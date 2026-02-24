@@ -1,15 +1,15 @@
 import {CloseIcon} from '@sanity/icons'
 import {
-  _inputElement,
-  _inputPresentation,
+  _input_element,
+  _input_presentation,
   type InputStyleProps,
   type ResponsiveProp,
   textInput,
-  textInputElement,
-  textInputPrefix,
-  textInputSuffix,
+  textInput_element,
+  textInput_prefix,
+  textInput_suffix,
 } from '@sanity/ui/css'
-import type {FontWeight, Space} from '@sanity/ui/theme'
+import type {FontWeight, Space} from '@sanity/ui-tokens/system'
 import {
   type ElementType,
   isValidElement,
@@ -59,6 +59,9 @@ export type TextInputOwnProps = InputStyleProps & {
   onClear?: () => void
   prefix?: ReactNode
   suffix?: ReactNode
+  /**
+   * @deprecated Use `fontWeight` instead
+   */
   weight?: FontWeight
 }
 
@@ -82,28 +85,31 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
   const {
     __unstable_disableFocusRing,
     as: Element = DEFAULT_TEXT_INPUT_ELEMENT,
-    border = true,
+    border,
     className,
     clearButton,
     disabled = false,
     flex,
     fontSize = 2,
+    fontWeight: _fontWeight,
     gap = 3,
     icon: IconComponent,
     iconRight: IconRightComponent,
     onClear,
     padding = 3,
     prefix,
-    radius = 2,
+    radius,
     readOnly,
     ref: forwardedRef,
     suffix,
     customValidity,
     type = 'text',
-    weight: _width,
+    weight: _weight,
     width,
     ...rest
   } = props as TextInputProps<typeof DEFAULT_TEXT_INPUT_ELEMENT>
+
+  const fontWeight = _fontWeight ?? _weight
 
   const ref = useRef<HTMLInputElement | null>(null)
 
@@ -144,6 +150,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
         border,
         flex,
         fontSize,
+        fontWeight,
         padding,
         radius,
         gap,
@@ -151,30 +158,30 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
       })}
       data-icon-left={IconComponent ? '' : undefined}
       data-icon-right={IconRightComponent ? '' : undefined}
-      data-invalid={customValidity ? '' : undefined}
       data-prefix={prefix ? '' : undefined}
-      data-read-only={!disabled && readOnly ? '' : undefined}
       data-suffix={suffix ? '' : undefined}
       data-ui="TextInput"
     >
       {prefix && (
-        <span className={textInputPrefix()}>
+        <span className={textInput_prefix()}>
           <span>{prefix}</span>
         </span>
       )}
 
-      <span className={textInputElement()}>
+      <span className={textInput_element()}>
         <Element
           {...rest}
           ref={ref}
-          className={_inputElement()}
+          className={_input_element()}
+          data-invalid={customValidity ? '' : undefined}
           data-no-focus-ring={__unstable_disableFocusRing ? '' : undefined}
+          data-read-only={!disabled && readOnly ? '' : undefined}
           disabled={disabled}
           readOnly={readOnly}
           type={type}
         />
 
-        <span className={_inputPresentation()}>
+        <span className={_input_presentation()}>
           {IconComponent && (
             <Box as="span" insetLeft={0} insetTop={0} padding={padding} position="absolute">
               <Text as="span" size={fontSize}>
@@ -207,7 +214,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
       </span>
 
       {suffix && (
-        <span className={textInputSuffix()}>
+        <span className={textInput_suffix()}>
           <span>{suffix}</span>
         </span>
       )}
@@ -221,35 +228,33 @@ function ClearButton({
   clearButtonProps,
   handleClearClick,
   handleClearMouseDown,
-  padding,
+  padding: paddingProp,
 }: {
   clearButtonProps: TextInputClearButtonProps
   handleClearClick: (event: MouseEvent<HTMLButtonElement>) => void
   handleClearMouseDown: (event: MouseEvent<HTMLButtonElement>) => void
   padding: ResponsiveProp<Space>
 } & Pick<TextInputOwnProps, 'fontSize' | 'radius'>) {
-  const clearButtonBoxPadding = useMemo(() => {
-    return Object.fromEntries(
-      Object.entries(padding).map(([key, value]) => {
-        if (value === 0) return [key, 0]
-        if (value === 1) return [key, 1]
-        if (value === 2) return [key, 1]
+  const padding = _getResponsiveProp(paddingProp)
 
-        return [key, typeof value === 'number' ? value - 2 : 0]
-      }),
-    ) as ResponsiveProp<Space>
+  const clearButtonBoxPadding = useMemo(() => {
+    return padding.map((p) => {
+      if (p === 0) return 0
+      if (p === 1) return 1
+      if (p === 2) return 1
+
+      return typeof p === 'number' ? p - 2 : 0
+    }) as ResponsiveProp<Space>
   }, [padding])
 
   const clearButtonPadding = useMemo(() => {
-    return Object.fromEntries(
-      Object.entries(padding).map(([key, value]) => {
-        if (value === 0) return [key, 0]
-        if (value === 1) return [key, 0]
-        if (value === 2) return [key, 1]
+    return padding.map((p) => {
+      if (p === 0) return 0
+      if (p === 1) return 0
+      if (p === 2) return 1
 
-        return [key, typeof value === 'number' ? value - 1 : 0]
-      }),
-    ) as ResponsiveProp<Space>
+      return typeof p === 'number' ? p - 1 : 0
+    }) as ResponsiveProp<Space>
   }, [padding])
 
   return (
@@ -264,7 +269,6 @@ function ClearButton({
       <Button
         aria-label="Clear"
         data-qa="clear-button"
-        display="block"
         fontSize={fontSize}
         icon={CloseIcon}
         mode="bleed"

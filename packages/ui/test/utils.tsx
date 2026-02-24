@@ -1,3 +1,4 @@
+import type {ColorScheme} from '@sanity/ui-tokens/system'
 import {
   render as _testRender,
   type RenderOptions as _TestRenderOptions,
@@ -6,7 +7,6 @@ import {
 import {Fragment, type ReactNode, StrictMode} from 'react'
 
 import {Root} from '../src/core'
-import type {ColorScheme} from '../src/theme'
 
 export interface TestRenderOptions extends _TestRenderOptions {
   scheme?: ColorScheme

@@ -1,4 +1,4 @@
-import type {ContainerWidth} from '@sanity/ui/theme'
+import type {ContainerWidth} from '@sanity/ui/tokens'
 
 /**
  * @beta

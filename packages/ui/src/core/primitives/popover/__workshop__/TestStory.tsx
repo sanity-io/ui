@@ -14,7 +14,7 @@ import {
   WORKSHOP_CONTAINER_WIDTH_OPTIONS,
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_RADIUS_OPTIONS,
-} from '$workshop'
+} from '../../../../../workshop'
 
 export default function TestStory(): React.JSX.Element {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
@@ -25,14 +25,11 @@ export default function TestStory(): React.JSX.Element {
   const constrainSize = useBoolean('Constrain size', true)
   const matchReferenceWidth = useBoolean('Match reference width', false)
   const open = useBoolean('Open', true)
-  // @ts-expect-error - TODO: fix this
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
   const portal = useBoolean('Render in portal', true)
   const preventOverflow = useBoolean('Prevent overflow', true)
-  // @ts-expect-error - TODO: fix this
   const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
   const referenceWide = useBoolean('Reference wide?', false)
-  // @ts-expect-error - TODO: fix this
   const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 'auto')
 
   const text = useText('Text', 'Test')
@@ -40,7 +37,7 @@ export default function TestStory(): React.JSX.Element {
   const updateRef = useRef<PopoverUpdateCallback>(undefined)
 
   const button = (
-    <Button selected style={{width: referenceWide ? 300 : undefined}} text="reference" />
+    <Button text="reference" selected style={{width: referenceWide ? 300 : undefined}} />
   )
 
   return (
@@ -56,8 +53,8 @@ export default function TestStory(): React.JSX.Element {
       }}
     >
       <div
-        ref={setPortalElement}
         data-portal=""
+        ref={setPortalElement}
         style={{
           position: 'absolute',
           top: 0,
@@ -77,21 +74,18 @@ export default function TestStory(): React.JSX.Element {
               {mount && (
                 <Popover
                   arrow={arrow}
-                  constrainSize={constrainSize}
                   content={<Text size={1}>{text}</Text>}
+                  constrainSize={constrainSize}
                   fallbackPlacements={['left', 'bottom', 'right', 'top']}
                   matchReferenceWidth={matchReferenceWidth}
                   open={open}
                   overflow="hidden"
                   padding={3}
-                  // @ts-expect-error - TODO: fix this
                   placement={placement}
                   portal={portal}
                   preventOverflow={preventOverflow}
-                  // @ts-expect-error - TODO: fix this
                   radius={radius}
                   updateRef={updateRef}
-                  // @ts-expect-error - TODO: fix this
                   width={width}
                 >
                   {button}

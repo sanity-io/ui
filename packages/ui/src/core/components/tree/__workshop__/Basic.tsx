@@ -21,7 +21,7 @@ export default function BasicStory(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <Wrapper>
-        <Tree ref={ref} gap={1}>
+        <Tree ref={ref} gap={1} padding={0} radius={3}>
           <TreeItem expanded text="Fruit" onClick={handleClick}>
             <TreeItem
               data-testid="oranges"
@@ -50,52 +50,52 @@ export default function BasicStory(): React.JSX.Element {
               />
               <TreeItem data-testid="apples/fuji" text="Fuji" onClick={handleClick} />
             </TreeItem>
-            <TreeItem text="Bananas" onClick={handleClick} />
+            <TreeItem muted text="Bananas" onClick={handleClick} />
             <TreeItem text="Pears" onClick={handleClick}>
-              <TreeItem text="Anjou" onClick={handleClick} />
-              <TreeItem text="Bartlett" onClick={handleClick} />
-              <TreeItem text="Bosc" onClick={handleClick} />
-              <TreeItem text="Concorde" onClick={handleClick} />
-              <TreeItem text="Seckel" onClick={handleClick} />
-              <TreeItem text="Starkrimson" onClick={handleClick} />
+              <TreeItem muted text="Anjou" onClick={handleClick} />
+              <TreeItem muted text="Bartlett" onClick={handleClick} />
+              <TreeItem muted text="Bosc" onClick={handleClick} />
+              <TreeItem muted text="Concorde" onClick={handleClick} />
+              <TreeItem muted text="Seckel" onClick={handleClick} />
+              <TreeItem muted text="Starkrimson" onClick={handleClick} />
             </TreeItem>
           </TreeItem>
           <TreeItem text="Vegetables" onClick={handleClick}>
             <TreeItem text="Podded vegetables" onClick={handleClick}>
-              <TreeItem text="Lentil" onClick={handleClick} />
-              <TreeItem text="Pea" onClick={handleClick} />
-              <TreeItem text="Peanut" onClick={handleClick} />
+              <TreeItem muted text="Lentil" onClick={handleClick} />
+              <TreeItem muted text="Pea" onClick={handleClick} />
+              <TreeItem muted text="Peanut" onClick={handleClick} />
             </TreeItem>
             <TreeItem text="Bulb and stem vegetables" onClick={handleClick}>
-              <TreeItem text="Asparagus" onClick={handleClick} />
-              <TreeItem text="Celery" onClick={handleClick} />
-              <TreeItem text="Leek" onClick={handleClick} />
-              <TreeItem text="Onion" onClick={handleClick} />
+              <TreeItem muted text="Asparagus" onClick={handleClick} />
+              <TreeItem muted text="Celery" onClick={handleClick} />
+              <TreeItem muted text="Leek" onClick={handleClick} />
+              <TreeItem muted text="Onion" onClick={handleClick} />
             </TreeItem>
             <TreeItem text="Root and tuberous vegetables" onClick={handleClick}>
-              <TreeItem text="Carrot" onClick={handleClick} />
-              <TreeItem text="Ginger" onClick={handleClick} />
-              <TreeItem text="Parsnip" onClick={handleClick} />
-              <TreeItem text="Potato" onClick={handleClick} />
+              <TreeItem muted text="Carrot" onClick={handleClick} />
+              <TreeItem muted text="Ginger" onClick={handleClick} />
+              <TreeItem muted text="Parsnip" onClick={handleClick} />
+              <TreeItem muted text="Potato" onClick={handleClick} />
             </TreeItem>
           </TreeItem>
           <TreeItem text="Grains" onClick={handleClick}>
             <TreeItem text="Cereal grains" onClick={handleClick}>
-              <TreeItem text="Barley" onClick={handleClick} />
-              <TreeItem text="Oats" onClick={handleClick} />
-              <TreeItem text="Rice" onClick={handleClick} />
+              <TreeItem muted text="Barley" onClick={handleClick} />
+              <TreeItem muted text="Oats" onClick={handleClick} />
+              <TreeItem muted text="Rice" onClick={handleClick} />
             </TreeItem>
             <TreeItem text="Pseudocereal grains" onClick={handleClick}>
-              <TreeItem text="Amaranth" onClick={handleClick} />
-              <TreeItem text="Buckwheat" onClick={handleClick} />
-              <TreeItem text="Chia" onClick={handleClick} />
-              <TreeItem text="Quinoa" onClick={handleClick} />
+              <TreeItem muted text="Amaranth" onClick={handleClick} />
+              <TreeItem muted text="Buckwheat" onClick={handleClick} />
+              <TreeItem muted text="Chia" onClick={handleClick} />
+              <TreeItem muted text="Quinoa" onClick={handleClick} />
             </TreeItem>
             <TreeItem text="Oilseeds" onClick={handleClick}>
-              <TreeItem text="India mustard" onClick={handleClick} />
-              <TreeItem text="Safflower" onClick={handleClick} />
-              <TreeItem text="Flax seed" onClick={handleClick} />
-              <TreeItem text="Poppy seed" onClick={handleClick} />
+              <TreeItem muted text="India mustard" onClick={handleClick} />
+              <TreeItem muted text="Safflower" onClick={handleClick} />
+              <TreeItem muted text="Flax seed" onClick={handleClick} />
+              <TreeItem muted text="Poppy seed" onClick={handleClick} />
             </TreeItem>
           </TreeItem>
         </Tree>

@@ -39,95 +39,95 @@ export default function GroupsStory(): React.JSX.Element {
                   <MenuItem
                     fontSize={1}
                     hotkeys={['⌘', 'T']}
+                    onClick={useAction('New tab')}
                     padding={2}
                     text="New tab"
-                    onClick={useAction('New tab')}
                   />
                   <MenuItem
                     fontSize={1}
                     hotkeys={['⌘', 'N']}
+                    onClick={useAction('New window')}
                     padding={2}
                     text="New window"
-                    onClick={useAction('New window')}
                   />
                   <MenuItem
                     fontSize={1}
                     hotkeys={['⇧', '⌘', 'T']}
+                    onClick={useAction('Reopen closed tab')}
                     padding={2}
                     text="Reopen closed tab"
-                    onClick={useAction('Reopen closed tab')}
                   />
                   <MenuItem
                     fontSize={1}
                     hotkeys={['⌘', 'O']}
+                    onClick={useAction('Open file…')}
                     padding={2}
                     text="Open file…"
-                    onClick={useAction('Open file…')}
                   />
                   <MenuItem
                     fontSize={1}
                     hotkeys={['⌘', 'L']}
+                    onClick={useAction('Open location…')}
                     padding={2}
                     text="Open location…"
-                    onClick={useAction('Open location…')}
                   />
                   <MenuDivider />
                   <MenuGroup
                     fontSize={1}
+                    onClick={useAction('Share')}
                     padding={2}
                     popover={NESTED_POPOVER_PROPS}
                     text="Share"
-                    onClick={useAction('Share')}
                   >
                     <MenuItem
                       fontSize={1}
+                      onClick={useAction('Share / Email link')}
                       padding={2}
                       text="Email link"
-                      onClick={useAction('Share / Email link')}
                     />
                     <MenuItem
                       fontSize={1}
+                      onClick={useAction('Share / Messages')}
                       padding={2}
                       text="Messages"
-                      onClick={useAction('Share / Messages')}
                     />
                     <MenuItem
                       fontSize={1}
+                      onClick={useAction('Share / Airdrop')}
                       padding={2}
                       text="Airdrop"
-                      onClick={useAction('Share / Airdrop')}
                     />
-                    <MenuItem fontSize={1} padding={2} text="Notes" onClick={useAction('Notes')} />
+                    <MenuItem fontSize={1} onClick={useAction('Notes')} padding={2} text="Notes" />
                     <MenuGroup
                       fontSize={1}
+                      onClick={useAction('Share / More')}
                       padding={2}
                       popover={NESTED_POPOVER_PROPS}
                       text="More"
-                      onClick={useAction('Share / More')}
                     >
                       <MenuItem
                         fontSize={1}
+                        onClick={useAction('Share / More / Email link')}
                         padding={2}
                         text="Email link"
-                        onClick={useAction('Share / More / Email link')}
                       />
                       <MenuItem
                         fontSize={1}
+                        onClick={useAction('Share / More / Messages')}
                         padding={2}
                         text="Messages"
-                        onClick={useAction('Share / More / Messages')}
                       />
                       <MenuItem
                         fontSize={1}
+                        onClick={useAction('Share / More / Airdrop')}
                         padding={2}
                         text="Airdrop"
-                        onClick={useAction('Share / More / Airdrop')}
                       />
                       <MenuItem
                         fontSize={1}
+                        onClick={useAction('Share / More / Notes')}
                         padding={2}
                         text="Notes"
-                        onClick={useAction('Share / More / Notes')}
                       />
                     </MenuGroup>
                   </MenuGroup>
@@ -135,9 +135,9 @@ export default function GroupsStory(): React.JSX.Element {
                   <MenuItem
                     fontSize={1}
                     hotkeys={['⌘', 'P']}
+                    onClick={useAction('Print…')}
                     padding={2}
                     text="Print…"
-                    onClick={useAction('Print…')}
                   />
                 </Menu>
               }

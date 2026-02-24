@@ -1,76 +1,66 @@
-import {icons, type IconSymbol} from '@sanity/icons'
-import {Button, Flex} from '@sanity/ui'
+import {icons} from '@sanity/icons'
+import {Button, Flex, type TooltipProps} from '@sanity/ui'
+import {
+  BUTTON_MODES,
+  ELEMENT_TONES,
+  FONT_TEXT_SIZE,
+  FONT_WEIGHT,
+  SPACE,
+} from '@sanity/ui-tokens/system'
 import {useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 
 import {
-  WORKSHOP_BUTTON_MODE_OPTIONS,
+  CardWrapper,
   WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS,
-  WORKSHOP_BUTTON_TONE_OPTIONS,
   WORKSHOP_FLEX_JUSTIFY_OPTIONS,
   WORKSHOP_ICON_SYMBOL_OPTIONS,
-  WORKSHOP_SPACE_OPTIONS,
-  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-  WORKSHOP_TEXT_WEIGHT_OPTIONS,
 } from '$workshop'
 
 export default function ButtonStory(): React.JSX.Element {
   const disabled = useBoolean('Disabled')
-  // @ts-expect-error - TODO: fix this
-  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
-  // @ts-expect-error - TODO: fix this
-  const gap = useSelect('Gap', WORKSHOP_SPACE_OPTIONS)
-  // @ts-expect-error - TODO: fix this
+  const fontSize = useSelect('Font size', [undefined, ...FONT_TEXT_SIZE])
+  const gap = useSelect('Gap', [undefined, ...SPACE])
   const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS)
-  // @ts-expect-error - TODO: fix this
   const iconRight = useSelect('Icon (right)', WORKSHOP_ICON_SYMBOL_OPTIONS)
-  // @ts-expect-error - TODO: fix this
   const justify = useSelect('Justify', WORKSHOP_FLEX_JUSTIFY_OPTIONS)
   const loading = useBoolean('Loading')
-  // @ts-expect-error - TODO: fix this
-  const mode = useSelect('Mode', WORKSHOP_BUTTON_MODE_OPTIONS)
-  // @ts-expect-error - TODO: fix this
-  const paddingX = useSelect('Padding X', WORKSHOP_SPACE_OPTIONS)
-  // @ts-expect-error - TODO: fix this
-  const paddingY = useSelect('Padding Y', WORKSHOP_SPACE_OPTIONS)
+  const mode = useSelect('Mode', [undefined, ...BUTTON_MODES])
+  const paddingX = useSelect('Padding X', [undefined, ...SPACE])
+  const paddingY = useSelect('Padding Y', [undefined, ...SPACE])
   const selected = useBoolean('Selected')
-  // @ts-expect-error - TODO: fix this
-  const tone = useSelect('Tone', WORKSHOP_BUTTON_TONE_OPTIONS)
-  // @ts-expect-error - TODO: fix this
+  const tone = useSelect('Tone', [undefined, ...ELEMENT_TONES])
   const textAlign = useSelect('Text align', WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS)
-  const textProp = useText('Text', 'Label')
-  // @ts-expect-error - TODO: fix this
-  const textWeight = useSelect('Text weight', WORKSHOP_TEXT_WEIGHT_OPTIONS)
+  const textProp = useText('Text', 'Text')
+  const textWeight = useSelect('Text weight', [undefined, ...FONT_WEIGHT])
+  const tooltip = useText('Tooltip text', 'Tooltip')
 
   return (
-    <Flex align="center" height="fill" justify="center">
-      <Button
-        disabled={disabled}
-        // @ts-expect-error - TODO: fix this
-        fontSize={fontSize}
-        // @ts-expect-error - TODO: fix this
-        gap={gap}
-        // @ts-expect-error - TODO: fix this
-        icon={icon && icons[icon]}
-        iconRight={iconRight && icons[iconRight as IconSymbol]}
-        // @ts-expect-error - TODO: fix this
-        justify={justify}
-        loading={loading}
-        // @ts-expect-error - TODO: fix this
-        mode={mode}
-        // @ts-expect-error - TODO: fix this
-        paddingX={paddingX}
-        // @ts-expect-error - TODO: fix this
-        paddingY={paddingY}
-        selected={selected}
-        text={textProp}
-        // @ts-expect-error - TODO: fix this
-        textAlign={textAlign}
-        // @ts-expect-error - TODO: fix this
-        textWeight={textWeight}
-        // @ts-expect-error - TODO: fix this
-        tone={tone}
-        onClick={useAction('onClick')}
-      />
-    </Flex>
+    <CardWrapper width={0}>
+      <Flex align="center" height="fill" justify="center">
+        <Button
+          disabled={disabled}
+          fontSize={fontSize}
+          gap={gap}
+          icon={icon && icons[icon]}
+          iconRight={iconRight && icons[iconRight]}
+          justify={justify}
+          loading={loading}
+          mode={mode}
+          paddingX={paddingX}
+          paddingY={paddingY}
+          selected={selected}
+          text={textProp}
+          textAlign={textAlign}
+          textWeight={textWeight}
+          tone={tone}
+          tooltip={
+            tooltip
+              ? ({hotkeys: ['⌘', 'K'], id: 'test-button-tooltip', text: tooltip} as TooltipProps)
+              : undefined
+          }
+          onClick={useAction('onClick')}
+        />
+      </Flex>
+    </CardWrapper>
   )
 }

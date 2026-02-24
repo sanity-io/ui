@@ -1,3 +1,4 @@
+import {UploadIcon} from '@sanity/icons'
 import {Button, Flex} from '@sanity/ui'
 import {useCallback, useRef} from 'react'
 
@@ -15,15 +16,13 @@ export default function UploadButtonStory(): React.JSX.Element {
       <Button
         as="label"
         htmlFor="file"
+        icon={UploadIcon}
         tabIndex={0}
-        text={
-          <>
-            Upload
-            <input ref={inputRef} id="file" style={{display: 'none'}} type="file" />
-          </>
-        }
+        text="Upload"
         onKeyDown={handleKeyDown}
-      />
+      >
+        <input ref={inputRef} id="file" style={{display: 'none'}} type="file" />
+      </Button>
     </Flex>
   )
 }

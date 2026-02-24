@@ -14,7 +14,6 @@ export default function ClosableMenuButtonStory(): React.JSX.Element {
     <Box padding={[4, 5, 6]}>
       <Stack>
         <MenuButton
-          ref={ref}
           button={<Button text="Open" />}
           id="closable-example"
           menu={
@@ -28,18 +27,19 @@ export default function ClosableMenuButtonStory(): React.JSX.Element {
               <Stack padding={1} style={{borderTop: `1px solid ${vars.color.border}`}}>
                 <Button
                   icon={AddIcon}
-                  mode="bleed"
-                  text="Add item"
-                  tone="primary"
                   onClick={() => {
                     ref.current?.click()
                     ref.current?.focus()
                   }}
+                  mode="bleed"
+                  text="Add item"
+                  tone="primary"
                 />
               </Stack>
             </Menu>
           }
           popover={POPOVER_PROPS}
+          ref={ref}
         />
       </Stack>
     </Box>

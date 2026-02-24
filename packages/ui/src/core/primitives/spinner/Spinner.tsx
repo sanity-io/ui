@@ -1,5 +1,5 @@
 import {type ResponsiveProp, spinner} from '@sanity/ui/css'
-import type {FontTextSize} from '@sanity/ui/theme'
+import type {FontTextSize} from '@sanity/ui/tokens'
 
 import type {ComponentType, Props} from '../../types'
 import {Text} from '../text/Text'

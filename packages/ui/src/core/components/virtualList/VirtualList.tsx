@@ -1,5 +1,5 @@
 import {vars} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/theme'
+import type {Space} from '@sanity/ui/tokens'
 import {
   type CSSProperties,
   type ReactNode,
@@ -145,7 +145,6 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
   }, [fromIndex, gapValue, itemHeight, onChange, scrollHeight, scrollTop, toIndex])
 
   useEffect(() => {
-    // console.log('renderItem', renderItem)
     startTransition(() => setItemHeight(-1))
   }, [renderItem])
 

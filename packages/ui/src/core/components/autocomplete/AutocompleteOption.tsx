@@ -1,4 +1,4 @@
-import {type KeyboardEvent, type ReactNode, useCallback} from 'react'
+import {type KeyboardEvent, type ReactNode} from 'react'
 
 import {_isEnterToClickElement} from '../../helpers/element'
 
@@ -13,22 +13,19 @@ export interface AutocompleteOptionProps {
 export function AutocompleteOption(props: AutocompleteOptionProps): React.JSX.Element {
   const {children, id, onSelect, selected, value} = props
 
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     // Calling the `onSelect` in a timeout is a fix to
     // allow the `click` event to propagate in some cases
     setTimeout(() => {
       onSelect(value)
     }, 0)
-  }, [onSelect, value])
+  }
 
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLLIElement>) => {
-      if (event.key === 'Enter' && !_isEnterToClickElement(event.currentTarget)) {
-        handleClick()
-      }
-    },
-    [handleClick],
-  )
+  const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
+    if (event.key === 'Enter' && !_isEnterToClickElement(event.currentTarget)) {
+      handleClick()
+    }
+  }
 
   return (
     <li

@@ -68,7 +68,7 @@ export function ElementQuery<
   ])
 
   return (
-    <Element data-ui="ElementQuery" {...rest} ref={setElement} data-eq-max={max} data-eq-min={min}>
+    <Element data-ui="ElementQuery" {...rest} data-eq-max={max} data-eq-min={min} ref={setElement}>
       {children}
     </Element>
   )

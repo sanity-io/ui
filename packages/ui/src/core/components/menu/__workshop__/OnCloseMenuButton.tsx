@@ -30,6 +30,7 @@ export default function OnCloseMenuButton(): React.JSX.Element {
         <MenuButton
           button={<Button text="With onClose callback" />}
           id="closable-example"
+          onClose={handleClose}
           menu={
             <Menu gap={0} padding={0}>
               <Stack gap={1} padding={1}>
@@ -41,9 +42,8 @@ export default function OnCloseMenuButton(): React.JSX.Element {
             </Menu>
           }
           popover={POPOVER_PROPS}
-          onClose={handleClose}
         />
-        <Button mode="ghost" text="Blur test button" />
+        <Button text="Blur test button" mode="ghost" />
       </Stack>
     </Box>
   )

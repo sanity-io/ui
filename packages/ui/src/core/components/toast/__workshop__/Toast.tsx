@@ -1,12 +1,11 @@
 import {Box, Container, Toast} from '@sanity/ui'
 import {useAction, useBoolean, useSelect, useString, useText} from '@sanity/ui-workshop'
 
-import {WORKSHOP_TOAST_STATUS_OPTIONS} from '$workshop'
+import {WORKSHOP_TOAST_STATUS_OPTIONS} from '../../../../../workshop'
 
 export default function ToastStory(): React.JSX.Element {
   const closable = useBoolean('Closable', false)
   const title = useString('Title', 'Toast title')
-  // @ts-expect-error - TODO: fix this
   const status = useSelect('Status', WORKSHOP_TOAST_STATUS_OPTIONS)
   const description = useText('Description')
   const handleClose = useAction('onClose')
@@ -17,10 +16,9 @@ export default function ToastStory(): React.JSX.Element {
         <Toast
           closable={closable}
           description={description}
-          // @ts-expect-error - TODO: fix this
+          onClose={handleClose}
           status={status}
           title={title}
-          onClose={handleClose}
         />
       </Container>
     </Box>

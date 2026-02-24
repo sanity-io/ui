@@ -1,12 +1,13 @@
 import {
   avatar,
-  avatarArrow,
-  avatarImage,
-  avatarImageOutline,
-  avatarInitials,
+  avatar_arrow,
+  avatar_image,
+  avatar_imageOutline,
+  avatar_initials,
   type ResponsiveProp,
 } from '@sanity/ui/css'
-import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui/theme'
+import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui/tokens'
+import {avatar_arrowSvg} from '@sanity/ui-css'
 import {useCallback, useEffect, useMemo, useState} from 'react'
 
 import {_getResponsiveProp} from '../../helpers/props'
@@ -114,23 +115,22 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
       data-image-error={imageError ? '' : undefined}
       title={title}
     >
-      <span className={avatarArrow()}>
-        <svg fill="none" height="7" viewBox="0 0 11 7" width="11">
-          <path
-            d="M6.67948 1.50115L11 7L0 7L4.32052 1.50115C4.92109 0.736796 6.07891 0.736795 6.67948 1.50115Z"
-            fill={color}
-          />
+      <span className={avatar_arrow()}>
+        <svg className={avatar_arrowSvg()} fill="none" height="7" viewBox="0 0 11 7" width="11">
+          <path d="M6.67948 1.50115L11 7L0 7L4.32052 1.50115C4.92109 0.736796 6.07891 0.736795 6.67948 1.50115Z" />
         </svg>
       </span>
 
       <Box
         alignItems="center"
         as="span"
-        className={avatarInitials()}
+        className={avatar_initials()}
         display="flex"
         inset={0}
         justifyContent="center"
+        overflow="hidden"
         position="absolute"
+        radius="full"
       >
         <Label align="center" as="span" size={initialsSize} weight="medium">
           {initials}
@@ -138,9 +138,9 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
       </Box>
 
       {src && (
-        <Box className={avatarImage()} inset={0} position="absolute">
+        <Box className={avatar_image()} inset={0} position="absolute">
           <img alt={initials} src={src} onError={handleImageError} />
-          <span className={avatarImageOutline()} />
+          <span className={avatar_imageOutline()} />
         </Box>
       )}
     </Element>

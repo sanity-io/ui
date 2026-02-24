@@ -1,5 +1,5 @@
 import {Card, Container, Flex, Stack, Text} from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES} from '@sanity/ui/tokens'
 
 export default function TonesStory(): React.JSX.Element {
   return (
@@ -10,8 +10,8 @@ export default function TonesStory(): React.JSX.Element {
             {CARD_TONES.map((tone) => (
               <Card
                 key={tone}
-                padding={3}
-                radius={2}
+                padding={4}
+                radius={3}
                 shadow={2}
                 style={{textAlign: 'center'}}
                 tone={tone}

@@ -1,6 +1,7 @@
+import {_syntax} from '@sanity/ui-css'
 import {hasLanguage, Refractor} from 'react-refractor'
 
-export default function LazyRefractor(
+export default function LazySyntax(
   props: Partial<Pick<React.ComponentProps<typeof Refractor>, 'language'>> & {
     value: React.ReactNode
   },
@@ -12,7 +13,14 @@ export default function LazyRefractor(
   return (
     <>
       {!(language && registered) && <code>{value}</code>}
-      {language && registered && <Refractor inline language={language} value={String(value)} />}
+      {language && registered && (
+        <Refractor
+          className={_syntax()}
+          inline
+          language={language}
+          value={typeof value === 'string' ? value : ''}
+        />
+      )}
     </>
   )
 }

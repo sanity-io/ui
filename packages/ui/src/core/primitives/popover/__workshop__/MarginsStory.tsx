@@ -19,7 +19,7 @@ export default function MarginsStory(): React.JSX.Element {
         // radius={0}
       >
         <Container width={0}>
-          <Card muted padding={2} shadow={1}>
+          <Card padding={2} muted shadow={1}>
             <Text align="center" muted size={1}>
               Reference
             </Text>

@@ -1,5 +1,5 @@
-import {codeSkeleton, type ResponsiveProp} from '@sanity/ui/css'
-import type {FontCodeSize} from '@sanity/ui/theme'
+import {code_skeleton, type ResponsiveProp} from '@sanity/ui/css'
+import type {FontCodeSize} from '@sanity/ui/tokens'
 
 import type {Props} from '../../types'
 import {Skeleton, type SkeletonElementType, type SkeletonOwnProps} from './Skeleton'
@@ -40,7 +40,7 @@ export function CodeSkeleton<
   return (
     <Skeleton
       {...rest}
-      className={codeSkeleton({
+      className={code_skeleton({
         className,
         size,
       })}

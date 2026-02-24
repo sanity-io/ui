@@ -1,24 +1,18 @@
-import {_selectable, type SelectableStyleProps} from '@sanity/ui/css'
-import type {ElementTone} from '@sanity/ui/theme'
+import {selectable, SELECTABLE_STYLE_PROP_KEYS, type SelectableStyleProps} from '@sanity/ui/css'
 
+import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
-import {Box, type BoxOwnProps} from '../box/Box'
 
 /** @internal */
 export const DEFAULT_SELECTABLE_ELEMENT = 'button'
 
 /** @internal */
-export type SelectableOwnProps = BoxOwnProps &
-  SelectableStyleProps & {
-    disabled?: boolean
-    href?: string
-    selected?: boolean
-    tone?: ElementTone
-    type?: 'button'
-  }
+export interface SelectableOwnProps extends SelectableStyleProps {
+  selected?: boolean
+}
 
 /** @internal */
-export type SelectableElementType = 'button' | 'a' | ComponentType
+export type SelectableElementType = 'a' | 'button' | 'span' | ComponentType
 
 /** @internal */
 export type SelectableProps<E extends SelectableElementType = SelectableElementType> = Props<
@@ -30,21 +24,28 @@ export type SelectableProps<E extends SelectableElementType = SelectableElementT
 export function Selectable<E extends SelectableElementType = typeof DEFAULT_SELECTABLE_ELEMENT>(
   props: SelectableProps<E>,
 ): React.JSX.Element {
-  const {
-    as = DEFAULT_SELECTABLE_ELEMENT,
-    className,
-    radius,
-    selected,
-    tone,
-    ...rest
-  } = props as SelectableProps<typeof DEFAULT_SELECTABLE_ELEMENT>
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_SELECTABLE_ELEMENT,
+      children,
+      selected,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(
+    props as SelectableProps<typeof DEFAULT_SELECTABLE_ELEMENT>,
+    SELECTABLE_STYLE_PROP_KEYS,
+  )
 
   return (
-    <Box
-      {...rest}
-      as={as}
-      className={_selectable({className, radius, tone})}
-      data-selected={selected ? '' : props['data-selected']}
-    />
+    <Element
+      data-ui="Selectable"
+      {...domProps}
+      className={selectable(styleProps)}
+      data-pressed={selected ? '' : props['data-pressed']}
+    >
+      {children}
+    </Element>
   )
 }

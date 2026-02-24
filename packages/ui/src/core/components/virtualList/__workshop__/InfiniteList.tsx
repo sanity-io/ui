@@ -40,8 +40,8 @@ export default function InfiniteListStory(): React.JSX.Element {
         gap={3}
         getItemKey={getItemKey}
         items={data}
-        renderItem={renderItem}
         onChange={handleChange}
+        renderItem={renderItem}
       />
     </Box>
   )

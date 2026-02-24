@@ -1,54 +1,43 @@
-import {SquareIcon} from '@sanity/icons'
-import {Button, Card, Container, Grid, Stack, Text} from '@sanity/ui'
+import {ArrowLeftIcon, ArrowRightIcon} from '@sanity/icons'
+import {Button, type ButtonProps, Stack, Text} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
-const GAP = 4
-const COLUMNS = 3
+import {CardWrapper} from '$workshop'
 
-const DEFAULT_PROPS = {
-  icon: SquareIcon,
-  iconRight: SquareIcon,
-} as const
+const sharedProps: ButtonProps<'button'> = {
+  icon: ArrowLeftIcon,
+  iconRight: ArrowRightIcon,
+  justify: 'space-between',
+}
 
 export default function DisabledButtonStory(): React.JSX.Element {
   const muted = useBoolean('Muted', false)
 
   return (
-    <Card padding={5}>
-      <Container width={2}>
-        <Stack gap={4}>
-          <Grid gap={GAP} gridTemplateColumns={COLUMNS}>
-            <Text size={1} weight="semibold">
-              Default
-            </Text>
-            <Text size={1} weight="semibold">
-              Ghost
-            </Text>
-            <Text size={1} weight="semibold">
-              Bleed
-            </Text>
-          </Grid>
+    <CardWrapper gap={5} width={0}>
+      <Stack gap={3}>
+        <Text size={1} weight="medium">
+          Default button
+        </Text>
+        <Button {...sharedProps} mode="default" muted={muted} text="Enabled" />
+        <Button {...sharedProps} disabled mode="default" muted={muted} text="Disabled" />
+      </Stack>
 
-          <Stack gap={2}>
-            <Grid gap={GAP} gridTemplateColumns={COLUMNS}>
-              <Stack gap={2}>
-                <Button {...DEFAULT_PROPS} mode="default" muted={muted} text="Enabled" />
-                <Button {...DEFAULT_PROPS} disabled mode="default" muted={muted} text="Disabled" />
-              </Stack>
+      <Stack gap={3}>
+        <Text size={1} weight="medium">
+          Ghost button
+        </Text>
+        <Button {...sharedProps} mode="ghost" muted={muted} text="Enabled" />
+        <Button {...sharedProps} disabled mode="ghost" muted={muted} text="Disabled" />
+      </Stack>
 
-              <Stack gap={2}>
-                <Button {...DEFAULT_PROPS} mode="ghost" muted={muted} text="Enabled" />
-                <Button {...DEFAULT_PROPS} disabled mode="ghost" muted={muted} text="Disabled" />
-              </Stack>
-
-              <Stack gap={2}>
-                <Button {...DEFAULT_PROPS} mode="bleed" muted={muted} text="Enabled" />
-                <Button {...DEFAULT_PROPS} disabled mode="bleed" muted={muted} text="Disabled" />
-              </Stack>
-            </Grid>
-          </Stack>
-        </Stack>
-      </Container>
-    </Card>
+      <Stack gap={3}>
+        <Text size={1} weight="medium">
+          Bleed button
+        </Text>
+        <Button {...sharedProps} mode="bleed" muted={muted} text="Enabled" />
+        <Button {...sharedProps} disabled mode="bleed" muted={muted} text="Disabled" />
+      </Stack>
+    </CardWrapper>
   )
 }

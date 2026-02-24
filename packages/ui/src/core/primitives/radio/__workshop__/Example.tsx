@@ -20,9 +20,9 @@ export default function ExampleStory(): React.JSX.Element {
               checked={value === 'first-option'}
               disabled={disabled}
               name="name"
+              onChange={handleChange}
               readOnly={readOnly}
               value="first-option"
-              onChange={handleChange}
             />
             <Box marginLeft={2}>
               <Text>First option</Text>
@@ -34,9 +34,9 @@ export default function ExampleStory(): React.JSX.Element {
               checked={value === 'second-option'}
               disabled={disabled}
               name="name"
+              onChange={handleChange}
               readOnly={readOnly}
               value="second-option"
-              onChange={handleChange}
             />
             <Box marginLeft={2}>
               <Text>Second option</Text>
@@ -48,9 +48,9 @@ export default function ExampleStory(): React.JSX.Element {
               checked={value === 'third-option'}
               disabled={disabled}
               name="name"
+              onChange={handleChange}
               readOnly={readOnly}
               value="third-option"
-              onChange={handleChange}
             />
             <Box marginLeft={2}>
               <Text>Third option</Text>

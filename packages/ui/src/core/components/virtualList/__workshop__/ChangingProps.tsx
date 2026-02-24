@@ -12,11 +12,11 @@ export default function ChangingPropsStory(): React.JSX.Element {
     (item: {key: number}) => (
       <Card
         as="button"
+        onClick={toggleExpand}
         paddingX={4}
         paddingY={expanded ? 5 : 4}
         radius={2}
         tone="primary"
-        onClick={toggleExpand}
       >
         <Text>Item #{item.key}</Text>
       </Card>

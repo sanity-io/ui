@@ -9,11 +9,11 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import type {CardTone} from '@sanity/ui/theme'
+import type {CardTone} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../../../workshop'
 
 const SIDE_PANEL_WIDTH = {
   sm: 300,
@@ -26,7 +26,6 @@ export default function SidePanelStory(): React.JSX.Element {
   const sidePanelWidth = useSelect('Side panel width', SIDE_PANEL_WIDTH, SIDE_PANEL_WIDTH.md)
   const [sidePanel, setSidePanel] = useState<HTMLDivElement | null>(null)
   const updateRef = useRef<PopoverUpdateCallback>(undefined)
-  // @ts-expect-error - TODO: fix this
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS) ?? 'inherit'
 
   useEffect(() => updateRef.current?.(), [sidePanelWidth])
@@ -41,7 +40,7 @@ export default function SidePanelStory(): React.JSX.Element {
         </Box>
       </Card>
       <BoundaryElementProvider element={sidePanel}>
-        <Card ref={setSidePanel} borderLeft flex="none" style={{width: sidePanelWidth}} width={0}>
+        <Card borderLeft flex="none" ref={setSidePanel} style={{width: sidePanelWidth}} width={0}>
           <Stack gap={5} padding={4}>
             <Text muted size={1}>
               Click the <code>reference</code> text below to toggle the popover.
@@ -49,12 +48,7 @@ export default function SidePanelStory(): React.JSX.Element {
 
             <Card border padding={3}>
               <Text size={1}>
-                Some editor{' '}
-                <InlineObject
-                  // @ts-expect-error - TODO: fix this
-                  tone={tone}
-                  updateRef={updateRef}
-                />
+                Some editor <InlineObject tone={tone} updateRef={updateRef} />
               </Text>
             </Card>
           </Stack>
@@ -74,7 +68,6 @@ function InlineObject(props: {tone: CardTone | 'inherit'; updateRef?: PopoverPro
 
   return (
     <Popover
-      constrainSize
       content={
         <Box padding={3}>
           <Text size={1}>
@@ -88,12 +81,13 @@ function InlineObject(props: {tone: CardTone | 'inherit'; updateRef?: PopoverPro
           </Text>
         </Box>
       }
+      constrainSize
       open={open}
       overflow="auto"
       portal
       tone={tone}
-      updateRef={updateRef}
       width={0}
+      updateRef={updateRef}
     >
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
       <code onClick={handleClick}>reference</code>

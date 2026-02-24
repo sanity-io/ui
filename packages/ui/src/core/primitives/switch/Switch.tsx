@@ -1,6 +1,6 @@
 import {
   _switch,
-  _switchElement,
+  _switch_element,
   _switchPresentation,
   _switchThumb,
   _switchTrack,
@@ -62,7 +62,7 @@ export function Switch<E extends SwitchElementType = typeof DEFAULT_SWITCH_ELEME
       <Element
         {...rest}
         ref={ref}
-        className={_switchElement()}
+        className={_switch_element()}
         data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled || readOnly}
         type="checkbox"

@@ -35,29 +35,29 @@ export default function SelectedItemStory(): React.JSX.Element {
                 icon={SearchIcon}
                 iconRight={selectedIndex === 0 ? CheckmarkIcon : undefined}
                 id="menu-item-1"
+                onClick={() => setSelectedIndex(0)}
                 pressed={selectedIndex === 0}
                 selected={selectedIndex === 0}
                 text="Show search"
-                onClick={() => setSelectedIndex(0)}
               />
               <MenuItem
                 icon={ClockIcon}
                 iconRight={selectedIndex === 1 ? CheckmarkIcon : undefined}
                 id="menu-item-2"
+                onClick={() => setSelectedIndex(1)}
                 pressed={selectedIndex === 1}
                 selected={selectedIndex === 1}
                 text="Show clock"
-                onClick={() => setSelectedIndex(1)}
               />
               <MenuDivider />
               <MenuItem
                 icon={ExpandIcon}
                 iconRight={selectedIndex === 2 ? CheckmarkIcon : undefined}
                 id="menu-item-3"
+                onClick={() => setSelectedIndex(2)}
                 pressed={selectedIndex === 2}
                 selected={selectedIndex === 2}
                 text="Expanded"
-                onClick={() => setSelectedIndex(2)}
               />
             </Menu>
           }

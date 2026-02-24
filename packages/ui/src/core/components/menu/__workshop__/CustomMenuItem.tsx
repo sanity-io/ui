@@ -8,7 +8,7 @@ export default function CustomMenuItemStory(): React.JSX.Element {
           <Menu>
             <MenuItem padding={3}>
               <Stack gap={3}>
-                <Text size={1} weight="medium">
+                <Text weight="medium" size={1}>
                   First option
                 </Text>
                 <Text muted size={1}>
@@ -18,7 +18,7 @@ export default function CustomMenuItemStory(): React.JSX.Element {
             </MenuItem>
             <MenuItem padding={3}>
               <Stack gap={3}>
-                <Text size={1} weight="medium">
+                <Text weight="medium" size={1}>
                   Second option
                 </Text>
                 <Text muted size={1}>
@@ -29,7 +29,7 @@ export default function CustomMenuItemStory(): React.JSX.Element {
             <MenuDivider />
             <MenuItem padding={3} tone="critical">
               <Stack gap={3}>
-                <Text size={1} weight="medium">
+                <Text weight="medium" size={1}>
                   Dangerous option
                 </Text>
                 <Text muted size={1}>

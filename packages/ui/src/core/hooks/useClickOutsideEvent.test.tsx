@@ -22,8 +22,8 @@ describe('useClickOutsideEvent', () => {
 
       return (
         <>
-          <button ref={buttonRef} data-testid="button" />
-          <div ref={popoverRef} data-testid="popover" />
+          <button data-testid="button" ref={buttonRef} />
+          <div data-testid="popover" ref={popoverRef} />
           <div data-testid="outside" />
         </>
       )
@@ -56,8 +56,8 @@ describe('useClickOutsideEvent', () => {
 
       return (
         <>
-          <button ref={buttonRef} data-testid="button" />
-          <div ref={popoverRef} data-testid="popover" />
+          <button data-testid="button" ref={buttonRef} />
+          <div data-testid="popover" ref={popoverRef} />
           <div data-testid="outside" />
         </>
       )
@@ -91,8 +91,8 @@ describe('useClickOutsideEvent', () => {
       return (
         <>
           <div ref={boundaryRef}>
-            <button ref={buttonRef} data-testid="button" />
-            <div ref={popoverRef} data-testid="popover" />
+            <button data-testid="button" ref={buttonRef} />
+            <div data-testid="popover" ref={popoverRef} />
             <div data-testid="inside" />
           </div>
           <div data-testid="outside" />

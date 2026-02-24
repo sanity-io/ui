@@ -1,277 +1,41 @@
-import {Box, Card, Container, Flex, Stack, Text, TextInput} from '@sanity/ui'
+import {Box, Card, Text, TextInput} from '@sanity/ui'
+import {CARD_TONES} from '@sanity/ui-tokens/system'
 import {useBoolean} from '@sanity/ui-workshop'
 
+import {CardWrapper} from '../../../../../workshop'
+
 export default function TonesStory(): React.JSX.Element {
-  const transparentTone = useBoolean('Transparent', true)
-  const neutralTone = useBoolean('Neutral', true)
-  const primaryTone = useBoolean('Primary', true)
-  const suggestTone = useBoolean('Suggest', true)
-  const positiveTone = useBoolean('Positive', true)
-  const cautionTone = useBoolean('Caution', true)
-  const criticalTone = useBoolean('Critical', true)
+  const disabled = useBoolean('Disabled', false)
 
   return (
-    <Card height="fill" tone="transparent">
-      <Flex align="center" height="fill" justify="center">
-        <Container width={1}>
-          <Flex>
-            <Card flex={1} scheme="light">
-              <Stack gap={4} padding={[3, 4, 5]}>
-                <Card padding={3}>
-                  <TextInput
-                    placeholder="default"
-                    prefix={
-                      <Box padding={3}>
-                        <Text>prefix</Text>
-                      </Box>
-                    }
-                    suffix={
-                      <Box padding={3}>
-                        <Text>suffix</Text>
-                      </Box>
-                    }
-                  />
-                </Card>
-
-                {transparentTone && (
-                  <Card padding={3} tone="transparent">
-                    <TextInput
-                      placeholder="transparent"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {neutralTone && (
-                  <Card padding={3} tone="neutral">
-                    <TextInput
-                      placeholder="neutral"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {primaryTone && (
-                  <Card padding={3} tone="primary">
-                    <TextInput
-                      placeholder="primary"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {suggestTone && (
-                  <Card padding={3} tone="suggest">
-                    <TextInput
-                      placeholder="suggest"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {positiveTone && (
-                  <Card padding={3} tone="positive">
-                    <TextInput
-                      placeholder="positive"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {cautionTone && (
-                  <Card padding={3} tone="caution">
-                    <TextInput
-                      placeholder="caution"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {criticalTone && (
-                  <Card padding={3} tone="critical">
-                    <TextInput
-                      placeholder="critical"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-              </Stack>
-            </Card>
-            <Card flex={1} scheme="dark">
-              <Stack gap={4} padding={[3, 4, 5]}>
-                <Card padding={3}>
-                  <TextInput
-                    placeholder="default"
-                    prefix={
-                      <Box padding={3}>
-                        <Text>prefix</Text>
-                      </Box>
-                    }
-                    suffix={
-                      <Box padding={3}>
-                        <Text>suffix</Text>
-                      </Box>
-                    }
-                  />
-                </Card>
-
-                {transparentTone && (
-                  <Card padding={3} tone="transparent">
-                    <TextInput
-                      placeholder="transparent"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {primaryTone && (
-                  <Card padding={3} tone="primary">
-                    <TextInput
-                      placeholder="primary"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {positiveTone && (
-                  <Card padding={3} tone="positive">
-                    <TextInput
-                      placeholder="positive"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {cautionTone && (
-                  <Card padding={3} tone="caution">
-                    <TextInput
-                      placeholder="caution"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-
-                {criticalTone && (
-                  <Card padding={3} tone="critical">
-                    <TextInput
-                      placeholder="critical"
-                      prefix={
-                        <Box padding={3}>
-                          <Text>prefix</Text>
-                        </Box>
-                      }
-                      suffix={
-                        <Box padding={3}>
-                          <Text>suffix</Text>
-                        </Box>
-                      }
-                    />
-                  </Card>
-                )}
-              </Stack>
-            </Card>
-          </Flex>
-        </Container>
-      </Flex>
-    </Card>
+    <CardWrapper>
+      <Box
+        alignItems="center"
+        display="flex"
+        flexDirection="column"
+        gap={2}
+        height="fill"
+        justifyContent="center"
+      >
+        {CARD_TONES.map((tone) => (
+          <Card key={tone} padding={3} radius={5} tone={tone}>
+            <TextInput
+              disabled={disabled}
+              placeholder="default"
+              prefix={
+                <Box padding={3}>
+                  <Text>prefix</Text>
+                </Box>
+              }
+              suffix={
+                <Box padding={3}>
+                  <Text>suffix</Text>
+                </Box>
+              }
+            />
+          </Card>
+        ))}
+      </Box>
+    </CardWrapper>
   )
 }

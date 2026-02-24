@@ -7,8 +7,8 @@ export default function ResponsiveZOffsetStory(): React.JSX.Element {
     <Layer
       id="responsive-layer"
       padding={[1, 2, 3, 4, 5, 6, 7]}
-      shadow={1}
       sizing="border"
+      shadow={1}
       zOffset={[1, 2, 3, 4, 5, 6, 7]}
     >
       <LayerDebugInfo />

@@ -1,5 +1,5 @@
 import type {ResponsiveProp} from '@sanity/ui/css'
-import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
+import type {ElementTone, FontTextSize, Space} from '@sanity/ui/tokens'
 import {
   type ElementType,
   type FocusEvent,
@@ -91,6 +91,7 @@ export function Tab<E extends TabElementType = typeof DEFAULT_TAB_ELEMENT>(
       ref={ref}
       aria-selected={selected ? 'true' : 'false'}
       as={as}
+      flex="none"
       fontSize={fontSize}
       icon={icon}
       id={id}

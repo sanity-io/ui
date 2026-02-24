@@ -1,4 +1,9 @@
-import {_inputElement, _inputPresentation, textArea, type TextAreaStyleProps} from '@sanity/ui/css'
+import {
+  textArea,
+  textArea_element,
+  textArea_presentation,
+  type TextAreaStyleProps,
+} from '@sanity/ui/css'
 import {useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -42,9 +47,10 @@ export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_ARE
     disabled = false,
     flex,
     fontSize = 2,
+    fontWeight,
     gap = 3,
     padding = 3,
-    radius = 2,
+    radius = 3,
     readOnly,
     ref: forwardedRef,
     width,
@@ -67,24 +73,25 @@ export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_ARE
         border,
         flex,
         fontSize,
+        fontWeight,
         gap,
         padding,
         radius,
         width,
       })}
-      data-invalid={customValidity ? '' : undefined}
-      data-read-only={!disabled && readOnly ? '' : undefined}
       data-ui="TextArea"
     >
       <Element
         {...rest}
         ref={ref}
-        className={_inputElement()}
+        className={textArea_element()}
+        data-invalid={customValidity ? '' : undefined}
         data-no-focus-ring={__unstable_disableFocusRing ? '' : undefined}
+        data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled}
         readOnly={readOnly}
       />
-      <span className={_inputPresentation()} />
+      <span className={textArea_presentation()} />
     </span>
   )
 }

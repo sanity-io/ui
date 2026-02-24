@@ -2,14 +2,13 @@ import {BoundaryElementProvider, Button, Card, Code, Flex, Stack, Text, Tooltip}
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 
-import {WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '../../../../../workshop'
 
 export default function OverflowingBoundaryStory(): React.JSX.Element {
   const content = useText(
     'Content',
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mollis consectetur malesuada. Sed lobortis est dolor, eget imperdiet velit placerat et. Aenean posuere mi non aliquet iaculis. Donec fermentum pulvinar purus at sagittis. Ut tincidunt massa odio, sed finibus justo ullamcorper id. Nam venenatis justo non ligula elementum cursus. Pellentesque laoreet justo in mollis sagittis. In lacinia ornare ultrices. Suspendisse potenti.',
   )
-  // @ts-expect-error - TODO: fix this
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
   const portal = useBoolean('Portal', false)
   const useBoundaryElement = useBoolean('Use boundary element', true)
@@ -57,7 +56,6 @@ export default function OverflowingBoundaryStory(): React.JSX.Element {
             <Tooltip
               content={<Text size={1}>{content}</Text>}
               padding={2}
-              // @ts-expect-error - TODO: fix this
               placement={placement}
               portal={portal}
             >

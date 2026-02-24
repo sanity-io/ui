@@ -1,6 +1,6 @@
 import {ChevronRightIcon} from '@sanity/icons'
 import type {RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
-import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
+import type {ElementTone, FontTextSize, Space} from '@sanity/ui-tokens/system'
 import {
   type ElementType,
   isValidElement,
@@ -43,7 +43,7 @@ export type MenuGroupOwnProps = RadiusStyleProps & {
     | 'onBlurCapture'
   >
   padding?: ResponsiveProp<Space>
-  popover?: Omit<PopoverProps<'div'>, 'content' | 'open'>
+  popover?: Omit<PopoverProps, 'content' | 'open'>
   text?: ReactNode
   tone?: ElementTone
 }
@@ -71,7 +71,7 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
     onClick,
     padding = 3,
     popover,
-    radius = 2,
+    radius = 3,
     text,
     tone = 'default',
     ...rest
@@ -165,13 +165,13 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
   const childMenu = (
     <Menu
       {...menuProps}
-      registerElement={registerElement}
-      shouldFocus={shouldFocus}
       onClickOutside={onClickOutside}
       onEscape={onEscape}
       onItemClick={handleChildItemClick}
       onKeyDown={handleMenuKeyDown}
       onMouseEnter={handleMenuMouseEnter}
+      registerElement={registerElement}
+      shouldFocus={shouldFocus}
     >
       {children}
     </Menu>
@@ -194,25 +194,27 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
   }, [])
 
   return (
-    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={open}>
+    <Popover
+      __unstable_shift={-4}
+      data-ui="MenuGroup__popover"
+      {...popover}
+      content={childMenu}
+      open={open}
+    >
       <Selectable
-        // data-as={as}
         data-ui="MenuGroup"
-        // forwardedAs={as}
         {...rest}
-        ref={setRootElement}
         aria-pressed={as === 'button' ? withinMenu : undefined}
         as={as}
-        // data-pressed={as !== 'button' ? withinMenu : undefined}
-        // data-selected={!withinMenu && active ? '' : undefined}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        onMouseEnter={handleMouseEnter}
         radius={radius}
+        ref={setRootElement}
         selected={withinMenu}
         tabIndex={-1}
         tone={tone}
         type={as === 'button' ? 'button' : undefined}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        onMouseEnter={handleMouseEnter}
       >
         <Flex gap={gap} padding={padding}>
           {IconComponent && (

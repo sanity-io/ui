@@ -1,5 +1,5 @@
 import {Button, Flex, LayerProvider, type Placement, Popover, useLayer} from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES} from '@sanity/ui/tokens'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 export default function RecursiveStory(): React.JSX.Element {
@@ -49,8 +49,8 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
 
   return (
     <Popover
-      content={<RecursiveExample onClose={handleClose} />}
       fallbackPlacements={fallbackPlacements}
+      content={<RecursiveExample onClose={handleClose} />}
       open={open}
       padding={1}
       placement={fallbackPlacements[3]}
@@ -58,11 +58,11 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
       tone={CARD_TONES[seed]}
     >
       <Button
-        ref={buttonRef}
         mode="bleed"
-        text="Open"
-        onClick={handleOpen}
         onKeyDown={handleKeyDown}
+        onClick={handleOpen}
+        ref={buttonRef}
+        text="Open"
       />
     </Popover>
   )

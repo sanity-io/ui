@@ -1,16 +1,22 @@
 import {detectOverflow, type Middleware} from '@floating-ui/react-dom'
 
-import type {PopoverMargins} from '../types'
+// import type {PopoverMargins} from '../types'
 
 export function size(options: {
   boundaryElement?: HTMLElement | null
   constrainSize: boolean
-  margins: PopoverMargins
+  // margins: PopoverMargins
   matchReferenceWidth?: boolean
   padding?: number
   referenceWidthRef: React.RefObject<number | undefined>
 }): Middleware {
-  const {margins, padding = 0, constrainSize, matchReferenceWidth, referenceWidthRef} = options
+  const {
+    // margins,
+    padding = 0,
+    constrainSize,
+    matchReferenceWidth,
+    referenceWidthRef,
+  } = options
 
   return {
     name: '@sanity/ui/size',
@@ -54,9 +60,9 @@ export function size(options: {
 
       // IMPORTANT – APPLY ELEMENT STYLES HERE
       // Elements need to be resized BEFORE the `platform.getDimensions` call below
-      const availableWidth = maxWidth - margins[1] - margins[3]
-      const availableHeight = maxHeight - margins[0] - margins[2]
-      const referenceWidth = reference.width - margins[1] - margins[3]
+      const availableWidth = maxWidth // - margins[1] - margins[3]
+      const availableHeight = maxHeight // - margins[0] - margins[2]
+      const referenceWidth = reference.width // - margins[1] - margins[3]
 
       referenceWidthRef.current = referenceWidth
 

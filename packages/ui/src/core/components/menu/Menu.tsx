@@ -1,5 +1,5 @@
 import {menu, type PaddingStyleProps, type ResponsiveProp} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/theme'
+import type {Space} from '@sanity/ui-tokens/system'
 import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
@@ -157,15 +157,15 @@ export function Menu<E extends MenuElementType = typeof DEFAULT_MENU_ELEMENT>(
       <Box
         data-ui="Menu"
         {...rest}
-        ref={handleRefChange}
         as={as}
         className={menu({className})}
-        outline="none"
+        onKeyDown={handleKeyDown}
         overflow="auto"
+        outline="none"
         padding={padding}
+        ref={handleRefChange}
         role="menu"
         tabIndex={-1}
-        onKeyDown={handleKeyDown}
       >
         <Stack gap={gap}>{children}</Stack>
       </Box>

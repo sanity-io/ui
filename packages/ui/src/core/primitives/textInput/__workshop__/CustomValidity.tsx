@@ -1,17 +1,17 @@
-import {Button, Card, Container, Stack, TextInput} from '@sanity/ui'
+import {Button, Stack, TextInput} from '@sanity/ui'
 import {useText} from '@sanity/ui-workshop'
+
+import {CardWrapper} from '../../../../../workshop'
 
 export default function CustomValidityStory(): React.JSX.Element {
   const customValidity = useText('Custom validity', 'Invalid value') || undefined
 
   return (
-    <Container as="form" width={0} onSubmit={(event) => event.preventDefault()}>
-      <Card padding={4}>
-        <Stack gap={4}>
-          <TextInput customValidity={customValidity} />
-          <Button text="Submit" type="submit" />
-        </Stack>
-      </Card>
-    </Container>
+    <CardWrapper>
+      <Stack as="form" gap={3} onSubmit={(event) => event.preventDefault()}>
+        <TextInput customValidity={customValidity} />
+        <Button text="Submit" type="submit" />
+      </Stack>
+    </CardWrapper>
   )
 }

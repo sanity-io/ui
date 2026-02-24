@@ -1,4 +1,4 @@
-import type {CardTone, ColorScheme} from '@sanity/ui/theme'
+import type {CardTone, ColorScheme} from '@sanity/ui/tokens'
 import type {ComponentType, ReactNode} from 'react'
 
 /** @internal */
@@ -10,6 +10,7 @@ export type _CardCompatProviderComponent = ComponentType<{
 
 /** @public */
 export interface CardContextValue {
+  root: boolean
   tone: CardTone
   scheme: ColorScheme
   /** @internal */

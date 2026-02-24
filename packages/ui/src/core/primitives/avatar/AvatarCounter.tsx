@@ -1,8 +1,8 @@
-import {avatarCounter, type ResponsiveProp} from '@sanity/ui/css'
-import type {AvatarSize, FontLabelSize} from '@sanity/ui/theme'
+import {avatar_counter, type ResponsiveProp} from '@sanity/ui/css'
+import type {AvatarSize, FontLabelSize} from '@sanity/ui/tokens'
 import {useMemo} from 'react'
 
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
+import {_getResponsiveProp} from '../../helpers/props'
 import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
@@ -34,11 +34,11 @@ export function AvatarCounter<
     size: sizeProp = 1,
     ...rest
   } = props as AvatarCounterProps<typeof DEFAULT_AVATAR_COUNTER_ELEMENT>
-  const size = useResponsiveProp(sizeProp)
+  const size = _getResponsiveProp(sizeProp)
 
   const labelSize = useMemo(
     () =>
-      Object.values(size).map((s) => {
+      size.map((s) => {
         if (s === 1) return 1 satisfies FontLabelSize
         if (s === 2) return 3 satisfies FontLabelSize
         if (s === 3) return 5 satisfies FontLabelSize
@@ -54,7 +54,7 @@ export function AvatarCounter<
       {...rest}
       alignItems="center"
       as={as}
-      className={avatarCounter({className, size})}
+      className={avatar_counter({className, size})}
       display="flex"
       flex="none"
       justifyContent="center"

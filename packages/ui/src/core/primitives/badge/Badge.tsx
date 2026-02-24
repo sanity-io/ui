@@ -1,20 +1,18 @@
-import {
-  badge,
-  type BadgeStyleProps,
-  type FlexStyleProps,
-  type PaddingStyleProps,
-  type RadiusStyleProps,
-} from '@sanity/ui/css'
+import {badge, BADGE_STYLE_PROP_KEYS, type BadgeStyleProps} from '@sanity/ui/css'
+import type {ResponsiveProp} from '@sanity/ui-css'
+import type {FontTextSize} from '@sanity/ui-tokens/system'
 
+import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
-import {Box} from '../box/Box'
 import {Text} from '../text/Text'
 
 /** @public */
 export const DEFAULT_BADGE_ELEMENT = 'span'
 
 /** @public */
-export type BadgeOwnProps = BadgeStyleProps & FlexStyleProps & PaddingStyleProps & RadiusStyleProps
+export interface BadgeOwnProps extends BadgeStyleProps {
+  fontSize?: ResponsiveProp<FontTextSize>
+}
 
 /** @public */
 export type BadgeElementType = 'div' | 'span' | ComponentType
@@ -30,32 +28,22 @@ export type BadgeProps<E extends BadgeElementType = BadgeElementType> = Props<Ba
 export function Badge<E extends BadgeElementType = typeof DEFAULT_BADGE_ELEMENT>(
   props: BadgeProps<E>,
 ): React.JSX.Element {
-  const {
-    as = DEFAULT_BADGE_ELEMENT,
-    children,
-    className,
-    flex = 'none',
-    fontSize = 1,
-    padding = 1,
-    radius = 2,
-    tone = 'default',
-    ...rest
-  } = props as BadgeProps<typeof DEFAULT_BADGE_ELEMENT>
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_BADGE_ELEMENT,
+      children,
+      fontSize = 1,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as BadgeProps<typeof DEFAULT_BADGE_ELEMENT>, BADGE_STYLE_PROP_KEYS)
 
   return (
-    <Box
-      data-ui="Badge"
-      {...rest}
-      as={as}
-      className={badge({className, tone})}
-      display="flex"
-      flex={flex}
-      maxWidth="fill"
-      padding={padding}
-      radius={radius}
-      width="min"
-    >
-      <Text size={fontSize}>{children}</Text>
-    </Box>
+    <Element data-ui="Badge" {...domProps} className={badge(styleProps)}>
+      <Text as="span" size={fontSize}>
+        {children}
+      </Text>
+    </Element>
   )
 }

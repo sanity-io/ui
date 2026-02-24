@@ -1,10 +1,10 @@
-import {code, type CodeStyleProps, type ResponsiveProp} from '@sanity/ui/css'
-import type {FontCodeSize} from '@sanity/ui/theme'
+import {code, CODE_STYLE_PROP_KEYS, type CodeStyleProps} from '@sanity/ui/css'
 import {lazy, Suspense} from 'react'
 
+import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
 
-const LazyRefractor = lazy(() => import('./Refractor'))
+const LazyRefractor = lazy(() => import('../_syntax/LazySyntax'))
 
 /** @public */
 export const DEFAULT_CODE_ELEMENT = 'pre'
@@ -13,7 +13,6 @@ export const DEFAULT_CODE_ELEMENT = 'pre'
 export type CodeOwnProps = CodeStyleProps & {
   /** Define the language to use for syntax highlighting. */
   language?: string
-  size?: ResponsiveProp<FontCodeSize>
 }
 
 /** @public */
@@ -26,44 +25,22 @@ export type CodeProps<E extends CodeElementType = CodeElementType> = Props<CodeO
 export function Code<E extends CodeElementType = typeof DEFAULT_CODE_ELEMENT>(
   props: CodeProps<E>,
 ): React.JSX.Element {
+  const [styleProps, domProps] = _splitKeys(
+    props as CodeProps<typeof DEFAULT_CODE_ELEMENT>,
+    CODE_STYLE_PROP_KEYS,
+  )
+
   const {
     as: Element = DEFAULT_CODE_ELEMENT,
     children,
-    className,
     language: languageProp,
-    margin,
-    marginX,
-    marginY,
-    marginTop,
-    marginRight,
-    marginBottom,
-    marginLeft,
-    maxWidth,
-    size = 2,
-    weight = 'regular',
-    ...rest
-  } = props as CodeProps<typeof DEFAULT_CODE_ELEMENT>
+    ...restDomProps
+  } = domProps
 
   const language = typeof languageProp === 'string' ? languageProp : undefined
 
   return (
-    <Element
-      data-ui="Code"
-      {...rest}
-      className={code({
-        className,
-        margin,
-        marginX,
-        marginY,
-        marginTop,
-        marginRight,
-        marginBottom,
-        marginLeft,
-        maxWidth,
-        size,
-        weight,
-      })}
-    >
+    <Element data-ui="Code" {...restDomProps} className={code(styleProps)}>
       <Suspense fallback={<code>{children}</code>}>
         <LazyRefractor language={language} value={children} />
       </Suspense>

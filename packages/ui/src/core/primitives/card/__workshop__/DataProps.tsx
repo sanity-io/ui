@@ -1,11 +1,10 @@
 import {Card, Stack, Text} from '@sanity/ui'
-import type {CardTone} from '@sanity/ui/theme'
+import type {CardTone} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../../../workshop'
 
 export default function DataPropsStory(): React.JSX.Element {
-  // @ts-expect-error - TODO: fix this
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS, 'default') as CardTone | undefined
 
   return (

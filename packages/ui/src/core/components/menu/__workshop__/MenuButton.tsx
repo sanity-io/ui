@@ -14,10 +14,9 @@ import {
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useMemo} from 'react'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
+import {WORKSHOP_CARD_TONE_OPTIONS} from '../../../../../workshop'
 
 export default function MenuButtonStory(): React.JSX.Element {
-  // @ts-expect-error - TODO: fix this
   const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
   const portal = useBoolean('Portal', false)
 
@@ -30,13 +29,9 @@ export default function MenuButtonStory(): React.JSX.Element {
   )
 
   return (
-    <Card
-      height="fill"
-      // @ts-expect-error - TODO: fix this
-      tone={layoutTone}
-    >
+    <Card height="fill" tone={layoutTone}>
       <Box padding={[4, 5, 6]}>
-        <Grid gap={2} gridTemplateColumns={3}>
+        <Grid gridTemplateColumns={3} gap={2}>
           <Button id="prev-button" mode="ghost" text="Prev" />
           <LayerProvider>
             <MenuButton
@@ -47,37 +42,37 @@ export default function MenuButtonStory(): React.JSX.Element {
                   <MenuItem
                     icon={SearchIcon}
                     id="menu-item-1"
-                    text="Search"
                     onClick={useAction('Search')}
+                    text="Search"
                   />
                   <MenuItem
                     icon={ClockIcon}
                     id="menu-item-2"
-                    text="Clock"
                     onClick={useAction('Clock')}
+                    text="Clock"
                   />
                   <MenuItem
                     disabled
                     icon={CommentIcon}
                     id="menu-item-3"
-                    text="Comment"
                     onClick={useAction('Comment')}
+                    text="Comment"
                   />
                   <MenuDivider />
                   <MenuItem
                     icon={ExpandIcon}
                     id="menu-item-4"
-                    text="Expand"
                     onClick={useAction('Expand')}
+                    text="Expand"
                   />
                 </Menu>
               }
-              popover={popover}
               onClose={useAction('onClose')}
               onOpen={useAction('onOpen')}
+              popover={popover}
             />
           </LayerProvider>
-          <Button id="next-button" mode="ghost" text="Next" />
+          <Button mode="ghost" id="next-button" text="Next" />
         </Grid>
       </Box>
     </Card>

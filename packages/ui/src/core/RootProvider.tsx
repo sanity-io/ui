@@ -1,4 +1,4 @@
-import type {CardTone, ColorScheme} from '@sanity/ui/theme'
+import type {CardTone, ColorScheme} from '@sanity/ui/tokens'
 import type {ReactNode} from 'react'
 
 import {ToastProvider} from './components/toast/ToastProvider'
@@ -12,23 +12,17 @@ export interface RootProviderProps {
   boundaryElement?: HTMLElement | null
   children?: ReactNode
   portalElement?: HTMLElement | null
-  scheme?: ColorScheme
-  tone?: CardTone
+  scheme: ColorScheme
+  tone: CardTone
 }
 
 /** @public */
 export function RootProvider(props: RootProviderProps): React.JSX.Element {
-  const {
-    boundaryElement = null,
-    children,
-    portalElement = null,
-    scheme = 'light',
-    tone = 'transparent',
-  } = props
+  const {boundaryElement = null, children, portalElement = null, scheme, tone} = props
 
   return (
     <LayerProvider>
-      <CardProvider scheme={scheme} tone={tone}>
+      <CardProvider root scheme={scheme} tone={tone}>
         <ToastProvider>
           <BoundaryElementProvider element={boundaryElement}>
             <PortalProvider element={portalElement}>{children}</PortalProvider>

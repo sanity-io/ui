@@ -1,8 +1,8 @@
-import {avatarStack, type ResponsiveProp} from '@sanity/ui/css'
-import type {AvatarSize} from '@sanity/ui/theme'
+import {avatar_stack, type ResponsiveProp} from '@sanity/ui/css'
+import type {AvatarSize} from '@sanity/ui/tokens'
 import {Children, cloneElement, Fragment, isValidElement, type ReactElement} from 'react'
 
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
+import {_getResponsiveProp} from '../../helpers/props'
 import type {ComponentType, Props} from '../../types'
 import {Box, type BoxOwnProps} from '../box/Box'
 import type {AvatarProps} from './Avatar'
@@ -50,7 +50,7 @@ export function AvatarStack<E extends AvatarStackElementType = typeof DEFAULT_AV
     AvatarProps<'span'>
   >[]
   const maxLength = Math.max(maxLengthProp, 0)
-  const size = useResponsiveProp(sizeProp)
+  const size = _getResponsiveProp(sizeProp)
 
   const len = children.length
   const visibleCount = maxLength - 1
@@ -63,7 +63,7 @@ export function AvatarStack<E extends AvatarStackElementType = typeof DEFAULT_AV
       {...rest}
       alignItems="center"
       as={as}
-      className={avatarStack({className, size})}
+      className={avatar_stack({className, size})}
       display="flex"
       justifyContent="flex-start"
     >

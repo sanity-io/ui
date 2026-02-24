@@ -15,6 +15,11 @@ const scope: WorkshopScope = {
       title: 'Tones',
       component: lazy(() => import('./Tones')),
     },
+    {
+      name: 'within-button',
+      title: 'Within button',
+      component: lazy(() => import('./within-button')),
+    },
   ],
 }
 

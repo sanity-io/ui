@@ -1,4 +1,4 @@
-import {breadcrumbs, type GapStyleProps} from '@sanity/ui/css'
+import {type GapStyleProps} from '@sanity/ui/css'
 import {
   Children,
   Fragment,
@@ -45,7 +45,6 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
   const {
     as = DEFAULT_BREADCRUMBS_ELEMENT,
     children,
-    className,
     expandButton: expandButtonProps,
     gap = 2,
     gapX = gap,
@@ -79,23 +78,17 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
   })
 
   return (
-    <Flex
-      as={as}
-      data-ui="Breadcrumbs"
-      {...rest}
-      className={breadcrumbs({className})}
-      gap={gap}
-      gapX={gapX}
-      gapY={gapY}
-    >
+    <Flex as={as} data-ui="Breadcrumbs" {...rest} gap={gap} gapX={gapX} gapY={gapY} wrap="wrap">
       {items.map((item, itemIndex) => (
         <Fragment key={itemIndex}>
           {itemIndex > 0 && (
-            <Box aria-hidden as="li">
+            <Box aria-hidden as="li" flex="none">
               {separator || <Text muted>/</Text>}
             </Box>
           )}
-          <Box as="li">{item}</Box>
+          <Box as="li" flex="none">
+            {item}
+          </Box>
         </Fragment>
       ))}
     </Flex>

@@ -1,19 +1,21 @@
-import {card, type CardStyleProps} from '@sanity/ui/css'
-import {use} from 'react'
+import {card, CARD_STYLE_PROP_KEYS, type CardStyleProps} from '@sanity/ui/css'
+import type {CardTone} from '@sanity/ui-tokens/system'
 
+import {_splitKeys} from '../../_keys'
 import type {Props} from '../../types'
-import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
-import {CardContext} from './CardContext'
+import type {BoxElementType} from '../box/Box'
 import {CardProvider} from './CardProvider'
+import {useCard} from './useCard'
 
 /** @public */
 export const DEFAULT_CARD_ELEMENT = 'div'
 
 /** @public */
-export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
+export interface CardOwnProps extends Omit<CardStyleProps, 'tone'> {
   /**
    * Do not use in production.
    * @beta
+   * @deprecated Use `__unstable_pattern` instead.
    */
   __unstable_checkered?: boolean
   /**
@@ -25,6 +27,7 @@ export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
   pressed?: boolean
   selected?: boolean
   target?: string
+  tone?: CardTone | 'inherit'
 }
 
 /** @public */
@@ -42,46 +45,53 @@ export type CardProps<E extends CardElementType = CardElementType> = Props<CardO
 export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
   props: CardProps<E>,
 ): React.JSX.Element {
+  const [
+    {
+      scheme: schemeProp,
+      tone: toneProp = 'inherit',
+      // split style props
+      ...styleProps
+    },
+    // split DOM props
+    domProps,
+  ] = _splitKeys(props as CardProps<typeof DEFAULT_CARD_ELEMENT>, CARD_STYLE_PROP_KEYS)
+
   const {
     __unstable_checkered: checkered = false,
     __unstable_focusRing: focusRing = false,
-    as = DEFAULT_CARD_ELEMENT,
-    className,
+    as: As = DEFAULT_CARD_ELEMENT,
+    children,
     pressed,
-    radius = 0,
-    scheme: schemeProp,
     selected,
-    style,
-    tone: toneProp = 'default',
-    ...rest
-  } = props as CardProps<typeof DEFAULT_CARD_ELEMENT>
+    ...restDomProps
+  } = domProps
 
-  const parent = use(CardContext)
-  const tone = toneProp === 'inherit' ? parent?.tone : toneProp
-  const scheme = schemeProp === undefined ? parent?.scheme : schemeProp
+  const context = useCard()
+  const tone = toneProp === 'inherit' ? context?.tone : toneProp
+  const scheme = schemeProp ?? context?.scheme
 
   let node = (
-    <Box
+    <As
       data-ui="Card"
-      {...rest}
-      as={as}
+      {...restDomProps}
       className={card({
-        className,
-        scheme: scheme === parent?.scheme ? undefined : scheme,
-        tone,
+        ...styleProps,
+        __unstable_pattern: styleProps.__unstable_pattern ?? (checkered ? 'checkered' : undefined),
+        tone: tone === context.tone && !context.root ? undefined : tone,
+        scheme: scheme === context.scheme && !context.root ? undefined : scheme,
       })}
-      data-checkered={checkered ? '' : undefined}
-      // Extract the disabled prop without removing it from `...rest` so that the underlying <button> or <a> has `[disabled]` when needed
+      // Extract the disabled prop without removing it from `...rest` so that the underlying
+      // <button> or <a> has `[data-disabled]` when needed
       data-disabled={props.disabled ? '' : props['data-disabled']}
       data-focus-ring={focusRing ? '' : props['data-focus-ring']}
       data-pressed={pressed ? '' : props['data-pressed']}
       data-selected={selected ? '' : props['data-selected']}
-      radius={radius}
-      style={style}
-    />
+    >
+      {children}
+    </As>
   )
 
-  if (scheme === parent?.scheme && tone === parent?.tone) {
+  if (scheme === context?.scheme && tone === context?.tone) {
     return node
   }
 
@@ -89,17 +99,17 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
     <CardProvider
       scheme={scheme ?? 'light'}
       tone={tone ?? 'default'}
-      unstable_CompatProvider={parent?.unstable_CompatProvider}
+      unstable_CompatProvider={context?.unstable_CompatProvider}
     >
       {node}
     </CardProvider>
   )
 
-  if (parent?.unstable_CompatProvider) {
-    const CompatProvider = parent.unstable_CompatProvider
+  if (context?.unstable_CompatProvider) {
+    const CompatProvider = context.unstable_CompatProvider
 
     return (
-      <CompatProvider scheme={scheme ?? 'light'} tone={tone ?? parent.tone}>
+      <CompatProvider scheme={scheme ?? 'light'} tone={tone ?? context.tone}>
         {node}
       </CompatProvider>
     )

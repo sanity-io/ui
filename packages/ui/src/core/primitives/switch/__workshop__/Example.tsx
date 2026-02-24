@@ -1,6 +1,8 @@
 import {Box, Flex, Switch, Text} from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
+import {CardWrapper} from '../../../../../workshop'
+
 export default function ExampleStory(): React.JSX.Element {
   const [checked, setChecked] = useState<boolean | undefined>(undefined)
   const indeterminate = checked === undefined
@@ -9,7 +11,7 @@ export default function ExampleStory(): React.JSX.Element {
   }, [])
 
   return (
-    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+    <CardWrapper alignItems="center" display="flex" justifyContent="center">
       <Flex align="center" as="label">
         <Switch checked={checked || false} indeterminate={indeterminate} onChange={handleChange} />
         <Box marginLeft={3}>
@@ -18,6 +20,6 @@ export default function ExampleStory(): React.JSX.Element {
           </Text>
         </Box>
       </Flex>
-    </Flex>
+    </CardWrapper>
   )
 }

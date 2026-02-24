@@ -1,6 +1,6 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
-import {type ResponsiveProp, treeItem, vars} from '@sanity/ui/css'
-import type {FontTextSize, FontWeight, Space} from '@sanity/ui/theme'
+import {type ResponsiveProp, tree_item, vars} from '@sanity/ui/css'
+import type {FontTextSize, FontWeight, Space} from '@sanity/ui/tokens'
 import {
   type ElementType,
   type KeyboardEvent,
@@ -73,7 +73,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
     muted,
     onClick,
     padding = 2,
-    radius = 2,
+    radius = 3,
     selected = false,
     space = 2,
     text,
@@ -81,7 +81,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
     ...rest
   } = props as TreeItemProps<typeof DEFAULT_TREE_ITEM_ELEMENT>
 
-  const [rootElement, setRootElement] = useState<HTMLLIElement | null>(null)
+  const [rootElement, setRootElement] = useState<HTMLElement | null>(null)
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
@@ -173,7 +173,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
         {...(rest as BoxProps<'li'>)}
         ref={setRootElement}
         as="li"
-        className={treeItem({className})}
+        className={tree_item({className})}
         role="none"
         onClick={handleClick}
       >
@@ -204,15 +204,14 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
 
   return (
     <Box
-      // @ts-expect-error - TODO: fix this
-      ref={setRootElement}
-      data-selected={selected ? '' : undefined}
+      data-pressed={selected ? '' : undefined}
       data-tree-id={id}
       data-tree-key={itemKey}
       data-ui="TreeItem"
       {...(rest as BoxProps<'a'>)}
+      ref={setRootElement}
       aria-expanded={expanded}
-      className={treeItem({className})}
+      className={tree_item({className})}
       role="treeitem"
       tabIndex={tabIndex}
       onClick={handleClick}
