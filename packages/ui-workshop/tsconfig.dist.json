@@ -1,6 +1,6 @@
 {
-  "extends": "./tsconfig.settings",
-  "include": ["./exports", "./package.json", "./src", "./typings"],
+  "extends": "@repo/typescript-config/base.json",
+  "include": ["../ui/exports", "../ui/src", "./exports", "./package.json", "./src"],
   "exclude": [
     "./src/**/__fixtures__",
     "./src/**/__mocks__",
@@ -9,13 +9,17 @@
     "./src/**/*.test.tsx"
   ],
   "compilerOptions": {
-    "jsx": "preserve",
-    "rootDir": ".",
+    "rootDir": "..",
     "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/tsconfig.dist.tsbuildinfo",
+
     "noCheck": true,
+
     "paths": {
-      "@sanity/ui-workshop/*": ["./exports/*.ts"],
-      "@sanity/ui-workshop": ["./exports"]
+      "@sanity/ui": ["../ui/exports"],
+      "@sanity/ui/*": ["../ui/exports/*"],
+      "@sanity/ui-workshop": ["./exports"],
+      "@sanity/ui-workshop/*": ["./exports/*.ts"]
     }
   }
 }
