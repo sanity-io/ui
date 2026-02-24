@@ -9,6 +9,7 @@
     "./rollup",
     "./scripts",
     "./src",
+    "./vanilla-extract",
     "./workshop.config.ts",
     "./workshop.runtime.ts"
   ],
