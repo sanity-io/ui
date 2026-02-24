@@ -110,8 +110,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * Props forwarded to the internal listbox {@link Box} element that wraps
      * the rendered options.
      *
-     * @beta Do not use in production.
-     *
      * @defaultValue `{}`
      */
     listBox?: BoxOwnProps
@@ -161,14 +159,12 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * button with the specified custom props. When `false` or `undefined`,
      * no open button is rendered.
      *
-     * @beta Do not use in production.
      */
     openButton?: boolean | AutocompleteOpenButtonProps
 
     /**
      * When `true`, opens the autocomplete dropdown when the input receives focus.
      *
-     * @beta Do not use in production.
      */
     openOnFocus?: boolean
 
@@ -231,7 +227,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * moves to one of the specified elements (e.g. a custom popover or
      * panel rendered alongside the autocomplete).
      *
-     * @beta Do not use in production.
      */
     relatedElements?: HTMLElement[]
 
@@ -257,7 +252,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * and mouse event handlers as props, along with a forwarded ref for the
      * popover container.
      *
-     * @beta Do not use in production.
      */
     renderPopover?: (
       props: {

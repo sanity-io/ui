@@ -29,7 +29,6 @@ export interface TextOverflowStyleProps {
    * constrained dimensions and `overflow: hidden` (or equivalent) in order
    * to take effect.
    *
-   * @beta
    */
   textOverflow?: TextOverflow
 }

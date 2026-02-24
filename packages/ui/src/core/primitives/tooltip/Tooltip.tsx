@@ -82,8 +82,6 @@ export type TooltipOwnProps = LayerOwnProps &
      * Animation is automatically disabled when the user's operating system
      * indicates a preference for reduced motion (`prefers-reduced-motion: reduce`).
      *
-     * @beta
-     *
      * @defaultValue false
      */
     animate?: boolean

@@ -105,8 +105,6 @@ export type ButtonOwnProps = ButtonStyleProps &
      * When `true`, renders a loading spinner overlay on the button and
      * disables user interaction. The button's content is visually hidden
      * behind the spinner.
-     *
-     * @beta Do not use in production, as this might change.
      */
     loading?: boolean
 

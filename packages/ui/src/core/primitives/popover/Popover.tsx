@@ -89,8 +89,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * Animation is automatically disabled when the user's operating system
    * indicates a preference for reduced motion (`prefers-reduced-motion: reduce`).
    *
-   * @beta
-   *
    * @defaultValue false
    */
   animate?: boolean
@@ -190,8 +188,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * popover that blocks all pointer interaction with elements behind it
    * until the popover is closed.
    *
-   * @beta
-   *
    * @defaultValue false
    */
   modal?: boolean
@@ -284,7 +280,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * A ref that receives the Floating UI `update` function, allowing the
    * consumer to imperatively recompute the popover's position.
    *
-   * @beta Do not use in production.
    */
   updateRef?: Ref<PopoverUpdateCallback | undefined>
 

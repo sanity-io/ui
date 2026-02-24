@@ -91,7 +91,6 @@ export type TextInputOwnProps = InputStyleProps & {
    * Clicking the clear button invokes the {@link TextInputOwnProps.onClear | onClear}
    * callback and refocuses the input element.
    *
-   * @beta Do not use in production.
    */
   clearButton?: boolean | TextInputClearButtonProps
 
@@ -138,7 +137,6 @@ export type TextInputOwnProps = InputStyleProps & {
    * fires, the input element is refocused. Use this callback to clear the
    * controlled input value in the parent component.
    *
-   * @beta Do not use in production.
    */
   onClear?: () => void
 
