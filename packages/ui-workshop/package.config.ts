@@ -14,7 +14,7 @@ export default defineConfig({
 
   bundles: [
     {
-      source: './src/cli/index.ts',
+      source: './src/cli.ts',
       import: './dist/cli.js',
       runtime: 'node',
     },
