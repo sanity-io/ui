@@ -19,8 +19,7 @@ export default defineConfig({
     alias: features.dist
       ? {}
       : {
-          '@sanity/ui/css/index.css': path.resolve(__dirname, './empty.css'),
-          '@sanity/ui': path.resolve(__dirname, '../../exports'),
+          '@sanity/ui': path.resolve(__dirname, '../../packages/ui/exports'),
         },
   },
 })
