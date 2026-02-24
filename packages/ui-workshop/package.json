@@ -83,6 +83,7 @@
   "browserslist": "extends @sanity/browserslist-config",
   "dependencies": {
     "@sanity/icons": "^3.7.4",
+    "@vanilla-extract/vite-plugin": "^5.1.4",
     "@vitejs/plugin-react": "^5.1.4",
     "axe-core": "^4.11.1",
     "cac": "^6.7.14",
