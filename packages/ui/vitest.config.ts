@@ -13,7 +13,7 @@ export default defineConfig({
     // Enable rich PR failed test annotation on the CI
     reporters: process.env['GITHUB_ACTIONS'] ? ['default', 'github-actions'] : 'default',
     setupFiles: ['test/setup.ts'],
-    exclude: ['cypress', 'dist', 'node_modules'],
+    exclude: ['dist', 'e2e', 'node_modules'],
   },
   resolve: {
     alias: {
