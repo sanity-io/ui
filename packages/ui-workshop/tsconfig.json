@@ -12,7 +12,8 @@
     "./src",
     "./vanilla-extract",
     "./workshop.config.ts",
-    "./workshop.runtime.ts"
+    "./workshop.runtime.ts",
+    "../ui/typings/css.d.ts"
   ],
   "exclude": [
     "../ui/src/**/__fixtures__",
@@ -29,10 +30,14 @@
     "noEmit": true,
 
     "paths": {
-      "@sanity/ui": ["../ui/exports/index.ts"],
       "@sanity/ui/*": ["../ui/exports/*"],
-      "@sanity/ui-workshop": ["./exports/index.ts"],
-      "@sanity/ui-workshop/*": ["./exports/*"]
+      "@sanity/ui": ["../ui/exports/index.ts"],
+      "@sanity/ui-css": ["../ui-css/exports/index.ts"],
+      "@sanity/ui-css/*": ["../ui-css/exports/*"],
+      "@sanity/ui-tokens": ["../ui-tokens/exports/index.ts"],
+      "@sanity/ui-tokens/*": ["../ui-tokens/exports/*"],
+      "@sanity/ui-workshop/*": ["./exports/*.ts"],
+      "@sanity/ui-workshop": ["./exports"]
     }
   }
 }
