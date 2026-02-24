@@ -126,8 +126,10 @@ describe('dev', () => {
     // Wait for server to be ready
     await waitForServer('http://localhost:13337')
 
-    // Verify console output shows server started
-    expect(consoleLogSpy).toHaveBeenCalledWith('[workshop] Listening on http://localhost:13337')
+    // Verify console output shows server started (with timestamp prefix)
+    expect(consoleLogSpy).toHaveBeenCalledWith(
+      expect.stringContaining('[workshop] Listening on http://localhost:13337'),
+    )
 
     // Additional verification: check that console.log was called at least once
     expect(consoleLogSpy.mock.calls.length).toBeGreaterThan(0)
@@ -147,8 +149,10 @@ describe('dev', () => {
     await cleanup()
     cleanup = undefined // Prevent double cleanup in afterEach
 
-    // Verify shutdown message was logged
-    expect(consoleLogSpy).toHaveBeenCalledWith('[workshop] Shutting down gracefully...')
+    // Verify shutdown message was logged (with timestamp prefix)
+    expect(consoleLogSpy).toHaveBeenCalledWith(
+      expect.stringContaining('[workshop] Shutting down gracefully...'),
+    )
   }, 15000)
 
   it('should restart when runtime config changes', async () => {
@@ -158,8 +162,10 @@ describe('dev', () => {
     // Wait for server to be ready
     await waitForServer('http://localhost:13337')
 
-    // Verify initial server started
-    expect(consoleLogSpy).toHaveBeenCalledWith('[workshop] Listening on http://localhost:13337')
+    // Verify initial server started (with timestamp prefix)
+    expect(consoleLogSpy).toHaveBeenCalledWith(
+      expect.stringContaining('[workshop] Listening on http://localhost:13337'),
+    )
 
     // Verify initial server is accessible
     const response1 = await fetch('http://localhost:13337')
@@ -181,13 +187,18 @@ describe('dev', () => {
     // Give it time to restart (3 seconds should be enough)
     await new Promise((resolve) => setTimeout(resolve, 3000))
 
-    // Verify restart message was logged
+    // Verify restart message was logged (with timestamp prefix)
     expect(consoleLogSpy).toHaveBeenCalledWith(
-      '[workshop] Runtime config changed, restarting server...',
+      expect.stringContaining('[workshop] Runtime config changed, restarting server...'),
     )
 
-    // Verify server restarted and is listening again
-    expect(consoleLogSpy).toHaveBeenCalledWith('[workshop] Listening on http://localhost:13338')
+    // Verify server restarted and is listening again (with timestamp prefix)
+    expect(consoleLogSpy).toHaveBeenCalledWith(
+      expect.stringContaining('[workshop] Listening on http://localhost:13338'),
+    )
+
+    // Wait for server to be ready on new port
+    await waitForServer('http://localhost:13338')
 
     // Verify server is still accessible after restart
     const response2 = await fetch('http://localhost:13338')
