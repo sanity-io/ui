@@ -17,7 +17,9 @@
     "lint": "turbo lint",
     "prepare": "husky",
     "test": "turbo test -- --run",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "workshop:build": "turbo workshop:build --filter=./packages/ui",
+    "workshop:preview": "turbo workshop:preview --filter=./packages/ui"
   },
   "commitlint": {
     "extends": [
