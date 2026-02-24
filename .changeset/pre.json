@@ -1,0 +1,11 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@sanity/ui": "3.1.13",
+    "@sanity/ui-css": "0.0.0",
+    "@sanity/ui-tokens": "0.0.0",
+    "@sanity/ui-workshop": "3.4.0"
+  },
+  "changesets": []
+}
