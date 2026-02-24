@@ -1,12 +1,25 @@
 import {useEffect} from 'react'
 
-import type {SelectPropOptionsProp, SelectPropValue} from '../types'
+import type {SelectPropOptions, SelectPropValue} from '../types'
 import {useProps} from '../useProps'
 
-/** @internal */
+/** @public */
 export function useSelect<T extends SelectPropValue>(
   name: string,
-  options: SelectPropOptionsProp<T>,
+  options: SelectPropOptions<T>,
+  defaultValue: T,
+  groupName?: string,
+): T
+/** @public */
+export function useSelect<T extends SelectPropValue>(
+  name: string,
+  options: SelectPropOptions<T>,
+  defaultValue?: T,
+): T | undefined
+/** @public */
+export function useSelect<T extends SelectPropValue>(
+  name: string,
+  options: SelectPropOptions<T>,
   defaultValue?: T,
   groupName = 'Props',
 ): T | undefined {
@@ -17,7 +30,7 @@ export function useSelect<T extends SelectPropValue>(
       type: 'select',
       groupName,
       name,
-      options: options as SelectPropOptionsProp,
+      options: options as SelectPropOptions,
       defaultValue,
     })
 

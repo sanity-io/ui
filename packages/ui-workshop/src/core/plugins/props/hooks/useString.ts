@@ -2,7 +2,15 @@ import {useEffect} from 'react'
 
 import {useProps} from '../useProps'
 
-/** @internal */
+/** @public */
+export function useString(name: string, defaultValue: string, groupName?: string): string
+/** @public */
+export function useString(
+  name: string,
+  defaultValue?: string,
+  groupName?: string,
+): string | undefined
+/** @public */
 export function useString(
   name: string,
   defaultValue?: string,

@@ -1,11 +1,10 @@
 import {Box, Text} from '@sanity/ui'
-import {memo} from 'react'
 
 import {Prop} from './components/prop'
 import {useProps} from './useProps'
 
 /** @internal */
-export const PropsInspector = memo(function PropsInspector(): React.ReactNode {
+export function PropsInspector() {
   const {schemas, value} = useProps()
 
   return (
@@ -28,4 +27,4 @@ export const PropsInspector = memo(function PropsInspector(): React.ReactNode {
         ))}
     </Box>
   )
-})
+}

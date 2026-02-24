@@ -1,6 +1,6 @@
 import {Root, usePrefersDark} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/theme'
-import {memo, useCallback, useEffect, useReducer, useState} from 'react'
+import {useCallback, useEffect, useReducer, useState} from 'react'
 
 import type {WorkshopConfig} from '../config/types'
 import {createPubsub} from '../lib/pubsub'
@@ -26,16 +26,14 @@ function getStateFromLocation(): WorkshopState {
     frameReady: false,
     path,
     payload,
-    scheme: typeof scheme === 'string' ? (scheme as ColorScheme) : 'light',
+    scheme: typeof scheme === 'string' ? (scheme as ColorScheme) : 'system',
     viewport: typeof viewport === 'string' ? viewport : 'auto',
     zoom: typeof zoom === 'string' ? Number(zoom) : 1,
   }
 }
 
 /** @internal */
-export const WorkshopFrame = memo(function WorkshopFrame(
-  props: WorkshopFrameProps,
-): React.ReactNode {
+export function WorkshopFrame(props: WorkshopFrameProps) {
   const {config} = props
   const [main] = useState(() => createMainController())
   const [channel] = useState(() => createPubsub<WorkshopMsg>())
@@ -79,9 +77,9 @@ export const WorkshopFrame = memo(function WorkshopFrame(
       viewport={viewport}
       zoom={zoom}
     >
-      <Root height="fill" overflow="auto" scheme={scheme} tone="default">
+      <Root height="fill" overflow="auto" scheme={scheme}>
         <WorkshopCanvas />
       </Root>
     </WorkshopProvider>
   )
-})
+}

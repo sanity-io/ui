@@ -1,29 +1,28 @@
-import {Flex, Heading, Stack, Text} from '@sanity/ui'
+import {Flex, Stack, Text} from '@sanity/ui'
 import {useBoolean, useNumber, useSelect, useString, useText} from '@sanity/ui-workshop'
 
 const options = {
-  None: '',
+  None: undefined,
   Small: 'sm',
   Medium: 'md',
   Large: 'lg',
-}
+} as const
 
 export default function TestStory() {
-  const text = useText('Text', 'Hello, world')
-  const boolean = useBoolean('Boolean', true)
-  const number = useNumber('Number', 1234)
-  const string = useString('String', '...')
-  const option = useSelect('Select option', options)
+  const boolean = useBoolean('Boolean')
+  const number = useNumber('Number', 123)
+  const option = useSelect('Select', options, 'sm')
+  const string = useString('String', 'String')
+  const text = useText('Text', 'Text')
 
   return (
     <Flex align="center" height="fill" justify="center">
-      <Stack gap={[3, 4, 5]}>
-        <Heading size={[2, 3, 4]}>This is my first story.</Heading>
-        <Text size={[2, 3, 4]}>Some text: {text}</Text>
-        <Text size={[2, 3, 4]}>A boolean: {boolean ? 'true' : 'false'}</Text>
-        <Text size={[2, 3, 4]}>A number: {number}</Text>
-        <Text size={[2, 3, 4]}>A string: {string}</Text>
-        <Text size={[2, 3, 4]}>An option: {option}</Text>
+      <Stack gap={4} maxWidth={1} padding={4} width="fill">
+        <Text muted>Boolean: {boolean ? 'true' : 'false'}</Text>
+        <Text muted>Number: {number}</Text>
+        <Text muted>Select: {option ?? 'None'}</Text>
+        <Text muted>String: {string}</Text>
+        <Text muted>Text: {text}</Text>
       </Stack>
     </Flex>
   )

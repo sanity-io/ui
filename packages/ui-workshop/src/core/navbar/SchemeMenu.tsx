@@ -1,34 +1,44 @@
-import {MoonIcon, SunIcon} from '@sanity/icons'
-import {Button} from '@sanity/ui'
-import {memo, useCallback} from 'react'
+import {MobileDeviceIcon, MoonIcon, SunIcon} from '@sanity/icons'
+import {Button, Flex} from '@sanity/ui'
+import {useCallback} from 'react'
 
-import {startViewTransition} from '../lib/startViewTransition'
 import {useWorkshop} from '../useWorkshop'
+import type {WorkshopColorScheme} from '../WorkshopContext'
 
 /** @internal */
-export function SchemeMenu(): React.ReactNode {
+export function SchemeMenu() {
   const {broadcast, scheme} = useWorkshop()
 
-  const handleToggleScheme = useCallback(() => {
-    startViewTransition(() => broadcast({type: 'workshop/toggleScheme'}))
-  }, [broadcast])
-
-  return <SchemeMenuView dark={scheme === 'dark'} onToggleScheme={handleToggleScheme} />
-}
-
-const SchemeMenuView = memo(function SchemeMenuView(props: {
-  dark: boolean
-  onToggleScheme: () => void
-}) {
-  const {dark, onToggleScheme} = props
+  const setScheme = useCallback(
+    (value: WorkshopColorScheme) => {
+      broadcast({type: 'workshop/setScheme', value})
+    },
+    [broadcast],
+  )
 
   return (
-    <Button
-      fontSize={1}
-      icon={dark ? MoonIcon : SunIcon}
-      mode="bleed"
-      padding={2}
-      onClick={onToggleScheme}
-    />
+    <Flex flex="none" radius={3} shadow={1}>
+      <Button
+        icon={MobileDeviceIcon}
+        mode="bleed"
+        padding={2}
+        selected={scheme === 'system'}
+        onClick={() => setScheme('system')}
+      />
+      <Button
+        icon={SunIcon}
+        mode="bleed"
+        padding={2}
+        selected={scheme === 'light'}
+        onClick={() => setScheme('light')}
+      />
+      <Button
+        icon={MoonIcon}
+        mode="bleed"
+        padding={2}
+        selected={scheme === 'dark'}
+        onClick={() => setScheme('dark')}
+      />
+    </Flex>
   )
-})
+}

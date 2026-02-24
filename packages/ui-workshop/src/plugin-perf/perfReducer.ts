@@ -10,6 +10,11 @@ export function perfReducer(state: PerfState, msg: PerfMsg | WorkshopMsg): PerfS
   }
 
   if (msg.type === 'workshop/perf/registerTest') {
+    // Check if test is already registered
+    if (state.testDetails.some((t) => t.name === msg.name)) {
+      return state
+    }
+
     return {
       ...state,
       testDetails: state.testDetails.concat([
@@ -34,27 +39,27 @@ export function perfReducer(state: PerfState, msg: PerfMsg | WorkshopMsg): PerfS
         {
           name: msg.name,
           renders: [],
+          running: true,
         },
       ]),
     }
   }
 
   if (msg.type === 'workshop/perf/addResult') {
-    if (state.activeTest === msg.name) {
-      const result = state.results.filter((r) => r.name === msg.name)
-      const lastResult = result[result.length - 1]
+    const result = state.results.filter((r) => r.name === msg.name)
+    const lastResult = result[result.length - 1]
 
-      if (lastResult) {
-        return {
-          ...state,
-          results: state.results.map((r) => {
-            if (r === lastResult) {
-              return {...r, timing: msg.result}
-            }
+    if (lastResult) {
+      return {
+        ...state,
+        activeTest: state.activeTest === msg.name ? undefined : state.activeTest,
+        results: state.results.map((r) => {
+          if (r === lastResult) {
+            return {...r, timing: msg.result, running: false}
+          }
 
-            return r
-          }),
-        }
+          return r
+        }),
       }
     }
 

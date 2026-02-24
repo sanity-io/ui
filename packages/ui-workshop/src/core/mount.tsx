@@ -5,7 +5,10 @@ import type {WorkshopConfig} from './config/types'
 import {WorkshopApp} from './WorkshopApp'
 
 /** @beta */
-export function mount(options: {config: WorkshopConfig; element: HTMLElement | null}): void {
+export function mount(options: {
+  config: WorkshopConfig
+  element: Document | HTMLElement | null
+}): void {
   const {config, element} = options
 
   if (!element) throw new Error('missing element')

@@ -1,12 +1,11 @@
 import {Box, Card, Code, Stack, Text} from '@sanity/ui'
 import type {CardTone} from '@sanity/ui/theme'
 import axe from 'axe-core'
-import {memo} from 'react'
 
 import {useA11y} from './useA11y'
 
 /** @internal */
-export const A11yInspector = memo(function A11yInspector(): React.ReactNode {
+export function A11yInspector() {
   const {results} = useA11y()
 
   return (
@@ -26,14 +25,14 @@ export const A11yInspector = memo(function A11yInspector(): React.ReactNode {
       )}
     </Box>
   )
-})
+}
 
 /** @internal */
-const ResultItem = memo(function ResultItem(props: {result: axe.Result; tone?: CardTone}) {
+function ResultItem(props: {result: axe.Result; tone?: CardTone}) {
   const {result, tone} = props
 
   return (
-    <Card border radius={2} tone={tone}>
+    <Card radius={3} shadow={1} tone={tone}>
       <Stack gap={3} paddingX={2} paddingY={3}>
         <Text size={1} weight="semibold">
           {result.help}
@@ -48,13 +47,13 @@ const ResultItem = memo(function ResultItem(props: {result: axe.Result; tone?: C
           </a>
         </Text>
       </Stack>
-      <Card borderTop tone="inherit" />
+
       <Stack gap={2} padding={2}>
         {result.nodes.map((node, nodeIndex) => {
           return (
             <Stack key={nodeIndex} gap={2}>
               {node.failureSummary && <Text size={1}>{node.failureSummary}</Text>}
-              <Card border overflow="auto" padding={2} radius={2} tone="inherit">
+              <Card overflow="auto" padding={2} radius={2} shadow={1}>
                 <Code language="html" size={0}>
                   {node.html}
                 </Code>
@@ -65,4 +64,4 @@ const ResultItem = memo(function ResultItem(props: {result: axe.Result; tone?: C
       </Stack>
     </Card>
   )
-})
+}

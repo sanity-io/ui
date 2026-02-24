@@ -1,11 +1,9 @@
-import {Card, Layer, Tab, TabList} from '@sanity/ui'
-import {memo, useCallback} from 'react'
-
-import {inspectorHeader, inspectorHeaderCard} from '#styles'
+import {Layer, Tab, TabList} from '@sanity/ui'
+import {useCallback} from 'react'
 
 import type {InspectorTab} from './types'
 
-export const InspectorHeader = memo(function InspectorHeader(props: {
+export function InspectorHeader(props: {
   currentTabId: string | null
   onTabChange: (id: string) => void
   tabs: InspectorTab[]
@@ -13,22 +11,28 @@ export const InspectorHeader = memo(function InspectorHeader(props: {
   const {currentTabId, onTabChange, tabs} = props
 
   return (
-    <Layer className={inspectorHeader}>
-      <Card className={inspectorHeaderCard} padding={2} shadow={1}>
-        <TabList gap={1}>
-          {tabs.map((tab) => (
-            <InspectorTabView
-              key={tab.id}
-              selected={tab.id === currentTabId}
-              tab={tab}
-              onTabChange={onTabChange}
-            />
-          ))}
-        </TabList>
-      </Card>
+    <Layer
+      display="flex"
+      flex="none"
+      insetTop={0}
+      justifyContent={['center', 'center', 'flex-start']}
+      padding={2}
+      position="sticky"
+      shadow={1}
+    >
+      <TabList gap={1}>
+        {tabs.map((tab) => (
+          <InspectorTabView
+            key={tab.id}
+            selected={tab.id === currentTabId}
+            tab={tab}
+            onTabChange={onTabChange}
+          />
+        ))}
+      </TabList>
     </Layer>
   )
-})
+}
 
 function InspectorTabView(props: {
   onTabChange: (id: string) => void

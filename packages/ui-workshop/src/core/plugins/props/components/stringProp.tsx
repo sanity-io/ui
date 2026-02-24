@@ -1,15 +1,11 @@
 import {Box, Text, TextInput} from '@sanity/ui'
-import {memo} from 'react'
 
 import type {StringPropSchema} from '../types'
 import {useProps} from '../useProps'
 
 /** @internal */
-export const StringProp = memo(function StringProp(props: {
-  schema: StringPropSchema
-  value?: string
-}): React.ReactNode {
-  const {schema, value} = props
+export function StringProp(props: {schema: StringPropSchema; value?: string}) {
+  const {schema, value = ''} = props
   const {setPropValue} = useProps()
 
   return (
@@ -27,4 +23,4 @@ export const StringProp = memo(function StringProp(props: {
       </Box>
     </Box>
   )
-})
+}

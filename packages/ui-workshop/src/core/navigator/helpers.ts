@@ -19,8 +19,8 @@ export function parseMenuNode(
     return [
       {
         type: 'scope',
-        name: scope.name || '@@root@@',
-        title: scope.title || '(root)',
+        name: scope.name ?? '@@root@@',
+        title: scope.title ?? '(root)',
         scope,
       },
     ]
@@ -31,14 +31,14 @@ export function parseMenuNode(
   const entries = Object.entries(node).filter(([key]) => key !== '__scope__')
 
   const items = entries.flatMap(([key, child]) =>
-    parseMenuNode(coll?.children || [], child as Record<string, unknown>, key),
+    parseMenuNode(coll?.children ?? [], child as Record<string, unknown>, key),
   )
 
   return [
     {
       type: 'list',
       name,
-      title: coll?.title || name,
+      title: coll?.title ?? name,
       items,
     },
   ]
@@ -53,9 +53,9 @@ export function buildMenu(
 
   // Merge scopes
   for (const scope of scopes) {
-    const scopeName = scope.name || '@@root@@'
+    const scopeName = scope.name ?? '@@root@@'
 
-    const prevScope: WorkshopScope = scopeMap[scopeName] || {
+    const prevScope: WorkshopScope = scopeMap[scopeName] ?? {
       name: scopeName,
       title: scope.title,
       stories: [],
@@ -73,7 +73,7 @@ export function buildMenu(
   let tree = {}
 
   for (const scope of Object.values(scopeMap)) {
-    tree = set(tree, scope.name || '@@root@@', {__scope__: scope})
+    tree = set(tree, scope.name ?? '@@root@@', {__scope__: scope})
   }
 
   const rootNode: MenuList = {

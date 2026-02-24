@@ -1,5 +1,4 @@
-import type {ColorScheme} from '@sanity/ui/theme'
-
+import type {WorkshopColorScheme} from '../WorkshopContext'
 import type {WorkshopQuery} from './location'
 
 /** @public */
@@ -11,7 +10,7 @@ export interface WorkshopState {
   frameReady: boolean
   path: string
   payload: WorkshopPayload
-  scheme: ColorScheme
+  scheme: WorkshopColorScheme
   viewport: string
   zoom: number
 }
