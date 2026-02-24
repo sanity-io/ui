@@ -73,7 +73,12 @@ export default defineConfig(import.meta.dirname, [
         // configs
         {
           type: 'configs',
-          pattern: ['package.config.ts', 'workshop.config.ts', 'workshop.runtime.ts'],
+          pattern: [
+            'vanilla-extract/**/*',
+            'package.config.ts',
+            'workshop.config.ts',
+            'workshop.runtime.ts',
+          ],
           mode: 'file',
         },
       ],
@@ -99,6 +104,8 @@ export default defineConfig(import.meta.dirname, [
             {from: 'src/plugin-a11y', allow: ['@sanity/ui-workshop', 'src/plugin-a11y']},
             {from: 'src/plugin-perf', allow: ['@sanity/ui-workshop', 'src/plugin-perf']},
             {from: 'src/runtime', allow: ['@sanity/ui-workshop', 'src/runtime']},
+
+            {from: 'configs', allow: ['configs']},
 
             {
               from: 'test',
