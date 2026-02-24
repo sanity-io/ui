@@ -12,10 +12,6 @@
     "jsx": "preserve",
     "rootDir": ".",
     "outDir": "./dist",
-    "noCheck": true,
-    "paths": {
-      "@sanity/ui-workshop/*": ["./exports/*.ts"],
-      "@sanity/ui-workshop": ["./exports"]
-    }
+    "noCheck": true
   }
 }

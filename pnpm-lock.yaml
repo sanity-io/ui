@@ -378,7 +378,7 @@ importers:
     dependencies:
       '@sanity/icons':
         specifier: ^3.7.4
-        version: 3.7.4(react@19.2.4)
+        version: 3.7.4(react@19.2.0)
       '@sanity/ui':
         specifier: ^4
         version: link:../ui
@@ -514,7 +514,7 @@ importers:
         version: 5.4.0(eslint@9.39.3(jiti@2.5.1))
       eslint-plugin-import:
         specifier: ^2.32.0
-        version: 2.32.0(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@9.39.3(jiti@2.5.1)))(eslint@9.39.3(jiti@2.5.1)))(eslint@9.39.3(jiti@2.5.1))
+        version: 2.32.0(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.3(jiti@2.5.1))
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.39.3(jiti@2.5.1))
@@ -530,9 +530,6 @@ importers:
       globals:
         specifier: ^17.0.0
         version: 17.3.0
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
       jsdom:
         specifier: ^22.1.0
         version: 22.1.0
@@ -552,13 +549,13 @@ importers:
         specifier: ^2.5.21
         version: 2.5.22(prettier@3.8.1)
       react:
-        specifier: ^19.2.3
-        version: 19.2.4
+        specifier: ^19.2.0
+        version: 19.2.0
       react-dom:
-        specifier: ^19.2.3
-        version: 19.2.4(react@19.2.4)
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
       react-is:
-        specifier: ^19.2.3
+        specifier: ^19.2.0
         version: 19.2.4
       rollup:
         specifier: ^4.55.1
@@ -6072,11 +6069,6 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  husky@9.1.7:
-    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -7977,11 +7969,6 @@ packages:
     peerDependencies:
       react: ^19.2.0
 
-  react-dom@19.2.4:
-    resolution: {integrity: sha512-AXJdLo8kgMbimY95O2aKQqsz2iWi9jMgKJhRBAxECE4IFxfcazB2LmzloIoibJI3C12IlY20+KFaLv+71bUJeQ==}
-    peerDependencies:
-      react: ^19.2.4
-
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -8024,10 +8011,6 @@ packages:
 
   react@19.2.0:
     resolution: {integrity: sha512-tmbWg6W31tQLeB5cdIBOicJDJRR2KzXsV7uSK9iNfLWQ5bIZfxuPEHp7M8wiHyHnn0DD1i7w3Zmin0FtkrwoCQ==}
-    engines: {node: '>=0.10.0'}
-
-  react@19.2.4:
-    resolution: {integrity: sha512-9nfp2hYpCwOjAN+8TZFGhtWEwgvWHXqESH8qT89AT/lWklpLON22Lc8pEtnpsZz7VmawabSU0gCjnj8aC0euHQ==}
     engines: {node: '>=0.10.0'}
 
   read-package-json-fast@3.0.2:
@@ -12273,10 +12256,6 @@ snapshots:
     dependencies:
       react: 19.2.0
 
-  '@sanity/icons@3.7.4(react@19.2.4)':
-    dependencies:
-      react: 19.2.4
-
   '@sanity/parse-package-json@2.1.3':
     dependencies:
       zod: 4.3.6
@@ -15004,7 +14983,7 @@ snapshots:
       eslint: 9.39.3(jiti@2.5.1)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(eslint@9.39.3(jiti@2.5.1)))(eslint@9.39.3(jiti@2.5.1))
-      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@9.39.3(jiti@2.5.1)))(eslint@9.39.3(jiti@2.5.1)))(eslint@9.39.3(jiti@2.5.1))
+      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.3(jiti@2.5.1))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.3(jiti@2.5.1))
       eslint-plugin-react: 7.37.5(eslint@9.39.3(jiti@2.5.1))
       eslint-plugin-react-hooks: 7.0.1(eslint@9.39.3(jiti@2.5.1))
@@ -15054,7 +15033,7 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@9.39.3(jiti@2.5.1)))(eslint@9.39.3(jiti@2.5.1)))(eslint@9.39.3(jiti@2.5.1))
+      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.3(jiti@2.5.1))
     transitivePeerDependencies:
       - supports-color
 
@@ -15082,7 +15061,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-import@2.32.0(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(eslint@9.39.3(jiti@2.5.1)))(eslint@9.39.3(jiti@2.5.1)))(eslint@9.39.3(jiti@2.5.1)):
+  eslint-plugin-import@2.32.0(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.3(jiti@2.5.1)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -16182,8 +16161,6 @@ snapshots:
   human-signals@8.0.1: {}
 
   husky@8.0.3: {}
-
-  husky@9.1.7: {}
 
   iconv-lite@0.4.24:
     dependencies:
@@ -17928,11 +17905,6 @@ snapshots:
       react: 19.2.0
       scheduler: 0.27.0
 
-  react-dom@19.2.4(react@19.2.4):
-    dependencies:
-      react: 19.2.4
-      scheduler: 0.27.0
-
   react-is@16.13.1: {}
 
   react-is@17.0.2: {}
@@ -17963,8 +17935,6 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
 
   react@19.2.0: {}
-
-  react@19.2.4: {}
 
   read-package-json-fast@3.0.2:
     dependencies:

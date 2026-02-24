@@ -8,6 +8,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DIST_PATH = path.resolve(__dirname, 'dist')
 const EXPORTS_PATH = path.resolve(__dirname, 'exports')
 
+const UI_DIST_PATH = path.resolve(__dirname, '../ui/dist')
+const UI_EXPORTS_PATH = path.resolve(__dirname, '../ui/exports')
+
 export default defineRuntime({
   vite: (viteConfig) => {
     const isProd = viteConfig.mode === 'production'
@@ -39,9 +42,11 @@ export default defineRuntime({
       resolve: {
         alias: isProd
           ? {
+              '@sanity/ui': UI_DIST_PATH,
               '@sanity/ui-workshop': DIST_PATH,
             }
           : {
+              '@sanity/ui': UI_EXPORTS_PATH,
               '@sanity/ui-workshop': EXPORTS_PATH,
             },
       },

@@ -9,6 +9,8 @@
     "noUncheckedIndexedAccess": false,
 
     "paths": {
+      "@sanity/ui": ["../ui/exports/index.ts"],
+      "@sanity/ui/*": ["../ui/exports/*"],
       "@sanity/ui-workshop": ["./exports/index.ts"],
       "@sanity/ui-workshop/*": ["./exports/*"]
     }
