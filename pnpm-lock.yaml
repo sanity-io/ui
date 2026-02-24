@@ -553,6 +553,9 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@24.10.13)(jiti@2.5.1)(lightningcss@1.31.1)(terser@5.44.0)(tsx@4.21.0)
     devDependencies:
+      '@playwright/test':
+        specifier: ^1.57.0
+        version: 1.58.2
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../@repo/eslint-config

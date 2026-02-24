@@ -75,7 +75,11 @@
     "dev": "pnpm workshop:dev",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
     "prepack": "pnpm build",
+    "playwright:dev": "PLAYWRIGHT_DEV=true playwright test --ui",
     "test": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:dev": "PLAYWRIGHT_DEV=true playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "typecheck": "tsc --build",
     "workshop:build": "pnpm workshop:clean && tsx scripts/build.ts",
     "workshop:clean": "rimraf .workshop",
@@ -104,6 +108,7 @@
     "vite": "^7.3.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@sanity/browserslist-config": "^1.0.5",
