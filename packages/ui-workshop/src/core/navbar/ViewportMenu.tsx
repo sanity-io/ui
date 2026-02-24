@@ -1,13 +1,13 @@
 import {SelectIcon} from '@sanity/icons'
 import {Button, Menu, MenuButton, type MenuButtonProps, MenuItem} from '@sanity/ui'
-import {memo, useCallback} from 'react'
+import {useCallback} from 'react'
 
 import {VIEWPORT_OPTIONS} from '../constants'
 import {startViewTransition} from '../lib/startViewTransition'
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */
-export const ViewportMenu = memo(function ViewportMenu() {
+export function ViewportMenu() {
   const {broadcast, story, viewport} = useWorkshop()
 
   const setViewport = useCallback(
@@ -18,7 +18,7 @@ export const ViewportMenu = memo(function ViewportMenu() {
   )
 
   return <ViewportMenuView disabled={!story} setViewport={setViewport} viewport={viewport} />
-})
+}
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
   constrainSize: true,
@@ -26,7 +26,7 @@ const POPOVER_PROPS: MenuButtonProps['popover'] = {
   portal: true,
 }
 
-const ViewportMenuView = memo(function ViewportMenuView(props: {
+function ViewportMenuView(props: {
   disabled: boolean
   setViewport: (v: string) => void
   viewport: string
@@ -63,4 +63,4 @@ const ViewportMenuView = memo(function ViewportMenuView(props: {
       popover={POPOVER_PROPS}
     />
   )
-})
+}

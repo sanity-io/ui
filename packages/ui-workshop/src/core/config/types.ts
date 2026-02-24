@@ -28,16 +28,14 @@ export interface WorkshopConfig {
     navbar?: boolean
   }
   frameUrl?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  plugins?: WorkshopPlugin<any>[]
+  plugins?: WorkshopPlugin[]
   scopes: WorkshopScope[]
   theme?: PartialTokens<Tokens>
   title?: string
 }
 
 /** @public */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface WorkshopPlugin<Options = any> {
+export interface WorkshopPlugin<Options = Record<string, never>> {
   name: string
   title: string
   inspector?: React.ElementType<{options: Options}>

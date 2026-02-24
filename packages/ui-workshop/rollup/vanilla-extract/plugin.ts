@@ -1,3 +1,5 @@
+import {posix} from 'node:path'
+
 import {
   compile,
   type CompileOptions,
@@ -8,7 +10,6 @@ import {
   transform,
   virtualCssFileFilter,
 } from '@vanilla-extract/integration'
-import {posix} from 'path'
 import type {Plugin} from 'rollup'
 
 import {generateCssBundle, stripSideEffectImportsMatching, tryGetPackageName} from './lib'

@@ -1,5 +1,3 @@
-import type {ColorScheme} from '@sanity/ui/theme'
-
 import type {WorkshopScope, WorkshopStory} from './config/types'
 
 /** @internal */
@@ -36,16 +34,14 @@ export function buildFrameUrl(params: {
   baseUrl?: string
   path: string
   payload: Record<string, unknown>
-  scheme: ColorScheme
   viewport: string
   zoom: number
 }): string {
-  const {baseUrl = '/frame/', path, payload, scheme, viewport, zoom} = params
+  const {baseUrl = '/frame/', path, payload, viewport, zoom} = params
 
   return [
     baseUrl,
     `?path=${encodeURIComponent(path)}`,
-    `&scheme=${scheme}`,
     `&viewport=${viewport}`,
     `&zoom=${zoom}`,
     ...Object.entries(payload).map(([key, value]) => {

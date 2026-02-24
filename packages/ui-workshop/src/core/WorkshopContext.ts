@@ -6,6 +6,9 @@ import type {Pubsub} from './lib/pubsub'
 import type {WorkshopMsg} from './types/msg'
 
 /** @public */
+export type WorkshopColorScheme = ColorScheme | 'system'
+
+/** @public */
 export interface WorkshopContextValue<CustomMsg = never> {
   plugins: WorkshopPlugin[]
   broadcast: (msg: WorkshopMsg | CustomMsg) => void
@@ -16,7 +19,7 @@ export interface WorkshopContextValue<CustomMsg = never> {
   origin: 'frame' | 'main'
   path: string
   payload: Record<string, unknown>
-  scheme: ColorScheme
+  scheme: WorkshopColorScheme
   scope: WorkshopScope | null
   scopes: WorkshopScope[]
   story: WorkshopStory | null

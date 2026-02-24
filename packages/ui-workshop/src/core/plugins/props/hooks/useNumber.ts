@@ -2,7 +2,11 @@ import {useEffect} from 'react'
 
 import {useProps} from '../useProps'
 
-/** @internal */
+/** @public */
+export function useNumber(name: string, defaultValue: number, groupName?: string): number
+/** @public */
+export function useNumber(name: string, defaultValue?: number): number | undefined
+/** @public */
 export function useNumber(
   name: string,
   defaultValue?: number,

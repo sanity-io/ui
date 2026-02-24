@@ -135,8 +135,7 @@ export async function dev(options?: {
       if (server.httpServer) {
         // Close existing connections (available in Node 18.2+)
         if ('closeAllConnections' in server.httpServer) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          ;(server.httpServer as any).closeAllConnections()
+          server.httpServer.closeAllConnections()
         }
 
         // Force close the HTTP server

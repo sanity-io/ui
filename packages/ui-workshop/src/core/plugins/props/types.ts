@@ -1,50 +1,49 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/** @internal */
+/** @public */
 export interface GenericPropSchema<T = unknown> {
   name: string
   defaultValue?: T
   groupName?: string
 }
 
-/** @internal */
+/** @public */
 export interface BooleanPropSchema extends GenericPropSchema<boolean> {
   type: 'boolean'
 }
 
-/** @internal */
+/** @public */
 export interface NumberPropSchema extends GenericPropSchema<number> {
   type: 'number'
 }
 
-/** @internal */
-export type SelectPropValue = string | number | boolean
+/** @public */
+export type SelectPropValue = string | number | boolean | undefined
 
-/** @internal */
-export type SelectPropOptionsProp<T extends SelectPropValue = SelectPropValue> =
+/** @public */
+export type SelectPropOptions<T extends SelectPropValue = SelectPropValue> =
   | Record<PropertyKey, T>
   | Record<Extract<T, PropertyKey>, T[keyof T]>
   | T[]
   | readonly T[]
 
-/** @internal */
+/** @public */
 export interface SelectPropSchema<
   T extends SelectPropValue = SelectPropValue,
 > extends GenericPropSchema<T> {
   type: 'select'
-  options: SelectPropOptionsProp<T>
+  options: SelectPropOptions<T>
 }
 
-/** @internal */
+/** @public */
 export interface StringPropSchema extends GenericPropSchema<string> {
   type: 'string'
 }
 
-/** @internal */
+/** @public */
 export interface TextPropSchema extends GenericPropSchema<string> {
   type: 'text'
 }
 
-/** @internal */
+/** @public */
 export type PropSchema =
   | BooleanPropSchema
   | NumberPropSchema
@@ -52,8 +51,8 @@ export type PropSchema =
   | StringPropSchema
   | TextPropSchema
 
-/** @internal */
+/** @public */
 export interface PropsState {
   schemas: PropSchema[]
-  value: Record<string, any>
+  value: Record<string, unknown>
 }

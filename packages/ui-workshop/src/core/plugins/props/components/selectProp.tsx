@@ -1,15 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Select, Text} from '@sanity/ui'
-import {memo, useMemo} from 'react'
+import {useMemo} from 'react'
 
-import type {SelectPropSchema} from '../types'
+import type {SelectPropSchema, SelectPropValue} from '../types'
 import {useProps} from '../useProps'
 
 /** @internal */
-export const SelectProp = memo(function SelectProp(props: {
-  schema: SelectPropSchema
-  value: any
-}): React.ReactNode {
+export function SelectProp(props: {schema: SelectPropSchema; value: SelectPropValue}) {
   const {schema, value: valueProp} = props
   const {setPropValue} = useProps()
 
@@ -37,8 +33,8 @@ export const SelectProp = memo(function SelectProp(props: {
           radius={2}
           value={String(value || '')}
           onChange={(event) => {
-            const optionKey = event.currentTarget.value
-            const optionValue = schema.options[optionKey as any]
+            const optionKey = event.currentTarget.value as keyof typeof schema.options
+            const optionValue = schema.options[optionKey]
 
             setPropValue(schema.name, optionValue)
           }}
@@ -52,4 +48,4 @@ export const SelectProp = memo(function SelectProp(props: {
       </Box>
     </Box>
   )
-})
+}

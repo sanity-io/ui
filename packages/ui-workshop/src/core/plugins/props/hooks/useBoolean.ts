@@ -2,7 +2,11 @@ import {useEffect} from 'react'
 
 import {useProps} from '../useProps'
 
-/** @internal */
+/** @public */
+export function useBoolean(name: string, defaultValue: boolean, groupName?: string): boolean
+/** @public */
+export function useBoolean(name: string, defaultValue?: boolean): boolean | undefined
+/** @public */
 export function useBoolean(
   name: string,
   defaultValue?: boolean,

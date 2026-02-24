@@ -1,10 +1,10 @@
 import {Breadcrumbs, Text} from '@sanity/ui'
-import {memo, useCallback} from 'react'
+import {useCallback} from 'react'
 
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */
-export function NavbarBreadcrumbs(): React.ReactNode {
+export function NavbarBreadcrumbs() {
   const {broadcast, scope, story, title} = useWorkshop()
 
   const handleHomeClick = useCallback(
@@ -17,15 +17,15 @@ export function NavbarBreadcrumbs(): React.ReactNode {
 
   return (
     <NavbarBreadcrumbsView
-      scopeTitle={scope?.title}
-      storyTitle={story?.title}
+      scopeTitle={scope?.title ?? ''}
+      storyTitle={story?.title ?? ''}
       title={title}
       onHomeClick={handleHomeClick}
     />
   )
 }
 
-const NavbarBreadcrumbsView = memo(function NavbarBreadcrumbsView(props: {
+function NavbarBreadcrumbsView(props: {
   onHomeClick: (event: React.MouseEvent) => void
   scopeTitle?: string
   storyTitle?: string
@@ -57,4 +57,4 @@ const NavbarBreadcrumbsView = memo(function NavbarBreadcrumbsView(props: {
       {storyTitle && <Text size={[2, 2, 1]}>{storyTitle}</Text>}
     </Breadcrumbs>
   )
-})
+}

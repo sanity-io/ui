@@ -1,5 +1,4 @@
-import type {ColorScheme} from '@sanity/ui/theme'
-
+import type {WorkshopColorScheme} from '../WorkshopContext'
 import type {WorkshopQuery} from './location'
 import type {WorkshopPayload} from './state'
 
@@ -21,14 +20,9 @@ export interface WorkshopSetViewportMsg {
 }
 
 /** @public */
-export interface WorkshopToggleSchemeMsg {
-  type: 'workshop/toggleScheme'
-}
-
-/** @public */
 export interface WorkshopSetSchemeMsg {
   type: 'workshop/setScheme'
-  value: ColorScheme
+  value: WorkshopColorScheme
 }
 
 /** @public */
@@ -55,7 +49,6 @@ export type WorkshopMsg =
   | WorkshopFrameReadyMsg
   | WorkshopSetZoomMsg
   | WorkshopSetViewportMsg
-  | WorkshopToggleSchemeMsg
   | WorkshopSetSchemeMsg
   | WorkshopSetPathMsg
   | WorkshopSetPayloadMsg

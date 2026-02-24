@@ -2,7 +2,11 @@ import {useEffect} from 'react'
 
 import {useProps} from '../useProps'
 
-/** @internal */
+/** @public */
+export function useText(name: string, defaultValue: string, groupName?: string): string
+/** @public */
+export function useText(name: string, defaultValue?: string): string | undefined
+/** @public */
 export function useText(
   name: string,
   defaultValue?: string,

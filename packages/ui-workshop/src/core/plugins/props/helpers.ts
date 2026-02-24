@@ -1,5 +1,5 @@
 import {EMPTY_RECORD} from '../../constants'
-import {decode, encode} from './lib/zlib/zlib'
+import {decode, encode} from './lib/zlib'
 
 /** @internal */
 export function encodeValue(val: Record<string, unknown>): string {

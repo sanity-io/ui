@@ -1,6 +1,5 @@
 import {ControlsIcon, MenuIcon} from '@sanity/icons'
-import {Box, Button, Card, Flex, Inline, Text, useMediaIndex} from '@sanity/ui'
-import {memo} from 'react'
+import {Box, Button, Flex, Inline, Layer, Text, useMediaIndex} from '@sanity/ui'
 
 import {useWorkshop} from '../useWorkshop'
 import {NavbarBreadcrumbs} from './NavbarBreadcrumbs'
@@ -10,18 +9,25 @@ import {ViewportMenu} from './ViewportMenu'
 import {ZoomMenu} from './ZoomMenu'
 
 /** @internal */
-export const WorkshopNavbar = memo(function WorkshopNavbar(props: {
+export function WorkshopNavbar(props: {
   inspectorExpanded: boolean
   navigatorExpanded: boolean
   onInspectorToggle: () => void
   onNavigatorToggle: () => void
-}): React.ReactNode {
+}) {
   const {inspectorExpanded, navigatorExpanded, onInspectorToggle, onNavigatorToggle} = props
   const mediaIndex = useMediaIndex()
   const {story, title} = useWorkshop()
 
   return (
-    <Card borderBottom flex="none" padding={2} style={{lineHeight: 0}}>
+    <Layer
+      flex="none"
+      padding={2}
+      position="relative"
+      shadow={1}
+      style={{lineHeight: 0}}
+      zOffset={100}
+    >
       <Flex gap={1}>
         <Box display={['block', 'block', 'none']} flex="none">
           <Button
@@ -42,7 +48,7 @@ export const WorkshopNavbar = memo(function WorkshopNavbar(props: {
           sizing="border"
           style={{minWidth: 250}}
         >
-          {mediaIndex < 2 && <Text weight="bold">{story?.title || title}</Text>}
+          {mediaIndex < 2 && <Text weight="bold">{story?.title ?? title}</Text>}
           {mediaIndex >= 2 && <NavbarBreadcrumbs />}
         </Flex>
 
@@ -67,6 +73,6 @@ export const WorkshopNavbar = memo(function WorkshopNavbar(props: {
           </Inline>
         </Box>
       </Flex>
-    </Card>
+    </Layer>
   )
-})
+}

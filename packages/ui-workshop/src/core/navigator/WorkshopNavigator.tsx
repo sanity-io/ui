@@ -1,10 +1,8 @@
 import {SearchIcon} from '@sanity/icons'
 import {Box, Card, Flex, Layer, TextInput} from '@sanity/ui'
-import type {ResponsiveProp} from '@sanity/ui/css'
+import type {Display, ResponsiveProp} from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
-import {memo, useCallback, useMemo, useState} from 'react'
-
-import {workshopNavigator} from '#styles'
+import {useCallback, useMemo, useState} from 'react'
 
 import type {WorkshopScope, WorkshopStory} from '../config/types'
 import {EMPTY_ARRAY} from '../constants'
@@ -13,16 +11,14 @@ import {buildMenu} from './helpers'
 import {SearchResults} from './SearchResults'
 import {StoryTree} from './StoryTree'
 import type {MenuCollection, MenuList, MenuScope} from './types'
+import {root} from './WorkshopNavigator.css'
 
 const flexNoneStyle: React.CSSProperties = {flex: 'none'}
 const lineHeightNoneStyle: React.CSSProperties = {lineHeight: 0}
 const textInputFontSize: ResponsiveProp<FontTextSize> = [2, 2, 1]
 
 /** @internal */
-export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
-  collections?: MenuCollection[]
-  expanded: boolean
-}): React.ReactNode {
+export function WorkshopNavigator(props: {collections?: MenuCollection[]; expanded: boolean}) {
   const {collections = [], expanded} = props
   const {broadcast, scopes} = useWorkshop()
   const menu = useMemo(() => buildMenu(collections, scopes), [collections, scopes])
@@ -80,9 +76,9 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
       onStoryClick={handleStoryClick}
     />
   )
-})
+}
 
-const NavigatorView = memo(function NavigatorView(props: {
+function NavigatorView(props: {
   expanded: boolean
   matches: {scope: WorkshopScope; story: WorkshopStory}[]
   menu: MenuScope | MenuList
@@ -94,11 +90,18 @@ const NavigatorView = memo(function NavigatorView(props: {
   const {expanded, matches, menu, onSearchQueryChange, onSearchQueryClear, onStoryClick, query} =
     props
 
+  const display: ResponsiveProp<Display> = useMemo(
+    () => (expanded ? ['block'] : ['none', 'none', 'block']),
+    [expanded],
+  )
+
   return (
-    <Card
-      className={workshopNavigator}
-      display={expanded ? ['block'] : ['none', 'none', 'block']}
+    <Layer
+      className={root}
+      display={display}
       flex={1}
+      overflow={['hidden', 'hidden', 'auto']}
+      shadow={1}
     >
       <Flex direction="column" height="fill">
         <Layer style={flexNoneStyle}>
@@ -111,7 +114,7 @@ const NavigatorView = memo(function NavigatorView(props: {
               icon={SearchIcon}
               padding={2}
               placeholder="Stories"
-              radius={2}
+              // radius={2}
               value={query}
               onChange={onSearchQueryChange}
               onClear={onSearchQueryClear}
@@ -133,6 +136,6 @@ const NavigatorView = memo(function NavigatorView(props: {
           )}
         </Card>
       </Flex>
-    </Card>
+    </Layer>
   )
-})
+}

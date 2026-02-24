@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {useCallback} from 'react'
 
+import {isRecord} from './lib/isRecord'
 import {useWorkshop} from './useWorkshop'
 
 /** @public */
@@ -8,17 +8,22 @@ export function useAction(
   name: string,
   options?: {preventDefault?: boolean},
 ): (...args: unknown[]) => void {
-  const {preventDefault = false} = options || {}
+  const {preventDefault = false} = options ?? {}
   const {scope, story} = useWorkshop()
 
   return useCallback(
     (...args: unknown[]) => {
       if (!scope || !story) return
 
-      const ev: any = args[0]
+      const ev = args[0]
 
-      if (preventDefault && 'preventDefault' in ev && typeof ev.preventDefault === 'function') {
-        ev.preventDefault()
+      if (
+        preventDefault &&
+        isRecord(ev) &&
+        'preventDefault' in ev &&
+        typeof ev['preventDefault'] === 'function'
+      ) {
+        ev['preventDefault']()
       }
 
       // eslint-disable-next-line no-console

@@ -1,5 +1,5 @@
-import {isEqual} from 'lodash'
-import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import isEqual from 'lodash/isEqual'
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {useWorkshop} from '../../useWorkshop'
@@ -10,12 +10,10 @@ import {propsReducer} from './propsReducer'
 import type {PropSchema, PropsState} from './types'
 
 /** @internal */
-export const PropsProvider = memo(function PropsProvider(props: {
-  children?: React.ReactNode
-}): React.ReactNode {
+export function PropsProvider(props: {children?: React.ReactNode}) {
   const {children} = props
   const {channel, broadcast, payload} = useWorkshop<PropsMsg>()
-  const encodedValue = payload['value']
+  const encodedValue = payload['props']
   const encodedValueRef = useRef(encodedValue)
 
   const [{schemas, value}, setState] = useState<PropsState>(() => ({
@@ -77,33 +75,11 @@ export const PropsProvider = memo(function PropsProvider(props: {
 
       broadcast({
         type: 'workshop/setPayloadValue',
-        key: 'value',
+        key: 'props',
         value: nextEncodedValue,
       })
     }
   }, [broadcast, value])
 
-  useEffect(() => {
-    if (encodedValueRef.current === encodedValue) {
-      return
-    }
-
-    encodedValueRef.current = encodedValue
-
-    startTransition(() =>
-      setState((prevState) => {
-        const nextValue = decodeValue(String(encodedValue)) || {}
-        if (isEqual(prevState.value, nextValue)) {
-          return prevState
-        }
-
-        return {
-          ...prevState,
-          value: nextValue,
-        }
-      }),
-    )
-  }, [encodedValue])
-
   return <PropsContext.Provider value={ctx}>{children}</PropsContext.Provider>
-})
+}

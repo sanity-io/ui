@@ -1,24 +1,22 @@
 import {Tree, TreeItem} from '@sanity/ui'
-import {memo, type MouseEvent, useCallback, useMemo} from 'react'
+import {useCallback, useMemo} from 'react'
 
 import type {WorkshopStory} from '../config/types'
 import {useWorkshop} from '../useWorkshop'
 import type {MenuList, MenuScope, MenuStory} from './types'
 
 /** @internal */
-export const StoryTree = memo(function StoryTree(props: {
-  items: Array<MenuList | MenuScope | MenuStory>
-}) {
+export function StoryTree(props: {items: Array<MenuList | MenuScope | MenuStory>}) {
   const {items} = props
 
   return (
     <Tree gap={1}>
-      <MenuItems items={items} />
+      <StoryTreeMenuItems items={items} />
     </Tree>
   )
-})
+}
 
-const MenuItems = memo(function MenuItems(props: {
+function StoryTreeMenuItems(props: {
   basePath?: string
   items: Array<MenuList | MenuScope | MenuStory>
 }) {
@@ -26,7 +24,7 @@ const MenuItems = memo(function MenuItems(props: {
   const {broadcast, path: workshopPath, scope: currentScope, story: currentStory} = useWorkshop()
 
   const handleStoryClick = useCallback(
-    (event: MouseEvent<HTMLLIElement>) => {
+    (event: React.MouseEvent<HTMLLIElement>) => {
       event.preventDefault()
 
       const target = event.currentTarget
@@ -51,8 +49,8 @@ const MenuItems = memo(function MenuItems(props: {
             const path = `${basePath}/${item.name}`
 
             return (
-              <MemoList
-                key={item.name || itemIndex}
+              <StoryTreeList
+                key={item.name ?? itemIndex}
                 expanded={workshopPath.startsWith(path + '/')}
                 item={item}
                 path={path}
@@ -64,9 +62,9 @@ const MenuItems = memo(function MenuItems(props: {
             return (
               <TreeItem
                 key={item.name}
-                data-path={`/${item.name || ''}`}
+                data-path={`/${item.name ?? ''}`}
                 fontSize={[2, 2, 1]}
-                href={`/${item.name || ''}`}
+                href={`/${item.name ?? ''}`}
                 padding={2}
                 selected={currentStory?.component === item.component}
                 text={item.title}
@@ -77,8 +75,7 @@ const MenuItems = memo(function MenuItems(props: {
 
           if (item.type === 'scope') {
             return (
-              <MemoScope
-                key={item.name}
+              <StoryTreeScope
                 currentStory={currentStory}
                 expanded={item.scope === currentScope}
                 item={item}
@@ -92,12 +89,15 @@ const MenuItems = memo(function MenuItems(props: {
       </>
     )
   }, [basePath, currentScope, currentStory, handleStoryClick, items, workshopPath])
-})
+}
 
-const MemoList = memo(function MemoList(props: {expanded: boolean; item: MenuList; path: string}) {
+function StoryTreeList(props: {expanded: boolean; item: MenuList; path: string}) {
   const {expanded, item, path} = props
 
-  const children = useMemo(() => <MenuItems basePath={path} items={item.items} />, [item, path])
+  const children = useMemo(
+    () => <StoryTreeMenuItems basePath={path} items={item.items} />,
+    [item, path],
+  )
 
   return (
     <TreeItem
@@ -110,13 +110,13 @@ const MemoList = memo(function MemoList(props: {expanded: boolean; item: MenuLis
       {children}
     </TreeItem>
   )
-})
+}
 
-const MemoScope = memo(function MemoScope(props: {
+function StoryTreeScope(props: {
   currentStory: WorkshopStory | null
   expanded: boolean
   item: MenuScope
-  onStoryClick: (event: MouseEvent<HTMLLIElement>) => void
+  onStoryClick: (event: React.MouseEvent<HTMLLIElement>) => void
 }) {
   const {currentStory, expanded, item, onStoryClick} = props
 
@@ -148,4 +148,4 @@ const MemoScope = memo(function MemoScope(props: {
       {children}
     </TreeItem>
   )
-})
+}

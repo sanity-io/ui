@@ -2,7 +2,10 @@
 export const EMPTY_ARRAY: never[] = []
 
 /** @internal */
-export const EMPTY_RECORD: Record<string, unknown> = {}
+export const EMPTY_RECORD: Record<string, never> = {}
+
+/** @internal */
+export const DEFAULT_SCHEME_VALUE = 'system'
 
 /** @internal */
 export const DEFAULT_VIEWPORT_VALUE = 'auto'
@@ -11,16 +14,12 @@ export const DEFAULT_VIEWPORT_VALUE = 'auto'
 export const DEFAULT_ZOOM_VALUE = 1
 
 /** @internal */
-export const VIEWPORT_OPTIONS: {
-  name: string
-  title: string
-  rect: {width: number | 'auto'; height?: number}
-}[] = [
-  {name: 'auto', title: 'Full', rect: {width: 'auto'}},
-  {name: '768', title: '768px', rect: {width: 768}},
+export const VIEWPORT_OPTIONS = [
+  {name: 'auto', title: 'Full', rect: {width: 'auto', height: 'auto'}},
+  {name: '768', title: '768px', rect: {width: 768, height: 'auto'}},
   {name: '375', title: '375px', rect: {width: 375, height: 667}},
   {name: '320', title: '320px', rect: {width: 320, height: 568}},
-]
+] as const
 
 /** @internal */
 export const ZOOM_OPTIONS: {value: number; title: string}[] = [
