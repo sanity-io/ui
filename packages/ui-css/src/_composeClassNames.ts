@@ -4,9 +4,9 @@ import {_getClassNames} from './_getClassNames'
 export function _composeClassNames(
   ...classNames: Array<string | false | undefined>
 ): string | undefined {
-  return unique(_getClassNames(...classNames)).join(' ') || undefined
+  return _unique(_getClassNames(...classNames)).join(' ') || undefined
 }
 
-function unique<T>(array: T[]): T[] {
+function _unique<T>(array: T[]): T[] {
   return Array.from(new Set(array))
 }

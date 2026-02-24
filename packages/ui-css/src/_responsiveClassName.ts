@@ -1,5 +1,4 @@
-// import {MEDIA} from './constants'
-import {BREAKPOINTS} from './constants'
+import {BREAKPOINT_KEYS} from './constants'
 import type {ResponsiveProp, ResponsiveRuleOptions} from './types'
 
 export function _responsiveClassName<T extends string | number>(
@@ -16,7 +15,7 @@ export function _responsiveClassName<T extends string | number>(
   }
 
   if (typeof value === 'boolean') {
-    if (value && options?.valueWhenTrue) {
+    if (value === true && options?.valueWhenTrue) {
       value = options.valueWhenTrue
     } else {
       return undefined
@@ -29,15 +28,24 @@ export function _responsiveClassName<T extends string | number>(
 
   const classNames: string[] = []
 
-  for (const _index of Object.keys(BREAKPOINTS)) {
-    const index = Number(_index) as keyof typeof BREAKPOINTS
+  for (const key of BREAKPOINT_KEYS) {
+    const valueAtKey = value[key]
 
-    const valueAtIndex = value[index]
+    if (valueAtKey !== undefined && valueAtKey !== null && typeof valueAtKey !== 'boolean') {
+      const rule = rules[valueAtKey]
 
-    if (valueAtIndex !== undefined && valueAtIndex !== null && typeof valueAtIndex !== 'boolean') {
-      const rule = rules[valueAtIndex]
+      if (!rule) {
+        // eslint-disable-next-line no-console
+        console.warn(`Rule not found for value at key:`, {
+          rules,
+          valueAtIndex: valueAtKey,
+          rule,
+          key,
+        })
+        continue
+      }
 
-      classNames.push(rule[index])
+      classNames.push(rule?.[key])
     }
   }
 

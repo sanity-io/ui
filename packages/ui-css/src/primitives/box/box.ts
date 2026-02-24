@@ -3,7 +3,7 @@ import {alignItems} from '../../props/alignItems/alignItems'
 import {border} from '../../props/border/border'
 import {boxSizing} from '../../props/boxSizing/boxSizing'
 import {display} from '../../props/display/display'
-import {flex} from '../../props/flex/flex'
+import {flexProp} from '../../props/flex/flex'
 import {flexDirection} from '../../props/flexDirection/flexDirection'
 import {flexWrap} from '../../props/flexWrap/flexWrap'
 import {gap} from '../../props/gap/gap'
@@ -44,11 +44,11 @@ export function box(props: BoxStyleProps): string | undefined {
     root,
     props.muted && muted,
     alignItems(props),
-    border(props),
-    boxSizing({boxSizing: props.sizing}),
-    display(props),
+    border({...props, border: props.border ?? false}),
+    boxSizing({boxSizing: props.sizing ?? 'border'}),
+    display({display: props.display ?? 'block'}),
     height(props),
-    flex(props),
+    flexProp(props),
     flexDirection(props),
     flexWrap(props),
     gap(props),
@@ -65,12 +65,12 @@ export function box(props: BoxStyleProps): string | undefined {
     gridTemplateRows(props),
     inset(props),
     justifyContent(props),
-    margin(props),
+    margin({...props, margin: props.margin ?? 0}),
     maxWidth(props),
-    minHeight(props),
-    minWidth(props),
+    minHeight({...props, minHeight: props.minHeight ?? 0}),
+    minWidth({...props, minWidth: props.minWidth ?? 0}),
     overflow(props),
-    padding(props),
+    padding({...props, padding: props.padding ?? 0}),
     pointerEvents(props),
     position(props),
     outline(props),

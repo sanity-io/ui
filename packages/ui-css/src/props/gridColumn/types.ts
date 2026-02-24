@@ -1,3 +1,4 @@
+import {type ExactKeyTuple} from '../../_keys'
 import type {ResponsiveProp} from '../../types'
 
 /** @public */
@@ -7,3 +8,12 @@ export type GridColumn = 'auto' | 'full' | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 1
 export interface GridColumnStyleProps {
   gridColumn?: ResponsiveProp<GridColumn>
 }
+
+/** @internal */
+export const GRID_COLUMN_STYLE_PROP_KEYS = ['gridColumn'] as const
+
+// assert exact keys
+GRID_COLUMN_STYLE_PROP_KEYS satisfies ExactKeyTuple<
+  GridColumnStyleProps,
+  typeof GRID_COLUMN_STYLE_PROP_KEYS
+>

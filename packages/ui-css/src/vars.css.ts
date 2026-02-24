@@ -1,680 +1,76 @@
-import {COLOR_HUES, COLOR_TINTS} from '@sanity/color'
-import {
-  AVATAR_COLORS,
-  AVATAR_SIZE,
-  CARD_TONES,
-  COLOR_SCHEMES,
-  COLOR_VARIANTS,
-  CONTAINER_SCALE,
-  ELEMENT_TONES,
-  FONT_CODE_SIZE,
-  FONT_HEADING_SIZE,
-  FONT_LABEL_SIZE,
-  FONT_TEXT_SIZE,
-  RADIUS,
-  SHADOW,
-  SPACE,
-} from '@sanity/ui/theme'
-import {createThemeContract, createVar} from '@vanilla-extract/css'
+/* eslint-disable simple-import-sort/imports */
 
-import {_fromEntries} from './_fromEntries'
-import type {
-  ColorPaletteTokens,
-  ColorPaletteVars,
-  CoreThemeTokens,
-  ThemeContract,
-  ThemeTokens,
-  ThemeVars,
-} from './types'
+// 0 - palette
+import {_paletteVars} from './system/_palette.css'
 
-const paletteTokens: ColorPaletteTokens = {
-  black: '',
-  white: '',
-  ..._fromEntries(
-    COLOR_HUES.map((h) => [
-      h,
-      {
-        ..._fromEntries(COLOR_TINTS.map((t) => [t, ''])),
-      },
-    ]),
-  ),
-}
+// 1 - core
+import {_coreVars} from './system/_core.css'
 
-/** @internal */
-export const paletteVars: ColorPaletteVars = createThemeContract(paletteTokens)
+// 2 - color scheme
+import {_colorSchemeVars} from './system/_colorScheme.css'
 
-const themeTokens: CoreThemeTokens = {
-  avatar: {
-    focusRing: {
-      offset: '',
-      width: '',
-    },
-    scale: {
-      ..._fromEntries(
-        AVATAR_SIZE.map((s) => [
-          s,
-          {
-            distance: '',
-            size: '',
-          },
-        ]),
-      ),
-    },
-  },
-  button: {
-    border: {
-      width: '',
-    },
-    focusRing: {
-      offset: '',
-      width: '',
-    },
-  },
-  card: {
-    border: {
-      width: '',
-    },
-    focusRing: {
-      offset: '',
-      width: '',
-    },
-    shadow: {
-      outline: '',
-    },
-  },
-  color: {
-    // schemes
-    ..._fromEntries(
-      COLOR_SCHEMES.map((s) => [
-        s,
-        {
-          ..._fromEntries(
-            CARD_TONES.map((t) => [
-              t,
-              {
-                avatar: {
-                  ..._fromEntries(AVATAR_COLORS.map((c) => [c, {bg: '', fg: ''}])),
-                },
-                backdrop: '',
-                code: {
-                  bg: '',
-                  fg: '',
-                  token: {
-                    atrule: '',
-                    attrName: '',
-                    attrValue: '',
-                    attribute: '',
-                    boolean: '',
-                    builtin: '',
-                    cdata: '',
-                    char: '',
-                    class: '',
-                    className: '',
-                    comment: '',
-                    constant: '',
-                    deleted: '',
-                    doctype: '',
-                    entity: '',
-                    function: '',
-                    hexcode: '',
-                    id: '',
-                    important: '',
-                    inserted: '',
-                    keyword: '',
-                    number: '',
-                    operator: '',
-                    prolog: '',
-                    property: '',
-                    pseudoClass: '',
-                    pseudoElement: '',
-                    punctuation: '',
-                    regex: '',
-                    selector: '',
-                    string: '',
-                    symbol: '',
-                    tag: '',
-                    unit: '',
-                    url: '',
-                    variable: '',
-                  },
-                },
-                focusRing: '',
-                link: {
-                  fg: '',
-                },
-                shadow: {
-                  outline: '',
-                  umbra: '',
-                  penumbra: '',
-                  ambient: '',
-                },
-                skeleton: {
-                  from: '',
-                  to: '',
-                },
-                ..._fromEntries(
-                  COLOR_VARIANTS.map((v) => [
-                    v,
-                    {
-                      ..._fromEntries(
-                        ELEMENT_TONES.map((t) => [
-                          t,
-                          {
-                            bg: {
-                              0: '',
-                              4: '',
-                            },
-                            border: {
-                              0: '',
-                              4: '',
-                            },
-                            fg: {
-                              0: '',
-                              4: '',
-                            },
-                          },
-                        ]),
-                      ),
-                    },
-                  ]),
-                ),
-              },
-            ]),
-          ),
-        },
-      ]),
-    ),
-  },
-  container: {
-    ..._fromEntries(CONTAINER_SCALE.map((w) => [w, ''])),
-  },
-  font: {
-    code: {
-      family: '',
-      featureSettings: '',
-      weight: {
-        regular: '',
-        medium: '',
-        semibold: '',
-        bold: '',
-      },
-      scale: {
-        ..._fromEntries(
-          FONT_CODE_SIZE.map((s) => [
-            s,
-            {
-              fontSize: '',
-              lineHeight: '',
-              letterSpacing: '',
-              ascenderHeight: '',
-              descenderHeight: '',
-              iconSize: '',
-              customIconSize: '',
-            },
-          ]),
-        ),
-      },
-    },
-    heading: {
-      family: '',
-      featureSettings: '',
-      weight: {
-        regular: '',
-        medium: '',
-        semibold: '',
-        bold: '',
-      },
-      scale: {
-        ..._fromEntries(
-          FONT_HEADING_SIZE.map((s) => [
-            s,
-            {
-              fontSize: '',
-              lineHeight: '',
-              letterSpacing: '',
-              ascenderHeight: '',
-              descenderHeight: '',
-              iconSize: '',
-              customIconSize: '',
-            },
-          ]),
-        ),
-      },
-    },
-    label: {
-      family: '',
-      featureSettings: '',
-      weight: {
-        regular: '',
-        medium: '',
-        semibold: '',
-        bold: '',
-      },
-      scale: {
-        ..._fromEntries(
-          FONT_LABEL_SIZE.map((s) => [
-            s,
-            {
-              fontSize: '',
-              lineHeight: '',
-              letterSpacing: '',
-              ascenderHeight: '',
-              descenderHeight: '',
-              iconSize: '',
-              customIconSize: '',
-            },
-          ]),
-        ),
-      },
-    },
-    text: {
-      family: '',
-      featureSettings: '',
-      weight: {
-        regular: '',
-        medium: '',
-        semibold: '',
-        bold: '',
-      },
-      scale: {
-        ..._fromEntries(
-          FONT_TEXT_SIZE.map((s) => [
-            s,
-            {
-              fontSize: '',
-              lineHeight: '',
-              letterSpacing: '',
-              ascenderHeight: '',
-              descenderHeight: '',
-              iconSize: '',
-              customIconSize: '',
-            },
-          ]),
-        ),
-      },
-    },
-  },
-  input: {
-    border: {
-      width: '',
-    },
-    checkbox: {
-      size: '',
-      focusRing: {
-        offset: '',
-        width: '',
-      },
-    },
-    radio: {
-      size: '',
-      markSize: '',
-      focusRing: {
-        offset: '',
-        width: '',
-      },
-    },
-    select: {
-      focusRing: {
-        offset: '',
-        width: '',
-      },
-    },
-    switch: {
-      focusRing: {
-        width: '',
-        offset: '',
-      },
-      height: '',
-      width: '',
-      padding: '',
-      transitionDurationMs: '',
-      transitionTimingFunction: '',
-    },
-    text: {
-      focusRing: {
-        offset: '',
-        width: '',
-      },
-    },
-  },
-  radius: {
-    ..._fromEntries(RADIUS.map((r) => [r, ''])),
-  },
-  shadow: {
-    ..._fromEntries(
-      SHADOW.map((s) => [
-        s,
-        {
-          umbra: '',
-          penumbra: '',
-          ambient: '',
-        },
-      ]),
-    ),
-  },
-  space: {
-    ..._fromEntries(SPACE.map((s) => [s, ''])),
-  },
-}
+// 3 - card tone
+import {_cardToneVars} from './system/_cardTone.css'
 
-const _themeVars: ThemeContract<CoreThemeTokens> = createThemeContract(themeTokens)
+// rest
+import {avatarVars} from './system/avatar.css'
+import {borderVars} from './system/border.css'
+import {buttonVars} from './system/button.css'
+import {cardVars} from './system/card.css'
+import {colorVars} from './system/color.css'
+import {containerVars} from './system/container.css'
+import {cornerVars} from './system/corner.css'
+import {focusRingVars} from './system/focusRing.css'
+import {fontVars} from './system/font.css'
+import {inputVars} from './system/input.css'
+import {radiusVars} from './system/radius.css'
+import {shadowVars} from './system/shadow.css'
+import {spaceVars} from './system/space.css'
 
 /**
- * Variables to be defined in a theme.
+ * CSS custom properties (CSS variables) for the Sanity UI design system.
  *
- * @internal */
-export const themeVars: ThemeContract<ThemeTokens> = {
-  ..._themeVars,
-  color: {
-    ..._themeVars.color,
-    palette: paletteVars,
-  },
-}
-
-/**
- * Variables to be used.
+ * @remarks
+ * This object provides access to all design tokens as CSS variables wrapped in `var()` calls.
+ * Use these tokens to build components that automatically adapt to color schemes,
+ * card tones, and other contextual design system states.
+ *
+ * @example
+ * Using with vanilla-extract's style function:
+ * ```tsx
+ * import {style} from '@vanilla-extract/css'
+ * import {vars} from '@sanity/ui-css'
+ *
+ * export const card = style({
+ *   background: vars.color.bg,
+ *   border: `1px solid ${vars.color.border}`,
+ *   borderRadius: vars.radius[3],
+ *   boxShadow: vars.shadow[2],
+ * })
+ * ```
+ *
+ * @see {@link https://www.sanity.io/docs/ui/tokens/overview} - Design tokens documentation
  *
  * @public
  */
-export const vars: ThemeVars = {
-  ...themeVars,
-  avatar: {
-    ...themeVars.avatar,
-    distance: createVar(),
-    size: createVar(),
-  },
-  arrow: {
-    size: createVar(),
-  },
-  button: {
-    ...themeVars.button,
-    boxShadow: createVar(),
-  },
-  card: {
-    ...themeVars.card,
-    test: createVar(),
-  },
-  color: {
-    ...themeVars.color,
-    avatar: {
-      bg: createVar(),
-      fg: createVar(),
-      // colors
-      ..._fromEntries(AVATAR_COLORS.map((c) => [c, {bg: createVar(), fg: createVar()}])),
-    },
-    backdrop: createVar(),
-    bg: createVar(),
-    border: createVar(),
-    code: {
-      fg: createVar(),
-      bg: createVar(),
-      token: {
-        atrule: createVar(),
-        attrName: createVar(),
-        attrValue: createVar(),
-        attribute: createVar(),
-        boolean: createVar(),
-        builtin: createVar(),
-        cdata: createVar(),
-        char: createVar(),
-        class: createVar(),
-        className: createVar(),
-        comment: createVar(),
-        constant: createVar(),
-        deleted: createVar(),
-        doctype: createVar(),
-        entity: createVar(),
-        function: createVar(),
-        hexcode: createVar(),
-        id: createVar(),
-        important: createVar(),
-        inserted: createVar(),
-        keyword: createVar(),
-        number: createVar(),
-        operator: createVar(),
-        prolog: createVar(),
-        property: createVar(),
-        pseudoClass: createVar(),
-        pseudoElement: createVar(),
-        punctuation: createVar(),
-        regex: createVar(),
-        selector: createVar(),
-        string: createVar(),
-        symbol: createVar(),
-        tag: createVar(),
-        unit: createVar(),
-        url: createVar(),
-        variable: createVar(),
-      },
-    },
-    fg: createVar(),
-    focusRing: createVar(),
-    input: {
-      checkbox: {
-        bg: createVar(),
-        border: createVar(),
-        fg: createVar(),
-      },
-      text: {
-        bg: createVar(),
-        border: createVar(),
-        fg: createVar(),
-        placeholder: createVar(),
-      },
-      radio: {
-        bg: createVar(),
-        border: createVar(),
-        fg: createVar(),
-      },
-      switch: {
-        bg: createVar(),
-        fg: createVar(),
-      },
-    },
-    link: {
-      fg: createVar(),
-    },
-    muted: {
-      bg: createVar(),
-      border: createVar(),
-      fg: createVar(),
-    },
-    shadow: {
-      outline: createVar(),
-      umbra: createVar(),
-      penumbra: createVar(),
-      ambient: createVar(),
-    },
-    skeleton: {
-      from: createVar(),
-      to: createVar(),
-    },
+export const vars = {
+  /**
+   * @internal
+   * @deprecated Prefer using semantic color tokens instead.
+   */
+  palette: _paletteVars,
 
-    // variants
-    ..._fromEntries(
-      COLOR_VARIANTS.map((v) => [
-        v,
-        {
-          ..._fromEntries(
-            ELEMENT_TONES.map((t) => [
-              t,
-              {
-                bg: {
-                  0: createVar(),
-                  1: createVar(),
-                  2: createVar(),
-                  3: createVar(),
-                  4: createVar(),
-                },
-                border: {
-                  0: createVar(),
-                  1: createVar(),
-                  2: createVar(),
-                  3: createVar(),
-                  4: createVar(),
-                },
-                fg: {
-                  0: createVar(),
-                  1: createVar(),
-                  2: createVar(),
-                  3: createVar(),
-                  4: createVar(),
-                },
-              },
-            ]),
-          ),
-        },
-      ]),
-    ),
-
-    // tones
-    ..._fromEntries(
-      CARD_TONES.map((t) => [
-        t,
-        {
-          avatar: {
-            ..._fromEntries(AVATAR_COLORS.map((c) => [c, {bg: createVar(), fg: createVar()}])),
-          },
-          backdrop: createVar(),
-          code: {
-            fg: createVar(),
-            bg: createVar(),
-            token: {
-              atrule: createVar(),
-              attrName: createVar(),
-              attrValue: createVar(),
-              attribute: createVar(),
-              boolean: createVar(),
-              builtin: createVar(),
-              cdata: createVar(),
-              char: createVar(),
-              class: createVar(),
-              className: createVar(),
-              comment: createVar(),
-              constant: createVar(),
-              deleted: createVar(),
-              doctype: createVar(),
-              entity: createVar(),
-              function: createVar(),
-              hexcode: createVar(),
-              id: createVar(),
-              important: createVar(),
-              inserted: createVar(),
-              keyword: createVar(),
-              number: createVar(),
-              operator: createVar(),
-              prolog: createVar(),
-              property: createVar(),
-              pseudoClass: createVar(),
-              pseudoElement: createVar(),
-              punctuation: createVar(),
-              regex: createVar(),
-              selector: createVar(),
-              string: createVar(),
-              symbol: createVar(),
-              tag: createVar(),
-              unit: createVar(),
-              url: createVar(),
-              variable: createVar(),
-            },
-          },
-          bg: createVar(),
-          border: createVar(),
-          fg: createVar(),
-          focusRing: createVar(),
-          link: {
-            fg: createVar(),
-          },
-          muted: {
-            bg: createVar(),
-            border: createVar(),
-            fg: createVar(),
-          },
-          shadow: {
-            outline: createVar(),
-            umbra: createVar(),
-            penumbra: createVar(),
-            ambient: createVar(),
-          },
-          skeleton: {
-            from: createVar(),
-            to: createVar(),
-          },
-          ..._fromEntries(
-            COLOR_VARIANTS.map((v) => [
-              v,
-              {
-                ..._fromEntries(
-                  ELEMENT_TONES.map((t) => [
-                    t,
-                    {
-                      bg: {
-                        0: createVar(),
-                        4: createVar(),
-                      },
-                      border: {
-                        0: createVar(),
-                        4: createVar(),
-                      },
-                      fg: {
-                        0: createVar(),
-                        4: createVar(),
-                      },
-                    },
-                  ]),
-                ),
-              },
-            ]),
-          ),
-        },
-      ]),
-    ),
-  },
-  font: {
-    ...themeVars.font,
-    family: createVar(),
-    featureSettings: createVar(),
-    fontSize: createVar(),
-    lineHeight: createVar(),
-    letterSpacing: createVar(),
-    fontWeight: createVar(),
-    ascenderHeight: createVar(),
-    descenderHeight: createVar(),
-    capHeight: createVar(),
-    iconSize: createVar(),
-    iconOffset: createVar(),
-    customIconOffset: createVar(),
-    customIconSize: createVar(),
-    skeleton: {
-      ascenderHeight: createVar(),
-      descenderHeight: createVar(),
-      lineHeight: createVar(),
-    },
-    weight: {
-      regular: createVar(),
-      medium: createVar(),
-      semibold: createVar(),
-      bold: createVar(),
-    },
-  },
-  input: {
-    ...themeVars.input,
-    switch: {
-      ...themeVars.input.switch,
-      thumb: {
-        offset: createVar(),
-        size: createVar(),
-      },
-    },
-    text: {
-      ...themeVars.input.text,
-      fontSize: createVar(),
-      lineHeight: createVar(),
-      letterSpacing: createVar(),
-      ascenderHeight: createVar(),
-      descenderHeight: createVar(),
-      padding: createVar(),
-      gap: createVar(),
-    },
-  },
+  avatar: avatarVars,
+  border: borderVars,
+  button: buttonVars,
+  card: cardVars,
+  color: colorVars,
+  container: containerVars,
+  corner: cornerVars,
+  focusRing: focusRingVars,
+  font: fontVars,
+  input: inputVars,
+  radius: radiusVars,
+  shadow: shadowVars,
+  space: spaceVars,
 }

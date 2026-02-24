@@ -3,10 +3,14 @@
   "include": ["./exports", "./src", "./vanilla-extract"],
   "exclude": ["./src/**/*.test.ts", "./src/**/__tests__/**"],
   "compilerOptions": {
+    "composite": true,
+
     "rootDir": ".",
     "outDir": "./dist",
-    "composite": true,
+
+    "allowImportingTsExtensions": true,
     "noCheck": true,
+
     "paths": {
       "@sanity/ui-css": ["./exports/index.ts"],
       "@sanity/ui-css/*": ["./exports/*"]

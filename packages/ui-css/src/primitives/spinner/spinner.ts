@@ -8,6 +8,6 @@ export function spinner(props: SpinnerStyleProps): string | undefined {
 }
 
 /** @public */
-export function animatedSpinnerIcon(): string {
+export function spinner_animatedIcon(): string {
   return spinnerIcon
 }
