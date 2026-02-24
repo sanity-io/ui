@@ -340,6 +340,9 @@ importers:
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -610,6 +613,12 @@ importers:
       react-is:
         specifier: ^19.2.0
         version: 19.2.4
+      react-refractor:
+        specifier: ^4.0.0
+        version: 4.0.0(patch_hash=d09850788ff01720cb36d6393726a72fbcd5bbfc97ebbb207b578d062c2a8df9)(react@19.2.4)
+      refractor:
+        specifier: ^5.0.0
+        version: 5.0.0
       rollup:
         specifier: ^4.55.1
         version: 4.59.0
@@ -10699,7 +10708,7 @@ snapshots:
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/chai@5.2.2':
     dependencies:
@@ -10707,16 +10716,16 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
     optional: true
 
   '@types/cpx@1.5.6':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/deep-eql@4.0.2': {}
 
@@ -10736,7 +10745,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.1.1':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
       '@types/qs': 6.15.0
       '@types/range-parser': 1.2.7
       '@types/send': 1.2.1
@@ -10803,12 +10812,12 @@ snapshots:
 
   '@types/send@1.2.1':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/serve-static@2.2.0':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/unist@2.0.11': {}
 
@@ -12881,7 +12890,7 @@ snapshots:
 
   eval@0.1.8:
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
       require-like: 0.1.2
 
   events@3.3.0: {}
