@@ -2,24 +2,34 @@ import {vanillaExtractIdentifiers} from '@sanity/ui-css/vanilla-extract'
 import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop/runtime'
 import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
 import path from 'path'
+import {fileURLToPath} from 'url'
 import {mergeConfig} from 'vite'
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname)
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const runtime: WorkshopRuntimeOptions = {
-  vite: (viteConfig) =>
-    mergeConfig(viteConfig, {
+  server: {
+    port: 1338,
+  },
+  vite: (viteConfig) => {
+    return mergeConfig(viteConfig, {
       optimizeDeps: {
         exclude: ['@sanity/ui-css', '@sanity/ui-tokens'],
       },
-      plugins: [vanillaExtractPlugin({identifiers: vanillaExtractIdentifiers})],
+      plugins: [
+        vanillaExtractPlugin({
+          identifiers: vanillaExtractIdentifiers,
+        }),
+      ],
       resolve: {
         alias: {
-          '@sanity/ui-css': path.resolve(__dirname, '../../packages/ui-css/exports'),
-          '@sanity/ui-tokens': path.resolve(__dirname, '../../packages/ui-tokens/exports'),
+          '@sanity/ui-css': path.resolve(__dirname, './exports'),
+          '@sanity/ui-tokens': path.resolve(__dirname, '../ui-tokens/exports'),
         },
       },
-    }),
+    })
+  },
 }
 
 export default runtime

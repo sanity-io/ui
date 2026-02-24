@@ -1,19 +1,13 @@
-import {keyframes} from '@vanilla-extract/css'
-
 import {_style} from '../../_style.css'
-import {layers} from '../../layers.css'
+import {spin} from '../../keyframes/spinner.css'
+import {_layers} from '../../layers.css'
 
-const spin = keyframes({
-  from: {
-    transform: 'rotate(0deg)',
+export const root: string = _style(_layers.primitive, {}, '')
+
+export const spinnerIcon: string = _style(
+  _layers.primitive,
+  {
+    animation: `${spin} 500ms linear infinite`,
   },
-  to: {
-    transform: 'rotate(360deg)',
-  },
-})
-
-export const root: string = _style(layers.primitives, {})
-
-export const spinnerIcon: string = _style(layers.primitives, {
-  animation: `${spin} 500ms linear infinite`,
-})
+  'icon',
+)

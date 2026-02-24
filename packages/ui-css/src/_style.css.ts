@@ -1,9 +1,9 @@
 import {style, type StyleRule} from '@vanilla-extract/css'
 
-export function _style(layer: string, rule: StyleRule): string {
-  return style({
-    '@layer': {
-      [layer]: rule,
-    },
-  })
+/* @internal */
+export type LayerRule = NonNullable<StyleRule['@layer']>[string]
+
+/* @internal */
+export function _style(layer: string, rule: LayerRule, id: string): string {
+  return style({'@layer': {[layer]: rule}}, id)
 }

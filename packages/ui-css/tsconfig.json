@@ -12,7 +12,9 @@
     "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
     "rootDir": "..",
     "outDir": "./dist",
+
     "noEmit": true,
+
     "paths": {
       "@sanity/ui-css": ["./exports/index.ts"],
       "@sanity/ui-css/*": ["./exports/*"],

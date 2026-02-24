@@ -1,7 +1,7 @@
 import {layer, root} from './toast.css'
 
 /** @public */
-export function toastLayer(): string {
+export function toast_layer(): string {
   return layer
 }
 

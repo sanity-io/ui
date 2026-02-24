@@ -1,162 +1,192 @@
-import {globalStyle} from '@vanilla-extract/css'
+import {createVar, globalStyle} from '@vanilla-extract/css'
 
+import {_globalStyle} from '../../_globalStyle.css'
 import {_style} from '../../_style.css'
-import {layers} from '../../layers.css'
+import {_layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
-export const root: string = _style(layers.primitives, {
-  position: 'relative',
-  flex: 'none',
+const _vars = {
+  boxShadow: createVar('boxShadow'),
+}
 
-  selectors: {
-    '&:not([hidden])': {
-      display: 'block',
+export const root: string = _style(
+  _layers.primitive,
+  {
+    inlineSize: 'max-content',
+
+    vars: {
+      [_vars.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
+
+      /* 1) unchecked, enabled */
+      [vars.color.bg]: vars.color.input.boolean.valid.unchecked.enabled.bg,
+      [vars.color.border]: vars.color.input.boolean.valid.unchecked.enabled.border,
+      [vars.color.fg]: vars.color.input.boolean.valid.unchecked.enabled.fg,
     },
   },
-})
+  '',
+)
 
-export const input: string = _style(layers.primitives, {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  outline: 'none',
-  opacity: 0,
-  zIndex: 1,
-  padding: 0,
-  margin: 0,
-})
+export const input: string = _style(
+  _layers.primitive,
+  {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    outline: 'none',
+    opacity: 0,
+    zIndex: 1,
+    padding: 0,
+    margin: 0,
+  },
+  'input',
+)
 
-export const presentation: string = _style(layers.primitives, {
-  position: 'relative',
-  display: 'block',
-  width: vars.input.checkbox.size,
-  height: vars.input.checkbox.size,
-  boxSizing: 'border-box',
-  borderRadius: vars.radius[2],
-  lineHeight: 1,
-  backgroundColor: vars.color.input.checkbox.bg,
-  boxShadow: `inset 0 0 0 ${vars.input.border.width} ${vars.color.input.checkbox.border}`,
-  color: vars.color.input.checkbox.fg,
+// CSS state selectors
+const has = (state: string) => `${root}:has(${input}${state})`
+export const selectors = {
+  unchecked: {
+    enabled: has(':not(:checked):not(:disabled)'),
+    hovered: has(':not(:checked):not(:disabled):hover'),
+    disabled: has(':not(:checked):disabled'),
 
+    invalid: {
+      enabled: has(':not(:checked):not(:disabled)[data-invalid]'),
+      hovered: has(':not(:checked):not(:disabled)[data-invalid]:hover'),
+      disabled: has(':not(:checked):disabled[data-invalid]'),
+    },
+  },
+
+  checked: {
+    enabled: has(':checked:not(:disabled)'),
+    hovered: has(':checked:not(:disabled):hover'),
+    disabled: has(':checked:disabled'),
+
+    invalid: {
+      enabled: has(':checked:not(:disabled)[data-invalid]'),
+      hovered: has(':checked:not(:disabled)[data-invalid]:hover'),
+      disabled: has(':checked:disabled[data-invalid]'),
+    },
+  },
+
+  focused: has(':not(:disabled):focus:focus-visible'),
+} as const
+
+/* 2) unchecked, hovered */
+_globalStyle(_layers.primitive, selectors.unchecked.hovered, {
   vars: {
-    [vars.color.input.checkbox.bg]: vars.color.tinted.default.bg[0],
-    [vars.color.input.checkbox.border]: vars.color.tinted.default.border[2],
-    [vars.color.input.checkbox.fg]: vars.color.tinted.default.fg[0],
-  },
-
-  selectors: {
-    // checked, not disabled, not invalid
-    ':checked:not(:disabled):not([data-invalid]) + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.solid.default.bg[0],
-        [vars.color.input.checkbox.border]: vars.color.solid.default.bg[0],
-        [vars.color.input.checkbox.fg]: vars.color.solid.default.fg[0],
-      },
-    },
-
-    // not checked, not invalid, hovered
-    ':not(:checked):not([data-invalid]):hover + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.tinted.default.bg[1],
-        [vars.color.input.checkbox.border]: vars.color.tinted.default.border[4],
-        [vars.color.input.checkbox.fg]: vars.color.tinted.default.fg[0],
-      },
-    },
-
-    // not checked, not disabled, invalid
-    ':not(:checked):not(:disabled)[data-invalid] + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.tinted.critical.bg[1],
-        [vars.color.input.checkbox.border]: vars.color.tinted.critical.border[3],
-        [vars.color.input.checkbox.fg]: vars.color.tinted.critical.fg[4],
-      },
-    },
-
-    // not checked, invalid, hovered
-    ':not(:checked)[data-invalid]:hover + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.tinted.critical.bg[2],
-        [vars.color.input.checkbox.border]: vars.color.tinted.critical.border[4],
-        [vars.color.input.checkbox.fg]: vars.color.tinted.critical.fg[1],
-        // [vars.color.input.checkbox.border]: vars.color.focusRing,
-      },
-    },
-
-    // checked, not disabled, invalid
-    ':checked:not(:disabled)[data-invalid] + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.solid.critical.bg[0],
-        [vars.color.input.checkbox.border]: vars.color.solid.critical.bg[0],
-        [vars.color.input.checkbox.fg]: vars.color.solid.critical.fg[0],
-      },
-    },
-
-    // not checked, not indeterminate, read only
-    ':not(:checked):not(:indeterminate)[data-read-only] + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.tinted.default.bg[0],
-        [vars.color.input.checkbox.border]: vars.color.tinted.default.border[2],
-        [vars.color.input.checkbox.fg]: vars.color.tinted.default.fg[0],
-      },
-    },
-
-    // checked, read only
-    ':checked[data-read-only] + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.tinted.default.bg[1],
-      },
-    },
-
-    // not checked, focused
-    ':not(:checked):focus:focus-visible + &': {
-      vars: {
-        [vars.color.input.checkbox.border]: vars.color.focusRing,
-      },
-    },
-
-    // checked, focused
-    ':checked:focus:focus-visible + &': {
-      vars: {
-        [vars.color.input.checkbox.border]: vars.color.focusRing,
-        [vars.color.input.checkbox.bg]: vars.color.focusRing,
-        [vars.color.input.checkbox.fg]: vars.color.solid.default.fg[0],
-      },
-    },
-
-    // not checked, disabled
-    ':not(:checked):disabled + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.tinted.default.bg[1],
-        [vars.color.input.checkbox.border]: vars.color.tinted.default.border[0],
-        [vars.color.input.checkbox.fg]: vars.color.tinted.default.border[2],
-      },
-    },
-
-    // checked, disabled
-    ':checked:disabled + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.tinted.default.border[2],
-        [vars.color.input.checkbox.border]: vars.color.tinted.default.border[2],
-        [vars.color.input.checkbox.fg]: vars.color.tinted.default.bg[0],
-      },
-    },
-
-    // indeterminate, disabled
-    ':indeterminate:disabled + &': {
-      vars: {
-        [vars.color.input.checkbox.bg]: vars.color.tinted.default.bg[1],
-        [vars.color.input.checkbox.border]: vars.color.tinted.default.border[0],
-        [vars.color.input.checkbox.fg]: vars.color.tinted.default.border[2],
-      },
-    },
+    [vars.color.bg]: vars.color.input.boolean.valid.unchecked.hovered.bg,
+    [vars.color.border]: vars.color.input.boolean.valid.unchecked.hovered.border,
+    [vars.color.fg]: vars.color.input.boolean.valid.unchecked.hovered.fg,
   },
 })
+
+/* 3) checked, enabled */
+_globalStyle(_layers.primitive, selectors.checked.enabled, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.valid.checked.enabled.bg,
+    [vars.color.border]: vars.color.input.boolean.valid.checked.enabled.border,
+    [vars.color.fg]: vars.color.input.boolean.valid.checked.enabled.fg,
+  },
+})
+
+/* 4) checked, hovered */
+_globalStyle(_layers.primitive, selectors.checked.hovered, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.valid.checked.hovered.bg,
+    [vars.color.border]: vars.color.input.boolean.valid.checked.hovered.border,
+    [vars.color.fg]: vars.color.input.boolean.valid.checked.hovered.fg,
+  },
+})
+
+/* 5) invalid overrides */
+_globalStyle(_layers.primitive, selectors.unchecked.invalid.enabled, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.invalid.unchecked.enabled.bg,
+    [vars.color.border]: vars.color.input.boolean.invalid.unchecked.enabled.border,
+    [vars.color.fg]: vars.color.input.boolean.invalid.unchecked.enabled.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.checked.invalid.enabled, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.invalid.checked.enabled.bg,
+    [vars.color.border]: vars.color.input.boolean.invalid.checked.enabled.border,
+    [vars.color.fg]: vars.color.input.boolean.invalid.checked.enabled.fg,
+  },
+})
+
+_globalStyle(_layers.primitive, selectors.unchecked.invalid.hovered, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.invalid.unchecked.hovered.bg,
+    [vars.color.border]: vars.color.input.boolean.invalid.unchecked.hovered.border,
+    [vars.color.fg]: vars.color.input.boolean.invalid.unchecked.hovered.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.checked.invalid.hovered, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.invalid.checked.hovered.bg,
+    [vars.color.border]: vars.color.input.boolean.invalid.checked.hovered.border,
+    [vars.color.fg]: vars.color.input.boolean.invalid.checked.hovered.fg,
+  },
+})
+
+/* 6) disabled LAST */
+_globalStyle(_layers.primitive, selectors.unchecked.disabled, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.valid.unchecked.disabled.bg,
+    [vars.color.border]: vars.color.input.boolean.valid.unchecked.disabled.border,
+    [vars.color.fg]: vars.color.input.boolean.valid.unchecked.disabled.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.checked.disabled, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.valid.checked.disabled.bg,
+    [vars.color.border]: vars.color.input.boolean.valid.checked.disabled.border,
+    [vars.color.fg]: vars.color.input.boolean.valid.checked.disabled.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.unchecked.invalid.disabled, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.invalid.unchecked.disabled.bg,
+    [vars.color.border]: vars.color.input.boolean.invalid.unchecked.disabled.border,
+    [vars.color.fg]: vars.color.input.boolean.invalid.unchecked.disabled.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.checked.invalid.disabled, {
+  vars: {
+    [vars.color.bg]: vars.color.input.boolean.invalid.checked.disabled.bg,
+    [vars.color.border]: vars.color.input.boolean.invalid.checked.disabled.border,
+    [vars.color.fg]: vars.color.input.boolean.invalid.checked.disabled.fg,
+  },
+})
+
+// focus visible
+_globalStyle(_layers.primitive, selectors.focused, {
+  vars: {
+    [_vars.boxShadow]: `${vars.input.switch.focusRing}, inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
+  },
+})
+
+export const presentation: string = _style(
+  _layers.primitive,
+  {
+    position: 'relative',
+    display: 'block',
+    width: vars.input.checkbox.size,
+    height: vars.input.checkbox.size,
+    boxSizing: 'border-box',
+    lineHeight: 1,
+    backgroundColor: vars.color.bg,
+    boxShadow: _vars.boxShadow,
+    color: vars.color.fg,
+  },
+  'presentation',
+)
 
 globalStyle(`${presentation} svg`, {
   '@layer': {
-    [layers.primitives]: {
+    [_layers.primitive]: {
       display: 'block',
       position: 'absolute',
       opacity: 0,
@@ -168,9 +198,9 @@ globalStyle(`${presentation} svg`, {
 
 globalStyle(`${presentation} svg > path`, {
   '@layer': {
-    [layers.primitives]: {
+    [_layers.primitive]: {
       vectorEffect: 'non-scaling-stroke',
-      strokeWidth: '1.5px !important',
+      strokeWidth: '2px !important',
     },
   },
 })
@@ -178,7 +208,7 @@ globalStyle(`${presentation} svg > path`, {
 // show checkmark when checked
 globalStyle(`:checked + ${presentation} svg:first-child`, {
   '@layer': {
-    [layers.primitives]: {
+    [_layers.primitive]: {
       opacity: 1,
     },
   },
@@ -187,7 +217,7 @@ globalStyle(`:checked + ${presentation} svg:first-child`, {
 // show minus when indeterminate
 globalStyle(`:indeterminate + ${presentation} svg:last-child`, {
   '@layer': {
-    [layers.primitives]: {
+    [_layers.primitive]: {
       opacity: 1,
     },
   },

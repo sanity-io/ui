@@ -7,6 +7,6 @@ export function menu(props: {className?: string}): string | undefined {
 }
 
 /** @public */
-export function menuDivider(props: {className?: string}): string | undefined {
+export function menu_divider(props: {className?: string}): string | undefined {
   return _composeClassNames(props.className, divider)
 }

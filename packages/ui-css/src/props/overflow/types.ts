@@ -1,3 +1,4 @@
+import {type ExactKeyTuple} from '../../_keys'
 import type {ResponsiveProp} from '../../types'
 
 /** @public */
@@ -9,3 +10,12 @@ export interface OverflowStyleProps {
   overflowX?: ResponsiveProp<Overflow>
   overflowY?: ResponsiveProp<Overflow>
 }
+
+/** @internal */
+export const OVERFLOW_STYLE_PROP_KEYS = ['overflow', 'overflowX', 'overflowY'] as const
+
+// assert exact keys
+OVERFLOW_STYLE_PROP_KEYS satisfies ExactKeyTuple<
+  OverflowStyleProps,
+  typeof OVERFLOW_STYLE_PROP_KEYS
+>

@@ -1,27 +1,31 @@
-import {ELEMENT_TONES, type ElementTone} from '@sanity/ui/theme'
-
 import {_fromEntries} from '../../_fromEntries'
 import {_style} from '../../_style.css'
-import {layers} from '../../layers.css'
+import {_layers} from '../../layers.css'
+import {root as elementToneRoot} from '../../props/elementTone/elementTone.css'
 import {vars} from '../../vars.css'
 
-export const root: string = _style(layers.primitives, {
-  backgroundColor: vars.color.bg,
-  color: vars.color.fg,
-  whiteSpace: 'nowrap',
-})
+export const root: string = _style(
+  _layers.primitive,
+  {
+    backgroundColor: vars.color.muted.bg,
+    color: vars.color.muted.fg,
+    whiteSpace: 'nowrap',
 
-export const tones: Record<ElementTone, string> = {
-  ..._fromEntries(
-    ELEMENT_TONES.map((t) => [
-      t,
-      _style(layers.primitives, {
+    selectors: {
+      [`&:not(${elementToneRoot} &)`]: {
         vars: {
-          [vars.color.bg]: vars.color.tinted[t].bg[2],
-          [vars.color.border]: vars.color.tinted[t].border[2],
-          [vars.color.fg]: vars.color.tinted[t].fg[3],
+          [vars.color.muted.bg]: vars.color.tinted.bg[2],
+          [vars.color.muted.border]: vars.color.tinted.border[2],
+          [vars.color.muted.fg]: vars.color.tinted.fg[3],
         },
-      }),
-    ]),
-  ),
-}
+      },
+    },
+
+    vars: {
+      // [vars.color.bg]: vars.color.muted.bg,
+      [vars.color.border]: vars.color.muted.border,
+      [vars.color.fg]: vars.color.muted.fg,
+    },
+  },
+  '',
+)

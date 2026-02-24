@@ -7,6 +7,6 @@ export function popover(props: {className?: string}): string | undefined {
 }
 
 /** @public */
-export function popoverCard(): string | undefined {
+export function popover_card(): string | undefined {
   return _composeClassNames(card)
 }

@@ -1,6 +1,6 @@
 import {_composeClassNames} from '../../_composeClassNames'
 import {_responsiveClassName} from '../../_responsiveClassName'
-import {flex} from '../../props/flex/flex'
+import {flexProp} from '../../props/flex/flex'
 import {
   arrow,
   arrowSvg,
@@ -22,37 +22,37 @@ export function avatar(props: AvatarStyleProps): string | undefined {
     root,
     colors[props.color ?? 'gray'],
     _responsiveClassName(scale, props.size ?? 1),
-    flex({flex: 'none'}),
+    flexProp({flex: 'none'}),
   )
 }
 
 /** @public */
-export function avatarArrow(): string | undefined {
+export function avatar_arrow(): string | undefined {
   return arrow
 }
 
 /** @public */
-export function avatarArrowSvg(): string | undefined {
+export function avatar_arrowSvg(): string | undefined {
   return arrowSvg
 }
 
 /** @public */
-export function avatarInitials(): string | undefined {
+export function avatar_initials(): string | undefined {
   return initials
 }
 
 /** @public */
-export function avatarImage(): string | undefined {
+export function avatar_image(): string | undefined {
   return image
 }
 
 /** @public */
-export function avatarImageOutline(): string | undefined {
+export function avatar_imageOutline(): string | undefined {
   return imageOutline
 }
 
 /** @public */
-export function avatarCounter(props: {
+export function avatar_counter(props: {
   className?: string
   size?: AvatarStyleProps['size']
 }): string | undefined {
@@ -60,7 +60,7 @@ export function avatarCounter(props: {
 }
 
 /** @public */
-export function avatarStack(props: {
+export function avatar_stack(props: {
   className?: string
   size?: AvatarStyleProps['size']
 }): string | undefined {
