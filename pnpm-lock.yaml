@@ -9952,7 +9952,7 @@ snapshots:
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/chai@5.2.2':
     dependencies:
@@ -9960,16 +9960,16 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
     optional: true
 
   '@types/cpx@1.5.6':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/deep-eql@4.0.2': {}
 
@@ -9989,7 +9989,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.1.1':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
       '@types/send': 1.2.1
@@ -10002,7 +10002,7 @@ snapshots:
 
   '@types/follow-redirects@1.14.4':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/hast@3.0.4':
     dependencies:
@@ -10060,12 +10060,12 @@ snapshots:
 
   '@types/send@1.2.1':
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/serve-static@2.2.0':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
 
   '@types/unist@2.0.11': {}
 
@@ -11975,7 +11975,7 @@ snapshots:
 
   eval@0.1.8:
     dependencies:
-      '@types/node': 24.10.13
+      '@types/node': 25.3.0
       require-like: 0.1.2
 
   events@3.3.0: {}
