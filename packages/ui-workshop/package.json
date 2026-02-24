@@ -105,6 +105,7 @@
     "fast-glob": "^3.3.3",
     "lodash": "^4.17.21",
     "mkdirp": "^3.0.1",
+    "motion": "^12.34.3",
     "pako": "^2.1.0",
     "rimraf": "^6.1.2",
     "segmented-property": "^4.0.0",
