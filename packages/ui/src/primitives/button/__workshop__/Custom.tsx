@@ -1,4 +1,4 @@
-import {Button, Flex, Grid, Hotkeys, Stack, Text} from '@sanity/ui'
+import {Avatar, Badge, Button, Flex, Grid, Hotkeys, Stack, Text} from '@sanity/ui'
 import {BUTTON_MODES, ELEMENT_TONES} from '@sanity/ui/theme'
 
 export default function CustomStory(): React.JSX.Element {
@@ -16,6 +16,8 @@ export default function CustomStory(): React.JSX.Element {
                     <code>Code</code>
                   </Text>
                   <Hotkeys keys={['mod', 'c']} />
+                  <Avatar />
+                  <Badge>Badge</Badge>
                 </Stack>
               </Button>
             ))}
