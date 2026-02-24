@@ -1,34 +1,25 @@
-import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop'
-import path from 'path'
+import path from 'node:path'
+
+import type {WorkshopRuntimeOptions} from '@sanity/ui-workshop/runtime'
+import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
 import {mergeConfig} from 'vite'
 
-import {vanillaExtractIdentifiers} from './package.config'
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 const runtime: WorkshopRuntimeOptions = {
   vite: (viteConfig) => {
     return mergeConfig(viteConfig, {
-      build: {
-        // Helps simulate how UI is consumed in a real app, where the `@sanity/ui/css/index.css` single asset is used
-        cssCodeSplit: false,
-      },
       optimizeDeps: {
         exclude: ['@sanity/ui'],
       },
+      plugins: [vanillaExtractPlugin()],
       resolve: {
         alias: {
-          '@sanity/ui/css/index.css': path.resolve(__dirname, 'workshop/empty.css'),
-          '@sanity/ui/css': path.resolve(__dirname, 'src/css'),
-          '@sanity/ui/theme': path.resolve(__dirname, 'src/theme'),
-          '@sanity/ui/package.json': path.resolve(__dirname, 'package.json'),
-          '@sanity/ui': path.resolve(__dirname, 'src/core'),
-          '$workshop': path.resolve(__dirname, 'workshop'),
+          '$workshop': path.resolve(__dirname, './workshop'),
+          '@sanity/ui': path.resolve(__dirname, './exports'),
         },
       },
     })
-  },
-  vanillaExtract: {
-    identifiers: ({debugId, hash, filePath}) =>
-      vanillaExtractIdentifiers({debugId, hash, filePath}),
   },
 }
 
