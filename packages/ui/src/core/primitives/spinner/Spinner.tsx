@@ -24,10 +24,6 @@ export type SpinnerOwnProps = {
   /**
    * When `true`, reduces the visual prominence of the spinner by applying
    * a muted foreground color from the theme.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   muted?: boolean
 
@@ -37,12 +33,6 @@ export type SpinnerOwnProps = {
    * @remarks
    * Uses the text font size scale defined by the theme. The spinner scales
    * proportionally to the specified font size. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontTextSize\>}
-   * @defaultValue undefined
-   * @optional
    */
   size?: ResponsiveProp<FontTextSize>
 }
@@ -52,8 +42,6 @@ export type SpinnerOwnProps = {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Spinner`.
- *
- * Accepted values: `"div"` | `"span"` | `ComponentType`
  *
  * @public
  */
@@ -85,12 +73,6 @@ export type SpinnerProps<E extends SpinnerElementType = SpinnerElementType> = Pr
  * {@link Text} element. The size of the spinner is controlled by the `size` prop,
  * which maps to the theme's text font size scale. The `muted` prop can be used
  * to reduce its visual prominence.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"div"` |
  *
  * @public
  */

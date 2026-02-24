@@ -15,12 +15,6 @@ export interface GapStyleProps {
    * Maps to the CSS `gap` property. Supports responsive values.
    *
    * Uses the spacing scale defined by the theme.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
-   * @defaultValue undefined
-   * @optional
    */
   gap?: ResponsiveProp<Space>
 
@@ -32,12 +26,6 @@ export interface GapStyleProps {
    *
    * Uses the spacing scale defined by the theme. Overrides the horizontal
    * portion of the `gap` prop when both are specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
-   * @defaultValue undefined
-   * @optional
    */
   gapX?: ResponsiveProp<Space>
 
@@ -49,12 +37,6 @@ export interface GapStyleProps {
    *
    * Uses the spacing scale defined by the theme. Overrides the vertical
    * portion of the `gap` prop when both are specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
-   * @defaultValue undefined
-   * @optional
    */
   gapY?: ResponsiveProp<Space>
 }

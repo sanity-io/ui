@@ -30,16 +30,6 @@ export interface GridAutoRowsStyleProps {
    *
    * Implicitly created rows are those generated when grid items are placed
    * outside of the explicitly defined grid template.
-   *
-   * Accepted values:
-   * - `"auto"` – Rows are sized based on the content within them.
-   * - `"min"` – Rows are sized to `min-content`.
-   * - `"max"` – Rows are sized to `max-content`.
-   * - `"fr"` – Rows are sized to `1fr`, distributing available space equally.
-   *
-   * @type {ResponsiveProp\<GridAutoRows\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridAutoRows?: ResponsiveProp<GridAutoRows>
 }

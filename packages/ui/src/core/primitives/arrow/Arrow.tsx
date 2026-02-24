@@ -28,9 +28,6 @@ export type ArrowOwnProps = {
    * @remarks
    * Determines the horizontal size of the rendered SVG arrow element.
    * The SVG viewBox is sized to match this value.
-   *
-   * @type {number}
-   * @required
    */
   width: number
 
@@ -42,9 +39,6 @@ export type ArrowOwnProps = {
    * The actual SVG element height is equal to the `width` value; the
    * `height` controls how far the triangular point extends downward
    * within that space.
-   *
-   * @type {number}
-   * @required
    */
   height: number
 
@@ -55,9 +49,7 @@ export type ArrowOwnProps = {
    * Controls how rounded the corners of the triangular arrow shape are.
    * A value of `0` produces sharp corners.
    *
-   * @type {number}
    * @defaultValue 0
-   * @optional
    */
   radius?: number
 }
@@ -67,8 +59,6 @@ export type ArrowOwnProps = {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Arrow`.
- *
- * Accepted values: `"div"` | `"span"` | `ComponentType`
  *
  * @internal
  */
@@ -100,15 +90,6 @@ export type ArrowProps<E extends ArrowElementType = ArrowElementType> = Props<Ar
  *
  * This component is not intended for direct use by consumers. It is used
  * internally by floating UI primitives.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `ArrowElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `width` | `number` | — | Yes | The width of the arrow shape in pixels. |
- * | `height` | `number` | — | Yes | The height of the arrow's triangular point in pixels. |
- * | `radius` | `number` | `0` | No | The corner radius of the arrow point in pixels. |
  *
  * @internal
  */

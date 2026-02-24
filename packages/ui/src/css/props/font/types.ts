@@ -11,16 +11,6 @@ export interface FontStyleProps {
    *
    * @remarks
    * Maps to the CSS `font-weight` property.
-   *
-   * Accepted values:
-   * - `"regular"` – Normal font weight.
-   * - `"medium"` – Medium font weight.
-   * - `"semibold"` – Semi-bold font weight.
-   * - `"bold"` – Bold font weight.
-   *
-   * @type {FontWeight}
-   * @defaultValue undefined
-   * @optional
    */
   weight?: FontWeight
 }

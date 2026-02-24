@@ -16,19 +16,6 @@ export const DEFAULT_TEXT_ELEMENT = 'div'
  * Extends {@link TextStyleProps} and {@link TextOverflowStyleProps} to combine
  * typographic control with text overflow handling.
  *
- * Inherited from {@link TextStyleProps}:
- * - `align` (`TextAlign`) – Controls horizontal text alignment. Accepted values: `"left"` | `"right"` | `"center"` | `"justify"` | `"initial"`.
- * - `className` (`string`) – A custom CSS class name to append to the element.
- * - `muted` (`boolean`) – Reduces visual prominence by applying a muted foreground color.
- * - `size` (`ResponsiveProp<FontTextSize>`) – Sets the font size using the theme's text size scale. Accepted values: `0 | 1 | 2 | 3 | 4`. Default: `2`.
- * - `weight` (`FontWeight`) – Sets the font weight. Accepted values: `"regular"` | `"medium"` | `"semibold"` | `"bold"`. Default: `"regular"`.
- * - `flex` (`ResponsiveProp<Flex>`) – Controls the flex grow/shrink behavior.
- * - `margin`, `marginX`, `marginY`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft` – Margin props from the theme spacing scale.
- * - `maxWidth` (`ResponsiveProp<MaxWidth>`) – Constrains the maximum width. Default: `"fill"`.
- *
- * Inherited from {@link TextOverflowStyleProps}:
- * - `textOverflow` (`TextOverflow`) – Controls how overflowing text is treated. Accepted values: `"ellipsis"` | `"clip"`.
- *
  * @public
  */
 export type TextOwnProps = TextStyleProps & TextOverflowStyleProps
@@ -41,7 +28,6 @@ export type TextOwnProps = TextStyleProps & TextOverflowStyleProps
  * The rendered element receives all applicable HTML attributes for the chosen
  * element type in addition to the Text's own style props.
  *
- * Accepted values:
  * `"div"` | `"h1"` | `"h2"` | `"h3"` | `"h4"` | `"h5"` | `"h6"` | `"label"` |
  * `"li"` | `"p"` | `"span"` | `"summary"` | `"time"` | `ComponentType`
  *
@@ -88,20 +74,6 @@ export type TextProps<E extends TextElementType = TextElementType> = Props<TextO
  *
  * The inner text content is wrapped in a `<span>` that can apply text overflow
  * truncation via the `textOverflow` prop.
- *
- * ### Props
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `TextElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `align` | `TextAlign` | `undefined` | No | Sets horizontal text alignment (`"left"` \| `"right"` \| `"center"` \| `"justify"` \| `"initial"`). |
- * | `muted` | `boolean` | `undefined` | No | Applies a muted foreground color from the theme. |
- * | `size` | `ResponsiveProp<FontTextSize>` | `2` | No | Sets the font size using the theme's text size scale (`0 \| 1 \| 2 \| 3 \| 4`). |
- * | `weight` | `FontWeight` | `"regular"` | No | Sets the font weight (`"regular"` \| `"medium"` \| `"semibold"` \| `"bold"`). |
- * | `textOverflow` | `TextOverflow` | `undefined` | No | Controls how overflowing text is treated (`"ellipsis"` \| `"clip"`). |
- * | `flex` | `ResponsiveProp<Flex>` | `undefined` | No | Controls flex grow/shrink behavior. |
- * | `margin` | `ResponsiveProp<Margin>` | `undefined` | No | Sets outer margin on all sides. |
- * | `maxWidth` | `ResponsiveProp<MaxWidth>` | `"fill"` | No | Constrains the maximum width of the text element. |
  *
  * @public
  */

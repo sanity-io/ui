@@ -39,10 +39,6 @@ export type SwitchOwnProps = {
    *
    * Note: The indeterminate state is purely visual and does not affect the
    * underlying `checked` value of the input.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   indeterminate?: boolean
 }
@@ -52,8 +48,6 @@ export type SwitchOwnProps = {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Switch`.
- *
- * Accepted values: `"input"` | `ComponentType`
  *
  * @public
  */
@@ -98,20 +92,6 @@ export type SwitchProps<E extends SwitchElementType = SwitchElementType> = Props
  * When `readOnly` is `true`, the switch is visually rendered as non-interactive
  * (functionally disabled) but distinguished from `disabled` via a `data-read-only`
  * attribute for styling purposes.
- *
- * ### Props
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `SwitchElementType` | `"input"` | No | The HTML element or component type to render. |
- * | `indeterminate` | `boolean` | `undefined` | No | Sets the switch to an indeterminate (mixed) visual state. |
- * | `disabled` | `boolean` | `undefined` | No | Disables the switch, preventing user interaction. |
- * | `readOnly` | `boolean` | `undefined` | No | Prevents the user from changing the switch state. |
- * | `checked` | `boolean` | `undefined` | No | Controls whether the switch is on or off (controlled). |
- * | `defaultChecked` | `boolean` | `undefined` | No | Sets the initial checked state (uncontrolled). |
- * | `name` | `string` | `undefined` | No | The form field name for the input. |
- * | `onChange` | `ChangeEventHandler` | `undefined` | No | Callback fired when the switch state changes. |
- * | `ref` | `Ref<HTMLInputElement>` | `undefined` | No | Ref forwarded to the underlying input element. |
  *
  * @public
  */

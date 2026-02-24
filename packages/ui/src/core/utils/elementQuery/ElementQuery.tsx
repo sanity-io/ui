@@ -9,10 +9,29 @@ import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 export const DEFAULT_ELEMENT_QUERY_ELEMENT = 'div'
 
 /**
- * DO NOT USE IN PRODUCTION.
+ * Own props for the {@link ElementQuery} component.
+ *
+ * @remarks
+ * Defines the configuration for a container-query-style component that
+ * applies `data-eq-min` and `data-eq-max` attributes based on the
+ * element's measured width and a set of breakpoint thresholds.
+ *
  * @beta
  */
 export type ElementQueryOwnProps = {
+  /**
+   * Custom breakpoint thresholds (in pixels) used to compute the
+   * `data-eq-min` and `data-eq-max` attributes on the rendered element.
+   *
+   * @remarks
+   * Each value represents a pixel width boundary. As the element resizes,
+   * the component determines which breakpoints the current width exceeds
+   * (`min`) or falls below (`max`) and sets corresponding data attributes
+   * that can be targeted with CSS attribute selectors.
+   *
+   * When omitted, the default breakpoints from the design system's
+   * `BREAKPOINTS` constant are used.
+   */
   media?: number[]
 }
 
@@ -31,7 +50,18 @@ export type ElementQueryProps<E extends ElementQueryElementType = ElementQueryEl
 const DEFAULT_BREAKPOINTS = Object.values(BREAKPOINTS)
 
 /**
- * DO NOT USE IN PRODUCTION.
+ * A container-query component that measures its own width and applies
+ * responsive `data-eq-min` and `data-eq-max` attributes to the rendered element.
+ *
+ * @remarks
+ * The `ElementQuery` component observes the border-box width of its rendered
+ * element via {@link useElementSize} and compares it against a set of
+ * breakpoint thresholds (either the default design-system breakpoints or a
+ * custom list provided via the `media` prop). It then sets `data-eq-min` and
+ * `data-eq-max` attributes whose values are space-separated breakpoint
+ * indices, enabling CSS-based responsive styling scoped to the element's own
+ * width rather than the viewport.
+ *
  * @beta
  */
 export function ElementQuery<

@@ -16,14 +16,6 @@ export const DEFAULT_TAB_PANEL_ELEMENT = 'div'
  * required accessibility props for associating the panel with its corresponding
  * {@link Tab} element.
  *
- * Inherited from {@link BoxOwnProps}:
- * - All layout props: `display`, `flex`, `flexDirection`, `alignItems`, `justifyContent`, etc.
- * - All spacing props: `margin`, `marginX`, `marginY`, `padding`, `paddingX`, `paddingY` (and per-side variants).
- * - All sizing props: `width`, `height`, `minWidth`, `minHeight`, `maxWidth`.
- * - All position props: `position`, `inset`, and per-side inset variants.
- * - All visual props: `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
- * - Other: `textAlign`, `pointerEvents`, `sizing`.
- *
  * @public
  */
 export type TabPanelOwnProps = BoxOwnProps & {
@@ -34,9 +26,6 @@ export type TabPanelOwnProps = BoxOwnProps & {
    * Sets the `aria-labelledby` attribute on the rendered element, establishing
    * an accessible label relationship between the tab panel and its controlling
    * tab. This value must match the `id` prop of the corresponding `Tab`.
-   *
-   * @type {string}
-   * @required
    */
   'aria-labelledby': string
 
@@ -47,11 +36,8 @@ export type TabPanelOwnProps = BoxOwnProps & {
    * Applied as the `id` attribute on the rendered element. This value must
    * match the `aria-controls` prop of the corresponding {@link Tab} component
    * to establish the accessibility relationship.
-   *
-   * @type {string}
-   * @required
    */
-  'id': string
+  id: string
 }
 
 /**
@@ -59,8 +45,6 @@ export type TabPanelOwnProps = BoxOwnProps & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `TabPanel`.
- *
- * Accepted values: `"div"` | `"span"` | `ComponentType`
  *
  * @public
  */
@@ -94,15 +78,6 @@ export type TabPanelProps<E extends TabPanelElementType = TabPanelElementType> =
  * `id` / `aria-controls` and `aria-labelledby` / `id` attributes.
  *
  * The panel inherits all layout and visual style props from {@link BoxOwnProps}.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `TabPanelElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `aria-labelledby` | `string` | — | Yes | The `id` of the corresponding `Tab` that labels this panel. |
- * | `id` | `string` | — | Yes | A unique identifier for the panel. Must match the `aria-controls` of the corresponding `Tab`. |
- * | `tabIndex` | `number` | `0` | No | The tab index of the panel element. |
  *
  * @public
  */

@@ -73,21 +73,6 @@ export type GridProps<E extends GridElementType = GridElementType> = Props<GridO
  * Child items can be placed using `gridColumn`, `gridRow`, and their
  * start/end variants.
  *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `GridElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `display` | — | `"grid"` | — | Always set to `"grid"` (cannot be overridden). |
- * | `gap` | `ResponsiveProp<Space>` | `undefined` | No | Sets the gap between grid items on both axes. |
- * | `gapX` | `ResponsiveProp<Space>` | `undefined` | No | Sets the horizontal gap between grid items. |
- * | `gapY` | `ResponsiveProp<Space>` | `undefined` | No | Sets the vertical gap between grid items. |
- * | `gridTemplateColumns` | `ResponsiveProp<GridTemplateColumns>` | `undefined` | No | Defines the number of equal-width columns (`1`–`12`). |
- * | `gridTemplateRows` | `ResponsiveProp<GridTemplateRows>` | `undefined` | No | Defines the number of equal-height rows (`1`–`12`). |
- * | `gridAutoColumns` | `ResponsiveProp<GridAutoColumns>` | `undefined` | No | Sets the size of implicitly created columns. |
- * | `gridAutoRows` | `ResponsiveProp<GridAutoRows>` | `undefined` | No | Sets the size of implicitly created rows. |
- * | `gridAutoFlow` | `ResponsiveProp<GridAutoFlow>` | `undefined` | No | Controls the auto-placement algorithm. |
- *
  * @public
  */
 export function Grid<E extends GridElementType = typeof DEFAULT_GRID_ELEMENT>(

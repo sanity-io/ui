@@ -260,7 +260,7 @@ export const tones: Record<ElementTone, string> = {
             },
           },
 
-          'selectors': {
+          selectors: {
             // default - enabled
             [`&.${modes.default}:not([data-disabled])`]: {
               vars: stateVars.default.enabled,

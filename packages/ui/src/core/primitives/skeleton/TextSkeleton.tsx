@@ -9,6 +9,17 @@ export const DEFAULT_TEXT_SKELETON_ELEMENT = 'div'
 
 /** @beta */
 export type TextSkeletonOwnProps = SkeletonOwnProps & {
+  /**
+   * Sets the font size of the skeleton placeholder, matching the text font
+   * size scale defined by the theme.
+   *
+   * @remarks
+   * Supports responsive values. The skeleton's height and line-height are
+   * derived from this value so that the placeholder matches the dimensions
+   * of the {@link Text} component it stands in for.
+   *
+   * @defaultValue 2
+   */
   size?: ResponsiveProp<FontTextSize>
 }
 
@@ -25,7 +36,14 @@ export type TextSkeletonProps<E extends TextSkeletonElementType = TextSkeletonEl
 >
 
 /**
- * This API might change. DO NOT USE IN PRODUCTION.
+ * A skeleton placeholder that matches the dimensions of a {@link Text} component.
+ *
+ * @remarks
+ * The `TextSkeleton` component renders a {@link Skeleton} element styled to
+ * approximate the height and line-height of the text typography scale at the
+ * given `size`. Use it as a loading placeholder wherever a `Text` element
+ * will eventually appear.
+ *
  * @beta
  */
 export function TextSkeleton<

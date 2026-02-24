@@ -29,15 +29,15 @@ export const input: string = _style(layers.primitives, {
 })
 
 export const presentation: string = _style(layers.primitives, {
-  'display': 'block',
-  'position': 'relative',
-  'width': vars.input.radio.size,
-  'height': vars.input.radio.size,
-  'borderRadius': '9999px',
-  'backgroundColor': vars.color.input.radio.bg,
-  'boxShadow': `inset 0 0 0 ${vars.input.border.width} ${vars.color.input.radio.border}`,
+  display: 'block',
+  position: 'relative',
+  width: vars.input.radio.size,
+  height: vars.input.radio.size,
+  borderRadius: '9999px',
+  backgroundColor: vars.color.input.radio.bg,
+  boxShadow: `inset 0 0 0 ${vars.input.border.width} ${vars.color.input.radio.border}`,
 
-  'vars': {
+  vars: {
     [vars.color.input.radio.fg]: vars.color.tinted.default.fg[0],
     [vars.color.input.radio.bg]: vars.color.tinted.default.bg[0],
     [vars.color.input.radio.border]: vars.color.tinted.default.border[1],
@@ -55,7 +55,7 @@ export const presentation: string = _style(layers.primitives, {
     opacity: 0,
   },
 
-  'selectors': {
+  selectors: {
     // hovered
     [`${input}:not(:disabled):hover + &`]: {
       vars: {

@@ -24,9 +24,6 @@ export const DEFAULT_MENU_ELEMENT = 'div'
  * @remarks
  * Extends {@link PaddingStyleProps} to provide inner spacing control for the menu container.
  *
- * Inherited from {@link PaddingStyleProps}:
- * - `padding`, `paddingX`, `paddingY`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft`
- *
  * @public
  */
 export type MenuOwnProps = PaddingStyleProps & {
@@ -37,13 +34,9 @@ export type MenuOwnProps = PaddingStyleProps & {
    * Uses the spacing scale defined by the theme. Supports responsive values.
    * The gap is applied to an internal {@link Stack} component that wraps the menu's children.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
    * @defaultValue 1
-   * @optional
    */
-  'gap'?: ResponsiveProp<Space>
+  gap?: ResponsiveProp<Space>
 
   /**
    * Callback fired when the user clicks outside the menu while it is the top layer.
@@ -51,12 +44,8 @@ export type MenuOwnProps = PaddingStyleProps & {
    * @remarks
    * Only fires when the menu is the topmost layer in the layer stack.
    * Typically used to close the menu when focus leaves the menu area.
-   *
-   * @type {(event: MouseEvent) => void}
-   * @defaultValue undefined
-   * @optional
    */
-  'onClickOutside'?: (event: MouseEvent) => void
+  onClickOutside?: (event: MouseEvent) => void
 
   /**
    * Callback fired when the user presses the `Escape` key while the menu is the top layer.
@@ -65,12 +54,8 @@ export type MenuOwnProps = PaddingStyleProps & {
    * Only fires when the menu is the topmost layer in the layer stack.
    * Typically used to close the menu and optionally restore focus to the
    * element that opened it.
-   *
-   * @type {() => void}
-   * @defaultValue undefined
-   * @optional
    */
-  'onEscape'?: () => void
+  onEscape?: () => void
 
   /**
    * Callback fired when any {@link MenuItem} within the menu is clicked.
@@ -78,12 +63,8 @@ export type MenuOwnProps = PaddingStyleProps & {
    * @remarks
    * Receives the mouse event from the clicked menu item. This is a
    * centralized handler that fires for all items in the menu.
-   *
-   * @type {(event: React.MouseEvent\<HTMLButtonElement\>) => void}
-   * @defaultValue undefined
-   * @optional
    */
-  'onItemClick'?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  onItemClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 
   /**
    * Callback fired when the active (highlighted) menu item index changes.
@@ -91,12 +72,8 @@ export type MenuOwnProps = PaddingStyleProps & {
    * @remarks
    * Receives the zero-based index of the currently active menu item.
    * Useful for tracking which item is highlighted for keyboard navigation.
-   *
-   * @type {(index: number) => void}
-   * @defaultValue undefined
-   * @optional
    */
-  'onItemSelect'?: (index: number) => void
+  onItemSelect?: (index: number) => void
 
   /**
    * A reference to the element that triggered the menu to open.
@@ -104,12 +81,8 @@ export type MenuOwnProps = PaddingStyleProps & {
    * @remarks
    * Used to manage focus restoration when the menu is closed. When provided,
    * the menu controller uses this element as the "origin" for focus management.
-   *
-   * @type {HTMLElement | null}
-   * @defaultValue undefined
-   * @optional
    */
-  'originElement'?: HTMLElement | null
+  originElement?: HTMLElement | null
 
   /**
    * A callback to register the menu's root DOM element with a parent menu context.
@@ -118,27 +91,15 @@ export type MenuOwnProps = PaddingStyleProps & {
    * Used internally by nested menus (e.g. {@link MenuGroup}) to register their
    * root elements with the parent menu for click-outside detection and focus management.
    * Returns a cleanup function that unregisters the element.
-   *
-   * @type {(el: HTMLElement) => () => void}
-   * @defaultValue undefined
-   * @optional
    */
-  'registerElement'?: (el: HTMLElement) => () => void
+  registerElement?: (el: HTMLElement) => () => void
 
   /**
    * Controls which menu item receives focus when the menu mounts or updates.
    *
-   * @remarks
-   * Accepted values:
-   * - `"first"` – Focus the first menu item.
-   * - `"last"` – Focus the last menu item.
-   * - `null` – Do not programmatically move focus.
-   *
-   * @type {'first' | 'last' | null}
    * @defaultValue null
-   * @optional
    */
-  'shouldFocus'?: 'first' | 'last' | null
+  shouldFocus?: 'first' | 'last' | null
 
   /**
    * The `id` of the element that labels the menu.
@@ -147,10 +108,6 @@ export type MenuOwnProps = PaddingStyleProps & {
    * Sets the `aria-labelledby` attribute on the menu's root element,
    * establishing an accessible label relationship. Typically references
    * the `id` of the button that opens the menu.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   'aria-labelledby'?: string
 }
@@ -160,8 +117,6 @@ export type MenuOwnProps = PaddingStyleProps & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Menu`.
- *
- * Accepted values: `"div"` | `"span"` | `ComponentType`
  *
  * @public
  */
@@ -196,15 +151,6 @@ export type MenuProps<E extends MenuElementType = MenuElementType> = Props<MenuO
  * The menu integrates with the {@link Layer} system to detect whether it is the
  * topmost layer, ensuring that `onClickOutside` and `onEscape` only fire when
  * the menu has focus priority.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"div"` |
- * | `gap` | `1` |
- * | `padding` | `1` |
- * | `shouldFocus` | `null` |
  *
  * @public
  */

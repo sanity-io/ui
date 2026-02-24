@@ -10,7 +10,7 @@ export const options: ResponsiveRuleOptions<JustifyContent> = {
   'flex-end': _responsiveStyle(layers.props, {
     justifyContent: 'flex-end',
   }),
-  'center': _responsiveStyle(layers.props, {
+  center: _responsiveStyle(layers.props, {
     justifyContent: 'center',
   }),
   'space-between': _responsiveStyle(layers.props, {

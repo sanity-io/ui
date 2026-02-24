@@ -67,9 +67,7 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
     /**
      * When `true`, renders a visible border around the input element.
      *
-     * @type {boolean}
      * @defaultValue true
-     * @optional
      */
     border?: boolean
 
@@ -82,10 +80,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * attribute is applied to the wrapper for styling purposes.
      *
      * Set to an empty string `""` or `undefined` to clear the validation error.
-     *
-     * @type {string}
-     * @defaultValue undefined
-     * @optional
      */
     customValidity?: string
 
@@ -99,9 +93,7 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * When not provided, a default case-insensitive substring match on
      * `option.value` is used.
      *
-     * @type {(query: string, option: O) => boolean}
      * @defaultValue (case-insensitive substring match on `option.value`)
-     * @optional
      */
     filterOption?: (query: string, option: O) => boolean
 
@@ -111,10 +103,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * @remarks
      * Accepts either a React component type (rendered as `<IconComponent />`) or
      * a React element (rendered as-is).
-     *
-     * @type {ElementType | ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     icon?: ElementType | ReactNode
 
@@ -124,19 +112,13 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      *
      * @beta Do not use in production.
      *
-     * @type {BoxOwnProps}
      * @defaultValue `{}`
-     * @optional
      */
     listBox?: BoxOwnProps
 
     /**
      * When `true`, displays a loading spinner inside the input to indicate
      * that options are being fetched asynchronously.
-     *
-     * @type {boolean}
-     * @defaultValue undefined
-     * @optional
      */
     loading?: boolean
 
@@ -148,10 +130,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * Receives the `value` string of the selected option. This differs from
      * `onSelect`, which fires when an option is highlighted/selected in the
      * listbox but not yet committed.
-     *
-     * @type {(value: string) => void}
-     * @defaultValue undefined
-     * @optional
      */
     onChange?: (value: string) => void
 
@@ -161,10 +139,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * @remarks
      * Receives the current query string, or `null` when the query is cleared
      * (e.g. when a value is selected or the input is reset).
-     *
-     * @type {(query: string | null) => void}
-     * @defaultValue undefined
-     * @optional
      */
     onQueryChange?: (query: string | null) => void
 
@@ -174,10 +148,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * @remarks
      * Receives the `value` string of the selected option. This fires when a
      * user clicks an option or navigates to it and presses Enter.
-     *
-     * @type {(value: string) => void}
-     * @defaultValue undefined
-     * @optional
      */
     onSelect?: (value: string) => void
 
@@ -192,10 +162,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * no open button is rendered.
      *
      * @beta Do not use in production.
-     *
-     * @type {boolean | AutocompleteOpenButtonProps}
-     * @defaultValue undefined
-     * @optional
      */
     openButton?: boolean | AutocompleteOpenButtonProps
 
@@ -203,10 +169,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * When `true`, opens the autocomplete dropdown when the input receives focus.
      *
      * @beta Do not use in production.
-     *
-     * @type {boolean}
-     * @defaultValue undefined
-     * @optional
      */
     openOnFocus?: boolean
 
@@ -218,10 +180,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * {@link BaseAutocompleteOption} (requiring at minimum a `value: string`
      * property). Options are filtered by the `filterOption` function when
      * a query is present.
-     *
-     * @type {O[]}
-     * @defaultValue undefined
-     * @optional
      */
     options?: O[]
 
@@ -231,11 +189,7 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * @remarks
      * Uses the spacing scale defined by the theme. Supports responsive values.
      *
-     * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-     *
-     * @type {ResponsiveProp\<Space\>}
      * @defaultValue 3
-     * @optional
      */
     padding?: ResponsiveProp<Space>
 
@@ -247,19 +201,13 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * Accepts all {@link PopoverProps} except `content`, `onMouseEnter`,
      * `onMouseLeave`, and `open`, which are managed internally.
      *
-     * @type {Omit\<PopoverProps\<'div'\>, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'\>}
      * @defaultValue `{}`
-     * @optional
      */
     popover?: Omit<PopoverProps<'div'>, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
 
     /**
      * Content rendered before (to the left of) the input element, outside
      * the input's border.
-     *
-     * @type {ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     prefix?: ReactNode
 
@@ -270,11 +218,7 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * Uses the radius scale defined by the theme. Accepts a single value or
      * an array of values for responsive behavior.
      *
-     * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6`
-     *
-     * @type {Radius | Radius[]}
      * @defaultValue 2
-     * @optional
      */
     radius?: Radius | Radius[]
 
@@ -288,10 +232,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * panel rendered alongside the autocomplete).
      *
      * @beta Do not use in production.
-     *
-     * @type {HTMLElement[]}
-     * @defaultValue undefined
-     * @optional
      */
     relatedElements?: HTMLElement[]
 
@@ -303,9 +243,7 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * the option's visual content. When not provided, each option is rendered
      * with its `value` string displayed in a default styled layout.
      *
-     * @type {(option: O) => React.JSX.Element}
      * @defaultValue (renders `option.value` as text)
-     * @optional
      */
     renderOption?: (option: O) => React.JSX.Element
 
@@ -320,10 +258,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * popover container.
      *
      * @beta Do not use in production.
-     *
-     * @type {(props: \{ content: React.JSX.Element | null, hidden: boolean, inputElement: HTMLInputElement | null, onMouseEnter: () => void, onMouseLeave: () => void \}, ref: ForwardedRef\<HTMLDivElement\>) => ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     renderPopover?: (
       props: {
@@ -346,19 +280,13 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * option object. When not provided, the option's `value` property is
      * displayed as-is.
      *
-     * @type {(value: string, option?: O) => string}
      * @defaultValue (returns `option.value` or the raw value string)
-     * @optional
      */
     renderValue?: (value: string, option?: O) => string
 
     /**
      * Content rendered after (to the right of) the input element, outside
      * the input's border.
-     *
-     * @type {ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     suffix?: ReactNode
 
@@ -369,10 +297,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
      * When provided, the autocomplete operates in controlled mode. The value
      * corresponds to the `value` property of the selected option. The display
      * text is determined by the `renderValue` function.
-     *
-     * @type {string}
-     * @defaultValue undefined
-     * @optional
      */
     value?: string
   }
@@ -382,8 +306,6 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Autocomplete`.
- *
- * Accepted values: `"input"` | `ComponentType`
  *
  * @public
  */
@@ -428,24 +350,6 @@ const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
  * function whenever the query changes. The dropdown is rendered in a popover
  * that can be customized via the `popover` prop or fully replaced via
  * `renderPopover`.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `AutocompleteElementType` | `"input"` | No | The HTML element or component type to render. |
- * | `border` | `boolean` | `true` | No | Renders a visible border around the input. |
- * | `fontSize` | `ResponsiveProp<FontTextSize>` | `2` | No | Font size of the input text. Accepted values: `0 \| 1 \| 2 \| 3 \| 4`. |
- * | `padding` | `ResponsiveProp<Space>` | `3` | No | Inner padding. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- * | `radius` | `Radius \| Radius[]` | `2` | No | Border radius. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6`. |
- * | `filterOption` | `(query, option) => boolean` | (case-insensitive substring match) | No | Filters options based on the current query. |
- * | `renderValue` | `(value, option?) => string` | (returns `option.value`) | No | Converts a selected value to display text. |
- * | `options` | `O[]` | `undefined` | No | The list of options to display. |
- * | `value` | `string` | `undefined` | No | The currently selected value (controlled). |
- * | `loading` | `boolean` | `undefined` | No | Shows a loading spinner in the input. |
- * | `onChange` | `(value: string) => void` | `undefined` | No | Fires when an option is committed as the value. |
- * | `onQueryChange` | `(query: string \| null) => void` | `undefined` | No | Fires when the text query changes. |
- * | `onSelect` | `(value: string) => void` | `undefined` | No | Fires when an option is selected in the listbox. |
  *
  * @typeParam E - The HTML element or component type to render.
  * @typeParam O - The shape of each option object.
@@ -795,7 +699,7 @@ export function Autocomplete<
     if (!loading && !disabled && value) {
       return {
         'aria-label': 'Clear',
-        'onFocus': handleClearButtonFocus,
+        onFocus: handleClearButtonFocus,
       }
     }
 

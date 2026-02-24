@@ -25,15 +25,6 @@ export interface FlexWrapStyleProps {
    *
    * @remarks
    * Maps to the CSS `flex-wrap` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"wrap"` – Allows items to wrap onto multiple lines from top to bottom.
-   * - `"wrap-reverse"` – Allows items to wrap onto multiple lines from bottom to top.
-   * - `"nowrap"` – Forces all items onto a single line.
-   *
-   * @type {ResponsiveProp\<FlexWrap\>}
-   * @defaultValue undefined
-   * @optional
    */
   flexWrap?: ResponsiveProp<FlexWrap>
 }

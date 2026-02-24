@@ -34,11 +34,6 @@ export const DEFAULT_BREADCRUMBS_ELEMENT = 'nav'
  * and adds breadcrumbs-specific properties for overflow collapsing, custom
  * separators, and expand-button configuration.
  *
- * Inherited from {@link GapStyleProps}:
- * - `gap` (`ResponsiveProp<Space>`) – Sets the gap between items in both directions. Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`. Default: `2`.
- * - `gapX` (`ResponsiveProp<Space>`) – Sets the horizontal gap. Default: inherits from `gap`.
- * - `gapY` (`ResponsiveProp<Space>`) – Sets the vertical gap. Default: inherits from `gap`.
- *
  * @beta
  */
 export type BreadcrumbsOwnProps = GapStyleProps & {
@@ -51,10 +46,6 @@ export type BreadcrumbsOwnProps = GapStyleProps & {
    * `onClick`, and `selected`, which are managed internally. Use this to
    * customize the visual appearance of the expand trigger (e.g. `mode`,
    * `tone`, `fontSize`).
-   *
-   * @type {Omit\<ButtonProps\<'button'\>, 'as' | 'onClick' | 'selected'\>}
-   * @defaultValue undefined
-   * @optional
    */
   expandButton?: Omit<ButtonProps<'button'>, 'as' | 'onClick' | 'selected'>
 
@@ -71,10 +62,6 @@ export type BreadcrumbsOwnProps = GapStyleProps & {
    *
    * When `undefined` or not provided, all items are displayed without
    * collapsing.
-   *
-   * @type {number}
-   * @defaultValue undefined
-   * @optional
    */
   maxLength?: number
 
@@ -86,9 +73,7 @@ export type BreadcrumbsOwnProps = GapStyleProps & {
    * breadcrumb items. When `undefined`, a muted `/` character is rendered
    * as the default separator.
    *
-   * @type {ReactNode}
    * @defaultValue (a muted `/` text element)
-   * @optional
    */
   separator?: ReactNode
 }
@@ -98,8 +83,6 @@ export type BreadcrumbsOwnProps = GapStyleProps & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Breadcrumbs`.
- *
- * Accepted values: `"div"` | `"nav"` | `ComponentType`
  *
  * @beta
  */
@@ -139,18 +122,6 @@ export type BreadcrumbsProps<E extends BreadcrumbsElementType = BreadcrumbsEleme
  * Each child element is wrapped in a `<li>` element for semantic correctness.
  * The separators are marked with `aria-hidden` to prevent them from being
  * announced by screen readers.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `BreadcrumbsElementType` | `"nav"` | No | The HTML element or component type to render. |
- * | `gap` | `ResponsiveProp<Space>` | `2` | No | Gap between breadcrumb items (including separators). Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- * | `gapX` | `ResponsiveProp<Space>` | (inherits `gap`) | No | Horizontal gap between items. |
- * | `gapY` | `ResponsiveProp<Space>` | (inherits `gap`) | No | Vertical gap between items. |
- * | `maxLength` | `number` | `undefined` | No | Maximum visible items before middle items are collapsed. |
- * | `separator` | `ReactNode` | (muted `/` text) | No | Custom separator rendered between each item. |
- * | `expandButton` | `Omit<ButtonProps, ...>` | `undefined` | No | Props forwarded to the expand trigger button. |
  *
  * @beta
  */

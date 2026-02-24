@@ -24,14 +24,6 @@ export interface MinHeightStyleProps {
    *
    * @remarks
    * Maps to the CSS `min-height` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `0` – Sets the minimum height to `0`.
-   * - `"full"` – Sets the minimum height to `100%` of the parent container.
-   *
-   * @type {ResponsiveProp\<MinHeight\>}
-   * @defaultValue undefined
-   * @optional
    */
   minHeight?: ResponsiveProp<MinHeight>
 }

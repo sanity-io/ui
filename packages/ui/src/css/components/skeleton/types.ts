@@ -12,20 +12,11 @@ import type {ResponsiveProp} from '../../types'
  * Extends {@link FlexStyleProps}, {@link MarginStyleProps}, and {@link RadiusStyleProps}
  * to provide layout and visual control for skeleton placeholder elements.
  *
- * Inherited style props:
- * - `flex` (`ResponsiveProp<Flex>`) – Controls the flex grow/shrink behavior within a flex container. Accepted values: `"none"` | `"auto"` | `"initial"` | `1`–`12`.
- * - `margin`, `marginX`, `marginY`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft` – Outer margin using the theme spacing scale (`0`–`9` | `"auto"`).
- * - `radius` (`ResponsiveProp<Radius | 'full'>`) – Border radius using the theme radius scale (`0 | 1 | 2 | 3 | 4 | 5 | 6 | "full"`).
- *
  * @beta
  */
 export interface SkeletonStyleProps extends FlexStyleProps, MarginStyleProps, RadiusStyleProps {
   /**
    * A custom CSS class name to append to the element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   className?: string
 }
@@ -42,10 +33,6 @@ export interface SkeletonStyleProps extends FlexStyleProps, MarginStyleProps, Ra
 export interface CodeSkeletonStyleProps {
   /**
    * A custom CSS class name to append to the element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   className?: string
 
@@ -55,12 +42,6 @@ export interface CodeSkeletonStyleProps {
    * @remarks
    * Determines the height and line-height of the skeleton to match the
    * corresponding {@link Code} component at the same size. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontCodeSize\>}
-   * @defaultValue undefined
-   * @optional
    */
   size?: ResponsiveProp<FontCodeSize>
 }
@@ -77,10 +58,6 @@ export interface CodeSkeletonStyleProps {
 export interface HeadingSkeletonStyleProps {
   /**
    * A custom CSS class name to append to the element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   className?: string
 
@@ -90,12 +67,6 @@ export interface HeadingSkeletonStyleProps {
    * @remarks
    * Determines the height and line-height of the skeleton to match the
    * corresponding {@link Heading} component at the same size. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5`
-   *
-   * @type {ResponsiveProp\<FontHeadingSize\>}
-   * @defaultValue undefined
-   * @optional
    */
   size?: ResponsiveProp<FontHeadingSize>
 }
@@ -112,10 +83,6 @@ export interface HeadingSkeletonStyleProps {
 export interface LabelSkeletonStyleProps {
   /**
    * A custom CSS class name to append to the element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   className?: string
 
@@ -125,12 +92,6 @@ export interface LabelSkeletonStyleProps {
    * @remarks
    * Determines the height and line-height of the skeleton to match the
    * corresponding {@link Label} component at the same size. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5`
-   *
-   * @type {ResponsiveProp\<FontLabelSize\>}
-   * @defaultValue undefined
-   * @optional
    */
   size?: ResponsiveProp<FontLabelSize>
 }
@@ -147,10 +108,6 @@ export interface LabelSkeletonStyleProps {
 export interface TextSkeletonStyleProps {
   /**
    * A custom CSS class name to append to the element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   className?: string
 
@@ -160,12 +117,6 @@ export interface TextSkeletonStyleProps {
    * @remarks
    * Determines the height and line-height of the skeleton to match the
    * corresponding {@link Text} component at the same size. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontTextSize\>}
-   * @defaultValue undefined
-   * @optional
    */
   size?: ResponsiveProp<FontTextSize>
 }

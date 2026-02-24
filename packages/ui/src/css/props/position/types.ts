@@ -28,17 +28,6 @@ export interface PositionStyleProps {
    *
    * @remarks
    * Maps to the CSS `position` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"absolute"` – Positions the element relative to its closest positioned ancestor.
-   * - `"fixed"` – Positions the element relative to the viewport.
-   * - `"relative"` – Positions the element relative to its normal position.
-   * - `"static"` – Uses the default document flow positioning.
-   * - `"sticky"` – Toggles between `relative` and `fixed` based on scroll position.
-   *
-   * @type {ResponsiveProp\<Position\>}
-   * @defaultValue undefined
-   * @optional
    */
   position?: ResponsiveProp<Position>
 }

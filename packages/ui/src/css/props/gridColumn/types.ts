@@ -25,15 +25,6 @@ export interface GridColumnStyleProps {
    *
    * @remarks
    * Maps to the CSS `grid-column` shorthand property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"auto"` – The item is placed automatically by the grid layout algorithm.
-   * - `"full"` – The item spans all columns in the grid.
-   * - `1`–`12` – The item spans the specified number of columns.
-   *
-   * @type {ResponsiveProp\<GridColumn\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridColumn?: ResponsiveProp<GridColumn>
 }

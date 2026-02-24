@@ -27,16 +27,6 @@ export interface GridAutoFlowStyleProps {
    *
    * @remarks
    * Maps to the CSS `grid-auto-flow` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"row"` – Items are placed by filling each row in turn, adding new rows as necessary.
-   * - `"column"` – Items are placed by filling each column in turn, adding new columns as necessary.
-   * - `"row dense"` – Items fill each row using a dense packing algorithm that fills holes earlier in the grid.
-   * - `"column dense"` – Items fill each column using a dense packing algorithm that fills holes earlier in the grid.
-   *
-   * @type {ResponsiveProp\<GridAutoFlow\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridAutoFlow?: ResponsiveProp<GridAutoFlow>
 }

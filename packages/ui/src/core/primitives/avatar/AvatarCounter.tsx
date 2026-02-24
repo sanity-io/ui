@@ -31,9 +31,6 @@ export interface AvatarCounterOwnProps {
    * Typically represents the count of additional avatars that are not
    * individually visible within an {@link AvatarStack} due to the `maxLength`
    * constraint.
-   *
-   * @type {number}
-   * @required
    */
   count: number
 
@@ -45,16 +42,12 @@ export interface AvatarCounterOwnProps {
    * Should match the `size` of the sibling {@link Avatar} components for
    * consistent visual alignment within an {@link AvatarStack}.
    *
-   * Accepted values: `0 | 1 | 2 | 3`
-   *
    * - `0` – Extra-small size.
    * - `1` – Small size (default).
    * - `2` – Medium size.
    * - `3` – Large size.
    *
-   * @type {ResponsiveProp\<AvatarSize\>}
    * @defaultValue 1
-   * @optional
    */
   size?: ResponsiveProp<AvatarSize>
 }
@@ -64,8 +57,6 @@ export interface AvatarCounterOwnProps {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `AvatarCounter`.
- *
- * Accepted values: `"button"` | `"div"` | `"span"` | `ComponentType`
  *
  * @public
  */
@@ -94,13 +85,6 @@ export type AvatarCounterProps<E extends AvatarCounterElementType = AvatarCounte
  * The `AvatarCounter` component is typically used internally by {@link AvatarStack}
  * to show a `+N` style indicator when the number of avatars exceeds the
  * `maxLength` threshold. It can also be used standalone.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"span"` |
- * | `size` | `1` |
  *
  * @public
  */

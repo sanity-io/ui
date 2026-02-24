@@ -28,26 +28,11 @@ export interface LabelStyleProps
    *
    * @remarks
    * Maps to the CSS `text-align` property.
-   *
-   * Accepted values:
-   * - `"left"` – Aligns text to the left edge of the element.
-   * - `"right"` – Aligns text to the right edge of the element.
-   * - `"center"` – Centers text horizontally within the element.
-   * - `"justify"` – Stretches lines so each line has equal width.
-   * - `"initial"` – Resets the text alignment to the default value.
-   *
-   * @type {TextAlignStyleProps['textAlign']}
-   * @defaultValue undefined
-   * @optional
    */
   align?: TextAlignStyleProps['textAlign']
 
   /**
    * A custom CSS class name to append to the element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   className?: string
 
@@ -55,9 +40,7 @@ export interface LabelStyleProps
    * When `true`, reduces the visual prominence of the label by applying a
    * muted foreground color from the theme.
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   muted?: boolean
 
@@ -68,11 +51,7 @@ export interface LabelStyleProps
    * Supports responsive values. The label font size scale is independent from
    * the text and heading font size scales.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5`
-   *
-   * @type {ResponsiveProp\<FontLabelSize\>}
    * @defaultValue 1
-   * @optional
    */
   size?: ResponsiveProp<FontLabelSize>
 }

@@ -22,14 +22,6 @@ export interface PointerEventsStyleProps {
    *
    * @remarks
    * Maps to the CSS `pointer-events` property.
-   *
-   * Accepted values:
-   * - `"auto"` – The element responds to pointer events as normal.
-   * - `"none"` – The element ignores pointer events; events pass through to elements beneath it.
-   *
-   * @type {PointerEvents}
-   * @defaultValue undefined
-   * @optional
    */
   pointerEvents?: PointerEvents
 }

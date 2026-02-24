@@ -41,9 +41,7 @@ export type MenuButtonProps = {
    *
    * @beta Do not use in production.
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   __unstable_disableRestoreFocusOnClose?: boolean
 
@@ -55,9 +53,6 @@ export type MenuButtonProps = {
    * The `MenuButton` clones this element and injects additional props including
    * `id`, `onClick`, `onKeyDown`, `onMouseDown`, `aria-haspopup`, `aria-expanded`,
    * `selected`, and a `ref` callback.
-   *
-   * @type {ReactElement\<ButtonProps\>}
-   * @required
    */
   button: ReactElement<ButtonProps>
 
@@ -67,9 +62,6 @@ export type MenuButtonProps = {
    * @remarks
    * Applied as the `id` attribute on the trigger button element and used
    * as the `aria-labelledby` value on the menu for accessibility.
-   *
-   * @type {string}
-   * @required
    */
   id: string
 
@@ -80,10 +72,6 @@ export type MenuButtonProps = {
    * Must be a single React element (typically a {@link Menu} component).
    * The `MenuButton` clones this element and injects props for managing
    * click-outside, escape, item click, focus, and element registration.
-   *
-   * @type {ReactElement}
-   * @defaultValue undefined
-   * @optional
    */
   menu?: ReactElement
 
@@ -93,10 +81,6 @@ export type MenuButtonProps = {
    * @remarks
    * Invoked after the menu transitions from open to closed state. Useful
    * for performing side effects such as analytics or state cleanup.
-   *
-   * @type {() => void}
-   * @defaultValue undefined
-   * @optional
    */
   onClose?: () => void
 
@@ -106,10 +90,6 @@ export type MenuButtonProps = {
    * @remarks
    * Invoked after the menu transitions from closed to open state. Useful
    * for performing side effects such as analytics or data fetching.
-   *
-   * @type {() => void}
-   * @defaultValue undefined
-   * @optional
    */
   onOpen?: () => void
 
@@ -123,9 +103,7 @@ export type MenuButtonProps = {
    * portal behavior, boundary elements, overflow handling, and other
    * positioning options.
    *
-   * @type {Omit\<PopoverProps\<'div'\>, 'content' | 'open'\>}
    * @defaultValue `{ overflow: 'auto' }`
-   * @optional
    */
   popover?: Omit<PopoverProps<'div'>, 'content' | 'open'>
 
@@ -135,10 +113,6 @@ export type MenuButtonProps = {
    * @remarks
    * Provides access to the `HTMLButtonElement` rendered by the trigger
    * button. The ref is updated when the button element mounts or changes.
-   *
-   * @type {ForwardedRef\<HTMLButtonElement | null\>}
-   * @defaultValue undefined
-   * @optional
    */
   ref?: ForwardedRef<HTMLButtonElement | null>
 }
@@ -163,13 +137,6 @@ export type MenuButtonProps = {
  * - **ArrowUp** on the button – Opens the menu and focuses the last item.
  * - **Escape** while the menu is open – Closes the menu and restores focus to the button.
  * - Clicking a menu item – Closes the menu and restores focus to the button.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `__unstable_disableRestoreFocusOnClose` | `false` |
- * | `popover` | `{ overflow: 'auto' }` |
  *
  * @public
  */
@@ -312,11 +279,11 @@ export function MenuButton(props: MenuButtonProps): React.JSX.Element {
 
   const menuProps: Props<MenuProps, 'div'> = {
     'aria-labelledby': id,
-    'onBlurCapture': handleBlur,
-    'onClickOutside': handleMenuClickOutside,
-    'onEscape': handleMenuEscape,
-    'onItemClick': handleItemClick,
-    'originElement': buttonElement,
+    onBlurCapture: handleBlur,
+    onClickOutside: handleMenuClickOutside,
+    onEscape: handleMenuEscape,
+    onItemClick: handleItemClick,
+    originElement: buttonElement,
     registerElement,
     shouldFocus,
   }
@@ -329,13 +296,13 @@ export function MenuButton(props: MenuButtonProps): React.JSX.Element {
     const buttonProps: ButtonProps<'button'> = {
       'data-ui': 'MenuButton',
       id,
-      'onClick': handleButtonClick,
-      'onKeyDown': handleButtonKeyDown,
-      'onMouseDown': handleMouseDown,
+      onClick: handleButtonClick,
+      onKeyDown: handleButtonKeyDown,
+      onMouseDown: handleMouseDown,
       'aria-haspopup': true,
       'aria-expanded': open,
-      'ref': setButtonElement,
-      'selected': buttonProp.props.selected ?? open,
+      ref: setButtonElement,
+      selected: buttonProp.props.selected ?? open,
     }
 
     return cloneElement(buttonProp, buttonProps)

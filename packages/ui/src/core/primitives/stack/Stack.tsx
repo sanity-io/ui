@@ -96,13 +96,6 @@ export type StackProps<E extends StackElementType = StackElementType> = Props<St
  * like `display`, `flexDirection`, `gridTemplateColumns`, etc. omitted because
  * they are managed internally).
  *
- * ### Props
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `StackElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `gap` | `ResponsiveProp<Space>` | `undefined` | No | Sets the vertical spacing between stacked items. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- *
  * @public
  */
 export function Stack<E extends StackElementType = typeof DEFAULT_STACK_ELEMENT>(

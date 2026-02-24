@@ -30,18 +30,6 @@ export interface WidthStyleProps {
    *
    * @remarks
    * Maps to the CSS `width` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `0`–`5` – Values from the theme's container width scale.
-   * - `"auto"` – The element sizes itself based on its content and context.
-   * - `"fill"` – The element fills the available width of its parent (`width: 100%`).
-   * - `"stretch"` – The element stretches to fill available space.
-   * - `"min"` – The element shrinks to fit its content (`width: min-content`).
-   * - `"max"` – The element expands to fit its content (`width: max-content`).
-   *
-   * @type {ResponsiveProp\<Width\>}
-   * @defaultValue undefined
-   * @optional
    */
   width?: ResponsiveProp<Width>
 }

@@ -8,8 +8,6 @@ import type {ResponsiveProp} from '../../types'
  * of explicit rows in the grid by specifying how many equal-height
  * rows to create.
  *
- * Accepted values: `1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12`
- *
  * @public
  */
 export type GridTemplateRows = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
@@ -27,12 +25,6 @@ export interface GridTemplateRowsStyleProps {
    * Maps to the CSS `grid-template-rows` property. The numeric value
    * specifies how many equal-height rows to create using `repeat(n, 1fr)`.
    * Supports responsive values.
-   *
-   * Accepted values: `1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12`
-   *
-   * @type {ResponsiveProp\<GridTemplateRows\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridTemplateRows?: ResponsiveProp<GridTemplateRows>
 }

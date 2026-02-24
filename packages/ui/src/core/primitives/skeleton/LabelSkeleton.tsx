@@ -9,6 +9,17 @@ export const DEFAULT_LABEL_SKELETON_ELEMENT = 'div'
 
 /** @beta */
 export type LabelSkeletonOwnProps = SkeletonOwnProps & {
+  /**
+   * Sets the font size of the skeleton placeholder, matching the label font
+   * size scale defined by the theme.
+   *
+   * @remarks
+   * Supports responsive values. The skeleton's height and line-height are
+   * derived from this value so that the placeholder matches the dimensions
+   * of the {@link Label} component it stands in for.
+   *
+   * @defaultValue 2
+   */
   size?: ResponsiveProp<FontLabelSize>
 }
 
@@ -23,7 +34,14 @@ export type LabelSkeletonProps<E extends LabelSkeletonElementType = LabelSkeleto
   Props<LabelSkeletonOwnProps, E>
 
 /**
- * This API might change. DO NOT USE IN PRODUCTION.
+ * A skeleton placeholder that matches the dimensions of a {@link Label} component.
+ *
+ * @remarks
+ * The `LabelSkeleton` component renders a {@link Skeleton} element styled to
+ * approximate the height and line-height of the label typography scale at the
+ * given `size`. Use it as a loading placeholder wherever a `Label` element
+ * will eventually appear.
+ *
  * @beta
  */
 export function LabelSkeleton<

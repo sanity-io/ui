@@ -27,16 +27,6 @@ export interface FlexStyleProps {
    *
    * @remarks
    * Maps to the CSS `flex` shorthand property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"none"` – The element will not grow or shrink (`0 0 auto`).
-   * - `"auto"` – The element sizes based on its content but can grow and shrink (`1 1 auto`).
-   * - `"initial"` – The element sizes based on its content, can shrink, but will not grow (`0 1 auto`).
-   * - `1`–`12` – Sets the flex grow factor to the given number.
-   *
-   * @type {ResponsiveProp\<Flex\>}
-   * @defaultValue undefined
-   * @optional
    */
   flex?: ResponsiveProp<Flex>
 }

@@ -23,10 +23,6 @@ export interface CodeStyleProps
     MaxWidthStyleProps {
   /**
    * A custom CSS class name to append to the element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   className?: string
 
@@ -36,11 +32,7 @@ export interface CodeStyleProps
    * @remarks
    * Maps to the theme's code font size scale. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontCodeSize\>}
    * @defaultValue 2
-   * @optional
    */
   size?: ResponsiveProp<FontCodeSize>
 }

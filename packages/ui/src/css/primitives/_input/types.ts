@@ -19,10 +19,6 @@ export interface InputStyleProps extends FlexStyleProps, RadiusStyleProps, Width
   /**
    * When `true`, renders a visible border around the input element.
    * When `false` or omitted, the input renders without a border.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   border?: boolean
 
@@ -31,12 +27,6 @@ export interface InputStyleProps extends FlexStyleProps, RadiusStyleProps, Width
    *
    * @remarks
    * Uses the text font size scale defined by the theme. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontTextSize\>}
-   * @defaultValue undefined
-   * @optional
    */
   fontSize?: ResponsiveProp<FontTextSize>
 
@@ -45,12 +35,6 @@ export interface InputStyleProps extends FlexStyleProps, RadiusStyleProps, Width
    *
    * @remarks
    * Uses the spacing scale defined by the theme. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
-   * @defaultValue undefined
-   * @optional
    */
   gap?: ResponsiveProp<Space>
 
@@ -59,12 +43,6 @@ export interface InputStyleProps extends FlexStyleProps, RadiusStyleProps, Width
    *
    * @remarks
    * Uses the spacing scale defined by the theme. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
-   * @defaultValue undefined
-   * @optional
    */
   padding?: ResponsiveProp<Space>
 }

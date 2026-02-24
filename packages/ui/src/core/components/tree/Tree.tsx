@@ -45,11 +45,7 @@ export type TreeOwnProps = {
    * The gap is applied to an internal {@link Stack} component that wraps the
    * tree's children.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
    * @defaultValue 1
-   * @optional
    */
   gap?: ResponsiveProp<Space>
 }
@@ -59,8 +55,6 @@ export type TreeOwnProps = {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Tree`.
- *
- * Accepted values: `"div"` | `ComponentType`
  *
  * @beta
  */
@@ -99,13 +93,6 @@ export type TreeProps<E extends TreeElementType = TreeElementType> = Props<TreeO
  * - **ArrowLeft** – Collapses an expanded item, or moves focus to its parent item.
  *
  * This API might change. DO NOT USE IN PRODUCTION.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `TreeElementType` | `"div"` | No | The HTML element or component type to render (the inner list always renders as `<ul>`). |
- * | `gap` | `ResponsiveProp<Space>` | `1` | No | Vertical gap between tree items. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
  *
  * @beta
  */

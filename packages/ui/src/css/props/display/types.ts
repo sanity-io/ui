@@ -36,19 +36,6 @@ export interface DisplayStyleProps {
    *
    * @remarks
    * Maps to the CSS `display` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"block"` – Generates a block-level element box.
-   * - `"inline-block"` – Generates an inline-level block container.
-   * - `"flex"` – Generates a block-level flex container.
-   * - `"inline-flex"` – Generates an inline-level flex container.
-   * - `"grid"` – Generates a block-level grid container.
-   * - `"inline-grid"` – Generates an inline-level grid container.
-   * - `"none"` – Removes the element from the document flow; the element is not rendered.
-   *
-   * @type {ResponsiveProp\<Display\>}
-   * @defaultValue undefined
-   * @optional
    */
   display?: ResponsiveProp<Display>
 }

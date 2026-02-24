@@ -31,10 +31,6 @@ export type RadioOwnProps = {
    * `data-invalid` attribute and the browser's constraint validation API
    * (`setCustomValidity`). When set to an empty string or `undefined`, the
    * input is considered valid.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   customValidity?: string
 }
@@ -44,8 +40,6 @@ export type RadioOwnProps = {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Radio`.
- *
- * Accepted values: `"input"` | `ComponentType`
  *
  * @public
  */
@@ -84,18 +78,6 @@ export type RadioProps<E extends RadioElementType = RadioElementType> = Props<Ra
  *
  * When `readOnly` is `true`, the input is rendered as `disabled` to prevent
  * user changes while the `data-read-only` attribute is applied for styling.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `RadioElementType` | `"input"` | No | The HTML element or component type to render. |
- * | `customValidity` | `string` | `undefined` | No | A custom validation message for the input. |
- * | `disabled` | `boolean` | `undefined` | No | Prevents user interaction when `true`. |
- * | `readOnly` | `boolean` | `undefined` | No | Prevents user changes while keeping the input focusable. |
- * | `name` | `string` | `undefined` | No | Groups radio buttons so only one in the group can be selected. |
- * | `value` | `string` | `undefined` | No | The value submitted with the form when selected. |
- * | `checked` | `boolean` | `undefined` | No | Whether the radio is currently selected. |
  *
  * @public
  */

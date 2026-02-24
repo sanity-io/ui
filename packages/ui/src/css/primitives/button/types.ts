@@ -15,10 +15,6 @@ import type {ButtonMode, ElementTone} from '@sanity/ui/theme'
 export interface ButtonStyleProps extends FlexStyleProps, RadiusStyleProps, WidthStyleProps {
   /**
    * A custom CSS class name to append to the element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   className?: string
 
@@ -28,14 +24,7 @@ export interface ButtonStyleProps extends FlexStyleProps, RadiusStyleProps, Widt
    * @remarks
    * Determines the level of visual emphasis the button carries.
    *
-   * Accepted values:
-   * - `"default"` – Renders a filled button with a solid background.
-   * - `"ghost"` – Renders a button with a transparent background and a visible border.
-   * - `"bleed"` – Renders a button with no background or border; content bleeds into the surrounding layout.
-   *
-   * @type {ButtonMode}
    * @defaultValue `"default"`
-   * @optional
    */
   mode?: ButtonMode
 
@@ -45,18 +34,7 @@ export interface ButtonStyleProps extends FlexStyleProps, RadiusStyleProps, Widt
    * @remarks
    * The tone maps to a set of semantic color tokens from the theme.
    *
-   * Accepted values:
-   * - `"default"` – Neutral default tone.
-   * - `"neutral"` – Neutral emphasis tone.
-   * - `"primary"` – Primary action tone.
-   * - `"suggest"` – Suggestive or informational tone.
-   * - `"positive"` – Positive or success tone.
-   * - `"caution"` – Warning or caution tone.
-   * - `"critical"` – Destructive or critical action tone.
-   *
-   * @type {ElementTone}
    * @defaultValue `"default"`
-   * @optional
    */
   tone?: ElementTone
 }

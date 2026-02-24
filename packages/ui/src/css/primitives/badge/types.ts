@@ -8,8 +8,6 @@ import type {ResponsiveProp} from '../../types'
  * @remarks
  * Inherits from {@link ElementTone}. Controls the color scheme applied to the badge.
  *
- * Accepted values: `"default" | "neutral" | "primary" | "suggest" | "positive" | "caution" | "critical"`
- *
  * @public
  */
 export type BadgeTone = ElementTone
@@ -22,10 +20,6 @@ export type BadgeTone = ElementTone
 export interface BadgeStyleProps {
   /**
    * A custom CSS class name to append to the element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   className?: string
 
@@ -35,11 +29,7 @@ export interface BadgeStyleProps {
    * @remarks
    * Uses the text font size scale defined by the theme. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontTextSize\>}
    * @defaultValue 1
-   * @optional
    */
   fontSize?: ResponsiveProp<FontTextSize>
 
@@ -50,18 +40,7 @@ export interface BadgeStyleProps {
    * Controls the background and foreground colors applied to the badge based
    * on the current theme.
    *
-   * Accepted values:
-   * - `"default"` – The default, neutral badge appearance.
-   * - `"neutral"` – A neutral tone with subdued coloring.
-   * - `"primary"` – The primary accent tone, typically used for selections.
-   * - `"suggest"` – A suggestive tone for informational emphasis.
-   * - `"positive"` – Indicates a positive or successful state.
-   * - `"caution"` – Indicates a warning or cautionary state.
-   * - `"critical"` – Indicates a critical or error state.
-   *
-   * @type {BadgeTone}
    * @defaultValue "default"
-   * @optional
    */
   tone?: BadgeTone
 }

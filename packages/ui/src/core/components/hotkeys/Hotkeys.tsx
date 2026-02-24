@@ -20,14 +20,6 @@ export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
  * border-radius control alongside hotkeys-specific properties for rendering
  * keyboard shortcut indicators.
  *
- * Inherited from {@link GapStyleProps}:
- * - `gap` (`ResponsiveProp<Space>`) – Sets the gap between individual key elements. Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`. Default: `1`.
- * - `gapX` (`ResponsiveProp<Space>`) – Sets the horizontal gap between key elements.
- * - `gapY` (`ResponsiveProp<Space>`) – Sets the vertical gap between key elements.
- *
- * Inherited from {@link RadiusStyleProps}:
- * - `radius` (`ResponsiveProp<Radius | 'full'>`) – Sets the border radius of each individual key element. Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | "full"`.
- *
  * @public
  */
 export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
@@ -36,12 +28,6 @@ export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
    *
    * @remarks
    * Uses the text font size scale defined by the theme. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontTextSize\>}
-   * @defaultValue undefined
-   * @optional
    */
   fontSize?: ResponsiveProp<FontTextSize>
 
@@ -50,12 +36,6 @@ export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
    *
    * @remarks
    * Uses the spacing scale defined by the theme. Supports responsive values.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
-   * @defaultValue undefined
-   * @optional
    */
   padding?: ResponsiveProp<Space>
 
@@ -68,10 +48,6 @@ export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
    *
    * When `undefined`, `null`, or an empty array, the component returns `undefined`
    * and renders nothing.
-   *
-   * @type {string[]}
-   * @defaultValue undefined
-   * @optional
    */
   keys?: string[]
 }
@@ -82,8 +58,6 @@ export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
  * @remarks
  * Determines the HTML element or custom component type rendered as the
  * outer wrapper of the `Hotkeys` component.
- *
- * Accepted values: `"kbd"` | `ComponentType`
  *
  * @public
  */
@@ -118,17 +92,6 @@ export type HotkeysProps<E extends HotkeysElementType = HotkeysElementType> = Pr
  *
  * When the `keys` prop is `undefined`, `null`, or an empty array, the component
  * returns `undefined` and renders nothing.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `HotkeysElementType` | `"kbd"` | No | The HTML element or component type to render as the outer wrapper. |
- * | `gap` | `ResponsiveProp<Space>` | `1` | No | Gap between individual key elements. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- * | `fontSize` | `ResponsiveProp<FontTextSize>` | `undefined` | No | Font size of each key label. Accepted values: `0 \| 1 \| 2 \| 3 \| 4`. |
- * | `padding` | `ResponsiveProp<Space>` | `undefined` | No | Inner padding of each key element. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `undefined` | No | Border radius of each key element. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| "full"`. |
- * | `keys` | `string[]` | `undefined` | No | The key labels to render. When empty or absent, nothing is rendered. |
  *
  * @public
  */

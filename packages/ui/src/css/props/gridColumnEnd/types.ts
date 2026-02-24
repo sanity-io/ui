@@ -25,14 +25,6 @@ export interface GridColumnEndStyleProps {
    *
    * @remarks
    * Maps to the CSS `grid-column-end` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"auto"` – The item is placed automatically by the grid's auto-placement algorithm.
-   * - `1`–`12` – The ending grid line number for the item's column span.
-   *
-   * @type {ResponsiveProp\<GridColumnEnd\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridColumnEnd?: ResponsiveProp<GridColumnEnd>
 }

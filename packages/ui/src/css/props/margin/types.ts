@@ -25,12 +25,6 @@ export interface MarginStyleProps {
    * Maps to the CSS `margin` property. Supports responsive values.
    *
    * Uses the spacing scale defined by the theme, plus `"auto"` for automatic centering.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | "auto"`
-   *
-   * @type {ResponsiveProp\<Margin\>}
-   * @defaultValue undefined
-   * @optional
    */
   margin?: ResponsiveProp<Margin>
 
@@ -41,12 +35,6 @@ export interface MarginStyleProps {
    * Maps to the CSS `margin-left` and `margin-right` properties. Supports responsive values.
    *
    * Overrides the horizontal portion of the `margin` prop when both are specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | "auto"`
-   *
-   * @type {ResponsiveProp\<Margin\>}
-   * @defaultValue undefined
-   * @optional
    */
   marginX?: ResponsiveProp<Margin>
 
@@ -57,12 +45,6 @@ export interface MarginStyleProps {
    * Maps to the CSS `margin-top` and `margin-bottom` properties. Supports responsive values.
    *
    * Overrides the vertical portion of the `margin` prop when both are specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | "auto"`
-   *
-   * @type {ResponsiveProp\<Margin\>}
-   * @defaultValue undefined
-   * @optional
    */
   marginY?: ResponsiveProp<Margin>
 
@@ -73,12 +55,6 @@ export interface MarginStyleProps {
    * Maps to the CSS `margin-top` property. Supports responsive values.
    *
    * Overrides the top portion of `margin` and `marginY` when specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | "auto"`
-   *
-   * @type {ResponsiveProp\<Margin\>}
-   * @defaultValue undefined
-   * @optional
    */
   marginTop?: ResponsiveProp<Margin>
 
@@ -89,12 +65,6 @@ export interface MarginStyleProps {
    * Maps to the CSS `margin-right` property. Supports responsive values.
    *
    * Overrides the right portion of `margin` and `marginX` when specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | "auto"`
-   *
-   * @type {ResponsiveProp\<Margin\>}
-   * @defaultValue undefined
-   * @optional
    */
   marginRight?: ResponsiveProp<Margin>
 
@@ -105,12 +75,6 @@ export interface MarginStyleProps {
    * Maps to the CSS `margin-bottom` property. Supports responsive values.
    *
    * Overrides the bottom portion of `margin` and `marginY` when specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | "auto"`
-   *
-   * @type {ResponsiveProp\<Margin\>}
-   * @defaultValue undefined
-   * @optional
    */
   marginBottom?: ResponsiveProp<Margin>
 
@@ -121,12 +85,6 @@ export interface MarginStyleProps {
    * Maps to the CSS `margin-left` property. Supports responsive values.
    *
    * Overrides the left portion of `margin` and `marginX` when specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | "auto"`
-   *
-   * @type {ResponsiveProp\<Margin\>}
-   * @defaultValue undefined
-   * @optional
    */
   marginLeft?: ResponsiveProp<Margin>
 }

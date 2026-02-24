@@ -30,12 +30,6 @@ export interface InsetStyleProps {
    *
    * When set to `0`, the element is positioned flush against all edges of its
    * containing block.
-   *
-   * Accepted values: `0`
-   *
-   * @type {ResponsiveProp\<Inset\>}
-   * @defaultValue undefined
-   * @optional
    */
   inset?: ResponsiveProp<Inset>
 
@@ -48,12 +42,6 @@ export interface InsetStyleProps {
    * When set to `0`, the element is positioned flush against the top edge of its
    * containing block. Overrides the top portion of the `inset` prop when both
    * are specified.
-   *
-   * Accepted values: `0`
-   *
-   * @type {ResponsiveProp\<Inset\>}
-   * @defaultValue undefined
-   * @optional
    */
   insetTop?: ResponsiveProp<Inset>
 
@@ -66,12 +54,6 @@ export interface InsetStyleProps {
    * When set to `0`, the element is positioned flush against the right edge of its
    * containing block. Overrides the right portion of the `inset` prop when both
    * are specified.
-   *
-   * Accepted values: `0`
-   *
-   * @type {ResponsiveProp\<Inset\>}
-   * @defaultValue undefined
-   * @optional
    */
   insetRight?: ResponsiveProp<Inset>
 
@@ -84,12 +66,6 @@ export interface InsetStyleProps {
    * When set to `0`, the element is positioned flush against the bottom edge of its
    * containing block. Overrides the bottom portion of the `inset` prop when both
    * are specified.
-   *
-   * Accepted values: `0`
-   *
-   * @type {ResponsiveProp\<Inset\>}
-   * @defaultValue undefined
-   * @optional
    */
   insetBottom?: ResponsiveProp<Inset>
 
@@ -102,12 +78,6 @@ export interface InsetStyleProps {
    * When set to `0`, the element is positioned flush against the left edge of its
    * containing block. Overrides the left portion of the `inset` prop when both
    * are specified.
-   *
-   * Accepted values: `0`
-   *
-   * @type {ResponsiveProp\<Inset\>}
-   * @defaultValue undefined
-   * @optional
    */
   insetLeft?: ResponsiveProp<Inset>
 }

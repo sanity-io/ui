@@ -27,16 +27,6 @@ export interface FlexDirectionStyleProps {
    *
    * @remarks
    * Maps to the CSS `flex-direction` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"row"` – Items are placed along the horizontal axis (left to right in LTR).
-   * - `"row-reverse"` – Items are placed along the horizontal axis in reverse order.
-   * - `"column"` – Items are placed along the vertical axis (top to bottom).
-   * - `"column-reverse"` – Items are placed along the vertical axis in reverse order.
-   *
-   * @type {ResponsiveProp\<FlexDirection\>}
-   * @defaultValue undefined
-   * @optional
    */
   flexDirection?: ResponsiveProp<FlexDirection>
 }

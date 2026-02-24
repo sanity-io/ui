@@ -6,17 +6,17 @@ import {layers} from '../../layers.css'
 import {vars} from '../../vars.css'
 
 export const root: string = _style(layers.props, {
-  'fontFamily': vars.font.family,
-  'fontFeatureSettings': vars.font.featureSettings,
-  'fontSize': vars.font.fontSize,
-  'lineHeight': vars.font.lineHeight,
-  'letterSpacing': vars.font.letterSpacing,
-  'fontWeight': vars.font.fontWeight,
-  'transform': `translateY(${vars.font.descenderHeight})`,
-  'padding': '1px 0',
-  'margin': '0',
+  fontFamily: vars.font.family,
+  fontFeatureSettings: vars.font.featureSettings,
+  fontSize: vars.font.fontSize,
+  lineHeight: vars.font.lineHeight,
+  letterSpacing: vars.font.letterSpacing,
+  fontWeight: vars.font.fontWeight,
+  transform: `translateY(${vars.font.descenderHeight})`,
+  padding: '1px 0',
+  margin: '0',
 
-  'vars': {
+  vars: {
     [vars.font.capHeight]:
       `calc(${vars.font.lineHeight} - ${vars.font.ascenderHeight} - ${vars.font.descenderHeight})`,
     [vars.font.iconOffset]: `calc((${vars.font.capHeight} - ${vars.font.iconSize}) / 2)`,

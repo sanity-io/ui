@@ -25,17 +25,6 @@ export interface TextAlignStyleProps {
    *
    * @remarks
    * Maps to the CSS `text-align` property.
-   *
-   * Accepted values:
-   * - `"left"` – Aligns text to the left edge of the element.
-   * - `"right"` – Aligns text to the right edge of the element.
-   * - `"center"` – Centers text horizontally within the element.
-   * - `"justify"` – Stretches lines so each line has equal width.
-   * - `"initial"` – Resets the text alignment to the default value.
-   *
-   * @type {TextAlign}
-   * @defaultValue undefined
-   * @optional
    */
   textAlign?: TextAlign
 }

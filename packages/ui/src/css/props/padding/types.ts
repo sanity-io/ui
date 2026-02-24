@@ -21,12 +21,6 @@ export interface PaddingStyleProps {
    * Maps to the CSS `padding` property. Supports responsive values.
    *
    * Uses the spacing scale defined by the theme.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Padding\>}
-   * @defaultValue undefined
-   * @optional
    */
   padding?: ResponsiveProp<Padding>
 
@@ -38,12 +32,6 @@ export interface PaddingStyleProps {
    *
    * Uses the spacing scale defined by the theme. Overrides the top portion
    * of the `padding` and `paddingY` props when specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Padding\>}
-   * @defaultValue undefined
-   * @optional
    */
   paddingTop?: ResponsiveProp<Padding>
 
@@ -55,12 +43,6 @@ export interface PaddingStyleProps {
    *
    * Uses the spacing scale defined by the theme. Overrides the right portion
    * of the `padding` and `paddingX` props when specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Padding\>}
-   * @defaultValue undefined
-   * @optional
    */
   paddingRight?: ResponsiveProp<Padding>
 
@@ -72,12 +54,6 @@ export interface PaddingStyleProps {
    *
    * Uses the spacing scale defined by the theme. Overrides the bottom portion
    * of the `padding` and `paddingY` props when specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Padding\>}
-   * @defaultValue undefined
-   * @optional
    */
   paddingBottom?: ResponsiveProp<Padding>
 
@@ -89,12 +65,6 @@ export interface PaddingStyleProps {
    *
    * Uses the spacing scale defined by the theme. Overrides the left portion
    * of the `padding` and `paddingX` props when specified.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Padding\>}
-   * @defaultValue undefined
-   * @optional
    */
   paddingLeft?: ResponsiveProp<Padding>
 
@@ -108,12 +78,6 @@ export interface PaddingStyleProps {
    * Uses the spacing scale defined by the theme. Overrides the horizontal portions
    * of the `padding` prop when specified. Can be further overridden by `paddingLeft`
    * and `paddingRight`.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Padding\>}
-   * @defaultValue undefined
-   * @optional
    */
   paddingX?: ResponsiveProp<Padding>
 
@@ -127,12 +91,6 @@ export interface PaddingStyleProps {
    * Uses the spacing scale defined by the theme. Overrides the vertical portions
    * of the `padding` prop when specified. Can be further overridden by `paddingTop`
    * and `paddingBottom`.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Padding\>}
-   * @defaultValue undefined
-   * @optional
    */
   paddingY?: ResponsiveProp<Padding>
 }

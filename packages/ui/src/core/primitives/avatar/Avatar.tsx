@@ -36,10 +36,6 @@ export interface AvatarOwnProps {
    * When `true`, hides the inner stroke ring rendered inside the avatar circle.
    *
    * @beta Do not use in production.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   __unstable_hideInnerStroke?: boolean
 
@@ -49,12 +45,6 @@ export interface AvatarOwnProps {
    * @remarks
    * When specified, the arrow animates from this position to the value of
    * `arrowPosition` on mount.
-   *
-   * Accepted values: `"top"` | `"bottom"` | `"inside"`
-   *
-   * @type {AvatarPosition}
-   * @defaultValue undefined
-   * @optional
    */
   animateArrowFrom?: AvatarPosition
 
@@ -64,15 +54,6 @@ export interface AvatarOwnProps {
    * @remarks
    * When set, renders a small triangular arrow pointing outward from the avatar
    * at the specified position.
-   *
-   * Accepted values:
-   * - `"top"` – Renders the arrow above the avatar.
-   * - `"bottom"` – Renders the arrow below the avatar.
-   * - `"inside"` – Hides the arrow inside the avatar (not visible).
-   *
-   * @type {AvatarPosition}
-   * @defaultValue undefined
-   * @optional
    */
   arrowPosition?: AvatarPosition
 
@@ -82,12 +63,9 @@ export interface AvatarOwnProps {
    * @remarks
    * Uses a predefined set of color tokens from the theme.
    *
-   * Accepted values:
    * `"gray"` | `"blue"` | `"purple"` | `"magenta"` | `"red"` | `"orange"` | `"yellow"` | `"green"` | `"cyan"`
    *
-   * @type {AvatarColor}
    * @defaultValue `"magenta"`
-   * @optional
    */
   color?: AvatarColor
 
@@ -97,10 +75,6 @@ export interface AvatarOwnProps {
    *
    * @remarks
    * Typically one or two characters representing the user's name (e.g. `"AB"`).
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   initials?: string
 
@@ -110,10 +84,6 @@ export interface AvatarOwnProps {
    * @remarks
    * Receives an `Error` object with the message `"Avatar: the image failed to load"`.
    * When an image load error occurs, the avatar falls back to rendering the `initials`.
-   *
-   * @type {(event: Error) => void}
-   * @defaultValue undefined
-   * @optional
    */
   onImageLoadError?: (event: Error) => void
 
@@ -123,16 +93,12 @@ export interface AvatarOwnProps {
    * @remarks
    * Uses the avatar size scale defined by the theme. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3`
-   *
    * - `0` – Extra-small avatar.
    * - `1` – Small avatar (default).
    * - `2` – Medium avatar.
    * - `3` – Large avatar.
    *
-   * @type {ResponsiveProp\<AvatarSize\>}
    * @defaultValue 1
-   * @optional
    */
   size?: ResponsiveProp<AvatarSize>
 
@@ -143,10 +109,6 @@ export interface AvatarOwnProps {
    * When provided and loaded successfully, the image is rendered inside the
    * avatar circle. If the image fails to load, the avatar falls back to
    * displaying the `initials`.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   src?: string
 
@@ -156,10 +118,6 @@ export interface AvatarOwnProps {
    * @remarks
    * Provides a text description of the avatar for assistive technologies and
    * browser tooltip display on hover.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   title?: string
 }
@@ -169,8 +127,6 @@ export interface AvatarOwnProps {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Avatar`.
- *
- * Accepted values: `"a"` | `"button"` | `"div"` | `"span"` | `ComponentType`
  *
  * @public
  */
@@ -197,14 +153,6 @@ export type AvatarProps<E extends AvatarElementType = AvatarElementType> = Props
  * The `Avatar` component renders a circular element that can display either an image
  * (via the `src` prop) or initials (via the `initials` prop) as a fallback.
  * An optional directional arrow indicator can be shown via the `arrowPosition` prop.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"span"` |
- * | `color` | `"magenta"` |
- * | `size` | `1` |
  *
  * @public
  */

@@ -17,12 +17,6 @@ export const DEFAULT_SKELETON_ELEMENT = 'div'
  * Extends {@link SkeletonStyleProps} to inherit flex, margin, and radius style props,
  * and adds skeleton-specific properties for animation and delayed visibility.
  *
- * Inherited from {@link SkeletonStyleProps}:
- * - `className` (`string`) – A custom CSS class name to append to the element.
- * - `flex` (`ResponsiveProp<Flex>`) – Controls the flex grow/shrink behavior within a flex container.
- * - `margin`, `marginX`, `marginY`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft` – Outer margin props from the theme spacing scale.
- * - `radius` (`ResponsiveProp<Radius | 'full'>`) – Sets the border radius using the theme radius scale (`0 | 1 | 2 | 3 | 4 | 5 | 6 | "full"`).
- *
  * This API might change. DO NOT USE IN PRODUCTION.
  *
  * @beta
@@ -37,9 +31,7 @@ export type SkeletonOwnProps = SkeletonStyleProps & {
    * rendered element. The actual visual animation is defined in the
    * design system's CSS layer.
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   animated?: boolean
 
@@ -55,10 +47,6 @@ export type SkeletonOwnProps = SkeletonStyleProps & {
    *
    * When `0`, `undefined`, or not provided, the skeleton is visible
    * immediately on mount.
-   *
-   * @type {number}
-   * @defaultValue undefined
-   * @optional
    */
   delay?: number
 }
@@ -68,8 +56,6 @@ export type SkeletonOwnProps = SkeletonStyleProps & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Skeleton`.
- *
- * Accepted values: `"div"` | `"span"` | `ComponentType`
  *
  * @beta
  */
@@ -108,17 +94,6 @@ export type SkeletonProps<E extends SkeletonElementType = SkeletonElementType> =
  * dimensions (via `style` or CSS) to match the anticipated content size.
  *
  * This API might change. DO NOT USE IN PRODUCTION.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `SkeletonElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `animated` | `boolean` | `false` | No | When `true`, applies a pulsing loading animation. |
- * | `delay` | `number` | `undefined` | No | Delay in milliseconds before the skeleton becomes visible. |
- * | `flex` | `ResponsiveProp<Flex>` | `undefined` | No | Controls flex grow/shrink behavior. |
- * | `margin` | `ResponsiveProp<Margin>` | `undefined` | No | Sets outer margin on all sides. |
- * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `undefined` | No | Sets the border radius. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| "full"`. |
  *
  * @beta
  */

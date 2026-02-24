@@ -18,15 +18,6 @@ export const DEFAULT_TEXT_AREA_ELEMENT = 'textarea'
  * Extends {@link TextAreaStyleProps} (which itself extends {@link InputStyleProps})
  * to provide shared input styling capabilities alongside textarea-specific props.
  *
- * Inherited from {@link InputStyleProps} (via {@link TextAreaStyleProps}):
- * - `border` (`boolean`) – When `true`, renders a visible border around the textarea. Default: `true`.
- * - `fontSize` (`ResponsiveProp<FontTextSize>`) – Sets the font size of the textarea text. Accepted values: `0 | 1 | 2 | 3 | 4`. Default: `2`.
- * - `gap` (`ResponsiveProp<Space>`) – Sets the gap between internal elements. Default: `3`.
- * - `padding` (`ResponsiveProp<Space>`) – Sets the inner padding. Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`. Default: `3`.
- * - `flex` (`ResponsiveProp<Flex>`) – Controls flex grow/shrink behavior.
- * - `radius` (`ResponsiveProp<Radius | 'full'>`) – Sets the border radius. Default: `2`.
- * - `width` (`ResponsiveProp<Width>`) – Sets the width of the textarea.
- *
  * In addition to the props listed below, all standard HTML `<textarea>` attributes
  * (e.g. `rows`, `cols`, `placeholder`, `value`, `defaultValue`, `onChange`, `onBlur`,
  * `onFocus`, `name`, `disabled`, `readOnly`, `ref`, etc.) are also accepted and
@@ -40,10 +31,6 @@ export type TextAreaOwnProps = TextAreaStyleProps & {
    * when it receives focus.
    *
    * @beta Do not use in production.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   __unstable_disableFocusRing?: boolean
 
@@ -56,10 +43,6 @@ export type TextAreaOwnProps = TextAreaStyleProps & {
    * `data-invalid` attribute is applied to the wrapper element for styling.
    *
    * Set to an empty string `""` or `undefined` to clear the validation error.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   customValidity?: string
 }
@@ -69,8 +52,6 @@ export type TextAreaOwnProps = TextAreaStyleProps & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `TextArea`.
- *
- * Accepted values: `"textarea"` | `ComponentType`
  *
  * @public
  */
@@ -118,18 +99,6 @@ export type TextAreaProps<E extends TextAreaElementType = TextAreaElementType> =
  * It supports custom validation via the `customValidity` prop and read-only mode
  * via the `readOnly` prop (which renders the textarea as `disabled` while applying
  * a `data-read-only` attribute for distinct styling).
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"textarea"` |
- * | `border` | `true` |
- * | `disabled` | `false` |
- * | `fontSize` | `2` |
- * | `gap` | `3` |
- * | `padding` | `3` |
- * | `radius` | `2` |
  *
  * @public
  */

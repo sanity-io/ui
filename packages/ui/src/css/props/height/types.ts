@@ -28,18 +28,6 @@ export interface HeightStyleProps {
    *
    * @remarks
    * Maps to the CSS `height` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"fill"` – Sets the height to `100%` of the containing element.
-   * - `"auto"` – The element's height is determined by its content.
-   * - `"min"` – Sets the height to `min-content`.
-   * - `"max"` – Sets the height to `max-content`.
-   * - `"fit"` – Sets the height to `fit-content`.
-   * - `"stretch"` – Stretches the element to fill available space.
-   *
-   * @type {ResponsiveProp\<Height\>}
-   * @defaultValue undefined
-   * @optional
    */
   height?: ResponsiveProp<Height>
 }

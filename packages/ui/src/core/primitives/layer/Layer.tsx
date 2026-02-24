@@ -19,15 +19,6 @@ export const DEFAULT_LAYER_ELEMENT = 'div'
  * Extends {@link CardOwnProps} to inherit all card and box layout/style props,
  * and adds layer-specific properties for z-index stacking and activation callbacks.
  *
- * Inherited from {@link CardOwnProps} (which extends {@link BoxOwnProps} and {@link CardStyleProps}):
- * - All layout props: `display`, `flex`, `flexDirection`, `alignItems`, `justifyContent`, etc.
- * - All spacing props: `margin`, `marginX`, `marginY`, `padding`, `paddingX`, `paddingY` (and per-side variants).
- * - All sizing props: `width`, `height`, `minWidth`, `minHeight`, `maxWidth`.
- * - All position props: `position`, `inset`, and per-side inset variants.
- * - All visual props: `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
- * - Card-specific props: `scheme` (`"light"` | `"dark"`), `tone` (all card tones plus `"inherit"`).
- * - Interactive state props: `disabled`, `pressed`, `selected`.
- *
  * @public
  */
 export type LayerOwnProps = CardOwnProps & {
@@ -40,10 +31,6 @@ export type LayerOwnProps = CardOwnProps & {
    * had focus at the time the layer became active. This is useful for managing
    * focus restoration or performing side effects when a layer gains stacking
    * priority (e.g. when an overlapping layer above it is removed).
-   *
-   * @type {(props: \{ activeElement: HTMLElement | null \}) => void}
-   * @defaultValue undefined
-   * @optional
    */
   onActivate?: (props: {activeElement: HTMLElement | null}) => void
 
@@ -59,9 +46,7 @@ export type LayerOwnProps = CardOwnProps & {
    * Higher values place the layer above sibling layers with lower offsets.
    * Supports responsive values.
    *
-   * @type {ResponsiveProp\<number\>}
    * @defaultValue 1
-   * @optional
    */
   zOffset?: ResponsiveProp<number>
 }
@@ -110,14 +95,6 @@ export type LayerProps<E extends LayerElementType = LayerElementType> = Props<La
  * The `Layer` component inherits all visual and layout props from {@link Card},
  * including `scheme`, `tone`, `radius`, `shadow`, `padding`, and all
  * {@link BoxOwnProps}.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `LayerElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `zOffset` | `ResponsiveProp<number>` | `1` | No | The z-index offset applied to this layer relative to its parent layer context. |
- * | `onActivate` | `(props: { activeElement: HTMLElement \| null }) => void` | `undefined` | No | Callback fired when this layer becomes the topmost active layer. |
  *
  * @public
  */

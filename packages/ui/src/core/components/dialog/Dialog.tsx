@@ -45,14 +45,6 @@ export const DEFAULT_DIALOG_ELEMENT = 'div'
  * Extends {@link ContainerStyleProps} and {@link LayerOwnProps} (with `width` omitted)
  * to combine container width control with layer stacking capabilities.
  *
- * Inherited from {@link ContainerStyleProps}:
- * - `width` – Sets the maximum width of the dialog container using the theme's container width scale.
- *
- * Inherited from {@link LayerOwnProps} (via {@link CardOwnProps} and {@link BoxOwnProps}):
- * - All layout, spacing, sizing, position, and visual style props from `Box`.
- * - `onActivate` – Fires when the dialog becomes the topmost layer.
- * - `zOffset` – Controls the z-index offset of the dialog layer.
- *
  * @public
  */
 export type DialogOwnProps = ContainerStyleProps &
@@ -63,9 +55,7 @@ export type DialogOwnProps = ContainerStyleProps &
      *
      * @beta Do not use in production.
      *
-     * @type {boolean}
      * @defaultValue true
-     * @optional
      */
     __unstable_autoFocus?: boolean
 
@@ -74,9 +64,7 @@ export type DialogOwnProps = ContainerStyleProps &
      *
      * @beta Do not use in production.
      *
-     * @type {boolean}
      * @defaultValue false
-     * @optional
      */
     __unstable_hideCloseButton?: boolean
 
@@ -89,9 +77,7 @@ export type DialogOwnProps = ContainerStyleProps &
      *
      * @beta
      *
-     * @type {boolean}
      * @defaultValue false
-     * @optional
      */
     animate?: boolean
 
@@ -101,11 +87,7 @@ export type DialogOwnProps = ContainerStyleProps &
      * @remarks
      * Uses the radius scale defined by the theme. Supports responsive values.
      *
-     * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6`
-     *
-     * @type {ResponsiveProp\<Radius\>}
      * @defaultValue 4
-     * @optional
      */
     cardRadius?: ResponsiveProp<Radius>
 
@@ -115,10 +97,6 @@ export type DialogOwnProps = ContainerStyleProps &
      * @remarks
      * Provides a reference to the inner `<div>` that wraps the dialog's
      * children content. Useful for controlling scroll position programmatically.
-     *
-     * @type {ForwardedRef\<HTMLDivElement\>}
-     * @defaultValue undefined
-     * @optional
      */
     contentRef?: ForwardedRef<HTMLDivElement>
 
@@ -128,10 +106,6 @@ export type DialogOwnProps = ContainerStyleProps &
      * @remarks
      * When provided, the footer is rendered inside the dialog card at the bottom.
      * Typically used for action buttons (e.g. "Save", "Cancel").
-     *
-     * @type {ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     footer?: ReactNode
 
@@ -145,10 +119,6 @@ export type DialogOwnProps = ContainerStyleProps &
      *
      * The `id` prop is used to generate an `aria-labelledby` association
      * between the dialog and its header element.
-     *
-     * @type {ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     header?: ReactNode
 
@@ -159,9 +129,6 @@ export type DialogOwnProps = ContainerStyleProps &
      * Used as the `id` attribute on the rendered dialog element, and to
      * generate the `aria-labelledby` reference that associates the dialog
      * with its header. This value must be unique within the document.
-     *
-     * @type {string}
-     * @required
      */
     id: string
 
@@ -173,10 +140,6 @@ export type DialogOwnProps = ContainerStyleProps &
      * Receives an object containing the `activeElement` at the time of activation.
      * Useful for managing focus or performing side effects when the dialog
      * gains prominence in a multi-layer stack.
-     *
-     * @type {LayerProps['onActivate']}
-     * @defaultValue undefined
-     * @optional
      */
     onActivate?: LayerProps['onActivate']
 
@@ -186,10 +149,6 @@ export type DialogOwnProps = ContainerStyleProps &
      * @remarks
      * Typically used to close the dialog when the user clicks on the
      * overlay/backdrop area surrounding the dialog card.
-     *
-     * @type {() => void}
-     * @defaultValue undefined
-     * @optional
      */
     onClickOutside?: () => void
 
@@ -200,10 +159,6 @@ export type DialogOwnProps = ContainerStyleProps &
      * Triggered when the user clicks the close button in the dialog header.
      * The dialog does not close automatically; the consumer must update state
      * to unmount the dialog in response to this callback.
-     *
-     * @type {() => void}
-     * @defaultValue undefined
-     * @optional
      */
     onClose?: () => void
 
@@ -217,10 +172,6 @@ export type DialogOwnProps = ContainerStyleProps &
      * Note: The `Dialog` component is always rendered into a portal
      * regardless of this prop. To fully unmount the dialog, remove
      * the `<Dialog>` element from the component tree.
-     *
-     * @type {boolean}
-     * @defaultValue undefined
-     * @optional
      */
     open?: boolean
 
@@ -231,10 +182,6 @@ export type DialogOwnProps = ContainerStyleProps &
      * When specified, the dialog is rendered into the named portal
      * registered with the nearest {@link PortalProvider}. When omitted,
      * the dialog renders into the default portal element.
-     *
-     * @type {string}
-     * @defaultValue undefined
-     * @optional
      */
     portal?: string
 
@@ -245,13 +192,7 @@ export type DialogOwnProps = ContainerStyleProps &
      * Determines how the dialog is positioned relative to the viewport or
      * a positioned ancestor. Supports responsive values.
      *
-     * Accepted values:
-     * - `"absolute"` – Positions the dialog relative to its nearest positioned ancestor.
-     * - `"fixed"` – Positions the dialog relative to the viewport.
-     *
-     * @type {ResponsiveProp\<DialogPosition\>}
      * @defaultValue `"fixed"` (or the value from DialogContext if available)
-     * @optional
      */
     position?: ResponsiveProp<DialogPosition>
 
@@ -261,12 +202,6 @@ export type DialogOwnProps = ContainerStyleProps &
      * @remarks
      * Determines whether the dialog renders in a light or dark color mode.
      * Child components inherit this scheme unless they specify their own.
-     *
-     * Accepted values: `"light"` | `"dark"`
-     *
-     * @type {ColorScheme}
-     * @defaultValue undefined
-     * @optional
      */
     scheme?: ColorScheme
 
@@ -275,14 +210,6 @@ export type DialogOwnProps = ContainerStyleProps &
      *
      * @remarks
      * Controls the background and foreground colors applied to the dialog card.
-     *
-     * Accepted values:
-     * - `"transparent"` | `"default"` | `"neutral"` | `"primary"` | `"suggest"` | `"positive"` | `"caution"` | `"critical"` – A specific card tone from the theme.
-     * - `"inherit"` – Inherits the tone from the nearest parent `Card` context.
-     *
-     * @type {CardTone | 'inherit'}
-     * @defaultValue undefined
-     * @optional
      */
     tone?: CardTone | 'inherit'
 
@@ -294,9 +221,7 @@ export type DialogOwnProps = ContainerStyleProps &
      * layers in the application. Higher values place the dialog above lower ones.
      * Supports responsive values via an array.
      *
-     * @type {number | number[]}
      * @defaultValue Z_OFFSETS.dialog (from DialogContext if available)
-     * @optional
      */
     zOffset?: number | number[]
   }
@@ -306,8 +231,6 @@ export type DialogOwnProps = ContainerStyleProps &
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Dialog`.
- *
- * Accepted values: `"div"` | `"span"` | `ComponentType`
  *
  * @public
  */
@@ -340,21 +263,6 @@ export type DialogProps<E extends DialogElementType = DialogElementType> = Props
  * The dialog consists of a container with optional `header`, `footer`, and
  * children content areas. A close button is rendered in the header by default
  * unless `__unstable_hideCloseButton` is `true`.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"div"` |
- * | `__unstable_autoFocus` | `true` |
- * | `__unstable_hideCloseButton` | `false` |
- * | `animate` | `false` |
- * | `cardRadius` | `4` |
- * | `padding` | `3` |
- * | `position` | `"fixed"` |
- * | `shadow` | `4` |
- * | `width` | `0` |
- * | `zOffset` | `Z_OFFSETS.dialog` |
  *
  * @public
  */

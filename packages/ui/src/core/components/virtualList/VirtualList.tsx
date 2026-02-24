@@ -33,45 +33,33 @@ export const DEFAULT_VIRTUAL_LIST_ELEMENT = 'div'
 export interface VirtualListChangeOpts {
   /**
    * The index of the first item currently rendered in the visible window.
-   *
-   * @type {number}
    */
   fromIndex: number
 
   /**
    * The computed gap value (in pixels) between list items, derived from
    * the theme's spacing scale for the provided `gap` prop.
-   *
-   * @type {number}
    */
   gap: number
 
   /**
    * The measured height (in pixels) of a single list item. Determined
    * automatically by rendering the first item and measuring its offset height.
-   *
-   * @type {number}
    */
   itemHeight: number
 
   /**
    * The height (in pixels) of the scrollable viewport containing the list.
-   *
-   * @type {number}
    */
   scrollHeight: number
 
   /**
    * The current vertical scroll offset (in pixels) of the scrollable container.
-   *
-   * @type {number}
    */
   scrollTop: number
 
   /**
    * The index (exclusive) of the last item currently rendered in the visible window.
-   *
-   * @type {number}
    */
   toIndex: number
 }
@@ -100,11 +88,7 @@ export type VirtualListOwnProps<
    * from the DOM on mount to determine the pixel spacing between items for
    * accurate virtual positioning.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {Space}
    * @defaultValue 0
-   * @optional
    */
   gap?: Space
 
@@ -118,10 +102,6 @@ export type VirtualListOwnProps<
    *
    * Providing a stable key function improves rendering performance and avoids
    * unnecessary re-mounts when the visible window shifts.
-   *
-   * @type {(item: Item, itemIndex: number) => string}
-   * @defaultValue undefined
-   * @optional
    */
   getItemKey?: (item: Item, itemIndex: number) => string
 
@@ -133,9 +113,7 @@ export type VirtualListOwnProps<
    * to the DOM. The list measures the height of the first item on mount to
    * calculate the total content height and determine which items are visible.
    *
-   * @type {Item[]}
    * @defaultValue `[]`
-   * @optional
    */
   items?: Item[]
 
@@ -147,10 +125,6 @@ export type VirtualListOwnProps<
    * `fromIndex`, `toIndex`, `scrollTop`, `scrollHeight`, `itemHeight`, and
    * `gap` values. Useful for implementing infinite scroll, loading indicators,
    * or analytics tracking.
-   *
-   * @type {(opts: VirtualListChangeOpts) => void}
-   * @defaultValue undefined
-   * @optional
    */
   onChange?: (opts: VirtualListChangeOpts) => void
 
@@ -164,10 +138,6 @@ export type VirtualListOwnProps<
    *
    * The returned element is wrapped in an absolutely positioned {@link Box}
    * container that handles vertical placement within the virtualized scroll area.
-   *
-   * @type {(item: Item) => ReactNode}
-   * @defaultValue undefined
-   * @optional
    */
   renderItem?: (item: Item) => ReactNode
 }
@@ -177,8 +147,6 @@ export type VirtualListOwnProps<
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `VirtualList`.
- *
- * Accepted values: `"div"` | `ComponentType`
  *
  * @beta
  */
@@ -221,17 +189,6 @@ export type VirtualListProps<E extends VirtualListElementType = VirtualListEleme
  * change, enabling infinite-scroll patterns and loading indicators.
  *
  * This API might change. DO NOT USE IN PRODUCTION.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `VirtualListElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `gap` | `Space` | `0` | No | Vertical gap between list items. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- * | `getItemKey` | `(item, index) => string` | `undefined` | No | Returns a unique key for each item. Falls back to the item index. |
- * | `items` | `Item[]` | `[]` | No | The full array of items to virtualize. |
- * | `onChange` | `(opts: VirtualListChangeOpts) => void` | `undefined` | No | Fires when the visible range or scroll metrics change. |
- * | `renderItem` | `(item: Item) => ReactNode` | `undefined` | No | Render function for each visible item. |
  *
  * @beta
  */

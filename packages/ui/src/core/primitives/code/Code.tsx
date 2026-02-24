@@ -20,12 +20,6 @@ export const DEFAULT_CODE_ELEMENT = 'pre'
  * Extends {@link CodeStyleProps} to provide typographic control over code blocks,
  * with additional props for syntax highlighting and font sizing.
  *
- * Inherited from {@link CodeStyleProps}:
- * - `weight` – Font weight (`"regular"` | `"medium"` | `"semibold"` | `"bold"`).
- * - `flex` – Flex grow/shrink behavior.
- * - `margin`, `marginX`, `marginY`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft` – Outer margin.
- * - `maxWidth` – Maximum width constraint.
- *
  * @public
  */
 export type CodeOwnProps = CodeStyleProps & {
@@ -38,10 +32,6 @@ export type CodeOwnProps = CodeStyleProps & {
    * and rendered with syntax-highlighted tokens via a lazily loaded Refractor
    * component. When omitted or set to a non-string value, the content is
    * rendered as plain text inside a `<code>` element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   language?: string
 
@@ -52,11 +42,7 @@ export type CodeOwnProps = CodeStyleProps & {
    * Uses the code font size scale defined by the theme, which is separate from
    * the text and heading font size scales. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontCodeSize\>}
    * @defaultValue 2
-   * @optional
    */
   size?: ResponsiveProp<FontCodeSize>
 }
@@ -66,8 +52,6 @@ export type CodeOwnProps = CodeStyleProps & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Code`.
- *
- * Accepted values: `"div"` | `"pre"` | `ComponentType`
  *
  * @public
  */
@@ -98,14 +82,6 @@ export type CodeProps<E extends CodeElementType = CodeElementType> = Props<CodeO
  *
  * The component renders a `<pre>` element by default and supports all margin
  * and max-width style props inherited from {@link CodeStyleProps}.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"pre"` |
- * | `size` | `2` |
- * | `weight` | `"regular"` |
  *
  * @public
  */

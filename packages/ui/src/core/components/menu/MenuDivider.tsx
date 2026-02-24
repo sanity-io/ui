@@ -30,8 +30,6 @@ export type MenuDividerOwnProps = {}
  * @remarks
  * Determines the HTML element or custom component type rendered by `MenuDivider`.
  *
- * Accepted values: `"div"` | `"hr"` | `"span"` | `ComponentType`
- *
  * @public
  */
 export type MenuDividerElementType = 'div' | 'hr' | 'span' | ComponentType
@@ -62,12 +60,6 @@ export type MenuDividerProps<E extends MenuDividerElementType = MenuDividerEleme
  * default that visually separates sections of menu items. It does not accept
  * any component-specific props — only intrinsic HTML attributes for the
  * rendered element type.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `MenuDividerElementType` | `"hr"` | No | The HTML element or component type to render. Accepted values: `"div"` \| `"hr"` \| `"span"` \| `ComponentType`. |
  *
  * @public
  */

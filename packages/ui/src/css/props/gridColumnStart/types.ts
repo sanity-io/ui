@@ -25,14 +25,6 @@ export interface GridColumnStartStyleProps {
    *
    * @remarks
    * Maps to the CSS `grid-column-start` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"auto"` – The item is placed automatically by the grid auto-placement algorithm.
-   * - `1`–`12` – Specifies the starting column grid line number.
-   *
-   * @type {ResponsiveProp\<GridColumnStart\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridColumnStart?: ResponsiveProp<GridColumnStart>
 }

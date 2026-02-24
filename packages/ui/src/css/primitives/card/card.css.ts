@@ -67,10 +67,10 @@ const stateVars = {
 }
 
 export const root: string = _style(layers.primitives, {
-  'backgroundColor': vars.color.bg,
-  'color': vars.color.fg,
+  backgroundColor: vars.color.bg,
+  color: vars.color.fg,
 
-  'vars': stateVars.enabled,
+  vars: stateVars.enabled,
 
   '@media': {
     '(hover: hover)': {
@@ -108,7 +108,7 @@ export const root: string = _style(layers.primitives, {
     },
   },
 
-  'selectors': {
+  selectors: {
     'a.&': {
       outline: 'none',
       textDecoration: 'none',

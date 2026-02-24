@@ -41,7 +41,6 @@ export type BoxOwnProps = BoxStyleProps
  * The rendered element receives all applicable HTML attributes for the chosen element type
  * in addition to the Box's own style props.
  *
- * Accepted values:
  * `"a"` | `"article"` | `"aside"` | `"blockquote"` | `"body"` | `"button"` | `"details"` |
  * `"div"` | `"header"` | `"fieldset"` | `"figure"` | `"figcaption"` | `"footer"` | `"form"` |
  * `"html"` | `"iframe"` | `"kbd"` | `"label"` | `"legend"` | `"li"` | `"main"` | `"nav"` |
@@ -112,72 +111,6 @@ export type BoxProps<E extends BoxElementType = BoxElementType> = Props<BoxOwnPr
  *
  * It serves as the building block for higher-level layout primitives such as
  * {@link Flex}, {@link Grid}, {@link Stack}, {@link Inline}, and {@link Card}.
- *
- * ### Props
- *
- * | Prop | Type | Default | Description |
- * |------|------|---------|-------------|
- * | `as` | {@link BoxElementType} | `"div"` | The HTML element or component type to render. |
- * | `display` | `ResponsiveProp<Display>` | `"block"` | Sets the CSS display mode. |
- * | `flex` | `ResponsiveProp<Flex>` | — | Controls the flex grow/shrink behavior. |
- * | `flexDirection` | `ResponsiveProp<FlexDirection>` | — | Sets the flex direction. |
- * | `flexWrap` | `ResponsiveProp<FlexWrap>` | — | Controls whether flex items wrap. |
- * | `alignItems` | `ResponsiveProp<AlignItems>` | — | Aligns items along the cross axis. |
- * | `justifyContent` | `ResponsiveProp<JustifyContent>` | — | Distributes items along the main axis. |
- * | `gap` | `ResponsiveProp<Space>` | — | Sets the gap between flex/grid children. |
- * | `gapX` | `ResponsiveProp<Space>` | — | Sets the horizontal gap. |
- * | `gapY` | `ResponsiveProp<Space>` | — | Sets the vertical gap. |
- * | `margin` | `ResponsiveProp<Margin>` | `0` | Sets the outer margin on all sides. |
- * | `marginX` | `ResponsiveProp<Margin>` | — | Sets the horizontal margin. |
- * | `marginY` | `ResponsiveProp<Margin>` | — | Sets the vertical margin. |
- * | `marginTop` | `ResponsiveProp<Margin>` | — | Sets the top margin. |
- * | `marginRight` | `ResponsiveProp<Margin>` | — | Sets the right margin. |
- * | `marginBottom` | `ResponsiveProp<Margin>` | — | Sets the bottom margin. |
- * | `marginLeft` | `ResponsiveProp<Margin>` | — | Sets the left margin. |
- * | `padding` | `ResponsiveProp<Padding>` | `0` | Sets the inner padding on all sides. |
- * | `paddingX` | `ResponsiveProp<Padding>` | — | Sets the horizontal padding. |
- * | `paddingY` | `ResponsiveProp<Padding>` | — | Sets the vertical padding. |
- * | `paddingTop` | `ResponsiveProp<Padding>` | — | Sets the top padding. |
- * | `paddingRight` | `ResponsiveProp<Padding>` | — | Sets the right padding. |
- * | `paddingBottom` | `ResponsiveProp<Padding>` | — | Sets the bottom padding. |
- * | `paddingLeft` | `ResponsiveProp<Padding>` | — | Sets the left padding. |
- * | `width` | `ResponsiveProp<Width>` | — | Sets the width. |
- * | `height` | `ResponsiveProp<Height>` | — | Sets the height. |
- * | `minWidth` | `ResponsiveProp<MinWidth>` | `0` | Sets the minimum width. |
- * | `minHeight` | `ResponsiveProp<MinHeight>` | `0` | Sets the minimum height. |
- * | `maxWidth` | `ResponsiveProp<MaxWidth>` | — | Sets the maximum width. |
- * | `position` | `ResponsiveProp<Position>` | — | Sets the CSS positioning scheme. |
- * | `inset` | `ResponsiveProp<Inset>` | — | Sets the inset on all sides. |
- * | `insetTop` | `ResponsiveProp<Inset>` | — | Sets the top inset. |
- * | `insetRight` | `ResponsiveProp<Inset>` | — | Sets the right inset. |
- * | `insetBottom` | `ResponsiveProp<Inset>` | — | Sets the bottom inset. |
- * | `insetLeft` | `ResponsiveProp<Inset>` | — | Sets the left inset. |
- * | `overflow` | `ResponsiveProp<Overflow>` | — | Controls overflow behavior on both axes. |
- * | `overflowX` | `ResponsiveProp<Overflow>` | — | Controls horizontal overflow behavior. |
- * | `overflowY` | `ResponsiveProp<Overflow>` | — | Controls vertical overflow behavior. |
- * | `border` | `ResponsiveProp<BorderStyle \| boolean>` | `false` | Sets the border on all sides. |
- * | `borderTop` | `ResponsiveProp<BorderStyle \| boolean>` | — | Sets the top border. |
- * | `borderRight` | `ResponsiveProp<BorderStyle \| boolean>` | — | Sets the right border. |
- * | `borderBottom` | `ResponsiveProp<BorderStyle \| boolean>` | — | Sets the bottom border. |
- * | `borderLeft` | `ResponsiveProp<BorderStyle \| boolean>` | — | Sets the left border. |
- * | `radius` | `ResponsiveProp<Radius \| 'full'>` | — | Sets the border radius. |
- * | `shadow` | `ResponsiveProp<Shadow>` | — | Sets the box shadow elevation. |
- * | `muted` | `boolean` | — | Applies a muted foreground color. |
- * | `outline` | `'none'` | — | Removes the focus outline. |
- * | `sizing` | `BoxSizing` | `"border"` | Controls box-sizing behavior. |
- * | `textAlign` | `TextAlign` | — | Sets horizontal text alignment. |
- * | `pointerEvents` | `PointerEvents` | — | Controls pointer event handling. |
- * | `gridTemplateColumns` | `ResponsiveProp<GridTemplateColumns>` | — | Defines grid column template. |
- * | `gridTemplateRows` | `ResponsiveProp<GridTemplateRows>` | — | Defines grid row template. |
- * | `gridAutoColumns` | `ResponsiveProp<GridAutoColumns>` | — | Sets implicit grid column sizing. |
- * | `gridAutoRows` | `ResponsiveProp<GridAutoRows>` | — | Sets implicit grid row sizing. |
- * | `gridAutoFlow` | `ResponsiveProp<GridAutoFlow>` | — | Controls auto-placement flow in a grid. |
- * | `gridColumn` | `ResponsiveProp<GridColumn>` | — | Controls grid item column span/placement. |
- * | `gridColumnStart` | `ResponsiveProp<GridColumnStart>` | — | Sets the starting column grid line. |
- * | `gridColumnEnd` | `ResponsiveProp<GridColumnEnd>` | — | Sets the ending column grid line. |
- * | `gridRow` | `ResponsiveProp<GridRow>` | — | Controls grid item row span/placement. |
- * | `gridRowStart` | `ResponsiveProp<GridRowStart>` | — | Sets the starting row grid line. |
- * | `gridRowEnd` | `ResponsiveProp<GridRowEnd>` | — | Sets the ending row grid line. |
  *
  * @public
  */

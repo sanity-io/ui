@@ -34,10 +34,6 @@ export type CheckboxOwnProps = {
    *
    * This is set via the `HTMLInputElement.indeterminate` DOM property (not an
    * HTML attribute), so it can only be controlled programmatically.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   indeterminate?: boolean
 
@@ -50,10 +46,6 @@ export type CheckboxOwnProps = {
    * `data-invalid` attribute is applied to the wrapper element for styling.
    *
    * Set to an empty string `""` or `undefined` to clear the validation error.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   customValidity?: string
 }
@@ -63,8 +55,6 @@ export type CheckboxOwnProps = {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Checkbox`.
- *
- * Accepted values: `"input"` | `ComponentType`
  *
  * @public
  */
@@ -109,12 +99,6 @@ export type CheckboxProps<E extends CheckboxElementType = CheckboxElementType> =
  * When `readOnly` is `true`, the checkbox is visually enabled but interaction is
  * prevented by setting the native `disabled` attribute. A `data-read-only` attribute
  * is applied for styling differentiation from disabled state.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"input"` |
  *
  * @public
  */

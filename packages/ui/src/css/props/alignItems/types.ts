@@ -21,17 +21,6 @@ export interface AlignItemsStyleProps {
    *
    * @remarks
    * Maps to the CSS `align-items` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"baseline"` – Aligns items along their content baseline.
-   * - `"center"` – Centers items along the cross axis.
-   * - `"flex-end"` – Aligns items to the end of the cross axis.
-   * - `"flex-start"` – Aligns items to the start of the cross axis.
-   * - `"stretch"` – Stretches items to fill the container along the cross axis.
-   *
-   * @type {ResponsiveProp\<AlignItems\>}
-   * @defaultValue undefined
-   * @optional
    */
   alignItems?: ResponsiveProp<AlignItems>
 }

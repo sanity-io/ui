@@ -10,10 +10,6 @@ export interface ToastParams {
   /**
    * When `true`, renders a close button that allows the user to manually
    * dismiss the toast before the `duration` expires.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   closable?: boolean
 
@@ -23,10 +19,6 @@ export interface ToastParams {
    * @remarks
    * Accepts any React node. Typically a short string providing additional
    * context about the action or event that triggered the toast.
-   *
-   * @type {ReactNode}
-   * @defaultValue undefined
-   * @optional
    */
   description?: ReactNode
 
@@ -38,10 +30,6 @@ export interface ToastParams {
    * the specified time. When omitted, `Infinity`, or a very large value,
    * the toast remains visible until the user manually closes it (requires
    * `closable` to be `true`).
-   *
-   * @type {number}
-   * @defaultValue undefined
-   * @optional
    */
   duration?: number
 
@@ -56,19 +44,13 @@ export interface ToastParams {
    * The `id` is also returned by the {@link ToastContextValue.push} method,
    * allowing the consumer to programmatically update the toast later.
    *
-   * @type {string}
    * @defaultValue (auto-generated)
-   * @optional
    */
   id?: string
 
   /**
    * Callback fired when the toast is dismissed, either by the user clicking
    * the close button or by the auto-dismiss timer expiring.
-   *
-   * @type {() => void}
-   * @defaultValue undefined
-   * @optional
    */
   onClose?: () => void
 
@@ -78,10 +60,6 @@ export interface ToastParams {
    * @remarks
    * Accepts any React node. Typically a short string summarizing the action
    * or event (e.g. `"Document published"`, `"Error saving"`).
-   *
-   * @type {ReactNode}
-   * @defaultValue undefined
-   * @optional
    */
   title?: ReactNode
 
@@ -97,12 +75,6 @@ export interface ToastParams {
    * - `"info"` → `neutral` tone, `role="alert"`
    *
    * When omitted, the toast renders with the `default` tone and `role="status"`.
-   *
-   * Accepted values: `"error"` | `"warning"` | `"success"` | `"info"`
-   *
-   * @type {'error' | 'warning' | 'success' | 'info'}
-   * @defaultValue undefined
-   * @optional
    */
   status?: 'error' | 'warning' | 'success' | 'info'
 }
@@ -121,8 +93,6 @@ export interface ToastParams {
 export interface ToastContextValue {
   /**
    * The version of the toast context API.
-   *
-   * @type {0.0}
    */
   version: 0.0
 
@@ -137,8 +107,6 @@ export interface ToastContextValue {
    *
    * @param params - The {@link ToastParams} configuration for the toast.
    * @returns The unique identifier of the created or updated toast.
-   *
-   * @type {(params: ToastParams) => string}
    */
   push: (params: ToastParams) => string
 }

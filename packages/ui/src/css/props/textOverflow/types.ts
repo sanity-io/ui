@@ -29,14 +29,6 @@ export interface TextOverflowStyleProps {
    * constrained dimensions and `overflow: hidden` (or equivalent) in order
    * to take effect.
    *
-   * Accepted values:
-   * - `"ellipsis"` – Truncates overflowing text and appends `…`.
-   * - `"clip"` – Clips overflowing text with no visual indicator.
-   *
-   * @type {TextOverflow}
-   * @defaultValue undefined
-   * @optional
-   *
    * @beta
    */
   textOverflow?: TextOverflow

@@ -92,13 +92,6 @@ export type InlineProps<E extends InlineElementType = InlineElementType> = Props
  * The `gap` prop controls the spacing between items in both the horizontal and
  * vertical directions.
  *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `InlineElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `gap` | `ResponsiveProp<Space>` | `undefined` | No | Sets the gap between items in both directions. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- *
  * ### Internally managed props
  *
  * The following props are set internally and cannot be overridden:

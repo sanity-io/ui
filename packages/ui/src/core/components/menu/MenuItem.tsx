@@ -41,11 +41,6 @@ export const DEFAULT_MENU_ITEM_ELEMENT = 'button'
  * Extends {@link GapStyleProps}, {@link PaddingStyleProps}, and {@link RadiusStyleProps}
  * to provide spacing and visual control alongside menu-item-specific properties.
  *
- * Inherited style props:
- * - `gap`, `gapX`, `gapY` – Gap between child items (from {@link GapStyleProps}).
- * - `padding`, `paddingX`, `paddingY`, `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft` – Inner padding (from {@link PaddingStyleProps}).
- * - `radius` – Border radius (from {@link RadiusStyleProps}).
- *
  * @public
  */
 export type MenuItemOwnProps = GapStyleProps &
@@ -54,10 +49,6 @@ export type MenuItemOwnProps = GapStyleProps &
     /**
      * When `true`, disables the menu item, preventing click events and
      * applying a disabled visual state.
-     *
-     * @type {boolean}
-     * @defaultValue undefined
-     * @optional
      */
     disabled?: boolean
 
@@ -67,11 +58,7 @@ export type MenuItemOwnProps = GapStyleProps &
      * @remarks
      * Uses the text font size scale defined by the theme. Supports responsive values.
      *
-     * Accepted values: `0 | 1 | 2 | 3 | 4`
-     *
-     * @type {ResponsiveProp\<FontTextSize\>}
      * @defaultValue 1
-     * @optional
      */
     fontSize?: ResponsiveProp<FontTextSize>
 
@@ -81,10 +68,6 @@ export type MenuItemOwnProps = GapStyleProps &
      * @remarks
      * When provided, renders a {@link Hotkeys} component to the right of the item
      * text showing the specified key combination (e.g. `["Ctrl", "S"]`).
-     *
-     * @type {string[]}
-     * @defaultValue undefined
-     * @optional
      */
     hotkeys?: string[]
 
@@ -94,10 +77,6 @@ export type MenuItemOwnProps = GapStyleProps &
      * @remarks
      * Accepts either a React component type (rendered as `<IconComponent />`) or
      * a React element (rendered as-is).
-     *
-     * @type {ElementType | ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     icon?: ElementType | ReactNode
 
@@ -107,20 +86,12 @@ export type MenuItemOwnProps = GapStyleProps &
      * @remarks
      * Accepts either a React component type (rendered as `<IconComponent />`) or
      * a React element (rendered as-is).
-     *
-     * @type {ElementType | ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     iconRight?: ElementType | ReactNode
 
     /**
      * When `true`, applies a pressed visual state to the menu item via the
      * `data-pressed` attribute.
-     *
-     * @type {boolean}
-     * @defaultValue undefined
-     * @optional
      */
     pressed?: boolean
 
@@ -132,10 +103,6 @@ export type MenuItemOwnProps = GapStyleProps &
      * item should receive initial focus when the menu opens. The internal `active`
      * state (managed by the menu controller) takes visual precedence over this
      * prop for highlighting the currently focused item.
-     *
-     * @type {boolean}
-     * @defaultValue undefined
-     * @optional
      */
     selected?: boolean
 
@@ -147,10 +114,6 @@ export type MenuItemOwnProps = GapStyleProps &
      * `weight="medium"`. If both `text` and `children` are provided, `text` is
      * rendered with icon/hotkey layout and `children` is rendered in a separate
      * content area below.
-     *
-     * @type {ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     text?: ReactNode
 
@@ -160,18 +123,7 @@ export type MenuItemOwnProps = GapStyleProps &
      * @remarks
      * Controls the color scheme applied to the menu item's hover and active states.
      *
-     * Accepted values:
-     * - `"default"` – Neutral default tone.
-     * - `"neutral"` – Neutral emphasis tone.
-     * - `"primary"` – Primary action tone.
-     * - `"suggest"` – Suggestive or informational tone.
-     * - `"positive"` – Positive or success tone.
-     * - `"caution"` – Warning or caution tone.
-     * - `"critical"` – Destructive or critical action tone.
-     *
-     * @type {ElementTone}
      * @defaultValue `"default"`
-     * @optional
      */
     tone?: ElementTone
   }
@@ -181,8 +133,6 @@ export type MenuItemOwnProps = GapStyleProps &
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `MenuItem`.
- *
- * Accepted values: `"button"` | `"a"` | `ComponentType`
  *
  * @public
  */
@@ -220,18 +170,6 @@ export type MenuItemProps<E extends MenuItemElementType = MenuItemElementType> =
  * Items are registered with the parent menu's controller on mount and
  * participate in arrow-key navigation, mouse-enter highlighting, and
  * click handling.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"button"` |
- * | `fontSize` | `1` |
- * | `gap` | `3` |
- * | `padding` | `3` |
- * | `radius` | `2` |
- * | `role` | `"menuitem"` |
- * | `tone` | `"default"` |
  *
  * @public
  */

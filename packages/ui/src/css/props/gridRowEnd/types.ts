@@ -25,14 +25,6 @@ export interface GridRowEndStyleProps {
    *
    * @remarks
    * Maps to the CSS `grid-row-end` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"auto"` – The item is placed automatically by the grid auto-placement algorithm.
-   * - `1`–`12` – Specifies the ending grid line by numerical index.
-   *
-   * @type {ResponsiveProp\<GridRowEnd\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridRowEnd?: ResponsiveProp<GridRowEnd>
 }

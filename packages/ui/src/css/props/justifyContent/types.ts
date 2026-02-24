@@ -35,18 +35,6 @@ export interface JustifyContentStyleProps {
    *
    * @remarks
    * Maps to the CSS `justify-content` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"flex-start"` – Items are packed toward the start of the main axis.
-   * - `"flex-end"` – Items are packed toward the end of the main axis.
-   * - `"center"` – Items are centered along the main axis.
-   * - `"space-between"` – Items are evenly distributed; first item at the start, last at the end.
-   * - `"space-around"` – Items are evenly distributed with equal space around each item.
-   * - `"space-evenly"` – Items are evenly distributed with equal space between each item and edges.
-   *
-   * @type {ResponsiveProp\<JustifyContent\>}
-   * @defaultValue undefined
-   * @optional
    */
   justifyContent?: ResponsiveProp<JustifyContent>
 }

@@ -37,9 +37,6 @@ export type TabOwnProps = {
    * @remarks
    * Sets the `aria-controls` attribute on the rendered tab element, establishing
    * an accessible relationship between the tab and its associated panel.
-   *
-   * @type {string}
-   * @required
    */
   'aria-controls': string
 
@@ -50,11 +47,8 @@ export type TabOwnProps = {
    * Applied as the `id` attribute on the rendered element. This value is
    * referenced by the corresponding {@link TabPanel}'s `aria-labelledby`
    * prop to establish an accessible label relationship.
-   *
-   * @type {string}
-   * @required
    */
-  'id': string
+  id: string
 
   /**
    * An icon to render inside the tab, on the leading (left) side of the label.
@@ -63,12 +57,8 @@ export type TabOwnProps = {
    * Accepts either a React component type (rendered as `<IconComponent />`) or
    * a React element (rendered as-is). Forwarded to the underlying {@link Button}'s
    * `icon` prop.
-   *
-   * @type {ElementType | ReactNode}
-   * @defaultValue undefined
-   * @optional
    */
-  'icon'?: ElementType | ReactNode
+  icon?: ElementType | ReactNode
 
   /**
    * When `true`, programmatically moves focus to this tab element.
@@ -77,12 +67,8 @@ export type TabOwnProps = {
    * Managed internally by {@link TabList} during keyboard navigation. When the
    * value transitions to `true` and the tab does not already have focus, the
    * underlying button element is focused via `element.focus()`.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
-  'focused'?: boolean
+  focused?: boolean
 
   /**
    * Sets the font size of the tab's text and icon content.
@@ -90,25 +76,17 @@ export type TabOwnProps = {
    * @remarks
    * Uses the text font size scale defined by the theme. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontTextSize\>}
    * @defaultValue 1
-   * @optional
    */
-  'fontSize'?: ResponsiveProp<FontTextSize>
+  fontSize?: ResponsiveProp<FontTextSize>
 
   /**
    * The text label to display inside the tab.
    *
    * @remarks
    * Forwarded to the underlying {@link Button}'s `text` prop.
-   *
-   * @type {ReactNode}
-   * @defaultValue undefined
-   * @optional
    */
-  'label'?: ReactNode
+  label?: ReactNode
 
   /**
    * Sets the inner padding of the tab element.
@@ -116,13 +94,9 @@ export type TabOwnProps = {
    * @remarks
    * Uses the spacing scale defined by the theme. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
    * @defaultValue 2
-   * @optional
    */
-  'padding'?: ResponsiveProp<Space>
+  padding?: ResponsiveProp<Space>
 
   /**
    * When `true`, marks this tab as the currently active tab in the tab set.
@@ -132,33 +106,16 @@ export type TabOwnProps = {
    * visual state via the underlying {@link Button}. Only the selected tab is
    * included in the tab order (`tabIndex={0}`); all other tabs have
    * `tabIndex={-1}`.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
-  'selected'?: boolean
+  selected?: boolean
 
   /**
    * Sets the color tone of the tab.
    *
    * @remarks
    * Controls the color scheme applied to the tab's hover, focus, and selected states.
-   *
-   * Accepted values:
-   * - `"default"` – Neutral default tone.
-   * - `"neutral"` – Neutral emphasis tone.
-   * - `"primary"` – Primary action tone.
-   * - `"suggest"` – Suggestive or informational tone.
-   * - `"positive"` – Positive or success tone.
-   * - `"caution"` – Warning or caution tone.
-   * - `"critical"` – Destructive or critical action tone.
-   *
-   * @type {ElementTone}
-   * @defaultValue undefined
-   * @optional
    */
-  'tone'?: ElementTone
+  tone?: ElementTone
 }
 
 /**
@@ -166,8 +123,6 @@ export type TabOwnProps = {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Tab`.
- *
- * Accepted values: `"button"` | `ComponentType`
  *
  * @public
  */
@@ -198,21 +153,6 @@ export type TabProps<E extends TabElementType = TabElementType> = Props<TabOwnPr
  * Only the currently selected tab is included in the document tab order
  * (`tabIndex={0}`); all other tabs are removed from the tab order (`tabIndex={-1}`)
  * and navigable only via the ArrowLeft/ArrowRight keys handled by {@link TabList}.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `TabElementType` | `"button"` | No | The HTML element or component type to render. |
- * | `aria-controls` | `string` | — | Yes | The `id` of the corresponding `TabPanel`. |
- * | `id` | `string` | — | Yes | A unique identifier for the tab element. |
- * | `fontSize` | `ResponsiveProp<FontTextSize>` | `1` | No | Font size of the tab text. Accepted values: `0 \| 1 \| 2 \| 3 \| 4`. |
- * | `padding` | `ResponsiveProp<Space>` | `2` | No | Inner padding. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- * | `icon` | `ElementType \| ReactNode` | `undefined` | No | An icon rendered on the leading side. |
- * | `label` | `ReactNode` | `undefined` | No | The text label displayed inside the tab. |
- * | `focused` | `boolean` | `undefined` | No | When `true`, programmatically focuses this tab. |
- * | `selected` | `boolean` | `undefined` | No | When `true`, marks this tab as the active tab. |
- * | `tone` | `ElementTone` | `undefined` | No | Sets the color tone for interactive states. |
  *
  * @public
  */

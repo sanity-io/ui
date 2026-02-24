@@ -30,16 +30,6 @@ export interface GridAutoColumnsStyleProps {
    *
    * Implicitly created columns appear when grid items are placed outside
    * the bounds of the explicitly defined grid template.
-   *
-   * Accepted values:
-   * - `"auto"` – Columns are sized based on their content.
-   * - `"min"` – Columns are sized to their minimum content size (`min-content`).
-   * - `"max"` – Columns are sized to their maximum content size (`max-content`).
-   * - `"fr"` – Columns are sized to an equal fraction of the available space (`1fr`).
-   *
-   * @type {ResponsiveProp\<GridAutoColumns\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridAutoColumns?: ResponsiveProp<GridAutoColumns>
 }

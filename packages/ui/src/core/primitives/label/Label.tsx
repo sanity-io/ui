@@ -21,18 +21,6 @@ export const DEFAULT_LABEL_ELEMENT = 'div'
  * Combines {@link LabelStyleProps} and {@link TextOverflowStyleProps} to provide
  * typographic control and text truncation capabilities for label elements.
  *
- * Inherited from {@link LabelStyleProps}:
- * - `align` – Sets horizontal text alignment (`"left"` | `"right"` | `"center"` | `"justify"` | `"initial"`).
- * - `muted` – When `true`, applies a muted foreground color.
- * - `size` – Sets the font size using the theme's label size scale (`0 | 1 | 2 | 3 | 4 | 5`). Defaults to `1`.
- * - `weight` – Sets the font weight (`"regular"` | `"medium"` | `"semibold"` | `"bold"`). Defaults to `"regular"`.
- * - `flex` – Controls flex grow/shrink behavior within a flex container.
- * - `margin`, `marginX`, `marginY`, `marginTop`, `marginRight`, `marginBottom`, `marginLeft` – Outer margin props.
- * - `maxWidth` – Constrains the maximum width of the element.
- *
- * Inherited from {@link TextOverflowStyleProps}:
- * - `textOverflow` – Controls how overflowing text is treated (`"ellipsis"` | `"clip"`).
- *
  * @public
  */
 export type LabelOwnProps = LabelStyleProps & TextOverflowStyleProps
@@ -44,7 +32,6 @@ export type LabelOwnProps = LabelStyleProps & TextOverflowStyleProps
  * Determines the HTML element or custom component type rendered by `Label`.
  * Choose an element type that is semantically appropriate for the content.
  *
- * Accepted values:
  * `"div"` | `"h1"` | `"h2"` | `"h3"` | `"h4"` | `"h5"` | `"h6"` |
  * `"label"` | `"li"` | `"p"` | `"span"` | `ComponentType`
  *
@@ -90,20 +77,6 @@ export type LabelProps<E extends LabelElementType = LabelElementType> = Props<La
  *
  * The component wraps its children in a `<span>` element that applies text
  * overflow behavior when the `textOverflow` prop is set.
- *
- * ### Props
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `LabelElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `align` | `TextAlign` | `undefined` | No | Sets the horizontal text alignment. |
- * | `muted` | `boolean` | `false` | No | Applies a muted foreground color. |
- * | `size` | `ResponsiveProp<FontLabelSize>` | `1` | No | Sets the label font size (`0 \| 1 \| 2 \| 3 \| 4 \| 5`). |
- * | `weight` | `FontWeight` | `"regular"` | No | Sets the font weight (`"regular"` \| `"medium"` \| `"semibold"` \| `"bold"`). |
- * | `textOverflow` | `TextOverflow` | `undefined` | No | Controls how overflowing text is treated (`"ellipsis"` \| `"clip"`). |
- * | `flex` | `ResponsiveProp<Flex>` | `undefined` | No | Controls flex grow/shrink behavior. |
- * | `margin` | `ResponsiveProp<Margin>` | `undefined` | No | Sets outer margin on all sides. |
- * | `maxWidth` | `ResponsiveProp<MaxWidth>` | `undefined` | No | Constrains the maximum width of the element. |
  *
  * @public
  */

@@ -26,15 +26,6 @@ export interface GridRowStyleProps {
    *
    * @remarks
    * Maps to the CSS `grid-row` shorthand property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"auto"` – The item is placed automatically by the grid auto-placement algorithm.
-   * - `"full"` – The item spans all available rows.
-   * - `1`–`12` – The item spans the specified number of rows.
-   *
-   * @type {ResponsiveProp\<GridRow\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridRow?: ResponsiveProp<GridRow>
 }

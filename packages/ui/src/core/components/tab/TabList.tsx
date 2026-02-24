@@ -38,17 +38,6 @@ export type TabListChild = ReactElement<Props<TabProps, 'button'>> | null | unde
  * flex layout and spacing props, and adds a required `children` prop that accepts
  * an array of {@link Tab} elements.
  *
- * Inherited from {@link FlexOwnProps}:
- * - `align` (`ResponsiveProp<AlignItems>`) – Aligns items along the cross axis.
- * - `direction` (`ResponsiveProp<FlexDirection>`) – Sets the flex direction.
- * - `justify` (`ResponsiveProp<JustifyContent>`) – Distributes items along the main axis.
- * - `wrap` (`ResponsiveProp<FlexWrap>`) – Controls whether items wrap. Default: `"nowrap"`.
- * - `gap` (`ResponsiveProp<Space>`) – Gap between tab items. Default: `1`.
- * - All spacing props: `margin`, `padding`, and per-side variants.
- * - All sizing props: `width`, `minWidth`, `minHeight`, `maxWidth`.
- * - All visual props: `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
- * - Other: `flex`, `textAlign`, `pointerEvents`, `sizing`.
- *
  * @public
  */
 export type TabListOwnProps = Omit<FlexOwnProps, 'as' | 'height'> & {
@@ -59,9 +48,6 @@ export type TabListOwnProps = Omit<FlexOwnProps, 'as' | 'height'> & {
    * Accepts an array of {@link TabListChild} elements. Falsy values (`null`,
    * `undefined`, `false`) are filtered out. Each tab is cloned with injected
    * `focused` and `onFocus` props for keyboard navigation management.
-   *
-   * @type {TabListChild[]}
-   * @required
    */
   children: TabListChild[]
 }
@@ -71,8 +57,6 @@ export type TabListOwnProps = Omit<FlexOwnProps, 'as' | 'height'> & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `TabList`.
- *
- * Accepted values: `"div"` | `"span"` | `ComponentType`
  *
  * @public
  */
@@ -108,15 +92,6 @@ export type TabListProps<E extends TabListElementType = TabListElementType> = Pr
  * Each child {@link Tab} is cloned with injected `focused` and `onFocus` props
  * so that the `TabList` can track and programmatically move focus between tabs.
  * Falsy children are filtered out.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `TabListElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `gap` | `ResponsiveProp<Space>` | `1` | No | Gap between tab items. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- * | `wrap` | `ResponsiveProp<FlexWrap>` | `"nowrap"` | No | Controls whether tabs wrap onto multiple lines. Accepted values: `"wrap"` \| `"wrap-reverse"` \| `"nowrap"`. |
- * | `children` | `TabListChild[]` | — | Yes | The Tab elements to render inside the list. |
  *
  * @public
  */

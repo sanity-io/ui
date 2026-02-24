@@ -26,10 +26,6 @@ export interface BorderStyleProps {
    * @remarks
    * When set to `true`, applies a solid border. When set to `false`, removes the border.
    * A {@link BorderStyle} string value can also be provided for finer control. Supports responsive values.
-   *
-   * @type {ResponsiveProp\<BorderStyle | boolean\>}
-   * @defaultValue undefined
-   * @optional
    */
   border?: ResponsiveProp<BorderStyle | boolean>
 
@@ -41,10 +37,6 @@ export interface BorderStyleProps {
    * A {@link BorderStyle} string value can also be provided for finer control. Supports responsive values.
    *
    * Overrides the top portion of the `border` prop when both are specified.
-   *
-   * @type {ResponsiveProp\<BorderStyle | boolean\>}
-   * @defaultValue undefined
-   * @optional
    */
   borderTop?: ResponsiveProp<BorderStyle | boolean>
 
@@ -56,10 +48,6 @@ export interface BorderStyleProps {
    * A {@link BorderStyle} string value can also be provided for finer control. Supports responsive values.
    *
    * Overrides the right portion of the `border` prop when both are specified.
-   *
-   * @type {ResponsiveProp\<BorderStyle | boolean\>}
-   * @defaultValue undefined
-   * @optional
    */
   borderRight?: ResponsiveProp<BorderStyle | boolean>
 
@@ -71,10 +59,6 @@ export interface BorderStyleProps {
    * A {@link BorderStyle} string value can also be provided for finer control. Supports responsive values.
    *
    * Overrides the bottom portion of the `border` prop when both are specified.
-   *
-   * @type {ResponsiveProp\<BorderStyle | boolean\>}
-   * @defaultValue undefined
-   * @optional
    */
   borderBottom?: ResponsiveProp<BorderStyle | boolean>
 
@@ -86,10 +70,6 @@ export interface BorderStyleProps {
    * A {@link BorderStyle} string value can also be provided for finer control. Supports responsive values.
    *
    * Overrides the left portion of the `border` prop when both are specified.
-   *
-   * @type {ResponsiveProp\<BorderStyle | boolean\>}
-   * @defaultValue undefined
-   * @optional
    */
   borderLeft?: ResponsiveProp<BorderStyle | boolean>
 }

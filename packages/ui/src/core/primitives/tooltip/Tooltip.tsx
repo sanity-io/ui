@@ -69,21 +69,6 @@ export const DEFAULT_TOOLTIP_ELEMENT = 'div'
  * shadow control. Adds tooltip-specific properties for positioning, animation,
  * delay, portal rendering, and content display.
  *
- * Inherited from {@link LayerOwnProps} (via {@link CardOwnProps} and {@link BoxOwnProps}):
- * - All layout props: `display`, `flex`, `flexDirection`, `alignItems`, `justifyContent`, etc.
- * - All spacing props: `margin`, `padding`, and per-side variants.
- * - All sizing props: `width`, `height`, `minWidth`, `minHeight`, `maxWidth`.
- * - All position props: `position`, `inset`, and per-side inset variants.
- * - All visual props: `border`, `overflow`, `muted`, `outline`.
- * - Card-specific props: `scheme`, `tone`.
- * - Layer-specific props: `onActivate`, `zOffset`.
- *
- * Inherited from {@link RadiusStyleProps}:
- * - `radius` – Border radius from the theme radius scale.
- *
- * Inherited from {@link ShadowStyleProps}:
- * - `shadow` – Box shadow elevation level from the theme shadow scale.
- *
  * @public
  */
 export type TooltipOwnProps = LayerOwnProps &
@@ -99,9 +84,7 @@ export type TooltipOwnProps = LayerOwnProps &
      *
      * @beta
      *
-     * @type {boolean}
      * @defaultValue false
-     * @optional
      */
     animate?: boolean
 
@@ -109,9 +92,7 @@ export type TooltipOwnProps = LayerOwnProps &
      * When `true`, renders a directional arrow element that points from the
      * tooltip toward its reference element.
      *
-     * @type {boolean}
      * @defaultValue false
-     * @optional
      */
     arrow?: boolean
 
@@ -123,9 +104,7 @@ export type TooltipOwnProps = LayerOwnProps &
      * middleware operate. When not provided, the nearest boundary element
      * from the `BoundaryElementContext` is used.
      *
-     * @type {HTMLElement | null}
      * @defaultValue (from BoundaryElementContext)
-     * @optional
      */
     boundaryElement?: HTMLElement | null
 
@@ -138,10 +117,6 @@ export type TooltipOwnProps = LayerOwnProps &
      * `onClick`, `onContextMenu`). The `Tooltip` clones this element and
      * injects the necessary event handlers and ref for positioning and
      * visibility management.
-     *
-     * @type {ReactElement<HTMLAttributes<HTMLElement> & RefAttributes<HTMLElement>>}
-     * @defaultValue undefined
-     * @optional
      */
     children?: ReactElement<HTMLAttributes<HTMLElement> & RefAttributes<HTMLElement>>
 
@@ -151,10 +126,6 @@ export type TooltipOwnProps = LayerOwnProps &
      * @remarks
      * Rendered inside a styled tooltip layer card when the tooltip is visible.
      * When set to a falsy value while the tooltip is open, the tooltip closes.
-     *
-     * @type {ReactNode}
-     * @defaultValue undefined
-     * @optional
      */
     content?: ReactNode
 
@@ -171,9 +142,7 @@ export type TooltipOwnProps = LayerOwnProps &
      * When the tooltip is inside a `TooltipDelayGroup`, the group's delay
      * values take precedence over this prop.
      *
-     * @type {Delay}
      * @defaultValue 0
-     * @optional
      */
     delay?: Delay
 
@@ -181,10 +150,6 @@ export type TooltipOwnProps = LayerOwnProps &
      * When `true`, disables the tooltip entirely. The `children` reference
      * element is rendered as-is without any tooltip behavior. If the tooltip
      * is currently open when `disabled` becomes `true`, it is closed.
-     *
-     * @type {boolean}
-     * @defaultValue undefined
-     * @optional
      */
     disabled?: boolean
 
@@ -200,9 +165,7 @@ export type TooltipOwnProps = LayerOwnProps &
      * `"right"` | `"right-start"` | `"right-end"` | `"bottom"` | `"bottom-start"` |
      * `"bottom-end"` | `"left"` | `"left-start"` | `"left-end"`
      *
-     * @type {Placement[]}
      * @defaultValue (derived from `placement`)
-     * @optional
      */
     fallbackPlacements?: Placement[]
 
@@ -214,13 +177,10 @@ export type TooltipOwnProps = LayerOwnProps &
      * fit, it falls back to the `fallbackPlacements` using the Floating UI
      * `flip` middleware.
      *
-     * Accepted values: `"top"` | `"top-start"` | `"top-end"` | `"right"` |
      * `"right-start"` | `"right-end"` | `"bottom"` | `"bottom-start"` |
      * `"bottom-end"` | `"left"` | `"left-start"` | `"left-end"`
      *
-     * @type {Placement}
      * @defaultValue `"bottom"`
-     * @optional
      */
     placement?: Placement
 
@@ -232,10 +192,6 @@ export type TooltipOwnProps = LayerOwnProps &
      * registered with the nearest `PortalProvider`. When a string is provided,
      * it is used as the name of a named portal element. When `false` or
      * `undefined`, the tooltip is rendered in place.
-     *
-     * @type {boolean | string}
-     * @defaultValue undefined
-     * @optional
      */
     portal?: boolean | string
 
@@ -244,12 +200,6 @@ export type TooltipOwnProps = LayerOwnProps &
      *
      * @remarks
      * Determines whether the tooltip renders in a light or dark color mode.
-     *
-     * Accepted values: `"light"` | `"dark"`
-     *
-     * @type {ColorScheme}
-     * @defaultValue undefined
-     * @optional
      */
     scheme?: ColorScheme
 
@@ -261,12 +211,7 @@ export type TooltipOwnProps = LayerOwnProps &
      * based on the active theme. When set to `"inherit"`, the tone is inherited
      * from the nearest parent `Card` context.
      *
-     * Accepted values:
-     * - `"transparent"` | `"default"` | `"neutral"` | `"primary"` | `"suggest"` | `"positive"` | `"caution"` | `"critical"` – A specific card tone from the theme.
-     *
-     * @type {CardTone}
      * @defaultValue `"inherit"`
-     * @optional
      */
     tone?: CardTone
   }
@@ -276,8 +221,6 @@ export type TooltipOwnProps = LayerOwnProps &
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Tooltip`.
- *
- * Accepted values: `"div"` | `"span"` | `ComponentType`
  *
  * @public
  */
@@ -319,22 +262,6 @@ export type TooltipProps<E extends TooltipElementType = TooltipElementType> = Pr
  *
  * When `disabled` is `true` or `content` is falsy, the tooltip is not rendered
  * and the `children` reference element is returned as-is.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `TooltipElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `animate` | `boolean` | `false` | No | Enables scale/opacity entrance and exit animation. |
- * | `arrow` | `boolean` | `false` | No | Renders a directional arrow pointing at the reference element. |
- * | `delay` | `Delay` | `0` | No | Delay in milliseconds before the tooltip opens or closes. Accepts a number or `{open, close}` object. |
- * | `disabled` | `boolean` | `undefined` | No | When `true`, disables the tooltip entirely. |
- * | `padding` | `ResponsiveProp<Padding>` | `2` | No | Inner padding of the tooltip card. |
- * | `placement` | `Placement` | `"bottom"` | No | Preferred placement relative to the reference element. |
- * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `3` | No | Border radius of the tooltip card. |
- * | `shadow` | `ResponsiveProp<Shadow>` | `2` | No | Box shadow elevation of the tooltip card. |
- * | `tone` | `CardTone` | `"inherit"` | No | Color tone of the tooltip card. |
- * | `zOffset` | `ResponsiveProp<number>` | `Z_OFFSETS.tooltip` | No | Z-index offset for the tooltip layer. |
  *
  * @public
  */

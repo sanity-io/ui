@@ -25,14 +25,6 @@ export interface GridRowStartStyleProps {
    *
    * @remarks
    * Maps to the CSS `grid-row-start` property. Supports responsive values.
-   *
-   * Accepted values:
-   * - `"auto"` – The item is placed automatically by the grid auto-placement algorithm.
-   * - `1`–`12` – Specifies the starting row grid line number.
-   *
-   * @type {ResponsiveProp\<GridRowStart\>}
-   * @defaultValue undefined
-   * @optional
    */
   gridRowStart?: ResponsiveProp<GridRowStart>
 }

@@ -35,12 +35,6 @@ export type AvatarStackChild = ReactElement<AvatarProps<'div'>> | null | undefin
  * and `justifyContent` omitted, since those are internally managed by the component)
  * to provide layout control alongside avatar-stack-specific properties.
  *
- * Inherited from {@link BoxOwnProps}:
- * - All spacing props: `margin`, `padding`, and per-side variants.
- * - All sizing props: `width`, `height`, `minWidth`, `minHeight`, `maxWidth`.
- * - All visual props: `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
- * - Other layout props: `flex`, `gap`, `position`, etc.
- *
  * @public
  */
 export type AvatarStackOwnProps = Omit<
@@ -55,9 +49,6 @@ export type AvatarStackOwnProps = Omit<
    * (`null`, `undefined`, `false`) are filtered out. Avatars beyond the
    * `maxLength` limit are replaced by an {@link AvatarCounter} that
    * displays the count of hidden avatars.
-   *
-   * @type {AvatarStackChild | AvatarStackChild[]}
-   * @required
    */
   children: AvatarStackChild | AvatarStackChild[]
 
@@ -74,9 +65,7 @@ export type AvatarStackOwnProps = Omit<
    * A value of `0` or less is clamped to `0`, which hides all avatars
    * and only shows the counter.
    *
-   * @type {number}
    * @defaultValue 4
-   * @optional
    */
   maxLength?: number
 
@@ -88,11 +77,7 @@ export type AvatarStackOwnProps = Omit<
    * {@link AvatarCounter}, overriding any individually set `size` props.
    * Uses the avatar size scale defined by the theme. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3`
-   *
-   * @type {ResponsiveProp\<AvatarSize\>}
    * @defaultValue 1
-   * @optional
    */
   size?: ResponsiveProp<AvatarSize>
 }
@@ -102,8 +87,6 @@ export type AvatarStackOwnProps = Omit<
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `AvatarStack`.
- *
- * Accepted values: `"div"` | `"span"` | `ComponentType`
  *
  * @public
  */
@@ -137,14 +120,6 @@ export type AvatarStackProps<E extends AvatarStackElementType = AvatarStackEleme
  *
  * The `size` prop is propagated to all child avatars and the counter,
  * ensuring a uniform size across the stack.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"span"` |
- * | `maxLength` | `4` |
- * | `size` | `1` |
  *
  * @public
  */

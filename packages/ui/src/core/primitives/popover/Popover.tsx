@@ -63,15 +63,6 @@ export const DEFAULT_POPOVER_ELEMENT = 'div'
  * and layer stacking props. Adds floating-UI-specific properties for positioning,
  * overflow handling, animation, and portal rendering.
  *
- * Inherited from {@link LayerOwnProps} (via {@link CardOwnProps} and {@link BoxOwnProps}):
- * - All layout props: `display`, `flex`, `flexDirection`, `alignItems`, `justifyContent`, etc.
- * - All spacing props: `margin`, `padding`, and per-side variants.
- * - All sizing props: `width`, `height`, `minWidth`, `minHeight`.
- * - All position props: `position`, `inset`, and per-side inset variants.
- * - All visual props: `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
- * - Card-specific props: `scheme`, `tone`.
- * - Layer-specific props: `onActivate`, `zOffset`.
- *
  * @public
  */
 export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
@@ -86,9 +77,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    *
    * @beta Do not use in production.
    *
-   * @type {PopoverMargins}
    * @defaultValue `[0, 0, 0, 0]`
-   * @optional
    */
   __unstable_margins?: PopoverMargins
 
@@ -102,9 +91,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    *
    * @beta
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   animate?: boolean
 
@@ -112,9 +99,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * When `true`, renders a directional arrow element that points from the
    * popover toward its reference element.
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   arrow?: boolean
 
@@ -126,10 +111,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * clones this element and attaches a ref to measure its position and size
    * for floating-UI calculations. If `referenceElement` is provided instead,
    * this child is rendered as-is without ref cloning.
-   *
-   * @type {ReactElement<\{ ref: ForwardedRef<HTMLElement> \}>}
-   * @defaultValue undefined
-   * @optional
    */
   children?: ReactElement<{ref: ForwardedRef<HTMLElement>}>
 
@@ -144,9 +125,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * - Setting `preventOverflow` to `true` also prevents overflow on the side axis.
    * - Setting `matchReferenceWidth` to `true` also causes the popover to resize.
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   constrainSize?: boolean
 
@@ -156,20 +135,12 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * @remarks
    * This is the primary content slot. It is rendered inside a styled
    * {@link PopoverLayer} card when the popover is open.
-   *
-   * @type {ReactNode}
-   * @defaultValue undefined
-   * @optional
    */
   content?: ReactNode
 
   /**
    * When `true`, disables the popover entirely. The `children` element is
    * rendered as-is without any floating behavior or popover content.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   disabled?: boolean
 
@@ -185,9 +156,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * `"right"` | `"right-start"` | `"right-end"` | `"bottom"` | `"bottom-start"` |
    * `"bottom-end"` | `"left"` | `"left-start"` | `"left-end"`
    *
-   * @type {Placement[]}
    * @defaultValue (derived from `placement`)
-   * @optional
    */
   fallbackPlacements?: Placement[]
 
@@ -199,9 +168,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * middleware operate. When not provided, the nearest boundary element from
    * the `BoundaryElementContext` is used.
    *
-   * @type {HTMLElement | null}
    * @defaultValue (from BoundaryElementContext)
-   * @optional
    */
   floatingBoundary?: HTMLElement | null
 
@@ -214,9 +181,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * Uses the Floating UI `size` middleware. Note that setting `constrainSize`
    * to `true` also causes the popover to resize.
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   matchReferenceWidth?: boolean
 
@@ -227,9 +192,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    *
    * @beta
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   modal?: boolean
 
@@ -240,10 +203,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * When `true`, the popover content is rendered and positioned relative to
    * the reference element. When `false` or `undefined`, the popover content
    * is not rendered (the `children` reference element is still rendered).
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   open?: boolean
 
@@ -255,13 +214,10 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * fit, it falls back to the `fallbackPlacements` according to the
    * `placementStrategy`.
    *
-   * Accepted values: `"top"` | `"top-start"` | `"top-end"` | `"right"` |
    * `"right-start"` | `"right-end"` | `"bottom"` | `"bottom-start"` |
    * `"bottom-end"` | `"left"` | `"left-start"` | `"left-end"`
    *
-   * @type {Placement}
    * @defaultValue `"bottom"`
-   * @optional
    */
   placement?: Placement
 
@@ -272,13 +228,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * @remarks
    * Only relevant when `constrainSize` or `preventOverflow` is `true`.
    *
-   * Accepted values:
-   * - `"flip"` – Evaluates the initial placement and fallback placements in order; uses the first one that fits in the viewport.
-   * - `"autoPlacement"` – Evaluates all allowed placements and picks the one with the most available viewport space.
-   *
-   * @type {'flip' | 'autoPlacement'}
    * @defaultValue `"flip"`
-   * @optional
    */
   placementStrategy?: 'flip' | 'autoPlacement'
 
@@ -290,10 +240,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * registered with the nearest `PortalProvider`. When a string is provided,
    * it is used as the name of a named portal element. When `false` or
    * `undefined`, the popover is rendered in place.
-   *
-   * @type {boolean | string}
-   * @defaultValue undefined
-   * @optional
    */
   portal?: boolean | string
 
@@ -305,9 +251,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * Uses the Floating UI `shift` middleware (and `flip` when combined with
    * `constrainSize`).
    *
-   * @type {boolean}
    * @defaultValue true
-   * @optional
    */
   preventOverflow?: boolean
 
@@ -321,9 +265,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * provided, the nearest boundary element from the `BoundaryElementContext`
    * is used.
    *
-   * @type {HTMLElement | null}
    * @defaultValue (from BoundaryElementContext)
-   * @optional
    */
   referenceBoundary?: HTMLElement | null
 
@@ -335,10 +277,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * When a `referenceElement` is specified, the `children` element is still
    * rendered but is not used for positioning. The popover measures and tracks
    * the `referenceElement` for all Floating UI calculations.
-   *
-   * @type {HTMLElement | null}
-   * @defaultValue undefined
-   * @optional
    */
   referenceElement?: HTMLElement | null
 
@@ -347,10 +285,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * consumer to imperatively recompute the popover's position.
    *
    * @beta Do not use in production.
-   *
-   * @type {Ref<PopoverUpdateCallback | undefined>}
-   * @defaultValue undefined
-   * @optional
    */
   updateRef?: Ref<PopoverUpdateCallback | undefined>
 
@@ -361,11 +295,7 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
    * Uses the container width scale from the theme, plus the special values
    * `"auto"` and `"fill"`. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | "auto" | "fill"`
-   *
-   * @type {ResponsiveProp\<MaxWidth\>}
    * @defaultValue `"auto"`
-   * @optional
    */
   width?: ResponsiveProp<MaxWidth>
 }
@@ -375,8 +305,6 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Popover`.
- *
- * Accepted values: `"div"` | `ComponentType`
  *
  * @public
  */
@@ -432,27 +360,6 @@ function ViewportOverlay() {
  * When `open` is `true`, the popover content is rendered and positioned. When
  * `disabled` is `true`, the popover is completely bypassed and only the `children`
  * reference element is rendered.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `PopoverElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `__unstable_margins` | `PopoverMargins` | `[0, 0, 0, 0]` | No | Custom margin offsets for boundary calculations. |
- * | `animate` | `boolean` | `false` | No | Enables scale/opacity entrance and exit animation. |
- * | `arrow` | `boolean` | `false` | No | Renders a directional arrow pointing at the reference element. |
- * | `constrainSize` | `boolean` | `false` | No | Prevents overflow by flipping and resizing the popover. |
- * | `matchReferenceWidth` | `boolean` | `false` | No | Constrains the popover's max width to the reference element's width. |
- * | `modal` | `boolean` | `false` | No | Renders a viewport overlay blocking pointer events beneath the popover. |
- * | `overflow` | `ResponsiveProp<Overflow>` | `"hidden"` | No | Controls overflow behavior on the popover card. |
- * | `placement` | `Placement` | `"bottom"` | No | Preferred placement relative to the reference element. |
- * | `placementStrategy` | `'flip' \| 'autoPlacement'` | `"flip"` | No | Strategy used when the preferred placement does not fit. |
- * | `preventOverflow` | `boolean` | `true` | No | Shifts the popover to remain within the boundary element. |
- * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `3` | No | Border radius of the popover card. |
- * | `shadow` | `ResponsiveProp<Shadow>` | `3` | No | Box shadow elevation of the popover card. |
- * | `tone` | `CardTone \| 'inherit'` | `"inherit"` | No | Color tone of the popover card. |
- * | `width` | `ResponsiveProp<MaxWidth>` | `"auto"` | No | Maximum width of the popover content area. |
- * | `zOffset` | `ResponsiveProp<number>` | `Z_OFFSETS.popover` | No | Z-index offset for the popover layer. |
  *
  * @public
  */

@@ -20,17 +20,6 @@ export const DEFAULT_CARD_ELEMENT = 'div'
  * Extends {@link BoxOwnProps} (all Box layout/style props) and {@link CardStyleProps}
  * (card-specific visual props such as `scheme` and `tone`).
  *
- * Inherited from {@link BoxOwnProps}:
- * - All layout props: `display`, `flex`, `flexDirection`, `alignItems`, `justifyContent`, etc.
- * - All spacing props: `margin`, `padding`, and per-side variants.
- * - All sizing props: `width`, `height`, `minWidth`, `minHeight`, `maxWidth`.
- * - All position props: `position`, `inset`, and per-side inset variants.
- * - All visual props: `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
- *
- * Inherited from {@link CardStyleProps}:
- * - `scheme` – Color scheme (`"light"` | `"dark"`).
- * - `tone` – Color tone (`"transparent"` | `"default"` | `"neutral"` | `"primary"` | `"suggest"` | `"positive"` | `"caution"` | `"critical"` | `"inherit"`).
- *
  * @public
  */
 export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
@@ -39,9 +28,7 @@ export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
    *
    * @beta Do not use in production.
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   __unstable_checkered?: boolean
 
@@ -50,9 +37,7 @@ export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
    *
    * @beta Do not use in production.
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   __unstable_focusRing?: boolean
 
@@ -63,30 +48,18 @@ export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
    * @remarks
    * When the card renders as a `<button>` or `<a>` element, the native
    * `disabled` attribute is also applied.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   disabled?: boolean
 
   /**
    * When `true`, applies a pressed visual state to the card via the
    * `data-pressed` attribute.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   pressed?: boolean
 
   /**
    * When `true`, applies a selected visual state to the card via the
    * `data-selected` attribute.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   selected?: boolean
 
@@ -96,10 +69,6 @@ export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
    * @remarks
    * Standard HTML anchor `target` attribute. Only meaningful when the
    * card renders as an anchor element.
-   *
-   * @type {string}
-   * @defaultValue undefined
-   * @optional
    */
   target?: string
 }
@@ -137,14 +106,6 @@ export type CardProps<E extends CardElementType = CardElementType> = Props<CardO
  * `Card` renders a single HTML element (default `<div>`) and wraps its children in
  * a {@link CardProvider} when the `scheme` or `tone` differs from its parent card context.
  * This enables nested cards with different color treatments.
- *
- * ### Default prop values
- *
- * | Prop | Default |
- * |------|---------|
- * | `as` | `"div"` |
- * | `radius` | `0` |
- * | `tone` | `"default"` |
  *
  * @public
  */

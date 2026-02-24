@@ -18,16 +18,6 @@ export const DEFAULT_CONTAINER_ELEMENT = 'div'
  * its own width via the theme's container width scale) and {@link ContainerStyleProps}
  * to provide a complete set of layout and sizing capabilities.
  *
- * Inherited from {@link BoxOwnProps}:
- * - All layout props: `display`, `flex`, `flexDirection`, `alignItems`, `justifyContent`, etc.
- * - All spacing props: `margin`, `padding`, and per-side variants.
- * - All sizing props: `height`, `minWidth`, `minHeight`, `maxWidth` (but not `width`).
- * - All position props: `position`, `inset`, and per-side inset variants.
- * - All visual props: `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
- *
- * Inherited from {@link ContainerStyleProps}:
- * - `width` – Sets the maximum width of the container using the theme's container width scale.
- *
  * @public
  */
 export type ContainerOwnProps = Omit<BoxOwnProps, 'width'> & ContainerStyleProps
@@ -71,13 +61,6 @@ export type ContainerProps<E extends ContainerElementType = ContainerElementType
  *
  * The container centers itself horizontally within its parent and supports all
  * the same layout and spacing props as {@link Box}.
- *
- * ### Props
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `ContainerElementType` | `"div"` | No | The HTML element or component type to render. |
- * | `width` | `ResponsiveProp<ContainerWidth>` | `2` | No | Sets the maximum width using the theme's container width scale (`0 \| 1 \| 2 \| 3 \| 4 \| 5 \| "auto"`). |
  *
  * All other props from {@link BoxOwnProps} (except `width`) are also accepted.
  *

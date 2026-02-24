@@ -27,9 +27,6 @@ export const DEFAULT_TOAST_ELEMENT = 'li'
  * toast-specific properties for content, status, dismissibility, and auto-dismiss
  * duration.
  *
- * Inherited from {@link RadiusStyleProps}:
- * - `radius` (`ResponsiveProp<Radius | 'full'>`) – Sets the border radius of the toast card. Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | "full"`. Default: `3`.
- *
  * @internal
  */
 export type ToastOwnProps = RadiusStyleProps & {
@@ -40,10 +37,6 @@ export type ToastOwnProps = RadiusStyleProps & {
    * @remarks
    * The close button invokes the {@link ToastOwnProps.onClose | onClose}
    * callback when clicked.
-   *
-   * @type {boolean}
-   * @defaultValue undefined
-   * @optional
    */
   closable?: boolean
 
@@ -53,10 +46,6 @@ export type ToastOwnProps = RadiusStyleProps & {
    * @remarks
    * Rendered inside a muted {@link Text} component with `size={1}`. When
    * omitted, only the title is displayed.
-   *
-   * @type {ReactNode}
-   * @defaultValue undefined
-   * @optional
    */
   description?: ReactNode
 
@@ -67,10 +56,6 @@ export type ToastOwnProps = RadiusStyleProps & {
    * Only invoked when `closable` is `true` and the user clicks the close
    * button. The toast does not remove itself from the DOM; the consumer
    * (typically {@link ToastProvider}) is responsible for unmounting it.
-   *
-   * @type {() => void}
-   * @defaultValue undefined
-   * @optional
    */
   onClose?: () => void
 
@@ -81,10 +66,6 @@ export type ToastOwnProps = RadiusStyleProps & {
    * Rendered inside a {@link Text} component with `size={1}` and
    * `weight="medium"`. Typically a short, descriptive message summarizing
    * the action that occurred.
-   *
-   * @type {ReactNode}
-   * @defaultValue undefined
-   * @optional
    */
   title?: ReactNode
 
@@ -101,12 +82,6 @@ export type ToastOwnProps = RadiusStyleProps & {
    *
    * When `undefined`, the toast renders with the `"default"` tone and
    * `role="status"`.
-   *
-   * Accepted values: `"error"` | `"warning"` | `"success"` | `"info"`
-   *
-   * @type {'error' | 'warning' | 'success' | 'info'}
-   * @defaultValue undefined
-   * @optional
    */
   status?: 'error' | 'warning' | 'success' | 'info'
 
@@ -118,10 +93,6 @@ export type ToastOwnProps = RadiusStyleProps & {
    * toast is flagged with `data-has-duration` for the {@link ToastProvider}
    * to schedule automatic removal. When `undefined`, `Infinity`, or an
    * extremely large value, the toast persists until manually dismissed.
-   *
-   * @type {number}
-   * @defaultValue undefined
-   * @optional
    */
   duration?: number
 }
@@ -131,8 +102,6 @@ export type ToastOwnProps = RadiusStyleProps & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `Toast`.
- *
- * Accepted values: `"li"` | `ComponentType`
  *
  * @internal
  */
@@ -193,19 +162,6 @@ const BUTTON_TONE = {
  * Toasts are not typically rendered directly by consumers. Instead, use the
  * {@link ToastProvider} and the `useToast` hook to push toast notifications
  * via the {@link ToastContextValue.push} method.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `ToastElementType` | `"li"` | No | The HTML element or component type to render. |
- * | `closable` | `boolean` | `undefined` | No | When `true`, renders a close button to dismiss the toast. |
- * | `description` | `ReactNode` | `undefined` | No | Secondary descriptive text below the title. |
- * | `duration` | `number` | `undefined` | No | Auto-dismiss duration in milliseconds. |
- * | `onClose` | `() => void` | `undefined` | No | Callback fired when the close button is clicked. |
- * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `3` | No | Border radius of the toast card. |
- * | `status` | `'error' \| 'warning' \| 'success' \| 'info'` | `undefined` | No | Semantic status determining color tone and ARIA role. |
- * | `title` | `ReactNode` | `undefined` | No | The primary message text. |
  *
  * @internal
  */

@@ -20,17 +20,6 @@ export const DEFAULT_KBD_ELEMENT = 'kbd'
  * layout/style props with border radius control and a font size option for the
  * rendered keyboard input text.
  *
- * Inherited from {@link BoxOwnProps}:
- * - All layout props: `display`, `flex`, `flexDirection`, `alignItems`, `justifyContent`, etc.
- * - All spacing props: `margin`, `marginX`, `marginY`, `padding`, `paddingX`, `paddingY` (and per-side variants).
- * - All sizing props: `width`, `height`, `minWidth`, `minHeight`, `maxWidth`.
- * - All position props: `position`, `inset`, and per-side inset variants.
- * - All visual props: `border`, `shadow`, `overflow`, `muted`, `outline`.
- * - Other: `textAlign`, `pointerEvents`, `sizing`.
- *
- * Inherited from {@link RadiusStyleProps}:
- * - `radius` – Sets the border radius using the theme radius scale (`0 | 1 | 2 | 3 | 4 | 5 | 6 | "full"`). Default: `2`.
- *
  * @public
  */
 export type KBDOwnProps = BoxOwnProps &
@@ -41,11 +30,7 @@ export type KBDOwnProps = BoxOwnProps &
      * @remarks
      * Uses the text font size scale defined by the theme. Supports responsive values.
      *
-     * Accepted values: `0 | 1 | 2 | 3 | 4`
-     *
-     * @type {ResponsiveProp\<FontTextSize\>}
      * @defaultValue 1
-     * @optional
      */
     fontSize?: ResponsiveProp<FontTextSize>
   }
@@ -55,8 +40,6 @@ export type KBDOwnProps = BoxOwnProps &
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `KBD`.
- *
- * Accepted values: `"kbd"` | `ComponentType`
  *
  * @public
  */
@@ -87,16 +70,6 @@ export type KBDProps<E extends KBDElementType = KBDElementType> = Props<KBDOwnPr
  *
  * It is typically used as a building block within the {@link Hotkeys} component, or
  * standalone to annotate keyboard shortcuts in menus, tooltips, or documentation.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `KBDElementType` | `"kbd"` | No | The HTML element or component type to render. |
- * | `display` | `ResponsiveProp<Display>` | `"inline-block"` | No | Sets the CSS display mode. |
- * | `fontSize` | `ResponsiveProp<FontTextSize>` | `1` | No | Sets the font size of the key label. Accepted values: `0 \| 1 \| 2 \| 3 \| 4`. |
- * | `padding` | `ResponsiveProp<Padding>` | `1` | No | Sets the inner padding. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `2` | No | Sets the border radius. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| "full"`. |
  *
  * @public
  */

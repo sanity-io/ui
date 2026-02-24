@@ -22,14 +22,6 @@ export interface BoxSizingStyleProps {
    *
    * @remarks
    * Maps to the CSS `box-sizing` property.
-   *
-   * Accepted values:
-   * - `"content"` – Width and height apply only to the content area, excluding padding and border (`content-box`).
-   * - `"border"` – Width and height include padding and border, but not margin (`border-box`).
-   *
-   * @type {BoxSizing}
-   * @defaultValue undefined
-   * @optional
    */
   boxSizing?: BoxSizing
 }

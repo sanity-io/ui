@@ -30,15 +30,6 @@ export interface MaxWidthStyleProps {
    *
    * Uses the container width scale defined by the theme, plus the special
    * values `"auto"` and `"fill"`.
-   *
-   * Accepted values:
-   * - `0`–`5` – Constrains to a predefined container width from the theme.
-   * - `"auto"` – The maximum width is determined by the element's content.
-   * - `"fill"` – Sets the maximum width to `100%` of the parent container.
-   *
-   * @type {ResponsiveProp\<MaxWidth\>}
-   * @defaultValue undefined
-   * @optional
    */
   maxWidth?: ResponsiveProp<MaxWidth>
 }

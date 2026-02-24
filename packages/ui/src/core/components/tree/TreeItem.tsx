@@ -40,14 +40,6 @@ export const DEFAULT_TREE_ITEM_ELEMENT = 'a'
  * position, and visual style props. Adds tree-item-specific properties for
  * controlling expand/collapse state, icon rendering, text content, and click behavior.
  *
- * Inherited from {@link CardOwnProps} (which extends {@link BoxOwnProps} and {@link CardStyleProps}):
- * - All layout props: `display`, `flex`, `flexDirection`, `alignItems`, `justifyContent`, etc.
- * - All spacing props: `margin`, `marginX`, `marginY`, `padding`, `paddingX`, `paddingY` (and per-side variants).
- * - All sizing props: `width`, `height`, `minWidth`, `minHeight`, `maxWidth`.
- * - All position props: `position`, `inset`, and per-side inset variants.
- * - All visual props: `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
- * - Card-specific props: `scheme`, `tone`, `disabled`, `pressed`, `selected`.
- *
  * @beta
  */
 export type TreeItemOwnProps = CardOwnProps & {
@@ -64,9 +56,7 @@ export type TreeItemOwnProps = CardOwnProps & {
    * The component tracks its own expanded state internally; this prop sets
    * the initial value which can be overridden by user interaction.
    *
-   * @type {boolean}
    * @defaultValue false
-   * @optional
    */
   expanded?: boolean
 
@@ -76,11 +66,7 @@ export type TreeItemOwnProps = CardOwnProps & {
    * @remarks
    * Uses the text font size scale defined by the theme. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4`
-   *
-   * @type {ResponsiveProp\<FontTextSize\>}
    * @defaultValue 1
-   * @optional
    */
   fontSize?: ResponsiveProp<FontTextSize>
 
@@ -92,10 +78,6 @@ export type TreeItemOwnProps = CardOwnProps & {
    * provided, replaces the default toggle arrow icon. When omitted and the
    * tree item has children, a toggle arrow icon is rendered that rotates to
    * indicate the expanded/collapsed state.
-   *
-   * @type {ElementType}
-   * @defaultValue undefined
-   * @optional
    */
   icon?: ElementType
 
@@ -110,9 +92,7 @@ export type TreeItemOwnProps = CardOwnProps & {
    *
    * @internal
    *
-   * @type {SelectableElementType}
    * @defaultValue `"a"`
-   * @optional
    */
   linkAs?: SelectableElementType
 
@@ -124,10 +104,6 @@ export type TreeItemOwnProps = CardOwnProps & {
    * on whether the tree item renders as a link or a plain list item. Clicking
    * the item also toggles its expanded/collapsed state and updates the focused
    * item in the parent {@link Tree}.
-   *
-   * @type {MouseEventHandler\<HTMLAnchorElement | HTMLLIElement\>}
-   * @defaultValue undefined
-   * @optional
    */
   onClick?: MouseEventHandler<HTMLAnchorElement | HTMLLIElement>
 
@@ -137,11 +113,7 @@ export type TreeItemOwnProps = CardOwnProps & {
    * @remarks
    * Uses the spacing scale defined by the theme. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
    * @defaultValue 2
-   * @optional
    */
   padding?: ResponsiveProp<Space>
 
@@ -152,11 +124,7 @@ export type TreeItemOwnProps = CardOwnProps & {
    * @remarks
    * Uses the spacing scale defined by the theme. Supports responsive values.
    *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9`
-   *
-   * @type {ResponsiveProp\<Space\>}
    * @defaultValue 2
-   * @optional
    */
   space?: ResponsiveProp<Space>
 
@@ -166,22 +134,11 @@ export type TreeItemOwnProps = CardOwnProps & {
    * @remarks
    * Rendered inside a {@link Text} component with `textOverflow="ellipsis"`.
    * Accepts any React node, though typically a short string.
-   *
-   * @type {ReactNode}
-   * @defaultValue undefined
-   * @optional
    */
   text?: ReactNode
 
   /**
    * Sets the font weight of the tree item's text content.
-   *
-   * @remarks
-   * Accepted values: `"regular"` | `"medium"` | `"semibold"` | `"bold"`
-   *
-   * @type {FontWeight}
-   * @defaultValue undefined
-   * @optional
    */
   weight?: FontWeight
 }
@@ -191,8 +148,6 @@ export type TreeItemOwnProps = CardOwnProps & {
  *
  * @remarks
  * Determines the HTML element or custom component type rendered by `TreeItem`.
- *
- * Accepted values: `"a"` | `"li"` | `ComponentType`
  *
  * @beta
  */
@@ -238,22 +193,6 @@ export type TreeItemProps<E extends TreeItemElementType = TreeItemElementType> =
  * based on the nesting `level` from the tree context.
  *
  * This API might change. DO NOT USE IN PRODUCTION.
- *
- * ### Default prop values
- *
- * | Prop | Type | Default | Required | Description |
- * |------|------|---------|----------|-------------|
- * | `as` | `TreeItemElementType` | `"a"` | No | The HTML element or component type to render. |
- * | `expanded` | `boolean` | `false` | No | Controls whether nested children are visible. |
- * | `fontSize` | `ResponsiveProp<FontTextSize>` | `1` | No | Font size of the item text. Accepted values: `0 \| 1 \| 2 \| 3 \| 4`. |
- * | `icon` | `ElementType` | `undefined` | No | An icon component rendered on the leading side. |
- * | `linkAs` | `SelectableElementType` | `"a"` | No | Custom element type for the inner link component (internal). |
- * | `padding` | `ResponsiveProp<Space>` | `2` | No | Inner padding. Accepted values: `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9`. |
- * | `radius` | `ResponsiveProp<Radius \| 'full'>` | `2` | No | Border radius of the selectable area. |
- * | `selected` | `boolean` | `false` | No | When `true`, marks this item as selected and sets initial focus. |
- * | `space` | `ResponsiveProp<Space>` | `2` | No | Spacing between the icon/toggle and the text label. |
- * | `text` | `ReactNode` | `undefined` | No | The text label displayed inside the item. |
- * | `weight` | `FontWeight` | `undefined` | No | Font weight of the text. Accepted values: `"regular"` \| `"medium"` \| `"semibold"` \| `"bold"`. |
  *
  * @beta
  */

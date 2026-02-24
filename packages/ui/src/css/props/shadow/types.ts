@@ -16,12 +16,6 @@ export interface ShadowStyleProps {
    * a more pronounced shadow, conveying greater elevation. Supports responsive values.
    *
    * Uses the shadow scale defined by the theme.
-   *
-   * Accepted values: `0 | 1 | 2 | 3 | 4 | 5`
-   *
-   * @type {ResponsiveProp\<Shadow\>}
-   * @defaultValue undefined
-   * @optional
    */
   shadow?: ResponsiveProp<Shadow>
 }
