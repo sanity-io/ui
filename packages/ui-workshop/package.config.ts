@@ -1,11 +1,8 @@
 import {defineConfig} from '@sanity/pkg-utils'
-import path from 'path'
-import {env} from 'process'
 
 import {optimizeCss} from './rollup/optimize-css'
 import {vanillaExtractPlugin} from './rollup/vanilla-extract'
-
-const isProd = env['NODE_ENV'] === 'production'
+import {vanillaExtractIdentifiers} from './vanilla-extract/identifiers'
 
 const browserslist = '> 0.2% and not dead and supports css-cascade-layers and supports flexbox-gap'
 
@@ -49,8 +46,7 @@ export default defineConfig({
 
     plugins: [
       vanillaExtractPlugin({
-        identifiers: ({debugId, hash, filePath}) =>
-          vanillaExtractIdentifiers({debugId, hash, filePath}),
+        identifiers: vanillaExtractIdentifiers,
         extract: {
           name: 'index.css',
           sourcemap: true,
@@ -67,34 +63,3 @@ export default defineConfig({
 
   tsconfig: 'tsconfig.dist.json',
 })
-
-function vanillaExtractIdentifiers({
-  debugId,
-  hash,
-  filePath,
-}: {
-  debugId?: string
-  hash: string
-  filePath: string
-}) {
-  if (isProd) {
-    return `ui-workshop-${hash}`
-  }
-
-  const basename = path.basename(filePath, '.css.ts')
-  const name = dashCase([basename, debugId && sanitize(debugId)].filter(Boolean).join('-'))
-
-  return `${name}-${hash}`
-}
-
-function dashCase(str: string): string {
-  return str
-    .replace(/([A-Z])/g, '-$1')
-    .toLowerCase()
-    .replace(/^-/, '')
-}
-
-function sanitize(str: string): string {
-  // remove all non-alphanumeric characters except for dashes
-  return str.replace(/[^a-zA-Z0-9-]/g, '')
-}

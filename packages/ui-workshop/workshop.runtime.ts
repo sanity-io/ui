@@ -6,6 +6,8 @@ import {mergeConfig} from 'vite'
 
 import {defineRuntime} from './src/core'
 
+import {vanillaExtractIdentifiers} from './vanilla-extract/identifiers'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -15,26 +17,7 @@ export default defineRuntime({
   },
   vite: (viteConfig) => {
     return mergeConfig(viteConfig, {
-      plugins: [
-        vanillaExtractPlugin({
-          identifiers: (options) => {
-            const isProd = viteConfig.mode === 'production'
-
-            const {debugId, hash, filePath} = options
-
-            if (isProd) {
-              return `ui-workshop-${hash}`
-            }
-
-            const basename = path.basename(filePath, '.css.ts')
-            const name = dashCase(
-              [basename, debugId && sanitize(debugId)].filter(Boolean).join('-'),
-            )
-
-            return `${name}-${hash}`
-          },
-        }),
-      ],
+      plugins: [vanillaExtractPlugin({identifiers: vanillaExtractIdentifiers})],
 
       optimizeDeps: {
         exclude: ['@sanity/ui', '@sanity/ui-workshop'],
@@ -49,15 +32,3 @@ export default defineRuntime({
     })
   },
 })
-
-function dashCase(str: string): string {
-  return str
-    .replace(/([A-Z])/g, '-$1')
-    .toLowerCase()
-    .replace(/^-/, '')
-}
-
-function sanitize(str: string): string {
-  // remove all non-alphanumeric characters except for dashes
-  return str.replace(/[^a-zA-Z0-9-]/g, '')
-}
