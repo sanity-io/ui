@@ -5,6 +5,18 @@
   "ignorePresets": ["github>sanity-io/renovate-config:group-non-major"],
   "packageRules": [
     {
+      "description": "Dependency updates to apps packages should use the chore scope (as they aren't published to npm)",
+      "matchFileNames": ["apps/**/package.json"],
+      "semanticCommitType": "chore",
+      "groupSlug": "apps"
+    },
+    {
+      "description": "Dependency updates to playground packages should use the chore scope (as they aren't published to npm)",
+      "matchFileNames": ["playground/**/package.json"],
+      "semanticCommitType": "chore",
+      "groupSlug": "apps"
+    },
+    {
       "matchDepTypes": ["dependencies"],
       "semanticCommitType": "fix",
       "rangeStrategy": "bump"
