@@ -543,6 +543,9 @@ importers:
       mkdirp:
         specifier: ^3.0.1
         version: 3.0.1
+      motion:
+        specifier: ^12.34.3
+        version: 12.34.3(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.0(react@19.2.4))(react@19.2.4)
       pako:
         specifier: ^2.1.0
         version: 2.1.0
@@ -13046,6 +13049,16 @@ snapshots:
     dependencies:
       map-cache: 0.2.2
 
+  framer-motion@12.34.3(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.0(react@19.2.4))(react@19.2.4):
+    dependencies:
+      motion-dom: 12.34.3
+      motion-utils: 12.29.2
+      tslib: 2.8.1
+    optionalDependencies:
+      '@emotion/is-prop-valid': 1.4.0
+      react: 19.2.4
+      react-dom: 19.2.0(react@19.2.4)
+
   framer-motion@12.34.3(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       motion-dom: 12.34.3
@@ -14197,6 +14210,15 @@ snapshots:
       motion-utils: 12.29.2
 
   motion-utils@12.29.2: {}
+
+  motion@12.34.3(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.0(react@19.2.4))(react@19.2.4):
+    dependencies:
+      framer-motion: 12.34.3(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.0(react@19.2.4))(react@19.2.4)
+      tslib: 2.8.1
+    optionalDependencies:
+      '@emotion/is-prop-valid': 1.4.0
+      react: 19.2.4
+      react-dom: 19.2.0(react@19.2.4)
 
   motion@12.34.3(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
