@@ -1,4 +1,5 @@
-import {Card, Container, Heading, Spinner, Stack, Text} from '@sanity/ui'
+import {Card, Container, Heading, Stack, Text} from '@sanity/ui'
+import {vars} from '@sanity/ui/css'
 import {motion} from 'motion/react'
 import {useState} from 'react'
 
@@ -24,21 +25,20 @@ export function WorkshopCanvas(props: {frameRef: React.Ref<HTMLIFrameElement>; h
   const fixedW = typeof viewportW === 'number' ? viewportW : undefined
   const fixedH = typeof viewportH === 'number' ? viewportH : undefined
 
-  const visible = frameReady && path !== '/'
-
   return (
     <Card
-      // __unstable_pattern="halftone"
+      __unstable_pattern="halftone"
       display={hidden ? 'none' : 'grid'}
       flex={2}
       overflow="hidden"
       position="relative"
       style={{placeItems: 'center'}}
+      tone="transparent"
     >
       {path === '/' && (
         <Container width={0}>
           <Stack gap={4} padding={4}>
-            <Heading align="center" size={1}>
+            <Heading align="center" size={2}>
               {title}
             </Heading>
             <Text align="center" muted size={1}>
@@ -48,29 +48,25 @@ export function WorkshopCanvas(props: {frameRef: React.Ref<HTMLIFrameElement>; h
         </Container>
       )}
 
-      {!frameReady && path !== '/' && <Spinner />}
-
-      <motion.div
-        // layout="size"
-        animate={{scale: zoom}}
-        // transition={{
-        //   layout: {duration: 0.35, ease: 'easeInOut'},
-        //   scale: {type: 'spring', stiffness: 260, damping: 30},
-        // }}
-        style={{
-          width: isAutoW ? '100%' : fixedW,
-          height: isAutoH ? '100%' : fixedH,
-          maxWidth: '100%',
-          maxHeight: '100%',
-          transformOrigin: 'center center',
-          willChange: 'transform',
-          opacity: visible ? 1 : 0,
-          pointerEvents: visible ? 'auto' : 'none',
-        }}
-        transition={{type: 'spring', stiffness: 260, damping: 30}}
-      >
-        <iframe ref={frameRef} className={iframe} src={initialFrameUrl} title="Workshop Canvas" />
-      </motion.div>
+      {path !== '/' && (
+        <motion.div
+          animate={{scale: zoom}}
+          style={{
+            boxShadow: vars.shadow[1],
+            width: isAutoW ? '100%' : fixedW,
+            height: isAutoH ? '100%' : fixedH,
+            maxWidth: '100%',
+            maxHeight: '100%',
+            transformOrigin: 'center center',
+            willChange: 'transform',
+            opacity: frameReady ? 1 : 0,
+            pointerEvents: frameReady ? 'auto' : 'none',
+          }}
+          transition={{type: 'spring', stiffness: 260, damping: 30}}
+        >
+          <iframe ref={frameRef} className={iframe} src={initialFrameUrl} title="Workshop Canvas" />
+        </motion.div>
+      )}
     </Card>
   )
 }

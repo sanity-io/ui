@@ -33,7 +33,7 @@ export function Workshop(props: WorkshopProps) {
   const platform = detectPlatform()
   const prefersDark = usePrefersDark()
   const withNavbar = config.features?.navbar ?? true
-  const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])
+  const [channel] = useState(() => createPubsub<WorkshopMsg>())
   const frame = useMemo(() => createWorkshopFrameController(), [])
   const [{frameReady, path, payload, scheme, viewport, zoom}, setState] = useState<WorkshopState>(
     () => getStateFromLocation(locationStore.get()),
@@ -164,13 +164,11 @@ export function Workshop(props: WorkshopProps) {
   }, [_pushLocation, _replaceLocation, frameReady, path, payload, scheme, viewport, zoom])
 
   // Subscribe to global message channel
-  useEffect(
-    () =>
-      channel.subscribe((msg) => {
-        setState((prevState) => workshopReducer(prevState, msg))
-      }),
-    [channel],
-  )
+  useEffect(() => {
+    return channel.subscribe((msg) => {
+      setState((prevState) => workshopReducer(prevState, msg))
+    })
+  }, [channel])
 
   // Pipe messages from frame to channel
   useEffect(() => frame.message.subscribe(channel.publish), [channel, frame])
@@ -192,14 +190,14 @@ export function Workshop(props: WorkshopProps) {
 
   if (!config.scopes) {
     return (
-      <Root height="fill" padding={4} scheme={rootScheme}>
+      <Root height="fill" lang="en" padding={4} scheme={rootScheme}>
         <Text size={1}>No scopes</Text>
       </Root>
     )
   }
 
   return (
-    <Root height="fill" scheme={rootScheme}>
+    <Root height="fill" lang="en" scheme={rootScheme}>
       <WorkshopProvider
         broadcast={broadcast}
         channel={channel}

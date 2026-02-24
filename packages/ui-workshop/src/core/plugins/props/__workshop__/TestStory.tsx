@@ -10,8 +10,8 @@ const options = {
 
 export default function TestStory() {
   const boolean = useBoolean('Boolean')
-  const number = useNumber('Number', 123)
-  const option = useSelect('Select', options, 'sm')
+  const number = useNumber('Number')
+  const option = useSelect('Select', options)
   const string = useString('String', 'String')
   const text = useText('Text', 'Text')
 
@@ -20,7 +20,7 @@ export default function TestStory() {
       <Stack gap={4} maxWidth={1} padding={4} width="fill">
         <Text muted>Boolean: {boolean ? 'true' : 'false'}</Text>
         <Text muted>Number: {number}</Text>
-        <Text muted>Select: {option ?? 'None'}</Text>
+        <Text muted>Select: {option ?? <>&ndash;</>}</Text>
         <Text muted>String: {string}</Text>
         <Text muted>Text: {text}</Text>
       </Stack>

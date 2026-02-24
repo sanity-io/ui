@@ -9,18 +9,16 @@ export function PerfInspector() {
 
   if (testDetails.length === 0) {
     return (
-      <Box padding={2}>
-        <Box padding={2}>
-          <Text muted size={[2, 2, 1]}>
-            No tests
-          </Text>
-        </Box>
+      <Box padding={4}>
+        <Text muted size={[2, 2, 1]}>
+          No tests
+        </Text>
       </Box>
     )
   }
 
   return (
-    <Stack gap={2} padding={2}>
+    <Stack gap={2} padding={3}>
       {testDetails.map((detail) => {
         const testResults = results.filter((r) => r.name === detail.name)
         const hasRunningTest = testResults.some((r) => r.running === true)
@@ -53,12 +51,7 @@ export function PerfInspector() {
 
             <Stack>
               {testResults.map((result, resultIndex) => (
-                <Card
-                  key={resultIndex}
-                  borderTop="muted"
-                  // TODO
-                  // borderWidth={1}
-                >
+                <Card key={resultIndex} borderTop="muted" borderWidth={1}>
                   <Flex padding={2}>
                     <Box flex={1}>
                       <Text muted size={1}>
@@ -75,11 +68,7 @@ export function PerfInspector() {
                 </Card>
               ))}
 
-              <Card
-                borderTop="muted"
-                // TODO
-                // borderWidth={1}
-              >
+              <Card borderTop="muted" borderWidth={1}>
                 <Stack>
                   <Button
                     aria-label="Run"

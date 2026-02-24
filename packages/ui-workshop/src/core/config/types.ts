@@ -1,9 +1,8 @@
-import type {PartialTokens, Tokens} from '@sanity/ui/theme'
-
 /** @public */
 export interface WorkshopCollection {
-  name: string
-  title: string
+  name?: string
+  title?: string
+  children?: WorkshopCollection[]
 }
 
 /** @public */
@@ -30,7 +29,6 @@ export interface WorkshopConfig {
   frameUrl?: string
   plugins?: WorkshopPlugin[]
   scopes: WorkshopScope[]
-  theme?: PartialTokens<Tokens>
   title?: string
 }
 

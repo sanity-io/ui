@@ -37,7 +37,6 @@ export function A11yProvider(props: {children?: React.ReactNode}) {
       const promise = axe.run()
       runPromiseRef.current = promise
 
-       
       try {
         const _results = await promise
         broadcast({type: 'workshop/a11y/setResults', path, results: _results})
