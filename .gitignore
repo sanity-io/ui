@@ -32,5 +32,8 @@ coverage
 dist
 logs
 node_modules
+playwright-report
+playwright/.cache
 storybook-static
+test-results
 tmp
