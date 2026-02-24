@@ -71,7 +71,8 @@ import {WIDTH_STYLE_PROP_KEYS, type WidthStyleProps} from '../../props/width/typ
 
 /** @public */
 export interface BoxStyleProps
-  extends AlignItemsStyleProps,
+  extends
+    AlignItemsStyleProps,
     BorderStyleProps,
     DisplayStyleProps,
     FlexDirectionStyleProps,
