@@ -89,7 +89,6 @@
   "browserslist": "extends @sanity/browserslist-config",
   "dependencies": {
     "@sanity/icons": "^3.7.4",
-    "@vanilla-extract/vite-plugin": "^5.1.4",
     "@vitejs/plugin-react": "^5.1.4",
     "axe-core": "^4.11.1",
     "cac": "^6.7.14",
@@ -125,7 +124,8 @@
     "@vanilla-extract/css-utils": "^0.1.6",
     "@vanilla-extract/dynamic": "^2.1.5",
     "@vanilla-extract/integration": "^8.0.7",
-    "babel-plugin-react-compiler": "1.0.0",
+    "@vanilla-extract/vite-plugin": "^5.1.4",
+    "babel-plugin-react-compiler": "^1.0.0",
     "browserslist": "^4.28.1",
     "eslint": "^9.39.3",
     "eslint-plugin-boundaries": "^5.4.0",
