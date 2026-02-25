@@ -76,7 +76,7 @@
     "pkg:check": "pkg --strict",
     "prepare": "husky install",
     "release": "semantic-release",
-    "storybook:build": "storybook build",
+    "storybook:build": "storybook build -o storybook/storybook-static",
     "storybook:dev": "storybook dev -p 6006",
     "test": "jest",
     "test:browser": "start-server-and-test 'run-s workshop:build workshop:start' http://localhost:1337 'run-s cypress:run'",
