@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.12](https://github.com/sanity-io/ui/compare/v3.1.11...v3.1.12) (2026-02-25)
+
+### Bug Fixes
+
+- match storybook output to Vercel config ([#2178](https://github.com/sanity-io/ui/issues/2178)) ([c911333](https://github.com/sanity-io/ui/commit/c911333ab9bc1c673bb1ad48d0a6c2f56291866a))
+
 ## [3.1.11](https://github.com/sanity-io/ui/compare/v3.1.10...v3.1.11) (2025-10-21)
 
 ### Bug Fixes
