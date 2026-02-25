@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "turbo build --filter=./packages/*",
+    "storybook:build": "pnpm build && pnpm workshop:build",
     "changeset": "changeset",
     "changeset:publish": "changeset publish",
     "changeset:status": "changeset status",
