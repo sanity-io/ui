@@ -1,3 +1,4 @@
+import {defineLazyProperty} from './build/lib/lazy'
 import {defaultThemeConfig} from './defaults/config'
 import {
   RootTheme,
@@ -29,8 +30,6 @@ export function getScopedTheme(
   const v0 = is_v2(themeProp) ? v2_v0(themeProp) : themeProp
   const v2 = is_v2(themeProp) ? themeProp : v0_v2(themeProp)
 
-  const colorScheme_v0 = v0.color[scheme] || v0.color.light
-  const color_v0 = (colorScheme_v0 as Record<string, ThemeColor>)[tone] || colorScheme_v0.default
   const layer_v0 = v0.layer || defaultThemeConfig.layer
 
   const colorScheme_v2 = v2.color[scheme] || v2.color.light
@@ -38,19 +37,27 @@ export function getScopedTheme(
   const color_v2_9 = themeColor_v0_v2_9(color_v2)
   const layer_v2 = v2.layer || defaultThemeConfig.layer
 
-  const theme: Theme = {
-    sanity: {
-      ...v0,
-      color: color_v0,
-      layer: layer_v0,
-      v2: {
-        ...v2,
-        _resolved: true,
-        color: color_v2_9,
-        layer: layer_v2,
-      },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {color: _v0Color, ...v0Rest} = v0
+
+  const sanity = {
+    ...v0Rest,
+    layer: layer_v0,
+    v2: {
+      ...v2,
+      _resolved: true,
+      color: color_v2_9,
+      layer: layer_v2,
     },
-  }
+  } as Theme['sanity']
+
+  // Defer v0 color computation — only resolved if legacy code reads theme.sanity.color
+  defineLazyProperty(sanity, 'color', () => {
+    const colorScheme_v0 = v0.color[scheme] || v0.color.light
+    return (colorScheme_v0 as Record<string, ThemeColor>)[tone] || colorScheme_v0.default
+  })
+
+  const theme: Theme = {sanity}
 
   _setCachedTheme(themeProp, scheme, tone, theme)
 

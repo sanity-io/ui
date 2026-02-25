@@ -3,6 +3,7 @@ import {COLOR_HUES} from '@sanity/color'
 import {ThemeColorPalette, ThemeConfig} from '../config'
 import {defaultColorPalette} from '../defaults/colorPalette'
 import {
+  THEME_COLOR_CARD_TONES,
   THEME_COLOR_STATE_TONES,
   ThemeColorAvatar_v2,
   ThemeColorBadge_v2,
@@ -12,7 +13,6 @@ import {
   ThemeColorButtonMode_v2,
   ThemeColorButtonTone_v2,
   ThemeColorCard_v2,
-  ThemeColorCardToneKey,
   ThemeColorInput_v2,
   ThemeColorInputMode_v2,
   ThemeColorInputState_v2,
@@ -25,6 +25,7 @@ import {
   ThemeColorState_v2,
   ThemeColorSyntax,
 } from '../system'
+import {defineLazyProperty} from './lib/lazy'
 import {renderColorValue, RenderColorValueOptions} from './renderColorValue'
 
 export function renderThemeColorSchemes(
@@ -33,41 +34,40 @@ export function renderThemeColorSchemes(
 ): ThemeColorSchemes_v2 {
   const colorPalette = config?.palette ?? defaultColorPalette
 
-  return {
-    light: renderThemeColorScheme(colorPalette, value.light),
-    dark: renderThemeColorScheme(colorPalette, value.dark),
-  }
+  // Lazy schemes — each scheme is only rendered when first accessed
+  const schemes = {} as ThemeColorSchemes_v2
+  defineLazyProperty(schemes, 'light', () => renderThemeColorScheme(colorPalette, value.light))
+  defineLazyProperty(schemes, 'dark', () => renderThemeColorScheme(colorPalette, value.dark))
+
+  return schemes
 }
 
 function renderThemeColorScheme(
   colorPalette: ThemeColorPalette,
   value: ThemeColorScheme_v2,
 ): ThemeColorScheme_v2 {
-  const toneEntries = Object.entries(value) as [ThemeColorCardToneKey, ThemeColorCard_v2][]
+  // The `default` tone must be rendered eagerly — other tones depend on its `bg`.
+  const renderedDefaultTone = renderThemeColor(value.default, {colorPalette})
 
-  const [, transparentTone] = toneEntries.find(([k]) => k === 'transparent')!
-  const [, defaultTone] = toneEntries.find(([k]) => k === 'default')!
-
-  // The `transparent` and `default` tones are special cases, so we render them first
-  // (rendered without a `bg` option).
-  // But the rest of the tones are rendered on top of the `default` tone's `bg`.
-  const renderedTransparentTone = renderThemeColor(transparentTone, {colorPalette})
-  const renderedDefaultTone = renderThemeColor(defaultTone, {colorPalette})
-
-  // Get the `default` tone's `bg` property
   const bg = renderedDefaultTone.bg
 
   if (bg === 'white') {
     throw new Error('Cannot blend with white background')
   }
 
-  return Object.fromEntries([
-    ['transparent', renderedTransparentTone],
-    ['default', renderedDefaultTone],
-    ...toneEntries
-      .filter(([k]) => k !== 'default' && k !== 'transparent')
-      .map(([k, v]) => [k, renderThemeColor(v, {bg, colorPalette})]),
-  ]) as ThemeColorScheme_v2
+  // All other tones are lazy. `transparent` and `default` are rendered without
+  // a `bg` option; the rest blend on top of `default`'s `bg`.
+  // We iterate THEME_COLOR_CARD_TONES (not Object.entries) to avoid
+  // force-evaluating lazy getters from the build phase.
+  const scheme = {default: renderedDefaultTone} as ThemeColorScheme_v2
+
+  for (const tone of THEME_COLOR_CARD_TONES) {
+    if (tone === 'default') continue
+    const opts = tone === 'transparent' ? {colorPalette} : {bg, colorPalette}
+    defineLazyProperty(scheme, tone, () => renderThemeColor(value[tone], opts))
+  }
+
+  return scheme
 }
 
 function renderThemeColor(
