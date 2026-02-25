@@ -1,3 +1,4 @@
+import {defineLazyProperty} from '../build/lib/lazy'
 import {
   RootTheme,
   RootTheme_v2,
@@ -7,9 +8,22 @@ import {
   ThemeColorInputState,
   ThemeColorInputState_v2,
   ThemeColorInputStates,
+  ThemeColorScheme,
 } from '../system'
 
 const cache = new WeakMap<RootTheme_v2, RootTheme>()
+
+const V0_TONES = ['transparent', 'default', 'primary', 'positive', 'caution', 'critical'] as const
+
+function lazyV0Scheme(schemeKey: 'light' | 'dark', color: RootTheme_v2['color']): ThemeColorScheme {
+  const scheme = {} as ThemeColorScheme
+
+  for (const tone of V0_TONES) {
+    defineLazyProperty(scheme, tone, () => themeColor_v2_v0(color[schemeKey][tone]))
+  }
+
+  return scheme
+}
 
 /** @internal */
 export function v2_v0(v2: RootTheme_v2): RootTheme {
@@ -31,29 +45,19 @@ export function v2_v0(v2: RootTheme_v2): RootTheme {
     style: styles,
   } = v2
 
-  return {
+  // Lazy v0 color — two-level lazy structure so we don't force-evaluate
+  // the v2 lazy getters until a v0 tone is actually accessed.
+  const v0Color = {} as RootTheme['color']
+
+  defineLazyProperty(v0Color, 'light', () => lazyV0Scheme('light', color))
+  defineLazyProperty(v0Color, 'dark', () => lazyV0Scheme('dark', color))
+
+  const theme: RootTheme = {
     _version: 0,
     avatar,
     button,
     container,
-    color: {
-      light: {
-        transparent: themeColor_v2_v0(color.light.transparent),
-        default: themeColor_v2_v0(color.light.default),
-        primary: themeColor_v2_v0(color.light.primary),
-        positive: themeColor_v2_v0(color.light.positive),
-        caution: themeColor_v2_v0(color.light.caution),
-        critical: themeColor_v2_v0(color.light.critical),
-      },
-      dark: {
-        transparent: themeColor_v2_v0(color.dark.transparent),
-        default: themeColor_v2_v0(color.dark.default),
-        primary: themeColor_v2_v0(color.dark.primary),
-        positive: themeColor_v2_v0(color.dark.positive),
-        caution: themeColor_v2_v0(color.dark.caution),
-        critical: themeColor_v2_v0(color.dark.critical),
-      },
-    },
+    color: v0Color,
     focusRing: input.text.focusRing,
     fonts,
     input,
@@ -65,6 +69,10 @@ export function v2_v0(v2: RootTheme_v2): RootTheme {
 
     v2,
   }
+
+  cache.set(v2, theme)
+
+  return theme
 }
 
 function themeColor_v2_v0(color_v2: ThemeColorCard_v2): ThemeColor {

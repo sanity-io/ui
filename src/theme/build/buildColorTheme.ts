@@ -27,6 +27,7 @@ import {
   ThemeColorSyntax,
 } from '../system'
 import {ColorTokenContext, resolveColorTokenValue as _color} from './colorToken'
+import {defineLazyProperty} from './lib/lazy'
 import {resolveColorTokens} from './resolveColorTokens'
 
 export function buildColorTheme(config?: ThemeConfig): ThemeColorSchemes_v2 {
@@ -35,10 +36,13 @@ export function buildColorTheme(config?: ThemeConfig): ThemeColorSchemes_v2 {
     color: resolveColorTokens(config?.color),
   }
 
-  return {
-    light: buildColorScheme({scheme: 'light'}, resolvedConfig),
-    dark: buildColorScheme({scheme: 'dark'}, resolvedConfig),
-  }
+  // Lazy schemes — each scheme's token tree is only built when first accessed
+  const schemes = {} as ThemeColorSchemes_v2
+
+  defineLazyProperty(schemes, 'light', () => buildColorScheme({scheme: 'light'}, resolvedConfig))
+  defineLazyProperty(schemes, 'dark', () => buildColorScheme({scheme: 'dark'}, resolvedConfig))
+
+  return schemes
 }
 
 function buildColorScheme(
@@ -47,10 +51,11 @@ function buildColorScheme(
 ): ThemeColorScheme_v2 {
   const {scheme} = options
 
+  // Lazy tones — each tone's token tree is only built when first accessed
   const colorScheme = {} as ThemeColorScheme_v2
 
   for (const tone of THEME_COLOR_CARD_TONES) {
-    colorScheme[tone] = buildCardColorTheme({scheme, tone}, config)
+    defineLazyProperty(colorScheme, tone, () => buildCardColorTheme({scheme, tone}, config))
   }
 
   return colorScheme
