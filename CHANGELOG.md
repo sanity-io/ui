@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.13](https://github.com/sanity-io/ui/compare/v3.1.12...v3.1.13) (2026-02-25)
+
+### Bug Fixes
+
+- lazily compute color themes, tones, v0 colors ([#2177](https://github.com/sanity-io/ui/issues/2177)) ([31ec324](https://github.com/sanity-io/ui/commit/31ec324035f624fe04493cdf8c32179e2dc9be0d))
+
 ## [3.1.12](https://github.com/sanity-io/ui/compare/v3.1.11...v3.1.12) (2026-02-25)
 
 ### Bug Fixes
