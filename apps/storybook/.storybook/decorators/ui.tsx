@@ -1,10 +1,10 @@
 import {PortalProvider, Root} from '@sanity/ui'
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {ColorScheme} from '@sanity/ui/theme'
 import {Decorator} from '@storybook/react-vite'
 import {useState} from 'react'
 
 export const UIDecorator: Decorator = (storyFn, context) => {
-  const scheme = (context.userGlobals.theme || 'light') as ThemeColorSchemeKey
+  const scheme = (context.userGlobals.theme || 'light') as ColorScheme
 
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
 

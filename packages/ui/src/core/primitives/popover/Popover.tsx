@@ -520,6 +520,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     if (tone === 'inherit') {
       const card = use(CardContext)
       assertCardContext(card)
+      // @ts-expect-error - TODO: is this redundant? We are already excluding 'inherit' above.
       resolvedTone = card.tone
     }
 

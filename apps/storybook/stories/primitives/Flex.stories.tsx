@@ -9,13 +9,15 @@ import {
   SPACE_CONTROLS,
 } from '../controls'
 
+type FontTextSize = 0 | 1 | 2 | 3 | 4
+
 const meta: Meta<typeof Flex> = {
   component: Flex,
   args: {
     children: [
       Array.from({length: 5}, (_, index) => (
         <Card key={`card${index}`} padding={3}>
-          <Text size={index}>{`Card ${index}`} </Text>
+          <Text size={index as FontTextSize}>{`Card ${index}`} </Text>
         </Card>
       )),
     ],

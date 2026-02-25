@@ -1,4 +1,5 @@
-import {Box, Button, Card, type CardTone, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
+import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
+import type {CardTone} from '@sanity/ui/theme'
 import {CARD_TONES, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
@@ -146,7 +147,7 @@ export const Schemes: Story = {
     },
   },
   render: (props) => (
-    <Grid columns={CARD_TONES.length} gapX={1} gapY={4}>
+    <Grid gridTemplateColumns={CARD_TONES.length} gapX={1} gapY={4}>
       <>
         {CARD_TONES.map((t) => (
           <Card
@@ -296,7 +297,7 @@ export const MatrixAsButton: Story = {
     return (
       <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
         <Container>
-          <Grid columns={3} gap={2}>
+          <Grid gridTemplateColumns={3} gap={2}>
             <Box>
               <Text align="center" size={1} weight="semibold">
                 Enabled
@@ -314,7 +315,6 @@ export const MatrixAsButton: Story = {
                     <Stack gap={2}>
                       <Text weight="semibold">{tone}</Text>
                       <Text muted>Muted</Text>
-                      <Text accent>Accent</Text>
                     </Stack>
                   </Card>
                 ))}
@@ -339,7 +339,6 @@ export const MatrixAsButton: Story = {
                     <Stack gap={2}>
                       <Text weight="semibold">{tone}</Text>
                       <Text muted>Muted</Text>
-                      <Text accent>Accent</Text>
                     </Stack>
                   </Card>
                 ))}
@@ -363,7 +362,6 @@ export const MatrixAsButton: Story = {
                       <Stack gap={2}>
                         <Text weight="semibold">{tone}</Text>
                         <Text muted>Muted</Text>
-                        <Text accent>Accent</Text>
                       </Stack>
                     </Card>
                   </div>

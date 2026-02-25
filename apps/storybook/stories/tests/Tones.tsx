@@ -37,7 +37,7 @@ import {
   TextInput,
   TextSkeleton,
 } from '@sanity/ui'
-import {CARD_TONES, type ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {CARD_TONES, type ColorScheme} from '@sanity/ui/theme'
 import {type ReactNode, useState} from 'react'
 
 const Wrapper = ({title, children}: {title: string; children: React.ReactNode}) => (
@@ -55,7 +55,7 @@ const SkeletonComponent = () => (
   <Box>
     <Container width={1}>
       <Flex align="center">
-        <Grid gap={2} columns={2} marginRight={3}>
+        <Grid gap={2} gridTemplateColumns={2} marginRight={3}>
           <Skeleton style={{width: 40, height: 40}} radius={2} animated />
           <Skeleton style={{width: 40, height: 40}} radius={2} animated />
           <Skeleton style={{width: 40, height: 40}} radius={2} animated />
@@ -107,7 +107,7 @@ export function Tones(): ReactNode {
 
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
 
-  const [scheme, setScheme] = useState<ThemeColorSchemeKey>('light')
+  const [scheme, setScheme] = useState<ColorScheme>('light')
 
   return (
     <Card padding={2} radius={2} scheme="light" tone="default">

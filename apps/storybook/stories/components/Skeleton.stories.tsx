@@ -60,7 +60,7 @@ export const CardSkeleton: Story = {
             {[1, 2, 3].map((item) => (
               <Card key={item} padding={2} radius={2} border>
                 <Flex align="center">
-                  <Grid gap={2} columns={2} marginRight={3}>
+                  <Grid gap={2} gridTemplateColumns={2} marginRight={3}>
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />

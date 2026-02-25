@@ -1,12 +1,12 @@
 import {Card, Flex} from '@sanity/ui'
-import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
+import type {ColorScheme} from '@sanity/ui/theme'
 import type {ComponentProps, ReactNode} from 'react'
 
 interface RowBuilderProps<T> {
   gap?: ComponentProps<typeof Flex>['gap']
   renderItem: ({value, index}: {value: T; index: number}) => ReactNode
   rows: T[]
-  scheme?: ThemeColorSchemeKey
+  scheme?: ColorScheme
 }
 
 export const rowBuilder = function <T>({

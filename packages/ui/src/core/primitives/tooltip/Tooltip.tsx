@@ -553,6 +553,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     if (tone === 'inherit') {
       const card = use(CardContext)
       assertCardContext(card)
+      // @ts-expect-error - TODO: is this redundant? We are already excluding 'inherit' above.
       resolvedTone = card.tone
     }
 
