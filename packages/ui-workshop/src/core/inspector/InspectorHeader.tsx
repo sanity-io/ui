@@ -5,10 +5,10 @@ import type {InspectorTab} from './types'
 
 export function InspectorHeader(props: {
   currentTabId: string | null
-  onTabChange: (id: string) => void
+  onTabActivate: (id: string) => void
   tabs: InspectorTab[]
 }) {
-  const {currentTabId, onTabChange, tabs} = props
+  const {currentTabId, onTabActivate: onTabActivate, tabs} = props
 
   return (
     <Layer
@@ -20,13 +20,13 @@ export function InspectorHeader(props: {
       position="sticky"
       shadow={1}
     >
-      <TabList gap={1}>
+      <TabList autoActivate gap={1}>
         {tabs.map((tab) => (
           <InspectorTabView
             key={tab.id}
             selected={tab.id === currentTabId}
             tab={tab}
-            onTabChange={onTabChange}
+            onTabActivate={onTabActivate}
           />
         ))}
       </TabList>
@@ -35,15 +35,15 @@ export function InspectorHeader(props: {
 }
 
 function InspectorTabView(props: {
-  onTabChange: (id: string) => void
+  onTabActivate: (id: string) => void
   selected: boolean
   tab: InspectorTab
 }) {
-  const {onTabChange, selected, tab} = props
+  const {onTabActivate, selected, tab} = props
 
-  const handleClick = useCallback(() => {
-    onTabChange(tab.id)
-  }, [onTabChange, tab])
+  const handleActivate = useCallback(() => {
+    onTabActivate(tab.id)
+  }, [onTabActivate, tab])
 
   return (
     <Tab
@@ -53,7 +53,7 @@ function InspectorTabView(props: {
       label={tab.label}
       selected={selected}
       tone={tab.tone}
-      onClick={handleClick}
+      onActivate={handleActivate}
     />
   )
 }

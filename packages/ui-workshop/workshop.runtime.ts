@@ -11,6 +11,9 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export default defineRuntime({
+  server: {
+    port: 1339,
+  },
   vite: (viteConfig) => {
     return mergeConfig(viteConfig, {
       plugins: [vanillaExtractPlugin({identifiers: vanillaExtractIdentifiers})],

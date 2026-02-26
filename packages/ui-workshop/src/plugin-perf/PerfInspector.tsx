@@ -9,7 +9,7 @@ export function PerfInspector() {
 
   if (testDetails.length === 0) {
     return (
-      <Box padding={4}>
+      <Box paddingX={4} paddingY={5}>
         <Text muted size={[2, 2, 1]}>
           No tests
         </Text>
