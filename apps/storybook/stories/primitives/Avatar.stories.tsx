@@ -1,4 +1,7 @@
-import {Avatar, Flex, Stack} from '@sanity/ui'
+// import {Avatar, Flex, Stack} from '@sanity/ui'
+import {Avatar} from '@sanity/ui/primitives/avatar'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Stack} from '@sanity/ui/primitives/stack'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {AVATAR_SRC} from '../constants'

@@ -1,20 +1,37 @@
+// import {
+//   Box,
+//   Card,
+//   CodeSkeleton,
+//   type CodeSkeletonProps,
+//   Container,
+//   Flex,
+//   Grid,
+//   HeadingSkeleton,
+//   type HeadingSkeletonProps,
+//   LabelSkeleton,
+//   type LabelSkeletonProps,
+//   Skeleton,
+//   Stack,
+//   TextSkeleton,
+//   type TextSkeletonProps,
+// } from '@sanity/ui'
+import {Box} from '@sanity/ui/primitives/box'
+import {Card} from '@sanity/ui/primitives/card'
+import {Container} from '@sanity/ui/primitives/container'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Grid} from '@sanity/ui/primitives/grid'
 import {
-  Box,
-  Card,
   CodeSkeleton,
   type CodeSkeletonProps,
-  Container,
-  Flex,
-  Grid,
   HeadingSkeleton,
   type HeadingSkeletonProps,
   LabelSkeleton,
   type LabelSkeletonProps,
   Skeleton,
-  Stack,
   TextSkeleton,
   type TextSkeletonProps,
-} from '@sanity/ui'
+} from '@sanity/ui/primitives/skeleton'
+import {Stack} from '@sanity/ui/primitives/stack'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {SPACE_CONTROLS} from '../controls'

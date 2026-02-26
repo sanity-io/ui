@@ -1,5 +1,10 @@
 import {CloseIcon, SearchIcon, UploadIcon} from '@sanity/icons'
-import {Button, Flex, Grid, Stack, Text} from '@sanity/ui'
+// import {Button, Flex, Grid, Stack, Text} from '@sanity/ui'
+import {Button} from '@sanity/ui/primitives/button'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Grid} from '@sanity/ui/primitives/grid'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
 import {BUTTON_MODES, ELEMENT_TONES, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
@@ -14,7 +19,6 @@ import {
 } from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 import {rowBuilder} from '../helpers/rowBuilder'
-import {sanityUploadButton} from './styles.css'
 
 const meta: Meta<typeof Button> = {
   args: {
@@ -50,8 +54,8 @@ export const AsLink: Story = {
 
 export const UploadButton: Story = {
   render: () => (
-    <Button as="label" className={sanityUploadButton} icon={UploadIcon} tabIndex={0} text="Upload">
-      <input type="file" />
+    <Button as="label" icon={UploadIcon} tabIndex={0} text="Upload">
+      <input hidden type="file" />
     </Button>
   ),
 }

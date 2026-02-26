@@ -1,43 +1,78 @@
+// import {
+//   Avatar,
+//   Badge,
+//   Box,
+//   Button,
+//   Card,
+//   Checkbox,
+//   Code,
+//   CodeSkeleton,
+//   Container,
+//   Flex,
+//   Grid,
+//   Heading,
+//   HeadingSkeleton,
+//   Hotkeys,
+//   Inline,
+//   KBD,
+//   Label,
+//   LabelSkeleton,
+//   LayerProvider,
+//   Menu,
+//   MenuButton,
+//   MenuDivider,
+//   MenuItem,
+//   Popover,
+//   PortalProvider,
+//   Radio,
+//   Select,
+//   Skeleton,
+//   Spinner,
+//   Stack,
+//   Switch,
+//   Tab,
+//   TabList,
+//   Text,
+//   TextArea,
+//   TextInput,
+//   TextSkeleton,
+// } from '@sanity/ui'
+import {Hotkeys} from '@sanity/ui/components/hotkeys'
+import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/components/menu'
+import {Tab, TabList} from '@sanity/ui/components/tab'
+import {Avatar} from '@sanity/ui/primitives/avatar'
+import {Badge} from '@sanity/ui/primitives/badge'
+import {Box} from '@sanity/ui/primitives/box'
+import {Button} from '@sanity/ui/primitives/button'
+import {Card} from '@sanity/ui/primitives/card'
+import {Checkbox} from '@sanity/ui/primitives/checkbox'
+import {Code} from '@sanity/ui/primitives/code'
+import {Container} from '@sanity/ui/primitives/container'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Grid} from '@sanity/ui/primitives/grid'
+import {Heading} from '@sanity/ui/primitives/heading'
+import {Inline} from '@sanity/ui/primitives/inline'
+import {KBD} from '@sanity/ui/primitives/kbd'
+import {Label} from '@sanity/ui/primitives/label'
+import {LayerProvider} from '@sanity/ui/primitives/layer'
+import {Popover} from '@sanity/ui/primitives/popover'
+import {Radio} from '@sanity/ui/primitives/radio'
+import {Select} from '@sanity/ui/primitives/select'
 import {
-  Avatar,
-  Badge,
-  Box,
-  Button,
-  Card,
-  Checkbox,
-  Code,
   CodeSkeleton,
-  Container,
-  Flex,
-  Grid,
-  Heading,
   HeadingSkeleton,
-  Hotkeys,
-  Inline,
-  KBD,
-  Label,
   LabelSkeleton,
-  LayerProvider,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  Popover,
-  PortalProvider,
-  Radio,
-  Select,
   Skeleton,
-  Spinner,
-  Stack,
-  Switch,
-  Tab,
-  TabList,
-  Text,
-  TextArea,
-  TextInput,
   TextSkeleton,
-} from '@sanity/ui'
+} from '@sanity/ui/primitives/skeleton'
+import {Spinner} from '@sanity/ui/primitives/spinner'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Switch} from '@sanity/ui/primitives/switch'
+import {Text} from '@sanity/ui/primitives/text'
+import {TextArea} from '@sanity/ui/primitives/text-area'
+import {TextInput} from '@sanity/ui/primitives/text-input'
 import {CARD_TONES, type ColorScheme} from '@sanity/ui/theme'
+import {PortalProvider} from '@sanity/ui/utils/portal'
 import {type ReactNode, useState} from 'react'
 
 const Wrapper = ({title, children}: {title: string; children: React.ReactNode}) => (

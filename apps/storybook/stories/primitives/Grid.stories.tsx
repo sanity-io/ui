@@ -1,4 +1,7 @@
-import {Card, Code, Grid} from '@sanity/ui'
+// import {Card, Code, Grid} from '@sanity/ui'
+import {Card} from '@sanity/ui/primitives/card'
+import {Code} from '@sanity/ui/primitives/code'
+import {Grid} from '@sanity/ui/primitives/grid'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {HEIGHT_CONTROLS, OVERFLOW_CONTROLS, SPACE_CONTROLS} from '../controls'
@@ -44,6 +47,6 @@ export const Default: Story = {
 }
 
 export const Columns: Story = {
-  args: {columns: [1, 2, 3, 4, 5, 6, 7]},
+  args: {gridTemplateColumns: [1, 2, 3, 4, 5, 6, 7]},
   render: (props) => <Grid {...props} />,
 }

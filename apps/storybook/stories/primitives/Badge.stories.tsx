@@ -1,4 +1,8 @@
-import {Badge, Card, Flex, Stack} from '@sanity/ui'
+// import {Badge, Card, Flex, Stack} from '@sanity/ui'
+import {Badge} from '@sanity/ui/primitives/badge'
+import {Card} from '@sanity/ui/primitives/card'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Stack} from '@sanity/ui/primitives/stack'
 import {CARD_TONES, ELEMENT_TONES, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

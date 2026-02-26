@@ -1,4 +1,6 @@
-import {Box, Text} from '@sanity/ui'
+// import {Box, Text} from '@sanity/ui'
+import {Box} from '@sanity/ui/primitives/box'
+import {Text} from '@sanity/ui/primitives/text'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {SPACE_CONTROLS} from '../controls'

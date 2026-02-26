@@ -7,30 +7,47 @@ import {
   SearchIcon,
   SunIcon,
 } from '@sanity/icons'
-import {
-  Autocomplete,
-  Avatar,
-  Button,
-  Card,
-  Checkbox,
-  Flex,
-  Heading,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  PortalProvider,
-  Radio,
-  Select,
-  Stack,
-  Switch,
-  Tab,
-  TabList,
-  Text,
-  TextArea,
-  TextInput,
-} from '@sanity/ui'
+import {Autocomplete} from '@sanity/ui/components/autocomplete'
+import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/components/menu'
+import {Tab, TabList} from '@sanity/ui/components/tab'
+import {Avatar} from '@sanity/ui/primitives/avatar'
+import {Button} from '@sanity/ui/primitives/button'
+import {Card} from '@sanity/ui/primitives/card'
+import {Checkbox} from '@sanity/ui/primitives/checkbox'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Heading} from '@sanity/ui/primitives/heading'
+import {Radio} from '@sanity/ui/primitives/radio'
+import {Select} from '@sanity/ui/primitives/select'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Switch} from '@sanity/ui/primitives/switch'
+import {Text} from '@sanity/ui/primitives/text'
+import {TextArea} from '@sanity/ui/primitives/text-area'
+import {TextInput} from '@sanity/ui/primitives/text-input'
+// import {
+//   Autocomplete,
+//   Avatar,
+//   Button,
+//   Card,
+//   Checkbox,
+//   Flex,
+//   Heading,
+//   Menu,
+//   MenuButton,
+//   MenuDivider,
+//   MenuItem,
+//   PortalProvider,
+//   Radio,
+//   Select,
+//   Stack,
+//   Switch,
+//   Tab,
+//   TabList,
+//   Text,
+//   TextArea,
+//   TextInput,
+// } from '@sanity/ui'
 import {CARD_TONES, ELEMENT_TONES} from '@sanity/ui/theme'
+import {PortalProvider} from '@sanity/ui/utils/portal'
 import {type ReactNode, useState} from 'react'
 
 const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {

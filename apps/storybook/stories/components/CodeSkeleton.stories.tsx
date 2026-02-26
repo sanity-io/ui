@@ -1,4 +1,5 @@
-import {CodeSkeleton, type CodeSkeletonProps, Skeleton} from '@sanity/ui'
+// import {CodeSkeleton, type CodeSkeletonProps, Skeleton} from '@sanity/ui'
+import {CodeSkeleton, type CodeSkeletonProps, Skeleton} from '@sanity/ui/primitives/skeleton'
 import {FONT_CODE_SIZE, type FontCodeSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

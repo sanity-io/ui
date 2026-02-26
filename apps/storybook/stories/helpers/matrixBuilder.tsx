@@ -1,6 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import {Card, Flex, Grid, Text} from '@sanity/ui'
+// import {Card, Flex, Grid, Text} from '@sanity/ui'
+import {Card} from '@sanity/ui/primitives/card'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Grid} from '@sanity/ui/primitives/grid'
+import {Text} from '@sanity/ui/primitives/text'
 import type {ColorScheme} from '@sanity/ui/theme'
 
 interface MatrixBuilderProps<Rows extends string[], Cols extends string[]> {

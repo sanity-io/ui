@@ -1,4 +1,8 @@
-import {Card, Container, Stack, Text} from '@sanity/ui'
+// import {Card, Container, Stack, Text} from '@sanity/ui'
+import {Card} from '@sanity/ui/primitives/card'
+import {Container} from '@sanity/ui/primitives/container'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {CONTAINER_WIDTH_CONTROLS, HEIGHT_CONTROLS, OVERFLOW_CONTROLS} from '../controls'

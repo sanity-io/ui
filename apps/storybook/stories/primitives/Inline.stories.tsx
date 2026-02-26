@@ -1,4 +1,7 @@
-import {Card, Inline, Text} from '@sanity/ui'
+// import {Card, Inline, Text} from '@sanity/ui'
+import {Card} from '@sanity/ui/primitives/card'
+import {Inline} from '@sanity/ui/primitives/inline'
+import {Text} from '@sanity/ui/primitives/text'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {HEIGHT_CONTROLS, OVERFLOW_CONTROLS, SPACE_CONTROLS} from '../controls'

@@ -1,5 +1,12 @@
-import {Box, Card, Code, Flex, Grid, Heading, Stack} from '@sanity/ui'
+// import {Box, Card, Code, Flex, Grid, Heading, Stack} from '@sanity/ui'
 import {vars} from '@sanity/ui/css'
+import {Box} from '@sanity/ui/primitives/box'
+import {Card} from '@sanity/ui/primitives/card'
+import {Code} from '@sanity/ui/primitives/code'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Grid} from '@sanity/ui/primitives/grid'
+import {Heading} from '@sanity/ui/primitives/heading'
+import {Stack} from '@sanity/ui/primitives/stack'
 import {HUES, TINTS} from '@sanity/ui/theme'
 import type {ReactNode} from 'react'
 

@@ -6,19 +6,26 @@ import {
   LaunchIcon,
   SearchIcon,
 } from '@sanity/icons'
-import {
-  Box,
-  Button,
-  Card,
-  Flex,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  Stack,
-  Text,
-} from '@sanity/ui'
+import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '@sanity/ui/components/menu'
+// import {
+//   Box,
+//   Button,
+//   Card,
+//   Flex,
+//   Menu,
+//   MenuButton,
+//   MenuDivider,
+//   MenuGroup,
+//   MenuItem,
+//   Stack,
+//   Text,
+// } from '@sanity/ui'
+import {Box} from '@sanity/ui/primitives/box'
+import {Button} from '@sanity/ui/primitives/button'
+import {Card} from '@sanity/ui/primitives/card'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect, fn, userEvent, within} from 'storybook/test'
 
