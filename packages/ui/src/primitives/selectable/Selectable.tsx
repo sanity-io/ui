@@ -1,7 +1,5 @@
+import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
 import {selectable, SELECTABLE_STYLE_PROP_KEYS, type SelectableStyleProps} from '@sanity/ui/css'
-
-import {_splitKeys} from '../../core/_keys'
-import type {ComponentType, Props} from '../../core/types'
 
 /** @internal */
 export const DEFAULT_SELECTABLE_ELEMENT = 'button'

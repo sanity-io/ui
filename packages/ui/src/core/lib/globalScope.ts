@@ -16,4 +16,5 @@ function getGlobalScope() {
   throw new Error('@sanity/ui: could not locate global scope')
 }
 
+/** @internal */
 export const globalScope: typeof globalThis = getGlobalScope()

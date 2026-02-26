@@ -1,3 +1,5 @@
+import {Hotkeys} from '@sanity/ui/components/hotkeys'
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {
   type GapStyleProps,
   type PaddingStyleProps,
@@ -5,6 +7,9 @@ import {
   type ResponsiveProp,
   selectable_hotkeys,
 } from '@sanity/ui/css'
+import {Box} from '@sanity/ui/primitives/box'
+import {Selectable} from '@sanity/ui/primitives/selectable'
+import {Text} from '@sanity/ui/primitives/text'
 import type {ElementTone, FontTextSize} from '@sanity/ui/theme'
 import {
   type ElementType,
@@ -19,11 +24,6 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
-import type {ComponentType, Props} from '../../core/types'
-import {Box} from '../../primitives/box/Box'
-import {Selectable} from '../../primitives/selectable/Selectable'
-import {Text} from '../../primitives/text/Text'
-import {Hotkeys} from '../hotkeys/Hotkeys'
 import {useMenu} from './useMenu'
 
 /** @public */

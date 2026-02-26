@@ -1,9 +1,9 @@
 import type {ResponsiveProp} from '@sanity/ui/css'
+import {useMounted} from '@sanity/ui/hooks'
+import {LayerProvider} from '@sanity/ui/primitives/layer'
 import {AnimatePresence} from 'motion/react'
 import {startTransition, useMemo, useRef, useState} from 'react'
 
-import {useMounted} from '../../hooks/useMounted'
-import {LayerProvider} from '../../primitives/layer/LayerProvider'
 import {Toast} from './Toast'
 import {ToastContext} from './ToastContext'
 import {ToastLayer, type ToastLayerProps} from './ToastLayer'

@@ -1,4 +1,4 @@
-import {isHTMLAnchorElement, isHTMLButtonElement} from '../../core/helpers/element'
+import {isHTMLAnchorElement, isHTMLButtonElement} from '@sanity/ui/core'
 
 /**
  * @internal

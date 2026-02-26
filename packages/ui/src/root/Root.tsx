@@ -1,8 +1,8 @@
+import type {Props} from '@sanity/ui/core'
 import {box, root, type RootStyleProps} from '@sanity/ui/css'
+import {Box, type BoxOwnProps} from '@sanity/ui/primitives/box'
 import {useCallback, useImperativeHandle, useRef, useState} from 'react'
 
-import type {Props} from '../core/types'
-import {Box, type BoxOwnProps} from '../primitives/box/Box'
 import {RootProvider} from './RootProvider'
 
 /** @public */

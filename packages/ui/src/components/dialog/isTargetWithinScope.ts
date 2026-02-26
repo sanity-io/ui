@@ -1,4 +1,4 @@
-import {containsOrEqualsElement} from '../../core/helpers/element'
+import {containsOrEqualsElement} from '@sanity/ui/core'
 
 export function isTargetWithinScope(
   boundaryElement: HTMLElement | null,

@@ -1,14 +1,12 @@
+import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
 import {
   hotkeys,
   HOTKEYS_STYLE_PROP_KEYS,
   type HotkeysStyleProps,
   type ResponsiveProp,
 } from '@sanity/ui/css'
+import {KBD} from '@sanity/ui/primitives/kbd'
 import type {FontTextSize} from '@sanity/ui/theme'
-
-import {_splitKeys} from '../../core/_keys'
-import type {ComponentType, Props} from '../../core/types'
-import {KBD} from '../../primitives/kbd/Kbd'
 
 /** @public */
 export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'

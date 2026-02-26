@@ -1,13 +1,12 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {menu, type PaddingStyleProps, type ResponsiveProp} from '@sanity/ui/css'
+import {useClickOutsideEvent, useGlobalKeyDown} from '@sanity/ui/hooks'
+import {Box} from '@sanity/ui/primitives/box'
+import {useLayer} from '@sanity/ui/primitives/layer'
+import {Stack} from '@sanity/ui/primitives/stack'
 import type {Space} from '@sanity/ui/theme'
 import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 
-import type {ComponentType, Props} from '../../core/types'
-import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
-import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
-import {Box} from '../../primitives/box/Box'
-import {useLayer} from '../../primitives/layer/useLayer'
-import {Stack} from '../../primitives/stack/Stack'
 import {MenuContext, type MenuContextValue} from './MenuContext'
 import {useMenuController} from './useMenuController'
 

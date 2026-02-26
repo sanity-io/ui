@@ -1,3 +1,4 @@
+import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
 import {
   button,
   button_loadingBox,
@@ -5,16 +6,15 @@ import {
   type ButtonStyleProps,
   type ResponsiveProp,
 } from '@sanity/ui/css'
+import {Box} from '@sanity/ui/primitives/box'
+import {Spinner} from '@sanity/ui/primitives/spinner'
+import {Text, type TextOwnProps} from '@sanity/ui/primitives/text'
+import type {TooltipProps} from '@sanity/ui/primitives/tooltip'
 import type {FontTextSize} from '@sanity/ui/theme'
-import {isValidElement} from 'react'
+import {isValidElement, Suspense} from 'react'
 import {isValidElementType} from 'react-is'
 
-import {_splitKeys} from '../../core/_keys'
-import type {ComponentType, Props} from '../../core/types'
-import {Box} from '../box/Box'
-import {Spinner} from '../spinner/Spinner'
-import {Text, type TextOwnProps} from '../text/Text'
-import {Tooltip, type TooltipProps} from '../tooltip/Tooltip'
+import {LazyTooltip} from './LazyTooltip'
 
 /** @public */
 export const DEFAULT_BUTTON_ELEMENT = 'button'

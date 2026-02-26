@@ -1,5 +1,10 @@
 import {autoUpdate, type RootBoundary, useFloating} from '@floating-ui/react-dom'
+import {type Assign, getElementRef, type Placement, Z_OFFSETS} from '@sanity/ui/core'
 import {type MaxWidth, popover as popoverCss, type ResponsiveProp} from '@sanity/ui/css'
+import {usePrefersReducedMotion} from '@sanity/ui/hooks'
+import {useLayer} from '@sanity/ui/primitives/layer'
+import {BoundaryElementContext} from '@sanity/ui/utils/boundary-element'
+import {Portal} from '@sanity/ui/utils/portal'
 import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
@@ -14,13 +19,6 @@ import {
   useRef,
 } from 'react'
 
-import {Z_OFFSETS} from '../../core/constants'
-import {getElementRef} from '../../core/getElementRef'
-import type {Assign, Placement} from '../../core/types'
-import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
-import {Portal} from '../../utils/portal/Portal'
-import {useLayer} from '../layer/useLayer'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_POPOVER_DISTANCE,

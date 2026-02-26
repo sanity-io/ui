@@ -1,13 +1,17 @@
 import type {Transition, Variant} from 'motion/react'
 
+/** @internal */
 export const EMPTY_ARRAY: never[] = []
 
+/** @internal */
 export const EMPTY_RECORD: Record<string, never> = {}
 
 const POPOVER_MOTION_DURATION = 0.2
 
 /**
  * Shared `framer-motion` variants used by `Popover` and `Tooltip` components.
+ *
+ * @internal
  */
 export const POPOVER_MOTION_PROPS: {
   card: {
@@ -60,6 +64,7 @@ export const POPOVER_MOTION_PROPS: {
   },
 }
 
+/** @internal */
 export const Z_OFFSETS = {
   dialog: 600,
   popover: 400,

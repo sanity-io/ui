@@ -1,4 +1,4 @@
-import type {ButtonProps} from '../../primitives/button/Button'
+import type {ButtonProps} from '@sanity/ui/primitives/button'
 
 /** @public */
 export type AutocompleteOpenButtonProps = Omit<ButtonProps, 'as'>

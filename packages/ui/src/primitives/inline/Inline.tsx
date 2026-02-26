@@ -1,5 +1,6 @@
-import type {Props} from '../../core/types'
-import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
+import type {Props} from '@sanity/ui/core'
+import type {BoxStyleProps} from '@sanity/ui/css'
+import {Box, type BoxElementType} from '@sanity/ui/primitives/box'
 
 /** @public */
 export const DEFAULT_INLINE_ELEMENT = 'div'

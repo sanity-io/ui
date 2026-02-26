@@ -7,13 +7,27 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
+import {Hotkeys} from '@sanity/ui/components/hotkeys'
+import {
+  type ComponentType,
+  type Delay,
+  getElementRef,
+  type Placement,
+  type Props,
+  Z_OFFSETS,
+} from '@sanity/ui/core'
 import {
   type RadiusStyleProps,
   type ResponsiveProp,
   type ShadowStyleProps,
   tooltip,
 } from '@sanity/ui/css'
+import {usePrefersReducedMotion, useUnique} from '@sanity/ui/hooks'
+import type {LayerOwnProps} from '@sanity/ui/primitives/layer'
+import {Text} from '@sanity/ui/primitives/text'
 import type {CardTone, ColorScheme, FontTextSize} from '@sanity/ui/theme'
+import {BoundaryElementContext} from '@sanity/ui/utils/boundary-element'
+import {assertPortalContext, Portal, PortalContext} from '@sanity/ui/utils/portal'
 import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
@@ -30,19 +44,7 @@ import {
   useState,
 } from 'react'
 
-import {Hotkeys} from '../../components/hotkeys/Hotkeys'
-import {Z_OFFSETS} from '../../core/constants'
-import {getElementRef} from '../../core/getElementRef'
-import type {ComponentType, Delay, Placement, Props} from '../../core/types'
-import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {useUnique} from '../../hooks/useUnique'
 import {origin} from '../../middleware/origin'
-import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
-import {Portal} from '../../utils/portal/Portal'
-import {PortalContext} from '../../utils/portal/PortalContext'
-import {assertPortalContext} from '../../utils/portal/usePortal'
-import type {LayerOwnProps} from '../layer/Layer'
-import {Text} from '../text/Text'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_TOOLTIP_DELAY,

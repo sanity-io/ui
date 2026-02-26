@@ -1,6 +1,5 @@
+import {Code} from '@sanity/ui/primitives/code'
 import {Component, type ErrorInfo, type PropsWithChildren, type ReactNode} from 'react'
-
-import {Code} from '../primitives/code/Code'
 
 /**
  * DO NOT USE IN PRODUCTION

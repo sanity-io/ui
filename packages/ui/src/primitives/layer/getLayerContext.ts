@@ -1,4 +1,5 @@
-import {isRecord} from '../../core/lib/isRecord'
+import {isRecord} from '@sanity/ui/core'
+
 import type {LayerContextValue} from './types'
 
 export function getLayerContext(contextValue: LayerContextValue): LayerContextValue {
