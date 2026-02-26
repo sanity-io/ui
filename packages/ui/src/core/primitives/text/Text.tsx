@@ -24,9 +24,6 @@ export type TextOwnProps = TextStyleProps & TextOverflowStyleProps
  * The rendered element receives all applicable HTML attributes for the chosen
  * element type in addition to the Text's own style props.
  *
- * `"div"` | `"h1"` | `"h2"` | `"h3"` | `"h4"` | `"h5"` | `"h6"` | `"label"` |
- * `"li"` | `"p"` | `"span"` | `"summary"` | `"time"` | `ComponentType`
- *
  * @public
  */
 export type TextElementType =
