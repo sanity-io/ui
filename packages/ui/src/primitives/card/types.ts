@@ -10,6 +10,7 @@ export type _CardCompatProviderComponent = ComponentType<{
 
 /** @public */
 export interface CardContextValue {
+  root: boolean
   tone: CardTone
   scheme: ColorScheme
   /** @internal */
