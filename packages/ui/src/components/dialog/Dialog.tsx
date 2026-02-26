@@ -30,7 +30,9 @@ export const DEFAULT_DIALOG_ELEMENT = 'div'
 
 /** @public */
 export interface DialogOwnProps
-  extends Omit<ContainerStyleProps, 'tone'>, Omit<LayerOwnProps, 'shadow' | 'width'> {
+  extends
+    Omit<ContainerStyleProps, 'id' | 'position' | 'radius' | 'shadow'>,
+    Omit<LayerOwnProps, 'id' | 'position' | 'radius' | 'shadow' | 'width'> {
   /**
    * @beta
    */
@@ -58,7 +60,7 @@ export interface DialogOwnProps
   open?: boolean
   portal?: string
   position?: ResponsiveProp<DialogPosition>
-  scheme?: ColorScheme
+  // scheme?: ColorScheme
   /**
    * @deprecated Not in use – will be removed in the next major version.
    */

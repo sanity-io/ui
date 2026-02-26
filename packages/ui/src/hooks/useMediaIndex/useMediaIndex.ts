@@ -1,8 +1,6 @@
 import {type Breakpoint, BREAKPOINTS} from '@sanity/ui/css'
 import {useMemo, useSyncExternalStore} from 'react'
 
-const media = Object.values(BREAKPOINTS)
-
 /**
  * @internal
  */
@@ -16,7 +14,7 @@ type MediaQueryMaxWidth = `(max-width: ${number}px)`
 type MediaQueryMinMaxWidth = `${MediaQueryMinWidth} and ${MediaQueryMaxWidth}`
 type MediaQuery = `screen and ${MediaQueryMinWidth | MediaQueryMaxWidth | MediaQueryMinMaxWidth}`
 
-function _getMediaQuery(media: number[], index: number): MediaQuery {
+function _getMediaQuery(media: number[] | readonly number[], index: number): MediaQuery {
   if (index === 0) {
     return `screen and (max-width: ${media[index + 1] - 1}px)`
   }
@@ -29,7 +27,7 @@ function _getMediaQuery(media: number[], index: number): MediaQuery {
 }
 
 function _createMediaStore(): _MediaStore {
-  const mediaLen = media.length
+  const mediaLen = BREAKPOINTS.length
 
   let sizes: {mq: MediaQueryList; index: number}[] | undefined = undefined
 
@@ -45,7 +43,7 @@ function _createMediaStore(): _MediaStore {
       sizes = []
 
       for (let index = mediaLen; index > -1; index -= 1) {
-        const mediaQuery = _getMediaQuery(media, index)
+        const mediaQuery = _getMediaQuery(BREAKPOINTS, index)
 
         sizes.push({index, mq: window.matchMedia(mediaQuery)})
       }

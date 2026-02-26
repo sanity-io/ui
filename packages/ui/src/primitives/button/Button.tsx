@@ -138,7 +138,11 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
   )
 
   if (tooltip) {
-    return <Tooltip {...tooltip}>{node}</Tooltip>
+    return (
+      <Suspense fallback={node}>
+        <LazyTooltip {...tooltip}>{node}</LazyTooltip>
+      </Suspense>
+    )
   }
 
   return node

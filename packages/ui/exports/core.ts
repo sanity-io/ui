@@ -7,11 +7,9 @@ export * from '../src/core/helpers/focus'
 export * from '../src/core/helpers/props'
 export * from '../src/core/helpers/scroll'
 export * from '../src/core/lib/createGlobalScopedContext'
+export * from '../src/core/lib/elementSize'
 export * from '../src/core/lib/globalScope'
 export * from '../src/core/lib/isArray'
 export * from '../src/core/lib/isRecord'
+export * from '../src/core/lib/resize'
 export * from '../src/core/types'
-
-//
-export * from '../src/observers/elementSize'
-export * from '../src/observers/resize'

@@ -50,6 +50,7 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
   const {inputRef: ref} = props
 
   const border = useBoolean('Border', true)
+  const clearButton = useBoolean('Clear button', false)
   const customValidity = useText('Custom validity')
   const disabled = useBoolean('Disabled', false)
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
@@ -69,6 +70,7 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
     <TextInput
       ref={ref}
       border={border}
+      clearButton={clearButton}
       customValidity={customValidity}
       disabled={disabled}
       fontSize={fontSize}

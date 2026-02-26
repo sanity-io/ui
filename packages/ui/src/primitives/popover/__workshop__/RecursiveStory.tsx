@@ -1,4 +1,5 @@
-import {Button, Flex, LayerProvider, type Placement, Popover, useLayer} from '@sanity/ui'
+import {Button, Flex, LayerProvider, Popover, useLayer} from '@sanity/ui'
+import {type Placement} from '@sanity/ui/core'
 import {CARD_TONES} from '@sanity/ui/theme'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
@@ -18,13 +19,14 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
   const [open, setOpen] = useState(false)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const {isTopLayer} = useLayer()
-  const [seed] = useState(() => Math.floor(Math.random() * 4))
+  const [toneSeed] = useState(() => Math.floor(Math.random() * CARD_TONES.length))
+  const [placementSeed] = useState(() => Math.floor(Math.random() * placements.length))
   const fallbackPlacements = useMemo(() => {
-    const before = placements.slice(seed)
-    const after = placements.slice(0, seed)
+    const before = placements.slice(placementSeed)
+    const after = placements.slice(0, placementSeed)
 
     return before.concat(after)
-  }, [seed])
+  }, [placementSeed])
 
   useEffect(() => {
     if (open === false) buttonRef.current?.focus()
@@ -55,10 +57,11 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
       padding={1}
       placement={fallbackPlacements[3]}
       portal
-      tone={CARD_TONES[seed]}
+      tone={CARD_TONES[toneSeed]}
     >
       <Button
         ref={buttonRef}
+        // disabled={!isTopLayer}
         mode="bleed"
         text="Open"
         onClick={handleOpen}

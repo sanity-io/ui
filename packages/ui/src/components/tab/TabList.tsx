@@ -1,34 +1,25 @@
 import type {ComponentType, Props} from '@sanity/ui/core'
 import {Flex, type FlexOwnProps} from '@sanity/ui/primitives/flex'
-import {
-  Children,
-  cloneElement,
-  type KeyboardEvent,
-  type ReactElement,
-  useCallback,
-  useState,
-} from 'react'
+import {type KeyboardEvent, useCallback, useEffect, useRef, useState} from 'react'
 
-import type {TabProps} from './Tab'
+import {TabContext} from './TabListContext'
+import type {TabContextListValue} from './types'
 
 /** @public */
 export const DEFAULT_TAB_LIST_ELEMENT = 'div'
 
 /** @public */
-export type TabListChild = ReactElement<Props<TabProps, 'button'>> | null | undefined | false
-
-/** @public */
-export type TabListOwnProps = Omit<FlexOwnProps, 'as' | 'height'> & {
-  children: TabListChild[]
+export interface TabListOwnProps extends FlexOwnProps {
+  autoActivate?: boolean
 }
 
 /** @public */
 export type TabListElementType = 'div' | 'span' | ComponentType
 
 /** @public */
-export type TabListProps<E extends TabListElementType = TabListElementType> = Props<
-  TabListOwnProps,
-  E
+export type TabListProps<E extends TabListElementType = TabListElementType> = Omit<
+  Props<TabListOwnProps, E>,
+  'role'
 >
 
 /** @public */
@@ -37,54 +28,133 @@ export function TabList<E extends TabListElementType = typeof DEFAULT_TAB_LIST_E
 ): React.JSX.Element {
   const {
     as = DEFAULT_TAB_LIST_ELEMENT,
-    children: childrenProp,
-    gap = 1,
+    autoActivate = false,
+    children,
+    gap = 2,
+    onKeyDown,
     wrap = 'wrap',
     ...rest
   } = props as TabListProps<typeof DEFAULT_TAB_LIST_ELEMENT>
 
-  const [focusedIndex, setFocusedIndex] = useState(-1)
+  const [focusedId, setFocusedId] = useState<string | undefined>(undefined)
+  const [activeId, setActiveId] = useState<string | undefined>(undefined)
+  const [tabs, setTabs] = useState<{id: string; element: HTMLElement}[]>(() => [])
 
-  const children = Children.toArray(childrenProp).filter(_isReactElement)
+  const tabsRef = useRef(tabs)
 
-  const tabs = children.map((child, childIndex) =>
-    cloneElement(child, {
-      focused: focusedIndex === childIndex,
-      key: childIndex,
-      onFocus: () => setFocusedIndex(childIndex),
-    }),
-  )
-
-  const numTabs = tabs.length
+  useEffect(() => {
+    tabsRef.current = tabs
+  }, [tabs])
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
+      onKeyDown?.(event)
+
       if (event.key === 'ArrowLeft') {
-        setFocusedIndex((prevIndex) => (prevIndex + numTabs - 1) % numTabs)
+        setFocusedId((prevId) => {
+          const numTabs = tabsRef.current.length
+          const prevIndex = prevId ? tabsRef.current.findIndex((tab) => tab.id === prevId) : -1
+          const nextIndex = (prevIndex + numTabs - 1) % numTabs
+          const nextId = tabsRef.current[nextIndex]?.id
+
+          if (autoActivate) setActiveId(nextId)
+
+          return nextId
+        })
+        return
       }
 
       if (event.key === 'ArrowRight') {
-        setFocusedIndex((prevIndex) => (prevIndex + 1) % numTabs)
+        setFocusedId((prevId) => {
+          const numTabs = tabsRef.current.length
+          const prevIndex = prevId ? tabsRef.current.findIndex((tab) => tab.id === prevId) : -1
+          const nextIndex = (prevIndex + 1) % numTabs
+
+          const nextId = tabsRef.current[nextIndex]?.id
+
+          if (autoActivate) setActiveId(nextId)
+
+          return nextId
+        })
+        return
+      }
+
+      // Home (Optional): Moves focus to the first tab.
+      if (event.key === 'Home') {
+        const nextId = tabsRef.current[0]?.id
+        if (autoActivate) setActiveId(nextId)
+        setFocusedId(nextId)
+        return
+      }
+
+      // End (Optional): Moves focus to the last tab.
+      if (event.key === 'End') {
+        const nextId = tabsRef.current[tabsRef.current.length - 1]?.id
+        if (autoActivate) setActiveId(nextId)
+        setFocusedId(nextId)
+        return
       }
     },
-    [numTabs],
+    [autoActivate, onKeyDown],
   )
+
+  const context: TabContextListValue = {
+    version: 0.0,
+    focusedId,
+    activeId: activeId,
+    registerTab: (id, element, selectedProp) => {
+      // register tab
+      setTabs((prevTabs) => {
+        const newTabs = [...prevTabs]
+        newTabs.push({id, element})
+        newTabs.sort((a, b) => {
+          // sort by position in DOM
+          return a.element.compareDocumentPosition(b.element) & Node.DOCUMENT_POSITION_FOLLOWING
+            ? -1
+            : 1
+        })
+        return newTabs
+      })
+
+      if (selectedProp) {
+        setActiveId(id)
+      }
+
+      return () => {
+        // unregister tab
+        setTabs((prevTabs) => {
+          const newTabs = [...prevTabs]
+
+          newTabs.splice(
+            newTabs.findIndex((tab) => tab.id === id),
+            1,
+          )
+
+          return newTabs
+        })
+      }
+    },
+    focusTab: (id) => {
+      setFocusedId(id)
+      if (autoActivate) setActiveId(id)
+    },
+    activateTab: setActiveId,
+  }
 
   return (
-    <Flex
-      data-ui="TabList"
-      {...rest}
-      as={as}
-      gap={gap}
-      role="tablist"
-      wrap={wrap}
-      onKeyDown={handleKeyDown}
-    >
-      {tabs}
-    </Flex>
+    <TabContext.Provider value={context}>
+      <Flex
+        data-ui="TabList"
+        {...rest}
+        as={as}
+        // display="flex"
+        gap={gap}
+        role="tablist"
+        wrap={wrap}
+        onKeyDown={handleKeyDown}
+      >
+        {children}
+      </Flex>
+    </TabContext.Provider>
   )
-}
-
-function _isReactElement(node: unknown): node is ReactElement<Props<TabProps, 'button'>> {
-  return Boolean(node)
 }

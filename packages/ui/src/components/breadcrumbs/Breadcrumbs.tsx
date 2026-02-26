@@ -4,7 +4,7 @@ import {useClickOutsideEvent} from '@sanity/ui/hooks'
 import {Box} from '@sanity/ui/primitives/box'
 import {Button, type ButtonProps} from '@sanity/ui/primitives/button'
 import {Flex} from '@sanity/ui/primitives/flex'
-import {Popover} from '@sanity/ui/primitives/popover'
+import {Popover, type PopoverProps} from '@sanity/ui/primitives/popover'
 import {Stack} from '@sanity/ui/primitives/stack'
 import {Text} from '@sanity/ui/primitives/text'
 import {
@@ -25,6 +25,7 @@ export const DEFAULT_BREADCRUMBS_ELEMENT = 'nav'
 export type BreadcrumbsOwnProps = GapStyleProps & {
   expandButton?: Omit<ButtonProps, 'as' | 'onClick' | 'selected'>
   maxLength?: number
+  popover?: PopoverProps
   separator?: ReactNode
 }
 
@@ -49,6 +50,7 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
     gapX = gap,
     gapY = gap,
     maxLength,
+    popover: popoverProps,
     separator,
     ...rest
   } = props as BreadcrumbsProps<typeof DEFAULT_BREADCRUMBS_ELEMENT>
@@ -71,6 +73,7 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
     maxLength,
     open,
     popoverElementRef,
+    popoverProps,
     rawItems,
     gapY,
     expandButtonProps,
@@ -101,6 +104,7 @@ function useItems({
   maxLength,
   open,
   popoverElementRef,
+  popoverProps,
   rawItems,
   gapY,
   expandButtonProps,
@@ -111,6 +115,7 @@ function useItems({
   maxLength: number | undefined
   open: boolean
   popoverElementRef: React.RefObject<HTMLDivElement | null>
+  popoverProps?: PopoverProps
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rawItems: React.ReactElement<unknown, string | React.JSXElementConstructor<any>>[]
   gapY: NonNullable<GapStyleProps['gapY']>
@@ -126,17 +131,18 @@ function useItems({
       ...rawItems.slice(0, beforeLength - 1),
       <Popover
         key="button"
-        ref={popoverElementRef}
         constrainSize
+        open={open}
+        padding={2}
+        placement="top"
+        portal
+        {...popoverProps}
+        ref={popoverElementRef}
         content={
           <Stack as="ol" gap={gapY} overflow="auto">
             {rawItems.slice(beforeLength - 1, len - afterLength)}
           </Stack>
         }
-        open={open}
-        padding={2}
-        placement="top"
-        portal
       >
         <Button
           mode="bleed"

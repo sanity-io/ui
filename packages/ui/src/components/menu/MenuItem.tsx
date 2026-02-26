@@ -62,9 +62,9 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
     children,
     disabled,
     fontSize = 1,
-    gap = 3,
-    gapX,
-    gapY,
+    gap,
+    // gapX,
+    // gapY,
     hotkeys,
     icon: IconComponent,
     iconRight: IconRightComponent,
@@ -116,6 +116,7 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
       as={as}
       disabled={disabled}
       display="flex"
+      gap={gap ?? padding}
       padding={padding}
       radius={radius}
       role={role}
@@ -146,7 +147,7 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
         <Hotkeys
           className={selectable_hotkeys()}
           keys={hotkeys}
-          style={{marginTop: -4, marginBottom: -4}}
+          // style={{marginTop: -4, marginBottom: -4}}
         />
       )}
 

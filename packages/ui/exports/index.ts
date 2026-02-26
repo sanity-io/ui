@@ -1,5 +1,7 @@
-export * from '@sanity/ui/core'
+// hooks
 export * from '@sanity/ui/hooks'
+
+// root
 export * from '@sanity/ui/root'
 
 // utils
