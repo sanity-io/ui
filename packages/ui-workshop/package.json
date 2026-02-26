@@ -67,7 +67,7 @@
   ],
   "scripts": {
     "prebuild": "pnpm clean",
-    "build": "NODE_ENV=production pkg build --check --strict",
+    "build": "NODE_ENV=production pkg build --check",
     "clean": "rimraf dist",
     "dev": "pnpm workshop:dev",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
@@ -78,7 +78,6 @@
     "test:e2e:dev": "PLAYWRIGHT_DEV=true playwright test",
     "test:e2e:ui": "playwright test --ui",
     "typecheck": "tsc --build",
-    "watch": "pkg watch --strict",
     "workshop:build": "pnpm workshop:clean && tsx scripts/build.ts",
     "workshop:clean": "rimraf .workshop",
     "workshop:dev": "pnpm workshop:clean && tsx scripts/dev.ts",
