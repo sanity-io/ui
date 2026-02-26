@@ -10,11 +10,7 @@ import type {ComponentType, Props} from '../../types'
 export const DEFAULT_TEXT_ELEMENT = 'div'
 
 /**
- * Own props for the {@link Text} component.
- *
- * @remarks
- * Extends {@link TextStyleProps} and {@link TextOverflowStyleProps} to combine
- * typographic control with text overflow handling.
+ * Style props for the {@link Text} component.
  *
  * @public
  */
