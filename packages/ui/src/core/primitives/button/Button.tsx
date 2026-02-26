@@ -26,11 +26,7 @@ import type {ButtonTextAlign} from './types'
 export const DEFAULT_BUTTON_ELEMENT = 'button'
 
 /**
- * Own props for the {@link Button} component.
- *
- * @remarks
- * Extends {@link ButtonStyleProps}, {@link DisplayStyleProps}, {@link GapStyleProps},
- * and {@link PaddingStyleProps} to combine visual button styling with layout capabilities.
+ * Shared/layout props for the {@link Button} component.
  *
  * @public
  */
