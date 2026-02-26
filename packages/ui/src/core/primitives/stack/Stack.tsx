@@ -86,15 +86,9 @@ export type StackProps<E extends StackElementType = StackElementType> = Props<St
  * with consistent spacing between them.
  *
  * @remarks
- * `Stack` renders as a CSS grid container with `grid-auto-rows: min` and
- * `display: grid`, arranging its children in a single vertical column. The
+ * `Stack` renders as a CSS grid container, arranging its children in a single vertical column. The
  * `gap` prop controls the spacing between stacked items using the theme's
  * spacing scale.
- *
- * It is built on top of the {@link Box} component and inherits all of its
- * spacing, sizing, position, and visual style props (with certain layout props
- * like `display`, `flexDirection`, `gridTemplateColumns`, etc. omitted because
- * they are managed internally).
  *
  * @public
  */
