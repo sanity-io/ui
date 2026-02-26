@@ -76,7 +76,7 @@ export type BoxElementType =
  * element type specified by the `as` prop. When `as` is not provided,
  * the component renders a `<div>` element by default.
  *
- * @typeParam E - The HTML element or component type to render. Defaults to {@link BoxElementType}.
+ * @typeParam E - The HTML element or component type to render.
  *
  * @public
  */
