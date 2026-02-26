@@ -9,22 +9,16 @@ import {PortalProvider} from '../utils/portal/PortalProvider'
 
 /** @public */
 export interface RootProviderProps {
-  boundaryElement?: HTMLElement | null
+  boundaryElement: HTMLElement | null
   children?: ReactNode
-  portalElement?: HTMLElement | null
-  scheme?: ColorScheme
-  tone?: CardTone
+  portalElement: HTMLElement | null
+  scheme: ColorScheme
+  tone: CardTone
 }
 
 /** @public */
 export function RootProvider(props: RootProviderProps): React.JSX.Element {
-  const {
-    boundaryElement = null,
-    children,
-    portalElement = null,
-    scheme = 'light',
-    tone = 'transparent',
-  } = props
+  const {boundaryElement, children, portalElement, scheme, tone} = props
 
   return (
     <LayerProvider>
