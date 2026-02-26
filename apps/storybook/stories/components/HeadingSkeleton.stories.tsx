@@ -1,4 +1,4 @@
-import {HeadingSkeleton, type HeadingSkeletonProps, Skeleton} from '@sanity/ui'
+import {HeadingSkeleton, type HeadingSkeletonProps, Skeleton} from '@sanity/ui/primitives/skeleton'
 import {FONT_HEADING_SIZE, type FontHeadingSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

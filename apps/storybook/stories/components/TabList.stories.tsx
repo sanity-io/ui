@@ -1,5 +1,5 @@
 import {OkHandIcon, RocketIcon, SunIcon} from '@sanity/icons'
-import {Tab, TabList} from '@sanity/ui'
+import {Tab, TabList} from '@sanity/ui/components/tab'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {OVERFLOW_CONTROLS, SPACE_CONTROLS} from '../controls'

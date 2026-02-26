@@ -1,4 +1,5 @@
-import {Avatar, AvatarCounter, AvatarStack} from '@sanity/ui'
+// import {Avatar, AvatarCounter, AvatarStack} from '@sanity/ui'
+import {Avatar, AvatarCounter, AvatarStack} from '@sanity/ui/primitives/avatar'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {AVATAR_SRC} from '../constants'

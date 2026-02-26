@@ -1,4 +1,6 @@
-import {Label, Stack} from '@sanity/ui'
+// import {Label, Stack} from '@sanity/ui'
+import {Label} from '@sanity/ui/primitives/label'
+import {Stack} from '@sanity/ui/primitives/stack'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_LABEL_SIZE_CONTROLS, TEXT_ALIGN_CONTROLS} from '../controls'

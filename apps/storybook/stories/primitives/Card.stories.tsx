@@ -1,4 +1,12 @@
-import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
+// import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
+import {Box} from '@sanity/ui/primitives/box'
+import {Button} from '@sanity/ui/primitives/button'
+import {Card} from '@sanity/ui/primitives/card'
+import {Container} from '@sanity/ui/primitives/container'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Grid} from '@sanity/ui/primitives/grid'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
 import {CARD_TONES, type CardTone, RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
@@ -350,20 +358,22 @@ export const MatrixAsButton: Story = {
               </Text>
               <Stack gap={2} marginTop={3}>
                 {CARD_TONES.map((tone) => (
-                  <div key={tone} aria-selected>
-                    <Card
-                      __unstable_focusRing
-                      as="button"
-                      padding={4}
-                      style={{textAlign: 'center'}}
-                      tone={tone}
-                    >
-                      <Stack gap={2}>
-                        <Text weight="semibold">{tone}</Text>
-                        <Text muted>Muted</Text>
-                      </Stack>
-                    </Card>
-                  </div>
+                  // <div key={tone} >
+                  <Card
+                    key={tone}
+                    __unstable_focusRing
+                    as="button"
+                    padding={4}
+                    selected
+                    style={{textAlign: 'center'}}
+                    tone={tone}
+                  >
+                    <Stack gap={2}>
+                      <Text weight="semibold">{tone}</Text>
+                      <Text muted>Muted</Text>
+                    </Stack>
+                  </Card>
+                  // </div>
                 ))}
               </Stack>
             </Box>
@@ -377,35 +387,19 @@ export const MatrixAsButton: Story = {
 export const NestedSchemeChanges: Story = {
   render: () => {
     return (
-      <Flex gap={4} wrap={'wrap'}>
-        <Card margin={4} padding={4} scheme="light" shadow={1}>
-          <Text>Light default</Text>
-          <Card margin={4} padding={4} scheme="dark" shadow={1} tone="inherit">
-            <Text>Dark inherit</Text>
-            <Card margin={4} padding={4} scheme="light" shadow={1} tone="inherit">
-              <Text>Light inherit</Text>
+      <Grid gap={4} gridTemplateColumns={[1, 2, 3, 4]}>
+        {CARD_TONES.map((t) => (
+          <Card key={t} padding={4} scheme="light" shadow={1} tone={t}>
+            <Text marginBottom={4}>Light {t}</Text>
+            <Card padding={4} scheme="dark" shadow={1} tone="inherit">
+              <Text marginBottom={4}>Dark inherit</Text>
+              <Card padding={4} scheme="light" shadow={1} tone="inherit">
+                <Text>Light inherit</Text>
+              </Card>
             </Card>
           </Card>
-        </Card>
-        <Card margin={4} padding={4} scheme="light" shadow={1} tone="caution">
-          <Text>Light caution</Text>
-          <Card margin={4} padding={4} scheme="dark" shadow={1} tone="inherit">
-            <Text>Dark inherit</Text>
-            <Card margin={4} padding={4} scheme="light" shadow={1} tone="inherit">
-              <Text>Light inherit</Text>
-            </Card>
-          </Card>
-        </Card>
-        <Card margin={4} padding={4} scheme="light" shadow={1} tone="primary">
-          <Text>Primary caution</Text>
-          <Card margin={4} padding={4} scheme="dark" shadow={1} tone="inherit">
-            <Text>Dark inherit</Text>
-            <Card margin={4} padding={4} scheme="light" shadow={1} tone="inherit">
-              <Text>Light inherit</Text>
-            </Card>
-          </Card>
-        </Card>
-      </Flex>
+        ))}
+      </Grid>
     )
   },
 }

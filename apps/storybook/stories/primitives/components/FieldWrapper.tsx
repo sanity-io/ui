@@ -1,4 +1,6 @@
-import {Stack, Text} from '@sanity/ui'
+// import {Stack, Text} from '@sanity/ui'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
 import type {ReactNode} from 'react'
 
 export const FieldWrapper = ({

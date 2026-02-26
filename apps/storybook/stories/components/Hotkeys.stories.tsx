@@ -1,4 +1,4 @@
-import {Hotkeys} from '@sanity/ui'
+import {Hotkeys} from '@sanity/ui/components/hotkeys'
 import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

@@ -1,5 +1,6 @@
 import {SearchIcon} from '@sanity/icons'
-import {Autocomplete, Card} from '@sanity/ui'
+import {Autocomplete} from '@sanity/ui/components/autocomplete'
+import {Card} from '@sanity/ui/primitives/card'
 import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 

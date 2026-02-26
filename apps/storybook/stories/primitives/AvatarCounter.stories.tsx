@@ -1,4 +1,5 @@
-import {AvatarCounter, AvatarStack} from '@sanity/ui'
+// import {AvatarCounter, AvatarStack} from '@sanity/ui'
+import {AvatarCounter, AvatarStack} from '@sanity/ui/primitives/avatar'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 
 import {AVATAR_SIZE_CONTROLS} from '../controls'

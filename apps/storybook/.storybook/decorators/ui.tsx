@@ -1,4 +1,4 @@
-import {Root} from '@sanity/ui'
+import {Root} from '@sanity/ui/root'
 import type {Decorator} from '@storybook/react-vite'
 
 export const UIDecorator: Decorator = (storyFn, context) => {

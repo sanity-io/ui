@@ -1,4 +1,7 @@
-import {Flex, Stack, Switch} from '@sanity/ui'
+// import {Flex, Stack, Switch} from '@sanity/ui'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Switch} from '@sanity/ui/primitives/switch'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 

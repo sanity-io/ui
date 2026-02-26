@@ -1,4 +1,4 @@
-import {LabelSkeleton, type LabelSkeletonProps, Skeleton} from '@sanity/ui'
+import {LabelSkeleton, type LabelSkeletonProps, Skeleton} from '@sanity/ui/primitives/skeleton'
 import {FONT_LABEL_SIZE, type FontLabelSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

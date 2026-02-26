@@ -1,4 +1,4 @@
-import {Skeleton, TextSkeleton, type TextSkeletonProps} from '@sanity/ui'
+import {Skeleton, TextSkeleton, type TextSkeletonProps} from '@sanity/ui/primitives/skeleton'
 import {FONT_TEXT_SIZE, type FontTextSize} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

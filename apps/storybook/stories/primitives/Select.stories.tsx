@@ -1,4 +1,5 @@
-import {Select} from '@sanity/ui'
+// import {Select} from '@sanity/ui'
+import {Select} from '@sanity/ui/primitives/select'
 import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

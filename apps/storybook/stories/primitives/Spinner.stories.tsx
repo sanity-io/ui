@@ -1,4 +1,5 @@
-import {Spinner} from '@sanity/ui'
+// import {Spinner} from '@sanity/ui'
+import {Spinner} from '@sanity/ui/primitives/spinner'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_TEXT_SIZE_CONTROLS} from '../controls'

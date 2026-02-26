@@ -1,4 +1,8 @@
-import {Button, Card, Text, Tooltip, TooltipDelayGroupProvider} from '@sanity/ui'
+// import {Button, Card, Text, Tooltip, TooltipDelayGroupProvider} from '@sanity/ui'
+import {Button} from '@sanity/ui/primitives/button'
+import {Card} from '@sanity/ui/primitives/card'
+import {Text} from '@sanity/ui/primitives/text'
+import {Tooltip, TooltipDelayGroupProvider} from '@sanity/ui/primitives/tooltip'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {userEvent, within} from 'storybook/test'
 
