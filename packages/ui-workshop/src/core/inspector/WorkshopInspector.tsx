@@ -36,7 +36,7 @@ export function WorkshopInspector(props: {expanded: boolean}) {
       shadow={1}
     >
       <Flex direction="column" height="fill">
-        {showTabs && <InspectorHeader currentTabId={tabId} tabs={tabs} onTabChange={setTabId} />}
+        {showTabs && <InspectorHeader currentTabId={tabId} tabs={tabs} onTabActivate={setTabId} />}
 
         {showTabs &&
           tabs.map((tab) => (
