@@ -11,6 +11,11 @@ overrides:
   conventional-changelog-conventionalcommits: '>= 8.0.0'
   zod: ^4.3.6
 
+patchedDependencies:
+  react-refractor:
+    hash: 7bb60ab3749d86a517f6209f1d09a3477b50ae50a3ef089347d6be0965f89a2a
+    path: patches/react-refractor.patch
+
 importers:
 
   .:
@@ -234,7 +239,7 @@ importers:
         version: 12.34.3(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-refractor:
         specifier: ^4.0.0
-        version: 4.0.0(react@19.2.4)
+        version: 4.0.0(patch_hash=7bb60ab3749d86a517f6209f1d09a3477b50ae50a3ef089347d6be0965f89a2a)(react@19.2.4)
     devDependencies:
       '@babel/core':
         specifier: ^7.29.0
@@ -434,7 +439,7 @@ importers:
         version: 19.2.4(react@19.2.4)
       react-refractor:
         specifier: ^4.0.0
-        version: 4.0.0(react@19.2.4)
+        version: 4.0.0(patch_hash=7bb60ab3749d86a517f6209f1d09a3477b50ae50a3ef089347d6be0965f89a2a)(react@19.2.4)
       refractor:
         specifier: ^5.0.0
         version: 5.0.0
@@ -15172,7 +15177,7 @@ snapshots:
 
   react-is@19.2.4: {}
 
-  react-refractor@4.0.0(react@19.2.4):
+  react-refractor@4.0.0(patch_hash=7bb60ab3749d86a517f6209f1d09a3477b50ae50a3ef089347d6be0965f89a2a)(react@19.2.4):
     dependencies:
       react: 19.2.4
       refractor: 5.0.0
