@@ -1,5 +1,5 @@
 import {SearchIcon} from '@sanity/icons'
-import {Tab} from '@sanity/ui'
+import {Tab} from '@sanity/ui/components/tab'
 import {ELEMENT_TONES} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

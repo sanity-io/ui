@@ -1,4 +1,6 @@
-import {Code, Stack} from '@sanity/ui'
+// import {Code, Stack} from '@sanity/ui'
+import {Code} from '@sanity/ui/primitives/code'
+import {Stack} from '@sanity/ui/primitives/stack'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_CODE_SIZE_CONTROLS} from '../controls'

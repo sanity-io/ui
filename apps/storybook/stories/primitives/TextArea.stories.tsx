@@ -1,4 +1,9 @@
-import {Box, Card, Grid, Text, TextArea} from '@sanity/ui'
+// import {Box, Card, Grid, Text, TextArea} from '@sanity/ui'
+import {Box} from '@sanity/ui/primitives/box'
+import {Card} from '@sanity/ui/primitives/card'
+import {Grid} from '@sanity/ui/primitives/grid'
+import {Text} from '@sanity/ui/primitives/text'
+import {TextArea} from '@sanity/ui/primitives/text-area'
 import {RADIUS} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

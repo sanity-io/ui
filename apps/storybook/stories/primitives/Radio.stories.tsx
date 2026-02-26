@@ -1,4 +1,7 @@
-import {Flex, Radio, Stack} from '@sanity/ui'
+// import {Flex, Radio, Stack} from '@sanity/ui'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Radio} from '@sanity/ui/primitives/radio'
+import {Stack} from '@sanity/ui/primitives/stack'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {type ChangeEvent, useCallback, useState} from 'react'
 

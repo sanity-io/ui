@@ -1,4 +1,5 @@
-import {Breadcrumbs, Text} from '@sanity/ui'
+import {Breadcrumbs} from '@sanity/ui/components/breadcrumbs'
+import {Text} from '@sanity/ui/primitives/text'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {SPACE_CONTROLS} from '../controls'

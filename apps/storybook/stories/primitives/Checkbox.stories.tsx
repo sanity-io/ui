@@ -1,4 +1,7 @@
-import {Checkbox, Flex, Stack} from '@sanity/ui'
+// import {Checkbox, Flex, Stack} from '@sanity/ui'
+import {Checkbox} from '@sanity/ui/primitives/checkbox'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Stack} from '@sanity/ui/primitives/stack'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 

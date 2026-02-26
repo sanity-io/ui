@@ -1,4 +1,8 @@
-import {Card, Container, LayerProvider, Menu, MenuItem} from '@sanity/ui'
+// import {Card, Container, LayerProvider, Menu, MenuItem} from '@sanity/ui'
+import {Menu, MenuItem} from '@sanity/ui/components/menu'
+import {Card} from '@sanity/ui/primitives/card'
+import {Container} from '@sanity/ui/primitives/container'
+import {LayerProvider} from '@sanity/ui/primitives/layer'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 
 import {SPACE_CONTROLS} from '../controls'

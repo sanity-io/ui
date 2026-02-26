@@ -1,5 +1,9 @@
 import {AddCircleIcon} from '@sanity/icons'
-import {Card, Flex, Stack, Text} from '@sanity/ui'
+// import {Card, Flex, Stack, Text} from '@sanity/ui'
+import {Card} from '@sanity/ui/primitives/card'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_TEXT_SIZE_CONTROLS, TEXT_ALIGN_CONTROLS, TEXT_OVERFLOW_CONTROLS} from '../controls'

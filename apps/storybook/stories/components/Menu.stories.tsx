@@ -1,17 +1,25 @@
 import {BinaryDocumentIcon, CircleIcon, RestoreIcon} from '@sanity/icons'
-import {
-  Badge,
-  Card,
-  Container,
-  Flex,
-  LayerProvider,
-  Menu,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  Stack,
-  Text,
-} from '@sanity/ui'
+import {Menu, MenuDivider, MenuGroup, MenuItem} from '@sanity/ui/components/menu'
+// import {
+//   Badge,
+//   Card,
+//   Container,
+//   Flex,
+//   LayerProvider,
+//   Menu,
+//   MenuDivider,
+//   MenuGroup,
+//   MenuItem,
+//   Stack,
+//   Text,
+// } from '@sanity/ui'
+import {Badge} from '@sanity/ui/primitives/badge'
+import {Card} from '@sanity/ui/primitives/card'
+import {Container} from '@sanity/ui/primitives/container'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {LayerProvider} from '@sanity/ui/primitives/layer'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {fn} from 'storybook/test'
 

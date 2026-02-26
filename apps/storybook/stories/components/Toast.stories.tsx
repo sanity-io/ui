@@ -1,4 +1,10 @@
-import {Box, Button, Grid, Heading, Inline, Toast, ToastProvider, useToast} from '@sanity/ui'
+// import {Box, Button, Grid, Heading, Inline, Toast, ToastProvider, useToast} from '@sanity/ui'
+import {Toast, ToastProvider, useToast} from '@sanity/ui/components/toast'
+import {Box} from '@sanity/ui/primitives/box'
+import {Button} from '@sanity/ui/primitives/button'
+import {Grid} from '@sanity/ui/primitives/grid'
+import {Heading} from '@sanity/ui/primitives/heading'
+import {Inline} from '@sanity/ui/primitives/inline'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useId} from 'react'
 

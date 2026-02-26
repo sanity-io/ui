@@ -1,16 +1,26 @@
 import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
-import {
-  BoundaryElementProvider,
-  Box,
-  Button,
-  Card,
-  Dialog,
-  Flex,
-  Inline,
-  PortalProvider,
-  Stack,
-  Text,
-} from '@sanity/ui'
+import {Dialog} from '@sanity/ui/components/dialog'
+import {Box} from '@sanity/ui/primitives/box'
+import {Button} from '@sanity/ui/primitives/button'
+import {Card} from '@sanity/ui/primitives/card'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Inline} from '@sanity/ui/primitives/inline'
+import {Stack} from '@sanity/ui/primitives/stack'
+import {Text} from '@sanity/ui/primitives/text'
+// import {
+//   BoundaryElementProvider,
+//   Box,
+//   Button,
+//   Card,
+//   Dialog,
+//   Flex,
+//   Inline,
+//   PortalProvider,
+//   Stack,
+//   Text,
+// } from '@sanity/ui'
+import {BoundaryElementProvider} from '@sanity/ui/utils/boundary-element'
+import {PortalProvider} from '@sanity/ui/utils/portal'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 
