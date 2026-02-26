@@ -4,6 +4,11 @@ import {
   AVATAR_SIZE,
   type AvatarColor,
   type AvatarSize,
+  BG_PATTERNS,
+  type BgPattern,
+  BORDER_STYLE,
+  BORDER_WIDTH,
+  type BorderWidth,
   BUTTON_MODES,
   type ButtonMode,
   CARD_TONES,
@@ -43,8 +48,12 @@ export const WORKSHOP_AVATAR_SIZE_OPTIONS: Record<string, AvatarSize | undefined
   [undefined, ...AVATAR_SIZE].map((size) => [String(size), size]),
 )
 
-export const WORKSHOP_BADGE_TONE_OPTIONS: Record<string, ElementTone | undefined> = fromEntries(
-  [undefined, ...ELEMENT_TONES].map((tone) => [String(tone), tone]),
+export const WORKSHOP_BORDER_STYLE_OPTIONS = fromEntries(
+  BORDER_STYLE.map((style) => [String(style), style]),
+)
+
+export const WORKSHOP_BORDER_WIDTH_OPTIONS: Record<string, BorderWidth | undefined> = fromEntries(
+  [undefined, ...BORDER_WIDTH].map((width) => [String(width), width]),
 )
 
 export const WORKSHOP_BUTTON_MODE_OPTIONS: Record<string, ButtonMode | undefined> = fromEntries(
@@ -58,10 +67,6 @@ export const WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS = {
   'Center': 'center',
 } as const
 
-export const WORKSHOP_BUTTON_TONE_OPTIONS: Record<string, ElementTone | undefined> = fromEntries(
-  [undefined, ...ELEMENT_TONES].map((tone) => [tone === undefined ? '' : String(tone), tone]),
-)
-
 export const WORKSHOP_CARD_AS_OPTIONS = {
   '': undefined,
   'div': 'div',
@@ -71,6 +76,10 @@ export const WORKSHOP_CARD_AS_OPTIONS = {
   'pre': 'pre',
   'ul': 'ul',
 } as const
+
+export const WORKSHOP_CARD_PATTERN_OPTIONS: Record<string, BgPattern | undefined> = fromEntries(
+  [undefined, ...BG_PATTERNS].map((tone) => [String(tone), tone]),
+)
 
 export const WORKSHOP_CARD_TONE_OPTIONS: Record<string, CardTone | 'inherit' | undefined> =
   fromEntries([undefined, 'inherit' as const, ...CARD_TONES].map((tone) => [String(tone), tone]))
@@ -94,6 +103,10 @@ export const WORKSHOP_DIALOG_POSITION_OPTIONS = {
   'Fixed': 'fixed',
   'Absolute': 'absolute',
 } as const
+
+export const WORKSHOP_ELEMENT_TONE_OPTIONS: Record<string, ElementTone | undefined> = fromEntries(
+  [undefined, ...ELEMENT_TONES].map((tone) => [String(tone), tone]),
+)
 
 export const WORKSHOP_FLEX_DIRECTION_OPTIONS = {
   '': undefined,
@@ -168,7 +181,6 @@ export const WORKSHOP_SPACE_OPTIONS: Record<string, Space | undefined> = fromEnt
 
 export const WORKSHOP_TEXT_ALIGN_OPTIONS = {
   '': undefined,
-  'Initial': 'initial',
   'Left': 'left',
   'Right': 'right',
   'Center': 'center',

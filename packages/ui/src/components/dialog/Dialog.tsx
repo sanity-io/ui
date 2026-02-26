@@ -1,7 +1,7 @@
 import {
   type ContainerStyleProps,
   dialog,
-  dialogContainer,
+  dialog_container,
   type ResponsiveProp,
 } from '@sanity/ui/css'
 import type {CardTone, ColorScheme, Radius} from '@sanity/ui/theme'
@@ -206,7 +206,7 @@ export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEME
         <div ref={preDivRef} tabIndex={0} />
         <Container
           alignItems="center"
-          className={dialogContainer()}
+          className={dialog_container()}
           data-ui="DialogCard"
           display="flex"
           flexDirection="column"

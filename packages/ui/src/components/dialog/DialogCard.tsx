@@ -1,12 +1,12 @@
 import {CloseIcon} from '@sanity/icons'
 import {
-  dialogCard,
-  dialogContent,
-  dialogFooter,
-  dialogHeader,
-  dialogScroller,
-  dialogScrollerShadowBottom,
-  dialogScrollerShadowTop,
+  dialog_card,
+  dialog_content,
+  dialog_footer,
+  dialog_header,
+  dialog_scroller,
+  dialog_scrollerShadowBottom,
+  dialog_scrollerShadowTop,
 } from '@sanity/ui/css'
 import {
   type ForwardedRef,
@@ -174,12 +174,12 @@ export function DialogCard<E extends DialogCardElementType = typeof DEFAULT_DIAL
       {...rest}
       ref={ref}
       as={as}
-      className={dialogCard()}
+      className={dialog_card()}
       display="flex"
       flexDirection="column"
     >
       {showHeader && (
-        <Flex align="flex-start" className={dialogHeader()} padding={3} position="relative">
+        <Flex align="flex-start" className={dialog_header()} padding={3} position="relative">
           <Box flex={1} padding={2}>
             {header && (
               <Text id={labelId} size={1} weight="semibold">
@@ -203,28 +203,28 @@ export function DialogCard<E extends DialogCardElementType = typeof DEFAULT_DIAL
         </Flex>
       )}
 
-      <Box className={dialogContent()} flex={1} position="relative" tabIndex={-1}>
+      <Box className={dialog_content()} flex={1} position="relative" tabIndex={-1}>
         {showHeader && (
           <div
-            className={dialogScrollerShadowTop()}
+            className={dialog_scrollerShadowTop()}
             style={{opacity: Math.min(scrollTop, 32) / 32}}
           />
         )}
 
-        <Box ref={contentRef} className={dialogScroller()} overflow="auto">
+        <Box ref={contentRef} className={dialog_scroller()} overflow="auto">
           {children}
         </Box>
 
         {footer && (
           <div
-            className={dialogScrollerShadowBottom()}
+            className={dialog_scrollerShadowBottom()}
             style={{opacity: Math.min(scrollBottom, 32) / 32}}
           />
         )}
       </Box>
 
       {footer && (
-        <Box className={dialogFooter()} position="relative">
+        <Box className={dialog_footer()} position="relative">
           {footer}
         </Box>
       )}

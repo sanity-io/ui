@@ -1,5 +1,5 @@
 import type {Strategy} from '@floating-ui/react-dom'
-import {popoverCard} from '@sanity/ui/css'
+import {popover_card} from '@sanity/ui/css'
 import {motion} from 'motion/react'
 import {type CSSProperties, type ForwardedRef, useMemo} from 'react'
 
@@ -103,7 +103,7 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
   return (
     // @ts-expect-error - TODO: fix this
     <Layer
-      className={popoverCard()}
+      className={popover_card()}
       data-ui="Popover"
       {...rest}
       animate={animate ? ['visible', 'scaleIn'] : undefined}

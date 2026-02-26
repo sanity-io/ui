@@ -1,5 +1,5 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
-import {type ResponsiveProp, treeItem, vars} from '@sanity/ui/css'
+import {type ResponsiveProp, tree_item, vars} from '@sanity/ui/css'
 import type {FontTextSize, FontWeight, Space} from '@sanity/ui/theme'
 import {
   type ElementType,
@@ -173,7 +173,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
         {...(rest as BoxProps<'li'>)}
         ref={setRootElement}
         as="li"
-        className={treeItem({className})}
+        className={tree_item({className})}
         role="none"
         onClick={handleClick}
       >
@@ -212,7 +212,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
       data-ui="TreeItem"
       {...(rest as BoxProps<'a'>)}
       aria-expanded={expanded}
-      className={treeItem({className})}
+      className={tree_item({className})}
       role="treeitem"
       tabIndex={tabIndex}
       onClick={handleClick}

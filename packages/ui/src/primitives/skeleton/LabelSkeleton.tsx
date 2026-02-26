@@ -1,4 +1,4 @@
-import {labelSkeleton, type ResponsiveProp} from '@sanity/ui/css'
+import {label_skeleton, type ResponsiveProp} from '@sanity/ui/css'
 import type {FontLabelSize} from '@sanity/ui/theme'
 
 import type {Props} from '../../types'
@@ -38,7 +38,7 @@ export function LabelSkeleton<
   return (
     <Skeleton
       {...rest}
-      className={labelSkeleton({
+      className={label_skeleton({
         className,
         size,
       })}
