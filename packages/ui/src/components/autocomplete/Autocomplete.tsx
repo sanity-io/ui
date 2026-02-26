@@ -14,7 +14,7 @@ import {Box, type BoxOwnProps} from '@sanity/ui/primitives/box'
 import {Button} from '@sanity/ui/primitives/button'
 import {Popover, type PopoverProps} from '@sanity/ui/primitives/popover'
 import {Selectable} from '@sanity/ui/primitives/selectable'
-import {AnimatedSpinnerIcon} from '@sanity/ui/primitives/spinner'
+import {SpinnerAnimatedIcon} from '@sanity/ui/primitives/spinner'
 import {Stack} from '@sanity/ui/primitives/stack'
 import {Text} from '@sanity/ui/primitives/text'
 import {TextInput, type TextInputOwnProps} from '@sanity/ui/primitives/text-input'
@@ -122,7 +122,7 @@ export function Autocomplete<
     disabled,
     filterOption: filterOptionProp,
     flex,
-    fontSize,
+    fontSize = 2,
     icon,
     id,
     listBox = EMPTY_RECORD,
@@ -165,6 +165,10 @@ export function Autocomplete<
   const innerRadius = _getResponsiveProp(
     radius.map((r): Radius => {
       if (r === undefined || r === 'full') return 'full'
+      if (r === 0) return 0
+      if (r === 1) return 1
+      if (r === 2) return 1
+      if (r === 3) return 2
       return (r - 1) as Radius
     }) as ResponsiveProp<Radius>,
   )
@@ -622,7 +626,7 @@ export function Autocomplete<
         disabled={disabled}
         fontSize={fontSize}
         icon={icon}
-        iconRight={loading && AnimatedSpinnerIcon}
+        iconRight={loading && SpinnerAnimatedIcon}
         id={id}
         inputMode="search"
         padding={padding}

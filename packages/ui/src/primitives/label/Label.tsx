@@ -44,16 +44,22 @@ export function Label<E extends LabelElementType = typeof DEFAULT_LABEL_ELEMENT>
     styleProps,
     {
       as: Element = DEFAULT_LABEL_ELEMENT,
-      children,
+      children: childrenProp,
       textOverflow: textOverflowProp,
       // split DOM props
       ...domProps
     },
   ] = _splitKeys(props as LabelProps<typeof DEFAULT_LABEL_ELEMENT>, LABEL_STYLE_PROP_KEYS)
 
+  let children = childrenProp
+
+  if (textOverflowProp) {
+    children = <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
+  }
+
   return (
     <Element data-ui="Label" {...domProps} className={label(styleProps)}>
-      <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
+      {children}
     </Element>
   )
 }

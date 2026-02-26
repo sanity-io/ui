@@ -1,8 +1,8 @@
-export * from '@sanity/ui/core'
-// export * from '@sanity/ui/css'
+// hooks
 export * from '@sanity/ui/hooks'
+
+// root
 export * from '@sanity/ui/root'
-// export * from '@sanity/ui/theme'
 
 // utils
 export * from '@sanity/ui/utils/boundary-element'

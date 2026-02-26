@@ -1,8 +1,7 @@
 import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
 import {code, CODE_STYLE_PROP_KEYS, type CodeStyleProps} from '@sanity/ui/css'
-import {lazy, Suspense} from 'react'
-
-const LazyRefractor = lazy(() => import('../_syntax/LazySyntax'))
+import {LazySyntax} from '@sanity/ui/primitives/_syntax'
+import {Suspense} from 'react'
 
 /** @public */
 export const DEFAULT_CODE_ELEMENT = 'pre'
@@ -40,7 +39,7 @@ export function Code<E extends CodeElementType = typeof DEFAULT_CODE_ELEMENT>(
   return (
     <Element data-ui="Code" {...restDomProps} className={code(styleProps)}>
       <Suspense fallback={<code>{children}</code>}>
-        <LazyRefractor language={language} value={children} />
+        <LazySyntax language={language} value={children} />
       </Suspense>
     </Element>
   )

@@ -25,11 +25,16 @@ export function CardWrapper({
       display="flex"
       justifyContent={justifyContent}
       minHeight="full"
-      paddingX={[4, 5, 6]}
-      paddingY={[5, 6, 7]}
       tone={cardTone}
     >
-      <Stack margin="auto" maxWidth={1} width="fill" {...rest}>
+      <Stack
+        margin="auto"
+        maxWidth={1}
+        paddingX={[4, 5, 6]}
+        paddingY={[5, 6, 7]}
+        width="fill"
+        {...rest}
+      >
         {children}
       </Stack>
     </Card>

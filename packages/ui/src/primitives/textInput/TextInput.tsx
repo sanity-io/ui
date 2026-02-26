@@ -115,8 +115,6 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
 
   const ref = useRef<HTMLInputElement | null>(null)
 
-  const responsivePadding = useMemo(() => _getResponsiveProp(padding), [padding])
-
   const withClearButton = Boolean(clearButton)
 
   useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
@@ -209,7 +207,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
             fontSize={fontSize}
             handleClearClick={handleClearClick}
             handleClearMouseDown={handleClearMouseDown}
-            padding={responsivePadding}
+            padding={padding}
             radius={radius}
           />
         )}
@@ -239,21 +237,23 @@ function ClearButton({
 } & Pick<TextInputOwnProps, 'fontSize' | 'radius'>) {
   const padding = _getResponsiveProp(paddingProp)
 
-  const clearButtonBoxPadding = useMemo(() => {
+  const boxPadding = useMemo(() => {
     return padding.map((p) => {
       if (p === 0) return 0
       if (p === 1) return 1
       if (p === 2) return 1
+      if (p === 3) return 1
 
       return typeof p === 'number' ? p - 2 : 0
     }) as ResponsiveProp<Space>
   }, [padding])
 
-  const clearButtonPadding = useMemo(() => {
+  const buttonPadding = useMemo(() => {
     return padding.map((p) => {
       if (p === 0) return 0
       if (p === 1) return 0
       if (p === 2) return 1
+      if (p === 3) return 2
 
       return typeof p === 'number' ? p - 1 : 0
     }) as ResponsiveProp<Space>
@@ -264,7 +264,7 @@ function ClearButton({
       as="span"
       insetRight={0}
       insetTop={0}
-      padding={clearButtonBoxPadding}
+      padding={boxPadding}
       position="absolute"
       style={{zIndex: 2}}
     >
@@ -274,7 +274,7 @@ function ClearButton({
         fontSize={fontSize}
         icon={CloseIcon}
         mode="bleed"
-        padding={clearButtonPadding}
+        padding={buttonPadding}
         radius={radius}
         {...clearButtonProps}
         onClick={handleClearClick}

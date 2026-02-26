@@ -1,6 +1,6 @@
 import {Button, Flex} from '@sanity/ui'
 
-import {styledButton1} from './styles.css'
+import {styledButton1} from './Styled1.css'
 
 export default function StyledButton1Story(): React.JSX.Element {
   return (

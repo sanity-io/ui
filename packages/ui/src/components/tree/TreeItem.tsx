@@ -2,9 +2,12 @@ import {ToggleArrowRightIcon} from '@sanity/icons'
 import type {ComponentType, Props} from '@sanity/ui/core'
 import {type ResponsiveProp, tree_item, vars} from '@sanity/ui/css'
 import {Box, type BoxProps} from '@sanity/ui/primitives/box'
-import type {CardOwnProps} from '@sanity/ui/primitives/card'
 import {Flex} from '@sanity/ui/primitives/flex'
-import {Selectable, type SelectableElementType} from '@sanity/ui/primitives/selectable'
+import {
+  Selectable,
+  type SelectableElementType,
+  type SelectableOwnProps,
+} from '@sanity/ui/primitives/selectable'
 import {Text} from '@sanity/ui/primitives/text'
 import type {FontTextSize, FontWeight, Space} from '@sanity/ui/theme'
 import {
@@ -29,7 +32,7 @@ import {useTree} from './useTree'
 export const DEFAULT_TREE_ITEM_ELEMENT = 'a'
 
 /** @beta */
-export type TreeItemOwnProps = CardOwnProps & {
+export type TreeItemOwnProps = SelectableOwnProps & {
   expanded?: boolean
   fontSize?: ResponsiveProp<FontTextSize>
   icon?: ElementType
@@ -208,7 +211,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
       data-tree-id={id}
       data-tree-key={itemKey}
       data-ui="TreeItem"
-      {...(rest as BoxProps<'a'>)}
+      {...rest}
       ref={setRootElement}
       aria-expanded={expanded}
       className={tree_item({className})}
@@ -227,6 +230,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
         style={{
           paddingLeft: `calc(${vars.space[2]} * ${tree.level})`,
         }}
+        tabIndex={tabIndex}
       >
         {content}
       </Selectable>
