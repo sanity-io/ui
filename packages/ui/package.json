@@ -32,9 +32,8 @@
     },
     "./css": {
       "source": "./exports/css.ts",
-      "default": "./dist/css/index.js"
+      "default": "./dist/css.js"
     },
-    "./css/index.css": "./dist/css/index.css",
     "./package.json": "./package.json",
     "./theme": {
       "source": "./exports/theme.ts",
@@ -69,13 +68,11 @@
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",
     "prepack": "pnpm build",
-    "pkg:build": "mkdirp dist/css && touch dist/css/index.css && NODE_ENV=production pkg build --strict",
+    "pkg:build": "NODE_ENV=production pkg build --strict",
     "pkg:check": "pkg --strict",
-    "pkg:watch": "mkdirp dist/css && touch dist/css/index.css && NODE_ENV=production pkg watch --strict",
     "test": "vitest run",
     "test:browser": "start-server-and-test 'run-s workshop:build workshop:preview' http://localhost:1337 'run-s cypress:run'",
     "typecheck": "tsc --build",
-    "watch": "pkg watch --strict",
     "workshop:build": "workshop build",
     "workshop:clean": "rimraf .workshop",
     "workshop:dev": "workshop dev",

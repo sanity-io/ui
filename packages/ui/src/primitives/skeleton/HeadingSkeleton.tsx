@@ -1,4 +1,4 @@
-import {headingSkeleton, type ResponsiveProp} from '@sanity/ui/css'
+import {heading_skeleton, type ResponsiveProp} from '@sanity/ui/css'
 import type {FontHeadingSize} from '@sanity/ui/theme'
 
 import type {Props} from '../../types'
@@ -39,7 +39,7 @@ export function HeadingSkeleton<
   return (
     <Skeleton
       {...rest}
-      className={headingSkeleton({
+      className={heading_skeleton({
         className,
         size,
       })}

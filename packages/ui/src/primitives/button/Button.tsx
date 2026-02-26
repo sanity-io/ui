@@ -1,7 +1,7 @@
 import {
   type BoxStyleProps,
   button,
-  buttonLoadingBox,
+  button_loadingBox,
   type ButtonStyleProps,
   type DisplayStyleProps,
   type GapStyleProps,
@@ -116,7 +116,7 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
         <Box
           alignItems="center"
           as="span"
-          className={buttonLoadingBox()}
+          className={button_loadingBox()}
           display="flex"
           flex={1}
           justifyContent="center"

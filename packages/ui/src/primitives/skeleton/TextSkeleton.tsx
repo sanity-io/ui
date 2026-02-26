@@ -1,4 +1,4 @@
-import {type ResponsiveProp, textSkeleton} from '@sanity/ui/css'
+import {type ResponsiveProp, text_skeleton} from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
 
 import type {Props} from '../../types'
@@ -40,7 +40,7 @@ export function TextSkeleton<
   return (
     <Skeleton
       {...rest}
-      className={textSkeleton({
+      className={text_skeleton({
         className,
         size,
       })}

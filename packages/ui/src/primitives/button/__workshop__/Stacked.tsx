@@ -4,7 +4,7 @@ import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {
   WORKSHOP_BUTTON_MODE_OPTIONS,
-  WORKSHOP_BUTTON_TONE_OPTIONS,
+  WORKSHOP_ELEMENT_TONE_OPTIONS,
   WORKSHOP_FLEX_JUSTIFY_OPTIONS,
   WORKSHOP_ICON_SYMBOL_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
@@ -12,7 +12,7 @@ import {
 } from '$workshop'
 
 export default function StackedStory(): React.JSX.Element {
-  const tones = Object.entries(WORKSHOP_BUTTON_TONE_OPTIONS)
+  const tones = Object.entries(WORKSHOP_ELEMENT_TONE_OPTIONS)
   const disabled = useBoolean('Disabled', false)
   // @ts-expect-error - TODO: fix this
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2)

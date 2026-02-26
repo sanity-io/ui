@@ -1,5 +1,5 @@
 import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
-import {checkbox, checkboxInput, checkboxPresentation} from '@sanity/ui/css'
+import {checkbox, checkbox_input, checkbox_presentation} from '@sanity/ui/css'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -64,14 +64,14 @@ export function Checkbox<E extends CheckboxElementType = typeof DEFAULT_CHECKBOX
       <Element
         {...rest}
         ref={ref}
-        className={checkboxInput()}
+        className={checkbox_input()}
         data-invalid={customValidity ? '' : undefined}
         data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled || readOnly}
         readOnly={readOnly}
         type="checkbox"
       />
-      <span className={checkboxPresentation()}>
+      <span className={checkbox_presentation()}>
         <CheckmarkIcon />
         <RemoveIcon />
       </span>

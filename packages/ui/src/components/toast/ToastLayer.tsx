@@ -1,4 +1,4 @@
-import {type GapStyleProps, type PaddingStyleProps, toastLayer} from '@sanity/ui/css'
+import {type GapStyleProps, type PaddingStyleProps, toast_layer} from '@sanity/ui/css'
 
 import {Grid} from '../../primitives/grid/Grid'
 import {useLayer} from '../../primitives/layer/useLayer'
@@ -39,7 +39,7 @@ export function ToastLayer<E extends ToastLayerElementType = typeof DEFAULT_TOAS
   return (
     <Grid
       as={as}
-      className={toastLayer()}
+      className={toast_layer()}
       data-ui="ToastProvider"
       gap={gap}
       gridTemplateColumns={1}

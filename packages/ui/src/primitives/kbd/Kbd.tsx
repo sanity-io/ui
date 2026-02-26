@@ -35,7 +35,6 @@ export function KBD<E extends KBDElementType = typeof DEFAULT_KBD_ELEMENT>(
     display = 'inline-block',
     fontSize = 1,
     padding = 1,
-    radius = 2,
     ...rest
   } = props as KBDProps<typeof DEFAULT_KBD_ELEMENT>
 
@@ -44,7 +43,7 @@ export function KBD<E extends KBDElementType = typeof DEFAULT_KBD_ELEMENT>(
       data-ui="KBD"
       {...rest}
       as={as as BoxElementType}
-      className={kbd({className, radius})}
+      className={kbd({className})}
       display={display}
       muted
       padding={padding}

@@ -5,7 +5,7 @@ import {useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {
   WORKSHOP_BUTTON_MODE_OPTIONS,
   WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS,
-  WORKSHOP_BUTTON_TONE_OPTIONS,
+  WORKSHOP_ELEMENT_TONE_OPTIONS,
   WORKSHOP_FLEX_JUSTIFY_OPTIONS,
   WORKSHOP_ICON_SYMBOL_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
@@ -34,7 +34,7 @@ export default function ButtonStory(): React.JSX.Element {
   const paddingY = useSelect('Padding Y', WORKSHOP_SPACE_OPTIONS)
   const selected = useBoolean('Selected')
   // @ts-expect-error - TODO: fix this
-  const tone = useSelect('Tone', WORKSHOP_BUTTON_TONE_OPTIONS)
+  const tone = useSelect('Tone', WORKSHOP_ELEMENT_TONE_OPTIONS)
   // @ts-expect-error - TODO: fix this
   const textAlign = useSelect('Text align', WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS)
   const textProp = useText('Text', 'Label')

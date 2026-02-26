@@ -1,4 +1,9 @@
-import {_inputElement, _inputPresentation, textArea, type TextAreaStyleProps} from '@sanity/ui/css'
+import {
+  _input_element,
+  _input_presentation,
+  textArea,
+  type TextAreaStyleProps,
+} from '@sanity/ui/css'
 import {useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -79,12 +84,12 @@ export function TextArea<E extends TextAreaElementType = typeof DEFAULT_TEXT_ARE
       <Element
         {...rest}
         ref={ref}
-        className={_inputElement()}
+        className={_input_element()}
         data-no-focus-ring={__unstable_disableFocusRing ? '' : undefined}
         disabled={disabled}
         readOnly={readOnly}
       />
-      <span className={_inputPresentation()} />
+      <span className={_input_presentation()} />
     </span>
   )
 }
