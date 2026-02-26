@@ -1,4 +1,4 @@
-import type {Placement} from '../../core/types'
+import type {Placement} from '@sanity/ui/core'
 
 /**
  * @internal

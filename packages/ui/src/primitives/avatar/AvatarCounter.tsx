@@ -1,11 +1,9 @@
+import {_getResponsiveProp, type ComponentType, type Props} from '@sanity/ui/core'
 import {avatar_counter, type ResponsiveProp} from '@sanity/ui/css'
+import {Box} from '@sanity/ui/primitives/box'
+import {Label} from '@sanity/ui/primitives/label'
 import type {AvatarSize, FontLabelSize} from '@sanity/ui/theme'
 import {useMemo} from 'react'
-
-import {_getResponsiveProp} from '../../core/helpers/props'
-import type {ComponentType, Props} from '../../core/types'
-import {Box} from '../box/Box'
-import {Label} from '../label/Label'
 
 /** @public */
 export const DEFAULT_AVATAR_COUNTER_ELEMENT = 'span'

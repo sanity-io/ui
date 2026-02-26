@@ -1,3 +1,4 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {
   _switch,
   _switch_element,
@@ -6,8 +7,6 @@ import {
   _switchTrack,
 } from '@sanity/ui/css'
 import {useEffect, useImperativeHandle, useRef} from 'react'
-
-import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_SWITCH_ELEMENT = 'input'

@@ -1,22 +1,25 @@
 import {
+  type ComponentType,
+  focusFirstDescendant,
+  focusLastDescendant,
+  isHTMLElement,
+  type Props,
+  Z_OFFSETS,
+} from '@sanity/ui/core'
+import {
   type ContainerStyleProps,
   dialog,
   dialog_container,
   type ResponsiveProp,
 } from '@sanity/ui/css'
-import type {ColorScheme, Radius, Shadow} from '@sanity/ui/theme'
+import {usePrefersReducedMotion} from '@sanity/ui/hooks'
+import {Container} from '@sanity/ui/primitives/container'
+import {Layer, type LayerOwnProps, type LayerProps} from '@sanity/ui/primitives/layer'
+import type {Radius, Shadow} from '@sanity/ui/theme'
+import {BoundaryElementContext} from '@sanity/ui/utils/boundary-element'
+import {Portal, usePortal} from '@sanity/ui/utils/portal'
 import {type FocusEvent, type ForwardedRef, type ReactNode, use, useCallback, useRef} from 'react'
 
-import {Z_OFFSETS} from '../../core/constants'
-import {isHTMLElement} from '../../core/helpers/element'
-import {focusFirstDescendant, focusLastDescendant} from '../../core/helpers/focus'
-import type {ComponentType, Props} from '../../core/types'
-import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Container} from '../../primitives/container/Container'
-import {Layer, type LayerOwnProps, type LayerProps} from '../../primitives/layer/Layer'
-import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
-import {Portal} from '../../utils/portal/Portal'
-import {usePortal} from '../../utils/portal/usePortal'
 import {DialogCard} from './DialogCard'
 import {isTargetWithinScope} from './isTargetWithinScope'
 import type {DialogPosition} from './types'

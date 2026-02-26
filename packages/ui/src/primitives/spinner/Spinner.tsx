@@ -1,8 +1,8 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {type ResponsiveProp, spinner} from '@sanity/ui/css'
+import {Text} from '@sanity/ui/primitives/text'
 import type {FontTextSize} from '@sanity/ui/theme'
 
-import type {ComponentType, Props} from '../../core/types'
-import {Text} from '../text/Text'
 import {AnimatedSpinnerIcon} from './AnimatedSpinnerIcon'
 
 /** @public */

@@ -1,3 +1,4 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {
   _arrow,
   _arrow_shape,
@@ -9,7 +10,6 @@ import {
 import {assignInlineVars} from '@vanilla-extract/dynamic'
 import {useMemo} from 'react'
 
-import type {ComponentType, Props} from '../../core/types'
 import {compileCommands, getRoundedCommands, type Point} from './cmds'
 
 /** @internal */

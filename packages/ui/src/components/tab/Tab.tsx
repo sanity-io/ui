@@ -1,4 +1,6 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import type {ResponsiveProp} from '@sanity/ui/css'
+import {Button} from '@sanity/ui/primitives/button'
 import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
 import {
   type ElementType,
@@ -9,9 +11,6 @@ import {
   useImperativeHandle,
   useRef,
 } from 'react'
-
-import type {ComponentType, Props} from '../../core/types'
-import {Button} from '../../primitives/button/Button'
 
 /** @public */
 export const DEFAULT_TAB_ELEMENT = 'button'

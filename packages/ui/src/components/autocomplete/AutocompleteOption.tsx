@@ -1,6 +1,5 @@
+import {_isEnterToClickElement} from '@sanity/ui/core'
 import {type KeyboardEvent, type ReactNode} from 'react'
-
-import {_isEnterToClickElement} from '../../core/helpers/element'
 
 export interface AutocompleteOptionProps {
   children: ReactNode

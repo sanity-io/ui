@@ -1,7 +1,6 @@
+import {createGlobalScopedContext, globalScope} from '@sanity/ui/core'
 import type {Context} from 'react'
 
-import {createGlobalScopedContext} from '../../core/lib/createGlobalScopedContext'
-import {globalScope} from '../../core/lib/globalScope'
 import type {PortalContextValue} from './types'
 
 const key = '@sanity/ui/v4/portal'
@@ -12,7 +11,7 @@ const elementMap = globalScope as Record<symbol, HTMLDivElement | null>
 
 elementMap[elementKey] = null
 
-export const defaultContextValue: PortalContextValue = {
+const defaultContextValue: PortalContextValue = {
   version: 0.0,
   boundaryElement: null,
   get element() {
@@ -33,5 +32,6 @@ export const defaultContextValue: PortalContextValue = {
   },
 }
 
+/** @internal */
 export const PortalContext: Context<PortalContextValue> =
   createGlobalScopedContext<PortalContextValue>(key, defaultContextValue)

@@ -1,9 +1,7 @@
+import {type Placement, POPOVER_MOTION_PROPS} from '@sanity/ui/core'
+import {Layer, type LayerOwnProps, type LayerProps} from '@sanity/ui/primitives/layer'
 import {motion, type MotionStyle} from 'motion/react'
 import {useMemo} from 'react'
-
-import {POPOVER_MOTION_PROPS} from '../../core/constants'
-import type {Placement} from '../../core/types'
-import {Layer, type LayerOwnProps, type LayerProps} from '../layer/Layer'
 
 /** @internal */
 export const DEFAULT_TOOLTIP_LAYER_ELEMENT = 'div'

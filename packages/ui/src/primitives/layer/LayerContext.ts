@@ -1,6 +1,6 @@
+import {createGlobalScopedContext} from '@sanity/ui/core'
 import type {Context} from 'react'
 
-import {createGlobalScopedContext} from '../../core/lib/createGlobalScopedContext'
 import type {LayerContextValue} from './types'
 
 export const LayerContext: Context<LayerContextValue | null> =

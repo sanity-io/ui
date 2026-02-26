@@ -1,9 +1,7 @@
+import {assertCardContext, CardContext, CardProvider} from '@sanity/ui/primitives/card'
 import {type ReactNode, type ReactPortal, use} from 'react'
 import {createPortal} from 'react-dom'
 
-import {CardContext} from '../../primitives/card/CardContext'
-import {CardProvider} from '../../primitives/card/CardProvider'
-import {assertCardContext} from '../../primitives/card/useCard'
 import {usePortal} from './usePortal'
 
 /** @public */

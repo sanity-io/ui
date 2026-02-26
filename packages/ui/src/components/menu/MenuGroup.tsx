@@ -1,5 +1,11 @@
 import {ChevronRightIcon} from '@sanity/icons'
+import type {ComponentType, Props} from '@sanity/ui/core'
 import type {RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {Box} from '@sanity/ui/primitives/box'
+import {Flex} from '@sanity/ui/primitives/flex'
+import {Popover, type PopoverProps} from '@sanity/ui/primitives/popover'
+import {Selectable} from '@sanity/ui/primitives/selectable'
+import {Text} from '@sanity/ui/primitives/text'
 import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
 import {
   type ElementType,
@@ -13,12 +19,6 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
-import type {ComponentType, Props} from '../../core/types'
-import {Box} from '../../primitives/box/Box'
-import {Flex} from '../../primitives/flex/Flex'
-import {Popover, type PopoverProps} from '../../primitives/popover/Popover'
-import {Selectable} from '../../primitives/selectable/Selectable'
-import {Text} from '../../primitives/text/Text'
 import {DEFAULT_MENU_ELEMENT, Menu, type MenuProps} from './Menu'
 import {useMenu} from './useMenu'
 

@@ -1,3 +1,5 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
+import {Flex, type FlexOwnProps} from '@sanity/ui/primitives/flex'
 import {
   Children,
   cloneElement,
@@ -7,8 +9,6 @@ import {
   useState,
 } from 'react'
 
-import type {ComponentType, Props} from '../../core/types'
-import {Flex, type FlexOwnProps} from '../../primitives/flex/Flex'
 import type {TabProps} from './Tab'
 
 /** @public */

@@ -1,6 +1,6 @@
+import {createGlobalScopedContext} from '@sanity/ui/core'
 import type {Context} from 'react'
 
-import {createGlobalScopedContext} from '../../core/lib/createGlobalScopedContext'
 import type {TreeContextValue} from './types'
 
 /**

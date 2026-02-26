@@ -1,6 +1,6 @@
+import {isRecord} from '@sanity/ui/core'
 import {use} from 'react'
 
-import {isRecord} from '../../core/lib/isRecord'
 import {ToastContext} from './ToastContext'
 import type {ToastContextValue} from './types'
 

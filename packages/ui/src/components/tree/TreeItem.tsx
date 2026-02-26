@@ -1,5 +1,13 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {type ResponsiveProp, tree_item, vars} from '@sanity/ui/css'
+import {Box} from '@sanity/ui/primitives/box'
+import {
+  Selectable,
+  type SelectableElementType,
+  type SelectableOwnProps,
+} from '@sanity/ui/primitives/selectable'
+import {Text} from '@sanity/ui/primitives/text'
 import type {FontTextSize, FontWeight, Space} from '@sanity/ui/theme'
 import {
   type ElementType,
@@ -15,14 +23,6 @@ import {
   useState,
 } from 'react'
 
-import type {ComponentType, Props} from '../../core/types'
-import {Box} from '../../primitives/box/Box'
-import {
-  Selectable,
-  type SelectableElementType,
-  type SelectableOwnProps,
-} from '../../primitives/selectable/Selectable'
-import {Text} from '../../primitives/text/Text'
 import {TreeContext} from './TreeContext'
 import {TreeGroup} from './TreeGroup'
 import {useTree} from './useTree'

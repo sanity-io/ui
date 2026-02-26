@@ -12,6 +12,7 @@ import {type Context, createContext} from 'react'
 
 import {globalScope} from './globalScope'
 
+/** @internal */
 export function createGlobalScopedContext<ContextType, const T extends ContextType = ContextType>(
   /**
    * Enforce that all Symbol.for keys used for globally scoped contexts have a predictable prefix

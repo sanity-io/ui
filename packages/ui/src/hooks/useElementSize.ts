@@ -1,6 +1,5 @@
+import {_elementSizeObserver, type ElementSize} from '@sanity/ui/core'
 import {useEffect, useState} from 'react'
-
-import {_elementSizeObserver, type ElementSize} from '../observers/elementSize'
 
 /**
  * Subscribe to the size of a DOM element.

@@ -30,14 +30,194 @@
       "source": "./exports/index.ts",
       "default": "./dist/index.js"
     },
+    "./components/autocomplete": {
+      "source": "./exports/components/autocomplete.ts",
+      "default": "./dist/components/autocomplete.js"
+    },
+    "./components/breadcrumbs": {
+      "source": "./exports/components/breadcrumbs.ts",
+      "default": "./dist/components/breadcrumbs.js"
+    },
+    "./components/dialog": {
+      "source": "./exports/components/dialog.ts",
+      "default": "./dist/components/dialog.js"
+    },
+    "./components/hotkeys": {
+      "source": "./exports/components/hotkeys.ts",
+      "default": "./dist/components/hotkeys.js"
+    },
+    "./components/menu": {
+      "source": "./exports/components/menu.ts",
+      "default": "./dist/components/menu.js"
+    },
+    "./components/tab": {
+      "source": "./exports/components/tab.ts",
+      "default": "./dist/components/tab.js"
+    },
+    "./components/toast": {
+      "source": "./exports/components/toast.ts",
+      "default": "./dist/components/toast.js"
+    },
+    "./components/tree": {
+      "source": "./exports/components/tree.ts",
+      "default": "./dist/components/tree.js"
+    },
+    "./components/virtual-list": {
+      "source": "./exports/components/virtual-list.ts",
+      "default": "./dist/components/virtual-list.js"
+    },
+    "./core": {
+      "source": "./exports/core.ts",
+      "default": "./dist/core.js"
+    },
     "./css": {
       "source": "./exports/css.ts",
       "default": "./dist/css.js"
     },
+    "./hooks": {
+      "source": "./exports/hooks.ts",
+      "default": "./dist/hooks.js"
+    },
+    "./primitives/_syntax": {
+      "source": "./exports/primitives/_syntax.ts",
+      "default": "./dist/primitives/_syntax.js"
+    },
+    "./primitives/avatar": {
+      "source": "./exports/primitives/avatar.ts",
+      "default": "./dist/primitives/avatar.js"
+    },
+    "./primitives/badge": {
+      "source": "./exports/primitives/badge.ts",
+      "default": "./dist/primitives/badge.js"
+    },
+    "./primitives/box": {
+      "source": "./exports/primitives/box.ts",
+      "default": "./dist/primitives/box.js"
+    },
+    "./primitives/button": {
+      "source": "./exports/primitives/button.ts",
+      "default": "./dist/primitives/button.js"
+    },
+    "./primitives/card": {
+      "source": "./exports/primitives/card.ts",
+      "default": "./dist/primitives/card.js"
+    },
+    "./primitives/checkbox": {
+      "source": "./exports/primitives/checkbox.ts",
+      "default": "./dist/primitives/checkbox.js"
+    },
+    "./primitives/code": {
+      "source": "./exports/primitives/code.ts",
+      "default": "./dist/primitives/code.js"
+    },
+    "./primitives/container": {
+      "source": "./exports/primitives/container.ts",
+      "default": "./dist/primitives/container.js"
+    },
+    "./primitives/flex": {
+      "source": "./exports/primitives/flex.ts",
+      "default": "./dist/primitives/flex.js"
+    },
+    "./primitives/grid": {
+      "source": "./exports/primitives/grid.ts",
+      "default": "./dist/primitives/grid.js"
+    },
+    "./primitives/heading": {
+      "source": "./exports/primitives/heading.ts",
+      "default": "./dist/primitives/heading.js"
+    },
+    "./primitives/inline": {
+      "source": "./exports/primitives/inline.ts",
+      "default": "./dist/primitives/inline.js"
+    },
+    "./primitives/kbd": {
+      "source": "./exports/primitives/kbd.ts",
+      "default": "./dist/primitives/kbd.js"
+    },
+    "./primitives/label": {
+      "source": "./exports/primitives/label.ts",
+      "default": "./dist/primitives/label.js"
+    },
+    "./primitives/layer": {
+      "source": "./exports/primitives/layer.ts",
+      "default": "./dist/primitives/layer.js"
+    },
+    "./primitives/popover": {
+      "source": "./exports/primitives/popover.ts",
+      "default": "./dist/primitives/popover.js"
+    },
+    "./primitives/radio": {
+      "source": "./exports/primitives/radio.ts",
+      "default": "./dist/primitives/radio.js"
+    },
+    "./primitives/select": {
+      "source": "./exports/primitives/select.ts",
+      "default": "./dist/primitives/select.js"
+    },
+    "./primitives/selectable": {
+      "source": "./exports/primitives/selectable.ts",
+      "default": "./dist/primitives/selectable.js"
+    },
+    "./primitives/skeleton": {
+      "source": "./exports/primitives/skeleton.ts",
+      "default": "./dist/primitives/skeleton.js"
+    },
+    "./primitives/spinner": {
+      "source": "./exports/primitives/spinner.ts",
+      "default": "./dist/primitives/spinner.js"
+    },
+    "./primitives/sr-only": {
+      "source": "./exports/primitives/sr-only.ts",
+      "default": "./dist/primitives/sr-only.js"
+    },
+    "./primitives/stack": {
+      "source": "./exports/primitives/stack.ts",
+      "default": "./dist/primitives/stack.js"
+    },
+    "./primitives/switch": {
+      "source": "./exports/primitives/switch.ts",
+      "default": "./dist/primitives/switch.js"
+    },
+    "./primitives/text-area": {
+      "source": "./exports/primitives/text-area.ts",
+      "default": "./dist/primitives/text-area.js"
+    },
+    "./primitives/text-input": {
+      "source": "./exports/primitives/text-input.ts",
+      "default": "./dist/primitives/text-input.js"
+    },
+    "./primitives/text": {
+      "source": "./exports/primitives/text.ts",
+      "default": "./dist/primitives/text.js"
+    },
+    "./primitives/tooltip": {
+      "source": "./exports/primitives/tooltip.ts",
+      "default": "./dist/primitives/tooltip.js"
+    },
     "./package.json": "./package.json",
+    "./root": {
+      "source": "./exports/root.ts",
+      "default": "./dist/root.js"
+    },
     "./theme": {
       "source": "./exports/theme.ts",
       "default": "./dist/theme.js"
+    },
+    "./utils/boundary-element": {
+      "source": "./exports/utils/boundary-element.ts",
+      "default": "./dist/utils/boundary-element.js"
+    },
+    "./utils/element-query": {
+      "source": "./exports/utils/element-query.ts",
+      "default": "./dist/utils/element-query.js"
+    },
+    "./utils/error-boundary": {
+      "source": "./exports/utils/error-boundary.ts",
+      "default": "./dist/utils/error-boundary.js"
+    },
+    "./utils/portal": {
+      "source": "./exports/utils/portal.ts",
+      "default": "./dist/utils/portal.js"
     }
   },
   "main": "./dist/index.js",
@@ -58,7 +238,8 @@
     "src"
   ],
   "scripts": {
-    "build": "run-s clean pkg:build pkg:check",
+    "prebuild": "tsx scripts/prebuild.ts",
+    "build": "run-s pkg:build pkg:check",
     "clean": "rimraf dist",
     "cypress:dev": "run-p dev cypress:open",
     "cypress:open": "cypress open",
@@ -132,6 +313,7 @@
     "rimraf": "^5.0.10",
     "start-server-and-test": "^2.1.3",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.21.0",
     "typescript": "5.9.3",
     "vite": "^7.3.1",
     "vite-tsconfig-paths": "^6.1.1",

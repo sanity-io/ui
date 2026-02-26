@@ -1,11 +1,10 @@
+import {ToastProvider} from '@sanity/ui/components/toast'
+import {CardProvider} from '@sanity/ui/primitives/card'
+import {LayerProvider} from '@sanity/ui/primitives/layer'
 import type {CardTone, ColorScheme} from '@sanity/ui/theme'
+import {BoundaryElementProvider} from '@sanity/ui/utils/boundary-element'
+import {PortalProvider} from '@sanity/ui/utils/portal'
 import type {ReactNode} from 'react'
-
-import {ToastProvider} from '../components/toast/ToastProvider'
-import {CardProvider} from '../primitives/card/CardProvider'
-import {LayerProvider} from '../primitives/layer/LayerProvider'
-import {BoundaryElementProvider} from '../utils/boundaryElement/BoundaryElementProvider'
-import {PortalProvider} from '../utils/portal/PortalProvider'
 
 /** @public */
 export interface RootProviderProps {

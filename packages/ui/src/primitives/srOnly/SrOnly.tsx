@@ -1,6 +1,5 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {srOnly} from '@sanity/ui/css'
-
-import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_SR_ONLY_ELEMENT = 'span'

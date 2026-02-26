@@ -1,3 +1,6 @@
+import type {Props} from '@sanity/ui/core'
+import type {ButtonProps} from '@sanity/ui/primitives/button'
+import {Popover, type PopoverProps} from '@sanity/ui/primitives/popover'
 import {
   cloneElement,
   type FocusEvent,
@@ -13,9 +16,6 @@ import {
   useState,
 } from 'react'
 
-import type {Props} from '../../core/types'
-import type {ButtonProps} from '../../primitives/button/Button'
-import {Popover, type PopoverProps} from '../../primitives/popover/Popover'
 import type {MenuProps} from './Menu'
 
 /** @public */

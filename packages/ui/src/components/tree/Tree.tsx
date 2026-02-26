@@ -1,4 +1,6 @@
+import type {ComponentType, Props} from '@sanity/ui/core'
 import {tree} from '@sanity/ui/css'
+import {Stack, type StackOwnProps} from '@sanity/ui/primitives/stack'
 import {
   type FocusEvent,
   type KeyboardEvent,
@@ -10,8 +12,6 @@ import {
   useState,
 } from 'react'
 
-import type {ComponentType, Props} from '../../core/types'
-import {Stack, type StackOwnProps} from '../../primitives/stack/Stack'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
 import {TreeContext} from './TreeContext'
 import type {TreeContextValue, TreeState} from './types'
