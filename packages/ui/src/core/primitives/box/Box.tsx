@@ -28,12 +28,6 @@ export type BoxOwnProps = BoxStyleProps
  * The rendered element receives all applicable HTML attributes for the chosen element type
  * in addition to the Box's own style props.
  *
- * `"a"` | `"article"` | `"aside"` | `"blockquote"` | `"body"` | `"button"` | `"details"` |
- * `"div"` | `"header"` | `"fieldset"` | `"figure"` | `"figcaption"` | `"footer"` | `"form"` |
- * `"html"` | `"iframe"` | `"kbd"` | `"label"` | `"legend"` | `"li"` | `"main"` | `"nav"` |
- * `"ol"` | `"pre"` | `"section"` | `"span"` | `"summary"` | `"table"` | `"tbody"` | `"td"` |
- * `"tfoot"` | `"th"` | `"thead"` | `"tr"` | `"ul"` | `ComponentType`
- *
  * @public
  */
 export type BoxElementType =
