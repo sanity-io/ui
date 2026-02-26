@@ -22,7 +22,7 @@ import {
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_raf} from '../../helpers/animation'
 import {_hasFocus, focusFirstDescendant} from '../../helpers/focus'
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
+import {_getResponsiveProp} from '../../helpers/props'
 import {Box, type BoxOwnProps} from '../../primitives/box/Box'
 import {Button} from '../../primitives/button/Button'
 import {Popover, type PopoverProps} from '../../primitives/popover/Popover'
@@ -202,7 +202,7 @@ export function Autocomplete<
 
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
-  const padding = useResponsiveProp(paddingProp)
+  const padding = _getResponsiveProp(paddingProp)
   const currentOption = useMemo(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
     [options, value],
