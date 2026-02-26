@@ -10,24 +10,11 @@ import type {ComponentType, Props} from '../../types'
 export const DEFAULT_BOX_ELEMENT = 'div'
 
 /**
- * Own props for the {@link Box} component.
+ * Style props for the {@link Box} component.
  *
  * @remarks
  * Inherits all properties from {@link BoxStyleProps}, which provides a comprehensive set of
  * CSS utility style props for layout, spacing, sizing, positioning, and visual treatment.
- *
- * See {@link BoxStyleProps} for the full list of available style properties including:
- * - **Layout:** `display`, `flex`, `flexDirection`, `flexWrap`, `alignItems`, `justifyContent`
- * - **Spacing:** `margin`, `marginX`, `marginY`, `padding`, `paddingX`, `paddingY` (and per-side variants)
- * - **Sizing:** `width`, `height`, `minWidth`, `minHeight`, `maxWidth`
- * - **Grid:** `gap`, `gapX`, `gapY`, `gridTemplateColumns`, `gridTemplateRows`, and other grid props
- * - **Position:** `position`, `inset`, `insetTop`, `insetRight`, `insetBottom`, `insetLeft`
- * - **Visual:** `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`
- * - **Text:** `textAlign`
- * - **Other:** `pointerEvents`, `sizing` (box-sizing)
- *
- * All style props support responsive values via the `ResponsiveProp` type, which accepts
- * either a single value or a breakpoint-keyed object (e.g. `{0: 2, 2: 4}`).
  *
  * @public
  */
