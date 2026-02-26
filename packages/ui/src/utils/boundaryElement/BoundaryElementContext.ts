@@ -1,6 +1,6 @@
 import type {Context} from 'react'
 
-import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
+import {createGlobalScopedContext} from '../../core/lib/createGlobalScopedContext'
 import type {BoundaryElementContextValue} from './types'
 
 export const BoundaryElementContext: Context<BoundaryElementContextValue> =

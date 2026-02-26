@@ -1,4 +1,4 @@
-import type {Placement} from '../../types'
+import type {Placement} from '../../core/types'
 
 export const DEFAULT_TOOLTIP_DELAY = {
   open: 500,

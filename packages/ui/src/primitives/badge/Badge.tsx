@@ -6,8 +6,8 @@ import {
 } from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
 
-import {_splitKeys} from '../../_keys'
-import type {ComponentType, Props} from '../../types'
+import {_splitKeys} from '../../core/_keys'
+import type {ComponentType, Props} from '../../core/types'
 import {Text} from '../text/Text'
 
 /** @public */

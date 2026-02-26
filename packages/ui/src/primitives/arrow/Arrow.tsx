@@ -9,7 +9,7 @@ import {
 import {assignInlineVars} from '@vanilla-extract/dynamic'
 import {useMemo} from 'react'
 
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 import {compileCommands, getRoundedCommands, type Point} from './cmds'
 
 /** @internal */

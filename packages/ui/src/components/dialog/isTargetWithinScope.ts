@@ -1,4 +1,4 @@
-import {containsOrEqualsElement} from '../../helpers/element'
+import {containsOrEqualsElement} from '../../core/helpers/element'
 
 export function isTargetWithinScope(
   boundaryElement: HTMLElement | null,

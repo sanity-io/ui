@@ -14,11 +14,11 @@ import {
   useRef,
 } from 'react'
 
-import {Z_OFFSETS} from '../../constants'
+import {Z_OFFSETS} from '../../core/constants'
+import {getElementRef} from '../../core/getElementRef'
+import type {Assign, Placement} from '../../core/types'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import type {Assign, Placement} from '../../types'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
-import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
 import {useLayer} from '../layer/useLayer'
 import {

@@ -19,10 +19,10 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
+import type {ComponentType, Props} from '../../core/types'
 import {Box} from '../../primitives/box/Box'
 import {Selectable} from '../../primitives/selectable/Selectable'
 import {Text} from '../../primitives/text/Text'
-import type {ComponentType, Props} from '../../types'
 import {Hotkeys} from '../hotkeys/Hotkeys'
 import {useMenu} from './useMenu'
 

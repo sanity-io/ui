@@ -1,7 +1,7 @@
 import {flex, FLEX_STYLE_PROP_KEYS, type FlexStyleProps} from '@sanity/ui/css'
 
-import {_splitKeys} from '../../_keys'
-import type {Props} from '../../types'
+import {_splitKeys} from '../../core/_keys'
+import type {Props} from '../../core/types'
 import {type BoxElementType} from '../box/Box'
 
 /** @public */

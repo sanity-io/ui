@@ -1,6 +1,6 @@
 import {use} from 'react'
 
-import {isRecord} from '../../lib/isRecord'
+import {isRecord} from '../../core/lib/isRecord'
 import {MenuContext, type MenuContextValue} from './MenuContext'
 
 export function useMenu(): MenuContextValue {

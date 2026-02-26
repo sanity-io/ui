@@ -1,6 +1,6 @@
 import {Suspense} from 'react'
 
-import {_splitKeys} from '../../_keys'
+import {_splitKeys} from '../../core/_keys'
 import {Syntax} from '../_syntax/Syntax'
 
 /** @public */

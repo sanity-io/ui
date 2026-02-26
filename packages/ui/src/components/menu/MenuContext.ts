@@ -1,6 +1,6 @@
 import {type Context, type MouseEvent as ReactMouseEvent} from 'react'
 
-import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
+import {createGlobalScopedContext} from '../../core/lib/createGlobalScopedContext'
 
 export interface MenuContextValue {
   version: 2
