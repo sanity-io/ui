@@ -45,11 +45,11 @@ import type {AutocompleteOpenButtonProps, BaseAutocompleteOption} from './types'
 export const DEFAULT_AUTOCOMPLETE_ELEMENT = 'input'
 
 /** @public */
-export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocompleteOption> =
+export type AutocompleteOwnProps<Option extends BaseAutocompleteOption = BaseAutocompleteOption> =
   TextInputOwnProps & {
     border?: boolean
     customValidity?: string
-    filterOption?: (query: string, option: O) => boolean
+    filterOption?: (query: string, option: Option) => boolean
     icon?: ElementType | ReactNode
     /** @beta */
     listBox?: BoxOwnProps
@@ -62,7 +62,7 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
     /** @beta */
     openOnFocus?: boolean
     /** The options to render. */
-    options?: O[]
+    options?: Option[]
     padding?: ResponsiveProp<Space>
     popover?: Omit<PopoverProps<'div'>, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
     prefix?: ReactNode
@@ -70,7 +70,7 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
     /** @beta */
     relatedElements?: HTMLElement[]
     /** The callback function for rendering each option. */
-    renderOption?: (option: O) => React.JSX.Element
+    renderOption?: (option: Option) => React.JSX.Element
     /** @beta */
     renderPopover?: (
       props: {
@@ -82,7 +82,7 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
       },
       ref: ForwardedRef<HTMLDivElement>,
     ) => ReactNode
-    renderValue?: (value: string, option?: O) => string
+    renderValue?: (value: string, option?: Option) => string
     suffix?: ReactNode
     value?: string
   }
@@ -93,8 +93,8 @@ export type AutocompleteElementType = 'input' | ComponentType
 /** @public */
 export type AutocompleteProps<
   E extends AutocompleteElementType = AutocompleteElementType,
-  O extends BaseAutocompleteOption = BaseAutocompleteOption,
-> = Props<AutocompleteOwnProps<O>, E>
+  Option extends BaseAutocompleteOption = BaseAutocompleteOption,
+> = Props<AutocompleteOwnProps<Option>, E>
 
 const DEFAULT_RENDER_VALUE = (value: string, option?: BaseAutocompleteOption) =>
   option ? option.value : value
@@ -110,8 +110,8 @@ const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
  */
 export function Autocomplete<
   E extends AutocompleteElementType = typeof DEFAULT_AUTOCOMPLETE_ELEMENT,
-  O extends BaseAutocompleteOption = BaseAutocompleteOption,
->(props: AutocompleteProps<E, O>): React.JSX.Element {
+  Option extends BaseAutocompleteOption = BaseAutocompleteOption,
+>(props: AutocompleteProps<E, Option>): React.JSX.Element {
   const {
     as = DEFAULT_AUTOCOMPLETE_ELEMENT,
     border = true,
@@ -144,7 +144,7 @@ export function Autocomplete<
     suffix,
     value: valueProp,
     ...rest
-  } = props as AutocompleteProps<typeof DEFAULT_AUTOCOMPLETE_ELEMENT, O>
+  } = props as AutocompleteProps<typeof DEFAULT_AUTOCOMPLETE_ELEMENT, Option>
 
   const [state, dispatch] = useReducer(autocompleteReducer, {
     activeValue: valueProp || null,
