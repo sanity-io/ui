@@ -1,4 +1,4 @@
-import {_getResponsiveProp, type ComponentType, type Props} from '@sanity/ui/core'
+import {_getResponsiveProp, _raf, type ComponentType, type Props} from '@sanity/ui/core'
 import {
   avatar,
   avatar_arrow,
@@ -11,7 +11,7 @@ import {
 import {Box} from '@sanity/ui/primitives/box'
 import {Label} from '@sanity/ui/primitives/label'
 import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui/theme'
-import {useCallback, useEffect, useMemo, useState} from 'react'
+import {startTransition, useEffect, useState} from 'react'
 
 import type {AvatarPosition} from './types'
 
@@ -53,13 +53,15 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
     color = 'magenta',
     src,
     title,
-    initials,
+    initials: initialsProp,
     onImageLoadError,
     arrowPosition: arrowPositionProp,
     animateArrowFrom,
     size: sizeProp = 1,
     ...rest
   } = props as AvatarProps<typeof DEFAULT_AVATAR_ELEMENT>
+
+  const initials = typeof initialsProp === 'string' ? initialsProp.slice(0, 2) : undefined
 
   const size = _getResponsiveProp(sizeProp)
 
@@ -69,39 +71,34 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
 
   const [imageError, setImageError] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (arrowPosition === arrowPositionProp) return undefined
-
-    // Start animation in the next frame
-    const raf = requestAnimationFrame(() => setArrowPosition(arrowPositionProp))
-
-    return () => cancelAnimationFrame(raf)
-  }, [arrowPosition, arrowPositionProp])
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (src) setImageError(false)
-  }, [src])
-
-  const handleImageError = useCallback(() => {
+  const handleImageError = () => {
     setImageError(true)
 
     if (onImageLoadError) {
       onImageLoadError(new Error('Avatar: the image failed to load'))
     }
-  }, [onImageLoadError])
+  }
 
-  const initialsSize = useMemo(
-    () =>
-      size.map((s) => {
-        if (s === 1) return 1 satisfies FontLabelSize
-        if (s === 2) return 3 satisfies FontLabelSize
-        if (s === 3) return 5 satisfies FontLabelSize
+  const initialsSize = size.map((s) => {
+    if (s === 1) return 1 satisfies FontLabelSize
+    if (s === 2) return 3 satisfies FontLabelSize
+    if (s === 3) return 5 satisfies FontLabelSize
 
-        return 0 satisfies FontLabelSize
-      }) as ResponsiveProp<FontLabelSize>,
-    [size],
-  )
+    return 0 satisfies FontLabelSize
+  }) as ResponsiveProp<FontLabelSize>
+
+  useEffect(() => {
+    if (arrowPosition === arrowPositionProp) return undefined
+
+    // Start animation in the next frame
+    return _raf(() => setArrowPosition(arrowPositionProp))
+  }, [arrowPosition, arrowPositionProp])
+
+  useEffect(() => {
+    if (src) {
+      startTransition(() => setImageError(false))
+    }
+  }, [src])
 
   return (
     <Element
@@ -131,7 +128,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
         position="absolute"
         radius="full"
       >
-        <Label align="center" as="span" size={initialsSize} weight="medium">
+        <Label align="center" as="span" size={initialsSize} weight="semibold">
           {initials}
         </Label>
       </Box>

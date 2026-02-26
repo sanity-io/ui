@@ -1,6 +1,7 @@
 import {createGlobalScopedContext} from '@sanity/ui/core'
 import {type Context, type MouseEvent as ReactMouseEvent} from 'react'
 
+/** @internal */
 export interface MenuContextValue {
   version: 2
   activeElement: HTMLElement | null

@@ -3,7 +3,7 @@ import {type ResponsiveProp, spinner} from '@sanity/ui/css'
 import {Text} from '@sanity/ui/primitives/text'
 import type {FontTextSize} from '@sanity/ui/theme'
 
-import {AnimatedSpinnerIcon} from './AnimatedSpinnerIcon'
+import {SpinnerAnimatedIcon} from './SpinnerAnimatedIcon'
 
 /** @public */
 export const DEFAULT_SPINNER_ELEMENT = 'div'
@@ -39,7 +39,7 @@ export function Spinner<E extends SpinnerElementType = typeof DEFAULT_SPINNER_EL
 
   return (
     <Text as={as} data-ui="Spinner" {...rest} className={spinner({className})}>
-      <AnimatedSpinnerIcon />
+      <SpinnerAnimatedIcon />
     </Text>
   )
 }

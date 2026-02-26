@@ -11,7 +11,7 @@ const elementMap = globalScope as Record<symbol, HTMLDivElement | null>
 
 elementMap[elementKey] = null
 
-const defaultContextValue: PortalContextValue = {
+const defaultPortalContextValue: PortalContextValue = {
   version: 0.0,
   boundaryElement: null,
   get element() {
@@ -34,4 +34,4 @@ const defaultContextValue: PortalContextValue = {
 
 /** @internal */
 export const PortalContext: Context<PortalContextValue> =
-  createGlobalScopedContext<PortalContextValue>(key, defaultContextValue)
+  createGlobalScopedContext<PortalContextValue>(key, defaultPortalContextValue)

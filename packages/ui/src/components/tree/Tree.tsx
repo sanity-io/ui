@@ -23,7 +23,7 @@ export const DEFAULT_TREE_ELEMENT = 'div'
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export type TreeOwnProps = StackOwnProps
+export type TreeOwnProps = Omit<StackOwnProps, 'position'>
 
 /** @beta */
 export type TreeElementType = 'div' | ComponentType
@@ -44,6 +44,8 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
     className,
     gap = 1,
     onFocus,
+    // overflow = 'hidden',
+    padding = 1,
     ref: forwardedRef,
     ...rest
   } = props as TreeProps<typeof DEFAULT_TREE_ELEMENT>
@@ -97,7 +99,7 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
     })
   }, [])
 
-  const contextValue: TreeContextValue = useMemo(
+  const context: TreeContextValue = useMemo(
     () => ({
       version: 0.0,
       focusedElement: focusedElement || itemElements[0] || null,
@@ -229,7 +231,7 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
   }, [children])
 
   return (
-    <TreeContext value={contextValue}>
+    <TreeContext value={context}>
       <Stack
         as="ul"
         data-ui="Tree"
@@ -237,6 +239,8 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
         ref={ref}
         className={tree({className})}
         gap={gap}
+        padding={padding}
+        position="relative"
         role="tree"
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}

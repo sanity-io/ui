@@ -1,1 +1,1 @@
-export * from '../../src/primitives/_syntax/Syntax'
+export * from '../../src/primitives/_syntax/LazySyntax'

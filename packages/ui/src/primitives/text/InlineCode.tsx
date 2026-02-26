@@ -1,5 +1,5 @@
 import {_splitKeys} from '@sanity/ui/core'
-import {Syntax} from '@sanity/ui/primitives/_syntax'
+import {LazySyntax} from '@sanity/ui/primitives/_syntax'
 import {Suspense} from 'react'
 
 /** @public */
@@ -19,7 +19,7 @@ export function InlineCode(props: InlineCodeProps): React.JSX.Element {
 
   return (
     <Suspense fallback={<code>{children}</code>}>
-      <Syntax language={language} value={children} />
+      <LazySyntax language={language} value={children} />
     </Suspense>
   )
 }

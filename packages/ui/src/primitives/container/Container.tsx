@@ -11,7 +11,7 @@ import {type BoxElementType} from '@sanity/ui/primitives/box'
 export const DEFAULT_CONTAINER_ELEMENT = 'div'
 
 /** @public */
-export type ContainerOwnProps = Omit<BoxOwnProps, 'width'> & ContainerStyleProps
+export type ContainerOwnProps = Omit<BoxStyleProps, 'width'> & ContainerStyleProps
 
 /** @public */
 export type ContainerElementType = BoxElementType

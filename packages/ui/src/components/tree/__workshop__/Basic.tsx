@@ -1,5 +1,7 @@
 import {LinkIcon} from '@sanity/icons'
 import {Box, Tree, TreeItem} from '@sanity/ui'
+import {SPACE} from '@sanity/ui/theme'
+import {useSelect} from '@sanity/ui-workshop'
 import {usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {useCallback, useState} from 'react'
 
@@ -7,6 +9,8 @@ import {perfTests} from './basic.perf'
 
 export default function BasicStory(): React.JSX.Element {
   const {ref, Wrapper} = usePerfTest(perfTests[0])
+
+  const padding = useSelect('Padding', SPACE)
 
   const [id, setId] = useState('')
 
@@ -21,7 +25,7 @@ export default function BasicStory(): React.JSX.Element {
   return (
     <Box padding={[4, 5, 6]}>
       <Wrapper>
-        <Tree ref={ref} gap={1} padding={0} radius={3}>
+        <Tree ref={ref} gap={1} padding={padding} radius={3}>
           <TreeItem expanded text="Fruit" onClick={handleClick}>
             <TreeItem
               data-testid="oranges"

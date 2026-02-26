@@ -45,22 +45,22 @@ export function Text<E extends TextElementType = typeof DEFAULT_TEXT_ELEMENT>(
     styleProps,
     {
       as: Element = DEFAULT_TEXT_ELEMENT,
-      children,
+      children: childrenProp,
       textOverflow: textOverflowProp,
       // split DOM props
       ...domProps
     },
   ] = _splitKeys(props as TextProps<typeof DEFAULT_TEXT_ELEMENT>, TEXT_STYLE_PROP_KEYS)
 
+  let children = childrenProp
+
+  if (textOverflowProp) {
+    children = <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
+  }
+
   return (
     <Element data-ui="Text" {...domProps} className={text(styleProps)}>
-      <span
-        className={textOverflow({
-          textOverflow: textOverflowProp,
-        })}
-      >
-        {children}
-      </span>
+      {children}
     </Element>
   )
 }

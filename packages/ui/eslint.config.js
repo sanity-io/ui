@@ -132,11 +132,6 @@ export default defineConfig(import.meta.dirname, [
           mode: 'file',
         },
         {
-          type: '@sanity/ui/primitives/_arrow',
-          pattern: ['exports/primitives/_arrow.ts'],
-          mode: 'file',
-        },
-        {
           type: '@sanity/ui/primitives/_syntax',
           pattern: ['exports/primitives/_syntax.ts'],
           mode: 'file',
@@ -339,11 +334,6 @@ export default defineConfig(import.meta.dirname, [
           mode: 'full',
         },
         {
-          type: 'src/primitives/_arrow',
-          pattern: ['src/primitives/_arrow/**/*'],
-          mode: 'full',
-        },
-        {
           type: 'src/primitives/_syntax',
           pattern: ['src/primitives/_syntax/**/*'],
           mode: 'full',
@@ -516,7 +506,6 @@ export default defineConfig(import.meta.dirname, [
             {from: '@sanity/ui/components/tree', allow: ['src/components/tree']},
             {from: '@sanity/ui/components/virtual-list', allow: ['src/components/virtual-list']},
 
-            {from: '@sanity/ui/primitives/_arrow', allow: ['src/primitives/_arrow']},
             {from: '@sanity/ui/primitives/_syntax', allow: ['src/primitives/_syntax']},
             {from: '@sanity/ui/primitives/avatar', allow: ['src/primitives/avatar']},
             {from: '@sanity/ui/primitives/badge', allow: ['src/primitives/badge']},
@@ -675,7 +664,7 @@ export default defineConfig(import.meta.dirname, [
             },
             {
               from: 'src/primitives/code',
-              allow: ['@sanity/ui/css', 'src/primitives/code'],
+              allow: ['@sanity/ui/css', '@sanity/ui/primitives/_syntax', 'src/primitives/code'],
             },
             {
               from: 'src/primitives/container',

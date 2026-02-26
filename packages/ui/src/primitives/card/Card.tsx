@@ -68,6 +68,9 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
   const tone = toneProp === 'inherit' ? context?.tone : toneProp
   const scheme = schemeProp ?? context?.scheme
 
+  const styleTone = tone === context.tone && !context.root ? undefined : tone
+  const styleScheme = scheme === context.scheme && !context.root ? undefined : scheme
+
   let node = (
     <As
       data-ui="Card"
@@ -75,8 +78,9 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
       className={card({
         ...styleProps,
         __unstable_pattern: styleProps.__unstable_pattern ?? (checkered ? 'checkered' : undefined),
-        tone: tone === context.tone && !context.root ? undefined : tone,
-        scheme: scheme === context.scheme && !context.root ? undefined : scheme,
+        // If the style scheme is different from the context scheme, then set the tone
+        tone: styleScheme ? tone : styleTone,
+        scheme: styleScheme,
       })}
       // Extract the disabled prop without removing it from `...rest` so that the underlying
       // <button> or <a> has `[data-disabled]` when needed

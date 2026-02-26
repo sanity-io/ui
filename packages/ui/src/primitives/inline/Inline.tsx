@@ -7,7 +7,7 @@ export const DEFAULT_INLINE_ELEMENT = 'div'
 
 /** @public */
 export type InlineOwnProps = Omit<
-  BoxOwnProps,
+  BoxStyleProps,
   | 'alignItems'
   | 'flexDirection'
   | 'flexWrap'

@@ -1,5 +1,7 @@
-import {Card, Container, Portal, PortalProvider, Stack, Text} from '@sanity/ui'
+import {Card, Label, Portal, PortalProvider, Stack, Text} from '@sanity/ui'
 import {useMemo, useState} from 'react'
+
+import {CardWrapper} from '$workshop'
 
 export default function NamedStory(): React.JSX.Element {
   const [portal1Element, setPortal1Element] = useState<HTMLDivElement | null>(null)
@@ -16,48 +18,52 @@ export default function NamedStory(): React.JSX.Element {
 
   return (
     <PortalProvider __unstable_elements={__unstable_elements}>
-      <Container width={1}>
-        <Card height="fill" padding={4}>
-          <Stack gap={2}>
-            <Text size={1} weight="medium">
-              Portal 1
-            </Text>
-            <Card ref={setPortal1Element} border padding={3} />
-          </Stack>
-        </Card>
-        <Card height="fill" padding={4}>
-          <Stack gap={2}>
-            <Text size={1} weight="medium">
-              Portal 2
-            </Text>
-            <Card ref={setPortal2Element} border padding={3} />
-          </Stack>
-        </Card>
-        <Card height="fill" padding={4}>
-          <Stack gap={2}>
-            <Text size={1} weight="medium">
-              Portal 3
-            </Text>
-            <Card ref={setPortal3Element} border padding={3} />
-          </Stack>
-        </Card>
-      </Container>
+      <CardWrapper gap={5} tone="default">
+        <Stack gap={3}>
+          <Label muted size={1} weight="medium">
+            Portal 1
+          </Label>
+          <div ref={setPortal1Element} />
+        </Stack>
 
-      <Portal __unstable_name="portal1">
-        <Text>Portal 1</Text>
-      </Portal>
+        <Stack gap={3}>
+          <Label muted size={1} weight="medium">
+            Portal 2
+          </Label>
+          <div ref={setPortal2Element} />
+        </Stack>
 
-      <Portal __unstable_name="portal2">
-        <Text>Portal 2</Text>
-      </Portal>
+        <Stack gap={3}>
+          <Label muted size={1} weight="medium">
+            Portal 3
+          </Label>
+          <div ref={setPortal3Element} />
+        </Stack>
 
-      <Portal __unstable_name="portal3">
-        <Text>Portal 3A</Text>
-      </Portal>
+        <Portal __unstable_name="portal1">
+          <Card muted padding={4} radius={3} shadow={1}>
+            <Text size={1}>Card A in portal 1</Text>
+          </Card>
+        </Portal>
 
-      <Portal __unstable_name="portal3">
-        <Text>Portal 3B</Text>
-      </Portal>
+        <Portal __unstable_name="portal2">
+          <Card muted padding={4} radius={3} shadow={1}>
+            <Text size={1}>Card B in portal 2</Text>
+          </Card>
+        </Portal>
+
+        <Portal __unstable_name="portal3">
+          <Card muted padding={4} radius={3} shadow={1}>
+            <Text size={1}>Card C in portal 3</Text>
+          </Card>
+        </Portal>
+
+        <Portal __unstable_name="portal3">
+          <Card muted padding={4} radius={3} shadow={1}>
+            <Text size={1}>Card D in portal 3</Text>
+          </Card>
+        </Portal>
+      </CardWrapper>
     </PortalProvider>
   )
 }
