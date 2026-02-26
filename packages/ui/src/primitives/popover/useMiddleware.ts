@@ -9,9 +9,9 @@ import {
 } from '@floating-ui/react-dom'
 import {useMemo} from 'react'
 
-import {_getResponsiveProp} from '../../helpers/props'
+import {_getResponsiveProp} from '../../core/helpers/props'
+import type {Placement} from '../../core/types'
 import {origin} from '../../middleware/origin'
-import type {Placement} from '../../types'
 import {DEFAULT_POPOVER_PADDING} from './constants'
 import {size} from './floating-ui/size'
 

@@ -1,8 +1,8 @@
 import {code, CODE_STYLE_PROP_KEYS, type CodeStyleProps} from '@sanity/ui/css'
 import {lazy, Suspense} from 'react'
 
-import {_splitKeys} from '../../_keys'
-import type {ComponentType, Props} from '../../types'
+import {_splitKeys} from '../../core/_keys'
+import type {ComponentType, Props} from '../../core/types'
 
 const LazyRefractor = lazy(() => import('../_syntax/LazySyntax'))
 

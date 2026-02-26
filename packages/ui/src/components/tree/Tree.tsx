@@ -10,8 +10,8 @@ import {
   useState,
 } from 'react'
 
+import type {ComponentType, Props} from '../../core/types'
 import {Stack, type StackOwnProps} from '../../primitives/stack/Stack'
-import type {ComponentType, Props} from '../../types'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
 import {TreeContext} from './TreeContext'
 import type {TreeContextValue, TreeState} from './types'

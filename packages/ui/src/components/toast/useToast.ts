@@ -1,6 +1,6 @@
 import {use} from 'react'
 
-import {isRecord} from '../../lib/isRecord'
+import {isRecord} from '../../core/lib/isRecord'
 import {ToastContext} from './ToastContext'
 import type {ToastContextValue} from './types'
 

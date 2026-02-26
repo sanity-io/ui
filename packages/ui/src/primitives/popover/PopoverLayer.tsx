@@ -3,8 +3,8 @@ import {popover_card} from '@sanity/ui/css'
 import {type HTMLMotionProps, motion} from 'motion/react'
 import {useMemo} from 'react'
 
-import {POPOVER_MOTION_PROPS} from '../../constants'
-import type {Assign} from '../../types'
+import {POPOVER_MOTION_PROPS} from '../../core/constants'
+import type {Assign} from '../../core/types'
 import {Flex} from '../flex/Flex'
 import {Layer, type LayerOwnProps} from '../layer/Layer'
 

@@ -1,9 +1,9 @@
 import {type FocusEvent, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 
-import {EMPTY_RECORD} from '../../constants'
-import {containsOrEqualsElement, isHTMLElement} from '../../helpers/element'
+import {EMPTY_RECORD} from '../../core/constants'
+import {containsOrEqualsElement, isHTMLElement} from '../../core/helpers/element'
+import type {Props} from '../../core/types'
 import {Card, type CardElementType} from '../../primitives/card/Card'
-import type {Props} from '../../types'
 import type {LayerElementType, LayerOwnProps} from './Layer'
 import {useLayer} from './useLayer'
 

@@ -1,6 +1,6 @@
 import type {Context} from 'react'
 
-import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
+import {createGlobalScopedContext} from '../../core/lib/createGlobalScopedContext'
 import type {ToastContextValue} from './types'
 
 export const ToastContext: Context<ToastContextValue | null> =

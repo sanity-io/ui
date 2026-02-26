@@ -15,6 +15,7 @@ import {
   useState,
 } from 'react'
 
+import type {ComponentType, Props} from '../../core/types'
 import {Box} from '../../primitives/box/Box'
 import {
   Selectable,
@@ -22,7 +23,6 @@ import {
   type SelectableOwnProps,
 } from '../../primitives/selectable/Selectable'
 import {Text} from '../../primitives/text/Text'
-import type {ComponentType, Props} from '../../types'
 import {TreeContext} from './TreeContext'
 import {TreeGroup} from './TreeGroup'
 import {useTree} from './useTree'

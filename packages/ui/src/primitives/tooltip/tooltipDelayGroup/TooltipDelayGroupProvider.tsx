@@ -1,6 +1,6 @@
 import {type ReactNode, useCallback, useMemo, useRef, useState} from 'react'
 
-import type {Delay} from '../../../types'
+import type {Delay} from '../../../core/types'
 import {DEFAULT_TOOLTIP_DELAY} from '../constants'
 import {TooltipDelayGroupContext} from './TooltipDelayGroupContext'
 import type {TooltipDelayGroupContextValue} from './types'

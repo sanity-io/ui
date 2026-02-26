@@ -6,9 +6,9 @@ import {
 } from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
 
-import {_splitKeys} from '../../_keys'
+import {_splitKeys} from '../../core/_keys'
+import type {ComponentType, Props} from '../../core/types'
 import {KBD} from '../../primitives/kbd/Kbd'
-import type {ComponentType, Props} from '../../types'
 
 /** @public */
 export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'

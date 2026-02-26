@@ -7,8 +7,8 @@ import {
   type TextOverflowStyleProps,
 } from '@sanity/ui/css'
 
-import {_splitKeys} from '../../_keys'
-import type {ComponentType, Props} from '../../types'
+import {_splitKeys} from '../../core/_keys'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_HEADING_ELEMENT = 'div'

@@ -1,8 +1,8 @@
 import {type GapStyleProps, type PaddingStyleProps, toast_layer} from '@sanity/ui/css'
 
+import type {ComponentType, Props} from '../../core/types'
 import {Grid} from '../../primitives/grid/Grid'
 import {useLayer} from '../../primitives/layer/useLayer'
-import type {ComponentType, Props} from '../../types'
 
 /** @internal */
 export const DEFAULT_TOAST_LAYER_ELEMENT = 'ul'

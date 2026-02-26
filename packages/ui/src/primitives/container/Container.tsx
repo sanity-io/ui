@@ -1,7 +1,7 @@
 import {container, CONTAINER_STYLE_PROP_KEYS, type ContainerStyleProps} from '@sanity/ui/css'
 
-import {_splitKeys} from '../../_keys'
-import type {Props} from '../../types'
+import {_splitKeys} from '../../core/_keys'
+import type {Props} from '../../core/types'
 import {type BoxElementType, type BoxOwnProps} from '../box/Box'
 
 /** @public */
