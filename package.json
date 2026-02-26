@@ -68,6 +68,9 @@
       "commander": "^13.1.0",
       "conventional-changelog-conventionalcommits": ">= 8.0.0",
       "zod": "^4.3.6"
+    },
+    "patchedDependencies": {
+      "react-refractor": "patches/react-refractor.patch"
     }
   }
 }
