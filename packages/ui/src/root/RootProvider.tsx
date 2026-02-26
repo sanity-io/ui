@@ -28,7 +28,7 @@ export function RootProvider(props: RootProviderProps): React.JSX.Element {
 
   return (
     <LayerProvider>
-      <CardProvider scheme={scheme} tone={tone}>
+      <CardProvider root scheme={scheme} tone={tone}>
         <ToastProvider>
           <BoundaryElementProvider element={boundaryElement}>
             <PortalProvider element={portalElement}>{children}</PortalProvider>
