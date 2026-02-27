@@ -1,7 +1,7 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import type {ComponentType, Props} from '@sanity/ui/core'
 import {type ResponsiveProp, tree_item, vars} from '@sanity/ui/css'
-import {Box} from '@sanity/ui/primitives/box'
+import {Box, type BoxProps} from '@sanity/ui/primitives/box'
 import {
   Selectable,
   type SelectableElementType,
@@ -107,7 +107,8 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
   )
 
   const handleClick = useCallback(
-    (event: MouseEvent<HTMLLIElement>) => {
+    (event: MouseEvent<HTMLAnchorElement> | MouseEvent<HTMLLIElement>) => {
+      // (event: MouseEvent<HTMLLIElement>) => {
       if (onClick) onClick(event)
 
       const target = event.target
@@ -170,13 +171,17 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
   if (href) {
     return (
       <Box
-        ref={setRootElement}
-        as="li"
-        className={tree_item({className})}
+        // ref={setRootElement}
+        // as="li"
+        // className={tree_item({className})}
         data-selected={selected ? '' : undefined}
         data-tree-id={id}
         data-tree-key={itemKey}
         data-ui="TreeItem"
+        {...(rest as BoxProps<'li'>)}
+        ref={setRootElement}
+        as="li"
+        className={tree_item({className})}
         role="none"
         onClick={handleClick}
       >
@@ -185,7 +190,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
           aria-expanded={expanded}
           as={linkAs}
           data-ui="TreeItem__box"
-          {...rest}
+          // {...rest}
           href={href}
           radius={radius}
           role="treeitem"
@@ -205,14 +210,18 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
 
   return (
     <Box
-      ref={setRootElement}
-      aria-expanded={expanded}
-      as="li"
-      className={tree_item({className})}
+      // ref={setRootElement}
+      // aria-expanded={expanded}
+      // as="li"
+      // className={tree_item({className})}
       data-pressed={selected ? '' : undefined}
       data-tree-id={id}
       data-tree-key={itemKey}
       data-ui="TreeItem"
+      {...rest}
+      ref={setRootElement}
+      aria-expanded={expanded}
+      className={tree_item({className})}
       role="treeitem"
       tabIndex={tabIndex}
       onClick={handleClick}
@@ -221,10 +230,11 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
       <Selectable
         data-focused={focused ? '' : undefined}
         data-ui="TreeItem__box"
-        {...rest}
+        // {...rest}
         radius={radius}
         selected={selected}
         style={{paddingLeft: `calc(${vars.space[2]} * ${tree.level})`}}
+        tabIndex={tabIndex}
       >
         {content}
       </Selectable>
