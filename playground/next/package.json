@@ -1,6 +1,5 @@
 {
   "name": "sanity-ui-playground-next",
-  "version": "0.1.0",
   "private": true,
   "scripts": {
     "build": "FEATURE_DIST=on next build",
