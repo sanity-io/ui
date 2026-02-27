@@ -1,5 +1,3 @@
-import '@sanity/ui/css/index.css'
-
 import {Box, Card, Code, Heading, Root, Text, usePrefersDark} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/theme'
 import {startTransition, useEffect, useRef, useState} from 'react'

@@ -15,11 +15,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [{"name": "next"}],
-    "paths": {
-      "@sanity/ui/css/index.css": ["./empty.css"],
-      "@sanity/ui/*": ["../../packages/ui/exports/*"],
-      "@sanity/ui": ["../../packages/ui/exports/index.ts"]
-    }
+    "plugins": [{"name": "next"}]
   }
 }
