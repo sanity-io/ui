@@ -1,5 +1,12 @@
-import {text, textOverflow, type TextOverflowStyleProps, type TextStyleProps} from '@sanity/ui/css'
+import {
+  text,
+  TEXT_STYLE_PROP_KEYS,
+  textOverflow,
+  type TextOverflowStyleProps,
+  type TextStyleProps,
+} from '@sanity/ui/css'
 
+import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
 
 /** @public */
@@ -36,48 +43,19 @@ export type TextProps<E extends TextElementType = TextElementType> = Props<TextO
 export function Text<E extends TextElementType = typeof DEFAULT_TEXT_ELEMENT>(
   props: TextProps<E>,
 ): React.JSX.Element {
-  const {
-    align,
-    as: Element = DEFAULT_TEXT_ELEMENT,
-    children,
-    className,
-    flex,
-    margin,
-    marginX,
-    marginY,
-    marginTop,
-    marginRight,
-    marginBottom,
-    marginLeft,
-    maxWidth = 'fill',
-    muted,
-    size = 2,
-    textOverflow: textOverflowProp,
-    weight = 'regular',
-    ...rest
-  } = props as TextProps<typeof DEFAULT_TEXT_ELEMENT>
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_TEXT_ELEMENT,
+      children,
+      textOverflow: textOverflowProp,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as TextProps<typeof DEFAULT_TEXT_ELEMENT>, TEXT_STYLE_PROP_KEYS)
 
   return (
-    <Element
-      data-ui="Text"
-      {...rest}
-      className={text({
-        className,
-        align,
-        flex,
-        margin,
-        marginX,
-        marginY,
-        marginTop,
-        marginRight,
-        marginBottom,
-        marginLeft,
-        maxWidth,
-        muted,
-        size,
-        weight,
-      })}
-    >
+    <Element data-ui="Text" {...domProps} className={text(styleProps)}>
       <span
         className={textOverflow({
           textOverflow: textOverflowProp,

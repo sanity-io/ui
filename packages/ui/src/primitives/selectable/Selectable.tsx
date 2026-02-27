@@ -1,8 +1,9 @@
-import {selectable, type SelectableStyleProps} from '@sanity/ui/css'
+import {selectable, SELECTABLE_STYLE_PROP_KEYS, type SelectableStyleProps} from '@sanity/ui/css'
 import type {ElementTone} from '@sanity/ui/theme'
 
+import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
-import {Box, type BoxOwnProps} from '../box/Box'
+import {type BoxOwnProps} from '../box/Box'
 
 /** @internal */
 export const DEFAULT_SELECTABLE_ELEMENT = 'button'
@@ -30,20 +31,24 @@ export type SelectableProps<E extends SelectableElementType = SelectableElementT
 export function Selectable<E extends SelectableElementType = typeof DEFAULT_SELECTABLE_ELEMENT>(
   props: SelectableProps<E>,
 ): React.JSX.Element {
-  const {
-    as = DEFAULT_SELECTABLE_ELEMENT,
-    className,
-    radius,
-    selected,
-    tone,
-    ...rest
-  } = props as SelectableProps<typeof DEFAULT_SELECTABLE_ELEMENT>
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_SELECTABLE_ELEMENT,
+      selected,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(
+    props as SelectableProps<typeof DEFAULT_SELECTABLE_ELEMENT>,
+    SELECTABLE_STYLE_PROP_KEYS,
+  )
 
   return (
-    <Box
-      {...rest}
-      as={as}
-      className={selectable({className, radius, tone})}
+    <Element
+      data-ui="Selectable"
+      {...domProps}
+      className={selectable(styleProps)}
       data-selected={selected ? '' : props['data-selected']}
     />
   )

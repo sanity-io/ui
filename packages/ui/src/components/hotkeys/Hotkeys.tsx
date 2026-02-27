@@ -1,7 +1,13 @@
-import type {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
+import {
+  type GapStyleProps,
+  hotkeys,
+  HOTKEYS_STYLE_PROP_KEYS,
+  type RadiusStyleProps,
+  type ResponsiveProp,
+} from '@sanity/ui/css'
 import type {FontTextSize, Space} from '@sanity/ui/theme'
 
-import {Box} from '../../primitives/box/Box'
+import {_splitKeys} from '../../_keys'
 import {KBD} from '../../primitives/kbd/Kbd'
 import type {ComponentType, Props} from '../../types'
 
@@ -32,29 +38,26 @@ export type HotkeysProps<E extends HotkeysElementType = HotkeysElementType> = Pr
 export function Hotkeys<E extends HotkeysElementType = typeof DEFAULT_HOTKEYS_ELEMENT>(
   props: HotkeysProps<E>,
 ): React.JSX.Element | undefined {
-  const {
-    as = DEFAULT_HOTKEYS_ELEMENT,
-    fontSize,
-    gap = 1,
-    gapX,
-    gapY,
-    keys,
-    padding,
-    radius,
-    ...rest
-  } = props as HotkeysProps<typeof DEFAULT_HOTKEYS_ELEMENT>
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_HOTKEYS_ELEMENT,
+      fontSize: _fontSize,
+      keys,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as HotkeysProps<typeof DEFAULT_HOTKEYS_ELEMENT>, HOTKEYS_STYLE_PROP_KEYS)
 
   if (!keys || keys.length === 0) {
     return undefined
   }
 
   return (
-    <Box as={as} data-ui="Hotkeys" {...rest} display="flex" gap={gap} gapX={gapX} gapY={gapY}>
+    <Element data-ui="Hotkeys" {...domProps} className={hotkeys(styleProps)}>
       {keys.map((key, i) => (
-        <KBD key={i} fontSize={fontSize} padding={padding} radius={radius}>
-          {key}
-        </KBD>
+        <KBD key={i}>{key}</KBD>
       ))}
-    </Box>
+    </Element>
   )
 }

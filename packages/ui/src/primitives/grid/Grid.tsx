@@ -1,11 +1,14 @@
+import {grid, GRID_STYLE_PROP_KEYS, type GridStyleProps} from '@sanity/ui/css'
+
+import {_splitKeys} from '../../_keys'
 import type {Props} from '../../types'
-import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
+import {type BoxElementType} from '../box/Box'
 
 /** @public */
 export const DEFAULT_GRID_ELEMENT = 'div'
 
 /** @public */
-export type GridOwnProps = Omit<BoxOwnProps, 'display'>
+export type GridOwnProps = GridStyleProps
 
 /** @public */
 export type GridElementType = BoxElementType
@@ -21,15 +24,15 @@ export type GridProps<E extends GridElementType = GridElementType> = Props<GridO
 export function Grid<E extends GridElementType = typeof DEFAULT_GRID_ELEMENT>(
   props: GridProps<E>,
 ): React.JSX.Element {
-  const {
-    as = DEFAULT_GRID_ELEMENT,
-    children,
-    ...rest
-  } = props as GridProps<typeof DEFAULT_GRID_ELEMENT>
+  const [
+    // split style props
+    styleProps,
+    {
+      as: Element = DEFAULT_GRID_ELEMENT,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as GridProps<typeof DEFAULT_GRID_ELEMENT>, GRID_STYLE_PROP_KEYS)
 
-  return (
-    <Box data-ui="Grid" {...rest} as={as} display="grid">
-      {children}
-    </Box>
-  )
+  return <Element data-ui="Grid" {...domProps} className={grid(styleProps)} />
 }

@@ -1,7 +1,8 @@
-import {stack} from '@sanity/ui/css'
+import {stack, STACK_STYLE_PROP_KEYS} from '@sanity/ui/css'
 
+import {_splitKeys} from '../../_keys'
 import type {Props} from '../../types'
-import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
+import {type BoxElementType, type BoxOwnProps} from '../box/Box'
 
 /** @public */
 export const DEFAULT_STACK_ELEMENT = 'div'
@@ -39,22 +40,15 @@ export type StackProps<E extends StackElementType = StackElementType> = Props<St
 export function Stack<E extends StackElementType = typeof DEFAULT_STACK_ELEMENT>(
   props: StackProps<E>,
 ): React.JSX.Element {
-  const {
-    as = DEFAULT_STACK_ELEMENT,
-    className,
-    gap,
-    ...rest
-  } = props as StackProps<typeof DEFAULT_STACK_ELEMENT>
+  const [
+    // split style props
+    styleProps,
+    {
+      as: Element = DEFAULT_STACK_ELEMENT,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as StackProps<typeof DEFAULT_STACK_ELEMENT>, STACK_STYLE_PROP_KEYS)
 
-  return (
-    <Box
-      data-ui="Stack"
-      {...rest}
-      as={as}
-      className={stack({className})}
-      display="grid"
-      gap={gap}
-      gridAutoRows="min"
-    />
-  )
+  return <Element data-ui="Stack" {...domProps} className={stack(styleProps)} />
 }
