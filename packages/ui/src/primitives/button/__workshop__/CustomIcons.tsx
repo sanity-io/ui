@@ -1,14 +1,22 @@
 import {RocketIcon} from '@sanity/icons'
-import {Button, Flex, Inline} from '@sanity/ui'
+import {Button, Flex} from '@sanity/ui'
+import {BUTTON_MODES} from '@sanity/ui/theme'
+import {useSelect} from '@sanity/ui-workshop'
+
+import {CardWrapper} from '$workshop'
 
 export default function CustomIconsStory(): React.JSX.Element {
+  const mode = useSelect('Mode', BUTTON_MODES, 'default')
+
   return (
-    <Flex align="center" height="fill" justify="center">
-      <Inline gap={1}>
-        <Button fontSize={1} gap={2} icon={RocketIcon} padding={2} text="Rocket" />
-        <Button fontSize={1} gap={2} icon={CustomIcon} padding={2} text="Heart" />
-      </Inline>
-    </Flex>
+    <CardWrapper>
+      <Flex align="center" gap={2} height="fill" justify="center">
+        {/* <Inline gap={1}> */}
+        <Button fontSize={1} icon={RocketIcon} mode={mode} text="Rocket" />
+        <Button fontSize={1} icon={CustomIcon} mode={mode} text="Heart" />
+        {/* </Inline> */}
+      </Flex>
+    </CardWrapper>
   )
 }
 

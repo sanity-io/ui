@@ -21,10 +21,7 @@ globalStyle(`${sanityUploadButton} > span:nth-child(2)`, {
 })
 
 export const styledButton1: string = style({
-  selectors: {
-    '&:hover': {
-      backgroundColor: 'red',
-      boxShadow: 'none',
-    },
+  ':hover': {
+    backgroundColor: 'red',
   },
 })

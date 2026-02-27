@@ -1,10 +1,8 @@
 import {
   Autocomplete,
   type AutocompleteProps,
-  BoundaryElementProvider,
-  Box,
   Card,
-  Container,
+  Dialog,
   LayerProvider,
   Popover,
   Stack,
@@ -12,34 +10,28 @@ import {
 } from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
+import {CardWrapper} from '$workshop'
+
 import {countries} from './mock/countries'
 import type {ExampleOption} from './types'
 
 export default function ConstrainedHeightStory(): React.JSX.Element {
-  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
-
   return (
-    <Card height="fill" tone="transparent">
-      <Container height="fill" padding={3} sizing="border" width={1}>
-        <Card ref={setBoundaryElement} height="fill" radius={4} shadow={3} tone="default">
-          <Box height="fill" overflow="auto" padding={[4, 4, 5]} sizing="border">
-            <Stack gap={5}>
-              <BoundaryElementProvider element={boundaryElement}>
-                <ConstrainedHeightExampleField id="example-1" label="Example 1" />
-                <ConstrainedHeightExampleField id="example-2" label="Example 2" />
-                <ConstrainedHeightExampleField id="example-3" label="Example 3" />
-                <ConstrainedHeightExampleField id="example-4" label="Example 4" />
-                <ConstrainedHeightExampleField id="example-5" label="Example 5" />
-                <ConstrainedHeightExampleField id="example-6" label="Example 6" />
-                <ConstrainedHeightExampleField id="example-7" label="Example 7" />
-                <ConstrainedHeightExampleField id="example-8" label="Example 8" />
-                <ConstrainedHeightExampleField id="example-9" label="Example 9" />
-              </BoundaryElementProvider>
-            </Stack>
-          </Box>
-        </Card>
-      </Container>
-    </Card>
+    <CardWrapper pattern="halftone">
+      <Dialog id="constrained-height-dialog" tone="default">
+        <Stack gap={5} padding={4}>
+          <ConstrainedHeightExampleField id="example-1" label="Example 1" />
+          <ConstrainedHeightExampleField id="example-2" label="Example 2" />
+          <ConstrainedHeightExampleField id="example-3" label="Example 3" />
+          <ConstrainedHeightExampleField id="example-4" label="Example 4" />
+          <ConstrainedHeightExampleField id="example-5" label="Example 5" />
+          <ConstrainedHeightExampleField id="example-6" label="Example 6" />
+          <ConstrainedHeightExampleField id="example-7" label="Example 7" />
+          <ConstrainedHeightExampleField id="example-8" label="Example 8" />
+          <ConstrainedHeightExampleField id="example-9" label="Example 9" />
+        </Stack>
+      </Dialog>
+    </CardWrapper>
   )
 }
 
@@ -91,7 +83,6 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
         <Popover
           {...rest}
           ref={popoverRef}
-          arrow={false}
           constrainSize
           matchReferenceWidth
           open
@@ -118,7 +109,6 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
           openButton
           options={options}
           placeholder="Search"
-          radius={2}
           renderOption={renderOption}
           renderPopover={renderPopover}
           renderValue={renderValue}

@@ -12,15 +12,10 @@ import {
 
 export default function AlignedStory(): React.JSX.Element {
   const constrainSize = useBoolean('Constrain size', false)
-  // @ts-expect-error - TODO: fix this
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS)
   const portal = useBoolean('Portal', true)
-  // @ts-expect-error - TODO: fix this
   const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 'auto')
-
-  // @ts-expect-error - TODO: fix this
   const flexAlign = useSelect('Align', WORKSHOP_FLEX_ALIGN_OPTIONS)
-  // @ts-expect-error - TODO: fix this
   const flexJustify = useSelect('Justify', WORKSHOP_FLEX_JUSTIFY_OPTIONS)
 
   const [open, setOpen] = useState(false)
@@ -53,13 +48,7 @@ export default function AlignedStory(): React.JSX.Element {
   return (
     <Card height="fill" padding={[4, 5, 6]} sizing="border" tone="transparent">
       <Card ref={setBoundaryElement} height="fill" padding={2} shadow={1} sizing="border">
-        <Flex
-          // @ts-expect-error - TODO: fix this
-          align={flexAlign}
-          height="fill"
-          // @ts-expect-error - TODO: fix this
-          justify={flexJustify}
-        >
+        <Flex align={flexAlign} height="fill" justify={flexJustify}>
           <Popover
             ref={popoverElementRef}
             constrainSize={constrainSize}
@@ -68,10 +57,8 @@ export default function AlignedStory(): React.JSX.Element {
             open={open}
             overflow="auto"
             padding={3}
-            // @ts-expect-error - TODO: fix this
             placement={placement}
             portal={portal}
-            // @ts-expect-error - TODO: fix this
             width={width}
           >
             <Button

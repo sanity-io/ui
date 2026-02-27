@@ -1,14 +1,24 @@
-import {Box, Button, Root, Stack, Text, useCard, useToast} from '@sanity/ui'
+import {Button, Root, Stack, Text, useCard, useToast} from '@sanity/ui'
+
+import {CardWrapper} from '$workshop'
 
 export default function BoundaryStory(): React.JSX.Element {
   const {scheme} = useCard()
 
   return (
-    <Box padding={5}>
-      <Root as="div" padding={5} radius={4} scheme={scheme}>
+    <CardWrapper pattern="halftone">
+      <Root
+        as="div"
+        padding={4}
+        radius={5}
+        scheme={scheme}
+        shadow={3}
+        sizing="border"
+        style={{minHeight: 300}}
+      >
         <Layout />
       </Root>
-    </Box>
+    </CardWrapper>
   )
 }
 
@@ -22,7 +32,12 @@ function Layout() {
         within the root element.
       </Text>
 
-      <Button text="Push toast message" width="min" onClick={() => toast.push({title: 'Hello!'})} />
+      <Button
+        mode="ghost"
+        text="Push toast message"
+        width="min"
+        onClick={() => toast.push({title: 'Hello!'})}
+      />
     </Stack>
   )
 }

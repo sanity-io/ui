@@ -1,6 +1,8 @@
 import {Autocomplete, Box, Button, Code, Stack} from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
+import {CardWrapper} from '$workshop'
+
 export default function FocusAndBlurStory(): React.JSX.Element {
   const [value, setValue] = useState('')
   const [log, setLog] = useState<string[]>([])
@@ -9,8 +11,8 @@ export default function FocusAndBlurStory(): React.JSX.Element {
   const handleClear = useCallback(() => setLog([]), [])
 
   return (
-    <Box padding={[4, 5, 6]}>
-      <Stack gap={3}>
+    <CardWrapper alignItems="flex-start" pattern="halftone">
+      <Stack gap={5}>
         <Autocomplete
           id="focus-and-blur"
           openButton
@@ -21,8 +23,9 @@ export default function FocusAndBlurStory(): React.JSX.Element {
           onChange={setValue}
           onFocus={handleFocus}
         />
+
         <Stack gap={3}>
-          <Box muted overflow="auto" padding={3} radius={2}>
+          <Box muted overflow="auto" padding={3} radius={3}>
             <Code id="focus-and-blur-log" language="json" size={1}>
               {JSON.stringify(log)}
             </Code>
@@ -31,6 +34,6 @@ export default function FocusAndBlurStory(): React.JSX.Element {
           <Button id="focus-and-blur-clear-btn" mode="ghost" text="Clear" onClick={handleClear} />
         </Stack>
       </Stack>
-    </Box>
+    </CardWrapper>
   )
 }

@@ -45,6 +45,11 @@ const scope: WorkshopScope = {
       title: 'Side panel',
       component: lazy(() => import('./SidePanelStory')),
     },
+    {
+      name: 'portal-inheritance',
+      title: 'Portal inheritance',
+      component: lazy(() => import('./portal-inheritance')),
+    },
   ],
 }
 

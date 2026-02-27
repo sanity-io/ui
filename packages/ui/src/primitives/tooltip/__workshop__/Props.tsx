@@ -1,124 +1,105 @@
-import {Button, Card, Flex, Stack, Text, Tooltip, TooltipDelayGroupProvider} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
+import {Button, Card, Stack, Text, Tooltip, TooltipDelayGroupProvider} from '@sanity/ui'
 import {useBoolean, useNumber, useSelect, useText} from '@sanity/ui-workshop'
 
 import {
+  CardWrapper,
   WORKSHOP_PLACEMENT_OPTIONS,
   WORKSHOP_SHADOW_OPTIONS,
   WORKSHOP_SPACE_OPTIONS,
 } from '$workshop'
 
+import {DEFAULT_TOOLTIP_DELAY} from '../constants'
+
 export default function PropsStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', false)
   const content = useText('Content', 'Tooltip content')
-  // @ts-expect-error - TODO: fix this
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 2)
-  // @ts-expect-error - TODO: fix this
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
   const portal = useBoolean('Portal', true)
-  const openDelay = useNumber('Open Delay', 200)
-  const closeDelay = useNumber('Close Delay', 200)
-  // @ts-expect-error - TODO: fix this
+  const openDelay = useNumber('Open Delay', DEFAULT_TOOLTIP_DELAY.open)
+  const closeDelay = useNumber('Close Delay', DEFAULT_TOOLTIP_DELAY.close)
   const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 2)
 
   return (
-    <Card height="fill">
-      <Flex
-        align="center"
-        direction="column"
-        gap={4}
-        height="fill"
-        justify="center"
-        padding={8}
-        sizing="border"
-      >
-        <Stack
-          gap={4}
-          padding={4}
-          style={{outline: `1px solid ${vars.color.border}`, width: '100%', maxWidth: '640px'}}
-        >
-          <Text align="center" size={3}>
-            Standalone tooltip
+    <CardWrapper gap={[5, 6]} pattern="halftone">
+      <Stack gap={4}>
+        <Stack gap={3}>
+          <Text size={1} weight="medium">
+            Single tooltip
           </Text>
-          <Flex align="center" justify="center" padding={4} sizing="border">
+        </Stack>
+
+        <Card display="flex" gap={4} justifyContent="center" padding={4} radius={4} shadow={1}>
+          <Tooltip
+            arrow={arrow}
+            delay={{
+              open: openDelay,
+              close: closeDelay,
+            }}
+            padding={padding}
+            placement={placement}
+            portal={portal}
+            shadow={shadow}
+            text={content}
+          >
+            <Button mode="bleed" text="Hover me" />
+          </Tooltip>
+        </Card>
+      </Stack>
+
+      {/* GROUPED TOOLTIPS */}
+
+      <Stack gap={4}>
+        <Stack gap={3}>
+          <Text size={1} weight="medium">
+            Grouped tooltips
+          </Text>
+          <Text muted size={1}>
+            All tooltip delays are set to 1ms after the first tooltip within a DelayGroupProvider
+            opens.
+          </Text>
+        </Stack>
+
+        <Card display="flex" gap={4} justifyContent="center" padding={4} radius={4} shadow={1}>
+          <TooltipDelayGroupProvider
+            delay={{
+              open: openDelay,
+              close: closeDelay,
+            }}
+          >
             <Tooltip
               arrow={arrow}
               content={<Text size={1}>{content}</Text>}
+              // This is overridden by the group delay, kept here intentionally for testing purposes.
               delay={{
-                open: openDelay,
-                close: closeDelay,
+                open: 100,
+                close: 100,
               }}
-              // @ts-expect-error - TODO: fix this
               padding={padding}
-              // @ts-expect-error - TODO: fix this
               placement={placement}
               portal={portal}
-              // @ts-expect-error - TODO: fix this
               shadow={shadow}
             >
               <Button mode="bleed" text="Hover me" />
             </Tooltip>
-          </Flex>
-        </Stack>
-        <Stack
-          gap={4}
-          padding={4}
-          style={{outline: `1px solid ${vars.color.border}`, width: '100%', maxWidth: '640px'}}
-        >
-          <Text align="center" size={3}>
-            Grouped tooltips
-          </Text>
-          <Text align="center" size={1}>
-            All tooltip delays are set to 1ms after the first tooltip within a DelayGroupProvider
-            opens.
-          </Text>
-          <Flex align="center" gap={4} justify="center" padding={4} sizing="border">
-            <TooltipDelayGroupProvider
+            <Tooltip
+              arrow={arrow}
+              content={<Text size={1}>{content}</Text>}
+              // This is overridden by the group delay, kept here intentionally for testing purposes.
               delay={{
-                open: openDelay,
-                close: closeDelay,
+                open: 100,
+                close: 100,
               }}
+              padding={padding}
+              placement={placement}
+              portal={portal}
+              shadow={shadow}
             >
-              <Tooltip
-                arrow={arrow}
-                // This is overridden by the group delay, kept here intentionally for testing purposes.
-                content={<Text size={1}>{content}</Text>}
-                delay={{
-                  open: 100,
-                  close: 100,
-                }}
-                // @ts-expect-error - TODO: fix this
-                padding={padding}
-                // @ts-expect-error - TODO: fix this
-                placement={placement}
-                portal={portal}
-                // @ts-expect-error - TODO: fix this
-                shadow={shadow}
-              >
-                <Button mode="bleed" text="Hover me" />
-              </Tooltip>
-              <Tooltip
-                arrow={arrow}
-                content={<Text size={1}>{content}</Text>}
-                // This is overridden by the group delay, kept here intentionally for testing purposes.
-                delay={{
-                  open: 100,
-                  close: 100,
-                }}
-                // @ts-expect-error - TODO: fix this
-                padding={padding}
-                // @ts-expect-error - TODO: fix this
-                placement={placement}
-                portal={portal}
-                // @ts-expect-error - TODO: fix this
-                shadow={shadow}
-              >
-                <Button mode="bleed" text="Or me" />
-              </Tooltip>
-            </TooltipDelayGroupProvider>
-          </Flex>
-        </Stack>
-      </Flex>
-    </Card>
+              <Button mode="bleed" text="Or me" />
+            </Tooltip>
+          </TooltipDelayGroupProvider>
+        </Card>
+      </Stack>
+    </CardWrapper>
   )
 }
