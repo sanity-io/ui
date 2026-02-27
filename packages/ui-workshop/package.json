@@ -109,7 +109,6 @@
     "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^10.4.4",
     "@sanity/tsconfig": "^2.1.0",
-    "@sanity/ui": "^3.1.11",
     "@types/cpx": "^1.5.6",
     "@types/express": "^5.0.6",
     "@types/lodash": "^4.17.24",
