@@ -5,8 +5,9 @@ on:
   push:
     branches:
       - v2
-      - main
+      - main # v3
       - v4
+      - v4-beta
 
 permissions:
   contents: read # for checkout
