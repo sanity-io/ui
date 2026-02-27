@@ -39,7 +39,7 @@ export function TabList<E extends TabListElementType = typeof DEFAULT_TAB_LIST_E
     as = DEFAULT_TAB_LIST_ELEMENT,
     children: childrenProp,
     gap = 1,
-    wrap = 'nowrap',
+    wrap = 'wrap',
     ...rest
   } = props as TabListProps<typeof DEFAULT_TAB_LIST_ELEMENT>
 

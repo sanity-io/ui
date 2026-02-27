@@ -1,25 +1,18 @@
 import {selectable, SELECTABLE_STYLE_PROP_KEYS, type SelectableStyleProps} from '@sanity/ui/css'
-import type {ElementTone} from '@sanity/ui/theme'
 
 import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
-import {type BoxOwnProps} from '../box/Box'
 
 /** @internal */
 export const DEFAULT_SELECTABLE_ELEMENT = 'button'
 
 /** @internal */
-export type SelectableOwnProps = BoxOwnProps &
-  SelectableStyleProps & {
-    disabled?: boolean
-    href?: string
-    selected?: boolean
-    tone?: ElementTone
-    type?: 'button'
-  }
+export interface SelectableOwnProps extends SelectableStyleProps {
+  selected?: boolean
+}
 
 /** @internal */
-export type SelectableElementType = 'button' | 'a' | ComponentType
+export type SelectableElementType = 'a' | 'button' | 'span' | ComponentType
 
 /** @internal */
 export type SelectableProps<E extends SelectableElementType = SelectableElementType> = Props<
@@ -49,7 +42,7 @@ export function Selectable<E extends SelectableElementType = typeof DEFAULT_SELE
       data-ui="Selectable"
       {...domProps}
       className={selectable(styleProps)}
-      data-selected={selected ? '' : props['data-selected']}
+      data-pressed={selected ? '' : props['data-pressed']}
     />
   )
 }

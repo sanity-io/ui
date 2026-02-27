@@ -24,7 +24,7 @@ export const DEFAULT_BREADCRUMBS_ELEMENT = 'nav'
 
 /** @beta */
 export type BreadcrumbsOwnProps = GapStyleProps & {
-  expandButton?: Omit<ButtonProps<'button'>, 'as' | 'onClick' | 'selected'>
+  expandButton?: Omit<ButtonProps, 'as' | 'onClick' | 'selected'>
   maxLength?: number
   separator?: ReactNode
 }
@@ -78,15 +78,17 @@ export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BR
   })
 
   return (
-    <Flex as={as} data-ui="Breadcrumbs" {...rest} gap={gap} gapX={gapX} gapY={gapY}>
+    <Flex as={as} data-ui="Breadcrumbs" {...rest} gap={gap} gapX={gapX} gapY={gapY} wrap="wrap">
       {items.map((item, itemIndex) => (
         <Fragment key={itemIndex}>
           {itemIndex > 0 && (
-            <Box aria-hidden as="li">
+            <Box aria-hidden as="li" flex="none">
               {separator || <Text muted>/</Text>}
             </Box>
           )}
-          <Box as="li">{item}</Box>
+          <Box as="li" flex="none">
+            {item}
+          </Box>
         </Fragment>
       ))}
     </Flex>

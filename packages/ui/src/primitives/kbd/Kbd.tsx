@@ -1,19 +1,13 @@
-import {kbd, type RadiusStyleProps, type ResponsiveProp} from '@sanity/ui/css'
-import type {FontTextSize} from '@sanity/ui/theme'
-import {KBD_STYLE_PROP_KEYS} from '@sanity/ui-css'
+import {kbd, KBD_STYLE_PROP_KEYS, type KBDStyleProps} from '@sanity/ui/css'
 
 import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
-import {type BoxOwnProps} from '../box/Box'
 
 /** @public */
 export const DEFAULT_KBD_ELEMENT = 'kbd'
 
 /** @public */
-export type KBDOwnProps = BoxOwnProps &
-  RadiusStyleProps & {
-    fontSize?: ResponsiveProp<FontTextSize>
-  }
+export type KBDOwnProps = KBDStyleProps
 
 /** @public */
 export type KBDElementType = 'kbd' | ComponentType
