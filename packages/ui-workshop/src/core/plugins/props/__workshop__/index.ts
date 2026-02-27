@@ -2,8 +2,8 @@ import {defineScope} from '@sanity/ui-workshop'
 import {lazy} from 'react'
 
 export default defineScope({
-  name: 'test',
-  title: 'Test',
+  name: 'props',
+  title: 'Props',
   stories: [
     {
       name: 'test',
