@@ -19,8 +19,8 @@
     "test": "turbo test -- --run",
     "test:e2e": "turbo test:e2e",
     "typecheck": "turbo typecheck",
-    "workshop:build": "turbo workshop:build --filter=./packages/ui",
-    "workshop:preview": "turbo workshop:preview --filter=./packages/ui"
+    "workshop:build": "(cd packages/ui && pnpm workshop:build) && cpx 'packages/ui/.workshop/dist/**' dist/",
+    "workshop:preview": "cd packages/ui && pnpm workshop:preview"
   },
   "commitlint": {
     "extends": [
@@ -41,6 +41,7 @@
     "@sanity/prettier-config": "^3.0.0",
     "@sanity/tsconfig": "^2.1.0",
     "commitizen": "^4.3.1",
+    "cpx": "^1.5.0",
     "husky": "^9.1.7",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",
