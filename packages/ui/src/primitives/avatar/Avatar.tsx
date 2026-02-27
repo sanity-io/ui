@@ -61,7 +61,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
     ...rest
   } = props as AvatarProps<typeof DEFAULT_AVATAR_ELEMENT>
 
-  const size = useMemo(() => _getResponsiveProp(sizeProp), [sizeProp])
+  const size = _getResponsiveProp(sizeProp)
 
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
     animateArrowFrom || arrowPositionProp || 'inside',
@@ -93,7 +93,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
 
   const initialsSize = useMemo(
     () =>
-      Object.values(size).map((s) => {
+      size.map((s) => {
         if (s === 1) return 1 satisfies FontLabelSize
         if (s === 2) return 3 satisfies FontLabelSize
         if (s === 3) return 5 satisfies FontLabelSize

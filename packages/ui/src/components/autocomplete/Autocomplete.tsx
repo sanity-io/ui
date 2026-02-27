@@ -433,21 +433,19 @@ export function Autocomplete<
   })()
 
   const openButtonBoxPadding = (() => {
-    const result = Object.fromEntries(
-      Object.entries(padding).map(([key, value]) => {
-        if (value === 0) return [key, 0]
-        if (value === 1) return [key, 1]
-        if (value === 2) return [key, 1]
+    const result = padding.map((value) => {
+      if (value === 0) return 0
+      if (value === 1) return 1
+      if (value === 2) return 1
 
-        return [key, (value as Space) - 2]
-      }),
-    ) as ResponsiveProp<Space>
+      return (value as Space) - 2
+    }) as ResponsiveProp<Space>
 
     return result
   })()
 
-  const openButtonPadding = Object.values(padding).map((v) =>
-    Math.max((v as Space) - 1, 0),
+  const openButtonPadding = padding.map((v) =>
+    v === undefined ? undefined : (Math.max(v - 1, 0) as Space),
   ) as ResponsiveProp<Space>
 
   const openButtonProps: AutocompleteOpenButtonProps =

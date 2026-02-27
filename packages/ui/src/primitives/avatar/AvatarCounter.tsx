@@ -38,7 +38,7 @@ export function AvatarCounter<
 
   const labelSize = useMemo(
     () =>
-      Object.values(size).map((s) => {
+      size.map((s) => {
         if (s === 1) return 1 satisfies FontLabelSize
         if (s === 2) return 3 satisfies FontLabelSize
         if (s === 3) return 5 satisfies FontLabelSize
