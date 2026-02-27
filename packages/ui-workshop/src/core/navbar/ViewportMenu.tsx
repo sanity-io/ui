@@ -1,6 +1,7 @@
 import {SelectIcon} from '@sanity/icons'
-import {Button, Menu, MenuButton, MenuItem, type MenuButtonProps} from '@sanity/ui'
+import {Button, Menu, MenuButton, type MenuButtonProps,MenuItem} from '@sanity/ui'
 import {memo, useCallback} from 'react'
+
 import {VIEWPORT_OPTIONS} from '../constants'
 import {startViewTransition} from '../lib/startViewTransition'
 import {useWorkshop} from '../useWorkshop'
@@ -49,12 +50,12 @@ const ViewportMenuView = memo(function ViewportMenuView(props: {
         <Menu>
           {VIEWPORT_OPTIONS.map((option) => (
             <MenuItem
-              fontSize={1}
               key={option.name}
-              onClick={() => setViewport(option.name)}
+              fontSize={1}
               padding={2}
               selected={option.name === viewport}
               text={option.title}
+              onClick={() => setViewport(option.name)}
             />
           ))}
         </Menu>

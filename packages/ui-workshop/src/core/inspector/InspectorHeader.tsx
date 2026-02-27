@@ -1,6 +1,8 @@
 import {Card, Layer, Tab, TabList} from '@sanity/ui'
-import {inspectorHeader, inspectorHeaderCard} from '#styles'
 import {memo, useCallback} from 'react'
+
+import {inspectorHeader, inspectorHeaderCard} from '#styles'
+
 import type {InspectorTab} from './types'
 
 export const InspectorHeader = memo(function InspectorHeader(props: {
@@ -17,9 +19,9 @@ export const InspectorHeader = memo(function InspectorHeader(props: {
           {tabs.map((tab) => (
             <InspectorTabView
               key={tab.id}
-              onTabChange={onTabChange}
               selected={tab.id === currentTabId}
               tab={tab}
+              onTabChange={onTabChange}
             />
           ))}
         </TabList>
@@ -45,9 +47,9 @@ function InspectorTabView(props: {
       fontSize={[2, 2, 1]}
       id={tab.id}
       label={tab.label}
-      onClick={handleClick}
       selected={selected}
       tone={tab.tone}
+      onClick={handleClick}
     />
   )
 }

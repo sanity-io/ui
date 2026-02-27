@@ -1,4 +1,5 @@
 import type {WorkshopMsg} from '@sanity/ui-workshop'
+
 import type {PerfMsg} from './msg'
 import type {PerfState} from './types'
 

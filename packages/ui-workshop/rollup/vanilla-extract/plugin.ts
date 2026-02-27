@@ -1,15 +1,17 @@
 import {posix} from 'node:path'
+
 import {
   compile,
+  type CompileOptions,
   cssFileFilter,
   getSourceFromVirtualCssFile,
+  type IdentifierOption,
   processVanillaFile,
   transform,
   virtualCssFileFilter,
-  type CompileOptions,
-  type IdentifierOption,
 } from '@vanilla-extract/integration'
 import type {Plugin} from 'rollup'
+
 import {generateCssBundle, stripSideEffectImportsMatching, tryGetPackageName} from './lib'
 
 const {relative, normalize, dirname} = posix

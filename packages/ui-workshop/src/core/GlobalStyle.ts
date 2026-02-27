@@ -1,7 +1,8 @@
 import {useRootTheme} from '@sanity/ui'
 import {setElementVars} from '@vanilla-extract/dynamic'
-import {bodyBackgroundColor} from '#styles'
 import {useInsertionEffect} from 'react'
+
+import {bodyBackgroundColor} from '#styles'
 
 export function GlobalStyle(): null {
   const {scheme, theme} = useRootTheme()

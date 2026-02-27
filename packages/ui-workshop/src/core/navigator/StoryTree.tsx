@@ -1,5 +1,6 @@
 import {Tree, TreeItem} from '@sanity/ui'
-import {memo, useCallback, useMemo, type MouseEvent} from 'react'
+import {memo, type MouseEvent,useCallback, useMemo} from 'react'
+
 import type {WorkshopStory} from '../config/types'
 import {useWorkshop} from '../useWorkshop'
 import type {MenuList, MenuScope, MenuStory} from './types'
@@ -51,8 +52,8 @@ const MenuItems = memo(function MenuItems(props: {
 
             return (
               <MemoList
-                expanded={workshopPath.startsWith(path + '/')}
                 key={item.name || itemIndex}
+                expanded={workshopPath.startsWith(path + '/')}
                 item={item}
                 path={path}
               />
@@ -62,14 +63,14 @@ const MenuItems = memo(function MenuItems(props: {
           if (item.type === 'story') {
             return (
               <TreeItem
+                key={item.name}
                 data-path={`/${item.name || ''}`}
                 fontSize={[2, 2, 1]}
                 href={`/${item.name || ''}`}
-                key={item.name}
-                onClick={handleStoryClick}
                 padding={2}
                 selected={currentStory?.component === item.component}
                 text={item.title}
+                onClick={handleStoryClick}
               />
             )
           }
@@ -77,10 +78,10 @@ const MenuItems = memo(function MenuItems(props: {
           if (item.type === 'scope') {
             return (
               <MemoScope
+                key={item.name}
                 currentStory={currentStory}
                 expanded={item.scope === currentScope}
                 item={item}
-                key={item.name}
                 onStoryClick={handleStoryClick}
               />
             )
@@ -123,14 +124,14 @@ const MemoScope = memo(function MemoScope(props: {
     () =>
       item.scope.stories.map((story) => (
         <TreeItem
+          key={story.name}
           data-path={`/${item.scope.name}/${story.name}`}
           fontSize={[2, 2, 1]}
           href={`/${item.scope.name}/${story.name}`}
-          key={story.name}
-          onClick={onStoryClick}
           padding={2}
           selected={currentStory === story}
           text={story.title}
+          onClick={onStoryClick}
         />
       )),
     [currentStory, item, onStoryClick],

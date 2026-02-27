@@ -1,4 +1,5 @@
 import {useContext} from 'react'
+
 import {PerfContext, type PerfContextValue} from '../PerfContext'
 
 /** @internal */

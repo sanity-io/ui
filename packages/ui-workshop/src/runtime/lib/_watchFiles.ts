@@ -1,5 +1,6 @@
-import path from 'path'
 import {watch} from 'chokidar'
+import path from 'path'
+
 import type {_Observable} from './_observable'
 
 export interface _FileEvent {

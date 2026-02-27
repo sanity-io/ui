@@ -2,10 +2,11 @@ import {
   BoundaryElementProvider,
   Card,
   PortalProvider,
-  ToastProvider,
   type ThemeColorSchemeKey,
+  ToastProvider,
 } from '@sanity/ui'
 import {memo, useCallback, useEffect, useMemo, useState} from 'react'
+
 import type {WorkshopConfig} from '../config/types'
 import {createPubsub} from '../lib/pubsub'
 import {qs} from '../lib/qs'
@@ -80,8 +81,8 @@ export const WorkshopFrame = memo(function WorkshopFrame(
         <PortalProvider element={portalElement}>
           <WorkshopProvider
             broadcast={broadcast}
-            config={config}
             channel={channel}
+            config={config}
             frameReady={frameReady}
             origin="frame"
             path={path}
@@ -90,9 +91,9 @@ export const WorkshopFrame = memo(function WorkshopFrame(
             viewport={viewport}
             zoom={zoom}
           >
-            <Card height="fill" ref={setBoundaryElement}>
+            <Card ref={setBoundaryElement} height="fill">
               <WorkshopCanvas />
-              <div data-portal="" ref={setPortalElement} />
+              <div ref={setPortalElement} data-portal="" />
             </Card>
           </WorkshopProvider>
         </PortalProvider>

@@ -1,4 +1,5 @@
 import {basename} from 'node:path'
+
 import browserslist from 'browserslist'
 import {browserslistToTargets, transform} from 'lightningcss'
 import type {OutputAsset, Plugin} from 'rollup'

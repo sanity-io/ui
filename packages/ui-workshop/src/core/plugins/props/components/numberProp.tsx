@@ -1,5 +1,6 @@
 import {Box, Text, TextInput} from '@sanity/ui'
 import {memo} from 'react'
+
 import type {NumberPropSchema} from '../types'
 import {useProps} from '../useProps'
 
@@ -19,9 +20,9 @@ export const NumberProp = memo(function NumberProp(props: {
       <Box marginTop={2}>
         <TextInput
           fontSize={[2, 2, 1]}
-          onChange={(event) => setPropValue(schema.name, Number(event.currentTarget.value))}
           padding={2}
           value={value}
+          onChange={(event) => setPropValue(schema.name, Number(event.currentTarget.value))}
         />
       </Box>
     </Box>

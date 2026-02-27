@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Text} from '@sanity/ui'
+
 import type {PropSchema} from '../types'
 import {BooleanProp} from './booleanProp'
 import {NumberProp} from './numberProp'
