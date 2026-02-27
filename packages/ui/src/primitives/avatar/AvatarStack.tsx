@@ -41,7 +41,7 @@ export function AvatarStack<E extends AvatarStackElementType = typeof DEFAULT_AV
     children: childrenProp,
     className,
     maxLength: maxLengthProp = 4,
-    size: sizeProp = 1,
+    size = 1,
     ...rest
   } = props as AvatarStackProps<typeof DEFAULT_AVATAR_STACK_ELEMENT>
 

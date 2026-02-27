@@ -23,7 +23,7 @@ export const DEFAULT_BREADCRUMBS_ELEMENT = 'nav'
 
 /** @beta */
 export type BreadcrumbsOwnProps = GapStyleProps & {
-  expandButton?: Omit<ButtonProps<'button'>, 'as' | 'onClick' | 'selected'>
+  expandButton?: Omit<ButtonProps, 'as' | 'onClick' | 'selected'>
   maxLength?: number
   popover?: PopoverProps
   separator?: ReactNode

@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "FEATURE_DIST=on react-router build",
+    "build": "react-router build",
     "dev": "react-router dev",
     "dist:dev": "FEATURE_DIST=on vite",
     "lint": "eslint .",

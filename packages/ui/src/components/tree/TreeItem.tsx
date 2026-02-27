@@ -43,7 +43,9 @@ export type TreeItemOwnProps = SelectableOwnProps & {
   linkAs?: SelectableElementType
   onClick?: MouseEventHandler<HTMLAnchorElement | HTMLLIElement>
   padding?: ResponsiveProp<Space>
-  space?: ResponsiveProp<Space>
+  gap?: ResponsiveProp<Space>
+  /** @deprecated Use `gap` instead */
+  space?: never
   text?: ReactNode
   weight?: FontWeight
 }
@@ -69,6 +71,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
     className,
     expanded: expandedProp = false,
     fontSize = 1,
+    gap: gapProp,
     href,
     icon: IconComponent,
     id: idProp,
@@ -78,7 +81,6 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
     padding = 2,
     radius = 3,
     selected = false,
-    space = 2,
     text,
     weight,
     ...rest
@@ -105,6 +107,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement> | MouseEvent<HTMLLIElement>) => {
+      // (event: MouseEvent<HTMLLIElement>) => {
       if (onClick) onClick(event)
 
       const target = event.target
@@ -140,35 +143,36 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
   }, [expanded, itemKey, registerItem, rootElement, selected])
 
   const content = (
-    <Flex gap={space} padding={padding}>
-      <Box
+    <Box display="flex" gap={gap} padding={padding}>
+      <Text
+        flex="none"
+        muted={muted}
+        size={fontSize}
         style={{
           visibility: IconComponent || children ? 'visible' : 'hidden',
           pointerEvents: 'none',
         }}
+        weight={weight}
       >
-        {IconComponent && (
-          <Text muted={muted} size={fontSize} weight={weight}>
-            <IconComponent />
-          </Text>
+        {IconComponent ? (
+          <IconComponent />
+        ) : (
+          <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
         )}
-        {!IconComponent && (
-          <Text muted={muted} size={fontSize} weight={weight}>
-            <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
-          </Text>
-        )}
-      </Box>
-      <Box flex={1}>
-        <Text muted={muted} size={fontSize} textOverflow="ellipsis" weight={weight}>
-          {text}
-        </Text>
-      </Box>
-    </Flex>
+      </Text>
+
+      <Text flex={1} muted={muted} size={fontSize} textOverflow="ellipsis" weight={weight}>
+        {text}
+      </Text>
+    </Box>
   )
 
   if (href) {
     return (
       <Box
+        // ref={setRootElement}
+        // as="li"
+        // className={tree_item({className})}
         data-selected={selected ? '' : undefined}
         data-tree-id={id}
         data-tree-key={itemKey}
@@ -184,8 +188,8 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
           ref={treeitemRef}
           aria-expanded={expanded}
           as={linkAs}
-          // data-pressed={selected ? '' : undefined}
           data-ui="TreeItem__box"
+          // {...rest}
           href={href}
           radius={radius}
           role="treeitem"
@@ -221,10 +225,9 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
       onKeyDown={handleKeyDown}
     >
       <Selectable
-        as="button"
-        // data-pressed={selected ? '' : undefined}
         data-focused={focused ? '' : undefined}
         data-ui="TreeItem__box"
+        // {...rest}
         radius={radius}
         selected={selected}
         style={{

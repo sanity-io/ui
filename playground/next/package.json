@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "FEATURE_DIST=on next build",
+    "build": "next build",
     "dev": "next dev",
     "dev:dist": "FEATURE_DIST=on next dev",
     "lint": "eslint .",

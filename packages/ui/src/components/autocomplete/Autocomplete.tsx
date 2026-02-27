@@ -96,8 +96,8 @@ export type AutocompleteElementType = 'input' | ComponentType
 /** @public */
 export type AutocompleteProps<
   E extends AutocompleteElementType = AutocompleteElementType,
-  O extends BaseAutocompleteOption = BaseAutocompleteOption,
-> = Props<AutocompleteOwnProps<O>, E>
+  Option extends BaseAutocompleteOption = BaseAutocompleteOption,
+> = Props<AutocompleteOwnProps<Option>, E>
 
 const DEFAULT_RENDER_VALUE = (value: string, option?: BaseAutocompleteOption) =>
   option ? option.value : value
@@ -113,8 +113,8 @@ const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
  */
 export function Autocomplete<
   E extends AutocompleteElementType = typeof DEFAULT_AUTOCOMPLETE_ELEMENT,
-  O extends BaseAutocompleteOption = BaseAutocompleteOption,
->(props: AutocompleteProps<E, O>): React.JSX.Element {
+  Option extends BaseAutocompleteOption = BaseAutocompleteOption,
+>(props: AutocompleteProps<E, Option>): React.JSX.Element {
   const {
     as = DEFAULT_AUTOCOMPLETE_ELEMENT,
     border,
@@ -148,7 +148,7 @@ export function Autocomplete<
     suffix,
     value: valueProp,
     ...rest
-  } = props as AutocompleteProps<typeof DEFAULT_AUTOCOMPLETE_ELEMENT, O>
+  } = props as AutocompleteProps<typeof DEFAULT_AUTOCOMPLETE_ELEMENT, Option>
 
   const radius = _getResponsiveProp(radiusProp)
 

@@ -166,7 +166,7 @@ export function Popover(props: PopoverProps): React.JSX.Element {
     referenceElement,
     shadow = 3,
     width: widthProp = 'auto',
-    zOffset: zOffsetProp = Z_OFFSETS.popover,
+    zOffset = Z_OFFSETS.popover,
     updateRef,
     ...rest
   } = props
@@ -177,7 +177,6 @@ export function Popover(props: PopoverProps): React.JSX.Element {
 
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
-  const zOffset = useMemo(() => _getResponsiveProp(zOffsetProp), [zOffsetProp])
   const ref = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
 

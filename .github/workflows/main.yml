@@ -5,8 +5,9 @@ on:
   push:
     branches:
       - v2
-      - main
+      - main # v3
       - v4
+      - v4-beta
 
 permissions:
   contents: read # for checkout
@@ -35,7 +36,7 @@ jobs:
         with:
           node-version: lts/*
       - run: pnpm install
-      - run: pnpm lint -f gha --max-warnings 0
+      - run: pnpm lint -- -f gha --max-warnings 0
 
   test:
     needs: [build]

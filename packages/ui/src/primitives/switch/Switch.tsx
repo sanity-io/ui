@@ -66,9 +66,9 @@ export function Switch<E extends SwitchElementType = typeof DEFAULT_SWITCH_ELEME
         disabled={disabled || readOnly}
         type="checkbox"
       />
-      <span aria-hidden className={_switchPresentation()}>
-        <span className={_switchTrack()} />
-        <span className={_switchThumb()} />
+      <span aria-hidden className={_switch_presentation()}>
+        <span className={_switch_track()} />
+        <span className={_switch_thumb()} />
       </span>
     </span>
   )

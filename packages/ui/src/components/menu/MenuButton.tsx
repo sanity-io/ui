@@ -193,7 +193,7 @@ export function MenuButton(props: MenuButtonProps): React.JSX.Element {
   const button = useMemo(() => {
     if (!buttonProp) return null
 
-    const buttonProps: ButtonProps<'button'> = {
+    const buttonProps: ButtonProps = {
       'data-ui': 'MenuButton',
       id,
       'onClick': handleButtonClick,

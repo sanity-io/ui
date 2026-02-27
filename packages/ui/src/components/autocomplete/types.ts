@@ -1,7 +1,7 @@
 import type {ButtonProps} from '@sanity/ui/primitives/button'
 
 /** @public */
-export type AutocompleteOpenButtonProps = Omit<ButtonProps<'button'>, 'as'>
+export type AutocompleteOpenButtonProps = Omit<ButtonProps, 'as'>
 
 /** @public */
 export interface BaseAutocompleteOption {
