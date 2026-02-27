@@ -74,7 +74,7 @@ const ErrorScreen = memo(function ErrorScreen(props: {
 
   return (
     <Box padding={4}>
-      <Stack space={4}>
+      <Stack gap={4}>
         <Heading as="h1" size={[1, 1, 2]}>
           {error.message}
         </Heading>

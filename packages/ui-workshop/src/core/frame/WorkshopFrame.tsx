@@ -1,10 +1,5 @@
-import {
-  BoundaryElementProvider,
-  Card,
-  PortalProvider,
-  type ThemeColorSchemeKey,
-  ToastProvider,
-} from '@sanity/ui'
+import {BoundaryElementProvider, Card, PortalProvider, ToastProvider} from '@sanity/ui'
+import type {ColorScheme} from '@sanity/ui/tokens'
 import {memo, useCallback, useEffect, useMemo, useState} from 'react'
 
 import type {WorkshopConfig} from '../config/types'
@@ -20,7 +15,7 @@ import {createMainController} from './WorkshopMainController'
 /** @internal */
 export interface WorkshopFrameProps {
   config: WorkshopConfig
-  setScheme: (nextScheme: ThemeColorSchemeKey) => void
+  setScheme: (nextScheme: ColorScheme) => void
 }
 
 function getStateFromLocation(): WorkshopState {
@@ -31,7 +26,7 @@ function getStateFromLocation(): WorkshopState {
     frameReady: false,
     path,
     payload,
-    scheme: typeof scheme === 'string' ? (scheme as ThemeColorSchemeKey) : 'light',
+    scheme: typeof scheme === 'string' ? (scheme as ColorScheme) : 'light',
     viewport: typeof viewport === 'string' ? viewport : 'auto',
     zoom: typeof zoom === 'string' ? Number(zoom) : 1,
   }

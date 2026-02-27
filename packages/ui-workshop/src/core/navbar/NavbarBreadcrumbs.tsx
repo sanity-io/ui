@@ -35,12 +35,12 @@ const NavbarBreadcrumbsView = memo(function NavbarBreadcrumbsView(props: {
 
   return (
     <Breadcrumbs
+      gap={2}
       separator={
         <Text muted size={[2, 2, 1]}>
           /
         </Text>
       }
-      space={2}
     >
       <Text size={[2, 2, 1]} weight="bold">
         <a href="/" style={{color: 'inherit'}} onClick={onHomeClick}>

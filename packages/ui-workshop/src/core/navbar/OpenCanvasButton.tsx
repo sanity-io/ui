@@ -22,6 +22,7 @@ export const OpenCanvasButton = memo(function OpenCanvasButton() {
       as={canvasUrl ? 'a' : 'button'}
       disabled={!canvasUrl}
       fontSize={1}
+      // @ts-expect-error - TODO: fix this
       href={canvasUrl}
       iconRight={LaunchIcon}
       mode="ghost"

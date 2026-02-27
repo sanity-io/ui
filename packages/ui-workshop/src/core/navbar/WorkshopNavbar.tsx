@@ -59,7 +59,7 @@ export const WorkshopNavbar = memo(function WorkshopNavbar(props: {
         </Box>
 
         <Box display={['none', 'none', 'block']} flex="none">
-          <Inline space={1}>
+          <Inline gap={1}>
             <OpenCanvasButton />
             <ViewportMenu />
             <ZoomMenu />

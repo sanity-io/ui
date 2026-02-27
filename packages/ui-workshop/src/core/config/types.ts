@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type {RootTheme} from '@sanity/ui'
 
 /** @public */
 export interface WorkshopCollection {
@@ -31,7 +30,6 @@ export interface WorkshopConfig {
   frameUrl?: string
   plugins?: WorkshopPlugin<any>[]
   scopes: WorkshopScope[]
-  theme?: RootTheme
   title?: string
 }
 

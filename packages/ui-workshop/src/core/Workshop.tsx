@@ -2,10 +2,10 @@ import {
   BoundaryElementProvider,
   Flex,
   PortalProvider,
-  type ThemeColorSchemeKey,
   ToastProvider,
   useMediaIndex,
 } from '@sanity/ui'
+import type {ColorScheme} from '@sanity/ui/tokens'
 import {debounce, isEqual} from 'lodash'
 import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
@@ -28,13 +28,13 @@ import {workshopReducer} from './workshopReducer'
 export interface WorkshopProps {
   config: WorkshopConfig
   locationStore: WorkshopLocationStore
-  onSchemeChange: (nextScheme: ThemeColorSchemeKey) => void
-  scheme?: ThemeColorSchemeKey
+  onSchemeChange: (nextScheme: ColorScheme) => void
+  scheme?: ColorScheme
 }
 
 function getStateFromLocation(
   loc: Omit<WorkshopLocation, 'type'>,
-  schemeProp?: ThemeColorSchemeKey,
+  schemeProp?: ColorScheme,
   frameReady?: boolean,
 ): WorkshopState {
   const path = loc.path
@@ -45,7 +45,7 @@ function getStateFromLocation(
     frameReady: frameReady || false,
     path,
     payload,
-    scheme: schemeProp || (typeof scheme === 'string' ? (scheme as ThemeColorSchemeKey) : 'light'),
+    scheme: schemeProp || (typeof scheme === 'string' ? (scheme as ColorScheme) : 'light'),
     viewport: typeof viewport === 'string' ? viewport : 'auto',
     zoom: typeof zoom === 'number' ? zoom : 1,
   }
