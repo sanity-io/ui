@@ -16,12 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sanity-io/ui.git"
+    "url": "git+https://github.com/sanity-io/ui.git",
+    "directory": "packages/ui"
   },
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "sideEffects": [
-    "**/*.css"
+    "*.css"
   ],
   "type": "module",
   "exports": {
