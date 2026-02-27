@@ -1,10 +1,12 @@
 import {
   label,
+  LABEL_STYLE_PROP_KEYS,
   type LabelStyleProps,
   textOverflow,
   type TextOverflowStyleProps,
 } from '@sanity/ui/css'
 
+import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
 
 /** @public */
@@ -39,53 +41,21 @@ export type LabelProps<E extends LabelElementType = LabelElementType> = Props<La
 export function Label<E extends LabelElementType = typeof DEFAULT_LABEL_ELEMENT>(
   props: LabelProps<E>,
 ): React.JSX.Element {
-  const {
-    align,
-    as: Element = DEFAULT_LABEL_ELEMENT,
-    children,
-    className,
-    margin,
-    marginX,
-    marginY,
-    marginTop,
-    marginRight,
-    marginBottom,
-    marginLeft,
-    maxWidth,
-    muted = false,
-    size = 1,
-    textOverflow: textOverflowProp,
-    weight = 'regular',
-    ...rest
-  } = props
+  const [
+    // split style props
+    styleProps,
+    {
+      as: Element = DEFAULT_LABEL_ELEMENT,
+      children,
+      textOverflow: textOverflowProp,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as LabelProps<typeof DEFAULT_LABEL_ELEMENT>, LABEL_STYLE_PROP_KEYS)
 
   return (
-    <Element
-      data-ui="Label"
-      {...rest}
-      className={label({
-        className,
-        align,
-        margin,
-        marginX,
-        marginY,
-        marginTop,
-        marginRight,
-        marginBottom,
-        marginLeft,
-        maxWidth,
-        muted,
-        size,
-        weight,
-      })}
-    >
-      <span
-        className={textOverflow({
-          textOverflow: textOverflowProp,
-        })}
-      >
-        {children}
-      </span>
+    <Element data-ui="Label" {...domProps} className={label(styleProps)}>
+      <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
     </Element>
   )
 }

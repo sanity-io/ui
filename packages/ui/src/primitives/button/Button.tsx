@@ -1,50 +1,38 @@
 import {
-  type BoxStyleProps,
   button,
   button_loadingBox,
+  BUTTON_STYLE_PROP_KEYS,
   type ButtonStyleProps,
-  type DisplayStyleProps,
-  type GapStyleProps,
-  type PaddingStyleProps,
   type ResponsiveProp,
-  type Width,
 } from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
 import {isValidElement} from 'react'
 import {isValidElementType} from 'react-is'
 
+import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/Box'
 import {Spinner} from '../spinner/Spinner'
 import {Text, type TextOwnProps} from '../text/Text'
-import type {ButtonTextAlign} from './types'
 
 /** @public */
 export const DEFAULT_BUTTON_ELEMENT = 'button'
 
 /** @public */
-export type ButtonOwnProps = ButtonStyleProps &
-  DisplayStyleProps &
-  GapStyleProps &
-  PaddingStyleProps & {
-    'align'?: BoxStyleProps['alignItems']
-    'data-ui'?: string
-    'disabled'?: boolean
-    'fontSize'?: ResponsiveProp<FontTextSize>
-    'icon'?: React.ElementType | React.ReactNode
-    'iconRight'?: React.ElementType | React.ReactNode
-    'justify'?: BoxStyleProps['justifyContent']
-    /** @beta Do not use in production, as this might change.*/
-    'loading'?: boolean
-    'selected'?: boolean
-    'textAlign'?: ButtonTextAlign
-    'muted'?: boolean
-    'target'?: string
-    'text'?: React.ReactNode
-    'textOverflow'?: TextOwnProps['textOverflow']
-    'textWeight'?: TextOwnProps['weight']
-    'width'?: ResponsiveProp<Width>
-  }
+export interface ButtonOwnProps extends ButtonStyleProps {
+  'data-ui'?: string
+  'fontSize'?: ResponsiveProp<FontTextSize>
+  'icon'?: React.ElementType | React.ReactNode
+  'iconRight'?: React.ElementType | React.ReactNode
+  /** @beta Do not use in production, as this might change.*/
+  'loading'?: boolean
+  'muted'?: boolean
+  'selected'?: boolean
+  'textAlign'?: TextOwnProps['align']
+  'text'?: React.ReactNode
+  'textOverflow'?: TextOwnProps['textOverflow']
+  'textWeight'?: TextOwnProps['weight']
+}
 
 /** @public */
 export type ButtonElementType = 'a' | 'button' | 'label' | ComponentType
@@ -56,59 +44,46 @@ export type ButtonProps<E extends ButtonElementType = ButtonElementType> = Props
 export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEMENT>(
   props: ButtonProps<E>,
 ): React.JSX.Element {
-  const {
-    align = 'center',
-    as: Element = DEFAULT_BUTTON_ELEMENT,
-    children,
-    className,
-    disabled,
-    flex,
-    fontSize = 1,
-    gap: _gap,
-    gapX,
-    gapY,
-    icon: IconComponent,
-    iconRight: IconRightComponent,
-    justify = 'center',
-    loading,
-    mode = 'default',
-    muted = false,
-    padding = 3,
-    paddingX,
-    paddingY,
-    paddingTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    radius = 2,
-    selected,
-    text,
-    textAlign,
-    textOverflow = 'ellipsis',
-    textWeight = 'medium',
-    tone = 'default',
-    type = 'button',
-    width,
-    ...rest
-  } = props as ButtonProps<typeof DEFAULT_BUTTON_ELEMENT>
-  const gap = _gap ?? props.padding ?? 3
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_BUTTON_ELEMENT,
+      children,
+      disabled,
+      fontSize = 1,
+      icon: IconComponent,
+      iconRight: IconRightComponent,
+      loading,
+      muted,
+      selected,
+      text,
+      textAlign,
+      textOverflow = 'ellipsis',
+      textWeight = 'medium',
+      type = 'button',
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as ButtonProps<typeof DEFAULT_BUTTON_ELEMENT>, BUTTON_STYLE_PROP_KEYS)
 
   let href: string | undefined = undefined
 
-  if ('href' in rest) {
-    href = typeof rest.href === 'string' ? rest.href : href
-    delete rest.href
+  if ('href' in domProps) {
+    href = typeof domProps.href === 'string' ? domProps.href : href
+    delete domProps.href
   }
 
   return (
     <Element
       data-ui="Button"
-      {...rest}
-      className={button({className, flex, mode, radius, tone, width})}
+      {...domProps}
+      className={button(styleProps)}
       data-disabled={loading || disabled ? '' : props['data-disabled']}
       data-selected={selected ? '' : props['data-selected']}
       disabled={Boolean(loading || disabled)}
-      // @ts-expect-error - TODO: fix this
+      // WORKAROUND: Since `a` elements don't support the `disabled` prop,
+      // we need to remove the `href` prop from the DOM props when the button is disabled.
+      // @ts-expect-error - the default element is a `button` and does not have the `href` prop
       href={disabled ? undefined : href}
       type={type}
     >
@@ -126,70 +101,36 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
         </Box>
       )}
 
-      {(IconComponent || text || IconRightComponent) && (
-        <Box
-          alignItems={align}
-          as="span"
-          display="flex"
-          flex={1}
-          gap={gap}
-          gapX={gapX}
-          gapY={gapY}
-          justifyContent={justify}
-          padding={padding}
-          paddingBottom={paddingBottom}
-          paddingLeft={paddingLeft}
-          paddingRight={paddingRight}
-          paddingTop={paddingTop}
-          paddingX={paddingX}
-          paddingY={paddingY}
-        >
-          {IconComponent && (
-            <Text as="span" flex="none" muted size={fontSize}>
-              {isValidElement(IconComponent) && IconComponent}
-              {isValidElementType(IconComponent) && <IconComponent />}
-            </Text>
-          )}
+      {IconComponent && (
+        <Text as="span" flex="none" muted size={fontSize}>
+          {isValidElement(IconComponent) && IconComponent}
+          {isValidElementType(IconComponent) && <IconComponent />}
+        </Text>
+      )}
 
-          {text && (
-            <Box as="span" maxWidth="auto">
-              <Text
-                align={textAlign}
-                as="span"
-                muted={muted}
-                size={fontSize}
-                textOverflow={textOverflow}
-                weight={textWeight}
-              >
-                {text}
-              </Text>
-            </Box>
-          )}
-
-          {IconRightComponent && (
-            <Text as="span" flex="none" muted size={fontSize}>
-              {isValidElement(IconRightComponent) && IconRightComponent}
-              {isValidElementType(IconRightComponent) && <IconRightComponent />}
-            </Text>
-          )}
+      {text && (
+        <Box as="span" maxWidth="auto">
+          <Text
+            align={textAlign}
+            as="span"
+            muted={muted}
+            size={fontSize}
+            textOverflow={textOverflow}
+            weight={textWeight}
+          >
+            {text}
+          </Text>
         </Box>
       )}
 
-      {children && (
-        <Box
-          as="span"
-          flex={1}
-          padding={padding}
-          paddingBottom={paddingBottom}
-          paddingLeft={paddingLeft}
-          paddingRight={paddingRight}
-          paddingTop={paddingTop}
-          paddingX={paddingX}
-          paddingY={paddingY}
-        >
-          {children}
-        </Box>
+      {IconRightComponent && (
+        <Text as="span" flex="none" muted size={fontSize}>
+          {isValidElement(IconRightComponent) && IconRightComponent}
+          {isValidElementType(IconRightComponent) && <IconRightComponent />}
+        </Text>
       )}
+
+      {children}
     </Element>
   )
 }
