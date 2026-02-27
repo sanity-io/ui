@@ -22,9 +22,6 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "type": "module",
-  "imports": {
-    "#styles": "./src/core/styles.css.ts"
-  },
   "exports": {
     ".": {
       "source": "./exports/index.ts",

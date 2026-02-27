@@ -4,8 +4,6 @@ import type {ResponsiveProp} from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
 import {memo, useCallback, useMemo, useState} from 'react'
 
-import {workshopNavigator} from '#styles'
-
 import type {WorkshopScope, WorkshopStory} from '../config/types'
 import {EMPTY_ARRAY} from '../constants'
 import {useWorkshop} from '../useWorkshop'
@@ -13,6 +11,7 @@ import {buildMenu} from './helpers'
 import {SearchResults} from './SearchResults'
 import {StoryTree} from './StoryTree'
 import type {MenuCollection, MenuList, MenuScope} from './types'
+import {workshopNavigator} from './WorkshopNavigator.css'
 
 const flexNoneStyle: React.CSSProperties = {flex: 'none'}
 const lineHeightNoneStyle: React.CSSProperties = {lineHeight: 0}
