@@ -1,5 +1,6 @@
 import {Box, Text, TextArea} from '@sanity/ui'
 import {memo} from 'react'
+
 import type {TextPropSchema} from '../types'
 import {useProps} from '../useProps'
 
@@ -19,9 +20,9 @@ export const TextProp = memo(function TextProp(props: {
       <Box marginTop={2}>
         <TextArea
           fontSize={[2, 2, 1]}
-          onChange={(event) => setPropValue(schema.name, event.currentTarget.value)}
           rows={4}
           value={value || ''}
+          onChange={(event) => setPropValue(schema.name, event.currentTarget.value)}
         />
       </Box>
     </Box>

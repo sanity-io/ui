@@ -1,6 +1,7 @@
-import {Box, Card, Code, Stack, Text, type CardTone} from '@sanity/ui'
+import {Box, Card, type CardTone,Code, Stack, Text} from '@sanity/ui'
 import axe from 'axe-core'
 import {memo} from 'react'
+
 import {useA11y} from './useA11y'
 
 /** @internal */
@@ -41,7 +42,7 @@ const ResultItem = memo(function ResultItem(props: {result: axe.Result; tone?: C
           {result.description}
         </Text>
         <Text size={1}>
-          <a href={result.helpUrl} target="_blank" rel="noreferrer">
+          <a href={result.helpUrl} rel="noreferrer" target="_blank">
             Help URL &rarr;
           </a>
         </Text>

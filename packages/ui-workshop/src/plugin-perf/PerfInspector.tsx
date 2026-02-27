@@ -1,6 +1,7 @@
 import {PlayIcon, TrashIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
 import {memo} from 'react'
+
 import {usePerf} from './hooks/usePerf'
 
 /** @internal */
@@ -25,7 +26,7 @@ export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
         const testResults = results.filter((r) => r.name === detail.name)
 
         return (
-          <Card border key={detail.name} overflow="hidden" radius={2} style={{lineHeight: 0}}>
+          <Card key={detail.name} border overflow="hidden" radius={2} style={{lineHeight: 0}}>
             <Flex>
               <Stack flex={1} padding={2} space={2}>
                 <Text size={1} weight="semibold">
@@ -43,15 +44,15 @@ export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
                   fontSize={1}
                   icon={TrashIcon}
                   mode="bleed"
-                  onClick={() => clearResults(detail.name)}
                   padding={1}
+                  onClick={() => clearResults(detail.name)}
                 />
               </Flex>
             </Flex>
 
             <Stack>
               {testResults.map((result, resultIndex) => (
-                <Card borderTop key={resultIndex}>
+                <Card key={resultIndex} borderTop>
                   <Stack>
                     {result.renders.map((r, rIdx) => {
                       return <Card key={rIdx}>{r.phase}</Card>
@@ -79,9 +80,9 @@ export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
                     fontSize={1}
                     icon={PlayIcon}
                     mode="bleed"
-                    onClick={() => runTest(detail.name)}
                     padding={2}
                     radius={0}
+                    onClick={() => runTest(detail.name)}
                   />
                 </Stack>
               </Card>

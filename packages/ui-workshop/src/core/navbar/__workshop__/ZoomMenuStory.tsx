@@ -1,4 +1,5 @@
 import {Flex} from '@sanity/ui'
+
 import {ZoomMenu} from '../ZoomMenu'
 
 export default function ZoomMenuStory(): React.ReactNode {

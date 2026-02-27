@@ -1,5 +1,6 @@
-import path from 'path'
 import fg from 'fast-glob'
+import path from 'path'
+
 import type {_Observable} from './_observable'
 
 export function _getFiles(options: {

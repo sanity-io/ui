@@ -1,6 +1,7 @@
 import {ControlsIcon, MenuIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Inline, Text, useMediaIndex} from '@sanity/ui'
 import {memo} from 'react'
+
 import {useWorkshop} from '../useWorkshop'
 import {NavbarBreadcrumbs} from './NavbarBreadcrumbs'
 import {OpenCanvasButton} from './OpenCanvasButton'
@@ -28,9 +29,9 @@ export const WorkshopNavbar = memo(function WorkshopNavbar(props: {
             fontSize={[2, 2, 1]}
             icon={MenuIcon}
             mode="bleed"
-            onClick={onNavigatorToggle}
             padding={2}
             selected={navigatorExpanded}
+            onClick={onNavigatorToggle}
           />
         </Box>
 
@@ -51,9 +52,9 @@ export const WorkshopNavbar = memo(function WorkshopNavbar(props: {
             fontSize={[2, 2, 1]}
             icon={ControlsIcon}
             mode="bleed"
-            onClick={onInspectorToggle}
             padding={2}
             selected={inspectorExpanded}
+            onClick={onInspectorToggle}
           />
         </Box>
 

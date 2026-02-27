@@ -2,12 +2,13 @@ import {
   BoundaryElementProvider,
   Flex,
   PortalProvider,
+  type ThemeColorSchemeKey,
   ToastProvider,
   useMediaIndex,
-  type ThemeColorSchemeKey,
 } from '@sanity/ui'
 import {debounce, isEqual} from 'lodash'
 import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+
 import type {WorkshopConfig} from './config/types'
 import {DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
 import {WorkshopInspector} from './inspector/WorkshopInspector'
@@ -234,9 +235,9 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
 
   return (
     <WorkshopProvider
-      config={config}
       broadcast={broadcast}
       channel={channel}
+      config={config}
       frameReady={frameReady}
       origin="main"
       path={path}
@@ -249,10 +250,10 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
         <BoundaryElementProvider element={boundaryElement}>
           <PortalProvider element={portalElement}>
             <Flex
+              ref={setBoundaryElement}
               data-boundary=""
               direction="column"
               height="fill"
-              ref={setBoundaryElement}
               style={{minWidth: 320}}
             >
               {withNavbar && (
@@ -273,7 +274,7 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
                 <WorkshopInspector expanded={inspectorExpanded} />
               </Flex>
 
-              <div data-portal="" ref={setPortalElement} />
+              <div ref={setPortalElement} data-portal="" />
             </Flex>
           </PortalProvider>
         </BoundaryElementProvider>

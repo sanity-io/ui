@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Card, Flex, TabPanel} from '@sanity/ui'
-import {workshopInspector} from '#styles'
 import {memo, useState} from 'react'
+
+import {workshopInspector} from '#styles'
+
 import {EMPTY_RECORD} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {InspectorHeader} from './InspectorHeader'
@@ -41,16 +43,16 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
       flex={1}
     >
       <Flex direction="column" height="fill">
-        {showTabs && <InspectorHeader currentTabId={tabId} onTabChange={setTabId} tabs={tabs} />}
+        {showTabs && <InspectorHeader currentTabId={tabId} tabs={tabs} onTabChange={setTabId} />}
 
         {showTabs &&
           tabs.map((tab) => (
             <TabPanel
+              key={tab.id}
               aria-labelledby={`${tab.id}-tab`}
               flex={1}
               hidden={tab.id !== tabId}
               id={`${tab.id}-panel`}
-              key={tab.id}
               overflow="auto"
             >
               {tab.plugin.inspector && (

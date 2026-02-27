@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Box, Select, Text} from '@sanity/ui'
 import {memo, useMemo} from 'react'
+
 import type {SelectPropSchema} from '../types'
 import {useProps} from '../useProps'
 
@@ -32,15 +33,15 @@ export const SelectProp = memo(function SelectProp(props: {
       <Box marginTop={2}>
         <Select
           fontSize={[2, 2, 1]}
+          padding={2}
+          radius={2}
+          value={String(value || '')}
           onChange={(event) => {
             const optionKey = event.currentTarget.value
             const optionValue = schema.options[optionKey as any]
 
             setPropValue(schema.name, optionValue)
           }}
-          padding={2}
-          radius={2}
-          value={String(value || '')}
         >
           {Object.entries(schema.options).map(([key]) => (
             <option key={key} value={key}>

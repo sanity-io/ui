@@ -1,5 +1,6 @@
-import {studioTheme, ThemeProvider, usePrefersDark, type ThemeColorSchemeKey} from '@sanity/ui'
+import {studioTheme, type ThemeColorSchemeKey,ThemeProvider, usePrefersDark} from '@sanity/ui'
 import {startTransition, useEffect, useMemo, useState} from 'react'
+
 import type {WorkshopConfig} from './config/types'
 import {GlobalStyle} from './GlobalStyle'
 import {createLocationStore} from './location/LocationStore'
