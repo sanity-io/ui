@@ -13,7 +13,7 @@ export interface CardStyleProps extends Omit<BoxStyleProps, 'className'> {
   className?: string
   checkered?: boolean
   scheme?: ColorScheme
-  tone?: CardTone | 'inherit'
+  tone?: CardTone
 }
 
 /** @internal */
