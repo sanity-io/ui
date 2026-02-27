@@ -21,14 +21,14 @@ export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
   }
 
   return (
-    <Stack padding={2} space={2}>
+    <Stack gap={2} padding={2}>
       {testDetails.map((detail) => {
         const testResults = results.filter((r) => r.name === detail.name)
 
         return (
           <Card key={detail.name} border overflow="hidden" radius={2} style={{lineHeight: 0}}>
             <Flex>
-              <Stack flex={1} padding={2} space={2}>
+              <Stack flex={1} gap={2} padding={2}>
                 <Text size={1} weight="semibold">
                   {detail.title || detail.name}
                 </Text>

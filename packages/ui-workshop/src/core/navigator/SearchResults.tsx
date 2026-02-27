@@ -6,12 +6,12 @@ import type {WorkshopScope, WorkshopStory} from '../config/types'
 /** @internal */
 export const SearchResults = memo(function SearchResults(props: {
   matches: {scope: WorkshopScope; story: WorkshopStory}[]
-  onStoryClick: (event: React.MouseEvent<HTMLDivElement>) => void
+  onStoryClick: (event: React.MouseEvent<HTMLAnchorElement>) => void
 }) {
   const {matches, onStoryClick} = props
 
   return (
-    <Stack space={1}>
+    <Stack gap={1}>
       {matches.map(({scope, story}) => (
         <Card
           key={`${scope.name}/${story.name}`}
