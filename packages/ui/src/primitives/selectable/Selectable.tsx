@@ -1,24 +1,24 @@
 import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
 import {selectable, SELECTABLE_STYLE_PROP_KEYS, type SelectableStyleProps} from '@sanity/ui/css'
 
-/** @internal */
+/** @public */
 export const DEFAULT_SELECTABLE_ELEMENT = 'button'
 
-/** @internal */
+/** @public */
 export interface SelectableOwnProps extends SelectableStyleProps {
   selected?: boolean
 }
 
-/** @internal */
+/** @public */
 export type SelectableElementType = 'a' | 'button' | 'span' | ComponentType
 
-/** @internal */
+/** @public */
 export type SelectableProps<E extends SelectableElementType = SelectableElementType> = Props<
   SelectableOwnProps,
   E
 >
 
-/** @internal */
+/** @public */
 export function Selectable<E extends SelectableElementType = typeof DEFAULT_SELECTABLE_ELEMENT>(
   props: SelectableProps<E>,
 ): React.JSX.Element {
