@@ -26,8 +26,9 @@
     "paths": {
       "$test/*": ["./test/*"],
       "$workshop": ["./workshop"],
-      "@sanity/ui/*": ["./exports/*"],
+
       "@sanity/ui": ["./exports/index.ts"],
+      "@sanity/ui/*": ["./exports/*"],
       "@sanity/ui-css": ["../ui-css/exports"],
       "@sanity/ui-css/*": ["../ui-css/exports/*"],
       "@sanity/ui-tokens": ["../ui-tokens/exports"],
