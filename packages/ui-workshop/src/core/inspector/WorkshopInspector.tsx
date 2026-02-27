@@ -2,12 +2,11 @@
 import {Box, Card, Flex, TabPanel} from '@sanity/ui'
 import {memo, useState} from 'react'
 
-import {workshopInspector} from '#styles'
-
 import {EMPTY_RECORD} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {InspectorHeader} from './InspectorHeader'
 import type {InspectorTab} from './types'
+import {workshopInspector} from './WorkshopInspector.css'
 
 const MemoRender = memo(function MemoRender(props: {component: React.ElementType; options: any}) {
   const {component: Component, options} = props

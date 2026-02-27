@@ -2,17 +2,16 @@ import {Card, Container, Flex, Heading, Spinner, Stack, Text} from '@sanity/ui'
 import {assignInlineVars} from '@vanilla-extract/dynamic'
 import {memo, useState} from 'react'
 
+import {VIEWPORT_OPTIONS} from './constants'
+import {buildFrameUrl} from './helpers'
+import {useWorkshop} from './useWorkshop'
 import {
   iframe,
   iframeContainer,
   viewportMaxHeight,
   viewportMaxWidth,
   zoom as zoomVar,
-} from '#styles'
-
-import {VIEWPORT_OPTIONS} from './constants'
-import {buildFrameUrl} from './helpers'
-import {useWorkshop} from './useWorkshop'
+} from './WorkshopCanvas.css'
 
 /** @internal */
 export const WorkshopCanvas = memo(function WorkshopCanvas(props: {
