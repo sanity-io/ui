@@ -1,11 +1,10 @@
-import {code, CODE_STYLE_PROP_KEYS, type CodeStyleProps, type ResponsiveProp} from '@sanity/ui/css'
-import type {FontCodeSize} from '@sanity/ui/theme'
+import {code, CODE_STYLE_PROP_KEYS, type CodeStyleProps} from '@sanity/ui/css'
 import {lazy, Suspense} from 'react'
 
 import {_splitKeys} from '../../_keys'
 import type {ComponentType, Props} from '../../types'
 
-const LazyRefractor = lazy(() => import('./Refractor'))
+const LazyRefractor = lazy(() => import('../_syntax/LazySyntax'))
 
 /** @public */
 export const DEFAULT_CODE_ELEMENT = 'pre'
@@ -14,7 +13,6 @@ export const DEFAULT_CODE_ELEMENT = 'pre'
 export type CodeOwnProps = CodeStyleProps & {
   /** Define the language to use for syntax highlighting. */
   language?: string
-  size?: ResponsiveProp<FontCodeSize>
 }
 
 /** @public */
@@ -32,8 +30,8 @@ export function Code<E extends CodeElementType = typeof DEFAULT_CODE_ELEMENT>(
     {
       as: Element = DEFAULT_CODE_ELEMENT,
       children,
-
       language: languageProp,
+      // split DOM props
       ...domProps
     },
   ] = _splitKeys(props as CodeProps<typeof DEFAULT_CODE_ELEMENT>, CODE_STYLE_PROP_KEYS)

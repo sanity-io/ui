@@ -2,6 +2,7 @@ import {
   heading,
   HEADING_STYLE_PROP_KEYS,
   type HeadingStyleProps,
+  type TextOverflow,
   textOverflow,
   type TextOverflowStyleProps,
 } from '@sanity/ui/css'
@@ -13,7 +14,10 @@ import type {ComponentType, Props} from '../../types'
 export const DEFAULT_HEADING_ELEMENT = 'div'
 
 /** @public */
-export type HeadingOwnProps = HeadingStyleProps & TextOverflowStyleProps
+export type HeadingOwnProps = HeadingStyleProps &
+  TextOverflowStyleProps & {
+    textOverflow?: TextOverflow
+  }
 
 /** @public */
 export type HeadingElementType =

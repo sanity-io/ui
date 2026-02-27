@@ -1,10 +1,9 @@
-import {card, type CardStyleProps} from '@sanity/ui/css'
+import {card, CARD_STYLE_PROP_KEYS, type CardStyleProps} from '@sanity/ui/css'
 import type {CardTone} from '@sanity/ui/theme'
-import {CARD_STYLE_PROP_KEYS} from '@sanity/ui-css'
 
 import {_splitKeys} from '../../_keys'
 import type {Props} from '../../types'
-import {type BoxElementType, type BoxOwnProps} from '../box/Box'
+import type {BoxElementType} from '../box/Box'
 import {CardProvider} from './CardProvider'
 import {useCard} from './useCard'
 
@@ -12,10 +11,11 @@ import {useCard} from './useCard'
 export const DEFAULT_CARD_ELEMENT = 'div'
 
 /** @public */
-export interface CardOwnProps extends BoxOwnProps, Omit<CardStyleProps, 'tone'> {
+export interface CardOwnProps extends Omit<CardStyleProps, 'tone'> {
   /**
    * Do not use in production.
    * @beta
+   * @deprecated Use `__unstable_pattern` instead.
    */
   __unstable_checkered?: boolean
   /**
@@ -60,7 +60,6 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
     __unstable_checkered: checkered = false,
     __unstable_focusRing: focusRing = false,
     as: As = DEFAULT_CARD_ELEMENT,
-    children,
     pressed,
     selected,
     ...restDomProps
@@ -76,12 +75,12 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
       {...restDomProps}
       className={card({
         ...styleProps,
-        // __unstable_pattern: styleProps.__unstable_pattern ?? (checkered ? 'checkered' : undefined),
+        __unstable_pattern: styleProps.__unstable_pattern ?? (checkered ? 'checkered' : undefined),
         tone: tone === context.tone && !context.root ? undefined : tone,
         scheme: scheme === context.scheme && !context.root ? undefined : scheme,
       })}
-      data-checkered={checkered ? '' : undefined}
-      // Extract the disabled prop without removing it from `...rest` so that the underlying <button> or <a> has `[disabled]` when needed
+      // Extract the disabled prop without removing it from `...rest` so that the underlying
+      // <button> or <a> has `[data-disabled]` when needed
       data-disabled={props.disabled ? '' : props['data-disabled']}
       data-focus-ring={focusRing ? '' : props['data-focus-ring']}
       data-pressed={pressed ? '' : props['data-pressed']}

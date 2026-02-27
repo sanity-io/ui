@@ -1,10 +1,9 @@
-import {ChevronDownIcon} from '@sanity/icons'
+import {SelectIcon} from '@sanity/icons'
 import {_input_element, select, select_presentation, type SelectStyleProps} from '@sanity/ui/css'
 import {useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
 import type {ComponentType, Props} from '../../types'
-import {Box} from '../box/Box'
 import {Text} from '../text/Text'
 
 /** @public */
@@ -40,7 +39,7 @@ export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEME
     fontSize = 2,
     gap = 2,
     padding = 3,
-    radius = 1,
+    radius,
     readOnly,
     ref: forwardedRef,
     width = 'fill',
@@ -66,11 +65,11 @@ export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEME
         {children}
       </Element>
       <span className={select_presentation()}>
-        <Box as="span" display="inline-block" padding={padding}>
+        <span>
           <Text size={fontSize}>
-            <ChevronDownIcon />
+            <SelectIcon />
           </Text>
-        </Box>
+        </span>
       </span>
     </span>
   )

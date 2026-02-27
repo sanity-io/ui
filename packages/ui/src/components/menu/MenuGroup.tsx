@@ -43,7 +43,7 @@ export type MenuGroupOwnProps = RadiusStyleProps & {
     | 'onBlurCapture'
   >
   padding?: ResponsiveProp<Space>
-  popover?: Omit<PopoverProps<'div'>, 'content' | 'open'>
+  popover?: Omit<PopoverProps, 'content' | 'open'>
   text?: ReactNode
   tone?: ElementTone
 }
@@ -71,7 +71,7 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
     onClick,
     padding = 3,
     popover,
-    radius = 2,
+    radius = 3,
     text,
     tone = 'default',
     ...rest
@@ -194,17 +194,19 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
   }, [])
 
   return (
-    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={open}>
+    <Popover
+      __unstable_shift={-4}
+      data-ui="MenuGroup__popover"
+      {...popover}
+      content={childMenu}
+      open={open}
+    >
       <Selectable
-        // data-as={as}
         data-ui="MenuGroup"
-        // forwardedAs={as}
         {...rest}
         ref={setRootElement}
         aria-pressed={as === 'button' ? withinMenu : undefined}
         as={as}
-        // data-pressed={as !== 'button' ? withinMenu : undefined}
-        // data-selected={!withinMenu && active ? '' : undefined}
         radius={radius}
         selected={withinMenu}
         tabIndex={-1}

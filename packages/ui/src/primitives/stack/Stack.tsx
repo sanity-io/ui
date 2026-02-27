@@ -1,30 +1,14 @@
-import {stack, STACK_STYLE_PROP_KEYS} from '@sanity/ui/css'
+import {stack, STACK_STYLE_PROP_KEYS, type StackStyleProps} from '@sanity/ui/css'
 
 import {_splitKeys} from '../../_keys'
 import type {Props} from '../../types'
-import {type BoxElementType, type BoxOwnProps} from '../box/Box'
+import {type BoxElementType} from '../box/Box'
 
 /** @public */
 export const DEFAULT_STACK_ELEMENT = 'div'
 
 /** @public */
-export type StackOwnProps = Omit<
-  BoxOwnProps,
-  | 'align'
-  | 'alignItems'
-  | 'columns'
-  | 'gridTemplateColumns'
-  | 'direction'
-  | 'display'
-  | 'flexDirection'
-  | 'flexWrap'
-  | 'gapX'
-  | 'gapY'
-  | 'justify'
-  | 'justifyContent'
-  | 'rows'
-  | 'gridTemplateRows'
->
+export type StackOwnProps = StackStyleProps
 
 /** @public */
 export type StackElementType = BoxElementType

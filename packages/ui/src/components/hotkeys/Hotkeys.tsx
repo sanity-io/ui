@@ -1,11 +1,10 @@
 import {
-  type GapStyleProps,
   hotkeys,
   HOTKEYS_STYLE_PROP_KEYS,
-  type RadiusStyleProps,
+  type HotkeysStyleProps,
   type ResponsiveProp,
 } from '@sanity/ui/css'
-import type {FontTextSize, Space} from '@sanity/ui/theme'
+import type {FontTextSize} from '@sanity/ui/theme'
 
 import {_splitKeys} from '../../_keys'
 import {KBD} from '../../primitives/kbd/Kbd'
@@ -15,10 +14,10 @@ import type {ComponentType, Props} from '../../types'
 export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
 
 /** @public */
-export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
+export interface HotkeysOwnProps extends HotkeysStyleProps {
+  /** @deprecated - no longer supported */
   fontSize?: ResponsiveProp<FontTextSize>
-  padding?: ResponsiveProp<Space>
-  keys?: string[]
+  keys: string[]
 }
 
 /** @public */
@@ -32,6 +31,13 @@ export type HotkeysProps<E extends HotkeysElementType = HotkeysElementType> = Pr
 
 /**
  * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.
+ *
+ * @example
+ * ```tsx
+ * import {Hotkeys} from '@sanity/ui'
+ *
+ * <Hotkeys keys={['⌘', 'K']} />
+ * ```
  *
  * @public
  */

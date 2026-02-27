@@ -91,6 +91,7 @@ export function Tab<E extends TabElementType = typeof DEFAULT_TAB_ELEMENT>(
       ref={ref}
       aria-selected={selected ? 'true' : 'false'}
       as={as}
+      flex="none"
       fontSize={fontSize}
       icon={icon}
       id={id}

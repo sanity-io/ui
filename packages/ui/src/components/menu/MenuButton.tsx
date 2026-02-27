@@ -29,7 +29,7 @@ export type MenuButtonProps = {
   menu?: ReactElement
   onClose?: () => void
   onOpen?: () => void
-  popover?: Omit<PopoverProps<'div'>, 'content' | 'open'>
+  popover?: Omit<PopoverProps, 'content' | 'open'>
 
   ref?: ForwardedRef<HTMLButtonElement | null>
 }
@@ -74,7 +74,8 @@ export function MenuButton(props: MenuButtonProps): React.JSX.Element {
     openRef.current = open
   }, [open])
 
-  const handleButtonClick = useCallback(() => {
+  const handleButtonClick = useCallback((event: ReactMouseEvent<HTMLElement>) => {
+    event.preventDefault()
     setOpen((v) => !v)
     setShouldFocus(null)
   }, [])
@@ -192,7 +193,7 @@ export function MenuButton(props: MenuButtonProps): React.JSX.Element {
   const button = useMemo(() => {
     if (!buttonProp) return null
 
-    const buttonProps: ButtonProps<'button'> = {
+    const buttonProps: ButtonProps = {
       'data-ui': 'MenuButton',
       id,
       'onClick': handleButtonClick,
@@ -202,6 +203,7 @@ export function MenuButton(props: MenuButtonProps): React.JSX.Element {
       'aria-expanded': open,
       'ref': setButtonElement,
       'selected': buttonProp.props.selected ?? open,
+      'tooltip': open ? undefined : buttonProp.props.tooltip,
     }
 
     return cloneElement(buttonProp, buttonProps)
@@ -214,16 +216,15 @@ export function MenuButton(props: MenuButtonProps): React.JSX.Element {
     [buttonElement],
   )
 
-  const popoverProps: MenuButtonProps['popover'] = useMemo(
-    () => ({
-      overflow: 'auto',
-      ...(popover || {}),
-    }),
-    [popover],
-  )
-
   return (
-    <Popover data-ui="MenuButton__popover" {...popoverProps} content={menu} open={open}>
+    <Popover
+      data-ui="MenuButton__popover"
+      overflow="auto"
+      placement="bottom-start"
+      {...popover}
+      content={menu}
+      open={open}
+    >
       {button || <></>}
     </Popover>
   )

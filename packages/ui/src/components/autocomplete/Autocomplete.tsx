@@ -62,7 +62,7 @@ export type AutocompleteOwnProps<Option extends BaseAutocompleteOption = BaseAut
     /** The options to render. */
     options?: Option[]
     padding?: ResponsiveProp<Space>
-    popover?: Omit<PopoverProps<'div'>, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
+    popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
     prefix?: ReactNode
     radius?: Radius | Radius[]
     /** @beta */
@@ -112,11 +112,12 @@ export function Autocomplete<
 >(props: AutocompleteProps<E, Option>): React.JSX.Element {
   const {
     as = DEFAULT_AUTOCOMPLETE_ELEMENT,
-    border = true,
+    border,
     customValidity,
     disabled,
     filterOption: filterOptionProp,
-    fontSize = 2,
+    flex,
+    fontSize,
     icon,
     id,
     listBox = EMPTY_RECORD,
@@ -132,7 +133,7 @@ export function Autocomplete<
     padding: paddingProp = 3,
     popover = EMPTY_RECORD,
     prefix,
-    radius = 2,
+    radius: radiusProp = 3,
     readOnly,
     ref: forwardedRef,
     relatedElements,
@@ -154,8 +155,17 @@ export function Autocomplete<
 
   const {activeValue, focused, listFocused, query, value} = state
 
+  const radius = _getResponsiveProp(radiusProp)
+
+  const innerRadius = _getResponsiveProp(
+    radius.map((r): Radius => {
+      if (r === undefined || r === 'full') return 'full'
+      return (r - 1) as Radius
+    }) as ResponsiveProp<Radius>,
+  )
+
   const defaultRenderOption = ({value}: BaseAutocompleteOption) => (
-    <Selectable as="button" padding={paddingProp} radius={2}>
+    <Selectable as="button" padding={paddingProp} radius={innerRadius}>
       <Text size={fontSize} textOverflow="ellipsis">
         {value}
       </Text>
@@ -173,6 +183,7 @@ export function Autocomplete<
   const resultsPopoverElementRef = useRef<HTMLDivElement | null>(null)
   const inputElementRef = useRef<HTMLInputElement | null>(null)
   const listBoxElementRef = useRef<HTMLUListElement | null>(null)
+
   // Element refs that need to be accessed during render
   const [inputElement, setInputElement] = useState<HTMLInputElement | null>(null)
 
@@ -432,17 +443,14 @@ export function Autocomplete<
     return undefined
   })()
 
-  const openButtonBoxPadding = (() => {
-    const result = padding.map((value) => {
-      if (value === 0) return 0
-      if (value === 1) return 1
-      if (value === 2) return 1
+  const openButtonBoxPadding = padding.map((p) => {
+    if (p === undefined) return 0
+    if (p === 0) return 0
+    if (p === 1) return 1
+    if (p === 2) return 1
 
-      return (value as Space) - 2
-    }) as ResponsiveProp<Space>
-
-    return result
-  })()
+    return p - 2
+  }) as ResponsiveProp<Space>
 
   const openButtonPadding = padding.map((v) =>
     v === undefined ? undefined : (Math.max(v - 1, 0) as Space),
@@ -454,27 +462,32 @@ export function Autocomplete<
   const handleOpenClick = (event: MouseEvent<HTMLButtonElement>) => {
     dispatchOpen()
 
-    if (openButtonProps.onClick) openButtonProps.onClick(event)
+    if (openButtonProps['onClick']) openButtonProps['onClick'](event)
 
     _raf(() => inputElementRef.current?.focus())
   }
 
-  const openButtonNode = (() =>
-    !disabled && !readOnly && openButton ? (
+  const openButtonNode = (() => {
+    if (disabled) return undefined
+    if (readOnly) return undefined
+    if (!openButton) return undefined
+
+    return (
       <Box aria-hidden={expanded} padding={openButtonBoxPadding}>
         <Button
           aria-label="Open"
-          disabled={expanded}
-          display="block"
           fontSize={fontSize}
           icon={ChevronDownIcon}
           mode="bleed"
           padding={openButtonPadding}
+          radius={innerRadius}
+          selected={expanded}
           {...openButtonProps}
           onClick={handleOpenClick}
         />
       </Box>
-    ) : undefined)()
+    )
+  })()
 
   const inputValue = (() => {
     if (query === null) {
@@ -491,7 +504,10 @@ export function Autocomplete<
   const handleListBoxKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     // If the focus is currently in the list, move focus to the input element
     if (event.key === 'Tab') {
-      if (listFocused) inputElementRef.current?.focus()
+      if (listFocused) {
+        inputElementRef.current?.focus()
+        event.preventDefault()
+      }
     }
   }
 
@@ -499,13 +515,7 @@ export function Autocomplete<
     if (filteredOptions.length === 0) return null
 
     return (
-      <Box
-        data-ui="AutoComplete__results"
-        padding={1}
-        onKeyDown={handleListBoxKeyDown}
-        {...listBox}
-        tabIndex={-1}
-      >
+      <Box data-ui="AutoComplete__results" onKeyDown={handleListBoxKeyDown} {...listBox}>
         <Stack
           ref={listBoxElementRef}
           aria-multiselectable={false}
@@ -513,6 +523,7 @@ export function Autocomplete<
           data-ui="AutoComplete__resultsList"
           gap={1}
           id={listBoxId}
+          padding={1}
           role="listbox"
         >
           {filteredOptions.map((option) => {
@@ -571,7 +582,7 @@ export function Autocomplete<
         overflow="auto"
         placement={AUTOCOMPLETE_POPOVER_PLACEMENT}
         portal
-        radius={3}
+        radius={radius}
         referenceElement={inputElement}
         onMouseEnter={handlePopoverMouseEnter}
         onMouseLeave={handlePopoverMouseLeave}
@@ -581,10 +592,10 @@ export function Autocomplete<
   })()
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div
+    <Box
       ref={rootElementRef}
       data-ui="Autocomplete"
+      flex={1}
       onBlur={handleRootBlur}
       onFocus={handleRootFocus}
       onKeyDown={handleRootKeyDown}
@@ -622,7 +633,7 @@ export function Autocomplete<
         onFocus={handleInputFocus}
       />
       {results}
-    </div>
+    </Box>
   )
 }
 

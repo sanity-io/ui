@@ -196,7 +196,9 @@ export function useMenuController(props: {
     if (!rootElementRef.current) return
 
     const rafId = requestAnimationFrame(() => {
-      if (activeIndex === -1) {
+      let i = activeIndex
+
+      if (i === -1) {
         if (shouldFocus === 'first') {
           const focusableElements = _getFocusableElements(elementsRef.current)
           const el = focusableElements[0]
@@ -205,6 +207,7 @@ export function useMenuController(props: {
             const currentIndex = elementsRef.current.indexOf(el)
 
             setActiveIndex(currentIndex)
+            i = currentIndex
           }
         }
 
@@ -216,13 +219,14 @@ export function useMenuController(props: {
             const currentIndex = elementsRef.current.indexOf(el)
 
             setActiveIndex(currentIndex)
+            i = currentIndex
           }
         }
 
         return
       }
 
-      const element = elementsRef.current[activeIndex] || null
+      const element = elementsRef.current[i] || null
 
       element?.focus()
     })

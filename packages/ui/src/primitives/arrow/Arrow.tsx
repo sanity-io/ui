@@ -16,7 +16,7 @@ import {compileCommands, getRoundedCommands, type Point} from './cmds'
 export const DEFAULT_ARROW_ELEMENT = 'div'
 
 /** @internal */
-export type ArrowOwnProps = {
+export interface ArrowOwnProps {
   width: number
   height: number
   radius?: number
@@ -62,6 +62,7 @@ export function Arrow<E extends ArrowElementType = typeof DEFAULT_ARROW_ELEMENT>
 
   return (
     <Element
+      data-ui="Arrow"
       {...rest}
       className={_arrow()}
       style={{

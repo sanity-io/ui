@@ -15,10 +15,12 @@ import {
   useState,
 } from 'react'
 
-import {Box, type BoxProps} from '../../primitives/box/Box'
-import type {CardOwnProps} from '../../primitives/card/Card'
-import {Flex} from '../../primitives/flex/Flex'
-import {Selectable, type SelectableElementType} from '../../primitives/selectable/Selectable'
+import {Box} from '../../primitives/box/Box'
+import {
+  Selectable,
+  type SelectableElementType,
+  type SelectableOwnProps,
+} from '../../primitives/selectable/Selectable'
 import {Text} from '../../primitives/text/Text'
 import type {ComponentType, Props} from '../../types'
 import {TreeContext} from './TreeContext'
@@ -29,7 +31,7 @@ import {useTree} from './useTree'
 export const DEFAULT_TREE_ITEM_ELEMENT = 'a'
 
 /** @beta */
-export type TreeItemOwnProps = CardOwnProps & {
+export type TreeItemOwnProps = SelectableOwnProps & {
   expanded?: boolean
   fontSize?: ResponsiveProp<FontTextSize>
   icon?: ElementType
@@ -40,7 +42,9 @@ export type TreeItemOwnProps = CardOwnProps & {
   linkAs?: SelectableElementType
   onClick?: MouseEventHandler<HTMLAnchorElement | HTMLLIElement>
   padding?: ResponsiveProp<Space>
-  space?: ResponsiveProp<Space>
+  gap?: ResponsiveProp<Space>
+  /** @deprecated Use `gap` instead */
+  space?: never
   text?: ReactNode
   weight?: FontWeight
 }
@@ -66,6 +70,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
     className,
     expanded: expandedProp = false,
     fontSize = 1,
+    gap: gapProp,
     href,
     icon: IconComponent,
     id: idProp,
@@ -73,15 +78,16 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
     muted,
     onClick,
     padding = 2,
-    radius = 2,
+    radius = 3,
     selected = false,
-    space = 2,
     text,
     weight,
     ...rest
   } = props as TreeItemProps<typeof DEFAULT_TREE_ITEM_ELEMENT>
 
-  const [rootElement, setRootElement] = useState<HTMLLIElement | null>(null)
+  const gap = gapProp ?? padding
+
+  const [rootElement, setRootElement] = useState<HTMLElement | null>(null)
   const treeitemRef = useRef<HTMLDivElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
@@ -101,7 +107,7 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
   )
 
   const handleClick = useCallback(
-    (event: MouseEvent<HTMLAnchorElement> | MouseEvent<HTMLLIElement>) => {
+    (event: MouseEvent<HTMLLIElement>) => {
       if (onClick) onClick(event)
 
       const target = event.target
@@ -137,43 +143,40 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
   }, [expanded, itemKey, registerItem, rootElement, selected])
 
   const content = (
-    <Flex gap={space} padding={padding}>
-      <Box
+    <Box display="flex" gap={gap} padding={padding}>
+      <Text
+        flex="none"
+        muted={muted}
+        size={fontSize}
         style={{
           visibility: IconComponent || children ? 'visible' : 'hidden',
           pointerEvents: 'none',
         }}
+        weight={weight}
       >
-        {IconComponent && (
-          <Text muted={muted} size={fontSize} weight={weight}>
-            <IconComponent />
-          </Text>
+        {IconComponent ? (
+          <IconComponent />
+        ) : (
+          <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
         )}
-        {!IconComponent && (
-          <Text muted={muted} size={fontSize} weight={weight}>
-            <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
-          </Text>
-        )}
-      </Box>
-      <Box flex={1}>
-        <Text muted={muted} size={fontSize} textOverflow="ellipsis" weight={weight}>
-          {text}
-        </Text>
-      </Box>
-    </Flex>
+      </Text>
+
+      <Text flex={1} muted={muted} size={fontSize} textOverflow="ellipsis" weight={weight}>
+        {text}
+      </Text>
+    </Box>
   )
 
   if (href) {
     return (
       <Box
+        ref={setRootElement}
+        as="li"
+        className={tree_item({className})}
         data-selected={selected ? '' : undefined}
         data-tree-id={id}
         data-tree-key={itemKey}
         data-ui="TreeItem"
-        {...(rest as BoxProps<'li'>)}
-        ref={setRootElement}
-        as="li"
-        className={tree_item({className})}
         role="none"
         onClick={handleClick}
       >
@@ -181,15 +184,13 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
           ref={treeitemRef}
           aria-expanded={expanded}
           as={linkAs}
-          // data-pressed={selected ? '' : undefined}
           data-ui="TreeItem__box"
+          {...rest}
           href={href}
           radius={radius}
           role="treeitem"
           selected={selected}
-          style={{
-            paddingLeft: `calc(${vars.space[2]} * ${tree.level})`,
-          }}
+          style={{paddingLeft: `calc(${vars.space[2]} * ${tree.level})`}}
           tabIndex={tabIndex}
         >
           {content}
@@ -204,30 +205,26 @@ export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITE
 
   return (
     <Box
-      // @ts-expect-error - TODO: fix this
       ref={setRootElement}
-      data-selected={selected ? '' : undefined}
+      aria-expanded={expanded}
+      as="li"
+      className={tree_item({className})}
+      data-pressed={selected ? '' : undefined}
       data-tree-id={id}
       data-tree-key={itemKey}
       data-ui="TreeItem"
-      {...(rest as BoxProps<'a'>)}
-      aria-expanded={expanded}
-      className={tree_item({className})}
       role="treeitem"
       tabIndex={tabIndex}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
     >
       <Selectable
-        as="button"
-        // data-pressed={selected ? '' : undefined}
         data-focused={focused ? '' : undefined}
         data-ui="TreeItem__box"
+        {...rest}
         radius={radius}
         selected={selected}
-        style={{
-          paddingLeft: `calc(${vars.space[2]} * ${tree.level})`,
-        }}
+        style={{paddingLeft: `calc(${vars.space[2]} * ${tree.level})`}}
       >
         {content}
       </Selectable>

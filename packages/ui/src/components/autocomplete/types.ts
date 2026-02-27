@@ -1,7 +1,7 @@
 import type {ButtonProps} from '../../primitives/button/Button'
 
 /** @public */
-export type AutocompleteOpenButtonProps = Omit<ButtonProps<'button'>, 'as'>
+export type AutocompleteOpenButtonProps = Omit<ButtonProps, 'as'>
 
 /** @public */
 export interface BaseAutocompleteOption {
