@@ -1,16 +1,18 @@
-import {EarthAmericasIcon, SearchIcon} from '@sanity/icons'
+import {MarkerIcon, SearchIcon} from '@sanity/icons'
 import {
   Autocomplete,
   type BaseAutocompleteOption,
   Box,
-  Card,
   Code,
   Flex,
   LayerProvider,
+  Selectable,
   Stack,
   Text,
 } from '@sanity/ui'
 import {startTransition, useCallback, useEffect, useRef, useState} from 'react'
+
+import {CardWrapper} from '$workshop'
 
 import {countriesStore} from './mock/apiStore'
 
@@ -82,36 +84,37 @@ export default function AsyncStory(): React.JSX.Element {
   }, [doSearch, optionTitle])
 
   return (
-    <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
-      <Stack gap={[3, 3, 4]}>
-        <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="medium">
-          Country
-        </Text>
-        <LayerProvider zOffset={100}>
-          <Autocomplete
-            disabled={loadingCurrentRef}
-            filterOption={filterOption}
-            icon={value ? EarthAmericasIcon : SearchIcon}
-            id="async"
-            loading={loading}
-            openButton={{onClick: handleOpenButtonClick}}
-            options={options}
-            placeholder="Search"
-            renderOption={renderOption}
-            renderValue={renderValue}
-            value={value}
-            onChange={setValue}
-            onQueryChange={handleQueryChange}
-          />
-        </LayerProvider>
-
-        <Box muted overflow="auto" padding={3} radius={2}>
+    <CardWrapper alignItems="flex-start" pattern="halftone">
+      <Stack gap={5}>
+        <Stack gap={3}>
+          <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="medium">
+            Country
+          </Text>
+          <LayerProvider zOffset={100}>
+            <Autocomplete
+              disabled={loadingCurrentRef}
+              filterOption={filterOption}
+              icon={value ? MarkerIcon : SearchIcon}
+              id="async"
+              loading={loading}
+              openButton={{onClick: handleOpenButtonClick}}
+              options={options}
+              placeholder="Search"
+              renderOption={renderOption}
+              renderValue={renderValue}
+              value={value}
+              onChange={setValue}
+              onQueryChange={handleQueryChange}
+            />
+          </LayerProvider>
+        </Stack>
+        <Box muted overflow="auto" padding={3} radius={3}>
           <Code language="json" size={1}>
             {JSON.stringify({loading, options, query, value}, null, 2)}
           </Code>
         </Box>
       </Stack>
-    </Box>
+    </CardWrapper>
   )
 }
 
@@ -132,17 +135,18 @@ function AsyncOption(props: {
   }, [documentId])
 
   return (
-    <Card
+    <Selectable
       as="button"
       disabled={disabled}
       padding={3}
-      radius={1}
+      radius={2}
       selected={selected}
       tabIndex={tabIndex}
+      width="fill"
     >
       <Flex gap={3}>
         <Text>
-          <EarthAmericasIcon />
+          <MarkerIcon />
         </Text>
 
         {loading && (
@@ -153,6 +157,6 @@ function AsyncOption(props: {
 
         {!loading && <Text muted={!data}>{data ? data.title : <>Untitled</>}</Text>}
       </Flex>
-    </Card>
+    </Selectable>
   )
 }

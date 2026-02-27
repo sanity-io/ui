@@ -1,6 +1,8 @@
-import {Box, TextInput} from '@sanity/ui'
+import {TextInput} from '@sanity/ui'
 import {useText} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
+
+import {CardWrapper} from '$workshop'
 
 export default function ClearButtonStory(): React.JSX.Element {
   const customValidity = useText('Custom validitiy')
@@ -16,7 +18,7 @@ export default function ClearButtonStory(): React.JSX.Element {
   }, [])
 
   return (
-    <Box padding={4}>
+    <CardWrapper>
       <TextInput
         clearButton
         customValidity={customValidity}
@@ -25,6 +27,6 @@ export default function ClearButtonStory(): React.JSX.Element {
         onChange={handleChange}
         onClear={handleClear}
       />
-    </Box>
+    </CardWrapper>
   )
 }

@@ -6,19 +6,19 @@ const scope: WorkshopScope = {
   title: 'Text',
   stories: [
     {
-      name: 'default',
-      title: 'Text',
+      name: 'props',
+      title: 'Props',
       component: lazy(() => import('./Example')),
-    },
-    {
-      name: 'colored',
-      title: 'Colored text',
-      component: lazy(() => import('./Colored')),
     },
     {
       name: 'optical-alignment',
       title: 'Optical alignment',
       component: lazy(() => import('./OpticalAlignment')),
+    },
+    {
+      name: 'inline-code',
+      title: 'Inline code',
+      component: lazy(() => import('./inline-code')),
     },
   ],
 }

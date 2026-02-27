@@ -15,7 +15,7 @@ export default function CustomStory(): React.JSX.Element {
                   <Text>
                     <code>Code</code>
                   </Text>
-                  <Hotkeys keys={['Cmd', 'C']} />
+                  <Hotkeys keys={['mod', 'c']} />
                 </Stack>
               </Button>
             ))}

@@ -16,7 +16,6 @@ import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 export default function SkeletonStory(): React.JSX.Element {
-  // @ts-expect-error - TODO: fix this
   const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS)
   const animated = useBoolean('Animated', true)
 
@@ -25,14 +24,7 @@ export default function SkeletonStory(): React.JSX.Element {
       <Container width={1}>
         <Stack gap={4}>
           {[1, 2, 3].map((item) => (
-            <Card
-              key={item}
-              border
-              padding={2}
-              radius={2}
-              // @ts-expect-error - TODO: fix this
-              tone={tone}
-            >
+            <Card key={item} border padding={2} radius={2} tone={tone}>
               <Flex align="center">
                 <Grid gap={2} gridTemplateColumns={2} marginRight={3}>
                   <Skeleton animated={animated} radius={2} style={{width: 40, height: 40}} />

@@ -1,6 +1,8 @@
-import {Flex, Switch} from '@sanity/ui'
+import {Switch} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 import {useCallback} from 'react'
+
+import {CardWrapper} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
   const checked = useBoolean('Checked', false)
@@ -9,13 +11,13 @@ export default function PropsStory(): React.JSX.Element {
   const handleChange = useCallback(() => undefined, [])
 
   return (
-    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+    <CardWrapper alignItems="center" display="flex" justifyContent="center">
       <Switch
         checked={checked}
         indeterminate={indeterminate}
         readOnly={readOnly}
         onChange={handleChange}
       />
-    </Flex>
+    </CardWrapper>
   )
 }

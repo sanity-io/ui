@@ -46,11 +46,6 @@ const scope: WorkshopScope = {
       component: lazy(() => import('./ClosableMenuButton')),
     },
     {
-      name: 'without-arrow',
-      title: 'Without arrow',
-      component: lazy(() => import('./WithoutArrow')),
-    },
-    {
       name: 'constrained-in-boundary',
       title: 'Constrained in boundary',
       component: lazy(() => import('./ConstrainedInBoundary')),

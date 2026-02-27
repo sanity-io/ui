@@ -1,24 +1,19 @@
-import {Button, Stack} from '@sanity/ui'
-import type {ButtonMode, ElementTone} from '@sanity/ui/theme'
+import {Button} from '@sanity/ui'
+import {BUTTON_MODES, ELEMENT_TONES} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_BUTTON_MODE_OPTIONS, WORKSHOP_ELEMENT_TONE_OPTIONS} from '$workshop'
+import {CardWrapper} from '$workshop'
 
 export default function DataPropsStory(): React.JSX.Element {
-  // @ts-expect-error - TODO: fix this
-  const mode = useSelect('Mode', WORKSHOP_BUTTON_MODE_OPTIONS, 'default') as ButtonMode | undefined
-
-  // @ts-expect-error - TODO: fix this
-  const tone = useSelect('Tone', WORKSHOP_ELEMENT_TONE_OPTIONS, 'default') as
-    | ElementTone
-    | undefined
+  const mode = useSelect('Mode', [undefined, ...BUTTON_MODES], 'default')
+  const tone = useSelect('Tone', [undefined, ...ELEMENT_TONES], 'default')
 
   return (
-    <Stack gap={4} padding={4}>
+    <CardWrapper gap={3}>
       <Button data-enabled="" mode={mode} text="Button" tone={tone} />
       <Button data-hovered="" mode={mode} text="Button" tone={tone} />
       <Button data-pressed="" mode={mode} text="Button" tone={tone} />
       <Button data-selected="" mode={mode} text="Button" tone={tone} />
-    </Stack>
+    </CardWrapper>
   )
 }

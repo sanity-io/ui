@@ -12,7 +12,7 @@ export default function ExampleStory(): React.JSX.Element {
 
   return (
     <Box padding={[4, 5, 6]}>
-      <TabList gap={[1, 2, 3]}>
+      <TabList gap={[1, 2, 3, 4, 5, 6, 7]}>
         <Tab
           aria-controls="example-panel-foo"
           icon={SunIcon}

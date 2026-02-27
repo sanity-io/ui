@@ -4,8 +4,8 @@ export default function TestStory(): React.JSX.Element {
   const mediaIndex = useMediaIndex()
 
   return (
-    <Card padding={[3, 4, 5]}>
-      <Stack gap={2}>
+    <Card padding={5}>
+      <Stack gap={3}>
         <Text weight="medium">The current media index is {mediaIndex}.</Text>
         <Text muted>Try resizing the browser.</Text>
       </Stack>

@@ -36,11 +36,6 @@ const scope: WorkshopScope = {
       component: lazy(() => import('./UploadButton')),
     },
     {
-      name: 'sanity-upload-button-workaround',
-      title: 'SanityUploadButtonWorkaroundStory',
-      component: lazy(() => import('./SanityUploadButton')),
-    },
-    {
       name: 'custom-icons',
       title: 'Custom icons',
       component: lazy(() => import('./CustomIcons')),
