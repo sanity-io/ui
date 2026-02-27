@@ -23,7 +23,6 @@ import {
 import {isValidElementType} from 'react-is'
 
 import {EMPTY_RECORD} from '../../constants'
-import {_getResponsiveProp} from '../../helpers/props'
 import {useCustomValidity} from '../../hooks/useCustomValidity'
 import {isRecord} from '../../lib/isRecord'
 import type {ComponentType, Props} from '../../types'
@@ -106,8 +105,6 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
   } = props as TextInputProps<typeof DEFAULT_TEXT_INPUT_ELEMENT>
 
   const ref = useRef<HTMLInputElement | null>(null)
-
-  const responsivePadding = useMemo(() => _getResponsiveProp(padding), [padding])
 
   const withClearButton = Boolean(clearButton)
 
@@ -200,7 +197,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
             fontSize={fontSize}
             handleClearClick={handleClearClick}
             handleClearMouseDown={handleClearMouseDown}
-            padding={responsivePadding}
+            padding={padding}
             radius={radius}
           />
         )}
