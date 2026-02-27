@@ -1,9 +1,9 @@
 import type {FontTextSize, Space} from '@sanity/ui/theme'
 
-import type {ResponsiveProp} from '../../types'
 import type {FlexStyleProps} from '../../props/flex/types'
 import type {RadiusStyleProps} from '../../props/radius/types'
 import type {WidthStyleProps} from '../../props/width/types'
+import type {ResponsiveProp} from '../../types'
 
 /**
  * Shared style props for input-based components such as {@link TextInput},

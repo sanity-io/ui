@@ -1,7 +1,8 @@
+import type {ButtonMode, ElementTone} from '@sanity/ui/theme'
+
 import type {FlexStyleProps} from '../../props/flex/types'
 import type {RadiusStyleProps} from '../../props/radius/types'
 import type {WidthStyleProps} from '../../props/width/types'
-import type {ButtonMode, ElementTone} from '@sanity/ui/theme'
 
 /**
  * Style props for the {@link Button} component's visual appearance.
