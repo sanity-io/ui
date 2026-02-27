@@ -41,37 +41,218 @@ import {
 } from './constants'
 import type {AutocompleteOpenButtonProps, BaseAutocompleteOption} from './types'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Autocomplete} component.
+ *
+ * @public
+ */
 export const DEFAULT_AUTOCOMPLETE_ELEMENT = 'input'
 
-/** @public */
+/**
+ * Own props for the {@link Autocomplete} component.
+ *
+ * @remarks
+ * Extends {@link TextInputOwnProps} to inherit all single-line text input
+ * capabilities (border, fontSize, gap, padding, radius, width, icon, iconRight,
+ * prefix, suffix, clearButton, customValidity, weight, etc.) and adds
+ * autocomplete-specific properties for option rendering, filtering, querying,
+ * and popover behavior.
+ *
+ * @typeParam O - The shape of each option object. Must extend {@link BaseAutocompleteOption}.
+ *
+ * @public
+ */
 export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocompleteOption> =
   TextInputOwnProps & {
+    /**
+     * When `true`, renders a visible border around the input element.
+     *
+     * @defaultValue true
+     */
     border?: boolean
+
+    /**
+     * Sets a custom validation message on the input element.
+     *
+     * @remarks
+     * When a non-empty string is provided, the input is marked as invalid via
+     * the Constraint Validation API (`setCustomValidity`), and the `data-invalid`
+     * attribute is applied to the wrapper for styling purposes.
+     *
+     * Set to an empty string `""` or `undefined` to clear the validation error.
+     */
     customValidity?: string
+
+    /**
+     * A function used to filter options based on the current query string.
+     *
+     * @remarks
+     * Called for each option whenever the query changes. Return `true` to include
+     * the option in the filtered results, or `false` to exclude it.
+     *
+     * When not provided, a default case-insensitive substring match on
+     * `option.value` is used.
+     *
+     * @defaultValue (case-insensitive substring match on `option.value`)
+     */
     filterOption?: (query: string, option: O) => boolean
+
+    /**
+     * An icon to render on the leading (left) side of the input.
+     *
+     * @remarks
+     * Accepts either a React component type (rendered as `<IconComponent />`) or
+     * a React element (rendered as-is).
+     */
     icon?: ElementType | ReactNode
-    /** @beta */
+
+    /**
+     * Props forwarded to the internal listbox {@link Box} element that wraps
+     * the rendered options.
+     *
+     * @defaultValue `{}`
+     */
     listBox?: BoxOwnProps
+
+    /**
+     * When `true`, displays a loading spinner inside the input to indicate
+     * that options are being fetched asynchronously.
+     */
     loading?: boolean
+
+    /**
+     * Callback fired when an option is confirmed (selected and committed)
+     * as the input's value.
+     *
+     * @remarks
+     * Receives the `value` string of the selected option. This differs from
+     * `onSelect`, which fires when an option is highlighted/selected in the
+     * listbox but not yet committed.
+     */
     onChange?: (value: string) => void
+
+    /**
+     * Callback fired when the text query in the input changes.
+     *
+     * @remarks
+     * Receives the current query string, or `null` when the query is cleared
+     * (e.g. when a value is selected or the input is reset).
+     */
     onQueryChange?: (query: string | null) => void
+
+    /**
+     * Callback fired when an option is selected (highlighted) in the listbox.
+     *
+     * @remarks
+     * Receives the `value` string of the selected option. This fires when a
+     * user clicks an option or navigates to it and presses Enter.
+     */
     onSelect?: (value: string) => void
-    /** @beta */
+
+    /**
+     * Controls the visibility and configuration of a button that opens the
+     * autocomplete dropdown.
+     *
+     * @remarks
+     * When set to `true`, renders a default open button with a chevron icon.
+     * When set to an {@link AutocompleteOpenButtonProps} object, renders a
+     * button with the specified custom props. When `false` or `undefined`,
+     * no open button is rendered.
+     *
+     */
     openButton?: boolean | AutocompleteOpenButtonProps
-    /** @beta */
+
+    /**
+     * When `true`, opens the autocomplete dropdown when the input receives focus.
+     *
+     */
     openOnFocus?: boolean
-    /** The options to render. */
+
+    /**
+     * The list of options to display in the autocomplete dropdown.
+     *
+     * @remarks
+     * Each option must conform to the `O` type parameter, which extends
+     * {@link BaseAutocompleteOption} (requiring at minimum a `value: string`
+     * property). Options are filtered by the `filterOption` function when
+     * a query is present.
+     */
     options?: O[]
+
+    /**
+     * Sets the inner padding of the input element.
+     *
+     * @remarks
+     * Uses the spacing scale defined by the theme. Supports responsive values.
+     *
+     * @defaultValue 3
+     */
     padding?: ResponsiveProp<Space>
+
+    /**
+     * Props forwarded to the underlying {@link Popover} component that wraps
+     * the autocomplete dropdown.
+     *
+     * @remarks
+     * Accepts all {@link PopoverProps} except `content`, `onMouseEnter`,
+     * `onMouseLeave`, and `open`, which are managed internally.
+     *
+     * @defaultValue `{}`
+     */
     popover?: Omit<PopoverProps<'div'>, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
+
+    /**
+     * Content rendered before (to the left of) the input element, outside
+     * the input's border.
+     */
     prefix?: ReactNode
+
+    /**
+     * Sets the border radius of the input element.
+     *
+     * @remarks
+     * Uses the radius scale defined by the theme. Accepts a single value or
+     * an array of values for responsive behavior.
+     *
+     * @defaultValue 2
+     */
     radius?: Radius | Radius[]
-    /** @beta */
+
+    /**
+     * Additional DOM elements that should be considered "inside" the
+     * autocomplete when determining whether focus has left the component.
+     *
+     * @remarks
+     * Used to prevent the autocomplete dropdown from closing when focus
+     * moves to one of the specified elements (e.g. a custom popover or
+     * panel rendered alongside the autocomplete).
+     *
+     */
     relatedElements?: HTMLElement[]
-    /** The callback function for rendering each option. */
+
+    /**
+     * A custom render function for each option in the autocomplete dropdown.
+     *
+     * @remarks
+     * Called once per visible option. Must return a React element that represents
+     * the option's visual content. When not provided, each option is rendered
+     * with its `value` string displayed in a default styled layout.
+     *
+     * @defaultValue (renders `option.value` as text)
+     */
     renderOption?: (option: O) => React.JSX.Element
-    /** @beta */
+
+    /**
+     * A custom render function for the popover wrapper around the autocomplete
+     * dropdown content.
+     *
+     * @remarks
+     * When provided, replaces the default {@link Popover} rendering. Receives
+     * the popover content element, visibility state, input element reference,
+     * and mouse event handlers as props, along with a forwarded ref for the
+     * popover container.
+     *
+     */
     renderPopover?: (
       props: {
         content: React.JSX.Element | null
@@ -82,15 +263,61 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
       },
       ref: ForwardedRef<HTMLDivElement>,
     ) => ReactNode
+
+    /**
+     * A function that converts a selected option's value into the display
+     * string shown in the input field.
+     *
+     * @remarks
+     * Called when a value is selected to determine what text to display in
+     * the input. Receives the raw value string and optionally the matching
+     * option object. When not provided, the option's `value` property is
+     * displayed as-is.
+     *
+     * @defaultValue (returns `option.value` or the raw value string)
+     */
     renderValue?: (value: string, option?: O) => string
+
+    /**
+     * Content rendered after (to the right of) the input element, outside
+     * the input's border.
+     */
     suffix?: ReactNode
+
+    /**
+     * The currently selected value of the autocomplete.
+     *
+     * @remarks
+     * When provided, the autocomplete operates in controlled mode. The value
+     * corresponds to the `value` property of the selected option. The display
+     * text is determined by the `renderValue` function.
+     */
     value?: string
   }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Autocomplete} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Autocomplete`.
+ *
+ * @public
+ */
 export type AutocompleteElementType = 'input' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Autocomplete} component.
+ *
+ * @remarks
+ * Combines {@link AutocompleteOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<input>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link AutocompleteElementType}.
+ * @typeParam O - The shape of each option object. Must extend {@link BaseAutocompleteOption}.
+ *
+ * @public
+ */
 export type AutocompleteProps<
   E extends AutocompleteElementType = AutocompleteElementType,
   O extends BaseAutocompleteOption = BaseAutocompleteOption,
@@ -103,8 +330,23 @@ const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
   option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
 
 /**
- * The Autocomplete component is typically used for search components.
- * It consists of a text input for writing a query, and properties for rendering suggestions.
+ * An autocomplete search input that displays a filterable dropdown of
+ * suggestions as the user types.
+ *
+ * @remarks
+ * The `Autocomplete` component combines a {@link TextInput} with a dropdown
+ * {@link Popover} containing a listbox of filterable options. It manages the
+ * full lifecycle of an autocomplete interaction: querying, filtering, keyboard
+ * navigation (ArrowUp, ArrowDown, Enter, Escape), option selection, and
+ * value display.
+ *
+ * Options are provided via the `options` prop and filtered by the `filterOption`
+ * function whenever the query changes. The dropdown is rendered in a popover
+ * that can be customized via the `popover` prop or fully replaced via
+ * `renderPopover`.
+ *
+ * @typeParam E - The HTML element or component type to render.
+ * @typeParam O - The shape of each option object.
  *
  * @public
  */
@@ -451,7 +693,7 @@ export function Autocomplete<
     if (!loading && !disabled && value) {
       return {
         'aria-label': 'Clear',
-        'onFocus': handleClearButtonFocus,
+        onFocus: handleClearButtonFocus,
       }
     }
 

@@ -80,7 +80,7 @@ export const tones: Record<ElementTone, string> = {
       return [
         t,
         _style(layers.primitives, {
-          'vars': stateVars.enabled,
+          vars: stateVars.enabled,
 
           '@media': {
             '(hover: hover)': {
@@ -103,7 +103,7 @@ export const tones: Record<ElementTone, string> = {
             },
           },
 
-          'selectors': {
+          selectors: {
             // hovered
             [['&:not([data-disabled])[data-hovered]'].join(',')]: {
               vars: stateVars.hovered,

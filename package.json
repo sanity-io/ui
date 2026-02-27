@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "turbo build --filter=./packages/*",
+    "storybook:build": "pnpm build && pnpm workshop:build",
     "changeset": "changeset",
     "changeset:publish": "changeset publish",
     "changeset:status": "changeset status",
@@ -40,6 +41,7 @@
     "@sanity/prettier-config": "^3.0.0",
     "@sanity/tsconfig": "^2.1.0",
     "commitizen": "^4.3.1",
+    "eslint-formatter-gha": "^2.0.1",
     "husky": "^9.1.7",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.1",

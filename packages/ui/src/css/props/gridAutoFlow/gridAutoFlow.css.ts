@@ -4,10 +4,10 @@ import type {ResponsiveRuleOptions} from '../../types'
 import type {GridAutoFlow} from './types'
 
 export const options: ResponsiveRuleOptions<GridAutoFlow> = {
-  'row': _responsiveStyle(layers.props, {
+  row: _responsiveStyle(layers.props, {
     gridAutoFlow: 'row',
   }),
-  'column': _responsiveStyle(layers.props, {
+  column: _responsiveStyle(layers.props, {
     gridAutoFlow: 'column-content',
   }),
   'row dense': _responsiveStyle(layers.props, {

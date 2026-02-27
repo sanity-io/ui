@@ -75,23 +75,23 @@ export const defaultColor: PartialTokens<ColorTokens> = {
             4: ['700', '300'],
           },
         },
-        'primary': {
+        primary: {
           _hue: 'blue',
           bg: {0: ['inherit', 'inherit']},
         },
-        'suggest': {
+        suggest: {
           _hue: 'purple',
           bg: {0: ['inherit', 'inherit']},
         },
-        'positive': {
+        positive: {
           _hue: 'green',
           bg: {0: ['inherit', 'inherit']},
         },
-        'caution': {
+        caution: {
           _hue: 'yellow',
           bg: {0: ['inherit', 'inherit']},
         },
-        'critical': {
+        critical: {
           _hue: 'red',
           bg: {0: ['inherit', 'inherit']},
         },
@@ -111,7 +111,7 @@ export const defaultColor: PartialTokens<ColorTokens> = {
             4: ['200', '700'],
           },
         },
-        'default': {
+        default: {
           bg: {
             0: ['800', '200'],
             4: ['black', 'white'],
@@ -121,25 +121,25 @@ export const defaultColor: PartialTokens<ColorTokens> = {
             4: ['800', '200'],
           },
         },
-        'primary': {
+        primary: {
           _hue: 'blue',
         },
-        'suggest': {
+        suggest: {
           _hue: 'purple',
         },
-        'positive': {
+        positive: {
           _hue: 'green',
         },
-        'caution': {
+        caution: {
           _hue: 'yellow',
         },
-        'critical': {
+        critical: {
           _hue: 'red',
         },
       },
     },
   },
-  'transparent': {
+  transparent: {
     variant: {
       tinted: {
         '*': {
@@ -159,7 +159,7 @@ export const defaultColor: PartialTokens<ColorTokens> = {
       },
     },
   },
-  'default': {
+  default: {
     variant: {
       tinted: {
         '*': {
@@ -179,19 +179,19 @@ export const defaultColor: PartialTokens<ColorTokens> = {
       },
     },
   },
-  'primary': {
+  primary: {
     _hue: 'blue',
   },
-  'suggest': {
+  suggest: {
     _hue: 'purple',
   },
-  'positive': {
+  positive: {
     _hue: 'green',
   },
-  'caution': {
+  caution: {
     _hue: 'yellow',
   },
-  'critical': {
+  critical: {
     _hue: 'red',
   },
 }

@@ -53,55 +53,213 @@ import {
 import {TooltipDelayGroupContext} from './tooltipDelayGroup/TooltipDelayGroupContext'
 import {TooltipLayer} from './TooltipLayer'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Tooltip} component.
+ *
+ * @public
+ */
 export const DEFAULT_TOOLTIP_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Tooltip} component.
+ *
+ * @remarks
+ * Extends {@link LayerOwnProps}, {@link RadiusStyleProps}, and {@link ShadowStyleProps}
+ * to inherit all card, box, and layer stacking props alongside border radius and
+ * shadow control. Adds tooltip-specific properties for positioning, animation,
+ * delay, portal rendering, and content display.
+ *
+ * @public
+ */
 export type TooltipOwnProps = LayerOwnProps &
   RadiusStyleProps &
   ShadowStyleProps & {
     /**
-     * Whether the tooltip should animate in and out.
+     * When `true`, the tooltip animates in and out using a scale/opacity
+     * transition powered by `motion/react` (`AnimatePresence`).
      *
-     * @beta
+     * @remarks
+     * Animation is automatically disabled when the user's operating system
+     * indicates a preference for reduced motion (`prefers-reduced-motion: reduce`).
+     *
      * @defaultValue false
      */
     animate?: boolean
-    arrow?: boolean
-    boundaryElement?: HTMLElement | null
-    children?: ReactElement<HTMLAttributes<HTMLElement> & RefAttributes<HTMLElement>>
-    content?: ReactNode
+
     /**
-     * Adds a delay to open or close the tooltip.
+     * When `true`, renders a directional arrow element that points from the
+     * tooltip toward its reference element.
      *
-     * If only a `number` is passed, it will be used for both opening and closing.
+     * @defaultValue false
+     */
+    arrow?: boolean
+
+    /**
+     * An HTML element used as the clipping boundary for the floating tooltip.
      *
-     * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
+     * @remarks
+     * Determines the area within which the tooltip's `flip` and `shift`
+     * middleware operate. When not provided, the nearest boundary element
+     * from the `BoundaryElementContext` is used.
      *
-     * @public
+     * @defaultValue (from BoundaryElementContext)
+     */
+    boundaryElement?: HTMLElement | null
+
+    /**
+     * The reference element that the tooltip is anchored to.
+     *
+     * @remarks
+     * Must be a single React element that accepts a `ref` prop and standard
+     * HTML event handlers (`onMouseEnter`, `onMouseLeave`, `onFocus`, `onBlur`,
+     * `onClick`, `onContextMenu`). The `Tooltip` clones this element and
+     * injects the necessary event handlers and ref for positioning and
+     * visibility management.
+     */
+    children?: ReactElement<HTMLAttributes<HTMLElement> & RefAttributes<HTMLElement>>
+
+    /**
+     * The content to render inside the tooltip floating element.
+     *
+     * @remarks
+     * Rendered inside a styled tooltip layer card when the tooltip is visible.
+     * When set to a falsy value while the tooltip is open, the tooltip closes.
+     */
+    content?: ReactNode
+
+    /**
+     * Adds a delay in milliseconds before the tooltip opens or closes.
+     *
+     * @remarks
+     * When a `number` is provided, the same delay is used for both opening
+     * and closing the tooltip.
+     *
+     * When an object `{open: number; close: number}` is provided, different
+     * delays can be set for the open and close actions independently.
+     *
+     * When the tooltip is inside a `TooltipDelayGroup`, the group's delay
+     * values take precedence over this prop.
+     *
      * @defaultValue 0
      */
     delay?: Delay
+
+    /**
+     * When `true`, disables the tooltip entirely. The `children` reference
+     * element is rendered as-is without any tooltip behavior. If the tooltip
+     * is currently open when `disabled` becomes `true`, it is closed.
+     */
     disabled?: boolean
+
+    /**
+     * An ordered list of alternative placements to try when the tooltip
+     * cannot fit in its preferred `placement`.
+     *
+     * @remarks
+     * Used by the Floating UI `flip` middleware. If not provided, a default
+     * set of fallback placements is derived from the `placement` prop.
+     *
+     * Accepted values (each element): `"top"` | `"top-start"` | `"top-end"` |
+     * `"right"` | `"right-start"` | `"right-end"` | `"bottom"` | `"bottom-start"` |
+     * `"bottom-end"` | `"left"` | `"left-start"` | `"left-end"`
+     *
+     * @defaultValue (derived from `placement`)
+     */
     fallbackPlacements?: Placement[]
+
+    /**
+     * Sets the preferred placement of the tooltip relative to its reference element.
+     *
+     * @remarks
+     * The tooltip will attempt to render at this placement first. If it does not
+     * fit, it falls back to the `fallbackPlacements` using the Floating UI
+     * `flip` middleware.
+     *
+     * `"right-start"` | `"right-end"` | `"bottom"` | `"bottom-start"` |
+     * `"bottom-end"` | `"left"` | `"left-start"` | `"left-end"`
+     *
+     * @defaultValue `"bottom"`
+     */
     placement?: Placement
-    /** Whether or not to render the tooltip in a portal element. */
+
+    /**
+     * Controls whether the tooltip content is rendered inside a portal element.
+     *
+     * @remarks
+     * When `true`, the tooltip is rendered into the default portal element
+     * registered with the nearest `PortalProvider`. When a string is provided,
+     * it is used as the name of a named portal element. When `false` or
+     * `undefined`, the tooltip is rendered in place.
+     */
     portal?: boolean | string
+
+    /**
+     * Sets the color scheme of the tooltip card.
+     *
+     * @remarks
+     * Determines whether the tooltip renders in a light or dark color mode.
+     */
     scheme?: ColorScheme
+
+    /**
+     * Sets the color tone of the tooltip card.
+     *
+     * @remarks
+     * Controls the background and foreground colors applied to the tooltip card
+     * based on the active theme. When set to `"inherit"`, the tone is inherited
+     * from the nearest parent `Card` context.
+     *
+     * @defaultValue `"inherit"`
+     */
     tone?: CardTone
   }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Tooltip} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Tooltip`.
+ *
+ * @public
+ */
 export type TooltipElementType = 'div' | 'span' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Tooltip} component.
+ *
+ * @remarks
+ * Combines {@link TooltipOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TooltipElementType}.
+ *
+ * @public
+ */
 export type TooltipProps<E extends TooltipElementType = TooltipElementType> = Props<
   TooltipOwnProps,
   E
 >
 
 /**
- * Tooltips display information when hovering, focusing or tapping.
+ * Displays contextual information in a floating element when hovering over,
+ * focusing, or tapping a reference element.
+ *
+ * @remarks
+ * The `Tooltip` component uses Floating UI to position a content overlay relative
+ * to its `children` reference element. It automatically manages visibility based on
+ * mouse enter/leave, focus/blur, and click/context-menu events on the reference
+ * element.
+ *
+ * The tooltip supports configurable open/close delays (including delay groups for
+ * coordinated tooltip behavior), entrance/exit animation, arrow indicators,
+ * portal rendering, and keyboard dismissal via the `Escape` key.
+ *
+ * The tooltip renders as a {@link Layer}-based card and participates in the design
+ * system's managed stacking context.
+ *
+ * When `disabled` is `true` or `content` is falsy, the tooltip is not rendered
+ * and the `children` reference element is returned as-is.
  *
  * @public
  */
@@ -395,6 +553,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     if (tone === 'inherit') {
       const card = use(CardContext)
       assertCardContext(card)
+      // @ts-expect-error - TODO: is this redundant? We are already excluding 'inherit' above.
       resolvedTone = card.tone
     }
 

@@ -62,8 +62,8 @@ export const WithHook: Story = {
     }
 
     return (
-      <Grid columns={1} gap={4}>
-        <Grid columns={1} gap={2}>
+      <Grid gridTemplateColumns={1} gap={4}>
+        <Grid gridTemplateColumns={1} gap={2}>
           <Heading>Default duration</Heading>
           <Inline gap={2}>
             <Button
@@ -120,7 +120,7 @@ export const WithHook: Story = {
             />
           </Inline>
         </Grid>
-        <Grid columns={1} gap={2}>
+        <Grid gridTemplateColumns={1} gap={2}>
           <Heading>10s duration</Heading>
           <Inline gap={2}>
             <Button
@@ -181,7 +181,7 @@ export const WithHook: Story = {
             />
           </Inline>
         </Grid>
-        <Grid columns={1} gap={2}>
+        <Grid gridTemplateColumns={1} gap={2}>
           <Heading>Infinite duration</Heading>
           <Inline gap={2}>
             <Button
@@ -242,7 +242,7 @@ export const WithHook: Story = {
             />
           </Inline>
         </Grid>
-        <Grid columns={1} gap={2}>
+        <Grid gridTemplateColumns={1} gap={2}>
           <Heading>Sanity Studio patterns</Heading>
           <Inline gap={2}>
             <Button

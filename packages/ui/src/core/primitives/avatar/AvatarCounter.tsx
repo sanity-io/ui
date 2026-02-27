@@ -7,23 +7,87 @@ import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link AvatarCounter} component.
+ *
+ * @public
+ */
 export const DEFAULT_AVATAR_COUNTER_ELEMENT = 'span'
 
-/** @public */
+/**
+ * Own props for the {@link AvatarCounter} component.
+ *
+ * @remarks
+ * Defines the configuration for rendering a numeric counter that indicates
+ * the number of additional avatars not shown in an {@link AvatarStack}.
+ *
+ * @public
+ */
 export interface AvatarCounterOwnProps {
+  /**
+   * The number to display inside the counter.
+   *
+   * @remarks
+   * Typically represents the count of additional avatars that are not
+   * individually visible within an {@link AvatarStack} due to the `maxLength`
+   * constraint.
+   */
   count: number
+
+  /**
+   * Sets the size of the avatar counter, matching the avatar size scale.
+   *
+   * @remarks
+   * Uses the avatar size scale defined by the theme. Supports responsive values.
+   * Should match the `size` of the sibling {@link Avatar} components for
+   * consistent visual alignment within an {@link AvatarStack}.
+   *
+   * - `0` – Extra-small size.
+   * - `1` – Small size (default).
+   * - `2` – Medium size.
+   * - `3` – Large size.
+   *
+   * @defaultValue 1
+   */
   size?: ResponsiveProp<AvatarSize>
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link AvatarCounter} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `AvatarCounter`.
+ *
+ * @public
+ */
 export type AvatarCounterElementType = 'button' | 'div' | 'span' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link AvatarCounter} component.
+ *
+ * @remarks
+ * Combines {@link AvatarCounterOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<span>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link AvatarCounterElementType}.
+ *
+ * @public
+ */
 export type AvatarCounterProps<E extends AvatarCounterElementType = AvatarCounterElementType> =
   Props<AvatarCounterOwnProps, E>
 
-/** @public */
+/**
+ * Displays a numeric count indicating the number of additional avatars
+ * not individually rendered within an {@link AvatarStack}.
+ *
+ * @remarks
+ * The `AvatarCounter` component is typically used internally by {@link AvatarStack}
+ * to show a `+N` style indicator when the number of avatars exceeds the
+ * `maxLength` threshold. It can also be used standalone.
+ *
+ * @public
+ */
 export function AvatarCounter<
   E extends AvatarCounterElementType = typeof DEFAULT_AVATAR_COUNTER_ELEMENT,
 >(props: AvatarCounterProps<E>): React.JSX.Element {

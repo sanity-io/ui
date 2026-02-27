@@ -17,25 +17,83 @@ import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './h
 import {TreeContext} from './TreeContext'
 import type {TreeContextValue, TreeState} from './types'
 
-/** @beta */
+/**
+ * The default HTML element type rendered by the {@link Tree} component.
+ *
+ * @beta
+ */
 export const DEFAULT_TREE_ELEMENT = 'div'
 
 /**
+ * Own props for the {@link Tree} component.
+ *
+ * @remarks
+ * Defines the configuration for a tree view container that manages keyboard
+ * navigation (ArrowUp, ArrowDown, ArrowLeft, ArrowRight), focus tracking,
+ * and expand/collapse state for its {@link TreeItem} children.
+ *
  * This API might change. DO NOT USE IN PRODUCTION.
+ *
  * @beta
  */
 export type TreeOwnProps = {
+  /**
+   * Sets the vertical gap between tree items.
+   *
+   * @remarks
+   * Uses the spacing scale defined by the theme. Supports responsive values.
+   * The gap is applied to an internal {@link Stack} component that wraps the
+   * tree's children.
+   *
+   * @defaultValue 1
+   */
   gap?: ResponsiveProp<Space>
 }
 
-/** @beta */
+/**
+ * Accepted values for the `as` prop of the {@link Tree} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Tree`.
+ *
+ * @beta
+ */
 export type TreeElementType = 'div' | ComponentType
 
-/** @beta */
+/**
+ * Props for the {@link Tree} component.
+ *
+ * @remarks
+ * Combines {@link TreeOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * Standard HTML attributes available include `onFocus`, `onKeyDown`, `ref`,
+ * `className`, `style`, etc.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TreeElementType}.
+ *
+ * @beta
+ */
 export type TreeProps<E extends TreeElementType = TreeElementType> = Props<TreeOwnProps, E>
 
 /**
+ * A hierarchical tree view component that manages keyboard navigation,
+ * focus tracking, and expand/collapse state for nested {@link TreeItem} children.
+ *
+ * @remarks
+ * The `Tree` component renders a `<ul>` element (via {@link Stack}) with
+ * `role="tree"` and provides a {@link TreeContext} to its descendants for
+ * registering items, tracking focused elements, and managing expanded state.
+ *
+ * Keyboard navigation follows the WAI-ARIA TreeView pattern:
+ * - **ArrowDown** – Moves focus to the next visible tree item.
+ * - **ArrowUp** – Moves focus to the previous visible tree item.
+ * - **ArrowRight** – Expands a collapsed item, or does nothing if already expanded.
+ * - **ArrowLeft** – Collapses an expanded item, or moves focus to its parent item.
+ *
  * This API might change. DO NOT USE IN PRODUCTION.
+ *
  * @beta
  */
 export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(

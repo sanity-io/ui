@@ -26,20 +26,6 @@ export const Default: Story = {
   },
 }
 
-export const Accent: Story = {
-  args: {
-    accent: true,
-  },
-  parameters: {
-    controls: {
-      include: ['accent', 'size'],
-    },
-  },
-  render: (props) => {
-    return <Text {...props} />
-  },
-}
-
 export const Muted: Story = {
   args: {
     muted: true,

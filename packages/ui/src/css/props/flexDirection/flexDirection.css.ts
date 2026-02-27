@@ -4,13 +4,13 @@ import type {ResponsiveRuleOptions} from '../../types'
 import type {FlexDirection} from './types'
 
 export const options: ResponsiveRuleOptions<FlexDirection> = {
-  'row': _responsiveStyle(layers.props, {
+  row: _responsiveStyle(layers.props, {
     flexDirection: 'row',
   }),
   'row-reverse': _responsiveStyle(layers.props, {
     flexDirection: 'row-reverse',
   }),
-  'column': _responsiveStyle(layers.props, {
+  column: _responsiveStyle(layers.props, {
     flexDirection: 'column',
   }),
   'column-reverse': _responsiveStyle(layers.props, {

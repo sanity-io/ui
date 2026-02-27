@@ -27,14 +27,14 @@ const pulse = keyframes({
 })
 
 export const root: string = _style(layers.components, {
-  'backgroundColor': vars.color.skeleton.from,
-  'backgroundPosition': '100%',
-  'backgroundSize': '200% 100%',
-  'backgroundAttachment': 'fixed',
-  'opacity': 0,
-  'transition': 'opacity 200ms ease-in',
+  backgroundColor: vars.color.skeleton.from,
+  backgroundPosition: '100%',
+  backgroundSize: '200% 100%',
+  backgroundAttachment: 'fixed',
+  opacity: 0,
+  transition: 'opacity 200ms ease-in',
 
-  'selectors': {
+  selectors: {
     '&[data-animated]': {
       backgroundImage: [
         `linear-gradient(to right,`,

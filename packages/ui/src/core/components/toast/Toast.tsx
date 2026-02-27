@@ -12,23 +12,113 @@ import {Stack} from '../../primitives/stack/Stack'
 import {Text} from '../../primitives/text/Text'
 import type {ComponentType, Props} from '../../types'
 
-/** @internal */
+/**
+ * The default HTML element type rendered by the {@link Toast} component.
+ *
+ * @internal
+ */
 export const DEFAULT_TOAST_ELEMENT = 'li'
 
-/** @internal */
+/**
+ * Own props for the {@link Toast} component.
+ *
+ * @remarks
+ * Extends {@link RadiusStyleProps} to provide border radius control alongside
+ * toast-specific properties for content, status, dismissibility, and auto-dismiss
+ * duration.
+ *
+ * @internal
+ */
 export type ToastOwnProps = RadiusStyleProps & {
+  /**
+   * When `true`, renders a close button inside the toast that allows the
+   * user to manually dismiss it.
+   *
+   * @remarks
+   * The close button invokes the {@link ToastOwnProps.onClose | onClose}
+   * callback when clicked.
+   */
   closable?: boolean
+
+  /**
+   * Secondary descriptive text rendered below the title inside the toast.
+   *
+   * @remarks
+   * Rendered inside a muted {@link Text} component with `size={1}`. When
+   * omitted, only the title is displayed.
+   */
   description?: ReactNode
+
+  /**
+   * Callback fired when the toast's close button is clicked.
+   *
+   * @remarks
+   * Only invoked when `closable` is `true` and the user clicks the close
+   * button. The toast does not remove itself from the DOM; the consumer
+   * (typically {@link ToastProvider}) is responsible for unmounting it.
+   */
   onClose?: () => void
+
+  /**
+   * The primary text rendered inside the toast.
+   *
+   * @remarks
+   * Rendered inside a {@link Text} component with `size={1}` and
+   * `weight="medium"`. Typically a short, descriptive message summarizing
+   * the action that occurred.
+   */
   title?: ReactNode
+
+  /**
+   * Sets the semantic status of the toast, which determines its color tone
+   * and ARIA role.
+   *
+   * @remarks
+   * The status maps to a card tone and button tone from the theme:
+   * - `"error"` → `"critical"` tone, `role="alert"`
+   * - `"warning"` → `"caution"` tone, `role="alert"`
+   * - `"success"` → `"positive"` tone, `role="alert"`
+   * - `"info"` → `"neutral"` tone, `role="alert"`
+   *
+   * When `undefined`, the toast renders with the `"default"` tone and
+   * `role="status"`.
+   */
   status?: 'error' | 'warning' | 'success' | 'info'
+
+  /**
+   * The auto-dismiss duration in milliseconds.
+   *
+   * @remarks
+   * When a finite, positive number less than ~24 days is provided, the
+   * toast is flagged with `data-has-duration` for the {@link ToastProvider}
+   * to schedule automatic removal. When `undefined`, `Infinity`, or an
+   * extremely large value, the toast persists until manually dismissed.
+   */
   duration?: number
 }
 
-/** @internal */
+/**
+ * Accepted values for the `as` prop of the {@link Toast} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Toast`.
+ *
+ * @internal
+ */
 export type ToastElementType = 'li' | ComponentType
 
-/** @internal */
+/**
+ * Props for the {@link Toast} component.
+ *
+ * @remarks
+ * Combines {@link ToastOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<li>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link ToastElementType}.
+ *
+ * @internal
+ */
 export type ToastProps<E extends ToastElementType = ToastElementType> = Props<ToastOwnProps, E>
 
 // Support pattern used by Sanity Studio, that works around the lack of `duration: Infinity` support in older @sanity/ui versions
@@ -57,9 +147,21 @@ const BUTTON_TONE = {
 } as const
 
 /**
- * The `Toast` component gives feedback to users when an action has taken place.
+ * Provides visual feedback to users when an action has taken place.
  *
- * Toasts can be closed with a close button, or auto-dismiss when the duration expires.
+ * @remarks
+ * The `Toast` component renders an animated notification card with an optional
+ * title, description, status indicator, and close button. It uses `motion/react`
+ * for entrance, exit, and layout animations (automatically disabled when the
+ * user prefers reduced motion).
+ *
+ * The toast's visual appearance (background color, text color, close button tone)
+ * is determined by the `status` prop, which maps to semantic card tones from the
+ * theme. An appropriate ARIA `role` is also applied based on the status.
+ *
+ * Toasts are not typically rendered directly by consumers. Instead, use the
+ * {@link ToastProvider} and the `useToast` hook to push toast notifications
+ * via the {@link ToastContextValue.push} method.
  *
  * @internal
  */

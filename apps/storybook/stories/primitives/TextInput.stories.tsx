@@ -103,8 +103,8 @@ export const InputStates: Story = {
   },
   render: (props) => {
     return (
-      <Grid columns={[1, 1, 4]} gapX={3} gapY={5}>
-        <Box columnStart={1} columnEnd={[1, 1, 5]}>
+      <Grid gridTemplateColumns={[1, 1, 4]} gapX={3} gapY={5}>
+        <Box gridColumnStart={1} gridColumnEnd={[1, 1, 5]}>
           <Text weight="medium">Without error</Text>
         </Box>
 
@@ -134,7 +134,7 @@ export const InputStates: Story = {
           <TextInput {...props} defaultValue="Existing value" disabled readOnly />
         </FieldWrapper>
 
-        <Box columnStart={1} columnEnd={[1, 1, 5]}>
+        <Box gridColumnStart={1} gridColumnEnd={[1, 1, 5]}>
           <Text weight="medium">With error</Text>
         </Box>
 

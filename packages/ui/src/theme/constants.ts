@@ -73,6 +73,7 @@ export const CARD_TONES = [
   'positive',
   'caution',
   'critical',
+  'inherit',
 ] as const
 
 /** @public */

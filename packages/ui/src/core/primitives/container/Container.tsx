@@ -3,23 +3,66 @@ import {container, type ContainerStyleProps} from '@sanity/ui/css'
 import type {Props} from '../../types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Container} component.
+ *
+ * @public
+ */
 export const DEFAULT_CONTAINER_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Container} component.
+ *
+ * @remarks
+ * Extends {@link BoxOwnProps} (with `width` omitted, since the container manages
+ * its own width via the theme's container width scale) and {@link ContainerStyleProps}
+ * to provide a complete set of layout and sizing capabilities.
+ *
+ * @public
+ */
 export type ContainerOwnProps = Omit<BoxOwnProps, 'width'> & ContainerStyleProps
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Container} component.
+ *
+ * @remarks
+ * Inherits all element types from {@link BoxElementType}. The rendered element
+ * receives all applicable HTML attributes for the chosen element type.
+ *
+ * @public
+ */
 export type ContainerElementType = BoxElementType
 
-/** @public */
+/**
+ * Props for the {@link Container} component.
+ *
+ * @remarks
+ * Combines {@link ContainerOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link ContainerElementType}.
+ *
+ * @public
+ */
 export type ContainerProps<E extends ContainerElementType = ContainerElementType> = Props<
   ContainerOwnProps,
   E
 >
 
 /**
- * The `Container` component wraps content layout in a defined set of widths.
+ * The `Container` component wraps content in a centered, width-constrained layout
+ * using the theme's container width scale.
+ *
+ * @remarks
+ * `Container` renders a {@link Box} element with a maximum width determined by the
+ * `width` prop, which maps to the theme's predefined container width scale. It is
+ * used to constrain content to a readable line length or a standard page width.
+ *
+ * The container centers itself horizontally within its parent and supports all
+ * the same layout and spacing props as {@link Box}.
+ *
+ * All other props from {@link BoxOwnProps} (except `width`) are also accepted.
  *
  * @public
  */

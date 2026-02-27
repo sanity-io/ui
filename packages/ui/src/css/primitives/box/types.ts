@@ -33,7 +33,32 @@ import type {ShadowStyleProps} from '../../props/shadow/types'
 import type {TextAlignStyleProps} from '../../props/textAlign/types'
 import type {WidthStyleProps} from '../../props/width/types'
 
-/** @public */
+/**
+ * Composite style props for the {@link Box} component.
+ *
+ * @remarks
+ * `BoxStyleProps` combines all foundational CSS utility style prop interfaces into a
+ * single type. It serves as the base style prop interface for layout primitives such as
+ * `Box`, `Card`, `Flex`, `Grid`, `Stack`, and others.
+ *
+ *   {@link GridColumnStyleProps}, {@link GridColumnStartStyleProps}, {@link GridColumnEndStyleProps},
+ *   {@link GridRowStyleProps}, {@link GridRowStartStyleProps}, {@link GridRowEndStyleProps},
+ *   {@link GridTemplateColumnsStyleProps}, {@link GridTemplateRowsStyleProps}
+ * - **Sizing:** {@link HeightStyleProps}, {@link MaxWidthStyleProps}, {@link MinHeightStyleProps},
+ *   {@link MinWidthStyleProps}, {@link WidthStyleProps}
+ * - **Inset:** {@link InsetStyleProps}
+ * - **Justify:** {@link JustifyContentStyleProps}
+ * - **Margin:** {@link MarginStyleProps}
+ * - **Overflow:** {@link OverflowStyleProps}
+ * - **Padding:** {@link PaddingStyleProps}
+ * - **Pointer Events:** {@link PointerEventsStyleProps}
+ * - **Position:** {@link PositionStyleProps}
+ * - **Radius:** {@link RadiusStyleProps}
+ * - **Shadow:** {@link ShadowStyleProps}
+ * - **Text Align:** {@link TextAlignStyleProps}
+ *
+ * @public
+ */
 export interface BoxStyleProps
   extends AlignItemsStyleProps,
     BorderStyleProps,
@@ -68,8 +93,30 @@ export interface BoxStyleProps
     ShadowStyleProps,
     TextAlignStyleProps,
     WidthStyleProps {
+  /**
+   * A custom CSS class name to append to the element.
+   */
   className?: string
+
+  /**
+   * When `true`, reduces the visual prominence of the element by applying
+   * a muted foreground color from the theme.
+   */
   muted?: boolean
+
+  /**
+   * Removes the default focus outline from the element.
+   *
+   * @remarks
+   * The only accepted value is `"none"`, which sets `outline: none` on the element.
+   */
   outline?: 'none'
+
+  /**
+   * Controls how the total width and height of the element are calculated.
+   *
+   * @remarks
+   * A convenience alias for the CSS `box-sizing` property.
+   */
   sizing?: BoxSizingStyleProps['boxSizing']
 }

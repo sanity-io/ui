@@ -10,7 +10,12 @@ function ucfirst(str: string) {
 export function ColorPalette(): ReactNode {
   return (
     <Card scheme="light" tone="default">
-      <Grid columns={[1, 1, 2, 3]} gapX={[4, 4, 5]} gapY={[5, 5, 6]} padding={[4, 5, 6]}>
+      <Grid
+        gridTemplateColumns={[1, 1, 2, 3]}
+        gapX={[4, 4, 5]}
+        gapY={[5, 5, 6]}
+        padding={[4, 5, 6]}
+      >
         {HUES.map((hue) => (
           <ColorHuePreview hue={hue} key={hue} />
         ))}

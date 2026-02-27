@@ -5,27 +5,93 @@ import {Box} from '../../primitives/box/Box'
 import {KBD} from '../../primitives/kbd/Kbd'
 import type {ComponentType, Props} from '../../types'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Hotkeys} component.
+ *
+ * @public
+ */
 export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
 
-/** @public */
+/**
+ * Own props for the {@link Hotkeys} component.
+ *
+ * @remarks
+ * Extends {@link GapStyleProps} and {@link RadiusStyleProps} to provide gap and
+ * border-radius control alongside hotkeys-specific properties for rendering
+ * keyboard shortcut indicators.
+ *
+ * @public
+ */
 export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
+  /**
+   * Sets the font size of the key label text inside each {@link KBD} element.
+   *
+   * @remarks
+   * Uses the text font size scale defined by the theme. Supports responsive values.
+   */
   fontSize?: ResponsiveProp<FontTextSize>
+
+  /**
+   * Sets the inner padding of each individual {@link KBD} element.
+   *
+   * @remarks
+   * Uses the spacing scale defined by the theme. Supports responsive values.
+   */
   padding?: ResponsiveProp<Space>
+
+  /**
+   * An array of key label strings to render as individual keyboard key indicators.
+   *
+   * @remarks
+   * Each string in the array is rendered inside its own {@link KBD} element.
+   * For example, `["Ctrl", "S"]` renders two styled key indicators side by side.
+   *
+   * When `undefined`, `null`, or an empty array, the component returns `undefined`
+   * and renders nothing.
+   */
   keys?: string[]
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Hotkeys} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered as the
+ * outer wrapper of the `Hotkeys` component.
+ *
+ * @public
+ */
 export type HotkeysElementType = 'kbd' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Hotkeys} component.
+ *
+ * @remarks
+ * Combines {@link HotkeysOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<kbd>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link HotkeysElementType}.
+ *
+ * @public
+ */
 export type HotkeysProps<E extends HotkeysElementType = HotkeysElementType> = Props<
   HotkeysOwnProps,
   E
 >
 
 /**
- * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.
+ * Renders a keyboard shortcut as a row of styled {@link KBD} elements,
+ * representing each key in the combination.
+ *
+ * @remarks
+ * The `Hotkeys` component maps each entry in the `keys` array to an individual
+ * {@link KBD} element, laid out horizontally inside a flex {@link Box}. It is
+ * typically used inside {@link MenuItem} components to annotate actions with
+ * their keyboard shortcuts, or standalone to document key combinations.
+ *
+ * When the `keys` prop is `undefined`, `null`, or an empty array, the component
+ * returns `undefined` and renders nothing.
  *
  * @public
  */

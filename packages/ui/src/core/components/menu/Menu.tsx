@@ -11,30 +11,146 @@ import type {ComponentType, Props} from '../../types'
 import {MenuContext, type MenuContextValue} from './MenuContext'
 import {useMenuController} from './useMenuController'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Menu} component.
+ *
+ * @public
+ */
 export const DEFAULT_MENU_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Menu} component.
+ *
+ * @remarks
+ * Extends {@link PaddingStyleProps} to provide inner spacing control for the menu container.
+ *
+ * @public
+ */
 export type MenuOwnProps = PaddingStyleProps & {
-  'gap'?: ResponsiveProp<Space>
-  'onClickOutside'?: (event: MouseEvent) => void
-  'onEscape'?: () => void
-  'onItemClick'?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  'onItemSelect'?: (index: number) => void
-  'originElement'?: HTMLElement | null
-  'registerElement'?: (el: HTMLElement) => () => void
-  'shouldFocus'?: 'first' | 'last' | null
+  /**
+   * Sets the gap between menu items.
+   *
+   * @remarks
+   * Uses the spacing scale defined by the theme. Supports responsive values.
+   * The gap is applied to an internal {@link Stack} component that wraps the menu's children.
+   *
+   * @defaultValue 1
+   */
+  gap?: ResponsiveProp<Space>
+
+  /**
+   * Callback fired when the user clicks outside the menu while it is the top layer.
+   *
+   * @remarks
+   * Only fires when the menu is the topmost layer in the layer stack.
+   * Typically used to close the menu when focus leaves the menu area.
+   */
+  onClickOutside?: (event: MouseEvent) => void
+
+  /**
+   * Callback fired when the user presses the `Escape` key while the menu is the top layer.
+   *
+   * @remarks
+   * Only fires when the menu is the topmost layer in the layer stack.
+   * Typically used to close the menu and optionally restore focus to the
+   * element that opened it.
+   */
+  onEscape?: () => void
+
+  /**
+   * Callback fired when any {@link MenuItem} within the menu is clicked.
+   *
+   * @remarks
+   * Receives the mouse event from the clicked menu item. This is a
+   * centralized handler that fires for all items in the menu.
+   */
+  onItemClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+
+  /**
+   * Callback fired when the active (highlighted) menu item index changes.
+   *
+   * @remarks
+   * Receives the zero-based index of the currently active menu item.
+   * Useful for tracking which item is highlighted for keyboard navigation.
+   */
+  onItemSelect?: (index: number) => void
+
+  /**
+   * A reference to the element that triggered the menu to open.
+   *
+   * @remarks
+   * Used to manage focus restoration when the menu is closed. When provided,
+   * the menu controller uses this element as the "origin" for focus management.
+   */
+  originElement?: HTMLElement | null
+
+  /**
+   * A callback to register the menu's root DOM element with a parent menu context.
+   *
+   * @remarks
+   * Used internally by nested menus (e.g. {@link MenuGroup}) to register their
+   * root elements with the parent menu for click-outside detection and focus management.
+   * Returns a cleanup function that unregisters the element.
+   */
+  registerElement?: (el: HTMLElement) => () => void
+
+  /**
+   * Controls which menu item receives focus when the menu mounts or updates.
+   *
+   * @defaultValue null
+   */
+  shouldFocus?: 'first' | 'last' | null
+
+  /**
+   * The `id` of the element that labels the menu.
+   *
+   * @remarks
+   * Sets the `aria-labelledby` attribute on the menu's root element,
+   * establishing an accessible label relationship. Typically references
+   * the `id` of the button that opens the menu.
+   */
   'aria-labelledby'?: string
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Menu} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Menu`.
+ *
+ * @public
+ */
 export type MenuElementType = 'div' | 'span' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Menu} component.
+ *
+ * @remarks
+ * Combines {@link MenuOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link MenuElementType}.
+ *
+ * @public
+ */
 export type MenuProps<E extends MenuElementType = MenuElementType> = Props<MenuOwnProps, E>
 
 /**
- * The `Menu` component is a building block for application menus.
+ * A building block for application menus.
+ *
+ * @remarks
+ * The `Menu` component renders an accessible menu container following WAI-ARIA
+ * menu patterns. It manages keyboard navigation (arrow keys, Home, End),
+ * active/highlighted item tracking, click-outside detection, and Escape key handling.
+ *
+ * Menu items are registered automatically via the {@link MenuContext} provided
+ * to children. Use {@link MenuItem}, {@link MenuGroup}, and {@link MenuDivider}
+ * as children of `Menu`.
+ *
+ * The menu integrates with the {@link Layer} system to detect whether it is the
+ * topmost layer, ensuring that `onClickOutside` and `onEscape` only fire when
+ * the menu has focus priority.
  *
  * @public
  */

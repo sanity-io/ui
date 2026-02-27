@@ -1,16 +1,9 @@
 {
   "version": 2,
+  "outputDirectory": "packages/ui/dist",
   "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/frame/(.*)",
-      "dest": "/frame/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+    {"handle": "filesystem"},
+    {"src": "/frame/(.*)", "dest": "/frame/index.html"},
+    {"src": "/(.*)", "dest": "/index.html"}
   ]
 }

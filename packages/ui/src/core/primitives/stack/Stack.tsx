@@ -3,10 +3,41 @@ import {stack} from '@sanity/ui/css'
 import type {Props} from '../../types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Stack} component.
+ *
+ * @public
+ */
 export const DEFAULT_STACK_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Stack} component.
+ *
+ * @remarks
+ * Extends {@link BoxOwnProps} with several layout-related props omitted because they
+ * are internally managed by the `Stack` component (which renders as a CSS grid with
+ * `grid-auto-rows: min`).
+ *
+ * Omitted props (managed internally):
+ * - `align` / `alignItems`
+ * - `columns` / `gridTemplateColumns`
+ * - `direction` / `flexDirection`
+ * - `display`
+ * - `flexWrap`
+ * - `gapX` / `gapY`
+ * - `justify` / `justifyContent`
+ * - `rows` / `gridTemplateRows`
+ *
+ * Available inherited props from {@link BoxOwnProps} include:
+ * - **Spacing:** `margin`, `marginX`, `marginY`, `padding`, `paddingX`, `paddingY` (and per-side variants).
+ * - **Sizing:** `width`, `height`, `minWidth`, `minHeight`, `maxWidth`.
+ * - **Visual:** `border`, `radius`, `shadow`, `overflow`, `muted`, `outline`.
+ * - **Position:** `position`, `inset`, and per-side inset variants.
+ * - **Gap:** `gap` – Controls the vertical spacing between stacked items.
+ * - **Other:** `flex`, `textAlign`, `pointerEvents`, `sizing`.
+ *
+ * @public
+ */
 export type StackOwnProps = Omit<
   BoxOwnProps,
   | 'align'
@@ -25,14 +56,39 @@ export type StackOwnProps = Omit<
   | 'gridTemplateRows'
 >
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Stack} component.
+ *
+ * @remarks
+ * Inherits all element types from {@link BoxElementType}. The rendered element
+ * receives all applicable HTML attributes for the chosen element type.
+ *
+ * @public
+ */
 export type StackElementType = BoxElementType
 
-/** @public */
+/**
+ * Props for the {@link Stack} component.
+ *
+ * @remarks
+ * Combines {@link StackOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render
+ *
+ * @public
+ */
 export type StackProps<E extends StackElementType = StackElementType> = Props<StackOwnProps, E>
 
 /**
- * The `Stack` component is used to place elements on top of each other.
+ * The `Stack` component is used to vertically stack elements on top of each other
+ * with consistent spacing between them.
+ *
+ * @remarks
+ * `Stack` renders as a CSS grid container, arranging its children in a single vertical column. The
+ * `gap` prop controls the spacing between stacked items using the theme's
+ * spacing scale.
  *
  * @public
  */

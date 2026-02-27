@@ -25,37 +25,175 @@ import {TreeContext} from './TreeContext'
 import {TreeGroup} from './TreeGroup'
 import {useTree} from './useTree'
 
-/** @beta */
+/**
+ * The default HTML element type rendered by the {@link TreeItem} component.
+ *
+ * @beta
+ */
 export const DEFAULT_TREE_ITEM_ELEMENT = 'a'
 
-/** @beta */
+/**
+ * Own props for the {@link TreeItem} component.
+ *
+ * @remarks
+ * Extends {@link CardOwnProps} to inherit all card, box layout, spacing, sizing,
+ * position, and visual style props. Adds tree-item-specific properties for
+ * controlling expand/collapse state, icon rendering, text content, and click behavior.
+ *
+ * @beta
+ */
 export type TreeItemOwnProps = CardOwnProps & {
-  expanded?: boolean
-  fontSize?: ResponsiveProp<FontTextSize>
-  icon?: ElementType
   /**
-   * Allows passing a custom element type to the link component
+   * Controls whether the tree item's children are visible (expanded) or
+   * hidden (collapsed).
+   *
+   * @remarks
+   * When `true`, the item's nested children are rendered in a visible
+   * {@link TreeGroup}. When `false`, the children are hidden. The expand/collapse
+   * state can also be toggled by clicking the item or pressing the ArrowRight/ArrowLeft
+   * keys while the item is focused.
+   *
+   * The component tracks its own expanded state internally; this prop sets
+   * the initial value which can be overridden by user interaction.
+   *
+   * @defaultValue false
+   */
+  expanded?: boolean
+
+  /**
+   * Sets the font size of the tree item's text and icon content.
+   *
+   * @remarks
+   * Uses the text font size scale defined by the theme. Supports responsive values.
+   *
+   * @defaultValue 1
+   */
+  fontSize?: ResponsiveProp<FontTextSize>
+
+  /**
+   * An icon component rendered on the leading (left) side of the tree item.
+   *
+   * @remarks
+   * Accepts a React component type (rendered as `<IconComponent />`). When
+   * provided, replaces the default toggle arrow icon. When omitted and the
+   * tree item has children, a toggle arrow icon is rendered that rotates to
+   * indicate the expanded/collapsed state.
+   */
+  icon?: ElementType
+
+  /**
+   * Allows passing a custom element type to the inner link/selectable component
+   * rendered when the tree item has an `href`.
+   *
+   * @remarks
+   * Only used when the tree item renders as a link (i.e. when `href` is provided).
+   * The custom element type receives all props that a {@link Selectable} component
+   * would receive, including `href`, `radius`, `role`, `tabIndex`, and `selected`.
+   *
    * @internal
+   *
+   * @defaultValue `"a"`
    */
   linkAs?: SelectableElementType
+
+  /**
+   * Callback fired when the tree item is clicked.
+   *
+   * @remarks
+   * Receives a mouse event from either an `<a>` or `<li>` element depending
+   * on whether the tree item renders as a link or a plain list item. Clicking
+   * the item also toggles its expanded/collapsed state and updates the focused
+   * item in the parent {@link Tree}.
+   */
   onClick?: MouseEventHandler<HTMLAnchorElement | HTMLLIElement>
+
+  /**
+   * Sets the inner padding of the tree item's content area.
+   *
+   * @remarks
+   * Uses the spacing scale defined by the theme. Supports responsive values.
+   *
+   * @defaultValue 2
+   */
   padding?: ResponsiveProp<Space>
+
+  /**
+   * Sets the spacing between the icon/toggle and the text label inside
+   * the tree item.
+   *
+   * @remarks
+   * Uses the spacing scale defined by the theme. Supports responsive values.
+   *
+   * @defaultValue 2
+   */
   space?: ResponsiveProp<Space>
+
+  /**
+   * The text label displayed inside the tree item.
+   *
+   * @remarks
+   * Rendered inside a {@link Text} component with `textOverflow="ellipsis"`.
+   * Accepts any React node, though typically a short string.
+   */
   text?: ReactNode
+
+  /**
+   * Sets the font weight of the tree item's text content.
+   */
   weight?: FontWeight
 }
 
-/** @beta */
+/**
+ * Accepted values for the `as` prop of the {@link TreeItem} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `TreeItem`.
+ *
+ * @beta
+ */
 export type TreeItemElementType = 'a' | 'li' | ComponentType
 
-/** @beta */
+/**
+ * Props for the {@link TreeItem} component.
+ *
+ * @remarks
+ * Combines {@link TreeItemOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<a>` element by default.
+ *
+ * When `href` is provided, the tree item renders as a link with an inner
+ * {@link Selectable} anchor element. When `href` is omitted, the item renders
+ * as a non-link `<li>`-based element with a button-based selectable inside.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TreeItemElementType}.
+ *
+ * @beta
+ */
 export type TreeItemProps<E extends TreeItemElementType = TreeItemElementType> = Props<
   TreeItemOwnProps,
   E
 >
 
 /**
+ * A single item within a {@link Tree} component that supports expand/collapse,
+ * nested children, icons, links, and keyboard navigation.
+ *
+ * @remarks
+ * The `TreeItem` component renders a tree node that can contain text, an icon,
+ * and nested child tree items. It participates in the parent {@link Tree}'s
+ * keyboard navigation and focus management system.
+ *
+ * When `href` is provided, the item renders as a navigable link with a
+ * {@link Selectable} anchor element. When `href` is omitted, the item renders
+ * as a plain list item with a button-based selectable. In both cases, clicking
+ * the item toggles its expanded/collapsed state.
+ *
+ * The component registers itself with the parent tree's context on mount and
+ * tracks its own expanded/selected state. Indentation is applied automatically
+ * based on the nesting `level` from the tree context.
+ *
  * This API might change. DO NOT USE IN PRODUCTION.
+ *
  * @beta
  */
 export function TreeItem<E extends TreeItemElementType = typeof DEFAULT_TREE_ITEM_ELEMENT>(

@@ -18,7 +18,18 @@ export type RootElementType = 'html' | 'body' | 'div'
 export type RootProps<E extends RootElementType = RootElementType> = Props<RootOwnProps, E>
 
 /**
- * The `Root` component.
+ * The top-level wrapper component that establishes the design system context
+ * for all descendant components.
+ *
+ * @remarks
+ * The `Root` component renders a {@link Box} element (default `<html>`) that
+ * initialises the theme, color scheme, card tone, portal container, and
+ * boundary element for the entire component tree. It wraps its children in a
+ * {@link RootProvider} which supplies {@link CardProvider}, {@link LayerProvider},
+ * {@link ToastProvider}, {@link BoundaryElementProvider}, and {@link PortalProvider}.
+ *
+ * When rendered as `<html>`, an additional `<body>` wrapper is inserted
+ * automatically to apply height and margin reset styles.
  *
  * @public
  */

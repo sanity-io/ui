@@ -5,7 +5,7 @@ import type {ContainerWidth} from '@sanity/ui/theme'
  */
 export type PopoverMargins = [number, number, number, number]
 
-/** @beta */
+/** @public */
 export type PopoverUpdateCallback = () => void
 
 /** @public */

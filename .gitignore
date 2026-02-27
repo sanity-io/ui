@@ -22,6 +22,7 @@ pnpm-debug.log*
 .idea
 .next
 .nyc_output
+.pnpm-store
 .sanity
 .turbo
 .vercel

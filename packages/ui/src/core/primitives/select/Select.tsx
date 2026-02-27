@@ -7,23 +7,96 @@ import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/Box'
 import {Text} from '../text/Text'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Select} component.
+ *
+ * @public
+ */
 export const DEFAULT_SELECT_ELEMENT = 'select'
 
-/** @public */
+/**
+ * Own props for the {@link Select} component.
+ *
+ * @remarks
+ * Extends {@link SelectStyleProps} (which inherits from {@link InputStyleProps})
+ * to provide shared input styling capabilities alongside select-specific properties.
+ *
+ * In addition to the props listed below, the component also forwards all standard
+ * HTML `<select>` attributes (e.g. `value`, `defaultValue`, `disabled`, `multiple`,
+ * `name`, `onChange`, `onBlur`, `ref`, etc.) to the underlying element.
+ *
+ * @public
+ */
 export type SelectOwnProps = SelectStyleProps & {
+  /**
+   * Sets a custom validation message on the select input element.
+   *
+   * @remarks
+   * When a non-empty string is provided, the select is marked as invalid
+   * via the Constraint Validation API (`setCustomValidity`), and the
+   * `data-invalid` attribute is applied to the wrapper element for styling.
+   *
+   * Set to an empty string `""` or `undefined` to clear the validation error.
+   */
   customValidity?: string
+
+  /**
+   * When `true`, prevents the user from changing the selected value while
+   * keeping the element visually enabled.
+   *
+   * @remarks
+   * Internally sets the native `disabled` attribute on the `<select>` element
+   * to prevent interaction, while applying a `data-read-only` attribute on the
+   * wrapper for styling differentiation from the disabled state.
+   */
   readOnly?: boolean
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Select} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Select`.
+ *
+ * @public
+ */
 export type SelectElementType = 'select' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Select} component.
+ *
+ * @remarks
+ * Combines {@link SelectOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<select>` element by default.
+ *
+ * Standard HTML `<select>` attributes supported include:
+ * - `value` (`string | string[]`) – The currently selected value(s) (controlled mode).
+ * - `defaultValue` (`string | string[]`) – The initial selected value(s) (uncontrolled mode).
+ * - `disabled` (`boolean`) – When `true`, disables the select and prevents interaction.
+ * - `multiple` (`boolean`) – When `true`, allows selecting multiple options.
+ * - `name` (`string`) – The form field name for the select.
+ * - `onChange` (`ChangeEventHandler<HTMLSelectElement>`) – Callback fired when the selection changes.
+ * - `ref` (`Ref<HTMLSelectElement>`) – Ref forwarded to the underlying `<select>` element.
+ * - `children` (`ReactNode`) – The `<option>` and `<optgroup>` elements to render inside the select.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link SelectElementType}.
+ *
+ * @public
+ */
 export type SelectProps<E extends SelectElementType = SelectElementType> = Props<SelectOwnProps, E>
 
 /**
- * The `Select` component provides control of options.
+ * A styled select input component that provides a dropdown for choosing
+ * from a set of options.
+ *
+ * @remarks
+ * The `Select` component renders a native `<select>` element wrapped in a
+ * styled container with a chevron icon indicator. It supports all standard
+ * HTML `<select>` attributes, custom validation via `customValidity`, and
+ * a read-only mode that prevents user changes while maintaining visual clarity.
+ *
+ * Children should be standard `<option>` or `<optgroup>` HTML elements.
  *
  * @public
  */

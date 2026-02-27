@@ -4,21 +4,21 @@ import type {ResponsiveRuleOptions} from '../../types'
 import type {Display} from './types'
 
 export const options: ResponsiveRuleOptions<Display> = {
-  'block': _responsiveStyle(layers.props, {
+  block: _responsiveStyle(layers.props, {
     selectors: {
       '&:not([hidden])': {
         display: 'block',
       },
     },
   }),
-  'flex': _responsiveStyle(layers.props, {
+  flex: _responsiveStyle(layers.props, {
     selectors: {
       '&:not([hidden])': {
         display: 'flex',
       },
     },
   }),
-  'grid': _responsiveStyle(layers.props, {
+  grid: _responsiveStyle(layers.props, {
     selectors: {
       '&:not([hidden])': {
         display: 'grid',
@@ -46,7 +46,7 @@ export const options: ResponsiveRuleOptions<Display> = {
       },
     },
   }),
-  'none': _responsiveStyle(layers.props, {
+  none: _responsiveStyle(layers.props, {
     selectors: {
       '&:not([hidden])': {
         display: 'none',
