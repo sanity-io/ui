@@ -3,10 +3,6 @@ import {createVanillaExtractPlugin} from '@vanilla-extract/next-plugin'
 
 const withVanillaExtract = createVanillaExtractPlugin()
 
-const features = {
-  dist: process.env.FEATURE_DIST === 'on',
-}
-
 const nextConfig: NextConfig = {
   async headers() {
     return [
@@ -30,11 +26,7 @@ const nextConfig: NextConfig = {
     ]
   },
 
-  transpilePackages: features.dist ? [] : ['@sanity/ui'],
-
-  typescript: {
-    tsconfigPath: features.dist ? './tsconfig.dist.json' : './tsconfig.json',
-  },
+  turbopack: {},
 }
 
 export default withVanillaExtract(nextConfig)
