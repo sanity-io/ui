@@ -201,6 +201,9 @@ importers:
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.39.3(jiti@2.5.1))
+      eslint-formatter-gha:
+        specifier: ^2.0.1
+        version: 2.0.1
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.39.3(jiti@2.5.1))
@@ -4320,6 +4323,17 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
+  eslint-formatter-gha@2.0.1:
+    resolution: {integrity: sha512-HbiPXXjIley/JRcQ9zRZ4HJhhU8ZIf0wVLbfyQKm/7HIcbvOsA2xwl/Lblyd8fhYalUWxKcodJOwsOwxw7O0Cw==}
+
+  eslint-formatter-json@9.0.1:
+    resolution: {integrity: sha512-EQ/X+bPjiOUDo4frNbkY+5R6emaHTL7t2jHsJw5s8p8w1BTJ6ao6S7g/PaRyx/CqqaYcjJkWAPHH/onNyFlJBQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  eslint-formatter-stylish@9.0.1:
+    resolution: {integrity: sha512-FlhMRUiDUHztGj+bhm3pYo5DJ6Gbjh/FGPClcDENme7f9+Sc3+HZg6wMq80KJmRD8/oj/Ib6gy4D/ppjmHfGVA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   eslint-import-resolver-node@0.3.9:
     resolution: {integrity: sha512-WFj2isz22JahUv+B788TlO3N6zL3nNJGU8CcZbPZvVEkBPaJdCV4vy5wyghty5ROFbCRnm132v8BScu5/1BQ8g==}
 
@@ -6972,6 +6986,9 @@ packages:
     resolution: {integrity: sha512-nIVck8DK+GM/0Frwd+nIhZ84pR/BX7rmXMfYwyg+Sri5oGVE99/E3KvXqpC2xHFxyqXyGHTKBSioxxplrO4I4w==}
     engines: {node: '>=10'}
     hasBin: true
+
+  text-table@0.2.0:
+    resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
   through2@4.0.2:
     resolution: {integrity: sha512-iOqSav00cVxEEICeD7TjLB1sueEL+81Wpzp2bY17uZjZN0pWZPuo4suZ/61VujxmqSGFfgOcNuTZ85QJwNZQpw==}
@@ -11851,6 +11868,19 @@ snapshots:
     dependencies:
       eslint: 9.39.3(jiti@2.5.1)
 
+  eslint-formatter-gha@2.0.1:
+    dependencies:
+      eslint-formatter-json: 9.0.1
+      eslint-formatter-stylish: 9.0.1
+
+  eslint-formatter-json@9.0.1: {}
+
+  eslint-formatter-stylish@9.0.1:
+    dependencies:
+      chalk: 4.1.2
+      strip-ansi: 6.0.1
+      text-table: 0.2.0
+
   eslint-import-resolver-node@0.3.9:
     dependencies:
       debug: 3.2.7
@@ -14804,6 +14834,8 @@ snapshots:
       acorn: 8.15.0
       commander: 13.1.0
       source-map-support: 0.5.21
+
+  text-table@0.2.0: {}
 
   through2@4.0.2:
     dependencies:
