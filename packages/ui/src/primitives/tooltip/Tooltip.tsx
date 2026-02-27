@@ -32,7 +32,6 @@ import {
 
 import {Hotkeys} from '../../components/hotkeys/Hotkeys'
 import {Z_OFFSETS} from '../../constants'
-import {_getResponsiveProp} from '../../helpers/props'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {useUnique} from '../../hooks/useUnique'
 import {origin} from '../../middleware/origin'
@@ -134,7 +133,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     ref: forwardedRef,
     shadow = 2,
     text,
-    textSize: textSizeProp = 1,
+    textSize = 1,
     zOffset = Z_OFFSETS.tooltip,
     ...rest
   } = props as TooltipProps<typeof DEFAULT_TOOLTIP_ELEMENT>
@@ -242,8 +241,6 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
       timerRef.current = undefined
     }
   }, [isOpen, handleGroupOpenChange, id])
-
-  const textSize = _getResponsiveProp(textSizeProp)
 
   const hotkeys = useUnique(hotkeysProp)
 

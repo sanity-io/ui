@@ -26,7 +26,6 @@ import {
 } from 'react'
 
 import {Z_OFFSETS} from '../../constants'
-import {_getResponsiveProp} from '../../helpers/props'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
 import type {ComponentType, Placement, Props} from '../../types'
@@ -185,7 +184,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     shadow = 3,
     tone = 'inherit',
     width: widthProp = 'auto',
-    zOffset: zOffsetProp = Z_OFFSETS.popover,
+    zOffset = Z_OFFSETS.popover,
     updateRef,
     ...rest
   } = props as PopoverProps<typeof DEFAULT_POPOVER_ELEMENT>
@@ -196,7 +195,6 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
 
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
-  const zOffset = useMemo(() => _getResponsiveProp(zOffsetProp), [zOffsetProp])
   const ref = useRef<HTMLDivElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
