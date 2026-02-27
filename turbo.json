@@ -26,13 +26,6 @@
     },
     "test:e2e": {
       "dependsOn": ["^build"]
-    },
-    "workshop:build": {
-      "outputs": ["dist/**"]
-    },
-    "workshop:preview": {
-      "cache": false,
-      "persistent": true
     }
   }
 }
