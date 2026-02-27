@@ -8,16 +8,14 @@ import {
   WORKSHOP_SPACE_OPTIONS,
 } from '$workshop'
 
-import {DEFAULT_TOOLTIP_DELAY} from '../constants'
-
 export default function PropsStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', false)
   const content = useText('Content', 'Tooltip content')
   const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 2)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
   const portal = useBoolean('Portal', true)
-  const openDelay = useNumber('Open Delay', DEFAULT_TOOLTIP_DELAY.open)
-  const closeDelay = useNumber('Close Delay', DEFAULT_TOOLTIP_DELAY.close)
+  const openDelay = useNumber('Open Delay', 500)
+  const closeDelay = useNumber('Close Delay', 100)
   const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 2)
 
   return (

@@ -1,4 +1,4 @@
 import {lazy} from 'react'
 
 /** @internal */
-export const LazySyntax = lazy(() => import('./syntax'))
+export const LazySyntax = lazy(() => import('./Syntax'))
