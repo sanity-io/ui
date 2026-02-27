@@ -1,36 +1,34 @@
 import {PlayIcon, TrashIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
-import {memo} from 'react'
 
-import {usePerf} from './hooks/usePerf'
+import {usePerfInspector} from './hooks/usePerf'
 
 /** @internal */
-export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
-  const {clearResults, results, runTest, testDetails} = usePerf()
+export function PerfInspector() {
+  const {clearResults, results, runTest, testDetails} = usePerfInspector()
 
   if (testDetails.length === 0) {
     return (
-      <Box padding={2}>
-        <Box padding={2}>
-          <Text muted size={[2, 2, 1]}>
-            No tests
-          </Text>
-        </Box>
+      <Box paddingX={4} paddingY={5}>
+        <Text muted size={[2, 2, 1]}>
+          No tests
+        </Text>
       </Box>
     )
   }
 
   return (
-    <Stack gap={2} padding={2}>
+    <Stack gap={2} padding={3}>
       {testDetails.map((detail) => {
         const testResults = results.filter((r) => r.name === detail.name)
+        const hasRunningTest = testResults.some((r) => r.running === true)
 
         return (
-          <Card key={detail.name} border overflow="hidden" radius={2} style={{lineHeight: 0}}>
+          <Card key={detail.name} overflow="hidden" radius={3} shadow={1}>
             <Flex>
               <Stack flex={1} gap={2} padding={2}>
                 <Text size={1} weight="semibold">
-                  {detail.title || detail.name}
+                  {detail.title ?? detail.name}
                 </Text>
                 {detail.description && (
                   <Text muted size={1}>
@@ -41,6 +39,7 @@ export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
               <Flex align="flex-start" gap={1} padding={1}>
                 <Button
                   aria-label="Clear results"
+                  disabled={hasRunningTest}
                   fontSize={1}
                   icon={TrashIcon}
                   mode="bleed"
@@ -52,31 +51,28 @@ export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
 
             <Stack>
               {testResults.map((result, resultIndex) => (
-                <Card key={resultIndex} borderTop>
-                  <Stack>
-                    {result.renders.map((r, rIdx) => {
-                      return <Card key={rIdx}>{r.phase}</Card>
-                    })}
-                  </Stack>
-
+                <Card key={resultIndex} borderTop="muted" borderWidth={1}>
                   <Flex padding={2}>
                     <Box flex={1}>
                       <Text muted size={1}>
-                        {result.timing?.runs} runs
+                        {result.running ? 'Running...' : `${result.timing?.runs} runs`}
                       </Text>
                     </Box>
 
                     <Box>
-                      <Text size={1}>Avg. {result.timing?.avgDuration.toFixed(3)}ms</Text>
+                      {result.timing && (
+                        <Text size={1}>Avg. {result.timing.avgDuration.toFixed(3)}ms</Text>
+                      )}
                     </Box>
                   </Flex>
                 </Card>
               ))}
 
-              <Card borderTop>
+              <Card borderTop="muted" borderWidth={1}>
                 <Stack>
                   <Button
                     aria-label="Run"
+                    disabled={hasRunningTest}
                     fontSize={1}
                     icon={PlayIcon}
                     mode="bleed"
@@ -92,4 +88,4 @@ export const PerfInspector = memo(function PerfInspector(): React.ReactNode {
       })}
     </Stack>
   )
-})
+}

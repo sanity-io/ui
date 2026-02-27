@@ -1,4 +1,4 @@
-import {memo, Profiler, useCallback, useEffect, useMemo, useRef} from 'react'
+import {Profiler, useCallback, useEffect, useMemo, useRef} from 'react'
 
 import type {PerfTest, PerfTestRenderResult, PerfTestRunFn} from '../types'
 import {usePerf} from './usePerf'
@@ -35,6 +35,11 @@ export function usePerfTest<TargetType = unknown>(
 
   const handleRender: React.ProfilerOnRenderCallback = useCallback(
     (id, phase, actualDuration, baseDuration, startTime, commitTime) => {
+      // Only track mount and update phases, skip nested-update to prevent infinite loops
+      if (phase === 'nested-update') {
+        return
+      }
+
       const result: PerfTestRenderResult = {
         id,
         phase,
@@ -46,18 +51,14 @@ export function usePerfTest<TargetType = unknown>(
       }
 
       setTimeout(() => {
-        // eslint-disable-next-line
-        console.log('@todo: render', {addRenderResult, name, result})
-
-        // @todo: this causes an infinite render-loop – why???
-        // addRenderResult(name, result)
+        addRenderResult(name, result)
       }, 0)
     },
     [addRenderResult, name],
   )
 
   const Wrapper = useMemo(() => {
-    return memo(function Wrapper({children}: {children?: React.ReactNode}): React.ReactNode {
+    return function Wrapper({children}: {children?: React.ReactNode}) {
       if (!active) {
         return <>{children}</>
       }
@@ -67,7 +68,7 @@ export function usePerfTest<TargetType = unknown>(
           {children}
         </Profiler>
       )
-    })
+    }
   }, [active, handleRender, name])
 
   useEffect(() => registerTest(test as PerfTest<unknown>), [registerTest, test])
