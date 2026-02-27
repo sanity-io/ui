@@ -5,24 +5,70 @@ import {type KeyboardEvent, useCallback, useEffect, useRef, useState} from 'reac
 import {TabContext} from './TabListContext'
 import type {TabContextListValue} from './types'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link TabList} component.
+ *
+ * @public
+ */
 export const DEFAULT_TAB_LIST_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link TabList} component.
+ *
+ * @remarks
+ * Extends {@link FlexOwnProps} to inherit all flex container layout props.
+ *
+ * @public
+ */
 export interface TabListOwnProps extends FlexOwnProps {
+  /**
+   * When `true`, tabs are automatically activated (selected) when they
+   * receive focus via keyboard navigation.
+   */
   autoActivate?: boolean
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link TabList} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `TabList`.
+ *
+ * @public
+ */
 export type TabListElementType = 'div' | 'span' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link TabList} component.
+ *
+ * @remarks
+ * Combines {@link TabListOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop, with the `role` attribute omitted
+ * since it is always set to `"tablist"`. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TabListElementType}.
+ *
+ * @public
+ */
 export type TabListProps<E extends TabListElementType = TabListElementType> = Omit<
   Props<TabListOwnProps, E>,
   'role'
 >
 
-/** @public */
+/**
+ * The `TabList` component is a container for {@link Tab} components that
+ * provides keyboard navigation and focus management following the WAI-ARIA
+ * tabs pattern.
+ *
+ * @remarks
+ * `TabList` renders a {@link Flex} container with `role="tablist"` and manages
+ * keyboard navigation (ArrowLeft, ArrowRight, Home, End) across its child
+ * {@link Tab} components. It tracks the currently focused and active tab,
+ * and optionally auto-activates tabs on focus when `autoActivate` is `true`.
+ *
+ * @public
+ */
 export function TabList<E extends TabListElementType = typeof DEFAULT_TAB_LIST_ELEMENT>(
   props: TabListProps<E>,
 ): React.JSX.Element {

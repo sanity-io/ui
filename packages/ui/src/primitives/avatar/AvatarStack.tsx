@@ -18,8 +18,18 @@ export type AvatarStackOwnProps = Omit<
   BoxOwnProps,
   'align' | 'alignItems' | 'display' | 'justify' | 'justifyContent'
 > & {
+  /**
+   * The avatar elements to render in the stack.
+   */
   children: AvatarStackChild | AvatarStackChild[]
+  /**
+   * The maximum number of avatars to display before showing a counter
+   * for the remaining items.
+   */
   maxLength?: number
+  /**
+   * The size of the avatars in the stack. Supports responsive values.
+   */
   size?: ResponsiveProp<AvatarSize>
 }
 

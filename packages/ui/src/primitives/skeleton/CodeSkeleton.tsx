@@ -9,6 +9,10 @@ export const DEFAULT_CODE_SKELETON_ELEMENT = 'div'
 
 /** @beta */
 export type CodeSkeletonOwnProps = SkeletonOwnProps & {
+  /**
+   * Sets the font size of the skeleton placeholder, using the code font size scale from the theme.
+   * Supports responsive values.
+   */
   size?: ResponsiveProp<FontCodeSize>
 }
 

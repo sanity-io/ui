@@ -9,6 +9,10 @@ export const DEFAULT_HEADING_SKELETON_ELEMENT = 'div'
 
 /** @beta */
 export type HeadingSkeletonOwnProps = SkeletonOwnProps & {
+  /**
+   * The heading size to use for the skeleton placeholder dimensions.
+   * Supports responsive values.
+   */
   size?: ResponsiveProp<FontHeadingSize>
 }
 

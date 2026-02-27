@@ -33,51 +33,140 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link TextInput} component.
+ *
+ * @public
+ */
 export const DEFAULT_TEXT_INPUT_ELEMENT = 'input'
 
-/** @public */
+/**
+ * Props for the clear button rendered inside the {@link TextInput} component.
+ *
+ * @remarks
+ * Accepts all {@link ButtonProps} except `as`, `onClick`, and `onMouseDown`,
+ * which are managed internally by the text input.
+ *
+ * @public
+ */
 export type TextInputClearButtonProps = Omit<
   ButtonProps<'button'>,
   'as' | 'onClick' | 'onMouseDown'
 >
 
-/** @public */
+/**
+ * Own props for the {@link TextInput} component.
+ *
+ * @remarks
+ * Extends {@link InputStyleProps} to provide visual styling props such as
+ * `border`, `fontSize`, `padding`, `radius`, and `width`.
+ *
+ * @public
+ */
 export type TextInputOwnProps = InputStyleProps & {
   /**
-   * @beta
+   * When `true`, disables the focus ring on the input element.
+   *
+   * @beta Do not use in production.
    */
   __unstable_disableFocusRing?: boolean
+
   /**
+   * Enables a clear button inside the input. When `true`, renders a default
+   * clear button. When an object is provided, it is spread as props onto the
+   * clear {@link Button}.
+   *
    * @beta
    */
   clearButton?: boolean | TextInputClearButtonProps
-  customValidity?: string
-  icon?: ElementType | ReactNode
-  iconRight?: ElementType | ReactNode
+
   /**
+   * Sets a custom validation message on the underlying input element.
+   *
+   * @remarks
+   * When set to a non-empty string, the input is marked as invalid
+   * and the provided message is used as the validation message.
+   */
+  customValidity?: string
+
+  /**
+   * An icon to render on the leading (left) side of the input.
+   *
+   * @remarks
+   * Accepts either a React component type (rendered as `<IconComponent />`) or
+   * a React element (rendered as-is).
+   */
+  icon?: ElementType | ReactNode
+
+  /**
+   * An icon to render on the trailing (right) side of the input.
+   *
+   * @remarks
+   * Accepts either a React component type (rendered as `<IconComponent />`) or
+   * a React element (rendered as-is). Hidden when `clearButton` is enabled.
+   */
+  iconRight?: ElementType | ReactNode
+
+  /**
+   * A callback that fires when the clear button is clicked.
+   *
    * @beta
    */
   onClear?: () => void
-  prefix?: ReactNode
-  suffix?: ReactNode
+
   /**
-   * @deprecated Use `fontWeight` instead
+   * Content to render before the input element, outside the input's
+   * styled boundary.
+   */
+  prefix?: ReactNode
+
+  /**
+   * Content to render after the input element, outside the input's
+   * styled boundary.
+   */
+  suffix?: ReactNode
+
+  /**
+   * @deprecated Use `fontWeight` instead.
    */
   weight?: FontWeight
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link TextInput} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `TextInput`.
+ *
+ * @public
+ */
 export type TextInputElementType = 'input' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link TextInput} component.
+ *
+ * @remarks
+ * Combines {@link TextInputOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<input>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TextInputElementType}.
+ *
+ * @public
+ */
 export type TextInputProps<E extends TextInputElementType = TextInputElementType> = Props<
   TextInputOwnProps,
   E
 >
 
 /**
- * Single line text input.
+ * A single-line text input component with support for leading/trailing icons,
+ * prefix/suffix content, a clear button, and custom validation.
+ *
+ * @remarks
+ * Renders an `<input>` element by default, wrapped in a styled container.
+ * The component supports `disabled`, `readOnly`, custom validity states,
+ * and all standard HTML input attributes.
  *
  * @public
  */

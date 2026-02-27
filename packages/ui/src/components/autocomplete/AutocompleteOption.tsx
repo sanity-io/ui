@@ -2,10 +2,25 @@ import {_isEnterToClickElement} from '@sanity/ui/core'
 import {type KeyboardEvent, type ReactNode} from 'react'
 
 export interface AutocompleteOptionProps {
+  /**
+   * The content to render inside the option.
+   */
   children: ReactNode
+  /**
+   * A unique identifier for the option element, used for accessibility.
+   */
   id: string
+  /**
+   * A callback that fires when the option is selected.
+   */
   onSelect: (v: string) => void
+  /**
+   * Whether this option is currently highlighted in the list.
+   */
   selected: boolean
+  /**
+   * The value associated with this option, passed to `onSelect` when chosen.
+   */
   value: string
 }
 

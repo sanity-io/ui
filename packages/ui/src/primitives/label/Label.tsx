@@ -7,13 +7,34 @@ import {
   type TextOverflowStyleProps,
 } from '@sanity/ui/css'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Label} component.
+ *
+ * @public
+ */
 export const DEFAULT_LABEL_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Style props for the {@link Label} component.
+ *
+ * @remarks
+ * Combines {@link LabelStyleProps} and {@link TextOverflowStyleProps} to provide
+ * label-specific typography styling and text overflow behavior.
+ *
+ * @public
+ */
 export type LabelOwnProps = LabelStyleProps & TextOverflowStyleProps
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Label} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Label`.
+ * The rendered element receives all applicable HTML attributes for the chosen
+ * element type in addition to the Label's own style props.
+ *
+ * @public
+ */
 export type LabelElementType =
   | 'div'
   | 'h1'
@@ -28,11 +49,28 @@ export type LabelElementType =
   | 'span'
   | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Label} component.
+ *
+ * @remarks
+ * Combines {@link LabelOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link LabelElementType}.
+ *
+ * @public
+ */
 export type LabelProps<E extends LabelElementType = LabelElementType> = Props<LabelOwnProps, E>
 
 /**
- * Typographic labels.
+ * A themed typographic element for rendering UI labels such as form field
+ * labels, section headings, and other short descriptor text.
+ *
+ * @remarks
+ * The `Label` component renders a single HTML element (default `<div>`) styled
+ * with the theme's label typography scale. It is typically used for small,
+ * uppercase or semi-bold text that accompanies form controls or sections.
  *
  * @public
  */

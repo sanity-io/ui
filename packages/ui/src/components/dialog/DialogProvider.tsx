@@ -9,8 +9,19 @@ import type {DialogPosition} from './types'
  * @beta
  */
 export interface DialogProviderProps {
+  /**
+   * The application content to render within the dialog context.
+   */
   children?: ReactNode
+  /**
+   * The CSS position strategy for dialogs created within this provider.
+   * Supports responsive values.
+   */
   position?: ResponsiveProp<DialogPosition>
+  /**
+   * Controls the z-index offset for dialogs created within this provider.
+   * Supports responsive values.
+   */
   zOffset?: ResponsiveProp<number>
 }
 

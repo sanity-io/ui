@@ -12,15 +12,35 @@ export interface PopoverLayerOwnProps extends LayerOwnProps {
    * Whether the popover should animate in and out.
    *
    * @beta
-   * @defaultValue false
    */
   animate?: boolean
+  /**
+   * The content to render inside the popover.
+   */
   children?: React.ReactNode
+  /**
+   * The horizontal origin point for scale animations, as a fraction from 0 to 1.
+   */
   originX?: number
+  /**
+   * The vertical origin point for scale animations, as a fraction from 0 to 1.
+   */
   originY?: number
+  /**
+   * The width of the reference element in pixels, used to match the popover width.
+   */
   referenceWidth?: number
+  /**
+   * The CSS position strategy used by the floating element.
+   */
   strategy?: Strategy
+  /**
+   * The computed horizontal position of the popover in pixels.
+   */
   x?: number
+  /**
+   * The computed vertical position of the popover in pixels.
+   */
   y?: number
 }
 

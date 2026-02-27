@@ -5,26 +5,65 @@ import type {FontTextSize} from '@sanity/ui/theme'
 
 import {SpinnerAnimatedIcon} from './SpinnerAnimatedIcon'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Spinner} component.
+ *
+ * @public
+ */
 export const DEFAULT_SPINNER_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Spinner} component.
+ *
+ * @public
+ */
 export type SpinnerOwnProps = {
+  /**
+   * When `true`, applies a muted foreground color to the spinner.
+   */
   muted?: boolean
+
+  /**
+   * Sets the size of the spinner, using the text font size scale from the theme.
+   * Supports responsive values.
+   */
   size?: ResponsiveProp<FontTextSize>
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Spinner} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Spinner`.
+ *
+ * @public
+ */
 export type SpinnerElementType = 'div' | 'span' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Spinner} component.
+ *
+ * @remarks
+ * Combines {@link SpinnerOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link SpinnerElementType}.
+ *
+ * @public
+ */
 export type SpinnerProps<E extends SpinnerElementType = SpinnerElementType> = Props<
   SpinnerOwnProps,
   E
 >
 
 /**
- * Indicate that something is loading for an indeterminate amount of time.
+ * The `Spinner` component indicates that something is loading for an
+ * indeterminate amount of time.
+ *
+ * @remarks
+ * Renders an animated spinning icon inside a {@link Text} component,
+ * inheriting the theme's text sizing and color treatment.
  *
  * @public
  */

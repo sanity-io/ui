@@ -8,10 +8,26 @@ import type {ReactNode} from 'react'
 
 /** @public */
 export interface RootProviderProps {
+  /**
+   * The DOM element used as the boundary for detecting overflow
+   * in popovers and tooltips.
+   */
   boundaryElement?: HTMLElement | null
+  /**
+   * The application content to render within the root context.
+   */
   children?: ReactNode
+  /**
+   * The DOM element used as the default container for portal content.
+   */
   portalElement?: HTMLElement | null
+  /**
+   * The color scheme applied to the root and inherited by all descendants.
+   */
   scheme: ColorScheme
+  /**
+   * The semantic color tone applied to the root card context.
+   */
   tone: CardTone
 }
 

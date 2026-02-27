@@ -9,6 +9,10 @@ export const DEFAULT_TEXT_SKELETON_ELEMENT = 'div'
 
 /** @beta */
 export type TextSkeletonOwnProps = SkeletonOwnProps & {
+  /**
+   * Sets the size of the text skeleton, using the text font size scale from the theme.
+   * Supports responsive values.
+   */
   size?: ResponsiveProp<FontTextSize>
 }
 

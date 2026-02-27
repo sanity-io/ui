@@ -18,27 +18,95 @@ import {
   useState,
 } from 'react'
 
-/** @beta */
+/**
+ * The default HTML element type rendered by the {@link Breadcrumbs} component.
+ *
+ * @beta
+ */
 export const DEFAULT_BREADCRUMBS_ELEMENT = 'nav'
 
-/** @beta */
+/**
+ * Own props for the {@link Breadcrumbs} component.
+ *
+ * @remarks
+ * Extends {@link GapStyleProps} to provide spacing between breadcrumb items.
+ *
+ * @beta
+ */
 export type BreadcrumbsOwnProps = GapStyleProps & {
+  /**
+   * Props to pass to the expand button that appears when the breadcrumb
+   * trail is truncated beyond `maxLength`.
+   *
+   * @remarks
+   * Accepts all {@link ButtonProps} except `as`, `onClick`, and `selected`,
+   * which are managed internally.
+   */
   expandButton?: Omit<ButtonProps, 'as' | 'onClick' | 'selected'>
+
+  /**
+   * The maximum number of breadcrumb items to display before truncating.
+   *
+   * @remarks
+   * When the number of items exceeds this value, middle items are collapsed
+   * behind an expand button that reveals them in a {@link Popover}.
+   */
   maxLength?: number
+
+  /**
+   * Props to pass to the {@link Popover} that displays the collapsed
+   * breadcrumb items.
+   */
   popover?: PopoverProps
+
+  /**
+   * Custom separator content to render between breadcrumb items.
+   *
+   * @remarks
+   * Defaults to a muted `/` character when not provided.
+   */
   separator?: ReactNode
 }
 
-/** @beta */
+/**
+ * Accepted values for the `as` prop of the {@link Breadcrumbs} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Breadcrumbs`.
+ *
+ * @beta
+ */
 export type BreadcrumbsElementType = 'div' | 'nav' | ComponentType
 
-/** @beta */
+/**
+ * Props for the {@link Breadcrumbs} component.
+ *
+ * @remarks
+ * Combines {@link BreadcrumbsOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<nav>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link BreadcrumbsElementType}.
+ *
+ * @beta
+ */
 export type BreadcrumbsProps<E extends BreadcrumbsElementType = BreadcrumbsElementType> = Props<
   BreadcrumbsOwnProps,
   E
 >
 
-/** @beta */
+/**
+ * The `Breadcrumbs` component renders a navigational breadcrumb trail with
+ * automatic truncation and an expand popover for overflow items.
+ *
+ * @remarks
+ * When the number of items exceeds `maxLength`, middle items are collapsed
+ * behind an ellipsis button. Clicking the button reveals the hidden items
+ * in a {@link Popover}. Items are separated by a configurable `separator`
+ * (defaults to `/`).
+ *
+ * @beta
+ */
 export function Breadcrumbs<E extends BreadcrumbsElementType = typeof DEFAULT_BREADCRUMBS_ELEMENT>(
   props: BreadcrumbsProps<E>,
 ): React.JSX.Element {

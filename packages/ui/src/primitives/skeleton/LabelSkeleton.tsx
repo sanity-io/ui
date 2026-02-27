@@ -9,6 +9,10 @@ export const DEFAULT_LABEL_SKELETON_ELEMENT = 'div'
 
 /** @beta */
 export type LabelSkeletonOwnProps = SkeletonOwnProps & {
+  /**
+   * Sets the size of the label skeleton, using the label font size scale from the theme.
+   * Supports responsive values.
+   */
   size?: ResponsiveProp<FontLabelSize>
 }
 

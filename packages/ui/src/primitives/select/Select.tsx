@@ -5,23 +5,69 @@ import {useCustomValidity} from '@sanity/ui/hooks'
 import {Text} from '@sanity/ui/primitives/text'
 import {useImperativeHandle, useRef} from 'react'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Select} component.
+ *
+ * @public
+ */
 export const DEFAULT_SELECT_ELEMENT = 'select'
 
-/** @public */
+/**
+ * Own props for the {@link Select} component.
+ *
+ * @remarks
+ * Extends {@link SelectStyleProps} to provide visual styling props such as
+ * `border`, `fontSize`, `padding`, `radius`, and `width`.
+ *
+ * @public
+ */
 export type SelectOwnProps = SelectStyleProps & {
+  /**
+   * Sets a custom validation message on the underlying select element.
+   *
+   * @remarks
+   * When set to a non-empty string, the select is marked as invalid
+   * and the provided message is used as the validation message.
+   */
   customValidity?: string
+  /**
+   * When `true`, prevents user interaction with the select element
+   * without applying a disabled visual state.
+   */
   readOnly?: boolean
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Select} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Select`.
+ *
+ * @public
+ */
 export type SelectElementType = 'select' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Select} component.
+ *
+ * @remarks
+ * Combines {@link SelectOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<select>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link SelectElementType}.
+ *
+ * @public
+ */
 export type SelectProps<E extends SelectElementType = SelectElementType> = Props<SelectOwnProps, E>
 
 /**
- * The `Select` component provides control of options.
+ * The `Select` component provides a styled dropdown for selecting from a set of options.
+ *
+ * @remarks
+ * Renders a native `<select>` element by default, wrapped in a styled container
+ * with a trailing dropdown icon. It supports custom validation, read-only state,
+ * and all standard HTML select attributes.
  *
  * @public
  */

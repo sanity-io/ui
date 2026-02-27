@@ -26,34 +26,121 @@ import {isValidElementType} from 'react-is'
 
 import {useMenu} from './useMenu'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link MenuItem} component.
+ *
+ * @public
+ */
 export const DEFAULT_MENU_ITEM_ELEMENT = 'button'
 
-/** @public */
+/**
+ * Own props for the {@link MenuItem} component.
+ *
+ * @remarks
+ * Extends {@link GapStyleProps}, {@link PaddingStyleProps}, and {@link RadiusStyleProps}
+ * to provide layout and visual styling for menu items.
+ *
+ * @public
+ */
 export type MenuItemOwnProps = GapStyleProps &
   PaddingStyleProps &
   RadiusStyleProps & {
+    /**
+     * When `true`, disables the menu item, preventing user interaction.
+     */
     disabled?: boolean
+
+    /**
+     * Sets the font size of the menu item's text and icon content.
+     * Supports responsive values.
+     */
     fontSize?: ResponsiveProp<FontTextSize>
+
+    /**
+     * Keyboard shortcut keys to display alongside the menu item text.
+     *
+     * @remarks
+     * Rendered as a {@link Hotkeys} component on the trailing side of the item.
+     */
     hotkeys?: string[]
+
+    /**
+     * An icon to render on the leading (left) side of the menu item.
+     *
+     * @remarks
+     * Accepts either a React component type (rendered as `<IconComponent />`) or
+     * a React element (rendered as-is).
+     */
     icon?: ElementType | ReactNode
+
+    /**
+     * An icon to render on the trailing (right) side of the menu item.
+     *
+     * @remarks
+     * Accepts either a React component type (rendered as `<IconComponent />`) or
+     * a React element (rendered as-is).
+     */
     iconRight?: ElementType | ReactNode
+
+    /**
+     * When `true`, applies a pressed visual state to the menu item.
+     */
     pressed?: boolean
+
+    /**
+     * When `true`, applies a selected visual state to the menu item.
+     */
     selected?: boolean
+
+    /**
+     * The text label to display inside the menu item.
+     */
     text?: ReactNode
+
+    /**
+     * The semantic color tone of the menu item.
+     */
     tone?: ElementTone
   }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link MenuItem} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `MenuItem`.
+ *
+ * @public
+ */
 export type MenuItemElementType = 'button' | 'a' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link MenuItem} component.
+ *
+ * @remarks
+ * Combines {@link MenuItemOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<button>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link MenuItemElementType}.
+ *
+ * @public
+ */
 export type MenuItemProps<E extends MenuItemElementType = MenuItemElementType> = Props<
   MenuItemOwnProps,
   E
 >
 
-/** @public */
+/**
+ * The `MenuItem` component represents a single actionable item within a {@link Menu}.
+ *
+ * @remarks
+ * `MenuItem` renders a `<button>` element by default with `role="menuitem"`.
+ * It supports text labels, leading and trailing icons, keyboard shortcut hints,
+ * and integrates with the parent {@link Menu} context for focus management
+ * and keyboard navigation.
+ *
+ * @public
+ */
 export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITEM_ELEMENT>(
   props: MenuItemProps<E>,
 ): React.JSX.Element {

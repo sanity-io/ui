@@ -8,24 +8,54 @@ import {
 } from '@sanity/ui/css'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Switch} component.
+ *
+ * @public
+ */
 export const DEFAULT_SWITCH_ELEMENT = 'input'
 
-/** @public */
+/**
+ * Own props for the {@link Switch} component.
+ *
+ * @public
+ */
 export type SwitchOwnProps = {
+  /**
+   * When `true`, sets the switch to an indeterminate (mixed) state,
+   * visually distinct from both on and off.
+   */
   indeterminate?: boolean
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Switch} component.
+ *
+ * @public
+ */
 export type SwitchElementType = 'input' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Switch} component.
+ *
+ * @remarks
+ * Combines {@link SwitchOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<input>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link SwitchElementType}.
+ *
+ * @public
+ */
 export type SwitchProps<E extends SwitchElementType = SwitchElementType> = Props<SwitchOwnProps, E>
 
 /**
  * The `Switch` component allows the user to toggle a setting on and off.
  *
- * Extends all properties of an `<input type="checkbox" />` element, except type.
+ * @remarks
+ * Renders an `<input type="checkbox">` by default, styled as a toggle switch
+ * with a track and thumb. It supports `indeterminate`, `disabled`, and
+ * `readOnly` states.
  *
  * @public
  */

@@ -16,22 +16,59 @@ import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './h
 import {TreeContext} from './TreeContext'
 import type {TreeContextValue, TreeState} from './types'
 
-/** @beta */
+/**
+ * The default HTML element type rendered by the {@link Tree} component.
+ *
+ * @beta
+ */
 export const DEFAULT_TREE_ELEMENT = 'div'
 
 /**
+ * Own props for the {@link Tree} component.
+ *
+ * @remarks
+ * Extends {@link StackOwnProps} (with `position` omitted) to provide
+ * vertical stacking and spacing for tree items.
+ *
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
 export type TreeOwnProps = Omit<StackOwnProps, 'position'>
 
-/** @beta */
+/**
+ * Accepted values for the `as` prop of the {@link Tree} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Tree`.
+ *
+ * @beta
+ */
 export type TreeElementType = 'div' | ComponentType
 
-/** @beta */
+/**
+ * Props for the {@link Tree} component.
+ *
+ * @remarks
+ * Combines {@link TreeOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TreeElementType}.
+ *
+ * @beta
+ */
 export type TreeProps<E extends TreeElementType = TreeElementType> = Props<TreeOwnProps, E>
 
 /**
+ * The `Tree` component renders an accessible tree view with keyboard
+ * navigation for hierarchical content.
+ *
+ * @remarks
+ * `Tree` renders a `<ul>` element with `role="tree"` and manages keyboard
+ * navigation (ArrowUp, ArrowDown, ArrowLeft, ArrowRight) across its
+ * {@link TreeItem} children. It tracks focused and expanded states for
+ * all registered items.
+ *
  * This API might change. DO NOT USE IN PRODUCTION.
  *
  * @beta

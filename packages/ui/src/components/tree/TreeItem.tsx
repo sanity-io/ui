@@ -28,38 +28,118 @@ import {TreeContext} from './TreeContext'
 import {TreeGroup} from './TreeGroup'
 import {useTree} from './useTree'
 
-/** @beta */
+/**
+ * The default HTML element type rendered by the {@link TreeItem} component.
+ *
+ * @beta
+ */
 export const DEFAULT_TREE_ITEM_ELEMENT = 'a'
 
-/** @beta */
+/**
+ * Own props for the {@link TreeItem} component.
+ *
+ * @remarks
+ * Extends {@link SelectableOwnProps} to inherit selectable visual styling,
+ * and adds tree-specific behavior for expandable, navigable tree nodes.
+ *
+ * @beta
+ */
 export type TreeItemOwnProps = SelectableOwnProps & {
-  expanded?: boolean
-  fontSize?: ResponsiveProp<FontTextSize>
-  icon?: ElementType
   /**
-   * Allows passing a custom element type to the link component
+   * When `true`, the tree item's children are visible.
+   */
+  expanded?: boolean
+
+  /**
+   * Sets the font size of the tree item's text and icon content.
+   * Supports responsive values.
+   */
+  fontSize?: ResponsiveProp<FontTextSize>
+
+  /**
+   * An icon component to render on the leading side of the tree item.
+   *
+   * @remarks
+   * When not provided, a toggle arrow icon is displayed instead.
+   */
+  icon?: ElementType
+
+  /**
+   * Allows passing a custom element type to the link component.
+   *
    * @internal
    */
   linkAs?: SelectableElementType
+
+  /**
+   * A callback that fires when the tree item is clicked.
+   */
   onClick?: MouseEventHandler<HTMLAnchorElement | HTMLLIElement>
+
+  /**
+   * The padding inside the tree item content. Supports responsive values.
+   */
   padding?: ResponsiveProp<Space>
+
+  /**
+   * The gap between the icon and text within the tree item.
+   * Supports responsive values.
+   */
   gap?: ResponsiveProp<Space>
-  /** @deprecated Use `gap` instead */
+
+  /**
+   * @deprecated Use `gap` instead.
+   */
   space?: never
+
+  /**
+   * The text label to display inside the tree item.
+   */
   text?: ReactNode
+
+  /**
+   * The font weight of the tree item's text content.
+   */
   weight?: FontWeight
 }
 
-/** @beta */
+/**
+ * Accepted values for the `as` prop of the {@link TreeItem} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `TreeItem`.
+ *
+ * @beta
+ */
 export type TreeItemElementType = 'a' | 'li' | ComponentType
 
-/** @beta */
+/**
+ * Props for the {@link TreeItem} component.
+ *
+ * @remarks
+ * Combines {@link TreeItemOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<a>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TreeItemElementType}.
+ *
+ * @beta
+ */
 export type TreeItemProps<E extends TreeItemElementType = TreeItemElementType> = Props<
   TreeItemOwnProps,
   E
 >
 
 /**
+ * The `TreeItem` component represents a single node within a {@link Tree},
+ * supporting expandable children, icons, text labels, and link navigation.
+ *
+ * @remarks
+ * `TreeItem` renders as either a link (`<a>`) or a list item depending on
+ * whether an `href` prop is provided. It integrates with the parent
+ * {@link Tree} context for keyboard navigation (ArrowUp, ArrowDown,
+ * ArrowLeft, ArrowRight) and focus management.
+ *
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */

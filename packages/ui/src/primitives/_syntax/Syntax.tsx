@@ -2,7 +2,13 @@ import {_syntax} from '@sanity/ui/css'
 import {hasLanguage, Refractor} from 'react-refractor'
 
 export interface SyntaxProps {
+  /**
+   * The programming language to use for syntax highlighting.
+   */
   language?: string
+  /**
+   * The code content to render with syntax highlighting.
+   */
   value: React.ReactNode
 }
 

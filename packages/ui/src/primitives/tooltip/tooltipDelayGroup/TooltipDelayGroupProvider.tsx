@@ -9,6 +9,9 @@ import type {TooltipDelayGroupContextValue} from './types'
  * @public
  * */
 export interface TooltipDelayGroupProviderProps {
+  /**
+   * The tooltip elements to render within the shared delay group.
+   */
   children?: ReactNode
   /**
    * Handles the delays to open or close a tooltip inside a group

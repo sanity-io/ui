@@ -11,6 +11,9 @@ export type TreeGroupElementType = 'div' | ComponentType
 
 /** @public */
 export type TreeGroupOwnProps = {
+  /**
+   * When `true`, the group's children are visible.
+   */
   expanded?: boolean
 }
 

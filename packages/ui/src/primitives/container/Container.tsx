@@ -7,23 +7,60 @@ import {
 } from '@sanity/ui/css'
 import {type BoxElementType} from '@sanity/ui/primitives/box'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Container} component.
+ *
+ * @public
+ */
 export const DEFAULT_CONTAINER_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Container} component.
+ *
+ * @remarks
+ * Combines {@link BoxStyleProps} (with `width` omitted) and {@link ContainerStyleProps}
+ * to provide layout utilities alongside container-specific width constraints.
+ *
+ * @public
+ */
 export type ContainerOwnProps = Omit<BoxStyleProps, 'width'> & ContainerStyleProps
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Container} component.
+ *
+ * @remarks
+ * Inherits all element types from {@link BoxElementType}. The rendered element
+ * receives all applicable HTML attributes for the chosen element type.
+ *
+ * @public
+ */
 export type ContainerElementType = BoxElementType
 
-/** @public */
+/**
+ * Props for the {@link Container} component.
+ *
+ * @remarks
+ * Combines {@link ContainerOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link ContainerElementType}.
+ *
+ * @public
+ */
 export type ContainerProps<E extends ContainerElementType = ContainerElementType> = Props<
   ContainerOwnProps,
   E
 >
 
 /**
- * The `Container` component wraps content layout in a defined set of widths.
+ * The `Container` component constrains the width of its content to a predefined
+ * set of max-width values from the theme, centering it horizontally.
+ *
+ * @remarks
+ * Use `Container` to limit the width of page-level or section-level content
+ * for readability. The `width` prop selects from the theme's container width
+ * scale.
  *
  * @public
  */

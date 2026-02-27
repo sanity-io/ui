@@ -15,31 +15,108 @@ import {startTransition, useEffect, useState} from 'react'
 
 import type {AvatarPosition} from './types'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Avatar} component.
+ *
+ * @public
+ */
 export const DEFAULT_AVATAR_ELEMENT = 'span'
 
-/** @public */
+/**
+ * Own props for the {@link Avatar} component.
+ *
+ * @public
+ */
 export interface AvatarOwnProps {
-  /** @beta */
+  /**
+   * When `true`, hides the inner stroke outline on the avatar.
+   *
+   * @beta Do not use in production.
+   */
   __unstable_hideInnerStroke?: boolean
+
+  /**
+   * The position from which the arrow indicator should animate.
+   *
+   * @remarks
+   * Used to create a smooth transition when the arrow moves between positions.
+   */
   animateArrowFrom?: AvatarPosition
+
+  /**
+   * The position of the directional arrow indicator on the avatar.
+   */
   arrowPosition?: AvatarPosition
+
+  /**
+   * The color of the avatar background.
+   */
   color?: AvatarColor
+
+  /**
+   * The initials to display when no image source is provided.
+   *
+   * @remarks
+   * Only the first two characters are rendered.
+   */
   initials?: string
+
+  /**
+   * A callback that fires when the avatar image fails to load.
+   */
   onImageLoadError?: (event: Error) => void
+
+  /**
+   * The size of the avatar. Supports responsive values.
+   */
   size?: ResponsiveProp<AvatarSize>
+
+  /**
+   * The URL of the image to display in the avatar.
+   *
+   * @remarks
+   * When the image fails to load, the avatar falls back to displaying initials.
+   */
   src?: string
+
+  /**
+   * An accessible label for the avatar, rendered as `aria-label` and `title` attributes.
+   */
   title?: string
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Avatar} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Avatar`.
+ * The rendered element receives all applicable HTML attributes for the chosen element type.
+ *
+ * @public
+ */
 export type AvatarElementType = 'a' | 'button' | 'div' | 'span' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Avatar} component.
+ *
+ * @remarks
+ * Combines {@link AvatarOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<span>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link AvatarElementType}.
+ *
+ * @public
+ */
 export type AvatarProps<E extends AvatarElementType = AvatarElementType> = Props<AvatarOwnProps, E>
 
 /**
  * Avatars are used to represent people and other agents (e.g. bots).
+ *
+ * @remarks
+ * The `Avatar` component displays a user image, initials, or a colored
+ * placeholder. It supports an optional directional arrow indicator
+ * for use in collaborative editing contexts.
  *
  * @public
  */

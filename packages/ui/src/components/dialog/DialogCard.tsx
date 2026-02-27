@@ -44,13 +44,38 @@ export type DialogCardOwnProps = CardOwnProps & {
    * @beta
    */
   __unstable_hideCloseButton: boolean
+  /**
+   * The content to render inside the dialog card's scrollable area.
+   */
   children: ReactNode
+  /**
+   * A ref that receives the dialog's scrollable content container element.
+   */
   contentRef?: ForwardedRef<HTMLDivElement>
+  /**
+   * Content to render in the dialog's footer area, below the scrollable content.
+   */
   footer: ReactNode
+  /**
+   * Content to render in the dialog's header area, above the scrollable content.
+   */
   header: ReactNode
+  /**
+   * A unique identifier for the dialog, used for accessibility attributes.
+   */
   id: string
+  /**
+   * A callback that fires when the user clicks outside the dialog card.
+   */
   onClickOutside?: () => void
+  /**
+   * A callback that fires when the dialog should close, such as when the
+   * close button or Escape key is pressed.
+   */
   onClose?: () => void
+  /**
+   * The name of the portal used to scope keyboard and click-outside handling.
+   */
   portal?: string
 }
 

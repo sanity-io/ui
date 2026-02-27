@@ -4,28 +4,88 @@ import {use, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 
 import {TabContext} from './TabListContext'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Tab} component.
+ *
+ * @public
+ */
 export const DEFAULT_TAB_ELEMENT = 'button'
 
-/** @public */
+/**
+ * Own props for the {@link Tab} component.
+ *
+ * @remarks
+ * Extends {@link ButtonOwnProps} to inherit all button styling and
+ * interactive props, and adds tab-specific behavior for use within
+ * a {@link TabList}.
+ *
+ * @public
+ */
 export interface TabOwnProps extends ButtonOwnProps {
   /**
-   * The `id` of the corresponding `TabPanel` component.
+   * The `id` of the corresponding {@link TabPanel} component that
+   * this tab controls.
    */
   'aria-controls': string
+
+  /**
+   * A unique identifier for the tab, used for accessibility attributes
+   * and coordination with the {@link TabList} context.
+   */
   'id': string
+
+  /**
+   * When `true`, indicates the tab is visually focused via keyboard navigation.
+   */
   'focused'?: boolean
+
+  /**
+   * The text label to display inside the tab button.
+   */
   'label'?: React.ReactNode
+
+  /**
+   * A callback that fires when this tab becomes the active tab.
+   */
   'onActivate'?: () => void
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Tab} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Tab`.
+ *
+ * @public
+ */
 export type TabElementType = 'button' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Tab} component.
+ *
+ * @remarks
+ * Combines {@link TabOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<button>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TabElementType}.
+ *
+ * @public
+ */
 export type TabProps<E extends TabElementType = TabElementType> = Props<TabOwnProps, E>
 
-/** @public */
+/**
+ * The `Tab` component represents a single tab control within a {@link TabList},
+ * following the WAI-ARIA tabs pattern.
+ *
+ * @remarks
+ * `Tab` renders a {@link Button} with `role="tab"` and manages its own
+ * active, selected, and focused states in coordination with the parent
+ * {@link TabList} context. It supports keyboard navigation (ArrowLeft,
+ * ArrowRight, Home, End) when used inside a `TabList`.
+ *
+ * @public
+ */
 export function Tab<E extends TabElementType = typeof DEFAULT_TAB_ELEMENT>(
   props: TabProps<E>,
 ): React.JSX.Element {

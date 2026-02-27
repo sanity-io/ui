@@ -5,20 +5,62 @@ import {useCallback, useImperativeHandle, useRef, useState} from 'react'
 
 import {RootProvider} from './RootProvider'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Root} component.
+ *
+ * @public
+ */
 export const DEFAULT_ROOT_ELEMENT = 'html'
 
-/** @public */
+/**
+ * Own props for the {@link Root} component.
+ *
+ * @remarks
+ * Extends {@link BoxOwnProps} and {@link RootStyleProps} to provide
+ * layout utilities alongside root-level theming props such as `scheme` and `tone`.
+ *
+ * @public
+ */
 export interface RootOwnProps extends BoxOwnProps, RootStyleProps {}
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Root} component.
+ *
+ * @remarks
+ * Determines the HTML element rendered by `Root`. When rendered as `<html>`,
+ * an additional `<body>` wrapper is inserted automatically.
+ *
+ * @public
+ */
 export type RootElementType = 'html' | 'body' | 'div'
 
-/** @public */
+/**
+ * Props for the {@link Root} component.
+ *
+ * @remarks
+ * Combines {@link RootOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<html>` element by default.
+ *
+ * @typeParam E - The HTML element type to render. Defaults to {@link RootElementType}.
+ *
+ * @public
+ */
 export type RootProps<E extends RootElementType = RootElementType> = Props<RootOwnProps, E>
 
 /**
- * The `Root` component.
+ * The top-level wrapper component that establishes the design system context
+ * for all descendant components.
+ *
+ * @remarks
+ * The `Root` component renders a {@link Box} element (default `<html>`) that
+ * initialises the theme, color scheme, card tone, portal container, and
+ * boundary element for the entire component tree. It wraps its children in a
+ * {@link RootProvider} which supplies {@link CardProvider}, {@link LayerProvider},
+ * {@link ToastProvider}, {@link BoundaryElementProvider}, and {@link PortalProvider}.
+ *
+ * When rendered as `<html>`, an additional `<body>` wrapper is inserted
+ * automatically to apply height and margin reset styles.
  *
  * @public
  */

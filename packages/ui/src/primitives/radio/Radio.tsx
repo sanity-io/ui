@@ -3,22 +3,57 @@ import {radio, radio_input, radio_presentation} from '@sanity/ui/css'
 import {useCustomValidity} from '@sanity/ui/hooks'
 import {useImperativeHandle, useRef} from 'react'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Radio} component.
+ *
+ * @public
+ */
 export const DEFAULT_RADIO_ELEMENT = 'input'
 
-/** @public */
+/**
+ * Own props for the {@link Radio} component.
+ *
+ * @public
+ */
 export type RadioOwnProps = {
+  /**
+   * Sets a custom validation message on the underlying input element.
+   *
+   * @remarks
+   * When set to a non-empty string, the radio is marked as invalid
+   * and the provided message is used as the validation message.
+   */
   customValidity?: string
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Radio} component.
+ *
+ * @public
+ */
 export type RadioElementType = 'input' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Radio} component.
+ *
+ * @remarks
+ * Combines {@link RadioOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<input>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link RadioElementType}.
+ *
+ * @public
+ */
 export type RadioProps<E extends RadioElementType = RadioElementType> = Props<RadioOwnProps, E>
 
 /**
  * The `Radio` component allows the user to select one option from a set.
+ *
+ * @remarks
+ * Radio buttons are typically used in groups where only one option
+ * can be selected at a time. Each radio renders an `<input type="radio">`
+ * by default.
  *
  * @public
  */

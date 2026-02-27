@@ -10,7 +10,13 @@ export const DEFAULT_AVATAR_COUNTER_ELEMENT = 'span'
 
 /** @public */
 export interface AvatarCounterOwnProps {
+  /**
+   * The number to display inside the counter.
+   */
   count: number
+  /**
+   * The size of the counter. Supports responsive values.
+   */
   size?: ResponsiveProp<AvatarSize>
 }
 

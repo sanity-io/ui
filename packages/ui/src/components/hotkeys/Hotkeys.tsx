@@ -2,34 +2,67 @@ import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
 import {hotkeys, HOTKEYS_STYLE_PROP_KEYS, type HotkeysStyleProps} from '@sanity/ui/css'
 import {KBD} from '@sanity/ui/primitives/kbd'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Hotkeys} component.
+ *
+ * @public
+ */
 export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
 
-/** @public */
+/**
+ * Own props for the {@link Hotkeys} component.
+ *
+ * @remarks
+ * Extends {@link HotkeysStyleProps} to provide visual styling for the
+ * keyboard shortcut display.
+ *
+ * @public
+ */
 export interface HotkeysOwnProps extends HotkeysStyleProps {
-  /** @deprecated - no longer supported */
+  /** @deprecated No longer supported. */
   fontSize?: never
+
+  /**
+   * An array of key labels to display, each rendered as an individual
+   * {@link KBD} element.
+   */
   keys: string[]
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Hotkeys} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Hotkeys`.
+ *
+ * @public
+ */
 export type HotkeysElementType = 'kbd' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Hotkeys} component.
+ *
+ * @remarks
+ * Combines {@link HotkeysOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<kbd>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link HotkeysElementType}.
+ *
+ * @public
+ */
 export type HotkeysProps<E extends HotkeysElementType = HotkeysElementType> = Props<
   HotkeysOwnProps,
   E
 >
 
 /**
- * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.
+ * The `Hotkeys` component renders a keyboard shortcut combination as a
+ * series of semantic {@link KBD} elements.
  *
- * @example
- * ```tsx
- * import {Hotkeys} from '@sanity/ui'
- *
- * <Hotkeys keys={['⌘', 'K']} />
- * ```
+ * @remarks
+ * Each entry in the `keys` array is rendered as an individual `<kbd>` element,
+ * making the shortcut accessible and visually styled by the theme.
  *
  * @public
  */

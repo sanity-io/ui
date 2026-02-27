@@ -18,24 +18,69 @@ import {
 
 import type {MenuProps} from './Menu'
 
-/** @public */
+/**
+ * Props for the {@link MenuButton} component.
+ *
+ * @public
+ */
 export type MenuButtonProps = {
   /**
+   * When `true`, prevents focus from returning to the button element
+   * after the menu closes.
+   *
    * @beta Do not use in production.
    */
   __unstable_disableRestoreFocusOnClose?: boolean
+
+  /**
+   * The button element that triggers the menu. Rendered as the popover's
+   * reference element.
+   */
   button: ReactElement<ButtonProps>
+
+  /**
+   * A unique identifier for the menu button, used for accessibility
+   * attributes including `aria-labelledby` on the menu.
+   */
   id: string
+
+  /**
+   * The menu element to render inside the popover when open.
+   */
   menu?: ReactElement
+
+  /**
+   * A callback that fires when the menu closes.
+   */
   onClose?: () => void
+
+  /**
+   * A callback that fires when the menu opens.
+   */
   onOpen?: () => void
+
+  /**
+   * Configuration props for the {@link Popover} that wraps the menu.
+   *
+   * @remarks
+   * Accepts all {@link PopoverProps} except `content` and `open`, which
+   * are managed internally.
+   */
   popover?: Omit<PopoverProps, 'content' | 'open'>
 
+  /**
+   * A ref that receives the underlying button element.
+   */
   ref?: ForwardedRef<HTMLButtonElement | null>
 }
 
 /**
- * The `MenuButton` component follows the WAI-ARIA specification for menu buttons.
+ * The `MenuButton` component combines a {@link Button} trigger with a {@link Menu}
+ * inside a {@link Popover}, following the WAI-ARIA menu button pattern.
+ *
+ * @remarks
+ * Handles keyboard interactions (ArrowDown, ArrowUp, Enter, Space, Escape),
+ * focus management between the button and menu, and click-outside dismissal.
  *
  * @public
  */

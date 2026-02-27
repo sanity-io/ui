@@ -9,7 +9,14 @@ import type {LayerContextValue} from './types'
 
 /** @public */
 export interface LayerProviderProps {
+  /**
+   * The content to render within the layer context.
+   */
   children?: ReactNode
+  /**
+   * Controls the z-index offset of the layer relative to its parent layer.
+   * Supports responsive values.
+   */
   zOffset?: ResponsiveProp<number>
 }
 

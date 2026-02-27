@@ -16,13 +16,39 @@ type ToastState = {
   params: ToastParams
 }[]
 
-/** @public */
+/**
+ * Props for the {@link ToastProvider} component.
+ *
+ * @remarks
+ * Extends {@link ToastLayerProps} (with `children` omitted) to provide
+ * layout and spacing configuration for the toast container.
+ *
+ * @public
+ */
 export interface ToastProviderProps extends Omit<ToastLayerProps, 'children'> {
+  /**
+   * The application content to wrap with the toast context.
+   */
   children?: React.ReactNode
+
+  /**
+   * Controls the z-index offset of the toast layer relative to its parent layer.
+   * Supports responsive values.
+   */
   zOffset?: ResponsiveProp<number>
 }
 
-/** @public */
+/**
+ * The `ToastProvider` component establishes a context for displaying toast
+ * notifications and renders the toast container layer.
+ *
+ * @remarks
+ * Wrap your application with `ToastProvider` to enable the {@link useToast}
+ * hook. Toasts are managed via the `push` method on the context value,
+ * which supports configurable duration, status, and dismissal behavior.
+ *
+ * @public
+ */
 export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   const {children, padding, paddingX, paddingY, gap, zOffset = 1} = props
   const [state, setState] = useState<ToastState>([])

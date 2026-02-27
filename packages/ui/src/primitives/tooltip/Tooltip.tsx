@@ -55,10 +55,22 @@ import {
 import {TooltipDelayGroupContext} from './tooltipDelayGroup/TooltipDelayGroupContext'
 import {TooltipLayer} from './TooltipLayer'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Tooltip} component.
+ *
+ * @public
+ */
 export const DEFAULT_TOOLTIP_ELEMENT = 'div'
 
-/** @public */
+/**
+ * Own props for the {@link Tooltip} component.
+ *
+ * @remarks
+ * Extends {@link LayerOwnProps}, {@link RadiusStyleProps}, and {@link ShadowStyleProps}
+ * to provide positioning, visual styling, and stacking context for tooltip content.
+ *
+ * @public
+ */
 export type TooltipOwnProps = LayerOwnProps &
   RadiusStyleProps &
   ShadowStyleProps & {
@@ -66,50 +78,144 @@ export type TooltipOwnProps = LayerOwnProps &
      * Whether the tooltip should animate in and out.
      *
      * @beta
-     * @defaultValue false
      */
     animate?: boolean
-    /** @deprecated Will be removed in the next major version */
+
+    /**
+     * @deprecated Will be removed in the next major version.
+     */
     arrow?: boolean
+
+    /**
+     * The boundary element used to detect overflow when positioning the tooltip.
+     */
     boundaryElement?: HTMLElement | null
+
+    /**
+     * The reference element that the tooltip is anchored to.
+     *
+     * @remarks
+     * Must be a single React element that accepts a `ref` prop. The tooltip
+     * positions itself relative to this element and listens for hover and
+     * focus events on it.
+     */
     children?: React.ReactElement<
       React.HTMLAttributes<HTMLElement> & React.RefAttributes<HTMLElement>
     >
-    content?: React.ReactNode
+
     /**
-     * Adds a delay to open or close the tooltip.
+     * Custom content to render inside the tooltip.
      *
-     * If only a `number` is passed, it will be used for both opening and closing.
+     * @remarks
+     * Rendered alongside `text` and `hotkeys` content when provided.
+     */
+    content?: React.ReactNode
+
+    /**
+     * Adds a delay before the tooltip opens or closes.
      *
-     * If an object `{open: number; close:number}` is passed, it can be used to set different delays for each action.
-     *
-     * @public
-     * @defaultValue 0
+     * @remarks
+     * When a `number` is passed, it is used for both opening and closing.
+     * When an object `{open: number; close: number}` is passed, different
+     * delays can be set for each action.
      */
     delay?: Delay
+
+    /**
+     * When `true`, disables the tooltip and renders only the child element.
+     */
     disabled?: boolean
+
+    /**
+     * An ordered list of fallback placements to try when the preferred
+     * placement does not fit within the boundary.
+     */
     fallbackPlacements?: Placement[]
+
+    /**
+     * Keyboard shortcut keys to display inside the tooltip.
+     *
+     * @remarks
+     * Rendered as a {@link Hotkeys} component alongside the text and content.
+     */
     hotkeys?: string[]
+
+    /**
+     * The preferred placement of the tooltip relative to its reference element.
+     */
     placement?: Placement
-    /** Whether or not to render the tooltip in a portal element. */
+
+    /**
+     * Whether or not to render the tooltip in a portal element.
+     *
+     * @remarks
+     * When `true`, renders in the default portal. When a string is provided,
+     * renders in the named portal.
+     */
     portal?: boolean | string
+
+    /**
+     * The color scheme of the tooltip card.
+     */
     scheme?: ColorScheme
+
+    /**
+     * The text content to display inside the tooltip.
+     *
+     * @remarks
+     * Rendered inside a {@link Text} component with the size specified by `textSize`.
+     */
     text?: React.ReactNode
+
+    /**
+     * The font size of the tooltip's text content. Supports responsive values.
+     */
     textSize?: ResponsiveProp<FontTextSize>
+
+    /**
+     * The semantic color tone of the tooltip card.
+     */
     tone?: CardTone
   }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Tooltip} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `Tooltip`.
+ *
+ * @public
+ */
 export type TooltipElementType = 'div' | 'span' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Tooltip} component.
+ *
+ * @remarks
+ * Combines {@link TooltipOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link TooltipElementType}.
+ *
+ * @public
+ */
 export type TooltipProps<E extends TooltipElementType = TooltipElementType> = Props<
   TooltipOwnProps,
   E
 >
 
 /**
- * Tooltips display information when hovering, focusing or tapping.
+ * Tooltips display contextual information when hovering over, focusing, or
+ * tapping a reference element.
+ *
+ * @remarks
+ * The `Tooltip` component uses Floating UI to position its content relative
+ * to a child reference element. It supports text, custom content, keyboard
+ * shortcut hints, open/close delays, portal rendering, and animation.
+ *
+ * The tooltip automatically hides on Escape key press, context menu, or
+ * when the reference element loses hover/focus.
  *
  * @public
  */

@@ -8,9 +8,21 @@ export const DEFAULT_TOOLTIP_LAYER_ELEMENT = 'div'
 
 /** @internal */
 export interface TooltipLayerOwnProps extends LayerOwnProps {
+  /**
+   * Whether the tooltip should animate in and out.
+   */
   animate?: boolean
+  /**
+   * The horizontal origin point for scale animations, as a fraction from 0 to 1.
+   */
   originX?: number
+  /**
+   * The vertical origin point for scale animations, as a fraction from 0 to 1.
+   */
   originY?: number
+  /**
+   * The computed placement of the tooltip relative to its reference element.
+   */
   placement?: Placement
 }
 

@@ -13,41 +13,123 @@ import {
   useState,
 } from 'react'
 
-/** @beta */
+/**
+ * The default HTML element type rendered by the {@link VirtualList} component.
+ *
+ * @beta
+ */
 export const DEFAULT_VIRTUAL_LIST_ELEMENT = 'div'
 
-/** @beta */
+/**
+ * Options passed to the {@link VirtualListOwnProps.onChange} callback when
+ * the visible range or layout measurements change.
+ *
+ * @beta
+ */
 export interface VirtualListChangeOpts {
+  /** The index of the first visible item in the list. */
   fromIndex: number
+
+  /** The computed gap in pixels between items. */
   gap: number
+
+  /** The measured height in pixels of a single item. */
   itemHeight: number
+
+  /** The height in pixels of the scrollable viewport. */
   scrollHeight: number
+
+  /** The current scroll position in pixels. */
   scrollTop: number
+
+  /** The index of the last visible item in the list (exclusive). */
   toIndex: number
 }
 
-/** @beta */
+/**
+ * Own props for the {@link VirtualList} component.
+ *
+ * @remarks
+ * Provides configuration for virtualized rendering of large lists,
+ * including item rendering, keying, spacing, and change notifications.
+ *
+ * @typeParam Item - The shape of each item in the list.
+ *
+ * @beta
+ */
 export type VirtualListOwnProps<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Item = any,
 > = {
+  /**
+   * The spacing between items, using the theme's space scale.
+   */
   gap?: Space
+
+  /**
+   * A function that returns a unique key for each item, used for
+   * React reconciliation of virtualized items.
+   *
+   * @remarks
+   * When not provided, the item's index is used as the key.
+   */
   getItemKey?: (item: Item, itemIndex: number) => string
+
+  /**
+   * The array of items to render in the virtualized list.
+   */
   items?: Item[]
+
+  /**
+   * A callback that fires when the visible range or layout measurements change.
+   */
   onChange?: (opts: VirtualListChangeOpts) => void
+
+  /**
+   * A render function for each item in the list.
+   */
   renderItem?: (item: Item) => ReactNode
 }
 
-/** @beta */
+/**
+ * Accepted values for the `as` prop of the {@link VirtualList} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `VirtualList`.
+ *
+ * @beta
+ */
 export type VirtualListElementType = 'div' | ComponentType
 
-/** @beta */
+/**
+ * Props for the {@link VirtualList} component.
+ *
+ * @remarks
+ * Combines {@link VirtualListOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<div>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link VirtualListElementType}.
+ *
+ * @beta
+ */
 export type VirtualListProps<E extends VirtualListElementType = VirtualListElementType> = Props<
   VirtualListOwnProps,
   E
 >
 
-/** @beta */
+/**
+ * The `VirtualList` component efficiently renders large lists by only
+ * mounting the items currently visible within the scrollable viewport.
+ *
+ * @remarks
+ * `VirtualList` measures a single item's height on first render, then
+ * calculates which items are visible based on the scroll position and
+ * viewport size. Only the visible subset of items is rendered, with
+ * absolute positioning used to place them correctly within a sized wrapper.
+ *
+ * @beta
+ */
 export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VIRTUAL_LIST_ELEMENT>(
   props: VirtualListProps<E>,
 ): React.JSX.Element {

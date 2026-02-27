@@ -7,6 +7,9 @@ export const DEFAULT_INLINE_CODE_ELEMENT = 'code'
 
 /** @public */
 export interface InlineCodeProps {
+  /**
+   * The code content to render, optionally with syntax highlighting.
+   */
   children: React.ReactNode
   /** Language to use for syntax highlighting. */
   language?: string

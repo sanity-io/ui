@@ -11,23 +11,80 @@ import {Text} from '@sanity/ui/primitives/text'
 import {motion, type Variant, type Variants} from 'motion/react'
 import {type ReactNode} from 'react'
 
-/** @internal */
+/**
+ * The default HTML element type rendered by the {@link Toast} component.
+ *
+ * @internal
+ */
 export const DEFAULT_TOAST_ELEMENT = 'li'
 
-/** @internal */
+/**
+ * Own props for the {@link Toast} component.
+ *
+ * @remarks
+ * Extends {@link RadiusStyleProps} to provide border radius styling
+ * for the toast card.
+ *
+ * @internal
+ */
 export type ToastOwnProps = RadiusStyleProps & {
+  /**
+   * When `true`, renders a close button that allows the user to
+   * dismiss the toast manually.
+   */
   closable?: boolean
+
+  /**
+   * Secondary descriptive content displayed below the title.
+   */
   description?: ReactNode
+
+  /**
+   * A callback that fires when the toast is dismissed, either by
+   * the close button or when the duration expires.
+   */
   onClose?: () => void
+
+  /**
+   * The primary text content displayed in the toast.
+   */
   title?: ReactNode
+
+  /**
+   * The semantic status of the toast, which determines the color
+   * tone and ARIA role applied.
+   */
   status?: 'error' | 'warning' | 'success' | 'info'
+
+  /**
+   * The duration in milliseconds before the toast auto-dismisses.
+   *
+   * @remarks
+   * When set to `Infinity`, the toast will not auto-dismiss and must
+   * be closed manually via the close button.
+   */
   duration?: number
 }
 
-/** @internal */
+/**
+ * Accepted values for the `as` prop of the {@link Toast} component.
+ *
+ * @internal
+ */
 export type ToastElementType = 'li' | ComponentType
 
-/** @internal */
+/**
+ * Props for the {@link Toast} component.
+ *
+ * @remarks
+ * Combines {@link ToastOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<li>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link ToastElementType}.
+ *
+ * @internal
+ */
 export type ToastProps<E extends ToastElementType = ToastElementType> = Props<ToastOwnProps, E>
 
 // Support pattern used by Sanity Studio, that works around the lack of `duration: Infinity` support in older @sanity/ui versions
@@ -58,7 +115,11 @@ const BUTTON_TONE = {
 /**
  * The `Toast` component gives feedback to users when an action has taken place.
  *
- * Toasts can be closed with a close button, or auto-dismiss when the duration expires.
+ * @remarks
+ * Toasts can be closed with a close button or auto-dismiss when the duration
+ * expires. They support semantic statuses (`error`, `warning`, `success`, `info`)
+ * which determine the card tone and ARIA role. Toasts animate in and out
+ * using motion transitions.
  *
  * @internal
  */

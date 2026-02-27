@@ -4,26 +4,60 @@ import {checkbox, checkbox_input, checkbox_presentation} from '@sanity/ui/css'
 import {useCustomValidity} from '@sanity/ui/hooks'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link Checkbox} component.
+ *
+ * @public
+ */
 export const DEFAULT_CHECKBOX_ELEMENT = 'input'
 
-/** @public */
+/**
+ * Own props for the {@link Checkbox} component.
+ *
+ * @public
+ */
 export type CheckboxOwnProps = {
+  /**
+   * When `true`, sets the checkbox to an indeterminate (mixed) state,
+   * visually distinct from both checked and unchecked.
+   */
   indeterminate?: boolean
+  /**
+   * Sets a custom validation message on the underlying input element.
+   *
+   * @remarks
+   * When set to a non-empty string, the checkbox is marked as invalid
+   * and the provided message is used as the validation message.
+   */
   customValidity?: string
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link Checkbox} component.
+ *
+ * @public
+ */
 export type CheckboxElementType = 'input' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link Checkbox} component.
+ *
+ * @remarks
+ * Combines {@link CheckboxOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders an `<input>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link CheckboxElementType}.
+ *
+ * @public
+ */
 export type CheckboxProps<E extends CheckboxElementType = CheckboxElementType> = Props<
   CheckboxOwnProps,
   E
 >
 
 /**
- * Checkboxes allow the user to select one or more items from a set.
+ * The `Checkbox` component allows the user to select one or more items from a set.
  *
  * @public
  */

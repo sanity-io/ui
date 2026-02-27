@@ -22,15 +22,55 @@ import {isValidElementType} from 'react-is'
 import {DEFAULT_MENU_ELEMENT, Menu, type MenuProps} from './Menu'
 import {useMenu} from './useMenu'
 
-/** @public */
+/**
+ * The default HTML element type rendered by the {@link MenuGroup} component.
+ *
+ * @public
+ */
 export const DEFAULT_MENU_GROUP_ELEMENT = 'button'
 
-/** @public */
+/**
+ * Own props for the {@link MenuGroup} component.
+ *
+ * @remarks
+ * Extends {@link RadiusStyleProps} to provide border radius styling.
+ *
+ * @public
+ */
 export type MenuGroupOwnProps = RadiusStyleProps & {
+  /**
+   * When `true`, disables the menu group, preventing user interaction.
+   */
   disabled?: boolean
+
+  /**
+   * Sets the font size of the menu group's text and icon content.
+   * Supports responsive values.
+   */
   fontSize?: ResponsiveProp<FontTextSize>
+
+  /**
+   * The gap between the icon, text, and arrow elements within the menu group.
+   * Supports responsive values.
+   */
   gap?: ResponsiveProp<Space>
+
+  /**
+   * An icon to render on the leading (left) side of the menu group.
+   *
+   * @remarks
+   * Accepts either a React component type (rendered as `<IconComponent />`) or
+   * a React element (rendered as-is).
+   */
   icon?: ElementType | ReactNode
+
+  /**
+   * Props to pass to the child {@link Menu} rendered inside the submenu popover.
+   *
+   * @remarks
+   * Props related to menu lifecycle (`onClickOutside`, `onEscape`, `onItemClick`,
+   * etc.) are managed internally and cannot be overridden.
+   */
   menu?: Omit<
     MenuProps<typeof DEFAULT_MENU_ELEMENT>,
     | 'onClickOutside'
@@ -42,22 +82,70 @@ export type MenuGroupOwnProps = RadiusStyleProps & {
     | 'shouldFocus'
     | 'onBlurCapture'
   >
+
+  /**
+   * The padding inside the menu group button. Supports responsive values.
+   */
   padding?: ResponsiveProp<Space>
+
+  /**
+   * Props to pass to the {@link Popover} that contains the submenu.
+   *
+   * @remarks
+   * The `content` and `open` props are managed internally and cannot be overridden.
+   */
   popover?: Omit<PopoverProps, 'content' | 'open'>
+
+  /**
+   * The text label to display inside the menu group.
+   */
   text?: ReactNode
+
+  /**
+   * The semantic color tone of the menu group.
+   */
   tone?: ElementTone
 }
 
-/** @public */
+/**
+ * Accepted values for the `as` prop of the {@link MenuGroup} component.
+ *
+ * @remarks
+ * Determines the HTML element or custom component type rendered by `MenuGroup`.
+ *
+ * @public
+ */
 export type MenuGroupElementType = 'button' | ComponentType
 
-/** @public */
+/**
+ * Props for the {@link MenuGroup} component.
+ *
+ * @remarks
+ * Combines {@link MenuGroupOwnProps} with the intrinsic HTML attributes of the
+ * element type specified by the `as` prop. When `as` is not provided,
+ * the component renders a `<button>` element by default.
+ *
+ * @typeParam E - The HTML element or component type to render. Defaults to {@link MenuGroupElementType}.
+ *
+ * @public
+ */
 export type MenuGroupProps<E extends MenuGroupElementType = MenuGroupElementType> = Props<
   MenuGroupOwnProps,
   E
 >
 
-/** @public */
+/**
+ * The `MenuGroup` component renders a menu item that opens a submenu
+ * when hovered or activated via keyboard.
+ *
+ * @remarks
+ * `MenuGroup` acts as a container for nested {@link Menu} content. It renders
+ * a selectable button with an icon, text label, and trailing chevron arrow.
+ * When the user hovers over or navigates into the group, a {@link Popover}
+ * containing the child menu items appears alongside it.
+ *
+ * @public
+ */
 export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_GROUP_ELEMENT>(
   props: MenuGroupProps<E>,
 ): React.JSX.Element {
