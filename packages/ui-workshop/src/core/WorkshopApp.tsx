@@ -1,4 +1,4 @@
-import {Root, usePrefersDark} from '@sanity/ui'
+import {usePrefersDark} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/theme'
 import {startTransition, useEffect, useMemo, useState} from 'react'
 
@@ -17,13 +17,11 @@ export function WorkshopApp(props: {config: WorkshopConfig}) {
   }, [prefersDark])
 
   return (
-    <Root scheme={scheme}>
-      <Workshop
-        config={config}
-        locationStore={locationStore}
-        scheme={scheme}
-        onSchemeChange={setScheme}
-      />
-    </Root>
+    <Workshop
+      config={config}
+      locationStore={locationStore}
+      scheme={scheme}
+      onSchemeChange={setScheme}
+    />
   )
 }

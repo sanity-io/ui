@@ -1,4 +1,4 @@
-import {BoundaryElementProvider, Card, PortalProvider, ToastProvider} from '@sanity/ui'
+import {Root} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/theme'
 import {memo, useCallback, useEffect, useMemo, useState} from 'react'
 
@@ -15,7 +15,6 @@ import {createMainController} from './WorkshopMainController'
 /** @internal */
 export interface WorkshopFrameProps {
   config: WorkshopConfig
-  setScheme: (nextScheme: ColorScheme) => void
 }
 
 function getStateFromLocation(): WorkshopState {
@@ -36,11 +35,9 @@ function getStateFromLocation(): WorkshopState {
 export const WorkshopFrame = memo(function WorkshopFrame(
   props: WorkshopFrameProps,
 ): React.ReactNode {
-  const {config, setScheme} = props
+  const {config} = props
   const main = useMemo(() => createMainController(), [])
   const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])
-  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
-  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
 
   // Publish messages to both frame+main
   const broadcast = useCallback(
@@ -64,35 +61,25 @@ export const WorkshopFrame = memo(function WorkshopFrame(
   // Pipe messages from main to channel
   useEffect(() => main.message.subscribe(channel.publish), [channel, main])
 
-  // Update scheme
-  useEffect(() => setScheme(scheme), [setScheme, scheme])
-
   // Inform `main` that the frame is ready
   useEffect(() => broadcast({type: 'workshop/frameReady'}), [broadcast])
 
   return (
-    <ToastProvider>
-      <BoundaryElementProvider element={boundaryElement}>
-        <PortalProvider element={portalElement}>
-          <WorkshopProvider
-            broadcast={broadcast}
-            channel={channel}
-            config={config}
-            frameReady={frameReady}
-            origin="frame"
-            path={path}
-            payload={payload}
-            scheme={scheme}
-            viewport={viewport}
-            zoom={zoom}
-          >
-            <Card ref={setBoundaryElement} height="fill">
-              <WorkshopCanvas />
-              <div ref={setPortalElement} data-portal="" />
-            </Card>
-          </WorkshopProvider>
-        </PortalProvider>
-      </BoundaryElementProvider>
-    </ToastProvider>
+    <Root height="fill" lang="en" overflow="auto" scheme={scheme}>
+      <WorkshopProvider
+        broadcast={broadcast}
+        channel={channel}
+        config={config}
+        frameReady={frameReady}
+        origin="frame"
+        path={path}
+        payload={payload}
+        scheme={scheme}
+        viewport={viewport}
+        zoom={zoom}
+      >
+        <WorkshopCanvas />
+      </WorkshopProvider>
+    </Root>
   )
 })
