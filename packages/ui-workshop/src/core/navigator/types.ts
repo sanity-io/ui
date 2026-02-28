@@ -23,10 +23,3 @@ export interface MenuScope {
   title: string
   scope: WorkshopScope
 }
-
-/** @internal */
-export interface MenuCollection {
-  name?: string
-  title?: string
-  children?: MenuCollection[]
-}

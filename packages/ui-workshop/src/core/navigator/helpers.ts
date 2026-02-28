@@ -1,11 +1,11 @@
 import {set} from 'segmented-property'
 
-import type {WorkshopScope} from '../config/types'
-import type {MenuCollection, MenuList, MenuScope, MenuStory} from './types'
+import type {WorkshopCollection, WorkshopScope} from '../config/types'
+import type {MenuList, MenuScope, MenuStory} from './types'
 
 /** @internal */
 export function parseMenuNode(
-  collections: MenuCollection[],
+  collections: WorkshopCollection[],
   node: Record<string, unknown>,
   name?: string,
 ): Array<MenuList | MenuScope | MenuStory> {
@@ -46,7 +46,7 @@ export function parseMenuNode(
 
 /** @internal */
 export function buildMenu(
-  collections: MenuCollection[],
+  collections: WorkshopCollection[],
   scopes: WorkshopScope[],
 ): MenuList | MenuScope {
   const scopeMap: {[key: string]: WorkshopScope} = {}

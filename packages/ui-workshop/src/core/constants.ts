@@ -2,7 +2,7 @@
 export const EMPTY_ARRAY: never[] = []
 
 /** @internal */
-export const EMPTY_RECORD: Record<string, unknown> = {}
+export const EMPTY_RECORD: Record<string, never> = {}
 
 /** @internal */
 export const DEFAULT_SCHEME_VALUE = 'system'
