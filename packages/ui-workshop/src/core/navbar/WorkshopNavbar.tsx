@@ -1,5 +1,5 @@
 import {ControlsIcon, MenuIcon} from '@sanity/icons'
-import {Box, Button, Card, Flex, Inline, Text, useMediaIndex} from '@sanity/ui'
+import {Box, Button, Flex, Inline, Layer, Text, useMediaIndex} from '@sanity/ui'
 import {memo} from 'react'
 
 import {useWorkshop} from '../useWorkshop'
@@ -21,7 +21,7 @@ export const WorkshopNavbar = memo(function WorkshopNavbar(props: {
   const {story, title} = useWorkshop()
 
   return (
-    <Card borderBottom flex="none" padding={2} style={{lineHeight: 0}}>
+    <Layer flex="none" padding={2} shadow={1} zOffset={100}>
       <Flex gap={1}>
         <Box display={['block', 'block', 'none']} flex="none">
           <Button
@@ -67,6 +67,6 @@ export const WorkshopNavbar = memo(function WorkshopNavbar(props: {
           </Inline>
         </Box>
       </Flex>
-    </Card>
+    </Layer>
   )
 })

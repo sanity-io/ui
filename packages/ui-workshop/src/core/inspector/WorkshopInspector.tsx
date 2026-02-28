@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {Box, Card, Flex, TabPanel} from '@sanity/ui'
+
+import {Box, Flex, Layer, TabPanel} from '@sanity/ui'
 import {memo, useState} from 'react'
 
 import {EMPTY_RECORD} from '../constants'
@@ -36,10 +37,12 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
   const showTabs = tabs.length > 1
 
   return (
-    <Card
+    <Layer
       className={workshopInspector}
       display={expanded ? ['block'] : ['none', 'none', 'block']}
       flex={1}
+      overflow="hidden"
+      shadow={1}
     >
       <Flex direction="column" height="fill">
         {showTabs && <InspectorHeader currentTabId={tabId} tabs={tabs} onTabChange={setTabId} />}
@@ -72,6 +75,6 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
           </Box>
         )}
       </Flex>
-    </Card>
+    </Layer>
   )
 })
