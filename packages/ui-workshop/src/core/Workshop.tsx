@@ -249,7 +249,7 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
             />
           )}
 
-          <Flex flex={1}>
+          <Flex flex={1} overflow="hidden">
             <WorkshopNavigator collections={config.collections} expanded={navigatorExpanded} />
             <WorkshopCanvas
               frameRef={frame.setElement}

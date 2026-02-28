@@ -13,8 +13,6 @@ import {StoryTree} from './StoryTree'
 import type {MenuCollection, MenuList, MenuScope} from './types'
 import {workshopNavigator} from './WorkshopNavigator.css'
 
-const flexNoneStyle: React.CSSProperties = {flex: 'none'}
-const lineHeightNoneStyle: React.CSSProperties = {lineHeight: 0}
 const textInputFontSize: ResponsiveProp<FontTextSize> = [2, 2, 1]
 
 /** @internal */
@@ -94,28 +92,28 @@ const NavigatorView = memo(function NavigatorView(props: {
     props
 
   return (
-    <Card
+    <Layer
       className={workshopNavigator}
       display={expanded ? ['block'] : ['none', 'none', 'block']}
       flex={1}
+      overflow="hidden"
+      shadow={1}
     >
       <Flex direction="column" height="fill">
-        <Layer style={flexNoneStyle}>
-          <Card padding={2} shadow={1} style={lineHeightNoneStyle}>
-            <TextInput
-              border={false}
-              clearButton={Boolean(query)}
-              fontSize={textInputFontSize}
-              gap={2}
-              icon={SearchIcon}
-              padding={2}
-              placeholder="Stories"
-              radius={2}
-              value={query}
-              onChange={onSearchQueryChange}
-              onClear={onSearchQueryClear}
-            />
-          </Card>
+        <Layer flex="none" padding={2} shadow={1}>
+          <TextInput
+            border={false}
+            clearButton={Boolean(query)}
+            fontSize={textInputFontSize}
+            gap={2}
+            icon={SearchIcon}
+            padding={2}
+            placeholder="Stories"
+            radius={2}
+            value={query}
+            onChange={onSearchQueryChange}
+            onClear={onSearchQueryClear}
+          />
         </Layer>
 
         <Card flex={1} overflow="auto">
@@ -132,6 +130,6 @@ const NavigatorView = memo(function NavigatorView(props: {
           )}
         </Card>
       </Flex>
-    </Card>
+    </Layer>
   )
 })
