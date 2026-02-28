@@ -1,10 +1,4 @@
-import {
-  BoundaryElementProvider,
-  Flex,
-  PortalProvider,
-  ToastProvider,
-  useMediaIndex,
-} from '@sanity/ui'
+import {Flex, Root, useMediaIndex} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/tokens'
 import {debounce, isEqual} from 'lodash'
 import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
@@ -87,8 +81,6 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
   const withNavbar = config.features?.navbar ?? true
   const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])
   const frame = useMemo(() => createWorkshopFrameController(), [])
-  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
-  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const [{frameReady, path, payload, scheme, viewport, zoom}, setState] = useState<WorkshopState>(
     () => getStateFromLocation(locationStore.get(), schemeProp),
   )
@@ -234,51 +226,39 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
   }
 
   return (
-    <WorkshopProvider
-      broadcast={broadcast}
-      channel={channel}
-      config={config}
-      frameReady={frameReady}
-      origin="main"
-      path={path}
-      payload={payload}
-      scheme={scheme}
-      viewport={viewport}
-      zoom={zoom}
-    >
-      <ToastProvider>
-        <BoundaryElementProvider element={boundaryElement}>
-          <PortalProvider element={portalElement}>
-            <Flex
-              ref={setBoundaryElement}
-              data-boundary=""
-              direction="column"
-              height="fill"
-              style={{minWidth: 320}}
-            >
-              {withNavbar && (
-                <WorkshopNavbar
-                  inspectorExpanded={inspectorExpanded}
-                  navigatorExpanded={navigatorExpanded}
-                  onInspectorToggle={handleInspectorToggle}
-                  onNavigatorToggle={handleNavigatorToggle}
-                />
-              )}
+    <Root height="fill" lang="en" scheme={scheme}>
+      <WorkshopProvider
+        broadcast={broadcast}
+        channel={channel}
+        config={config}
+        frameReady={frameReady}
+        origin="main"
+        path={path}
+        payload={payload}
+        scheme={scheme}
+        viewport={viewport}
+        zoom={zoom}
+      >
+        <Flex direction="column" height="fill" style={{minWidth: 320}}>
+          {withNavbar && (
+            <WorkshopNavbar
+              inspectorExpanded={inspectorExpanded}
+              navigatorExpanded={navigatorExpanded}
+              onInspectorToggle={handleInspectorToggle}
+              onNavigatorToggle={handleNavigatorToggle}
+            />
+          )}
 
-              <Flex flex={1}>
-                <WorkshopNavigator collections={config.collections} expanded={navigatorExpanded} />
-                <WorkshopCanvas
-                  frameRef={frame.setElement}
-                  hidden={navigatorExpanded || inspectorExpanded}
-                />
-                <WorkshopInspector expanded={inspectorExpanded} />
-              </Flex>
-
-              <div ref={setPortalElement} data-portal="" />
-            </Flex>
-          </PortalProvider>
-        </BoundaryElementProvider>
-      </ToastProvider>
-    </WorkshopProvider>
+          <Flex flex={1}>
+            <WorkshopNavigator collections={config.collections} expanded={navigatorExpanded} />
+            <WorkshopCanvas
+              frameRef={frame.setElement}
+              hidden={navigatorExpanded || inspectorExpanded}
+            />
+            <WorkshopInspector expanded={inspectorExpanded} />
+          </Flex>
+        </Flex>
+      </WorkshopProvider>
+    </Root>
   )
 })

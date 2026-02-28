@@ -2,7 +2,7 @@ import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 
 import type {WorkshopConfig} from './config/types'
-import {WorkshopFrameApp} from './WorkshopFrameApp'
+import {WorkshopFrame} from './frame/WorkshopFrame'
 
 /** @beta */
 export function mountFrame(options: {config: WorkshopConfig; element: HTMLElement | null}): void {
@@ -14,7 +14,7 @@ export function mountFrame(options: {config: WorkshopConfig; element: HTMLElemen
 
   root.render(
     <StrictMode>
-      <WorkshopFrameApp config={config} />
+      <WorkshopFrame config={config} />
     </StrictMode>,
   )
 }
