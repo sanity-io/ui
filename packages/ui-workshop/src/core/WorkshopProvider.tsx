@@ -1,4 +1,3 @@
-import type {ColorScheme} from '@sanity/ui/theme'
 import {memo, useMemo} from 'react'
 
 import type {WorkshopConfig, WorkshopPlugin} from './config/types'
@@ -7,6 +6,7 @@ import {resolveLocation} from './helpers'
 import type {Pubsub} from './lib/pubsub'
 import {propsPlugin} from './plugins/props/plugin'
 import type {WorkshopMsg} from './types/msg'
+import type {WorkshopColorScheme} from './types/scheme'
 import {WorkshopContext} from './WorkshopContext'
 
 /** @internal */
@@ -19,7 +19,7 @@ export interface WorkshopProviderProps {
   origin: 'frame' | 'main'
   path: string
   payload: Record<string, unknown>
-  scheme: ColorScheme
+  scheme: WorkshopColorScheme
   viewport?: string
   zoom?: number
 }
