@@ -1,5 +1,5 @@
 import {LaunchIcon} from '@sanity/icons'
-import {Button} from '@sanity/ui'
+import {Button, type ButtonProps} from '@sanity/ui'
 import {memo, useMemo} from 'react'
 
 import {buildFrameUrl} from '../helpers'
@@ -17,19 +17,21 @@ export const OpenCanvasButton = memo(function OpenCanvasButton() {
     [frameUrl, path, payload, scheme, zoom, viewport],
   )
 
-  return (
-    <Button
-      as={canvasUrl ? 'a' : 'button'}
-      disabled={!canvasUrl}
-      fontSize={1}
-      // @ts-expect-error - TODO: fix this
-      href={canvasUrl}
-      iconRight={LaunchIcon}
-      mode="ghost"
-      padding={2}
-      rel="noopener noreferrer"
-      target="_blank"
-      text="Open story"
-    />
-  )
+  const buttonProps: ButtonProps = {
+    iconRight: LaunchIcon,
+    mode: 'ghost',
+    padding: 2,
+    text: 'Open story',
+  }
+
+  if (canvasUrl) {
+    buttonProps.as = 'a'
+    buttonProps['href'] = canvasUrl
+    buttonProps['rel'] = 'noopener noreferrer'
+    buttonProps['target'] = '_blank'
+  } else {
+    buttonProps['disabled'] = true
+  }
+
+  return <Button {...buttonProps} />
 })
