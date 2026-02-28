@@ -1,23 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {Box, Flex, Layer, TabPanel} from '@sanity/ui'
-import {memo, useState} from 'react'
+import {useState} from 'react'
 
 import {EMPTY_RECORD} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {InspectorHeader} from './InspectorHeader'
 import type {InspectorTab} from './types'
-import {workshopInspector} from './WorkshopInspector.css'
-
-const MemoRender = memo(function MemoRender(props: {component: React.ElementType; options: any}) {
-  const {component: Component, options} = props
-  return <Component options={options} />
-})
+import {root} from './WorkshopInspector.css'
 
 /** @internal */
-export const WorkshopInspector = memo(function WorkshopInspector(props: {
-  expanded: boolean
-}): React.ReactNode {
+export function WorkshopInspector(props: {expanded: boolean}) {
   const {expanded} = props
   const {plugins} = useWorkshop()
 
@@ -27,25 +18,25 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
       return {
         id: plugin.name,
         label: plugin.title,
-        tone: undefined,
+        tone: 'default',
         plugin,
       }
     })
 
-  const [tabId, setTabId] = useState<string | null>(tabs.length > 0 ? tabs[0].id : null)
+  const [tabId, setTabId] = useState<string | null>(tabs.length > 0 ? tabs[0]!.id : null)
   const currentTab = tabs.find((tab) => tab.id === tabId)
   const showTabs = tabs.length > 1
 
   return (
     <Layer
-      className={workshopInspector}
+      className={root}
       display={expanded ? ['block'] : ['none', 'none', 'block']}
       flex={1}
-      overflow="hidden"
+      overflow={['hidden', 'hidden', 'auto']}
       shadow={1}
     >
       <Flex direction="column" height="fill">
-        {showTabs && <InspectorHeader currentTabId={tabId} tabs={tabs} onTabChange={setTabId} />}
+        {showTabs && <InspectorHeader currentTabId={tabId} tabs={tabs} onTabActivate={setTabId} />}
 
         {showTabs &&
           tabs.map((tab) => (
@@ -58,9 +49,9 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
               overflow="auto"
             >
               {tab.plugin.inspector && (
-                <MemoRender
+                <RenderInspector
                   component={tab.plugin.inspector}
-                  options={tab.plugin.options || EMPTY_RECORD}
+                  options={tab.plugin.options ?? EMPTY_RECORD}
                 />
               )}
             </TabPanel>
@@ -68,13 +59,19 @@ export const WorkshopInspector = memo(function WorkshopInspector(props: {
 
         {!showTabs && currentTab?.plugin.inspector && (
           <Box flex={1} overflow="auto">
-            <MemoRender
+            <RenderInspector
               component={currentTab.plugin.inspector}
-              options={currentTab.plugin.options || EMPTY_RECORD}
+              options={currentTab.plugin.options ?? EMPTY_RECORD}
             />
           </Box>
         )}
       </Flex>
     </Layer>
   )
-})
+}
+
+function RenderInspector(props: {component: React.ElementType; options: Record<string, never>}) {
+  const {component: Component, options} = props
+
+  return <Component options={options} />
+}

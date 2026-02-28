@@ -1,12 +1,12 @@
 import {SelectIcon} from '@sanity/icons'
-import {Button, Menu, MenuButton, type MenuButtonProps,MenuItem} from '@sanity/ui'
-import {memo, useCallback} from 'react'
+import {Button, Menu, MenuButton, type MenuButtonProps, MenuItem} from '@sanity/ui'
+import {useCallback} from 'react'
 
 import {ZOOM_OPTIONS} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */
-export function ZoomMenu(): React.ReactNode {
+export function ZoomMenu() {
   const {broadcast, story, zoom} = useWorkshop()
 
   const setZoom = useCallback(
@@ -18,28 +18,27 @@ export function ZoomMenu(): React.ReactNode {
 }
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
-  constrainSize: true,
-  placement: 'bottom',
-  portal: true,
+  'constrainSize': true,
+  // @ts-expect-error - data-testid is not a valid prop for PopoverProps
+  'data-testid': 'zoom-menu-popover',
+  'placement': 'bottom',
 }
 
-const ZoomMenuView = memo(function ZoomMenuView(props: {
-  disabled: boolean
-  setZoom: (z: number) => void
-  zoom: number
-}) {
+function ZoomMenuView(props: {disabled: boolean; setZoom: (z: number) => void; zoom: number}) {
   const {disabled, setZoom, zoom} = props
 
   return (
     <MenuButton
       button={
         <Button
+          data-testid="zoom-menu-button"
           disabled={disabled}
           fontSize={1}
           iconRight={SelectIcon}
           mode="ghost"
           padding={2}
           text={ZOOM_OPTIONS.find((o) => o.value === zoom)?.title}
+          tooltip={{text: 'Zoom'}}
         />
       }
       id="zoom-menu"
@@ -50,6 +49,7 @@ const ZoomMenuView = memo(function ZoomMenuView(props: {
               key={option.value}
               fontSize={1}
               padding={2}
+              pressed={option.value === zoom}
               selected={option.value === zoom}
               text={option.title}
               onClick={() => setZoom(option.value)}
@@ -60,4 +60,4 @@ const ZoomMenuView = memo(function ZoomMenuView(props: {
       popover={POPOVER_PROPS}
     />
   )
-})
+}

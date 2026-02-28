@@ -1,28 +1,44 @@
 import {useEffect} from 'react'
 
-import type {SelectPropOptionsProp, SelectPropValue} from '../types'
+import {useUnique} from '../../../lib/commands/useUnique'
+import type {SelectPropOptions, SelectPropValue} from '../types'
 import {useProps} from '../useProps'
 
-/** @internal */
+/** @public */
 export function useSelect<T extends SelectPropValue>(
   name: string,
-  options: SelectPropOptionsProp<T>,
+  options: SelectPropOptions<T>,
+  defaultValue: T,
+  groupName?: string,
+): T
+/** @public */
+export function useSelect<T extends SelectPropValue>(
+  name: string,
+  options: SelectPropOptions<T>,
+  defaultValue?: T,
+): T | undefined
+/** @public */
+export function useSelect<T extends SelectPropValue>(
+  name: string,
+  options: SelectPropOptions<T>,
   defaultValue?: T,
   groupName = 'Props',
 ): T | undefined {
   const {registerProp, unregisterProp, value} = useProps()
+
+  const stableOptions = useUnique(options)
 
   useEffect(() => {
     registerProp({
       type: 'select',
       groupName,
       name,
-      options: options as SelectPropOptionsProp,
+      options: stableOptions as SelectPropOptions,
       defaultValue,
     })
 
     return () => unregisterProp(name)
-  }, [defaultValue, groupName, name, options, registerProp, unregisterProp])
+  }, [defaultValue, groupName, name, stableOptions, registerProp, unregisterProp])
 
   return value[name] === undefined ? defaultValue : (value[name] as T)
 }

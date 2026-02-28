@@ -1,11 +1,12 @@
-import {Flex, Root, useMediaIndex, usePrefersDark} from '@sanity/ui'
+import {Box, Flex, Root, Text, useMediaIndex, usePrefersDark} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/theme'
-import {debounce, isEqual} from 'lodash'
-import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import debounce from 'lodash/debounce'
+import {startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import type {WorkshopConfig} from './config/types'
 import {DEFAULT_SCHEME_VALUE, DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
 import {WorkshopInspector} from './inspector/WorkshopInspector'
+import {detectPlatform} from './lib/platform'
 import {createPubsub} from './lib/pubsub'
 import {startViewTransition} from './lib/startViewTransition'
 import type {WorkshopLocationStore} from './location/LocationStore'
@@ -15,6 +16,7 @@ import type {WorkshopLocation, WorkshopQuery} from './types/location'
 import type {WorkshopMsg} from './types/msg'
 import type {WorkshopState} from './types/state'
 import {WorkshopCanvas} from './WorkshopCanvas'
+import {WorkshopCommands} from './WorkshopCommands'
 import {createWorkshopFrameController} from './WorkshopFrameController'
 import {WorkshopProvider} from './WorkshopProvider'
 import {workshopReducer} from './workshopReducer'
@@ -30,20 +32,21 @@ function getStateFromLocation(
   frameReady?: boolean,
 ): WorkshopState {
   const path = loc.path
-  const query = loc.query || {}
+  const query = loc.query ?? {}
   const {scheme, viewport, zoom, ...payload} = query
 
   return {
-    frameReady: frameReady || false,
+    context: 'main',
+    frameReady: frameReady ?? false,
     path,
     payload,
     scheme: typeof scheme === 'string' ? (scheme as ColorScheme) : 'system',
     viewport: typeof viewport === 'string' ? viewport : 'auto',
-    zoom: typeof zoom === 'number' ? zoom : 1,
+    zoom: typeof zoom === 'string' ? Number(zoom) : 1,
   }
 }
 
-function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQuery {
+function getQueryFromState(state: WorkshopState): WorkshopQuery {
   const {payload, scheme, viewport, zoom} = state
 
   const query: WorkshopQuery = {}
@@ -60,17 +63,14 @@ function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQu
     query['zoom'] = zoom
   }
 
-  if (withPayload) {
-    for (const [key, val] of Object.entries(payload)) {
-      if (['schema', 'viewport', 'zoom'].includes(key)) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          `Workshop: the payload cannot contain a property named "${key}" (protected name)`,
-        )
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        query[key] = val as any
-      }
+  for (const [key, val] of Object.entries(payload)) {
+    if (['scheme', 'viewport', 'zoom'].includes(key)) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Workshop: the payload cannot contain a property named "${key}" (protected name)`,
+      )
+    } else {
+      query[key] = val
     }
   }
 
@@ -78,11 +78,12 @@ function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQu
 }
 
 /** @public */
-export const Workshop = memo(function Workshop(props: WorkshopProps): React.ReactNode {
+export function Workshop(props: WorkshopProps) {
   const {config, locationStore} = props
+  const platform = detectPlatform()
   const prefersDark = usePrefersDark()
   const withNavbar = config.features?.navbar ?? true
-  const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])
+  const [channel] = useState(() => createPubsub<WorkshopMsg>())
   const frame = useMemo(() => createWorkshopFrameController(), [])
   const [{frameReady, path, payload, scheme, viewport, zoom}, setState] = useState<WorkshopState>(
     () => getStateFromLocation(locationStore.get()),
@@ -92,7 +93,10 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
   const [inspectorExpanded, setInspectorExpanded] = useState(false)
   const frameReadyRef = useRef(frameReady)
   const pathRef = useRef(path)
-  const queryRef = useRef<WorkshopQuery>({scheme, viewport, zoom, ...payload})
+  const schemeRef = useRef(scheme)
+  const viewportRef = useRef(viewport)
+  const zoomRef = useRef(zoom)
+  const payloadRef = useRef(JSON.stringify(payload))
 
   const [rootScheme, setRootScheme] = useState(() =>
     scheme === 'system' ? (prefersDark ? 'dark' : 'light') : scheme,
@@ -158,43 +162,49 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
   useEffect(() => () => _pushLocation.cancel(), [_pushLocation])
   useEffect(() => () => _replaceLocation.cancel(), [_replaceLocation])
 
+  // Update refs when state changes
+  useEffect(() => {
+    if (
+      pathRef.current !== path ||
+      schemeRef.current !== scheme ||
+      viewportRef.current !== viewport ||
+      zoomRef.current !== zoom ||
+      payloadRef.current !== JSON.stringify(payload)
+    ) {
+      const nextLocation = {
+        path,
+        query: getQueryFromState({
+          context: 'main',
+          frameReady,
+          path,
+          payload,
+          scheme,
+          viewport,
+          zoom,
+        }),
+      }
+
+      // Determine if we should push or replace based on path change
+      if (pathRef.current !== path) {
+        _pushLocation(nextLocation)
+      } else {
+        _replaceLocation(nextLocation)
+      }
+
+      pathRef.current = path
+      schemeRef.current = scheme
+      viewportRef.current = viewport
+      zoomRef.current = zoom
+      payloadRef.current = JSON.stringify(payload)
+    }
+  }, [_pushLocation, _replaceLocation, frameReady, path, payload, scheme, viewport, zoom])
+
   // Subscribe to global message channel
-  useEffect(
-    () =>
-      channel.subscribe((msg) => {
-        // Update state
-        setState((prevState) => {
-          const nextState = workshopReducer(prevState, msg)
-          const changed = !isEqual(prevState, nextState)
-
-          if (changed) {
-            // Update URL location
-            if (msg.type === 'workshop/setPath') {
-              if (pathRef.current !== nextState.path) {
-                pathRef.current = nextState.path
-
-                // query without payload
-                const nextQuery = getQueryFromState(nextState, false)
-
-                _pushLocation({path: nextState.path, query: nextQuery})
-              }
-            } else if (msg.type !== 'workshop/setState') {
-              // query with payload
-              const nextQuery = getQueryFromState(nextState)
-
-              if (!isEqual(queryRef.current, nextQuery)) {
-                queryRef.current = nextQuery
-
-                _replaceLocation({path: nextState.path, query: nextQuery})
-              }
-            }
-          }
-
-          return changed ? nextState : prevState
-        })
-      }),
-    [_pushLocation, _replaceLocation, channel, locationStore],
-  )
+  useEffect(() => {
+    return channel.subscribe((msg) => {
+      setState((prevState) => workshopReducer(prevState, msg))
+    })
+  }, [channel])
 
   // Pipe messages from frame to channel
   useEffect(() => frame.message.subscribe(channel.publish), [channel, frame])
@@ -203,19 +213,23 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
     frameReadyRef.current = frameReady
   }, [frameReady])
 
-  // Handle location updates
-  useEffect(
-    () =>
-      locationStore.subscribe((loc) => {
-        const nextState = getStateFromLocation(loc, frameReady)
+  const iframeElementRef = useRef<HTMLIFrameElement>(null)
 
-        broadcast({type: 'workshop/setState', value: nextState})
-      }),
-    [broadcast, frameReady, locationStore],
+  // Handle iframe ref changes
+  const handleFrameRef = useCallback(
+    (el: HTMLIFrameElement | null) => {
+      frame.setElement(el)
+      iframeElementRef.current = el
+    },
+    [frame],
   )
 
   if (!config.scopes) {
-    return <>No scopes</>
+    return (
+      <Root height="fill" lang="en" padding={4} scheme={rootScheme}>
+        <Text size={1}>No scopes</Text>
+      </Root>
+    )
   }
 
   return (
@@ -228,11 +242,18 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
         origin="main"
         path={path}
         payload={payload}
+        platform={platform}
         scheme={scheme}
         viewport={viewport}
         zoom={zoom}
       >
-        <Flex direction="column" height="fill" style={{minWidth: 320}}>
+        <WorkshopCommands
+          handleInspectorToggle={handleInspectorToggle}
+          handleNavigatorToggle={handleNavigatorToggle}
+          iframeElementRef={iframeElementRef}
+        />
+
+        <Box display="flex" flexDirection="column" height="fill">
           {withNavbar && (
             <WorkshopNavbar
               inspectorExpanded={inspectorExpanded}
@@ -245,13 +266,13 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
           <Flex flex={1} overflow="hidden">
             <WorkshopNavigator collections={config.collections} expanded={navigatorExpanded} />
             <WorkshopCanvas
-              frameRef={frame.setElement}
+              frameRef={handleFrameRef}
               hidden={navigatorExpanded || inspectorExpanded}
             />
             <WorkshopInspector expanded={inspectorExpanded} />
           </Flex>
-        </Flex>
+        </Box>
       </WorkshopProvider>
     </Root>
   )
-})
+}

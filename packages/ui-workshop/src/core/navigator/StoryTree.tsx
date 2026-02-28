@@ -1,24 +1,10 @@
-import {Tree, TreeItem} from '@sanity/ui'
-import {memo, type MouseEvent, useCallback, useMemo} from 'react'
+import {TreeItem} from '@sanity/ui'
+import {useCallback} from 'react'
 
-import type {WorkshopStory} from '../config/types'
 import {useWorkshop} from '../useWorkshop'
 import type {MenuList, MenuScope, MenuStory} from './types'
 
-/** @internal */
-export const StoryTree = memo(function StoryTree(props: {
-  items: Array<MenuList | MenuScope | MenuStory>
-}) {
-  const {items} = props
-
-  return (
-    <Tree gap={1}>
-      <MenuItems items={items} />
-    </Tree>
-  )
-})
-
-const MenuItems = memo(function MenuItems(props: {
+export function StoryTreeItems(props: {
   basePath?: string
   items: Array<MenuList | MenuScope | MenuStory>
 }) {
@@ -26,7 +12,7 @@ const MenuItems = memo(function MenuItems(props: {
   const {broadcast, path: workshopPath, scope: currentScope, story: currentStory} = useWorkshop()
 
   const handleStoryClick = useCallback(
-    (event: MouseEvent<HTMLLIElement>) => {
+    (event: React.MouseEvent<HTMLLIElement>) => {
       event.preventDefault()
 
       const target = event.currentTarget
@@ -39,113 +25,75 @@ const MenuItems = memo(function MenuItems(props: {
     [broadcast],
   )
 
-  return useMemo(() => {
-    if (items.length === 0) {
-      return null
-    }
-
-    return (
-      <>
-        {items.map((item, itemIndex) => {
-          if (item.type === 'list') {
-            const path = `${basePath}/${item.name}`
-
-            return (
-              <MemoList
-                key={item.name || itemIndex}
-                expanded={workshopPath.startsWith(path + '/')}
-                item={item}
-                path={path}
-              />
-            )
-          }
-
-          if (item.type === 'story') {
-            return (
-              <TreeItem
-                key={item.name}
-                data-path={`/${item.name || ''}`}
-                fontSize={[2, 2, 1]}
-                href={`/${item.name || ''}`}
-                padding={2}
-                selected={currentStory?.component === item.component}
-                text={item.title}
-                onClick={handleStoryClick}
-              />
-            )
-          }
-
-          if (item.type === 'scope') {
-            return (
-              <MemoScope
-                key={item.name}
-                currentStory={currentStory}
-                expanded={item.scope === currentScope}
-                item={item}
-                onStoryClick={handleStoryClick}
-              />
-            )
-          }
-
-          return <TreeItem key={itemIndex} text="unknown" />
-        })}
-      </>
-    )
-  }, [basePath, currentScope, currentStory, handleStoryClick, items, workshopPath])
-})
-
-const MemoList = memo(function MemoList(props: {expanded: boolean; item: MenuList; path: string}) {
-  const {expanded, item, path} = props
-
-  const children = useMemo(() => <MenuItems basePath={path} items={item.items} />, [item, path])
+  if (items.length === 0) {
+    return null
+  }
 
   return (
-    <TreeItem
-      expanded={expanded}
-      fontSize={[2, 2, 1]}
-      padding={2}
-      text={item.title}
-      weight="semibold"
-    >
-      {children}
-    </TreeItem>
-  )
-})
+    <>
+      {items.map((item, itemIndex) => {
+        if (item.type === 'list') {
+          const path = `${basePath}/${item.name}`
 
-const MemoScope = memo(function MemoScope(props: {
-  currentStory: WorkshopStory | null
-  expanded: boolean
-  item: MenuScope
-  onStoryClick: (event: MouseEvent<HTMLLIElement>) => void
-}) {
-  const {currentStory, expanded, item, onStoryClick} = props
+          return (
+            <TreeItem
+              expanded={workshopPath.startsWith(path + '/')}
+              fontSize={1}
+              padding={2}
+              text={item.title}
+              weight="medium"
+            >
+              <StoryTreeItems basePath={path} items={item.items} />
+            </TreeItem>
+          )
+        }
 
-  const children = useMemo(
-    () =>
-      item.scope.stories.map((story) => (
-        <TreeItem
-          key={story.name}
-          data-path={`/${item.scope.name}/${story.name}`}
-          fontSize={[2, 2, 1]}
-          href={`/${item.scope.name}/${story.name}`}
-          padding={2}
-          selected={currentStory === story}
-          text={story.title}
-          onClick={onStoryClick}
-        />
-      )),
-    [currentStory, item, onStoryClick],
-  )
+        if (item.type === 'story') {
+          return (
+            <TreeItem
+              key={item.name}
+              data-path={`/${item.name ?? ''}`}
+              fontSize={1}
+              href={`/${item.name ?? ''}`}
+              muted
+              padding={2}
+              selected={currentStory?.component === item.component}
+              text={item.title}
+              weight="regular"
+              onClick={handleStoryClick}
+            />
+          )
+        }
 
-  return (
-    <TreeItem
-      expanded={expanded}
-      fontSize={[2, 2, 1]}
-      padding={2}
-      text={item.title}
-      weight="semibold"
-    >
-      {children}
-    </TreeItem>
+        if (item.type === 'scope') {
+          return (
+            <TreeItem
+              expanded={item.scope === currentScope}
+              fontSize={1}
+              padding={2}
+              text={item.title}
+              weight="medium"
+            >
+              {item.scope.stories.map((story) => (
+                <TreeItem
+                  key={story.name}
+                  data-path={`/${item.scope.name}/${story.name}`}
+                  fontSize={1}
+                  href={`/${item.scope.name}/${story.name}`}
+                  muted
+                  padding={2}
+                  selected={currentStory === story}
+                  text={story.title}
+                  weight="regular"
+                  onClick={handleStoryClick}
+                />
+              ))}
+            </TreeItem>
+          )
+        }
+
+        return <TreeItem key={itemIndex} text="unknown" />
+      })}
+    </>
   )
-})
+}

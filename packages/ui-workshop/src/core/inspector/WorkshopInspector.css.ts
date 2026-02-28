@@ -1,5 +1,11 @@
+import {BREAKPOINTS} from '@sanity/ui/css'
 import {style} from '@vanilla-extract/css'
 
-import {workshopAside} from '../styles.css'
-
-export const workshopInspector = style([workshopAside])
+export const root = style({
+  '@media': {
+    [`screen and (min-width: ${BREAKPOINTS[2]}px)`]: {
+      maxWidth: '300px',
+      minWidth: '240px',
+    },
+  },
+})

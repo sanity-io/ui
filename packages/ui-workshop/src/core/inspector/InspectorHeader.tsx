@@ -1,44 +1,49 @@
-import {Card, Layer, Tab, TabList} from '@sanity/ui'
-import {memo, useCallback} from 'react'
+import {Layer, Tab, TabList} from '@sanity/ui'
+import {useCallback} from 'react'
 
-import {inspectorHeader, inspectorHeaderCard} from './InspectorHeader.css'
 import type {InspectorTab} from './types'
 
-export const InspectorHeader = memo(function InspectorHeader(props: {
+export function InspectorHeader(props: {
   currentTabId: string | null
-  onTabChange: (id: string) => void
+  onTabActivate: (id: string) => void
   tabs: InspectorTab[]
 }) {
-  const {currentTabId, onTabChange, tabs} = props
+  const {currentTabId, onTabActivate: onTabActivate, tabs} = props
 
   return (
-    <Layer className={inspectorHeader}>
-      <Card className={inspectorHeaderCard} padding={2} shadow={1}>
-        <TabList gap={1}>
-          {tabs.map((tab) => (
-            <InspectorTabView
-              key={tab.id}
-              selected={tab.id === currentTabId}
-              tab={tab}
-              onTabChange={onTabChange}
-            />
-          ))}
-        </TabList>
-      </Card>
+    <Layer
+      display="flex"
+      flex="none"
+      insetTop={0}
+      justifyContent={['center', 'center', 'flex-start']}
+      padding={3}
+      position="sticky"
+      shadow={1}
+    >
+      <TabList autoActivate gap={1}>
+        {tabs.map((tab) => (
+          <InspectorTabView
+            key={tab.id}
+            selected={tab.id === currentTabId}
+            tab={tab}
+            onTabActivate={onTabActivate}
+          />
+        ))}
+      </TabList>
     </Layer>
   )
-})
+}
 
 function InspectorTabView(props: {
-  onTabChange: (id: string) => void
+  onTabActivate: (id: string) => void
   selected: boolean
   tab: InspectorTab
 }) {
-  const {onTabChange, selected, tab} = props
+  const {onTabActivate, selected, tab} = props
 
-  const handleClick = useCallback(() => {
-    onTabChange(tab.id)
-  }, [onTabChange, tab])
+  const handleActivate = useCallback(() => {
+    onTabActivate(tab.id)
+  }, [onTabActivate, tab])
 
   return (
     <Tab
@@ -48,7 +53,7 @@ function InspectorTabView(props: {
       label={tab.label}
       selected={selected}
       tone={tab.tone}
-      onClick={handleClick}
+      onActivate={handleActivate}
     />
   )
 }

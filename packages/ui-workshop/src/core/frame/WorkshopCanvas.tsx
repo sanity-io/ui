@@ -1,12 +1,12 @@
-import {Box, Button, Card, Code, ErrorBoundary, Flex, Heading, Spinner, Stack} from '@sanity/ui'
-import {createElement, memo, Suspense, useCallback, useState} from 'react'
+import {Box, Button, Card, Code, ErrorBoundary, Heading, Spinner, SrOnly, Stack} from '@sanity/ui'
+import {createElement, Suspense, useCallback, useState} from 'react'
 
 import type {WorkshopStory} from '../config/types'
 import {useWorkshop} from '../useWorkshop'
 import {formatStack} from './formatStack'
 
 /** @internal */
-export const WorkshopCanvas = memo(function WorkshopCanvas(): React.ReactNode {
+export function WorkshopCanvas() {
   const {story} = useWorkshop()
   const [state, setState] = useState<{error: Error | null; errorInfo: React.ErrorInfo | null}>({
     error: null,
@@ -38,34 +38,38 @@ export const WorkshopCanvas = memo(function WorkshopCanvas(): React.ReactNode {
 
   return (
     <>
-      <h1 hidden>{story.title}</h1>
+      <title>{story.title}</title>
 
       <Suspense fallback={<LoadingScreen story={story} />}>
-        <Card as="main" height="fill">
+        <Box as="main" height="fill">
+          <SrOnly>
+            <h1>{story.title}</h1>
+          </SrOnly>
+
           <ErrorBoundary onCatch={catchError}>{createElement(story.component)}</ErrorBoundary>
-        </Card>
+        </Box>
       </Suspense>
     </>
   )
-})
+}
 
-const LoadingScreen = memo(function LoadingScreen(props: {story: WorkshopStory}) {
+function LoadingScreen(props: {story: WorkshopStory}) {
   const {story} = props
 
   return (
-    <>
-      <h1 hidden>
-        Loading <em>{story.title}</em>…
-      </h1>
+    <Box alignItems="center" as="main" display="flex" height="fill" justifyContent="center">
+      <SrOnly>
+        <h1>
+          Loading <em>{story.title}</em>…
+        </h1>
+      </SrOnly>
 
-      <Flex align="center" as="main" height="fill" justify="center">
-        <Spinner muted />
-      </Flex>
-    </>
+      <Spinner />
+    </Box>
   )
-})
+}
 
-const ErrorScreen = memo(function ErrorScreen(props: {
+function ErrorScreen(props: {
   error: Error
   errorInfo: React.ErrorInfo | null
   onRetry: () => void
@@ -73,7 +77,7 @@ const ErrorScreen = memo(function ErrorScreen(props: {
   const {error, errorInfo, onRetry} = props
 
   return (
-    <Box padding={4}>
+    <Box as="main" padding={4}>
       <Stack gap={4}>
         <Heading as="h1" size={[1, 1, 2]}>
           {error.message}
@@ -88,4 +92,4 @@ const ErrorScreen = memo(function ErrorScreen(props: {
       </Stack>
     </Box>
   )
-})
+}

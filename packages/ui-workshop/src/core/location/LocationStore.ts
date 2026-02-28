@@ -10,7 +10,7 @@ export interface WorkshopLocationStore {
 }
 
 function _buildLocationUrl(loc: Omit<WorkshopLocation, 'type'>): string {
-  const search = qs.stringify(loc.query || {})
+  const search = qs.stringify(loc.query ?? {})
 
   return `${loc.path}${search ? `?${search}` : ''}`
 }
@@ -18,7 +18,7 @@ function _buildLocationUrl(loc: Omit<WorkshopLocation, 'type'>): string {
 function _getStateFromWindow(): Omit<WorkshopLocation, 'type'> {
   return {
     path: location.pathname,
-    query: qs.parse(location.search.substr(1)),
+    query: qs.parse(location.search.slice(1)),
   }
 }
 

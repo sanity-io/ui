@@ -1,11 +1,11 @@
 import {Root, usePrefersDark} from '@sanity/ui'
-import {memo, useCallback, useEffect, useMemo, useState} from 'react'
+import type {ColorScheme} from '@sanity/ui/theme'
+import {useCallback, useEffect, useReducer, useState} from 'react'
 
 import type {WorkshopConfig} from '../config/types'
 import {createPubsub} from '../lib/pubsub'
 import {qs} from '../lib/qs'
 import type {WorkshopMsg} from '../types/msg'
-import type {WorkshopColorScheme} from '../types/scheme'
 import type {WorkshopState} from '../types/state'
 import {WorkshopProvider} from '../WorkshopProvider'
 import {workshopReducer} from '../workshopReducer'
@@ -22,56 +22,49 @@ function getStateFromLocation(): WorkshopState {
   const {path = '/', scheme, viewport, zoom, ...payload} = query
 
   return {
+    context: 'frame',
     frameReady: false,
     path,
     payload,
-    scheme: typeof scheme === 'string' ? (scheme as WorkshopColorScheme) : 'system',
+    scheme: typeof scheme === 'string' ? (scheme as ColorScheme) : 'system',
     viewport: typeof viewport === 'string' ? viewport : 'auto',
     zoom: typeof zoom === 'string' ? Number(zoom) : 1,
   }
 }
 
 /** @internal */
-export const WorkshopFrame = memo(function WorkshopFrame(
-  props: WorkshopFrameProps,
-): React.ReactNode {
+export function WorkshopFrame(props: WorkshopFrameProps) {
   const {config} = props
-  const main = useMemo(() => createMainController(), [])
-  const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])
+  const [main] = useState(() => createMainController())
+  const [channel] = useState(() => createPubsub<WorkshopMsg>())
   const prefersDark = usePrefersDark()
+  const scheme = prefersDark ? 'dark' : 'light'
 
-  // Publish messages to both frame+main
+  // Publish messages to both `frame` and `main`
   const broadcast = useCallback(
     (msg: WorkshopMsg) => {
-      // Handle msg
       channel.publish(msg)
-
-      // Pass message to main
       main.message.publish(msg)
     },
     [channel, main],
   )
 
-  const [{frameReady, path, payload, scheme, viewport, zoom}, setState] = useState<WorkshopState>(
-    () => getStateFromLocation(),
-  )
+  const [initialState] = useState(getStateFromLocation)
+  const [state, dispatch] = useReducer(workshopReducer, initialState)
 
-  // Subscribe to global messages
-  useEffect(() => channel.subscribe((msg) => setState((s) => workshopReducer(s, msg))), [channel])
+  const {frameReady, path, payload, viewport, zoom} = state
 
-  // Pipe messages from main to channel
+  // Subscribe to message channel
+  useEffect(() => channel.subscribe(dispatch), [channel])
+
+  // Pipe messages from `main` to message channel
   useEffect(() => main.message.subscribe(channel.publish), [channel, main])
 
-  // Inform `main` that the frame is ready
+  // Inform `main` that `frame` is ready
   useEffect(() => broadcast({type: 'workshop/frameReady'}), [broadcast])
 
   return (
-    <Root
-      height="fill"
-      lang="en"
-      overflow="auto"
-      scheme={scheme === 'system' ? (prefersDark ? 'dark' : 'light') : scheme}
-    >
+    <Root height="fill" lang="en" overflow="auto" scheme={scheme}>
       <WorkshopProvider
         broadcast={broadcast}
         channel={channel}
@@ -88,4 +81,4 @@ export const WorkshopFrame = memo(function WorkshopFrame(
       </WorkshopProvider>
     </Root>
   )
-})
+}
