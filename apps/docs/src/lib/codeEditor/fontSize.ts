@@ -1,18 +1,16 @@
-import {rem} from '@sanity/ui'
-import {RootTheme_v2} from '@sanity/ui/theme'
+import {vars} from '@sanity/ui/css'
+import {FontCodeSize} from '@sanity/ui/theme'
 import {EditorView, Extension} from '@uiw/react-codemirror'
 
-export function getFontSizeExtension(options: {theme: RootTheme_v2; fontSize: number}): Extension {
-  const {theme, fontSize: fontSizeProp} = options
-  const {fontSize, lineHeight} = theme.font.code.sizes[fontSizeProp] || theme.font.code.sizes[2]
-
+export function getFontSizeExtension(options: {fontSize: FontCodeSize}): Extension {
   return EditorView.baseTheme({
     '&': {
-      fontSize: rem(fontSize),
+      fontSize: vars.font.code.scale[options.fontSize].fontSize,
+      lineHeight: vars.font.code.scale[options.fontSize].lineHeight,
     },
 
     '& .cm-scroller': {
-      lineHeight: `${lineHeight / fontSize} !important`,
+      lineHeight: vars.font.code.scale[options.fontSize].lineHeight,
     },
   })
 }

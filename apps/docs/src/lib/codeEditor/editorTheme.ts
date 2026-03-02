@@ -1,15 +1,7 @@
-import {rgba, RootTheme_v2, ThemeColorCardToneKey} from '@sanity/ui/theme'
+import {vars} from '@sanity/ui/css'
 import {EditorView, Extension} from '@uiw/react-codemirror'
 
-export function getEditorThemeExtension(options: {
-  theme: RootTheme_v2
-  tone: ThemeColorCardToneKey
-}): Extension {
-  const {theme, tone} = options
-
-  const dark = theme.color.dark[tone].selectable.default
-  const light = theme.color.light[tone].selectable.default
-
+export function getEditorThemeExtension(): Extension {
   return EditorView.baseTheme({
     '&.cm-editor': {
       height: '100%',
@@ -18,45 +10,41 @@ export function getEditorThemeExtension(options: {
       outline: 'none',
     },
 
+    '& .cm-selectionLayer': {
+      // width: '100%',
+      // height: '100%',
+      // outline: '1px solid red',
+      // outlineOffset: '-1px',
+    },
+
+    // Selection background color
+    '&.cm-editor.cm-focused .cm-selectionLayer .cm-selectionBackground': {
+      backgroundColor: '#074',
+    },
+
     // Matching brackets
     '&.cm-editor.cm-focused .cm-matchingBracket': {
       backgroundColor: 'transparent',
+      outline: `1px solid ${vars.color.border}`,
     },
     '&.cm-editor.cm-focused .cm-nonmatchingBracket': {
       backgroundColor: 'transparent',
-    },
-    '&dark.cm-editor.cm-focused .cm-matchingBracket': {
-      outline: `1px solid ${dark.enabled.border}`,
-    },
-    '&dark.cm-editor.cm-focused .cm-nonmatchingBracket': {
-      outline: `1px solid ${dark.enabled.border}`,
-    },
-    '&light.cm-editor.cm-focused .cm-matchingBracket': {
-      outline: `1px solid ${light.enabled.border}`,
-    },
-    '&light.cm-editor.cm-focused .cm-nonmatchingBracket': {
-      outline: `1px solid ${light.enabled.border}`,
+      outline: `1px solid ${vars.color.border}`,
     },
 
     // Size and padding of gutter
-    '& .cm-lineNumbers .cm-gutterElement': {
+    '&.cm-editor .cm-lineNumbers .cm-gutterElement': {
       minWidth: `32px !important`,
       padding: `0 8px !important`,
     },
-    '& .cm-gutter.cm-foldGutter': {
+    '&.cm-editor .cm-gutter.cm-foldGutter': {
       width: `0px !important`,
     },
 
     // Color of gutter
-    '&dark .cm-gutters': {
-      // backgroundColor: 'transparent',
-      color: `${rgba(dark.enabled.code.fg, 0.5)} !important`,
-      borderRight: `1px solid ${rgba(dark.enabled.border, 0.5)}`,
-    },
-    '&light .cm-gutters': {
-      // backgroundColor: 'transparent',
-      color: `${rgba(light.enabled.code.fg, 0.5)} !important`,
-      borderRight: `1px solid ${rgba(light.enabled.border, 0.5)}`,
+    '&.cm-editor .cm-gutters': {
+      color: `color-mix(in oklab, transparent, ${vars.color.tinted.default.fg[2]} 50%) !important`,
+      borderRight: `1px solid color-mix(in oklab, transparent, ${vars.color.border} 50%)`,
     },
   })
 }

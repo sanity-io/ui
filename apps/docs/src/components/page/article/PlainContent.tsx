@@ -7,19 +7,9 @@ import {
 import {sanity, unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Heading, Text} from '@sanity/ui'
 import React from 'react'
-import styled from 'styled-components'
+import {root} from './PlainContent.css'
 
 import {SanityBlockValue} from '@/lib/sanity/types'
-
-const Root = styled.div`
-  & > *:first-child {
-    margin-top: 0;
-  }
-
-  & > *:last-child {
-    margin-bottom: 0;
-  }
-`
 
 const Block: PortableTextBlockComponent = (props) => {
   const {children, value} = props
@@ -88,8 +78,8 @@ const components: Partial<PortableTextReactComponents> = {
 
 export function PlainContent({blocks}: {blocks: any[]}) {
   return (
-    <Root data-ui="PlainContent">
+    <div className={root} data-ui="PlainContent">
       <PortableText components={components} value={blocks} />
-    </Root>
+    </div>
   )
 }

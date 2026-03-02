@@ -4,16 +4,17 @@ import {Box, Stack, Text} from '@sanity/ui'
 import {ReactElement} from 'react'
 
 import {HeadingNode} from './getToc'
+import {Space} from '@sanity/ui/theme'
 
 export function HeadingsNav({
+  gap = 4,
   headings,
-  space = 4,
 }: {
   headings: HeadingNode[]
-  space?: number
+  gap?: Space
 }): ReactElement {
   return (
-    <Stack space={space}>
+    <Stack gap={gap}>
       {headings.map((heading) => (
         <Box key={heading.slug}>
           <Text size={1}>
@@ -22,7 +23,10 @@ export function HeadingsNav({
 
           {heading.level < 3 && heading.children.length > 0 && (
             <Box marginTop={4} paddingLeft={2}>
-              <HeadingsNav headings={heading.children} space={Math.max(heading.level + 2 - 1, 3)} />
+              <HeadingsNav
+                headings={heading.children}
+                gap={Math.max(heading.level + 2 - 1, 3) as Space}
+              />
             </Box>
           )}
         </Box>

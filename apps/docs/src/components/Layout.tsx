@@ -1,28 +1,19 @@
 import {ReactElement, ReactNode} from 'react'
-import {styled} from 'styled-components'
 
 import {Banner} from './Banner'
 import {AppFooter} from './Footer'
 import {Navbar} from './Navbar'
-
-const Root = styled.div({
-  'height': '100%',
-  'flexDirection': 'column',
-
-  '&:not([hidden])': {
-    display: 'flex',
-  },
-})
+import {Box} from '@sanity/ui'
 
 export function Layout(props: {children?: ReactNode; path: string[]}): ReactElement {
   const {children, path} = props
 
   return (
-    <Root>
+    <Box display="flex" flexDirection="column" height="fill">
       <Banner />
       <Navbar path={path} />
       {children}
       <AppFooter />
-    </Root>
+    </Box>
   )
 }

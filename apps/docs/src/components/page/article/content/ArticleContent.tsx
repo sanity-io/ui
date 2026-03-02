@@ -3,7 +3,6 @@ import {GroqLogo, GroqMonogram, SanityLogo, SanityMonogram} from '@sanity/logos'
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Box} from '@sanity/ui'
 import {ReactElement} from 'react'
-import styled from 'styled-components'
 
 import {
   ArticleData,
@@ -30,42 +29,7 @@ import {LogoGrid} from './LogoGrid'
 import {NpmPackageBadge} from './NpmPackageBadge'
 import {PropertyTable} from './PropertyTable'
 import {Span} from './Span'
-
-const Root = styled.div`
-  & > *:first-child {
-    margin-top: 0;
-  }
-
-  & > *:last-child {
-    margin-bottom: 0;
-  }
-`
-
-const BulletList = styled(Box)`
-  & > li [data-ui='Text'] > span:before {
-    position: absolute;
-    content: '•';
-    width: 1em;
-    margin-left: -1.5em;
-    text-align: right;
-  }
-`
-
-const NumberedList = styled(Box)`
-  counter-reset: list;
-
-  & > li {
-    counter-increment: list;
-  }
-
-  & > li [data-ui='Text'] > span:before {
-    position: absolute;
-    content: counter(list) '.';
-    width: 1em;
-    margin-left: -1.5em;
-    text-align: right;
-  }
-`
+import {bulletList, numberedList, root} from './ArticleContent.css'
 
 const groqLogos = [
   {name: 'GroqLogo', component: GroqLogo as any},
@@ -82,14 +46,14 @@ const components: Partial<PortableTextReactComponents> = {
 
   list: {
     bullet: ({children}) => (
-      <BulletList forwardedAs="ul" marginY={[4, 4, 5]} paddingLeft={5}>
+      <Box className={bulletList} as="ul" marginY={[4, 4, 5]} paddingLeft={5}>
         {children}
-      </BulletList>
+      </Box>
     ),
     number: ({children}) => (
-      <NumberedList forwardedAs="ol" marginY={[4, 4, 5]} paddingLeft={5}>
+      <Box className={numberedList} as="ol" marginY={[4, 4, 5]} paddingLeft={5}>
         {children}
-      </NumberedList>
+      </Box>
     ),
   },
 
@@ -168,8 +132,8 @@ export function ArticleContent(props: {
   }, [])
 
   return (
-    <Root>
+    <div className={root}>
       <PortableText components={components} value={contentWithChildMarkDefs} />
-    </Root>
+    </div>
   )
 }

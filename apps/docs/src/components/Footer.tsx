@@ -1,10 +1,10 @@
 import {HeartFilledIcon} from '@sanity/icons'
 import {SanityLogo} from '@sanity/logos'
-import {Box, Button, Card, Flex, Text, useTheme_v2} from '@sanity/ui'
+import {Box, Button, Card, Flex, Text, useCard} from '@sanity/ui'
 import {ReactElement} from 'react'
 
 export function AppFooter(): ReactElement {
-  const {color} = useTheme_v2()
+  const dark = useCard().scheme === 'dark'
 
   return (
     <Card flex="none" paddingX={[3, 4, 5]} paddingY={[2, 3, 4]} shadow={1} style={{zIndex: 10}}>
@@ -14,7 +14,7 @@ export function AppFooter(): ReactElement {
         </Text>
 
         <Box as="span" paddingX={1}>
-          <Text as="span" accent size={1}>
+          <Text as="span" size={1}>
             <HeartFilledIcon aria-label="love" />
           </Text>
         </Box>
@@ -30,10 +30,10 @@ export function AppFooter(): ReactElement {
           padding={2}
           rel="noopener noreferrer"
           target="_blank"
-          tone={color._dark ? undefined : 'critical'}
+          tone={dark ? undefined : 'critical'}
         >
           <Text as="span" size={1}>
-            <SanityLogo aria-label="Sanity" dark={color._dark} />
+            <SanityLogo aria-label="Sanity" dark={dark} />
           </Text>
         </Button>
       </Flex>
