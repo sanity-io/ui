@@ -25,10 +25,10 @@ export interface VirtualListChangeOpts {
 }
 
 /** @beta */
-export type VirtualListOwnProps<
+export interface VirtualListOwnProps<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Item = any,
-> = {
+> {
   gap?: Space
   getItemKey?: (item: Item, itemIndex: number) => string
   items?: Item[]
@@ -40,15 +40,18 @@ export type VirtualListOwnProps<
 export type VirtualListElementType = 'div' | ComponentType
 
 /** @beta */
-export type VirtualListProps<E extends VirtualListElementType = VirtualListElementType> = Props<
-  VirtualListOwnProps,
-  E
->
+export type VirtualListProps<
+  E extends VirtualListElementType = VirtualListElementType,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Item = any,
+> = Props<VirtualListOwnProps<Item>, E>
 
 /** @beta */
-export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VIRTUAL_LIST_ELEMENT>(
-  props: VirtualListProps<E>,
-): React.JSX.Element {
+export function VirtualList<
+  E extends VirtualListElementType = typeof DEFAULT_VIRTUAL_LIST_ELEMENT,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Item = any,
+>(props: VirtualListProps<E, Item>): React.JSX.Element {
   const {
     as = DEFAULT_VIRTUAL_LIST_ELEMENT,
     gap = 0,
@@ -64,7 +67,7 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const [scrollTop, setScrollTop] = useState(0)
   const [scrollHeight, setScrollHeight] = useState(0)
-  const [itemHeight, setItemHeight] = useState(-1)
+  const [itemHeight, setItemHeight] = useState<number | undefined>(undefined)
 
   const [gapValue, setGapValue] = useState(0)
 
@@ -129,6 +132,8 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
   const toIndex = height ? Math.ceil(((scrollTop + scrollHeight) / height) * len) + 1 : 0
 
   useEffect(() => {
+    if (itemHeight === undefined) return
+
     onChange?.({
       fromIndex,
       gap: gapValue,
@@ -140,7 +145,7 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
   }, [fromIndex, gapValue, itemHeight, onChange, scrollHeight, scrollTop, toIndex])
 
   useEffect(() => {
-    startTransition(() => setItemHeight(-1))
+    startTransition(() => setItemHeight(undefined))
   }, [renderItem])
 
   const children = useChildren({
@@ -180,11 +185,11 @@ function useChildren({
   Required<Pick<VirtualListProps, 'items'>> & {
     fromIndex: number
     gap: Space
-    itemHeight: number
+    itemHeight: number | undefined
     toIndex: number
     gapValue: number
     setGapValue: React.Dispatch<React.SetStateAction<number>>
-    setItemHeight: React.Dispatch<React.SetStateAction<number>>
+    setItemHeight: React.Dispatch<React.SetStateAction<number | undefined>>
   }) {
   if (!renderItem || items.length === 0) return null
 
@@ -213,7 +218,9 @@ function useChildren({
     ]
   }
 
-  return items.slice(fromIndex, toIndex).map((item, _itemIndex) => {
+  const slicedItems = items.slice(fromIndex, toIndex)
+
+  return slicedItems.map((item, _itemIndex) => {
     const itemIndex = fromIndex + _itemIndex
     const node = renderItem(item)
     const key = getItemKey ? getItemKey(item, itemIndex) : itemIndex
@@ -224,7 +231,9 @@ function useChildren({
         insetLeft={0}
         insetRight={0}
         position="absolute"
-        style={{top: itemIndex * (itemHeight + gapValue)}}
+        style={{
+          top: typeof itemHeight === 'number' ? itemIndex * (itemHeight + gapValue) : undefined,
+        }}
       >
         {node}
       </Box>
