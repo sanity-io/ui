@@ -7,7 +7,6 @@ import {
   type ResponsiveProp,
   selectable_hotkeys,
 } from '@sanity/ui/css'
-import {Box} from '@sanity/ui/primitives/box'
 import {Selectable} from '@sanity/ui/primitives/selectable'
 import {Text} from '@sanity/ui/primitives/text'
 import type {ElementTone, FontTextSize} from '@sanity/ui/theme'
@@ -63,8 +62,6 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
     disabled,
     fontSize = 1,
     gap,
-    // gapX,
-    // gapY,
     hotkeys,
     icon: IconComponent,
     iconRight: IconRightComponent,
@@ -136,20 +133,14 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
       )}
 
       {text && (
-        <Box flex={1}>
-          <Text size={fontSize} textOverflow="ellipsis" weight="medium">
-            {text}
-          </Text>
-        </Box>
+        <Text flex={1} size={fontSize} textOverflow="ellipsis" weight="medium">
+          {text}
+        </Text>
       )}
 
-      {hotkeys && (
-        <Hotkeys
-          className={selectable_hotkeys()}
-          keys={hotkeys}
-          // style={{marginTop: -4, marginBottom: -4}}
-        />
-      )}
+      {children}
+
+      {hotkeys && <Hotkeys className={selectable_hotkeys()} keys={hotkeys} />}
 
       {IconRightComponent && (
         <Text flex="none" muted size={fontSize}>
@@ -157,8 +148,6 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
           {isValidElementType(IconRightComponent) && <IconRightComponent />}
         </Text>
       )}
-
-      {children}
     </Selectable>
   )
 }
