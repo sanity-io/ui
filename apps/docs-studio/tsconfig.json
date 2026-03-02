@@ -1,0 +1,28 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "Preserve",
+    "moduleDetection": "force",
+
+    "rootDir": ".",
+    "outDir": "./dist",
+
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    "jsx": "preserve",
+    "incremental": true,
+
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
