@@ -17,7 +17,7 @@ const prodStudio = defineConfig<WorkspaceOptions>({
   basePath: '/production',
   name: 'production',
   title: 'Sanity UI',
-  projectId: 'mos42crl',
+  projectId: process.env['SANITY_STUDIO_PROJECT_ID']!,
   dataset: 'production',
   plugins: [
     codeInput(),
@@ -40,7 +40,7 @@ const devStudio = defineConfig<WorkspaceOptions>({
   basePath: '/development',
   name: 'development',
   title: 'Sanity UI (dev)',
-  projectId: 'mos42crl',
+  projectId: process.env['SANITY_STUDIO_PROJECT_ID']!,
   dataset: 'development',
   plugins: [
     codeInput(),
