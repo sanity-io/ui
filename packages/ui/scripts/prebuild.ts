@@ -89,6 +89,14 @@ async function prebuild() {
   )
   console.log(`- removed prebuild script from ${rel(path.resolve(pass1Path, 'package.json'))}`)
 
+  // mkdirp dist/css in `tmp/pass-1`
+  await fs.mkdir(path.resolve(pass1Path, 'dist/css'), {recursive: true})
+  console.log(`- created ${rel(path.resolve(pass1Path, 'dist/css'))}`)
+
+  // touch `dist/css/index.css` in `tmp/pass-1`
+  await fs.writeFile(path.resolve(pass1Path, 'dist/css/index.css'), '')
+  console.log(`- touched ${rel(path.resolve(pass1Path, 'dist/css/index.css'))}`)
+
   try {
     // run `pnpm build` in `tmp/pass-1`
     await exec(`pnpm build`, {cwd: path.resolve(pass1Path)})
@@ -114,6 +122,15 @@ async function prebuild() {
     recursive: true,
   })
   console.log(`- copied ${rel(path.resolve(pass1Path, 'dist'))} to ${rel(distPath)}`)
+
+  // copy `node_modules/@sanity/ui-css/dist/index.css` to `dist/css/index.css`
+  await fs.cp(
+    path.resolve(pass1Path, 'node_modules/@sanity/ui-css/dist/index.css'),
+    path.resolve(distPath, 'css/index.css'),
+  )
+  console.log(
+    `- copied ${rel(path.resolve(pass1Path, 'node_modules/@sanity/ui-css/dist/index.css'))} to ${rel(path.resolve(distPath, 'css/index.css'))}`,
+  )
 }
 
 prebuild().catch((err) => {

@@ -74,6 +74,7 @@
       "source": "./exports/css.ts",
       "default": "./dist/css.js"
     },
+    "./css/index.css": "./dist/css/index.css",
     "./hooks": {
       "source": "./exports/hooks.ts",
       "default": "./dist/hooks.js"
