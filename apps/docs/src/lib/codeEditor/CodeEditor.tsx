@@ -113,7 +113,6 @@ export function CodeEditor(
       if (isHotkey(['mod', 's'], event.nativeEvent)) {
         event.preventDefault()
 
-        // eslint-disable-next-line no-inner-declarations
         const run = async () => {
           const anchorResult = await runPrettier({
             code: value,
@@ -146,7 +145,6 @@ export function CodeEditor(
         }
 
         run().catch((err) => {
-          // eslint-disable-next-line no-console
           console.error(err)
         })
       }

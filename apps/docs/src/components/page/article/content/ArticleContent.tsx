@@ -107,9 +107,9 @@ const components: Partial<PortableTextReactComponents> = {
   },
 
   types: {
-    callout: ({value}) => <Callout data={value as WrappedValue<CalloutData>} />,
-    code: ({value}) => <CodeBlock data={value as WrappedValue<CodeData>} />,
-    codeExample: ({value}) => <CodeExampleBlock data={value as WrappedValue<CodeExampleData>} />,
+    'callout': ({value}) => <Callout data={value as WrappedValue<CalloutData>} />,
+    'code': ({value}) => <CodeBlock data={value as WrappedValue<CodeData>} />,
+    'codeExample': ({value}) => <CodeExampleBlock data={value as WrappedValue<CodeExampleData>} />,
     'content.groqLogoGrid': () => <LogoGrid logos={groqLogos} />,
     'content.sanityLogoGrid': () => <LogoGrid logos={sanityLogos} />,
     'content.colorGrid': () => <ColorGrid />,
@@ -117,15 +117,15 @@ const components: Partial<PortableTextReactComponents> = {
     'content.figmaButton': ({value}) => (
       <FigmaButton data={value as WrappedValue<FigmaButtonData>} />
     ),
-    image: ({value}) => (
+    'image': ({value}) => (
       // eslint-disable-next-line jsx-a11y/alt-text
       <Image data={value as WrappedValue<ImageData>} />
     ),
-    npmPackageBadge: ({value}) => (
+    'npmPackageBadge': ({value}) => (
       <NpmPackageBadge data={value as WrappedValue<NpmPackageBadgeData>} />
     ),
-    propertyTable: ({value}) => <PropertyTable data={value as WrappedValue<PropertyTableData>} />,
-    span: Span,
+    'propertyTable': ({value}) => <PropertyTable data={value as WrappedValue<PropertyTableData>} />,
+    'span': Span,
   },
 }
 
