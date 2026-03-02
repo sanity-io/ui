@@ -1,10 +1,10 @@
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Card, Code, Stack, Text} from '@sanity/ui'
 import {ReactElement} from 'react'
-import styled from 'styled-components'
 
 import {isArray} from '@/lib/common'
 import {PropertyData, PropertyTableData} from '@/lib/data'
+import {propertyBox} from './PropertyTable.css'
 
 import {PlainContent} from '../PlainContent'
 
@@ -30,14 +30,6 @@ export function PropertyTable(props: {data: WrappedValue<PropertyTableData>}): R
   )
 }
 
-const PropertyBox = styled(Box)`
-  overflow: auto;
-
-  & + & {
-    border-top: 1px solid var(--card-hairline-soft-color);
-  }
-`
-
 function Property(props: {property: WrappedValue<PropertyData>}) {
   const {property} = props
 
@@ -48,14 +40,14 @@ function Property(props: {property: WrappedValue<PropertyData>}) {
   tsType += `: ${property.type?.value}`
 
   return (
-    <PropertyBox padding={3}>
-      <Stack space={3}>
-        <Code language="typescript" muted size={1}>
+    <Box className={propertyBox} padding={3}>
+      <Stack gap={3}>
+        <Code language="typescript" size={1}>
           {tsType}
         </Code>
 
         {isArray(property.description) && <PlainContent blocks={property.description} />}
       </Stack>
-    </PropertyBox>
+    </Box>
   )
 }

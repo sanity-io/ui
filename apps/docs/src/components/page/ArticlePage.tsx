@@ -3,55 +3,15 @@
 import {ChevronRightIcon, CloseIcon, MenuIcon} from '@sanity/icons'
 import {sanity, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Breadcrumbs, Button, Card, Flex, Text} from '@sanity/ui'
-import {getTheme_v2} from '@sanity/ui/theme'
 import Link from 'next/link'
 import {ReactElement, useState} from 'react'
-import styled from 'styled-components'
+import {breadcrumbsNavCard, navCard} from './ArticlePage.css'
 
 import {ArticleData} from '@/lib/data'
 import {NavNode} from '@/lib/nav'
 
 import {Nav} from '../Nav'
 import {Article} from './article'
-
-const NavCard = styled(Card)((props) => {
-  const {media} = getTheme_v2(props.theme)
-
-  return {
-    maxWidth: 260,
-    height: '100vh',
-    position: 'sticky',
-    top: 0,
-
-    [`@media (max-width: ${media[1] - 1}px)`]: {
-      '&&:not([hidden])': {
-        display: 'none',
-      },
-    },
-  }
-})
-
-const BreadcrumbsNavCard = styled(Card)<{$menuOpen: boolean}>((props) => {
-  // const {$menuOpen} = props
-
-  const {media} = getTheme_v2(props.theme)
-
-  return {
-    // ...($menuOpen
-    //   ? {
-    position: 'sticky',
-    top: 0,
-    zIndex: 100,
-    //   }
-    // : undefined),
-
-    [`@media (min-width: ${media[1]}px)`]: {
-      '&&:not([hidden])': {
-        display: 'none',
-      },
-    },
-  }
-})
 
 export function ArticlePage(props: {
   article?: WrappedValue<ArticleData>
@@ -65,9 +25,9 @@ export function ArticlePage(props: {
   return (
     <Card flex={1} style={{minHeight: 'auto'}}>
       {nav && (
-        <BreadcrumbsNavCard
+        <Card
+          className={breadcrumbsNavCard}
           data-ui="BreadcrumbsNavCard"
-          $menuOpen={menuOpen}
           paddingX={[2, 2, 3, 4]}
           paddingY={2}
           shadow={1}
@@ -92,16 +52,16 @@ export function ArticlePage(props: {
               <Nav nav={nav} path={`/${path.join('/')}`} />
             </Box>
           )}
-        </BreadcrumbsNavCard>
+        </Card>
       )}
 
       <Flex hidden={menuOpen}>
         {nav && (
-          <NavCard flex={1} overflow="auto">
+          <Card className={navCard} flex={1} overflow="auto">
             <Box padding={[2, 2, 3, 4]}>
               <Nav nav={nav} path={`/${path.join('/')}`} />
             </Box>
-          </NavCard>
+          </Card>
         )}
 
         <Box flex={3}>{article && <Article article={article} />}</Box>
@@ -122,7 +82,7 @@ function NavBreadcrumbs(props: {nav: NavNode; path: string[]}) {
           <ChevronRightIcon />
         </Text>
       }
-      space={2}
+      gap={2}
     >
       {path.reduce<ReactElement[]>((children, segment, index) => {
         if (index > 0) {

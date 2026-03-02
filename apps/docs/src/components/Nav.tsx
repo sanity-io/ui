@@ -12,7 +12,7 @@ export function Nav(props: {nav: NavNode; path: string}): ReactElement {
   const {nav, path} = props
 
   return (
-    <Tree space={1}>
+    <Tree gap={1}>
       {nav.children?.map((node, idx) => (
         <NavMenuItem key={idx} level={1} node={node} path={path} />
       ))}

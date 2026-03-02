@@ -19,7 +19,12 @@ export function Image(props: {data: WrappedValue<ImageData>}) {
         <img alt={alt || undefined} src={src} style={{verticalAlign: 'top', width: '100%'}} />
       </Card>
       <Box marginTop={2}>
-        <Text as="figcaption" muted size={1}>
+        <Text
+          // @ts-expect-error TODO - fix in `@sanity/ui`
+          as="figcaption"
+          muted
+          size={1}
+        >
           {caption}
         </Text>
       </Box>

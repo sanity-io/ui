@@ -2,9 +2,7 @@
 
 import {sanity, unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Container, Flex, Heading, Stack, Text} from '@sanity/ui'
-import {getTheme_v2} from '@sanity/ui/theme'
 import {ReactElement, useMemo} from 'react'
-import styled from 'styled-components'
 
 import {ArticleData} from '@/lib/data'
 
@@ -13,23 +11,7 @@ import {ArticleContent} from './content'
 import {getHeadings} from './getHeadings'
 import {getTOCTree} from './getToc'
 import {HeadingsNav} from './HeadingsNav'
-
-const TocBox = styled(Box)((props) => {
-  const {media} = getTheme_v2(props.theme)
-
-  return {
-    maxWidth: 260,
-    height: '100vh',
-    position: 'sticky',
-    top: 0,
-
-    [`@media (max-width: ${media[3] - 1}px)`]: {
-      '&&:not([hidden])': {
-        display: 'none',
-      },
-    },
-  }
-})
+import {tocBox} from './Article.css'
 
 export function Article(props: {article: WrappedValue<ArticleData>}): ReactElement {
   const {article} = props
@@ -43,16 +25,16 @@ export function Article(props: {article: WrappedValue<ArticleData>}): ReactEleme
 
   return (
     <Flex>
-      <TocBox forwardedAs="aside" flex={1} style={{order: 2, maxWidth: 300}}>
+      <Box as="aside" className={tocBox} flex={1} style={{order: 2, maxWidth: 300}}>
         <Box padding={[3, 3, 3, 4]}>
           {toc.length > 0 && (
-            <Stack padding={2} space={4}>
+            <Stack gap={4} padding={2}>
               <Text size={1}>On this page</Text>
               <HeadingsNav headings={toc} />
             </Stack>
           )}
         </Box>
-      </TocBox>
+      </Box>
 
       <Box as="article" flex={3} paddingX={[4, 5, 6]} paddingY={[5, 6]} style={{order: 1}}>
         <Container width={article.layout?.wide ? 2 : 1}>

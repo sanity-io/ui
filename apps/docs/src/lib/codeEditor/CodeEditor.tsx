@@ -1,18 +1,16 @@
-import {javascript} from '@codemirror/lang-javascript'
-import {Card, CardProps, useRootTheme, useTheme_v2} from '@sanity/ui'
-import {getTheme_v2} from '@sanity/ui/theme'
+import {Card, CardProps, useCard} from '@sanity/ui'
 import CodeMirror, {EditorView, Statistics} from '@uiw/react-codemirror'
 import {ReactElement, useCallback, useEffect, useMemo, useRef} from 'react'
-import {css, styled} from 'styled-components'
+import {langs} from '@uiw/codemirror-extensions-langs'
 
 import {isHotkey} from '@/lib/hotkey'
 
 import {getEditorThemeExtension} from './editorTheme'
-import {focusRingBorderStyle, focusRingStyle} from './focusRingStyle'
 import {getFontSizeExtension} from './fontSize'
 import {runPrettier} from './prettier'
 import {getSyntaxTheme} from './syntaxTheme'
 import {CodeEditorSelection} from './types'
+import {editor} from './CodeEditor.css'
 
 export interface CodeEditorProps {
   focusRing?: boolean
@@ -21,39 +19,6 @@ export interface CodeEditorProps {
   selection: CodeEditorSelection
   value: string
 }
-
-const EditorContainer = styled(Card)<{$focusRing: boolean}>(({$focusRing, theme}) => {
-  const {color, input} = getTheme_v2(theme)
-
-  const border = {
-    color: color.input.default.enabled.border,
-    width: input.border.width,
-  }
-
-  return css`
-    --input-box-shadow: ${$focusRing ? focusRingBorderStyle(border) : undefined};
-
-    box-shadow: var(--input-box-shadow);
-    overflow: hidden;
-    position: relative;
-    z-index: 0;
-    min-height: 2em;
-
-    & > .cm-theme {
-      height: 100%;
-    }
-
-    &:focus-within {
-      --input-box-shadow: ${$focusRing
-        ? focusRingStyle({
-            base: color,
-            border,
-            focusRing: input.text.focusRing,
-          })
-        : undefined};
-    }
-  `
-})
 
 const basicSetup = {
   highlightActiveLine: false,
@@ -74,33 +39,28 @@ export function CodeEditor(
     ...restProps
   } = props
 
+  const card = useCard()
+
   const selectionRef = useRef(selection)
 
-  const rootTheme = useRootTheme()
-  const theme = useTheme_v2()
-
-  const editorThemeExtension = useMemo(
-    () =>
-      getEditorThemeExtension({
-        theme: rootTheme.theme.v2!,
-        tone: rootTheme.tone,
-      }),
-    [rootTheme],
-  )
-
-  const fontSizeExtension = useMemo(
-    () => getFontSizeExtension({fontSize: 1, theme: rootTheme.theme.v2!}),
-    [rootTheme],
-  )
-
-  const javascriptExtension = useMemo(() => javascript({jsx: true}), [])
-
   const extensions = useMemo(
-    () => [editorThemeExtension, fontSizeExtension, javascriptExtension],
-    [editorThemeExtension, fontSizeExtension, javascriptExtension],
+    () => [
+      // basicSetup(),
+      getEditorThemeExtension(),
+      getFontSizeExtension({fontSize: 1}),
+      // javascript({jsx: true, typescript: true}),
+      langs.tsx(),
+    ],
+    [],
   )
 
-  const codeMirrorTheme = useMemo(() => getSyntaxTheme({theme}), [theme])
+  const codeMirrorTheme = useMemo(
+    () =>
+      getSyntaxTheme({
+        scheme: card.scheme,
+      }),
+    [card.scheme],
+  )
 
   const viewRef = useRef<EditorView | null>(null)
 
@@ -186,7 +146,17 @@ export function CodeEditor(
   }, [selection])
 
   return (
-    <EditorContainer {...restProps} $focusRing={focusRing} border={border} overflow="hidden">
+    <Card
+      __unstable_focusRing={focusRing}
+      {...restProps}
+      border={border}
+      className={editor}
+      // data-focus={focusRing ? '' : undefined}
+      data-ui="CodeEditor"
+      height="fill"
+      overflow="hidden"
+      position="relative"
+    >
       <CodeMirror
         basicSetup={basicSetup}
         extensions={extensions}
@@ -197,6 +167,6 @@ export function CodeEditor(
         theme={codeMirrorTheme}
         value={value}
       />
-    </EditorContainer>
+    </Card>
   )
 }

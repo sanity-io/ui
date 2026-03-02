@@ -1,0 +1,10 @@
+import {vars} from '@sanity/ui/css'
+import {globalStyle, style} from '@vanilla-extract/css'
+
+export const propertyBox = style({
+  overflow: 'auto',
+})
+
+globalStyle(`${propertyBox} + ${propertyBox}`, {
+  borderTop: `1px solid ${vars.color.border}`,
+})

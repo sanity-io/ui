@@ -1,13 +1,9 @@
 import {Card, Code, ErrorBoundary} from '@sanity/ui'
 import React, {ReactNode} from 'react'
-import {styled} from 'styled-components'
 
 import {EvalComponentResult} from './evalComponent'
-
-const Root = styled(Card)`
-  height: 100%;
-  overflow: auto;
-`
+import {ResponsiveProp} from '@sanity/ui/css'
+import {Shadow, Space} from '@sanity/ui/theme'
 
 export function Canvas({
   onCatch,
@@ -16,15 +12,15 @@ export function Canvas({
   shadow,
 }: {
   onCatch: (params: {error: Error; info: React.ErrorInfo}) => void
-  padding?: number | number[]
+  padding?: ResponsiveProp<Space>
   result: EvalComponentResult | null
-  shadow?: number | number[]
+  shadow?: ResponsiveProp<Shadow>
 }): ReactNode {
   if (result && result.type === 'success') {
     return (
-      <Root height="fill" shadow={shadow} sizing="border" tone="transparent">
+      <Card height="fill" overflow="auto" shadow={shadow} sizing="border" tone="transparent">
         <ErrorBoundary onCatch={onCatch}>{result.node}</ErrorBoundary>
-      </Root>
+      </Card>
     )
   }
 
