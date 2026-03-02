@@ -6,8 +6,8 @@ import {defineConfig, type WorkspaceOptions} from 'sanity'
 import {presentationTool} from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
 
-import {schema} from '@/studio/schema'
-import {structure} from '@/studio/structure'
+import {schema} from '@/schema'
+import {structure} from '@/structure'
 
 const localStudioRuntime =
   typeof window !== 'undefined' && window.location.origin === 'http://localhost:3333'

@@ -1,0 +1,29 @@
+{
+  "name": "sanity-ui-docs-studio",
+  "private": true,
+  "scripts": {
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "typecheck": "tsc --build"
+  },
+  "dependencies": {
+    "@sanity/code-input": "^7.0.8",
+    "@sanity/color": "^3.0.6",
+    "@sanity/icons": "^3.7.4",
+    "@sanity/logos": "^2.2.2",
+    "@sanity/vision": "^5.12.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sanity": "^5.12.0",
+    "styled-components": "^6.3.11"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@sanity/eslint-config-studio": "^6.0.0",
+    "@types/react": "^19.2.14",
+    "eslint": "^9.39.3"
+  }
+}

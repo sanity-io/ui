@@ -24,7 +24,6 @@
     "@lezer/highlight": "^1.2.1",
     "@portabletext/react": "^3.2.1",
     "@sanity/client": "^7.6.0",
-    "@sanity/code-input": "^5.1.2",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.1.0",
@@ -46,7 +45,6 @@
     "react-dom": "^19.1.0",
     "react-refractor": "^2.2.0",
     "refractor": "^4.9.0",
-    "sanity": "^3.95.0",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
