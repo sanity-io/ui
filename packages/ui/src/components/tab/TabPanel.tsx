@@ -1,7 +1,7 @@
 import {type ComponentType, isFocusable, type Props} from '@sanity/ui/core'
 import {tab_panel} from '@sanity/ui/css'
 import {Box, type BoxOwnProps} from '@sanity/ui/primitives/box'
-import {startTransition, useEffect, useImperativeHandle, useRef, useState} from 'react'
+import {useEffect, useImperativeHandle, useRef, useState} from 'react'
 
 /** @public */
 export const DEFAULT_TAB_PANEL_ELEMENT = 'div'
@@ -46,39 +46,20 @@ export function TabPanel<E extends TabPanelElementType = typeof DEFAULT_TAB_PANE
   useEffect(() => {
     const el = ref.current
 
-    if (!el) return
+    if (!el) return undefined
 
-    // check if children has focusable elements
-    const hasFocusableChildren = (e: Element) => {
-      // return e.childNodes.some((child) => isFocusable(child as HTMLElement))
-      for (let i = 0; i < e.childNodes.length; i++) {
-        const child = e.childNodes[i]
-        if (isFocusable(child as HTMLElement)) {
-          return true
-        }
-        if (hasFocusableChildren(child as Element)) {
-          return true
-        }
-      }
-      return false
+    const mo = new MutationObserver(() => {
+      setHasFocusableChildren(_hasFocusableChildren(el))
+    })
+
+    mo.observe(el, {
+      childList: true,
+      subtree: true,
+    })
+
+    return () => {
+      mo.disconnect()
     }
-
-    if (hasFocusableChildren(el)) {
-      // el.tabIndex = 0
-      startTransition(() => {
-        setHasFocusableChildren(true)
-      })
-      // console.log('has focusable children')
-    } else {
-      // el.tabIndex = -1
-      startTransition(() => {
-        setHasFocusableChildren(false)
-      })
-    }
-
-    // if (hasFocusableElements) {
-
-    // isFocusable
   }, [])
 
   return (
@@ -95,4 +76,19 @@ export function TabPanel<E extends TabPanelElementType = typeof DEFAULT_TAB_PANE
       {children}
     </Box>
   )
+}
+
+// check if children has focusable elements
+function _hasFocusableChildren(element: HTMLElement) {
+  for (let i = 0; i < element.childNodes.length; i++) {
+    const child = element.childNodes[i]
+
+    if (child instanceof HTMLElement) {
+      if (isFocusable(child) || _hasFocusableChildren(child)) {
+        return true
+      }
+    }
+  }
+
+  return false
 }
