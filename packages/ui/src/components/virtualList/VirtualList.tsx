@@ -3,12 +3,10 @@ import {vars} from '@sanity/ui/css'
 import {Box} from '@sanity/ui/primitives/box'
 import type {Space} from '@sanity/ui/theme'
 import {
-  type CSSProperties,
   type ReactNode,
   startTransition,
   useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -158,11 +156,9 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
     setItemHeight,
   })
 
-  const wrapperStyle: CSSProperties = useMemo(() => ({height}), [height])
-
   return (
     <Box data-ui="VirtualList" {...rest} ref={ref} as={as} position="relative">
-      <div ref={wrapperRef} style={wrapperStyle}>
+      <div ref={wrapperRef} style={{height}}>
         {children}
       </div>
     </Box>
