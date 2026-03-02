@@ -1,4 +1,4 @@
-import {SchemaPluginOptions} from 'sanity'
+import type {SchemaPluginOptions} from 'sanity'
 
 import {articleType} from './article/article'
 import {navItemType, navType} from './nav'
