@@ -19,7 +19,6 @@ export function tryDecode(encoded: unknown): any {
     try {
       return decode(encoded)
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error('Could not decode arcade query:', err)
     }
   }
