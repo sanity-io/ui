@@ -1,9 +1,11 @@
-import {Box, Card, LayerProvider, Menu, MenuDivider, MenuItem, Stack, Text} from '@sanity/ui'
+import {Card, LayerProvider, Menu, MenuDivider, MenuItem, Stack, Text} from '@sanity/ui'
+
+import {CardWrapper} from '$workshop'
 
 export default function CustomMenuItemStory(): React.JSX.Element {
   return (
-    <Box padding={[4, 5, 6]}>
-      <Card radius={3} shadow={2}>
+    <CardWrapper pattern="halftone" tone="transparent" width={0}>
+      <Card radius={4} shadow={2}>
         <LayerProvider>
           <Menu>
             <MenuItem padding={3}>
@@ -40,6 +42,6 @@ export default function CustomMenuItemStory(): React.JSX.Element {
           </Menu>
         </LayerProvider>
       </Card>
-    </Box>
+    </CardWrapper>
   )
 }

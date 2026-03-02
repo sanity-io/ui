@@ -1,12 +1,13 @@
 import {Box, Code} from '@sanity/ui'
+import {FONT_CODE_SIZE} from '@sanity/ui/theme'
 import {useSelect, useText} from '@sanity/ui-workshop'
 
-import {WORKSHOP_CODE_LANGUAGE_OPTIONS, WORKSHOP_TEXT_FONT_SIZE_OPTIONS} from '$workshop'
+import {WORKSHOP_CODE_LANGUAGE_OPTIONS} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
   const code = useText('Code', `console.log('Hello, world')`)
   const language = useSelect('Language', WORKSHOP_CODE_LANGUAGE_OPTIONS, 'typescript')
-  const size = useSelect('Size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 1)
+  const size = useSelect('Size', [undefined, ...FONT_CODE_SIZE], 1)
 
   return (
     <Box padding={[4, 5, 6]}>

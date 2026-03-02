@@ -25,6 +25,7 @@ export default function OpticalAlignment(): React.JSX.Element {
               className={elementTone({elementTone: 'suggest'})}
               flex={1}
               muted
+              overflow="hidden"
               style={{outline: `0.5px solid ${vars.color.tinted.border[4]}`}}
             >
               <Code size={size}>Hamburgefonstiv M</Code>

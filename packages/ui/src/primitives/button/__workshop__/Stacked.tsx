@@ -1,28 +1,21 @@
 import {icons} from '@sanity/icons'
 import {Box, Button, Container, Flex, Stack} from '@sanity/ui'
-import {ELEMENT_TONES} from '@sanity/ui/theme'
+import {BUTTON_MODES, ELEMENT_TONES, FONT_TEXT_SIZE, SPACE} from '@sanity/ui/theme'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {
-  CardWrapper,
-  WORKSHOP_BUTTON_MODE_OPTIONS,
-  WORKSHOP_FLEX_JUSTIFY_OPTIONS,
-  WORKSHOP_ICON_SYMBOL_OPTIONS,
-  WORKSHOP_SPACE_OPTIONS,
-  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '$workshop'
+import {CardWrapper, WORKSHOP_FLEX_JUSTIFY_OPTIONS, WORKSHOP_ICON_SYMBOL_OPTIONS} from '$workshop'
 
 export default function StackedStory(): React.JSX.Element {
   const disabled = useBoolean('Disabled', false)
-  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2)
-  const gap = useSelect('Gap', WORKSHOP_SPACE_OPTIONS, 3)
-  const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS, 'add-circle')
+  const fontSize = useSelect('Font size', FONT_TEXT_SIZE)
+  const gap = useSelect('Gap', SPACE)
+  const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS)
   const iconRight = useSelect('Icon (right)', WORKSHOP_ICON_SYMBOL_OPTIONS)
-  const justify = useSelect('Justify', WORKSHOP_FLEX_JUSTIFY_OPTIONS, 'center')
-  const mode = useSelect('Mode', WORKSHOP_BUTTON_MODE_OPTIONS, 'default')
+  const justify = useSelect('Justify', WORKSHOP_FLEX_JUSTIFY_OPTIONS)
+  const mode = useSelect('Mode', BUTTON_MODES)
   const onClick = useAction('onClick')
-  const paddingX = useSelect('Padding X', WORKSHOP_SPACE_OPTIONS, 3)
-  const paddingY = useSelect('Padding Y', WORKSHOP_SPACE_OPTIONS, 3)
+  const paddingX = useSelect('Padding X', SPACE)
+  const paddingY = useSelect('Padding Y', SPACE)
   const selected = useBoolean('Selected', false)
 
   return (

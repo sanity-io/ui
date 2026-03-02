@@ -21,7 +21,7 @@ import {
 } from '@sanity/ui'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {
-  placement: 'right',
+  placement: 'bottom-end',
   portal: true,
   preventOverflow: true,
 }
@@ -31,7 +31,7 @@ export default function MenuGroupRightStory(): React.JSX.Element {
     <Card height="fill" tone="transparent">
       <Flex align="center" height="fill" padding={4} sizing="border">
         <Container width={1}>
-          <Card padding={2} radius={2} shadow={2}>
+          <Card padding={2} radius={5} shadow={2}>
             <Flex>
               <Box flex={1} />
               <Box>
@@ -40,11 +40,19 @@ export default function MenuGroupRightStory(): React.JSX.Element {
                   id="right-menu"
                   menu={
                     <Menu>
-                      <MenuGroup icon={AddIcon} popover={{placement: 'left'}} text="Add above">
+                      <MenuGroup
+                        icon={AddIcon}
+                        popover={{placement: 'right-start'}}
+                        text="Add above"
+                      >
                         <MenuItem icon={ImageIcon} text="Image" />
                         <MenuItem icon={BookIcon} text="Book" />
                       </MenuGroup>
-                      <MenuGroup icon={AddIcon} popover={{placement: 'left'}} text="Add below">
+                      <MenuGroup
+                        icon={AddIcon}
+                        popover={{placement: 'right-start'}}
+                        text="Add below"
+                      >
                         <MenuItem icon={ImageIcon} text="Image" />
                         <MenuItem icon={BookIcon} text="Book" />
                       </MenuGroup>

@@ -1,22 +1,23 @@
-import {Box, Card, Container, Text, VirtualList} from '@sanity/ui'
-import {useCallback} from 'react'
+import {Card, Container, Text, VirtualList} from '@sanity/ui'
 
-const data = Array.from(new Array(1000)).map((_, key) => ({key}))
+type Item = {
+  key: number
+}
+
+const data: Item[] = Array.from(new Array(1000)).map((_, key) => ({key}))
 
 export default function WindowScrollStory(): React.JSX.Element {
-  const renderItem = useCallback((item: {key: number}) => {
-    return (
-      <Card padding={3} radius={2} shadow={1}>
-        <Text>Item #{item.key}</Text>
-      </Card>
-    )
-  }, [])
-
   return (
-    <Box padding={4}>
-      <Container width={1}>
-        <VirtualList gap={2} items={data} renderItem={renderItem} />
-      </Container>
-    </Box>
+    <Container paddingX={[4, 5, 6]} paddingY={[5, 6, 7]} width={1}>
+      <VirtualList
+        gap={2}
+        items={data}
+        renderItem={(item) => (
+          <Card padding={3} radius={4} shadow={1}>
+            <Text size={1}>Item #{item.key}</Text>
+          </Card>
+        )}
+      />
+    </Container>
   )
 }
