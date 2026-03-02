@@ -17,6 +17,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [".next/types/**/*.ts", "next-env.d.ts", "sanity.config.ts", "sanity-env.d.ts", "src"],
+  "include": [
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "next.config.ts",
+    "sanity.config.ts",
+    "sanity-env.d.ts",
+    "src"
+  ],
   "exclude": [".next", "node_modules", "tmp"]
 }

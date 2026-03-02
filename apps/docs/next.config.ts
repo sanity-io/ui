@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type {NextConfig} from 'next'
+
+const nextConfig: NextConfig = {
   basePath: '/ui',
   compiler: {
     styledComponents: true,
@@ -37,4 +38,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default nextConfig
