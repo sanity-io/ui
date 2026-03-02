@@ -76,29 +76,29 @@ export function VirtualList<E extends VirtualListElementType = typeof DEFAULT_VI
   useEffect((): (() => void) | undefined => {
     if (!ref.current) return
 
-    const scrollEl = findScrollable(ref.current.parentNode)
+    const scrollableParent = _findScrollableParent(ref.current.parentNode)
 
-    if (scrollEl) {
-      if (!(scrollEl instanceof HTMLElement)) return
+    if (scrollableParent !== document.documentElement && scrollableParent) {
+      if (!(scrollableParent instanceof HTMLElement)) return
 
       const handleScroll = () => {
-        setScrollTop(scrollEl.scrollTop)
+        setScrollTop(scrollableParent.scrollTop)
       }
 
-      scrollEl.addEventListener('scroll', handleScroll, {passive: true})
+      scrollableParent.addEventListener('scroll', handleScroll, {passive: true})
 
       const ro = new _ResizeObserver((entries) => {
         setScrollHeight(entries[0].contentRect.height)
       })
 
-      ro.observe(scrollEl)
+      ro.observe(scrollableParent)
 
       handleScroll()
 
       return () => {
-        scrollEl.removeEventListener('scroll', handleScroll)
+        scrollableParent.removeEventListener('scroll', handleScroll)
 
-        ro.unobserve(scrollEl)
+        ro.unobserve(scrollableParent)
         ro.disconnect()
       }
     }
@@ -236,7 +236,7 @@ function useChildren({
   })
 }
 
-function findScrollable(parentNode: ParentNode | null) {
+function _findScrollableParent(parentNode: ParentNode | null) {
   let _scrollEl = parentNode
 
   while (_scrollEl && !_isScrollable(_scrollEl)) {
