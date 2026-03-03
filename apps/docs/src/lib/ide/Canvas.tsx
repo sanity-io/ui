@@ -1,9 +1,9 @@
 import {Card, Code, ErrorBoundary} from '@sanity/ui'
+import {ResponsiveProp} from '@sanity/ui/css'
+import {Shadow, Space} from '@sanity/ui/theme'
 import React, {ReactNode} from 'react'
 
 import {EvalComponentResult} from './evalComponent'
-import {ResponsiveProp} from '@sanity/ui/css'
-import {Shadow, Space} from '@sanity/ui/theme'
 
 export function Canvas({
   onCatch,

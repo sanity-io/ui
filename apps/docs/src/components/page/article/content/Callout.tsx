@@ -1,11 +1,11 @@
 import {Icon, IconSymbol} from '@sanity/icons'
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Card, Flex, Text} from '@sanity/ui'
+import {CardTone} from '@sanity/ui/theme'
 
 import {CalloutData} from '@/lib/data'
 
 import {PlainContent} from '../PlainContent'
-import {CardTone} from '@sanity/ui/theme'
 
 export function Callout(props: {data: WrappedValue<CalloutData>}) {
   const {content, icon, tone} = props.data

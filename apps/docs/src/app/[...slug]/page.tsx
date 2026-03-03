@@ -9,12 +9,14 @@ import {loadQuery} from '@/lib/sanity/loadQuery'
 
 import {DEFAULT_META_DESCRIPTION} from '../constants'
 
-export async function generateMetadata(props: {params: {slug: string[]}}): Promise<Metadata> {
-  const {params} = props
+export async function generateMetadata(props: {
+  params: Promise<{slug: string[]}>
+}): Promise<Metadata> {
+  const slug = (await props.params).slug
 
   const {data} = await loadQuery<TargetData | null>(TARGET_QUERY, {
     memberTypes: API_DOCUMENT_TYPES,
-    path: params.slug,
+    path: slug,
   })
 
   const title = data?.title
@@ -45,23 +47,25 @@ export async function generateMetadata(props: {params: {slug: string[]}}): Promi
   }
 }
 
-export default async function SlugRoute(props: {params: {slug: string[]}}) {
+export default async function SlugRoute(props: {params: Promise<{slug: string[]}>}) {
   const {params} = props
+
+  const slug = (await params).slug
 
   try {
     const {data: rawData, sourceMap} = await loadQuery<TargetData | null>(TARGET_QUERY, {
       memberTypes: API_DOCUMENT_TYPES,
-      path: params.slug,
+      path: slug,
     })
 
     if ((await draftMode()).isEnabled) {
-      return <PreviewPage initial={{data: rawData, sourceMap}} path={params.slug} />
+      return <PreviewPage initial={{data: rawData, sourceMap}} path={slug} />
     }
 
     const data = rawData ? wrapData({baseUrl: '/studio'}, rawData, sourceMap) : null
 
-    return <Page data={data} path={params.slug} />
+    return <Page data={data} path={slug} />
   } catch (error) {
-    return <Page error={error as Error} path={params.slug} />
+    return <Page error={error as Error} path={slug} />
   }
 }

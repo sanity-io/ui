@@ -2,10 +2,9 @@ import {wrapData} from '@sanity/react-loader/jsx'
 import {draftMode} from 'next/headers'
 
 import {Page} from '@/components/page'
+import {PreviewPage} from '@/components/page/PreviewPage'
 import {API_DOCUMENT_TYPES, TARGET_QUERY, TargetData} from '@/lib/data'
 import {loadQuery} from '@/lib/sanity/loadQuery'
-
-import {PreviewPage} from '../components/page/PreviewPage'
 
 export default async function RootRoute() {
   try {

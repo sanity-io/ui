@@ -33,7 +33,10 @@ export const metadata: Metadata = {
 export default async function RootLayoutLoader(props: PropsWithChildren) {
   const {data: rawData, sourceMap} = await loadQuery<GlobalData>(GLOBAL_QUERY)
   const data: WrappedValue<GlobalData> = wrapData({baseUrl: '/studio'}, rawData, sourceMap)
-  const prefersDarkServerSnapshot = (await headers()).get('sec-ch-prefers-color-scheme') === 'dark'
+  const initialScheme = (await headers()).get('sec-ch-prefers-color-scheme') as
+    | 'dark'
+    | 'light'
+    | null
 
   return (
     <RootLayout
@@ -42,9 +45,9 @@ export default async function RootLayoutLoader(props: PropsWithChildren) {
       dataset={process.env.SANITY_DATASET!}
       draftMode={(await draftMode()).isEnabled}
       hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
+      initialScheme={initialScheme}
       projectId={process.env.SANITY_PROJECT_ID!}
       studioOrigin={process.env.SANITY_STUDIO_ORIGIN}
-      prefersDarkServerSnapshot={prefersDarkServerSnapshot}
     />
   )
 }

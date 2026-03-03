@@ -17,6 +17,7 @@ import {
 } from '@/lib/data'
 
 import {HeadingType} from '../getHeadings'
+import {bulletList, numberedList, root} from './ArticleContent.css'
 import {Block} from './Block'
 import {Callout} from './Callout'
 import {CodeBlock} from './CodeBlock'
@@ -29,7 +30,6 @@ import {LogoGrid} from './LogoGrid'
 import {NpmPackageBadge} from './NpmPackageBadge'
 import {PropertyTable} from './PropertyTable'
 import {Span} from './Span'
-import {bulletList, numberedList, root} from './ArticleContent.css'
 
 const groqLogos = [
   {name: 'GroqLogo', component: GroqLogo as any},

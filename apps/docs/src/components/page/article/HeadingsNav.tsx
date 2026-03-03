@@ -1,10 +1,10 @@
 'use client'
 
 import {Box, Stack, Text} from '@sanity/ui'
+import {Space} from '@sanity/ui/theme'
 import {ReactElement} from 'react'
 
 import {HeadingNode} from './getToc'
-import {Space} from '@sanity/ui/theme'
 
 export function HeadingsNav({
   gap = 4,
