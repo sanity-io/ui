@@ -1,5 +1,4 @@
 export * from './_global'
-export * from './api'
 export * from './article'
 export * from './screen'
 export * from './seo'
