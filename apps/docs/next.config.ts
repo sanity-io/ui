@@ -5,7 +5,7 @@ const withVanillaExtract = createVanillaExtractPlugin()
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  basePath: '/ui',
+  basePath: process.env.BASE_PATH,
   experimental: {
     taint: true,
   },

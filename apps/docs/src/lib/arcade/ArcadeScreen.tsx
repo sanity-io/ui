@@ -12,6 +12,7 @@ import {CodePane} from './CodePane'
 import {DEFAULT_CODE, INITIAL_STATE} from './constants'
 import {getArcadeQuery, tryDecode} from './helpers'
 import {ArcadeCodeMode, ArcadeMeta, ArcadeQueryParams, CanvasWidth} from './types'
+import {basePath} from '@/env'
 
 type SaveFn = (params: ArcadeQueryParams) => void
 
@@ -34,9 +35,8 @@ export function ArcadeScreen(props: {title: string; description: string}): React
   // Create `saveFn` callback
   useEffect(() => {
     const saveFn = debounce((params: ArcadeQueryParams) => {
-      const href = `/arcade?${compileSearch(getArcadeQuery(params))}`
+      const href = `${basePath}/arcade?${compileSearch(getArcadeQuery(params))}`
       document.title = `${params.title ?? 'Arcade'} | Sanity UI`
-      window.history.replaceState({}, '', `/ui${href}`)
       routerRef.current.replace(href, {scroll: false})
     }, 100)
 
