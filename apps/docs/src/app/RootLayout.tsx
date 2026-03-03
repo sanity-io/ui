@@ -17,6 +17,7 @@ import {parseNav} from '@/lib/nav'
 
 import {AppContext, AppContextValue} from './AppContext'
 import {DisableDraftMode} from './DisableDraftMode'
+import {basePath} from '@/env'
 
 registerLanguage(bash)
 registerLanguage(json)
@@ -80,7 +81,7 @@ export function RootLayout(props: {
 
   const app: AppContextValue = useMemo(
     () => ({
-      basePath: '/ui',
+      basePath,
       colorScheme: scheme,
       dataset,
       features: {hintHiddenContent},
