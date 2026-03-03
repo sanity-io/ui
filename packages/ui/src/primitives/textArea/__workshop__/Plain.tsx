@@ -1,25 +1,20 @@
 import {Stack, Text, TextArea} from '@sanity/ui'
+import {FONT_TEXT_SIZE, RADIUS, SPACE} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useState} from 'react'
 
-import {
-  CardWrapper,
-  WORKSHOP_FONT_WEIGHT_OPTIONS,
-  WORKSHOP_RADIUS_OPTIONS,
-  WORKSHOP_SPACE_OPTIONS,
-  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '$workshop'
+import {CardWrapper, WORKSHOP_FONT_WEIGHT_OPTIONS} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
   const border = useBoolean('Border', true)
   const customValidity = useText('Custom validity')
   const disableFocusRing = useBoolean('Disable focus ring (unstable)', false)
   const disabled = useBoolean('Disabled', false)
-  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
+  const fontSize = useSelect('Font size', FONT_TEXT_SIZE)
   const fontWeight = useSelect('Font weight', WORKSHOP_FONT_WEIGHT_OPTIONS)
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS)
+  const padding = useSelect('Padding', SPACE)
   const placeholder = useText('Placeholder', 'Placeholder')
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS)
+  const radius = useSelect('Radius', RADIUS)
   const readOnly = useBoolean('Read only', false)
 
   const [value, setValue] = useState('')

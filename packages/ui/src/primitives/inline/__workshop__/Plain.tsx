@@ -1,12 +1,11 @@
 import {Card, Flex, Inline, Text} from '@sanity/ui'
+import {SPACE} from '@sanity/ui/theme'
 import {useAction, useSelect} from '@sanity/ui-workshop'
-
-import {WORKSHOP_SPACE_OPTIONS} from '$workshop'
 
 export default function PlainStory(): React.JSX.Element {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
-      <Inline gap={useSelect('Gap', WORKSHOP_SPACE_OPTIONS, 0)} onClick={useAction('onClick')}>
+      <Inline gap={useSelect('Gap', SPACE, 0)} onClick={useAction('onClick')}>
         <Card padding={1} shadow={1}>
           <Text size={1}>Inline item</Text>
         </Card>

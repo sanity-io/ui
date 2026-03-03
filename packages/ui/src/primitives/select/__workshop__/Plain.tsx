@@ -1,13 +1,14 @@
 import {Select, Stack, Text} from '@sanity/ui'
+import {FONT_TEXT_SIZE, RADIUS} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {CardWrapper, WORKSHOP_RADIUS_OPTIONS, WORKSHOP_TEXT_FONT_SIZE_OPTIONS} from '$workshop'
+import {CardWrapper} from '$workshop'
 
 export default function PlainStory(): React.JSX.Element {
   const border = useBoolean('Border', true)
   const disabled = useBoolean('Disabled', false)
-  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS)
+  const fontSize = useSelect('Font size', FONT_TEXT_SIZE)
+  const radius = useSelect('Radius', RADIUS)
   const readOnly = useBoolean('Read only', false)
 
   return (

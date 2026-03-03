@@ -1,10 +1,11 @@
 import {Menu, MenuItem, Text} from '@sanity/ui'
+import {ELEMENT_TONES} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
 
-import {CardWrapper, WORKSHOP_ELEMENT_TONE_OPTIONS} from '$workshop'
+import {CardWrapper} from '$workshop'
 
 export default function DataPropsStory(): React.JSX.Element {
-  const tone = useSelect('Tone', WORKSHOP_ELEMENT_TONE_OPTIONS, 'default')
+  const tone = useSelect('Tone', ELEMENT_TONES, 'default')
 
   return (
     <CardWrapper width={0}>

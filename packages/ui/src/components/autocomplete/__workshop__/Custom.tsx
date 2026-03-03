@@ -1,32 +1,25 @@
 import {SearchIcon} from '@sanity/icons'
 import {Autocomplete, Box, Button, Code, Selectable, Stack, Text} from '@sanity/ui'
-import type {Radius} from '@sanity/ui/theme'
+import {FONT_TEXT_SIZE, RADIUS, type Radius, SPACE} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 
-import {
-  CardWrapper,
-  WORKSHOP_RADIUS_OPTIONS,
-  WORKSHOP_SPACE_OPTIONS,
-  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '$workshop'
+import {CardWrapper} from '$workshop'
 
 import {countries} from './mock/countries'
 import type {ExampleOption} from './types'
 
 export default function CustomStory(): React.JSX.Element {
   const data: ExampleOption[] = countries.map((d) => ({value: d.code, title: d.name}))
+  const [value, setValue] = useState('')
+
   const border = useBoolean('Border', true)
   const disabled = useBoolean('Disabled', false)
-
-  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2)
+  const fontSize = useSelect('Font size', FONT_TEXT_SIZE, 2)
   const openButton = useBoolean('Open button', true)
-
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
-
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 3)
+  const padding = useSelect('Padding', SPACE, 3)
+  const radius = useSelect('Radius', RADIUS, 3)
   const readOnly = useBoolean('Read only', false)
-  const [value, setValue] = useState('')
 
   const renderOption = useCallback(
     (option: ExampleOption) => (

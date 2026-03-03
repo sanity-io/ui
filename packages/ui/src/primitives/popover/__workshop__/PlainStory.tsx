@@ -1,13 +1,9 @@
 import {Button, Card, Popover, PortalProvider, Text} from '@sanity/ui'
+import {CONTAINER, RADIUS, SPACE} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useState} from 'react'
 
-import {
-  WORKSHOP_CONTAINER_WIDTH_OPTIONS,
-  WORKSHOP_PLACEMENT_OPTIONS,
-  WORKSHOP_RADIUS_OPTIONS,
-  WORKSHOP_SPACE_OPTIONS,
-} from '$workshop'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
 
 export default function PlainStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', true)
@@ -15,12 +11,12 @@ export default function PlainStory(): React.JSX.Element {
   const constrainSize = useBoolean('Constrain size', true)
   const matchReferenceWidth = useBoolean('Match reference width', false)
   const open = useBoolean('Open', true)
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
+  const padding = useSelect('Padding', SPACE, 3)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
   const portal = useBoolean('Portal', true)
   const preventOverflow = useBoolean('Prevent overflow', true)
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
-  const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 'auto')
+  const radius = useSelect('Radius', RADIUS, 2)
+  const width = useSelect('Width', CONTAINER, 'auto')
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 

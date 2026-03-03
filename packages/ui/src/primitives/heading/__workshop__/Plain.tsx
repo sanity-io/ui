@@ -1,15 +1,12 @@
 import {Flex, Heading} from '@sanity/ui'
+import {FONT_HEADING_SIZE} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 
-import {
-  WORKSHOP_FONT_WEIGHT_OPTIONS,
-  WORKSHOP_HEADING_FONT_SIZE_OPTIONS,
-  WORKSHOP_TEXT_OVERFLOW_OPTIONS,
-} from '$workshop'
+import {WORKSHOP_FONT_WEIGHT_OPTIONS, WORKSHOP_TEXT_OVERFLOW_OPTIONS} from '$workshop'
 
 export default function PlainStory(): React.JSX.Element {
   const muted = useBoolean('Muted', false)
-  const size = useSelect('Size', WORKSHOP_HEADING_FONT_SIZE_OPTIONS, 2)
+  const size = useSelect('Size', FONT_HEADING_SIZE, 2)
   const textChild = useText('Text', 'Hello, world')
   const textOverflow = useSelect(
     'Text overflow',

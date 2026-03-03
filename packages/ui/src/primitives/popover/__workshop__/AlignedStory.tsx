@@ -1,10 +1,10 @@
 import {EllipsisVerticalIcon} from '@sanity/icons'
 import {Button, Card, Flex, Popover, Text, useClickOutsideEvent} from '@sanity/ui'
+import {CONTAINER} from '@sanity/ui/theme'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useRef, useState} from 'react'
 
 import {
-  WORKSHOP_CONTAINER_WIDTH_OPTIONS,
   WORKSHOP_FLEX_ALIGN_OPTIONS,
   WORKSHOP_FLEX_JUSTIFY_OPTIONS,
   WORKSHOP_PLACEMENT_OPTIONS,
@@ -14,7 +14,7 @@ export default function AlignedStory(): React.JSX.Element {
   const constrainSize = useBoolean('Constrain size', false)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS)
   const portal = useBoolean('Portal', true)
-  const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 'auto')
+  const width = useSelect('Width', CONTAINER, 'auto')
   const flexAlign = useSelect('Align', WORKSHOP_FLEX_ALIGN_OPTIONS)
   const flexJustify = useSelect('Justify', WORKSHOP_FLEX_JUSTIFY_OPTIONS)
 

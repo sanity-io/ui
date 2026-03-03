@@ -1,22 +1,18 @@
 import {Button, Card, Stack, Text, Tooltip, TooltipDelayGroupProvider} from '@sanity/ui'
+import {SHADOW, SPACE} from '@sanity/ui/theme'
 import {useBoolean, useNumber, useSelect, useText} from '@sanity/ui-workshop'
 
-import {
-  CardWrapper,
-  WORKSHOP_PLACEMENT_OPTIONS,
-  WORKSHOP_SHADOW_OPTIONS,
-  WORKSHOP_SPACE_OPTIONS,
-} from '$workshop'
+import {CardWrapper, WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', false)
   const content = useText('Content', 'Tooltip content')
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 2)
+  const padding = useSelect('Padding', SPACE, 2)
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'top')
   const portal = useBoolean('Portal', true)
   const openDelay = useNumber('Open Delay', 500)
   const closeDelay = useNumber('Close Delay', 100)
-  const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 2)
+  const shadow = useSelect('Shadow', SHADOW, 2)
 
   return (
     <CardWrapper gap={[5, 6]} pattern="halftone">

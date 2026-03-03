@@ -1,5 +1,6 @@
 import {icons} from '@sanity/icons'
 import {Box, Stack, Text, TextInput} from '@sanity/ui'
+import {FONT_TEXT_SIZE, RADIUS, SPACE} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {type PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
@@ -8,9 +9,9 @@ import {
   CardWrapper,
   WORKSHOP_FONT_WEIGHT_OPTIONS,
   WORKSHOP_ICON_SYMBOL_OPTIONS,
-  WORKSHOP_RADIUS_OPTIONS,
-  WORKSHOP_SPACE_OPTIONS,
-  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
+  // WORKSHOP_RADIUS_OPTIONS,
+  // WORKSHOP_SPACE_OPTIONS,
+  // WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
 } from '$workshop'
 
 const typingPerfTest: PerfTestProps<HTMLInputElement> = {
@@ -53,15 +54,15 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
   const clearButton = useBoolean('Clear button', false)
   const customValidity = useText('Custom validity')
   const disabled = useBoolean('Disabled', false)
-  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
-  const gap = useSelect('Gap', WORKSHOP_SPACE_OPTIONS)
+  const fontSize = useSelect('Font size', FONT_TEXT_SIZE)
+  const gap = useSelect('Gap', SPACE)
   const fontWeight = useSelect('Font weight', WORKSHOP_FONT_WEIGHT_OPTIONS)
   const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS)
   const iconRight = useSelect('Icon (right)', WORKSHOP_ICON_SYMBOL_OPTIONS)
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
+  const padding = useSelect('Padding', SPACE, 3)
   const placeholder = useText('Placeholder')
   const prefix = useBoolean('Prefix', false)
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS)
+  const radius = useSelect('Radius', RADIUS)
   const readOnly = useBoolean('Read only', false)
   const suffix = useBoolean('Suffix', false)
   const value = useText('Value')

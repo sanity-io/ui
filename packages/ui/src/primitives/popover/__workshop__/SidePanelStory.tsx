@@ -9,11 +9,9 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import type {CardTone} from '@sanity/ui/theme'
+import {CARD_TONES, type CardTone} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
-
-import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 const SIDE_PANEL_WIDTH = {
   sm: 300,
@@ -26,7 +24,7 @@ export default function SidePanelStory(): React.JSX.Element {
   const sidePanelWidth = useSelect('Side panel width', SIDE_PANEL_WIDTH, SIDE_PANEL_WIDTH.md)
   const [sidePanel, setSidePanel] = useState<HTMLDivElement | null>(null)
   const updateRef = useRef<PopoverUpdateCallback>(undefined)
-  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS) ?? 'inherit'
+  const tone = useSelect('Tone', CARD_TONES) ?? 'inherit'
 
   useEffect(() => updateRef.current?.(), [sidePanelWidth])
 

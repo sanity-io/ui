@@ -1,16 +1,12 @@
 import {SearchIcon} from '@sanity/icons'
 import {Autocomplete, Text} from '@sanity/ui'
+import {FONT_TEXT_SIZE, RADIUS, SPACE} from '@sanity/ui/theme'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {type PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
 import {useCallback, useMemo, useState} from 'react'
 
-import {
-  CardWrapper,
-  WORKSHOP_RADIUS_OPTIONS,
-  WORKSHOP_SPACE_OPTIONS,
-  WORKSHOP_TEXT_FONT_SIZE_OPTIONS,
-} from '$workshop'
+import {CardWrapper} from '$workshop'
 
 import {countries} from './mock/countries'
 
@@ -37,13 +33,10 @@ export default function ExampleStory(): React.JSX.Element {
   const border = useBoolean('Border', true)
   const customValidity = useText('Custom validity')
   const disabled = useBoolean('Disabled', false)
-
-  const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS)
+  const fontSize = useSelect('Font size', FONT_TEXT_SIZE)
   const openButton = useBoolean('Open button', false)
-
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS)
-
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS)
+  const padding = useSelect('Padding', SPACE)
+  const radius = useSelect('Radius', RADIUS)
   const readOnly = useBoolean('Read only', false)
   const [value, setValue] = useState('')
 
