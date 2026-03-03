@@ -3,7 +3,7 @@ import {Metadata} from 'next'
 import {draftMode} from 'next/headers'
 
 import {Page, PreviewPage} from '@/components/page'
-import {API_DOCUMENT_TYPES, TARGET_QUERY, TargetData} from '@/lib/data'
+import {TARGET_QUERY, TargetData} from '@/lib/data'
 import {getImageUrlBuilder} from '@/lib/sanity/image'
 import {loadQuery} from '@/lib/sanity/loadQuery'
 
@@ -15,7 +15,6 @@ export async function generateMetadata(props: {
   const slug = (await props.params).slug
 
   const {data} = await loadQuery<TargetData | null>(TARGET_QUERY, {
-    memberTypes: API_DOCUMENT_TYPES,
     path: slug,
   })
 
@@ -54,7 +53,6 @@ export default async function SlugRoute(props: {params: Promise<{slug: string[]}
 
   try {
     const {data: rawData, sourceMap} = await loadQuery<TargetData | null>(TARGET_QUERY, {
-      memberTypes: API_DOCUMENT_TYPES,
       path: slug,
     })
 
