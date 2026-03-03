@@ -4,12 +4,13 @@ import * as icons from '@sanity/icons'
 import * as ui from '@sanity/ui'
 import {Card, Code, ErrorBoundary, Text} from '@sanity/ui'
 import {vars} from '@sanity/ui/css'
-import React, {ReactElement, useCallback, useEffect, useState} from 'react'
+import React, {ReactElement, startTransition, useCallback, useEffect, useState} from 'react'
 
 import {isRecord} from '@/lib/common'
 import {evalComponent, EvalComponentResult, ready as readyCheck} from '@/lib/ide'
 
 import {useApp} from '../../useApp'
+import {ColorScheme} from '@sanity/ui/theme'
 
 export default function ArcadeFrameRoute(): ReactElement {
   const {setColorScheme} = useApp()
@@ -28,14 +29,14 @@ export default function ArcadeFrameRoute(): ReactElement {
 
       if (isRecord(msg)) {
         if (msg.type === 'arcadeFrame/input') {
-          setJSXCode(msg.jsxCode as any)
-          setHookCode(msg.hookCode as any)
+          setJSXCode(msg.jsxCode as string)
+          setHookCode(msg.hookCode as string)
 
           return
         }
 
         if (msg.type === 'arcadeFrame/colorScheme') {
-          setColorScheme(msg.colorScheme as any)
+          setColorScheme(msg.colorScheme as ColorScheme)
         }
       }
     }
@@ -52,18 +53,22 @@ export default function ArcadeFrameRoute(): ReactElement {
     if (hookCode === null) return
     if (jsxCode === null) return
 
-    setEvalResult(
-      evalComponent({
-        hookCode,
-        jsxCode,
-        scope: {...icons, ...ui, ...React, React, vars},
-      }),
-    )
+    startTransition(() => {
+      setEvalResult(
+        evalComponent({
+          hookCode,
+          jsxCode,
+          scope: {...icons, ...ui, ...React, React, vars},
+        }),
+      )
+    })
   }, [hookCode, jsxCode, evalReady])
 
   useEffect(() => {
-    setRenderError(null)
-    setWindowError(null)
+    startTransition(() => {
+      setRenderError(null)
+      setWindowError(null)
+    })
   }, [hookCode, jsxCode])
 
   useEffect(() => {
@@ -101,7 +106,7 @@ export default function ArcadeFrameRoute(): ReactElement {
       <script async src="https://unpkg.com/@babel/standalone/babel.min.js" />
 
       {evalResult?.type === 'success' && !renderError && (
-        <Card height="fill" key={`${hookCode};${jsxCode}`}>
+        <Card height="fill" key={`${hookCode};${jsxCode}`} padding={4}>
           <ErrorBoundary onCatch={handleCatch}>{evalResult.node}</ErrorBoundary>
         </Card>
       )}

@@ -16,7 +16,7 @@ import {
   useLayer,
   useToast,
 } from '@sanity/ui'
-import React, {ReactElement, useCallback, useEffect, useRef, useState} from 'react'
+import React, {ReactElement, startTransition, useCallback, useEffect, useRef, useState} from 'react'
 
 import {ArcadeFrame} from './ArcadeFrame'
 import {SIZES} from './constants'
@@ -53,9 +53,17 @@ function MetaEditor({
     titleInputRef.current?.focus()
   }, [])
 
-  useEffect(() => setFormTitle(value.title), [value.title])
+  useEffect(() => {
+    startTransition(() => {
+      setFormTitle(value.title)
+    })
+  }, [value.title])
 
-  useEffect(() => setFormDescription(value.description), [value.description])
+  useEffect(() => {
+    startTransition(() => {
+      setFormDescription(value.description)
+    })
+  }, [value.description])
 
   const handleGlobalKeyDown = useCallback(
     (event: KeyboardEvent) => {

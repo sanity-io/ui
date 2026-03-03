@@ -19,6 +19,7 @@ export function ready(opts?: {timeout?: number}): Promise<void> {
         return
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       if ((window as any).Babel !== undefined) {
         resolve()
 

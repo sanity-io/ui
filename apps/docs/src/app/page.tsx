@@ -3,8 +3,7 @@ import {draftMode} from 'next/headers'
 
 import {Page} from '@/components/page'
 import {PreviewPage} from '@/components/page/PreviewPage'
-import {TARGET_QUERY, TargetData} from '@/lib/data'
-
+import {TARGET_QUERY, type TargetData} from '@/lib/data'
 import {getContext} from './context'
 
 export default async function RootRoute() {
@@ -23,8 +22,16 @@ export default async function RootRoute() {
     const _draftMode = await draftMode()
 
     if (_draftMode.isEnabled) {
-      // eslint-disable-next-line react-hooks/error-boundaries
-      return <PreviewPage initial={{data: rawData, sourceMap}} path={[]} />
+      return (
+        // eslint-disable-next-line react-hooks/error-boundaries
+        <PreviewPage
+          initial={{
+            data: rawData,
+            sourceMap,
+          }}
+          path={[]}
+        />
+      )
     }
 
     const data = rawData

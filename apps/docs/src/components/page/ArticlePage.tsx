@@ -28,7 +28,6 @@ export function ArticlePage(props: {
         <Card
           className={breadcrumbsNavCard}
           data-ui="BreadcrumbsNavCard"
-          // $menuOpen={menuOpen}
           paddingX={[2, 2, 3, 4]}
           paddingY={2}
           shadow={1}
@@ -74,7 +73,7 @@ export function ArticlePage(props: {
 function NavBreadcrumbs(props: {nav: NavNode; path: string[]}) {
   const {nav, path} = props
 
-  let node: NavNode | undefined = nav
+  const breadcrumbItems = _getBreadcrumbItems(nav, path)
 
   return (
     <Breadcrumbs
@@ -85,28 +84,48 @@ function NavBreadcrumbs(props: {nav: NavNode; path: string[]}) {
       }
       gap={2}
     >
-      {path.reduce<ReactElement[]>((children, segment, index) => {
-        if (index > 0) {
-          node = node?.children?.find((child) => child.segment === segment)
-        }
-
-        if (!node) {
-          return children
-        }
-
-        return [
-          ...children,
-          <Text key={segment} size={1} weight="medium">
-            {index === 0 ? (
-              <Link href={`/${node.segment}`} style={{color: 'inherit'}}>
-                <sanity.span>{node.title}</sanity.span>
-              </Link>
-            ) : (
+      {breadcrumbItems.map(({node, segment, index}) => (
+        <Text key={segment} size={1} weight="medium">
+          {index === 0 ? (
+            <Link href={`/${node.segment}`} style={{color: 'inherit'}}>
               <sanity.span>{node.title}</sanity.span>
-            )}
-          </Text>,
-        ]
-      }, [])}
+            </Link>
+          ) : (
+            <sanity.span>{node.title}</sanity.span>
+          )}
+        </Text>
+      ))}
     </Breadcrumbs>
   )
+}
+
+function _getBreadcrumbItems(
+  nav: NavNode,
+  path: string[],
+): {node: NavNode; segment: string; index: number}[] {
+  const items = []
+
+  const len = path.length
+
+  let node: NavNode | undefined = nav
+
+  for (let index = 0; index < len; index += 1) {
+    const segment = path[index]
+
+    if (index > 0) {
+      node = node?.children?.find((child) => child.segment === segment)
+    }
+
+    if (!node) {
+      break
+    }
+
+    items.push({
+      node,
+      segment,
+      index,
+    })
+  }
+
+  return items
 }

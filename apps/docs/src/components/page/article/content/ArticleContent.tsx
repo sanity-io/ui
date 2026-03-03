@@ -32,12 +32,15 @@ import {PropertyTable} from './PropertyTable'
 import {Span} from './Span'
 
 const groqLogos = [
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   {name: 'GroqLogo', component: GroqLogo as any},
   {name: 'GroqMonogram', component: GroqMonogram},
 ]
 
 const sanityLogos = [
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   {name: 'SanityLogo', component: SanityLogo as any},
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   {name: 'SanityMonogram', component: SanityMonogram as any},
 ]
 
@@ -111,6 +114,7 @@ export function ArticleContent(props: {
    * Ideally, `react-portabletext` would support receiving `wrapped` data and allow definition
    * of custom mark components via `components.marks`.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const contentWithChildMarkDefs = props.content.reduce<any[]>((acc, val) => {
     if (val._type === 'block') {
       const blockChildren = val.children?.map((child) => {

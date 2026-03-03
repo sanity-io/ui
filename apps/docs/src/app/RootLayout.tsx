@@ -3,33 +3,35 @@
 import '@sanity/ui/css/index.css'
 
 import createImageUrlBuilder from '@sanity/image-url'
-import {WrappedValue} from '@sanity/react-loader/jsx'
+import type {WrappedValue} from '@sanity/react-loader/jsx'
 import {Root, usePrefersDark} from '@sanity/ui'
-import {ColorScheme} from '@sanity/ui/theme'
-import {ReactNode, startTransition, useEffect, useMemo, useState} from 'react'
+import type {ColorScheme} from '@sanity/ui/theme'
+import {ClientPerspective} from 'next-sanity'
+import {startTransition, useEffect, useMemo, useState} from 'react'
 import {registerLanguage} from 'react-refractor'
 import bash from 'refractor/bash'
 import json from 'refractor/json'
 import tsx from 'refractor/tsx'
 
-import {GlobalData} from '@/lib/data'
+import {basePath} from '@/env'
+import type {GlobalData} from '@/lib/data'
 import {parseNav} from '@/lib/nav'
 
 import {AppContext, AppContextValue} from './AppContext'
-import {DisableDraftMode} from './DisableDraftMode'
-import {basePath} from '@/env'
+import {AppEnv} from './types'
 
 registerLanguage(bash)
 registerLanguage(json)
 registerLanguage(tsx)
 
 export function RootLayout(props: {
-  children?: ReactNode
+  children?: React.ReactNode
   data: WrappedValue<GlobalData>
+  env: AppEnv
   dataset: string
-  draftMode: boolean
   hintHiddenContent: boolean
   initialScheme: ColorScheme | null
+  perspective: ClientPerspective | undefined
   projectId: string
   studioBaseUrl: string
 }) {
@@ -37,12 +39,14 @@ export function RootLayout(props: {
     children,
     data,
     dataset,
-    draftMode,
+    env,
     hintHiddenContent,
     initialScheme,
+    perspective,
     projectId,
     studioBaseUrl,
   } = props
+
   const prefersDark = usePrefersDark(() => initialScheme === 'dark')
 
   const [scheme, setColorScheme] = useState<ColorScheme | 'system'>('system')
@@ -84,9 +88,13 @@ export function RootLayout(props: {
       basePath,
       colorScheme: scheme,
       dataset,
-      features: {hintHiddenContent},
+      env,
+      features: {
+        hintHiddenContent,
+      },
       imageUrlBuilder,
       nav,
+      perspective,
       projectId,
       setColorScheme: (s) => {
         window.localStorage.setItem('sanityStudio:ui:colorScheme', s)
@@ -98,9 +106,11 @@ export function RootLayout(props: {
     [
       scheme,
       dataset,
+      env,
       hintHiddenContent,
       imageUrlBuilder,
       nav,
+      perspective,
       projectId,
       setColorScheme,
       settings,
@@ -111,6 +121,8 @@ export function RootLayout(props: {
   return (
     <AppContext.Provider value={app}>
       <Root
+        data-dataset={dataset}
+        data-perspective={JSON.stringify(perspective)}
         height="fill"
         lang="en"
         overflow="auto"
@@ -121,13 +133,6 @@ export function RootLayout(props: {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         {children}
-
-        {draftMode && (
-          <>
-            {/* <VisualEditing /> */}
-            <DisableDraftMode />
-          </>
-        )}
       </Root>
     </AppContext.Provider>
   )

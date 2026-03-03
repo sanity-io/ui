@@ -28,6 +28,7 @@ export function Callout(props: {data: WrappedValue<CalloutData>}) {
 
         {content && (
           <Box flex={1} padding={3} paddingLeft={2}>
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <PlainContent blocks={content as any} />
           </Box>
         )}

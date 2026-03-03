@@ -77,6 +77,7 @@ const components: Partial<PortableTextReactComponents> = {
   },
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function PlainContent({blocks}: {blocks: any[]}) {
   return (
     <div className={root} data-ui="PlainContent">

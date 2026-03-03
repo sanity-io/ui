@@ -3,22 +3,17 @@ import {SanityMonogram, SanityMonogramColor} from '@sanity/logos'
 import {sanity} from '@sanity/react-loader/jsx'
 import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
-import {ReactElement, useMemo} from 'react'
+import {ReactElement} from 'react'
 
 import {useApp} from '../app/useApp'
 import {GitHubMark} from './assets'
 
 export function Navbar(props: {path: string[]}): ReactElement {
   const {path} = props
-  const {dataset, features, nav} = useApp()
+  const {env, features, nav} = useApp()
 
-  const monogramColor: SanityMonogramColor | undefined = useMemo(
-    () =>
-      dataset?.startsWith('prod')
-        ? undefined
-        : {bg1: gray['500'].hex, bg2: gray['200'].hex, fg: white.hex},
-    [dataset],
-  )
+  const monogramColor: SanityMonogramColor | undefined =
+    env === 'production' ? undefined : {bg1: gray['500'].hex, bg2: gray['200'].hex, fg: white.hex}
 
   return (
     <Card flex="none" padding={[2, 2, 3, 4]} style={{lineHeight: 0}}>
@@ -37,7 +32,7 @@ export function Navbar(props: {path: string[]}): ReactElement {
               </Box>
 
               <Box flex="none">
-                <Text size={[1, 1, 2]} weight="bold" style={{color: 'var(--card-fg-color)'}}>
+                <Text size={1} weight="semibold" style={{color: 'var(--card-fg-color)'}}>
                   Sanity UI
                 </Text>
               </Box>
@@ -60,12 +55,10 @@ export function Navbar(props: {path: string[]}): ReactElement {
                 <Button
                   as={Link}
                   data-as="a"
-                  fontSize={[1, 1, 2]}
                   href={node.href}
                   key={idx}
                   mode="bleed"
                   padding={3}
-                  radius={3}
                   selected={node.segment === path[0]}
                   style={{opacity: node.hidden ? 0.25 : undefined}}
                   text={<sanity.span>{node.title}</sanity.span>}
@@ -79,12 +72,11 @@ export function Navbar(props: {path: string[]}): ReactElement {
           <Button
             aria-label="Open GitHub repository"
             as="a"
-            fontSize={[1, 1, 2]}
             href="https://github.com/sanity-io/ui"
             icon={GitHubMark}
             mode="bleed"
             padding={3}
-            radius={2}
+            radius="full"
             rel="noopener noreferrer"
             target="_blank"
           />

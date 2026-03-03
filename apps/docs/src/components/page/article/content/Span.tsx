@@ -2,6 +2,7 @@ import {PortableTextTypeComponent} from '@portabletext/react'
 import {sanity, unwrapData} from '@sanity/react-loader/jsx'
 
 export const Span: PortableTextTypeComponent = (props) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const markDefs = props.value.markDefs as any[]
   const marks = unwrapData(props.value.marks) as string[]
 

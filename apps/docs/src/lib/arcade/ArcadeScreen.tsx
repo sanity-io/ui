@@ -30,13 +30,19 @@ export function ArcadeScreen(props: {title: string; description: string}): React
 
   const saveFnRef = useRef<DebouncedFunc<SaveFn> | null>(null)
 
-  routerRef.current = router
+  // routerRef.current = router
+
+  useEffect(() => {
+    routerRef.current = router
+  }, [router])
 
   // Create `saveFn` callback
   useEffect(() => {
     const saveFn = debounce((params: ArcadeQueryParams) => {
       const href = `${basePath}/arcade?${compileSearch(getArcadeQuery(params))}`
       document.title = `${params.title ?? 'Arcade'} | Sanity UI`
+      // window.history.replaceState({}, '', href)
+      console.log('redirect to', href)
       routerRef.current.replace(href, {scroll: false})
     }, 100)
 
@@ -67,9 +73,11 @@ export function ArcadeScreen(props: {title: string; description: string}): React
 
     dispatch({
       type: 'init',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       codeMode: (query.mode as any) || 'jsx',
       hookCode: tryDecode(query.hook) || '',
       jsxCode: tryDecode(query.jsx) || DEFAULT_CODE,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       canvasWidth: typeof query.width === 'string' ? (Number(query.width) as any) : null,
       meta: {
         title: String(query.title || ''),
@@ -107,12 +115,7 @@ export function ArcadeScreen(props: {title: string; description: string}): React
   return (
     <Card flex={1} overflow="hidden" shadow={1} style={{minHeight: 'auto'}}>
       <Flex direction={['column', 'column', 'row']} height="fill">
-        <Card
-          flex={1}
-          overflow="hidden"
-          tone="transparent"
-          style={{position: 'relative', zIndex: 1}}
-        >
+        <Card flex={1} overflow="hidden" style={{position: 'relative', zIndex: 1}}>
           <CanvasPane
             hookCode={state.hookCode}
             jsxCode={state.jsxCode}

@@ -14,7 +14,7 @@ export function FigmaEmbed(props: {data: WrappedValue<FigmaEmbedData>}) {
       <Box
         allowFullScreen
         as="iframe"
-        src={`https://www.figma.com/embed?embed_host=sanity.ui/ui&amp;url=${url}`}
+        src={`https://www.figma.com/embed?embed_host=sanity.io/ui&amp;url=${url}`}
         style={{height: 800}}
       />
     </Card>

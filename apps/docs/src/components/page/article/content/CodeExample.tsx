@@ -3,7 +3,7 @@
 import {ArrowRightIcon} from '@sanity/icons'
 import {Box, Button, Card, Flex, Stack, Tab, TabList, TabPanel, Text} from '@sanity/ui'
 import Link from 'next/link'
-import {ReactElement, useEffect, useState} from 'react'
+import {ReactElement, startTransition, useEffect, useState} from 'react'
 
 import {getArcadeQuery} from '@/lib/arcade'
 import {ArcadeFrame} from '@/lib/arcade/ArcadeFrame'
@@ -23,7 +23,9 @@ export function CodeExample(props: {
   const [renderError, setRenderError] = useState<Error | null>(null)
 
   useEffect(() => {
-    setRenderError(null)
+    startTransition(() => {
+      setRenderError(null)
+    })
   }, [hookCode, jsxCode])
 
   const arcadeQuery = getArcadeQuery({

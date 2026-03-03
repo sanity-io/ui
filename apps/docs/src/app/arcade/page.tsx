@@ -4,20 +4,21 @@ import {ReactElement} from 'react'
 import {ArcadePage} from './ArcadePage'
 
 interface ArcadeRouteProps {
-  searchParams: {
+  searchParams: Promise<{
     jsx?: string
     mode: 'jsx' | 'hook'
     width: string
     title?: string
     description?: string
-  }
+  }>
 }
 
-export function generateMetadata(props: ArcadeRouteProps): Metadata {
+export async function generateMetadata(props: ArcadeRouteProps): Promise<Metadata> {
   const {searchParams} = props
 
-  const title = searchParams.title || 'Arcade'
-  const description = searchParams.description || 'An interactive JSX playground for Sanity UI.'
+  const title = (await searchParams).title || 'Arcade'
+  const description =
+    (await searchParams).description || 'An interactive JSX playground for Sanity UI.'
 
   return {
     title: `${title} | Sanity UI`,

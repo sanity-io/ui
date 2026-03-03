@@ -21,7 +21,7 @@ export function runPrettier({
       semi: false,
       singleQuote: true,
     })
-  } catch (err) {
+  } catch {
     // Just a formatting error so we pass
     return null
   }
