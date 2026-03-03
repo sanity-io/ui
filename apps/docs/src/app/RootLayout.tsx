@@ -2,6 +2,7 @@
 
 import '@sanity/ui/css/index.css'
 
+import createImageUrlBuilder from '@sanity/image-url'
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Root, usePrefersDark} from '@sanity/ui'
 import {ColorScheme} from '@sanity/ui/theme'
@@ -13,7 +14,6 @@ import tsx from 'refractor/tsx'
 
 import {GlobalData} from '@/lib/data'
 import {parseNav} from '@/lib/nav'
-import {getImageUrlBuilder} from '@/lib/sanity/image'
 
 import {AppContext, AppContextValue} from './AppContext'
 import {DisableDraftMode} from './DisableDraftMode'
@@ -28,11 +28,20 @@ export function RootLayout(props: {
   dataset: string
   draftMode: boolean
   hintHiddenContent: boolean
-  projectId: string
-  studioOrigin?: string
   initialScheme: ColorScheme | null
+  projectId: string
+  studioBaseUrl: string
 }) {
-  const {children, data, dataset, draftMode, hintHiddenContent, initialScheme, projectId} = props
+  const {
+    children,
+    data,
+    dataset,
+    draftMode,
+    hintHiddenContent,
+    initialScheme,
+    projectId,
+    studioBaseUrl,
+  } = props
   const prefersDark = usePrefersDark(() => initialScheme === 'dark')
 
   const [scheme, setColorScheme] = useState<ColorScheme | 'system'>('system')
@@ -60,13 +69,22 @@ export function RootLayout(props: {
 
   const nav = useMemo(() => navNode && parseNav(navNode, []), [navNode])
 
+  const imageUrlBuilder = useMemo(
+    () =>
+      createImageUrlBuilder({
+        projectId,
+        dataset,
+      }),
+    [dataset, projectId],
+  )
+
   const app: AppContextValue = useMemo(
     () => ({
       basePath: '/ui',
       colorScheme: scheme,
       dataset,
       features: {hintHiddenContent},
-      imageUrlBuilder: getImageUrlBuilder({dataset, projectId}).imageUrlBuilder,
+      imageUrlBuilder,
       nav,
       projectId,
       setColorScheme: (s) => {
@@ -74,8 +92,19 @@ export function RootLayout(props: {
         setColorScheme(s)
       },
       settings,
+      studioBaseUrl,
     }),
-    [scheme, dataset, hintHiddenContent, nav, projectId, setColorScheme, settings],
+    [
+      scheme,
+      dataset,
+      hintHiddenContent,
+      imageUrlBuilder,
+      nav,
+      projectId,
+      setColorScheme,
+      settings,
+      studioBaseUrl,
+    ],
   )
 
   return (

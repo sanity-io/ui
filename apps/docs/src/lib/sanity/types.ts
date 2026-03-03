@@ -1,5 +1,3 @@
-// import {PortableTextObject} from 'sanity'
-
 export interface SanityImageValue {
   _type: 'image'
   asset: SanityReferenceValue | null
@@ -38,8 +36,8 @@ export interface SanityBlockValue {
   children: SanitySpanValue[]
   level?: number
   listItem?: 'bullet' | 'number'
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  markDefs: any[]
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  markDefs: {}[]
   style: string
 }
 
