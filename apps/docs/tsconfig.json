@@ -13,6 +13,7 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [{"name": "next"}],
+    "outDir": "./dist",
     "paths": {
       "@/*": ["./src/*"]
     }
