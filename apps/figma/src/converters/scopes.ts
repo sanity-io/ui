@@ -1,4 +1,4 @@
-import type {SanityTokenScope} from '@sanity/ui-tokens/system'
+import type {SanityTokenScope} from '@sanity/ui-tokens'
 
 // Unsupported Figma scopes:
 //   | 'ALL_SCOPES'

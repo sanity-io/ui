@@ -1,4 +1,4 @@
-import type {DTCGDimensionToken} from '@sanity/ui-tokens/system'
+import type {DTCGDimensionToken} from '@sanity/ui-tokens'
 
 import type {SanityFigmaNumber, SanityFigmaNumberAlias} from '../types'
 
