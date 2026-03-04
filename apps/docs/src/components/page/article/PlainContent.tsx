@@ -11,6 +11,7 @@ import React from 'react'
 import {SanityBlockValue} from '@/lib/sanity/types'
 
 import {root} from './PlainContent.css'
+import {vars} from '@sanity/ui/css'
 
 const Block: PortableTextBlockComponent = (props) => {
   const {children, value} = props
@@ -47,7 +48,11 @@ const Block: PortableTextBlockComponent = (props) => {
     )
   }
 
-  return <Text muted>{children}</Text>
+  return (
+    <Text muted size={1}>
+      {children}
+    </Text>
+  )
 }
 
 const Span: PortableTextTypeComponent = (props) => {
@@ -60,7 +65,7 @@ const Span: PortableTextTypeComponent = (props) => {
   }
 
   if (marks.includes('strong')) {
-    node = <strong>{node}</strong>
+    node = <strong style={{fontWeight: vars.font.text.weight.semibold}}>{node}</strong>
   }
 
   if (marks.includes('code')) {

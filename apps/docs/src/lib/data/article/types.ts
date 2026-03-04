@@ -67,6 +67,23 @@ export interface FigmaEmbedData {
   url: string | null
 }
 
+export interface LinkCollectionItemData {
+  _type: 'content.linkCollection.item'
+  title: string | null
+  subtitle: string | null
+  href: string | null
+  image: SanityImageValue | null
+  // TODO: portable text
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  description: any[] | null
+}
+
+export interface LinkCollectionData {
+  _type: 'content.linkCollection'
+  title: string | null
+  links: SanityArrayItemValue<LinkCollectionItemData>[] | null
+}
+
 export interface ImageData extends SanityImageValue {
   alt: string | null
   caption: string | null
@@ -105,6 +122,7 @@ export type ArticleContentData = SanityArrayItemValue<
   | ImageData
   | NpmPackageBadgeData
   | PropertyTableData
+  | LinkCollectionData
 >[]
 
 export interface ArticleData {

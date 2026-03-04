@@ -11,7 +11,7 @@ export const GET = async (request: Request) => {
   // set `env` cookie
   ;(await cookies()).set('env', env)
 
-  const {client} = await getContext()
+  const {client} = await getContext(undefined)
 
   return defineEnableDraftMode({client}).GET(request)
 }

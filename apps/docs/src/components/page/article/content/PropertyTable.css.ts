@@ -6,5 +6,5 @@ export const propertyBox = style({
 })
 
 globalStyle(`${propertyBox} + ${propertyBox}`, {
-  borderTop: `1px solid ${vars.color.border}`,
+  borderTop: `${vars.border[2]} solid ${vars.color.muted.border}`,
 })

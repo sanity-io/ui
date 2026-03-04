@@ -18,7 +18,7 @@ export const breadcrumbsNavCard = style({
 })
 
 export const navCard = style({
-  'maxWidth': 260,
+  // 'maxWidth': 260,
   'height': '100vh',
   'position': 'sticky',
   'top': 0,

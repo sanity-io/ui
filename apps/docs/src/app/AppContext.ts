@@ -14,17 +14,21 @@ export interface AppContextValue {
   basePath?: string
   colorScheme: ColorScheme | 'system'
   dataset: string
+  defaultVersion: string
+  draftMode: boolean
   env: AppEnv
   features: {
     hintHiddenContent: boolean
   }
   imageUrlBuilder: ImageUrlBuilder
   nav: NavNode | null
+  navTrees: {_id: string; id: string; title: string | null}[]
   perspective: ClientPerspective | undefined
   projectId: string
   setColorScheme: (scheme: ColorScheme | 'system') => void
   settings: WrappedValue<SettingsData> | null
   studioBaseUrl: string
+  version: string
 }
 
 export const AppContext = createContext<AppContextValue | null>(null)

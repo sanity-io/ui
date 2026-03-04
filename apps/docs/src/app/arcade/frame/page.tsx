@@ -2,8 +2,9 @@
 
 import * as icons from '@sanity/icons'
 import * as ui from '@sanity/ui'
+import * as css from '@sanity/ui/css'
+import * as theme from '@sanity/ui/theme'
 import {Card, Code, ErrorBoundary, Text} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
 import React, {ReactElement, startTransition, useCallback, useEffect, useState} from 'react'
 
 import {isRecord} from '@/lib/common'
@@ -12,7 +13,7 @@ import {evalComponent, EvalComponentResult, ready as readyCheck} from '@/lib/ide
 import {useApp} from '../../useApp'
 import {ColorScheme} from '@sanity/ui/theme'
 
-export default function ArcadeFrameRoute(): ReactElement {
+export default function ArcadeFramePage(_props: PageProps<'/arcade/frame'>): ReactElement {
   const {setColorScheme} = useApp()
   const [evalResult, setEvalResult] = useState<EvalComponentResult | null>(null)
   const [evalReady, setEvalReady] = useState(false)
@@ -58,7 +59,7 @@ export default function ArcadeFrameRoute(): ReactElement {
         evalComponent({
           hookCode,
           jsxCode,
-          scope: {...icons, ...ui, ...React, React, vars},
+          scope: {...css, ...icons, ...theme, ...ui, ...React, React},
         }),
       )
     })
@@ -106,7 +107,7 @@ export default function ArcadeFrameRoute(): ReactElement {
       <script async src="https://unpkg.com/@babel/standalone/babel.min.js" />
 
       {evalResult?.type === 'success' && !renderError && (
-        <Card height="fill" key={`${hookCode};${jsxCode}`} padding={4}>
+        <Card height="fill" key={`${hookCode};${jsxCode}`} tone="default">
           <ErrorBoundary onCatch={handleCatch}>{evalResult.node}</ErrorBoundary>
         </Card>
       )}

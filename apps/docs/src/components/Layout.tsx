@@ -5,13 +5,13 @@ import {Banner} from './Banner'
 import {AppFooter} from './Footer'
 import {Navbar} from './Navbar'
 
-export function Layout(props: {children?: ReactNode; path: string[]}): ReactElement {
-  const {children, path} = props
+export function Layout(props: {children?: ReactNode; slug: string[] | undefined}): ReactElement {
+  const {children, slug} = props
 
   return (
     <Box display="flex" flexDirection="column" height="fill">
       <Banner />
-      <Navbar path={path} />
+      <Navbar slug={slug} />
       {children}
       <AppFooter />
     </Box>

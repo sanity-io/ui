@@ -12,6 +12,7 @@ import {
   FigmaButtonData,
   FigmaEmbedData,
   ImageData,
+  LinkCollectionData,
   NpmPackageBadgeData,
   PropertyTableData,
 } from '@/lib/data'
@@ -30,6 +31,7 @@ import {LogoGrid} from './LogoGrid'
 import {NpmPackageBadge} from './NpmPackageBadge'
 import {PropertyTable} from './PropertyTable'
 import {Span} from './Span'
+import {LinkCollection} from './LinkCollection'
 
 const groqLogos = [
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -83,6 +85,9 @@ const components: Partial<PortableTextReactComponents> = {
     'content.figmaEmbed': ({value}) => <FigmaEmbed data={value as WrappedValue<FigmaEmbedData>} />,
     'content.figmaButton': ({value}) => (
       <FigmaButton data={value as WrappedValue<FigmaButtonData>} />
+    ),
+    'content.linkCollection': ({value}) => (
+      <LinkCollection data={value as WrappedValue<LinkCollectionData>} />
     ),
     'image': ({value}) => (
       // eslint-disable-next-line jsx-a11y/alt-text

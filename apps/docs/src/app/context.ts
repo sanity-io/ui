@@ -1,13 +1,26 @@
 import {cookies, draftMode, headers} from 'next/headers'
-
-import {apiVersion, datasets, projectId} from '@/sanity/env'
-
-import {AppEnv} from './types'
 import {ClientPerspective, ClientReturn, ContentSourceMap, createClient} from 'next-sanity'
-import {token} from '@/sanity/token'
 import {DefinedSanityFetchType, defineLive} from 'next-sanity/live'
 
-export async function getContext() {
+import {apiVersion, datasets, projectId} from '@/sanity/env'
+import {token} from '@/sanity/token'
+
+import {AppEnv} from './types'
+
+const RE_VERSION = /^v([0-9]+)$/
+
+export async function getContext(slugParam: string[] | undefined) {
+  const defaultVersion = process.env.NEXT_PUBLIC_VERSION || 'v3'
+
+  let version = defaultVersion
+
+  let slug = slugParam
+
+  if (slug && typeof slug[0] === 'string' && RE_VERSION.test(slug[0])) {
+    version = slug[0]
+    slug = slug.slice(1)
+  }
+
   const env = ((await cookies()).get('env')?.value ?? 'production') as AppEnv
 
   const isDraftMode = (await draftMode()).isEnabled
@@ -45,12 +58,15 @@ export async function getContext() {
   return {
     client,
     dataset,
+    defaultVersion,
     env,
     initialScheme,
     isDraftMode,
     perspective,
     projectId,
+    slug,
     studioBaseUrl: `${process.env.NEXT_PUBLIC_SANITY_STUDIO_BASE_URL || 'http://localhost:3333'}/${env}`,
+    version,
 
     sanityFetch: <const QueryString extends string>(
       options: Parameters<DefinedSanityFetchType>[0],

@@ -34,6 +34,14 @@ export interface HeroSectionData {
   } | null
 }
 
+export interface ArcadeSectionData {
+  _key: string
+  _type: 'screenSection.arcade'
+  code: string | null
+}
+
+type ScreenSectionData = HeroSectionData | ArcadeSectionData
+
 export interface ScreenData {
   _type: 'screen'
   _createdAt: string
@@ -41,6 +49,6 @@ export interface ScreenData {
   _rev: string
   _id: string
   title: string | null
-  sections: HeroSectionData[] | null
+  sections: ScreenSectionData[] | null
   seo: SEOData | null
 }

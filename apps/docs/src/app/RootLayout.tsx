@@ -2,8 +2,9 @@
 
 import '@sanity/ui/css/index.css'
 
+import {assignInlineVars} from '@vanilla-extract/dynamic'
 import createImageUrlBuilder from '@sanity/image-url'
-import type {WrappedValue} from '@sanity/react-loader/jsx'
+import {unwrapData, type WrappedValue} from '@sanity/react-loader/jsx'
 import {Root, usePrefersDark} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/theme'
 import {ClientPerspective} from 'next-sanity'
@@ -19,6 +20,8 @@ import {parseNav} from '@/lib/nav'
 
 import {AppContext, AppContextValue} from './AppContext'
 import {AppEnv} from './types'
+import {waldenburgNormal} from './fonts'
+import {vars} from '@sanity/ui/css'
 
 registerLanguage(bash)
 registerLanguage(json)
@@ -27,6 +30,8 @@ registerLanguage(tsx)
 export function RootLayout(props: {
   children?: React.ReactNode
   data: WrappedValue<GlobalData>
+  defaultVersion: string
+  draftMode: boolean
   env: AppEnv
   dataset: string
   hintHiddenContent: boolean
@@ -34,17 +39,21 @@ export function RootLayout(props: {
   perspective: ClientPerspective | undefined
   projectId: string
   studioBaseUrl: string
+  version: string
 }) {
   const {
     children,
     data,
     dataset,
+    defaultVersion,
+    draftMode,
     env,
     hintHiddenContent,
     initialScheme,
     perspective,
     projectId,
     studioBaseUrl,
+    version,
   } = props
 
   const prefersDark = usePrefersDark(() => initialScheme === 'dark')
@@ -70,7 +79,7 @@ export function RootLayout(props: {
     }
   }, [scheme])
 
-  const {nav: navNode = null, settings = null} = data || {}
+  const {nav: navNode = null, navTrees, settings = null} = data || {}
 
   const nav = useMemo(() => navNode && parseNav(navNode, []), [navNode])
 
@@ -88,12 +97,15 @@ export function RootLayout(props: {
       basePath,
       colorScheme: scheme,
       dataset,
+      defaultVersion,
+      draftMode,
       env,
       features: {
         hintHiddenContent,
       },
       imageUrlBuilder,
       nav,
+      navTrees: unwrapData(navTrees),
       perspective,
       projectId,
       setColorScheme: (s) => {
@@ -102,31 +114,45 @@ export function RootLayout(props: {
       },
       settings,
       studioBaseUrl,
+      version,
     }),
     [
       scheme,
       dataset,
+      defaultVersion,
+      draftMode,
       env,
       hintHiddenContent,
       imageUrlBuilder,
       nav,
+      navTrees,
       perspective,
       projectId,
       setColorScheme,
       settings,
       studioBaseUrl,
+      version,
     ],
   )
 
   return (
     <AppContext.Provider value={app}>
       <Root
+        className={waldenburgNormal.variable}
         data-dataset={dataset}
         data-perspective={JSON.stringify(perspective)}
         height="fill"
         lang="en"
         overflow="auto"
         scheme={scheme === 'system' ? (prefersDark ? 'dark' : 'light') : scheme}
+        tone="transparent"
+        style={{
+          ...assignInlineVars({
+            [vars.font.heading.family]: waldenburgNormal.style.fontFamily,
+            [vars.font.heading.featureSettings]:
+              `"ss07" on,"cv01" on,"cv11" on,"cv12" on,"cv13" on`,
+          }),
+        }}
       >
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />

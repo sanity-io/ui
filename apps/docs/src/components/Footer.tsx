@@ -1,14 +1,14 @@
 import {HeartFilledIcon} from '@sanity/icons'
 import {SanityLogo} from '@sanity/logos'
-import {Box, Button, Card, Flex, Text, useCard} from '@sanity/ui'
+import {Box, Button, Flex, Text, useCard} from '@sanity/ui'
 import {ReactElement} from 'react'
 
 export function AppFooter(): ReactElement {
   const card = useCard()
 
   return (
-    <Card flex="none" paddingX={[3, 4, 5]} paddingY={[2, 3, 4]} shadow={1} style={{zIndex: 10}}>
-      <Flex align="center" gap={1} justify="center">
+    <Box hidden flex="none" padding={[2, 3, 4]}>
+      <Flex align="center" gap={1} justify="flex-end" padding={1}>
         <Text as="span" muted size={1}>
           Made with
         </Text>
@@ -37,6 +37,6 @@ export function AppFooter(): ReactElement {
           </Text>
         </Button>
       </Flex>
-    </Card>
+    </Box>
   )
 }

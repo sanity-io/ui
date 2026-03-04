@@ -26,7 +26,11 @@ export const Block: PortableTextBlockComponent = (props) => {
   const headings = useContext(ArticleHeadingsContext)
 
   if (block._listItem) {
-    return <ListItem>{children}</ListItem>
+    return (
+      <ListItem>
+        <span>{children}</span>
+      </ListItem>
+    )
   }
 
   if (style === 'normal') {
@@ -39,8 +43,8 @@ export const Block: PortableTextBlockComponent = (props) => {
     const heading = headings.find((t) => t.text === text)
 
     return (
-      <Box marginTop={6} marginBottom={5} id={heading?.slug}>
-        <Heading as="h2" size={[1, 1, 2]}>
+      <Box marginTop={[5, 6, 7]} marginBottom={5} id={heading?.slug}>
+        <Heading as="h2" size={[2, 2, 3]} weight="medium">
           {children}
           {heading && (
             <>
@@ -62,7 +66,7 @@ export const Block: PortableTextBlockComponent = (props) => {
 
     return (
       <Box marginTop={6} marginBottom={4} id={heading?.slug}>
-        <Heading as="h3" size={1}>
+        <Heading as="h3" size={[1, 1, 2]} weight="medium">
           {children}
           {heading && (
             <>

@@ -1,10 +1,11 @@
 'use client'
 
 import {sanity, unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
-import {Box, Container, Flex, Heading, Stack, Text} from '@sanity/ui'
+import {Box, Card, Container, Heading, Label, Stack} from '@sanity/ui'
 import {ReactElement, useMemo} from 'react'
 
 import {ArticleData} from '@/lib/data'
+import {NavNode} from '@/lib/nav'
 
 import {tocBox} from './Article.css'
 import {ArticleHeadingsContext} from './ArticleHeadingsContext'
@@ -12,9 +13,14 @@ import {ArticleContent} from './content'
 import {getHeadings} from './getHeadings'
 import {getTOCTree} from './getToc'
 import {HeadingsNav} from './HeadingsNav'
+import {NavBreadcrumbs} from './NavBreadcrumbs'
 
-export function Article(props: {article: WrappedValue<ArticleData>}): ReactElement {
-  const {article} = props
+export function Article(props: {
+  article: WrappedValue<ArticleData>
+  nav: NavNode | undefined
+  slug: string[] | undefined
+}): ReactElement {
+  const {article, nav, slug} = props
 
   const headings = useMemo(
     () => getHeadings(unwrapData(article.content) as ArticleData['content']),
@@ -24,22 +30,41 @@ export function Article(props: {article: WrappedValue<ArticleData>}): ReactEleme
   const toc = useMemo(() => getTOCTree(headings), [headings])
 
   return (
-    <Flex>
-      <Box as="aside" className={tocBox} flex={1} style={{order: 2, maxWidth: 300}}>
-        <Box padding={[3, 3, 3, 4]}>
+    <Card display="flex" minHeight="full" tone="default" shadow={1}>
+      <Box as="aside" className={tocBox} flex={1} maxWidth={0} style={{order: 2}}>
+        <Box padding={5}>
           {toc.length > 0 && (
-            <Stack gap={4} padding={2}>
-              <Text size={1}>On this page</Text>
+            <Stack gap={4}>
+              <Label size={1}>On this page</Label>
               <HeadingsNav headings={toc} />
             </Stack>
           )}
         </Box>
       </Box>
 
-      <Box as="article" flex={3} paddingX={[4, 5, 6]} paddingY={[5, 6]} style={{order: 1}}>
-        <Container width={article.layout?.wide ? 2 : 1}>
-          <Box marginBottom={[5, 5, 5, 6]}>
-            <Heading as="h1" size={[2, 2, 3, 4, 5]}>
+      <Box
+        as="article"
+        flex={3}
+        overflow="hidden"
+        // style={{}}
+        style={{containerType: 'inline-size', order: 1}}
+      >
+        {nav && (
+          <Box flex={1} padding={4}>
+            <Box padding={2}>
+              <NavBreadcrumbs nav={nav} slug={slug} />
+            </Box>
+          </Box>
+        )}
+
+        <Container
+          paddingX={[4, 5, 6]}
+          paddingY={[6, 7, 8]}
+          width={article.layout?.wide ? [3, 4] : [2, 3]}
+          style={{containerType: 'inline-size'}}
+        >
+          <Box marginBottom={[5, 6]}>
+            <Heading as="h1" size={[4, 5, 6]} weight="medium">
               {article.apiMember?.isComponent ? (
                 <code>
                   &lt;<sanity.span>{article.title}</sanity.span> /&gt;
@@ -59,6 +84,6 @@ export function Article(props: {article: WrappedValue<ArticleData>}): ReactEleme
           </ArticleHeadingsContext.Provider>
         </Container>
       </Box>
-    </Flex>
+    </Card>
   )
 }

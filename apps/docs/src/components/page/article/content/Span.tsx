@@ -1,5 +1,7 @@
 import {PortableTextTypeComponent} from '@portabletext/react'
 import {sanity, unwrapData} from '@sanity/react-loader/jsx'
+import {VersionedLink} from '../../../VersionedLink'
+import {vars} from '@sanity/ui/css'
 
 export const Span: PortableTextTypeComponent = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,15 +18,29 @@ export const Span: PortableTextTypeComponent = (props) => {
           acc = <em>{acc}</em>
           break
         case 'strong':
-          acc = <strong>{acc}</strong>
+          acc = <strong style={{fontWeight: vars.font.text.weight.semibold}}>{acc}</strong>
           break
         default:
           const markDef = markDefs.find((m) => m._key === mark)
           if (markDef?._type === 'link') {
             const target = (markDef?.href?.value || '').startsWith('http') ? '_blank' : undefined
+            const href = markDef?.href?.value
+
+            if (!href) {
+              return acc
+            }
+
+            if (!target && href.startsWith('/')) {
+              return (
+                <VersionedLink href={href} target={target}>
+                  {acc}
+                </VersionedLink>
+              )
+            }
+
             return (
               <a
-                href={markDef?.href?.value}
+                href={href}
                 target={target}
                 rel={target === '_blank' ? 'noindex nofollow' : undefined}
               >
