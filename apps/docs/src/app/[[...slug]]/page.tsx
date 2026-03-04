@@ -55,14 +55,6 @@ export default async function SlugPage(props: PageProps<'/[[...slug]]'>) {
   const {isDraftMode, studioBaseUrl, sanityFetch, slug, version} = await getContext(params.slug)
 
   try {
-    console.log('fetch', {
-      query: TARGET_QUERY,
-      params: {
-        navId: version,
-        path: slug ? (slug.length === 0 ? [null] : slug) : [null],
-      },
-    })
-
     const result = await sanityFetch({
       query: TARGET_QUERY,
       params: {
