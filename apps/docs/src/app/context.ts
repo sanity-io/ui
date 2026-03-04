@@ -37,7 +37,7 @@ export async function getContext(slugParam: string[] | undefined) {
     projectId,
     dataset,
     apiVersion,
-    useCdn: isDraftMode ? false : true,
+    useCdn: !isDraftMode,
     perspective,
     token,
     resultSourceMap: isDraftMode ? 'withKeyArraySelector' : false,
@@ -75,6 +75,13 @@ export async function getContext(slugParam: string[] | undefined) {
       sourceMap: ContentSourceMap | null
       tags: string[]
     }> => {
+      console.log('sanity.fetch', {
+        projectId: client.config().projectId,
+        dataset: client.config().dataset,
+        apiVersion: client.config().apiVersion,
+        perspective,
+      })
+
       return sanityFetch({...options, perspective})
     },
 
