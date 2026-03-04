@@ -10,11 +10,7 @@ import React, {ReactElement, startTransition, useCallback, useEffect, useState} 
 import {isRecord} from '@/lib/common'
 import {evalComponent, EvalComponentResult, ready as readyCheck} from '@/lib/ide'
 
-import {useApp} from '../../useApp'
-import {ColorScheme} from '@sanity/ui/theme'
-
 export default function ArcadeFramePage(_props: PageProps<'/arcade/frame'>): ReactElement {
-  const {setColorScheme} = useApp()
   const [evalResult, setEvalResult] = useState<EvalComponentResult | null>(null)
   const [evalReady, setEvalReady] = useState(false)
   const [hookCode, setHookCode] = useState<string | null>(null)
@@ -35,10 +31,6 @@ export default function ArcadeFramePage(_props: PageProps<'/arcade/frame'>): Rea
 
           return
         }
-
-        if (msg.type === 'arcadeFrame/colorScheme') {
-          setColorScheme(msg.colorScheme as ColorScheme)
-        }
       }
     }
 
@@ -47,7 +39,7 @@ export default function ArcadeFramePage(_props: PageProps<'/arcade/frame'>): Rea
     return () => {
       window.removeEventListener('message', handleMessage)
     }
-  }, [setColorScheme])
+  }, [])
 
   useEffect(() => {
     if (!evalReady) return

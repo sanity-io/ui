@@ -120,6 +120,7 @@ function MetaEditor({
 }
 
 export function CanvasPane(props: {
+  basePath: string
   hookCode: string
   jsxCode: string
   meta: ArcadeMeta
@@ -127,7 +128,7 @@ export function CanvasPane(props: {
   onWidthChange: (v: CanvasWidth | null) => void
   width: CanvasWidth | null
 }): ReactElement {
-  const {hookCode, jsxCode, meta, onMetaChange, onWidthChange, width} = props
+  const {basePath, hookCode, jsxCode, meta, onMetaChange, onWidthChange, width} = props
   const [editorOpen, setEditorOpen] = useState(false)
   const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
   const [editButtonElement, setEditButtonElement] = useState<HTMLButtonElement | null>(null)
@@ -244,7 +245,7 @@ export function CanvasPane(props: {
           width="auto"
         >
           <Card height="fill" shadow={1}>
-            <ArcadeFrame hookCode={hookCode} jsxCode={jsxCode} />
+            <ArcadeFrame basePath={basePath} hookCode={hookCode} jsxCode={jsxCode} />
           </Card>
         </Container>
       </Card>
