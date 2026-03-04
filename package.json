@@ -11,7 +11,7 @@
     "changeset:status": "changeset status",
     "changeset:version": "changeset version",
     "commit": "cz",
-    "dev": "turbo dev",
+    "dev": "turbo dev --ui=tui",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "turbo lint",
