@@ -1,4 +1,4 @@
-import {ColorScheme} from '@sanity/ui/theme'
+import {ColorScheme} from '@sanity/ui/tokens'
 import {headers} from 'next/headers'
 import {AppRoot} from '../components/AppRoot'
 import {Metadata, Viewport} from 'next'

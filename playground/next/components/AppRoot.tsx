@@ -3,7 +3,7 @@
 import '@sanity/ui/css/index.css'
 
 import {Root, usePrefersDark} from '@sanity/ui'
-import {ColorScheme} from '@sanity/ui/theme'
+import {ColorScheme} from '@sanity/ui/tokens'
 import {ReactNode, startTransition, useEffect, useRef, useState} from 'react'
 
 export function AppRoot(props: {children: ReactNode; initialPrefersDark: boolean}) {
