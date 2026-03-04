@@ -1,5 +1,5 @@
 import {Box, Card, Code, Stack, Text} from '@sanity/ui'
-import type {CardTone} from '@sanity/ui/theme'
+import type {CardTone} from '@sanity/ui/tokens'
 import axe from 'axe-core'
 
 import {useA11y} from './useA11y'
