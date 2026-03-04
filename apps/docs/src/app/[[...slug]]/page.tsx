@@ -7,6 +7,7 @@ import createImageUrlBuilder from '@sanity/image-url'
 
 import {DEFAULT_META_DESCRIPTION} from '../constants'
 import {getContext} from '../context'
+import {ArcadeScreen} from '../ArcadeScreen'
 
 export async function generateMetadata(props: PageProps<'/[[...slug]]'>): Promise<Metadata> {
   const params = await props.params
@@ -53,6 +54,10 @@ export default async function SlugPage(props: PageProps<'/[[...slug]]'>) {
   const params = await props.params
 
   const {isDraftMode, studioBaseUrl, sanityFetch, slug, version} = await getContext(params.slug)
+
+  if (slug && slug[0] === 'arcade') {
+    return <ArcadeScreen />
+  }
 
   try {
     const result = await sanityFetch({

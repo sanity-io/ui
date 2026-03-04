@@ -110,6 +110,9 @@ importers:
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@sanity/ui3':
+        specifier: npm:@sanity/ui@3.1.13
+        version: '@sanity/ui@3.1.13(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react-is@19.2.4)(react@19.2.4)(styled-components@6.3.11(react-dom@19.2.4(react@19.2.4))(react@19.2.4))'
       '@sanity/visual-editing':
         specifier: ^2.15.0
         version: 2.15.4(@emotion/is-prop-valid@1.4.0)(@sanity/client@7.16.0)(@sanity/types@5.12.0(@types/react@19.2.14))(next@16.1.6(@playwright/test@1.58.2)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-is@19.2.4)(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(sanity@5.12.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.0.1)(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(babel-plugin-react-compiler@1.0.0)(immer@10.2.0)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(styled-components@6.3.11(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.44.0)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(styled-components@6.3.11(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3)

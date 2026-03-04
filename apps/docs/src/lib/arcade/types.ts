@@ -28,15 +28,6 @@ export interface ArcadeState {
   codeMode: ArcadeCodeMode
 }
 
-export interface ArcadeInitMsg {
-  type: 'init'
-  canvasWidth: CanvasWidth | null
-  codeMode: ArcadeCodeMode
-  hookCode: string
-  jsxCode: string
-  meta: ArcadeMeta
-}
-
 export interface ArcadeSetCanvasWidthMsg {
   type: 'setCanvasWidth'
   value: CanvasWidth | null
@@ -73,7 +64,6 @@ export interface ArcadeSetMetaCodeMsg {
 }
 
 export type ArcadeMsg =
-  | ArcadeInitMsg
   | ArcadeSetCanvasWidthMsg
   | ArcadeSetCodeModeMsg
   | ArcadeSetHookCodeMsg
