@@ -4,7 +4,8 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**"],
+      "env": ["SANITY_API_READ_TOKEN"]
     },
     "deploy": {
       "dependsOn": ["^build"],
