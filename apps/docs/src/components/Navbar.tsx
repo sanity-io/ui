@@ -14,6 +14,16 @@ export function Navbar(props: {slug: string[] | undefined}): ReactElement {
 
   const navTree = navTrees.find((t) => t.id === version)
 
+  let pathname = slug ? `/${slug.join('/')}` : ''
+
+  for (const t of navTrees) {
+    const versionPrefix = defaultVersion === t.id ? '' : `/${t.id}`
+
+    if (versionPrefix && pathname.startsWith(versionPrefix)) {
+      pathname = pathname.slice(versionPrefix.length)
+    }
+  }
+
   return (
     <Card
       display="flex"
@@ -54,7 +64,7 @@ export function Navbar(props: {slug: string[] | undefined}): ReactElement {
                 return (
                   <MenuItem
                     as={Link}
-                    href={`${versionPrefix}${slug ? `/${slug.join('/')}` : ''}`}
+                    href={`${versionPrefix}${pathname}`}
                     key={t._id}
                     pressed={t.id === version}
                     selected={t.id === version}
