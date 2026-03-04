@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
       "env": ["SANITY_API_READ_TOKEN"]
     },
     "deploy": {
