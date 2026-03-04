@@ -25,3 +25,9 @@ export const projectId = assertValue(
 // export const perspective = process.env.NEXT_PUBLIC_SANITY_PERSPECTIVE?.split(',') || 'published'
 
 export const apiVersion = '2025-09-25'
+
+console.log('@/sanity/env', {
+  projectId,
+  datasets,
+  apiVersion,
+})
