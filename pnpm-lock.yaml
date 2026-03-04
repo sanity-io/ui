@@ -110,6 +110,9 @@ importers:
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@sanity/ui3':
+        specifier: npm:@sanity/ui@3.1.13
+        version: '@sanity/ui@3.1.13(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react-is@19.2.4)(react@19.2.4)(styled-components@6.3.11(react-dom@19.2.4(react@19.2.4))(react@19.2.4))'
       '@sanity/visual-editing':
         specifier: ^2.15.0
         version: 2.15.4(3eb65a8c8dc677c76ad93b74e53b8c1b)

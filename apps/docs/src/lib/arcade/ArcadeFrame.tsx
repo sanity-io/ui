@@ -11,7 +11,7 @@ export function ArcadeFrame({
   hookCode: string
   jsxCode: string
 }): ReactElement {
-  const {basePath} = useApp()
+  const {basePath, version} = useApp()
 
   const [frame, setFrame] = useState<HTMLIFrameElement | null>(null)
   const [ready, setReady] = useState(false)
@@ -70,6 +70,12 @@ export function ArcadeFrame({
   )
 
   return (
-    <Box as="iframe" ref={setFrame} src={`${basePath}/arcade/frame`} height="fill" width="fill" />
+    <Box
+      as="iframe"
+      ref={setFrame}
+      src={`${basePath}/arcade/frame?version=${version}`}
+      height="fill"
+      width="fill"
+    />
   )
 }

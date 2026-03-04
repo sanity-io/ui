@@ -1,17 +1,6 @@
 import {ArcadeMsg, ArcadeState} from './types'
 
 export function arcadeReducer(state: ArcadeState, msg: ArcadeMsg): ArcadeState {
-  if (msg.type === 'init') {
-    return {
-      ...state,
-      canvasWidth: msg.canvasWidth,
-      codeMode: msg.codeMode,
-      hookCode: msg.hookCode,
-      jsxCode: msg.jsxCode,
-      meta: msg.meta,
-    }
-  }
-
   if (msg.type === 'setCanvasWidth') {
     return {
       ...state,

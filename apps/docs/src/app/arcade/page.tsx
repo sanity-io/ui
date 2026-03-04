@@ -1,6 +1,6 @@
 import {Metadata} from 'next'
 
-import {ArcadeScreen} from './ArcadeScreen'
+import {ArcadeScreen} from '../ArcadeScreen'
 
 export async function generateMetadata(props: PageProps<'/arcade'>): Promise<Metadata> {
   const searchParams = await props.searchParams
