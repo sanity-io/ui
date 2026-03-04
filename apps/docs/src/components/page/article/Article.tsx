@@ -66,13 +66,15 @@ export function Article(props: {
           <Box marginBottom={[5, 6]}>
             <Heading as="h1" size={[4, 5, 6]} weight="medium">
               {article.apiMember?.isComponent ? (
-                <code>
-                  &lt;<sanity.span>{article.title}</sanity.span> /&gt;
-                </code>
+                // <code>
+                //   &lt;<sanity.span>{article.title}</sanity.span> /&gt;
+                // </code>
+                <sanity.span>{article.title}</sanity.span>
               ) : article.apiMember?.isHook ? (
-                <code>
-                  <sanity.span>{article.title}</sanity.span>()
-                </code>
+                // <code>
+                //   <sanity.span>{article.title}</sanity.span>()
+                // </code>
+                <sanity.span>{article.title}</sanity.span>
               ) : (
                 <sanity.span>{article.title}</sanity.span>
               )}
