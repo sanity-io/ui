@@ -9,14 +9,14 @@ import {structureTool} from 'sanity/structure'
 import {schema} from '@/schema'
 import {structure} from '@/structure'
 
-const previewBaseUrl = 'http://localhost:3000'
+const previewBaseUrl = process.env['SANITY_STUDIO_PREVIEW_BASE_URL'] ?? 'https://www.sanity.io/ui'
 
 const prodStudio = defineConfig<WorkspaceOptions>({
   basePath: '/production',
   name: 'production',
   title: 'Sanity UI',
   projectId: process.env['SANITY_STUDIO_PROJECT_ID']!,
-  dataset: 'production',
+  dataset: process.env['SANITY_STUDIO_DATASET_PRODUCTION'] ?? 'production',
   plugins: [
     codeInput(),
     structureTool({structure}),
@@ -39,7 +39,7 @@ const devStudio = defineConfig<WorkspaceOptions>({
   name: 'development',
   title: 'Sanity UI (dev)',
   projectId: process.env['SANITY_STUDIO_PROJECT_ID']!,
-  dataset: 'development',
+  dataset: process.env['SANITY_STUDIO_DATASET_DEVELOPMENT'] ?? 'development',
   plugins: [
     codeInput(),
     structureTool({structure}),
