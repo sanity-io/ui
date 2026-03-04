@@ -45,7 +45,6 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
         paddingTop={[6, 7, 8]}
       >
         <Heading
-          marginBottom={[5, 5, 6]}
           as="h1"
           size={[4, 5, 6, 8, 9]}
           weight="medium"
@@ -55,13 +54,13 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
         </Heading>
 
         {data.copy && (
-          <Text marginBottom={[4, 4, 5]} as="p" size={[2, 2, 3, 4]}>
+          <Text marginTop={[5, 5, 6]} as="p" size={[2, 2, 3, 4]}>
             <sanity.span>{data.copy}</sanity.span>
           </Text>
         )}
 
         {data.ctas && (
-          <Flex gap={2} wrap="wrap">
+          <Flex marginTop={[4, 4, 5]} gap={2} wrap="wrap">
             {data.ctas
               .filter((cta) => cta.href)
               .map((cta) => (
