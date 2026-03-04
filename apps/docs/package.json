@@ -10,7 +10,7 @@
     "build": "next build --webpack",
     "dev": "next dev --webpack",
     "fix": "prettier --write --cache --ignore-unknown . && eslint . --ext .cjs,.js,.ts,.tsx --fix --quiet",
-    "lint": "next lint",
+    "lint": "eslint .",
     "start": "next start",
     "test": "vitest",
     "typecheck": "tsc --build"
