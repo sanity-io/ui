@@ -7,7 +7,7 @@ import {CardWrapper} from '$workshop'
 
 export default function OpticalAlignment(): React.JSX.Element {
   return (
-    <CardWrapper width={0}>
+    <CardWrapper width={1}>
       <Stack gap={4}>
         {FONT_HEADING_SIZE.map((size) => (
           <Box key={size} display="flex" gap={3}>
