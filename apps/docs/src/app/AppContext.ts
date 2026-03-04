@@ -11,7 +11,7 @@ import {ClientPerspective} from 'next-sanity'
 import {AppEnv} from './types'
 
 export interface AppContextValue {
-  basePath?: string
+  basePath: string
   colorScheme: ColorScheme | 'system'
   dataset: string
   defaultVersion: string

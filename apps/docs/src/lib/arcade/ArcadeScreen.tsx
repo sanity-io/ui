@@ -21,12 +21,8 @@ function compileSearch(params: Record<string, string>): string {
   return qs.stringify(params)
 }
 
-export function ArcadeScreen(props: {
-  basePath: string
-  title: string
-  description: string
-}): ReactElement {
-  const {basePath, title = '', description = ''} = props
+export function ArcadeScreen(props: {title: string; description: string}): ReactElement {
+  const {title = '', description = ''} = props
 
   const router = useRouter()
   const routerRef = useRef(router)
@@ -52,7 +48,7 @@ export function ArcadeScreen(props: {
     saveFnRef.current = saveFn
 
     return () => saveFn.cancel()
-  }, [basePath])
+  }, [])
 
   // Trigger save callback
   useEffect(() => {
@@ -120,7 +116,6 @@ export function ArcadeScreen(props: {
       <Flex direction={['column', 'column', 'row']} height="fill">
         <Card flex={1} overflow="hidden" style={{position: 'relative', zIndex: 1}}>
           <CanvasPane
-            basePath={basePath}
             hookCode={state.hookCode}
             jsxCode={state.jsxCode}
             meta={state.meta}

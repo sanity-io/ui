@@ -3,7 +3,6 @@ import {SpeedInsights} from '@vercel/speed-insights/next'
 import {Metadata} from 'next'
 import {VisualEditing} from 'next-sanity/visual-editing'
 
-import {basePath} from '@/env'
 import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
 import {datasets, projectId} from '@/sanity/env'
 
@@ -118,6 +117,7 @@ export default async function ArcadeLayout(props: LayoutProps<'/arcade'>) {
   const children = props.children
 
   const {
+    basePath,
     defaultVersion,
     env,
     initialScheme,
@@ -149,6 +149,7 @@ export default async function ArcadeLayout(props: LayoutProps<'/arcade'>) {
 
   return (
     <RootLayout
+      basePath={basePath}
       data={data}
       draftMode={isDraftMode}
       defaultVersion={defaultVersion}

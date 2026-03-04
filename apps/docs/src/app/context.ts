@@ -56,6 +56,7 @@ export async function getContext(slugParam: string[] | undefined) {
   })
 
   return {
+    basePath: process.env.BASE_PATH || '',
     client,
     dataset,
     defaultVersion,

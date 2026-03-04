@@ -10,13 +10,13 @@ import {NavNode} from '@/lib/nav'
 
 export function Nav(props: {nav: NavNode; path: string}): ReactElement {
   const {nav} = props
-  const {basePath, defaultVersion, version} = useApp()
+  const {defaultVersion, version} = useApp()
   const versionPrefix = version === defaultVersion ? '' : `/${version}`
 
   const nodes: NavTreeNode[] = [
     {
       key: nav.segment ?? '',
-      path: ensureBasePath(`${versionPrefix}${nav.href}`, basePath),
+      path: `${versionPrefix}${nav.href}`,
       title: <sanity.span>{nav.menuTitle ?? nav.title}</sanity.span>,
       hidden: nav.hidden,
       link: !!nav.targetId,
@@ -25,13 +25,13 @@ export function Nav(props: {nav: NavNode; path: string}): ReactElement {
     ...(nav.children ?? []).map((n) => {
       return {
         key: n.segment ?? '',
-        path: ensureBasePath(`${versionPrefix}${n.href}`, basePath),
+        path: `${versionPrefix}${n.href}`,
         title: <sanity.span>{n.menuTitle ?? n.title}</sanity.span>,
         hidden: n.hidden,
         children: n.children?.map((c) => {
           return {
             key: c.segment ?? '',
-            path: ensureBasePath(`${versionPrefix}${c.href}`, basePath),
+            path: `${versionPrefix}${c.href}`,
             title: <sanity.span>{c.menuTitle ?? c.title}</sanity.span>,
             hidden: c.hidden,
             link: !!c.targetId,
@@ -43,12 +43,4 @@ export function Nav(props: {nav: NavNode; path: string}): ReactElement {
   ]
 
   return <NavTree nodes={nodes} />
-}
-
-function ensureBasePath(path: string, basePath: string = '') {
-  if (!basePath) return path
-
-  if (path.startsWith(basePath)) return path
-
-  return `${basePath}${path}`
 }
