@@ -13,6 +13,7 @@ import {
   propertyTableField,
   sanityLogoGridBlock,
 } from './content'
+import {linkCollectionBlock} from './content/linkCollection'
 
 export const articleType = defineType({
   type: 'document',
@@ -61,6 +62,7 @@ export const articleType = defineType({
         calloutBlock,
         figmaEmbedBlock,
         figmaButtonBlock,
+        linkCollectionBlock,
       ],
     }),
     defineField({
