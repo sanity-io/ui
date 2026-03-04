@@ -78,38 +78,42 @@ function MetaEditor({
   useGlobalKeyDown(handleGlobalKeyDown)
 
   return (
-    <Stack as="form" padding={4} onSubmit={handleEditorSubmit} gap={4}>
-      <Stack gap={3}>
-        <Text size={1} weight="semibold">
-          Title
-        </Text>
-        <TextInput
-          onChange={(event) => setFormTitle(event.currentTarget.value)}
-          padding={2}
-          placeholder="Empty"
-          ref={titleInputRef}
-          value={formTitle}
-        />
-      </Stack>
-      <Stack gap={3}>
-        <Text size={1} weight="semibold">
-          Description
-        </Text>
-        <TextArea
-          onChange={(event) => setFormDescription(event.currentTarget.value)}
-          padding={2}
-          placeholder="Empty"
-          rows={4}
-          value={formDescription}
-        />
-      </Stack>
-      <Flex gap={2}>
-        <Stack flex={1}>
-          <Button mode="default" padding={2} text="Update" type="submit" />
+    <Stack as="form" onSubmit={handleEditorSubmit} style={{width: 300}}>
+      <Stack gap={4} padding={4}>
+        <Stack gap={3}>
+          <Text as="label" htmlFor="meta-title" size={1} weight="medium">
+            Title
+          </Text>
+          <TextInput
+            fontSize={1}
+            id="meta-title"
+            onChange={(event) => setFormTitle(event.currentTarget.value)}
+            padding={2}
+            placeholder="Empty"
+            radius={2}
+            ref={titleInputRef}
+            value={formTitle}
+          />
         </Stack>
-        <Stack flex={1}>
-          <Button mode="ghost" onClick={onCancel} padding={2} text="Cancel" type="reset" />
+        <Stack gap={3}>
+          <Text as="label" htmlFor="meta-description" size={1} weight="medium">
+            Description
+          </Text>
+          <TextArea
+            fontSize={1}
+            id="meta-description"
+            onChange={(event) => setFormDescription(event.currentTarget.value)}
+            padding={2}
+            placeholder="Empty"
+            radius={2}
+            rows={4}
+            value={formDescription}
+          />
         </Stack>
+      </Stack>
+      <Flex justify="flex-end" gap={2} padding={3}>
+        <Button mode="bleed" onClick={onCancel} padding={2} text="Cancel" type="reset" />
+        <Button mode="default" padding={2} text="Update" type="submit" />
       </Flex>
     </Stack>
   )

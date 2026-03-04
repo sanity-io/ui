@@ -1,7 +1,7 @@
 'use client'
 
 import {WrappedValue} from '@sanity/react-loader/jsx'
-import {Card, Text} from '@sanity/ui'
+import {Box, Code, Text} from '@sanity/ui'
 
 import {useApp} from '@/app/useApp'
 import {ArticlePage, PageBuilder} from '@/components/page'
@@ -10,72 +10,49 @@ import {TargetData} from '@/lib/data'
 import {Layout} from '../Layout'
 
 export interface PageProps {
-  data?: WrappedValue<TargetData> | null
-  error?: Error
-  path: string[]
+  data: WrappedValue<TargetData> | null
+  error: unknown
+  slug: string[] | undefined
 }
 
 export function Page(props: PageProps) {
-  const {data, error, path} = props
+  const {data, error, slug} = props
   const {nav} = useApp()
-
-  const pageNav = nav?.children?.find((item) => path.length && item.segment === path[0])
 
   if (error) {
     return (
-      <Layout path={path}>
-        <Card flex={1}>
-          <pre>{error.message}</pre>
-        </Card>
+      <Layout slug={slug}>
+        <Box flex={1} padding={[4, 4, 5]}>
+          <Code size={1}>{error instanceof Error ? error.message : JSON.stringify(error)}</Code>
+        </Box>
       </Layout>
     )
   }
 
   if (data === null) {
     return (
-      <Layout path={path}>
-        <Card flex={1}>
-          <div>no target</div>
-        </Card>
-      </Layout>
-    )
-  }
-
-  if (!data) {
-    return (
-      <Layout path={path}>
-        <Card flex={1} padding={[4, 4, 5]}>
+      <Layout slug={slug}>
+        <Box flex={1} padding={[4, 4, 5]}>
           <Text muted size={1}>
-            Loading…
+            Page not found
           </Text>
-        </Card>
+        </Box>
       </Layout>
     )
   }
 
   if (data._type === 'article') {
-    if (pageNav) {
-      return (
-        <Layout path={path}>
-          <ArticlePage
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            article={(data?._type === 'article' ? data : undefined) as any}
-            nav={pageNav}
-            path={path}
-          />
-        </Layout>
-      )
-    }
+    const pageNav = nav?.children?.find((item) => slug?.length && item.segment === slug[0])
 
     return (
-      <Layout path={path}>
-        <ArticlePage article={data} nav={pageNav} path={path} />
+      <Layout slug={slug}>
+        <ArticlePage article={data} nav={pageNav} slug={slug} />
       </Layout>
     )
   }
 
   return (
-    <Layout path={path}>
+    <Layout slug={slug}>
       <PageBuilder page={data} />
     </Layout>
   )

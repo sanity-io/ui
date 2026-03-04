@@ -1,7 +1,7 @@
 'use client'
 
 import {WrappedValue} from '@sanity/react-loader/jsx'
-import {Code} from '@sanity/ui'
+import {Card, Code, Text} from '@sanity/ui'
 import {ReactElement} from 'react'
 
 import {ScreenData} from '@/lib/data'
@@ -19,9 +19,23 @@ export function PageBuilder(props: {page: WrappedValue<ScreenData>}): ReactEleme
         }
 
         return (
-          <div key={section._key}>
-            <Code size={1}>{JSON.stringify(section, null, 2)}</Code>
-          </div>
+          <Card
+            display="flex"
+            flexDirection="column"
+            gap={4}
+            key={section._key}
+            padding={5}
+            shadow={1}
+            tone="default"
+          >
+            <Text size={1} weight="medium">
+              Unknown section type: {section._type}
+            </Text>
+
+            <Code language="json" size={1}>
+              {JSON.stringify(section, null, 2)}
+            </Code>
+          </Card>
         )
       })}
     </>

@@ -1,6 +1,6 @@
 import {Icon, IconSymbol} from '@sanity/icons'
 import {WrappedValue} from '@sanity/react-loader/jsx'
-import {Box, Card, Flex, Text} from '@sanity/ui'
+import {Box, Card, Text} from '@sanity/ui'
 import {CardTone} from '@sanity/ui/theme'
 
 import {CalloutData} from '@/lib/data'
@@ -12,27 +12,29 @@ export function Callout(props: {data: WrappedValue<CalloutData>}) {
 
   return (
     <Card
+      display="flex"
+      gap={4}
       marginY={[4, 4, 5]}
-      padding={2}
-      radius={2}
+      padding={4}
+      radius={4}
       tone={(tone?.value || 'transparent') as CardTone}
     >
-      <Flex>
-        {icon?.value && (
-          <Box padding={3}>
-            <Text muted>
-              <Icon symbol={icon.value as IconSymbol} />
-            </Text>
-          </Box>
-        )}
+      {/* <Flex> */}
+      {icon?.value && (
+        // <Box padding={3}>
+        <Text flex="none" muted>
+          <Icon symbol={icon.value as IconSymbol} />
+        </Text>
+        // </Box>
+      )}
 
-        {content && (
-          <Box flex={1} padding={3} paddingLeft={2}>
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-            <PlainContent blocks={content as any} />
-          </Box>
-        )}
-      </Flex>
+      {content && (
+        <Box flex={1}>
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+          <PlainContent blocks={content as any} />
+        </Box>
+      )}
+      {/* </Flex> */}
     </Card>
   )
 }

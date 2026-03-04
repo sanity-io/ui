@@ -43,5 +43,6 @@ export interface SettingsData {
 
 export interface GlobalData {
   nav: NavData | null
+  navTrees: {_id: string; id: string; title: string | null}[]
   settings: SettingsData | null
 }

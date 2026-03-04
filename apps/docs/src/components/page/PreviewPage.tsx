@@ -10,33 +10,28 @@ import {TARGET_QUERY, TargetData} from '@/lib/data'
 
 export function PreviewPage(props: {
   initial: QueryResponseInitial<TargetData | null>
-  path: string[]
+  slug: string[] | undefined
 }) {
-  const {initial, path} = props
+  const {initial, slug} = props
+  const {studioBaseUrl, version} = useApp()
 
-  const {studioBaseUrl} = useApp()
-
-  const {data: rawData, sourceMap} = useQuery<TargetData | null>(
+  const {
+    data: rawData,
+    error,
+    sourceMap,
+  } = useQuery<TargetData | null>(
     TARGET_QUERY,
     {
-      path: path.length === 0 ? [null] : path,
+      navId: version,
+      path: slug ?? [null],
     },
     {initial},
   )
 
   const data = useMemo(
-    () =>
-      rawData
-        ? wrapData(
-            {
-              baseUrl: studioBaseUrl,
-            },
-            rawData,
-            sourceMap,
-          )
-        : null,
+    () => (rawData ? wrapData({baseUrl: studioBaseUrl}, rawData, sourceMap) : null),
     [rawData, sourceMap, studioBaseUrl],
   )
 
-  return <Page data={data} path={path} />
+  return <Page data={data} error={error} slug={slug} />
 }

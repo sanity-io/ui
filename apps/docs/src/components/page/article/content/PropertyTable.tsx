@@ -13,7 +13,7 @@ export function PropertyTable(props: {data: WrappedValue<PropertyTableData>}): R
 
   return (
     <Box marginY={[2, 2, 3, 4]}>
-      <Card radius={2} shadow={1}>
+      <Card radius={3} shadow={1}>
         {properties?.map((property) => (
           <Property key={property.name?.value} property={property} />
         ))}
@@ -40,8 +40,8 @@ function Property(props: {property: WrappedValue<PropertyData>}) {
   tsType += `: ${property.type?.value}`
 
   return (
-    <Box className={propertyBox} padding={3}>
-      <Stack gap={3}>
+    <Box className={propertyBox} padding={4}>
+      <Stack gap={4}>
         <Code language="typescript" size={1}>
           {tsType}
         </Code>

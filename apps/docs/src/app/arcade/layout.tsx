@@ -2,16 +2,15 @@ import {wrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import {Metadata} from 'next'
 import {VisualEditing} from 'next-sanity/visual-editing'
-import {PropsWithChildren} from 'react'
 
 import {basePath} from '@/env'
 import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
 import {datasets, projectId} from '@/sanity/env'
 
-import {DEFAULT_META_DESCRIPTION, DEFAULT_META_OG_IMAGE} from './constants'
-import {DisableDraftMode} from './DisableDraftMode'
-import {RootLayout} from './RootLayout'
-import {getContext} from './context'
+import {DEFAULT_META_DESCRIPTION, DEFAULT_META_OG_IMAGE} from '../constants'
+import {DisableDraftMode} from '../DisableDraftMode'
+import {RootLayout} from '../RootLayout'
+import {getContext} from '../context'
 
 export const metadata: Metadata = {
   title: 'Sanity UI',
@@ -115,14 +114,26 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayoutLoader(props: PropsWithChildren) {
-  const {children, ...restProps} = props
+export default async function ArcadeLayout(props: LayoutProps<'/arcade'>) {
+  const children = props.children
 
-  const {env, initialScheme, isDraftMode, perspective, studioBaseUrl, sanityFetch, SanityLive} =
-    await getContext()
+  const {
+    defaultVersion,
+    env,
+    initialScheme,
+    isDraftMode,
+    perspective,
+    studioBaseUrl,
+    sanityFetch,
+    SanityLive,
+    version,
+  } = await getContext(['arcade'])
 
   const result = await sanityFetch({
     query: GLOBAL_QUERY,
+    params: {
+      navId: version,
+    },
   })
 
   const rawData = result.data as GlobalData
@@ -138,8 +149,9 @@ export default async function RootLayoutLoader(props: PropsWithChildren) {
 
   return (
     <RootLayout
-      {...restProps}
       data={data}
+      draftMode={isDraftMode}
+      defaultVersion={defaultVersion}
       env={env}
       dataset={datasets[env]}
       perspective={perspective}
@@ -147,6 +159,7 @@ export default async function RootLayoutLoader(props: PropsWithChildren) {
       initialScheme={initialScheme}
       projectId={projectId}
       studioBaseUrl={studioBaseUrl}
+      version={version}
     >
       {isDraftMode && <DisableDraftMode />}
       {isDraftMode && <VisualEditing basePath={basePath} />}

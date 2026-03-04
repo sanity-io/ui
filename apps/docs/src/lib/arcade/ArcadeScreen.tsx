@@ -1,3 +1,5 @@
+'use client'
+
 import {Card, Flex} from '@sanity/ui'
 import {debounce, DebouncedFunc} from 'lodash-es'
 import {useRouter} from 'next/navigation'
@@ -30,8 +32,6 @@ export function ArcadeScreen(props: {title: string; description: string}): React
 
   const saveFnRef = useRef<DebouncedFunc<SaveFn> | null>(null)
 
-  // routerRef.current = router
-
   useEffect(() => {
     routerRef.current = router
   }, [router])
@@ -41,8 +41,6 @@ export function ArcadeScreen(props: {title: string; description: string}): React
     const saveFn = debounce((params: ArcadeQueryParams) => {
       const href = `${basePath}/arcade?${compileSearch(getArcadeQuery(params))}`
       document.title = `${params.title ?? 'Arcade'} | Sanity UI`
-      // window.history.replaceState({}, '', href)
-      console.log('redirect to', href)
       routerRef.current.replace(href, {scroll: false})
     }, 100)
 
@@ -113,7 +111,7 @@ export function ArcadeScreen(props: {title: string; description: string}): React
   )
 
   return (
-    <Card flex={1} overflow="hidden" shadow={1} style={{minHeight: 'auto'}}>
+    <Card flex={1} overflow="hidden" shadow={1} style={{minHeight: 'auto'}} tone="default">
       <Flex direction={['column', 'column', 'row']} height="fill">
         <Card flex={1} overflow="hidden" style={{position: 'relative', zIndex: 1}}>
           <CanvasPane

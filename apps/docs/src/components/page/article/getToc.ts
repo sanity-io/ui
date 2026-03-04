@@ -20,6 +20,10 @@ export function getTOCTree(headings: HeadingType[]): HeadingNode[] {
   const stack: HeadingNode[] = [node]
 
   for (const heading of headings) {
+    if (!node) {
+      break
+    }
+
     if (heading.level > node.level) {
       const parent = node
 
@@ -35,10 +39,23 @@ export function getTOCTree(headings: HeadingType[]): HeadingNode[] {
     } else {
       while (heading.level <= node.level) {
         stack.pop()
-        node = stack[stack.length - 1]
+
+        const nextNode = stack[stack.length - 1] as HeadingNode | undefined
+
+        if (!nextNode) {
+          break
+        }
+
+        node = nextNode
       }
 
-      const parent = stack[stack.length - 1]
+      const nextParent = stack[stack.length - 1] as HeadingNode | undefined
+
+      if (!nextParent) {
+        break
+      }
+
+      const parent = nextParent
 
       node = {
         level: heading.level,

@@ -46,7 +46,7 @@ export function DisableDraftMode() {
       display="flex"
       position="fixed"
       insetBottom={0}
-      insetRight={0}
+      insetLeft={0}
       margin={4}
       overflow="hidden"
       shadow={2}
