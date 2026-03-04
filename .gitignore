@@ -31,6 +31,7 @@ pnpm-debug.log*
 coverage
 dist
 logs
+next-env.d.ts
 node_modules
 playwright-report
 playwright/.cache
