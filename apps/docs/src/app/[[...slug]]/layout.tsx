@@ -162,7 +162,7 @@ export default async function SlugLayout(props: LayoutProps<'/[[...slug]]'>) {
       studioBaseUrl={studioBaseUrl}
       version={version}
     >
-      {isDraftMode && <DisableDraftMode />}
+      {(env !== 'production' || isDraftMode) && <DisableDraftMode />}
       {isDraftMode && <VisualEditing basePath={basePath} />}
       {children}
       <SanityLive />
