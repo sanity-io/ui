@@ -7,7 +7,6 @@ import createImageUrlBuilder from '@sanity/image-url'
 
 import {DEFAULT_META_DESCRIPTION} from '../constants'
 import {getContext} from '../context'
-import {basePath} from '@/env'
 
 export async function generateMetadata(props: PageProps<'/[[...slug]]'>): Promise<Metadata> {
   const params = await props.params
@@ -76,7 +75,7 @@ export default async function SlugPage(props: PageProps<'/[[...slug]]'>) {
         (module) => module.ArcadeScreen,
       )
 
-      return <ArcadeScreen basePath={basePath} title="" description="" />
+      return <ArcadeScreen title="" description="" />
     }
 
     if (isDraftMode) {

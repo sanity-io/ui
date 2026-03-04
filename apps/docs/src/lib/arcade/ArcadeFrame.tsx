@@ -1,17 +1,18 @@
 import {Box} from '@sanity/ui'
 import {ReactElement, useCallback, useEffect, useRef, useState} from 'react'
 
+import {useApp} from '@/app/useApp'
 import {isRecord} from '@/lib/common'
 
 export function ArcadeFrame({
-  basePath,
   hookCode,
   jsxCode,
 }: {
-  basePath: string
   hookCode: string
   jsxCode: string
 }): ReactElement {
+  const {basePath} = useApp()
+
   const [frame, setFrame] = useState<HTMLIFrameElement | null>(null)
   const [ready, setReady] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -69,12 +70,6 @@ export function ArcadeFrame({
   )
 
   return (
-    <Box
-      as="iframe"
-      ref={setFrame}
-      src={`${basePath ?? ''}/arcade/frame`}
-      height="fill"
-      width="fill"
-    />
+    <Box as="iframe" ref={setFrame} src={`${basePath}/arcade/frame`} height="fill" width="fill" />
   )
 }

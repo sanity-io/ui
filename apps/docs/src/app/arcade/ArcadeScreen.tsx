@@ -6,8 +6,7 @@ import {Layout} from '@/components/Layout'
 
 const LazyArcadeScreen = lazy(() => import('@/lib/arcade/default'))
 
-export function ArcadeScreen(props: {basePath: string}): ReactNode {
-  const {basePath} = props
+export function ArcadeScreen(): ReactNode {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -21,7 +20,7 @@ export function ArcadeScreen(props: {basePath: string}): ReactNode {
   return (
     <Layout slug={['arcade']}>
       <Suspense>
-        <LazyArcadeScreen basePath={basePath} title="" description="" />
+        <LazyArcadeScreen title="" description="" />
       </Suspense>
     </Layout>
   )

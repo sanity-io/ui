@@ -1,7 +1,4 @@
 import {Metadata} from 'next'
-import {ReactElement} from 'react'
-
-import {basePath} from '@/env'
 
 import {ArcadeScreen} from './ArcadeScreen'
 
@@ -29,6 +26,6 @@ export async function generateMetadata(props: PageProps<'/arcade'>): Promise<Met
   }
 }
 
-export default function ArcadePage(): ReactElement {
-  return <ArcadeScreen basePath={basePath} />
+export default async function ArcadePage() {
+  return <ArcadeScreen />
 }

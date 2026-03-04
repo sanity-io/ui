@@ -14,7 +14,6 @@ import bash from 'refractor/bash'
 import json from 'refractor/json'
 import tsx from 'refractor/tsx'
 
-import {basePath} from '@/env'
 import type {GlobalData} from '@/lib/data'
 import {parseNav} from '@/lib/nav'
 
@@ -28,6 +27,7 @@ registerLanguage(json)
 registerLanguage(tsx)
 
 export function RootLayout(props: {
+  basePath: string
   children?: React.ReactNode
   data: WrappedValue<GlobalData>
   defaultVersion: string
@@ -42,6 +42,7 @@ export function RootLayout(props: {
   version: string
 }) {
   const {
+    basePath,
     children,
     data,
     dataset,
@@ -117,7 +118,7 @@ export function RootLayout(props: {
       version,
     }),
     [
-      scheme,
+      basePath,
       dataset,
       defaultVersion,
       draftMode,
@@ -128,6 +129,7 @@ export function RootLayout(props: {
       navTrees,
       perspective,
       projectId,
+      scheme,
       setColorScheme,
       settings,
       studioBaseUrl,
