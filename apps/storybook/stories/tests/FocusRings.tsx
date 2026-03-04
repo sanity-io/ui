@@ -46,7 +46,7 @@ import {TextInput} from '@sanity/ui/primitives/text-input'
 //   TextArea,
 //   TextInput,
 // } from '@sanity/ui'
-import {CARD_TONES, ELEMENT_TONES} from '@sanity/ui/theme'
+import {CARD_TONES, ELEMENT_TONES} from '@sanity/ui/tokens'
 import {PortalProvider} from '@sanity/ui/utils/portal'
 import {type ReactNode, useState} from 'react'
 

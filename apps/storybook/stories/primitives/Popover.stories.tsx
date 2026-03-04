@@ -5,7 +5,7 @@ import {Card} from '@sanity/ui/primitives/card'
 import {Flex} from '@sanity/ui/primitives/flex'
 import {Popover} from '@sanity/ui/primitives/popover'
 import {Text} from '@sanity/ui/primitives/text'
-import {RADIUS} from '@sanity/ui/theme'
+import {RADIUS} from '@sanity/ui/tokens'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useEffect, useState} from 'react'
 

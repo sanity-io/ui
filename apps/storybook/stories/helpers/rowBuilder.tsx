@@ -1,7 +1,7 @@
 // import {Card, Flex} from '@sanity/ui'
 import {Card} from '@sanity/ui/primitives/card'
 import {Flex} from '@sanity/ui/primitives/flex'
-import type {ColorScheme} from '@sanity/ui/theme'
+import type {ColorScheme} from '@sanity/ui/tokens'
 import type {ComponentProps, ReactNode} from 'react'
 
 interface RowBuilderProps<T> {

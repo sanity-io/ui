@@ -2,7 +2,7 @@
 import {Card} from '@sanity/ui/primitives/card'
 import {Flex} from '@sanity/ui/primitives/flex'
 import {Text} from '@sanity/ui/primitives/text'
-import {FONT_TEXT_SIZE} from '@sanity/ui/theme'
+import {FONT_TEXT_SIZE} from '@sanity/ui/tokens'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {

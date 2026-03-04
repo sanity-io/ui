@@ -1,7 +1,7 @@
 // import {Card, Stack} from '@sanity/ui'
 import {Card} from '@sanity/ui/primitives/card'
 import {Stack} from '@sanity/ui/primitives/stack'
-import type {ColorScheme} from '@sanity/ui/theme'
+import type {ColorScheme} from '@sanity/ui/tokens'
 import type {ComponentProps, ReactNode} from 'react'
 
 interface ColumnBuilderProps<T> {

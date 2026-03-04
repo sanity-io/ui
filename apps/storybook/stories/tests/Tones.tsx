@@ -71,7 +71,7 @@ import {Switch} from '@sanity/ui/primitives/switch'
 import {Text} from '@sanity/ui/primitives/text'
 import {TextArea} from '@sanity/ui/primitives/text-area'
 import {TextInput} from '@sanity/ui/primitives/text-input'
-import {CARD_TONES, type ColorScheme} from '@sanity/ui/theme'
+import {CARD_TONES, type ColorScheme} from '@sanity/ui/tokens'
 import {PortalProvider} from '@sanity/ui/utils/portal'
 import {type ReactNode, useState} from 'react'
 

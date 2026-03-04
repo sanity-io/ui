@@ -7,7 +7,7 @@ import {Flex} from '@sanity/ui/primitives/flex'
 import {Grid} from '@sanity/ui/primitives/grid'
 import {Heading} from '@sanity/ui/primitives/heading'
 import {Stack} from '@sanity/ui/primitives/stack'
-import {HUES, TINTS} from '@sanity/ui/theme'
+import {HUES, TINTS} from '@sanity/ui/tokens'
 import type {ReactNode} from 'react'
 
 function ucfirst(str: string) {

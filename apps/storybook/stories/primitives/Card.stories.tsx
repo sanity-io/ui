@@ -7,7 +7,7 @@ import {Flex} from '@sanity/ui/primitives/flex'
 import {Grid} from '@sanity/ui/primitives/grid'
 import {Stack} from '@sanity/ui/primitives/stack'
 import {Text} from '@sanity/ui/primitives/text'
-import {CARD_TONES, type CardTone, RADIUS} from '@sanity/ui/theme'
+import {CARD_TONES, type CardTone, RADIUS} from '@sanity/ui/tokens'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {RADIUS_CONTROLS, SHADOW_CONTROLS, SPACE_CONTROLS} from '../controls'

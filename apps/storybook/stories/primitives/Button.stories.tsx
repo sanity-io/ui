@@ -5,7 +5,7 @@ import {Flex} from '@sanity/ui/primitives/flex'
 import {Grid} from '@sanity/ui/primitives/grid'
 import {Stack} from '@sanity/ui/primitives/stack'
 import {Text} from '@sanity/ui/primitives/text'
-import {BUTTON_MODES, ELEMENT_TONES, RADIUS} from '@sanity/ui/theme'
+import {BUTTON_MODES, ELEMENT_TONES, RADIUS} from '@sanity/ui/tokens'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {

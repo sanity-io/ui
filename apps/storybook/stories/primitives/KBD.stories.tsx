@@ -1,7 +1,7 @@
 import {Card} from '@sanity/ui/primitives/card'
 import {KBD} from '@sanity/ui/primitives/kbd'
 import {Stack} from '@sanity/ui/primitives/stack'
-import {CARD_TONES, RADIUS} from '@sanity/ui/theme'
+import {CARD_TONES, RADIUS} from '@sanity/ui/tokens'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'

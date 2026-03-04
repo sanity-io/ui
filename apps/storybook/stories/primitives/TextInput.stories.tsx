@@ -4,7 +4,7 @@ import {Container} from '@sanity/ui/primitives/container'
 import {Grid} from '@sanity/ui/primitives/grid'
 import {Text} from '@sanity/ui/primitives/text'
 import {TextInput} from '@sanity/ui/primitives/text-input'
-import {RADIUS} from '@sanity/ui/theme'
+import {RADIUS} from '@sanity/ui/tokens'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 

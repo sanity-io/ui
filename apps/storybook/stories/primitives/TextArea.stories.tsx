@@ -4,7 +4,7 @@ import {Card} from '@sanity/ui/primitives/card'
 import {Grid} from '@sanity/ui/primitives/grid'
 import {Text} from '@sanity/ui/primitives/text'
 import {TextArea} from '@sanity/ui/primitives/text-area'
-import {RADIUS} from '@sanity/ui/theme'
+import {RADIUS} from '@sanity/ui/tokens'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'
