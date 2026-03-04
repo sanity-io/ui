@@ -14,7 +14,6 @@ import {CodePane} from './CodePane'
 import {DEFAULT_CODE, INITIAL_STATE} from './constants'
 import {getArcadeQuery, tryDecode} from './helpers'
 import {ArcadeCodeMode, ArcadeMeta, ArcadeQueryParams, CanvasWidth} from './types'
-import {basePath} from '@/env'
 
 type SaveFn = (params: ArcadeQueryParams) => void
 
@@ -22,12 +21,18 @@ function compileSearch(params: Record<string, string>): string {
   return qs.stringify(params)
 }
 
-export function ArcadeScreen(props: {title: string; description: string}): ReactElement {
+export function ArcadeScreen(props: {
+  basePath: string
+  title: string
+  description: string
+}): ReactElement {
+  const {basePath, title = '', description = ''} = props
+
   const router = useRouter()
   const routerRef = useRef(router)
   const [state, dispatch] = useReducer(arcadeReducer, {
     ...INITIAL_STATE,
-    meta: {title: props.title || '', description: props.description || ''},
+    meta: {title, description},
   })
 
   const saveFnRef = useRef<DebouncedFunc<SaveFn> | null>(null)
@@ -39,7 +44,7 @@ export function ArcadeScreen(props: {title: string; description: string}): React
   // Create `saveFn` callback
   useEffect(() => {
     const saveFn = debounce((params: ArcadeQueryParams) => {
-      const href = `${basePath}/arcade?${compileSearch(getArcadeQuery(params))}`
+      const href = `/arcade?${compileSearch(getArcadeQuery(params))}`
       document.title = `${params.title ?? 'Arcade'} | Sanity UI`
       routerRef.current.replace(href, {scroll: false})
     }, 100)
@@ -47,7 +52,7 @@ export function ArcadeScreen(props: {title: string; description: string}): React
     saveFnRef.current = saveFn
 
     return () => saveFn.cancel()
-  }, [])
+  }, [basePath])
 
   // Trigger save callback
   useEffect(() => {
@@ -115,6 +120,7 @@ export function ArcadeScreen(props: {title: string; description: string}): React
       <Flex direction={['column', 'column', 'row']} height="fill">
         <Card flex={1} overflow="hidden" style={{position: 'relative', zIndex: 1}}>
           <CanvasPane
+            basePath={basePath}
             hookCode={state.hookCode}
             jsxCode={state.jsxCode}
             meta={state.meta}

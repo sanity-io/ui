@@ -1,19 +1,28 @@
 'use client'
 
-import {createElement, lazy, ReactNode, Suspense, useEffect, useState} from 'react'
+import {lazy, ReactNode, startTransition, Suspense, useEffect, useState} from 'react'
 
 import {Layout} from '@/components/Layout'
 
-export function ArcadeScreen(): ReactNode {
+const LazyArcadeScreen = lazy(() => import('@/lib/arcade/default'))
+
+export function ArcadeScreen(props: {basePath: string}): ReactNode {
+  const {basePath} = props
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    startTransition(() => {
+      setMounted(true)
+    })
+  }, [])
 
   if (!mounted) return null
 
   return (
     <Layout slug={['arcade']}>
-      <Suspense>{createElement(lazy(() => import('@/lib/arcade/default')))}</Suspense>
+      <Suspense>
+        <LazyArcadeScreen basePath={basePath} title="" description="" />
+      </Suspense>
     </Layout>
   )
 }
