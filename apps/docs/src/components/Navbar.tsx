@@ -51,30 +51,36 @@ export function Navbar(props: {slug: string[] | undefined}): ReactElement {
           />
         </Box>
 
-        <MenuButton
-          button={
-            <Button text={navTree?.title || version} mode="ghost" iconRight={<ChevronDownIcon />} />
-          }
-          id="nav-tree-menu"
-          menu={
-            <Menu>
-              {navTrees.map((t) => {
-                const versionPrefix = defaultVersion === t.id ? '' : `/${t.id}`
+        {navTrees.length > 1 && (
+          <MenuButton
+            button={
+              <Button
+                text={navTree?.title || version}
+                mode="ghost"
+                iconRight={<ChevronDownIcon />}
+              />
+            }
+            id="nav-tree-menu"
+            menu={
+              <Menu>
+                {navTrees.map((t) => {
+                  const versionPrefix = defaultVersion === t.id ? '' : `/${t.id}`
 
-                return (
-                  <MenuItem
-                    as={Link}
-                    href={`${versionPrefix}${pathname}`}
-                    key={t._id}
-                    pressed={t.id === version}
-                    selected={t.id === version}
-                    text={t.title || t.id}
-                  />
-                )
-              })}
-            </Menu>
-          }
-        />
+                  return (
+                    <MenuItem
+                      as={Link}
+                      href={`${versionPrefix}${pathname}`}
+                      key={t._id}
+                      pressed={t.id === version}
+                      selected={t.id === version}
+                      text={t.title || t.id}
+                    />
+                  )
+                })}
+              </Menu>
+            }
+          />
+        )}
       </Box>
 
       {nav && (
