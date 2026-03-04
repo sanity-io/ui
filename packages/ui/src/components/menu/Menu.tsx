@@ -4,7 +4,7 @@ import {useClickOutsideEvent, useGlobalKeyDown} from '@sanity/ui/hooks'
 import {Box} from '@sanity/ui/primitives/box'
 import {useLayer} from '@sanity/ui/primitives/layer'
 import {Stack} from '@sanity/ui/primitives/stack'
-import type {Space} from '@sanity/ui/theme'
+import type {Space} from '@sanity/ui/tokens'
 import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 
 import {MenuContext, type MenuContextValue} from './MenuContext'

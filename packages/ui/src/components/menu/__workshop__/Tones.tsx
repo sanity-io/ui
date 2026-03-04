@@ -1,6 +1,6 @@
 import {CubeIcon} from '@sanity/icons'
 import {Menu, MenuItem} from '@sanity/ui'
-import {ELEMENT_TONES} from '@sanity/ui/theme'
+import {ELEMENT_TONES} from '@sanity/ui/tokens'
 import {useBoolean} from '@sanity/ui-workshop'
 
 import {CardWrapper} from '$workshop'

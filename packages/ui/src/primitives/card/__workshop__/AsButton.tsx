@@ -1,5 +1,5 @@
 import {Box, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES} from '@sanity/ui/tokens'
 
 export default function AsButtonStory(): React.JSX.Element {
   return (

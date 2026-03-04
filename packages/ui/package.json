@@ -200,9 +200,9 @@
       "source": "./exports/root.ts",
       "default": "./dist/root.js"
     },
-    "./theme": {
-      "source": "./exports/theme.ts",
-      "default": "./dist/theme.js"
+    "./tokens": {
+      "source": "./exports/tokens.ts",
+      "default": "./dist/tokens.js"
     },
     "./utils/boundary-element": {
       "source": "./exports/utils/boundary-element.ts",

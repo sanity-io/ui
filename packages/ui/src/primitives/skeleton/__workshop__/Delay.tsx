@@ -11,7 +11,7 @@ import {
   Text,
   TextSkeleton,
 } from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES} from '@sanity/ui/tokens'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
 export default function SkeletonDelayStory(): React.JSX.Element {

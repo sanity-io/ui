@@ -15,7 +15,7 @@ import {
 import {usePrefersReducedMotion} from '@sanity/ui/hooks'
 import {Container} from '@sanity/ui/primitives/container'
 import {Layer, type LayerOwnProps, type LayerProps} from '@sanity/ui/primitives/layer'
-import type {Radius, Shadow} from '@sanity/ui/theme'
+import type {Radius, Shadow} from '@sanity/ui/tokens'
 import {BoundaryElementContext} from '@sanity/ui/utils/boundary-element'
 import {Portal, usePortal} from '@sanity/ui/utils/portal'
 import {type FocusEvent, type ForwardedRef, type ReactNode, use, useCallback, useRef} from 'react'

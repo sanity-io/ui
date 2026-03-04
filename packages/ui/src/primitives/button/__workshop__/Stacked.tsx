@@ -1,6 +1,6 @@
 import {icons} from '@sanity/icons'
 import {Box, Button, Container, Flex, Stack} from '@sanity/ui'
-import {BUTTON_MODES, ELEMENT_TONES, FONT_TEXT_SIZE, SPACE} from '@sanity/ui/theme'
+import {BUTTON_MODES, ELEMENT_TONES, FONT_TEXT_SIZE, SPACE} from '@sanity/ui/tokens'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {CardWrapper, WORKSHOP_FLEX_JUSTIFY_OPTIONS, WORKSHOP_ICON_SYMBOL_OPTIONS} from '$workshop'

@@ -1,5 +1,5 @@
 import {Card, Flex, Stack, Text} from '@sanity/ui'
-import {BG_PATTERNS, BORDER_WIDTH, CARD_TONES, RADIUS, SHADOW, SPACE} from '@sanity/ui/theme'
+import {BG_PATTERNS, BORDER_WIDTH, CARD_TONES, RADIUS, SHADOW, SPACE} from '@sanity/ui/tokens'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_CARD_AS_OPTIONS} from '$workshop'

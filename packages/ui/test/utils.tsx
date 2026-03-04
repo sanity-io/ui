@@ -1,4 +1,4 @@
-import type {ColorScheme} from '@sanity/ui-tokens/system'
+import type {ColorScheme} from '@sanity/ui-tokens'
 import {
   render as _testRender,
   type RenderOptions as _TestRenderOptions,

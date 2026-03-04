@@ -1,5 +1,5 @@
 import {Menu, MenuItem, Text} from '@sanity/ui'
-import {ELEMENT_TONES} from '@sanity/ui/theme'
+import {ELEMENT_TONES} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 
 import {CardWrapper} from '$workshop'

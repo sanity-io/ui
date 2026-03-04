@@ -18,7 +18,7 @@ import {SpinnerAnimatedIcon} from '@sanity/ui/primitives/spinner'
 import {Stack} from '@sanity/ui/primitives/stack'
 import {Text} from '@sanity/ui/primitives/text'
 import {TextInput, type TextInputOwnProps} from '@sanity/ui/primitives/text-input'
-import type {Radius, Space} from '@sanity/ui/theme'
+import type {Radius, Space} from '@sanity/ui/tokens'
 import {
   type ChangeEvent,
   cloneElement,

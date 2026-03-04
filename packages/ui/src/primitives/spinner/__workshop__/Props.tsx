@@ -1,5 +1,5 @@
 import {Flex, Spinner} from '@sanity/ui'
-import {FONT_TEXT_SIZE} from '@sanity/ui/theme'
+import {FONT_TEXT_SIZE} from '@sanity/ui/tokens'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
 export default function Props(): React.JSX.Element {

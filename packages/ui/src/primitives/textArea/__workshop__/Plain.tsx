@@ -1,5 +1,5 @@
 import {Stack, Text, TextArea} from '@sanity/ui'
-import {FONT_TEXT_SIZE, RADIUS, SPACE} from '@sanity/ui/theme'
+import {FONT_TEXT_SIZE, RADIUS, SPACE} from '@sanity/ui/tokens'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useState} from 'react'
 

@@ -1,5 +1,5 @@
 import {Badge, Flex} from '@sanity/ui'
-import {ELEMENT_TONES, RADIUS, SPACE} from '@sanity/ui/theme'
+import {ELEMENT_TONES, RADIUS, SPACE} from '@sanity/ui/tokens'
 import {useAction, useSelect, useText} from '@sanity/ui-workshop'
 
 export default function PropsStory() {

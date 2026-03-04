@@ -8,7 +8,7 @@ import {
   type SelectableOwnProps,
 } from '@sanity/ui/primitives/selectable'
 import {Text} from '@sanity/ui/primitives/text'
-import type {FontTextSize, FontWeight, Space} from '@sanity/ui/theme'
+import type {FontTextSize, FontWeight, Space} from '@sanity/ui/tokens'
 import {
   type ElementType,
   type KeyboardEvent,

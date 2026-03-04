@@ -1,7 +1,7 @@
 import {_splitKeys, type Props} from '@sanity/ui/core'
 import {card, CARD_STYLE_PROP_KEYS, type CardStyleProps} from '@sanity/ui/css'
 import type {BoxElementType} from '@sanity/ui/primitives/box'
-import type {CardTone} from '@sanity/ui/theme'
+import type {CardTone} from '@sanity/ui/tokens'
 
 import {CardProvider} from './CardProvider'
 import {useCard} from './useCard'

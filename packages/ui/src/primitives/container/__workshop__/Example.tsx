@@ -1,5 +1,5 @@
 import {Container, Flex, Text} from '@sanity/ui'
-import {CONTAINER_SCALE} from '@sanity/ui/theme'
+import {CONTAINER_SCALE} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 
 export default function PlainStory(): React.JSX.Element {

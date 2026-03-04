@@ -1,4 +1,4 @@
-import type {CardTone, ColorScheme} from '@sanity/ui/theme'
+import type {CardTone, ColorScheme} from '@sanity/ui/tokens'
 import {type ReactNode, useMemo} from 'react'
 
 import {CardContext} from './CardContext'

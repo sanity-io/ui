@@ -1,6 +1,6 @@
 import {icons} from '@sanity/icons'
 import {Button, Flex, type TooltipProps} from '@sanity/ui'
-import {BUTTON_MODES, ELEMENT_TONES, FONT_TEXT_SIZE, FONT_WEIGHT, SPACE} from '@sanity/ui/theme'
+import {BUTTON_MODES, ELEMENT_TONES, FONT_TEXT_SIZE, FONT_WEIGHT, SPACE} from '@sanity/ui/tokens'
 import {useAction, useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 
 import {

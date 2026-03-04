@@ -9,7 +9,7 @@ import {
 } from '@sanity/ui/css'
 import {Selectable} from '@sanity/ui/primitives/selectable'
 import {Text} from '@sanity/ui/primitives/text'
-import type {ElementTone, FontTextSize} from '@sanity/ui/theme'
+import type {ElementTone, FontTextSize} from '@sanity/ui/tokens'
 import {
   type ElementType,
   isValidElement,

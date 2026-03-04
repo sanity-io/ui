@@ -1,5 +1,5 @@
 import {Select, Stack, Text} from '@sanity/ui'
-import {FONT_TEXT_SIZE, RADIUS} from '@sanity/ui/theme'
+import {FONT_TEXT_SIZE, RADIUS} from '@sanity/ui/tokens'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {CardWrapper} from '$workshop'

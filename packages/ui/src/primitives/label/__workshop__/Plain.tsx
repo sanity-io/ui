@@ -1,5 +1,5 @@
 import {Container, Flex, Label} from '@sanity/ui'
-import {FONT_TEXT_SIZE} from '@sanity/ui/theme'
+import {FONT_TEXT_SIZE} from '@sanity/ui/tokens'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 
 import {

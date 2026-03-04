@@ -1,6 +1,6 @@
 import {RocketIcon} from '@sanity/icons'
 import {Button, Flex} from '@sanity/ui'
-import {BUTTON_MODES} from '@sanity/ui/theme'
+import {BUTTON_MODES} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 
 import {CardWrapper} from '$workshop'

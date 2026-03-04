@@ -1,7 +1,7 @@
 import {CropIcon} from '@sanity/icons'
 import {Box, Heading, Stack} from '@sanity/ui'
 import {elementTone, vars} from '@sanity/ui/css'
-import {FONT_HEADING_SIZE} from '@sanity/ui/theme'
+import {FONT_HEADING_SIZE} from '@sanity/ui/tokens'
 
 import {CardWrapper} from '$workshop'
 

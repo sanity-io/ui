@@ -1,5 +1,5 @@
 import {Box, type BoxProps, Text} from '@sanity/ui'
-import {BORDER_STYLE, BORDER_WIDTH, RADIUS, SHADOW, SPACE} from '@sanity/ui/theme'
+import {BORDER_STYLE, BORDER_WIDTH, RADIUS, SHADOW, SPACE} from '@sanity/ui/tokens'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {CardWrapper} from '$workshop'

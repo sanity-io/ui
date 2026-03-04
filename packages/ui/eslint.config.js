@@ -277,7 +277,7 @@ export default defineConfig(import.meta.dirname, [
           mode: 'file',
         },
         {
-          type: '@sanity/ui/theme',
+          type: '@sanity/ui/tokens',
           pattern: ['exports/theme.ts'],
           mode: 'file',
         },
@@ -538,7 +538,7 @@ export default defineConfig(import.meta.dirname, [
             {from: '@sanity/ui/primitives/text', allow: ['src/primitives/text']},
             {from: '@sanity/ui/primitives/tooltip', allow: ['src/primitives/tooltip']},
             {from: '@sanity/ui/css', allow: []},
-            {from: '@sanity/ui/theme', allow: []},
+            {from: '@sanity/ui/tokens', allow: []},
             {from: '@sanity/ui', allow: []},
 
             {
@@ -546,7 +546,7 @@ export default defineConfig(import.meta.dirname, [
               allow: [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/*',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/components/autocomplete',
               ],
             },
@@ -558,7 +558,7 @@ export default defineConfig(import.meta.dirname, [
               from: 'src/components/dialog',
               allow: [
                 '@sanity/ui/css',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 '@sanity/ui/primitives/*',
                 'src/components/dialog',
               ],
@@ -573,7 +573,7 @@ export default defineConfig(import.meta.dirname, [
                 '@sanity/ui/components/hotkeys',
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/*',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/components/menu',
               ],
             },
@@ -582,7 +582,7 @@ export default defineConfig(import.meta.dirname, [
               allow: [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/*',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/components/tab',
               ],
             },
@@ -595,7 +595,7 @@ export default defineConfig(import.meta.dirname, [
               allow: [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/*',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/components/tree',
               ],
             },
@@ -604,7 +604,7 @@ export default defineConfig(import.meta.dirname, [
               allow: [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/*',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/components/virtual-list',
               ],
             },
@@ -620,7 +620,7 @@ export default defineConfig(import.meta.dirname, [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/box',
                 '@sanity/ui/primitives/label',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/primitives/avatar',
               ],
             },
@@ -629,7 +629,7 @@ export default defineConfig(import.meta.dirname, [
               allow: [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/text',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/primitives/badge',
               ],
             },
@@ -641,7 +641,7 @@ export default defineConfig(import.meta.dirname, [
                 '@sanity/ui/primitives/spinner',
                 '@sanity/ui/primitives/text',
                 '@sanity/ui/primitives/tooltip',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/primitives/button',
               ],
             },
@@ -654,7 +654,7 @@ export default defineConfig(import.meta.dirname, [
               allow: [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/box',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/primitives/card',
               ],
             },
@@ -671,7 +671,7 @@ export default defineConfig(import.meta.dirname, [
               allow: [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/box',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/primitives/container',
               ],
             },
@@ -709,7 +709,7 @@ export default defineConfig(import.meta.dirname, [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/flex',
                 '@sanity/ui/primitives/layer',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/primitives/popover',
               ],
             },
@@ -727,14 +727,14 @@ export default defineConfig(import.meta.dirname, [
             },
             {
               from: 'src/primitives/skeleton',
-              allow: ['@sanity/ui/css', '@sanity/ui/theme', 'src/primitives/skeleton'],
+              allow: ['@sanity/ui/css', '@sanity/ui/tokens', 'src/primitives/skeleton'],
             },
             {
               from: 'src/primitives/spinner',
               allow: [
                 '@sanity/ui/css',
                 '@sanity/ui/primitives/text',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/primitives/spinner',
               ],
             },
@@ -764,7 +764,7 @@ export default defineConfig(import.meta.dirname, [
                 '@sanity/ui/components/hotkeys',
                 '@sanity/ui/primitives/layer',
                 '@sanity/ui/primitives/text',
-                '@sanity/ui/theme',
+                '@sanity/ui/tokens',
                 'src/primitives/tooltip',
               ],
             },
@@ -782,7 +782,7 @@ export default defineConfig(import.meta.dirname, [
             },
             {
               from: 'test/workshop',
-              allow: ['@sanity/ui', '@sanity/ui/css', '@sanity/ui/theme', 'test/workshop'],
+              allow: ['@sanity/ui', '@sanity/ui/css', '@sanity/ui/tokens', 'test/workshop'],
             },
           ],
         },

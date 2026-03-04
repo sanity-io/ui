@@ -1,6 +1,6 @@
 import {EllipsisHorizontalIcon} from '@sanity/icons'
 import {Box, Breadcrumbs, Button, Flex, Text} from '@sanity/ui'
-import {SPACE} from '@sanity/ui/theme'
+import {SPACE} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 
 import {CardWrapper} from '$workshop'

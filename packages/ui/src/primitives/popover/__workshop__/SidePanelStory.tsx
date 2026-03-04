@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import {CARD_TONES, type CardTone} from '@sanity/ui/theme'
+import {CARD_TONES, type CardTone} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
 

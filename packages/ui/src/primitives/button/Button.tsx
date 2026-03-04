@@ -10,7 +10,7 @@ import {Box} from '@sanity/ui/primitives/box'
 import {Spinner} from '@sanity/ui/primitives/spinner'
 import {Text, type TextOwnProps} from '@sanity/ui/primitives/text'
 import type {TooltipProps} from '@sanity/ui/primitives/tooltip'
-import type {FontTextSize} from '@sanity/ui/theme'
+import type {FontTextSize} from '@sanity/ui/tokens'
 import {isValidElement, Suspense} from 'react'
 import {isValidElementType} from 'react-is'
 

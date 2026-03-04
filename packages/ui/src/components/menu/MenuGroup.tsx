@@ -6,7 +6,7 @@ import {Flex} from '@sanity/ui/primitives/flex'
 import {Popover, type PopoverProps} from '@sanity/ui/primitives/popover'
 import {Selectable} from '@sanity/ui/primitives/selectable'
 import {Text} from '@sanity/ui/primitives/text'
-import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
+import type {ElementTone, FontTextSize, Space} from '@sanity/ui/tokens'
 import {
   type ElementType,
   isValidElement,

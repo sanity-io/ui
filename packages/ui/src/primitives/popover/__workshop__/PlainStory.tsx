@@ -1,5 +1,5 @@
 import {Button, Card, Popover, PortalProvider, Text} from '@sanity/ui'
-import {CONTAINER, RADIUS, SPACE} from '@sanity/ui/theme'
+import {CONTAINER, RADIUS, SPACE} from '@sanity/ui/tokens'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useState} from 'react'
 

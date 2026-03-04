@@ -1,5 +1,5 @@
 import {Box, Button, Dialog, LayerProvider, Stack, Text} from '@sanity/ui'
-import {CARD_TONES, COLOR_SCHEMES, CONTAINER} from '@sanity/ui/theme'
+import {CARD_TONES, COLOR_SCHEMES, CONTAINER} from '@sanity/ui/tokens'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useCallback, useRef, useState} from 'react'
 

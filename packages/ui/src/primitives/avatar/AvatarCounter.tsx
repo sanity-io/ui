@@ -2,7 +2,7 @@ import {_getResponsiveProp, type ComponentType, type Props} from '@sanity/ui/cor
 import {avatar_counter, type ResponsiveProp} from '@sanity/ui/css'
 import {Box} from '@sanity/ui/primitives/box'
 import {Label} from '@sanity/ui/primitives/label'
-import type {AvatarSize, FontLabelSize} from '@sanity/ui/theme'
+import type {AvatarSize, FontLabelSize} from '@sanity/ui/tokens'
 import {useMemo} from 'react'
 
 /** @public */
