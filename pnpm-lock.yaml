@@ -82,11 +82,11 @@ importers:
         specifier: ^10.4.1
         version: 10.4.1
       '@testing-library/jest-dom':
-        specifier: ^6.8.0
-        version: 6.8.0
+        specifier: ^6.9.1
+        version: 6.9.1
       '@testing-library/react':
-        specifier: ^16.3.0
-        version: 16.3.0(@testing-library/dom@10.4.1)(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: ^16.3.2
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@testing-library/user-event':
         specifier: ^14.6.1
         version: 14.6.1(@testing-library/dom@10.4.1)
@@ -149,10 +149,10 @@ importers:
         version: 1.6.0
       eslint-plugin-boundaries:
         specifier: ^5.0.2
-        version: 5.0.2(@typescript-eslint/parser@8.46.0(eslint@9.37.0(jiti@2.5.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.5.1))
+        version: 5.0.2(eslint@9.37.0(jiti@2.5.1))
       eslint-plugin-import:
         specifier: ^2.32.0
-        version: 2.32.0(@typescript-eslint/parser@8.46.0(eslint@9.37.0(jiti@2.5.1))(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.37.0(jiti@2.5.1))
+        version: 2.32.0(eslint@9.37.0(jiti@2.5.1))
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.37.0(jiti@2.5.1))
@@ -438,7 +438,7 @@ importers:
         version: 5.0.4(vite@7.1.11(@types/node@24.7.2)(jiti@2.5.1)(lightningcss@1.30.2)(terser@5.44.0)(tsx@4.20.6))
       chromatic:
         specifier: ^13.1.5
-        version: 13.2.0
+        version: 13.3.4
       storybook:
         specifier: ^10.1.4
         version: 10.1.4(@testing-library/dom@10.4.1)(prettier@3.6.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2426,12 +2426,12 @@ packages:
     resolution: {integrity: sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg==}
     engines: {node: '>=18'}
 
-  '@testing-library/jest-dom@6.8.0':
-    resolution: {integrity: sha512-WgXcWzVM6idy5JaftTVC8Vs83NKRmGJz4Hqs4oyOuO2J4r/y79vvKZsb+CaGyCSEbUPI6OsewfPd0G1A0/TUZQ==}
+  '@testing-library/jest-dom@6.9.1':
+    resolution: {integrity: sha512-zIcONa+hVtVSSep9UT3jZ5rizo2BsxgyDYU7WFD5eICBE7no3881HGeb/QkGfsJs6JTkY1aQhT7rIPC7e+0nnA==}
     engines: {node: '>=14', npm: '>=6', yarn: '>=1'}
 
-  '@testing-library/react@16.3.0':
-    resolution: {integrity: sha512-kFSyxiEDwv1WLl2fgsq6pPBbw5aWKrsY2/noi1Id0TK0UParSF62oFQFGHXIyaG4pp2tEub/Zlel+fjjZILDsw==}
+  '@testing-library/react@16.3.2':
+    resolution: {integrity: sha512-XU5/SytQM+ykqMnAnvB2umaJNIOsLF3PVv//1Ew4CTcpz0/BRyy/af40qqrt7SjKpDdT1saBMc42CUok5gaw+g==}
     engines: {node: '>=18'}
     peerDependencies:
       '@testing-library/dom': ^10.0.0
@@ -3367,18 +3367,6 @@ packages:
   chokidar@4.0.3:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
-
-  chromatic@13.2.0:
-    resolution: {integrity: sha512-7ikJxdpLdYa6zmd+nLoP1U0HX6oCCtyj2eiAMd0rD4L9kbkWpl1pVIyI3CUQ/lQLtD3VKMTVi+bI3cWD+qz/IA==}
-    hasBin: true
-    peerDependencies:
-      '@chromatic-com/cypress': ^0.*.* || ^1.0.0
-      '@chromatic-com/playwright': ^0.*.* || ^1.0.0
-    peerDependenciesMeta:
-      '@chromatic-com/cypress':
-        optional: true
-      '@chromatic-com/playwright':
-        optional: true
 
   chromatic@13.3.4:
     resolution: {integrity: sha512-TR5rvyH0ESXobBB3bV8jc87AEAFQC7/n+Eb4XWhJz6hW3YNxIQPVjcbgLv+a4oKHEl1dUBueWSoIQsOVGTd+RQ==}
@@ -4628,6 +4616,7 @@ packages:
   git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
+    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
     hasBin: true
 
   git-up@8.1.1:
@@ -4660,20 +4649,23 @@ packages:
 
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@11.0.3:
     resolution: {integrity: sha512-2Nim7dha1KVkaiF4q6Dj+ngPPMdfvLJEOpZk/jKiUAkqKebpGAWQXAq9z1xu9HKu5lWfqw/FASuccEjyznjPaA==}
     engines: {node: 20 || >=22}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   glob@9.3.5:
     resolution: {integrity: sha512-e1LleDykUz2Iu+MTYdkSsuWX8lvAjAcs0Xef0lNIu0S2wOAzuTxCJtcd9S3cijlwYF18EsU3rzb8jPVobxDh9Q==}
     engines: {node: '>=16 || 14 >=14.17'}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   global-directory@4.0.1:
     resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
@@ -6542,10 +6534,6 @@ packages:
     peerDependencies:
       typescript: '>= 4.3.x'
 
-  react-docgen@8.0.1:
-    resolution: {integrity: sha512-kQKsqPLplY3Hx4jGnM3jpQcG3FQDt7ySz32uTHt3C9HAe45kNXG+3o16Eqn3Fw1GtMfHoN3b4J/z2e6cZJCmqQ==}
-    engines: {node: ^20.9.0 || >=22}
-
   react-docgen@8.0.2:
     resolution: {integrity: sha512-+NRMYs2DyTP4/tqWz371Oo50JqmWltR1h2gcdgUMAWZJIAvrd0/SqlCfx7tpzpl/s36rzw6qH2MjoNrxtRNYhA==}
     engines: {node: ^20.9.0 || >=22}
@@ -7805,6 +7793,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
@@ -10117,7 +10106,7 @@ snapshots:
       empathic: 2.0.0
       magic-string: 0.30.19
       react: 19.2.0
-      react-docgen: 8.0.1
+      react-docgen: 8.0.2
       react-dom: 19.2.0(react@19.2.0)
       resolve: 1.22.10
       storybook: 10.1.4(@testing-library/dom@10.4.1)(prettier@3.6.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -10159,7 +10148,7 @@ snapshots:
       picocolors: 1.1.1
       pretty-format: 27.5.1
 
-  '@testing-library/jest-dom@6.8.0':
+  '@testing-library/jest-dom@6.9.1':
     dependencies:
       '@adobe/css-tools': 4.4.4
       aria-query: 5.3.2
@@ -10168,7 +10157,7 @@ snapshots:
       picocolors: 1.1.1
       redent: 3.0.0
 
-  '@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@babel/runtime': 7.28.4
       '@testing-library/dom': 10.4.1
@@ -11295,8 +11284,6 @@ snapshots:
     dependencies:
       readdirp: 4.1.2
 
-  chromatic@13.2.0: {}
-
   chromatic@13.3.4: {}
 
   chrome-trace-event@1.0.4: {}
@@ -12087,7 +12074,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-boundaries@5.0.2(@typescript-eslint/parser@8.46.0(eslint@9.37.0(jiti@2.5.1))(typescript@5.9.3))(eslint@9.37.0(jiti@2.5.1)):
+  eslint-plugin-boundaries@5.0.2(eslint@9.37.0(jiti@2.5.1)):
     dependencies:
       chalk: 4.1.2
       eslint: 9.37.0(jiti@2.5.1)
@@ -12124,6 +12111,33 @@ snapshots:
       tsconfig-paths: 3.15.0
     optionalDependencies:
       '@typescript-eslint/parser': 8.46.0(eslint@9.37.0(jiti@2.5.1))(typescript@5.9.3)
+    transitivePeerDependencies:
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+
+  eslint-plugin-import@2.32.0(eslint@9.37.0(jiti@2.5.1)):
+    dependencies:
+      '@rtsao/scc': 1.1.0
+      array-includes: 3.1.9
+      array.prototype.findlastindex: 1.2.6
+      array.prototype.flat: 1.3.3
+      array.prototype.flatmap: 1.3.3
+      debug: 3.2.7(supports-color@8.1.1)
+      doctrine: 2.1.0
+      eslint: 9.37.0(jiti@2.5.1)
+      eslint-import-resolver-node: 0.3.9
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.46.0(eslint@9.37.0(jiti@2.5.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.10.1)(eslint@9.37.0(jiti@2.5.1))
+      hasown: 2.0.2
+      is-core-module: 2.16.1
+      is-glob: 4.0.3
+      minimatch: 3.1.2
+      object.fromentries: 2.0.8
+      object.groupby: 1.0.3
+      object.values: 1.2.1
+      semver: 6.3.1
+      string.prototype.trimend: 1.0.9
+      tsconfig-paths: 3.15.0
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -14651,21 +14665,6 @@ snapshots:
     dependencies:
       typescript: 5.9.3
 
-  react-docgen@8.0.1:
-    dependencies:
-      '@babel/core': 7.28.4
-      '@babel/traverse': 7.28.4
-      '@babel/types': 7.28.4
-      '@types/babel__core': 7.20.5
-      '@types/babel__traverse': 7.28.0
-      '@types/doctrine': 0.0.9
-      '@types/resolve': 1.20.6
-      doctrine: 3.0.0
-      resolve: 1.22.10
-      strip-indent: 4.1.0
-    transitivePeerDependencies:
-      - supports-color
-
   react-docgen@8.0.2:
     dependencies:
       '@babel/core': 7.28.4
@@ -15446,7 +15445,7 @@ snapshots:
     dependencies:
       '@storybook/global': 5.0.0
       '@storybook/icons': 2.0.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@testing-library/jest-dom': 6.8.0
+      '@testing-library/jest-dom': 6.9.1
       '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
       '@vitest/expect': 3.2.4
       '@vitest/spy': 3.2.4
