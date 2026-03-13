@@ -9,8 +9,13 @@ import {paletteVars} from './palette.css'
 
 // console.log('_colorScheme.css')
 
-const _vars = {...paletteVars}
-const _cssTokens = _toCSSTokens(_colorSchemeTokens.light, _vars)
+const _vars = {
+  color: {
+    ...paletteVars.color,
+  },
+}
+
+const _cssTokens = _toCSSTokens(_colorSchemeTokens.light, _vars, false)
 
 /** @internal */
 export const _colorSchemeVars = createThemeContract(_cssTokens)

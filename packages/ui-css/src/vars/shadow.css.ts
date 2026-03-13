@@ -10,7 +10,7 @@ import {colorVars} from './color.css'
 
 // console.log('shadow.css')
 
-const _vars = {...borderVars, ...cardVars, ...colorVars}
+const _vars = {...colorVars, ...borderVars, ...cardVars}
 const _cssTokens = _toCSSTokens(shadowTokens, _vars)
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens}, 'vars')
 

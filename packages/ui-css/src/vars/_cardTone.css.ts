@@ -9,7 +9,12 @@ import {_colorSchemeVars} from './_colorScheme.css'
 
 // console.log('_cardTone.css')
 
-const _vars = {..._colorSchemeVars}
+const _vars = {
+  color: {
+    ..._colorSchemeVars,
+  },
+}
+
 const _cssTokens = _toCSSTokens(_cardToneTokens.default, _vars, false)
 
 /** @internal */
@@ -24,7 +29,12 @@ export const _cardToneClassNames = _fromEntries(
       _cardToneVars,
       {
         '@layer': _layers.vars,
-        ..._toCSSTokens(tokens, {..._vars, ..._cardToneVars}),
+        ..._toCSSTokens(tokens, {
+          color: {
+            ..._colorSchemeVars.color,
+            ..._cardToneVars.color,
+          },
+        }),
       },
       `${variant}-vars`,
     )

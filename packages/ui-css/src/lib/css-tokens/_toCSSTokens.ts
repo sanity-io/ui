@@ -15,7 +15,7 @@ import type {CSSTokens, SanityFontStyleCSSTokens} from './types'
 export function _toCSSTokens<Tokens extends object>(
   tokens: Tokens,
   vars: Record<string, unknown>,
-  throwOnMissingVar: boolean = false,
+  throwOnMissingVar: boolean = true,
 ): CSSTokens<Tokens> {
   return visitNode(tokens, undefined) as CSSTokens<Tokens>
 
