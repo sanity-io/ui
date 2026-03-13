@@ -1,3 +1,4 @@
+import type {ExactKeyTuple} from '../../lib/props/_keys'
 import type {ResponsiveProp} from '../../types'
 
 /** @public */
@@ -14,3 +15,9 @@ export type Display =
 export interface DisplayStyleProps {
   display?: ResponsiveProp<Display>
 }
+
+/** @internal */
+export const DISPLAY_STYLE_PROP_KEYS = ['display'] as const
+
+// assert exact keys
+DISPLAY_STYLE_PROP_KEYS satisfies ExactKeyTuple<DisplayStyleProps, typeof DISPLAY_STYLE_PROP_KEYS>

@@ -1,31 +1,38 @@
-import {FONT_LABEL_SIZE, type FontLabelSize} from '@sanity/ui/theme'
+import type {FontLabelSize} from '@sanity/ui-tokens'
+import {FONT_LABEL_SIZE} from '@sanity/ui-tokens/constants'
 import {globalStyle} from '@vanilla-extract/css'
 
-import {_fromEntries} from '../../_fromEntries'
-import {_responsiveStyle} from '../../_responsiveStyle.css'
-import {_style} from '../../_style.css'
-import {layers} from '../../layers.css'
+import {_CORNER_SHAPE_RADIUS_MULTIPLIER} from '../../constants'
+import {_layers} from '../../layers.css'
+import {_fromEntries} from '../../lib/_fromEntries'
+import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
+import {_style} from '../../lib/css/_style.css'
+import {fontVars} from '../../props/font/font.css'
 import type {ResponsiveRuleOptions} from '../../types'
-import {vars} from '../../vars.css'
+import {vars} from '../../vars'
 
-export const root: string = _style(layers.primitives, {
-  vars: {
-    [vars.font.family]: vars.font.label.family,
-    [vars.font.featureSettings]: vars.font.label.featureSettings,
+export const root: string = _style(
+  _layers.primitive,
+  {
+    vars: {
+      [fontVars.family]: vars.font.label.family,
+      [fontVars.featureSettings]: vars.font.label.featureSettings,
 
-    [vars.font.weight.regular]: vars.font.label.weight.regular,
-    [vars.font.weight.medium]: vars.font.label.weight.medium,
-    [vars.font.weight.semibold]: vars.font.label.weight.semibold,
-    [vars.font.weight.bold]: vars.font.label.weight.bold,
+      [fontVars.weight.regular]: vars.font.label.weight.regular,
+      [fontVars.weight.medium]: vars.font.label.weight.medium,
+      [fontVars.weight.semibold]: vars.font.label.weight.semibold,
+      [fontVars.weight.bold]: vars.font.label.weight.bold,
+    },
+
+    color: vars.color.fg,
+    textTransform: 'uppercase',
   },
-
-  color: vars.color.fg,
-  textTransform: 'uppercase',
-})
+  '',
+)
 
 globalStyle(`${root} a`, {
   '@layer': {
-    [layers.primitives]: {
+    [_layers.primitive]: {
       color: vars.color.link.fg,
       textDecoration: 'none',
     },
@@ -34,7 +41,7 @@ globalStyle(`${root} a`, {
 
 globalStyle(`${root} a:hover`, {
   '@layer': {
-    [layers.primitives]: {
+    [_layers.primitive]: {
       color: vars.color.fg,
     },
   },
@@ -42,26 +49,38 @@ globalStyle(`${root} a:hover`, {
 
 globalStyle(`${root} code`, {
   '@layer': {
-    [layers.primitives]: {
-      fontFamily: vars.font.code.family,
-      color: vars.color.code.fg,
-      backgroundColor: vars.color.code.bg,
-      borderRadius: vars.radius[2],
+    [_layers.primitive]: {
+      'fontFamily': vars.font.code.family,
+      'color': vars.color.muted.fg,
+      'backgroundColor': vars.color.muted.bg,
+      'borderRadius': vars.radius[2],
+
+      '@supports': {
+        ['(corner-shape: squircle)']: {
+          borderRadius: `calc(${vars.radius[2]} * ${vars.corner.shape.squircle} * ${_CORNER_SHAPE_RADIUS_MULTIPLIER})`,
+          // @ts-expect-error - `cornerShape` is not yet fully supported in CSS
+          cornerShape: `superellipse(${vars.corner.shape.squircle})`,
+        },
+      },
     },
   },
 })
 
 globalStyle(`${root} svg`, {
   '@layer': {
-    [layers.primitives]: {
+    [_layers.primitive]: {
       color: vars.color.muted.fg,
     },
   },
 })
 
-export const muted: string = _style(layers.primitives, {
-  color: vars.color.muted.fg,
-})
+export const muted: string = _style(
+  _layers.primitive,
+  {
+    color: vars.color.muted.fg,
+  },
+  'muted',
+)
 
 export const sizes: ResponsiveRuleOptions<FontLabelSize> = {
   ..._fromEntries(
@@ -70,17 +89,22 @@ export const sizes: ResponsiveRuleOptions<FontLabelSize> = {
 
       return [
         s,
-        _responsiveStyle(layers.primitives, {
-          vars: {
-            [vars.font.fontSize]: v.fontSize,
-            [vars.font.lineHeight]: v.lineHeight,
-            [vars.font.letterSpacing]: v.letterSpacing,
-            [vars.font.iconSize]: v.iconSize,
-            [vars.font.ascenderHeight]: v.ascenderHeight,
-            [vars.font.descenderHeight]: v.descenderHeight,
-            [vars.font.customIconSize]: v.customIconSize,
+        _responsiveStyle(
+          _layers.primitive,
+          {
+            vars: {
+              [fontVars.fontSize]: v.fontSize,
+              [fontVars.lineHeight]: v.lineHeight,
+              [fontVars.ascenderHeight]: v.ascenderHeight,
+              [fontVars.descenderHeight]: v.descenderHeight,
+
+              [fontVars.letterSpacing]: v.letterSpacing,
+              [fontVars.iconSize]: v.iconSize,
+              [fontVars.customIconSize]: v.customIconSize,
+            },
           },
-        }),
+          String(s),
+        ),
       ]
     }),
   ),

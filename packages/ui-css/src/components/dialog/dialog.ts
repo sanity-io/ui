@@ -1,4 +1,4 @@
-import {_composeClassNames} from '../../_composeClassNames'
+import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
 import {inset} from '../../props/inset/inset'
 import {
   card,
@@ -18,41 +18,41 @@ export function dialog(props: {className?: string}): string | undefined {
 }
 
 /** @public */
-export function dialogCard(): string | undefined {
+export function dialog_card(): string | undefined {
   return card
 }
 
 /** @public */
-export function dialogContainer(): string | undefined {
+export function dialog_container(): string | undefined {
   return container
 }
 
 /** @public */
-export function dialogHeader(): string | undefined {
+export function dialog_header(): string | undefined {
   return header
 }
 
 /** @public */
-export function dialogContent(): string | undefined {
+export function dialog_content(): string | undefined {
   return content
 }
 
 /** @public */
-export function dialogScroller(): string | undefined {
+export function dialog_scroller(): string | undefined {
   return scroller
 }
 
 /** @public */
-export function dialogScrollerShadowTop(): string | undefined {
+export function dialog_scrollerShadowTop(): string | undefined {
   return scrollerShadowTop
 }
 
 /** @public */
-export function dialogScrollerShadowBottom(): string | undefined {
+export function dialog_scrollerShadowBottom(): string | undefined {
   return scrollerShadowBottom
 }
 
 /** @public */
-export function dialogFooter(): string | undefined {
+export function dialog_footer(): string | undefined {
   return footer
 }

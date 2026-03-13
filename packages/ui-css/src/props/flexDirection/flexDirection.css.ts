@@ -1,19 +1,15 @@
-import {_responsiveStyle} from '../../_responsiveStyle.css'
-import {layers} from '../../layers.css'
+import {_layers} from '../../layers.css'
+import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import type {FlexDirection} from './types'
 
 export const options: ResponsiveRuleOptions<FlexDirection> = {
-  'row': _responsiveStyle(layers.props, {
-    flexDirection: 'row',
-  }),
-  'row-reverse': _responsiveStyle(layers.props, {
-    flexDirection: 'row-reverse',
-  }),
-  'column': _responsiveStyle(layers.props, {
-    flexDirection: 'column',
-  }),
-  'column-reverse': _responsiveStyle(layers.props, {
-    flexDirection: 'column-reverse',
-  }),
+  'row': _responsiveStyle(_layers.prop, {flexDirection: 'row'}, 'row'),
+  'row-reverse': _responsiveStyle(_layers.prop, {flexDirection: 'row-reverse'}, 'row-reverse'),
+  'column': _responsiveStyle(_layers.prop, {flexDirection: 'column'}, 'column'),
+  'column-reverse': _responsiveStyle(
+    _layers.prop,
+    {flexDirection: 'column-reverse'},
+    'column-reverse',
+  ),
 }

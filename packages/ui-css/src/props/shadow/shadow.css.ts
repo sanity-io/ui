@@ -1,23 +1,23 @@
-import {SHADOW, type Shadow} from '@sanity/ui/theme'
+import {type Shadow} from '@sanity/ui-tokens'
+import {SHADOW} from '@sanity/ui-tokens/constants'
 
-import {_fromEntries} from '../../_fromEntries'
-import {_responsiveStyle} from '../../_responsiveStyle.css'
-import {layers} from '../../layers.css'
+import {_layers} from '../../layers.css'
+import {_fromEntries} from '../../lib/_fromEntries'
+import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import type {ResponsiveRuleOptions} from '../../types'
-import {vars} from '../../vars.css'
+import {vars} from '../../vars'
 
 export const options: ResponsiveRuleOptions<Shadow> = {
   ..._fromEntries(
     SHADOW.map((index) => [
       index,
-      _responsiveStyle(layers.props, {
-        boxShadow: [
-          `0 0 0 ${vars.card.shadow.outline} ${vars.color.shadow.outline}`,
-          `${vars.shadow[index].umbra} ${vars.color.shadow.umbra}`,
-          `${vars.shadow[index].penumbra} ${vars.color.shadow.penumbra}`,
-          `${vars.shadow[index].ambient} ${vars.color.shadow.ambient}`,
-        ].join(', '),
-      }),
+      _responsiveStyle(
+        _layers.prop,
+        {
+          boxShadow: vars.shadow[index],
+        },
+        String(index),
+      ),
     ]),
   ),
 }

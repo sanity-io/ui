@@ -1,25 +1,13 @@
-import {_responsiveStyle} from '../../_responsiveStyle.css'
-import {layers} from '../../layers.css'
+import {_layers} from '../../layers.css'
+import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import type {Height} from './types'
 
 export const options: ResponsiveRuleOptions<Height> = {
-  fill: _responsiveStyle(layers.props, {
-    height: '100%',
-  }),
-  auto: _responsiveStyle(layers.props, {
-    height: 'auto',
-  }),
-  min: _responsiveStyle(layers.props, {
-    height: 'min-content',
-  }),
-  max: _responsiveStyle(layers.props, {
-    height: 'max-content',
-  }),
-  fit: _responsiveStyle(layers.props, {
-    height: 'fit-content',
-  }),
-  stretch: _responsiveStyle(layers.props, {
-    height: 'stretch',
-  }),
+  fill: _responsiveStyle(_layers.prop, {height: '100%'}, 'fill'),
+  auto: _responsiveStyle(_layers.prop, {height: 'auto'}, 'auto'),
+  min: _responsiveStyle(_layers.prop, {height: 'min-content'}, 'min'),
+  max: _responsiveStyle(_layers.prop, {height: 'max-content'}, 'max'),
+  fit: _responsiveStyle(_layers.prop, {height: 'fit-content'}, 'fit'),
+  stretch: _responsiveStyle(_layers.prop, {height: 'stretch'}, 'stretch'),
 }

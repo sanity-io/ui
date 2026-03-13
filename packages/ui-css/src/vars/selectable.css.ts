@@ -1,0 +1,28 @@
+import {selectableTokens} from '@sanity/ui-tokens/selectable'
+import {createTheme} from '@vanilla-extract/css'
+
+import {_layers} from '../layers.css'
+import {_toCSSTokens} from '../lib/css-tokens/_toCSSTokens'
+import type {CSSVars} from '../lib/css-tokens/types'
+import {colorVars} from './color.css'
+import {elementToneVars} from './element/tone.css'
+
+const _vars = {
+  color: {
+    ...colorVars.color,
+    ...elementToneVars.color,
+    tinted: {
+      ...colorVars.color.tinted,
+      ...elementToneVars.color.tinted,
+    },
+    solid: {
+      ...colorVars.color.solid,
+      ...elementToneVars.color.solid,
+    },
+  },
+}
+const _cssTokens = _toCSSTokens(selectableTokens, _vars)
+const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
+
+export const selectableVarsClassName = _theme[0]
+export const selectableVars: CSSVars<typeof _cssTokens> = _theme[1]

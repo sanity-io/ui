@@ -1,4 +1,4 @@
-import {_responsiveClassName} from '../../_responsiveClassName'
+import {_responsiveClassName} from '../../lib/class-names/_responsiveClassName'
 import {options} from './textAlign.css'
 import type {TextAlignStyleProps} from './types'
 

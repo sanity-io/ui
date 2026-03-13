@@ -1,140 +1,119 @@
-import {ELEMENT_TONES, type ElementTone} from '@sanity/ui/theme'
+import {_layers} from '../../layers.css'
+import {_style} from '../../lib/css/_style.css'
+import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
+import {vars} from '../../vars'
 
-import {_fromEntries} from '../../_fromEntries'
-import {_style} from '../../_style.css'
-import {layers} from '../../layers.css'
-import {vars} from '../../vars.css'
+const when = (selector: string) => `&:is(a, button)${selector}`
 
-export const root: string = _style(layers.primitives, {
-  backgroundColor: vars.color.bg,
-  color: vars.color.fg,
+const selectors = {
+  hovered: [when(':hover'), when('[data-hovered]')].join(','),
+  pressed: [when(':active'), when('[data-pressed]')].join(','),
+  selected: [when('[data-selected]')].join(','),
+  focused: [when(':focus'), when('[data-focused]')].join(','),
+  disabled: [when(':disabled'), when('[data-disabled]')].join(','),
+}
 
-  selectors: {
-    'button.&': {
-      WebkitFontSmoothing: 'inherit',
-      appearance: 'none',
-      outline: 'none',
-      font: 'inherit',
-      textAlign: 'inherit',
-      border: 0,
-      // See https://caniuse.com/?search=width%3A%20stretch
-      width: ['-moz-available', '-webkit-fill-available', 'stretch'],
+export const root: string = _style(
+  _layers.primitive,
+  {
+    backgroundColor: vars.color.bg,
+    userSelect: 'none',
+
+    selectors: {
+      '&:is(a)': {
+        outline: 'none',
+        textDecoration: 'none',
+        color: 'inherit',
+      },
+
+      '&:is(button)': {
+        WebkitFontSmoothing: 'inherit',
+        appearance: 'none',
+        outline: 'none',
+        font: 'inherit',
+        textAlign: 'inherit',
+        userSelect: 'none',
+      },
+
+      [selectors.hovered]: {
+        vars: {
+          [vars.color.bg]: vars.selectable.color.state.hovered.bg,
+          [vars.color.border]: vars.selectable.color.state.hovered.border,
+          [vars.color.fg]: vars.selectable.color.state.hovered.fg,
+          [vars.color.muted.bg]: vars.selectable.color.state.hovered.muted.bg,
+          [vars.color.muted.border]: vars.selectable.color.state.hovered.muted.border,
+          [vars.color.muted.fg]: vars.selectable.color.state.hovered.muted.fg,
+        },
+      },
+
+      [selectors.pressed]: {
+        vars: {
+          [vars.color.bg]: vars.selectable.color.state.pressed.bg,
+          [vars.color.border]: vars.selectable.color.state.pressed.border,
+          [vars.color.fg]: vars.selectable.color.state.pressed.fg,
+          [vars.color.muted.bg]: vars.selectable.color.state.pressed.muted.bg,
+          [vars.color.muted.border]: vars.selectable.color.state.pressed.muted.border,
+          [vars.color.muted.fg]: vars.selectable.color.state.pressed.muted.fg,
+        },
+      },
+
+      [selectors.selected]: {
+        vars: {
+          [vars.color.bg]: vars.selectable.color.state.selected.bg,
+          [vars.color.border]: vars.selectable.color.state.selected.border,
+          [vars.color.fg]: vars.selectable.color.state.selected.fg,
+          [vars.color.muted.bg]: vars.selectable.color.state.selected.muted.bg,
+          [vars.color.muted.border]: vars.selectable.color.state.selected.muted.border,
+          [vars.color.muted.fg]: vars.selectable.color.state.selected.muted.fg,
+        },
+      },
+
+      [selectors.focused]: {
+        vars: {
+          [vars.color.bg]: vars.selectable.color.state.selected.bg,
+          [vars.color.border]: vars.selectable.color.state.selected.border,
+          [vars.color.fg]: vars.selectable.color.state.selected.fg,
+          [vars.color.muted.bg]: vars.selectable.color.state.selected.muted.bg,
+          [vars.color.muted.border]: vars.selectable.color.state.selected.muted.border,
+          [vars.color.muted.fg]: vars.selectable.color.state.selected.muted.fg,
+        },
+      },
+
+      [selectors.disabled]: {
+        vars: {
+          [vars.color.bg]: vars.selectable.color.state.disabled.bg,
+          [vars.color.border]: vars.selectable.color.state.disabled.border,
+          [vars.color.fg]: vars.selectable.color.state.disabled.fg,
+          [vars.color.muted.bg]: vars.selectable.color.state.disabled.muted.bg,
+          [vars.color.muted.border]: vars.selectable.color.state.disabled.muted.border,
+          [vars.color.muted.fg]: vars.selectable.color.state.disabled.muted.fg,
+        },
+      },
     },
 
-    'a.&': {
-      outline: 'none',
-      textDecoration: 'none',
+    vars: {
+      // enabled state
+      [vars.color.bg]: vars.selectable.color.state.enabled.bg,
+      [vars.color.border]: vars.selectable.color.state.enabled.border,
+      [vars.color.fg]: vars.selectable.color.state.enabled.fg,
+      [vars.color.muted.bg]: vars.selectable.color.state.enabled.muted.bg,
+      [vars.color.muted.border]: vars.selectable.color.state.enabled.muted.border,
+      [vars.color.muted.fg]: vars.selectable.color.state.enabled.muted.fg,
     },
   },
-})
+  '',
+)
 
-export const tones: Record<ElementTone, string> = {
-  ..._fromEntries(
-    ELEMENT_TONES.map((t) => {
-      const tinted = vars.color.tinted[t]
-      const focused = vars.color.solid.primary
-      const disabled = vars.color.tinted.default
+export const hotkeys = _style(
+  _layers.primitive,
+  {
+    opacity: 0.5,
 
-      const stateVars = {
-        enabled: {
-          [vars.color.bg]: tinted.bg[0],
-          [vars.color.border]: tinted.border[1],
-          [vars.color.fg]: tinted.fg[2],
-          [vars.color.muted.bg]: tinted.bg[1],
-          [vars.color.muted.fg]: tinted.fg[3],
-        },
-
-        hovered: {
-          [vars.color.bg]: tinted.bg[1],
-          [vars.color.border]: tinted.border[2],
-          [vars.color.fg]: tinted.fg[1],
-          [vars.color.muted.bg]: tinted.bg[2],
-          [vars.color.muted.fg]: tinted.fg[4],
-        },
-
-        pressed: {
-          [vars.color.bg]: tinted.bg[2],
-          [vars.color.border]: tinted.border[4],
-          [vars.color.fg]: tinted.fg[0],
-          [vars.color.muted.bg]: tinted.bg[3],
-          [vars.color.muted.fg]: tinted.fg[4],
-        },
-
-        focused: {
-          [vars.color.bg]: focused.bg[0],
-          [vars.color.border]: focused.border[1],
-          [vars.color.fg]: focused.fg[0],
-          [vars.color.muted.bg]: focused.bg[1],
-          [vars.color.muted.fg]: focused.fg[3],
-        },
-
-        disabled: {
-          [vars.color.bg]: disabled.bg[0],
-          [vars.color.border]: disabled.border[1],
-          [vars.color.fg]: disabled.border[4],
-          [vars.color.muted.bg]: disabled.bg[1],
-          [vars.color.muted.fg]: disabled.border[4],
-        },
-      } as const
-
-      return [
-        t,
-        _style(layers.primitives, {
-          'vars': stateVars.enabled,
-
-          '@media': {
-            '(hover: hover)': {
-              selectors: {
-                [[
-                  '&',
-                  ':not(:active)',
-                  ':not(:focus)',
-                  ':not(:disabled)',
-                  ':not([aria-pressed="true"])',
-                  ':not([data-pressed])',
-                  ':not([data-focused])',
-                  ':not([data-selected])',
-                  ':not([data-disabled])',
-                  ':hover',
-                ].join('')]: {
-                  vars: stateVars.hovered,
-                },
-              },
-            },
-          },
-
-          'selectors': {
-            // hovered
-            [['&:not([data-disabled])[data-hovered]'].join(',')]: {
-              vars: stateVars.hovered,
-            },
-
-            // pressed
-            [[
-              '&:not([data-disabled]):active',
-              '&:not([data-disabled])[aria-pressed="true"]',
-              '&:not([data-disabled])[data-pressed]',
-            ].join(',')]: {
-              vars: stateVars.pressed,
-            },
-
-            // focused
-            // selected
-            [[
-              '&:not([data-disabled]):focus',
-              '&:not([data-disabled])[data-focused]',
-              '&:not([data-disabled])[data-selected]',
-            ].join(',')]: {
-              vars: stateVars.focused,
-            },
-
-            // disabled
-            [['&:disabled', '&[data-disabled]'].join(',')]: {
-              vars: stateVars.disabled,
-            },
-          },
-        }),
-      ]
-    }),
-  ),
-}
+    selectors: {
+      [`${root}:focus &, ${root}[data-selected] &`]: {
+        opacity: 1,
+      },
+    },
+  },
+  'hotkeys',
+)

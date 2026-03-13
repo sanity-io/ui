@@ -1,4 +1,4 @@
-import {_responsiveClassName} from '../../_responsiveClassName'
+import {_responsiveClassName} from '../../lib/class-names/_responsiveClassName'
 import {options} from './alignItems.css'
 import type {AlignItemsStyleProps} from './types'
 

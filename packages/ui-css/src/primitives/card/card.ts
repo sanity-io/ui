@@ -1,13 +1,35 @@
-import {_composeClassNames} from '../../_composeClassNames'
-import {root, schemes, tones} from './card.css'
+import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
+import {bgPattern} from '../../props/bgPattern/bgPattern'
+import {cardTone} from '../../props/cardTone/cardTone'
+import {colorScheme} from '../../props/colorScheme/colorScheme'
+import {cardVarsClassName} from '../../vars/card.css'
+import {colorVarsClassName} from '../../vars/color.css'
+import {elementToneClassNames} from '../../vars/element/tone.css'
+import {shadowVarsClassName} from '../../vars/shadow.css'
+import {box} from '../box/box'
+// import {root as selectableRoot, selectableVarsClassName} from '../selectable/selectable.css'
+import {root} from './card.css'
 import type {CardStyleProps} from './types'
 
 /** @public */
 export function card(props: CardStyleProps): string | undefined {
+  const {className, scheme, tone, ...rest} = props
+
   return _composeClassNames(
-    props.className,
+    className,
     root,
-    props.scheme && schemes[props.scheme],
-    props.tone && props.tone !== 'inherit' && tones[props.tone],
+    scheme && colorScheme({colorScheme: scheme}),
+    tone && cardTone({cardTone: tone}),
+    tone && cardVarsClassName,
+    tone && colorVarsClassName,
+    tone && elementToneClassNames.default,
+    tone && shadowVarsClassName,
+    bgPattern({bgPattern: rest.__unstable_pattern}),
+
+    // // TODO: reconsider this, feels wrong
+    // selectableRoot,
+    // selectableVarsClassName,
+
+    box(rest),
   )
 }

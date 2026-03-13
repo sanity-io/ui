@@ -1,8 +1,8 @@
-import {_responsiveClassName} from '../../_responsiveClassName'
+import {_responsiveClassName} from '../../lib/class-names/_responsiveClassName'
 import {options} from './flex.css'
-import type {FlexStyleProps} from './types'
+import type {FlexPropStyleProps} from './types'
 
 /** @public */
-export function flex(props: FlexStyleProps): string | undefined {
+export function flexProp(props: FlexPropStyleProps): string | undefined {
   return _responsiveClassName(options, props.flex)
 }

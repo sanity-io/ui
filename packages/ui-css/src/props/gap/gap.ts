@@ -1,5 +1,5 @@
-import {_composeClassNames} from '../../_composeClassNames'
-import {_responsiveClassName} from '../../_responsiveClassName'
+import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
+import {_responsiveClassName} from '../../lib/class-names/_responsiveClassName'
 import {gapOptions, gapXOptions, gapYOptions} from './gap.css'
 import type {GapStyleProps} from './types'
 

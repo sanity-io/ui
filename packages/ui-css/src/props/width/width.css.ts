@@ -1,34 +1,22 @@
-import {CONTAINER_SCALE} from '@sanity/ui/theme'
+import {CONTAINER_SCALE} from '@sanity/ui-tokens/constants'
 
-import {_fromEntries} from '../../_fromEntries'
-import {_responsiveStyle} from '../../_responsiveStyle.css'
-import {layers} from '../../layers.css'
+import {_layers} from '../../layers.css'
+import {_fromEntries} from '../../lib/_fromEntries'
+import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import type {ResponsiveRuleOptions} from '../../types'
-import {vars} from '../../vars.css'
+import {vars} from '../../vars'
 import type {Width} from './types'
 
 export const options: ResponsiveRuleOptions<Width> = {
-  auto: _responsiveStyle(layers.props, {
-    width: 'auto',
-  }),
-  fill: _responsiveStyle(layers.props, {
-    width: '100%',
-  }),
-  stretch: _responsiveStyle(layers.props, {
-    width: 'stretch',
-  }),
-  min: _responsiveStyle(layers.props, {
-    width: 'min-content',
-  }),
-  max: _responsiveStyle(layers.props, {
-    width: 'max-content',
-  }),
+  auto: _responsiveStyle(_layers.prop, {width: 'auto'}, 'auto'),
+  fill: _responsiveStyle(_layers.prop, {width: '100%'}, 'fill'),
+  stretch: _responsiveStyle(_layers.prop, {width: 'stretch'}, 'stretch'),
+  min: _responsiveStyle(_layers.prop, {width: 'min-content'}, 'min'),
+  max: _responsiveStyle(_layers.prop, {width: 'max-content'}, 'max'),
   ..._fromEntries(
     CONTAINER_SCALE.map((index) => [
       index,
-      _responsiveStyle(layers.props, {
-        width: vars.container[index],
-      }),
+      _responsiveStyle(_layers.prop, {width: vars.container[index]}, String(index)),
     ]),
   ),
 }

@@ -217,6 +217,12 @@ importers:
       '@sanity/icons':
         specifier: ^3.7.4
         version: 3.7.4(react@19.2.4)
+      '@sanity/ui-css':
+        specifier: workspace:*
+        version: link:../ui-css
+      '@sanity/ui-tokens':
+        specifier: workspace:*
+        version: link:../ui-tokens
       '@vanilla-extract/dynamic':
         specifier: ^2.1.5
         version: 2.1.5
@@ -344,6 +350,82 @@ importers:
       vitest-axe:
         specifier: 1.0.0-pre.5
         version: 1.0.0-pre.5(vitest@4.0.18(@types/node@24.10.13)(jiti@2.6.1)(jsdom@28.1.0(@noble/hashes@2.2.0))(lightningcss@1.32.0)(terser@5.44.0)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/ui-css:
+    dependencies:
+      '@sanity/ui-tokens':
+        specifier: workspace:*
+        version: link:../ui-tokens
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../@repo/eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../@repo/typescript-config
+      '@sanity/browserslist-config':
+        specifier: ^1.0.5
+        version: 1.0.5
+      '@sanity/icons':
+        specifier: ^3.7.4
+        version: 3.7.4(react@19.2.4)
+      '@sanity/pkg-utils':
+        specifier: ^10.4.4
+        version: 10.4.4(@types/babel__core@7.20.5)(@types/node@24.10.13)(babel-plugin-react-compiler@1.0.0)(typescript@5.9.3)
+      '@sanity/tsconfig':
+        specifier: ^2.1.0
+        version: 2.1.0
+      '@sanity/ui-workshop':
+        specifier: workspace:*
+        version: link:../ui-workshop
+      '@types/node':
+        specifier: ^24.10.13
+        version: 24.10.13
+      '@types/react':
+        specifier: 19.2.14
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.14)
+      '@types/react-is':
+        specifier: ^19.2.0
+        version: 19.2.0
+      '@vanilla-extract/css':
+        specifier: ^1.18.0
+        version: 1.18.0
+      '@vanilla-extract/vite-plugin':
+        specifier: ^5.1.4
+        version: 5.1.4(@types/node@24.10.13)(jiti@2.5.1)(lightningcss@1.31.1)(terser@5.44.0)(tsx@4.21.0)(vite@7.3.1(@types/node@24.10.13)(jiti@2.5.1)(lightningcss@1.31.1)(terser@5.44.0)(tsx@4.21.0))
+      dotenv-flow:
+        specifier: ^4.1.0
+        version: 4.1.0
+      eslint:
+        specifier: ^9.39.2
+        version: 9.39.3(jiti@2.5.1)
+      mkdirp:
+        specifier: ^3.0.1
+        version: 3.0.1
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
+      react-refractor:
+        specifier: ^4.0.0
+        version: 4.0.0(react@19.2.4)
+      refractor:
+        specifier: ^5.0.0
+        version: 5.0.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^7.3.1
+        version: 7.3.1(@types/node@24.10.13)(jiti@2.5.1)(lightningcss@1.31.1)(terser@5.44.0)(tsx@4.21.0)
+      vitest:
+        specifier: ^4.0.18
+        version: 4.0.18(@types/node@24.10.13)(jiti@2.5.1)(jsdom@28.1.0)(lightningcss@1.31.1)(terser@5.44.0)(tsx@4.21.0)
 
   packages/ui-tokens:
     dependencies:

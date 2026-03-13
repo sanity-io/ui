@@ -1,5 +1,6 @@
-import type {Space} from '@sanity/ui/theme'
+import type {Space} from '@sanity/ui-tokens'
 
+import {type ExactKeyTuple} from '../../lib/props/_keys'
 import type {ResponsiveProp} from '../../types'
 
 /** @public */
@@ -15,3 +16,17 @@ export interface PaddingStyleProps {
   paddingX?: ResponsiveProp<Padding>
   paddingY?: ResponsiveProp<Padding>
 }
+
+/** @internal */
+export const PADDING_STYLE_PROP_KEYS = [
+  'padding',
+  'paddingTop',
+  'paddingRight',
+  'paddingBottom',
+  'paddingLeft',
+  'paddingX',
+  'paddingY',
+] as const
+
+// assert exact keys
+PADDING_STYLE_PROP_KEYS satisfies ExactKeyTuple<PaddingStyleProps, typeof PADDING_STYLE_PROP_KEYS>

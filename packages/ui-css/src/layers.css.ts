@@ -1,12 +1,12 @@
 import {layer} from '@vanilla-extract/css'
 
-/** @public */
-export type CSSLayer = 'theme' | 'props' | 'primitives' | 'components'
+/** @internal */
+export type CSSLayer = 'vars' | 'prop' | 'primitive' | 'component'
 
-/** @public */
-export const layers: Record<CSSLayer, string> = {
-  theme: layer('theme'),
-  props: layer('props'),
-  primitives: layer('primitives'),
-  components: layer('components'),
+/** @internal */
+export const _layers: Record<CSSLayer, string> = {
+  vars: layer('vars'),
+  prop: layer('prop'),
+  primitive: layer('primitive'),
+  component: layer('component'),
 }

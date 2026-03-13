@@ -1,14 +1,22 @@
-import {_style} from '../../_style.css'
-import {layers} from '../../layers.css'
-import {vars} from '../../vars.css'
+import {_layers} from '../../layers.css'
+import {_style} from '../../lib/css/_style.css'
+import {vars} from '../../vars'
 
-export const root: string = _style(layers.components, {
-  outline: 'none',
-})
+export const root: string = _style(
+  _layers.component,
+  {
+    outline: 'none',
+  },
+  '',
+)
 
-export const divider: string = _style(layers.components, {
-  height: vars.card.border.width,
-  border: 0,
-  backgroundColor: vars.color.border,
-  margin: 0,
-})
+export const divider: string = _style(
+  _layers.component,
+  {
+    height: vars.border[1],
+    border: 0,
+    backgroundColor: vars.color.border,
+    margin: `0 calc(0px - ${vars.space[1]})`,
+  },
+  'divider',
+)

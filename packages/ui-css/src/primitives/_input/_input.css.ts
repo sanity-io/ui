@@ -1,218 +1,312 @@
-import {FONT_TEXT_SIZE, type FontTextSize, SPACE, type Space} from '@sanity/ui/theme'
+import type {FontTextSize, Space} from '@sanity/ui-tokens'
+import {FONT_TEXT_SIZE, SPACE} from '@sanity/ui-tokens/constants'
+import {createVar} from '@vanilla-extract/css'
 
-import {_fromEntries} from '../../_fromEntries'
-import {_responsiveStyle} from '../../_responsiveStyle.css'
-import {_style} from '../../_style.css'
-import {layers} from '../../layers.css'
+import {_layers} from '../../layers.css'
+import {_fromEntries} from '../../lib/_fromEntries'
+import {_globalStyle} from '../../lib/css/_globalStyle.css'
+import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
+import {_style} from '../../lib/css/_style.css'
 import type {ResponsiveRuleOptions} from '../../types'
-import {vars} from '../../vars.css'
+import {vars} from '../../vars'
 
-export const root: string = _style(layers.primitives, {
-  position: 'relative',
-})
+/** @internal */
+export const _inputVars = {
+  boxShadow: createVar('boxShadow'),
 
-export const border: string = _style(layers.primitives, {})
-
-export const element: string = _style(layers.primitives, {
-  WebkitFontSmoothing: 'inherit',
-  appearance: 'none',
-  border: 0,
-  outline: 'none',
-  margin: 0,
-  fontFamily: vars.font.text.family,
-  fontSize: vars.input.text.fontSize,
-  lineHeight: vars.input.text.lineHeight,
-  letterSpacing: vars.input.text.letterSpacing,
-  backgroundColor: 'transparent',
-  color: vars.color.input.text.fg,
-  padding: [
-    `calc(${vars.input.text.padding} - ${vars.input.text.ascenderHeight})`,
-    vars.input.text.padding,
-    `calc(${vars.input.text.padding} - ${vars.input.text.descenderHeight})`,
-    vars.input.text.padding,
-  ].join(' '),
-  borderRadius: 'inherit',
-  position: 'relative',
-  zIndex: 1,
-  display: 'block',
-  boxSizing: 'border-box',
-  resize: 'none',
-  inlineSize: 'stretch',
-
-  selectors: {
-    '&::placeholder': {
-      color: vars.color.input.text.placeholder,
-      opacity: 1,
-    },
-
-    [`${root}[data-icon-left] &`]: {
-      paddingLeft: `calc(${vars.input.text.padding} + calc(${vars.input.text.lineHeight} - ${vars.input.text.ascenderHeight} - ${vars.input.text.descenderHeight}) + ${vars.input.text.gap})`,
-    },
-
-    [`${root}[data-icon-right] &`]: {
-      paddingRight: `calc(${vars.input.text.padding} + calc(${vars.input.text.lineHeight} - ${vars.input.text.ascenderHeight} - ${vars.input.text.descenderHeight}) + ${vars.input.text.gap})`,
-    },
-
-    [`${root}:not([data-invalid]) &`]: {
-      vars: {
-        [vars.color.input.text.fg]: vars.color.tinted.default.fg[2],
-      },
-    },
-
-    [`${root}:not([data-invalid]) &:hover`]: {
-      vars: {
-        [vars.color.input.text.fg]: vars.color.tinted.default.fg[0],
-      },
-    },
-
-    [`${root}:not([data-invalid]) &:focus`]: {
-      vars: {
-        [vars.color.input.text.fg]: vars.color.tinted.default.fg[0],
-      },
-    },
-
-    [`${root}:not([data-invalid]) &:disabled`]: {
-      vars: {
-        [vars.color.input.text.fg]: vars.color.tinted.default.border[4],
-      },
-    },
-
-    [`${root}[data-invalid] &`]: {
-      vars: {
-        [vars.color.input.text.fg]: vars.color.tinted.critical.fg[2],
-      },
-    },
-
-    [`${root}[data-invalid] &:hover`]: {
-      vars: {
-        [vars.color.input.text.fg]: vars.color.tinted.critical.fg[1],
-      },
-    },
-
-    [`${root}[data-invalid] &:focus`]: {
-      vars: {
-        [vars.color.input.text.fg]: vars.color.tinted.critical.fg[1],
-      },
-    },
-
-    [`${root}[data-invalid] &:disabled`]: {
-      vars: {
-        [vars.color.input.text.fg]: vars.color.tinted.critical.border[4],
-      },
-    },
+  color: {
+    placeholder: createVar('placeholder'),
   },
 
-  vars: {
-    [vars.color.input.text.placeholder]:
-      `color-mix(in srgb, transparent, ${vars.color.input.text.fg} 50%)`,
-  },
-})
+  fontSize: createVar('fontSize'),
+  fontWeight: createVar('fontWeight'),
+  lineHeight: createVar('lineHeight'),
+  letterSpacing: createVar('letterSpacing'),
+  ascenderHeight: createVar('ascenderHeight'),
+  descenderHeight: createVar('descenderHeight'),
 
-export const presentation: string = _style(layers.primitives, {
-  backgroundColor: vars.color.input.text.bg,
-  borderRadius: 'inherit',
-  boxShadow: `inset 0 0 0 ${vars.input.border.width} ${vars.color.input.text.border}`,
-  display: 'block',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  pointerEvents: 'none',
-  zIndex: 0,
+  padding: createVar('padding'),
+  gap: createVar('gap'),
+}
 
-  selectors: {
-    [`${root}[data-prefix] &`]: {
-      borderTopLeftRadius: 0,
-      borderBottomLeftRadius: 0,
+export const border: string = _style(_layers.primitive, {}, 'border')
+
+export const root: string = _style(
+  _layers.primitive,
+  {
+    vars: {
+      [_inputVars.boxShadow]: `inset 0 0 0 ${vars.input.border.width} transparent`,
     },
 
-    [`${root}[data-suffix] &`]: {
-      borderTopRightRadius: 0,
-      borderBottomRightRadius: 0,
-    },
-
-    // focus ring
-    [`${element}:not([data-no-focus-ring]):focus + &`]: {
-      outlineWidth: vars.input.text.focusRing.width,
-      outlineStyle: 'solid',
-      outlineColor: vars.color.focusRing,
-      outlineOffset: vars.input.text.focusRing.offset,
-    },
-
-    // valid
-
-    [`${root}:not([data-invalid]) &`]: {
-      vars: {
-        [vars.color.input.text.bg]: vars.color.tinted.default.bg[0],
-        [vars.color.input.text.border]: vars.color.tinted.default.border[1],
-      },
-    },
-
-    [`${root}:not([data-invalid])[data-read-only] ${element} + &`]: {
-      vars: {
-        [vars.color.input.text.bg]: vars.color.tinted.default.bg[1],
-      },
-    },
-
-    [`${root}.${border}:not([data-invalid]):not([data-read-only]) ${element}:not(:disabled):hover + &`]:
-      {
+    selectors: {
+      [`&.${border}`]: {
         vars: {
-          [vars.color.input.text.border]: vars.color.tinted.default.border[2],
+          [_inputVars.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
         },
       },
+    },
+  },
+  '',
+)
 
-    [`${root}:not([data-invalid]) ${element}:focus + &`]: {
+export const fontWeightOptions = {
+  regular: _style(
+    _layers.primitive,
+    {
       vars: {
-        [vars.color.input.text.border]: vars.color.tinted.default.border[2],
-        [vars.color.input.text.fg]: vars.color.tinted.default.fg[1],
+        [_inputVars.fontWeight]: vars.font.text.weight.regular,
+      },
+    },
+    'w-regular',
+  ),
+  medium: _style(
+    _layers.primitive,
+    {
+      vars: {
+        [_inputVars.fontWeight]: vars.font.text.weight.medium,
+      },
+    },
+    'w-medium',
+  ),
+  semibold: _style(
+    _layers.primitive,
+    {
+      vars: {
+        [_inputVars.fontWeight]: vars.font.text.weight.semibold,
+      },
+    },
+    'w-semibold',
+  ),
+  bold: _style(
+    _layers.primitive,
+    {
+      vars: {
+        [_inputVars.fontWeight]: vars.font.text.weight.bold,
+      },
+    },
+    'w-bold',
+  ),
+}
+
+export const element: string = _style(
+  _layers.primitive,
+  {
+    WebkitFontSmoothing: 'inherit',
+    appearance: 'none',
+    border: 0,
+    outline: 'none',
+    margin: 0,
+    fontFamily: vars.font.text.family,
+    fontSize: _inputVars.fontSize,
+    fontWeight: _inputVars.fontWeight,
+    lineHeight: _inputVars.lineHeight,
+    letterSpacing: _inputVars.letterSpacing,
+    backgroundColor: 'transparent',
+    color: vars.color.fg,
+    padding: [
+      `calc(${_inputVars.padding} - ${_inputVars.ascenderHeight})`,
+      _inputVars.padding,
+      `calc(${_inputVars.padding} - ${_inputVars.descenderHeight})`,
+      _inputVars.padding,
+    ].join(' '),
+    borderRadius: 'inherit',
+    // @ts-expect-error - `cornerShape` is not yet fully supported in CSS
+    cornerShape: 'inherit',
+    position: 'relative',
+    zIndex: 1,
+    display: 'block',
+    boxSizing: 'border-box',
+    resize: 'none',
+    inlineSize: ['stretch', '100%'],
+
+    selectors: {
+      '&::placeholder': {
+        color: _inputVars.color.placeholder,
+        opacity: 1,
+      },
+
+      [`${root}[data-icon-left] &`]: {
+        paddingLeft: `calc(${_inputVars.padding} + calc(${_inputVars.lineHeight} - ${_inputVars.ascenderHeight} - ${_inputVars.descenderHeight}) + ${_inputVars.gap})`,
+      },
+
+      [`${root}[data-icon-right] &`]: {
+        paddingRight: `calc(${_inputVars.padding} + calc(${_inputVars.lineHeight} - ${_inputVars.ascenderHeight} - ${_inputVars.descenderHeight}) + ${_inputVars.gap})`,
       },
     },
 
-    [`${root}:not([data-invalid]) ${element}:disabled + &`]: {
-      vars: {
-        [vars.color.input.text.bg]: vars.color.tinted.default.bg[1],
-        [vars.color.input.text.border]: vars.color.tinted.default.border[0],
-        [vars.color.muted.fg]: vars.color.tinted.default.border[4],
-      },
+    vars: {
+      [_inputVars.color.placeholder]: `color-mix(in srgb, transparent, ${vars.color.fg} 50%)`,
     },
+  },
+  'element',
+)
 
-    // invalid
+// helper for readability
+const has = (sel: string) => `${root}:has(${element}${sel})`
 
-    [`${root}[data-invalid] &`]: {
-      vars: {
-        [vars.color.input.text.bg]: vars.color.tinted.critical.bg[1],
-        [vars.color.input.text.border]: vars.color.tinted.critical.border[1],
-        [vars.color.muted.fg]: vars.color.tinted.critical.fg[4],
-      },
+export const selectors = {
+  enabled: has(':not(:disabled)'),
+  disabled: has(':disabled'),
+
+  readOnly: {
+    enabled: has(':not(:disabled)[readonly]'),
+    hovered: has(':not(:disabled)[readonly]:hover'),
+  },
+
+  valid: {
+    enabled: has(':not(:disabled):not([data-invalid])'),
+    hovered: has(':not(:disabled):hover:not([data-invalid])'),
+    readOnly: {
+      enabled: has(':not(:disabled)[readonly]:not([data-invalid])'),
+      hovered: has(':not(:disabled)[readonly]:hover:not([data-invalid])'),
     },
+  },
 
-    [`${root}.${border}[data-invalid] ${element}:not(:disabled):hover + &`]: {
-      vars: {
-        [vars.color.input.text.border]: vars.color.tinted.critical.border[2],
-      },
+  invalid: {
+    enabled: has(':not(:disabled)[data-invalid]'),
+    hovered: has(':not(:disabled):hover[data-invalid]'),
+    readOnly: {
+      enabled: has(':not(:disabled)[readonly][data-invalid]'),
+      hovered: has(':not(:disabled)[readonly]:hover[data-invalid]'),
     },
+    disabled: has(':disabled[data-invalid]'),
+  },
+} as const
 
-    [`${root}[data-invalid] ${element}:focus + &`]: {
-      vars: {
-        [vars.color.input.text.border]: vars.color.tinted.critical.border[2],
+/* ORDER = PRIORITY */
+
+/* 1) enabled baseline */
+_globalStyle(_layers.primitive, selectors.enabled, {
+  vars: {
+    [vars.color.fg]: vars.input.color.valid.enabled.fg,
+    [vars.color.border]: vars.input.color.valid.enabled.border,
+    [vars.color.bg]: vars.input.color.valid.enabled.bg,
+    [vars.color.muted.fg]: vars.input.color.valid.enabled.muted.fg,
+  },
+})
+
+/* 2) readonly baseline (still enabled) */
+_globalStyle(_layers.primitive, selectors.readOnly.enabled, {
+  vars: {
+    [vars.color.fg]: vars.input.color.valid.enabled.fg,
+    [vars.color.border]: vars.input.color.valid.enabled.border,
+    [vars.color.bg]: vars.input.color.valid.enabled.muted.bg,
+    [vars.color.muted.fg]: vars.input.color.valid.enabled.muted.fg,
+  },
+})
+
+/* 3) hover (readonly allowed) */
+_globalStyle(_layers.primitive, selectors.valid.hovered, {
+  vars: {
+    [vars.color.fg]: vars.input.color.valid.hovered.fg,
+    [vars.color.border]: vars.input.color.valid.hovered.border,
+    [vars.color.bg]: vars.input.color.valid.hovered.bg,
+    [vars.color.muted.fg]: vars.input.color.valid.hovered.muted.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.readOnly.hovered, {
+  vars: {
+    [vars.color.fg]: vars.input.color.valid.hovered.fg,
+    [vars.color.border]: vars.input.color.valid.hovered.border,
+    [vars.color.bg]: vars.input.color.valid.hovered.muted.bg,
+    [vars.color.muted.fg]: vars.input.color.valid.hovered.muted.fg,
+  },
+})
+
+/* 4) invalid (overrides normal + hover) */
+_globalStyle(_layers.primitive, selectors.invalid.enabled, {
+  vars: {
+    [vars.color.fg]: vars.input.color.invalid.enabled.fg,
+    [vars.color.border]: vars.input.color.invalid.enabled.border,
+    [vars.color.bg]: vars.input.color.invalid.enabled.bg,
+    [vars.color.muted.fg]: vars.input.color.invalid.enabled.muted.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.invalid.hovered, {
+  vars: {
+    [vars.color.fg]: vars.input.color.invalid.hovered.fg,
+    [vars.color.border]: vars.input.color.invalid.hovered.border,
+    [vars.color.bg]: vars.input.color.invalid.hovered.bg,
+    [vars.color.muted.fg]: vars.input.color.invalid.hovered.muted.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.invalid.readOnly.enabled, {
+  vars: {
+    [vars.color.fg]: vars.input.color.invalid.enabled.fg,
+    [vars.color.border]: vars.input.color.invalid.enabled.border,
+    [vars.color.bg]: vars.input.color.invalid.enabled.bg,
+    [vars.color.muted.fg]: vars.input.color.invalid.enabled.muted.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.invalid.readOnly.hovered, {
+  vars: {
+    [vars.color.fg]: vars.input.color.invalid.hovered.fg,
+    [vars.color.border]: vars.input.color.invalid.hovered.border,
+    [vars.color.bg]: vars.input.color.invalid.hovered.bg,
+    [vars.color.muted.fg]: vars.input.color.invalid.hovered.muted.fg,
+  },
+})
+
+/* 5) disabled LAST (wins) */
+_globalStyle(_layers.primitive, selectors.disabled, {
+  vars: {
+    [vars.color.fg]: vars.input.color.valid.disabled.fg,
+    [vars.color.border]: vars.input.color.valid.disabled.border,
+    [vars.color.bg]: vars.input.color.valid.disabled.bg,
+    [vars.color.muted.fg]: vars.input.color.valid.disabled.muted.fg,
+  },
+})
+_globalStyle(_layers.primitive, selectors.invalid.disabled, {
+  vars: {
+    [vars.color.fg]: vars.input.color.invalid.disabled.fg,
+    [vars.color.border]: vars.input.color.invalid.disabled.border,
+    [vars.color.bg]: vars.input.color.invalid.disabled.bg,
+    [vars.color.muted.fg]: vars.input.color.invalid.disabled.muted.fg,
+  },
+})
+
+export const prefix: string = _style(_layers.primitive, {}, 'prefix')
+
+export const suffix: string = _style(_layers.primitive, {}, 'suffix')
+
+export const presentation: string = _style(
+  _layers.primitive,
+  {
+    backgroundColor: vars.color.bg,
+    borderRadius: 'inherit',
+    // @ts-expect-error - `cornerShape` is not yet fully supported in CSS
+    cornerShape: 'inherit',
+    boxShadow: _inputVars.boxShadow,
+    display: 'block',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    pointerEvents: 'none',
+    zIndex: 0,
+
+    selectors: {
+      [`${root}:has(${prefix}) &`]: {
+        borderTopLeftRadius: 0,
+        borderBottomLeftRadius: 0,
+        borderLeftColor: vars.color.muted.border,
       },
-    },
 
-    [`${root}[data-invalid] ${element}:disabled + &`]: {
-      vars: {
-        [vars.color.input.text.bg]: vars.color.tinted.critical.bg[1],
-        [vars.color.input.text.border]: vars.color.tinted.critical.border[0],
+      [`${root}:has(${suffix}) &`]: {
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0,
+        borderRightColor: vars.color.muted.border,
       },
-    },
 
-    [`${root}:not(${border}) &`]: {
-      vars: {
-        [vars.color.input.text.border]: 'transparent',
+      // focus ring
+      [`${element}:not([data-no-focus-ring]):focus + &`]: {
+        boxShadow: `${vars.input.text.focusRing}, ${_inputVars.boxShadow}`,
       },
     },
   },
-})
+  'presentation',
+)
 
 export const fontSize: ResponsiveRuleOptions<FontTextSize> = {
   ..._fromEntries(
@@ -221,15 +315,19 @@ export const fontSize: ResponsiveRuleOptions<FontTextSize> = {
 
       return [
         s,
-        _responsiveStyle(layers.primitives, {
-          vars: {
-            [vars.input.text.fontSize]: source.fontSize,
-            [vars.input.text.lineHeight]: source.lineHeight,
-            [vars.input.text.letterSpacing]: source.letterSpacing,
-            [vars.input.text.ascenderHeight]: source.ascenderHeight,
-            [vars.input.text.descenderHeight]: source.descenderHeight,
+        _responsiveStyle(
+          _layers.primitive,
+          {
+            vars: {
+              [_inputVars.fontSize]: source.fontSize,
+              [_inputVars.lineHeight]: source.lineHeight,
+              [_inputVars.letterSpacing]: source.letterSpacing,
+              [_inputVars.ascenderHeight]: source.ascenderHeight,
+              [_inputVars.descenderHeight]: source.descenderHeight,
+            },
           },
-        }),
+          `s-${s}`,
+        ),
       ]
     }),
   ),
@@ -239,11 +337,15 @@ export const padding: ResponsiveRuleOptions<Space> = {
   ..._fromEntries(
     SPACE.map((s) => [
       s,
-      _responsiveStyle(layers.primitives, {
-        vars: {
-          [vars.input.text.padding]: vars.space[s],
+      _responsiveStyle(
+        _layers.primitive,
+        {
+          vars: {
+            [_inputVars.padding]: vars.space[s],
+          },
         },
-      }),
+        `p-${s}`,
+      ),
     ]),
   ),
 }
@@ -252,11 +354,15 @@ export const gap: ResponsiveRuleOptions<Space> = {
   ..._fromEntries(
     SPACE.map((s) => [
       s,
-      _responsiveStyle(layers.primitives, {
-        vars: {
-          [vars.input.text.gap]: vars.space[s],
+      _responsiveStyle(
+        _layers.primitive,
+        {
+          vars: {
+            [_inputVars.gap]: vars.space[s],
+          },
         },
-      }),
+        `g-${s}`,
+      ),
     ]),
   ),
 }
