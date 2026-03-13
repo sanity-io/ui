@@ -13,7 +13,7 @@ export function Callout(props: {data: WrappedValue<CalloutData>}) {
   return (
     <Card
       display="flex"
-      gap={4}
+      gap={3}
       marginY={[4, 4, 5]}
       padding={4}
       radius={4}
@@ -22,7 +22,7 @@ export function Callout(props: {data: WrappedValue<CalloutData>}) {
       {/* <Flex> */}
       {icon?.value && (
         // <Box padding={3}>
-        <Text flex="none" muted>
+        <Text flex="none" muted size={1}>
           <Icon symbol={icon.value as IconSymbol} />
         </Text>
         // </Box>
