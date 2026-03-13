@@ -6,7 +6,7 @@ import {_fromEntries} from '../../lib/_fromEntries'
 import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import type {ResponsiveRuleOptions, ResponsiveRules} from '../../types'
 import {vars} from '../../vars'
-import {_CORNER_SHAPE_RADIUS_MULTIPLIER} from '../../vars/_contants'
+import {_CORNER_SHAPE_RADIUS_MULTIPLIER} from '../../constants'
 
 export const options: ResponsiveRuleOptions<Radius> = {
   ..._fromEntries(
