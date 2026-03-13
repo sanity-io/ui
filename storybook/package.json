@@ -28,6 +28,6 @@
     "@vitejs/plugin-react": "^5.0.4",
     "chromatic": "^13.1.5",
     "storybook": "^10.1.4",
-    "vite": "^7.1.9"
+    "vite": "^7.3.1"
   }
 }
