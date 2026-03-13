@@ -37,3 +37,4 @@ playwright/.cache
 storybook-static
 test-results
 tmp
+performance-report.md
