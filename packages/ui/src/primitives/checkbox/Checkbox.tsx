@@ -1,6 +1,6 @@
 import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
 import {type ComponentType, type Props} from '@sanity/ui/core'
-import {checkbox, checkbox_input, checkbox_presentation} from '@sanity/ui/css'
+import {checkbox, checkbox_input, checkbox_presentation} from '@sanity/ui-css'
 import {useCustomValidity} from '@sanity/ui/hooks'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 

@@ -5,7 +5,7 @@ import {
   type LabelStyleProps,
   textOverflow,
   type TextOverflowStyleProps,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 
 /** @public */
 export const DEFAULT_LABEL_ELEMENT = 'div'

@@ -6,7 +6,7 @@ import {
   type TextOverflow,
   textOverflow,
   type TextOverflowStyleProps,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 
 /** @public */
 export const DEFAULT_HEADING_ELEMENT = 'div'

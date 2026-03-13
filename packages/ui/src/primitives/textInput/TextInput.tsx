@@ -15,12 +15,12 @@ import {
   textInput_element,
   textInput_prefix,
   textInput_suffix,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {useCustomValidity} from '@sanity/ui/hooks'
 import {Box} from '@sanity/ui/primitives/box'
 import {Button, type ButtonProps} from '@sanity/ui/primitives/button'
 import {Text} from '@sanity/ui/primitives/text'
-import type {FontWeight, Space} from '@sanity/ui/tokens'
+import type {FontWeight, Space} from '@sanity/ui-tokens'
 import {
   type ElementType,
   isValidElement,

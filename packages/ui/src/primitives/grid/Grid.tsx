@@ -1,5 +1,5 @@
 import {_splitKeys, type Props} from '@sanity/ui/core'
-import {grid, GRID_STYLE_PROP_KEYS, type GridStyleProps} from '@sanity/ui/css'
+import {grid, GRID_STYLE_PROP_KEYS, type GridStyleProps} from '@sanity/ui-css'
 import {type BoxElementType} from '@sanity/ui/primitives/box'
 
 /** @public */

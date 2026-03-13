@@ -1,5 +1,5 @@
 import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
-import {box, BOX_STYLE_PROP_KEYS, type BoxStyleProps} from '@sanity/ui/css'
+import {box, BOX_STYLE_PROP_KEYS, type BoxStyleProps} from '@sanity/ui-css'
 
 /** @public */
 export const DEFAULT_BOX_ELEMENT = 'div'

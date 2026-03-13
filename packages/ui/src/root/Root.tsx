@@ -1,5 +1,5 @@
 import {_splitKeys, type Props} from '@sanity/ui/core'
-import {root, root_body, ROOT_STYLE_PROP_KEYS, type RootStyleProps} from '@sanity/ui/css'
+import {root, root_body, ROOT_STYLE_PROP_KEYS, type RootStyleProps} from '@sanity/ui-css'
 import {useCallback, useImperativeHandle, useRef, useState} from 'react'
 
 import {RootProvider} from './RootProvider'

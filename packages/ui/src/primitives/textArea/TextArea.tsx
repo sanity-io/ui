@@ -4,7 +4,7 @@ import {
   textArea_element,
   textArea_presentation,
   type TextAreaStyleProps,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {useCustomValidity} from '@sanity/ui/hooks'
 import {useImperativeHandle, useRef} from 'react'
 

@@ -1,5 +1,5 @@
 import type {ComponentType, Props} from '@sanity/ui/core'
-import {tree} from '@sanity/ui/css'
+import {tree} from '@sanity/ui-css'
 import {Stack, type StackOwnProps} from '@sanity/ui/primitives/stack'
 import {
   type FocusEvent,

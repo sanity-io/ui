@@ -5,12 +5,12 @@ import {
   BUTTON_STYLE_PROP_KEYS,
   type ButtonStyleProps,
   type ResponsiveProp,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {Box} from '@sanity/ui/primitives/box'
 import {Spinner} from '@sanity/ui/primitives/spinner'
 import {Text, type TextOwnProps} from '@sanity/ui/primitives/text'
 import type {TooltipProps} from '@sanity/ui/primitives/tooltip'
-import type {FontTextSize} from '@sanity/ui/tokens'
+import type {FontTextSize} from '@sanity/ui-tokens'
 import {isValidElement, Suspense} from 'react'
 import {isValidElementType} from 'react-is'
 

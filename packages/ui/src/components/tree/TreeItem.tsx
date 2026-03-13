@@ -1,6 +1,6 @@
 import {ToggleArrowRightIcon} from '@sanity/icons'
 import type {ComponentType, Props} from '@sanity/ui/core'
-import {type ResponsiveProp, tree_item, vars} from '@sanity/ui/css'
+import {type ResponsiveProp, tree_item, vars} from '@sanity/ui-css'
 import {Box, type BoxProps} from '@sanity/ui/primitives/box'
 import {
   Selectable,
@@ -8,7 +8,7 @@ import {
   type SelectableOwnProps,
 } from '@sanity/ui/primitives/selectable'
 import {Text} from '@sanity/ui/primitives/text'
-import type {FontTextSize, FontWeight, Space} from '@sanity/ui/tokens'
+import type {FontTextSize, FontWeight, Space} from '@sanity/ui-tokens'
 import {
   type ElementType,
   type KeyboardEvent,

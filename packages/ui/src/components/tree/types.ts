@@ -1,5 +1,5 @@
-import type {ResponsiveProp} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/tokens'
+import type {ResponsiveProp} from '@sanity/ui-css'
+import type {Space} from '@sanity/ui-tokens'
 
 /**
  * @beta

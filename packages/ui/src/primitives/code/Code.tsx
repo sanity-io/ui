@@ -1,5 +1,5 @@
 import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
-import {code, CODE_STYLE_PROP_KEYS, type CodeStyleProps} from '@sanity/ui/css'
+import {code, CODE_STYLE_PROP_KEYS, type CodeStyleProps} from '@sanity/ui-css'
 import {LazySyntax} from '@sanity/ui/primitives/_syntax'
 import {Suspense} from 'react'
 

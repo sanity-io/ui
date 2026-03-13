@@ -1,5 +1,5 @@
 import {_getResponsiveProp} from '@sanity/ui/core'
-import type {ResponsiveProp, ResponsivePropArray} from '@sanity/ui/css'
+import type {ResponsiveProp, ResponsivePropArray} from '@sanity/ui-css'
 
 /**
  * @internal

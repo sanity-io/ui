@@ -1,5 +1,5 @@
 import {_getResponsiveProp} from '@sanity/ui/core'
-import type {Breakpoint, ResponsiveProp} from '@sanity/ui/css'
+import type {Breakpoint, ResponsiveProp} from '@sanity/ui-css'
 import {useMediaIndex} from '@sanity/ui/hooks'
 import {type ReactNode, use, useCallback, useEffect, useMemo, useState} from 'react'
 

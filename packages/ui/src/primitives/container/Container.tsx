@@ -4,7 +4,7 @@ import {
   container,
   CONTAINER_STYLE_PROP_KEYS,
   type ContainerStyleProps,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {type BoxElementType} from '@sanity/ui/primitives/box'
 
 /** @public */

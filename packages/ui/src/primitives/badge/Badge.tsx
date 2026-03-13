@@ -4,9 +4,9 @@ import {
   BADGE_STYLE_PROP_KEYS,
   type BadgeStyleProps,
   type ResponsiveProp,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {Text} from '@sanity/ui/primitives/text'
-import type {FontTextSize} from '@sanity/ui/tokens'
+import type {FontTextSize} from '@sanity/ui-tokens'
 
 /** @public */
 export const DEFAULT_BADGE_ELEMENT = 'span'

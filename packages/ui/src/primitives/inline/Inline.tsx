@@ -1,5 +1,5 @@
 import type {Props} from '@sanity/ui/core'
-import type {BoxStyleProps} from '@sanity/ui/css'
+import type {BoxStyleProps} from '@sanity/ui-css'
 import {Box, type BoxElementType} from '@sanity/ui/primitives/box'
 
 /** @public */

@@ -1,5 +1,5 @@
 import {createGlobalScopedContext} from '@sanity/ui/core'
-import type {ResponsiveProp} from '@sanity/ui/css'
+import type {ResponsiveProp} from '@sanity/ui-css'
 import type {Context} from 'react'
 
 import type {DialogPosition} from './types'

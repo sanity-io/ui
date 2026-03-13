@@ -1,5 +1,5 @@
 import type {Props} from '@sanity/ui/core'
-import type {ResponsiveProp} from '@sanity/ui/css'
+import type {ResponsiveProp} from '@sanity/ui-css'
 import type {CardElementType, CardOwnProps} from '@sanity/ui/primitives/card'
 
 import {LayerCard} from './LayerCard'

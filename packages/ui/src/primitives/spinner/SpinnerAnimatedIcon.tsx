@@ -1,5 +1,5 @@
 import {SpinnerIcon} from '@sanity/icons'
-import {spinner_animatedIcon} from '@sanity/ui/css'
+import {spinner_animatedIcon} from '@sanity/ui-css'
 import type {SVGProps} from 'react'
 
 /** @internal */

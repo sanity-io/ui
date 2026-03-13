@@ -1,6 +1,6 @@
 import {CropIcon} from '@sanity/icons'
 import {Box, Code, Stack} from '@sanity/ui'
-import {elementTone, vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui/css'
 import {FONT_CODE_SIZE} from '@sanity/ui/tokens'
 
 import {CardWrapper} from '$workshop'
@@ -11,18 +11,12 @@ export default function OpticalAlignment(): React.JSX.Element {
       <Stack gap={4}>
         {FONT_CODE_SIZE.map((size) => (
           <Box key={size} display="flex" gap={2}>
-            <Box
-              className={elementTone({elementTone: 'suggest'})}
-              flex="none"
-              muted
-              style={{outline: `0.5px solid ${vars.color.tinted.border[4]}`}}
-            >
+            <Box flex="none" muted style={{outline: `0.5px solid ${vars.color.tinted.border[4]}`}}>
               <Code size={size}>
                 <CropIcon />
               </Code>
             </Box>
             <Box
-              className={elementTone({elementTone: 'suggest'})}
               flex={1}
               muted
               overflow="hidden"

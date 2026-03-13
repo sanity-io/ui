@@ -1,5 +1,5 @@
 import {type ComponentType, isFocusable, type Props} from '@sanity/ui/core'
-import {tab_panel} from '@sanity/ui/css'
+import {tab_panel} from '@sanity/ui-css'
 import {Box, type BoxOwnProps} from '@sanity/ui/primitives/box'
 import {useEffect, useImperativeHandle, useRef, useState} from 'react'
 

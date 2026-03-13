@@ -1,6 +1,6 @@
 import type {Strategy} from '@floating-ui/react-dom'
 import {type Assign, POPOVER_MOTION_PROPS} from '@sanity/ui/core'
-import {popover_card} from '@sanity/ui/css'
+import {popover_card} from '@sanity/ui-css'
 import {Flex} from '@sanity/ui/primitives/flex'
 import {Layer, type LayerOwnProps} from '@sanity/ui/primitives/layer'
 import {type HTMLMotionProps, motion} from 'motion/react'

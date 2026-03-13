@@ -1,5 +1,5 @@
 import type {ComponentType, Props} from '@sanity/ui/core'
-import {type GapStyleProps} from '@sanity/ui/css'
+import {type GapStyleProps} from '@sanity/ui-css'
 import {useClickOutsideEvent} from '@sanity/ui/hooks'
 import {Box} from '@sanity/ui/primitives/box'
 import {Button, type ButtonProps} from '@sanity/ui/primitives/button'

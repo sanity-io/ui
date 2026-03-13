@@ -5,7 +5,7 @@ import {
   _switch_presentation,
   _switch_thumb,
   _switch_track,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
 /** @public */

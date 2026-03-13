@@ -5,7 +5,7 @@ import {
   textOverflow,
   type TextOverflowStyleProps,
   type TextStyleProps,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 
 /** @public */
 export const DEFAULT_TEXT_ELEMENT = 'div'

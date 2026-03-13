@@ -21,11 +21,11 @@ import {
   type ResponsiveProp,
   type ShadowStyleProps,
   tooltip,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {usePrefersReducedMotion, useUnique} from '@sanity/ui/hooks'
 import type {LayerOwnProps} from '@sanity/ui/primitives/layer'
 import {Text} from '@sanity/ui/primitives/text'
-import type {CardTone, ColorScheme, FontTextSize} from '@sanity/ui/tokens'
+import type {CardTone, ColorScheme, FontTextSize} from '@sanity/ui-tokens'
 import {BoundaryElementContext} from '@sanity/ui/utils/boundary-element'
 import {assertPortalContext, Portal, PortalContext} from '@sanity/ui/utils/portal'
 import {AnimatePresence} from 'motion/react'

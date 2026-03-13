@@ -1,5 +1,5 @@
 import {_splitKeys, type ComponentType, type Props} from '@sanity/ui/core'
-import {hotkeys, HOTKEYS_STYLE_PROP_KEYS, type HotkeysStyleProps} from '@sanity/ui/css'
+import {hotkeys, HOTKEYS_STYLE_PROP_KEYS, type HotkeysStyleProps} from '@sanity/ui-css'
 import {KBD} from '@sanity/ui/primitives/kbd'
 
 /** @public */

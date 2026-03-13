@@ -1,4 +1,4 @@
-import type {ResponsiveProp} from '@sanity/ui/css'
+import type {ResponsiveProp} from '@sanity/ui-css'
 import {useMounted} from '@sanity/ui/hooks'
 import {LayerProvider} from '@sanity/ui/primitives/layer'
 import {AnimatePresence} from 'motion/react'

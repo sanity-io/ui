@@ -1,5 +1,5 @@
 import type {ComponentType, Props} from '@sanity/ui/core'
-import {BREAKPOINTS} from '@sanity/ui/css'
+import {BREAKPOINTS} from '@sanity/ui-css'
 import {useElementSize} from '@sanity/ui/hooks'
 import {useImperativeHandle, useMemo, useState} from 'react'
 

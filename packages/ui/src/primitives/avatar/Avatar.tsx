@@ -7,10 +7,10 @@ import {
   avatar_imageOutline,
   avatar_initials,
   type ResponsiveProp,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {Box} from '@sanity/ui/primitives/box'
 import {Label} from '@sanity/ui/primitives/label'
-import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui/tokens'
+import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui-tokens'
 import {startTransition, useEffect, useState} from 'react'
 
 import type {AvatarPosition} from './types'

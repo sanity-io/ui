@@ -9,7 +9,6 @@ import {
   focusFirstDescendant,
   type Props,
 } from '@sanity/ui/core'
-import type {ResponsiveProp} from '@sanity/ui/css'
 import {Box, type BoxOwnProps} from '@sanity/ui/primitives/box'
 import {Button} from '@sanity/ui/primitives/button'
 import {Popover, type PopoverProps} from '@sanity/ui/primitives/popover'
@@ -18,7 +17,8 @@ import {SpinnerAnimatedIcon} from '@sanity/ui/primitives/spinner'
 import {Stack} from '@sanity/ui/primitives/stack'
 import {Text} from '@sanity/ui/primitives/text'
 import {TextInput, type TextInputOwnProps} from '@sanity/ui/primitives/text-input'
-import type {Radius, Space} from '@sanity/ui/tokens'
+import type {ResponsiveProp} from '@sanity/ui-css'
+import type {Radius, Space} from '@sanity/ui-tokens'
 import {
   type ChangeEvent,
   cloneElement,
@@ -604,7 +604,7 @@ export function Autocomplete<
     <Box
       ref={rootElementRef}
       data-ui="Autocomplete"
-      flex={1}
+      flex={flex}
       onBlur={handleRootBlur}
       onFocus={handleRootFocus}
       onKeyDown={handleRootKeyDown}

@@ -6,10 +6,10 @@ import {
   type RadiusStyleProps,
   type ResponsiveProp,
   selectable_hotkeys,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {Selectable} from '@sanity/ui/primitives/selectable'
 import {Text} from '@sanity/ui/primitives/text'
-import type {ElementTone, FontTextSize} from '@sanity/ui/tokens'
+import type {ElementTone, FontTextSize} from '@sanity/ui-tokens'
 import {
   type ElementType,
   isValidElement,

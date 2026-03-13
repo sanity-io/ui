@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import type {ComponentType, Props} from '@sanity/ui/core'
-import {type RadiusStyleProps, toast} from '@sanity/ui/css'
+import {type RadiusStyleProps, toast} from '@sanity/ui-css'
 import {usePrefersReducedMotion} from '@sanity/ui/hooks'
 import {Box} from '@sanity/ui/primitives/box'
 import {Button} from '@sanity/ui/primitives/button'

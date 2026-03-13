@@ -1,7 +1,7 @@
 import {_isScrollable, _ResizeObserver, type ComponentType, type Props} from '@sanity/ui/core'
-import {vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui-css'
 import {Box} from '@sanity/ui/primitives/box'
-import type {Space} from '@sanity/ui/tokens'
+import type {Space} from '@sanity/ui-tokens'
 import {
   type ReactNode,
   startTransition,

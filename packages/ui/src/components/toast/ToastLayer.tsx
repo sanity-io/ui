@@ -1,5 +1,5 @@
 import type {ComponentType, Props} from '@sanity/ui/core'
-import {type GapStyleProps, type PaddingStyleProps, toast_layer} from '@sanity/ui/css'
+import {type GapStyleProps, type PaddingStyleProps, toast_layer} from '@sanity/ui-css'
 import {Grid} from '@sanity/ui/primitives/grid'
 import {useLayer} from '@sanity/ui/primitives/layer'
 

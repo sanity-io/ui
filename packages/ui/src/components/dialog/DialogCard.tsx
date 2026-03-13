@@ -8,7 +8,7 @@ import {
   dialog_scroller,
   dialog_scrollerShadowBottom,
   dialog_scrollerShadowTop,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 import {useClickOutsideEvent, useGlobalKeyDown} from '@sanity/ui/hooks'
 import {Box} from '@sanity/ui/primitives/box'
 import {Button} from '@sanity/ui/primitives/button'

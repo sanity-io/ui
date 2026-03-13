@@ -1,6 +1,6 @@
 import {autoUpdate, type RootBoundary, useFloating} from '@floating-ui/react-dom'
 import {type Assign, getElementRef, type Placement, Z_OFFSETS} from '@sanity/ui/core'
-import {type MaxWidth, popover as popoverCss, type ResponsiveProp} from '@sanity/ui/css'
+import {type MaxWidth, popover as popoverCss, type ResponsiveProp} from '@sanity/ui-css'
 import {usePrefersReducedMotion} from '@sanity/ui/hooks'
 import {useLayer} from '@sanity/ui/primitives/layer'
 import {BoundaryElementContext} from '@sanity/ui/utils/boundary-element'
