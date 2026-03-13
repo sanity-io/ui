@@ -1,4 +1,4 @@
-import {_composeClassNames} from '../../_composeClassNames'
+import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
 import {root} from './tooltip.css'
 import type {TooltipStyleProps} from './types'
 

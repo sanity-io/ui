@@ -1,3 +1,4 @@
+import {type ExactKeyTuple} from '../../lib/props/_keys'
 import type {ResponsiveProp} from '../../types'
 
 /** @public */
@@ -13,3 +14,12 @@ export type JustifyContent =
 export interface JustifyContentStyleProps {
   justifyContent?: ResponsiveProp<JustifyContent>
 }
+
+/** @internal */
+export const JUSTIFY_CONTENT_STYLE_PROP_KEYS = ['justifyContent'] as const
+
+// assert exact keys
+JUSTIFY_CONTENT_STYLE_PROP_KEYS satisfies ExactKeyTuple<
+  JustifyContentStyleProps,
+  typeof JUSTIFY_CONTENT_STYLE_PROP_KEYS
+>

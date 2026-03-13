@@ -1,4 +1,4 @@
-import {_responsiveClassName} from '../../_responsiveClassName'
+import {_responsiveClassName} from '../../lib/class-names/_responsiveClassName'
 import {options} from './gridAutoColumns.css'
 import type {GridAutoColumnsStyleProps} from './types'
 

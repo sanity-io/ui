@@ -1,5 +1,6 @@
-import type {Space} from '@sanity/ui/theme'
+import type {Space} from '@sanity/ui-tokens'
 
+import {type ExactKeyTuple} from '../../lib/props/_keys'
 import type {ResponsiveProp} from '../../types'
 
 /** @public */
@@ -15,3 +16,17 @@ export interface MarginStyleProps {
   marginBottom?: ResponsiveProp<Margin>
   marginLeft?: ResponsiveProp<Margin>
 }
+
+/** @internal */
+export const MARGIN_STYLE_PROP_KEYS = [
+  'margin',
+  'marginX',
+  'marginY',
+  'marginTop',
+  'marginRight',
+  'marginBottom',
+  'marginLeft',
+] as const
+
+// assert exact keys
+MARGIN_STYLE_PROP_KEYS satisfies ExactKeyTuple<MarginStyleProps, typeof MARGIN_STYLE_PROP_KEYS>

@@ -1,12 +1,13 @@
-import {_composeClassNames} from '../../_composeClassNames'
-import {_responsiveClassName} from '../../_responsiveClassName'
+import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
+import {_responsiveClassName} from '../../lib/class-names/_responsiveClassName'
 import {display} from '../../props/display/display'
-import {flex} from '../../props/flex/flex'
+import {flexProp} from '../../props/flex/flex'
 import {font} from '../../props/font/font'
 import {margin} from '../../props/margin/margin'
 import {maxWidth} from '../../props/maxWidth/maxWidth'
 import {textAlign} from '../../props/textAlign/textAlign'
-import {muted, root, sizes} from './heading.css'
+import {width} from '../../props/width/width'
+import {muted, root, scale} from './heading.css'
 import type {HeadingStyleProps} from './types'
 
 /** @public */
@@ -15,12 +16,13 @@ export function heading(props: HeadingStyleProps): string | undefined {
     props.className,
     root,
     props.muted && muted,
-    _responsiveClassName(sizes, props.size ?? 1),
+    _responsiveClassName(scale, props.size ?? 2),
     display({display: 'block'}),
-    flex(props),
-    font(props),
-    margin(props),
+    flexProp(props),
+    font({...props, weight: props.weight ?? 'semibold'}),
+    margin({...props, margin: props.margin ?? 0}),
     maxWidth(props),
     textAlign({textAlign: props.align}),
+    width(props),
   )
 }

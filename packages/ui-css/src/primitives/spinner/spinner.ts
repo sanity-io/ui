@@ -1,4 +1,4 @@
-import {_composeClassNames} from '../../_composeClassNames'
+import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
 import {root, spinnerIcon} from './spinner.css'
 import type {SpinnerStyleProps} from './types'
 
@@ -8,6 +8,6 @@ export function spinner(props: SpinnerStyleProps): string | undefined {
 }
 
 /** @public */
-export function animatedSpinnerIcon(): string {
+export function spinner_animatedIcon(): string {
   return spinnerIcon
 }

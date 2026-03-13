@@ -1,4 +1,4 @@
-import {_composeClassNames} from '../../_composeClassNames'
+import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
 import {card, root} from './popover.css'
 
 /** @public */
@@ -7,6 +7,6 @@ export function popover(props: {className?: string}): string | undefined {
 }
 
 /** @public */
-export function popoverCard(): string | undefined {
+export function popover_card(): string | undefined {
   return _composeClassNames(card)
 }

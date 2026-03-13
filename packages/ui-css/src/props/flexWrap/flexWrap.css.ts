@@ -1,16 +1,10 @@
-import {_responsiveStyle} from '../../_responsiveStyle.css'
-import {layers} from '../../layers.css'
+import {_layers} from '../../layers.css'
+import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import type {FlexWrap} from './types'
 
 export const options: ResponsiveRuleOptions<FlexWrap> = {
-  'wrap': _responsiveStyle(layers.props, {
-    flexWrap: 'wrap',
-  }),
-  'wrap-reverse': _responsiveStyle(layers.props, {
-    flexWrap: 'wrap-reverse',
-  }),
-  'nowrap': _responsiveStyle(layers.props, {
-    flexWrap: 'nowrap',
-  }),
+  'wrap': _responsiveStyle(_layers.prop, {flexWrap: 'wrap'}, 'wrap'),
+  'wrap-reverse': _responsiveStyle(_layers.prop, {flexWrap: 'wrap-reverse'}, 'wrap-reverse'),
+  'nowrap': _responsiveStyle(_layers.prop, {flexWrap: 'nowrap'}, 'nowrap'),
 }

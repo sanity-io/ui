@@ -1,94 +1,112 @@
-import type {FontWeight} from '@sanity/ui/theme'
-import {globalStyle} from '@vanilla-extract/css'
+import type {FontWeight} from '@sanity/ui-tokens'
+import {createVar, globalStyle} from '@vanilla-extract/css'
 
-import {_style} from '../../_style.css'
-import {layers} from '../../layers.css'
-import {vars} from '../../vars.css'
+import {_layers} from '../../layers.css'
+import {_style} from '../../lib/css/_style.css'
+// import {vars} from '../../vars.css'
 
-export const root: string = _style(layers.props, {
-  'fontFamily': vars.font.family,
-  'fontFeatureSettings': vars.font.featureSettings,
-  'fontSize': vars.font.fontSize,
-  'lineHeight': vars.font.lineHeight,
-  'letterSpacing': vars.font.letterSpacing,
-  'fontWeight': vars.font.fontWeight,
-  'transform': `translateY(${vars.font.descenderHeight})`,
-  'padding': '1px 0',
-  'margin': '0',
+/** @internal */
+export const fontVars = {
+  family: createVar('font-family'),
+  featureSettings: createVar('font-feature-settings'),
 
-  'vars': {
-    [vars.font.capHeight]:
-      `calc(${vars.font.lineHeight} - ${vars.font.ascenderHeight} - ${vars.font.descenderHeight})`,
-    [vars.font.iconOffset]: `calc((${vars.font.capHeight} - ${vars.font.iconSize}) / 2)`,
-    [vars.font.customIconOffset]:
-      `calc((${vars.font.capHeight} - ${vars.font.customIconSize}) / 2)`,
+  capHeight: createVar('cap-height'),
+  fontSize: createVar('font-size'),
+  lineHeight: createVar('line-height'),
+  ascenderHeight: createVar('ascender-height'),
+  descenderHeight: createVar('descender-height'),
+  letterSpacing: createVar('letter-spacing'),
+  fontWeight: createVar('font-weight'),
+  iconSize: createVar('icon-size'),
+  iconOffset: createVar('icon-offset'),
+  customIconOffset: createVar('custom-icon-offset'),
+  customIconSize: createVar('custom-icon-size'),
+
+  weight: {
+    regular: createVar('regular'),
+    medium: createVar('medium'),
+    semibold: createVar('semibold'),
+    bold: createVar('bold'),
   },
+}
 
-  ':before': {
-    content: '""',
-    display: 'block',
-    height: 0,
-    marginTop: `calc((0px - ${vars.font.ascenderHeight} - ${vars.font.descenderHeight}) - 1px)`,
-  },
+export const root: string = _style(
+  _layers.prop,
+  {
+    fontFamily: fontVars.family,
+    fontFeatureSettings: fontVars.featureSettings,
+    fontSize: fontVars.fontSize,
+    lineHeight: fontVars.lineHeight,
+    letterSpacing: fontVars.letterSpacing,
+    fontWeight: fontVars.fontWeight,
 
-  ':after': {
-    content: '""',
-    display: 'block',
-    height: 0,
-    marginBottom: '-1px',
+    vars: {
+      [fontVars.capHeight]: `calc(${fontVars.lineHeight} - ${fontVars.ascenderHeight} - ${fontVars.descenderHeight})`,
+      [fontVars.iconOffset]: `calc((${fontVars.capHeight} - ${fontVars.iconSize}) / 2)`,
+      [fontVars.customIconOffset]: `calc((${fontVars.capHeight} - ${fontVars.customIconSize}) / 2)`,
+    },
+
+    /**
+     * Text-box-trim implementation using ascender/descender metrics
+     * Trims whitespace above cap height and below baseline
+     */
+    selectors: {
+      '&::before': {
+        content: '""',
+        display: 'table',
+        marginBottom: `calc(0rem - ${fontVars.ascenderHeight})`,
+      },
+      '&::after': {
+        content: '""',
+        display: 'table',
+        marginTop: `calc(0rem - ${fontVars.descenderHeight})`,
+      },
+    },
   },
-})
+  '',
+)
 
 globalStyle(`${root} svg`, {
   '@layer': {
-    [layers.props]: {
-      // Certain popular CSS libraries changes the defaults for SVG display
-      // Make sure SVGs are rendered as inline elements
+    [_layers.prop]: {
+      // Some CSS libraries change the defaults for SVG display
+      // Ensure SVGs are rendered as inline elements
       display: 'inline',
     },
   },
 })
+
 globalStyle(`${root} svg:not([data-sanity-icon])`, {
   '@layer': {
-    [layers.props]: {
-      fontSize: vars.font.customIconSize,
-      margin: vars.font.customIconOffset,
-    },
+    [_layers.prop]: {fontSize: fontVars.customIconSize, margin: fontVars.customIconOffset},
   },
 })
 
 globalStyle(`${root} [data-sanity-icon]`, {
   '@layer': {
-    [layers.props]: {
-      fontSize: vars.font.iconSize,
-      margin: vars.font.iconOffset,
-      // vectorEffect: 'non-scaling-stroke',
-    },
+    [_layers.prop]: {fontSize: fontVars.iconSize, margin: fontVars.iconOffset},
   },
 })
 
-export const weights: Record<FontWeight, string> = {
-  regular: _style(layers.props, {
-    vars: {
-      [vars.font.fontWeight]: vars.font.weight.regular,
-    },
-  }),
+export const weightOptions: Record<FontWeight, string> = {
+  regular: _style(
+    _layers.prop,
+    {vars: {[fontVars.fontWeight]: fontVars.weight.regular}},
+    'w-regular',
+  ),
 
-  medium: _style(layers.props, {
-    vars: {
-      [vars.font.fontWeight]: vars.font.weight.medium,
-    },
-  }),
+  medium: _style(
+    //
+    _layers.prop,
+    {vars: {[fontVars.fontWeight]: fontVars.weight.medium}},
+    'w-medium',
+  ),
 
-  semibold: _style(layers.props, {
-    vars: {
-      [vars.font.fontWeight]: vars.font.weight.semibold,
-    },
-  }),
+  semibold: _style(
+    _layers.prop,
+    {vars: {[fontVars.fontWeight]: fontVars.weight.semibold}},
+    'w-semibold',
+  ),
 
-  bold: _style(layers.props, {
-    vars: {
-      [vars.font.fontWeight]: vars.font.weight.bold,
-    },
-  }),
+  bold: _style(_layers.prop, {vars: {[fontVars.fontWeight]: fontVars.weight.bold}}, 'w-bold'),
 }

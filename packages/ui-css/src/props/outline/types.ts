@@ -1,3 +1,5 @@
+import {type ExactKeyTuple} from '../../lib/props/_keys'
+
 /** @public */
 export type Outline = 'none'
 
@@ -5,3 +7,9 @@ export type Outline = 'none'
 export interface OutlineStyleProps {
   outline?: Outline
 }
+
+/** @internal */
+export const OUTLINE_STYLE_PROP_KEYS = ['outline'] as const
+
+// assert exact keys
+OUTLINE_STYLE_PROP_KEYS satisfies ExactKeyTuple<OutlineStyleProps, typeof OUTLINE_STYLE_PROP_KEYS>
