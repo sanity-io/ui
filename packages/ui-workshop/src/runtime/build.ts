@@ -2,7 +2,7 @@ import cpx from 'cpx'
 import {writeFile} from 'fs/promises'
 import path from 'path'
 import {rimraf} from 'rimraf'
-import {build as viteBuild,createServer} from 'vite'
+import {build as viteBuild, createServer} from 'vite'
 
 import {_loadRuntimeConfig} from './config/_loadRuntime'
 import {DEFAULT_PATTERN} from './constants'
