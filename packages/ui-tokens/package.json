@@ -1,0 +1,219 @@
+{
+  "name": "@sanity/ui-tokens",
+  "version": "0.0.0",
+  "keywords": [
+    "sanity",
+    "ui",
+    "design",
+    "tokens"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/ui.git",
+    "directory": "packages/ui-tokens"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "source": "./exports/index.ts",
+      "import": "./dist/index.js"
+    },
+    "./avatar": {
+      "source": "./exports/avatar.ts",
+      "import": "./dist/avatar.js"
+    },
+    "./border": {
+      "source": "./exports/border.ts",
+      "import": "./dist/border.js"
+    },
+    "./card": {
+      "source": "./exports/card.ts",
+      "import": "./dist/card.js"
+    },
+    "./button": {
+      "source": "./exports/button.ts",
+      "import": "./dist/button.js"
+    },
+    "./button/_buttonMode": {
+      "source": "./exports/button/_buttonMode.ts",
+      "import": "./dist/button/_buttonMode.js"
+    },
+    "./color": {
+      "source": "./exports/color.ts",
+      "import": "./dist/color.js"
+    },
+    "./color/palette": {
+      "source": "./exports/color/palette.ts",
+      "import": "./dist/color/palette.js"
+    },
+    "./color/_cardTone": {
+      "source": "./exports/color/_cardTone.ts",
+      "import": "./dist/color/_cardTone.js"
+    },
+    "./color/_colorScheme": {
+      "source": "./exports/color/_colorScheme.ts",
+      "import": "./dist/color/_colorScheme.js"
+    },
+    "./constants": {
+      "source": "./exports/constants.ts",
+      "import": "./dist/constants.js"
+    },
+    "./container": {
+      "source": "./exports/container.ts",
+      "import": "./dist/container.js"
+    },
+    "./corner": {
+      "source": "./exports/corner.ts",
+      "import": "./dist/corner.js"
+    },
+    "./focus": {
+      "source": "./exports/focus.ts",
+      "import": "./dist/focus.js"
+    },
+    "./font": {
+      "source": "./exports/font.ts",
+      "import": "./dist/font.js"
+    },
+    "./input": {
+      "source": "./exports/input.ts",
+      "import": "./dist/input.js"
+    },
+    "./radius": {
+      "source": "./exports/radius.ts",
+      "import": "./dist/radius.js"
+    },
+    "./selectable": {
+      "source": "./exports/selectable.ts",
+      "import": "./dist/selectable.js"
+    },
+    "./shadow": {
+      "source": "./exports/shadow.ts",
+      "import": "./dist/shadow.js"
+    },
+    "./space": {
+      "source": "./exports/space.ts",
+      "import": "./dist/space.js"
+    },
+    "./system": {
+      "source": "./exports/system.ts",
+      "import": "./dist/system.js"
+    },
+    "./lib": {
+      "source": "./exports/lib.ts",
+      "import": "./dist/lib.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "run-s clean",
+    "build": "run-s pkg:build",
+    "clean": "rimraf dist",
+    "figma:deploy": "tsx scripts/figma/deploy.ts",
+    "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
+    "prepack": "run-s build",
+    "pkg:build": "pkg build --strict",
+    "test": "vitest --passWithNoTests",
+    "tokens-studio:generate": "tsx scripts/tokens-studio/generate.ts",
+    "typecheck": "tsc --build"
+  },
+  "browserslist": "extends @sanity/browserslist-config",
+  "dependencies": {
+    "@sanity/color": "^3.0.6",
+    "colorjs.io": "^0.6.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@sanity/browserslist-config": "^1.0.5",
+    "@sanity/pkg-utils": "^10.4.4",
+    "@sanity/tsconfig": "^2.1.0",
+    "@types/node": "^24.10.13",
+    "dotenv-flow": "^4.1.0",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "import": "./dist/index.js"
+      },
+      "./avatar": {
+        "import": "./dist/avatar.js"
+      },
+      "./border": {
+        "import": "./dist/border.js"
+      },
+      "./card": {
+        "import": "./dist/card.js"
+      },
+      "./button": {
+        "import": "./dist/button.js"
+      },
+      "./button/_buttonMode": {
+        "import": "./dist/button/_buttonMode.js"
+      },
+      "./color": {
+        "import": "./dist/color.js"
+      },
+      "./color/_cardTone": {
+        "import": "./dist/color/_cardTone.js"
+      },
+      "./color/_colorScheme": {
+        "import": "./dist/color/_colorScheme.js"
+      },
+      "./color/palette": {
+        "import": "./dist/color/palette.js"
+      },
+      "./constants": {
+        "import": "./dist/constants.js"
+      },
+      "./container": {
+        "import": "./dist/container.js"
+      },
+      "./corner": {
+        "import": "./dist/corner.js"
+      },
+      "./focus": {
+        "import": "./dist/focus.js"
+      },
+      "./font": {
+        "import": "./dist/font.js"
+      },
+      "./input": {
+        "import": "./dist/input.js"
+      },
+      "./radius": {
+        "import": "./dist/radius.js"
+      },
+      "./selectable": {
+        "import": "./dist/selectable.js"
+      },
+      "./shadow": {
+        "import": "./dist/shadow.js"
+      },
+      "./space": {
+        "import": "./dist/space.js"
+      },
+      "./lib": {
+        "import": "./dist/lib.js"
+      },
+      "./system": {
+        "import": "./dist/system.js"
+      },
+      "./package.json": "./package.json"
+    }
+  }
+}

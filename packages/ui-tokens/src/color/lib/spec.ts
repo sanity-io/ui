@@ -1,12 +1,59 @@
-import type {ColorTokens, PartialTokens} from '../types'
+import type {AvatarColor, CardTone, CodeTokenKey, ColorVariant, ElementTone, Hue} from '../../types'
+import type {ColorSchemePair} from './_parseColorExprLiteral'
 
-/** @internal */
-export const defaultColor: PartialTokens<ColorTokens> = {
+export type AvatarsColorSpec = Record<
+  '*' | AvatarColor,
+  {
+    _hue?: Hue
+    bg?: ColorSchemePair
+    fg?: ColorSchemePair
+  }
+>
+
+export interface SanityElementColorSpec {
+  _hue?: Hue
+  bg?: {
+    0?: ColorSchemePair
+    4?: ColorSchemePair
+  }
+  border?: {
+    0?: ColorSchemePair
+    4?: ColorSchemePair
+  }
+  fg?: {
+    0?: ColorSchemePair
+    4?: ColorSchemePair
+  }
+}
+
+export interface SanityCardColorSpec {
+  _hue?: Hue
+  avatar?: AvatarsColorSpec
+  backdrop?: ColorSchemePair
+  code?: {
+    token?: Partial<Record<CodeTokenKey, ColorSchemePair>>
+  }
+  focusRing?: ColorSchemePair
+  link?: {
+    fg?: ColorSchemePair
+  }
+  shadow?: {
+    outline?: ColorSchemePair
+    umbra?: ColorSchemePair
+    penumbra?: ColorSchemePair
+    ambient?: ColorSchemePair
+  }
+  element?: Partial<
+    Record<ColorVariant, Partial<Record<'*' | ElementTone, SanityElementColorSpec>>>
+  >
+}
+
+type SanityColorSpec = Partial<Record<'*' | CardTone, SanityCardColorSpec>>
+
+export const colorSpec: SanityColorSpec = {
   '*': {
-    backdrop: ['gray-100/0.5', 'black/0.5'],
+    backdrop: ['200/0.5', 'black/0.5'],
     code: {
-      bg: ['50', '950'],
-      fg: ['700', '300'],
       token: {
         atrule: ['purple-600', 'purple-400'],
         attrName: ['green-600', 'green-400'],
@@ -18,7 +65,7 @@ export const defaultColor: PartialTokens<ColorTokens> = {
         char: ['yellow-600', 'yellow-400'],
         class: ['orange-600', 'orange-400'],
         className: ['cyan-600', 'cyan-400'],
-        comment: ['gray-400', 'gray-600'],
+        comment: ['600 60%', '400 60%'],
         constant: ['purple-600', 'purple-400'],
         deleted: ['red-600', 'red-400'],
         entity: ['red-600', 'red-400'],
@@ -30,11 +77,11 @@ export const defaultColor: PartialTokens<ColorTokens> = {
         keyword: ['magenta-600', 'magenta-400'],
         number: ['purple-600', 'purple-400'],
         operator: ['magenta-600', 'magenta-400'],
-        prolog: ['gray-600', 'gray-400'],
+        prolog: ['600', '400'],
         property: ['blue-600', 'blue-400'],
         pseudoClass: ['yellow-600', 'yellow-400'],
         pseudoElement: ['yellow-600', 'yellow-400'],
-        punctuation: ['gray-600', 'gray-400'],
+        punctuation: ['600', '400'],
         regex: ['blue-600', 'blue-400'],
         selector: ['red-600', 'red-400'],
         string: ['yellow-600', 'yellow-400'],
@@ -50,16 +97,12 @@ export const defaultColor: PartialTokens<ColorTokens> = {
       fg: ['blue-600', 'blue-400'],
     },
     shadow: {
-      outline: ['600/0.3', '500/0.4'],
-      umbra: ['600/0.1', 'black/0.2'],
-      penumbra: ['600/0.07', 'black/0.14'],
-      ambient: ['600/0.06', 'black/0.12'],
+      outline: ['600/0.4', '500/0.4'],
+      umbra: ['600/0.2', 'black/0.2'],
+      penumbra: ['600/0.14', 'black/0.14'],
+      ambient: ['600/0.12', 'black/0.12'],
     },
-    skeleton: {
-      from: ['200 70%', '800 35%'],
-      to: ['200 40%', '800 50%'],
-    },
-    variant: {
+    element: {
       tinted: {
         '*': {
           bg: {
@@ -68,12 +111,15 @@ export const defaultColor: PartialTokens<ColorTokens> = {
           },
           border: {
             0: ['200', '700 50%'],
-            4: ['300 75%', '500'],
+            4: ['400', '600 75%'],
           },
           fg: {
-            0: ['900', '100'],
-            4: ['700', '300'],
+            0: ['800', '200'],
+            4: ['800 70%', '200 70%'],
           },
+        },
+        'neutral': {
+          bg: {0: ['inherit', 'inherit']},
         },
         'primary': {
           _hue: 'blue',
@@ -103,22 +149,12 @@ export const defaultColor: PartialTokens<ColorTokens> = {
             4: ['600', '300'],
           },
           border: {
-            0: ['400', '200'],
-            4: ['500', '100'],
+            0: ['400', '500'],
+            4: ['300', '600'],
           },
           fg: {
-            0: ['white', 'black'],
+            0: ['50', '950'],
             4: ['200', '700'],
-          },
-        },
-        'default': {
-          bg: {
-            0: ['800', '200'],
-            4: ['black', 'white'],
-          },
-          border: {
-            0: ['700', '300'],
-            4: ['800', '200'],
           },
         },
         'primary': {
@@ -140,39 +176,69 @@ export const defaultColor: PartialTokens<ColorTokens> = {
     },
   },
   'transparent': {
-    variant: {
+    backdrop: ['100/0.5', 'black/0.5'],
+    element: {
       tinted: {
         '*': {
           bg: {
-            0: ['gray-50', 'black'],
+            0: ['50', 'black'],
             4: ['300 75%', '700 75%'],
           },
           border: {
             0: ['200', '800 75%'],
-            4: ['400', '700'],
+            4: ['300 75%', '700'],
           },
           fg: {
             0: ['black', '100'],
-            4: ['700', '400'],
+            4: ['800 70%', '200 70%'],
+          },
+        },
+      },
+      solid: {
+        default: {
+          bg: {
+            0: ['800', '200'],
+            4: ['black', 'white'],
+          },
+          border: {
+            0: ['700', '300'],
+            4: ['600', '400'],
+          },
+          fg: {
+            0: ['white', 'black'],
+            4: ['200', '700'],
           },
         },
       },
     },
   },
   'default': {
-    variant: {
+    backdrop: ['100/0.5', 'black/0.5'],
+    element: {
       tinted: {
         '*': {
           bg: {
             0: ['white', '950'],
-            4: ['300 75%', '700'],
+            4: ['200', '700'],
           },
           border: {
-            0: ['100', '800 75%'],
-            4: ['300', '700'],
+            0: ['200 75%', '800 75%'],
+            4: ['400 75%', '400 75%'],
           },
           fg: {
-            0: ['black', 'white'],
+            0: ['900', '100'],
+            4: ['700 80%', '300 80%'],
+          },
+        },
+      },
+      solid: {
+        default: {
+          bg: {
+            0: ['800', '200'],
+            4: ['black', 'white'],
+          },
+          border: {
+            0: ['700', '300'],
             4: ['600', '400'],
           },
         },

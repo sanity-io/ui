@@ -1,12 +1,37 @@
-import {HUES, TINTS} from './constants'
-import type {ColorToken, Hue, Tint} from './types'
+import {
+  COLOR_HUES,
+  COLOR_TINTS,
+  type ColorHueKey as Hue,
+  type ColorTintKey as Tint,
+} from '@sanity/color'
+
+/** @internal */
+export type ColorExprLiteralOpacityValue = `0` | `0.${number}` | `1`
+
+/** @internal */
+export type ColorExprLiteral =
+  | `inherit`
+  | `black`
+  | `black/${ColorExprLiteralOpacityValue}`
+  | `black ${number}%`
+  | `white`
+  | `white/${ColorExprLiteralOpacityValue}`
+  | `white ${number}%`
+  | `${Hue}-${Tint}`
+  | `${Hue}-${Tint}/${ColorExprLiteralOpacityValue}`
+  | `${Hue}-${Tint} ${number}%`
+  | `${Tint}`
+  | `${Tint}/${ColorExprLiteralOpacityValue}`
+  | `${Tint} ${number}%`
+
+export type ColorSchemePair = [ColorExprLiteral, ColorExprLiteral]
 
 const RE_PERCENTAGE = /^([0-9]+)%/
 const RE_OPACITY = /^(1|0\.[0-9]+)?/
 
 /** @internal */
-export interface ColorNode {
-  type: 'color'
+export interface ColorKeywordExpr {
+  type: 'keyword'
   name: 'black' | 'white'
   /** Between 0 and 1 */
   opacity: number
@@ -15,7 +40,7 @@ export interface ColorNode {
 }
 
 /** @internal */
-export interface ColorTintNode {
+export interface ColorTintExpr {
   type: 'tint'
   hue: Hue
   tint: Tint
@@ -26,15 +51,18 @@ export interface ColorTintNode {
 }
 
 /** @internal */
-export interface ColorInheritNode {
+export interface ColorInheritExpr {
   type: 'inherit'
 }
 
 /** @internal */
-export type TokenizeColorResult = ColorNode | ColorTintNode | ColorInheritNode
+export type ColorExpr = ColorKeywordExpr | ColorTintExpr | ColorInheritExpr
 
 /** @internal */
-export function _parseColorToken(str: ColorToken, options: {defaultHue: Hue}): TokenizeColorResult {
+export function _parseColorExprLiteral(
+  str: ColorExprLiteral,
+  options: {defaultHue: Hue},
+): ColorExpr {
   const {defaultHue} = options
 
   let cursor = 0
@@ -55,21 +83,21 @@ export function _parseColorToken(str: ColorToken, options: {defaultHue: Hue}): T
     return str[cursor]
   }
 
-  function parseColorNode(): ColorNode | ColorTintNode | ColorInheritNode {
+  function parseColorNode(): ColorKeywordExpr | ColorTintExpr | ColorInheritExpr {
     ignoreWhitespace()
 
     let v = _consume('black') || _consume('white')
 
     if (v) {
       return {
-        type: 'color',
+        type: 'keyword',
         name: v as 'black' | 'white',
         opacity: parseOpacity() ?? 1,
         mix: parseMix() ?? 1,
       }
     }
 
-    for (const hue of HUES) {
+    for (const hue of COLOR_HUES) {
       v = _consume(String(hue))
 
       if (v) {
@@ -119,20 +147,20 @@ export function _parseColorToken(str: ColorToken, options: {defaultHue: Hue}): T
   function parseTint() {
     ignoreWhitespace()
 
-    let v = Number(str.slice(cursor, cursor + 3)) as Tint
+    let v = str.slice(cursor, cursor + 3)
 
-    if (TINTS.includes(v)) {
+    if (COLOR_TINTS.includes(v as Tint)) {
       cursor += 3
 
-      return v
+      return v as Tint
     }
 
-    v = Number(str.slice(cursor, cursor + 2)) as Tint
+    v = str.slice(cursor, cursor + 2)
 
-    if (TINTS.includes(v)) {
+    if (COLOR_TINTS.includes(v as Tint)) {
       cursor += 2
 
-      return v
+      return v as Tint
     }
 
     return undefined
@@ -143,7 +171,7 @@ export function _parseColorToken(str: ColorToken, options: {defaultHue: Hue}): T
 
     const match = RE_PERCENTAGE.exec(str.slice(cursor))
 
-    if (match) {
+    if (match?.[0] && match?.[1]) {
       cursor += match[0].length
 
       return parseFloat(match[1]) / 100
@@ -160,7 +188,7 @@ export function _parseColorToken(str: ColorToken, options: {defaultHue: Hue}): T
 
       const match = RE_OPACITY.exec(str.slice(cursor))
 
-      if (match) {
+      if (match?.[0] && match?.[1]) {
         cursor += match[0].length
 
         return parseFloat(match[1])

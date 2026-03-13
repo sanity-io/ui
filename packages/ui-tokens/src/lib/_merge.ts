@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export function merge<T extends Record<string, any>>(...records: (T | undefined)[]): T {
-  return (records.filter(Boolean) as T[]).reduce(_merge, {} as T)
+export function _merge<T extends Record<string, any>>(...records: (T | undefined)[]): T {
+  return (records.filter(Boolean) as T[]).reduce(mergeInner, {} as T)
 }
 
-function _merge<T extends Record<string, any>>(acc: T, source: T): T {
+function mergeInner<T extends Record<string, any>>(acc: T, source: T): T {
   for (const key of Object.keys(source)) {
     const prevValue = acc[key]
     const nextValue = source[key]
 
     if (isRecord(prevValue) && isRecord(nextValue)) {
-      ;(acc as any)[key] = merge(prevValue, nextValue)
+      ;(acc as any)[key] = _merge(prevValue, nextValue)
     } else {
       ;(acc as any)[key] = nextValue
     }
