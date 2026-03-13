@@ -1,4 +1,4 @@
-import {SetStateAction, useCallback, useRef, useState} from 'react'
+import {SetStateAction, useCallback, useEffect, useRef, useState} from 'react'
 
 /**
  * @beta
@@ -22,6 +22,14 @@ export function useDelayedState<S>(
 
     if (!delay) return action()
     delayedAction.current = setTimeout(action, delay)
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      if (delayedAction.current) {
+        clearTimeout(delayedAction.current)
+      }
+    }
   }, [])
 
   return [state, onStateChange]
