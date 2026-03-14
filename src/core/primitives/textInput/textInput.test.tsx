@@ -21,13 +21,13 @@ describe('primitives/textInput', () => {
   })
 
   it('should support `space` and `gap` with the same behavior', () => {
-    render(<TextInput icon={() => null} space={2} />, {strict: false})
+    render(<TextInput icon={() => null} space={2} />)
 
     expect(mockedResponsiveInputPaddingStyle).toHaveBeenCalledWith(
       expect.objectContaining({$space: [2]}),
     )
 
-    render(<TextInput gap={2} icon={() => null} />, {strict: false})
+    render(<TextInput gap={2} icon={() => null} />)
 
     expect(mockedResponsiveInputPaddingStyle).toHaveBeenCalledWith(
       expect.objectContaining({$space: [2]}),
@@ -35,7 +35,7 @@ describe('primitives/textInput', () => {
   })
 
   it('should prefer `gap` over `space` when both are provided', () => {
-    render(<TextInput gap={3} icon={() => null} space={1} />, {strict: false})
+    render(<TextInput gap={3} icon={() => null} space={1} />)
 
     expect(mockedResponsiveInputPaddingStyle).toHaveBeenCalledWith(
       expect.objectContaining({$space: [3]}),

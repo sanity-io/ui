@@ -29,7 +29,6 @@ describe('components/tabList', () => {
         <Tab aria-controls="tab-panel-a" id="tab-a" label="Tab A" />
         <Tab aria-controls="tab-panel-b" id="tab-b" label="Tab B" />
       </TabList>,
-      {strict: false},
     )
   }
 

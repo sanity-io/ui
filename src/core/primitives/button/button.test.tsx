@@ -59,21 +59,21 @@ describe('atoms/button', () => {
   })
 
   it('should support `space`', () => {
-    render(<Button icon={AddIcon} space={17} text="Button text" />, {strict: false})
+    render(<Button icon={AddIcon} space={17} text="Button text" />)
 
     const propsList = mockedFlex.mock.calls.map(([props]) => props)
     expect(propsList).toContainEqual(expect.objectContaining({gap: [17]}))
   })
 
   it('should support `gap`', () => {
-    render(<Button gap={18} icon={AddIcon} text="Button text" />, {strict: false})
+    render(<Button gap={18} icon={AddIcon} text="Button text" />)
 
     const propsList = mockedFlex.mock.calls.map(([props]) => props)
     expect(propsList).toContainEqual(expect.objectContaining({gap: [18]}))
   })
 
   it('should prefer `gap` over `space` when both are provided', () => {
-    render(<Button gap={19} icon={AddIcon} space={20} text="Button text" />, {strict: false})
+    render(<Button gap={19} icon={AddIcon} space={20} text="Button text" />)
 
     const propsList = mockedFlex.mock.calls.map(([props]) => props)
     expect(propsList).toContainEqual(expect.objectContaining({gap: [19]}))

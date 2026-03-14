@@ -18,7 +18,7 @@ const meta: Meta<typeof Breadcrumbs> = {
       <Text key="item">Item</Text>,
     ],
   },
-  argTypes: {space: getSpaceControls()},
+  argTypes: {gap: getSpaceControls(), space: getSpaceControls()},
   component: Breadcrumbs,
   tags: ['autodocs'],
 }

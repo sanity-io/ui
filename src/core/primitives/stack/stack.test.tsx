@@ -25,7 +25,6 @@ describe('primitives/stack', () => {
         <span>One</span>
         <span>Two</span>
       </Stack>,
-      {strict: false},
     )
 
     expect(mockedResponsiveStackSpaceStyle).toHaveBeenCalledWith(
@@ -36,7 +35,6 @@ describe('primitives/stack', () => {
         <span>One</span>
         <span>Two</span>
       </Stack>,
-      {strict: false},
     )
 
     expect(mockedResponsiveStackSpaceStyle).toHaveBeenCalledWith(
@@ -50,7 +48,6 @@ describe('primitives/stack', () => {
         <span>One</span>
         <span>Two</span>
       </Stack>,
-      {strict: false},
     )
     expect(mockedResponsiveStackSpaceStyle).toHaveBeenCalledWith(
       expect.objectContaining({$space: [3]}),

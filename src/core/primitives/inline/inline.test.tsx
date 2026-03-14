@@ -26,7 +26,6 @@ describe('primitives/inline', () => {
         <span>One</span>
         <span>Two</span>
       </Inline>,
-      {strict: false},
     )
     expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
 
@@ -35,7 +34,6 @@ describe('primitives/inline', () => {
         <span>One</span>
         <span>Two</span>
       </Inline>,
-      {strict: false},
     )
     expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
   })
@@ -46,7 +44,6 @@ describe('primitives/inline', () => {
         <span>One</span>
         <span>Two</span>
       </Inline>,
-      {strict: false},
     )
     expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [3]}))
   })

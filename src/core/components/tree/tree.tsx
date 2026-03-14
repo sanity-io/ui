@@ -18,6 +18,10 @@ import {TreeContextValue, TreeState} from './types'
  * @beta
  */
 export interface TreeProps {
+  gap?: number | number[]
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   space?: number | number[]
 }
 
@@ -30,7 +34,8 @@ export const Tree = forwardRef(function Tree(
     Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ): React.JSX.Element {
-  const {children, space = 1, onFocus, ...restProps} = props
+  const {children, gap, space = 1, onFocus, ...restProps} = props
+  const spacing = gap === undefined ? space : gap
   const ref = useRef<HTMLDivElement | null>(null)
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const focusedElementRef = useRef(focusedElement)
@@ -89,10 +94,11 @@ export const Tree = forwardRef(function Tree(
       registerItem,
       setExpanded,
       setFocusedElement,
-      space,
+      gap: spacing,
+      space: spacing,
       state,
     }),
-    [focusedElement, itemElements, path, registerItem, setExpanded, space, state],
+    [focusedElement, itemElements, path, registerItem, setExpanded, spacing, state],
   )
 
   const handleKeyDown = useCallback(
@@ -221,7 +227,7 @@ export const Tree = forwardRef(function Tree(
         onKeyDown={handleKeyDown}
         ref={ref}
         role="tree"
-        space={space}
+        gap={spacing}
       >
         {children}
       </Stack>

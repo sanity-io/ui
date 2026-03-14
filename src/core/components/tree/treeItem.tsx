@@ -26,6 +26,10 @@ export interface TreeItemProps {
    */
   linkAs?: BoxProps['as']
   padding?: number | number[]
+  gap?: number | number[]
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   space?: number | number[]
   text?: React.ReactNode
   weight?: ThemeFontWeightKey
@@ -60,11 +64,13 @@ export function TreeItem(
     onClick,
     padding = 2,
     selected = false,
+    gap,
     space = 2,
     text,
     weight,
     ...restProps
   } = props
+  const spacing = gap === undefined ? space : gap
   const [rootElement, _setRootElement] = useState<HTMLLIElement | null>(null)
   /**
    * The startTransition wrapper here is to avoid an issue when on React 18 where this error can happen:
@@ -133,7 +139,7 @@ export function TreeItem(
   const content = (
     <Flex padding={padding}>
       <Box
-        marginRight={space}
+        marginRight={spacing}
         style={{
           visibility: IconComponent || children ? 'visible' : 'hidden',
           pointerEvents: 'none',

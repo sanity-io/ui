@@ -14,8 +14,12 @@ import {selectStyle} from './styles'
  */
 export interface SelectProps {
   fontSize?: number | number[]
+  gap?: number | number[]
   padding?: number | number[]
   radius?: Radius | Radius[]
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   space?: number | number[]
   customValidity?: string
 }
@@ -45,12 +49,14 @@ export const Select = forwardRef(function Select(
     customValidity,
     disabled,
     fontSize = 2,
+    gap,
     padding = 3,
     radius = 2,
     readOnly,
     space = 3,
     ...restProps
   } = props
+  const spacing = gap === undefined ? space : gap
 
   const ref = useRef<HTMLSelectElement | null>(null)
 
@@ -70,7 +76,7 @@ export const Select = forwardRef(function Select(
         $fontSize={_getArrayProp(fontSize)}
         $padding={_getArrayProp(padding)}
         $radius={_getArrayProp(radius)}
-        $space={_getArrayProp(space)}
+        $space={_getArrayProp(spacing)}
         disabled={disabled || readOnly}
         ref={ref}
       >

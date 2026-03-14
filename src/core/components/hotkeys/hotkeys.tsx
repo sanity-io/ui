@@ -10,8 +10,12 @@ import {Radius} from '../../types'
  */
 export interface HotkeysProps {
   fontSize?: number | number[]
+  gap?: number | number[]
   padding?: number | number[]
   radius?: Radius | Radius[]
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   space?: number | number[]
   keys?: string[]
 }
@@ -40,8 +44,8 @@ export const Hotkeys = forwardRef(function Hotkeys(
   props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
   ref: React.Ref<HTMLElement>,
 ) {
-  const {fontSize, keys, padding, radius, space: spaceProp = 0.5, ...restProps} = props
-  const space = _getArrayProp(spaceProp)
+  const {fontSize, gap, keys, padding, radius, space: spaceProp = 0.5, ...restProps} = props
+  const spacing = _getArrayProp(gap === undefined ? spaceProp : gap)
 
   if (!keys || keys.length === 0) {
     return <></>
@@ -49,7 +53,7 @@ export const Hotkeys = forwardRef(function Hotkeys(
 
   return (
     <StyledHotkeys data-ui="Hotkeys" {...restProps} ref={ref}>
-      <Inline as="span" space={space}>
+      <Inline as="span" gap={spacing}>
         {keys.map((key, i) => (
           <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
             {key}

@@ -31,6 +31,10 @@ export interface MenuGroupProps {
   padding?: number | number[]
   popover?: Omit<PopoverProps, 'content' | 'open'>
   radius?: Radius | Radius[]
+  gap?: number | number[]
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   space?: number | number[]
   text: React.ReactNode
   tone?: SelectableTone
@@ -53,11 +57,13 @@ export function MenuGroup(
     padding = 3,
     popover,
     radius = 2,
+    gap,
     space = 3,
     text,
     tone = 'default',
     ...restProps
   } = props
+  const spacing = gap === undefined ? space : gap
   const menu = useMenu()
   const {scheme} = useRootTheme()
   const {
@@ -193,7 +199,7 @@ export function MenuGroup(
         tabIndex={-1}
         type={as === 'button' ? 'button' : undefined}
       >
-        <Flex gap={space} padding={padding}>
+        <Flex gap={spacing} padding={padding}>
           {IconComponent && (
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}

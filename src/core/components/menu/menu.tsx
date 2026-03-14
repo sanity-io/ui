@@ -27,6 +27,10 @@ export interface MenuProps extends ResponsivePaddingProps {
   'originElement'?: HTMLElement | null
   'registerElement'?: (el: HTMLElement) => () => void
   'shouldFocus'?: 'first' | 'last' | null
+  'gap'?: number | number[]
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   'space'?: number | number[]
   'aria-labelledby'?: string
   'onBlurCapture'?: (event: FocusEvent) => void
@@ -61,9 +65,11 @@ export const Menu = forwardRef(function Menu(
     padding = 1,
     registerElement,
     shouldFocus: _shouldFocus,
+    gap,
     space = 1,
     ...restProps
   } = props
+  const spacing = gap === undefined ? space : gap
   const shouldFocus =
     _shouldFocus ?? ((props.focusFirst && 'first') || (props.focusLast && 'last') || null)
 
@@ -164,7 +170,7 @@ export const Menu = forwardRef(function Menu(
         role="menu"
         tabIndex={-1}
       >
-        <Stack space={space}>{children}</Stack>
+        <Stack gap={spacing}>{children}</Stack>
       </StyledMenu>
     </MenuContext.Provider>
   )
