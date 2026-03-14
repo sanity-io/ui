@@ -10,8 +10,14 @@ import {ResponsiveInlineSpaceStyleProps} from './types'
  * @public
  */
 export interface InlineProps extends Omit<BoxProps, 'display'> {
-  /** The spacing between children. */
+
+  /**
+   * The spacing between children.
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   space?: number | number[]
+   /** The spacing between children. */
+   gap?: number | number[]
 }
 
 const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
@@ -25,7 +31,8 @@ export const Inline = forwardRef(function Inline(
   props: InlineProps & React.HTMLProps<HTMLDivElement>,
   ref,
 ) {
-  const {as, children: childrenProp, space, ...restProps} = props
+  const {as, children: childrenProp, gap, space, ...restProps} = props
+  const spacing = gap === undefined ? space : gap
 
   const children = useMemo(
     () => Children.map(childrenProp, (child) => child && <div>{child}</div>),
@@ -36,7 +43,7 @@ export const Inline = forwardRef(function Inline(
     <StyledInline
       data-ui="Inline"
       {...restProps}
-      $space={_getArrayProp(space)}
+      $space={_getArrayProp(spacing)}
       forwardedAs={as}
       ref={ref as any}
     >
