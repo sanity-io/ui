@@ -10,14 +10,13 @@ import {ResponsiveInlineSpaceStyleProps} from './types'
  * @public
  */
 export interface InlineProps extends Omit<BoxProps, 'display'> {
-
   /**
    * The spacing between children.
    * @deprecated Use `gap` instead. `space` will be removed in v4.
    */
   space?: number | number[]
-   /** The spacing between children. */
-   gap?: number | number[]
+  /** The spacing between children. */
+  gap?: number | number[]
 }
 
 const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
