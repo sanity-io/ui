@@ -37,8 +37,6 @@ export const Grid = forwardRef(function Grid(
     children,
     ...restProps
   } = props
-  const resolvedColumns = gridTemplateColumns === undefined ? columns : gridTemplateColumns
-  const resolvedRows = gridTemplateRows === undefined ? rows : gridTemplateRows
 
   return (
     <StyledGrid
@@ -48,11 +46,11 @@ export const Grid = forwardRef(function Grid(
       $autoRows={_getArrayProp(autoRows)}
       $autoCols={_getArrayProp(autoCols)}
       $autoFlow={_getArrayProp(autoFlow)}
-      $columns={_getArrayProp(resolvedColumns)}
+      $columns={_getArrayProp(gridTemplateColumns === undefined ? columns : gridTemplateColumns)}
       $gap={_getArrayProp(gap)}
       $gapX={_getArrayProp(gapX)}
       $gapY={_getArrayProp(gapY)}
-      $rows={_getArrayProp(resolvedRows)}
+      $rows={_getArrayProp(gridTemplateRows === undefined ? rows : gridTemplateRows)}
       forwardedAs={as}
       ref={ref}
     >

@@ -176,7 +176,7 @@ export const MultipleStyles: Story = {
                 {/* Small button */}
                 <Button
                   {...props}
-                  gap={2}
+                  space={2}
                   padding={2}
                   tone={row}
                   mode={column}
@@ -202,7 +202,7 @@ export const MultipleStyles: Story = {
                 {/* Small button */}
                 <Button
                   {...props}
-                  gap={2}
+                  space={2}
                   padding={2}
                   tone={row}
                   mode={column}

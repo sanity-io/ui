@@ -4,10 +4,6 @@ import {styled} from 'styled-components'
 import {Inline, InlineProps} from '../../primitives'
 
 /**
- * Inherits layout spacing props from `InlineProps`:
- * - `gap` (preferred)
- * - `space` (deprecated, will be removed in v4)
- *
  * @public
  */
 export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
