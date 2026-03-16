@@ -3,8 +3,8 @@
 import {render} from '../../../../test'
 import {Box} from '../../primitives'
 import {TreeContext} from './treeContext'
-import {TreeContextValue, TreeState} from './types'
 import {TreeItem} from './treeItem'
+import {TreeContextValue, TreeState} from './types'
 
 jest.mock('../../primitives', () => {
   const actual = jest.requireActual('../../primitives')
