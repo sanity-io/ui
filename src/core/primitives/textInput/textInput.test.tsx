@@ -27,6 +27,7 @@ describe('primitives/textInput', () => {
       expect.objectContaining({$space: [2]}),
     )
 
+    mockedResponsiveInputPaddingStyle.mockClear()
     render(<TextInput gap={2} icon={() => null} />)
 
     expect(mockedResponsiveInputPaddingStyle).toHaveBeenCalledWith(

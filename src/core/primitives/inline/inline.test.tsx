@@ -29,6 +29,7 @@ describe('primitives/inline', () => {
     )
     expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
 
+    mockedInlineSpaceStyle.mockClear()
     render(
       <Inline gap={2}>
         <span>One</span>

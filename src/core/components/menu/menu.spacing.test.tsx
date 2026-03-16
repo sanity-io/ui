@@ -39,6 +39,7 @@ describe('components/menu spacing', () => {
       expect.objectContaining({gap: 2}),
     )
 
+    mockedStack.mockClear()
     render(
       <Menu gap={2}>
         <div>Item</div>

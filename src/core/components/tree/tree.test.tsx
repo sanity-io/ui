@@ -31,6 +31,7 @@ describe('components/tree spacing', () => {
       expect.objectContaining({gap: 2}),
     )
 
+    mockedStack.mockClear()
     render(
       <Tree gap={2}>
         <TreeItem text="Item 1" />

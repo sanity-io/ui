@@ -35,6 +35,7 @@ describe('components/breadcrumbs spacing', () => {
       expect.objectContaining({paddingX: [2]}),
     )
 
+    mockedBox.mockClear()
     renderBreadcrumbs({gap: 2})
     expect(mockedBox.mock.calls.map(([props]) => props)).toContainEqual(
       expect.objectContaining({paddingX: [2]}),
