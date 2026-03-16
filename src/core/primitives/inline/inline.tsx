@@ -31,8 +31,8 @@ export const Inline = forwardRef(function Inline(
   props: InlineProps & React.HTMLProps<HTMLDivElement>,
   ref,
 ) {
-  const {as, children: childrenProp, gap, space, ...restProps} = props
-  const spacing = gap === undefined ? space : gap
+  const {as, children: childrenProp, gap, space: deprecated_space, ...restProps} = props
+  const spacing = gap === undefined ? deprecated_space : gap
 
   const children = useMemo(
     () => Children.map(childrenProp, (child) => child && <div>{child}</div>),

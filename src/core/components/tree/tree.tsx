@@ -34,8 +34,8 @@ export const Tree = forwardRef(function Tree(
     Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ): React.JSX.Element {
-  const {children, gap, space = 1, onFocus, ...restProps} = props
-  const spacing = gap === undefined ? space : gap
+  const {children, gap, space: deprecated_space = 1, onFocus, ...restProps} = props
+  const spacing = gap === undefined ? deprecated_space : gap
   const ref = useRef<HTMLDivElement | null>(null)
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const focusedElementRef = useRef(focusedElement)

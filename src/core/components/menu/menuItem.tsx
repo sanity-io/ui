@@ -67,12 +67,12 @@ export const MenuItem = forwardRef(function MenuItem(
     radius = 2,
     selected: selectedProp,
     gap,
-    space = 3,
+    space: deprecated_space = 3,
     text,
     tone = 'default',
     ...restProps
   } = props
-  const spacing = gap === undefined ? space : gap
+  const spacing = gap === undefined ? deprecated_space : gap
   const {scheme} = useRootTheme()
   const menu = useMenu()
   const {

@@ -89,7 +89,7 @@ export const Button = forwardRef(function Button(
     radius: radiusProp = 2,
     selected,
     gap,
-    space: spaceProp = 3,
+    space: deprecated_space = 3,
     text,
     textAlign,
     textWeight,
@@ -110,7 +110,7 @@ export const Button = forwardRef(function Button(
   const paddingLeft = _getArrayProp(paddingLeftProp)
   const paddingRight = _getArrayProp(paddingRightProp)
   const radius = _getArrayProp(radiusProp)
-  const spacing = _getArrayProp(gap === undefined ? spaceProp : gap)
+  const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
 
   const boxProps = useMemo(
     () => ({

@@ -44,8 +44,8 @@ export const Hotkeys = forwardRef(function Hotkeys(
   props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
   ref: React.Ref<HTMLElement>,
 ) {
-  const {fontSize, gap, keys, padding, radius, space: spaceProp = 0.5, ...restProps} = props
-  const spacing = _getArrayProp(gap === undefined ? spaceProp : gap)
+  const {fontSize, gap, keys, padding, radius, space: deprecated_space = 0.5, ...restProps} = props
+  const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
 
   if (!keys || keys.length === 0) {
     return <></>

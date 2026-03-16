@@ -53,10 +53,10 @@ export const Select = forwardRef(function Select(
     padding = 3,
     radius = 2,
     readOnly,
-    space = 3,
+    space: deprecated_space = 3,
     ...restProps
   } = props
-  const spacing = gap === undefined ? space : gap
+  const spacing = gap === undefined ? deprecated_space : gap
 
   const ref = useRef<HTMLSelectElement | null>(null)
 

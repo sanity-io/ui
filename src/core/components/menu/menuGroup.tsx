@@ -58,12 +58,12 @@ export function MenuGroup(
     popover,
     radius = 2,
     gap,
-    space = 3,
+    space: deprecated_space = 3,
     text,
     tone = 'default',
     ...restProps
   } = props
-  const spacing = gap === undefined ? space : gap
+  const spacing = gap === undefined ? deprecated_space : gap
   const menu = useMenu()
   const {scheme} = useRootTheme()
   const {

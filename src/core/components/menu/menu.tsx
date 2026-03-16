@@ -66,10 +66,10 @@ export const Menu = forwardRef(function Menu(
     registerElement,
     shouldFocus: _shouldFocus,
     gap,
-    space = 1,
+    space: deprecated_space = 1,
     ...restProps
   } = props
-  const spacing = gap === undefined ? space : gap
+  const spacing = gap === undefined ? deprecated_space : gap
   const shouldFocus =
     _shouldFocus ?? ((props.focusFirst && 'first') || (props.focusLast && 'last') || null)
 

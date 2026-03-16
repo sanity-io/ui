@@ -65,12 +65,12 @@ export function TreeItem(
     padding = 2,
     selected = false,
     gap,
-    space = 2,
+    space: deprecated_space = 2,
     text,
     weight,
     ...restProps
   } = props
-  const spacing = gap === undefined ? space : gap
+  const spacing = gap === undefined ? deprecated_space : gap
   const [rootElement, _setRootElement] = useState<HTMLLIElement | null>(null)
   /**
    * The startTransition wrapper here is to avoid an issue when on React 18 where this error can happen:

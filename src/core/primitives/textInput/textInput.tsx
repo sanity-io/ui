@@ -174,7 +174,7 @@ export const TextInput = forwardRef(function TextInput(
     prefix,
     radius: radiusProp = 2,
     readOnly,
-    space: spaceProp = 3,
+    space: deprecated_space = 3,
     suffix,
     customValidity,
     type = 'text',
@@ -188,7 +188,7 @@ export const TextInput = forwardRef(function TextInput(
   const fontSize = _getArrayProp(fontSizeProp)
   const padding = _getArrayProp(paddingProp)
   const radius = _getArrayProp(radiusProp)
-  const space = _getArrayProp(gap === undefined ? spaceProp : gap)
+  const space = _getArrayProp(gap === undefined ? deprecated_space : gap)
 
   // Transient properties
   const $hasClearButton = Boolean(clearButton)

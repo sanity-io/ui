@@ -31,8 +31,8 @@ export const Stack = forwardRef(function Stack(
   props: StackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {as, gap, space, ...restProps} = props
-  const spacing = gap === undefined ? space : gap
+  const {as, gap, space: deprecated_space, ...restProps} = props
+  const spacing = gap === undefined ? deprecated_space : gap
 
   return (
     <StyledStack

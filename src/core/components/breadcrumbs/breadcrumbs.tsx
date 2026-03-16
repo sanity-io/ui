@@ -34,8 +34,8 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
   ref: React.ForwardedRef<HTMLOListElement>,
 ) {
-  const {children, gap, maxLength, separator, space: spaceRaw = 2, ...restProps} = props
-  const space = _getArrayProp(gap === undefined ? spaceRaw : gap)
+  const {children, gap, maxLength, separator, space: deprecated_space = 2, ...restProps} = props
+  const space = _getArrayProp(gap === undefined ? deprecated_space : gap)
   const [open, setOpen] = useState(false)
   const expandElementRef = useRef<HTMLButtonElement | null>(null)
   const popoverElementRef = useRef<HTMLDivElement | null>(null)
