@@ -47,6 +47,26 @@ describe('useDelayedState', () => {
     expect(result.current[0]).toBe(true)
   })
 
+  it('should clear pending timeout on unmount', () => {
+    jest.useFakeTimers()
+    const clearTimeoutSpy = jest.spyOn(global, 'clearTimeout')
+    const {result, unmount} = renderHook(() => useDelayedState(false))
+    const [, setState] = result.current
+
+    act(() => {
+      setState(true, 1000)
+    })
+
+    clearTimeoutSpy.mockClear()
+
+    // Unmount while the delayed update is still pending
+    unmount()
+
+    // clearTimeout should have been called during cleanup
+    expect(clearTimeoutSpy).toHaveBeenCalledTimes(1)
+    clearTimeoutSpy.mockRestore()
+  })
+
   it('should cancel update if the set state was called with a new state', () => {
     const {result} = renderHook(() => useDelayedState(false))
     const [, setState] = result.current
