@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.14](https://github.com/sanity-io/ui/compare/v3.1.13...v3.1.14) (2026-03-16)
+
+### Bug Fixes
+
+- **useDelayedState:** cancel timeouts on unmount ([#2181](https://github.com/sanity-io/ui/issues/2181)) ([ec8beba](https://github.com/sanity-io/ui/commit/ec8bebabd37d6ebf740e4695008205751f5c47b1))
+
 ## [3.1.13](https://github.com/sanity-io/ui/compare/v3.1.12...v3.1.13) (2026-02-25)
 
 ### Bug Fixes
