@@ -29,7 +29,11 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
    */
   loading?: boolean
   selected?: boolean
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   space?: number | number[]
+  gap?: number | number[]
   muted?: boolean
   text?: React.ReactNode
   textAlign?: ButtonTextAlign
@@ -84,7 +88,8 @@ export const Button = forwardRef(function Button(
     paddingRight: paddingRightProp,
     radius: radiusProp = 2,
     selected,
-    space: spaceProp = 3,
+    gap,
+    space: deprecated_space = 3,
     text,
     textAlign,
     textWeight,
@@ -105,7 +110,7 @@ export const Button = forwardRef(function Button(
   const paddingLeft = _getArrayProp(paddingLeftProp)
   const paddingRight = _getArrayProp(paddingRightProp)
   const radius = _getArrayProp(radiusProp)
-  const space = _getArrayProp(spaceProp)
+  const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
 
   const boxProps = useMemo(
     () => ({
@@ -143,7 +148,7 @@ export const Button = forwardRef(function Button(
 
       {(IconComponent || text || IconRightComponent) && (
         <Box as="span" {...boxProps}>
-          <Flex as="span" justify={justify} gap={space}>
+          <Flex as="span" justify={justify} gap={spacing}>
             {IconComponent && (
               <Text size={fontSize}>
                 {isValidElement(IconComponent) && IconComponent}

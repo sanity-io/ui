@@ -21,6 +21,7 @@ const meta: Meta<typeof Select> = {
     fontSize: getFontSizeControls('text'),
     padding: getSpaceControls(),
     radius: getRadiusControls(),
+    gap: getSpaceControls(),
     space: getSpaceControls(),
   },
   component: Select,

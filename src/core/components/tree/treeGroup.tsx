@@ -18,9 +18,9 @@ export function TreeGroup(
       data-ui="TreeGroup"
       {...restProps}
       hidden={!expanded}
-      marginTop={tree.space}
+      marginTop={tree.gap}
       role="group"
-      space={tree.space}
+      gap={tree.gap}
     >
       {children}
     </Stack>

@@ -36,6 +36,7 @@ const meta: Meta<typeof Stack> = {
     marginX: getSpaceControls(),
     height: getHeightControls(),
     overflow: getOverflowControls(),
+    gap: getSpaceControls(),
     space: getSpaceControls(),
   },
   tags: ['autodocs'],

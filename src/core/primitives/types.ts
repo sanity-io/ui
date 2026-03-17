@@ -66,11 +66,20 @@ export interface ResponsiveGridProps {
   autoRows?: GridAutoRows | GridAutoRows[]
   autoCols?: GridAutoCols | GridAutoCols[]
   autoFlow?: GridAutoFlow | GridAutoFlow[]
+
+  /**
+   * @deprecated Use `gridTemplateColumns` instead. `columns` will be removed in v4.
+   */
   columns?: number | number[]
+  gridTemplateColumns?: number | number[]
   gap?: number | number[]
   gapX?: number | number[]
   gapY?: number | number[]
+  /**
+   * @deprecated Use `gridTemplateRows` instead. `rows` will be removed in v4.
+   */
   rows?: number | number[]
+  gridTemplateRows?: number | number[]
 }
 
 /**

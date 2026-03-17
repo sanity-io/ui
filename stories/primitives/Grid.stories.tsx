@@ -32,6 +32,10 @@ const meta: Meta<typeof Grid> = {
     height: getHeightControls(),
     overflow: getOverflowControls(),
     gap: getSpaceControls(),
+    columns: {control: {type: 'number', min: 1, max: 12}},
+    gridTemplateColumns: {control: {type: 'number', min: 1, max: 12}},
+    rows: {control: {type: 'number', min: 1, max: 12}},
+    gridTemplateRows: {control: {type: 'number', min: 1, max: 12}},
   },
   tags: ['autodocs'],
 }

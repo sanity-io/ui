@@ -28,6 +28,7 @@ const meta: Meta<typeof TabList> = {
     paddingTop: getSpaceControls(),
     paddingX: getSpaceControls(),
     paddingY: getSpaceControls(),
+    gap: getSpaceControls(),
     space: getSpaceControls(),
   },
   component: TabList,

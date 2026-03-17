@@ -2,11 +2,16 @@ import type {Meta, StoryObj} from '@storybook/react'
 
 import {Hotkeys} from '../../src/core/components'
 import {RADII} from '../constants'
+import {getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
 
 const meta: Meta<typeof Hotkeys> = {
   args: {
     keys: ['Ctrl', 'Shift', 'P'],
+  },
+  argTypes: {
+    gap: getSpaceControls(),
+    space: getSpaceControls(),
   },
   component: Hotkeys,
   tags: ['autodocs'],

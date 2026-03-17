@@ -22,8 +22,21 @@ export const Grid = forwardRef(function Grid(
   props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'rows'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {as, autoRows, autoCols, autoFlow, columns, gap, gapX, gapY, rows, children, ...restProps} =
-    props
+  const {
+    as,
+    autoRows,
+    autoCols,
+    autoFlow,
+    columns,
+    gridTemplateColumns,
+    gap,
+    gapX,
+    gapY,
+    rows,
+    gridTemplateRows,
+    children,
+    ...restProps
+  } = props
 
   return (
     <StyledGrid
@@ -33,11 +46,11 @@ export const Grid = forwardRef(function Grid(
       $autoRows={_getArrayProp(autoRows)}
       $autoCols={_getArrayProp(autoCols)}
       $autoFlow={_getArrayProp(autoFlow)}
-      $columns={_getArrayProp(columns)}
+      $columns={_getArrayProp(gridTemplateColumns === undefined ? columns : gridTemplateColumns)}
       $gap={_getArrayProp(gap)}
       $gapX={_getArrayProp(gapX)}
       $gapY={_getArrayProp(gapY)}
-      $rows={_getArrayProp(rows)}
+      $rows={_getArrayProp(gridTemplateRows === undefined ? rows : gridTemplateRows)}
       forwardedAs={as}
       ref={ref}
     >
