@@ -31,6 +31,7 @@ describe('primitives/select spacing', () => {
     )
     expect(mockedSelectInputStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
 
+    mockedSelectInputStyle.mockClear()
     render(
       <Select gap={2}>
         <option>Option A</option>

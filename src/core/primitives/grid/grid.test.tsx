@@ -28,6 +28,7 @@ describe('primitives/grid', () => {
     )
     expect(mockedResponsiveGridStyle).toHaveBeenCalledWith(expect.objectContaining({$columns: [2]}))
 
+    mockedResponsiveGridStyle.mockClear()
     render(
       <Grid gridTemplateColumns={2}>
         <div>A</div>
@@ -56,6 +57,7 @@ describe('primitives/grid', () => {
     )
     expect(mockedResponsiveGridStyle).toHaveBeenCalledWith(expect.objectContaining({$rows: [2]}))
 
+    mockedResponsiveGridStyle.mockClear()
     render(
       <Grid gridTemplateRows={2}>
         <div>A</div>

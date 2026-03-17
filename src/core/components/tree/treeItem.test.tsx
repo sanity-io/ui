@@ -49,6 +49,7 @@ describe('components/treeItem spacing', () => {
       expect.objectContaining({marginRight: 2}),
     )
 
+    mockedBox.mockClear()
     renderTreeItem({gap: 2})
     expect(mockedBox.mock.calls.map(([props]) => props)).toContainEqual(
       expect.objectContaining({marginRight: 2}),

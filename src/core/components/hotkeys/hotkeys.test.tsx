@@ -26,6 +26,7 @@ describe('components/hotkeys spacing', () => {
       expect.objectContaining({gap: [2]}),
     )
 
+    mockedInline.mockClear()
     render(<Hotkeys gap={2} keys={['Ctrl', 'S']} />)
     expect(mockedInline.mock.calls.map(([props]) => props)).toContainEqual(
       expect.objectContaining({gap: [2]}),

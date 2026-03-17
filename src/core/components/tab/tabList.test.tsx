@@ -36,6 +36,7 @@ describe('components/tabList', () => {
     renderTabList({space: 2})
     expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
 
+    mockedInlineSpaceStyle.mockClear()
     renderTabList({gap: 2})
     expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
   })

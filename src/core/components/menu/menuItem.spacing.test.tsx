@@ -43,6 +43,7 @@ describe('components/menuItem spacing', () => {
       expect.objectContaining({gap: 2}),
     )
 
+    mockedFlex.mockClear()
     renderMenuItem({gap: 2})
     expect(mockedFlex.mock.calls.map(([props]) => props)).toContainEqual(
       expect.objectContaining({gap: 2}),

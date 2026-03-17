@@ -30,6 +30,7 @@ describe('primitives/stack', () => {
     expect(mockedResponsiveStackSpaceStyle).toHaveBeenCalledWith(
       expect.objectContaining({$space: [2]}),
     )
+    mockedResponsiveStackSpaceStyle.mockClear()
     render(
       <Stack gap={2}>
         <span>One</span>
