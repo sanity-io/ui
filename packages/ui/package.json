@@ -1,5 +1,5 @@
 {
-  "name": "ui-poc",
+  "name": "ui",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,15 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.17.0",
+  "peerDependencies": {
+    "react": "^19.2",
+    "react-dom": "^19.2"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1"
+  },
   "devDependencies": {
-    "turbo": "^2.8.20"
+    "@types/react": "^19.2.14",
+    "vitest": "^4.1.1"
   }
 }
