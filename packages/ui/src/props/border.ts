@@ -1,4 +1,5 @@
 import { type PropDef } from "../types/PropDef";
+import { type Radius, RADIUS } from "../types/Radius";
 import { type Responsive } from "../types/Responsive";
 
 export type BorderProps = {
@@ -6,33 +7,39 @@ export type BorderProps = {
   borderTop?: Responsive<boolean>
   borderRight?: Responsive<boolean>
   borderBottom?: Responsive<boolean>
-  borderLeft?: Responsive<boolean>  
+  borderLeft?: Responsive<boolean>
+  radius?: Responsive<Radius>
 }
 
 export const borderProps: Record<string, PropDef> = {
   border: {
     type: 'boolean',
     className: 'border',
-    inverseClassName: 'border-none'
+    inverse: 'border-none'
   },
   borderTop: {
     type: 'boolean',
     className: 'border-top',
-    inverseClassName: 'border-top-none'
+    inverse: 'border-top-none'
   },
   borderRight: {
     type: 'boolean',
     className: 'border-right',
-    inverseClassName: 'border-right-none'
+    inverse: 'border-right-none'
   },
   borderBottom: {
     type: 'boolean',
     className: 'border-bottom',
-    inverseClassName: 'border-bottom-none'
+    inverse: 'border-bottom-none'
   },
   borderLeft: {
     type: 'boolean',
     className: 'border-left',
-    inverseClassName: 'border-left-none'
+    inverse: 'border-left-none'
   },
+  radius: {
+    type: 'union',
+    className: 'radius',
+    values: RADIUS
+  }
 }

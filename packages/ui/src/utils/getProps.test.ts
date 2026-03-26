@@ -4,13 +4,13 @@ import {getProps} from './getProps'
 import {layoutProps} from '../props/layout'
 
 describe('getProps', () => {
-  it('generates className based on an enum', () => {
+  it('generates className based on an union', () => {
     const result = getProps({padding: 1}, layoutProps)
     expect(result.className).toBe('sui-padding-1')
     expect(result.style).toEqual({})
   })
 
-  it('does not generate className based on enum if value is unsupported', () => {
+  it('does not generate className based on union if value is unsupported', () => {
     const result = getProps({padding: 10}, layoutProps)
     expect(result.className).toBe('')
     expect(result.style).toEqual({})
@@ -40,6 +40,12 @@ describe('getProps', () => {
     expect(result.style).toEqual({})
   })
 
+  it('generates className based on a number', () => {
+    const result = getProps({flexGrow: 1.5}, layoutProps)
+    expect(result.className).toBe('sui-flex-grow')
+    expect(result.style).toEqual({'--flex-grow': 1.5})
+  })
+
   it('generates multiple classNames', () => {
     const result = getProps({border: true, padding: 1}, layoutProps)
     expect(result.className).toBe('sui-border sui-padding-1')
@@ -53,7 +59,7 @@ describe('getProps', () => {
     expect(result.as).toEqual('div')
   })
 
-  it('generates responsive className based on enums', () => {
+  it('generates responsive className based on unions', () => {
     const result = getProps({padding: [1, 2, 3]}, layoutProps)
     expect(result.className).toBe('sui-padding-1 sui-padding-2-bp-1 sui-padding-3-bp-2')
     expect(result.style).toEqual({})

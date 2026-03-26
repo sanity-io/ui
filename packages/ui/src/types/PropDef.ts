@@ -1,22 +1,29 @@
 type BooleanPropDef = {
   type: 'boolean'
   className: string
-  inverseClassName: string
+  inverse: string
 }
 
-type EnumPropDef<T> = {
-  type: 'enum'
-  className: string
-  values: readonly T[]
-}
-
-type StringPropDef = {
-  type: 'string'
+type NumberPropDef = {
+  type: 'number'
   className: string
   variable: string
 }
 
+type StringPropDef = {
+  type: 'string'
+  className?: string
+  variable?: string
+}
+
+type UnionPropDef<T> = {
+  type: 'union'
+  className: string
+  values: readonly T[]
+}
+
 export type PropDef<T = any> =
   | BooleanPropDef
-  | EnumPropDef<T>
+  | NumberPropDef
   | StringPropDef
+  | UnionPropDef<T>

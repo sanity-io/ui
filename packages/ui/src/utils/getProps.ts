@@ -23,7 +23,7 @@ export function getProps<
   let style = props?.style || {}
 
   for (const key in props) {
-    if (!propDefs?.[key]) {
+    if (!propDefs?.[key] || !propDefs?.[key].className) {
       continue
     }
 
@@ -44,23 +44,23 @@ export function getProps<
 }
 
 function getClassName (prop: any, propDef: PropDef, bp?: number) {
-  if (propDef.type === 'enum' && propDef.values?.includes(prop)) {
+  if (propDef.type === 'union' && propDef.values?.includes(prop)) {
     return `${PREFIX}-${propDef.className}-${prop}${bp ? `-bp-${bp}` : ''}`
   }
 
-  if (propDef.type === 'string') {
+  if (propDef.type === 'string' || propDef.type === 'number') {
     return `${PREFIX}-${propDef.className}${bp ? `-bp-${bp}` : ''}`
   }
 
   if (propDef.type === 'boolean') {
-    return `${PREFIX}-${prop ? propDef.className : propDef.inverseClassName}${bp ? `-bp-${bp}` : ''}`
+    return `${PREFIX}-${prop ? propDef.className : propDef.inverse}${bp ? `-bp-${bp}` : ''}`
   }
 
   return ''
 }
 
 function getStyle (prop: any, propDef: PropDef, bp?: number) {
-  if (propDef.type === 'string') {
+  if (propDef.type === 'string' || propDef.type === 'number') {
     return {
       [`${propDef.variable}${bp ?  `-bp-${bp}` : ''}`]: prop
     }

@@ -1,29 +1,23 @@
 import React from 'react'
 import classNames from 'classnames';
 
-import { layoutProps, type LayoutProps } from '../props/layout';
+import { boxProps } from './box.props';
+import { type DisplayBlock } from '../types/Display';
+import { type Responsive } from '../types/Responsive';
+
 import { getProps } from '../utils/getProps';
+import { type LayoutProps } from '../props/layout';
 
-export const DISPLAY = ['block', 'inline-block', 'none'] as const
-export type Display = (typeof DISPLAY)[number]
-
-export type BoxProps<T extends React.ElementType> = LayoutProps & {
+export interface BoxProps<T extends React.ElementType> extends LayoutProps {
   as?: T
-  display?: Display
+  display?: Responsive<DisplayBlock>
 }
 
 export function Box<T extends React.ElementType = 'div'>(
-  props: BoxProps<T>
+  {display = 'block', ...props}: BoxProps<T>
   & Omit<React.ComponentPropsWithRef<T>, keyof BoxProps<T>>
 ) {
-  const { as, children, className, display = 'block', style, ...rest } = getProps(props, {
-    ...layoutProps,
-    display: {
-      type: 'enum',
-      className: 'display',
-      values: DISPLAY,
-    }
-  })
+  const {as, children, className, style, ...rest} = getProps({display, ...props}, boxProps)
   const Component = as || 'div'
 
   return (

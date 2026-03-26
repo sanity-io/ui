@@ -14,37 +14,37 @@ export type PaddingProps = {
 
 export const paddingProps: Record<string, PropDef<Space>> = {
   padding: {
-    type: 'enum',
+    type: 'union',
     className: 'padding',
     values: SPACE,
   },
   paddingX: {
-    type: 'enum',
+    type: 'union',
     className: 'padding-x',
     values: SPACE,
   },
   paddingY: {
-    type: 'enum',
+    type: 'union',
     className: 'padding-y',
     values: SPACE,
   },
   paddingTop: {
-    type: 'enum',
+    type: 'union',
     className: 'padding-t',
     values: SPACE,
   },
   paddingRight: {
-    type: 'enum',
+    type: 'union',
     className: 'padding-r',
     values: SPACE,
   },
   paddingBottom: {
-    type: 'enum',
+    type: 'union',
     className: 'padding-b',
     values: SPACE,
   },
   paddingLeft: {
-    type: 'enum',
+    type: 'union',
     className: 'padding-l',
     values: SPACE,
   },
