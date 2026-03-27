@@ -11,11 +11,6 @@ export function getArgTypes<T extends Record<string, PropDef>, P> (
   return Object.entries(propDefs).reduce<Record<string, unknown>>((obj, [key, value]) => {
     obj[key] = {
       type: value.type,
-      table: {
-        type: {
-          summary: value.type,
-        },
-      },
       ...(value.type === 'union' && {
         options: value.values,
         control: { type: 'select' },

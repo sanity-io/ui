@@ -3,7 +3,7 @@ import { type Responsive } from "../types/Responsive";
 import { type Space, SPACE } from "../types/Space";
 
 export interface PaddingProps {
-  /**CSS **padding** property */
+  /** CSS **padding** property */
   padding?: Responsive<Space>
   /** CSS **padding-left** and **padding-right** properties */
   paddingX?: Responsive<Space>

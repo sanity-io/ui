@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+const monorepoDirname = path.resolve(dirname, '../..');
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
@@ -16,6 +17,7 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
+      allowExternal: true,
       exclude: [
         ...coverageConfigDefaults.exclude,
         '**/assets/**',
@@ -23,7 +25,7 @@ export default defineConfig({
       ],
       include: [
         '**/stories/**',
-        '../../packages/ui/src/components/**'
+        path.join(monorepoDirname, 'packages/ui/src/components/**/*.{ts,tsx}'),
       ],
     },
     projects: [{
