@@ -1,5 +1,6 @@
 /// <reference types="vitest/config" />
 import { defineConfig } from 'vite';
+import { coverageConfigDefaults } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 
 // https://vite.dev/config/
@@ -13,6 +14,18 @@ const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(file
 export default defineConfig({
   plugins: [react()],
   test: {
+    coverage: {
+      provider: 'v8',
+      exclude: [
+        ...coverageConfigDefaults.exclude,
+        '**/assets/**',
+        '**/utils/**'
+      ],
+      include: [
+        '**/stories/**',
+        '../../packages/ui/src/components/**'
+      ],
+    },
     projects: [{
       extends: true,
       plugins: [

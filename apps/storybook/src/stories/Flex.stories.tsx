@@ -1,4 +1,5 @@
 import type { Meta, StoryObj} from '@storybook/react-vite'
+import { expect } from 'storybook/test'
 
 import {Flex} from '../../../../packages/ui/src/components/Flex'
 import { getArgTypes } from '../utils/getArgTypes'
@@ -25,4 +26,9 @@ export const Default: Story = {
   render: (props) => {
     return <Flex {...props} />
   },
+  play: async ({ canvas }) => {
+    await expect(
+      (await canvas.findByText('This is a Flex component.')).classList
+    ).toContain('sui-display-flex')
+  }
 }

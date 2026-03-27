@@ -1,4 +1,5 @@
 import type { Meta, StoryObj} from '@storybook/react-vite'
+import { expect } from 'storybook/test'
 
 import {Box} from '../../../../packages/ui/src/components/Box'
 import { getArgTypes } from '../utils/getArgTypes'
@@ -25,4 +26,9 @@ export const Default: Story = {
   render: (props) => {
     return <Box {...props} />
   },
+  play: async ({ canvas }) => {
+    await expect(
+      (await canvas.findByText('This is a Box component.')).classList
+    ).toContain('sui-display-block')
+  }
 }
