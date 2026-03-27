@@ -2,13 +2,20 @@ import { type PropDef } from "../types/PropDef";
 import { type Responsive } from "../types/Responsive";
 import { type Space, SPACE } from "../types/Space";
 
-export type PaddingProps = {
+export interface PaddingProps {
+  /** CSS **padding** property */
   padding?: Responsive<Space>
+  /** CSS **padding-left** and **padding-right** properties */
   paddingX?: Responsive<Space>
+  /** CSS **padding-top** and **padding-bottom** properties */
   paddingY?: Responsive<Space>
+  /** CSS **padding-top** property */
   paddingTop?: Responsive<Space>
+  /** CSS **padding-right** property */
   paddingRight?: Responsive<Space>
+  /** CSS **padding-bottom** property */
   paddingBottom?: Responsive<Space>
+  /** CSS **padding-left** property */
   paddingLeft?: Responsive<Space>
 }
 

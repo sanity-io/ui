@@ -9,10 +9,13 @@ import type { GapProps } from '../props/gap';
 import type { FlexParentProps } from '../props/flexParent';
 import { type Responsive } from '../types/Responsive';
 
-export type FlexProps<T extends React.ElementType> = LayoutProps & FlexParentProps & GapProps & {
+export interface FlexProps<T extends React.ElementType> extends FlexParentProps, GapProps, LayoutProps {
+  /** Element to render */
   as?: T
+  /** CSS **display** property */
   display?: Responsive<DisplayFlex>
 }
+
 
 export function Flex<T extends React.ElementType = 'div'>(
   {display = 'flex', ...props}: FlexProps<T>

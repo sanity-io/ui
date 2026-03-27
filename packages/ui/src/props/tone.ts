@@ -3,6 +3,7 @@ import { type Responsive } from "../types/Responsive";
 import { TONE, type Tone } from "../types/Tone";
 
 export type ToneProps = {
+  /** CSS **background-color** property */
   tone?: Responsive<Tone>
 }
 

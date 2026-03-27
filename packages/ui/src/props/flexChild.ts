@@ -2,8 +2,11 @@ import { type PropDef } from "../types/PropDef";
 import { type Responsive } from "../types/Responsive";
 
 export type FlexChildProps = {
+  /** CSS **flex-basis** property */
   flexBasis?: Responsive<string>
+  /** CSS **flex-grow** property */
   flexGrow?: Responsive<number>
+  /** CSS **flex-shrink** property */
   flexShrink?: Responsive<number>
 }
 

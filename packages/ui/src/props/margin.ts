@@ -3,12 +3,19 @@ import { type Responsive } from "../types/Responsive";
 import { type SpaceAuto, SPACE_AUTO } from "../types/Space";
 
 export type MarginProps = {
+  /** CSS **margin** property */
   margin?: Responsive<SpaceAuto>
+  /** CSS **margin-left** and **margin-right** properties */
   marginX?: Responsive<SpaceAuto>
+  /** CSS **margin-top** and **margin-bottom** properties */
   marginY?: Responsive<SpaceAuto>
+  /** CSS **margin-top** property */
   marginTop?: Responsive<SpaceAuto>
+  /** CSS **margin-right** property */
   marginRight?: Responsive<SpaceAuto>
+  /** CSS **margin-bottom** property */
   marginBottom?: Responsive<SpaceAuto>
+  /** CSS **margin-left** property */
   marginLeft?: Responsive<SpaceAuto>
 }
 

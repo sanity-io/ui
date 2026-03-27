@@ -2,8 +2,11 @@ import { type PropDef } from "../types/PropDef";
 import { type Responsive } from "../types/Responsive";
 
 export type HeightProps = {
+  /** CSS **height** property */
   height?: Responsive<string>
+  /** CSS **min-height** property */
   minHeight?: Responsive<string>
+  /** CSS **max-height** property */
   maxHeight?: Responsive<string>
 }
 

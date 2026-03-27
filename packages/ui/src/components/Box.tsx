@@ -9,7 +9,9 @@ import { getProps } from '../utils/getProps';
 import { type LayoutProps } from '../props/layout';
 
 export interface BoxProps<T extends React.ElementType> extends LayoutProps {
+  /** Element to render */
   as?: T
+  /** CSS **display** property */
   display?: Responsive<DisplayBlock>
 }
 

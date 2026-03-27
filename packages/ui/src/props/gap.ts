@@ -3,8 +3,11 @@ import { type Responsive } from "../types/Responsive";
 import { type Space, SPACE } from "../types/Space";
 
 export type GapProps = {
+  /** CSS **gap** property */
   gap?: Responsive<Space>
+  /** CSS **row-gap** property */
   gapX?: Responsive<Space>
+  /** CSS **column-gap** property */
   gapY?: Responsive<Space>
 }
 

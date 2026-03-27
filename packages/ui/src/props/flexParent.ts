@@ -12,9 +12,13 @@ import { type PropDef } from "../types/PropDef";
 import { type Responsive } from "../types/Responsive";
 
 export type FlexParentProps = {
+  /** CSS **align-items** property */
   alignItems?: Responsive<AlignItems>
+  /** CSS **justify-content** property */
   justifyContent?: Responsive<JustifyContent>
+  /** CSS **flex-direction** property */
   flexDirection?: Responsive<FlexDirection>
+  /** CSS **flex-wrap** property */
   flexWrap?: Responsive<FlexWrap>
 }
 

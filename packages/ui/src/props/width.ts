@@ -2,8 +2,11 @@ import { type PropDef } from "../types/PropDef";
 import { type Responsive } from "../types/Responsive";
  
 export type WidthProps = {
+  /** CSS **width** property */
   width?: Responsive<string>
+  /** CSS **min-width** property */
   minWidth?: Responsive<string>
+  /** CSS **max-width** property */
   maxWidth?: Responsive<string>
 }
 

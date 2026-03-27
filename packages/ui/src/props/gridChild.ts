@@ -2,11 +2,17 @@ import { type PropDef } from "../types/PropDef";
 import { type Responsive } from "../types/Responsive";
 
 export type GridChildProps = {
+  /** CSS **grid-column** property */
   gridColumn?: Responsive<string>
+  /** CSS **grid-column-start** property */
   gridColumnStart?: Responsive<string>
+  /** CSS **grid-column-end** property */
   gridColumnEnd?: Responsive<string>
+  /** CSS **grid-row** property */
   gridRow?: Responsive<string>
+  /** CSS **grid-row-start** property */
   gridRowStart?: Responsive<string>
+  /** CSS **grid-row-end** property */
   gridRowEnd?: Responsive<string>
 }
 

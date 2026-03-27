@@ -2,13 +2,16 @@ import type { Meta, StoryObj} from '@storybook/react-vite'
 
 import {Box} from '../../../../packages/ui/src/components/Box'
 import { getArgTypes } from '../utils/getArgTypes'
-import { layoutProps } from '../../../../packages/ui/src/props/layout'
+import { boxProps } from '../../../../packages/ui/src/components/box.props'
 
-const argTypes = getArgTypes(layoutProps)
+const argTypes = getArgTypes(boxProps)
 
 const meta: Meta<typeof Box> = {
+  title: 'Layout/Box',
   args: {
     children: 'This is a Box component.',
+    as: 'div',
+    display: 'block',
   },
   argTypes,
   component: Box,

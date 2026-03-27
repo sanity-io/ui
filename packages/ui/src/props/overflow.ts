@@ -3,8 +3,11 @@ import { type PropDef } from "../types/PropDef";
 import { type Responsive } from "../types/Responsive";
 
 export type OverflowProps = {
+  /** CSS **overflow** property */
   overflow?: Responsive<Overflow>
+  /** CSS **overflow-x** property */
   overflowX?: Responsive<Overflow>
+  /** CSS **overflow-y** property */
   overflowY?: Responsive<Overflow>
 }
 

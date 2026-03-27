@@ -4,11 +4,17 @@ import { type Responsive } from "../types/Responsive";
 import { type SpaceAuto, SPACE_AUTO } from "../types/Space";
 
 export type PositionProps = {
+  /** CSS **position** property */
   position?: Responsive<Position>
+  /** CSS **inset** property */
   inset?: Responsive<SpaceAuto>
+  /** CSS **top** property */
   top?: Responsive<SpaceAuto>
+  /** CSS **right** property */
   right?: Responsive<SpaceAuto>
+  /** CSS **bottom** property */
   bottom?: Responsive<SpaceAuto>
+  /** CSS **left** property */
   left?: Responsive<SpaceAuto>
 }
 

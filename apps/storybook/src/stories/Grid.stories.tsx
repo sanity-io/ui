@@ -1,0 +1,28 @@
+import type { Meta, StoryObj} from '@storybook/react-vite'
+
+import {Grid} from '../../../../packages/ui/src/components/Grid'
+import { getArgTypes } from '../utils/getArgTypes'
+import { gridProps } from '../../../../packages/ui/src/components/grid.props'
+
+const argTypes = getArgTypes(gridProps)
+
+const meta: Meta<typeof Grid> = {
+  title: 'Layout/Grid',
+  args: {
+    children: 'This is a Grid component.',
+    as: 'div',
+    display: 'grid',
+  },
+  argTypes,
+  component: Grid,
+  tags: ['autodocs'],
+}
+
+export default meta
+type Story = StoryObj<typeof Grid>
+
+export const Default: Story = {
+  render: (props) => {
+    return <Grid {...props} />
+  },
+}

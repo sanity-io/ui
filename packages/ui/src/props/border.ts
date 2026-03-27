@@ -3,11 +3,17 @@ import { type Radius, RADIUS } from "../types/Radius";
 import { type Responsive } from "../types/Responsive";
 
 export type BorderProps = {
+  /** CSS **border** property */
   border?: Responsive<boolean>
+  /** CSS **border-top** property */
   borderTop?: Responsive<boolean>
+  /** CSS **border-right** property */
   borderRight?: Responsive<boolean>
+  /** CSS **border-bottom** property */
   borderBottom?: Responsive<boolean>
+  /** CSS **border-left** property */
   borderLeft?: Responsive<boolean>
+  /** CSS **border-radius** property */
   radius?: Responsive<Radius>
 }
 

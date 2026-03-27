@@ -1,31 +1,33 @@
 import React from 'react'
 import classNames from 'classnames';
 
-import { type DisplayFlex } from '../types/Display';
-import { flexProps } from './flex.props';
+import { type DisplayGrid } from '../types/Display';
+import { gridProps } from './grid.props';
+import { type GapProps } from '../props/gap';
 import { getProps } from '../utils/getProps';
+import { type GridParentProps } from '../props/gridParent';
 import { type LayoutProps } from '../props/layout';
-import type { GapProps } from '../props/gap';
-import type { FlexParentProps } from '../props/flexParent';
 import { type Responsive } from '../types/Responsive';
 
-export type FlexProps<T extends React.ElementType> = LayoutProps & FlexParentProps & GapProps & {
+export interface FlexProps<T extends React.ElementType> extends GridParentProps, GapProps, LayoutProps {
+  /** Element to render */
   as?: T
-  display?: Responsive<DisplayFlex>
+  /** CSS **display** property */
+  display?: Responsive<DisplayGrid>
 }
 
-export function Flex<T extends React.ElementType = 'div'>(
-  props: FlexProps<T>
+export function Grid<T extends React.ElementType = 'div'>(
+  {display = 'grid', ...props}: FlexProps<T>
   & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>
 ) {
-  const { as, children, className, display = 'block', style, ...rest } = getProps(props, flexProps)
+  const { as, children, className, style, ...rest } = getProps({display, ...props}, gridProps)
   const Component = as || 'div'
 
   return (
     <Component
-      className={classNames('sui-Flex', className)}
+      className={classNames('sui-Grid', className)}
       style={style}
-      data-ui="Flex"
+      data-ui="Grid"
       {...rest}
     >
       {children}
