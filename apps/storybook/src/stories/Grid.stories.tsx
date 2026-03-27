@@ -17,6 +17,11 @@ const meta: Meta<typeof Grid> = {
   argTypes,
   component: Grid,
   tags: ['autodocs'],
+  parameters: {
+    a11y: {
+      context: '.sui-Grid'
+    }
+  }
 }
 
 export default meta

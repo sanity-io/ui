@@ -17,6 +17,11 @@ const meta: Meta<typeof Box> = {
   argTypes,
   component: Box,
   tags: ['autodocs'],
+  parameters: {
+    a11y: {
+      context: '.sui-Box'
+    }
+  }
 }
 
 export default meta

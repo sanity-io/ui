@@ -17,6 +17,11 @@ const meta: Meta<typeof Flex> = {
   argTypes,
   component: Flex,
   tags: ['autodocs'],
+  parameters: {
+    a11y: {
+      context: '.sui-Flex'
+    }
+  }
 }
 
 export default meta
