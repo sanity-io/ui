@@ -86,11 +86,35 @@ export interface ResponsiveGridProps {
  * @public
  */
 export interface ResponsiveGridItemProps {
+  gridColumn?: GridItemColumn | GridItemColumn[]
+  /**
+   * @deprecated Use `gridColumn` instead. `column` will be removed in v4.
+   */
   column?: GridItemColumn | GridItemColumn[]
+  gridColumnStart?: GridItemColumnStart | GridItemColumnStart[]
+  /**
+   * @deprecated Use `gridColumnStart` instead. `columnStart` will be removed in v4.
+   */
   columnStart?: GridItemColumnStart | GridItemColumnStart[]
+  gridColumnEnd?: GridItemColumnEnd | GridItemColumnEnd[]
+  /**
+   * @deprecated Use `gridColumnEnd` instead. `columnEnd` will be removed in v4.
+   */
   columnEnd?: GridItemColumnEnd | GridItemColumnEnd[]
+  gridRow?: GridItemRow | GridItemRow[]
+  /**
+   * @deprecated Use `gridRow` instead. `row` will be removed in v4.
+   */
   row?: GridItemRow | GridItemRow[]
+  gridRowStart?: GridItemRowStart | GridItemRowStart[]
+  /**
+   * @deprecated Use `gridRowStart` instead. `rowStart` will be removed in v4.
+   */
   rowStart?: GridItemRowStart | GridItemRowStart[]
+  gridRowEnd?: GridItemRowEnd | GridItemRowEnd[]
+  /**
+   * @deprecated Use `gridRowEnd` instead. `rowEnd` will be removed in v4.
+   */
   rowEnd?: GridItemRowEnd | GridItemRowEnd[]
 }
 
