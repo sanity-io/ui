@@ -2,14 +2,41 @@
   "name": "ui",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
+    "build": "pkg build --strict --clean --check",
+    "format": "prettier --write --cache --ignore-unknown .",
+    "ts:check": "tsc --noEmit",
+    "lint": "eslint . --ext .cjs,.js,.ts,.tsx",
     "test": "vitest run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.17.0",
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ]
+  },
+  "browserslist": "extends @sanity/browserslist-config",
+  "prettier": "@sanity/prettier-config",
   "peerDependencies": {
     "react": "^19.2",
     "react-dom": "^19.2"
@@ -18,7 +45,23 @@
     "classnames": "^2.5.1"
   },
   "devDependencies": {
+    "@sanity/tsconfig": "^1.0.0",
+    "@sanity/pkg-utils": "^9.2.3",
+    "@sanity/prettier-config": "^1.0.6",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
     "@types/react": "^19.2.14",
     "vitest": "^4.1.1"
+  },
+  "engines": {
+    "node": ">=20.19 <22 || >=22.12"
   }
 }
