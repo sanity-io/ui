@@ -8,6 +8,7 @@ import { type Responsive } from '../types/Responsive';
 import { getProps } from '../utils/getProps';
 import { type LayoutProps } from '../props/layout';
 
+/** @public */
 export interface BoxProps<T extends React.ElementType> extends LayoutProps {
   /** Element to render */
   as?: T
@@ -15,6 +16,7 @@ export interface BoxProps<T extends React.ElementType> extends LayoutProps {
   display?: Responsive<DisplayBlock>
 }
 
+/** @public */
 export function Box<T extends React.ElementType = 'div'>(
   {display = 'block', ...props}: BoxProps<T>
   & Omit<React.ComponentPropsWithRef<T>, keyof BoxProps<T>>
