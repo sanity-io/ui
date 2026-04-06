@@ -1,6 +1,6 @@
-import { type PropDef } from "../types/PropDef";
-import { type Responsive } from "../types/Responsive";
-import { type SpaceAuto, SPACE_AUTO } from "../types/Space";
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
+import {SPACE_AUTO, type SpaceAuto} from '../types/Space'
 
 export type MarginProps = {
   /** CSS **margin** property */

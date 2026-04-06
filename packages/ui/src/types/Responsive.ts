@@ -1,11 +1,10 @@
-export type Responsive<T> = 
+export type Responsive<T> =
   | T
   | []
-  | [T | undefined, ...(T | undefined)[]] & { length: 1 }
-  | [T | undefined, ...(T | undefined)[]] & { length: 2 }
-  | [T | undefined, ...(T | undefined)[]] & { length: 3 }
-  | [T | undefined, ...(T | undefined)[]] & { length: 4 }
-  | [T | undefined, ...(T | undefined)[]] & { length: 5 }
-  | [T | undefined, ...(T | undefined)[]] & { length: 6 }
-  | [T | undefined, ...(T | undefined)[]] & { length: 7 }
-  
+  | ([T | undefined, ...(T | undefined)[]] & {length: 1})
+  | ([T | undefined, ...(T | undefined)[]] & {length: 2})
+  | ([T | undefined, ...(T | undefined)[]] & {length: 3})
+  | ([T | undefined, ...(T | undefined)[]] & {length: 4})
+  | ([T | undefined, ...(T | undefined)[]] & {length: 5})
+  | ([T | undefined, ...(T | undefined)[]] & {length: 6})
+  | ([T | undefined, ...(T | undefined)[]] & {length: 7})

@@ -22,8 +22,4 @@ type UnionPropDef<T> = {
   values: readonly T[]
 }
 
-export type PropDef<T = any> =
-  | BooleanPropDef
-  | NumberPropDef
-  | StringPropDef
-  | UnionPropDef<T>
+export type PropDef<T = any> = BooleanPropDef | NumberPropDef | StringPropDef | UnionPropDef<T>

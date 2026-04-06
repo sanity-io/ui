@@ -1,6 +1,6 @@
-import classNames from 'classnames';
+import classNames from 'classnames'
 
-import { type PropDef } from "../types/PropDef";
+import {type PropDef} from '../types/PropDef'
 
 const PREFIX = 'sui'
 const BREAKPOINTS_LENGTH = 7
@@ -11,10 +11,7 @@ interface ComponentProps {
   [key: string]: any
 }
 
-export function getProps<
-  P extends ComponentProps,
-  T extends Record<string, PropDef>
-> (
+export function getProps<P extends ComponentProps, T extends Record<string, PropDef>>(
   componentProps?: P,
   propDefs?: T,
 ): ComponentProps {
@@ -40,10 +37,10 @@ export function getProps<
     delete props[key]
   }
 
-  return { ...props, className, style }
+  return {...props, className, style}
 }
 
-function getClassName (prop: any, propDef: PropDef, bp?: number) {
+function getClassName(prop: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'union' && propDef.values?.includes(prop)) {
     return `${PREFIX}-${propDef.className}-${prop}${bp ? `-bp-${bp}` : ''}`
   }
@@ -59,10 +56,10 @@ function getClassName (prop: any, propDef: PropDef, bp?: number) {
   return ''
 }
 
-function getStyle (prop: any, propDef: PropDef, bp?: number) {
+function getStyle(prop: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'string' || propDef.type === 'number') {
     return {
-      [`${propDef.variable}${bp ?  `-bp-${bp}` : ''}`]: prop
+      [`${propDef.variable}${bp ? `-bp-${bp}` : ''}`]: prop,
     }
   }
 
