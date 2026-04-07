@@ -19,7 +19,7 @@ export interface PaddingProps {
   paddingLeft?: Responsive<Space>
 }
 
-export const paddingProps: Record<string, PropDef<Space>> = {
+export const paddingProps: Record<string, PropDef> = {
   padding: {
     type: 'union',
     className: 'padding',

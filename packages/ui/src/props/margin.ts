@@ -19,7 +19,7 @@ export type MarginProps = {
   marginLeft?: Responsive<SpaceAuto>
 }
 
-export const marginProps: Record<string, PropDef<SpaceAuto>> = {
+export const marginProps: Record<string, PropDef> = {
   margin: {
     type: 'union',
     className: 'margin',

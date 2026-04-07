@@ -8,6 +8,7 @@ const BREAKPOINTS_LENGTH = 7
 interface ComponentProps {
   className?: string
   style?: React.CSSProperties
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   [key: string]: any
 }
 
@@ -40,6 +41,7 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
   return {...props, className, style}
 }
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 function getClassName(prop: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'union' && propDef.values?.includes(prop)) {
     return `${PREFIX}-${propDef.className}-${prop}${bp ? `-bp-${bp}` : ''}`
@@ -56,6 +58,7 @@ function getClassName(prop: any, propDef: PropDef, bp?: number) {
   return ''
 }
 
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 function getStyle(prop: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'string' || propDef.type === 'number') {
     return {

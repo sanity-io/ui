@@ -11,7 +11,7 @@ export type GapProps = {
   gapY?: Responsive<Space>
 }
 
-export const gapProps: Record<string, PropDef<Space>> = {
+export const gapProps: Record<string, PropDef> = {
   gap: {
     type: 'union',
     className: 'gap',
