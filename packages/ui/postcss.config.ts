@@ -1,11 +1,16 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path')
+import path from 'node:path'
 
-module.exports = {
+import autoprefixer from 'autoprefixer'
+import postcssImport from 'postcss-import'
+
+import breakpoints from './postcss-breakpoints'
+
+export default {
   plugins: [
-    require('postcss-import')({
+    postcssImport({
       path: [path.relative(process.cwd(), '../')],
     }),
-    require('autoprefixer'),
+    breakpoints,
+    autoprefixer,
   ],
 }
