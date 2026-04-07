@@ -1,5 +1,5 @@
-import { type PropDef } from "../types/PropDef";
-import { type Responsive } from "../types/Responsive";
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
 
 export type FlexChildProps = {
   /** CSS **flex-basis** property */

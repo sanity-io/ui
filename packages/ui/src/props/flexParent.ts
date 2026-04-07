@@ -1,15 +1,15 @@
 import {
-  type AlignItems,
-  type FlexDirection,
-  type FlexWrap,
-  type JustifyContent,
   ALIGN_ITEMS,
+  type AlignItems,
   FLEX_DIRECTION,
   FLEX_WRAP,
-  JUSTIFY_CONTENT
-} from "../types/Flex";
-import { type PropDef } from "../types/PropDef";
-import { type Responsive } from "../types/Responsive";
+  type FlexDirection,
+  type FlexWrap,
+  JUSTIFY_CONTENT,
+  type JustifyContent,
+} from '../types/Flex'
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
 
 export type FlexParentProps = {
   /** CSS **align-items** property */

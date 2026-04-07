@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest'
 
-import {getProps} from './getProps'
 import {layoutProps} from '../props/layout'
+import {getProps} from './getProps'
 
 describe('getProps', () => {
   it('generates className based on an union', () => {
@@ -29,9 +29,9 @@ describe('getProps', () => {
   })
 
   it('merges existing style', () => {
-    const result = getProps({width: '100px', style: { display: 'block' }}, layoutProps)
+    const result = getProps({width: '100px', style: {display: 'block'}}, layoutProps)
     expect(result.className).toBe('sui-width')
-    expect(result.style).toEqual({'--width': '100px', display: 'block' })
+    expect(result.style).toEqual({'--width': '100px', 'display': 'block'})
   })
 
   it('generates className based on a boolean', () => {
@@ -68,7 +68,11 @@ describe('getProps', () => {
   it('generates responsive className and style based on strings', () => {
     const result = getProps({width: ['100px', '200px', '300px']}, layoutProps)
     expect(result.className).toBe('sui-width sui-width-bp-1 sui-width-bp-2')
-    expect(result.style).toEqual({'--width': '100px', '--width-bp-1': '200px', '--width-bp-2': '300px'})
+    expect(result.style).toEqual({
+      '--width': '100px',
+      '--width-bp-1': '200px',
+      '--width-bp-2': '300px',
+    })
   })
 
   it('generates responsive className based on booleans', () => {
@@ -79,7 +83,9 @@ describe('getProps', () => {
 
   it('does not generate responsive className with more values than breakpoints', () => {
     const result = getProps({padding: [1, 2, 3, 4, 5, 6, 7, 8]}, layoutProps)
-    expect(result.className).toBe('sui-padding-1 sui-padding-2-bp-1 sui-padding-3-bp-2 sui-padding-4-bp-3 sui-padding-5-bp-4 sui-padding-6-bp-5 sui-padding-7-bp-6')
+    expect(result.className).toBe(
+      'sui-padding-1 sui-padding-2-bp-1 sui-padding-3-bp-2 sui-padding-4-bp-3 sui-padding-5-bp-4 sui-padding-6-bp-5 sui-padding-7-bp-6',
+    )
     expect(result.style).toEqual({})
   })
 

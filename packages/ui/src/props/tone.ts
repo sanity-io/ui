@@ -1,6 +1,6 @@
-import { type PropDef } from "../types/PropDef";
-import { type Responsive } from "../types/Responsive";
-import { TONE, type Tone } from "../types/Tone";
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
+import {TONE, type Tone} from '../types/Tone'
 
 export type ToneProps = {
   /** CSS **background-color** property */

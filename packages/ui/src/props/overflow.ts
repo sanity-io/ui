@@ -1,6 +1,6 @@
-import { type Overflow, OVERFLOW } from "../types/Overflow";
-import { type PropDef } from "../types/PropDef";
-import { type Responsive } from "../types/Responsive";
+import {OVERFLOW, type Overflow} from '../types/Overflow'
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
 
 export type OverflowProps = {
   /** CSS **overflow** property */
