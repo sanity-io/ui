@@ -1,0 +1,19 @@
+.sui-flow-row {
+  grid-auto-flow: row;
+}
+
+.sui-flow-row-dense {
+  grid-auto-flow: row dense;
+}
+
+.sui-flow-column {
+  grid-auto-flow: column;
+}
+
+.sui-flow-column-dense {
+  grid-auto-flow: column dense;
+}
+
+.sui-flow-dense {
+  grid-auto-flow: dense;
+}

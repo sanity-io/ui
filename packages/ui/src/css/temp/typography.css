@@ -1,0 +1,32 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --body-0: 400 10px/1.5 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --body-1: 400 13px/1.5 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --body-2: 400 16px/1.5 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --body-3: 400 18.75px/1.5 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --body-4: 400 21.5px/1.5 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --code-0: 400 10px/1.5 ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --code-1: 400 13px/1.5 ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --code-2: 400 16px/1.5 ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --code-3: 400 18.75px/1.5 ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --code-4: 400 21.5px/1.5 ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --heading-0: 400 13px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --heading-1: 400 16px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --heading-2: 400 21px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --heading-3: 400 27px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --heading-4: 400 33px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --heading-5: 400 38px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --heading-6: 400 48px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --heading-7: 400 63px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --heading-8: 400 84px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --heading-9: 400 112px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --label-0: 400 8.1px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --label-1: 400 9.5px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --label-2: 400 10.8px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --label-3: 400 12.25px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --label-4: 400 13.6px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+  --label-5: 400 15px/1.25 Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif;
+}

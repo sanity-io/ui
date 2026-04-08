@@ -6,9 +6,9 @@ export type GapProps = {
   /** CSS **gap** property */
   gap?: Responsive<Space>
   /** CSS **row-gap** property */
-  gapX?: Responsive<Space>
+  rowGap?: Responsive<Space>
   /** CSS **column-gap** property */
-  gapY?: Responsive<Space>
+  columnGap?: Responsive<Space>
 }
 
 export const gapProps: Record<string, PropDef> = {
@@ -17,14 +17,14 @@ export const gapProps: Record<string, PropDef> = {
     className: 'gap',
     values: SPACE,
   },
-  gapX: {
+  rowGap: {
     type: 'union',
-    className: 'gap-x',
+    className: 'row-gap',
     values: SPACE,
   },
-  gapY: {
+  columnGap: {
     type: 'union',
-    className: 'gap-y',
+    className: 'column-gap',
     values: SPACE,
   },
 }

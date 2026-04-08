@@ -1,0 +1,19 @@
+.sui-static {
+  position: static;
+}
+
+.sui-relative {
+  position: relative;
+}
+
+.sui-absolute {
+  position: absolute;
+}
+
+.sui-fixed {
+  position: fixed;
+}
+
+.sui-sticky {
+  position: sticky;
+}
