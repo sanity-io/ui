@@ -1,31 +1,11 @@
-.sui-display-block {
-  display: block;
-}
+.sui-display-block { display: block; }
+.sui-display-inline-block { display: inline-block; }
+.sui-display-inline { display: inline; }
 
-.sui-display-inline-block {
-  display: inline-block;
-}
+.sui-display-flex { display: flex; }
+.sui-display-inline-flex { display: inline-flex; }
 
-.sui-display-inline {
-  display: inline;
-}
+.sui-display-grid { display: grid; }
+.sui-display-inline-grid { display: inline-grid; }
 
-.sui-display-flex {
-  display: flex;
-}
-
-.sui-display-inline-flex {
-  display: inline-flex;
-}
-
-.sui-display-grid {
-  display: grid;
-}
-
-.sui-display-inline-grid {
-  display: inline-grid;
-}
-
-.sui-display-none {
-  display: none;
-}
+.sui-display-none { display: none; }
