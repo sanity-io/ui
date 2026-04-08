@@ -1,0 +1,5 @@
+@breakpoints {
+  .sui-padding-1 {
+    padding: var(--space-1);
+  }
+}

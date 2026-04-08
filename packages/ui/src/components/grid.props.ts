@@ -1,8 +1,8 @@
-import { DISPLAY_GRID } from "../types/Display";
-import { gapProps } from '../props/gap';
-import { gridParentProps } from "../props/gridParent";
-import { layoutProps } from '../props/layout';
-import { type PropDef } from "../types/PropDef";
+import {gapProps} from '../props/gap'
+import {gridParentProps} from '../props/gridParent'
+import {layoutProps} from '../props/layout'
+import {DISPLAY_GRID} from '../types/Display'
+import {type PropDef} from '../types/PropDef'
 
 export const gridProps: Record<string, PropDef> = {
   as: {
@@ -11,7 +11,7 @@ export const gridProps: Record<string, PropDef> = {
   display: {
     type: 'union',
     className: 'display',
-    values: DISPLAY_GRID
+    values: DISPLAY_GRID,
   },
   ...gridParentProps,
   ...gapProps,

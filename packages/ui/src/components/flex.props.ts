@@ -1,8 +1,8 @@
-import { DISPLAY_FLEX } from "../types/Display";
-import { flexParentProps } from '../props/flexParent';
-import { gapProps } from '../props/gap';
-import { layoutProps } from '../props/layout';
-import { type PropDef } from "../types/PropDef";
+import {flexParentProps} from '../props/flexParent'
+import {gapProps} from '../props/gap'
+import {layoutProps} from '../props/layout'
+import {DISPLAY_FLEX} from '../types/Display'
+import {type PropDef} from '../types/PropDef'
 
 export const flexProps: Record<string, PropDef> = {
   as: {
@@ -11,7 +11,7 @@ export const flexProps: Record<string, PropDef> = {
   display: {
     type: 'union',
     className: 'display',
-    values: DISPLAY_FLEX
+    values: DISPLAY_FLEX,
   },
   ...flexParentProps,
   ...gapProps,

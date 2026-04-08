@@ -1,5 +1,5 @@
-import { type PropDef } from "../types/PropDef";
-import { type Responsive } from "../types/Responsive";
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
 
 export type GridChildProps = {
   /** CSS **grid-column** property */
