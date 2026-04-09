@@ -1,0 +1,9 @@
+{
+  "extends": "@sanity/tsconfig/strictest",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist"
+  },
+  "include": ["./**/*.cjs", "./**/*.ts", "./**/*.tsx"],
+  "exclude": ["./node_modules"]
+}

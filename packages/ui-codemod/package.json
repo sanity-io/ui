@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint . --ext .cjs,.js,.ts,.tsx"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,15 @@
     "jscodeshift": "^17.3.0"
   },
   "devDependencies": {
+    "@sanity/tsconfig": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "prettier": "^3.8.1",
     "vitest": "^4.1.1"
   }
 }
