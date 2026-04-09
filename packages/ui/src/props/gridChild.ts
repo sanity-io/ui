@@ -19,18 +19,18 @@ export type GridChildProps = {
 export const gridChildProps: Record<string, PropDef> = {
   gridColumn: {
     type: 'string',
-    className: 'grid-col',
-    variable: '--grid-col',
+    className: 'grid-column',
+    variable: '--grid-column',
   },
   gridColumnStart: {
     type: 'string',
-    className: 'grid-col-start',
-    variable: '--grid-col-start',
+    className: 'grid-column-start',
+    variable: '--grid-column-start',
   },
   gridColumnEnd: {
     type: 'string',
-    className: 'grid-col-end',
-    variable: '--grid-col-end',
+    className: 'grid-column-end',
+    variable: '--grid-column-end',
   },
   gridRow: {
     type: 'string',

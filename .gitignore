@@ -1,4 +1,5 @@
 *.local
+*.local.json
 *.log
 *.tgz
 
@@ -7,3 +8,4 @@ coverage
 dist
 etc
 node_modules
+packages/ui/src/*.css

@@ -1,0 +1,8 @@
+@breakpoints {
+  .sui-grid-column { grid-column: var(--grid-column); }
+  .sui-grid-column-start { grid-column-start: var(--grid-column-start); }
+  .sui-grid-column-end { grid-column-end: var(--grid-column-end); }
+  .sui-grid-row { grid-row: var(--grid-row); }
+  .sui-grid-row-start { grid-row-start: var(--grid-row-start); }
+  .sui-grid-row-end { grid-row-end: var(--grid-row-end); }
+}

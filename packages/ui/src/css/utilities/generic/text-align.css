@@ -1,0 +1,5 @@
+@breakpoints {
+  .sui-text-start { text-align: start; }
+  .sui-text-center { text-align: center; }
+  .sui-text-end { text-align: end; }
+}

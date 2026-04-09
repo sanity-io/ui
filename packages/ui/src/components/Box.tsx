@@ -16,7 +16,9 @@ export interface BoxProps<T extends React.ElementType> extends LayoutProps {
 }
 
 /** @public */
-export function Box<T extends React.ElementType = 'div'>(props: BoxProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof BoxProps<T>>) {
+export function Box<T extends React.ElementType = 'div'>(
+  props: BoxProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof BoxProps<T>>,
+) {
   const {as, children, className, style, ...rest} = getProps(props, boxProps)
   const Component = as || 'div'
 

@@ -1,0 +1,6 @@
+@breakpoints {
+  .sui-grid-auto-columns { grid-auto-columns: var(--grid-auto-columns); }
+  .sui-grid-auto-rows { grid-auto-rows: var(--grid-auto-rows); }
+  .sui-grid-template-columns { grid-template-columns: var(--grid-template-columns); }
+  .sui-grid-template-rows { grid-template-rows: var(--grid-template-rows); }
+}
