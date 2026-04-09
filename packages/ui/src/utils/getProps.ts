@@ -44,7 +44,8 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 function getClassName(prop: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'union' && propDef.values?.includes(prop)) {
-    return `${PREFIX}-${propDef.className}-${prop}${bp ? `-bp-${bp}` : ''}`
+    /* Note: This may need updating depending on the final CSS classname formatting */
+    return `${PREFIX}-${propDef.className}${typeof prop === 'string' ? `-${prop}` : prop}${bp ? `-bp-${bp}` : ''}`
   }
 
   if (propDef.type === 'string' || propDef.type === 'number') {
