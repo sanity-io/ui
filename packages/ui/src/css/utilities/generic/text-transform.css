@@ -1,1 +1,3 @@
-.sui-text-uppercase { text-transform: uppercase; }
+@breakpoints {
+  .sui-text-uppercase { text-transform: uppercase; }
+}

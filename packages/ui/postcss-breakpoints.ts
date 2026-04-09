@@ -4,6 +4,28 @@ import type {ContainerWithChildren} from 'postcss/lib/container'
 
 export const BREAKPOINTS = ['360px', '600px', '900px', '1200px', '1800px', '2400px'] as const
 
+const DYNAMIC_VARS = [
+  'var(--flex-basis)',
+  'var(--flex-grow)',
+  'var(--flex-shrink)',
+  'var(--grid-auto-columns)',
+  'var(--grid-auto-rows)',
+  'var(--grid-column)',
+  'var(--grid-column-end)',
+  'var(--grid-column-start)',
+  'var(--grid-row)',
+  'var(--grid-row-end)',
+  'var(--grid-row-start)',
+  'var(--grid-template-columns)',
+  'var(--grid-template-rows)',
+  'var(--height)',
+  'var(--max-height)',
+  'var(--min-height)',
+  'var(--width)',
+  'var(--max-width)',
+  'var(--min-width)',
+]
+
 const cache = new WeakMap()
 
 function getClone(rule: Rule, suffix: string) {
@@ -14,6 +36,10 @@ function getClone(rule: Rule, suffix: string) {
   clone.raws.after = `\n${'  '}`
 
   clone.walkDecls((decl) => {
+    if (DYNAMIC_VARS.includes(decl.value)) {
+      decl.value = decl.value.replace(')', `${suffix})`)
+    }
+
     decl.raws.before = `\n${'    '}`
   })
 
