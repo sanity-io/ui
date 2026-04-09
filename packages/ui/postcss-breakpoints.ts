@@ -39,7 +39,7 @@ function getClone(rule: Rule, suffix: string) {
     if (DYNAMIC_VARS.includes(decl.value)) {
       decl.value = decl.value.replace(')', `${suffix})`)
     }
-    
+
     decl.raws.before = `\n${'    '}`
   })
 

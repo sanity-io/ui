@@ -17,7 +17,9 @@ export interface FlexProps<T extends React.ElementType>
   display?: Responsive<DisplayFlex>
 }
 
-export function Flex<T extends React.ElementType = 'div'>(props: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>) {
+export function Flex<T extends React.ElementType = 'div'>(
+  props: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>,
+) {
   const {as, children, className, style, ...rest} = getProps(props, flexProps)
   const Component = as || 'div'
 
