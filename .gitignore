@@ -1,5 +1,11 @@
-pnpm-debug.log*
+*.local
+*.local.json
+*.log
+*.tgz
 
 .DS_Store
-node_modules
 coverage
+dist
+etc
+node_modules
+packages/ui/src/*.css

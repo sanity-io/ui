@@ -1,0 +1,5 @@
+@breakpoints {
+  .sui-flex-basis { flex-basis: var(--flex-basis); }
+  .sui-flex-grow { flex-grow: var(--flex-grow); }
+  .sui-flex-shrink { flex-shrink: var(--flex-shrink); }
+}

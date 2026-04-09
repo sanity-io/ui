@@ -1,6 +1,6 @@
-import { type PropDef } from "../types/PropDef";
-import { type Responsive } from "../types/Responsive";
-import { type Space, SPACE } from "../types/Space";
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
+import {SPACE, type Space} from '../types/Space'
 
 export interface PaddingProps {
   /** CSS **padding** property */
@@ -19,40 +19,40 @@ export interface PaddingProps {
   paddingLeft?: Responsive<Space>
 }
 
-export const paddingProps: Record<string, PropDef<Space>> = {
+export const paddingProps: Record<string, PropDef> = {
   padding: {
     type: 'union',
-    className: 'padding',
+    className: 'p',
     values: SPACE,
   },
   paddingX: {
     type: 'union',
-    className: 'padding-x',
+    className: 'px',
     values: SPACE,
   },
   paddingY: {
     type: 'union',
-    className: 'padding-y',
+    className: 'py',
     values: SPACE,
   },
   paddingTop: {
     type: 'union',
-    className: 'padding-t',
+    className: 'pt',
     values: SPACE,
   },
   paddingRight: {
     type: 'union',
-    className: 'padding-r',
+    className: 'pr',
     values: SPACE,
   },
   paddingBottom: {
     type: 'union',
-    className: 'padding-b',
+    className: 'pb',
     values: SPACE,
   },
   paddingLeft: {
     type: 'union',
-    className: 'padding-l',
+    className: 'pl',
     values: SPACE,
   },
 }

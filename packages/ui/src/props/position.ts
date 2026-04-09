@@ -1,7 +1,7 @@
-import { type PropDef } from "../types/PropDef";
-import { type Position, POSITION } from "../types/Position";
-import { type Responsive } from "../types/Responsive";
-import { type SpaceAuto, SPACE_AUTO } from "../types/Space";
+import {POSITION, type Position} from '../types/Position'
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
+import {SPACE_AUTO, type SpaceAuto} from '../types/Space'
 
 export type PositionProps = {
   /** CSS **position** property */

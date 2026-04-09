@@ -1,6 +1,6 @@
-import { type GridAutoFlow, GRID_AUTO_FLOW } from "../types/Grid";
-import { type PropDef } from "../types/PropDef";
-import { type Responsive } from "../types/Responsive";
+import {GRID_AUTO_FLOW, type GridAutoFlow} from '../types/Grid'
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
 
 export type GridParentProps = {
   /** CSS **grid-auto-flow** property */
@@ -19,7 +19,7 @@ export const gridParentProps: Record<string, PropDef> = {
   gridAutoFlow: {
     type: 'union',
     className: 'grid-auto-flow',
-    values: GRID_AUTO_FLOW
+    values: GRID_AUTO_FLOW,
   },
   gridAutoColumns: {
     type: 'string',

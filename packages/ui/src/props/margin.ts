@@ -1,6 +1,6 @@
-import { type PropDef } from "../types/PropDef";
-import { type Responsive } from "../types/Responsive";
-import { type SpaceAuto, SPACE_AUTO } from "../types/Space";
+import {type PropDef} from '../types/PropDef'
+import {type Responsive} from '../types/Responsive'
+import {SPACE_AUTO, type SpaceAuto} from '../types/Space'
 
 export type MarginProps = {
   /** CSS **margin** property */
@@ -19,40 +19,40 @@ export type MarginProps = {
   marginLeft?: Responsive<SpaceAuto>
 }
 
-export const marginProps: Record<string, PropDef<SpaceAuto>> = {
+export const marginProps: Record<string, PropDef> = {
   margin: {
     type: 'union',
-    className: 'margin',
+    className: 'm',
     values: SPACE_AUTO,
   },
   marginX: {
     type: 'union',
-    className: 'margin-x',
+    className: 'mx',
     values: SPACE_AUTO,
   },
   marginY: {
     type: 'union',
-    className: 'margin-y',
+    className: 'my',
     values: SPACE_AUTO,
   },
   marginTop: {
     type: 'union',
-    className: 'margin-t',
+    className: 'mt',
     values: SPACE_AUTO,
   },
   marginRight: {
     type: 'union',
-    className: 'margin-r',
+    className: 'mr',
     values: SPACE_AUTO,
   },
   marginBottom: {
     type: 'union',
-    className: 'margin-b',
+    className: 'mb',
     values: SPACE_AUTO,
   },
   marginLeft: {
     type: 'union',
-    className: 'margin-l',
+    className: 'ml',
     values: SPACE_AUTO,
   },
 }
