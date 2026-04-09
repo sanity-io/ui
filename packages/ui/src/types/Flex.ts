@@ -14,5 +14,5 @@ export type JustifyContent = (typeof JUSTIFY_CONTENT)[number]
 export const FLEX_DIRECTION = ['row', 'row-reverse', 'column', 'column-reverse'] as const
 export type FlexDirection = (typeof FLEX_DIRECTION)[number]
 
-export const FLEX_WRAP = ['wrap', 'reverse-wrap', 'nowrap'] as const
+export const FLEX_WRAP = ['wrap', 'wrap-reverse', 'nowrap'] as const
 export type FlexWrap = (typeof FLEX_WRAP)[number]

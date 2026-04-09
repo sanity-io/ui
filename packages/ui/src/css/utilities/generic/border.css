@@ -1,0 +1,11 @@
+.sui-border { border-width: 1px; border-style: solid; }
+.sui-border-top { border-top-width: 1px; border-top-style: solid; }
+.sui-border-right { border-right-width: 1px; border-right-style: solid; }
+.sui-border-bottom { border-bottom-width: 1px; border-bottom-style: solid; }
+.sui-border-left { border-left-width: 1px; border-left-style: solid; }
+
+.sui-border-none { border: none; }
+.sui-border-top-none { border-top: none; }
+.sui-border-right-none { border-right: none; }
+.sui-border-bottom-none { border-bottom: none; }
+.sui-border-left-none { border-left: none; }
