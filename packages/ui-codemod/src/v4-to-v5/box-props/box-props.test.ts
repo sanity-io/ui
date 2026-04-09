@@ -1,5 +1,5 @@
-import transform from './box-props'
-import { defineInlineTest } from '../../utils/testUtils';
+import { defineInlineTest } from "../../utils/testUtils";
+import transform from "./box-props";
 
 // Maybe let use pass in if they want to alias?
 defineInlineTest(
@@ -15,7 +15,7 @@ defineInlineTest(
       boxSizing: "content-box"
     }} />
   `,
-  'moves sizing onto style as boxSizing and removes sizing'
+  "moves sizing onto style as boxSizing and removes sizing",
 );
 
 defineInlineTest(
@@ -29,5 +29,5 @@ defineInlineTest(
     boxSizing: "border-box"
   }} />
   `,
-  'adds style when Box only had sizing'
+  "adds style when Box only had sizing",
 );

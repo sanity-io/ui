@@ -1,52 +1,60 @@
-import { type JSXAttribute, type API, type JSXSpreadAttribute } from "jscodeshift";
+import {
+  type API,
+  type JSXAttribute,
+  type JSXSpreadAttribute,
+} from "jscodeshift";
+
 import { type AnyExpression } from "../types/AnyExpression";
 
 export function mergeStyle(
-  j: API['jscodeshift'],
+  j: API["jscodeshift"],
   attrs: (JSXAttribute | JSXSpreadAttribute)[],
   styleKey: string,
   styleExpression: AnyExpression,
 ) {
-  const newProp = j.objectProperty(j.identifier(styleKey), styleExpression as never);
+  const newProp = j.objectProperty(
+    j.identifier(styleKey),
+    styleExpression as never,
+  );
 
   const styleIndex = attrs.findIndex(
     (a): a is JSXAttribute =>
-      a.type === 'JSXAttribute' &&
-      a.name.type === 'JSXIdentifier' &&
-      a.name.name === 'style'
+      a.type === "JSXAttribute" &&
+      a.name.type === "JSXIdentifier" &&
+      a.name.name === "style",
   );
 
   if (styleIndex === -1) {
     attrs.push(
       j.jsxAttribute(
-        j.jsxIdentifier('style'),
-        j.jsxExpressionContainer(j.objectExpression([newProp]))
-      )
+        j.jsxIdentifier("style"),
+        j.jsxExpressionContainer(j.objectExpression([newProp])),
+      ),
     );
-  
+
     return true;
   }
 
   const styleAttr = attrs[styleIndex] as JSXAttribute;
 
-  if (styleAttr.value?.type !== 'JSXExpressionContainer') {
+  if (styleAttr.value?.type !== "JSXExpressionContainer") {
     return false;
   }
 
   const expr = styleAttr.value.expression;
 
-  if (expr.type === 'ObjectExpression') {
+  if (expr.type === "ObjectExpression") {
     expr.properties = expr.properties.filter((prop) => {
-      if (prop.type !== 'ObjectProperty' && prop.type !== 'Property') {
+      if (prop.type !== "ObjectProperty" && prop.type !== "Property") {
         return true;
       }
 
       const key = prop.key;
 
       const name =
-        key.type === 'Identifier'
+        key.type === "Identifier"
           ? key.name
-          : key.type === 'StringLiteral' || key.type === 'Literal'
+          : key.type === "StringLiteral" || key.type === "Literal"
             ? String(key.value)
             : null;
 
@@ -58,7 +66,7 @@ export function mergeStyle(
   }
 
   styleAttr.value = j.jsxExpressionContainer(
-    j.objectExpression([j.spreadElement(expr as never), newProp])
+    j.objectExpression([j.spreadElement(expr as never), newProp]),
   );
 
   return true;

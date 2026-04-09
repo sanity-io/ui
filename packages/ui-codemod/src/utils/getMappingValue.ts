@@ -1,8 +1,11 @@
 import { type AttributeMappings } from "../types/AnyExpression";
 
-export function getMappingValue(mappings: AttributeMappings, key: string | null) {
+export function getMappingValue(
+  mappings: AttributeMappings,
+  key: string | null,
+) {
   if (!key) {
-    return
+    return;
   }
 
   if (Object.prototype.hasOwnProperty.call(mappings, key)) {
@@ -11,9 +14,12 @@ export function getMappingValue(mappings: AttributeMappings, key: string | null)
 
   const number = Number(key);
 
-  if (!Number.isNaN(number) && Object.prototype.hasOwnProperty.call(mappings, number)) {
+  if (
+    !Number.isNaN(number) &&
+    Object.prototype.hasOwnProperty.call(mappings, number)
+  ) {
     return mappings[number];
   }
 
-  return
+  return;
 }
