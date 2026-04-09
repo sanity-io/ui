@@ -30,6 +30,9 @@ export const Default: Story = {
   play: async ({ canvas }) => {
     const hr = canvas.getByRole("separator");
     await expect(hr.classList).toContain("sui-Divider");
-    await expect(hr.classList).toContain("border-top");
+    await expect(hr.classList).toContain("sui-border-bottom-none");
+    await expect(hr.classList).toContain("sui-border-left-none");
+    await expect(hr.classList).toContain("sui-border-right-none");
+    await expect(hr.classList).toContain("sui-border-top");
   },
 };

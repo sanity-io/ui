@@ -1,5 +1,10 @@
-import React from "react";
+import React from 'react'
 
 export function Divider() {
-  return <hr className="sui-Divider border-top" data-ui="Divider" />;
+  return (
+    <hr
+      className="sui-Divider sui-border-bottom-none sui-border-left-none sui-border-right-none sui-border-top"
+      data-ui="Divider"
+    />
+  )
 }
