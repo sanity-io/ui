@@ -10,7 +10,7 @@ export type ToneProps = {
 export const toneProps: Record<string, PropDef> = {
   tone: {
     type: 'union',
-    className: 'bg',
+    className: 'tone',
     values: TONE,
   },
 }
