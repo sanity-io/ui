@@ -1,160 +1,131 @@
-import {
-  type API,
-  type ASTPath,
-  type JSXAttribute,
-  type JSXOpeningElement,
-  type JSXSpreadAttribute,
-} from "jscodeshift";
+import {type API, type ASTPath, type JSXOpeningElement} from 'jscodeshift'
 
-import { AnyExpression, type AttributeMods } from "../types/AnyExpression";
-import { canMoveUnmappedStyle } from "./canMoveUnmappedStyle";
-import { getAttributeExpression } from "./getAttributeExpression";
-import { getMappingArray } from "./getMappingArray";
-import { getMappingExpression } from "./getMappingExpression";
-import { getMappingKey } from "./getMappingKey";
-import { getMappingValue } from "./getMappingValue";
-import { getStyleExpression } from "./getStyleExpression";
-import { insertTodo } from "./insertTodo";
-import { mergeStyle } from "./mergeStyle";
-
-function isConditionalOrIdentifier(expr: AnyExpression): boolean {
-  return expr.type === "ConditionalExpression" || expr.type === "Identifier";
-}
+import {type AttributeMods} from '../types/AnyExpression'
+import {getAttributeExpression} from './getAttributeExpression'
+import {getMappingArray} from './getMappingArray'
+import {getMappingExpression} from './getMappingExpression'
+import {getMappingValue} from './getMappingValue'
+import {getStyleExpression} from './getStyleExpression'
+import {insertTodoWarning} from './insertTodoWarning'
+import {isValidStyleType} from './isValidStyleType'
+import {mergeStyle} from './mergeStyle'
 
 export function transformAttributes(
-  j: API["jscodeshift"],
+  j: API['jscodeshift'],
   path: ASTPath<JSXOpeningElement>,
   mods: AttributeMods,
-  todoMessage: string,
+  todoWarning: string,
 ) {
   if (!path.node.attributes) {
-    return;
+    return
   }
 
-  const attrs = path.node.attributes;
-  const removeIdxs: number[] = [];
+  const attrs = path.node.attributes
+  const removeIdxs: number[] = []
 
   for (let i = 0, len = attrs.length; i < len; i++) {
-    const attr = attrs[i];
+    const attr = attrs[i]
 
-    if (attr.type !== "JSXAttribute" || attr.name.type !== "JSXIdentifier") {
-      continue;
+    if (!attr || attr.type !== 'JSXAttribute' || attr.name.type !== 'JSXIdentifier') {
+      continue
     }
 
-    const mod = mods[attr.name.name];
+    const mod = mods[attr.name.name]
+    const expr = getAttributeExpression(attr, j)
 
-    if (!mod) {
-      continue;
+    if (!mod || !expr) {
+      continue
     }
 
-    const expr = getAttributeExpression(attr, j);
-
-    if (mod.type === "remove") {
-      removeIdxs.push(i);
-      continue;
+    if (mod.type === 'remove') {
+      removeIdxs.push(i)
     }
 
-    if (mod.type === "rename") {
-      if (attr.name.type === "JSXIdentifier") {
-        attr.name.name = mod.name;
+    if (mod.type === 'rename') {
+      if (attr.name.type === 'JSXIdentifier') {
+        attr.name.name = mod.name
+      }
+    }
+
+    if (mod.type === 'style-only') {
+      if (!expr || !isValidStyleType(expr)) {
+        insertTodoWarning(j, path, todoWarning)
+        continue
       }
 
-      continue;
-    }
-
-    if (mod.type === "style-only") {
-      if (
-        !expr ||
-        !canMoveUnmappedStyle(expr) ||
-        isConditionalOrIdentifier(expr)
-      ) {
-        insertTodo(j, path, todoMessage);
-        continue;
-      }
-
-      const merged = mergeStyle(
-        j,
-        attrs,
-        mod.style,
-        getStyleExpression(j, expr),
-      );
+      const merged = mergeStyle(j, attrs, mod.style, getStyleExpression(j, expr))
 
       if (merged) {
-        removeIdxs.push(i);
+        removeIdxs.push(i)
       } else {
-        insertTodo(j, path, todoMessage);
+        insertTodoWarning(j, path, todoWarning)
       }
-
-      continue;
     }
 
-    if (mod.type === "style-mapped") {
-      if (!expr || isConditionalOrIdentifier(expr)) {
-        insertTodo(j, path, todoMessage);
-        continue;
+    if (mod.type === 'style-mapped') {
+      if (!expr || !isValidStyleType(expr)) {
+        insertTodoWarning(j, path, todoWarning)
+        continue
       }
 
-      const styleKey = getMappingKey(expr);
-      const styleValue = getMappingValue(mod.mappings, styleKey);
+      const styleValue = getMappingValue(mod.mappings, expr)
 
-      if (!styleKey || !styleValue) {
-        continue;
+      if (!styleValue) {
+        continue
       }
 
-      const styleExpression = getMappingExpression(j, styleValue);
-      const merged = mergeStyle(j, attrs, mod.style, styleExpression);
+      const merged = mergeStyle(j, attrs, mod.style, getMappingExpression(j, styleValue))
 
       if (merged) {
-        removeIdxs.push(i);
+        removeIdxs.push(i)
       } else {
-        insertTodo(j, path, todoMessage);
+        insertTodoWarning(j, path, todoWarning)
       }
-
-      continue;
     }
 
-    if (mod.type === "mapped-only") {
-      // if (isConditionalOrIdentifier(expr)) {
-      //   addTodoBeforeBox(path, j);
-      //   continue
-      // }
+    if (mod.type === 'mapped-only') {
+      if (expr.type === 'ConditionalExpression' || expr.type === 'Identifier') {
+        insertTodoWarning(j, path, todoWarning)
+        continue
+      }
 
-      if (expr && expr.type === "ArrayExpression") {
-        const styleArray = getMappingArray(j, expr, mod.mappings);
+      if (expr.type === 'ArrayExpression') {
+        const styleArray = getMappingArray(j, expr, mod.mappings)
 
         if (!styleArray) {
-          insertTodo(j, path, todoMessage);
-          continue;
+          insertTodoWarning(j, path, todoWarning)
+          continue
         }
 
-        if (attr.value?.type === "JSXExpressionContainer") {
-          attr.value.expression = styleArray;
+        if (attr.value?.type === 'JSXExpressionContainer') {
+          attr.value.expression = styleArray
         } else {
-          attr.value = j.jsxExpressionContainer(styleArray);
+          attr.value = j.jsxExpressionContainer(styleArray)
         }
 
-        continue;
+        continue
       }
 
-      const styleKey = getMappingKey(expr!);
-      const styleValue = getMappingValue(mod.mappings, styleKey!);
+      const styleValue = getMappingValue(mod.mappings, expr)
 
-      if (!styleKey || !styleValue) {
-        continue;
+      if (!styleValue) {
+        continue
       }
 
-      if (typeof styleValue === "string") {
-        attr.value = j.stringLiteral(styleValue);
-        continue;
+      if (typeof styleValue === 'string') {
+        attr.value = j.stringLiteral(styleValue)
+        continue
       }
 
-      const styleExpression = getMappingExpression(j, styleValue!);
-      attr.value = j.jsxExpressionContainer(styleExpression);
-      continue;
+      attr.value = j.jsxExpressionContainer(getMappingExpression(j, styleValue) as never)
     }
   }
 
   for (let k = removeIdxs.length - 1; k >= 0; k--) {
-    attrs.splice(removeIdxs[k], 1);
+    const i = removeIdxs[k]
+
+    if (i !== undefined) {
+      attrs.splice(i, 1)
+    }
   }
 }

@@ -1,22 +1,79 @@
-import { defineInlineTest } from "../../utils/testUtils";
-import transform from "./box-props";
+import {defineInlineTest} from '../../utils/testUtils'
+import transform, {TODO_WARNING} from './box-props'
 
-// Maybe let use pass in if they want to alias?
 defineInlineTest(
   transform,
   {},
   `
-  <Box sizing="content" style={{ width: '100%' }} />
+  <Box borderWidth={0.5} />
   `,
   `
-  <Box
-    style={{
-      width: '100%',
-      boxSizing: "content-box"
-    }} />
+  <Box />
   `,
-  "moves sizing onto style as boxSizing and removes sizing",
-);
+  'removes deprecated prop',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box insetTop={0} />
+  `,
+  `
+  <Box top={0} />
+  `,
+  'renames prop',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box width="fill" />
+  `,
+  `
+  <Box width="100%" />
+  `,
+  'updates prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box border="muted" />
+  `,
+  `
+  <Box border={true} />
+  `,
+  'updates boolean prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box width={[0, 1, 2]} />
+  `,
+  `
+  <Box width={["20rem", "40rem", "60rem"]} />
+  `,
+  'updates responsive prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box alignItems="center" />
+  `,
+  `
+  <Box style={{
+    alignItems: "center"
+  }} />
+  `,
+  'moves prop to style',
+)
 
 defineInlineTest(
   transform,
@@ -29,5 +86,100 @@ defineInlineTest(
     boxSizing: "border-box"
   }} />
   `,
-  "adds style when Box only had sizing",
-);
+  'moves prop to style with updated value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box alignItems={\`center\`} />
+  `,
+  `
+  <Box style={{
+    alignItems: \`center\`
+  }} />
+  `,
+  'moves prop to style with updated template literal value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box alignItems="center" style={{ background: 'blue' }} />
+  `,
+  `
+  <Box
+    style={{
+      background: 'blue',
+      alignItems: "center"
+    }} />
+  `,
+  'preserves existing styles',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box alignItems={["center", "flex-start"]} />
+  `,
+  `
+  // TODO: ${TODO_WARNING}
+  <Box alignItems={["center", "flex-start"]} />
+  `,
+  'comments if responsive prop should be moved to style',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box sizing={["content", "box"]} />
+  `,
+  `
+  // TODO: ${TODO_WARNING}
+  <Box sizing={["content", "box"]} />
+  `,
+  'comments if responsive prop value should be updated and moved to style',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box alignItems={variable} />
+  `,
+  `
+  // TODO: ${TODO_WARNING}
+  <Box alignItems={variable} />
+  `,
+  'comments if prop value is a variable',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box alignItems={variable ? 'center' : 'flex-start'} />
+  `,
+  `
+  // TODO: ${TODO_WARNING}
+  <Box alignItems={variable ? 'center' : 'flex-start'} />
+  `,
+  'comments if prop value is a ternary',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box alignItems={\`flex\${\`-start\`}\`} />
+  `,
+  `
+  // TODO: ${TODO_WARNING}
+  <Box alignItems={\`flex\${\`-start\`}\`} />
+  `,
+  'comments if prop value is a template literal with variable',
+)

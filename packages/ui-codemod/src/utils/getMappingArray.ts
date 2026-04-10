@@ -1,44 +1,34 @@
-import { type API } from "jscodeshift";
+import {type API, type ArrayExpression} from 'jscodeshift'
 
-import {
-  type AnyExpression,
-  type AttributeMappings,
-} from "../types/AnyExpression";
-import { getMappingExpression } from "./getMappingExpression";
-import { getMappingKey } from "./getMappingKey";
-import { getMappingValue } from "./getMappingValue";
+import {type AnyExpression, type AttributeMappings} from '../types/AnyExpression'
+import {getMappingExpression} from './getMappingExpression'
+import {getMappingValue} from './getMappingValue'
 
 export function getMappingArray(
-  j: API["jscodeshift"],
+  j: API['jscodeshift'],
   arr: AnyExpression,
   mappings: AttributeMappings,
-) {
-  if (arr.type !== "ArrayExpression") {
-    return null;
+): ArrayExpression | null {
+  if (arr.type !== 'ArrayExpression') {
+    return null
   }
 
-  const elements = arr.elements as (AnyExpression | null)[];
-  const output: AnyExpression[] = [];
+  const elements = arr.elements as (AnyExpression | null)[]
+  const output: AnyExpression[] = []
 
   for (const el of elements) {
-    if (el == null || el.type === "SpreadElement") {
-      return null;
+    if (el == null || el.type === 'SpreadElement') {
+      return null
     }
 
-    const key = getMappingKey(el);
+    const mappingValue = getMappingValue(mappings, el)
 
-    if (!key === null) {
-      return null;
+    if (!mappingValue) {
+      return null
     }
 
-    const mapped = getMappingValue(mappings, key);
-
-    if (mapped === undefined) {
-      return null;
-    }
-
-    output.push(getMappingExpression(j, mapped));
+    output.push(getMappingExpression(j, mappingValue))
   }
 
-  return j.arrayExpression(output as never[]);
+  return j.arrayExpression(output as never[])
 }
