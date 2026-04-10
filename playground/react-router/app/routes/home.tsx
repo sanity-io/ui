@@ -1,8 +1,8 @@
 import {Badge, Box, Button, Card, Heading, Menu, MenuButton, MenuItem, useToast} from '@sanity/ui'
 
-// import type {Route} from './+types/home'
+import type {Route} from './+types/home'
 
-export function meta() {
+export const meta: Route.MetaFunction = () => {
   return [{title: 'Sanity UI in React Router'}]
 }
 

@@ -1,3 +1,5 @@
+import '@sanity/ui/css/index.css'
+
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 
