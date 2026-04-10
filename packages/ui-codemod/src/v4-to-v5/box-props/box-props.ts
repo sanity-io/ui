@@ -61,6 +61,14 @@ const MODS: AttributeMods = {
     type: 'style-only',
     style: 'flexWrap',
   },
+  gapX: {
+    type: 'rename',
+    name: 'rowGap',
+  },
+  gapY: {
+    type: 'rename',
+    name: 'columnGap',
+  },
   gridAutoColumns: {
     type: 'style-only',
     style: 'gridAutoColumns',
