@@ -375,9 +375,6 @@ importers:
       '@sanity/tsconfig':
         specifier: ^2.1.0
         version: 2.1.0
-      '@sanity/ui-workshop':
-        specifier: workspace:*
-        version: link:../ui-workshop
       '@types/node':
         specifier: ^24.10.13
         version: 24.10.13
