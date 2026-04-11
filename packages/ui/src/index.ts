@@ -109,8 +109,8 @@ export * from './utils/portal/types'
 export {usePortal} from './utils/portal/usePortal'
 
 // root
-export * from './Root'
-export * from './RootProvider'
+export * from './root/Root'
+export * from './root/RootProvider'
 
 // types
 export * from './types'
