@@ -17,7 +17,7 @@ import {Flex} from '../../primitives/flex/Flex'
 import {Popover} from '../../primitives/popover/Popover'
 import {Stack} from '../../primitives/stack/Stack'
 import {Text} from '../../primitives/text/Text'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @beta */
 export const DEFAULT_BREADCRUMBS_ELEMENT = 'nav'

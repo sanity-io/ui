@@ -1,5 +1,5 @@
 import {Box, type BoxOwnProps} from '../../primitives/box/Box'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_TAB_PANEL_ELEMENT = 'div'

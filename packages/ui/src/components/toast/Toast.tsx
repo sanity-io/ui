@@ -10,7 +10,7 @@ import {Card} from '../../primitives/card/Card'
 import {Flex} from '../../primitives/flex/Flex'
 import {Stack} from '../../primitives/stack/Stack'
 import {Text} from '../../primitives/text/Text'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @internal */
 export const DEFAULT_TOAST_ELEMENT = 'li'

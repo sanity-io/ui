@@ -1,8 +1,8 @@
 import {BREAKPOINTS} from '@sanity/ui-css'
 import {useImperativeHandle, useMemo, useState} from 'react'
 
+import type {ComponentType, Props} from '../../core/types'
 import {useElementSize} from '../../hooks/useElementSize'
-import type {ComponentType, Props} from '../../types'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
 
 /** @beta */

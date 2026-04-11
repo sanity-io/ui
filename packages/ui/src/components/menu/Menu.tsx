@@ -7,7 +7,7 @@ import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
 import {Box} from '../../primitives/box/Box'
 import {useLayer} from '../../primitives/layer/useLayer'
 import {Stack} from '../../primitives/stack/Stack'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 import {MenuContext, type MenuContextValue} from './MenuContext'
 import {useMenuController} from './useMenuController'
 

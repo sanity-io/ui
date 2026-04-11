@@ -13,7 +13,7 @@ import type {FontTextSize} from '@sanity/ui-tokens'
 import {isValidElement} from 'react'
 import {isValidElementType} from 'react-is'
 
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 import {Box} from '../box/Box'
 import {Spinner} from '../spinner/Spinner'
 import {Text, type TextOwnProps} from '../text/Text'

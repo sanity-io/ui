@@ -1,7 +1,7 @@
 import type {Context} from 'react'
 
-import {createGlobalScopedContext} from '../../lib/createGlobalScopedContext'
-import {globalScope} from '../../lib/globalScope'
+import {createGlobalScopedContext} from '../../core/lib/createGlobalScopedContext'
+import {globalScope} from '../../core/lib/globalScope'
 import type {PortalContextValue} from './types'
 
 const key = '@sanity/ui/v4/portal'

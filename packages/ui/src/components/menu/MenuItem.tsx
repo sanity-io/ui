@@ -23,7 +23,7 @@ import {Box} from '../../primitives/box/Box'
 import {Flex} from '../../primitives/flex/Flex'
 import {Selectable} from '../../primitives/selectable/Selectable'
 import {Text} from '../../primitives/text/Text'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 import {Hotkeys} from '../hotkeys/Hotkeys'
 import {useMenu} from './useMenu'
 

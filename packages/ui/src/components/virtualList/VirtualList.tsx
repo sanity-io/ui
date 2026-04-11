@@ -11,10 +11,10 @@ import {
   useState,
 } from 'react'
 
-import {_isScrollable} from '../../helpers/scroll'
+import {_isScrollable} from '../../core/helpers/scroll'
 import {_ResizeObserver} from '../../observers/resize'
 import {Box} from '../../primitives/box/Box'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @beta */
 export const DEFAULT_VIRTUAL_LIST_ELEMENT = 'div'

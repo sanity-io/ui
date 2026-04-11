@@ -25,11 +25,11 @@ import {
   useRef,
 } from 'react'
 
-import {Z_OFFSETS} from '../../constants'
-import {_getResponsiveProp} from '../../helpers/props'
+import {Z_OFFSETS} from '../../core/constants'
+import {_getResponsiveProp} from '../../core/helpers/props'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
-import type {ComponentType, Placement, Props} from '../../types'
+import type {ComponentType, Placement, Props} from '../../core/types'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'

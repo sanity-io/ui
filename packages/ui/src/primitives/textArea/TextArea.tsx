@@ -7,7 +7,7 @@ import {
 import {useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_TEXT_AREA_ELEMENT = 'textarea'

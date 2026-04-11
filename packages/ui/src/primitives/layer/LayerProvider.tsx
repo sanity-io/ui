@@ -1,7 +1,7 @@
 import type {Breakpoint, ResponsiveProp} from '@sanity/ui-css'
 import {type ReactNode, use, useCallback, useEffect, useMemo, useState} from 'react'
 
-import {_getResponsiveProp} from '../../helpers/props'
+import {_getResponsiveProp} from '../../core/helpers/props'
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './LayerContext'

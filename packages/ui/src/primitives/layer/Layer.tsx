@@ -1,7 +1,7 @@
 import type {ResponsiveProp} from '@sanity/ui-css'
 
 import type {CardElementType, CardOwnProps} from '../../primitives/card/Card'
-import type {Props} from '../../types'
+import type {Props} from '../../core/types'
 import {LayerCard} from './LayerCard'
 import {LayerProvider} from './LayerProvider'
 

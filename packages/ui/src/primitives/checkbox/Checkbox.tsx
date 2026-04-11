@@ -3,7 +3,7 @@ import {checkbox, checkbox_input, checkbox_presentation} from '@sanity/ui-css'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_CHECKBOX_ELEMENT = 'input'

@@ -7,7 +7,7 @@ import {
 } from '@sanity/ui-css'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_SWITCH_ELEMENT = 'input'

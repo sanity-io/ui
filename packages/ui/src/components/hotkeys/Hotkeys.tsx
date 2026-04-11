@@ -3,7 +3,7 @@ import type {FontTextSize, Space} from '@sanity/ui-tokens'
 
 import {Box} from '../../primitives/box/Box'
 import {KBD} from '../../primitives/kbd/Kbd'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'

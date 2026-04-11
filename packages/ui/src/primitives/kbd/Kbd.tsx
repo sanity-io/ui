@@ -1,7 +1,7 @@
 import {kbd, type ResponsiveProp} from '@sanity/ui-css'
 import type {FontTextSize} from '@sanity/ui-tokens'
 
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
 import {Text} from '../text/Text'
 

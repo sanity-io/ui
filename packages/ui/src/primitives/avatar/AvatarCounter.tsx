@@ -3,7 +3,7 @@ import type {AvatarSize, FontLabelSize} from '@sanity/ui-tokens'
 import {useMemo} from 'react'
 
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
 

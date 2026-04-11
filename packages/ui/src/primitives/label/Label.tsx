@@ -5,7 +5,7 @@ import {
   type TextOverflowStyleProps,
 } from '@sanity/ui-css'
 
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_LABEL_ELEMENT = 'div'

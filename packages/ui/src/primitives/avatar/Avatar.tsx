@@ -9,8 +9,8 @@ import {
 import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui-tokens'
 import {useCallback, useEffect, useMemo, useState} from 'react'
 
-import {_getResponsiveProp} from '../../helpers/props'
-import type {ComponentType, Props} from '../../types'
+import {_getResponsiveProp} from '../../core/helpers/props'
+import type {ComponentType, Props} from '../../core/types'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
 import type {AvatarPosition} from './types'

@@ -6,7 +6,7 @@ import {
   type RadiusStyleProps,
 } from '@sanity/ui-css'
 
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 import {Box} from '../box/Box'
 import {Text} from '../text/Text'
 

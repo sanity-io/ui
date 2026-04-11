@@ -1,7 +1,7 @@
 import {skeleton, type SkeletonStyleProps} from '@sanity/ui-css'
 import {useEffect, useState} from 'react'
 
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 
 /** @beta */
 export const DEFAULT_SKELETON_ELEMENT = 'div'

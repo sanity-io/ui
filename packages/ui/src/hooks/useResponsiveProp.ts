@@ -1,7 +1,7 @@
 import type {Breakpoint, ResponsiveProp} from '@sanity/ui-css'
 import {useMemo} from 'react'
 
-import {_getResponsiveProp} from '../helpers/props'
+import {_getResponsiveProp} from '../core/helpers/props'
 
 /**
  * @internal

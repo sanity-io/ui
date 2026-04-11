@@ -2,7 +2,7 @@ import {card, type CardStyleProps} from '@sanity/ui-css'
 import type {CardTone} from '@sanity/ui-tokens'
 import {use} from 'react'
 
-import type {Props} from '../../types'
+import type {Props} from '../../core/types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
 import {CardContext} from './CardContext'
 import {CardProvider} from './CardProvider'

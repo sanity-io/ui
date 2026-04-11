@@ -3,7 +3,7 @@ import type {AvatarSize} from '@sanity/ui-tokens'
 import {Children, cloneElement, Fragment, isValidElement, type ReactElement} from 'react'
 
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
-import type {ComponentType, Props} from '../../types'
+import type {ComponentType, Props} from '../../core/types'
 import {Box, type BoxOwnProps} from '../box/Box'
 import type {AvatarProps} from './Avatar'
 import {AvatarCounter} from './AvatarCounter'

@@ -27,11 +27,11 @@ export * from './components/tree/useTree'
 export * from './components/virtualList/VirtualList'
 
 // helpers
-export * from './helpers/animation'
-export * from './helpers/element'
-export * from './helpers/focus'
-export * from './helpers/props'
-export * from './helpers/scroll'
+export * from './core/helpers/animation'
+export * from './core/helpers/element'
+export * from './core/helpers/focus'
+export * from './core/helpers/props'
+export * from './core/helpers/scroll'
 
 // hooks
 export * from './hooks/useClickOutsideEvent'
@@ -113,4 +113,4 @@ export * from './root/Root'
 export * from './root/RootProvider'
 
 // types
-export * from './types'
+export * from './core/types'
