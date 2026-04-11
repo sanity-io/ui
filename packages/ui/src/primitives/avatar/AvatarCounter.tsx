@@ -3,7 +3,6 @@ import type {AvatarSize, FontLabelSize} from '@sanity/ui-tokens'
 import {useMemo} from 'react'
 
 import type {ComponentType, Props} from '../../core/types'
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
 
@@ -31,10 +30,9 @@ export function AvatarCounter<
     as = DEFAULT_AVATAR_COUNTER_ELEMENT,
     className,
     count,
-    size: sizeProp = 1,
+    size = 1,
     ...rest
   } = props as AvatarCounterProps<typeof DEFAULT_AVATAR_COUNTER_ELEMENT>
-  const size = useResponsiveProp(sizeProp)
 
   const labelSize = useMemo(
     () =>

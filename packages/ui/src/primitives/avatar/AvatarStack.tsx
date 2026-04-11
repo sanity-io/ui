@@ -3,7 +3,6 @@ import type {AvatarSize} from '@sanity/ui-tokens'
 import {Children, cloneElement, Fragment, isValidElement, type ReactElement} from 'react'
 
 import type {ComponentType, Props} from '../../core/types'
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {Box, type BoxOwnProps} from '../box/Box'
 import type {AvatarProps} from './Avatar'
 import {AvatarCounter} from './AvatarCounter'
@@ -42,7 +41,7 @@ export function AvatarStack<E extends AvatarStackElementType = typeof DEFAULT_AV
     children: childrenProp,
     className,
     maxLength: maxLengthProp = 4,
-    size: sizeProp = 1,
+    size = 1,
     ...rest
   } = props as AvatarStackProps<typeof DEFAULT_AVATAR_STACK_ELEMENT>
 
@@ -50,7 +49,6 @@ export function AvatarStack<E extends AvatarStackElementType = typeof DEFAULT_AV
     AvatarProps<'span'>
   >[]
   const maxLength = Math.max(maxLengthProp, 0)
-  const size = useResponsiveProp(sizeProp)
 
   const len = children.length
   const visibleCount = maxLength - 1

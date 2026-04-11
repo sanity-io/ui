@@ -27,7 +27,7 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const level = parentLevel + 1
 
   // Get z-index offset
-  const zOffset = useMemo(() => _getResponsiveProp(zOffsetProp), [zOffsetProp])
+  const zOffset = _getResponsiveProp(zOffsetProp)
 
   // Get responsive z-index value
   const maxMediaIndex = Object.values(zOffset).length - 1

@@ -107,7 +107,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
 
   const ref = useRef<HTMLInputElement | null>(null)
 
-  const responsivePadding = useMemo(() => _getResponsiveProp(padding), [padding])
+  const responsivePadding = _getResponsiveProp(padding)
 
   const withClearButton = Boolean(clearButton)
 

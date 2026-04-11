@@ -1,15 +1,14 @@
-import type {Breakpoint, ResponsiveProp} from '@sanity/ui-css'
-import {useMemo} from 'react'
+import type {ResponsiveProp, ResponsivePropArray} from '@sanity/ui-css'
 
 import {_getResponsiveProp} from '../core/helpers/props'
 
 /**
  * @internal
- * @deprecated use `_getResponsiveProp` directly instead, if necessary
+ * @deprecated use `_getResponsiveProp` directly instead
  */
 export function useResponsiveProp<T>(
   val: ResponsiveProp<T> | undefined,
-  defaultVal?: Partial<Record<Breakpoint, T>>,
-): Partial<Record<Breakpoint, T>> {
-  return useMemo(() => _getResponsiveProp(val, defaultVal), [defaultVal, val])
+  defaultVal?: ResponsivePropArray<T>,
+): ResponsivePropArray<T> {
+  return _getResponsiveProp(val, defaultVal)
 }

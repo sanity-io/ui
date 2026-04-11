@@ -23,7 +23,6 @@ import {EMPTY_ARRAY, EMPTY_RECORD} from '../../core/constants'
 import {_raf} from '../../core/helpers/animation'
 import {_hasFocus, focusFirstDescendant} from '../../core/helpers/focus'
 import type {ComponentType, Props} from '../../core/types'
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {Box, type BoxOwnProps} from '../../primitives/box/Box'
 import {Button} from '../../primitives/button/Button'
 import {Popover, type PopoverProps} from '../../primitives/popover/Popover'
@@ -131,7 +130,7 @@ export function Autocomplete<
     openButton,
     openOnFocus,
     options: optionsProp,
-    padding: paddingProp = 3,
+    padding = 3,
     popover = EMPTY_RECORD,
     prefix,
     radius = 2,
@@ -158,13 +157,13 @@ export function Autocomplete<
 
   const defaultRenderOption = useCallback(
     ({value}: BaseAutocompleteOption) => (
-      <Selectable as="button" padding={paddingProp} radius={2}>
+      <Selectable as="button" padding={padding} radius={2}>
         <Text size={fontSize} textOverflow="ellipsis">
           {value}
         </Text>
       </Selectable>
     ),
-    [fontSize, paddingProp],
+    [fontSize, padding],
   )
 
   const renderOption =
@@ -202,7 +201,6 @@ export function Autocomplete<
 
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
-  const padding = useResponsiveProp(paddingProp)
   const currentOption = useMemo(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
     [options, value],

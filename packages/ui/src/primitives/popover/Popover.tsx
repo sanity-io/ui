@@ -196,7 +196,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
 
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
-  const zOffset = useMemo(() => _getResponsiveProp(zOffsetProp), [zOffsetProp])
+  const zOffset = _getResponsiveProp(zOffsetProp)
   const ref = useRef<HTMLDivElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
