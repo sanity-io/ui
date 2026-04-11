@@ -35,9 +35,9 @@
     },
     "./css/index.css": "./dist/css/index.css",
     "./package.json": "./package.json",
-    "./theme": {
-      "source": "./exports/theme.ts",
-      "default": "./dist/theme.js"
+    "./tokens": {
+      "source": "./exports/tokens.ts",
+      "default": "./dist/tokens.js"
     }
   },
   "main": "./dist/index.js",
@@ -47,8 +47,8 @@
       "css": [
         "./dist/css.d.ts"
       ],
-      "theme": [
-        "./dist/theme.d.ts"
+      "tokens": [
+        "./dist/tokens.d.ts"
       ]
     }
   },
