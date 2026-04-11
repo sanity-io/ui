@@ -13,9 +13,9 @@ import {
   useState,
 } from 'react'
 
+import type {Props} from '../../core/types'
 import type {ButtonProps} from '../../primitives/button/Button'
 import {Popover, type PopoverProps} from '../../primitives/popover/Popover'
-import type {Props} from '../../core/types'
 import type {MenuProps} from './Menu'
 
 /** @public */

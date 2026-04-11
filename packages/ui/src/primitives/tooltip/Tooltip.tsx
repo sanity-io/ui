@@ -32,10 +32,10 @@ import {
 } from 'react'
 
 import {Z_OFFSETS} from '../../core/constants'
+import type {ComponentType, Delay, Placement, Props} from '../../core/types'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
-import type {ComponentType, Delay, Placement, Props} from '../../core/types'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'

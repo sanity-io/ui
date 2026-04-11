@@ -2,8 +2,8 @@ import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
 import {checkbox, checkbox_input, checkbox_presentation} from '@sanity/ui-css'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
-import {useCustomValidity} from '../../hooks/useCustomValidity'
 import type {ComponentType, Props} from '../../core/types'
+import {useCustomValidity} from '../../hooks/useCustomValidity'
 
 /** @public */
 export const DEFAULT_CHECKBOX_ELEMENT = 'input'

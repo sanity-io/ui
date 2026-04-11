@@ -1,5 +1,5 @@
-import {Stack} from '../../primitives/stack/Stack'
 import type {ComponentType, Props} from '../../core/types'
+import {Stack} from '../../primitives/stack/Stack'
 import {useTree} from './useTree'
 
 /** @public */

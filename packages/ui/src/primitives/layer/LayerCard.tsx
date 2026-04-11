@@ -2,8 +2,8 @@ import {type FocusEvent, useCallback, useEffect, useImperativeHandle, useRef} fr
 
 import {EMPTY_RECORD} from '../../core/constants'
 import {containsOrEqualsElement, isHTMLElement} from '../../core/helpers/element'
-import {Card, type CardElementType} from '../../primitives/card/Card'
 import type {Props} from '../../core/types'
+import {Card, type CardElementType} from '../../primitives/card/Card'
 import type {LayerElementType, LayerOwnProps} from './Layer'
 import {useLayer} from './useLayer'
 

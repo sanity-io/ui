@@ -20,6 +20,7 @@ import {
 } from 'react'
 
 import {focusFirstDescendant} from '../../core/helpers/focus'
+import type {Props} from '../../core/types'
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
 import {Box} from '../../primitives/box/Box'
@@ -28,7 +29,6 @@ import {Card, type CardElementType, type CardOwnProps} from '../../primitives/ca
 import {Flex} from '../../primitives/flex/Flex'
 import {useLayer} from '../../primitives/layer/useLayer'
 import {Text} from '../../primitives/text/Text'
-import type {Props} from '../../core/types'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {usePortal} from '../../utils/portal/usePortal'
 import {isTargetWithinScope} from './isTargetWithinScope'

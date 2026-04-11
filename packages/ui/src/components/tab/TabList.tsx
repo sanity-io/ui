@@ -7,8 +7,8 @@ import {
   useState,
 } from 'react'
 
-import {Flex, type FlexOwnProps} from '../../primitives/flex/Flex'
 import type {ComponentType, Props} from '../../core/types'
+import {Flex, type FlexOwnProps} from '../../primitives/flex/Flex'
 import type {TabProps} from './Tab'
 
 /** @public */

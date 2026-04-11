@@ -1,9 +1,9 @@
 import type {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui-css'
 import type {FontTextSize, Space} from '@sanity/ui-tokens'
 
+import type {ComponentType, Props} from '../../core/types'
 import {Box} from '../../primitives/box/Box'
 import {KBD} from '../../primitives/kbd/Kbd'
-import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
 export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'

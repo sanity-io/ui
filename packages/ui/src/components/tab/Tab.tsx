@@ -10,8 +10,8 @@ import {
   useRef,
 } from 'react'
 
-import {Button} from '../../primitives/button/Button'
 import type {ComponentType, Props} from '../../core/types'
+import {Button} from '../../primitives/button/Button'
 
 /** @public */
 export const DEFAULT_TAB_ELEMENT = 'button'

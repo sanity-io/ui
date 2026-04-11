@@ -15,12 +15,12 @@ import {
   useState,
 } from 'react'
 
+import type {ComponentType, Props} from '../../core/types'
 import {Box, type BoxProps} from '../../primitives/box/Box'
 import type {CardOwnProps} from '../../primitives/card/Card'
 import {Flex} from '../../primitives/flex/Flex'
 import {Selectable, type SelectableElementType} from '../../primitives/selectable/Selectable'
 import {Text} from '../../primitives/text/Text'
-import type {ComponentType, Props} from '../../core/types'
 import {TreeContext} from './TreeContext'
 import {TreeGroup} from './TreeGroup'
 import {useTree} from './useTree'

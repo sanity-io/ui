@@ -2,8 +2,8 @@ import {avatar_counter, type ResponsiveProp} from '@sanity/ui-css'
 import type {AvatarSize, FontLabelSize} from '@sanity/ui-tokens'
 import {useMemo} from 'react'
 
-import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import type {ComponentType, Props} from '../../core/types'
+import {useResponsiveProp} from '../../hooks/useResponsiveProp'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
 

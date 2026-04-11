@@ -2,8 +2,8 @@ import {ChevronDownIcon} from '@sanity/icons'
 import {_input_element, select, select_presentation, type SelectStyleProps} from '@sanity/ui-css'
 import {useImperativeHandle, useRef} from 'react'
 
-import {useCustomValidity} from '../../hooks/useCustomValidity'
 import type {ComponentType, Props} from '../../core/types'
+import {useCustomValidity} from '../../hooks/useCustomValidity'
 import {Box} from '../box/Box'
 import {Text} from '../text/Text'
 
