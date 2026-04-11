@@ -11,7 +11,7 @@ import {
   MenuItem,
   Text,
 } from '@sanity/ui'
-import type {ElementTone} from '@sanity/ui/theme'
+import type {ElementTone} from '@sanity/ui/tokens'
 import {useState} from 'react'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {

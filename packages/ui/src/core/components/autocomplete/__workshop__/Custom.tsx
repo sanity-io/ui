@@ -1,5 +1,5 @@
 import {Autocomplete, Box, Button, Card, Code, Container, Stack, Text} from '@sanity/ui'
-import type {Radius} from '@sanity/ui/theme'
+import type {Radius} from '@sanity/ui/tokens'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useState} from 'react'
 

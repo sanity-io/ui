@@ -1,6 +1,6 @@
 import {Flex, Text} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
-import type {AvatarColor} from '@sanity/ui/theme'
+import type {AvatarColor} from '@sanity/ui/tokens'
+import {vars} from '@sanity/ui-css'
 import {useSelect} from '@sanity/ui-workshop'
 import {assignInlineVars} from '@vanilla-extract/dynamic'
 

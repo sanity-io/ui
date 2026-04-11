@@ -1,5 +1,5 @@
 import {Button, Flex, LayerProvider, type Placement, Popover, useLayer} from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/theme'
+import {CARD_TONES} from '@sanity/ui/tokens'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 export default function RecursiveStory(): React.JSX.Element {

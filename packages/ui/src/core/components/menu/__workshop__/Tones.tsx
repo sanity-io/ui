@@ -1,6 +1,6 @@
 import {CubeIcon} from '@sanity/icons'
 import {Box, Card, LayerProvider, Menu, MenuItem} from '@sanity/ui'
-import {ELEMENT_TONES} from '@sanity/ui/theme'
+import {ELEMENT_TONES} from '@sanity/ui/tokens'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'

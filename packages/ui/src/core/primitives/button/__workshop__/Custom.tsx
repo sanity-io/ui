@@ -1,5 +1,5 @@
 import {Button, Flex, Grid, Hotkeys, Stack, Text} from '@sanity/ui'
-import {BUTTON_MODES, ELEMENT_TONES} from '@sanity/ui/theme'
+import {BUTTON_MODES, ELEMENT_TONES} from '@sanity/ui/tokens'
 
 export default function CustomStory(): React.JSX.Element {
   return (

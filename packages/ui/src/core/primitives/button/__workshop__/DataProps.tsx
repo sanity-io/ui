@@ -1,5 +1,5 @@
 import {Button, Stack} from '@sanity/ui'
-import type {ButtonMode, ElementTone} from '@sanity/ui/theme'
+import type {ButtonMode, ElementTone} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 
 import {WORKSHOP_BUTTON_MODE_OPTIONS, WORKSHOP_BUTTON_TONE_OPTIONS} from '$workshop'

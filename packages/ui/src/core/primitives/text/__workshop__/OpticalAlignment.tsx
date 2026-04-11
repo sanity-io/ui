@@ -1,7 +1,7 @@
 import {CropIcon} from '@sanity/icons'
 import {Box, Stack, Text} from '@sanity/ui'
 import {vars} from '@sanity/ui/css'
-import {FONT_TEXT_SIZE} from '@sanity/ui/theme'
+import {FONT_TEXT_SIZE} from '@sanity/ui/tokens'
 
 export default function OpticalAlignment(): React.JSX.Element {
   return (
