@@ -1,5 +1,5 @@
-import {avatarStack, type ResponsiveProp} from '@sanity/ui/css'
-import type {AvatarSize} from '@sanity/ui/theme'
+import {avatar_stack, type ResponsiveProp} from '@sanity/ui-css'
+import type {AvatarSize} from '@sanity/ui-tokens'
 import {Children, cloneElement, Fragment, isValidElement, type ReactElement} from 'react'
 
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
@@ -63,7 +63,7 @@ export function AvatarStack<E extends AvatarStackElementType = typeof DEFAULT_AV
       {...rest}
       alignItems="center"
       as={as}
-      className={avatarStack({className, size})}
+      className={avatar_stack({className, size})}
       display="flex"
       justifyContent="flex-start"
     >

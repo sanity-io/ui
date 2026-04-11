@@ -1,6 +1,6 @@
 import {ChevronRightIcon} from '@sanity/icons'
-import type {RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
-import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
+import type {RadiusStyleProps, ResponsiveProp} from '@sanity/ui-css'
+import type {ElementTone, FontTextSize, Space} from '@sanity/ui-tokens'
 import {
   type ElementType,
   isValidElement,

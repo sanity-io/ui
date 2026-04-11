@@ -1,4 +1,4 @@
-import {skeleton, type SkeletonStyleProps} from '@sanity/ui/css'
+import {skeleton, type SkeletonStyleProps} from '@sanity/ui-css'
 import {useEffect, useState} from 'react'
 
 import type {ComponentType, Props} from '../../types'

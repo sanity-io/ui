@@ -1,5 +1,5 @@
-import {menu, type PaddingStyleProps, type ResponsiveProp} from '@sanity/ui/css'
-import type {Space} from '@sanity/ui/theme'
+import {menu, type PaddingStyleProps, type ResponsiveProp} from '@sanity/ui-css'
+import type {Space} from '@sanity/ui-tokens'
 import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'

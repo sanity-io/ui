@@ -8,8 +8,8 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {type RadiusStyleProps, type ShadowStyleProps, tooltip} from '@sanity/ui/css'
-import type {CardTone, ColorScheme} from '@sanity/ui/theme'
+import {type RadiusStyleProps, type ShadowStyleProps, tooltip} from '@sanity/ui-css'
+import type {CardTone, ColorScheme} from '@sanity/ui-tokens'
 import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
@@ -41,9 +41,9 @@ import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
 import {PortalContext} from '../../utils/portal/PortalContext'
 import {assertPortalContext} from '../../utils/portal/usePortal'
-import {CardContext} from '../card/CardContext'
+// import {CardContext} from '../card/CardContext'
 import {CardProvider} from '../card/CardProvider'
-import {assertCardContext} from '../card/useCard'
+// import {assertCardContext} from '../card/useCard'
 import type {LayerOwnProps} from '../layer/Layer'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
@@ -127,7 +127,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     scheme,
     shadow = 2,
     zOffset = Z_OFFSETS.tooltip,
-    tone = 'inherit',
+    tone,
     ...rest
   } = props as TooltipProps<typeof DEFAULT_TOOLTIP_ELEMENT>
   const boundaryElement = _boundaryElement ?? use(BoundaryElementContext)
@@ -161,16 +161,13 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     rootBoundary,
   })
 
-  const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
+  const {floatingStyles, placement, middlewareData, refs} = useFloating({
     middleware,
     placement: placementProp,
     whileElementsMounted: autoUpdate,
     elements: {reference: referenceElement},
     transform: false,
   })
-
-  const arrowX = middlewareData.arrow?.x
-  const arrowY = middlewareData.arrow?.y
 
   const originX = middlewareData['@sanity/ui/origin']?.originX
   const originY = middlewareData['@sanity/ui/origin']?.originY
@@ -310,14 +307,6 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     setTooltipMaxWidth(Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2)
   }, [boundaryElement, portalElement])
 
-  const setArrow = useCallback(
-    (arrowEl: HTMLDivElement | null) => {
-      arrowRef.current = arrowEl
-      update()
-    },
-    [update],
-  )
-
   const setFloating = useCallback(
     (node: HTMLDivElement | null) => {
       ref.current = node
@@ -364,10 +353,6 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
       {...rest}
       ref={setFloating}
       animate={animate}
-      arrow={arrowProp}
-      arrowRef={setArrow}
-      arrowX={arrowX}
-      arrowY={arrowY}
       as={as}
       className={tooltip({className})}
       originX={originX}
@@ -391,16 +376,16 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
   let children = showTooltip ? node : null
 
   if (showTooltip && portalProp) {
-    let resolvedTone = tone as Exclude<typeof tone, 'inherit'>
-    if (tone === 'inherit') {
-      const card = use(CardContext)
-      assertCardContext(card)
-      resolvedTone = card.tone
-    }
+    const resolvedTone = tone as Exclude<typeof tone, 'inherit'>
+    // if (tone === 'inherit') {
+    //   const card = use(CardContext)
+    //   assertCardContext(card)
+    //   resolvedTone = card.tone
+    // }
 
     children = (
       <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        <CardProvider scheme={scheme ?? 'light'} tone={resolvedTone}>
+        <CardProvider scheme={scheme ?? 'light'} tone={resolvedTone ?? 'default'}>
           {node}
         </CardProvider>
       </Portal>

@@ -1,4 +1,4 @@
-import {radio, radioInput, radioPresentation} from '@sanity/ui/css'
+import {radio, radio_input, radio_presentation} from '@sanity/ui-css'
 import {useImperativeHandle, useRef} from 'react'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -51,14 +51,14 @@ export function Radio<E extends RadioElementType = typeof DEFAULT_RADIO_ELEMENT>
       <Element
         {...rest}
         ref={ref}
-        className={radioInput()}
+        className={radio_input()}
         data-invalid={customValidity ? '' : undefined}
         data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled || readOnly}
         readOnly={readOnly}
         type="radio"
       />
-      <span className={radioPresentation()} />
+      <span className={radio_presentation()} />
     </span>
   )
 }

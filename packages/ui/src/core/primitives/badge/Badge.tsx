@@ -4,7 +4,7 @@ import {
   type FlexStyleProps,
   type PaddingStyleProps,
   type RadiusStyleProps,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 
 import type {ComponentType, Props} from '../../types'
 import {Box} from '../box/Box'
@@ -35,7 +35,6 @@ export function Badge<E extends BadgeElementType = typeof DEFAULT_BADGE_ELEMENT>
     children,
     className,
     flex = 'none',
-    fontSize = 1,
     padding = 1,
     radius = 2,
     tone = 'default',
@@ -55,7 +54,7 @@ export function Badge<E extends BadgeElementType = typeof DEFAULT_BADGE_ELEMENT>
       radius={radius}
       width="min"
     >
-      <Text size={fontSize}>{children}</Text>
+      <Text size={1}>{children}</Text>
     </Box>
   )
 }

@@ -1,4 +1,4 @@
-import type {Breakpoint, ResponsiveProp} from '@sanity/ui/css'
+import type {Breakpoint, ResponsiveProp} from '@sanity/ui-css'
 
 import {EMPTY_ARRAY} from '../constants'
 import {isArray} from '../lib/isArray'

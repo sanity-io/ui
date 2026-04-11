@@ -1,4 +1,4 @@
-import type {ResponsiveProp} from '@sanity/ui/css'
+import type {ResponsiveProp} from '@sanity/ui-css'
 import {AnimatePresence} from 'motion/react'
 import {startTransition, useMemo, useRef, useState} from 'react'
 

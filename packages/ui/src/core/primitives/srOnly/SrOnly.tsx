@@ -1,4 +1,4 @@
-import {srOnly} from '@sanity/ui/css'
+import {srOnly} from '@sanity/ui-css'
 
 import type {ComponentType, Props} from '../../types'
 

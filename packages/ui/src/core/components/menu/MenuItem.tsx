@@ -3,8 +3,8 @@ import type {
   PaddingStyleProps,
   RadiusStyleProps,
   ResponsiveProp,
-} from '@sanity/ui/css'
-import type {ElementTone, FontTextSize} from '@sanity/ui/theme'
+} from '@sanity/ui-css'
+import type {ElementTone, FontTextSize} from '@sanity/ui-tokens'
 import {
   type ElementType,
   isValidElement,

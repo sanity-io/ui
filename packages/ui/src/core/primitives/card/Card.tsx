@@ -1,4 +1,5 @@
-import {card, type CardStyleProps} from '@sanity/ui/css'
+import {card, type CardStyleProps} from '@sanity/ui-css'
+import type {CardTone} from '@sanity/ui-tokens'
 import {use} from 'react'
 
 import type {Props} from '../../types'
@@ -10,7 +11,7 @@ import {CardProvider} from './CardProvider'
 export const DEFAULT_CARD_ELEMENT = 'div'
 
 /** @public */
-export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
+export interface CardOwnProps extends BoxOwnProps, Omit<CardStyleProps, 'tone'> {
   /**
    * Do not use in production.
    * @beta
@@ -25,6 +26,7 @@ export interface CardOwnProps extends BoxOwnProps, CardStyleProps {
   pressed?: boolean
   selected?: boolean
   target?: string
+  tone?: CardTone | 'inherit'
 }
 
 /** @public */

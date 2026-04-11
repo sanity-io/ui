@@ -1,5 +1,5 @@
-import type {ResponsiveProp} from '@sanity/ui/css'
-import type {ElementTone, FontTextSize, Space} from '@sanity/ui/theme'
+import type {ResponsiveProp} from '@sanity/ui-css'
+import type {ElementTone, FontTextSize, Space} from '@sanity/ui-tokens'
 import {
   type ElementType,
   type FocusEvent,

@@ -1,5 +1,5 @@
-import {avatarCounter, type ResponsiveProp} from '@sanity/ui/css'
-import type {AvatarSize, FontLabelSize} from '@sanity/ui/theme'
+import {avatar_counter, type ResponsiveProp} from '@sanity/ui-css'
+import type {AvatarSize, FontLabelSize} from '@sanity/ui-tokens'
 import {useMemo} from 'react'
 
 import {useResponsiveProp} from '../../hooks/useResponsiveProp'
@@ -54,7 +54,7 @@ export function AvatarCounter<
       {...rest}
       alignItems="center"
       as={as}
-      className={avatarCounter({className, size})}
+      className={avatar_counter({className, size})}
       display="flex"
       flex="none"
       justifyContent="center"

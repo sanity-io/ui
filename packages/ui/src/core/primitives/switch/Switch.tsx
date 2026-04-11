@@ -1,10 +1,10 @@
 import {
   _switch,
-  _switchElement,
-  _switchPresentation,
-  _switchThumb,
-  _switchTrack,
-} from '@sanity/ui/css'
+  _switch_element,
+  _switch_presentation,
+  _switch_thumb,
+  _switch_track,
+} from '@sanity/ui-css'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 
 import type {ComponentType, Props} from '../../types'
@@ -62,14 +62,14 @@ export function Switch<E extends SwitchElementType = typeof DEFAULT_SWITCH_ELEME
       <Element
         {...rest}
         ref={ref}
-        className={_switchElement()}
+        className={_switch_element()}
         data-read-only={!disabled && readOnly ? '' : undefined}
         disabled={disabled || readOnly}
         type="checkbox"
       />
-      <span aria-hidden className={_switchPresentation()}>
-        <span className={_switchTrack()} />
-        <span className={_switchThumb()} />
+      <span aria-hidden className={_switch_presentation()}>
+        <span className={_switch_track()} />
+        <span className={_switch_thumb()} />
       </span>
     </span>
   )

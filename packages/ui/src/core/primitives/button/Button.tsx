@@ -1,15 +1,15 @@
 import {
   type BoxStyleProps,
   button,
-  buttonLoadingBox,
+  button_loadingBox,
   type ButtonStyleProps,
   type DisplayStyleProps,
   type GapStyleProps,
   type PaddingStyleProps,
   type ResponsiveProp,
   type Width,
-} from '@sanity/ui/css'
-import type {FontTextSize} from '@sanity/ui/theme'
+} from '@sanity/ui-css'
+import type {FontTextSize} from '@sanity/ui-tokens'
 import {isValidElement} from 'react'
 import {isValidElementType} from 'react-is'
 
@@ -116,7 +116,7 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
         <Box
           alignItems="center"
           as="span"
-          className={buttonLoadingBox()}
+          className={button_loadingBox()}
           display="flex"
           flex={1}
           justifyContent="center"

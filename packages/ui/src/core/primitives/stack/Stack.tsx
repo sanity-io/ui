@@ -1,4 +1,4 @@
-import {stack} from '@sanity/ui/css'
+import {stack} from '@sanity/ui-css'
 
 import type {Props} from '../../types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'

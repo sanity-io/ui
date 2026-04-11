@@ -1,5 +1,5 @@
-import {_selectable, type SelectableStyleProps} from '@sanity/ui/css'
-import type {ElementTone} from '@sanity/ui/theme'
+import {selectable, type SelectableStyleProps} from '@sanity/ui-css'
+import type {ElementTone} from '@sanity/ui-tokens'
 
 import type {ComponentType, Props} from '../../types'
 import {Box, type BoxOwnProps} from '../box/Box'
@@ -43,7 +43,7 @@ export function Selectable<E extends SelectableElementType = typeof DEFAULT_SELE
     <Box
       {...rest}
       as={as}
-      className={_selectable({className, radius, tone})}
+      className={selectable({className, radius, tone})}
       data-selected={selected ? '' : props['data-selected']}
     />
   )

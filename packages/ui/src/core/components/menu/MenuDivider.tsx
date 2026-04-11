@@ -1,4 +1,4 @@
-import {menuDivider} from '@sanity/ui/css'
+import {menu_divider} from '@sanity/ui-css'
 
 import type {ComponentType, Props} from '../../types'
 
@@ -28,5 +28,5 @@ export function MenuDivider<E extends MenuDividerElementType = typeof DEFAULT_ME
     ...rest
   } = props as MenuDividerProps<typeof DEFAULT_MENU_DIVIDER_ELEMENT>
 
-  return <Element {...rest} className={menuDivider({className})} />
+  return <Element {...rest} className={menu_divider({className})} />
 }

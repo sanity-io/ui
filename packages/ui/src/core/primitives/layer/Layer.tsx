@@ -1,4 +1,4 @@
-import type {ResponsiveProp} from '@sanity/ui/css'
+import type {ResponsiveProp} from '@sanity/ui-css'
 
 import type {CardElementType, CardOwnProps} from '../../primitives/card/Card'
 import type {Props} from '../../types'

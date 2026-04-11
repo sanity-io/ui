@@ -1,9 +1,5 @@
 import type {Placement} from '../../types'
 
-export const DEFAULT_TOOLTIP_ARROW_WIDTH = 15
-export const DEFAULT_TOOLTIP_ARROW_HEIGHT = 6
-export const DEFAULT_TOOLTIP_ARROW_RADIUS = 2
-
 export const DEFAULT_TOOLTIP_DISTANCE = 4
 export const DEFAULT_TOOLTIP_PADDING = 4
 

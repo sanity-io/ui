@@ -1,19 +1,13 @@
 import type {Strategy} from '@floating-ui/react-dom'
-import {popoverCard} from '@sanity/ui/css'
+import {popover_card} from '@sanity/ui-css'
 import {motion} from 'motion/react'
-import {type CSSProperties, type ForwardedRef, useMemo} from 'react'
+import {type CSSProperties, useMemo} from 'react'
 
 import {POPOVER_MOTION_PROPS} from '../../constants'
 import type {Placement} from '../../types'
-import {Arrow} from '../arrow/Arrow'
 import {Flex} from '../flex/Flex'
 import {Layer, type LayerOwnProps, type LayerProps} from '../layer/Layer'
-import {
-  DEFAULT_POPOVER_ARROW_HEIGHT,
-  DEFAULT_POPOVER_ARROW_RADIUS,
-  DEFAULT_POPOVER_ARROW_WIDTH,
-  DEFAULT_POPOVER_MARGINS,
-} from './constants'
+import {DEFAULT_POPOVER_MARGINS} from './constants'
 import type {PopoverMargins} from './types'
 
 /** @internal */
@@ -24,10 +18,6 @@ export type PopoverLayerOwnProps = LayerOwnProps & {
   /** @beta*/
   __unstable_margins?: PopoverMargins
   animate?: boolean
-  arrow: boolean
-  arrowRef: ForwardedRef<HTMLDivElement>
-  arrowX?: number
-  arrowY?: number
   originX?: number
   originY?: number
   placement: Placement
@@ -45,10 +35,6 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
   const {
     __unstable_margins: marginsProp,
     animate,
-    arrow,
-    arrowRef,
-    arrowX,
-    arrowY,
     children,
     maxWidth,
     padding,
@@ -61,7 +47,7 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
     shadow,
     strategy,
     style,
-    tone = 'inherit',
+    tone,
     x: xProp,
     y: yProp,
     ...rest
@@ -90,20 +76,10 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
     [animate, originX, originY, referenceWidth, style, x, y],
   )
 
-  const arrowStyle: CSSProperties = useMemo(
-    () => ({
-      left: arrowX !== null ? arrowX : undefined,
-      top: arrowY !== null ? arrowY : undefined,
-      right: undefined,
-      bottom: undefined,
-    }),
-    [arrowX, arrowY],
-  )
-
   return (
     // @ts-expect-error - TODO: fix this
     <Layer
-      className={popoverCard()}
+      className={popover_card()}
       data-ui="Popover"
       {...rest}
       animate={animate ? ['visible', 'scaleIn'] : undefined}
@@ -134,16 +110,6 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
           {children}
         </Flex>
       </Flex>
-
-      {arrow && (
-        <Arrow
-          ref={arrowRef}
-          height={DEFAULT_POPOVER_ARROW_HEIGHT}
-          radius={DEFAULT_POPOVER_ARROW_RADIUS}
-          style={arrowStyle}
-          width={DEFAULT_POPOVER_ARROW_WIDTH}
-        />
-      )}
     </Layer>
   )
 }

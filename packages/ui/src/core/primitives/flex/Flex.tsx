@@ -4,7 +4,7 @@ import type {
   FlexWrap,
   JustifyContent,
   ResponsiveProp,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 
 import type {Props} from '../../types'
 import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'

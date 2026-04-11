@@ -1,4 +1,4 @@
-import {BREAKPOINTS} from '@sanity/ui/css'
+import {BREAKPOINTS} from '@sanity/ui-css'
 import {useImperativeHandle, useMemo, useState} from 'react'
 
 import {useElementSize} from '../../hooks/useElementSize'

@@ -1,4 +1,4 @@
-import {type Breakpoint, BREAKPOINTS} from '@sanity/ui/css'
+import {type Breakpoint, BREAKPOINTS} from '@sanity/ui-css'
 import {useMemo, useSyncExternalStore} from 'react'
 
 const media = Object.values(BREAKPOINTS)

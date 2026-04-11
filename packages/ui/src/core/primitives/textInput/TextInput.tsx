@@ -1,15 +1,15 @@
 import {CloseIcon} from '@sanity/icons'
 import {
-  _inputElement,
-  _inputPresentation,
+  _input_element,
+  _input_presentation,
   type InputStyleProps,
   type ResponsiveProp,
   textInput,
-  textInputElement,
-  textInputPrefix,
-  textInputSuffix,
-} from '@sanity/ui/css'
-import type {FontWeight, Space} from '@sanity/ui/theme'
+  textInput_element,
+  textInput_prefix,
+  textInput_suffix,
+} from '@sanity/ui-css'
+import type {FontWeight, Space} from '@sanity/ui-tokens'
 import {
   type ElementType,
   isValidElement,
@@ -158,23 +158,23 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
       data-ui="TextInput"
     >
       {prefix && (
-        <span className={textInputPrefix()}>
+        <span className={textInput_prefix()}>
           <span>{prefix}</span>
         </span>
       )}
 
-      <span className={textInputElement()}>
+      <span className={textInput_element()}>
         <Element
           {...rest}
           ref={ref}
-          className={_inputElement()}
+          className={_input_element()}
           data-no-focus-ring={__unstable_disableFocusRing ? '' : undefined}
           disabled={disabled}
           readOnly={readOnly}
           type={type}
         />
 
-        <span className={_inputPresentation()}>
+        <span className={_input_presentation()}>
           {IconComponent && (
             <Box as="span" insetLeft={0} insetTop={0} padding={padding} position="absolute">
               <Text as="span" size={fontSize}>
@@ -207,7 +207,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
       </span>
 
       {suffix && (
-        <span className={textInputSuffix()}>
+        <span className={textInput_suffix()}>
           <span>{suffix}</span>
         </span>
       )}

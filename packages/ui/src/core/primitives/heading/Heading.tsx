@@ -3,7 +3,7 @@ import {
   type HeadingStyleProps,
   textOverflow,
   type TextOverflowStyleProps,
-} from '@sanity/ui/css'
+} from '@sanity/ui-css'
 
 import type {ComponentType, Props} from '../../types'
 

@@ -10,7 +10,7 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {type MaxWidth, popover as popoverCss, type ResponsiveProp} from '@sanity/ui/css'
+import {type MaxWidth, popover as popoverCss, type ResponsiveProp} from '@sanity/ui-css'
 import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
@@ -33,9 +33,9 @@ import type {ComponentType, Placement, Props} from '../../types'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
-import {CardContext} from '../card/CardContext'
+// import {CardContext} from '../card/CardContext'
 import {CardProvider} from '../card/CardProvider'
-import {assertCardContext} from '../card/useCard'
+// import {assertCardContext} from '../card/useCard'
 import {type LayerOwnProps} from '../layer/Layer'
 import {useLayer} from '../layer/useLayer'
 import {
@@ -183,7 +183,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     referenceElement,
     scheme,
     shadow = 3,
-    tone = 'inherit',
+    tone,
     width: widthProp = 'auto',
     zOffset: zOffsetProp = Z_OFFSETS.popover,
     updateRef,
@@ -236,9 +236,6 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
 
   const referenceHidden = middlewareData.hide?.referenceHidden
 
-  const arrowX = middlewareData.arrow?.x
-  const arrowY = middlewareData.arrow?.y
-
   const originX = middlewareData['@sanity/ui/origin']?.originX
   const originY = middlewareData['@sanity/ui/origin']?.originY
 
@@ -280,10 +277,6 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
         ref={setFloating}
         __unstable_margins={margins}
         animate={animate}
-        arrow={arrowProp}
-        arrowRef={arrowRef}
-        arrowX={arrowX}
-        arrowY={arrowY}
         as={as}
         className={popoverCss({className})}
         hidden={referenceHidden}
@@ -310,16 +303,16 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
   let children = open ? node : null
 
   if (open && portal) {
-    let resolvedTone = tone as Exclude<typeof tone, 'inherit'>
-    if (tone === 'inherit') {
-      const card = use(CardContext)
-      assertCardContext(card)
-      resolvedTone = card.tone
-    }
+    const resolvedTone = tone as Exclude<typeof tone, 'inherit'>
+    // if (tone === 'inherit') {
+    //   const card = use(CardContext)
+    //   assertCardContext(card)
+    //   resolvedTone = card.tone
+    // }
 
     children = (
       <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
-        <CardProvider scheme={scheme ?? 'light'} tone={resolvedTone}>
+        <CardProvider scheme={scheme ?? 'light'} tone={resolvedTone ?? 'default'}>
           {node}
         </CardProvider>
       </Portal>

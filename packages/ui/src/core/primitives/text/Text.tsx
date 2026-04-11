@@ -1,4 +1,4 @@
-import {text, textOverflow, type TextOverflowStyleProps, type TextStyleProps} from '@sanity/ui/css'
+import {text, textOverflow, type TextOverflowStyleProps, type TextStyleProps} from '@sanity/ui-css'
 
 import type {ComponentType, Props} from '../../types'
 

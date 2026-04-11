@@ -1,5 +1,5 @@
 import {SpinnerIcon} from '@sanity/icons'
-import {animatedSpinnerIcon} from '@sanity/ui/css'
+import {spinner_animatedIcon} from '@sanity/ui-css'
 import type {SVGProps} from 'react'
 
 /** @internal */
@@ -9,6 +9,6 @@ export function AnimatedSpinnerIcon(
   const {...rest} = props
 
   return (
-    <SpinnerIcon data-sanity-icon="animated-spinner" {...rest} className={animatedSpinnerIcon()} />
+    <SpinnerIcon data-sanity-icon="animated-spinner" {...rest} className={spinner_animatedIcon()} />
   )
 }

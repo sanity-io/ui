@@ -1,5 +1,5 @@
-import {code, type CodeStyleProps, type ResponsiveProp} from '@sanity/ui/css'
-import type {FontCodeSize} from '@sanity/ui/theme'
+import {code, type CodeStyleProps, type ResponsiveProp} from '@sanity/ui-css'
+import type {FontCodeSize} from '@sanity/ui-tokens'
 import {lazy, Suspense} from 'react'
 
 import type {ComponentType, Props} from '../../types'

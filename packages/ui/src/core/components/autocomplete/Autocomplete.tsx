@@ -1,6 +1,6 @@
 import {ChevronDownIcon} from '@sanity/icons'
-import type {ResponsiveProp} from '@sanity/ui/css'
-import type {Radius, Space} from '@sanity/ui/theme'
+import type {ResponsiveProp} from '@sanity/ui-css'
+import type {Radius, Space} from '@sanity/ui-tokens'
 import {
   type ChangeEvent,
   cloneElement,

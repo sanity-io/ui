@@ -1,5 +1,5 @@
-import type {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui/css'
-import type {FontTextSize, Space} from '@sanity/ui/theme'
+import type {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui-css'
+import type {FontTextSize, Space} from '@sanity/ui-tokens'
 
 import {Box} from '../../primitives/box/Box'
 import {KBD} from '../../primitives/kbd/Kbd'

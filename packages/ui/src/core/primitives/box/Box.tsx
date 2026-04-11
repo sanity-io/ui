@@ -1,4 +1,4 @@
-import {box, type BoxStyleProps} from '@sanity/ui/css'
+import {box, type BoxStyleProps} from '@sanity/ui-css'
 
 import type {ComponentType, Props} from '../../types'
 
