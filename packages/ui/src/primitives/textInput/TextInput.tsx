@@ -264,7 +264,6 @@ function ClearButton({
       <Button
         aria-label="Clear"
         data-qa="clear-button"
-        display="block"
         fontSize={fontSize}
         icon={CloseIcon}
         mode="bleed"

@@ -1,13 +1,14 @@
-import {container, type ContainerStyleProps} from '@sanity/ui-css'
+import {container, CONTAINER_STYLE_PROP_KEYS, type ContainerStyleProps} from '@sanity/ui-css'
 
+import {_splitKeys} from '../../core/_keys'
 import type {Props} from '../../core/types'
-import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
+import type {BoxElementType} from '../box/Box'
 
 /** @public */
 export const DEFAULT_CONTAINER_ELEMENT = 'div'
 
 /** @public */
-export type ContainerOwnProps = Omit<BoxOwnProps, 'width'> & ContainerStyleProps
+export type ContainerOwnProps = ContainerStyleProps
 
 /** @public */
 export type ContainerElementType = BoxElementType
@@ -26,12 +27,17 @@ export type ContainerProps<E extends ContainerElementType = ContainerElementType
 export function Container<E extends ContainerElementType = typeof DEFAULT_CONTAINER_ELEMENT>(
   props: ContainerProps<E>,
 ): React.JSX.Element {
-  const {
-    as = DEFAULT_CONTAINER_ELEMENT,
-    className,
-    width = 2,
-    ...rest
-  } = props as ContainerProps<typeof DEFAULT_CONTAINER_ELEMENT>
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_CONTAINER_ELEMENT,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(
+    props as ContainerProps<typeof DEFAULT_CONTAINER_ELEMENT>,
+    CONTAINER_STYLE_PROP_KEYS,
+  )
 
-  return <Box data-ui="Container" {...rest} as={as} className={container({className, width})} />
+  return <Element data-ui="Container" {...domProps} className={container(styleProps)} />
 }

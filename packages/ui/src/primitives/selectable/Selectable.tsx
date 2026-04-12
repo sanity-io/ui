@@ -1,50 +1,48 @@
-import {selectable, type SelectableStyleProps} from '@sanity/ui-css'
-import type {ElementTone} from '@sanity/ui-tokens'
+import {selectable, SELECTABLE_STYLE_PROP_KEYS, type SelectableStyleProps} from '@sanity/ui-css'
 
+import {_splitKeys} from '../../core/_keys'
 import type {ComponentType, Props} from '../../core/types'
-import {Box, type BoxOwnProps} from '../box/Box'
 
-/** @internal */
+/** @public */
 export const DEFAULT_SELECTABLE_ELEMENT = 'button'
 
-/** @internal */
-export type SelectableOwnProps = BoxOwnProps &
-  SelectableStyleProps & {
-    disabled?: boolean
-    href?: string
-    selected?: boolean
-    tone?: ElementTone
-    type?: 'button'
-  }
+/** @public */
+export interface SelectableOwnProps extends SelectableStyleProps {
+  selected?: boolean
+}
 
-/** @internal */
-export type SelectableElementType = 'button' | 'a' | ComponentType
+/** @public */
+export type SelectableElementType = 'a' | 'button' | 'span' | ComponentType
 
-/** @internal */
+/** @public */
 export type SelectableProps<E extends SelectableElementType = SelectableElementType> = Props<
   SelectableOwnProps,
   E
 >
 
-/** @internal */
+/** @public */
 export function Selectable<E extends SelectableElementType = typeof DEFAULT_SELECTABLE_ELEMENT>(
   props: SelectableProps<E>,
 ): React.JSX.Element {
-  const {
-    as = DEFAULT_SELECTABLE_ELEMENT,
-    className,
-    radius,
-    selected,
-    tone,
-    ...rest
-  } = props as SelectableProps<typeof DEFAULT_SELECTABLE_ELEMENT>
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_SELECTABLE_ELEMENT,
+      selected,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(
+    props as SelectableProps<typeof DEFAULT_SELECTABLE_ELEMENT>,
+    SELECTABLE_STYLE_PROP_KEYS,
+  )
 
   return (
-    <Box
-      {...rest}
-      as={as}
-      className={selectable({className, radius, tone})}
-      data-selected={selected ? '' : props['data-selected']}
+    <Element
+      data-ui="Selectable"
+      {...domProps}
+      className={selectable(styleProps)}
+      data-pressed={selected ? '' : props['data-pressed']}
     />
   )
 }

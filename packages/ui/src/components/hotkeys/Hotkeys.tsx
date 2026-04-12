@@ -1,8 +1,12 @@
-import type {GapStyleProps, RadiusStyleProps, ResponsiveProp} from '@sanity/ui-css'
-import type {FontTextSize, Space} from '@sanity/ui-tokens'
+import {
+  type GapStyleProps,
+  hotkeys,
+  HOTKEYS_STYLE_PROP_KEYS,
+  type RadiusStyleProps,
+} from '@sanity/ui-css'
 
+import {_splitKeys} from '../../core/_keys'
 import type {ComponentType, Props} from '../../core/types'
-import {Box} from '../../primitives/box/Box'
 import {KBD} from '../../primitives/kbd/Kbd'
 
 /** @public */
@@ -10,9 +14,11 @@ export const DEFAULT_HOTKEYS_ELEMENT = 'kbd'
 
 /** @public */
 export interface HotkeysOwnProps extends GapStyleProps, RadiusStyleProps {
-  fontSize?: ResponsiveProp<FontTextSize>
-  padding?: ResponsiveProp<Space>
-  keys?: string[]
+  /** @deprecated No longer supported. */
+  fontSize?: never
+  /** @deprecated No longer supported. */
+  padding?: never
+  keys: string[]
 }
 
 /** @public */
@@ -32,29 +38,26 @@ export type HotkeysProps<E extends HotkeysElementType = HotkeysElementType> = Pr
 export function Hotkeys<E extends HotkeysElementType = typeof DEFAULT_HOTKEYS_ELEMENT>(
   props: HotkeysProps<E>,
 ): React.JSX.Element | undefined {
-  const {
-    as = DEFAULT_HOTKEYS_ELEMENT,
-    fontSize,
-    gap = 1,
-    gapX,
-    gapY,
-    keys,
-    padding,
-    radius,
-    ...rest
-  } = props as HotkeysProps<typeof DEFAULT_HOTKEYS_ELEMENT>
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_HOTKEYS_ELEMENT,
+      fontSize: _fontSize,
+      keys,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as HotkeysProps<typeof DEFAULT_HOTKEYS_ELEMENT>, HOTKEYS_STYLE_PROP_KEYS)
 
   if (!keys || keys.length === 0) {
     return undefined
   }
 
   return (
-    <Box as={as} data-ui="Hotkeys" {...rest} display="flex" gap={gap} gapX={gapX} gapY={gapY}>
+    <Element data-ui="Hotkeys" {...domProps} className={hotkeys(styleProps)}>
       {keys.map((key, i) => (
-        <KBD key={i} fontSize={fontSize} padding={padding} radius={radius}>
-          {key}
-        </KBD>
+        <KBD key={i}>{key}</KBD>
       ))}
-    </Box>
+    </Element>
   )
 }

@@ -1,18 +1,18 @@
-import {box, root, type RootStyleProps} from '@sanity/ui-css'
+import {root, root_body, ROOT_STYLE_PROP_KEYS, type RootStyleProps} from '@sanity/ui-css'
 import {useCallback, useImperativeHandle, useRef, useState} from 'react'
 
+import {_splitKeys} from '../core/_keys'
 import type {Props} from '../core/types'
-import {Box, type BoxOwnProps} from '../primitives/box/Box'
 import {RootProvider} from './RootProvider'
 
 /** @public */
 export const DEFAULT_ROOT_ELEMENT = 'html'
 
 /** @public */
-export interface RootOwnProps extends BoxOwnProps, RootStyleProps {}
+export type RootOwnProps = RootStyleProps
 
 /** @public */
-export type RootElementType = 'html' | 'body' | 'div'
+export type RootElementType = 'html' | 'div'
 
 /** @public */
 export type RootProps<E extends RootElementType = RootElementType> = Props<RootOwnProps, E>
@@ -25,17 +25,23 @@ export type RootProps<E extends RootElementType = RootElementType> = Props<RootO
 export function Root<E extends RootElementType = typeof DEFAULT_ROOT_ELEMENT>(
   props: RootProps<E>,
 ): React.JSX.Element {
-  const {
-    as: as = DEFAULT_ROOT_ELEMENT,
-    children,
-    className,
-    height,
-    overflow = 'hidden',
-    ref: forwardedRef,
-    scheme = 'light',
-    tone = 'default',
-    ...rest
-  } = props as RootProps<typeof DEFAULT_ROOT_ELEMENT>
+  const [
+    {
+      height,
+      overflow = 'hidden',
+      scheme = 'light',
+      tone = 'default',
+      // split style props
+      ...styleProps
+    },
+    {
+      as: Element = DEFAULT_ROOT_ELEMENT,
+      children,
+      ref: forwardedRef,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as RootProps<typeof DEFAULT_ROOT_ELEMENT>, ROOT_STYLE_PROP_KEYS)
 
   const ref = useRef<HTMLHtmlElement | null>(null)
 
@@ -64,25 +70,24 @@ export function Root<E extends RootElementType = typeof DEFAULT_ROOT_ELEMENT>(
     </RootProvider>
   )
 
-  if (as === 'html') {
-    node = <body className={box({height, margin: 0})}>{node}</body>
+  if (Element === 'html') {
+    node = <body className={root_body({height})}>{node}</body>
   }
 
   return (
-    <Box
-      as={as}
+    <Element
       data-ui="Root"
-      {...rest}
+      {...domProps}
       ref={handleRef}
       className={root({
-        className,
+        ...styleProps,
         height,
+        overflow,
         scheme,
         tone,
       })}
-      overflow={overflow}
     >
       {node}
-    </Box>
+    </Element>
   )
 }

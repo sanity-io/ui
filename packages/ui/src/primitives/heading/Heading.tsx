@@ -1,10 +1,12 @@
 import {
   heading,
+  HEADING_STYLE_PROP_KEYS,
   type HeadingStyleProps,
   textOverflow,
   type TextOverflowStyleProps,
 } from '@sanity/ui-css'
 
+import {_splitKeys} from '../../core/_keys'
 import type {ComponentType, Props} from '../../core/types'
 
 /** @public */
@@ -40,55 +42,27 @@ export type HeadingProps<E extends HeadingElementType = HeadingElementType> = Pr
 export function Heading<E extends HeadingElementType = typeof DEFAULT_HEADING_ELEMENT>(
   props: HeadingProps<E>,
 ): React.JSX.Element {
-  const {
-    align,
-    as: Element = DEFAULT_HEADING_ELEMENT,
-    children,
-    className,
-    flex,
-    margin,
-    marginX,
-    marginY,
-    marginTop,
-    marginRight,
-    marginBottom,
-    marginLeft,
-    maxWidth,
-    muted = false,
-    size = 2,
-    textOverflow: textOverflowProp,
-    weight = 'regular',
-    ...rest
-  } = props as HeadingProps<typeof DEFAULT_HEADING_ELEMENT>
+  const [
+    // split style props
+    styleProps,
+    {
+      as: Element = DEFAULT_HEADING_ELEMENT,
+      children: childrenProp,
+      textOverflow: textOverflowProp,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as HeadingProps<typeof DEFAULT_HEADING_ELEMENT>, HEADING_STYLE_PROP_KEYS)
+
+  let children = childrenProp
+
+  if (textOverflowProp) {
+    children = <span className={textOverflow({textOverflow: textOverflowProp})}>{children}</span>
+  }
 
   return (
-    <Element
-      data-ui="Heading"
-      {...rest}
-      className={heading({
-        className,
-        align,
-        flex,
-        margin,
-        marginX,
-        marginY,
-        marginTop,
-        marginRight,
-        marginBottom,
-        marginLeft,
-        maxWidth,
-        muted,
-        size,
-        weight,
-      })}
-    >
-      <span
-        className={textOverflow({
-          textOverflow: textOverflowProp,
-        })}
-      >
-        {children}
-      </span>
+    <Element data-ui="Heading" {...domProps} className={heading(styleProps)}>
+      {children}
     </Element>
   )
 }

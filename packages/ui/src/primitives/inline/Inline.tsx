@@ -1,30 +1,14 @@
+import {inline, INLINE_STYLE_PROP_KEYS, type InlineStyleProps} from '@sanity/ui-css'
+
+import {_splitKeys} from '../../core/_keys'
 import type {Props} from '../../core/types'
-import {Box, type BoxElementType, type BoxOwnProps} from '../box/Box'
+import type {BoxElementType} from '../box/Box'
 
 /** @public */
 export const DEFAULT_INLINE_ELEMENT = 'div'
 
 /** @public */
-export type InlineOwnProps = Omit<
-  BoxOwnProps,
-  | 'alignItems'
-  | 'flexDirection'
-  | 'flexWrap'
-  | 'justifyContent'
-  | 'gridAutoColumns'
-  | 'gridAutoFlow'
-  | 'gridAutoRows'
-  | 'gridColumnEnd'
-  | 'gridColumnStart'
-  | 'gridColumn'
-  | 'gridRowEnd'
-  | 'gridRowStart'
-  | 'gridRow'
-  | 'gridTemplateColumns'
-  | 'gridTemplateRows'
-  // eslint-disable-next-line no-warning-comments
-  // todo: omit deprecated flex and grid props
->
+export type InlineOwnProps = InlineStyleProps
 
 /** @public */
 export type InlineElementType = BoxElementType
@@ -40,24 +24,14 @@ export type InlineProps<E extends InlineElementType = InlineElementType> = Props
 export function Inline<E extends InlineElementType = typeof DEFAULT_INLINE_ELEMENT>(
   props: InlineProps<E>,
 ): React.JSX.Element {
-  const {
-    as = DEFAULT_INLINE_ELEMENT,
-    children,
-    gap,
-    ...rest
-  } = props as InlineProps<typeof DEFAULT_INLINE_ELEMENT>
+  const [
+    styleProps,
+    {
+      as: Element = DEFAULT_INLINE_ELEMENT,
+      // split DOM props
+      ...domProps
+    },
+  ] = _splitKeys(props as InlineProps<typeof DEFAULT_INLINE_ELEMENT>, INLINE_STYLE_PROP_KEYS)
 
-  return (
-    <Box
-      data-ui="Inline"
-      {...rest}
-      alignItems="center"
-      as={as}
-      display="flex"
-      flexWrap="wrap"
-      gap={gap}
-    >
-      {children}
-    </Box>
-  )
+  return <Element data-ui="Inline" {...domProps} className={inline(styleProps)} />
 }
