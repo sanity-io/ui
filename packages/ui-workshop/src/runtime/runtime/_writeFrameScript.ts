@@ -3,6 +3,8 @@ import path from 'path'
 
 const SCRIPT = `// THIS FILE IS AUTO-GENERATED
 
+import '@sanity/ui/css/index.css'
+
 import {mountFrame} from '@sanity/ui-workshop'
 import {scopes} from '../scopes'
 import config from '../../workshop.config'
