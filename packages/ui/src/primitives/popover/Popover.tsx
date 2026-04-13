@@ -41,7 +41,6 @@ export type PopoverOwnProps = Omit<PopoverLayerOwnProps, 'maxWidth'> & {
   /** @beta */
   __unstable_shift?: number
   /**
-   * @public
    * @deprecated Will be removed in the next major version
    */
   arrow?: boolean
