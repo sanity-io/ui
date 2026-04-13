@@ -84,7 +84,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
   const {
     __unstable_disableFocusRing,
     as: Element = DEFAULT_TEXT_INPUT_ELEMENT,
-    border = true,
+    border,
     className,
     clearButton,
     disabled = false,
