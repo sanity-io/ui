@@ -1,7 +1,7 @@
 'use client'
 
 import {Box, Stack, Text} from '@sanity/ui'
-import {Space} from '@sanity/ui/theme'
+import {Space} from '@sanity/ui/tokens'
 import {ReactElement} from 'react'
 
 import {HeadingNode} from './getToc'
