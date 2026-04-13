@@ -1,6 +1,5 @@
-import type {ColorScheme} from '@sanity/ui/theme'
-
 import type {WorkshopScope, WorkshopStory} from './config/types'
+import type {WorkshopColorScheme} from './types/scheme'
 
 /** @internal */
 export function resolveLocation(
@@ -36,7 +35,7 @@ export function buildFrameUrl(params: {
   baseUrl?: string
   path: string
   payload: Record<string, unknown>
-  scheme: ColorScheme
+  scheme: WorkshopColorScheme
   viewport: string
   zoom: number
 }): string {
@@ -45,11 +44,13 @@ export function buildFrameUrl(params: {
   return [
     baseUrl,
     `?path=${encodeURIComponent(path)}`,
-    `&scheme=${scheme}`,
+    scheme === 'system' ? undefined : `&scheme=${scheme}`,
     `&viewport=${viewport}`,
     `&zoom=${zoom}`,
     ...Object.entries(payload).map(([key, value]) => {
       return `&${key}=${value}`
     }),
-  ].join('')
+  ]
+    .filter(Boolean)
+    .join('')
 }

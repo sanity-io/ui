@@ -1,11 +1,11 @@
-import {Root} from '@sanity/ui'
-import type {ColorScheme} from '@sanity/ui/tokens'
+import {Root, usePrefersDark} from '@sanity/ui'
 import {memo, useCallback, useEffect, useMemo, useState} from 'react'
 
 import type {WorkshopConfig} from '../config/types'
 import {createPubsub} from '../lib/pubsub'
 import {qs} from '../lib/qs'
 import type {WorkshopMsg} from '../types/msg'
+import type {WorkshopColorScheme} from '../types/scheme'
 import type {WorkshopState} from '../types/state'
 import {WorkshopProvider} from '../WorkshopProvider'
 import {workshopReducer} from '../workshopReducer'
@@ -25,7 +25,7 @@ function getStateFromLocation(): WorkshopState {
     frameReady: false,
     path,
     payload,
-    scheme: typeof scheme === 'string' ? (scheme as ColorScheme) : 'light',
+    scheme: typeof scheme === 'string' ? (scheme as WorkshopColorScheme) : 'system',
     viewport: typeof viewport === 'string' ? viewport : 'auto',
     zoom: typeof zoom === 'string' ? Number(zoom) : 1,
   }
@@ -38,6 +38,7 @@ export const WorkshopFrame = memo(function WorkshopFrame(
   const {config} = props
   const main = useMemo(() => createMainController(), [])
   const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])
+  const prefersDark = usePrefersDark()
 
   // Publish messages to both frame+main
   const broadcast = useCallback(
@@ -65,7 +66,12 @@ export const WorkshopFrame = memo(function WorkshopFrame(
   useEffect(() => broadcast({type: 'workshop/frameReady'}), [broadcast])
 
   return (
-    <Root height="fill" lang="en" overflow="auto" scheme={scheme}>
+    <Root
+      height="fill"
+      lang="en"
+      overflow="auto"
+      scheme={scheme === 'system' ? (prefersDark ? 'dark' : 'light') : scheme}
+    >
       <WorkshopProvider
         broadcast={broadcast}
         channel={channel}

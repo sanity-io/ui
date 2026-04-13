@@ -1,12 +1,13 @@
-import {Flex, Root, useMediaIndex} from '@sanity/ui'
+import {Flex, Root, useMediaIndex, usePrefersDark} from '@sanity/ui'
 import type {ColorScheme} from '@sanity/ui/tokens'
 import {debounce, isEqual} from 'lodash'
 import {memo, startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import type {WorkshopConfig} from './config/types'
-import {DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
+import {DEFAULT_SCHEME_VALUE, DEFAULT_VIEWPORT_VALUE, DEFAULT_ZOOM_VALUE} from './constants'
 import {WorkshopInspector} from './inspector/WorkshopInspector'
 import {createPubsub} from './lib/pubsub'
+import {startViewTransition} from './lib/startViewTransition'
 import type {WorkshopLocationStore} from './location/LocationStore'
 import {WorkshopNavbar} from './navbar/WorkshopNavbar'
 import {WorkshopNavigator} from './navigator/WorkshopNavigator'
@@ -22,13 +23,10 @@ import {workshopReducer} from './workshopReducer'
 export interface WorkshopProps {
   config: WorkshopConfig
   locationStore: WorkshopLocationStore
-  onSchemeChange: (nextScheme: ColorScheme) => void
-  scheme?: ColorScheme
 }
 
 function getStateFromLocation(
   loc: Omit<WorkshopLocation, 'type'>,
-  schemeProp?: ColorScheme,
   frameReady?: boolean,
 ): WorkshopState {
   const path = loc.path
@@ -39,7 +37,7 @@ function getStateFromLocation(
     frameReady: frameReady || false,
     path,
     payload,
-    scheme: schemeProp || (typeof scheme === 'string' ? (scheme as ColorScheme) : 'light'),
+    scheme: typeof scheme === 'string' ? (scheme as ColorScheme) : 'system',
     viewport: typeof viewport === 'string' ? viewport : 'auto',
     zoom: typeof zoom === 'number' ? zoom : 1,
   }
@@ -48,7 +46,11 @@ function getStateFromLocation(
 function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQuery {
   const {payload, scheme, viewport, zoom} = state
 
-  const query: WorkshopQuery = {scheme}
+  const query: WorkshopQuery = {}
+
+  if (scheme && scheme !== DEFAULT_SCHEME_VALUE) {
+    query['scheme'] = scheme
+  }
 
   if (viewport && viewport !== DEFAULT_VIEWPORT_VALUE) {
     query['viewport'] = viewport
@@ -77,21 +79,30 @@ function getQueryFromState(state: WorkshopState, withPayload = true): WorkshopQu
 
 /** @public */
 export const Workshop = memo(function Workshop(props: WorkshopProps): React.ReactNode {
-  const {config, locationStore, onSchemeChange, scheme: schemeProp} = props
+  const {config, locationStore} = props
+  const prefersDark = usePrefersDark()
   const withNavbar = config.features?.navbar ?? true
   const channel = useMemo(() => createPubsub<WorkshopMsg>(), [])
   const frame = useMemo(() => createWorkshopFrameController(), [])
   const [{frameReady, path, payload, scheme, viewport, zoom}, setState] = useState<WorkshopState>(
-    () => getStateFromLocation(locationStore.get(), schemeProp),
+    () => getStateFromLocation(locationStore.get()),
   )
   const mediaIndex = useMediaIndex()
   const [navigatorExpanded, setNavigatorExpanded] = useState(false)
   const [inspectorExpanded, setInspectorExpanded] = useState(false)
   const frameReadyRef = useRef(frameReady)
-
-  const schemeRef = useRef(scheme)
   const pathRef = useRef(path)
   const queryRef = useRef<WorkshopQuery>({scheme, viewport, zoom, ...payload})
+
+  const [rootScheme, setRootScheme] = useState(() =>
+    scheme === 'system' ? (prefersDark ? 'dark' : 'light') : scheme,
+  )
+
+  useEffect(() => {
+    startViewTransition(() => {
+      setRootScheme(scheme === 'system' ? (prefersDark ? 'dark' : 'light') : scheme)
+    })
+  }, [scheme, prefersDark])
 
   const broadcast = useCallback(
     (msg: WorkshopMsg) => {
@@ -196,37 +207,19 @@ export const Workshop = memo(function Workshop(props: WorkshopProps): React.Reac
   useEffect(
     () =>
       locationStore.subscribe((loc) => {
-        const nextState = getStateFromLocation(loc, undefined, frameReady)
+        const nextState = getStateFromLocation(loc, frameReady)
 
         broadcast({type: 'workshop/setState', value: nextState})
       }),
     [broadcast, frameReady, locationStore],
   )
 
-  // Observe `scheme` state
-  useEffect(() => {
-    schemeRef.current = scheme
-
-    // Call the `onSchemeChange` callback when `scheme` changes
-    onSchemeChange(scheme)
-  }, [onSchemeChange, scheme])
-
-  // Broadcast changes to `scheme` property
-  useEffect(() => {
-    if (schemeProp) {
-      if (schemeRef.current !== schemeProp) {
-        schemeRef.current = schemeProp
-        broadcast({type: 'workshop/setScheme', value: schemeProp})
-      }
-    }
-  }, [broadcast, schemeProp])
-
   if (!config.scopes) {
     return <>No scopes</>
   }
 
   return (
-    <Root height="fill" lang="en" scheme={scheme}>
+    <Root height="fill" lang="en" scheme={rootScheme}>
       <WorkshopProvider
         broadcast={broadcast}
         channel={channel}

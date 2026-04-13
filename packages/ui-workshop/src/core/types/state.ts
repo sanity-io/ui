@@ -1,11 +1,11 @@
-import type {ColorScheme} from '@sanity/ui/theme'
+import type {WorkshopColorScheme} from './scheme'
 
 /** @public */
 export interface WorkshopState {
   frameReady: boolean
   path: string
   payload: Record<string, unknown>
-  scheme: ColorScheme
+  scheme: WorkshopColorScheme
   viewport: string
   zoom: number
 }

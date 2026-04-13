@@ -5,6 +5,9 @@ export const EMPTY_ARRAY: never[] = []
 export const EMPTY_RECORD: Record<string, unknown> = {}
 
 /** @internal */
+export const DEFAULT_SCHEME_VALUE = 'system'
+
+/** @internal */
 export const DEFAULT_VIEWPORT_VALUE = 'auto'
 
 /** @internal */

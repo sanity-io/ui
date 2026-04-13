@@ -29,10 +29,6 @@ export function workshopReducer(state: WorkshopState, msg: WorkshopMsg): Worksho
     return {...state, viewport: msg.value}
   }
 
-  if (msg.type === 'workshop/toggleScheme') {
-    return {...state, scheme: state.scheme === 'light' ? 'dark' : 'light'}
-  }
-
   if (msg.type === 'workshop/setScheme') {
     if (state.scheme === msg.value) return state
 

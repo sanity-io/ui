@@ -1,9 +1,9 @@
-import type {ColorScheme} from '@sanity/ui/theme'
 import {createContext} from 'react'
 
 import type {WorkshopCollection, WorkshopPlugin, WorkshopScope, WorkshopStory} from './config/types'
 import type {Pubsub} from './lib/pubsub'
 import type {WorkshopMsg} from './types/msg'
+import type {WorkshopColorScheme} from './types/scheme'
 
 /** @public */
 export interface WorkshopContextValue<CustomMsg = never> {
@@ -16,7 +16,7 @@ export interface WorkshopContextValue<CustomMsg = never> {
   origin: 'frame' | 'main'
   path: string
   payload: Record<string, unknown>
-  scheme: ColorScheme
+  scheme: WorkshopColorScheme
   scope: WorkshopScope | null
   scopes: WorkshopScope[]
   story: WorkshopStory | null
