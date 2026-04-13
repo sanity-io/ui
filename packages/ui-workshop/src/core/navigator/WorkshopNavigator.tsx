@@ -4,20 +4,20 @@ import type {ResponsiveProp} from '@sanity/ui/css'
 import type {FontTextSize} from '@sanity/ui/theme'
 import {memo, useCallback, useMemo, useState} from 'react'
 
-import type {WorkshopScope, WorkshopStory} from '../config/types'
+import type {WorkshopCollection, WorkshopScope, WorkshopStory} from '../config/types'
 import {EMPTY_ARRAY} from '../constants'
 import {useWorkshop} from '../useWorkshop'
 import {buildMenu} from './helpers'
 import {SearchResults} from './SearchResults'
 import {StoryTree} from './StoryTree'
-import type {MenuCollection, MenuList, MenuScope} from './types'
+import type {MenuList, MenuScope} from './types'
 import {workshopNavigator} from './WorkshopNavigator.css'
 
 const textInputFontSize: ResponsiveProp<FontTextSize> = [2, 2, 1]
 
 /** @internal */
 export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
-  collections?: MenuCollection[]
+  collections?: WorkshopCollection[]
   expanded: boolean
 }): React.ReactNode {
   const {collections = [], expanded} = props

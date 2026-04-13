@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 /** @public */
 export interface WorkshopCollection {
-  name: string
-  title: string
+  name?: string
+  title?: string
+  children?: WorkshopCollection[]
 }
 
 /** @public */
@@ -28,13 +27,13 @@ export interface WorkshopConfig {
     navbar?: boolean
   }
   frameUrl?: string
-  plugins?: WorkshopPlugin<any>[]
+  plugins?: WorkshopPlugin[]
   scopes: WorkshopScope[]
   title?: string
 }
 
 /** @public */
-export interface WorkshopPlugin<Options = any> {
+export interface WorkshopPlugin<Options = Record<string, never>> {
   name: string
   title: string
   inspector?: React.ElementType<{options: Options}>

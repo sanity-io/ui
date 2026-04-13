@@ -62,7 +62,7 @@ export const WorkshopProvider = memo(function WorkshopProvider(
     if (plugin.provider) {
       const Provider = plugin.provider
       wrappedChildren = (
-        <Provider options={plugin.options || EMPTY_RECORD}>{wrappedChildren}</Provider>
+        <Provider options={plugin.options ?? EMPTY_RECORD}>{wrappedChildren}</Provider>
       )
     }
   }
