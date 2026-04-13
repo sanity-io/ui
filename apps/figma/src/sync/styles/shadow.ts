@@ -1,4 +1,4 @@
-import type {DTCGShadowToken, DTCGShadowValue} from '@sanity/ui-tokens'
+import type {_DTCGShadowToken, _DTCGShadowValue} from '@sanity/ui-tokens/lib'
 
 import {getFigmaDimensionValue} from '../converters/dimension'
 import type {SanityFigmaShadowStyleNode} from '../types/styles'
@@ -7,6 +7,7 @@ export async function createShadowStyle(
   name: string,
   node: SanityFigmaShadowStyleNode,
   allVariableIdsMap: Map<string, string>,
+  shadowTokenMap: Map<string, unknown>,
   disableCache: boolean,
 ) {
   // eslint-disable-next-line no-console
@@ -14,13 +15,14 @@ export async function createShadowStyle(
 
   const t = node.token
 
-  await createDTCGShadowStyle(name, t, allVariableIdsMap, disableCache)
+  await createDTCGShadowStyle(name, t, allVariableIdsMap, shadowTokenMap, disableCache)
 }
 
 async function createDTCGShadowStyle(
   name: string,
-  t: DTCGShadowToken,
+  t: _DTCGShadowToken,
   allVariableIdsMap: Map<string, string>,
+  shadowTokenMap: Map<string, unknown>,
   disableCache: boolean,
 ) {
   const s = await getOrCreateEffectStyle(name)
@@ -31,14 +33,34 @@ async function createDTCGShadowStyle(
     return
   }
 
+  let resolvedToken = t
+
+  // Resolve shadow references
   if (typeof t.$value === 'string') {
-    // not supported
+    const refPath = t.$value.slice(1, -1)
+    const referenced = shadowTokenMap.get(refPath)
+
+    if (referenced && typeof referenced === 'object' && '$type' in referenced && referenced.$type === 'shadow') {
+      resolvedToken = referenced as _DTCGShadowToken
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(`[${name}] Could not resolve shadow reference: ${t.$value}`)
+      return
+    }
+  }
+
+  if (typeof resolvedToken.$value === 'string') {
+    // Still a reference after resolution - shouldn't happen
     // eslint-disable-next-line no-console
-    console.warn(`[${name}] shadow value is a reference - not supported`)
+    console.warn(`[${name}] Shadow reference could not be fully resolved`)
     return
   }
 
-  s.effects = toArray(t.$value).map((v) => buildEffect(v, allVariableIdsMap))
+  const values = [...toArray(resolvedToken.$value)]
+
+  values.reverse()
+
+  s.effects = values.map((v) => buildEffect(v, allVariableIdsMap))
   s.setPluginData('sanity-ui-tokens', cacheKey)
 }
 
@@ -49,7 +71,7 @@ function toArray<T>(value: T | T[]): T[] {
   return [value]
 }
 
-function getShadowValue(t: DTCGShadowValue) {
+function getShadowValue(t: _DTCGShadowValue) {
   return {
     color: t.color,
     offsetX: getFigmaDimensionValue({
@@ -88,7 +110,7 @@ async function getOrCreateEffectStyle(name: string): Promise<EffectStyle> {
   return style
 }
 
-function buildEffect(t: DTCGShadowValue, allVariableIdsMap: Map<string, string>): Effect {
+function buildEffect(t: _DTCGShadowValue, allVariableIdsMap: Map<string, string>): Effect {
   const {color, offsetX, offsetY, blur, spread, inset} = getShadowValue(t)
 
   const colorVariableId =

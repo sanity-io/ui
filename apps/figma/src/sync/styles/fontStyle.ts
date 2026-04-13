@@ -1,3 +1,10 @@
+import type {
+  // _DTCGStringToken,
+  SanityFontFamilyToken,
+  SanityFontWeightToken,
+  SanityTypographyToken,
+} from '@sanity/ui-tokens/lib'
+
 import type {SanityFigmaFontStyleNode} from '../types/styles'
 
 export async function createFontStyleStyle(
@@ -9,25 +16,31 @@ export async function createFontStyleStyle(
   // eslint-disable-next-line no-console
   console.log('Create font style...', key)
 
-  const fontFamily = node.token.family.$extensions['io.sanity'].figma.value
-  const textBoxEdge = node.token.family.$extensions['io.sanity'].textBoxEdge
+  const fontTokens = node.tokens
+
+  const familyToken = fontTokens['family'] as SanityFontFamilyToken
+  // todo
+  // const featureSettingsToken = fontTokens['featureSettings'] as _DTCGStringToken
+  const scaleTokens = fontTokens['scale'] as Record<string, SanityTypographyToken>
+  const weightTokens = fontTokens['weight'] as Record<string, SanityFontWeightToken>
+
+  // node.token.$extensions['io.sanity'].
+  const fontFamily = familyToken.$extensions['io.sanity'].figma.value
+  const textBoxEdge = familyToken.$extensions['io.sanity'].textBoxEdge
 
   // Load all font weights
-  for (const weightToken of Object.values(node.token.weight)) {
+  for (const weightToken of Object.values(weightTokens)) {
     const fontWeight = weightToken.$extensions['io.sanity'].figma.value
     await loadFontOnce(fontFamily, fontWeight)
   }
 
-  for (const [size, sizeToken] of Object.entries(node.token.scale)) {
-    for (const [weight, weightToken] of Object.entries(node.token.weight)) {
+  for (const [size, sizeToken] of Object.entries(scaleTokens)) {
+    for (const [weight, weightToken] of Object.entries(weightTokens)) {
       const name = `${key}/${size}/${weight}`
       const fontWeight = weightToken.$extensions['io.sanity'].figma.value
-
       const fontSize = sizeToken.$value.fontSize
       const lineHeight = sizeToken.$extensions['io.sanity'].lineHeight
       const letterSpacing = sizeToken.$value.letterSpacing
-
-      const s = await getOrCreateTextStyle(name)
 
       const cacheKey = JSON.stringify({
         fontFamily,
@@ -37,30 +50,24 @@ export async function createFontStyleStyle(
         letterSpacing,
         textBoxEdge,
       })
-
+      const s = await getOrCreateTextStyle(name)
       if (!disableCache && s.getPluginData('sanity-ui-tokens') === cacheKey) {
         return
       }
-
       s.fontName = {
         family: fontFamily,
         style: fontWeight,
       }
-
       s.fontSize = typeof fontSize === 'string' ? 16 : fontSize.value
-
       s.letterSpacing = {
         unit: 'PIXELS',
         value: typeof letterSpacing === 'string' ? 0 : letterSpacing.value,
       }
-
       s.lineHeight = {
         unit: 'PIXELS',
         value: typeof lineHeight === 'string' ? 1 : lineHeight.value,
       }
-
       s.leadingTrim = textBoxEdge === 'cap-height' ? 'CAP_HEIGHT' : 'NONE'
-
       s.setPluginData('sanity-ui-tokens', cacheKey)
     }
   }
@@ -72,9 +79,7 @@ export async function createFontStyleStyle(
 async function getOrCreateTextStyle(name: string): Promise<TextStyle> {
   const styles = await figma.getLocalTextStylesAsync()
   const trimmedName = name.trim()
-
   let style = styles.find((s) => s.name.trim() === trimmedName)
-
   if (!style) {
     style = figma.createTextStyle()
     style.name = trimmedName
@@ -82,7 +87,6 @@ async function getOrCreateTextStyle(name: string): Promise<TextStyle> {
   } else {
     // logger.debug(`✓ Found existing text style: "${trimmedName}"`)
   }
-
   return style
 }
 
@@ -97,7 +101,6 @@ async function loadFontOnce(family: string, style: string): Promise<void> {
   if (loadedFonts.has(key)) {
     return
   }
-
   await figma.loadFontAsync({family, style})
   loadedFonts.add(key)
 }

@@ -12,5 +12,6 @@ export default defineConfig({
       '@babel/plugin-transform-optional-chaining',
     ],
   },
+  minify: true,
   tsconfig: 'tsconfig.dist.json',
 })

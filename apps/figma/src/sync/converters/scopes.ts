@@ -1,4 +1,4 @@
-import type {SanityTokenScope} from '@sanity/ui-tokens'
+import type {SanityTokenScope} from '@sanity/ui-tokens/lib'
 
 // Unsupported Figma scopes:
 //   | 'ALL_SCOPES'
@@ -16,6 +16,7 @@ import type {SanityTokenScope} from '@sanity/ui-tokens'
 
 const scopeMap: Record<string, VariableScope> = {
   'corner/radius': 'CORNER_RADIUS',
+  // 'corner/shape': 'CORNER_SMOOTHING',
   'fill/frame': 'FRAME_FILL',
   'fill/shape': 'SHAPE_FILL',
   'fill/text': 'TEXT_FILL',

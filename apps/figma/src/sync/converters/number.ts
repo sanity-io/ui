@@ -1,9 +1,9 @@
-import type {DTCGNumberToken} from '@sanity/ui-tokens'
+import type {_DTCGNumberToken} from '@sanity/ui-tokens/lib'
 
 import type {SanityFigmaNumber, SanityFigmaNumberAlias} from '../types'
 
 export function getFigmaNumberValue(
-  token: DTCGNumberToken,
+  token: _DTCGNumberToken,
 ): SanityFigmaNumber | SanityFigmaNumberAlias {
   if (typeof token.$value === 'string') {
     return {

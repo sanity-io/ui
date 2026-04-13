@@ -1,9 +1,5 @@
-import {system} from '@sanity/ui-tokens'
+import {tokenSystem} from '@sanity/ui-tokens/system'
 
-import {createOrUpdateStyle} from '../styles/handlers'
-import type {Alias} from '../types'
-import type {SanityFigmaStyle} from '../types/styles'
-import {createOrUpdateVariable} from '../variables/handlers'
 import {resolveAliases} from './aliases'
 import {
   buildModeMap,
@@ -13,14 +9,28 @@ import {
   removeExtraModes,
 } from './collections'
 import {findEntities} from './findEntities'
+import {createOrUpdateStyle} from './styles/handlers'
+import type {Alias} from './types'
+import type {SanityFigmaStyle} from './types/styles'
+import {createOrUpdateVariable} from './variables/handlers'
 
 export async function sync(options: {disableCache?: boolean}) {
   const localCollections = await figma.variables.getLocalVariableCollectionsAsync()
   const allVariablesMap = new Map<string, Variable>()
   const allVariableIdsMap = new Map<string, string>()
   const allFigmaStyles: SanityFigmaStyle[] = []
+  const allAliases: Alias[] = []
 
-  for (const _collection of Object.values(system.collections)) {
+  // Build a global shadow token map for resolving cross-layer references
+  const shadowTokenMap = new Map<string, unknown>()
+  for (const layer of tokenSystem.layers) {
+    const tokenSets = layer.kind === 'layer' ? [layer.tokenSet] : Object.values(layer.tokenSets)
+    for (const tokenSet of tokenSets) {
+      collectShadowTokens(tokenSet, shadowTokenMap)
+    }
+  }
+
+  for (const layer of tokenSystem.layers) {
     let collection: VariableCollection | undefined
     let variablesArray: Variable[] | undefined
     let variablesMap: Map<string, Variable> | undefined
@@ -30,15 +40,16 @@ export async function sync(options: {disableCache?: boolean}) {
 
     const aliases: Alias[] = []
 
-    // Get all expected mode keys for this collection
-    const expectedModes = Object.keys(_collection.modes)
+    const modeKeys = [...(layer.kind === 'layer' ? ['default'] : layer.variants)]
 
-    for (const [modeKey, modeValues] of Object.entries(_collection.modes)) {
+    for (const modeKey of modeKeys) {
+      const modeValues = layer.kind === 'layer' ? layer.tokenSet : layer.tokenSets[modeKey]
+
       const {figmaVars, figmaStyles} = findEntities(modeValues)
 
       if (figmaVars.length > 0) {
         if (!collection || !variablesMap || !variableIdsMap || !modes) {
-          collection = getOrCreateCollection(localCollections, _collection.title)
+          collection = getOrCreateCollection(localCollections, layer.title)
           variablesArray = await loadExistingVariables(collection)
           // Convert array to Maps for O(1) lookups
           variablesMap = new Map(variablesArray.map((v) => [v.name, v]))
@@ -48,9 +59,7 @@ export async function sync(options: {disableCache?: boolean}) {
         const modeId = ensureMode(collection, modes!, modeKey)
 
         // eslint-disable-next-line no-console
-        console.log(
-          `Processing ${figmaVars.length} variables for ${_collection.title}/${modeKey}...`,
-        )
+        console.log(`Processing ${figmaVars.length} variables for ${layer.title}/${modeKey}...`)
 
         for (const figmaVar of figmaVars) {
           createOrUpdateVariable(
@@ -60,7 +69,7 @@ export async function sync(options: {disableCache?: boolean}) {
             variablesMap,
             variableIdsMap,
             aliases,
-            _collection.namespace.startsWith('_'),
+            layer.name.startsWith('_'),
             options.disableCache ?? false,
           )
         }
@@ -71,7 +80,7 @@ export async function sync(options: {disableCache?: boolean}) {
 
     if (collection) {
       // Remove any modes that aren't in our expected list (e.g., "Mode 1")
-      removeExtraModes(collection, expectedModes)
+      removeExtraModes(collection, modeKeys)
     }
 
     // Merge into global Maps
@@ -86,16 +95,48 @@ export async function sync(options: {disableCache?: boolean}) {
       }
     }
 
-    // Use ID map for faster alias resolution
-    resolveAliases(aliases, allVariableIdsMap)
+    // Collect all aliases for resolution after all layers are processed
+    allAliases.push(...aliases)
   }
+
+  // Resolve all aliases after all variables have been created and registered
+  resolveAliases(allAliases, allVariableIdsMap)
 
   if (allFigmaStyles.length > 0) {
     // eslint-disable-next-line no-console
     console.log(`Processing ${allFigmaStyles.length} styles...`)
 
     for (const figmaStyle of allFigmaStyles) {
-      await createOrUpdateStyle(figmaStyle, allVariableIdsMap, options.disableCache ?? false)
+      await createOrUpdateStyle(
+        figmaStyle,
+        allVariableIdsMap,
+        shadowTokenMap,
+        options.disableCache ?? false,
+      )
+    }
+  }
+}
+
+function collectShadowTokens(obj: unknown, map: Map<string, unknown>, parentPath = '', parentType?: string): void {
+  if (!obj || typeof obj !== 'object') return
+
+  for (const [key, value] of Object.entries(obj)) {
+    const path = parentPath ? `${parentPath}.${key}` : key
+
+    if (value && typeof value === 'object') {
+      const currentType = '$type' in value ? (value.$type as string) : undefined
+
+      // If this object has a $value and the parent type is 'shadow', it's a shadow token
+      if ('$value' in value && (currentType === 'shadow' || parentType === 'shadow')) {
+        map.set(path, {...value, $type: 'shadow'})
+      }
+      // If this object has $type but no $value, it's a group - continue with this type
+      else if (currentType && !('$value' in value)) {
+        collectShadowTokens(value, map, path, currentType)
+        continue
+      }
+
+      collectShadowTokens(value, map, path, parentType)
     }
   }
 }

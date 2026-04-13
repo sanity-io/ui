@@ -1,4 +1,4 @@
-import type {Alias} from '../types'
+import type {Alias} from './types'
 
 export function resolveAliases(aliases: Alias[], variableIdsMap: Map<string, string>): void {
   for (const alias of aliases) {

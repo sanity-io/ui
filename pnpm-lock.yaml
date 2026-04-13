@@ -304,6 +304,9 @@ importers:
       '@sanity/ui-tokens':
         specifier: workspace:*
         version: link:../../packages/ui-tokens
+      vitest:
+        specifier: ^4.0.18
+        version: 4.0.18(@types/node@25.3.0)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.2.0))(lightningcss@1.32.0)(terser@5.44.0)(tsx@4.21.0)(yaml@2.8.3)
 
   apps/storybook:
     dependencies:
@@ -16386,7 +16389,6 @@ snapshots:
       magic-string: 0.30.21
     optionalDependencies:
       vite: 7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.44.0)(tsx@4.21.0)(yaml@2.8.3)
-    optional: true
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -22891,7 +22893,6 @@ snapshots:
       - terser
       - tsx
       - yaml
-    optional: true
 
   void-elements@3.1.0: {}
 

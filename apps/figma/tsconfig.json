@@ -1,11 +1,6 @@
 {
   "extends": "@repo/typescript-config/base.json",
-  "include": [
-    "../../packages/ui-tokens/exports",
-    "../../packages/ui-tokens/src",
-    "./src",
-    "./package.config.ts"
-  ],
+  "include": ["./src", "./package.config.ts"],
   "compilerOptions": {
     "target": "ES6",
     "lib": ["ES2022", "DOM"],
@@ -13,6 +8,7 @@
     "noEmit": true,
     "rootDir": "../..",
     "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
     "typeRoots": ["./node_modules/@types", "./node_modules/@figma"],
     "paths": {
       "@sanity/ui-tokens": ["../../packages/ui-tokens/exports/index.ts"],

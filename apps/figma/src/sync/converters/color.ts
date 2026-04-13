@@ -1,4 +1,4 @@
-import type {SanityColorToken} from '@sanity/ui-tokens'
+import type {SanityColorToken} from '@sanity/ui-tokens/lib'
 
 import type {SanityFigmaColor, SanityFigmaColorAlias} from '../types'
 

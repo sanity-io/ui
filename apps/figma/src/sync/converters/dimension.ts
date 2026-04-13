@@ -1,9 +1,9 @@
-import type {DTCGDimensionToken} from '@sanity/ui-tokens'
+import type {_DTCGDimensionToken} from '@sanity/ui-tokens/lib'
 
 import type {SanityFigmaNumber, SanityFigmaNumberAlias} from '../types'
 
 export function getFigmaDimensionValue(
-  token: DTCGDimensionToken,
+  token: _DTCGDimensionToken,
 ): SanityFigmaNumber | SanityFigmaNumberAlias {
   if (typeof token.$value === 'string') {
     return {

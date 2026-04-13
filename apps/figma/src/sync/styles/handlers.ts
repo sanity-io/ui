@@ -5,10 +5,11 @@ import {createShadowStyle} from './shadow'
 export async function createOrUpdateStyle(
   style: SanityFigmaStyle,
   allVariableIdsMap: Map<string, string>,
+  shadowTokenMap: Map<string, unknown>,
   disableCache: boolean,
 ) {
   if (style.node.type === 'shadow') {
-    await createShadowStyle(style.name, style.node, allVariableIdsMap, disableCache)
+    await createShadowStyle(style.name, style.node, allVariableIdsMap, shadowTokenMap, disableCache)
     return
   }
 

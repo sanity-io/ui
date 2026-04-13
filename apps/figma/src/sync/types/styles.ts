@@ -1,13 +1,16 @@
-import type {DTCGShadowToken, SanityFontToken} from '@sanity/ui-tokens'
+import type {_DTCGShadowToken} from '@sanity/ui-tokens/lib'
+
+import type {TokenTree} from './tokens'
 
 export interface SanityFigmaShadowStyleNode {
   type: 'shadow'
-  token: DTCGShadowToken
+  token: _DTCGShadowToken
 }
 
 export interface SanityFigmaFontStyleNode {
   type: 'font-style'
-  token: SanityFontToken
+  // token: SanityTypographyToken
+  tokens: TokenTree
 }
 
 export interface SanityFigmaStyle {
