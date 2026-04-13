@@ -14,6 +14,7 @@ import type {ComponentType, Props} from '../../core/types'
 import {Box} from '../box/Box'
 import {Spinner} from '../spinner/Spinner'
 import {Text, type TextOwnProps} from '../text/Text'
+import {Tooltip, type TooltipProps} from '../tooltip/Tooltip'
 
 /** @public */
 export const DEFAULT_BUTTON_ELEMENT = 'button'
@@ -32,6 +33,7 @@ export interface ButtonOwnProps extends ButtonStyleProps {
   'text'?: React.ReactNode
   'textOverflow'?: TextOwnProps['textOverflow']
   'textWeight'?: TextOwnProps['weight']
+  'tooltip'?: Omit<TooltipProps<'div'>, 'as' | 'children'>
 }
 
 /** @public */
@@ -60,6 +62,7 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
       textAlign,
       textOverflow = 'ellipsis',
       textWeight = 'medium',
+      tooltip,
       type = 'button',
       // split DOM props
       ...domProps
@@ -73,7 +76,7 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
     delete domProps.href
   }
 
-  return (
+  const node = (
     <Element
       data-ui="Button"
       {...domProps}
@@ -133,4 +136,10 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
       )}
     </Element>
   )
+
+  if (tooltip) {
+    return <Tooltip {...tooltip}>{node}</Tooltip>
+  }
+
+  return node
 }
