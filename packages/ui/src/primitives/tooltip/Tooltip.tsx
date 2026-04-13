@@ -41,9 +41,6 @@ import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
 import {PortalContext} from '../../utils/portal/PortalContext'
 import {assertPortalContext} from '../../utils/portal/usePortal'
-// import {CardContext} from '../card/CardContext'
-import {CardProvider} from '../card/CardProvider'
-// import {assertCardContext} from '../card/useCard'
 import type {LayerOwnProps} from '../layer/Layer'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
@@ -376,18 +373,9 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
   let children = showTooltip ? node : null
 
   if (showTooltip && portalProp) {
-    const resolvedTone = tone as Exclude<typeof tone, 'inherit'>
-    // if (tone === 'inherit') {
-    //   const card = use(CardContext)
-    //   assertCardContext(card)
-    //   resolvedTone = card.tone
-    // }
-
     children = (
       <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        <CardProvider scheme={scheme ?? 'light'} tone={resolvedTone ?? 'default'}>
-          {node}
-        </CardProvider>
+        {node}
       </Portal>
     )
   }

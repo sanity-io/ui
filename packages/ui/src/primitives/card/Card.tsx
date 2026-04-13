@@ -1,9 +1,12 @@
 import {card, CARD_STYLE_PROP_KEYS, type CardStyleProps} from '@sanity/ui-css'
 import type {CardTone} from '@sanity/ui-tokens'
+import {use} from 'react'
 
 import {_splitKeys} from '../../core/_keys'
 import type {Props} from '../../core/types'
 import type {BoxElementType} from '../box/Box'
+import {CardInternalContext} from './CardInternalContext'
+import {CardInternalProvider} from './CardInternalProvider'
 import {CardProvider} from './CardProvider'
 import {useCard} from './useCard'
 
@@ -68,11 +71,12 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
   } = domProps
 
   const context = useCard()
+  const internalContext = use(CardInternalContext)
   const tone = toneProp === 'inherit' ? context?.tone : toneProp
   const scheme = schemeProp ?? context?.scheme
 
-  const styleTone = tone === context.tone ? undefined : tone
-  const styleScheme = scheme === context.scheme ? undefined : scheme
+  const styleTone = tone === context.tone && !internalContext?.root ? undefined : tone
+  const styleScheme = scheme === context.scheme && !internalContext?.root ? undefined : scheme
 
   let node = (
     <As
@@ -99,17 +103,15 @@ export function Card<E extends CardElementType = typeof DEFAULT_CARD_ELEMENT>(
   }
 
   node = (
-    <CardProvider
-      scheme={scheme ?? 'light'}
-      tone={tone ?? 'default'}
-      unstable_CompatProvider={context?.unstable_CompatProvider}
-    >
-      {node}
-    </CardProvider>
+    <CardInternalProvider CompatProvider={internalContext?.CompatProvider}>
+      <CardProvider scheme={scheme ?? 'light'} tone={tone ?? 'default'}>
+        {node}
+      </CardProvider>
+    </CardInternalProvider>
   )
 
-  if (context?.unstable_CompatProvider) {
-    const CompatProvider = context.unstable_CompatProvider
+  if (internalContext?.CompatProvider) {
+    const CompatProvider = internalContext.CompatProvider
 
     return (
       <CompatProvider scheme={scheme ?? 'light'} tone={tone ?? context.tone}>

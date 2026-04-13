@@ -9,10 +9,8 @@ export function CardProvider(props: {
   children?: ReactNode
   tone: CardTone
   scheme: ColorScheme
-  /** @internal */
-  unstable_CompatProvider?: _CardCompatProviderComponent
 }): React.JSX.Element {
-  const {children, tone, scheme, unstable_CompatProvider} = props
+  const {children, tone, scheme} = props
 
-  return <CardContext value={{tone, scheme, unstable_CompatProvider}}>{children}</CardContext>
+  return <CardContext value={{tone, scheme}}>{children}</CardContext>
 }

@@ -2,6 +2,7 @@ import {type ReactNode, type ReactPortal, use} from 'react'
 import {createPortal} from 'react-dom'
 
 import {CardContext} from '../../primitives/card/CardContext'
+import {CardInternalProvider} from '../../primitives/card/CardInternalProvider'
 import {CardProvider} from '../../primitives/card/CardProvider'
 import {assertCardContext} from '../../primitives/card/useCard'
 import {usePortal} from './usePortal'
@@ -31,9 +32,11 @@ export function Portal(props: PortalProps): ReactPortal | null {
   assertCardContext(card)
 
   return createPortal(
-    <CardProvider scheme={card.scheme} tone="transparent">
-      {children}
-    </CardProvider>,
+    <CardInternalProvider root>
+      <CardProvider scheme={card.scheme} tone={card.tone}>
+        {children}
+      </CardProvider>
+    </CardInternalProvider>,
     portalElement,
   )
 }

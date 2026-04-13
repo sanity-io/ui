@@ -33,9 +33,6 @@ import {origin} from '../../middleware/origin'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
-// import {CardContext} from '../card/CardContext'
-import {CardProvider} from '../card/CardProvider'
-// import {assertCardContext} from '../card/useCard'
 import {type LayerOwnProps} from '../layer/Layer'
 import {useLayer} from '../layer/useLayer'
 import {
@@ -303,19 +300,8 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
   let children = open ? node : null
 
   if (open && portal) {
-    const resolvedTone = tone as Exclude<typeof tone, 'inherit'>
-    // if (tone === 'inherit') {
-    //   const card = use(CardContext)
-    //   assertCardContext(card)
-    //   resolvedTone = card.tone
-    // }
-
     children = (
-      <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>
-        <CardProvider scheme={scheme ?? 'light'} tone={resolvedTone ?? 'default'}>
-          {node}
-        </CardProvider>
-      </Portal>
+      <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>{node}</Portal>
     )
   }
 

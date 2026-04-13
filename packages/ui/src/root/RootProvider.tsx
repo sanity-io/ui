@@ -2,6 +2,7 @@ import type {CardTone, ColorScheme} from '@sanity/ui-tokens'
 import type {ReactNode} from 'react'
 
 import {ToastProvider} from '../components/toast/ToastProvider'
+import {CardInternalProvider} from '../primitives/card/CardInternalProvider'
 import {CardProvider} from '../primitives/card/CardProvider'
 import {LayerProvider} from '../primitives/layer/LayerProvider'
 import {BoundaryElementProvider} from '../utils/boundaryElement/BoundaryElementProvider'
@@ -28,13 +29,15 @@ export function RootProvider(props: RootProviderProps): React.JSX.Element {
 
   return (
     <LayerProvider>
-      <CardProvider scheme={scheme} tone={tone}>
-        <ToastProvider>
-          <BoundaryElementProvider element={boundaryElement}>
-            <PortalProvider element={portalElement}>{children}</PortalProvider>
-          </BoundaryElementProvider>
-        </ToastProvider>
-      </CardProvider>
+      <CardInternalProvider root>
+        <CardProvider scheme={scheme} tone={tone}>
+          <ToastProvider>
+            <BoundaryElementProvider element={boundaryElement}>
+              <PortalProvider element={portalElement}>{children}</PortalProvider>
+            </BoundaryElementProvider>
+          </ToastProvider>
+        </CardProvider>
+      </CardInternalProvider>
     </LayerProvider>
   )
 }
