@@ -6,6 +6,7 @@
     "./package.json",
     "./package.config.ts",
     "./playwright.config.ts",
+    "./scripts",
     "./src",
     "./test",
     "./typings",
