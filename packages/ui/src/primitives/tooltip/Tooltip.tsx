@@ -8,8 +8,13 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {type RadiusStyleProps, type ShadowStyleProps, tooltip} from '@sanity/ui-css'
-import type {CardTone, ColorScheme} from '@sanity/ui-tokens'
+import {
+  type RadiusStyleProps,
+  type ResponsiveProp,
+  type ShadowStyleProps,
+  tooltip,
+} from '@sanity/ui-css'
+import type {CardTone, ColorScheme, FontTextSize} from '@sanity/ui-tokens'
 import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
@@ -42,6 +47,7 @@ import {Portal} from '../../utils/portal/Portal'
 import {PortalContext} from '../../utils/portal/PortalContext'
 import {assertPortalContext} from '../../utils/portal/usePortal'
 import type {LayerOwnProps} from '../layer/Layer'
+import {Text} from '../text/Text'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_TOOLTIP_DISTANCE,
@@ -85,6 +91,8 @@ export type TooltipOwnProps = LayerOwnProps &
     /** Whether or not to render the tooltip in a portal element. */
     portal?: boolean | string
     scheme?: ColorScheme
+    text?: React.ReactNode
+    textSize?: ResponsiveProp<FontTextSize>
     tone?: CardTone
   }
 
@@ -123,6 +131,8 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     ref: forwardedRef,
     scheme,
     shadow = 2,
+    text,
+    textSize = 1,
     zOffset = Z_OFFSETS.tooltip,
     tone,
     ...rest
@@ -366,6 +376,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
       tone={tone}
       zOffset={zOffset}
     >
+      {text && <Text size={textSize}>{text}</Text>}
       {content}
     </TooltipLayer>
   )
