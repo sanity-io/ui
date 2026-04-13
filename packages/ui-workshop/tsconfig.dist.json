@@ -1,6 +1,6 @@
 {
   "extends": "@repo/typescript-config/base.json",
-  "include": ["../ui/exports", "../ui/src", "./exports", "./package.json", "./src"],
+  "include": ["./exports", "./package.json", "./src"],
   "exclude": [
     "./src/**/__fixtures__",
     "./src/**/__mocks__",
@@ -18,6 +18,10 @@
     "paths": {
       "@sanity/ui": ["../ui/exports"],
       "@sanity/ui/*": ["../ui/exports/*"],
+      "@sanity/ui-css": ["../ui-css/exports"],
+      "@sanity/ui-css/*": ["../ui-css/exports/*"],
+      "@sanity/ui-tokens": ["../ui-tokens/exports"],
+      "@sanity/ui-tokens/*": ["../ui-tokens/exports/*"],
       "@sanity/ui-workshop": ["./exports"],
       "@sanity/ui-workshop/*": ["./exports/*.ts"]
     }

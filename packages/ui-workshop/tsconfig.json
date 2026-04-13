@@ -1,8 +1,6 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "include": [
-    "../ui/exports",
-    "../ui/src",
     "./exports",
     "./package.json",
     "./package.config.ts",
@@ -12,13 +10,6 @@
     "./vanilla-extract",
     "./workshop.config.ts",
     "./workshop.runtime.ts"
-  ],
-  "exclude": [
-    "../ui/src/**/__fixtures__",
-    "../ui/src/**/__mocks__",
-    "../ui/src/**/__workshop__",
-    "../ui/src/**/*.test.ts",
-    "../ui/src/**/*.test.tsx"
   ],
   "compilerOptions": {
     "rootDir": "..",
@@ -30,6 +21,10 @@
     "paths": {
       "@sanity/ui/*": ["../ui/exports/*"],
       "@sanity/ui": ["../ui/exports/index.ts"],
+      "@sanity/ui-css/*": ["../ui-css/exports/*"],
+      "@sanity/ui-css": ["../ui-css/exports/index.ts"],
+      "@sanity/ui-tokens": ["../ui-tokens/exports/index.ts"],
+      "@sanity/ui-tokens/*": ["../ui-tokens/exports/*"],
       "@sanity/ui-workshop/*": ["./exports/*.ts"],
       "@sanity/ui-workshop": ["./exports"]
     }

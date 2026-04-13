@@ -19,6 +19,8 @@ export default defineConfig({
 
   dts: 'rolldown',
 
+  external: ['@sanity/ui', '@sanity/ui-css', '@sanity/ui-tokens'],
+
   extract: {
     rules: {
       'ae-internal-missing-underscore': 'off',
