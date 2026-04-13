@@ -9,9 +9,7 @@ import {structureTool} from 'sanity/structure'
 import {schema} from '@/schema'
 import {structure} from '@/structure'
 
-const localStudioRuntime =
-  typeof window !== 'undefined' && window.location.origin === 'http://localhost:3333'
-const previewOrigin = localStudioRuntime ? 'http://localhost:3000' : ''
+const previewBaseUrl = 'http://localhost:3000'
 
 const prodStudio = defineConfig<WorkspaceOptions>({
   basePath: '/production',
@@ -24,10 +22,10 @@ const prodStudio = defineConfig<WorkspaceOptions>({
     structureTool({structure}),
     presentationTool({
       previewUrl: {
-        preview: `${previewOrigin}/ui`,
+        preview: `${previewBaseUrl}`,
         draftMode: {
-          enable: `${previewOrigin}/ui/api/draft`,
-          disable: `${previewOrigin}/ui/api/disable-draft`,
+          enable: `${previewBaseUrl}/api/draft-mode/enable`,
+          disable: `${previewBaseUrl}/api/draft-mode/disable`,
         },
       },
     }),
@@ -47,19 +45,20 @@ const devStudio = defineConfig<WorkspaceOptions>({
     structureTool({structure}),
     presentationTool({
       previewUrl: {
-        preview: `${previewOrigin}/ui`,
+        preview: `${previewBaseUrl}`,
         draftMode: {
-          enable: `${previewOrigin}/ui/api/draft?dataset=development`,
-          disable: `${previewOrigin}/ui/api/disable-draft`,
+          enable: `${previewBaseUrl}/api/draft-mode/enable?env=development`,
+          disable: `${previewBaseUrl}/api/draft-mode/disable`,
         },
       },
     }),
   ],
   schema,
-  icon: () =>
-    createElement(SanityMonogram, {
+  icon: function SanityDevMonogram() {
+    return createElement(SanityMonogram, {
       color: {bg1: gray[200].hex, bg2: gray[100].hex, fg: gray[50].hex},
-    }),
+    })
+  },
 })
 
 export default defineConfig<WorkspaceOptions[]>([prodStudio, devStudio])
