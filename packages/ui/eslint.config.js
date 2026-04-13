@@ -4,15 +4,7 @@ import {defineConfig} from '@repo/eslint-config'
 
 export default defineConfig(import.meta.dirname, [
   {
-    ignores: [
-      '.turbo',
-      '.workshop',
-      'dist',
-      'src/main/system.ts', // auto-generated file
-      'test-results',
-      'playwright-report',
-      'tmp',
-    ],
+    ignores: ['.turbo', '.workshop', 'dist', 'test-results', 'playwright-report', 'tmp'],
   },
 
   // boundaries
@@ -20,6 +12,9 @@ export default defineConfig(import.meta.dirname, [
     plugins: {boundaries},
 
     settings: {
+      // Helps the plugin resolve patterns consistently in monorepos / ESM
+      'boundaries/root-path': import.meta.dirname,
+
       'import/resolver': {
         typescript: true,
         node: {
@@ -31,7 +26,7 @@ export default defineConfig(import.meta.dirname, [
         unresolvableAlias: true,
         inNodeModules: true,
         outsideRootPath: false,
-        customSourcePatterns: [],
+        customSourcePatterns: ['@sanity/ui-css', '@sanity/ui-tokens', '@sanity/ui-workshop'],
       },
 
       'boundaries/elements': [
@@ -93,7 +88,7 @@ export default defineConfig(import.meta.dirname, [
           mode: 'file',
         },
         {
-          type: '@sanity/ui/theme',
+          type: '@sanity/ui/tokens',
           pattern: ['exports/theme.ts'],
           mode: 'file',
         },
@@ -129,10 +124,10 @@ export default defineConfig(import.meta.dirname, [
 
             {from: '@sanity/ui', allow: ['src/core']},
             {from: '@sanity/ui/css', allow: ['src/css']},
-            {from: '@sanity/ui/theme', allow: ['src/theme']},
+            {from: '@sanity/ui/tokens', allow: ['src/theme']},
 
-            {from: 'src/core', allow: ['@sanity/ui/css', '@sanity/ui/theme', 'src/core']},
-            {from: 'src/css', allow: ['@sanity/ui/theme', 'src/css']},
+            {from: 'src/core', allow: ['@sanity/ui/css', '@sanity/ui/tokens', 'src/core']},
+            {from: 'src/css', allow: ['@sanity/ui/tokens', 'src/css']},
             {from: 'src/theme', allow: ['src/theme']},
 
             {
@@ -141,7 +136,7 @@ export default defineConfig(import.meta.dirname, [
             },
             {
               from: 'test/workshop',
-              allow: ['@sanity/ui', '@sanity/ui/css', '@sanity/ui/theme', 'test/workshop'],
+              allow: ['@sanity/ui', '@sanity/ui/css', '@sanity/ui/tokens', 'test/workshop'],
             },
           ],
         },
