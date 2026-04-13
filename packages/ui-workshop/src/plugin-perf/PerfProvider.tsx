@@ -1,85 +1,143 @@
-import {useWorkshop} from '@sanity/ui-workshop'
-import {memo, useCallback, useEffect, useMemo, useState} from 'react'
+import {useWorkshop, type WorkshopMsg} from '@sanity/ui-workshop'
+import isEqual from 'lodash/isEqual'
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {_runTest} from './_runTest'
 import type {PerfMsg} from './msg'
-import {PerfContext, type PerfContextValue} from './PerfContext'
+import {
+  PerfInspectorContext,
+  type PerfInspectorContextValue,
+  PerfTestContext,
+  type PerfTestContextValue,
+} from './PerfContext'
 import {perfReducer} from './perfReducer'
 import type {PerfState, PerfTest, PerfTestRenderResult} from './types'
 
 /** @internal */
-export const PerfProvider = memo(function PerfProvider(props: {
-  children?: React.ReactNode
-}): React.ReactNode {
+export function PerfProvider(props: {children?: React.ReactNode}) {
   const {children} = props
   const {broadcast, channel} = useWorkshop<PerfMsg>()
-  const [{activeTest, results, testDetails, tests}, setState] = useState<PerfState>({
+  const [{activeTest, results, testDetails}, setState] = useState<Omit<PerfState, 'tests'>>({
+    activeTest: undefined,
     results: [],
     testDetails: [],
-    tests: [],
   })
+  const testsRef = useRef<PerfTest[]>([])
+  const broadcastRef = useRef(broadcast)
+  const stateRef = useRef({activeTest, results, testDetails})
 
-  const addRenderResult = useCallback(
-    (name: string, result: PerfTestRenderResult) => {
-      broadcast({type: 'workshop/perf/addRenderResult', name, result})
-    },
-    [broadcast],
-  )
+  // Keep refs in sync
+  useEffect(() => {
+    broadcastRef.current = broadcast
+  }, [broadcast])
 
-  const clearResults = useCallback(
-    (name: string) => {
-      broadcast({type: 'workshop/perf/clearResults', name})
-    },
-    [broadcast],
-  )
+  useEffect(() => {
+    stateRef.current = {activeTest, results, testDetails}
+  }, [activeTest, results, testDetails])
 
-  const registerTest = useCallback(
-    (test: PerfTest) => {
-      broadcast({
-        type: 'workshop/perf/registerTest',
-        description: test.description,
-        title: test.title,
-        name: test.name,
-      })
+  const addRenderResult = useCallback((name: string, result: PerfTestRenderResult) => {
+    broadcastRef.current({type: 'workshop/perf/addRenderResult', name, result})
+  }, [])
 
-      setState((s) => ({...s, tests: s.tests.concat([test])}))
+  const clearResults = useCallback((name: string) => {
+    broadcastRef.current({type: 'workshop/perf/clearResults', name})
+  }, [])
 
-      return () => {
-        broadcast({type: 'workshop/perf/unregisterTest', name: test.name})
-        setState((s) => ({...s, tests: s.tests.filter((t) => t !== test)}))
-      }
-    },
-    [broadcast],
-  )
+  const registerTest = useCallback((test: PerfTest) => {
+    // Store test in ref only (not in state)
+    testsRef.current = testsRef.current.concat([test])
 
-  const runTest = useCallback(
-    (testName: string) => {
-      broadcast({type: 'workshop/perf/runTest', name: testName})
-    },
-    [broadcast],
-  )
+    // Broadcast testDetails to main window
+    broadcastRef.current({
+      type: 'workshop/perf/registerTest',
+      description: test.description,
+      title: test.title,
+      name: test.name,
+    })
 
-  const perf: PerfContextValue = useMemo(
+    return () => {
+      // Remove from ref only (not from state)
+      testsRef.current = testsRef.current.filter((t) => t !== test)
+
+      // Broadcast testDetails to main window
+      broadcastRef.current({type: 'workshop/perf/unregisterTest', name: test.name})
+    }
+  }, [])
+
+  const runTest = useCallback((testName: string) => {
+    broadcastRef.current({type: 'workshop/perf/runTest', name: testName})
+  }, [])
+
+  // Split context into test context (stable, rarely changes) and inspector context (changes frequently)
+  const testContext: PerfTestContextValue = useMemo(
     () => ({
       activeTest,
       addRenderResult,
-      clearResults,
       registerTest,
+    }),
+    [activeTest, addRenderResult, registerTest],
+  )
+
+  const inspectorContext: PerfInspectorContextValue = useMemo(
+    () => ({
+      clearResults,
       results,
       runTest,
       testDetails,
-      tests,
     }),
-    [activeTest, addRenderResult, clearResults, registerTest, results, runTest, testDetails, tests],
+    [clearResults, results, runTest, testDetails],
   )
 
   useEffect(() => {
-    return channel.subscribe((msg) => {
-      setState((s) => perfReducer(s, msg))
+    let mounted = true
+    let pendingMessages: (PerfMsg | WorkshopMsg)[] = []
+    let updateScheduled = false
+
+    const processPendingMessages = () => {
+      updateScheduled = false
+      if (!mounted || pendingMessages.length === 0) {
+        return
+      }
+
+      const messages = pendingMessages
+      pendingMessages = []
+
+      setState((s) => {
+        let nextState = s as PerfState
+        for (const msg of messages) {
+          nextState = perfReducer(nextState, msg) as PerfState
+        }
+
+        // Only update if state actually changed
+        if (isEqual(s, nextState)) {
+          return s
+        }
+
+        return nextState as Omit<PerfState, 'tests'>
+      })
+    }
+
+    const unsubscribe = channel.subscribe((msg) => {
+      if (!mounted) {
+        return
+      }
+
+      // Batch messages together
+      pendingMessages.push(msg)
+
+      if (!updateScheduled) {
+        updateScheduled = true
+        queueMicrotask(processPendingMessages)
+      }
 
       if (msg.type === 'workshop/perf/runTest') {
+        // Use setTimeout to ensure state update has been processed
         setTimeout(() => {
-          const test = tests.find((t) => t.name === msg.name)
+          if (!mounted) {
+            return
+          }
+
+          const test = testsRef.current.find((t) => t.name === msg.name)
 
           if (test) {
             const container = test.ref.current
@@ -87,15 +145,25 @@ export const PerfProvider = memo(function PerfProvider(props: {
             if (container !== null) {
               _runTest(test, container)
                 .then((result) => {
-                  broadcast({
-                    type: 'workshop/perf/addResult',
-                    name: test.name,
-                    result,
-                  })
+                  if (mounted) {
+                    broadcastRef.current({
+                      type: 'workshop/perf/addResult',
+                      name: test.name,
+                      result,
+                    })
+                  }
                 })
                 .catch((err) => {
-                  // eslint-disable-next-line no-console
-                  console.error(err)
+                  if (mounted) {
+                    // eslint-disable-next-line no-console
+                    console.error(err)
+
+                    broadcastRef.current({
+                      type: 'workshop/perf/addError',
+                      name: test.name,
+                      error: err instanceof Error ? err.message : 'Unknown error',
+                    })
+                  }
                 })
             }
           }
@@ -104,7 +172,18 @@ export const PerfProvider = memo(function PerfProvider(props: {
         return
       }
     })
-  }, [broadcast, channel, tests])
 
-  return <PerfContext.Provider value={perf}>{children}</PerfContext.Provider>
-})
+    return () => {
+      mounted = false
+      unsubscribe()
+    }
+  }, [channel])
+
+  return (
+    <PerfTestContext.Provider value={testContext}>
+      <PerfInspectorContext.Provider value={inspectorContext}>
+        {children}
+      </PerfInspectorContext.Provider>
+    </PerfTestContext.Provider>
+  )
+}

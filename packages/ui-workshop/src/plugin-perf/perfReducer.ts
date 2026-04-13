@@ -10,6 +10,11 @@ export function perfReducer(state: PerfState, msg: PerfMsg | WorkshopMsg): PerfS
   }
 
   if (msg.type === 'workshop/perf/registerTest') {
+    // Check if test is already registered
+    if (state.testDetails.some((t) => t.name === msg.name)) {
+      return state
+    }
+
     return {
       ...state,
       testDetails: state.testDetails.concat([
@@ -34,27 +39,46 @@ export function perfReducer(state: PerfState, msg: PerfMsg | WorkshopMsg): PerfS
         {
           name: msg.name,
           renders: [],
+          running: true,
         },
       ]),
     }
   }
 
+  if (msg.type === 'workshop/perf/addError') {
+    const lastRunningResult = [...state.results]
+      .reverse()
+      .find((r) => r.name === msg.name && r.running)
+
+    if (lastRunningResult) {
+      return {
+        ...state,
+        activeTest: state.activeTest === msg.name ? undefined : state.activeTest,
+        results: state.results.map((r) =>
+          r === lastRunningResult ? {...r, running: false, error: msg.error} : r,
+        ),
+      }
+    }
+
+    return state
+  }
+
   if (msg.type === 'workshop/perf/addResult') {
-    if (state.activeTest === msg.name) {
-      const result = state.results.filter((r) => r.name === msg.name)
-      const lastResult = result[result.length - 1]
+    const lastRunningResult = [...state.results]
+      .reverse()
+      .find((r) => r.name === msg.name && r.running)
 
-      if (lastResult) {
-        return {
-          ...state,
-          results: state.results.map((r) => {
-            if (r === lastResult) {
-              return {...r, timing: msg.result}
-            }
+    if (lastRunningResult) {
+      return {
+        ...state,
+        activeTest: state.activeTest === msg.name ? undefined : state.activeTest,
+        results: state.results.map((r) => {
+          if (r === lastRunningResult) {
+            return {...r, timing: msg.result, running: false}
+          }
 
-            return r
-          }),
-        }
+          return r
+        }),
       }
     }
 

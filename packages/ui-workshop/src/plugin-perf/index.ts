@@ -1,5 +1,5 @@
 export * from './hooks/usePerf'
 export * from './hooks/usePerfTest'
-export type {PerfContextValue} from './PerfContext'
+export type {PerfInspectorContextValue, PerfTestContextValue} from './PerfContext'
 export * from './plugin'
 export * from './types'

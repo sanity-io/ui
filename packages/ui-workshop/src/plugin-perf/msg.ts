@@ -27,6 +27,13 @@ export interface PerfUnregisterTestMsg {
 }
 
 /** @internal */
+export interface PerfAddErrorMsg {
+  type: 'workshop/perf/addError'
+  name: string
+  error: string
+}
+
+/** @internal */
 export interface PerfAddResultMsg {
   type: 'workshop/perf/addResult'
   name: string
@@ -50,5 +57,6 @@ export type PerfMsg =
   | PerfRegisterTestMsg
   | PerfRunTestMsg
   | PerfUnregisterTestMsg
+  | PerfAddErrorMsg
   | PerfAddResultMsg
   | PerfAddRenderResultMsg

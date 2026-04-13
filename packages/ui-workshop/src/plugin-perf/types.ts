@@ -16,6 +16,8 @@ export interface PerfTest<TargetType = unknown> {
 export interface PerfTestResult {
   name: string
   renders: PerfTestRenderResult[]
+  running?: boolean
+  error?: string
   timing?: {
     avgDuration: number
     sumDuration: number
@@ -41,7 +43,7 @@ export interface PerfTestRenderResult {
   baseDuration: number
   startTime: number
   commitTime: number
-  /** @deprecated - this will be removed in the next major version */
+  /** @deprecated Do not use */
   interactions: Set<{
     __count: number
     id: number
