@@ -1,5 +1,4 @@
-import type {ResponsiveProp} from '@sanity/ui-css'
-import type {Space} from '@sanity/ui-tokens'
+import {tree} from '@sanity/ui-css'
 import {
   type FocusEvent,
   type KeyboardEvent,
@@ -12,7 +11,7 @@ import {
 } from 'react'
 
 import type {ComponentType, Props} from '../../core/types'
-import {Stack} from '../../primitives/stack/Stack'
+import {Stack, type StackOwnProps} from '../../primitives/stack/Stack'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
 import {TreeContext} from './TreeContext'
 import type {TreeContextValue, TreeState} from './types'
@@ -24,9 +23,7 @@ export const DEFAULT_TREE_ELEMENT = 'div'
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export type TreeOwnProps = {
-  gap?: ResponsiveProp<Space>
-}
+export type TreeOwnProps = Omit<StackOwnProps, 'position'>
 
 /** @beta */
 export type TreeElementType = 'div' | ComponentType
@@ -43,6 +40,7 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
 ): React.JSX.Element {
   const {
     children,
+    className,
     gap = 1,
     onFocus,
     ref: forwardedRef,
@@ -98,7 +96,7 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
     })
   }, [])
 
-  const contextValue: TreeContextValue = useMemo(
+  const context: TreeContextValue = useMemo(
     () => ({
       version: 0.0,
       focusedElement: focusedElement || itemElements[0] || null,
@@ -230,13 +228,15 @@ export function Tree<E extends TreeElementType = typeof DEFAULT_TREE_ELEMENT>(
   }, [children])
 
   return (
-    <TreeContext value={contextValue}>
+    <TreeContext value={context}>
       <Stack
         as="ul"
         data-ui="Tree"
         {...rest}
         ref={ref}
+        className={tree({className})}
         gap={gap}
+        position="relative"
         role="tree"
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
