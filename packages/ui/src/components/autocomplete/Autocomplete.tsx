@@ -28,7 +28,7 @@ import {Box, type BoxOwnProps} from '../../primitives/box/Box'
 import {Button} from '../../primitives/button/Button'
 import {Popover, type PopoverProps} from '../../primitives/popover/Popover'
 import {Selectable} from '../../primitives/selectable/Selectable'
-import {AnimatedSpinnerIcon} from '../../primitives/spinner/AnimatedSpinnerIcon'
+import {SpinnerAnimatedIcon} from '../../primitives/spinner/SpinnerAnimatedIcon'
 import {Stack} from '../../primitives/stack/Stack'
 import {Text} from '../../primitives/text/Text'
 import {TextInput, type TextInputOwnProps} from '../../primitives/textInput/TextInput'
@@ -688,7 +688,7 @@ export function Autocomplete<
         disabled={disabled}
         fontSize={fontSize}
         icon={icon}
-        iconRight={loading && AnimatedSpinnerIcon}
+        iconRight={loading && SpinnerAnimatedIcon}
         id={id}
         inputMode="search"
         padding={padding}
