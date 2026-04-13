@@ -1,27 +1,28 @@
 import {Menu, MenuItem, Text} from '@sanity/ui'
-import type {ElementTone} from '@sanity/ui/tokens'
+import {ELEMENT_TONES} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_BUTTON_TONE_OPTIONS} from '$workshop'
+import {CardWrapper} from '$workshop'
 
 export default function DataPropsStory(): React.JSX.Element {
-  // @ts-expect-error - TODO: fix this
-  const tone = useSelect('Tone', WORKSHOP_BUTTON_TONE_OPTIONS, 'default') as ElementTone | undefined
+  const tone = useSelect('Tone', ELEMENT_TONES, 'default')
 
   return (
-    <Menu gap={4} padding={4}>
-      <MenuItem data-enabled="" padding={3} tone={tone}>
-        <Text>MenuItem</Text>
-      </MenuItem>
-      <MenuItem data-hovered="" padding={3} tone={tone}>
-        <Text>MenuItem</Text>
-      </MenuItem>
-      <MenuItem data-pressed="" padding={3} tone={tone}>
-        <Text>MenuItem</Text>
-      </MenuItem>
-      <MenuItem data-selected="" padding={3} tone={tone}>
-        <Text>MenuItem</Text>
-      </MenuItem>
-    </Menu>
+    <CardWrapper width={0}>
+      <Menu gap={1} padding={4}>
+        <MenuItem data-enabled="" padding={3} tone={tone}>
+          <Text size={1}>MenuItem</Text>
+        </MenuItem>
+        <MenuItem data-hovered="" padding={3} tone={tone}>
+          <Text size={1}>MenuItem</Text>
+        </MenuItem>
+        <MenuItem data-pressed="" padding={3} tone={tone}>
+          <Text size={1}>MenuItem</Text>
+        </MenuItem>
+        <MenuItem data-selected="" padding={3} tone={tone}>
+          <Text size={1}>MenuItem</Text>
+        </MenuItem>
+      </Menu>
+    </CardWrapper>
   )
 }

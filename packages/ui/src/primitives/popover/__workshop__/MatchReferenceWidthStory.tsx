@@ -5,7 +5,6 @@ import {WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
 
 export default function MatchReferenceWidthStory(): React.JSX.Element {
   const arrow = useBoolean('Arrow', true)
-  // @ts-expect-error - TODO: fix this
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
 
   return (
@@ -19,7 +18,6 @@ export default function MatchReferenceWidthStory(): React.JSX.Element {
         }
         matchReferenceWidth
         open
-        // @ts-expect-error - TODO: fix this
         placement={placement}
         radius={2}
       >

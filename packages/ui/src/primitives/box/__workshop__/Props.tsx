@@ -1,25 +1,26 @@
-import {Box, Card, Text} from '@sanity/ui'
-import {useAction, useSelect} from '@sanity/ui-workshop'
+import {Box, type BoxProps, Text} from '@sanity/ui'
+import {BORDER_STYLE, BORDER_WIDTH, RADIUS, SHADOW, SPACE} from '@sanity/ui/tokens'
+import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {WORKSHOP_SPACE_OPTIONS} from '$workshop'
+import {CardWrapper} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
-  // @ts-expect-error - TODO: fix this
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 0)
+  const boxProps: BoxProps = {
+    border: useSelect('Border', BORDER_STYLE),
+    borderWidth: useSelect('Border Width', BORDER_WIDTH),
+    muted: useBoolean('Muted'),
+    padding: useSelect('Padding', SPACE),
+    radius: useSelect('Radius', RADIUS),
+    shadow: useSelect('Shadow', SHADOW),
+  }
 
   return (
-    <Box padding={[4, 5, 6]}>
-      <Card border tone="inherit">
-        <Box
-          // @ts-expect-error - TODO: fix this
-          padding={padding}
-          onClick={useAction('onClick')}
-        >
-          <Text>
-            Box with <code>padding={padding}</code>
-          </Text>
-        </Box>
-      </Card>
-    </Box>
+    <CardWrapper>
+      <Box {...boxProps}>
+        <Text muted size={1}>
+          Text within box with props
+        </Text>
+      </Box>
+    </CardWrapper>
   )
 }

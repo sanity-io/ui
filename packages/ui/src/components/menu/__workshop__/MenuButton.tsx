@@ -11,14 +11,12 @@ import {
   MenuDivider,
   MenuItem,
 } from '@sanity/ui'
+import {CARD_TONES} from '@sanity/ui/tokens'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useMemo} from 'react'
 
-import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
-
 export default function MenuButtonStory(): React.JSX.Element {
-  // @ts-expect-error - TODO: fix this
-  const layoutTone = useSelect('Layout tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
+  const layoutTone = useSelect('Layout tone', CARD_TONES, 'default')
   const portal = useBoolean('Portal', false)
 
   const popover: MenuButtonProps['popover'] = useMemo(
@@ -30,11 +28,7 @@ export default function MenuButtonStory(): React.JSX.Element {
   )
 
   return (
-    <Card
-      height="fill"
-      // @ts-expect-error - TODO: fix this
-      tone={layoutTone}
-    >
+    <Card height="fill" tone={layoutTone}>
       <Box padding={[4, 5, 6]}>
         <Grid gap={2} gridTemplateColumns={3}>
           <Button id="prev-button" mode="ghost" text="Prev" />

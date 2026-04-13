@@ -1,55 +1,11 @@
 import {icons, type IconSymbol} from '@sanity/icons'
-import {
-  AVATAR_COLORS,
-  AVATAR_SIZE,
-  type AvatarColor,
-  type AvatarSize,
-  BUTTON_MODES,
-  type ButtonMode,
-  CARD_TONES,
-  type CardTone,
-  CONTAINER,
-  type ContainerWidth,
-  ELEMENT_TONES,
-  type ElementTone,
-  FONT_CODE_SIZE,
-  FONT_HEADING_SIZE,
-  FONT_LABEL_SIZE,
-  FONT_TEXT_SIZE,
-  type FontCodeSize,
-  type FontHeadingSize,
-  type FontLabelSize,
-  type FontTextSize,
-  RADIUS,
-  type Radius,
-  SHADOW,
-  type Shadow,
-  SPACE,
-  type Space,
-} from '@sanity/ui/tokens'
 
 function fromEntries<K extends string | number | symbol, V>(entries: [K, V][]) {
   return Object.fromEntries(entries) as Record<K, V>
 }
 
-export const WORKSHOP_AVATAR_COLOR_OPTIONS: Record<string, AvatarColor | undefined> = fromEntries(
-  [undefined, ...AVATAR_COLORS].map((color) => [String(color), color]),
-)
-
 export const WORKSHOP_AVATAR_SRC =
   'https://avatars3.githubusercontent.com/u/406933?s=400&u=af898b0a50ef2ef1248be32dfa1410ccb55f6f65&v=4'
-
-export const WORKSHOP_AVATAR_SIZE_OPTIONS: Record<string, AvatarSize | undefined> = fromEntries(
-  [undefined, ...AVATAR_SIZE].map((size) => [String(size), size]),
-)
-
-export const WORKSHOP_BADGE_TONE_OPTIONS: Record<string, ElementTone | undefined> = fromEntries(
-  [undefined, ...ELEMENT_TONES].map((tone) => [String(tone), tone]),
-)
-
-export const WORKSHOP_BUTTON_MODE_OPTIONS: Record<string, ButtonMode | undefined> = fromEntries(
-  [undefined, ...BUTTON_MODES].map((mode) => [String(mode), mode]),
-)
 
 export const WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS = {
   '': undefined,
@@ -57,10 +13,6 @@ export const WORKSHOP_BUTTON_TEXT_ALIGN_OPTIONS = {
   'Right': 'right',
   'Center': 'center',
 } as const
-
-export const WORKSHOP_BUTTON_TONE_OPTIONS: Record<string, ElementTone | undefined> = fromEntries(
-  [undefined, ...ELEMENT_TONES].map((tone) => [tone === undefined ? '' : String(tone), tone]),
-)
 
 export const WORKSHOP_CARD_AS_OPTIONS = {
   '': undefined,
@@ -72,9 +24,6 @@ export const WORKSHOP_CARD_AS_OPTIONS = {
   'ul': 'ul',
 } as const
 
-export const WORKSHOP_CARD_TONE_OPTIONS: Record<string, CardTone | 'inherit' | undefined> =
-  fromEntries([undefined, 'inherit' as const, ...CARD_TONES].map((tone) => [String(tone), tone]))
-
 export const WORKSHOP_CODE_LANGUAGE_OPTIONS = {
   JSON: 'json',
   JavaScript: 'js',
@@ -82,12 +31,6 @@ export const WORKSHOP_CODE_LANGUAGE_OPTIONS = {
   TypeScript: 'ts',
   TSX: 'tsx',
 } as const
-
-export const WORKSHOP_CODE_FONT_SIZE_OPTIONS: Record<string, FontCodeSize | undefined> =
-  fromEntries([undefined, ...FONT_CODE_SIZE].map((size) => [String(size), size]))
-
-export const WORKSHOP_CONTAINER_WIDTH_OPTIONS: Record<string, ContainerWidth | undefined> =
-  fromEntries([undefined, ...CONTAINER].map((size) => [String(size), size]))
 
 export const WORKSHOP_DIALOG_POSITION_OPTIONS = {
   '': undefined,
@@ -128,15 +71,9 @@ export const WORKSHOP_FONT_WEIGHT_OPTIONS = {
   'Bold': 'bold',
 } as const
 
-export const WORKSHOP_HEADING_FONT_SIZE_OPTIONS: Record<string, FontHeadingSize | undefined> =
-  fromEntries([undefined, ...FONT_HEADING_SIZE].map((size) => [String(size), size]))
-
 export const WORKSHOP_ICON_SYMBOL_OPTIONS: Record<string, IconSymbol | undefined> = fromEntries(
   [undefined, ...Object.keys(icons)].map((key) => [key, key]) as [string, IconSymbol][],
 )
-
-export const WORKSHOP_LABEL_FONT_SIZE_OPTIONS: Record<string, FontLabelSize | undefined> =
-  fromEntries([undefined, ...FONT_LABEL_SIZE].map((size) => [String(size), size]))
 
 export const WORKSHOP_PLACEMENT_OPTIONS = {
   '': undefined,
@@ -154,21 +91,9 @@ export const WORKSHOP_PLACEMENT_OPTIONS = {
   'bottom-end': 'bottom-end',
 } as const
 
-export const WORKSHOP_RADIUS_OPTIONS: Record<string, Radius | undefined> = fromEntries(
-  [undefined, ...RADIUS].map((size) => [String(size), size]),
-)
-
-export const WORKSHOP_SHADOW_OPTIONS: Record<string, Shadow | undefined> = fromEntries(
-  [undefined, ...SHADOW].map((size) => [String(size), size]),
-)
-
-export const WORKSHOP_SPACE_OPTIONS: Record<string, Space | undefined> = fromEntries(
-  [undefined, ...SPACE].map((space) => [String(space), space]),
-)
-
 export const WORKSHOP_TEXT_ALIGN_OPTIONS = {
   '': undefined,
-  'Initial': 'initial',
+
   'Left': 'left',
   'Right': 'right',
   'Center': 'center',
@@ -189,11 +114,6 @@ export const WORKSHOP_TEXT_INPUT_TYPE_OPTIONS = {
   'week': 'week',
   'color': 'color',
 } as const
-
-export const WORKSHOP_TEXT_FONT_SIZE_OPTIONS: Record<string, FontTextSize | undefined> =
-  fromEntries(
-    [undefined, ...FONT_TEXT_SIZE].map((size) => [size === undefined ? '' : String(size), size]),
-  )
 
 export const WORKSHOP_TEXT_OVERFLOW_OPTIONS = {
   '': undefined,

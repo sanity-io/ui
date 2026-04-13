@@ -9,11 +9,9 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import type {CardTone} from '@sanity/ui/tokens'
+import {CARD_TONES, type CardTone} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 import {useCallback, useEffect, useRef, useState} from 'react'
-
-import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
 
 const SIDE_PANEL_WIDTH = {
   sm: 300,
@@ -26,8 +24,7 @@ export default function SidePanelStory(): React.JSX.Element {
   const sidePanelWidth = useSelect('Side panel width', SIDE_PANEL_WIDTH, SIDE_PANEL_WIDTH.md)
   const [sidePanel, setSidePanel] = useState<HTMLDivElement | null>(null)
   const updateRef = useRef<PopoverUpdateCallback>(undefined)
-  // @ts-expect-error - TODO: fix this
-  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS) ?? 'inherit'
+  const tone = useSelect('Tone', CARD_TONES) ?? 'inherit'
 
   useEffect(() => updateRef.current?.(), [sidePanelWidth])
 
@@ -49,12 +46,7 @@ export default function SidePanelStory(): React.JSX.Element {
 
             <Card border padding={3}>
               <Text size={1}>
-                Some editor{' '}
-                <InlineObject
-                  // @ts-expect-error - TODO: fix this
-                  tone={tone}
-                  updateRef={updateRef}
-                />
+                Some editor <InlineObject tone={tone} updateRef={updateRef} />
               </Text>
             </Card>
           </Stack>

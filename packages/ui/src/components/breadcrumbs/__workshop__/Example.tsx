@@ -1,61 +1,49 @@
-import {Breadcrumbs, Flex, Text} from '@sanity/ui'
+import {EllipsisHorizontalIcon} from '@sanity/icons'
+import {Box, Breadcrumbs, Button, Flex, Text} from '@sanity/ui'
+import {SPACE} from '@sanity/ui/tokens'
 import {useSelect} from '@sanity/ui-workshop'
 
-const BREADCRUMBS_MAX_LENGTH_OPTIONS = {
-  '(none)': 0,
-  '1': 1,
-  '2': 2,
-  '3': 3,
-  '4': 4,
-  '5': 5,
-  '6': 6,
-  '7': 7,
-}
+import {CardWrapper} from '$workshop'
+
+const items = ['List 1', 'List 2', 'List 3', 'List 4', 'List 5', 'List 6', 'List 7']
+
+const MAX_LENGTH_OPTIONS = [undefined, ...items.map((_, index) => index + 1)]
 
 export default function ExampleStory(): React.JSX.Element {
-  const maxLength = useSelect('Max. length', BREADCRUMBS_MAX_LENGTH_OPTIONS)
+  const maxLength = useSelect('Max. length', MAX_LENGTH_OPTIONS)
+  const gap = useSelect('Gap', [undefined, ...SPACE])
 
   return (
-    <Flex align="center" height="fill" justify="center">
-      <Breadcrumbs
-        gap={2}
-        maxLength={maxLength}
-        separator={
-          <Text muted size={1}>
-            /
-          </Text>
-        }
-      >
-        <Text size={1}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#">Root</a>
-        </Text>
-        <Text size={1}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#">Category A</a>
-        </Text>
-        <Text size={1}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#">Category B</a>
-        </Text>
-        <Text size={1}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#">Category C</a>
-        </Text>
-        <Text size={1}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#">Category D</a>
-        </Text>
-        <Text size={1}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#">Category E</a>
-        </Text>
-        <Text size={1}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#">Category F</a>
-        </Text>
-        <Text size={1}>Item</Text>
-      </Breadcrumbs>
-    </Flex>
+    <CardWrapper>
+      <Flex align="center" height="fill" justify="center">
+        <Breadcrumbs
+          expandButton={{
+            icon: EllipsisHorizontalIcon,
+            padding: 2,
+            text: undefined,
+          }}
+          gap={gap}
+          maxLength={maxLength}
+          popover={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1,
+            padding: 1,
+            placement: 'bottom',
+          }}
+          separator={
+            <Box paddingY={2}>
+              <Text muted size={1} style={{opacity: 0.5}}>
+                /
+              </Text>
+            </Box>
+          }
+        >
+          {items.map((item) => (
+            <Button key={item} mode="bleed" padding={2} text={item} />
+          ))}
+        </Breadcrumbs>
+      </Flex>
+    </CardWrapper>
   )
 }

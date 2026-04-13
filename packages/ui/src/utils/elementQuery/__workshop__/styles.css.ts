@@ -1,4 +1,4 @@
-import {vars} from '@sanity/ui-css'
+import {vars} from '@sanity/ui/css'
 import {style} from '@vanilla-extract/css'
 
 export const testCard: string = style({

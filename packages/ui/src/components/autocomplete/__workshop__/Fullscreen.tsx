@@ -1,19 +1,20 @@
 import {CloseIcon, SearchIcon} from '@sanity/icons'
 import {
   Autocomplete,
+  Badge,
   type BaseAutocompleteOption,
   Box,
   Button,
   Card,
   Flex,
-  Heading,
-  Label,
   Layer,
   Portal,
   PortalProvider,
+  Selectable,
   Stack,
   Text,
   TextSkeleton,
+  Tooltip,
   useToast,
 } from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
@@ -94,8 +95,9 @@ export default function FullscreenStory(): React.JSX.Element {
         return (
           <Portal>
             <Card
+              inset={0}
               padding={4}
-              style={{position: 'absolute', inset: '0 0 0 0'}}
+              position="absolute"
               tone="critical"
               onMouseEnter={props.onMouseEnter}
               onMouseLeave={props.onMouseLeave}
@@ -114,13 +116,17 @@ export default function FullscreenStory(): React.JSX.Element {
         return (
           <Portal>
             <Card
+              inset={0}
               padding={4}
-              style={{position: 'absolute', inset: '0 0 0 0'}}
+              position="absolute"
+              // shadow={1}
+              tone="default"
+              // style={{position: 'absolute', inset: '0 0 0 0'}}
               onMouseEnter={props.onMouseEnter}
               onMouseLeave={props.onMouseLeave}
             >
               <Flex align="center" height="fill" justify="center">
-                <Text align="center" muted>
+                <Text align="center" muted size={1}>
                   No results for <strong>‘{query}’</strong>
                 </Text>
               </Flex>
@@ -134,6 +140,7 @@ export default function FullscreenStory(): React.JSX.Element {
           <Card
             ref={ref}
             hidden={props.hidden}
+            tone="default"
             onMouseEnter={props.onMouseEnter}
             onMouseLeave={props.onMouseLeave}
           >
@@ -176,25 +183,29 @@ export default function FullscreenStory(): React.JSX.Element {
   }, [value])
 
   return (
-    <Card display="flex" flexDirection="column" minHeight="full" tone="transparent">
+    <Card display="flex" flexDirection="column" minHeight="full">
       <PortalProvider element={portalElement}>
         <Card hidden={open} padding={2}>
           <Flex align="center">
             <Box flex={1} />
-            <Button
-              ref={openSearchButtonElementRef}
-              aria-label="Open search"
-              icon={SearchIcon}
-              mode="bleed"
-              onClick={handleOpen}
-            />
+            <Tooltip placement="bottom" text="Open search">
+              <Button
+                ref={openSearchButtonElementRef}
+                aria-label="Open search"
+                icon={SearchIcon}
+                mode="bleed"
+                onClick={handleOpen}
+              />
+            </Tooltip>
           </Flex>
         </Card>
         <Layer hidden={!open} style={{position: 'sticky', top: 0}}>
-          <Card padding={2} shadow={1}>
+          <Card display="flex" gap={2} padding={2} shadow={1}>
             <Autocomplete
               ref={inputRef}
+              border={false}
               filterOption={filterOption}
+              flex={1}
               fontSize={1}
               icon={SearchIcon}
               id="fullsceen-example"
@@ -207,27 +218,28 @@ export default function FullscreenStory(): React.JSX.Element {
               renderOption={renderOption}
               renderPopover={renderPopover}
               renderValue={renderValue}
-              suffix={
-                <Box padding={1}>
-                  <Button
-                    ref={setCloseSearchButtonElement}
-                    aria-label="Close search"
-                    icon={CloseIcon}
-                    mode="bleed"
-                    padding={2}
-                    onClick={handleClose}
-                  />
-                </Box>
-              }
               value={value}
               onQueryChange={handleQueryChange}
               onSelect={handleSelect}
             />
+
+            <Tooltip placement="bottom" text="Close search">
+              <Button
+                ref={setCloseSearchButtonElement}
+                aria-label="Close search"
+                flex="none"
+                icon={CloseIcon}
+                mode="bleed"
+                onClick={handleClose}
+              />
+            </Tooltip>
           </Card>
         </Layer>
         <Card ref={setPortalElement} flex={1} hidden={!open} position="relative" />
         <Box flex={1} hidden={open} padding={4}>
-          <Heading>Welcome to this app</Heading>
+          <Text size={1} weight="medium">
+            Welcome to this app
+          </Text>
         </Box>
       </PortalProvider>
     </Card>
@@ -251,12 +263,12 @@ function AsyncOption(props: {
   }, [documentId])
 
   return (
-    <Card
+    <Selectable
       aria-label={data?.title}
       as="button"
       disabled={disabled}
       padding={2}
-      radius={2}
+      radius={3}
       selected={selected}
       style={{lineHeight: 0}}
       tabIndex={tabIndex}
@@ -273,7 +285,7 @@ function AsyncOption(props: {
             )}
             {!loading && (
               <>
-                <Text muted={!data} textOverflow="ellipsis">
+                <Text muted={!data} size={1} textOverflow="ellipsis" weight="medium">
                   {data ? data.title : <>Untitled</>}
                 </Text>
                 <Text muted size={1}>
@@ -283,12 +295,13 @@ function AsyncOption(props: {
             )}
           </Stack>
         </Box>
-        <Box paddingX={2}>
-          <Label muted size={0}>
+        <Box paddingX={1}>
+          {/* <Label muted size={0}>
             Country
-          </Label>
+          </Label> */}
+          <Badge>Country</Badge>
         </Box>
       </Flex>
-    </Card>
+    </Selectable>
   )
 }

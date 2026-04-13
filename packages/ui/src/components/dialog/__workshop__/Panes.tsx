@@ -12,8 +12,6 @@ import {
 } from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
-import {panePortal, paneRoot} from './styles.css'
-
 export default function PanesStory(): React.JSX.Element {
   return (
     <Flex height="fill">
@@ -36,12 +34,12 @@ function Pane(props: {borderLeft?: boolean; id: string}) {
   return (
     <BoundaryElementProvider element={element}>
       <PortalProvider element={portalElement}>
-        <Card ref={setElement} borderLeft={borderLeft} className={paneRoot} flex={1}>
+        <Card ref={setElement} borderLeft={borderLeft} flex={1} position="relative">
           <Box padding={4}>
             <Button selected={dialogOpen} text="Open dialog" onClick={() => setDialogOpen(true)} />
           </Box>
 
-          <div ref={setPortalElement} className={panePortal} />
+          <div ref={setPortalElement} />
         </Card>
 
         {dialogOpen && (

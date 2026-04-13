@@ -7,14 +7,11 @@ import {
   PortalProvider,
   Text,
 } from '@sanity/ui'
+import {CONTAINER, RADIUS} from '@sanity/ui/tokens'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useRef, useState} from 'react'
 
-import {
-  WORKSHOP_CONTAINER_WIDTH_OPTIONS,
-  WORKSHOP_PLACEMENT_OPTIONS,
-  WORKSHOP_RADIUS_OPTIONS,
-} from '$workshop'
+import {WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'
 
 export default function TestStory(): React.JSX.Element {
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
@@ -25,15 +22,12 @@ export default function TestStory(): React.JSX.Element {
   const constrainSize = useBoolean('Constrain size', true)
   const matchReferenceWidth = useBoolean('Match reference width', false)
   const open = useBoolean('Open', true)
-  // @ts-expect-error - TODO: fix this
   const placement = useSelect('Placement', WORKSHOP_PLACEMENT_OPTIONS, 'bottom')
   const portal = useBoolean('Render in portal', true)
   const preventOverflow = useBoolean('Prevent overflow', true)
-  // @ts-expect-error - TODO: fix this
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 2)
+  const radius = useSelect('Radius', RADIUS, 2)
   const referenceWide = useBoolean('Reference wide?', false)
-  // @ts-expect-error - TODO: fix this
-  const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 'auto')
+  const width = useSelect('Width', CONTAINER, 'auto')
 
   const text = useText('Text', 'Test')
 
@@ -84,14 +78,11 @@ export default function TestStory(): React.JSX.Element {
                   open={open}
                   overflow="hidden"
                   padding={3}
-                  // @ts-expect-error - TODO: fix this
                   placement={placement}
                   portal={portal}
                   preventOverflow={preventOverflow}
-                  // @ts-expect-error - TODO: fix this
                   radius={radius}
                   updateRef={updateRef}
-                  // @ts-expect-error - TODO: fix this
                   width={width}
                 >
                   {button}

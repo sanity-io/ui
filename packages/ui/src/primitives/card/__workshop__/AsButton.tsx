@@ -1,10 +1,7 @@
 import {Box, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
-
-import {WORKSHOP_CARD_TONE_OPTIONS} from '$workshop'
+import {CARD_TONES} from '@sanity/ui/tokens'
 
 export default function AsButtonStory(): React.JSX.Element {
-  const tones = Object.entries(WORKSHOP_CARD_TONE_OPTIONS)
-
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Container>
@@ -14,7 +11,7 @@ export default function AsButtonStory(): React.JSX.Element {
               Enabled
             </Text>
             <Stack gap={1} marginTop={3}>
-              {tones.map(([title, tone]) => (
+              {CARD_TONES.map((tone) => (
                 <Card
                   key={tone}
                   __unstable_focusRing
@@ -25,7 +22,7 @@ export default function AsButtonStory(): React.JSX.Element {
                 >
                   <Stack gap={3}>
                     <Text size={1} weight="medium">
-                      {title}
+                      {tone}
                     </Text>
                     <Text muted size={1}>
                       Muted
@@ -44,7 +41,7 @@ export default function AsButtonStory(): React.JSX.Element {
               Disabled
             </Text>
             <Stack gap={1} marginTop={3}>
-              {tones.map(([title, tone]) => (
+              {CARD_TONES.map((tone) => (
                 <Card
                   key={tone}
                   __unstable_focusRing
@@ -56,7 +53,7 @@ export default function AsButtonStory(): React.JSX.Element {
                 >
                   <Stack gap={3}>
                     <Text size={1} weight="medium">
-                      {title}
+                      {tone}
                     </Text>
                     <Text muted size={1}>
                       Muted
@@ -75,7 +72,7 @@ export default function AsButtonStory(): React.JSX.Element {
               Selected
             </Text>
             <Stack gap={1} marginTop={3}>
-              {tones.map(([title, tone]) => (
+              {CARD_TONES.map((tone) => (
                 <Card
                   key={tone}
                   __unstable_focusRing
@@ -87,7 +84,7 @@ export default function AsButtonStory(): React.JSX.Element {
                 >
                   <Stack gap={3}>
                     <Text size={1} weight="medium">
-                      {title}
+                      {tone}
                     </Text>
                     <Text muted size={1}>
                       Muted

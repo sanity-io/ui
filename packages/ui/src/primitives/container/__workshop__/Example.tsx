@@ -1,24 +1,16 @@
-import {Card, Container, Flex, Text} from '@sanity/ui'
-import {useAction, useSelect} from '@sanity/ui-workshop'
-
-import {WORKSHOP_CONTAINER_WIDTH_OPTIONS} from '$workshop'
+import {Container, Flex, Text} from '@sanity/ui'
+import {CONTAINER_SCALE} from '@sanity/ui/tokens'
+import {useSelect} from '@sanity/ui-workshop'
 
 export default function PlainStory(): React.JSX.Element {
-  // @ts-expect-error - TODO: fix this
-  const width = useSelect('Width', WORKSHOP_CONTAINER_WIDTH_OPTIONS, 0)
+  const width = useSelect('Width', [undefined, ...CONTAINER_SCALE])
 
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
-      <Container
-        // @ts-expect-error - TODO: fix this
-        width={width}
-        onClick={useAction('onClick')}
-      >
-        <Card padding={4} shadow={1}>
-          <Text size={1}>
-            Container with <code>max-width={width}</code>
-          </Text>
-        </Card>
+      <Container padding={3} radius={4} shadow={1} width={width}>
+        <Text size={1}>
+          Container with <code>max-width={width}</code>
+        </Text>
       </Container>
     </Flex>
   )

@@ -1,48 +1,35 @@
 import {Card, Flex, Stack, Text} from '@sanity/ui'
+import {BG_PATTERNS, BORDER_WIDTH, CARD_TONES, RADIUS, SHADOW, SPACE} from '@sanity/ui/tokens'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 
-import {
-  WORKSHOP_CARD_AS_OPTIONS,
-  WORKSHOP_CARD_TONE_OPTIONS,
-  WORKSHOP_RADIUS_OPTIONS,
-  WORKSHOP_SHADOW_OPTIONS,
-  WORKSHOP_SPACE_OPTIONS,
-} from '$workshop'
+import {WORKSHOP_CARD_AS_OPTIONS} from '$workshop'
 
 export default function PropsStory(): React.JSX.Element {
-  // @ts-expect-error - TODO: fix this
   const as = useSelect('As', WORKSHOP_CARD_AS_OPTIONS, 'div')
   const border = useBoolean('Border', false)
-  const checkered = useBoolean('Checkered', false)
+  const borderWidth = useSelect('Border Width', BORDER_WIDTH, 0)
   const muted = useBoolean('Muted', false)
-  // @ts-expect-error - TODO: fix this
-  const padding = useSelect('Padding', WORKSHOP_SPACE_OPTIONS, 3)
+  const padding = useSelect('Padding', SPACE, 3)
+  const pattern = useSelect('Pattern', BG_PATTERNS, undefined)
   const pressed = useBoolean('Pressed', false)
-  // @ts-expect-error - TODO: fix this
-  const radius = useSelect('Radius', WORKSHOP_RADIUS_OPTIONS, 0)
+  const radius = useSelect('Radius', RADIUS, 0)
   const selected = useBoolean('Selected', false)
-  // @ts-expect-error - TODO: fix this
-  const shadow = useSelect('Shadow', WORKSHOP_SHADOW_OPTIONS, 0)
-  // @ts-expect-error - TODO: fix this
-  const tone = useSelect('Tone', WORKSHOP_CARD_TONE_OPTIONS, 'default')
+  const shadow = useSelect('Shadow', SHADOW, 0)
+  const tone = useSelect('Tone', CARD_TONES, 'default')
 
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Card
-        __unstable_checkered={checkered}
-        // @ts-expect-error - TODO: fix this
+        __unstable_pattern={pattern}
         as={as}
         border={border}
+        borderWidth={borderWidth}
         muted={muted}
-        // @ts-expect-error - TODO: fix this
         padding={padding}
         pressed={pressed}
-        // @ts-expect-error - TODO: fix this
         radius={radius}
         selected={selected}
-        // @ts-expect-error - TODO: fix this
         shadow={shadow}
-        // @ts-expect-error - TODO: fix this
         tone={tone}
         onClick={useAction('onClick')}
       >

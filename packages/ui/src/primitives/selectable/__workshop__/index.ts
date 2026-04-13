@@ -10,5 +10,10 @@ export default defineScope({
       title: 'Data props',
       component: lazy(() => import('./DataProps')),
     },
+    {
+      name: 'as-link',
+      title: 'As link',
+      component: lazy(() => import('./as-link')),
+    },
   ],
 })

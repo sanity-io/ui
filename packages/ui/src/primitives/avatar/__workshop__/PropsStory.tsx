@@ -1,19 +1,22 @@
 import {Avatar, Box} from '@sanity/ui'
-import type {AvatarSize} from '@sanity/ui/tokens'
-import {useBoolean, useSelect} from '@sanity/ui-workshop'
+import {AVATAR_SIZE} from '@sanity/ui/tokens'
+import {useBoolean, useSelect, useString} from '@sanity/ui-workshop'
 
-import {WORKSHOP_AVATAR_SIZE_OPTIONS, WORKSHOP_AVATAR_SRC} from '$workshop'
+import {WORKSHOP_AVATAR_SRC} from '$workshop'
 
 export default function PropsStory() {
   const hideInnerStroke = useBoolean('Hide inner stroke', false)
   const src = useBoolean('With image source (src)', false)
-  // @ts-expect-error - TODO: fix this
-  const size = useSelect<AvatarSize>('Size', WORKSHOP_AVATAR_SIZE_OPTIONS, 1)
+  const size = useSelect('Size', [undefined, ...AVATAR_SIZE])
+  const arrowPosition = useSelect('Arrow position', [undefined, 'top', 'bottom', 'inside'])
+  const initials = useString('Initials', 'AB')
 
   return (
     <Box alignItems="center" display="flex" height="fill" justifyContent="center">
       <Avatar
         __unstable_hideInnerStroke={hideInnerStroke}
+        arrowPosition={arrowPosition}
+        initials={initials}
         size={size}
         src={src ? WORKSHOP_AVATAR_SRC : undefined}
       />
