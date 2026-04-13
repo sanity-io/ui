@@ -55,7 +55,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
     color = 'magenta',
     src,
     title,
-    initials,
+    initials: initialsProp,
     onImageLoadError,
     arrowPosition: arrowPositionProp,
     animateArrowFrom,
@@ -63,6 +63,7 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
     ...rest
   } = props as AvatarProps<typeof DEFAULT_AVATAR_ELEMENT>
 
+  const initials = typeof initialsProp === 'string' ? initialsProp.slice(0, 2) : undefined
   const size = _getResponsiveProp(sizeProp)
 
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
