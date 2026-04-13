@@ -5,10 +5,10 @@ import {POPOVER_MOTION_PROPS} from '../../core/constants'
 import type {Placement} from '../../core/types'
 import {Layer, type LayerOwnProps, type LayerProps} from '../layer/Layer'
 
-/* @internal */
+/** @internal */
 export const DEFAULT_TOOLTIP_LAYER_ELEMENT = 'div'
 
-/* @internal */
+/** @internal */
 export interface TooltipLayerOwnProps extends LayerOwnProps {
   animate?: boolean
   originX?: number

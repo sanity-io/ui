@@ -1,5 +1,4 @@
 import {
-  arrow,
   autoUpdate,
   flip,
   type Middleware,
@@ -18,12 +17,7 @@ import type {CardTone, ColorScheme, FontTextSize} from '@sanity/ui-tokens'
 import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
-  type FocusEvent,
-  type HTMLAttributes,
-  type MouseEvent as ReactMouseEvent,
-  type ReactElement,
-  type ReactNode,
-  type RefAttributes,
+  startTransition,
   use,
   useCallback,
   useEffect,
@@ -38,7 +32,6 @@ import {
 
 import {Z_OFFSETS} from '../../core/constants'
 import type {ComponentType, Delay, Placement, Props} from '../../core/types'
-import {useDelayedState} from '../../hooks/useDelayedState'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
@@ -50,6 +43,7 @@ import type {LayerOwnProps} from '../layer/Layer'
 import {Text} from '../text/Text'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
+  DEFAULT_TOOLTIP_DELAY,
   DEFAULT_TOOLTIP_DISTANCE,
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
@@ -70,10 +64,13 @@ export type TooltipOwnProps = LayerOwnProps &
      * @defaultValue false
      */
     animate?: boolean
+    /** @deprecated Will be removed in the next major version */
     arrow?: boolean
     boundaryElement?: HTMLElement | null
-    children?: ReactElement<HTMLAttributes<HTMLElement> & RefAttributes<HTMLElement>>
-    content?: ReactNode
+    children?: React.ReactElement<
+      React.HTMLAttributes<HTMLElement> & React.RefAttributes<HTMLElement>
+    >
+    content?: React.ReactNode
     /**
      * Adds a delay to open or close the tooltip.
      *
@@ -115,28 +112,31 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
 ): React.JSX.Element {
   const {
     animate: _animate = false,
-    arrow: arrowProp = false,
+    arrow: _arrow,
     as = DEFAULT_TOOLTIP_ELEMENT,
     boundaryElement: _boundaryElement,
     children: childProp,
     className,
-    content,
-    delay,
+    content: contentProp,
+    delay = DEFAULT_TOOLTIP_DELAY,
     disabled,
+    id: idProp,
     fallbackPlacements: _fallbackPlacements,
     padding = 2,
     placement: placementProp = 'bottom',
-    portal: portalProp,
+    portal = false,
     radius = 3,
     ref: forwardedRef,
-    scheme,
     shadow = 2,
     text,
     textSize = 1,
     zOffset = Z_OFFSETS.tooltip,
-    tone,
     ...rest
   } = props as TooltipProps<typeof DEFAULT_TOOLTIP_ELEMENT>
+
+  const _randomId = useId()
+  const id = idProp ?? _randomId
+
   const boundaryElement = _boundaryElement ?? use(BoundaryElementContext)
   const fallbackPlacements =
     _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
@@ -145,24 +145,21 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
   const animate = prefersReducedMotion ? false : _animate
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
-  const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
   const [tooltipMaxWidth, setTooltipMaxWidth] = useState(0)
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
   let portalElement: HTMLElement | null = null
-  if (portalProp) {
-    const portal = use(PortalContext)
-    assertPortalContext(portal)
+  if (portal) {
+    const portalContext = use(PortalContext)
+    assertPortalContext(portalContext)
     portalElement =
-      typeof portalProp === 'string' ? portal.elements?.[portalProp] || null : portal.element
+      typeof portal === 'string' ? portalContext.elements?.[portal] || null : portalContext.element
   }
 
   const middleware = useMiddleware({
     animate,
-    arrowProp,
-    arrowRef,
     boundaryElement,
     fallbackPlacements,
     rootBoundary,
@@ -179,117 +176,164 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
   const originX = middlewareData['@sanity/ui/origin']?.originX
   const originY = middlewareData['@sanity/ui/origin']?.originY
 
-  const tooltipId = useId()
-  const [isOpen, setIsOpen] = useDelayedState(false)
   const delayGroupContext = use(TooltipDelayGroupContext)
-  const {setIsGroupActive, setOpenTooltipId} = delayGroupContext || {}
-  const showTooltip = isOpen || delayGroupContext?.openTooltipId === tooltipId
+  const handleGroupOpenChange = delayGroupContext?.handleOpenChange
 
-  const isInsideGroup = delayGroupContext !== null
-  const openDelayProp = typeof delay === 'number' ? delay : delay?.open || 0
-  const closeDelayProp = typeof delay === 'number' ? delay : delay?.close || 0
+  const groupVisible = delayGroupContext?.visibleTooltipId === id
 
-  const openDelay = isInsideGroup ? delayGroupContext.openDelay : openDelayProp
-  const closeDelay = isInsideGroup ? delayGroupContext.closeDelay : closeDelayProp
+  const openDelay = typeof delay === 'number' ? delay : (delay.open ?? DEFAULT_TOOLTIP_DELAY.open)
+  const closeDelay =
+    typeof delay === 'number' ? delay : (delay.close ?? DEFAULT_TOOLTIP_DELAY.close)
 
-  const handleIsOpenChange = useCallback(
-    (open: boolean, immediate?: boolean) => {
-      if (isInsideGroup) {
-        //  When it's inside a group, the open or close status will be handled by the group.
-        if (open) {
-          const groupedOpenDelay = immediate ? 0 : openDelay
+  const openDelayRef = useRef(openDelay)
+  useEffect(() => {
+    // update `openDelayRef` when `openDelay` changes
+    openDelayRef.current = openDelay
+  }, [openDelay])
 
-          setIsGroupActive?.(open, groupedOpenDelay)
-          setOpenTooltipId?.(tooltipId, groupedOpenDelay)
-        } else {
-          const minimumGroupDeactivateDelay = 200 // We should provide some delay to allow the user to reach the next tooltip.
-          const groupDeactivateDelay =
-            closeDelay > minimumGroupDeactivateDelay ? closeDelay : minimumGroupDeactivateDelay
+  const closeDelayRef = useRef(closeDelay)
+  useEffect(() => {
+    // update `closeDelayRef` when `closeDelay` changes
+    closeDelayRef.current = closeDelay
+  }, [closeDelay])
 
-          setIsGroupActive?.(open, groupDeactivateDelay)
-          setOpenTooltipId?.(null, immediate ? 0 : closeDelay)
-        }
-      } else {
-        const standaloneDelay = immediate ? 0 : open ? openDelay : closeDelay
+  const [referenceHovered, setReferenceHovered] = useState(false)
+  const [referenceFocused, setReferenceFocused] = useState(false)
 
-        // When it's not inside a group, the open or close status will be handled by the tooltip itself.
-        setIsOpen(open, standaloneDelay)
-      }
-    },
-    [
-      isInsideGroup,
-      openDelay,
-      setIsGroupActive,
-      setOpenTooltipId,
-      tooltipId,
-      closeDelay,
-      setIsOpen,
-    ],
-  )
+  const isOpen = referenceHovered || referenceFocused
+
+  const [localVisible, setVisible] = useState(false)
+
+  const visible = groupVisible || localVisible
+
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  useEffect(() => {
+    if (handleGroupOpenChange) {
+      handleGroupOpenChange({open: isOpen, id})
+      return
+    }
+
+    if (timerRef.current) clearTimeout(timerRef.current)
+    timerRef.current = undefined
+
+    if (isOpen) {
+      // start open timer
+      timerRef.current = setTimeout(() => {
+        setVisible(true)
+        timerRef.current = undefined
+      }, openDelayRef.current)
+      return
+    }
+
+    // start close timer
+    timerRef.current = setTimeout(() => {
+      setVisible(false)
+      timerRef.current = undefined
+    }, closeDelayRef.current)
+
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+      timerRef.current = undefined
+    }
+  }, [isOpen, handleGroupOpenChange, id])
+
+  const content = useMemo(() => {
+    if (contentProp || text) {
+      return (
+        <>
+          {text && <Text size={textSize}>{text}</Text>}
+          {contentProp}
+        </>
+      )
+    }
+
+    return undefined
+  }, [contentProp, text, textSize])
+
+  // Hide immediately
+  const hide = useCallback(() => {
+    handleGroupOpenChange?.({open: false, id, immediate: true})
+    setVisible(false)
+    setReferenceHovered(false)
+    setReferenceFocused(false)
+  }, [handleGroupOpenChange, id])
+
+  const childOnBlur = childProp?.props?.onBlur
+  const childOnFocus = childProp?.props?.onFocus
+  const childOnMouseEnter = childProp?.props?.onMouseEnter
+  const childOnMouseLeave = childProp?.props?.onMouseLeave
+  const childOnContextMenu = childProp?.props?.onContextMenu
 
   const handleBlur = useCallback(
-    (e: FocusEvent<HTMLElement>) => {
-      handleIsOpenChange(false)
-      childProp?.props?.onBlur?.(e)
+    (e: React.FocusEvent<HTMLElement>) => {
+      childOnBlur?.(e)
+      setReferenceFocused(false)
     },
-    [childProp?.props, handleIsOpenChange],
-  )
-  const handleClick = useCallback(
-    (e: ReactMouseEvent<HTMLElement>) => {
-      handleIsOpenChange(false, true)
-      childProp?.props.onClick?.(e)
-    },
-    [childProp?.props, handleIsOpenChange],
+    [childOnBlur],
   )
   const handleContextMenu = useCallback(
-    (e: ReactMouseEvent<HTMLElement>) => {
-      handleIsOpenChange(false, true)
-      childProp?.props.onContextMenu?.(e)
+    (e: React.MouseEvent<HTMLElement>) => {
+      childOnContextMenu?.(e)
+      setReferenceHovered(false)
+      setReferenceFocused(false)
+      hide()
     },
-    [childProp?.props, handleIsOpenChange],
+    [childOnContextMenu, hide],
   )
   const handleFocus = useCallback(
-    (e: FocusEvent<HTMLElement>) => {
-      handleIsOpenChange(true)
-      childProp?.props?.onFocus?.(e)
+    (e: React.FocusEvent<HTMLElement>) => {
+      childOnFocus?.(e)
+      setReferenceFocused(true)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childOnFocus],
   )
   const handleMouseEnter = useCallback(
-    (e: ReactMouseEvent<HTMLElement>) => {
-      handleIsOpenChange(true)
-      childProp?.props?.onMouseEnter?.(e)
+    (e: React.MouseEvent<HTMLElement>) => {
+      childOnMouseEnter?.(e)
+      setReferenceHovered(true)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childOnMouseEnter],
   )
   const handleMouseLeave = useCallback(
-    (e: ReactMouseEvent<HTMLElement>) => {
-      handleIsOpenChange(false)
-      childProp?.props?.onMouseLeave?.(e)
+    (e: React.MouseEvent<HTMLElement>) => {
+      childOnMouseLeave?.(e)
+      setReferenceHovered(false)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childOnMouseLeave],
   )
 
   // Handle closing the tooltip when the mouse leaves the referenceElement
-  useCloseOnMouseLeave({handleIsOpenChange, referenceElement, showTooltip, isInsideGroup})
+  useCloseOnMouseLeave({
+    referenceElement,
+    visible,
+    onClose: useCallback(() => {
+      setReferenceHovered(false)
+    }, []),
+  })
 
   // Close when `disabled` changes to `true`
   useEffect(() => {
-    if (disabled && showTooltip) handleIsOpenChange(false)
-  }, [disabled, handleIsOpenChange, showTooltip])
+    if (disabled) {
+      startTransition(() => hide())
+    }
+  }, [disabled, hide])
 
   // Close when `content` changes to falsy
   useEffect(() => {
-    if (!content && showTooltip) handleIsOpenChange(false)
-  }, [content, handleIsOpenChange, showTooltip])
+    if (!content) {
+      startTransition(() => hide())
+    }
+  }, [content, hide])
 
   useEffect(() => {
-    // If the user clicks on escape key, close the tooltip.
-    if (!showTooltip) return
+    if (!visible) return
 
     function handleWindowKeyDown(event: KeyboardEvent) {
+      // If the user clicks on escape key, close the tooltip.
       if (event.key === 'Escape') {
-        handleIsOpenChange(false, true)
+        startTransition(() => hide())
+        return
       }
     }
 
@@ -298,9 +342,9 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     return () => {
       window.removeEventListener('keydown', handleWindowKeyDown)
     }
-  }, [handleIsOpenChange, showTooltip])
+  }, [hide, visible])
 
-  // // Set the max width of the tooltip based on boundaries and portals
+  // Set the max width of the tooltip based on boundaries and portals
   useLayoutEffect(() => {
     // Get the maximum tooltip width (sans tooltip padding)
     // Tooltip width should never exceed the width of either any supplied boundary or portal element.
@@ -310,8 +354,9 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
       portalElement?.offsetWidth || document.body.offsetWidth,
     ]
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTooltipMaxWidth(Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2)
+    startTransition(() => {
+      setTooltipMaxWidth(Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2)
+    })
   }, [boundaryElement, portalElement])
 
   const setFloating = useCallback(
@@ -326,22 +371,23 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     if (!childProp) return null
 
     return cloneElement(childProp, {
-      onBlur: handleBlur,
-      onFocus: handleFocus,
-      onMouseEnter: handleMouseEnter,
-      onMouseLeave: handleMouseLeave,
-      onClick: handleClick,
-      onContextMenu: handleContextMenu,
-      ref: setReferenceElement,
+      'aria-describedby': visible ? id : undefined,
+      'onBlur': handleBlur,
+      'onFocus': handleFocus,
+      'onMouseEnter': handleMouseEnter,
+      'onMouseLeave': handleMouseLeave,
+      'onContextMenu': handleContextMenu,
+      'ref': setReferenceElement,
     })
   }, [
     childProp,
     handleBlur,
-    handleClick,
     handleContextMenu,
     handleFocus,
     handleMouseEnter,
     handleMouseLeave,
+    id,
+    visible,
   ])
 
   // If there's a child then we need to set the reference element to the cloned child ref
@@ -362,32 +408,31 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
       animate={animate}
       as={as}
       className={tooltip({className})}
+      display="flex"
+      gap={padding}
+      id={id}
       originX={originX}
       originY={originY}
       padding={padding}
       placement={placement}
       radius={radius}
-      scheme={scheme}
+      role="tooltip"
       shadow={shadow}
       style={{
         ...floatingStyles,
         maxWidth: tooltipMaxWidth > 0 ? `${tooltipMaxWidth}px` : undefined,
       }}
-      tone={tone}
       zOffset={zOffset}
     >
-      {text && <Text size={textSize}>{text}</Text>}
       {content}
     </TooltipLayer>
   )
 
-  let children = showTooltip ? node : null
+  let children = visible ? node : null
 
-  if (showTooltip && portalProp) {
+  if (visible && portal) {
     children = (
-      <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        {node}
-      </Portal>
+      <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>{node}</Portal>
     )
   }
 
@@ -404,15 +449,11 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
 
 function useMiddleware({
   animate,
-  arrowProp,
-  arrowRef,
   boundaryElement,
   fallbackPlacements,
   rootBoundary,
 }: {
   animate: boolean
-  arrowProp: boolean
-  arrowRef: React.RefObject<HTMLDivElement | null>
   boundaryElement: HTMLElement | null
   fallbackPlacements: Placement[]
   rootBoundary: RootBoundary
@@ -442,11 +483,6 @@ function useMiddleware({
       }),
     )
 
-    // Place arrow
-    if (arrowProp) {
-      ret.push(arrow({element: arrowRef, padding: DEFAULT_TOOLTIP_PADDING}))
-    }
-
     // Determine the origin to scale from.
     // Must be placed after `@sanity/ui/size` and `shift` middleware.
     if (animate) {
@@ -454,26 +490,24 @@ function useMiddleware({
     }
 
     return ret
-  }, [animate, arrowProp, arrowRef, boundaryElement, fallbackPlacements, rootBoundary])
+  }, [animate, boundaryElement, fallbackPlacements, rootBoundary])
 }
 
 /**
  * As `useEffectEvent` should never be passed to other components or hooks, this custom hook groups together the `useEffectEvent` and the `useEffect` hook using it.
- * @see https://19.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events:~:text=Never%20pass%20them%20to%20other%20components%20or%20Hooks
+ * @see https://react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events:~:text=Never%20pass%20them%20to%20other%20components%20or%20Hooks
  */
 function useCloseOnMouseLeave({
-  handleIsOpenChange,
+  onClose,
   referenceElement,
-  showTooltip,
-  isInsideGroup,
+  visible,
 }: {
-  handleIsOpenChange: (open: boolean, immediate?: boolean) => void
+  onClose: () => void
   referenceElement: HTMLElement | null
-  showTooltip: boolean
-  isInsideGroup: boolean
+  visible: boolean
 }) {
   // Since we don't want the `mouseevent` events to be attached and removed if the `referenceElement` is changed
-  // we use a "effect event" (https://19.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
+  // we use a "effect event" (https://react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
   // in order to always see the latest `referenceElement` value inside the event handler itself.
   const onMouseMove = useEffectEvent((target: EventTarget | null, teardown: () => void) => {
     if (!referenceElement) return
@@ -482,7 +516,7 @@ function useCloseOnMouseLeave({
       referenceElement === target || (target instanceof Node && referenceElement.contains(target))
 
     if (!isHoveringReference) {
-      handleIsOpenChange(false)
+      onClose()
       // Allow removing the event listener eagerly, to avoid race conditions
       teardown()
     }
@@ -492,7 +526,7 @@ function useCloseOnMouseLeave({
   // necessary, because the tooltip might not always close as it should (e.g. when clicking
   // the reference element triggers a CPU-heavy operation.)
   useEffect(() => {
-    if (!showTooltip || isInsideGroup) return
+    if (!visible) return
 
     const handleMouseMove = (event: MouseEvent) => {
       onMouseMove(event.target, () => window.removeEventListener('mousemove', handleMouseMove))
@@ -501,5 +535,5 @@ function useCloseOnMouseLeave({
     window.addEventListener('mousemove', handleMouseMove)
 
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [isInsideGroup, showTooltip])
+  }, [visible])
 }
