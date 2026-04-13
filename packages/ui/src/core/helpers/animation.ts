@@ -13,15 +13,14 @@ export function _raf(fn: () => void): () => void {
  * @internal
  */
 export function _raf2(fn: () => void): () => void {
-  let innerDispose: (() => void) | null = null
+  let innerDispose: (() => void) | undefined = undefined
 
-  const outerDispose = _raf(() => {
+  const dispose = _raf(() => {
     innerDispose = _raf(fn)
   })
 
   return () => {
-    if (innerDispose) innerDispose()
-
-    outerDispose()
+    innerDispose?.()
+    dispose()
   }
 }
