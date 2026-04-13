@@ -8,7 +8,7 @@ import {
   type ResponsiveProp,
 } from '@sanity/ui-css'
 import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui-tokens'
-import {startTransition, useCallback, useEffect, useState} from 'react'
+import {startTransition, useEffect, useState} from 'react'
 
 import {_raf} from '../../core/helpers/animation'
 import {_getResponsiveProp} from '../../core/helpers/props'
@@ -72,6 +72,22 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
 
   const [imageError, setImageError] = useState<boolean>(false)
 
+  const handleImageError = () => {
+    setImageError(true)
+
+    if (onImageLoadError) {
+      onImageLoadError(new Error('Avatar: the image failed to load'))
+    }
+  }
+
+  const initialsSize = size.map((s): FontLabelSize => {
+    if (s === 1) return 1
+    if (s === 2) return 3
+    if (s === 3) return 5
+
+    return 0
+  }) as ResponsiveProp<FontLabelSize>
+
   useEffect(() => {
     if (arrowPosition === arrowPositionProp) return undefined
 
@@ -84,22 +100,6 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
       startTransition(() => setImageError(false))
     }
   }, [src])
-
-  const handleImageError = useCallback(() => {
-    setImageError(true)
-
-    if (onImageLoadError) {
-      onImageLoadError(new Error('Avatar: the image failed to load'))
-    }
-  }, [onImageLoadError])
-
-  const initialsSize = size.map((s): FontLabelSize => {
-    if (s === 1) return 1
-    if (s === 2) return 3
-    if (s === 3) return 5
-
-    return 0
-  }) as ResponsiveProp<FontLabelSize>
 
   return (
     <Element
