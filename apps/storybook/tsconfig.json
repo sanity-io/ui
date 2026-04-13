@@ -17,10 +17,13 @@
     "noEmit": true,
     "rootDir": "../..",
     "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
 
     "types": ["vite/client"],
 
     "jsx": "react-jsx",
+
+    "skipLibCheck": true,
 
     "paths": {
       "@sanity/ui": ["../../packages/ui/exports/index.ts"],
