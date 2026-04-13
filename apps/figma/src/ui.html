@@ -1,0 +1,17 @@
+<h2>Sanity UI tokens</h2>
+<div>
+  <input type="checkbox" id="disable-cache" />
+  <label for="disable-cache">Disable cache</label>
+</div>
+<button id="sync">Sync</button>
+<button id="cancel">Cancel</button>
+<script>
+  document.getElementById('sync').onclick = () => {
+    const disableCache = document.getElementById('disable-cache').checked
+    parent.postMessage({pluginMessage: {type: 'sync', disableCache}}, '*')
+  }
+
+  document.getElementById('cancel').onclick = () => {
+    parent.postMessage({pluginMessage: {type: 'cancel'}}, '*')
+  }
+</script>

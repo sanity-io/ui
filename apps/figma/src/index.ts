@@ -1,36 +1,22 @@
-/** Entry point for Figma plugin */
+import {sync} from './sync/sync'
 
-/// <reference types="@figma/plugin-typings" />
-
-import {config} from './config'
-import {writeStyles} from './styles/write'
-import {writeVars} from './vars/write'
-
-const commands = {
-  styles: {
-    write: writeStyles,
-  },
-  vars: {
-    write: writeVars,
-  },
-}
-
-//
 figma.showUI(__html__)
 
-// Calls to "parent.postMessage" from within the HTML page will trigger this
-// callback. The callback will be passed the "pluginMessage" property of the
-// posted message.
-figma.ui.onmessage = (msg) => {
-  if (msg.type === 'styles:write') {
-    commands.styles.write()
+figma.ui.onmessage = (msg: {type: string; disableCache?: boolean}) => {
+  if (msg.type === 'sync') {
+    sync({disableCache: msg.disableCache ?? false})
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error(err)
+      })
+      .finally(() => {
+        figma.closePlugin()
+      })
+    return
   }
 
-  if (msg.type === 'vars:write') {
-    commands.vars.write(config)
+  if (msg.type === 'cancel') {
+    figma.closePlugin()
+    return
   }
-
-  // Make sure to close the plugin when you're done. Otherwise the plugin will
-  // keep running, which shows the cancel button at the bottom of the screen.
-  figma.closePlugin()
 }
