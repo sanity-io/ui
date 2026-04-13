@@ -1,6 +1,8 @@
-context('Primitives/Layer', () => {
-  it('should support responsive z-offset', () => {
-    cy.visit('/frame/?path=/primitives/layer/responsive-z-offset')
+import {expect, test} from '@playwright/test'
+
+test.describe('Primitives/Layer', () => {
+  test('should support responsive z-offset', async ({page}) => {
+    await page.goto('/frame/?path=/primitives/layer/responsive-z-offset')
 
     const sizes = [
       {viewport: [320, 600], css: {zIndex: '1'}},
@@ -15,22 +17,25 @@ context('Primitives/Layer', () => {
     for (const size of sizes) {
       const {css, viewport} = size
 
-      cy.viewport(viewport[0], viewport[1])
-      cy.reload()
+      await page.setViewportSize({width: viewport[0], height: viewport[1]})
+      await page.reload()
 
-      cy.get('#responsive-layer').should('have.attr', 'style', `z-index: ${css.zIndex};`)
+      await expect(page.locator('#responsive-layer')).toHaveAttribute(
+        'style',
+        `z-index: ${css.zIndex};`,
+      )
     }
   })
 
-  it('should calculate size of nested layers', () => {
-    cy.visit('/frame/?path=/primitives/layer/nested')
+  test('should calculate size of nested layers', async ({page}) => {
+    await page.goto('/frame/?path=/primitives/layer/nested')
 
-    cy.get('#open-layer-1').click()
+    await page.locator('#open-layer-1').first().click()
 
-    cy.get('#layer-debug-info-1').contains('size=1')
+    await expect(page.locator('#layer-debug-info-1').first()).toContainText('size=1')
 
-    cy.get('#open-layer-2').click()
+    await page.locator('#open-layer-2').first().click()
 
-    cy.get('#layer-debug-info-1').contains('size=2')
+    await expect(page.locator('#layer-debug-info-1').first()).toContainText('size=2')
   })
 })

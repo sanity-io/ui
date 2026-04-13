@@ -1,99 +1,104 @@
-context('Components/MenuButton', () => {
-  it('clicking should open/close menu', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+import {expect, test} from '@playwright/test'
+
+test.describe('Components/MenuButton', () => {
+  test('clicking should open/close menu', async ({page}) => {
+    await page.goto('/frame/?path=/components/menu/menu-button')
 
     // click button
-    cy.get('#menu-button').click()
-    cy.get('#menu-button[aria-expanded="true"]').should('exist')
+    await page.locator('#menu-button').click()
+    await expect(page.locator('#menu-button[aria-expanded="true"]')).toBeVisible()
 
     // click outside
-    cy.get('#next-button').click()
-    cy.get('#menu-button[aria-expanded="false"]').should('exist')
+    await page.locator('#next-button').click()
+    await expect(page.locator('#menu-button[aria-expanded="false"]')).toBeVisible()
   })
 
-  it('should use arrow keys to navigate the menu', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+  test('should use arrow keys to navigate the menu', async ({page}) => {
+    await page.goto('/frame/?path=/components/menu/menu-button')
 
     // Open menu by pressed DOWN arrow key
-    cy.get('#menu-button').focus().realPress('ArrowDown')
-    cy.get('#menu-item-1:focus').should('be.focused')
+    await page.locator('#menu-button').focus()
+    await page.keyboard.press('ArrowDown')
+    await expect(page.locator('#menu-item-1')).toBeFocused()
 
     // Move through menu with arrow keys
-    cy.get('#menu-item-1').realPress('ArrowDown')
-    cy.get('#menu-item-2:focus').should('be.focused')
+    await page.keyboard.press('ArrowDown')
+    await expect(page.locator('#menu-item-2')).toBeFocused()
 
-    cy.get('#menu-item-2').realPress('ArrowDown')
+    await page.keyboard.press('ArrowDown')
     // Skips #menu-item-3, because it's disabled
-    cy.get('#menu-item-4:focus').should('be.focused')
-    cy.get('#menu-item-4').realPress('ArrowDown')
+    await expect(page.locator('#menu-item-4')).toBeFocused()
+    await page.keyboard.press('ArrowDown')
     // The first menu item should now be focused
-    cy.get('#menu-item-1:focus').should('be.focused')
+    await expect(page.locator('#menu-item-1')).toBeFocused()
     // Escape to exit the menu
-    cy.get('#menu-item-1').realPress('Escape')
-    cy.get('#menu-button').should('be.focused')
+    await page.keyboard.press('Escape')
+    await expect(page.locator('#menu-button')).toBeFocused()
 
     // Open menu by pressed UP arrow key
-    cy.get('#menu-button').realPress('ArrowUp')
-    cy.get('#menu-item-4:focus').should('be.focused')
+    await page.keyboard.press('ArrowUp')
+    await expect(page.locator('#menu-item-4')).toBeFocused()
     // Move through menu with arrow keys
-    cy.get('#menu-item-4').realPress('ArrowUp')
+    await page.keyboard.press('ArrowUp')
     // Skips #menu-item-3, because it's disabled
-    cy.get('#menu-item-2:focus').should('be.focused')
-    cy.get('#menu-item-2').realPress('ArrowUp')
-    cy.get('#menu-item-1:focus').should('be.focused')
-    cy.get('#menu-item-1').realPress('ArrowUp')
+    await expect(page.locator('#menu-item-2')).toBeFocused()
+    await page.keyboard.press('ArrowUp')
+    await expect(page.locator('#menu-item-1')).toBeFocused()
+    await page.keyboard.press('ArrowUp')
     // The last menu item should now be focused
-    cy.get('#menu-item-4:focus').should('be.focused')
+    await expect(page.locator('#menu-item-4')).toBeFocused()
     // Escape to exit the menu
-    cy.get('#menu-item-4').realPress('Escape')
-    cy.get('#menu-button').should('be.focused')
+    await page.keyboard.press('Escape')
+    await expect(page.locator('#menu-button')).toBeFocused()
   })
 
-  it('should close on tab', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+  test('should close on tab', async ({page}) => {
+    await page.goto('/frame/?path=/components/menu/menu-button')
 
-    cy.get('#menu-button').focus().realPress('ArrowDown')
-    cy.get('#menu-item-1').should('be.focused')
-    cy.get('#menu-item-1').realPress('Tab')
-    cy.get('#menu-button[aria-expanded="true"]').should('not.exist')
-    cy.get('#next-button').should('be.focused')
+    await page.locator('#menu-button').focus()
+    await page.keyboard.press('ArrowDown')
+    await expect(page.locator('#menu-item-1')).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(page.locator('#menu-button[aria-expanded="true"]')).not.toBeVisible()
+    await expect(page.locator('#next-button')).toBeFocused()
   })
 
-  it('should close on shift + tab', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+  test('should close on shift + tab', async ({page}) => {
+    await page.goto('/frame/?path=/components/menu/menu-button')
 
-    cy.get('#menu-button').focus().realPress('ArrowDown')
-    cy.get('#menu-item-1').should('be.focused')
-    cy.get('#menu-item-1').realPress(['Shift', 'Tab'])
-    cy.get('#menu-button[aria-expanded="true"]').should('not.exist')
-    cy.get('#prev-button').should('be.focused')
+    await page.locator('#menu-button').focus()
+    await page.keyboard.press('ArrowDown')
+    await expect(page.locator('#menu-item-1')).toBeFocused()
+    await page.keyboard.press('Shift+Tab')
+    await expect(page.locator('#menu-button[aria-expanded="true"]')).not.toBeVisible()
+    await expect(page.locator('#prev-button')).toBeFocused()
   })
 
-  it('should not close when one of the items receives focus', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+  test('should not close when one of the items receives focus', async ({page}) => {
+    await page.goto('/frame/?path=/components/menu/menu-button')
 
-    cy.get('#menu-button').click()
-    cy.get('#menu-button').should('be.focused')
-    cy.get('#menu-item-2').focus()
-    cy.get('#menu-button[aria-expanded="true"]').should('exist')
+    await page.locator('#menu-button').click()
+    await expect(page.locator('#menu-button')).toBeFocused()
+    await page.locator('#menu-item-2').focus()
+    await expect(page.locator('#menu-button[aria-expanded="true"]')).toBeVisible()
   })
 
-  it('clicking should open/close menu (with selected items)', () => {
-    cy.visit('/frame/?path=/components/menu/selected-item')
+  test('clicking should open/close menu (with selected items)', async ({page}) => {
+    await page.goto('/frame/?path=/components/menu/selected-item')
 
     // click button
-    cy.get('#menu-button').click()
-    cy.get('#menu-button[aria-expanded="true"]').should('exist')
+    await page.locator('#menu-button').click()
+    await expect(page.locator('#menu-button[aria-expanded="true"]')).toBeVisible()
 
     // click the same button again
-    cy.get('#menu-button').click()
-    cy.get('#menu-button[aria-expanded="false"]').should('exist')
+    await page.locator('#menu-button').click()
+    await expect(page.locator('#menu-button[aria-expanded="false"]')).toBeVisible()
   })
 
-  it('should show the selected menu item when opened', () => {
-    cy.visit('/frame/?path=/components/menu/selected-item')
+  test('should show the selected menu item when opened', async ({page}) => {
+    await page.goto('/frame/?path=/components/menu/selected-item')
 
-    cy.get('#menu-button').click()
-    cy.get('#menu-item-2').should('be.focused')
+    await page.locator('#menu-button').click()
+    await expect(page.locator('#menu-item-2')).toBeFocused()
   })
 })

@@ -1,189 +1,190 @@
-const RE_RESIZE_OBSERVER_LOOP_ERROR = /ResizeObserver loop limit exceeded/
+import {expect, test} from '@playwright/test'
 
-context('Components/Autocomplete', () => {
-  it('should use key arrows', () => {
-    cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
+test.describe('Components/Autocomplete', () => {
+  test('should use key arrows', async ({page}) => {
+    await page.goto('/frame/?path=/components/autocomplete/custom')
 
-    cy.visit('/frame/?path=/components/autocomplete/custom')
-
-    cy.get('#custom').click()
+    await page.locator('#custom').click()
 
     // Search for "nor"
-    cy.get('#custom').type('nor')
+    await page.locator('#custom').fill('nor')
 
     // The listbox is expanded
-    cy.get('#custom[aria-expanded="true"]').should('exist')
-    cy.get('#custom-listbox').should('exist')
+    await expect(page.locator('#custom[aria-expanded="true"]')).toBeVisible()
+    await expect(page.locator('#custom-listbox')).toBeVisible()
 
     // Arrow down 3 times
-    cy.get('#custom-listbox').realPress('ArrowDown')
-    cy.get('#custom-listbox').realPress('ArrowDown')
-    cy.get('#custom-listbox').realPress('ArrowDown')
+    await page.keyboard.press('ArrowDown')
+    await page.keyboard.press('ArrowDown')
+    await page.keyboard.press('ArrowDown')
 
     // The 3rd option should be focused
-    cy.get('[data-qa="option-NO"]').should('have.focus')
+    await expect(page.locator('[data-qa="option-NO"]')).toBeFocused()
 
     // Escape to close listbox and clear input
-    cy.get('[data-qa="option-NO"]').realPress('Escape')
-    cy.get('#custom[aria-expanded="false"][value=""]').should('exist')
+    await page.keyboard.press('Escape')
+    await expect(page.locator('#custom[aria-expanded="false"][value=""]')).toBeVisible()
   })
 
-  it('should press clear button to clear', () => {
-    cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
+  test('should press clear button to clear', async ({page}) => {
+    await page.goto('/frame/?path=/components/autocomplete/custom')
 
-    cy.visit('/frame/?path=/components/autocomplete/custom')
-
-    cy.get('#custom').click()
+    await page.locator('#custom').click()
 
     // Search for "nor"
-    cy.get('#custom').type('nor')
+    await page.locator('#custom').fill('nor')
 
     // Arrow down 3 times
-    cy.get('#custom-listbox').realPress('ArrowDown')
-    cy.get('#custom-listbox').realPress('ArrowDown')
-    cy.get('#custom-listbox').realPress('ArrowDown')
+    await page.keyboard.press('ArrowDown')
+    await page.keyboard.press('ArrowDown')
+    await page.keyboard.press('ArrowDown')
 
     // Enter to select
-    cy.get('[data-qa="option-NO"]').should('have.focus').realPress('{enter}')
+    await expect(page.locator('[data-qa="option-NO"]')).toBeFocused()
+    await page.keyboard.press('Enter')
 
     // Tab 1 time
-    cy.get('#custom').should('have.focus').realPress('Tab')
+    await expect(page.locator('#custom')).toBeFocused()
+    await page.keyboard.press('Tab')
 
     // Enter to clear
-    cy.get('[data-qa="clear-button"]').should('be.focused')
-    cy.get('[data-qa="clear-button"]').click()
+    await expect(page.locator('[data-qa="clear-button"]')).toBeFocused()
+    await page.locator('[data-qa="clear-button"]').click()
 
     // The input should be empty and focused
-    cy.get('#custom[value=""]').should('be.focused')
+    await expect(page.locator('#custom[value=""]')).toBeFocused()
   })
 
-  it('should collapse when tabbing out', () => {
-    cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
-
-    cy.visit('/frame/?path=/components/autocomplete/custom')
+  test('should collapse when tabbing out', async ({page}) => {
+    await page.goto('/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
-    cy.get('#custom').click()
+    await page.locator('#custom').click()
 
     // Search for "nor"
-    cy.get('#custom:focus').type('nor')
+    await page.locator('#custom:focus').fill('nor')
 
     // Tab 1 time
-    cy.get('#custom[aria-expanded="true"]').should('have.focus')
+    await expect(page.locator('#custom[aria-expanded="true"]')).toBeFocused()
 
     // Focus the next focusable element
-    cy.get('#set-value-btn').focus()
+    await page.locator('#set-value-btn').focus()
 
     // Should be collapsed
-    cy.get('#custom[aria-expanded="false"]').should('exist')
+    await expect(page.locator('#custom[aria-expanded="false"]')).toBeVisible()
   })
 
-  it('should clear query on blur', () => {
-    cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
-
-    cy.visit('/frame/?path=/components/autocomplete/custom')
+  test('should clear query on blur', async ({page}) => {
+    await page.goto('/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
-    cy.get('#custom').click()
+    await page.locator('#custom').click()
 
     // Search for "nor"
-    cy.get('#custom').type('nor')
+    await page.locator('#custom').fill('nor')
 
     // Arrow down 3 times
-    cy.get('#custom-listbox').realPress('ArrowDown')
-    cy.get('#custom-listbox').realPress('ArrowDown')
-    cy.get('#custom-listbox').realPress('ArrowDown')
+    await page.keyboard.press('ArrowDown')
+    await page.keyboard.press('ArrowDown')
+    await page.keyboard.press('ArrowDown')
 
     // Enter to select
-    cy.get('[data-qa="option-NO"]').should('have.focus')
+    await expect(page.locator('[data-qa="option-NO"]')).toBeFocused()
+    await page.keyboard.press('Enter')
 
-    cy.realPress('{enter}')
-
-    cy.get('#custom[value="Norway"]:focus').should('exist')
+    await expect(page.locator('#custom[value="Norway"]:focus')).toBeVisible()
 
     // Click to focus
-    cy.get('#custom').click()
+    await page.locator('#custom').click()
 
     // Search for "net"
-    cy.get('#custom').type('{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}net')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.locator('#custom').fill('net')
 
     // Tab out of autocomplete
-    cy.get('#set-value-btn').focus()
+    await page.locator('#set-value-btn').focus()
 
     // Expect the value to be "Norway" and autocomplete to be collapsed
-    cy.get('#custom[aria-expanded="false"][value="Norway"]').should('exist')
+    await expect(page.locator('#custom[aria-expanded="false"][value="Norway"]')).toBeVisible()
   })
 
-  it('should search anew after selecting a value', () => {
-    cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
-
-    cy.visit('/frame/?path=/components/autocomplete/custom')
+  test('should search anew after selecting a value', async ({page}) => {
+    await page.goto('/frame/?path=/components/autocomplete/custom')
 
     // Click to focus
-    cy.get('#custom').click()
+    await page.locator('#custom').click()
 
     // Search for "nor"
-    cy.get('#custom').type('nor')
+    await page.locator('#custom').fill('nor')
 
     // Arrow down 3 times
-    cy.get('#custom-listbox').realPress('ArrowDown')
-    cy.get('#custom-listbox').realPress('ArrowDown')
-    cy.get('#custom-listbox').realPress('ArrowDown')
+    await page.keyboard.press('ArrowDown')
+    await page.keyboard.press('ArrowDown')
+    await page.keyboard.press('ArrowDown')
 
     // Enter to select
-    cy.get('[data-qa="option-NO"]').should('have.focus')
-    cy.realPress('{enter}')
+    await expect(page.locator('[data-qa="option-NO"]')).toBeFocused()
+    await page.keyboard.press('Enter')
 
-    cy.get('#custom[value="Norway"]:focus').should('exist')
+    await expect(page.locator('#custom[value="Norway"]:focus')).toBeVisible()
 
     // Click to focus
-    cy.get('#custom').click()
+    await page.locator('#custom').click()
 
-    // Search for "nor"
-    cy.get('#custom').type('{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}net')
+    // Search for "net"
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.keyboard.press('Backspace')
+    await page.locator('#custom').fill('net')
 
     // Arrow down 1 time
-    cy.get('#custom-listbox').realPress('ArrowDown')
+    await page.keyboard.press('ArrowDown')
 
     // Enter to select
-    cy.get('[data-qa="option-NL"]').should('have.focus')
-    cy.realPress('{enter}')
+    await expect(page.locator('[data-qa="option-NL"]')).toBeFocused()
+    await page.keyboard.press('Enter')
 
     // Expect "Netherlands" to be selected
-    cy.get('#custom[value="Netherlands"]:focus').should('exist')
+    await expect(page.locator('#custom[value="Netherlands"]:focus')).toBeVisible()
   })
 
-  it('should trigger focus and blur', () => {
-    cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
-
-    cy.visit('/frame/?path=/components/autocomplete/focus-and-blur')
+  test('should trigger focus and blur', async ({page}) => {
+    await page.goto('/frame/?path=/components/autocomplete/focus-and-blur')
 
     // Click to focus
-    cy.get('#focus-and-blur').click()
-    cy.get('#focus-and-blur-log').should('have.text', '["focus"]')
+    await page.locator('#focus-and-blur').click()
+    await expect(page.locator('#focus-and-blur-log')).toHaveText('["focus"]')
 
     // Click body to blur
-    cy.get('body').click()
-    cy.get('#focus-and-blur-log').should('have.text', '["focus","blur"]')
+    await page.locator('body').click()
+    await expect(page.locator('#focus-and-blur-log')).toHaveText('["focus","blur"]')
 
     // Clear log
-    cy.get('#focus-and-blur-clear-btn').click()
+    await page.locator('#focus-and-blur-clear-btn').click()
 
     // Click to focus
-    cy.get('#focus-and-blur').click()
+    await page.locator('#focus-and-blur').click()
 
-    // Search for "nor"
-    cy.get('#focus-and-blur').type('foo')
-    cy.get('#focus-and-blur-listbox').realPress('ArrowDown')
-    cy.get('#focus-and-blur-option-foo > button').should('have.focus')
-    cy.get('#focus-and-blur-option-foo > button').click()
+    // Search for "foo"
+    await page.locator('#focus-and-blur').fill('foo')
+    await page.keyboard.press('ArrowDown')
+    await expect(page.locator('#focus-and-blur-option-foo > button')).toBeFocused()
+    await page.locator('#focus-and-blur-option-foo > button').click()
 
     // Expect "foo" to be selected
-    cy.get('#focus-and-blur[value="foo"]:focus').should('exist')
-    cy.get('#focus-and-blur-log').should('have.text', '["focus"]')
+    await expect(page.locator('#focus-and-blur[value="foo"]:focus')).toBeVisible()
+    await expect(page.locator('#focus-and-blur-log')).toHaveText('["focus"]')
 
     // Click body to blur
-    cy.get('body').click()
-    cy.get('#focus-and-blur-log').should('have.text', '["focus","blur"]')
+    await page.locator('body').click()
+    await expect(page.locator('#focus-and-blur-log')).toHaveText('["focus","blur"]')
   })
 })

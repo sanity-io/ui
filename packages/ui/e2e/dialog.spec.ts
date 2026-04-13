@@ -1,57 +1,57 @@
-context('Components/Dialog', () => {
-  it('should open dialog', () => {
-    cy.visit('/frame/?path=/components/dialog/props')
+import {expect, test} from '@playwright/test'
 
-    cy.get('#open-dialog-button').click()
-    cy.get('#dialog').should('be.visible')
+test.describe('Components/Dialog', () => {
+  test('should open dialog', async ({page}) => {
+    await page.goto('/frame/?path=/components/dialog/props')
+
+    await page.locator('#open-dialog-button').click()
+    await expect(page.locator('#dialog')).toBeVisible()
   })
 
-  it('should trap focus', () => {
-    cy.visit('/frame/?path=/components/dialog/props')
+  test('should trap focus', async ({page}) => {
+    await page.goto('/frame/?path=/components/dialog/props')
 
-    // Press enter to open the dialog
-    // cy.get('#open-dialog-button').realPress('{enter}')
-    cy.get('#open-dialog-button').click()
-    cy.get('#dialog').should('be.visible')
+    await page.locator('#open-dialog-button').click()
+    await expect(page.locator('#dialog')).toBeVisible()
 
     // The first button should be focused
-    cy.get('#dialog button[aria-label="Close dialog"]').should('be.focused')
+    await expect(page.locator('#dialog button[aria-label="Close dialog"]')).toBeFocused()
 
     // Tab to next until the focus is back at the top
-    cy.get('#dialog button[aria-label="Close dialog"]').realPress('Tab')
-    cy.get('#button-1').should('be.focused')
-    cy.get('#button-1').realPress('Tab')
-    cy.get('#button-2').should('be.focused')
-    cy.get('#button-2').realPress('Tab')
-    cy.get('#button-3').should('be.focused')
-    cy.get('#button-3').realPress('Tab')
-    cy.get('#button-4').should('be.focused')
-    cy.get('#button-4').realPress('Tab')
-    cy.get('#button-5').should('be.focused')
-    cy.get('#button-5').realPress('Tab')
-    cy.get('#dialog button[aria-label="Close dialog"]').should('be.focused')
-    cy.get('#dialog button[aria-label="Close dialog"]').realPress('Tab')
+    await page.keyboard.press('Tab')
+    await expect(page.locator('#button-1')).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(page.locator('#button-2')).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(page.locator('#button-3')).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(page.locator('#button-4')).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(page.locator('#button-5')).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(page.locator('#dialog button[aria-label="Close dialog"]')).toBeFocused()
+    await page.keyboard.press('Tab')
 
     // The first button should again be focused
-    cy.get('#button-1').should('be.focused')
+    await expect(page.locator('#button-1')).toBeFocused()
   })
 
-  it('should focus last focused element when dialog becomes top layer', () => {
-    cy.visit('/frame/?path=/components/dialog/activate')
+  test('should focus last focused element when dialog becomes top layer', async ({page}) => {
+    await page.goto('/frame/?path=/components/dialog/activate')
 
     // Open the nested dialogs
-    cy.get('#open-dialog-1-button').click()
-    cy.get('#open-dialog-2-button-2').click()
-    cy.get('#open-dialog-3-button-3').click()
+    await page.locator('#open-dialog-1-button').click()
+    await page.locator('#open-dialog-2-button-2').click()
+    await page.locator('#open-dialog-3-button-3').click()
 
     // Close dialogs and check if the last focused element is focused
-    cy.realPress('Escape')
-    cy.get('#open-dialog-3-button-3').should('be.focused')
+    await page.keyboard.press('Escape')
+    await expect(page.locator('#open-dialog-3-button-3')).toBeFocused()
 
-    cy.realPress('Escape')
-    cy.get('#open-dialog-2-button-2').should('be.focused')
+    await page.keyboard.press('Escape')
+    await expect(page.locator('#open-dialog-2-button-2')).toBeFocused()
 
-    cy.realPress('Escape')
-    cy.get('#open-dialog-1-button').should('be.focused')
+    await page.keyboard.press('Escape')
+    await expect(page.locator('#open-dialog-1-button')).toBeFocused()
   })
 })

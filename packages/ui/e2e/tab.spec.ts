@@ -1,19 +1,24 @@
-context('Components/Tab', () => {
-  it('should use keys to navigate tabs', () => {
-    cy.visit('/frame/?path=/components/tab/example')
+import {expect, test} from '@playwright/test'
 
-    cy.get('#example-tab-foo').click().realPress('{rightarrow}')
+test.describe('Components/Tab', () => {
+  test('should use keys to navigate tabs', async ({page}) => {
+    await page.goto('/frame/?path=/components/tab/example')
 
-    cy.get('#example-tab-bar:focus').realPress('{rightarrow}')
+    await page.locator('#example-tab-foo').click()
+    await page.keyboard.press('ArrowRight')
 
-    cy.get('#example-tab-baz:focus').realPress('{rightarrow}')
+    await expect(page.locator('#example-tab-bar')).toBeFocused()
+    await page.keyboard.press('ArrowRight')
 
-    cy.get('#example-tab-foo').should('have.focus')
+    await expect(page.locator('#example-tab-baz')).toBeFocused()
+    await page.keyboard.press('ArrowRight')
+
+    await expect(page.locator('#example-tab-foo')).toBeFocused()
 
     // Trigger "Tab"
-    cy.get('#example-tab-foo').realPress('Tab')
+    await page.keyboard.press('Tab')
 
     // Expect the panel to be focus
-    cy.get('#example-panel-foo').should('have.focus')
+    await expect(page.locator('#example-panel-foo')).toBeFocused()
   })
 })

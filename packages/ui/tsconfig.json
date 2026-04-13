@@ -1,10 +1,11 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "include": [
-    "./cypress.config.ts",
+    "./e2e",
     "./exports",
     "./package.json",
     "./package.config.ts",
+    "./playwright.config.ts",
     "./src",
     "./test",
     "./typings",

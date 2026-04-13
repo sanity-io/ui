@@ -42,8 +42,8 @@ export default defineConfig(import.meta.dirname, [
           mode: 'full',
         },
         {
-          type: 'test/cypress',
-          pattern: ['cypress/**/*'],
+          type: 'test/e2e',
+          pattern: ['e2e/**/*'],
           mode: 'full',
         },
         {
@@ -66,6 +66,7 @@ export default defineConfig(import.meta.dirname, [
             'cypress.config.ts',
             'eslint.config.js',
             'package.config.ts',
+            'playwright.config.ts',
             'workshop.config.ts',
             'workshop.runtime.ts',
             'vitest.config.ts',
