@@ -58,6 +58,9 @@ export type TextInputOwnProps = InputStyleProps & {
   onClear?: () => void
   prefix?: ReactNode
   suffix?: ReactNode
+  /**
+   * @deprecated Use `fontWeight` instead
+   */
   weight?: FontWeight
 }
 
@@ -87,26 +90,28 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
     disabled = false,
     flex,
     fontSize = 2,
+    fontWeight: _fontWeight,
     gap = 3,
     icon: IconComponent,
     iconRight: IconRightComponent,
     onClear,
-    padding = 3,
+    padding: paddingProp = 3,
     prefix,
-    radius = 2,
+    radius,
     readOnly,
     ref: forwardedRef,
     suffix,
     customValidity,
     type = 'text',
-    weight: _width,
+    weight: _weight,
     width,
     ...rest
   } = props as TextInputProps<typeof DEFAULT_TEXT_INPUT_ELEMENT>
 
   const ref = useRef<HTMLInputElement | null>(null)
 
-  const responsivePadding = _getResponsiveProp(padding)
+  const fontWeight = _fontWeight ?? _weight
+  const padding = _getResponsiveProp(paddingProp)
 
   const withClearButton = Boolean(clearButton)
 
@@ -143,6 +148,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
         border,
         flex,
         fontSize,
+        fontWeight,
         padding,
         radius,
         gap,
@@ -150,9 +156,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
       })}
       data-icon-left={IconComponent ? '' : undefined}
       data-icon-right={IconRightComponent ? '' : undefined}
-      data-invalid={customValidity ? '' : undefined}
       data-prefix={prefix ? '' : undefined}
-      data-read-only={!disabled && readOnly ? '' : undefined}
       data-suffix={suffix ? '' : undefined}
       data-ui="TextInput"
     >
@@ -167,7 +171,9 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
           {...rest}
           ref={ref}
           className={_input_element()}
+          data-invalid={customValidity ? '' : undefined}
           data-no-focus-ring={__unstable_disableFocusRing ? '' : undefined}
+          data-read-only={!disabled && readOnly ? '' : undefined}
           disabled={disabled}
           readOnly={readOnly}
           type={type}
@@ -175,7 +181,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
 
         <span className={_input_presentation()}>
           {IconComponent && (
-            <Box as="span" insetLeft={0} insetTop={0} padding={padding} position="absolute">
+            <Box as="span" insetLeft={0} insetTop={0} padding={paddingProp} position="absolute">
               <Text as="span" size={fontSize}>
                 {isValidElement(IconComponent) && IconComponent}
                 {isValidElementType(IconComponent) && <IconComponent />}
@@ -184,7 +190,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
           )}
 
           {!withClearButton && IconRightComponent && (
-            <Box as="span" insetRight={0} insetTop={0} padding={padding} position="absolute">
+            <Box as="span" insetRight={0} insetTop={0} padding={paddingProp} position="absolute">
               <Text as="span" size={fontSize}>
                 {isValidElement(IconRightComponent) && IconRightComponent}
                 {isValidElementType(IconRightComponent) && <IconRightComponent />}
@@ -199,7 +205,7 @@ export function TextInput<E extends TextInputElementType = typeof DEFAULT_TEXT_I
             fontSize={fontSize}
             handleClearClick={handleClearClick}
             handleClearMouseDown={handleClearMouseDown}
-            padding={responsivePadding}
+            padding={padding}
             radius={radius}
           />
         )}
