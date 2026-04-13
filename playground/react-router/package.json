@@ -7,7 +7,7 @@
     "dev": "react-router dev",
     "lint": "eslint .",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc --build"
   },
   "dependencies": {
     "@react-router/node": "^7.13.1",

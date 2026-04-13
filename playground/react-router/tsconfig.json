@@ -9,6 +9,7 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "rootDirs": [".", "./.react-router/types"],
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,

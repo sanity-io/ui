@@ -1,5 +1,5 @@
 {
-  "include": ["../../packages/ui/exports", "../../packages/ui/src", "src"],
+  "include": ["src"],
 
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
