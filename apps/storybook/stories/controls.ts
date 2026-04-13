@@ -11,7 +11,7 @@ import {
   RADIUS,
   SHADOW,
   SPACE,
-} from '@sanity/ui/theme'
+} from '@sanity/ui/tokens'
 
 export const TEXT_ALIGN_CONTROLS = {
   control: {type: 'radio'},

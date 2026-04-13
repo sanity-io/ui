@@ -1,5 +1,5 @@
 import {Select} from '@sanity/ui'
-import {RADIUS} from '@sanity/ui/theme'
+import {RADIUS} from '@sanity/ui/tokens'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'

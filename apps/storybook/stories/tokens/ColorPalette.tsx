@@ -1,6 +1,6 @@
 import {Box, Card, Code, Flex, Grid, Heading, Stack} from '@sanity/ui'
 import {vars} from '@sanity/ui/css'
-import {HUES, TINTS} from '@sanity/ui/theme'
+import {HUES, TINTS} from '@sanity/ui/tokens'
 import type {ReactNode} from 'react'
 
 function ucfirst(str: string) {
@@ -52,7 +52,7 @@ function ColorTintPreview(props: {hue: (typeof HUES)[number]; tint: (typeof TINT
       radius={2}
       style={{
         [vars.color.bg]: vars.color.palette[hue][tint],
-        [vars.color.fg]: tint < 500 ? vars.color.palette.black : vars.color.palette.white,
+        [vars.color.fg]: Number(tint) < 500 ? vars.color.palette.black : vars.color.palette.white,
       }}
     >
       <Flex padding={3}>

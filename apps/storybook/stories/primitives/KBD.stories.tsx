@@ -1,5 +1,5 @@
 import {Card, KBD, Stack} from '@sanity/ui'
-import {CARD_TONES, RADIUS} from '@sanity/ui/theme'
+import {CARD_TONES, RADIUS} from '@sanity/ui/tokens'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'
@@ -8,7 +8,6 @@ import {rowBuilder} from '../helpers/rowBuilder'
 const meta: Meta<typeof KBD> = {
   args: {
     children: 'Ctrl',
-    style: {verticalAlign: 'top'},
   },
   argTypes: {
     fontSize: FONT_TEXT_SIZE_CONTROLS,
@@ -55,7 +54,7 @@ export const InheritedTones: Story = {
         {rowBuilder({
           renderItem: ({value}) => (
             <Card key={value} border padding={4} tone={value}>
-              <KBD {...props}>{value}</KBD>
+              <KBD {...props}>Ctrl</KBD>
             </Card>
           ),
           rows: [...CARD_TONES],

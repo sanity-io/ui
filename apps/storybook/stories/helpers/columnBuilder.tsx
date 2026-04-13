@@ -1,5 +1,5 @@
 import {Card, Stack} from '@sanity/ui'
-import type {ColorScheme} from '@sanity/ui/theme'
+import type {ColorScheme} from '@sanity/ui/tokens'
 import type {ComponentProps, ReactNode} from 'react'
 
 interface ColumnBuilderProps<T> {

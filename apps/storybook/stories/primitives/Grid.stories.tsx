@@ -44,6 +44,6 @@ export const Default: Story = {
 }
 
 export const Columns: Story = {
-  args: {columns: [1, 2, 3, 4, 5, 6, 7]},
+  args: {gridTemplateColumns: [1, 2, 3, 4, 5, 6, 7]},
   render: (props) => <Grid {...props} />,
 }

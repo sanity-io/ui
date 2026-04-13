@@ -37,7 +37,7 @@ import {
   TextInput,
   TextSkeleton,
 } from '@sanity/ui'
-import {CARD_TONES, type ColorScheme} from '@sanity/ui/theme'
+import {CARD_TONES, type ColorScheme} from '@sanity/ui/tokens'
 import {type ReactNode, useState} from 'react'
 
 const Wrapper = ({title, children}: {title: string; children: React.ReactNode}) => (
