@@ -1,5 +1,4 @@
 import type {
-  // _DTCGStringToken,
   SanityFontFamilyToken,
   SanityFontWeightToken,
   SanityTypographyToken,
@@ -19,8 +18,10 @@ export async function createFontStyleStyle(
   const fontTokens = node.tokens
 
   const familyToken = fontTokens['family'] as SanityFontFamilyToken
-  // todo
+
+  // NOTE: Font feature settings are not supported yet by Figma API
   // const featureSettingsToken = fontTokens['featureSettings'] as _DTCGStringToken
+
   const scaleTokens = fontTokens['scale'] as Record<string, SanityTypographyToken>
   const weightTokens = fontTokens['weight'] as Record<string, SanityFontWeightToken>
 

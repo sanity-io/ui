@@ -8,6 +8,7 @@ import type {
 
 import {getFigmaColorValue} from './converters/color'
 import {getFigmaDimensionValue} from './converters/dimension'
+import {getFigmaDurationValue} from './converters/duration'
 import {getFigmaNumberValue} from './converters/number'
 import {parseFigmaScopes} from './converters/scopes'
 import type {SanityFigmaStyle, SanityFigmaVar, TokenTree} from './types'
@@ -119,29 +120,13 @@ export function findEntities(
       if (node.$type === 'duration') {
         figmaVars.push({
           name: path,
-          value:
-            typeof node.$value === 'string'
-              ? {
-                  type: 'number-alias',
-                  target: node.$value.slice(1, -1).replace(/\./g, '/'),
-                }
-              : {
-                  type: 'number',
-                  value: node.$value.value, // todo: account for unit
-                },
+          value: getFigmaDurationValue(node),
           scopes: [],
         })
         continue
       }
 
-      // todo
-      // node.$type === 'boolean'
-      // node.$type === 'border'
-      // node.$type === 'cubicBezier'
-      // node.$type === 'typography'
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      throw new Error(`Unhandled node type: ${(node as any).$type}`)
+      throw new Error(`Unhandled node type: ${node.$type}`)
     }
 
     const nested = findEntities(_node, path)
