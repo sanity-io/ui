@@ -48,6 +48,7 @@ export * from './observers/elementSize'
 export * from './observers/resize'
 
 // primitives
+export * from './primitives/_syntax/LazySyntax'
 export * from './primitives/avatar/Avatar'
 export * from './primitives/avatar/AvatarCounter'
 export * from './primitives/avatar/AvatarStack'

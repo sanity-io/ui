@@ -1,3 +1,5 @@
+*.patch
+
 .changeset
 .next
 .react-router

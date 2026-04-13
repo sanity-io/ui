@@ -1,0 +1,25 @@
+diff --git a/dist/index.js b/dist/index.js
+index 0771d904f3ab061ef1769a73648eede68db28dec..8c5bc50fecc814932fc4aa95633409896ce3ae3a 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -188,7 +188,7 @@ var __defProp = Object.defineProperty, __defProps = Object.defineProperties, __g
+ const DEFAULT_CLASSNAME = "refractor";
+ function Refractor(props) {
+   const className = props.className || DEFAULT_CLASSNAME, langClassName = `language-${props.language}`, codeProps = { className: langClassName }, preClass = [className, langClassName].filter(Boolean).join(" ");
+-  if (props.inline && (codeProps.style = { display: "inline" }, codeProps.className = className), props.plainText) {
++  if (props.inline && (codeProps.className = className), props.plainText) {
+     const code2 = /* @__PURE__ */ jsx("code", __spreadProps(__spreadValues({}, codeProps), { children: props.value }));
+     return props.inline ? code2 : /* @__PURE__ */ jsx("pre", { className: preClass, children: code2 });
+   }
+diff --git a/src/Refractor.tsx b/src/Refractor.tsx
+index c8ac3a13766d22fb323d31e0156bba658e8c16e4..dd3d819bfc72f041a258ff62919ae471ca052506 100644
+--- a/src/Refractor.tsx
++++ b/src/Refractor.tsx
+@@ -17,7 +17,6 @@ export function Refractor(props: RefractorProps) {
+   const preClass = [className, langClassName].filter(Boolean).join(' ')
+ 
+   if (props.inline) {
+-    codeProps.style = {display: 'inline'}
+     codeProps.className = className
+   }
+ 
