@@ -19,6 +19,7 @@ export interface AppContextValue {
   nav: NavNode | null
   setColorScheme: (scheme: ColorScheme | 'system') => void
   settings: WrappedValue<SettingsData> | null
+  studioBaseUrl: string
 }
 
 export const AppContext = createContext<AppContextValue | null>(null)

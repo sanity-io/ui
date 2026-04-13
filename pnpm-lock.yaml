@@ -134,6 +134,9 @@ importers:
       next:
         specifier: ^16.1.6
         version: 16.1.6(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      next-sanity:
+        specifier: ^12.1.0
+        version: 12.1.0(3eb65a8c8dc677c76ad93b74e53b8c1b)
       pako:
         specifier: ^2.1.0
         version: 2.1.0
@@ -4224,11 +4227,27 @@ packages:
     peerDependencies:
       '@sanity/client': ^7.11.2
 
+  '@sanity/visual-editing-csm@3.0.5':
+    resolution: {integrity: sha512-hhu1LUik3YtteIszYGL8si4L7DtR/VjHJj1jQZVa4rzdko7Fs7lnU1s/jT7/8EZ/NIBXe3oFBg98vyGc02J0JA==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      '@sanity/client': ^7.14.1
+
   '@sanity/visual-editing-types@1.1.8':
     resolution: {integrity: sha512-4Hu3J8qDLanymnSapRzKwHlQl6SCsBbkL1o5fSMVbWVHvTk/j2uGLLNTsjASICTqUwSm3fwWlyahzCy2uS/LvQ==}
     engines: {node: '>=18'}
     peerDependencies:
       '@sanity/client': ^7.11.2
+      '@sanity/types': '*'
+    peerDependenciesMeta:
+      '@sanity/types':
+        optional: true
+
+  '@sanity/visual-editing-types@2.0.4':
+    resolution: {integrity: sha512-X8R7lCb/0Cto2A++hNg6YuhBlg22iWffENFu5QKx+Gw8csFHuOF0Oboja1QLsWzMNGeHwJLl0WNhucxQqtyFlw==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      '@sanity/client': ^7.14.1
       '@sanity/types': '*'
     peerDependenciesMeta:
       '@sanity/types':
@@ -4261,6 +4280,34 @@ packages:
         optional: true
       svelte:
         optional: true
+
+  '@sanity/visual-editing@5.2.1':
+    resolution: {integrity: sha512-69KGJGyf6QVi8F67mODWe2wBTadzXiezj8lRvBXU2H1u98t7WARVkK28izK2oNWmjn5FbCE9zgSLL6d824H5MA==}
+    engines: {node: '>=20.19'}
+    peerDependencies:
+      '@sanity/client': ^7.14.1
+      '@sveltejs/kit': '>= 2'
+      next: '>=16.0.0-0'
+      react: ^19.2
+      react-dom: ^19.2
+      react-router: '>= 7'
+      styled-components: ^6.1
+      svelte: '>= 4'
+    peerDependenciesMeta:
+      '@sanity/client':
+        optional: true
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react-router:
+        optional: true
+      svelte:
+        optional: true
+
+  '@sanity/webhook@4.0.4':
+    resolution: {integrity: sha512-c8LmzR5Wx93zJ10ohhp0XlmPrTNSFyvPcLbNY/sN45Wj5VOngz4FbBMbX9j64sSQLt+676U6OhiVfjs1yw3YCw==}
+    engines: {node: '>=20.0.0'}
 
   '@sanity/worker-channels@2.0.0':
     resolution: {integrity: sha512-mC+8yPQuw2rHXdHigFPU9thNa6vTaPmh7jFR6RvloE8s+6dmnk9bHdPXRbrrUqafxzK3L9aH2E170ubXyxcAIA==}
@@ -4882,6 +4929,9 @@ packages:
 
   '@vercel/stega@0.1.2':
     resolution: {integrity: sha512-P7mafQXjkrsoyTRppnt0N21udKS9wUmLXHRyP9saLXLHw32j/FgUJ3FscSWgvSqRs4cj7wKZtwqJEvWJ2jbGmA==}
+
+  '@vercel/stega@1.0.0':
+    resolution: {integrity: sha512-jyDUZEBjxmlh28J4y2wB6dBKayYOw1+9fRNRHWRN2oSO+LnooRHUe2z3JeTkCqXY2yrZ9dmtCl982YNIoIBeuw==}
 
   '@vercel/stega@1.1.0':
     resolution: {integrity: sha512-DFOm3Gk78nKDkppQEG5aj8Wj8R8hPKu/xrz4Rtp0AfiaNbZNCoJbxn7VI6iMxqhGeLdUDy/8mTuTWMz/izAtPA==}
@@ -8320,6 +8370,17 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
+  next-sanity@12.1.0:
+    resolution: {integrity: sha512-zokqCJFxQ1EpG0LM6vfnQDydJJNI+gyf8/bAkZLyE61jVkQ/d1PehnFvKRamVFTbu2v8i1ojbzxIPp9zQ3q1gg==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      '@sanity/client': ^7.14.1
+      next: ^16.0.0-0
+      react: ^19.2.3
+      react-dom: ^19.2.3
+      sanity: ^5.8.1
+      styled-components: ^6.1
+
   next@16.1.6:
     resolution: {integrity: sha512-hkyRkcu5x/41KoqnROkfTm2pZVbKxvbZRuNvKXLRXxs3VfyO0WhY50TQS40EuKO9SW3rBj/sF3WbVwDACeMZyw==}
     engines: {node: '>=20.9.0'}
@@ -9391,6 +9452,9 @@ packages:
   serve-static@2.2.0:
     resolution: {integrity: sha512-61g9pCh0Vnh7IutZjtLGGpTA355+OPn2TyDv/6ivP2h/AdAVX9azsoxmg2/M6nZeQZNYBEwIcsne1mJd9oQItQ==}
     engines: {node: '>= 18'}
+
+  server-only@0.0.1:
+    resolution: {integrity: sha512-qepMx2JxAa5jjfzxG79yPPq+8BuFToHd1hm7kI+Z4zAq1ftQiP7HcxMhDDItrbtwVeLg/cY2JnKnrcFkmiswNA==}
 
   set-cookie-parser@2.7.1:
     resolution: {integrity: sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==}
@@ -12584,7 +12648,6 @@ snapshots:
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/checkbox@4.3.2(@types/node@25.3.0)':
     dependencies:
@@ -12604,7 +12667,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/checkbox@5.1.3(@types/node@25.3.0)':
     dependencies:
@@ -12621,7 +12683,6 @@ snapshots:
       '@inquirer/type': 3.0.10(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/confirm@5.1.21(@types/node@25.3.0)':
     dependencies:
@@ -12636,7 +12697,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/confirm@6.0.11(@types/node@25.3.0)':
     dependencies:
@@ -12657,7 +12717,6 @@ snapshots:
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/core@10.3.2(@types/node@25.3.0)':
     dependencies:
@@ -12683,7 +12742,6 @@ snapshots:
       signal-exit: 4.1.0
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/core@11.1.8(@types/node@25.3.0)':
     dependencies:
@@ -12704,7 +12762,6 @@ snapshots:
       '@inquirer/type': 3.0.10(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/editor@4.2.23(@types/node@25.3.0)':
     dependencies:
@@ -12721,7 +12778,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/editor@5.1.0(@types/node@25.3.0)':
     dependencies:
@@ -12738,7 +12794,6 @@ snapshots:
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/expand@4.0.23(@types/node@25.3.0)':
     dependencies:
@@ -12754,7 +12809,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/expand@5.0.12(@types/node@25.3.0)':
     dependencies:
@@ -12769,7 +12823,6 @@ snapshots:
       iconv-lite: 0.7.0
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/external-editor@1.0.3(@types/node@25.3.0)':
     dependencies:
@@ -12784,7 +12837,6 @@ snapshots:
       iconv-lite: 0.7.2
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/external-editor@3.0.0(@types/node@25.3.0)':
     dependencies:
@@ -12803,7 +12855,6 @@ snapshots:
       '@inquirer/type': 3.0.10(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/input@4.3.1(@types/node@25.3.0)':
     dependencies:
@@ -12818,7 +12869,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/input@5.0.11(@types/node@25.3.0)':
     dependencies:
@@ -12833,7 +12883,6 @@ snapshots:
       '@inquirer/type': 3.0.10(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/number@3.0.23(@types/node@25.3.0)':
     dependencies:
@@ -12848,7 +12897,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/number@4.0.11(@types/node@25.3.0)':
     dependencies:
@@ -12864,7 +12912,6 @@ snapshots:
       '@inquirer/type': 3.0.10(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/password@4.0.23(@types/node@25.3.0)':
     dependencies:
@@ -12881,7 +12928,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/password@5.0.11(@types/node@25.3.0)':
     dependencies:
@@ -12905,7 +12951,6 @@ snapshots:
       '@inquirer/select': 4.4.2(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/prompts@7.10.1(@types/node@25.3.0)':
     dependencies:
@@ -12936,7 +12981,6 @@ snapshots:
       '@inquirer/select': 5.1.3(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/prompts@8.4.1(@types/node@25.3.0)':
     dependencies:
@@ -12960,7 +13004,6 @@ snapshots:
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/rawlist@4.1.11(@types/node@25.3.0)':
     dependencies:
@@ -12976,7 +13019,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/rawlist@5.2.7(@types/node@25.3.0)':
     dependencies:
@@ -12993,7 +13035,6 @@ snapshots:
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/search@3.2.2(@types/node@25.3.0)':
     dependencies:
@@ -13011,7 +13052,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/search@4.1.7(@types/node@25.3.0)':
     dependencies:
@@ -13030,7 +13070,6 @@ snapshots:
       yoctocolors-cjs: 2.1.3
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/select@4.4.2(@types/node@25.3.0)':
     dependencies:
@@ -13050,7 +13089,6 @@ snapshots:
       '@inquirer/type': 4.0.5(@types/node@24.10.13)
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/select@5.1.3(@types/node@25.3.0)':
     dependencies:
@@ -13064,7 +13102,6 @@ snapshots:
   '@inquirer/type@3.0.10(@types/node@24.10.13)':
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/type@3.0.10(@types/node@25.3.0)':
     optionalDependencies:
@@ -13073,7 +13110,6 @@ snapshots:
   '@inquirer/type@4.0.5(@types/node@24.10.13)':
     optionalDependencies:
       '@types/node': 24.10.13
-    optional: true
 
   '@inquirer/type@4.0.5(@types/node@25.3.0)':
     optionalDependencies:
@@ -13460,7 +13496,6 @@ snapshots:
       fast-levenshtein: 3.0.0
     transitivePeerDependencies:
       - '@types/node'
-    optional: true
 
   '@oclif/plugin-not-found@3.2.80(@types/node@25.3.0)':
     dependencies:
@@ -14199,7 +14234,6 @@ snapshots:
       - supports-color
       - terser
       - yaml
-    optional: true
 
   '@sanity/cli-core@1.3.0(@noble/hashes@2.2.0)(@sanity/telemetry@0.9.0(react@19.2.4))(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.44.0)(yaml@2.8.3)':
     dependencies:
@@ -14332,7 +14366,6 @@ snapshots:
       - typescript
       - utf-8-validate
       - xstate
-    optional: true
 
   '@sanity/cli@6.3.1(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@types/node@25.3.0)(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.32.0)(styled-components@6.4.0(css-to-react-native@3.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.44.0)(ts-toolbelt@9.6.0)(typescript@5.9.3)(xstate@5.30.0)':
     dependencies:
@@ -14501,7 +14534,6 @@ snapshots:
       zod: 4.3.6
     transitivePeerDependencies:
       - supports-color
-    optional: true
 
   '@sanity/codegen@6.0.2(@oclif/core@4.10.5)(@sanity/cli-core@1.3.0(@noble/hashes@2.2.0)(@sanity/telemetry@0.9.0(react@19.2.4))(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.44.0)(yaml@2.8.3))(@sanity/telemetry@0.9.0(react@19.2.4))':
     dependencies:
@@ -14717,7 +14749,6 @@ snapshots:
       - '@types/react'
       - supports-color
       - xstate
-    optional: true
 
   '@sanity/migrate@6.1.1(@oclif/core@4.10.5)(@sanity/cli-core@1.3.0(@noble/hashes@2.2.0)(@sanity/telemetry@0.9.0(react@19.2.4))(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.44.0)(yaml@2.8.3))(@types/react@19.2.14)(xstate@5.30.0)':
     dependencies:
@@ -14989,7 +15020,6 @@ snapshots:
       - typescript
       - utf-8-validate
       - yaml
-    optional: true
 
   '@sanity/runtime-cli@14.12.0(@types/node@25.3.0)(lightningcss@1.32.0)(terser@5.44.0)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.3)':
     dependencies:
@@ -15199,7 +15229,22 @@ snapshots:
       - '@sanity/types'
       - typescript
 
+  '@sanity/visual-editing-csm@3.0.5(@sanity/client@7.21.0)(@sanity/types@5.20.0(@types/react@19.2.14))(typescript@5.9.3)':
+    dependencies:
+      '@sanity/client': 7.21.0
+      '@sanity/visual-editing-types': 2.0.4(@sanity/client@7.21.0)(@sanity/types@5.20.0(@types/react@19.2.14))
+      valibot: 1.2.0(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@sanity/types'
+      - typescript
+
   '@sanity/visual-editing-types@1.1.8(@sanity/client@7.21.0)(@sanity/types@5.20.0(@types/react@19.2.14))':
+    dependencies:
+      '@sanity/client': 7.21.0
+    optionalDependencies:
+      '@sanity/types': 5.20.0(@types/react@19.2.14)
+
+  '@sanity/visual-editing-types@2.0.4(@sanity/client@7.21.0)(@sanity/types@5.20.0(@types/react@19.2.14))':
     dependencies:
       '@sanity/client': 7.21.0
     optionalDependencies:
@@ -15235,6 +15280,35 @@ snapshots:
       - '@sanity/types'
       - sanity
       - typescript
+
+  '@sanity/visual-editing@5.2.1(@emotion/is-prop-valid@1.4.0)(@sanity/client@7.21.0)(@sanity/types@5.20.0(@types/react@19.2.14))(next@16.1.6(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-is@19.2.4)(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(styled-components@6.4.0(css-to-react-native@3.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3)':
+    dependencies:
+      '@sanity/comlink': 4.0.1
+      '@sanity/icons': 3.7.4(react@19.2.4)
+      '@sanity/insert-menu': 3.0.4(@emotion/is-prop-valid@1.4.0)(@sanity/types@5.20.0(@types/react@19.2.14))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(styled-components@6.4.0(css-to-react-native@3.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+      '@sanity/mutate': 0.16.1(xstate@5.30.0)
+      '@sanity/presentation-comlink': 2.0.1(@sanity/client@7.21.0)(@sanity/types@5.20.0(@types/react@19.2.14))
+      '@sanity/preview-url-secret': 4.0.4(@sanity/client@7.21.0)
+      '@sanity/ui': 3.1.14(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react-is@19.2.4)(react@19.2.4)(styled-components@6.4.0(css-to-react-native@3.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+      '@sanity/visual-editing-csm': 3.0.5(@sanity/client@7.21.0)(@sanity/types@5.20.0(@types/react@19.2.14))(typescript@5.9.3)
+      '@vercel/stega': 1.0.0
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+      rxjs: 7.8.2
+      scroll-into-view-if-needed: 3.1.0
+      styled-components: 6.4.0(css-to-react-native@3.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      xstate: 5.30.0
+    optionalDependencies:
+      '@sanity/client': 7.21.0
+      next: 16.1.6(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react-router: 7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - '@sanity/types'
+      - react-is
+      - typescript
+
+  '@sanity/webhook@4.0.4': {}
 
   '@sanity/worker-channels@2.0.0': {}
 
@@ -16096,6 +16170,8 @@ snapshots:
       js-yaml: 3.13.1
 
   '@vercel/stega@0.1.2': {}
+
+  '@vercel/stega@1.0.0': {}
 
   '@vercel/stega@1.1.0': {}
 
@@ -19913,6 +19989,33 @@ snapshots:
 
   neo-async@2.6.2: {}
 
+  next-sanity@12.1.0(3eb65a8c8dc677c76ad93b74e53b8c1b):
+    dependencies:
+      '@portabletext/react': 6.0.3(react@19.2.4)
+      '@sanity/client': 7.21.0
+      '@sanity/comlink': 4.0.1
+      '@sanity/presentation-comlink': 2.0.1(@sanity/client@7.21.0)(@sanity/types@5.20.0(@types/react@19.2.14))
+      '@sanity/preview-url-secret': 4.0.4(@sanity/client@7.21.0)
+      '@sanity/visual-editing': 5.2.1(@emotion/is-prop-valid@1.4.0)(@sanity/client@7.21.0)(@sanity/types@5.20.0(@types/react@19.2.14))(next@16.1.6(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-is@19.2.4)(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(styled-components@6.4.0(css-to-react-native@3.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3)
+      '@sanity/webhook': 4.0.4
+      dequal: 2.0.3
+      groq: 5.20.0
+      history: 5.3.0
+      next: 16.1.6(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+      sanity: 5.20.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.10.5)(@sanity/cli-core@1.3.0(@noble/hashes@2.2.0)(@sanity/telemetry@0.9.0(react@19.2.4))(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.44.0)(yaml@2.8.3))(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.32.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(styled-components@6.4.0(css-to-react-native@3.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.44.0)(ts-toolbelt@9.6.0)(typescript@5.9.3)
+      server-only: 0.0.1
+      styled-components: 6.4.0(css-to-react-native@3.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - '@sanity/types'
+      - '@sveltejs/kit'
+      - react-is
+      - react-router
+      - svelte
+      - typescript
+
   next@16.1.6(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       '@next/env': 16.1.6
@@ -21167,7 +21270,6 @@ snapshots:
       - ts-toolbelt
       - typescript
       - utf-8-validate
-    optional: true
 
   sanity@5.20.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.10.5)(@sanity/cli-core@1.3.0(@noble/hashes@2.2.0)(@sanity/telemetry@0.9.0(react@19.2.4))(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.44.0)(yaml@2.8.3))(@types/node@25.3.0)(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.32.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(styled-components@6.4.0(css-to-react-native@3.2.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(terser@5.44.0)(ts-toolbelt@9.6.0)(typescript@5.9.3):
     dependencies:
@@ -21391,6 +21493,8 @@ snapshots:
       send: 1.2.0
     transitivePeerDependencies:
       - supports-color
+
+  server-only@0.0.1: {}
 
   set-cookie-parser@2.7.1: {}
 
@@ -22434,7 +22538,6 @@ snapshots:
       - terser
       - tsx
       - yaml
-    optional: true
 
   vite-node@5.3.0(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.44.0)(tsx@4.21.0)(yaml@2.8.3):
     dependencies:

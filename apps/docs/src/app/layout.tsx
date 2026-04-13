@@ -1,13 +1,13 @@
 import {wrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Metadata} from 'next'
-import {draftMode, headers} from 'next/headers'
+import {draftMode} from 'next/headers'
 import {PropsWithChildren} from 'react'
 
 import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
-import {loadQuery} from '@/lib/sanity/loadQuery'
 
 import {DEFAULT_META_DESCRIPTION, DEFAULT_META_OG_IMAGE} from './constants'
 import {RootLayout} from './RootLayout'
+import {getContext} from './context'
 
 export const metadata: Metadata = {
   title: 'Sanity UI',
@@ -31,23 +31,33 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayoutLoader(props: PropsWithChildren) {
-  const {data: rawData, sourceMap} = await loadQuery<GlobalData>(GLOBAL_QUERY)
-  const data: WrappedValue<GlobalData> = wrapData({baseUrl: '/studio'}, rawData, sourceMap)
-  const initialScheme = (await headers()).get('sec-ch-prefers-color-scheme') as
-    | 'dark'
-    | 'light'
-    | null
+  const {dataset, initialScheme, projectId, studioBaseUrl, sanityFetch} = await getContext()
+
+  const result = await sanityFetch({
+    query: GLOBAL_QUERY,
+  })
+
+  const rawData = result.data as GlobalData
+  const sourceMap = result.sourceMap || undefined
+
+  const data: WrappedValue<GlobalData> = wrapData(
+    {
+      baseUrl: studioBaseUrl,
+    },
+    rawData,
+    sourceMap,
+  )
 
   return (
     <RootLayout
       {...props}
       data={data}
-      dataset={process.env.SANITY_DATASET!}
+      dataset={dataset}
       draftMode={(await draftMode()).isEnabled}
       hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
       initialScheme={initialScheme}
-      projectId={process.env.SANITY_PROJECT_ID!}
-      studioOrigin={process.env.SANITY_STUDIO_ORIGIN}
+      projectId={projectId}
+      studioBaseUrl={studioBaseUrl}
     />
   )
 }
