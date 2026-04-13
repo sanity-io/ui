@@ -194,17 +194,19 @@ export function MenuGroup<E extends MenuGroupElementType = typeof DEFAULT_MENU_G
   }, [])
 
   return (
-    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={open}>
+    <Popover
+      __unstable_shift={-4}
+      data-ui="MenuGroup__popover"
+      {...popover}
+      content={childMenu}
+      open={open}
+    >
       <Selectable
-        // data-as={as}
         data-ui="MenuGroup"
-        // forwardedAs={as}
         {...rest}
         ref={setRootElement}
         aria-pressed={as === 'button' ? withinMenu : undefined}
         as={as}
-        // data-pressed={as !== 'button' ? withinMenu : undefined}
-        // data-selected={!withinMenu && active ? '' : undefined}
         radius={radius}
         selected={withinMenu}
         tabIndex={-1}

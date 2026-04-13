@@ -1,8 +1,9 @@
-import type {
-  GapStyleProps,
-  PaddingStyleProps,
-  RadiusStyleProps,
-  ResponsiveProp,
+import {
+  type GapStyleProps,
+  type PaddingStyleProps,
+  type RadiusStyleProps,
+  type ResponsiveProp,
+  selectable_hotkeys,
 } from '@sanity/ui-css'
 import type {ElementTone, FontTextSize} from '@sanity/ui-tokens'
 import {
@@ -13,15 +14,12 @@ import {
   useCallback,
   useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
 } from 'react'
 import {isValidElementType} from 'react-is'
 
 import type {ComponentType, Props} from '../../core/types'
-import {Box} from '../../primitives/box/Box'
-import {Flex} from '../../primitives/flex/Flex'
 import {Selectable} from '../../primitives/selectable/Selectable'
 import {Text} from '../../primitives/text/Text'
 import {Hotkeys} from '../hotkeys/Hotkeys'
@@ -63,22 +61,14 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
     children,
     disabled,
     fontSize = 1,
-    gap = 3,
-    gapX,
-    gapY,
+    gap,
     hotkeys,
     icon: IconComponent,
     iconRight: IconRightComponent,
     onClick,
     padding = 3,
-    paddingX,
-    paddingY,
-    paddingTop,
-    paddingRight,
-    paddingBottom,
-    paddingLeft,
     pressed,
-    radius = 2,
+    radius = 3,
     ref: forwardedRef,
     role = 'menuitem',
     selected: selectedProp,
@@ -109,19 +99,6 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
     [disabled, onClick, onItemClick],
   )
 
-  const paddingProps = useMemo(
-    () => ({
-      padding,
-      paddingX,
-      paddingY,
-      paddingTop,
-      paddingRight,
-      paddingBottom,
-      paddingLeft,
-    }),
-    [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft],
-  )
-
   const setRef = useCallback((el: HTMLButtonElement | null) => {
     ref.current = el
     setRootElement(el)
@@ -129,11 +106,15 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
 
   return (
     <Selectable
+      data-pressed={pressed ? '' : undefined}
       data-ui="MenuItem"
       {...rest}
       ref={setRef}
       as={as}
       disabled={disabled}
+      display="flex"
+      gap={gap ?? padding}
+      padding={padding}
       radius={radius}
       role={role}
       selected={active}
@@ -144,38 +125,28 @@ export function MenuItem<E extends MenuItemElementType = typeof DEFAULT_MENU_ITE
       onMouseEnter={onItemMouseEnter}
       onMouseLeave={onItemMouseLeave}
     >
-      {(IconComponent || text || IconRightComponent) && (
-        <Flex align="center" as="span" gap={gap} gapX={gapX} gapY={gapY} {...paddingProps}>
-          {IconComponent && (
-            <Text muted size={fontSize}>
-              {isValidElement(IconComponent) && IconComponent}
-              {isValidElementType(IconComponent) && <IconComponent />}
-            </Text>
-          )}
-
-          {text && (
-            <Box flex={1}>
-              <Text size={fontSize} textOverflow="ellipsis" weight="medium">
-                {text}
-              </Text>
-            </Box>
-          )}
-
-          {hotkeys && <Hotkeys keys={hotkeys} style={{marginTop: -4, marginBottom: -4}} />}
-
-          {IconRightComponent && (
-            <Text muted size={fontSize}>
-              {isValidElement(IconRightComponent) && IconRightComponent}
-              {isValidElementType(IconRightComponent) && <IconRightComponent />}
-            </Text>
-          )}
-        </Flex>
+      {IconComponent && (
+        <Text flex="none" muted size={fontSize}>
+          {isValidElement(IconComponent) && IconComponent}
+          {isValidElementType(IconComponent) && <IconComponent />}
+        </Text>
       )}
 
-      {children && (
-        <Box as="span" {...paddingProps}>
-          {children}
-        </Box>
+      {text && (
+        <Text flex={1} size={fontSize} textOverflow="ellipsis" weight="medium">
+          {text}
+        </Text>
+      )}
+
+      {children}
+
+      {hotkeys && <Hotkeys className={selectable_hotkeys()} keys={hotkeys} />}
+
+      {IconRightComponent && (
+        <Text flex="none" muted size={fontSize}>
+          {isValidElement(IconRightComponent) && IconRightComponent}
+          {isValidElementType(IconRightComponent) && <IconRightComponent />}
+        </Text>
       )}
     </Selectable>
   )
