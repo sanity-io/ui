@@ -7,13 +7,12 @@ test.describe('Keyboard shortcuts', () => {
     // Wait for page to load
     await page.waitForTimeout(500)
 
-    // Get initial zoom
+    // Get initial zoom from data attribute
     const initialZoom = await page.evaluate(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const state = (window as any).__workshopState
-      return state?.zoom ?? 1
+      const root = document.querySelector('[data-workshop]')
+      return root?.getAttribute('data-workshop-zoom')
     })
-    expect(initialZoom).toBe(1)
+    expect(initialZoom).toBe('1')
 
     // Press ControlOrMeta+= to zoom in (works cross-platform)
     await page.keyboard.press('ControlOrMeta+=')
@@ -23,11 +22,10 @@ test.describe('Keyboard shortcuts', () => {
 
     // Check zoom increased
     const newZoom = await page.evaluate(() => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const state = (window as any).__workshopState
-      return state?.zoom
+      const root = document.querySelector('[data-workshop]')
+      return root?.getAttribute('data-workshop-zoom')
     })
-    expect(newZoom).toBeGreaterThan(initialZoom)
+    expect(newZoom).toBe('1.5')
   })
 
   // Note: This test is skipped because Playwright's ControlOrMeta doesn't work

@@ -233,7 +233,7 @@ export function Workshop(props: WorkshopProps) {
   }
 
   return (
-    <Root height="fill" lang="en" scheme={rootScheme}>
+    <Root data-workshop="" data-workshop-zoom={zoom} height="fill" lang="en" scheme={rootScheme}>
       <WorkshopProvider
         broadcast={broadcast}
         channel={channel}
