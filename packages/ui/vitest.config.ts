@@ -1,9 +1,9 @@
 import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
 import path from 'path'
-import type {UserConfig} from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import {defineConfig} from 'vitest/config'
 
-const config: UserConfig = {
+export default defineConfig({
   plugins: [tsconfigPaths(), vanillaExtractPlugin()],
   test: {
     globals: true,
@@ -14,12 +14,11 @@ const config: UserConfig = {
     // Enable rich PR failed test annotation on the CI
     reporters: process.env['GITHUB_ACTIONS'] ? ['default', 'github-actions'] : 'default',
     setupFiles: ['test/setup.ts'],
+    exclude: ['.workshop', 'dist', 'e2e', 'node_modules', 'tmp'],
   },
   resolve: {
     alias: {
       $test: path.resolve(__dirname, 'test'),
     },
   },
-}
-
-export default config
+})
