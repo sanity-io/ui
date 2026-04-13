@@ -1,31 +1,23 @@
-import {Box, Text} from '@sanity/ui'
-import {memo} from 'react'
+import {Stack, Text} from '@sanity/ui'
 
 import {Prop} from './components/prop'
 import {useProps} from './useProps'
 
 /** @internal */
-export const PropsInspector = memo(function PropsInspector(): React.ReactNode {
+export function PropsInspector() {
   const {schemas, value} = useProps()
 
   return (
-    <Box padding={2}>
+    <Stack gap={5} paddingX={4} paddingY={5}>
       {schemas.length === 0 && (
-        <Box padding={2}>
-          <Text muted size={[2, 2, 1]}>
-            No properties
-          </Text>
-        </Box>
+        <Text muted size={[2, 2, 1]}>
+          No properties
+        </Text>
       )}
 
-      {schemas.length > 0 &&
-        schemas.map((schema, schemaIndex) => (
-          <Prop
-            key={schemaIndex}
-            schema={schema}
-            value={value[schema.name] === undefined ? schema.defaultValue : value[schema.name]}
-          />
-        ))}
-    </Box>
+      {schemas.map((schema, schemaIndex) => (
+        <Prop key={schemaIndex} schema={schema} value={value[schema.name]} />
+      ))}
+    </Stack>
   )
-})
+}

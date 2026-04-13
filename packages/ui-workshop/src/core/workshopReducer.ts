@@ -1,20 +1,14 @@
-import {isEqual} from 'lodash'
+import isEqual from 'lodash/isEqual'
 
 import type {WorkshopMsg} from './types/msg'
-import type {WorkshopState} from './types/state'
+import type {WorkshopPayload, WorkshopState} from './types/state'
 
 /** @internal */
 export function workshopReducer(state: WorkshopState, msg: WorkshopMsg): WorkshopState {
   if (msg.type === 'workshop/frameReady') {
+    if (state.frameReady) return state
+
     return {...state, frameReady: true}
-  }
-
-  if (msg.type === 'workshop/setState') {
-    if (isEqual(state, msg.value)) {
-      return state
-    }
-
-    return msg.value
   }
 
   if (msg.type === 'workshop/setZoom') {
@@ -50,7 +44,7 @@ export function workshopReducer(state: WorkshopState, msg: WorkshopMsg): Worksho
   }
 
   if (msg.type === 'workshop/setPayloadValue') {
-    const payload = {...state.payload, [msg.key]: msg.value}
+    const payload: WorkshopPayload = {...state.payload, [msg.key]: msg.value}
 
     if (isEqual(state.payload, payload)) {
       return state

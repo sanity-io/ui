@@ -1,5 +1,4 @@
 import type {WorkshopScope, WorkshopStory} from './config/types'
-import type {WorkshopColorScheme} from './types/scheme'
 
 /** @internal */
 export function resolveLocation(
@@ -35,22 +34,18 @@ export function buildFrameUrl(params: {
   baseUrl?: string
   path: string
   payload: Record<string, unknown>
-  scheme: WorkshopColorScheme
   viewport: string
   zoom: number
 }): string {
-  const {baseUrl = '/frame/', path, payload, scheme, viewport, zoom} = params
+  const {baseUrl = '/frame/', path, payload, viewport, zoom} = params
 
   return [
     baseUrl,
     `?path=${encodeURIComponent(path)}`,
-    scheme === 'system' ? undefined : `&scheme=${scheme}`,
     `&viewport=${viewport}`,
     `&zoom=${zoom}`,
     ...Object.entries(payload).map(([key, value]) => {
       return `&${key}=${value}`
     }),
-  ]
-    .filter(Boolean)
-    .join('')
+  ].join('')
 }

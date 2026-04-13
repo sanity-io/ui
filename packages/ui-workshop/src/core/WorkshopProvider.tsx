@@ -1,8 +1,9 @@
-import {memo, useMemo} from 'react'
+import {useMemo} from 'react'
 
 import type {WorkshopConfig, WorkshopPlugin} from './config/types'
 import {EMPTY_ARRAY, EMPTY_RECORD} from './constants'
 import {resolveLocation} from './helpers'
+import {CommandsProvider} from './lib/commands'
 import type {Pubsub} from './lib/pubsub'
 import {propsPlugin} from './plugins/props/plugin'
 import type {WorkshopMsg} from './types/msg'
@@ -22,12 +23,11 @@ export interface WorkshopProviderProps {
   scheme: WorkshopColorScheme
   viewport?: string
   zoom?: number
+  platform?: 'mac' | 'other'
 }
 
 /** @internal */
-export const WorkshopProvider = memo(function WorkshopProvider(
-  props: WorkshopProviderProps,
-): React.ReactNode {
+export function WorkshopProvider(props: WorkshopProviderProps) {
   const {
     broadcast,
     children,
@@ -37,6 +37,7 @@ export const WorkshopProvider = memo(function WorkshopProvider(
     origin,
     path,
     payload,
+    platform,
     scheme,
     viewport = 'auto',
     zoom = 1,
@@ -67,7 +68,8 @@ export const WorkshopProvider = memo(function WorkshopProvider(
     }
   }
 
-  return (
+  // Only create CommandsProvider in main window, not in iframe
+  const content = (
     <WorkshopContext.Provider
       value={{
         plugins,
@@ -91,6 +93,11 @@ export const WorkshopProvider = memo(function WorkshopProvider(
       {wrappedChildren}
     </WorkshopContext.Provider>
   )
-})
 
-WorkshopProvider.displayName = 'Memo(WorkshopProvider)'
+  // Only wrap with CommandsProvider in main context, not in iframe
+  if (origin === 'main') {
+    return <CommandsProvider platform={platform}>{content}</CommandsProvider>
+  }
+
+  return content
+}

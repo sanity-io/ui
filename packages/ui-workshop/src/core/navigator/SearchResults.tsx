@@ -1,10 +1,9 @@
 import {Card, Stack, Text} from '@sanity/ui'
-import {memo} from 'react'
 
 import type {WorkshopScope, WorkshopStory} from '../config/types'
 
 /** @internal */
-export const SearchResults = memo(function SearchResults(props: {
+export function SearchResults(props: {
   matches: {scope: WorkshopScope; story: WorkshopStory}[]
   onStoryClick: (event: React.MouseEvent<HTMLAnchorElement>) => void
 }) {
@@ -23,10 +22,10 @@ export const SearchResults = memo(function SearchResults(props: {
           onClick={onStoryClick}
         >
           <Text size={1} textOverflow="ellipsis">
-            {[scope.title || '', story.title].filter(Boolean).join(' / ')}
+            {[scope.title, story.title].filter(Boolean).join(' / ')}
           </Text>
         </Card>
       ))}
     </Stack>
   )
-})
+}

@@ -1,30 +1,42 @@
-import {Box, Text, TextInput} from '@sanity/ui'
-import {memo} from 'react'
+import {Stack, Text, TextInput} from '@sanity/ui'
+import {useState} from 'react'
 
 import type {NumberPropSchema} from '../types'
 import {useProps} from '../useProps'
 
 /** @internal */
-export const NumberProp = memo(function NumberProp(props: {
-  schema: NumberPropSchema
-  value?: string
-}): React.ReactNode {
-  const {schema, value = ''} = props
+export function NumberProp(props: {schema: NumberPropSchema; value?: number}) {
+  const {schema, value} = props
   const {setPropValue} = useProps()
 
+  const [tempValue, setTempValue] = useState<string | undefined>(String(value))
+  const parsedValue = Number(tempValue)
+
   return (
-    <Box padding={3}>
-      <Text size={1} weight="semibold">
+    <Stack gap={3}>
+      <Text size={1} weight="medium">
         {schema.name}
       </Text>
-      <Box marginTop={2}>
-        <TextInput
-          fontSize={[2, 2, 1]}
-          padding={2}
-          value={value}
-          onChange={(event) => setPropValue(schema.name, Number(event.currentTarget.value))}
-        />
-      </Box>
-    </Box>
+
+      <TextInput
+        customValidity={isNaN(parsedValue) ? 'Not a number' : undefined}
+        fontSize={[2, 2, 1]}
+        padding={2}
+        value={tempValue ?? (typeof value === 'number' ? String(value) : '')}
+        onChange={(event) => {
+          const valueString = event.currentTarget.value
+
+          setTempValue(valueString)
+
+          const valueNumber = Number(valueString)
+
+          if (isNaN(valueNumber)) {
+            return
+          }
+
+          setPropValue(schema.name, valueNumber)
+        }}
+      />
+    </Stack>
   )
-})
+}

@@ -1,25 +1,17 @@
 import {SearchIcon} from '@sanity/icons'
-import {Box, Card, Flex, Layer, TextInput} from '@sanity/ui'
-import type {ResponsiveProp} from '@sanity/ui/css'
-import type {FontTextSize} from '@sanity/ui/theme'
-import {memo, useCallback, useMemo, useState} from 'react'
+import {Box, Flex, Layer, TextInput, Tree} from '@sanity/ui'
+import {useCallback, useMemo, useState} from 'react'
 
 import type {WorkshopCollection, WorkshopScope, WorkshopStory} from '../config/types'
 import {EMPTY_ARRAY} from '../constants'
 import {useWorkshop} from '../useWorkshop'
-import {buildMenu} from './helpers'
+import {buildMenu} from './menu'
 import {SearchResults} from './SearchResults'
-import {StoryTree} from './StoryTree'
-import type {MenuList, MenuScope} from './types'
-import {workshopNavigator} from './WorkshopNavigator.css'
-
-const textInputFontSize: ResponsiveProp<FontTextSize> = [2, 2, 1]
+import {StoryTreeItems} from './StoryTree'
+import {root} from './WorkshopNavigator.css'
 
 /** @internal */
-export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
-  collections?: WorkshopCollection[]
-  expanded: boolean
-}): React.ReactNode {
+export function WorkshopNavigator(props: {collections?: WorkshopCollection[]; expanded: boolean}) {
   const {collections = [], expanded} = props
   const {broadcast, scopes} = useWorkshop()
   const menu = useMemo(() => buildMenu(collections, scopes), [collections, scopes])
@@ -59,7 +51,6 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
 
       if (targetPath) {
         broadcast({type: 'workshop/setPath', value: targetPath})
-
         setQuery('')
       }
     },
@@ -67,69 +58,40 @@ export const WorkshopNavigator = memo(function WorkshopNavigator(props: {
   )
 
   return (
-    <NavigatorView
-      expanded={expanded}
-      matches={matches}
-      menu={menu}
-      query={query}
-      onSearchQueryChange={handleSearchQueryChange}
-      onSearchQueryClear={handleSearchQueryClear}
-      onStoryClick={handleStoryClick}
-    />
-  )
-})
-
-const NavigatorView = memo(function NavigatorView(props: {
-  expanded: boolean
-  matches: {scope: WorkshopScope; story: WorkshopStory}[]
-  menu: MenuScope | MenuList
-  onSearchQueryChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onSearchQueryClear: () => void
-  onStoryClick: (event: React.MouseEvent<HTMLAnchorElement>) => void
-  query: string
-}) {
-  const {expanded, matches, menu, onSearchQueryChange, onSearchQueryClear, onStoryClick, query} =
-    props
-
-  return (
     <Layer
-      className={workshopNavigator}
+      className={root}
       display={expanded ? ['block'] : ['none', 'none', 'block']}
       flex={1}
-      overflow="hidden"
+      overflow={['hidden', 'hidden', 'auto']}
       shadow={1}
     >
       <Flex direction="column" height="fill">
-        <Layer flex="none" padding={2} shadow={1}>
+        <Layer flex="none" padding={3} shadow={1}>
           <TextInput
             border={false}
             clearButton={Boolean(query)}
-            fontSize={textInputFontSize}
-            gap={2}
+            fontSize={1}
             icon={SearchIcon}
             padding={2}
             placeholder="Stories"
-            radius={2}
             value={query}
-            onChange={onSearchQueryChange}
-            onClear={onSearchQueryClear}
+            onChange={handleSearchQueryChange}
+            onClear={handleSearchQueryClear}
           />
         </Layer>
 
-        <Card flex={1} overflow="auto">
-          {query && matches.length > 0 && (
-            <Box padding={2}>
-              <SearchResults matches={matches} onStoryClick={onStoryClick} />
-            </Box>
-          )}
+        {query && matches.length > 0 && (
+          <Box flex={1} overflow="auto" padding={3}>
+            <SearchResults matches={matches} onStoryClick={handleStoryClick} />
+          </Box>
+        )}
 
-          {!query && menu.type === 'list' && (
-            <Box padding={2}>
-              <StoryTree items={menu.items} />
-            </Box>
-          )}
-        </Card>
+        {!query && menu.type === 'list' && (
+          <Tree flex={1} gap={1} overflow="auto" padding={3}>
+            <StoryTreeItems items={menu.items} />
+          </Tree>
+        )}
       </Flex>
     </Layer>
   )
-})
+}

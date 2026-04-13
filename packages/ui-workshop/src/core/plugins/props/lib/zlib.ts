@@ -38,7 +38,11 @@ export function decode(input: string): string {
 
   const arr = base64ToUint8Array(input)
 
-  return inflate(arr, {to: 'string'})
+  const result = inflate(arr, {to: 'string'})
+
+  // console.log('decoded', result)
+
+  return result
 }
 
 /** @internal */
@@ -47,5 +51,13 @@ export function encode(input: string): string {
 
   const arr = deflate(input)
 
-  return uint8ArrayToBase64(arr)
+  const result = uint8ArrayToBase64(arr)
+
+  // console.log('encoded', {
+  //   input,
+  //   result,
+  //   reversed: decode(result),
+  // })
+
+  return result
 }

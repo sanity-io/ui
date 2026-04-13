@@ -1,15 +1,10 @@
-import type {WorkshopState} from './state'
+import type {WorkshopQuery} from './location'
 import type {WorkshopColorScheme} from './scheme'
+import type {WorkshopPayload} from './state'
 
 /** @public */
 export interface WorkshopFrameReadyMsg {
   type: 'workshop/frameReady'
-}
-
-/** @public */
-export interface WorkshopSetStateMsg {
-  type: 'workshop/setState'
-  value: WorkshopState
 }
 
 /** @public */
@@ -39,20 +34,19 @@ export interface WorkshopSetPathMsg {
 /** @public */
 export interface WorkshopSetPayloadMsg {
   type: 'workshop/setPayload'
-  value: Record<string, unknown>
+  value: WorkshopPayload
 }
 
 /** @public */
 export interface WorkshopSetPayloadValueMsg {
   type: 'workshop/setPayloadValue'
   key: string
-  value: unknown
+  value: string | number | boolean | WorkshopQuery | undefined
 }
 
 /** @public */
 export type WorkshopMsg =
   | WorkshopFrameReadyMsg
-  | WorkshopSetStateMsg
   | WorkshopSetZoomMsg
   | WorkshopSetViewportMsg
   | WorkshopSetSchemeMsg

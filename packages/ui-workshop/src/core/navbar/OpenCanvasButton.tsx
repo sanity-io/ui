@@ -1,20 +1,18 @@
 import {LaunchIcon} from '@sanity/icons'
 import {Button, type ButtonProps} from '@sanity/ui'
-import {memo, useMemo} from 'react'
+import {useMemo} from 'react'
 
 import {buildFrameUrl} from '../helpers'
 import {useWorkshop} from '../useWorkshop'
 
 /** @internal */
-export const OpenCanvasButton = memo(function OpenCanvasButton() {
-  const {frameUrl, path, payload, scheme, zoom, viewport} = useWorkshop()
+export function OpenCanvasButton() {
+  const {frameUrl, path, payload, zoom, viewport} = useWorkshop()
 
   const canvasUrl = useMemo(
     () =>
-      path === '/'
-        ? undefined
-        : buildFrameUrl({baseUrl: frameUrl, path, payload, scheme, zoom, viewport}),
-    [frameUrl, path, payload, scheme, zoom, viewport],
+      path === '/' ? undefined : buildFrameUrl({baseUrl: frameUrl, path, payload, zoom, viewport}),
+    [frameUrl, path, payload, zoom, viewport],
   )
 
   const buttonProps: ButtonProps = {
@@ -34,4 +32,4 @@ export const OpenCanvasButton = memo(function OpenCanvasButton() {
   }
 
   return <Button {...buttonProps} />
-})
+}
