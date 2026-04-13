@@ -1,5 +1,10 @@
 import type {Placement} from '../../core/types'
 
+export const DEFAULT_TOOLTIP_DELAY = {
+  open: 500,
+  close: 100,
+}
+
 export const DEFAULT_TOOLTIP_DISTANCE = 4
 export const DEFAULT_TOOLTIP_PADDING = 4
 
