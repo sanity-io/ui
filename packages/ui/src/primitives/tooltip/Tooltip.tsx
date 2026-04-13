@@ -128,7 +128,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     hotkeys: hotkeysProp,
     padding = 2,
     placement: placementProp = 'bottom',
-    portal = false,
+    portal = true,
     radius = 3,
     ref: forwardedRef,
     shadow = 2,
