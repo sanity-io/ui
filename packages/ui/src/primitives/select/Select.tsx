@@ -39,7 +39,7 @@ export function Select<E extends SelectElementType = typeof DEFAULT_SELECT_ELEME
     fontSize = 2,
     gap = 2,
     padding = 3,
-    radius = 1,
+    radius = 2,
     readOnly,
     ref: forwardedRef,
     width = 'fill',
