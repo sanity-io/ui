@@ -207,11 +207,11 @@ export function DialogCard<E extends DialogCardElementType = typeof DEFAULT_DIAL
         {showHeader && (
           <div
             className={dialog_scrollerShadowTop()}
-            style={{opacity: Math.min(scrollTop, 32) / 32}}
+            style={{opacity: Math.min(scrollTop, 32) / 32, zIndex: 1}}
           />
         )}
 
-        <Box ref={contentRef} className={dialog_scroller()} overflow="auto">
+        <Box ref={contentRef} className={dialog_scroller()} overflow="auto" tabIndex={-1}>
           {children}
         </Box>
 

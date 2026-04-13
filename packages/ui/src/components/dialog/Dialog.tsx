@@ -4,13 +4,12 @@ import {
   dialog_container,
   type ResponsiveProp,
 } from '@sanity/ui-css'
-import type {CardTone, ColorScheme, Radius} from '@sanity/ui-tokens'
+import type {Radius, Shadow} from '@sanity/ui-tokens'
 import {type FocusEvent, type ForwardedRef, type ReactNode, use, useCallback, useRef} from 'react'
 
 import {Z_OFFSETS} from '../../core/constants'
 import {isHTMLElement} from '../../core/helpers/element'
 import {focusFirstDescendant, focusLastDescendant} from '../../core/helpers/focus'
-import {_getResponsiveProp} from '../../core/helpers/props'
 import type {ComponentType, Props} from '../../core/types'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Container} from '../../primitives/container/Container'
@@ -27,39 +26,42 @@ import {useDialog} from './useDialog'
 export const DEFAULT_DIALOG_ELEMENT = 'div'
 
 /** @public */
-export type DialogOwnProps = ContainerStyleProps &
-  Omit<LayerOwnProps, 'width'> & {
-    /**
-     * @beta
-     */
-    __unstable_autoFocus?: boolean
-    /**
-     * @beta
-     */
-    __unstable_hideCloseButton?: boolean
-    /**
-     * Whether the dialog should animate in on mount.
-     *
-     * @beta
-     * @defaultValue false
-     */
-    animate?: boolean
-    cardRadius?: ResponsiveProp<Radius>
-    contentRef?: ForwardedRef<HTMLDivElement>
-    footer?: ReactNode
-    header?: ReactNode
-    id: string
-    /** A callback that fires when the dialog becomes the top layer when it was not the top layer before. */
-    onActivate?: LayerProps['onActivate']
-    onClickOutside?: () => void
-    onClose?: () => void
-    open?: boolean
-    portal?: string
-    position?: ResponsiveProp<DialogPosition>
-    scheme?: ColorScheme
-    tone?: CardTone | 'inherit'
-    zOffset?: number | number[]
-  }
+export interface DialogOwnProps
+  extends
+    Omit<ContainerStyleProps, 'id' | 'position' | 'radius' | 'shadow'>,
+    Omit<LayerOwnProps, 'id' | 'position' | 'radius' | 'shadow' | 'width'> {
+  /**
+   * @beta
+   */
+  __unstable_autoFocus?: boolean
+  /**
+   * @beta
+   */
+  __unstable_hideCloseButton?: boolean
+  /**
+   * Whether the dialog should animate in on mount.
+   *
+   * @beta
+   * @defaultValue false
+   */
+  animate?: boolean
+  cardRadius?: ResponsiveProp<Radius>
+  contentRef?: ForwardedRef<HTMLDivElement>
+  footer?: ReactNode
+  header?: ReactNode
+  id: string
+  /** A callback that fires when the dialog becomes the top layer when it was not the top layer before. */
+  onActivate?: LayerProps['onActivate']
+  onClickOutside?: () => void
+  onClose?: () => void
+  open?: boolean
+  portal?: string
+  position?: ResponsiveProp<DialogPosition>
+  /**
+   * @deprecated Not in use – will be removed in the next major version.
+   */
+  shadow?: ResponsiveProp<Shadow>
+}
 
 /** @public */
 export type DialogElementType = 'div' | 'span' | ComponentType
@@ -79,8 +81,8 @@ export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEME
   const {
     __unstable_autoFocus: autoFocus = true,
     __unstable_hideCloseButton: hideCloseButton = false,
-    animate: _animate = false,
-    cardRadius: cardRadiusProp = 4,
+    animate: _animate = true,
+    cardRadius = 5,
     children,
     className,
     contentRef,
@@ -94,24 +96,20 @@ export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEME
     padding = 3,
     portal: portalProp,
     position: _positionProp,
-    scheme,
-    shadow: cardShadow = 4,
+    // Remove `shadow` prop in next major version
+    shadow: _shadow,
     width = 0,
     zOffset: _zOffsetProp,
-    tone,
     ...rest
   } = props as DialogProps<typeof DEFAULT_DIALOG_ELEMENT>
 
-  const positionProp = _positionProp ?? context.position ?? 'fixed'
-  const zOffsetProp = _zOffsetProp ?? context.zOffset ?? Z_OFFSETS.dialog
+  const position = _positionProp ?? context.position ?? 'fixed'
+  const zOffset = _zOffsetProp ?? context.zOffset ?? Z_OFFSETS.dialog
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const portal = usePortal()
   const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
   const boundaryElement = use(BoundaryElementContext)
-  const cardRadius = _getResponsiveProp(cardRadiusProp)
-  const position = _getResponsiveProp(positionProp)
-  const zOffset = _getResponsiveProp(zOffsetProp)
 
   const preDivRef = useRef<HTMLDivElement | null>(null)
   const postDivRef = useRef<HTMLDivElement | null>(null)
@@ -178,14 +176,15 @@ export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEME
   return (
     <Portal __unstable_name={portalProp}>
       <Layer
+        data-ui="Dialog"
         {...rest}
         aria-labelledby={labelId}
         aria-modal
         className={dialog({className})}
         data-animate={animate ? '' : undefined}
-        data-ui="Dialog"
         display="flex"
         id={id}
+        inset={0}
         padding={padding}
         position={position}
         role="dialog"
@@ -215,9 +214,7 @@ export function Dialog<E extends DialogElementType = typeof DEFAULT_DIALOG_ELEME
             id={id}
             portal={portalProp}
             radius={cardRadius}
-            scheme={scheme}
-            shadow={cardShadow}
-            tone={tone}
+            shadow={4}
             width={width}
             onClickOutside={onClickOutside}
             onClose={onClose}
