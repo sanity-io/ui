@@ -22,6 +22,7 @@ import {
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../core/constants'
 import {_raf} from '../../core/helpers/animation'
 import {_hasFocus, focusFirstDescendant} from '../../core/helpers/focus'
+import {_getResponsiveProp} from '../../core/helpers/props'
 import type {ComponentType, Props} from '../../core/types'
 import {Box, type BoxOwnProps} from '../../primitives/box/Box'
 import {Button} from '../../primitives/button/Button'
@@ -130,10 +131,10 @@ export function Autocomplete<
     openButton,
     openOnFocus,
     options: optionsProp,
-    padding = 3,
+    padding: paddingProp = 3,
     popover = EMPTY_RECORD,
     prefix,
-    radius = 2,
+    radius: radiusProp = 2,
     readOnly,
     ref: forwardedRef,
     relatedElements,
@@ -145,6 +146,9 @@ export function Autocomplete<
     ...rest
   } = props as AutocompleteProps<typeof DEFAULT_AUTOCOMPLETE_ELEMENT, O>
 
+  const radius = _getResponsiveProp(radiusProp)
+  const padding = _getResponsiveProp(paddingProp)
+
   const [state, dispatch] = useReducer(autocompleteReducer, {
     activeValue: valueProp || null,
     focused: false,
@@ -155,15 +159,25 @@ export function Autocomplete<
 
   const {activeValue, focused, listFocused, query, value} = state
 
-  const defaultRenderOption = useCallback(
-    ({value}: BaseAutocompleteOption) => (
-      <Selectable as="button" padding={padding} radius={2}>
-        <Text size={fontSize} textOverflow="ellipsis">
-          {value}
-        </Text>
-      </Selectable>
-    ),
-    [fontSize, padding],
+  const innerRadius = useMemo(
+    () =>
+      radius.map((r): Radius => {
+        if (r === undefined || r === 'full') return 'full'
+        if (r === 0) return 0
+        if (r === 1) return 1
+        if (r === 2) return 1
+        if (r === 3) return 2
+        return (r - 1) as Radius
+      }) as ResponsiveProp<Radius>,
+    [radius],
+  )
+
+  const defaultRenderOption = ({value}: BaseAutocompleteOption) => (
+    <Selectable as="button" padding={paddingProp} radius={innerRadius}>
+      <Text size={fontSize} textOverflow="ellipsis">
+        {value}
+      </Text>
+    </Selectable>
   )
 
   const renderOption =

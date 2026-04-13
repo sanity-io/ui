@@ -17,7 +17,6 @@ import {
   type ReactNode,
   useCallback,
   useImperativeHandle,
-  useMemo,
   useRef,
 } from 'react'
 import {isValidElementType} from 'react-is'
@@ -221,43 +220,39 @@ function ClearButton({
   clearButtonProps,
   handleClearClick,
   handleClearMouseDown,
-  padding,
+  padding: paddingProp,
 }: {
   clearButtonProps: TextInputClearButtonProps
   handleClearClick: (event: MouseEvent<HTMLButtonElement>) => void
   handleClearMouseDown: (event: MouseEvent<HTMLButtonElement>) => void
   padding: ResponsiveProp<Space>
 } & Pick<TextInputOwnProps, 'fontSize' | 'radius'>) {
-  const clearButtonBoxPadding = useMemo(() => {
-    return Object.fromEntries(
-      Object.entries(padding).map(([key, value]) => {
-        if (value === 0) return [key, 0]
-        if (value === 1) return [key, 1]
-        if (value === 2) return [key, 1]
+  const padding = _getResponsiveProp(paddingProp)
 
-        return [key, typeof value === 'number' ? value - 2 : 0]
-      }),
-    ) as ResponsiveProp<Space>
-  }, [padding])
+  const boxPadding = padding.map((p): Space => {
+    if (p === 0) return 0
+    if (p === 1) return 1
+    if (p === 2) return 1
+    if (p === 3) return 1
 
-  const clearButtonPadding = useMemo(() => {
-    return Object.fromEntries(
-      Object.entries(padding).map(([key, value]) => {
-        if (value === 0) return [key, 0]
-        if (value === 1) return [key, 0]
-        if (value === 2) return [key, 1]
+    return typeof p === 'number' ? ((p - 2) as Space) : 0
+  }) as ResponsiveProp<Space>
 
-        return [key, typeof value === 'number' ? value - 1 : 0]
-      }),
-    ) as ResponsiveProp<Space>
-  }, [padding])
+  const buttonPadding = padding.map((p): Space => {
+    if (p === 0) return 0
+    if (p === 1) return 0
+    if (p === 2) return 1
+    if (p === 3) return 2
+
+    return typeof p === 'number' ? ((p - 1) as Space) : 0
+  }) as ResponsiveProp<Space>
 
   return (
     <Box
       as="span"
       insetRight={0}
       insetTop={0}
-      padding={clearButtonBoxPadding}
+      padding={boxPadding}
       position="absolute"
       style={{zIndex: 2}}
     >
@@ -267,7 +262,7 @@ function ClearButton({
         fontSize={fontSize}
         icon={CloseIcon}
         mode="bleed"
-        padding={clearButtonPadding}
+        padding={buttonPadding}
         radius={radius}
         {...clearButtonProps}
         onClick={handleClearClick}

@@ -7,7 +7,7 @@ import {
   type ResponsiveProp,
 } from '@sanity/ui-css'
 import type {AvatarColor, AvatarSize, FontLabelSize} from '@sanity/ui-tokens'
-import {useCallback, useEffect, useMemo, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 
 import {_getResponsiveProp} from '../../core/helpers/props'
 import type {ComponentType, Props} from '../../core/types'
@@ -91,17 +91,13 @@ export function Avatar<E extends AvatarElementType = typeof DEFAULT_AVATAR_ELEME
     }
   }, [onImageLoadError])
 
-  const initialsSize = useMemo(
-    () =>
-      Object.values(size).map((s) => {
-        if (s === 1) return 1 satisfies FontLabelSize
-        if (s === 2) return 3 satisfies FontLabelSize
-        if (s === 3) return 5 satisfies FontLabelSize
+  const initialsSize = size.map((s): FontLabelSize => {
+    if (s === 1) return 1
+    if (s === 2) return 3
+    if (s === 3) return 5
 
-        return 0 satisfies FontLabelSize
-      }) as ResponsiveProp<FontLabelSize>,
-    [size],
-  )
+    return 0
+  }) as ResponsiveProp<FontLabelSize>
 
   return (
     <Element
