@@ -6,12 +6,12 @@ import {ReactElement, useMemo} from 'react'
 
 import {ArticleData} from '@/lib/data'
 
+import {tocBox} from './Article.css'
 import {ArticleHeadingsContext} from './ArticleHeadingsContext'
 import {ArticleContent} from './content'
 import {getHeadings} from './getHeadings'
 import {getTOCTree} from './getToc'
 import {HeadingsNav} from './HeadingsNav'
-import {tocBox} from './Article.css'
 
 export function Article(props: {article: WrappedValue<ArticleData>}): ReactElement {
   const {article} = props

@@ -1,16 +1,17 @@
+// import {javascript} from '@codemirror/lang-javascript'
 import {Card, CardProps, useCard} from '@sanity/ui'
+import {langs} from '@uiw/codemirror-extensions-langs'
 import CodeMirror, {EditorView, Statistics} from '@uiw/react-codemirror'
 import {ReactElement, useCallback, useEffect, useMemo, useRef} from 'react'
-import {langs} from '@uiw/codemirror-extensions-langs'
 
 import {isHotkey} from '@/lib/hotkey'
 
+import {editor} from './CodeEditor.css'
 import {getEditorThemeExtension} from './editorTheme'
 import {getFontSizeExtension} from './fontSize'
 import {runPrettier} from './prettier'
 import {getSyntaxTheme} from './syntaxTheme'
 import {CodeEditorSelection} from './types'
-import {editor} from './CodeEditor.css'
 
 export interface CodeEditorProps {
   focusRing?: boolean
@@ -20,19 +21,13 @@ export interface CodeEditorProps {
   value: string
 }
 
-const basicSetup = {
-  highlightActiveLine: false,
-}
-
 export function CodeEditor(
-  props: CodeEditorProps & Omit<CardProps, '__unstable_focusRing' | 'overflow'>,
+  props: CodeEditorProps & Omit<CardProps<'div'>, '__unstable_focusRing' | 'onChange' | 'overflow'>,
 ): ReactElement {
   const {
     border = true,
-    // cursor,
     focusRing = true,
     onChange,
-    // onCursorChange,
     onSelectionChange,
     selection,
     value,
@@ -158,7 +153,6 @@ export function CodeEditor(
       position="relative"
     >
       <CodeMirror
-        basicSetup={basicSetup}
         extensions={extensions}
         onChange={onChange}
         onCreateEditor={handleCreateEditor}

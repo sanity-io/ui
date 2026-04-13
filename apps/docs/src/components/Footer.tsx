@@ -4,7 +4,7 @@ import {Box, Button, Card, Flex, Text, useCard} from '@sanity/ui'
 import {ReactElement} from 'react'
 
 export function AppFooter(): ReactElement {
-  const dark = useCard().scheme === 'dark'
+  const card = useCard()
 
   return (
     <Card flex="none" paddingX={[3, 4, 5]} paddingY={[2, 3, 4]} shadow={1} style={{zIndex: 10}}>
@@ -30,10 +30,10 @@ export function AppFooter(): ReactElement {
           padding={2}
           rel="noopener noreferrer"
           target="_blank"
-          tone={dark ? undefined : 'critical'}
+          tone={card.scheme === 'dark' ? undefined : 'critical'}
         >
           <Text as="span" size={1}>
-            <SanityLogo aria-label="Sanity" dark={dark} />
+            <SanityLogo aria-label="Sanity" dark={card.scheme === 'dark'} />
           </Text>
         </Button>
       </Flex>

@@ -32,6 +32,7 @@ export function ColorGrid() {
                   </Box>
                   <Box marginLeft={2}>
                     <Button
+                      fontSize={1}
                       icon={ClipboardIcon}
                       mode="bleed"
                       onClick={() => {

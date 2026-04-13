@@ -11,8 +11,6 @@
     "dev": "next dev --webpack",
     "fix": "prettier --write --cache --ignore-unknown . && eslint . --ext .cjs,.js,.ts,.tsx --fix --quiet",
     "lint": "next lint",
-    "sanity:dev": "sanity dev",
-    "sanity:manifest:extract": "mkdirp public/studio/static && sanity manifest extract --path public/studio/static",
     "start": "next start",
     "test": "vitest",
     "typecheck": "tsc --build"

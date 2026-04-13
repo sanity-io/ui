@@ -55,6 +55,7 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
       expanded={node.collapsed !== true || path.startsWith(`${node.href}/`)}
       href={hrefWithBasePath}
       onClick={handleClick}
+      radius={3}
       selected={href ? href === path : false}
       style={{opacity: node.hidden ? 0.25 : undefined}}
       text={

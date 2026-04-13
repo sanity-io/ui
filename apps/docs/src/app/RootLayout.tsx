@@ -1,5 +1,7 @@
 'use client'
 
+import '@sanity/ui/css/index.css'
+
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Root, usePrefersDark} from '@sanity/ui'
 import {ColorScheme} from '@sanity/ui/theme'
@@ -14,7 +16,7 @@ import {parseNav} from '@/lib/nav'
 import {getImageUrlBuilder} from '@/lib/sanity/image'
 
 import {AppContext, AppContextValue} from './AppContext'
-import {VisualEditing} from './VisualEditing'
+import {DisableDraftMode} from './DisableDraftMode'
 
 registerLanguage(bash)
 registerLanguage(json)
@@ -28,20 +30,12 @@ export function RootLayout(props: {
   hintHiddenContent: boolean
   projectId: string
   studioOrigin?: string
-  prefersDarkServerSnapshot: boolean
+  initialScheme: ColorScheme | null
 }) {
-  const {
-    children,
-    data,
-    dataset,
-    draftMode,
-    hintHiddenContent,
-    projectId,
-    prefersDarkServerSnapshot,
-  } = props
-  const prefersDark = usePrefersDark(() => prefersDarkServerSnapshot)
+  const {children, data, dataset, draftMode, hintHiddenContent, initialScheme, projectId} = props
+  const prefersDark = usePrefersDark(() => initialScheme === 'dark')
 
-  const [colorScheme, setColorScheme] = useState<ColorScheme | 'system'>('system')
+  const [scheme, setColorScheme] = useState<ColorScheme | 'system'>('system')
 
   useEffect(() => {
     const localColorScheme = window.localStorage.getItem('sanityStudio:ui:colorScheme') || 'system'
@@ -53,14 +47,14 @@ export function RootLayout(props: {
       // If the restored value is invalid then ignore it
       return
     }
-    if (localColorScheme !== colorScheme) {
+    if (localColorScheme !== scheme) {
       // If the value from local storage is different from the current state, update the state
       // this typically only happens on mount
       startTransition(() => {
         setColorScheme(localColorScheme)
       })
     }
-  }, [colorScheme])
+  }, [scheme])
 
   const {nav: navNode = null, settings = null} = data || {}
 
@@ -69,7 +63,7 @@ export function RootLayout(props: {
   const app: AppContextValue = useMemo(
     () => ({
       basePath: '/ui',
-      colorScheme,
+      colorScheme: scheme,
       dataset,
       features: {hintHiddenContent},
       imageUrlBuilder: getImageUrlBuilder({dataset, projectId}).imageUrlBuilder,
@@ -81,20 +75,30 @@ export function RootLayout(props: {
       },
       settings,
     }),
-    [colorScheme, dataset, hintHiddenContent, nav, projectId, setColorScheme, settings],
+    [scheme, dataset, hintHiddenContent, nav, projectId, setColorScheme, settings],
   )
 
   return (
-    <Root
-      lang="en"
-      scheme={colorScheme === 'system' ? (prefersDark ? 'dark' : 'light') : colorScheme}
-    >
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <AppContext.Provider value={app}>
+      <Root
+        height="fill"
+        lang="en"
+        overflow="auto"
+        scheme={scheme === 'system' ? (prefersDark ? 'dark' : 'light') : scheme}
+      >
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-      <AppContext.Provider value={app}>{children}</AppContext.Provider>
-      {draftMode && <VisualEditing dataset={dataset} projectId={projectId} />}
-    </Root>
+        {children}
+
+        {draftMode && (
+          <>
+            {/* <VisualEditing /> */}
+            <DisableDraftMode />
+          </>
+        )}
+      </Root>
+    </AppContext.Provider>
   )
 }

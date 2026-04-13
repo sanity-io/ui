@@ -7,9 +7,10 @@ import {
 import {sanity, unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Heading, Text} from '@sanity/ui'
 import React from 'react'
-import {root} from './PlainContent.css'
 
 import {SanityBlockValue} from '@/lib/sanity/types'
+
+import {root} from './PlainContent.css'
 
 const Block: PortableTextBlockComponent = (props) => {
   const {children, value} = props

@@ -5,13 +5,13 @@ import {sanity, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Breadcrumbs, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {ReactElement, useState} from 'react'
-import {breadcrumbsNavCard, navCard} from './ArticlePage.css'
 
 import {ArticleData} from '@/lib/data'
 import {NavNode} from '@/lib/nav'
 
 import {Nav} from '../Nav'
 import {Article} from './article'
+import {breadcrumbsNavCard, navCard} from './ArticlePage.css'
 
 export function ArticlePage(props: {
   article?: WrappedValue<ArticleData>
@@ -28,6 +28,7 @@ export function ArticlePage(props: {
         <Card
           className={breadcrumbsNavCard}
           data-ui="BreadcrumbsNavCard"
+          // $menuOpen={menuOpen}
           paddingX={[2, 2, 3, 4]}
           paddingY={2}
           shadow={1}

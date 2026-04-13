@@ -1,13 +1,14 @@
 'use client'
+
 import {createElement, lazy, ReactNode, Suspense, useEffect, useState} from 'react'
 
 import {Layout} from '@/components/Layout'
 
 export function ArcadePage(props: {
-  searchParams: {
+  searchParams: Promise<{
     title?: string
     description?: string
-  }
+  }>
 }): ReactNode {
   const {searchParams: _searchParams} = props
 

@@ -1,7 +1,7 @@
 'use client'
 
 import {ArrowRightIcon} from '@sanity/icons'
-import {Box, Button, Card, Stack, Tab, TabList, TabPanel, Text} from '@sanity/ui'
+import {Box, Button, Card, Flex, Stack, Tab, TabList, TabPanel, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {ReactElement, useEffect, useState} from 'react'
 
@@ -82,8 +82,8 @@ export function CodeExample(props: {
         >
           {mode === 'jsx' && (
             <CodeEditor
-              border={false}
               focusRing
+              border={false}
               selection={jsxCursor}
               flex={1}
               height="fill"
@@ -116,18 +116,18 @@ export function CodeExample(props: {
         </TabPanel>
       </Card>
 
-      <Box marginTop={2} style={{textAlign: 'right'}}>
+      <Flex justify="flex-end">
         <Button
           as={Link}
           fontSize={1}
+          gap={2}
           href={`/arcade${encodeQueryParams(arcadeQuery)}`}
           iconRight={ArrowRightIcon}
           mode="bleed"
           padding={2}
-          gap={2}
           text="Open in Arcade"
         />
-      </Box>
+      </Flex>
     </Stack>
   )
 }

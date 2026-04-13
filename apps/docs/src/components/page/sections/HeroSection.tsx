@@ -2,13 +2,26 @@
 
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {sanity} from '@sanity/react-loader/jsx'
-import {Box, Button, Card, Container, Flex, Grid, Heading, Stack, Text, useCard} from '@sanity/ui'
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Flex,
+  Grid,
+  Heading,
+  // Inline,
+  Stack,
+  Text,
+  useCard,
+} from '@sanity/ui'
+import {ButtonMode, ElementTone} from '@sanity/ui/theme'
 import Link from 'next/link'
 import {ReactElement} from 'react'
 
 import {useApp} from '@/app/useApp'
 import {HeroSectionData} from '@/lib/data'
-import {ButtonMode, ElementTone} from '@sanity/ui/theme'
+
 import {backgroundBox} from './HeroSection.css'
 
 export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): ReactElement {
@@ -57,7 +70,6 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
             <Flex gap={2} justify="center" wrap="wrap">
               {data.ctas
                 .filter((cta) => cta.href)
-
                 .map((cta) => (
                   <Button
                     as={Link}

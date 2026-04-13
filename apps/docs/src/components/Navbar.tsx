@@ -14,7 +14,7 @@ export function Navbar(props: {path: string[]}): ReactElement {
 
   const monogramColor: SanityMonogramColor | undefined = useMemo(
     () =>
-      dataset === 'production'
+      dataset?.startsWith('prod')
         ? undefined
         : {bg1: gray['500'].hex, bg2: gray['200'].hex, fg: white.hex},
     [dataset],
@@ -24,7 +24,7 @@ export function Navbar(props: {path: string[]}): ReactElement {
     <Card flex="none" padding={[2, 2, 3, 4]} style={{lineHeight: 0}}>
       <Flex gap={1}>
         <Box flex="none">
-          <Button as={Link} data-as="a" href="/" mode="bleed" padding={3} radius={2}>
+          <Button as={Link} data-as="a" href="/" mode="bleed" padding={3} radius={3}>
             <Flex align="center" gap={[3, 3, 4]}>
               <Box flex="none">
                 <Text size={[1, 1, 2]}>
@@ -65,7 +65,7 @@ export function Navbar(props: {path: string[]}): ReactElement {
                   key={idx}
                   mode="bleed"
                   padding={3}
-                  radius={2}
+                  radius={3}
                   selected={node.segment === path[0]}
                   style={{opacity: node.hidden ? 0.25 : undefined}}
                   text={<sanity.span>{node.title}</sanity.span>}

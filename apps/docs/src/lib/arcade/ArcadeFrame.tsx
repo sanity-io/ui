@@ -1,8 +1,8 @@
+import {Box} from '@sanity/ui'
 import {ReactElement, useCallback, useEffect, useRef, useState} from 'react'
 
 import {useApp} from '@/app/useApp'
 import {isRecord} from '@/lib/common'
-import {Box} from '@sanity/ui'
 
 export function ArcadeFrame({
   hookCode,
@@ -71,6 +71,7 @@ export function ArcadeFrame({
     () => postMessage({type: 'arcadeFrame/input', hookCode, jsxCode}),
     [hookCode, jsxCode, postMessage],
   )
+
   return (
     <Box as="iframe" ref={setFrame} src={`${basePath}/arcade/frame`} height="fill" width="fill" />
   )

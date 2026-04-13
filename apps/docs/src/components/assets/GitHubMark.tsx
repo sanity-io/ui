@@ -9,7 +9,7 @@ export function GitHubMark() {
       viewBox="0 0 17 17"
       fill="none"
     >
-      <g clipPath="url(githublogo)" transform="translate(0.25, 0.25)">
+      <g clipPath="url(#githublogo)" transform="translate(0.25, 0.25)">
         <path
           fill="currentColor"
           fillRule="evenodd"
