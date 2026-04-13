@@ -1,19 +1,18 @@
 import {Box, Card, Code, Stack, Text} from '@sanity/ui'
 import type {CardTone} from '@sanity/ui/tokens'
 import axe from 'axe-core'
-import {memo} from 'react'
 
 import {useA11y} from './useA11y'
 
 /** @internal */
-export const A11yInspector = memo(function A11yInspector(): React.ReactNode {
+export function A11yInspector() {
   const {results} = useA11y()
 
   return (
-    <Box padding={2}>
+    <Box padding={3}>
       {results && (
         <>
-          <Stack gap={2}>
+          <Stack gap={3}>
             {results.violations.map((violation) => (
               <ResultItem key={violation.id} result={violation} tone="critical" />
             ))}
@@ -26,15 +25,15 @@ export const A11yInspector = memo(function A11yInspector(): React.ReactNode {
       )}
     </Box>
   )
-})
+}
 
 /** @internal */
-const ResultItem = memo(function ResultItem(props: {result: axe.Result; tone?: CardTone}) {
+function ResultItem(props: {result: axe.Result; tone?: CardTone}) {
   const {result, tone} = props
 
   return (
-    <Card border radius={2} tone={tone}>
-      <Stack gap={3} paddingX={2} paddingY={3}>
+    <Card overflow="hidden" radius={2} shadow={1} tone={tone}>
+      <Stack gap={3} padding={3} shadow={1}>
         <Text size={1} weight="semibold">
           {result.help}
           {result.impact && <> ({result.impact})</>}
@@ -48,21 +47,21 @@ const ResultItem = memo(function ResultItem(props: {result: axe.Result; tone?: C
           </a>
         </Text>
       </Stack>
-      <Card borderTop tone="inherit" />
-      <Stack gap={2} padding={2}>
+
+      <Stack gap={2} padding={3}>
         {result.nodes.map((node, nodeIndex) => {
           return (
-            <Stack key={nodeIndex} gap={2}>
+            <Stack key={nodeIndex} gap={3}>
               {node.failureSummary && <Text size={1}>{node.failureSummary}</Text>}
-              <Card border overflow="auto" padding={2} radius={2} tone="inherit">
-                <Code language="html" size={0}>
-                  {node.html}
-                </Code>
-              </Card>
+              {/* <Card overflow="auto" padding={3} radius={2} shadow={1}> */}
+              <Code language="html" size={1}>
+                {node.html}
+              </Code>
+              {/* </Card> */}
             </Stack>
           )
         })}
       </Stack>
     </Card>
   )
-})
+}
