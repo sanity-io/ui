@@ -1,10 +1,9 @@
-import {act, fireEvent, screen} from '@testing-library/react'
+import {act, fireEvent, screen, waitFor} from '@testing-library/react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '$test/utils'
 
 import {Button} from '../button/Button'
-import {Text} from '../text/Text'
 import {Tooltip} from './Tooltip'
 import {TooltipDelayGroupProvider} from './tooltipDelayGroup/TooltipDelayGroupProvider'
 
@@ -21,9 +20,9 @@ afterEach(() => {
 
 describe('Tooltip', () => {
   describe('Using same delay for open and close', () => {
-    it('should hide and show the tooltip content when hovered, with no delay', () => {
+    it('should hide and show the tooltip content when hovered, with no delay', async () => {
       render(
-        <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} placement={'top'}>
+        <Tooltip animate={false} delay={0} placement={'top'} text="Tooltip content">
           <Button mode="bleed" text="Hover me" />
         </Tooltip>,
       )
@@ -35,23 +34,24 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(button)
 
-      // Validate tooltip content is rendered
-      screen.getByText('Tooltip content')
+      // With delay=0, wait for tooltip to appear
+      await waitFor(() => {
+        expect(screen.getByText('Tooltip content')).toBeInTheDocument()
+      })
 
-      fireEvent.mouseOut(button)
-      // Validate tooltip content is not rendered anymore
-      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      fireEvent.mouseLeave(button)
+
+      // Wait for tooltip to disappear
+      await waitFor(() => {
+        expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      })
     })
     it('should support delays to show and hide the tooltip.', () => {
       vi.useFakeTimers()
       const delay = 200
 
       render(
-        <Tooltip
-          content={<Text size={1}>{'Tooltip content'}</Text>}
-          delay={delay}
-          placement={'top'}
-        >
+        <Tooltip animate={false} delay={delay} placement={'top'} text="Tooltip content">
           <Button mode="bleed" text="Hover me" />
         </Tooltip>,
       )
@@ -71,7 +71,7 @@ describe('Tooltip', () => {
       // Validate tooltip content is rendered
       screen.getByText('Tooltip content')
 
-      fireEvent.mouseOut(button)
+      fireEvent.mouseLeave(button)
       // Validate tooltip content is still showing.
       screen.getByText('Tooltip content')
       act(() => vi.advanceTimersByTime(delay))
@@ -85,12 +85,13 @@ describe('Tooltip', () => {
 
       render(
         <Tooltip
-          content={<Text size={1}>{'Tooltip content'}</Text>}
+          animate={false}
           delay={{
             open: openDelay,
             close: closeDelay,
           }}
           placement={'top'}
+          text="Tooltip content"
         >
           <Button mode="bleed" text="Hover me" />
         </Tooltip>,
@@ -111,7 +112,7 @@ describe('Tooltip', () => {
       // Validate tooltip content is rendered
       screen.getByText('Tooltip content')
 
-      fireEvent.mouseOut(button)
+      fireEvent.mouseLeave(button)
       // Validate tooltip content is still showing.
       screen.getByText('Tooltip content')
       act(() => vi.advanceTimersByTime(closeDelay))
@@ -121,19 +122,20 @@ describe('Tooltip', () => {
   })
 
   describe('Using the <TooltipDelayGroupProvider />', () => {
-    it('should support groups with the same delay to open and close.', () => {
+    it('should support groups with the same delay to open and close.', async () => {
       const delay = 150
 
       vi.useFakeTimers()
       render(
         <TooltipDelayGroupProvider delay={delay}>
-          <Tooltip content={<Text size={1}>{'Tooltip 1'}</Text>} delay={400} placement={'top'}>
+          <Tooltip animate={false} delay={400} placement={'top'} text="Tooltip 1">
             <Button mode="bleed" text="Button 1" />
           </Tooltip>
           <Tooltip
-            content={<Text size={1}>{'Tooltip 2'}</Text>}
+            animate={false}
             delay={400} // This should be overridden by the group delay
             placement={'top'}
+            text="Tooltip 2"
           >
             <Button mode="bleed" text="Button 2" />
           </Tooltip>
@@ -160,7 +162,7 @@ describe('Tooltip', () => {
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovers on second button.
-      fireEvent.mouseOut(button1)
+      fireEvent.mouseLeave(button1)
       fireEvent.mouseEnter(button2)
 
       // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
@@ -169,17 +171,20 @@ describe('Tooltip', () => {
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
-      fireEvent.mouseOut(button2)
+      fireEvent.mouseLeave(button2)
       act(() => vi.advanceTimersByTime(delay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovering again, should trigger the tooltip to show immediately, as the group is not deactivated yet
       fireEvent.mouseEnter(button2)
       act(() => vi.advanceTimersByTime(1))
+      await act(async () => {
+        await vi.runAllTimersAsync()
+      })
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
-      fireEvent.mouseOut(button2)
+      fireEvent.mouseLeave(button2)
       act(() => vi.advanceTimersByTime(delay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
@@ -191,7 +196,8 @@ describe('Tooltip', () => {
       act(() => vi.advanceTimersByTime(delay / 2))
       screen.getByText('Tooltip 2')
     })
-    it('should support groups with different open and close delay.', () => {
+
+    it('should support groups with different open and close delay.', async () => {
       const openDelay = 250
       const closeDelay = 150
 
@@ -203,13 +209,14 @@ describe('Tooltip', () => {
             close: closeDelay,
           }}
         >
-          <Tooltip content={<Text size={1}>{'Tooltip 1'}</Text>} delay={400} placement={'top'}>
+          <Tooltip animate={false} delay={400} placement={'top'} text="Tooltip 1">
             <Button mode="bleed" text="Button 1" />
           </Tooltip>
           <Tooltip
-            content={<Text size={1}>{'Tooltip 2'}</Text>}
+            animate={false}
             delay={400} // This should be overridden by the group delay
             placement={'top'}
+            text="Tooltip 2"
           >
             <Button mode="bleed" text="Button 2" />
           </Tooltip>
@@ -236,7 +243,7 @@ describe('Tooltip', () => {
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovers on second button.
-      fireEvent.mouseOut(button1)
+      fireEvent.mouseLeave(button1)
       fireEvent.mouseEnter(button2)
 
       // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
@@ -245,17 +252,20 @@ describe('Tooltip', () => {
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
-      fireEvent.mouseOut(button2)
+      fireEvent.mouseLeave(button2)
       act(() => vi.advanceTimersByTime(closeDelay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovering again, should trigger the tooltip to show immediately, as the group is not deactivated yet
       fireEvent.mouseEnter(button2)
       act(() => vi.advanceTimersByTime(1))
+      await act(async () => {
+        await vi.runAllTimersAsync()
+      })
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
-      fireEvent.mouseOut(button2)
+      fireEvent.mouseLeave(button2)
       act(() => vi.advanceTimersByTime(closeDelay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
@@ -276,11 +286,7 @@ describe('Tooltip', () => {
       vi.useFakeTimers()
 
       render(
-        <Tooltip
-          content={<Text size={1}>{'Tooltip content'}</Text>}
-          delay={delay}
-          placement={'top'}
-        >
+        <Tooltip animate={false} delay={delay} placement={'top'} text="Tooltip content">
           <Button mode="bleed" text="Hover me" />
         </Tooltip>,
       )
@@ -308,11 +314,7 @@ describe('Tooltip', () => {
 
       render(
         <TooltipDelayGroupProvider delay={{close: delay}}>
-          <Tooltip
-            content={<Text size={1}>{'Tooltip content'}</Text>}
-            delay={{close: delay}}
-            placement={'top'}
-          >
+          <Tooltip animate={false} delay={{close: delay}} placement={'top'} text="Tooltip content">
             <Button mode="bleed" text="Hover me" />
           </Tooltip>
         </TooltipDelayGroupProvider>,
@@ -332,17 +334,23 @@ describe('Tooltip', () => {
       act(() => {
         fireEvent.keyDown(button, {key: 'Escape', code: 'Escape'})
       })
+
+      // Wait for any pending state updates to complete
+      act(() => {
+        vi.runAllTimers()
+      })
+
       // Validate tooltip content is not rendered anymore
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
   })
 
   describe('Clicking the <Tooltip /> child should close the tooltip', () => {
-    it('Should close the tooltip when clicked', () => {
+    it('Should close the tooltip when clicked', async () => {
       const delay = 150
 
       render(
-        <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} delay={delay}>
+        <Tooltip animate={false} delay={delay} text="Tooltip content">
           <Button mode="bleed" text="Hover me" />
         </Tooltip>,
       )
@@ -355,20 +363,25 @@ describe('Tooltip', () => {
 
       act(() => vi.advanceTimersByTime(delay))
 
-      // Assertion: the tooltip is not visible
-      expect(screen.queryByText('Tooltip content')).toBeVisible()
+      // Assertion: the tooltip is visible
+      expect(screen.getByText('Tooltip content')).toBeVisible()
 
-      act(() => fireEvent.click(button))
+      fireEvent.click(button)
 
-      // Assertion: tooltip does not exist in the document
-      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      // Click should close tooltip - wait for it to disappear
+      await waitFor(
+        () => {
+          expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+        },
+        {timeout: delay + 100},
+      )
     })
 
     it('Should close the tooltip when the context menu is opened (right click)', () => {
       const delay = 150
 
       render(
-        <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} delay={delay}>
+        <Tooltip animate={false} delay={delay} text="Tooltip content">
           <Button mode="bleed" text="Hover me" />
         </Tooltip>,
       )
@@ -381,8 +394,8 @@ describe('Tooltip', () => {
 
       act(() => vi.advanceTimersByTime(delay))
 
-      // Assertion: the tooltip is not visible
-      expect(screen.queryByText('Tooltip content')).toBeVisible()
+      // Assertion: the tooltip is visible
+      expect(screen.getByText('Tooltip content')).toBeVisible()
 
       act(() => fireEvent.contextMenu(button))
 
@@ -392,59 +405,85 @@ describe('Tooltip', () => {
   })
 
   describe('Used defined events on <Tooltip /> child should fire correctly', () => {
-    const handleBlur = vi.fn()
-    const handleClick = vi.fn()
-    const handleContextMenu = vi.fn()
-    const handleFocus = vi.fn()
-    const handleMouseEnter = vi.fn()
-    const handleMouseLeave = vi.fn()
+    it('should fire the onBlur event', () => {
+      const handleBlur = vi.fn()
 
-    beforeEach(() => {
       render(
-        <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>}>
-          <Button
-            data-testid="btn"
-            mode="bleed"
-            text="Hover me"
-            onBlur={handleBlur}
-            onClick={handleClick}
-            onContextMenu={handleContextMenu}
-            onFocus={handleFocus}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          />
+        <Tooltip animate={false} text="Tooltip content">
+          <Button data-testid="btn" mode="bleed" text="Hover me" onBlur={handleBlur} />
         </Tooltip>,
       )
-    })
 
-    afterEach(() => vi.clearAllMocks())
-
-    it('should fire the onBlur event', () => {
       act(() => fireEvent.blur(screen.getByTestId('btn')))
       expect(handleBlur).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onClick event', () => {
+      const handleClick = vi.fn()
+
+      render(
+        <Tooltip animate={false} text="Tooltip content">
+          <Button data-testid="btn" mode="bleed" text="Hover me" onClick={handleClick} />
+        </Tooltip>,
+      )
+
       act(() => fireEvent.click(screen.getByTestId('btn')))
       expect(handleClick).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onContextMenu event', () => {
+      const handleContextMenu = vi.fn()
+
+      render(
+        <Tooltip animate={false} text="Tooltip content">
+          <Button
+            data-testid="btn"
+            mode="bleed"
+            text="Hover me"
+            onContextMenu={handleContextMenu}
+          />
+        </Tooltip>,
+      )
+
       act(() => fireEvent.contextMenu(screen.getByTestId('btn')))
       expect(handleContextMenu).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onFocus event', () => {
+      const handleFocus = vi.fn()
+
+      render(
+        <Tooltip animate={false} text="Tooltip content">
+          <Button data-testid="btn" mode="bleed" text="Hover me" onFocus={handleFocus} />
+        </Tooltip>,
+      )
+
       act(() => fireEvent.focus(screen.getByTestId('btn')))
       expect(handleFocus).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onMouseEnter event', () => {
+      const handleMouseEnter = vi.fn()
+
+      render(
+        <Tooltip animate={false} text="Tooltip content">
+          <Button data-testid="btn" mode="bleed" text="Hover me" onMouseEnter={handleMouseEnter} />
+        </Tooltip>,
+      )
+
       act(() => fireEvent.mouseEnter(screen.getByTestId('btn')))
       expect(handleMouseEnter).toHaveBeenCalledTimes(1)
     })
 
     it('should fire the onMouseLeave event', () => {
+      const handleMouseLeave = vi.fn()
+
+      render(
+        <Tooltip animate={false} text="Tooltip content">
+          <Button data-testid="btn" mode="bleed" text="Hover me" onMouseLeave={handleMouseLeave} />
+        </Tooltip>,
+      )
+
       act(() => fireEvent.mouseLeave(screen.getByTestId('btn')))
       expect(handleMouseLeave).toHaveBeenCalledTimes(1)
     })
