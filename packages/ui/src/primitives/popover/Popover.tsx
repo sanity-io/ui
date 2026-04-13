@@ -1,15 +1,4 @@
-import {
-  arrow,
-  autoPlacement,
-  autoUpdate,
-  flip,
-  hide,
-  type Middleware,
-  offset,
-  type RootBoundary,
-  shift,
-  useFloating,
-} from '@floating-ui/react-dom'
+import {autoUpdate, type RootBoundary, useFloating} from '@floating-ui/react-dom'
 import {type MaxWidth, popover as popoverCss, type ResponsiveProp} from '@sanity/ui-css'
 import {AnimatePresence} from 'motion/react'
 import {
@@ -26,39 +15,35 @@ import {
 } from 'react'
 
 import {Z_OFFSETS} from '../../core/constants'
-import {_getResponsiveProp} from '../../core/helpers/props'
-import type {ComponentType, Placement, Props} from '../../core/types'
+import type {Assign, Placement} from '../../core/types'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {origin} from '../../middleware/origin'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
 import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
-import {type LayerOwnProps} from '../layer/Layer'
 import {useLayer} from '../layer/useLayer'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
   DEFAULT_POPOVER_DISTANCE,
   DEFAULT_POPOVER_MARGINS,
-  DEFAULT_POPOVER_PADDING,
 } from './constants'
-import {size} from './floating-ui/size'
-import {PopoverLayer} from './PopoverLayer'
+import {PopoverLayer, type PopoverLayerOwnProps, type PopoverLayerProps} from './PopoverLayer'
 import type {PopoverMargins, PopoverUpdateCallback} from './types'
+import {useMiddleware} from './useMiddleware'
 
 /** @public */
-export const DEFAULT_POPOVER_ELEMENT = 'div'
-
-/** @public */
-export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
+export type PopoverOwnProps = Omit<PopoverLayerOwnProps, 'maxWidth'> & {
   /** @beta */
-  __unstable_margins?: PopoverMargins
+  __unstable_distance?: number
   /**
-   * Whether the popover should animate in and out.
-   *
    * @beta
-   * @defaultValue false
+   * @deprecated Will be removed in the next major version */
+  __unstable_margins?: PopoverMargins
+  /** @beta */
+  __unstable_shift?: number
+  /**
+   * @public
+   * @deprecated Will be removed in the next major version
    */
-  animate?: boolean
   arrow?: boolean
   children?: ReactElement<{ref: ForwardedRef<HTMLElement>}>
   /**
@@ -120,13 +105,10 @@ export type PopoverOwnProps = Omit<LayerOwnProps, 'maxWidth'> & {
 }
 
 /** @public */
-export type PopoverElementType = 'div' | ComponentType
+export type PopoverElementType = 'div'
 
 /** @public */
-export type PopoverProps<E extends PopoverElementType = PopoverElementType> = Props<
-  PopoverOwnProps,
-  E
->
+export type PopoverProps = Assign<PopoverLayerProps, PopoverOwnProps>
 
 function ViewportOverlay() {
   const {zIndex} = useLayer()
@@ -149,14 +131,15 @@ function ViewportOverlay() {
  *
  * @public
  */
-export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_ELEMENT>(
-  props: PopoverProps<E>,
-): React.JSX.Element {
+export function Popover(props: PopoverProps): React.JSX.Element {
   const {
-    __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
+    // Remove `__unstable_margins` prop in next major version
+    __unstable_margins: _margins = DEFAULT_POPOVER_MARGINS,
+    __unstable_distance: distance = DEFAULT_POPOVER_DISTANCE,
+    __unstable_shift: shift = 0,
     animate: _animate = false,
-    arrow: arrowProp = false,
-    as: as = DEFAULT_POPOVER_ELEMENT,
+    // Remove `arrow` prop in next major version
+    arrow: _arrow,
     children: childProp,
     className,
     constrainSize = false,
@@ -170,22 +153,20 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
     open,
     overflow = 'hidden',
     padding,
-    placement: placementProp = 'bottom',
+    placement: placement = 'bottom',
     placementStrategy = 'flip',
-    portal,
+    portal = true,
     preventOverflow = true,
-    radius = 3,
+    radius = 4,
     ref: forwardedRef,
     referenceBoundary: _referenceBoundary,
     referenceElement,
-    scheme,
     shadow = 3,
-    tone,
     width: widthProp = 'auto',
-    zOffset: zOffsetProp = Z_OFFSETS.popover,
+    zOffset = Z_OFFSETS.popover,
     updateRef,
     ...rest
-  } = props as PopoverProps<typeof DEFAULT_POPOVER_ELEMENT>
+  } = props
   const fallbackPlacements =
     _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
   const floatingBoundary = _floatingBoundary ?? use(BoundaryElementContext)
@@ -193,9 +174,9 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
 
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
-  const zOffset = _getResponsiveProp(zOffsetProp)
+
   const ref = useRef<HTMLDivElement | null>(null)
-  const arrowRef = useRef<HTMLDivElement | null>(null)
+
   const rootBoundary: RootBoundary = 'viewport'
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
@@ -205,24 +186,23 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
 
   const middleware = useMiddleware({
     animate,
-    arrowProp,
-    arrowRef,
     constrainSize,
+    distance,
     fallbackPlacements,
     floatingBoundary,
-    margins,
     matchReferenceWidth,
-    placementProp,
+    placement,
     placementStrategy,
     preventOverflow,
     referenceBoundary,
     referenceWidthRef,
     rootBoundary,
+    shift,
   })
 
-  const {x, y, middlewareData, placement, refs, strategy, update} = useFloating({
+  const {x, y, middlewareData, refs, strategy, update} = useFloating({
     middleware,
-    placement: placementProp,
+    placement: placement,
     whileElementsMounted: autoUpdate,
     elements: referenceElement
       ? {
@@ -272,9 +252,7 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
       <PopoverLayer
         {...rest}
         ref={setFloating}
-        __unstable_margins={margins}
         animate={animate}
-        as={as}
         className={popoverCss({className})}
         hidden={referenceHidden}
         maxWidth={widthProp}
@@ -282,12 +260,9 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
         originY={originY}
         overflow={overflow}
         padding={padding}
-        placement={placement}
         radius={radius}
-        scheme={scheme}
         shadow={shadow}
         strategy={strategy}
-        tone={tone}
         x={x}
         y={y}
         zOffset={zOffset}
@@ -314,129 +289,4 @@ export function Popover<E extends PopoverElementType = typeof DEFAULT_POPOVER_EL
       {child}
     </>
   )
-}
-
-function useMiddleware({
-  animate,
-  arrowProp,
-  arrowRef,
-  constrainSize,
-  fallbackPlacements,
-  floatingBoundary,
-  margins,
-  matchReferenceWidth,
-  placementProp,
-  placementStrategy,
-  preventOverflow,
-  referenceBoundary,
-  referenceWidthRef,
-  rootBoundary,
-}: {
-  animate: boolean
-  arrowProp: boolean
-  arrowRef: React.RefObject<HTMLDivElement | null>
-  constrainSize: boolean
-  fallbackPlacements: Placement[]
-  floatingBoundary: HTMLElement | null
-  margins: PopoverMargins
-  matchReferenceWidth: boolean | undefined
-  placementProp: Placement
-  placementStrategy: 'flip' | 'autoPlacement'
-  preventOverflow: boolean
-  referenceBoundary: HTMLElement | null
-  referenceWidthRef: React.RefObject<number | undefined>
-  rootBoundary: RootBoundary
-}) {
-  return useMemo(() => {
-    const ret: Middleware[] = []
-
-    // Flip the floating element when leaving the boundary box
-    if (constrainSize || preventOverflow) {
-      if (placementStrategy === 'autoPlacement') {
-        ret.push(
-          autoPlacement({
-            allowedPlacements: [placementProp].concat(fallbackPlacements),
-          }),
-        )
-      } else {
-        ret.push(
-          flip({
-            boundary: floatingBoundary || undefined,
-            fallbackPlacements,
-            padding: DEFAULT_POPOVER_PADDING,
-            rootBoundary,
-          }),
-        )
-      }
-    }
-
-    // Define distance between reference and floating element
-    ret.push(offset({mainAxis: DEFAULT_POPOVER_DISTANCE}))
-
-    // Track sizes
-    if (constrainSize || matchReferenceWidth) {
-      ret.push(
-        size({
-          boundaryElement: floatingBoundary || undefined,
-          constrainSize,
-          margins,
-          matchReferenceWidth,
-          padding: DEFAULT_POPOVER_PADDING,
-          referenceWidthRef,
-        }),
-      )
-    }
-
-    // Shift the popover so its sits within the boundary element
-    if (preventOverflow) {
-      ret.push(
-        shift({
-          boundary: floatingBoundary || undefined,
-          rootBoundary,
-          padding: DEFAULT_POPOVER_PADDING,
-        }),
-      )
-    }
-
-    // Place arrow
-    if (arrowProp) {
-      ret.push(
-        arrow({
-          element: arrowRef,
-          padding: DEFAULT_POPOVER_PADDING,
-        }),
-      )
-    }
-
-    // Determine the origin to scale from.
-    // Must be placed after `@sanity/ui/size` and `shift` middleware.
-    if (animate) {
-      ret.push(origin)
-    }
-
-    ret.push(
-      hide({
-        boundary: referenceBoundary || undefined,
-        padding: DEFAULT_POPOVER_PADDING,
-        strategy: 'referenceHidden',
-      }),
-    )
-
-    return ret
-  }, [
-    animate,
-    arrowProp,
-    arrowRef,
-    constrainSize,
-    fallbackPlacements,
-    floatingBoundary,
-    margins,
-    matchReferenceWidth,
-    placementProp,
-    placementStrategy,
-    preventOverflow,
-    referenceBoundary,
-    referenceWidthRef,
-    rootBoundary,
-  ])
 }

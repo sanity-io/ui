@@ -64,7 +64,7 @@ export type AutocompleteOwnProps<O extends BaseAutocompleteOption = BaseAutocomp
     /** The options to render. */
     options?: O[]
     padding?: ResponsiveProp<Space>
-    popover?: Omit<PopoverProps<'div'>, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
+    popover?: Omit<PopoverProps, 'content' | 'onMouseEnter' | 'onMouseLeave' | 'open'>
     prefix?: ReactNode
     radius?: Radius | Radius[]
     /** @beta */

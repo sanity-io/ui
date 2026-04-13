@@ -1,44 +1,41 @@
 import type {Strategy} from '@floating-ui/react-dom'
 import {popover_card} from '@sanity/ui-css'
-import {motion} from 'motion/react'
-import {type CSSProperties, useMemo} from 'react'
+import {type HTMLMotionProps, motion} from 'motion/react'
+import {useMemo} from 'react'
 
 import {POPOVER_MOTION_PROPS} from '../../core/constants'
-import type {Placement} from '../../core/types'
+import type {Assign} from '../../core/types'
 import {Flex} from '../flex/Flex'
-import {Layer, type LayerOwnProps, type LayerProps} from '../layer/Layer'
-import {DEFAULT_POPOVER_MARGINS} from './constants'
-import type {PopoverMargins} from './types'
+import {Layer, type LayerOwnProps} from '../layer/Layer'
 
 /** @internal */
-export const DEFAULT_POPOVER_LAYER_ELEMENT = 'div'
-
-/** @internal */
-export type PopoverLayerOwnProps = LayerOwnProps & {
-  /** @beta*/
-  __unstable_margins?: PopoverMargins
+export interface PopoverLayerOwnProps extends LayerOwnProps {
+  /**
+   * Whether the popover should animate in and out.
+   *
+   * @beta
+   * @defaultValue false
+   */
   animate?: boolean
+  children?: React.ReactNode
   originX?: number
   originY?: number
-  placement: Placement
   referenceWidth?: number
-  strategy: Strategy
-  x: number | null
-  y: number | null
+  strategy?: Strategy
+  x?: number
+  y?: number
 }
 
-/** @internal */
-export type PopoverLayerProps = PopoverLayerOwnProps & LayerProps<'div'>
+/** @public */
+export type PopoverLayerProps = Assign<HTMLMotionProps<'div'>, PopoverLayerOwnProps>
 
 /** @internal */
 export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
   const {
-    __unstable_margins: marginsProp,
-    animate,
+    animate = false,
     children,
     maxWidth,
     padding,
-    placement,
     originX,
     originY,
     overflow,
@@ -47,23 +44,13 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
     shadow,
     strategy,
     style,
-    tone,
-    x: xProp,
-    y: yProp,
+    tone = 'inherit',
+    x,
+    y,
     ...rest
   } = props
 
-  // Get margins: [top, right, bottom, left]
-  const margins: PopoverMargins = useMemo(
-    () => marginsProp || DEFAULT_POPOVER_MARGINS,
-    [marginsProp],
-  )
-
-  // Translate according to margins
-  const x = (xProp ?? 0) + margins[3]
-  const y = (yProp ?? 0) + margins[0]
-
-  const rootStyle: CSSProperties = useMemo(
+  const rootStyle = useMemo(
     () => ({
       left: x,
       originX,
@@ -77,15 +64,12 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
   )
 
   return (
-    // @ts-expect-error - TODO: fix this
     <Layer
       className={popover_card()}
       data-ui="Popover"
       {...rest}
       animate={animate ? ['visible', 'scaleIn'] : undefined}
       as={motion.div}
-      data-context-tone={tone}
-      data-placement={placement}
       display="flex"
       exit={animate ? ['hidden', 'scaleOut'] : undefined}
       flexDirection="column"
@@ -105,6 +89,8 @@ export function PopoverLayer(props: PopoverLayerProps): React.JSX.Element {
         flex={1}
         maxWidth={maxWidth}
         overflow={overflow}
+        radius={radius}
+        tabIndex={-1}
       >
         <Flex direction="column" flex={1} padding={padding}>
           {children}
