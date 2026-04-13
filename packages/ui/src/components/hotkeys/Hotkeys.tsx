@@ -33,6 +33,13 @@ export type HotkeysProps<E extends HotkeysElementType = HotkeysElementType> = Pr
 /**
  * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.
  *
+ * @example
+ * ```tsx
+ * import {Hotkeys} from '@sanity/ui'
+ *
+ * <Hotkeys keys={['⌘', 'K']} />
+ * ```
+ *
  * @public
  */
 export function Hotkeys<E extends HotkeysElementType = typeof DEFAULT_HOTKEYS_ELEMENT>(
