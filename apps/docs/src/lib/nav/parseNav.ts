@@ -5,7 +5,10 @@ import {NavNode} from './types'
 
 export function parseNav(item: WrappedValue<NavData>, basePath: string[]): NavNode {
   const children = item.items
-    ? item.items.map((i: any) => parseNav(i, basePath.concat(item.segment?.value || '')))
+    ? item.items.map(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (i: any) => parseNav(i, basePath.concat(item.segment?.value || '')),
+      )
     : []
 
   return {

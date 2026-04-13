@@ -1,11 +1,15 @@
 import {wrapData, WrappedValue} from '@sanity/react-loader/jsx'
+import {SpeedInsights} from '@vercel/speed-insights/next'
 import {Metadata} from 'next'
-import {draftMode} from 'next/headers'
+import {VisualEditing} from 'next-sanity/visual-editing'
 import {PropsWithChildren} from 'react'
 
+import {basePath} from '@/env'
 import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
+import {datasets, projectId} from '@/sanity/env'
 
 import {DEFAULT_META_DESCRIPTION, DEFAULT_META_OG_IMAGE} from './constants'
+import {DisableDraftMode} from './DisableDraftMode'
 import {RootLayout} from './RootLayout'
 import {getContext} from './context'
 
@@ -31,7 +35,10 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayoutLoader(props: PropsWithChildren) {
-  const {dataset, initialScheme, projectId, studioBaseUrl, sanityFetch} = await getContext()
+  const {children, ...restProps} = props
+
+  const {env, initialScheme, isDraftMode, perspective, studioBaseUrl, sanityFetch, SanityLive} =
+    await getContext()
 
   const result = await sanityFetch({
     query: GLOBAL_QUERY,
@@ -50,14 +57,21 @@ export default async function RootLayoutLoader(props: PropsWithChildren) {
 
   return (
     <RootLayout
-      {...props}
+      {...restProps}
       data={data}
-      dataset={dataset}
-      draftMode={(await draftMode()).isEnabled}
+      env={env}
+      dataset={datasets[env]}
+      perspective={perspective}
       hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
       initialScheme={initialScheme}
       projectId={projectId}
       studioBaseUrl={studioBaseUrl}
-    />
+    >
+      {isDraftMode && <DisableDraftMode />}
+      {isDraftMode && <VisualEditing basePath={basePath} />}
+      {children}
+      <SanityLive />
+      <SpeedInsights />
+    </RootLayout>
   )
 }

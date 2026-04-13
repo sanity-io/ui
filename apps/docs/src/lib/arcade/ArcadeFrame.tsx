@@ -14,6 +14,7 @@ export function ArcadeFrame({
   const {basePath = '', colorScheme} = useApp()
   const [frame, setFrame] = useState<HTMLIFrameElement | null>(null)
   const [ready, setReady] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const msgQueueRef = useRef<any[]>([])
 
   // Handle messages from frame
@@ -48,6 +49,7 @@ export function ArcadeFrame({
   }, [frame])
 
   const postMessage = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (msg: any) => {
       if (!frame) return
 

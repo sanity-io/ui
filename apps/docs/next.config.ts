@@ -3,7 +3,6 @@ import type {NextConfig} from 'next'
 
 const withVanillaExtract = createVanillaExtractPlugin()
 
-/** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
   basePath: process.env.BASE_PATH,
   devIndicators: false,

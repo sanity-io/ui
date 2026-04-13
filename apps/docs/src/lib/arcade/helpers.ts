@@ -14,6 +14,7 @@ export function getArcadeQuery(params: ArcadeQueryParams): Record<string, string
   return query
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function tryDecode(encoded: unknown): any {
   if (typeof encoded === 'string') {
     try {

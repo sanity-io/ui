@@ -18,7 +18,7 @@ export function Canvas({
 }): ReactNode {
   if (result && result.type === 'success') {
     return (
-      <Card height="fill" overflow="auto" shadow={shadow} sizing="border" tone="transparent">
+      <Card height="fill" overflow="auto" shadow={shadow} sizing="border">
         <ErrorBoundary onCatch={onCatch}>{result.node}</ErrorBoundary>
       </Card>
     )

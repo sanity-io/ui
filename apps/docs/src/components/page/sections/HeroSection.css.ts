@@ -4,7 +4,7 @@ export const backgroundBox = style({
   position: 'absolute',
   width: '100%',
   height: '400px',
-  maxHeight: '50vh',
+  // maxHeight: '50vh',
   backgroundSize: 'contain',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center center',

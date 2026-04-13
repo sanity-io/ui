@@ -2,19 +2,7 @@
 
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {sanity} from '@sanity/react-loader/jsx'
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  // Inline,
-  Stack,
-  Text,
-  useCard,
-} from '@sanity/ui'
+import {Box, Button, Card, Container, Flex, Grid, Heading, Stack, Text, useCard} from '@sanity/ui'
 import {ButtonMode, ElementTone} from '@sanity/ui/theme'
 import Link from 'next/link'
 import {ReactElement} from 'react'
@@ -32,8 +20,8 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
   const dark = useCard().scheme === 'dark'
 
   const backgroundImage = {
-    dark: data.backgroundImage?.dark && imageUrlBuilder.image(data.backgroundImage?.dark).url(),
-    light: data.backgroundImage?.light && imageUrlBuilder.image(data.backgroundImage?.light).url(),
+    dark: data.backgroundImage?.dark && imageUrlBuilder.image(data.backgroundImage.dark).url(),
+    light: data.backgroundImage?.light && imageUrlBuilder.image(data.backgroundImage.light).url(),
   }
 
   const backgroundImageUrl = dark ? backgroundImage.dark : backgroundImage.light
@@ -54,7 +42,7 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
         }}
       />
 
-      <Container width={0}>
+      <Container position="relative" width={0}>
         <Stack gap={[4, 4, 5]}>
           <Heading align="center" as="h1" size={[2, 3, 4, 5]}>
             <sanity.span>{data.headline}</sanity.span>

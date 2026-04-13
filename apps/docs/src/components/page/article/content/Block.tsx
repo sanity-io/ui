@@ -1,13 +1,13 @@
 'use client'
 
-import {PortableTextBlockComponent} from '@portabletext/react'
+import type {PortableTextBlockComponent} from '@portabletext/react'
 import {LinkIcon} from '@sanity/icons'
 import {unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Heading} from '@sanity/ui'
 import {useContext} from 'react'
 
 import {blocksToText} from '@/lib/blocksToText'
-import {SanityBlockValue} from '@/lib/sanity/types'
+import type {SanityBlockValue} from '@/lib/sanity/types'
 
 import {ArticleHeadingsContext} from '../ArticleHeadingsContext'
 import {ListItem} from './ListItem'
@@ -34,6 +34,7 @@ export const Block: PortableTextBlockComponent = (props) => {
   }
 
   if (style === 'h2') {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const text = blocksToText([unwrapData(value as any) as unknown as SanityBlockValue])
     const heading = headings.find((t) => t.text === text)
 
@@ -55,6 +56,7 @@ export const Block: PortableTextBlockComponent = (props) => {
   }
 
   if (style === 'h3') {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const text = blocksToText([unwrapData(value as any) as unknown as SanityBlockValue])
     const heading = headings.find((t) => t.text === text)
 

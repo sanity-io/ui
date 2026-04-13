@@ -20,8 +20,9 @@
     "test": "turbo test -- --run",
     "test:e2e": "turbo test:e2e",
     "typecheck": "turbo typecheck",
-    "workshop:build": "(cd packages/ui && pnpm workshop:build) && cpx 'packages/ui/.workshop/dist/**' dist/",
-    "workshop:preview": "cd packages/ui && pnpm workshop:preview"
+    "workshop:build": "pnpm --filter ./packages/ui workshop:build && cpx 'packages/ui/.workshop/dist/**' dist/",
+    "workshop:dev": "pnpm --filter ./packages/ui workshop:dev",
+    "workshop:preview": "pnpm --filter ./packages/ui workshop:preview"
   },
   "commitlint": {
     "extends": [

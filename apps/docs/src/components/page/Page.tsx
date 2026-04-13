@@ -41,18 +41,6 @@ export function Page(props: PageProps) {
     )
   }
 
-  if (pageNav) {
-    return (
-      <Layout path={path}>
-        <ArticlePage
-          article={(data?._type === 'article' ? data : undefined) as any}
-          nav={pageNav}
-          path={path}
-        />
-      </Layout>
-    )
-  }
-
   if (!data) {
     return (
       <Layout path={path}>
@@ -66,6 +54,19 @@ export function Page(props: PageProps) {
   }
 
   if (data._type === 'article') {
+    if (pageNav) {
+      return (
+        <Layout path={path}>
+          <ArticlePage
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            article={(data?._type === 'article' ? data : undefined) as any}
+            nav={pageNav}
+            path={path}
+          />
+        </Layout>
+      )
+    }
+
     return (
       <Layout path={path}>
         <ArticlePage article={data} nav={pageNav} path={path} />

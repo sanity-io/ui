@@ -13,6 +13,7 @@ export type EvalComponentResult = EvalComponentSuccessResult | EvalComponentErro
 export function evalComponent(opts: {
   hookCode: string
   jsxCode: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   scope: Record<string, any>
 }): EvalComponentResult {
   const code = [
@@ -31,6 +32,7 @@ export function evalComponent(opts: {
   ].join('\n')
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const babelResult = (window as any).Babel.transform(code, {
       presets: ['env', 'react'],
     })
@@ -47,10 +49,12 @@ export function evalComponent(opts: {
 
 const hasProp = {}.hasOwnProperty
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function scopeEval(source: string, scope: Record<string, any>) {
   const keys: string[] = []
   const values = []
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let value: any
 
   for (const key in scope) {

@@ -30,6 +30,7 @@ export interface CodeExampleData {
 
 export interface CalloutData {
   _type: 'callout'
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   content: any[] | null
   icon: IconSymbol | null
   tone: CardTone | null
