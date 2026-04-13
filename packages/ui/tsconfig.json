@@ -16,8 +16,9 @@
     "./workshop.runtime.ts"
   ],
   "compilerOptions": {
-    "rootDir": ".",
+    "rootDir": "..",
     "outDir": "./dist/types",
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
 
     "esModuleInterop": true,
     "noEmit": true,
@@ -28,7 +29,13 @@
       "$workshop": ["./workshop"],
 
       "@sanity/ui": ["./exports/index.ts"],
-      "@sanity/ui/*": ["./exports/*"]
+      "@sanity/ui/*": ["./exports/*"],
+      "@sanity/ui-css": ["../ui-css/exports/index.ts"],
+      "@sanity/ui-css/*": ["../ui-css/exports/*.ts"],
+      "@sanity/ui-tokens": ["../ui-tokens/exports/index.ts"],
+      "@sanity/ui-tokens/*": ["../ui-tokens/exports/*.ts"],
+      "@sanity/ui-workshop": ["../ui-workshop/exports/index.ts"],
+      "@sanity/ui-workshop/*": ["../ui-workshop/exports/*.ts"]
     }
   }
 }
