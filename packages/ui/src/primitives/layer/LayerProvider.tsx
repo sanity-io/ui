@@ -30,7 +30,7 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const zOffset = _getResponsiveProp(zOffsetProp)
 
   // Get responsive z-index value
-  const maxMediaIndex = Object.values(zOffset).length - 1
+  const maxMediaIndex = zOffset.length - 1
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex) as Breakpoint
   const zIndex = parent ? parent.zIndex + (zOffset[mediaIndex] ?? 0) : (zOffset[mediaIndex] ?? 0)
 
