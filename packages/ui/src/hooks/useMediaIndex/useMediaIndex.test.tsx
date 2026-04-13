@@ -16,6 +16,6 @@ describe('useMediaIndex', () => {
     expect(renderToStaticMarkup(<Log />)).toBe('mediaIndex: 0')
   })
   it(`SSR to markup for hydration doesn't throw`, () => {
-    expect(renderToString(<Log />)).toMatchInlineSnapshot(`"mediaIndex: <!-- -->0"`)
+    expect(renderToString(<Log />)).toBe('mediaIndex: <!-- -->0')
   })
 })

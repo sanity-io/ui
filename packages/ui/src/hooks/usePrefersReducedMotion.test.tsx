@@ -15,6 +15,6 @@ describe('usePrefersReducedMotion', () => {
     expect(renderToStaticMarkup(<Log />)).toBe('prefers-motion: false')
   })
   it(`SSR to markup for hydration doesn't throw`, () => {
-    expect(renderToString(<Log />)).toMatchInlineSnapshot(`"prefers-motion: <!-- -->false"`)
+    expect(renderToString(<Log />)).toBe('prefers-motion: <!-- -->false')
   })
 })
