@@ -114,7 +114,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
   props: TooltipProps<E>,
 ): React.JSX.Element {
   const {
-    animate: _animate = false,
+    animate: animateProp = true,
     arrow: _arrow,
     as = DEFAULT_TOOLTIP_ELEMENT,
     boundaryElement: _boundaryElement,
@@ -146,7 +146,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
     _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
 
   const prefersReducedMotion = usePrefersReducedMotion()
-  const animate = prefersReducedMotion ? false : _animate
+  const animate = prefersReducedMotion ? false : animateProp
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
