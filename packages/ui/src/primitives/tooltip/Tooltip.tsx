@@ -32,12 +32,12 @@ import {
 
 import {Hotkeys} from '../../components/hotkeys/Hotkeys'
 import {Z_OFFSETS} from '../../core/constants'
+import {getElementRef} from '../../core/getElementRef'
 import type {ComponentType, Delay, Placement, Props} from '../../core/types'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {useUnique} from '../../hooks/useUnique'
 import {origin} from '../../middleware/origin'
 import {BoundaryElementContext} from '../../utils/boundaryElement/BoundaryElementContext'
-import {getElementRef} from '../../utils/getElementRef'
 import {Portal} from '../../utils/portal/Portal'
 import {PortalContext} from '../../utils/portal/PortalContext'
 import {assertPortalContext} from '../../utils/portal/usePortal'
