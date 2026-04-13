@@ -1,4 +1,4 @@
-import type {DTCGShadowToken, DTCGShadowValue} from '@sanity/ui-tokens/system'
+import type {DTCGShadowToken, DTCGShadowValue} from '@sanity/ui-tokens'
 
 import {getFigmaDimensionValue} from '../converters/dimension'
 import type {SanityFigmaShadowStyleNode} from '../types/styles'

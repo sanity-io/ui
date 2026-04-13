@@ -5,7 +5,7 @@ import type {
   SanityNumberToken,
   TokenLeaf,
   TokenTree,
-} from '@sanity/ui-tokens/system'
+} from '@sanity/ui-tokens'
 
 import {getFigmaColorValue} from '../converters/color'
 import {getFigmaDimensionValue} from '../converters/dimension'
