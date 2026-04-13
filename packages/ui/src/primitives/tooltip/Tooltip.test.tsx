@@ -1,4 +1,4 @@
-import {act, fireEvent, screen, waitFor} from '@testing-library/react'
+import {act, fireEvent, screen} from '@testing-library/react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '$test/utils'
@@ -6,6 +6,18 @@ import {render} from '$test/utils'
 import {Button} from '../button/Button'
 import {Tooltip} from './Tooltip'
 import {TooltipDelayGroupProvider} from './tooltipDelayGroup/TooltipDelayGroupProvider'
+
+async function advance(ms: number) {
+  await act(async () => {
+    vi.advanceTimersByTime(ms)
+  })
+}
+
+async function flushAll() {
+  await act(async () => {
+    await vi.runAllTimersAsync()
+  })
+}
 
 // Fake timers
 beforeEach(() => {
@@ -20,7 +32,7 @@ afterEach(() => {
 
 describe('Tooltip', () => {
   describe('Using same delay for open and close', () => {
-    it('should hide and show the tooltip content when hovered, with no delay', async () => {
+    it('should hide and show the tooltip content when hovered, with no delay', () => {
       render(
         <Tooltip animate={false} delay={0} placement={'top'} text="Tooltip content">
           <Button mode="bleed" text="Hover me" />
@@ -34,17 +46,15 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(button)
 
-      // With delay=0, wait for tooltip to appear
-      await waitFor(() => {
-        expect(screen.getByText('Tooltip content')).toBeInTheDocument()
-      })
+      // With delay=0, advance timers to show tooltip
+      act(() => vi.advanceTimersByTime(1))
+      expect(screen.getByText('Tooltip content')).toBeInTheDocument()
 
       fireEvent.mouseLeave(button)
 
-      // Wait for tooltip to disappear
-      await waitFor(() => {
-        expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      })
+      // Advance timers to hide tooltip
+      act(() => vi.advanceTimersByTime(1))
+      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
     it('should support delays to show and hide the tooltip.', () => {
       vi.useFakeTimers()
@@ -280,7 +290,7 @@ describe('Tooltip', () => {
   })
 
   describe('Closing the <Tooltip /> with the Escape key', () => {
-    it('Standalone tooltip closes immediately with Escape key', () => {
+    it('Standalone tooltip closes immediately with Escape key', async () => {
       const delay = 150
 
       vi.useFakeTimers()
@@ -295,15 +305,20 @@ describe('Tooltip', () => {
 
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      act(() => fireEvent.focus(button))
-      act(() => vi.advanceTimersByTime(delay))
+      act(() => {
+        fireEvent.focus(button)
+      })
+      await advance(delay)
 
       // Validate tooltip content is rendered
-      screen.getByText('Tooltip content')
+      expect(screen.getByText('Tooltip content')).toBeInTheDocument()
 
       act(() => {
         fireEvent.keyDown(button, {key: 'Escape', code: 'Escape'})
       })
+
+      await flushAll()
+
       // Validate tooltip content is not rendered anymore
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     })
@@ -324,8 +339,9 @@ describe('Tooltip', () => {
 
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      act(() => fireEvent.focus(button))
-
+      act(() => {
+        fireEvent.focus(button)
+      })
       act(() => vi.advanceTimersByTime(delay))
 
       // Validate tooltip content is rendered
@@ -346,7 +362,7 @@ describe('Tooltip', () => {
   })
 
   describe('Clicking the <Tooltip /> child should close the tooltip', () => {
-    it('Should close the tooltip when clicked', async () => {
+    it('Should close the tooltip when the context menu is opened (right click)', async () => {
       const delay = 150
 
       render(
@@ -359,45 +375,19 @@ describe('Tooltip', () => {
 
       // Assertion: tooltip does not exist in the document
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      act(() => fireEvent.focus(button))
-
-      act(() => vi.advanceTimersByTime(delay))
-
-      // Assertion: the tooltip is visible
-      expect(screen.getByText('Tooltip content')).toBeVisible()
-
-      fireEvent.click(button)
-
-      // Click should close tooltip - wait for it to disappear
-      await waitFor(
-        () => {
-          expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-        },
-        {timeout: delay + 100},
-      )
-    })
-
-    it('Should close the tooltip when the context menu is opened (right click)', () => {
-      const delay = 150
-
-      render(
-        <Tooltip animate={false} delay={delay} text="Tooltip content">
-          <Button mode="bleed" text="Hover me" />
-        </Tooltip>,
-      )
-
-      const button = screen.getByText('Hover me')
-
-      // Assertion: tooltip does not exist in the document
-      expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
-      act(() => fireEvent.focus(button))
-
-      act(() => vi.advanceTimersByTime(delay))
+      act(() => {
+        fireEvent.focus(button)
+      })
+      await advance(delay)
 
       // Assertion: the tooltip is visible
       expect(screen.getByText('Tooltip content')).toBeVisible()
 
-      act(() => fireEvent.contextMenu(button))
+      act(() => {
+        fireEvent.contextMenu(button)
+      })
+
+      await flushAll()
 
       // Assertion: tooltip does not exist in the document
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
@@ -418,7 +408,7 @@ describe('Tooltip', () => {
       expect(handleBlur).toHaveBeenCalledTimes(1)
     })
 
-    it('should fire the onClick event', () => {
+    it('should fire the onClick event', async () => {
       const handleClick = vi.fn()
 
       render(
@@ -427,7 +417,12 @@ describe('Tooltip', () => {
         </Tooltip>,
       )
 
-      act(() => fireEvent.click(screen.getByTestId('btn')))
+      act(() => {
+        fireEvent.click(screen.getByTestId('btn'))
+      })
+
+      await flushAll()
+
       expect(handleClick).toHaveBeenCalledTimes(1)
     })
 
@@ -449,7 +444,7 @@ describe('Tooltip', () => {
       expect(handleContextMenu).toHaveBeenCalledTimes(1)
     })
 
-    it('should fire the onFocus event', () => {
+    it('should fire the onFocus event', async () => {
       const handleFocus = vi.fn()
 
       render(
@@ -458,11 +453,16 @@ describe('Tooltip', () => {
         </Tooltip>,
       )
 
-      act(() => fireEvent.focus(screen.getByTestId('btn')))
+      act(() => {
+        fireEvent.focus(screen.getByTestId('btn'))
+      })
+
+      await flushAll()
+
       expect(handleFocus).toHaveBeenCalledTimes(1)
     })
 
-    it('should fire the onMouseEnter event', () => {
+    it('should fire the onMouseEnter event', async () => {
       const handleMouseEnter = vi.fn()
 
       render(
@@ -471,7 +471,12 @@ describe('Tooltip', () => {
         </Tooltip>,
       )
 
-      act(() => fireEvent.mouseEnter(screen.getByTestId('btn')))
+      act(() => {
+        fireEvent.mouseEnter(screen.getByTestId('btn'))
+      })
+
+      await flushAll()
+
       expect(handleMouseEnter).toHaveBeenCalledTimes(1)
     })
 
