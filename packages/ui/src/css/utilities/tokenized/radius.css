@@ -1,10 +1,8 @@
-@breakpoints {
-  .sui-radius0 { border-radius: var(--radius-0); }
-  .sui-radius1 { border-radius: var(--radius-1); }
-  .sui-radius2 { border-radius: var(--radius-2); }
-  .sui-radius3 { border-radius: var(--radius-3); }
-  .sui-radius4 { border-radius: var(--radius-4); }
-  .sui-radius5 { border-radius: var(--radius-5); }
-  .sui-radius6 { border-radius: var(--radius-6); }
-  .sui-radius-round { border-radius: var(--radius-round); }
-}
+.sui-radius0 { border-radius: var(--radius-0); }
+.sui-radius1 { border-radius: var(--radius-1); }
+.sui-radius2 { border-radius: var(--radius-2); }
+.sui-radius3 { border-radius: var(--radius-3); }
+.sui-radius4 { border-radius: var(--radius-4); }
+.sui-radius5 { border-radius: var(--radius-5); }
+.sui-radius6 { border-radius: var(--radius-6); }
+.sui-radius-round { border-radius: var(--radius-round); }
