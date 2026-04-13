@@ -1,5 +1,4 @@
-import {code, CODE_STYLE_PROP_KEYS, type CodeStyleProps, type ResponsiveProp} from '@sanity/ui-css'
-import type {FontCodeSize} from '@sanity/ui-tokens'
+import {code, CODE_STYLE_PROP_KEYS, type CodeStyleProps} from '@sanity/ui-css'
 import {Suspense} from 'react'
 
 import {_splitKeys} from '../../core/_keys'
@@ -13,7 +12,6 @@ export const DEFAULT_CODE_ELEMENT = 'pre'
 export type CodeOwnProps = CodeStyleProps & {
   /** Define the language to use for syntax highlighting. */
   language?: string
-  size?: ResponsiveProp<FontCodeSize>
 }
 
 /** @public */
