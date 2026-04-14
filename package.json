@@ -10,23 +10,16 @@
     "changeset:publish": "changeset publish",
     "changeset:status": "changeset status",
     "changeset:version": "changeset version",
-    "commit": "cz",
     "dev": "turbo dev --ui=tui",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "turbo lint",
-    "prepare": "husky",
     "release": "changeset publish",
     "storybook:build": "(cd apps/storybook && pnpm build) && cpx 'apps/storybook/storybook-static/**' storybook/storybook-static/",
     "test": "turbo test -- --run",
     "test:e2e": "turbo test:e2e",
     "typecheck": "turbo typecheck --filter=./packages/*",
     "workshop:build": "pnpm --filter ./packages/ui workshop:build && cpx 'packages/ui/.workshop/dist/**' dist/"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
   },
   "lint-staged": {
     "*": [
@@ -36,15 +29,11 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.30.0",
-    "@commitlint/cli": "^20.5.0",
-    "@commitlint/config-conventional": "^20.5.0",
     "@sanity/pkg-utils": "^10.4.14",
     "@sanity/prettier-config": "^3.0.0",
     "@sanity/tsconfig": "^2.1.0",
     "@sanity/ui-workshop": "workspace:*",
-    "commitizen": "^4.3.1",
     "cpx": "^1.5.0",
-    "husky": "^9.1.7",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.8.2",
     "prettier-plugin-packagejson": "^3.0.2",
