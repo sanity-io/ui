@@ -8,6 +8,8 @@
   "ignore": [
     "@repo/*",
     "figma-sanity-ui-tokens-sync",
+    "sanity-ui-docs",
+    "sanity-ui-docs-studio",
     "sanity-ui-storybook",
     "sanity-ui-playground-*"
   ],
