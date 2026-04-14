@@ -577,7 +577,6 @@ export function Autocomplete<
     return (
       <Popover
         ref={resultsPopoverElementRef}
-        arrow={false}
         constrainSize
         content={content}
         fallbackPlacements={AUTOCOMPLETE_POPOVER_FALLBACK_PLACEMENTS}
