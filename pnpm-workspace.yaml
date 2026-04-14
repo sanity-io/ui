@@ -3,3 +3,15 @@ packages:
   - packages/@repo/*
   - packages/*
   - playground/*
+
+publicHoistPattern:
+  # This is needed for prettier to be able to use the plugin specified by the
+  # `@sanity/prettier-config` preset, as well as eslint plugins defined by `@repo/eslint-config`
+  - "*eslint*"
+  - "*prettier*"
+
+preferWorkspacePackages: true
+strictPeerDependencies: false
+linkWorkspacePackages: deep
+# https://github.com/cypress-io/github-action/blob/43c624e40c65c7c3a255a901d0a0a0a2040b7140/examples/basic-pnpm/.npmrc#L2C1-L2C25
+sideEffectsCache: false
