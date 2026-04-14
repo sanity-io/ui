@@ -1,9 +1,4 @@
-<!-- markdownlint-disable --><!-- textlint-disable -->
-
-# 📓 Changelog
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+# Changelog
 
 ## [4.0.0-static.46](https://github.com/sanity-io/ui/compare/v4.0.0-static.45...v4.0.0-static.46) (2025-11-25)
 
