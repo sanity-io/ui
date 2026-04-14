@@ -1,17 +1,11 @@
 {
   "extends": "@repo/typescript-config/base.json",
-  "include": [
-    //
-    "../dtcg/exports",
-    "./exports",
-    "./package.config.ts",
-    "./scripts",
-    "./src"
-  ],
+  "include": ["./exports", "./package.config.ts", "./scripts", "./src"],
   "exclude": ["./src/main/system.ts"],
   "compilerOptions": {
-    "rootDir": "..",
+    "rootDir": ".",
     "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
     "noEmit": true,
     "paths": {
       "@sanity/ui-tokens": ["./exports/index.ts"],
