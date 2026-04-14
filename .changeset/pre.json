@@ -5,7 +5,13 @@
     "@sanity/ui": "3.1.13",
     "@sanity/ui-css": "0.0.0",
     "@sanity/ui-tokens": "0.0.0",
-    "@sanity/ui-workshop": "3.4.0"
+    "@sanity/ui-workshop": "3.4.0",
+    "sanity-ui-docs": "2.0.0",
+    "figma-sanity-ui-tokens-sync": "0.0.0",
+    "@repo/eslint-config": "0.0.0",
+    "@repo/typescript-config": "0.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "free-icons-thank"
+  ]
 }
