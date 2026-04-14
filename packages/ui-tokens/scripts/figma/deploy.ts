@@ -2,6 +2,8 @@
 
 import 'dotenv-flow/config'
 
+import process from 'node:process'
+
 const FIGMA_BASE_URL = 'https://api.figma.com'
 const FIGMA_FILE_ID = 'Io4wkAmU0VhScVu8edUrBD'
 const FIGMA_TOKEN = process.env['FIGMA_TOKEN']

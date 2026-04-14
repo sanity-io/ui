@@ -3,6 +3,7 @@
 import {exec as execCallback} from 'node:child_process'
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import process from 'node:process'
 import {fileURLToPath} from 'node:url'
 import {promisify} from 'node:util'
 

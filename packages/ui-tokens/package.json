@@ -141,13 +141,13 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/pkg-utils": "^10.4.4",
+    "@sanity/pkg-utils": "^10.4.14",
     "@sanity/tsconfig": "^2.1.0",
-    "@types/node": "^24.10.13",
+    "@types/node": "^24.12.2",
     "dotenv-flow": "^4.1.0",
-    "eslint": "^9.39.2",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "eslint": "^9.39.4",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.4"
   },
   "publishConfig": {
     "exports": {
