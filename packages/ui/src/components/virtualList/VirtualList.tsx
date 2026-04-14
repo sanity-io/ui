@@ -11,7 +11,6 @@ import {
 
 import {_isScrollable} from '../../core/helpers/scroll'
 import type {ComponentType, Props} from '../../core/types'
-import {_ResizeObserver} from '../../observers/resize'
 import {Box} from '../../primitives/box/Box'
 
 /** @beta */
@@ -91,7 +90,7 @@ export function VirtualList<
 
       scrollableParent.addEventListener('scroll', handleScroll, {passive: true})
 
-      const ro = new _ResizeObserver((entries) => {
+      const ro = new ResizeObserver((entries) => {
         setScrollHeight(entries[0].contentRect.height)
       })
 

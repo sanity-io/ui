@@ -81,7 +81,6 @@
   },
   "browserslist": "extends @sanity/browserslist-config",
   "dependencies": {
-    "@juggle/resize-observer": "^3.4.0",
     "@floating-ui/react-dom": "^2.1.8",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.7.4",

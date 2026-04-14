@@ -1,5 +1,3 @@
-import {_ResizeObserver} from './resize'
-
 /**
  * @beta
  */
@@ -48,7 +46,7 @@ export const _elementSizeObserver: _ElementSizeObserver = _createElementSizeObse
 function _createElementRectValueListener(): _ElementSizeListener {
   return {
     subscribe(element, subscriber) {
-      const resizeObserver = new _ResizeObserver(([entry]) => {
+      const resizeObserver = new ResizeObserver(([entry]) => {
         subscriber({
           _contentRect: entry.contentRect,
           border: {

@@ -45,7 +45,6 @@ export * from '../src/hooks/usePrefersReducedMotion'
 
 // observers
 export * from '../src/observers/elementSize'
-export * from '../src/observers/resize'
 
 // primitives
 export * from '../src/primitives/_syntax/LazySyntax'
