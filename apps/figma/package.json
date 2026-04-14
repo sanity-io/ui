@@ -36,13 +36,13 @@
     "@babel/plugin-transform-optional-catch-binding": "^7.28.6",
     "@babel/plugin-transform-optional-chaining": "^7.28.6",
     "@figma/eslint-plugin-figma-plugins": "^1.0.0",
-    "@figma/plugin-typings": "^1.123.0",
+    "@figma/plugin-typings": "^1.124.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/pkg-utils": "^10.4.4",
+    "@sanity/pkg-utils": "^10.4.14",
     "@sanity/ui-tokens": "workspace:*",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.4"
   },
   "publishConfig": {
     "exports": {
