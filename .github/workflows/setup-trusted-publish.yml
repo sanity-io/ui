@@ -1,0 +1,17 @@
+name: Setup a new npm package with Trusted Publishing
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'The package name, for example @sanity/foo-bar'
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "not implement on main yet"
