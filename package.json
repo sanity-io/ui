@@ -16,6 +16,7 @@
     "format:check": "prettier --check .",
     "lint": "turbo lint",
     "prepare": "husky",
+    "release": "changeset publish",
     "storybook:build": "(cd apps/storybook && pnpm build) && cpx 'apps/storybook/storybook-static/**' storybook/storybook-static/",
     "test": "turbo test -- --run",
     "test:e2e": "turbo test:e2e",
