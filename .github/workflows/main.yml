@@ -61,33 +61,28 @@ jobs:
       - run: pnpm build
       - run: pnpm test
 
-  # cypress:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v5
-  #     - uses: pnpm/action-setup@v4
-  #     - uses: actions/setup-node@v5
-  #       with:
-  #         node-version: lts/*
-  #     - uses: cypress-io/github-action@v6
-  #       with:
-  #         build: pnpm workshop:build
-  #         start: pnpm workshop:preview
-  #         wait-on: http://localhost:1337
-  #       env:
-  #         NODE_OPTIONS: "--no-experimental-require-module --no-experimental-detect-module"
-  #     - uses: actions/upload-artifact@v4
-  #       if: failure()
-  #       with:
-  #         name: cypress-screenshots
-  #         path: cypress/screenshots
-  #         if-no-files-found: ignore
-  #     - uses: actions/upload-artifact@v4
-  #       if: always()
-  #       with:
-  #         name: cypress-videos
-  #         path: cypress/videos
-  #         if-no-files-found: ignore
+  e2e:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+      - run: pnpm install
+      - run: pnpm build
+      - run: pnpx playwright install --with-deps chromium
+      - run: pnpm test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            packages/*/playwright-report/
+            packages/*/test-results/
+          retention-days: 30
+          if-no-files-found: ignore
 
   # sanity-e2e:
   #   if: ${{ github.event_name == 'pull_request' }}
