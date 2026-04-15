@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Card,
+  type ElementTone,
   Flex,
   Menu,
   MenuButton,
@@ -11,7 +12,6 @@ import {
   MenuItem,
   Text,
 } from '@sanity/ui'
-import type {ElementTone} from '@sanity/ui/tokens'
 import {useState} from 'react'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {

@@ -1,6 +1,5 @@
 import {EllipsisVerticalIcon} from '@sanity/icons'
-import {Button, Card, Flex, Popover, Text, useClickOutsideEvent} from '@sanity/ui'
-import {CONTAINER} from '@sanity/ui/tokens'
+import {Button, Card, CONTAINER, Flex, Popover, Text, useClickOutsideEvent} from '@sanity/ui'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useCallback, useRef, useState} from 'react'
 

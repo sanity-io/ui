@@ -1,5 +1,4 @@
-import {Badge, Flex} from '@sanity/ui'
-import {ELEMENT_TONES} from '@sanity/ui/tokens'
+import {Badge, ELEMENT_TONES, Flex} from '@sanity/ui'
 
 export default function Tones(): React.JSX.Element {
   return (

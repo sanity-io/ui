@@ -1,6 +1,5 @@
 import {CropIcon} from '@sanity/icons'
-import {Box, Label, Stack} from '@sanity/ui'
-import {FONT_LABEL_SIZE} from '@sanity/ui/tokens'
+import {Box, FONT_LABEL_SIZE, Label, Stack} from '@sanity/ui'
 
 import {CardWrapper} from '$workshop'
 

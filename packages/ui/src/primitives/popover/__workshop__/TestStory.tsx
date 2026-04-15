@@ -7,7 +7,7 @@ import {
   PortalProvider,
   Text,
 } from '@sanity/ui'
-import {CONTAINER, RADIUS} from '@sanity/ui/tokens'
+import {CONTAINER, RADIUS} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {useRef, useState} from 'react'
 

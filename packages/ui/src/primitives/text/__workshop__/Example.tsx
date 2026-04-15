@@ -1,5 +1,4 @@
-import {Text} from '@sanity/ui'
-import {FONT_TEXT_SIZE} from '@sanity/ui/tokens'
+import {FONT_TEXT_SIZE, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 
 import {

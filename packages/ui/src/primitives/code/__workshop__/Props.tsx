@@ -1,5 +1,4 @@
-import {Box, Code} from '@sanity/ui'
-import {FONT_CODE_SIZE} from '@sanity/ui/tokens'
+import {Box, Code, FONT_CODE_SIZE} from '@sanity/ui'
 import {useSelect, useText} from '@sanity/ui-workshop'
 
 import {WORKSHOP_CODE_LANGUAGE_OPTIONS} from '$workshop'

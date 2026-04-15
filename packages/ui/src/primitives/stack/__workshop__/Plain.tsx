@@ -1,5 +1,4 @@
-import {Card, Container, Flex, Stack, Text} from '@sanity/ui'
-import {SPACE} from '@sanity/ui/tokens'
+import {Card, Container, Flex, SPACE, Stack, Text} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
 
 export default function PlainStory(): React.JSX.Element {

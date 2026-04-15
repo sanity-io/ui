@@ -1,6 +1,6 @@
 import {AddIcon} from '@sanity/icons'
 import {Box, Button, Menu, MenuButton, type MenuButtonProps, MenuItem, Stack} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui'
 import {useRef} from 'react'
 
 const POPOVER_PROPS: MenuButtonProps['popover'] = {

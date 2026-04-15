@@ -1,5 +1,4 @@
-import {Box, Text} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
+import {Box, Text, vars} from '@sanity/ui'
 
 export default function ResponsiveStory(): React.JSX.Element {
   return (

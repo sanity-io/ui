@@ -1,5 +1,4 @@
-import {Card, Container, Flex, Stack, Text} from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/tokens'
+import {Card, CARD_TONES, Container, Flex, Stack, Text} from '@sanity/ui'
 
 export default function TonesStory(): React.JSX.Element {
   return (

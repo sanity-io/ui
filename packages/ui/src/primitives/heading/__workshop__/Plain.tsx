@@ -1,5 +1,4 @@
-import {Flex, Heading} from '@sanity/ui'
-import {FONT_HEADING_SIZE} from '@sanity/ui/tokens'
+import {Flex, FONT_HEADING_SIZE, Heading} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 
 import {WORKSHOP_FONT_WEIGHT_OPTIONS, WORKSHOP_TEXT_OVERFLOW_OPTIONS} from '$workshop'

@@ -1,5 +1,13 @@
-import {Button, Card, Stack, Text, Tooltip, TooltipDelayGroupProvider} from '@sanity/ui'
-import {SHADOW, SPACE} from '@sanity/ui/tokens'
+import {
+  Button,
+  Card,
+  SHADOW,
+  SPACE,
+  Stack,
+  Text,
+  Tooltip,
+  TooltipDelayGroupProvider,
+} from '@sanity/ui'
 import {useBoolean, useNumber, useSelect, useText} from '@sanity/ui-workshop'
 
 import {CardWrapper, WORKSHOP_PLACEMENT_OPTIONS} from '$workshop'

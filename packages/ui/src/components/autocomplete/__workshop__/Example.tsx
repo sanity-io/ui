@@ -1,6 +1,5 @@
 import {SearchIcon} from '@sanity/icons'
-import {Autocomplete, Text} from '@sanity/ui'
-import {FONT_TEXT_SIZE, RADIUS, SPACE} from '@sanity/ui/tokens'
+import {Autocomplete, FONT_TEXT_SIZE, RADIUS, SPACE, Text} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {type PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'

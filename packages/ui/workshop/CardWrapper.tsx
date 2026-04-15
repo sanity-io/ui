@@ -1,5 +1,11 @@
-import {Card, type ContainerOwnProps, Stack} from '@sanity/ui'
-import {type BgPattern, CARD_TONES, type CardTone} from '@sanity/ui/tokens'
+import {
+  type BgPattern,
+  Card,
+  CARD_TONES,
+  type CardTone,
+  type ContainerOwnProps,
+  Stack,
+} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
 
 export function CardWrapper({

@@ -1,5 +1,4 @@
-import {Box, Card, Text, TextInput} from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/tokens'
+import {Box, Card, CARD_TONES, Text, TextInput} from '@sanity/ui'
 import {useBoolean} from '@sanity/ui-workshop'
 
 import {CardWrapper} from '$workshop'

@@ -1,5 +1,4 @@
-import {Avatar, Flex} from '@sanity/ui'
-import {AVATAR_SIZE} from '@sanity/ui/tokens'
+import {Avatar, AVATAR_SIZE, Flex} from '@sanity/ui'
 import {useSelect} from '@sanity/ui-workshop'
 
 export default function AsButtonStory(): React.JSX.Element {

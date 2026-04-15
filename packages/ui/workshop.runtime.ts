@@ -16,10 +16,10 @@ const runtime: WorkshopRuntimeOptions = {
       resolve: {
         alias: {
           '$workshop': path.resolve(__dirname, './workshop'),
-          '@sanity/ui/css/index.css': path.resolve(
-            __dirname,
-            './node_modules/@sanity/ui-css/dist/index.css',
-          ),
+          // '@sanity/ui/index.css': path.resolve(
+          //   __dirname,
+          //   './node_modules/@sanity/ui-css/dist/index.css',
+          // ),
           '@sanity/ui': path.resolve(__dirname, './exports'),
         },
       },

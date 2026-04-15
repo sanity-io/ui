@@ -11,7 +11,7 @@ import {
   MenuDivider,
   MenuItem,
 } from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/tokens'
+import {CARD_TONES} from '@sanity/ui'
 import {useAction, useBoolean, useSelect} from '@sanity/ui-workshop'
 import {useMemo} from 'react'
 

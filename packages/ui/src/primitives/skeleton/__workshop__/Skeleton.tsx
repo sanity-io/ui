@@ -1,6 +1,7 @@
 import {
   Box,
   Card,
+  CARD_TONES,
   CodeSkeleton,
   Container,
   Flex,
@@ -11,7 +12,6 @@ import {
   Stack,
   TextSkeleton,
 } from '@sanity/ui'
-import {CARD_TONES} from '@sanity/ui/tokens'
 import {useBoolean, useSelect} from '@sanity/ui-workshop'
 
 export default function SkeletonStory(): React.JSX.Element {

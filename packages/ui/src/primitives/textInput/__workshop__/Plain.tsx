@@ -1,6 +1,5 @@
 import {icons} from '@sanity/icons'
-import {Box, Stack, Text, TextInput} from '@sanity/ui'
-import {FONT_TEXT_SIZE, RADIUS, SPACE} from '@sanity/ui/tokens'
+import {Box, FONT_TEXT_SIZE, RADIUS, SPACE, Stack, Text, TextInput} from '@sanity/ui'
 import {useBoolean, useSelect, useText} from '@sanity/ui-workshop'
 import {type PerfTestProps, usePerfTest} from '@sanity/ui-workshop/plugin-perf'
 import {fireEvent} from '@testing-library/dom'
