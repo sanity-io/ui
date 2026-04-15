@@ -23,11 +23,6 @@ export function createViteConfig(options: {
     },
     cacheDir: path.resolve(cwd, 'node_modules/.workshop/vite'),
     mode,
-    optimizeDeps: {
-      esbuildOptions: {
-        jsx: 'automatic',
-      },
-    },
     plugins: [react()],
     root: cwd,
   }
