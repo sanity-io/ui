@@ -1,2 +1,5 @@
 .sui-Text {
+  font: var(--body-2);
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
 }

@@ -1,26 +1,24 @@
-import { FONT_WEIGHT, type FontWeight } from '../types/FontWeight'
+import {FONT_WEIGHT, type FontWeight} from '../types/FontWeight'
 import {type PropDef} from '../types/PropDef'
-import { TEXT_ALIGN, type TextAlign } from '../types/TextAlign'
+import {TEXT_ALIGN, type TextAlign} from '../types/TextAlign'
+import {TEXT_OVERFLOW, type TextOverflow} from '../types/TextOverflow'
 import {type MarginProps, marginProps} from './margin'
 
-
-export interface TypographyProps
-  extends
-    MarginProps {
-      /** CSS **text-align** property */
-      align?: TextAlign
-      /** CSS **color** property */
-      muted?: boolean
-      /** CSS **overlow** property */
-      textOverflow?: boolean
-      /** CSS **font-weight** property */
-      weight?: FontWeight
-    }
+export interface TypographyProps extends MarginProps {
+  /** CSS **text-align** property */
+  align?: TextAlign
+  /** CSS **color** property */
+  muted?: boolean
+  /** CSS **overlow** property */
+  textOverflow?: TextOverflow
+  /** CSS **font-weight** property */
+  weight?: FontWeight
+}
 
 export const typographyProps: Record<string, PropDef> = {
   align: {
     type: 'union',
-    className: 'text-align',
+    className: 'text',
     values: TEXT_ALIGN,
   },
   muted: {
@@ -29,13 +27,13 @@ export const typographyProps: Record<string, PropDef> = {
     inverse: 'text-default',
   },
   textOverflow: {
-    type: 'boolean',
-    className: 'text-overflow',
-    inverse: 'text-wrap',
+    type: 'union',
+    className: 'text',
+    values: TEXT_OVERFLOW,
   },
   weight: {
     type: 'union',
-    className: 'font-weight',
+    className: 'weight',
     values: FONT_WEIGHT,
   },
   ...marginProps,

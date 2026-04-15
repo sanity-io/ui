@@ -1,0 +1,2 @@
+.sui-text-ellipsis { text-overflow: ellipsis; overflow-x: hidden; white-space: nowrap; }
+.sui-text-clip { text-overflow: clip; overflow-x: hidden; white-space: nowrap; }
