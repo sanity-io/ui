@@ -4,28 +4,21 @@ test.describe('Keyboard shortcuts', () => {
   test('should work when focus is in main window', async ({page}) => {
     await page.goto('/')
 
-    // Wait for page to load
-    await page.waitForTimeout(500)
+    // Wait for workshop to be fully initialized
+    await page.waitForSelector('[data-workshop][data-workshop-zoom="1"]', {timeout: 5000})
 
-    // Get initial zoom from data attribute
-    const initialZoom = await page.evaluate(() => {
-      const root = document.querySelector('[data-workshop]')
-      return root?.getAttribute('data-workshop-zoom')
+    // Detect platform from browser and set override to match
+    const modifierKey = await page.evaluate(() => {
+      const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.userAgent || navigator.platform)
+
+      return isMac ? 'Meta' : 'Control'
     })
-    expect(initialZoom).toBe('1')
 
-    // Press ControlOrMeta+= to zoom in (works cross-platform)
-    await page.keyboard.press('ControlOrMeta+=')
+    // Press appropriate modifier+= to zoom in (platform-specific)
+    await page.keyboard.press(`${modifierKey}+=`)
 
-    // Wait for state to update
-    await page.waitForTimeout(100)
-
-    // Check zoom increased
-    const newZoom = await page.evaluate(() => {
-      const root = document.querySelector('[data-workshop]')
-      return root?.getAttribute('data-workshop-zoom')
-    })
-    expect(newZoom).toBe('1.5')
+    // Wait for zoom to increase
+    await page.waitForSelector('[data-workshop][data-workshop-zoom="1.5"]', {timeout: 5000})
   })
 
   // Note: This test is skipped because Playwright's ControlOrMeta doesn't work
@@ -51,7 +44,7 @@ test.describe('Keyboard shortcuts', () => {
       if (!win) throw new Error('No window in iframe')
 
       // Detect platform to know which modifier key to use
-      const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.userAgent)
+      const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.userAgent || navigator.platform)
       const modKey = isMac ? 'Meta' : 'Control'
 
       // First send the modifier key down
@@ -99,13 +92,20 @@ test.describe('Keyboard shortcuts', () => {
   test('should prevent default browser zoom behavior', async ({page}) => {
     await page.goto('/')
 
+    // Detect platform from browser and set override to match
+    const modifierKey = await page.evaluate(() => {
+      const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.userAgent || navigator.platform)
+
+      return isMac ? 'Meta' : 'Control'
+    })
+
     // Get viewport before
     const viewportBefore = page.viewportSize()
 
-    // Press ControlOrMeta+= multiple times
-    await page.keyboard.press('ControlOrMeta+=')
-    await page.keyboard.press('ControlOrMeta+=')
-    await page.keyboard.press('ControlOrMeta+=')
+    // Press appropriate modifier+= multiple times (platform-specific)
+    await page.keyboard.press(`${modifierKey}+=`)
+    await page.keyboard.press(`${modifierKey}+=`)
+    await page.keyboard.press(`${modifierKey}+=`)
 
     // Viewport should not have changed (browser zoom prevented)
     const viewportAfter = page.viewportSize()
