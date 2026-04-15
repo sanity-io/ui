@@ -45,7 +45,7 @@ export async function getContext(slugParam: string[] | undefined) {
 
   const client = createClient(clientOptions)
 
-  const {sanityFetch, SanityLive} = defineLive({
+  const {sanityFetch} = defineLive({
     client,
     // Required for showing draft content when the Sanity Presentation Tool is used, or to enable
     // the Vercel Toolbar Edit Mode
@@ -78,7 +78,5 @@ export async function getContext(slugParam: string[] | undefined) {
     }> => {
       return sanityFetch({...options, perspective})
     },
-
-    SanityLive,
   }
 }

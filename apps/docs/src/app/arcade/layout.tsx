@@ -131,7 +131,6 @@ export default async function ArcadeLayout(props: LayoutProps<'/arcade'>) {
     perspective,
     studioBaseUrl,
     sanityFetch,
-    SanityLive,
     version,
   } = await getContext(['arcade'])
 
@@ -171,7 +170,6 @@ export default async function ArcadeLayout(props: LayoutProps<'/arcade'>) {
       {isDraftMode && <DisableDraftMode />}
       {isDraftMode && <VisualEditing basePath={basePath} />}
       {children}
-      <SanityLive />
       <SpeedInsights />
     </RootLayout>
   )

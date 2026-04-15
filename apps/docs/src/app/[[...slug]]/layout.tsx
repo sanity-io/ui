@@ -132,7 +132,6 @@ export default async function SlugLayout(props: LayoutProps<'/[[...slug]]'>) {
     perspective,
     studioBaseUrl,
     sanityFetch,
-    SanityLive,
     version,
   } = await getContext(params.slug)
 
@@ -172,7 +171,6 @@ export default async function SlugLayout(props: LayoutProps<'/[[...slug]]'>) {
       {(env !== 'production' || isDraftMode) && <DisableDraftMode />}
       {isDraftMode && <VisualEditing basePath={basePath} />}
       {children}
-      <SanityLive />
       <SpeedInsights />
     </RootLayout>
   )
