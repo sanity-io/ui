@@ -19,10 +19,10 @@ async function prebuild() {
   await fs.rm(distPath, {force: true, recursive: true})
   console.log(`- removed ${_rel(distPath)}`)
 
-  // copy `exports/css/index.css` to `dist/css/index.css`
-  await fs.cp(path.resolve(exportsPath, 'css/index.css'), path.resolve(distPath, 'css/index.css'))
+  // copy `exports/index.css` to `dist/index.css`
+  await fs.cp(path.resolve(exportsPath, 'index.css'), path.resolve(distPath, 'index.css'))
   console.log(
-    `- copied ${_rel(path.resolve(exportsPath, 'css/index.css'))} to ${_rel(path.resolve(distPath, 'css/index.css'))}`,
+    `- copied ${_rel(path.resolve(exportsPath, 'index.css'))} to ${_rel(path.resolve(distPath, 'index.css'))}`,
   )
 }
 

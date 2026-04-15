@@ -30,29 +30,11 @@
       "source": "./exports/index.ts",
       "default": "./dist/index.js"
     },
-    "./css": {
-      "source": "./exports/css.ts",
-      "default": "./dist/css.js"
-    },
-    "./css/index.css": "./dist/css/index.css",
-    "./package.json": "./package.json",
-    "./tokens": {
-      "source": "./exports/tokens.ts",
-      "default": "./dist/tokens.js"
-    }
+    "./index.css": "./dist/index.css",
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "css": [
-        "./dist/css.d.ts"
-      ],
-      "tokens": [
-        "./dist/tokens.d.ts"
-      ]
-    }
-  },
   "files": [
     "dist",
     "exports",

@@ -1,3 +1,11 @@
+// re-export css (types, constants and vars)
+export type {ResponsiveProp} from '@sanity/ui-css'
+export {BREAKPOINTS, vars} from '@sanity/ui-css'
+
+// re-export tokens (types and constants)
+export type * from '@sanity/ui-tokens'
+export * from '@sanity/ui-tokens/constants'
+
 // components
 export * from '../src/components/autocomplete/Autocomplete'
 export * from '../src/components/autocomplete/types'
