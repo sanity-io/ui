@@ -66,7 +66,7 @@
     "figma:build": "pnpm run --filter 'figma-plugin-sanity-ui' build",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",
-    "prepack": "pnpm build",
+    "prepack": "turbo run build",
     "pkg:build": "NODE_ENV=production pkg build --strict",
     "pkg:check": "pkg --strict",
     "playwright:dev": "PLAYWRIGHT_DEV=true playwright test --ui",
