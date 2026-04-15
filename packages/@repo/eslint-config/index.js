@@ -1,5 +1,6 @@
 import js from '@eslint/js'
 import eslintConfigPrettier from 'eslint-config-prettier'
+import importPlugin from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -33,12 +34,13 @@ export function defineConfig(root, ...configs) {
         },
         linterOptions: {reportUnusedDisableDirectives: 'error'},
         plugins: {
+          'import': importPlugin,
           'simple-import-sort': simpleImportSort,
         },
         rules: {
           'import/no-unresolved': 'off',
           'no-console': 'error',
-          'no-duplicate-imports': 'error',
+          'import/no-duplicates': 'error', // Auto-fixable alternative to no-duplicate-imports
           'no-warning-comments': ['warn', {location: 'start', terms: ['todo', '@todo', 'fixme']}],
           '@typescript-eslint/no-unused-vars': 'off', // Let TS handle unused vars
           'simple-import-sort/imports': 'error',
