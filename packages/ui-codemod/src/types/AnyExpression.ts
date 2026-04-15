@@ -12,7 +12,8 @@ export type AttributeMappings = Record<string | number, string | boolean | numbe
 
 type AttributeMod =
   | {type: 'remove'}
-  | {type: 'rename'; name: string}
+  | {type: 'rename-only'; name: string}
+  | {type: 'rename-mapped'; name: string; mappings: AttributeMappings}
   | {type: 'style-only'; style: string}
   | {type: 'style-mapped'; style: string; mappings: AttributeMappings}
   | {type: 'mapped-only'; mappings: AttributeMappings}

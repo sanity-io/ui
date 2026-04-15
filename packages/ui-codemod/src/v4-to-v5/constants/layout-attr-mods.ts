@@ -1,13 +1,6 @@
-import {type API, type FileInfo} from 'jscodeshift'
+import type { AttributeMods } from "../../types/AnyExpression";
 
-import {type AttributeMods} from '../../types/AnyExpression'
-import {transformAttributes} from '../../utils/transformAttributes'
-
-const MODS: AttributeMods = {
-  alignItems: {
-    type: 'style-only',
-    style: 'alignItems',
-  },
+export const LAYOUT_MODS: AttributeMods = {
   border: {
     type: 'mapped-only',
     mappings: {
@@ -53,33 +46,13 @@ const MODS: AttributeMods = {
     type: 'style-only',
     style: 'flex',
   },
-  flexDirection: {
-    type: 'style-only',
-    style: 'flexDirection',
-  },
-  flexWrap: {
-    type: 'style-only',
-    style: 'flexWrap',
-  },
   gapX: {
-    type: 'rename',
+    type: 'rename-only',
     name: 'rowGap',
   },
   gapY: {
-    type: 'rename',
+    type: 'rename-only',
     name: 'columnGap',
-  },
-  gridAutoColumns: {
-    type: 'style-only',
-    style: 'gridAutoColumns',
-  },
-  gridAutoFlow: {
-    type: 'style-only',
-    style: 'gridAutoFlow',
-  },
-  gridAutoRows: {
-    type: 'style-only',
-    style: 'gridAutoRow',
   },
   gridColumn: {
     type: 'mapped-only',
@@ -191,14 +164,6 @@ const MODS: AttributeMods = {
       12: '12',
     },
   },
-  gridTemplateColumns: {
-    type: 'style-only',
-    style: 'gridTemplateColumns',
-  },
-  gridTemplateRows: {
-    type: 'style-only',
-    style: 'gridTemplateRows',
-  },
   height: {
     type: 'mapped-only',
     mappings: {
@@ -211,24 +176,20 @@ const MODS: AttributeMods = {
     },
   },
   insetTop: {
-    type: 'rename',
+    type: 'rename-only',
     name: 'top',
   },
   insetRight: {
-    type: 'rename',
+    type: 'rename-only',
     name: 'right',
   },
   insetBottom: {
-    type: 'rename',
+    type: 'rename-only',
     name: 'bottom',
   },
   insetLeft: {
-    type: 'rename',
+    type: 'rename-only',
     name: 'left',
-  },
-  justifyContent: {
-    type: 'style-only',
-    style: 'justifyContent',
   },
   minWidth: {
     type: 'mapped-only',
@@ -279,21 +240,4 @@ const MODS: AttributeMods = {
       5: '120rem',
     },
   },
-}
-
-export const TODO_WARNING = 'Codemod could not update the prop below'
-
-export default function transform(fileInfo: FileInfo, api: API): string {
-  const j = api.jscodeshift
-  const root = j(fileInfo.source)
-
-  root
-    .find(j.JSXOpeningElement, {
-      name: {type: 'JSXIdentifier', name: 'Box'},
-    })
-    .forEach((path) => {
-      transformAttributes(j, path, MODS, TODO_WARNING)
-    })
-
-  return root.toSource()
 }

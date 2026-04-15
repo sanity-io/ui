@@ -41,7 +41,7 @@ export function transformAttributes(
       removeIdxs.push(i)
     }
 
-    if (mod.type === 'rename') {
+    if (mod.type === 'rename-only') {
       if (attr.name.type === 'JSXIdentifier') {
         attr.name.name = mod.name
       }
@@ -83,7 +83,13 @@ export function transformAttributes(
       }
     }
 
-    if (mod.type === 'mapped-only') {
+    if (mod.type === 'mapped-only' || mod.type === 'rename-mapped') {
+      if (mod.type === 'rename-mapped') {
+        if (attr.name.type === 'JSXIdentifier') {
+          attr.name.name = mod.name
+        }
+      }
+
       if (expr.type === 'ConditionalExpression' || expr.type === 'Identifier') {
         insertTodoWarning(j, path, todoWarning)
         continue

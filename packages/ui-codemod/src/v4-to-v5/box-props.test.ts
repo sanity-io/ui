@@ -1,4 +1,4 @@
-import {defineInlineTest} from '../../utils/testUtils'
+import {defineInlineTest} from '../utils/testUtils'
 import transform, {TODO_WARNING} from './box-props'
 
 defineInlineTest(
@@ -65,11 +65,11 @@ defineInlineTest(
   transform,
   {},
   `
-  <Box alignItems="center" />
+  <Box textAlign="center" />
   `,
   `
   <Box style={{
-    alignItems: "center"
+    textAlign: "center"
   }} />
   `,
   'moves prop to style',
@@ -93,11 +93,11 @@ defineInlineTest(
   transform,
   {},
   `
-  <Box alignItems={\`center\`} />
+  <Box textAlign={\`center\`} />
   `,
   `
   <Box style={{
-    alignItems: \`center\`
+    textAlign: \`center\`
   }} />
   `,
   'moves prop to style with updated template literal value',
@@ -107,13 +107,13 @@ defineInlineTest(
   transform,
   {},
   `
-  <Box alignItems="center" style={{ background: 'blue' }} />
+  <Box textAlign="center" style={{ background: 'blue' }} />
   `,
   `
   <Box
     style={{
       background: 'blue',
-      alignItems: "center"
+      textAlign: "center"
     }} />
   `,
   'preserves existing styles',
@@ -123,11 +123,11 @@ defineInlineTest(
   transform,
   {},
   `
-  <Box alignItems={["center", "flex-start"]} />
+  <Box textAlign={["center", "left"]} />
   `,
   `
   // TODO: ${TODO_WARNING}
-  <Box alignItems={["center", "flex-start"]} />
+  <Box textAlign={["center", "left"]} />
   `,
   'comments if responsive prop should be moved to style',
 )
@@ -149,11 +149,11 @@ defineInlineTest(
   transform,
   {},
   `
-  <Box alignItems={variable} />
+  <Box textAlign={variable} />
   `,
   `
   // TODO: ${TODO_WARNING}
-  <Box alignItems={variable} />
+  <Box textAlign={variable} />
   `,
   'comments if prop value is a variable',
 )
@@ -162,11 +162,11 @@ defineInlineTest(
   transform,
   {},
   `
-  <Box alignItems={variable ? 'center' : 'flex-start'} />
+  <Box textAlign={variable ? 'center' : 'left'} />
   `,
   `
   // TODO: ${TODO_WARNING}
-  <Box alignItems={variable ? 'center' : 'flex-start'} />
+  <Box textAlign={variable ? 'center' : 'left'} />
   `,
   'comments if prop value is a ternary',
 )
@@ -175,11 +175,11 @@ defineInlineTest(
   transform,
   {},
   `
-  <Box alignItems={\`flex\${\`-start\`}\`} />
+  <Box alignItems={\`lef\${\`t\`}\`} />
   `,
   `
   // TODO: ${TODO_WARNING}
-  <Box alignItems={\`flex\${\`-start\`}\`} />
+  <Box alignItems={\`lef\${\`t\`}\`} />
   `,
   'comments if prop value is a template literal with variable',
 )
