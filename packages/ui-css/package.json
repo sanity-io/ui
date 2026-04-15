@@ -43,7 +43,7 @@
     "clean": "rimraf dist",
     "dev": "workshop dev",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
-    "prepack": "run-s build",
+    "prepack": "turbo run build",
     "pkg:build": "mkdirp dist && touch dist/index.css && pkg build --strict",
     "test": "vitest --passWithNoTests",
     "tsc:build": "tsc --build",
