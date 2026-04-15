@@ -117,7 +117,12 @@ export async function sync(options: {disableCache?: boolean}) {
   }
 }
 
-function collectShadowTokens(obj: unknown, map: Map<string, unknown>, parentPath = '', parentType?: string): void {
+function collectShadowTokens(
+  obj: unknown,
+  map: Map<string, unknown>,
+  parentPath = '',
+  parentType?: string,
+): void {
   if (!obj || typeof obj !== 'object') return
 
   for (const [key, value] of Object.entries(obj)) {

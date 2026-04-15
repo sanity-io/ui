@@ -40,7 +40,12 @@ async function createDTCGShadowStyle(
     const refPath = t.$value.slice(1, -1)
     const referenced = shadowTokenMap.get(refPath)
 
-    if (referenced && typeof referenced === 'object' && '$type' in referenced && referenced.$type === 'shadow') {
+    if (
+      referenced &&
+      typeof referenced === 'object' &&
+      '$type' in referenced &&
+      referenced.$type === 'shadow'
+    ) {
       resolvedToken = referenced as _DTCGShadowToken
     } else {
       // eslint-disable-next-line no-console
