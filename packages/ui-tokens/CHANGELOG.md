@@ -1,5 +1,11 @@
 # @sanity/ui-tokens
 
+## 1.0.0-beta.1
+
+### Patch Changes
+
+- [`fb81598`](https://github.com/sanity-io/ui/commit/fb815985aba79b081ef6998201e94f873f64e02e) Thanks [@mariuslundgard](https://github.com/mariuslundgard)! - Ensure correct build output during publish by switching `prepack` to `turbo run build` across packages.
+
 ## 1.0.0-beta.0
 
 ### Major Changes

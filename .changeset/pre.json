@@ -12,6 +12,7 @@
     "@repo/typescript-config": "0.0.0"
   },
   "changesets": [
+    "cold-apes-teach",
     "free-icons-thank"
   ]
 }
