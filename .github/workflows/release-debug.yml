@@ -1,0 +1,31 @@
+name: Release Debug
+
+on:
+  push:
+    branches:
+      - v4
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  debug-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+      - run: npm install -g npm@latest
+      - run: pnpm install
+
+      - name: Pack ui-tokens
+        run: pnpm --filter @sanity/ui-tokens pack
+
+      - name: Publish dry-run ui
+        run: pnpm --filter @sanity/ui publish --dry-run --tag beta --no-git-checks
+
+      - name: Publish dry-run ui-workshop
+        run: pnpm --filter @sanity/ui-workshop publish --dry-run --tag beta --no-git-checks

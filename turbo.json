@@ -3,7 +3,14 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        ".react-router/**",
+        "build/**",
+        "dist/**",
+        "storybook-static/**"
+      ],
       "env": ["SANITY_API_READ_TOKEN"]
     },
     "deploy": {
