@@ -5,7 +5,7 @@ import {_vanillaExtractIdentifiers} from './vanilla-extract/identifiers'
 const browserslist = '> 0.2% and not dead and supports css-cascade-layers and supports flexbox-gap'
 
 const pkgOptions: PkgConfigOptions = {
-  tsconfig: 'tsconfig.dist.json',
+  dts: 'rolldown',
   extract: {
     rules: {
       'ae-internal-missing-underscore': 'off',
@@ -22,6 +22,7 @@ const pkgOptions: PkgConfigOptions = {
       browserslist,
     },
   },
+  tsconfig: 'tsconfig.dist.json',
 }
 
 export default defineConfig(pkgOptions)
