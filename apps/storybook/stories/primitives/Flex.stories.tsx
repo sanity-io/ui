@@ -1,5 +1,4 @@
-import {Card, Flex, Text} from '@sanity/ui'
-import {FONT_TEXT_SIZE} from '@sanity/ui/tokens'
+import {Card, Flex, FONT_TEXT_SIZE, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {

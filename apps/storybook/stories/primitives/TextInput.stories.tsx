@@ -1,5 +1,4 @@
-import {Box, Container, Grid, Text, TextInput} from '@sanity/ui'
-import {RADIUS} from '@sanity/ui/tokens'
+import {Box, Container, Grid, RADIUS, Text, TextInput} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 

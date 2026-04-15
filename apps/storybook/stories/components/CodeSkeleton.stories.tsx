@@ -1,5 +1,10 @@
-import {CodeSkeleton, type CodeSkeletonProps, Skeleton} from '@sanity/ui'
-import {FONT_CODE_SIZE, type FontCodeSize} from '@sanity/ui/tokens'
+import {
+  CodeSkeleton,
+  type CodeSkeletonProps,
+  FONT_CODE_SIZE,
+  type FontCodeSize,
+  Skeleton,
+} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_CODE_SIZE_CONTROLS, SPACE_CONTROLS} from '../controls'

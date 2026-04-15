@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import {Card, Flex, Grid, Text} from '@sanity/ui'
-import type {ColorScheme} from '@sanity/ui/tokens'
+import {Card, type ColorScheme, Flex, Grid, Text} from '@sanity/ui'
 
 interface MatrixBuilderProps<Rows extends string[], Cols extends string[]> {
   scheme?: ColorScheme

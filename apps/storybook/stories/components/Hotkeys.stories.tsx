@@ -1,5 +1,4 @@
-import {Hotkeys} from '@sanity/ui'
-import {RADIUS} from '@sanity/ui/tokens'
+import {Hotkeys, RADIUS} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {rowBuilder} from '../helpers/rowBuilder'

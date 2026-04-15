@@ -1,6 +1,5 @@
 import {SearchIcon} from '@sanity/icons'
-import {Autocomplete, Card} from '@sanity/ui'
-import {RADIUS} from '@sanity/ui/tokens'
+import {Autocomplete, Card, RADIUS} from '@sanity/ui'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 
 import {rowBuilder} from '../helpers/rowBuilder'

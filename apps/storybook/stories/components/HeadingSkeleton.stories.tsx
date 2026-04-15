@@ -1,5 +1,10 @@
-import {HeadingSkeleton, type HeadingSkeletonProps, Skeleton} from '@sanity/ui'
-import {FONT_HEADING_SIZE, type FontHeadingSize} from '@sanity/ui/tokens'
+import {
+  FONT_HEADING_SIZE,
+  type FontHeadingSize,
+  HeadingSkeleton,
+  type HeadingSkeletonProps,
+  Skeleton,
+} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_HEADING_SIZE_CONTROLS, SPACE_CONTROLS} from '../controls'

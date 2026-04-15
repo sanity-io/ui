@@ -12,7 +12,9 @@ import {
   Avatar,
   Button,
   Card,
+  CARD_TONES,
   Checkbox,
+  ELEMENT_TONES,
   Flex,
   Heading,
   Menu,
@@ -30,7 +32,6 @@ import {
   TextArea,
   TextInput,
 } from '@sanity/ui'
-import {CARD_TONES, ELEMENT_TONES} from '@sanity/ui/tokens'
 import {type ReactNode, useState} from 'react'
 
 const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {

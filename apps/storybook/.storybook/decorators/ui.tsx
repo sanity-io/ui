@@ -1,4 +1,4 @@
-import '@sanity/ui/css/index.css'
+import '@sanity/ui/index.css'
 
 import {Root} from '@sanity/ui'
 import type {Decorator} from '@storybook/react-vite'

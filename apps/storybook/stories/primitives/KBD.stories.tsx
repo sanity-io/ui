@@ -1,5 +1,4 @@
-import {Card, KBD, Stack} from '@sanity/ui'
-import {CARD_TONES, RADIUS} from '@sanity/ui/tokens'
+import {Card, CARD_TONES, KBD, RADIUS, Stack} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {FONT_TEXT_SIZE_CONTROLS, RADIUS_CONTROLS, SPACE_CONTROLS} from '../controls'

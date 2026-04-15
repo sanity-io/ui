@@ -1,5 +1,16 @@
-import {Box, Button, Card, Container, Flex, Grid, Stack, Text} from '@sanity/ui'
-import {CARD_TONES, type CardTone, RADIUS} from '@sanity/ui/tokens'
+import {
+  Box,
+  Button,
+  Card,
+  CARD_TONES,
+  type CardTone,
+  Container,
+  Flex,
+  Grid,
+  RADIUS,
+  Stack,
+  Text,
+} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {RADIUS_CONTROLS, SHADOW_CONTROLS, SPACE_CONTROLS} from '../controls'

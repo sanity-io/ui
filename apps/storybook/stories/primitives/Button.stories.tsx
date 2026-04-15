@@ -1,6 +1,5 @@
 import {CloseIcon, SearchIcon, UploadIcon} from '@sanity/icons'
-import {Button, Flex, Grid, Stack, Text} from '@sanity/ui'
-import {BUTTON_MODES, ELEMENT_TONES, RADIUS} from '@sanity/ui/tokens'
+import {Button, BUTTON_MODES, ELEMENT_TONES, Flex, Grid, RADIUS, Stack, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {

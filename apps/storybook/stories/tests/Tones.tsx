@@ -4,9 +4,11 @@ import {
   Box,
   Button,
   Card,
+  CARD_TONES,
   Checkbox,
   Code,
   CodeSkeleton,
+  type ColorScheme,
   Container,
   Flex,
   Grid,
@@ -37,7 +39,6 @@ import {
   TextInput,
   TextSkeleton,
 } from '@sanity/ui'
-import {CARD_TONES, type ColorScheme} from '@sanity/ui/tokens'
 import {type ReactNode, useState} from 'react'
 
 const Wrapper = ({title, children}: {title: string; children: React.ReactNode}) => (

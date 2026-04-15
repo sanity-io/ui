@@ -1,6 +1,4 @@
-import {Box, Card, Code, Flex, Grid, Heading, Stack} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
-import {HUES, TINTS} from '@sanity/ui/tokens'
+import {Box, Card, Code, Flex, Grid, Heading, HUES, Stack, TINTS, vars} from '@sanity/ui'
 import type {ReactNode} from 'react'
 
 function ucfirst(str: string) {

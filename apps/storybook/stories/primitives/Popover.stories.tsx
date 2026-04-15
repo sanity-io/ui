@@ -1,5 +1,4 @@
-import {Box, Button, Card, Flex, Popover, Text} from '@sanity/ui'
-import {RADIUS} from '@sanity/ui/tokens'
+import {Box, Button, Card, Flex, Popover, RADIUS, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useEffect, useState} from 'react'
 
