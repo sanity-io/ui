@@ -96,6 +96,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@sanity-labs/design-tokens':
+        specifier: 0.0.2-alpha.0
+        version: 0.0.2-alpha.0
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -1077,6 +1080,10 @@ packages:
 
   '@rushstack/ts-command-line@5.3.4':
     resolution: {integrity: sha512-MLkVKVEN6/2clKTrjN2B2KqKCuPxRwnNsWY7a+FCAq2EMdkj10cM8YgiBSMeGFfzM0mDMzargpHNnNzaBi9Whg==}
+
+  '@sanity-labs/design-tokens@0.0.2-alpha.0':
+    resolution: {integrity: sha512-bud4efVrqvANItxkDAaWTpo3zQhrWc8qDiEIIVV8AfnDeO2t+KjEIHV1cH01zx3vIfapa6IUVLlsWg+8xb7awA==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
 
   '@sanity/browserslist-config@1.0.5':
     resolution: {integrity: sha512-so+/UtCge8t1jq509hH0otbbptRz0zM/Aa0dh5MhMD7HGT6n2igWIL2VWH/9QR9e77Jn3dJsjz23mW1WCxT+sg==}
@@ -4746,6 +4753,8 @@ snapshots:
       string-argv: 0.3.2
     transitivePeerDependencies:
       - '@types/node'
+
+  '@sanity-labs/design-tokens@0.0.2-alpha.0': {}
 
   '@sanity/browserslist-config@1.0.5': {}
 
