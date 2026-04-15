@@ -19,28 +19,26 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
   let className = componentProps?.className || ''
   let style = componentProps?.style || {}
 
-  // Iterate through the keys of all props on the component
   for (const key in componentProps) {
-    // Bypass props that aren't style props
     if (!propDefs?.[key] || !propDefs?.[key].className) {
       continue
     }
 
-    // Process style props
     if (Array.isArray(componentProps[key])) {
-      // Responsive array: generate a class name and style per breakpoint
-      for (let i = 0, len = Math.min(componentProps[key].length, BREAKPOINTS_LENGTH); i < len; i++) {
+      for (
+        let i = 0, len = Math.min(componentProps[key].length, BREAKPOINTS_LENGTH);
+        i < len;
+        i++
+      ) {
         className = classNames(className, getClassName(componentProps[key][i], propDefs[key], i))
         style = {...style, ...getStyle(componentProps[key][i], propDefs[key], i)}
       }
     } else {
-      // Single value: generate one class name and style
       className = classNames(className, getClassName(componentProps[key], propDefs[key]))
       style = {...style, ...getStyle(componentProps[key], propDefs[key])}
     }
   }
 
-  // Return only the props not consumed by propDefs
   const rest: ComponentProps = {}
   for (const key in componentProps) {
     if (!propDefs?.[key] || !propDefs[key].className) {
