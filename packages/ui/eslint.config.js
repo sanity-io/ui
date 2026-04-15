@@ -83,12 +83,12 @@ export default defineConfig(import.meta.dirname, [
           mode: 'file',
         },
         {
-          type: '@sanity/ui/css',
+          type: '@sanity/ui',
           pattern: ['exports/css.ts'],
           mode: 'file',
         },
         {
-          type: '@sanity/ui/tokens',
+          type: '@sanity/ui',
           pattern: ['exports/theme.ts'],
           mode: 'file',
         },
@@ -123,11 +123,11 @@ export default defineConfig(import.meta.dirname, [
             {from: 'configs', allow: ['configs', 'package']},
 
             {from: '@sanity/ui', allow: ['src/core']},
-            {from: '@sanity/ui/css', allow: ['src/css']},
-            {from: '@sanity/ui/tokens', allow: ['src/theme']},
+            {from: '@sanity/ui', allow: ['src/css']},
+            {from: '@sanity/ui', allow: ['src/theme']},
 
-            {from: 'src/core', allow: ['@sanity/ui/css', '@sanity/ui/tokens', 'src/core']},
-            {from: 'src/css', allow: ['@sanity/ui/tokens', 'src/css']},
+            {from: 'src/core', allow: ['@sanity/ui', '@sanity/ui', 'src/core']},
+            {from: 'src/css', allow: ['@sanity/ui', 'src/css']},
             {from: 'src/theme', allow: ['src/theme']},
 
             {
@@ -136,7 +136,7 @@ export default defineConfig(import.meta.dirname, [
             },
             {
               from: 'test/workshop',
-              allow: ['@sanity/ui', '@sanity/ui/css', '@sanity/ui/tokens', 'test/workshop'],
+              allow: ['@sanity/ui', '@sanity/ui', '@sanity/ui', 'test/workshop'],
             },
           ],
         },
