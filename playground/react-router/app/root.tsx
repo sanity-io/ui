@@ -1,7 +1,6 @@
-import '@sanity/ui/css/index.css'
+import '@sanity/ui/index.css'
 
-import {Box, Card, Code, Heading, Root, Text, usePrefersDark} from '@sanity/ui'
-import type {ColorScheme} from '@sanity/ui/tokens'
+import {Box, Card, Code, type ColorScheme, Heading, Root, Text, usePrefersDark} from '@sanity/ui'
 import {startTransition, useEffect, useRef, useState} from 'react'
 import {
   isRouteErrorResponse,
