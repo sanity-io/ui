@@ -1,6 +1,5 @@
 import {defineConfig} from '@repo/eslint-config'
 import boundaries from 'eslint-plugin-boundaries'
-import importPlugin from 'eslint-plugin-import'
 import {layers} from './system.config.js'
 
 export default defineConfig(import.meta.dirname, [
@@ -11,7 +10,6 @@ export default defineConfig(import.meta.dirname, [
   {
     files: ['src/**/*.ts', 'exports/**/*.ts'],
     ignores: ['**/*.test.ts', '**/*.spec.ts'],
-    extends: [importPlugin.flatConfigs.recommended, importPlugin.flatConfigs.typescript],
     plugins: {boundaries},
     languageOptions: {
       parserOptions: {
