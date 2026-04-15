@@ -13,6 +13,9 @@
     "rootDir": "..",
     "outDir": "./dist",
 
+    // Needed for vite 8 (via ui-workshop)
+    "jsx": "react-jsx",
+
     "noEmit": true,
 
     "paths": {
