@@ -1,5 +1,5 @@
-import {vars} from '@sanity/ui/css'
-import {FontCodeSize} from '@sanity/ui/tokens'
+import {vars} from '@sanity/ui'
+import {FontCodeSize} from '@sanity/ui'
 import {EditorView, Extension} from '@uiw/react-codemirror'
 
 export function getFontSizeExtension(options: {fontSize: FontCodeSize}): Extension {

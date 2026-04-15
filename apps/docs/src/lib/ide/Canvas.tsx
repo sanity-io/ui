@@ -1,6 +1,6 @@
 import {Card, Code, ErrorBoundary} from '@sanity/ui'
-import {ResponsiveProp} from '@sanity/ui/css'
-import {Shadow, Space} from '@sanity/ui/tokens'
+import {ResponsiveProp} from '@sanity/ui'
+import {Shadow, Space} from '@sanity/ui'
 import React, {ReactNode} from 'react'
 
 import {EvalComponentResult} from './evalComponent'

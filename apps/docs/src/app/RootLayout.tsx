@@ -1,12 +1,12 @@
 'use client'
 
-import '@sanity/ui/css/index.css'
+import '@sanity/ui/index.css'
 
 import {assignInlineVars} from '@vanilla-extract/dynamic'
 import createImageUrlBuilder from '@sanity/image-url'
 import {unwrapData, type WrappedValue} from '@sanity/react-loader/jsx'
 import {Root, usePrefersDark} from '@sanity/ui'
-import type {ColorScheme} from '@sanity/ui/tokens'
+import type {ColorScheme} from '@sanity/ui'
 import {ClientPerspective} from 'next-sanity'
 import {startTransition, useEffect, useMemo, useState} from 'react'
 import {registerLanguage} from 'react-refractor'
@@ -20,7 +20,7 @@ import {parseNav} from '@/lib/nav'
 import {AppContext, AppContextValue} from './AppContext'
 import {AppEnv} from './types'
 import {waldenburgNormal} from './fonts'
-import {vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui'
 
 registerLanguage(bash)
 registerLanguage(json)

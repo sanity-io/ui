@@ -1,7 +1,7 @@
 import {Icon, IconSymbol} from '@sanity/icons'
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Card, Text} from '@sanity/ui'
-import {CardTone} from '@sanity/ui/tokens'
+import {CardTone} from '@sanity/ui'
 
 import {CalloutData} from '@/lib/data'
 

@@ -1,6 +1,6 @@
 import {tags as t} from '@lezer/highlight'
-import {vars} from '@sanity/ui/css'
-import {ColorScheme} from '@sanity/ui/tokens'
+import {vars} from '@sanity/ui'
+import {ColorScheme} from '@sanity/ui'
 import {createTheme} from '@uiw/codemirror-themes'
 import {Extension} from '@uiw/react-codemirror'
 

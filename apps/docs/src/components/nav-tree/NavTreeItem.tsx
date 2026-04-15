@@ -2,7 +2,7 @@
 
 import {ChevronRightIcon} from '@sanity/icons'
 import {Box, Card, Flex, Stack, Text} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui'
 import {AnimatePresence, motion} from 'motion/react'
 import {useState} from 'react'
 // import {Link, useLocation} from 'react-router'

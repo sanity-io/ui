@@ -7,7 +7,7 @@ import {startTransition, useEffect, useState, useTransition} from 'react'
 import {disableDraftMode} from '@/app/actions'
 import {CloseIcon, EarthGlobeIcon, EyeOpenIcon} from '@sanity/icons'
 import {useApp} from './useApp'
-import {vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui'
 
 function isInIframeSafe() {
   try {

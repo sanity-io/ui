@@ -1,4 +1,4 @@
-import {vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui'
 import {EditorView, Extension} from '@uiw/react-codemirror'
 
 export function getEditorThemeExtension(): Extension {

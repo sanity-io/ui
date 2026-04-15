@@ -1,7 +1,7 @@
 import {PortableTextTypeComponent} from '@portabletext/react'
 import {sanity, unwrapData} from '@sanity/react-loader/jsx'
 import {VersionedLink} from '../../../VersionedLink'
-import {vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui'
 
 export const Span: PortableTextTypeComponent = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

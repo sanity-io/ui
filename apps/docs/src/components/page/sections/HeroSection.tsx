@@ -15,7 +15,7 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import {ButtonMode, ElementTone} from '@sanity/ui/tokens'
+import {ButtonMode, ElementTone} from '@sanity/ui'
 import Link from 'next/link'
 import {ReactElement} from 'react'
 

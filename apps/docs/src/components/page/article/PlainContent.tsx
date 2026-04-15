@@ -11,7 +11,7 @@ import React from 'react'
 import {SanityBlockValue} from '@/lib/sanity/types'
 
 import {root} from './PlainContent.css'
-import {vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui'
 
 const Block: PortableTextBlockComponent = (props) => {
   const {children, value} = props

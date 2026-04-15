@@ -1,5 +1,5 @@
 import {IconSymbol} from '@sanity/icons'
-import {CardTone} from '@sanity/ui/tokens'
+import {CardTone} from '@sanity/ui'
 
 import {SanityArrayItemValue, SanityBlockValue, SanityImageValue} from '@/lib/sanity/types'
 

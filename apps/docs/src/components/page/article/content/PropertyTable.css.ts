@@ -1,4 +1,4 @@
-import {vars} from '@sanity/ui/css'
+import {vars} from '@sanity/ui'
 import {globalStyle, style} from '@vanilla-extract/css'
 
 export const propertyBox = style({
