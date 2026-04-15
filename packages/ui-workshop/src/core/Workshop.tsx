@@ -1,5 +1,4 @@
-import {Box, Flex, Root, Text, useMediaIndex, usePrefersDark} from '@sanity/ui'
-import type {ColorScheme} from '@sanity/ui/tokens'
+import {Box, type ColorScheme, Flex, Root, Text, useMediaIndex, usePrefersDark} from '@sanity/ui'
 import debounce from 'lodash/debounce'
 import {startTransition, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 

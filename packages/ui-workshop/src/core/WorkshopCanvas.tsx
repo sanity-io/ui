@@ -1,5 +1,4 @@
-import {Card, Container, Heading, Stack, Text} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
+import {Card, Container, Heading, Stack, Text, vars} from '@sanity/ui'
 import {motion} from 'motion/react'
 import {useState} from 'react'
 

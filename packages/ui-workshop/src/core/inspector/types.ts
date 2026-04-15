@@ -1,4 +1,4 @@
-import type {ElementTone} from '@sanity/ui/tokens'
+import type {ElementTone} from '@sanity/ui'
 
 import type {WorkshopPlugin} from '../config/types'
 

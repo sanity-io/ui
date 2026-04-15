@@ -1,4 +1,4 @@
-import {BREAKPOINTS} from '@sanity/ui/css'
+import {BREAKPOINTS} from '@sanity/ui'
 import {style} from '@vanilla-extract/css'
 
 export const root = style({

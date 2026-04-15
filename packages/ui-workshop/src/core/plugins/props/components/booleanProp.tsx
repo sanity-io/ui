@@ -1,5 +1,4 @@
-import {Box, Checkbox, Flex, Text} from '@sanity/ui'
-import {vars} from '@sanity/ui/css'
+import {Box, Checkbox, Flex, Text, vars} from '@sanity/ui'
 
 import type {BooleanPropSchema} from '../types'
 import {useProps} from '../useProps'

@@ -1,5 +1,4 @@
-import {Root, usePrefersDark} from '@sanity/ui'
-import type {ColorScheme} from '@sanity/ui/tokens'
+import {type ColorScheme, Root, usePrefersDark} from '@sanity/ui'
 import {useCallback, useEffect, useReducer, useState} from 'react'
 
 import type {WorkshopConfig} from '../config/types'
