@@ -8,7 +8,7 @@ import {
   JUSTIFY_CONTENT,
   type JustifyContent,
 } from '../types/Flex'
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 import {type Responsive} from '../types/Responsive'
 
 export type FlexParentProps = {
@@ -22,7 +22,7 @@ export type FlexParentProps = {
   flexWrap?: Responsive<FlexWrap>
 }
 
-export const flexParentProps: Record<string, PropDef> = {
+export const flexParentProps: Record<string, StyleProp> = {
   alignItems: {
     type: 'union',
     className: 'align-items',

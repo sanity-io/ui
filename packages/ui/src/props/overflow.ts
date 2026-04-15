@@ -1,5 +1,5 @@
 import {OVERFLOW, type Overflow} from '../types/Overflow'
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 import {type Responsive} from '../types/Responsive'
 
 export type OverflowProps = {
@@ -11,7 +11,7 @@ export type OverflowProps = {
   overflowY?: Responsive<Overflow>
 }
 
-export const overflowProps: Record<string, PropDef> = {
+export const overflowProps: Record<string, StyleProp> = {
   overflow: {
     type: 'union',
     className: 'overflow',

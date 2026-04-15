@@ -1,4 +1,4 @@
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 import {type Responsive} from '../types/Responsive'
 import {SPACE, type Space} from '../types/Space'
 
@@ -11,7 +11,7 @@ export type GapProps = {
   columnGap?: Responsive<Space>
 }
 
-export const gapProps: Record<string, PropDef> = {
+export const gapProps: Record<string, StyleProp> = {
   gap: {
     type: 'union',
     className: 'gap',

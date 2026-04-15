@@ -1,4 +1,4 @@
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 import {type Responsive} from '../types/Responsive'
 
 export type HeightProps = {
@@ -10,7 +10,7 @@ export type HeightProps = {
   maxHeight?: Responsive<string>
 }
 
-export const heightProps: Record<string, PropDef> = {
+export const heightProps: Record<string, StyleProp> = {
   height: {
     type: 'string',
     className: 'height',

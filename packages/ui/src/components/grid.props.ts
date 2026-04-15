@@ -2,9 +2,9 @@ import {gapProps} from '../props/gap'
 import {gridParentProps} from '../props/gridParent'
 import {layoutProps} from '../props/layout'
 import {DISPLAY_GRID} from '../types/Display'
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 
-export const gridProps: Record<string, PropDef> = {
+export const gridProps: Record<string, StyleProp> = {
   as: {
     type: 'string',
   },

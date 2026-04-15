@@ -1,4 +1,4 @@
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 import {RADIUS, type Radius} from '../types/Radius'
 import {type Responsive} from '../types/Responsive'
 
@@ -17,7 +17,7 @@ export type BorderProps = {
   radius?: Responsive<Radius>
 }
 
-export const borderProps: Record<string, PropDef> = {
+export const borderProps: Record<string, StyleProp> = {
   border: {
     type: 'boolean',
     className: 'border',

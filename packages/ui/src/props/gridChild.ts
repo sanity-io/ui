@@ -1,4 +1,4 @@
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 import {type Responsive} from '../types/Responsive'
 
 export type GridChildProps = {
@@ -16,7 +16,7 @@ export type GridChildProps = {
   gridRowEnd?: Responsive<string>
 }
 
-export const gridChildProps: Record<string, PropDef> = {
+export const gridChildProps: Record<string, StyleProp> = {
   gridColumn: {
     type: 'string',
     className: 'grid-column',

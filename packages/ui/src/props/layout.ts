@@ -1,4 +1,4 @@
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 import {type BorderProps, borderProps} from './border'
 import {type FlexChildProps, flexChildProps} from './flexChild'
 import {type GridChildProps, gridChildProps} from './gridChild'
@@ -23,7 +23,7 @@ export interface LayoutProps
     FlexChildProps,
     GridChildProps {}
 
-export const layoutProps: Record<string, PropDef> = {
+export const layoutProps: Record<string, StyleProp> = {
   ...toneProps,
   ...widthProps,
   ...heightProps,

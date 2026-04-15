@@ -1,4 +1,4 @@
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 import {type Responsive} from '../types/Responsive'
 
 export type FlexChildProps = {
@@ -10,7 +10,7 @@ export type FlexChildProps = {
   flexShrink?: Responsive<number>
 }
 
-export const flexChildProps: Record<string, PropDef> = {
+export const flexChildProps: Record<string, StyleProp> = {
   flexBasis: {
     type: 'string',
     className: 'flex-basis',

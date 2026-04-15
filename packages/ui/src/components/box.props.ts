@@ -1,8 +1,8 @@
 import {layoutProps} from '../props/layout'
 import {DISPLAY_BLOCK} from '../types/Display'
-import {type PropDef} from '../types/PropDef'
+import {type StyleProp} from '../types/StyleProp'
 
-export const boxProps: Record<string, PropDef> = {
+export const boxProps: Record<string, StyleProp> = {
   as: {
     type: 'string',
   },
