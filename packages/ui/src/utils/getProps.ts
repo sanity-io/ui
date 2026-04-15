@@ -18,9 +18,11 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
 ): ComponentProps {
   let className = componentProps?.className || ''
   let style = componentProps?.style || {}
+  const returnedProps: ComponentProps = {}
 
   for (const key in componentProps) {
     if (!propDefs?.[key] || !propDefs?.[key].className) {
+      returnedProps[key] = componentProps[key]
       continue
     }
 
@@ -39,14 +41,7 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
     }
   }
 
-  const rest: ComponentProps = {}
-  for (const key in componentProps) {
-    if (!propDefs?.[key] || !propDefs[key].className) {
-      rest[key] = componentProps[key]
-    }
-  }
-
-  return {...rest, className, style}
+  return {...returnedProps, className, style}
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
