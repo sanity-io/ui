@@ -22,4 +22,4 @@ type UnionPropDef<T> = {
   values: readonly T[]
 }
 
-export type StyleProp<T = unknown> = BooleanPropDef | NumberPropDef | StringPropDef | UnionPropDef<T>
+export type PropDef<T = unknown> = BooleanPropDef | NumberPropDef | StringPropDef | UnionPropDef<T>

@@ -1,79 +1,79 @@
 import classNames from 'classnames'
 
-import {type StyleProp} from '../types/StyleProp'
+import {type PropDef} from '../types/PropDef'
 
 const PREFIX = 'sui'
 const BREAKPOINTS_LENGTH = 7
 
-interface AllProps {
+interface ComponentProps {
   className?: string
   style?: React.CSSProperties
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   [key: string]: any
 }
 
-export function getProps<P extends AllProps, T extends Record<string, StyleProp>>(
-  allProps?: P,
-  styleProps?: T,
-): AllProps {
-  let className = allProps?.className || ''
-  let style = allProps?.style || {}
+export function getProps<P extends ComponentProps, T extends Record<string, PropDef>>(
+  componentProps?: P,
+  propDefs?: T,
+): ComponentProps {
+  let className = componentProps?.className || ''
+  let style = componentProps?.style || {}
 
   // Iterate through the keys of all props on the component
-  for (const key in allProps) {
+  for (const key in componentProps) {
     // Bypass props that aren't style props
-    if (!styleProps?.[key] || !styleProps?.[key].className) {
+    if (!propDefs?.[key] || !propDefs?.[key].className) {
       continue
     }
 
     // Process style props
-    if (Array.isArray(allProps[key])) {
+    if (Array.isArray(componentProps[key])) {
       // Responsive array: generate a class name and style per breakpoint
-      for (let i = 0, len = Math.min(allProps[key].length, BREAKPOINTS_LENGTH); i < len; i++) {
-        className = classNames(className, getClassName(allProps[key][i], styleProps[key], i))
-        style = {...style, ...getStyle(allProps[key][i], styleProps[key], i)}
+      for (let i = 0, len = Math.min(componentProps[key].length, BREAKPOINTS_LENGTH); i < len; i++) {
+        className = classNames(className, getClassName(componentProps[key][i], propDefs[key], i))
+        style = {...style, ...getStyle(componentProps[key][i], propDefs[key], i)}
       }
     } else {
       // Single value: generate one class name and style
-      className = classNames(className, getClassName(allProps[key], styleProps[key]))
-      style = {...style, ...getStyle(allProps[key], styleProps[key])}
+      className = classNames(className, getClassName(componentProps[key], propDefs[key]))
+      style = {...style, ...getStyle(componentProps[key], propDefs[key])}
     }
   }
 
-  // Return only the props not consumed by style props
-  const propsWithoutStyleProps: AllProps = {}
-  for (const key in allProps) {
-    if (!styleProps?.[key] || !styleProps[key].className) {
-      propsWithoutStyleProps[key] = allProps[key]
+  // Return only the props not consumed by propDefs
+  const rest: ComponentProps = {}
+  for (const key in componentProps) {
+    if (!propDefs?.[key] || !propDefs[key].className) {
+      rest[key] = componentProps[key]
     }
   }
 
-  return {...propsWithoutStyleProps, className, style}
+  return {...rest, className, style}
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-function getClassName(prop: any, styleProp: StyleProp, bp?: number) {
-  if (styleProp.type === 'union' && styleProp.values?.includes(prop)) {
+function getClassName(prop: any, propDef: PropDef, bp?: number) {
+  if (propDef.type === 'union' && propDef.values?.includes(prop)) {
     /* Note: This may need updating depending on the final CSS classname formatting */
-    return `${PREFIX}-${styleProp.className}${typeof prop === 'string' ? `-${prop}` : prop}${bp ? `-bp-${bp}` : ''}`
+    return `${PREFIX}-${propDef.className}${typeof prop === 'string' ? `-${prop}` : prop}${bp ? `-bp-${bp}` : ''}`
   }
 
-  if (styleProp.type === 'string' || styleProp.type === 'number') {
-    return `${PREFIX}-${styleProp.className}${bp ? `-bp-${bp}` : ''}`
+  if (propDef.type === 'string' || propDef.type === 'number') {
+    return `${PREFIX}-${propDef.className}${bp ? `-bp-${bp}` : ''}`
   }
 
-  if (styleProp.type === 'boolean') {
-    return `${PREFIX}-${prop ? styleProp.className : styleProp.inverse}${bp ? `-bp-${bp}` : ''}`
+  if (propDef.type === 'boolean') {
+    return `${PREFIX}-${prop ? propDef.className : propDef.inverse}${bp ? `-bp-${bp}` : ''}`
   }
 
   return ''
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-function getStyle(prop: any, styleProp: StyleProp, bp?: number) {
-  if (styleProp.type === 'string' || styleProp.type === 'number') {
+function getStyle(prop: any, propDef: PropDef, bp?: number) {
+  if (propDef.type === 'string' || propDef.type === 'number') {
     return {
-      [`${styleProp.variable}${bp ? `-bp-${bp}` : ''}`]: prop,
+      [`${propDef.variable}${bp ? `-bp-${bp}` : ''}`]: prop,
     }
   }
 

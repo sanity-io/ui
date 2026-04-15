@@ -1,4 +1,4 @@
-import {type StyleProp} from '../types/StyleProp'
+import {type PropDef} from '../types/PropDef'
 import {type Responsive} from '../types/Responsive'
 
 export type WidthProps = {
@@ -10,7 +10,7 @@ export type WidthProps = {
   maxWidth?: Responsive<string>
 }
 
-export const widthProps: Record<string, StyleProp> = {
+export const widthProps: Record<string, PropDef> = {
   width: {
     type: 'string',
     className: 'width',

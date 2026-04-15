@@ -1,5 +1,5 @@
 import {GRID_AUTO_FLOW, type GridAutoFlow} from '../types/Grid'
-import {type StyleProp} from '../types/StyleProp'
+import {type PropDef} from '../types/PropDef'
 import {type Responsive} from '../types/Responsive'
 
 export type GridParentProps = {
@@ -15,7 +15,7 @@ export type GridParentProps = {
   gridTemplateRows?: Responsive<string>
 }
 
-export const gridParentProps: Record<string, StyleProp> = {
+export const gridParentProps: Record<string, PropDef> = {
   gridAutoFlow: {
     type: 'union',
     className: 'grid-auto-flow',

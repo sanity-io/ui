@@ -1,5 +1,5 @@
 import {POSITION, type Position} from '../types/Position'
-import {type StyleProp} from '../types/StyleProp'
+import {type PropDef} from '../types/PropDef'
 import {type Responsive} from '../types/Responsive'
 import {SPACE_AUTO, type SpaceAuto} from '../types/Space'
 
@@ -18,7 +18,7 @@ export type PositionProps = {
   left?: Responsive<SpaceAuto>
 }
 
-export const positionProps: Record<string, StyleProp> = {
+export const positionProps: Record<string, PropDef> = {
   position: {
     type: 'union',
     className: 'position',
