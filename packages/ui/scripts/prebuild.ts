@@ -19,6 +19,10 @@ async function prebuild() {
   await fs.rm(distPath, {force: true, recursive: true})
   console.log(`- removed ${_rel(distPath)}`)
 
+  // make `dist` directory
+  await fs.mkdir(distPath, {recursive: true})
+  console.log(`- created ${_rel(distPath)}`)
+
   // copy `exports/index.css` to `dist/index.css`
   await fs.cp(path.resolve(exportsPath, 'index.css'), path.resolve(distPath, 'index.css'))
   console.log(
@@ -27,6 +31,6 @@ async function prebuild() {
 }
 
 prebuild().catch((err) => {
-  console.error(err)
+  console.error('prebuild failed:', err)
   process.exit(1)
 })
