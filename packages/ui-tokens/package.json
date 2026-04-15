@@ -125,7 +125,7 @@
     "clean": "rimraf dist",
     "figma:deploy": "tsx scripts/figma/deploy.ts",
     "lint": "eslint . --ext .cjs,.js,.jsx,.mjs,.ts,.tsx",
-    "prepack": "run-s build",
+    "prepack": "turbo run build",
     "pkg:build": "pkg build --strict",
     "test": "vitest --passWithNoTests",
     "tokens-studio:generate": "tsx scripts/tokens-studio/generate.ts",
