@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.0.0-beta.2
+
+### Patch Changes
+
+- [`b1a7305`](https://github.com/sanity-io/ui/commit/b1a73050b3c95e330b4dd5f7249144c9a09528f7) Thanks [@mariuslundgard](https://github.com/mariuslundgard)! - Simplifies imports by re-exporting css and token utilities from `@sanity/ui`.
+
+  You must now import everything from the root package:
+  - `@sanity/ui/index.css` instead of `@sanity/ui/css/index.css`
+  - tokens and css utilities directly from `@sanity/ui`
+
+- Updated dependencies [[`b1a7305`](https://github.com/sanity-io/ui/commit/b1a73050b3c95e330b4dd5f7249144c9a09528f7)]:
+  - @sanity/ui-tokens@1.0.0-beta.2
+  - @sanity/ui-css@1.0.0-beta.2
+
 ## 4.0.0-beta.1
 
 ### Patch Changes
