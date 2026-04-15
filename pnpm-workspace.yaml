@@ -7,8 +7,8 @@ packages:
 publicHoistPattern:
   # This is needed for prettier to be able to use the plugin specified by the
   # `@sanity/prettier-config` preset, as well as eslint plugins defined by `@repo/eslint-config`
-  - "*eslint*"
-  - "*prettier*"
+  - '*eslint*'
+  - '*prettier*'
 
 preferWorkspacePackages: true
 strictPeerDependencies: false
