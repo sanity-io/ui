@@ -21,6 +21,10 @@
     "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
 
     "esModuleInterop": true,
+
+    // Needed for vite 8 (via ui-workshop)
+    "jsx": "react-jsx",
+
     "noEmit": true,
     "resolveJsonModule": true,
 
