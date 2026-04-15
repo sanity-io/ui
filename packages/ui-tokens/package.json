@@ -150,6 +150,7 @@
     "vitest": "^4.1.4"
   },
   "publishConfig": {
+    "access": "public",
     "exports": {
       ".": {
         "import": "./dist/index.js"
