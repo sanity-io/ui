@@ -3,7 +3,7 @@ import {display} from '../../props/display/display'
 import {flexProp} from '../../props/flex/flex'
 import {position} from '../../props/position/position'
 import {radius} from '../../props/radius/radius'
-import {inputVarsClassName} from '../../vars/input.css'
+import {inputVarsClassName} from '../../vars/component/input.css'
 import {input, presentation, root} from './checkbox.css'
 
 /** @public */

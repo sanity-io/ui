@@ -1,36 +1,36 @@
 /* eslint-disable simple-import-sort/imports */
 
 // 0 - palette
-import {paletteVars} from './vars/palette.css'
 
 // 1 - color scheme
-import {_colorSchemeVars} from './vars/color/scheme.css'
+import {paletteVars} from './vars/primitive/color/palette.css'
 
 // 2 - card tone
-import {_cardToneVars} from './vars/card/tone.css'
+import {_colorSchemeVars} from './vars/build/color/scheme.css'
 
 // 3 - semantic color
-import {colorVars} from './vars/color.css'
+import {_cardToneVars} from './vars/context/card/tone.css'
+import {elementToneVars} from './vars/context/element/tone.css'
 
 // 4 - element tone
-import {elementToneVars} from './vars/element/tone.css'
+import {fontVars} from './vars/primitive/font.css'
+import {radiusVars} from './vars/primitive/radius.css'
+import {shadowVars} from './vars/primitive/shadow.css'
+import {spaceVars} from './vars/primitive/space.css'
 
 // 5 - other primitives
-import {avatarVars} from './vars/avatar.css'
-import {borderVars} from './vars/border.css'
-import {containerVars} from './vars/container.css'
-import {cornerVars} from './vars/corner.css'
-import {focusVars} from './vars/focus.css'
-import {fontVars} from './vars/font.css'
-import {radiusVars} from './vars/radius.css'
-import {shadowVars} from './vars/shadow.css'
-import {spaceVars} from './vars/space.css'
+import {borderVars} from './vars/decision/border.css'
+import {containerVars} from './vars/decision/container.css'
+import {cornerVars} from './vars/decision/corner.css'
+import {focusVars} from './vars/decision/focus.css'
 
 // 6 - components
-import {buttonVars} from './vars/button.css'
-import {cardVars} from './vars/card.css'
-import {inputVars} from './vars/input.css'
-import {selectableVars} from './vars/selectable.css'
+import {colorVars} from './vars/semantic/color.css'
+import {avatarVars} from './vars/component/avatar.css'
+import {buttonVars} from './vars/component/button.css'
+import {cardVars} from './vars/component/card.css'
+import {inputVars} from './vars/component/input.css'
+import {selectableVars} from './vars/component/selectable.css'
 
 /**
  * CSS custom properties (CSS variables) for the Sanity UI design system.

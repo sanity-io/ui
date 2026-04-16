@@ -1,14 +1,14 @@
-import {_buttonModeTokens} from '@sanity/ui-tokens/button/mode'
+import {_buttonModeTokens} from '@sanity/ui-tokens/component/button/mode'
 import {BUTTON_MODES} from '@sanity/ui-tokens/constants'
 import {createTheme, createThemeContract} from '@vanilla-extract/css'
 
 import {_layers} from '../../layers.css'
 import {_fromEntries} from '../../lib/_fromEntries'
 import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
-import {borderVars} from '../../vars/border.css'
-import {colorVars} from '../../vars/color.css'
-import {elementToneVars} from '../../vars/element/tone.css'
-import {shadowVars} from '../../vars/shadow.css'
+import {elementToneVars} from '../../vars/context/element/tone.css'
+import {borderVars} from '../../vars/decision/border.css'
+import {shadowVars} from '../../vars/primitive/shadow.css'
+import {colorVars} from '../../vars/semantic/color.css'
 
 const _vars = {
   ...borderVars,

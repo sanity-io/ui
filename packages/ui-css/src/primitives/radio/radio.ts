@@ -2,7 +2,7 @@ import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
 import {display} from '../../props/display/display'
 import {flexProp} from '../../props/flex/flex'
 import {position} from '../../props/position/position'
-import {inputVarsClassName} from '../../vars/input.css'
+import {inputVarsClassName} from '../../vars/component/input.css'
 import {input, presentation, root} from './radio.css'
 
 /** @public */

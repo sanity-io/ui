@@ -1,4 +1,4 @@
-import {_cardToneClassNames} from '../../vars/card/tone.css'
+import {_cardToneClassNames} from '../../vars/context/card/tone.css'
 import type {CardToneStyleProps} from './types'
 
 /** @public */

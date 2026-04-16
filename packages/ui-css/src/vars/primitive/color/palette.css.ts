@@ -1,9 +1,9 @@
-import {paletteTokens} from '@sanity/ui-tokens/color/palette'
+import {paletteTokens} from '@sanity/ui-tokens/primitive/color/palette'
 import {createTheme} from '@vanilla-extract/css'
 
-import {_layers} from '../layers.css'
-import {_toCSSTokens} from '../lib/css-tokens/_toCSSTokens'
-import type {CSSVars} from '../lib/css-tokens/types'
+import {_layers} from '../../../layers.css'
+import {_toCSSTokens} from '../../../lib/css-tokens/_toCSSTokens'
+import type {CSSVars} from '../../../lib/css-tokens/types'
 
 const _vars = {}
 const _cssTokens = _toCSSTokens(paletteTokens, _vars)

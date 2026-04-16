@@ -1,9 +1,9 @@
-import {spaceTokens} from '@sanity/ui-tokens/space'
+import {spaceTokens} from '@sanity/ui-tokens/primitive/space'
 import {createTheme} from '@vanilla-extract/css'
 
-import {_layers} from '../layers.css'
-import {_toCSSTokens} from '../lib/css-tokens/_toCSSTokens'
-import type {CSSVars} from '../lib/css-tokens/types'
+import {_layers} from '../../layers.css'
+import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
+import type {CSSVars} from '../../lib/css-tokens/types'
 
 const _vars = {}
 const _cssTokens = _toCSSTokens(spaceTokens, _vars)

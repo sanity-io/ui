@@ -1,11 +1,11 @@
-import {_colorSchemeTokens} from '@sanity/ui-tokens/color/scheme'
+import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/scheme'
 import {COLOR_SCHEMES} from '@sanity/ui-tokens/constants'
 import {createTheme, createThemeContract} from '@vanilla-extract/css'
 
-import {_layers} from '../../layers.css'
-import {_fromEntries} from '../../lib/_fromEntries'
-import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
-import {paletteVars} from '../palette.css'
+import {_layers} from '../../../layers.css'
+import {_fromEntries} from '../../../lib/_fromEntries'
+import {_toCSSTokens} from '../../../lib/css-tokens/_toCSSTokens'
+import {paletteVars} from '../../primitive/color/palette.css'
 
 const _vars = {
   color: {

@@ -1,11 +1,11 @@
-import {cardTokens} from '@sanity/ui-tokens/card'
+import {cardTokens} from '@sanity/ui-tokens/component/card'
 import {createTheme} from '@vanilla-extract/css'
 
-import {_layers} from '../layers.css'
-import {_toCSSTokens} from '../lib/css-tokens/_toCSSTokens'
-import type {CSSVars} from '../lib/css-tokens/types'
-import {borderVars} from './border.css'
-import {colorVars} from './color.css'
+import {_layers} from '../../layers.css'
+import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
+import type {CSSVars} from '../../lib/css-tokens/types'
+import {borderVars} from '../decision/border.css'
+import {colorVars} from '../semantic/color.css'
 
 const _vars = {
   ...borderVars,

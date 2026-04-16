@@ -1,5 +1,5 @@
 import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
-import {elementToneClassNames} from '../../vars/element/tone.css'
+import {elementToneClassNames} from '../../vars/context/element/tone.css'
 import type {ElementToneStyleProps} from './types'
 
 /** @internal */

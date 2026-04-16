@@ -1,11 +1,11 @@
-import {selectableTokens} from '@sanity/ui-tokens/selectable'
+import {selectableTokens} from '@sanity/ui-tokens/component/selectable'
 import {createTheme} from '@vanilla-extract/css'
 
-import {_layers} from '../layers.css'
-import {_toCSSTokens} from '../lib/css-tokens/_toCSSTokens'
-import type {CSSVars} from '../lib/css-tokens/types'
-import {colorVars} from './color.css'
-import {elementToneVars} from './element/tone.css'
+import {_layers} from '../../layers.css'
+import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
+import type {CSSVars} from '../../lib/css-tokens/types'
+import {elementToneVars} from '../context/element/tone.css'
+import {colorVars} from '../semantic/color.css'
 
 const _vars = {
   color: {

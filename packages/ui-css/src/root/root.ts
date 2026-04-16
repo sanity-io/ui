@@ -1,28 +1,28 @@
 /* eslint-disable simple-import-sort/imports */
 
 // 0 - palette
-import {paletteVarsClassName} from '../vars/palette.css'
+import {paletteVarsClassName} from '../vars/primitive/color/palette.css'
 
 // 1 - core
 // import {_coreVarsClassName} from '../vars/_core.css'
 
 // vars
-import {avatarVarsClassName} from '../vars/avatar.css'
-import {borderVarsClassName} from '../vars/border.css'
-import {colorVarsClassName} from '../vars/color.css'
-import {containerVarsClassName} from '../vars/container.css'
-import {cornerVarsClassName} from '../vars/corner.css'
-import {focusVarsClassName} from '../vars/focus.css'
-import {fontVarsClassName} from '../vars/font.css'
-import {radiusVarsClassName} from '../vars/radius.css'
-import {shadowVarsClassName} from '../vars/shadow.css'
-import {spaceVarsClassName} from '../vars/space.css'
+import {borderVarsClassName} from '../vars/decision/border.css'
+import {colorVarsClassName} from '../vars/semantic/color.css'
+import {containerVarsClassName} from '../vars/decision/container.css'
+import {cornerVarsClassName} from '../vars/decision/corner.css'
+import {focusVarsClassName} from '../vars/decision/focus.css'
+import {fontVarsClassName} from '../vars/primitive/font.css'
+import {radiusVarsClassName} from '../vars/primitive/radius.css'
+import {shadowVarsClassName} from '../vars/primitive/shadow.css'
+import {spaceVarsClassName} from '../vars/primitive/space.css'
 
 // components
 // import {buttonVarsClassName} from '../vars/button.css'
-import {cardVarsClassName} from '../vars/card.css'
 // import {inputVarsClassName} from '../vars/input.css'
 // import {selectableVarsClassName} from '../primitives/selectable/selectable.css'
+import {avatarVarsClassName} from '../vars/component/avatar.css'
+import {cardVarsClassName} from '../vars/component/card.css'
 
 // props
 import {bgPattern} from '../props/bgPattern/bgPattern'

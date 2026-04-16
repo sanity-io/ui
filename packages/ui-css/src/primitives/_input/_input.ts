@@ -4,7 +4,7 @@ import {flexProp} from '../../props/flex/flex'
 import {position} from '../../props/position/position'
 import {radius} from '../../props/radius/radius'
 import {width} from '../../props/width/width'
-import {inputVarsClassName} from '../../vars/input.css'
+import {inputVarsClassName} from '../../vars/component/input.css'
 import {
   border,
   element,

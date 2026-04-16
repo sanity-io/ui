@@ -1,10 +1,10 @@
-import {focusTokens} from '@sanity/ui-tokens/focus'
+import {focusTokens} from '@sanity/ui-tokens/decision/focus'
 import {createTheme} from '@vanilla-extract/css'
 
-import {_layers} from '../layers.css'
-import {_toCSSTokens} from '../lib/css-tokens/_toCSSTokens'
-import type {CSSVars} from '../lib/css-tokens/types'
-import {colorVars} from './color.css'
+import {_layers} from '../../layers.css'
+import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
+import type {CSSVars} from '../../lib/css-tokens/types'
+import {colorVars} from '../semantic/color.css'
 
 const _vars = {...colorVars}
 const _cssTokens = _toCSSTokens(focusTokens, _vars)

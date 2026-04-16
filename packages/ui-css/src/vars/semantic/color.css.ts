@@ -1,11 +1,11 @@
-import {colorTokens} from '@sanity/ui-tokens/color'
+import {colorTokens} from '@sanity/ui-tokens/semantic/color'
 import {createTheme, createThemeContract} from '@vanilla-extract/css'
 
-import {_layers} from '../layers.css'
-import {_toCSSTokens} from '../lib/css-tokens/_toCSSTokens'
-import type {CSSVars} from '../lib/css-tokens/types'
-import {_cardToneVars} from './card/tone.css'
-import {elementToneVars} from './element/tone.css'
+import {_layers} from '../../layers.css'
+import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
+import type {CSSVars} from '../../lib/css-tokens/types'
+import {_cardToneVars} from '../context/card/tone.css'
+import {elementToneVars} from '../context/element/tone.css'
 
 const _vars = {
   color: {
