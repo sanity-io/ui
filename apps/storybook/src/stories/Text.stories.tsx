@@ -4,7 +4,6 @@ import { expect } from 'storybook/test'
 import {Text} from '../../../../packages/ui/src/components/Text'
 import { getArgTypes } from '../utils/getArgTypes'
 import { textProps } from '../../../../packages/ui/src/components/text.props'
-import { Box } from '../../../../packages/ui/src/components/Box'
 
 const argTypes = getArgTypes(textProps)
 
@@ -36,40 +35,24 @@ export const Default: Story = {
   play: async ({ canvas }) => {
     await expect(
       (await canvas.findByText('This is a Text component.')).classList
-    ).toContain('sui-display-block')
+    ).toContain('sui-text-body2')
   }
 }
 
-export const TestTrim: Story = {
+export const TrimLineClamp: Story = {
   render: (props) => {
     return (
-      <Box style={{ border: '20px solid lightgreen' }}>
-        <Text trim {...props}>
-          cap alphabetic
-        </Text>
-      </Box>
+      <Text trim lineClamp={1} {...props}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </Text>
     )
   },
   play: async ({ canvas }) => {
     await expect(
-      (await canvas.findByText('This is a Text component.')).classList
-    ).toContain('sui-display-block')
-  }
-}
-
-export const TestEllipsis: Story = {
-  render: (props) => {
-    return (
-      <Box style={{ border: '20px solid lightgreen' }}>
-        <Text lineClamp={1} {...props}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        </Text>
-      </Box>
-    )
-  },
-  play: async ({ canvas }) => {
+      (await canvas.findByText(/Lorem ipsum dolor sit amet/)).classList
+    ).toContain('sui-line-clamp')
+  
     await expect(
-      (await canvas.findByText('This is a Text component.')).classList
-    ).toContain('sui-display-block')
+      (await canvas.findByText(/Lorem ipsum dolor sit amet/)).parentElement?.classList).toContain('sui-text-trim')
   }
 }
