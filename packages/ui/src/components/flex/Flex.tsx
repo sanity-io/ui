@@ -1,12 +1,12 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import type {FlexParentProps} from '../props/flexParent'
-import type {GapProps} from '../props/gap'
-import {type LayoutProps} from '../props/layout'
-import {type DisplayFlex} from '../types/Display'
-import {type Responsive} from '../types/Responsive'
-import {getProps} from '../utils/getProps'
+import type {FlexParentProps} from '../../props/flexParent'
+import type {GapProps} from '../../props/gap'
+import {type LayoutProps} from '../../props/layout'
+import {type DisplayFlex} from '../../types/Display'
+import {type Responsive} from '../../types/Responsive'
+import {getProps} from '../../utils/getProps'
 import {flexProps} from './flex.props'
 
 export interface FlexProps<T extends React.ElementType>
@@ -18,9 +18,9 @@ export interface FlexProps<T extends React.ElementType>
 }
 
 export function Flex<T extends React.ElementType = 'div'>(
-  props: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>,
+  { display = 'flex', ...props}: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>,
 ) {
-  const {as, children, className, style, ...rest} = getProps(props, flexProps)
+  const {as, children, className, style, ...rest} = getProps({display, ...props}, flexProps)
   const Component = as || 'div'
 
   return (
