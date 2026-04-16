@@ -18,7 +18,9 @@ export const colorTokens = _defineTokens({
       ]),
     ),
     backdrop: _colorAlias('{color._cardTone.backdrop}', {scopes: ['fill/shape']}),
-    bg: _colorAlias('{color.tinted.default.bg.0}', {scopes: ['effect/color', 'fill/frame']}),
+    bg: _colorAlias('{color.tinted.default.bg.0}', {
+      scopes: ['effect/color', 'fill/frame', 'fill/shape'],
+    }),
     border: _colorAlias('{color.tinted.default.border.2}', {scopes: ['stroke/color']}),
     code: {
       token: _fromEntries(
