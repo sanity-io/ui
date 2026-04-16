@@ -37,6 +37,7 @@ export function StoryTreeItems(props: {
 
           return (
             <TreeItem
+              key={item.name}
               expanded={workshopPath.startsWith(path + '/')}
               fontSize={1}
               padding={2}
@@ -68,6 +69,7 @@ export function StoryTreeItems(props: {
         if (item.type === 'scope') {
           return (
             <TreeItem
+              key={item.name}
               expanded={item.scope === currentScope}
               fontSize={1}
               padding={2}
