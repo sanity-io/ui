@@ -1,9 +1,9 @@
 import type { Meta, StoryObj} from '@storybook/react-vite'
 import { expect } from 'storybook/test'
 
-import {Text} from '../../../../packages/ui/src/components/Text'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import { getArgTypes } from '../utils/getArgTypes'
-import { textProps } from '../../../../packages/ui/src/components/text.props'
+import { textProps } from '../../../../packages/ui/src/components/text/text.props'
 
 const argTypes = getArgTypes(textProps)
 

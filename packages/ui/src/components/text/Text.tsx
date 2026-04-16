@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import type {TypographyProps} from '../props/typography'
-import type {TextSize} from '../types/Text'
-import {getProps} from '../utils/getProps'
+import type {TypographyProps} from '../../props/typography'
+import type {TextSize} from '../../types/Text'
+import {getProps} from '../../utils/getProps'
 import {textProps} from './text.props'
 
 /** @public */
