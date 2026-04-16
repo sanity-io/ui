@@ -1,92 +1,108 @@
 /**
  * List of layers to export. Paths are relative to the `src` directory.
+ * The `name` should match the `path` (location in src/).
  */
 export const layers = [
+  // primitive layers
   {
-    name: 'avatar',
-    path: 'avatar',
+    name: 'primitive/color/palette',
+    path: 'primitive/color/palette',
   },
   {
-    name: 'border',
-    path: 'border',
+    name: 'primitive/font/lib',
+    path: 'primitive/font/lib',
   },
   {
-    name: '_buttonMode',
-    path: 'button/mode',
-    importsFrom: ['color/lib'],
+    name: 'primitive/font',
+    path: 'primitive/font',
+    importsFrom: ['primitive/font/lib'],
   },
   {
-    name: 'button',
-    path: 'button',
-    importsFrom: ['color/lib'],
+    name: 'primitive/radius',
+    path: 'primitive/radius',
   },
   {
-    name: 'card',
-    path: 'card',
-    importsFrom: ['color/lib'],
+    name: 'primitive/shadow',
+    path: 'primitive/shadow',
+    importsFrom: ['lib/color'],
   },
   {
-    name: '_cardTone',
-    path: 'card/tone',
-    importsFrom: ['color/lib', '_colorScheme'],
+    name: 'primitive/space',
+    path: 'primitive/space',
+  },
+
+  // build layers
+  {
+    name: 'build/color/scheme',
+    path: 'build/color/scheme',
+    importsFrom: ['lib/color', 'primitive/color/palette'],
+  },
+
+  // semantic layers
+  {
+    name: 'semantic/color',
+    path: 'semantic/color',
+    importsFrom: ['lib/color', 'build/color/scheme', 'primitive/color/palette'],
+  },
+
+  // decision layers
+  {
+    name: 'decision/border',
+    path: 'decision/border',
   },
   {
-    name: 'palette',
-    path: 'color/palette',
+    name: 'decision/container',
+    path: 'decision/container',
   },
   {
-    name: '_colorScheme',
-    path: 'color/scheme',
-    importsFrom: ['color/lib', 'palette'],
+    name: 'decision/corner',
+    path: 'decision/corner',
   },
   {
-    name: 'color',
-    path: 'color',
-    importsFrom: ['color/lib'],
+    name: 'decision/focus',
+    path: 'decision/focus',
+  },
+
+  // context layers
+  {
+    name: 'context/element/tone',
+    path: 'context/element/tone',
+    importsFrom: ['lib/color'],
   },
   {
-    name: 'container',
-    path: 'container',
+    name: 'context/card/tone',
+    path: 'context/card/tone',
+    importsFrom: ['lib/color'],
+  },
+
+  // component layers
+  {
+    name: 'component/avatar',
+    path: 'component/avatar',
   },
   {
-    name: 'corner',
-    path: 'corner',
+    name: 'component/button/mode',
+    path: 'component/button/mode',
+    importsFrom: ['lib/color'],
   },
   {
-    name: '_elementTone',
-    path: 'element/tone',
-    importsFrom: ['color/lib'],
+    name: 'component/button',
+    path: 'component/button',
+    importsFrom: ['lib/color'],
   },
   {
-    name: 'focus',
-    path: 'focus',
+    name: 'component/card',
+    path: 'component/card',
+    importsFrom: ['lib/color'],
   },
   {
-    name: 'font',
-    path: 'font',
-    importsFrom: ['font/lib'],
+    name: 'component/input',
+    path: 'component/input',
+    importsFrom: ['lib/color'],
   },
   {
-    name: 'input',
-    path: 'input',
-    importsFrom: ['color/lib'],
-  },
-  {
-    name: 'radius',
-    path: 'radius',
-  },
-  {
-    name: 'selectable',
-    path: 'selectable',
-    importsFrom: ['color/lib'],
-  },
-  {
-    name: 'shadow',
-    path: 'shadow',
-    importsFrom: ['color/lib'],
-  },
-  {
-    name: 'space',
-    path: 'space',
+    name: 'component/selectable',
+    path: 'component/selectable',
+    importsFrom: ['lib/color'],
   },
 ]

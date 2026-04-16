@@ -26,89 +26,89 @@
       "source": "./exports/index.ts",
       "import": "./dist/index.js"
     },
-    "./avatar": {
-      "source": "./exports/avatar.ts",
-      "import": "./dist/avatar.js"
+    "./build/color/scheme": {
+      "source": "./exports/build/color/scheme.ts",
+      "import": "./dist/build/color/scheme.js"
     },
-    "./border": {
-      "source": "./exports/border.ts",
-      "import": "./dist/border.js"
+    "./component/avatar": {
+      "source": "./exports/component/avatar.ts",
+      "import": "./dist/component/avatar.js"
     },
-    "./card": {
-      "source": "./exports/card.ts",
-      "import": "./dist/card.js"
+    "./component/card": {
+      "source": "./exports/component/card.ts",
+      "import": "./dist/component/card.js"
     },
-    "./card/tone": {
-      "source": "./exports/card/tone.ts",
-      "import": "./dist/card/tone.js"
+    "./context/card/tone": {
+      "source": "./exports/context/card/tone.ts",
+      "import": "./dist/context/card/tone.js"
     },
-    "./button": {
-      "source": "./exports/button.ts",
-      "import": "./dist/button.js"
+    "./component/button": {
+      "source": "./exports/component/button.ts",
+      "import": "./dist/component/button.js"
     },
-    "./button/mode": {
-      "source": "./exports/button/mode.ts",
-      "import": "./dist/button/mode.js"
+    "./component/button/mode": {
+      "source": "./exports/component/button/mode.ts",
+      "import": "./dist/component/button/mode.js"
     },
-    "./color": {
-      "source": "./exports/color.ts",
-      "import": "./dist/color.js"
+    "./component/input": {
+      "source": "./exports/component/input.ts",
+      "import": "./dist/component/input.js"
     },
-    "./color/palette": {
-      "source": "./exports/color/palette.ts",
-      "import": "./dist/color/palette.js"
-    },
-    "./color/scheme": {
-      "source": "./exports/color/scheme.ts",
-      "import": "./dist/color/scheme.js"
+    "./component/selectable": {
+      "source": "./exports/component/selectable.ts",
+      "import": "./dist/component/selectable.js"
     },
     "./constants": {
       "source": "./exports/constants.ts",
       "import": "./dist/constants.js"
     },
-    "./container": {
-      "source": "./exports/container.ts",
-      "import": "./dist/container.js"
+    "./context/element/tone": {
+      "source": "./exports/context/element/tone.ts",
+      "import": "./dist/context/element/tone.js"
     },
-    "./corner": {
-      "source": "./exports/corner.ts",
-      "import": "./dist/corner.js"
+    "./decision/border": {
+      "source": "./exports/decision/border.ts",
+      "import": "./dist/decision/border.js"
     },
-    "./element/tone": {
-      "source": "./exports/element/tone.ts",
-      "import": "./dist/element/tone.js"
+    "./decision/container": {
+      "source": "./exports/decision/container.ts",
+      "import": "./dist/decision/container.js"
     },
-    "./focus": {
-      "source": "./exports/focus.ts",
-      "import": "./dist/focus.js"
+    "./decision/corner": {
+      "source": "./exports/decision/corner.ts",
+      "import": "./dist/decision/corner.js"
     },
-    "./font": {
-      "source": "./exports/font.ts",
-      "import": "./dist/font.js"
-    },
-    "./input": {
-      "source": "./exports/input.ts",
-      "import": "./dist/input.js"
+    "./decision/focus": {
+      "source": "./exports/decision/focus.ts",
+      "import": "./dist/decision/focus.js"
     },
     "./lib": {
       "source": "./exports/lib.ts",
       "import": "./dist/lib.js"
     },
-    "./radius": {
-      "source": "./exports/radius.ts",
-      "import": "./dist/radius.js"
+    "./primitive/color/palette": {
+      "source": "./exports/primitive/color/palette.ts",
+      "import": "./dist/primitive/color/palette.js"
     },
-    "./selectable": {
-      "source": "./exports/selectable.ts",
-      "import": "./dist/selectable.js"
+    "./primitive/font": {
+      "source": "./exports/primitive/font.ts",
+      "import": "./dist/primitive/font.js"
     },
-    "./shadow": {
-      "source": "./exports/shadow.ts",
-      "import": "./dist/shadow.js"
+    "./primitive/radius": {
+      "source": "./exports/primitive/radius.ts",
+      "import": "./dist/primitive/radius.js"
     },
-    "./space": {
-      "source": "./exports/space.ts",
-      "import": "./dist/space.js"
+    "./primitive/shadow": {
+      "source": "./exports/primitive/shadow.ts",
+      "import": "./dist/primitive/shadow.js"
+    },
+    "./primitive/space": {
+      "source": "./exports/primitive/space.ts",
+      "import": "./dist/primitive/space.js"
+    },
+    "./semantic/color": {
+      "source": "./exports/semantic/color.ts",
+      "import": "./dist/semantic/color.js"
     },
     "./system": {
       "source": "./exports/system.ts",
@@ -152,76 +152,76 @@
   "publishConfig": {
     "access": "public",
     "exports": {
+      "./package.json": "./package.json",
       ".": {
         "import": "./dist/index.js"
       },
-      "./avatar": {
-        "import": "./dist/avatar.js"
+      "./build/color/scheme": {
+        "import": "./dist/build/color/scheme.js"
       },
-      "./border": {
-        "import": "./dist/border.js"
+      "./component/avatar": {
+        "import": "./dist/component/avatar.js"
       },
-      "./card": {
-        "import": "./dist/card.js"
+      "./component/button": {
+        "import": "./dist/component/button.js"
       },
-      "./card/tone": {
-        "import": "./dist/card/tone.js"
+      "./component/button/mode": {
+        "import": "./dist/component/button/mode.js"
       },
-      "./button": {
-        "import": "./dist/button.js"
+      "./component/card": {
+        "import": "./dist/component/card.js"
       },
-      "./button/mode": {
-        "import": "./dist/button/mode.js"
+      "./component/input": {
+        "import": "./dist/component/input.js"
       },
-      "./color": {
-        "import": "./dist/color.js"
-      },
-      "./color/palette": {
-        "import": "./dist/color/palette.js"
-      },
-      "./color/scheme": {
-        "import": "./dist/color/scheme.js"
+      "./component/selectable": {
+        "import": "./dist/component/selectable.js"
       },
       "./constants": {
         "import": "./dist/constants.js"
       },
-      "./container": {
-        "import": "./dist/container.js"
+      "./context/card/tone": {
+        "import": "./dist/context/card/tone.js"
       },
-      "./corner": {
-        "import": "./dist/corner.js"
+      "./context/element/tone": {
+        "import": "./dist/context/element/tone.js"
       },
-      "./element/tone": {
-        "import": "./dist/element/tone.js"
+      "./decision/border": {
+        "import": "./dist/decision/border.js"
       },
-      "./focus": {
-        "import": "./dist/focus.js"
+      "./decision/container": {
+        "import": "./dist/decision/container.js"
       },
-      "./font": {
-        "import": "./dist/font.js"
+      "./decision/corner": {
+        "import": "./dist/decision/corner.js"
       },
-      "./input": {
-        "import": "./dist/input.js"
+      "./decision/focus": {
+        "import": "./dist/decision/focus.js"
       },
       "./lib": {
         "import": "./dist/lib.js"
       },
-      "./radius": {
-        "import": "./dist/radius.js"
+      "./primitive/color/palette": {
+        "import": "./dist/primitive/color/palette.js"
       },
-      "./selectable": {
-        "import": "./dist/selectable.js"
+      "./primitive/font": {
+        "import": "./dist/primitive/font.js"
       },
-      "./shadow": {
-        "import": "./dist/shadow.js"
+      "./primitive/radius": {
+        "import": "./dist/primitive/radius.js"
       },
-      "./space": {
-        "import": "./dist/space.js"
+      "./primitive/shadow": {
+        "import": "./dist/primitive/shadow.js"
+      },
+      "./primitive/space": {
+        "import": "./dist/primitive/space.js"
+      },
+      "./semantic/color": {
+        "import": "./dist/semantic/color.js"
       },
       "./system": {
         "import": "./dist/system.js"
-      },
-      "./package.json": "./package.json"
+      }
     }
   }
 }

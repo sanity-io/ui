@@ -1,7 +1,7 @@
-import {_colorAlias} from '../../color/lib/_colorAlias'
-import {_defineToken} from '../../lib/_defineToken'
-import {_defineTokenGroup} from '../../lib/_defineTokenGroup'
-import {_defineTokens} from '../../lib/_defineTokens'
+import {_defineToken} from '../../../lib/_defineToken'
+import {_defineTokenGroup} from '../../../lib/_defineTokenGroup'
+import {_defineTokens} from '../../../lib/_defineTokens'
+import {_colorAlias} from '../../../lib/color/_colorAlias'
 
 /** @internal */
 export const _buttonModeTokens = {

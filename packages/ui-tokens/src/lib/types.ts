@@ -1,9 +1,9 @@
-import type {SanityColorToken} from '../color/lib/types'
 import type {
   SanityFontFamilyToken,
   SanityFontWeightToken,
   SanityTypographyToken,
-} from '../font/lib/types'
+} from '../primitive/font/lib/types'
+import type {SanityColorToken} from './color/types'
 import type {
   _DTCGBooleanToken,
   _DTCGBorderToken,

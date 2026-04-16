@@ -40,7 +40,7 @@ export default defineConfig(import.meta.dirname, [
           return [
             {
               type: `exports/${c.name}`,
-              pattern: `exports/${c.path}.ts`,
+              pattern: `exports/${c.name}.ts`,
               mode: 'file',
             },
           ]
@@ -48,10 +48,13 @@ export default defineConfig(import.meta.dirname, [
 
         // source/*
         {type: 'source/constants', pattern: 'src/constants.ts', mode: 'file'},
-        {type: 'source/lib', pattern: 'src/lib/**/*.ts', mode: 'file'},
         {type: 'source/types', pattern: 'src/types.ts', mode: 'file'},
-        {type: 'source/color/lib', pattern: 'src/color/lib/*.ts', mode: 'file'},
-        {type: 'source/font/lib', pattern: 'src/font/lib/*.ts', mode: 'file'},
+        {type: 'source/lib/color', pattern: 'src/lib/color/*.ts', mode: 'file'},
+        {type: 'source/lib', pattern: 'src/lib/**/*.ts', mode: 'file'},
+        {type: 'source/primitive/font/lib', pattern: 'src/primitive/font/lib/*.ts', mode: 'file'},
+        {type: 'source/decision/color/lib', pattern: 'src/decision/color/*.ts', mode: 'file'},
+        {type: 'source/build/color/scheme', pattern: 'src/build/color/scheme/*.ts', mode: 'file'},
+        {type: 'source/semantic/tokens', pattern: 'src/semantic/tokens.ts', mode: 'file'},
         ...layers.flatMap((c) => {
           return [
             {
@@ -91,7 +94,11 @@ export default defineConfig(import.meta.dirname, [
             // source/*
             {
               from: 'source/lib',
-              allow: ['source/color/lib', 'source/font/lib', 'source/lib'],
+              allow: ['source/lib/color', 'source/computed/color/lib', 'source/primitive/font/lib', 'source/lib'],
+            },
+            {
+              from: 'source/lib/color',
+              allow: ['source/lib', 'source/lib/color', 'source/types', 'source/constants'],
             },
             {
               from: 'source/types',
@@ -102,21 +109,48 @@ export default defineConfig(import.meta.dirname, [
               allow: [
                 'source/constants',
                 'source/lib',
+                'source/lib/color',
                 'source/types',
                 ...(c.importsFrom?.map((n) => `source/${n}`) ?? []),
               ],
             })),
             {
-              from: 'source/font/lib',
-              allow: ['source/lib', 'source/font/lib'],
+              from: 'source/primitive/font/lib',
+              allow: ['source/lib', 'source/primitive/font/lib'],
             },
             {
-              from: 'source/color/lib',
-              allow: ['source/lib', 'source/constants', 'source/types', 'source/color/lib'],
+              from: 'source/decision/color/lib',
+              allow: ['source/lib', 'source/types', 'source/constants', 'source/decision/color/lib'],
+            },
+            {
+              from: 'source/build/color/scheme',
+              allow: ['source/lib', 'source/lib/color', 'source/types', 'source/constants', 'source/decision/color/lib', 'source/color/palette'],
+            },
+            {
+              from: 'source/semantic/tokens',
+              allow: ['source/lib', 'source/lib/color', 'source/types', 'source/constants', 'source/build/color/scheme', 'source/color/palette'],
+            },
+            {
+              from: 'source/computed/color/lib',
+              allow: [
+                'source/lib',
+                'source/lib/color',
+                'source/constants',
+                'source/types',
+                'source/computed/color/lib',
+              ],
             },
             {
               from: 'source/system',
-              allow: ['exports/*', 'exports/constants'],
+              allow: [
+                'exports/*',
+                'exports/primitive/**/*',
+                'exports/build/**/*',
+                'exports/semantic/**/*',
+                'exports/decision/**/*',
+                'exports/context/**/*',
+                'exports/component/**/*',
+              ],
             },
           ],
         },
@@ -133,12 +167,28 @@ export default defineConfig(import.meta.dirname, [
               allow: ['@sanity/color', 'zod'],
             },
             {
-              from: 'source/color/lib',
+              from: 'source/lib/color',
               allow: ['@sanity/color', 'colorjs.io', 'zod'],
             },
             {
-              from: 'source/font/lib',
+              from: 'source/decision/color/lib',
+              allow: ['@sanity/color', 'zod'],
+            },
+            {
+              from: 'source/build/color/scheme',
+              allow: ['@sanity/color', 'colorjs.io', 'zod'],
+            },
+            {
+              from: 'source/computed/color/lib',
+              allow: ['@sanity/color', 'colorjs.io', 'zod'],
+            },
+            {
+              from: 'source/primitive/font/lib',
               allow: ['zod'],
+            },
+            {
+              from: 'source/primitive/color/palette',
+              allow: ['@sanity/color', 'zod'],
             },
           ],
         },
