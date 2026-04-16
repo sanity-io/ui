@@ -1,12 +1,12 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import {type GapProps} from '../props/gap'
-import {type GridParentProps} from '../props/gridParent'
-import {type LayoutProps} from '../props/layout'
-import {type DisplayGrid} from '../types/Display'
-import {type Responsive} from '../types/Responsive'
-import {getProps} from '../utils/getProps'
+import {type GapProps} from '../../props/gap'
+import {type GridParentProps} from '../../props/gridParent'
+import {type LayoutProps} from '../../props/layout'
+import {type DisplayGrid} from '../../types/Display'
+import {type Responsive} from '../../types/Responsive'
+import {getProps} from '../../utils/getProps'
 import {gridProps} from './grid.props'
 
 export interface FlexProps<T extends React.ElementType>
@@ -18,9 +18,9 @@ export interface FlexProps<T extends React.ElementType>
 }
 
 export function Grid<T extends React.ElementType = 'div'>(
-  props: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>,
+  {display = 'grid', ...props}: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>,
 ) {
-  const {as, children, className, style, ...rest} = getProps(props, gridProps)
+  const {as, children, className, style, ...rest} = getProps({display, ...props}, gridProps)
   const Component = as || 'div'
 
   return (
