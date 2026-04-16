@@ -1,6 +1,6 @@
 'use client'
 
-import {ImageUrlBuilder} from '@sanity/image-url/lib/types/builder'
+import {ImageUrlBuilder} from '@sanity/image-url'
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {ColorScheme} from '@sanity/ui'
 import {createContext} from 'react'
