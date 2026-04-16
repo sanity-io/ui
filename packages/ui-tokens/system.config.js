@@ -81,6 +81,11 @@ export const layers = [
     path: 'component/avatar',
   },
   {
+    name: 'component/avatar/color',
+    path: 'component/avatar/color',
+    importsFrom: ['lib/color'],
+  },
+  {
     name: 'component/button/mode',
     path: 'component/button/mode',
     importsFrom: ['lib/color'],

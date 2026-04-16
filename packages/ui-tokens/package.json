@@ -34,6 +34,10 @@
       "source": "./exports/component/avatar.ts",
       "import": "./dist/component/avatar.js"
     },
+    "./component/avatar/color": {
+      "source": "./exports/component/avatar/color.ts",
+      "import": "./dist/component/avatar/color.js"
+    },
     "./component/card": {
       "source": "./exports/component/card.ts",
       "import": "./dist/component/card.js"
@@ -161,6 +165,9 @@
       },
       "./component/avatar": {
         "import": "./dist/component/avatar.js"
+      },
+      "./component/avatar/color": {
+        "import": "./dist/component/avatar/color.js"
       },
       "./component/button": {
         "import": "./dist/component/button.js"
