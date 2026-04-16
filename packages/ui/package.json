@@ -12,7 +12,8 @@
       "source": "./src/index.ts",
       "default": "./dist/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./styles.css": "./dist/styles.css"
   },
   "types": "./dist/index.d.ts",
   "files": [

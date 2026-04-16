@@ -1,9 +1,9 @@
 import type { Meta, StoryObj} from '@storybook/react-vite'
 import { expect } from 'storybook/test'
 
-import {Grid} from '../../../../packages/ui/src/components/Grid'
+import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
 import { getArgTypes } from '../utils/getArgTypes'
-import { gridProps } from '../../../../packages/ui/src/components/grid.props'
+import { gridProps } from '../../../../packages/ui/src/components/grid/grid.props'
 
 const argTypes = getArgTypes(gridProps)
 

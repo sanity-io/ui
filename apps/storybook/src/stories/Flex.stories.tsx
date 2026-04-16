@@ -1,9 +1,9 @@
 import type { Meta, StoryObj} from '@storybook/react-vite'
 import { expect } from 'storybook/test'
 
-import {Flex} from '../../../../packages/ui/src/components/Flex'
+import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import { getArgTypes } from '../utils/getArgTypes'
-import { flexProps } from '../../../../packages/ui/src/components/flex.props'
+import { flexProps } from '../../../../packages/ui/src/components/flex/flex.props'
 
 const argTypes = getArgTypes(flexProps)
 
