@@ -110,11 +110,7 @@ export const CONTAINER_SCALE = [0, 1, 2, 3, 4, 5] as const
 /** @public */
 export const CONTAINER: [...typeof CONTAINER_SCALE, 'auto'] = [...CONTAINER_SCALE, 'auto']
 
-/**
- * Available element tone mode values for the `_elementTone` collection.
- *
- * @public
- */
+/** @public */
 export const ELEMENT_TONES = [
   'default',
   'neutral',

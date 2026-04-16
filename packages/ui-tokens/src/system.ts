@@ -83,7 +83,7 @@ export const tokenSystem: TokenSystem = {
       tokenSet: colorTokens,
     }),
     variantLayer({
-      name: '_elementTone',
+      name: 'elementTone',
       title: 'Element tone',
       variants: ELEMENT_TONES,
       tokenSets: elementToneTokens,
