@@ -74,7 +74,7 @@ export const _buttonModeTokens = {
         $type: 'shadow',
         $value: [
           {
-            color: '{color.border}',
+            color: '{color.muted.border}',
             offsetX: {value: 0, unit: 'px'},
             offsetY: {value: 0, unit: 'px'},
             blur: {value: 0, unit: 'px'},
