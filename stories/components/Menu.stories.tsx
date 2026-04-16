@@ -16,6 +16,7 @@ const meta: Meta<typeof Menu> = {
   },
   argTypes: {
     padding: getSpaceControls(),
+    gap: getSpaceControls(),
     space: getSpaceControls(),
     disabled: {control: 'boolean'},
     paddingX: getSpaceControls(),

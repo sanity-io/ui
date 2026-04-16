@@ -13,6 +13,7 @@ const meta: Meta<typeof Tree> = {
     ],
   },
   argTypes: {
+    gap: getSpaceControls(),
     space: getSpaceControls(),
   },
   component: Tree,

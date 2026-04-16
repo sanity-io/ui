@@ -18,6 +18,7 @@ const meta: Meta<typeof MenuItem> = {
     paddingLeft: getSpaceControls(),
     paddingRight: getSpaceControls(),
     paddingTop: getSpaceControls(),
+    gap: getSpaceControls(),
     space: getSpaceControls(),
   },
   component: MenuItem,

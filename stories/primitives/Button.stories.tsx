@@ -24,6 +24,7 @@ const meta: Meta<typeof Button> = {
     iconRight: getIconControls(),
     padding: getSpaceControls(),
     radius: getRadiusControls(),
+    gap: getSpaceControls(),
     space: getSpaceControls(),
     text: {control: 'text'},
     width: getButtonWidthControls(),
@@ -51,7 +52,7 @@ export const WithIcons: Story = {
   },
   parameters: {
     controls: {
-      include: ['icon', 'iconRight', 'mode', 'space', 'tone'],
+      include: ['icon', 'iconRight', 'mode', 'gap', 'space', 'tone'],
     },
   },
   render: (props) => <Button {...props} />,

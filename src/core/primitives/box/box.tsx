@@ -63,9 +63,12 @@ export const Box = forwardRef(function Box(
 ) {
   const {
     as: asProp = 'div',
-    column,
-    columnStart,
-    columnEnd,
+    gridColumn,
+    column: deprecated_column,
+    gridColumnStart,
+    columnStart: deprecated_columnStart,
+    gridColumnEnd,
+    columnEnd: deprecated_columnEnd,
     display = 'block',
     flex,
     height,
@@ -84,12 +87,21 @@ export const Box = forwardRef(function Box(
     paddingRight,
     paddingBottom,
     paddingLeft,
-    row,
-    rowStart,
-    rowEnd,
+    gridRow,
+    row: deprecated_row,
+    gridRowStart,
+    rowStart: deprecated_rowStart,
+    gridRowEnd,
+    rowEnd: deprecated_rowEnd,
     sizing,
     ...restProps
   } = props
+  const column = gridColumn === undefined ? deprecated_column : gridColumn
+  const columnStart = gridColumnStart === undefined ? deprecated_columnStart : gridColumnStart
+  const columnEnd = gridColumnEnd === undefined ? deprecated_columnEnd : gridColumnEnd
+  const row = gridRow === undefined ? deprecated_row : gridRow
+  const rowStart = gridRowStart === undefined ? deprecated_rowStart : gridRowStart
+  const rowEnd = gridRowEnd === undefined ? deprecated_rowEnd : gridRowEnd
 
   return (
     <StyledBox

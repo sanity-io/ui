@@ -21,6 +21,7 @@ const meta: Meta<typeof TextInput> = {
     icon: getIconControls(),
     iconRight: getIconControls(),
     radius: getRadiusControls(),
+    gap: getSpaceControls(),
     space: getSpaceControls(),
   },
   component: TextInput,
