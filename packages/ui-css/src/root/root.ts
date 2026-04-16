@@ -1,26 +1,24 @@
 /* eslint-disable simple-import-sort/imports */
 
-// 0 - palette
+// primitive color vars
 import {paletteVarsClassName} from '../vars/primitive/color/palette.css'
 
-// 1 - core
-// import {_coreVarsClassName} from '../vars/_core.css'
-
-// vars
-import {borderVarsClassName} from '../vars/decision/border.css'
+// semantic color vars
 import {colorVarsClassName} from '../vars/semantic/color.css'
+
+// decision vars
+import {borderVarsClassName} from '../vars/decision/border.css'
 import {containerVarsClassName} from '../vars/decision/container.css'
 import {cornerVarsClassName} from '../vars/decision/corner.css'
 import {focusVarsClassName} from '../vars/decision/focus.css'
+
+// primitive vars
 import {fontVarsClassName} from '../vars/primitive/font.css'
 import {radiusVarsClassName} from '../vars/primitive/radius.css'
 import {shadowVarsClassName} from '../vars/primitive/shadow.css'
 import {spaceVarsClassName} from '../vars/primitive/space.css'
 
-// components
-// import {buttonVarsClassName} from '../vars/button.css'
-// import {inputVarsClassName} from '../vars/input.css'
-// import {selectableVarsClassName} from '../primitives/selectable/selectable.css'
+// component vars
 import {avatarVarsClassName} from '../vars/component/avatar.css'
 import {cardVarsClassName} from '../vars/component/card.css'
 
@@ -51,17 +49,13 @@ export function root(props: RootStyleProps): string | undefined {
   return _composeClassNames(
     props.className,
     paletteVarsClassName,
-    // _coreVarsClassName,
 
     colorScheme({colorScheme: scheme}),
     cardTone({cardTone: tone}),
     elementTone({elementTone: 'default'}),
-    // elementToneClassNames.default,
 
     avatarVarsClassName,
     borderVarsClassName,
-    // buttonVarsClassName,
-    // cardVarsClassName,
     colorVarsClassName,
     containerVarsClassName,
     cornerVarsClassName,
@@ -74,8 +68,6 @@ export function root(props: RootStyleProps): string | undefined {
     _root,
     cardRoot,
     cardVarsClassName,
-    // inputVarsClassName,
-    // selectableVarsClassName,
 
     bgPattern({bgPattern: rest.__unstable_pattern}),
     box(rest),

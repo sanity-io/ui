@@ -1,31 +1,33 @@
 /* eslint-disable simple-import-sort/imports */
 
-// 0 - palette
+// NOTE: order matters for CSS
 
-// 1 - color scheme
+// color primitive vars
 import {paletteVars} from './vars/primitive/color/palette.css'
 
-// 2 - card tone
+// color vars
 import {_colorSchemeVars} from './vars/build/color/scheme.css'
 
-// 3 - semantic color
+// context
 import {_cardToneVars} from './vars/context/card/tone.css'
 import {elementToneVars} from './vars/context/element/tone.css'
 
-// 4 - element tone
+// semantic color vars
+import {colorVars} from './vars/semantic/color.css'
+
+// primitive vars
 import {fontVars} from './vars/primitive/font.css'
 import {radiusVars} from './vars/primitive/radius.css'
 import {shadowVars} from './vars/primitive/shadow.css'
 import {spaceVars} from './vars/primitive/space.css'
 
-// 5 - other primitives
+// decision vars
 import {borderVars} from './vars/decision/border.css'
 import {containerVars} from './vars/decision/container.css'
 import {cornerVars} from './vars/decision/corner.css'
 import {focusVars} from './vars/decision/focus.css'
 
-// 6 - components
-import {colorVars} from './vars/semantic/color.css'
+// component vars
 import {avatarVars} from './vars/component/avatar.css'
 import {buttonVars} from './vars/component/button.css'
 import {cardVars} from './vars/component/card.css'
