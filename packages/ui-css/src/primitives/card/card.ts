@@ -7,7 +7,6 @@ import {elementToneClassNames} from '../../vars/context/element/tone.css'
 import {shadowVarsClassName} from '../../vars/primitive/shadow.css'
 import {colorVarsClassName} from '../../vars/semantic/color.css'
 import {box} from '../box/box'
-// import {root as selectableRoot, selectableVarsClassName} from '../selectable/selectable.css'
 import {root} from './card.css'
 import type {CardStyleProps} from './types'
 
@@ -25,11 +24,6 @@ export function card(props: CardStyleProps): string | undefined {
     tone && elementToneClassNames.default,
     tone && shadowVarsClassName,
     bgPattern({bgPattern: rest.__unstable_pattern}),
-
-    // // TODO: reconsider this, feels wrong
-    // selectableRoot,
-    // selectableVarsClassName,
-
     box(rest),
   )
 }
