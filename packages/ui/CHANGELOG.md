@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.0.0-beta.3
+
+### Patch Changes
+
+- [`e4a65a0`](https://github.com/sanity-io/ui/commit/e4a65a065a3a1c42c1d7f8ce1f9eb2a1e2abb361) Thanks [@mariuslundgard](https://github.com/mariuslundgard)! - Reorganizes UI token and CSS layers, updates token colors and component styling, refreshes package configuration, enables the React Compiler in the workshop, fixes missing `StoryTree` keys, and removes outdated docs and commented code.
+
+- Updated dependencies [[`e4a65a0`](https://github.com/sanity-io/ui/commit/e4a65a065a3a1c42c1d7f8ce1f9eb2a1e2abb361)]:
+  - @sanity/ui-tokens@1.0.0-beta.3
+  - @sanity/ui-css@1.0.0-beta.3
+
 ## 4.0.0-beta.2
 
 ### Patch Changes
