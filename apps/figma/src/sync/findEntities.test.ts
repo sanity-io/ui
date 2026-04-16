@@ -1,5 +1,5 @@
-import {_colorSchemeTokens} from '@sanity/ui-tokens/color/scheme'
-import {fontTokens} from '@sanity/ui-tokens/font'
+import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/scheme'
+import {fontTokens} from '@sanity/ui-tokens/primitive/font'
 import {tokenSystem} from '@sanity/ui-tokens/system'
 import {describe, expect, test} from 'vitest'
 

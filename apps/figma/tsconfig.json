@@ -9,7 +9,7 @@
     "rootDir": "../..",
     "outDir": "./dist",
     "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
-    "typeRoots": ["./node_modules/@types", "./node_modules/@figma"],
+    "types": ["@figma/plugin-typings"],
     "paths": {
       "@sanity/ui-tokens": ["../../packages/ui-tokens/exports/index.ts"],
       "@sanity/ui-tokens/*": ["../../packages/ui-tokens/exports/*"]
