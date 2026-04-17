@@ -47,6 +47,7 @@
     "classnames": "^2.5.1"
   },
   "devDependencies": {
+    "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^9.2.3",
     "@sanity/prettier-config": "^1.0.6",
     "@sanity/tsconfig": "^1.0.0",

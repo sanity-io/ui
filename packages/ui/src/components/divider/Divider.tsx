@@ -1,5 +1,6 @@
 import React from 'react'
 
+/** @public */
 export function Divider() {
   return (
     <hr
