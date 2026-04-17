@@ -52,7 +52,7 @@ const MODS: AttributeMods = {
       10: 'repeat(10, 1fr)',
       11: 'repeat(11, 1fr)',
       12: 'repeat(12, 1fr)',
-    }
+    },
   },
 }
 
