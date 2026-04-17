@@ -1,6 +1,5 @@
 import {_layers} from '../../layers.css'
 import {_style} from '../../lib/css/_style.css'
-import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
 import {vars} from '../../vars'
 
 const when = (selector: string) => `&:is(a, button)${selector}`

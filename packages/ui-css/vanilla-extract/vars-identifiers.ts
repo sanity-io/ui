@@ -3,11 +3,32 @@ import path from 'node:path'
 import {dashCase, sanitize} from './helpers'
 
 const shortNamespaces: Record<string, string | undefined> = {
-  'button/mode': 'button',
-  'card/tone': 'card',
-  'color/scheme': 'scheme',
-  'color/palette': 'palette',
-  'element/tone': 'element',
+  'build/color/_scheme': '_scheme',
+
+  'context/card/_tone': '_card',
+  'context/element/tone': 'element',
+
+  'component/avatar': 'avatar',
+  'component/avatar/color': 'avatar-color',
+  'component/button/mode': 'button',
+  'component/button': 'button',
+  'component/card': 'card',
+  'component/code': 'code',
+  'component/input': 'input',
+  'component/selectable': 'selectable',
+
+  'decision/border': 'border',
+  'decision/container': 'container',
+  'decision/corner': 'corner',
+  'decision/focus': 'focus',
+
+  'primitive/color/palette': 'palette',
+  'primitive/font': 'font',
+  'primitive/radius': 'radius',
+  'primitive/shadow': 'shadow',
+  'primitive/space': 'space',
+
+  'semantic/color': 'color',
 }
 
 const shortIdSegments = [
@@ -20,14 +41,11 @@ const VARIANT_PREFIX = 'variant-'
 
 /** @internal */
 export function _varsIdentifiers(params: {debugId?: string; hash: string; filePath: string}) {
-  const {debugId, filePath} = params
+  const {debugId, filePath, hash} = params
 
   const dir = path.relative('src/vars', path.dirname(filePath))
 
   const basename = path.join(dir, path.basename(filePath, '.css.ts'))
-  // .replace(/\//g, '-')
-
-  // console.log('basename', basename)
 
   let id = debugId ? sanitize(dashCase(debugId)) : ''
 
@@ -38,11 +56,13 @@ export function _varsIdentifiers(params: {debugId?: string; hash: string; filePa
 
   let namespace: string = basename
 
-  // if (namespace.startsWith('_')) {
-  //   namespace = namespace.slice(1)
-  // }
+  namespace = shortNamespaces[namespace] ?? namespace.replace(/\//g, '-')
 
-  namespace = sanitize(dashCase(shortNamespaces[namespace] ?? namespace))
+  const isInternal = namespace.startsWith('_')
+
+  namespace = sanitize(dashCase(namespace))
+
+  // console.log('namespace', namespace)
 
   // identifier of single variant collections
   if (id === '') {
@@ -54,6 +74,11 @@ export function _varsIdentifiers(params: {debugId?: string; hash: string; filePa
     id = id.slice(VARIANT_PREFIX.length)
 
     return `ui-${namespace}-${id}-vars`
+  }
+
+  // internal variable
+  if (isInternal) {
+    return `ui-${hash}` // internal identifier
   }
 
   // identifier of variable

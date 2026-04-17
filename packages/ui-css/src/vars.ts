@@ -65,25 +65,19 @@ export const vars = {
     ...paletteVars.color,
     ...colorVars.color,
     ...elementToneVars.color,
-    tinted: {
-      ...colorVars.color.tinted,
-      ...elementToneVars.color.tinted,
-    },
-    solid: {
-      ...colorVars.color.solid,
-      ...elementToneVars.color.solid,
-    },
   },
 
   // the primitive tokens
-  ...borderVars,
-  ...containerVars,
-  ...cornerVars,
-  ...focusVars,
   ...fontVars,
   ...radiusVars,
   ...shadowVars,
   ...spaceVars,
+
+  // decision tokens
+  ...borderVars,
+  ...containerVars,
+  ...cornerVars,
+  ...focusVars,
 
   // component tokens
   avatar: {
