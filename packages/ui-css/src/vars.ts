@@ -6,10 +6,10 @@
 import {paletteVars} from './vars/primitive/color/palette.css'
 
 // color vars
-import {_colorSchemeVars} from './vars/build/color/scheme.css'
+import './vars/build/color/_scheme.css'
 
 // context
-import {_cardToneVars} from './vars/context/card/tone.css'
+import './vars/context/card/_tone.css'
 import {elementToneVars} from './vars/context/element/tone.css'
 
 // semantic color vars
@@ -60,13 +60,7 @@ import {selectableVars} from './vars/component/selectable.css'
  */
 export const vars = {
   color: {
-    // primitive color tokens
     ...paletteVars.color,
-
-    ..._colorSchemeVars.color, // internal
-    ..._cardToneVars.color, // internal
-
-    // semantic color tokens
     ...colorVars.color,
     ...elementToneVars.color,
     tinted: {

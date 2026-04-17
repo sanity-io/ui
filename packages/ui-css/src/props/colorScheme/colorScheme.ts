@@ -1,5 +1,5 @@
 import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
-import {_colorSchemeVarsClassNames} from '../../vars/build/color/scheme.css'
+import {_colorSchemeVarsClassNames} from '../../vars/build/color/_scheme.css'
 import {schemes} from './colorScheme.css'
 import type {ColorSchemeStyleProps} from './types'
 

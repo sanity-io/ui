@@ -1,4 +1,4 @@
-import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/scheme'
+import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/_scheme'
 import {COLOR_SCHEMES} from '@sanity/ui-tokens/constants'
 import {createTheme, createThemeContract} from '@vanilla-extract/css'
 
