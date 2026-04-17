@@ -1,10 +1,18 @@
 {
-  "name": "ui",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@sanity-labs/ui-poc",
+  "version": "0.0.1-alpha.0",
+  "description": "Sanity UI POC",
   "keywords": [],
+  "homepage": "https://github.com/sanity-labs/ui-poc#readme",
+  "bugs": {
+    "url": "https://github.com/sanity-labs/ui-poc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-labs/ui-poc.git"
+  },
   "license": "ISC",
-  "author": "",
+  "author": "Sanity",
   "sideEffects": [
     "*.css"
   ],
