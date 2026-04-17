@@ -1,4 +1,4 @@
-import {_buttonModeTokens} from '@sanity/ui-tokens/component/button/mode'
+import {buttonModeTokens} from '@sanity/ui-tokens/component/button/mode'
 import {BUTTON_MODES} from '@sanity/ui-tokens/constants'
 import {createTheme, createThemeContract} from '@vanilla-extract/css'
 
@@ -21,19 +21,19 @@ const _vars = {
   ...shadowVars,
 }
 
-const _cssTokens = _toCSSTokens(_buttonModeTokens.default, _vars, false)
+const _cssTokens = _toCSSTokens(buttonModeTokens.default, _vars, false)
 
 /** @internal */
-export const _buttonModeVars = createThemeContract(_cssTokens)
+export const buttonModeVars = createThemeContract(_cssTokens)
 
 /** @internal */
-export const _buttonMode = _fromEntries(
+export const buttonMode = _fromEntries(
   BUTTON_MODES.map((variant) => {
     const className = createTheme(
-      _buttonModeVars,
+      buttonModeVars,
       {
         '@layer': _layers.primitive,
-        ..._toCSSTokens(_buttonModeTokens[variant], _vars),
+        ..._toCSSTokens(buttonModeTokens[variant], _vars),
       },
       variant,
     )
