@@ -16,29 +16,32 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
   componentProps?: P,
   propDefs?: T,
 ): ComponentProps {
-  const props = {...componentProps}
-  let className = props?.className || ''
-  let style = props?.style || {}
+  let className = componentProps?.className || ''
+  let style = componentProps?.style || {}
+  const restProps: ComponentProps = {}
 
-  for (const key in props) {
+  for (const key in componentProps) {
     if (!propDefs?.[key] || !propDefs?.[key].className) {
+      restProps[key] = componentProps[key]
       continue
     }
 
-    if (Array.isArray(props[key])) {
-      for (let i = 0, len = Math.min(props[key].length, BREAKPOINTS_LENGTH); i < len; i++) {
-        className = classNames(className, getClassName(props[key][i], propDefs[key], i))
-        style = {...style, ...getStyle(props[key][i], propDefs[key], i)}
+    if (Array.isArray(componentProps[key])) {
+      for (
+        let i = 0, len = Math.min(componentProps[key].length, BREAKPOINTS_LENGTH);
+        i < len;
+        i++
+      ) {
+        className = classNames(className, getClassName(componentProps[key][i], propDefs[key], i))
+        style = {...style, ...getStyle(componentProps[key][i], propDefs[key], i)}
       }
     } else {
-      className = classNames(className, getClassName(props[key], propDefs[key]))
-      style = {...style, ...getStyle(props[key], propDefs[key])}
+      className = classNames(className, getClassName(componentProps[key], propDefs[key]))
+      style = {...style, ...getStyle(componentProps[key], propDefs[key])}
     }
-
-    delete props[key]
   }
 
-  return {...props, className, style}
+  return {...restProps, className, style}
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

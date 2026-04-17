@@ -12,7 +12,8 @@
       "source": "./src/index.ts",
       "default": "./dist/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./styles.css": "./dist/styles.css"
   },
   "types": "./dist/index.d.ts",
   "files": [
@@ -42,6 +43,7 @@
   "browserslist": "extends @sanity/browserslist-config",
   "prettier": "@sanity/prettier-config",
   "dependencies": {
+    "@sanity-labs/design-tokens": "0.0.2-alpha.0",
     "classnames": "^2.5.1"
   },
   "devDependencies": {
