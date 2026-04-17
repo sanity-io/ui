@@ -5,7 +5,9 @@
   "keywords": [],
   "license": "ISC",
   "author": "",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "type": "module",
   "exports": {
     ".": {
