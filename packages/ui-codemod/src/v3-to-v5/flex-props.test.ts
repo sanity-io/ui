@@ -1,7 +1,6 @@
 import {defineInlineTest} from '../utils/testUtils'
 import transform, {TODO_WARNING} from './box-props'
 
-
 defineInlineTest(
   transform,
   {},
@@ -107,4 +106,3 @@ defineInlineTest(
   `,
   'comments if prop value is a ternary',
 )
-

@@ -49,7 +49,6 @@ export default defineConfig([
   {
     files: ['**/*.ts', '**/*.tsx'],
     rules: {
-      '@typescript-eslint/explicit-module-boundary-types': 'error',
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/member-delimiter-style': 'off',
       '@typescript-eslint/no-empty-interface': 'off',

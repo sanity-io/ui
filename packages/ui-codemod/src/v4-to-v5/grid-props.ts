@@ -2,7 +2,7 @@ import {type API, type FileInfo} from 'jscodeshift'
 
 import {type AttributeMods} from '../types/AnyExpression'
 import {transformAttributes} from '../utils/transformAttributes'
-import { LAYOUT_MODS } from './constants/layout-attr-mods'
+import {LAYOUT_MODS} from './constants/layout-attr-mods'
 
 const MODS: AttributeMods = {
   ...LAYOUT_MODS,
@@ -52,7 +52,7 @@ const MODS: AttributeMods = {
       10: 'repeat(10, 1fr)',
       11: 'repeat(11, 1fr)',
       12: 'repeat(12, 1fr)',
-    }
+    },
   },
   justifyContent: {
     type: 'style-only',

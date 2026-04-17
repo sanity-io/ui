@@ -9,6 +9,7 @@ import {type Responsive} from '../../types/Responsive'
 import {getProps} from '../../utils/getProps'
 import {gridProps} from './grid.props'
 
+/** @public */
 export interface FlexProps<T extends React.ElementType>
   extends GridParentProps, GapProps, LayoutProps {
   /** Element to render */
@@ -17,6 +18,7 @@ export interface FlexProps<T extends React.ElementType>
   display?: Responsive<DisplayGrid>
 }
 
+/** @public */
 export function Grid<T extends React.ElementType = 'div'>({
   display = 'grid',
   ...props

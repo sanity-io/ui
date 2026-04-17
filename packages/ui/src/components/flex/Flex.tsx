@@ -9,6 +9,7 @@ import {type Responsive} from '../../types/Responsive'
 import {getProps} from '../../utils/getProps'
 import {flexProps} from './flex.props'
 
+/** @public */
 export interface FlexProps<T extends React.ElementType>
   extends FlexParentProps, GapProps, LayoutProps {
   /** Element to render */
@@ -17,6 +18,7 @@ export interface FlexProps<T extends React.ElementType>
   display?: Responsive<DisplayFlex>
 }
 
+/** @public */
 export function Flex<T extends React.ElementType = 'div'>({
   display = 'flex',
   ...props
