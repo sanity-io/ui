@@ -26,39 +26,39 @@ export const inputTokens = _defineTokens({
         valid: {
           unchecked: {
             enabled: {
-              bg: _colorAlias('{color.tinted.default.bg.0}'),
-              border: _colorAlias('{color.tinted.default.border.2}'),
-              fg: _colorAlias('{color.tinted.default.fg.0}'),
+              bg: _colorAlias('{color.tinted.bg.0}'),
+              border: _colorAlias('{color.tinted.border.2}'),
+              fg: _colorAlias('{color.tinted.fg.0}'),
             },
 
             hovered: {
-              bg: _colorAlias('{color.tinted.default.bg.0}'),
-              border: _colorAlias('{color.tinted.default.border.4}'),
-              fg: _colorAlias('{color.tinted.default.fg.0}'),
+              bg: _colorAlias('{color.tinted.bg.0}'),
+              border: _colorAlias('{color.tinted.border.4}'),
+              fg: _colorAlias('{color.tinted.fg.0}'),
             },
 
             disabled: {
-              bg: _colorAlias('{color.tinted.default.bg.1}'),
-              border: _colorAlias('{color.tinted.default.border.0}'),
-              fg: _colorAlias('{color.tinted.default.border.4}'),
+              bg: _colorAlias('{color.tinted.bg.1}'),
+              border: _colorAlias('{color.tinted.border.0}'),
+              fg: _colorAlias('{color.tinted.border.4}'),
             },
           },
 
           checked: {
             enabled: {
-              bg: _colorAlias('{color.tinted.default.fg.0}'),
-              border: _colorAlias('{color.tinted.default.fg.0}'),
-              fg: _colorAlias('{color.tinted.default.bg.0}'),
+              bg: _colorAlias('{color.tinted.fg.0}'),
+              border: _colorAlias('{color.tinted.fg.0}'),
+              fg: _colorAlias('{color.tinted.bg.0}'),
             },
             hovered: {
-              bg: _colorAlias('{color.tinted.default.fg.1}'),
-              border: _colorAlias('{color.tinted.default.fg.1}'),
-              fg: _colorAlias('{color.tinted.default.bg.0}'),
+              bg: _colorAlias('{color.tinted.fg.1}'),
+              border: _colorAlias('{color.tinted.fg.1}'),
+              fg: _colorAlias('{color.tinted.bg.0}'),
             },
             disabled: {
-              bg: _colorAlias('{color.tinted.default.border.3}'),
-              border: _colorAlias('{color.tinted.default.border.3}'),
-              fg: _colorAlias('{color.tinted.default.bg.1}'),
+              bg: _colorAlias('{color.tinted.border.3}'),
+              border: _colorAlias('{color.tinted.border.3}'),
+              fg: _colorAlias('{color.tinted.bg.1}'),
             },
           },
         },
@@ -66,39 +66,39 @@ export const inputTokens = _defineTokens({
         invalid: {
           unchecked: {
             enabled: {
-              bg: _colorAlias('{color.tinted.critical.bg.1}'),
-              border: _colorAlias('{color.tinted.critical.border.2}'),
-              fg: _colorAlias('{color.tinted.critical.fg.2}'),
+              bg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
+              border: _colorAlias('{color._cardTone.tinted.critical.border.2}'),
+              fg: _colorAlias('{color._cardTone.tinted.critical.fg.2}'),
             },
 
             hovered: {
-              bg: _colorAlias('{color.tinted.critical.bg.1}'),
-              border: _colorAlias('{color.tinted.critical.border.4}'),
-              fg: _colorAlias('{color.tinted.critical.fg.2}'),
+              bg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
+              border: _colorAlias('{color._cardTone.tinted.critical.border.4}'),
+              fg: _colorAlias('{color._cardTone.tinted.critical.fg.2}'),
             },
 
             disabled: {
-              bg: _colorAlias('{color.tinted.critical.bg.1}'),
-              border: _colorAlias('{color.tinted.critical.border.0}'),
-              fg: _colorAlias('{color.tinted.critical.border.3}'),
+              bg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
+              border: _colorAlias('{color._cardTone.tinted.critical.border.0}'),
+              fg: _colorAlias('{color._cardTone.tinted.critical.border.3}'),
             },
           },
 
           checked: {
             enabled: {
-              bg: _colorAlias('{color.tinted.critical.fg.2}'),
-              border: _colorAlias('{color.tinted.critical.fg.2}'),
-              fg: _colorAlias('{color.tinted.critical.bg.1}'),
+              bg: _colorAlias('{color._cardTone.tinted.critical.fg.2}'),
+              border: _colorAlias('{color._cardTone.tinted.critical.fg.2}'),
+              fg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
             },
             hovered: {
-              bg: _colorAlias('{color.tinted.critical.fg.1}'),
-              border: _colorAlias('{color.tinted.critical.fg.1}'),
-              fg: _colorAlias('{color.tinted.critical.bg.1}'),
+              bg: _colorAlias('{color._cardTone.tinted.critical.fg.1}'),
+              border: _colorAlias('{color._cardTone.tinted.critical.fg.1}'),
+              fg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
             },
             disabled: {
-              bg: _colorAlias('{color.tinted.critical.border.3}'),
-              border: _colorAlias('{color.tinted.critical.border.3}'),
-              fg: _colorAlias('{color.tinted.critical.bg.1}'),
+              bg: _colorAlias('{color._cardTone.tinted.critical.border.3}'),
+              border: _colorAlias('{color._cardTone.tinted.critical.border.3}'),
+              fg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
             },
           },
         },
@@ -106,64 +106,64 @@ export const inputTokens = _defineTokens({
 
       valid: {
         enabled: {
-          bg: _colorAlias('{color.tinted.default.bg.0}'),
-          border: _colorAlias('{color.tinted.default.border.1}'),
-          fg: _colorAlias('{color.tinted.default.fg.0}'),
+          bg: _colorAlias('{color.tinted.bg.0}'),
+          border: _colorAlias('{color.tinted.border.1}'),
+          fg: _colorAlias('{color.tinted.fg.0}'),
           muted: {
-            bg: _colorAlias('{color.tinted.default.bg.1}'),
-            fg: _colorAlias('{color.tinted.default.fg.4}'),
+            bg: _colorAlias('{color.tinted.bg.1}'),
+            fg: _colorAlias('{color.tinted.fg.4}'),
           },
         },
 
         hovered: {
-          bg: _colorAlias('{color.tinted.default.bg.0}'),
-          border: _colorAlias('{color.tinted.default.border.4}'),
-          fg: _colorAlias('{color.tinted.default.fg.0}'),
+          bg: _colorAlias('{color.tinted.bg.0}'),
+          border: _colorAlias('{color.tinted.border.4}'),
+          fg: _colorAlias('{color.tinted.fg.0}'),
           muted: {
-            bg: _colorAlias('{color.tinted.default.bg.1}'),
-            fg: _colorAlias('{color.tinted.default.fg.4}'),
+            bg: _colorAlias('{color.tinted.bg.1}'),
+            fg: _colorAlias('{color.tinted.fg.4}'),
           },
         },
 
         disabled: {
-          bg: _colorAlias('{color.tinted.default.bg.1}'),
-          border: _colorAlias('{color.tinted.default.border.0}'),
-          fg: _colorAlias('{color.tinted.default.border.3}'),
+          bg: _colorAlias('{color.tinted.bg.1}'),
+          border: _colorAlias('{color.tinted.border.0}'),
+          fg: _colorAlias('{color.tinted.border.3}'),
           muted: {
-            bg: _colorAlias('{color.tinted.default.bg.2}'),
-            fg: _colorAlias('{color.tinted.default.border.2}'),
+            bg: _colorAlias('{color.tinted.bg.2}'),
+            fg: _colorAlias('{color.tinted.border.2}'),
           },
         },
       },
 
       invalid: {
         enabled: {
-          bg: _colorAlias('{color.tinted.critical.bg.1}'),
-          border: _colorAlias('{color.tinted.critical.border.1}'),
-          fg: _colorAlias('{color.tinted.critical.fg.4}'),
+          bg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
+          border: _colorAlias('{color._cardTone.tinted.critical.border.1}'),
+          fg: _colorAlias('{color._cardTone.tinted.critical.fg.4}'),
           muted: {
-            bg: _colorAlias('{color.tinted.critical.bg.2}'),
-            fg: _colorAlias('{color.tinted.critical.fg.4}'),
+            bg: _colorAlias('{color._cardTone.tinted.critical.bg.2}'),
+            fg: _colorAlias('{color._cardTone.tinted.critical.fg.4}'),
           },
         },
 
         hovered: {
-          bg: _colorAlias('{color.tinted.critical.bg.1}'),
-          border: _colorAlias('{color.tinted.critical.border.4}'),
-          fg: _colorAlias('{color.tinted.critical.fg.0}'),
+          bg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
+          border: _colorAlias('{color._cardTone.tinted.critical.border.4}'),
+          fg: _colorAlias('{color._cardTone.tinted.critical.fg.0}'),
           muted: {
-            bg: _colorAlias('{color.tinted.critical.bg.2}'),
-            fg: _colorAlias('{color.tinted.critical.fg.4}'),
+            bg: _colorAlias('{color._cardTone.tinted.critical.bg.2}'),
+            fg: _colorAlias('{color._cardTone.tinted.critical.fg.4}'),
           },
         },
 
         disabled: {
-          bg: _colorAlias('{color.tinted.critical.bg.1}'),
-          border: _colorAlias('{color.tinted.critical.border.0}'),
-          fg: _colorAlias('{color.tinted.critical.border.3}'),
+          bg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
+          border: _colorAlias('{color._cardTone.tinted.critical.border.0}'),
+          fg: _colorAlias('{color._cardTone.tinted.critical.border.3}'),
           muted: {
-            bg: _colorAlias('{color.tinted.critical.bg.2}'),
-            fg: _colorAlias('{color.tinted.critical.border.2}'),
+            bg: _colorAlias('{color._cardTone.tinted.critical.bg.2}'),
+            fg: _colorAlias('{color._cardTone.tinted.critical.border.2}'),
           },
         },
       },

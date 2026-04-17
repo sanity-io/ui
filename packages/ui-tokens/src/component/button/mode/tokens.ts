@@ -55,13 +55,19 @@ export const _buttonModeTokens = {
             },
           },
           disabled: {
-            bg: _colorAlias('{color.tinted.default.border.3}', {scopes: ['fill/frame']}),
-            border: _colorAlias('{color.tinted.default.border.2}', {scopes: ['stroke/color']}),
-            fg: _colorAlias('{color.tinted.default.bg.0}', {scopes: ['fill/text']}),
+            bg: _colorAlias('{color._cardTone.tinted.default.border.3}', {scopes: ['fill/frame']}),
+            border: _colorAlias('{color._cardTone.tinted.default.border.2}', {
+              scopes: ['stroke/color'],
+            }),
+            fg: _colorAlias('{color._cardTone.tinted.default.bg.0}', {scopes: ['fill/text']}),
             muted: {
-              bg: _colorAlias('{color.tinted.default.border.3}', {scopes: ['fill/frame']}),
-              border: _colorAlias('{color.tinted.default.border.2}', {scopes: ['stroke/color']}),
-              fg: _colorAlias('{color.tinted.default.bg.0}', {scopes: ['fill/text']}),
+              bg: _colorAlias('{color._cardTone.tinted.default.border.3}', {
+                scopes: ['fill/frame'],
+              }),
+              border: _colorAlias('{color._cardTone.tinted.default.border.2}', {
+                scopes: ['stroke/color'],
+              }),
+              fg: _colorAlias('{color._cardTone.tinted.default.bg.0}', {scopes: ['fill/text']}),
             },
           },
         },
@@ -127,13 +133,17 @@ export const _buttonModeTokens = {
             },
           },
           disabled: {
-            bg: _colorAlias('{color.tinted.default.bg.0}', {scopes: ['fill/frame']}),
-            border: _colorAlias('{color.tinted.default.border.0}', {scopes: ['stroke/color']}),
-            fg: _colorAlias('{color.tinted.default.border.4}', {scopes: ['fill/text']}),
+            bg: _colorAlias('{color._cardTone.tinted.default.bg.0}', {scopes: ['fill/frame']}),
+            border: _colorAlias('{color._cardTone.tinted.default.border.0}', {
+              scopes: ['stroke/color'],
+            }),
+            fg: _colorAlias('{color._cardTone.tinted.default.border.4}', {scopes: ['fill/text']}),
             muted: {
-              bg: _colorAlias('{color.tinted.default.bg.1}', {scopes: ['fill/frame']}),
-              border: _colorAlias('{color.tinted.default.border.0}', {scopes: ['stroke/color']}),
-              fg: _colorAlias('{color.tinted.default.border.2}', {scopes: ['fill/text']}),
+              bg: _colorAlias('{color._cardTone.tinted.default.bg.1}', {scopes: ['fill/frame']}),
+              border: _colorAlias('{color._cardTone.tinted.default.border.0}', {
+                scopes: ['stroke/color'],
+              }),
+              fg: _colorAlias('{color._cardTone.tinted.default.border.2}', {scopes: ['fill/text']}),
             },
           },
         },
@@ -190,13 +200,17 @@ export const _buttonModeTokens = {
             },
           },
           disabled: {
-            bg: _colorAlias('{color.tinted.default.bg.0}', {scopes: ['fill/frame']}),
-            border: _colorAlias('{color.tinted.default.border.0}', {scopes: ['stroke/color']}),
-            fg: _colorAlias('{color.tinted.default.border.4}', {scopes: ['fill/text']}),
+            bg: _colorAlias('{color._cardTone.tinted.default.bg.0}', {scopes: ['fill/frame']}),
+            border: _colorAlias('{color._cardTone.tinted.default.border.0}', {
+              scopes: ['stroke/color'],
+            }),
+            fg: _colorAlias('{color._cardTone.tinted.default.border.4}', {scopes: ['fill/text']}),
             muted: {
-              bg: _colorAlias('{color.tinted.default.bg.1}', {scopes: ['fill/frame']}),
-              border: _colorAlias('{color.tinted.default.border.0}', {scopes: ['stroke/color']}),
-              fg: _colorAlias('{color.tinted.default.border.2}', {scopes: ['fill/text']}),
+              bg: _colorAlias('{color._cardTone.tinted.default.bg.1}', {scopes: ['fill/frame']}),
+              border: _colorAlias('{color._cardTone.tinted.default.border.0}', {
+                scopes: ['stroke/color'],
+              }),
+              fg: _colorAlias('{color._cardTone.tinted.default.border.2}', {scopes: ['fill/text']}),
             },
           },
         },

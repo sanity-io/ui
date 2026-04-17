@@ -13,7 +13,6 @@ import type {ColorToken} from './types'
 type ColorPaletteKey = `palette.black` | `palette.white` | `palette.${Hue}.${Tint}`
 
 type ColorSemanticKey =
-  | `avatar.${AvatarColor}.${'bg' | 'fg'}`
   | 'backdrop'
   | 'border'
   | `code.token.${CodeTokenKey}`
@@ -24,16 +23,21 @@ type ColorSemanticKey =
   | 'shadow.umbra'
   | 'shadow.penumbra'
   | 'shadow.ambient'
-  | `${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
 
 type ColorElementKey = `${ColorVariant}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
+
+type ColorAvatarKey = `avatar.${AvatarColor}.${'bg' | 'fg'}`
 
 type ColorKey =
   | `color.${ColorPaletteKey}`
   | `color.${ColorSemanticKey}`
   | `color.${ColorElementKey}`
+  | `color._cardTone.${ColorAvatarKey}`
   | `color._cardTone.${ColorSemanticKey}`
+  | `color._cardTone.${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
+  | `color._colorScheme.${CardTone}.${ColorAvatarKey}`
   | `color._colorScheme.${CardTone}.${ColorSemanticKey}`
+  | `color._colorScheme.${CardTone}.${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
 
 type ColorAlias = `{${ColorKey}}`
 

@@ -43,13 +43,13 @@ export const selectableTokens = _defineTokens({
         },
 
         selected: {
-          bg: _colorAlias('{color.solid.primary.bg.0}'),
-          border: _colorAlias('{color.solid.primary.border.2}'),
-          fg: _colorAlias('{color.solid.primary.fg.0}'),
+          bg: _colorAlias('{color._cardTone.solid.primary.bg.0}'),
+          border: _colorAlias('{color._cardTone.solid.primary.border.2}'),
+          fg: _colorAlias('{color._cardTone.solid.primary.fg.0}'),
           muted: {
-            bg: _colorAlias('{color.solid.primary.bg.1}'),
-            border: _colorAlias('{color.solid.primary.border.1}'),
-            fg: _colorAlias('{color.solid.primary.fg.4}'),
+            bg: _colorAlias('{color._cardTone.solid.primary.bg.1}'),
+            border: _colorAlias('{color._cardTone.solid.primary.border.1}'),
+            fg: _colorAlias('{color._cardTone.solid.primary.fg.4}'),
           },
         },
 
