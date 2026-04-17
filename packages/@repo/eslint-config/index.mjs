@@ -1,16 +1,21 @@
-import { defineConfig } from "eslint/config";
-import js from "@eslint/js";
-import globals from 'globals'
+import js from '@eslint/js'
+import {defineConfig} from 'eslint/config'
 import eslintConfigPrettier from 'eslint-config-prettier'
-import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
 import * as importPlugin from 'eslint-plugin-import'
+import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import globals from 'globals'
+import tsLint from 'typescript-eslint'
 
 /** @type import('eslint').Linter.Config */
 export default defineConfig([
   js.configs.recommended,
   eslintConfigPrettier,
   eslintPluginPrettier,
+  ...tsLint.configs.recommended,
+  {
+    ignores: ['.DS_Store', 'node_modules', 'dist', 'pnpm-lock.yaml'],
+  },
   {
     languageOptions: {
       globals: {
@@ -18,7 +23,7 @@ export default defineConfig([
         ...globals.node,
       },
       ecmaVersion: 2020,
-      sourceType: "module",
+      sourceType: 'module',
       parserOptions: {},
     },
     plugins: {
@@ -42,12 +47,12 @@ export default defineConfig([
     },
   },
   {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ['**/*.ts', '**/*.tsx'],
     rules: {
-        "@typescript-eslint/explicit-module-boundary-types": "error",
-        "@typescript-eslint/interface-name-prefix": "off",
-        "@typescript-eslint/member-delimiter-style": "off",
-        "@typescript-eslint/no-empty-interface": "off",
+      '@typescript-eslint/explicit-module-boundary-types': 'error',
+      '@typescript-eslint/interface-name-prefix': 'off',
+      '@typescript-eslint/member-delimiter-style': 'off',
+      '@typescript-eslint/no-empty-interface': 'off',
     },
   },
 ])

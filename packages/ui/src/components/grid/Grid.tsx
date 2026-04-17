@@ -17,9 +17,10 @@ export interface FlexProps<T extends React.ElementType>
   display?: Responsive<DisplayGrid>
 }
 
-export function Grid<T extends React.ElementType = 'div'>(
-  {display = 'grid', ...props}: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>,
-) {
+export function Grid<T extends React.ElementType = 'div'>({
+  display = 'grid',
+  ...props
+}: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>) {
   const {as, children, className, style, ...rest} = getProps({display, ...props}, gridProps)
   const Component = as || 'div'
 
