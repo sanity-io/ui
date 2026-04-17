@@ -3,10 +3,10 @@ import {_defineTokenGroup} from '../../../lib/_defineTokenGroup'
 import {_defineTokens} from '../../../lib/_defineTokens'
 import {_colorAlias} from '../../../lib/color/_colorAlias'
 
-/** @internal */
-export const _buttonModeTokens = {
+/** @public */
+export const buttonModeTokens = {
   default: _defineTokens({
-    _buttonMode: {
+    buttonMode: {
       boxShadow: _defineToken({
         $type: 'shadow',
         $value: '{shadow.0}',
@@ -75,7 +75,7 @@ export const _buttonModeTokens = {
     },
   }),
   ghost: _defineTokens({
-    _buttonMode: {
+    buttonMode: {
       boxShadow: _defineToken({
         $type: 'shadow',
         $value: [
@@ -151,7 +151,7 @@ export const _buttonModeTokens = {
     },
   }),
   bleed: _defineTokens({
-    _buttonMode: {
+    buttonMode: {
       boxShadow: _defineToken({
         $type: 'shadow',
         $value: '{shadow.0}',

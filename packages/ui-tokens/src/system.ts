@@ -2,7 +2,7 @@ import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/_scheme'
 import {avatarTokens} from '@sanity/ui-tokens/component/avatar'
 import {avatarColorTokens} from '@sanity/ui-tokens/component/avatar/color'
 import {buttonTokens} from '@sanity/ui-tokens/component/button'
-import {_buttonModeTokens} from '@sanity/ui-tokens/component/button/mode'
+import {buttonModeTokens} from '@sanity/ui-tokens/component/button/mode'
 import {cardTokens} from '@sanity/ui-tokens/component/card'
 import {inputTokens} from '@sanity/ui-tokens/component/input'
 import {selectableTokens} from '@sanity/ui-tokens/component/selectable'
@@ -151,10 +151,10 @@ export const tokenSystem: TokenSystem = {
       tokenSets: avatarColorTokens,
     }),
     variantLayer({
-      name: '_buttonMode',
+      name: 'buttonMode',
       title: 'Button mode',
       variants: BUTTON_MODES,
-      tokenSets: _buttonModeTokens,
+      tokenSets: buttonModeTokens,
     }),
     layer({
       name: 'button',
