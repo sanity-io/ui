@@ -33,8 +33,8 @@ export const layers = [
 
   // build layers
   {
-    name: 'build/color/scheme',
-    path: 'build/color/scheme',
+    name: 'build/color/_scheme',
+    path: 'build/color/_scheme',
     importsFrom: ['lib/color', 'primitive/color/palette'],
   },
 
@@ -42,7 +42,7 @@ export const layers = [
   {
     name: 'semantic/color',
     path: 'semantic/color',
-    importsFrom: ['lib/color', 'build/color/scheme', 'primitive/color/palette'],
+    importsFrom: ['lib/color', 'build/color/_scheme', 'primitive/color/palette'],
   },
 
   // decision layers
@@ -70,8 +70,8 @@ export const layers = [
     importsFrom: ['lib/color'],
   },
   {
-    name: 'context/card/tone',
-    path: 'context/card/tone',
+    name: 'context/card/_tone',
+    path: 'context/card/_tone',
     importsFrom: ['lib/color'],
   },
 

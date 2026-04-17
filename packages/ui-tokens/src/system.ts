@@ -1,4 +1,4 @@
-import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/scheme'
+import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/_scheme'
 import {avatarTokens} from '@sanity/ui-tokens/component/avatar'
 import {avatarColorTokens} from '@sanity/ui-tokens/component/avatar/color'
 import {buttonTokens} from '@sanity/ui-tokens/component/button'
@@ -13,7 +13,7 @@ import {
   COLOR_SCHEMES,
   ELEMENT_TONES,
 } from '@sanity/ui-tokens/constants'
-import {_cardToneTokens} from '@sanity/ui-tokens/context/card/tone'
+import {_cardToneTokens} from '@sanity/ui-tokens/context/card/_tone'
 import {elementToneTokens} from '@sanity/ui-tokens/context/element/tone'
 import {borderTokens} from '@sanity/ui-tokens/decision/border'
 import {containerTokens} from '@sanity/ui-tokens/decision/container'
