@@ -13,7 +13,7 @@ const _vars = {
 
 export const patterns: Record<BgPattern, string> = {
   checkered: _style(
-    _layers.primitive,
+    _layers.prop,
     {
       backgroundImage: `
         conic-gradient(${_vars.ink} 0 90deg, transparent 0 180deg, ${_vars.ink} 0 270deg, transparent 0)
@@ -37,7 +37,7 @@ export const patterns: Record<BgPattern, string> = {
   ),
 
   halftone: _style(
-    _layers.primitive,
+    _layers.prop,
     {
       backgroundImage: `
         radial-gradient(circle, ${_vars.ink} ${_vars.dot}, transparent ${_vars.dot}),
@@ -60,7 +60,7 @@ export const patterns: Record<BgPattern, string> = {
   ),
 
   grid: _style(
-    _layers.primitive,
+    _layers.prop,
     {
       backgroundImage: `
         linear-gradient(to right, ${_vars.ink} 1px, transparent 1px),
