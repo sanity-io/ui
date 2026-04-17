@@ -1,6 +1,6 @@
-import type { Preview } from '@storybook/react-vite'
-
 import '../../../packages/ui/src/styles.css'
+
+import type {Preview} from '@storybook/react-vite'
 
 const preview: Preview = {
   parameters: {
@@ -18,6 +18,6 @@ const preview: Preview = {
       test: 'todo',
     },
   },
-};
+}
 
-export default preview;
+export default preview

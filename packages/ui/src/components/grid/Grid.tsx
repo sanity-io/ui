@@ -10,7 +10,7 @@ import {getProps} from '../../utils/getProps'
 import {gridProps} from './grid.props'
 
 /** @public */
-export interface FlexProps<T extends React.ElementType>
+export interface GridProps<T extends React.ElementType>
   extends GridParentProps, GapProps, LayoutProps {
   /** Element to render */
   as?: T
@@ -19,9 +19,10 @@ export interface FlexProps<T extends React.ElementType>
 }
 
 /** @public */
-export function Grid<T extends React.ElementType = 'div'>(
-  {display = 'grid', ...props}: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>,
-) {
+export function Grid<T extends React.ElementType = 'div'>({
+  display = 'grid',
+  ...props
+}: GridProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof GridProps<T>>) {
   const {as, children, className, style, ...rest} = getProps({display, ...props}, gridProps)
   const Component = as || 'div'
 

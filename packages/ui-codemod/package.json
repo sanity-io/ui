@@ -2,34 +2,29 @@
   "name": "ui-codemod",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest run",
     "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "eslint . --ext .cjs,.js,.ts,.tsx"
+    "lint": "eslint . --ext .cjs,.js,.ts,.tsx",
+    "test": "vitest run"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.17.0",
   "prettier": "@sanity/prettier-config",
   "dependencies": {
     "@types/jscodeshift": "^17.3.0",
     "jscodeshift": "^17.3.0"
   },
   "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
     "@sanity/prettier-config": "^1.0.6",
     "@sanity/tsconfig": "^1.0.0",
     "@types/node": "^25.5.2",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^9.1.2",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-prettier": "^5.5.5",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint": "^9.22.0",
     "prettier": "^3.8.1",
     "prettier-plugin-packagejson": "^3.0.2",
     "vitest": "^4.1.1"
-  }
+  },
+  "packageManager": "pnpm@10.17.0"
 }

@@ -1,9 +1,8 @@
-import type { ArgTypes } from "@storybook/react-vite"
-import type { PropDef } from "../../../../packages/ui/src/types/PropDef"
+import type {ArgTypes} from '@storybook/react-vite'
 
-export function getArgTypes<T extends Record<string, PropDef>, P> (
-  propDefs?: T,
-) {
+import type {PropDef} from '../../../../packages/ui/src/types/PropDef'
+
+export function getArgTypes<T extends Record<string, PropDef>, P>(propDefs?: T) {
   if (!propDefs) {
     return {}
   }
@@ -13,7 +12,7 @@ export function getArgTypes<T extends Record<string, PropDef>, P> (
       type: value.type,
       ...(value.type === 'union' && {
         options: value.values,
-        control: { type: 'select' },
+        control: {type: 'select'},
       }),
     }
 

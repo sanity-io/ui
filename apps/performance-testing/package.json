@@ -9,13 +9,15 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "prettier": "@sanity/prettier-config",
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "ui": "workspace:*"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
+    "@repo/eslint-config": "workspace:*",
+    "@sanity/prettier-config": "^1.0.6",
     "@sanity/ui": "^3.1.14",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
@@ -24,11 +26,12 @@
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
+    "prettier": "^3.8.1",
+    "prettier-plugin-packagejson": "^3.0.2",
     "globals": "^17.4.0",
     "react-is": "^19.2.5",
     "styled-components": "^6.4.0",
     "typescript": "~6.0.2",
-    "typescript-eslint": "^8.58.0",
     "ui4": "npm:@sanity/ui@4.0.0-static.46",
     "vite": "^8.0.4"
   }

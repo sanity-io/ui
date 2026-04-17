@@ -1,9 +1,9 @@
-import type { Meta, StoryObj} from '@storybook/react-vite'
-import { expect } from 'storybook/test'
+import type {Meta, StoryObj} from '@storybook/react-vite'
+import {expect} from 'storybook/test'
 
 import {Box} from '../../../../packages/ui/src/components/box/Box'
-import { getArgTypes } from '../utils/getArgTypes'
-import { boxProps } from '../../../../packages/ui/src/components/box/box.props'
+import {boxProps} from '../../../../packages/ui/src/components/box/box.props'
+import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(boxProps)
 
@@ -19,9 +19,9 @@ const meta: Meta<typeof Box> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Box'
-    }
-  }
+      context: '.sui-Box',
+    },
+  },
 }
 
 export default meta
@@ -31,9 +31,9 @@ export const Default: Story = {
   render: (props) => {
     return <Box {...props} />
   },
-  play: async ({ canvas }) => {
-    await expect(
-      (await canvas.findByText('This is a Box component.')).classList
-    ).toContain('sui-display-block')
-  }
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText('This is a Box component.')).classList).toContain(
+      'sui-display-block',
+    )
+  },
 }

@@ -2,7 +2,7 @@ import {type API, type FileInfo} from 'jscodeshift'
 
 import {type AttributeMods} from '../types/AnyExpression'
 import {transformAttributes} from '../utils/transformAttributes'
-import { LAYOUT_MODS } from './constants/layout-attr-mods'
+import {LAYOUT_MODS} from './constants/layout-attr-mods'
 
 const MODS: AttributeMods = {
   ...LAYOUT_MODS,
