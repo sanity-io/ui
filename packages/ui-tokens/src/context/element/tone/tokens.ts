@@ -51,11 +51,21 @@ export const elementToneTokens = {
                   }),
                 },
                 fg: {
-                  0: _colorAlias(`{color._cardTone.${v}.${t}.fg.0}`, {scopes: ['fill/text']}),
-                  1: _colorAlias(`{color._cardTone.${v}.${t}.fg.1}`, {scopes: ['fill/text']}),
-                  2: _colorAlias(`{color._cardTone.${v}.${t}.fg.2}`, {scopes: ['fill/text']}),
-                  3: _colorAlias(`{color._cardTone.${v}.${t}.fg.3}`, {scopes: ['fill/text']}),
-                  4: _colorAlias(`{color._cardTone.${v}.${t}.fg.4}`, {scopes: ['fill/text']}),
+                  0: _colorAlias(`{color._cardTone.${v}.${t}.fg.0}`, {
+                    scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+                  }),
+                  1: _colorAlias(`{color._cardTone.${v}.${t}.fg.1}`, {
+                    scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+                  }),
+                  2: _colorAlias(`{color._cardTone.${v}.${t}.fg.2}`, {
+                    scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+                  }),
+                  3: _colorAlias(`{color._cardTone.${v}.${t}.fg.3}`, {
+                    scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+                  }),
+                  4: _colorAlias(`{color._cardTone.${v}.${t}.fg.4}`, {
+                    scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+                  }),
                 },
               },
             ]),
