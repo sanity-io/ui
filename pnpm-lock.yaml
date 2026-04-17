@@ -227,9 +227,6 @@ importers:
       eslint:
         specifier: ^9.22.0
         version: 9.39.4
-      globals:
-        specifier: ^16.5.0
-        version: 16.5.0
       lint-staged:
         specifier: ^15.5.2
         version: 15.5.2
