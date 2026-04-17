@@ -1,11 +1,21 @@
 {
-  "name": "ui",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@sanity-labs/ui-poc",
+  "version": "0.0.1-alpha.1",
+  "description": "Sanity UI POC",
   "keywords": [],
+  "homepage": "https://github.com/sanity-labs/ui-poc#readme",
+  "bugs": {
+    "url": "https://github.com/sanity-labs/ui-poc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-labs/ui-poc.git"
+  },
   "license": "ISC",
-  "author": "",
-  "sideEffects": false,
+  "author": "Sanity",
+  "sideEffects": [
+    "*.css"
+  ],
   "type": "module",
   "exports": {
     ".": {
@@ -48,6 +58,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^9.2.3",
     "@sanity/prettier-config": "^1.0.6",
     "@sanity/tsconfig": "^1.0.0",
