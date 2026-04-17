@@ -4,11 +4,11 @@ import {createTheme} from '@vanilla-extract/css'
 import {_layers} from '../../layers.css'
 import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
 import type {CSSVars} from '../../lib/css-tokens/types'
-import {_cardToneVars} from '../context/card/_tone.css'
+import {_colorSchemeVars} from '../build/color/_scheme.css'
 
 const _vars = {
   color: {
-    ..._cardToneVars.color,
+    ..._colorSchemeVars.color,
   },
 }
 const _cssTokens = _toCSSTokens(codeTokens, _vars)
