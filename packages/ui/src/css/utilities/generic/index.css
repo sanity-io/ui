@@ -2,9 +2,9 @@
 @import './display.css';
 @import './flex.css';
 @import './grid.css';
-@import './line-height.css';
 @import './overflow.css';
 @import './position.css';
 @import './text-align.css';
-@import './text-transform.css';
+@import './text-muted.css';
+@import './text-trim.css';
 @import './tone.css';
