@@ -3,7 +3,13 @@ import {_globalStyle} from '../../lib/css/_globalStyle.css'
 import {_style} from '../../lib/css/_style.css'
 import {vars} from '../../vars'
 
-export const root = _style(_layers.primitive, {}, '')
+export const root = _style(
+  _layers.primitive,
+  {
+    color: vars.color.muted.fg,
+  },
+  '',
+)
 
 _globalStyle(_layers.primitive, `${root} .token.atrule`, {
   color: vars.code.color.token.atrule,
@@ -36,7 +42,7 @@ _globalStyle(_layers.primitive, `${root} .token.class-name`, {
   color: vars.code.color.token.className,
 })
 _globalStyle(_layers.primitive, `${root} .token.comment`, {
-  color: vars.code.color.token.comment,
+  opacity: 0.5,
 })
 _globalStyle(_layers.primitive, `${root} .token.constant`, {
   color: vars.code.color.token.constant,
@@ -74,9 +80,6 @@ _globalStyle(_layers.primitive, `${root} .token.number`, {
 _globalStyle(_layers.primitive, `${root} .token.operator`, {
   color: vars.code.color.token.operator,
 })
-_globalStyle(_layers.primitive, `${root} .token.prolog`, {
-  color: vars.code.color.token.prolog,
-})
 _globalStyle(_layers.primitive, `${root} .token.property`, {
   color: vars.code.color.token.property,
 })
@@ -86,14 +89,9 @@ _globalStyle(_layers.primitive, `${root} .token.pseudo-class`, {
 _globalStyle(_layers.primitive, `${root} .token.pseudo-element`, {
   color: vars.code.color.token.pseudoElement,
 })
-_globalStyle(_layers.primitive, `${root} .token.punctuation`, {
-  color: vars.code.color.token.punctuation,
-})
-
 _globalStyle(_layers.primitive, `${root} .token.attr-value:not(.attr-equals).punctuation`, {
   color: 'inherit',
 })
-
 _globalStyle(_layers.primitive, `${root} .token.regex`, {
   color: vars.code.color.token.regex,
 })
