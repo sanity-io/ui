@@ -13,7 +13,6 @@ const meta: Meta<typeof Text> = {
     children: 'This is a Text component.',
     as: 'p',
     size: 2,
-    margin: 0,
   },
   argTypes,
   component: Text,
