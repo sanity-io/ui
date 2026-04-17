@@ -2,12 +2,12 @@ import type {FontLabelSize} from '@sanity/ui-tokens'
 
 import type {ExactKeyTuple} from '../../lib/props/_keys'
 import {FLEX_PROP_STYLE_PROP_KEYS, type FlexPropStyleProps} from '../../props/flex/types'
-import {FONT_STYLE_PROP_KEYS, type FontStyleProps} from '../../props/font/types'
 import {MARGIN_STYLE_PROP_KEYS, type MarginStyleProps} from '../../props/margin/types'
 import {MAX_WIDTH_STYLE_PROP_KEYS, type MaxWidthStyleProps} from '../../props/maxWidth/types'
 import type {TextAlign} from '../../props/textAlign/types'
 import {WIDTH_STYLE_PROP_KEYS, type WidthStyleProps} from '../../props/width/types'
 import type {ResponsiveProp} from '../../types'
+import {FONT_STYLE_PROP_KEYS, type FontStyleProps} from '../_font/types'
 
 /** @public */
 export interface LabelStyleProps

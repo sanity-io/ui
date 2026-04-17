@@ -44,9 +44,6 @@ export * from '../src/props/flexDirection/types'
 // flexWrap
 export * from '../src/props/flexWrap/flexWrap'
 export * from '../src/props/flexWrap/types'
-// font
-export * from '../src/props/font/font'
-export * from '../src/props/font/types'
 // gap
 export * from '../src/props/gap/gap'
 export * from '../src/props/gap/types'
@@ -142,6 +139,9 @@ export * from '../src/root/types'
 
 // CSS: primitives
 
+// _font
+export * from '../src/primitives/_font/_font'
+export * from '../src/primitives/_font/types'
 // _input
 export * from '../src/primitives/_input/_input'
 export * from '../src/primitives/_input/types'

@@ -7,19 +7,19 @@ import {_fromEntries} from '../../lib/_fromEntries'
 import {_globalStyle} from '../../lib/css/_globalStyle.css'
 import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import {_style} from '../../lib/css/_style.css'
-import {fontVars} from '../../props/font/font.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars'
+import {_fontVars} from '../_font/_font.css'
 
 export const root: string = _style(
   _layers.primitive,
   {
     vars: {
-      [fontVars.family]: vars.font.text.family,
-      [fontVars.weight.regular]: vars.font.text.weight.regular,
-      [fontVars.weight.medium]: vars.font.text.weight.medium,
-      [fontVars.weight.semibold]: vars.font.text.weight.semibold,
-      [fontVars.weight.bold]: vars.font.text.weight.bold,
+      [_fontVars.family]: vars.font.text.family,
+      [_fontVars.weight.regular]: vars.font.text.weight.regular,
+      [_fontVars.weight.medium]: vars.font.text.weight.medium,
+      [_fontVars.weight.semibold]: vars.font.text.weight.semibold,
+      [_fontVars.weight.bold]: vars.font.text.weight.bold,
     },
 
     color: vars.color.fg,
@@ -82,13 +82,13 @@ export const sizes: ResponsiveRuleOptions<FontTextSize> = {
           _layers.primitive,
           {
             vars: {
-              [fontVars.fontSize]: v.fontSize,
-              [fontVars.lineHeight]: v.lineHeight,
-              [fontVars.ascenderHeight]: v.ascenderHeight,
-              [fontVars.descenderHeight]: v.descenderHeight,
-              [fontVars.letterSpacing]: v.letterSpacing,
-              [fontVars.iconSize]: v.iconSize,
-              [fontVars.customIconSize]: v.customIconSize,
+              [_fontVars.fontSize]: v.fontSize,
+              [_fontVars.lineHeight]: v.lineHeight,
+              [_fontVars.ascenderHeight]: v.ascenderHeight,
+              [_fontVars.descenderHeight]: v.descenderHeight,
+              [_fontVars.letterSpacing]: v.letterSpacing,
+              [_fontVars.iconSize]: v.iconSize,
+              [_fontVars.customIconSize]: v.customIconSize,
             },
           },
           String(s),

@@ -6,21 +6,21 @@ import {_layers} from '../../layers.css'
 import {_fromEntries} from '../../lib/_fromEntries'
 import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import {_style} from '../../lib/css/_style.css'
-import {fontVars} from '../../props/font/font.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars'
+import {_fontVars} from '../_font/_font.css'
 
 export const root: string = _style(
   _layers.primitive,
   {
     vars: {
-      [fontVars.family]: vars.font.code.family,
-      [fontVars.featureSettings]: vars.font.code.featureSettings || undefined,
+      [_fontVars.family]: vars.font.code.family,
+      [_fontVars.featureSettings]: vars.font.code.featureSettings || undefined,
 
-      [fontVars.weight.regular]: vars.font.code.weight.regular,
-      [fontVars.weight.medium]: vars.font.code.weight.medium,
-      [fontVars.weight.semibold]: vars.font.code.weight.semibold,
-      [fontVars.weight.bold]: vars.font.code.weight.bold,
+      [_fontVars.weight.regular]: vars.font.code.weight.regular,
+      [_fontVars.weight.medium]: vars.font.code.weight.medium,
+      [_fontVars.weight.semibold]: vars.font.code.weight.semibold,
+      [_fontVars.weight.bold]: vars.font.code.weight.bold,
     },
 
     color: vars.color.muted.fg,
@@ -72,14 +72,14 @@ export const scale: ResponsiveRuleOptions<FontCodeSize> = {
           _layers.primitive,
           {
             vars: {
-              [fontVars.fontSize]: v.fontSize,
-              [fontVars.lineHeight]: v.lineHeight,
-              [fontVars.ascenderHeight]: v.ascenderHeight,
-              [fontVars.descenderHeight]: v.descenderHeight,
+              [_fontVars.fontSize]: v.fontSize,
+              [_fontVars.lineHeight]: v.lineHeight,
+              [_fontVars.ascenderHeight]: v.ascenderHeight,
+              [_fontVars.descenderHeight]: v.descenderHeight,
 
-              [fontVars.letterSpacing]: v.letterSpacing,
-              [fontVars.iconSize]: v.iconSize,
-              [fontVars.customIconSize]: v.customIconSize,
+              [_fontVars.letterSpacing]: v.letterSpacing,
+              [_fontVars.iconSize]: v.iconSize,
+              [_fontVars.customIconSize]: v.customIconSize,
             },
           },
           String(s),

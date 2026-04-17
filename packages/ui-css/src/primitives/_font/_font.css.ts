@@ -3,10 +3,9 @@ import {createVar, globalStyle} from '@vanilla-extract/css'
 
 import {_layers} from '../../layers.css'
 import {_style} from '../../lib/css/_style.css'
-// import {vars} from '../../vars.css'
 
 /** @internal */
-export const fontVars = {
+export const _fontVars = {
   family: createVar('font-family'),
   featureSettings: createVar('font-feature-settings'),
 
@@ -28,22 +27,34 @@ export const fontVars = {
     semibold: createVar('semibold'),
     bold: createVar('bold'),
   },
+
+  color: {
+    fg: createVar('text-color-fg'),
+    muted: {
+      bg: createVar('text-color-muted-bg'),
+      fg: createVar('text-color-muted-fg'),
+    },
+    link: {
+      fg: createVar('text-color-link-fg'),
+      hover: createVar('text-color-link-hover-fg'),
+    },
+  },
 }
 
 export const root: string = _style(
-  _layers.prop,
+  _layers.primitive,
   {
-    fontFamily: fontVars.family,
-    fontFeatureSettings: fontVars.featureSettings,
-    fontSize: fontVars.fontSize,
-    lineHeight: fontVars.lineHeight,
-    letterSpacing: fontVars.letterSpacing,
-    fontWeight: fontVars.fontWeight,
+    fontFamily: _fontVars.family,
+    fontFeatureSettings: _fontVars.featureSettings,
+    fontSize: _fontVars.fontSize,
+    lineHeight: _fontVars.lineHeight,
+    letterSpacing: _fontVars.letterSpacing,
+    fontWeight: _fontVars.fontWeight,
 
     vars: {
-      [fontVars.capHeight]: `calc(${fontVars.lineHeight} - ${fontVars.ascenderHeight} - ${fontVars.descenderHeight})`,
-      [fontVars.iconOffset]: `calc((${fontVars.capHeight} - ${fontVars.iconSize}) / 2)`,
-      [fontVars.customIconOffset]: `calc((${fontVars.capHeight} - ${fontVars.customIconSize}) / 2)`,
+      [_fontVars.capHeight]: `calc(${_fontVars.lineHeight} - ${_fontVars.ascenderHeight} - ${_fontVars.descenderHeight})`,
+      [_fontVars.iconOffset]: `calc((${_fontVars.capHeight} - ${_fontVars.iconSize}) / 2)`,
+      [_fontVars.customIconOffset]: `calc((${_fontVars.capHeight} - ${_fontVars.customIconSize}) / 2)`,
     },
 
     /**
@@ -54,12 +65,12 @@ export const root: string = _style(
       '&::before': {
         content: '""',
         display: 'table',
-        marginBottom: `calc(0rem - ${fontVars.ascenderHeight})`,
+        marginBottom: `calc(0rem - ${_fontVars.ascenderHeight})`,
       },
       '&::after': {
         content: '""',
         display: 'table',
-        marginTop: `calc(0rem - ${fontVars.descenderHeight})`,
+        marginTop: `calc(0rem - ${_fontVars.descenderHeight})`,
       },
     },
   },
@@ -68,7 +79,7 @@ export const root: string = _style(
 
 globalStyle(`${root} svg`, {
   '@layer': {
-    [_layers.prop]: {
+    [_layers.primitive]: {
       // Some CSS libraries change the defaults for SVG display
       // Ensure SVGs are rendered as inline elements
       display: 'inline',
@@ -78,35 +89,39 @@ globalStyle(`${root} svg`, {
 
 globalStyle(`${root} svg:not([data-sanity-icon])`, {
   '@layer': {
-    [_layers.prop]: {fontSize: fontVars.customIconSize, margin: fontVars.customIconOffset},
+    [_layers.primitive]: {fontSize: _fontVars.customIconSize, margin: _fontVars.customIconOffset},
   },
 })
 
 globalStyle(`${root} [data-sanity-icon]`, {
   '@layer': {
-    [_layers.prop]: {fontSize: fontVars.iconSize, margin: fontVars.iconOffset},
+    [_layers.primitive]: {fontSize: _fontVars.iconSize, margin: _fontVars.iconOffset},
   },
 })
 
 export const weightOptions: Record<FontWeight, string> = {
   regular: _style(
-    _layers.prop,
-    {vars: {[fontVars.fontWeight]: fontVars.weight.regular}},
+    _layers.primitive,
+    {vars: {[_fontVars.fontWeight]: _fontVars.weight.regular}},
     'w-regular',
   ),
 
   medium: _style(
     //
-    _layers.prop,
-    {vars: {[fontVars.fontWeight]: fontVars.weight.medium}},
+    _layers.primitive,
+    {vars: {[_fontVars.fontWeight]: _fontVars.weight.medium}},
     'w-medium',
   ),
 
   semibold: _style(
-    _layers.prop,
-    {vars: {[fontVars.fontWeight]: fontVars.weight.semibold}},
+    _layers.primitive,
+    {vars: {[_fontVars.fontWeight]: _fontVars.weight.semibold}},
     'w-semibold',
   ),
 
-  bold: _style(_layers.prop, {vars: {[fontVars.fontWeight]: fontVars.weight.bold}}, 'w-bold'),
+  bold: _style(
+    _layers.primitive,
+    {vars: {[_fontVars.fontWeight]: _fontVars.weight.bold}},
+    'w-bold',
+  ),
 }
