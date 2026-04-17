@@ -43,7 +43,7 @@ export function getEditorThemeExtension(): Extension {
 
     // Color of gutter
     '&.cm-editor .cm-gutters': {
-      color: `color-mix(in oklab, transparent, ${vars.color.tinted.default.fg[2]} 50%) !important`,
+      color: `color-mix(in oklab, transparent, ${vars.color.tinted.fg[2]} 50%) !important`,
       borderRight: `1px solid color-mix(in oklab, transparent, ${vars.color.border} 50%)`,
     },
   })

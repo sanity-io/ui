@@ -6,18 +6,14 @@ import {Extension} from '@uiw/react-codemirror'
 
 export function getSyntaxTheme(options: {scheme: ColorScheme}): Extension {
   const {scheme} = options
-
-  // element color
-  const {bg, fg} = vars.color.tinted.default
-
-  // token color
-  const c = vars.color.code.token
+  const {tinted} = vars.color
+  const c = vars.code.color.token // token color
 
   return createTheme({
     theme: scheme,
     settings: {
-      background: bg[0],
-      foreground: fg[2],
+      background: tinted.bg[0],
+      foreground: tinted.fg[2],
       // lineHighlight: bg[1],
       // lineHighlight: `color-mix(in srgb, transparent, ${vars.color.focusRing} 10%)`,
       lineHighlight: 'transparent',
@@ -25,17 +21,20 @@ export function getSyntaxTheme(options: {scheme: ColorScheme}): Extension {
       caret: vars.color.focusRing,
       selection: `color-mix(in srgb, transparent, ${vars.color.focusRing} 20%)`,
       selectionMatch: `color-mix(in srgb, transparent, ${vars.color.focusRing} 40%)`,
-      gutterBackground: bg[1],
-      gutterForeground: fg[4],
-      gutterActiveForeground: fg[0],
+      gutterBackground: tinted.bg[1],
+      gutterForeground: tinted.fg[4],
+      gutterActiveForeground: tinted.fg[0],
     },
     styles: [
-      {tag: [t.heading, t.heading2, t.heading3, t.heading4, t.heading5, t.heading6], color: fg[0]},
-      {tag: t.angleBracket, color: fg[2]},
+      {
+        tag: [t.heading, t.heading2, t.heading3, t.heading4, t.heading5, t.heading6],
+        color: tinted.fg[0],
+      },
+      {tag: t.angleBracket, color: tinted.fg[2]},
       {tag: t.atom, color: c.keyword},
       {tag: t.attributeName, color: c.attrName},
       {tag: t.bool, color: c.boolean},
-      {tag: t.bracket, color: fg[2]},
+      {tag: t.bracket, color: tinted.fg[2]},
       {tag: t.className, color: c.className},
       {tag: t.comment, color: c.comment},
       {tag: t.definition(t.typeName), color: c.function},
@@ -52,7 +51,7 @@ export function getSyntaxTheme(options: {scheme: ColorScheme}): Extension {
       {tag: t.keyword, color: c.keyword},
       {tag: t.null, color: c.number},
       {tag: t.number, color: c.number},
-      {tag: t.meta, color: fg[2]},
+      {tag: t.meta, color: tinted.fg[2]},
       {tag: t.operator, color: c.operator},
       {tag: t.propertyName, color: c.property},
       {tag: [t.string, t.special(t.brace)], color: c.string},
