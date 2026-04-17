@@ -18,19 +18,19 @@ export const elementToneTokens = {
               {
                 bg: {
                   0: _colorAlias(`{color._cardTone.${v}.${t}.bg.0}`, {
-                    scopes: ['fill/frame'],
+                    scopes: ['fill/frame', 'fill/shape'],
                   }),
                   1: _colorAlias(`{color._cardTone.${v}.${t}.bg.1}`, {
-                    scopes: ['fill/frame'],
+                    scopes: ['fill/frame', 'fill/shape'],
                   }),
                   2: _colorAlias(`{color._cardTone.${v}.${t}.bg.2}`, {
-                    scopes: ['fill/frame'],
+                    scopes: ['fill/frame', 'fill/shape'],
                   }),
                   3: _colorAlias(`{color._cardTone.${v}.${t}.bg.3}`, {
-                    scopes: ['fill/frame'],
+                    scopes: ['fill/frame', 'fill/shape'],
                   }),
                   4: _colorAlias(`{color._cardTone.${v}.${t}.bg.4}`, {
-                    scopes: ['fill/frame'],
+                    scopes: ['fill/frame', 'fill/shape'],
                   }),
                 },
                 border: {
