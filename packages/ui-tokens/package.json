@@ -42,6 +42,10 @@
       "source": "./exports/component/card.ts",
       "import": "./dist/component/card.js"
     },
+    "./component/code": {
+      "source": "./exports/component/code.ts",
+      "import": "./dist/component/code.js"
+    },
     "./component/button": {
       "source": "./exports/component/button.ts",
       "import": "./dist/component/button.js"
@@ -177,6 +181,9 @@
       },
       "./component/card": {
         "import": "./dist/component/card.js"
+      },
+      "./component/code": {
+        "import": "./dist/component/code.js"
       },
       "./component/input": {
         "import": "./dist/component/input.js"

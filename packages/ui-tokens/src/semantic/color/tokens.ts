@@ -13,18 +13,6 @@ export const colorTokens = _defineTokens({
       scopes: ['effect/color', 'fill/frame', 'fill/shape'],
     }),
     border: _colorAlias('{color._cardTone.tinted.default.border.2}', {scopes: ['stroke/color']}),
-    code: {
-      token: _fromEntries(
-        _CODE_TOKEN_KEYS.map((key) => [
-          key,
-          _colorAlias(`{color._cardTone.code.token.${key}}`, {
-            // scopes: ['fill/text'],
-            // NOTE: hide in figma for now
-            scopes: [],
-          }),
-        ]),
-      ),
-    },
     fg: _colorAlias('{color._cardTone.tinted.default.fg.0}', {scopes: ['fill/text']}),
     focusRing: _colorAlias('{color._cardTone.focusRing}', {scopes: ['effect/color']}),
     link: {

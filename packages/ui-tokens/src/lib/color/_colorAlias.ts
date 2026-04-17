@@ -15,7 +15,6 @@ type ColorPaletteKey = `palette.black` | `palette.white` | `palette.${Hue}.${Tin
 type ColorSemanticKey =
   | 'backdrop'
   | 'border'
-  | `code.token.${CodeTokenKey}`
   | 'fg'
   | 'focusRing'
   | 'link.fg'
@@ -23,6 +22,8 @@ type ColorSemanticKey =
   | 'shadow.umbra'
   | 'shadow.penumbra'
   | 'shadow.ambient'
+
+type ColorCodeTokenKey = `code.token.${CodeTokenKey}`
 
 type ColorElementKey = `${ColorVariant}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
 
@@ -33,9 +34,11 @@ type ColorKey =
   | `color.${ColorSemanticKey}`
   | `color.${ColorElementKey}`
   | `color._cardTone.${ColorAvatarKey}`
+  | `color._cardTone.${ColorCodeTokenKey}`
   | `color._cardTone.${ColorSemanticKey}`
   | `color._cardTone.${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
   | `color._colorScheme.${CardTone}.${ColorAvatarKey}`
+  | `color._colorScheme.${CardTone}.${ColorCodeTokenKey}`
   | `color._colorScheme.${CardTone}.${ColorSemanticKey}`
   | `color._colorScheme.${CardTone}.${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
 

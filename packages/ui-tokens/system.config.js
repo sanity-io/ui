@@ -101,6 +101,11 @@ export const layers = [
     importsFrom: ['lib/color'],
   },
   {
+    name: 'component/code',
+    path: 'component/code',
+    importsFrom: ['lib/color'],
+  },
+  {
     name: 'component/input',
     path: 'component/input',
     importsFrom: ['lib/color'],
