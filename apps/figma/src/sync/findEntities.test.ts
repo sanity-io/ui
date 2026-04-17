@@ -1,4 +1,4 @@
-import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/scheme'
+import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/_scheme'
 import {fontTokens} from '@sanity/ui-tokens/primitive/font'
 import {tokenSystem} from '@sanity/ui-tokens/system'
 import {describe, expect, test} from 'vitest'
