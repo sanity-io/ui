@@ -8,7 +8,7 @@ import {headingProps, type HeadingProps} from './heading.props'
 export function Heading<T extends React.ElementType = 'h1'>({
   size = 2,
   ...props
-}: HeadingProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof HeadingProps<T>>) {
+}: HeadingProps & Omit<React.ComponentPropsWithRef<T>, keyof HeadingProps>) {
   const {as, children, className, style, ...rest} = getProps({size, ...props}, headingProps)
   const Component = as || 'h1'
 

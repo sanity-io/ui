@@ -33,8 +33,8 @@ export const Default: Story = {
   },
   play: async ({ canvas }) => {
     await expect(
-      (await canvas.findByText('This is a Heading component.')).classList
-    ).toContain('sui-heading-body2')
+      (await canvas.findByText('This is a Heading component.')).tagName
+    ).toBe('H1')
   }
 }
 
