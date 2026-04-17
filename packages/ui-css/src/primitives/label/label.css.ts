@@ -1,6 +1,6 @@
 import type {FontLabelSize} from '@sanity/ui-tokens'
 import {FONT_LABEL_SIZE} from '@sanity/ui-tokens/constants'
-import {globalStyle} from '@vanilla-extract/css'
+import {fallbackVar, globalStyle} from '@vanilla-extract/css'
 
 import {_CORNER_SHAPE_RADIUS_MULTIPLIER} from '../../constants'
 import {_layers} from '../../layers.css'
@@ -24,7 +24,7 @@ export const root: string = _style(
       [_fontVars.weight.bold]: vars.font.label.weight.bold,
     },
 
-    color: vars.color.fg,
+    color: fallbackVar(_fontVars.color.fg, vars.color.fg),
     textTransform: 'uppercase',
   },
   '',
@@ -33,7 +33,7 @@ export const root: string = _style(
 globalStyle(`${root} a`, {
   '@layer': {
     [_layers.primitive]: {
-      color: vars.color.link.fg,
+      color: fallbackVar(_fontVars.color.link.fg, vars.color.link.fg),
       textDecoration: 'none',
     },
   },
@@ -42,7 +42,7 @@ globalStyle(`${root} a`, {
 globalStyle(`${root} a:hover`, {
   '@layer': {
     [_layers.primitive]: {
-      color: vars.color.fg,
+      color: fallbackVar(_fontVars.color.fg, vars.color.fg),
     },
   },
 })
@@ -51,8 +51,8 @@ globalStyle(`${root} code`, {
   '@layer': {
     [_layers.primitive]: {
       'fontFamily': vars.font.code.family,
-      'color': vars.color.muted.fg,
-      'backgroundColor': vars.color.muted.bg,
+      'color': fallbackVar(_fontVars.color.muted.fg, vars.color.muted.fg),
+      'backgroundColor': fallbackVar(_fontVars.color.muted.bg, vars.color.muted.bg),
       'borderRadius': vars.radius[2],
 
       '@supports': {
@@ -69,7 +69,7 @@ globalStyle(`${root} code`, {
 globalStyle(`${root} svg`, {
   '@layer': {
     [_layers.primitive]: {
-      color: vars.color.muted.fg,
+      color: fallbackVar(_fontVars.color.muted.fg, vars.color.muted.fg),
     },
   },
 })
@@ -77,7 +77,7 @@ globalStyle(`${root} svg`, {
 export const muted: string = _style(
   _layers.primitive,
   {
-    color: vars.color.muted.fg,
+    color: fallbackVar(_fontVars.color.muted.fg, vars.color.muted.fg),
   },
   'muted',
 )

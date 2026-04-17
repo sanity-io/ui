@@ -1,5 +1,6 @@
 import type {FontTextSize} from '@sanity/ui-tokens'
 import {FONT_TEXT_SIZE} from '@sanity/ui-tokens/constants'
+import {fallbackVar} from '@vanilla-extract/css'
 
 import {_CORNER_SHAPE_RADIUS_MULTIPLIER} from '../../constants'
 import {_layers} from '../../layers.css'
@@ -22,13 +23,13 @@ export const root: string = _style(
       [_fontVars.weight.bold]: vars.font.text.weight.bold,
     },
 
-    color: vars.color.fg,
+    color: fallbackVar(_fontVars.color.fg, vars.color.fg),
   },
   '',
 )
 
 _globalStyle(_layers.primitive, `${root} a`, {
-  'color': vars.color.link.fg,
+  'color': fallbackVar(_fontVars.color.link.fg, vars.color.link.fg),
   'textDecoration': 'none',
   'borderRadius': vars.radius[2],
   'outline': 'none',
@@ -43,7 +44,7 @@ _globalStyle(_layers.primitive, `${root} a`, {
 })
 
 _globalStyle(_layers.primitive, `${root} a:hover`, {
-  color: vars.color.fg,
+  color: fallbackVar(_fontVars.color.link.hover, vars.color.fg),
 })
 
 _globalStyle(_layers.primitive, `${root} a:focus:focus-visible`, {
@@ -52,8 +53,8 @@ _globalStyle(_layers.primitive, `${root} a:focus:focus-visible`, {
 
 _globalStyle(_layers.primitive, `${root} code`, {
   'fontFamily': vars.font.code.family,
-  'color': vars.color.muted.fg,
-  'backgroundColor': vars.color.muted.bg,
+  'color': fallbackVar(_fontVars.color.muted.fg, vars.color.muted.fg),
+  'backgroundColor': fallbackVar(_fontVars.color.muted.bg, vars.color.muted.bg),
   'borderRadius': vars.radius[2],
 
   '@supports': {
@@ -66,10 +67,16 @@ _globalStyle(_layers.primitive, `${root} code`, {
 })
 
 _globalStyle(_layers.primitive, `${root} svg`, {
-  color: vars.color.muted.fg,
+  color: fallbackVar(_fontVars.color.muted.fg, vars.color.muted.fg),
 })
 
-export const muted: string = _style(_layers.primitive, {color: vars.color.muted.fg}, 'muted')
+export const muted: string = _style(
+  _layers.primitive,
+  {
+    color: fallbackVar(_fontVars.color.muted.fg, vars.color.muted.fg),
+  },
+  'muted',
+)
 
 export const sizes: ResponsiveRuleOptions<FontTextSize> = {
   ..._fromEntries(
