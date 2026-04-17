@@ -1,7 +1,8 @@
 import {_layers} from '../../layers.css'
 import {_style} from '../../lib/css/_style.css'
 import {vars} from '../../vars'
-import {_buttonModeVars} from './buttonMode.css'
+import {_buttonModeVars} from '../../vars/component/button/mode.css'
+import {_fontVars} from '../_font/_font.css'
 
 const stateSelectors = {
   hovered: '&:not(:disabled):hover, &:not(:disabled)[data-hovered]',
@@ -14,7 +15,6 @@ export const root: string = _style(
   _layers.primitive,
   {
     'WebkitFontSmoothing': 'inherit',
-    // 'alignItems': 'center',
     'appearance': 'none',
     'font': 'inherit',
     'outline': 'none',
@@ -22,7 +22,6 @@ export const root: string = _style(
     'textDecoration': 'none',
     'border': 0,
     'boxSizing': 'border-box',
-    // 'padding': 0,
     'overflow': 'hidden',
     'margin': 0,
     'textAlign': 'left',
@@ -30,7 +29,6 @@ export const root: string = _style(
     'verticalAlign': 'top',
     'boxShadow': _buttonModeVars._buttonMode.boxShadow,
     'backgroundColor': vars.color.bg,
-    'color': vars.color.fg,
 
     '@media': {
       '(hover: hover)': {
@@ -39,11 +37,12 @@ export const root: string = _style(
             vars: {
               [vars.color.bg]: _buttonModeVars._buttonMode.color.state.hovered.bg,
               [vars.color.border]: _buttonModeVars._buttonMode.color.state.hovered.border,
-              [vars.color.fg]: _buttonModeVars._buttonMode.color.state.hovered.fg,
-              [vars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.hovered.muted.bg,
               [vars.color.muted.border]:
                 _buttonModeVars._buttonMode.color.state.hovered.muted.border,
-              [vars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.hovered.muted.fg,
+
+              [_fontVars.color.fg]: _buttonModeVars._buttonMode.color.state.hovered.fg,
+              [_fontVars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.hovered.muted.bg,
+              [_fontVars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.hovered.muted.fg,
             },
           },
 
@@ -51,11 +50,12 @@ export const root: string = _style(
             vars: {
               [vars.color.bg]: _buttonModeVars._buttonMode.color.state.pressed.bg,
               [vars.color.border]: _buttonModeVars._buttonMode.color.state.pressed.border,
-              [vars.color.fg]: _buttonModeVars._buttonMode.color.state.pressed.fg,
-              [vars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.pressed.muted.bg,
               [vars.color.muted.border]:
                 _buttonModeVars._buttonMode.color.state.pressed.muted.border,
-              [vars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.pressed.muted.fg,
+
+              [_fontVars.color.fg]: _buttonModeVars._buttonMode.color.state.pressed.fg,
+              [_fontVars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.pressed.muted.bg,
+              [_fontVars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.pressed.muted.fg,
             },
           },
 
@@ -63,11 +63,12 @@ export const root: string = _style(
             vars: {
               [vars.color.bg]: _buttonModeVars._buttonMode.color.state.selected.bg,
               [vars.color.border]: _buttonModeVars._buttonMode.color.state.selected.border,
-              [vars.color.fg]: _buttonModeVars._buttonMode.color.state.selected.fg,
-              [vars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.selected.muted.bg,
               [vars.color.muted.border]:
                 _buttonModeVars._buttonMode.color.state.selected.muted.border,
-              [vars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.selected.muted.fg,
+
+              [_fontVars.color.fg]: _buttonModeVars._buttonMode.color.state.selected.fg,
+              [_fontVars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.selected.muted.bg,
+              [_fontVars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.selected.muted.fg,
             },
           },
 
@@ -76,11 +77,12 @@ export const root: string = _style(
             vars: {
               [vars.color.bg]: _buttonModeVars._buttonMode.color.state.disabled.bg,
               [vars.color.border]: _buttonModeVars._buttonMode.color.state.disabled.border,
-              [vars.color.fg]: _buttonModeVars._buttonMode.color.state.disabled.fg,
-              [vars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.disabled.muted.bg,
               [vars.color.muted.border]:
                 _buttonModeVars._buttonMode.color.state.disabled.muted.border,
-              [vars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.disabled.muted.fg,
+
+              [_fontVars.color.fg]: _buttonModeVars._buttonMode.color.state.disabled.fg,
+              [_fontVars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.disabled.muted.bg,
+              [_fontVars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.disabled.muted.fg,
             },
           },
         },
@@ -105,10 +107,11 @@ export const root: string = _style(
     'vars': {
       [vars.color.bg]: _buttonModeVars._buttonMode.color.state.enabled.bg,
       [vars.color.border]: _buttonModeVars._buttonMode.color.state.enabled.border,
-      [vars.color.fg]: _buttonModeVars._buttonMode.color.state.enabled.fg,
-      [vars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.enabled.muted.bg,
       [vars.color.muted.border]: _buttonModeVars._buttonMode.color.state.enabled.muted.border,
-      [vars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.enabled.muted.fg,
+
+      [_fontVars.color.fg]: _buttonModeVars._buttonMode.color.state.enabled.fg,
+      [_fontVars.color.muted.bg]: _buttonModeVars._buttonMode.color.state.enabled.muted.bg,
+      [_fontVars.color.muted.fg]: _buttonModeVars._buttonMode.color.state.enabled.muted.fg,
     },
   },
   '',

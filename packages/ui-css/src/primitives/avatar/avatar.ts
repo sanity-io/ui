@@ -1,10 +1,10 @@
 import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
 import {_responsiveClassName} from '../../lib/class-names/_responsiveClassName'
 import {flexProp} from '../../props/flex/flex'
+import {avatarColorClassNames} from '../../vars/component/avatar/color.css'
 import {
   arrow,
   arrowSvg,
-  colors,
   counter,
   image,
   imageOutline,
@@ -20,7 +20,7 @@ export function avatar(props: AvatarStyleProps): string | undefined {
   return _composeClassNames(
     props.className,
     root,
-    colors[props.color ?? 'gray'],
+    avatarColorClassNames[props.color ?? 'gray'],
     _responsiveClassName(scale, props.size ?? 1),
     flexProp({flex: 'none'}),
   )

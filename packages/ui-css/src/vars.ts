@@ -33,6 +33,8 @@ import {buttonVars} from './vars/component/button.css'
 import {cardVars} from './vars/component/card.css'
 import {inputVars} from './vars/component/input.css'
 import {selectableVars} from './vars/component/selectable.css'
+import {avatarColorVars} from './vars/component/avatar/color.css'
+import {codeVars} from './vars/component/code.css'
 
 /**
  * CSS custom properties (CSS variables) for the Sanity UI design system.
@@ -74,7 +76,6 @@ export const vars = {
   },
 
   // the primitive tokens
-  ...avatarVars,
   ...borderVars,
   ...containerVars,
   ...cornerVars,
@@ -85,8 +86,13 @@ export const vars = {
   ...spaceVars,
 
   // component tokens
+  avatar: {
+    ...avatarVars.avatar,
+    ...avatarColorVars.avatar,
+  },
   ...buttonVars,
   ...cardVars,
+  ...codeVars,
   ...inputVars,
   ...selectableVars,
 }

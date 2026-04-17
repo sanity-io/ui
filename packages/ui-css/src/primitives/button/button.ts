@@ -9,8 +9,8 @@ import {maxWidth} from '../../props/maxWidth/maxWidth'
 import {padding} from '../../props/padding/padding'
 import {radius} from '../../props/radius/radius'
 import {width} from '../../props/width/width'
+import {_buttonMode} from '../../vars/component/button/mode.css'
 import {loadingBox, root} from './button.css'
-import {_buttonMode} from './buttonMode.css'
 import type {ButtonStyleProps} from './types'
 
 /** @public */

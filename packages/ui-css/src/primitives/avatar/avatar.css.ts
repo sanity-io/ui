@@ -1,5 +1,5 @@
-import type {AvatarColor, AvatarSize} from '@sanity/ui-tokens'
-import {AVATAR_COLORS, AVATAR_SIZE} from '@sanity/ui-tokens/constants'
+import type {AvatarSize} from '@sanity/ui-tokens'
+import {AVATAR_SIZE} from '@sanity/ui-tokens/constants'
 import {createVar} from '@vanilla-extract/css'
 
 import {_layers} from '../../layers.css'
@@ -9,12 +9,9 @@ import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import {_style} from '../../lib/css/_style.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars'
+import {_fontVars} from '../_font/_font.css'
 
 const _vars = {
-  color: {
-    bg: createVar('color-bg'),
-    fg: createVar('color-fg'),
-  },
   distance: createVar('distance'),
   size: createVar('size'),
 }
@@ -28,7 +25,7 @@ _globalStyle(_layers.primitive, `${stack} > * + *`, {
 export const root: string = _style(
   _layers.primitive,
   {
-    backgroundColor: _vars.color.bg,
+    backgroundColor: vars.avatar.color.bg,
     position: 'relative',
     boxSizing: 'border-box',
     userSelect: 'none',
@@ -42,8 +39,8 @@ export const root: string = _style(
     justifyContent: 'center',
 
     vars: {
-      [vars.color.fg]: _vars.color.fg,
-      [vars.color.muted.fg]: _vars.color.fg,
+      [_fontVars.color.fg]: vars.avatar.color.fg,
+      [_fontVars.color.muted.fg]: vars.avatar.color.fg,
     },
 
     selectors: {
@@ -72,32 +69,14 @@ export const root: string = _style(
 
       ':disabled &, [data-disabled] &': {
         vars: {
-          [_vars.color.bg]: vars.color.border,
-          [_vars.color.fg]: vars.color.bg,
+          [vars.avatar.color.bg]: vars.color.border,
+          [vars.avatar.color.fg]: vars.color.bg,
         },
       },
     },
   },
   '',
 )
-
-export const colors: Record<AvatarColor, string> = {
-  ..._fromEntries(
-    AVATAR_COLORS.map((c) => [
-      c,
-      _style(
-        _layers.primitive,
-        {
-          vars: {
-            [_vars.color.bg]: vars.color.avatar[c].bg,
-            [_vars.color.fg]: vars.color.avatar[c].fg,
-          },
-        },
-        c,
-      ),
-    ]),
-  ),
-}
 
 export const arrow: string = _style(
   _layers.primitive,
@@ -138,7 +117,7 @@ export const arrowSvg: string = _style(
     top: '-5px',
     left: '50%',
     transform: 'translateX(-5.5px)',
-    fill: _vars.color.bg,
+    fill: vars.avatar.color.bg,
   },
   'arrow-svg',
 )
@@ -186,13 +165,14 @@ export const imageOutline: string = _style(
     borderRadius: 'inherit',
     // @ts-expect-error - TODO: fix this
     cornerShape: 'inherit',
-    boxShadow: [`inset 0 0 0 1px ${_vars.color.bg}`, `inset 0 0 0 1.5px ${vars.color.bg}`].join(
-      ', ',
-    ),
+    boxShadow: [
+      `inset 0 0 0 1px ${vars.avatar.color.bg}`,
+      `inset 0 0 0 1.5px ${vars.color.bg}`,
+    ].join(', '),
 
     selectors: {
       [`.${root}[data-hide-inner-stroke] &`]: {
-        boxShadow: `inset 0 0 0 1px ${_vars.color.bg}`,
+        boxShadow: `inset 0 0 0 1px ${vars.avatar.color.bg}`,
       },
     },
   },
