@@ -10,7 +10,7 @@ export const codeTokens = _defineTokens({
       token: _fromEntries(
         _CODE_TOKEN_KEYS.map((key) => [
           key,
-          _colorAlias(`{color._cardTone.code.token.${key}}`, {
+          _colorAlias(`{color._colorScheme.code.token.${key}}`, {
             // scopes: ['fill/text'],
             // NOTE: hide in figma for now
             scopes: [],

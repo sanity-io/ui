@@ -1,6 +1,6 @@
 import type {z} from 'zod'
 
-import type {AvatarColor, CodeTokenKey, ColorVariant, ElementTone} from '../../types'
+import type {ColorVariant, ElementTone} from '../../types'
 import type {_DTCGColorValue, _DTCGTokenAlias} from '../dtcg/types'
 import type {SanityColorExtensionsSchema, SanityColorTokenSchema} from './schema'
 
@@ -11,17 +11,7 @@ export interface ElementToneColorTokens {
 }
 
 export type CardToneTokens = {
-  avatar: Record<
-    AvatarColor,
-    {
-      bg: ColorToken
-      fg: ColorToken
-    }
-  >
   backdrop: ColorToken
-  code: {
-    token: Record<CodeTokenKey, ColorToken>
-  }
   focusRing: ColorToken
   link: {
     fg: ColorToken

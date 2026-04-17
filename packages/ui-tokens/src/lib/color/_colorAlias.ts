@@ -33,12 +33,10 @@ type ColorKey =
   | `color.${ColorPaletteKey}`
   | `color.${ColorSemanticKey}`
   | `color.${ColorElementKey}`
-  | `color._cardTone.${ColorAvatarKey}`
-  | `color._cardTone.${ColorCodeTokenKey}`
   | `color._cardTone.${ColorSemanticKey}`
   | `color._cardTone.${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
-  | `color._colorScheme.${CardTone}.${ColorAvatarKey}`
-  | `color._colorScheme.${CardTone}.${ColorCodeTokenKey}`
+  | `color._colorScheme.${ColorAvatarKey}`
+  | `color._colorScheme.${ColorCodeTokenKey}`
   | `color._colorScheme.${CardTone}.${ColorSemanticKey}`
   | `color._colorScheme.${CardTone}.${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
 

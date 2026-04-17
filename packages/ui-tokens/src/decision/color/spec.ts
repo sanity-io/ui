@@ -28,11 +28,7 @@ export interface SanityElementColorSpec {
 
 export interface SanityCardColorSpec {
   _hue?: Hue
-  avatar?: AvatarsColorSpec
   backdrop?: ColorSchemePair
-  code?: {
-    token?: Partial<Record<CodeTokenKey, ColorSchemePair>>
-  }
   focusRing?: ColorSchemePair
   link?: {
     fg?: ColorSchemePair
@@ -48,47 +44,56 @@ export interface SanityCardColorSpec {
   >
 }
 
-type SanityColorSpec = Partial<Record<'*' | CardTone, SanityCardColorSpec>>
+type SanityColorSpec = Partial<Record<'*' | CardTone, SanityCardColorSpec>> & {
+  avatar?: AvatarsColorSpec
+  code?: {
+    token?: Partial<Record<CodeTokenKey, ColorSchemePair>>
+  }
+}
 
 export const colorSpec: SanityColorSpec = {
+  'code': {
+    token: {
+      atrule: ['purple-600', 'purple-400'],
+      attrName: ['green-600', 'green-400'],
+      attrValue: ['yellow-600', 'yellow-400'],
+      attribute: ['yellow-600', 'yellow-400'],
+      boolean: ['purple-600', 'purple-400'],
+      builtin: ['purple-600', 'purple-400'],
+      cdata: ['yellow-600', 'yellow-400'],
+      char: ['yellow-600', 'yellow-400'],
+      class: ['orange-600', 'orange-400'],
+      className: ['cyan-600', 'cyan-400'],
+      // comment: ['600 60%', '400 60%'],
+      constant: ['purple-600', 'purple-400'],
+      deleted: ['red-600', 'red-400'],
+      entity: ['red-600', 'red-400'],
+      function: ['green-600', 'green-400'],
+      hexcode: ['blue-600', 'blue-400'],
+      id: ['purple-600', 'purple-400'],
+      important: ['purple-600', 'purple-400'],
+      inserted: ['green-600', 'green-400'],
+      keyword: ['magenta-600', 'magenta-400'],
+      number: ['purple-600', 'purple-400'],
+      operator: ['magenta-600', 'magenta-400'],
+      // prolog: ['600', '400'],
+      property: ['blue-600', 'blue-400'],
+      pseudoClass: ['yellow-600', 'yellow-400'],
+      pseudoElement: ['yellow-600', 'yellow-400'],
+      // punctuation: ['600', '400'],
+      regex: ['blue-600', 'blue-400'],
+      selector: ['red-600', 'red-400'],
+      string: ['yellow-600', 'yellow-400'],
+      symbol: ['purple-600', 'purple-400'],
+      tag: ['red-600', 'red-400'],
+      unit: ['orange-600', 'orange-400'],
+      url: ['red-600', 'red-400'],
+      variable: ['red-600', 'red-400'],
+    },
+  },
+
   '*': {
     backdrop: ['200/0.5', 'black/0.5'],
-    code: {
-      token: {
-        atrule: ['purple-600', 'purple-400'],
-        attrName: ['green-600', 'green-400'],
-        attrValue: ['yellow-600', 'yellow-400'],
-        attribute: ['yellow-600', 'yellow-400'],
-        boolean: ['purple-600', 'purple-400'],
-        builtin: ['purple-600', 'purple-400'],
-        cdata: ['yellow-600', 'yellow-400'],
-        char: ['yellow-600', 'yellow-400'],
-        class: ['orange-600', 'orange-400'],
-        className: ['cyan-600', 'cyan-400'],
-        constant: ['purple-600', 'purple-400'],
-        deleted: ['red-600', 'red-400'],
-        entity: ['red-600', 'red-400'],
-        function: ['green-600', 'green-400'],
-        hexcode: ['blue-600', 'blue-400'],
-        id: ['purple-600', 'purple-400'],
-        important: ['purple-600', 'purple-400'],
-        inserted: ['green-600', 'green-400'],
-        keyword: ['magenta-600', 'magenta-400'],
-        number: ['purple-600', 'purple-400'],
-        operator: ['magenta-600', 'magenta-400'],
-        property: ['blue-600', 'blue-400'],
-        pseudoClass: ['yellow-600', 'yellow-400'],
-        pseudoElement: ['yellow-600', 'yellow-400'],
-        regex: ['blue-600', 'blue-400'],
-        selector: ['red-600', 'red-400'],
-        string: ['yellow-600', 'yellow-400'],
-        symbol: ['purple-600', 'purple-400'],
-        tag: ['red-600', 'red-400'],
-        unit: ['orange-600', 'orange-400'],
-        url: ['red-600', 'red-400'],
-        variable: ['red-600', 'red-400'],
-      },
-    },
     focusRing: ['blue-500', 'blue-500'],
     link: {
       fg: ['blue-600', 'blue-400'],

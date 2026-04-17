@@ -11,8 +11,8 @@ export const avatarColorTokens = _fromEntries(
       avatar: {
         color: _defineTokenGroup({
           $type: 'color',
-          bg: _colorAlias(`{color._cardTone.avatar.${color}.bg}`, {scopes: ['fill/frame']}),
-          fg: _colorAlias(`{color._cardTone.avatar.${color}.fg}`, {scopes: ['fill/text']}),
+          bg: _colorAlias(`{color._colorScheme.avatar.${color}.bg}`, {scopes: ['fill/frame']}),
+          fg: _colorAlias(`{color._colorScheme.avatar.${color}.fg}`, {scopes: ['fill/text']}),
         }),
       },
     } as const,

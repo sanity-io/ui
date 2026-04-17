@@ -1,10 +1,4 @@
-import {
-  _CODE_TOKEN_KEYS,
-  AVATAR_COLORS,
-  CARD_TONES,
-  COLOR_VARIANTS,
-  ELEMENT_TONES,
-} from '../../../constants'
+import {_CODE_TOKEN_KEYS, CARD_TONES, COLOR_VARIANTS, ELEMENT_TONES} from '../../../constants'
 import {_defineTokenGroup} from '../../../lib/_defineTokenGroup'
 import {_fromEntries} from '../../../lib/_fromEntries'
 import {_colorAlias} from '../../../lib/color/_colorAlias'
@@ -26,26 +20,7 @@ export const _cardToneTokens = _fromEntries(
 
 function buildCardToneTokens(cardTone: CardTone): CardToneTokens {
   return {
-    avatar: {
-      ..._fromEntries(
-        AVATAR_COLORS.map((color) => [
-          color,
-          {
-            bg: _colorAlias(`{color._colorScheme.${cardTone}.avatar.${color}.bg}`),
-            fg: _colorAlias(`{color._colorScheme.${cardTone}.avatar.${color}.fg}`),
-          },
-        ]),
-      ),
-    },
     backdrop: _colorAlias(`{color._colorScheme.${cardTone}.backdrop}`),
-    code: {
-      token: _fromEntries(
-        _CODE_TOKEN_KEYS.map((key) => [
-          key,
-          _colorAlias(`{color._colorScheme.${cardTone}.code.token.${key}}`),
-        ]),
-      ),
-    },
     focusRing: _colorAlias(`{color._colorScheme.${cardTone}.focusRing}`),
     link: {
       fg: _colorAlias(`{color._colorScheme.${cardTone}.link.fg}`),

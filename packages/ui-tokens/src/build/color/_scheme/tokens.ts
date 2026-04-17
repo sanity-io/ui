@@ -17,26 +17,59 @@ import type {TokenGroup} from '../../../lib/types'
 import {paletteTokens} from '../../../primitive/color/palette/tokens'
 import type {CardTone, ColorScheme, ColorVariant, ElementTone} from '../../../types'
 
-const light = _defineTokens({
-  color: _defineTokenGroup({
-    $type: 'color',
-    _colorScheme: _fromEntries(
-      CARD_TONES.map((cardTone) => [cardTone, buildCardToneTokens('light', cardTone)]),
-    ),
-  }),
-})
-
-const dark = _defineTokens({
-  color: _defineTokenGroup({
-    $type: 'color',
-    _colorScheme: _fromEntries(
-      CARD_TONES.map((cardTone) => [cardTone, buildCardToneTokens('dark', cardTone)]),
-    ),
-  }),
-})
-
 /** @internal */
-export const _colorSchemeTokens = {light, dark} satisfies TokenGroup<ColorScheme>
+export const _colorSchemeTokens = {
+  light: buildColorSchemeTokens('light'),
+  dark: buildColorSchemeTokens('dark'),
+} satisfies TokenGroup<ColorScheme>
+
+function buildColorSchemeTokens(scheme: ColorScheme) {
+  const model = colorModel[scheme]
+  const systemBg: ColorExpr =
+    scheme === 'light'
+      ? {type: 'keyword', name: 'white', opacity: 1, mix: 1}
+      : {type: 'keyword', name: 'black', opacity: 1, mix: 1}
+  const debugId = `card.${scheme}`
+  const options = { systemBg} as const
+
+  return _defineTokens({
+    color: _defineTokenGroup({
+      $type: 'color',
+      _colorScheme: {
+        avatar: _fromEntries(
+          AVATAR_COLORS.map((color) => [
+            color,
+            {
+              bg: resolveColorExpr(
+                model.avatar[color].bg,
+                options,
+                `${debugId}.avatar.${color}.bg`,
+              ),
+              fg: resolveColorExpr(
+                model.avatar[color].fg,
+                options,
+                `${debugId}.avatar.${color}.fg`,
+              ),
+            },
+          ]),
+        ),
+        code: {
+          token: _fromEntries(
+            _CODE_TOKEN_KEYS.map((key) => [
+              key,
+              resolveColorExpr(model.code.token[key], options, `${debugId}.code.token.${key}`),
+            ]),
+          ),
+        },
+
+        // tones
+        ..._fromEntries(
+          CARD_TONES.map((cardTone) => [cardTone, buildCardToneTokens(scheme, cardTone)]),
+        )
+      },
+    }),
+  })
+}
 
 function buildCardToneTokens(scheme: ColorScheme, cardTone: CardTone): CardToneTokens {
   const cardModel = colorModel[scheme][cardTone]
@@ -49,32 +82,7 @@ function buildCardToneTokens(scheme: ColorScheme, cardTone: CardTone): CardToneT
   const options = {bg, systemBg} as const
 
   return {
-    avatar: _fromEntries(
-      AVATAR_COLORS.map((color) => [
-        color,
-        {
-          bg: resolveColorExpr(
-            cardModel.avatar[color].bg,
-            options,
-            `${debugId}.avatar.${color}.bg`,
-          ),
-          fg: resolveColorExpr(
-            cardModel.avatar[color].fg,
-            options,
-            `${debugId}.avatar.${color}.fg`,
-          ),
-        },
-      ]),
-    ),
     backdrop: resolveColorExpr(cardModel.backdrop, options, `${debugId}.backdrop`),
-    code: {
-      token: _fromEntries(
-        _CODE_TOKEN_KEYS.map((key) => [
-          key,
-          resolveColorExpr(cardModel.code.token[key], options, `${debugId}.code.token.${key}`),
-        ]),
-      ),
-    },
     focusRing: resolveColorExpr(cardModel.focusRing, options, `${debugId}.focusRing`),
     link: {
       fg: resolveColorExpr(cardModel.link.fg, options, `${debugId}.link.fg`),
