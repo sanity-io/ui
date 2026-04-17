@@ -1,3 +1,9 @@
+## 4.0.0-beta.4
+
+### Patch Changes
+
+- [`e004875`](https://github.com/sanity-io/ui/commit/e0048759c5a8ca2f054625c8593a2d920fb0e93f) Thanks [@mariuslundgard](https://github.com/mariuslundgard)! - Refactors layered token and CSS variable internals, adds avatar color tokens, and updates related styling, documentation, and tests.
+
 ## 4.0.0-beta.3
 
 ### Patch Changes
