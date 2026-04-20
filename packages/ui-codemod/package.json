@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "eslint . --ext .cjs,.js,.ts,.tsx",
+    "lint": "eslint .",
     "test": "vitest run"
   },
   "prettier": "@sanity/prettier-config",

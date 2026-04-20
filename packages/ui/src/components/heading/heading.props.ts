@@ -1,5 +1,5 @@
-import {typographyProps, type TypographyProps} from '../../props/typography'
-import { HEADING_SIZE, HEADING_TAG, type HeadingSize, type HeadingTag } from '../../types/Heading'
+import {type TypographyProps, typographyProps} from '../../props/typography'
+import {HEADING_SIZE, HEADING_TAG, type HeadingSize, type HeadingTag} from '../../types/Heading'
 import {type PropDef} from '../../types/PropDef'
 
 /** @public */

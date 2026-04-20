@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {headingProps, type HeadingProps} from './heading.props'
+import {type HeadingProps, headingProps} from './heading.props'
 
 /** @public */
 export function Heading<T extends React.ElementType = 'h1'>({
@@ -26,7 +26,12 @@ export function Heading<T extends React.ElementType = 'h1'>({
   }
 
   return (
-    <Component className={classNames('sui-Heading', className)} style={style} data-ui="Heading" {...rest}>
+    <Component
+      className={classNames('sui-Heading', className)}
+      style={style}
+      data-ui="Heading"
+      {...rest}
+    >
       {children}
     </Component>
   )
