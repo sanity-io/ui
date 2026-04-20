@@ -21,7 +21,13 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
   const restProps: ComponentProps = {}
 
   for (const key in componentProps) {
-    if (!propDefs?.[key] || !propDefs?.[key].className) {
+    // Pass over props that don't effect CSS output, including them in `restProps` instead.
+    // @TODO Is there a better way to write this `if`? Perhaps explicitly enumerating the props
+    // we know we don't need to operate on here (e.g. the `as` prop)?
+    if (
+      !propDefs?.[key] ||
+      (!('className' in propDefs[key]) && !('composition' in propDefs[key]))
+    ) {
       restProps[key] = componentProps[key]
       continue
     }
@@ -46,6 +52,17 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 function getClassName(prop: any, propDef: PropDef, bp?: number) {
+  if (propDef.type === 'composite' && propDef.composition[prop]) {
+    const classes = bp
+      ? propDef.composition[prop]
+          .split(' ')
+          .map((className: string) => `${className}-bp-${bp}`)
+          .join(' ')
+      : propDef.composition[prop]
+    // @TODO prefix has been written included as part of composite class names; does it need to be dynamic?
+    return classes
+  }
+
   if (propDef.type === 'union' && propDef.values?.includes(prop)) {
     /* Note: This may need updating depending on the final CSS classname formatting */
     return `${PREFIX}-${propDef.className}${typeof prop === 'string' ? `-${prop}` : prop}${bp ? `-bp-${bp}` : ''}`
