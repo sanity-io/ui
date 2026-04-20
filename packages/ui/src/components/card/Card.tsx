@@ -5,10 +5,11 @@ import {getProps} from '../../utils/getProps'
 import {type CardProps, cardProps} from './card.props'
 
 /** @public */
-export function Card<T extends React.ElementType = 'div'>(
-  props: CardProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof CardProps<T>>,
-) {
-  const {as, children, className, style, ...rest} = getProps(props, cardProps)
+export function Card<T extends React.ElementType = 'div'>({
+  density = 'regular',
+  ...props
+}: CardProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof CardProps<T>>) {
+  const {as, children, className, style, ...rest} = getProps({density, ...props}, cardProps)
   const Component = as || 'div'
 
   return (
