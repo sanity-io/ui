@@ -71,6 +71,7 @@ export function transformAttributes(
       const styleValue = getMappingValue(mod.mappings, expr)
 
       if (!styleValue) {
+        insertTodoWarning(j, path, todoWarning)
         continue
       }
 
@@ -115,6 +116,7 @@ export function transformAttributes(
       const styleValue = getMappingValue(mod.mappings, expr)
 
       if (!styleValue) {
+        insertTodoWarning(j, path, todoWarning)
         continue
       }
 
