@@ -41,7 +41,7 @@
     "dev:css": "postcss src/index.css -o src/styles.css --watch",
     "dev:js": "pkg watch",
     "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "eslint . --ext .cjs,.js,.ts,.tsx",
+    "lint": "eslint .",
     "test": "vitest run",
     "ts:check": "tsc --noEmit"
   },

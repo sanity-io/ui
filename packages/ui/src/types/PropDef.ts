@@ -1,12 +1,12 @@
 type BooleanPropDef = {
   type: 'boolean'
-  className: string
+  className?: string
   inverse: string
 }
 
 type NumberPropDef = {
   type: 'number'
-  className: string
+  className?: string
   variable: string
 }
 
@@ -18,7 +18,7 @@ type StringPropDef = {
 
 type UnionPropDef<T> = {
   type: 'union'
-  className: string
+  className?: string
   values: readonly T[]
 }
 
