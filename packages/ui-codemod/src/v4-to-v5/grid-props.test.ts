@@ -21,7 +21,7 @@ defineInlineTest(
       justifyContent: "center"
     }} />
   `,
-  'moves flex child props to style',
+  'moves flex props to style',
 )
 
 defineInlineTest(
@@ -39,5 +39,5 @@ defineInlineTest(
     gridTemplateRows="repeat(2, 1fr)"
   />
   `,
-  'moves grid child props to style and updates mapped values',
+  'updates grid props mapped values',
 )

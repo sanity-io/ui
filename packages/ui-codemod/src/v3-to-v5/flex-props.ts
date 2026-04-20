@@ -34,7 +34,7 @@ export default function transform(fileInfo: FileInfo, api: API): string {
 
   root
     .find(j.JSXOpeningElement, {
-      name: {type: 'JSXIdentifier', name: 'Box'},
+      name: {type: 'JSXIdentifier', name: 'Flex'},
     })
     .forEach((path) => {
       transformAttributes(j, path, MODS, TODO_WARNING)
