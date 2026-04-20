@@ -10,7 +10,7 @@ export interface CardProps<T extends React.ElementType> extends MarginProps {
   as?: T
   /** CSS **display** property */
   display?: Responsive<DisplayBlock>
-  /** Composite prop determining padding and border radius */
+  /** Composite prop for setting padding and border radius */
   density?: Responsive<Density>
 }
 
