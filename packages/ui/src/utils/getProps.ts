@@ -16,34 +16,29 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
   componentProps?: P,
   propDefs?: T,
 ): ComponentProps {
+  const allProps = spreadCompositeProps(componentProps, propDefs)
+  const restProps: ComponentProps = {}
   let className = componentProps?.className || ''
   let style = componentProps?.style || {}
-  const restProps: ComponentProps = {}
 
-  for (const key in componentProps) {
-    // Pass over props that don't effect CSS output, including them in `restProps` instead.
-    // @TODO Is there a better way to write this `if`? Perhaps explicitly enumerating the props
-    // we know we don't need to operate on here (e.g. the `as` prop)?
-    if (
-      !propDefs?.[key] ||
-      (!('className' in propDefs[key]) && !('composition' in propDefs[key]))
-    ) {
-      restProps[key] = componentProps[key]
+  for (const key in allProps) {
+    if (!propDefs?.[key] || !('className' in propDefs?.[key]) || !propDefs?.[key].className) {
+      restProps[key] = allProps[key]
       continue
     }
 
-    if (Array.isArray(componentProps[key])) {
+    if (Array.isArray(allProps[key])) {
       for (
-        let i = 0, len = Math.min(componentProps[key].length, BREAKPOINTS_LENGTH);
+        let i = 0, len = Math.min(allProps[key].length, BREAKPOINTS_LENGTH);
         i < len;
         i++
       ) {
-        className = classNames(className, getClassName(componentProps[key][i], propDefs[key], i))
-        style = {...style, ...getStyle(componentProps[key][i], propDefs[key], i)}
+        className = classNames(className, getClassName(allProps[key][i], propDefs[key], i))
+        style = {...style, ...getStyle(allProps[key][i], propDefs[key], i)}
       }
     } else {
-      className = classNames(className, getClassName(componentProps[key], propDefs[key]))
-      style = {...style, ...getStyle(componentProps[key], propDefs[key])}
+      className = classNames(className, getClassName(allProps[key], propDefs[key]))
+      style = {...style, ...getStyle(allProps[key], propDefs[key])}
     }
   }
 
@@ -52,17 +47,6 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 function getClassName(prop: any, propDef: PropDef, bp?: number) {
-  if (propDef.type === 'composite' && propDef.composition[prop]) {
-    const classes = bp
-      ? propDef.composition[prop]
-          .split(' ')
-          .map((className: string) => `${className}-bp-${bp}`)
-          .join(' ')
-      : propDef.composition[prop]
-    // @TODO prefix has been written included as part of composite class names; does it need to be dynamic?
-    return classes
-  }
-
   if (propDef.type === 'union' && propDef.values?.includes(prop)) {
     /* Note: This may need updating depending on the final CSS classname formatting */
     return `${PREFIX}-${propDef.className}${typeof prop === 'string' ? `-${prop}` : prop}${bp ? `-bp-${bp}` : ''}`
@@ -88,4 +72,37 @@ function getStyle(prop: any, propDef: PropDef, bp?: number) {
   }
 
   return {}
+}
+
+export function spreadCompositeProps<P extends ComponentProps, T extends Record<string, PropDef>>(
+  componentProps?: P,
+  propDefs?: T,
+): ComponentProps {
+  const compositeProps: ComponentProps = {}
+
+  for (const key in componentProps) {
+    if (propDefs?.[key] && propDefs?.[key].type === 'composite') {
+      for (const compKey in propDefs?.[key].composition) {
+        const mappings = propDefs?.[key].composition[compKey];
+
+        if (Array.isArray(componentProps[key])) {
+          compositeProps[compKey] = []
+
+          for (
+            let i = 0, len = componentProps[key].length;
+            i < len;
+            i++
+          ) {
+            compositeProps[compKey][i] = mappings?.[componentProps[key][i]]
+          }
+        } else {
+          compositeProps[compKey] = mappings?.[componentProps[key]]
+        }
+      }
+    } else {
+      compositeProps[key] = componentProps[key]
+    }
+  }
+
+  return compositeProps
 }

@@ -29,7 +29,7 @@ type UnionPropDef<T> = {
  */
 type CompositePropDef = {
   type: 'composite'
-  composition: Record<string, string>
+  composition: Record<string, Record<string, unknown>>
 }
 
 export type PropDef<T = unknown> =

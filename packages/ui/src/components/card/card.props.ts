@@ -1,4 +1,6 @@
+import { borderProps } from '../../props/border'
 import {type MarginProps, marginProps} from '../../props/margin'
+import { paddingProps } from '../../props/padding'
 import {type Density} from '../../types/Density'
 import {DISPLAY_BLOCK, type DisplayBlock} from '../../types/Display'
 import {type PropDef} from '../../types/PropDef'
@@ -26,10 +28,23 @@ export const cardProps: Record<string, PropDef> = {
   density: {
     type: 'composite',
     composition: {
-      compact: 'sui-p3 sui-radius2',
-      regular: 'sui-p4 sui-radius3',
-      loose: 'sui-p5 sui-radius4',
-    } as Record<Density, string>,
+      padding: {
+        compact: 3,
+        regular: 4,
+        loose: 5,
+      },
+      radius: {
+        compact: 2,
+        regular: 3,
+        loose: 4,
+      }
+    }
   },
+  ...(paddingProps['padding'] && {
+    padding: paddingProps['padding'],
+  }),
+  ...(borderProps['radius'] && {
+    radius: borderProps['radius'],
+  }),
   ...marginProps,
 }
