@@ -5,24 +5,6 @@ import {transformAttributes} from '../utils/transformAttributes'
 import { addAttribute } from '../utils/addAttribute'
 
 const MODS: AttributeMods = {
-  flex: {
-    type: 'style-only',
-    style: 'flex',
-  },
-  maxWidth: {
-    type: 'style-mapped',
-    style: 'maxWidth',
-    mappings: {
-      auto: 'none',
-      fill: '100%',
-      0: '20rem',
-      1: '40rem',
-      2: '60rem',
-      3: '80rem',
-      4: '100rem',
-      5: '120rem',
-    },
-  },
   textOverflow: {
     type: 'rename-mapped',
     name: 'lineClamp',

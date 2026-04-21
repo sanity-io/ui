@@ -31,6 +31,23 @@ const MODS: AttributeMods = {
       clip: 1,
     },
   },
+  width: {
+    type: 'style-mapped',
+    style: 'width',
+    mappings: {
+      auto: 'auto',
+      fill: '100%',
+      stretch: 'stretch',
+      min: 'min-content',
+      max: 'max-content',
+      0: '20rem',
+      1: '40rem',
+      2: '60rem',
+      3: '80rem',
+      4: '100rem',
+      5: '120rem',
+    },
+  },
 }
 
 export const TODO_WARNING = 'Codemod could not migrate the Text component below'
@@ -41,7 +58,7 @@ export default function transform(fileInfo: FileInfo, api: API): string {
 
   root
     .find(j.JSXOpeningElement, {
-      name: {type: 'JSXIdentifier', name: 'Text'},
+      name: {type: 'JSXIdentifier', name: 'Heading'},
     })
     .forEach((path) => {
       transformAttributes(j, path, MODS, TODO_WARNING)

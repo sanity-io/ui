@@ -26,7 +26,7 @@ const MODS: AttributeMods = {
   },
 }
 
-export const TODO_WARNING = 'Codemod could not update the prop below'
+export const TODO_WARNING = 'Codemod could not migrate the Flex component below'
 
 export default function transform(fileInfo: FileInfo, api: API): string {
   const j = api.jscodeshift
