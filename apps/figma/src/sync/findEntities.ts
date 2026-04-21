@@ -40,12 +40,11 @@ export function findEntities(
       const node = _node as SanityToken
 
       if (node.$type === 'color') {
+        const n = node as SanityColorToken
         figmaVars.push({
           name: path,
-          value: getFigmaColorValue(node as SanityColorToken),
-          scopes: parseFigmaScopes(
-            (node as SanityColorToken).$extensions?.['io.sanity']?.scopes ?? [],
-          ),
+          value: getFigmaColorValue(n),
+          scopes: parseFigmaScopes(n.$extensions?.['io.sanity.scopes'] ?? []),
         })
         continue
       }
