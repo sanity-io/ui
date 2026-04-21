@@ -1,7 +1,7 @@
 import 'ui/styles.css'
 
 import {Profiler} from 'react'
-import {Box} from 'ui'
+import {Box} from '@sanity-labs/ui-poc'
 
 const count = 5000
 const iterator = [...Array(count).keys()]
