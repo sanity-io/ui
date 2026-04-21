@@ -2,6 +2,7 @@ import {type API, type FileInfo} from 'jscodeshift'
 
 import {type AttributeMods} from '../types/AnyExpression'
 import {transformAttributes} from '../utils/transformAttributes'
+import { addAttribute } from '../utils/addAttribute'
 
 const MODS: AttributeMods = {
   flex: {
@@ -27,7 +28,7 @@ const MODS: AttributeMods = {
     name: 'lineClamp',
     mappings: {
       ellipsis: 1,
-      clip: 1
+      clip: 1,
     },
   },
 }
@@ -44,6 +45,7 @@ export default function transform(fileInfo: FileInfo, api: API): string {
     })
     .forEach((path) => {
       transformAttributes(j, path, MODS, TODO_WARNING)
+      addAttribute(j, path.node, 'trim', true)
     })
 
   return root.toSource()
