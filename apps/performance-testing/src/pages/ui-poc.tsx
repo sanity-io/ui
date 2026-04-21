@@ -1,7 +1,7 @@
 import 'ui/styles.css'
 
 import {Profiler} from 'react'
-import {Box} from 'ui'
+import {Box, Card} from 'ui'
 
 const count = 5000
 const iterator = [...Array(count).keys()]
@@ -31,6 +31,14 @@ export default function UiPoc() {
           <Box key={i} padding={3} marginBottom={2}>
             <span>Box content</span>
           </Box>
+        ))}
+      </Profiler>
+
+      <Profiler id="Cards" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Card key={i} density={['regular', 'loose']} marginBottom={2}>
+            <span>Card content</span>
+          </Card>
         ))}
       </Profiler>
     </div>
