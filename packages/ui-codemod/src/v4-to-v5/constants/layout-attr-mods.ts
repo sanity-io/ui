@@ -191,6 +191,19 @@ export const LAYOUT_MODS: AttributeMods = {
     type: 'rename-only',
     name: 'left',
   },
+  maxWidth: {
+    type: 'mapped-only',
+    mappings: {
+      auto: 'none',
+      fill: '100%',
+      0: '20rem',
+      1: '40rem',
+      2: '60rem',
+      3: '80rem',
+      4: '100rem',
+      5: '120rem',
+    },
+  },
   minWidth: {
     type: 'mapped-only',
     mappings: {
