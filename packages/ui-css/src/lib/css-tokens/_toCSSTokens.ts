@@ -137,11 +137,14 @@ export function _toCSSTokens<Tokens extends object>(
       return resolveVar(token.$value, vars, '#000000')
     }
 
-    if (token.$value.hex) {
+    const hex = token.$value.hex
+    const alpha = token.$value.alpha ?? 1
+
+    if (hex && alpha === 1) {
       return token.$value.hex
     }
 
-    return `rgba(${token.$value.components.map((c) => (c * 255).toFixed(0)).join(', ')}, ${token.$value.alpha ?? 1})`
+    return `rgb(${token.$value.components.map((c) => (c * 255).toFixed(0)).join(' ')} / ${alpha})`
   }
 
   function renderDimensionToken(token: SanityDimensionToken, vars: Record<string, unknown>) {
