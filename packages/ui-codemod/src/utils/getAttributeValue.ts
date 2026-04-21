@@ -1,4 +1,4 @@
-import type { API, JSXAttribute } from "jscodeshift"
+import type {API, JSXAttribute} from 'jscodeshift'
 
 export function getAttributeValue(
   j: API['jscodeshift'],

@@ -1,5 +1,5 @@
 import {defineInlineTest} from '../utils/testUtils'
-import transform, { TODO_WARNING } from './heading-props'
+import transform, {TODO_WARNING} from './heading-props'
 
 defineInlineTest(
   transform,

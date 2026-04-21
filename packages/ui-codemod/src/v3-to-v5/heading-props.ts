@@ -1,6 +1,6 @@
 import {type API, type FileInfo} from 'jscodeshift'
 
-import { addAttribute } from '../utils/addAttribute'
+import {addAttribute} from '../utils/addAttribute'
 
 export const TODO_WARNING = 'Codemod could not migrate the Text component below'
 
