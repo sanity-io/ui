@@ -35,7 +35,7 @@ export const layers = [
   {
     name: 'build/color/_scheme',
     path: 'build/color/_scheme',
-    importsFrom: ['lib/color', 'primitive/color/palette'],
+    importsFrom: ['lib/color', 'build/color/_scheme', 'primitive/color/palette'],
   },
 
   // semantic layers
