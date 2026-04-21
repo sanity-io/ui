@@ -3,7 +3,7 @@ import type {AttributeMods} from '../../types/AnyExpression'
 export const LAYOUT_MODS: AttributeMods = {
   border: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       none: false,
       muted: true,
       default: true,
@@ -11,7 +11,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   borderTop: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       none: false,
       muted: true,
       default: true,
@@ -19,7 +19,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   borderRight: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       none: false,
       muted: true,
       default: true,
@@ -27,7 +27,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   borderBottom: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       none: false,
       muted: true,
       default: true,
@@ -35,7 +35,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   borderLeft: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       none: false,
       muted: true,
       default: true,
@@ -56,7 +56,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   gridColumn: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       auto: 'auto',
       full: '1 / -1',
       1: 'span 1 / span 1',
@@ -75,7 +75,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   gridColumnEnd: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       auto: 'auto',
       1: '1',
       2: '2',
@@ -93,7 +93,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   gridColumnStart: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       auto: 'auto',
       1: '1',
       2: '2',
@@ -111,7 +111,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   gridRow: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       auto: 'auto',
       full: '1 / -1',
       1: 'span 1 / span 1',
@@ -130,7 +130,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   gridRowEnd: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       auto: 'auto',
       1: '1',
       2: '2',
@@ -148,7 +148,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   gridRowStart: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       auto: 'auto',
       1: '1',
       2: '2',
@@ -166,7 +166,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   height: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       fill: '100%',
       auto: 'auto',
       min: 'min-content',
@@ -191,9 +191,22 @@ export const LAYOUT_MODS: AttributeMods = {
     type: 'rename-only',
     name: 'left',
   },
+  maxWidth: {
+    type: 'mapped-only',
+    mapping: {
+      auto: 'none',
+      fill: '100%',
+      0: '20rem',
+      1: '40rem',
+      2: '60rem',
+      3: '80rem',
+      4: '100rem',
+      5: '120rem',
+    },
+  },
   minWidth: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       full: '100%',
       0: '0',
       auto: 'auto',
@@ -215,7 +228,7 @@ export const LAYOUT_MODS: AttributeMods = {
   sizing: {
     type: 'style-mapped',
     style: 'boxSizing',
-    mappings: {
+    mapping: {
       content: 'content-box',
       border: 'border-box',
     },
@@ -226,7 +239,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   width: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       auto: 'auto',
       fill: '100%',
       stretch: 'stretch',

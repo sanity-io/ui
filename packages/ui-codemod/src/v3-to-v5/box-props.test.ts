@@ -1,41 +1,5 @@
 import {defineInlineTest} from '../utils/testUtils'
-import transform, {TODO_WARNING} from './box-props'
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Box height="fill" />
-  `,
-  `
-  <Box height="100%" />
-  `,
-  'updates prop value',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Box height={["fill", "auto", "fill"]} />
-  `,
-  `
-  <Box height={["100%", "auto", "100%"]} />
-  `,
-  'updates responsive prop value',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Box column="full" />
-  `,
-  `
-  <Box gridColumn="1 / -1" />
-  `,
-  'renames prop and updates value',
-)
+import transform from './box-props'
 
 defineInlineTest(
   transform,
@@ -48,61 +12,97 @@ defineInlineTest(
     flex: 1
   }} />
   `,
-  'moves prop to style',
+  'moves flex prop to style',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Box sizing="content" />
+  <Box height="fill" />
+  `,
+  `
+  <Box height="100%" />
+  `,
+  'updates height prop',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box height={["fill", "auto", "fill"]} />
+  `,
+  `
+  <Box height={["100%", "auto", "100%"]} />
+  `,
+  'updates responsive height prop',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box sizing="border" />
   `,
   `
   <Box style={{
-    boxSizing: "content-box"
+    boxSizing: "border-box"
   }} />
   `,
-  'moves prop to style with updated value',
+  'moves sizing prop to style and updates mapped value',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Box sizing="content" style={{ background: 'blue' }} />
+  <Box sizing="border" />
+  `,
+  `
+  <Box style={{
+    boxSizing: "border-box"
+  }} />
+  `,
+  'moves sizing prop to style and updates mapped value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Box
+    column="full"
+    columnStart={2}
+    columnEnd={4}
+  />
   `,
   `
   <Box
-    style={{
-      background: 'blue',
-      boxSizing: "content-box"
-    }} />
+    gridColumn="1 / -1"
+    gridColumnStart="2"
+    gridColumnEnd="4"
+  />
   `,
-  'preserves existing styles',
+  'renames grid column props and updates mapped values',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Box height={variable} />
+  <Box
+    row="full"
+    rowStart={2}
+    rowEnd={4}
+  />
   `,
   `
-  // TODO: ${TODO_WARNING}
-  <Box height={variable} />
+  <Box
+    gridRow="1 / -1"
+    gridRowStart="2"
+    gridRowEnd="4"
+  />
   `,
-  'comments if prop value is a variable',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Box height={variable ? 'fill' : 'auto'} />
-  `,
-  `
-  // TODO: ${TODO_WARNING}
-  <Box height={variable ? 'fill' : 'auto'} />
-  `,
-  'comments if prop value is a ternary',
+  'renames grid row props and updates mapped values',
 )

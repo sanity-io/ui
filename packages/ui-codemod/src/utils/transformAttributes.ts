@@ -68,9 +68,10 @@ export function transformAttributes(
         continue
       }
 
-      const styleValue = getMappingValue(mod.mappings, expr)
+      const styleValue = getMappingValue(mod.mapping, expr)
 
       if (!styleValue) {
+        insertTodoWarning(j, path, todoWarning)
         continue
       }
 
@@ -96,7 +97,7 @@ export function transformAttributes(
       }
 
       if (expr.type === 'ArrayExpression') {
-        const styleArray = getMappingArray(j, expr, mod.mappings)
+        const styleArray = getMappingArray(j, expr, mod.mapping)
 
         if (!styleArray) {
           insertTodoWarning(j, path, todoWarning)
@@ -112,9 +113,10 @@ export function transformAttributes(
         continue
       }
 
-      const styleValue = getMappingValue(mod.mappings, expr)
+      const styleValue = getMappingValue(mod.mapping, expr)
 
       if (!styleValue) {
+        insertTodoWarning(j, path, todoWarning)
         continue
       }
 
