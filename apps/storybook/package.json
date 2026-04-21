@@ -4,12 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc -b && vite build",
-    "build-storybook": "storybook build",
-    "dev": "vite",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006"
+    "build": "storybook build",
+    "dev": "storybook dev -p 6006",
+    "lint": "eslint ."
   },
   "prettier": "@sanity/prettier-config",
   "dependencies": {
