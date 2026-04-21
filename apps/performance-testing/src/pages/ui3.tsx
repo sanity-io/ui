@@ -37,7 +37,7 @@ export default function Ui3() {
 
       <Profiler id="Cards" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Card key={i} padding={3} radius={2} marginBottom={2}>
+          <Card key={i} padding={[3, 4]} radius={[2, 3]} marginBottom={2}>
             <span>Card content</span>
           </Card>
         ))}
