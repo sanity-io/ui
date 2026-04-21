@@ -28,6 +28,7 @@ export function mixColors(
 
   // Convert back to DTCG format (always output as sRGB)
   const srgb = mixed.to('srgb')
+  const hex = mixed.toString({format: 'hex'})
 
   return {
     colorSpace: 'srgb',
@@ -37,7 +38,7 @@ export function mixColors(
       _roundChannel(srgb.coords[2] ?? 0),
     ],
     alpha: _roundChannel(mixed.alpha ?? 1),
-    hex: mixed.toString({format: 'hex'}),
+    hex,
   }
 }
 
