@@ -16,13 +16,13 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
   componentProps?: P,
   propDefs?: T,
 ): ComponentProps {
-  const allProps = spreadCompositeProps(componentProps, propDefs)
+  const {allProps, allDefs} = getComposites(componentProps, propDefs)
   const restProps: ComponentProps = {}
   let className = componentProps?.className || ''
   let style = componentProps?.style || {}
 
   for (const key in allProps) {
-    if (!propDefs?.[key] || !('className' in propDefs?.[key]) || !propDefs?.[key].className) {
+    if (!allDefs?.[key] || !('className' in allDefs?.[key]) || !allDefs?.[key].className) {
       restProps[key] = allProps[key]
       continue
     }
@@ -33,12 +33,12 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
         i < len;
         i++
       ) {
-        className = classNames(className, getClassName(allProps[key][i], propDefs[key], i))
-        style = {...style, ...getStyle(allProps[key][i], propDefs[key], i)}
+        className = classNames(className, getClassName(allProps[key][i], allDefs[key], i))
+        style = {...style, ...getStyle(allProps[key][i], allDefs[key], i)}
       }
     } else {
-      className = classNames(className, getClassName(allProps[key], propDefs[key]))
-      style = {...style, ...getStyle(allProps[key], propDefs[key])}
+      className = classNames(className, getClassName(allProps[key], allDefs[key]))
+      style = {...style, ...getStyle(allProps[key], allDefs[key])}
     }
   }
 
@@ -74,35 +74,40 @@ function getStyle(prop: any, propDef: PropDef, bp?: number) {
   return {}
 }
 
-export function spreadCompositeProps<P extends ComponentProps, T extends Record<string, PropDef>>(
+export function getComposites<P extends ComponentProps, T extends Record<string, PropDef>>(
   componentProps?: P,
   propDefs?: T,
-): ComponentProps {
-  const compositeProps: ComponentProps = {}
+) {
+  const composites = {
+    allProps: {} as ComponentProps,
+    allDefs: {} as Record<string, PropDef>
+  }
 
   for (const key in componentProps) {
     if (propDefs?.[key] && propDefs?.[key].type === 'composite') {
       for (const compKey in propDefs?.[key].composition) {
-        const mappings = propDefs?.[key].composition[compKey];
+        const mapping = propDefs?.[key].composition[compKey]?.mapping
+        composites.allDefs[compKey] = propDefs?.[key].composition[compKey]?.def as PropDef
 
         if (Array.isArray(componentProps[key])) {
-          compositeProps[compKey] = []
+          composites.allProps[compKey] = []
 
           for (
             let i = 0, len = componentProps[key].length;
             i < len;
             i++
           ) {
-            compositeProps[compKey][i] = mappings?.[componentProps[key][i]]
+            composites.allProps[compKey][i] = mapping?.[componentProps[key][i]]
           }
         } else {
-          compositeProps[compKey] = mappings?.[componentProps[key]]
+          composites.allProps[compKey] = mapping?.[componentProps[key]]
         }
       }
     } else {
-      compositeProps[key] = componentProps[key]
+      composites.allDefs[key] = propDefs?.[key] as PropDef
+      composites.allProps[key] = componentProps[key]
     }
   }
 
-  return compositeProps
+  return composites
 }

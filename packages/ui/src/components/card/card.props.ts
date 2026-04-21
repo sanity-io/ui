@@ -29,22 +29,22 @@ export const cardProps: Record<string, PropDef> = {
     type: 'composite',
     composition: {
       padding: {
-        compact: 3,
-        regular: 4,
-        loose: 5,
+        def: paddingProps['padding'] as PropDef,
+        mapping: {
+          compact: 3,
+          regular: 4,
+          loose: 5,
+        }
       },
       radius: {
-        compact: 2,
-        regular: 3,
-        loose: 4,
+        def: borderProps['radius'] as PropDef,
+        mapping: {
+          compact: 2,
+          regular: 3,
+          loose: 4,
+        }
       }
     }
   },
-  ...(paddingProps['padding'] && {
-    padding: paddingProps['padding'],
-  }),
-  ...(borderProps['radius'] && {
-    radius: borderProps['radius'],
-  }),
   ...marginProps,
 }
