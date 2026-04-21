@@ -1,0 +1,14 @@
+:root {
+  --tone-neutral-normal-surface: light-dark(var(--gray-200), var(--gray-800));
+  --tone-neutral-strong-surface: light-dark(var(--gray-800), var(--gray-200));
+  --tone-primary-normal-surface: light-dark(var(--blue-200), var(--blue-800));
+  --tone-primary-strong-surface: light-dark(var(--blue-800), var(--blue-200));
+  --tone-positive-normal-surface: light-dark(var(--green-200), var(--green-800));
+  --tone-positive-strong-surface: light-dark(var(--green-800), var(--green-200));
+  --tone-suggest-normal-surface: light-dark(var(--purple-200), var(--purple-800));
+  --tone-suggest-strong-surface: light-dark(var(--purple-800), var(--purple-200));
+  --tone-caution-normal-surface: light-dark(var(--yellow-200), var(--yellow-800));
+  --tone-caution-strong-surface: light-dark(var(--yellow-800), var(--yellow-200));
+  --tone-critical-normal-surface: light-dark(var(--red-200), var(--red-800));
+  --tone-critical-strong-surface: light-dark(var(--red-800), var(--red-200));
+}
