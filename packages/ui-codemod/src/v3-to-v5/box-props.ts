@@ -7,7 +7,7 @@ const MODS: AttributeMods = {
   column: {
     type: 'rename-mapped',
     name: 'gridColumn',
-    mappings: {
+    mapping: {
       auto: 'auto',
       full: '1 / -1',
       1: 'span 1 / span 1',
@@ -27,7 +27,7 @@ const MODS: AttributeMods = {
   columnEnd: {
     type: 'rename-mapped',
     name: 'gridColumnEnd',
-    mappings: {
+    mapping: {
       auto: 'auto',
       1: '1',
       2: '2',
@@ -46,7 +46,7 @@ const MODS: AttributeMods = {
   columnStart: {
     type: 'rename-mapped',
     name: 'gridColumnStart',
-    mappings: {
+    mapping: {
       auto: 'auto',
       1: '1',
       2: '2',
@@ -68,7 +68,7 @@ const MODS: AttributeMods = {
   },
   height: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       fill: '100%',
       auto: 'auto',
       min: 'min-content',
@@ -80,7 +80,7 @@ const MODS: AttributeMods = {
   row: {
     type: 'rename-mapped',
     name: 'gridRow',
-    mappings: {
+    mapping: {
       auto: 'auto',
       full: '1 / -1',
       1: 'span 1 / span 1',
@@ -100,7 +100,7 @@ const MODS: AttributeMods = {
   rowEnd: {
     type: 'rename-mapped',
     name: 'gridRowEnd',
-    mappings: {
+    mapping: {
       auto: 'auto',
       1: '1',
       2: '2',
@@ -119,7 +119,7 @@ const MODS: AttributeMods = {
   rowStart: {
     type: 'rename-mapped',
     name: 'gridRowStart',
-    mappings: {
+    mapping: {
       auto: 'auto',
       1: '1',
       2: '2',
@@ -138,7 +138,7 @@ const MODS: AttributeMods = {
   sizing: {
     type: 'style-mapped',
     style: 'boxSizing',
-    mappings: {
+    mapping: {
       content: 'content-box',
       border: 'border-box',
     },

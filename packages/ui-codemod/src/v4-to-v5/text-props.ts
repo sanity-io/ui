@@ -12,7 +12,7 @@ const MODS: AttributeMods = {
   maxWidth: {
     type: 'style-mapped',
     style: 'maxWidth',
-    mappings: {
+    mapping: {
       auto: 'none',
       fill: '100%',
       0: '20rem',
@@ -26,7 +26,7 @@ const MODS: AttributeMods = {
   textOverflow: {
     type: 'rename-mapped',
     name: 'lineClamp',
-    mappings: {
+    mapping: {
       ellipsis: 1,
       clip: 1,
     },

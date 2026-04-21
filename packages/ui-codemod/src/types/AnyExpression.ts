@@ -8,14 +8,14 @@ export interface AnyExpression extends Expression {
   expressions?: unknown
 }
 
-export type AttributeMappings = Record<string | number, string | boolean | number>
+export type AttributeMapping = Record<string | number, string | boolean | number>
 
 type AttributeMod =
   | {type: 'remove'}
   | {type: 'rename-only'; name: string}
-  | {type: 'rename-mapped'; name: string; mappings: AttributeMappings}
+  | {type: 'rename-mapped'; name: string; mapping: AttributeMapping}
   | {type: 'style-only'; style: string}
-  | {type: 'style-mapped'; style: string; mappings: AttributeMappings}
-  | {type: 'mapped-only'; mappings: AttributeMappings}
+  | {type: 'style-mapped'; style: string; mapping: AttributeMapping}
+  | {type: 'mapped-only'; mapping: AttributeMapping}
 
 export type AttributeMods = Record<string, AttributeMod>

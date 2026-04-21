@@ -1,13 +1,13 @@
 import {type API, type ArrayExpression} from 'jscodeshift'
 
-import {type AnyExpression, type AttributeMappings} from '../types/AnyExpression'
+import {type AnyExpression, type AttributeMapping} from '../types/AnyExpression'
 import {getMappingExpression} from './getMappingExpression'
 import {getMappingValue} from './getMappingValue'
 
 export function getMappingArray(
   j: API['jscodeshift'],
   arr: AnyExpression,
-  mappings: AttributeMappings,
+  mapping: AttributeMapping,
 ): ArrayExpression | null {
   if (arr.type !== 'ArrayExpression') {
     return null
@@ -21,7 +21,7 @@ export function getMappingArray(
       return null
     }
 
-    const mappingValue = getMappingValue(mappings, el)
+    const mappingValue = getMappingValue(mapping, el)
 
     if (!mappingValue) {
       return null

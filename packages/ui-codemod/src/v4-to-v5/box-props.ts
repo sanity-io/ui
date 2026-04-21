@@ -33,7 +33,7 @@ const MODS: AttributeMods = {
   gridTemplateColumns: {
     type: 'style-mapped',
     style: 'gridTemplateColumns',
-    mappings: {
+    mapping: {
       0: '0px',
       1: 'repeat(1, 1fr)',
       2: 'repeat(2, 1fr)',
@@ -52,7 +52,7 @@ const MODS: AttributeMods = {
   gridTemplateRows: {
     type: 'style-mapped',
     style: 'gridTemplateRows',
-    mappings: {
+    mapping: {
       0: '0px',
       1: 'repeat(1, 1fr)',
       2: 'repeat(2, 1fr)',

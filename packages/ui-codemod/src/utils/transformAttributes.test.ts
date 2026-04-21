@@ -7,7 +7,7 @@ import {transformAttributes} from './transformAttributes'
 const MODS: AttributeMods = {
   border: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       default: true,
     },
   },
@@ -19,7 +19,7 @@ const MODS: AttributeMods = {
   sizing: {
     type: 'style-mapped',
     style: 'boxSizing',
-    mappings: {
+    mapping: {
       border: 'border-box',
     },
   },
@@ -29,7 +29,7 @@ const MODS: AttributeMods = {
   },
   width: {
     type: 'mapped-only',
-    mappings: {
+    mapping: {
       fill: '100%',
       0: '20rem',
       1: '40rem',

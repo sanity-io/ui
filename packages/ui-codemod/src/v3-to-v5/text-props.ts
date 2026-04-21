@@ -8,7 +8,7 @@ const MODS: AttributeMods = {
   textOverflow: {
     type: 'rename-mapped',
     name: 'lineClamp',
-    mappings: {
+    mapping: {
       ellipsis: 1,
       clip: 1,
     },
