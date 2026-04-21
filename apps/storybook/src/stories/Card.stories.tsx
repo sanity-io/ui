@@ -7,8 +7,6 @@ import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(cardProps)
 
-console.log('test')
-
 const meta: Meta<typeof Card> = {
   title: 'Layout/Card',
   args: {
