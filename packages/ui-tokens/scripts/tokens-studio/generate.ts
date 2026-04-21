@@ -296,8 +296,6 @@ function _mapToken(token: SanityToken) {
   }
 
   throw new Error(`Unknown token type: ${JSON.stringify(token)}`)
-
-  // return token
 }
 
 function getColorValue(value: _DTCGColorValue | _DTCGTokenAlias) {
@@ -306,8 +304,10 @@ function getColorValue(value: _DTCGColorValue | _DTCGTokenAlias) {
   }
 
   if (value.colorSpace === 'srgb') {
-    if (!value.hex) {
-      return `rgb(${value.components.join(' ')} / ${value.alpha ?? 1})`
+    const alpha = value.alpha ?? 1
+
+    if (!value.hex || alpha !== 1) {
+      return `rgb(${value.components.join(' ')} / ${alpha})`
     }
 
     return value.hex || '#000000'
