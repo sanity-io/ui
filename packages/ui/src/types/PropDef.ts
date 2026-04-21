@@ -24,12 +24,10 @@ type UnionPropDef<T> = {
 
 /** A composite prop def defines a prop that takes a union of
  * values (represented by the composition object’s keys) which
- * map to a composition of one or more class names (represented
- * by the composition object’s values).
+ * map to a composition of one or more other props.
  */
 type CompositePropDef = {
   type: 'composite'
-  // composition: Record<string, Record<string, unknown>>
   composition: Record<string, {
     def: PropDef
     mapping: Record<string, unknown>
