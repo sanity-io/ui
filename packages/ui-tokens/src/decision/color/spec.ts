@@ -1,5 +1,5 @@
+import type {ColorSchemePair} from '../../lib/color/_parseColorExprLiteral'
 import type {AvatarColor, CardTone, CodeTokenKey, ColorVariant, ElementTone, Hue} from '../../types'
-import type {ColorSchemePair} from './_parseColorExprLiteral'
 
 export type AvatarsColorSpec = Record<
   '*' | AvatarColor,

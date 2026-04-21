@@ -127,6 +127,7 @@ export default defineConfig(import.meta.dirname, [
               from: 'source/decision/color/lib',
               allow: [
                 'source/lib',
+                'source/lib/color',
                 'source/types',
                 'source/constants',
                 'source/decision/color/lib',

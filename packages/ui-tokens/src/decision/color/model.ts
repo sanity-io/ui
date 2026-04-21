@@ -8,6 +8,7 @@ import {
 } from '../../constants'
 import {_fromEntries} from '../../lib/_fromEntries'
 import {_merge} from '../../lib/_merge'
+import {_parseColorExprLiteral, type ColorExpr} from '../../lib/color/_parseColorExprLiteral'
 import type {
   AvatarColor,
   CardTone,
@@ -16,7 +17,6 @@ import type {
   ColorVariant,
   ElementTone,
 } from '../../types'
-import {_parseColorExprLiteral, type ColorExpr} from './_parseColorExprLiteral'
 import {colorSpec} from './spec'
 
 export type SanityAvatarsColorModel = Record<

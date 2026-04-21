@@ -5,13 +5,13 @@ import {
   COLOR_VARIANTS,
   ELEMENT_TONES,
 } from '../../../constants'
-import type {ColorExpr} from '../../../decision/color/_parseColorExprLiteral'
 import {colorModel} from '../../../decision/color/model'
 import {_defineTokenGroup} from '../../../lib/_defineTokenGroup'
 import {_defineTokens} from '../../../lib/_defineTokens'
 import {_fromEntries} from '../../../lib/_fromEntries'
 import {mixColors} from '../../../lib/color/_colorMixing'
 import type {CardToneTokens, ColorToken, ElementToneColorTokens} from '../../../lib/color/types'
+import type {ColorExpr} from '../../../lib/color/_parseColorExprLiteral'
 import type {_DTCGColorValue} from '../../../lib/dtcg/types'
 import type {TokenGroup} from '../../../lib/types'
 import {paletteTokens} from '../../../primitive/color/palette/tokens'
