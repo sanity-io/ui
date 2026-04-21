@@ -3,7 +3,13 @@ import {_defineTokenGroup} from '../../lib/_defineTokenGroup'
 import {_defineTokens} from '../../lib/_defineTokens'
 import {_px} from '../../lib/_px'
 import type {TokenScale} from '../../lib/types'
-import type {FontCodeSize, FontHeadingSize, FontLabelSize, FontTextSize, FontWeight} from '../../types'
+import type {
+  FontCodeSize,
+  FontHeadingSize,
+  FontLabelSize,
+  FontTextSize,
+  FontWeight,
+} from '../../types'
 import type {SanityTypographyToken} from './lib/types'
 
 /** @public */
