@@ -7,9 +7,14 @@ import {type CardProps, cardProps} from './card.props'
 /** @public */
 export function Card<T extends React.ElementType = 'div'>({
   density = 'regular',
+  tone = 'neutral',
+  toneLevel = 'normal',
   ...props
 }: CardProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof CardProps<T>>) {
-  const {as, children, className, style, ...rest} = getProps({density, ...props}, cardProps)
+  const {as, children, className, style, ...rest} = getProps(
+    {density, tone, toneLevel, ...props},
+    cardProps,
+  )
   const Component = as || 'div'
 
   return (
