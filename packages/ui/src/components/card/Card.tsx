@@ -9,7 +9,6 @@ export function Card<T extends React.ElementType = 'div'>({
   density = 'regular',
   ...props
 }: CardProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof CardProps<T>>) {
-  console.log('cardProps',cardProps)
   const {as, children, className, style, ...rest} = getProps({density, ...props}, cardProps)
   const Component = as || 'div'
 
