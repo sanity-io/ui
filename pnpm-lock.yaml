@@ -41,9 +41,6 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/@repo/eslint-config
-      '@sanity/prettier-config':
-        specifier: ^1.0.6
-        version: 1.0.6(prettier@3.8.1)
       '@sanity/ui':
         specifier: ^3.1.14
         version: 3.1.14(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react-is@19.2.5)(react@19.2.4)(styled-components@6.4.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
@@ -71,12 +68,6 @@ importers:
       globals:
         specifier: ^17.4.0
         version: 17.4.0
-      prettier:
-        specifier: ^3.8.1
-        version: 3.8.1
-      prettier-plugin-packagejson:
-        specifier: ^3.0.2
-        version: 3.0.2(prettier@3.8.1)
       react-is:
         specifier: ^19.2.5
         version: 19.2.5
@@ -108,9 +99,6 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/@repo/eslint-config
-      '@sanity/prettier-config':
-        specifier: ^1.0.6
-        version: 1.0.6(prettier@3.8.1)
       '@storybook/addon-a11y':
         specifier: ^10.3.3
         version: 10.3.3(storybook@10.3.3(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
@@ -159,9 +147,6 @@ importers:
       playwright:
         specifier: ^1.58.2
         version: 1.58.2
-      prettier-plugin-packagejson:
-        specifier: ^3.0.2
-        version: 3.0.2(prettier@3.8.1)
       storybook:
         specifier: ^10.3.3
         version: 10.3.3(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -226,9 +211,6 @@ importers:
       '@sanity/pkg-utils':
         specifier: ^9.2.3
         version: 9.2.3(@types/babel__core@7.20.5)(@types/node@25.5.2)(typescript@5.9.3)
-      '@sanity/prettier-config':
-        specifier: ^1.0.6
-        version: 1.0.6(prettier@3.8.1)
       '@sanity/tsconfig':
         specifier: ^1.0.0
         version: 1.0.0
@@ -253,12 +235,6 @@ importers:
       postcss-import:
         specifier: ^16.1.1
         version: 16.1.1(postcss@8.5.8)
-      prettier:
-        specifier: ^3.8.1
-        version: 3.8.1
-      prettier-plugin-packagejson:
-        specifier: ^3.0.2
-        version: 3.0.2(prettier@3.8.1)
       rimraf:
         specifier: ^6.1.3
         version: 6.1.3
@@ -281,9 +257,6 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../@repo/eslint-config
-      '@sanity/prettier-config':
-        specifier: ^1.0.6
-        version: 1.0.6(prettier@3.8.1)
       '@sanity/tsconfig':
         specifier: ^1.0.0
         version: 1.0.0
@@ -293,12 +266,6 @@ importers:
       eslint:
         specifier: ^9.22.0
         version: 9.39.4
-      prettier:
-        specifier: ^3.8.1
-        version: 3.8.1
-      prettier-plugin-packagejson:
-        specifier: ^3.0.2
-        version: 3.0.2(prettier@3.8.1)
       vitest:
         specifier: ^4.1.1
         version: 4.1.1(@types/node@25.5.2)(@vitest/browser-playwright@4.1.1)(vite@8.0.8(@types/node@25.5.2)(esbuild@0.27.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
