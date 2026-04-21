@@ -19,7 +19,7 @@ const MODS: AttributeMods = {
   columns: {
     type: 'rename-mapped',
     name: 'gridTemplateColumns',
-    mappings: {
+    mapping: {
       0: '0px',
       1: 'repeat(1, 1fr)',
       2: 'repeat(2, 1fr)',
@@ -38,7 +38,7 @@ const MODS: AttributeMods = {
   rows: {
     type: 'rename-mapped',
     name: 'gridTemplateRows',
-    mappings: {
+    mapping: {
       0: '0px',
       1: 'repeat(1, 1fr)',
       2: 'repeat(2, 1fr)',
@@ -56,7 +56,7 @@ const MODS: AttributeMods = {
   },
 }
 
-export const TODO_WARNING = 'Codemod could not update the prop below'
+export const TODO_WARNING = 'Codemod could not migrate the Grid component below'
 
 export default function transform(fileInfo: FileInfo, api: API): string {
   const j = api.jscodeshift
