@@ -1,6 +1,9 @@
 @import '@sanity-labs/design-tokens/dist/css/index.css';
 
 @import './global.css';
+
 @import './utilities/dynamic/index.css';
 @import './utilities/generic/index.css';
 @import './utilities/tokenized/index.css';
+
+@import './tokens/tone.css';
