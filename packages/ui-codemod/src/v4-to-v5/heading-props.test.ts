@@ -5,10 +5,11 @@ defineInlineTest(
   transform,
   {},
   `
-  <Heading flex={1} />
+  <Heading as="h1" flex={1} />
   `,
   `
   <Heading
+    as="h1"
     style={{
       flex: 1
     }}
@@ -21,10 +22,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Heading/>
+  <Heading as="h1" />
   `,
   `
-  <Heading trim={true} />
+  <Heading as="h1" trim={true} />
   `,
   'adds trim prop',
 )
@@ -33,10 +34,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Heading width={0} maxWidth="fill" />
+  <Heading as="h1" width={0} maxWidth="fill" />
   `,
   `
-  <Heading style={{
+  <Heading as="h1" style={{
     width: "20rem",
     maxWidth: "100%"
   }} trim={true} />
@@ -48,10 +49,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Heading textOverflow="ellipsis" />
+  <Heading as="h1" textOverflow="ellipsis" />
   `,
   `
-  <Heading lineClamp={1} trim={true} />
+  <Heading as="h1" lineClamp={1} trim={true} />
   `,
   'renames textOverflow prop and updates mapped values',
 )
@@ -60,11 +61,24 @@ defineInlineTest(
   transform,
   {},
   `
-  <Heading maxWidth={[0, 1, 2]} />
+  <Heading as="h1" maxWidth={[0, 1, 2]} />
   `,
   `
   // TODO: ${TODO_WARNING}
-  <Heading maxWidth={[0, 1, 2]} trim={true} />
+  <Heading as="h1" maxWidth={[0, 1, 2]} trim={true} />
   `,
   'warns if responsive maxWidth prop should be moved to style',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Heading />
+  `,
+  `
+  // TODO: Codemod migrated Heading component but "as" is required
+  <Heading trim={true} />
+  `,
+  'warns if as props is missing',
 )

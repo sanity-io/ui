@@ -1,5 +1,6 @@
 import type { API, JSXOpeningElement } from "jscodeshift"
 import { getAttributeValue } from "./getAttributeValue"
+import { hasAttribute } from "./hasAttribute"
 
 export function addAttribute(
   j: API['jscodeshift'],
@@ -7,14 +8,7 @@ export function addAttribute(
   name: string,
   value: unknown,
 ) {
-  const hasAttribute = node.attributes?.some(
-    (attr) =>
-      attr.type === 'JSXAttribute' &&
-      attr.name.type === 'JSXIdentifier' &&
-      attr.name.name === name,
-  )
-
-  if (hasAttribute) {
+  if (hasAttribute(node, name)) {
     return
   }
 

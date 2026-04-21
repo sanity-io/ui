@@ -3,6 +3,8 @@ import {type API, type FileInfo} from 'jscodeshift'
 import {type AttributeMods} from '../types/AnyExpression'
 import {transformAttributes} from '../utils/transformAttributes'
 import { addAttribute } from '../utils/addAttribute'
+import { hasAttribute } from '../utils/hasAttribute'
+import { insertTodoWarning } from '../utils/insertTodoWarning'
 
 const MODS: AttributeMods = {
   flex: {
@@ -50,7 +52,7 @@ const MODS: AttributeMods = {
   },
 }
 
-export const TODO_WARNING = 'Codemod could not migrate the Text component below'
+export const TODO_WARNING = 'Codemod could not migrate the Heading component below'
 
 export default function transform(fileInfo: FileInfo, api: API): string {
   const j = api.jscodeshift
@@ -63,6 +65,10 @@ export default function transform(fileInfo: FileInfo, api: API): string {
     .forEach((path) => {
       transformAttributes(j, path, MODS, TODO_WARNING)
       addAttribute(j, path.node, 'trim', true)
+
+      if (!hasAttribute(path.node, 'as')) {
+        insertTodoWarning(j, path, 'Codemod migrated Heading component but "as" is required')
+      }
     })
 
   return root.toSource()
