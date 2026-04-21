@@ -1,5 +1,11 @@
 # @sanity/ui-tokens
 
+## 1.0.0-beta.5
+
+### Patch Changes
+
+- [`ef2c65d`](https://github.com/sanity-io/ui/commit/ef2c65df72e02fe9133a62b90aadd0c807b2adb0) Thanks [@mariuslundgard](https://github.com/mariuslundgard)! - Improves color token handling, CSS token sourcing, and related internal token cleanup.
+
 ## 1.0.0-beta.4
 
 ### Patch Changes
