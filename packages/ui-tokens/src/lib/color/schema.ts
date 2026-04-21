@@ -11,25 +11,22 @@ export const SanityColorStopSchema = z.object({
 
 /** @internal */
 export const SanityColorExtensionsSchema = z.object({
-  'io.sanity': z
+  'io.sanity.expr': z
     .object({
-      expr: z
-        .object({
-          v: z.literal(1),
-          op: z.literal('mix'),
-          space: z.enum(['srgb', 'oklab']),
-          stops: z.tuple([
-            z.union([SanityColorStopSchema, SanityColorStopSchema]),
-            z.union([SanityColorStopSchema, SanityColorStopSchema]),
-          ]),
-          hue: z.enum(['shorter', 'longer', 'increasing', 'decreasing']).optional(),
-          alpha: z.enum(['premultiply']).optional(),
-        })
-        .optional(),
-      opacity: z.number().min(0).max(1).optional(),
-      scopes: z.array(SanityTokenScopeSchema).optional(),
+      v: z.literal(1),
+      op: z.literal('mix'),
+      space: z.enum(['srgb', 'oklab']),
+      stops: z.tuple([
+        z.union([SanityColorStopSchema, SanityColorStopSchema]),
+        z.union([SanityColorStopSchema, SanityColorStopSchema]),
+      ]),
+      hue: z.enum(['shorter', 'longer', 'increasing', 'decreasing']).optional(),
+      alpha: z.enum(['premultiply']).optional(),
     })
     .optional(),
+  'io.sanity.name': z.string().optional(),
+  'io.sanity.opacity': z.number().min(0).max(1).optional(),
+  'io.sanity.scopes': z.array(SanityTokenScopeSchema).optional(),
 })
 
 /** @internal */

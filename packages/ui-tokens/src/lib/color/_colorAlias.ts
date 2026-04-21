@@ -49,9 +49,7 @@ export function _colorAlias(
   return {
     $value: alias,
     $extensions: {
-      ['io.sanity']: {
-        scopes: options?.scopes,
-      },
+      ['io.sanity.scopes']: options?.scopes,
     },
   }
 }
