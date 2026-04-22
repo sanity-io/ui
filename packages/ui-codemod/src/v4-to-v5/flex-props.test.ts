@@ -1,185 +1,64 @@
 import {defineInlineTest} from '../utils/testUtils'
-import transform, {TODO_WARNING} from './flex-props'
+import transform from './flex-props'
 
 defineInlineTest(
   transform,
   {},
   `
-  <Flex borderWidth={0.5} />
+  <Flex
+    align="center"
+    direction="row"
+    wrap="wrap"
+    justify="center"
+  />
   `,
   `
-  <Flex />
+  <Flex
+    alignItems="center"
+    flexDirection="row"
+    flexWrap="wrap"
+    justifyContent="center"
+  />
   `,
-  'removes deprecated prop',
+  'renames flex props',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Flex align="center" />
-  `,
-  `
-  <Flex alignItems="center" />
-  `,
-  'renames prop',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex width="fill" />
-  `,
-  `
-  <Flex width="100%" />
-  `,
-  'updates prop value',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex border="muted" />
-  `,
-  `
-  <Flex border={true} />
-  `,
-  'updates boolean prop value',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex width={[0, 1, 2]} />
-  `,
-  `
-  <Flex width={["20rem", "40rem", "60rem"]} />
-  `,
-  'updates responsive prop value',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex textAlign="center" />
-  `,
-  `
-  <Flex style={{
-    textAlign: "center"
-  }} />
-  `,
-  'moves prop to style',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex sizing="border" />
-  `,
-  `
-  <Flex style={{
-    boxSizing: "border-box"
-  }} />
-  `,
-  'moves prop to style with updated value',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex textAlign={\`center\`} />
-  `,
-  `
-  <Flex style={{
-    textAlign: \`center\`
-  }} />
-  `,
-  'moves prop to style with updated template literal value',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex textAlign="center" style={{ background: 'blue' }} />
+  <Flex
+    gridAutoColumns="auto"
+    gridAutoFlow="row"
+    gridAutoRows="auto"
+  />
   `,
   `
   <Flex
     style={{
-      background: 'blue',
-      textAlign: "center"
+      gridAutoColumns: "auto",
+      gridAutoFlow: "row",
+      gridAutoRows: "auto"
     }} />
   `,
-  'preserves existing styles',
+  'moves grid props to style',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Flex textAlign={["center", "left"]} />
+  <Flex
+    gridTemplateColumns={1}
+    gridTemplateRows={2}
+  />
   `,
   `
-  // TODO: ${TODO_WARNING}
-  <Flex textAlign={["center", "left"]} />
+  <Flex
+    style={{
+      gridTemplateColumns: "repeat(1, 1fr)",
+      gridTemplateRows: "repeat(2, 1fr)"
+    }} />
   `,
-  'comments if responsive prop should be moved to style',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex sizing={["content", "box"]} />
-  `,
-  `
-  // TODO: ${TODO_WARNING}
-  <Flex sizing={["content", "box"]} />
-  `,
-  'comments if responsive prop value should be updated and moved to style',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex textAlign={variable} />
-  `,
-  `
-  // TODO: ${TODO_WARNING}
-  <Flex textAlign={variable} />
-  `,
-  'comments if prop value is a variable',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex textAlign={variable ? 'center' : 'left'} />
-  `,
-  `
-  // TODO: ${TODO_WARNING}
-  <Flex textAlign={variable ? 'center' : 'left'} />
-  `,
-  'comments if prop value is a ternary',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <Flex textAlign={\`lef\${\`t\`}\`} />
-  `,
-  `
-  // TODO: ${TODO_WARNING}
-  <Flex textAlign={\`lef\${\`t\`}\`} />
-  `,
-  'comments if prop value is a template literal with variable',
+  'moves grid props to style and updates mapped values',
 )

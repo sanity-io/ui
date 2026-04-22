@@ -2,15 +2,30 @@
   "name": "ui-poc",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "turbo build --filter=./packages/*",
+    "dev": "turbo dev --ui=tui",
+    "lint": "turbo lint",
+    "prepare": "husky",
+    "test": "turbo test -- --run"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.17.0",
+  "lint-staged": {
+    "*": [
+      "prettier --write --cache --ignore-unknown"
+    ]
+  },
+  "prettier": "@sanity/prettier-config",
   "devDependencies": {
+    "@sanity/prettier-config": "^1.0.6",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.8.1",
+    "prettier-plugin-packagejson": "^3.0.2",
     "turbo": "^2.8.20"
-  }
+  },
+  "packageManager": "pnpm@10.17.0"
 }

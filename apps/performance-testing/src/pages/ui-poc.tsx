@@ -1,7 +1,7 @@
 import 'ui/styles.css'
 
+import {Box, Card} from '@sanity-labs/ui-poc'
 import {Profiler} from 'react'
-import {Box, Card} from 'ui'
 
 const count = 5000
 const iterator = [...Array(count).keys()]
@@ -16,7 +16,9 @@ function handleOnRender(
 ) {
   const value = {id, phase, actualDuration, baseDuration, startTime, commitTime}
   const perComponent = actualDuration / count
+  /* eslint-disable-next-line no-console */
   console.log(JSON.stringify(value, null, 2))
+  /* eslint-disable-next-line no-console */
   console.log({perComponent})
   navigator.clipboard.writeText(String(perComponent))
 }

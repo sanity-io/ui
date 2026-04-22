@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import { expect } from 'storybook/test'
+import type {Meta, StoryObj} from '@storybook/react-vite'
+import {expect} from 'storybook/test'
 
-import { Card } from '../../../../packages/ui/src/components/card/Card'
-import { cardProps } from '../../../../packages/ui/src/components/card/card.props'
-import { getArgTypes } from '../utils/getArgTypes'
+import {Card} from '../../../../packages/ui/src/components/card/Card'
+import {cardProps} from '../../../../packages/ui/src/components/card/card.props'
+import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(cardProps)
 

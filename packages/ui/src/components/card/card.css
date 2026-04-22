@@ -1,4 +1,54 @@
 .sui-Card {
-  /* Placeholder for now */
-  color: currentColor;
+  background-color: transparent;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+/** -----------------------------------
+  * TONE: custom properties
+  * ---------------------------------*/
+.sui-Card:where(.sui-tone-neutral) {
+  --surface-tone: var(--tone-neutral-normal-surface);
+  --strong-surface-tone: var(--tone-neutral-strong-surface);
+}
+
+.sui-Card:where(.sui-tone-primary) {
+  --surface-tone: var(--tone-primary-normal-surface);
+  --strong-surface-tone: var(--tone-primary-strong-surface);
+}
+
+.sui-Card:where(.sui-tone-positive) {
+  --surface-tone: var(--tone-positive-normal-surface);
+  --strong-surface-tone: var(--tone-positive-strong-surface);
+}
+
+.sui-Card:where(.sui-tone-suggest) {
+  --surface-tone: var(--tone-suggest-normal-surface);
+  --strong-surface-tone: var(--tone-suggest-strong-surface);
+}
+
+.sui-Card:where(.sui-tone-caution) {
+  --surface-tone: var(--tone-caution-normal-surface);
+  --strong-surface-tone: var(--tone-caution-strong-surface);
+}
+
+.sui-Card:where(.sui-tone-critical) {
+  --surface-tone: var(--tone-critical-normal-surface);
+  --strong-surface-tone: var(--tone-critical-strong-surface);
+}
+
+/** -----------------------------------
+  * TONE: application of custom properties by tone level
+  * ---------------------------------*/
+.sui-Card:where(.sui-tone-level-muted) {
+  border-color: var(--surface-tone);
+}
+
+.sui-Card:where(.sui-tone-level-normal) {
+  background-color: var(--surface-tone);
+}
+
+.sui-Card:where(.sui-tone-level-strong) {
+  background-color: var(--strong-surface-tone);
 }

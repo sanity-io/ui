@@ -1,10 +1,12 @@
 import { borderProps } from '../../props/border'
 import {type MarginProps, marginProps} from '../../props/margin'
 import { paddingProps } from '../../props/padding'
+import {toneProps} from '../../props/tone'
 import {type Density} from '../../types/Density'
 import {DISPLAY_BLOCK, type DisplayBlock} from '../../types/Display'
 import {type PropDef} from '../../types/PropDef'
 import {type Responsive} from '../../types/Responsive'
+import type {Tone, ToneLevel} from '../../types/Tone'
 
 /** @public */
 export interface CardProps<T extends React.ElementType> extends MarginProps {
@@ -14,6 +16,8 @@ export interface CardProps<T extends React.ElementType> extends MarginProps {
   display?: Responsive<DisplayBlock>
   /** Composite prop for setting padding and border radius */
   density?: Responsive<Density>
+  tone?: Tone
+  toneLevel?: ToneLevel
 }
 
 export const cardProps: Record<string, PropDef> = {
@@ -46,5 +50,6 @@ export const cardProps: Record<string, PropDef> = {
       }
     }
   },
+  ...toneProps,
   ...marginProps,
 }

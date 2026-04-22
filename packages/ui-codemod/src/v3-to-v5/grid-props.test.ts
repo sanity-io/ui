@@ -5,22 +5,36 @@ defineInlineTest(
   transform,
   {},
   `
-  <Grid autoCols="min-content" />
+  <Grid
+    autoCols="auto"
+    autoFlow="row"
+    autoRows="auto"
+  />
   `,
   `
-  <Grid gridAutoColumns="min-content" />
+  <Grid
+    gridAutoColumns="auto"
+    gridAutoFlow="row"
+    gridAutoRows="auto"
+  />
   `,
-  'renames prop',
+  'renames grid props',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Grid rows={2} />
+  <Grid
+    columns={1}
+    rows={2}
+  />
   `,
   `
-  <Grid gridTemplateRows="repeat(2, 1fr)" />
+  <Grid
+    gridTemplateColumns="repeat(1, 1fr)"
+    gridTemplateRows="repeat(2, 1fr)"
+  />
   `,
-  'renames prop and updates value',
+  'renames grid props and updates mapped values',
 )
