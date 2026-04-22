@@ -11,19 +11,15 @@
     "lint": "eslint .",
     "test": "vitest run"
   },
-  "prettier": "@sanity/prettier-config",
   "dependencies": {
     "@types/jscodeshift": "^17.3.0",
     "jscodeshift": "^17.3.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@sanity/prettier-config": "^1.0.6",
     "@sanity/tsconfig": "^1.0.0",
     "@types/node": "^25.5.2",
     "eslint": "^9.22.0",
-    "prettier": "^3.8.1",
-    "prettier-plugin-packagejson": "^3.0.2",
     "vitest": "^4.1.1"
   },
   "packageManager": "pnpm@10.17.0"

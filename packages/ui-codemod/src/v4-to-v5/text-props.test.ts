@@ -1,5 +1,5 @@
 import {defineInlineTest} from '../utils/testUtils'
-import transform, { TODO_WARNING } from './text-props'
+import transform, {TODO_WARNING} from './text-props'
 
 defineInlineTest(
   transform,

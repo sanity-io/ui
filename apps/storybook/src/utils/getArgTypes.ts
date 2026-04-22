@@ -1,6 +1,6 @@
-import type { ArgTypes } from '@storybook/react-vite'
+import type {ArgTypes} from '@storybook/react-vite'
 
-import type { PropDef } from '../../../../packages/ui/src/types/PropDef'
+import type {PropDef} from '../../../../packages/ui/src/types/PropDef'
 
 export function getArgTypes<T extends Record<string, PropDef>, P>(propDefs?: T) {
   if (!propDefs) {
@@ -16,8 +16,8 @@ export function getArgTypes<T extends Record<string, PropDef>, P>(propDefs?: T) 
       }),
       ...(value.type === 'composite' && {
         options: Object.keys(value.composition),
-        control: {type: 'select'}
-      })
+        control: {type: 'select'},
+      }),
     }
 
     return obj

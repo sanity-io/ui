@@ -1,13 +1,8 @@
-import type { JSXOpeningElement } from "jscodeshift"
+import type {JSXOpeningElement} from 'jscodeshift'
 
-export function hasAttribute(
-  node: JSXOpeningElement,
-  name: string,
-) {
+export function hasAttribute(node: JSXOpeningElement, name: string) {
   return node.attributes?.some(
     (attr) =>
-      attr.type === 'JSXAttribute' &&
-      attr.name.type === 'JSXIdentifier' &&
-      attr.name.name === name,
+      attr.type === 'JSXAttribute' && attr.name.type === 'JSXIdentifier' && attr.name.name === name,
   )
 }

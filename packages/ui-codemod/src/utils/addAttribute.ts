@@ -1,6 +1,7 @@
-import type { API, JSXOpeningElement } from "jscodeshift"
-import { getAttributeValue } from "./getAttributeValue"
-import { hasAttribute } from "./hasAttribute"
+import type {API, JSXOpeningElement} from 'jscodeshift'
+
+import {getAttributeValue} from './getAttributeValue'
+import {hasAttribute} from './hasAttribute'
 
 export function addAttribute(
   j: API['jscodeshift'],
@@ -16,7 +17,5 @@ export function addAttribute(
     node.attributes = []
   }
 
-  node.attributes.push(
-    j.jsxAttribute(j.jsxIdentifier(name), getAttributeValue(j, value)),
-  )
+  node.attributes.push(j.jsxAttribute(j.jsxIdentifier(name), getAttributeValue(j, value)))
 }

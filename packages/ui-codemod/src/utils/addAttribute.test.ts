@@ -1,7 +1,7 @@
 import {type API, type FileInfo} from 'jscodeshift'
 
 import {defineInlineTest} from '../utils/testUtils'
-import { addAttribute } from './addAttribute'
+import {addAttribute} from './addAttribute'
 
 function transform(fileInfo: FileInfo, api: API): string {
   const j = api.jscodeshift
