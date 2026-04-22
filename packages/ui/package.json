@@ -1,7 +1,7 @@
 {
-  "name": "@sanity-labs/ui-poc",
-  "version": "0.0.1-alpha.6",
-  "description": "Sanity UI POC",
+  "name": "@sanity-labs/design-system",
+  "version": "0.0.1-alpha.0",
+  "description": "Sanity Design System POC",
   "keywords": [],
   "homepage": "https://github.com/sanity-labs/ui-poc#readme",
   "bugs": {
