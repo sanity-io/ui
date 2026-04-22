@@ -28,10 +28,13 @@ type UnionPropDef<T> = {
  */
 type CompositePropDef = {
   type: 'composite'
-  composition: Record<string, {
-    def: PropDef
-    mapping: Record<string, unknown>
-  }>
+  composition: Record<
+    string,
+    {
+      propDef: PropDef
+      mapping: Record<string, unknown>
+    }
+  >
 }
 
 export type PropDef<T = unknown> =

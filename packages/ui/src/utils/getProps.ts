@@ -16,29 +16,28 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
   componentProps?: P,
   propDefs?: T,
 ): ComponentProps {
-  const {allProps, allDefs} = getComposites(componentProps, propDefs)
+  const {allComponentProps, allPropDefs} = flattenCompositeProps(componentProps, propDefs)
   const restProps: ComponentProps = {}
   let className = componentProps?.className || ''
   let style = componentProps?.style || {}
 
-  for (const key in allProps) {
-    if (!allDefs?.[key] || !('className' in allDefs?.[key]) || !allDefs?.[key].className) {
-      restProps[key] = allProps[key]
+  for (const key in allComponentProps) {
+    const propDef = allPropDefs?.[key]
+    const propValue = allComponentProps[key]
+
+    if (!propDef || !('className' in propDef) || !propDef.className) {
+      restProps[key] = propValue
       continue
     }
 
-    if (Array.isArray(allProps[key])) {
-      for (
-        let i = 0, len = Math.min(allProps[key].length, BREAKPOINTS_LENGTH);
-        i < len;
-        i++
-      ) {
-        className = classNames(className, getClassName(allProps[key][i], allDefs[key], i))
-        style = {...style, ...getStyle(allProps[key][i], allDefs[key], i)}
+    if (Array.isArray(propValue)) {
+      for (let i = 0, len = Math.min(propValue.length, BREAKPOINTS_LENGTH); i < len; i++) {
+        className = classNames(className, getClassName(propValue[i], propDef, i))
+        style = {...style, ...getStyle(propValue[i], propDef, i)}
       }
     } else {
-      className = classNames(className, getClassName(allProps[key], allDefs[key]))
-      style = {...style, ...getStyle(allProps[key], allDefs[key])}
+      className = classNames(className, getClassName(propValue, propDef))
+      style = {...style, ...getStyle(propValue, propDef)}
     }
   }
 
@@ -46,10 +45,10 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-function getClassName(prop: any, propDef: PropDef, bp?: number) {
-  if (propDef.type === 'union' && propDef.values?.includes(prop)) {
+function getClassName(propValue: any, propDef: PropDef, bp?: number) {
+  if (propDef.type === 'union' && propDef.values?.includes(propValue)) {
     /* Note: This may need updating depending on the final CSS classname formatting */
-    return `${PREFIX}-${propDef.className}${typeof prop === 'string' ? `-${prop}` : prop}${bp ? `-bp-${bp}` : ''}`
+    return `${PREFIX}-${propDef.className}${typeof propValue === 'string' ? `-${propValue}` : propValue}${bp ? `-bp-${bp}` : ''}`
   }
 
   if (propDef.type === 'string' || propDef.type === 'number') {
@@ -57,57 +56,68 @@ function getClassName(prop: any, propDef: PropDef, bp?: number) {
   }
 
   if (propDef.type === 'boolean') {
-    return `${PREFIX}-${prop ? propDef.className : propDef.inverse}${bp ? `-bp-${bp}` : ''}`
+    return `${PREFIX}-${propValue ? propDef.className : propDef.inverse}${bp ? `-bp-${bp}` : ''}`
   }
 
   return ''
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-function getStyle(prop: any, propDef: PropDef, bp?: number) {
+function getStyle(propValue: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'string' || propDef.type === 'number') {
     return {
-      [`${propDef.variable}${bp ? `-bp-${bp}` : ''}`]: prop,
+      [`${propDef.variable}${bp ? `-bp-${bp}` : ''}`]: propValue,
     }
   }
 
   return {}
 }
 
-export function getComposites<P extends ComponentProps, T extends Record<string, PropDef>>(
+export function flattenCompositeProps<P extends ComponentProps, T extends Record<string, PropDef>>(
   componentProps?: P,
   propDefs?: T,
 ) {
-  const composites = {
-    allProps: {} as ComponentProps,
-    allDefs: {} as Record<string, PropDef>
+  const props = {
+    allComponentProps: {} as ComponentProps,
+    allPropDefs: {} as Record<string, PropDef>,
   }
 
   for (const key in componentProps) {
     if (propDefs?.[key] && propDefs?.[key].type === 'composite') {
-      for (const compKey in propDefs?.[key].composition) {
-        const mapping = propDefs?.[key].composition[compKey]?.mapping
-        composites.allDefs[compKey] = propDefs?.[key].composition[compKey]?.def as PropDef
+      for (const compositeKey in propDefs?.[key].composition) {
+        const compositeValue = getCompositeValue(componentProps[key], propDefs[key], compositeKey)
 
-        if (Array.isArray(componentProps[key])) {
-          composites.allProps[compKey] = []
-
-          for (
-            let i = 0, len = componentProps[key].length;
-            i < len;
-            i++
-          ) {
-            composites.allProps[compKey][i] = mapping?.[componentProps[key][i]]
-          }
-        } else {
-          composites.allProps[compKey] = mapping?.[componentProps[key]]
-        }
+        props.allComponentProps[compositeKey] = compositeValue
+        props.allPropDefs[compositeKey] = propDefs[key].composition[compositeKey]
+          ?.propDef as PropDef
       }
     } else {
-      composites.allDefs[key] = propDefs?.[key] as PropDef
-      composites.allProps[key] = componentProps[key]
+      props.allComponentProps[key] = componentProps[key]
+      props.allPropDefs[key] = propDefs?.[key] as PropDef
     }
   }
 
-  return composites
+  return props
+}
+
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+function getCompositeValue(propValue: any, propDef: PropDef, key: string) {
+  if (!('composition' in propDef)) {
+    return
+  }
+
+  const mapping = propDef.composition[key]?.['mapping']
+  let compositeValue
+
+  if (Array.isArray(propValue)) {
+    compositeValue = []
+
+    for (let i = 0, len = propValue.length; i < len; i++) {
+      compositeValue[i] = mapping?.[propValue[i]]
+    }
+  } else {
+    compositeValue = mapping?.[propValue]
+  }
+
+  return compositeValue
 }
