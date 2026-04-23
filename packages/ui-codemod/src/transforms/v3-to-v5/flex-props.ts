@@ -26,8 +26,10 @@ const MODS: AttributeMods = {
   },
 }
 
+/** @internal */
 export const TODO_WARNING = 'Codemod could not migrate the Flex component below'
 
+/** @internal */
 export default function transform(fileInfo: FileInfo, api: API): string {
   const j = api.jscodeshift
   const root = j(fileInfo.source)

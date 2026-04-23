@@ -1,4 +1,4 @@
-import {run} from 'jscodeshift/src/Runner'
+import {run} from 'jscodeshift/src/Runner.js'
 
 import {BaseCommand} from '../../baseCommand'
 import {getTransformPath} from '../../utils/getTransformPath'
