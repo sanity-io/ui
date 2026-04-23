@@ -63,7 +63,7 @@ describe('getProps', () => {
     const result = getProps({padding: 1, as: 'div'}, layoutProps)
     expect(result.className).toBe('sui-p1')
     expect(result.style).toEqual({})
-    expect(result.as).toEqual('div')
+    expect(result['as']).toEqual('div')
   })
 
   it('generates responsive className based on unions', () => {
@@ -90,7 +90,7 @@ describe('getProps', () => {
 
   it('genereates responsive className based on composites', () => {
     const result = getProps({density: ['compact', 'regular']}, cardProps)
-    expect(result.className).toBe('sui-p3 sui-radius2 sui-p4-bp-1 sui-radius3-bp-1')
+    expect(result.className).toBe('sui-p3 sui-p4-bp-1 sui-radius2 sui-radius3-bp-1')
     expect(result.style).toEqual({})
   })
 

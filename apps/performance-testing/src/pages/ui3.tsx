@@ -1,4 +1,4 @@
-import {Box, ThemeProvider} from '@sanity/ui'
+import {Box, Card, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
 import {Profiler} from 'react'
 
@@ -34,6 +34,14 @@ export default function Ui3() {
           <Box key={i} padding={3} marginBottom={2}>
             <span>Box content</span>
           </Box>
+        ))}
+      </Profiler>
+
+      <Profiler id="Cards" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Card key={i} padding={[3, 4]} radius={[2, 3]} marginBottom={2}>
+            <span>Card content</span>
+          </Card>
         ))}
       </Profiler>
     </ThemeProvider>

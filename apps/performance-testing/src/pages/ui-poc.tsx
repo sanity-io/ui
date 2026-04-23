@@ -1,6 +1,6 @@
 import 'ui/styles.css'
 
-import {Box} from '@sanity-labs/ui-poc'
+import {Box, Card} from '@sanity-labs/ui-poc'
 import {Profiler} from 'react'
 
 const count = 5000
@@ -33,6 +33,14 @@ export default function UiPoc() {
           <Box key={i} padding={3} marginBottom={2}>
             <span>Box content</span>
           </Box>
+        ))}
+      </Profiler>
+
+      <Profiler id="Cards" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Card key={i} density={['regular', 'loose']} marginBottom={2}>
+            <span>Card content</span>
+          </Card>
         ))}
       </Profiler>
     </div>

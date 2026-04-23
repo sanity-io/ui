@@ -1,7 +1,7 @@
 import 'ui4/css/index.css'
 
 import {Profiler} from 'react'
-import {Box, Root} from 'ui4'
+import {Box, Card, Root} from 'ui4'
 
 const count = 5000
 const iterator = [...Array(count).keys()]
@@ -33,6 +33,14 @@ export default function Ui4() {
           <Box key={i} padding={3} marginBottom={2}>
             <span>Box content</span>
           </Box>
+        ))}
+      </Profiler>
+
+      <Profiler id="Cards" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Card key={i} padding={[3, 4]} radius={[2, 3]} marginBottom={2}>
+            <span>Card content</span>
+          </Card>
         ))}
       </Profiler>
     </Root>

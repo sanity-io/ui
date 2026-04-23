@@ -16,34 +16,28 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
   componentProps?: P,
   propDefs?: T,
 ): ComponentProps {
+  const {allComponentProps, allPropDefs} = flattenCompositeProps(componentProps, propDefs)
+  const restProps: ComponentProps = {}
   let className = componentProps?.className || ''
   let style = componentProps?.style || {}
-  const restProps: ComponentProps = {}
 
-  for (const key in componentProps) {
-    // Pass over props that don't effect CSS output, including them in `restProps` instead.
-    // @TODO Is there a better way to write this `if`? Perhaps explicitly enumerating the props
-    // we know we don't need to operate on here (e.g. the `as` prop)?
-    if (
-      !propDefs?.[key] ||
-      (!('className' in propDefs[key]) && !('composition' in propDefs[key]))
-    ) {
-      restProps[key] = componentProps[key]
+  for (const key in allComponentProps) {
+    const propDef = allPropDefs?.[key]
+    const propValue = allComponentProps[key]
+
+    if (!propDef || !('className' in propDef) || !propDef.className) {
+      restProps[key] = propValue
       continue
     }
 
-    if (Array.isArray(componentProps[key])) {
-      for (
-        let i = 0, len = Math.min(componentProps[key].length, BREAKPOINTS_LENGTH);
-        i < len;
-        i++
-      ) {
-        className = classNames(className, getClassName(componentProps[key][i], propDefs[key], i))
-        style = {...style, ...getStyle(componentProps[key][i], propDefs[key], i)}
+    if (Array.isArray(propValue)) {
+      for (let i = 0, len = Math.min(propValue.length, BREAKPOINTS_LENGTH); i < len; i++) {
+        className = classNames(className, getClassName(propValue[i], propDef, i))
+        style = {...style, ...getStyle(propValue[i], propDef, i)}
       }
     } else {
-      className = classNames(className, getClassName(componentProps[key], propDefs[key]))
-      style = {...style, ...getStyle(componentProps[key], propDefs[key])}
+      className = classNames(className, getClassName(propValue, propDef))
+      style = {...style, ...getStyle(propValue, propDef)}
     }
   }
 
@@ -51,21 +45,10 @@ export function getProps<P extends ComponentProps, T extends Record<string, Prop
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-function getClassName(prop: any, propDef: PropDef, bp?: number) {
-  if (propDef.type === 'composite' && propDef.composition[prop]) {
-    const classes = bp
-      ? propDef.composition[prop]
-          .split(' ')
-          .map((className: string) => `${className}-bp-${bp}`)
-          .join(' ')
-      : propDef.composition[prop]
-    // @TODO prefix has been written included as part of composite class names; does it need to be dynamic?
-    return classes
-  }
-
-  if (propDef.type === 'union' && propDef.values?.includes(prop)) {
+function getClassName(propValue: any, propDef: PropDef, bp?: number) {
+  if (propDef.type === 'union' && propDef.values?.includes(propValue)) {
     /* Note: This may need updating depending on the final CSS classname formatting */
-    return `${PREFIX}-${propDef.className}${typeof prop === 'string' ? `-${prop}` : prop}${bp ? `-bp-${bp}` : ''}`
+    return `${PREFIX}-${propDef.className}${typeof propValue === 'string' ? `-${propValue}` : propValue}${bp ? `-bp-${bp}` : ''}`
   }
 
   if (propDef.type === 'string' || propDef.type === 'number') {
@@ -73,19 +56,68 @@ function getClassName(prop: any, propDef: PropDef, bp?: number) {
   }
 
   if (propDef.type === 'boolean') {
-    return `${PREFIX}-${prop ? propDef.className : propDef.inverse}${bp ? `-bp-${bp}` : ''}`
+    return `${PREFIX}-${propValue ? propDef.className : propDef.inverse}${bp ? `-bp-${bp}` : ''}`
   }
 
   return ''
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-function getStyle(prop: any, propDef: PropDef, bp?: number) {
+function getStyle(propValue: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'string' || propDef.type === 'number') {
     return {
-      [`${propDef.variable}${bp ? `-bp-${bp}` : ''}`]: prop,
+      [`${propDef.variable}${bp ? `-bp-${bp}` : ''}`]: propValue,
     }
   }
 
   return {}
+}
+
+export function flattenCompositeProps<P extends ComponentProps, T extends Record<string, PropDef>>(
+  componentProps?: P,
+  propDefs?: T,
+) {
+  const props = {
+    allComponentProps: {} as ComponentProps,
+    allPropDefs: {} as Record<string, PropDef>,
+  }
+
+  for (const key in componentProps) {
+    if (propDefs?.[key] && propDefs?.[key].type === 'composite') {
+      for (const compositeKey in propDefs?.[key].composition) {
+        const compositeValue = getCompositeValue(componentProps[key], propDefs[key], compositeKey)
+
+        props.allComponentProps[compositeKey] = compositeValue
+        props.allPropDefs[compositeKey] = propDefs[key].composition[compositeKey]
+          ?.propDef as PropDef
+      }
+    } else {
+      props.allComponentProps[key] = componentProps[key]
+      props.allPropDefs[key] = propDefs?.[key] as PropDef
+    }
+  }
+
+  return props
+}
+
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+function getCompositeValue(propValue: any, propDef: PropDef, key: string) {
+  if (!('composition' in propDef)) {
+    return
+  }
+
+  const mapping = propDef.composition[key]?.['mapping']
+  let compositeValue
+
+  if (Array.isArray(propValue)) {
+    compositeValue = []
+
+    for (let i = 0, len = propValue.length; i < len; i++) {
+      compositeValue[i] = mapping?.[propValue[i]]
+    }
+  } else {
+    compositeValue = mapping?.[propValue]
+  }
+
+  return compositeValue
 }
