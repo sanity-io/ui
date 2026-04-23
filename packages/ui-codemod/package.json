@@ -1,5 +1,5 @@
 {
-  "name": "@sanity-labs/ui-codemod",
+  "name": "@sanity-labs/ui-poc-codemod",
   "version": "0.0.1-alpha.0",
   "description": "",
   "keywords": [],
@@ -75,7 +75,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "ui-codemod": "./bin/run.js"
+    "ui-poc-codemod": "./bin/run.js"
   },
   "files": [
     "dist",
@@ -88,9 +88,9 @@
     "test": "vitest run"
   },
   "oclif": {
-    "bin": "@sanity-labs/ui-codemod",
+    "bin": "@sanity-labs/ui-poc-codemod",
     "commands": "./dist/commands",
-    "dirname": "ui-codemod",
+    "dirname": "ui-poc-codemod",
     "topicSeparator": ":",
     "topics": {
       "v3-to-v5": {
