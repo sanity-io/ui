@@ -1,6 +1,6 @@
 import 'ui/styles.css'
 
-import {Box} from '@sanity-labs/ui-poc'
+import {Box} from '@sanity-labs/design-system'
 import {Profiler} from 'react'
 
 const count = 5000

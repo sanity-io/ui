@@ -5,18 +5,43 @@
   "keywords": [],
   "license": "ISC",
   "author": "",
-  "main": "index.js",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./sanity-ui/box-props": {
+      "source": "./src/sanity-ui/box-props.ts",
+      "default": "./dist/sanity-ui/box-props.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "design-system-codemod": "./bin/run.js"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
+    "build": "pkg build --strict --clean --check",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",
     "test": "vitest run"
   },
+  "browserslist": "extends @sanity/browserslist-config",
+  "oclif": {
+    "bin": "design-system-codemod",
+    "commands": "./dist",
+    "dirname": "design-system-codemod",
+    "topicSeparator": " "
+  },
   "dependencies": {
+    "@oclif/core": "^4.10.5",
     "@types/jscodeshift": "^17.3.0",
     "jscodeshift": "^17.3.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@sanity/pkg-utils": "^9.2.3",
     "@sanity/tsconfig": "^1.0.0",
     "@types/node": "^25.5.2",
     "eslint": "^9.22.0",
