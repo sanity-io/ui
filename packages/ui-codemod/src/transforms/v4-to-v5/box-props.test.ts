@@ -1,40 +1,41 @@
-import {defineInlineTest} from '../utils/testUtils'
-import transform from './flex-props'
+import {defineInlineTest} from '../../utils/testUtils'
+import transform from './box-props'
 
 defineInlineTest(
   transform,
   {},
   `
-  <Flex
-    align="center"
-    direction="row"
-    wrap="wrap"
-    justify="center"
-  />
-  `,
-  `
-  <Flex
+  <Box
     alignItems="center"
     flexDirection="row"
     flexWrap="wrap"
     justifyContent="center"
   />
   `,
-  'renames flex props',
+  `
+  <Box
+    style={{
+      alignItems: "center",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "center"
+    }} />
+  `,
+  'moves flex props to style',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Flex
+  <Box
     gridAutoColumns="auto"
     gridAutoFlow="row"
     gridAutoRows="auto"
   />
   `,
   `
-  <Flex
+  <Box
     style={{
       gridAutoColumns: "auto",
       gridAutoFlow: "row",
@@ -48,13 +49,13 @@ defineInlineTest(
   transform,
   {},
   `
-  <Flex
+  <Box
     gridTemplateColumns={1}
     gridTemplateRows={2}
   />
   `,
   `
-  <Flex
+  <Box
     style={{
       gridTemplateColumns: "repeat(1, 1fr)",
       gridTemplateRows: "repeat(2, 1fr)"

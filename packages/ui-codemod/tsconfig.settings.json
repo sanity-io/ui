@@ -1,7 +1,9 @@
 {
-  "extends": "@sanity/tsconfig/strictest",
+  "extends": "./node_modules/@sanity/tsconfig/strictest.tsconfig.json",
+  "include": ["src"],
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "types": ["node"]
   }
 }

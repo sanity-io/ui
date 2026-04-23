@@ -1,25 +1,119 @@
 {
-  "name": "ui-codemod",
-  "version": "1.0.0",
+  "name": "@sanity-labs/ui-poc-codemod",
+  "version": "0.0.1-alpha.0",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "",
-  "main": "index.js",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./transforms/v3-to-v5/box-props": {
+      "source": "./src/transforms/v3-to-v5/box-props.ts",
+      "default": "./dist/transforms/v3-to-v5/box-props.js"
+    },
+    "./v3-to-v5/box-props": {
+      "source": "./src/commands/v3-to-v5/box-props.ts",
+      "default": "./dist/commands/v3-to-v5/box-props.js"
+    },
+    "./transforms/v3-to-v5/flex-props": {
+      "source": "./src/transforms/v3-to-v5/flex-props.ts",
+      "default": "./dist/transforms/v3-to-v5/flex-props.js"
+    },
+    "./v3-to-v5/flex-props": {
+      "source": "./src/commands/v3-to-v5/flex-props.ts",
+      "default": "./dist/commands/v3-to-v5/flex-props.js"
+    },
+    "./transforms/v3-to-v5/grid-props": {
+      "source": "./src/transforms/v3-to-v5/grid-props.ts",
+      "default": "./dist/transforms/v3-to-v5/grid-props.js"
+    },
+    "./v3-to-v5/grid-props": {
+      "source": "./src/commands/v3-to-v5/grid-props.ts",
+      "default": "./dist/commands/v3-to-v5/grid-props.js"
+    },
+    "./transforms/v4-to-v5/box-props": {
+      "source": "./src/transforms/v4-to-v5/box-props.ts",
+      "default": "./dist/transforms/v4-to-v5/box-props.js"
+    },
+    "./v4-to-v5/box-props": {
+      "source": "./src/commands/v4-to-v5/box-props.ts",
+      "default": "./dist/commands/v4-to-v5/box-props.js"
+    },
+    "./transforms/v4-to-v5/flex-props": {
+      "source": "./src/transforms/v4-to-v5/flex-props.ts",
+      "default": "./dist/transforms/v4-to-v5/flex-props.js"
+    },
+    "./v4-to-v5/flex-props": {
+      "source": "./src/commands/v4-to-v5/flex-props.ts",
+      "default": "./dist/commands/v4-to-v5/flex-props.js"
+    },
+    "./transforms/v4-to-v5/grid-props": {
+      "source": "./src/transforms/v4-to-v5/grid-props.ts",
+      "default": "./dist/transforms/v4-to-v5/grid-props.js"
+    },
+    "./v4-to-v5/grid-props": {
+      "source": "./src/commands/v4-to-v5/grid-props.ts",
+      "default": "./dist/commands/v4-to-v5/grid-props.js"
+    },
+    "./transforms/v4-to-v5/heading-props": {
+      "source": "./src/transforms/v4-to-v5/heading-props.ts",
+      "default": "./dist/transforms/v4-to-v5/heading-props.js"
+    },
+    "./v4-to-v5/heading-props": {
+      "source": "./src/commands/v4-to-v5/heading-props.ts",
+      "default": "./dist/commands/v4-to-v5/heading-props.js"
+    },
+    "./transforms/v4-to-v5/text-props": {
+      "source": "./src/transforms/v4-to-v5/text-props.ts",
+      "default": "./dist/transforms/v4-to-v5/text-props.js"
+    },
+    "./v4-to-v5/text-props": {
+      "source": "./src/commands/v4-to-v5/text-props.ts",
+      "default": "./dist/commands/v4-to-v5/text-props.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "ui-poc-codemod": "./bin/run.js"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
+    "build": "pkg build --strict --clean --check",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",
     "test": "vitest run"
   },
+  "oclif": {
+    "bin": "@sanity-labs/ui-poc-codemod",
+    "commands": "./dist/commands",
+    "dirname": "ui-poc-codemod",
+    "topicSeparator": ":",
+    "topics": {
+      "v3-to-v5": {
+        "description": "Migrate from UI v3 to v5"
+      },
+      "v4-to-v5": {
+        "description": "Migrate from UI v4 to v5"
+      }
+    }
+  },
   "dependencies": {
+    "@oclif/core": "^4.10.5",
     "@types/jscodeshift": "^17.3.0",
     "jscodeshift": "^17.3.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@sanity/pkg-utils": "^9.2.3",
     "@sanity/tsconfig": "^1.0.0",
     "@types/node": "^25.5.2",
     "eslint": "^9.22.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "vitest": "^4.1.1"
   },
   "packageManager": "pnpm@10.17.0"

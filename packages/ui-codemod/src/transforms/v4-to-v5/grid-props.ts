@@ -1,8 +1,8 @@
 import {type API, type FileInfo} from 'jscodeshift'
 
-import {type AttributeMods} from '../types/AnyExpression'
-import {transformAttributes} from '../utils/transformAttributes'
-import {LAYOUT_MODS} from './constants/layout-attr-mods'
+import {LAYOUT_MODS} from '../../constants/v4-to-v5/layout-attr-mods'
+import {type AttributeMods} from '../../types/AnyExpression'
+import {transformAttributes} from '../../utils/transformAttributes'
 
 const MODS: AttributeMods = {
   ...LAYOUT_MODS,
@@ -60,8 +60,10 @@ const MODS: AttributeMods = {
   },
 }
 
+/** @internal */
 export const TODO_WARNING = 'Codemod could not migrate the Grid component below'
 
+/** @internal */
 export default function transform(fileInfo: FileInfo, api: API): string {
   const j = api.jscodeshift
   const root = j(fileInfo.source)

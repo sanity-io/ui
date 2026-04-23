@@ -1,4 +1,4 @@
-import {defineInlineTest} from '../utils/testUtils'
+import {defineInlineTest} from '../../utils/testUtils'
 import transform from './text-props'
 
 defineInlineTest(

@@ -1,5 +1,8 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./**/*.cjs", "./**/*.ts", "./**/*.tsx"],
-  "exclude": ["./node_modules"]
+  "include": ["./src"],
+  "exclude": ["./node_modules"],
+  "compilerOptions": {
+    "rootDir": "./src"
+  }
 }

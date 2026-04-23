@@ -1,8 +1,8 @@
 import {type API, type FileInfo} from 'jscodeshift'
 
-import {type AttributeMods} from '../types/AnyExpression'
-import {addAttribute} from '../utils/addAttribute'
-import {transformAttributes} from '../utils/transformAttributes'
+import type {AttributeMods} from '../../types/AnyExpression'
+import {addAttribute} from '../../utils/addAttribute'
+import {transformAttributes} from '../../utils/transformAttributes'
 
 const MODS: AttributeMods = {
   textOverflow: {
@@ -15,8 +15,10 @@ const MODS: AttributeMods = {
   },
 }
 
+/** @internal */
 export const TODO_WARNING = 'Codemod could not migrate the Text component below'
 
+/** @internal */
 export default function transform(fileInfo: FileInfo, api: API): string {
   const j = api.jscodeshift
   const root = j(fileInfo.source)

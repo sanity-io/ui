@@ -1,7 +1,7 @@
 import {type API, type FileInfo} from 'jscodeshift'
 
-import {type AttributeMods} from '../types/AnyExpression'
-import {transformAttributes} from '../utils/transformAttributes'
+import type {AttributeMods} from '../../types/AnyExpression'
+import {transformAttributes} from '../../utils/transformAttributes'
 
 const MODS: AttributeMods = {
   column: {
@@ -145,8 +145,10 @@ const MODS: AttributeMods = {
   },
 }
 
+/** @internal */
 export const TODO_WARNING = 'Codemod could not migrate the Box component below'
 
+/** @internal */
 export default function transform(fileInfo: FileInfo, api: API): string {
   const j = api.jscodeshift
   const root = j(fileInfo.source)
