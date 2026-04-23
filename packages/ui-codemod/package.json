@@ -75,7 +75,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "design-system-codemod": "./bin/run.js"
+    "ui-codemod": "./bin/run.js"
   },
   "files": [
     "dist",
