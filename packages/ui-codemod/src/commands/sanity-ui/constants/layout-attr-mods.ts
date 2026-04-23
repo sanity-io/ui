@@ -1,4 +1,4 @@
-import type {AttributeMods} from '../../types/AnyExpression'
+import type {AttributeMods} from '../../../types/AnyExpression'
 
 export const LAYOUT_MODS: AttributeMods = {
   border: {

@@ -1,6 +1,6 @@
 {
-  "name": "ui-codemod",
-  "version": "1.0.0",
+  "name": "@sanity-labs/ui-codemod",
+  "version": "0.0.1-alpha.0",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -9,8 +9,8 @@
   "type": "module",
   "exports": {
     "./sanity-ui/box-props": {
-      "source": "./src/sanity-ui/box-props.ts",
-      "default": "./dist/sanity-ui/box-props.js"
+      "source": "./src/commands/sanity-ui/box-props.ts",
+      "default": "./dist/commands/sanity-ui/box-props.js"
     },
     "./package.json": "./package.json"
   },
@@ -29,9 +29,9 @@
   },
   "browserslist": "extends @sanity/browserslist-config",
   "oclif": {
-    "bin": "design-system-codemod",
-    "commands": "./dist",
-    "dirname": "design-system-codemod",
+    "bin": "@sanity-labs/ui-codemod",
+    "commands": "./dist/commands",
+    "dirname": "ui-codemod",
     "topicSeparator": " "
   },
   "dependencies": {
@@ -45,6 +45,7 @@
     "@sanity/tsconfig": "^1.0.0",
     "@types/node": "^25.5.2",
     "eslint": "^9.22.0",
+    "ts-node": "^10.9.2",
     "vitest": "^4.1.1"
   },
   "packageManager": "pnpm@10.17.0"
