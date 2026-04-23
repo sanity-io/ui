@@ -9,7 +9,7 @@
   "type": "module",
   "exports": {
     "./sanity-ui/box-props": {
-      "source": "./src/commands/sanity-ui/box-props.ts",
+      "source": "./src/commands/sanity-ui/box-props/box-props.ts",
       "default": "./dist/commands/sanity-ui/box-props.js"
     },
     "./package.json": "./package.json"
@@ -46,6 +46,7 @@
     "@types/node": "^25.5.2",
     "eslint": "^9.22.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "vitest": "^4.1.1"
   },
   "packageManager": "pnpm@10.17.0"

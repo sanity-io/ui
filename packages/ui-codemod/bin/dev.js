@@ -1,5 +1,11 @@
-#!/usr/bin/env -S node --loader ts-node/esm --no-warnings=ExperimentalWarning
+#!/usr/bin/env node
 
-import {execute} from '@oclif/core'
+import {createRequire} from 'node:module'
+import {pathToFileURL} from 'node:url'
 
+const require = createRequire(import.meta.url)
+const {register} = await import(pathToFileURL(require.resolve('tsx/esm/api')))
+register()
+
+const {execute} = await import('@oclif/core')
 await execute({development: true, dir: import.meta.url})

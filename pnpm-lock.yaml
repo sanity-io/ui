@@ -275,6 +275,9 @@ importers:
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@25.5.2)(typescript@6.0.2)
+      tsx:
+        specifier: ^4.21.0
+        version: 4.21.0
       vitest:
         specifier: ^4.1.1
         version: 4.1.1(@types/node@25.5.2)(@vitest/browser-playwright@4.1.1)(vite@8.0.8(@types/node@25.5.2)(esbuild@0.27.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
