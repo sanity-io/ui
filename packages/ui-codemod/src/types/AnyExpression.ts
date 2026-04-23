@@ -1,4 +1,4 @@
-import {Expression} from 'jscodeshift'
+import type {Expression} from 'jscodeshift'
 
 export interface AnyExpression extends Expression {
   type: string

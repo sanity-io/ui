@@ -8,9 +8,69 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    "./sanity-ui/box-props": {
-      "source": "./src/commands/sanity-ui/box-props/box-props.ts",
-      "default": "./dist/commands/sanity-ui/box-props.js"
+    "./transforms/v3-to-v5/box-props": {
+      "source": "./src/transforms/v3-to-v5/box-props.ts",
+      "default": "./dist/transforms/v3-to-v5/box-props.js"
+    },
+    "./v3-to-v5/box-props": {
+      "source": "./src/commands/v3-to-v5/box-props.ts",
+      "default": "./dist/commands/v3-to-v5/box-props.js"
+    },
+    "./transforms/v3-to-v5/flex-props": {
+      "source": "./src/transforms/v3-to-v5/flex-props.ts",
+      "default": "./dist/transforms/v3-to-v5/flex-props.js"
+    },
+    "./v3-to-v5/flex-props": {
+      "source": "./src/commands/v3-to-v5/flex-props.ts",
+      "default": "./dist/commands/v3-to-v5/flex-props.js"
+    },
+    "./transforms/v3-to-v5/grid-props": {
+      "source": "./src/transforms/v3-to-v5/grid-props.ts",
+      "default": "./dist/transforms/v3-to-v5/grid-props.js"
+    },
+    "./v3-to-v5/grid-props": {
+      "source": "./src/commands/v3-to-v5/grid-props.ts",
+      "default": "./dist/commands/v3-to-v5/grid-props.js"
+    },
+    "./transforms/v4-to-v5/box-props": {
+      "source": "./src/transforms/v4-to-v5/box-props.ts",
+      "default": "./dist/transforms/v4-to-v5/box-props.js"
+    },
+    "./v4-to-v5/box-props": {
+      "source": "./src/commands/v4-to-v5/box-props.ts",
+      "default": "./dist/commands/v4-to-v5/box-props.js"
+    },
+    "./transforms/v4-to-v5/flex-props": {
+      "source": "./src/transforms/v4-to-v5/flex-props.ts",
+      "default": "./dist/transforms/v4-to-v5/flex-props.js"
+    },
+    "./v4-to-v5/flex-props": {
+      "source": "./src/commands/v4-to-v5/flex-props.ts",
+      "default": "./dist/commands/v4-to-v5/flex-props.js"
+    },
+    "./transforms/v4-to-v5/grid-props": {
+      "source": "./src/transforms/v4-to-v5/grid-props.ts",
+      "default": "./dist/transforms/v4-to-v5/grid-props.js"
+    },
+    "./v4-to-v5/grid-props": {
+      "source": "./src/commands/v4-to-v5/grid-props.ts",
+      "default": "./dist/commands/v4-to-v5/grid-props.js"
+    },
+    "./transforms/v4-to-v5/heading-props": {
+      "source": "./src/transforms/v4-to-v5/heading-props.ts",
+      "default": "./dist/transforms/v4-to-v5/heading-props.js"
+    },
+    "./v4-to-v5/heading-props": {
+      "source": "./src/commands/v4-to-v5/heading-props.ts",
+      "default": "./dist/commands/v4-to-v5/heading-props.js"
+    },
+    "./transforms/v4-to-v5/text-props": {
+      "source": "./src/transforms/v4-to-v5/text-props.ts",
+      "default": "./dist/transforms/v4-to-v5/text-props.js"
+    },
+    "./v4-to-v5/text-props": {
+      "source": "./src/commands/v4-to-v5/text-props.ts",
+      "default": "./dist/commands/v4-to-v5/text-props.js"
     },
     "./package.json": "./package.json"
   },
@@ -27,12 +87,19 @@
     "lint": "eslint .",
     "test": "vitest run"
   },
-  "browserslist": "extends @sanity/browserslist-config",
   "oclif": {
     "bin": "@sanity-labs/ui-codemod",
     "commands": "./dist/commands",
     "dirname": "ui-codemod",
-    "topicSeparator": " "
+    "topicSeparator": ":",
+    "topics": {
+      "v3-to-v5": {
+        "description": "Migrate from UI v3 to v5"
+      },
+      "v4-to-v5": {
+        "description": "Migrate from UI v4 to v5"
+      }
+    }
   },
   "dependencies": {
     "@oclif/core": "^4.10.5",

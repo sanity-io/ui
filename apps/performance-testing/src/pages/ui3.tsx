@@ -31,7 +31,15 @@ export default function Ui3() {
       <h2>{count} Boxes</h2>
       <Profiler id="Boxes" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Box key={i} padding={3} marginBottom={2} sizing="border">
+          <Box
+            key={i}
+            padding={3}
+            marginBottom={2}
+            height="100%"
+            style={{
+              boxSizing: 'border-box',
+            }}
+          >
             <span>Box content</span>
           </Box>
         ))}
