@@ -1,6 +1,6 @@
 {
-  "name": "@sanity-labs/design-system",
-  "version": "0.0.1-alpha.1",
+  "name": "@sanity-labs/ui-poc",
+  "version": "0.0.1-alpha.7",
   "description": "Sanity Design System POC",
   "keywords": [],
   "homepage": "https://github.com/sanity-labs/ui-poc#readme",
@@ -47,7 +47,7 @@
   },
   "browserslist": "extends @sanity/browserslist-config",
   "dependencies": {
-    "@sanity-labs/design-tokens": "0.0.2-alpha.0",
+    "@sanity-labs/design-tokens": "0.0.2-alpha.1",
     "classnames": "^2.5.1"
   },
   "devDependencies": {
