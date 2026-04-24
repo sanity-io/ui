@@ -1,6 +1,6 @@
 import {type API, type FileInfo} from 'jscodeshift'
 
-import type {AttributeMods} from '../../types/AnyExpression'
+import type {AttributeMods} from '../../types/AttributeMods'
 import type {BaseOptions} from '../../types/BaseOptions'
 import {addAttribute} from '../../utils/addAttribute'
 import {transformAttributes} from '../../utils/transformAttributes'

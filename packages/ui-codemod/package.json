@@ -63,6 +63,7 @@
     "lint": "eslint .",
     "test": "vitest run"
   },
+  "browserslist": "extends @sanity/browserslist-config",
   "oclif": {
     "bin": "@sanity-labs/ui-poc-codemod",
     "commands": "./dist/commands",
@@ -81,6 +82,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^9.2.3",
     "@sanity/tsconfig": "^1.0.0",
     "@types/node": "^25.5.2",
