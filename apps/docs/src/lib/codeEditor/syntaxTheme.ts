@@ -36,7 +36,7 @@ export function getSyntaxTheme(options: {scheme: ColorScheme}): Extension {
       {tag: t.bool, color: c.boolean},
       {tag: t.bracket, color: tinted.fg[2]},
       {tag: t.className, color: c.className},
-      {tag: t.comment, color: c.comment},
+      {tag: t.comment, opacity: 0.5},
       {tag: t.definition(t.typeName), color: c.function},
       {
         tag: [
