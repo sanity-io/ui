@@ -117,7 +117,7 @@ export const colorSpec: SanityColorSpec = {
           },
           fg: {
             0: ['800', '200'],
-            4: ['800 70%', '200 70%'],
+            4: ['800 70%', '300 75%'],
           },
         },
         'neutral': {
@@ -184,7 +184,7 @@ export const colorSpec: SanityColorSpec = {
         '*': {
           bg: {
             0: ['50', 'black'],
-            4: ['300 75%', '700 50%'],
+            4: ['300 75%', '700 80%'],
           },
           border: {
             0: ['200', '800 50%'],
@@ -221,7 +221,7 @@ export const colorSpec: SanityColorSpec = {
         '*': {
           bg: {
             0: ['white', '950'],
-            4: ['200', '700'],
+            4: ['300 60%', '700'],
           },
           border: {
             0: ['200', '700 50%'],
