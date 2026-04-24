@@ -43,7 +43,7 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   borderWidth: {type: 'remove'},
   flex: {
-    type: 'composite-mapped',
+    type: 'shorthand-mapped',
     composition: [
       {
         name: 'flexBasis',

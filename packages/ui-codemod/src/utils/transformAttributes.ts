@@ -2,10 +2,10 @@ import {type API, type ASTPath, type JSXOpeningElement} from 'jscodeshift'
 
 import {type AttributeMods} from '../types/AnyExpression'
 import {getAttributeExpression} from './getAttributeExpression'
-import {getCompositeAttributes} from './getCompositeAttributes'
 import {getMappingArray} from './getMappingArray'
 import {getMappingExpression} from './getMappingExpression'
 import {getMappingValue} from './getMappingValue'
+import {getShorthandAttributes} from './getShorthandAttributes'
 import {getStyleExpression} from './getStyleExpression'
 import {insertTodoWarning} from './insertTodoWarning'
 import {isValidStyleType} from './isValidStyleType'
@@ -85,16 +85,16 @@ export function transformAttributes(
       }
     }
 
-    if (mod.type === 'composite-mapped') {
+    if (mod.type === 'shorthand-mapped') {
       if (expr.type === 'ConditionalExpression' || expr.type === 'Identifier') {
         insertTodoWarning(j, path, todoWarning)
         continue
       }
 
-      const compositeAttrs = getCompositeAttributes(j, expr, mod)
+      const shorthandAttrs = getShorthandAttributes(j, expr, mod)
 
-      if (compositeAttrs.length) {
-        attrs.splice(i + 1, 0, ...compositeAttrs)
+      if (shorthandAttrs.length) {
+        attrs.splice(i + 1, 0, ...shorthandAttrs)
         removeIdxs.push(i)
       } else {
         insertTodoWarning(j, path, todoWarning)

@@ -17,6 +17,6 @@ export type AttributeMod =
   | {type: 'style-only'; style: string}
   | {type: 'style-mapped'; style: string; mapping: AttributeMapping}
   | {type: 'mapped-only'; mapping: AttributeMapping}
-  | {type: 'composite-mapped'; composition: {name: string; mapping: AttributeMapping}[]}
+  | {type: 'shorthand-mapped'; props: {name: string; mapping: AttributeMapping}[]}
 
 export type AttributeMods = Record<string, AttributeMod>

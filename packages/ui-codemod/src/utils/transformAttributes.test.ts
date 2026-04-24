@@ -13,8 +13,8 @@ const MODS: AttributeMods = {
   },
   borderWidth: {type: 'remove'},
   flex: {
-    type: 'composite-mapped',
-    composition: [
+    type: 'shorthand-mapped',
+    props: [
       {
         name: 'flexBasis',
         mapping: {
@@ -211,7 +211,7 @@ defineInlineTest(
   `
   <div flexBasis="auto" flexGrow="1" flexShrink="1" />
   `,
-  'splits up composite props and updates mapped prop value',
+  'splits up shorthand props and updates mapped prop value',
 )
 
 defineInlineTest(
@@ -223,7 +223,7 @@ defineInlineTest(
   `
   <div flexBasis={["0%", "auto"]} flexGrow={["2", "1"]} flexShrink={["1", "1"]} />
   `,
-  'splits up composite props and updates responsive mapped prop value',
+  'splits up shorthand props and updates responsive mapped prop value',
 )
 
 defineInlineTest(
