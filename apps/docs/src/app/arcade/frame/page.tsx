@@ -6,7 +6,7 @@ import * as v3_theme from '@sanity/ui3/theme'
 import * as v4 from '@sanity/ui'
 import * as v4_css from '@sanity/ui'
 import * as v4_theme from '@sanity/ui'
-import {Box, Card, Code, ErrorBoundary, Text} from '@sanity/ui'
+import {Card, Code, ErrorBoundary, Text} from '@sanity/ui'
 import {useSearchParams} from 'next/navigation'
 import React, {ReactElement, startTransition, useCallback, useEffect, useState} from 'react'
 
@@ -15,7 +15,7 @@ import {isRecord} from '@/lib/common'
 import {evalComponent, EvalComponentResult, ready as readyCheck} from '@/lib/ide'
 
 export default function ArcadeFramePage(): ReactElement {
-  const {version: defaultVersion} = useApp()
+  const {colorScheme, version: defaultVersion} = useApp()
   const searchParams = useSearchParams()
 
   // Get the version from the query params
@@ -116,40 +116,26 @@ export default function ArcadeFramePage(): ReactElement {
     <>
       <script async src="https://unpkg.com/@babel/standalone/babel.min.js" />
 
-      {evalResult?.type === 'success' &&
-        !renderError &&
-        (version === 'v3' ? (
-          <ErrorBoundary onCatch={handleCatch}>
-            {version === 'v3' ? <V3Provider>{evalResult.node}</V3Provider> : evalResult.node}
-          </ErrorBoundary>
-        ) : (
-          <Box height="fill" key={`${hookCode};${jsxCode}`}>
-            <ErrorBoundary onCatch={handleCatch}>
-              {version === 'v3' ? <V3Provider>{evalResult.node}</V3Provider> : evalResult.node}
-            </ErrorBoundary>
-          </Box>
-        ))}
+      {evalResult?.type === 'success' && !renderError && (
+        <ErrorBoundary key={`${hookCode};${jsxCode}`} onCatch={handleCatch}>
+          {version === 'v3' ? (
+            <V3Provider colorScheme={colorScheme}>{evalResult.node}</V3Provider>
+          ) : (
+            <Card height="fill" tone="default">
+              {evalResult.node}
+            </Card>
+          )}
+        </ErrorBoundary>
+      )}
 
       {errorMessage && (
-        <Card
-          padding={4}
-          overflow="auto"
-          sizing="border"
-          style={{minHeight: '100%'}}
-          tone="critical"
-        >
+        <Card padding={4} overflow="auto" sizing="border" height="fill" tone="critical">
           <Code size={1}>{errorMessage}</Code>
         </Card>
       )}
 
       {renderErrorMessage && (
-        <Card
-          padding={4}
-          overflow="auto"
-          sizing="border"
-          style={{minHeight: '100%'}}
-          tone="critical"
-        >
+        <Card height="fill" padding={4} overflow="auto" sizing="border" tone="critical">
           {!windowError && <Text size={1}>An error occured while rendering</Text>}
           {windowError && <Text size={1}>{windowError.message}</Text>}
         </Card>
@@ -158,11 +144,22 @@ export default function ArcadeFramePage(): ReactElement {
   )
 }
 
-function V3Provider({children}: {children: React.ReactNode}): ReactElement {
+function V3Provider({
+  children,
+  colorScheme,
+}: {
+  children: React.ReactNode
+  colorScheme: 'light' | 'dark' | 'system'
+}): ReactElement {
+  const prefersDark = v3.usePrefersDark(() => colorScheme === 'dark')
+
   return (
-    <v3.ThemeProvider theme={v3.studioTheme}>
+    <v3.ThemeProvider
+      scheme={colorScheme === 'system' ? (prefersDark ? 'dark' : 'light') : colorScheme}
+      theme={v3.studioTheme}
+    >
       <v3.ToastProvider>
-        <v3.Card tone="default" style={{minHeight: '100%'}}>
+        <v3.Card height="fill" tone="default">
           {children}
         </v3.Card>
       </v3.ToastProvider>
