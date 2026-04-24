@@ -10,57 +10,83 @@ export const selectableTokens = _defineTokens({
       $type: 'color',
 
       enabled: {
-        bg: _colorAlias('{color.tinted.bg.0}'),
-        border: _colorAlias('{color.tinted.border.2}'),
-        fg: _colorAlias('{color.tinted.fg.0}'),
+        bg: _colorAlias('{color.tinted.bg.0}', {scopes: ['fill/frame', 'fill/shape']}),
+        border: _colorAlias('{color.tinted.border.2}', {scopes: ['stroke/color']}),
+        fg: _colorAlias('{color.tinted.fg.0}', {
+          scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+        }),
         muted: {
-          bg: _colorAlias('{color.tinted.bg.1}'),
-          border: _colorAlias('{color.tinted.border.3}'),
-          fg: _colorAlias('{color.tinted.fg.4}'),
+          bg: _colorAlias('{color.tinted.bg.1}', {scopes: ['fill/frame', 'fill/shape']}),
+          border: _colorAlias('{color.tinted.border.3}', {scopes: ['stroke/color']}),
+          fg: _colorAlias('{color.tinted.fg.4}', {
+            scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+          }),
         },
       },
 
       hovered: {
-        bg: _colorAlias('{color.tinted.bg.1}'),
-        border: _colorAlias('{color.tinted.border.3}'),
-        fg: _colorAlias('{color.tinted.fg.0}'),
+        bg: _colorAlias('{color.tinted.bg.1}', {scopes: ['fill/frame', 'fill/shape']}),
+        border: _colorAlias('{color.tinted.border.3}', {scopes: ['stroke/color']}),
+        fg: _colorAlias('{color.tinted.fg.0}', {
+          scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+        }),
         muted: {
-          bg: _colorAlias('{color.tinted.bg.2}'),
-          border: _colorAlias('{color.tinted.border.4}'),
-          fg: _colorAlias('{color.tinted.fg.4}'),
+          bg: _colorAlias('{color.tinted.bg.2}', {scopes: ['fill/frame', 'fill/shape']}),
+          border: _colorAlias('{color.tinted.border.4}', {scopes: ['stroke/color']}),
+          fg: _colorAlias('{color.tinted.fg.4}', {
+            scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+          }),
         },
       },
 
       pressed: {
-        bg: _colorAlias('{color.tinted.bg.2}'),
-        border: _colorAlias('{color.tinted.border.4}'),
-        fg: _colorAlias('{color.tinted.fg.0}'),
+        bg: _colorAlias('{color.tinted.bg.2}', {scopes: ['fill/frame', 'fill/shape']}),
+        border: _colorAlias('{color.tinted.border.4}', {scopes: ['stroke/color']}),
+        fg: _colorAlias('{color.tinted.fg.0}', {
+          scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+        }),
         muted: {
-          bg: _colorAlias('{color.tinted.bg.3}'),
-          border: _colorAlias('{color.tinted.border.4}'),
-          fg: _colorAlias('{color.tinted.fg.4}'),
+          bg: _colorAlias('{color.tinted.bg.3}', {scopes: ['fill/frame', 'fill/shape']}),
+          border: _colorAlias('{color.tinted.border.4}', {scopes: ['stroke/color']}),
+          fg: _colorAlias('{color.tinted.fg.4}', {
+            scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+          }),
         },
       },
 
       selected: {
-        bg: _colorAlias('{color._cardTone.solid.primary.bg.0}'),
-        border: _colorAlias('{color._cardTone.solid.primary.border.2}'),
-        fg: _colorAlias('{color._cardTone.solid.primary.fg.0}'),
+        bg: _colorAlias('{color._cardTone.solid.primary.bg.0}', {
+          scopes: ['fill/frame', 'fill/shape'],
+        }),
+        border: _colorAlias('{color._cardTone.solid.primary.border.2}', {scopes: ['stroke/color']}),
+        fg: _colorAlias('{color._cardTone.solid.primary.fg.0}', {
+          scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+        }),
         muted: {
-          bg: _colorAlias('{color._cardTone.solid.primary.bg.1}'),
-          border: _colorAlias('{color._cardTone.solid.primary.border.1}'),
-          fg: _colorAlias('{color._cardTone.solid.primary.fg.4}'),
+          bg: _colorAlias('{color._cardTone.solid.primary.bg.1}', {
+            scopes: ['fill/frame', 'fill/shape'],
+          }),
+          border: _colorAlias('{color._cardTone.solid.primary.border.1}', {
+            scopes: ['stroke/color'],
+          }),
+          fg: _colorAlias('{color._cardTone.solid.primary.fg.4}', {
+            scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+          }),
         },
       },
 
       disabled: {
-        bg: _colorAlias('{color.tinted.bg.0}'),
-        border: _colorAlias('{color.tinted.border.0}'),
-        fg: _colorAlias('{color.tinted.border.3}'),
+        bg: _colorAlias('{color.tinted.bg.0}', {scopes: ['fill/frame', 'fill/shape']}),
+        border: _colorAlias('{color.tinted.border.0}', {scopes: ['stroke/color']}),
+        fg: _colorAlias('{color.tinted.border.3}', {
+          scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+        }),
         muted: {
-          bg: _colorAlias('{color.tinted.bg.1}'),
-          border: _colorAlias('{color.tinted.bg.0}'),
-          fg: _colorAlias('{color.tinted.border.2}'),
+          bg: _colorAlias('{color.tinted.bg.1}', {scopes: ['fill/frame', 'fill/shape']}),
+          border: _colorAlias('{color.tinted.bg.0}', {scopes: ['stroke/color']}),
+          fg: _colorAlias('{color.tinted.border.2}', {
+            scopes: ['fill/text', 'fill/shape', 'stroke/color'],
+          }),
         },
       },
     }),
