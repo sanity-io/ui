@@ -19,7 +19,6 @@ const MODS: AttributeMods = {
         name: 'flexBasis',
         mapping: {
           auto: 'auto',
-          1: undefined,
         },
       },
       {
@@ -33,7 +32,6 @@ const MODS: AttributeMods = {
         name: 'flexShrink',
         mapping: {
           auto: '1',
-          1: undefined,
         },
       },
     ],
