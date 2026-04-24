@@ -18,7 +18,7 @@ export function getCompositeAttributes(
 
   if (expr.type === 'ArrayExpression') {
     for (const composite of mod.composition) {
-      const styleArray = getMappingArray(j, expr, composite.mapping, true)
+      const styleArray = getMappingArray(j, expr, composite.mapping)
 
       if (!styleArray) {
         continue

@@ -8,7 +8,6 @@ export function getMappingArray(
   j: API['jscodeshift'],
   arr: AnyExpression,
   mapping: AttributeMapping,
-  allowUndefined?: boolean,
 ): ArrayExpression | null {
   if (arr.type !== 'ArrayExpression') {
     return null
@@ -24,7 +23,7 @@ export function getMappingArray(
 
     const mappingValue = getMappingValue(mapping, el)
 
-    if (!mappingValue && !allowUndefined) {
+    if (!mappingValue) {
       return null
     }
 

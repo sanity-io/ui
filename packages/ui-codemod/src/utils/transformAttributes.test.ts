@@ -19,6 +19,8 @@ const MODS: AttributeMods = {
         name: 'flexBasis',
         mapping: {
           auto: 'auto',
+          1: '0%',
+          2: '0%',
         },
       },
       {
@@ -26,12 +28,15 @@ const MODS: AttributeMods = {
         mapping: {
           auto: '1',
           1: '1',
+          2: '2',
         },
       },
       {
         name: 'flexShrink',
         mapping: {
           auto: '1',
+          1: '1',
+          2: '1',
         },
       },
     ],
@@ -216,7 +221,7 @@ defineInlineTest(
   <div flex="1" />
   `,
   `
-  <div flexGrow="1" />
+  <div flexBasis="0%" flexGrow="1" flexShrink="1" />
   `,
   'splits up composite props and ignores undefined mapped prop values',
 )
@@ -225,13 +230,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <div flex={["1", "auto"]} />
+  <div flex={["2", "auto"]} />
   `,
   `
-  <div
-    flexBasis={[undefined, "auto"]}
-    flexGrow={["1", "1"]}
-    flexShrink={[undefined, "1"]} />
+  <div flexBasis={["0%", "auto"]} flexGrow={["2", "1"]} flexShrink={["1", "1"]} />
   `,
   'splits up composite props and updates responsive mapped prop value',
 )
