@@ -12,6 +12,35 @@ const MODS: AttributeMods = {
     },
   },
   borderWidth: {type: 'remove'},
+  flex: {
+    type: 'shorthand-mapped',
+    props: [
+      {
+        name: 'flexBasis',
+        mapping: {
+          auto: 'auto',
+          1: '0%',
+          2: '0%',
+        },
+      },
+      {
+        name: 'flexGrow',
+        mapping: {
+          auto: '1',
+          1: '1',
+          2: '2',
+        },
+      },
+      {
+        name: 'flexShrink',
+        mapping: {
+          auto: '1',
+          1: '1',
+          2: '1',
+        },
+      },
+    ],
+  },
   insetTop: {
     type: 'rename-only',
     name: 'top',
@@ -171,6 +200,56 @@ defineInlineTest(
     }} />
   `,
   'moves prop to style and preserves existing styles',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div flex="auto" />
+  `,
+  `
+  <div flexBasis="auto" flexGrow="1" flexShrink="1" />
+  `,
+  'splits up shorthand props and updates mapped prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div flex={["2", "auto"]} />
+  `,
+  `
+  <div flexBasis={["0%", "auto"]} flexGrow={["2", "1"]} flexShrink={["1", "1"]} />
+  `,
+  'splits up shorthand props and updates responsive mapped prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div width={3} />
+  `,
+  `
+  // TODO: ${TODO_WARNING}
+  <div width={3} />
+  `,
+  'warns if mapped prop value does not match mappings',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div width={[2, 3]} />
+  `,
+  `
+  // TODO: ${TODO_WARNING}
+  <div width={[2, 3]} />
+  `,
+  'warns if responsive mapped prop value does not match mappings',
 )
 
 defineInlineTest(

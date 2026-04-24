@@ -5,6 +5,7 @@ import {getAttributeExpression} from './getAttributeExpression'
 import {getMappingArray} from './getMappingArray'
 import {getMappingExpression} from './getMappingExpression'
 import {getMappingValue} from './getMappingValue'
+import {getShorthandAttributes} from './getShorthandAttributes'
 import {getStyleExpression} from './getStyleExpression'
 import {insertTodoWarning} from './insertTodoWarning'
 import {isValidStyleType} from './isValidStyleType'
@@ -78,6 +79,22 @@ export function transformAttributes(
       const merged = mergeStyle(j, attrs, mod.style, getMappingExpression(j, styleValue))
 
       if (merged) {
+        removeIdxs.push(i)
+      } else {
+        insertTodoWarning(j, path, todoWarning)
+      }
+    }
+
+    if (mod.type === 'shorthand-mapped') {
+      if (expr.type === 'ConditionalExpression' || expr.type === 'Identifier') {
+        insertTodoWarning(j, path, todoWarning)
+        continue
+      }
+
+      const shorthandAttrs = getShorthandAttributes(j, expr, mod)
+
+      if (shorthandAttrs.length) {
+        attrs.splice(i + 1, 0, ...shorthandAttrs)
         removeIdxs.push(i)
       } else {
         insertTodoWarning(j, path, todoWarning)
