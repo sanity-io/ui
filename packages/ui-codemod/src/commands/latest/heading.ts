@@ -4,13 +4,13 @@ import {BaseCommand} from '../../baseCommand'
 import {getTransformPath} from '../../utils/getTransformPath'
 
 /** @public */
-export default class BoxProps extends BaseCommand<typeof BoxProps> {
-  static override description = 'transform Box component props'
+export default class Heading extends BaseCommand<typeof Heading> {
+  static override description = 'Transform Heading component'
 
   public async run(): Promise<void> {
-    const {flags} = await this.parse(BoxProps)
+    const {flags} = await this.parse(Heading)
     const {paths, ...restFlags} = flags
-    const transformPath = getTransformPath(this.config.root, 'v3-to-v5', 'box-props')
+    const transformPath = getTransformPath(this.config.root, 'latest', 'heading')
 
     await run(transformPath, paths, {
       babel: true,

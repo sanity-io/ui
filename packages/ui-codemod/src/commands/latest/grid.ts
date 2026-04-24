@@ -4,13 +4,13 @@ import {BaseCommand} from '../../baseCommand'
 import {getTransformPath} from '../../utils/getTransformPath'
 
 /** @public */
-export default class HeadingProps extends BaseCommand<typeof HeadingProps> {
-  static override description = 'transform Heading component props'
+export default class Grid extends BaseCommand<typeof Grid> {
+  static override description = 'Transform Grid component'
 
   public async run(): Promise<void> {
-    const {flags} = await this.parse(HeadingProps)
+    const {flags} = await this.parse(Grid)
     const {paths, ...restFlags} = flags
-    const transformPath = getTransformPath(this.config.root, 'v4-to-v5', 'heading-props')
+    const transformPath = getTransformPath(this.config.root, 'latest', 'grid')
 
     await run(transformPath, paths, {
       babel: true,

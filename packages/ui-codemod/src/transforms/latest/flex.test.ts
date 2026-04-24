@@ -1,5 +1,5 @@
 import {defineInlineTest} from '../../utils/testUtils'
-import transform from './flex-props'
+import transform from './flex'
 
 defineInlineTest(
   transform,

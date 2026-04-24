@@ -8,69 +8,45 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    "./transforms/v3-to-v5/box-props": {
-      "source": "./src/transforms/v3-to-v5/box-props.ts",
-      "default": "./dist/transforms/v3-to-v5/box-props.js"
+    "./transforms/latest/box": {
+      "source": "./src/transforms/latest/box.ts",
+      "default": "./dist/transforms/latest/box.js"
     },
-    "./v3-to-v5/box-props": {
-      "source": "./src/commands/v3-to-v5/box-props.ts",
-      "default": "./dist/commands/v3-to-v5/box-props.js"
+    "./latest/box": {
+      "source": "./src/commands/latest/box.ts",
+      "default": "./dist/commands/latest/box.js"
     },
-    "./transforms/v3-to-v5/flex-props": {
-      "source": "./src/transforms/v3-to-v5/flex-props.ts",
-      "default": "./dist/transforms/v3-to-v5/flex-props.js"
+    "./transforms/latest/flex": {
+      "source": "./src/transforms/latest/flex.ts",
+      "default": "./dist/transforms/latest/flex.js"
     },
-    "./v3-to-v5/flex-props": {
-      "source": "./src/commands/v3-to-v5/flex-props.ts",
-      "default": "./dist/commands/v3-to-v5/flex-props.js"
+    "./latest/flex": {
+      "source": "./src/commands/latest/flex.ts",
+      "default": "./dist/commands/latest/flex.js"
     },
-    "./transforms/v3-to-v5/grid-props": {
-      "source": "./src/transforms/v3-to-v5/grid-props.ts",
-      "default": "./dist/transforms/v3-to-v5/grid-props.js"
+    "./transforms/latest/grid": {
+      "source": "./src/transforms/latest/grid.ts",
+      "default": "./dist/transforms/latest/grid.js"
     },
-    "./v3-to-v5/grid-props": {
-      "source": "./src/commands/v3-to-v5/grid-props.ts",
-      "default": "./dist/commands/v3-to-v5/grid-props.js"
+    "./latest/grid": {
+      "source": "./src/commands/latest/grid.ts",
+      "default": "./dist/commands/latest/grid.js"
     },
-    "./transforms/v4-to-v5/box-props": {
-      "source": "./src/transforms/v4-to-v5/box-props.ts",
-      "default": "./dist/transforms/v4-to-v5/box-props.js"
+    "./transforms/latest/heading": {
+      "source": "./src/transforms/latest/heading.ts",
+      "default": "./dist/transforms/latest/heading.js"
     },
-    "./v4-to-v5/box-props": {
-      "source": "./src/commands/v4-to-v5/box-props.ts",
-      "default": "./dist/commands/v4-to-v5/box-props.js"
+    "./latest/heading": {
+      "source": "./src/commands/latest/heading.ts",
+      "default": "./dist/commands/latest/heading.js"
     },
-    "./transforms/v4-to-v5/flex-props": {
-      "source": "./src/transforms/v4-to-v5/flex-props.ts",
-      "default": "./dist/transforms/v4-to-v5/flex-props.js"
+    "./transforms/latest/text": {
+      "source": "./src/transforms/latest/text.ts",
+      "default": "./dist/transforms/latest/text.js"
     },
-    "./v4-to-v5/flex-props": {
-      "source": "./src/commands/v4-to-v5/flex-props.ts",
-      "default": "./dist/commands/v4-to-v5/flex-props.js"
-    },
-    "./transforms/v4-to-v5/grid-props": {
-      "source": "./src/transforms/v4-to-v5/grid-props.ts",
-      "default": "./dist/transforms/v4-to-v5/grid-props.js"
-    },
-    "./v4-to-v5/grid-props": {
-      "source": "./src/commands/v4-to-v5/grid-props.ts",
-      "default": "./dist/commands/v4-to-v5/grid-props.js"
-    },
-    "./transforms/v4-to-v5/heading-props": {
-      "source": "./src/transforms/v4-to-v5/heading-props.ts",
-      "default": "./dist/transforms/v4-to-v5/heading-props.js"
-    },
-    "./v4-to-v5/heading-props": {
-      "source": "./src/commands/v4-to-v5/heading-props.ts",
-      "default": "./dist/commands/v4-to-v5/heading-props.js"
-    },
-    "./transforms/v4-to-v5/text-props": {
-      "source": "./src/transforms/v4-to-v5/text-props.ts",
-      "default": "./dist/transforms/v4-to-v5/text-props.js"
-    },
-    "./v4-to-v5/text-props": {
-      "source": "./src/commands/v4-to-v5/text-props.ts",
-      "default": "./dist/commands/v4-to-v5/text-props.js"
+    "./latest/text": {
+      "source": "./src/commands/latest/text.ts",
+      "default": "./dist/commands/latest/text.js"
     },
     "./package.json": "./package.json"
   },
@@ -87,17 +63,15 @@
     "lint": "eslint .",
     "test": "vitest run"
   },
+  "browserslist": "extends @sanity/browserslist-config",
   "oclif": {
     "bin": "@sanity-labs/ui-poc-codemod",
     "commands": "./dist/commands",
     "dirname": "ui-poc-codemod",
     "topicSeparator": ":",
     "topics": {
-      "v3-to-v5": {
-        "description": "Migrate from UI v3 to v5"
-      },
-      "v4-to-v5": {
-        "description": "Migrate from UI v4 to v5"
+      "latest": {
+        "description": "Migrate to latest version of UI"
       }
     }
   },
@@ -108,6 +82,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^9.2.3",
     "@sanity/tsconfig": "^1.0.0",
     "@types/node": "^25.5.2",

@@ -1,6 +1,6 @@
 import {type API, type ASTPath, type JSXOpeningElement} from 'jscodeshift'
 
-import {type AttributeMods} from '../types/AnyExpression'
+import {type AttributeMods} from '../types/AttributeMods'
 import {getAttributeExpression} from './getAttributeExpression'
 import {getMappingArray} from './getMappingArray'
 import {getMappingExpression} from './getMappingExpression'
