@@ -1,4 +1,5 @@
 import type {
+  _DTCGStringToken,
   SanityFontFamilyToken,
   SanityFontWeightToken,
   SanityTypographyToken,
@@ -21,6 +22,9 @@ export async function createFontStyleStyle(
 
   // NOTE: Font feature settings are not supported yet by Figma API
   // const featureSettingsToken = fontTokens['featureSettings'] as _DTCGStringToken
+
+  const textTransformToken = fontTokens['textTransform'] as _DTCGStringToken
+  const textTransform = textTransformToken.$value || 'none'
 
   const scaleTokens = fontTokens['scale'] as Record<string, SanityTypographyToken>
   const weightTokens = fontTokens['weight'] as Record<string, SanityFontWeightToken>
@@ -50,6 +54,7 @@ export async function createFontStyleStyle(
         lineHeight,
         letterSpacing,
         textBoxEdge,
+        textTransform,
       })
       const s = await getOrCreateTextStyle(name)
       if (!disableCache && s.getPluginData('sanity-ui-tokens') === cacheKey) {
@@ -69,6 +74,11 @@ export async function createFontStyleStyle(
         value: typeof lineHeight === 'string' ? 1 : lineHeight.value,
       }
       s.leadingTrim = textBoxEdge === 'cap-height' ? 'CAP_HEIGHT' : 'NONE'
+      if (textTransform === 'uppercase') {
+        s.textCase = 'UPPER'
+      } else {
+        s.textCase = 'ORIGINAL'
+      }
       s.setPluginData('sanity-ui-tokens', cacheKey)
     }
   }
