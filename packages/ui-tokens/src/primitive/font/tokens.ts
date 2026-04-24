@@ -91,6 +91,10 @@ export const fontTokens = _defineTokens({
           customIconSize: 28,
         }),
       }) satisfies TokenScale<FontCodeSize, 'typography'>,
+      textTransform: _defineToken({
+        $type: 'string',
+        $value: 'none',
+      }),
       weight: _defineTokenGroup({
         $type: 'fontWeight',
         regular: {
@@ -237,6 +241,10 @@ export const fontTokens = _defineTokens({
           customIconSize: 140,
         }),
       }) satisfies TokenScale<FontHeadingSize, 'typography'>,
+      textTransform: _defineToken({
+        $type: 'string',
+        $value: 'none',
+      }),
       weight: _defineTokenGroup({
         $type: 'fontWeight',
         regular: {
@@ -343,6 +351,10 @@ export const fontTokens = _defineTokens({
           customIconSize: 18,
         }),
       }) satisfies TokenScale<FontLabelSize, 'typography'>,
+      textTransform: _defineToken({
+        $type: 'string',
+        $value: 'uppercase',
+      }),
       weight: _defineTokenGroup({
         $type: 'fontWeight',
         regular: {
@@ -439,6 +451,10 @@ export const fontTokens = _defineTokens({
           customIconSize: 28,
         }),
       }) satisfies TokenScale<FontTextSize, 'typography'>,
+      textTransform: _defineToken({
+        $type: 'string',
+        $value: 'none',
+      }),
       weight: _defineTokenGroup({
         $type: 'fontWeight',
         regular: {
