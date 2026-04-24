@@ -8,60 +8,59 @@ export const selectableTokens = _defineTokens({
   selectable: {
     color: _defineTokenGroup({
       $type: 'color',
-      state: {
-        enabled: {
-          bg: _colorAlias('{color.tinted.bg.0}'),
-          border: _colorAlias('{color.tinted.border.2}'),
-          fg: _colorAlias('{color.tinted.fg.0}'),
-          muted: {
-            bg: _colorAlias('{color.tinted.bg.1}'),
-            border: _colorAlias('{color.tinted.border.3}'),
-            fg: _colorAlias('{color.tinted.fg.4}'),
-          },
-        },
 
-        hovered: {
+      enabled: {
+        bg: _colorAlias('{color.tinted.bg.0}'),
+        border: _colorAlias('{color.tinted.border.2}'),
+        fg: _colorAlias('{color.tinted.fg.0}'),
+        muted: {
           bg: _colorAlias('{color.tinted.bg.1}'),
           border: _colorAlias('{color.tinted.border.3}'),
-          fg: _colorAlias('{color.tinted.fg.0}'),
-          muted: {
-            bg: _colorAlias('{color.tinted.bg.2}'),
-            border: _colorAlias('{color.tinted.border.4}'),
-            fg: _colorAlias('{color.tinted.fg.4}'),
-          },
+          fg: _colorAlias('{color.tinted.fg.4}'),
         },
+      },
 
-        pressed: {
+      hovered: {
+        bg: _colorAlias('{color.tinted.bg.1}'),
+        border: _colorAlias('{color.tinted.border.3}'),
+        fg: _colorAlias('{color.tinted.fg.0}'),
+        muted: {
           bg: _colorAlias('{color.tinted.bg.2}'),
           border: _colorAlias('{color.tinted.border.4}'),
-          fg: _colorAlias('{color.tinted.fg.0}'),
-          muted: {
-            bg: _colorAlias('{color.tinted.bg.3}'),
-            border: _colorAlias('{color.tinted.border.4}'),
-            fg: _colorAlias('{color.tinted.fg.4}'),
-          },
+          fg: _colorAlias('{color.tinted.fg.4}'),
         },
+      },
 
-        selected: {
-          bg: _colorAlias('{color._cardTone.solid.primary.bg.0}'),
-          border: _colorAlias('{color._cardTone.solid.primary.border.2}'),
-          fg: _colorAlias('{color._cardTone.solid.primary.fg.0}'),
-          muted: {
-            bg: _colorAlias('{color._cardTone.solid.primary.bg.1}'),
-            border: _colorAlias('{color._cardTone.solid.primary.border.1}'),
-            fg: _colorAlias('{color._cardTone.solid.primary.fg.4}'),
-          },
+      pressed: {
+        bg: _colorAlias('{color.tinted.bg.2}'),
+        border: _colorAlias('{color.tinted.border.4}'),
+        fg: _colorAlias('{color.tinted.fg.0}'),
+        muted: {
+          bg: _colorAlias('{color.tinted.bg.3}'),
+          border: _colorAlias('{color.tinted.border.4}'),
+          fg: _colorAlias('{color.tinted.fg.4}'),
         },
+      },
 
-        disabled: {
-          bg: _colorAlias('{color.tinted.bg.0}'),
-          border: _colorAlias('{color.tinted.border.0}'),
-          fg: _colorAlias('{color.tinted.border.3}'),
-          muted: {
-            bg: _colorAlias('{color.tinted.bg.1}'),
-            border: _colorAlias('{color.tinted.bg.0}'),
-            fg: _colorAlias('{color.tinted.border.2}'),
-          },
+      selected: {
+        bg: _colorAlias('{color._cardTone.solid.primary.bg.0}'),
+        border: _colorAlias('{color._cardTone.solid.primary.border.2}'),
+        fg: _colorAlias('{color._cardTone.solid.primary.fg.0}'),
+        muted: {
+          bg: _colorAlias('{color._cardTone.solid.primary.bg.1}'),
+          border: _colorAlias('{color._cardTone.solid.primary.border.1}'),
+          fg: _colorAlias('{color._cardTone.solid.primary.fg.4}'),
+        },
+      },
+
+      disabled: {
+        bg: _colorAlias('{color.tinted.bg.0}'),
+        border: _colorAlias('{color.tinted.border.0}'),
+        fg: _colorAlias('{color.tinted.border.3}'),
+        muted: {
+          bg: _colorAlias('{color.tinted.bg.1}'),
+          border: _colorAlias('{color.tinted.bg.0}'),
+          fg: _colorAlias('{color.tinted.border.2}'),
         },
       },
     }),

@@ -44,7 +44,44 @@ type TokenVariantLayer<
   tokenSets: TokenSets
 }
 
-type LayerDefinition = TokenLayer | TokenVariantLayer
+/**
+ * A token layer that projects state-specific values as Figma modes.
+ *
+ * States are inferred from the token structure: every non-$ key at the
+ * statePath is treated as a Figma state mode.
+ *
+ * Object key order at the statePath determines Figma mode order.
+ *
+ * @example
+ * ```ts
+ * stateLayer({
+ *   name: 'selectable',
+ *   title: 'Selectable',
+ *   tokenSet: selectableTokens,
+ *   statePath: ['selectable', 'color'],
+ * })
+ * ```
+ *
+ * Given tokens at `selectable.color` like:
+ * ```json
+ * {
+ *   "enabled": { "bg": "...", "fg": "..." },
+ *   "hovered": { "bg": "...", "fg": "..." }
+ * }
+ * ```
+ *
+ * Will create Figma modes: enabled, hovered
+ */
+type TokenStateLayer<TokenSet = object> = {
+  kind: 'state'
+  title: string
+  name: string
+  tokenSet: TokenSet
+  /** Path to the object whose children represent states. Must be non-empty. */
+  statePath: readonly string[]
+}
+
+type LayerDefinition = TokenLayer | TokenVariantLayer | TokenStateLayer
 
 type TokenSystem = {
   layers: LayerDefinition[]
@@ -61,6 +98,25 @@ function variantLayer<
   layer: Omit<TokenVariantLayer<Variants, TokenSets>, 'kind'>,
 ): TokenVariantLayer<Variants, TokenSets> {
   return {kind: 'variant', ...layer}
+}
+
+function stateLayer<TokenSet extends object = object>(config: {
+  name: string
+  title: string
+  tokenSet: TokenSet
+  statePath: readonly string[]
+}): TokenStateLayer<TokenSet> {
+  if (config.statePath.length === 0) {
+    throw new Error(`State layer "${config.name}" must define a non-empty statePath`)
+  }
+
+  return {
+    kind: 'state',
+    name: config.name,
+    title: config.title,
+    tokenSet: config.tokenSet,
+    statePath: config.statePath,
+  }
 }
 
 /** @public */
@@ -171,10 +227,11 @@ export const tokenSystem: TokenSystem = {
       title: 'Input',
       tokenSet: inputTokens,
     }),
-    layer({
+    stateLayer({
       name: 'selectable',
       title: 'Selectable',
       tokenSet: selectableTokens,
+      statePath: ['selectable', 'color'],
     }),
   ],
 }
