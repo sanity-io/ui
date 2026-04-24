@@ -3,6 +3,22 @@ import transform from './box-props'
 
 defineInlineTest(
   transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
+  import {Box} from '@legacy/ui'
+
+  <Box />
+  `,
+  `
+  import {Box} from "@sanity/ui"
+
+  <Box />
+  `,
+  'updates Box import path based on fromPackage and toPackage',
+)
+
+defineInlineTest(
+  transform,
   {},
   `
   <Box flex={1} />
