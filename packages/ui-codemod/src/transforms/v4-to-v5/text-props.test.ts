@@ -3,6 +3,22 @@ import transform from './text-props'
 
 defineInlineTest(
   transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
+  import {Text} from '@legacy/ui'
+
+  <Text />
+  `,
+  `
+  import {Text} from "@sanity/ui"
+
+  <Text trim={true} />
+  `,
+  'updates Text import path based on fromPackage and toPackage',
+)
+
+defineInlineTest(
+  transform,
   {},
   `
   <Text/>

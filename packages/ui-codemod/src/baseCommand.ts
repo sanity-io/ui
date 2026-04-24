@@ -1,7 +1,5 @@
 import {Command, Flags, Interfaces} from '@oclif/core'
 
-import {DEFAULT_UI_PACKAGE} from './utils/transformImport'
-
 export type Flags<T extends typeof Command> = Interfaces.InferredFlags<
   (typeof BaseCommand)['baseFlags'] & T['flags']
 >
@@ -17,11 +15,9 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
     }),
     fromPackage: Flags.string({
       description: 'Original package name to transform',
-      default: DEFAULT_UI_PACKAGE,
     }),
     toPackage: Flags.string({
       description: 'New package name',
-      default: DEFAULT_UI_PACKAGE,
     }),
     dry: Flags.boolean({
       description: 'Dry run without changing files',

@@ -3,6 +3,22 @@ import transform from './flex-props'
 
 defineInlineTest(
   transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
+  import {Flex} from '@legacy/ui'
+
+  <Flex />
+  `,
+  `
+  import {Flex} from "@sanity/ui"
+
+  <Flex />
+  `,
+  'updates Flex import path based on fromPackage and toPackage',
+)
+
+defineInlineTest(
+  transform,
   {},
   `
   <Flex

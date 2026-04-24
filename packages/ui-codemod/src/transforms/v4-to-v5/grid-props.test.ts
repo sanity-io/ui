@@ -3,6 +3,22 @@ import transform from './grid-props'
 
 defineInlineTest(
   transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
+  import {Grid} from '@legacy/ui'
+
+  <Grid />
+  `,
+  `
+  import {Grid} from "@sanity/ui"
+
+  <Grid />
+  `,
+  'updates Grid import path based on fromPackage and toPackage',
+)
+
+defineInlineTest(
+  transform,
   {},
   `
   <Grid
