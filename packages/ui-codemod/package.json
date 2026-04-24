@@ -8,45 +8,45 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    "./transforms/latest/box-props": {
-      "source": "./src/transforms/latest/box-props.ts",
-      "default": "./dist/transforms/latest/box-props.js"
+    "./transforms/latest/box": {
+      "source": "./src/transforms/latest/box.ts",
+      "default": "./dist/transforms/latest/box.js"
     },
-    "./latest/box-props": {
-      "source": "./src/commands/latest/box-props.ts",
-      "default": "./dist/commands/latest/box-props.js"
+    "./latest/box": {
+      "source": "./src/commands/latest/box.ts",
+      "default": "./dist/commands/latest/box.js"
     },
-    "./transforms/latest/flex-props": {
-      "source": "./src/transforms/latest/flex-props.ts",
-      "default": "./dist/transforms/latest/flex-props.js"
+    "./transforms/latest/flex": {
+      "source": "./src/transforms/latest/flex.ts",
+      "default": "./dist/transforms/latest/flex.js"
     },
-    "./latest/flex-props": {
-      "source": "./src/commands/latest/flex-props.ts",
-      "default": "./dist/commands/latest/flex-props.js"
+    "./latest/flex": {
+      "source": "./src/commands/latest/flex.ts",
+      "default": "./dist/commands/latest/flex.js"
     },
-    "./transforms/latest/grid-props": {
-      "source": "./src/transforms/latest/grid-props.ts",
-      "default": "./dist/transforms/latest/grid-props.js"
+    "./transforms/latest/grid": {
+      "source": "./src/transforms/latest/grid.ts",
+      "default": "./dist/transforms/latest/grid.js"
     },
-    "./latest/grid-props": {
-      "source": "./src/commands/latest/grid-props.ts",
-      "default": "./dist/commands/latest/grid-props.js"
+    "./latest/grid": {
+      "source": "./src/commands/latest/grid.ts",
+      "default": "./dist/commands/latest/grid.js"
     },
-    "./transforms/latest/heading-props": {
-      "source": "./src/transforms/latest/heading-props.ts",
-      "default": "./dist/transforms/latest/heading-props.js"
+    "./transforms/latest/heading": {
+      "source": "./src/transforms/latest/heading.ts",
+      "default": "./dist/transforms/latest/heading.js"
     },
-    "./latest/heading-props": {
-      "source": "./src/commands/latest/heading-props.ts",
-      "default": "./dist/commands/latest/heading-props.js"
+    "./latest/heading": {
+      "source": "./src/commands/latest/heading.ts",
+      "default": "./dist/commands/latest/heading.js"
     },
-    "./transforms/latest/text-props": {
-      "source": "./src/transforms/latest/text-props.ts",
-      "default": "./dist/transforms/latest/text-props.js"
+    "./transforms/latest/text": {
+      "source": "./src/transforms/latest/text.ts",
+      "default": "./dist/transforms/latest/text.js"
     },
-    "./latest/text-props": {
-      "source": "./src/commands/latest/text-props.ts",
-      "default": "./dist/commands/latest/text-props.js"
+    "./latest/text": {
+      "source": "./src/commands/latest/text.ts",
+      "default": "./dist/commands/latest/text.js"
     },
     "./package.json": "./package.json"
   },
@@ -71,7 +71,7 @@
     "topicSeparator": ":",
     "topics": {
       "latest": {
-        "description": "Migrate to lastest version of UI"
+        "description": "Migrate to latest version of UI"
       }
     }
   },

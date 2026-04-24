@@ -4,13 +4,13 @@ import {BaseCommand} from '../../baseCommand'
 import {getTransformPath} from '../../utils/getTransformPath'
 
 /** @public */
-export default class HeadingProps extends BaseCommand<typeof HeadingProps> {
-  static override description = 'transform Heading component props'
+export default class Heading extends BaseCommand<typeof Heading> {
+  static override description = 'Transform Heading component'
 
   public async run(): Promise<void> {
-    const {flags} = await this.parse(HeadingProps)
+    const {flags} = await this.parse(Heading)
     const {paths, ...restFlags} = flags
-    const transformPath = getTransformPath(this.config.root, 'latest', 'heading-props')
+    const transformPath = getTransformPath(this.config.root, 'latest', 'heading')
 
     await run(transformPath, paths, {
       babel: true,
