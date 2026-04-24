@@ -13,6 +13,12 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       required: true,
       helpValue: '<paths>',
     }),
+    fromPackage: Flags.string({
+      description: 'Original package name to transform',
+    }),
+    toPackage: Flags.string({
+      description: 'New package name',
+    }),
     dry: Flags.boolean({
       description: 'Dry run without changing files',
       default: false,
