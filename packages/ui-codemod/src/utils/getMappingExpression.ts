@@ -4,7 +4,7 @@ import type {AnyExpression} from '../types/AnyExpression'
 
 export function getMappingExpression(
   j: API['jscodeshift'],
-  val: string | boolean | number,
+  val?: string | boolean | number,
 ): AnyExpression {
   if (typeof val === 'boolean') {
     return j.booleanLiteral(val)
@@ -12,6 +12,10 @@ export function getMappingExpression(
 
   if (typeof val === 'number') {
     return j.numericLiteral(val)
+  }
+
+  if (typeof val === 'undefined') {
+    return j.identifier('undefined')
   }
 
   return j.stringLiteral(val)

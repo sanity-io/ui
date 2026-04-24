@@ -12,6 +12,32 @@ const MODS: AttributeMods = {
     },
   },
   borderWidth: {type: 'remove'},
+  flex: {
+    type: 'composite-mapped',
+    composition: [
+      {
+        name: 'flexBasis',
+        mapping: {
+          auto: 'auto',
+          1: undefined,
+        },
+      },
+      {
+        name: 'flexGrow',
+        mapping: {
+          auto: '1',
+          1: '1',
+        },
+      },
+      {
+        name: 'flexShrink',
+        mapping: {
+          auto: '1',
+          1: undefined,
+        },
+      },
+    ],
+  },
   insetTop: {
     type: 'rename-only',
     name: 'top',
@@ -171,6 +197,71 @@ defineInlineTest(
     }} />
   `,
   'moves prop to style and preserves existing styles',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div flex="auto" />
+  `,
+  `
+  <div flexBasis="auto" flexGrow="1" flexShrink="1" />
+  `,
+  'splits up composite props and updates mapped prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div flex="1" />
+  `,
+  `
+  <div flexGrow="1" />
+  `,
+  'splits up composite props and ignores undefined mapped prop values',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div flex={["1", "auto"]} />
+  `,
+  `
+  <div
+    flexBasis={[undefined, "auto"]}
+    flexGrow={["1", "1"]}
+    flexShrink={[undefined, "1"]} />
+  `,
+  'splits up composite props and updates responsive mapped prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div width={3} />
+  `,
+  `
+  // TODO: ${TODO_WARNING}
+  <div width={3} />
+  `,
+  'warns if mapped prop value does not match mappings',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div width={[2, 3]} />
+  `,
+  `
+  // TODO: ${TODO_WARNING}
+  <div width={[2, 3]} />
+  `,
+  'warns if responsive mapped prop value does not match mappings',
 )
 
 defineInlineTest(
