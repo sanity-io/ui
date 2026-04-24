@@ -10,7 +10,7 @@ export default class HeadingProps extends BaseCommand<typeof HeadingProps> {
   public async run(): Promise<void> {
     const {flags} = await this.parse(HeadingProps)
     const {paths, ...restFlags} = flags
-    const transformPath = getTransformPath(this.config.root, 'v4-to-v5', 'heading-props')
+    const transformPath = getTransformPath(this.config.root, 'latest', 'heading-props')
 
     await run(transformPath, paths, {
       babel: true,

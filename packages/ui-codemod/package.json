@@ -8,69 +8,45 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    "./transforms/v3-to-v5/box-props": {
-      "source": "./src/transforms/v3-to-v5/box-props.ts",
-      "default": "./dist/transforms/v3-to-v5/box-props.js"
+    "./transforms/latest/box-props": {
+      "source": "./src/transforms/latest/box-props.ts",
+      "default": "./dist/transforms/latest/box-props.js"
     },
-    "./v3-to-v5/box-props": {
-      "source": "./src/commands/v3-to-v5/box-props.ts",
-      "default": "./dist/commands/v3-to-v5/box-props.js"
+    "./latest/box-props": {
+      "source": "./src/commands/latest/box-props.ts",
+      "default": "./dist/commands/latest/box-props.js"
     },
-    "./transforms/v3-to-v5/flex-props": {
-      "source": "./src/transforms/v3-to-v5/flex-props.ts",
-      "default": "./dist/transforms/v3-to-v5/flex-props.js"
+    "./transforms/latest/flex-props": {
+      "source": "./src/transforms/latest/flex-props.ts",
+      "default": "./dist/transforms/latest/flex-props.js"
     },
-    "./v3-to-v5/flex-props": {
-      "source": "./src/commands/v3-to-v5/flex-props.ts",
-      "default": "./dist/commands/v3-to-v5/flex-props.js"
+    "./latest/flex-props": {
+      "source": "./src/commands/latest/flex-props.ts",
+      "default": "./dist/commands/latest/flex-props.js"
     },
-    "./transforms/v3-to-v5/grid-props": {
-      "source": "./src/transforms/v3-to-v5/grid-props.ts",
-      "default": "./dist/transforms/v3-to-v5/grid-props.js"
+    "./transforms/latest/grid-props": {
+      "source": "./src/transforms/latest/grid-props.ts",
+      "default": "./dist/transforms/latest/grid-props.js"
     },
-    "./v3-to-v5/grid-props": {
-      "source": "./src/commands/v3-to-v5/grid-props.ts",
-      "default": "./dist/commands/v3-to-v5/grid-props.js"
+    "./latest/grid-props": {
+      "source": "./src/commands/latest/grid-props.ts",
+      "default": "./dist/commands/latest/grid-props.js"
     },
-    "./transforms/v4-to-v5/box-props": {
-      "source": "./src/transforms/v4-to-v5/box-props.ts",
-      "default": "./dist/transforms/v4-to-v5/box-props.js"
+    "./transforms/latest/heading-props": {
+      "source": "./src/transforms/latest/heading-props.ts",
+      "default": "./dist/transforms/latest/heading-props.js"
     },
-    "./v4-to-v5/box-props": {
-      "source": "./src/commands/v4-to-v5/box-props.ts",
-      "default": "./dist/commands/v4-to-v5/box-props.js"
+    "./latest/heading-props": {
+      "source": "./src/commands/latest/heading-props.ts",
+      "default": "./dist/commands/latest/heading-props.js"
     },
-    "./transforms/v4-to-v5/flex-props": {
-      "source": "./src/transforms/v4-to-v5/flex-props.ts",
-      "default": "./dist/transforms/v4-to-v5/flex-props.js"
+    "./transforms/latest/text-props": {
+      "source": "./src/transforms/latest/text-props.ts",
+      "default": "./dist/transforms/latest/text-props.js"
     },
-    "./v4-to-v5/flex-props": {
-      "source": "./src/commands/v4-to-v5/flex-props.ts",
-      "default": "./dist/commands/v4-to-v5/flex-props.js"
-    },
-    "./transforms/v4-to-v5/grid-props": {
-      "source": "./src/transforms/v4-to-v5/grid-props.ts",
-      "default": "./dist/transforms/v4-to-v5/grid-props.js"
-    },
-    "./v4-to-v5/grid-props": {
-      "source": "./src/commands/v4-to-v5/grid-props.ts",
-      "default": "./dist/commands/v4-to-v5/grid-props.js"
-    },
-    "./transforms/v4-to-v5/heading-props": {
-      "source": "./src/transforms/v4-to-v5/heading-props.ts",
-      "default": "./dist/transforms/v4-to-v5/heading-props.js"
-    },
-    "./v4-to-v5/heading-props": {
-      "source": "./src/commands/v4-to-v5/heading-props.ts",
-      "default": "./dist/commands/v4-to-v5/heading-props.js"
-    },
-    "./transforms/v4-to-v5/text-props": {
-      "source": "./src/transforms/v4-to-v5/text-props.ts",
-      "default": "./dist/transforms/v4-to-v5/text-props.js"
-    },
-    "./v4-to-v5/text-props": {
-      "source": "./src/commands/v4-to-v5/text-props.ts",
-      "default": "./dist/commands/v4-to-v5/text-props.js"
+    "./latest/text-props": {
+      "source": "./src/commands/latest/text-props.ts",
+      "default": "./dist/commands/latest/text-props.js"
     },
     "./package.json": "./package.json"
   },
@@ -93,11 +69,8 @@
     "dirname": "ui-poc-codemod",
     "topicSeparator": ":",
     "topics": {
-      "v3-to-v5": {
-        "description": "Migrate from UI v3 to v5"
-      },
-      "v4-to-v5": {
-        "description": "Migrate from UI v4 to v5"
+      "latest": {
+        "description": "Migrate to lastest version of UI"
       }
     }
   },

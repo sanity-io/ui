@@ -10,7 +10,7 @@ export default class TextProps extends BaseCommand<typeof TextProps> {
   public async run(): Promise<void> {
     const {flags} = await this.parse(TextProps)
     const {paths, ...restFlags} = flags
-    const transformPath = getTransformPath(this.config.root, 'v4-to-v5', 'text-props')
+    const transformPath = getTransformPath(this.config.root, 'latest', 'text-props')
 
     await run(transformPath, paths, {
       babel: true,
