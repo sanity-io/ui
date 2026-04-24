@@ -25,6 +25,7 @@ export function handleStringVariable(
   const scopes: VariableScope[] = disableScopes ? ['ALL_SCOPES'] : figmaVar.scopes
 
   const cacheKey = JSON.stringify({
+    modeId,
     hidden,
     scopes,
     value: figmaVar.value.value,
@@ -71,6 +72,7 @@ export function handleStringAliasVariable(
   const scopes: VariableScope[] = disableScopes ? ['ALL_SCOPES'] : figmaVar.scopes
 
   const cacheKey = JSON.stringify({
+    modeId,
     hidden,
     scopes,
     target: figmaVar.value.target,

@@ -29,7 +29,7 @@ export function handleColorVariable(
 
   const scopes: VariableScope[] = disableScopes ? ['ALL_SCOPES'] : figmaVar.scopes
 
-  const cacheKey = JSON.stringify({hidden, scopes, value})
+  const cacheKey = JSON.stringify({modeId, hidden, scopes, value})
 
   if (!disableCache && variable.getPluginData('sanity-ui-tokens') === cacheKey) {
     return
@@ -73,7 +73,7 @@ export function handleColorAliasVariable(
 
   const target = figmaVar.value.target
 
-  const cacheKey = JSON.stringify({hidden, scopes, target})
+  const cacheKey = JSON.stringify({modeId, hidden, scopes, target})
 
   if (!disableCache && variable.getPluginData('sanity-ui-tokens') === cacheKey) {
     return
