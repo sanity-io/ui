@@ -44,7 +44,7 @@ export const LAYOUT_MODS: AttributeMods = {
   borderWidth: {type: 'remove'},
   flex: {
     type: 'shorthand-mapped',
-    composition: [
+    props: [
       {
         name: 'flexBasis',
         mapping: {
