@@ -3,12 +3,17 @@
   <input type="checkbox" id="disable-cache" />
   <label for="disable-cache">Disable cache</label>
 </div>
+<div>
+  <input type="checkbox" id="disable-scopes" />
+  <label for="disable-scopes">Disable scopes</label>
+</div>
 <button id="sync">Sync</button>
 <button id="cancel">Cancel</button>
 <script>
   document.getElementById('sync').onclick = () => {
     const disableCache = document.getElementById('disable-cache').checked
-    parent.postMessage({pluginMessage: {type: 'sync', disableCache}}, '*')
+    const disableScopes = document.getElementById('disable-scopes').checked
+    parent.postMessage({pluginMessage: {type: 'sync', disableCache, disableScopes}}, '*')
   }
 
   document.getElementById('cancel').onclick = () => {

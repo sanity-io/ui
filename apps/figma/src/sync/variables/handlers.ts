@@ -12,6 +12,7 @@ type VariableHandler = (
   aliases: Alias[],
   hidden: boolean,
   disableCache: boolean,
+  disableScopes: boolean,
 ) => void
 
 const handlers: Record<string, VariableHandler> = {
@@ -40,7 +41,18 @@ export function createOrUpdateVariable(
   aliases: Alias[],
   hidden: boolean,
   disableCache: boolean,
+  disableScopes: boolean,
 ): void {
   const handler = getVariableHandler(figmaVar.value.type)
-  handler(figmaVar, modeId, collection, variablesMap, variableIdsMap, aliases, hidden, disableCache)
+  handler(
+    figmaVar,
+    modeId,
+    collection,
+    variablesMap,
+    variableIdsMap,
+    aliases,
+    hidden,
+    disableCache,
+    disableScopes,
+  )
 }

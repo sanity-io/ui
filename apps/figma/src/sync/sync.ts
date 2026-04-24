@@ -14,7 +14,7 @@ import type {Alias} from './types'
 import type {SanityFigmaStyle} from './types/styles'
 import {createOrUpdateVariable} from './variables/handlers'
 
-export async function sync(options: {disableCache?: boolean}) {
+export async function sync(options: {disableCache?: boolean; disableScopes?: boolean}) {
   const localCollections = await figma.variables.getLocalVariableCollectionsAsync()
   const allVariablesMap = new Map<string, Variable>()
   const allVariableIdsMap = new Map<string, string>()
@@ -71,6 +71,7 @@ export async function sync(options: {disableCache?: boolean}) {
             aliases,
             layer.name.startsWith('_'),
             options.disableCache ?? false,
+            options.disableScopes ?? false,
           )
         }
       }

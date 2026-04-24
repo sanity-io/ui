@@ -10,6 +10,7 @@ export function handleStringVariable(
   _aliases: Alias[],
   hidden: boolean,
   disableCache: boolean,
+  disableScopes: boolean,
 ): void {
   if (figmaVar.value.type !== 'string') return
 
@@ -21,10 +22,12 @@ export function handleStringVariable(
     variableIdsMap,
   )
 
+  const scopes: VariableScope[] = disableScopes ? ['ALL_SCOPES'] : figmaVar.scopes
+
   const cacheKey = JSON.stringify({
     hidden,
+    scopes,
     value: figmaVar.value.value,
-    scopes: figmaVar.scopes,
   })
 
   if (!disableCache && variable.getPluginData('sanity-ui-tokens') === cacheKey) {
@@ -33,7 +36,7 @@ export function handleStringVariable(
 
   try {
     variable.setValueForMode(modeId, figmaVar.value.value)
-    variable.scopes = figmaVar.scopes
+    variable.scopes = scopes
     variable.hiddenFromPublishing = hidden
     variable.setPluginData('sanity-ui-tokens', cacheKey)
   } catch (error) {
@@ -53,6 +56,7 @@ export function handleStringAliasVariable(
   aliases: Alias[],
   hidden: boolean,
   disableCache: boolean,
+  disableScopes: boolean,
 ): void {
   if (figmaVar.value.type !== 'string-alias') return
 
@@ -64,10 +68,12 @@ export function handleStringAliasVariable(
     variableIdsMap,
   )
 
+  const scopes: VariableScope[] = disableScopes ? ['ALL_SCOPES'] : figmaVar.scopes
+
   const cacheKey = JSON.stringify({
     hidden,
+    scopes,
     target: figmaVar.value.target,
-    scopes: figmaVar.scopes,
   })
 
   if (!disableCache && variable.getPluginData('sanity-ui-tokens') === cacheKey) {
@@ -75,7 +81,7 @@ export function handleStringAliasVariable(
   }
 
   try {
-    variable.scopes = figmaVar.scopes
+    variable.scopes = scopes
     variable.hiddenFromPublishing = hidden
     variable.setPluginData('sanity-ui-tokens', cacheKey)
 
