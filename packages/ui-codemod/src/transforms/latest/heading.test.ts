@@ -1,5 +1,5 @@
 import {defineInlineTest} from '../../utils/testUtils'
-import transform from './heading-props'
+import transform from './heading'
 
 defineInlineTest(
   transform,

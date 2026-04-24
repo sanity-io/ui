@@ -1,5 +1,5 @@
 import {defineInlineTest} from '../../utils/testUtils'
-import transform from './grid-props'
+import transform from './grid'
 
 defineInlineTest(
   transform,
