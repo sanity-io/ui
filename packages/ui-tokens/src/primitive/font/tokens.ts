@@ -207,7 +207,7 @@ export const fontTokens = _defineTokens({
           fontSize: 48, // +10
           iconSize: 68,
           lineHeight: 54,
-          letterSpacing: -2,
+          letterSpacing: -1,
           customIconSize: 60,
         }),
         7: fontStyleToken({
@@ -217,7 +217,7 @@ export const fontTokens = _defineTokens({
           fontSize: 63, // +15
           iconSize: 90,
           lineHeight: 70,
-          letterSpacing: -3,
+          letterSpacing: -2,
           customIconSize: 80,
         }),
         8: fontStyleToken({
@@ -227,7 +227,7 @@ export const fontTokens = _defineTokens({
           fontSize: 84, // +20
           iconSize: 118,
           lineHeight: 90,
-          letterSpacing: -4,
+          letterSpacing: -3,
           customIconSize: 105,
         }),
         9: fontStyleToken({
@@ -237,7 +237,7 @@ export const fontTokens = _defineTokens({
           fontSize: 112, // +28
           iconSize: 156,
           lineHeight: 113,
-          letterSpacing: -4.5,
+          letterSpacing: -4,
           customIconSize: 140,
         }),
       }) satisfies TokenScale<FontHeadingSize, 'typography'>,
