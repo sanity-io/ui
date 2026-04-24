@@ -218,18 +218,6 @@ defineInlineTest(
   transform,
   {},
   `
-  <div flex="1" />
-  `,
-  `
-  <div flexBasis="0%" flexGrow="1" flexShrink="1" />
-  `,
-  'splits up composite props and ignores undefined mapped prop values',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
   <div flex={["2", "auto"]} />
   `,
   `

@@ -8,7 +8,7 @@ export interface AnyExpression extends Expression {
   expressions?: unknown
 }
 
-export type AttributeMapping = Record<string | number, string | boolean | number | undefined>
+export type AttributeMapping = Record<string | number, string | boolean | number>
 
 export type AttributeMod =
   | {type: 'remove'}
