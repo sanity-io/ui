@@ -9,6 +9,7 @@ import {
   removeExtraModes,
 } from './collections'
 import {findEntities} from './findEntities'
+import {getFigmaModeTokenSets, getSourceTokenSets} from './layers'
 import {createOrUpdateStyle} from './styles/handlers'
 import type {Alias} from './types'
 import type {SanityFigmaStyle} from './types/styles'
@@ -22,10 +23,10 @@ export async function sync(options: {disableCache?: boolean; disableScopes?: boo
   const allAliases: Alias[] = []
 
   // Build a global shadow token map for resolving cross-layer references
+  // Use source token sets (not Figma-projected) for canonical token lookup
   const shadowTokenMap = new Map<string, unknown>()
   for (const layer of tokenSystem.layers) {
-    const tokenSets = layer.kind === 'layer' ? [layer.tokenSet] : Object.values(layer.tokenSets)
-    for (const tokenSet of tokenSets) {
+    for (const tokenSet of getSourceTokenSets(layer)) {
       collectShadowTokens(tokenSet, shadowTokenMap)
     }
   }
@@ -40,10 +41,11 @@ export async function sync(options: {disableCache?: boolean; disableScopes?: boo
 
     const aliases: Alias[] = []
 
-    const modeKeys = [...(layer.kind === 'layer' ? ['default'] : layer.variants)]
+    const modeTokenSets = getFigmaModeTokenSets(layer)
+    const modeKeys = Object.keys(modeTokenSets)
 
     for (const modeKey of modeKeys) {
-      const modeValues = layer.kind === 'layer' ? layer.tokenSet : layer.tokenSets[modeKey]
+      const modeValues = modeTokenSets[modeKey]
 
       const {figmaVars, figmaStyles} = findEntities(modeValues)
 

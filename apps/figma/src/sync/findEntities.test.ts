@@ -4,20 +4,28 @@ import {tokenSystem} from '@sanity/ui-tokens/system'
 import {describe, expect, test} from 'vitest'
 
 import {findEntities} from './findEntities'
+import {getFigmaModeTokenSets} from './layers'
 import type {SanityFigmaFontStyleNode} from './types/styles'
 
 describe('findEntities', () => {
-  describe('token system processing', () => {
-    test('should process all token system layers without errors', () => {
+  describe('Figma mode token set processing', () => {
+    test('should process all Figma mode token sets without errors', () => {
       for (const layer of tokenSystem.layers) {
-        const variants = layer.kind === 'layer' ? [''] : layer.variants
+        const modeTokenSets = getFigmaModeTokenSets(layer)
 
-        for (const variant of variants) {
-          const tokens = layer.kind === 'layer' ? layer.tokenSet : layer.tokenSets[variant]
+        for (const [mode, tokens] of Object.entries(modeTokenSets)) {
+          let result: ReturnType<typeof findEntities>
 
-          expect(() => findEntities(tokens)).not.toThrow()
+          try {
+            result = findEntities(tokens)
+          } catch (err) {
+            throw new Error(
+              `Failed to process ${layer.name}/${mode}: ${
+                err instanceof Error ? err.message : String(err)
+              }`,
+            )
+          }
 
-          const result = findEntities(tokens)
           expect(result).toHaveProperty('figmaVars')
           expect(result).toHaveProperty('figmaStyles')
           expect(Array.isArray(result.figmaVars)).toBe(true)
@@ -28,11 +36,8 @@ describe('findEntities', () => {
 
     test('should return expected structure for all layers', () => {
       const results = tokenSystem.layers.flatMap((layer) => {
-        const variants = layer.kind === 'layer' ? [''] : layer.variants
-        return variants.map((variant) => {
-          const tokens = layer.kind === 'layer' ? layer.tokenSet : layer.tokenSets[variant]
-          return findEntities(tokens)
-        })
+        const modeTokenSets = getFigmaModeTokenSets(layer)
+        return Object.values(modeTokenSets).map((tokens) => findEntities(tokens))
       })
 
       expect(results.length).toBeGreaterThan(0)
