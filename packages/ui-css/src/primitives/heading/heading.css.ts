@@ -16,7 +16,8 @@ export const root: string = _style(
   {
     vars: {
       [_fontVars.family]: vars.font.heading.family,
-      [_fontVars.featureSettings]: vars.font.heading.featureSettings,
+      [_fontVars.featureSettings]: vars.font.heading.featureSettings || undefined,
+      [_fontVars.textTransform]: vars.font.heading.textTransform || undefined,
 
       [_fontVars.weight.regular]: vars.font.heading.weight.regular,
       [_fontVars.weight.medium]: vars.font.heading.weight.medium,

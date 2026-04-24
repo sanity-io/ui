@@ -8,6 +8,7 @@ import {_style} from '../../lib/css/_style.css'
 export const _fontVars = {
   family: createVar('font-family'),
   featureSettings: createVar('font-feature-settings'),
+  textTransform: createVar('font-text-transform'),
 
   capHeight: createVar('cap-height'),
   fontSize: createVar('font-size'),

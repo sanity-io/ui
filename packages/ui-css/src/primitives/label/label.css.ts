@@ -16,7 +16,8 @@ export const root: string = _style(
   {
     vars: {
       [_fontVars.family]: vars.font.label.family,
-      [_fontVars.featureSettings]: vars.font.label.featureSettings,
+      [_fontVars.featureSettings]: vars.font.label.featureSettings || undefined,
+      [_fontVars.textTransform]: vars.font.label.textTransform || undefined,
 
       [_fontVars.weight.regular]: vars.font.label.weight.regular,
       [_fontVars.weight.medium]: vars.font.label.weight.medium,
@@ -25,7 +26,6 @@ export const root: string = _style(
     },
 
     color: fallbackVar(_fontVars.color.fg, vars.color.fg),
-    textTransform: 'uppercase',
   },
   '',
 )

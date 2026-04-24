@@ -17,6 +17,9 @@ export const root: string = _style(
   {
     vars: {
       [_fontVars.family]: vars.font.text.family,
+      [_fontVars.featureSettings]: vars.font.text.featureSettings || undefined,
+      [_fontVars.textTransform]: vars.font.text.textTransform || undefined,
+
       [_fontVars.weight.regular]: vars.font.text.weight.regular,
       [_fontVars.weight.medium]: vars.font.text.weight.medium,
       [_fontVars.weight.semibold]: vars.font.text.weight.semibold,
