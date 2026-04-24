@@ -6,6 +6,7 @@ import {
   ELEMENT_TONES,
 } from '../../../constants'
 import {colorModel} from '../../../decision/color/model'
+import {_defineToken} from '../../../lib/_defineToken'
 import {_defineTokenGroup} from '../../../lib/_defineTokenGroup'
 import {_defineTokens} from '../../../lib/_defineTokens'
 import {_fromEntries} from '../../../lib/_fromEntries'
@@ -25,14 +26,18 @@ export const _colorSchemeTokens = {
 
 function buildColorSchemeTokens(scheme: ColorScheme) {
   const model = colorModel[scheme]
-  const systemBg: ColorExpr =
-    scheme === 'light'
-      ? {type: 'keyword', name: 'white', opacity: 1, mix: 1}
-      : {type: 'keyword', name: 'black', opacity: 1, mix: 1}
+  const dark = scheme === 'dark'
+  const systemBg: ColorExpr = dark
+    ? {type: 'keyword', name: 'black', opacity: 1, mix: 1}
+    : {type: 'keyword', name: 'white', opacity: 1, mix: 1}
   const debugId = `card.${scheme}`
   const options: _ResolveColorOptions = {bg: systemBg, systemBg}
 
   return _defineTokens({
+    colorScheme: _defineToken({
+      $type: 'string',
+      $value: scheme,
+    }),
     color: _defineTokenGroup({
       $type: 'color',
       _colorScheme: {
