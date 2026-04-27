@@ -1,11 +1,34 @@
-.sui-border { border: 1px solid var(--border-color, var(--gray-200)) }
-.sui-border-top { border-top: 1px solid var(--border-color, var(--gray-200)) }
-.sui-border-right { border-right: 1px solid var(--border-color, var(--gray-200)) }
-.sui-border-bottom { border-bottom: 1px solid var(--border-color, var(--gray-200)) }
-.sui-border-left { border-left: 1px solid var(--border-color, var(--gray-200)) }
+.sui-border {
+  border: 1px solid var(--border-color, var(--gray-200));
+}
+.sui-border-none {
+  border: none;
+}
 
-.sui-border-none { border: none; }
-.sui-border-top-none { border-top: none; }
-.sui-border-right-none { border-right: none; }
-.sui-border-bottom-none { border-bottom: none; }
-.sui-border-left-none { border-left: none; }
+.sui-border-top {
+  border-top: 1px solid var(--border-color, var(--gray-200));
+}
+.sui-border-top-none {
+  border-top: none;
+}
+
+.sui-border-right {
+  border-right: 1px solid var(--border-color, var(--gray-200));
+}
+.sui-border-right-none {
+  border-right: none;
+}
+
+.sui-border-bottom {
+  border-bottom: 1px solid var(--border-color, var(--gray-200));
+}
+.sui-border-bottom-none {
+  border-bottom: none;
+}
+
+.sui-border-left {
+  border-left: 1px solid var(--border-color, var(--gray-200));
+}
+.sui-border-left-none {
+  border-left: none;
+}

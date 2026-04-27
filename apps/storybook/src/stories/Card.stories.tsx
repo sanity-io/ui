@@ -8,7 +8,7 @@ import {getArgTypes} from '../utils/getArgTypes'
 const argTypes = getArgTypes(cardProps)
 
 const meta: Meta<typeof Card> = {
-  title: 'Layout/Card',
+  title: 'Components/Card',
   args: {
     children: 'This is a Card component.',
     as: 'div',

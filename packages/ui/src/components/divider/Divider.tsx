@@ -1,11 +1,18 @@
-import React from 'react'
+import classNames from 'classnames'
+
+import {getProps} from '../../utils/getProps'
+import {type DividerProps, dividerProps} from './divider.props'
 
 /** @public */
-export function Divider() {
+export function Divider(props: DividerProps) {
+  const {className, style, ...rest} = getProps(props, dividerProps)
+
   return (
     <hr
-      className="sui-Divider sui-border-bottom-none sui-border-left-none sui-border-right-none sui-border-top"
+      className={classNames('sui-Divider sui-border-none sui-border-top', className)}
+      style={style}
       data-ui="Divider"
+      {...rest}
     />
   )
 }

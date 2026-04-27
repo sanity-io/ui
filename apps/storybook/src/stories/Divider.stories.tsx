@@ -2,10 +2,15 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
 import {Divider} from '../../../../packages/ui/src/components/divider/Divider'
+import {dividerProps} from '../../../../packages/ui/src/components/divider/divider.props'
+import {getArgTypes} from '../utils/getArgTypes'
+
+const argTypes = getArgTypes(dividerProps)
 
 const meta: Meta<typeof Divider> = {
-  title: 'Layout/Divider',
+  title: 'Components/Divider',
   component: Divider,
+  argTypes,
   tags: ['autodocs'],
   parameters: {
     a11y: {
@@ -18,21 +23,19 @@ export default meta
 type Story = StoryObj<typeof Divider>
 
 export const Default: Story = {
-  render: () => {
+  render: (props) => {
     return (
-      <div>
+      <>
         <p>Content above</p>
-        <Divider />
+        <Divider {...props} />
         <p>Content below</p>
-      </div>
+      </>
     )
   },
   play: async ({canvas}) => {
     const hr = canvas.getByRole('separator')
     await expect(hr.classList).toContain('sui-Divider')
-    await expect(hr.classList).toContain('sui-border-bottom-none')
-    await expect(hr.classList).toContain('sui-border-left-none')
-    await expect(hr.classList).toContain('sui-border-right-none')
+    await expect(hr.classList).toContain('sui-none')
     await expect(hr.classList).toContain('sui-border-top')
   },
 }
