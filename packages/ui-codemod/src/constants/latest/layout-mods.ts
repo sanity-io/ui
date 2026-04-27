@@ -334,7 +334,13 @@ export const LAYOUT_MODS: AttributeMods = {
       fit: 'fit-content',
     },
   },
-  muted: {type: 'remove'},
+  muted: {
+    type: 'rename-mapped',
+    name: 'tone',
+    mapping: {
+      true: 'neutral',
+    },
+  },
   outline: {
     type: 'style-only',
     style: 'outline',
