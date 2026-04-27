@@ -28,3 +28,31 @@ defineInlineTest(
   `,
   'adds trim prop',
 )
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Heading flex="auto" />
+  `,
+  `
+  <Heading
+    style={{
+      flex: "1 1 auto"
+    }}
+    trim={true} />
+  `,
+  'moves flex prop to style',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Heading width={1} maxWidth="fill" />
+  `,
+  `
+  <Heading width="40rem" maxWidth="100%" trim={true} />
+  `,
+  'updates width prop mapped values',
+)
