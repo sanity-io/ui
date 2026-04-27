@@ -1,19 +1,8 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import {type LayoutProps} from '../../props/layout'
-import {type DisplayBlock} from '../../types/Display'
-import {type Responsive} from '../../types/Responsive'
 import {getProps} from '../../utils/getProps'
-import {boxProps} from './box.props'
-
-/** @public */
-export interface BoxProps<T extends React.ElementType> extends LayoutProps {
-  /** Element to render */
-  as?: T
-  /** CSS **display** property */
-  display?: Responsive<DisplayBlock>
-}
+import {type BoxProps, boxProps} from './box.props'
 
 /** @public */
 export function Box<T extends React.ElementType = 'div'>({

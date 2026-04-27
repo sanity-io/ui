@@ -1,22 +1,8 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import type {FlexParentProps} from '../../props/flexParent'
-import type {GapProps} from '../../props/gap'
-import {type LayoutProps} from '../../props/layout'
-import {type DisplayFlex} from '../../types/Display'
-import {type Responsive} from '../../types/Responsive'
 import {getProps} from '../../utils/getProps'
-import {flexProps} from './flex.props'
-
-/** @public */
-export interface FlexProps<T extends React.ElementType>
-  extends FlexParentProps, GapProps, LayoutProps {
-  /** Element to render */
-  as?: T
-  /** CSS **display** property */
-  display?: Responsive<DisplayFlex>
-}
+import {type FlexProps, flexProps} from './flex.props'
 
 /** @public */
 export function Flex<T extends React.ElementType = 'div'>({

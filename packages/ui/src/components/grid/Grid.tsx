@@ -1,22 +1,8 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import {type GapProps} from '../../props/gap'
-import {type GridParentProps} from '../../props/gridParent'
-import {type LayoutProps} from '../../props/layout'
-import {type DisplayGrid} from '../../types/Display'
-import {type Responsive} from '../../types/Responsive'
 import {getProps} from '../../utils/getProps'
-import {gridProps} from './grid.props'
-
-/** @public */
-export interface GridProps<T extends React.ElementType>
-  extends GridParentProps, GapProps, LayoutProps {
-  /** Element to render */
-  as?: T
-  /** CSS **display** property */
-  display?: Responsive<DisplayGrid>
-}
+import {type GridProps, gridProps} from './grid.props'
 
 /** @public */
 export function Grid<T extends React.ElementType = 'div'>({
