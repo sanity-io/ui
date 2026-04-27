@@ -1,8 +1,18 @@
-import {flexParentProps} from '../../props/flexParent'
-import {gapProps} from '../../props/gap'
-import {layoutProps} from '../../props/layout'
-import {DISPLAY_FLEX} from '../../types/Display'
+import {type FlexParentProps, flexParentProps} from '../../props/flexParent'
+import {type GapProps, gapProps} from '../../props/gap'
+import {type LayoutProps, layoutProps} from '../../props/layout'
+import {DISPLAY_FLEX, type DisplayFlex} from '../../types/Display'
 import {type PropDef} from '../../types/PropDef'
+import type {Responsive} from '../../types/Responsive'
+
+/** @public */
+export interface FlexProps<T extends React.ElementType>
+  extends FlexParentProps, GapProps, LayoutProps {
+  /** Element to render */
+  as?: T
+  /** CSS **display** property */
+  display?: Responsive<DisplayFlex>
+}
 
 export const flexProps: Record<string, PropDef> = {
   as: {

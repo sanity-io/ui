@@ -1,26 +1,16 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import type {TypographyProps} from '../../props/typography'
-import type {TextSize} from '../../types/Text'
 import {getProps} from '../../utils/getProps'
-import {textProps} from './text.props'
+import {type TextProps, textProps} from './text.props'
 
 /** @public */
-export interface TextProps<T extends React.ElementType> extends TypographyProps {
-  /** Element to render */
-  as?: T
-  /** CSS **font-size** property */
-  size?: TextSize
-}
-
-/** @public */
-export function Text<T extends React.ElementType = 'p'>({
+export function Text<T extends React.ElementType = 'span'>({
   size = 2,
   ...props
 }: TextProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof TextProps<T>>) {
   const {as, children, className, style, ...rest} = getProps({size, ...props}, textProps)
-  const Component = as || 'p'
+  const Component = as || 'span'
 
   if (props.lineClamp && props.trim) {
     return (

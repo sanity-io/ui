@@ -5,13 +5,13 @@ import {getProps} from '../../utils/getProps'
 import {type HeadingProps, headingProps} from './heading.props'
 
 /** @public */
-export function Heading<T extends React.ElementType = 'h1'>({
+export function Heading<T extends React.ElementType = 'h2'>({
   size = 2,
   weight = 'bold',
   ...props
 }: HeadingProps & Omit<React.ComponentPropsWithRef<T>, keyof HeadingProps>) {
   const {as, children, className, style, ...rest} = getProps({size, weight, ...props}, headingProps)
-  const Component = as || 'h1'
+  const Component = as || 'h2'
 
   if (props.lineClamp && props.trim) {
     return (
