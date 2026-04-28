@@ -14,7 +14,12 @@ export function Card<T extends React.ElementType = 'div'>({
   const Component = as || 'div'
 
   return (
-    <Component className={classNames('sui-Card', className)} style={style} data-ui="Card" {...rest}>
+    <Component
+      className={classNames('sui-Card sui-border', className)}
+      style={style}
+      data-ui="Card"
+      {...rest}
+    >
       {children}
     </Component>
   )

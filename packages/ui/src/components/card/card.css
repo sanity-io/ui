@@ -2,9 +2,10 @@
   * CARD - defaults
   * ---------------------------------*/
 .sui-Card {
+  /* Card is always used with `tone`;
+   * therefore we can set background and border colors
+   * by default without setting default custom properties; */
   background-color: var(--tone-surface);
-  border-width: 1px;
-  border-style: solid;
   border-color: var(--tone-separator);
 }
 
