@@ -16,10 +16,7 @@ export const SanityColorExtensionsSchema = z.object({
       v: z.literal(1),
       op: z.literal('mix'),
       space: z.enum(['srgb', 'oklab']),
-      stops: z.tuple([
-        z.union([SanityColorStopSchema, SanityColorStopSchema]),
-        z.union([SanityColorStopSchema, SanityColorStopSchema]),
-      ]),
+      stops: z.tuple([SanityColorStopSchema, SanityColorStopSchema]),
       hue: z.enum(['shorter', 'longer', 'increasing', 'decreasing']).optional(),
       alpha: z.enum(['premultiply']).optional(),
     })

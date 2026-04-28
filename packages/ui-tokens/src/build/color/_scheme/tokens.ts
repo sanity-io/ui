@@ -10,13 +10,14 @@ import {_defineToken} from '../../../lib/_defineToken'
 import {_defineTokenGroup} from '../../../lib/_defineTokenGroup'
 import {_defineTokens} from '../../../lib/_defineTokens'
 import {_fromEntries} from '../../../lib/_fromEntries'
+import {mixColors} from '../../../lib/color/_colorMixing'
 import type {ColorExpr} from '../../../lib/color/_parseColorExprLiteral'
-import type {CardToneTokens, ElementToneColorTokens} from '../../../lib/color/types'
-import type {_DTCGColorValue} from '../../../lib/dtcg/types'
+import type {CardToneTokens, ColorToken, ElementToneColorTokens} from '../../../lib/color/types'
+import type {_DTCGColorValue, _DTCGTokenAlias} from '../../../lib/dtcg/types'
 import type {TokenGroup} from '../../../lib/types'
 import type {CardTone, ColorScheme, ColorVariant, ElementTone} from '../../../types'
-import {_createColorScale} from './_createColorScale'
 import {type _ResolveColorOptions, _resolveColorToken} from './_resolveColorToken'
+import {_resolveColorValue} from './_resolveColorValue'
 
 /** @internal */
 export const _colorSchemeTokens = {
@@ -30,7 +31,7 @@ function buildColorSchemeTokens(scheme: ColorScheme) {
   const systemBg: ColorExpr = dark
     ? {type: 'keyword', name: 'black', opacity: 1, mix: 1}
     : {type: 'keyword', name: 'white', opacity: 1, mix: 1}
-  const debugId = `card.${scheme}`
+  const debugId = 'color._colorScheme'
   const options: _ResolveColorOptions = {bg: systemBg, systemBg}
 
   return _defineTokens({
@@ -69,7 +70,10 @@ function buildColorSchemeTokens(scheme: ColorScheme) {
 
         // tones
         ..._fromEntries(
-          CARD_TONES.map((cardTone) => [cardTone, buildCardToneTokens(scheme, cardTone, options)]),
+          CARD_TONES.map((cardTone) => [
+            cardTone,
+            buildCardToneTokens(scheme, cardTone, options, debugId),
+          ]),
         ),
       },
     }),
@@ -80,10 +84,11 @@ function buildCardToneTokens(
   scheme: ColorScheme,
   cardTone: CardTone,
   schemeOptions: _ResolveColorOptions,
+  schemeId: string,
 ): CardToneTokens {
   const {systemBg} = schemeOptions
   const cardModel = colorModel[scheme][cardTone]
-  const debugId = `card.${scheme}.${cardTone}`
+  const debugId = `${schemeId}.${cardTone}`
   const options: _ResolveColorOptions = {
     bg: cardModel.element.tinted.default.bg[0],
     systemBg,
@@ -119,7 +124,7 @@ function buildCardToneTokens(
                   variant,
                   elementTone,
                   options,
-                  `${debugId}.element.${variant}.${elementTone}`,
+                  `${debugId}.${variant}.${elementTone}`,
                 ),
               ]
             }),
@@ -130,69 +135,127 @@ function buildCardToneTokens(
   }
 }
 
+interface ColorScaleContext {
+  from: {id: string; expr: ColorExpr; token: ColorToken; bg: ColorExpr}
+  to: {id: string; expr: ColorExpr; token: ColorToken; bg: ColorExpr}
+}
+
+function createColorScaleContext(options: {
+  id: string
+  from: ColorExpr
+  to: ColorExpr
+  bg: ColorExpr
+  systemBg: ColorExpr
+}) {
+  const {id, from, to, bg, systemBg} = options
+
+  return {
+    from: {
+      id: `${id}.0`,
+      expr: from,
+      token: _resolveColorToken(from, {bg, systemBg}, `${id}.0`),
+      bg,
+    },
+    to: {
+      id: `${id}.4`,
+      expr: to,
+      token: _resolveColorToken(to, {bg, systemBg}, `${id}.4`),
+      bg,
+    },
+  }
+}
+
 function resolveElementColorTokens(
   scheme: ColorScheme,
   cardTone: CardTone,
   variant: ColorVariant,
   elementTone: ElementTone,
   options: _ResolveColorOptions,
-  debugId: string,
+  id: string,
 ): ElementToneColorTokens {
   const {bg: cardBg, systemBg} = options
   const t = colorModel[scheme][cardTone].element[variant][elementTone]
 
-  const bgScale = _createColorScale(
-    {
-      from: t.bg[0],
-      to: t.bg[4],
-      // use systemBg for default element tone, otherwise use bg from card tone
-      bg: elementTone === 'default' ? systemBg : cardBg,
-      systemBg,
-    },
-    debugId,
-  )
+  const bg = createColorScaleContext({
+    from: t.bg[0],
+    to: t.bg[4],
+    id: `${id}.bg`,
+    bg: elementTone === 'default' ? systemBg : cardBg,
+    systemBg,
+  })
 
-  const borderScale = _createColorScale(
-    {
-      from: t.border[0],
-      to: t.border[4],
-      bg: t.bg[0],
-      systemBg,
-    },
-    debugId,
-  )
+  const border = createColorScaleContext({
+    from: t.border[0],
+    to: t.border[4],
+    id: `${id}.border`,
+    bg: t.bg[0],
+    systemBg,
+  })
 
-  const fgScale = _createColorScale(
-    {
-      from: t.fg[0],
-      to: t.fg[4],
-      bg: t.bg[0],
-      systemBg,
-    },
-    debugId,
-  )
+  const fg = createColorScaleContext({
+    from: t.fg[0],
+    to: t.fg[4],
+    id: `${id}.fg`,
+    bg: t.bg[0],
+    systemBg,
+  })
+
+  const _mix = (_context: ColorScaleContext, ratio: number): ColorToken => {
+    const _from = _resolveColorValue(
+      _context.from.expr.type === 'inherit' ? _context.from.bg : _context.from.expr,
+      undefined,
+      {
+        mixBg: _context.from.bg,
+        systemBg,
+      },
+    )
+
+    const _to = _resolveColorValue(
+      _context.to.expr.type === 'inherit' ? _context.to.bg : _context.to.expr,
+      undefined,
+      {
+        mixBg: _context.to.bg,
+        systemBg,
+      },
+    )
+
+    return {
+      $value: mixColors('srgb', _from, _to, ratio),
+      $extensions: {
+        'io.sanity.expr': {
+          v: 1,
+          op: 'mix',
+          space: 'srgb',
+          stops: [
+            {color: `{${_context.from.id}}`, stop: 0},
+            {color: `{${_context.to.id}}`, stop: ratio},
+          ],
+        },
+      },
+    }
+  }
 
   return {
     bg: {
-      0: bgScale(0),
-      1: bgScale(0.25),
-      2: bgScale(0.5),
-      3: bgScale(0.75),
-      4: bgScale(1),
+      0: bg.from.token,
+      1: _mix(bg, 0.25),
+      2: _mix(bg, 0.5),
+      3: _mix(bg, 0.75),
+      4: bg.to.token,
     },
     border: {
-      0: borderScale(0),
-      1: borderScale(0.25),
-      2: borderScale(0.5),
-      3: borderScale(0.75),
-      4: borderScale(1),
+      0: border.from.token,
+      1: _mix(border, 0.25),
+      2: _mix(border, 0.5),
+      3: _mix(border, 0.75),
+      4: border.to.token,
     },
     fg: {
-      0: fgScale(0),
-      1: fgScale(0.25),
-      2: fgScale(0.5),
-      3: fgScale(0.75),
-      4: fgScale(1),
+      0: fg.from.token,
+      1: _mix(fg, 0.25),
+      2: _mix(fg, 0.5),
+      3: _mix(fg, 0.75),
+      4: fg.to.token,
     },
   }
 }
