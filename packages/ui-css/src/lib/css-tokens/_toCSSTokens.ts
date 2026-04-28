@@ -20,7 +20,13 @@ export function _toCSSTokens<Tokens extends object>(
   debugId: string,
   throwOnMissingVar: boolean = true,
 ): CSSTokens<Tokens> {
-  return visitNode(tokens, undefined) as CSSTokens<Tokens>
+  const result = visitNode(tokens, undefined)
+
+  if (result === undefined) {
+    return {} as CSSTokens<Tokens>
+  }
+
+  return result as CSSTokens<Tokens>
 
   function visitNode(node: unknown, inheritedType: SanityToken['$type'] | undefined): unknown {
     if (!isRecord(node)) {
@@ -29,6 +35,13 @@ export function _toCSSTokens<Tokens extends object>(
 
     if (isTokenNode(node)) {
       const effectiveType = (node.$type ?? inheritedType) as SanityToken['$type'] | undefined
+
+      const extensions = '$extensions' in node ? node['$extensions'] : undefined
+      const includeInCSS = isRecord(extensions) ? extensions?.['io.sanity.css'] : undefined
+
+      if (includeInCSS === false) {
+        return undefined
+      }
 
       if (!effectiveType) {
         if (throwOnMissingVar) {
@@ -54,7 +67,12 @@ export function _toCSSTokens<Tokens extends object>(
         return acc
       }
 
-      acc[key] = visitNode(value, nextInheritedType)
+      const nextValue = visitNode(value, nextInheritedType)
+
+      if (nextValue !== undefined) {
+        acc[key] = nextValue
+      }
+
       return acc
     }, {})
   }
