@@ -25,9 +25,10 @@ export interface ButtonOwnProps extends ButtonStyleProps {
   'fontSize'?: ResponsiveProp<FontTextSize>
   'icon'?: React.ElementType | React.ReactNode
   'iconRight'?: React.ElementType | React.ReactNode
-  /** @beta Do not use in production, as this might change.*/
   'loading'?: boolean
   'muted'?: boolean
+  'pressed'?: boolean
+  /** @deprecated Use `pressed` instead. */
   'selected'?: boolean
   'textAlign'?: TextOwnProps['align']
   'text'?: React.ReactNode
@@ -57,7 +58,9 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
       iconRight: IconRight,
       loading,
       muted,
-      selected,
+      pressed = props.selected,
+      // eslint-disable-next-line no-warning-comments
+      selected: _selected, // TODO: remove in next major version
       text,
       textAlign,
       textOverflow = 'ellipsis',
@@ -82,7 +85,7 @@ export function Button<E extends ButtonElementType = typeof DEFAULT_BUTTON_ELEME
       {...domProps}
       className={button(styleProps)}
       data-disabled={loading || disabled ? '' : props['data-disabled']}
-      data-selected={selected ? '' : props['data-selected']}
+      data-pressed={pressed ? '' : (props['data-pressed'] ?? props['data-selected'])}
       disabled={Boolean(loading || disabled)}
       // WORKAROUND: Since `a` elements don't support the `disabled` prop,
       // we need to remove the `href` prop from the DOM props when the button is disabled.
