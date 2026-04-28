@@ -200,7 +200,9 @@ function resolveElementColorTokens(
     systemBg,
   })
 
-  const _mix = (_context: ColorScaleContext, ratio: number): ColorToken => {
+  const _mix = (_context: ColorScaleContext, step: number): ColorToken => {
+    const ratio = step / 4
+
     const _from = _resolveColorValue(
       _context.from.expr.type === 'inherit' ? _context.from.bg : _context.from.expr,
       undefined,
@@ -222,6 +224,7 @@ function resolveElementColorTokens(
     return {
       $value: mixColors('srgb', _from, _to, ratio),
       $extensions: {
+        'io.sanity.css': false, // do not include include in CSS, only used for Figma
         'io.sanity.expr': {
           v: 1,
           op: 'mix',
@@ -238,23 +241,23 @@ function resolveElementColorTokens(
   return {
     bg: {
       0: bg.from.token,
-      1: _mix(bg, 0.25),
-      2: _mix(bg, 0.5),
-      3: _mix(bg, 0.75),
+      1: _mix(bg, 1),
+      2: _mix(bg, 2),
+      3: _mix(bg, 3),
       4: bg.to.token,
     },
     border: {
       0: border.from.token,
-      1: _mix(border, 0.25),
-      2: _mix(border, 0.5),
-      3: _mix(border, 0.75),
+      1: _mix(border, 1),
+      2: _mix(border, 2),
+      3: _mix(border, 3),
       4: border.to.token,
     },
     fg: {
       0: fg.from.token,
-      1: _mix(fg, 0.25),
-      2: _mix(fg, 0.5),
-      3: _mix(fg, 0.75),
+      1: _mix(fg, 1),
+      2: _mix(fg, 2),
+      3: _mix(fg, 3),
       4: fg.to.token,
     },
   }

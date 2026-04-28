@@ -11,6 +11,7 @@ export const SanityColorStopSchema = z.object({
 
 /** @internal */
 export const SanityColorExtensionsSchema = z.object({
+  'io.sanity.css': z.boolean().optional(),
   'io.sanity.expr': z
     .object({
       v: z.literal(1),
@@ -21,6 +22,7 @@ export const SanityColorExtensionsSchema = z.object({
       alpha: z.enum(['premultiply']).optional(),
     })
     .optional(),
+  'io.sanity.figmaAlias': z.string().optional(),
   'io.sanity.name': z.string().optional(),
   'io.sanity.opacity': z.number().min(0).max(1).optional(),
   'io.sanity.scopes': z.array(SanityTokenScopeSchema).optional(),
