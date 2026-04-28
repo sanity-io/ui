@@ -86,13 +86,33 @@ export const layers = [
     importsFrom: ['lib/color'],
   },
   {
-    name: 'component/button/mode',
-    path: 'component/button/mode',
+    name: 'component/boolean/color',
+    path: 'component/boolean/color',
+    importsFrom: ['lib/color'],
+  },
+  {
+    name: 'component/boolean/validity',
+    path: 'component/boolean/validity',
+    importsFrom: ['lib/color'],
+  },
+  {
+    name: 'component/boolean/state',
+    path: 'component/boolean/state',
     importsFrom: ['lib/color'],
   },
   {
     name: 'component/button',
     path: 'component/button',
+    importsFrom: ['lib/color'],
+  },
+  {
+    name: 'component/button/mode',
+    path: 'component/button/mode',
+    importsFrom: ['lib/color'],
+  },
+  {
+    name: 'component/button/state',
+    path: 'component/button/state',
     importsFrom: ['lib/color'],
   },
   {
@@ -111,8 +131,28 @@ export const layers = [
     importsFrom: ['lib/color'],
   },
   {
+    name: 'component/input/color',
+    path: 'component/input/color',
+    importsFrom: ['lib/color'],
+  },
+  {
+    name: 'component/input/validity',
+    path: 'component/input/validity',
+    importsFrom: ['lib/color'],
+  },
+  {
+    name: 'component/input/state',
+    path: 'component/input/state',
+    importsFrom: ['lib/color'],
+  },
+  {
     name: 'component/selectable',
     path: 'component/selectable',
+    importsFrom: ['lib/color'],
+  },
+  {
+    name: 'component/selectable/state',
+    path: 'component/selectable/state',
     importsFrom: ['lib/color'],
   },
 ]

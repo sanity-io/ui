@@ -1,11 +1,19 @@
 import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/_scheme'
 import {avatarTokens} from '@sanity/ui-tokens/component/avatar'
 import {avatarColorTokens} from '@sanity/ui-tokens/component/avatar/color'
+import {booleanColorTokens} from '@sanity/ui-tokens/component/boolean/color'
+import {booleanStateTokens} from '@sanity/ui-tokens/component/boolean/state'
+import {booleanValidityTokens} from '@sanity/ui-tokens/component/boolean/validity'
 import {buttonTokens} from '@sanity/ui-tokens/component/button'
 import {buttonModeTokens} from '@sanity/ui-tokens/component/button/mode'
+import {buttonStateTokens} from '@sanity/ui-tokens/component/button/state'
 import {cardTokens} from '@sanity/ui-tokens/component/card'
 import {inputTokens} from '@sanity/ui-tokens/component/input'
+import {inputColorTokens} from '@sanity/ui-tokens/component/input/color'
+import {inputStateTokens} from '@sanity/ui-tokens/component/input/state'
+import {inputValidityTokens} from '@sanity/ui-tokens/component/input/validity'
 import {selectableTokens} from '@sanity/ui-tokens/component/selectable'
+import {selectableStateTokens} from '@sanity/ui-tokens/component/selectable/state'
 import {
   AVATAR_COLORS,
   BUTTON_MODES,
@@ -58,15 +66,14 @@ type TokenVariantLayer<
  *   name: 'selectable',
  *   title: 'Selectable',
  *   tokenSet: selectableTokens,
- *   statePath: ['selectable', 'color'],
  * })
  * ```
  *
- * Given tokens at `selectable.color` like:
+ * Given tokens like:
  * ```json
  * {
- *   "enabled": { "bg": "...", "fg": "..." },
- *   "hovered": { "bg": "...", "fg": "..." }
+ *   "enabled": {"selectable": { "bg": "...", "fg": "..." }},
+ *   "hovered": {"selectable": { "bg": "...", "fg": "..." }}
  * }
  * ```
  *
@@ -77,8 +84,6 @@ type TokenStateLayer<TokenSet = object> = {
   title: string
   name: string
   tokenSet: TokenSet
-  /** Path to the object whose children represent states. Must be non-empty. */
-  statePath: readonly string[]
 }
 
 type LayerDefinition = TokenLayer | TokenVariantLayer | TokenStateLayer
@@ -104,18 +109,12 @@ function stateLayer<TokenSet extends object = object>(config: {
   name: string
   title: string
   tokenSet: TokenSet
-  statePath: readonly string[]
 }): TokenStateLayer<TokenSet> {
-  if (config.statePath.length === 0) {
-    throw new Error(`State layer "${config.name}" must define a non-empty statePath`)
-  }
-
   return {
     kind: 'state',
     name: config.name,
     title: config.title,
     tokenSet: config.tokenSet,
-    statePath: config.statePath,
   }
 }
 
@@ -206,16 +205,36 @@ export const tokenSystem: TokenSystem = {
       variants: AVATAR_COLORS,
       tokenSets: avatarColorTokens,
     }),
+    layer({
+      name: 'booleanColor',
+      title: 'Boolean color',
+      tokenSet: booleanColorTokens,
+    }),
+    stateLayer({
+      name: 'booleanValidity',
+      title: 'Boolean validity',
+      tokenSet: booleanValidityTokens,
+    }),
+    stateLayer({
+      name: 'booleanState',
+      title: 'Boolean state',
+      tokenSet: booleanStateTokens,
+    }),
+    layer({
+      name: 'button',
+      title: 'Button',
+      tokenSet: buttonTokens,
+    }),
     variantLayer({
       name: 'buttonMode',
       title: 'Button mode',
       variants: BUTTON_MODES,
       tokenSets: buttonModeTokens,
     }),
-    layer({
-      name: 'button',
-      title: 'Button',
-      tokenSet: buttonTokens,
+    stateLayer({
+      name: 'buttonState',
+      title: 'Button state',
+      tokenSet: buttonStateTokens,
     }),
     layer({
       name: 'card',
@@ -227,11 +246,30 @@ export const tokenSystem: TokenSystem = {
       title: 'Input',
       tokenSet: inputTokens,
     }),
+    layer({
+      name: 'inputColor',
+      title: 'Input color',
+      tokenSet: inputColorTokens,
+    }),
     stateLayer({
+      name: 'inputValidity',
+      title: 'Input validity',
+      tokenSet: inputValidityTokens,
+    }),
+    stateLayer({
+      name: 'inputState',
+      title: 'Input state',
+      tokenSet: inputStateTokens,
+    }),
+    layer({
       name: 'selectable',
       title: 'Selectable',
       tokenSet: selectableTokens,
-      statePath: ['selectable', 'color'],
+    }),
+    stateLayer({
+      name: 'selectableState',
+      title: 'Selectable state',
+      tokenSet: selectableStateTokens,
     }),
   ],
 }
