@@ -52,6 +52,20 @@ export function findEntities(
 
       if (node.$type === 'color') {
         const n = node as SanityColorToken
+
+        const figmaAlias = n.$extensions?.['io.sanity.figmaAlias']
+
+        if (figmaAlias) {
+          figmaVars.push({
+            name: path,
+            value: {
+              type: 'color-alias',
+              target: figmaAlias.slice(1, -1).replace(/\./g, '/'),
+            },
+            scopes: parseFigmaScopes(n.$extensions?.['io.sanity.scopes'] ?? []),
+          })
+        }
+
         figmaVars.push({
           name: path,
           value: getFigmaColorValue(n),
