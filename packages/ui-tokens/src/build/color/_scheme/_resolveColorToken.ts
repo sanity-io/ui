@@ -61,7 +61,7 @@ export function _resolveColorToken(
           },
         ],
       },
-      'io.sanity.name': `color-mix(in srgb, ${bgNode.$extensions?.['io.sanity.name']}, ${node.$extensions?.['io.sanity.name']}, ${expr.mix})`,
+      'io.sanity.name': undefined,
     }
 
     try {
@@ -74,10 +74,26 @@ export function _resolveColorToken(
   }
 
   if (expr.opacity !== 1) {
-    // Store opacity operation in extensions for advanced systems
+    // mix with `transparent`
     node.$extensions = {
       ...node.$extensions,
-      'io.sanity.opacity': expr.opacity,
+      'io.sanity.expr': {
+        v: 1,
+        op: 'mix',
+        space: 'srgb',
+        stops: [
+          {
+            color: {
+              colorSpace: 'srgb',
+              components: [0, 0, 0],
+              alpha: 0,
+            },
+            stop: 0,
+          },
+          {color: node.$value, stop: expr.opacity},
+        ],
+      },
+      'io.sanity.name': undefined,
     }
 
     // Compute color with opacity for fallback systems

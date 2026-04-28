@@ -24,7 +24,6 @@ export const SanityColorExtensionsSchema = z.object({
     .optional(),
   'io.sanity.figmaAlias': z.string().optional(),
   'io.sanity.name': z.string().optional(),
-  'io.sanity.opacity': z.number().min(0).max(1).optional(),
   'io.sanity.scopes': z.array(SanityTokenScopeSchema).optional(),
 })
 
