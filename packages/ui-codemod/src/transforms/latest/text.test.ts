@@ -12,7 +12,7 @@ defineInlineTest(
   `
   import {Text} from "@sanity/ui"
 
-  <Text trim={true} />
+  <Text as="div" trim={true} />
   `,
   'updates Text import path based on fromPackage and toPackage',
 )
@@ -24,9 +24,33 @@ defineInlineTest(
   <Text />
   `,
   `
-  <Text trim={true} />
+  <Text as="div" trim={true} />
   `,
   'adds trim prop',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Text />
+  `,
+  `
+  <Text as="div" trim={true} />
+  `,
+  'adds as prop',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Text as="span" />
+  `,
+  `
+  <Text as="span" trim={true} />
+  `,
+  'does not add as prop if already set',
 )
 
 defineInlineTest(
@@ -40,6 +64,7 @@ defineInlineTest(
     style={{
       flex: "1 1 auto"
     }}
+    as="div"
     trim={true} />
   `,
   'moves flex prop to style',
@@ -52,7 +77,7 @@ defineInlineTest(
   <Text accent />
   `,
   `
-  <Text tone="suggest" trim={true} />
+  <Text tone="suggest" as="div" trim={true} />
   `,
   'renames accent prop and updates mapped values',
 )
@@ -64,7 +89,7 @@ defineInlineTest(
   <Text textOverflow="ellipsis" />
   `,
   `
-  <Text lineClamp={1} trim={true} />
+  <Text lineClamp={1} as="div" trim={true} />
   `,
   'renames textOverflow prop and updates mapped values',
 )
@@ -76,7 +101,7 @@ defineInlineTest(
   <Text maxWidth="fill" />
   `,
   `
-  <Text maxWidth="100%" trim={true} />
+  <Text maxWidth="100%" as="div" trim={true} />
   `,
   'updates maxWidth prop mapped value',
 )

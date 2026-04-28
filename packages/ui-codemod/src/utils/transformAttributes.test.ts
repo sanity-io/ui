@@ -1,6 +1,6 @@
 import {type API, type FileInfo} from 'jscodeshift'
 
-import type {AttributeMods} from '../types/AnyExpression'
+import type {AttributeMods} from '../types/AttributeMods'
 import {defineInlineTest} from '../utils/testUtils'
 import {transformAttributes} from './transformAttributes'
 
@@ -44,6 +44,13 @@ const MODS: AttributeMods = {
   insetTop: {
     type: 'rename-only',
     name: 'top',
+  },
+  muted: {
+    type: 'rename-mapped',
+    name: 'tone',
+    mapping: {
+      true: 'neutral',
+    },
   },
   sizing: {
     type: 'style-mapped',
@@ -142,6 +149,18 @@ defineInlineTest(
   <div border={true} />
   `,
   'updates boolean mapped prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div muted />
+  `,
+  `
+  <div tone="neutral" />
+  `,
+  'renames and updates boolean prop to mapped value',
 )
 
 defineInlineTest(

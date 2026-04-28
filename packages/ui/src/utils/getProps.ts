@@ -6,15 +6,15 @@ const PREFIX = 'sui'
 const BREAKPOINTS_LENGTH = 7
 
 interface ComponentProps {
-  className?: string
-  style?: React.CSSProperties
+  className?: string | undefined
+  style?: React.CSSProperties | undefined
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   [key: string]: any
 }
 
-export function getProps<P extends ComponentProps, T extends Record<string, PropDef>>(
-  componentProps?: P,
-  propDefs?: T,
+export function getProps(
+  componentProps?: ComponentProps,
+  propDefs?: Record<string, PropDef>,
 ): ComponentProps {
   const {allComponentProps, allPropDefs} = flattenCompositeProps(componentProps, propDefs)
   const restProps: ComponentProps = {}
@@ -73,9 +73,9 @@ function getStyle(propValue: any, propDef: PropDef, bp?: number) {
   return {}
 }
 
-export function flattenCompositeProps<P extends ComponentProps, T extends Record<string, PropDef>>(
-  componentProps?: P,
-  propDefs?: T,
+export function flattenCompositeProps(
+  componentProps?: ComponentProps,
+  propDefs?: Record<string, PropDef>,
 ) {
   const props = {
     allComponentProps: {} as ComponentProps,

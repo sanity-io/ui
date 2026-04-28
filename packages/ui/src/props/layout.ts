@@ -7,6 +7,7 @@ import {type MarginProps, marginProps} from './margin'
 import {type OverflowProps, overflowProps} from './overflow'
 import {type PaddingProps, paddingProps} from './padding'
 import {type PositionProps, positionProps} from './position'
+import {type ShadowProps, shadowProps} from './shadow'
 import {type ToneProps, toneProps} from './tone'
 import {type WidthProps, widthProps} from './width'
 
@@ -21,7 +22,8 @@ export interface LayoutProps
     PositionProps,
     OverflowProps,
     FlexChildProps,
-    GridChildProps {}
+    GridChildProps,
+    ShadowProps {}
 
 export const layoutProps: Record<string, PropDef> = {
   ...toneProps,
@@ -34,4 +36,5 @@ export const layoutProps: Record<string, PropDef> = {
   ...overflowProps,
   ...flexChildProps,
   ...gridChildProps,
+  ...shadowProps,
 }
