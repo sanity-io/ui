@@ -188,6 +188,11 @@ export function _toCSSTokens<Tokens extends object>(
       return value.hex
     }
 
+    // check if transparent
+    if (alpha === 0 && value.components.every((c) => c === 0)) {
+      return 'transparent'
+    }
+
     return `rgb(${value.components.map((c) => (c * 255).toFixed(0)).join(' ')} / ${alpha})`
   }
 
