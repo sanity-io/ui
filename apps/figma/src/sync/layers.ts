@@ -1,7 +1,5 @@
 import {tokenSystem} from '@sanity/ui-tokens/system'
 
-import {createStateTokenSetsFromPath} from './transformStateLayer'
-
 /**
  * Extracts source token sets from any layer type in the token system.
  * Returns unprojected token sets for operations that need the canonical token shape.
@@ -44,10 +42,7 @@ export function getFigmaModeTokenSets(
   }
 
   if (layer.kind === 'state') {
-    return createStateTokenSetsFromPath({
-      tokenSet: layer.tokenSet,
-      path: layer.statePath,
-    })
+    return layer.tokenSet as Record<string, object>
   }
 
   const _exhaustive: never = layer
