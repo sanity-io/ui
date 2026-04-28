@@ -15,6 +15,7 @@ import type {CSSTokens, SanityTypographyCSSTokens} from './types'
 export function _toCSSTokens<Tokens extends object>(
   tokens: Tokens,
   vars: Record<string, unknown>,
+  debugId: string,
   throwOnMissingVar: boolean = true,
 ): CSSTokens<Tokens> {
   return visitNode(tokens, undefined) as CSSTokens<Tokens>
@@ -234,15 +235,7 @@ export function _toCSSTokens<Tokens extends object>(
     }
 
     if (throwOnMissingVar) {
-      try {
-        throw new Error(`Variable not found: ${name}`)
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(name, vars)
-        // eslint-disable-next-line no-console
-        console.error(err)
-        throw err
-      }
+      throw new Error(`[${debugId}] Variable not found: ${name}`)
     }
 
     return fallback
