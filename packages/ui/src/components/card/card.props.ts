@@ -2,7 +2,7 @@ import {borderProps} from '../../props/border'
 import {type MarginProps, marginProps} from '../../props/margin'
 import {paddingProps} from '../../props/padding'
 import {type ToneProps, toneProps} from '../../props/tone'
-import {type Density} from '../../types/Density'
+import {DENSITY, type Density} from '../../types/Density'
 import {DISPLAY_BLOCK, type DisplayBlock} from '../../types/Display'
 import {type PropDef} from '../../types/PropDef'
 import {type Responsive} from '../../types/Responsive'
@@ -28,6 +28,7 @@ export const cardProps: Record<string, PropDef> = {
   },
   density: {
     type: 'composite',
+    values: DENSITY,
     composition: {
       padding: {
         propDef: paddingProps['padding'] as PropDef,
@@ -46,7 +47,7 @@ export const cardProps: Record<string, PropDef> = {
         },
       },
     },
-  },
+  } satisfies PropDef<Density>,
   ...toneProps,
   ...marginProps,
 }

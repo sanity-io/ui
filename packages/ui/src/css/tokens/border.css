@@ -1,0 +1,3 @@
+:root {
+  --border-color-default: light-dark(var(--gray-200), var(--gray-800));
+}

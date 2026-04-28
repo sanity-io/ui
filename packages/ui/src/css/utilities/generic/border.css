@@ -1,14 +1,19 @@
-.sui-border { border: 1px solid var(--border-color, var(--gray-200)) }
-.sui-border-none { border: none; }
+/* Border colors set via `tone` use a --tone-separator custom property;
+ * if this hasn't been defined within the scope of the border class,
+ * we fall back to the default border color. */
+@breakpoints {
+  .sui-border { border: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border-none { border: none; }
 
-.sui-border-top { border-top: 1px solid var(--border-color, var(--gray-200)) }
-.sui-border-top-none { border-top: none; }
+  .sui-border-top { border-top: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border-top-none { border-top: none; }
 
-.sui-border-right { border-right: 1px solid var(--border-color, var(--gray-200)) }
-.sui-border-right-none { border-right: none; }
+  .sui-border-right { border-right: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border-right-none { border-right: none; }
 
-.sui-border-bottom { border-bottom: 1px solid var(--border-color, var(--gray-200)) }
-.sui-border-bottom-none { border-bottom: none; }
+  .sui-border-bottom { border-bottom: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border-bottom-none { border-bottom: none; }
 
-.sui-border-left { border-left: 1px solid var(--border-color, var(--gray-200)) }
-.sui-border-left-none { border-left: none; }
+  .sui-border-left { border-left: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border-left-none { border-left: none; }
+}
