@@ -1,5 +1,7 @@
 import type {
+  _BUTTON_STATES,
   _CODE_TOKEN_KEYS,
+  _INPUT_VALIDITY,
   AVATAR_COLORS,
   AVATAR_SIZE,
   BG_PATTERNS,
@@ -21,6 +23,15 @@ import type {
   SHADOW,
   SPACE,
 } from './constants'
+
+/** @internal */
+export type _ButtonState = (typeof _BUTTON_STATES)[number]
+
+/** @internal */
+export type _CodeTokenKey = (typeof _CODE_TOKEN_KEYS)[number]
+
+/** @internal */
+export type _InputValidity = (typeof _INPUT_VALIDITY)[number]
 
 export {
   /** @public */
@@ -49,9 +60,6 @@ export type ButtonMode = (typeof BUTTON_MODES)[number]
 
 /** @public */
 export type CardTone = (typeof CARD_TONES)[number]
-
-/** @internal */
-export type CodeTokenKey = (typeof _CODE_TOKEN_KEYS)[number]
 
 /** @public */
 export type ColorScheme = (typeof COLOR_SCHEMES)[number]

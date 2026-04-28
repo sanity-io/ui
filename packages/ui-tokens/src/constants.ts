@@ -1,12 +1,13 @@
 import {COLOR_HUES} from '@sanity/color'
 
-// re-export
-export {
-  /** @public */
-  COLOR_HUES as HUES,
-  /** @public */
-  COLOR_TINTS as TINTS,
-} from '@sanity/color'
+/** @internal */
+export const _BUTTON_STATES = [
+  'enabled',
+  'hovered',
+  'pressed',
+  //  'selected',
+  'disabled',
+] as const
 
 /** @internal */
 export const _CODE_TOKEN_KEYS = [
@@ -44,6 +45,17 @@ export const _CODE_TOKEN_KEYS = [
   'url',
   'variable',
 ] as const
+
+/** @internal */
+export const _INPUT_VALIDITY = ['valid', 'invalid'] as const
+
+// re-export
+export {
+  /** @public */
+  COLOR_HUES as HUES,
+  /** @public */
+  COLOR_TINTS as TINTS,
+} from '@sanity/color'
 
 /**
  * Available avatar color mode values for the `_avatarColor` collection.

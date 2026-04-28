@@ -10,9 +10,9 @@ import {_fromEntries} from '../../lib/_fromEntries'
 import {_merge} from '../../lib/_merge'
 import {_parseColorExprLiteral, type ColorExpr} from '../../lib/color/_parseColorExprLiteral'
 import type {
+  _CodeTokenKey,
   AvatarColor,
   CardTone,
-  CodeTokenKey,
   ColorScheme,
   ColorVariant,
   ElementTone,
@@ -51,7 +51,7 @@ export interface SanityCardColorModel {
 export type SanityColorSchemeModel = Record<CardTone, SanityCardColorModel> & {
   avatar: SanityAvatarsColorModel
   code: {
-    token: Record<CodeTokenKey, ColorExpr>
+    token: Record<_CodeTokenKey, ColorExpr>
   }
 }
 
