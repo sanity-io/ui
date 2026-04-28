@@ -10,6 +10,7 @@ import {elementToneVars} from '../../context/element/tone.css'
 import {borderVars} from '../../decision/border.css'
 import {shadowVars} from '../../primitive/shadow.css'
 import {colorVars} from '../../semantic/color.css'
+import {buttonSlotVars} from './slots.css'
 
 const _vars = {
   ...borderVars,
@@ -18,6 +19,7 @@ const _vars = {
     ...colorVars.color,
     ...elementToneVars.color,
   },
+  ...buttonSlotVars,
   ...shadowVars,
 }
 

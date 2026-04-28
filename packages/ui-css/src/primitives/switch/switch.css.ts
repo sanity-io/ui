@@ -25,9 +25,9 @@ export const root: string = _style(
       [_vars.size]: `calc(${vars.input.switch.height} - ${vars.input.switch.padding} * 2)`,
       [_vars.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
 
-      [vars.color.bg]: vars.input.color.boolean.valid.unchecked.enabled.bg,
-      [vars.color.border]: vars.input.color.boolean.valid.unchecked.enabled.border,
-      [vars.color.fg]: vars.input.color.boolean.valid.unchecked.enabled.fg,
+      [vars.color.bg]: vars.boolean.color.valid.unchecked.enabled.bg,
+      [vars.color.border]: vars.boolean.color.valid.unchecked.enabled.border,
+      [vars.color.fg]: vars.boolean.color.valid.unchecked.enabled.fg,
     },
   },
   '',
@@ -86,88 +86,88 @@ export const selectors = {
 /* 2) unchecked, hovered */
 _globalStyle(_layers.primitive, selectors.unchecked.hovered, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.valid.unchecked.hovered.bg,
-    [vars.color.border]: vars.input.color.boolean.valid.unchecked.hovered.border,
-    [vars.color.fg]: vars.input.color.boolean.valid.unchecked.hovered.fg,
+    [vars.color.bg]: vars.boolean.color.valid.unchecked.hovered.bg,
+    [vars.color.border]: vars.boolean.color.valid.unchecked.hovered.border,
+    [vars.color.fg]: vars.boolean.color.valid.unchecked.hovered.fg,
   },
 })
 
 /* 3) checked, enabled */
 _globalStyle(_layers.primitive, selectors.checked.enabled, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.valid.checked.enabled.bg,
-    [vars.color.border]: vars.input.color.boolean.valid.checked.enabled.border,
-    [vars.color.fg]: vars.input.color.boolean.valid.checked.enabled.fg,
+    [vars.color.bg]: vars.boolean.color.valid.checked.enabled.bg,
+    [vars.color.border]: vars.boolean.color.valid.checked.enabled.border,
+    [vars.color.fg]: vars.boolean.color.valid.checked.enabled.fg,
   },
 })
 
 /* 4) checked, hovered */
 _globalStyle(_layers.primitive, selectors.checked.hovered, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.valid.checked.hovered.bg,
-    [vars.color.border]: vars.input.color.boolean.valid.checked.hovered.border,
-    [vars.color.fg]: vars.input.color.boolean.valid.checked.hovered.fg,
+    [vars.color.bg]: vars.boolean.color.valid.checked.hovered.bg,
+    [vars.color.border]: vars.boolean.color.valid.checked.hovered.border,
+    [vars.color.fg]: vars.boolean.color.valid.checked.hovered.fg,
   },
 })
 
 /* 5) invalid overrides */
 _globalStyle(_layers.primitive, selectors.unchecked.invalid.enabled, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.invalid.unchecked.enabled.bg,
-    [vars.color.border]: vars.input.color.boolean.invalid.unchecked.enabled.border,
-    [vars.color.fg]: vars.input.color.boolean.invalid.unchecked.enabled.fg,
+    [vars.color.bg]: vars.boolean.color.invalid.unchecked.enabled.bg,
+    [vars.color.border]: vars.boolean.color.invalid.unchecked.enabled.border,
+    [vars.color.fg]: vars.boolean.color.invalid.unchecked.enabled.fg,
   },
 })
 _globalStyle(_layers.primitive, selectors.checked.invalid.enabled, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.invalid.checked.enabled.bg,
-    [vars.color.border]: vars.input.color.boolean.invalid.checked.enabled.border,
-    [vars.color.fg]: vars.input.color.boolean.invalid.checked.enabled.fg,
+    [vars.color.bg]: vars.boolean.color.invalid.checked.enabled.bg,
+    [vars.color.border]: vars.boolean.color.invalid.checked.enabled.border,
+    [vars.color.fg]: vars.boolean.color.invalid.checked.enabled.fg,
   },
 })
 
 _globalStyle(_layers.primitive, selectors.unchecked.invalid.hovered, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.invalid.unchecked.hovered.bg,
-    [vars.color.border]: vars.input.color.boolean.invalid.unchecked.hovered.border,
-    [vars.color.fg]: vars.input.color.boolean.invalid.unchecked.hovered.fg,
+    [vars.color.bg]: vars.boolean.color.invalid.unchecked.hovered.bg,
+    [vars.color.border]: vars.boolean.color.invalid.unchecked.hovered.border,
+    [vars.color.fg]: vars.boolean.color.invalid.unchecked.hovered.fg,
   },
 })
 _globalStyle(_layers.primitive, selectors.checked.invalid.hovered, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.invalid.checked.hovered.bg,
-    [vars.color.border]: vars.input.color.boolean.invalid.checked.hovered.border,
-    [vars.color.fg]: vars.input.color.boolean.invalid.checked.hovered.fg,
+    [vars.color.bg]: vars.boolean.color.invalid.checked.hovered.bg,
+    [vars.color.border]: vars.boolean.color.invalid.checked.hovered.border,
+    [vars.color.fg]: vars.boolean.color.invalid.checked.hovered.fg,
   },
 })
 
 /* 6) disabled LAST */
 _globalStyle(_layers.primitive, selectors.unchecked.disabled, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.valid.unchecked.disabled.bg,
-    [vars.color.border]: vars.input.color.boolean.valid.unchecked.disabled.border,
-    [vars.color.fg]: vars.input.color.boolean.valid.unchecked.disabled.fg,
+    [vars.color.bg]: vars.boolean.color.valid.unchecked.disabled.bg,
+    [vars.color.border]: vars.boolean.color.valid.unchecked.disabled.border,
+    [vars.color.fg]: vars.boolean.color.valid.unchecked.disabled.fg,
   },
 })
 _globalStyle(_layers.primitive, selectors.checked.disabled, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.valid.checked.disabled.bg,
-    [vars.color.border]: vars.input.color.boolean.valid.checked.disabled.border,
-    [vars.color.fg]: vars.input.color.boolean.valid.checked.disabled.fg,
+    [vars.color.bg]: vars.boolean.color.valid.checked.disabled.bg,
+    [vars.color.border]: vars.boolean.color.valid.checked.disabled.border,
+    [vars.color.fg]: vars.boolean.color.valid.checked.disabled.fg,
   },
 })
 _globalStyle(_layers.primitive, selectors.unchecked.invalid.disabled, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.invalid.unchecked.disabled.bg,
-    [vars.color.border]: vars.input.color.boolean.invalid.unchecked.disabled.border,
-    [vars.color.fg]: vars.input.color.boolean.invalid.unchecked.disabled.fg,
+    [vars.color.bg]: vars.boolean.color.invalid.unchecked.disabled.bg,
+    [vars.color.border]: vars.boolean.color.invalid.unchecked.disabled.border,
+    [vars.color.fg]: vars.boolean.color.invalid.unchecked.disabled.fg,
   },
 })
 _globalStyle(_layers.primitive, selectors.checked.invalid.disabled, {
   vars: {
-    [vars.color.bg]: vars.input.color.boolean.invalid.checked.disabled.bg,
-    [vars.color.border]: vars.input.color.boolean.invalid.checked.disabled.border,
-    [vars.color.fg]: vars.input.color.boolean.invalid.checked.disabled.fg,
+    [vars.color.bg]: vars.boolean.color.invalid.checked.disabled.bg,
+    [vars.color.border]: vars.boolean.color.invalid.checked.disabled.border,
+    [vars.color.fg]: vars.boolean.color.invalid.checked.disabled.fg,
   },
 })
 

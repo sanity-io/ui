@@ -5,16 +5,13 @@ import {_layers} from '../../layers.css'
 import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
 import type {CSSVars} from '../../lib/css-tokens/types'
 import {_cardToneVars} from '../context/card/_tone.css'
-import {elementToneVars} from '../context/element/tone.css'
 import {borderVars} from '../decision/border.css'
 import {colorVars} from '../semantic/color.css'
 
 const _vars = {
   ...borderVars,
   color: {
-    ..._cardToneVars.color,
     ...colorVars.color,
-    ...elementToneVars.color,
   },
 }
 

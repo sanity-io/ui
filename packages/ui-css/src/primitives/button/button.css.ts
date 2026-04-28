@@ -2,6 +2,7 @@ import {_layers} from '../../layers.css'
 import {_style} from '../../lib/css/_style.css'
 import {vars} from '../../vars'
 import {buttonModeVars} from '../../vars/component/button/mode.css'
+import {buttonSlotVars} from '../../vars/component/button/slots.css'
 import {_fontVars} from '../_font/_font.css'
 
 const stateSelectors = {
@@ -27,7 +28,7 @@ export const root: string = _style(
     'textAlign': 'left',
     'position': 'relative',
     'verticalAlign': 'top',
-    'boxShadow': buttonModeVars.buttonMode.boxShadow,
+    'boxShadow': buttonModeVars.button.boxShadow,
     'backgroundColor': vars.color.bg,
 
     '@media': {
@@ -35,52 +36,70 @@ export const root: string = _style(
         selectors: {
           [stateSelectors.hovered]: {
             vars: {
-              [vars.color.bg]: buttonModeVars.buttonMode.color.state.hovered.bg,
-              [vars.color.border]: buttonModeVars.buttonMode.color.state.hovered.border,
-              [vars.color.muted.border]: buttonModeVars.buttonMode.color.state.hovered.muted.border,
+              [vars.color.bg]: buttonModeVars.button.color.hovered.bg,
+              [vars.color.border]: buttonModeVars.button.color.hovered.border,
+              [vars.color.muted.border]: buttonModeVars.button.color.hovered.muted.border,
 
-              [_fontVars.color.fg]: buttonModeVars.buttonMode.color.state.hovered.fg,
-              [_fontVars.color.muted.bg]: buttonModeVars.buttonMode.color.state.hovered.muted.bg,
-              [_fontVars.color.muted.fg]: buttonModeVars.buttonMode.color.state.hovered.muted.fg,
+              // button slot overrides
+              [buttonSlotVars.button.color.muted.border]:
+                buttonModeVars.button.color.hovered.muted.border,
+
+              // font slot overrides
+              [_fontVars.color.fg]: buttonModeVars.button.color.hovered.fg,
+              [_fontVars.color.muted.bg]: buttonModeVars.button.color.hovered.muted.bg,
+              [_fontVars.color.muted.fg]: buttonModeVars.button.color.hovered.muted.fg,
             },
           },
 
           [stateSelectors.pressed]: {
             vars: {
-              [vars.color.bg]: buttonModeVars.buttonMode.color.state.pressed.bg,
-              [vars.color.border]: buttonModeVars.buttonMode.color.state.pressed.border,
-              [vars.color.muted.border]: buttonModeVars.buttonMode.color.state.pressed.muted.border,
+              [vars.color.bg]: buttonModeVars.button.color.pressed.bg,
+              [vars.color.border]: buttonModeVars.button.color.pressed.border,
+              [vars.color.muted.border]: buttonModeVars.button.color.pressed.muted.border,
 
-              [_fontVars.color.fg]: buttonModeVars.buttonMode.color.state.pressed.fg,
-              [_fontVars.color.muted.bg]: buttonModeVars.buttonMode.color.state.pressed.muted.bg,
-              [_fontVars.color.muted.fg]: buttonModeVars.buttonMode.color.state.pressed.muted.fg,
+              // button slot overrides
+              [buttonSlotVars.button.color.muted.border]:
+                buttonModeVars.button.color.pressed.muted.border,
+
+              // font slot overrides
+              [_fontVars.color.fg]: buttonModeVars.button.color.pressed.fg,
+              [_fontVars.color.muted.bg]: buttonModeVars.button.color.pressed.muted.bg,
+              [_fontVars.color.muted.fg]: buttonModeVars.button.color.pressed.muted.fg,
             },
           },
 
-          [stateSelectors.selected]: {
-            vars: {
-              [vars.color.bg]: buttonModeVars.buttonMode.color.state.selected.bg,
-              [vars.color.border]: buttonModeVars.buttonMode.color.state.selected.border,
-              [vars.color.muted.border]:
-                buttonModeVars.buttonMode.color.state.selected.muted.border,
+          // [stateSelectors.selected]: {
+          //   vars: {
+          //     [vars.color.bg]: buttonModeVars.button.color.selected.bg,
+          //     [vars.color.border]: buttonModeVars.button.color.selected.border,
+          //     [vars.color.muted.border]: buttonModeVars.button.color.selected.muted.border,
 
-              [_fontVars.color.fg]: buttonModeVars.buttonMode.color.state.selected.fg,
-              [_fontVars.color.muted.bg]: buttonModeVars.buttonMode.color.state.selected.muted.bg,
-              [_fontVars.color.muted.fg]: buttonModeVars.buttonMode.color.state.selected.muted.fg,
-            },
-          },
+          //     // button slot overrides
+          //     [buttonSlotVars.button.color.muted.border]:
+          //       buttonModeVars.button.color.selected.muted.border,
+
+          //     // font slot overrides
+          //     [_fontVars.color.fg]: buttonModeVars.button.color.selected.fg,
+          //     [_fontVars.color.muted.bg]: buttonModeVars.button.color.selected.muted.bg,
+          //     [_fontVars.color.muted.fg]: buttonModeVars.button.color.selected.muted.fg,
+          //   },
+          // },
 
           [stateSelectors.disabled]: {
             opacity: 0.5,
             vars: {
-              [vars.color.bg]: buttonModeVars.buttonMode.color.state.disabled.bg,
-              [vars.color.border]: buttonModeVars.buttonMode.color.state.disabled.border,
-              [vars.color.muted.border]:
-                buttonModeVars.buttonMode.color.state.disabled.muted.border,
+              [vars.color.bg]: buttonModeVars.button.color.disabled.bg,
+              [vars.color.border]: buttonModeVars.button.color.disabled.border,
+              [vars.color.muted.border]: buttonModeVars.button.color.disabled.muted.border,
 
-              [_fontVars.color.fg]: buttonModeVars.buttonMode.color.state.disabled.fg,
-              [_fontVars.color.muted.bg]: buttonModeVars.buttonMode.color.state.disabled.muted.bg,
-              [_fontVars.color.muted.fg]: buttonModeVars.buttonMode.color.state.disabled.muted.fg,
+              // button slot overrides
+              [buttonSlotVars.button.color.muted.border]:
+                buttonModeVars.button.color.disabled.muted.border,
+
+              // font slot overrides
+              [_fontVars.color.fg]: buttonModeVars.button.color.disabled.fg,
+              [_fontVars.color.muted.bg]: buttonModeVars.button.color.disabled.muted.bg,
+              [_fontVars.color.muted.fg]: buttonModeVars.button.color.disabled.muted.fg,
             },
           },
         },
@@ -94,22 +113,26 @@ export const root: string = _style(
       },
 
       '&:focus': {
-        boxShadow: `${buttonModeVars.buttonMode.boxShadow}, ${vars.button.focusRing}`,
+        boxShadow: `${buttonModeVars.button.boxShadow}, ${vars.button.focusRing}`,
       },
 
       '&:focus:not(:focus-visible)': {
-        boxShadow: buttonModeVars.buttonMode.boxShadow,
+        boxShadow: buttonModeVars.button.boxShadow,
       },
     },
 
     'vars': {
-      [vars.color.bg]: buttonModeVars.buttonMode.color.state.enabled.bg,
-      [vars.color.border]: buttonModeVars.buttonMode.color.state.enabled.border,
-      [vars.color.muted.border]: buttonModeVars.buttonMode.color.state.enabled.muted.border,
+      [vars.color.bg]: buttonModeVars.button.color.enabled.bg,
+      [vars.color.border]: buttonModeVars.button.color.enabled.border,
+      [vars.color.muted.border]: buttonModeVars.button.color.enabled.muted.border,
 
-      [_fontVars.color.fg]: buttonModeVars.buttonMode.color.state.enabled.fg,
-      [_fontVars.color.muted.bg]: buttonModeVars.buttonMode.color.state.enabled.muted.bg,
-      [_fontVars.color.muted.fg]: buttonModeVars.buttonMode.color.state.enabled.muted.fg,
+      // button slot overrides
+      [buttonSlotVars.button.color.muted.border]: buttonModeVars.button.color.enabled.muted.border,
+
+      // font slot overrides
+      [_fontVars.color.fg]: buttonModeVars.button.color.enabled.fg,
+      [_fontVars.color.muted.bg]: buttonModeVars.button.color.enabled.muted.bg,
+      [_fontVars.color.muted.fg]: buttonModeVars.button.color.enabled.muted.fg,
     },
   },
   '',

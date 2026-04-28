@@ -35,6 +35,8 @@ import {inputVars} from './vars/component/input.css'
 import {selectableVars} from './vars/component/selectable.css'
 import {avatarColorVars} from './vars/component/avatar/color.css'
 import {codeVars} from './vars/component/code.css'
+import {booleanColorVars} from './vars/component/boolean/color.css'
+import {inputColorVars} from './vars/component/input/color.css'
 
 /**
  * CSS custom properties (CSS variables) for the Sanity UI design system.
@@ -84,9 +86,15 @@ export const vars = {
     ...avatarVars.avatar,
     ...avatarColorVars.avatar,
   },
+  boolean: {
+    ...booleanColorVars.boolean,
+  },
   ...buttonVars,
   ...cardVars,
   ...codeVars,
-  ...inputVars,
+  input: {
+    ...inputVars.input,
+    ...inputColorVars.input,
+  },
   ...selectableVars,
 }
