@@ -1,6 +1,6 @@
-import 'ui/styles.css'
+import '@sanity-labs/ui-poc/styles.css'
 
-import {Box, Card} from '@sanity-labs/ui-poc'
+import {Box, Card, Text, Heading, Flex, Grid, Divider} from '@sanity-labs/ui-poc'
 import {Profiler} from 'react'
 
 const count = 5000
@@ -36,10 +36,77 @@ export default function UiPoc() {
         ))}
       </Profiler>
 
+      <h2>{count} Flexes</h2>
+      <Profiler id="Flexes" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Flex key={i} flexDirection="column" gap={3}>
+            <span>Flex content</span>
+            <span>Flex content</span>
+            <span>Flex content</span>
+          </Flex>
+        ))}
+      </Profiler>
+
+      <h2>{count} Grids</h2>
+      <Profiler id="Grids" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Grid key={i} gridAutoFlow="column" gap={3}>
+            <span>Grid content</span>
+            <span>Grid content</span>
+            <span>Grid content</span>
+            <span>Grid content</span>
+          </Grid>
+        ))}
+      </Profiler>
+
+      <h2>{count} Texts</h2>
+      <Profiler id="Texts" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Text key={i} size={2} muted>
+            Text
+          </Text>
+        ))}
+      </Profiler>
+
+      <h2>{count} Headings</h2>
+      <Profiler id="Headings" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Heading key={i} size={2} muted>
+            Heading
+          </Heading>
+        ))}
+      </Profiler>
+
+      <h2>{count} Dividers</h2>
+      <Profiler id="Dividers" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Divider key={i} />
+        ))}
+      </Profiler>
+
+      <h2>{count} Cards</h2>
       <Profiler id="Cards" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Card key={i} density={['regular', 'loose']} marginBottom={2}>
             <span>Card content</span>
+          </Card>
+        ))}
+      </Profiler>
+
+      <h2>{count} Compositions</h2>
+      <Profiler id="Compositions" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Card key={i} density={['regular', 'loose']} marginBottom={2}>
+            <Flex flexDirection="column" gap={3}>
+              <Heading size={3} muted>
+                Card content
+              </Heading>
+              <Box padding={3}>
+                <Text size={1} muted>
+                  This is a card{' '}
+                </Text>
+              </Box>
+            </Flex>
           </Card>
         ))}
       </Profiler>
