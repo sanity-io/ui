@@ -1,9 +1,11 @@
 import type {
+  _DTCGColorValue,
   _DTCGDurationToken,
   _DTCGFontFamilyToken,
   _DTCGFontWeightToken,
   _DTCGShadowToken,
   _DTCGStringToken,
+  _DTCGTokenAlias,
   SanityColorToken,
   SanityDimensionToken,
   SanityNumberToken,
@@ -138,14 +140,37 @@ export function _toCSSTokens<Tokens extends object>(
       return resolveVar(token.$value, vars, '#000000')
     }
 
-    const hex = token.$value.hex
-    const alpha = token.$value.alpha ?? 1
+    const expr = token.$extensions?.['io.sanity.expr']
 
-    if (hex && alpha === 1) {
-      return token.$value.hex
+    if (expr) {
+      const _from = expr.stops[0]
+      const _to = expr.stops[1]
+
+      const from = renderColorValue(_from.color, vars)
+      const to = renderColorValue(_to.color, vars)
+
+      return `color-mix(in ${expr.space}, ${from}, ${to} ${_to.stop * 100}%)`
     }
 
-    return `rgb(${token.$value.components.map((c) => (c * 255).toFixed(0)).join(' ')} / ${alpha})`
+    return renderColorValue(token.$value, vars)
+  }
+
+  function renderColorValue(
+    value: _DTCGColorValue | _DTCGTokenAlias,
+    vars: Record<string, unknown>,
+  ) {
+    if (typeof value === 'string') {
+      return resolveVar(value, vars, '#000000')
+    }
+
+    const hex = value.hex
+    const alpha = value.alpha ?? 1
+
+    if (hex && alpha === 1) {
+      return value.hex
+    }
+
+    return `rgb(${value.components.map((c) => (c * 255).toFixed(0)).join(' ')} / ${alpha})`
   }
 
   function renderDimensionToken(token: SanityDimensionToken, vars: Record<string, unknown>) {

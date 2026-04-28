@@ -28,7 +28,14 @@ export const _colorSchemeVarsClassNames = _fromEntries(
       _colorSchemeVars,
       {
         '@layer': _layers.vars,
-        ..._toCSSTokens(tokens, _vars, 'vars/build/color/_scheme'),
+        ..._toCSSTokens(
+          tokens,
+          {
+            ..._vars,
+            color: {..._vars.color, ..._colorSchemeVars.color},
+          },
+          'vars/build/color/_scheme',
+        ),
       },
       `variant-${variant}`,
     )
