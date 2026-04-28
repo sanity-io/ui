@@ -2,6 +2,7 @@ import {_composeClassNames} from '../../lib/class-names/_composeClassNames'
 import {display} from '../../props/display/display'
 import {flexProp} from '../../props/flex/flex'
 import {position} from '../../props/position/position'
+import {booleanColorVarsClassName} from '../../vars/component/boolean/color.css'
 import {inputVarsClassName} from '../../vars/component/input.css'
 import {input, presentation, root, thumb, track} from './switch.css'
 
@@ -11,6 +12,7 @@ export function _switch(props: {className?: string}): string | undefined {
     props.className,
     root,
     inputVarsClassName,
+    booleanColorVarsClassName,
     display({display: 'block'}),
     flexProp({flex: 'none'}),
     position({position: 'relative'}),

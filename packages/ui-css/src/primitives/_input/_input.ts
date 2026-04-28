@@ -5,6 +5,7 @@ import {position} from '../../props/position/position'
 import {radius} from '../../props/radius/radius'
 import {width} from '../../props/width/width'
 import {inputVarsClassName} from '../../vars/component/input.css'
+import {inputColorVarsClassName} from '../../vars/component/input/color.css'
 import {
   border,
   element,
@@ -24,6 +25,7 @@ export function _input(props: InputStyleProps): string | undefined {
   return _composeClassNames(
     root,
     inputVarsClassName,
+    inputColorVarsClassName,
     props.border !== false && border,
     fontWeightOptions[props.fontWeight ?? 'regular'],
     _responsiveClassName(fontSize, props.fontSize ?? 2),
