@@ -1,4 +1,5 @@
 import {_colorSchemeTokens} from '@sanity/ui-tokens/build/color/_scheme'
+import {buttonModeTokens} from '@sanity/ui-tokens/component/button/mode'
 import {fontTokens} from '@sanity/ui-tokens/primitive/font'
 import {tokenSystem} from '@sanity/ui-tokens/system'
 import {describe, expect, test} from 'vitest'
@@ -197,6 +198,59 @@ describe('findEntities', () => {
       }
 
       expect(() => findEntities(unsupported)).toThrow(/Unhandled node type/)
+    })
+  })
+
+  describe('variant layer mode injection', () => {
+    test('should inject mode name into style paths for variant layers', () => {
+      const buttonModeLayer = tokenSystem.layers.find((l) => l.name === 'buttonMode')
+      expect(buttonModeLayer).toBeDefined()
+      expect(buttonModeLayer!.kind).toBe('variant')
+
+      // Test default mode
+      const defaultResult = findEntities(buttonModeTokens.default, undefined, {
+        modeKey: 'default',
+      })
+
+      const defaultShadow = defaultResult.figmaStyles.find((s) => s.name.includes('boxShadow'))
+      expect(defaultShadow).toBeDefined()
+      expect(defaultShadow!.name).toBe('button/default/boxShadow')
+
+      // Test ghost mode
+      const ghostResult = findEntities(buttonModeTokens.ghost, undefined, {
+        modeKey: 'ghost',
+      })
+
+      const ghostShadow = ghostResult.figmaStyles.find((s) => s.name.includes('boxShadow'))
+      expect(ghostShadow).toBeDefined()
+      expect(ghostShadow!.name).toBe('button/ghost/boxShadow')
+
+      // Test bleed mode
+      const bleedResult = findEntities(buttonModeTokens.bleed, undefined, {
+        modeKey: 'bleed',
+      })
+
+      const bleedShadow = bleedResult.figmaStyles.find((s) => s.name.includes('boxShadow'))
+      expect(bleedShadow).toBeDefined()
+      expect(bleedShadow!.name).toBe('button/bleed/boxShadow')
+    })
+
+    test('should not inject mode name into variable paths for variant layers', () => {
+      const buttonModeLayer = tokenSystem.layers.find((l) => l.name === 'buttonMode')
+      expect(buttonModeLayer).toBeDefined()
+
+      const defaultResult = findEntities(buttonModeTokens.default, undefined, {
+        modeKey: 'default',
+      })
+
+      // Variables should not have mode in path (modes are handled via modeId)
+      const colorVars = defaultResult.figmaVars.filter((v) => v.name.includes('color'))
+      expect(colorVars.length).toBeGreaterThan(0)
+
+      for (const colorVar of colorVars) {
+        // Should not contain '/default/' or '/ghost/' or '/bleed/'
+        expect(colorVar.name).not.toMatch(/\/(default|ghost|bleed)\//)
+      }
     })
   })
 })

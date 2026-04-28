@@ -47,7 +47,9 @@ export async function sync(options: {disableCache?: boolean; disableScopes?: boo
     for (const modeKey of modeKeys) {
       const modeValues = modeTokenSets[modeKey]
 
-      const {figmaVars, figmaStyles} = findEntities(modeValues)
+      const {figmaVars, figmaStyles} = findEntities(modeValues, undefined, {
+        modeKey,
+      })
 
       if (figmaVars.length > 0) {
         if (!collection || !variablesMap || !variableIdsMap || !modes) {
