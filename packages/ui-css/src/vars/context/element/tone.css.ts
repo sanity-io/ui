@@ -14,7 +14,12 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(elementToneTokens.default, _vars, false)
+const _cssTokens = _toCSSTokens(
+  elementToneTokens.default,
+  _vars,
+  'vars/context/element/tone',
+  false,
+)
 
 /** @internal */
 export const elementToneVars = createThemeContract(_cssTokens)
@@ -28,7 +33,7 @@ export const elementToneClassNames = _fromEntries(
       elementToneVars,
       {
         '@layer': _layers.vars,
-        ..._toCSSTokens(tokens, _vars),
+        ..._toCSSTokens(tokens, _vars, 'vars/context/element/tone'),
       },
       `variant-${variant}`,
     )

@@ -13,7 +13,7 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(avatarColorTokens.gray, _vars, false)
+const _cssTokens = _toCSSTokens(avatarColorTokens.gray, _vars, 'vars/component/avatar/color', false)
 
 /** @internal */
 export const avatarColorVars = createThemeContract(_cssTokens)
@@ -27,7 +27,7 @@ export const avatarColorClassNames = _fromEntries(
       avatarColorVars,
       {
         '@layer': _layers.vars,
-        ..._toCSSTokens(tokens, _vars),
+        ..._toCSSTokens(tokens, _vars, 'vars/component/avatar/color'),
       },
       `variant-${variant}`,
     )

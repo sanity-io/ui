@@ -6,7 +6,7 @@ import {_toCSSTokens} from '../../lib/css-tokens/_toCSSTokens'
 import type {CSSVars} from '../../lib/css-tokens/types'
 
 const _vars = {}
-const _cssTokens = _toCSSTokens(spaceTokens, _vars)
+const _cssTokens = _toCSSTokens(spaceTokens, _vars, 'vars/primitive/space')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const spaceVarsClassName = _theme[0]

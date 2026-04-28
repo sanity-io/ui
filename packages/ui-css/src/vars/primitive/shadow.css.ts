@@ -9,7 +9,7 @@ import {borderVars} from '../decision/border.css'
 import {colorVars} from '../semantic/color.css'
 
 const _vars = {...colorVars, ...borderVars, ...cardVars}
-const _cssTokens = _toCSSTokens(shadowTokens, _vars)
+const _cssTokens = _toCSSTokens(shadowTokens, _vars, 'vars/primitive/shadow')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const shadowVarsClassName = _theme[0]

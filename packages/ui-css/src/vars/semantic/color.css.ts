@@ -14,7 +14,7 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(colorTokens, _vars, false)
+const _cssTokens = _toCSSTokens(colorTokens, _vars, 'vars/semantic/color', false)
 
 export const colorVars: CSSVars<typeof _cssTokens> = createThemeContract(_cssTokens)
 
@@ -29,6 +29,6 @@ export const colorVarsClassName = createTheme(colorVars, {
         ...colorVars.color,
       },
     },
-    true,
+    'vars/semantic/color',
   ),
 })

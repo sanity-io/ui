@@ -20,7 +20,7 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(inputTokens, _vars)
+const _cssTokens = _toCSSTokens(inputTokens, _vars, 'vars/component/input')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const inputVarsClassName = _theme[0]

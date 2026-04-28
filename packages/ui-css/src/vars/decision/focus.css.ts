@@ -7,7 +7,7 @@ import type {CSSVars} from '../../lib/css-tokens/types'
 import {colorVars} from '../semantic/color.css'
 
 const _vars = {...colorVars}
-const _cssTokens = _toCSSTokens(focusTokens, _vars)
+const _cssTokens = _toCSSTokens(focusTokens, _vars, 'vars/decision/focus')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const focusVarsClassName = _theme[0]

@@ -18,7 +18,7 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(cardTokens, _vars)
+const _cssTokens = _toCSSTokens(cardTokens, _vars, 'vars/component/card')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const cardVarsClassName = _theme[0]

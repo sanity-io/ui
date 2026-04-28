@@ -15,7 +15,7 @@ const _vars = {
     ...elementToneVars.color,
   },
 }
-const _cssTokens = _toCSSTokens(selectableTokens, _vars)
+const _cssTokens = _toCSSTokens(selectableTokens, _vars, 'vars/component/selectable')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const selectableVarsClassName = _theme[0]

@@ -15,7 +15,7 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(_colorSchemeTokens.light, _vars, false)
+const _cssTokens = _toCSSTokens(_colorSchemeTokens.light, _vars, 'vars/build/color/_scheme', false)
 
 /** @internal */
 export const _colorSchemeVars = createThemeContract(_cssTokens)
@@ -28,7 +28,7 @@ export const _colorSchemeVarsClassNames = _fromEntries(
       _colorSchemeVars,
       {
         '@layer': _layers.vars,
-        ..._toCSSTokens(tokens, _vars),
+        ..._toCSSTokens(tokens, _vars, 'vars/build/color/_scheme'),
       },
       `variant-${variant}`,
     )

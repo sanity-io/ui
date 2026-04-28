@@ -15,11 +15,11 @@ const _vars = {
   ...focusVars,
   ...radiusVars,
 }
-const _cssTokens = _toCSSTokens(avatarTokens, _vars)
+const _cssTokens = _toCSSTokens(avatarTokens, _vars, 'vars/component/avatar', false)
 
 export const avatarVars: CSSVars<typeof _cssTokens> = createThemeContract(_cssTokens)
 
 export const avatarVarsClassName = createTheme(avatarVars, {
   '@layer': _layers.vars,
-  ..._toCSSTokens(avatarTokens, {..._vars, ...avatarVars}),
+  ..._toCSSTokens(avatarTokens, {..._vars, ...avatarVars}, 'vars/component/avatar'),
 })

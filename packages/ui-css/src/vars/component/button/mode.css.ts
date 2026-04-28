@@ -21,7 +21,12 @@ const _vars = {
   ...shadowVars,
 }
 
-const _cssTokens = _toCSSTokens(buttonModeTokens.default, _vars, false)
+const _cssTokens = _toCSSTokens(
+  buttonModeTokens.default,
+  _vars,
+  'vars/component/button/mode',
+  false,
+)
 
 /** @internal */
 export const buttonModeVars = createThemeContract(_cssTokens)
@@ -33,7 +38,7 @@ export const buttonMode = _fromEntries(
       buttonModeVars,
       {
         '@layer': _layers.primitive,
-        ..._toCSSTokens(buttonModeTokens[variant], _vars),
+        ..._toCSSTokens(buttonModeTokens[variant], _vars, 'vars/component/button/mode'),
       },
       variant,
     )

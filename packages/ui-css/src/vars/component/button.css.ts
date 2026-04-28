@@ -18,7 +18,7 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(buttonTokens, _vars)
+const _cssTokens = _toCSSTokens(buttonTokens, _vars, 'vars/component/button', false)
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const buttonVarsClassName = _theme[0]

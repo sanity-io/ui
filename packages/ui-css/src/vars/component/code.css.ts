@@ -11,7 +11,7 @@ const _vars = {
     ..._colorSchemeVars.color,
   },
 }
-const _cssTokens = _toCSSTokens(codeTokens, _vars)
+const _cssTokens = _toCSSTokens(codeTokens, _vars, 'vars/component/code')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const codeVarsClassName = _theme[0]

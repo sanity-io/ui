@@ -13,7 +13,7 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(_cardToneTokens.default, _vars, false)
+const _cssTokens = _toCSSTokens(_cardToneTokens.default, _vars, 'vars/context/card/_tone', false)
 
 /** @internal */
 export const _cardToneVars = createThemeContract(_cssTokens)
@@ -27,12 +27,16 @@ export const _cardToneClassNames = _fromEntries(
       _cardToneVars,
       {
         '@layer': _layers.vars,
-        ..._toCSSTokens(tokens, {
-          color: {
-            ..._colorSchemeVars.color,
-            ..._cardToneVars.color,
+        ..._toCSSTokens(
+          tokens,
+          {
+            color: {
+              ..._colorSchemeVars.color,
+              ..._cardToneVars.color,
+            },
           },
-        }),
+          'vars/context/card/_tone',
+        ),
       },
       `variant-${variant}`,
     )
