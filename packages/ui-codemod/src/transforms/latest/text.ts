@@ -75,6 +75,7 @@ export default function transform(fileInfo: FileInfo, api: API, options: BaseOpt
     })
     .forEach((path) => {
       transformAttributes(j, path, MODS, TODO_WARNING)
+      addAttribute(j, path.node, 'as', 'div')
       addAttribute(j, path.node, 'trim', true)
     })
 
