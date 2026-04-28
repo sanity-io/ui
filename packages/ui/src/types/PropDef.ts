@@ -26,13 +26,14 @@ type UnionPropDef<T> = {
  * values (represented by the composition object’s keys) which
  * map to a composition of one or more other props.
  */
-type CompositePropDef = {
+type CompositePropDef<T> = {
   type: 'composite'
+  values: readonly T[]
   composition: Record<
     string,
     {
       propDef: PropDef
-      mapping: Record<string, unknown>
+      mapping: Record<T & PropertyKey, unknown>
     }
   >
 }
@@ -42,4 +43,4 @@ export type PropDef<T = unknown> =
   | NumberPropDef
   | StringPropDef
   | UnionPropDef<T>
-  | CompositePropDef
+  | CompositePropDef<T>

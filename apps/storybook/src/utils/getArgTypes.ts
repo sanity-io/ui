@@ -15,7 +15,7 @@ export function getArgTypes<T extends Record<string, PropDef>, P>(propDefs?: T) 
         control: {type: 'select'},
       }),
       ...(value.type === 'composite' && {
-        options: Object.keys(value.composition),
+        options: value.values,
         control: {type: 'select'},
       }),
     }

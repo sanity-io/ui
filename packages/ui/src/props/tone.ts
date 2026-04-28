@@ -1,10 +1,9 @@
 import {type PropDef} from '../types/PropDef'
-import {TONE, type Tone, TONE_LEVEL, type ToneLevel} from '../types/Tone'
+import {TONE, type Tone} from '../types/Tone'
 
 export type ToneProps = {
   /** CSS **background-color** property */
   tone?: Tone
-  toneLevel?: ToneLevel
 }
 
 export const toneProps: Record<string, PropDef> = {
@@ -12,10 +11,5 @@ export const toneProps: Record<string, PropDef> = {
     type: 'union',
     className: 'tone',
     values: TONE,
-  },
-  toneLevel: {
-    type: 'union',
-    className: 'tone-level',
-    values: TONE_LEVEL,
   },
 }
