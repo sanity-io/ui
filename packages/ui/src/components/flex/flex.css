@@ -2,13 +2,16 @@
   * FLEX - defaults
   * ---------------------------------*/
 .sui-Flex {
-  /* Flex has no tone by default */
+  /* Flex has no tone by default, therefore we set --tone-surface as transparent */
   --tone-surface: transparent;
   background-color: var(--tone-surface);
 }
 
 /** -----------------------------------
   * FLEX - tone
+  * Tone classes set tone custom properties for surface and separator colors;
+  * background color is applied by the component class, while border width/style/color
+  * is applied via the optional border props/classes.
   * ---------------------------------*/
 .sui-Flex:where(.sui-tone-none) {
   --tone-surface: var(--tone-none-surface);
