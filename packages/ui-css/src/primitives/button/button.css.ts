@@ -68,23 +68,6 @@ export const root: string = _style(
             },
           },
 
-          // [stateSelectors.selected]: {
-          //   vars: {
-          //     [vars.color.bg]: buttonModeVars.button.color.selected.bg,
-          //     [vars.color.border]: buttonModeVars.button.color.selected.border,
-          //     [vars.color.muted.border]: buttonModeVars.button.color.selected.muted.border,
-
-          //     // button slot overrides
-          //     [buttonSlotVars.button.color.muted.border]:
-          //       buttonModeVars.button.color.selected.muted.border,
-
-          //     // font slot overrides
-          //     [_fontVars.color.fg]: buttonModeVars.button.color.selected.fg,
-          //     [_fontVars.color.muted.bg]: buttonModeVars.button.color.selected.muted.bg,
-          //     [_fontVars.color.muted.fg]: buttonModeVars.button.color.selected.muted.fg,
-          //   },
-          // },
-
           [stateSelectors.disabled]: {
             opacity: 0.5,
             vars: {
