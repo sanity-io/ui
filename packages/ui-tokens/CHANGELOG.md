@@ -1,5 +1,15 @@
 # @sanity/ui-tokens
 
+## 1.0.0-beta.7
+
+### Patch Changes
+
+- [`f82aee0`](https://github.com/sanity-io/ui/commit/f82aee0655885270d2f0a8816f6ca0530f700c33) Thanks [@mariuslundgard](https://github.com/mariuslundgard)! - Refine component color tokens and CSS token output.
+
+  This release updates component color tokens to better separate variant-level and interaction-state color decisions, adds component color aliases, and improves support for color mix expressions. Opacity-based colors are now represented as color mix expressions, transparent color tokens are serialized correctly, and precomputed tokens are excluded from CSS output.
+
+  Button styling now includes a pressed state, while obsolete selected button styles have been removed. Input and boolean color variables are now applied correctly in CSS.
+
 ## 1.0.0-beta.6
 
 ### Patch Changes
