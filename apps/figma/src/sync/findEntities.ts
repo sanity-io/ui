@@ -24,7 +24,7 @@ export function findEntities(
   const tokenTree = _map(modeValues)
 
   for (const [key, _node] of Object.entries(tokenTree)) {
-    const path = parentPath ? `${parentPath}/${key}` : key
+    const path = parentPath && parentPath !== 'font' ? `${parentPath}/${key}` : key
 
     if ('family' in _node && 'featureSettings' in _node && 'scale' in _node && 'weight' in _node) {
       // For font styles from variant/state layers, inject mode after first segment
