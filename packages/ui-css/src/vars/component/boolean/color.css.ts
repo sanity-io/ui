@@ -14,7 +14,7 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(booleanColorTokens, _vars, 'vars/component/boolean/color', false)
+const _cssTokens = _toCSSTokens(booleanColorTokens, _vars, 'vars/component/boolean/color')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const booleanColorVarsClassName = _theme[0]

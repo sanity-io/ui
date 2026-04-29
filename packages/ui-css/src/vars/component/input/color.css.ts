@@ -15,7 +15,7 @@ const _vars = {
   },
 }
 
-const _cssTokens = _toCSSTokens(inputColorTokens, _vars, 'vars/component/input/color', false)
+const _cssTokens = _toCSSTokens(inputColorTokens, _vars, 'vars/component/input/color')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})
 
 export const inputColorVarsClassName = _theme[0]
