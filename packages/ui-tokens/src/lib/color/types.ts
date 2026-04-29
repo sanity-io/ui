@@ -10,7 +10,8 @@ export interface ElementToneColorTokens {
   fg: Record<0 | 1 | 2 | 3 | 4, ColorToken>
 }
 
-export type CardToneTokens = {
+export type CardToneColorTokens = {
+  $type: 'color'
   backdrop: ColorToken
   focusRing: ColorToken
   link: {

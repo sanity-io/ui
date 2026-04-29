@@ -12,7 +12,11 @@ import {_defineTokens} from '../../../lib/_defineTokens'
 import {_fromEntries} from '../../../lib/_fromEntries'
 import {mixColors} from '../../../lib/color/_colorMixing'
 import type {ColorExpr} from '../../../lib/color/_parseColorExprLiteral'
-import type {CardToneTokens, ColorToken, ElementToneColorTokens} from '../../../lib/color/types'
+import type {
+  CardToneColorTokens,
+  ColorToken,
+  ElementToneColorTokens,
+} from '../../../lib/color/types'
 import type {_DTCGColorValue, _DTCGTokenAlias} from '../../../lib/dtcg/types'
 import type {TokenGroup} from '../../../lib/types'
 import type {CardTone, ColorScheme, ColorVariant, ElementTone} from '../../../types'
@@ -35,13 +39,13 @@ function buildColorSchemeTokens(scheme: ColorScheme) {
   const options: _ResolveColorOptions = {bg: systemBg, systemBg}
 
   return _defineTokens({
-    colorScheme: _defineToken({
-      $type: 'string',
-      $value: scheme,
-    }),
-    color: _defineTokenGroup({
-      $type: 'color',
-      _colorScheme: {
+    _scheme: {
+      colorScheme: _defineToken({
+        $type: 'string',
+        $value: scheme,
+      }),
+      color: _defineTokenGroup({
+        $type: 'color',
         avatar: _fromEntries(
           AVATAR_COLORS.map((color) => [
             color,
@@ -67,25 +71,23 @@ function buildColorSchemeTokens(scheme: ColorScheme) {
             ]),
           ),
         },
-
-        // tones
         ..._fromEntries(
           CARD_TONES.map((cardTone) => [
             cardTone,
-            buildCardToneTokens(scheme, cardTone, options, debugId),
+            buildCardToneColorTokens(scheme, cardTone, options, debugId),
           ]),
         ),
-      },
-    }),
+      }),
+    },
   })
 }
 
-function buildCardToneTokens(
+function buildCardToneColorTokens(
   scheme: ColorScheme,
   cardTone: CardTone,
   schemeOptions: _ResolveColorOptions,
   schemeId: string,
-): CardToneTokens {
+): Omit<CardToneColorTokens, '$type'> {
   const {systemBg} = schemeOptions
   const cardModel = colorModel[scheme][cardTone]
   const debugId = `${schemeId}.${cardTone}`

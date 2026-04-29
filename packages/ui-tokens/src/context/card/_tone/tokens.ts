@@ -19,17 +19,19 @@ export const _cardToneTokens = _fromEntries(
 )
 
 function buildCardToneTokens(cardTone: CardTone): CardToneTokens {
+  const prefix = `_scheme.color.${cardTone}` as const
+
   return {
-    backdrop: _colorAlias(`{color._colorScheme.${cardTone}.backdrop}`),
-    focusRing: _colorAlias(`{color._colorScheme.${cardTone}.focusRing}`),
+    backdrop: _colorAlias(`{${prefix}.backdrop}`),
+    focusRing: _colorAlias(`{${prefix}.focusRing}`),
     link: {
-      fg: _colorAlias(`{color._colorScheme.${cardTone}.link.fg}`),
+      fg: _colorAlias(`{${prefix}.link.fg}`),
     },
     shadow: {
-      outline: _colorAlias(`{color._colorScheme.${cardTone}.shadow.outline}`),
-      umbra: _colorAlias(`{color._colorScheme.${cardTone}.shadow.umbra}`),
-      penumbra: _colorAlias(`{color._colorScheme.${cardTone}.shadow.penumbra}`),
-      ambient: _colorAlias(`{color._colorScheme.${cardTone}.shadow.ambient}`),
+      outline: _colorAlias(`{${prefix}.shadow.outline}`),
+      umbra: _colorAlias(`{${prefix}.shadow.umbra}`),
+      penumbra: _colorAlias(`{${prefix}.shadow.penumbra}`),
+      ambient: _colorAlias(`{${prefix}.shadow.ambient}`),
     },
     ..._fromEntries(
       COLOR_VARIANTS.map((variant) => [
@@ -37,8 +39,7 @@ function buildCardToneTokens(cardTone: CardTone): CardToneTokens {
         {
           ..._fromEntries(
             ELEMENT_TONES.map((elementTone) => {
-              const aliasPrefix =
-                `color._colorScheme.${cardTone}.${variant}.${elementTone}` as const
+              const aliasPrefix = `${prefix}.${variant}.${elementTone}` as const
 
               const _mix = (key: 'bg' | 'border' | 'fg', step: 1 | 2 | 3) =>
                 ({

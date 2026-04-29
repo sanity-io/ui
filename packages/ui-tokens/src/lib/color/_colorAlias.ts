@@ -42,10 +42,10 @@ type ColorKey =
   | `color.${ColorElementKey}`
   | `color._cardTone.${ColorSemanticKey}`
   | `color._cardTone.${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
-  | `color._colorScheme.${ColorAvatarKey}`
-  | `color._colorScheme.${ColorCodeTokenKey}`
-  | `color._colorScheme.${CardTone}.${ColorSemanticKey}`
-  | `color._colorScheme.${CardTone}.${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
+  | `_scheme.color.${ColorAvatarKey}`
+  | `_scheme.color.${ColorCodeTokenKey}`
+  | `_scheme.color.${CardTone}.${ColorSemanticKey}`
+  | `_scheme.color.${CardTone}.${ColorVariant}.${ElementTone}.${'bg' | 'border' | 'fg'}.${0 | 1 | 2 | 3 | 4}`
   | `boolean.color.${'valid' | 'invalid'}.${BooleanState}.${InputState}.${'bg' | 'border' | 'fg' | 'muted.bg' | 'muted.border' | 'muted.fg'}`
   | `boolean.color.${BooleanState}.${InputState}.${'bg' | 'border' | 'fg' | 'muted.bg' | 'muted.border' | 'muted.fg'}`
   | `button.color.${'bg' | 'border' | 'fg' | 'muted.bg' | 'muted.border' | 'muted.fg'}`
