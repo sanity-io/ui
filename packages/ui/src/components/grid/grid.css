@@ -1,6 +1,3 @@
-/** -----------------------------------
-  * GRID - defaults
-  * ---------------------------------*/
 .sui-Grid {
   /* Grid has no tone by default, therefore we set --tone-surface as transparent */
   --tone-surface: transparent;

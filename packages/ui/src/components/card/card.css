@@ -1,6 +1,3 @@
-/** -----------------------------------
-  * CARD - defaults
-  * ---------------------------------*/
 .sui-Card {
   /* Card is always used with tone, therefore we can apply background and border colors
    * by default without setting fallback custom properties.
