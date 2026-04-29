@@ -1,61 +1,27 @@
 import type {FontWeight} from '@sanity/ui-tokens'
-import {createVar, globalStyle} from '@vanilla-extract/css'
+import {globalStyle} from '@vanilla-extract/css'
 
 import {_layers} from '../../layers.css'
 import {_style} from '../../lib/css/_style.css'
-
-/** @internal */
-export const _fontVars = {
-  family: createVar('font-family'),
-  featureSettings: createVar('font-feature-settings'),
-  textTransform: createVar('font-text-transform'),
-
-  capHeight: createVar('cap-height'),
-  fontSize: createVar('font-size'),
-  lineHeight: createVar('line-height'),
-  ascenderHeight: createVar('ascender-height'),
-  descenderHeight: createVar('descender-height'),
-  letterSpacing: createVar('letter-spacing'),
-  fontWeight: createVar('font-weight'),
-  iconSize: createVar('icon-size'),
-  iconOffset: createVar('icon-offset'),
-  customIconOffset: createVar('custom-icon-offset'),
-  customIconSize: createVar('custom-icon-size'),
-
-  weight: {
-    regular: createVar('regular'),
-    medium: createVar('medium'),
-    semibold: createVar('semibold'),
-    bold: createVar('bold'),
-  },
-
-  color: {
-    fg: createVar('text-color-fg'),
-    muted: {
-      bg: createVar('text-color-muted-bg'),
-      fg: createVar('text-color-muted-fg'),
-    },
-    link: {
-      fg: createVar('text-color-link-fg'),
-      hover: createVar('text-color-link-hover-fg'),
-    },
-  },
-}
+import {vars} from '../../vars'
 
 export const root: string = _style(
   _layers.primitive,
   {
-    fontFamily: _fontVars.family,
-    fontFeatureSettings: _fontVars.featureSettings,
-    fontSize: _fontVars.fontSize,
-    lineHeight: _fontVars.lineHeight,
-    letterSpacing: _fontVars.letterSpacing,
-    fontWeight: _fontVars.fontWeight,
+    fontFamily: vars.font.family,
+    fontFeatureSettings: vars.font.featureSettings,
+    fontSize: vars.font.fontSize,
+    lineHeight: vars.font.lineHeight,
+    letterSpacing: vars.font.letterSpacing,
+    fontWeight: vars.font.fontWeight,
+    textTransform: vars.font.textTransform,
 
     vars: {
-      [_fontVars.capHeight]: `calc(${_fontVars.lineHeight} - ${_fontVars.ascenderHeight} - ${_fontVars.descenderHeight})`,
-      [_fontVars.iconOffset]: `calc((${_fontVars.capHeight} - ${_fontVars.iconSize}) / 2)`,
-      [_fontVars.customIconOffset]: `calc((${_fontVars.capHeight} - ${_fontVars.customIconSize}) / 2)`,
+      [vars.font.capHeight]:
+        `calc(${vars.font.lineHeight} - ${vars.font.ascenderHeight} - ${vars.font.descenderHeight})`,
+      [vars.font.iconOffset]: `calc((${vars.font.capHeight} - ${vars.font.iconSize}) / 2)`,
+      [vars.font.customIconOffset]:
+        `calc((${vars.font.capHeight} - ${vars.font.customIconSize}) / 2)`,
     },
 
     /**
@@ -66,12 +32,12 @@ export const root: string = _style(
       '&::before': {
         content: '""',
         display: 'table',
-        marginBottom: `calc(0rem - ${_fontVars.ascenderHeight})`,
+        marginBottom: `calc(0rem - ${vars.font.ascenderHeight})`,
       },
       '&::after': {
         content: '""',
         display: 'table',
-        marginTop: `calc(0rem - ${_fontVars.descenderHeight})`,
+        marginTop: `calc(0rem - ${vars.font.descenderHeight})`,
       },
     },
   },
@@ -90,39 +56,39 @@ globalStyle(`${root} svg`, {
 
 globalStyle(`${root} svg:not([data-sanity-icon])`, {
   '@layer': {
-    [_layers.primitive]: {fontSize: _fontVars.customIconSize, margin: _fontVars.customIconOffset},
+    [_layers.primitive]: {fontSize: vars.font.customIconSize, margin: vars.font.customIconOffset},
   },
 })
 
 globalStyle(`${root} [data-sanity-icon]`, {
   '@layer': {
-    [_layers.primitive]: {fontSize: _fontVars.iconSize, margin: _fontVars.iconOffset},
+    [_layers.primitive]: {fontSize: vars.font.iconSize, margin: vars.font.iconOffset},
   },
 })
 
 export const weightOptions: Record<FontWeight, string> = {
   regular: _style(
     _layers.primitive,
-    {vars: {[_fontVars.fontWeight]: _fontVars.weight.regular}},
+    {vars: {[vars.font.fontWeight]: vars.font.weight.regular}},
     'w-regular',
   ),
 
   medium: _style(
     //
     _layers.primitive,
-    {vars: {[_fontVars.fontWeight]: _fontVars.weight.medium}},
+    {vars: {[vars.font.fontWeight]: vars.font.weight.medium}},
     'w-medium',
   ),
 
   semibold: _style(
     _layers.primitive,
-    {vars: {[_fontVars.fontWeight]: _fontVars.weight.semibold}},
+    {vars: {[vars.font.fontWeight]: vars.font.weight.semibold}},
     'w-semibold',
   ),
 
   bold: _style(
     _layers.primitive,
-    {vars: {[_fontVars.fontWeight]: _fontVars.weight.bold}},
+    {vars: {[vars.font.fontWeight]: vars.font.weight.bold}},
     'w-bold',
   ),
 }

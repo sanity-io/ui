@@ -1,6 +1,5 @@
 import type {AvatarSize} from '@sanity/ui-tokens'
 import {AVATAR_SIZE} from '@sanity/ui-tokens/constants'
-import {createVar} from '@vanilla-extract/css'
 
 import {_layers} from '../../layers.css'
 import {_fromEntries} from '../../lib/_fromEntries'
@@ -9,17 +8,11 @@ import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import {_style} from '../../lib/css/_style.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars'
-import {_fontVars} from '../_font/_font.css'
-
-const _vars = {
-  distance: createVar('distance'),
-  size: createVar('size'),
-}
 
 export const stack: string = _style(_layers.primitive, {}, 'stack')
 
 _globalStyle(_layers.primitive, `${stack} > * + *`, {
-  marginLeft: _vars.distance,
+  marginLeft: vars.avatar.distance,
 })
 
 export const root: string = _style(
@@ -31,16 +24,16 @@ export const root: string = _style(
     userSelect: 'none',
     boxShadow: `0 0 0 1px ${vars.color.bg}`,
     lineHeight: 0,
-    width: _vars.size,
-    height: _vars.size,
-    borderRadius: _vars.size,
+    width: vars.avatar.size,
+    height: vars.avatar.size,
+    borderRadius: vars.avatar.size,
 
     alignItems: 'center',
     justifyContent: 'center',
 
     vars: {
-      [_fontVars.color.fg]: vars.avatar.color.fg,
-      [_fontVars.color.muted.fg]: vars.avatar.color.fg,
+      [vars.font.color.fg]: vars.avatar.color.fg,
+      [vars.font.color.muted.fg]: vars.avatar.color.fg,
     },
 
     selectors: {
@@ -128,8 +121,8 @@ export const image: string = _style(
     position: 'absolute',
     top: 0,
     left: 0,
-    width: _vars.size,
-    height: _vars.size,
+    width: vars.avatar.size,
+    height: vars.avatar.size,
     borderRadius: 'inherit',
     // @ts-expect-error - TODO: fix this
     cornerShape: 'inherit',
@@ -160,8 +153,8 @@ export const imageOutline: string = _style(
     position: 'absolute',
     top: 0,
     left: 0,
-    width: _vars.size,
-    height: _vars.size,
+    width: vars.avatar.size,
+    height: vars.avatar.size,
     borderRadius: 'inherit',
     // @ts-expect-error - TODO: fix this
     cornerShape: 'inherit',
@@ -195,12 +188,12 @@ export const counter: string = _style(
     backgroundColor: vars.color.bg,
     boxShadow: `inset 0 0 0 1px ${vars.color.border}`,
     userSelect: 'none',
-    borderRadius: _vars.size,
-    height: _vars.size,
+    borderRadius: vars.avatar.size,
+    height: vars.avatar.size,
 
     selectors: {
       '&&': {
-        minWidth: _vars.size,
+        minWidth: vars.avatar.size,
       },
 
       // '[data-hide-inner-stroke] &': {
@@ -219,8 +212,8 @@ export const scale: ResponsiveRuleOptions<AvatarSize> = {
         _layers.primitive,
         {
           vars: {
-            [_vars.distance]: vars.avatar.scale[s].distance,
-            [_vars.size]: vars.avatar.scale[s].size,
+            [vars.avatar.distance]: vars.avatar.scale[s].distance,
+            [vars.avatar.size]: vars.avatar.scale[s].size,
           },
         },
         String(s),

@@ -37,6 +37,12 @@ import {avatarColorVars} from './vars/component/avatar/color.css'
 import {codeVars} from './vars/component/code.css'
 import {booleanColorVars} from './vars/component/boolean/color.css'
 import {inputColorVars} from './vars/component/input/color.css'
+import {buttonSlotVars} from './vars/component/button/slots.css'
+import {inputSlotVars} from './vars/component/input/slots.css'
+import {avatarSlotVars} from './vars/component/avatar/slots.css'
+import {badgeSlotVars} from './vars/component/badge/slots.css'
+import {skeletonSlotVars} from './vars/component/skeleton/slots.css'
+import {fontSlotVars} from './vars/primitive/font/slots.css'
 
 /**
  * CSS custom properties (CSS variables) for the Sanity UI design system.
@@ -70,7 +76,10 @@ export const vars = {
   },
 
   // the primitive tokens
-  ...fontVars,
+  font: {
+    ...fontVars.font,
+    ...fontSlotVars.font,
+  },
   ...radiusVars,
   ...shadowVars,
   ...spaceVars,
@@ -85,16 +94,34 @@ export const vars = {
   avatar: {
     ...avatarVars.avatar,
     ...avatarColorVars.avatar,
+    ...avatarSlotVars.avatar,
+  },
+  badge: {
+    ...badgeSlotVars.badge,
   },
   boolean: {
     ...booleanColorVars.boolean,
   },
-  ...buttonVars,
+  button: {
+    ...buttonVars.button,
+    color: {
+      ...buttonModeVars.button.color,
+      ...buttonSlotVars.button.color,
+    },
+  },
   ...cardVars,
   ...codeVars,
   input: {
     ...inputVars.input,
     ...inputColorVars.input,
+    ...inputSlotVars.input,
+    color: {
+      ...inputColorVars.input.color,
+      ...inputSlotVars.input.color,
+    },
   },
   ...selectableVars,
+  skeleton: {
+    ...skeletonSlotVars.skeleton,
+  },
 }

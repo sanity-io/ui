@@ -5,22 +5,14 @@ import {
   FONT_LABEL_SIZE,
   FONT_TEXT_SIZE,
 } from '@sanity/ui-tokens/constants'
-import {createVar} from '@vanilla-extract/css'
 
 import {pulse} from '../../keyframes/skeleton.css'
 import {_layers} from '../../layers.css'
 import {_fromEntries} from '../../lib/_fromEntries'
 import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import {_style} from '../../lib/css/_style.css'
-// import {root as elementToneRoot} from '../../props/elementTone/elementTone.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars'
-
-const localVars = {
-  lineHeight: createVar('line-height'),
-  ascenderHeight: createVar('ascender-height'),
-  descenderHeight: createVar('descender-height'),
-}
 
 export const root: string = _style(
   _layers.primitive,
@@ -76,7 +68,7 @@ export const root: string = _style(
 export const font: string = _style(
   _layers.primitive,
   {
-    height: `calc(${localVars.lineHeight} - ${localVars.ascenderHeight} - ${localVars.descenderHeight})`,
+    height: `calc(${vars.skeleton.lineHeight} - ${vars.skeleton.ascenderHeight} - ${vars.skeleton.descenderHeight})`,
   },
   'font',
 )
@@ -89,9 +81,9 @@ export const codeScale: ResponsiveRuleOptions<FontCodeSize> = {
         _layers.primitive,
         {
           vars: {
-            [localVars.lineHeight]: vars.font.code.scale[s].lineHeight,
-            [localVars.ascenderHeight]: vars.font.code.scale[s].ascenderHeight,
-            [localVars.descenderHeight]: vars.font.code.scale[s].descenderHeight,
+            [vars.skeleton.lineHeight]: vars.font.code.scale[s].lineHeight,
+            [vars.skeleton.ascenderHeight]: vars.font.code.scale[s].ascenderHeight,
+            [vars.skeleton.descenderHeight]: vars.font.code.scale[s].descenderHeight,
           },
         },
         `code-${s}`,
@@ -108,9 +100,9 @@ export const headingScale: ResponsiveRuleOptions<FontHeadingSize> = {
         _layers.primitive,
         {
           vars: {
-            [localVars.lineHeight]: vars.font.heading.scale[s].lineHeight,
-            [localVars.ascenderHeight]: vars.font.heading.scale[s].ascenderHeight,
-            [localVars.descenderHeight]: vars.font.heading.scale[s].descenderHeight,
+            [vars.skeleton.lineHeight]: vars.font.heading.scale[s].lineHeight,
+            [vars.skeleton.ascenderHeight]: vars.font.heading.scale[s].ascenderHeight,
+            [vars.skeleton.descenderHeight]: vars.font.heading.scale[s].descenderHeight,
           },
         },
         `heading-${s}`,
@@ -127,9 +119,9 @@ export const labelScale: ResponsiveRuleOptions<FontLabelSize> = {
         _layers.primitive,
         {
           vars: {
-            [localVars.lineHeight]: vars.font.label.scale[s].lineHeight,
-            [localVars.ascenderHeight]: vars.font.label.scale[s].ascenderHeight,
-            [localVars.descenderHeight]: vars.font.label.scale[s].descenderHeight,
+            [vars.skeleton.lineHeight]: vars.font.label.scale[s].lineHeight,
+            [vars.skeleton.ascenderHeight]: vars.font.label.scale[s].ascenderHeight,
+            [vars.skeleton.descenderHeight]: vars.font.label.scale[s].descenderHeight,
           },
         },
         `label-${s}`,
@@ -146,9 +138,9 @@ export const textScale: ResponsiveRuleOptions<FontTextSize> = {
         _layers.primitive,
         {
           vars: {
-            [localVars.lineHeight]: vars.font.text.scale[s].lineHeight,
-            [localVars.ascenderHeight]: vars.font.text.scale[s].ascenderHeight,
-            [localVars.descenderHeight]: vars.font.text.scale[s].descenderHeight,
+            [vars.skeleton.lineHeight]: vars.font.text.scale[s].lineHeight,
+            [vars.skeleton.ascenderHeight]: vars.font.text.scale[s].ascenderHeight,
+            [vars.skeleton.descenderHeight]: vars.font.text.scale[s].descenderHeight,
           },
         },
         `text-${s}`,

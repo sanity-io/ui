@@ -1,18 +1,7 @@
-import {createVar} from '@vanilla-extract/css'
-
 import {_layers} from '../../layers.css'
 import {_globalStyle} from '../../lib/css/_globalStyle.css'
 import {_style} from '../../lib/css/_style.css'
 import {vars} from '../../vars'
-
-/** Local variables */
-const _vars = {
-  offset: createVar('offset'),
-  size: createVar('size'),
-  boxShadow: createVar('boxShadow'),
-}
-
-// vars.input.color.
 
 /** `switch` - root class name */
 export const root: string = _style(
@@ -21,9 +10,9 @@ export const root: string = _style(
     inlineSize: 'max-content',
 
     vars: {
-      [_vars.offset]: '0',
-      [_vars.size]: `calc(${vars.input.switch.height} - ${vars.input.switch.padding} * 2)`,
-      [_vars.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
+      [vars.input.offset]: '0',
+      [vars.input.size]: `calc(${vars.input.switch.height} - ${vars.input.switch.padding} * 2)`,
+      [vars.input.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
 
       [vars.color.bg]: vars.boolean.color.valid.unchecked.enabled.bg,
       [vars.color.border]: vars.boolean.color.valid.unchecked.enabled.border,
@@ -179,7 +168,7 @@ export const presentation: string = _style(
     width: vars.input.switch.width,
     height: vars.input.switch.height,
     borderRadius: vars.radius.full,
-    boxShadow: _vars.boxShadow,
+    boxShadow: vars.input.boxShadow,
     backgroundColor: vars.color.bg,
     transition: `background-color ${vars.input.switch.transitionDurationMs} ${vars.input.switch.transitionTimingFunction}`,
 
@@ -190,25 +179,27 @@ export const presentation: string = _style(
       // shift the thumb to the right when the switch is checked
       [`${input}:checked + &`]: {
         vars: {
-          [_vars.offset]: `calc(${vars.input.switch.width} - (${vars.input.switch.padding} * 2) - ${_vars.size})`,
+          [vars.input.offset]:
+            `calc(${vars.input.switch.width} - (${vars.input.switch.padding} * 2) - ${vars.input.size})`,
         },
       },
 
       // shift the thumb to the middle when the switch is indeterminate
       [`${input}:indeterminate + &`]: {
         vars: {
-          [_vars.offset]: `calc(${vars.input.switch.width} / 2 - ${_vars.size} / 2 - ${vars.input.switch.padding})`,
+          [vars.input.offset]:
+            `calc(${vars.input.switch.width} / 2 - ${vars.input.size} / 2 - ${vars.input.switch.padding})`,
         },
       },
 
       // focus ring when the switch is focused with keyboard
       [`${input}:focus + &`]: {
-        boxShadow: `${vars.input.switch.focusRing}, ${_vars.boxShadow}`,
+        boxShadow: `${vars.input.switch.focusRing}, ${vars.input.boxShadow}`,
       },
 
       // hide focus ring when the switch is focused without keyboard
       [`${input}:focus:not(:focus-visible) + &`]: {
-        boxShadow: _vars.boxShadow,
+        boxShadow: vars.input.boxShadow,
       },
     },
   },
@@ -236,11 +227,11 @@ export const thumb: string = _style(
     position: 'absolute',
     left: vars.input.switch.padding,
     top: vars.input.switch.padding,
-    width: _vars.size,
-    height: _vars.size,
+    width: vars.input.size,
+    height: vars.input.size,
     backgroundColor: vars.color.fg,
     borderRadius: vars.radius.full,
-    transform: `translate3d(${_vars.offset}, 0, 0)`,
+    transform: `translate3d(${vars.input.offset}, 0, 0)`,
     transition: `transform ${vars.input.switch.transitionDurationMs} ${vars.input.switch.transitionTimingFunction}`,
   },
   'thumb',

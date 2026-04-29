@@ -2,7 +2,7 @@ import {globalStyle} from '@vanilla-extract/css'
 
 import {_layers} from '../../layers.css'
 import {_style} from '../../lib/css/_style.css'
-import {_inputVars} from '../_input/_input.css'
+import {vars} from '../../vars'
 
 export const root = _style(
   _layers.primitive,
@@ -21,8 +21,8 @@ globalStyle(`${presentation} > span`, {
     [_layers.primitive]: {
       display: 'flex',
       position: 'absolute',
-      top: _inputVars.padding,
-      right: _inputVars.padding,
+      top: vars.input.padding,
+      right: vars.input.padding,
     },
   },
 })

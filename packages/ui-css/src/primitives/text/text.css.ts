@@ -10,29 +10,28 @@ import {_responsiveStyle} from '../../lib/css/_responsiveStyle.css'
 import {_style} from '../../lib/css/_style.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars'
-import {_fontVars} from '../_font/_font.css'
 
 export const root: string = _style(
   _layers.primitive,
   {
     vars: {
-      [_fontVars.family]: vars.font.text.family,
-      [_fontVars.featureSettings]: vars.font.text.featureSettings || undefined,
-      [_fontVars.textTransform]: vars.font.text.textTransform || undefined,
+      [vars.font.family]: vars.font.text.family,
+      [vars.font.featureSettings]: vars.font.text.featureSettings || undefined,
+      [vars.font.textTransform]: vars.font.text.textTransform || undefined,
 
-      [_fontVars.weight.regular]: vars.font.text.weight.regular,
-      [_fontVars.weight.medium]: vars.font.text.weight.medium,
-      [_fontVars.weight.semibold]: vars.font.text.weight.semibold,
-      [_fontVars.weight.bold]: vars.font.text.weight.bold,
+      [vars.font.weight.regular]: vars.font.text.weight.regular,
+      [vars.font.weight.medium]: vars.font.text.weight.medium,
+      [vars.font.weight.semibold]: vars.font.text.weight.semibold,
+      [vars.font.weight.bold]: vars.font.text.weight.bold,
     },
 
-    color: fallbackVar(_fontVars.color.fg, vars.color.fg),
+    color: fallbackVar(vars.font.color.fg, vars.color.fg),
   },
   '',
 )
 
 _globalStyle(_layers.primitive, `${root} a`, {
-  'color': fallbackVar(_fontVars.color.link.fg, vars.color.link.fg),
+  'color': fallbackVar(vars.font.color.link.fg, vars.color.link.fg),
   'textDecoration': 'none',
   'borderRadius': vars.radius[2],
   'outline': 'none',
@@ -47,7 +46,7 @@ _globalStyle(_layers.primitive, `${root} a`, {
 })
 
 _globalStyle(_layers.primitive, `${root} a:hover`, {
-  color: fallbackVar(_fontVars.color.link.hover, vars.color.fg),
+  color: fallbackVar(vars.font.color.link.hover.fg, vars.color.fg),
 })
 
 _globalStyle(_layers.primitive, `${root} a:focus:focus-visible`, {
@@ -56,8 +55,8 @@ _globalStyle(_layers.primitive, `${root} a:focus:focus-visible`, {
 
 _globalStyle(_layers.primitive, `${root} code`, {
   'fontFamily': vars.font.code.family,
-  'color': fallbackVar(_fontVars.color.muted.fg, vars.color.muted.fg),
-  'backgroundColor': fallbackVar(_fontVars.color.muted.bg, vars.color.muted.bg),
+  'color': fallbackVar(vars.font.color.muted.fg, vars.color.muted.fg),
+  'backgroundColor': fallbackVar(vars.font.color.muted.bg, vars.color.muted.bg),
   'borderRadius': vars.radius[2],
 
   '@supports': {
@@ -70,13 +69,13 @@ _globalStyle(_layers.primitive, `${root} code`, {
 })
 
 _globalStyle(_layers.primitive, `${root} svg`, {
-  color: fallbackVar(_fontVars.color.muted.fg, vars.color.muted.fg),
+  color: fallbackVar(vars.font.color.muted.fg, vars.color.muted.fg),
 })
 
 export const muted: string = _style(
   _layers.primitive,
   {
-    color: fallbackVar(_fontVars.color.muted.fg, vars.color.muted.fg),
+    color: fallbackVar(vars.font.color.muted.fg, vars.color.muted.fg),
   },
   'muted',
 )
@@ -92,13 +91,13 @@ export const sizes: ResponsiveRuleOptions<FontTextSize> = {
           _layers.primitive,
           {
             vars: {
-              [_fontVars.fontSize]: v.fontSize,
-              [_fontVars.lineHeight]: v.lineHeight,
-              [_fontVars.ascenderHeight]: v.ascenderHeight,
-              [_fontVars.descenderHeight]: v.descenderHeight,
-              [_fontVars.letterSpacing]: v.letterSpacing,
-              [_fontVars.iconSize]: v.iconSize,
-              [_fontVars.customIconSize]: v.customIconSize,
+              [vars.font.fontSize]: v.fontSize,
+              [vars.font.lineHeight]: v.lineHeight,
+              [vars.font.ascenderHeight]: v.ascenderHeight,
+              [vars.font.descenderHeight]: v.descenderHeight,
+              [vars.font.letterSpacing]: v.letterSpacing,
+              [vars.font.iconSize]: v.iconSize,
+              [vars.font.customIconSize]: v.customIconSize,
             },
           },
           String(s),

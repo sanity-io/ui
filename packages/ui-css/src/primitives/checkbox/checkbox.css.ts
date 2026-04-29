@@ -1,13 +1,9 @@
-import {createVar, globalStyle} from '@vanilla-extract/css'
+import {globalStyle} from '@vanilla-extract/css'
 
 import {_layers} from '../../layers.css'
 import {_globalStyle} from '../../lib/css/_globalStyle.css'
 import {_style} from '../../lib/css/_style.css'
 import {vars} from '../../vars'
-
-const _vars = {
-  boxShadow: createVar('boxShadow'),
-}
 
 export const root: string = _style(
   _layers.primitive,
@@ -15,7 +11,7 @@ export const root: string = _style(
     inlineSize: 'max-content',
 
     vars: {
-      [_vars.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
+      [vars.input.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
 
       /* 1) unchecked, enabled */
       [vars.color.bg]: vars.boolean.color.valid.unchecked.enabled.bg,
@@ -164,7 +160,8 @@ _globalStyle(_layers.primitive, selectors.checked.invalid.disabled, {
 // focus visible
 _globalStyle(_layers.primitive, selectors.focused, {
   vars: {
-    [_vars.boxShadow]: `${vars.input.switch.focusRing}, inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
+    [vars.input.boxShadow]:
+      `${vars.input.switch.focusRing}, inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
   },
 })
 
@@ -178,7 +175,7 @@ export const presentation: string = _style(
     boxSizing: 'border-box',
     lineHeight: 1,
     backgroundColor: vars.color.bg,
-    boxShadow: _vars.boxShadow,
+    boxShadow: vars.input.boxShadow,
     color: vars.color.fg,
   },
   'presentation',

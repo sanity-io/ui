@@ -1,13 +1,7 @@
-import {createVar} from '@vanilla-extract/css'
-
 import {_layers} from '../../layers.css'
 import {_globalStyle} from '../../lib/css/_globalStyle.css'
 import {_style} from '../../lib/css/_style.css'
 import {vars} from '../../vars'
-
-const _vars = {
-  boxShadow: createVar('boxShadow'),
-}
 
 export const root: string = _style(
   _layers.primitive,
@@ -108,10 +102,10 @@ export const presentation: string = _style(
     'height': vars.input.radio.size,
     'borderRadius': vars.radius.full,
     'backgroundColor': vars.color.bg,
-    'boxShadow': _vars.boxShadow,
+    'boxShadow': vars.input.boxShadow,
 
     'vars': {
-      [_vars.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
+      [vars.input.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
     },
 
     '::after': {
@@ -129,7 +123,7 @@ export const presentation: string = _style(
     'selectors': {
       // focused
       [`${input}:not(:disabled):focus + &`]: {
-        boxShadow: `${vars.input.radio.focusRing}, ${_vars.boxShadow}`,
+        boxShadow: `${vars.input.radio.focusRing}, ${vars.input.boxShadow}`,
       },
 
       [`${input}:checked + &::after`]: {

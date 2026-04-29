@@ -1,6 +1,5 @@
 import type {FontTextSize, Space} from '@sanity/ui-tokens'
 import {FONT_TEXT_SIZE, SPACE} from '@sanity/ui-tokens/constants'
-import {createVar} from '@vanilla-extract/css'
 
 import {_layers} from '../../layers.css'
 import {_fromEntries} from '../../lib/_fromEntries'
@@ -10,38 +9,19 @@ import {_style} from '../../lib/css/_style.css'
 import type {ResponsiveRuleOptions} from '../../types'
 import {vars} from '../../vars'
 
-/** @internal */
-export const _inputVars = {
-  boxShadow: createVar('boxShadow'),
-
-  color: {
-    placeholder: createVar('placeholder'),
-  },
-
-  fontSize: createVar('fontSize'),
-  fontWeight: createVar('fontWeight'),
-  lineHeight: createVar('lineHeight'),
-  letterSpacing: createVar('letterSpacing'),
-  ascenderHeight: createVar('ascenderHeight'),
-  descenderHeight: createVar('descenderHeight'),
-
-  padding: createVar('padding'),
-  gap: createVar('gap'),
-}
-
 export const border: string = _style(_layers.primitive, {}, 'border')
 
 export const root: string = _style(
   _layers.primitive,
   {
     vars: {
-      [_inputVars.boxShadow]: `inset 0 0 0 ${vars.input.border.width} transparent`,
+      [vars.input.boxShadow]: `inset 0 0 0 ${vars.input.border.width} transparent`,
     },
 
     selectors: {
       [`&.${border}`]: {
         vars: {
-          [_inputVars.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
+          [vars.input.boxShadow]: `inset 0 0 0 ${vars.input.border.width} ${vars.color.border}`,
         },
       },
     },
@@ -54,7 +34,7 @@ export const fontWeightOptions = {
     _layers.primitive,
     {
       vars: {
-        [_inputVars.fontWeight]: vars.font.text.weight.regular,
+        [vars.input.fontWeight]: vars.font.text.weight.regular,
       },
     },
     'w-regular',
@@ -63,7 +43,7 @@ export const fontWeightOptions = {
     _layers.primitive,
     {
       vars: {
-        [_inputVars.fontWeight]: vars.font.text.weight.medium,
+        [vars.input.fontWeight]: vars.font.text.weight.medium,
       },
     },
     'w-medium',
@@ -72,7 +52,7 @@ export const fontWeightOptions = {
     _layers.primitive,
     {
       vars: {
-        [_inputVars.fontWeight]: vars.font.text.weight.semibold,
+        [vars.input.fontWeight]: vars.font.text.weight.semibold,
       },
     },
     'w-semibold',
@@ -81,7 +61,7 @@ export const fontWeightOptions = {
     _layers.primitive,
     {
       vars: {
-        [_inputVars.fontWeight]: vars.font.text.weight.bold,
+        [vars.input.fontWeight]: vars.font.text.weight.bold,
       },
     },
     'w-bold',
@@ -97,17 +77,17 @@ export const element: string = _style(
     outline: 'none',
     margin: 0,
     fontFamily: vars.font.text.family,
-    fontSize: _inputVars.fontSize,
-    fontWeight: _inputVars.fontWeight,
-    lineHeight: _inputVars.lineHeight,
-    letterSpacing: _inputVars.letterSpacing,
+    fontSize: vars.input.fontSize,
+    fontWeight: vars.input.fontWeight,
+    lineHeight: vars.input.lineHeight,
+    letterSpacing: vars.input.letterSpacing,
     backgroundColor: 'transparent',
     color: vars.color.fg,
     padding: [
-      `calc(${_inputVars.padding} - ${_inputVars.ascenderHeight})`,
-      _inputVars.padding,
-      `calc(${_inputVars.padding} - ${_inputVars.descenderHeight})`,
-      _inputVars.padding,
+      `calc(${vars.input.padding} - ${vars.input.ascenderHeight})`,
+      vars.input.padding,
+      `calc(${vars.input.padding} - ${vars.input.descenderHeight})`,
+      vars.input.padding,
     ].join(' '),
     borderRadius: 'inherit',
     // @ts-expect-error - `cornerShape` is not yet fully supported in CSS
@@ -121,21 +101,21 @@ export const element: string = _style(
 
     selectors: {
       '&::placeholder': {
-        color: _inputVars.color.placeholder,
+        color: vars.input.color.placeholder,
         opacity: 1,
       },
 
       [`${root}[data-icon-left] &`]: {
-        paddingLeft: `calc(${_inputVars.padding} + calc(${_inputVars.lineHeight} - ${_inputVars.ascenderHeight} - ${_inputVars.descenderHeight}) + ${_inputVars.gap})`,
+        paddingLeft: `calc(${vars.input.padding} + calc(${vars.input.lineHeight} - ${vars.input.ascenderHeight} - ${vars.input.descenderHeight}) + ${vars.input.gap})`,
       },
 
       [`${root}[data-icon-right] &`]: {
-        paddingRight: `calc(${_inputVars.padding} + calc(${_inputVars.lineHeight} - ${_inputVars.ascenderHeight} - ${_inputVars.descenderHeight}) + ${_inputVars.gap})`,
+        paddingRight: `calc(${vars.input.padding} + calc(${vars.input.lineHeight} - ${vars.input.ascenderHeight} - ${vars.input.descenderHeight}) + ${vars.input.gap})`,
       },
     },
 
     vars: {
-      [_inputVars.color.placeholder]: `color-mix(in srgb, transparent, ${vars.color.fg} 50%)`,
+      [vars.input.color.placeholder]: `color-mix(in srgb, transparent, ${vars.color.fg} 50%)`,
     },
   },
   'element',
@@ -276,7 +256,7 @@ export const presentation: string = _style(
     borderRadius: 'inherit',
     // @ts-expect-error - `cornerShape` is not yet fully supported in CSS
     cornerShape: 'inherit',
-    boxShadow: _inputVars.boxShadow,
+    boxShadow: vars.input.boxShadow,
     display: 'block',
     position: 'absolute',
     top: 0,
@@ -301,7 +281,7 @@ export const presentation: string = _style(
 
       // focus ring
       [`${element}:not([data-no-focus-ring]):focus + &`]: {
-        boxShadow: `${vars.input.text.focusRing}, ${_inputVars.boxShadow}`,
+        boxShadow: `${vars.input.text.focusRing}, ${vars.input.boxShadow}`,
       },
     },
   },
@@ -319,11 +299,11 @@ export const fontSize: ResponsiveRuleOptions<FontTextSize> = {
           _layers.primitive,
           {
             vars: {
-              [_inputVars.fontSize]: source.fontSize,
-              [_inputVars.lineHeight]: source.lineHeight,
-              [_inputVars.letterSpacing]: source.letterSpacing,
-              [_inputVars.ascenderHeight]: source.ascenderHeight,
-              [_inputVars.descenderHeight]: source.descenderHeight,
+              [vars.input.fontSize]: source.fontSize,
+              [vars.input.lineHeight]: source.lineHeight,
+              [vars.input.letterSpacing]: source.letterSpacing,
+              [vars.input.ascenderHeight]: source.ascenderHeight,
+              [vars.input.descenderHeight]: source.descenderHeight,
             },
           },
           `s-${s}`,
@@ -341,7 +321,7 @@ export const padding: ResponsiveRuleOptions<Space> = {
         _layers.primitive,
         {
           vars: {
-            [_inputVars.padding]: vars.space[s],
+            [vars.input.padding]: vars.space[s],
           },
         },
         `p-${s}`,
@@ -358,7 +338,7 @@ export const gap: ResponsiveRuleOptions<Space> = {
         _layers.primitive,
         {
           vars: {
-            [_inputVars.gap]: vars.space[s],
+            [vars.input.gap]: vars.space[s],
           },
         },
         `g-${s}`,
