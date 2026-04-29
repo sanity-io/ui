@@ -1,0 +1,9 @@
+.sui-Text {
+  --tone-text-default: light-dark(var(--gray-800), var(--gray-200));
+  color: var(--tone-text, var(--tone-text-default));
+}
+
+.sui-Text:where(.sui-text-muted) {
+  --tone-text-muted-default: light-dark(var(--gray-600), var(--gray-400));
+  color: var(--tone-text-muted, var(--tone-text-muted-default));
+}

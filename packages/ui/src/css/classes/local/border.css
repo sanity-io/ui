@@ -1,6 +1,3 @@
-/* Border colors set via `tone` use a --tone-separator custom property;
- * if this hasn't been defined within the scope of the border class,
- * we fall back to the default border color. */
 @breakpoints {
   .sui-border { border: 1px solid var(--tone-separator, var(--border-color-default)); }
   .sui-border-none { border: none; }
