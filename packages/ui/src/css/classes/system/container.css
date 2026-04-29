@@ -1,0 +1,20 @@
+@breakpoints {
+  .sui-width0 {
+    width: var(--container-0);
+  }
+  .sui-width1 {
+    width: var(--container-1);
+  }
+  .sui-width2 {
+    width: var(--container-2);
+  }
+  .sui-width3 {
+    width: var(--container-3);
+  }
+  .sui-width4 {
+    width: var(--container-4);
+  }
+  .sui-width5 {
+    width: var(--container-5);
+  }
+}

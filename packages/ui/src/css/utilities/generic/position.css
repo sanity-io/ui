@@ -1,7 +1,0 @@
-@breakpoints {
-  .sui-position-static { position: static; }
-  .sui-position-relative { position: relative; }
-  .sui-position-absolute { position: absolute; }
-  .sui-position-fixed { position: fixed; }
-  .sui-position-sticky { position: sticky; }
-}

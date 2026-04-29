@@ -1,0 +1,11 @@
+@breakpoints {
+  .sui-width {
+    width: var(--width);
+  }
+  .sui-min-width {
+    min-width: var(--min-width);
+  }
+  .sui-max-width {
+    max-width: var(--max-width);
+  }
+}

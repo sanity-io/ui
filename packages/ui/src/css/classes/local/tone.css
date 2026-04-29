@@ -1,0 +1,34 @@
+.sui-tone-none {
+  --tone-surface: var(--tone-none-surface);
+  --tone-separator: var(--tone-none-separator);
+}
+
+.sui-tone-neutral {
+  --tone-surface: var(--tone-neutral-surface);
+  --tone-separator: var(--tone-neutral-separator);
+}
+
+.sui-tone-primary {
+  --tone-surface: var(--tone-primary-surface);
+  --tone-separator: var(--tone-primary-separator);
+}
+
+.sui-tone-positive {
+  --tone-surface: var(--tone-positive-surface);
+  --tone-separator: var(--tone-positive-separator);
+}
+
+.sui-tone-suggest {
+  --tone-surface: var(--tone-suggest-surface);
+  --tone-separator: var(--tone-suggest-separator);
+}
+
+.sui-tone-caution {
+  --tone-surface: var(--tone-caution-surface);
+  --tone-separator: var(--tone-caution-separator);
+}
+
+.sui-tone-critical {
+  --tone-surface: var(--tone-critical-surface);
+  --tone-separator: var(--tone-critical-separator);
+}
