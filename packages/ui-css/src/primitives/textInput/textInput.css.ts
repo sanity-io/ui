@@ -1,10 +1,21 @@
-import {globalStyle} from '@vanilla-extract/css'
-
 import {_layers} from '../../layers.css'
+import {_globalStyle} from '../../lib/css/_globalStyle.css'
 import {_style} from '../../lib/css/_style.css'
 import {vars} from '../../vars'
 
 export const root: string = _style(_layers.primitive, {}, '')
+
+export const element: string = _style(
+  _layers.primitive,
+  {
+    display: 'block',
+    borderRadius: 'inherit',
+    flex: 1,
+    position: 'relative',
+    width: 'stretch',
+  },
+  'element',
+)
 
 export const prefix: string = _style(
   _layers.primitive,
@@ -20,25 +31,11 @@ export const prefix: string = _style(
   'prefix',
 )
 
-globalStyle(`${prefix} > span`, {
-  [`@layer ${_layers.primitive}`]: {
-    display: 'block',
-    margin: `calc(0px - ${vars.input.border.width})`,
-    marginRight: 0,
-  },
+_globalStyle(_layers.primitive, `${prefix} > span`, {
+  display: 'block',
+  margin: `calc(0px - ${vars.input.border.width})`,
+  marginRight: 0,
 })
-
-export const element: string = _style(
-  _layers.primitive,
-  {
-    display: 'block',
-    borderRadius: 'inherit',
-    flex: 1,
-    position: 'relative',
-    width: 'stretch',
-  },
-  'element',
-)
 
 export const suffix: string = _style(
   _layers.primitive,
@@ -54,10 +51,8 @@ export const suffix: string = _style(
   'suffix',
 )
 
-globalStyle(`${suffix} > span`, {
-  [`@layer ${_layers.primitive}`]: {
-    display: 'block',
-    margin: `calc(0px - ${vars.input.border.width})`,
-    marginLeft: 0,
-  },
+_globalStyle(_layers.primitive, `${suffix} > span`, {
+  display: 'block',
+  margin: `calc(0px - ${vars.input.border.width})`,
+  marginLeft: 0,
 })
