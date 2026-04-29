@@ -32,7 +32,7 @@ export const _colorSchemeVarsClassNames = _fromEntries(
           tokens,
           {
             ..._vars,
-            color: {..._vars.color, ..._colorSchemeVars.color},
+            ..._colorSchemeVars,
           },
           'vars/build/color/_scheme',
         ),
@@ -45,8 +45,8 @@ export const _colorSchemeVarsClassNames = _fromEntries(
 )
 
 _globalStyle(_layers.vars, `.${_colorSchemeVarsClassNames.light}`, {
-  colorScheme: _colorSchemeVars.colorScheme,
+  colorScheme: _colorSchemeVars._scheme.colorScheme,
 })
 _globalStyle(_layers.vars, `.${_colorSchemeVarsClassNames.dark}`, {
-  colorScheme: _colorSchemeVars.colorScheme,
+  colorScheme: _colorSchemeVars._scheme.colorScheme,
 })

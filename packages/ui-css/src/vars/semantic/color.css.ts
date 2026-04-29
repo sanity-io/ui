@@ -8,8 +8,8 @@ import {_cardToneVars} from '../context/card/_tone.css'
 import {elementToneVars} from '../context/element/tone.css'
 
 const _vars = {
+  ..._cardToneVars,
   color: {
-    ..._cardToneVars.color,
     ...elementToneVars.color,
   },
 }
@@ -23,9 +23,9 @@ export const colorVarsClassName = createTheme(colorVars, {
   ..._toCSSTokens(
     colorTokens,
     {
+      ..._vars,
       color: {
-        ..._cardToneVars.color,
-        ...elementToneVars.color,
+        ..._vars.color,
         ...colorVars.color,
       },
     },

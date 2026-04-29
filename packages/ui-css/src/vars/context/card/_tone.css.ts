@@ -8,9 +8,7 @@ import {_toCSSTokens} from '../../../lib/css-tokens/_toCSSTokens'
 import {_colorSchemeVars} from '../../build/color/_scheme.css'
 
 const _vars = {
-  color: {
-    ..._colorSchemeVars,
-  },
+  ..._colorSchemeVars,
 }
 
 const _cssTokens = _toCSSTokens(_cardToneTokens.default, _vars, 'vars/context/card/_tone', false)
@@ -30,10 +28,8 @@ export const _cardToneClassNames = _fromEntries(
         ..._toCSSTokens(
           tokens,
           {
-            color: {
-              ..._colorSchemeVars.color,
-              ..._cardToneVars.color,
-            },
+            ..._vars,
+            ..._cardToneVars,
           },
           'vars/context/card/_tone',
         ),

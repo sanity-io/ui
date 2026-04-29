@@ -9,8 +9,8 @@ import {elementToneVars} from '../context/element/tone.css'
 import {colorVars} from '../semantic/color.css'
 
 const _vars = {
+  ..._cardToneVars,
   color: {
-    ..._cardToneVars.color,
     ...colorVars.color,
     ...elementToneVars.color,
   },

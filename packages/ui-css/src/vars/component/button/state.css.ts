@@ -10,9 +10,9 @@ import {borderVars} from '../../decision/border.css'
 import {colorVars} from '../../semantic/color.css'
 
 const _vars = {
+  ..._cardToneVars,
   ...borderVars,
   color: {
-    ..._cardToneVars.color,
     ...colorVars.color,
     ...elementToneVars.color,
   },

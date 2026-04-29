@@ -8,9 +8,7 @@ import {_toCSSTokens} from '../../../lib/css-tokens/_toCSSTokens'
 import {_colorSchemeVars} from '../../build/color/_scheme.css'
 
 const _vars = {
-  color: {
-    ..._colorSchemeVars.color,
-  },
+  ..._colorSchemeVars,
 }
 
 const _cssTokens = _toCSSTokens(avatarColorTokens.gray, _vars, 'vars/component/avatar/color', false)

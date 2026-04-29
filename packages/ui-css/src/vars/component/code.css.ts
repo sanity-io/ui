@@ -7,9 +7,7 @@ import type {CSSVars} from '../../lib/css-tokens/types'
 import {_colorSchemeVars} from '../build/color/_scheme.css'
 
 const _vars = {
-  color: {
-    ..._colorSchemeVars.color,
-  },
+  ..._colorSchemeVars,
 }
 const _cssTokens = _toCSSTokens(codeTokens, _vars, 'vars/component/code')
 const _theme = createTheme({'@layer': _layers.vars, ..._cssTokens})

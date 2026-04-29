@@ -9,9 +9,7 @@ import {_colorSchemeVars} from '../../build/color/_scheme.css'
 import {_cardToneVars} from '../card/_tone.css'
 
 const _vars = {
-  color: {
-    ..._cardToneVars.color,
-  },
+  ..._cardToneVars,
 }
 
 const _cssTokens = _toCSSTokens(
