@@ -42,7 +42,7 @@ export const buttonMode = _fromEntries(
         '@layer': _layers.primitive,
         ..._toCSSTokens(buttonModeTokens[variant], _vars, 'vars/component/button/mode'),
       },
-      variant,
+      `variant-${variant}`,
     )
 
     return [variant, className]
