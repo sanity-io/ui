@@ -16,8 +16,6 @@ export type PositionProps = {
   bottom?: Responsive<SpaceAuto>
   /** CSS **left** property */
   left?: Responsive<SpaceAuto>
-  /** CSS **z-index** property */
-  zIndex?: Responsive<number>
 }
 
 export const positionProps: Record<string, PropDef> = {
@@ -50,10 +48,5 @@ export const positionProps: Record<string, PropDef> = {
     type: 'union',
     className: 'left',
     values: SPACE_AUTO,
-  },
-  zIndex: {
-    type: 'number',
-    className: 'z-index',
-    variable: '--z-index',
   },
 }

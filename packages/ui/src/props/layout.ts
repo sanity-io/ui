@@ -10,6 +10,7 @@ import {type PositionProps, positionProps} from './position'
 import {type ShadowProps, shadowProps} from './shadow'
 import {type ToneProps, toneProps} from './tone'
 import {type WidthProps, widthProps} from './width'
+import {type ZIndexProps, zIndexProps} from './zIndex'
 
 export interface LayoutProps
   extends
@@ -23,6 +24,7 @@ export interface LayoutProps
     OverflowProps,
     FlexChildProps,
     GridChildProps,
+    ZIndexProps,
     ShadowProps {}
 
 export const layoutProps: Record<string, PropDef> = {
@@ -37,4 +39,5 @@ export const layoutProps: Record<string, PropDef> = {
   ...flexChildProps,
   ...gridChildProps,
   ...shadowProps,
+  ...zIndexProps,
 }
