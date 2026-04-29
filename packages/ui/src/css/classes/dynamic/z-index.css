@@ -1,5 +1,3 @@
 @breakpoints {
-  .sui-z-index {
-    z-index: var(--z-index);
-  }
+  .sui-z-index { z-index: var(--z-index); }
 }

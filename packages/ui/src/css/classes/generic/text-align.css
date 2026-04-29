@@ -1,11 +1,5 @@
 @breakpoints {
-  .sui-text-left {
-    text-align: left;
-  }
-  .sui-text-center {
-    text-align: center;
-  }
-  .sui-text-right {
-    text-align: right;
-  }
+  .sui-text-left { text-align: left; }
+  .sui-text-center { text-align: center; }
+  .sui-text-right { text-align: right; }
 }

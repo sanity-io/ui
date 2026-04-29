@@ -1,6 +1,2 @@
-.sui-font-sans {
-  font-family: var(--sans);
-}
-.sui-font-mono {
-  font-family: var(--mono);
-}
+.sui-font-sans { font-family: var(--sans); }
+.sui-font-mono { font-family: var(--mono); }
