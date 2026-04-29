@@ -44,32 +44,32 @@ export const inputColorTokens = _defineTokens({
 
       invalid: {
         enabled: {
-          bg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
-          border: _colorAlias('{color._cardTone.tinted.critical.border.1}'),
-          fg: _colorAlias('{color._cardTone.tinted.critical.fg.4}'),
+          bg: _colorAlias('{_tone.color.tinted.critical.bg.1}'),
+          border: _colorAlias('{_tone.color.tinted.critical.border.1}'),
+          fg: _colorAlias('{_tone.color.tinted.critical.fg.4}'),
           muted: {
-            bg: _colorAlias('{color._cardTone.tinted.critical.bg.2}'),
-            fg: _colorAlias('{color._cardTone.tinted.critical.fg.4}'),
+            bg: _colorAlias('{_tone.color.tinted.critical.bg.2}'),
+            fg: _colorAlias('{_tone.color.tinted.critical.fg.4}'),
           },
         },
 
         hovered: {
-          bg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
-          border: _colorAlias('{color._cardTone.tinted.critical.border.4}'),
-          fg: _colorAlias('{color._cardTone.tinted.critical.fg.0}'),
+          bg: _colorAlias('{_tone.color.tinted.critical.bg.1}'),
+          border: _colorAlias('{_tone.color.tinted.critical.border.4}'),
+          fg: _colorAlias('{_tone.color.tinted.critical.fg.0}'),
           muted: {
-            bg: _colorAlias('{color._cardTone.tinted.critical.bg.2}'),
-            fg: _colorAlias('{color._cardTone.tinted.critical.fg.4}'),
+            bg: _colorAlias('{_tone.color.tinted.critical.bg.2}'),
+            fg: _colorAlias('{_tone.color.tinted.critical.fg.4}'),
           },
         },
 
         disabled: {
-          bg: _colorAlias('{color._cardTone.tinted.critical.bg.1}'),
-          border: _colorAlias('{color._cardTone.tinted.critical.border.0}'),
-          fg: _colorAlias('{color._cardTone.tinted.critical.border.3}'),
+          bg: _colorAlias('{_tone.color.tinted.critical.bg.1}'),
+          border: _colorAlias('{_tone.color.tinted.critical.border.0}'),
+          fg: _colorAlias('{_tone.color.tinted.critical.border.3}'),
           muted: {
-            bg: _colorAlias('{color._cardTone.tinted.critical.bg.2}'),
-            fg: _colorAlias('{color._cardTone.tinted.critical.border.2}'),
+            bg: _colorAlias('{_tone.color.tinted.critical.bg.2}'),
+            fg: _colorAlias('{_tone.color.tinted.critical.border.2}'),
           },
         },
       },

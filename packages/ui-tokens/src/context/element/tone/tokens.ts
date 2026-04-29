@@ -17,53 +17,53 @@ export const elementToneTokens = {
               v,
               {
                 bg: {
-                  0: _colorAlias(`{color._cardTone.${v}.${t}.bg.0}`, {
+                  0: _colorAlias(`{_tone.color.${v}.${t}.bg.0}`, {
                     scopes: ['fill/frame', 'fill/shape'],
                   }),
-                  1: _colorAlias(`{color._cardTone.${v}.${t}.bg.1}`, {
+                  1: _colorAlias(`{_tone.color.${v}.${t}.bg.1}`, {
                     scopes: ['fill/frame', 'fill/shape'],
                   }),
-                  2: _colorAlias(`{color._cardTone.${v}.${t}.bg.2}`, {
+                  2: _colorAlias(`{_tone.color.${v}.${t}.bg.2}`, {
                     scopes: ['fill/frame', 'fill/shape'],
                   }),
-                  3: _colorAlias(`{color._cardTone.${v}.${t}.bg.3}`, {
+                  3: _colorAlias(`{_tone.color.${v}.${t}.bg.3}`, {
                     scopes: ['fill/frame', 'fill/shape'],
                   }),
-                  4: _colorAlias(`{color._cardTone.${v}.${t}.bg.4}`, {
+                  4: _colorAlias(`{_tone.color.${v}.${t}.bg.4}`, {
                     scopes: ['fill/frame', 'fill/shape'],
                   }),
                 },
                 border: {
-                  0: _colorAlias(`{color._cardTone.${v}.${t}.border.0}`, {
+                  0: _colorAlias(`{_tone.color.${v}.${t}.border.0}`, {
                     scopes: ['stroke/color'],
                   }),
-                  1: _colorAlias(`{color._cardTone.${v}.${t}.border.1}`, {
+                  1: _colorAlias(`{_tone.color.${v}.${t}.border.1}`, {
                     scopes: ['stroke/color'],
                   }),
-                  2: _colorAlias(`{color._cardTone.${v}.${t}.border.2}`, {
+                  2: _colorAlias(`{_tone.color.${v}.${t}.border.2}`, {
                     scopes: ['stroke/color'],
                   }),
-                  3: _colorAlias(`{color._cardTone.${v}.${t}.border.3}`, {
+                  3: _colorAlias(`{_tone.color.${v}.${t}.border.3}`, {
                     scopes: ['stroke/color'],
                   }),
-                  4: _colorAlias(`{color._cardTone.${v}.${t}.border.4}`, {
+                  4: _colorAlias(`{_tone.color.${v}.${t}.border.4}`, {
                     scopes: ['stroke/color'],
                   }),
                 },
                 fg: {
-                  0: _colorAlias(`{color._cardTone.${v}.${t}.fg.0}`, {
+                  0: _colorAlias(`{_tone.color.${v}.${t}.fg.0}`, {
                     scopes: ['fill/text', 'fill/shape', 'stroke/color'],
                   }),
-                  1: _colorAlias(`{color._cardTone.${v}.${t}.fg.1}`, {
+                  1: _colorAlias(`{_tone.color.${v}.${t}.fg.1}`, {
                     scopes: ['fill/text', 'fill/shape', 'stroke/color'],
                   }),
-                  2: _colorAlias(`{color._cardTone.${v}.${t}.fg.2}`, {
+                  2: _colorAlias(`{_tone.color.${v}.${t}.fg.2}`, {
                     scopes: ['fill/text', 'fill/shape', 'stroke/color'],
                   }),
-                  3: _colorAlias(`{color._cardTone.${v}.${t}.fg.3}`, {
+                  3: _colorAlias(`{_tone.color.${v}.${t}.fg.3}`, {
                     scopes: ['fill/text', 'fill/shape', 'stroke/color'],
                   }),
-                  4: _colorAlias(`{color._cardTone.${v}.${t}.fg.4}`, {
+                  4: _colorAlias(`{_tone.color.${v}.${t}.fg.4}`, {
                     scopes: ['fill/text', 'fill/shape', 'stroke/color'],
                   }),
                 },

@@ -8,30 +8,30 @@ import {_colorAlias} from '../../lib/color/_colorAlias'
 export const colorTokens = _defineTokens({
   color: _defineTokenGroup({
     $type: 'color',
-    backdrop: _colorAlias('{color._cardTone.backdrop}', {scopes: ['fill/shape']}),
-    bg: _colorAlias('{color._cardTone.tinted.default.bg.0}', {
+    backdrop: _colorAlias('{_tone.color.backdrop}', {scopes: ['fill/shape']}),
+    bg: _colorAlias('{_tone.color.tinted.default.bg.0}', {
       scopes: ['effect/color', 'fill/frame', 'fill/shape'],
     }),
-    border: _colorAlias('{color._cardTone.tinted.default.border.2}', {scopes: ['stroke/color']}),
-    fg: _colorAlias('{color._cardTone.tinted.default.fg.0}', {scopes: ['fill/text']}),
-    focusRing: _colorAlias('{color._cardTone.focusRing}', {scopes: ['effect/color']}),
+    border: _colorAlias('{_tone.color.tinted.default.border.2}', {scopes: ['stroke/color']}),
+    fg: _colorAlias('{_tone.color.tinted.default.fg.0}', {scopes: ['fill/text']}),
+    focusRing: _colorAlias('{_tone.color.focusRing}', {scopes: ['effect/color']}),
     link: {
-      fg: _colorAlias('{color._cardTone.link.fg}', {scopes: ['fill/text']}),
+      fg: _colorAlias('{_tone.color.link.fg}', {scopes: ['fill/text']}),
     },
     muted: {
-      bg: _colorAlias('{color._cardTone.tinted.default.bg.1}', {scopes: ['fill/frame']}),
-      border: _colorAlias('{color._cardTone.tinted.default.border.1}', {scopes: ['stroke/color']}),
-      fg: _colorAlias('{color._cardTone.tinted.default.fg.4}', {scopes: ['fill/text']}),
+      bg: _colorAlias('{_tone.color.tinted.default.bg.1}', {scopes: ['fill/frame']}),
+      border: _colorAlias('{_tone.color.tinted.default.border.1}', {scopes: ['stroke/color']}),
+      fg: _colorAlias('{_tone.color.tinted.default.fg.4}', {scopes: ['fill/text']}),
     },
     shadow: {
-      outline: _colorAlias('{color._cardTone.shadow.outline}', {scopes: ['effect/color']}),
-      umbra: _colorAlias('{color._cardTone.shadow.umbra}', {scopes: ['effect/color']}),
-      penumbra: _colorAlias('{color._cardTone.shadow.penumbra}', {scopes: ['effect/color']}),
-      ambient: _colorAlias('{color._cardTone.shadow.ambient}', {scopes: ['effect/color']}),
+      outline: _colorAlias('{_tone.color.shadow.outline}', {scopes: ['effect/color']}),
+      umbra: _colorAlias('{_tone.color.shadow.umbra}', {scopes: ['effect/color']}),
+      penumbra: _colorAlias('{_tone.color.shadow.penumbra}', {scopes: ['effect/color']}),
+      ambient: _colorAlias('{_tone.color.shadow.ambient}', {scopes: ['effect/color']}),
     },
     skeleton: {
-      from: _colorAlias('{color._cardTone.tinted.default.bg.3}', {scopes: ['fill/frame']}),
-      to: _colorAlias('{color._cardTone.tinted.default.bg.2}', {scopes: ['fill/frame']}),
+      from: _colorAlias('{_tone.color.tinted.default.bg.3}', {scopes: ['fill/frame']}),
+      to: _colorAlias('{_tone.color.tinted.default.bg.2}', {scopes: ['fill/frame']}),
     },
   }),
 })

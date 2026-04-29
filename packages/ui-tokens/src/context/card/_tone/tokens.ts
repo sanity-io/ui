@@ -2,7 +2,7 @@ import {_CODE_TOKEN_KEYS, CARD_TONES, COLOR_VARIANTS, ELEMENT_TONES} from '../..
 import {_defineTokenGroup} from '../../../lib/_defineTokenGroup'
 import {_fromEntries} from '../../../lib/_fromEntries'
 import {_colorAlias} from '../../../lib/color/_colorAlias'
-import type {CardToneTokens, ColorToken} from '../../../lib/color/types'
+import type {CardToneColorTokens, ColorToken} from '../../../lib/color/types'
 import type {CardTone} from '../../../types'
 
 /** @internal */
@@ -10,18 +10,18 @@ export const _cardToneTokens = _fromEntries(
   CARD_TONES.map((cardTone) => [
     cardTone,
     {
-      color: _defineTokenGroup({
-        $type: 'color',
-        _cardTone: buildCardToneTokens(cardTone),
-      }),
+      _tone: {
+        color: buildCardToneColorTokens(cardTone),
+      },
     } as const,
   ]),
 )
 
-function buildCardToneTokens(cardTone: CardTone): CardToneTokens {
+function buildCardToneColorTokens(cardTone: CardTone): CardToneColorTokens {
   const prefix = `_scheme.color.${cardTone}` as const
 
   return {
+    $type: 'color',
     backdrop: _colorAlias(`{${prefix}.backdrop}`),
     focusRing: _colorAlias(`{${prefix}.focusRing}`),
     link: {
