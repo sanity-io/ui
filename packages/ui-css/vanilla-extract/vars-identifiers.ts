@@ -9,12 +9,14 @@ const shortNamespaces: Record<string, string | undefined> = {
   'context/element/tone': 'element',
 
   'component/avatar': 'avatar',
-  'component/avatar/color': 'avatar-color',
+  'component/avatar/color': 'avatar',
+  'component/boolean/color': 'boolean-color',
   'component/button/mode': 'button',
   'component/button': 'button',
   'component/card': 'card',
   'component/code': 'code',
   'component/input': 'input',
+  'component/input/color': 'input-color',
   'component/selectable': 'selectable',
 
   'decision/border': 'border',
@@ -62,8 +64,6 @@ export function _varsIdentifiers(params: {debugId?: string; hash: string; filePa
 
   namespace = sanitize(dashCase(namespace))
 
-  // console.log('namespace', namespace)
-
   // identifier of single variant collections
   if (id === '') {
     return `ui-${namespace}-vars`
@@ -79,6 +79,10 @@ export function _varsIdentifiers(params: {debugId?: string; hash: string; filePa
   // internal variable
   if (isInternal) {
     return `ui-${hash}` // internal identifier
+  }
+
+  if (id.startsWith('palette-')) {
+    id = id.slice('palette-'.length)
   }
 
   // identifier of variable
