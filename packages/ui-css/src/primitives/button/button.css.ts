@@ -1,7 +1,6 @@
 import {_layers} from '../../layers.css'
 import {_style} from '../../lib/css/_style.css'
 import {vars} from '../../vars'
-import {buttonModeVars} from '../../vars/component/button/mode.css'
 
 const stateSelectors = {
   hovered: '&:not(:disabled):hover, &:not(:disabled)[data-hovered]',
@@ -26,7 +25,7 @@ export const root: string = _style(
     'textAlign': 'left',
     'position': 'relative',
     'verticalAlign': 'top',
-    'boxShadow': buttonModeVars.button.boxShadow,
+    'boxShadow': vars.button.boxShadow,
     'backgroundColor': vars.button.color.bg,
 
     '@media': {
@@ -118,11 +117,11 @@ export const root: string = _style(
       },
 
       '&:focus': {
-        boxShadow: `${buttonModeVars.button.boxShadow}, ${vars.button.focusRing}`,
+        boxShadow: `${vars.button.boxShadow}, ${vars.button.focusRing}`,
       },
 
       '&:focus:not(:focus-visible)': {
-        boxShadow: buttonModeVars.button.boxShadow,
+        boxShadow: vars.button.boxShadow,
       },
     },
 

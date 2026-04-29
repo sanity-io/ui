@@ -37,6 +37,7 @@ import {avatarColorVars} from './vars/component/avatar/color.css'
 import {codeVars} from './vars/component/code.css'
 import {booleanColorVars} from './vars/component/boolean/color.css'
 import {inputColorVars} from './vars/component/input/color.css'
+import {buttonModeVars} from './vars/component/button/mode.css'
 import {buttonSlotVars} from './vars/component/button/slots.css'
 import {inputSlotVars} from './vars/component/input/slots.css'
 import {avatarSlotVars} from './vars/component/avatar/slots.css'
@@ -104,6 +105,7 @@ export const vars = {
   },
   button: {
     ...buttonVars.button,
+    ...buttonModeVars.button,
     color: {
       ...buttonModeVars.button.color,
       ...buttonSlotVars.button.color,
