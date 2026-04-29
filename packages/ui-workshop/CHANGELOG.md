@@ -1,3 +1,9 @@
+## 4.0.0-beta.8
+
+### Patch Changes
+
+- [`1e90c51`](https://github.com/sanity-io/ui/commit/1e90c51459d3abb0388b2879e3e9a34cf63dc04f) Thanks [@mariuslundgard](https://github.com/mariuslundgard)! - Refine CSS token output and namespacing, including exposed primitive/component slot variables, normalized variable identifiers, resolved scheme/tone aliases, namespaced button variants, stable text input output, and RGB transparent colors.
+
 ## 4.0.0-beta.7
 
 ### Patch Changes
