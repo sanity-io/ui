@@ -1,34 +1,48 @@
 .sui-tone-none {
   --tone-surface: var(--tone-none-surface);
   --tone-separator: var(--tone-none-separator);
+  --tone-text: var(--tone-none-text);
+  --tone-text-muted: var(--tone-none-text-muted);
 }
 
 .sui-tone-neutral {
   --tone-surface: var(--tone-neutral-surface);
   --tone-separator: var(--tone-neutral-separator);
+  --tone-text: var(--tone-neutral-text);
+  --tone-text-muted: var(--tone-neutral-text-muted);
 }
 
 .sui-tone-primary {
   --tone-surface: var(--tone-primary-surface);
   --tone-separator: var(--tone-primary-separator);
+  --tone-text: var(--tone-primary-text);
+  --tone-text-muted: var(--tone-primary-text-muted);
 }
 
 .sui-tone-positive {
   --tone-surface: var(--tone-positive-surface);
   --tone-separator: var(--tone-positive-separator);
+  --tone-text: var(--tone-positive-text);
+  --tone-text-muted: var(--tone-positive-text-muted);
 }
 
 .sui-tone-suggest {
   --tone-surface: var(--tone-suggest-surface);
   --tone-separator: var(--tone-suggest-separator);
+  --tone-text: var(--tone-suggest-text);
+  --tone-text-muted: var(--tone-suggest-text-muted);
 }
 
 .sui-tone-caution {
   --tone-surface: var(--tone-caution-surface);
   --tone-separator: var(--tone-caution-separator);
+  --tone-text: var(--tone-caution-text);
+  --tone-text-muted: var(--tone-caution-text-muted);
 }
 
 .sui-tone-critical {
   --tone-surface: var(--tone-critical-surface);
   --tone-separator: var(--tone-critical-separator);
+  --tone-text: var(--tone-critical-text);
+  --tone-text-muted: var(--tone-critical-text-muted);
 }

@@ -2,8 +2,9 @@ import {FONT_WEIGHT, type FontWeight} from '../types/FontWeight'
 import {type PropDef} from '../types/PropDef'
 import {TEXT_ALIGN, type TextAlign} from '../types/TextAlign'
 import {type MarginProps, marginProps} from './margin'
+import {type ToneProps, toneProps} from './tone'
 
-export interface TypographyProps extends MarginProps {
+export interface TypographyProps extends MarginProps, ToneProps {
   /** CSS **text-align** property */
   align?: TextAlign
   /** CSS **-webkit-line-clamp** property */
@@ -43,4 +44,5 @@ export const typographyProps: Record<string, PropDef> = {
     values: FONT_WEIGHT,
   },
   ...marginProps,
+  ...toneProps,
 }
