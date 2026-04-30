@@ -1,4 +1,4 @@
-import {defineInlineTest} from '../../utils/testUtils'
+import {defineInlineTest} from '../../../utils/testUtils'
 import transform from './text'
 
 defineInlineTest(
@@ -101,7 +101,12 @@ defineInlineTest(
   <Text maxWidth="fill" />
   `,
   `
-  <Text maxWidth="100%" as="div" trim={true} />
+  <Text
+    style={{
+      maxWidth: "100%"
+    }}
+    as="div"
+    trim={true} />
   `,
-  'updates maxWidth prop mapped value',
+  'moves maxWidth prop to style and updates mapped value',
 )

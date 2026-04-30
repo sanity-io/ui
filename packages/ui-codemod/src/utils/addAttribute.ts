@@ -1,7 +1,7 @@
 import type {API, JSXOpeningElement} from 'jscodeshift'
 
+import {getAttribute} from './getAttribute'
 import {getAttributeValue} from './getAttributeValue'
-import {hasAttribute} from './hasAttribute'
 
 export function addAttribute(
   j: API['jscodeshift'],
@@ -9,7 +9,7 @@ export function addAttribute(
   name: string,
   value: unknown,
 ) {
-  if (hasAttribute(node, name)) {
+  if (getAttribute(node.attributes, name)) {
     return
   }
 

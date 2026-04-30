@@ -1,6 +1,7 @@
 import {type API, type ArrayExpression} from 'jscodeshift'
 
-import {type AnyExpression, type AttributeMapping} from '../types/AnyExpression'
+import type {AnyExpression} from '../types/AnyExpression'
+import type {AttributeMapping} from '../types/AttributeMods'
 import {getMappingExpression} from './getMappingExpression'
 import {getMappingValue} from './getMappingValue'
 

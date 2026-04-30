@@ -1,7 +1,9 @@
 import {type API, type ASTPath, type JSXOpeningElement} from 'jscodeshift'
 
 import {type AttributeMods} from '../types/AttributeMods'
+import {getAttribute} from './getAttribute'
 import {getAttributeExpression} from './getAttributeExpression'
+import {getCompositeAttrValue} from './getCompositeAttrValue'
 import {getMappingArray} from './getMappingArray'
 import {getMappingExpression} from './getMappingExpression'
 import {getMappingValue} from './getMappingValue'
@@ -24,6 +26,18 @@ export function transformAttributes(
   const attrs = path.node.attributes
   const removeIdxs: number[] = []
 
+  for (const [attrName, mod] of Object.entries(mods)) {
+    if (mod?.type !== 'warn-missing') {
+      continue
+    }
+
+    if (getAttribute(attrs, attrName)) {
+      continue
+    }
+
+    insertTodoWarning(j, path, mod.warning || todoWarning)
+  }
+
   for (let i = 0, len = attrs.length; i < len; i++) {
     const attr = attrs[i]
 
@@ -40,6 +54,10 @@ export function transformAttributes(
 
     if (mod.type === 'remove') {
       removeIdxs.push(i)
+    }
+
+    if (mod.type === 'warn-only') {
+      insertTodoWarning(j, path, mod.warning || todoWarning)
     }
 
     if (mod.type === 'rename-only') {
@@ -71,7 +89,7 @@ export function transformAttributes(
 
       const styleValue = getMappingValue(mod.mapping, expr)
 
-      if (!styleValue) {
+      if (styleValue === undefined) {
         insertTodoWarning(j, path, todoWarning)
         continue
       }
@@ -98,6 +116,38 @@ export function transformAttributes(
         removeIdxs.push(i)
       } else {
         insertTodoWarning(j, path, todoWarning)
+      }
+    }
+
+    if (mod.type === 'composite') {
+      const triggerName = attr.name.name
+      const compositeValue = getCompositeAttrValue(j, attrs, mod.mapping)
+
+      if (!compositeValue) {
+        insertTodoWarning(j, path, todoWarning)
+        continue
+      }
+
+      if (attr.name.type === 'JSXIdentifier') {
+        attr.name.name = mod.name
+      }
+
+      attr.value = j.stringLiteral(compositeValue)
+
+      for (const attrName of Object.keys(mod.mapping[compositeValue] || {})) {
+        if (attrName === triggerName) {
+          continue
+        }
+
+        const otherAttr = getAttribute(attrs, attrName)
+
+        if (otherAttr) {
+          const k = attrs.indexOf(otherAttr)
+
+          if (k !== -1) {
+            removeIdxs.push(k)
+          }
+        }
       }
     }
 
@@ -132,7 +182,7 @@ export function transformAttributes(
 
       const styleValue = getMappingValue(mod.mapping, expr)
 
-      if (!styleValue) {
+      if (styleValue === undefined) {
         insertTodoWarning(j, path, todoWarning)
         continue
       }
@@ -146,11 +196,9 @@ export function transformAttributes(
     }
   }
 
-  for (let k = removeIdxs.length - 1; k >= 0; k--) {
-    const i = removeIdxs[k]
+  const idxsToRemove = [...new Set(removeIdxs)].sort((a, b) => b - a)
 
-    if (i !== undefined) {
-      attrs.splice(i, 1)
-    }
+  for (const i of idxsToRemove) {
+    attrs.splice(i, 1)
   }
 }

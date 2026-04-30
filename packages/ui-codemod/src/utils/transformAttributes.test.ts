@@ -9,6 +9,7 @@ const MODS: AttributeMods = {
     type: 'mapped-only',
     mapping: {
       default: true,
+      none: false,
     },
   },
   borderWidth: {type: 'remove'},
@@ -26,17 +27,17 @@ const MODS: AttributeMods = {
       {
         name: 'flexGrow',
         mapping: {
-          auto: '1',
-          1: '1',
-          2: '2',
+          auto: 1,
+          1: 1,
+          2: 2,
         },
       },
       {
         name: 'flexShrink',
         mapping: {
-          auto: '1',
-          1: '1',
-          2: '1',
+          auto: 1,
+          1: 1,
+          2: 1,
         },
       },
     ],
@@ -51,6 +52,20 @@ const MODS: AttributeMods = {
     mapping: {
       true: 'neutral',
     },
+  },
+  padding: {
+    type: 'composite',
+    name: 'density',
+    mapping: {
+      compact: {
+        padding: 3,
+        radius: 2,
+      },
+    },
+  },
+  scheme: {
+    type: 'warn-only',
+    warning: 'Custom warning',
   },
   sizing: {
     type: 'style-mapped',
@@ -155,6 +170,30 @@ defineInlineTest(
   transform,
   {},
   `
+  <div border="none" />
+  `,
+  `
+  <div border={false} />
+  `,
+  'updates boolean mapped prop value if false',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div border />
+  `,
+  `
+  <div border={true} />
+  `,
+  'skips updating mapped prop value if it matches existing',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
   <div muted />
   `,
   `
@@ -228,7 +267,7 @@ defineInlineTest(
   <div flex="auto" />
   `,
   `
-  <div flexBasis="auto" flexGrow="1" flexShrink="1" />
+  <div flexBasis="auto" flexGrow={1} flexShrink={1} />
   `,
   'splits up shorthand props and updates mapped prop value',
 )
@@ -240,9 +279,34 @@ defineInlineTest(
   <div flex={["2", "auto"]} />
   `,
   `
-  <div flexBasis={["0%", "auto"]} flexGrow={["2", "1"]} flexShrink={["1", "1"]} />
+  <div flexBasis={["0%", "auto"]} flexGrow={[2, 1]} flexShrink={[1, 1]} />
   `,
   'splits up shorthand props and updates responsive mapped prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div padding={3} radius={2} />
+  `,
+  `
+  <div density="compact" />
+  `,
+  'combines composite props and updates mapped prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div scheme="light" width="fill" />
+  `,
+  `
+  // UI-POC-CODEMOD TODO: Custom warning
+  <div scheme="light" width="100%" />
+  `,
+  'warns with custom warning for warn prop',
 )
 
 defineInlineTest(
@@ -252,7 +316,7 @@ defineInlineTest(
   <div width={3} />
   `,
   `
-  // TODO: ${TODO_WARNING}
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
   <div width={3} />
   `,
   'warns if mapped prop value does not match mappings',
@@ -265,7 +329,7 @@ defineInlineTest(
   <div width={[2, 3]} />
   `,
   `
-  // TODO: ${TODO_WARNING}
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
   <div width={[2, 3]} />
   `,
   'warns if responsive mapped prop value does not match mappings',
@@ -278,7 +342,7 @@ defineInlineTest(
   <div width={variable} />
   `,
   `
-  // TODO: ${TODO_WARNING}
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
   <div width={variable} />
   `,
   'warns if mapped prop value is a variable',
@@ -291,7 +355,7 @@ defineInlineTest(
   <div width={variable ? 'fill' : 0} />
   `,
   `
-  // TODO: ${TODO_WARNING}
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
   <div width={variable ? 'fill' : 0} />
   `,
   'warns if mapped prop value is a ternary',
@@ -304,7 +368,7 @@ defineInlineTest(
   <div width={\`fil\${\`l\`}\`} />
   `,
   `
-  // TODO: ${TODO_WARNING}
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
   <div width={\`fil\${\`l\`}\`} />
   `,
   'warns if mapped prop value is a template literal with variable',
@@ -317,7 +381,7 @@ defineInlineTest(
   <div textAlign={["center", "left"]} />
   `,
   `
-  // TODO: ${TODO_WARNING}
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
   <div textAlign={["center", "left"]} />
   `,
   'warns if responsive prop should be moved to style',
@@ -330,7 +394,7 @@ defineInlineTest(
   <div sizing={["content", "box"]} />
   `,
   `
-  // TODO: ${TODO_WARNING}
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
   <div sizing={["content", "box"]} />
   `,
   'warns if responsive prop should be moved to style with updated values',
@@ -343,8 +407,97 @@ defineInlineTest(
   <div textAlign={\`cente\${\`r\`}\`} />
   `,
   `
-  // TODO: ${TODO_WARNING}
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
   <div textAlign={\`cente\${\`r\`}\`} />
   `,
   'warns if prop with template literal value with variable should be moved to style',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div padding={3} />
+  `,
+  `
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  <div padding={3} />
+  `,
+  'warns if composite prop does not include all mappings',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div padding={[3, 4]} radius={2} />
+  `,
+  `
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  <div padding={[3, 4]} radius={2} />
+  `,
+  'warns if composite prop includes responsive values',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div padding={3} radius={variable} />
+  `,
+  `
+  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  <div padding={3} radius={variable} />
+  `,
+  'warns if composite prop includes variable',
+)
+
+function transformWarnMissing(fileInfo: FileInfo, api: API): string {
+  const j = api.jscodeshift
+  const root = j(fileInfo.source)
+
+  root
+    .find(j.JSXOpeningElement, {
+      name: {type: 'JSXIdentifier', name: 'div'},
+    })
+    .forEach((path) => {
+      transformAttributes(
+        j,
+        path,
+        {
+          requiredProp: {
+            type: 'warn-missing',
+            warning: 'Missing',
+          },
+        },
+        TODO_WARNING,
+      )
+    })
+
+  return root.toSource()
+}
+
+defineInlineTest(
+  transformWarnMissing,
+  {},
+  `
+  <div />
+  `,
+  `
+  // UI-POC-CODEMOD TODO: Missing
+  <div />
+  `,
+  'warns with custom warning for warn missing prop',
+)
+
+defineInlineTest(
+  transformWarnMissing,
+  {},
+  `
+  <div requiredProp />
+  `,
+  `
+  <div requiredProp />
+  `,
+  'does not warn for warn missing prop if prop is present',
 )

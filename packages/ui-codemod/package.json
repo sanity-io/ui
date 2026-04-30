@@ -1,6 +1,6 @@
 {
   "name": "@sanity-labs/ui-poc-codemod",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.9",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -9,40 +9,48 @@
   "type": "module",
   "exports": {
     "./transforms/latest/box": {
-      "source": "./src/transforms/latest/box.ts",
-      "default": "./dist/transforms/latest/box.js"
+      "source": "./src/transforms/latest/box/box.ts",
+      "default": "./dist/transforms/latest/box/box.js"
     },
     "./latest/box": {
       "source": "./src/commands/latest/box.ts",
       "default": "./dist/commands/latest/box.js"
     },
+    "./transforms/latest/card": {
+      "source": "./src/transforms/latest/card/card.ts",
+      "default": "./dist/transforms/latest/card/card.js"
+    },
+    "./latest/card": {
+      "source": "./src/commands/latest/card.ts",
+      "default": "./dist/commands/latest/card.js"
+    },
     "./transforms/latest/flex": {
-      "source": "./src/transforms/latest/flex.ts",
-      "default": "./dist/transforms/latest/flex.js"
+      "source": "./src/transforms/latest/flex/flex.ts",
+      "default": "./dist/transforms/latest/flex/flex.js"
     },
     "./latest/flex": {
       "source": "./src/commands/latest/flex.ts",
       "default": "./dist/commands/latest/flex.js"
     },
     "./transforms/latest/grid": {
-      "source": "./src/transforms/latest/grid.ts",
-      "default": "./dist/transforms/latest/grid.js"
+      "source": "./src/transforms/latest/grid/grid.ts",
+      "default": "./dist/transforms/latest/grid/grid.js"
     },
     "./latest/grid": {
       "source": "./src/commands/latest/grid.ts",
       "default": "./dist/commands/latest/grid.js"
     },
     "./transforms/latest/heading": {
-      "source": "./src/transforms/latest/heading.ts",
-      "default": "./dist/transforms/latest/heading.js"
+      "source": "./src/transforms/latest/heading/heading.ts",
+      "default": "./dist/transforms/latest/heading/heading.js"
     },
     "./latest/heading": {
       "source": "./src/commands/latest/heading.ts",
       "default": "./dist/commands/latest/heading.js"
     },
     "./transforms/latest/text": {
-      "source": "./src/transforms/latest/text.ts",
-      "default": "./dist/transforms/latest/text.js"
+      "source": "./src/transforms/latest/text/text.ts",
+      "default": "./dist/transforms/latest/text/text.js"
     },
     "./latest/text": {
       "source": "./src/commands/latest/text.ts",
