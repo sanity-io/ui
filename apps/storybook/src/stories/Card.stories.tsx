@@ -12,7 +12,6 @@ const meta: Meta<typeof Card> = {
   args: {
     children: 'This is a Card component.',
     as: 'div',
-    display: 'block',
   },
   argTypes,
   component: Card,
