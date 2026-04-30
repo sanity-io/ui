@@ -1,4 +1,4 @@
-import {Box, Card, Flex, Grid, Text, Heading, ThemeProvider} from '@sanity/ui'
+import {Box, Card, Flex, Grid, Heading, Text, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
 import {Profiler} from 'react'
 
@@ -18,8 +18,7 @@ function handleOnRender(
   /* eslint-disable-next-line no-console */
   console.log(JSON.stringify(value, null, 2))
   /* eslint-disable-next-line no-console */
-  console.log({perComponent})
-  navigator.clipboard.writeText(String(perComponent))
+  console.log(`per ${id} component: ${perComponent}`)
 }
 
 const theme = buildTheme()
@@ -29,7 +28,7 @@ export default function Ui3() {
     <ThemeProvider theme={theme}>
       <h1>UI v3</h1>
       <h2>{count} Boxes</h2>
-      <Profiler id="Boxes" onRender={handleOnRender}>
+      <Profiler id="Box" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Box key={i} padding={3} marginBottom={2}>
             <span>Box content</span>
@@ -38,7 +37,7 @@ export default function Ui3() {
       </Profiler>
 
       <h2>{count} Flexes</h2>
-      <Profiler id="Flexes" onRender={handleOnRender}>
+      <Profiler id="Flex" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Flex key={i} direction="column" gap={3}>
             <span>Flex content</span>
@@ -49,7 +48,7 @@ export default function Ui3() {
       </Profiler>
 
       <h2>{count} Grids</h2>
-      <Profiler id="Flexes" onRender={handleOnRender}>
+      <Profiler id="Flex" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Grid key={i} columns={2} gap={3}>
             <span>Flex content</span>
@@ -61,7 +60,7 @@ export default function Ui3() {
       </Profiler>
 
       <h2>{count} Texts</h2>
-      <Profiler id="Texts" onRender={handleOnRender}>
+      <Profiler id="Text" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Text key={i} size={2} muted>
             Text
@@ -70,7 +69,7 @@ export default function Ui3() {
       </Profiler>
 
       <h2>{count} Headings</h2>
-      <Profiler id="Headings" onRender={handleOnRender}>
+      <Profiler id="Heading" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Heading key={i} size={2} muted>
             Heading
@@ -79,7 +78,7 @@ export default function Ui3() {
       </Profiler>
 
       <h2>{count} Cards</h2>
-      <Profiler id="Cards" onRender={handleOnRender}>
+      <Profiler id="Card" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Card key={i} padding={[3, 4]} radius={[2, 3]} marginBottom={2}>
             <span>Card content</span>
@@ -88,7 +87,7 @@ export default function Ui3() {
       </Profiler>
 
       <h2>{count} Compositions</h2>
-      <Profiler id="Compositions" onRender={handleOnRender}>
+      <Profiler id="Composition" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Card key={i} padding={[3, 4]} radius={[2, 3]} marginBottom={2}>
             <Flex direction="column" gap={3}>
