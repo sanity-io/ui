@@ -1,3 +1,4 @@
+import {AddIcon} from '@sanity/icons'
 import {Box, Card, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
 import {Profiler} from 'react'
@@ -42,6 +43,13 @@ export default function Ui3() {
           <Card key={i} padding={[3, 4]} radius={[2, 3]} marginBottom={2}>
             <span>Card content</span>
           </Card>
+        ))}
+      </Profiler>
+
+      <h2>{count} Icons</h2>
+      <Profiler id="Icons" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <AddIcon key={i} />
         ))}
       </Profiler>
     </ThemeProvider>

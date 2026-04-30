@@ -1,5 +1,6 @@
 import 'ui4/css/index.css'
 
+import {AddIcon} from '@sanity/icons'
 import {Profiler} from 'react'
 import {Box, Card, Root} from 'ui4'
 
@@ -41,6 +42,13 @@ export default function Ui4() {
           <Card key={i} padding={[3, 4]} radius={[2, 3]} marginBottom={2}>
             <span>Card content</span>
           </Card>
+        ))}
+      </Profiler>
+
+      <h2>{count} Icons</h2>
+      <Profiler id="Icons" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <AddIcon key={i} />
         ))}
       </Profiler>
     </Root>

@@ -1,4 +1,5 @@
 export * from './components/box/Box'
+export * from './components/icon/Icon'
 export * from './components/card/Card'
 export * from './components/divider/Divider'
 export * from './components/flex/Flex'
