@@ -69,7 +69,8 @@
     "build": "pkg build --strict --clean --check",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "ts:check": "tsc --noEmit"
   },
   "browserslist": "extends @sanity/browserslist-config",
   "oclif": {

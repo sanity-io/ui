@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "storybook build",
+    "chromatic": "npx chromatic --build-script-name build",
     "dev": "storybook dev -p 6006",
     "lint": "eslint .",
     "test": "vitest --project=storybook"

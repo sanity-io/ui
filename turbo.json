@@ -10,6 +10,9 @@
       "persistent": true
     },
     "lint": {},
-    "test": {}
+    "test": {
+      "dependsOn": ["^build"]
+    },
+    "ts:check": {}
   }
 }

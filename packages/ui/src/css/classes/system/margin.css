@@ -1,5 +1,4 @@
 @breakpoints {
-  /* margin */
   .sui-m0 { margin: var(--space-0); }
   .sui-m1 { margin: var(--space-1); }
   .sui-m2 { margin: var(--space-2); }
@@ -12,7 +11,6 @@
   .sui-m9 { margin: var(--space-9); }
   .sui-m-auto { margin: auto; }
 
-  /* margin-x */
   .sui-mx0 { margin-left: var(--space-0); margin-right: var(--space-0); }
   .sui-mx1 { margin-left: var(--space-1); margin-right: var(--space-1); }
   .sui-mx2 { margin-left: var(--space-2); margin-right: var(--space-2); }
@@ -25,7 +23,6 @@
   .sui-mx9 { margin-left: var(--space-9); margin-right: var(--space-9); }
   .sui-mx-auto { margin-left: auto; margin-right: auto; }
 
-  /* margin-y */
   .sui-my0 { margin-top: var(--space-0); margin-bottom: var(--space-0); }
   .sui-my1 { margin-top: var(--space-1); margin-bottom: var(--space-1); }
   .sui-my2 { margin-top: var(--space-2); margin-bottom: var(--space-2); }
@@ -38,7 +35,6 @@
   .sui-my9 { margin-top: var(--space-9); margin-bottom: var(--space-9); }
   .sui-my-auto { margin-top: auto; margin-bottom: auto; }
 
-  /* margin-top */
   .sui-mt0 { margin-top: var(--space-0); }
   .sui-mt1 { margin-top: var(--space-1); }
   .sui-mt2 { margin-top: var(--space-2); }
@@ -51,7 +47,6 @@
   .sui-mt9 { margin-top: var(--space-9); }
   .sui-mt-auto { margin-top: auto; }
 
-  /* margin-right */
   .sui-mr0 { margin-right: var(--space-0); }
   .sui-mr1 { margin-right: var(--space-1); }
   .sui-mr2 { margin-right: var(--space-2); }
@@ -64,7 +59,6 @@
   .sui-mr9 { margin-right: var(--space-9); }
   .sui-mr-auto { margin-right: auto; }
 
-  /* margin-bottom */
   .sui-mb0 { margin-bottom: var(--space-0); }
   .sui-mb1 { margin-bottom: var(--space-1); }
   .sui-mb2 { margin-bottom: var(--space-2); }
@@ -77,7 +71,6 @@
   .sui-mb9 { margin-bottom: var(--space-9); }
   .sui-mb-auto { margin-bottom: auto; }
 
-  /* margin-left */
   .sui-ml0 { margin-left: var(--space-0); }
   .sui-ml1 { margin-left: var(--space-1); }
   .sui-ml2 { margin-left: var(--space-2); }

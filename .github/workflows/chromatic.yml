@@ -1,0 +1,39 @@
+name: Chromatic
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  chromatic:
+    name: Run Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+        env:
+          CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
+          CHROMATIC_SLUG: ${{ github.repository }}
+      - name: Set up environment
+        uses: ./.github/actions/setup
+      - name: Build
+        run: pnpm build
+      - name: Run Chromatic
+        id: chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: apps/storybook
+      - name: Render summary
+        run: |
+          echo "| Results |  |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ${{steps.chromatic.outputs.buildUrl}} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Component Count | ${{steps.chromatic.outputs.componentCount}} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Count | ${{steps.chromatic.outputs.testCount}} |" >> $GITHUB_STEP_SUMMARY

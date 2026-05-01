@@ -38,7 +38,7 @@
     "build:js": "pkg build --strict --check",
     "clean": "rimraf dist",
     "dev": "pnpm run --parallel /^dev:/",
-    "dev:css": "postcss src/index.css -o src/styles.css --watch",
+    "dev:css": "postcss src/index.css -o dist/styles.css --watch",
     "dev:js": "pkg watch",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "eslint .",

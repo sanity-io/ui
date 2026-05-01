@@ -11,7 +11,8 @@
     "dev": "turbo dev --ui=tui",
     "lint": "turbo lint",
     "prepare": "husky",
-    "test": "turbo test -- --run"
+    "test": "turbo test -- --run",
+    "ts:check": "turbo ts:check --filter=./packages/*"
   },
   "lint-staged": {
     "*": [
