@@ -20,6 +20,8 @@
   },
   "prettier": "@sanity/prettier-config",
   "devDependencies": {
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
     "@sanity/prettier-config": "^1.0.6",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.2",
