@@ -1,4 +1,4 @@
-import '../../../packages/ui/src/styles.css'
+import '../../../packages/ui/dist/styles.css'
 
 import type {Preview} from '@storybook/react-vite'
 
