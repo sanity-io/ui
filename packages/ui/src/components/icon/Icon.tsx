@@ -4,21 +4,21 @@ import {getProps} from '../../utils/getProps'
 import {Flex} from '../flex/Flex'
 import {type IconProps, iconProps} from './icon.props'
 
-const ICON_FONT_SIZES: Record<string, string> = {sm: '21px', md: '25px', lg: '29px'}
+const ICON_FONT_SIZES = ['17px', '21px', '25px', '29px', '33px']
 
 /** @public */
-export function Icon({icon: IconComponent, size = 'md', tone, ...props}: IconProps) {
+export function Icon({icon: IconComponent, size = 2, tone, ...props}: IconProps) {
   const {as, className, style, ...rest} = getProps(props, iconProps)
 
   return (
     <Flex
       as={as || 'span'}
       display="inline-flex"
-      alignItems="center"
-      justifyContent="center"
+      width={ICON_FONT_SIZES[size]}
+      height={ICON_FONT_SIZES[size]}
       {...(tone !== undefined && {tone})}
       className={classNames('sui-Icon', className)}
-      style={{fontSize: ICON_FONT_SIZES[size], ...style}}
+      style={{...style, background: 'none'}}
       data-ui="Icon"
       {...rest}
     >

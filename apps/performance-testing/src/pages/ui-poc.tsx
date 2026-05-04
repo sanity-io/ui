@@ -48,7 +48,7 @@ export default function UiPoc() {
       <h2>{count} Icons</h2>
       <Profiler id="Icons" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Icon key={i} icon={AddIcon} size="md" tone="primary" />
+          <Icon key={i} icon={AddIcon} />
         ))}
       </Profiler>
     </div>

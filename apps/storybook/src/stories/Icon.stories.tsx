@@ -30,8 +30,11 @@ const argTypes = {
     control: {type: 'select'},
     mapping: ICON_OPTIONS,
   },
+  muted: {
+    control: {type: 'boolean'},
+  },
   size: {
-    options: ['sm', 'md', 'lg'],
+    options: [0, 1, 2, 3, 4],
     control: {type: 'select'},
   },
   tone: {
@@ -70,9 +73,11 @@ export const Default: Story = {
 export const Sizes: Story = {
   render: ({icon}) => (
     <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
-      <Icon icon={icon} size="sm" />
-      <Icon icon={icon} size="md" />
-      <Icon icon={icon} size="lg" />
+      <Icon icon={icon} size={0} />
+      <Icon icon={icon} size={1} />
+      <Icon icon={icon} size={2} />
+      <Icon icon={icon} size={3} />
+      <Icon icon={icon} size={4} />
     </div>
   ),
 }

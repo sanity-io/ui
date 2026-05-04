@@ -2,8 +2,12 @@
   color: var(--tone-text, currentColor);
 }
 
+.sui-Icon:where(.sui-text-muted) {
+  --tone-text-muted-default: light-dark(var(--gray-600), var(--gray-400));
+  color: var(--tone-text-muted, var(--tone-text-muted-default));
+}
+
 .sui-Icon svg {
-  display: block;
-  height: 1em;
-  width: 1em;
+  width: 100%;
+  height: 100%;
 }
