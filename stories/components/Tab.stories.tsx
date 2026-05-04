@@ -66,3 +66,12 @@ export const WithIcon: Story = {
     return <Tab {...props} />
   },
 }
+
+export const WithIconRight: Story = {
+  args: {
+    iconRight: SearchIcon,
+  },
+  render: (props) => {
+    return <Tab {...props} />
+  },
+}
