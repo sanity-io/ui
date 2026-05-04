@@ -1,17 +1,9 @@
 .sui-Icon {
   color: var(--tone-text, currentColor);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .sui-Icon svg {
   display: block;
-  font-size: inherit;
   height: 1em;
   width: 1em;
 }
-
-.sui-icon-size-sm { font-size: 21px; }
-.sui-icon-size-md { font-size: 25px; }
-.sui-icon-size-lg { font-size: 29px; }

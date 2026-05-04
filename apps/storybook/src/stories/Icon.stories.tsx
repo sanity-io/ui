@@ -10,8 +10,9 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
 import {Icon} from '../../../../packages/ui/src/components/icon/Icon'
-import {iconProps} from '../../../../packages/ui/src/components/icon/icon.props'
+import {TONE} from '../../../../packages/ui/src/types/Tone'
 import {getArgTypes} from '../utils/getArgTypes'
+import {iconProps} from '../../../../packages/ui/src/components/icon/icon.props'
 
 const ICON_OPTIONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   AddIcon,
@@ -28,6 +29,14 @@ const argTypes = {
     options: Object.keys(ICON_OPTIONS),
     control: {type: 'select'},
     mapping: ICON_OPTIONS,
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: {type: 'select'},
+  },
+  tone: {
+    options: TONE,
+    control: {type: 'select'},
   },
 }
 
