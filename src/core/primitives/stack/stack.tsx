@@ -10,6 +10,10 @@ import {responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps, stackBaseStyl
  */
 export interface StackProps extends BoxProps {
   as?: React.ElementType | keyof React.JSX.IntrinsicElements
+  gap?: number | number[]
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   space?: number | number[]
 }
 
@@ -27,14 +31,15 @@ export const Stack = forwardRef(function Stack(
   props: StackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {as, space, ...restProps} = props
+  const {as, gap, space: deprecated_space, ...restProps} = props
+  const spacing = gap === undefined ? deprecated_space : gap
 
   return (
     <StyledStack
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Stack"
       {...restProps}
-      $space={_getArrayProp(space)}
+      $space={_getArrayProp(spacing)}
       forwardedAs={as}
       ref={ref}
     />

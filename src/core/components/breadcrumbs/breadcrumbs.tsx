@@ -20,6 +20,10 @@ import {ExpandButton, StyledBreadcrumbs} from './breadcrumbs.styles'
 export interface BreadcrumbsProps {
   maxLength?: number
   separator?: React.ReactNode
+  gap?: number | number[]
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
   space?: number | number[]
 }
 
@@ -30,8 +34,8 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
   ref: React.ForwardedRef<HTMLOListElement>,
 ) {
-  const {children, maxLength, separator, space: spaceRaw = 2, ...restProps} = props
-  const space = _getArrayProp(spaceRaw)
+  const {children, gap, maxLength, separator, space: deprecated_space = 2, ...restProps} = props
+  const space = _getArrayProp(gap === undefined ? deprecated_space : gap)
   const [open, setOpen] = useState(false)
   const expandElementRef = useRef<HTMLButtonElement | null>(null)
   const popoverElementRef = useRef<HTMLDivElement | null>(null)
@@ -101,7 +105,7 @@ function useItems({
       <Popover
         constrainSize
         content={
-          <Stack as="ol" overflow="auto" padding={space} space={space}>
+          <Stack as="ol" overflow="auto" padding={space} gap={space}>
             {rawItems.slice(beforeLength - 1, len - afterLength)}
           </Stack>
         }

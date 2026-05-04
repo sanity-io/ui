@@ -19,6 +19,7 @@ const meta: Meta<typeof Inline> = {
     ],
   },
   argTypes: {
+    gap: getSpaceControls(),
     space: getSpaceControls(),
     padding: getSpaceControls(),
     paddingBottom: getSpaceControls(),
