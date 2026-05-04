@@ -21,6 +21,10 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+body {
+  background: light-dark(var(--white), var(--black))
+}
+
 /* Display multimedia as block by default */
 audio,
 canvas,

@@ -34,6 +34,7 @@
     "globals": "^17.4.0",
     "playwright": "^1.58.2",
     "storybook": "^10.3.3",
+    "storybook-dark-mode": "^5.0.0",
     "typescript": "~5.9.3",
     "vite": "^8.0.1",
     "vitest": "^4.1.1"

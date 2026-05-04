@@ -1,6 +1,9 @@
 import '../../../packages/ui/dist/styles.css'
+import '../src/styles/storybook.css'
 
 import type {Preview} from '@storybook/react-vite'
+
+import {DocsThemeContainer} from '../src/components/DocsThemeContainer'
 
 const preview: Preview = {
   parameters: {
@@ -15,6 +18,13 @@ const preview: Preview = {
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
       test: 'error',
+    },
+    darkMode: {
+      stylePreview: true,
+      classTarget: 'html',
+    },
+    docs: {
+      container: DocsThemeContainer,
     },
   },
 }
