@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.0](https://github.com/sanity-io/ui/compare/v3.1.14...v3.2.0) (2026-05-04)
+
+### Features
+
+- `space`, `columns`, `rows` and box grid item deprecation warnings ([#2182](https://github.com/sanity-io/ui/issues/2182)) ([2e2013e](https://github.com/sanity-io/ui/commit/2e2013e859d58ab682b2ada8a5a49e98e5d23a7d)), closes [#2184](https://github.com/sanity-io/ui/issues/2184)
+
 ## [3.1.14](https://github.com/sanity-io/ui/compare/v3.1.13...v3.1.14) (2026-03-16)
 
 ### Bug Fixes
