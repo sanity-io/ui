@@ -12,13 +12,7 @@ jest.mock('../../primitives', () => {
   return {
     ...actual,
     Flex: jest.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
-    Popover: jest.fn(
-      ({
-        children,
-      }: {
-        children?: React.ReactNode
-      }) => children,
-    ),
+    Popover: jest.fn(({children}: {children?: React.ReactNode}) => children),
   }
 })
 
