@@ -16,7 +16,7 @@ jobs:
       - name: Set up environment
         uses: ./.github/actions/setup
       - name: Install Playwright browsers
-        run: pnpm --filter storybook exec playwright install --with-deps chromium-headless-shell
+        run: pnpm --filter "./apps/storybook" exec playwright install --with-deps chromium-headless-shell
       - name: Build
         run: pnpm build
       - name: Run tests

@@ -1,6 +1,6 @@
 {
   "name": "@sanity-labs/ui-poc-codemod",
-  "version": "0.0.1-alpha.9",
+  "version": "0.0.1-alpha.10",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -98,6 +98,7 @@
     "eslint": "^9.22.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.1"
   },
   "packageManager": "pnpm@10.17.0"
