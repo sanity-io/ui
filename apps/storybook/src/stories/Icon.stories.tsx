@@ -49,7 +49,7 @@ const meta: Meta<typeof Icon> = {
   argTypes,
   args: {
     icon: AddIcon,
-    size: 'md',
+    size: 2,
   },
   tags: ['autodocs'],
   parameters: {
@@ -83,14 +83,14 @@ export const Sizes: Story = {
 }
 
 export const Tones: Story = {
-  render: ({icon}) => (
+  render: ({icon, muted, size}) => (
     <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
-      <Icon icon={icon} tone="neutral" />
-      <Icon icon={icon} tone="primary" />
-      <Icon icon={icon} tone="positive" />
-      <Icon icon={icon} tone="caution" />
-      <Icon icon={icon} tone="critical" />
-      <Icon icon={icon} tone="suggest" />
+      <Icon icon={icon} muted={muted} size={size} tone="neutral" />
+      <Icon icon={icon} muted={muted} size={size} tone="primary" />
+      <Icon icon={icon} muted={muted} size={size} tone="positive" />
+      <Icon icon={icon} muted={muted} size={size} tone="caution" />
+      <Icon icon={icon} muted={muted} size={size} tone="critical" />
+      <Icon icon={icon} muted={muted} size={size} tone="suggest" />
     </div>
   ),
 }
