@@ -10,11 +10,10 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
 import {Icon} from '../../../../packages/ui/src/components/icon/Icon'
-import {TONE} from '../../../../packages/ui/src/types/Tone'
-import {getArgTypes} from '../utils/getArgTypes'
 import {iconProps} from '../../../../packages/ui/src/components/icon/icon.props'
+import {getArgTypes} from '../utils/getArgTypes'
 
-const ICON_OPTIONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
+const ICON_OPTIONS = {
   AddIcon,
   CheckmarkIcon,
   CloseIcon,
@@ -27,19 +26,7 @@ const argTypes = {
   ...getArgTypes(iconProps),
   icon: {
     options: Object.keys(ICON_OPTIONS),
-    control: {type: 'select'},
-    mapping: ICON_OPTIONS,
-  },
-  muted: {
-    control: {type: 'boolean'},
-  },
-  size: {
-    options: [0, 1, 2, 3, 4],
-    control: {type: 'select'},
-  },
-  tone: {
-    options: TONE,
-    control: {type: 'select'},
+    control: {type: 'select'} as const,
   },
 }
 
@@ -49,7 +36,6 @@ const meta: Meta<typeof Icon> = {
   argTypes,
   args: {
     icon: AddIcon,
-    size: 2,
   },
   tags: ['autodocs'],
   parameters: {
@@ -83,14 +69,14 @@ export const Sizes: Story = {
 }
 
 export const Tones: Story = {
-  render: ({icon, muted, size}) => (
+  render: ({icon, muted}) => (
     <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
-      <Icon icon={icon} muted={muted} size={size} tone="neutral" />
-      <Icon icon={icon} muted={muted} size={size} tone="primary" />
-      <Icon icon={icon} muted={muted} size={size} tone="positive" />
-      <Icon icon={icon} muted={muted} size={size} tone="caution" />
-      <Icon icon={icon} muted={muted} size={size} tone="critical" />
-      <Icon icon={icon} muted={muted} size={size} tone="suggest" />
+      <Icon icon={icon} tone="neutral" muted={muted} />
+      <Icon icon={icon} tone="primary" muted={muted} />
+      <Icon icon={icon} tone="positive" muted={muted} />
+      <Icon icon={icon} tone="caution" muted={muted} />
+      <Icon icon={icon} tone="critical" muted={muted} />
+      <Icon icon={icon} tone="suggest" muted={muted} />
     </div>
   ),
 }

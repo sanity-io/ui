@@ -1,5 +1,6 @@
 .sui-Icon {
-  color: var(--tone-text, currentColor);
+  --tone-text-default: light-dark(var(--gray-800), var(--gray-200));
+  color: var(--tone-text, var(--tone-text-default));
 }
 
 .sui-Icon:where(.sui-text-muted) {
@@ -7,7 +8,10 @@
   color: var(--tone-text-muted, var(--tone-text-muted-default));
 }
 
-.sui-Icon svg {
-  width: 100%;
-  height: 100%;
+@breakpoints {
+  .sui-text-icon0 { font-size: 17px; }
+  .sui-text-icon1 { font-size: 21px; }
+  .sui-text-icon2 { font-size: 25px; }
+  .sui-text-icon3 { font-size: 29px; }
+  .sui-text-icon4 { font-size: 33px; }
 }
