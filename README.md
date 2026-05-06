@@ -2,7 +2,7 @@
 
 The next version of Sanity's component library. Faster, simpler, and built on CSS instead of styled-components.
 
-Seven layout and typography primitives ship today: **Box**, **Flex**, **Grid**, **Card**, **Heading**, **Text**, and **Divider**. More components follow each quarter.
+Seven layout and typography building blocks ship today: **Box**, **Flex**, **Grid**, **Card**, **Heading**, **Text**, and **Divider**. More components follow each quarter.
 
 ## What's different from v3
 
@@ -16,7 +16,7 @@ Seven layout and typography primitives ship today: **Box**, **Flex**, **Grid**, 
 pnpm add @sanity-labs/ui-poc
 ```
 
-Requires React 19 and Node 20+.
+Requires React 19 and Node 24+.
 
 ## Setup
 
@@ -26,7 +26,7 @@ Import the stylesheet at your app entry point. Without it, components render as 
 import '@sanity-labs/ui-poc/styles.css'
 ```
 
-If your app uses Sanity UI v3, keep the existing `ThemeProvider` setup. v4 components read from the same theme context.
+If your app uses Sanity UI v3, keep the existing `ThemeProvider` setup.
 
 ```tsx
 import { ThemeProvider, studioTheme, ToastProvider } from '@sanity/ui'
@@ -44,7 +44,7 @@ createRoot(document.getElementById('root')!).render(
 
 ## Usage
 
-Import v4 primitives from `@sanity-labs/ui-poc`. Import everything else from `@sanity/ui`.
+Import v4 building blocks from `@sanity-labs/ui-poc`. Import everything else from `@sanity/ui`.
 
 ```tsx
 import { Box, Flex, Card, Heading, Text } from '@sanity-labs/ui-poc'
@@ -122,6 +122,7 @@ pnpm ts:check
 ## Run Storybook
 
 ```sh
+cd apps/storybook
 pnpm dev
 ```
 
@@ -132,7 +133,7 @@ Opens the Storybook app with all component stories. Use it to browse variants, t
 We welcome feedback and contributions. Start here:
 
 1. **Try the components** and report what breaks, what confuses, or what's missing.
-2. **Read the contribution model** — build a recipe with existing primitives, then propose graduating it.
+2. **Read the contribution model** — build a recipe with existing building blocks, then propose graduating it.
 3. **Open a PR** following the branch naming and checklist in the developer contribution docs.
 
 During preview, the most useful contribution is using the components and telling us what happens.
