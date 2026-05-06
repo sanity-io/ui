@@ -33,20 +33,20 @@ export const Default: Story = {
     return (
       <Grid {...props}>
         <Square>
-          <Text>1</Text>
+          <Text>Child 1</Text>
         </Square>
         <Square>
-          <Text>2</Text>
+          <Text>Child 2</Text>
         </Square>
         <Square>
-          <Text>3</Text>
+          <Text>Child 3</Text>
         </Square>
       </Grid>
     )
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('1')).parentElement?.closest('.sui-Grid')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Grid')?.classList,
     ).toContain('sui-display-grid')
   },
 }
@@ -59,20 +59,20 @@ export const Columns: Story = {
     return (
       <Grid {...props}>
         <Square>
-          <Text>1</Text>
+          <Text>Child 1</Text>
         </Square>
         <Square>
-          <Text>2</Text>
+          <Text>Child 2</Text>
         </Square>
         <Square>
-          <Text>3</Text>
+          <Text>Child 3</Text>
         </Square>
       </Grid>
     )
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('1')).parentElement?.closest('.sui-Grid')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Grid')?.classList,
     ).toContain('sui-grid-template-columns')
   },
 }

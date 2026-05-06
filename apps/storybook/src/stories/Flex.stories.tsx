@@ -33,20 +33,20 @@ export const Default: Story = {
     return (
       <Flex {...props}>
         <Square>
-          <Text>1</Text>
+          <Text>Child 1</Text>
         </Square>
         <Square>
-          <Text>2</Text>
+          <Text>Child 2</Text>
         </Square>
         <Square>
-          <Text>3</Text>
+          <Text>Child 3</Text>
         </Square>
       </Flex>
     )
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('1')).parentElement?.closest('.sui-Flex')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Flex')?.classList,
     ).toContain('sui-display-flex')
   },
 }

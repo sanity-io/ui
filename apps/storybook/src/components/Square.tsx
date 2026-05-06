@@ -1,6 +1,6 @@
-import type {PropsWithChildren} from 'react'
+import type {ComponentPropsWithRef} from 'react'
 
-export function Square({children}: PropsWithChildren) {
+export function Square({children, style}: ComponentPropsWithRef<'div'>) {
   return (
     <div
       style={{
@@ -14,6 +14,7 @@ export function Square({children}: PropsWithChildren) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        ...style,
       }}
     >
       {children}

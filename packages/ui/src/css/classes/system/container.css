@@ -1,8 +1,8 @@
 @breakpoints {
-  .sui-width0 { width: var(--container-0); }
-  .sui-width1 { width: var(--container-1); }
-  .sui-width2 { width: var(--container-2); }
-  .sui-width3 { width: var(--container-3); }
-  .sui-width4 { width: var(--container-4); }
-  .sui-width5 { width: var(--container-5); }
+  .sui-container0 { max-width: var(--container-0); }
+  .sui-container1 { max-width: var(--container-1); }
+  .sui-container2 { max-width: var(--container-2); }
+  .sui-container3 { max-width: var(--container-3); }
+  .sui-container4 { max-width: var(--container-4); }
+  .sui-container5 { max-width: var(--container-5); }
 }

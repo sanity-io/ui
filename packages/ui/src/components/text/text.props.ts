@@ -1,15 +1,14 @@
 import {type TypographyProps, typographyProps} from '../../props/typography'
 import {type PropDef} from '../../types/PropDef'
-
-const TEXT_SIZE = [0, 1, 2, 3, 4] as const
-type TextSize = (typeof TEXT_SIZE)[number]
+import type {Responsive} from '../../types/Responsive'
+import {TEXT_SIZE, type TextSize} from '../../types/Text'
 
 /** @public */
 export interface TextProps<T extends React.ElementType> extends TypographyProps {
   /** Element to render */
   as?: T
   /** CSS **font-size** property */
-  size?: TextSize
+  size?: Responsive<TextSize>
 }
 
 export const textProps: Record<string, PropDef> = {
