@@ -5,6 +5,7 @@
   "keywords": [],
   "license": "ISC",
   "author": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "build": "turbo build --filter=./packages/*",
@@ -12,6 +13,7 @@
     "changeset:publish": "changeset publish",
     "changeset:status": "changeset status",
     "changeset:version": "changeset version",
+    "create:ui": "node bin/create-ui.js",
     "dev": "turbo dev --ui=tui",
     "lint": "turbo lint",
     "prepare": "husky",
