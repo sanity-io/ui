@@ -1,9 +1,9 @@
 import {existsSync} from 'node:fs'
 import path from 'node:path'
 
-export function getTransformPath(root: string, version: string, filename: string) {
-  const jsPath = path.join(root, `dist/transforms/${version}/${filename}.js`)
-  const tsPath = path.join(root, `src/transforms/${version}/${filename}.ts`)
+export function getTransformPath(root: string, version: string, name: string) {
+  const jsPath = path.join(root, `dist/transforms/${version}/${name}/${name}.js`)
+  const tsPath = path.join(root, `src/transforms/${version}/${name}/${name}.ts`)
 
   if (existsSync(jsPath)) {
     return jsPath
@@ -13,5 +13,5 @@ export function getTransformPath(root: string, version: string, filename: string
     return tsPath
   }
 
-  throw new Error(`Could not find ${filename} codemod`)
+  throw new Error(`Could not find ${name} codemod`)
 }

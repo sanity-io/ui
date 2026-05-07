@@ -5,13 +5,21 @@
   "keywords": [],
   "license": "ISC",
   "author": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "build": "turbo build --filter=./packages/*",
+    "changeset": "changeset",
+    "changeset:publish": "changeset publish",
+    "changeset:status": "changeset status",
+    "changeset:version": "changeset version",
+    "create:ui": "node bin/create-ui.js",
     "dev": "turbo dev --ui=tui",
     "lint": "turbo lint",
     "prepare": "husky",
-    "test": "turbo test -- --run"
+    "release": "pnpm run build && pnpm run changeset:version && pnpm run changeset:publish",
+    "test": "turbo test -- --run",
+    "ts:check": "turbo ts:check --filter=./packages/*"
   },
   "lint-staged": {
     "*": [
@@ -20,6 +28,10 @@
   },
   "prettier": "@sanity/prettier-config",
   "devDependencies": {
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.31.0",
+    "@commitlint/cli": "^20.5.3",
+    "@commitlint/config-conventional": "^20.5.3",
     "@sanity/prettier-config": "^1.0.6",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.2",

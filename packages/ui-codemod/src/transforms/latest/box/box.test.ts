@@ -1,56 +1,57 @@
-import {defineInlineTest} from '../../utils/testUtils'
-import transform from './flex'
+import {defineInlineTest} from '../../../utils/testUtils'
+import transform from './box'
 
 defineInlineTest(
   transform,
   {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
   `
-  import {Flex} from '@legacy/ui'
+  import {Box} from '@legacy/ui'
 
-  <Flex />
+  <Box />
   `,
   `
-  import {Flex} from "@sanity/ui"
+  import {Box} from "@sanity/ui"
 
-  <Flex />
+  <Box />
   `,
-  'updates Flex import path based on fromPackage and toPackage',
+  'updates Box import path based on fromPackage and toPackage',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Flex
-    align="center"
-    direction="row"
-    wrap="wrap"
-    justify="center"
-  />
-  `,
-  `
-  <Flex
+  <Box
     alignItems="center"
     flexDirection="row"
     flexWrap="wrap"
     justifyContent="center"
   />
   `,
-  'renames flex props',
+  `
+  <Box
+    style={{
+      alignItems: "center",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "center"
+    }} />
+  `,
+  'moves flex props to style',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Flex
+  <Box
     gridAutoColumns="auto"
     gridAutoFlow="row"
     gridAutoRows="auto"
   />
   `,
   `
-  <Flex
+  <Box
     style={{
       gridAutoColumns: "auto",
       gridAutoFlow: "row",
@@ -64,13 +65,13 @@ defineInlineTest(
   transform,
   {},
   `
-  <Flex
+  <Box
     gridTemplateColumns={1}
     gridTemplateRows={2}
   />
   `,
   `
-  <Flex
+  <Box
     style={{
       gridTemplateColumns: "repeat(1, 1fr)",
       gridTemplateRows: "repeat(2, 1fr)"

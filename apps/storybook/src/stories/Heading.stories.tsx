@@ -3,6 +3,8 @@ import {expect} from 'storybook/test'
 
 import {Heading} from '../../../../packages/ui/src/components/heading/Heading'
 import {headingProps} from '../../../../packages/ui/src/components/heading/heading.props'
+import {HEADING_SIZE} from '../../../../packages/ui/src/types/Heading'
+import {TONE} from '../../../../packages/ui/src/types/Tone'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(headingProps)
@@ -10,7 +12,7 @@ const argTypes = getArgTypes(headingProps)
 const meta: Meta<typeof Heading> = {
   title: 'Typography/Heading',
   args: {
-    children: 'This is a Heading component.',
+    children: 'Heading Component',
     as: 'h1',
     size: 2,
   },
@@ -32,11 +34,56 @@ export const Default: Story = {
     return <Heading {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('This is a Heading component.')).tagName).toBe('H1')
+    await expect((await canvas.findByText('Heading Component')).tagName).toBe('H1')
+  },
+}
+
+export const Sizes: Story = {
+  render: (props) => {
+    return (
+      <>
+        {HEADING_SIZE.map((size) => (
+          <Heading {...props} key={size} size={size}>
+            Heading Size {size} (
+            {
+              ['13px', '16px', '21px', '27px', '33px', '38px', '48px', '63px', '84px', '112px'][
+                size
+              ]
+            }
+            )
+          </Heading>
+        ))}
+      </>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText('Heading Size 3 (27px)')).classList).toContain(
+      'sui-text-heading3',
+    )
+  },
+}
+
+export const Tones: Story = {
+  render: (props) => {
+    return (
+      <>
+        {TONE.map((tone) => (
+          <Heading {...props} key={tone} tone={tone}>
+            Heading Tone {tone[0].toUpperCase() + tone.slice(1)}
+          </Heading>
+        ))}
+      </>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText('Heading Tone Positive')).classList).toContain(
+      'sui-tone-positive',
+    )
   },
 }
 
 export const TrimLineClamp: Story = {
+  name: 'Trim & Line Clamp',
   render: (props) => {
     return (
       <Heading trim lineClamp={1} {...props}>

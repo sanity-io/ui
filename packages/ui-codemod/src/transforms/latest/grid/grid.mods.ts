@@ -1,12 +1,8 @@
-import {type API, type FileInfo} from 'jscodeshift'
+import {LAYOUT_MODS} from '../../../constants/latest/layout-mods'
+import type {AttributeMods} from '../../../types/AttributeMods'
 
-import {LAYOUT_MODS} from '../../constants/latest/layout-mods'
-import {type AttributeMods} from '../../types/AttributeMods'
-import type {BaseOptions} from '../../types/BaseOptions'
-import {transformAttributes} from '../../utils/transformAttributes'
-import {transformImport} from '../../utils/transformImport'
-
-const MODS: AttributeMods = {
+/** @internal */
+export const GRID_MODS: AttributeMods = {
   ...LAYOUT_MODS,
   alignItems: {
     type: 'style-only',
@@ -110,26 +106,4 @@ const MODS: AttributeMods = {
       12: 'repeat(12, 1fr)',
     },
   },
-}
-
-/** @internal */
-export const TODO_WARNING = 'Codemod could not migrate the Grid component below'
-
-/** @internal */
-export default function transform(fileInfo: FileInfo, api: API, options: BaseOptions): string {
-  const j = api.jscodeshift
-  const root = j(fileInfo.source)
-  const {fromPackage, toPackage} = options || {}
-
-  transformImport(j, root, 'Grid', fromPackage, toPackage)
-
-  root
-    .find(j.JSXOpeningElement, {
-      name: {type: 'JSXIdentifier', name: 'Grid'},
-    })
-    .forEach((path) => {
-      transformAttributes(j, path, MODS, TODO_WARNING)
-    })
-
-  return root.toSource()
 }

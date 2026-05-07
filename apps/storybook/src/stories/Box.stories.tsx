@@ -3,6 +3,8 @@ import {expect} from 'storybook/test'
 
 import {Box} from '../../../../packages/ui/src/components/box/Box'
 import {boxProps} from '../../../../packages/ui/src/components/box/box.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
+import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(boxProps)
@@ -10,7 +12,6 @@ const argTypes = getArgTypes(boxProps)
 const meta: Meta<typeof Box> = {
   title: 'Layout/Box',
   args: {
-    children: 'This is a Box component.',
     as: 'div',
     display: 'block',
   },
@@ -29,11 +30,23 @@ type Story = StoryObj<typeof Box>
 
 export const Default: Story = {
   render: (props) => {
-    return <Box {...props} />
+    return (
+      <Box {...props}>
+        <Square>
+          <Text>Child 1</Text>
+        </Square>
+        <Square>
+          <Text>Child 2</Text>
+        </Square>
+        <Square>
+          <Text>Child 3</Text>
+        </Square>
+      </Box>
+    )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('This is a Box component.')).classList).toContain(
-      'sui-display-block',
-    )
+    await expect(
+      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Box')?.classList,
+    ).toContain('sui-display-block')
   },
 }

@@ -7,6 +7,7 @@ const config: StorybookConfig = {
     '@storybook/addon-vitest',
     '@storybook/addon-a11y',
     '@storybook/addon-docs',
+    'storybook-dark-mode',
   ],
   framework: '@storybook/react-vite',
   typescript: {

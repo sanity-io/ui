@@ -3,6 +3,8 @@ import {expect} from 'storybook/test'
 
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
 import {gridProps} from '../../../../packages/ui/src/components/grid/grid.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
+import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(gridProps)
@@ -10,7 +12,6 @@ const argTypes = getArgTypes(gridProps)
 const meta: Meta<typeof Grid> = {
   title: 'Layout/Grid',
   args: {
-    children: 'This is a Grid component.',
     as: 'div',
     display: 'grid',
   },
@@ -29,11 +30,49 @@ type Story = StoryObj<typeof Grid>
 
 export const Default: Story = {
   render: (props) => {
-    return <Grid {...props} />
+    return (
+      <Grid {...props}>
+        <Square>
+          <Text>Child 1</Text>
+        </Square>
+        <Square>
+          <Text>Child 2</Text>
+        </Square>
+        <Square>
+          <Text>Child 3</Text>
+        </Square>
+      </Grid>
+    )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('This is a Grid component.')).classList).toContain(
-      'sui-display-grid',
+    await expect(
+      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Grid')?.classList,
+    ).toContain('sui-display-grid')
+  },
+}
+
+export const Columns: Story = {
+  args: {
+    gridTemplateColumns: 'repeat(3, 1fr)',
+  },
+  render: (props) => {
+    return (
+      <Grid {...props}>
+        <Square>
+          <Text>Child 1</Text>
+        </Square>
+        <Square>
+          <Text>Child 2</Text>
+        </Square>
+        <Square>
+          <Text>Child 3</Text>
+        </Square>
+      </Grid>
     )
+  },
+  play: async ({canvas}) => {
+    await expect(
+      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Grid')?.classList,
+    ).toContain('sui-grid-template-columns')
   },
 }

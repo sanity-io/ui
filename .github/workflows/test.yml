@@ -1,0 +1,23 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  chromatic:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Set up environment
+        uses: ./.github/actions/setup
+      - name: Install Playwright browsers
+        run: pnpm --filter "./apps/storybook" exec playwright install --with-deps chromium-headless-shell
+      - name: Build
+        run: pnpm build
+      - name: Run tests
+        run: pnpm test

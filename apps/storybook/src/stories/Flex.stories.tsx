@@ -3,6 +3,8 @@ import {expect} from 'storybook/test'
 
 import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {flexProps} from '../../../../packages/ui/src/components/flex/flex.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
+import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(flexProps)
@@ -10,7 +12,6 @@ const argTypes = getArgTypes(flexProps)
 const meta: Meta<typeof Flex> = {
   title: 'Layout/Flex',
   args: {
-    children: 'This is a Flex component.',
     as: 'div',
     display: 'flex',
   },
@@ -29,11 +30,23 @@ type Story = StoryObj<typeof Flex>
 
 export const Default: Story = {
   render: (props) => {
-    return <Flex {...props} />
+    return (
+      <Flex {...props}>
+        <Square>
+          <Text>Child 1</Text>
+        </Square>
+        <Square>
+          <Text>Child 2</Text>
+        </Square>
+        <Square>
+          <Text>Child 3</Text>
+        </Square>
+      </Flex>
+    )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('This is a Flex component.')).classList).toContain(
-      'sui-display-flex',
-    )
+    await expect(
+      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Flex')?.classList,
+    ).toContain('sui-display-flex')
   },
 }

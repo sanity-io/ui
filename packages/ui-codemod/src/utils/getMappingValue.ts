@@ -1,6 +1,19 @@
-import {type AnyExpression, type AttributeMapping} from '../types/AnyExpression'
+import type {AnyExpression} from '../types/AnyExpression'
+import type {AttributeMapping} from '../types/AttributeMods'
 
 export function getMappingValue(mapping: AttributeMapping, expr: AnyExpression) {
+  let matchedVal
+
+  for (const val in mapping) {
+    if (expr.value === mapping[val]) {
+      matchedVal = mapping[val]
+    }
+  }
+
+  if (matchedVal) {
+    return matchedVal
+  }
+
   let key
 
   if (
