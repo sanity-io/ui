@@ -32,9 +32,7 @@
   ],
   "scripts": {
     "build": "pnpm run clean & pnpm run /^build:/",
-    "build:css:components": "postcss src/components/index.css -o dist/components.css",
-    "build:css:index": "postcss src/index.css -o dist/styles.css",
-    "build:css:utilities": "postcss src/css/index.css -o dist/utilities.css",
+    "build:css": "postcss src/index.css -o dist/styles.css",
     "build:js": "pkg build --strict --check",
     "clean": "rimraf dist",
     "dev": "pnpm run --parallel /^dev:/",

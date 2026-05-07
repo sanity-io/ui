@@ -1,2 +1,10 @@
-@import 'components/index.css';
-@import 'css/index.css';
+@layer core, components, classes;
+@layer core.global, core.tokens;
+
+/* Write tokens first for ease of reference */
+@import '@sanity-labs/design-tokens/dist/css/index.css' layer(core.tokens);
+@import './css/tokens/index.css' layer(core.tokens);
+
+@import './css/global/index.css' layer(core.global);
+@import './components/index.css' layer(components);
+@import './css/classes/index.css' layer(classes);
