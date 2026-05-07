@@ -64,6 +64,7 @@ export const Sizes: Story = {
       <Icon icon={icon} size={2} />
       <Icon icon={icon} size={3} />
       <Icon icon={icon} size={4} />
+      <Icon icon={icon} size={[1, 2, 3, 4]} />
     </div>
   ),
 }
