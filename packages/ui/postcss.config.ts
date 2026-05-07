@@ -1,6 +1,7 @@
 import path from 'node:path'
 
 import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
 import postcssImport from 'postcss-import'
 
 import breakpoints from './postcss-breakpoints'
@@ -12,5 +13,8 @@ export default {
     }),
     breakpoints,
     autoprefixer,
+    cssnano({
+      preset: 'default',
+    }),
   ],
 }
