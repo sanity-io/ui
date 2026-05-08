@@ -27,6 +27,7 @@ const argTypes = {
   icon: {
     options: Object.keys(ICON_OPTIONS),
     control: {type: 'select'} as const,
+    mapping: ICON_OPTIONS,
   },
 }
 

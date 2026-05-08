@@ -9,9 +9,9 @@
 }
 
 @breakpoints {
-  .sui-text-icon0 { font-size: 17px; }
-  .sui-text-icon1 { font-size: 21px; }
-  .sui-text-icon2 { font-size: 25px; }
-  .sui-text-icon3 { font-size: 29px; }
-  .sui-text-icon4 { font-size: 33px; }
+  .sui-icon-body0 { font-size: 17px; }
+  .sui-icon-body1 { font-size: 21px; }
+  .sui-icon-body2 { font-size: 25px; }
+  .sui-icon-body3 { font-size: 29px; }
+  .sui-icon-body4 { font-size: 33px; }
 }
