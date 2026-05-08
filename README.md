@@ -2,7 +2,7 @@
 
 The next version of Sanity's component library. Faster, simpler, and built on CSS instead of styled-components.
 
-Seven layout and typography building blocks ship today: **Box**, **Flex**, **Grid**, **Card**, **Heading**, **Text**, and **Divider**. More components follow each quarter.
+Seven layout and typography building block components ship today: **Box**, **Flex**, **Grid**, **Card**, **Heading**, **Text**, and **Divider**. More components follow each quarter.
 
 ## What's different from v3
 
@@ -44,7 +44,7 @@ createRoot(document.getElementById('root')!).render(
 
 ## Usage
 
-Import v4 building blocks from `@sanity-labs/ui-poc`. Import everything else from `@sanity/ui`.
+Import v4 building block components from `@sanity-labs/ui-poc`. Import everything else from `@sanity/ui`.
 
 ```tsx
 import { Box, Flex, Card, Heading, Text } from '@sanity-labs/ui-poc'
@@ -133,7 +133,7 @@ Opens the Storybook app with all component stories. Use it to browse variants, t
 We welcome feedback and contributions. Start here:
 
 1. **Try the components** and report what breaks, what confuses, or what's missing.
-2. **Read the contribution model** — build a recipe with existing building blocks, then propose graduating it.
+2. **Read the contribution model** — build a recipe with existing building block components, then propose graduating it.
 3. **Open a PR** following the branch naming and checklist in the developer contribution docs.
 
 During preview, the most useful contribution is using the components and telling us what happens.
