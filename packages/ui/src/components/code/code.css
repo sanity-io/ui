@@ -1,0 +1,36 @@
+.sui-Code { color: light-dark(var(--gray-700), var(--gray-400)); }
+.sui-Code .atrule { color: light-dark(var(--purple-600), var(--purple-400)); }
+.sui-Code .attr-name { color: light-dark(var(--green-600), var(--green-400)); }
+.sui-Code .attr-value { color: light-dark(var(--yellow-700), var(--yellow-400)); }
+.sui-Code .attribute { color: light-dark(var(--yellow-700), var(--yellow-400)); }
+.sui-Code .boolean { color: light-dark(var(--purple-600), var(--purple-400)); }
+.sui-Code .builtin { color: light-dark(var(--purple-600), var(--purple-400)); }
+.sui-Code .cdata { color: light-dark(var(--yellow-700), var(--yellow-400)); }
+.sui-Code .char { color: light-dark(var(--yellow-700), var(--yellow-400)); }
+.sui-Code .class { color: light-dark(var(--orange-600), var(--orange-400)); }
+.sui-Code .class-name { color: light-dark(var(--cyan-600), var(--cyan-400)); }
+.sui-Code .comment { color: light-dark(var(--gray-700), var(--gray-400)); opacity: 0.75; }
+.sui-Code .constant { color: light-dark(var(--purple-600), var(--purple-400)); }
+.sui-Code .deleted { color: light-dark(var(--red-700), var(--red-400)); }
+.sui-Code .entity { color: light-dark(var(--red-700), var(--red-400)); }
+.sui-Code .function { color: light-dark(var(--green-600), var(--green-400)); }
+.sui-Code .hexcode { color: light-dark(var(--blue-600), var(--blue-400)); }
+.sui-Code .id { color: light-dark(var(--purple-600), var(--purple-400)); }
+.sui-Code .important { color: light-dark(var(--purple-600), var(--purple-400)); }
+.sui-Code .inserted { color: light-dark(var(--green-600), var(--green-400)); }
+.sui-Code .keyword { color: light-dark(var(--magenta-600), var(--magenta-400)); }
+.sui-Code .number { color: light-dark(var(--purple-600), var(--purple-400)); }
+.sui-Code .operator { color: light-dark(var(--magenta-600), var(--magenta-400)); }
+.sui-Code .prolog { color: light-dark(var(--gray-700), var(--gray-400)); }
+.sui-Code .property { color: light-dark(var(--blue-600), var(--blue-400)); }
+.sui-Code .pseudo-class { color: light-dark(var(--yellow-700), var(--yellow-400)); }
+.sui-Code .pseudo-element { color: light-dark(var(--yellow-700), var(--yellow-400)); }
+.sui-Code .punctuation { color: light-dark(var(--gray-700), var(--gray-400)); }
+.sui-Code .regex { color: light-dark(var(--blue-600), var(--blue-400)); }
+.sui-Code .selector { color: light-dark(var(--red-700), var(--red-400)); }
+.sui-Code .string { color: light-dark(var(--yellow-700), var(--yellow-400)); }
+.sui-Code .symbol { color: light-dark(var(--purple-600), var(--purple-400)); }
+.sui-Code .tag { color: light-dark(var(--red-700), var(--red-400)); }
+.sui-Code .unit { color: light-dark(var(--orange-600), var(--orange-400)); }
+.sui-Code .url { color: light-dark(var(--red-700), var(--red-400)); }
+.sui-Code .variable { color: light-dark(var(--red-700), var(--red-400)); }

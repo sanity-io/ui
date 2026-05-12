@@ -36,4 +36,10 @@
   .sui-text-heading7 { --trim: -16px; }
   .sui-text-heading8 { --trim: -22px; }
   .sui-text-heading9 { --trim: -30px; }
+
+  .sui-text-code0 { --trim: -4px; }
+  .sui-text-code1 { --trim: -5px; }
+  .sui-text-code2 { --trim: -6px; }
+  .sui-text-code3 { --trim: -7px; }
+  .sui-text-code4 { --trim: -8px; }
 }

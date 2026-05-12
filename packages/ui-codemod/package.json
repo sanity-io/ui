@@ -24,6 +24,14 @@
       "source": "./src/commands/latest/card.ts",
       "default": "./dist/commands/latest/card.js"
     },
+    "./transforms/latest/code": {
+      "source": "./src/transforms/latest/code/code.ts",
+      "default": "./dist/transforms/latest/code/code.js"
+    },
+    "./latest/code": {
+      "source": "./src/commands/latest/code.ts",
+      "default": "./dist/commands/latest/code.js"
+    },
     "./transforms/latest/container": {
       "source": "./src/transforms/latest/container/container.ts",
       "default": "./dist/transforms/latest/container/container.js"

@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react-dom": "^19.2.4",
+    "react-refractor": "^4.0.0",
+    "refractor": "^5.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.0",
