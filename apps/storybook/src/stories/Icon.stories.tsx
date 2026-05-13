@@ -9,8 +9,12 @@ import {
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
+import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {Icon} from '../../../../packages/ui/src/components/icon/Icon'
 import {iconProps} from '../../../../packages/ui/src/components/icon/icon.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
+import {ICON_SIZE} from '../../../../packages/ui/src/types/Icon'
+import {TONE} from '../../../../packages/ui/src/types/Tone'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const ICON_OPTIONS = {
@@ -58,27 +62,42 @@ export const Default: Story = {
 }
 
 export const Sizes: Story = {
-  render: ({icon}) => (
-    <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
-      <Icon icon={icon} size={0} />
-      <Icon icon={icon} size={1} />
-      <Icon icon={icon} size={2} />
-      <Icon icon={icon} size={3} />
-      <Icon icon={icon} size={4} />
-      <Icon icon={icon} size={[1, 2, 3, 4]} />
-    </div>
-  ),
+  render: (props) => {
+    return (
+      <>
+        {ICON_SIZE.map((size) => (
+          <Flex alignItems="center">
+            <Icon {...props} size={size} aria-label={`Icon Size ${size}`} />
+            <Text size={size}>({['17px', '21px', '25px', '29px', '33px'][size]})</Text>
+          </Flex>
+        ))}
+      </>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByLabelText('Icon Size 3')).classList).toContain(
+      'sui-icon-body3',
+    )
+  },
 }
 
 export const Tones: Story = {
-  render: ({icon, muted}) => (
-    <div style={{display: 'flex', alignItems: 'center', gap: '16px'}}>
-      <Icon icon={icon} tone="neutral" muted={muted} />
-      <Icon icon={icon} tone="primary" muted={muted} />
-      <Icon icon={icon} tone="positive" muted={muted} />
-      <Icon icon={icon} tone="caution" muted={muted} />
-      <Icon icon={icon} tone="critical" muted={muted} />
-      <Icon icon={icon} tone="suggest" muted={muted} />
-    </div>
-  ),
+  render: (props) => {
+    return (
+      <Flex alignItems="center" gap={4}>
+        {TONE.map((tone) => (
+          <Icon
+            {...props}
+            tone={tone}
+            aria-label={`Icon Tone ${tone[0].toUpperCase() + tone.slice(1)}`}
+          />
+        ))}
+      </Flex>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByLabelText('Icon Tone Positive')).classList).toContain(
+      'sui-tone-positive',
+    )
+  },
 }
