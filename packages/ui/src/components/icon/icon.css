@@ -1,0 +1,17 @@
+.sui-Icon {
+  --tone-text-default: light-dark(var(--gray-800), var(--gray-200));
+  color: var(--tone-text, var(--tone-text-default));
+}
+
+.sui-Icon:where(.sui-text-muted) {
+  --tone-text-muted-default: light-dark(var(--gray-600), var(--gray-400));
+  color: var(--tone-text-muted, var(--tone-text-muted-default));
+}
+
+@breakpoints {
+  .sui-icon-body0 { font-size: 17px; }
+  .sui-icon-body1 { font-size: 21px; }
+  .sui-icon-body2 { font-size: 25px; }
+  .sui-icon-body3 { font-size: 29px; }
+  .sui-icon-body4 { font-size: 33px; }
+}

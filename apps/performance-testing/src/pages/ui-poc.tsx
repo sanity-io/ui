@@ -1,6 +1,7 @@
 import '@sanity-labs/ui-poc/styles.css'
 
-import {Box, Card, Divider, Flex, Grid, Heading, Text} from '@sanity-labs/ui-poc'
+import {AddIcon} from '@sanity/icons'
+import {Box, Card, Divider, Flex, Grid, Heading, Icon, Text} from '@sanity-labs/ui-poc'
 import {Profiler} from 'react'
 
 const count = 5000
@@ -89,6 +90,13 @@ export default function UiPoc() {
           <Card key={i} density={['regular', 'loose']} marginBottom={2}>
             <span>Card content</span>
           </Card>
+        ))}
+      </Profiler>
+
+      <h2>{count} Icons</h2>
+      <Profiler id="Icons" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Icon key={i} icon={AddIcon} />
         ))}
       </Profiler>
 
