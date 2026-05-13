@@ -72,6 +72,6 @@ export const CONTAINER_MODS: AttributeMods = {
   },
   width: {
     type: 'rename-only',
-    name: 'size',
+    name: 'contentSize',
   },
 }

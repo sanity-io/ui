@@ -52,7 +52,7 @@ export const Sizes: Story = {
     return (
       <>
         {CONTAINER_SIZE.map((size) => (
-          <Container {...props} key={size} size={size}>
+          <Container {...props} key={size} contentSize={size}>
             <Square style={{width: '100%'}}>
               <Text>
                 Container Size {size} (
