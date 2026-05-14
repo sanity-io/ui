@@ -21,27 +21,27 @@ export const borderProps: Record<string, PropDef> = {
   border: {
     type: 'boolean',
     className: 'border',
-    inverse: 'border-none',
+    inverseClassName: 'border-none',
   },
   borderTop: {
     type: 'boolean',
     className: 'border-top',
-    inverse: 'border-top-none',
+    inverseClassName: 'border-top-none',
   },
   borderRight: {
     type: 'boolean',
     className: 'border-right',
-    inverse: 'border-right-none',
+    inverseClassName: 'border-right-none',
   },
   borderBottom: {
     type: 'boolean',
     className: 'border-bottom',
-    inverse: 'border-bottom-none',
+    inverseClassName: 'border-bottom-none',
   },
   borderLeft: {
     type: 'boolean',
     className: 'border-left',
-    inverse: 'border-left-none',
+    inverseClassName: 'border-left-none',
   },
   radius: {
     type: 'union',

@@ -7,4 +7,3 @@ export type Responsive<T> =
   | ([T | undefined, ...(T | undefined)[]] & {length: 4})
   | ([T | undefined, ...(T | undefined)[]] & {length: 5})
   | ([T | undefined, ...(T | undefined)[]] & {length: 6})
-  | ([T | undefined, ...(T | undefined)[]] & {length: 7})

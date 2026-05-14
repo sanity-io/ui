@@ -97,7 +97,7 @@ describe('getProps', () => {
   it('does not generate responsive className with more values than breakpoints', () => {
     const result = getProps({padding: [1, 2, 3, 4, 5, 6, 7, 8]}, layoutProps)
     expect(result.className).toBe(
-      'sui-p1 sui-p2-bp-1 sui-p3-bp-2 sui-p4-bp-3 sui-p5-bp-4 sui-p6-bp-5 sui-p7-bp-6',
+      'sui-p1 sui-p2-bp-1 sui-p3-bp-2 sui-p4-bp-3 sui-p5-bp-4 sui-p6-bp-5',
     )
     expect(result.style).toEqual({})
   })

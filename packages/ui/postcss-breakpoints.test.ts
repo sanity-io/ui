@@ -43,11 +43,6 @@ it('generates responsive css', async () => {
   .p-1-bp-5 {
     padding: var(--space-1);
   }
-}
-@media (min-width: 2400px) {
-  .p-1-bp-6 {
-    padding: var(--space-1);
-  }
 }`
 
   await run(input, output)

@@ -31,12 +31,12 @@ export const typographyProps: Record<string, PropDef> = {
   muted: {
     type: 'boolean',
     className: 'text-muted',
-    inverse: 'text-default',
+    inverseClassName: 'text-default',
   },
   trim: {
     type: 'boolean',
     className: 'text-trim',
-    inverse: 'text-trim-none',
+    inverseClassName: 'text-trim-none',
   },
   weight: {
     type: 'union',

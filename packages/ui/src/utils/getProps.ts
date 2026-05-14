@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import {type PropDef} from '../types/PropDef'
 
 const PREFIX = 'sui'
-const BREAKPOINTS_LENGTH = 7
+const BREAKPOINTS_LENGTH = 6
 
 interface ComponentProps {
   className?: string | undefined
@@ -56,7 +56,7 @@ function getClassName(propValue: any, propDef: PropDef, bp?: number) {
   }
 
   if (propDef.type === 'boolean') {
-    return `${PREFIX}-${propValue ? propDef.className : propDef.inverse}${bp ? `-bp-${bp}` : ''}`
+    return `${PREFIX}-${propValue ? propDef.className : propDef.inverseClassName}${bp ? `-bp-${bp}` : ''}`
   }
 
   return ''
