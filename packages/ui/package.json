@@ -31,8 +31,8 @@
     "src"
   ],
   "scripts": {
-    "build": "pnpm run clean & pnpm run /^build:/",
-    "build:css": "postcss src/index.css -o dist/styles.css",
+    "build": "pnpm run clean && pnpm run /^build:/",
+    "build:css": "NODE_ENV=production postcss src/index.css -o dist/styles.css",
     "build:js": "pkg build --strict --check",
     "clean": "rimraf dist",
     "dev": "pnpm run --parallel /^dev:/",
@@ -56,6 +56,7 @@
     "@types/postcss-import": "^14.0.3",
     "@types/react": "^19.2.14",
     "autoprefixer": "^10.4.27",
+    "cssnano": "^8.0.0",
     "eslint": "^9.22.0",
     "postcss": "^8.5.8",
     "postcss-cli": "^11.0.1",
