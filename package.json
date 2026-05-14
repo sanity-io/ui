@@ -14,11 +14,12 @@
     "changeset:status": "changeset status",
     "changeset:version": "changeset version",
     "create:ui": "node bin/create-ui.js",
-    "dev": "turbo dev --ui=tui",
+    "dev": "turbo dev --ui=tui --filter=./packages/ui --filter=./apps/storybook",
     "lint": "turbo lint",
     "prepare": "husky",
     "release": "pnpm run build && pnpm run changeset:version && pnpm run changeset:publish",
     "test": "turbo test -- --run",
+    "test:e2e": "turbo test:e2e --filter=./apps/frameworks",
     "ts:check": "turbo ts:check --filter=./packages/*"
   },
   "lint-staged": {

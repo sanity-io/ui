@@ -29,7 +29,7 @@ import '@sanity-labs/ui-poc/styles.css'
 If your app uses Sanity UI v3, keep the existing `ThemeProvider` setup.
 
 ```tsx
-import { ThemeProvider, studioTheme, ToastProvider } from '@sanity/ui'
+import {ThemeProvider, studioTheme, ToastProvider} from '@sanity/ui'
 import '@sanity-labs/ui-poc/styles.css'
 import App from './App'
 
@@ -47,24 +47,32 @@ createRoot(document.getElementById('root')!).render(
 Import v4 building block components from `@sanity-labs/ui-poc`. Import everything else from `@sanity/ui`.
 
 ```tsx
-import { Box, Flex, Card, Heading, Text } from '@sanity-labs/ui-poc'
-import { Button, Stack, Badge } from '@sanity/ui'
-import { AddIcon } from '@sanity/icons'
+import {Box, Flex, Card, Heading, Text} from '@sanity-labs/ui-poc'
+import {Button, Stack, Badge} from '@sanity/ui'
+import {AddIcon} from '@sanity/icons'
 
 export default function App() {
   return (
-    <Flex style={{ minHeight: '100vh' }}>
+    <Flex style={{minHeight: '100vh'}}>
       <Box as="nav" aria-label="Main" padding={3} borderRight width="240px">
-        <Heading as="h2" size={1}>My App</Heading>
+        <Heading as="h2" size={1}>
+          My App
+        </Heading>
       </Box>
       <Box as="main" padding={4} flexGrow={1}>
         <Flex alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={2}>
-          <Heading as="h1" size={2}>Documents</Heading>
+          <Heading as="h1" size={2}>
+            Documents
+          </Heading>
           <Button icon={AddIcon} text="New" />
         </Flex>
         <Card density="regular" marginTop={3}>
-          <Text size={1} weight="medium">First document</Text>
-          <Text size={1} muted>Edited 2 hours ago</Text>
+          <Text size={1} weight="medium">
+            First document
+          </Text>
+          <Text size={1} muted>
+            Edited 2 hours ago
+          </Text>
         </Card>
       </Box>
     </Flex>
@@ -74,16 +82,16 @@ export default function App() {
 
 ## Components
 
-| Component | Package | What it does |
-|-----------|---------|-------------|
-| `Box` | `@sanity-labs/ui-poc` | General container with padding, margin, border, tone, and layout props |
-| `Flex` | `@sanity-labs/ui-poc` | Flexbox layout with alignment and gap |
-| `Grid` | `@sanity-labs/ui-poc` | CSS grid layout for card grids and dashboards |
-| `Card` | `@sanity-labs/ui-poc` | Visual surface with background, tone, and density |
-| `Heading` | `@sanity-labs/ui-poc` | Semantic headings (`h1`–`h6`) with size and weight |
-| `Text` | `@sanity-labs/ui-poc` | Body text, captions, and metadata |
-| `Divider` | `@sanity-labs/ui-poc` | Horizontal rule between content sections |
-| Everything else | `@sanity/ui` | Button, Menu, Dialog, TextInput, Stack, Badge, etc. |
+| Component       | Package               | What it does                                                           |
+| --------------- | --------------------- | ---------------------------------------------------------------------- |
+| `Box`           | `@sanity-labs/ui-poc` | General container with padding, margin, border, tone, and layout props |
+| `Flex`          | `@sanity-labs/ui-poc` | Flexbox layout with alignment and gap                                  |
+| `Grid`          | `@sanity-labs/ui-poc` | CSS grid layout for card grids and dashboards                          |
+| `Card`          | `@sanity-labs/ui-poc` | Visual surface with background, tone, and density                      |
+| `Heading`       | `@sanity-labs/ui-poc` | Semantic headings (`h1`–`h6`) with size and weight                     |
+| `Text`          | `@sanity-labs/ui-poc` | Body text, captions, and metadata                                      |
+| `Divider`       | `@sanity-labs/ui-poc` | Horizontal rule between content sections                               |
+| Everything else | `@sanity/ui`          | Button, Menu, Dialog, TextInput, Stack, Badge, etc.                    |
 
 ## Repo structure
 

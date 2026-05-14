@@ -1,0 +1,17 @@
+{
+  "name": "frameworks",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "test:e2e": "playwright test --reporter=list"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.7.0"
+  },
+  "packageManager": "pnpm@10.17.0"
+}
