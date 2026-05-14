@@ -6,7 +6,11 @@
     "ui-poc-storybook": "0.0.0",
     "@repo/eslint-config": "0.0.0",
     "@sanity-labs/ui-poc": "0.0.1-alpha.10",
-    "@sanity-labs/ui-poc-codemod": "0.0.1-alpha.9"
+    "@sanity-labs/ui-poc-codemod": "0.0.1-alpha.9",
+    "ui-poc-frameworks": "1.0.0",
+    "ui-poc-next": "0.1.0",
+    "ui-poc-vite": "0.0.0",
+    "ui-poc-performance-testing": "0.0.0"
   },
-  "changesets": ["wide-tables-jump"]
+  "changesets": ["funky-comics-type", "light-berries-fry", "wide-tables-jump"]
 }

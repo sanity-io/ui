@@ -1,11 +1,18 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.1.4/schema.json",
-  "changelog": ["@changesets/changelog-github", {"repo": "sanity-labs/ui-poc"}],
+  "changelog": ["@changesets/changelog-git", null],
   "commit": false,
   "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [
+    "ui-poc-frameworks",
+    "ui-poc-next",
+    "ui-poc-react-router",
+    "ui-poc-vite",
+    "ui-poc-performance-testing",
+    "ui-poc-storybook"
+  ]
 }
