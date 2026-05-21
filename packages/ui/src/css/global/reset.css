@@ -33,14 +33,12 @@ iframe,
 img,
 object,
 picture,
-svg,
 video {
   display: block;
   max-width: 100%;
 }
 img,
 picture,
-svg,
 video {
   block-size: auto;
 }
