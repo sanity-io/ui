@@ -5,7 +5,6 @@ import {Container} from '../../../../packages/ui/src/components/container/Contai
 import {containerProps} from '../../../../packages/ui/src/components/container/container.props'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {CONTAINER_SIZE} from '../../../../packages/ui/src/types/Container'
-import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(containerProps)
@@ -33,9 +32,9 @@ export const Default: Story = {
   render: (props) => {
     return (
       <Container {...props}>
-        <Square style={{width: '100%'}}>
-          <Text>Container Component</Text>
-        </Square>
+        <Text as="p" margin={3}>
+          Container Component
+        </Text>
       </Container>
     )
   },
@@ -52,13 +51,18 @@ export const Sizes: Story = {
     return (
       <>
         {CONTAINER_SIZE.map((size) => (
-          <Container {...props} key={size} contentSize={size}>
-            <Square style={{width: '100%'}}>
-              <Text>
-                Container Size {size} (
-                {['320px', '640px', '960px', '1280px', '1600px', '1920px'][size]})
-              </Text>
-            </Square>
+          <Container
+            {...props}
+            key={size}
+            contentSize={size}
+            padding={3}
+            marginY={2}
+            tone="neutral"
+          >
+            <Text>
+              Container Size {size} (
+              {['320px', '640px', '960px', '1280px', '1600px', '1920px'][size]})
+            </Text>
           </Container>
         ))}
       </>

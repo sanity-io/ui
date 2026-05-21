@@ -1,48 +1,83 @@
-.sui-tone-none {
-  --tone-surface: var(--tone-none-surface);
-  --tone-separator: var(--tone-none-separator);
-  --tone-text: var(--tone-none-text);
-  --tone-text-muted: var(--tone-none-text-muted);
+[class*='sui-tone'] {
+  /* All .sui-tone classes use black and white for tone-0/-1000 */
+  --tone-0: light-dark(var(--white), var(--black));
+  --tone-1000: light-dark(var(--black), var(--white));
+
+  /* Surface tokens, for use with all tones */
+  --background-high: var(--tone-100);
+  --background-low: var(--tone-50);
+  --separator-high: var(--tone-400);
+  --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
+  --foreground-high: var(--tone-800);
+  --foreground-low: var(--tone-600);
 }
 
 .sui-tone-neutral {
-  --tone-surface: var(--tone-neutral-surface);
-  --tone-separator: var(--tone-neutral-separator);
-  --tone-text: var(--tone-neutral-text);
-  --tone-text-muted: var(--tone-neutral-text-muted);
-}
-
-.sui-tone-primary {
-  --tone-surface: var(--tone-primary-surface);
-  --tone-separator: var(--tone-primary-separator);
-  --tone-text: var(--tone-primary-text);
-  --tone-text-muted: var(--tone-primary-text-muted);
-}
-
-.sui-tone-positive {
-  --tone-surface: var(--tone-positive-surface);
-  --tone-separator: var(--tone-positive-separator);
-  --tone-text: var(--tone-positive-text);
-  --tone-text-muted: var(--tone-positive-text-muted);
+  --tone-50: light-dark(var(--gray-50), var(--gray-950));
+  --tone-100: light-dark(var(--gray-100), var(--gray-900));
+  --tone-200: light-dark(var(--gray-200), var(--gray-800));
+  --tone-300: light-dark(var(--gray-300), var(--gray-700));
+  --tone-400: light-dark(var(--gray-400), var(--gray-600));
+  --tone-500: light-dark(var(--gray-500), var(--gray-500));
+  --tone-600: light-dark(var(--gray-600), var(--gray-400));
+  --tone-700: light-dark(var(--gray-700), var(--gray-300));
+  --tone-800: light-dark(var(--gray-800), var(--gray-200));
+  --tone-900: light-dark(var(--gray-900), var(--gray-100));
+  --tone-950: light-dark(var(--gray-950), var(--gray-50));
 }
 
 .sui-tone-suggest {
-  --tone-surface: var(--tone-suggest-surface);
-  --tone-separator: var(--tone-suggest-separator);
-  --tone-text: var(--tone-suggest-text);
-  --tone-text-muted: var(--tone-suggest-text-muted);
+  --tone-50: light-dark(var(--purple-50), var(--purple-950));
+  --tone-100: light-dark(var(--purple-100), var(--purple-900));
+  --tone-200: light-dark(var(--purple-200), var(--purple-800));
+  --tone-300: light-dark(var(--purple-300), var(--purple-700));
+  --tone-400: light-dark(var(--purple-400), var(--purple-600));
+  --tone-500: light-dark(var(--purple-500), var(--purple-500));
+  --tone-600: light-dark(var(--purple-600), var(--purple-400));
+  --tone-700: light-dark(var(--purple-700), var(--purple-300));
+  --tone-800: light-dark(var(--purple-800), var(--purple-200));
+  --tone-900: light-dark(var(--purple-900), var(--purple-100));
+  --tone-950: light-dark(var(--purple-950), var(--purple-50));
+}
+
+.sui-tone-positive {
+  --tone-50: light-dark(var(--green-50), var(--green-950));
+  --tone-100: light-dark(var(--green-100), var(--green-900));
+  --tone-200: light-dark(var(--green-200), var(--green-800));
+  --tone-300: light-dark(var(--green-300), var(--green-700));
+  --tone-400: light-dark(var(--green-400), var(--green-600));
+  --tone-500: light-dark(var(--green-500), var(--green-500));
+  --tone-600: light-dark(var(--green-600), var(--green-400));
+  --tone-700: light-dark(var(--green-700), var(--green-300));
+  --tone-800: light-dark(var(--green-800), var(--green-200));
+  --tone-900: light-dark(var(--green-900), var(--green-100));
+  --tone-950: light-dark(var(--green-950), var(--green-50));
 }
 
 .sui-tone-caution {
-  --tone-surface: var(--tone-caution-surface);
-  --tone-separator: var(--tone-caution-separator);
-  --tone-text: var(--tone-caution-text);
-  --tone-text-muted: var(--tone-caution-text-muted);
+  --tone-50: light-dark(var(--yellow-50), var(--yellow-950));
+  --tone-100: light-dark(var(--yellow-100), var(--yellow-900));
+  --tone-200: light-dark(var(--yellow-200), var(--yellow-800));
+  --tone-300: light-dark(var(--yellow-300), var(--yellow-700));
+  --tone-400: light-dark(var(--yellow-400), var(--yellow-600));
+  --tone-500: light-dark(var(--yellow-500), var(--yellow-500));
+  --tone-600: light-dark(var(--yellow-600), var(--yellow-400));
+  --tone-700: light-dark(var(--yellow-700), var(--yellow-300));
+  --tone-800: light-dark(var(--yellow-800), var(--yellow-200));
+  --tone-900: light-dark(var(--yellow-900), var(--yellow-100));
+  --tone-950: light-dark(var(--yellow-950), var(--yellow-50));
 }
 
 .sui-tone-critical {
-  --tone-surface: var(--tone-critical-surface);
-  --tone-separator: var(--tone-critical-separator);
-  --tone-text: var(--tone-critical-text);
-  --tone-text-muted: var(--tone-critical-text-muted);
+  --tone-50: light-dark(var(--red-50), var(--red-950));
+  --tone-100: light-dark(var(--red-100), var(--red-900));
+  --tone-200: light-dark(var(--red-200), var(--red-800));
+  --tone-300: light-dark(var(--red-300), var(--red-700));
+  --tone-400: light-dark(var(--red-400), var(--red-600));
+  --tone-500: light-dark(var(--red-500), var(--red-500));
+  --tone-600: light-dark(var(--red-600), var(--red-400));
+  --tone-700: light-dark(var(--red-700), var(--red-300));
+  --tone-800: light-dark(var(--red-800), var(--red-200));
+  --tone-900: light-dark(var(--red-900), var(--red-100));
+  --tone-950: light-dark(var(--red-950), var(--red-50));
 }

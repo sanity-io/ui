@@ -1,16 +1,20 @@
+.sui-border {
+  border-color: var(--separator-low, light-dark(var(--gray-200), var(--gray-800)));
+}
+
 @breakpoints {
-  .sui-border { border: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border { border-width: 1px; border-style: solid; }
   .sui-border-none { border: none; }
 
-  .sui-border-top { border-top: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border-top { border-top-width: 1px; border-top-style: solid; }
   .sui-border-top-none { border-top: none; }
 
-  .sui-border-right { border-right: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border-right { border-right-width: 1px; border-right-style: solid; }
   .sui-border-right-none { border-right: none; }
 
-  .sui-border-bottom { border-bottom: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border-bottom { border-bottom-width: 1px; border-bottom-style: solid; }
   .sui-border-bottom-none { border-bottom: none; }
 
-  .sui-border-left { border-left: 1px solid var(--tone-separator, var(--border-color-default)); }
+  .sui-border-left { border-left-width: 1px; border-left-style: solid; }
   .sui-border-left-none { border-left: none; }
 }

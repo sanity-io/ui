@@ -1,4 +1,8 @@
-.sui-Code { color: light-dark(var(--gray-700), var(--gray-400)); }
+.sui-Code {
+  --code-color: light-dark(var(--gray-700), var(--gray-400));
+  color: var(--code-color);
+}
+
 .sui-Code .atrule { color: light-dark(var(--purple-600), var(--purple-400)); }
 .sui-Code .attr-name { color: light-dark(var(--green-600), var(--green-400)); }
 .sui-Code .attr-value { color: light-dark(var(--yellow-700), var(--yellow-400)); }

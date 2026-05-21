@@ -4,7 +4,6 @@ import {expect} from 'storybook/test'
 import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {flexProps} from '../../../../packages/ui/src/components/flex/flex.props'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
-import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(flexProps)
@@ -32,15 +31,15 @@ export const Default: Story = {
   render: (props) => {
     return (
       <Flex {...props}>
-        <Square>
-          <Text>Child 1</Text>
-        </Square>
-        <Square>
-          <Text>Child 2</Text>
-        </Square>
-        <Square>
-          <Text>Child 3</Text>
-        </Square>
+        <Text as="p" margin={3}>
+          Child 1
+        </Text>
+        <Text as="p" margin={3}>
+          Child 2
+        </Text>
+        <Text as="p" margin={3}>
+          Child 3
+        </Text>
       </Flex>
     )
   },

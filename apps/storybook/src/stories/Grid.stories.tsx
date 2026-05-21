@@ -4,7 +4,6 @@ import {expect} from 'storybook/test'
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
 import {gridProps} from '../../../../packages/ui/src/components/grid/grid.props'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
-import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(gridProps)
@@ -32,15 +31,15 @@ export const Default: Story = {
   render: (props) => {
     return (
       <Grid {...props}>
-        <Square>
-          <Text>Child 1</Text>
-        </Square>
-        <Square>
-          <Text>Child 2</Text>
-        </Square>
-        <Square>
-          <Text>Child 3</Text>
-        </Square>
+        <Text as="p" margin={3}>
+          Child 1
+        </Text>
+        <Text as="p" margin={3}>
+          Child 2
+        </Text>
+        <Text as="p" margin={3}>
+          Child 3
+        </Text>
       </Grid>
     )
   },
@@ -54,19 +53,15 @@ export const Default: Story = {
 export const Columns: Story = {
   args: {
     gridTemplateColumns: 'repeat(3, 1fr)',
+    tone: 'neutral',
+    padding: 3,
   },
   render: (props) => {
     return (
       <Grid {...props}>
-        <Square>
-          <Text>Child 1</Text>
-        </Square>
-        <Square>
-          <Text>Child 2</Text>
-        </Square>
-        <Square>
-          <Text>Child 3</Text>
-        </Square>
+        <Text>Child 1</Text>
+        <Text>Child 2</Text>
+        <Text>Child 3</Text>
       </Grid>
     )
   },

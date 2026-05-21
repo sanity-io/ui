@@ -4,7 +4,6 @@ import {expect} from 'storybook/test'
 import {Box} from '../../../../packages/ui/src/components/box/Box'
 import {boxProps} from '../../../../packages/ui/src/components/box/box.props'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
-import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(boxProps)
@@ -32,15 +31,9 @@ export const Default: Story = {
   render: (props) => {
     return (
       <Box {...props}>
-        <Square>
-          <Text>Child 1</Text>
-        </Square>
-        <Square>
-          <Text>Child 2</Text>
-        </Square>
-        <Square>
-          <Text>Child 3</Text>
-        </Square>
+        <Text as="p">Child 1</Text>
+        <Text as="p">Child 2</Text>
+        <Text as="p">Child 3</Text>
       </Box>
     )
   },
