@@ -22,7 +22,8 @@ html {
 }
 
 body {
-  background: light-dark(var(--white), var(--black))
+  background: light-dark(var(--white), var(--black));
+  font-family: var(--sans);
 }
 
 /* Display multimedia as block by default */
