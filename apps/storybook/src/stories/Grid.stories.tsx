@@ -31,15 +31,9 @@ export const Default: Story = {
   render: (props) => {
     return (
       <Grid {...props}>
-        <Text as="p" margin={3}>
-          Child 1
-        </Text>
-        <Text as="p" margin={3}>
-          Child 2
-        </Text>
-        <Text as="p" margin={3}>
-          Child 3
-        </Text>
+        <Text as="p">Child 1</Text>
+        <Text as="p">Child 2</Text>
+        <Text as="p">Child 3</Text>
       </Grid>
     )
   },

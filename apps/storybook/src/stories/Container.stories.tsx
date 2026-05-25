@@ -32,9 +32,7 @@ export const Default: Story = {
   render: (props) => {
     return (
       <Container {...props}>
-        <Text as="p" margin={3}>
-          Container Component
-        </Text>
+        <Text as="p">Container Component</Text>
       </Container>
     )
   },
