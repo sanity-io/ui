@@ -1,4 +1,4 @@
-.sui-border {
+[class*='sui-border'] {
   border-color: var(--separator-low, light-dark(var(--gray-200), var(--gray-800)));
 }
 
