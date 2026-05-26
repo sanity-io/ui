@@ -67,6 +67,7 @@
     "vitest": "^4.1.1"
   },
   "peerDependencies": {
+    "@sanity/icons": "^3.7.4",
     "react": "^19.2",
     "react-dom": "^19.2",
     "react-refractor": "^4.0.0"

@@ -1,0 +1,36 @@
+.sui-CheckboxMark {
+  border: 1px solid var(--tone-separator, var(--border-color-default));
+  color: light-dark(var(--white), var(--black));
+  font-size: 16px;
+}
+
+.sui-CheckboxInput:focus-visible + .sui-CheckboxMark {
+  outline: 1px solid var(--blue-500);
+  outline-offset: 1px;
+}
+
+.sui-CheckboxInput:checked + .sui-CheckboxMark {
+  background: light-dark(var(--black), var(--white));
+  border-color: light-dark(var(--black), var(--white));
+}
+
+.sui-CheckboxInput:indeterminate + .sui-CheckboxMark {
+  color: light-dark(var(--black), var(--white));
+}
+
+.sui-CheckboxInput:disabled + .sui-CheckboxMark {
+  background: light-dark(var(--gray-50), var(--gray-700));
+  color: light-dark(var(--gray-400), var(--gray-400));
+}
+
+.sui-CheckboxMark svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sui-CheckboxMark path {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 1.5px;
+}

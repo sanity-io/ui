@@ -66,14 +66,14 @@ function getName(name, isCapitalized) {
 
 function getComponentFile(componentName, propsName) {
   return `import classNames from 'classnames'
-import React from 'react'
+import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {type ${componentName}Props, ${propsName}Props} from './${propsName}.props'
 
 /** @public */
-export function ${componentName}<T extends React.ElementType = 'div'>(
-  props: ${componentName}Props<T> & Omit<React.ComponentPropsWithRef<T>, keyof ${componentName}Props<T>>,
+export function ${componentName}<T extends ElementType = 'div'>(
+  props: ${componentName}Props<T> & Omit<ComponentPropsWithRef<T>, keyof ${componentName}Props<T>>,
 ) {
   const {as, children, className, style, ...rest} = getProps(props, ${propsName}Props)
   const Component = as || 'div'

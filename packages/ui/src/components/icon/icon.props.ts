@@ -1,4 +1,4 @@
-import React from 'react'
+import type {ComponentProps, SVGProps} from 'react'
 
 import {type MarginProps, marginProps} from '../../props/margin'
 import {type ToneProps, toneProps} from '../../props/tone'
@@ -8,9 +8,9 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface IconProps extends React.ComponentProps<'svg'>, MarginProps, ToneProps {
+export interface IconProps extends ComponentProps<'svg'>, MarginProps, ToneProps {
   /** Icon to render */
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  icon: React.ComponentType<SVGProps<SVGSVGElement>>
   /** CSS **font-size** property */
   size?: Responsive<IconSize>
   /** CSS **color** property */

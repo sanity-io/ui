@@ -1,14 +1,14 @@
 import classNames from 'classnames'
-import React from 'react'
+import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {type TextProps, textProps} from './text.props'
 
 /** @public */
-export function Text<T extends React.ElementType = 'span'>({
+export function Text<T extends ElementType = 'span'>({
   size = 2,
   ...props
-}: TextProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof TextProps<T>>) {
+}: TextProps<T> & Omit<ComponentPropsWithRef<T>, keyof TextProps<T>>) {
   const {as, children, className, style, ...rest} = getProps({size, ...props}, textProps)
   const Component = as || 'span'
 

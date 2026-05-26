@@ -1,15 +1,15 @@
 import classNames from 'classnames'
-import React from 'react'
+import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {type HeadingProps, headingProps} from './heading.props'
 
 /** @public */
-export function Heading<T extends React.ElementType = 'h2'>({
+export function Heading<T extends ElementType = 'h2'>({
   size = 2,
   weight = 'bold',
   ...props
-}: HeadingProps & Omit<React.ComponentPropsWithRef<T>, keyof HeadingProps>) {
+}: HeadingProps & Omit<ComponentPropsWithRef<T>, keyof HeadingProps>) {
   const {as, children, className, style, ...rest} = getProps({size, weight, ...props}, headingProps)
   const Component = as || 'h2'
 

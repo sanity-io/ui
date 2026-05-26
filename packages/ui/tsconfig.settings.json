@@ -4,5 +4,6 @@
     "esModuleInterop": true,
     "rootDir": ".",
     "outDir": "./dist",
-  },
+    "exactOptionalPropertyTypes": false
+  }
 }

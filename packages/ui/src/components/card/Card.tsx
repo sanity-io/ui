@@ -1,15 +1,15 @@
 import classNames from 'classnames'
-import React from 'react'
+import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {type CardProps, cardProps} from './card.props'
 
 /** @public */
-export function Card<T extends React.ElementType = 'div'>({
+export function Card<T extends ElementType = 'div'>({
   density = 'regular',
   tone = 'none',
   ...props
-}: CardProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof CardProps<T>>) {
+}: CardProps<T> & Omit<ComponentPropsWithRef<T>, keyof CardProps<T>>) {
   const {as, children, className, style, ...rest} = getProps({density, tone, ...props}, cardProps)
   const Component = as || 'div'
 

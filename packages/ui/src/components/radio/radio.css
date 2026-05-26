@@ -1,0 +1,26 @@
+.sui-RadioMark {
+  border: 1px solid var(--tone-separator, var(--border-color-default));
+}
+
+.sui-RadioInput:focus-visible + .sui-RadioMark {
+  outline: 1px solid var(--blue-500);
+  outline-offset: 1px;
+}
+
+.sui-RadioInput:checked + .sui-RadioMark:after {
+  content: '';
+  background: light-dark(var(--black), var(--white));
+  border-radius: var(--radius-round);
+  position: absolute;
+  inset: 3px;
+  display: block;
+}
+
+.sui-RadioInput:disabled + .sui-RadioMark {
+  background: light-dark(var(--gray-50), var(--gray-700));
+}
+
+.sui-RadioInput:disabled + .sui-RadioMark:after {
+  background: light-dark(var(--gray-300), var(--gray-500));
+}
+

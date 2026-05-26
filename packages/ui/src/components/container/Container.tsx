@@ -1,14 +1,14 @@
 import classNames from 'classnames'
-import React from 'react'
+import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {type ContainerProps, containerProps} from './container.props'
 
 /** @public */
-export function Container<T extends React.ElementType = 'div'>({
+export function Container<T extends ElementType = 'div'>({
   marginX = 'auto',
   ...props
-}: ContainerProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof ContainerProps<T>>) {
+}: ContainerProps<T> & Omit<ComponentPropsWithRef<T>, keyof ContainerProps<T>>) {
   const {as, children, className, style, ...rest} = getProps({marginX, ...props}, containerProps)
   const Component = as || 'div'
 

@@ -1,14 +1,14 @@
 import classNames from 'classnames'
-import React from 'react'
+import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {type FlexProps, flexProps} from './flex.props'
 
 /** @public */
-export function Flex<T extends React.ElementType = 'div'>({
+export function Flex<T extends ElementType = 'div'>({
   display = 'flex',
   ...props
-}: FlexProps<T> & Omit<React.ComponentPropsWithRef<T>, keyof FlexProps<T>>) {
+}: FlexProps<T> & Omit<ComponentPropsWithRef<T>, keyof FlexProps<T>>) {
   const {as, children, className, style, ...rest} = getProps({display, ...props}, flexProps)
   const Component = as || 'div'
 

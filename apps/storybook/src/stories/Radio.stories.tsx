@@ -1,0 +1,58 @@
+import type {Meta, StoryObj} from '@storybook/react-vite'
+import {expect} from 'storybook/test'
+
+import {Radio} from '../../../../packages/ui/src/components/radio/Radio'
+import {radioProps} from '../../../../packages/ui/src/components/radio/radio.props'
+import {VisuallyHidden} from '../../../../packages/ui/src/components/visually-hidden/VisuallyHidden'
+import {getArgTypes} from '../utils/getArgTypes'
+
+const argTypes = getArgTypes(radioProps)
+
+const meta: Meta<typeof Radio> = {
+  title: 'Components/Radio',
+  args: {
+    label: 'Radio',
+  },
+  argTypes,
+  component: Radio,
+  tags: ['autodocs'],
+  parameters: {
+    a11y: {
+      context: '.sui-Radio',
+    },
+  },
+}
+
+export default meta
+type Story = StoryObj<typeof Radio>
+
+export const Default: Story = {
+  render: (props) => {
+    return <Radio {...props} />
+  },
+  play: async ({canvas}) => {
+    await expect(((await canvas.findByLabelText('Radio')) as HTMLInputElement).type).toBe('radio')
+  },
+}
+
+export const Disabled: Story = {
+  render: (props) => {
+    return <Radio {...props} label="Disabled radio" disabled defaultChecked />
+  },
+  play: async ({canvas}) => {
+    await expect(
+      ((await canvas.findByLabelText('Disabled radio')) as HTMLInputElement).disabled,
+    ).toBe(true)
+  },
+}
+
+export const VisuallyHiddenLabel: Story = {
+  render: (props) => {
+    return <Radio {...props} label={<VisuallyHidden>Visually hidden label radio</VisuallyHidden>} />
+  },
+  play: async ({canvas}) => {
+    await expect(
+      ((await canvas.findByLabelText('Visually hidden label radio')) as HTMLInputElement).type,
+    ).toBe('radio')
+  },
+}
