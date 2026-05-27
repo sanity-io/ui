@@ -361,6 +361,9 @@ importers:
       '@sanity-labs/design-tokens':
         specifier: 0.0.2-alpha.2
         version: 0.0.2-alpha.2
+      '@sanity/icons':
+        specifier: ^3.7.4
+        version: 3.7.4(react@19.2.4)
       classnames:
         specifier: ^2.5.1
         version: 2.5.1

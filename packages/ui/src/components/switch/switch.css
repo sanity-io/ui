@@ -1,0 +1,40 @@
+.sui-SwitchMark {
+  background: var(--tone-separator, var(--border-color-default));
+}
+
+.sui-SwitchMark:after {
+  content: '';
+  background: light-dark(var(--white), var(--black));
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-round);
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: block;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px;
+}
+
+.sui-SwitchInput:focus-visible + .sui-SwitchMark {
+  outline: 1px solid var(--blue-500);
+  outline-offset: 1px;
+}
+
+.sui-SwitchInput:checked + .sui-SwitchMark {
+  background: light-dark(var(--black), var(--white));
+}
+
+.sui-SwitchInput:checked + .sui-SwitchMark:after {
+  left: auto;
+  right: 5px;
+}
+
+.sui-SwitchInput:indeterminate + .sui-SwitchMark:after {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+.sui-SwitchInput:disabled + .sui-SwitchMark:after {
+  background: light-dark(var(--gray-50), var(--gray-700));
+}

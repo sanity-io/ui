@@ -1,9 +1,14 @@
 @import './box/box.css';
 @import './card/card.css';
+@import './checkbox/checkbox.css';
 @import './code/code.css';
 @import './container/container.css';
 @import './flex/flex.css';
 @import './grid/grid.css';
 @import './heading/heading.css';
 @import './icon/icon.css';
+@import './label/label.css';
+@import './radio/radio.css';
+@import './switch/switch.css';
 @import './text/text.css';
+@import './visually-hidden/visually-hidden.css';

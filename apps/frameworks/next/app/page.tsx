@@ -1,3 +1,5 @@
+'use client'
+
 import {Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
 
 export default function Home() {
