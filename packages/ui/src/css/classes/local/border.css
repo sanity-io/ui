@@ -4,17 +4,17 @@
 
 @breakpoints {
   .sui-border { border-width: 1px; border-style: solid; }
-  .sui-border-none { border: none; }
+  .sui-border-none { border-style: none; }
 
   .sui-border-top { border-top-width: 1px; border-top-style: solid; }
-  .sui-border-top-none { border-top: none; }
+  .sui-border-top-none { border-top-style: none; }
 
   .sui-border-right { border-right-width: 1px; border-right-style: solid; }
-  .sui-border-right-none { border-right: none; }
+  .sui-border-right-none { border-right-style: none; }
 
   .sui-border-bottom { border-bottom-width: 1px; border-bottom-style: solid; }
-  .sui-border-bottom-none { border-bottom: none; }
+  .sui-border-bottom-none { border-bottom-style: none; }
 
   .sui-border-left { border-left-width: 1px; border-left-style: solid; }
-  .sui-border-left-none { border-left: none; }
+  .sui-border-left-none { border-left-style: none; }
 }
