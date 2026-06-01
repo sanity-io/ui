@@ -1,5 +1,4 @@
 .sui-Box {
-  /* Box has no tone by default, therefore we set --tone-surface as transparent */
-  --tone-surface: transparent;
-  background-color: var(--tone-surface);
+  --box-background: var(--background-low, transparent);
+  background-color: var(--box-background);
 }

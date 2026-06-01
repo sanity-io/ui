@@ -1,5 +1,4 @@
 .sui-Flex {
-  /* Flex has no tone by default, therefore we set --tone-surface as transparent */
-  --tone-surface: transparent;
-  background-color: var(--tone-surface);
+  --flex-background: var(--background-low, transparent);
+  background-color: var(--flex-background);
 }

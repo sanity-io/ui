@@ -1,7 +1,4 @@
 .sui-Card {
-  /* Card is always used with tone, therefore we can apply background and border colors
-   * by default without setting fallback custom properties.
-   * Note that border width/style is applied by .sui-border, used by default on Card */
-  background-color: var(--tone-surface);
-  border-color: var(--tone-separator);
+  --card-background: var(--background-low);
+  background-color: var(--card-background);
 }

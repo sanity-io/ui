@@ -1,4 +1,4 @@
 .sui-Container {
-  --tone-surface: transparent;
-  background-color: var(--tone-surface);
+  --container-background: var(--background-low, transparent);
+  background-color: var(--container-background);
 }
