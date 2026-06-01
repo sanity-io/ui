@@ -1,4 +1,4 @@
-.sui-Box {
-  --box-background: var(--background-low, transparent);
+.sui-Box[class*='sui-tone'] {
+  --box-background: var(--background-low);
   background-color: var(--box-background);
 }

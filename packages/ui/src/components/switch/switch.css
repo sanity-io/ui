@@ -1,16 +1,18 @@
-.sui-SwitchMark {
-  background: var(--tone-separator, var(--border-color-default));
+
+.sui-SwitchMark[class*='sui-tone'] {
+  background-color: var(--tone-0);
+  border: 1px solid var(--separator-high);
 }
 
 .sui-SwitchMark:after {
   content: '';
-  background: light-dark(var(--white), var(--black));
+  background: var(--tone-1000);
   width: 7px;
   height: 7px;
   border-radius: var(--radius-round);
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 4px;
+  left: 4px;
   display: block;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px;
 }
@@ -21,12 +23,17 @@
 }
 
 .sui-SwitchInput:checked + .sui-SwitchMark {
-  background: light-dark(var(--black), var(--white));
+  background: var(--tone-1000);
+  border-color: transparent;
+}
+
+.sui-SwitchInput:checked + .sui-SwitchMark:after {
+  background: var(--tone-0);
 }
 
 .sui-SwitchInput:checked + .sui-SwitchMark:after {
   left: auto;
-  right: 5px;
+  right: 4px;
 }
 
 .sui-SwitchInput:indeterminate + .sui-SwitchMark:after {

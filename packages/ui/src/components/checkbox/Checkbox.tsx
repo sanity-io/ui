@@ -36,7 +36,7 @@ export function Checkbox(props: CheckboxProps) {
 
       <Box
         as="span"
-        className="sui-CheckboxMark"
+        className="sui-CheckboxMark sui-tone-neutral"
         position="relative"
         radius={2}
         width="17px"

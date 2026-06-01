@@ -1,4 +1,4 @@
-.sui-Flex {
-  --flex-background: var(--background-low, transparent);
+.sui-Flex[class*='sui-tone'] {
+  --flex-background: var(--background-low);
   background-color: var(--flex-background);
 }

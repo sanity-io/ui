@@ -359,8 +359,8 @@ importers:
   packages/ui:
     dependencies:
       '@sanity-labs/design-tokens':
-        specifier: 0.0.2-alpha.2
-        version: 0.0.2-alpha.2
+        specifier: 0.0.2-alpha.4
+        version: 0.0.2-alpha.4
       '@sanity/icons':
         specifier: ^3.7.4
         version: 3.7.4(react@19.2.4)
@@ -2098,8 +2098,8 @@ packages:
   '@rushstack/ts-command-line@5.3.4':
     resolution: {integrity: sha512-MLkVKVEN6/2clKTrjN2B2KqKCuPxRwnNsWY7a+FCAq2EMdkj10cM8YgiBSMeGFfzM0mDMzargpHNnNzaBi9Whg==}
 
-  '@sanity-labs/design-tokens@0.0.2-alpha.2':
-    resolution: {integrity: sha512-rM0+qso6XaE60UaJ7z7v7DWBRlJ57XQUzuL8nTwtub42xGw4jusEhDq7/c4Mrdec98hLykyhe6t5n2mKxf/BVQ==}
+  '@sanity-labs/design-tokens@0.0.2-alpha.4':
+    resolution: {integrity: sha512-+i7GXix4Akt34VDWgSM1Lpq8Hxf8SH8022uNsDRXSNuAqQMjKVGWLItAyc2TyfWVwWZLhsCF3lj5tdW7cecDxQ==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
   '@sanity/browserslist-config@1.0.5':
@@ -8345,7 +8345,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@sanity-labs/design-tokens@0.0.2-alpha.2': {}
+  '@sanity-labs/design-tokens@0.0.2-alpha.4': {}
 
   '@sanity/browserslist-config@1.0.5': {}
 

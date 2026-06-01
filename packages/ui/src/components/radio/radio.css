@@ -1,5 +1,6 @@
-.sui-RadioMark {
-  border: 1px solid var(--tone-separator, var(--border-color-default));
+.sui-RadioMark[class*='sui-tone'] {
+  background-color: var(--tone-0);
+  border: 1px solid var(--separator-high);
 }
 
 .sui-RadioInput:focus-visible + .sui-RadioMark {
@@ -9,7 +10,7 @@
 
 .sui-RadioInput:checked + .sui-RadioMark:after {
   content: '';
-  background: light-dark(var(--black), var(--white));
+  background: var(--tone-1000);
   border-radius: var(--radius-round);
   position: absolute;
   inset: 3px;

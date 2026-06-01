@@ -21,7 +21,7 @@ export function Radio(props: RadioProps) {
 
       <Box
         as="span"
-        className="sui-RadioMark"
+        className="sui-RadioMark sui-tone-neutral"
         position="relative"
         radius="full"
         width="17px"

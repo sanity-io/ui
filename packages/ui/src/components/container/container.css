@@ -1,4 +1,4 @@
-.sui-Container {
-  --container-background: var(--background-low, transparent);
+.sui-Container[class*='sui-tone'] {
+  --container-background: var(--background-low);
   background-color: var(--container-background);
 }

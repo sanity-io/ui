@@ -1,6 +1,6 @@
 .sui-Icon {
   --icon-color: light-dark(var(--gray-800), var(--gray-200));
-  color: var(--foreground-high, var(--tone-text-default));
+  color: var(--foreground-high, var(--icon-color));
 }
 
 .sui-Icon:where(.sui-text-muted) {

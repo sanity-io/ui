@@ -36,7 +36,7 @@ export function Switch(props: SwitchProps) {
 
       <Box
         as="span"
-        className="sui-SwitchMark"
+        className="sui-SwitchMark sui-tone-neutral"
         position="relative"
         radius={6}
         width="25px"

@@ -45,7 +45,7 @@
   },
   "browserslist": "extends @sanity/browserslist-config",
   "dependencies": {
-    "@sanity-labs/design-tokens": "0.0.2-alpha.2",
+    "@sanity-labs/design-tokens": "0.0.2-alpha.4",
     "classnames": "^2.5.1"
   },
   "devDependencies": {

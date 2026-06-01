@@ -1,7 +1,11 @@
 .sui-CheckboxMark {
-  border: 1px solid var(--tone-separator, var(--border-color-default));
-  color: light-dark(var(--white), var(--black));
   font-size: 16px;
+}
+
+.sui-CheckboxMark[class*='sui-tone'] {
+  background-color: var(--tone-0);
+  border: 1px solid var(--separator-high);
+  color: var(--tone-0);
 }
 
 .sui-CheckboxInput:focus-visible + .sui-CheckboxMark {
@@ -10,12 +14,12 @@
 }
 
 .sui-CheckboxInput:checked + .sui-CheckboxMark {
-  background: light-dark(var(--black), var(--white));
-  border-color: light-dark(var(--black), var(--white));
+  background: var(--tone-1000);
+  border-color: var(--tone-1000);
 }
 
 .sui-CheckboxInput:indeterminate + .sui-CheckboxMark {
-  color: light-dark(var(--black), var(--white));
+  color: var(--tone-1000);
 }
 
 .sui-CheckboxInput:disabled + .sui-CheckboxMark {

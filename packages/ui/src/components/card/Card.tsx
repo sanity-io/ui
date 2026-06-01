@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
-import { getProps } from '../../utils/getProps'
-import { type CardProps, cardProps } from './card.props'
+import {getProps} from '../../utils/getProps'
+import {type CardProps, cardProps} from './card.props'
 
 /** @public */
 export function Card<T extends ElementType = 'div'>({

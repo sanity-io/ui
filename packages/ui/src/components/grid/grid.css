@@ -1,4 +1,4 @@
-.sui-Grid {
-  --grid-background: var(--background-low, transparent);
+.sui-Grid[class*='sui-tone'] {
+  --grid-background: var(--background-low);
   background-color: var(--grid-background);
 }
