@@ -1,0 +1,9 @@
+.sui-SkipToContent {
+  --z-index: 9999;
+  background-color: light-dark(var(--gray-900), var(--white));
+  color: light-dark(var(--white), var(--gray-900));
+}
+
+.sui-SkipToContent .sui-Text {
+  color: inherit;
+}

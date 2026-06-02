@@ -1,4 +1,4 @@
-.sui-VisuallyHidden {
+.sui-VisuallyHidden:not(.sui-VisuallyHidden-Visible:focus-visible) {
   width: 1px;
   height: 1px;
   clip: rect(0 0 0 0);

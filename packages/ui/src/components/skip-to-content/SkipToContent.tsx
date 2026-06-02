@@ -1,0 +1,30 @@
+import classNames from 'classnames'
+
+import {getProps} from '../../utils/getProps'
+import {Link} from '../link/Link'
+import {Text} from '../text/Text'
+import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
+import {type SkipToContentProps, skipToContentProps} from './skipToContent.props'
+
+/** @beta */
+export function SkipToContent(props: SkipToContentProps) {
+  const {className, hash, label, style, ...rest} = getProps(props, skipToContentProps)
+
+  return (
+    <VisuallyHidden
+      as={Link}
+      href={hash}
+      underlined={false}
+      className={classNames(
+        'sui-SkipToContent sui-position-absolute sui-top2 sui-left2 sui-display-inline-block sui-z-index sui-py2 sui-px3 sui-radius2 sui-text-body1',
+        className,
+      )}
+      style={style}
+      data-ui="SkipToContent"
+      visibleOnFocus
+      {...rest}
+    >
+      <Text size={1}>{label}</Text>
+    </VisuallyHidden>
+  )
+}

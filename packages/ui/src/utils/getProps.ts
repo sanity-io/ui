@@ -56,7 +56,13 @@ function getClassName(propValue: any, propDef: PropDef, bp?: number) {
   }
 
   if (propDef.type === 'boolean') {
-    return `${PREFIX}-${propValue ? propDef.className : propDef.inverseClassName}${bp ? `-bp-${bp}` : ''}`
+    if (propValue) {
+      return `${PREFIX}-${propDef.className}${bp ? `-bp-${bp}` : ''}`
+    }
+
+    if (!propValue && propDef.inverseClassName) {
+      return `${PREFIX}-${propDef.inverseClassName}${bp ? `-bp-${bp}` : ''}`
+    }
   }
 
   return ''

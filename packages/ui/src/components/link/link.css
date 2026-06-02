@@ -1,0 +1,12 @@
+.sui-Link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sui-Link:focus-visible {
+  outline-color: var(--blue-500);
+}
+
+.sui-Link-Underlined {
+  text-decoration: underline;
+}

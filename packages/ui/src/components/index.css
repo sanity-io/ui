@@ -8,7 +8,9 @@
 @import './heading/heading.css';
 @import './icon/icon.css';
 @import './label/label.css';
+@import './link/link.css';
 @import './radio/radio.css';
+@import './skip-to-content/skip-to-content.css';
 @import './switch/switch.css';
 @import './text/text.css';
 @import './visually-hidden/visually-hidden.css';

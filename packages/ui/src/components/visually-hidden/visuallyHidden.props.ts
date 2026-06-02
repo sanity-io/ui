@@ -4,10 +4,16 @@ import {type PropDef} from '../../types/PropDef'
 export interface VisuallyHiddenProps<T extends React.ElementType> {
   /** Element to render */
   as?: T
+  /** If true, element is visible on :focus-visible */
+  visibleOnFocus?: boolean
 }
 
 export const visuallyHiddenProps: Record<string, PropDef> = {
   as: {
     type: 'string',
+  },
+  visibleOnFocus: {
+    type: 'boolean',
+    className: 'VisuallyHidden-Visible',
   },
 }
