@@ -1,5 +1,12 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.13
+
+### Patch Changes
+
+- 6c71932: add vstack, hstack, and inline components
+- 683d119: add link and skip to content components
+
 ## 0.0.1-alpha.12
 
 ### Patch Changes

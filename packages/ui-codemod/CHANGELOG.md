@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc-codemod
 
+## 0.0.1-alpha.12
+
+### Patch Changes
+
+- 6c71932: add stack and inline codemods
+
 ## 0.0.1-alpha.11
 
 ### Patch Changes

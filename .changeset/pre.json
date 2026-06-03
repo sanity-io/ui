@@ -12,5 +12,13 @@
     "ui-poc-vite": "0.0.0",
     "ui-poc-performance-testing": "0.0.0"
   },
-  "changesets": ["funky-comics-type", "light-berries-fry", "lucky-states-cry", "wide-tables-jump"]
+  "changesets": [
+    "funky-comics-type",
+    "light-berries-fry",
+    "lucky-states-cry",
+    "plain-sides-camp",
+    "sour-beers-thank",
+    "tame-rules-doubt",
+    "wide-tables-jump"
+  ]
 }
