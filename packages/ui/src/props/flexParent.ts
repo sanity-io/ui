@@ -40,7 +40,7 @@ export const flexParentProps: Record<string, PropDef> = {
   },
   flexWrap: {
     type: 'union',
-    className: 'flex-wrap',
+    className: 'flex',
     values: FLEX_WRAP,
   },
 }

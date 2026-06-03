@@ -49,7 +49,7 @@ describe('getProps', () => {
 
   it('generates className based on a composite', () => {
     const result = getProps({density: 'regular'}, cardProps)
-    expect(result.className).toBe('sui-p4 sui-radius3')
+    expect(result.className).toBe('sui-gap3 sui-p4 sui-radius3')
     expect(result.style).toEqual({})
   })
 
@@ -90,7 +90,9 @@ describe('getProps', () => {
 
   it('genereates responsive className based on composites', () => {
     const result = getProps({density: ['compact', 'regular']}, cardProps)
-    expect(result.className).toBe('sui-p3 sui-p4-bp-1 sui-radius2 sui-radius3-bp-1')
+    expect(result.className).toBe(
+      'sui-gap2 sui-gap3-bp-1 sui-p3 sui-p4-bp-1 sui-radius2 sui-radius3-bp-1',
+    )
     expect(result.style).toEqual({})
   })
 

@@ -30,7 +30,7 @@ defineInlineTest(
 
   <Box />
   `,
-  'replaces Card and updates import path based on fromPackage and toPackage',
+  'replaces Card with Box and updates import path based on fromPackage and toPackage',
 )
 
 defineInlineTest(

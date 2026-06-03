@@ -1,4 +1,5 @@
 import {borderProps} from '../../props/border'
+import {gapProps} from '../../props/gap'
 import {type MarginProps, marginProps} from '../../props/margin'
 import {paddingProps} from '../../props/padding'
 import {type ToneProps, toneProps} from '../../props/tone'
@@ -22,6 +23,14 @@ export const cardProps: Record<string, PropDef> = {
     type: 'composite',
     values: DENSITY,
     composition: {
+      gap: {
+        propDef: gapProps['gap'] as PropDef,
+        mapping: {
+          compact: 2,
+          regular: 3,
+          loose: 4,
+        },
+      },
       padding: {
         propDef: paddingProps['padding'] as PropDef,
         mapping: {

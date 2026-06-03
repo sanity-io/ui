@@ -9,6 +9,7 @@
   .sui-gap7 { gap: var(--space-7); }
   .sui-gap8 { gap: var(--space-8); }
   .sui-gap9 { gap: var(--space-9); }
+  .sui-gap-inherit { gap: inherit; }
 
   .sui-row-gap0 { row-gap: var(--space-0); }
   .sui-row-gap1 { row-gap: var(--space-1); }
@@ -20,6 +21,7 @@
   .sui-row-gap7 { row-gap: var(--space-7); }
   .sui-row-gap8 { row-gap: var(--space-8); }
   .sui-row-gap9 { row-gap: var(--space-9); }
+  .sui-row-gap-inherit { gap: inherit; }
 
   .sui-column-gap0 { column-gap: var(--space-0); }
   .sui-column-gap1 { column-gap: var(--space-1); }
@@ -31,4 +33,5 @@
   .sui-column-gap7 { column-gap: var(--space-7); }
   .sui-column-gap8 { column-gap: var(--space-8); }
   .sui-column-gap9 { column-gap: var(--space-9); }
+  .sui-column-gap-inherit { gap: inherit; }
 }

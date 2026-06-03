@@ -1,30 +1,30 @@
 import {type PropDef} from '../types/PropDef'
 import {type Responsive} from '../types/Responsive'
-import {SPACE, type Space} from '../types/Space'
+import {SPACE_INHERIT, type SpaceInherit} from '../types/Space'
 
 export type GapProps = {
   /** CSS **gap** property */
-  gap?: Responsive<Space>
+  gap?: Responsive<SpaceInherit>
   /** CSS **row-gap** property */
-  rowGap?: Responsive<Space>
+  rowGap?: Responsive<SpaceInherit>
   /** CSS **column-gap** property */
-  columnGap?: Responsive<Space>
+  columnGap?: Responsive<SpaceInherit>
 }
 
 export const gapProps: Record<string, PropDef> = {
   gap: {
     type: 'union',
     className: 'gap',
-    values: SPACE,
+    values: SPACE_INHERIT,
   },
   rowGap: {
     type: 'union',
     className: 'row-gap',
-    values: SPACE,
+    values: SPACE_INHERIT,
   },
   columnGap: {
     type: 'union',
     className: 'column-gap',
-    values: SPACE,
+    values: SPACE_INHERIT,
   },
 }
