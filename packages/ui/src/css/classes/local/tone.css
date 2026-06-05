@@ -1,15 +1,7 @@
 [class*='sui-tone'] {
-  /* All .sui-tone classes use black and white for tone-0/-1000 */
+  /* All .sui-tone classes use white and black for tone-0/-1000 */
   --tone-0: light-dark(var(--white), var(--black));
   --tone-1000: light-dark(var(--black), var(--white));
-
-  /* Surface tokens, for use with all tones */
-  --background-high: var(--tone-100);
-  --background-low: var(--tone-50);
-  --separator-high: var(--tone-400);
-  --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
-  --foreground-high: var(--tone-800);
-  --foreground-low: var(--tone-600);
 }
 
 .sui-tone-neutral {
