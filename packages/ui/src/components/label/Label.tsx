@@ -6,7 +6,7 @@ import {type LabelProps, labelProps} from './label.props'
 
 /** @beta */
 export function Label(props: LabelProps) {
-  const {children, className, style, disabled, ...rest} = getProps(props, labelProps)
+  const {children, className, style, disabled, error, ...rest} = getProps(props, labelProps)
 
   return (
     <Text
@@ -15,6 +15,7 @@ export function Label(props: LabelProps) {
       muted={disabled}
       className={classNames(
         'sui-Label sui-display-flex sui-align-items-center sui-gap2',
+        error && 'sui-error',
         className,
       )}
       style={style}
