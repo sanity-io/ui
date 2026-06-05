@@ -8,20 +8,27 @@ import {type RadioProps, radioProps} from './radio.props'
 
 /** @beta */
 export function Radio(props: RadioProps) {
-  const {className, style, label, ...rest} = getProps(props, radioProps)
+  const {className, style, label, disabled, error, ...rest} = getProps(props, radioProps)
 
   return (
     <Label
       className={classNames('sui-Radio', className)}
       style={style}
       data-ui="Radio"
-      disabled={props.disabled}
+      disabled={disabled}
+      error={error}
     >
-      <VisuallyHidden as="input" type="radio" className="sui-RadioInput" {...rest} />
+      <VisuallyHidden
+        as="input"
+        type="radio"
+        className="sui-RadioInput"
+        disabled={disabled}
+        {...rest}
+      />
 
       <Box
         as="span"
-        className="sui-RadioMark sui-tone-neutral"
+        className={classNames('sui-RadioMark', error && 'sui-error')}
         position="relative"
         radius="full"
         width="17px"

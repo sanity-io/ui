@@ -10,20 +10,21 @@
   border: 1px solid var(--border-color);
   color: transparent;
   font-size: 16px;
-  transition: border-color 100ms linear, background-color 100ms linear;
+  transition: var(--hover-transition);
 }
 
 /**
-  * Hover - uses relative border/background colours to darken/lighten
+  * Hover - uses relative border/background colours to darken/lighten in both normal & error state
   */
+/** Checkbox border (unchecked) */
 .sui-Checkbox:hover .sui-CheckboxMark {
-  --hover-source-color: var(--border-color);
   border-color: light-dark(
     oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
     oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
   );
 }
 
+/** Checkbox background (checked, indeterminate) */
 .sui-Checkbox:hover .sui-CheckboxInput:is(:checked, :indeterminate) + .sui-CheckboxMark {
   background-color: light-dark(
     oklch(from var(--background-color) calc(l - var(--hover-lightness-delta)) c h),
@@ -35,12 +36,12 @@
   * Focus
   */
 .sui-CheckboxInput:focus-visible + .sui-CheckboxMark {
-  outline: 2px solid var(--blue-500);
-  outline-offset: 2px;
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
 }
 
 /**
-  * Checked/indeterminate, neither disabled nor in error
+  * Checked/indeterminate
   */
 .sui-CheckboxInput:is(:checked, :indeterminate) + .sui-CheckboxMark {
   --background-color: var(--active-background-emphasized);
@@ -76,7 +77,7 @@
 }
 
 /**
-  * Error, but checked/indeterminate
+  * Error, checked/indeterminate
   */
 .sui-CheckboxInput:is(:checked, :indeterminate) + .sui-CheckboxMark.sui-error {
   --background-color: var(--error-background-emphasized);
