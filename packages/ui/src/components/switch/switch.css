@@ -1,47 +1,113 @@
-
-.sui-SwitchMark[class*='sui-tone'] {
-  background-color: var(--tone-0);
-  border: 1px solid var(--separator-high);
+/**
+  * Custom switch control, base
+  */
+.sui-SwitchMark {
+  /* Background and border colours are computed relatively in hover states;
+     we use custom properties to make this easier */
+  --background-color: var(--backdrop);
+  --border-color: var(--separator-high);
+  --width: 25px;
+  --height: 17px;
+  --marker-size: 7px;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  width: var(--width);
+  height: var(--height);
+  transition: var(--hover-transition);
 }
 
+/**
+  * Custom switch marker
+  */
 .sui-SwitchMark:after {
   content: '';
-  background: var(--tone-1000);
-  width: 7px;
-  height: 7px;
-  border-radius: var(--radius-round);
-  position: absolute;
-  top: 4px;
-  left: 4px;
   display: block;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px;
+  background-color: var(--foreground-high);
+  width: var(--marker-size);
+  height: var(--marker-size);
+  border-radius: var(--radius-round);
+  translate: 50% 0;
+  transition: translate 100ms linear;
 }
 
+/**
+  * Hover - uses relative border/background colours to darken/lighten in both normal & error state
+  */
+/** Switch border (unchecked) */
+.sui-Switch:hover .sui-SwitchMark {
+  border-color: light-dark(
+    oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
+    oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
+  );
+}
+
+/* Switch background (checked) */
+.sui-Switch:hover .sui-SwitchInput:is(:checked) + .sui-SwitchMark {
+  background-color: light-dark(
+    oklch(from var(--background-color) calc(l - var(--hover-lightness-delta)) c h),
+    oklch(from var(--background-color) calc(l + var(--hover-lightness-delta)) c h)
+  );
+}
+
+/**
+  * Focus
+  */
 .sui-SwitchInput:focus-visible + .sui-SwitchMark {
-  outline: 1px solid var(--blue-500);
-  outline-offset: 1px;
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
 }
 
+/**
+  * Checked
+  */
 .sui-SwitchInput:checked + .sui-SwitchMark {
-  background: var(--tone-1000);
-  border-color: transparent;
+  --background-color: var(--active-background-emphasized);
+  --border-color: transparent;
 }
 
 .sui-SwitchInput:checked + .sui-SwitchMark:after {
-  background: var(--tone-0);
+  background-color: var(--active-foreground-emphasized);
+  translate: calc(var(--width) - 175%) 0;
 }
 
-.sui-SwitchInput:checked + .sui-SwitchMark:after {
-  left: auto;
-  right: 4px;
-}
-
-.sui-SwitchInput:indeterminate + .sui-SwitchMark:after {
-  left: 50%;
-  right: auto;
-  transform: translateX(-50%);
+/**
+  * Disabled
+  */
+.sui-SwitchInput:disabled + .sui-SwitchMark {
+  --background-color: var(--inert-background);
+  --border-color: var(--separator-low);
 }
 
 .sui-SwitchInput:disabled + .sui-SwitchMark:after {
-  background: light-dark(var(--gray-50), var(--gray-700));
+  background: var(--inert-foreground);
+}
+
+/**
+  * Disabled and checked
+  */
+  .sui-SwitchInput:disabled:checked + .sui-SwitchMark {
+    --background-color: var(--inert-foreground);
+    --border-color: transparent;
+  }
+
+.sui-SwitchInput:disabled:checked + .sui-SwitchMark:after {
+  background-color: var(--inert-background);
+}
+
+/**
+  * Error
+  */
+.sui-SwitchMark.sui-error {
+  --border-color: var(--error-separator);
+}
+
+.sui-SwitchMark.sui-error:after {
+  background-color: var(--error-separator);
+}
+
+/**
+  * Error and checked
+  */
+.sui-SwitchInput:checked + .sui-SwitchMark.sui-error {
+  --background-color: var(--error-background-emphasized);
 }

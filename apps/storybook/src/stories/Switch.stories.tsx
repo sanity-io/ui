@@ -35,19 +35,6 @@ export const Default: Story = {
   },
 }
 
-export const Indeterminate: Story = {
-  render: (props) => {
-    return <Switch {...props} label="Indeterminate switch" indeterminate />
-  },
-  play: async ({canvas}) => {
-    await waitFor(async () => {
-      await expect(
-        ((await canvas.findByLabelText('Indeterminate switch')) as HTMLInputElement).indeterminate,
-      ).toBe(true)
-    })
-  },
-}
-
 export const Disabled: Story = {
   render: (props) => {
     return <Switch {...props} label="Disabled switch" disabled />
