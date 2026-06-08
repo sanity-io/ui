@@ -6,9 +6,10 @@
      we use custom properties to make this easier */
   --background-color: var(--backdrop);
   --border-color: var(--separator-high);
+  /* Switch size stored as custom properties to be used with calc
+     for active switch marker's x-axis translation */
   --width: 25px;
   --height: 17px;
-  --marker-size: 7px;
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
   width: var(--width);
@@ -23,8 +24,8 @@
   content: '';
   display: block;
   background-color: var(--foreground-high);
-  width: var(--marker-size);
-  height: var(--marker-size);
+  width: 7px;
+  height: 7px;
   border-radius: var(--radius-round);
   translate: 50% 0;
   transition: translate 100ms linear;
