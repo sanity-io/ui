@@ -43,12 +43,15 @@ export const Disabled: Story = {
   render: (props) => {
     return (
       <>
-        <Radio {...props} label="Disabled radio" disabled defaultChecked />
+        <Radio {...props} label="Disabled checked radio" disabled defaultChecked />
         <Radio {...props} label="Disabled radio" disabled />
       </>
     )
   },
   play: async ({canvas}) => {
+    await expect(
+      ((await canvas.findByLabelText('Disabled checked radio')) as HTMLInputElement).disabled,
+    ).toBe(true)
     await expect(
       ((await canvas.findByLabelText('Disabled radio')) as HTMLInputElement).disabled,
     ).toBe(true)
