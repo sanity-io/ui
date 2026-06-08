@@ -54,6 +54,7 @@
   */
 .sui-CheckboxInput:disabled + .sui-CheckboxMark {
   --background-color: var(--inert-background);
+  --border-color: var(--separator-low);
 }
 
 /* Turn hover (and all pointer events) off for disabled checkboxes */
