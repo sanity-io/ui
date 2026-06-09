@@ -3,18 +3,18 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
 export interface SwitchProps extends React.ComponentProps<'input'>, MarginProps {
+  /** Error state */
+  error?: boolean
   /** Input label */
   label: React.ReactNode
-  /** Indeterminate state */
-  indeterminate?: boolean
 }
 
 export const switchProps: Record<string, PropDef> = {
+  error: {
+    type: 'boolean',
+  },
   label: {
     type: 'string',
-  },
-  indeterminate: {
-    type: 'boolean',
   },
   ...marginProps,
 }

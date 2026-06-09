@@ -10,9 +10,7 @@ const argTypes = getArgTypes(radioProps)
 
 const meta: Meta<typeof Radio> = {
   title: 'Components/Radio',
-  args: {
-    label: 'Radio',
-  },
+  args: {},
   argTypes,
   component: Radio,
   tags: ['autodocs'],
@@ -28,18 +26,32 @@ type Story = StoryObj<typeof Radio>
 
 export const Default: Story = {
   render: (props) => {
-    return <Radio {...props} />
+    return (
+      <>
+        <Radio {...props} name="radio" label="Radio 1" />
+        <Radio {...props} name="radio" label="Radio 2" />
+      </>
+    )
   },
   play: async ({canvas}) => {
-    await expect(((await canvas.findByLabelText('Radio')) as HTMLInputElement).type).toBe('radio')
+    await expect(((await canvas.findByLabelText('Radio 1')) as HTMLInputElement).type).toBe('radio')
+    await expect(((await canvas.findByLabelText('Radio 2')) as HTMLInputElement).type).toBe('radio')
   },
 }
 
 export const Disabled: Story = {
   render: (props) => {
-    return <Radio {...props} label="Disabled radio" disabled defaultChecked />
+    return (
+      <>
+        <Radio {...props} label="Disabled checked radio" disabled defaultChecked />
+        <Radio {...props} label="Disabled radio" disabled />
+      </>
+    )
   },
   play: async ({canvas}) => {
+    await expect(
+      ((await canvas.findByLabelText('Disabled checked radio')) as HTMLInputElement).disabled,
+    ).toBe(true)
     await expect(
       ((await canvas.findByLabelText('Disabled radio')) as HTMLInputElement).disabled,
     ).toBe(true)

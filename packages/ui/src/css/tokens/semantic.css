@@ -1,0 +1,21 @@
+:root {
+  --backdrop: light-dark(var(--white), var(--black));
+  --brand-background: #eb5228;
+  --brand-foreground: var(--black);
+  --placeholder-opacity: var(--opacity-mid);
+  --overlay-opacity: var(--opacity-mid);
+  /* State */
+  --active-background-normal: light-dark(var(--blue-50), var(--blue-950));
+  --active-foreground-normal: light-dark(var(--blue-800), var(--blue-200));
+  --active-background-emphasized: light-dark(var(--blue-600), var(--blue-400));
+  --active-foreground-emphasized: light-dark(var(--white), var(--black));
+  --error-background-emphasized: light-dark(var(--red-600), var(--red-400));
+  --error-foreground: light-dark(var(--red-800), var(--red-200));
+  --error-separator: light-dark(var(--red-600), var(--red-400));
+  --focus-outline: 2px solid var(--blue-500);
+  --focus-offset: 2px;
+  --hover-lightness-delta: 0.125;
+  --hover-transition: border-color 100ms linear, background-color 100ms linear;
+  --inert-background: light-dark(var(--gray-50), var(--gray-950));
+  --inert-foreground: light-dark(var(--gray-400), var(--gray-600));
+}

@@ -1,27 +1,97 @@
-.sui-RadioMark[class*='sui-tone'] {
-  background-color: var(--tone-0);
-  border: 1px solid var(--separator-high);
+/**
+  * Custom radio control, base
+  */
+.sui-RadioMark {
+  /* Background and border colours are computed relatively in hover states;
+     we use custom properties to make this easier */
+  --background-color: var(--backdrop);
+  --border-color: var(--separator-high);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  transition: var(--hover-transition);
 }
 
+/**
+  * Custom radio marker
+  */
+.sui-RadioMark:after {
+  content: '';
+  background: var(--active-foreground-emphasized);
+  border-radius: var(--radius-round);
+  display: block;
+  inset: 0;
+  position: absolute;
+  opacity: 0;
+  transition: inset 100ms linear;
+}
+
+/**
+  * Hover - uses relative border/background colours to darken/lighten in both normal & error state
+  */
+/** Radio border (unchecked) */
+.sui-Radio:hover .sui-RadioMark {
+  border-color: light-dark(
+    oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
+    oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
+  );
+}
+
+/* Radio background (checked) */
+.sui-Radio:hover .sui-RadioInput:is(:checked) + .sui-RadioMark {
+  background-color: light-dark(
+    oklch(from var(--background-color) calc(l - var(--hover-lightness-delta)) c h),
+    oklch(from var(--background-color) calc(l + var(--hover-lightness-delta)) c h)
+  );
+}
+
+/**
+  * Focus
+  */
 .sui-RadioInput:focus-visible + .sui-RadioMark {
-  outline: 1px solid var(--blue-500);
-  outline-offset: 1px;
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+/**
+  * Checked
+  */
+.sui-RadioInput:checked + .sui-RadioMark {
+  --background-color: var(--active-background-emphasized);
+  --border-color: transparent;
 }
 
 .sui-RadioInput:checked + .sui-RadioMark:after {
-  content: '';
-  background: var(--tone-1000);
-  border-radius: var(--radius-round);
-  position: absolute;
-  inset: 3px;
-  display: block;
+  inset: 4px;
+  opacity: 1;
 }
 
+/**
+  * Disabled
+  */
 .sui-RadioInput:disabled + .sui-RadioMark {
-  background: light-dark(var(--gray-50), var(--gray-700));
+  --background-color: var(--inert-background);
+  --border-color: var(--separator-low);
 }
 
 .sui-RadioInput:disabled + .sui-RadioMark:after {
   background: light-dark(var(--gray-300), var(--gray-500));
 }
 
+/* Turn hover (and all pointer events) off for disabled radios */
+.sui-Radio:has(:disabled) {
+  pointer-events: none;
+}
+
+/**
+  * Error
+  */
+.sui-RadioMark.sui-error {
+  --border-color: var(--error-separator);
+}
+
+/**
+  * Error, checked
+  */
+.sui-RadioInput:checked + .sui-RadioMark.sui-error {
+  --background-color: var(--error-background-emphasized);
+}
