@@ -3,8 +3,6 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
 export interface CheckboxProps extends React.ComponentProps<'input'>, MarginProps {
-  /** Disabled state */
-  disabled?: boolean
   /** Error state */
   error?: boolean
   /** Indeterminate state */
@@ -14,9 +12,6 @@ export interface CheckboxProps extends React.ComponentProps<'input'>, MarginProp
 }
 
 export const checkboxProps: Record<string, PropDef> = {
-  disabled: {
-    type: 'boolean',
-  },
   error: {
     type: 'boolean',
   },

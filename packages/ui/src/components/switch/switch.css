@@ -27,7 +27,7 @@
   width: 7px;
   height: 7px;
   border-radius: var(--radius-round);
-  translate: 50% 0;
+  translate: 50%;
   transition: translate 100ms linear;
 }
 
@@ -68,7 +68,7 @@
 
 .sui-SwitchInput:checked + .sui-SwitchMark:after {
   background-color: var(--active-foreground-emphasized);
-  translate: calc(var(--width) - 175%) 0;
+  translate: calc(var(--width) - 175%);
 }
 
 /**
@@ -83,13 +83,18 @@
   background: var(--inert-foreground);
 }
 
+/* Turn hover (and all pointer events) off for disabled switches */
+.sui-Switch:has(:disabled) {
+  pointer-events: none;
+}
+
 /**
   * Disabled and checked
   */
-  .sui-SwitchInput:disabled:checked + .sui-SwitchMark {
-    --background-color: var(--inert-foreground);
-    --border-color: transparent;
-  }
+.sui-SwitchInput:disabled:checked + .sui-SwitchMark {
+  --background-color: var(--inert-foreground);
+  --border-color: transparent;
+}
 
 .sui-SwitchInput:disabled:checked + .sui-SwitchMark:after {
   background-color: var(--inert-background);

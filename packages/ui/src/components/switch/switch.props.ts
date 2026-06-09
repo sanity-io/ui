@@ -3,8 +3,6 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
 export interface SwitchProps extends React.ComponentProps<'input'>, MarginProps {
-  /** Disabled state */
-  disabled?: boolean
   /** Error state */
   error?: boolean
   /** Input label */
@@ -12,9 +10,6 @@ export interface SwitchProps extends React.ComponentProps<'input'>, MarginProps 
 }
 
 export const switchProps: Record<string, PropDef> = {
-  disabled: {
-    type: 'boolean',
-  },
   error: {
     type: 'boolean',
   },

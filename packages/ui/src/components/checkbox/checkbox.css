@@ -58,7 +58,7 @@
 }
 
 /* Turn hover (and all pointer events) off for disabled checkboxes */
-.sui-Checkbox:has(.sui-CheckboxInput:disabled) {
+.sui-Checkbox:has(:disabled) {
   pointer-events: none;
 }
 

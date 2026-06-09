@@ -78,7 +78,7 @@
 }
 
 /* Turn hover (and all pointer events) off for disabled radios */
-.sui-Radio:has(.sui-RadioInput:disabled) {
+.sui-Radio:has(:disabled) {
   pointer-events: none;
 }
 
