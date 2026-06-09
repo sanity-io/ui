@@ -10,6 +10,7 @@
 @import './inline/inline.css';
 @import './label/label.css';
 @import './link/link.css';
+@import './list/list.css';
 @import './radio/radio.css';
 @import './skip-to-content/skip-to-content.css';
 @import './switch/switch.css';

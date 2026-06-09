@@ -24,6 +24,7 @@ html {
 body {
   background: light-dark(var(--white), var(--black));
   font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Display multimedia as block by default */
