@@ -41,22 +41,16 @@ export default ts.config(
         '@typescript-eslint/no-restricted-imports': [
           'error',
           {
-            name: 'motion/react',
-            allowTypeImports: true,
-            message:
-              'Do not import motion at runtime. It must only be imported from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
-          },
-          {
-            name: 'motion-dom',
-            allowTypeImports: true,
-            message:
-              'Do not import motion at runtime. It must only be imported from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
-          },
-          {
-            name: 'framer-motion',
-            allowTypeImports: true,
-            message:
-              'Do not import motion at runtime. It must only be imported from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+            // Patterns also cover subpaths and alternate entrypoints (e.g. `motion/mini`,
+            // `motion/react/dist/...`, `framer-motion/dom`) so they cannot bypass the guard.
+            patterns: [
+              {
+                group: ['motion', 'motion/*', 'motion-dom', 'motion-dom/*', 'framer-motion', 'framer-motion/*'],
+                allowTypeImports: true,
+                message:
+                  'Do not import motion at runtime. It must only be imported from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+              },
+            ],
           },
         ],
         'import/no-unresolved': 'off',
