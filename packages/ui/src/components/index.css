@@ -8,6 +8,8 @@
 @import './grid/grid.css';
 @import './heading/heading.css';
 @import './icon/icon.css';
+@import './indicator/indicator.css';
+@import './indicator-group/indicator-group.css';
 @import './inline/inline.css';
 @import './label/label.css';
 @import './link/link.css';
