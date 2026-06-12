@@ -13,7 +13,11 @@ import {
   DEFAULT_TOOLTIP_ARROW_WIDTH,
 } from './constants'
 
-const MotionCard = styled(motion.create(Card))`
+// Re-exported so `tooltip.tsx` can lazily load `AnimatePresence` from the same chunk as this
+// module, avoiding both a static `motion/react` import and a second chunk request.
+export {AnimatePresence} from 'motion/react'
+
+const MotionCard = /* @__PURE__ */ styled(/* @__PURE__ */ motion.create(Card))`
   will-change: transform;
 `
 

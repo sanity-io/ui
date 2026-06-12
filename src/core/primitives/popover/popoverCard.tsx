@@ -16,7 +16,11 @@ import {
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
 
-const MotionCard = styled(motion.create(Card))`
+// Re-exported so `popover.tsx` can lazily load `AnimatePresence` from the same chunk as this
+// module, avoiding both a static `motion/react` import and a second chunk request.
+export {AnimatePresence} from 'motion/react'
+
+const MotionCard = /* @__PURE__ */ styled(/* @__PURE__ */ motion.create(Card))`
   &:not([hidden]) {
     display: flex;
   }
@@ -26,7 +30,7 @@ const MotionCard = styled(motion.create(Card))`
   will-change: transform;
 `
 
-const MotionFlex = styled(motion.create(Flex))`
+const MotionFlex = /* @__PURE__ */ styled(/* @__PURE__ */ motion.create(Flex))`
   will-change: opacity;
 `
 

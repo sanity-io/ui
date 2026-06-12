@@ -11,11 +11,12 @@ import {
   useFloating,
 } from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
   forwardRef,
+  lazy,
   type Ref,
+  Suspense,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -40,8 +41,20 @@ import {
 } from './constants'
 import {size} from './floating-ui/size'
 import {calcCurrentWidth, calcMaxWidth} from './helpers'
-import {PopoverCard} from './popoverCard'
 import {PopoverUpdateCallback, PopoverWidth} from './types'
+
+// `popoverCard.tsx` is the only module in the popover graph that depends on `motion/react`.
+// Loading it (and `AnimatePresence`) lazily keeps the motion library out of the static module
+// graph, so it is only evaluated once a popover actually opens.
+const PopoverCard = lazy(() =>
+  import('./popoverCard').then((popoverCardModule) => ({default: popoverCardModule.PopoverCard})),
+)
+
+const AnimatePresence = lazy(() =>
+  import('./popoverCard').then((popoverCardModule) => ({
+    default: popoverCardModule.AnimatePresence,
+  })),
+)
 
 /** @public */
 export interface PopoverProps
@@ -185,6 +198,15 @@ export const Popover = forwardRef(function Popover(
   const zOffsetProp = _zOffsetProp ?? layer.popover.zOffset
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
+
+  // Latches to `true` the first time an animated popover opens, and deliberately never resets,
+  // so that `AnimatePresence` only loads once needed but stays mounted to run exit animations.
+  const [hasOpenedAnimated, setHasOpenedAnimated] = useState(Boolean(animate && open))
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (animate && open) setHasOpenedAnimated(true)
+  }, [animate, open])
   const boundarySize = useElementSize(boundaryElement)?.border
   const padding = _getArrayProp(paddingProp)
   const radius = _getArrayProp(radiusProp)
@@ -324,32 +346,34 @@ export const Popover = forwardRef(function Popover(
       {/* Optional transparent blocking overlay at the top-most z-index layer. Must be positioned before the below popover card. */}
       {modal && <ViewportOverlay />}
 
-      <PopoverCard
-        {...restProps}
-        __unstable_margins={margins}
-        animate={animate}
-        arrow={arrowProp}
-        arrowRef={setArrow}
-        arrowX={arrowX}
-        arrowY={arrowY}
-        hidden={referenceHidden}
-        overflow={overflow}
-        padding={padding}
-        placement={placement}
-        radius={radius}
-        ref={setFloating}
-        scheme={scheme}
-        shadow={shadow}
-        originX={originX}
-        originY={originY}
-        strategy={strategy}
-        tone={tone}
-        width={matchReferenceWidth ? referenceWidth : width}
-        x={x}
-        y={y}
-      >
-        {content}
-      </PopoverCard>
+      <Suspense fallback={null}>
+        <PopoverCard
+          {...restProps}
+          __unstable_margins={margins}
+          animate={animate}
+          arrow={arrowProp}
+          arrowRef={setArrow}
+          arrowX={arrowX}
+          arrowY={arrowY}
+          hidden={referenceHidden}
+          overflow={overflow}
+          padding={padding}
+          placement={placement}
+          radius={radius}
+          ref={setFloating}
+          scheme={scheme}
+          shadow={shadow}
+          originX={originX}
+          originY={originY}
+          strategy={strategy}
+          tone={tone}
+          width={matchReferenceWidth ? referenceWidth : width}
+          x={x}
+          y={y}
+        >
+          {content}
+        </PopoverCard>
+      </Suspense>
     </LayerProvider>
   )
 
@@ -364,7 +388,13 @@ export const Popover = forwardRef(function Popover(
   return (
     <>
       {/* the popover */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate
+        ? hasOpenedAnimated && (
+            <Suspense fallback={null}>
+              <AnimatePresence>{children}</AnimatePresence>
+            </Suspense>
+          )
+        : children}
 
       {/* the referred element */}
       {child}

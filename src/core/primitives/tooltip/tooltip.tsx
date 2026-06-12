@@ -9,10 +9,11 @@ import {
   useFloating,
 } from '@floating-ui/react-dom'
 import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
   forwardRef,
+  lazy,
+  Suspense,
   useCallback,
   useEffect,
   useId,
@@ -39,8 +40,20 @@ import {
   DEFAULT_TOOLTIP_DISTANCE,
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
-import {TooltipCard} from './tooltipCard'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
+
+// `tooltipCard.tsx` is the only module in the tooltip graph that depends on `motion/react`.
+// Loading it (and `AnimatePresence`) lazily keeps the motion library out of the static module
+// graph, so it is only evaluated once a tooltip actually shows.
+const TooltipCard = lazy(() =>
+  import('./tooltipCard').then((tooltipCardModule) => ({default: tooltipCardModule.TooltipCard})),
+)
+
+const AnimatePresence = lazy(() =>
+  import('./tooltipCard').then((tooltipCardModule) => ({
+    default: tooltipCardModule.AnimatePresence,
+  })),
+)
 
 /**
  * @public
@@ -121,6 +134,10 @@ export const Tooltip = forwardRef(function Tooltip(
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const fallbackPlacements = _getArrayProp(fallbackPlacementsProp)
+
+  // Latches to `true` the first time an animated tooltip shows, and deliberately never resets,
+  // so that `AnimatePresence` only loads once needed but stays mounted to run exit animations.
+  const [hasShownAnimated, setHasShownAnimated] = useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
@@ -160,6 +177,11 @@ export const Tooltip = forwardRef(function Tooltip(
   const delayGroupContext = useTooltipDelayGroup()
   const {setIsGroupActive, setOpenTooltipId} = delayGroupContext || {}
   const showTooltip = isOpen || delayGroupContext?.openTooltipId === tooltipId
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (animate && showTooltip) setHasShownAnimated(true)
+  }, [animate, showTooltip])
 
   const isInsideGroup = delayGroupContext !== null
   const openDelayProp = typeof delay === 'number' ? delay : delay?.open || 0
@@ -349,24 +371,26 @@ export const Tooltip = forwardRef(function Tooltip(
       }}
       zOffset={zOffset}
     >
-      <TooltipCard
-        {...restProps}
-        animate={animate}
-        arrow={arrowProp}
-        arrowRef={setArrow}
-        arrowX={arrowX}
-        arrowY={arrowY}
-        originX={originX}
-        originY={originY}
-        padding={padding}
-        placement={placement}
-        radius={radius}
-        ref={setFloating}
-        scheme={scheme}
-        shadow={shadow}
-      >
-        {content}
-      </TooltipCard>
+      <Suspense fallback={null}>
+        <TooltipCard
+          {...restProps}
+          animate={animate}
+          arrow={arrowProp}
+          arrowRef={setArrow}
+          arrowX={arrowX}
+          arrowY={arrowY}
+          originX={originX}
+          originY={originY}
+          padding={padding}
+          placement={placement}
+          radius={radius}
+          ref={setFloating}
+          scheme={scheme}
+          shadow={shadow}
+        >
+          {content}
+        </TooltipCard>
+      </Suspense>
     </StyledTooltip>
   )
 
@@ -383,7 +407,13 @@ export const Tooltip = forwardRef(function Tooltip(
   return (
     <>
       {/* the tooltip */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate
+        ? hasShownAnimated && (
+            <Suspense fallback={null}>
+              <AnimatePresence>{children}</AnimatePresence>
+            </Suspense>
+          )
+        : children}
 
       {/* the referred element */}
       {child}

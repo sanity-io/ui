@@ -1,20 +1,16 @@
-import {AnimatePresence} from 'motion/react'
-import {startTransition, useMemo, useState} from 'react'
+import {lazy, startTransition, Suspense, useMemo, useState} from 'react'
 
 import {useMounted} from '../../hooks/useMounted'
 import {LayerProvider} from '../../utils'
-import {Toast} from './toast'
 import {ToastContext} from './toastContext'
 import {ToastLayer, type ToastLayerProps} from './toastLayer'
+import type {ToastState} from './toastList'
 import {generateToastId} from './toastState'
 import {ToastContextValue, ToastParams} from './types'
 
-type ToastState = {
-  dismiss: () => void
-  id: string
-  updatedAt: number
-  params: ToastParams
-}[]
+const ToastList = lazy(() =>
+  import('./toastList').then((toastListModule) => ({default: toastListModule.ToastList})),
+)
 
 /**
  * @public
@@ -30,12 +26,17 @@ export interface ToastProviderProps extends Omit<ToastLayerProps, 'children'> {
 export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   const {children, padding, paddingX, paddingY, gap, zOffset = 1} = props
   const [state, setState] = useState<ToastState>([])
+  // Latches to `true` on the first push, and deliberately never resets, so that the lazily
+  // loaded toast list stays mounted and can run exit animations for the last dismissed toast.
+  const [hasPushed, setHasPushed] = useState(false)
   const mounted = useMounted()
 
   const value: ToastContextValue = useMemo(() => {
     const push = (params: ToastParams) => {
       const id = params.id || generateToastId()
       const duration = params.duration || 5000
+
+      setHasPushed(true)
 
       startTransition(() => {
         setState((prevState): ToastState => {
@@ -89,20 +90,11 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
       {mounted && (
         <LayerProvider zOffset={zOffset}>
           <ToastLayer padding={padding} paddingX={paddingX} paddingY={paddingY} gap={gap}>
-            <AnimatePresence initial={false} mode="popLayout">
-              {state.map(({dismiss, id, params, updatedAt}) => (
-                <Toast
-                  key={id}
-                  closable={params.closable}
-                  description={params.description}
-                  onClose={dismiss}
-                  status={params.status}
-                  title={params.title}
-                  duration={params.duration}
-                  updatedAt={updatedAt}
-                />
-              ))}
-            </AnimatePresence>
+            {hasPushed && (
+              <Suspense fallback={null}>
+                <ToastList toasts={state} />
+              </Suspense>
+            )}
           </ToastLayer>
         </LayerProvider>
       )}

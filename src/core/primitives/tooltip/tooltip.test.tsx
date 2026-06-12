@@ -21,7 +21,7 @@ afterEach(() => {
 
 describe('Tooltip', () => {
   describe('Using same delay for open and close', () => {
-    it('should hide and show the tooltip content when hovered, with no delay', () => {
+    it('should hide and show the tooltip content when hovered, with no delay', async () => {
       render(
         <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} placement={'top'}>
           <Button mode="bleed" text="Hover me" />
@@ -35,8 +35,8 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(button)
 
-      // Validate tooltip content is rendered
-      screen.getByText('Tooltip content')
+      // Validate tooltip content is rendered (the tooltip card module is lazy loaded on first use)
+      await screen.findByText('Tooltip content')
 
       fireEvent.mouseOut(button)
       // Validate tooltip content is not rendered anymore
