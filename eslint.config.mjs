@@ -38,6 +38,27 @@ export default ts.config(
       rules: {
         // '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-explicit-any': 'off', // todo: warn
+        '@typescript-eslint/no-restricted-imports': [
+          'error',
+          {
+            name: 'motion/react',
+            allowTypeImports: true,
+            message:
+              'Do not import motion at runtime. It must only be imported from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+          },
+          {
+            name: 'motion-dom',
+            allowTypeImports: true,
+            message:
+              'Do not import motion at runtime. It must only be imported from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+          },
+          {
+            name: 'framer-motion',
+            allowTypeImports: true,
+            message:
+              'Do not import motion at runtime. It must only be imported from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+          },
+        ],
         'import/no-unresolved': 'off',
         'no-console': 'error',
         'no-restricted-imports': [
@@ -223,6 +244,21 @@ export default ts.config(
         ],
 
         'boundaries/no-private': 'off',
+      },
+    },
+
+    // Allow runtime motion imports only in the lazy-loaded chunk modules.
+    // These files are reached exclusively via React.lazy(), so importing motion
+    // here does not leak it into the static module graph.
+    {
+      files: [
+        'src/core/primitives/popover/popoverCardAnimated.tsx',
+        'src/core/primitives/tooltip/tooltipCardAnimated.tsx',
+        'src/core/components/toast/toastCard.tsx',
+        'src/core/components/toast/toastList.tsx',
+      ],
+      rules: {
+        '@typescript-eslint/no-restricted-imports': 'off',
       },
     },
 

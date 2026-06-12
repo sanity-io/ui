@@ -26,8 +26,10 @@ const ROLES = {
 const LONG_ENOUGH_BUT_NOT_TOO_LONG = 1000 * 60 * 60 * 24 * 24
 
 /**
- * Animated `Toast` implementation, kept in a separate module so that `motion/react` is only
- * loaded when a toast is actually rendered.
+ * Animated `Toast` implementation. This module carries the `motion/react` dependency; isolating it
+ * here lets consumers defer that cost. The deferral is enforced by the consumers, not here:
+ * `toast.tsx` loads this module via `React.lazy`, and `toastProvider.tsx` gates the toast stack
+ * behind its `hasPushed` latch so nothing imports it until a toast is pushed.
  *
  * @internal
  */

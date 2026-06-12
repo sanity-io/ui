@@ -383,7 +383,7 @@ export const Popover = forwardRef(function Popover(
       {/* Optional transparent blocking overlay at the top-most z-index layer. Must be positioned before the below popover card. */}
       {modal && <ViewportOverlay />}
 
-      {animate ? <Suspense fallback={null}>{card}</Suspense> : card}
+      {card}
     </LayerProvider>
   )
 

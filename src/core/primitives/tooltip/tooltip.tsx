@@ -142,6 +142,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
   // Latches to `true` the first time an animated tooltip shows, and deliberately never resets,
   // so that `AnimatePresence` only loads once needed but stays mounted to run exit animations.
+  // Unlike popover, seeds `false`: a tooltip is hover/focus-driven, so it is never open at mount.
   const [hasShownAnimated, setHasShownAnimated] = useState(false)
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
@@ -399,7 +400,7 @@ export const Tooltip = forwardRef(function Tooltip(
       }}
       zOffset={zOffset}
     >
-      {animate ? <Suspense fallback={null}>{card}</Suspense> : card}
+      {card}
     </StyledTooltip>
   )
 
