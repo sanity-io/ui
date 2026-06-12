@@ -22,9 +22,10 @@
   );
 }
 
-.sui-Button:disabled {
+.sui-Button[class*='sui-tone']:disabled {
   --background-color: var(--inert-background);
   --foreground-color: var(--inert-foreground);
+  --border-color: transparent;
   pointer-events: none;
 }
 
