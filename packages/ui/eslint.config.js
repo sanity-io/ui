@@ -145,4 +145,46 @@ export default defineConfig(import.meta.dirname, [
       'boundaries/no-private': 'off',
     },
   },
+
+  // Keep `motion/react` (framer-motion / motion-dom) out of the static module graph. Runtime
+  // imports are blocked everywhere; type-only imports are allowed (they erase at build). The lazy
+  // chunk modules below are the only places motion may be imported at runtime, reached only via
+  // `React.lazy(() => import(...))`.
+  {
+    files: ['**/*.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-restricted-imports': [
+        'error',
+        {
+          name: 'motion/react',
+          allowTypeImports: true,
+          message:
+            'Do not import motion at runtime. Import it only from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+        },
+        {
+          name: 'motion-dom',
+          allowTypeImports: true,
+          message:
+            'Do not import motion at runtime. Import it only from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+        },
+        {
+          name: 'framer-motion',
+          allowTypeImports: true,
+          message:
+            'Do not import motion at runtime. Import it only from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+        },
+      ],
+    },
+  },
+
+  // Whitelist the lazy chunk files (reached only via React.lazy()).
+  {
+    files: [
+      'src/primitives/popover/PopoverLayerAnimated.tsx',
+      'src/primitives/tooltip/TooltipLayerAnimated.tsx',
+      'src/components/toast/ToastCard.tsx',
+      'src/components/toast/ToastList.tsx',
+    ],
+    rules: {'@typescript-eslint/no-restricted-imports': 'off'},
+  },
 ])

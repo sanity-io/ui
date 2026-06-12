@@ -14,10 +14,11 @@ import {
   tooltip,
 } from '@sanity/ui-css'
 import type {CardTone, ColorScheme, FontTextSize} from '@sanity/ui-tokens'
-import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
+  lazy,
   startTransition,
+  Suspense,
   use,
   useCallback,
   useEffect,
@@ -50,7 +51,23 @@ import {
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
 import {TooltipDelayGroupContext} from './tooltipDelayGroup/TooltipDelayGroupContext'
-import {TooltipLayer} from './TooltipLayer'
+import {TooltipLayerStatic} from './TooltipLayerStatic'
+
+// `TooltipLayerAnimated.tsx` is the only module in the tooltip graph that depends on
+// `motion/react`. Loading it (and `AnimatePresence`) lazily keeps the motion library out of the
+// static module graph, so it is only evaluated once an animated tooltip is shown. Non-animated
+// tooltips render the static `TooltipLayerStatic` synchronously.
+const TooltipLayerAnimated = lazy(() =>
+  import('./TooltipLayerAnimated').then((tooltipLayerModule) => ({
+    default: tooltipLayerModule.TooltipLayerAnimated,
+  })),
+)
+
+const AnimatePresence = lazy(() =>
+  import('./TooltipLayerAnimated').then((tooltipLayerModule) => ({
+    default: tooltipLayerModule.AnimatePresence,
+  })),
+)
 
 /** @public */
 export const DEFAULT_TOOLTIP_ELEMENT = 'div'
@@ -209,6 +226,16 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
   const [localVisible, setVisible] = useState(false)
 
   const visible = groupVisible || localVisible
+
+  // Latches to `true` the first time an animated tooltip is shown, and deliberately never resets,
+  // so that `AnimatePresence` only loads once needed but stays mounted to run exit animations.
+  // Seeded `false` because a tooltip is hover/focus driven and is never visible at mount.
+  const [hasShownAnimated, setHasShownAnimated] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (animate && visible) setHasShownAnimated(true)
+  }, [animate, visible])
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
@@ -407,8 +434,10 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
 
   if (disabled) return child
 
+  const LayerComponent = animate ? TooltipLayerAnimated : TooltipLayerStatic
+
   const node = (
-    <TooltipLayer
+    <LayerComponent
       data-ui="Tooltip"
       {...rest}
       ref={setFloating}
@@ -432,7 +461,7 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
       zOffset={zOffset}
     >
       {content}
-    </TooltipLayer>
+    </LayerComponent>
   )
 
   let children = visible ? node : null
@@ -446,7 +475,13 @@ export function Tooltip<E extends TooltipElementType = typeof DEFAULT_TOOLTIP_EL
   return (
     <>
       {/* the tooltip */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate
+        ? hasShownAnimated && (
+            <Suspense fallback={null}>
+              <AnimatePresence>{children}</AnimatePresence>
+            </Suspense>
+          )
+        : children}
 
       {/* the referred element */}
       {child}

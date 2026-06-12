@@ -1,20 +1,17 @@
 import type {ResponsiveProp} from '@sanity/ui-css'
-import {AnimatePresence} from 'motion/react'
-import {startTransition, useMemo, useRef, useState} from 'react'
+import {lazy, startTransition, Suspense, useMemo, useRef, useState} from 'react'
 
 import {useMounted} from '../../hooks/useMounted'
 import {LayerProvider} from '../../primitives/layer/LayerProvider'
-import {Toast} from './Toast'
 import {ToastContext} from './ToastContext'
 import {ToastLayer, type ToastLayerProps} from './ToastLayer'
+import type {ToastState} from './ToastList'
 import {generateToastId} from './toastState'
 import type {ToastContextValue, ToastParams} from './types'
 
-type ToastState = {
-  dismiss: () => void
-  id: string
-  params: ToastParams
-}[]
+const ToastList = lazy(() =>
+  import('./ToastList').then((toastListModule) => ({default: toastListModule.ToastList})),
+)
 
 /** @public */
 export interface ToastProviderProps extends Omit<ToastLayerProps, 'children'> {
@@ -26,6 +23,9 @@ export interface ToastProviderProps extends Omit<ToastLayerProps, 'children'> {
 export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
   const {children, padding, paddingX, paddingY, gap, zOffset = 1} = props
   const [state, setState] = useState<ToastState>([])
+  // Latches to `true` on the first push, and deliberately never resets, so that the lazily loaded
+  // toast list stays mounted and can run exit animations for the last dismissed toast.
+  const [hasPushed, setHasPushed] = useState(false)
   const mounted = useMounted()
 
   const timeoutIdsRef = useRef<Record<string, NodeJS.Timeout | undefined>>({})
@@ -34,6 +34,8 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
     const push = (params: ToastParams) => {
       const id = params.id ?? generateToastId()
       const duration = params.duration ?? 5000
+
+      setHasPushed(true)
 
       // If the `id` is reused, clear the previous timeout
       const existingTimeoutId = timeoutIdsRef.current[id]
@@ -106,19 +108,11 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
       {mounted && (
         <LayerProvider zOffset={zOffset}>
           <ToastLayer gap={gap} padding={padding} paddingX={paddingX} paddingY={paddingY}>
-            <AnimatePresence initial={false} mode="popLayout">
-              {state.map(({dismiss, id, params}) => (
-                <Toast
-                  key={id}
-                  closable={params.closable}
-                  description={params.description}
-                  duration={params.duration}
-                  status={params.status}
-                  title={params.title}
-                  onClose={dismiss}
-                />
-              ))}
-            </AnimatePresence>
+            {hasPushed && (
+              <Suspense fallback={null}>
+                <ToastList toasts={state} />
+              </Suspense>
+            )}
           </ToastLayer>
         </LayerProvider>
       )}

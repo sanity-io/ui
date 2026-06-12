@@ -1,16 +1,7 @@
-import {CloseIcon} from '@sanity/icons'
-import {type RadiusStyleProps, toast} from '@sanity/ui-css'
-import {motion, type Variant, type Variants} from 'motion/react'
-import {type ReactNode} from 'react'
+import {type RadiusStyleProps} from '@sanity/ui-css'
+import {lazy, type ReactNode, Suspense} from 'react'
 
 import type {ComponentType, Props} from '../../core/types'
-import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Box} from '../../primitives/box/Box'
-import {Button} from '../../primitives/button/Button'
-import {Card} from '../../primitives/card/Card'
-import {Flex} from '../../primitives/flex/Flex'
-import {Stack} from '../../primitives/stack/Stack'
-import {Text} from '../../primitives/text/Text'
 
 /** @internal */
 export const DEFAULT_TOAST_ELEMENT = 'li'
@@ -31,161 +22,26 @@ export type ToastElementType = 'li' | ComponentType
 /** @internal */
 export type ToastProps<E extends ToastElementType = ToastElementType> = Props<ToastOwnProps, E>
 
-// Support pattern used by Sanity Studio, that works around the lack of `duration: Infinity` support in older @sanity/ui versions
-// https://developer.mozilla.org/en-US/docs/Web/API/setTimeout#maximum_delay_value
-const LONG_ENOUGH_BUT_NOT_TOO_LONG = 1000 * 60 * 60 * 24 * 24
-
-const ROLES = {
-  error: 'alert',
-  warning: 'alert',
-  success: 'alert',
-  info: 'alert',
-} as const
-
-const STATUS_CARD_TONE = {
-  error: 'critical',
-  warning: 'caution',
-  success: 'positive',
-  info: 'neutral',
-} as const
-
-const BUTTON_TONE = {
-  error: 'critical',
-  warning: 'caution',
-  success: 'positive',
-  info: 'neutral',
-} as const
+const ToastCard = lazy(() =>
+  import('./ToastCard').then((toastCardModule) => ({default: toastCardModule.ToastCard})),
+)
 
 /**
  * The `Toast` component gives feedback to users when an action has taken place.
  *
  * Toasts can be closed with a close button, or auto-dismiss when the duration expires.
  *
+ * The animated implementation (and the `motion` library it depends on) is loaded lazily on the
+ * first render, so the toast may appear a frame later than it otherwise would.
+ *
  * @internal
  */
 export function Toast<E extends ToastElementType = typeof DEFAULT_TOAST_ELEMENT>(
   props: ToastProps<E>,
 ): React.JSX.Element {
-  const {
-    as = DEFAULT_TOAST_ELEMENT,
-    closable,
-    description,
-    duration,
-    onClose,
-    radius = 3,
-    title,
-    status,
-    ...rest
-  } = props as ToastProps<typeof DEFAULT_TOAST_ELEMENT>
-
-  const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
-  const buttonTone = status ? BUTTON_TONE[status] : 'default'
-  const role = status ? ROLES[status] : 'status'
-
-  const prefersReducedMotion = usePrefersReducedMotion()
-
-  const visualDuration: number = prefersReducedMotion ? 0 : 0.26
-  const transition = visualDuration
-    ? {type: 'spring' as const, visualDuration, bounce: 0.25}
-    : {duration: 0}
-
-  const hasDuration = duration && isFinite(duration) && duration < LONG_ENOUGH_BUT_NOT_TOO_LONG
-  const initial: ContainerVariants[] = ['hidden', 'initial']
-  const animate: ContainerVariants[] = ['visible', 'slideIn']
-  const exit: ContainerVariants[] = ['hidden', 'slideOut']
-
   return (
-    <MotionCard
-      as={as}
-      className={toast()}
-      data-ui="Toast"
-      role={role}
-      {...rest}
-      animate={animate}
-      custom={visualDuration}
-      data-has-duration={hasDuration ? '' : undefined}
-      exit={exit}
-      initial={initial}
-      layout="position"
-      position="relative"
-      radius={radius}
-      shadow={2}
-      tone={cardTone}
-      transition={transition}
-      variants={container}
-    >
-      <MotionFlex align="flex-start" transition={transition} variants={content}>
-        <Flex flex={1} overflowX="auto" padding={3}>
-          <Stack gap={3}>
-            {title && (
-              <Text size={1} weight="medium">
-                {title}
-              </Text>
-            )}
-            {description && (
-              <MotionText muted size={1} transition={transition} variants={content}>
-                {description}
-              </MotionText>
-            )}
-          </Stack>
-        </Flex>
-
-        {closable && (
-          <Box padding={1}>
-            <Button
-              as="button"
-              icon={CloseIcon}
-              mode="bleed"
-              padding={2}
-              style={{verticalAlign: 'top'}}
-              tone={buttonTone}
-              onClick={onClose}
-            />
-          </Box>
-        )}
-      </MotionFlex>
-    </MotionCard>
+    <Suspense fallback={null}>
+      <ToastCard {...(props as ToastProps<typeof DEFAULT_TOAST_ELEMENT>)} />
+    </Suspense>
   )
 }
-
-const container = {
-  initial: {y: 32, scale: 0.5, zIndex: 1},
-  hidden: {opacity: 0},
-  visible: (visualDuration: number) => {
-    if (!visualDuration) return {opacity: 1}
-
-    return {
-      opacity: 1,
-      transition: {
-        when: 'beforeChildren',
-        staggerChildren: visualDuration / 3,
-        duration: visualDuration / 3,
-      },
-    }
-  },
-  slideIn: {
-    y: 0,
-    scale: 1,
-  },
-  slideOut: {
-    zIndex: 0,
-    scale: 0.75,
-  },
-} satisfies Variants
-type ContainerVariants = keyof typeof container
-
-const content = {
-  initial: {
-    willChange: 'transform',
-  },
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-  },
-} satisfies Partial<Record<ContainerVariants, Variant>>
-
-const MotionCard = motion.create(Card)
-const MotionFlex = motion.create(Flex)
-const MotionText = motion.create(Text)

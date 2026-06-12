@@ -1,17 +1,20 @@
 import {autoUpdate, type RootBoundary, useFloating} from '@floating-ui/react-dom'
 import {type MaxWidth, popover as popoverCss, type ResponsiveProp} from '@sanity/ui-css'
-import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
   type ForwardedRef,
+  lazy,
   type ReactElement,
   type ReactNode,
   type Ref,
+  Suspense,
   use,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
+  useState,
 } from 'react'
 
 import {Z_OFFSETS} from '../../core/constants'
@@ -26,9 +29,28 @@ import {
   DEFAULT_POPOVER_DISTANCE,
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
-import {PopoverLayer, type PopoverLayerOwnProps, type PopoverLayerProps} from './PopoverLayer'
+import type {PopoverLayerOwnProps, PopoverLayerProps} from './PopoverLayer'
+import {PopoverLayerStatic} from './PopoverLayerStatic'
 import type {PopoverMargins, PopoverUpdateCallback} from './types'
 import {useMiddleware} from './useMiddleware'
+
+// `PopoverLayerAnimated.tsx` is the only module in the popover graph that depends on
+// `motion/react`. Loading it (and `AnimatePresence`) lazily keeps the motion library out of the
+// static module graph, so it is only evaluated once an animated popover actually opens.
+// Non-animated popovers render the static `PopoverLayerStatic` synchronously, so popover content
+// (and any listeners it attaches, e.g. click-outside handling in `Menu`) mounts in the same commit
+// that opens the popover.
+const PopoverLayerAnimated = lazy(() =>
+  import('./PopoverLayerAnimated').then((popoverLayerModule) => ({
+    default: popoverLayerModule.PopoverLayerAnimated,
+  })),
+)
+
+const AnimatePresence = lazy(() =>
+  import('./PopoverLayerAnimated').then((popoverLayerModule) => ({
+    default: popoverLayerModule.AnimatePresence,
+  })),
+)
 
 /** @public */
 export type PopoverOwnProps = Omit<PopoverLayerOwnProps, 'maxWidth'> & {
@@ -174,6 +196,15 @@ export function Popover(props: PopoverProps): React.JSX.Element {
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
 
+  // Latches to `true` the first time an animated popover opens, and deliberately never resets,
+  // so that `AnimatePresence` only loads once needed but stays mounted to run exit animations.
+  const [hasOpenedAnimated, setHasOpenedAnimated] = useState(Boolean(animate && open))
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (animate && open) setHasOpenedAnimated(true)
+  }, [animate, open])
+
   const ref = useRef<HTMLDivElement | null>(null)
 
   const rootBoundary: RootBoundary = 'viewport'
@@ -242,13 +273,15 @@ export function Popover(props: PopoverProps): React.JSX.Element {
     return childProp || <></>
   }
 
+  const LayerComponent = animate ? PopoverLayerAnimated : PopoverLayerStatic
+
   const node = (
     <>
       {/* Optional transparent blocking overlay at the top-most z-index layer. Must be positioned
       before the below popover card. */}
       {modal && <ViewportOverlay />}
 
-      <PopoverLayer
+      <LayerComponent
         {...rest}
         ref={setFloating}
         animate={animate}
@@ -267,7 +300,7 @@ export function Popover(props: PopoverProps): React.JSX.Element {
         zOffset={zOffset}
       >
         {content}
-      </PopoverLayer>
+      </LayerComponent>
     </>
   )
 
@@ -282,7 +315,13 @@ export function Popover(props: PopoverProps): React.JSX.Element {
   return (
     <>
       {/* the popover */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate
+        ? hasOpenedAnimated && (
+            <Suspense fallback={null}>
+              <AnimatePresence>{children}</AnimatePresence>
+            </Suspense>
+          )
+        : children}
 
       {/* the referred element */}
       {child}
