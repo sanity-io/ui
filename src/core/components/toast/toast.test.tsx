@@ -1,11 +1,45 @@
 /** @jest-environment jsdom */
 
+import '../../../../test/mocks/resizeObserver.mock'
+import '../../../../test/mocks/matchMedia.mock'
+
+import {fireEvent, screen} from '@testing-library/react'
+
 import {render} from '../../../../test'
 import {ToastContext} from './toastContext'
+import {ToastProvider} from './toastProvider'
 import {ToastContextValue} from './types'
 import {useToast} from './useToast'
 
 describe('components/toast', () => {
+  describe('ToastProvider', () => {
+    it('should render a pushed toast (the toast stack is lazy loaded on first push)', async () => {
+      function PushButton() {
+        const {push} = useToast()
+
+        return (
+          <button onClick={() => push({title: 'Toast title', status: 'info'})} type="button">
+            push
+          </button>
+        )
+      }
+
+      render(
+        <ToastProvider>
+          <PushButton />
+        </ToastProvider>,
+      )
+
+      // Validate no toast is rendered before pushing
+      expect(screen.queryByText('Toast title')).not.toBeInTheDocument()
+
+      fireEvent.click(screen.getByText('push'))
+
+      // Validate the pushed toast is rendered
+      await screen.findByText('Toast title')
+    })
+  })
+
   describe('useToast', () => {
     it('should get context value', async () => {
       const log = jest.fn()
