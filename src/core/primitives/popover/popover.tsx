@@ -41,17 +41,23 @@ import {
 } from './constants'
 import {size} from './floating-ui/size'
 import {calcCurrentWidth, calcMaxWidth} from './helpers'
+import {PopoverCard} from './popoverCard'
 import {PopoverUpdateCallback, PopoverWidth} from './types'
 
-// `popoverCard.tsx` is the only module in the popover graph that depends on `motion/react`.
-// Loading it (and `AnimatePresence`) lazily keeps the motion library out of the static module
-// graph, so it is only evaluated once a popover actually opens.
-const PopoverCard = lazy(() =>
-  import('./popoverCard').then((popoverCardModule) => ({default: popoverCardModule.PopoverCard})),
+// `popoverCardAnimated.tsx` is the only module in the popover graph that depends on
+// `motion/react`. Loading it (and `AnimatePresence`) lazily keeps the motion library out of the
+// static module graph, so it is only evaluated once an animated popover actually opens.
+// Non-animated popovers render the static `PopoverCard` synchronously, so popover content (and
+// any listeners it attaches, e.g. click-outside handling in `Menu`) mounts in the same commit
+// that opens the popover.
+const PopoverCardAnimated = lazy(() =>
+  import('./popoverCardAnimated').then((popoverCardModule) => ({
+    default: popoverCardModule.PopoverCardAnimated,
+  })),
 )
 
 const AnimatePresence = lazy(() =>
-  import('./popoverCard').then((popoverCardModule) => ({
+  import('./popoverCardAnimated').then((popoverCardModule) => ({
     default: popoverCardModule.AnimatePresence,
   })),
 )
@@ -341,39 +347,43 @@ export const Popover = forwardRef(function Popover(
     return childProp || <></>
   }
 
+  const CardComponent = animate ? PopoverCardAnimated : PopoverCard
+
+  const card = (
+    <CardComponent
+      {...restProps}
+      __unstable_margins={margins}
+      animate={animate}
+      arrow={arrowProp}
+      arrowRef={setArrow}
+      arrowX={arrowX}
+      arrowY={arrowY}
+      hidden={referenceHidden}
+      overflow={overflow}
+      padding={padding}
+      placement={placement}
+      radius={radius}
+      ref={setFloating}
+      scheme={scheme}
+      shadow={shadow}
+      originX={originX}
+      originY={originY}
+      strategy={strategy}
+      tone={tone}
+      width={matchReferenceWidth ? referenceWidth : width}
+      x={x}
+      y={y}
+    >
+      {content}
+    </CardComponent>
+  )
+
   const popover = (
     <LayerProvider zOffset={zOffset}>
       {/* Optional transparent blocking overlay at the top-most z-index layer. Must be positioned before the below popover card. */}
       {modal && <ViewportOverlay />}
 
-      <Suspense fallback={null}>
-        <PopoverCard
-          {...restProps}
-          __unstable_margins={margins}
-          animate={animate}
-          arrow={arrowProp}
-          arrowRef={setArrow}
-          arrowX={arrowX}
-          arrowY={arrowY}
-          hidden={referenceHidden}
-          overflow={overflow}
-          padding={padding}
-          placement={placement}
-          radius={radius}
-          ref={setFloating}
-          scheme={scheme}
-          shadow={shadow}
-          originX={originX}
-          originY={originY}
-          strategy={strategy}
-          tone={tone}
-          width={matchReferenceWidth ? referenceWidth : width}
-          x={x}
-          y={y}
-        >
-          {content}
-        </PopoverCard>
-      </Suspense>
+      {animate ? <Suspense fallback={null}>{card}</Suspense> : card}
     </LayerProvider>
   )
 

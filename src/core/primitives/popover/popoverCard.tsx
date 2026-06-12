@@ -1,10 +1,8 @@
 import {Strategy} from '@floating-ui/react-dom'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {motion, type MotionProps} from 'motion/react'
 import React, {CSSProperties, forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
 
-import {POPOVER_MOTION_PROPS} from '../../constants'
 import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
 import {Arrow, useLayer} from '../../utils'
 import {Card, CardProps} from '../card'
@@ -15,50 +13,56 @@ import {
   DEFAULT_POPOVER_ARROW_WIDTH,
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
+import {popoverCardStyle, popoverWrapperStyle} from './popoverCardStyles'
 
-// Re-exported so `popover.tsx` can lazily load `AnimatePresence` from the same chunk as this
-// module, avoiding both a static `motion/react` import and a second chunk request.
-export {AnimatePresence} from 'motion/react'
-
-const MotionCard = /* @__PURE__ */ styled(/* @__PURE__ */ motion.create(Card))`
-  &:not([hidden]) {
-    display: flex;
-  }
-  flex-direction: column;
-  width: max-content;
-  min-width: min-content;
-  will-change: transform;
+const StyledCard = /* @__PURE__ */ styled(Card)`
+  ${popoverCardStyle}
 `
 
-const MotionFlex = /* @__PURE__ */ styled(/* @__PURE__ */ motion.create(Flex))`
-  will-change: opacity;
+const StyledFlex = /* @__PURE__ */ styled(Flex)`
+  ${popoverWrapperStyle}
 `
 
 /**
  * @internal
  */
-export const PopoverCard = forwardRef(function PopoverCard(
-  props: {
-    /** @beta*/
-    __unstable_margins?: PopoverMargins
-    animate?: boolean
-    arrow: boolean
-    arrowRef: React.Ref<HTMLDivElement>
-    arrowX?: number
-    arrowY?: number
-    originX?: number
-    originY?: number
-    overflow?: BoxOverflow
-    padding?: number | number[]
-    placement: Placement
-    radius?: Radius | Radius[]
-    scheme?: ThemeColorSchemeKey
-    shadow?: number | number[]
-    strategy: Strategy
-    tone: CardTone
-    width: number | undefined
-    x: number | null
-    y: number | null
+export interface PopoverCardProps {
+  /** @beta*/
+  __unstable_margins?: PopoverMargins
+  animate?: boolean
+  arrow: boolean
+  arrowRef: React.Ref<HTMLDivElement>
+  arrowX?: number
+  arrowY?: number
+  originX?: number
+  originY?: number
+  overflow?: BoxOverflow
+  padding?: number | number[]
+  placement: Placement
+  radius?: Radius | Radius[]
+  scheme?: ThemeColorSchemeKey
+  shadow?: number | number[]
+  strategy: Strategy
+  tone: CardTone
+  width: number | undefined
+  x: number | null
+  y: number | null
+}
+
+/**
+ * Layout shared by the static `PopoverCard` and the motion-wrapped card in
+ * `popoverCardAnimated.tsx`. The root and wrapper components (and their extra props) are
+ * injected, so the motion variant can pass `motion/react` components without this module
+ * depending on them.
+ *
+ * @internal
+ */
+export const PopoverCardLayout = forwardRef(function PopoverCardLayout(
+  props: PopoverCardProps & {
+    cardComponent?: React.ElementType
+    cardProps?: Record<string, unknown>
+    flexComponent?: React.ElementType
+    flexProps?: Record<string, unknown>
   } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
@@ -69,7 +73,11 @@ export const PopoverCard = forwardRef(function PopoverCard(
     arrowRef,
     arrowX,
     arrowY,
+    cardComponent: CardComponent = StyledCard,
+    cardProps,
     children,
+    flexComponent: FlexComponent = StyledFlex,
+    flexProps,
     padding,
     placement,
     originX,
@@ -125,9 +133,10 @@ export const PopoverCard = forwardRef(function PopoverCard(
   )
 
   return (
-    <MotionCard
+    <CardComponent
       data-ui="Popover"
-      {...(restProps as CardProps & MotionProps)}
+      {...(restProps as CardProps)}
+      {...cardProps}
       data-placement={placement}
       radius={radius}
       ref={ref}
@@ -136,24 +145,18 @@ export const PopoverCard = forwardRef(function PopoverCard(
       sizing="border"
       style={rootStyle}
       tone={tone}
-      variants={POPOVER_MOTION_PROPS.card}
-      transition={POPOVER_MOTION_PROPS.transition}
-      initial={animate ? ['hidden', 'initial'] : undefined}
-      animate={animate ? ['visible', 'scaleIn'] : undefined}
-      exit={animate ? ['hidden', 'scaleOut'] : undefined}
     >
-      <MotionFlex
+      <FlexComponent
         data-ui="Popover__wrapper"
+        {...flexProps}
         direction="column"
         flex={1}
         overflow={overflow}
-        variants={POPOVER_MOTION_PROPS.children}
-        transition={POPOVER_MOTION_PROPS.transition}
       >
         <Flex direction="column" flex={1} padding={padding}>
           {children}
         </Flex>
-      </MotionFlex>
+      </FlexComponent>
 
       {arrow && (
         <Arrow
@@ -164,7 +167,22 @@ export const PopoverCard = forwardRef(function PopoverCard(
           radius={DEFAULT_POPOVER_ARROW_RADIUS}
         />
       )}
-    </MotionCard>
+    </CardComponent>
   )
+})
+PopoverCardLayout.displayName = 'ForwardRef(PopoverCardLayout)'
+
+/**
+ * Static, motion-free popover card. Rendered synchronously when the popover is not animated, so
+ * popover content (and any listeners it attaches, e.g. click-outside handling in `Menu`) mounts
+ * in the same commit that opens the popover.
+ *
+ * @internal
+ */
+export const PopoverCard = forwardRef(function PopoverCard(
+  props: PopoverCardProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
+  ref: React.ForwardedRef<HTMLDivElement>,
+) {
+  return <PopoverCardLayout {...props} ref={ref} />
 })
 PopoverCard.displayName = 'ForwardRef(PopoverCard)'

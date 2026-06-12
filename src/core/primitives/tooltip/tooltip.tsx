@@ -40,17 +40,22 @@ import {
   DEFAULT_TOOLTIP_DISTANCE,
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
+import {TooltipCard} from './tooltipCard'
 import {useTooltipDelayGroup} from './tooltipDelayGroup'
 
-// `tooltipCard.tsx` is the only module in the tooltip graph that depends on `motion/react`.
-// Loading it (and `AnimatePresence`) lazily keeps the motion library out of the static module
-// graph, so it is only evaluated once a tooltip actually shows.
-const TooltipCard = lazy(() =>
-  import('./tooltipCard').then((tooltipCardModule) => ({default: tooltipCardModule.TooltipCard})),
+// `tooltipCardAnimated.tsx` is the only module in the tooltip graph that depends on
+// `motion/react`. Loading it (and `AnimatePresence`) lazily keeps the motion library out of the
+// static module graph, so it is only evaluated once an animated tooltip actually shows.
+// Non-animated tooltips render the static `TooltipCard` synchronously, so tooltip content mounts
+// in the same commit that shows the tooltip.
+const TooltipCardAnimated = lazy(() =>
+  import('./tooltipCardAnimated').then((tooltipCardModule) => ({
+    default: tooltipCardModule.TooltipCardAnimated,
+  })),
 )
 
 const AnimatePresence = lazy(() =>
-  import('./tooltipCard').then((tooltipCardModule) => ({
+  import('./tooltipCardAnimated').then((tooltipCardModule) => ({
     default: tooltipCardModule.AnimatePresence,
   })),
 )
@@ -360,6 +365,29 @@ export const Tooltip = forwardRef(function Tooltip(
 
   if (disabled) return child
 
+  const CardComponent = animate ? TooltipCardAnimated : TooltipCard
+
+  const card = (
+    <CardComponent
+      {...restProps}
+      animate={animate}
+      arrow={arrowProp}
+      arrowRef={setArrow}
+      arrowX={arrowX}
+      arrowY={arrowY}
+      originX={originX}
+      originY={originY}
+      padding={padding}
+      placement={placement}
+      radius={radius}
+      ref={setFloating}
+      scheme={scheme}
+      shadow={shadow}
+    >
+      {content}
+    </CardComponent>
+  )
+
   const tooltip = (
     <StyledTooltip
       data-ui="Tooltip"
@@ -371,26 +399,7 @@ export const Tooltip = forwardRef(function Tooltip(
       }}
       zOffset={zOffset}
     >
-      <Suspense fallback={null}>
-        <TooltipCard
-          {...restProps}
-          animate={animate}
-          arrow={arrowProp}
-          arrowRef={setArrow}
-          arrowX={arrowX}
-          arrowY={arrowY}
-          originX={originX}
-          originY={originY}
-          padding={padding}
-          placement={placement}
-          radius={radius}
-          ref={setFloating}
-          scheme={scheme}
-          shadow={shadow}
-        >
-          {content}
-        </TooltipCard>
-      </Suspense>
+      {animate ? <Suspense fallback={null}>{card}</Suspense> : card}
     </StyledTooltip>
   )
 

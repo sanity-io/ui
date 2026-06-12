@@ -10,15 +10,16 @@ import {Button, Text} from '../../primitives'
 import {Popover} from './popover'
 
 describe('Popover', () => {
-  it('should render the content when open (the popover card is lazy loaded on first open)', async () => {
+  it('should render the content synchronously when open and not animated', () => {
     render(
       <Popover content={<Text size={1}>{'Popover content'}</Text>} open>
         <Button mode="bleed" text="Reference" />
       </Popover>,
     )
 
-    // Validate popover content is rendered
-    await screen.findByText('Popover content')
+    // Non-animated popovers must mount their content in the same commit that opens them, so
+    // listeners attached by the content (e.g. click-outside handling in `Menu`) work immediately.
+    screen.getByText('Popover content')
   })
 
   it('should not render the content when closed', () => {

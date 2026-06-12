@@ -1,9 +1,7 @@
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {motion, type MotionProps} from 'motion/react'
 import React, {CSSProperties, forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
 
-import {POPOVER_MOTION_PROPS} from '../../constants'
 import {Placement, Radius} from '../../types'
 import {Arrow} from '../../utils'
 import {Card, CardProps} from '../card'
@@ -12,32 +10,41 @@ import {
   DEFAULT_TOOLTIP_ARROW_RADIUS,
   DEFAULT_TOOLTIP_ARROW_WIDTH,
 } from './constants'
+import {tooltipCardStyle} from './tooltipCardStyles'
 
-// Re-exported so `tooltip.tsx` can lazily load `AnimatePresence` from the same chunk as this
-// module, avoiding both a static `motion/react` import and a second chunk request.
-export {AnimatePresence} from 'motion/react'
-
-const MotionCard = /* @__PURE__ */ styled(/* @__PURE__ */ motion.create(Card))`
-  will-change: transform;
+const StyledCard = /* @__PURE__ */ styled(Card)`
+  ${tooltipCardStyle}
 `
 
 /**
  * @internal
  */
-export const TooltipCard = forwardRef(function TooltipCard(
-  props: {
-    animate?: boolean
-    arrow: boolean
-    arrowRef: React.Ref<HTMLDivElement>
-    arrowX?: number
-    arrowY?: number
-    originX?: number
-    originY?: number
-    padding?: number | number[]
-    placement?: Placement
-    radius?: Radius | Radius[]
-    scheme?: ThemeColorSchemeKey
-    shadow?: number | number[]
+export interface TooltipCardProps {
+  animate?: boolean
+  arrow: boolean
+  arrowRef: React.Ref<HTMLDivElement>
+  arrowX?: number
+  arrowY?: number
+  originX?: number
+  originY?: number
+  padding?: number | number[]
+  placement?: Placement
+  radius?: Radius | Radius[]
+  scheme?: ThemeColorSchemeKey
+  shadow?: number | number[]
+}
+
+/**
+ * Layout shared by the static `TooltipCard` and the motion-wrapped card in
+ * `tooltipCardAnimated.tsx`. The root component (and its extra props) is injected, so the motion
+ * variant can pass a `motion/react` component without this module depending on it.
+ *
+ * @internal
+ */
+export const TooltipCardLayout = forwardRef(function TooltipCardLayout(
+  props: TooltipCardProps & {
+    cardComponent?: React.ElementType
+    cardProps?: Record<string, unknown>
   } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
@@ -47,6 +54,8 @@ export const TooltipCard = forwardRef(function TooltipCard(
     arrowRef,
     arrowX,
     arrowY,
+    cardComponent: CardComponent = StyledCard,
+    cardProps,
     children,
     originX,
     originY,
@@ -80,9 +89,10 @@ export const TooltipCard = forwardRef(function TooltipCard(
   )
 
   return (
-    <MotionCard
+    <CardComponent
       data-ui="Tooltip__card"
-      {...(restProps as CardProps & MotionProps)}
+      {...(restProps as CardProps)}
+      {...cardProps}
       data-placement={placement}
       padding={padding}
       radius={radius}
@@ -90,11 +100,6 @@ export const TooltipCard = forwardRef(function TooltipCard(
       scheme={scheme}
       shadow={shadow}
       style={rootStyle}
-      variants={POPOVER_MOTION_PROPS.card}
-      transition={POPOVER_MOTION_PROPS.transition}
-      initial={animate ? ['hidden', 'initial'] : undefined}
-      animate={animate ? ['visible', 'scaleIn'] : undefined}
-      exit={animate ? ['hidden', 'scaleOut'] : undefined}
     >
       {children}
 
@@ -107,7 +112,21 @@ export const TooltipCard = forwardRef(function TooltipCard(
           radius={DEFAULT_TOOLTIP_ARROW_RADIUS}
         />
       )}
-    </MotionCard>
+    </CardComponent>
   )
+})
+TooltipCardLayout.displayName = 'ForwardRef(TooltipCardLayout)'
+
+/**
+ * Static, motion-free tooltip card. Rendered synchronously when the tooltip is not animated, so
+ * tooltip content mounts in the same commit that shows the tooltip.
+ *
+ * @internal
+ */
+export const TooltipCard = forwardRef(function TooltipCard(
+  props: TooltipCardProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
+  ref: React.ForwardedRef<HTMLDivElement>,
+) {
+  return <TooltipCardLayout {...props} ref={ref} />
 })
 TooltipCard.displayName = 'ForwardRef(TooltipCard)'
