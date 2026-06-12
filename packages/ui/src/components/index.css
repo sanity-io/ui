@@ -1,4 +1,5 @@
 @import './box/box.css';
+@import './button/button.css';
 @import './card/card.css';
 @import './checkbox/checkbox.css';
 @import './code/code.css';
@@ -12,6 +13,7 @@
 @import './link/link.css';
 @import './list/list.css';
 @import './radio/radio.css';
+@import './spinner/spinner.css';
 @import './skip-to-content/skip-to-content.css';
 @import './switch/switch.css';
 @import './text/text.css';

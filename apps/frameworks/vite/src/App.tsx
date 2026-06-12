@@ -1,6 +1,6 @@
 import '@sanity-labs/ui-poc/styles.css'
 
-import {Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
+import {Button, Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
 
 function App() {
   return (
@@ -14,6 +14,8 @@ function App() {
       </Flex>
 
       <Divider marginY={5} />
+
+      <Button as="a" text="Test Button" href="/test" />
     </Container>
   )
 }

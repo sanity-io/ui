@@ -8,13 +8,12 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface IconProps extends ComponentProps<'svg'>, MarginProps, ToneProps {
+export interface IconProps
+  extends ComponentProps<'svg'>, Pick<TypographyProps, 'muted'>, MarginProps, ToneProps {
   /** Icon to render */
   icon: React.ComponentType<SVGProps<SVGSVGElement>>
   /** CSS **font-size** property */
   size?: Responsive<IconSize>
-  /** CSS **color** property */
-  muted?: TypographyProps['muted']
 }
 
 export const iconProps: Record<string, PropDef> = {

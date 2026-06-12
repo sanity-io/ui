@@ -1,16 +1,17 @@
 import classNames from 'classnames'
-import {lazy, Suspense} from 'react'
+import {type ComponentPropsWithRef, lazy, Suspense} from 'react'
 
+import {type CodeTag} from '../../types/Code'
 import {getProps} from '../../utils/getProps'
 import {type CodeProps, codeProps} from './code.props'
 
 const LazyRefractor = lazy(() => import('./LazyRefractor'))
 
 /** @public */
-export function Code<T extends React.ElementType = 'pre'>({
+export function Code<T extends CodeTag = 'pre'>({
   size = 2,
   ...props
-}: CodeProps & Omit<React.ComponentPropsWithRef<T>, keyof CodeProps>) {
+}: CodeProps<T> & Omit<ComponentPropsWithRef<T>, keyof CodeProps<T>>) {
   const {as, children, className, language, style, ...rest} = getProps({size, ...props}, codeProps)
   const Component = as || 'pre'
 

@@ -5,10 +5,12 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface CodeProps
-  extends React.ComponentProps<'pre'>, Omit<TypographyProps, 'align' | 'lineClamp' | 'tone'> {
+export interface CodeProps<T extends CodeTag> extends Omit<
+  TypographyProps,
+  'align' | 'lineClamp' | 'tone'
+> {
   /** Element to render */
-  as?: CodeTag
+  as?: T
   /** Refractor language for syntax highlighting */
   language?: string
   /** CSS **font-size** property */

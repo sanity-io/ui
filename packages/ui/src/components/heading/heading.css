@@ -1,9 +1,9 @@
 .sui-Heading {
-  --heading-color: light-dark(var(--gray-800), var(--gray-200));
-  color: var(--foreground-high, var(--heading-color));
+  --heading-color: var(--foreground-high);
+  color: var(--heading-color);
 }
 
 .sui-Heading:where(.sui-text-muted) {
-  --heading-color-muted: light-dark(var(--gray-600), var(--gray-400));
-  color: var(--foreground-low, var(--heading-color-muted));
+  --heading-color-muted: var(--foreground-low);
+  color: var(--heading-color-muted);
 }

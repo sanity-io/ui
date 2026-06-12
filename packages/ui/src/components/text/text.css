@@ -1,9 +1,9 @@
 .sui-Text {
-  --text-color: light-dark(var(--gray-800), var(--gray-200));
-  color: var(--foreground-high, var(--text-color));
+  --text-color: var(--foreground-high);
+  color: var(--text-color);
 }
 
 .sui-Text:where(.sui-text-muted) {
-  --text-color-muted: light-dark(var(--gray-600), var(--gray-400));
-  color: var(--foreground-low, var(--text-color-muted));
+  --text-color-muted: var(--foreground-low);
+  color: var(--text-color-muted);
 }

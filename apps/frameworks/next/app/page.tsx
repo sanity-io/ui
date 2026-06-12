@@ -1,6 +1,7 @@
 'use client'
 
-import {Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
+import {Button, Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -14,6 +15,8 @@ export default function Home() {
       </Flex>
 
       <Divider marginY={5} />
+
+      <Button as={Link} text="Test Button" href="/test" />
     </Container>
   )
 }

@@ -1,11 +1,11 @@
 .sui-Icon {
-  --icon-color: light-dark(var(--gray-800), var(--gray-200));
-  color: var(--foreground-high, var(--icon-color));
+  --icon-color: var(--foreground-high);
+  color: var(--icon-color);
 }
 
 .sui-Icon:where(.sui-text-muted) {
-  --icon-color-muted: light-dark(var(--gray-600), var(--gray-400));
-  color: var(--foreground-low, var(--icon-color-muted));
+  --icon-color-muted: var(--foreground-low);
+  color: var(--icon-color-muted);
 }
 
 @breakpoints {

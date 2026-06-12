@@ -1,0 +1,61 @@
+import classNames from 'classnames'
+import {type ComponentPropsWithRef, type ElementType, isValidElement} from 'react'
+
+import {getProps} from '../../utils/getProps'
+import {Flex} from '../flex/Flex'
+import {Spinner} from '../spinner/Spinner'
+import {Text} from '../text/Text'
+import {type ButtonProps, buttonProps} from './button.props'
+
+/** @public */
+export function Button<T extends ElementType = 'button'>({
+  density = 'regular',
+  level = 'primary',
+  tone = 'neutral',
+  ...props
+}: ButtonProps<T> & Omit<ComponentPropsWithRef<T>, keyof ButtonProps<T>>) {
+  const {
+    as,
+    children,
+    className,
+    disabled,
+    style,
+    iconStart: IconStart,
+    iconEnd: IconEnd,
+    loading,
+    text,
+    ...rest
+  } = getProps({density, level, tone, ...props}, buttonProps)
+  const Component = as || 'button'
+
+  return (
+    <Component
+      className={classNames(
+        'sui-Button',
+        'sui-display-inline-flex sui-align-items-center sui-justify-content-center sui-radius2 sui-position-relative sui-overflow-hidden',
+        className,
+      )}
+      style={style}
+      data-ui="Button"
+      disabled={disabled || loading}
+      {...rest}
+    >
+      {loading && (
+        <Flex position="absolute" inset={0} alignItems="center" justifyContent="center">
+          <Spinner />
+        </Flex>
+      )}
+
+      {IconStart && (isValidElement(IconStart) ? IconStart : <IconStart />)}
+
+      {text && (
+        <Text size={1} weight="medium" trim>
+          {text}
+        </Text>
+      )}
+
+      {children}
+      {IconEnd && (isValidElement(IconEnd) ? IconEnd : <IconEnd />)}
+    </Component>
+  )
+}

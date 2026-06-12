@@ -1,0 +1,80 @@
+.sui-Button {
+  background: var(--background-color);
+  box-shadow: inset 0 0 0 1px var(--border-color, transparent);
+  color: var(--foreground-color);
+  text-decoration: none;
+  transition: var(--hover-transition);
+}
+
+.sui-Button:hover {
+  background: color-mix(
+    in srgb,
+    var(--tone-500) 25%,
+    var(--background-color)
+  );
+}
+
+.sui-Button.sui-button-level-primary:hover {
+  background: color-mix(
+    in srgb,
+    var(--tone-950) 25%,
+    var(--background-color)
+  );
+}
+
+.sui-Button:disabled {
+  --background-color: var(--inert-background);
+  --foreground-color: var(--inert-foreground);
+  pointer-events: none;
+}
+
+.sui-Button:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+.sui-Button [data-sanity-icon] {
+  margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-1));
+  font-size: 21px;
+  color: inherit;
+}
+
+.sui-Button .sui-Spinner {
+  color: inherit;
+}
+
+.sui-Button .sui-Text {
+  color: inherit;
+}
+
+.sui-Button > .sui-Flex + * {
+  opacity: 0;
+}
+
+.sui-button-level-primary {
+  --background-color: var(--background-high-emphasized);
+  --foreground-color: var(--foreground-low-emphasized);
+}
+
+.sui-button-level-primary.sui-tone-critical {
+  --background-color: var(--background-low-emphasized);
+}
+
+.sui-button-level-secondary {
+  --background-color: var(--background-high);
+  --foreground-color: var(--foreground-high);
+  --border-color: var(--separator-low)
+}
+
+.sui-button-level-secondary.sui-tone-critical {
+  --foreground-color: var(--foreground-low);
+}
+
+.sui-button-level-tertiary {
+  --background-color: transparent;
+  --foreground-color: var(--foreground-high);
+}
+
+.sui-button-level-tertiary.sui-tone-critical {
+  --foreground-color: var(--foreground-low);
+}

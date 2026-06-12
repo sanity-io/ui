@@ -1,0 +1,10 @@
+.sui-Spinner {
+  --spinner-color: var(--foreground-high);
+  color: var(--spinner-color);
+  animation: 500ms linear 0s infinite normal none running spin;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

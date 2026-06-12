@@ -1,6 +1,7 @@
-import {Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
+import {Button, Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
 
 import '@sanity-labs/ui-poc/styles.css'
+import {Link} from 'react-router'
 
 export function Welcome() {
   return (
@@ -14,6 +15,8 @@ export function Welcome() {
       </Flex>
 
       <Divider marginY={5} />
+
+      <Button as={Link} text="Test Button" to="/test" />
     </Container>
   )
 }
