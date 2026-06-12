@@ -156,22 +156,28 @@ export default defineConfig(import.meta.dirname, [
       '@typescript-eslint/no-restricted-imports': [
         'error',
         {
-          name: 'motion/react',
-          allowTypeImports: true,
-          message:
-            'Do not import motion at runtime. Import it only from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
-        },
-        {
-          name: 'motion-dom',
-          allowTypeImports: true,
-          message:
-            'Do not import motion at runtime. Import it only from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
-        },
-        {
-          name: 'framer-motion',
-          allowTypeImports: true,
-          message:
-            'Do not import motion at runtime. Import it only from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+          patterns: [
+            {
+              // Matches `motion`, `motion/react`, `motion/mini`, `motion/react-client`,
+              // `motion/react/dist/...` and every other subpath/entrypoint.
+              regex: '^motion(/.*)?$',
+              allowTypeImports: true,
+              message:
+                'Do not import motion at runtime. Import it only from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+            },
+            {
+              regex: '^motion-dom(/.*)?$',
+              allowTypeImports: true,
+              message:
+                'Do not import motion at runtime. Import it only from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+            },
+            {
+              regex: '^framer-motion(/.*)?$',
+              allowTypeImports: true,
+              message:
+                'Do not import motion at runtime. Import it only from the lazy-loaded chunk modules so it stays out of the static module graph. Type-only imports are allowed.',
+            },
+          ],
         },
       ],
     },

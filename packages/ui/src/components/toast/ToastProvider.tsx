@@ -35,8 +35,6 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
       const id = params.id ?? generateToastId()
       const duration = params.duration ?? 5000
 
-      setHasPushed(true)
-
       // If the `id` is reused, clear the previous timeout
       const existingTimeoutId = timeoutIdsRef.current[id]
       if (existingTimeoutId) {
@@ -44,18 +42,27 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
         timeoutIdsRef.current[id] = undefined
       }
 
+      /**
+       * Backwards compatibility for `sanity` patterns workaround a lack of programatically dismissible toasts.
+       * It uses a super short duration that closes the toast immediately in previous versions of `@sanity/ui`.
+       * We interpret this as a request to dismiss the toast immediately, and remove it from the state right away.
+       * Even once we support programatic dismissal we'll need to keep this for backwards compatibility with v2 and v1.
+       */
+      if (duration === 0.01) {
+        startTransition(() => {
+          setState((prevState) => prevState.filter((toast) => toast.id !== id))
+        })
+
+        return id
+      }
+
+      // A toast is genuinely being added, so latch the lazily loaded toast list to mount. This
+      // stays after the dismiss/ping short-circuit above so that a programmatic dismiss never
+      // eagerly loads the motion-bearing chunk.
+      setHasPushed(true)
+
       startTransition(() => {
         setState((prevState): ToastState => {
-          /**
-           * Backwards compatibility for `sanity` patterns workaround a lack of programatically dismissible toasts.
-           * It uses a super short duration that closes the toast immediately in previous versions of `@sanity/ui`.
-           * We interpret this as a request to dismiss the toast immediately, and remove it from the state right away.
-           * Even once we support programatic dismissal we'll need to keep this for backwards compatibility with v2 and v1.
-           */
-          if (duration === 0.01) {
-            return prevState.filter((toast) => toast.id !== id)
-          }
-
           /**
            * Creates a function to dismiss this specific toast.
            * This function will be passed to the Toast component
