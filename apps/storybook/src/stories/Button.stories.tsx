@@ -51,6 +51,17 @@ export const Disabled: Story = {
   },
 }
 
+export const Loading: Story = {
+  render: (props) => {
+    return <Button {...props} loading text="Loading Button" />
+  },
+  play: async ({canvas}) => {
+    await expect(
+      ((await canvas.findByText('Loading Button')).parentElement as HTMLButtonElement)?.ariaBusy,
+    ).toBe('true')
+  },
+}
+
 export const FullWidth: Story = {
   render: (props) => {
     return <Button {...props} fullWidth />

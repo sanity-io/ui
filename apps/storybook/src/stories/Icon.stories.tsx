@@ -54,10 +54,9 @@ export default meta
 type Story = StoryObj<typeof Icon>
 
 export const Default: Story = {
-  render: (props) => <Icon {...props} />,
-  play: async () => {
-    const el = document.querySelector('[data-ui="Icon"]')
-    await expect(el?.classList).toContain('sui-Icon')
+  render: (props) => <Icon {...props} aria-label="Icon" />,
+  play: async ({canvas}) => {
+    await expect((await canvas.findByLabelText('Icon')).classList).toContain('sui-Icon')
   },
 }
 

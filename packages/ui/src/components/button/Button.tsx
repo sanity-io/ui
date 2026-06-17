@@ -38,6 +38,7 @@ export function Button<T extends ElementType = 'button'>({
       style={style}
       data-ui="Button"
       disabled={disabled || loading}
+      aria-busy={loading ? true : undefined}
       {...rest}
     >
       {loading && (

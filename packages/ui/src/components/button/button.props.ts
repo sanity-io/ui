@@ -1,5 +1,7 @@
 import {gapProps} from '../../props/gap'
+import {heightProps} from '../../props/height'
 import {paddingProps} from '../../props/padding'
+import {widthProps} from '../../props/width'
 import {
   BUTTON_DENSITY,
   BUTTON_LEVEL,
@@ -54,6 +56,20 @@ export const buttonProps: Record<string, PropDef> = {
         mapping: {
           regular: 2,
           loose: 3,
+        },
+      },
+      minHeight: {
+        propDef: heightProps['minHeight'] as PropDef,
+        mapping: {
+          regular: '25px',
+          loose: '33px',
+        },
+      },
+      minWidth: {
+        propDef: widthProps['minWidth'] as PropDef,
+        mapping: {
+          regular: '25px',
+          loose: '33px',
         },
       },
     },

@@ -17,6 +17,9 @@ export interface IconProps
 }
 
 export const iconProps: Record<string, PropDef> = {
+  icon: {
+    type: 'string',
+  },
   size: {
     type: 'union',
     className: 'icon-body',
