@@ -1,196 +1,109 @@
-# Sanity UI v4
+# Sanity UI 4 — Monorepo
 
-The next version of Sanity's component library. Faster, simpler, and built on CSS instead of styled-components.
+Development monorepo for Sanity UI 4 (`@sanity-labs/ui-poc`). Contains the component library, migration tooling, Storybook, and test apps.
 
-## What's different from v3
+## Packages
 
-- **CSS classes instead of styled-components.** No runtime style generation. Smaller bundles, faster renders.
-- **Direct props for layout.** Width, height, position, border, and overflow are first-class props — no more `style={{ ... }}` escape hatches.
-- **Works alongside v3.** Install both packages in the same app. No forced migration.
+Published packages installable from npm.
 
-## Install
+| Package                                                | Version               | Description                                             |
+| ------------------------------------------------------ | --------------------- | ------------------------------------------------------- |
+| [`@sanity-labs/ui-poc`](./packages/ui)                 | `packages/ui`         | The component library. CSS-based, works alongside UI 3. |
+| [`@sanity-labs/ui-poc-codemod`](./packages/ui-codemod) | `packages/ui-codemod` | CLI codemods for migrating UI 3 components to UI 4.     |
 
-```sh
-pnpm add @sanity-labs/ui-poc
-```
+## Apps
 
-Requires React 19.2+ and Node >=20.19 <22 || >=22.12.
+Internal apps — not published.
 
-## Setup
-
-Import the stylesheet at your app entry point. Without it, components render as unstyled HTML with no error.
-
-```tsx
-import '@sanity-labs/ui-poc/styles.css'
-```
-
-If your app uses Sanity UI v3, keep the existing `ThemeProvider` setup.
-
-```tsx
-import {ThemeProvider, studioTheme, ToastProvider} from '@sanity/ui'
-import '@sanity-labs/ui-poc/styles.css'
-import App from './App'
-
-createRoot(document.getElementById('root')!).render(
-  <ThemeProvider theme={studioTheme}>
-    <ToastProvider>
-      <App />
-    </ToastProvider>
-  </ThemeProvider>,
-)
-```
-
-## Usage
-
-Import from `@sanity-labs/ui-poc`. Components not yet in v4 — Menu, Dialog, TextInput, Badge — remain in `@sanity/ui`.
-
-```tsx
-import {Box, Flex, Card, Heading, Text, Button} from '@sanity-labs/ui-poc'
-import {AddIcon} from '@sanity/icons'
-
-export default function App() {
-  return (
-    <Flex minHeight="100vh">
-      <Box as="nav" aria-label="Main" padding={3} borderRight width="240px">
-        <Heading as="h2" size={1}>
-          My App
-        </Heading>
-      </Box>
-      <Box as="main" padding={4} flexGrow={1}>
-        <Flex alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={2}>
-          <Heading as="h1" size={2}>
-            Documents
-          </Heading>
-          <Button iconStart={AddIcon} text="New" />
-        </Flex>
-        <Box marginTop={3}>
-          <Card density="loose">
-              <Text size={1}
-                First document
-              </Text>
-              <Text size={1} muted>
-                Edited 2 hours ago
-              </Text>
-          </Card>
-        </Box>
-      </Box>
-    </Flex>
-  )
-}
-```
-
-## Components
-
-All components below are from `@sanity-labs/ui-poc`.
-
-### Layout
-
-| Component   | What it does                                                                        |
-| ----------- | ----------------------------------------------------------------------------------- |
-| `Box`       | General container. Padding, margin, border, overflow, and position as direct props. |
-| `Flex`      | Flexbox layout. `alignItems`, `justifyContent`, `flexDirection`, `gap`.             |
-| `Grid`      | CSS grid. Use `gridTemplateColumns` with a CSS string (e.g. `"repeat(3, 1fr)"`).    |
-| `Container` | Max-width content wrapper.                                                          |
-| `HStack`    | Horizontal stack. Accepts `gap` and `as` only — use `Flex` for alignment control.   |
-| `VStack`    | Vertical stack. Accepts `gap` and `as` only — use `Flex` for alignment control.     |
-| `Inline`    | Inline flow layout with wrapping and gap.                                           |
-
-### Typography
-
-| Component | What it does                                                            |
-| --------- | ----------------------------------------------------------------------- |
-| `Heading` | Semantic headings (`h1`–`h6`). Always set `as` to match the level.      |
-| `Text`    | Body copy, captions, labels. Props: `size`, `weight`, `muted`, `align`. |
-| `Label`   | Form input label. Use only with form elements.                          |
-| `Code`    | Inline or block code. Uses the system monospace font.                   |
-
-### Interactive
-
-| Component  | What it does                                                                                                             |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `Button`   | `level` (primary/secondary/tertiary), `tone` (neutral/critical), `iconStart`, `iconEnd`, `text`, `fullWidth`, `loading`. |
-| `Checkbox` | Controlled checkbox. Requires `label` (string).                                                                          |
-| `Radio`    | Controlled radio button.                                                                                                 |
-| `Switch`   | Toggle control. Requires `label` (string).                                                                               |
-| `Link`     | Anchor element styled as a link.                                                                                         |
-
-### Display
-
-| Component        | What it does                                                                                                         |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `Card`           | Raised surface with background and `tone`. Does not accept padding, margin, or layout props — wrap content in `Box`. |
-| `Divider`        | Horizontal rule between content sections.                                                                            |
-| `Icon`           | Renders a `@sanity/icons` icon component. Always set `aria-label` or `aria-hidden`.                                  |
-| `Indicator`      | Status dot with `tone`.                                                                                              |
-| `IndicatorGroup` | Grouped `Indicator` elements.                                                                                        |
-| `Spinner`        | Loading indicator.                                                                                                   |
-
-### Lists
-
-| Component | What it does                                        |
-| --------- | --------------------------------------------------- |
-| `List`    | Semantic list. Use `List.Item` and `List.ItemText`. |
-
-### Accessibility
-
-| Component        | What it does                                                                                     |
-| ---------------- | ------------------------------------------------------------------------------------------------ |
-| `SkipToContent`  | Visually hidden skip-nav link. Must be the first focusable element. Requires `hash` and `label`. |
-| `VisuallyHidden` | Hides content visually while keeping it in the accessibility tree.                               |
-
-### Still from `@sanity/ui`
-
-Menu, Dialog, TextInput, Select, Stack, Badge, ThemeProvider, ToastProvider, and other components not yet migrated to v4.
+| App                                                      | Description                                                                               |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| [`apps/storybook`](./apps/storybook)                     | Component stories. Browse variants, test props, verify visual behavior.                   |
+| [`apps/performance-testing`](./apps/performance-testing) | Render benchmarks. Compares v3 and v4 render times across component counts.               |
+| [`apps/frameworks`](./apps/frameworks)                   | E2E tests across Next.js, React Router, and Vite to verify cross-framework compatibility. |
 
 ## Repo structure
 
 ```
 ui-poc/
-├── packages/
-│   ├── ui/                  # The component library (@sanity-labs/ui-poc)
-│   ├── ui-codemod/          # Migration codemods for v3 → v4
-│   └── @repo/               # Shared repo tooling (eslint config, etc.)
 ├── apps/
-│   ├── storybook/           # Component stories — run locally
-│   └── performance-testing/ # Render benchmarks
-├── turbo.json               # Turborepo pipeline config
-└── pnpm-workspace.yaml      # Workspace definition
+│   ├── frameworks/          # E2E tests across Next, React Router, Vite
+│   ├── performance-testing/ # Render benchmarks
+│   └── storybook/           # Component stories
+├── packages/
+│   ├── @repo/
+│   │   └── eslint-config/   # Shared ESLint config (internal)
+│   ├── ui/                  # @sanity-labs/ui-poc
+│   └── ui-codemod/          # @sanity-labs/ui-poc-codemod
+├── bin/
+│   └── create-ui.js         # Component scaffolding script
+├── turbo.json
+└── pnpm-workspace.yaml
 ```
 
-## Development
+## Requirements
+
+- Node `>=20.19 <22 || >=22.12`
+- pnpm `10.17.0`
+
+## Getting started
 
 ```sh
-# Install dependencies
 pnpm install
-
-# Start dev mode (components + storybook)
 pnpm dev
+```
 
-# Run tests
-pnpm test
+`pnpm dev` starts the component library in watch mode and launches Storybook at `http://localhost:6006`.
+
+## Commands
+
+Run all commands from the repo root.
+
+```sh
+# Start dev mode (packages/ui + storybook)
+pnpm dev
 
 # Build all packages
 pnpm build
 
-# Type check
+# Run unit tests
+pnpm test
+
+# Run E2E tests (Next, React Router, Vite)
+pnpm test:e2e
+
+# Type-check all packages
 pnpm ts:check
+
+# Lint everything
+pnpm lint
 ```
 
-## Run Storybook
+## Adding a component
+
+The `create:ui` script scaffolds a new component with a component file, props file, and Storybook story.
 
 ```sh
-cd apps/storybook
-pnpm dev
+pnpm create:ui my-component-name
 ```
 
-Opens the Storybook app with all component stories. Use it to browse variants, test props, and verify behavior.
+The name must be kebab-case. The script creates:
 
-## Contributing
+- `packages/ui/src/components/my-component-name/MyComponentName.tsx`
+- `packages/ui/src/components/my-component-name/myComponentName.props.ts`
+- `apps/storybook/src/stories/MyComponentName.stories.tsx`
 
-We welcome feedback and contributions. Start here:
+It also adds the export to `packages/ui/src/index.ts`.
 
-1. **Try the components** and report what breaks, what confuses, or what's missing.
-2. **Read the contribution model** — build a recipe with existing building block components, then propose graduating it.
-3. **Open a PR** following the branch naming and checklist in the developer contribution docs.
+## Releasing
 
-During preview, the most useful contribution is using the components and telling us what happens.
+Releases use [Changesets](https://github.com/changesets/changesets).
+
+```sh
+# Create a changeset for your changes
+pnpm changeset
+
+# Cut a release (build → version → publish)
+pnpm release
+```
+
+Each changeset describes what changed and its semver impact. Commit the changeset file alongside your PR.
