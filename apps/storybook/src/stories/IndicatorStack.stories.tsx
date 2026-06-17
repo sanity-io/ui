@@ -2,41 +2,41 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
 import {Indicator} from '../../../../packages/ui/src/components/indicator/Indicator'
-import {IndicatorGroup} from '../../../../packages/ui/src/components/indicator-group/IndicatorGroup'
-import {indicatorGroupProps} from '../../../../packages/ui/src/components/indicator-group/indicatorGroup.props'
+import {IndicatorStack} from '../../../../packages/ui/src/components/indicator-stack/IndicatorStack'
+import {indicatorStackProps} from '../../../../packages/ui/src/components/indicator-stack/indicatorStack.props'
 import {getArgTypes} from '../utils/getArgTypes'
 
-const argTypes = getArgTypes(indicatorGroupProps)
+const argTypes = getArgTypes(indicatorStackProps)
 
-const meta: Meta<typeof IndicatorGroup> = {
-  title: 'Components/IndicatorGroup',
+const meta: Meta<typeof IndicatorStack> = {
+  title: 'Components/IndicatorStack',
   args: {},
   argTypes,
-  component: IndicatorGroup,
+  component: IndicatorStack,
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-IndicatorGroup',
+      context: '.sui-IndicatorStack',
     },
   },
 }
 
 export default meta
-type Story = StoryObj<typeof IndicatorGroup>
+type Story = StoryObj<typeof IndicatorStack>
 
 export const Default: Story = {
   render: (props) => {
     return (
-      <IndicatorGroup {...props}>
+      <IndicatorStack {...props}>
         <Indicator tone="critical" label="Critical" />
         <Indicator tone="positive" label="Positive" />
         <Indicator tone="suggest" label="Suggest" />
-      </IndicatorGroup>
+      </IndicatorStack>
     )
   },
   play: async ({canvas}) => {
     await expect((await canvas.findByLabelText('Positive')).parentElement?.classList).toContain(
-      'sui-IndicatorGroup',
+      'sui-IndicatorStack',
     )
   },
 }
