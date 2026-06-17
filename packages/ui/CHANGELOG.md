@@ -1,5 +1,12 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.15
+
+### Patch Changes
+
+- ef0e601: add icon button component
+- cfd8652: add tooltip and tooltip group components
+
 ## 0.0.1-alpha.14
 
 ### Patch Changes
