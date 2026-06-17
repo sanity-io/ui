@@ -1,9 +1,9 @@
 import {type PropDef} from '../types/PropDef'
-import {SHADOW} from '../types/Shadow'
+import {SHADOW, type Shadow} from '../types/Shadow'
 
 export type ShadowProps = {
   /** CSS **box-shadow** property */
-  shadow?: string
+  shadow?: Shadow
 }
 
 export const shadowProps: Record<string, PropDef> = {

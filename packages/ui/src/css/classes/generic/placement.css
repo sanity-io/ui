@@ -1,0 +1,171 @@
+@position-try --top-center {
+  top: auto;
+  right: auto;
+  bottom: anchor(top);
+  left: anchor(center);
+  translate: -50% 0;
+}
+
+@position-try --top-start {
+  top: auto;
+  right: auto;
+  bottom: anchor(top);
+  left: anchor(left);
+  translate: none;
+}
+
+@position-try --top-end {
+  top: auto;
+  left: auto;
+  bottom: anchor(top);
+  right: anchor(right);
+  translate: none;
+}
+
+@position-try --bottom-center {
+  bottom: auto;
+  right: auto;
+  top: anchor(bottom);
+  left: anchor(center);
+  translate: -50% 0;
+}
+
+@position-try --bottom-start {
+  bottom: auto;
+  right: auto;
+  top: anchor(bottom);
+  left: anchor(left);
+  translate: none;
+}
+
+@position-try --bottom-end {
+  bottom: auto;
+  left: auto;
+  top: anchor(bottom);
+  right: anchor(right);
+  translate: none;
+}
+
+@position-try --right-center {
+  right: auto;
+  bottom: auto;
+  left: anchor(right);
+  top: anchor(center);
+  translate: 0 -50%;
+}
+
+@position-try --right-start {
+  right: auto;
+  bottom: auto;
+  left: anchor(right);
+  top: anchor(top);
+  translate: none;
+}
+
+@position-try --right-end {
+  right: auto;
+  top: auto;
+  left: anchor(right);
+  bottom: anchor(bottom);
+  translate: none;
+}
+
+@position-try --left-center {
+  left: auto;
+  bottom: auto;
+  right: anchor(left);
+  top: anchor(center);
+  translate: 0 -50%;
+}
+
+@position-try --left-start {
+  left: auto;
+  bottom: auto;
+  right: anchor(left);
+  top: anchor(top);
+  translate: none;
+}
+
+@position-try --left-end {
+  left: auto;
+  top: auto;
+  right: anchor(left);
+  bottom: anchor(bottom);
+  translate: none;
+}
+
+.sui-placement-bottom {
+  top: anchor(bottom);
+  left: anchor(center);
+  translate: -50% 0;
+  position-try-fallbacks: --top-center;
+}
+
+.sui-placement-bottom-start {
+  top: anchor(bottom);
+  left: anchor(left);
+  position-try-fallbacks: --top-start;
+}
+
+.sui-placement-bottom-end {
+  top: anchor(bottom);
+  right: anchor(right);
+  position-try-fallbacks: --top-end;
+}
+
+.sui-placement-top {
+  bottom: anchor(top);
+  left: anchor(center);
+  translate: -50% 0;
+  position-try-fallbacks: --bottom-center;
+}
+
+.sui-placement-top-start {
+  bottom: anchor(top);
+  left: anchor(left);
+  position-try-fallbacks: --bottom-start;
+}
+
+.sui-placement-top-end {
+  bottom: anchor(top);
+  right: anchor(right);
+  position-try-fallbacks: --bottom-end;
+}
+
+.sui-placement-left {
+  right: anchor(left);
+  top: anchor(center);
+  translate: 0 -50%;
+  position-try-fallbacks: --right-center;
+}
+
+.sui-placement-left-start {
+  right: anchor(left);
+  top: anchor(top);
+  position-try-fallbacks: --right-start;
+}
+
+.sui-placement-left-end {
+  right: anchor(left);
+  bottom: anchor(bottom);
+  position-try-fallbacks: --right-end;
+}
+
+.sui-placement-right {
+  left: anchor(right);
+  top: anchor(center);
+  translate: 0 -50%;
+  position-try-fallbacks: --left-center;
+}
+
+.sui-placement-right-start {
+  left: anchor(right);
+  top: anchor(top);
+  position-try-fallbacks: --left-start;
+}
+
+.sui-placement-right-end {
+  left: anchor(right);
+  bottom: anchor(bottom);
+  position-try-fallbacks: --left-end;
+}
