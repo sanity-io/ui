@@ -2,8 +2,6 @@
 
 The next version of Sanity's component library. Faster, simpler, and built on CSS instead of styled-components.
 
-Seven layout and typography building block components ship today: **Box**, **Flex**, **Grid**, **Card**, **Heading**, **Text**, and **Divider**. More components follow each quarter.
-
 ## What's different from v3
 
 - **CSS classes instead of styled-components.** No runtime style generation. Smaller bundles, faster renders.
@@ -16,7 +14,7 @@ Seven layout and typography building block components ship today: **Box**, **Fle
 pnpm add @sanity-labs/ui-poc
 ```
 
-Requires React 19 and Node 24+.
+Requires React 19.2+ and Node >=20.19 <22 || >=22.12.
 
 ## Setup
 
@@ -44,16 +42,15 @@ createRoot(document.getElementById('root')!).render(
 
 ## Usage
 
-Import v4 building block components from `@sanity-labs/ui-poc`. Import everything else from `@sanity/ui`.
+Import from `@sanity-labs/ui-poc`. Components not yet in v4 — Menu, Dialog, TextInput, Badge — remain in `@sanity/ui`.
 
 ```tsx
-import {Box, Flex, Card, Heading, Text} from '@sanity-labs/ui-poc'
-import {Button, Stack, Badge} from '@sanity/ui'
+import {Box, Flex, Card, Heading, Text, Button} from '@sanity-labs/ui-poc'
 import {AddIcon} from '@sanity/icons'
 
 export default function App() {
   return (
-    <Flex style={{minHeight: '100vh'}}>
+    <Flex minHeight="100vh">
       <Box as="nav" aria-label="Main" padding={3} borderRight width="240px">
         <Heading as="h2" size={1}>
           My App
@@ -64,16 +61,18 @@ export default function App() {
           <Heading as="h1" size={2}>
             Documents
           </Heading>
-          <Button icon={AddIcon} text="New" />
+          <Button iconStart={AddIcon} text="New" />
         </Flex>
-        <Card density="regular" marginTop={3}>
-          <Text size={1} weight="medium">
-            First document
-          </Text>
-          <Text size={1} muted>
-            Edited 2 hours ago
-          </Text>
-        </Card>
+        <Box marginTop={3}>
+          <Card density="loose">
+              <Text size={1}
+                First document
+              </Text>
+              <Text size={1} muted>
+                Edited 2 hours ago
+              </Text>
+          </Card>
+        </Box>
       </Box>
     </Flex>
   )
@@ -82,16 +81,66 @@ export default function App() {
 
 ## Components
 
-| Component       | Package               | What it does                                                           |
-| --------------- | --------------------- | ---------------------------------------------------------------------- |
-| `Box`           | `@sanity-labs/ui-poc` | General container with padding, margin, border, tone, and layout props |
-| `Flex`          | `@sanity-labs/ui-poc` | Flexbox layout with alignment and gap                                  |
-| `Grid`          | `@sanity-labs/ui-poc` | CSS grid layout for card grids and dashboards                          |
-| `Card`          | `@sanity-labs/ui-poc` | Visual surface with background, tone, and density                      |
-| `Heading`       | `@sanity-labs/ui-poc` | Semantic headings (`h1`–`h6`) with size and weight                     |
-| `Text`          | `@sanity-labs/ui-poc` | Body text, captions, and metadata                                      |
-| `Divider`       | `@sanity-labs/ui-poc` | Horizontal rule between content sections                               |
-| Everything else | `@sanity/ui`          | Button, Menu, Dialog, TextInput, Stack, Badge, etc.                    |
+All components below are from `@sanity-labs/ui-poc`.
+
+### Layout
+
+| Component   | What it does                                                                        |
+| ----------- | ----------------------------------------------------------------------------------- |
+| `Box`       | General container. Padding, margin, border, overflow, and position as direct props. |
+| `Flex`      | Flexbox layout. `alignItems`, `justifyContent`, `flexDirection`, `gap`.             |
+| `Grid`      | CSS grid. Use `gridTemplateColumns` with a CSS string (e.g. `"repeat(3, 1fr)"`).    |
+| `Container` | Max-width content wrapper.                                                          |
+| `HStack`    | Horizontal stack. Accepts `gap` and `as` only — use `Flex` for alignment control.   |
+| `VStack`    | Vertical stack. Accepts `gap` and `as` only — use `Flex` for alignment control.     |
+| `Inline`    | Inline flow layout with wrapping and gap.                                           |
+
+### Typography
+
+| Component | What it does                                                            |
+| --------- | ----------------------------------------------------------------------- |
+| `Heading` | Semantic headings (`h1`–`h6`). Always set `as` to match the level.      |
+| `Text`    | Body copy, captions, labels. Props: `size`, `weight`, `muted`, `align`. |
+| `Label`   | Form input label. Use only with form elements.                          |
+| `Code`    | Inline or block code. Uses the system monospace font.                   |
+
+### Interactive
+
+| Component  | What it does                                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `Button`   | `level` (primary/secondary/tertiary), `tone` (neutral/critical), `iconStart`, `iconEnd`, `text`, `fullWidth`, `loading`. |
+| `Checkbox` | Controlled checkbox. Requires `label` (string).                                                                          |
+| `Radio`    | Controlled radio button.                                                                                                 |
+| `Switch`   | Toggle control. Requires `label` (string).                                                                               |
+| `Link`     | Anchor element styled as a link.                                                                                         |
+
+### Display
+
+| Component        | What it does                                                                                                         |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `Card`           | Raised surface with background and `tone`. Does not accept padding, margin, or layout props — wrap content in `Box`. |
+| `Divider`        | Horizontal rule between content sections.                                                                            |
+| `Icon`           | Renders a `@sanity/icons` icon component. Always set `aria-label` or `aria-hidden`.                                  |
+| `Indicator`      | Status dot with `tone`.                                                                                              |
+| `IndicatorGroup` | Grouped `Indicator` elements.                                                                                        |
+| `Spinner`        | Loading indicator.                                                                                                   |
+
+### Lists
+
+| Component | What it does                                        |
+| --------- | --------------------------------------------------- |
+| `List`    | Semantic list. Use `List.Item` and `List.ItemText`. |
+
+### Accessibility
+
+| Component        | What it does                                                                                     |
+| ---------------- | ------------------------------------------------------------------------------------------------ |
+| `SkipToContent`  | Visually hidden skip-nav link. Must be the first focusable element. Requires `hash` and `label`. |
+| `VisuallyHidden` | Hides content visually while keeping it in the accessibility tree.                               |
+
+### Still from `@sanity/ui`
+
+Menu, Dialog, TextInput, Select, Stack, Badge, ThemeProvider, ToastProvider, and other components not yet migrated to v4.
 
 ## Repo structure
 
