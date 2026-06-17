@@ -1,5 +1,13 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.14
+
+### Patch Changes
+
+- 9d55d1a: add button and spinner components
+- 01d6838: add indicator and indicator group components
+- 202508a: add list component and item, image, and text subcomponents
+
 ## 0.0.1-alpha.13
 
 ### Patch Changes
