@@ -1,147 +1,109 @@
-# Sanity UI v4
+# Sanity UI 4 — Monorepo
 
-The next version of Sanity's component library. Faster, simpler, and built on CSS instead of styled-components.
+Development monorepo for Sanity UI 4 (`@sanity-labs/ui-poc`). Contains the component library, migration tooling, Storybook, and test apps.
 
-Seven layout and typography building block components ship today: **Box**, **Flex**, **Grid**, **Card**, **Heading**, **Text**, and **Divider**. More components follow each quarter.
+## Packages
 
-## What's different from v3
+Published packages installable from npm.
 
-- **CSS classes instead of styled-components.** No runtime style generation. Smaller bundles, faster renders.
-- **Direct props for layout.** Width, height, position, border, and overflow are first-class props — no more `style={{ ... }}` escape hatches.
-- **Works alongside v3.** Install both packages in the same app. No forced migration.
+| Package                                                | Version               | Description                                             |
+| ------------------------------------------------------ | --------------------- | ------------------------------------------------------- |
+| [`@sanity-labs/ui-poc`](./packages/ui)                 | `packages/ui`         | The component library. CSS-based, works alongside UI 3. |
+| [`@sanity-labs/ui-poc-codemod`](./packages/ui-codemod) | `packages/ui-codemod` | CLI codemods for migrating UI 3 components to UI 4.     |
 
-## Install
+## Apps
 
-```sh
-pnpm add @sanity-labs/ui-poc
-```
+Internal apps — not published.
 
-Requires React 19 and Node 24+.
-
-## Setup
-
-Import the stylesheet at your app entry point. Without it, components render as unstyled HTML with no error.
-
-```tsx
-import '@sanity-labs/ui-poc/styles.css'
-```
-
-If your app uses Sanity UI v3, keep the existing `ThemeProvider` setup.
-
-```tsx
-import {ThemeProvider, studioTheme, ToastProvider} from '@sanity/ui'
-import '@sanity-labs/ui-poc/styles.css'
-import App from './App'
-
-createRoot(document.getElementById('root')!).render(
-  <ThemeProvider theme={studioTheme}>
-    <ToastProvider>
-      <App />
-    </ToastProvider>
-  </ThemeProvider>,
-)
-```
-
-## Usage
-
-Import v4 building block components from `@sanity-labs/ui-poc`. Import everything else from `@sanity/ui`.
-
-```tsx
-import {Box, Flex, Card, Heading, Text} from '@sanity-labs/ui-poc'
-import {Button, Stack, Badge} from '@sanity/ui'
-import {AddIcon} from '@sanity/icons'
-
-export default function App() {
-  return (
-    <Flex style={{minHeight: '100vh'}}>
-      <Box as="nav" aria-label="Main" padding={3} borderRight width="240px">
-        <Heading as="h2" size={1}>
-          My App
-        </Heading>
-      </Box>
-      <Box as="main" padding={4} flexGrow={1}>
-        <Flex alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={2}>
-          <Heading as="h1" size={2}>
-            Documents
-          </Heading>
-          <Button icon={AddIcon} text="New" />
-        </Flex>
-        <Card density="regular" marginTop={3}>
-          <Text size={1} weight="medium">
-            First document
-          </Text>
-          <Text size={1} muted>
-            Edited 2 hours ago
-          </Text>
-        </Card>
-      </Box>
-    </Flex>
-  )
-}
-```
-
-## Components
-
-| Component       | Package               | What it does                                                           |
-| --------------- | --------------------- | ---------------------------------------------------------------------- |
-| `Box`           | `@sanity-labs/ui-poc` | General container with padding, margin, border, tone, and layout props |
-| `Flex`          | `@sanity-labs/ui-poc` | Flexbox layout with alignment and gap                                  |
-| `Grid`          | `@sanity-labs/ui-poc` | CSS grid layout for card grids and dashboards                          |
-| `Card`          | `@sanity-labs/ui-poc` | Visual surface with background, tone, and density                      |
-| `Heading`       | `@sanity-labs/ui-poc` | Semantic headings (`h1`–`h6`) with size and weight                     |
-| `Text`          | `@sanity-labs/ui-poc` | Body text, captions, and metadata                                      |
-| `Divider`       | `@sanity-labs/ui-poc` | Horizontal rule between content sections                               |
-| Everything else | `@sanity/ui`          | Button, Menu, Dialog, TextInput, Stack, Badge, etc.                    |
+| App                                                      | Description                                                                               |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| [`apps/storybook`](./apps/storybook)                     | Component stories. Browse variants, test props, verify visual behavior.                   |
+| [`apps/performance-testing`](./apps/performance-testing) | Render benchmarks. Compares v3 and v4 render times across component counts.               |
+| [`apps/frameworks`](./apps/frameworks)                   | E2E tests across Next.js, React Router, and Vite to verify cross-framework compatibility. |
 
 ## Repo structure
 
 ```
 ui-poc/
-├── packages/
-│   ├── ui/                  # The component library (@sanity-labs/ui-poc)
-│   ├── ui-codemod/          # Migration codemods for v3 → v4
-│   └── @repo/               # Shared repo tooling (eslint config, etc.)
 ├── apps/
-│   ├── storybook/           # Component stories — run locally
-│   └── performance-testing/ # Render benchmarks
-├── turbo.json               # Turborepo pipeline config
-└── pnpm-workspace.yaml      # Workspace definition
+│   ├── frameworks/          # E2E tests across Next, React Router, Vite
+│   ├── performance-testing/ # Render benchmarks
+│   └── storybook/           # Component stories
+├── packages/
+│   ├── @repo/
+│   │   └── eslint-config/   # Shared ESLint config (internal)
+│   ├── ui/                  # @sanity-labs/ui-poc
+│   └── ui-codemod/          # @sanity-labs/ui-poc-codemod
+├── bin/
+│   └── create-ui.js         # Component scaffolding script
+├── turbo.json
+└── pnpm-workspace.yaml
 ```
 
-## Development
+## Requirements
+
+- Node `>=20.19 <22 || >=22.12`
+- pnpm `10.17.0`
+
+## Getting started
 
 ```sh
-# Install dependencies
 pnpm install
-
-# Start dev mode (components + storybook)
 pnpm dev
+```
 
-# Run tests
-pnpm test
+`pnpm dev` starts the component library in watch mode and launches Storybook at `http://localhost:6006`.
+
+## Commands
+
+Run all commands from the repo root.
+
+```sh
+# Start dev mode (packages/ui + storybook)
+pnpm dev
 
 # Build all packages
 pnpm build
 
-# Type check
+# Run unit tests
+pnpm test
+
+# Run E2E tests (Next, React Router, Vite)
+pnpm test:e2e
+
+# Type-check all packages
 pnpm ts:check
+
+# Lint everything
+pnpm lint
 ```
 
-## Run Storybook
+## Adding a component
+
+The `create:ui` script scaffolds a new component with a component file, props file, and Storybook story.
 
 ```sh
-cd apps/storybook
-pnpm dev
+pnpm create:ui my-component-name
 ```
 
-Opens the Storybook app with all component stories. Use it to browse variants, test props, and verify behavior.
+The name must be kebab-case. The script creates:
 
-## Contributing
+- `packages/ui/src/components/my-component-name/MyComponentName.tsx`
+- `packages/ui/src/components/my-component-name/myComponentName.props.ts`
+- `apps/storybook/src/stories/MyComponentName.stories.tsx`
 
-We welcome feedback and contributions. Start here:
+It also adds the export to `packages/ui/src/index.ts`.
 
-1. **Try the components** and report what breaks, what confuses, or what's missing.
-2. **Read the contribution model** — build a recipe with existing building block components, then propose graduating it.
-3. **Open a PR** following the branch naming and checklist in the developer contribution docs.
+## Releasing
 
-During preview, the most useful contribution is using the components and telling us what happens.
+Releases use [Changesets](https://github.com/changesets/changesets).
+
+```sh
+# Create a changeset for your changes
+pnpm changeset
+
+# Cut a release (build → version → publish)
+pnpm release
+```
+
+Each changeset describes what changed and its semver impact. Commit the changeset file alongside your PR.
