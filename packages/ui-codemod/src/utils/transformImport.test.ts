@@ -123,3 +123,53 @@ defineInlineTest(
   `,
   'splits mixed imports and only updates import path for current component',
 )
+
+defineInlineTest(
+  transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
+  import {Box, BoxProps} from '@legacy/ui'
+
+  <Box />
+  `,
+  `
+  import {Box, BoxProps} from "@sanity/ui"
+
+  <Box />
+  `,
+  'updates import path for type import',
+)
+
+defineInlineTest(
+  transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
+  import {Box, type BoxProps} from '@legacy/ui'
+
+  <Box />
+  `,
+  `
+  import {Box, type BoxProps} from "@sanity/ui"
+
+  <Box />
+  `,
+  'updates import path for with type keyword inside',
+)
+
+defineInlineTest(
+  transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
+  import {Box} from '@legacy/ui'
+  import type {BoxProps} from '@legacy/ui'
+
+  <Box />
+  `,
+  `
+  import {Box} from "@sanity/ui"
+  import type {BoxProps} from "@sanity/ui"
+
+  <Box />
+  `,
+  'updates import path for with type keyword outside',
+)

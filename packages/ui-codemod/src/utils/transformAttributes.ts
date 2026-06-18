@@ -38,7 +38,7 @@ export function transformAttributes(
     insertTodoWarning(j, path, mod.warning || todoWarning)
   }
 
-  for (let i = 0, len = attrs.length; i < len; i++) {
+  for (let i = 0; i < attrs.length; i++) {
     const attr = attrs[i]
 
     if (!attr || attr.type !== 'JSXAttribute' || attr.name.type !== 'JSXIdentifier') {

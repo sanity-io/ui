@@ -4,6 +4,7 @@ export function getSplitImportSpecifiers(
   specifiers: (ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier)[] = [],
   componentName: string,
 ) {
+  const componentNames = new Set([componentName, `${componentName}Props`])
   const specs = {
     componentSpecs: [] as (ImportSpecifier | ImportDefaultSpecifier)[],
     restSpecs: [] as (ImportSpecifier | ImportDefaultSpecifier | ImportNamespaceSpecifier)[],
@@ -27,7 +28,7 @@ export function getSplitImportSpecifiers(
         local = spec.local?.type === 'Identifier' ? spec.local.name : null
       }
 
-      if (local === componentName) {
+      if (local && componentNames.has(local)) {
         specs.componentSpecs.push(spec)
       } else {
         specs.restSpecs.push(spec)

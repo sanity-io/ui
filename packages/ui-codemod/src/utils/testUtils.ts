@@ -34,7 +34,10 @@ function runInlineTest(
   expectedOutput: FileInfo['source'],
   testOptions?: Record<string, unknown>,
 ) {
-  const output = applyTransform(module, options, input, testOptions)
+  const output = applyTransform(module, options, input, {
+    parser: 'tsx',
+    ...testOptions,
+  })
 
   const expectation = (
     o: Promise<string | null | undefined | void> | string | null | undefined | void,
