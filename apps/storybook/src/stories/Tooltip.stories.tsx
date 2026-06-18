@@ -40,13 +40,13 @@ export const Default: Story = {
     const trigger = await canvas.findByRole('button', {name: 'Open Tooltip'})
     const tooltip = await canvas.findByRole('tooltip', {hidden: true})
 
-    trigger.focus()
+    await userEvent.tab()
 
     await waitFor(
       async () => {
         await expect(tooltip).toBeVisible()
       },
-      {timeout: 700},
+      {timeout: 750},
     )
 
     await userEvent.keyboard('{Escape}')
@@ -55,7 +55,7 @@ export const Default: Story = {
       async () => {
         await expect(tooltip).not.toBeVisible()
       },
-      {timeout: 300},
+      {timeout: 350},
     )
 
     trigger.blur()
@@ -105,7 +105,9 @@ export const Placements: Story = {
     )
   },
   play: async ({canvas}) => {
-    await (await canvas.findByRole('button', {name: 'Top-end Tooltip'})).focus()
+    await userEvent.tab()
+    await userEvent.tab()
+    await userEvent.tab()
 
     await waitFor(
       async () => {

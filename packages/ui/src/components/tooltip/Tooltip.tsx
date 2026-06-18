@@ -37,13 +37,17 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
 
   const trigger = cloneElement(children, {
     'aria-describedby': id,
-    'onBlur': (e) => {
-      children.props.onBlur?.(e)
+    'onMouseEnter': (e) => {
       setDismissed(false)
+      children.props.onMouseEnter?.(e)
     },
-    'onMouseLeave': (e) => {
-      children.props.onMouseLeave?.(e)
+    'onFocus': (e) => {
       setDismissed(false)
+      children.props.onFocus?.(e)
+    },
+    'onClick': (e) => {
+      setDismissed(true)
+      children.props.onClick?.(e)
     },
     'style': {
       ...children.props.style,

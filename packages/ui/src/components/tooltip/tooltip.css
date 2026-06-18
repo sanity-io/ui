@@ -11,7 +11,7 @@
     visibility 0s linear calc(var(--tooltip-delay-close) + 200ms);
 }
 
-[aria-describedby]:is(:hover, :focus) + [role="tooltip"]:not(.sui-Tooltip-Dismissed) {
+[aria-describedby]:is(:hover, :focus-visible) + [role="tooltip"]:not(.sui-Tooltip-Dismissed) {
   visibility: visible;
   opacity: 1;
   scale: 1;
@@ -19,6 +19,10 @@
     opacity 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-open),
     scale 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-open),
     visibility 0s linear var(--tooltip-delay-open);
+}
+
+[aria-describedby]:is(:hover, :focus-visible) + .sui-Tooltip-Dismissed[role="tooltip"] {
+  transition: none;
 }
 
 .sui-Tooltip[class*='placement-bottom'],
