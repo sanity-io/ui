@@ -1,0 +1,14 @@
+import type {InteractiveAs} from '../../types/Interactive'
+import {type PropDef} from '../../types/PropDef'
+
+/** @public */
+export interface PressAreaProps<T extends React.ElementType> {
+  /** Element to render */
+  as?: InteractiveAs<T>
+}
+
+export const pressAreaProps: Record<string, PropDef> = {
+  as: {
+    type: 'string',
+  },
+}

@@ -4,6 +4,7 @@
   color: var(--foreground-color);
   text-decoration: none;
   transition: var(--hover-transition);
+  appearance: none;
 }
 
 .sui-Button:hover {
