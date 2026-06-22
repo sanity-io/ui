@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc-codemod
 
+## 0.0.1-alpha.13
+
+### Patch Changes
+
+- 2895097: transform component type import
+
 ## 0.0.1-alpha.12
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.16
+
+### Patch Changes
+
+- c63061c: add press area component
+
 ## 0.0.1-alpha.15
 
 ### Patch Changes
