@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc-codemod
 
+## 0.0.1-alpha.14
+
+### Patch Changes
+
+- 22b360a: improve transforming shorthand attributes
+
 ## 0.0.1-alpha.13
 
 ### Patch Changes
