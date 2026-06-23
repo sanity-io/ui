@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.17
+
+### Patch Changes
+
+- 5a0d129: fixes issues w/ codemods and browserslist config
+
 ## 0.0.1-alpha.16
 
 ### Patch Changes
