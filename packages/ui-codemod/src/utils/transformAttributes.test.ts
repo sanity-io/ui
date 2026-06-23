@@ -19,15 +19,17 @@ const MODS: AttributeMods = {
       {
         name: 'flexBasis',
         mapping: {
+          none: 'auto',
           auto: 'auto',
-          1: '0%',
-          2: '0%',
+          initial: 'auto',
         },
       },
       {
         name: 'flexGrow',
         mapping: {
+          none: 0,
           auto: 1,
+          initial: 0,
           1: 1,
           2: 2,
         },
@@ -35,9 +37,9 @@ const MODS: AttributeMods = {
       {
         name: 'flexShrink',
         mapping: {
+          none: 0,
           auto: 1,
-          1: 1,
-          2: 1,
+          initial: 1,
         },
       },
     ],
@@ -276,12 +278,51 @@ defineInlineTest(
   transform,
   {},
   `
-  <div flex={["2", "auto"]} />
+  <div flex="none" />
   `,
   `
-  <div flexBasis={["0%", "auto"]} flexGrow={[2, 1]} flexShrink={[1, 1]} />
+  <div flexBasis="auto" flexGrow={0} flexShrink={0} />
+  `,
+  'splits up shorthand props and updates mapped prop value even if zero',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div flex="1" />
+  `,
+  `
+  <div flexGrow={1} />
+  `,
+  'splits up shorthand props and updates mapped prop value skipping if undefined',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div flex={["auto", "none"]} />
+  `,
+  `
+  <div flexBasis={["auto", "auto"]} flexGrow={[1, 0]} flexShrink={[1, 0]} />
   `,
   'splits up shorthand props and updates responsive mapped prop value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div flex={["2", "none"]} />
+  `,
+  `
+  <div
+    flexBasis={[undefined, "auto"]}
+    flexGrow={[2, 0]}
+    flexShrink={[undefined, 0]} />
+  `,
+  'splits up shorthand props and updates responsive mapped prop value including undefined',
 )
 
 defineInlineTest(

@@ -19,7 +19,7 @@ export function getShorthandAttributes(
 
   if (expr.type === 'ArrayExpression') {
     for (const prop of mod.props) {
-      const styleArray = getMappingArray(j, expr, prop.mapping)
+      const styleArray = getMappingArray(j, expr, prop.mapping, true)
 
       if (!styleArray) {
         continue
@@ -34,7 +34,7 @@ export function getShorthandAttributes(
   for (const prop of mod.props) {
     const styleValue = getMappingValue(prop.mapping, expr)
 
-    if (!styleValue) {
+    if (styleValue === undefined) {
       continue
     }
 
