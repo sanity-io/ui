@@ -225,6 +225,9 @@ importers:
       globals:
         specifier: ^17.4.0
         version: 17.4.0
+      playwright:
+        specifier: 1.58.2
+        version: 1.58.2
       react-is:
         specifier: ^19.2.5
         version: 19.2.5
