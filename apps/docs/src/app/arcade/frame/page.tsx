@@ -98,7 +98,14 @@ export default function ArcadeFrameRoute(): ReactElement {
 
   return (
     <>
-      <script async src="https://unpkg.com/@babel/standalone/babel.min.js" />
+      {/*
+        Pin @babel/standalone to an exact version. The unversioned URL resolves
+        to the latest release, so a new major (e.g. the v7 -> v8 jump that
+        switched @babel/preset-react to the automatic runtime) can silently
+        change the transform output and break the live preview. See the matching
+        preset configuration in `src/lib/ide/evalComponent.ts`.
+      */}
+      <script async src="https://unpkg.com/@babel/standalone@8.0.2/babel.min.js" />
 
       {evalResult?.type === 'success' && !renderError && (
         <Card height="fill" key={`${hookCode};${jsxCode}`}>
