@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type CardProps, cardProps} from './card.props'
 
 /** @public */
@@ -15,7 +16,7 @@ export function Card<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames('sui-Card sui-border', className)}
+      className={classNames(getVersionedClassname('sui-Card'), 'sui-border', className)}
       style={style}
       data-ui="Card"
       {...rest}

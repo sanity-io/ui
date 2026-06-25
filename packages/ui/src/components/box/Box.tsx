@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type BoxProps, boxProps} from './box.props'
 
 /** @public */
@@ -13,7 +14,12 @@ export function Box<T extends ElementType = 'div'>({
   const Component = as || 'div'
 
   return (
-    <Component className={classNames('sui-Box', className)} style={style} data-ui="Box" {...rest}>
+    <Component
+      className={classNames(getVersionedClassname('sui-Box'), className)}
+      style={style}
+      data-ui="Box"
+      {...rest}
+    >
       {children}
     </Component>
   )

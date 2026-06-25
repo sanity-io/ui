@@ -7,6 +7,6 @@
   outline-color: var(--blue-500);
 }
 
-.sui-Link-Underlined {
+.sui-Link.sui-underlined {
   text-decoration: underline;
 }

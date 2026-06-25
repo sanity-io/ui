@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Link} from '../link/Link'
 import {Text} from '../text/Text'
 import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
@@ -16,7 +17,8 @@ export function SkipToContent(props: SkipToContentProps) {
       href={hash}
       underlined={false}
       className={classNames(
-        'sui-SkipToContent sui-position-absolute sui-top2 sui-left2 sui-display-inline-block sui-z-index sui-py2 sui-px3 sui-radius2 sui-text-body1',
+        getVersionedClassname('sui-SkipToContent'),
+        'sui-position-absolute sui-top2 sui-left2 sui-display-inline-block sui-z-index sui-py2 sui-px3 sui-radius2 sui-text-body1',
         className,
       )}
       style={style}

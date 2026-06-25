@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type HeadingProps, headingProps} from './heading.props'
 
 /** @public */
@@ -16,7 +17,10 @@ export function Heading<T extends ElementType = 'h2'>({
   if (props.lineClamp && props.trim) {
     return (
       <Component
-        className={classNames('sui-Heading', className?.replace('sui-line-clamp', ''))}
+        className={classNames(
+          getVersionedClassname('sui-Heading'),
+          className?.replace('sui-line-clamp', ''),
+        )}
         style={style}
         data-ui="Heading"
         {...rest}
@@ -28,7 +32,7 @@ export function Heading<T extends ElementType = 'h2'>({
 
   return (
     <Component
-      className={classNames('sui-Heading', className)}
+      className={classNames(getVersionedClassname('sui-Heading'), className)}
       style={style}
       data-ui="Heading"
       {...rest}

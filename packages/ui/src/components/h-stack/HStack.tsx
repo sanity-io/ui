@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Flex} from '../flex/Flex'
 import {type HStackProps, hStackProps} from './hStack.props'
 
@@ -15,7 +16,7 @@ export function HStack<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={classNames('sui-HStack', className)}
+      className={classNames(getVersionedClassname('sui-HStack'), className)}
       style={style}
       data-ui="HStack"
       display="inline-flex"

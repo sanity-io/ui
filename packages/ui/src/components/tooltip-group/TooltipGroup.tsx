@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import {type ComponentPropsWithRef, type ElementType, useRef, useState} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type TooltipGroupProps, tooltipGroupProps} from './tooltipGroup.props'
 
 /** @public */
@@ -42,7 +43,7 @@ export function TooltipGroup<T extends ElementType = 'div'>(
 
   return (
     <Component
-      className={classNames('sui-TooltipGroup', className)}
+      className={classNames(getVersionedClassname('sui-TooltipGroup'), className)}
       style={{
         ...style,
         ...(isActive && {

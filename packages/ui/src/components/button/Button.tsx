@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import {type ComponentPropsWithRef, type ElementType, isValidElement} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Flex} from '../flex/Flex'
 import {Spinner} from '../spinner/Spinner'
 import {Text} from '../text/Text'
@@ -31,7 +32,7 @@ export function Button<T extends ElementType = 'button'>({
   return (
     <Component
       className={classNames(
-        'sui-Button',
+        getVersionedClassname('sui-Button'),
         'sui-display-inline-flex sui-align-items-center sui-justify-content-center sui-radius2 sui-position-relative sui-overflow-hidden',
         className,
       )}

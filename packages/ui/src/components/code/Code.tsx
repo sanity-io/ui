@@ -3,6 +3,7 @@ import {type ComponentPropsWithRef, lazy, Suspense} from 'react'
 
 import {type CodeTag} from '../../types/Code'
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type CodeProps, codeProps} from './code.props'
 
 const LazyRefractor = lazy(() => import('./LazyRefractor'))
@@ -18,7 +19,7 @@ export function Code<T extends CodeTag = 'pre'>({
   if (!language) {
     return (
       <Component
-        className={classNames('sui-Code', className)}
+        className={classNames(getVersionedClassname('sui-Code'), className)}
         style={style}
         data-ui="Code"
         {...rest}
@@ -29,7 +30,12 @@ export function Code<T extends CodeTag = 'pre'>({
   }
 
   return (
-    <Component className={classNames('sui-Code', className)} style={style} data-ui="Code" {...rest}>
+    <Component
+      className={classNames(getVersionedClassname('sui-Code'), className)}
+      style={style}
+      data-ui="Code"
+      {...rest}
+    >
       <Suspense fallback={<code>{children}</code>}>
         <LazyRefractor language={language} value={children} />
       </Suspense>

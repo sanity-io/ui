@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Box} from '../box/Box'
 import {type IndicatorProps, indicatorProps} from './indicator.props'
 
@@ -20,7 +21,7 @@ export function Indicator<T extends ElementType = 'span'>({
   return (
     <Box
       as={Component}
-      className={classNames('sui-Indicator', className)}
+      className={classNames(getVersionedClassname('sui-Indicator'), className)}
       style={style}
       data-ui="Indicator"
       width="5px"

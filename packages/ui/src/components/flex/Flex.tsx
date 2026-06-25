@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type FlexProps, flexProps} from './flex.props'
 
 /** @public */
@@ -13,7 +14,12 @@ export function Flex<T extends ElementType = 'div'>({
   const Component = as || 'div'
 
   return (
-    <Component className={classNames('sui-Flex', className)} style={style} data-ui="Flex" {...rest}>
+    <Component
+      className={classNames(getVersionedClassname('sui-Flex'), className)}
+      style={style}
+      data-ui="Flex"
+      {...rest}
+    >
       {children}
     </Component>
   )

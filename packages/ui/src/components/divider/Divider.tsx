@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type DividerProps, dividerProps} from './divider.props'
 
 /** @public */
@@ -9,7 +10,11 @@ export function Divider(props: DividerProps) {
 
   return (
     <hr
-      className={classNames('sui-Divider sui-border-none sui-border-top', className)}
+      className={classNames(
+        getVersionedClassname('sui-Divider'),
+        'sui-border-none sui-border-top',
+        className,
+      )}
       style={style}
       data-ui="Divider"
       {...rest}

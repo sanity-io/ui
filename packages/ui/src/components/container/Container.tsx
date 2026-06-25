@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type ContainerProps, containerProps} from './container.props'
 
 /** @public */
@@ -14,7 +15,7 @@ export function Container<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames('sui-Container', className)}
+      className={classNames(getVersionedClassname('sui-Container'), className)}
       style={style}
       data-ui="Container"
       {...rest}

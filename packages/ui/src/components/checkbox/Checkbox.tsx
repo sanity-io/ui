@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import {useEffect, useRef} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
 import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
@@ -24,7 +25,7 @@ export function Checkbox(props: CheckboxProps) {
 
   return (
     <Label
-      className={classNames('sui-Checkbox', className)}
+      className={classNames(getVersionedClassname('sui-Checkbox'), className)}
       style={style}
       data-ui="Checkbox"
       disabled={disabled}
@@ -33,7 +34,7 @@ export function Checkbox(props: CheckboxProps) {
       <VisuallyHidden
         as="input"
         type="checkbox"
-        className="sui-CheckboxInput"
+        className={getVersionedClassname('sui-CheckboxInput')}
         ref={inputRef}
         disabled={disabled}
         {...rest}
@@ -41,7 +42,7 @@ export function Checkbox(props: CheckboxProps) {
 
       <Box
         as="span"
-        className={classNames('sui-CheckboxMark', error && 'sui-error')}
+        className={classNames(getVersionedClassname('sui-CheckboxMark'), error && 'sui-error')}
         position="relative"
         radius={2}
         width="17px"

@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {HStack} from '../h-stack/HStack'
 import {type IndicatorStackProps, indicatorStackProps} from './indicatorStack.props'
 
@@ -15,7 +16,7 @@ export function IndicatorStack<T extends ElementType = 'div'>(
   return (
     <HStack
       as={Component}
-      className={classNames('sui-IndicatorStack', className)}
+      className={classNames(getVersionedClassname('sui-IndicatorStack'), className)}
       style={style}
       data-ui="IndicatorStack"
       {...rest}

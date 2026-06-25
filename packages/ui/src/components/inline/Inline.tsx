@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import {Children, type ComponentPropsWithRef, type ElementType, useMemo} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {inlineChildrenProps, type InlineProps, inlineProps} from './inline.props'
 
 /** @deprecated Use HStack component instead */
@@ -24,7 +25,7 @@ export function Inline<T extends ElementType = 'div'>(
 
   return (
     <Component
-      className={classNames('sui-Inline', className)}
+      className={classNames(getVersionedClassname('sui-Inline'), className)}
       style={style}
       data-ui="Inline"
       {...rest}

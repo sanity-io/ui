@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import {cloneElement, useEffect, useId, useState} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Box} from '../box/Box'
 import {type TooltipProps, tooltipProps} from './tooltip.props'
 
@@ -64,7 +65,11 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
       {trigger}
 
       <Box
-        className={classNames('sui-Tooltip', dismissed ? 'sui-Tooltip-Dismissed' : '', className)}
+        className={classNames(
+          getVersionedClassname('sui-Tooltip'),
+          dismissed ? getVersionedClassname('sui-Tooltip-Dismissed') : '',
+          className,
+        )}
         role="tooltip"
         style={{
           ...style,

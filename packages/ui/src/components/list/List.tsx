@@ -3,6 +3,7 @@ import type {ComponentProps, ComponentPropsWithRef, ElementType} from 'react'
 
 import type {ListTag} from '../../types/List'
 import {getProps} from '../../utils/getProps'
+import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Flex} from '../flex/Flex'
 import {Text} from '../text/Text'
 import {
@@ -20,7 +21,12 @@ function ListRoot<T extends ListTag = 'ul'>(
   const Component = as || 'ul'
 
   return (
-    <Component className={classNames('sui-List', className)} style={style} data-ui="List" {...rest}>
+    <Component
+      className={classNames(getVersionedClassname('sui-List'), className)}
+      style={style}
+      data-ui="List"
+      {...rest}
+    >
       {children}
     </Component>
   )
@@ -35,7 +41,7 @@ function ListItem({density = 'regular', ...props}: ListItemProps) {
   return (
     <Flex
       as="li"
-      className={classNames('sui-ListItem', className)}
+      className={classNames(getVersionedClassname('sui-ListItem'), className)}
       style={style}
       data-ui="ListItem"
       alignItems="center"
@@ -59,7 +65,7 @@ function ListItemText<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={classNames('sui-ListItemText', className)}
+      className={classNames(getVersionedClassname('sui-ListItemText'), className)}
       style={style}
       data-ui="ListItemText"
       flexDirection="column"
@@ -88,7 +94,7 @@ function ListItemImage(props: ComponentProps<'img'>) {
 
   return (
     <img
-      className={classNames('sui-ListItemImage sui-radius2', className)}
+      className={classNames(getVersionedClassname('sui-ListItemImage'), 'sui-radius2', className)}
       style={style}
       data-ui="ListItemImage"
       {...rest}
