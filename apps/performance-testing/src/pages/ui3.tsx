@@ -1,5 +1,24 @@
 import {AddIcon} from '@sanity/icons'
-import {Box, Card, Flex, Grid, Heading, Text, ThemeProvider} from '@sanity/ui'
+import {
+  Box,
+  Button,
+  Card,
+  Checkbox,
+  Code,
+  Container,
+  Flex,
+  Grid,
+  Heading,
+  Inline,
+  Label,
+  Radio,
+  Spinner,
+  Stack,
+  Switch,
+  Text,
+  ThemeProvider,
+  Tooltip,
+} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
 import {Profiler} from 'react'
 
@@ -28,6 +47,7 @@ export default function Ui3() {
   return (
     <ThemeProvider theme={theme}>
       <h1>UI v3</h1>
+
       <h2>{count} Boxes</h2>
       <Profiler id="Box" onRender={handleOnRender}>
         {iterator.map((i) => (
@@ -49,32 +69,44 @@ export default function Ui3() {
       </Profiler>
 
       <h2>{count} Grids</h2>
-      <Profiler id="Flex" onRender={handleOnRender}>
+      <Profiler id="Grid" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Grid key={i} columns={2} gap={3}>
-            <span>Flex content</span>
-            <span>Flex content</span>
-            <span>Flex content</span>
+            <span>Grid content</span>
+            <span>Grid content</span>
+            <span>Grid content</span>
             <span>Grid content</span>
           </Grid>
         ))}
       </Profiler>
 
-      <h2>{count} Texts</h2>
-      <Profiler id="Text" onRender={handleOnRender}>
+      <h2>{count} Inlines</h2>
+      <Profiler id="Inline" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Text key={i} size={2} muted>
-            Text
-          </Text>
+          <Inline key={i} space={3}>
+            <span>Inline content</span>
+            <span>Inline content</span>
+          </Inline>
         ))}
       </Profiler>
 
-      <h2>{count} Headings</h2>
-      <Profiler id="Heading" onRender={handleOnRender}>
+      <h2>{count} Stacks</h2>
+      <Profiler id="Stack" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Heading key={i} size={2} muted>
-            Heading
-          </Heading>
+          <Stack key={i} space={3}>
+            <span>Stack content</span>
+            <span>Stack content</span>
+            <span>Stack content</span>
+          </Stack>
+        ))}
+      </Profiler>
+
+      <h2>{count} Containers</h2>
+      <Profiler id="Container" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Container key={i} width={1}>
+            <span>Container content</span>
+          </Container>
         ))}
       </Profiler>
 
@@ -87,8 +119,84 @@ export default function Ui3() {
         ))}
       </Profiler>
 
+      <h2>{count} Headings</h2>
+      <Profiler id="Heading" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Heading key={i} size={2} muted>
+            Heading
+          </Heading>
+        ))}
+      </Profiler>
+
+      <h2>{count} Texts</h2>
+      <Profiler id="Text" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Text key={i} size={2} muted>
+            Text
+          </Text>
+        ))}
+      </Profiler>
+
+      <h2>{count} Labels</h2>
+      <Profiler id="Label" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Label key={i}>Label</Label>
+        ))}
+      </Profiler>
+
+      <h2>{count} Codes</h2>
+      <Profiler id="Code" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Code key={i}>const code = true</Code>
+        ))}
+      </Profiler>
+
+      <h2>{count} Buttons</h2>
+      <Profiler id="Button" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Button key={i} text="Button" />
+        ))}
+      </Profiler>
+
+      <h2>{count} Checkboxes</h2>
+      <Profiler id="Checkbox" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Checkbox key={i} />
+        ))}
+      </Profiler>
+
+      <h2>{count} Switches</h2>
+      <Profiler id="Switch" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Switch key={i} />
+        ))}
+      </Profiler>
+
+      <h2>{count} Radios</h2>
+      <Profiler id="Radio" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Radio key={i} name="radio" />
+        ))}
+      </Profiler>
+
+      <h2>{count} Spinners</h2>
+      <Profiler id="Spinner" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Spinner key={i} />
+        ))}
+      </Profiler>
+
+      <h2>{count} Tooltips</h2>
+      <Profiler id="Tooltip" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Tooltip key={i} content={<Text size={1}>Tooltip</Text>}>
+            <Button text="Open tooltip" />
+          </Tooltip>
+        ))}
+      </Profiler>
+
       <h2>{count} Icons</h2>
-      <Profiler id="Icons" onRender={handleOnRender}>
+      <Profiler id="Icon" onRender={handleOnRender}>
         {iterator.map((i) => (
           <AddIcon key={i} />
         ))}
