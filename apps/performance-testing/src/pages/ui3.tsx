@@ -161,21 +161,30 @@ export default function Ui3() {
       <h2>{count} Checkboxes</h2>
       <Profiler id="Checkbox" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Checkbox key={i} />
+          <Inline key={i}>
+            <Checkbox />
+            <Text as="label">Checkbox</Text>
+          </Inline>
         ))}
       </Profiler>
 
       <h2>{count} Switches</h2>
       <Profiler id="Switch" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Switch key={i} />
+          <Inline key={i}>
+            <Switch />
+            <Text as="label">Switch</Text>
+          </Inline>
         ))}
       </Profiler>
 
       <h2>{count} Radios</h2>
       <Profiler id="Radio" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Radio key={i} name="radio" />
+          <Inline key={i}>
+            <Radio name="radio" />
+            <Text as="label">Radio</Text>
+          </Inline>
         ))}
       </Profiler>
 

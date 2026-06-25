@@ -6,15 +6,18 @@
  * baseDuration, ... }. This script loads each route in a real browser, collects
  * those entries, and writes a structured per-codebase / per-component report.
  *
+ * React's <Profiler onRender> only reports timings in a dev build (it is disabled
+ * in production), so this drives the vite DEV server.
+ *
  * Usage:
- *   npm run perf:extract            # builds, then measures the production preview
- *   PERF_BASE_URL=http://localhost:5174 node scripts/extract-perf.mjs   # use a running server
+ *   npm run perf:extract            # starts a dev server, measures every route
+ *   PERF_BASE_URL=http://localhost:5174 npm run perf:extract            # use a running dev server
  *   PERF_RUNS=3 npm run perf:extract                                    # median of N runs
  */
-import {spawn} from 'node:child_process'
 import {writeFile, mkdir} from 'node:fs/promises'
 import {resolve, dirname} from 'node:path'
 import {fileURLToPath} from 'node:url'
+import {createServer} from 'vite'
 import {chromium} from 'playwright'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -32,19 +35,6 @@ const median = (xs) => {
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2
 }
 const round = (v) => (v == null ? null : Math.round(v * 100) / 100)
-
-async function waitForServer(url, timeoutMs = 60_000) {
-  const start = Date.now()
-  while (Date.now() - start < timeoutMs) {
-    try {
-      if ((await fetch(url)).ok) return
-    } catch {
-      /* not up yet */
-    }
-    await new Promise((r) => setTimeout(r, 250))
-  }
-  throw new Error(`Server did not respond at ${url}`)
-}
 
 /** Load one route once; return { component: { actualDuration, baseDuration } }. */
 async function measureRoute(browser, baseUrl, route) {
@@ -82,20 +72,23 @@ async function measureRoute(browser, baseUrl, route) {
 }
 
 async function main() {
-  const useExternal = !!process.env.PERF_BASE_URL
-  const baseUrl = process.env.PERF_BASE_URL || `http://localhost:${PORT}`
+  // Run the vite DEV server in-process. React's <Profiler onRender> is disabled
+  // in production builds, so the timings only exist in dev. PERF_BASE_URL points
+  // the extractor at an already-running dev server instead.
   let server = null
-  if (!useExternal) {
-    console.log('Starting preview server…')
-    // Use the workspace-local vite (npx would try to fetch it in a pnpm repo).
-    server = spawn('pnpm', ['exec', 'vite', 'preview', '--port', String(PORT), '--strictPort'], {
-      cwd: ROOT,
-      stdio: 'ignore',
+  let baseUrl = process.env.PERF_BASE_URL
+  if (!baseUrl) {
+    console.log('Starting dev server…')
+    server = await createServer({
+      root: ROOT,
+      server: {port: PORT, strictPort: true, host: 'localhost'},
+      logLevel: 'error',
     })
+    await server.listen()
+    baseUrl = server.resolvedUrls.local[0].replace(/\/$/, '')
   }
 
   try {
-    await waitForServer(baseUrl)
     const browser = await chromium.launch()
 
     // route -> component -> [actualDuration samples], [baseDuration samples]
@@ -141,7 +134,7 @@ async function main() {
     console.log('\n' + toMarkdown(report))
     console.log(`Wrote perf-results/latest.json and perf-results/PERF.md`)
   } finally {
-    if (server) server.kill()
+    if (server) await server.close()
   }
 }
 
@@ -154,7 +147,7 @@ function toMarkdown(report) {
   const lines = [
     '# Component perf — mount duration by codebase',
     '',
-    `Generated ${report.generatedAt}. Median of ${report.runs} run(s), ${report.instancesPerComponent} instances per component. Values are React Profiler \`actualDuration\` (ms).`,
+    `Generated ${report.generatedAt}. Median of ${report.runs} run(s), ${report.instancesPerComponent} instances per component. Values are React Profiler \`actualDuration\` (ms), measured in a **dev** build (Profiler is disabled in production) — treat as relative, not absolute.`,
     '',
     `| Component | ${routes.join(' | ')} |`,
     `| --- | ${routes.map(() => '---:').join(' | ')} |`,

@@ -7,7 +7,7 @@
     "build": "tsc -b && vite build",
     "dev": "vite",
     "lint": "eslint .",
-    "perf:extract": "vite build && node scripts/extract-perf.mjs",
+    "perf:extract": "node scripts/extract-perf.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
