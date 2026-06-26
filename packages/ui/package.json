@@ -13,7 +13,11 @@
     "type": "git",
     "url": "git+https://github.com/sanity-labs/ui-poc.git"
   },
+  "bin": {
+    "sanity-ui": "./bin/sanity-ui.js"
+  },
   "files": [
+    "bin",
     "dist",
     "src"
   ],
@@ -38,7 +42,8 @@
     }
   },
   "scripts": {
-    "build": "pnpm run clean && pnpm run build:css && pnpm run build:js",
+    "build": "pnpm run clean && pnpm run build:css && pnpm run build:js && pnpm run build:cli",
+    "build:cli": "tsc -p tsconfig.cli.json",
     "build:css": "NODE_ENV=production postcss src/index.css -o dist/styles.css",
     "build:js": "pkg build --strict --check",
     "clean": "rimraf dist",
@@ -52,6 +57,7 @@
     "@sanity-labs/design-tokens": "0.0.2-alpha.4",
     "@sanity/icons": "^3.7.4",
     "clsx": "^2.1.1",
+    "comment-json": "^5.0.0",
     "react-refractor": "^4.0.0"
   },
   "devDependencies": {

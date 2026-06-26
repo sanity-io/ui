@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.settings.json",
+  "include": ["src/cli"],
+  "exclude": ["src/cli/**/*.test.ts"],
+  "compilerOptions": {
+    "rootDir": "./src/cli",
+    "outDir": "./dist/cli",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": false,
+    "verbatimModuleSyntax": true,
+    "types": ["node"],
+    "noEmit": false,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "noCheck": true
+  }
+}

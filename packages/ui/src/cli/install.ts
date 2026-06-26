@@ -1,0 +1,102 @@
+import {spawnSync} from 'node:child_process'
+import process from 'node:process'
+
+import {isPackageInstalled, PACKAGE_NAME} from './detect.js'
+import {readSelfPackage} from './selfPackage.js'
+import type {PackageManager} from './types.js'
+
+const ICONS_PEER = '@sanity/icons'
+const REFRACTOR_PEER = 'react-refractor'
+const DEV_FLAG: Record<PackageManager, string> = {
+  npm: '--save-dev',
+  pnpm: '-D',
+  yarn: '-D',
+  bun: '-d',
+}
+
+export interface InstallResult {
+  ok: boolean
+  command: string
+  args: string[]
+  reason?: 'spawn' | 'exit'
+  message?: string
+  status?: number | null
+}
+
+/** Strips range operators to the exact floor version, e.g. "^3.7.4" -> "3.7.4". */
+function exactFromRange(range: string | undefined): string | null {
+  if (typeof range !== 'string') return null
+  const match = range.match(/\d+\.\d+\.\d+(?:-[\w.]+)?/)
+  return match ? match[0] : null
+}
+
+/**
+ * Builds the exact specs to install from this package's own manifest: the
+ * package at its shipped version and the peers at the versions it declares.
+ * Nothing here is invented. React/react-dom are peers too but belong to the
+ * host app, so they are intentionally left out (the prereq check verifies them).
+ */
+export function resolveInstallSpecs({includeCode = false} = {}): string[] {
+  const self = readSelfPackage()
+  const peers = self.peerDependencies ?? {}
+
+  const specs = [`${PACKAGE_NAME}@${self.version ?? 'latest'}`]
+
+  const iconsVersion = exactFromRange(peers[ICONS_PEER])
+  specs.push(iconsVersion ? `${ICONS_PEER}@${iconsVersion}` : ICONS_PEER)
+
+  if (includeCode) {
+    const refractorVersion = exactFromRange(peers[REFRACTOR_PEER])
+    specs.push(refractorVersion ? `${REFRACTOR_PEER}@${refractorVersion}` : REFRACTOR_PEER)
+  }
+
+  return specs
+}
+
+/**
+ * The React type packages a TypeScript project needs to type-check JSX and the
+ * component props. Only the ones not already installed are returned, pinned to
+ * the project's React major (defaulting to the supported React 19).
+ */
+export function resolveTypeSpecs(cwd: string, {reactMajor = 19} = {}): string[] {
+  const major = Number.isInteger(reactMajor) ? reactMajor : 19
+  return ['@types/react', '@types/react-dom']
+    .filter((name) => !isPackageInstalled(cwd, name))
+    .map((name) => `${name}@^${major}`)
+}
+
+export function installCommand(
+  packageManager: PackageManager,
+  specs: string[],
+  {dev = false} = {},
+): {command: string; args: string[]} {
+  const verb = packageManager === 'npm' ? 'install' : 'add'
+  const flags = dev ? [DEV_FLAG[packageManager]] : []
+  return {command: packageManager, args: [verb, ...flags, ...specs]}
+}
+
+/**
+ * Runs the install with inherited stdio. Returns a structured result so the
+ * caller can explain a peer-dependency conflict in plain language instead of
+ * failing silently.
+ */
+export function runInstall(
+  cwd: string,
+  packageManager: PackageManager,
+  specs: string[],
+  {dev = false} = {},
+): InstallResult {
+  const {command, args} = installCommand(packageManager, specs, {dev})
+  // On Windows the package managers are .cmd shims, and spawning them without a
+  // shell throws (ENOENT, or EINVAL since the Node .cmd security fix). The args
+  // are package specs we build ourselves, so there is nothing to escape.
+  const result = spawnSync(command, args, {cwd, stdio: 'inherit', shell: process.platform === 'win32'})
+
+  if (result.error) {
+    return {ok: false, reason: 'spawn', message: result.error.message, command, args}
+  }
+  if (result.status !== 0) {
+    return {ok: false, reason: 'exit', status: result.status, command, args}
+  }
+  return {ok: true, command, args}
+}
