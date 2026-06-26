@@ -12,6 +12,15 @@ describe('hasStylesImport', () => {
     expect(hasStylesImport(`import "@sanity-labs/ui-poc/styles.css"`)).toBe(true)
     expect(hasStylesImport(`import './app.css'`)).toBe(false)
   })
+
+  it('matches a require of the stylesheet', () => {
+    expect(hasStylesImport(`require('@sanity-labs/ui-poc/styles.css')`)).toBe(true)
+  })
+
+  it('ignores a commented-out or string mention of the path', () => {
+    expect(hasStylesImport(`// import '@sanity-labs/ui-poc/styles.css'`)).toBe(false)
+    expect(hasStylesImport(`const note = 'see @sanity-labs/ui-poc/styles.css'`)).toBe(false)
+  })
 })
 
 describe('wireStylesheet', () => {

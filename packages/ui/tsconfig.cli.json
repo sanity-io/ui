@@ -13,7 +13,6 @@
     "noEmit": false,
     "declaration": false,
     "declarationMap": false,
-    "sourceMap": false,
-    "noCheck": true
+    "sourceMap": false
   }
 }

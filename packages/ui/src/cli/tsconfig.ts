@@ -174,9 +174,11 @@ export function planTsconfigChanges(effective: Record<string, unknown>): Tsconfi
   const module = opts['module']
   const moduleLower = typeof module === 'string' ? module.toLowerCase() : null
   const moduleCompatible = Boolean(moduleLower && BUNDLER_MODULES.has(moduleLower))
-  if (!module) {
-    changes.push({key: 'module', from: undefined, to: 'esnext', load: true})
-  } else if (resolutionWillBeBundler && !moduleCompatible) {
+  // Only enforce module when resolution is (or becomes) bundler. node16/nodenext
+  // pair with their own module values, so a missing or non-bundler module under
+  // those resolutions is left alone rather than forced to esnext (which would be
+  // an invalid combination and could change a NodeNext project's semantics).
+  if (resolutionWillBeBundler && !moduleCompatible) {
     changes.push({key: 'module', from: module, to: 'esnext', load: true})
   }
 

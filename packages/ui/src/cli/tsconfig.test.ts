@@ -58,6 +58,16 @@ describe('planTsconfigChanges', () => {
     expect(keysChanged(changes)).toEqual([])
   })
 
+  it('does not force module when resolution is nodenext and module is missing', () => {
+    const changes = planTsconfigChanges({
+      jsx: 'react-jsx',
+      moduleResolution: 'nodenext',
+      lib: ['DOM', 'DOM.Iterable', 'ES2022'],
+      skipLibCheck: true,
+    })
+    expect(changes.find((c) => c.key === 'module')).toBeUndefined()
+  })
+
   it('adds only missing DOM libs and keeps the existing ES baseline', () => {
     const changes = planTsconfigChanges({
       jsx: 'react-jsx',
