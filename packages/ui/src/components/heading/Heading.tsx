@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type HeadingProps, headingProps} from './heading.props'
 
+const headingClassname = getVersionedClassname('sui-Heading')
+
 /** @public */
 export function Heading<T extends ElementType = 'h2'>({
   size = 2,
@@ -17,10 +19,7 @@ export function Heading<T extends ElementType = 'h2'>({
   if (props.lineClamp && props.trim) {
     return (
       <Component
-        className={classNames(
-          getVersionedClassname('sui-Heading'),
-          className?.replace('sui-line-clamp', ''),
-        )}
+        className={classNames(headingClassname, className?.replace('sui-line-clamp', ''))}
         style={style}
         data-ui="Heading"
         {...rest}
@@ -32,7 +31,7 @@ export function Heading<T extends ElementType = 'h2'>({
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-Heading'), className)}
+      className={classNames(headingClassname, className)}
       style={style}
       data-ui="Heading"
       {...rest}

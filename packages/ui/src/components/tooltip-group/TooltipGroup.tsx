@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type TooltipGroupProps, tooltipGroupProps} from './tooltipGroup.props'
 
+const tooltipGroupClassname = getVersionedClassname('sui-TooltipGroup')
+
 /** @public */
 export function TooltipGroup<T extends ElementType = 'div'>(
   props: TooltipGroupProps<T> & Omit<ComponentPropsWithRef<T>, keyof TooltipGroupProps<T>>,
@@ -43,7 +45,7 @@ export function TooltipGroup<T extends ElementType = 'div'>(
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-TooltipGroup'), className)}
+      className={classNames(tooltipGroupClassname, className)}
       style={{
         ...style,
         ...(isActive && {

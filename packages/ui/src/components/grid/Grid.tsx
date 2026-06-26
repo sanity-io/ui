@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type GridProps, gridProps} from './grid.props'
 
+const gridClassname = getVersionedClassname('sui-Grid')
+
 /** @public */
 export function Grid<T extends ElementType = 'div'>({
   display = 'grid',
@@ -15,7 +17,7 @@ export function Grid<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-Grid'), className)}
+      className={classNames(gridClassname, className)}
       style={style}
       data-ui="Grid"
       {...rest}

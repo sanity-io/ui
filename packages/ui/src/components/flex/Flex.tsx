@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type FlexProps, flexProps} from './flex.props'
 
+const flexClassname = getVersionedClassname('sui-Flex')
+
 /** @public */
 export function Flex<T extends ElementType = 'div'>({
   display = 'flex',
@@ -15,7 +17,7 @@ export function Flex<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-Flex'), className)}
+      className={classNames(flexClassname, className)}
       style={style}
       data-ui="Flex"
       {...rest}

@@ -6,6 +6,8 @@ import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {HStack} from '../h-stack/HStack'
 import {type IndicatorStackProps, indicatorStackProps} from './indicatorStack.props'
 
+const indicatorStackClassname = getVersionedClassname('sui-IndicatorStack')
+
 /** @public */
 export function IndicatorStack<T extends ElementType = 'div'>(
   props: IndicatorStackProps<T> & Omit<ComponentPropsWithRef<T>, keyof IndicatorStackProps<T>>,
@@ -16,7 +18,7 @@ export function IndicatorStack<T extends ElementType = 'div'>(
   return (
     <HStack
       as={Component}
-      className={classNames(getVersionedClassname('sui-IndicatorStack'), className)}
+      className={classNames(indicatorStackClassname, className)}
       style={style}
       data-ui="IndicatorStack"
       {...rest}

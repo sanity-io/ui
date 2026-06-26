@@ -7,6 +7,8 @@ import {Text} from '../text/Text'
 import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
 import {type SkipToContentProps, skipToContentProps} from './skipToContent.props'
 
+const skipToContentClassname = getVersionedClassname('sui-SkipToContent')
+
 /** @beta */
 export function SkipToContent(props: SkipToContentProps) {
   const {className, hash, label, style, ...rest} = getProps(props, skipToContentProps)
@@ -17,7 +19,7 @@ export function SkipToContent(props: SkipToContentProps) {
       href={hash}
       underlined={false}
       className={classNames(
-        getVersionedClassname('sui-SkipToContent'),
+        skipToContentClassname,
         'sui-position-absolute sui-top2 sui-left2 sui-display-inline-block sui-z-index sui-py2 sui-px3 sui-radius2 sui-text-body1',
         className,
       )}

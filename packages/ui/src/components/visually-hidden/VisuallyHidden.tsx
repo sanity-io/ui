@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type VisuallyHiddenProps, visuallyHiddenProps} from './visuallyHidden.props'
 
+const visuallyHiddenClassname = getVersionedClassname('sui-VisuallyHidden')
+
 /** @public */
 export function VisuallyHidden<T extends ElementType = 'span'>(
   props: VisuallyHiddenProps<T> & Omit<ComponentPropsWithRef<T>, keyof VisuallyHiddenProps<T>>,
@@ -14,7 +16,7 @@ export function VisuallyHidden<T extends ElementType = 'span'>(
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-VisuallyHidden'), className)}
+      className={classNames(visuallyHiddenClassname, className)}
       style={style}
       data-ui="VisuallyHidden"
       {...rest}

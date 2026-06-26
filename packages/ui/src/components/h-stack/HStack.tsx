@@ -6,6 +6,8 @@ import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Flex} from '../flex/Flex'
 import {type HStackProps, hStackProps} from './hStack.props'
 
+const hStackClassname = getVersionedClassname('sui-HStack')
+
 /** @public */
 export function HStack<T extends ElementType = 'div'>(
   props: HStackProps<T> & Omit<ComponentPropsWithRef<T>, keyof HStackProps<T>>,
@@ -16,7 +18,7 @@ export function HStack<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={classNames(getVersionedClassname('sui-HStack'), className)}
+      className={classNames(hStackClassname, className)}
       style={style}
       data-ui="HStack"
       display="inline-flex"

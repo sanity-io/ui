@@ -4,6 +4,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type LinkProps, linkProps} from './link.props'
 
+const linkClassname = getVersionedClassname('sui-Link')
+
 /** @beta */
 export function Link({underlined = true, ...props}: LinkProps) {
   const {children, className, style, openInNewTab, ...rest} = getProps(
@@ -13,7 +15,7 @@ export function Link({underlined = true, ...props}: LinkProps) {
 
   return (
     <a
-      className={classNames(getVersionedClassname('sui-Link'), className)}
+      className={classNames(linkClassname, className)}
       style={style}
       data-ui="Link"
       {...(openInNewTab ? {target: '_blank', rel: 'noopener noreferrer'} : {})}

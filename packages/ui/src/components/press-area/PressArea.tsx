@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type PressAreaProps, pressAreaProps} from './pressArea.props'
 
+const pressAreaClassname = getVersionedClassname('sui-PressArea')
+
 /** @public */
 export function PressArea<T extends ElementType = 'button'>(
   props: PressAreaProps<T> & Omit<ComponentPropsWithRef<T>, keyof PressAreaProps<T>>,
@@ -14,7 +16,7 @@ export function PressArea<T extends ElementType = 'button'>(
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-PressArea'), 'sui-width-full', className)}
+      className={classNames(pressAreaClassname, 'sui-width-full', className)}
       style={style}
       data-ui="PressArea"
       {...rest}

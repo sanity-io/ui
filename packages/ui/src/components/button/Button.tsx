@@ -8,6 +8,8 @@ import {Spinner} from '../spinner/Spinner'
 import {Text} from '../text/Text'
 import {type ButtonProps, buttonProps} from './button.props'
 
+const buttonClassname = getVersionedClassname('sui-Button')
+
 /** @public */
 export function Button<T extends ElementType = 'button'>({
   density = 'regular',
@@ -32,7 +34,7 @@ export function Button<T extends ElementType = 'button'>({
   return (
     <Component
       className={classNames(
-        getVersionedClassname('sui-Button'),
+        buttonClassname,
         'sui-display-inline-flex sui-align-items-center sui-justify-content-center sui-radius2 sui-position-relative sui-overflow-hidden',
         className,
       )}

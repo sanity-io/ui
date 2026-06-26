@@ -6,6 +6,8 @@ import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Box} from '../box/Box'
 import {type IndicatorProps, indicatorProps} from './indicator.props'
 
+const indicatorClassname = getVersionedClassname('sui-Indicator')
+
 /** @beta */
 export function Indicator<T extends ElementType = 'span'>({
   tone = 'neutral',
@@ -21,7 +23,7 @@ export function Indicator<T extends ElementType = 'span'>({
   return (
     <Box
       as={Component}
-      className={classNames(getVersionedClassname('sui-Indicator'), className)}
+      className={classNames(indicatorClassname, className)}
       style={style}
       data-ui="Indicator"
       width="5px"

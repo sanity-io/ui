@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type CardProps, cardProps} from './card.props'
 
+const cardClassname = getVersionedClassname('sui-Card')
+
 /** @public */
 export function Card<T extends ElementType = 'div'>({
   density = 'regular',
@@ -16,7 +18,7 @@ export function Card<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-Card'), 'sui-border', className)}
+      className={classNames(cardClassname, 'sui-border', className)}
       style={style}
       data-ui="Card"
       {...rest}

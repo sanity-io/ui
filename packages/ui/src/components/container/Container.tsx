@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type ContainerProps, containerProps} from './container.props'
 
+const containerClassname = getVersionedClassname('sui-Container')
+
 /** @public */
 export function Container<T extends ElementType = 'div'>({
   marginX = 'auto',
@@ -15,7 +17,7 @@ export function Container<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-Container'), className)}
+      className={classNames(containerClassname, className)}
       style={style}
       data-ui="Container"
       {...rest}

@@ -6,6 +6,8 @@ import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Flex} from '../flex/Flex'
 import {type VStackProps, vStackProps} from './vStack.props'
 
+const vStackClassname = getVersionedClassname('sui-VStack')
+
 /** @public */
 export function VStack<T extends ElementType = 'div'>(
   props: VStackProps<T> & Omit<ComponentPropsWithRef<T>, keyof VStackProps<T>>,
@@ -16,7 +18,7 @@ export function VStack<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={classNames(getVersionedClassname('sui-VStack'), className)}
+      className={classNames(vStackClassname, className)}
       style={style}
       data-ui="VStack"
       flexDirection="column"

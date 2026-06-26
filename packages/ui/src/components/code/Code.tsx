@@ -8,6 +8,8 @@ import {type CodeProps, codeProps} from './code.props'
 
 const LazyRefractor = lazy(() => import('./LazyRefractor'))
 
+const codeClassname = getVersionedClassname('sui-Code')
+
 /** @public */
 export function Code<T extends CodeTag = 'pre'>({
   size = 2,
@@ -19,7 +21,7 @@ export function Code<T extends CodeTag = 'pre'>({
   if (!language) {
     return (
       <Component
-        className={classNames(getVersionedClassname('sui-Code'), className)}
+        className={classNames(codeClassname, className)}
         style={style}
         data-ui="Code"
         {...rest}
@@ -31,7 +33,7 @@ export function Code<T extends CodeTag = 'pre'>({
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-Code'), className)}
+      className={classNames(codeClassname, className)}
       style={style}
       data-ui="Code"
       {...rest}

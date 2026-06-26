@@ -6,6 +6,9 @@ import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {Box} from '../box/Box'
 import {type TooltipProps, tooltipProps} from './tooltip.props'
 
+const tooltipClassname = getVersionedClassname('sui-Tooltip')
+const tooltipDismissedClassname = getVersionedClassname('sui-Tooltip-Dismissed')
+
 /** @public */
 export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
   const {
@@ -66,8 +69,8 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
 
       <Box
         className={classNames(
-          getVersionedClassname('sui-Tooltip'),
-          dismissed ? getVersionedClassname('sui-Tooltip-Dismissed') : '',
+          tooltipClassname,
+          dismissed ? tooltipDismissedClassname : '',
           className,
         )}
         role="tooltip"

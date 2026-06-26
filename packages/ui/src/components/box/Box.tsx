@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type BoxProps, boxProps} from './box.props'
 
+const boxClassname = getVersionedClassname('sui-Box')
+
 /** @public */
 export function Box<T extends ElementType = 'div'>({
   display = 'block',
@@ -15,7 +17,7 @@ export function Box<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-Box'), className)}
+      className={classNames(boxClassname, className)}
       style={style}
       data-ui="Box"
       {...rest}

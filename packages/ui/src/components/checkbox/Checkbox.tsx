@@ -9,6 +9,10 @@ import {Label} from '../label/Label'
 import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
 import {type CheckboxProps, checkboxProps} from './checkbox.props'
 
+const checkboxClassname = getVersionedClassname('sui-Checkbox')
+const checkboxInputClassname = getVersionedClassname('sui-CheckboxInput')
+const checkboxMarkClassname = getVersionedClassname('sui-CheckboxMark')
+
 /** @beta */
 export function Checkbox(props: CheckboxProps) {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -25,7 +29,7 @@ export function Checkbox(props: CheckboxProps) {
 
   return (
     <Label
-      className={classNames(getVersionedClassname('sui-Checkbox'), className)}
+      className={classNames(checkboxClassname, className)}
       style={style}
       data-ui="Checkbox"
       disabled={disabled}
@@ -34,7 +38,7 @@ export function Checkbox(props: CheckboxProps) {
       <VisuallyHidden
         as="input"
         type="checkbox"
-        className={getVersionedClassname('sui-CheckboxInput')}
+        className={checkboxInputClassname}
         ref={inputRef}
         disabled={disabled}
         {...rest}
@@ -42,7 +46,7 @@ export function Checkbox(props: CheckboxProps) {
 
       <Box
         as="span"
-        className={classNames(getVersionedClassname('sui-CheckboxMark'), error && 'sui-error')}
+        className={classNames(checkboxMarkClassname, error && 'sui-error')}
         position="relative"
         radius={2}
         width="17px"

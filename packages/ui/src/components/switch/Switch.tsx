@@ -7,13 +7,17 @@ import {Label} from '../label/Label'
 import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
 import {type SwitchProps, switchProps} from './switch.props'
 
+const switchClassname = getVersionedClassname('sui-Switch')
+const switchInputClassname = getVersionedClassname('sui-SwitchInput')
+const switchMarkClassname = getVersionedClassname('sui-SwitchMark')
+
 /** @beta */
 export function Switch(props: SwitchProps) {
   const {className, style, disabled, error, label, ...rest} = getProps(props, switchProps)
 
   return (
     <Label
-      className={classNames(getVersionedClassname('sui-Switch'), className)}
+      className={classNames(switchClassname, className)}
       style={style}
       data-ui="Switch"
       disabled={props.disabled}
@@ -23,14 +27,14 @@ export function Switch(props: SwitchProps) {
         as="input"
         type="checkbox"
         role="switch"
-        className={getVersionedClassname('sui-SwitchInput')}
+        className={switchInputClassname}
         disabled={disabled}
         {...rest}
       />
 
       <Flex
         as="span"
-        className={classNames(getVersionedClassname('sui-SwitchMark'), error && 'sui-error')}
+        className={classNames(switchMarkClassname, error && 'sui-error')}
         alignItems="center"
         radius={6}
         aria-hidden="true"

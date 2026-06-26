@@ -7,6 +7,8 @@ import {Button} from '../button/Button'
 import {Icon} from '../icon/Icon'
 import {type IconButtonProps, iconButtonProps} from './iconButton.props'
 
+const iconButtonClassname = getVersionedClassname('sui-IconButton')
+
 /** @public */
 export function IconButton<T extends ElementType = 'button'>(
   props: IconButtonProps<T> & Omit<ComponentPropsWithRef<T>, keyof IconButtonProps<T>>,
@@ -17,7 +19,7 @@ export function IconButton<T extends ElementType = 'button'>(
   return (
     <Button
       as={Component}
-      className={classNames(getVersionedClassname('sui-IconButton'), className)}
+      className={classNames(iconButtonClassname, className)}
       style={style}
       data-ui="IconButton"
       {...rest}

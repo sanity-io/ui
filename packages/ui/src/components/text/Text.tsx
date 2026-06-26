@@ -5,6 +5,8 @@ import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
 import {type TextProps, textProps} from './text.props'
 
+const textClassname = getVersionedClassname('sui-Text')
+
 /** @public */
 export function Text<T extends ElementType = 'span'>({
   size = 2,
@@ -16,10 +18,7 @@ export function Text<T extends ElementType = 'span'>({
   if (props.lineClamp && props.trim) {
     return (
       <Component
-        className={classNames(
-          getVersionedClassname('sui-Text'),
-          className?.replace('sui-line-clamp', ''),
-        )}
+        className={classNames(textClassname, className?.replace('sui-line-clamp', ''))}
         style={style}
         data-ui="Text"
         {...rest}
@@ -31,7 +30,7 @@ export function Text<T extends ElementType = 'span'>({
 
   return (
     <Component
-      className={classNames(getVersionedClassname('sui-Text'), className)}
+      className={classNames(textClassname, className)}
       style={style}
       data-ui="Text"
       {...rest}
