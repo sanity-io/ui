@@ -5,7 +5,7 @@ import {join} from 'node:path'
 import {parse} from 'comment-json'
 import {afterEach, beforeEach, describe, expect, it} from 'vitest'
 
-import {planTsconfigChanges, reconcileTsconfig} from './tsconfig.js'
+import {planTsconfigChanges, reconcileTsconfig, resolveTargetTsconfig} from './tsconfig.js'
 import type {TsconfigChange} from './types.js'
 
 function keysChanged(changes: TsconfigChange[]): string[] {
@@ -149,5 +149,26 @@ describe('reconcileTsconfig', () => {
     const result = reconcileTsconfig(dir)
     expect(result.file.endsWith('tsconfig.app.json')).toBe(true)
     expect(keysChanged(result.changes)).toEqual(['lib'])
+  })
+
+  it('skips a referenced config without compilerOptions and picks one that has them', () => {
+    writeFileSync(
+      join(dir, 'tsconfig.json'),
+      `{"files": [], "references": [{"path": "./tsconfig.app.json"}, {"path": "./tsconfig.node.json"}]}\n`,
+    )
+    // The "app" config is preferred by name but carries no options, so it must be skipped.
+    writeFileSync(join(dir, 'tsconfig.app.json'), `{"extends": "./base.json"}\n`)
+    writeFileSync(
+      join(dir, 'tsconfig.node.json'),
+      `{"compilerOptions": {"moduleResolution": "bundler"}}\n`,
+    )
+    const target = resolveTargetTsconfig(dir)
+    expect(target.file.endsWith('tsconfig.node.json')).toBe(true)
+  })
+
+  it('treats a non-object tsconfig.json as unreadable instead of crashing', () => {
+    writeFileSync(join(dir, 'tsconfig.json'), `null\n`)
+    expect(resolveTargetTsconfig(dir).unreadable).toBe(true)
+    expect(reconcileTsconfig(dir).unreadable).toBe(true)
   })
 })

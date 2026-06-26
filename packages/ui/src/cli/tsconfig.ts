@@ -59,7 +59,13 @@ export interface TsconfigResult {
 }
 
 function readJsonc(file: string): TsconfigDoc {
-  return parse(readFileSync(file, 'utf8')) as unknown as TsconfigDoc
+  const data = parse(readFileSync(file, 'utf8'))
+  // comment-json happily parses valid-but-non-object JSON (null, true, []). Treat
+  // those as unreadable so callers don't crash on later property reads.
+  if (typeof data !== 'object' || data === null || Array.isArray(data)) {
+    throw new Error('tsconfig.json is not an object')
+  }
+  return data as unknown as TsconfigDoc
 }
 
 /**
@@ -89,7 +95,19 @@ export function resolveTargetTsconfig(cwd: string): {file: string; exists: boole
     .map((p) => join(cwd, p.endsWith('.json') ? p : join(p, 'tsconfig.json')))
     .filter((p) => existsSync(p))
 
-  const appConfig = referenced.find((p) => p.includes('app')) ?? referenced[0]
+  // Keep only references we can parse and that actually carry compilerOptions, so
+  // we never write into a reference that has none or crash on an unreadable one.
+  // Prefer an "app" config, the common Vite solution-style layout.
+  const withOptions = referenced.filter((p) => {
+    try {
+      const doc = readJsonc(p)
+      return Boolean(doc.compilerOptions && Object.keys(doc.compilerOptions).length > 0)
+    } catch {
+      return false
+    }
+  })
+
+  const appConfig = withOptions.find((p) => p.includes('app')) ?? withOptions[0]
   return {file: appConfig ?? root, exists: true}
 }
 
