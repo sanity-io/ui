@@ -1,7 +1,6 @@
 import '@sanity-labs/ui-poc/styles.css'
-
-import {AddIcon} from '@sanity/icons'
 import {Box, Card, Divider, Flex, Grid, Heading, Icon, Text} from '@sanity-labs/ui-poc'
+import {AddIcon} from '@sanity/icons'
 import {Profiler} from 'react'
 
 const count = 5000

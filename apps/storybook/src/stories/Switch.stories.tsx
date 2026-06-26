@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import {expect, waitFor} from 'storybook/test'
+import {expect} from 'storybook/test'
 
 import {Switch} from '../../../../packages/ui/src/components/switch/Switch'
 import {switchProps} from '../../../../packages/ui/src/components/switch/switch.props'

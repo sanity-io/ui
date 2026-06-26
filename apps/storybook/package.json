@@ -7,7 +7,6 @@
     "build": "storybook build",
     "chromatic": "npx chromatic --build-script-name build",
     "dev": "storybook dev -p 6006",
-    "lint": "eslint .",
     "test": "vitest --project=storybook"
   },
   "dependencies": {
@@ -18,8 +17,9 @@
     "refractor": "^5.0.0"
   },
   "devDependencies": {
+    "@babel/core": "catalog:",
     "@chromatic-com/storybook": "^4.0.0",
-    "@repo/eslint-config": "workspace:*",
+    "@rolldown/plugin-babel": "catalog:",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/addon-vitest": "^10.3.3",
@@ -30,11 +30,7 @@
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/browser-playwright": "^4.1.1",
     "@vitest/coverage-v8": "^4.1.1",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "eslint-plugin-storybook": "^10.3.3",
-    "globals": "^17.4.0",
+    "babel-plugin-react-compiler": "catalog:",
     "playwright": "^1.58.2",
     "storybook": "^10.3.3",
     "storybook-dark-mode": "^5.0.0",

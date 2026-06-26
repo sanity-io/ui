@@ -2,11 +2,11 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect, waitFor} from 'storybook/test'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
-import {Tooltip} from '../../../../packages/ui/src/components/tooltip/Tooltip'
+import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
 import {TooltipGroup} from '../../../../packages/ui/src/components/tooltip-group/TooltipGroup'
 import {tooltipGroupProps} from '../../../../packages/ui/src/components/tooltip-group/tooltipGroup.props'
+import {Tooltip} from '../../../../packages/ui/src/components/tooltip/Tooltip'
 import {getArgTypes} from '../utils/getArgTypes'
-import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
 
 const argTypes = getArgTypes(tooltipGroupProps)
 

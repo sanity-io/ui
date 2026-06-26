@@ -4,8 +4,9 @@
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 
+import babel from '@rolldown/plugin-babel'
 import {storybookTest} from '@storybook/addon-vitest/vitest-plugin'
-import react from '@vitejs/plugin-react'
+import react, {reactCompilerPreset} from '@vitejs/plugin-react'
 import {playwright} from '@vitest/browser-playwright'
 import {defineConfig} from 'vite'
 import {coverageConfigDefaults} from 'vitest/config'
@@ -15,7 +16,7 @@ const monorepoDirname = path.resolve(dirname, '../..')
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), babel({presets: [reactCompilerPreset({target: '19'})]})],
   test: {
     coverage: {
       provider: 'v8',

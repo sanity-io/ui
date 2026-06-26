@@ -1,5 +1,4 @@
 import '@sanity-labs/ui-poc/styles.css'
-
 import {Button, Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
 
 function App() {
