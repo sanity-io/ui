@@ -8,7 +8,6 @@ const BREAKPOINTS_LENGTH = 6
 interface ComponentProps {
   className?: string | undefined
   style?: React.CSSProperties | undefined
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   [key: string]: any
 }
 
@@ -31,6 +30,8 @@ export function getProps(
     }
 
     if (Array.isArray(propValue)) {
+      // @TODO: consider fixing this O(n^2) time complexity
+      // oxlint-disable-next-line no-accumulating-spread
       for (let i = 0, len = Math.min(propValue.length, BREAKPOINTS_LENGTH); i < len; i++) {
         className = classNames(className, getClassName(propValue[i], propDef, i))
         style = {...style, ...getStyle(propValue[i], propDef, i)}
@@ -44,7 +45,6 @@ export function getProps(
   return {...restProps, className, style}
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 function getClassName(propValue: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'union' && propDef.values?.includes(propValue)) {
     /* Note: This may need updating depending on the final CSS classname formatting */
@@ -68,7 +68,6 @@ function getClassName(propValue: any, propDef: PropDef, bp?: number) {
   return ''
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 function getStyle(propValue: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'string' || propDef.type === 'number') {
     return {
@@ -106,7 +105,6 @@ export function flattenCompositeProps(
   return props
 }
 
-/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 function getCompositeValue(propValue: any, propDef: PropDef, key: string) {
   if (!('composition' in propDef)) {
     return

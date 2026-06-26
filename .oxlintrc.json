@@ -1,0 +1,87 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "react",
+    "react-perf",
+    "oxc",
+    "import",
+    "jsx-a11y",
+    "promise"
+  ],
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/.next/**",
+    "**/storybook-static/**",
+    "**/out/**",
+    "**/build/**",
+    "**/next-env.d.ts",
+    "pnpm-lock.yaml"
+  ],
+  "options": {
+    "denyWarnings": true,
+    "reportUnusedDisableDirectives": "error",
+    "typeAware": true
+    // @TODO: Swap to oxlint for type checking later
+    // "typeCheck": true
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error"
+  },
+  "rules": {
+    "eslint/no-console": ["error", {"allow": ["warn", "error"]}],
+    "eslint/no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "react",
+            "importNames": ["useMemo", "useCallback", "memo"],
+            "message": "Rely on the React Compiler for memoization instead of useMemo, useCallback, or memo."
+          }
+        ]
+      }
+    ],
+    "import/no-unassigned-import": ["error", {"allow": ["**/*.css"]}],
+    "react/exhaustive-deps": "error",
+    "react/react-compiler": "error",
+    "react/rules-of-hooks": "error",
+    "typescript/no-deprecated": "error",
+    "unicorn/no-abusive-eslint-disable": "error",
+    // Not necessary since react compiler handles it
+    "react-perf/jsx-no-new-array-as-prop": "off",
+    "react-perf/jsx-no-jsx-as-prop": "off",
+    "react-perf/jsx-no-new-object-as-prop": "off",
+    "react-perf/jsx-no-new-function-as-prop": "off",
+    // We use JSX automatic runtime insertion so React does not need to be in scope
+    "react/react-in-jsx-scope": "off",
+    // Maybe consider enabling in the future
+    "import/no-named-as-default-member": "off",
+    "import/no-named-as-default": "off",
+    "jsx-a11y/alt-text": "off",
+    "jsx-a11y/prefer-tag-over-role": "off",
+    "jsx-a11y/role-has-required-aria-props": "off",
+    "no-empty-pattern": "off",
+    "typescript/await-thenable": "off",
+    "typescript/consistent-return": "off",
+    "typescript/no-floating-promises": "off",
+    "typescript/no-redundant-type-constituents": "off",
+    "typescript/no-unnecessary-template-expression": "off",
+    "typescript/no-unnecessary-type-assertion": "off",
+    "typescript/no-unnecessary-type-parameters": "off",
+    "typescript/no-unsafe-type-assertion": "off",
+    "unicorn/no-array-reverse": "off",
+    "unicorn/no-array-sort": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/stories/**/*.tsx"],
+      "rules": {
+        "no-deprecated": "off"
+      }
+    }
+  ]
+}

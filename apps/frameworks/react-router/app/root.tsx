@@ -1,7 +1,7 @@
+import {Container, Flex, Heading, Text} from '@sanity-labs/ui-poc'
 import {isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration} from 'react-router'
 
 import type {Route} from './+types/root'
-import {Container, Flex, Heading, Text} from '@sanity-labs/ui-poc'
 
 export function Layout({children}: {children: React.ReactNode}) {
   return (

@@ -65,7 +65,7 @@ export const Sizes: Story = {
     return (
       <>
         {ICON_SIZE.map((size) => (
-          <Flex alignItems="center">
+          <Flex key={size} alignItems="center">
             <Icon {...props} size={size} aria-label={`Icon Size ${size}`} />
             <Text size={size}>({['17px', '21px', '25px', '29px', '33px'][size]})</Text>
           </Flex>
@@ -86,6 +86,7 @@ export const Tones: Story = {
       <Flex alignItems="center" gap={4}>
         {TONE.map((tone) => (
           <Icon
+            key={tone}
             {...props}
             tone={tone}
             aria-label={`Icon Tone ${tone[0].toUpperCase() + tone.slice(1)}`}

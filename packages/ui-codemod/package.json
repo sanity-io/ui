@@ -5,8 +5,15 @@
   "keywords": [],
   "license": "ISC",
   "author": "",
-  "sideEffects": false,
+  "bin": {
+    "ui-poc-codemod": "./bin/run.js"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "type": "module",
+  "sideEffects": false,
   "exports": {
     "./transforms/latest/box": {
       "source": "./src/transforms/latest/box/box.ts",
@@ -74,19 +81,46 @@
     },
     "./package.json": "./package.json"
   },
-  "bin": {
-    "ui-poc-codemod": "./bin/run.js"
+  "publishConfig": {
+    "exports": {
+      "./transforms/latest/box": "./dist/transforms/latest/box/box.js",
+      "./latest/box": "./dist/commands/latest/box.js",
+      "./transforms/latest/card": "./dist/transforms/latest/card/card.js",
+      "./latest/card": "./dist/commands/latest/card.js",
+      "./transforms/latest/code": "./dist/transforms/latest/code/code.js",
+      "./latest/code": "./dist/commands/latest/code.js",
+      "./transforms/latest/container": "./dist/transforms/latest/container/container.js",
+      "./latest/container": "./dist/commands/latest/container.js",
+      "./transforms/latest/flex": "./dist/transforms/latest/flex/flex.js",
+      "./latest/flex": "./dist/commands/latest/flex.js",
+      "./transforms/latest/grid": "./dist/transforms/latest/grid/grid.js",
+      "./latest/grid": "./dist/commands/latest/grid.js",
+      "./transforms/latest/heading": "./dist/transforms/latest/heading/heading.js",
+      "./latest/heading": "./dist/commands/latest/heading.js",
+      "./transforms/latest/text": "./dist/transforms/latest/text/text.js",
+      "./latest/text": "./dist/commands/latest/text.js",
+      "./package.json": "./package.json"
+    }
   },
-  "files": [
-    "dist",
-    "src"
-  ],
   "scripts": {
     "build": "pkg build --strict --clean --check",
-    "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "eslint .",
     "test": "vitest run",
     "ts:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@oclif/core": "^4.10.5",
+    "@types/jscodeshift": "^17.3.0",
+    "jscodeshift": "^17.3.0"
+  },
+  "devDependencies": {
+    "@sanity/browserslist-config": "^1.0.5",
+    "@sanity/pkg-utils": "catalog:",
+    "@sanity/tsconfig": "^1.0.0",
+    "@types/node": "^25.5.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.1"
   },
   "browserslist": "extends @sanity/browserslist-config",
   "oclif": {
@@ -99,23 +133,6 @@
         "description": "Migrate to latest version of UI"
       }
     }
-  },
-  "dependencies": {
-    "@oclif/core": "^4.10.5",
-    "@types/jscodeshift": "^17.3.0",
-    "jscodeshift": "^17.3.0"
-  },
-  "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/pkg-utils": "^9.2.3",
-    "@sanity/tsconfig": "^1.0.0",
-    "@types/node": "^25.5.2",
-    "eslint": "^9.22.0",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "vitest": "^4.1.1"
   },
   "packageManager": "pnpm@10.17.0"
 }

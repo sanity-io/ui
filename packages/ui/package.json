@@ -7,16 +7,21 @@
   "bugs": {
     "url": "https://github.com/sanity-labs/ui-poc/issues"
   },
+  "license": "ISC",
+  "author": "Sanity",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sanity-labs/ui-poc.git"
   },
-  "license": "ISC",
-  "author": "Sanity",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "sideEffects": [
     "*.css"
   ],
-  "type": "module",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "source": "./src/index.ts",
@@ -25,11 +30,13 @@
     "./package.json": "./package.json",
     "./styles.css": "./dist/styles.css"
   },
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
-  ],
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.js",
+      "./package.json": "./package.json",
+      "./styles.css": "./dist/styles.css"
+    }
+  },
   "scripts": {
     "build": "pnpm run clean && pnpm run build:css && pnpm run build:js",
     "build:css": "NODE_ENV=production postcss src/index.css -o dist/styles.css",
@@ -38,8 +45,6 @@
     "dev": "concurrently -n css,js \"pnpm run dev:css\" \"pnpm run dev:js\"",
     "dev:css": "postcss src/index.css -o dist/styles.css --watch",
     "dev:js": "pkg watch",
-    "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "eslint .",
     "test": "vitest run",
     "ts:check": "tsc --noEmit"
   },
@@ -48,16 +53,16 @@
     "classnames": "^2.5.1"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "@sanity/browserslist-config": "^1.0.5",
-    "@sanity/pkg-utils": "^9.2.3",
+    "@sanity/pkg-utils": "catalog:",
     "@sanity/tsconfig": "^1.0.0",
+    "@types/node": "^25.5.2",
     "@types/postcss-import": "^14.0.3",
     "@types/react": "^19.2.14",
     "autoprefixer": "^10.4.27",
+    "babel-plugin-react-compiler": "catalog:",
     "concurrently": "^9.2.1",
     "cssnano": "^8.0.0",
-    "eslint": "^9.22.0",
     "postcss": "^8.5.8",
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",
@@ -76,8 +81,8 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@10.17.0",
   "engines": {
     "node": ">=20.19 <22 || >=22.12"
-  }
+  },
+  "packageManager": "pnpm@10.17.0"
 }

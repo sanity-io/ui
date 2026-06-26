@@ -1,5 +1,5 @@
-name: "Set up environment"
-description: "Set up node and pnpm and install dependencies"
+name: 'Set up environment'
+description: 'Set up node and pnpm and install dependencies'
 
 runs:
   using: composite

@@ -48,6 +48,7 @@ function createUi() {
   fs.writeFileSync(storyFile, getStoryFile(componentName, propsName, name))
   fs.appendFileSync(indexFile, `export * from './components/${name}/${componentName}'\n`)
 
+  // oxlint-disable-next-line no-console
   console.log('\x1b[32m', `Successfully created ${componentName} component`)
 }
 

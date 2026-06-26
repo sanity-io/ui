@@ -113,7 +113,7 @@ export const Tones: Story = {
     return (
       <VStack gap={3}>
         {BUTTON_LEVEL.map((level) => (
-          <HStack gap="inherit">
+          <HStack key={level} gap="inherit">
             {BUTTON_TONE.map((tone) => (
               <IconButton
                 {...props}

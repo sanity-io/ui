@@ -1,5 +1,4 @@
 import 'ui4/css/index.css'
-
 import {AddIcon} from '@sanity/icons'
 import {Profiler} from 'react'
 import {Box, Card, Flex, Grid, Heading, Root, Text} from 'ui4'

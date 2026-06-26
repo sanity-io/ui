@@ -2,4 +2,15 @@ packages:
   - apps/*
   - apps/frameworks/*
   - packages/*
-  - packages/@repo/*
+
+catalog:
+  '@babel/core': ^8.0.1
+  '@rolldown/plugin-babel': ^0.2.3
+  '@sanity/pkg-utils': ^10.6.0
+  babel-plugin-react-compiler: ^1.0.0
+  react: ^19.2.6
+  react-dom: ^19.2.6
+
+overrides:
+  react: 'catalog:'
+  react-dom: 'catalog:'
