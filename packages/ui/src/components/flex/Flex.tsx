@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -16,12 +16,16 @@ export function Flex<T extends ElementType = 'div'>({
   const Component = as || 'div'
 
   return (
+<<<<<<< HEAD
     <Component
       className={classNames(flexClassname, className)}
       style={style}
       data-ui="Flex"
       {...rest}
     >
+=======
+    <Component className={clsx('sui-Flex', className)} style={style} data-ui="Flex" {...rest}>
+>>>>>>> main
       {children}
     </Component>
   )

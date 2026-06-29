@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import {type ComponentPropsWithRef, lazy, Suspense} from 'react'
 
 import {type CodeTag} from '../../types/Code'
@@ -21,7 +21,7 @@ export function Code<T extends CodeTag = 'pre'>({
   if (!language) {
     return (
       <Component
-        className={classNames(codeClassname, className)}
+        className={clsx(codeClassname, className)}
         style={style}
         data-ui="Code"
         {...rest}
@@ -33,7 +33,7 @@ export function Code<T extends CodeTag = 'pre'>({
 
   return (
     <Component
-      className={classNames(codeClassname, className)}
+      className={clsx(codeClassname, className)}
       style={style}
       data-ui="Code"
       {...rest}

@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -17,7 +17,7 @@ export function Box<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames(boxClassname, className)}
+      className={clsx(boxClassname, className)}
       style={style}
       data-ui="Box"
       {...rest}

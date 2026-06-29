@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -23,7 +23,7 @@ export function Indicator<T extends ElementType = 'span'>({
   return (
     <Box
       as={Component}
-      className={classNames(indicatorClassname, className)}
+      className={clsx(indicatorClassname, className)}
       style={style}
       data-ui="Indicator"
       width="5px"

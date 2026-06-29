@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
@@ -18,7 +18,7 @@ export function SkipToContent(props: SkipToContentProps) {
       as={Link}
       href={hash}
       underlined={false}
-      className={classNames(
+      className={clsx(
         skipToContentClassname,
         'sui-position-absolute sui-top2 sui-left2 sui-display-inline-block sui-z-index sui-py2 sui-px3 sui-radius2 sui-text-body1',
         className,

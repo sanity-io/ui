@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -19,7 +19,7 @@ export function IconButton<T extends ElementType = 'button'>(
   return (
     <Button
       as={Component}
-      className={classNames(iconButtonClassname, className)}
+      className={clsx(iconButtonClassname, className)}
       style={style}
       data-ui="IconButton"
       {...rest}

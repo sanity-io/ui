@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -18,7 +18,7 @@ export function VStack<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={classNames(vStackClassname, className)}
+      className={clsx(vStackClassname, className)}
       style={style}
       data-ui="VStack"
       flexDirection="column"

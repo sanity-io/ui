@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -18,7 +18,7 @@ export function Card<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames(cardClassname, 'sui-border', className)}
+      className={clsx(cardClassname, 'sui-border', className)}
       style={style}
       data-ui="Card"
       {...rest}

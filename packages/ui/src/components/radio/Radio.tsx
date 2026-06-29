@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
@@ -17,7 +17,7 @@ export function Radio(props: RadioProps) {
 
   return (
     <Label
-      className={classNames(radioClassname, className)}
+      className={clsx(radioClassname, className)}
       style={style}
       data-ui="Radio"
       disabled={disabled}
@@ -33,7 +33,7 @@ export function Radio(props: RadioProps) {
 
       <Box
         as="span"
-        className={classNames(radioMarkClassname, error && 'sui-error')}
+        className={clsx(radioMarkClassname, error && 'sui-error')}
         position="relative"
         radius="full"
         width="17px"

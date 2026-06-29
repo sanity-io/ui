@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@sanity-labs/design-tokens": "0.0.2-alpha.4",
-    "classnames": "^2.5.1"
+    "clsx": "^2.1.1"
   },
   "devDependencies": {
     "@sanity/browserslist-config": "^1.0.5",
@@ -64,7 +64,7 @@
     "babel-plugin-react-compiler": "catalog:",
     "concurrently": "^9.2.1",
     "cssnano": "^8.0.0",
-    "postcss": "^8.5.15",
+    "postcss": "^8.5.14",
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",
     "postcss-prefix-selector": "^2.1.1",

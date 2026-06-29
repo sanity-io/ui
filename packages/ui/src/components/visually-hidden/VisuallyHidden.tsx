@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -16,7 +16,7 @@ export function VisuallyHidden<T extends ElementType = 'span'>(
 
   return (
     <Component
-      className={classNames(visuallyHiddenClassname, className)}
+      className={clsx(visuallyHiddenClassname, className)}
       style={style}
       data-ui="VisuallyHidden"
       {...rest}

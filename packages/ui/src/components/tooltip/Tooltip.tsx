@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import {cloneElement, useEffect, useId, useState} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -68,7 +68,7 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
       {trigger}
 
       <Box
-        className={classNames(
+        className={clsx(
           tooltipClassname,
           dismissed ? tooltipDismissedClassname : '',
           className,

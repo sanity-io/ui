@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
 import {getVersionedClassname} from '../../utils/getVersionedClassname'
@@ -15,7 +15,7 @@ export function Link({underlined = true, ...props}: LinkProps) {
 
   return (
     <a
-      className={classNames(linkClassname, className)}
+      className={clsx(linkClassname, className)}
       style={style}
       data-ui="Link"
       {...(openInNewTab ? {target: '_blank', rel: 'noopener noreferrer'} : {})}
