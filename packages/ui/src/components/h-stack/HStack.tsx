@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -15,7 +15,7 @@ export function HStack<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={classNames('sui-HStack', className)}
+      className={clsx('sui-HStack', className)}
       style={style}
       data-ui="HStack"
       display="inline-flex"

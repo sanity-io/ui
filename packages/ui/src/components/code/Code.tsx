@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import {type ComponentPropsWithRef, lazy, Suspense} from 'react'
 
 import {type CodeTag} from '../../types/Code'
@@ -17,19 +17,14 @@ export function Code<T extends CodeTag = 'pre'>({
 
   if (!language) {
     return (
-      <Component
-        className={classNames('sui-Code', className)}
-        style={style}
-        data-ui="Code"
-        {...rest}
-      >
+      <Component className={clsx('sui-Code', className)} style={style} data-ui="Code" {...rest}>
         <code>{children}</code>
       </Component>
     )
   }
 
   return (
-    <Component className={classNames('sui-Code', className)} style={style} data-ui="Code" {...rest}>
+    <Component className={clsx('sui-Code', className)} style={style} data-ui="Code" {...rest}>
       <Suspense fallback={<code>{children}</code>}>
         <LazyRefractor language={language} value={children} />
       </Suspense>

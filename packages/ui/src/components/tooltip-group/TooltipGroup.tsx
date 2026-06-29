@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import {type ComponentPropsWithRef, type ElementType, useRef, useState} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -42,7 +42,7 @@ export function TooltipGroup<T extends ElementType = 'div'>(
 
   return (
     <Component
-      className={classNames('sui-TooltipGroup', className)}
+      className={clsx('sui-TooltipGroup', className)}
       style={{
         ...style,
         ...(isActive && {

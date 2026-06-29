@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
 import {type IconProps, iconProps} from './icon.props'
@@ -9,7 +9,7 @@ export function Icon({size = 2, ...props}: IconProps) {
 
   return (
     <Component
-      className={classNames('sui-Icon', className)}
+      className={clsx('sui-Icon', className)}
       data-ui="Icon"
       style={style}
       aria-hidden={props['aria-label'] ? undefined : true}

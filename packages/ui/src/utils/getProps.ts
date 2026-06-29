@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 import {type PropDef} from '../types/PropDef'
 
@@ -33,11 +33,11 @@ export function getProps(
       // @TODO: consider fixing this O(n^2) time complexity
       // oxlint-disable-next-line no-accumulating-spread
       for (let i = 0, len = Math.min(propValue.length, BREAKPOINTS_LENGTH); i < len; i++) {
-        className = classNames(className, getClassName(propValue[i], propDef, i))
+        className = clsx(className, getClassName(propValue[i], propDef, i))
         style = {...style, ...getStyle(propValue[i], propDef, i)}
       }
     } else {
-      className = classNames(className, getClassName(propValue, propDef))
+      className = clsx(className, getClassName(propValue, propDef))
       style = {...style, ...getStyle(propValue, propDef)}
     }
   }
