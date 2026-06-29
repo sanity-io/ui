@@ -2,12 +2,12 @@
   /* Default surface */
   --background-high: light-dark(var(--gray-100), var(--gray-900));
   --background-high-emphasized: light-dark(var(--gray-800), var(--gray-200));
-  --background-low: light-dark(var(--gray-50), var(--gray-950))j;
+  --background-low: light-dark(var(--gray-50), var(--gray-950));
   --background-low-emphasized: light-dark(var(--gray-600), var(--gray-400));
   --separator-high: light-dark(var(--gray-400), var(--gray-600));
   --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
   --foreground-high: light-dark(var(--gray-800), var(--gray-200));
-  --foreground-high-emphasized: light-dark(var(--white), var(--black))
+  --foreground-high-emphasized: light-dark(var(--white), var(--black));
   --foreground-low: light-dark(var(--gray-600), var(--gray-400));
   --foreground-low-emphasized: light-dark(var(--gray-100), var(--gray-900));
 }
