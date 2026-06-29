@@ -17,7 +17,7 @@ export function Switch(props: SwitchProps) {
 
   return (
     <Label
-      className={clsx(switchClassname, className)}ain
+      className={clsx(switchClassname, className)}
       style={style}
       data-ui="Switch"
       disabled={props.disabled}

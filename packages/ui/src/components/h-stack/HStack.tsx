@@ -18,11 +18,7 @@ export function HStack<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-<<<<<<< HEAD
-      className={classNames(hStackClassname, className)}
-=======
-      className={clsx('sui-HStack', className)}
->>>>>>> main
+      className={clsx(hStackClassname, className)}
       style={style}
       data-ui="HStack"
       display="inline-flex"
