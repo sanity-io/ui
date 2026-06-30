@@ -5,19 +5,18 @@ import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles'
 import {useTheme_v2} from '../../theme'
-import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types'
+import {AvatarPosition, AvatarSize, AvatarStatus, ElementType, Props} from '../../types'
 import {Label} from '../label'
 import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
 
 /**
  * @public
  */
-export interface AvatarProps {
+export interface AvatarOwnProps {
   /** @beta */
   __unstable_hideInnerStroke?: boolean
   animateArrowFrom?: AvatarPosition
   arrowPosition?: AvatarPosition
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   color?: ThemeColorAvatarColorKey
   initials?: string
   onImageLoadError?: (event: Error) => void
@@ -30,6 +29,11 @@ export interface AvatarProps {
   status?: AvatarStatus
   title?: string
 }
+
+/**
+ * @public
+ */
+export type AvatarProps<E extends ElementType = 'div'> = Props<AvatarOwnProps, E>
 
 const StyledAvatar = styled.div<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
@@ -50,13 +54,8 @@ const InitialsLabel = styled(Label)({
 
 const AvatarImage = styled.svg(avatarStyle.image)
 
-/**
- * Avatars are used to represent people and other agents (e.g. bots).
- *
- * @public
- */
-export const Avatar = forwardRef(function Avatar(
-  props: AvatarProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
+const AvatarComponent = forwardRef(function Avatar(
+  props: AvatarOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -189,4 +188,13 @@ export const Avatar = forwardRef(function Avatar(
     </StyledAvatar>
   )
 })
-Avatar.displayName = 'ForwardRef(Avatar)'
+AvatarComponent.displayName = 'ForwardRef(Avatar)'
+
+/**
+ * Avatars are used to represent people and other agents (e.g. bots).
+ *
+ * @public
+ */
+export const Avatar = AvatarComponent as unknown as <E extends ElementType = 'div'>(
+  props: AvatarProps<E>,
+) => React.JSX.Element

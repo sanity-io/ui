@@ -9,7 +9,7 @@ import {
   responsiveTextAlignStyle,
   ResponsiveTextAlignStyleProps,
 } from '../../styles/internal'
-import {TextAlign} from '../../types'
+import {ElementType, Props, TextAlign} from '../../types'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {headingBaseStyle} from './styles'
 import {HeadingStyleProps} from './types'
@@ -17,10 +17,9 @@ import {HeadingStyleProps} from './types'
 /**
  * @public
  */
-export interface HeadingProps {
+export interface HeadingOwnProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   muted?: boolean
   size?: number | number[]
   /**
@@ -32,17 +31,17 @@ export interface HeadingProps {
   weight?: ThemeFontWeightKey
 }
 
+/**
+ * @public
+ */
+export type HeadingProps<E extends ElementType = 'div'> = Props<HeadingOwnProps, E>
+
 const StyledHeading = styled.div<
   HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
 >(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
 
-/**
- * Typographic headings.
- *
- * @public
- */
-export const Heading = forwardRef(function Heading(
-  props: HeadingProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
+const HeadingComponent = forwardRef(function Heading(
+  props: HeadingOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
   ref: React.ForwardedRef<HTMLElement>,
 ) {
   const {
@@ -77,4 +76,13 @@ export const Heading = forwardRef(function Heading(
     </StyledHeading>
   )
 })
-Heading.displayName = 'ForwardRef(Heading)'
+HeadingComponent.displayName = 'ForwardRef(Heading)'
+
+/**
+ * Typographic headings.
+ *
+ * @public
+ */
+export const Heading = HeadingComponent as unknown as <E extends ElementType = 'div'>(
+  props: HeadingProps<E>,
+) => React.JSX.Element

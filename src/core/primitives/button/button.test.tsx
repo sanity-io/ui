@@ -6,7 +6,7 @@ import {axe} from 'jest-axe'
 
 import {render} from '../../../../test'
 import {Flex} from '../flex'
-import {Button, ButtonProps} from './button'
+import {Button, ButtonOwnProps} from './button'
 
 jest.mock('../flex', () => {
   const actual = jest.requireActual('../flex')
@@ -45,11 +45,11 @@ describe('atoms/button', () => {
   })
 
   it('should wrap button', () => {
-    function WrappedButton({button: buttonProps}: {button: ButtonProps}) {
+    function WrappedButton({button: buttonProps}: {button: ButtonOwnProps}) {
       return <Button {...buttonProps} />
     }
 
-    const buttonProps: ButtonProps = {
+    const buttonProps: ButtonOwnProps = {
       text: 'Button text',
     }
 
