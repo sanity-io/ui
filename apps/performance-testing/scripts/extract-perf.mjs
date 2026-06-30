@@ -1,3 +1,10 @@
+/* eslint-disable no-console, no-await-in-loop, no-unmodified-loop-condition --
+ * CLI extractor. `console.log` *is* the output channel; `await` inside the
+ * route/run loops is intentional (parallelising would corrupt the perf
+ * timings via resource contention); the `sawFinal` loop condition is
+ * mutated by the page.on('console') event handler, not in the loop body.
+ */
+
 /**
  * Extract React Profiler perf results from each codebase (route) and component.
  *
@@ -17,8 +24,9 @@
 import {writeFile, mkdir} from 'node:fs/promises'
 import {resolve, dirname} from 'node:path'
 import {fileURLToPath} from 'node:url'
-import {createServer} from 'vite'
+
 import {chromium} from 'playwright'
+import {createServer} from 'vite'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT_DIR = resolve(ROOT, 'perf-results')

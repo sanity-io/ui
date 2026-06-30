@@ -1,6 +1,4 @@
 import '@sanity-labs/ui-poc/styles.css'
-
-import {AddIcon, EditIcon} from '@sanity/icons'
 import {
   Box,
   Button,
@@ -17,7 +15,6 @@ import {
   IconButton,
   Indicator,
   IndicatorStack,
-  Inline,
   Label,
   Link,
   List,
@@ -32,6 +29,7 @@ import {
   VisuallyHidden,
   VStack,
 } from '@sanity-labs/ui-poc'
+import {AddIcon, EditIcon} from '@sanity/icons'
 import {Profiler} from 'react'
 
 const count = 5000
@@ -107,16 +105,6 @@ export default function UiPoc() {
             <span>VStack content</span>
             <span>VStack content</span>
           </VStack>
-        ))}
-      </Profiler>
-
-      <h2>{count} Inlines</h2>
-      <Profiler id="Inline" onRender={handleOnRender}>
-        {iterator.map((i) => (
-          <Inline key={i} gap={3}>
-            <span>Inline content</span>
-            <span>Inline content</span>
-          </Inline>
         ))}
       </Profiler>
 
