@@ -1,4 +1,5 @@
 import type {Metadata} from 'next'
+
 import '@sanity-labs/ui-poc/styles.css'
 
 export const metadata: Metadata = {

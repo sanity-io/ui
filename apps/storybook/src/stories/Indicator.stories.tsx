@@ -42,6 +42,7 @@ export const Tones: Story = {
       <Flex alignItems="center" gap={4}>
         {TONE.map((tone) => (
           <Indicator
+            key={tone}
             {...props}
             tone={tone}
             label={`Indicator Tone ${tone[0].toUpperCase() + tone.slice(1)}`}

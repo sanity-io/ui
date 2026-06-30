@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import {type ComponentPropsWithRef, type ElementType, isValidElement} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -30,7 +30,7 @@ export function Button<T extends ElementType = 'button'>({
 
   return (
     <Component
-      className={classNames(
+      className={clsx(
         'sui-Button',
         'sui-display-inline-flex sui-align-items-center sui-justify-content-center sui-radius2 sui-position-relative sui-overflow-hidden',
         className,

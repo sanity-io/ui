@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -13,7 +13,7 @@ export function Grid<T extends ElementType = 'div'>({
   const Component = as || 'div'
 
   return (
-    <Component className={classNames('sui-Grid', className)} style={style} data-ui="Grid" {...rest}>
+    <Component className={clsx('sui-Grid', className)} style={style} data-ui="Grid" {...rest}>
       {children}
     </Component>
   )

@@ -39,7 +39,7 @@ export const Sizes: Story = {
     return (
       <>
         {ICON_SIZE.map((size) => (
-          <Flex alignItems="center">
+          <Flex key={size} alignItems="center">
             <Spinner {...props} size={size} aria-label={`Spinner Size ${size}`} />
             <Text size={size}>({['17px', '21px', '25px', '29px', '33px'][size]})</Text>
           </Flex>

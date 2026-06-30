@@ -1,5 +1,5 @@
-import classNames from 'classnames'
-import {Children, type ComponentPropsWithRef, type ElementType, useMemo} from 'react'
+import clsx from 'clsx'
+import {Children, type ComponentPropsWithRef, type ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {inlineChildrenProps, type InlineProps, inlineProps} from './inline.props'
@@ -7,28 +7,20 @@ import {inlineChildrenProps, type InlineProps, inlineProps} from './inline.props
 /** @deprecated Use HStack component instead */
 /** @public */
 export function Inline<T extends ElementType = 'div'>(
+  // oxlint-disable-next-line no-deprecated
   props: InlineProps<T> & Omit<ComponentPropsWithRef<T>, keyof InlineProps<T>>,
 ) {
   const {as, children: childrenProp, className, style, ...rest} = getProps(props, inlineProps)
   const {className: childrenClassName} = getProps(props, inlineChildrenProps)
   const Component = as || 'div'
 
-  const children = useMemo(
-    () =>
-      Children.map(
-        childrenProp,
-        (child) => child && <div className={childrenClassName}>{child}</div>,
-      ),
-    [childrenProp],
+  const children = Children.map(
+    childrenProp,
+    (child) => child && <div className={childrenClassName}>{child}</div>,
   )
 
   return (
-    <Component
-      className={classNames('sui-Inline', className)}
-      style={style}
-      data-ui="Inline"
-      {...rest}
-    >
+    <Component className={clsx('sui-Inline', className)} style={style} data-ui="Inline" {...rest}>
       {children}
     </Component>
   )

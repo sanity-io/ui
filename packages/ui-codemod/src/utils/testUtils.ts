@@ -1,7 +1,6 @@
 import {type FileInfo, type Options, type Transform} from 'jscodeshift'
 import {expect, it} from 'vitest'
 
-/* eslint-disable-next-line @typescript-eslint/no-require-imports */
 const applyTransform = require('jscodeshift/dist/testUtils').applyTransform
 
 export function defineInlineTest(

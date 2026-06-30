@@ -1,9 +1,9 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
-import {Indicator} from '../../../../packages/ui/src/components/indicator/Indicator'
 import {IndicatorStack} from '../../../../packages/ui/src/components/indicator-stack/IndicatorStack'
 import {indicatorStackProps} from '../../../../packages/ui/src/components/indicator-stack/indicatorStack.props'
+import {Indicator} from '../../../../packages/ui/src/components/indicator/Indicator'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(indicatorStackProps)

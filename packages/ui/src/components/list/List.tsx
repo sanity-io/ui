@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentProps, ComponentPropsWithRef, ElementType} from 'react'
 
 import type {ListTag} from '../../types/List'
@@ -20,7 +20,7 @@ function ListRoot<T extends ListTag = 'ul'>(
   const Component = as || 'ul'
 
   return (
-    <Component className={classNames('sui-List', className)} style={style} data-ui="List" {...rest}>
+    <Component className={clsx('sui-List', className)} style={style} data-ui="List" {...rest}>
       {children}
     </Component>
   )
@@ -35,7 +35,7 @@ function ListItem({density = 'regular', ...props}: ListItemProps) {
   return (
     <Flex
       as="li"
-      className={classNames('sui-ListItem', className)}
+      className={clsx('sui-ListItem', className)}
       style={style}
       data-ui="ListItem"
       alignItems="center"
@@ -59,7 +59,7 @@ function ListItemText<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={classNames('sui-ListItemText', className)}
+      className={clsx('sui-ListItemText', className)}
       style={style}
       data-ui="ListItemText"
       flexDirection="column"
@@ -88,7 +88,7 @@ function ListItemImage(props: ComponentProps<'img'>) {
 
   return (
     <img
-      className={classNames('sui-ListItemImage sui-radius2', className)}
+      className={clsx('sui-ListItemImage sui-radius2', className)}
       style={style}
       data-ui="ListItemImage"
       {...rest}

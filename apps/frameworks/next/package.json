@@ -7,7 +7,6 @@
     "dev": "next dev --port 3000",
     "dev:turbopack": "next dev --turbopack --port 3000",
     "dev:webpack": "next dev --webpack --port 3000",
-    "lint": "eslint",
     "start": "next start --port 3000"
   },
   "dependencies": {
@@ -17,12 +16,10 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.6",
+    "babel-plugin-react-compiler": "catalog:",
     "typescript": "^5"
   }
 }

@@ -5,4 +5,6 @@ export default defineConfig({
   strictOptions: {
     noImplicitBrowsersList: 'off',
   },
+  babel: {reactCompiler: true},
+  reactCompilerOptions: {target: '19'},
 })
