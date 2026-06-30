@@ -1,12 +1,23 @@
 import {styled} from 'styled-components'
 
-/**
- * @public
- */
-export const MenuDivider = styled.hr`
+import {ElementType, EmptyProps, Props} from '../../types'
+
+const StyledMenuDivider = styled.hr`
   height: 1px;
   border: 0;
   background: var(--card-hairline-soft-color);
   margin: 0;
 `
-MenuDivider.displayName = 'MenuDivider'
+StyledMenuDivider.displayName = 'MenuDivider'
+
+/**
+ * @public
+ */
+export type MenuDividerProps<E extends ElementType = 'hr'> = Props<EmptyProps, E>
+
+/**
+ * @public
+ */
+export const MenuDivider = StyledMenuDivider as unknown as <E extends ElementType = 'hr'>(
+  props: MenuDividerProps<E>,
+) => React.JSX.Element
