@@ -226,6 +226,9 @@ importers:
       babel-plugin-react-compiler:
         specifier: 'catalog:'
         version: 1.0.0
+      playwright:
+        specifier: 1.58.2
+        version: 1.58.2
       react-is:
         specifier: ^19.2.5
         version: 19.2.5
