@@ -6,7 +6,6 @@ import type {AcceptedPlugin, Rule} from 'postcss'
 import postcssImport from 'postcss-import'
 import prefixer from 'postcss-prefix-selector'
 import selectorParser from 'postcss-selector-parser'
-import transformVariables from 'postcss-transform-variables'
 
 import breakpoints from './postcss-breakpoints'
 
@@ -46,9 +45,6 @@ const config = {
         return selector
       },
     } as Parameters<typeof prefixer>[0]),
-    transformVariables({
-      transform: ({identifier}) => `${identifier}-${version}`,
-    }),
     breakpoints,
     autoprefixer,
     ...(process.env['NODE_ENV'] === 'production'
