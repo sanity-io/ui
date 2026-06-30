@@ -34,7 +34,7 @@ export default function SidePanelStory() {
         </Box>
       </Card>
       <BoundaryElementProvider element={sidePanel}>
-        <Card borderLeft flex="none" ref={setSidePanel} style={{width: sidePanelWidth}} width={0}>
+        <Card borderLeft flex="none" ref={setSidePanel} style={{width: sidePanelWidth}}>
           <Stack padding={4} space={5}>
             <Text muted size={1}>
               Click the <code>reference</code> text below to toggle the popover.

@@ -2,14 +2,15 @@ import {Children, forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles'
-import {Box, BoxProps} from '../box'
+import {ElementType, Props} from '../../types'
+import {Box, BoxOwnProps} from '../box'
 import {inlineBaseStyle, inlineSpaceStyle} from './styles'
 import {ResponsiveInlineSpaceStyleProps} from './types'
 
 /**
  * @public
  */
-export interface InlineProps extends Omit<BoxProps, 'display'> {
+export interface InlineOwnProps extends Omit<BoxOwnProps, 'display'> {
   /**
    * The spacing between children.
    * @deprecated Use `gap` instead. `space` will be removed in v4.
@@ -19,15 +20,15 @@ export interface InlineProps extends Omit<BoxProps, 'display'> {
   gap?: number | number[]
 }
 
-const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
-
 /**
- * The `Inline` component is a layout utility for aligning and spacing items horizontally.
- *
  * @public
  */
-export const Inline = forwardRef(function Inline(
-  props: InlineProps & React.HTMLProps<HTMLDivElement>,
+export type InlineProps<E extends ElementType = 'div'> = Props<InlineOwnProps, E>
+
+const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
+
+const InlineComponent = forwardRef(function Inline(
+  props: InlineOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,
   ref,
 ) {
   const {as, children: childrenProp, gap, space: deprecated_space, ...restProps} = props
@@ -50,4 +51,13 @@ export const Inline = forwardRef(function Inline(
     </StyledInline>
   )
 })
-Inline.displayName = 'ForwardRef(Inline)'
+InlineComponent.displayName = 'ForwardRef(Inline)'
+
+/**
+ * The `Inline` component is a layout utility for aligning and spacing items horizontally.
+ *
+ * @public
+ */
+export const Inline = InlineComponent as unknown as <E extends ElementType = 'div'>(
+  props: InlineProps<E>,
+) => React.JSX.Element

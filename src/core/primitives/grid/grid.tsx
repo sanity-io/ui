@@ -3,23 +3,27 @@ import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles'
 import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/internal'
-import {Box, BoxProps} from '../box'
+import {ElementType, Props} from '../../types'
+import {Box, BoxOwnProps} from '../box'
 import {ResponsiveGridProps} from '../types'
 
 /**
  * @public
  */
-export interface GridProps extends Omit<BoxProps, 'display'>, ResponsiveGridProps {}
+export interface GridOwnProps extends Omit<BoxOwnProps, 'display'>, ResponsiveGridProps {}
+
+/**
+ * @public
+ */
+export type GridProps<E extends ElementType = 'div'> = Props<GridOwnProps, E>
 
 const StyledGrid = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
 
-/**
- * The `Grid` component is for building 2-dimensional layers (based on CSS grid).
- *
- * @public
- */
-export const Grid = forwardRef(function Grid(
-  props: GridProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'rows'>,
+const GridComponent = forwardRef(function Grid(
+  props: GridOwnProps & {as?: ElementType} & Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'height' | 'rows'
+    >,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -58,4 +62,13 @@ export const Grid = forwardRef(function Grid(
     </StyledGrid>
   )
 })
-Grid.displayName = 'ForwardRef(Grid)'
+GridComponent.displayName = 'ForwardRef(Grid)'
+
+/**
+ * The `Grid` component is for building 2-dimensional layers (based on CSS grid).
+ *
+ * @public
+ */
+export const Grid = GridComponent as unknown as <E extends ElementType = 'div'>(
+  props: GridProps<E>,
+) => React.JSX.Element

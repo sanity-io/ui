@@ -7,7 +7,7 @@ export interface TreeGroupProps {
 
 export function TreeGroup(
   props: TreeGroupProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
+    Omit<React.HTMLProps<HTMLUListElement>, 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
 ): React.JSX.Element {
   const {children, expanded = false, ...restProps} = props
   const tree = useTree()

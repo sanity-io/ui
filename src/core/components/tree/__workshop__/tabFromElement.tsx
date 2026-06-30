@@ -19,7 +19,7 @@ export default function BasicStory() {
     if (testid) setId(testid)
   }, [])
 
-  const handleFocus = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
+  const handleFocus = useCallback((event: React.FocusEvent<HTMLElement>) => {
     const elementFocus = event.target.getAttribute('data-testid')
     if (elementFocus) setFocus(elementFocus)
   }, [])

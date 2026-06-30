@@ -1,7 +1,7 @@
 import {forwardRef, useEffect, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {Box, BoxProps, ResponsiveRadiusProps} from '../../primitives'
+import {Box, BoxOwnProps, ResponsiveRadiusProps} from '../../primitives'
 import {_getArrayProp} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {skeletonStyle} from './styles'
@@ -14,7 +14,7 @@ const StyledSkeleton = styled(Box)<
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxProps, 'children'> {
+export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxOwnProps, 'children'> {
   animated?: boolean
   delay?: number
 }

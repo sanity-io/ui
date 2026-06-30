@@ -31,12 +31,12 @@ export interface TreeProps {
  */
 export const Tree = forwardRef(function Tree(
   props: TreeProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
+    Omit<React.HTMLProps<HTMLUListElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
+  forwardedRef: React.ForwardedRef<HTMLUListElement>,
 ): React.JSX.Element {
   const {children, gap, space: deprecated_space = 1, onFocus, ...restProps} = props
   const spacing = gap === undefined ? deprecated_space : gap
-  const ref = useRef<HTMLDivElement | null>(null)
+  const ref = useRef<HTMLUListElement | null>(null)
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const focusedElementRef = useRef(focusedElement)
   const path: string[] = useMemo(() => [], [])
@@ -44,7 +44,10 @@ export const Tree = forwardRef(function Tree(
   const [state, setState] = useState<TreeState>({})
   const stateRef = useRef(state)
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
+  useImperativeHandle<HTMLUListElement | null, HTMLUListElement | null>(
+    forwardedRef,
+    () => ref.current,
+  )
 
   useEffect(() => {
     focusedElementRef.current = focusedElement
@@ -102,7 +105,7 @@ export const Tree = forwardRef(function Tree(
   )
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: React.KeyboardEvent<HTMLUListElement>) => {
       if (!focusedElementRef.current) return
 
       if (event.key === 'ArrowDown') {
@@ -199,7 +202,7 @@ export const Tree = forwardRef(function Tree(
   )
 
   const handleFocus = useCallback(
-    (event: React.FocusEvent<HTMLDivElement>) => {
+    (event: React.FocusEvent<HTMLUListElement>) => {
       setFocusedElement(event.target)
 
       // Call the element's `focus` handler

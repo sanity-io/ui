@@ -11,7 +11,7 @@ export default function UploadButtonStory() {
   }, [])
 
   return (
-    <Flex align="center" height="fill" htmlFor="file" justify="center">
+    <Flex align="center" height="fill" justify="center">
       <Button
         as="label"
         onKeyDown={handleKeyDown}

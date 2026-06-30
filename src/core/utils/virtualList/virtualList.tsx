@@ -3,7 +3,7 @@ import {styled} from 'styled-components'
 
 import {_isScrollable} from '../../helpers'
 import {_ResizeObserver} from '../../observers'
-import {StackProps} from '../../primitives'
+import {StackOwnProps} from '../../primitives'
 import {useTheme_v2} from '../../theme'
 
 /**
@@ -45,7 +45,7 @@ const ItemWrapper = styled.div`
  */
 export const VirtualList = forwardRef(function VirtualList(
   props: VirtualListProps &
-    StackProps &
+    StackOwnProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange' | 'ref'>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ): React.JSX.Element {

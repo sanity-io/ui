@@ -4,7 +4,8 @@ import {styled} from 'styled-components'
 import {_getArrayProp} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {BadgeMode, BadgeTone} from '../../types'
-import {Box, BoxProps} from '../box'
+import {ElementType, Props} from '../../types'
+import {Box, BoxOwnProps} from '../box'
 import {Text} from '../text'
 import {ResponsiveRadiusProps} from '../types'
 import {badgeStyle} from './styles'
@@ -13,26 +14,25 @@ import {BadgeStyleProps} from './types'
 /**
  * @public
  */
-export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+export interface BadgeOwnProps extends BoxOwnProps, ResponsiveRadiusProps {
   fontSize?: number | number[]
   /** @deprecated No longer used. */
   mode?: BadgeMode
   tone?: BadgeTone
 }
 
+/**
+ * @public
+ */
+export type BadgeProps<E extends ElementType = 'div'> = Props<BadgeOwnProps, E>
+
 const StyledBadge = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
   responsiveRadiusStyle,
   badgeStyle,
 )
 
-/**
- * Badges are used to tag resources.
- *
- * @public
- */
-export const Badge = forwardRef(function Badge(
-  props: BadgeProps & React.HTMLProps<HTMLDivElement>,
+const BadgeComponent = forwardRef(function Badge(
+  props: BadgeOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,
   ref,
 ) {
   const {
@@ -59,4 +59,13 @@ export const Badge = forwardRef(function Badge(
     </StyledBadge>
   )
 })
-Badge.displayName = 'ForwardRef(Badge)'
+BadgeComponent.displayName = 'ForwardRef(Badge)'
+
+/**
+ * Badges are used to tag resources.
+ *
+ * @public
+ */
+export const Badge = BadgeComponent as unknown as <E extends ElementType = 'div'>(
+  props: BadgeProps<E>,
+) => React.JSX.Element

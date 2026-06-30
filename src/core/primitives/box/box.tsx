@@ -15,6 +15,7 @@ import {
   responsivePaddingStyle,
   ResponsivePaddingStyleProps,
 } from '../../styles/internal'
+import {ElementType, Props} from '../../types'
 import {
   ResponsiveBoxProps,
   ResponsiveFlexItemProps,
@@ -24,17 +25,23 @@ import {
 } from '../types'
 
 /**
+ * The props that `Box` adds on top of the element it renders as.
+ *
  * @public
  */
-export interface BoxProps
+export interface BoxOwnProps
   extends ResponsiveFlexItemProps,
     ResponsiveBoxProps,
     ResponsiveGridItemProps,
     ResponsiveMarginProps,
     ResponsivePaddingProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
-  forwardedAs?: React.ElementType | keyof React.JSX.IntrinsicElements
+  forwardedAs?: ElementType
 }
+
+/**
+ * @public
+ */
+export type BoxProps<E extends ElementType = 'div'> = Props<BoxOwnProps, E>
 
 const StyledBox = styled.div<
   FlexItemStyleProps &
@@ -51,14 +58,8 @@ const StyledBox = styled.div<
   responsivePaddingStyle,
 )
 
-/**
- * The `Box` component is a basic layout wrapper component which provides utility properties
- * for flex, margins and padding.
- *
- * @public
- */
-export const Box = forwardRef(function Box(
-  props: BoxProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
+const BoxComponent = forwardRef(function Box(
+  props: BoxOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -140,4 +141,14 @@ export const Box = forwardRef(function Box(
     </StyledBox>
   )
 })
-Box.displayName = 'ForwardRef(Box)'
+BoxComponent.displayName = 'ForwardRef(Box)'
+
+/**
+ * The `Box` component is a basic layout wrapper component which provides utility properties
+ * for flex, margins and padding.
+ *
+ * @public
+ */
+export const Box = BoxComponent as unknown as <E extends ElementType = 'div'>(
+  props: BoxProps<E>,
+) => React.JSX.Element
