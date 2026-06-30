@@ -73,6 +73,8 @@ describe('primitives/grid', () => {
       </Grid>,
     )
     expect(mockedResponsiveGridStyle).toHaveBeenCalledWith(expect.objectContaining({$rows: [3]}))
-    expect(mockedResponsiveGridStyle).not.toHaveBeenCalledWith(expect.objectContaining({$rows: [1]}))
+    expect(mockedResponsiveGridStyle).not.toHaveBeenCalledWith(
+      expect.objectContaining({$rows: [1]}),
+    )
   })
 })

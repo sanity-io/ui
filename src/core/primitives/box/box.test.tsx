@@ -25,20 +25,28 @@ describe('<Box />', () => {
   it('uses column when gridColumn is not provided', () => {
     render(<Box column={3} />)
 
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(expect.objectContaining({$column: [3]}))
+    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
+      expect.objectContaining({$column: [3]}),
+    )
   })
 
   it('uses gridColumn when provided', () => {
     render(<Box gridColumn={4} />)
 
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(expect.objectContaining({$column: [4]}))
+    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
+      expect.objectContaining({$column: [4]}),
+    )
   })
 
   it('prefers gridColumn over column when both are provided', () => {
     render(<Box column={3} gridColumn={5} />)
 
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(expect.objectContaining({$column: [5]}))
-    expect(mockedResponsiveGridItemStyle).not.toHaveBeenCalledWith(expect.objectContaining({$column: [3]}))
+    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
+      expect.objectContaining({$column: [5]}),
+    )
+    expect(mockedResponsiveGridItemStyle).not.toHaveBeenCalledWith(
+      expect.objectContaining({$column: [3]}),
+    )
   })
 
   it('supports responsive arrays with gridColumn', () => {
