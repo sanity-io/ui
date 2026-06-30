@@ -13,8 +13,7 @@ import {
   ResponsiveShadowStyleProps,
 } from '../../styles/internal'
 import {ThemeColorProvider, useRootTheme} from '../../theme'
-import {CardTone} from '../../types'
-import {ElementType, Props} from '../../types'
+import {CardTone, ElementType, Props} from '../../types'
 import {Box, BoxOwnProps} from '../box'
 import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {cardStyle} from './styles'

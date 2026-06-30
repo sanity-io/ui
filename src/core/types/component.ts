@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 /**
  * Assign properties from `U` to `T`, excluding properties that already exist in `T`.
  *
