@@ -15,6 +15,7 @@ import {Selectable} from '../../primitives/_selectable'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
 import {_getArrayProp} from '../../styles'
 import {useRootTheme} from '../../theme'
+import {ElementType, Props} from '../../types'
 import {SelectableTone} from '../../types/selectable'
 import {Hotkeys} from '../hotkeys'
 import {useMenu} from './useMenu'
@@ -22,8 +23,7 @@ import {useMenu} from './useMenu'
 /**
  * @public
  */
-export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+export interface MenuItemOwnProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   fontSize?: number | number[]
   hotkeys?: string[]
   icon?: React.ElementType | React.ReactNode
@@ -42,9 +42,13 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
 /**
  * @public
  */
-export const MenuItem = forwardRef(function MenuItem(
-  props: MenuItemProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref' | 'selected' | 'tabIndex'>,
+export type MenuItemProps<E extends ElementType = 'button'> = Props<MenuItemOwnProps, E>
+
+const MenuItemComponent = forwardRef(function MenuItem(
+  props: MenuItemOwnProps & {as?: ElementType} & Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'height' | 'ref' | 'selected' | 'tabIndex'
+    >,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -183,4 +187,11 @@ export const MenuItem = forwardRef(function MenuItem(
     </Selectable>
   )
 })
-MenuItem.displayName = 'ForwardRef(MenuItem)'
+MenuItemComponent.displayName = 'ForwardRef(MenuItem)'
+
+/**
+ * @public
+ */
+export const MenuItem = MenuItemComponent as unknown as <E extends ElementType = 'button'>(
+  props: MenuItemProps<E>,
+) => React.JSX.Element

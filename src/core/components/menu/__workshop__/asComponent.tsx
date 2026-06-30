@@ -16,7 +16,7 @@ const CustomLink = forwardRef(function CustomLink(
 })
 
 export default function AsComponentStory() {
-  const props = {href: '#'}
+  const props = {href: '#', req: 'example'}
 
   return (
     <Flex align="center" height="fill" justify="center">
