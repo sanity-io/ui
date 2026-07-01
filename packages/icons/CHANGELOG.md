@@ -1,5 +1,11 @@
 # @sanity/icons
 
+## 3.7.7
+
+### Patch Changes
+
+- [#181](https://github.com/sanity-io/icons/pull/181) [`5b9d2cb`](https://github.com/sanity-io/icons/commit/5b9d2cb568239231ce28c72b39560230c90f3d12) Thanks [@stipsan](https://github.com/stipsan)! - Bumped `@testing-library/react`, `@types/node`, and `@types/react` devDependencies to their latest versions.
+
 ## [3.7.6](https://github.com/sanity-io/icons/compare/v3.7.5...v3.7.6) (2026-07-01)
 
 ### Bug Fixes
