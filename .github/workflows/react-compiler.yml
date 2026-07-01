@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
+      - uses: pnpm/setup@v1
         with:
-          node-version: lts/*
+          cache: true
+          runtime: node@lts
       - run: pnpm -r up --ignore-scripts react-compiler-runtime@latest babel-plugin-react-compiler@latest eslint-plugin-react-hooks@latest
       - uses: actions/create-github-app-token@v2
         id: generate-token
