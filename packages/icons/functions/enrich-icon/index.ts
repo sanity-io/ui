@@ -18,6 +18,14 @@ export const handler = documentEventHandler<IconEvent>(async ({context, event}) 
 
   const label = _id.replace(/^icon_/, '')
 
+  // Shared context so the model understands these are interface glyphs, not
+  // illustrations: they are used on software surfaces like Sanity Studio, Sanity
+  // UI, the Portable Text Editor, and Sanity plugins.
+  const preamble =
+    `This is a monochrome line icon (an interface glyph) named "${label}" from the ` +
+    'Sanity icon set. These icons appear on software surfaces such as Sanity Studio, ' +
+    'Sanity UI, the Portable Text Editor, and Sanity plugins.'
+
   // 1. Use Sanity's native vision model (Agent Actions) to look at the
   //    rasterized icon and write a search-friendly description.
   await client.agent.action.transform({
@@ -26,11 +34,10 @@ export const handler = documentEventHandler<IconEvent>(async ({context, event}) 
     // Write to the published document (not a draft) so dataset embeddings index it.
     forcePublishedWrite: true,
     instruction: [
-      `This is a minimal, monochrome line UI icon named "${label}".`,
-      'Write a short, search-friendly description of what it depicts,',
-      'then list the concepts, actions, objects and synonyms a person might',
-      'type to find it (for example, a clock should mention "time").',
-      'Do not mention colors, the word "icon", or that it is an SVG.',
+      preamble,
+      'In one or two sentences, describe what the glyph depicts and the action or',
+      'concept it represents in such an interface.',
+      'Do not list keywords or synonyms, and do not mention colors or that it is an SVG.',
     ].join(' '),
     target: [
       {
@@ -40,15 +47,17 @@ export const handler = documentEventHandler<IconEvent>(async ({context, event}) 
     ],
   })
 
-  // 2. Derive concise search tags from the description just written.
+  // 2. Derive concise search tags (keywords live here, not in the description).
   await client.agent.action.generate({
     schemaId: '_.schemas.default',
     documentId: _id,
     forcePublishedWrite: true,
     instruction: [
-      'Using the icon description in $description, generate a concise set of',
-      'lowercase search tags: the objects, actions, concepts and common synonyms',
-      'someone might search to find this UI icon. Prefer single words or short phrases.',
+      preamble,
+      'Using the description in $description, generate a concise set of lowercase',
+      'search tags: the objects, actions, concepts, UI features and common synonyms',
+      'someone building or using a Sanity Studio, Portable Text Editor, or Sanity',
+      'plugin might search to find this icon. Prefer single words or short phrases.',
     ].join(' '),
     instructionParams: {
       description: {type: 'field', path: ['description']},
