@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.0](https://github.com/sanity-io/ui/compare/v3.2.0...v3.3.0) (2026-07-01)
+
+### Features
+
+- backport polymorphic `as` typings from v4 ([#2209](https://github.com/sanity-io/ui/issues/2209)) ([ae60285](https://github.com/sanity-io/ui/commit/ae6028547003767cf383050bbe9664cb9ba0fb34))
+
 ## [3.2.0](https://github.com/sanity-io/ui/compare/v3.1.14...v3.2.0) (2026-05-04)
 
 ### Features
