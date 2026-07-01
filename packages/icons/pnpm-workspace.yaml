@@ -4,9 +4,6 @@ allowBuilds:
   fsevents: true
   unrs-resolver: true
 
-overrides:
-  conventional-changelog-conventionalcommits: '>= 8.0.0'
-
 publicHoistPattern:
   - '*prettier*'
   - styled-components
