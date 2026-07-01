@@ -81,6 +81,7 @@ import {DoubleChevronDownIcon} from './doubleChevronDownIcon'
 import {DoubleChevronLeftIcon} from './doubleChevronLeftIcon'
 import {DoubleChevronRightIcon} from './doubleChevronRightIcon'
 import {DoubleChevronUpIcon} from './doubleChevronUpIcon'
+import {DoubleQuoteIcon} from './doubleQuoteIcon'
 import {DownloadIcon} from './downloadIcon'
 import {DragHandleIcon} from './dragHandleIcon'
 import {DropIcon} from './dropIcon'
@@ -321,6 +322,7 @@ export type IconSymbol =
   | 'double-chevron-left'
   | 'double-chevron-right'
   | 'double-chevron-up'
+  | 'double-quote'
   | 'download'
   | 'drag-handle'
   | 'drop'
@@ -558,6 +560,7 @@ export {
   DoubleChevronLeftIcon,
   DoubleChevronRightIcon,
   DoubleChevronUpIcon,
+  DoubleQuoteIcon,
   DownloadIcon,
   DragHandleIcon,
   DropIcon,
@@ -799,6 +802,7 @@ export interface IconMap {
   'double-chevron-left': IconComponent
   'double-chevron-right': IconComponent
   'double-chevron-up': IconComponent
+  'double-quote': IconComponent
   'download': IconComponent
   'drag-handle': IconComponent
   'drop': IconComponent
@@ -1040,6 +1044,7 @@ export const icons: IconMap = {
   'double-chevron-left': DoubleChevronLeftIcon,
   'double-chevron-right': DoubleChevronRightIcon,
   'double-chevron-up': DoubleChevronUpIcon,
+  'double-quote': DoubleQuoteIcon,
   'download': DownloadIcon,
   'drag-handle': DragHandleIcon,
   'drop': DropIcon,
