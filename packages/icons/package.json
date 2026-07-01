@@ -22,13 +22,12 @@
   ],
   "type": "module",
   "sideEffects": false,
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "source": "./src/index.ts",
-      "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
@@ -36,7 +35,6 @@
   "publishConfig": {
     "exports": {
       ".": {
-        "require": "./dist/index.cjs",
         "default": "./dist/index.js"
       },
       "./package.json": "./package.json"
@@ -118,7 +116,7 @@
     }
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=22.12"
   },
   "packageManager": "pnpm@11.9.0",
   "esm.sh": {
