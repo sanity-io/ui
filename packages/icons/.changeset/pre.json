@@ -4,8 +4,5 @@
   "initialVersions": {
     "@sanity/icons": "3.7.7"
   },
-  "changesets": [
-    "drop-commonjs-support",
-    "drop-react-18-support"
-  ]
+  "changesets": ["drop-commonjs-support", "drop-react-18-support"]
 }

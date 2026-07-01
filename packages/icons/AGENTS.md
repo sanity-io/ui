@@ -9,7 +9,7 @@
   - Dev showcase app: `pnpm dev` (Vite on http://localhost:5173/, entry `src/__workshop__/main.tsx`).
   - Lint: `pnpm lint` (oxlint). Format: `pnpm format` (oxfmt).
   - Test: `pnpm test` (vitest, jsdom).
-  - Build the library: `pnpm build` (runs `clean` → `generate` → `pkg:build` → `pkg:check`).
+  - Build the library: `pnpm build` (runs `generate` via `prebuild`, then `tsdown`, which bundles to `dist/`, emits `.d.ts` types, runs publint, and — locally only — writes the `exports`/`publishConfig.exports` fields in `package.json`).
   - Dead-code/deps check: `pnpm knip`.
 - Non-obvious: `pnpm build` runs `generate`, which deletes and regenerates `src/icons/*` and `src/icons/index.ts` from the SVG sources in `export/`. These generated files are committed; do not hand-edit them—edit the SVGs in `export/` or `scripts/generate.ts` instead.
 - The pre-commit hook (lefthook) runs oxfmt + oxlint on staged files.

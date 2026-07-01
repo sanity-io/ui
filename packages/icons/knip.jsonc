@@ -1,9 +1,6 @@
 {
   "$schema": "./node_modules/knip/schema-jsonc.json",
   "entry": [
-    // Read by `pkg` (`@sanity/pkg-utils`) via its own config file naming convention,
-    // not through an import, so it's otherwise invisible to knip.
-    "package.config.ts",
     // Sanity Functions entry points, consumed by the Sanity runtime rather than
     // through an import graph knip can follow.
     "functions/*/index.ts",
