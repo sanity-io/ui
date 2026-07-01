@@ -1,6 +1,6 @@
 import {Icon, SearchIcon, SpinnerIcon, type IconSymbol} from '@sanity/icons'
 import {Box, Card, Code, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
-import {startTransition, useState} from 'react'
+import {startTransition, useEffect, useState} from 'react'
 import {registerLanguage} from 'react-refractor'
 import tsx from 'refractor/typescript'
 import {keyframes, styled} from 'styled-components'
@@ -33,8 +33,23 @@ function toPascalCase(str: string) {
 }
 
 export default function OverviewStory() {
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    return searchParams.get('query') ?? ''
+  })
   const {results: iconKeys, loading} = useIconSearch(query)
+
+  useEffect(() => {
+    if (typeof requestIdleCallback === 'function') {
+      const id = requestIdleCallback(() => {
+        const searchParams = new URLSearchParams(window.location.search)
+        searchParams.set('query', query)
+        window.history.replaceState(null, '', `?${searchParams}`)
+      })
+      return () => cancelIdleCallback(id)
+    }
+    return undefined
+  }, [query])
 
   return (
     <Card padding={[4, 5, 6]}>
@@ -45,6 +60,7 @@ export default function OverviewStory() {
             onChange={(event) => startTransition(() => setQuery(event.currentTarget.value))}
             placeholder="Search icons by name or meaning, e.g. “time” or “create person”…"
             radius={2}
+            defaultValue={query}
           />
         </Box>
 
