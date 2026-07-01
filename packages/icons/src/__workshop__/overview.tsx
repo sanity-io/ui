@@ -58,7 +58,7 @@ export default function OverviewStory() {
           <TextInput
             icon={loading ? <SpinningIcon /> : SearchIcon}
             onChange={(event) => startTransition(() => setQuery(event.currentTarget.value))}
-            placeholder="Search icons by name or meaning, e.g. “time” or “create person”…"
+            placeholder="Fuzzy search icons by name or meaning, e.g. “oh no” or “delete”…"
             radius={2}
             defaultValue={query}
           />
