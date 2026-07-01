@@ -20,8 +20,12 @@ jobs:
       - uses: actions/checkout@v5
       - uses: pnpm/setup@v1
         with:
+          install: false
           cache: true
-          runtime: node@lts
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+      - run: pnpm install
       - run: pnpm format
       - run: git restore .github/workflows pnpm-lock.yaml
       - uses: actions/create-github-app-token@v2

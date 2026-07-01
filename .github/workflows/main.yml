@@ -18,8 +18,12 @@ jobs:
       - uses: actions/checkout@v5
       - uses: pnpm/setup@v1
         with:
+          install: false
           cache: true
-          runtime: node@lts
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+      - run: pnpm install
       - run: pnpm ts:check
       - run: pnpm build
 
@@ -31,8 +35,12 @@ jobs:
       - uses: actions/checkout@v5
       - uses: pnpm/setup@v1
         with:
+          install: false
           cache: true
-          runtime: node@lts
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+      - run: pnpm install
       - run: "pnpm lint -f gha --max-warnings 0"
 
   test:
@@ -43,17 +51,21 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ubuntu-latest]
-        # node-version: [lts, latest]
-        node-version: [lts]
+        # node-version: [lts/*, current]
+        node-version: [lts/*]
         include:
           - platform: macos-latest
-            node-version: lts
+            node-version: lts/*
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/setup@v1
         with:
+          install: false
           cache: true
-          runtime: node@${{ matrix.node-version }}
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: pnpm install
       - run: pnpm build
       - run: pnpm test
 
@@ -65,7 +77,9 @@ jobs:
         with:
           install: false
           cache: true
-          runtime: node@lts
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
       - uses: cypress-io/github-action@v6
         with:
           build: pnpm workshop:build
@@ -109,8 +123,12 @@ jobs:
           persist-credentials: false
       - uses: pnpm/setup@v1
         with:
+          install: false
           cache: true
-          runtime: node@lts
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+      - run: pnpm install
       # Branches that will release new versions are defined in .releaserc.json
       - run: pnpm exec semantic-release
         env:
