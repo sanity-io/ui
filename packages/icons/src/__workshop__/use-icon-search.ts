@@ -6,7 +6,7 @@ import {searchClient} from './sanity-client'
 // Hybrid ranking: exact filename, then prefix, then keyword matches across
 // filename/namedExport/tags/description, and finally semantic similarity.
 // Keyword boosts are weighted high so exact/partial matches always rank above
-// fuzzy ones. The icon key is recovered from `_id` ("icon.<key>").
+// fuzzy ones. The icon key is recovered from `_id` ("icon_<key>").
 const SEARCH_QUERY = `*[_type == "icon"] | score(
   boost(filename == $qExact, 12),
   boost(filename match $qPrefix, 8),
@@ -59,7 +59,7 @@ export function useIconSearch(query: string): IconSearchState {
 
         // Recover the icon key from `_id` and keep only icons in the shipped set.
         const names = rows
-          .map((row) => row.id.replace(/^icon\./, ''))
+          .map((row) => row.id.replace(/^icon_/, ''))
           .filter((name) => name in icons)
 
         setRemote({query: trimmed, names, semantic: true})

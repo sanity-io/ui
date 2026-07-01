@@ -69,7 +69,9 @@ async function main() {
 
   for (const filePath of filePaths) {
     const key = iconKeyFromPath(filePath)
-    const _id = `icon.${key}`
+    // Prefix with `icon_` (not `icon.`): `.` is a document-id namespace separator
+    // in Sanity and segments like "versions" are reserved.
+    const _id = `icon_${key}`
     // The literal filename as it exists in `export/` (e.g. "add-user.svg").
     const filename = path.relative(IMPORT_PATH, filePath).split(path.sep).join('/')
     // The ESM named export, matching scripts/generate.ts (e.g. "AddUserIcon").

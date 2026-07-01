@@ -16,7 +16,7 @@ export const handler = documentEventHandler<IconEvent>(async ({context, event}) 
     useCdn: false,
   })
 
-  const label = _id.replace(/^icon\./, '')
+  const label = _id.replace(/^icon_/, '')
 
   // 1. Use Sanity's native vision model (Agent Actions) to look at the
   //    rasterized icon and write a search-friendly description.
