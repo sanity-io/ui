@@ -4,3 +4,4 @@
 .workshop
 dist
 node_modules
+.husky/pre-commit

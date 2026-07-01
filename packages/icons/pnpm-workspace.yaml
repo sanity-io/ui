@@ -9,6 +9,3 @@ allowBuilds:
 # supply-chain policy (a no-op when the policy is not enabled).
 minimumReleaseAgeExclude:
   - vite@8.1.2
-
-publicHoistPattern:
-  - styled-components
