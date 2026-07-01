@@ -3,19 +3,23 @@ import {css, styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {Radius} from '../../types'
+import {ElementType, Props, Radius} from '../../types'
 import {Box} from '../box'
 import {Text} from '../text'
 
 /**
  * @public
  */
-export interface KBDProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+export interface KBDOwnProps {
   fontSize?: number | number[]
   padding?: number | number[]
   radius?: Radius | Radius[]
 }
+
+/**
+ * @public
+ */
+export type KBDProps<E extends ElementType = 'kbd'> = Props<KBDOwnProps, E>
 
 function kbdStyle() {
   return css`
@@ -37,13 +41,8 @@ function kbdStyle() {
 
 const StyledKBD = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
 
-/**
- * Used to define some text as keyboard input.
- *
- * @public
- */
-export const KBD = forwardRef(function KBD(
-  props: KBDProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
+const KBDComponent = forwardRef(function KBD(
+  props: KBDOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {children, fontSize = 0, padding = 1, radius = 2, ...restProps} = props
@@ -58,4 +57,13 @@ export const KBD = forwardRef(function KBD(
     </StyledKBD>
   )
 })
-KBD.displayName = 'ForwardRef(KBD)'
+KBDComponent.displayName = 'ForwardRef(KBD)'
+
+/**
+ * Used to define some text as keyboard input.
+ *
+ * @public
+ */
+export const KBD = KBDComponent as unknown as <E extends ElementType = 'kbd'>(
+  props: KBDProps<E>,
+) => React.JSX.Element

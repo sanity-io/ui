@@ -1,7 +1,7 @@
 import {getTheme_v2, ThemeColorStateToneKey} from '@sanity/ui/theme'
 import {styled} from 'styled-components'
 
-import {Card, Flex} from '../../primitives'
+import {Card, type CardProps, Flex} from '../../primitives'
 import type {ButtonTone} from '../../types'
 
 const LOADING_BAR_HEIGHT = 2
@@ -61,7 +61,7 @@ export const LoadingBarMask = styled(Card)`
   z-index: 1;
 `
 
-type LoadingBarProgressProps = Omit<React.ComponentProps<typeof Card>, 'tone'> & {
+type LoadingBarProgressProps = Omit<CardProps, 'tone'> & {
   tone: ThemeColorStateToneKey
 }
 export const LoadingBarProgress = styled<React.ComponentType<LoadingBarProgressProps>>(Card)`

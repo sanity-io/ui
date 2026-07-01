@@ -8,31 +8,32 @@ import {
   responsiveFlexStyle,
   ResponsiveFlexStyleProps,
 } from '../../styles/internal'
-import {Box, BoxProps} from '../box'
+import {ElementType, Props} from '../../types'
+import {Box, BoxOwnProps} from '../box'
 import {ResponsiveFlexItemProps, ResponsiveFlexProps} from '../types'
 
 /**
  * @public
  */
-export interface FlexProps
-  extends Omit<BoxProps, 'display'>,
+export interface FlexOwnProps
+  extends Omit<BoxOwnProps, 'display'>,
     ResponsiveFlexProps,
     ResponsiveFlexItemProps {
   gap?: number | number[]
 }
+
+/**
+ * @public
+ */
+export type FlexProps<E extends ElementType = 'div'> = Props<FlexOwnProps, E>
 
 const StyledFlex = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
   flexItemStyle,
   responsiveFlexStyle,
 )
 
-/**
- * The `Flex` component is a wrapper component for flexible elements (`Box`, `Card` and `Flex`).
- *
- * @public
- */
-export const Flex = forwardRef(function Flex(
-  props: FlexProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'wrap'>,
+const FlexComponent = forwardRef(function Flex(
+  props: FlexOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'wrap'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {align, as, direction = 'row', gap, justify, wrap, ...restProps} = props
@@ -51,4 +52,13 @@ export const Flex = forwardRef(function Flex(
     />
   )
 })
-Flex.displayName = 'ForwardRef(Flex)'
+FlexComponent.displayName = 'ForwardRef(Flex)'
+
+/**
+ * The `Flex` component is a wrapper component for flexible elements (`Box`, `Card` and `Flex`).
+ *
+ * @public
+ */
+export const Flex = FlexComponent as unknown as <E extends ElementType = 'div'>(
+  props: FlexProps<E>,
+) => React.JSX.Element

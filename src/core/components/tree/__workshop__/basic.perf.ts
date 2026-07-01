@@ -9,7 +9,7 @@ function test<ElementType = unknown>(
 }
 
 export const perfTests = [
-  test('Toggle tree groups', async ({target}: {target: HTMLDivElement}) => {
+  test('Toggle tree groups', async ({target}: {target: HTMLUListElement}) => {
     const apples = await findByTestId(target, 'apples')
     const oranges = await findByTestId(target, 'oranges')
 

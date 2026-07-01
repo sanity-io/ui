@@ -5,12 +5,12 @@ import {Container} from '../../container/container'
 import {Grid} from '../../grid/grid'
 import {Stack} from '../../stack/stack'
 import {Text} from '../../text/text'
-import {Button, ButtonProps} from '../button'
+import {Button, ButtonOwnProps} from '../button'
 
 const GAP = 4
 const COLUMNS = 3
 
-const DEFAULT_PROPS: ButtonProps = {
+const DEFAULT_PROPS: ButtonOwnProps = {
   icon: SquareIcon,
   iconRight: SquareIcon,
 }

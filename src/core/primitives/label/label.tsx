@@ -4,17 +4,16 @@ import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles'
 import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
-import {TextAlign} from '../../types'
+import {ElementType, Props, TextAlign} from '../../types'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {labelBaseStyle} from './styles'
 
 /**
  * @public
  */
-export interface LabelProps {
+export interface LabelOwnProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   muted?: boolean
   size?: number | number[]
   /**
@@ -26,6 +25,11 @@ export interface LabelProps {
   weight?: ThemeFontWeightKey
 }
 
+/**
+ * @public
+ */
+export type LabelProps<E extends ElementType = 'div'> = Props<LabelOwnProps, E>
+
 const StyledLabel = styled.div<{
   $accent?: boolean
   $align: TextAlign[]
@@ -33,13 +37,8 @@ const StyledLabel = styled.div<{
   $size: number[]
 }>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
 
-/**
- * Typographic labels.
- *
- * @public
- */
-export const Label = forwardRef(function Label(
-  props: LabelProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
+const LabelComponent = forwardRef(function Label(
+  props: LabelOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -76,4 +75,13 @@ export const Label = forwardRef(function Label(
     </StyledLabel>
   )
 })
-Label.displayName = 'ForwardRef(Label)'
+LabelComponent.displayName = 'ForwardRef(Label)'
+
+/**
+ * Typographic labels.
+ *
+ * @public
+ */
+export const Label = LabelComponent as unknown as <E extends ElementType = 'div'>(
+  props: LabelProps<E>,
+) => React.JSX.Element

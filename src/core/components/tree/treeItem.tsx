@@ -3,7 +3,8 @@ import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {startTransition, useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {Box, BoxProps, Flex, Text} from '../../primitives'
+import {Box, Flex, Text} from '../../primitives'
+import {ElementType} from '../../types'
 import {
   treeItemBoxStyle,
   TreeItemBoxStyleProps,
@@ -24,7 +25,7 @@ export interface TreeItemProps {
   /**
    * Allows passing a custom element type to the link component
    */
-  linkAs?: BoxProps['as']
+  linkAs?: ElementType
   padding?: number | number[]
   gap?: number | number[]
   /**

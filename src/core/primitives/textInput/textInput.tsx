@@ -22,14 +22,14 @@ import {
 import {useRootTheme} from '../../theme'
 import {Radius} from '../../types'
 import {Box} from '../box'
-import {Button, ButtonProps} from '../button'
+import {Button, ButtonOwnProps} from '../button'
 import {Card} from '../card'
 import {Text} from '../text'
 
 /**
  * @public
  */
-export type TextInputClearButtonProps = Omit<ButtonProps, 'as'> &
+export type TextInputClearButtonProps = ButtonOwnProps &
   Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'onClick' | 'onMouseDown' | 'ref'>
 
 /**

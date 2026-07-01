@@ -13,8 +13,8 @@ import {
   ResponsiveShadowStyleProps,
 } from '../../styles/internal'
 import {ThemeColorProvider, useRootTheme} from '../../theme'
-import {CardTone} from '../../types'
-import {Box, BoxProps} from '../box'
+import {CardTone, ElementType, Props} from '../../types'
+import {Box, BoxOwnProps} from '../box'
 import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {cardStyle} from './styles'
 import {CardStyleProps} from './types'
@@ -22,8 +22,8 @@ import {CardStyleProps} from './types'
 /**
  * @public
  */
-export interface CardProps
-  extends BoxProps,
+export interface CardOwnProps
+  extends BoxOwnProps,
     ResponsiveBorderProps,
     ResponsiveRadiusProps,
     ResponsiveShadowProps {
@@ -37,11 +37,18 @@ export interface CardProps
    * @beta
    */
   __unstable_focusRing?: boolean
+  disabled?: boolean
   muted?: boolean
   pressed?: boolean
   scheme?: ThemeColorSchemeKey
+  selected?: boolean
   tone?: CardTone
 }
+
+/**
+ * @public
+ */
+export type CardProps<E extends ElementType = 'div'> = Props<CardOwnProps, E>
 
 const StyledCard = styled(Box)<
   CardStyleProps &
@@ -50,14 +57,8 @@ const StyledCard = styled(Box)<
     ResponsiveShadowStyleProps
 >(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
 
-/**
- * The `Card` component acts much like a `Box`, but with a background and foreground color.
- * Components within a `Card` inherit its colors.
- *
- * @public
- */
-export const Card = forwardRef(function Card(
-  props: CardProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
+const CardComponent = forwardRef(function Card(
+  props: CardOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -114,4 +115,14 @@ export const Card = forwardRef(function Card(
     </ThemeColorProvider>
   )
 })
-Card.displayName = 'ForwardRef(Card)'
+CardComponent.displayName = 'ForwardRef(Card)'
+
+/**
+ * The `Card` component acts much like a `Box`, but with a background and foreground color.
+ * Components within a `Card` inherit its colors.
+ *
+ * @public
+ */
+export const Card = CardComponent as unknown as <E extends ElementType = 'div'>(
+  props: CardProps<E>,
+) => React.JSX.Element

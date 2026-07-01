@@ -8,17 +8,16 @@ import {
   responsiveTextAlignStyle,
   responsiveTextFont,
 } from '../../styles/internal'
-import {TextAlign} from '../../types'
+import {ElementType, Props, TextAlign} from '../../types'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {textBaseStyle} from './styles'
 
 /**
  * @public
  */
-export interface TextProps {
+export interface TextOwnProps {
   accent?: boolean
   align?: TextAlign | TextAlign[]
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
   /** When `true` the text color will be muted. */
   muted?: boolean
   size?: number | number[]
@@ -31,19 +30,19 @@ export interface TextProps {
   weight?: ThemeFontWeightKey
 }
 
+/**
+ * @public
+ */
+export type TextProps<E extends ElementType = 'div'> = Props<TextOwnProps, E>
+
 const StyledText = styled.div<ResponsiveFontStyleProps>(
   responsiveTextFont,
   responsiveTextAlignStyle,
   textBaseStyle,
 )
 
-/**
- * The `Text` component is an agile, themed typographic element.
- *
- * @public
- */
-export const Text = forwardRef(function Text(
-  props: TextProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
+const TextComponent = forwardRef(function Text(
+  props: TextOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
@@ -78,4 +77,13 @@ export const Text = forwardRef(function Text(
     </StyledText>
   )
 })
-Text.displayName = 'ForwardRef(Text)'
+TextComponent.displayName = 'ForwardRef(Text)'
+
+/**
+ * The `Text` component is an agile, themed typographic element.
+ *
+ * @public
+ */
+export const Text = TextComponent as unknown as <E extends ElementType = 'div'>(
+  props: TextProps<E>,
+) => React.JSX.Element

@@ -6,7 +6,15 @@ import {styled} from 'styled-components'
 import {_getArrayProp, ThemeProps} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme_v2} from '../../theme'
-import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth, FlexJustify} from '../../types'
+import {
+  ButtonMode,
+  ButtonTextAlign,
+  ButtonTone,
+  ButtonWidth,
+  ElementType,
+  FlexJustify,
+  Props,
+} from '../../types'
 import {Box} from '../box'
 import {Flex} from '../flex'
 import {Spinner} from '../spinner'
@@ -17,8 +25,7 @@ import {buttonBaseStyles, buttonColorStyles} from './styles'
 /**
  * @public
  */
-export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+export interface ButtonOwnProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   fontSize?: number | number[]
   mode?: ButtonMode
   icon?: React.ElementType | React.ReactNode
@@ -43,6 +50,11 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   width?: ButtonWidth
 }
 
+/**
+ * @public
+ */
+export type ButtonProps<E extends ElementType = 'button'> = Props<ButtonOwnProps, E>
+
 const StyledButton = styled.button<
   {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps &
     ThemeProps
@@ -63,11 +75,11 @@ const LoadingBox = styled.div`
   box-shadow: inherit;
 `
 
-/**
- * @public
- */
-export const Button = forwardRef(function Button(
-  props: ButtonProps & Omit<React.HTMLProps<HTMLButtonElement>, 'as' | 'width'>,
+const ButtonComponent = forwardRef(function Button(
+  props: ButtonOwnProps & {as?: ElementType} & Omit<
+      React.HTMLProps<HTMLButtonElement>,
+      'as' | 'width'
+    >,
   ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
@@ -188,4 +200,11 @@ export const Button = forwardRef(function Button(
     </StyledButton>
   )
 })
-Button.displayName = 'ForwardRef(Button)'
+ButtonComponent.displayName = 'ForwardRef(Button)'
+
+/**
+ * @public
+ */
+export const Button = ButtonComponent as unknown as <E extends ElementType = 'button'>(
+  props: ButtonProps<E>,
+) => React.JSX.Element

@@ -15,5 +15,10 @@ export default defineScope({
       title: 'Responsive',
       component: lazy(() => import('./responsive')),
     },
+    {
+      name: 'as-component',
+      title: 'As component',
+      component: lazy(() => import('./asComponent')),
+    },
   ],
 })

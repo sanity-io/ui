@@ -27,7 +27,7 @@ const SanityUploadButton = styled(Button).attrs({forwardedAs: 'label'})`
 
 export default function SanityUploadButtonWorkaroundStory() {
   return (
-    <Flex align="center" height="fill" htmlFor="file" justify="center">
+    <Flex align="center" height="fill" justify="center">
       <SanityUploadButton icon={UploadIcon} tabIndex={0} text="Upload">
         <input type="file" />
       </SanityUploadButton>

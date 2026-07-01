@@ -3,6 +3,7 @@ import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles'
 import {responsiveCodeFontStyle, ResponsiveFontStyleProps} from '../../styles/internal'
+import {ElementType, Props} from '../../types'
 import {codeBaseStyle} from './styles'
 
 const LazyRefractor = lazy(() => import('./refractor'))
@@ -10,21 +11,22 @@ const LazyRefractor = lazy(() => import('./refractor'))
 /**
  * @public
  */
-export interface CodeProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+export interface CodeOwnProps {
   /** Define the language to use for syntax highlighting. */
   language?: string
   size?: number | number[]
   weight?: string
 }
 
-const StyledCode = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeFontStyle)
-
 /**
  * @public
  */
-export const Code = forwardRef(function Code(
-  props: CodeProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
+export type CodeProps<E extends ElementType = 'pre'> = Props<CodeOwnProps, E>
+
+const StyledCode = styled.pre<ResponsiveFontStyleProps>(codeBaseStyle, responsiveCodeFontStyle)
+
+const CodeComponent = forwardRef(function Code(
+  props: CodeOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
   ref: React.ForwardedRef<HTMLElement>,
 ) {
   const {children, language, size = 2, weight, ...restProps} = props
@@ -43,4 +45,11 @@ export const Code = forwardRef(function Code(
     </StyledCode>
   )
 })
-Code.displayName = 'ForwardRef(Code)'
+CodeComponent.displayName = 'ForwardRef(Code)'
+
+/**
+ * @public
+ */
+export const Code = CodeComponent as unknown as <E extends ElementType = 'pre'>(
+  props: CodeProps<E>,
+) => React.JSX.Element

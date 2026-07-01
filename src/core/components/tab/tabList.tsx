@@ -1,12 +1,12 @@
 import {Children, cloneElement, forwardRef, isValidElement, useCallback, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {Inline, InlineProps} from '../../primitives'
+import {Inline, InlineOwnProps} from '../../primitives'
 
 /**
  * @public
  */
-export interface TabListProps extends Omit<InlineProps, 'as' | 'height'> {
+export interface TabListProps extends Omit<InlineOwnProps, 'height'> {
   children: Array<React.JSX.Element | null | undefined | false>
 }
 

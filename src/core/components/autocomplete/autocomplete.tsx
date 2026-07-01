@@ -190,7 +190,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const rootElementRef = useRef<HTMLDivElement | null>(null)
   const resultsPopoverElementRef = useRef<HTMLDivElement | null>(null)
   const inputElementRef = useRef<HTMLInputElement | null>(null)
-  const listBoxElementRef = useRef<HTMLDivElement | null>(null)
+  const listBoxElementRef = useRef<HTMLUListElement | null>(null)
   // Element refs that need to be accessed during render
   const [inputElement, _setInputElement] = useState<HTMLInputElement | null>(null)
   /**

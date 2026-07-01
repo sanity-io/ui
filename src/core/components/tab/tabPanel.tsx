@@ -1,11 +1,11 @@
 import {forwardRef} from 'react'
 
-import {Box, BoxProps} from '../../primitives'
+import {Box, BoxOwnProps} from '../../primitives'
 
 /**
  * @public
  */
-export interface TabPanelProps extends BoxProps {
+export interface TabPanelProps extends BoxOwnProps {
   /**
    * The `id` of the correlating `Tab` component.
    */

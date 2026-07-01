@@ -6,15 +6,14 @@ import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
 import {Selectable} from '../../primitives/_selectable'
 import {_getArrayProp} from '../../styles'
 import {useRootTheme} from '../../theme'
-import {Radius, SelectableTone} from '../../types'
+import {ElementType, Props, Radius, SelectableTone} from '../../types'
 import {Menu, MenuProps} from './menu'
 import {useMenu} from './useMenu'
 
 /**
  * @public
  */
-export interface MenuGroupProps {
-  as?: React.ElementType | keyof React.JSX.IntrinsicElements
+export interface MenuGroupOwnProps {
   fontSize?: number | number[]
   icon?: React.ElementType | React.ReactNode
   menu?: Omit<
@@ -43,9 +42,11 @@ export interface MenuGroupProps {
 /**
  * @public
  */
-export function MenuGroup(
+export type MenuGroupProps<E extends ElementType = 'button'> = Props<MenuGroupOwnProps, E>
+
+function MenuGroupComponent(
   props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'popover' | 'ref' | 'tabIndex'> &
-    MenuGroupProps,
+    MenuGroupOwnProps & {as?: ElementType},
 ): React.JSX.Element {
   const {
     as = 'button',
@@ -222,4 +223,11 @@ export function MenuGroup(
   )
 }
 
-MenuGroup.displayName = 'MenuGroup'
+MenuGroupComponent.displayName = 'MenuGroup'
+
+/**
+ * @public
+ */
+export const MenuGroup = MenuGroupComponent as unknown as <E extends ElementType = 'button'>(
+  props: MenuGroupProps<E>,
+) => React.JSX.Element

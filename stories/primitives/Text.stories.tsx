@@ -141,7 +141,7 @@ export const TextInCard: Story = {
   render: () => {
     return (
       <Flex>
-        <Stack space={4} wrap={'wrap'}>
+        <Stack space={4}>
           <Text>Text without card</Text>
           <Text muted>Text muted</Text>
 
