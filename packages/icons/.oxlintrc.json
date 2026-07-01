@@ -23,15 +23,19 @@
     "perf": "error"
   },
   "rules": {
-    "no-underscore-dangle": "off",
-    "import/no-cycle": "error",
     "eslint/no-console": "error",
-    "react/rules-of-hooks": "error",
-    "react/exhaustive-deps": "error",
+    "import/no-cycle": "error",
+    "jsx-no-jsx-as-prop": "off",
+    "jsx-no-new-array-as-prop": "off",
+    "jsx-no-new-function-as-prop": "off",
+    "no-underscore-dangle": "off",
+    "no-unsafe-type-assertion": "off",
     "react-in-jsx-scope": "off",
+    "react/exhaustive-deps": "error",
     "react/react-compiler": "error",
+    "react/rules-of-hooks": "error",
     "typescript/ban-ts-comment": "error",
     "typescript/no-deprecated": "error",
-    "typescript/prefer-ts-expect-error": "error"
+    "typescript/prefer-ts-expect-error": "error",
   }
 }

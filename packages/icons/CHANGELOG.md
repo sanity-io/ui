@@ -1,9 +1,4 @@
-<!-- markdownlint-disable --><!-- textlint-disable -->
-
-# 📓 Changelog
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+# @sanity/icons
 
 ## [3.7.6](https://github.com/sanity-io/icons/compare/v3.7.5...v3.7.6) (2026-07-01)
 

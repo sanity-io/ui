@@ -84,7 +84,6 @@ async function readIcon(filePath: string) {
     .replace(/"#([0-9a-fA-F]{6})"/g, '"currentColor"')
     .replace('<svg ', `<svg data-sanity-icon="${name}" `)
 
-  // oxlint-disable-next-line no-unsafe-type-assertion
   code = (await format(targetPath, code, formatConfig as unknown as FormatConfig)).code
 
   return {
@@ -162,7 +161,6 @@ async function generate() {
       // getIconsMap,
       iconsExport,
     ].join('\n\n'),
-    // oxlint-disable-next-line no-unsafe-type-assertion
     formatConfig as unknown as FormatConfig,
   )
 
