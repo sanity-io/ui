@@ -1,5 +1,13 @@
 # @sanity/icons
 
+## 4.0.0-rc.0
+
+### Major Changes
+
+- [#200](https://github.com/sanity-io/icons/pull/200) [`26b9248`](https://github.com/sanity-io/icons/commit/26b9248026cab731d5506e238ac10a1d14a579ad) Thanks [@stipsan](https://github.com/stipsan)! - Drop CommonJS support and require Node.js `>=22.12`
+
+  `@sanity/icons` is now ESM-only. The `require` export condition and the CommonJS build output (`./dist/index.cjs`) have been removed, so the package must be consumed via ESM `import`. The minimum supported Node.js version has been raised to `>=22.12` to match `sanity`.
+
 ## 3.8.0
 
 ### Minor Changes

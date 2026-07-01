@@ -4,5 +4,7 @@
   "initialVersions": {
     "@sanity/icons": "3.7.7"
   },
-  "changesets": []
+  "changesets": [
+    "drop-commonjs-support"
+  ]
 }
