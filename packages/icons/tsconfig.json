@@ -1,13 +1,6 @@
 {
   "extends": "./tsconfig.settings",
-  "include": [
-    "./jest.config.mjs",
-    "./package.config.ts",
-    "./scripts",
-    "./src",
-    "./test",
-    "./workshop.config.ts"
-  ],
+  "include": ["./package.config.ts", "./scripts", "./src", "./test", "./vite.config.ts"],
   "compilerOptions": {
     "noEmit": true,
     "jsx": "react-jsx",

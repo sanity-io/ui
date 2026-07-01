@@ -5,5 +5,10 @@ allowBuilds:
   lefthook: true
   unrs-resolver: false
 
+# Allow the freshly published vite 8 release through pnpm's minimum release age
+# supply-chain policy (a no-op when the policy is not enabled).
+minimumReleaseAgeExclude:
+  - vite@8.1.2
+
 publicHoistPattern:
   - styled-components

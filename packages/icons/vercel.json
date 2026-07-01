@@ -1,12 +1,10 @@
 {
   "version": 2,
+  "buildCommand": "pnpm build:showcase",
+  "outputDirectory": "dist",
   "routes": [
     {
       "handle": "filesystem"
-    },
-    {
-      "src": "/frame/(.*)",
-      "dest": "/frame/index.html"
     },
     {
       "src": "/(.*)",
