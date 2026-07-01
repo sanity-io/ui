@@ -9,6 +9,7 @@ allowBuilds:
 # supply-chain policy (a no-op when the policy is not enabled).
 minimumReleaseAgeExclude:
   - '@sanity/*'
+  - '@types/node'
   - '@oxlint/*'
   - 'oxlint'
   - 'oxlint-tsgolint'
