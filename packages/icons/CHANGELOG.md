@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.5](https://github.com/sanity-io/icons/compare/v3.7.4...v3.7.5) (2026-07-01)
+
+### Bug Fixes
+
+- setup trusted publishing ([#183](https://github.com/sanity-io/icons/issues/183)) ([fe8c88a](https://github.com/sanity-io/icons/commit/fe8c88a40347ab7ab4ce853182e817ce42fde8e6))
+
 ## [3.7.4](https://github.com/sanity-io/icons/compare/v3.7.3...v3.7.4) (2025-06-20)
 
 ### Bug Fixes
