@@ -5,4 +5,5 @@
     // not through an import, so it's otherwise invisible to knip.
     "package.config.ts",
   ],
+  "ignoreDependencies": ["react-refractor", "refractor"],
 }
