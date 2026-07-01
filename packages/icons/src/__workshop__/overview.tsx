@@ -87,6 +87,7 @@ function CopyCodeButton({code}: {code: string}) {
   // open while the copied/error feedback is active.
   return (
     <Popover
+      animate
       content={
         <Box padding={2}>
           <Text size={1}>{label}</Text>
