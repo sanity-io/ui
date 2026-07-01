@@ -1,6 +1,10 @@
 import {Icon, icons, SearchIcon, type IconSymbol} from '@sanity/icons'
 import {Box, Card, Code, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
 import {useState, Activity, startTransition} from 'react'
+import {registerLanguage} from 'react-refractor'
+import tsx from 'refractor/typescript'
+
+registerLanguage(tsx)
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)

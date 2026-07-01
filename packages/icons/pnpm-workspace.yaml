@@ -13,3 +13,7 @@ minimumReleaseAgeExclude:
   - 'oxlint'
   - 'oxlint-tsgolint'
   - vite@8.1.2
+
+publicHoistPattern:
+  - 'react-refractor'
+  - 'refractor'
