@@ -24,6 +24,7 @@ export const DiamondIcon: ForwardRefExoticComponent<
         stroke="currentColor"
         strokeWidth={1.2}
         strokeLinejoin="round"
+        strokeLinecap="round"
       />
     </svg>
   )
