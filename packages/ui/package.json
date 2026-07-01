@@ -50,7 +50,9 @@
   },
   "dependencies": {
     "@sanity-labs/design-tokens": "0.0.2-alpha.4",
-    "clsx": "^2.1.1"
+    "@sanity/icons": "^3.7.4",
+    "clsx": "^2.1.1",
+    "react-refractor": "^4.0.0"
   },
   "devDependencies": {
     "@sanity/browserslist-config": "^1.0.5",
@@ -71,15 +73,8 @@
     "vitest": "^4.1.1"
   },
   "peerDependencies": {
-    "@sanity/icons": "^3.7.4",
     "react": "^19.2",
-    "react-dom": "^19.2",
-    "react-refractor": "^4.0.0"
-  },
-  "peerDependenciesMeta": {
-    "react-refractor": {
-      "optional": true
-    }
+    "react-dom": "^19.2"
   },
   "engines": {
     "node": ">=20.19 <22 || >=22.12"
