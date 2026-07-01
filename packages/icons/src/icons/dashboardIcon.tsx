@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const DashboardIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function DashboardIcon(props, ref) {
+export function DashboardIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="dashboard"
@@ -17,7 +15,6 @@ export const DashboardIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path
         d="M14.5 19.5V12.5M10.5 12.5V5.5M5.5 12.5H19.5M5.5 19.5H19.5V5.5H5.5V19.5Z"
@@ -27,4 +24,4 @@ export const DashboardIcon: ForwardRefExoticComponent<
       />
     </svg>
   )
-})
+}

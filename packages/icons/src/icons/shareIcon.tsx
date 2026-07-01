@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const ShareIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function ShareIcon(props, ref) {
+export function ShareIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="share"
@@ -17,7 +15,6 @@ export const ShareIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path
         d="M15 10.5H18.5V19.5H6.5L6.5 10.5H10M12.5 16V3.5"
@@ -28,4 +25,4 @@ export const ShareIcon: ForwardRefExoticComponent<
       <path d="M9 7L12.5 3.5L16 7" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>
   )
-})
+}

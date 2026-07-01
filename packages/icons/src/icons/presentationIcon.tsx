@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const PresentationIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function PresentationIcon(props, ref) {
+export function PresentationIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="presentation"
@@ -17,7 +15,6 @@ export const PresentationIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path
         d="M10.5 18H5.5V8.5H19.5V18H14.5M10.5 18L9 22M10.5 18H14.5M14.5 18L16 22M4.5 8.5H20.5V6.5H4.5V8.5Z"
@@ -27,4 +24,4 @@ export const PresentationIcon: ForwardRefExoticComponent<
       />
     </svg>
   )
-})
+}

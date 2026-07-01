@@ -106,7 +106,7 @@
     "vitest": "^4.1.9"
   },
   "peerDependencies": {
-    "react": "^18.3 || ^19.0.0-0"
+    "react": "^19"
   },
   "devEngines": {
     "runtime": {

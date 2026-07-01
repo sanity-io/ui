@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const EnterIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function EnterIcon(props, ref) {
+export function EnterIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="enter"
@@ -17,7 +15,6 @@ export const EnterIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path d="M6 14.5H19.5V7" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path
@@ -28,4 +25,4 @@ export const EnterIcon: ForwardRefExoticComponent<
       />
     </svg>
   )
-})
+}

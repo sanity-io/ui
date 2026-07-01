@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const PauseIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function PauseIcon(props, ref) {
+export function PauseIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="pause"
@@ -17,7 +15,6 @@ export const PauseIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path d="M10.5 7.5H8.5V17.5H10.5V7.5Z" fill="currentColor" />
       <path d="M16.5 7.5H14.5V17.5H16.5V7.5Z" fill="currentColor" />
@@ -25,4 +22,4 @@ export const PauseIcon: ForwardRefExoticComponent<
       <path d="M16.5 7.5H14.5V17.5H16.5V7.5Z" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-})
+}

@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const ArrowLeftIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function ArrowLeftIcon(props, ref) {
+export function ArrowLeftIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="arrow-left"
@@ -17,7 +15,6 @@ export const ArrowLeftIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path d="M5.5 12.5H20" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path
@@ -28,4 +25,4 @@ export const ArrowLeftIcon: ForwardRefExoticComponent<
       />
     </svg>
   )
-})
+}

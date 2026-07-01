@@ -1,4 +1,4 @@
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 import {icons} from './icons'
 import type {IconSymbol} from './icons'
@@ -13,9 +13,7 @@ export interface IconProps {
 /**
  * @public
  */
-export const Icon: ForwardRefExoticComponent<
-  IconProps & Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function Icon(props, ref) {
+export function Icon(props: IconProps & ComponentPropsWithRef<'svg'>): ReactElement | null {
   const {symbol, ...restProps} = props
   const IconComponent = icons[symbol]
 
@@ -23,5 +21,5 @@ export const Icon: ForwardRefExoticComponent<
     return null
   }
 
-  return <IconComponent {...restProps} ref={ref} />
-})
+  return <IconComponent {...restProps} />
+}

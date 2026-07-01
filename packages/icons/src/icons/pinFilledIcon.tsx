@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const PinFilledIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function PinFilledIcon(props, ref) {
+export function PinFilledIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="pin-filled"
@@ -17,7 +15,6 @@ export const PinFilledIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path
         d="M17 15H8V13.5C8 12 10.5 11 10.5 11V9L8.5 7V6H16.5V7L14.5 9V11C14.5 11 17 12 17 13.5V15Z"
@@ -34,4 +31,4 @@ export const PinFilledIcon: ForwardRefExoticComponent<
       />
     </svg>
   )
-})
+}

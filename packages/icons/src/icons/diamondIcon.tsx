@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const DiamondIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function DiamondIcon(props, ref) {
+export function DiamondIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="diamond"
@@ -17,7 +15,6 @@ export const DiamondIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path
         d="M21 10.5L12.5 21M21 10.5L18 5.5H11M21 10.5H16M12.5 21L4 10.5M12.5 21L9 10.5M12.5 21L16 10.5M4 10.5L7 5.5H11M4 10.5H9M9 10.5H12.5H16M9 10.5L11 5.5M16 10.5L14.5 5.5H11"
@@ -28,4 +25,4 @@ export const DiamondIcon: ForwardRefExoticComponent<
       />
     </svg>
   )
-})
+}

@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const DocumentIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function DocumentIcon(props, ref) {
+export function DocumentIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="document"
@@ -17,7 +15,6 @@ export const DocumentIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path d="M11.5 4.5V9.5H6.5" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path
@@ -28,4 +25,4 @@ export const DocumentIcon: ForwardRefExoticComponent<
       />
     </svg>
   )
-})
+}

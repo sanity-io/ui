@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const ThListIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function ThListIcon(props, ref) {
+export function ThListIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="th-list"
@@ -17,7 +15,6 @@ export const ThListIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path
         d="M9.5 6.5V10.5M9.5 10.5V14.5M9.5 10.5H19.5M9.5 10.5H5.5M9.5 14.5V18.5M9.5 14.5H19.5M9.5 14.5H5.5M5.5 6.5H19.5V18.5H5.5V6.5Z"
@@ -27,4 +24,4 @@ export const ThListIcon: ForwardRefExoticComponent<
       />
     </svg>
   )
-})
+}

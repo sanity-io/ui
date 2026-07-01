@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const Progress50Icon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function Progress50Icon(props, ref) {
+export function Progress50Icon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="progress-50"
@@ -17,7 +15,6 @@ export const Progress50Icon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path
         d="M17 12.5C17 14.9853 14.9853 17 12.5 17V8C14.9853 8 17 10.0147 17 12.5Z"
@@ -34,4 +31,4 @@ export const Progress50Icon: ForwardRefExoticComponent<
       />
     </svg>
   )
-})
+}

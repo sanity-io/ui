@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const TrendUpwardIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function TrendUpwardIcon(props, ref) {
+export function TrendUpwardIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="trend-upward"
@@ -17,7 +15,6 @@ export const TrendUpwardIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path
         d="M4.5 18.5L11.5 10.5L13.5 14.5L20.5 6.5"
@@ -28,4 +25,4 @@ export const TrendUpwardIcon: ForwardRefExoticComponent<
       <path d="M20.5 11V6.5H16" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>
   )
-})
+}

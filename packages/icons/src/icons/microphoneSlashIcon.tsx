@@ -1,13 +1,11 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const MicrophoneSlashIcon: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function MicrophoneSlashIcon(props, ref) {
+export function MicrophoneSlashIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     <svg
       data-sanity-icon="microphone-slash"
@@ -17,7 +15,6 @@ export const MicrophoneSlashIcon: ForwardRefExoticComponent<
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
-      ref={ref}
     >
       <path
         d="M17.8162 14.412C18.6231 13.3173 19.1 11.9644 19.1 10.5V10H17.9V10.5C17.9 11.6324 17.5514 12.6834 16.9557 13.5516L17.8162 14.412Z"
@@ -38,4 +35,4 @@ export const MicrophoneSlashIcon: ForwardRefExoticComponent<
       <path d="M19 18L6 5" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
     </svg>
   )
-})
+}

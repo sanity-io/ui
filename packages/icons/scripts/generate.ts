@@ -20,18 +20,16 @@ const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
 const __TEMPLATE__ = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+import type {ComponentPropsWithRef, ReactElement} from 'react'
 
 /**
  * @public
  */
-export const __NAME__: ForwardRefExoticComponent<
-  Omit<SVGProps<SVGSVGElement>, "ref"> & RefAttributes<SVGSVGElement>
-> = /* @__PURE__ */ forwardRef(function __NAME__(props, ref) {
+export function __NAME__(props: ComponentPropsWithRef<'svg'>): ReactElement {
   return (
     __JSX__
   )
-});
+}
 `
 
 async function readIcon(filePath: string) {
@@ -64,7 +62,7 @@ async function readIcon(filePath: string) {
 
   code = code.replace(
     /xmlns="http:\/\/www.w3.org\/2000\/svg"/g,
-    ' xmlns="http://www.w3.org/2000/svg" {...props} ref={ref}',
+    ' xmlns="http://www.w3.org/2000/svg" {...props}',
   )
 
   code = code.replace(/width="25"/g, `width="1em"`)
