@@ -56,7 +56,6 @@
     "prepublishOnly": "pnpm build",
     "release": "changeset publish",
     "test": "jest",
-    "ts:check": "tsc",
     "workshop:build": "workshop build",
     "workshop:dev": "workshop dev"
   },

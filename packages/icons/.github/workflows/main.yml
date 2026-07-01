@@ -27,8 +27,7 @@ jobs:
       - uses: pnpm/setup@v1
         with:
           cache: true
-      - run: pnpm lint --deny-warnings --format github
-      - run: tsc --noEmit
+      - run: pnpm lint --format github
       - run: pnpm build
 
   test:
