@@ -1,15 +1,18 @@
 // oxlint-disable no-console
 
-import {readFile, writeFile} from 'fs/promises'
-import path from 'path'
-import prettierConfig from '@sanity/prettier-config'
+import {readFile, writeFile} from 'node:fs/promises'
+import path from 'node:path'
+import {fileURLToPath} from 'node:url'
+
 import {transform} from '@svgr/core'
 import camelCase from 'camelcase'
 import {globby} from 'globby'
 import {mkdirp} from 'mkdirp'
-import {format} from 'prettier'
+import {format, type FormatConfig} from 'oxfmt'
 
-const ROOT_PATH = path.resolve(__dirname, '..')
+import formatConfig from '../.oxfmtrc.json' with {type: 'json'}
+
+const ROOT_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const IMPORT_PATH = path.resolve(ROOT_PATH, 'export')
 const SRC_ICONS_PATH = path.resolve(ROOT_PATH, 'src/icons')
 
@@ -81,7 +84,8 @@ async function readIcon(filePath: string) {
     .replace(/"#([0-9a-fA-F]{6})"/g, '"currentColor"')
     .replace('<svg ', `<svg data-sanity-icon="${name}" `)
 
-  code = await format(code, {...prettierConfig, filepath: targetPath})
+  // oxlint-disable-next-line no-unsafe-type-assertion
+  code = (await format(targetPath, code, formatConfig as unknown as FormatConfig)).code
 
   return {
     basename,
@@ -146,7 +150,8 @@ async function generate() {
 
   const indexPath = path.resolve(SRC_ICONS_PATH, `index.ts`)
 
-  const indexTsCode = await format(
+  const {code: indexTsCode} = await format(
+    indexPath,
     [
       GENERATED_BANNER,
       importTypes,
@@ -157,10 +162,8 @@ async function generate() {
       // getIconsMap,
       iconsExport,
     ].join('\n\n'),
-    {
-      ...prettierConfig,
-      filepath: indexPath,
-    },
+    // oxlint-disable-next-line no-unsafe-type-assertion
+    formatConfig as unknown as FormatConfig,
   )
 
   await writeFile(indexPath, indexTsCode)

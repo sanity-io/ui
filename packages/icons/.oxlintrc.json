@@ -1,15 +1,37 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "unicorn", "react", "oxc", "import"],
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "react",
+    "react-perf",
+    "oxc",
+    "import",
+    "jsx-a11y",
+    "promise"
+  ],
   "ignorePatterns": ["**/dist/*", "**/.workshop/*"],
+  "options": {
+    "denyWarnings": true,
+    "reportUnusedDisableDirectives": "error",
+    "typeAware": true,
+    "typeCheck": true
+  },
   "categories": {
     "correctness": "error",
+    "suspicious": "error",
     "perf": "error"
   },
   "rules": {
+    "no-underscore-dangle": "off",
     "import/no-cycle": "error",
     "eslint/no-console": "error",
     "react/rules-of-hooks": "error",
-    "react-in-jsx-scope": "off"
+    "react/exhaustive-deps": "error",
+    "react-in-jsx-scope": "off",
+    "react/react-compiler": "error",
+    "typescript/ban-ts-comment": "error",
+    "typescript/no-deprecated": "error",
+    "typescript/prefer-ts-expect-error": "error"
   }
 }

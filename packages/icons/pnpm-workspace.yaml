@@ -1,9 +1,9 @@
 allowBuilds:
-  core-js: true
-  esbuild: true
-  fsevents: true
-  unrs-resolver: true
+  core-js: false
+  esbuild: false
+  fsevents: false
+  lefthook: true
+  unrs-resolver: false
 
 publicHoistPattern:
-  - '*prettier*'
   - styled-components

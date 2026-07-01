@@ -3,6 +3,7 @@
  */
 
 import {render} from '@testing-library/react'
+
 import {Icon} from './icon'
 
 test('should render svg', () => {

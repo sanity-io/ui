@@ -1,4 +1,5 @@
 import path from 'path'
+
 import {defineRuntime} from '@sanity/ui-workshop'
 
 export default defineRuntime({

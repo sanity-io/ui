@@ -1,6 +1,7 @@
 import {Icon, icons, SearchIcon, SpinnerIcon, type IconSymbol} from '@sanity/icons'
 import {Box, Card, Code, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
 import {useState, useTransition} from 'react'
+
 import {spin} from './animation.css'
 
 function ucfirst(str: string) {
