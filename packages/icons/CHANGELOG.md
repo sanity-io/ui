@@ -1,5 +1,17 @@
 # @sanity/icons
 
+## 4.0.0
+
+### Major Changes
+
+- [#200](https://github.com/sanity-io/icons/pull/200) [`26b9248`](https://github.com/sanity-io/icons/commit/26b9248026cab731d5506e238ac10a1d14a579ad) Thanks [@stipsan](https://github.com/stipsan)! - Drop CommonJS support and require Node.js `>=22.12`
+
+  `@sanity/icons` is now ESM-only. The `require` export condition and the CommonJS build output (`./dist/index.cjs`) have been removed, so the package must be consumed via ESM `import`. The minimum supported Node.js version has been raised to `>=22.12` to match `sanity`.
+
+- [#201](https://github.com/sanity-io/icons/pull/201) [`01e3807`](https://github.com/sanity-io/icons/commit/01e38074b9be9c22ff27101873f27152e51a525e) Thanks [@stipsan](https://github.com/stipsan)! - Drop React 18 support — React 19 is now required.
+
+  Icon components no longer use `forwardRef`. Refs are now accepted as a regular prop (typed via `React.ComponentPropsWithRef`), following React 19's ref-as-prop model. The `react` peer dependency range is now `^19`, and the exported `IconComponent` type has changed accordingly.
+
 ## 4.0.0-rc.2
 
 ### Patch Changes
