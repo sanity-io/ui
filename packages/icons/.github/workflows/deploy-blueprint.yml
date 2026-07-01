@@ -26,3 +26,8 @@ jobs:
       - run: pnpm blueprint:deploy
         env:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
+          # Scope + Stack normally live in the gitignored .sanity/blueprint.config.json,
+          # so CI must supply them. projectId is non-secret; the Stack ID (ST-…) comes
+          # from `sanity blueprints init` and is set as a repo variable.
+          SANITY_PROJECT_ID: ppsg7ml5
+          SANITY_BLUEPRINT_STACK_ID: ${{ vars.SANITY_BLUEPRINT_STACK_ID }}

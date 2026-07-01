@@ -24,9 +24,6 @@ jobs:
       - uses: pnpm/setup@v1
         with:
           cache: true
-      - run: pnpm schema:deploy
-        env:
-          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
       - run: pnpm studio:deploy
         env:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
