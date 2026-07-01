@@ -133,16 +133,24 @@
   "peerDependencies": {
     "react": "^18.3 || ^19.0.0-0"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@11.9.0",
   "engines": {
     "node": ">=14.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "exports": {
+      ".": {
+        "require": "./dist/index.cjs",
+        "default": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    }
   },
-  "pnpm": {
-    "overrides": {
-      "conventional-changelog-conventionalcommits": ">= 8.0.0"
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.0.0",
+      "onFail": "download"
     }
   },
   "esm.sh": {
