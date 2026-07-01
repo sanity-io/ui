@@ -1,5 +1,13 @@
 # @sanity/icons
 
+## 4.0.0-rc.1
+
+### Major Changes
+
+- [#201](https://github.com/sanity-io/icons/pull/201) [`01e3807`](https://github.com/sanity-io/icons/commit/01e38074b9be9c22ff27101873f27152e51a525e) Thanks [@stipsan](https://github.com/stipsan)! - Drop React 18 support — React 19 is now required.
+
+  Icon components no longer use `forwardRef`. Refs are now accepted as a regular prop (typed via `React.ComponentPropsWithRef`), following React 19's ref-as-prop model. The `react` peer dependency range is now `^19`, and the exported `IconComponent` type has changed accordingly.
+
 ## 4.0.0-rc.0
 
 ### Major Changes
