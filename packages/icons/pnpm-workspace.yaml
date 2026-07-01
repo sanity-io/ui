@@ -13,6 +13,7 @@ minimumReleaseAgeExclude:
   - '@oxlint/*'
   - 'oxlint'
   - 'oxlint-tsgolint'
+  - sanity@6.3.0
   - vite@8.1.2
   - '@architect/hydrate@6.0.2'
 
