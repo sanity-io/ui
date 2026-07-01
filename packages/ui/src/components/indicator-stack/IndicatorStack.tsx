@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -15,7 +15,7 @@ export function IndicatorStack<T extends ElementType = 'div'>(
   return (
     <HStack
       as={Component}
-      className={classNames('sui-IndicatorStack', className)}
+      className={clsx('sui-IndicatorStack', className)}
       style={style}
       data-ui="IndicatorStack"
       {...rest}

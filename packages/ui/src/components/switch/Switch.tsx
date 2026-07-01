@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
 import {Flex} from '../flex/Flex'
@@ -12,7 +12,7 @@ export function Switch(props: SwitchProps) {
 
   return (
     <Label
-      className={classNames('sui-Switch', className)}
+      className={clsx('sui-Switch', className)}
       style={style}
       data-ui="Switch"
       disabled={props.disabled}
@@ -29,7 +29,7 @@ export function Switch(props: SwitchProps) {
 
       <Flex
         as="span"
-        className={classNames('sui-SwitchMark', error && 'sui-error')}
+        className={clsx('sui-SwitchMark', error && 'sui-error')}
         alignItems="center"
         radius={6}
         aria-hidden="true"

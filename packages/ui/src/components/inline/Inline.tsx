@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import {Children, type ComponentPropsWithRef, type ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -20,12 +20,7 @@ export function Inline<T extends ElementType = 'div'>(
   )
 
   return (
-    <Component
-      className={classNames('sui-Inline', className)}
-      style={style}
-      data-ui="Inline"
-      {...rest}
-    >
+    <Component className={clsx('sui-Inline', className)} style={style} data-ui="Inline" {...rest}>
       {children}
     </Component>
   )

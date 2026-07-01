@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc -b && vite build",
     "dev": "vite",
+    "perf:extract": "node scripts/extract-perf.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "babel-plugin-react-compiler": "catalog:",
+    "playwright": "1.58.2",
     "react-is": "^19.2.5",
     "styled-components": "^6.4.0",
     "typescript": "~6.0.2",

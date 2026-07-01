@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
@@ -14,7 +14,7 @@ export function Container<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={classNames('sui-Container', className)}
+      className={clsx('sui-Container', className)}
       style={style}
       data-ui="Container"
       {...rest}
