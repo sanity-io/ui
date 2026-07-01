@@ -36,6 +36,6 @@
     "react/rules-of-hooks": "error",
     "typescript/ban-ts-comment": "error",
     "typescript/no-deprecated": "error",
-    "typescript/prefer-ts-expect-error": "error",
+    "typescript/prefer-ts-expect-error": "error"
   }
 }

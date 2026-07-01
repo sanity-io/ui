@@ -1,11 +1,11 @@
 import {fileURLToPath} from 'node:url'
 
-import {vanillaExtractPlugin} from '@vanilla-extract/vite-plugin'
-import react from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
+import react, {reactCompilerPreset} from '@vitejs/plugin-react'
 import {defineConfig} from 'vitest/config'
 
 export default defineConfig({
-  plugins: [react(), vanillaExtractPlugin()],
+  plugins: [react(), babel({presets: [reactCompilerPreset({target: '19'})]})],
   resolve: {
     alias: {
       '@sanity/icons': fileURLToPath(new URL('./src', import.meta.url)),
