@@ -6,6 +6,9 @@ export default defineConfig({
       'ae-internal-missing-underscore': 'off',
     },
   },
+  strictOptions: {
+    noImplicitBrowsersList: 'off',
+  },
   tsconfig: 'tsconfig.dist.json',
   dts: 'rolldown',
 })

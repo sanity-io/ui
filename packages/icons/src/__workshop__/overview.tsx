@@ -44,7 +44,7 @@ export default function OverviewStory() {
           <Text>No matches</Text>
         </Activity>
 
-        <Stack space={3}>
+        <Stack gap={3}>
           {Object.keys(icons).map((key) => (
             <Activity key={key} mode={filteredKeys.includes(key) ? 'visible' : 'hidden'}>
               <Card border overflow="hidden" radius={2}>
