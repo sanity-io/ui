@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/knip/schema-jsonc.json",
+  "entry": [
+    // Read by `pkg` (`@sanity/pkg-utils`) via its own config file naming convention,
+    // not through an import, so it's otherwise invisible to knip.
+    "package.config.ts",
+  ],
+}

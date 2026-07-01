@@ -30,6 +30,15 @@ jobs:
       - run: pnpm lint --format github
       - run: pnpm build
 
+  knip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v1
+        with:
+          cache: true
+      - run: pnpm knip --reporter github-actions
+
   test:
     runs-on: ${{ matrix.platform }}
     name: Node.js ${{ matrix.node-version }} / ${{ matrix.platform }}
