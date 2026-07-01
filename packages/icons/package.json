@@ -46,7 +46,7 @@
     "pkg:watch": "pkg watch --strict",
     "prepare": "husky install",
     "prepublishOnly": "pnpm build",
-    "release": "semantic-release",
+    "release": "changeset publish",
     "test": "jest",
     "ts:check": "tsc",
     "workshop:build": "workshop build",
@@ -62,31 +62,17 @@
     ]
   },
   "browserslist": "extends @sanity/browserslist-config",
-  "release": {
-    "branches": [
-      "+([0-9])?(.{+([0-9]),x}).x",
-      "main",
-      {
-        "name": "beta",
-        "prerelease": true
-      },
-      {
-        "name": "alpha",
-        "prerelease": true
-      }
-    ],
-    "extends": "@sanity/semantic-release-preset"
-  },
   "devDependencies": {
     "@babel/core": "^7.28.4",
     "@babel/preset-env": "^7.28.3",
     "@babel/preset-react": "^7.27.1",
     "@babel/preset-typescript": "^7.27.1",
+    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/cli": "^2.31.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@sanity/browserslist-config": "^1.0.5",
     "@sanity/pkg-utils": "^8.1.21",
     "@sanity/prettier-config": "^2.0.1",
-    "@sanity/semantic-release-preset": "^6.0.0",
     "@sanity/tsconfig": "^2.0.0",
     "@sanity/ui": "^3.1.10",
     "@sanity/ui-workshop": "^3.4.0",
@@ -117,7 +103,6 @@
     "react-dom": "^19.2.1",
     "react-is": "^19.2.1",
     "rimraf": "^6.0.1",
-    "semantic-release": "^25.0.5",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
