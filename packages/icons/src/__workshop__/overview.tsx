@@ -64,7 +64,7 @@ export default function OverviewStory() {
           />
         </Box>
 
-        {iconKeys.length === 0 && <Text>No matches</Text>}
+        {iconKeys.length === 0 && !loading && <Text>No matches</Text>}
 
         {iconKeys.length > 0 && (
           <Stack gap={3}>

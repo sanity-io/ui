@@ -12,5 +12,5 @@ export const searchClient = createClient({
   projectId,
   dataset,
   apiVersion: 'vX',
-  useCdn: false,
+  useCdn: true,
 })
