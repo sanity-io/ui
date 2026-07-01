@@ -1,10 +1,26 @@
-import {Icon, icons, SearchIcon, type IconSymbol} from '@sanity/icons'
+import {Icon, SearchIcon, SpinnerIcon, type IconSymbol} from '@sanity/icons'
 import {Box, Card, Code, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
-import {useState, Activity, startTransition} from 'react'
+import {startTransition, useState} from 'react'
 import {registerLanguage} from 'react-refractor'
 import tsx from 'refractor/typescript'
+import {keyframes, styled} from 'styled-components'
+
+import {useIconSearch} from './use-icon-search'
 
 registerLanguage(tsx)
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`
+
+const SpinningIcon = styled(SpinnerIcon)`
+  animation: ${rotate} 500ms linear infinite;
+`
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)
@@ -17,37 +33,27 @@ function toPascalCase(str: string) {
 }
 
 export default function OverviewStory() {
-  const [_query, setQuery] = useState('')
-
-  const query = _query.toLowerCase()
-  const filteredKeys = Object.keys(icons).filter((iconKey) => {
-    return _query === ''
-      ? true
-      : iconKey.includes(query) ||
-          // @ts-expect-error `displayName` is not typed
-          icons[iconKey]?.displayName?.toLowerCase().includes(query)
-  })
+  const [query, setQuery] = useState('')
+  const {results: iconKeys, loading} = useIconSearch(query)
 
   return (
     <Card padding={[4, 5, 6]}>
       <Container width={1}>
         <Box marginBottom={4}>
           <TextInput
-            icon={SearchIcon}
+            icon={loading ? <SpinningIcon /> : SearchIcon}
             onChange={(event) => startTransition(() => setQuery(event.currentTarget.value))}
-            placeholder="Filter by name…"
+            placeholder="Search icons by name or meaning, e.g. “time” or “create person”…"
             radius={2}
           />
         </Box>
 
-        <Activity mode={filteredKeys.length ? 'hidden' : 'visible'}>
-          <Text>No matches</Text>
-        </Activity>
+        {iconKeys.length === 0 && <Text>No matches</Text>}
 
-        <Stack gap={3}>
-          {Object.keys(icons).map((key) => (
-            <Activity key={key} mode={filteredKeys.includes(key) ? 'visible' : 'hidden'}>
-              <Card border overflow="hidden" radius={2}>
+        {iconKeys.length > 0 && (
+          <Stack gap={3}>
+            {iconKeys.map((key) => (
+              <Card border key={key} overflow="hidden" radius={2}>
                 <Flex align="center" gap={4} padding={4}>
                   <Heading>
                     <Icon symbol={key as IconSymbol} />
@@ -60,9 +66,9 @@ export default function OverviewStory() {
                   )}Icon} from '@sanity/icons'`}</Code>
                 </Card>
               </Card>
-            </Activity>
-          ))}
-        </Stack>
+            ))}
+          </Stack>
+        )}
       </Container>
     </Card>
   )

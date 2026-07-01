@@ -1,0 +1,28 @@
+name: Upload icons to Sanity
+
+on:
+  push:
+    tags:
+      - '**'
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: upload-icons
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v1
+        with:
+          cache: true
+      - run: pnpm seed:icons
+        env:
+          SANITY_API_WRITE_TOKEN: ${{ secrets.SANITY_API_WRITE_TOKEN }}

@@ -1,0 +1,28 @@
+name: Deploy Sanity Blueprint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sanity.blueprint.ts'
+      - 'functions/**'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-blueprint
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v1
+        with:
+          cache: true
+      - run: pnpm blueprint:deploy
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
