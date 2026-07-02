@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 import {type PropDef} from '../types/PropDef'
 
 const PREFIX = 'sui'
@@ -9,16 +11,14 @@ interface ComponentProps {
   [key: string]: any
 }
 
-const classNameCache = new WeakMap<PropDef, Map<string, string>>()
-
 export function getProps(
   componentProps?: ComponentProps,
   propDefs?: Record<string, PropDef>,
 ): ComponentProps {
   const {allComponentProps, allPropDefs} = flattenCompositeProps(componentProps, propDefs)
   const restProps: ComponentProps = {}
-  const classes: string[] = componentProps?.className ? [componentProps.className] : []
-  const style: Record<string, unknown> = componentProps?.style ? {...componentProps.style} : {}
+  let className = componentProps?.className || ''
+  let style = componentProps?.style || {}
 
   for (const key in allComponentProps) {
     const propDef = allPropDefs?.[key]
@@ -30,39 +30,24 @@ export function getProps(
     }
 
     if (Array.isArray(propValue)) {
+      // @TODO: consider fixing this O(n^2) time complexity
+      // oxlint-disable-next-line no-accumulating-spread
       for (let i = 0, len = Math.min(propValue.length, BREAKPOINTS_LENGTH); i < len; i++) {
-        const cls = getClassName(propValue[i], propDef, i)
-        if (cls) classes.push(cls)
-        assignStyle(style, propValue[i], propDef, i)
+        className = clsx(className, getClassName(propValue[i], propDef, i))
+        style = {...style, ...getStyle(propValue[i], propDef, i)}
       }
     } else {
-      const cls = getClassName(propValue, propDef)
-      if (cls) classes.push(cls)
-      assignStyle(style, propValue, propDef)
+      className = clsx(className, getClassName(propValue, propDef))
+      style = {...style, ...getStyle(propValue, propDef)}
     }
   }
 
-  return {...restProps, className: classes.join(' '), style}
+  return {...restProps, className, style}
 }
 
-function getClassName(propValue: any, propDef: PropDef, bp?: number): string {
-  let inner = classNameCache.get(propDef)
-  if (!inner) {
-    inner = new Map()
-    classNameCache.set(propDef, inner)
-  }
-  // bp=0 produces the same output as bp=undefined (no -bp-N suffix), so
-  // collapse them into one cache entry via `bp || ''`.
-  const cacheKey = `${propValue}\x00${bp || ''}`
-  const hit = inner.get(cacheKey)
-  if (hit !== undefined) return hit
-  const result = computeClassName(propValue, propDef, bp)
-  inner.set(cacheKey, result)
-  return result
-}
-
-function computeClassName(propValue: any, propDef: PropDef, bp?: number): string {
+function getClassName(propValue: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'union' && propDef.values?.includes(propValue)) {
+    /* Note: This may need updating depending on the final CSS classname formatting */
     return `${PREFIX}-${propDef.className}${typeof propValue === 'string' ? `-${propValue}` : propValue}${bp ? `-bp-${bp}` : ''}`
   }
 
@@ -83,15 +68,14 @@ function computeClassName(propValue: any, propDef: PropDef, bp?: number): string
   return ''
 }
 
-function assignStyle(
-  style: Record<string, unknown>,
-  propValue: any,
-  propDef: PropDef,
-  bp?: number,
-): void {
+function getStyle(propValue: any, propDef: PropDef, bp?: number) {
   if (propDef.type === 'string' || propDef.type === 'number') {
-    style[`${propDef.variable}${bp ? `-bp-${bp}` : ''}`] = propValue
+    return {
+      [`${propDef.variable}${bp ? `-bp-${bp}` : ''}`]: propValue,
+    }
   }
+
+  return {}
 }
 
 export function flattenCompositeProps(
