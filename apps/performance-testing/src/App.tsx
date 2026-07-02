@@ -1,6 +1,6 @@
 import {lazy, Suspense} from 'react'
 
-const routes: Record<string, React.LazyExoticComponent<() => JSX.Element>> = {
+const routes: Record<string, React.LazyExoticComponent<() => React.JSX.Element>> = {
   'ui-poc': lazy(() => import('./pages/ui-poc')),
   'ui3': lazy(() => import('./pages/ui3')),
   'ui4': lazy(() => import('./pages/ui4')),
