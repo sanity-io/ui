@@ -1,12 +1,10 @@
-import {
-  CheckmarkIcon,
-  CopyIcon,
-  ErrorOutlineIcon,
-  Icon,
-  SearchIcon,
-  SpinnerIcon,
-  type IconSymbol,
-} from '@sanity/icons'
+import {Icon, type IconSymbol} from '@sanity/icons'
+// Preferred per-icon imports: pull in just the icons this view uses.
+import {CheckmarkIcon} from '@sanity/icons/Checkmark'
+import {CopyIcon} from '@sanity/icons/Copy'
+import {ErrorOutlineIcon} from '@sanity/icons/ErrorOutline'
+import {SearchIcon} from '@sanity/icons/Search'
+import {SpinnerIcon} from '@sanity/icons/Spinner'
 import {
   Box,
   Button,
@@ -152,7 +150,7 @@ export default function OverviewStory() {
         {iconKeys.length > 0 && (
           <Stack gap={3}>
             {iconKeys.map((key) => {
-              const code = `import {${toPascalCase(key)}Icon} from '@sanity/icons'`
+              const code = `import {${toPascalCase(key)}Icon} from '@sanity/icons/${toPascalCase(key)}'`
 
               return (
                 <Card border key={key} overflow="hidden" radius={2}>

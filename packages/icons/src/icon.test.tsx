@@ -2,8 +2,8 @@ import {render} from '@testing-library/react'
 import {createRef} from 'react'
 import {expect, test} from 'vitest'
 
+import {RocketIcon} from './exports/Rocket'
 import {Icon} from './icon'
-import {RocketIcon} from './icons'
 
 test('should render svg', () => {
   const {container} = render(<Icon symbol="rocket" />)

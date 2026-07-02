@@ -1,0 +1,29 @@
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import type {ComponentPropsWithRef, ReactElement} from 'react'
+
+/**
+ * @public
+ */
+export function ErrorOutlineIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+  return (
+    <svg
+      data-sanity-icon="error-outline"
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        d="M12.5 16V14.5M12.5 9V13M20.5 12.5C20.5 16.9183 16.9183 20.5 12.5 20.5C8.08172 20.5 4.5 16.9183 4.5 12.5C4.5 8.08172 8.08172 4.5 12.5 4.5C16.9183 4.5 20.5 8.08172 20.5 12.5Z"
+        stroke="currentColor"
+        strokeWidth={1.2}
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+export {ErrorOutlineIcon as default}
