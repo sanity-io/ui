@@ -20,7 +20,7 @@ const meta: Meta<typeof Code> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Code',
+      context: '[data-ui="Code"]',
     },
   },
 }
@@ -68,7 +68,7 @@ export const Sizes: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Code Size 3 (18.75px)')).parentElement?.closest('.sui-Code')
+      (await canvas.findByText('Code Size 3 (18.75px)')).parentElement?.closest('[data-ui="Code"]')
         ?.classList,
     ).toContain('sui-text-code3')
   },

@@ -18,7 +18,7 @@ const meta: Meta<typeof Checkbox> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Checkbox',
+      context: '[data-ui="Checkbox"]',
     },
   },
 }

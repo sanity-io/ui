@@ -15,7 +15,7 @@ const meta: Meta<typeof PressArea> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-PressArea',
+      context: '[data-ui="PressArea"]',
     },
   },
 }
@@ -32,9 +32,9 @@ export const Default: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect(
-      (await canvas.findByText('Press Area Content')).parentElement?.classList,
-    ).toContain('sui-PressArea')
+    await expect((await canvas.findByText('Press Area Content')).parentElement?.dataset.ui).toBe(
+      'PressArea',
+    )
   },
 }
 
@@ -47,8 +47,8 @@ export const Anchor: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect(
-      (await canvas.findByText('Press Area Content')).parentElement?.classList,
-    ).toContain('sui-PressArea')
+    await expect((await canvas.findByText('Press Area Content')).parentElement?.dataset.ui).toBe(
+      'PressArea',
+    )
   },
 }

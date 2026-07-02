@@ -20,7 +20,7 @@ const meta: Meta<typeof Tooltip> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Tooltip',
+      context: '[data-ui="Tooltip"]',
     },
   },
 }

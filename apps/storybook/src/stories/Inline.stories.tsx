@@ -18,7 +18,7 @@ const meta: Meta<typeof Inline> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Inline',
+      context: '[data-ui="Inline"]',
     },
   },
 }
@@ -38,7 +38,7 @@ export const Default: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Inline')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('[data-ui="Inline"]')?.classList,
     ).toContain('sui-mt-3')
   },
 }

@@ -19,7 +19,7 @@ const meta: Meta<typeof Flex> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Flex',
+      context: '[data-ui="Flex"]',
     },
   },
 }
@@ -39,7 +39,7 @@ export const Default: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Flex')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('[data-ui="Flex"]')?.classList,
     ).toContain('sui-display-flex')
   },
 }

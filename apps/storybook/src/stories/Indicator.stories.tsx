@@ -19,7 +19,7 @@ const meta: Meta<typeof Indicator> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Indicator',
+      context: '[data-ui="Indicator"]',
     },
   },
 }
@@ -32,7 +32,7 @@ export const Default: Story = {
     return <Indicator {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByLabelText('Label')).classList).toContain('sui-Indicator')
+    await expect((await canvas.findByLabelText('Label')).dataset.ui).toBe('Indicator')
   },
 }
 

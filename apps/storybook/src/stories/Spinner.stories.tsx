@@ -17,7 +17,7 @@ const meta: Meta<typeof Spinner> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Spinner',
+      context: '[data-ui="Spinner"]',
     },
   },
 }
@@ -30,7 +30,7 @@ export const Default: Story = {
     return <Spinner {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByLabelText('Loading...')).classList).toContain('sui-Spinner')
+    await expect((await canvas.findByLabelText('Loading...')).dataset.ui).toBe('Spinner')
   },
 }
 

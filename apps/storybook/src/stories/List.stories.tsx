@@ -12,7 +12,7 @@ const meta: Meta<typeof List> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-List',
+      context: '[data-ui="List"]',
     },
   },
 }
@@ -43,7 +43,8 @@ export const Default: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('First Item Title')).parentElement?.closest('.sui-List')?.tagName,
+      (await canvas.findByText('First Item Title')).parentElement?.closest('[data-ui="List"]')
+        ?.tagName,
     ).toBe('UL')
   },
 }

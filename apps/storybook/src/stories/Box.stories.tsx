@@ -19,7 +19,7 @@ const meta: Meta<typeof Box> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Box',
+      context: '[data-ui="Box"]',
     },
   },
 }
@@ -39,7 +39,7 @@ export const Default: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Box')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('[data-ui="Box"]')?.classList,
     ).toContain('sui-display-block')
   },
 }

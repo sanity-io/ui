@@ -19,7 +19,7 @@ const meta: Meta<typeof Grid> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Grid',
+      context: '[data-ui="Grid"]',
     },
   },
 }
@@ -39,7 +39,7 @@ export const Default: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Grid')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('[data-ui="Grid"]')?.classList,
     ).toContain('sui-display-grid')
   },
 }
@@ -61,7 +61,7 @@ export const Columns: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-Grid')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('[data-ui="Grid"]')?.classList,
     ).toContain('sui-grid-template-columns')
   },
 }

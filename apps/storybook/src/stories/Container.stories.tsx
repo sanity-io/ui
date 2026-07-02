@@ -20,7 +20,7 @@ const meta: Meta<typeof Text> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Text',
+      context: '[data-ui="Container"]',
     },
   },
 }
@@ -38,8 +38,9 @@ export const Default: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Container Component')).parentElement?.closest('.sui-Container')
-        ?.classList,
+      (await canvas.findByText('Container Component')).parentElement?.closest(
+        '[data-ui="Container"]',
+      )?.classList,
     ).toContain('sui-mx-auto')
   },
 }
@@ -69,7 +70,7 @@ export const Sizes: Story = {
   play: async ({canvas}) => {
     await expect(
       (await canvas.findByText('Container Size 3 (1280px)')).parentElement?.closest(
-        '.sui-Container',
+        '[data-ui="Container"]',
       )?.classList,
     ).toContain('sui-container3')
   },

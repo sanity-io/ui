@@ -18,7 +18,7 @@ const meta: Meta<typeof Switch> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Switch',
+      context: '[data-ui="Switch"]',
     },
   },
 }
