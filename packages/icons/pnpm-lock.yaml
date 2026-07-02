@@ -33,8 +33,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       '@sanity/tsdown-config':
-        specifier: ^0.7.2
-        version: 0.7.2(tsdown@0.22.3(oxc-resolver@11.21.3)(publint@0.3.21)(tsx@4.22.4)(typescript@6.0.3))(typescript@6.0.3)
+        specifier: ^0.7.3
+        version: 0.7.3(tsdown@0.22.3(oxc-resolver@11.21.3)(publint@0.3.21)(tsx@4.22.4)(typescript@6.0.3))(typescript@6.0.3)
       '@sanity/ui':
         specifier: ^3.3.0
         version: 3.3.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(styled-components@6.4.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
@@ -2671,10 +2671,6 @@ packages:
   '@sanity/mutator@6.3.0':
     resolution: {integrity: sha512-Rfwx+U1lxzjSecZ9k41rjCa8KTwv9H9PMLhxw/sojAG+kbEfo0TwFjM9BqxVq2Cu9+U02DoE4c4tv6zXqQMqIQ==}
 
-  '@sanity/parse-package-json@2.2.1':
-    resolution: {integrity: sha512-PHxDNBUfs3H7b0AVvY7M8N8R76nx1oi2RonbQ+mZ5H/RChtme+xdrqy7krV9e55eBChJ8psYTaqbnbWm91Qhng==}
-    engines: {node: '>=20.19 <22 || >=22.12'}
-
   '@sanity/presentation-comlink@2.1.0':
     resolution: {integrity: sha512-XwbGSK/cNW/awPfT8GssDTZoTlmg/7bcz1feCdfSDjOvNmlNfSqu/uPJZgKPnM0n54bFTUy8cs2zTKm1kc8nVA==}
     engines: {node: '>=20.19 <22 || >=22.12'}
@@ -2724,8 +2720,8 @@ packages:
   '@sanity/tsconfig@2.1.0':
     resolution: {integrity: sha512-Cnz0EycMsfeILkxL/gYzzfPs511OzP3sjQxU4XkDtujdiFAc+bteMYXi4/SJ83m98cXLum63HbHDk+he6AbbIA==}
 
-  '@sanity/tsdown-config@0.7.2':
-    resolution: {integrity: sha512-fWCguRaWcGIUEXZU5A/mwEW8pF8WxID2qf5BOH2mRADfZqfTsNj4PjJu8SJqXMw5/J5xFj9abDaDr9c+oZLUGA==}
+  '@sanity/tsdown-config@0.7.3':
+    resolution: {integrity: sha512-9vcwtvG45yYpxCNrLwj1qLsBOSnE2guFUbAUnLusjpZ5PcI3reOyZ9cU9xuF8qq+DgtnEDtJec+eKsBmVi0rvg==}
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       tsdown: 0.22.x
@@ -9033,10 +9029,6 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  '@sanity/parse-package-json@2.2.1':
-    dependencies:
-      zod: 4.4.3
-
   '@sanity/presentation-comlink@2.1.0(@sanity/client@7.23.0)(@sanity/types@6.3.0(@types/react@19.2.17))':
     dependencies:
       '@sanity/comlink': 4.0.1
@@ -9157,9 +9149,8 @@ snapshots:
 
   '@sanity/tsconfig@2.1.0': {}
 
-  '@sanity/tsdown-config@0.7.2(tsdown@0.22.3(oxc-resolver@11.21.3)(publint@0.3.21)(tsx@4.22.4)(typescript@6.0.3))(typescript@6.0.3)':
+  '@sanity/tsdown-config@0.7.3(tsdown@0.22.3(oxc-resolver@11.21.3)(publint@0.3.21)(tsx@4.22.4)(typescript@6.0.3))(typescript@6.0.3)':
     dependencies:
-      '@sanity/parse-package-json': 2.2.1
       publint: 0.3.21
       tsdown: 0.22.3(oxc-resolver@11.21.3)(publint@0.3.21)(tsx@4.22.4)(typescript@6.0.3)
       typescript: 6.0.3
