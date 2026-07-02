@@ -11,9 +11,11 @@ minimumReleaseAgeExclude:
   - '@sanity/*'
   - '@types/node'
   - '@oxlint/*'
+  - knip
   - 'oxlint'
   - 'oxlint-tsgolint'
   - sanity
+  - sanity-plugin-media
   - vite
   - '@architect/hydrate@6.0.2'
 
