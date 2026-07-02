@@ -8,8 +8,8 @@ import prefixer from 'postcss-prefix-selector'
 import selectorParser from 'postcss-selector-parser'
 
 import breakpoints from './postcss-breakpoints'
+import {VERSION} from './src/version'
 
-const version = 'alpha17'
 const componentClassPattern = /^sui-[A-Z]/
 
 function suffixSelectorClasses(selector: string, suffix: string) {
@@ -28,7 +28,7 @@ const config = {
       path: [path.relative(process.cwd(), '../')],
     }),
     prefixer({
-      prefix: version,
+      prefix: VERSION,
       transform(
         prefix: string,
         selector: string,

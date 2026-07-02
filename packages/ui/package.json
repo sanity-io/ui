@@ -45,6 +45,7 @@
     "dev": "concurrently -n css,js \"pnpm run dev:css\" \"pnpm run dev:js\"",
     "dev:css": "postcss src/index.css -o dist/styles.css --watch",
     "dev:js": "pkg watch",
+    "sync-version": "node scripts/write-version.js",
     "test": "vitest run",
     "ts:check": "tsc --noEmit"
   },

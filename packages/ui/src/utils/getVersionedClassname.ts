@@ -1,5 +1,5 @@
-const version = 'alpha17'
+import {VERSION} from "../version"
 
 export function getVersionedClassname(classname: string) {
-  return `${classname}-${version}`
+  return `${classname}-${VERSION}`
 }
