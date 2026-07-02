@@ -2,25 +2,13 @@ import path from 'node:path'
 
 import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
-import type {AcceptedPlugin, Rule} from 'postcss'
+import type {AcceptedPlugin} from 'postcss'
 import postcssImport from 'postcss-import'
 import prefixer from 'postcss-prefix-selector'
-import selectorParser from 'postcss-selector-parser'
 
 import breakpoints from './postcss-breakpoints'
+import {versionSuffix} from './postcss-version-suffix'
 import {VERSION} from './src/version'
-
-const componentClassPattern = /^sui-[A-Z]/
-
-function suffixSelectorClasses(selector: string, suffix: string) {
-  return selectorParser((selectors) => {
-    selectors.walkClasses((classNode) => {
-      if (componentClassPattern.test(classNode.value) && !classNode.value.endsWith(`-${suffix}`)) {
-        classNode.value = `${classNode.value}-${suffix}`
-      }
-    })
-  }).processSync(selector)
-}
 
 const config = {
   plugins: [
@@ -29,21 +17,7 @@ const config = {
     }),
     prefixer({
       prefix: VERSION,
-      transform(
-        prefix: string,
-        selector: string,
-        _prefixedSelector: string,
-        _filePath: string,
-        rule: Rule,
-      ) {
-        const filePath = rule.source?.input?.file ?? _filePath
-
-        if (filePath.match(/ui\/src\/components/)) {
-          return suffixSelectorClasses(selector, prefix)
-        }
-
-        return selector
-      },
+      transform: versionSuffix,
     } as Parameters<typeof prefixer>[0]),
     breakpoints,
     autoprefixer,
