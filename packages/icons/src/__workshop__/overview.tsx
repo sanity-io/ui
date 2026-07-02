@@ -149,29 +149,33 @@ export default function OverviewStory() {
 
         {iconKeys.length > 0 && (
           <Stack gap={3}>
-            {iconKeys.map((key) => {
-              const pascalCase = toPascalCase(key)
-              const code = `import {${pascalCase}Icon} from '@sanity/icons/${pascalCase}'`
-
-              return (
-                <Card key={key} border overflow="hidden" radius={2}>
-                  <Flex align="center" gap={4} padding={4}>
-                    <Heading>
-                      <Icon symbol={key as IconSymbol} />
-                    </Heading>
-                    <Text>{key}</Text>
-                    <Box flex={1} />
-                    <CopyCodeButton code={code} />
-                  </Flex>
-                  <Card overflow="auto" padding={4} tone="transparent">
-                    <Code language="typescript">{code}</Code>
-                  </Card>
-                </Card>
-              )
-            })}
+            {iconKeys.map((key) => (
+              <CodeSnippet key={key} icon={key} />
+            ))}
           </Stack>
         )}
       </Container>
+    </Card>
+  )
+}
+
+function CodeSnippet({icon}: {icon: string}) {
+  const pascalCase = toPascalCase(icon)
+  const code = `import {${pascalCase}Icon} from '@sanity/icons/${pascalCase}'`
+
+  return (
+    <Card border overflow="hidden" radius={2}>
+      <Flex align="center" gap={4} padding={4}>
+        <Heading>
+          <Icon symbol={icon as IconSymbol} />
+        </Heading>
+        <Text>{icon}</Text>
+        <Box flex={1} />
+        <CopyCodeButton code={code} />
+      </Flex>
+      <Card overflow="auto" padding={4} tone="transparent">
+        <Code language="typescript">{code}</Code>
+      </Card>
     </Card>
   )
 }
