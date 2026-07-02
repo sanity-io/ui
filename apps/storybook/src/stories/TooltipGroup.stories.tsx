@@ -17,7 +17,7 @@ const meta: Meta<typeof TooltipGroup> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-TooltipGroup',
+      context: '[data-ui="TooltipGroup"]',
     },
   },
 }

@@ -2,7 +2,10 @@ import clsx from 'clsx'
 import {Children, type ComponentPropsWithRef, type ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {inlineChildrenProps, type InlineProps, inlineProps} from './inline.props'
+
+const inlineClassName = suffixClassName('sui-Inline')
 
 /** @deprecated Use HStack component instead */
 /** @public */
@@ -20,7 +23,12 @@ export function Inline<T extends ElementType = 'div'>(
   )
 
   return (
-    <Component className={clsx('sui-Inline', className)} style={style} data-ui="Inline" {...rest}>
+    <Component
+      className={clsx(inlineClassName, className)}
+      style={style}
+      data-ui="Inline"
+      {...rest}
+    >
       {children}
     </Component>
   )

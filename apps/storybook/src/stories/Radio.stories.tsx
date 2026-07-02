@@ -16,7 +16,7 @@ const meta: Meta<typeof Radio> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Radio',
+      context: '[data-ui="Radio"]',
     },
   },
 }

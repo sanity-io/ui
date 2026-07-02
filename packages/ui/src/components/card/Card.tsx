@@ -2,7 +2,10 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type CardProps, cardProps} from './card.props'
+
+const cardClassName = suffixClassName('sui-Card')
 
 /** @public */
 export function Card<T extends ElementType = 'div'>({
@@ -15,7 +18,7 @@ export function Card<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={clsx('sui-Card sui-border', className)}
+      className={clsx(cardClassName, 'sui-border', className)}
       style={style}
       data-ui="Card"
       {...rest}

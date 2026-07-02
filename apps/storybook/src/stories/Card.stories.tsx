@@ -18,7 +18,7 @@ const meta: Meta<typeof Card> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Card',
+      context: '[data-ui="Card"]',
     },
   },
 }
@@ -31,8 +31,6 @@ export const Default: Story = {
     return <Card {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('This is a Card component.')).classList).toContain(
-      'sui-Card',
-    )
+    await expect((await canvas.findByText('This is a Card component.')).dataset.ui).toBe('Card')
   },
 }

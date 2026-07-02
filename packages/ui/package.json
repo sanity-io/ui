@@ -1,6 +1,6 @@
 {
   "name": "@sanity-labs/ui-poc",
-  "version": "0.0.1-alpha.17",
+  "version": "0.0.1-versioned.4",
   "description": "Sanity Design System POC",
   "keywords": [],
   "homepage": "https://github.com/sanity-labs/ui-poc#readme",
@@ -45,6 +45,7 @@
     "dev": "concurrently -n css,js \"pnpm run dev:css\" \"pnpm run dev:js\"",
     "dev:css": "postcss src/index.css -o dist/styles.css --watch",
     "dev:js": "pkg watch",
+    "sync-version": "node scripts/write-version.js",
     "test": "vitest run",
     "ts:check": "tsc --noEmit"
   },
@@ -60,6 +61,7 @@
     "@sanity/tsconfig": "^1.0.0",
     "@types/node": "^25.5.2",
     "@types/postcss-import": "^14.0.3",
+    "@types/postcss-prefix-selector": "^1.16.3",
     "@types/react": "^19.2.14",
     "autoprefixer": "^10.4.27",
     "babel-plugin-react-compiler": "catalog:",
@@ -68,6 +70,8 @@
     "postcss": "^8.5.14",
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",
+    "postcss-prefix-selector": "^2.1.1",
+    "postcss-selector-parser": "^7.1.1",
     "rimraf": "^6.1.3",
     "typescript": "^5.9.3",
     "vitest": "^4.1.1"

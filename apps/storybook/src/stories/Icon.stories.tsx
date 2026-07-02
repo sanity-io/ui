@@ -45,7 +45,7 @@ const meta: Meta<typeof Icon> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Icon',
+      context: '[data-ui="Icon"]',
     },
   },
 }
@@ -56,7 +56,7 @@ type Story = StoryObj<typeof Icon>
 export const Default: Story = {
   render: (props) => <Icon {...props} aria-label="Icon" />,
   play: async ({canvas}) => {
-    await expect((await canvas.findByLabelText('Icon')).classList).toContain('sui-Icon')
+    await expect((await canvas.findByLabelText('Icon')).dataset.ui).toBe('Icon')
   },
 }
 

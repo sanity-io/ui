@@ -2,7 +2,10 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type HeadingProps, headingProps} from './heading.props'
+
+const headingClassName = suffixClassName('sui-Heading')
 
 /** @public */
 export function Heading<T extends ElementType = 'h2'>({
@@ -16,7 +19,7 @@ export function Heading<T extends ElementType = 'h2'>({
   if (props.lineClamp && props.trim) {
     return (
       <Component
-        className={clsx('sui-Heading', className?.replace('sui-line-clamp', ''))}
+        className={clsx(headingClassName, className?.replace('sui-line-clamp', ''))}
         style={style}
         data-ui="Heading"
         {...rest}
@@ -27,7 +30,12 @@ export function Heading<T extends ElementType = 'h2'>({
   }
 
   return (
-    <Component className={clsx('sui-Heading', className)} style={style} data-ui="Heading" {...rest}>
+    <Component
+      className={clsx(headingClassName, className)}
+      style={style}
+      data-ui="Heading"
+      {...rest}
+    >
       {children}
     </Component>
   )

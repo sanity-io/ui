@@ -1,4 +1,4 @@
-import {toneProps, type ToneProps} from '../../props/tone'
+import {type ToneProps, toneProps} from '../../props/tone'
 import {type PropDef} from '../../types/PropDef'
 
 /** @beta */

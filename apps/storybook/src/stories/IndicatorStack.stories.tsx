@@ -16,7 +16,7 @@ const meta: Meta<typeof IndicatorStack> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-IndicatorStack',
+      context: '[data-ui="IndicatorStack"]',
     },
   },
 }
@@ -35,8 +35,8 @@ export const Default: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByLabelText('Positive')).parentElement?.classList).toContain(
-      'sui-IndicatorStack',
+    await expect((await canvas.findByLabelText('Positive')).parentElement?.dataset.ui).toContain(
+      'IndicatorStack',
     )
   },
 }

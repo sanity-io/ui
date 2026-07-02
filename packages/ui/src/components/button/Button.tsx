@@ -2,10 +2,13 @@ import clsx from 'clsx'
 import {type ComponentPropsWithRef, type ElementType, isValidElement} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Flex} from '../flex/Flex'
 import {Spinner} from '../spinner/Spinner'
 import {Text} from '../text/Text'
 import {type ButtonProps, buttonProps} from './button.props'
+
+const buttonClassName = suffixClassName('sui-Button')
 
 /** @public */
 export function Button<T extends ElementType = 'button'>({
@@ -31,7 +34,7 @@ export function Button<T extends ElementType = 'button'>({
   return (
     <Component
       className={clsx(
-        'sui-Button',
+        buttonClassName,
         'sui-display-inline-flex sui-align-items-center sui-justify-content-center sui-radius2 sui-position-relative sui-overflow-hidden',
         className,
       )}

@@ -2,8 +2,12 @@ import clsx from 'clsx'
 import {cloneElement, useEffect, useId, useState} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
 import {type TooltipProps, tooltipProps} from './tooltip.props'
+
+const tooltipClassName = suffixClassName('sui-Tooltip')
+const tooltipDismissedClassName = suffixClassName('sui-Tooltip-Dismissed')
 
 /** @public */
 export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
@@ -64,7 +68,11 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
       {trigger}
 
       <Box
-        className={clsx('sui-Tooltip', dismissed ? 'sui-Tooltip-Dismissed' : '', className)}
+        className={clsx(
+          tooltipClassName,
+          dismissed ? tooltipDismissedClassName : '',
+          className,
+        )}
         role="tooltip"
         style={{
           ...style,
