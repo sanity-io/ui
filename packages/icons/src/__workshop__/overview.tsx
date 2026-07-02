@@ -150,10 +150,11 @@ export default function OverviewStory() {
         {iconKeys.length > 0 && (
           <Stack gap={3}>
             {iconKeys.map((key) => {
-              const code = `import {${toPascalCase(key)}Icon} from '@sanity/icons/${toPascalCase(key)}'`
+              const pascalCase = toPascalCase(key)
+              const code = `import {${pascalCase}Icon} from '@sanity/icons/${pascalCase}'`
 
               return (
-                <Card border key={key} overflow="hidden" radius={2}>
+                <Card key={key} border overflow="hidden" radius={2}>
                   <Flex align="center" gap={4} padding={4}>
                     <Heading>
                       <Icon symbol={key as IconSymbol} />
