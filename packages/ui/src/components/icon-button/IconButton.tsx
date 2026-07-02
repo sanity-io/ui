@@ -2,12 +2,12 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Button} from '../button/Button'
 import {Icon} from '../icon/Icon'
 import {type IconButtonProps, iconButtonProps} from './iconButton.props'
 
-const iconButtonClassname = getVersionedClassname('sui-IconButton')
+const iconButtonClassName = suffixClassName('sui-IconButton')
 
 /** @public */
 export function IconButton<T extends ElementType = 'button'>(
@@ -19,7 +19,7 @@ export function IconButton<T extends ElementType = 'button'>(
   return (
     <Button
       as={Component}
-      className={clsx(iconButtonClassname, className)}
+      className={clsx(iconButtonClassName, className)}
       style={style}
       data-ui="IconButton"
       {...rest}

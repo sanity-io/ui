@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type ContainerProps, containerProps} from './container.props'
 
-const containerClassname = getVersionedClassname('sui-Container')
+const containerClassName = suffixClassName('sui-Container')
 
 /** @public */
 export function Container<T extends ElementType = 'div'>({
@@ -17,7 +17,7 @@ export function Container<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={clsx(containerClassname, className)}
+      className={clsx(containerClassName, className)}
       style={style}
       data-ui="Container"
       {...rest}

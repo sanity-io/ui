@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type IconProps, iconProps} from './icon.props'
 
-const iconClassname = getVersionedClassname('sui-Icon')
+const iconClassName = suffixClassName('sui-Icon')
 
 /** @public */
 export function Icon({size = 2, ...props}: IconProps) {
@@ -12,7 +12,7 @@ export function Icon({size = 2, ...props}: IconProps) {
 
   return (
     <Component
-      className={clsx(iconClassname, className)}
+      className={clsx(iconClassName, className)}
       data-ui="Icon"
       style={style}
       aria-hidden={props['aria-label'] ? undefined : true}

@@ -7,7 +7,7 @@ import postcssImport from 'postcss-import'
 import prefixer from 'postcss-prefix-selector'
 
 import breakpoints from './postcss-breakpoints'
-import {versionSuffix} from './postcss-version-suffix'
+import {suffixSelectors} from './postcss-suffix-selectors'
 import {VERSION} from './src/version'
 
 const config = {
@@ -17,7 +17,7 @@ const config = {
     }),
     prefixer({
       prefix: VERSION,
-      transform: versionSuffix,
+      transform: suffixSelectors,
     } as Parameters<typeof prefixer>[0]),
     breakpoints,
     autoprefixer,

@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type TextProps, textProps} from './text.props'
 
-const textClassname = getVersionedClassname('sui-Text')
+const textClassName = suffixClassName('sui-Text')
 
 /** @public */
 export function Text<T extends ElementType = 'span'>({
@@ -18,7 +18,7 @@ export function Text<T extends ElementType = 'span'>({
   if (props.lineClamp && props.trim) {
     return (
       <Component
-        className={clsx(textClassname, className?.replace('sui-line-clamp', ''))}
+        className={clsx(textClassName, className?.replace('sui-line-clamp', ''))}
         style={style}
         data-ui="Text"
         {...rest}
@@ -30,7 +30,7 @@ export function Text<T extends ElementType = 'span'>({
 
   return (
     <Component
-      className={clsx(textClassname, className)}
+      className={clsx(textClassName, className)}
       style={style}
       data-ui="Text"
       {...rest}

@@ -2,11 +2,11 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
 import {type IndicatorProps, indicatorProps} from './indicator.props'
 
-const indicatorClassname = getVersionedClassname('sui-Indicator')
+const indicatorClassName = suffixClassName('sui-Indicator')
 
 /** @beta */
 export function Indicator<T extends ElementType = 'span'>({
@@ -23,7 +23,7 @@ export function Indicator<T extends ElementType = 'span'>({
   return (
     <Box
       as={Component}
-      className={clsx(indicatorClassname, className)}
+      className={clsx(indicatorClassName, className)}
       style={style}
       data-ui="Indicator"
       width="5px"

@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type FlexProps, flexProps} from './flex.props'
 
-const flexClassname = getVersionedClassname('sui-Flex')
+const flexClassName = suffixClassName('sui-Flex')
 
 /** @public */
 export function Flex<T extends ElementType = 'div'>({
@@ -17,7 +17,7 @@ export function Flex<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={clsx(flexClassname, className)}
+      className={clsx(flexClassName, className)}
       style={style}
       data-ui="Flex"
       {...rest}

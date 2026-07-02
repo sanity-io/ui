@@ -1,13 +1,13 @@
 import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Link} from '../link/Link'
 import {Text} from '../text/Text'
 import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
 import {type SkipToContentProps, skipToContentProps} from './skipToContent.props'
 
-const skipToContentClassname = getVersionedClassname('sui-SkipToContent')
+const skipToContentClassName = suffixClassName('sui-SkipToContent')
 
 /** @beta */
 export function SkipToContent(props: SkipToContentProps) {
@@ -19,7 +19,7 @@ export function SkipToContent(props: SkipToContentProps) {
       href={hash}
       underlined={false}
       className={clsx(
-        skipToContentClassname,
+        skipToContentClassName,
         'sui-position-absolute sui-top2 sui-left2 sui-display-inline-block sui-z-index sui-py2 sui-px3 sui-radius2 sui-text-body1',
         className,
       )}

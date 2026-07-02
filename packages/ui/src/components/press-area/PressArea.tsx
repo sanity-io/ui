@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type PressAreaProps, pressAreaProps} from './pressArea.props'
 
-const pressAreaClassname = getVersionedClassname('sui-PressArea')
+const pressAreaClassName = suffixClassName('sui-PressArea')
 
 /** @public */
 export function PressArea<T extends ElementType = 'button'>(
@@ -16,7 +16,7 @@ export function PressArea<T extends ElementType = 'button'>(
 
   return (
     <Component
-      className={clsx(pressAreaClassname, 'sui-width-full', className)}
+      className={clsx(pressAreaClassName, 'sui-width-full', className)}
       style={style}
       data-ui="PressArea"
       {...rest}

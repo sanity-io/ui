@@ -1,15 +1,15 @@
 import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Flex} from '../flex/Flex'
 import {Label} from '../label/Label'
 import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
 import {type SwitchProps, switchProps} from './switch.props'
 
-const switchClassname = getVersionedClassname('sui-Switch')
-const switchInputClassname = getVersionedClassname('sui-SwitchInput')
-const switchMarkClassname = getVersionedClassname('sui-SwitchMark')
+const switchClassName = suffixClassName('sui-Switch')
+const switchInputClassName = suffixClassName('sui-SwitchInput')
+const switchMarkClassName = suffixClassName('sui-SwitchMark')
 
 /** @beta */
 export function Switch(props: SwitchProps) {
@@ -17,7 +17,7 @@ export function Switch(props: SwitchProps) {
 
   return (
     <Label
-      className={clsx(switchClassname, className)}
+      className={clsx(switchClassName, className)}
       style={style}
       data-ui="Switch"
       disabled={props.disabled}
@@ -27,14 +27,14 @@ export function Switch(props: SwitchProps) {
         as="input"
         type="checkbox"
         role="switch"
-        className={switchInputClassname}
+        className={switchInputClassName}
         disabled={disabled}
         {...rest}
       />
 
       <Flex
         as="span"
-        className={clsx(switchMarkClassname, error && 'sui-error')}
+        className={clsx(switchMarkClassName, error && 'sui-error')}
         alignItems="center"
         radius={6}
         aria-hidden="true"

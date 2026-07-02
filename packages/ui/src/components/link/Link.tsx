@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type LinkProps, linkProps} from './link.props'
 
-const linkClassname = getVersionedClassname('sui-Link')
+const linkClassName = suffixClassName('sui-Link')
 
 /** @beta */
 export function Link({underlined = true, ...props}: LinkProps) {
@@ -15,7 +15,7 @@ export function Link({underlined = true, ...props}: LinkProps) {
 
   return (
     <a
-      className={clsx(linkClassname, className)}
+      className={clsx(linkClassName, className)}
       style={style}
       data-ui="Link"
       {...(openInNewTab ? {target: '_blank', rel: 'noopener noreferrer'} : {})}

@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type VisuallyHiddenProps, visuallyHiddenProps} from './visuallyHidden.props'
 
-const visuallyHiddenClassname = getVersionedClassname('sui-VisuallyHidden')
+const visuallyHiddenClassName = suffixClassName('sui-VisuallyHidden')
 
 /** @public */
 export function VisuallyHidden<T extends ElementType = 'span'>(
@@ -16,7 +16,7 @@ export function VisuallyHidden<T extends ElementType = 'span'>(
 
   return (
     <Component
-      className={clsx(visuallyHiddenClassname, className)}
+      className={clsx(visuallyHiddenClassName, className)}
       style={style}
       data-ui="VisuallyHidden"
       {...rest}

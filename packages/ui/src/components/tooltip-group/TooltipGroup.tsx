@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import {type ComponentPropsWithRef, type ElementType, useRef, useState} from 'react'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type TooltipGroupProps, tooltipGroupProps} from './tooltipGroup.props'
 
-const tooltipGroupClassname = getVersionedClassname('sui-TooltipGroup')
+const tooltipGroupClassName = suffixClassName('sui-TooltipGroup')
 
 /** @public */
 export function TooltipGroup<T extends ElementType = 'div'>(
@@ -45,7 +45,7 @@ export function TooltipGroup<T extends ElementType = 'div'>(
 
   return (
     <Component
-      className={clsx(tooltipGroupClassname, className)}
+      className={clsx(tooltipGroupClassName, className)}
       style={{
         ...style,
         ...(isActive && {

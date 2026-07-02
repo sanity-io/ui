@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Text} from '../text/Text'
 import {type LabelProps, labelProps} from './label.props'
 
-const labelClassname = getVersionedClassname('sui-Label')
+const labelClassName = suffixClassName('sui-Label')
 
 /** @beta */
 export function Label(props: LabelProps) {
@@ -17,7 +17,7 @@ export function Label(props: LabelProps) {
       size={1}
       muted={disabled}
       className={clsx(
-        labelClassname,
+        labelClassName,
         'sui-display-flex sui-align-items-center sui-gap2',
         error && 'sui-error',
         className,

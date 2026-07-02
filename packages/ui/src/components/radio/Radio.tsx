@@ -1,15 +1,15 @@
 import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
 import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
 import {type RadioProps, radioProps} from './radio.props'
 
-const radioClassname = getVersionedClassname('sui-Radio')
-const radioInputClassname = getVersionedClassname('sui-RadioInput')
-const radioMarkClassname = getVersionedClassname('sui-RadioMark')
+const radioClassName = suffixClassName('sui-Radio')
+const radioInputClassName = suffixClassName('sui-RadioInput')
+const radioMarkClassName = suffixClassName('sui-RadioMark')
 
 /** @beta */
 export function Radio(props: RadioProps) {
@@ -17,7 +17,7 @@ export function Radio(props: RadioProps) {
 
   return (
     <Label
-      className={clsx(radioClassname, className)}
+      className={clsx(radioClassName, className)}
       style={style}
       data-ui="Radio"
       disabled={disabled}
@@ -26,14 +26,14 @@ export function Radio(props: RadioProps) {
       <VisuallyHidden
         as="input"
         type="radio"
-        className={radioInputClassname}
+        className={radioInputClassName}
         disabled={disabled}
         {...rest}
       />
 
       <Box
         as="span"
-        className={clsx(radioMarkClassname, error && 'sui-error')}
+        className={clsx(radioMarkClassName, error && 'sui-error')}
         position="relative"
         radius="full"
         width="17px"

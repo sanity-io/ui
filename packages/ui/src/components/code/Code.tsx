@@ -3,12 +3,12 @@ import {type ComponentPropsWithRef, lazy, Suspense} from 'react'
 
 import {type CodeTag} from '../../types/Code'
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type CodeProps, codeProps} from './code.props'
 
 const LazyRefractor = lazy(() => import('./LazyRefractor'))
 
-const codeClassname = getVersionedClassname('sui-Code')
+const codeClassName = suffixClassName('sui-Code')
 
 /** @public */
 export function Code<T extends CodeTag = 'pre'>({
@@ -21,7 +21,7 @@ export function Code<T extends CodeTag = 'pre'>({
   if (!language) {
     return (
       <Component
-        className={clsx(codeClassname, className)}
+        className={clsx(codeClassName, className)}
         style={style}
         data-ui="Code"
         {...rest}
@@ -33,7 +33,7 @@ export function Code<T extends CodeTag = 'pre'>({
 
   return (
     <Component
-      className={clsx(codeClassname, className)}
+      className={clsx(codeClassName, className)}
       style={style}
       data-ui="Code"
       {...rest}

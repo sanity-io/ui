@@ -1,17 +1,17 @@
 import type {Rule} from 'postcss'
 import {describe, expect, it} from 'vitest'
 
-import {versionSuffix} from './postcss-version-suffix'
+import {suffixSelectors} from './postcss-suffix-selectors'
 
-const PREFIX = '001'
+const SUFFIX = '001'
 const COMPONENT_PATH = 'ui/src/components/test.css'
 const OTHER_PATH = ''
 
 function transform(selector: string, filePath = COMPONENT_PATH, rule: Rule = {} as Rule) {
-  return versionSuffix(PREFIX, selector, `${PREFIX} ${selector}`, filePath, rule)
+  return suffixSelectors(SUFFIX, selector, `${SUFFIX} ${selector}`, filePath, rule)
 }
 
-describe('versionSuffix', () => {
+describe('suffixSelectors', () => {
   it('adds a version suffix to component selectors', () => {
     expect(transform('.sui-Checkbox')).toBe('.sui-Checkbox-001')
   })

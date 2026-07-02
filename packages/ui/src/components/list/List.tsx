@@ -3,7 +3,7 @@ import type {ComponentProps, ComponentPropsWithRef, ElementType} from 'react'
 
 import type {ListTag} from '../../types/List'
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Flex} from '../flex/Flex'
 import {Text} from '../text/Text'
 import {
@@ -14,10 +14,10 @@ import {
   type ListProps,
 } from './list.props'
 
-const listClassname = getVersionedClassname('sui-List')
-const listItemClassname = getVersionedClassname('sui-ListItem')
-const listItemTextClassname = getVersionedClassname('sui-ListItemText')
-const listItemImageClassname = getVersionedClassname('sui-ListItemImage')
+const listClassName = suffixClassName('sui-List')
+const listItemClassName = suffixClassName('sui-ListItem')
+const listItemTextClassName = suffixClassName('sui-ListItemText')
+const listItemImageClassName = suffixClassName('sui-ListItemImage')
 
 function ListRoot<T extends ListTag = 'ul'>(
   props: ListProps<T> & Omit<ComponentPropsWithRef<T>, keyof ListProps<T>>,
@@ -27,7 +27,7 @@ function ListRoot<T extends ListTag = 'ul'>(
 
   return (
     <Component
-      className={clsx(listClassname, className)}
+      className={clsx(listClassName, className)}
       style={style}
       data-ui="List"
       {...rest}
@@ -46,7 +46,7 @@ function ListItem({density = 'regular', ...props}: ListItemProps) {
   return (
     <Flex
       as="li"
-      className={clsx(listItemClassname, className)}
+      className={clsx(listItemClassName, className)}
       style={style}
       data-ui="ListItem"
       alignItems="center"
@@ -70,7 +70,7 @@ function ListItemText<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={clsx(listItemTextClassname, className)}
+      className={clsx(listItemTextClassName, className)}
       style={style}
       data-ui="ListItemText"
       flexDirection="column"
@@ -99,7 +99,7 @@ function ListItemImage(props: ComponentProps<'img'>) {
 
   return (
     <img
-      className={clsx(listItemImageClassname, 'sui-radius2', className)}
+      className={clsx(listItemImageClassName, 'sui-radius2', className)}
       style={style}
       data-ui="ListItemImage"
       {...rest}

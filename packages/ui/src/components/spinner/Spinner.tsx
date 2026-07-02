@@ -2,11 +2,11 @@ import {SpinnerIcon} from '@sanity/icons'
 import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
-import {getVersionedClassname} from '../../utils/getVersionedClassname'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Icon} from '../icon/Icon'
 import {type SpinnerProps, spinnerProps} from './spinner.props'
 
-const spinnerClassname = getVersionedClassname('sui-Spinner')
+const spinnerClassName = suffixClassName('sui-Spinner')
 
 /** @public */
 export function Spinner({size = 2, ...props}: SpinnerProps) {
@@ -15,7 +15,7 @@ export function Spinner({size = 2, ...props}: SpinnerProps) {
   return (
     <Icon
       icon={SpinnerIcon}
-      className={clsx(spinnerClassname, className)}
+      className={clsx(spinnerClassName, className)}
       style={style}
       data-ui="Spinner"
       role="status"
