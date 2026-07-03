@@ -1,32 +1,35 @@
 # Contributing guidelines
 
-## Working with prereleases
+This repository is a pnpm monorepo. The published `@sanity/ui` package lives in
+[`packages/ui`](packages/ui), and the Figma plugin lives in
+[`packages/figma`](packages/figma).
 
-### Going from `alpha => beta`
-
-```sh
-git checkout alpha
-git pull --rebase
-git fetch origin main
-git rebase origin/main
-git push origin alpha # optional
-
-git checkout beta
-git reset --hard alpha
-git push origin main
-```
-
-### Going from `beta => main`
+## Getting started
 
 ```sh
-git checkout beta
-git pull --rebase
-git fetch origin main
-git rebase origin/main
-git push origin beta # optional
-
-git checkout -b v2 # make a new release branch
-git reset --hard beta
-git push origin v2
-# make a PR to `main`
+pnpm install
+pnpm build
+pnpm test
 ```
+
+Run `pnpm dev` to start Storybook (http://localhost:6006) and the Workshop
+(http://localhost:1337) in parallel.
+
+## Releasing
+
+Releases are managed with [Changesets](https://github.com/changesets/changesets).
+
+When you make a change that should be released, add a changeset to your pull
+request:
+
+```sh
+pnpm changeset
+```
+
+Once pull requests with changesets are merged into `main`, a "Version Packages"
+pull request is opened (and kept up to date) that bumps the affected package
+versions and updates their changelogs. Merging that pull request publishes the
+packages to npm through the
+[`Release` workflow](https://github.com/sanity-io/ui/actions/workflows/release.yml),
+which uses npm [Trusted Publishing](https://docs.npmjs.com/trusted-publishers)
+(OIDC).
