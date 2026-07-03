@@ -34,22 +34,45 @@ import {lazy} from 'react'
 const RocketIcon = lazy(() => import('@sanity/icons/Rocket'))
 ```
 
-### Barrel imports
+### Dynamic icons
 
-Importing individual icons from the root entry still works, and the named export is identical to
-the subpath's:
+The root entry exposes the dynamic `<Icon>` component, the `icons` map, and their types – and
+nothing else. Individual icons are not re-exported from the root (these barrel exports were
+deprecated in v4 and removed in v5): import them from their subpath as shown above.
+
+Every entry in the `icons` map is a `React.lazy` component over the icon's subpath module, so
+importing the root entry pulls no icon code into your bundle – each icon is fetched as its own
+chunk the first time it renders.
+
+`<Icon>` wraps the lazy icon in a `<Suspense>` boundary whose fallback is an svg with the same
+viewBox and dimensions (but no drawing content yet), so the icon slot reserves its final size
+immediately and the graphic pops in once loaded – the way an `<img>` with intrinsic dimensions
+loads:
 
 ```jsx
-import {RocketIcon} from '@sanity/icons'
+import {Icon} from '@sanity/icons'
+
+function App() {
+  return <Icon symbol="rocket" style={{fontSize: 72}} />
+}
 ```
 
-However, these barrel imports are marked `@deprecated` (your editor will show them as such, with
-the subpath to use instead) because they come with barrel file performance issues: unless your
-bundler has barrel-file optimizations, importing one icon pulls in the entire icon set. Prefer the
-per-icon export paths.
+When rendering components from the `icons` map directly, provide your own `<Suspense>` boundary:
 
-The dynamic `<Icon symbol="…" />` component and the `icons` map remain available from the root
-entry and are not deprecated.
+```jsx
+import {icons} from '@sanity/icons'
+import {Suspense} from 'react'
+
+function App(props) {
+  const IconComponent = icons[props.symbol]
+
+  return (
+    <Suspense fallback={null}>
+      <IconComponent />
+    </Suspense>
+  )
+}
+```
 
 ## License
 

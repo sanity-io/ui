@@ -1,241 +1,7 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import {AccessDeniedIcon} from './exports/AccessDenied'
-import {ActivityIcon} from './exports/Activity'
-import {AddIcon} from './exports/Add'
-import {AddCircleIcon} from './exports/AddCircle'
-import {AddCommentIcon} from './exports/AddComment'
-import {AddDocumentIcon} from './exports/AddDocument'
-import {AddUserIcon} from './exports/AddUser'
-import {ApiIcon} from './exports/Api'
-import {ArchiveIcon} from './exports/Archive'
-import {ArrowDownIcon} from './exports/ArrowDown'
-import {ArrowLeftIcon} from './exports/ArrowLeft'
-import {ArrowRightIcon} from './exports/ArrowRight'
-import {ArrowTopRightIcon} from './exports/ArrowTopRight'
-import {ArrowUpIcon} from './exports/ArrowUp'
-import {AsteriskIcon} from './exports/Asterisk'
-import {BarChartIcon} from './exports/BarChart'
-import {BasketIcon} from './exports/Basket'
-import {BellIcon} from './exports/Bell'
-import {BillIcon} from './exports/Bill'
-import {BinaryDocumentIcon} from './exports/BinaryDocument'
-import {BlockContentIcon} from './exports/BlockContent'
-import {BlockElementIcon} from './exports/BlockElement'
-import {BlockquoteIcon} from './exports/Blockquote'
-import {BoldIcon} from './exports/Bold'
-import {BoltIcon} from './exports/Bolt'
-import {BookIcon} from './exports/Book'
-import {BookmarkIcon} from './exports/Bookmark'
-import {BookmarkFilledIcon} from './exports/BookmarkFilled'
-import {BottleIcon} from './exports/Bottle'
-import {BugIcon} from './exports/Bug'
-import {BulbFilledIcon} from './exports/BulbFilled'
-import {BulbOutlineIcon} from './exports/BulbOutline'
-import {CalendarIcon} from './exports/Calendar'
-import {CaseIcon} from './exports/Case'
-import {ChartUpwardIcon} from './exports/ChartUpward'
-import {CheckmarkIcon} from './exports/Checkmark'
-import {CheckmarkCircleIcon} from './exports/CheckmarkCircle'
-import {ChevronDownIcon} from './exports/ChevronDown'
-import {ChevronLeftIcon} from './exports/ChevronLeft'
-import {ChevronRightIcon} from './exports/ChevronRight'
-import {ChevronUpIcon} from './exports/ChevronUp'
-import {CircleIcon} from './exports/Circle'
-import {ClipboardIcon} from './exports/Clipboard'
-import {ClipboardImageIcon} from './exports/ClipboardImage'
-import {ClockIcon} from './exports/Clock'
-import {CloseIcon} from './exports/Close'
-import {CloseCircleIcon} from './exports/CloseCircle'
-import {CodeIcon} from './exports/Code'
-import {CodeBlockIcon} from './exports/CodeBlock'
-import {CogIcon} from './exports/Cog'
-import {CollapseIcon} from './exports/Collapse'
-import {ColorWheelIcon} from './exports/ColorWheel'
-import {CommentIcon} from './exports/Comment'
-import {ComponentIcon} from './exports/Component'
-import {ComposeIcon} from './exports/Compose'
-import {ComposeSparklesIcon} from './exports/ComposeSparkles'
-import {ConfettiIcon} from './exports/Confetti'
-import {ControlsIcon} from './exports/Controls'
-import {CopyIcon} from './exports/Copy'
-import {CreditCardIcon} from './exports/CreditCard'
-import {CropIcon} from './exports/Crop'
-import {CubeIcon} from './exports/Cube'
-import {DashboardIcon} from './exports/Dashboard'
-import {DatabaseIcon} from './exports/Database'
-import {DesktopIcon} from './exports/Desktop'
-import {DiamondIcon} from './exports/Diamond'
-import {DocumentIcon} from './exports/Document'
-import {DocumentPdfIcon} from './exports/DocumentPdf'
-import {DocumentRemoveIcon} from './exports/DocumentRemove'
-import {DocumentsIcon} from './exports/Documents'
-import {DocumentSheetIcon} from './exports/DocumentSheet'
-import {DocumentTextIcon} from './exports/DocumentText'
-import {DocumentVideoIcon} from './exports/DocumentVideo'
-import {DocumentWordIcon} from './exports/DocumentWord'
-import {DocumentZipIcon} from './exports/DocumentZip'
-import {DotIcon} from './exports/Dot'
-import {DoubleChevronDownIcon} from './exports/DoubleChevronDown'
-import {DoubleChevronLeftIcon} from './exports/DoubleChevronLeft'
-import {DoubleChevronRightIcon} from './exports/DoubleChevronRight'
-import {DoubleChevronUpIcon} from './exports/DoubleChevronUp'
-import {DoubleQuoteIcon} from './exports/DoubleQuote'
-import {DownloadIcon} from './exports/Download'
-import {DragHandleIcon} from './exports/DragHandle'
-import {DropIcon} from './exports/Drop'
-import {EarthAmericasIcon} from './exports/EarthAmericas'
-import {EarthGlobeIcon} from './exports/EarthGlobe'
-import {EditIcon} from './exports/Edit'
-import {EllipsisHorizontalIcon} from './exports/EllipsisHorizontal'
-import {EllipsisVerticalIcon} from './exports/EllipsisVertical'
-import {EmptyIcon} from './exports/Empty'
-import {EnterIcon} from './exports/Enter'
-import {EnterRightIcon} from './exports/EnterRight'
-import {EnvelopeIcon} from './exports/Envelope'
-import {EqualIcon} from './exports/Equal'
-import {ErrorFilledIcon} from './exports/ErrorFilled'
-import {ErrorOutlineIcon} from './exports/ErrorOutline'
-import {ErrorScreenIcon} from './exports/ErrorScreen'
-import {ExpandIcon} from './exports/Expand'
-import {EyeClosedIcon} from './exports/EyeClosed'
-import {EyeOpenIcon} from './exports/EyeOpen'
-import {FaceHappyIcon} from './exports/FaceHappy'
-import {FaceIndifferentIcon} from './exports/FaceIndifferent'
-import {FaceSadIcon} from './exports/FaceSad'
-import {FeedbackIcon} from './exports/Feedback'
-import {FilterIcon} from './exports/Filter'
-import {FolderIcon} from './exports/Folder'
-import {GenerateIcon} from './exports/Generate'
-import {GithubIcon} from './exports/Github'
-import {GroqIcon} from './exports/Groq'
-import {HashIcon} from './exports/Hash'
-import {HeartIcon} from './exports/Heart'
-import {HeartFilledIcon} from './exports/HeartFilled'
-import {HelpCircleIcon} from './exports/HelpCircle'
-import {HighlightIcon} from './exports/Highlight'
-import {HomeIcon} from './exports/Home'
-import {IceCreamIcon} from './exports/IceCream'
-import {ImageIcon} from './exports/Image'
-import {ImageRemoveIcon} from './exports/ImageRemove'
-import {ImagesIcon} from './exports/Images'
-import {InboxIcon} from './exports/Inbox'
-import {InfoFilledIcon} from './exports/InfoFilled'
-import {InfoOutlineIcon} from './exports/InfoOutline'
-import {InlineIcon} from './exports/Inline'
-import {InlineElementIcon} from './exports/InlineElement'
-import {InsertAboveIcon} from './exports/InsertAbove'
-import {InsertBelowIcon} from './exports/InsertBelow'
-import {ItalicIcon} from './exports/Italic'
-import {JoystickIcon} from './exports/Joystick'
-import {JsonIcon} from './exports/Json'
-import {LaunchIcon} from './exports/Launch'
-import {LeaveIcon} from './exports/Leave'
-import {LemonIcon} from './exports/Lemon'
-import {LinkIcon} from './exports/Link'
-import {LinkedinIcon} from './exports/Linkedin'
-import {LinkRemovedIcon} from './exports/LinkRemoved'
-import {ListIcon} from './exports/List'
-import {LockIcon} from './exports/Lock'
-import {LogoJsIcon} from './exports/LogoJs'
-import {LogoTsIcon} from './exports/LogoTs'
-import {MarkerIcon} from './exports/Marker'
-import {MarkerRemovedIcon} from './exports/MarkerRemoved'
-import {MasterDetailIcon} from './exports/MasterDetail'
-import {MenuIcon} from './exports/Menu'
-import {MicrophoneIcon} from './exports/Microphone'
-import {MicrophoneSlashIcon} from './exports/MicrophoneSlash'
-import {MobileDeviceIcon} from './exports/MobileDevice'
-import {MoonIcon} from './exports/Moon'
-import {NumberIcon} from './exports/Number'
-import {OkHandIcon} from './exports/OkHand'
-import {OlistIcon} from './exports/Olist'
-import {OverageIcon} from './exports/Overage'
-import {PackageIcon} from './exports/Package'
-import {PanelLeftIcon} from './exports/PanelLeft'
-import {PanelRightIcon} from './exports/PanelRight'
-import {PauseIcon} from './exports/Pause'
-import {PinIcon} from './exports/Pin'
-import {PinFilledIcon} from './exports/PinFilled'
-import {PinRemovedIcon} from './exports/PinRemoved'
-import {PlayIcon} from './exports/Play'
-import {PlugIcon} from './exports/Plug'
-import {PresentationIcon} from './exports/Presentation'
-import {Progress50Icon} from './exports/Progress50'
-import {Progress75Icon} from './exports/Progress75'
-import {ProjectsIcon} from './exports/Projects'
-import {PublishIcon} from './exports/Publish'
-import {ReadOnlyIcon} from './exports/ReadOnly'
-import {RedoIcon} from './exports/Redo'
-import {RefreshIcon} from './exports/Refresh'
-import {RemoveIcon} from './exports/Remove'
-import {RemoveCircleIcon} from './exports/RemoveCircle'
-import {ResetIcon} from './exports/Reset'
-import {RestoreIcon} from './exports/Restore'
-import {RetrieveIcon} from './exports/Retrieve'
-import {RetryIcon} from './exports/Retry'
-import {RevertIcon} from './exports/Revert'
-import {RobotIcon} from './exports/Robot'
-import {RocketIcon} from './exports/Rocket'
-import {SchemaIcon} from './exports/Schema'
-import {SearchIcon} from './exports/Search'
-import {SelectIcon} from './exports/Select'
-import {ShareIcon} from './exports/Share'
-import {SortIcon} from './exports/Sort'
-import {SparkleIcon} from './exports/Sparkle'
-import {SparklesIcon} from './exports/Sparkles'
-import {SpinnerIcon} from './exports/Spinner'
-import {SplitHorizontalIcon} from './exports/SplitHorizontal'
-import {SplitVerticalIcon} from './exports/SplitVertical'
-import {SquareIcon} from './exports/Square'
-import {StackIcon} from './exports/Stack'
-import {StackCompactIcon} from './exports/StackCompact'
-import {StarIcon} from './exports/Star'
-import {StarFilledIcon} from './exports/StarFilled'
-import {StopIcon} from './exports/Stop'
-import {StrikethroughIcon} from './exports/Strikethrough'
-import {StringIcon} from './exports/String'
-import {SunIcon} from './exports/Sun'
-import {SyncIcon} from './exports/Sync'
-import {TabletDeviceIcon} from './exports/TabletDevice'
-import {TagIcon} from './exports/Tag'
-import {TagsIcon} from './exports/Tags'
-import {TargetIcon} from './exports/Target'
-import {TaskIcon} from './exports/Task'
-import {TerminalIcon} from './exports/Terminal'
-import {TextIcon} from './exports/Text'
-import {ThLargeIcon} from './exports/ThLarge'
-import {ThListIcon} from './exports/ThList'
-import {ThumbsDownIcon} from './exports/ThumbsDown'
-import {ThumbsUpIcon} from './exports/ThumbsUp'
-import {TiersIcon} from './exports/Tiers'
-import {TimelineIcon} from './exports/Timeline'
-import {ToggleArrowRightIcon} from './exports/ToggleArrowRight'
-import {TokenIcon} from './exports/Token'
-import {TransferIcon} from './exports/Transfer'
-import {TranslateIcon} from './exports/Translate'
-import {TrashIcon} from './exports/Trash'
-import {TrendUpwardIcon} from './exports/TrendUpward'
-import {TriangleOutlineIcon} from './exports/TriangleOutline'
-import {TrolleyIcon} from './exports/Trolley'
-import {TruncateIcon} from './exports/Truncate'
-import {TwitterIcon} from './exports/Twitter'
-import {UlistIcon} from './exports/Ulist'
-import {UnarchiveIcon} from './exports/Unarchive'
-import {UnderlineIcon} from './exports/Underline'
-import {UndoIcon} from './exports/Undo'
-import {UnknownIcon} from './exports/Unknown'
-import {UnlinkIcon} from './exports/Unlink'
-import {UnlockIcon} from './exports/Unlock'
-import {UnpublishIcon} from './exports/Unpublish'
-import {UploadIcon} from './exports/Upload'
-import {UserIcon} from './exports/User'
-import {UsersIcon} from './exports/Users'
-import {VersionsIcon} from './exports/Versions'
-import {VideoIcon} from './exports/Video'
-import {WarningFilledIcon} from './exports/WarningFilled'
-import {WarningOutlineIcon} from './exports/WarningOutline'
-import {WrenchIcon} from './exports/Wrench'
+import {lazy} from 'react'
+
 import type {IconComponent} from './types'
 
 /**
@@ -725,240 +491,240 @@ export interface IconMap {
  * @public
  */
 export const icons: IconMap = {
-  'access-denied': AccessDeniedIcon,
-  'activity': ActivityIcon,
-  'add-circle': AddCircleIcon,
-  'add-comment': AddCommentIcon,
-  'add-document': AddDocumentIcon,
-  'add': AddIcon,
-  'add-user': AddUserIcon,
-  'api': ApiIcon,
-  'archive': ArchiveIcon,
-  'arrow-down': ArrowDownIcon,
-  'arrow-left': ArrowLeftIcon,
-  'arrow-right': ArrowRightIcon,
-  'arrow-top-right': ArrowTopRightIcon,
-  'arrow-up': ArrowUpIcon,
-  'asterisk': AsteriskIcon,
-  'bar-chart': BarChartIcon,
-  'basket': BasketIcon,
-  'bell': BellIcon,
-  'bill': BillIcon,
-  'binary-document': BinaryDocumentIcon,
-  'block-content': BlockContentIcon,
-  'block-element': BlockElementIcon,
-  'blockquote': BlockquoteIcon,
-  'bold': BoldIcon,
-  'bolt': BoltIcon,
-  'book': BookIcon,
-  'bookmark-filled': BookmarkFilledIcon,
-  'bookmark': BookmarkIcon,
-  'bottle': BottleIcon,
-  'bug': BugIcon,
-  'bulb-filled': BulbFilledIcon,
-  'bulb-outline': BulbOutlineIcon,
-  'calendar': CalendarIcon,
-  'case': CaseIcon,
-  'chart-upward': ChartUpwardIcon,
-  'checkmark-circle': CheckmarkCircleIcon,
-  'checkmark': CheckmarkIcon,
-  'chevron-down': ChevronDownIcon,
-  'chevron-left': ChevronLeftIcon,
-  'chevron-right': ChevronRightIcon,
-  'chevron-up': ChevronUpIcon,
-  'circle': CircleIcon,
-  'clipboard': ClipboardIcon,
-  'clipboard-image': ClipboardImageIcon,
-  'clock': ClockIcon,
-  'close-circle': CloseCircleIcon,
-  'close': CloseIcon,
-  'code-block': CodeBlockIcon,
-  'code': CodeIcon,
-  'cog': CogIcon,
-  'collapse': CollapseIcon,
-  'color-wheel': ColorWheelIcon,
-  'comment': CommentIcon,
-  'component': ComponentIcon,
-  'compose': ComposeIcon,
-  'compose-sparkles': ComposeSparklesIcon,
-  'confetti': ConfettiIcon,
-  'controls': ControlsIcon,
-  'copy': CopyIcon,
-  'credit-card': CreditCardIcon,
-  'crop': CropIcon,
-  'cube': CubeIcon,
-  'dashboard': DashboardIcon,
-  'database': DatabaseIcon,
-  'desktop': DesktopIcon,
-  'diamond': DiamondIcon,
-  'document': DocumentIcon,
-  'document-pdf': DocumentPdfIcon,
-  'document-remove': DocumentRemoveIcon,
-  'document-sheet': DocumentSheetIcon,
-  'document-text': DocumentTextIcon,
-  'document-video': DocumentVideoIcon,
-  'document-word': DocumentWordIcon,
-  'document-zip': DocumentZipIcon,
-  'documents': DocumentsIcon,
-  'dot': DotIcon,
-  'double-chevron-down': DoubleChevronDownIcon,
-  'double-chevron-left': DoubleChevronLeftIcon,
-  'double-chevron-right': DoubleChevronRightIcon,
-  'double-chevron-up': DoubleChevronUpIcon,
-  'double-quote': DoubleQuoteIcon,
-  'download': DownloadIcon,
-  'drag-handle': DragHandleIcon,
-  'drop': DropIcon,
-  'earth-americas': EarthAmericasIcon,
-  'earth-globe': EarthGlobeIcon,
-  'edit': EditIcon,
-  'ellipsis-horizontal': EllipsisHorizontalIcon,
-  'ellipsis-vertical': EllipsisVerticalIcon,
-  'empty': EmptyIcon,
-  'enter': EnterIcon,
-  'enter-right': EnterRightIcon,
-  'envelope': EnvelopeIcon,
-  'equal': EqualIcon,
-  'error-filled': ErrorFilledIcon,
-  'error-outline': ErrorOutlineIcon,
-  'error-screen': ErrorScreenIcon,
-  'expand': ExpandIcon,
-  'eye-closed': EyeClosedIcon,
-  'eye-open': EyeOpenIcon,
-  'face-happy': FaceHappyIcon,
-  'face-indifferent': FaceIndifferentIcon,
-  'face-sad': FaceSadIcon,
-  'feedback': FeedbackIcon,
-  'filter': FilterIcon,
-  'folder': FolderIcon,
-  'generate': GenerateIcon,
-  'github': GithubIcon,
-  'groq': GroqIcon,
-  'hash': HashIcon,
-  'heart-filled': HeartFilledIcon,
-  'heart': HeartIcon,
-  'help-circle': HelpCircleIcon,
-  'highlight': HighlightIcon,
-  'home': HomeIcon,
-  'ice-cream': IceCreamIcon,
-  'image': ImageIcon,
-  'image-remove': ImageRemoveIcon,
-  'images': ImagesIcon,
-  'inbox': InboxIcon,
-  'info-filled': InfoFilledIcon,
-  'info-outline': InfoOutlineIcon,
-  'inline-element': InlineElementIcon,
-  'inline': InlineIcon,
-  'insert-above': InsertAboveIcon,
-  'insert-below': InsertBelowIcon,
-  'italic': ItalicIcon,
-  'joystick': JoystickIcon,
-  'json': JsonIcon,
-  'launch': LaunchIcon,
-  'leave': LeaveIcon,
-  'lemon': LemonIcon,
-  'link': LinkIcon,
-  'link-removed': LinkRemovedIcon,
-  'linkedin': LinkedinIcon,
-  'list': ListIcon,
-  'lock': LockIcon,
-  'logo-js': LogoJsIcon,
-  'logo-ts': LogoTsIcon,
-  'marker': MarkerIcon,
-  'marker-removed': MarkerRemovedIcon,
-  'master-detail': MasterDetailIcon,
-  'menu': MenuIcon,
-  'microphone': MicrophoneIcon,
-  'microphone-slash': MicrophoneSlashIcon,
-  'mobile-device': MobileDeviceIcon,
-  'moon': MoonIcon,
-  'number': NumberIcon,
-  'ok-hand': OkHandIcon,
-  'olist': OlistIcon,
-  'overage': OverageIcon,
-  'package': PackageIcon,
-  'panel-left': PanelLeftIcon,
-  'panel-right': PanelRightIcon,
-  'pause': PauseIcon,
-  'pin-filled': PinFilledIcon,
-  'pin': PinIcon,
-  'pin-removed': PinRemovedIcon,
-  'play': PlayIcon,
-  'plug': PlugIcon,
-  'presentation': PresentationIcon,
-  'progress-50': Progress50Icon,
-  'progress-75': Progress75Icon,
-  'projects': ProjectsIcon,
-  'publish': PublishIcon,
-  'read-only': ReadOnlyIcon,
-  'redo': RedoIcon,
-  'refresh': RefreshIcon,
-  'remove-circle': RemoveCircleIcon,
-  'remove': RemoveIcon,
-  'reset': ResetIcon,
-  'restore': RestoreIcon,
-  'retrieve': RetrieveIcon,
-  'retry': RetryIcon,
-  'revert': RevertIcon,
-  'robot': RobotIcon,
-  'rocket': RocketIcon,
-  'schema': SchemaIcon,
-  'search': SearchIcon,
-  'select': SelectIcon,
-  'share': ShareIcon,
-  'sort': SortIcon,
-  'sparkle': SparkleIcon,
-  'sparkles': SparklesIcon,
-  'spinner': SpinnerIcon,
-  'split-horizontal': SplitHorizontalIcon,
-  'split-vertical': SplitVerticalIcon,
-  'square': SquareIcon,
-  'stack-compact': StackCompactIcon,
-  'stack': StackIcon,
-  'star-filled': StarFilledIcon,
-  'star': StarIcon,
-  'stop': StopIcon,
-  'strikethrough': StrikethroughIcon,
-  'string': StringIcon,
-  'sun': SunIcon,
-  'sync': SyncIcon,
-  'tablet-device': TabletDeviceIcon,
-  'tag': TagIcon,
-  'tags': TagsIcon,
-  'target': TargetIcon,
-  'task': TaskIcon,
-  'terminal': TerminalIcon,
-  'text': TextIcon,
-  'th-large': ThLargeIcon,
-  'th-list': ThListIcon,
-  'thumbs-down': ThumbsDownIcon,
-  'thumbs-up': ThumbsUpIcon,
-  'tiers': TiersIcon,
-  'timeline': TimelineIcon,
-  'toggle-arrow-right': ToggleArrowRightIcon,
-  'token': TokenIcon,
-  'transfer': TransferIcon,
-  'translate': TranslateIcon,
-  'trash': TrashIcon,
-  'trend-upward': TrendUpwardIcon,
-  'triangle-outline': TriangleOutlineIcon,
-  'trolley': TrolleyIcon,
-  'truncate': TruncateIcon,
-  'twitter': TwitterIcon,
-  'ulist': UlistIcon,
-  'unarchive': UnarchiveIcon,
-  'underline': UnderlineIcon,
-  'undo': UndoIcon,
-  'unknown': UnknownIcon,
-  'unlink': UnlinkIcon,
-  'unlock': UnlockIcon,
-  'unpublish': UnpublishIcon,
-  'upload': UploadIcon,
-  'user': UserIcon,
-  'users': UsersIcon,
-  'versions': VersionsIcon,
-  'video': VideoIcon,
-  'warning-filled': WarningFilledIcon,
-  'warning-outline': WarningOutlineIcon,
-  'wrench': WrenchIcon,
+  'access-denied': lazy(() => import('./exports/AccessDenied')),
+  'activity': lazy(() => import('./exports/Activity')),
+  'add-circle': lazy(() => import('./exports/AddCircle')),
+  'add-comment': lazy(() => import('./exports/AddComment')),
+  'add-document': lazy(() => import('./exports/AddDocument')),
+  'add': lazy(() => import('./exports/Add')),
+  'add-user': lazy(() => import('./exports/AddUser')),
+  'api': lazy(() => import('./exports/Api')),
+  'archive': lazy(() => import('./exports/Archive')),
+  'arrow-down': lazy(() => import('./exports/ArrowDown')),
+  'arrow-left': lazy(() => import('./exports/ArrowLeft')),
+  'arrow-right': lazy(() => import('./exports/ArrowRight')),
+  'arrow-top-right': lazy(() => import('./exports/ArrowTopRight')),
+  'arrow-up': lazy(() => import('./exports/ArrowUp')),
+  'asterisk': lazy(() => import('./exports/Asterisk')),
+  'bar-chart': lazy(() => import('./exports/BarChart')),
+  'basket': lazy(() => import('./exports/Basket')),
+  'bell': lazy(() => import('./exports/Bell')),
+  'bill': lazy(() => import('./exports/Bill')),
+  'binary-document': lazy(() => import('./exports/BinaryDocument')),
+  'block-content': lazy(() => import('./exports/BlockContent')),
+  'block-element': lazy(() => import('./exports/BlockElement')),
+  'blockquote': lazy(() => import('./exports/Blockquote')),
+  'bold': lazy(() => import('./exports/Bold')),
+  'bolt': lazy(() => import('./exports/Bolt')),
+  'book': lazy(() => import('./exports/Book')),
+  'bookmark-filled': lazy(() => import('./exports/BookmarkFilled')),
+  'bookmark': lazy(() => import('./exports/Bookmark')),
+  'bottle': lazy(() => import('./exports/Bottle')),
+  'bug': lazy(() => import('./exports/Bug')),
+  'bulb-filled': lazy(() => import('./exports/BulbFilled')),
+  'bulb-outline': lazy(() => import('./exports/BulbOutline')),
+  'calendar': lazy(() => import('./exports/Calendar')),
+  'case': lazy(() => import('./exports/Case')),
+  'chart-upward': lazy(() => import('./exports/ChartUpward')),
+  'checkmark-circle': lazy(() => import('./exports/CheckmarkCircle')),
+  'checkmark': lazy(() => import('./exports/Checkmark')),
+  'chevron-down': lazy(() => import('./exports/ChevronDown')),
+  'chevron-left': lazy(() => import('./exports/ChevronLeft')),
+  'chevron-right': lazy(() => import('./exports/ChevronRight')),
+  'chevron-up': lazy(() => import('./exports/ChevronUp')),
+  'circle': lazy(() => import('./exports/Circle')),
+  'clipboard': lazy(() => import('./exports/Clipboard')),
+  'clipboard-image': lazy(() => import('./exports/ClipboardImage')),
+  'clock': lazy(() => import('./exports/Clock')),
+  'close-circle': lazy(() => import('./exports/CloseCircle')),
+  'close': lazy(() => import('./exports/Close')),
+  'code-block': lazy(() => import('./exports/CodeBlock')),
+  'code': lazy(() => import('./exports/Code')),
+  'cog': lazy(() => import('./exports/Cog')),
+  'collapse': lazy(() => import('./exports/Collapse')),
+  'color-wheel': lazy(() => import('./exports/ColorWheel')),
+  'comment': lazy(() => import('./exports/Comment')),
+  'component': lazy(() => import('./exports/Component')),
+  'compose': lazy(() => import('./exports/Compose')),
+  'compose-sparkles': lazy(() => import('./exports/ComposeSparkles')),
+  'confetti': lazy(() => import('./exports/Confetti')),
+  'controls': lazy(() => import('./exports/Controls')),
+  'copy': lazy(() => import('./exports/Copy')),
+  'credit-card': lazy(() => import('./exports/CreditCard')),
+  'crop': lazy(() => import('./exports/Crop')),
+  'cube': lazy(() => import('./exports/Cube')),
+  'dashboard': lazy(() => import('./exports/Dashboard')),
+  'database': lazy(() => import('./exports/Database')),
+  'desktop': lazy(() => import('./exports/Desktop')),
+  'diamond': lazy(() => import('./exports/Diamond')),
+  'document': lazy(() => import('./exports/Document')),
+  'document-pdf': lazy(() => import('./exports/DocumentPdf')),
+  'document-remove': lazy(() => import('./exports/DocumentRemove')),
+  'document-sheet': lazy(() => import('./exports/DocumentSheet')),
+  'document-text': lazy(() => import('./exports/DocumentText')),
+  'document-video': lazy(() => import('./exports/DocumentVideo')),
+  'document-word': lazy(() => import('./exports/DocumentWord')),
+  'document-zip': lazy(() => import('./exports/DocumentZip')),
+  'documents': lazy(() => import('./exports/Documents')),
+  'dot': lazy(() => import('./exports/Dot')),
+  'double-chevron-down': lazy(() => import('./exports/DoubleChevronDown')),
+  'double-chevron-left': lazy(() => import('./exports/DoubleChevronLeft')),
+  'double-chevron-right': lazy(() => import('./exports/DoubleChevronRight')),
+  'double-chevron-up': lazy(() => import('./exports/DoubleChevronUp')),
+  'double-quote': lazy(() => import('./exports/DoubleQuote')),
+  'download': lazy(() => import('./exports/Download')),
+  'drag-handle': lazy(() => import('./exports/DragHandle')),
+  'drop': lazy(() => import('./exports/Drop')),
+  'earth-americas': lazy(() => import('./exports/EarthAmericas')),
+  'earth-globe': lazy(() => import('./exports/EarthGlobe')),
+  'edit': lazy(() => import('./exports/Edit')),
+  'ellipsis-horizontal': lazy(() => import('./exports/EllipsisHorizontal')),
+  'ellipsis-vertical': lazy(() => import('./exports/EllipsisVertical')),
+  'empty': lazy(() => import('./exports/Empty')),
+  'enter': lazy(() => import('./exports/Enter')),
+  'enter-right': lazy(() => import('./exports/EnterRight')),
+  'envelope': lazy(() => import('./exports/Envelope')),
+  'equal': lazy(() => import('./exports/Equal')),
+  'error-filled': lazy(() => import('./exports/ErrorFilled')),
+  'error-outline': lazy(() => import('./exports/ErrorOutline')),
+  'error-screen': lazy(() => import('./exports/ErrorScreen')),
+  'expand': lazy(() => import('./exports/Expand')),
+  'eye-closed': lazy(() => import('./exports/EyeClosed')),
+  'eye-open': lazy(() => import('./exports/EyeOpen')),
+  'face-happy': lazy(() => import('./exports/FaceHappy')),
+  'face-indifferent': lazy(() => import('./exports/FaceIndifferent')),
+  'face-sad': lazy(() => import('./exports/FaceSad')),
+  'feedback': lazy(() => import('./exports/Feedback')),
+  'filter': lazy(() => import('./exports/Filter')),
+  'folder': lazy(() => import('./exports/Folder')),
+  'generate': lazy(() => import('./exports/Generate')),
+  'github': lazy(() => import('./exports/Github')),
+  'groq': lazy(() => import('./exports/Groq')),
+  'hash': lazy(() => import('./exports/Hash')),
+  'heart-filled': lazy(() => import('./exports/HeartFilled')),
+  'heart': lazy(() => import('./exports/Heart')),
+  'help-circle': lazy(() => import('./exports/HelpCircle')),
+  'highlight': lazy(() => import('./exports/Highlight')),
+  'home': lazy(() => import('./exports/Home')),
+  'ice-cream': lazy(() => import('./exports/IceCream')),
+  'image': lazy(() => import('./exports/Image')),
+  'image-remove': lazy(() => import('./exports/ImageRemove')),
+  'images': lazy(() => import('./exports/Images')),
+  'inbox': lazy(() => import('./exports/Inbox')),
+  'info-filled': lazy(() => import('./exports/InfoFilled')),
+  'info-outline': lazy(() => import('./exports/InfoOutline')),
+  'inline-element': lazy(() => import('./exports/InlineElement')),
+  'inline': lazy(() => import('./exports/Inline')),
+  'insert-above': lazy(() => import('./exports/InsertAbove')),
+  'insert-below': lazy(() => import('./exports/InsertBelow')),
+  'italic': lazy(() => import('./exports/Italic')),
+  'joystick': lazy(() => import('./exports/Joystick')),
+  'json': lazy(() => import('./exports/Json')),
+  'launch': lazy(() => import('./exports/Launch')),
+  'leave': lazy(() => import('./exports/Leave')),
+  'lemon': lazy(() => import('./exports/Lemon')),
+  'link': lazy(() => import('./exports/Link')),
+  'link-removed': lazy(() => import('./exports/LinkRemoved')),
+  'linkedin': lazy(() => import('./exports/Linkedin')),
+  'list': lazy(() => import('./exports/List')),
+  'lock': lazy(() => import('./exports/Lock')),
+  'logo-js': lazy(() => import('./exports/LogoJs')),
+  'logo-ts': lazy(() => import('./exports/LogoTs')),
+  'marker': lazy(() => import('./exports/Marker')),
+  'marker-removed': lazy(() => import('./exports/MarkerRemoved')),
+  'master-detail': lazy(() => import('./exports/MasterDetail')),
+  'menu': lazy(() => import('./exports/Menu')),
+  'microphone': lazy(() => import('./exports/Microphone')),
+  'microphone-slash': lazy(() => import('./exports/MicrophoneSlash')),
+  'mobile-device': lazy(() => import('./exports/MobileDevice')),
+  'moon': lazy(() => import('./exports/Moon')),
+  'number': lazy(() => import('./exports/Number')),
+  'ok-hand': lazy(() => import('./exports/OkHand')),
+  'olist': lazy(() => import('./exports/Olist')),
+  'overage': lazy(() => import('./exports/Overage')),
+  'package': lazy(() => import('./exports/Package')),
+  'panel-left': lazy(() => import('./exports/PanelLeft')),
+  'panel-right': lazy(() => import('./exports/PanelRight')),
+  'pause': lazy(() => import('./exports/Pause')),
+  'pin-filled': lazy(() => import('./exports/PinFilled')),
+  'pin': lazy(() => import('./exports/Pin')),
+  'pin-removed': lazy(() => import('./exports/PinRemoved')),
+  'play': lazy(() => import('./exports/Play')),
+  'plug': lazy(() => import('./exports/Plug')),
+  'presentation': lazy(() => import('./exports/Presentation')),
+  'progress-50': lazy(() => import('./exports/Progress50')),
+  'progress-75': lazy(() => import('./exports/Progress75')),
+  'projects': lazy(() => import('./exports/Projects')),
+  'publish': lazy(() => import('./exports/Publish')),
+  'read-only': lazy(() => import('./exports/ReadOnly')),
+  'redo': lazy(() => import('./exports/Redo')),
+  'refresh': lazy(() => import('./exports/Refresh')),
+  'remove-circle': lazy(() => import('./exports/RemoveCircle')),
+  'remove': lazy(() => import('./exports/Remove')),
+  'reset': lazy(() => import('./exports/Reset')),
+  'restore': lazy(() => import('./exports/Restore')),
+  'retrieve': lazy(() => import('./exports/Retrieve')),
+  'retry': lazy(() => import('./exports/Retry')),
+  'revert': lazy(() => import('./exports/Revert')),
+  'robot': lazy(() => import('./exports/Robot')),
+  'rocket': lazy(() => import('./exports/Rocket')),
+  'schema': lazy(() => import('./exports/Schema')),
+  'search': lazy(() => import('./exports/Search')),
+  'select': lazy(() => import('./exports/Select')),
+  'share': lazy(() => import('./exports/Share')),
+  'sort': lazy(() => import('./exports/Sort')),
+  'sparkle': lazy(() => import('./exports/Sparkle')),
+  'sparkles': lazy(() => import('./exports/Sparkles')),
+  'spinner': lazy(() => import('./exports/Spinner')),
+  'split-horizontal': lazy(() => import('./exports/SplitHorizontal')),
+  'split-vertical': lazy(() => import('./exports/SplitVertical')),
+  'square': lazy(() => import('./exports/Square')),
+  'stack-compact': lazy(() => import('./exports/StackCompact')),
+  'stack': lazy(() => import('./exports/Stack')),
+  'star-filled': lazy(() => import('./exports/StarFilled')),
+  'star': lazy(() => import('./exports/Star')),
+  'stop': lazy(() => import('./exports/Stop')),
+  'strikethrough': lazy(() => import('./exports/Strikethrough')),
+  'string': lazy(() => import('./exports/String')),
+  'sun': lazy(() => import('./exports/Sun')),
+  'sync': lazy(() => import('./exports/Sync')),
+  'tablet-device': lazy(() => import('./exports/TabletDevice')),
+  'tag': lazy(() => import('./exports/Tag')),
+  'tags': lazy(() => import('./exports/Tags')),
+  'target': lazy(() => import('./exports/Target')),
+  'task': lazy(() => import('./exports/Task')),
+  'terminal': lazy(() => import('./exports/Terminal')),
+  'text': lazy(() => import('./exports/Text')),
+  'th-large': lazy(() => import('./exports/ThLarge')),
+  'th-list': lazy(() => import('./exports/ThList')),
+  'thumbs-down': lazy(() => import('./exports/ThumbsDown')),
+  'thumbs-up': lazy(() => import('./exports/ThumbsUp')),
+  'tiers': lazy(() => import('./exports/Tiers')),
+  'timeline': lazy(() => import('./exports/Timeline')),
+  'toggle-arrow-right': lazy(() => import('./exports/ToggleArrowRight')),
+  'token': lazy(() => import('./exports/Token')),
+  'transfer': lazy(() => import('./exports/Transfer')),
+  'translate': lazy(() => import('./exports/Translate')),
+  'trash': lazy(() => import('./exports/Trash')),
+  'trend-upward': lazy(() => import('./exports/TrendUpward')),
+  'triangle-outline': lazy(() => import('./exports/TriangleOutline')),
+  'trolley': lazy(() => import('./exports/Trolley')),
+  'truncate': lazy(() => import('./exports/Truncate')),
+  'twitter': lazy(() => import('./exports/Twitter')),
+  'ulist': lazy(() => import('./exports/Ulist')),
+  'unarchive': lazy(() => import('./exports/Unarchive')),
+  'underline': lazy(() => import('./exports/Underline')),
+  'undo': lazy(() => import('./exports/Undo')),
+  'unknown': lazy(() => import('./exports/Unknown')),
+  'unlink': lazy(() => import('./exports/Unlink')),
+  'unlock': lazy(() => import('./exports/Unlock')),
+  'unpublish': lazy(() => import('./exports/Unpublish')),
+  'upload': lazy(() => import('./exports/Upload')),
+  'user': lazy(() => import('./exports/User')),
+  'users': lazy(() => import('./exports/Users')),
+  'versions': lazy(() => import('./exports/Versions')),
+  'video': lazy(() => import('./exports/Video')),
+  'warning-filled': lazy(() => import('./exports/WarningFilled')),
+  'warning-outline': lazy(() => import('./exports/WarningOutline')),
+  'wrench': lazy(() => import('./exports/Wrench')),
 }

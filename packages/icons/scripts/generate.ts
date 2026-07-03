@@ -15,7 +15,6 @@ import formatConfig from '../.oxfmtrc.json' with {type: 'json'}
 const ROOT_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const IMPORT_PATH = path.resolve(ROOT_PATH, 'export')
 const SRC_EXPORTS_PATH = path.resolve(ROOT_PATH, 'src/exports')
-const SRC_INDEX_PATH = path.resolve(ROOT_PATH, 'src/index.ts')
 // The `icons` map lives in a flat `src/icons.ts` (not `src/icons/index.ts`). The basename
 // matters: tsdown/rolldown derives declaration chunk names from the source basename, and a
 // second `index` module would collide with the root barrel's `index.d.ts` and swap them.
@@ -24,9 +23,10 @@ const SRC_ICONS_PATH = path.resolve(ROOT_PATH, 'src/icons.ts')
 const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
 // Every icon lives in its own module under `src/exports`, which is also a build entry point
-// (see `tsdown.config.ts`). Each is exposed both as a named export – so it stays interchangeable
-// with the barrel import `import {AccessDeniedIcon} from '@sanity/icons'` – and as the default
+// (see `tsdown.config.ts`). Each is exposed both as a named export – the documented import
+// style, `import {AccessDeniedIcon} from '@sanity/icons/AccessDenied'` – and as the default
 // export, so `React.lazy(() => import('@sanity/icons/AccessDenied'))` works out of the box.
+// The generated `icons` map relies on that default export for its own lazy entries.
 const __TEMPLATE__ = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
 import type {ComponentPropsWithRef, ReactElement} from 'react'
@@ -118,58 +118,15 @@ interface IconMeta {
   name: string
 }
 
-// The barrel exposes every icon from its dedicated `./exports/<ExportName>` module – the very
-// same module that backs the individual `@sanity/icons/<ExportName>` subpath export – so the two
-// import styles stay interchangeable and the bundler can de-duplicate them into shared chunks.
-//
-// Each icon is exported as a `const` alias of the subpath module's default export, carrying an
-// `@deprecated` TSDoc tag. This deprecates the *barrel import* of the icon only – the same
-// component imported from its own subpath (or via the `icons` map and `<Icon>`) is not
-// deprecated – nudging users towards per-icon imports, which avoid barrel file performance
-// issues. The explicit `typeof` annotation is required by isolated declarations and keeps the
-// barrel export's type identical to the subpath export's.
-async function writeRootIndex(files: IconMeta[]) {
-  const iconImports = files
-    .map((f) => `import Original${f.componentName} from './exports/${f.exportName}'`)
-    .join('\n')
-
-  const iconExports = files
-    .map(
-      (f) =>
-        `/**
- * @deprecated Use \`import {${f.componentName}} from '@sanity/icons/${f.exportName}'\` instead, to avoid barrel file performance issues.
- */
-export const ${f.componentName}: typeof Original${f.componentName} = Original${f.componentName}`,
-    )
-    .join('\n\n')
-
-  const {code} = await format(
-    SRC_INDEX_PATH,
-    [
-      GENERATED_BANNER,
-      iconImports,
-      `export * from './icon'`,
-      `export * from './types'`,
-      `export {icons} from './icons'`,
-      `export type {IconMap, IconSymbol} from './icons'`,
-      iconExports,
-    ].join('\n\n'),
-    formatConfig as unknown as FormatConfig,
-  )
-
-  await writeFile(SRC_INDEX_PATH, code)
-}
-
 // The `icons` map (and its `IconSymbol`/`IconMap` types) power the dynamic `<Icon symbol=… />`
-// component. It imports every icon from its `../exports/<ExportName>` module; the individual
-// named icons are re-exported from `src/index.ts`, not here, so this module stays focused on
-// the map alone.
+// component. Every entry is a `React.lazy` component over its `./exports/<ExportName>` module's
+// default export, so importing the map (or the root barrel) pulls in no icon code up front –
+// each icon is fetched as its own chunk the first time it renders, like an `<img>` loading its
+// `src`. The `<Icon>` wrapper supplies the `<Suspense>` boundary with a matching svg fallback.
 async function writeIconsMap(files: IconMeta[]) {
-  const importTypes = `import type {IconComponent} from './types'`
+  const importReact = `import {lazy} from 'react'`
 
-  const iconImports = files
-    .map((f) => `import {${f.componentName}} from './exports/${f.exportName}';`)
-    .join('\n')
+  const importTypes = `import type {IconComponent} from './types'`
 
   const typesExports = `/**\n * @public\n */\nexport type IconSymbol = \n${files
     .map((f) => `| '${f.name}'`)
@@ -180,12 +137,12 @@ async function writeIconsMap(files: IconMeta[]) {
     .join(',')}}`
 
   const iconsExport = `/**\n * @public\n */\nexport const icons: IconMap = {${files
-    .map((f) => `'${f.name}': ${f.componentName}`)
+    .map((f) => `'${f.name}': lazy(() => import('./exports/${f.exportName}'))`)
     .join(',')}}`
 
   const {code} = await format(
     SRC_ICONS_PATH,
-    [GENERATED_BANNER, importTypes, iconImports, typesExports, iconMapInterface, iconsExport].join(
+    [GENERATED_BANNER, importReact, importTypes, typesExports, iconMapInterface, iconsExport].join(
       '\n\n',
     ),
     formatConfig as unknown as FormatConfig,
@@ -213,7 +170,7 @@ async function generate() {
   })
 
   // Guard against two icons mapping to the same subpath, which would make the generated
-  // `package.json` `exports` and `src/index.ts` re-exports ambiguous.
+  // `package.json` `exports` and the `icons` map entries ambiguous.
   const seen = new Map<string, string>()
   for (const file of files) {
     const previous = seen.get(file.exportName)
@@ -227,7 +184,6 @@ async function generate() {
 
   await Promise.all(files.map(writeIcon))
   await writeIconsMap(files)
-  await writeRootIndex(files)
 
   console.log(`generated ${files.length} icons:`, files.map((f) => f.name).join(', '))
 }

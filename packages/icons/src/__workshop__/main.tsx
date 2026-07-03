@@ -1,7 +1,6 @@
-// The preferred way to reach a single icon: importing from its dedicated subpath keeps
-// bundles small and treeshake fast. The named export is identical to the barrel's, so
-// `import {RocketIcon} from '@sanity/icons/Rocket'` and
-// `import {RocketIcon} from '@sanity/icons'` are interchangeable.
+// The way to reach a single icon eagerly: importing from its dedicated subpath keeps
+// bundles small and treeshaking fast. The root entry only exposes the lazy `icons` map
+// and the `<Icon>` component.
 import {RocketIcon} from '@sanity/icons/Rocket'
 import {Card, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'

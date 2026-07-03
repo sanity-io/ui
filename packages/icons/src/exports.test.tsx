@@ -2,6 +2,9 @@ import {readdirSync, readFileSync} from 'node:fs'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 
+import {render, waitFor} from '@testing-library/react'
+import {Suspense} from 'react'
+import {isLazy} from 'react-is'
 import {describe, expect, test} from 'vitest'
 
 import {icons} from './icons'
@@ -39,13 +42,10 @@ describe('per-icon subpath exports', () => {
       const named = mod[namedExport]
       expect(typeof named).toBe('function')
 
-      // The default export enables `React.lazy(() => import('@sanity/icons/AccessDenied'))`,
-      // and it must be the very same component as the named export.
+      // The default export backs both `React.lazy(() => import('@sanity/icons/AccessDenied'))`
+      // in userland and the lazy `icons` map entries, and it must be the very same component
+      // as the named export.
       expect(mod['default']).toBe(named)
-
-      // The barrel (`@sanity/icons`) re-exports the identical component, so the subpath and
-      // barrel named imports are fully interchangeable.
-      expect(barrelExports[namedExport]).toBe(named)
     },
   )
 
@@ -55,12 +55,42 @@ describe('per-icon subpath exports', () => {
       expect(pkg.exports[`./${exportName}`]).toBeDefined()
     },
   )
+})
 
-  test('every icon in the `icons` map is reachable from the barrel', () => {
-    const barrelComponents = new Set(Object.values(barrelExports))
+describe('root entry', () => {
+  test('exposes only the dynamic entry points, no per-icon exports', () => {
+    expect(Object.keys(barrelExports).toSorted()).toEqual(['Icon', 'icons'])
+  })
 
-    for (const component of Object.values(icons)) {
-      expect(barrelComponents.has(component)).toBe(true)
+  test('every entry in the `icons` map is a `React.lazy` component', () => {
+    for (const IconComponent of Object.values(icons)) {
+      expect(isLazy(<IconComponent />)).toBe(true)
     }
   })
+
+  test('every entry in the `icons` map lazily resolves to the svg with the matching name', async () => {
+    const {container} = render(
+      <Suspense fallback={null}>
+        {Object.entries(icons).map(([name, IconComponent]) => (
+          <IconComponent key={name} />
+        ))}
+      </Suspense>,
+    )
+
+    // The single Suspense boundary only commits once every icon chunk has resolved.
+    await waitFor(
+      () => {
+        expect(container.querySelectorAll('svg[data-sanity-icon]')).toHaveLength(
+          Object.keys(icons).length,
+        )
+      },
+      {timeout: 10_000},
+    )
+
+    for (const name of Object.keys(icons)) {
+      const svg = container.querySelector(`svg[data-sanity-icon="${name}"]`)
+      expect(svg).not.toBeNull()
+      expect(svg?.hasChildNodes()).toBe(true)
+    }
+  }, 15_000)
 })
