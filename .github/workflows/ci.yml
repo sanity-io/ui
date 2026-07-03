@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  # Build on pushes branches that have a PR (including drafts)
+  pull_request:
+  # Build on commits pushed to the default branch
+  push:
+    branches: [main]
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: pnpm ts:check
+      - run: pnpm lint -f gha --max-warnings 0
+      - run: pnpm build
+
+  test:
+    needs: [build]
+    runs-on: ${{ matrix.os }}
+    name: Test ${{ matrix.runtime }} / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        runtime: [node@lts]
+        include:
+          - os: macos-latest
+            runtime: node@lts
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          runtime: ${{ matrix.runtime }}
+      - run: pnpm build
+      - run: pnpm test
+
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - uses: cypress-io/github-action@v6
+        with:
+          install: false
+          build: pnpm workshop:build
+          start: pnpm workshop:start
+          wait-on: http://localhost:1337
+        env:
+          NODE_OPTIONS: '--no-experimental-require-module --no-experimental-detect-module'
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
