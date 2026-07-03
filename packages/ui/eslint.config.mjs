@@ -6,7 +6,6 @@ import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import storybook from 'eslint-plugin-storybook'
 import globals from 'globals'
 import ts from 'typescript-eslint'
@@ -53,17 +52,6 @@ export default ts.config(
           },
         ],
         'no-warning-comments': ['warn', {location: 'start', terms: ['todo', '@todo', 'fixme']}],
-      },
-    },
-
-    // simple-import-sort
-    {
-      plugins: {
-        'simple-import-sort': simpleImportSort,
-      },
-      rules: {
-        'simple-import-sort/imports': 'error',
-        'simple-import-sort/exports': 'error',
       },
     },
 

@@ -1,35 +1,15 @@
-name: Format
+name: Auto format
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    branches: [main]
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref_name }}
-  cancel-in-progress: true
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: read # for checkout
 
 jobs:
-  run:
-    name: Can the code be prettier? 🤔
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: ./.github/actions/setup
-      - run: pnpm format
-      - run: git restore .github/workflows pnpm-lock.yaml
-      - uses: actions/create-github-app-token@v2
-        id: generate-token
-        with:
-          app-id: ${{ secrets.ECOSPARK_APP_ID }}
-          private-key: ${{ secrets.ECOSPARK_APP_PRIVATE_KEY }}
-      - uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
-        with:
-          body: I ran `pnpm format` 🧑‍💻
-          branch: actions/prettier-${{ github.ref_name }}
-          commit-message: "chore(prettier): 🤖 ✨"
-          labels: 🤖 bot
-          sign-commits: true
-          title: "chore(prettier): 🤖 ✨"
-          token: ${{ steps.generate-token.outputs.token }}
+  if-needed:
+    uses: sanity-io/.github/.github/workflows/format.yml@main
+    secrets: inherit
