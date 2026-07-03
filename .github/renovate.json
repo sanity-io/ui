@@ -3,11 +3,18 @@
   "baseBranchPatterns": ["v2", "$default", "v4"],
   "extends": ["github>sanity-io/renovate-config"],
   "ignorePresets": ["github>sanity-io/renovate-config:group-non-major"],
+  "enabledManagers": ["npm"],
   "packageRules": [
     {
       "matchDepTypes": ["dependencies"],
       "semanticCommitType": "fix",
       "rangeStrategy": "bump"
+    },
+    {
+      "description": "Only update production dependencies; ignore devDependencies, peerDependencies and optionalDependencies",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies", "peerDependencies", "optionalDependencies"],
+      "enabled": false
     }
   ]
 }
