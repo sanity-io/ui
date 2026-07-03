@@ -16,9 +16,7 @@ import {ResponsiveFlexItemProps, ResponsiveFlexProps} from '../types'
  * @public
  */
 export interface FlexOwnProps
-  extends Omit<BoxOwnProps, 'display'>,
-    ResponsiveFlexProps,
-    ResponsiveFlexItemProps {
+  extends Omit<BoxOwnProps, 'display'>, ResponsiveFlexProps, ResponsiveFlexItemProps {
   gap?: number | number[]
 }
 

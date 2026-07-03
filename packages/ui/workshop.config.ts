@@ -1,6 +1,6 @@
-import {buildTheme} from '@sanity/ui/theme'
 import {defineConfig} from '@sanity/ui-workshop'
 import {perfPlugin} from '@sanity/ui-workshop/plugin-perf'
+import {buildTheme} from '@sanity/ui/theme'
 import {registerLanguage} from 'react-refractor'
 import javascript from 'refractor/javascript'
 import json from 'refractor/json'

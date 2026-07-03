@@ -9,6 +9,7 @@ import {
   ThemeColorProvider,
   useRootTheme,
 } from '@sanity/ui'
+import {useBoolean} from '@sanity/ui-workshop'
 import {
   getContrastRatio,
   mix,
@@ -23,7 +24,6 @@ import {
   ThemeColorSelectableTone_v2,
   ThemeColorState_v2,
 } from '@sanity/ui/theme'
-import {useBoolean} from '@sanity/ui-workshop'
 import {createContext, useContext} from 'react'
 
 interface Features {

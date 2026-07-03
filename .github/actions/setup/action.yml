@@ -1,9 +1,9 @@
-name: "Setup Environment"
-description: "Sets up pnpm and a Node.js runtime, and installs dependencies"
+name: 'Setup Environment'
+description: 'Sets up pnpm and a Node.js runtime, and installs dependencies'
 
 inputs:
   runtime:
-    description: "Runtime to install, e.g. node@lts or node@latest"
+    description: 'Runtime to install, e.g. node@lts or node@latest'
     required: false
     default: node@lts
 

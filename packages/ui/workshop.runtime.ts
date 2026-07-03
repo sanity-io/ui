@@ -1,5 +1,6 @@
-import {defineRuntime} from '@sanity/ui-workshop'
 import path from 'path'
+
+import {defineRuntime} from '@sanity/ui-workshop'
 
 const EXPORTS_PATH = path.resolve(__dirname, 'exports')
 

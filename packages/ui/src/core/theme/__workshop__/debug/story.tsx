@@ -1,4 +1,5 @@
 import {CropIcon} from '@sanity/icons'
+import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {
   THEME_COLOR_BUTTON_MODES,
   THEME_COLOR_STATE_TONES,
@@ -9,7 +10,6 @@ import {
   ThemeColorSchemeKey,
   ThemeColorState_v2,
 } from '@sanity/ui/theme'
-import {useBoolean, useSelect} from '@sanity/ui-workshop'
 import {CSSProperties} from 'react'
 
 import {Badge, Box, Flex, KBD, Stack, Text} from '../../../primitives'

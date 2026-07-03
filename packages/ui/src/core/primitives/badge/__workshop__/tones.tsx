@@ -1,6 +1,6 @@
 import {Badge, Flex, Inline} from '@sanity/ui'
-import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 import {useSelect} from '@sanity/ui-workshop'
+import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 
 import {WORKSHOP_BADGE_MODE_OPTIONS} from '../../../__workshop__/constants'
 
