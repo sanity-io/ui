@@ -1,9 +1,10 @@
-<!-- markdownlint-disable --><!-- textlint-disable -->
+# @sanity/ui
 
-# 📓 Changelog
+## 3.3.1
 
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+### Patch Changes
+
+- [#2216](https://github.com/sanity-io/ui/pull/2216) [`e5e508a`](https://github.com/sanity-io/ui/commit/e5e508a3875c672b3e4b84bd807e5ecf443e1422) Thanks [@stipsan](https://github.com/stipsan)! - Set up Changesets-based releases with npm trusted publishing. No runtime changes.
 
 ## [3.3.0](https://github.com/sanity-io/ui/compare/v3.2.0...v3.3.0) (2026-07-01)
 
