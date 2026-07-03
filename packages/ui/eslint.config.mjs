@@ -14,7 +14,7 @@ import ts from 'typescript-eslint'
 export default ts.config(
   [
     {
-      ignores: ['.workshop', 'dist', 'figma', 'storybook-static'],
+      ignores: ['.workshop', 'dist', 'storybook/storybook-static', 'storybook-static'],
     },
 
     {

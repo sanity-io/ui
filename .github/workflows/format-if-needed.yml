@@ -1,11 +1,9 @@
-name: Prettier
+name: Format
 
 on:
   push:
     branches:
-      - v2
       - main
-      - v4
   workflow_dispatch:
 
 concurrency:
@@ -17,12 +15,8 @@ jobs:
     name: Can the code be prettier? 🤔
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v5
-        with:
-          node-version: lts/*
-      - run: pnpm install
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
       - run: pnpm format
       - run: git restore .github/workflows pnpm-lock.yaml
       - uses: actions/create-github-app-token@v2

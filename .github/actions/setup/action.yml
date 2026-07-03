@@ -1,0 +1,16 @@
+name: "Setup Environment"
+description: "Sets up pnpm and a Node.js runtime, and installs dependencies"
+
+inputs:
+  runtime:
+    description: "Runtime to install, e.g. node@lts or node@latest"
+    required: false
+    default: node@lts
+
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/setup@v1
+      with:
+        runtime: ${{ inputs.runtime }}
+        cache: true
