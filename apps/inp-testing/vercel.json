@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "turbo build --filter=inp-testing",
+  "outputDirectory": "dist",
+  "rewrites": [{"source": "/(.*)", "destination": "/index.html"}]
+}
