@@ -22,7 +22,7 @@
     "test:browser": "start-server-and-test 'run-s workshop:build workshop:start' http://localhost:1337 'run-s cypress:run'",
     "ts:check": "pnpm --filter @sanity/ui ts:check",
     "watch": "pnpm --filter @sanity/ui watch",
-    "workshop:build": "pnpm --filter @sanity/ui workshop:build && cpx 'packages/ui/dist/**' dist/",
+    "workshop:build": "pnpm --filter @sanity/ui build && pnpm --filter @sanity/ui workshop:build && cpx 'packages/ui/dist/**' dist/",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
   },
   "commitlint": {
@@ -58,5 +58,16 @@
   "packageManager": "pnpm@11.9.0",
   "engines": {
     "node": ">=20.19 <22 || >=22.12"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "^19.2.2",
+      "@types/react-dom": "^19.2.2",
+      "@types/react-is": "^19.2.0",
+      "conventional-changelog-conventionalcommits": ">= 8.0.0",
+      "react": "^19.2.0",
+      "react-dom": "^19.2.0",
+      "react-is": "^19.2.0"
+    }
   }
 }

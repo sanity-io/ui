@@ -16,6 +16,8 @@ publicHoistPattern:
   - '*eslint*'
   - '*prettier*'
 
+# Keep in sync with the pnpm.overrides field in package.json, which exists for
+# tooling that still runs older pnpm versions (e.g. Vercel deploys with pnpm 9)
 overrides:
   '@types/react': ^19.2.2
   '@types/react-dom': ^19.2.2
