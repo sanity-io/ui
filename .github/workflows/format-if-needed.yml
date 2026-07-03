@@ -28,8 +28,8 @@ jobs:
         with:
           body: I ran `pnpm format` 🧑‍💻
           branch: actions/prettier-${{ github.ref_name }}
-          commit-message: 'chore(prettier): 🤖 ✨'
+          commit-message: "chore(prettier): 🤖 ✨"
           labels: 🤖 bot
           sign-commits: true
-          title: 'chore(prettier): 🤖 ✨'
+          title: "chore(prettier): 🤖 ✨"
           token: ${{ steps.generate-token.outputs.token }}
