@@ -52,6 +52,9 @@ importers:
       start-server-and-test:
         specifier: ^2.1.0
         version: 2.1.2(supports-color@8.1.1)
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
 
   packages/figma:
     devDependencies:
