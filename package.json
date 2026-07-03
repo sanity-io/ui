@@ -12,7 +12,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "dev": "pnpm --filter @sanity/ui dev",
-    "format": "prettier --write --cache --ignore-unknown .",
+    "format": "oxfmt . --no-error-on-unmatched-pattern",
     "lint": "pnpm --filter @sanity/ui lint",
     "release": "changeset publish",
     "storybook:build": "pnpm --filter @sanity/ui storybook:build && cpx 'packages/ui/storybook/storybook-static/**' storybook/storybook-static/",
@@ -23,31 +23,29 @@
     "workshop:build": "pnpm --filter @sanity/ui workshop:build && cpx 'packages/ui/dist/**' dist/",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
   },
-  "lint-staged": {
-    "*": [
-      "prettier --write --cache --ignore-unknown"
-    ]
-  },
-  "prettier": "@sanity/prettier-config",
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.0",
-    "@sanity/prettier-config": "^2.0.1",
     "cpx": "^1.5.0",
     "cypress": "^13.17.0",
     "cypress-real-events": "^1.14.0",
     "http-server": "^14.1.1",
     "lint-staged": "^14.0.1",
     "npm-run-all2": "^8.0.4",
-    "prettier": "^3.6.2",
+    "oxfmt": "^0.57.0",
     "rimraf": "^5.0.5",
     "start-server-and-test": "^2.1.0",
     "typescript": "5.9.3"
   },
-  "packageManager": "pnpm@11.9.0",
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,jsonc,md}": [
+      "oxfmt --no-error-on-unmatched-pattern"
+    ]
+  },
   "engines": {
     "node": ">=22.13"
   },
+  "packageManager": "pnpm@11.9.0",
   "pnpm": {
     "overrides": {
       "@types/react": "^19.2.2",

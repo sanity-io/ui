@@ -23,10 +23,7 @@ import {CardStyleProps} from './types'
  * @public
  */
 export interface CardOwnProps
-  extends BoxOwnProps,
-    ResponsiveBorderProps,
-    ResponsiveRadiusProps,
-    ResponsiveShadowProps {
+  extends BoxOwnProps, ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps {
   /**
    * Do not use in production.
    * @beta

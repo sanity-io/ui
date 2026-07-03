@@ -45,9 +45,7 @@ import {PopoverUpdateCallback, PopoverWidth} from './types'
 
 /** @public */
 export interface PopoverProps
-  extends Omit<LayerProps, 'as'>,
-    ResponsiveRadiusProps,
-    ResponsiveShadowProps {
+  extends Omit<LayerProps, 'as'>, ResponsiveRadiusProps, ResponsiveShadowProps {
   /** @beta */
   __unstable_margins?: PopoverMargins
   /**

@@ -42,7 +42,10 @@ function kbdStyle() {
 const StyledKBD = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
 
 const KBDComponent = forwardRef(function KBD(
-  props: KBDOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
+  props: KBDOwnProps & {as?: ElementType} & Omit<
+      React.HTMLProps<HTMLElement>,
+      'as' | 'ref' | 'size'
+    >,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {children, fontSize = 0, padding = 1, radius = 2, ...restProps} = props

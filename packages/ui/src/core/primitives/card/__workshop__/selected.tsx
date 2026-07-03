@@ -1,7 +1,7 @@
 import {EditIcon, PublishIcon} from '@sanity/icons'
 import {Box, Card, Container, Flex, Inline, Stack, Text, ThemeProps, useRootTheme} from '@sanity/ui'
-import {getTheme_v2, ThemeColorStateToneKey} from '@sanity/ui/theme'
 import {useBoolean} from '@sanity/ui-workshop'
+import {getTheme_v2, ThemeColorStateToneKey} from '@sanity/ui/theme'
 import {css, styled} from 'styled-components'
 
 const TextWithTone = styled(Text)<{$tone: ThemeColorStateToneKey}>((

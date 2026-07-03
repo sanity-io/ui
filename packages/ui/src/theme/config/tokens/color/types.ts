@@ -99,8 +99,9 @@ export interface ThemeColorStateTokens {
 export type ThemeColorStatesTokens = Partial<Record<ColorConfigState, ThemeColorStateTokens>>
 
 /** @public */
-export interface ThemeColorButtonTokens
-  extends Partial<Record<ColorConfigStateTone, ThemeColorStatesTokens>> {
+export interface ThemeColorButtonTokens extends Partial<
+  Record<ColorConfigStateTone, ThemeColorStatesTokens>
+> {
   _hue?: ColorHueKey
 }
 
@@ -118,8 +119,9 @@ export interface ThemeColorInputStateTokens {
 }
 
 /** @public */
-export interface ThemeColorInputTokens
-  extends Partial<Record<ColorConfigInputState, ThemeColorInputStateTokens>> {
+export interface ThemeColorInputTokens extends Partial<
+  Record<ColorConfigInputState, ThemeColorInputStateTokens>
+> {
   _hue?: ColorHueKey
 }
 
