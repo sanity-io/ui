@@ -13,9 +13,6 @@ allowBuilds:
   fsevents: false
   unrs-resolver: true
 
-publicHoistPattern:
-  - '*eslint*'
-
 # Keep in sync with the pnpm.overrides field in package.json, which exists for
 # tooling that still runs older pnpm versions (e.g. Vercel deploys with pnpm 9)
 overrides:

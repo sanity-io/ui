@@ -10,10 +10,15 @@ pnpm (`packageManager` pin in `package.json`); developing in this repo requires
 Node `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
 supports `>=20.19 <22 || >=22.12` (see `packages/ui/package.json` engines).
 
-Standard scripts live in the root `package.json` (`lint`, `ts:check`, `test`,
-`build`, `dev`) and forward to `packages/ui`. Notes that are not obvious from
-the scripts:
+Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
+`dev`); `test`, `build` and `dev` forward to `packages/ui`. Notes that are not
+obvious from the scripts:
 
+- Linting uses [oxlint](https://oxc.rs/docs/guide/usage/linter.html) with a
+  root `.oxlintrc.json` (type-aware via `oxlint-tsgolint`). TypeScript type
+  checking is included in `pnpm lint` via the `typeCheck` option — there is no
+  separate `tsc`/`ts:check` command. Run `pnpm lint:fix` to auto-fix issues
+  when possible. Suppressions use `oxlint-disable-next-line` comments.
 - Tests require a built package first. `pnpm test` (jest) resolves `@sanity/ui`
   and `@sanity/ui/theme` from `packages/ui/dist` (via package `exports`), so you
   must run `pnpm build` at least once before `pnpm test` or every suite fails

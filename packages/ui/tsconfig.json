@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.settings.json",
   "include": [
-    "./.storybook",
+    "./.storybook/**/*",
     "./exports",
     "./package.config.ts",
     "./scripts",
@@ -16,7 +16,6 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist/types",
-    "baseUrl": ".",
     "paths": {
       "@sanity/ui/*": ["./exports/*"],
       "@sanity/ui": ["./exports"]

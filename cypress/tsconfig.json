@@ -1,8 +1,8 @@
 {
   "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es5", "dom"],
+    "target": "es2017",
+    "lib": ["es2017", "dom"],
     "types": ["cypress", "cypress-real-events", "node"]
   },
   "include": ["./**/*.ts"]

@@ -13,12 +13,13 @@
     "cypress:run": "cypress run",
     "dev": "pnpm --filter @sanity/ui dev",
     "format": "oxfmt . --no-error-on-unmatched-pattern",
-    "lint": "pnpm --filter @sanity/ui lint",
+    "lint": "pnpm run oxlint",
+    "lint:fix": "pnpm lint --fix --fix-suggestions",
+    "oxlint": "oxlint --disable-nested-config",
     "release": "changeset publish",
     "storybook:build": "pnpm --filter @sanity/ui storybook:build && cpx 'packages/ui/storybook/storybook-static/**' storybook/storybook-static/",
     "test": "pnpm --filter @sanity/ui test",
     "test:browser": "start-server-and-test 'run-s workshop:build workshop:start' http://localhost:1337 'run-s cypress:run'",
-    "ts:check": "pnpm --filter @sanity/ui ts:check",
     "watch": "pnpm --filter @sanity/ui watch",
     "workshop:build": "pnpm --filter @sanity/ui workshop:build && cpx 'packages/ui/dist/**' dist/",
     "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.0",
+    "@types/node": "^22.18.1",
     "cpx": "^1.5.0",
     "cypress": "^13.17.0",
     "cypress-real-events": "^1.14.0",
@@ -33,6 +35,8 @@
     "lint-staged": "^14.0.1",
     "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.57.0",
+    "oxlint": "^1.72.0",
+    "oxlint-tsgolint": "^0.24.0",
     "rimraf": "^5.0.5",
     "start-server-and-test": "^2.1.0",
     "typescript": "5.9.3"
