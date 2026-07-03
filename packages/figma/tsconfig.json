@@ -1,15 +1,13 @@
 {
   "extends": "../../tsconfig.settings.json",
-  "include": ["../ui/exports", "../ui/src", "../ui/typings", "./src"],
+  "include": ["./src", "../ui/typings"],
   "compilerOptions": {
-    "composite": true,
     "rootDir": "..",
     "outDir": "./dist/types",
-    "target": "ES6",
-    "lib": ["ES2020"],
-    "paths": {
-      "@sanity/ui/*": ["../ui/exports/*"],
-      "@sanity/ui": ["../ui/exports"]
-    }
+    "types": ["node"],
+    // Resolve `@sanity/ui` to its TypeScript source through the
+    // `@sanity/ui:source` condition in package.json `exports`, instead of
+    // tsconfig `paths` mappings.
+    "customConditions": ["@sanity/ui:source"]
   }
 }

@@ -19,6 +19,12 @@ obvious from the scripts:
   checking is included in `pnpm lint` via the `typeCheck` option — there is no
   separate `tsc`/`ts:check` command. Run `pnpm lint:fix` to auto-fix issues
   when possible. Suppressions use `oxlint-disable-next-line` comments.
+- `@sanity/ui` imports (self-references and from `packages/figma`) resolve to
+  TypeScript source through the custom `@sanity/ui:source` condition in
+  `packages/ui/package.json` `exports`, enabled via `customConditions` in the
+  dev tsconfigs — there are no tsconfig `paths` mappings outside the
+  build-only `tsconfig.dist.json`. Vite-based tooling (Workshop, Storybook)
+  uses an equivalent `@sanity/ui` → `exports/` alias instead.
 - Tests require a built package first. `pnpm test` (jest) resolves `@sanity/ui`
   and `@sanity/ui/theme` from `packages/ui/dist` (via package `exports`), so you
   must run `pnpm build` at least once before `pnpm test` or every suite fails

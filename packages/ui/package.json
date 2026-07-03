@@ -43,18 +43,21 @@
   "exports": {
     ".": {
       "source": "./exports/index.ts",
+      "@sanity/ui:source": "./exports/index.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./_visual-editing": {
       "source": "./exports/_visual-editing.ts",
+      "@sanity/ui:source": "./exports/_visual-editing.ts",
       "import": "./dist/_visual-editing.mjs",
       "require": "./dist/_visual-editing.js",
       "default": "./dist/_visual-editing.js"
     },
     "./theme": {
       "source": "./exports/theme.ts",
+      "@sanity/ui:source": "./exports/theme.ts",
       "import": "./dist/theme.mjs",
       "require": "./dist/theme.js",
       "default": "./dist/theme.js"
@@ -126,7 +129,6 @@
     "jest": "^30.1.3",
     "jest-axe": "^10.0.0",
     "jest-environment-jsdom": "^30.1.2",
-    "module-alias": "^2.2.3",
     "npm-run-all2": "^8.0.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -135,10 +137,8 @@
     "rimraf": "^5.0.5",
     "storybook": "^8.6.14",
     "styled-components": "npm:@sanity/styled-components@^6.1.23",
-    "tsconfig-paths": "^4.2.0",
-    "typescript": "5.9.3",
-    "vite": "^7.2.2",
-    "vite-tsconfig-paths": "^5.1.4"
+    "typescript": "6.0.3",
+    "vite": "^7.2.2"
   },
   "peerDependencies": {
     "react": "^18 || >=19.0.0-0",

@@ -1,7 +1,11 @@
+import path from 'node:path'
+
 import type {StorybookConfig} from '@storybook/react-vite'
 import viteReact from '@vitejs/plugin-react'
 import {mergeConfig} from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
+
+// oxlint-disable-next-line no-restricted-globals
+const EXPORTS_PATH = path.resolve(__dirname, '../exports')
 
 const config: StorybookConfig = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -27,8 +31,12 @@ const config: StorybookConfig = {
         viteReact({
           babel: {plugins: [['babel-plugin-react-compiler', {target: '19'}]]},
         }),
-        tsconfigPaths(),
       ],
+      resolve: {
+        // Resolve `@sanity/ui` self-references to source, like the
+        // `@sanity/ui:source` condition in package.json `exports` does for tsc
+        alias: {'@sanity/ui': EXPORTS_PATH},
+      },
     })
   },
 }

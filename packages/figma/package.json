@@ -28,6 +28,6 @@
     "@sanity/pkg-utils": "^8.1.29",
     "@sanity/ui": "workspace:*",
     "segmented-property": "^4.0.0",
-    "typescript": "5.9.3"
+    "typescript": "6.0.3"
   }
 }

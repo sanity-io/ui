@@ -16,10 +16,11 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist/types",
-    "paths": {
-      "@sanity/ui/*": ["./exports/*"],
-      "@sanity/ui": ["./exports"]
-    },
+    "types": ["node", "jest"],
+    // Resolve `@sanity/ui` self-references to their TypeScript source through
+    // the `@sanity/ui:source` condition in package.json `exports`, instead of
+    // tsconfig `paths` mappings.
+    "customConditions": ["@sanity/ui:source"],
     // Setting "jsx" to aynthing but "preserve" is usually incorrect, but at the moment Storybook needs it
     "jsx": "react-jsx"
   }
