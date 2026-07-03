@@ -74,7 +74,7 @@
     "test": "jest",
     "ts:check": "tsc",
     "watch": "pkg watch --strict",
-    "workshop:build": "workshop build",
+    "workshop:build": "pnpm build && workshop build",
     "workshop:dev": "workshop dev"
   },
   "dependencies": {
