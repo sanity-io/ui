@@ -6,8 +6,9 @@ This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
 the published package lives in `packages/ui` and the Figma plugin in
 `packages/figma` (`pnpm-workspace.yaml`). The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is
-pnpm (`packageManager` pin in `package.json`); Node must satisfy
-`>=20.19 <22 || >=22.12`.
+pnpm (`packageManager` pin in `package.json`); developing in this repo requires
+Node `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
+supports `>=20.19 <22 || >=22.12` (see `packages/ui/package.json` engines).
 
 Standard scripts live in the root `package.json` (`lint`, `ts:check`, `test`,
 `build`, `dev`) and forward to `packages/ui`. Notes that are not obvious from
