@@ -23,6 +23,7 @@ export default function SelectedItemStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={4}>
         <Code>selectedIndex={selectedIndex}</Code>
 

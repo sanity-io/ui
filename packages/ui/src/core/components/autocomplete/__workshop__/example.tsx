@@ -49,6 +49,7 @@ export default function ExampleStory() {
     <Card height="fill" tone={layoutTone}>
       <Container width={1}>
         <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text as="label" htmlFor="default" size={1} weight="medium">
               Country code

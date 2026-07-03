@@ -63,11 +63,13 @@ export type ColorConfigValue =
   | `white`
   | `black/${ColorConfigOpacityValue}`
   | `white/${ColorConfigOpacityValue}`
+  // oxlint-disable-next-line no-unnecessary-template-expression
   | `${ColorHueKey}`
   | `${ColorHueKey} ${number}%`
   | `${ColorHueKey}/${ColorTintKey}`
   | `${ColorHueKey}/${ColorTintKey} ${number}%`
   | `${ColorHueKey}/${ColorTintKey}/${ColorConfigOpacityValue}`
+  // oxlint-disable-next-line no-unnecessary-template-expression
   | `${ColorTintKey}`
   | `${ColorTintKey} ${number}%`
   | `${ColorTintKey}/${ColorConfigOpacityValue}`

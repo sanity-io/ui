@@ -4,6 +4,7 @@ import {THEME_COLOR_CARD_TONES} from '@sanity/ui/theme'
 export default function CheckeredStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={1}>
         {THEME_COLOR_CARD_TONES.map((tone) => (
           <Card

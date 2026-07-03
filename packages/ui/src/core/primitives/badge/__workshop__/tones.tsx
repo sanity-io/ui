@@ -9,8 +9,10 @@ export default function Tones() {
 
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
+      {/* oxlint-disable-next-line no-deprecated */}
       <Inline space={2}>
         {THEME_COLOR_STATE_TONES.map((tone) => (
+          // oxlint-disable-next-line no-deprecated
           <Badge key={tone} mode={mode} tone={tone}>
             {tone}
           </Badge>

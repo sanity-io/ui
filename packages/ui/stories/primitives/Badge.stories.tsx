@@ -69,6 +69,7 @@ export const Tones: Story = {
 export const InheritedTones: Story = {
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={3}>
         {rowBuilder({
           renderItem: ({value}) => (

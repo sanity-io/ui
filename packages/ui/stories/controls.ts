@@ -12,6 +12,7 @@ export const getAlignControls = () => {
 }
 
 export const getAvatarSizeControls = () => {
+  // oxlint-disable-next-line no-deprecated
   const numSizes = theme.avatar.sizes.length
 
   return {
@@ -32,6 +33,7 @@ export const getButtonWidthControls = () => {
 }
 
 export const getContainerWidthControls = () => {
+  // oxlint-disable-next-line no-deprecated
   const numContainerSizes = theme.container.length
 
   return {
@@ -55,6 +57,7 @@ export const getFlexAlignControls = () => {
 }
 
 export const getFontSizeControls = (themeFontKey: ThemeFontKey) => {
+  // oxlint-disable-next-line no-deprecated
   const numSizes = theme.fonts[themeFontKey].sizes.length
 
   return {
@@ -96,6 +99,7 @@ export const getOverflowControls = () => {
 }
 
 export const getRadiusControls = () => {
+  // oxlint-disable-next-line no-deprecated
   const numRadiusSizes = theme.radius.length
 
   return {
@@ -105,6 +109,7 @@ export const getRadiusControls = () => {
 }
 
 export const getShadowControls = () => {
+  // oxlint-disable-next-line no-deprecated
   const numShadowSizes = theme.shadows.length
 
   return {
@@ -114,6 +119,7 @@ export const getShadowControls = () => {
 }
 
 export const getSpaceControls = () => {
+  // oxlint-disable-next-line no-deprecated
   const numSpaceSizes = theme.space.length
 
   return {

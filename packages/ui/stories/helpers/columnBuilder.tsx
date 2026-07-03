@@ -18,6 +18,7 @@ export const columnBuilder = function <T>({
 }: ColumnBuilderProps<T>): ReactNode {
   return (
     <Card border={!!scheme} padding={scheme ? 4 : 0} radius={scheme ? 2 : 0} scheme={scheme}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={gap}>{rows.map((value, index) => renderItem({index, value}))}</Stack>
     </Card>
   )

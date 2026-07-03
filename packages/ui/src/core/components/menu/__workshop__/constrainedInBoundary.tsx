@@ -115,6 +115,7 @@ export default function ConstrainedInBoundaryStory() {
                     menu={
                       <Menu>
                         {items.map((item, itemIndex) => (
+                          // oxlint-disable-next-line no-array-index-key
                           <MenuItem key={itemIndex} padding={5} tone={item.tone}>
                             <Text>{item.message}</Text>
                           </MenuItem>

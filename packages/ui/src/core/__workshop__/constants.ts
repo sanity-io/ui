@@ -23,6 +23,7 @@ export const WORKSHOP_AVATAR_SIZE_OPTIONS: {[key: string]: AvatarSize} = {
   '3': 3,
 }
 
+// oxlint-disable-next-line no-deprecated
 export const WORKSHOP_BADGE_MODE_OPTIONS: {[key: string]: BadgeMode} = {
   Default: 'default',
   Outline: 'outline',
@@ -146,6 +147,7 @@ export const WORKSHOP_ICON_SYMBOL_OPTIONS: {[key: string]: IconSymbol | ''} = Ob
   icons,
 ).reduce(
   (acc: {[key: string]: IconSymbol | ''}, key) => {
+    // oxlint-disable-next-line no-unsafe-type-assertion
     acc[key] = key as IconSymbol
 
     return acc

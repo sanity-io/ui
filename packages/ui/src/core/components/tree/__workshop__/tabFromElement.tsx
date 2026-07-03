@@ -38,6 +38,7 @@ export default function BasicStory() {
       </Box>
       <Wrapper>
         <TextInput />
+        {/* oxlint-disable-next-line no-deprecated */}
         <Tree ref={ref} space={1} onFocus={handleFocus}>
           <TreeItem data-testid="fruit" onClick={handleClick} expanded text="Fruit">
             <TreeItem

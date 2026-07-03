@@ -8,11 +8,13 @@ export default function AsButtonStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Container>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={3} gap={2}>
           <Box>
             <Text align="center" size={1} weight="medium">
               Enabled
             </Text>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack marginTop={3} space={2}>
               {tones.map(([title, tone]) => (
                 <Card
@@ -23,6 +25,7 @@ export default function AsButtonStory() {
                   style={{textAlign: 'center'}}
                   tone={tone}
                 >
+                  {/* oxlint-disable-next-line no-deprecated */}
                   <Stack space={2}>
                     <Text size={1} weight="medium">
                       {title}
@@ -43,6 +46,7 @@ export default function AsButtonStory() {
             <Text align="center" size={1} weight="medium">
               Disabled
             </Text>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack marginTop={3} space={2}>
               {tones.map(([title, tone]) => (
                 <Card
@@ -54,6 +58,7 @@ export default function AsButtonStory() {
                   style={{textAlign: 'center'}}
                   tone={tone}
                 >
+                  {/* oxlint-disable-next-line no-deprecated */}
                   <Stack space={2}>
                     <Text size={1} weight="medium">
                       {title}
@@ -74,6 +79,7 @@ export default function AsButtonStory() {
             <Text align="center" size={1} weight="medium">
               Selected
             </Text>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack marginTop={3} space={2}>
               {tones.map(([title, tone]) => (
                 <Card
@@ -85,6 +91,7 @@ export default function AsButtonStory() {
                   style={{textAlign: 'center'}}
                   tone={tone}
                 >
+                  {/* oxlint-disable-next-line no-deprecated */}
                   <Stack space={2}>
                     <Text size={1} weight="medium">
                       {title}

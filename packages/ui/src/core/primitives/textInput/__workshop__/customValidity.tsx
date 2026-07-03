@@ -7,6 +7,7 @@ export default function CustomValidityStory() {
   return (
     <Container as="form" onSubmit={(event) => event.preventDefault()} width={0}>
       <Card padding={4}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={4}>
           <TextInput customValidity={customValidity} />
           <Button text="Submit" type="submit" />

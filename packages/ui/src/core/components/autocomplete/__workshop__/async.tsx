@@ -70,6 +70,7 @@ export default function AsyncStory() {
         setLoadingCurrentRef,
       )
     } else {
+      // oxlint-disable-next-line react-compiler
       setOptionTitle(null)
       setLoadingCurrentRef(false)
     }
@@ -81,6 +82,7 @@ export default function AsyncStory() {
 
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={[3, 3, 4]}>
         <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="medium">
           Country

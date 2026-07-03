@@ -29,6 +29,7 @@ export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
       paddingX={paddingX}
       paddingY={paddingY}
       gap={gap}
+      // oxlint-disable-next-line no-deprecated
       columns={1}
       style={{zIndex}}
     >

@@ -14,6 +14,7 @@ export default function ExampleStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[3, 4, 5]} sizing="border">
       <Container width={0}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Flex align="center" as="label">
             <Radio

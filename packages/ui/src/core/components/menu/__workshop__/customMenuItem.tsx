@@ -7,6 +7,7 @@ export default function CustomMenuItemStory() {
         <LayerProvider>
           <Menu>
             <MenuItem padding={3}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={3}>
                 <Text weight="medium" size={1}>
                   First option
@@ -17,6 +18,7 @@ export default function CustomMenuItemStory() {
               </Stack>
             </MenuItem>
             <MenuItem padding={3}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={3}>
                 <Text weight="medium" size={1}>
                   Second option
@@ -28,6 +30,7 @@ export default function CustomMenuItemStory() {
             </MenuItem>
             <MenuDivider />
             <MenuItem padding={3} tone="critical">
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={3}>
                 <Text weight="medium" size={1}>
                   Dangerous option

@@ -34,13 +34,14 @@ export default function PropsStory() {
         shadow={shadow}
         tone={tone}
       >
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Text size={1}>
             Card with <code>padding={padding}</code>, <code>tone={tone}</code>, and{' '}
             <code>shadow={shadow}</code>.
           </Text>
           <Text size={1}>
-            Text with {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            Text with
             <a href="#">link</a>.
           </Text>
           <Text accent size={1}>

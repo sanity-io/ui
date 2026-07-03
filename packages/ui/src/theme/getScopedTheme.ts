@@ -30,6 +30,7 @@ export function getScopedTheme(
   const v0 = is_v2(themeProp) ? v2_v0(themeProp) : themeProp
   const v2 = is_v2(themeProp) ? themeProp : v0_v2(themeProp)
 
+  // oxlint-disable-next-line no-deprecated
   const layer_v0 = v0.layer || defaultThemeConfig.layer
 
   const colorScheme_v2 = v2.color[scheme] || v2.color.light
@@ -37,11 +38,13 @@ export function getScopedTheme(
   const color_v2_9 = themeColor_v0_v2_9(color_v2)
   const layer_v2 = v2.layer || defaultThemeConfig.layer
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // oxlint-disable-next-line no-deprecated
   const {color: _v0Color, ...v0Rest} = v0
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const sanity = {
     ...v0Rest,
+    // oxlint-disable-next-line no-deprecated
     layer: layer_v0,
     v2: {
       ...v2,
@@ -53,7 +56,9 @@ export function getScopedTheme(
 
   // Defer v0 color computation — only resolved if legacy code reads theme.sanity.color
   defineLazyProperty(sanity, 'color', () => {
+    // oxlint-disable-next-line no-deprecated
     const colorScheme_v0 = v0.color[scheme] || v0.color.light
+    // oxlint-disable-next-line no-deprecated
     return (colorScheme_v0 as Record<string, ThemeColor>)[tone] || colorScheme_v0.default
   })
 

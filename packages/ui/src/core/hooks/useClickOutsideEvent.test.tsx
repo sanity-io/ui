@@ -23,6 +23,7 @@ describe('useClickOutsideEvent', () => {
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={buttonRef} />
           <div data-testid="popover" ref={popoverRef} />
           <div data-testid="outside" />
@@ -57,6 +58,7 @@ describe('useClickOutsideEvent', () => {
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={buttonRef} />
           <div data-testid="popover" ref={popoverRef} />
           <div data-testid="outside" />
@@ -92,6 +94,7 @@ describe('useClickOutsideEvent', () => {
       return (
         <>
           <div ref={boundaryRef}>
+            {/* oxlint-disable-next-line control-has-associated-label */}
             <button data-testid="button" ref={buttonRef} />
             <div data-testid="popover" ref={popoverRef} />
             <div data-testid="inside" />

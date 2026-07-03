@@ -16,6 +16,7 @@ export default function TonesStory() {
         <Container width={1}>
           <Flex>
             <Card flex={1} scheme="light">
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack padding={[3, 4, 5]} space={4}>
                 <Card padding={3}>
                   <TextInput
@@ -161,6 +162,7 @@ export default function TonesStory() {
               </Stack>
             </Card>
             <Card flex={1} scheme="dark">
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack padding={[3, 4, 5]} space={4}>
                 <Card padding={3}>
                   <TextInput

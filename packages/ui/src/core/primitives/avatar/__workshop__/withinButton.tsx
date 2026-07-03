@@ -14,6 +14,7 @@ export default function WithinButtonStory() {
 
   return (
     <Container width={1}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack paddingX={4} paddingY={[5, 6, 7]} space={1}>
         <Button disabled={disabled} padding={1}>
           <Flex align="center" gap={3} padding={2}>

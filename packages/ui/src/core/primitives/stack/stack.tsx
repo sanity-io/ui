@@ -31,6 +31,7 @@ const StackComponent = forwardRef(function Stack(
   props: StackOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
+  // oxlint-disable-next-line no-deprecated
   const {as, gap, space: deprecated_space, ...restProps} = props
   const spacing = gap === undefined ? deprecated_space : gap
 
@@ -52,6 +53,7 @@ StackComponent.displayName = 'ForwardRef(Stack)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Stack = StackComponent as unknown as <E extends ElementType = 'div'>(
   props: StackProps<E>,
 ) => React.JSX.Element

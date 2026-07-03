@@ -19,6 +19,7 @@ export function TreeGroup(
       {...restProps}
       hidden={!expanded}
       marginTop={tree.gap}
+      // oxlint-disable-next-line prefer-tag-over-role
       role="group"
       gap={tree.gap}
     >

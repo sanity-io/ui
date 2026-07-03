@@ -5,6 +5,7 @@ export default function AllTonesStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={0}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           {THEME_COLOR_CARD_TONES.map((tone) => (
             <Card

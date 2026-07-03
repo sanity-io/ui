@@ -151,6 +151,7 @@ export const Schemes: Story = {
     },
   },
   render: (props) => (
+    // oxlint-disable-next-line no-deprecated
     <Grid columns={5} gapX={2} gapY={3}>
       <Card {...props}>
         <Text>Light (Default)</Text>
@@ -224,6 +225,7 @@ export const WithButtonsAndTones: Story = {
       {rowBuilder({
         renderItem: ({value}) => (
           <Card {...props} key={value} tone={value}>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={4}>
               <Text>{value}</Text>
               <Button text={'Primary'} tone="primary" />
@@ -250,6 +252,7 @@ export const MultipleStyles: Story = {
   },
 
   render: (props) => (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={4}>
       {matrixBuilder({
         columns: ['card', 'enabled button', 'disabled button', 'selected button'],
@@ -294,11 +297,13 @@ export const MatrixAsButton: Story = {
     return (
       <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
         <Container>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Grid columns={3} gap={2}>
             <Box>
               <Text align="center" size={1} weight="semibold">
                 Enabled
               </Text>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack marginTop={3} space={2}>
                 {CARD_TONES.map((tone) => (
                   <Card
@@ -309,6 +314,7 @@ export const MatrixAsButton: Story = {
                     style={{textAlign: 'center'}}
                     tone={tone}
                   >
+                    {/* oxlint-disable-next-line no-deprecated */}
                     <Stack space={2}>
                       <Text weight="semibold">{tone}</Text>
                       <Text muted>Muted</Text>
@@ -323,6 +329,7 @@ export const MatrixAsButton: Story = {
               <Text align="center" size={1} weight="semibold">
                 Disabled
               </Text>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack marginTop={3} space={2}>
                 {CARD_TONES.map((tone) => (
                   <Card
@@ -334,6 +341,7 @@ export const MatrixAsButton: Story = {
                     style={{textAlign: 'center'}}
                     tone={tone}
                   >
+                    {/* oxlint-disable-next-line no-deprecated */}
                     <Stack space={2}>
                       <Text weight="semibold">{tone}</Text>
                       <Text muted>Muted</Text>
@@ -348,6 +356,7 @@ export const MatrixAsButton: Story = {
               <Text align="center" size={1} weight="semibold">
                 Selected
               </Text>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack marginTop={3} space={2}>
                 {CARD_TONES.map((tone) => (
                   <div aria-selected key={tone}>
@@ -358,6 +367,7 @@ export const MatrixAsButton: Story = {
                       style={{textAlign: 'center'}}
                       tone={tone}
                     >
+                      {/* oxlint-disable-next-line no-deprecated */}
                       <Stack space={2}>
                         <Text weight="semibold">{tone}</Text>
                         <Text muted>Muted</Text>

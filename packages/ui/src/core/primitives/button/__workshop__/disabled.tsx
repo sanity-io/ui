@@ -18,7 +18,9 @@ const DEFAULT_PROPS: ButtonOwnProps = {
 function Layout() {
   return (
     <Container width={2}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={4}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={COLUMNS} gap={GAP}>
           <Text size={1} weight="semibold">
             Default
@@ -31,20 +33,25 @@ function Layout() {
           </Text>
         </Grid>
 
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={2}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Grid columns={COLUMNS} gap={GAP}>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={2}>
               <Button {...DEFAULT_PROPS} mode="default" text="Enabled" />
               <Button {...DEFAULT_PROPS} disabled mode="default" text="Disabled" />
               <Button {...DEFAULT_PROPS} disabled mode="default" muted text="Disabled (muted)" />
             </Stack>
 
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={2}>
               <Button {...DEFAULT_PROPS} mode="ghost" text="Enabled" />
               <Button {...DEFAULT_PROPS} disabled mode="ghost" text="Disabled" />
               <Button {...DEFAULT_PROPS} disabled mode="ghost" muted text="Disabled (muted)" />
             </Stack>
 
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={2}>
               <Button {...DEFAULT_PROPS} mode="bleed" text="Enabled" />
               <Button {...DEFAULT_PROPS} mode="bleed" disabled text="Disabled" />
@@ -60,6 +67,7 @@ function Layout() {
 export default function DisabledButtonStory() {
   return (
     <Stack>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={4}>
         <Card padding={5} scheme="light">
           <Layout />

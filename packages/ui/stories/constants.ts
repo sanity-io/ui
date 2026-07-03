@@ -14,6 +14,7 @@ const theme = buildTheme()
 export const AVATAR_SRC =
   'https://avatars3.githubusercontent.com/u/406933?s=400&u=af898b0a50ef2ef1248be32dfa1410ccb55f6f65&v=4'
 
+// oxlint-disable-next-line no-deprecated
 export const BADGE_MODES: BadgeMode[] = ['default', 'outline']
 
 export const BADGE_TONES: BadgeTone[] = ['default', 'primary', 'positive', 'caution', 'critical']
@@ -46,4 +47,5 @@ export const PLACEMENT_OPTIONS: Placement[] = [
   'bottom-end',
 ]
 
+// oxlint-disable-next-line no-deprecated
 export const RADII: Radius[] = [...Array(theme.radius.length).keys(), 'full']

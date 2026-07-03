@@ -5,6 +5,7 @@ import {css, styled} from 'styled-components'
 
 import {WORKSHOP_SPOT_COLOR_OPTIONS} from '../../../__workshop__/constants'
 
+// oxlint-disable-next-line no-deprecated
 const ColoredText = styled(Text)<{$color?: ThemeColorSpotKey}>((
   props: {
     $color?: ThemeColorAvatarColorKey

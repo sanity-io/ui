@@ -16,6 +16,7 @@ import {BadgeStyleProps} from './types'
 export interface BadgeOwnProps extends BoxOwnProps, ResponsiveRadiusProps {
   fontSize?: number | number[]
   /** @deprecated No longer used. */
+  // oxlint-disable-next-line no-deprecated
   mode?: BadgeMode
   tone?: BadgeTone
 }
@@ -37,7 +38,7 @@ const BadgeComponent = forwardRef(function Badge(
   const {
     children,
     fontSize = 1,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // oxlint-disable-next-line no-deprecated
     mode: _deprecated_mode,
     padding = 1,
     radius = 'full',
@@ -65,6 +66,7 @@ BadgeComponent.displayName = 'ForwardRef(Badge)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Badge = BadgeComponent as unknown as <E extends ElementType = 'div'>(
   props: BadgeProps<E>,
 ) => React.JSX.Element

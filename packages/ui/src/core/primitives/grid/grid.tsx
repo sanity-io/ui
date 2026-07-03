@@ -31,11 +31,13 @@ const GridComponent = forwardRef(function Grid(
     autoRows,
     autoCols,
     autoFlow,
+    // oxlint-disable-next-line no-deprecated
     columns,
     gridTemplateColumns,
     gap,
     gapX,
     gapY,
+    // oxlint-disable-next-line no-deprecated
     rows,
     gridTemplateRows,
     children,
@@ -69,6 +71,7 @@ GridComponent.displayName = 'ForwardRef(Grid)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Grid = GridComponent as unknown as <E extends ElementType = 'div'>(
   props: GridProps<E>,
 ) => React.JSX.Element

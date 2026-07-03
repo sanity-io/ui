@@ -42,6 +42,7 @@ export default function Fullscreen() {
   const [value, setValue] = useState<string>('')
 
   const relatedElements = useMemo(
+    // oxlint-disable-next-line no-unsafe-type-assertion
     () => [closeSearchButtonElement].filter(Boolean) as HTMLElement[],
     [closeSearchButtonElement],
   )
@@ -169,6 +170,7 @@ export default function Fullscreen() {
         setLoadingCurrentRef,
       )
     } else {
+      // oxlint-disable-next-line react-compiler
       setOptionTitle(null)
       setLoadingCurrentRef(false)
     }
@@ -264,6 +266,7 @@ function AsyncOption(props: {
       <Flex align="center">
         <Skeleton radius={2} style={{width: 35, height: 35}} />
         <Box flex={1} marginLeft={3}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={2}>
             {loading && (
               <>

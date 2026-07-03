@@ -76,6 +76,7 @@ export const MenuItemsVariants: Story = {
         <MenuItem disabled={disabled} id="menu-item-1" tone={tone}>
           <Flex as="span" gap={3} align="center">
             {(text || subText) && (
+              // oxlint-disable-next-line no-deprecated
               <Stack flex={1} space={2}>
                 {text && (
                   <Text size={fontSize} textOverflow="ellipsis" weight="medium">
@@ -90,6 +91,7 @@ export const MenuItemsVariants: Story = {
               </Stack>
             )}
             {badgeText && (
+              // oxlint-disable-next-line no-deprecated
               <Badge fontSize={fontSize} mode="default">
                 {badgeText}
               </Badge>

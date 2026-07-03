@@ -69,12 +69,14 @@ function resolveBaseColorTones(
     _hue: hue,
     avatar: COLOR_HUES.reduce((acc, hue) => {
       return {
+        // oxlint-disable-next-line no-accumulating-spread
         ...acc,
         [hue]: merge({_hue: hue}, spec.avatar?.['*'], spec.avatar?.[hue]),
       }
     }, {} as ThemeColorAvatarTokens),
     badge: THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
       return {
+        // oxlint-disable-next-line no-accumulating-spread
         ...acc,
         [tone]: {
           _hue: inputTokens?.base?.[tone]?._hue || hue,
@@ -145,12 +147,14 @@ function resolveButtonStateColorTokens(
     _hue: hue,
     avatar: COLOR_HUES.reduce((acc, hue) => {
       return {
+        // oxlint-disable-next-line no-accumulating-spread
         ...acc,
         [hue]: merge({_hue: hue}, spec.avatar?.['*'], spec.avatar?.[hue]),
       }
     }, {} as ThemeColorAvatarTokens),
     badge: THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
       return {
+        // oxlint-disable-next-line no-accumulating-spread
         ...acc,
         [tone]: {
           _hue: inputTokens?.base?.[tone]?._hue || hue,
@@ -250,12 +254,14 @@ function resolveSelectableStateColorTokens(
     _hue: hue,
     avatar: COLOR_HUES.reduce((acc, hue) => {
       return {
+        // oxlint-disable-next-line no-accumulating-spread
         ...acc,
         [hue]: merge({_hue: hue}, spec.avatar?.['*'], spec.avatar?.[hue]),
       }
     }, {} as ThemeColorAvatarTokens),
     badge: THEME_COLOR_STATE_TONES.reduce((acc, tone) => {
       return {
+        // oxlint-disable-next-line no-accumulating-spread
         ...acc,
         [tone]: {
           _hue: inputTokens?.base?.[tone]?._hue || hue,

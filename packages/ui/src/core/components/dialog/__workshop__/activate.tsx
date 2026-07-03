@@ -28,6 +28,7 @@ export default function LayeringFocusStory() {
               onActivate={({activeElement}) => activeElement?.focus()}
               onClose={() => setFirstDialogOpen(false)}
             >
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={2} padding={3}>
                 <Button
                   mode="ghost"
@@ -56,6 +57,7 @@ export default function LayeringFocusStory() {
                   onActivate={({activeElement}) => activeElement?.focus()}
                   onClose={() => setSecondDialogOpen(false)}
                 >
+                  {/* oxlint-disable-next-line no-deprecated */}
                   <Stack space={2} padding={3}>
                     <Button
                       mode="ghost"
@@ -84,6 +86,7 @@ export default function LayeringFocusStory() {
                       onActivate={({activeElement}) => activeElement?.focus()}
                       onClose={() => setThirdDialogOpen(false)}
                     >
+                      {/* oxlint-disable-next-line no-deprecated */}
                       <Stack space={2} padding={3}>
                         <MenuButton
                           id="menu"
@@ -116,6 +119,7 @@ export default function LayeringFocusStory() {
                           onActivate={({activeElement}) => activeElement?.focus()}
                           onClose={() => setFourthDialogOpen(false)}
                         >
+                          {/* oxlint-disable-next-line no-deprecated */}
                           <Stack space={2} padding={3}>
                             <Text>👋</Text>
                           </Stack>

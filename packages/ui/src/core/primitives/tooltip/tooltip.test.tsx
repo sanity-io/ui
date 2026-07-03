@@ -1,5 +1,7 @@
 /** @jest-environment jsdom */
+// oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
+// oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
 import {act, fireEvent, screen} from '@testing-library/react'
 
@@ -357,6 +359,7 @@ describe('Tooltip', () => {
       // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
 
+      // oxlint-disable-next-line no-floating-promises
       act(() => fireEvent.click(button))
 
       // Assertion: tooltip does not exist in the document
@@ -383,6 +386,7 @@ describe('Tooltip', () => {
       // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
 
+      // oxlint-disable-next-line no-floating-promises
       act(() => fireEvent.contextMenu(button))
 
       // Assertion: tooltip does not exist in the document

@@ -6,6 +6,7 @@ interface Item {
 }
 
 function getData(len: number, offsetIndex = 0): Item[] {
+  // oxlint-disable-next-line no-new-array
   return Array.from(new Array(len)).map((_, index) => ({key: String(offsetIndex + index)}))
 }
 

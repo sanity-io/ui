@@ -51,7 +51,9 @@ export default function CustomStory() {
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
       <Container width={0}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={5}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text as="label" htmlFor="custom" id="custom-label" size={1} weight="medium">
               Country

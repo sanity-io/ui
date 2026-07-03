@@ -17,6 +17,7 @@ export default function PropsStory() {
   return (
     <Flex align="center" height="fill" justify="center">
       <Badge
+        // oxlint-disable-next-line no-deprecated
         mode={mode}
         onClick={useAction('onClick')}
         paddingX={paddingX}

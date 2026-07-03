@@ -33,6 +33,7 @@ export default function SelectedStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Container width={0}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={1}>
           <Card
             __unstable_focusRing
@@ -70,6 +71,7 @@ function Preview({selected}: {selected: boolean}) {
       <Box flex={1}>
         <Text size={1}>Title</Text>
       </Box>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Inline space={3}>
         <TextWithTone
           data-selected={selected ? '' : undefined}

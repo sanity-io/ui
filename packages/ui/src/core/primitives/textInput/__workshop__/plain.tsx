@@ -35,6 +35,7 @@ export default function PlainStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={0}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Text as="label" htmlFor="text-input-example" size={1} weight="medium">
             TextInput
@@ -54,7 +55,9 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
   const customValidity = useText('Custom validity', '', 'Props') || undefined
   const disabled = useBoolean('Disabled', false, 'Props')
   const fontSize = useSelect('Font size', WORKSHOP_TEXT_FONT_SIZE_OPTIONS, 2, 'Props')
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const icon = useSelect('Icon', WORKSHOP_ICON_SYMBOL_OPTIONS, 'search', 'Props') as IconSymbol
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const iconRight = useSelect(
     'Icon (right)',
     WORKSHOP_ICON_SYMBOL_OPTIONS,
@@ -90,6 +93,7 @@ function TextInputTest(props: {inputRef: React.Ref<HTMLInputElement>}) {
       radius={radius}
       readOnly={readOnly}
       ref={ref}
+      // oxlint-disable-next-line no-deprecated
       space={space}
       value={value}
       weight={weight}

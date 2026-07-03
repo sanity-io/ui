@@ -21,6 +21,7 @@ describe('primitives/textInput', () => {
   })
 
   it('should support `space` and `gap` with the same behavior', () => {
+    // oxlint-disable-next-line no-deprecated
     render(<TextInput icon={() => null} space={2} />)
 
     expect(mockedResponsiveInputPaddingStyle).toHaveBeenCalledWith(
@@ -36,6 +37,7 @@ describe('primitives/textInput', () => {
   })
 
   it('should prefer `gap` over `space` when both are provided', () => {
+    // oxlint-disable-next-line no-deprecated
     render(<TextInput gap={3} icon={() => null} space={1} />)
 
     expect(mockedResponsiveInputPaddingStyle).toHaveBeenCalledWith(

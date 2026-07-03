@@ -44,6 +44,7 @@ export default function ButtonStory() {
         paddingX={paddingX}
         paddingY={paddingY}
         selected={selected}
+        // oxlint-disable-next-line no-deprecated
         space={space}
         textAlign={textAlign}
         text={textProp}

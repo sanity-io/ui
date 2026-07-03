@@ -1,5 +1,3 @@
-/* eslint-disable no-var */
-
 /**
  * @todo Remove when TypeScript supports this
  */

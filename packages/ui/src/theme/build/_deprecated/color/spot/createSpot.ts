@@ -2,9 +2,12 @@ import {ThemeColorBase, ThemeColorSpot} from '../../../../system'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createSpot(
+  // oxlint-disable-next-line no-deprecated
   opts: ThemeColorBuilderOpts,
+  // oxlint-disable-next-line no-deprecated
   base: ThemeColorBase,
   dark: boolean,
+  // oxlint-disable-next-line no-deprecated
 ): ThemeColorSpot {
   return {
     gray: opts.spot({base, dark, key: 'gray'}),

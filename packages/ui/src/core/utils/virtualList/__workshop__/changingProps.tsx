@@ -1,6 +1,7 @@
 import {Box, Card, Text, VirtualList} from '@sanity/ui'
 import {useCallback, useState} from 'react'
 
+// oxlint-disable-next-line no-new-array
 const data = Array.from(new Array(1000)).map((_, key) => ({key}))
 
 export default function ChangingProps() {

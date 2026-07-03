@@ -37,9 +37,13 @@ export const WithHook: Story = {
     },
   },
   render: () => {
+    // oxlint-disable-next-line rules-of-hooks
     const toast = useToast()
+    // oxlint-disable-next-line rules-of-hooks
     const id1 = useId()
+    // oxlint-disable-next-line rules-of-hooks
     const id2 = useId()
+    // oxlint-disable-next-line rules-of-hooks
     const id3 = useId()
 
     // Based on https://github.com/sanity-io/sanity/blob/54af2dd01d670367ace54f34d0f479af4b2b28db/packages/sanity/src/structure/panes/document/documentPanel/documentViews/useConditionalToast.ts#L5-L29
@@ -64,9 +68,12 @@ export const WithHook: Story = {
     }
 
     return (
+      // oxlint-disable-next-line no-deprecated
       <Grid columns={1} gap={4}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={1} gap={2}>
           <Heading>Default duration</Heading>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Inline space={2}>
             <Button
               onClick={() =>
@@ -122,8 +129,10 @@ export const WithHook: Story = {
             />
           </Inline>
         </Grid>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={1} gap={2}>
           <Heading>10s duration</Heading>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Inline space={2}>
             <Button
               onClick={() =>
@@ -183,8 +192,10 @@ export const WithHook: Story = {
             />
           </Inline>
         </Grid>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={1} gap={2}>
           <Heading>Infinite duration</Heading>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Inline space={2}>
             <Button
               onClick={() =>
@@ -244,8 +255,10 @@ export const WithHook: Story = {
             />
           </Inline>
         </Grid>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={1} gap={2}>
           <Heading>Sanity Studio patterns</Heading>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Inline space={2}>
             <Button
               onClick={() =>
@@ -256,6 +269,7 @@ export const WithHook: Story = {
                   description: (
                     <Box paddingTop={2}>
                       <Button
+                        // oxlint-disable-next-line no-deprecated
                         space={3}
                         padding={3}
                         onClick={() => window.location.reload()}

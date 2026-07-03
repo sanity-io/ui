@@ -61,6 +61,7 @@ function WrappedDialog(props: DialogProps & {children?: ReactNode}) {
     const containsActiveElement = dialogRef.current?.contains(document.activeElement)
 
     if (containsActiveElement) {
+      // oxlint-disable-next-line no-unsafe-type-assertion
       setLastFocusedElement(document.activeElement as HTMLElement)
     }
   }, [])

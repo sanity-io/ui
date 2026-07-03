@@ -105,6 +105,7 @@ export const Arrow = forwardRef(function Arrow(
   const cmds = getRoundedCommands(points)
   const path = compileCommands(cmds)
 
+  // oxlint-disable-next-line no-unnecessary-template-expression
   const strokePath = `${path}`
   const fillPath = `${path} M ${w} -1 M 0 -1 Z`
 

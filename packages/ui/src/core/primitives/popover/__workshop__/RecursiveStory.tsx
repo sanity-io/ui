@@ -13,6 +13,7 @@ export default function RecursiveStory() {
 }
 
 const placements: Placement[] = ['top', 'right', 'bottom', 'left']
+// oxlint-disable-next-line no-deprecated
 const tones: ThemeColorToneKey[] = ['primary', 'positive', 'caution', 'critical']
 
 function RecursiveExample({onClose}: {onClose?: () => void}) {
@@ -28,6 +29,7 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
   }, [seed])
 
   useEffect(() => {
+    // oxlint-disable-next-line no-unnecessary-boolean-literal-compare
     if (open === false) buttonRef.current?.focus()
   }, [open])
 

@@ -17,13 +17,16 @@ export default function OnCloseMenuButton() {
 
   return (
     <Box padding={[4, 5, 6]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={2}>
         <MenuButton
           button={<Button text="With onClose callback" />}
           id="closable-example"
           onClose={handleClose}
           menu={
+            // oxlint-disable-next-line no-deprecated
             <Menu padding={0} space={0}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack padding={1} space={1}>
                 <MenuItem text="Item 1" />
                 <MenuItem text="Item 2" />

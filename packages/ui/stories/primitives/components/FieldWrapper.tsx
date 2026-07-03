@@ -10,6 +10,7 @@ export const FieldWrapper = ({
   title: string
 }): ReactNode => {
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={3}>
       <Text size={1} weight="semibold">
         {title}

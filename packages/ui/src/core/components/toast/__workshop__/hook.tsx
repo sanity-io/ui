@@ -6,8 +6,10 @@ export default function HookStory() {
   return (
     <ToastProvider>
       <Box padding={[4, 5, 6]}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Inline space={2}>
           <Button
+            // oxlint-disable-next-line no-unstable-nested-components
             onClick={() =>
               toast.push({
                 id: 'status',

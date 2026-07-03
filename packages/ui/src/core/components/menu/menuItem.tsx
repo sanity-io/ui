@@ -26,7 +26,9 @@ import {useMenu} from './useMenu'
 export interface MenuItemOwnProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   fontSize?: number | number[]
   hotkeys?: string[]
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: React.ElementType | React.ReactNode
+  // oxlint-disable-next-line no-redundant-type-constituents
   iconRight?: React.ElementType | React.ReactNode
   pressed?: boolean
   selected?: boolean
@@ -71,6 +73,7 @@ const MenuItemComponent = forwardRef(function MenuItem(
     radius = 2,
     selected: selectedProp,
     gap,
+    // oxlint-disable-next-line no-deprecated
     space: deprecated_space = 3,
     text,
     tone = 'default',
@@ -192,6 +195,7 @@ MenuItemComponent.displayName = 'ForwardRef(MenuItem)'
 /**
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const MenuItem = MenuItemComponent as unknown as <E extends ElementType = 'button'>(
   props: MenuItemProps<E>,
 ) => React.JSX.Element

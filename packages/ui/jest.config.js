@@ -1,5 +1,6 @@
 'use strict'
 
+// oxlint-disable-next-line no-commonjs
 module.exports = {
   moduleFileExtensions: ['cjs', 'js', 'jsx', 'mjs', 'ts', 'tsx'],
   modulePathIgnorePatterns: ['<rootDir>/dist/'],

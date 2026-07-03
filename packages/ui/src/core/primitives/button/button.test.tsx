@@ -13,6 +13,7 @@ jest.mock('../flex', () => {
 
   return {
     ...actual,
+    // oxlint-disable-next-line no-unnecessary-type-assertion
     Flex: jest.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
   }
 })
@@ -59,6 +60,7 @@ describe('atoms/button', () => {
   })
 
   it('should support `space`', () => {
+    // oxlint-disable-next-line no-deprecated
     render(<Button icon={AddIcon} space={17} text="Button text" />)
 
     const propsList = mockedFlex.mock.calls.map(([props]) => props)
@@ -73,6 +75,7 @@ describe('atoms/button', () => {
   })
 
   it('should prefer `gap` over `space` when both are provided', () => {
+    // oxlint-disable-next-line no-deprecated
     render(<Button gap={19} icon={AddIcon} space={20} text="Button text" />)
 
     const propsList = mockedFlex.mock.calls.map(([props]) => props)

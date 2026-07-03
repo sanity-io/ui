@@ -13,6 +13,7 @@ export interface TabProps {
    */
   'aria-controls': string
   'id': string
+  // oxlint-disable-next-line no-redundant-type-constituents
   'icon'?: React.ElementType | React.ReactNode
   'focused'?: boolean
   'fontSize'?: number | number[]

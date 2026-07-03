@@ -58,6 +58,7 @@ export default function NestedStory() {
                           <MenuItem text="Test" />
                         </Menu>
                       }
+                      // oxlint-disable-next-line no-deprecated
                       portal
                     />
                   </Box>

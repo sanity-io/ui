@@ -5,13 +5,16 @@ import {Grid} from '../../../primitives'
 
 export default function ExampleStory() {
   const [element, setElement] = useState<HTMLElement | null>(null)
+  // oxlint-disable-next-line no-deprecated
   const rect = useElementRect(element)
   const size = {width: rect?.width || 0, height: rect?.height || 0}
 
   return (
     <Box padding={[3, 4, 5]}>
       <Container width={1}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={4}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Grid columns={[1, 2, 3]}>
             <Card ref={setElement} tone="transparent">
               <Text>rect</Text>

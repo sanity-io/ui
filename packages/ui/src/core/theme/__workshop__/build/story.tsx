@@ -26,7 +26,9 @@ export default function BuildStory(): React.JSX.Element {
         style={{
           display: 'flex',
           ...getCSSProps({
+            // oxlint-disable-next-line no-deprecated
             radius: theme.radius.map((r) => rem(r)),
+            // oxlint-disable-next-line no-deprecated
             shadows: theme.shadows.map((s) =>
               s
                 ? {
@@ -36,6 +38,7 @@ export default function BuildStory(): React.JSX.Element {
                   }
                 : {},
             ),
+            // oxlint-disable-next-line no-deprecated
             space: theme.space.map((s) => rem(s)),
           }),
         }}
@@ -74,6 +77,7 @@ function BaseTonePreview(props: {
   const theme = useTheme_v2()
 
   return (
+    // oxlint-disable-next-line no-unsafe-type-assertion
     <div className="base" style={getCSSProps(color as unknown as Record<string, unknown>)}>
       <div
         style={{
@@ -147,6 +151,7 @@ function StatePreview(props: {theme: ThemeColorState_v2}) {
   return (
     <div
       style={
+        // oxlint-disable-next-line no-unsafe-type-assertion
         {
           ...getCSSProps({card}),
 
@@ -170,7 +175,7 @@ function StatePreview(props: {theme: ThemeColorState_v2}) {
             display: 'flex',
             gap: 'var(--space-1)',
           }}
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+          // oxlint-disable-next-line no-noninteractive-tabindex
           tabIndex={0}
         >
           <div style={{flex: 'none'}}>Card</div>
@@ -280,7 +285,7 @@ function ButtonPreview(props: {theme: ThemeColorButtonTone_v2}) {
       <div
         className="button"
         style={{flex: 1, padding: 'var(--space-2)', display: 'flex', gap: 4}}
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        // oxlint-disable-next-line no-noninteractive-tabindex
         tabIndex={0}
       >
         <div style={{flex: 'none'}}>Button</div>
@@ -434,6 +439,7 @@ function InputPreview(props: {mode: ThemeColorInputModeKey; theme: ThemeColorInp
   return (
     <div
       style={
+        // oxlint-disable-next-line no-unsafe-type-assertion
         {
           ...getCSSProps({input}),
 
@@ -445,14 +451,14 @@ function InputPreview(props: {mode: ThemeColorInputModeKey; theme: ThemeColorInp
     >
       <div
         className="input"
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        // oxlint-disable-next-line no-noninteractive-tabindex
         tabIndex={0}
       >
         <span>Text ({mode})</span> <span className="placeholder">Placeholder</span>
       </div>
       <div
         className="input readOnly"
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        // oxlint-disable-next-line no-noninteractive-tabindex
         tabIndex={0}
       >
         <span>Text ({mode})</span>

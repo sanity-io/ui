@@ -116,6 +116,7 @@ export const WithSelectedItem: Story = {
     const menu = within(document.documentElement).queryByTestId('menu')
 
     // Assertion: <Menu> with a selected item should not be visible when clicking the original <MenuButton> to close
+    // oxlint-disable-next-line no-floating-promises
     expect(menu).toBeNull()
   },
 }
@@ -134,6 +135,7 @@ export const PopoverModal: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={4}>
         <Flex gap={4} wrap="wrap">
           <MenuButton {...props} button={<Button text="Default " />} />
@@ -170,7 +172,7 @@ export const PopoverModal: Story = {
             <Box padding={2}>
               <Text size={1}>Open sanity.io in a new window</Text>
             </Box>
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+            {/* oxlint-disable-next-line click-events-have-key-events, no-static-element-interactions */}
             <div
               onClick={(e) => {
                 e.stopPropagation()

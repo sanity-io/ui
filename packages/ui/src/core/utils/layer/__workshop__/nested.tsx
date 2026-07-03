@@ -28,6 +28,7 @@ function Root() {
           </Text>
         </Box>
         <Box padding={3}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <LayerDebugInfo id="layer-debug-info-1" />
             <Button id="open-layer-1" mode="ghost" onClick={handleOpen} text="Open layer 1" />
@@ -61,6 +62,7 @@ function Layer1({onClose}: {onClose: () => void}) {
         </Box>
       </Flex>
       <Box padding={3}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <LayerDebugInfo />
           <Button id="open-layer-2" mode="ghost" onClick={handleOpen} text="Open layer 2" />
@@ -89,6 +91,7 @@ function Layer2({onClose}: {onClose: () => void}) {
         </Box>
       </Flex>
       <Box padding={3}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <LayerDebugInfo />
         </Stack>

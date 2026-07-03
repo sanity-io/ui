@@ -51,6 +51,7 @@ export default function AlignedStory() {
       <Card height="fill" padding={2} ref={setBoundaryElement} shadow={1} sizing="border">
         <Flex align={flexAlign} height="fill" justify={flexJustify}>
           <Popover
+            // oxlint-disable-next-line no-deprecated
             boundaryElement={boundaryElement}
             constrainSize={constrainSize}
             content={content}

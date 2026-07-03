@@ -21,6 +21,7 @@ export default function BasicStory() {
   return (
     <Box padding={[4, 5, 6]}>
       <Wrapper>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Tree ref={ref} space={1}>
           <TreeItem onClick={handleClick} expanded text="Fruit">
             <TreeItem

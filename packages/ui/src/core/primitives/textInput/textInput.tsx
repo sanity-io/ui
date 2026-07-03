@@ -65,7 +65,9 @@ export interface TextInputProps {
   clearButton?: boolean | TextInputClearButtonProps
   customValidity?: string
   fontSize?: number | number[]
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: React.ElementType | React.ReactNode
+  // oxlint-disable-next-line no-redundant-type-constituents
   iconRight?: React.ElementType | React.ReactNode
   /**
    * @beta
@@ -174,6 +176,7 @@ export const TextInput = forwardRef(function TextInput(
     prefix,
     radius: radiusProp = 2,
     readOnly,
+    // oxlint-disable-next-line no-deprecated
     space: deprecated_space = 3,
     suffix,
     customValidity,

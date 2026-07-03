@@ -55,6 +55,7 @@ export default function CustomPortalStory() {
             <Text>Boundary element</Text>
             <Flex align="center" height="fill" justify="center">
               <Flex justify="center">
+                {/* oxlint-disable-next-line no-deprecated */}
                 <Stack space={2}>
                   <Tooltip
                     boundaryElement={useBoundaryElement ? boundaryElement : null}
@@ -87,6 +88,7 @@ export default function CustomPortalStory() {
       />
 
       <Portal __unstable_name="portal1">
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={4}>
           <Text size={1} weight="medium">
             Portal 1 content

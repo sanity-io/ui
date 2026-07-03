@@ -21,6 +21,7 @@ export default function ListNavigationStory() {
 
 function List1() {
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={1}>
       <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
         <Preview />
@@ -43,6 +44,7 @@ function List1() {
 
 function List2() {
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={1}>
       <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
         <Preview />
@@ -67,6 +69,7 @@ function Preview() {
   return (
     <Flex align="center" gap={2}>
       <Skeleton radius="full" style={{width: 33, height: 33}} />
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack flex={1} space={2}>
         <Text size={1} weight="medium">
           Preview

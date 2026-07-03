@@ -16,6 +16,7 @@ export default function InteractiveCardStory() {
           selected={selected}
           tabIndex={0}
         >
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text>
               Text <code>Code</code>

@@ -32,6 +32,7 @@ export default function SkeletonDelayStory() {
               marginRight={3}
               delay={1000}
             />
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={2} flex={1}>
               <HeadingSkeleton
                 size={4}

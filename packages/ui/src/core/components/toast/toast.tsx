@@ -106,6 +106,7 @@ export function Toast(
     >
       <MotionFlex align="flex-start" variants={content} transition={transition}>
         <TextBox flex={1} padding={3}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             {title && (
               <Text size={1} weight="medium">

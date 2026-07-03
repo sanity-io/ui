@@ -72,6 +72,7 @@ export const Sizes: Story = {
     },
   },
   render: (props) => (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={3}>
       <Avatar {...props} size={0} />
       <Avatar {...props} size={1} />

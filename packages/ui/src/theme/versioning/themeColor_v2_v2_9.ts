@@ -14,6 +14,7 @@ export function themeColor_v0_v2_9(color: ThemeColorCard_v2): ThemeColorCard_v2 
   }
 
   // TypeScript narrows to `never` because the above should always be true
+  // oxlint-disable-next-line no-unnecessary-type-assertion
   const colors = color as ThemeColorCard_v2
 
   return {

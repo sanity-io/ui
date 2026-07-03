@@ -8,7 +8,9 @@ export default function StatesStory() {
   return (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={1}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={5}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text size={1} weight="medium">
               <label htmlFor="enabled-example">Enabled (default)</label>
@@ -21,6 +23,7 @@ export default function StatesStory() {
             />
           </Stack>
 
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text size={1} weight="medium">
               <label htmlFor="disabled-example">Disabled</label>
@@ -34,6 +37,7 @@ export default function StatesStory() {
             />
           </Stack>
 
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text size={1} weight="medium">
               <label htmlFor="read-only-example">Read-only</label>

@@ -121,6 +121,7 @@ export const MultipleStyles: Story = {
     const SubHeader = () => (
       <>
         <div />
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={2} marginY={2}>
           <Text size={0} align={'center'}>
             Default
@@ -129,6 +130,7 @@ export const MultipleStyles: Story = {
             Size small
           </Text>
         </Grid>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={3} marginY={2}>
           <Text size={0} align={'center'}>
             Default
@@ -141,6 +143,7 @@ export const MultipleStyles: Story = {
             Size small
           </Text>
         </Grid>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={3} marginY={2}>
           <Text size={0} align={'center'}>
             Default
@@ -158,6 +161,7 @@ export const MultipleStyles: Story = {
     )
 
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={3}>
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({
@@ -176,6 +180,7 @@ export const MultipleStyles: Story = {
                 {/* Small button */}
                 <Button
                   {...props}
+                  // oxlint-disable-next-line no-deprecated
                   space={2}
                   padding={2}
                   tone={row}
@@ -202,6 +207,7 @@ export const MultipleStyles: Story = {
                 {/* Small button */}
                 <Button
                   {...props}
+                  // oxlint-disable-next-line no-deprecated
                   space={2}
                   padding={2}
                   tone={row}
@@ -221,15 +227,17 @@ export const CustomButton: Story = {
   render: (props) => {
     return (
       <Flex align="center" height="fill" justify="center">
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={2}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Grid columns={5} gap={1}>
             {BUTTON_TONES.map((tone) => (
               <Button {...props} key={tone} mode="bleed" padding={3} tone={tone} text={undefined}>
+                {/* oxlint-disable-next-line no-deprecated */}
                 <Stack space={2}>
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="">Link</a>
                   </Text>
                   <Text>
@@ -240,14 +248,15 @@ export const CustomButton: Story = {
               </Button>
             ))}
           </Grid>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Grid columns={5} gap={1}>
             {BUTTON_TONES.map((tone) => (
               <Button {...props} key={tone} mode="ghost" padding={3} tone={tone} text={undefined}>
+                {/* oxlint-disable-next-line no-deprecated */}
                 <Stack space={2}>
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="">Link</a>
                   </Text>
                   <Text>
@@ -259,14 +268,15 @@ export const CustomButton: Story = {
             ))}
           </Grid>
 
+          {/* oxlint-disable-next-line no-deprecated */}
           <Grid columns={5} gap={1}>
             {BUTTON_TONES.map((tone) => (
               <Button {...props} key={tone} mode="default" padding={3} tone={tone} text={undefined}>
+                {/* oxlint-disable-next-line no-deprecated */}
                 <Stack space={2}>
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="">Link</a>
                   </Text>
                   <Text>

@@ -10,6 +10,7 @@ import {useImperativeHandle, useRef} from 'react'
  * +useImperativeHandle(forwardedRef, () => ref.current)
  * ```
  */
+// oxlint-disable-next-line no-deprecated
 export function useForwardedRef<T>(ref: React.ForwardedRef<T>): React.MutableRefObject<T | null> {
   const innerRef = useRef<T | null>(null)
 

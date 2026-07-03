@@ -81,7 +81,6 @@ const CardComponent = forwardRef(function Card(
   const rootTheme = useRootTheme()
   const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
 
-  // eslint-disable-next-line no-warning-comments
   // todo: Consider adding the wrapper approach for nested cards in which the tones are not changing, avoid unnecessary ThemeColorProvider
   return (
     <ThemeColorProvider scheme={scheme} tone={tone}>
@@ -120,6 +119,7 @@ CardComponent.displayName = 'ForwardRef(Card)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Card = CardComponent as unknown as <E extends ElementType = 'div'>(
   props: CardProps<E>,
 ) => React.JSX.Element

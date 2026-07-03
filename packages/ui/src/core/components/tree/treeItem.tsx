@@ -66,6 +66,7 @@ export function TreeItem(
     padding = 2,
     selected = false,
     gap,
+    // oxlint-disable-next-line no-deprecated
     space: deprecated_space = 2,
     text,
     weight,

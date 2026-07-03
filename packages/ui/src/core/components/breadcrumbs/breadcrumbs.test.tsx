@@ -9,6 +9,7 @@ jest.mock('../../primitives', () => {
 
   return {
     ...actual,
+    // oxlint-disable-next-line no-unnecessary-type-assertion
     Box: jest.fn((props: Record<string, unknown>) => (actual.Box as any).render(props, null)),
   }
 })

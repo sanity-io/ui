@@ -13,6 +13,7 @@ export default function OnScrollStory() {
 
     el.addEventListener('scroll', handleScroll, {passive: true})
 
+    // oxlint-disable-next-line consistent-return
     return () => el.removeEventListener('scroll', handleScroll)
   }, [handleScroll])
 

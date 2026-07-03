@@ -11,6 +11,7 @@ export default function PositionStory() {
   return (
     <Box padding={4}>
       <Box style={{padding: 'calc(100vh - 100px) 0'}}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Text align="center">
             <ArrowUpIcon />

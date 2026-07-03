@@ -9,5 +9,6 @@ import {useElementSize} from '../useElementSize'
 export function useElementRect(element: HTMLElement | null): DOMRectReadOnly | null {
   const elementSize = useElementSize(element)
 
+  // oxlint-disable-next-line no-deprecated
   return elementSize?._contentRect || null
 }

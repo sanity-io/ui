@@ -11,6 +11,7 @@ jest.mock('../../primitives', () => {
 
   return {
     ...actual,
+    // oxlint-disable-next-line no-unnecessary-type-assertion
     Box: jest.fn((props: Record<string, unknown>) => (actual.Box as any).render(props, null)),
   }
 })
@@ -24,7 +25,9 @@ const treeContextValue: TreeContextValue = {
   registerItem: () => () => undefined,
   setExpanded: () => undefined,
   setFocusedElement: () => undefined,
+  // oxlint-disable-next-line no-deprecated
   space: 1,
+  // oxlint-disable-next-line no-unnecessary-type-assertion
   state: {} as TreeState,
 }
 

@@ -16,7 +16,9 @@ export default function ClosableMenuButtonStory() {
           button={<Button text="Open" />}
           id="closable-example"
           menu={
+            // oxlint-disable-next-line no-deprecated
             <Menu padding={0} space={0}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack padding={1} space={1}>
                 <MenuItem text="Item 1" />
                 <MenuItem text="Item 2" />

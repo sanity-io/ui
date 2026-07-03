@@ -11,6 +11,7 @@ jest.mock('../../primitives', () => {
 
   return {
     ...actual,
+    // oxlint-disable-next-line no-unnecessary-type-assertion
     Flex: jest.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
     Popover: jest.fn(({children}: {children?: React.ReactNode}) => children),
   }

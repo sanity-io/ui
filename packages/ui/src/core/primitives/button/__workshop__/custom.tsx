@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
 import {Button, Flex, Grid, Stack, Text} from '@sanity/ui'
 
 import {WORKSHOP_BUTTON_TONE_OPTIONS} from '../../../__workshop__/constants'
@@ -10,10 +8,13 @@ export default function CustomStory() {
 
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={2}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={len} gap={1}>
           {tones.map(([title, tone]) => (
             <Button key={tone} mode="ghost" padding={3} tone={tone}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={2}>
                 <Text>{title}</Text>
                 <Text muted>Muted</Text>
@@ -28,9 +29,11 @@ export default function CustomStory() {
             </Button>
           ))}
         </Grid>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={len} gap={1}>
           {tones.map(([title, tone]) => (
             <Button key={tone} mode="default" padding={3} tone={tone}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={2}>
                 <Text>{title}</Text>
                 <Text muted>Muted</Text>

@@ -22,6 +22,7 @@ describe('primitives/grid', () => {
 
   it('should support `columns` and `gridTemplateColumns` with the same behavior', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Grid columns={2}>
         <div>A</div>
       </Grid>,
@@ -39,6 +40,7 @@ describe('primitives/grid', () => {
 
   it('should prefer `gridTemplateColumns` over `columns` when both are provided', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Grid columns={1} gridTemplateColumns={3}>
         <div>A</div>
       </Grid>,
@@ -51,6 +53,7 @@ describe('primitives/grid', () => {
 
   it('should support `rows` and `gridTemplateRows` with the same behavior', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Grid rows={2}>
         <div>A</div>
       </Grid>,
@@ -68,6 +71,7 @@ describe('primitives/grid', () => {
 
   it('should prefer `gridTemplateRows` over `rows` when both are provided', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Grid gridTemplateRows={3} rows={1}>
         <div>A</div>
       </Grid>,

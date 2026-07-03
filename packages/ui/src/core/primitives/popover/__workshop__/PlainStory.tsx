@@ -47,6 +47,7 @@ export default function PlainStory() {
             <Popover
               __unstable_margins={[1, 1, 1, 1]}
               arrow={arrow}
+              // oxlint-disable-next-line no-deprecated
               boundaryElement={boundaryElementFlag ? boundaryElement : undefined}
               constrainSize={constrainSize}
               content={<Text size={1}>popover content</Text>}

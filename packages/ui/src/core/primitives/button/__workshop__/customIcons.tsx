@@ -4,8 +4,11 @@ import {Button, Flex, Inline} from '@sanity/ui'
 export default function CustomIconsStory() {
   return (
     <Flex align="center" height="fill" justify="center">
+      {/* oxlint-disable-next-line no-deprecated */}
       <Inline space={1}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Button fontSize={1} icon={RocketIcon} padding={2} space={2} text="Rocket" />
+        {/* oxlint-disable-next-line no-deprecated */}
         <Button fontSize={1} icon={CustomIcon} padding={2} space={2} text="Heart" />
       </Inline>
     </Flex>

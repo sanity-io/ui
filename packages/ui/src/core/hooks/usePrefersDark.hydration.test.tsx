@@ -19,6 +19,7 @@ const originalMatchMedia = window.matchMedia
 describe('usePrefersDark SSR hydration', () => {
   beforeAll(() => {
     window.matchMedia = () =>
+      // oxlint-disable-next-line no-unsafe-type-assertion
       ({
         addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
@@ -47,7 +48,6 @@ describe('usePrefersDark SSR hydration', () => {
     // After hydration it should switch to true
     await waitFor(() => expect(node.innerHTML).toBe('dark: <!-- -->true'))
 
-    // eslint-disable-next-line no-console
     expect(console.error).not.toHaveBeenCalled()
 
     spy.mockReset()

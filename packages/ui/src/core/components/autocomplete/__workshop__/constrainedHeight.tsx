@@ -30,6 +30,7 @@ export default function ConstrainedHeightStory() {
           // style={{position: 'absolute', top: 12, right: 12, bottom: 12, left: 12}}
         >
           <Box height="fill" overflow="auto" padding={[4, 4, 5]} sizing="border">
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={5}>
               <BoundaryElementProvider element={boundaryElement}>
                 <ConstrainedHeightExampleField id="example-1" label="Example 1" />
@@ -113,6 +114,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
   )
 
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={3}>
       <Text size={1} weight="medium">
         {label}

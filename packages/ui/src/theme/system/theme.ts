@@ -45,6 +45,7 @@ export interface BaseTheme {
   /**
    * @deprecated Use `v2.avatar` instead
    */
+  // oxlint-disable-next-line no-deprecated
   avatar: ThemeAvatar
   /**
    * @deprecated Use `v2.button` instead
@@ -55,6 +56,7 @@ export interface BaseTheme {
   /**
    * @deprecated Use `v2.color` instead
    */
+  // oxlint-disable-next-line no-deprecated
   color: ThemeColorSchemes
   /**
    * @deprecated Use `v2.container` instead
@@ -74,6 +76,7 @@ export interface BaseTheme {
   /**
    * @deprecated Use `v2.input` instead
    */
+  // oxlint-disable-next-line no-deprecated
   input: ThemeInput
   /**
    * THIS API MAY BE UNSTABLE. DO NOT USE IN PRODUCTION.
@@ -132,6 +135,7 @@ export interface Theme {
     /**
      * @deprecated Use `v2.color` instead
      */
+    // oxlint-disable-next-line no-deprecated
     color: ThemeColor
     v2?: Theme_v2
   }

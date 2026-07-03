@@ -8,6 +8,7 @@ export default function NestedMenuItems() {
         id="nested-example"
         menu={
           <Menu>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={1}>
               <MenuItem text="Item 1" />
               <MenuItem text="Item 2" />

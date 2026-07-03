@@ -64,6 +64,7 @@ export const Sizes: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={4}>
         <Heading size={4} {...props} />
         <Heading size={3} {...props} />
@@ -83,6 +84,7 @@ export const Weights: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={4}>
         <Heading {...props} />
         <Heading weight="medium" {...props} />
@@ -100,6 +102,7 @@ export const OpticalAlignment: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={1}>
         <Flex>
           <Card padding={0}>

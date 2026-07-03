@@ -4,6 +4,7 @@ import {Box, Card, Code, Flex, Stack} from '@sanity/ui'
 export default function OpticalAlignment() {
   return (
     <Box padding={[4, 5, 6]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={1}>
         <Flex>
           <Card padding={0} scheme="dark">

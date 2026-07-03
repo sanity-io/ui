@@ -40,6 +40,7 @@ export default function OverflowingBoundaryStory() {
         >
           <Flex align="center" height="fill" justify="center">
             <Flex justify="center">
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={2}>
                 <Code size={1}>Placement: {placement}</Code>
                 <Button

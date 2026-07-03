@@ -38,6 +38,7 @@ export default function PropsStory() {
             width={width}
           >
             <Box padding={4}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={4}>
                 <Text>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et orci vitae diam

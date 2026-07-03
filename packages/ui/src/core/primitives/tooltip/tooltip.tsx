@@ -271,6 +271,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
     window.addEventListener('keydown', handleWindowKeyDown)
 
+    // oxlint-disable-next-line consistent-return
     return () => {
       window.removeEventListener('keydown', handleWindowKeyDown)
     }
@@ -286,7 +287,7 @@ export const Tooltip = forwardRef(function Tooltip(
       portalElement?.offsetWidth || document.body.offsetWidth,
     ]
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // oxlint-disable-next-line react-compiler
     setTooltipMaxWidth(Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2)
   }, [boundaryElement, portalElement])
 
@@ -490,6 +491,7 @@ function useCloseOnMouseLeave({
 
     window.addEventListener('mousemove', handleMouseMove)
 
+    // oxlint-disable-next-line consistent-return
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [isInsideGroup, showTooltip])
 }

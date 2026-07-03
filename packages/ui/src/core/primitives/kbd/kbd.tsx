@@ -67,6 +67,7 @@ KBDComponent.displayName = 'ForwardRef(KBD)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const KBD = KBDComponent as unknown as <E extends ElementType = 'kbd'>(
   props: KBDProps<E>,
 ) => React.JSX.Element

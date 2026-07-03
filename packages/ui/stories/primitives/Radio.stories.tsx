@@ -28,8 +28,10 @@ export const Controlled: Story = {
     },
   },
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [value, setValue] = useState('a')
 
+    // oxlint-disable-next-line rules-of-hooks
     const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
       setValue(event.currentTarget.value)
     }, [])
@@ -52,6 +54,7 @@ export const InputStates: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={3}>
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({

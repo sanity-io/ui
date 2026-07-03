@@ -30,6 +30,7 @@ export default function StackedStory() {
       <Flex align="center" height="fill" justify="center">
         <Container width={0} style={{textAlign: 'center'}}>
           <Box padding={4}>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={1}>
               {tones.map(([title, tone]) => (
                 <Button
@@ -44,6 +45,7 @@ export default function StackedStory() {
                   paddingX={paddingX}
                   paddingY={paddingY}
                   selected={selected}
+                  // oxlint-disable-next-line no-deprecated
                   space={space}
                   text={title}
                   tone={tone}

@@ -8,6 +8,7 @@ export default function PlainStory() {
   return (
     <Container width={0}>
       <Card padding={4}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Label as="label" htmlFor="select">
             Select

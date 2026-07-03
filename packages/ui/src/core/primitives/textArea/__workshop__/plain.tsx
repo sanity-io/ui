@@ -26,6 +26,7 @@ export default function PlainStory() {
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Container width={0}>
         <Card padding={3} tone={tone}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text as="label" htmlFor="text-area-example" size={1} weight="medium">
               TextArea

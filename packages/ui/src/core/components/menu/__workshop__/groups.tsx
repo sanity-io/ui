@@ -29,6 +29,7 @@ export default function GroupsStory() {
   return (
     <Box padding={[4, 5, 6]}>
       <Card padding={1} radius={3} shadow={1}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Inline space={1}>
           <LayerProvider>
             <MenuButton

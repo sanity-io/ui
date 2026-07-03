@@ -12,6 +12,7 @@ export default function LayerStory() {
         {dialogOpen && (
           <Dialog header="Dialog" id="dialog" onClickOutside={closeDialog} onClose={closeDialog}>
             <Box padding={4}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={[4, 5, 6]}>
                 <Popover
                   content={
@@ -43,6 +44,7 @@ export default function LayerStory() {
           </Dialog>
         )}
 
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={[4, 5, 6]}>
           <Popover
             content={

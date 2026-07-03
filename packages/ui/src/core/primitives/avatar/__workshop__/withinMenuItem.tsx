@@ -18,6 +18,7 @@ export default function WithinMenuItemStory() {
       <Layer>
         <Box paddingX={4} paddingY={[5, 6, 7]}>
           <Card radius={3} shadow={3}>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Menu space={1}>
               <MenuItem disabled={disabled} padding={0}>
                 <Flex align="center" gap={2} padding={2}>

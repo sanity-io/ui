@@ -31,6 +31,7 @@ export default function MenuButtonStory() {
   return (
     <Card height="fill" tone={layoutTone}>
       <Box padding={[4, 5, 6]}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={3} gap={2}>
           <Button id="prev-button" mode="ghost" text="Prev" />
           <LayerProvider>

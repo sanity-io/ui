@@ -30,6 +30,7 @@ export default function PropsStory() {
         <Stack
           padding={4}
           style={{outline: '1px solid var(--card-border-color)', width: '100%', maxWidth: '640px'}}
+          // oxlint-disable-next-line no-deprecated
           space={4}
         >
           <Text align="center" size={3}>
@@ -54,6 +55,7 @@ export default function PropsStory() {
         <Stack
           padding={4}
           style={{outline: '1px solid var(--card-border-color)', width: '100%', maxWidth: '640px'}}
+          // oxlint-disable-next-line no-deprecated
           space={4}
         >
           <Text align="center" size={3}>

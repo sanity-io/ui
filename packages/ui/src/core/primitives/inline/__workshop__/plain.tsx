@@ -8,6 +8,7 @@ export default function PlainStory() {
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
       <Inline
         onClick={useAction('onClick')}
+        // oxlint-disable-next-line no-deprecated
         space={useSelect('Space', WORKSHOP_SPACE_OPTIONS, 0, 'Props')}
       >
         <Card padding={1} shadow={1}>

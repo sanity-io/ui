@@ -29,6 +29,7 @@ describe('utils/layer', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values
           <LayerContext.Provider value={value}>
             <Debug />
           </LayerContext.Provider>
@@ -61,6 +62,7 @@ describe('utils/layer', () => {
         const value = undefined
 
         return (
+          // oxlint-disable-next-line no-unsafe-type-assertion
           <LayerContext.Provider value={value as any}>
             <Debug />
           </LayerContext.Provider>
@@ -92,6 +94,7 @@ describe('utils/layer', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values, no-unsafe-type-assertion
           <LayerContext.Provider value={value as any}>
             <Debug />
           </LayerContext.Provider>

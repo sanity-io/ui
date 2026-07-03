@@ -16,4 +16,5 @@ function getGlobalScope() {
   throw new Error('@sanity/ui: could not locate global scope')
 }
 
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const globalScope = getGlobalScope() as any

@@ -58,6 +58,7 @@ export const Sizes: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={3}>
         <Label {...props} size={4} />
         <Label {...props} size={3} />
@@ -77,6 +78,7 @@ export const Weights: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={3}>
         <Label {...props} />
         <Label {...props} weight="medium" />

@@ -5,6 +5,7 @@ import {createColorTheme} from './factory'
 describe('color', () => {
   describe('createColorTheme', () => {
     it('should generate base (scheme=light, name=default)', () => {
+      // oxlint-disable-next-line no-deprecated
       const theme = createColorTheme()
       const scheme = 'light'
       const name = 'default'
@@ -29,6 +30,7 @@ describe('color', () => {
     })
 
     it('should generate muted states (scheme=light, name=default)', () => {
+      // oxlint-disable-next-line no-deprecated
       const theme = createColorTheme()
       const scheme = 'light'
       const name = 'default'

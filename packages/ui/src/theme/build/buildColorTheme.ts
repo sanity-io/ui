@@ -37,6 +37,7 @@ export function buildColorTheme(config?: ThemeConfig): ThemeColorSchemes_v2 {
   }
 
   // Lazy schemes — each scheme's token tree is only built when first accessed
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const schemes = {} as ThemeColorSchemes_v2
 
   defineLazyProperty(schemes, 'light', () => buildColorScheme({scheme: 'light'}, resolvedConfig))
@@ -52,6 +53,7 @@ function buildColorScheme(
   const {scheme} = options
 
   // Lazy tones — each tone's token tree is only built when first accessed
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorScheme = {} as ThemeColorScheme_v2
 
   for (const tone of THEME_COLOR_CARD_TONES) {
@@ -172,6 +174,7 @@ function buildBadgeColorTheme(
 ): ThemeColorBadge_v2 {
   const {scheme} = options
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorBadge = {} as ThemeColorBadge_v2
 
   for (const tone of THEME_COLOR_STATE_TONES) {
@@ -211,6 +214,7 @@ function buildButtonColorTheme(
     modes[mode] = buildButtonTonesColorTheme({cardTone, scheme, mode}, config)
   }
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return modes as ThemeColorButton_v2
 }
 
@@ -230,6 +234,7 @@ function buildButtonTonesColorTheme(
     tones[tone] = buildButtonStatesColorTheme({cardTone, mode, scheme, tone}, config)
   }
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return tones as ThemeColorButtonMode_v2
 }
 
@@ -250,6 +255,7 @@ function buildButtonStatesColorTheme(
     states[state] = buildButtonStateColorTheme({cardTone, mode, tone, scheme, state}, config)
   }
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return states as ThemeColorButtonTone_v2
 }
 
@@ -377,6 +383,7 @@ function buildSelectableColorTheme(
     tones[tone] = buildSelectableStatesColorTheme({cardTone, scheme, tone}, config)
   }
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return tones as ThemeColorButtonMode_v2
 }
 
@@ -396,6 +403,7 @@ function buildSelectableStatesColorTheme(
     states[state] = buildSelectableStateColorTheme({cardTone, tone, scheme, state}, config)
   }
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return states as ThemeColorButtonTone_v2
 }
 

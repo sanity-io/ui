@@ -35,6 +35,7 @@ export default function SidePanelStory() {
       </Card>
       <BoundaryElementProvider element={sidePanel}>
         <Card borderLeft flex="none" ref={setSidePanel} style={{width: sidePanelWidth}}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack padding={4} space={5}>
             <Text muted size={1}>
               Click the <code>reference</code> text below to toggle the popover.
@@ -82,7 +83,7 @@ function InlineObject(props: {updateRef?: PopoverProps['updateRef']}) {
       width={0}
       updateRef={updateRef}
     >
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
+      {/* oxlint-disable-next-line click-events-have-key-events, no-noninteractive-element-interactions */}
       <code onClick={handleClick}>reference</code>
     </Popover>
   )

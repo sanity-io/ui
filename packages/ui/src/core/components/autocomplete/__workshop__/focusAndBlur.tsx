@@ -10,6 +10,7 @@ export default function FocusAndBlurStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={3}>
         <Autocomplete
           id="focus-and-blur"
@@ -21,6 +22,7 @@ export default function FocusAndBlurStory() {
           placeholder="Search"
           value={value}
         />
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Card overflow="auto" padding={3} radius={2} tone="transparent">
             <Code id="focus-and-blur-log" language="json" size={1}>

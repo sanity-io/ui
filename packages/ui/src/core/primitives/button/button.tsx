@@ -28,7 +28,9 @@ import {buttonBaseStyles, buttonColorStyles} from './styles'
 export interface ButtonOwnProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
   fontSize?: number | number[]
   mode?: ButtonMode
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: React.ElementType | React.ReactNode
+  // oxlint-disable-next-line no-redundant-type-constituents
   iconRight?: React.ElementType | React.ReactNode
   justify?: FlexJustify | FlexJustify[]
   /**
@@ -101,6 +103,7 @@ const ButtonComponent = forwardRef(function Button(
     radius: radiusProp = 2,
     selected,
     gap,
+    // oxlint-disable-next-line no-deprecated
     space: deprecated_space = 3,
     text,
     textAlign,
@@ -205,6 +208,7 @@ ButtonComponent.displayName = 'ForwardRef(Button)'
 /**
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Button = ButtonComponent as unknown as <E extends ElementType = 'button'>(
   props: ButtonProps<E>,
 ) => React.JSX.Element
