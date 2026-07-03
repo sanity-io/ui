@@ -26,9 +26,6 @@ the scripts:
 - The Workshop's first component render can show a long loading spinner while
   Vite optimizes deps on demand; it is warm after the first load. This is
   expected, not a failure.
-- Commits are linted by a husky `commit-msg` hook running commitlint
-  (conventional-commits). Use conventional commit messages (e.g. `chore: ...`,
-  `fix: ...`).
 - Releases are managed with Changesets: run `pnpm changeset` to add a changeset
   to a PR that should trigger a release. Merging to `main` opens/updates a
   "Version Packages" PR, and merging that publishes to npm via trusted

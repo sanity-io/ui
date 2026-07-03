@@ -22,7 +22,6 @@ overrides:
   '@types/react': ^19.2.2
   '@types/react-dom': ^19.2.2
   '@types/react-is': ^19.2.0
-  conventional-changelog-conventionalcommits: '>= 8.0.0'
   react: ^19.2.0
   react-dom: ^19.2.0
   react-is: ^19.2.0
