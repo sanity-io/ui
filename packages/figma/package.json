@@ -1,6 +1,7 @@
 {
   "name": "figma-plugin-sanity-ui",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
