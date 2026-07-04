@@ -15,6 +15,9 @@ const config = await defineConfig({
   styledComponents: true,
 })
 
+// Emit sourcemaps for both formats, like @sanity/pkg-utils did
+config.sourcemap = true
+
 const userConfig: UserConfig = {
   ...config,
   exports: {
@@ -24,11 +27,12 @@ const userConfig: UserConfig = {
         const key = subpath === 'index' ? '.' : `./${subpath}`
         const value = exportsMap[key]
         if (context.isPublish) {
-          // Keep publishing the `source` condition, like @sanity/pkg-utils
-          // did (the npm package ships `src` and `exports`, and Sanity
-          // tooling resolves published packages to source through it).
+          // Publish the exact same exports shape as @sanity/pkg-utils did:
+          // the `source` condition (the npm package ships `src` and `exports`,
+          // and Sanity tooling resolves published packages to source through
+          // it) and a trailing `default` fallback to the CJS build.
           if (typeof value === 'object' && value !== null) {
-            exportsMap[key] = {source: sourceFile, ...value}
+            exportsMap[key] = {source: sourceFile, ...value, default: `./dist/${subpath}.js`}
           }
         } else {
           // Dev exports: everything in the monorepo (tsc, oxlint, jest, vite)

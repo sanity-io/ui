@@ -69,17 +69,20 @@
       ".": {
         "source": "./exports/index.ts",
         "import": "./dist/index.mjs",
-        "require": "./dist/index.js"
+        "require": "./dist/index.js",
+        "default": "./dist/index.js"
       },
       "./_visual-editing": {
         "source": "./exports/_visual-editing.ts",
         "import": "./dist/_visual-editing.mjs",
-        "require": "./dist/_visual-editing.js"
+        "require": "./dist/_visual-editing.js",
+        "default": "./dist/_visual-editing.js"
       },
       "./theme": {
         "source": "./exports/theme.ts",
         "import": "./dist/theme.mjs",
-        "require": "./dist/theme.js"
+        "require": "./dist/theme.js",
+        "default": "./dist/theme.js"
       },
       "./package.json": "./package.json"
     },
