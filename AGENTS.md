@@ -20,7 +20,9 @@ obvious from the scripts:
   separate `tsc`/`ts:check` command. Run `pnpm lint:fix` to auto-fix issues
   when possible. Suppressions use `oxlint-disable-next-line` comments.
 - Packages are built with [tsdown](https://tsdown.dev) via
-  `@sanity/tsdown-config` (`tsdown.config.ts` in each package). The build
+  `@sanity/tsdown-config` (`tsdown.config.mts` in each package — the `.mts`
+  extension is required because these packages are not `"type": "module"` and
+  the Node version in CI cannot import TS config files otherwise). The build
   regenerates package.json `exports` (dev exports): in the monorepo,
   `@sanity/ui` and `@sanity/ui/theme` resolve directly to TypeScript source
   via the `default` condition (tsc, oxlint's type checker, and vite all pick

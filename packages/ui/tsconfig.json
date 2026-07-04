@@ -7,7 +7,7 @@
     "./src",
     "./stories",
     "./test",
-    "./tsdown.config.ts",
+    "./tsdown.config.mts",
     "./typings",
     "./workshop",
     "./workshop.config.ts",

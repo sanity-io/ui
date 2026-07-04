@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.settings.json",
-  "include": ["./src", "./tsdown.config.ts", "../ui/typings"],
+  "include": ["./src", "./tsdown.config.mts", "../ui/typings"],
   "compilerOptions": {
     "rootDir": "..",
     "outDir": "./dist/types",
