@@ -1,6 +1,6 @@
 import pluginBabel from '@rolldown/plugin-babel'
 import {defineConfig} from '@sanity/tsdown-config'
-import {UserConfig} from 'tsdown'
+import type {UserConfig} from 'tsdown'
 
 const entry = {
   'index': './exports/index.ts',

@@ -1,5 +1,5 @@
 import {defineConfig} from '@sanity/tsdown-config'
-import {UserConfig} from 'tsdown'
+import type {UserConfig} from 'tsdown'
 
 const config = await defineConfig({
   entry: {index: './src/index.ts'},
