@@ -1,12 +1,15 @@
 import {defineConfig} from '@sanity/ui-workshop'
 import {perfPlugin} from '@sanity/ui-workshop/plugin-perf'
-import {buildTheme} from '@sanity/ui/theme'
 import {registerLanguage} from 'react-refractor'
 import javascript from 'refractor/javascript'
 import json from 'refractor/json'
 import jsx from 'refractor/jsx'
 import typescript from 'refractor/typescript'
 
+// Import the theme source relatively: this config runs in Node (the workshop
+// CLI), which cannot load the TypeScript source that the dev `exports` of
+// `@sanity/ui/theme` point at.
+import {buildTheme} from './src/theme'
 import {fontsPlugin} from './workshop/fontsPlugin'
 
 registerLanguage(javascript)

@@ -13,13 +13,8 @@
     "rootDir": ".",
     "outDir": "./dist",
     "types": ["node"],
-    // The @sanity/pkg-utils v8 build cannot resolve self-references through
-    // the `@sanity/ui:source` condition in package.json `exports`
-    // (api-extractor does not support `customConditions`, and `dist` does not
-    // exist yet during a clean build), so the build keeps explicit `paths`.
-    "paths": {
-      "@sanity/ui/theme": ["./exports/theme.ts"],
-      "@sanity/ui": ["./exports"]
-    }
+    // The shared settings use "preserve" (for Storybook), but the tsdown
+    // build must compile JSX for the published output
+    "jsx": "react-jsx"
   }
 }

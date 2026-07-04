@@ -19,22 +19,24 @@ obvious from the scripts:
   checking is included in `pnpm lint` via the `typeCheck` option — there is no
   separate `tsc`/`ts:check` command. Run `pnpm lint:fix` to auto-fix issues
   when possible. Suppressions use `oxlint-disable-next-line` comments.
-- `@sanity/ui` imports (self-references and from `packages/figma`) resolve to
-  TypeScript source through the custom `@sanity/ui:source` condition in
-  `packages/ui/package.json` `exports`, enabled via `customConditions` in the
-  dev tsconfigs — there are no tsconfig `paths` mappings outside the
-  build-only `tsconfig.dist.json`. Vite-based tooling (Workshop, Storybook)
-  uses an equivalent `@sanity/ui` → `exports/` alias instead.
-- Tests require a built package first. `pnpm test` (jest) resolves `@sanity/ui`
-  and `@sanity/ui/theme` from `packages/ui/dist` (via package `exports`), so you
-  must run `pnpm build` at least once before `pnpm test` or every suite fails
-  with "Cannot find module '@sanity/ui'". Re-run `pnpm build` after changing
-  source that tests import through the package entrypoints.
+- Packages are built with [tsdown](https://tsdown.dev) via
+  `@sanity/tsdown-config` (`tsdown.config.ts` in each package). The build
+  regenerates package.json `exports` (dev exports): in the monorepo,
+  `@sanity/ui` and `@sanity/ui/theme` resolve directly to TypeScript source
+  via the `default` condition (tsc, oxlint's type checker, and vite all pick
+  it), so there are no tsconfig `paths`, no `customConditions`, and no vite
+  aliases. The `node` condition points at `dist` for Node-only consumers (the
+  workshop CLI). The publishable `exports` (dist + `source` condition) live
+  under `publishConfig` and are applied by `pnpm pack`/`publish`.
+- Tests do not require a build: jest maps `@sanity/ui` to source via
+  `moduleNameMapper` and applies the React Compiler in its babel transform
+  (see `jest.config.js`) to match the shipped `dist` behavior.
 - `pnpm dev` runs two servers in parallel (`run-p storybook:dev workshop:dev` in
   `packages/ui`): Storybook on http://localhost:6006 and the Workshop on
-  http://localhost:1337. The Workshop is Vite-based and aliases `@sanity/ui` to
-  the `packages/ui/exports/` source, so it hot-reloads source edits directly (no
-  rebuild needed); Storybook likewise reads source. Only jest depends on `dist`.
+  http://localhost:1337. Both are Vite-based and resolve `@sanity/ui` to the
+  `packages/ui/exports/` source (dev exports), so they hot-reload source edits
+  directly. The workshop CLI itself needs `pnpm build` to have run once (its
+  Node process imports `@sanity/ui` through the `node` condition → `dist`).
 - The Workshop's first component render can show a long loading spinner while
   Vite optimizes deps on demand; it is warm after the first load. This is
   expected, not a failure.

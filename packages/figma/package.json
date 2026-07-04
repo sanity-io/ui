@@ -7,27 +7,33 @@
   "author": "Sanity.io <hello@sanity.io>",
   "type": "module",
   "sideEffects": false,
-  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": {
-      "source": "./src/index.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
-    },
+    ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
+  "publishConfig": {
+    "exports": {
+      ".": "./dist/index.js",
+      "./package.json": "./package.json"
+    }
+  },
   "scripts": {
-    "build": "pkg build --strict && pkg --strict",
-    "watch": "pkg watch --strict"
+    "build": "tsdown",
+    "watch": "tsdown --watch"
   },
   "devDependencies": {
-    "@babel/plugin-transform-object-rest-spread": "^7.28.4",
     "@figma/plugin-typings": "^1.117.0",
     "@sanity/color": "^3.0.6",
-    "@sanity/pkg-utils": "^8.1.29",
+    "@sanity/tsdown-config": "^0.11.0",
     "@sanity/ui": "workspace:*",
     "segmented-property": "^4.0.0",
-    "typescript": "6.0.3"
+    "tsdown": "^0.22.3",
+    "typescript": "6.0.3",
+    "unrun": "^0.3.1"
+  },
+  "inlinedDependencies": {
+    "@sanity/color": "3.0.6",
+    "segmented-property": "4.0.0"
   }
 }
