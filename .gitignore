@@ -8,5 +8,6 @@ node_modules
 storybook-static
 .eslintcache
 
-# Vitest browser mode failure screenshots
+# Vitest browser mode failure screenshots and attachments
 __screenshots__
+.vitest-attachments
