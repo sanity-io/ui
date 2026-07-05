@@ -13,7 +13,4 @@ const config: UserConfig = await defineConfig({
   styledComponents: true,
 })
 
-// Emit sourcemaps for both formats, like @sanity/pkg-utils did
-config.sourcemap = true
-
 export default config
