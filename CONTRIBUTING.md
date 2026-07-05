@@ -1,8 +1,9 @@
 # Contributing guidelines
 
 This repository is a pnpm monorepo. The published `@sanity/ui` package lives in
-[`packages/ui`](packages/ui), and the Figma plugin lives in
-[`packages/figma`](packages/figma).
+[`packages/ui`](packages/ui), the Figma plugin lives in
+[`packages/figma`](packages/figma), and the Storybook lives in
+[`apps/storybook`](apps/storybook).
 
 ## Getting started
 
@@ -12,8 +13,9 @@ pnpm build
 pnpm test
 ```
 
-Run `pnpm dev` to start Storybook (http://localhost:6006) and the Workshop
-(http://localhost:1337) in parallel.
+Run `pnpm dev` to start Storybook (http://localhost:6006). Storybook resolves
+`@sanity/ui` from the package source, so edits to `packages/ui/src` hot-reload
+without a rebuild.
 
 ## Releasing
 

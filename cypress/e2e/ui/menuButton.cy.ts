@@ -1,6 +1,6 @@
 context('Components/MenuButton', () => {
   it('clicking should open/close menu', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+    cy.visit('/iframe.html?id=components-menubutton--keyboard-navigation&viewMode=story')
 
     // click button
     cy.get('#menu-button').click()
@@ -12,7 +12,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should use arrow keys to navigate the menu', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+    cy.visit('/iframe.html?id=components-menubutton--keyboard-navigation&viewMode=story')
 
     // Open menu by pressed DOWN arrow key
     cy.get('#menu-button').focus().realPress('ArrowDown')
@@ -50,7 +50,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should close on tab', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+    cy.visit('/iframe.html?id=components-menubutton--keyboard-navigation&viewMode=story')
 
     cy.get('#menu-button').focus().realPress('ArrowDown')
     cy.get('#menu-item-1').should('be.focused')
@@ -60,7 +60,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should close on shift + tab', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+    cy.visit('/iframe.html?id=components-menubutton--keyboard-navigation&viewMode=story')
 
     cy.get('#menu-button').focus().realPress('ArrowDown')
     cy.get('#menu-item-1').should('be.focused')
@@ -70,7 +70,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should not close when one of the items receives focus', () => {
-    cy.visit('/frame/?path=/components/menu/menu-button')
+    cy.visit('/iframe.html?id=components-menubutton--keyboard-navigation&viewMode=story')
 
     cy.get('#menu-button').click()
     cy.get('#menu-button').should('be.focused')
@@ -79,7 +79,7 @@ context('Components/MenuButton', () => {
   })
 
   it('clicking should open/close menu (with selected items)', () => {
-    cy.visit('/frame/?path=/components/menu/selected-item')
+    cy.visit('/iframe.html?id=components-menubutton--selected-item-focus&viewMode=story')
 
     // click button
     cy.get('#menu-button').click()
@@ -91,7 +91,7 @@ context('Components/MenuButton', () => {
   })
 
   it('should show the selected menu item when opened', () => {
-    cy.visit('/frame/?path=/components/menu/selected-item')
+    cy.visit('/iframe.html?id=components-menubutton--selected-item-focus&viewMode=story')
 
     cy.get('#menu-button').click()
     cy.get('#menu-item-2').should('be.focused')

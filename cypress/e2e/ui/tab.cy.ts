@@ -1,6 +1,6 @@
 context('Components/Tab', () => {
   it('should use keys to navigate tabs', () => {
-    cy.visit('/frame/?path=/components/tab/example')
+    cy.visit('/iframe.html?id=components-tab--example&viewMode=story')
 
     cy.get('#example-tab-foo').click().realPress('{rightarrow}')
 

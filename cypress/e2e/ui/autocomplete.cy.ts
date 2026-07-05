@@ -4,7 +4,7 @@ context('Components/Autocomplete', () => {
   it('should use key arrows', () => {
     cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
 
-    cy.visit('/frame/?path=/components/autocomplete/custom')
+    cy.visit('/iframe.html?id=components-autocomplete--custom&viewMode=story')
 
     cy.get('#custom').click()
 
@@ -31,7 +31,7 @@ context('Components/Autocomplete', () => {
   it('should press clear button to clear', () => {
     cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
 
-    cy.visit('/frame/?path=/components/autocomplete/custom')
+    cy.visit('/iframe.html?id=components-autocomplete--custom&viewMode=story')
 
     cy.get('#custom').click()
 
@@ -60,7 +60,7 @@ context('Components/Autocomplete', () => {
   it('should collapse when tabbing out', () => {
     cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
 
-    cy.visit('/frame/?path=/components/autocomplete/custom')
+    cy.visit('/iframe.html?id=components-autocomplete--custom&viewMode=story')
 
     // Click to focus
     cy.get('#custom').click()
@@ -81,7 +81,7 @@ context('Components/Autocomplete', () => {
   it('should clear query on blur', () => {
     cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
 
-    cy.visit('/frame/?path=/components/autocomplete/custom')
+    cy.visit('/iframe.html?id=components-autocomplete--custom&viewMode=story')
 
     // Click to focus
     cy.get('#custom').click()
@@ -117,7 +117,7 @@ context('Components/Autocomplete', () => {
   it('should search anew after selecting a value', () => {
     cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
 
-    cy.visit('/frame/?path=/components/autocomplete/custom')
+    cy.visit('/iframe.html?id=components-autocomplete--custom&viewMode=story')
 
     // Click to focus
     cy.get('#custom').click()
@@ -156,7 +156,7 @@ context('Components/Autocomplete', () => {
   it('should trigger focus and blur', () => {
     cy.on('uncaught:exception', (err) => !RE_RESIZE_OBSERVER_LOOP_ERROR.test(err.message))
 
-    cy.visit('/frame/?path=/components/autocomplete/focus-and-blur')
+    cy.visit('/iframe.html?id=components-autocomplete--focus-and-blur&viewMode=story')
 
     // Click to focus
     cy.get('#focus-and-blur').click()

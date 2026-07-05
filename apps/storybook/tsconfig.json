@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "include": ["./.storybook", "./stories", "./typings"],
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "baseUrl": ".",
+    "paths": {
+      "@sanity/ui/*": ["../../packages/ui/exports/*"],
+      "@sanity/ui": ["../../packages/ui/exports"]
+    },
+    // Setting "jsx" to anything but "preserve" is usually incorrect, but at the moment Storybook needs it
+    "jsx": "react-jsx"
+  }
+}
