@@ -1,23 +1,10 @@
 {
   "extends": "../../tsconfig.settings.json",
-  "include": [
-    "./.storybook/**/*",
-    "./exports",
-    "./scripts",
-    "./src",
-    "./stories",
-    "./test",
-    "./tsdown.config.mts",
-    "./typings",
-    "./workshop",
-    "./workshop.config.ts",
-    "./workshop.runtime.ts"
-  ],
+  "include": ["./exports", "./scripts", "./src", "./test", "./tsdown.config.mts", "./typings"],
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "./dist/types",
     "types": ["node", "jest"],
-    // Setting "jsx" to aynthing but "preserve" is usually incorrect, but at the moment Storybook needs it
     "jsx": "react-jsx"
   }
 }

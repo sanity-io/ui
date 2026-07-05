@@ -47,9 +47,9 @@ jobs:
       - uses: cypress-io/github-action@v6
         with:
           install: false
-          build: pnpm workshop:build
-          start: pnpm workshop:start
-          wait-on: http://localhost:1337
+          build: pnpm storybook:build
+          start: pnpm storybook:start
+          wait-on: http://localhost:6006
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
