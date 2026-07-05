@@ -11,8 +11,9 @@ import {
   Text,
   useLayer,
 } from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
+import {expect, userEvent, waitFor} from 'storybook/test'
 
 const meta: Meta = {
   parameters: {controls: {include: []}},
@@ -128,6 +129,21 @@ export const Nested: Story = {
       <NestedRoot />
     </Box>
   ),
+  play: async ({canvasElement, step}) => {
+    // The story renders multiple stacked examples with the same ids, so only
+    // interact with the first one
+    const el = (id: string) => canvasElement.querySelector<HTMLElement>(`#${id}`)
+
+    await step('should calculate size of nested layers', async () => {
+      await userEvent.click(el('open-layer-1')!)
+
+      await waitFor(() => expect(el('layer-debug-info-1')).toHaveTextContent('size=1'))
+
+      await userEvent.click(el('open-layer-2')!)
+
+      await waitFor(() => expect(el('layer-debug-info-1')).toHaveTextContent('size=2'))
+    })
+  },
 }
 
 export const MultipleRoots: Story = {

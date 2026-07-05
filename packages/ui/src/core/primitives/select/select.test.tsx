@@ -1,23 +1,25 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Select} from './select'
 import {selectStyle} from './styles'
 
-jest.mock('./styles', () => {
-  const actual = jest.requireActual('./styles')
+vi.mock('./styles', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./styles')>()
 
   return {
     ...actual,
     selectStyle: {
       ...actual.selectStyle,
-      input: jest.fn(actual.selectStyle.input),
+      input: vi.fn(actual.selectStyle.input),
     },
   }
 })
 
 describe('primitives/select spacing', () => {
-  const mockedSelectInputStyle = jest.mocked(selectStyle.input)
+  const mockedSelectInputStyle = vi.mocked(selectStyle.input)
 
   beforeEach(() => {
     mockedSelectInputStyle.mockClear()

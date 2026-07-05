@@ -31,9 +31,9 @@ import {
   ToastProvider,
   useToast,
 } from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
-import {expect, fn, userEvent, within} from '@storybook/test'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useRef, useState} from 'react'
+import {expect, fn, userEvent, waitFor, within} from 'storybook/test'
 
 const meta: Meta<typeof MenuButton> = {
   args: {
@@ -249,6 +249,76 @@ export const KeyboardNavigation: Story = {
       </Box>
     </Card>
   ),
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+    const el = (id: string) => doc.getElementById(id)
+
+    await step('clicking should open/close menu', async () => {
+      // click button
+      await userEvent.click(el('menu-button')!)
+      await waitFor(() => expect(el('menu-button')).toHaveAttribute('aria-expanded', 'true'))
+
+      // click outside
+      await userEvent.click(el('next-button')!)
+      await waitFor(() => expect(el('menu-button')).toHaveAttribute('aria-expanded', 'false'))
+    })
+
+    await step('should use arrow keys to navigate the menu', async () => {
+      // Open menu by pressing DOWN arrow key
+      el('menu-button')!.focus()
+      await userEvent.keyboard('{ArrowDown}')
+      await waitFor(() => expect(el('menu-item-1')).toHaveFocus())
+
+      // Move through menu with arrow keys
+      await userEvent.keyboard('{ArrowDown}')
+      await waitFor(() => expect(el('menu-item-2')).toHaveFocus())
+
+      // Skips #menu-item-3, because it's disabled
+      await userEvent.keyboard('{ArrowDown}')
+      await waitFor(() => expect(el('menu-item-4')).toHaveFocus())
+
+      // The first menu item should now be focused
+      await userEvent.keyboard('{ArrowDown}')
+      await waitFor(() => expect(el('menu-item-1')).toHaveFocus())
+
+      // Escape to exit the menu
+      await userEvent.keyboard('{Escape}')
+      await waitFor(() => expect(el('menu-button')).toHaveFocus())
+
+      // Open menu by pressing UP arrow key
+      await userEvent.keyboard('{ArrowUp}')
+      await waitFor(() => expect(el('menu-item-4')).toHaveFocus())
+
+      // Move through menu with arrow keys, skipping the disabled #menu-item-3
+      await userEvent.keyboard('{ArrowUp}')
+      await waitFor(() => expect(el('menu-item-2')).toHaveFocus())
+      await userEvent.keyboard('{ArrowUp}')
+      await waitFor(() => expect(el('menu-item-1')).toHaveFocus())
+
+      // The last menu item should now be focused
+      await userEvent.keyboard('{ArrowUp}')
+      await waitFor(() => expect(el('menu-item-4')).toHaveFocus())
+
+      // Escape to exit the menu
+      await userEvent.keyboard('{Escape}')
+      await waitFor(() => expect(el('menu-button')).toHaveFocus())
+    })
+
+    // Closing the menu with (shift+)tab depends on the browser's native focus
+    // behavior which cannot be emulated here, so it is covered with real key
+    // presses in tests/menuButton.test.tsx
+
+    await step('should not close when one of the items receives focus', async () => {
+      await userEvent.click(el('menu-button')!)
+      await waitFor(() => expect(el('menu-button')).toHaveFocus())
+      el('menu-item-2')!.focus()
+      await waitFor(() => expect(el('menu-button')).toHaveAttribute('aria-expanded', 'true'))
+
+      // Close the menu again
+      await userEvent.keyboard('{Escape}')
+      await waitFor(() => expect(el('menu-button')).toHaveAttribute('aria-expanded', 'false'))
+    })
+  },
 }
 
 const SELECTED_ITEM_POPOVER_PROPS: MenuButtonProps['popover'] = {
@@ -308,6 +378,29 @@ function SelectedItemFocusStory() {
 export const SelectedItemFocus: Story = {
   parameters: {controls: {include: []}},
   render: () => <SelectedItemFocusStory />,
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+    const el = (id: string) => doc.getElementById(id)
+
+    await step('clicking should open/close menu', async () => {
+      // click button
+      await userEvent.click(el('menu-button')!)
+      await waitFor(() => expect(el('menu-button')).toHaveAttribute('aria-expanded', 'true'))
+
+      // click the same button again
+      await userEvent.click(el('menu-button')!)
+      await waitFor(() => expect(el('menu-button')).toHaveAttribute('aria-expanded', 'false'))
+    })
+
+    await step('should show the selected menu item when opened', async () => {
+      await userEvent.click(el('menu-button')!)
+      await waitFor(() => expect(el('menu-item-2')).toHaveFocus())
+
+      // Close the menu again
+      await userEvent.keyboard('{Escape}')
+      await waitFor(() => expect(el('menu-button')).toHaveAttribute('aria-expanded', 'false'))
+    })
+  },
 }
 
 function ClosableStory() {

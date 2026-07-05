@@ -1,4 +1,6 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Box} from '../../primitives'
@@ -6,12 +8,12 @@ import {TreeContext} from './treeContext'
 import {TreeItem} from './treeItem'
 import {TreeContextValue, TreeState} from './types'
 
-jest.mock('../../primitives', () => {
-  const actual = jest.requireActual('../../primitives')
+vi.mock('../../primitives', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives')>()
 
   return {
     ...actual,
-    Box: jest.fn((props: Record<string, unknown>) => (actual.Box as any).render(props, null)),
+    Box: vi.fn((props: Record<string, unknown>) => (actual.Box as any).render(props, null)),
   }
 })
 
@@ -37,7 +39,7 @@ function renderTreeItem(props: Partial<React.ComponentProps<typeof TreeItem>> = 
 }
 
 describe('components/treeItem spacing', () => {
-  const mockedBox = jest.mocked(Box)
+  const mockedBox = vi.mocked(Box)
 
   beforeEach(() => {
     mockedBox.mockClear()

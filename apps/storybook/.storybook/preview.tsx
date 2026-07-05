@@ -1,10 +1,10 @@
-import type {Preview} from '@storybook/react'
-import {themes} from '@storybook/theming'
+import type {Preview} from '@storybook/react-vite'
 import {registerLanguage} from 'react-refractor'
 import javascript from 'refractor/javascript'
 import json from 'refractor/json'
 import jsx from 'refractor/jsx'
 import typescript from 'refractor/typescript'
+import {themes} from 'storybook/theming'
 
 import {withSanityTheme} from './decorators/withSanityTheme.decorator'
 
@@ -22,7 +22,7 @@ const preview: Preview = {
   ],
   parameters: {
     actions: {argTypesRegex: '^on[A-Z].*'},
-    backgrounds: {disable: true},
+    backgrounds: {disabled: true},
     controls: {
       matchers: {
         color: /(background|color)$/i,

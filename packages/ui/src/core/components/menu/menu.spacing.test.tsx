@@ -1,20 +1,22 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Stack} from '../../primitives'
 import {Menu} from './menu'
 
-jest.mock('../../primitives', () => {
-  const actual = jest.requireActual('../../primitives')
+vi.mock('../../primitives', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives')>()
 
   return {
     ...actual,
-    Stack: jest.fn((props: Record<string, unknown>) => (actual.Stack as any).render(props, null)),
+    Stack: vi.fn((props: Record<string, unknown>) => (actual.Stack as any).render(props, null)),
   }
 })
 
-jest.mock('../../utils', () => {
-  const actual = jest.requireActual('../../utils')
+vi.mock('../../utils', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../utils')>()
 
   return {
     ...actual,
@@ -23,7 +25,7 @@ jest.mock('../../utils', () => {
 })
 
 describe('components/menu spacing', () => {
-  const mockedStack = jest.mocked(Stack)
+  const mockedStack = vi.mocked(Stack)
 
   beforeEach(() => {
     mockedStack.mockClear()

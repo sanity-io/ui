@@ -1,21 +1,23 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Stack} from '../../primitives'
 import {Tree} from './tree'
 import {TreeItem} from './treeItem'
 
-jest.mock('../../primitives', () => {
-  const actual = jest.requireActual('../../primitives')
+vi.mock('../../primitives', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives')>()
 
   return {
     ...actual,
-    Stack: jest.fn((props: Record<string, unknown>) => (actual.Stack as any).render(props, null)),
+    Stack: vi.fn((props: Record<string, unknown>) => (actual.Stack as any).render(props, null)),
   }
 })
 
 describe('components/tree spacing', () => {
-  const mockedStack = jest.mocked(Stack)
+  const mockedStack = vi.mocked(Stack)
 
   beforeEach(() => {
     mockedStack.mockClear()

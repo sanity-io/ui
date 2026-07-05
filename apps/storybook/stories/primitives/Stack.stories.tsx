@@ -1,5 +1,5 @@
 import {Card, Stack, Text} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {getHeightControls, getOverflowControls, getSpaceControls} from '../controls'
 

@@ -33,9 +33,9 @@ import {
   Text,
 } from '@sanity/ui'
 import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
-import type {Meta, StoryObj} from '@storybook/react'
-import {fn} from '@storybook/test'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {Fragment, useCallback, useState} from 'react'
+import {fn} from 'storybook/test'
 
 import {getSpaceControls} from '../controls'
 

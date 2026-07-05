@@ -1,5 +1,5 @@
 import {Box, Card, Grid, Text, TextArea} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'

@@ -15,7 +15,7 @@ import {
   useRootTheme,
 } from '@sanity/ui'
 import {getTheme_v2, THEME_COLOR_CARD_TONES, ThemeColorStateToneKey} from '@sanity/ui/theme'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {forwardRef} from 'react'
 import {css, styled} from 'styled-components'
 

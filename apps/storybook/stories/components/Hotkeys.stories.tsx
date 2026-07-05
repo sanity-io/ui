@@ -1,5 +1,5 @@
 import {Hotkeys} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {RADII} from '../constants'
 import {getSpaceControls} from '../controls'

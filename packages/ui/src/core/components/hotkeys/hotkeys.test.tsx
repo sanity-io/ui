@@ -1,20 +1,22 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Inline} from '../../primitives'
 import {Hotkeys} from './hotkeys'
 
-jest.mock('../../primitives', () => {
-  const actual = jest.requireActual('../../primitives')
+vi.mock('../../primitives', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives')>()
 
   return {
     ...actual,
-    Inline: jest.fn((props: Record<string, unknown>) => (actual.Inline as any).render(props, null)),
+    Inline: vi.fn((props: Record<string, unknown>) => (actual.Inline as any).render(props, null)),
   }
 })
 
 describe('components/hotkeys spacing', () => {
-  const mockedInline = jest.mocked(Inline)
+  const mockedInline = vi.mocked(Inline)
 
   beforeEach(() => {
     mockedInline.mockClear()

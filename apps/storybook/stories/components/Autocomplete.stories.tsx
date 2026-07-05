@@ -24,8 +24,9 @@ import {
   ToastProvider,
   useToast,
 } from '@sanity/ui'
-import type {Meta, StoryFn, StoryObj} from '@storybook/react'
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {RADII} from '../constants'
 import {rowBuilder} from '../helpers/rowBuilder'
@@ -160,6 +161,142 @@ function CustomStory() {
 export const Custom: Story = {
   parameters: {controls: {include: []}},
   render: () => <CustomStory />,
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+    const input = () => doc.getElementById('custom') as HTMLInputElement
+    const listbox = () => doc.getElementById('custom-listbox')
+    const option = (value: string) => doc.querySelector(`[data-qa="option-${value}"]`)
+
+    await step('should use key arrows', async () => {
+      await userEvent.click(input())
+
+      // Search for "nor"
+      await userEvent.type(input(), 'nor')
+
+      // The listbox is expanded
+      await waitFor(() => expect(input()).toHaveAttribute('aria-expanded', 'true'))
+      await waitFor(() => expect(listbox()).toBeInTheDocument())
+
+      // Arrow down 3 times
+      await userEvent.keyboard('{ArrowDown}')
+      await userEvent.keyboard('{ArrowDown}')
+      await userEvent.keyboard('{ArrowDown}')
+
+      // The 3rd option should be focused
+      await waitFor(() => expect(option('NO')).toHaveFocus())
+
+      // Escape to close listbox and clear input
+      await userEvent.keyboard('{Escape}')
+      await waitFor(() => expect(input()).toHaveAttribute('aria-expanded', 'false'))
+      expect(input()).toHaveValue('')
+    })
+
+    await step('should press clear button to clear', async () => {
+      await userEvent.click(input())
+
+      // Search for "nor"
+      await userEvent.type(input(), 'nor')
+
+      // Arrow down 3 times
+      await waitFor(() => expect(listbox()).toBeInTheDocument())
+      await userEvent.keyboard('{ArrowDown}')
+      await userEvent.keyboard('{ArrowDown}')
+      await userEvent.keyboard('{ArrowDown}')
+
+      // Enter to select
+      await waitFor(() => expect(option('NO')).toHaveFocus())
+      await userEvent.keyboard('{Enter}')
+
+      // Tab 1 time
+      await waitFor(() => expect(input()).toHaveFocus())
+      await userEvent.tab()
+
+      // Enter to clear
+      const clearButton = doc.querySelector<HTMLButtonElement>('[data-qa="clear-button"]')!
+
+      await waitFor(() => expect(clearButton).toHaveFocus())
+      await userEvent.click(clearButton)
+
+      // The input should be empty and focused
+      await waitFor(() => expect(input()).toHaveValue(''))
+      expect(input()).toHaveFocus()
+    })
+
+    await step('should collapse when tabbing out', async () => {
+      // Click to focus
+      await userEvent.click(input())
+      await waitFor(() => expect(input()).toHaveFocus())
+
+      // Search for "nor"
+      await userEvent.type(input(), 'nor')
+
+      // The input is expanded and focused
+      await waitFor(() => expect(input()).toHaveAttribute('aria-expanded', 'true'))
+      expect(input()).toHaveFocus()
+
+      // Focus the next focusable element
+      doc.getElementById('set-value-btn')!.focus()
+
+      // Should be collapsed
+      await waitFor(() => expect(input()).toHaveAttribute('aria-expanded', 'false'))
+    })
+
+    await step('should clear query on blur', async () => {
+      // Click to focus
+      await userEvent.click(input())
+
+      // Search for "nor"
+      await userEvent.type(input(), 'nor')
+
+      // Arrow down 3 times
+      await waitFor(() => expect(listbox()).toBeInTheDocument())
+      await userEvent.keyboard('{ArrowDown}')
+      await userEvent.keyboard('{ArrowDown}')
+      await userEvent.keyboard('{ArrowDown}')
+
+      // Enter to select
+      await waitFor(() => expect(option('NO')).toHaveFocus())
+      await userEvent.keyboard('{Enter}')
+
+      await waitFor(() => expect(input()).toHaveValue('Norway'))
+      expect(input()).toHaveFocus()
+
+      // Click to focus
+      await userEvent.click(input())
+
+      // Search for "net"
+      await userEvent.keyboard('{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}')
+      await userEvent.type(input(), 'net')
+
+      // Tab out of autocomplete
+      doc.getElementById('set-value-btn')!.focus()
+
+      // Expect the value to be "Norway" and autocomplete to be collapsed
+      await waitFor(() => expect(input()).toHaveAttribute('aria-expanded', 'false'))
+      await waitFor(() => expect(input()).toHaveValue('Norway'))
+    })
+
+    await step('should search anew after selecting a value', async () => {
+      // Click to focus
+      await userEvent.click(input())
+
+      // Search for "net"
+      await userEvent.keyboard('{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}{Backspace}')
+      await userEvent.type(input(), 'net')
+
+      // Arrow down 1 time
+      await waitFor(() => expect(listbox()).toBeInTheDocument())
+      await userEvent.keyboard('{ArrowDown}')
+
+      // Enter to select
+      await waitFor(() => expect(option('NL')).toHaveFocus())
+      await userEvent.keyboard('{Enter}')
+
+      // Expect "Netherlands" to be selected
+      await waitFor(() => expect(input()).toHaveValue('Netherlands'))
+      expect(input()).toHaveFocus()
+    })
+  },
 }
 
 function AsyncStory() {
@@ -470,6 +607,46 @@ function FocusAndBlurStory() {
 export const FocusAndBlur: Story = {
   parameters: {controls: {include: []}},
   render: () => <FocusAndBlurStory />,
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+    const input = () => doc.getElementById('focus-and-blur') as HTMLInputElement
+    const log = () => doc.getElementById('focus-and-blur-log')
+
+    await step('should trigger focus and blur', async () => {
+      // Click to focus
+      await userEvent.click(input())
+      await waitFor(() => expect(log()).toHaveTextContent('["focus"]'))
+
+      // Click outside to blur
+      await userEvent.click(doc.body)
+      await waitFor(() => expect(log()).toHaveTextContent('["focus","blur"]'))
+
+      // Clear log
+      await userEvent.click(doc.getElementById('focus-and-blur-clear-btn')!)
+
+      // Click to focus
+      await userEvent.click(input())
+
+      // Search for "foo"
+      await userEvent.type(input(), 'foo')
+      await waitFor(() => expect(doc.getElementById('focus-and-blur-listbox')).toBeInTheDocument())
+      await userEvent.keyboard('{ArrowDown}')
+
+      const option = doc.querySelector<HTMLElement>('#focus-and-blur-option-foo > div')!
+
+      await waitFor(() => expect(option).toHaveFocus())
+      await userEvent.click(option)
+
+      // Expect "foo" to be selected, without the input having lost focus in the meantime
+      await waitFor(() => expect(input()).toHaveValue('foo'))
+      expect(input()).toHaveFocus()
+      expect(log()).toHaveTextContent('["focus"]')
+
+      // Click outside to blur
+      await userEvent.click(doc.body)
+      await waitFor(() => expect(log()).toHaveTextContent('["focus","blur"]'))
+    })
+  },
 }
 
 function FullscreenStory() {
