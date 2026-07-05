@@ -74,7 +74,9 @@ export const InputStates: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Grid columns={[1, 1, 4]} gapX={3} gapY={5}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Box columnStart={1} columnEnd={[1, 1, 5]}>
           <Text weight="medium">Without error</Text>
         </Box>
@@ -105,6 +107,7 @@ export const InputStates: Story = {
           <TextArea {...props} defaultValue="Existing value" disabled readOnly />
         </FieldWrapper>
 
+        {/* oxlint-disable-next-line no-deprecated */}
         <Box columnStart={1} columnEnd={[1, 1, 5]}>
           <Text weight="medium">With error</Text>
         </Box>

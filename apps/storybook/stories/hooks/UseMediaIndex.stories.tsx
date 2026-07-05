@@ -13,6 +13,7 @@ function ExampleStory() {
 
   return (
     <Card padding={[3, 4, 5]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={2}>
         <Text weight="medium">The current media index is {mediaIndex}.</Text>
         <Text muted>Try resizing the browser.</Text>

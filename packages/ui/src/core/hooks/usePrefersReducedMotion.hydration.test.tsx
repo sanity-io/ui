@@ -21,6 +21,7 @@ const originalMatchMedia = window.matchMedia
 describe('usePrefersReducedMotion SSR hydration', () => {
   beforeAll(() => {
     window.matchMedia = () =>
+      // oxlint-disable-next-line no-unsafe-type-assertion
       ({
         addEventListener: vi.fn(),
         removeEventListener: vi.fn(),
@@ -49,7 +50,6 @@ describe('usePrefersReducedMotion SSR hydration', () => {
     // After hydration it should switch to true
     await waitFor(() => expect(node.innerHTML).toBe('prefers-motion: <!-- -->true'))
 
-    // eslint-disable-next-line no-console
     expect(console.error).not.toHaveBeenCalled()
 
     spy.mockReset()

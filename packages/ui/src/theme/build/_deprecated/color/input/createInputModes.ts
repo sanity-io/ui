@@ -2,11 +2,16 @@ import {ThemeColorBase, ThemeColorInput, ThemeColorMuted, ThemeColorSolid} from 
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createInputModes(
+  // oxlint-disable-next-line no-deprecated
   opts: ThemeColorBuilderOpts,
+  // oxlint-disable-next-line no-deprecated
   base: ThemeColorBase,
   dark: boolean,
+  // oxlint-disable-next-line no-deprecated
   solid: ThemeColorSolid,
+  // oxlint-disable-next-line no-deprecated
   muted: ThemeColorMuted,
+  // oxlint-disable-next-line no-deprecated
 ): ThemeColorInput {
   return {
     default: {

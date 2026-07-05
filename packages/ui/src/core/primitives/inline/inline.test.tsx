@@ -24,6 +24,7 @@ describe('primitives/inline', () => {
 
   it('should support `space` and `gap` with the same behavior', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Inline space={2}>
         <span>One</span>
         <span>Two</span>
@@ -43,6 +44,7 @@ describe('primitives/inline', () => {
 
   it('should prefer `gap` over `space` when both are provided', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Inline gap={3} space={1}>
         <span>One</span>
         <span>Two</span>

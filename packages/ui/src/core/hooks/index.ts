@@ -1,3 +1,4 @@
+// oxlint-disable-next-line no-deprecated
 export {type ArrayPropPrimitive, useArrayProp} from './useArrayProp'
 export * from './useClickOutside'
 export * from './useClickOutsideEvent'

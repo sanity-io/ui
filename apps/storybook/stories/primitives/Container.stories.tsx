@@ -33,6 +33,7 @@ export const Widths: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={2}>
         <Container {...props} width="auto">
           <Card padding={4} tone="transparent">

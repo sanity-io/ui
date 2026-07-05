@@ -15,6 +15,7 @@ import {useMenu} from './useMenu'
  */
 export interface MenuGroupOwnProps {
   fontSize?: number | number[]
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: React.ElementType | React.ReactNode
   menu?: Omit<
     MenuProps,
@@ -59,6 +60,7 @@ function MenuGroupComponent(
     popover,
     radius = 2,
     gap,
+    // oxlint-disable-next-line no-deprecated
     space: deprecated_space = 3,
     text,
     tone = 'default',
@@ -129,13 +131,13 @@ function MenuGroupComponent(
 
   // Close child menu when a sibling item becomes active
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // oxlint-disable-next-line react-compiler
     if (!active) setOpen(false)
   }, [active])
 
   // Update state when child menu is no longer open
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // oxlint-disable-next-line react-compiler
     if (!open) setWithinMenu(false)
   }, [open])
 
@@ -146,6 +148,7 @@ function MenuGroupComponent(
     // By doing the same here, we ensure that the reset is processed after the focus change.
     const rafId = requestAnimationFrame(() => setShouldFocus(null))
 
+    // oxlint-disable-next-line consistent-return
     return () => cancelAnimationFrame(rafId)
   }, [shouldFocus])
 
@@ -228,6 +231,7 @@ MenuGroupComponent.displayName = 'MenuGroup'
 /**
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const MenuGroup = MenuGroupComponent as unknown as <E extends ElementType = 'button'>(
   props: MenuGroupProps<E>,
 ) => React.JSX.Element

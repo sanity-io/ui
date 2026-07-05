@@ -13,19 +13,31 @@ export function v0_v2(v0: RootTheme): RootTheme_v2 {
   if (cached_v2) return cached_v2
 
   const {
+    // oxlint-disable-next-line no-deprecated
     avatar,
+    // oxlint-disable-next-line no-deprecated
     button,
+    // oxlint-disable-next-line no-deprecated
     color,
+    // oxlint-disable-next-line no-deprecated
     container,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // oxlint-disable-next-line no-deprecated
     focusRing: _unused_focusRing,
+    // oxlint-disable-next-line no-deprecated
     fonts: font,
+    // oxlint-disable-next-line no-deprecated
     input,
+    // oxlint-disable-next-line no-deprecated
     layer,
+    // oxlint-disable-next-line no-deprecated
     media,
+    // oxlint-disable-next-line no-deprecated
     radius,
+    // oxlint-disable-next-line no-deprecated
     shadows: shadow,
+    // oxlint-disable-next-line no-deprecated
     space,
+    // oxlint-disable-next-line no-deprecated
     styles: style,
   } = v0
 

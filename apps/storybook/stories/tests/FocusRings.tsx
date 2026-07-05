@@ -37,6 +37,7 @@ const theme = buildTheme()
 
 const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={3}>
       <Text size={1} weight="semibold">
         {title}
@@ -50,7 +51,9 @@ export function FocusRings(): ReactNode {
   return (
     <ThemeProvider scheme="light" theme={theme}>
       <Card padding={5}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={7}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={6}>
             <Heading>Primitives</Heading>
             <Wrapper title="Avatar (as button)">
@@ -159,6 +162,7 @@ export function FocusRings(): ReactNode {
               </Flex>
             </Wrapper>
           </Stack>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={6}>
             <Heading>Components</Heading>
             <Wrapper title="Autocomplete">
@@ -185,6 +189,7 @@ export function FocusRings(): ReactNode {
               />
             </Wrapper>
             <Wrapper title="TabList">
+              {/* oxlint-disable-next-line no-deprecated */}
               <TabList space={2}>
                 <Tab
                   aria-controls="example-panel-foo"

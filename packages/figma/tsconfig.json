@@ -1,15 +1,9 @@
 {
   "extends": "../../tsconfig.settings.json",
-  "include": ["../ui/exports", "../ui/src", "../ui/typings", "./src"],
+  "include": ["./src", "./tsdown.config.mts", "../ui/typings"],
   "compilerOptions": {
-    "composite": true,
     "rootDir": "..",
     "outDir": "./dist/types",
-    "target": "ES6",
-    "lib": ["ES2020"],
-    "paths": {
-      "@sanity/ui/*": ["../ui/exports/*"],
-      "@sanity/ui": ["../ui/exports"]
-    }
+    "types": ["node"]
   }
 }

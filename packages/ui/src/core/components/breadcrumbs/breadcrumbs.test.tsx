@@ -11,6 +11,7 @@ vi.mock('../../primitives', async (importOriginal) => {
 
   return {
     ...actual,
+    // oxlint-disable-next-line no-unsafe-type-assertion
     Box: vi.fn((props: Record<string, unknown>) => (actual.Box as any).render(props, null)),
   }
 })

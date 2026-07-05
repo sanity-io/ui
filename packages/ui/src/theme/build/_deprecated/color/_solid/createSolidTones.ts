@@ -2,10 +2,14 @@ import {ThemeColorBase, ThemeColorName, ThemeColorSolid} from '../../../../syste
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createSolidTones(
+  // oxlint-disable-next-line no-deprecated
   opts: ThemeColorBuilderOpts,
+  // oxlint-disable-next-line no-deprecated
   base: ThemeColorBase,
   dark: boolean,
+  // oxlint-disable-next-line no-deprecated
   name: ThemeColorName,
+  // oxlint-disable-next-line no-deprecated
 ): ThemeColorSolid {
   return {
     default: {

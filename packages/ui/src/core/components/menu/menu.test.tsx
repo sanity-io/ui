@@ -1,7 +1,5 @@
 /** @vitest-environment jsdom */
 
-/* eslint-disable no-console */
-
 import React, {useCallback, useMemo} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
@@ -24,11 +22,13 @@ describe('components/menu', () => {
 
       function Root() {
         const handleItemMouseEnter = useCallback(
+          // oxlint-disable-next-line no-console
           (event: React.MouseEvent<HTMLElement>) => console.log(event),
           [],
         )
 
         const handleItemMouseLeave = useCallback(
+          // oxlint-disable-next-line no-console
           (event: React.MouseEvent<HTMLElement>) => console.log(event),
           [],
         )
@@ -38,6 +38,7 @@ describe('components/menu', () => {
             ({
               version: 2,
               activeElement: null,
+              // oxlint-disable-next-line no-console
               mount: (element: HTMLElement | null) => () => console.log(element),
               onItemClick: () => undefined,
               onItemMouseEnter: handleItemMouseEnter,
@@ -112,6 +113,7 @@ describe('components/menu', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values
           <MenuContext.Provider value={value}>
             <Debug />
           </MenuContext.Provider>

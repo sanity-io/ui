@@ -144,6 +144,7 @@ export const Popover = forwardRef(function Popover(
     __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
     animate: _animate = false,
     arrow: arrowProp = false,
+    // oxlint-disable-next-line no-deprecated
     boundaryElement: _boundaryElement,
     children: childProp,
     constrainSize = false,
@@ -153,7 +154,7 @@ export const Popover = forwardRef(function Popover(
     matchReferenceWidth,
     floatingBoundary: _floatingBoundary,
     modal,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // oxlint-disable-next-line no-unused-vars
     onActivate,
     open,
     overflow = 'hidden',
@@ -177,8 +178,10 @@ export const Popover = forwardRef(function Popover(
   const fallbackPlacements =
     _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
   const floatingBoundary =
+    // oxlint-disable-next-line no-deprecated
     _floatingBoundary ?? props.boundaryElement ?? boundaryElementContext.element
   const referenceBoundary =
+    // oxlint-disable-next-line no-deprecated
     _referenceBoundary ?? props.boundaryElement ?? boundaryElementContext.element
   const zOffsetProp = _zOffsetProp ?? layer.popover.zOffset
   const prefersReducedMotion = usePrefersReducedMotion()

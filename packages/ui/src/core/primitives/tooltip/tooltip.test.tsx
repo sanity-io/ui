@@ -2,7 +2,9 @@
 
 import {act, fireEvent, screen} from '@testing-library/react'
 
+// oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
+// oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
@@ -64,9 +66,11 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(button)
 
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay / 2))
       // Content should not be rendered yet
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay / 2))
 
       // Validate tooltip content is rendered
@@ -75,6 +79,7 @@ describe('Tooltip', () => {
       fireEvent.mouseOut(button)
       // Validate tooltip content is still showing.
       screen.getByText('Tooltip content')
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay))
       // Validate tooltip content is not rendered anymore
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
@@ -104,9 +109,11 @@ describe('Tooltip', () => {
 
       fireEvent.mouseEnter(button)
 
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(openDelay / 2))
       // Content should not be rendered yet
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(openDelay / 2))
 
       // Validate tooltip content is rendered
@@ -115,6 +122,7 @@ describe('Tooltip', () => {
       fireEvent.mouseOut(button)
       // Validate tooltip content is still showing.
       screen.getByText('Tooltip content')
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(closeDelay))
       // Validate tooltip content is not rendered anymore
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
@@ -150,10 +158,12 @@ describe('Tooltip', () => {
 
       // Hovers on first button, it should show first tooltip only
       fireEvent.mouseEnter(button1)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay / 2))
       // Content should not be rendered yet, we have a delay of 150ms
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay / 2))
 
       // Validate Tooltip 1 is rendered
@@ -165,30 +175,37 @@ describe('Tooltip', () => {
       fireEvent.mouseEnter(button2)
 
       // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(1))
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovering again, should trigger the tooltip to show immediately, as the group is not deactivated yet
       fireEvent.mouseEnter(button2)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(1))
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Wait 200ms, the group is deactivated, hovering again should trigger the delay
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(200))
       fireEvent.mouseEnter(button2)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay / 2))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay / 2))
       screen.getByText('Tooltip 2')
     })
@@ -226,10 +243,12 @@ describe('Tooltip', () => {
 
       // Hovers on first button, it should show first tooltip only
       fireEvent.mouseEnter(button1)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(openDelay / 2))
       // Content should not be rendered yet, we have a delay of2150ms
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(openDelay / 2))
 
       // Validate Tooltip 1 is rendered
@@ -241,30 +260,37 @@ describe('Tooltip', () => {
       fireEvent.mouseEnter(button2)
 
       // Validate Tooltip 1 is not rendered, now tooltip 2 is open.
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(1))
       expect(screen.queryByText('Tooltip 1')).not.toBeInTheDocument()
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(closeDelay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Hovering again, should trigger the tooltip to show immediately, as the group is not deactivated yet
       fireEvent.mouseEnter(button2)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(1))
       screen.getByText('Tooltip 2')
 
       // Validate tooltip content is not rendered anymore
       fireEvent.mouseOut(button2)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(closeDelay + 1))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
 
       // Wait 200ms, the group is deactivated, hovering again should trigger the delay
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(200))
       fireEvent.mouseEnter(button2)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(openDelay / 2))
       expect(screen.queryByText('Tooltip 2')).not.toBeInTheDocument()
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(openDelay / 2))
       screen.getByText('Tooltip 2')
     })
@@ -291,6 +317,7 @@ describe('Tooltip', () => {
       // Validate tooltip content is not rendered
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       fireEvent.focus(button)
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay))
 
       // Validate tooltip content is rendered
@@ -325,6 +352,7 @@ describe('Tooltip', () => {
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       fireEvent.focus(button)
 
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay))
 
       // Validate tooltip content is rendered
@@ -354,11 +382,13 @@ describe('Tooltip', () => {
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       fireEvent.focus(button)
 
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay))
 
       // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
 
+      // oxlint-disable-next-line no-floating-promises
       act(() => fireEvent.click(button))
 
       // Assertion: tooltip does not exist in the document
@@ -380,11 +410,13 @@ describe('Tooltip', () => {
       expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
       fireEvent.focus(button)
 
+      // oxlint-disable-next-line no-floating-promises
       act(() => vi.advanceTimersByTime(delay))
 
       // Assertion: the tooltip is not visible
       expect(screen.queryByText('Tooltip content')).toBeVisible()
 
+      // oxlint-disable-next-line no-floating-promises
       act(() => fireEvent.contextMenu(button))
 
       // Assertion: tooltip does not exist in the document

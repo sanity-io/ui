@@ -64,6 +64,7 @@ export const WithDelay: Story = {
                 marginRight={3}
                 delay={1000}
               />
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={2} flex={1}>
                 <HeadingSkeleton
                   {...props}
@@ -95,16 +96,19 @@ export const CardSkeleton: Story = {
     return (
       <Box padding={[4, 5, 6]}>
         <Container width={1}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={4}>
             {[1, 2, 3].map((item) => (
               <Card key={item} padding={2} radius={2} border>
                 <Flex align="center">
+                  {/* oxlint-disable-next-line no-deprecated */}
                   <Grid gap={2} columns={2} marginRight={3}>
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                     <Skeleton style={{width: 40, height: 40}} radius={2} {...props} />
                   </Grid>
+                  {/* oxlint-disable-next-line no-deprecated */}
                   <Stack space={2} flex={1}>
                     <HeadingSkeleton style={{width: '100%'}} radius={1} {...props} />
                     <TextSkeleton style={{width: '100%'}} radius={1} {...props} />

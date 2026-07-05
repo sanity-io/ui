@@ -11,9 +11,9 @@
     "sourceMap": true,
     "rootDir": ".",
     "outDir": "./dist",
-    "paths": {
-      "@sanity/ui/theme": ["./exports/theme.ts"],
-      "@sanity/ui": ["./exports"]
-    }
+    "types": ["node"],
+    // The shared settings use "preserve" (for Storybook), but the tsdown
+    // build must compile JSX for the published output
+    "jsx": "react-jsx"
   }
 }

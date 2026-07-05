@@ -105,6 +105,7 @@ const tones = {
   },
 }
 
+// oxlint-disable-next-line no-deprecated
 export const defaultOpts: ThemeColorBuilderOpts = {
   base: ({dark, name}) => {
     if (name === 'default') {

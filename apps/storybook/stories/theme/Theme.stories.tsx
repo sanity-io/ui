@@ -74,6 +74,7 @@ function LayerStory() {
         {dialogOpen && (
           <Dialog header="Dialog" id="dialog" onClickOutside={closeDialog} onClose={closeDialog}>
             <Box padding={4}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={[4, 5, 6]}>
                 <Popover
                   content={
@@ -105,6 +106,7 @@ function LayerStory() {
           </Dialog>
         )}
 
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={[4, 5, 6]}>
           <Popover
             content={
@@ -146,13 +148,16 @@ export const Layer: Story = {
 function ColorStory() {
   const {theme} = useRootTheme()
 
+  // oxlint-disable-next-line no-deprecated
   if (!theme.color) {
     return null
   }
 
   return (
     <Box padding={[4, 5, 6]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Tree space={1}>
+        {/* oxlint-disable-next-line no-deprecated */}
         {Object.entries(theme.color).map(([key, value]) => (
           <ColorGroup key={key} name={key} value={value} />
         ))}
@@ -168,6 +173,7 @@ function ColorGroup({name, value}: {name: string; value: Record<string, unknown>
     <TreeItem fontSize={1} padding={2} text={name}>
       {entries.map(([key, value]) => {
         if (value && typeof value === 'object') {
+          // oxlint-disable-next-line no-unsafe-type-assertion
           return <ColorGroup key={key} name={key} value={value as Record<string, unknown>} />
         }
 

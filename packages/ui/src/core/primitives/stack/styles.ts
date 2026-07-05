@@ -27,6 +27,7 @@ export function responsiveStackSpaceStyle(
   const {media, space} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$space, (spaceIndex) => ({
+    // oxlint-disable-next-line no-deprecated
     gridGap: rem(space[spaceIndex]),
   }))
 }

@@ -8,11 +8,16 @@ import {
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createSelectableTones(
+  // oxlint-disable-next-line no-deprecated
   opts: ThemeColorBuilderOpts,
+  // oxlint-disable-next-line no-deprecated
   base: ThemeColorBase,
   dark: boolean,
+  // oxlint-disable-next-line no-deprecated
   solid: ThemeColorSolid,
+  // oxlint-disable-next-line no-deprecated
   muted: ThemeColorMuted,
+  // oxlint-disable-next-line no-deprecated
 ): ThemeColorSelectable {
   return {
     default: _createSelectableStates(opts, base, dark, solid, muted, 'default'),
@@ -24,12 +29,17 @@ export function createSelectableTones(
 }
 
 function _createSelectableStates(
+  // oxlint-disable-next-line no-deprecated
   opts: ThemeColorBuilderOpts,
+  // oxlint-disable-next-line no-deprecated
   base: ThemeColorBase,
   dark: boolean,
+  // oxlint-disable-next-line no-deprecated
   solid: ThemeColorSolid,
+  // oxlint-disable-next-line no-deprecated
   muted: ThemeColorMuted,
   tone: 'default' | 'primary' | 'positive' | 'caution' | 'critical',
+  // oxlint-disable-next-line no-deprecated
 ): ThemeColorSelectableStates {
   return {
     enabled: opts.selectable({

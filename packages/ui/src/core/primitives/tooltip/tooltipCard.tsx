@@ -78,6 +78,7 @@ export const TooltipCard = forwardRef(function TooltipCard(
   return (
     <MotionCard
       data-ui="Tooltip__card"
+      // oxlint-disable-next-line no-unsafe-type-assertion
       {...(restProps as CardProps & MotionProps)}
       data-placement={placement}
       padding={padding}

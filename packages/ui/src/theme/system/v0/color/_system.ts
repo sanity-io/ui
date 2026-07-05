@@ -14,4 +14,5 @@ export type ThemeColorName =
  * @public
  * @deprecated Use `ThemeColorCardToneKey` instead.
  */
+// oxlint-disable-next-line no-deprecated
 export type ThemeColorToneKey = ThemeColorName

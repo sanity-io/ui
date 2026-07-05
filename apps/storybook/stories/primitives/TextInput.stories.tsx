@@ -74,12 +74,15 @@ export const Radius: Story = {
 
 export const WithClearButton: Story = {
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [value, setValue] = useState('')
 
+    // oxlint-disable-next-line rules-of-hooks
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
       setValue(event.currentTarget.value)
     }, [])
 
+    // oxlint-disable-next-line rules-of-hooks
     const handleClear = useCallback(() => {
       setValue('')
     }, [])
@@ -110,7 +113,9 @@ export const InputStates: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Grid columns={[1, 1, 4]} gapX={3} gapY={5}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Box columnStart={1} columnEnd={[1, 1, 5]}>
           <Text weight="medium">Without error</Text>
         </Box>
@@ -141,6 +146,7 @@ export const InputStates: Story = {
           <TextInput {...props} defaultValue="Existing value" disabled readOnly />
         </FieldWrapper>
 
+        {/* oxlint-disable-next-line no-deprecated */}
         <Box columnStart={1} columnEnd={[1, 1, 5]}>
           <Text weight="medium">With error</Text>
         </Box>
@@ -205,6 +211,7 @@ export const Typed: Story = {
 function TonesColumn({scheme}: {scheme: 'light' | 'dark'}) {
   return (
     <Card flex={1} scheme={scheme}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack padding={[3, 4, 5]} space={4}>
         <Card padding={3}>
           <TextInput

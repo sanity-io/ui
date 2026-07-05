@@ -8,12 +8,17 @@ import {
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createButtonTones(
+  // oxlint-disable-next-line no-deprecated
   opts: ThemeColorBuilderOpts,
+  // oxlint-disable-next-line no-deprecated
   base: ThemeColorBase,
   dark: boolean,
+  // oxlint-disable-next-line no-deprecated
   solid: ThemeColorSolid,
+  // oxlint-disable-next-line no-deprecated
   muted: ThemeColorMuted,
   mode: ThemeColorButtonModeKey,
+  // oxlint-disable-next-line no-deprecated
 ): ThemeColorButtonTones {
   return {
     default: opts.button({

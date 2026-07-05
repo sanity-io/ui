@@ -53,6 +53,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   customValidity?: string
   filterOption?: (query: string, option: Option) => boolean
   fontSize?: number | number[]
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: ElementType | ReactNode
   id: string
   /** @beta */
@@ -263,6 +264,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
           }
         }
 
+        // oxlint-disable-next-line no-unnecessary-boolean-literal-compare
         if (focusInside === false) {
           dispatch({type: 'root/blur'})
           popoverMouseWithinRef.current = false
@@ -352,6 +354,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         return
       }
 
+      // oxlint-disable-next-line no-unsafe-type-assertion
       const target = event.target as Node
       const listEl = listBoxElementRef.current
 
@@ -456,6 +459,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
     if (activeOption) {
       const activeIndex = filteredOptions.indexOf(activeOption)
+      // oxlint-disable-next-line no-unsafe-type-assertion
       const activeItemElement = listElement.childNodes[activeIndex] as HTMLLIElement | undefined
 
       if (activeItemElement) {
@@ -572,7 +576,9 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
           data-ui="AutoComplete__resultsList"
           id={listBoxId}
           ref={listBoxElementRef}
+          // oxlint-disable-next-line prefer-tag-over-role
           role="listbox"
+          // oxlint-disable-next-line no-deprecated
           space={1}
         >
           {filteredOptions.map((option) => {
@@ -696,6 +702,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         radius={radius}
         readOnly={readOnly}
         ref={setInputElement}
+        // oxlint-disable-next-line prefer-tag-over-role, role-has-required-aria-props
         role="combobox"
         spellCheck={false}
         suffix={suffix || openButtonNode}
@@ -738,6 +745,7 @@ InnerAutocomplete.displayName = 'ForwardRef(Autocomplete)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
     Omit<

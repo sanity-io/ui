@@ -34,6 +34,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
   ref: React.ForwardedRef<HTMLOListElement>,
 ) {
+  // oxlint-disable-next-line no-deprecated
   const {children, gap, maxLength, separator, space: deprecated_space = 2, ...restProps} = props
   const space = _getArrayProp(gap === undefined ? deprecated_space : gap)
   const [open, setOpen] = useState(false)
@@ -61,6 +62,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   return (
     <StyledBreadcrumbs data-ui="Breadcrumbs" {...restProps} ref={ref}>
       {items.map((item, itemIndex) => (
+        // oxlint-disable-next-line no-array-index-key
         <Fragment key={itemIndex}>
           {itemIndex > 0 && (
             <Box aria-hidden as="li" paddingX={space}>
@@ -91,6 +93,7 @@ function useItems({
   maxLength: number | undefined
   open: boolean
   popoverElementRef: React.RefObject<HTMLDivElement | null>
+  // oxlint-disable-next-line no-unnecessary-type-arguments
   rawItems: React.ReactElement<unknown, string | React.JSXElementConstructor<any>>[]
   space: number[]
 }) {

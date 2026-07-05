@@ -1,5 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
-
 import {Card, ThemeProvider} from '@sanity/ui'
 import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {

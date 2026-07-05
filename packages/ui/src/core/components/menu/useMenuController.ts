@@ -23,6 +23,7 @@ export function useMenuController(props: {
   onKeyDown?: React.KeyboardEventHandler
   originElement?: HTMLElement | null
   shouldFocus: 'first' | 'last' | null
+  // oxlint-disable-next-line no-deprecated
   rootElementRef: React.MutableRefObject<HTMLDivElement | null>
 }): MenuController {
   const {onKeyDown, originElement, shouldFocus, rootElementRef} = props
@@ -217,6 +218,7 @@ export function useMenuController(props: {
       element?.focus()
     })
 
+    // oxlint-disable-next-line consistent-return
     return () => cancelAnimationFrame(rafId)
   }, [activeIndex, rootElementRef, setActiveIndex, shouldFocus])
 

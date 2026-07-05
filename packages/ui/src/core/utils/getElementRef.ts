@@ -6,21 +6,26 @@
 // Access the ref using the method that doesn't yield a warning.
 export function getElementRef(element: React.ReactElement) {
   // React <=18 in DEV
+  // oxlint-disable-next-line unbound-method
   let getter = Object.getOwnPropertyDescriptor(element.props, 'ref')?.get
   let mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning
 
   if (mayWarn) {
+    // oxlint-disable-next-line no-unsafe-type-assertion
     return (element as any).ref
   }
 
   // React 19 in DEV
+  // oxlint-disable-next-line unbound-method
   getter = Object.getOwnPropertyDescriptor(element, 'ref')?.get
   mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning
 
   if (mayWarn) {
+    // oxlint-disable-next-line no-unsafe-type-assertion
     return (element.props as {ref?: React.Ref<unknown>}).ref
   }
 
   // Not DEV
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return (element.props as {ref?: React.Ref<unknown>}).ref || (element as any).ref
 }

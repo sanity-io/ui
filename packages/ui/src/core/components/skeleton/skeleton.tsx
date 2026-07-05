@@ -28,6 +28,7 @@ export const Skeleton = forwardRef(function Skeleton(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {animated = false, delay, radius, ...restProps} = props
+  // oxlint-disable-next-line no-unneeded-ternary
   const [visible, setVisible] = useState<boolean>(delay ? false : true)
 
   useEffect(() => {

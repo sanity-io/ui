@@ -45,6 +45,7 @@ export function parseTokenValue(str: string): TokenValueNode | undefined {
   }
 
   if (isColorValue(segment0)) {
+    // oxlint-disable-next-line no-unnecessary-type-assertion
     const key = segment0 as 'black' | 'white'
     const segment1 = segments.shift() || ''
 

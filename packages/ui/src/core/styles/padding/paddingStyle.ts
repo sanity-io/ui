@@ -9,6 +9,7 @@ export function responsivePaddingStyle(
 ): CSSObject[][] {
   const {theme} = props
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return [
     _getResponsiveSpace(theme, ['padding'], props.$padding),
     _getResponsiveSpace(theme, ['paddingLeft', 'paddingRight'], props.$paddingX),

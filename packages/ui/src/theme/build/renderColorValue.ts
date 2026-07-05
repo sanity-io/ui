@@ -62,13 +62,11 @@ export function renderColorValue(str: string, options: RenderColorValueOptions):
       hex = rgbToHex(mix(from, to, node.mix))
     }
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.warn('could not blend', hex, mixOptions)
     throw err
   }
 
   if (hex === '#aN') {
-    // eslint-disable-next-line no-console
     console.warn(`invalid color token value: ${str}`)
     hex = hexBeforeMix
   }

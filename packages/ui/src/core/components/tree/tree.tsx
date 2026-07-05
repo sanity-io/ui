@@ -34,6 +34,7 @@ export const Tree = forwardRef(function Tree(
     Omit<React.HTMLProps<HTMLUListElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
   forwardedRef: React.ForwardedRef<HTMLUListElement>,
 ): React.JSX.Element {
+  // oxlint-disable-next-line no-deprecated
   const {children, gap, space: deprecated_space = 1, onFocus, ...restProps} = props
   const spacing = gap === undefined ? deprecated_space : gap
   const ref = useRef<HTMLUListElement | null>(null)
@@ -222,6 +223,7 @@ export const Tree = forwardRef(function Tree(
 
   return (
     <TreeContext.Provider value={contextValue}>
+      {/* oxlint-disable-next-line interactive-supports-focus */}
       <Stack
         as="ul"
         data-ui="Tree"

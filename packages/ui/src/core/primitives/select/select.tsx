@@ -53,6 +53,7 @@ export const Select = forwardRef(function Select(
     padding = 3,
     radius = 2,
     readOnly,
+    // oxlint-disable-next-line no-deprecated
     space: deprecated_space = 3,
     ...restProps
   } = props

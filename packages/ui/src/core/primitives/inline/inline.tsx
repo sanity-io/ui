@@ -31,6 +31,7 @@ const InlineComponent = forwardRef(function Inline(
   props: InlineOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,
   ref,
 ) {
+  // oxlint-disable-next-line no-deprecated
   const {as, children: childrenProp, gap, space: deprecated_space, ...restProps} = props
   const spacing = gap === undefined ? deprecated_space : gap
 
@@ -45,6 +46,7 @@ const InlineComponent = forwardRef(function Inline(
       {...restProps}
       $space={_getArrayProp(spacing)}
       forwardedAs={as}
+      // oxlint-disable-next-line no-unnecessary-type-assertion, no-unsafe-type-assertion
       ref={ref as any}
     >
       {children}
@@ -58,6 +60,7 @@ InlineComponent.displayName = 'ForwardRef(Inline)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Inline = InlineComponent as unknown as <E extends ElementType = 'div'>(
   props: InlineProps<E>,
 ) => React.JSX.Element

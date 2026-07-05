@@ -18,8 +18,10 @@ export function useLayer(): LayerContextValue {
     return getLayerContext(value)
   } catch (err) {
     if (err instanceof Error) {
+      // oxlint-disable-next-line preserve-caught-error
       throw new Error(`useLayer(): ${err.message}`)
     } else {
+      // oxlint-disable-next-line preserve-caught-error, restrict-template-expressions
       throw new Error(`useLayer(): ${err}`)
     }
   }

@@ -21,6 +21,7 @@ figma.showUI(__html__)
 // Calls to "parent.postMessage" from within the HTML page will trigger this
 // callback. The callback will be passed the "pluginMessage" property of the
 // posted message.
+// oxlint-disable-next-line prefer-add-event-listener
 figma.ui.onmessage = (msg) => {
   if (msg.type === 'styles:write') {
     commands.styles.write()

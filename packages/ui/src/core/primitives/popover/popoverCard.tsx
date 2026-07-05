@@ -123,6 +123,7 @@ export const PopoverCard = forwardRef(function PopoverCard(
   return (
     <MotionCard
       data-ui="Popover"
+      // oxlint-disable-next-line no-unsafe-type-assertion
       {...(restProps as CardProps & MotionProps)}
       data-placement={placement}
       radius={radius}

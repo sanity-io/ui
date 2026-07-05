@@ -7,11 +7,13 @@ export default function LazyRefractor(
 ) {
   const {language: languageProp, value} = props
   const language = typeof languageProp === 'string' ? languageProp : undefined
+  // oxlint-disable-next-line no-unnecessary-type-assertion, no-unsafe-type-assertion
   const registered = language ? hasLanguage(language as any) : false
 
   return (
     <>
       {!(language && registered) && <code>{value}</code>}
+      {/* oxlint-disable-next-line no-base-to-string */}
       {language && registered && <Refractor inline language={language} value={String(value)} />}
     </>
   )

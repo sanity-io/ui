@@ -82,6 +82,7 @@ LabelComponent.displayName = 'ForwardRef(Label)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Label = LabelComponent as unknown as <E extends ElementType = 'div'>(
   props: LabelProps<E>,
 ) => React.JSX.Element

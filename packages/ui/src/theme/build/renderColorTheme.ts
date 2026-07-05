@@ -35,6 +35,7 @@ export function renderThemeColorSchemes(
   const colorPalette = config?.palette ?? defaultColorPalette
 
   // Lazy schemes — each scheme is only rendered when first accessed
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const schemes = {} as ThemeColorSchemes_v2
   defineLazyProperty(schemes, 'light', () => renderThemeColorScheme(colorPalette, value.light))
   defineLazyProperty(schemes, 'dark', () => renderThemeColorScheme(colorPalette, value.dark))
@@ -59,6 +60,7 @@ function renderThemeColorScheme(
   // a `bg` option; the rest blend on top of `default`'s `bg`.
   // We iterate THEME_COLOR_CARD_TONES (not Object.entries) to avoid
   // force-evaluating lazy getters from the build phase.
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const scheme = {default: renderedDefaultTone} as ThemeColorScheme_v2
 
   for (const tone of THEME_COLOR_CARD_TONES) {
@@ -190,6 +192,7 @@ function renderThemeColorAvatar(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorAvatar_v2 {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorAvatar = {} as ThemeColorAvatar_v2
 
   for (const hue of COLOR_HUES) {
@@ -239,6 +242,7 @@ function renderThemeColorBadge(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorBadge_v2 {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorBadge = {} as ThemeColorBadge_v2
 
   for (const tone of THEME_COLOR_STATE_TONES) {
@@ -305,6 +309,7 @@ function renderThemeColorButtonTones(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorButtonMode_v2 {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorButtonMode = {} as ThemeColorButtonMode_v2
 
   for (const tone of THEME_COLOR_STATE_TONES) {
@@ -454,6 +459,7 @@ function renderThemeColorSelectable(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorSelectable_v2 {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorSelectable = {} as ThemeColorSelectable_v2
 
   for (const tone of THEME_COLOR_STATE_TONES) {

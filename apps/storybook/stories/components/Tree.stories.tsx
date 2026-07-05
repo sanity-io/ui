@@ -95,6 +95,7 @@ function TabFromElementStory() {
         <Text>Focus: {focus}</Text>
       </Box>
       <TextInput />
+      {/* oxlint-disable-next-line no-deprecated */}
       <Tree space={1} onFocus={handleFocus}>
         <TreeItem data-testid="fruit" onClick={handleClick} expanded text="Fruit">
           <TreeItem

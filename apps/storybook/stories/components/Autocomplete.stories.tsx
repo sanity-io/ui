@@ -123,7 +123,9 @@ function CustomStory() {
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
       <Container width={0}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={5}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text as="label" htmlFor="custom" id="custom-label" size={1} weight="medium">
               Country
@@ -163,6 +165,7 @@ export const Custom: Story = {
   render: () => <CustomStory />,
   play: async ({canvasElement, step}) => {
     const doc = canvasElement.ownerDocument
+    // oxlint-disable-next-line no-unsafe-type-assertion
     const input = () => doc.getElementById('custom') as HTMLInputElement
     const listbox = () => doc.getElementById('custom-listbox')
     const option = (value: string) => doc.querySelector(`[data-qa="option-${value}"]`)
@@ -188,6 +191,7 @@ export const Custom: Story = {
       // Escape to close listbox and clear input
       await userEvent.keyboard('{Escape}')
       await waitFor(() => expect(input()).toHaveAttribute('aria-expanded', 'false'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveValue('')
     })
 
@@ -219,6 +223,7 @@ export const Custom: Story = {
 
       // The input should be empty and focused
       await waitFor(() => expect(input()).toHaveValue(''))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
     })
 
@@ -232,6 +237,7 @@ export const Custom: Story = {
 
       // The input is expanded and focused
       await waitFor(() => expect(input()).toHaveAttribute('aria-expanded', 'true'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
 
       // Focus the next focusable element
@@ -259,6 +265,7 @@ export const Custom: Story = {
       await userEvent.keyboard('{Enter}')
 
       await waitFor(() => expect(input()).toHaveValue('Norway'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
 
       // Click to focus
@@ -294,6 +301,7 @@ export const Custom: Story = {
 
       // Expect "Netherlands" to be selected
       await waitFor(() => expect(input()).toHaveValue('Netherlands'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
     })
   },
@@ -355,6 +363,7 @@ function AsyncStory() {
         setLoadingCurrentRef,
       )
     } else {
+      // oxlint-disable-next-line react-compiler
       setOptionTitle(null)
       setLoadingCurrentRef(false)
     }
@@ -366,6 +375,7 @@ function AsyncStory() {
 
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={[3, 3, 4]}>
         <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="medium">
           Country
@@ -459,6 +469,7 @@ function ConstrainedHeightStory() {
           style={{position: 'relative'}}
         >
           <Box height="fill" overflow="auto" padding={[4, 4, 5]} sizing="border">
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={5}>
               <BoundaryElementProvider element={boundaryElement}>
                 <ConstrainedHeightExampleField id="example-1" label="Example 1" />
@@ -542,6 +553,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
   )
 
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={3}>
       <Text size={1} weight="medium">
         {label}
@@ -579,6 +591,7 @@ function FocusAndBlurStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={3}>
         <Autocomplete
           id="focus-and-blur"
@@ -590,6 +603,7 @@ function FocusAndBlurStory() {
           placeholder="Search"
           value={value}
         />
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Card overflow="auto" padding={3} radius={2} tone="transparent">
             <Code id="focus-and-blur-log" language="json" size={1}>
@@ -609,6 +623,7 @@ export const FocusAndBlur: Story = {
   render: () => <FocusAndBlurStory />,
   play: async ({canvasElement, step}) => {
     const doc = canvasElement.ownerDocument
+    // oxlint-disable-next-line no-unsafe-type-assertion
     const input = () => doc.getElementById('focus-and-blur') as HTMLInputElement
     const log = () => doc.getElementById('focus-and-blur-log')
 
@@ -639,7 +654,9 @@ export const FocusAndBlur: Story = {
 
       // Expect "foo" to be selected, without the input having lost focus in the meantime
       await waitFor(() => expect(input()).toHaveValue('foo'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
+      // oxlint-disable-next-line no-floating-promises
       expect(log()).toHaveTextContent('["focus"]')
 
       // Click outside to blur
@@ -667,6 +684,7 @@ function FullscreenStory() {
   const [value, setValue] = useState<string>('')
 
   const relatedElements = useMemo(
+    // oxlint-disable-next-line no-unsafe-type-assertion
     () => [closeSearchButtonElement].filter(Boolean) as HTMLElement[],
     [closeSearchButtonElement],
   )
@@ -774,6 +792,7 @@ function FullscreenStory() {
         setLoadingCurrentRef,
       )
     } else {
+      // oxlint-disable-next-line react-compiler
       setOptionTitle(null)
       setLoadingCurrentRef(false)
     }
@@ -869,6 +888,7 @@ function FullscreenAsyncOption(props: {
       <Flex align="center">
         <Skeleton radius={2} style={{width: 35, height: 35}} />
         <Box flex={1} marginLeft={3}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={2}>
             {loading && (
               <>

@@ -57,6 +57,7 @@ FlexComponent.displayName = 'ForwardRef(Flex)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Flex = FlexComponent as unknown as <E extends ElementType = 'div'>(
   props: FlexProps<E>,
 ) => React.JSX.Element

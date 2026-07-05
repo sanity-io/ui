@@ -27,6 +27,7 @@ describe('primitives/select spacing', () => {
 
   it('should support `space` and `gap` with the same behavior', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Select space={2}>
         <option>Option A</option>
       </Select>,
@@ -44,6 +45,7 @@ describe('primitives/select spacing', () => {
 
   it('should prefer `gap` over `space` when both are provided', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Select gap={3} space={1}>
         <option>Option A</option>
       </Select>,

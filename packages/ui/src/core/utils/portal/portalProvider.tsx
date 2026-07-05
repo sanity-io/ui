@@ -23,6 +23,7 @@ export interface PortalProviderProps {
  * @public
  */
 export function PortalProvider(props: PortalProviderProps): React.JSX.Element {
+  // oxlint-disable-next-line no-deprecated
   const {boundaryElement, children, element, __unstable_elements: elements} = props
   const fallbackElement = useSyncExternalStore(
     emptySubscribe,

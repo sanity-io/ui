@@ -139,6 +139,7 @@ export const WithSelectedItem: Story = {
     const menu = within(document.documentElement).queryByTestId('menu')
 
     // Assertion: <Menu> with a selected item should not be visible when clicking the original <MenuButton> to close
+    // oxlint-disable-next-line no-floating-promises
     expect(menu).toBeNull()
   },
 }
@@ -157,6 +158,7 @@ export const PopoverModal: Story = {
   },
   render: (props) => {
     return (
+      // oxlint-disable-next-line no-deprecated
       <Stack space={4}>
         <Flex gap={4} wrap="wrap">
           <MenuButton {...props} button={<Button text="Default " />} />
@@ -218,6 +220,7 @@ export const KeyboardNavigation: Story = {
   render: () => (
     <Card height="fill">
       <Box padding={[4, 5, 6]}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={3} gap={2}>
           <Button id="prev-button" mode="ghost" text="Prev" />
           <LayerProvider>
@@ -330,6 +333,7 @@ function SelectedItemFocusStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={4}>
         <Code>selectedIndex={selectedIndex}</Code>
 
@@ -413,7 +417,9 @@ function ClosableStory() {
           button={<Button text="Open" />}
           id="closable-example"
           menu={
+            // oxlint-disable-next-line no-deprecated
             <Menu padding={0} space={0}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack padding={1} space={1}>
                 <MenuItem text="Item 1" />
                 <MenuItem text="Item 2" />
@@ -510,6 +516,7 @@ function ConstrainedInBoundaryStory() {
                     menu={
                       <Menu>
                         {CONSTRAINED_ITEMS.map((item, itemIndex) => (
+                          // oxlint-disable-next-line no-array-index-key
                           <MenuItem key={itemIndex} padding={5} tone={item.tone}>
                             <Text>{item.message}</Text>
                           </MenuItem>
@@ -568,13 +575,16 @@ function WithOnCloseStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={2}>
         <MenuButton
           button={<Button text="With onClose callback" />}
           id="closable-example"
           onClose={handleClose}
           menu={
+            // oxlint-disable-next-line no-deprecated
             <Menu padding={0} space={0}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack padding={1} space={1}>
                 <MenuItem text="Item 1" />
                 <MenuItem text="Item 2" />

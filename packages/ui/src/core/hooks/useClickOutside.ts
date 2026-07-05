@@ -26,6 +26,7 @@ function _getElements(
     }
   }
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return ret.filter(Boolean) as HTMLElement[]
 }
 
@@ -58,7 +59,6 @@ export function useClickOutside(
     const nextElements = _getElements(element, elementsArg)
 
     if (prevElements.length !== nextElements.length) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setElements(nextElements)
       elementsRef.current = nextElements
 

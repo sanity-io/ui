@@ -24,11 +24,6 @@ export default defineConfig({
       {
         // Browser tests that need direct control over the viewport
         plugins: [viteReact()],
-        resolve: {
-          alias: {
-            '@sanity/ui': path.resolve(import.meta.dirname, '../../packages/ui/exports'),
-          },
-        },
         test: {
           name: 'tests',
           include: ['tests/**/*.test.{ts,tsx}'],

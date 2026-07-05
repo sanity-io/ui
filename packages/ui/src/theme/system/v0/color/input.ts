@@ -18,9 +18,13 @@ export interface ThemeColorInputState {
  * @deprecated Use `ThemeColorInputMode_v2` instead.
  */
 export interface ThemeColorInputStates {
+  // oxlint-disable-next-line no-deprecated
   enabled: ThemeColorInputState
+  // oxlint-disable-next-line no-deprecated
   disabled: ThemeColorInputState
+  // oxlint-disable-next-line no-deprecated
   hovered: ThemeColorInputState
+  // oxlint-disable-next-line no-deprecated
   readOnly: ThemeColorInputState
 }
 
@@ -29,6 +33,8 @@ export interface ThemeColorInputStates {
  * @deprecated Use `ThemeColorInput_v2` instead.
  */
 export interface ThemeColorInput {
+  // oxlint-disable-next-line no-deprecated
   default: ThemeColorInputStates
+  // oxlint-disable-next-line no-deprecated
   invalid: ThemeColorInputStates
 }

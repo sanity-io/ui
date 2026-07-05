@@ -44,6 +44,7 @@ export const Hotkeys = forwardRef(function Hotkeys(
   props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
   ref: React.Ref<HTMLElement>,
 ) {
+  // oxlint-disable-next-line no-deprecated
   const {fontSize, gap, keys, padding, radius, space: deprecated_space = 0.5, ...restProps} = props
   const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
 
@@ -55,6 +56,7 @@ export const Hotkeys = forwardRef(function Hotkeys(
     <StyledHotkeys data-ui="Hotkeys" {...restProps} ref={ref}>
       <Inline as="span" gap={spacing}>
         {keys.map((key, i) => (
+          // oxlint-disable-next-line no-array-index-key
           <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
             {key}
           </Key>

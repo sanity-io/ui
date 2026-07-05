@@ -30,53 +30,81 @@ import {createSpot} from './spot/createSpot'
  * @deprecated Use `buildColorTheme` instead.
  */
 export interface ThemeColorBuilderOpts {
+  // oxlint-disable-next-line no-deprecated
   base: (opts: {dark: boolean; name: ThemeColorName}) => ThemeColorBase
   solid: (opts: {
+    // oxlint-disable-next-line no-deprecated
     base: ThemeColorBase
     dark: boolean
+    // oxlint-disable-next-line no-deprecated
     tone: ThemeColorName
+    // oxlint-disable-next-line no-deprecated
     name: ThemeColorName
     state: 'enabled' | 'disabled' | 'hovered' | 'pressed' | 'selected'
+    // oxlint-disable-next-line no-deprecated
   }) => ThemeColorGenericState
   muted: (opts: {
+    // oxlint-disable-next-line no-deprecated
     base: ThemeColorBase
     dark: boolean
+    // oxlint-disable-next-line no-deprecated
     tone: ThemeColorToneKey
+    // oxlint-disable-next-line no-deprecated
     name: ThemeColorName
     state: 'enabled' | 'disabled' | 'hovered' | 'pressed' | 'selected'
+    // oxlint-disable-next-line no-deprecated
   }) => ThemeColorGenericState
   card: (opts: {
+    // oxlint-disable-next-line no-deprecated
     base: ThemeColorBase
     dark: boolean
+    // oxlint-disable-next-line no-deprecated
     muted: ThemeColorMuted
+    // oxlint-disable-next-line no-deprecated
     name: ThemeColorName
+    // oxlint-disable-next-line no-deprecated
     solid: ThemeColorSolid
     state: 'enabled' | 'disabled' | 'hovered' | 'pressed' | 'selected'
+    // oxlint-disable-next-line no-deprecated
   }) => ThemeColorGenericState
   button: (opts: {
     dark: boolean
     mode: ThemeColorButtonModeKey
+    // oxlint-disable-next-line no-deprecated
     base: ThemeColorBase
+    // oxlint-disable-next-line no-deprecated
     solid: ThemeColorSolidTone
+    // oxlint-disable-next-line no-deprecated
     muted: ThemeColorMutedTone
+    // oxlint-disable-next-line no-deprecated
   }) => ThemeColorButtonStates
   input: (opts: {
+    // oxlint-disable-next-line no-deprecated
     base: ThemeColorBase
+    // oxlint-disable-next-line no-deprecated
     solid: ThemeColorSolidTone
+    // oxlint-disable-next-line no-deprecated
     muted: ThemeColorMutedTone
     dark: boolean
     mode: 'default' | 'invalid'
     state: 'enabled' | 'disabled' | 'hovered' | 'readOnly'
+    // oxlint-disable-next-line no-deprecated
   }) => ThemeColorInputState
   selectable: (opts: {
     dark: boolean
+    // oxlint-disable-next-line no-deprecated
     base: ThemeColorBase
+    // oxlint-disable-next-line no-deprecated
     solid: ThemeColorSolid
+    // oxlint-disable-next-line no-deprecated
     muted: ThemeColorMuted
     state: 'enabled' | 'disabled' | 'hovered' | 'pressed' | 'selected'
     tone: 'default' | 'primary' | 'positive' | 'caution' | 'critical'
+    // oxlint-disable-next-line no-deprecated
   }) => ThemeColorGenericState
+  // oxlint-disable-next-line no-deprecated
   syntax: (opts: {base: ThemeColorBase; dark: boolean}) => ThemeColorSyntax
+  // oxlint-disable-next-line no-deprecated
   spot: (opts: {base: ThemeColorBase; dark: boolean; key: ThemeColorSpotKey}) => string
 }
 
@@ -84,6 +112,7 @@ export interface ThemeColorBuilderOpts {
  * @public
  * @deprecated Use `ThemeConfig` instead.
  */
+// oxlint-disable-next-line no-deprecated
 export type PartialThemeColorBuilderOpts = Partial<ThemeColorBuilderOpts>
 
 /**
@@ -91,8 +120,11 @@ export type PartialThemeColorBuilderOpts = Partial<ThemeColorBuilderOpts>
  * @deprecated Use `buildColorTheme` instead.
  */
 export function createColorTheme(
+  // oxlint-disable-next-line no-deprecated
   partialOpts: PartialThemeColorBuilderOpts = {},
+  // oxlint-disable-next-line no-deprecated
 ): ThemeColorSchemes {
+  // oxlint-disable-next-line no-deprecated
   const builders: ThemeColorBuilderOpts = {...defaultOpts, ...partialOpts}
 
   return {
@@ -104,6 +136,7 @@ export function createColorTheme(
 /**
  * @internal
  */
+// oxlint-disable-next-line no-deprecated
 function _createColorScheme(opts: ThemeColorBuilderOpts, dark: boolean): ThemeColorScheme {
   return {
     default: _createColor(opts, dark, 'default'),
@@ -119,9 +152,12 @@ function _createColorScheme(opts: ThemeColorBuilderOpts, dark: boolean): ThemeCo
  * @internal
  */
 function _createColor(
+  // oxlint-disable-next-line no-deprecated
   opts: ThemeColorBuilderOpts,
   dark: boolean,
+  // oxlint-disable-next-line no-deprecated
   name: ThemeColorName,
+  // oxlint-disable-next-line no-deprecated
 ): ThemeColor {
   const base = opts.base({dark, name})
   const solid = createSolidTones(opts, base, dark, name)

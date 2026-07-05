@@ -66,10 +66,13 @@ const BoxComponent = forwardRef(function Box(
   const {
     as: asProp = 'div',
     gridColumn,
+    // oxlint-disable-next-line no-deprecated
     column: deprecated_column,
     gridColumnStart,
+    // oxlint-disable-next-line no-deprecated
     columnStart: deprecated_columnStart,
     gridColumnEnd,
+    // oxlint-disable-next-line no-deprecated
     columnEnd: deprecated_columnEnd,
     display = 'block',
     flex,
@@ -90,10 +93,13 @@ const BoxComponent = forwardRef(function Box(
     paddingBottom,
     paddingLeft,
     gridRow,
+    // oxlint-disable-next-line no-deprecated
     row: deprecated_row,
     gridRowStart,
+    // oxlint-disable-next-line no-deprecated
     rowStart: deprecated_rowStart,
     gridRowEnd,
+    // oxlint-disable-next-line no-deprecated
     rowEnd: deprecated_rowEnd,
     sizing,
     ...restProps
@@ -150,6 +156,7 @@ BoxComponent.displayName = 'ForwardRef(Box)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Box = BoxComponent as unknown as <E extends ElementType = 'div'>(
   props: BoxProps<E>,
 ) => React.JSX.Element

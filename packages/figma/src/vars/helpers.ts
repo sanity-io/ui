@@ -3,6 +3,7 @@ import {parseColor} from '@sanity/ui/theme'
 import {FigmaSanityUIColorVariable} from './types'
 
 export function getOrCreateColorVariableCollection(name: string): VariableCollection {
+  // oxlint-disable-next-line no-deprecated
   const localVariableCollections = figma.variables.getLocalVariableCollections()
 
   let colorCollection = localVariableCollections.find((c) => c.name === name)
@@ -15,6 +16,7 @@ export function getOrCreateColorVariableCollection(name: string): VariableCollec
 }
 
 export function getFigmaVariables(collection: VariableCollection): Variable[] {
+  // oxlint-disable-next-line no-deprecated
   return collection.variableIds.map((id) => figma.variables.getVariableById(id)!)
 }
 
@@ -39,6 +41,7 @@ export function setColorVariable(
     if (typeof variable.value !== 'string') {
       console.warn(`invalid color value for ${key}[${modeId}]: ${variable.value}`)
 
+      // oxlint-disable-next-line consistent-return
       return
     }
 
@@ -77,6 +80,7 @@ function getOrCreateColorVariable(
   let variable = figmaVariables.find((v) => v.name === variableName)
 
   if (!variable) {
+    // oxlint-disable-next-line no-deprecated
     variable = figma.variables.createVariable(variableName, collection.id, 'COLOR')
     figmaVariables.push(variable)
   }
