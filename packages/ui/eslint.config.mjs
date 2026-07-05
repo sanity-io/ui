@@ -6,14 +6,13 @@ import jsxA11y from 'eslint-plugin-jsx-a11y'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import storybook from 'eslint-plugin-storybook'
 import globals from 'globals'
 import ts from 'typescript-eslint'
 
 export default ts.config(
   [
     {
-      ignores: ['.workshop', 'dist', 'storybook/storybook-static', 'storybook-static'],
+      ignores: ['dist'],
     },
 
     {
@@ -91,9 +90,9 @@ export default ts.config(
       ...react.configs.flat['jsx-runtime'],
     },
 
-    // Ignore Storybook stories and test files for the react compiler
+    // Ignore test files for the react compiler
     {
-      files: ['**/__workshop__/*.{js,ts,tsx}', '**/*.stories.{js,ts,tsx}', '**/*.test.{js,ts,tsx}'],
+      files: ['**/*.test.{js,ts,tsx}'],
       rules: {
         'react-hooks/set-state-in-effect': 'off',
         'react-hooks/refs': 'off',
@@ -104,15 +103,12 @@ export default ts.config(
     // jsx-a11y
     jsxA11y.flatConfigs.recommended,
 
-    // storybook
-    storybook.configs['flat/recommended'],
-
     // boundaries
     {
       plugins: {boundaries},
 
       settings: {
-        'boundaries/ignore': ['src/**/*.test.ts', 'src/**/*.test.tsx', 'src/**/__workshop__/**/*'],
+        'boundaries/ignore': ['src/**/*.test.ts', 'src/**/*.test.tsx'],
 
         'boundaries/elements': [
           // entry points
@@ -151,32 +147,10 @@ export default ts.config(
             mode: 'full',
           },
 
-          {
-            type: 'test/storybook',
-            pattern: ['.storybook/**/*.*'],
-            mode: 'full',
-          },
-          {
-            type: 'test/storybook/stories',
-            pattern: ['stories/**/*'],
-            mode: 'full',
-          },
-
-          {
-            type: 'test/cypress',
-            pattern: ['cypress/**/*'],
-            mode: 'full',
-          },
-
           // configs
           {
             type: 'configs',
-            pattern: [
-              'cypress.config.ts',
-              'package.config.ts',
-              'workshop.config.ts',
-              'workshop.runtime.ts',
-            ],
+            pattern: ['package.config.ts'],
             mode: 'file',
           },
           {
@@ -201,11 +175,6 @@ export default ts.config(
               {from: 'src/core', allow: ['src/core', '@sanity/ui/theme']},
               {from: 'src/theme', allow: ['src/theme']},
               {from: 'test', allow: ['@sanity/ui', '@sanity/ui/theme']},
-              {from: 'test/storybook', allow: ['test/storybook']},
-              {
-                from: 'test/storybook/stories',
-                allow: ['src/core', 'src/theme', 'test/storybook/stories'],
-              },
             ],
           },
         ],

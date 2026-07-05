@@ -1,13 +1,13 @@
 context('Components/Dialog', () => {
   it('should open dialog', () => {
-    cy.visit('/frame/?path=/components/dialog/props')
+    cy.visit('/iframe.html?id=components-dialog--props&viewMode=story')
 
     cy.get('#open-dialog-button').click()
     cy.get('#dialog').should('be.visible')
   })
 
   it('should trap focus', () => {
-    cy.visit('/frame/?path=/components/dialog/props')
+    cy.visit('/iframe.html?id=components-dialog--props&viewMode=story')
 
     // Press enter to open the dialog
     // cy.get('#open-dialog-button').realPress('{enter}')
@@ -37,7 +37,7 @@ context('Components/Dialog', () => {
   })
 
   it('should focus last focused element when dialog becomes top layer', () => {
-    cy.visit('/frame/?path=/components/dialog/activate')
+    cy.visit('/iframe.html?id=components-dialog--activate&viewMode=story')
 
     // Open the nested dialogs
     cy.get('#open-dialog-1-button').click()
