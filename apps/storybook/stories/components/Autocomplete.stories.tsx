@@ -165,6 +165,7 @@ export const Custom: Story = {
   render: () => <CustomStory />,
   play: async ({canvasElement, step}) => {
     const doc = canvasElement.ownerDocument
+    // oxlint-disable-next-line no-unsafe-type-assertion
     const input = () => doc.getElementById('custom') as HTMLInputElement
     const listbox = () => doc.getElementById('custom-listbox')
     const option = (value: string) => doc.querySelector(`[data-qa="option-${value}"]`)
@@ -190,6 +191,7 @@ export const Custom: Story = {
       // Escape to close listbox and clear input
       await userEvent.keyboard('{Escape}')
       await waitFor(() => expect(input()).toHaveAttribute('aria-expanded', 'false'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveValue('')
     })
 
@@ -221,6 +223,7 @@ export const Custom: Story = {
 
       // The input should be empty and focused
       await waitFor(() => expect(input()).toHaveValue(''))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
     })
 
@@ -234,6 +237,7 @@ export const Custom: Story = {
 
       // The input is expanded and focused
       await waitFor(() => expect(input()).toHaveAttribute('aria-expanded', 'true'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
 
       // Focus the next focusable element
@@ -261,6 +265,7 @@ export const Custom: Story = {
       await userEvent.keyboard('{Enter}')
 
       await waitFor(() => expect(input()).toHaveValue('Norway'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
 
       // Click to focus
@@ -296,6 +301,7 @@ export const Custom: Story = {
 
       // Expect "Netherlands" to be selected
       await waitFor(() => expect(input()).toHaveValue('Netherlands'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
     })
   },
@@ -617,6 +623,7 @@ export const FocusAndBlur: Story = {
   render: () => <FocusAndBlurStory />,
   play: async ({canvasElement, step}) => {
     const doc = canvasElement.ownerDocument
+    // oxlint-disable-next-line no-unsafe-type-assertion
     const input = () => doc.getElementById('focus-and-blur') as HTMLInputElement
     const log = () => doc.getElementById('focus-and-blur-log')
 
@@ -647,7 +654,9 @@ export const FocusAndBlur: Story = {
 
       // Expect "foo" to be selected, without the input having lost focus in the meantime
       await waitFor(() => expect(input()).toHaveValue('foo'))
+      // oxlint-disable-next-line no-floating-promises
       expect(input()).toHaveFocus()
+      // oxlint-disable-next-line no-floating-promises
       expect(log()).toHaveTextContent('["focus"]')
 
       // Click outside to blur

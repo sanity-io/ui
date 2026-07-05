@@ -12,6 +12,7 @@ vi.mock('../../primitives', async (importOriginal) => {
 
   return {
     ...actual,
+    // oxlint-disable-next-line no-unsafe-type-assertion
     Flex: vi.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
   }
 })

@@ -13,6 +13,7 @@ vi.mock('../../primitives', async (importOriginal) => {
 
   return {
     ...actual,
+    // oxlint-disable-next-line no-unsafe-type-assertion
     Box: vi.fn((props: Record<string, unknown>) => (actual.Box as any).render(props, null)),
   }
 })
@@ -26,7 +27,9 @@ const treeContextValue: TreeContextValue = {
   registerItem: () => () => undefined,
   setExpanded: () => undefined,
   setFocusedElement: () => undefined,
+  // oxlint-disable-next-line no-deprecated
   space: 1,
+  // oxlint-disable-next-line no-unnecessary-type-assertion
   state: {} as TreeState,
 }
 

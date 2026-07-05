@@ -11,6 +11,7 @@ vi.mock('../../primitives', async (importOriginal) => {
 
   return {
     ...actual,
+    // oxlint-disable-next-line no-unsafe-type-assertion
     Stack: vi.fn((props: Record<string, unknown>) => (actual.Stack as any).render(props, null)),
   }
 })
@@ -33,6 +34,7 @@ describe('components/menu spacing', () => {
 
   it('should support `space` and `gap` with the same behavior', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Menu space={2}>
         <div>Item</div>
       </Menu>,
@@ -54,6 +56,7 @@ describe('components/menu spacing', () => {
 
   it('should prefer `gap` over `space` when both are provided', () => {
     render(
+      // oxlint-disable-next-line no-deprecated
       <Menu gap={3} space={1}>
         <div>Item</div>
       </Menu>,
