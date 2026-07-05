@@ -1,20 +1,22 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {responsiveInputPaddingStyle} from '../../styles/internal'
 import {TextInput} from './textInput'
 
-jest.mock('../../styles/internal', () => {
-  const actual = jest.requireActual('../../styles/internal')
+vi.mock('../../styles/internal', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../styles/internal')>()
 
   return {
     ...actual,
-    responsiveInputPaddingStyle: jest.fn(actual.responsiveInputPaddingStyle),
+    responsiveInputPaddingStyle: vi.fn(actual.responsiveInputPaddingStyle),
   }
 })
 
 describe('primitives/textInput', () => {
-  const mockedResponsiveInputPaddingStyle = jest.mocked(responsiveInputPaddingStyle)
+  const mockedResponsiveInputPaddingStyle = vi.mocked(responsiveInputPaddingStyle)
 
   beforeEach(() => {
     mockedResponsiveInputPaddingStyle.mockClear()

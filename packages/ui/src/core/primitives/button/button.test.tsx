@@ -1,24 +1,25 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
 
 import {AddIcon} from '@sanity/icons'
 import {screen} from '@testing-library/react'
-import {axe} from 'jest-axe'
+import {beforeEach, describe, expect, it, vi} from 'vitest'
+import {axe} from 'vitest-axe'
 
 import {render} from '../../../../test'
 import {Flex} from '../flex'
 import {Button, ButtonOwnProps} from './button'
 
-jest.mock('../flex', () => {
-  const actual = jest.requireActual('../flex')
+vi.mock('../flex', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../flex')>()
 
   return {
     ...actual,
-    Flex: jest.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
+    Flex: vi.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
   }
 })
 
 describe('atoms/button', () => {
-  const mockedFlex = jest.mocked(Flex)
+  const mockedFlex = vi.mocked(Flex)
 
   beforeEach(() => {
     mockedFlex.mockClear()

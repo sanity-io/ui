@@ -1,7 +1,8 @@
-/** @jest-environment node */
+/** @vitest-environment node */
 
 import {buildTheme} from '@sanity/ui/theme'
 import {renderToStaticMarkup, renderToString} from 'react-dom/server'
+import {describe, expect, it} from 'vitest'
 
 import {ThemeProvider} from '../../theme'
 import {useMediaIndex} from './useMediaIndex'

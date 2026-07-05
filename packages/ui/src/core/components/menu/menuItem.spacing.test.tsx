@@ -1,16 +1,18 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Flex} from '../../primitives'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {MenuItem} from './menuItem'
 
-jest.mock('../../primitives', () => {
-  const actual = jest.requireActual('../../primitives')
+vi.mock('../../primitives', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives')>()
 
   return {
     ...actual,
-    Flex: jest.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
+    Flex: vi.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
   }
 })
 
@@ -31,7 +33,7 @@ function renderMenuItem(props: Partial<React.ComponentProps<typeof MenuItem>> = 
 }
 
 describe('components/menuItem spacing', () => {
-  const mockedFlex = jest.mocked(Flex)
+  const mockedFlex = vi.mocked(Flex)
 
   beforeEach(() => {
     mockedFlex.mockClear()

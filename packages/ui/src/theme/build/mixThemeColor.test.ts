@@ -1,3 +1,5 @@
+import {expect, test} from 'vitest'
+
 import {mixThemeColor} from './mixThemeColor'
 
 test('mix 1', () => {

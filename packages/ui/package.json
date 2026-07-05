@@ -71,7 +71,8 @@
     "pkg:build": "pkg build --strict",
     "pkg:check": "pkg --strict",
     "prepack": "pnpm build",
-    "test": "jest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "ts:check": "tsc",
     "watch": "pkg watch --strict"
   },
@@ -87,18 +88,12 @@
     "use-effect-event": "^2.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
     "@eslint/js": "^9.39.1",
     "@sanity/pkg-utils": "^8.1.29",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "@types/jest": "^30.0.0",
-    "@types/jest-axe": "^3.5.9",
     "@types/node": "^22.18.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
@@ -115,9 +110,7 @@
     "eslint-plugin-react-hooks": "7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.3.0",
-    "jest": "^30.1.3",
-    "jest-axe": "^10.0.0",
-    "jest-environment-jsdom": "^30.1.2",
+    "jsdom": "^29.1.1",
     "npm-run-all2": "^8.0.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -126,7 +119,9 @@
     "rimraf": "^5.0.5",
     "styled-components": "npm:@sanity/styled-components@^6.1.23",
     "typescript": "5.9.3",
-    "typescript-eslint": "^8.46.3"
+    "typescript-eslint": "^8.46.3",
+    "vitest": "^4.1.9",
+    "vitest-axe": "^1.0.0-pre.5"
   },
   "peerDependencies": {
     "react": "^18 || >=19.0.0-0",

@@ -1,3 +1,5 @@
+import {expect, test} from 'vitest'
+
 import {ThemeColorTokens} from '../config'
 import {buildColorTheme} from './buildColorTheme'
 

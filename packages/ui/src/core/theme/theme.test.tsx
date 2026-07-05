@@ -1,6 +1,7 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
 
 import {buildTheme} from '@sanity/ui/theme'
+import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../test'
 import {ThemeContext} from './themeContext'
@@ -10,7 +11,7 @@ import {useRootTheme} from './useRootTheme'
 describe('theme', () => {
   describe('useRootTheme', () => {
     it('should get context value', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         const rootTheme = useRootTheme()
@@ -43,7 +44,7 @@ describe('theme', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {
