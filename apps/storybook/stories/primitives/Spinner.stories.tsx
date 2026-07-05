@@ -1,5 +1,5 @@
 import {Spinner} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {getFontSizeControls} from '../controls'
 

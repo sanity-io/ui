@@ -1,5 +1,5 @@
 import {Badge, Card, Flex, Stack} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {BADGE_TONES, CARD_TONES, RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'

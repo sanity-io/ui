@@ -20,13 +20,13 @@ Standard scripts live in the root `package.json` (`lint`, `ts:check`, `test`,
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. The
   Storybook Vite config aliases `@sanity/ui` to the `packages/ui/exports/`
   source, so it hot-reloads source edits directly (no rebuild needed).
-- Playwright end-to-end tests (in `apps/storybook/e2e/`) run against the built
-  Storybook: `pnpm test:browser` builds Storybook, serves it on
-  http://localhost:6006, and runs `playwright test` (see
-  `apps/storybook/playwright.config.ts`; browsers must be installed once via
-  `pnpm --filter sanity-ui-storybook exec playwright install chromium`). The
-  specs visit stories via `/iframe.html?id=<story-id>` URLs, so renaming
-  stories referenced by `page.goto()` breaks them.
+- `pnpm test:browser` runs the Storybook tests (`apps/storybook`): vitest
+  renders every story in headless Chromium via `@storybook/addon-vitest` and
+  executes story `play` interactions, plus the browser tests in
+  `apps/storybook/tests/` (see `apps/storybook/vitest.config.ts`). The
+  Playwright-provided browser must be installed once via
+  `pnpm --filter sanity-ui-storybook exec playwright install chromium`.
+  Stories opt out of being tested with the `!test` tag.
 - Releases are managed with Changesets: run `pnpm changeset` to add a changeset
   to a PR that should trigger a release. Merging to `main` opens/updates a
   "Version Packages" PR, and merging that publishes to npm via trusted

@@ -8,8 +8,5 @@ node_modules
 storybook-static
 .eslintcache
 
-# Playwright
-test-results
-playwright-report
-blob-report
-playwright/.cache
+# Vitest browser mode failure screenshots
+__screenshots__

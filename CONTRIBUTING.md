@@ -24,13 +24,17 @@ source in `packages/ui/src`. Run them with `pnpm test` (or
 `pnpm test:watch` in `packages/ui` for watch mode). They run against the
 package source, so no build is required.
 
-End-to-end tests are written with [Playwright](https://playwright.dev) and live
-in `apps/storybook/e2e`, next to the stories they visit. Install the browsers
-once with `pnpm --filter sanity-ui-storybook exec playwright install chromium`,
-then run `pnpm test:browser` — this builds Storybook, serves it on
-http://localhost:6006, and runs the tests against it. While developing, you can
-keep `pnpm dev` running (Playwright reuses the running Storybook) and use
-`pnpm test:browser:ui` to run tests interactively.
+Browser tests live in the Storybook app (`apps/storybook`) and use
+[Storybook's Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon):
+every story is rendered as a smoke test in headless Chromium, and interaction
+tests are written as story [`play` functions](https://storybook.js.org/docs/writing-stories/play-function).
+Tests that need direct control over the browser (e.g. resizing the viewport)
+live in `apps/storybook/tests/`.
+
+Install the Playwright-provided browser once with
+`pnpm --filter sanity-ui-storybook exec playwright install chromium`, then run
+`pnpm test:browser`. While developing, `pnpm dev` exposes the same tests
+interactively through the testing panel in the Storybook UI.
 
 ## Releasing
 

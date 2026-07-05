@@ -1,5 +1,5 @@
 import {Card, Container, LayerProvider, Menu, MenuDivider, MenuItem, Stack, Text} from '@sanity/ui'
-import type {Meta, StoryFn, StoryObj} from '@storybook/react'
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {forwardRef} from 'react'
 
 import {getSpaceControls} from '../controls'

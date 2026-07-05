@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.settings.json",
-  "include": ["./.storybook", "./e2e", "./playwright.config.ts", "./stories", "./typings"],
+  "include": ["./.storybook", "./stories", "./tests", "./typings", "./vitest.config.ts"],
   "compilerOptions": {
     "noEmit": true,
     "declaration": false,

@@ -20,9 +20,9 @@ import {
   Text,
   useLayer,
 } from '@sanity/ui'
-import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import {fn} from '@storybook/test'
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
+import {expect, fn, userEvent, waitFor} from 'storybook/test'
 import {styled} from 'styled-components'
 
 import {
@@ -320,6 +320,40 @@ function PropsStory() {
 export const Props: Story = {
   parameters: {controls: {include: []}},
   render: () => <PropsStory />,
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+    const el = (id: string) => doc.getElementById(id)
+    const closeButton = () =>
+      doc.querySelector<HTMLButtonElement>('#dialog button[aria-label="Close dialog"]')
+
+    await step('should open dialog', async () => {
+      await userEvent.click(el('open-dialog-button')!)
+      await waitFor(() => expect(el('dialog')).toBeVisible())
+    })
+
+    await step('should trap focus', async () => {
+      // The close button should be focused when the dialog opens
+      await waitFor(() => expect(closeButton()).toHaveFocus())
+
+      // Tab to next until the focus is back at the top
+      await userEvent.tab()
+      await waitFor(() => expect(el('button-1')).toHaveFocus())
+      await userEvent.tab()
+      await waitFor(() => expect(el('button-2')).toHaveFocus())
+      await userEvent.tab()
+      await waitFor(() => expect(el('button-3')).toHaveFocus())
+      await userEvent.tab()
+      await waitFor(() => expect(el('button-4')).toHaveFocus())
+      await userEvent.tab()
+      await waitFor(() => expect(el('button-5')).toHaveFocus())
+      await userEvent.tab()
+      await waitFor(() => expect(closeButton()).toHaveFocus())
+      await userEvent.tab()
+
+      // The first button should again be focused
+      await waitFor(() => expect(el('button-1')).toHaveFocus())
+    })
+  },
 }
 
 function ActivateStory() {
@@ -453,6 +487,29 @@ function ActivateStory() {
 export const Activate: Story = {
   parameters: {controls: {include: []}},
   render: () => <ActivateStory />,
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+    const el = (id: string) => doc.getElementById(id)
+
+    await step('should focus last focused element when dialog becomes top layer', async () => {
+      // Open the nested dialogs
+      await userEvent.click(el('open-dialog-1-button')!)
+      await waitFor(() => expect(el('open-dialog-2-button-2')).toBeVisible())
+      await userEvent.click(el('open-dialog-2-button-2')!)
+      await waitFor(() => expect(el('open-dialog-3-button-3')).toBeVisible())
+      await userEvent.click(el('open-dialog-3-button-3')!)
+
+      // Close dialogs and check if the last focused element is focused
+      await userEvent.keyboard('{Escape}')
+      await waitFor(() => expect(el('open-dialog-3-button-3')).toHaveFocus())
+
+      await userEvent.keyboard('{Escape}')
+      await waitFor(() => expect(el('open-dialog-2-button-2')).toHaveFocus())
+
+      await userEvent.keyboard('{Escape}')
+      await waitFor(() => expect(el('open-dialog-1-button')).toHaveFocus())
+    })
+  },
 }
 
 function NestedStory() {

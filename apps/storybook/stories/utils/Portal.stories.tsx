@@ -1,5 +1,5 @@
 import {Card, Container, Portal, PortalProvider, Stack, Text} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useMemo, useState} from 'react'
 
 const meta: Meta = {

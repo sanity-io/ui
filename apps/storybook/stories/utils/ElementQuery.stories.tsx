@@ -1,5 +1,5 @@
 import {Box, Card, ElementQuery, Text} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {styled} from 'styled-components'
 
 const meta: Meta = {

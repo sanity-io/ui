@@ -1,5 +1,5 @@
 import {Box, Card, Container, Text, VirtualList, VirtualListChangeOpts} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useRef, useState} from 'react'
 
 const meta: Meta = {

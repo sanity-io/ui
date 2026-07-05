@@ -13,10 +13,8 @@
     "lint": "pnpm --recursive lint",
     "release": "changeset publish",
     "storybook:build": "pnpm --filter sanity-ui-storybook build",
-    "storybook:start": "pnpm --filter sanity-ui-storybook start",
     "test": "pnpm --filter @sanity/ui test",
-    "test:browser": "pnpm --filter sanity-ui-storybook test:browser",
-    "test:browser:ui": "pnpm --filter sanity-ui-storybook test:browser:ui",
+    "test:browser": "pnpm --filter sanity-ui-storybook test",
     "ts:check": "pnpm --recursive ts:check",
     "watch": "pnpm --filter @sanity/ui watch"
   },

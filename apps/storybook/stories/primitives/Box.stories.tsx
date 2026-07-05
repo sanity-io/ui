@@ -1,5 +1,5 @@
 import {Box, Flex, Grid, Text} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {forwardRef} from 'react'
 
 import {getSpaceControls} from '../controls'

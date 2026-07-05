@@ -1,6 +1,7 @@
 import {Box, Card, Container, Flex, Grid, Stack, Text, TextInput} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
+import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {RADII} from '../constants'
 import {
@@ -270,11 +271,26 @@ export const Tones: Story = {
 }
 
 export const ReadOnly: Story = {
-  // The Playwright test for this story asserts on light-scheme focus ring colors
+  // The interaction test for this story asserts on light-scheme focus ring colors
   parameters: {controls: {include: []}, themes: {themeOverride: 'light'}},
   render: () => (
     <Flex padding={4}>
       <TextInput id="text-input-example" readOnly />
     </Flex>
   ),
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+
+    await step('read-only input should have focus styling', async () => {
+      await userEvent.click(doc.getElementById('text-input-example')!)
+
+      const span = doc.querySelector('#text-input-example + span')!
+
+      await waitFor(() =>
+        expect(getComputedStyle(span).boxShadow).toBe(
+          'rgb(85, 107, 252) 0px 0px 0px 1px inset, rgb(227, 228, 232) 0px 0px 0px 1px inset',
+        ),
+      )
+    })
+  },
 }
