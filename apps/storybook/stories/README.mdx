@@ -16,7 +16,7 @@ _This is a work in progress_
 ## Things to note
 
 - All stories are wrapped with a [common decorator](https://storybook.js.org/docs/react/writing-stories/decorators#story-decorators) which wraps stories in both a `<ThemeProvider>` but also a `<Card>` with padding. Stories that depend on exact viewport dimensions (e.g. stories covered by Playwright tests) can opt out with the `padding: 0` parameter.
-- The Playwright end-to-end tests (in `e2e/` at the repository root) run against the built Storybook. Take care when renaming stories that are referenced by `page.goto()` calls.
+- The Playwright end-to-end tests (in `e2e/` next to this `stories/` directory) run against the built Storybook. Take care when renaming stories that are referenced by `page.goto()` calls.
 
 ## Areas of improvement
 

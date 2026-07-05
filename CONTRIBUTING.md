@@ -25,7 +25,8 @@ source in `packages/ui/src`. Run them with `pnpm test` (or
 package source, so no build is required.
 
 End-to-end tests are written with [Playwright](https://playwright.dev) and live
-in `e2e/`. Install the browsers once with `pnpm exec playwright install chromium`,
+in `apps/storybook/e2e`, next to the stories they visit. Install the browsers
+once with `pnpm --filter sanity-ui-storybook exec playwright install chromium`,
 then run `pnpm test:browser` — this builds Storybook, serves it on
 http://localhost:6006, and runs the tests against it. While developing, you can
 keep `pnpm dev` running (Playwright reuses the running Storybook) and use

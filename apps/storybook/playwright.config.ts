@@ -17,7 +17,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'run-s storybook:build storybook:start',
+    command: 'run-s build start',
     url: 'http://localhost:6006',
     reuseExistingServer: !process.env['CI'],
     timeout: 300_000,
