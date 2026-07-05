@@ -41,48 +41,24 @@
     }
   },
   "exports": {
-    ".": {
-      "node": {
-        "import": "./dist/index.mjs",
-        "require": "./dist/index.js"
-      },
-      "default": "./exports/index.ts"
-    },
-    "./_visual-editing": {
-      "node": {
-        "import": "./dist/_visual-editing.mjs",
-        "require": "./dist/_visual-editing.js"
-      },
-      "default": "./exports/_visual-editing.ts"
-    },
-    "./theme": {
-      "node": {
-        "import": "./dist/theme.mjs",
-        "require": "./dist/theme.js"
-      },
-      "default": "./exports/theme.ts"
-    },
+    ".": "./exports/index.ts",
+    "./_visual-editing": "./exports/_visual-editing.ts",
+    "./theme": "./exports/theme.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "exports": {
       ".": {
-        "source": "./exports/index.ts",
         "import": "./dist/index.mjs",
-        "require": "./dist/index.js",
-        "default": "./dist/index.js"
+        "require": "./dist/index.js"
       },
       "./_visual-editing": {
-        "source": "./exports/_visual-editing.ts",
         "import": "./dist/_visual-editing.mjs",
-        "require": "./dist/_visual-editing.js",
-        "default": "./dist/_visual-editing.js"
+        "require": "./dist/_visual-editing.js"
       },
       "./theme": {
-        "source": "./exports/theme.ts",
         "import": "./dist/theme.mjs",
-        "require": "./dist/theme.js",
-        "default": "./dist/theme.js"
+        "require": "./dist/theme.js"
       },
       "./package.json": "./package.json"
     },
