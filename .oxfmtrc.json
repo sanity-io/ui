@@ -7,7 +7,14 @@
   "quoteProps": "consistent",
   "sortImports": true,
   "sortPackageJson": {"sortScripts": true},
-  "ignorePatterns": ["dist/**", "storybook-static/**", "pnpm-lock.yaml", "CHANGELOG.md"],
+  "ignorePatterns": [
+    "dist/**",
+    "storybook-static/**",
+    "playwright-report/**",
+    "test-results/**",
+    "pnpm-lock.yaml",
+    "CHANGELOG.md"
+  ],
   "overrides": [
     {
       "files": [".changeset/*.md"],

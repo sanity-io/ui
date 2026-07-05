@@ -14,20 +14,19 @@ supports `>=20.19 <22 || >=22.12` (see `packages/ui/package.json` engines).
 Standard scripts live in the root `package.json` (`lint`, `ts:check`, `test`,
 `build`, `dev`). Notes that are not obvious from the scripts:
 
-- Tests require a built package first. `pnpm test` (jest) resolves `@sanity/ui`
-  and `@sanity/ui/theme` from `packages/ui/dist` (via package `exports`), so you
-  must run `pnpm build` at least once before `pnpm test` or every suite fails
-  with "Cannot find module '@sanity/ui'". Re-run `pnpm build` after changing
-  source that tests import through the package entrypoints.
+- `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`).
+  The config aliases `@sanity/ui` to the `packages/ui/exports/` source, so unit
+  tests run directly against source and do not require a `pnpm build` first.
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. The
   Storybook Vite config aliases `@sanity/ui` to the `packages/ui/exports/`
-  source, so it hot-reloads source edits directly (no rebuild needed). Only jest
-  depends on `dist`.
-- Cypress end-to-end tests run against the built Storybook: `pnpm test:browser`
-  builds Storybook, serves it on http://localhost:6006 (`pnpm storybook:start`),
-  and runs `cypress run`. The specs visit stories via
+  source, so it hot-reloads source edits directly (no rebuild needed).
+- Playwright end-to-end tests (in `e2e/` at the repository root) run against the
+  built Storybook: `pnpm test:browser` builds Storybook, serves it on
+  http://localhost:6006, and runs `playwright test` (see `playwright.config.ts`,
+  browsers must be installed once via
+  `pnpm exec playwright install chromium`). The specs visit stories via
   `/iframe.html?id=<story-id>` URLs, so renaming stories referenced by
-  `cy.visit()` breaks them.
+  `page.goto()` breaks them.
 - Releases are managed with Changesets: run `pnpm changeset` to add a changeset
   to a PR that should trigger a release. Merging to `main` opens/updates a
   "Version Packages" PR, and merging that publishes to npm via trusted

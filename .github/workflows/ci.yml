@@ -37,29 +37,18 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           runtime: ${{ matrix.runtime }}
-      - run: pnpm build
       - run: pnpm test
 
-  cypress:
+  playwright:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
-      - uses: cypress-io/github-action@v6
-        with:
-          install: false
-          build: pnpm storybook:build
-          start: pnpm storybook:start
-          wait-on: http://localhost:6006
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:browser
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-          if-no-files-found: ignore
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: cypress-videos
-          path: cypress/videos
+          name: playwright-report
+          path: playwright-report
           if-no-files-found: ignore

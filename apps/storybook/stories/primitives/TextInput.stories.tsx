@@ -270,7 +270,7 @@ export const Tones: Story = {
 }
 
 export const ReadOnly: Story = {
-  // The Cypress test for this story asserts on light-scheme focus ring colors
+  // The Playwright test for this story asserts on light-scheme focus ring colors
   parameters: {controls: {include: []}, themes: {themeOverride: 'light'}},
   render: () => (
     <Flex padding={4}>

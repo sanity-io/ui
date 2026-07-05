@@ -1,6 +1,8 @@
-context('Primitives/Box', () => {
-  it('resizing window should hide and show responsive elements', () => {
-    cy.visit('/iframe.html?id=primitives-box--responsive&viewMode=story')
+import {expect, test} from '@playwright/test'
+
+test.describe('Primitives/Box', () => {
+  test('resizing window should hide and show responsive elements', async ({page}) => {
+    await page.goto('/iframe.html?id=primitives-box--responsive&viewMode=story')
 
     const sizes = [
       {viewport: [320, 600], css: {display: 'none', flex: '1 1 0%', boxSizing: 'content-box'}},
@@ -12,14 +14,16 @@ context('Primitives/Box', () => {
       {viewport: [2400, 600], css: {display: 'none', flex: '7 1 0%', boxSizing: 'content-box'}},
     ]
 
+    const box = page.locator('#responsive-box')
+
     for (const size of sizes) {
       const {css, viewport} = size
 
-      cy.viewport(viewport[0], viewport[1])
+      await page.setViewportSize({width: viewport[0], height: viewport[1]})
 
-      cy.get('#responsive-box').should('have.css', 'display', css.display)
-      cy.get('#responsive-box').should('have.css', 'flex', css.flex)
-      cy.get('#responsive-box').should('have.css', 'boxSizing', css.boxSizing)
+      await expect(box).toHaveCSS('display', css.display)
+      await expect(box).toHaveCSS('flex', css.flex)
+      await expect(box).toHaveCSS('box-sizing', css.boxSizing)
     }
   })
 })

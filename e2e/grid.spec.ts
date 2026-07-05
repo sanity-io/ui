@@ -1,6 +1,8 @@
-context('Primitives/Grid', () => {
-  it('should have responsive styles', () => {
-    cy.visit('/iframe.html?id=primitives-grid--responsive&viewMode=story')
+import {expect, test} from '@playwright/test'
+
+test.describe('Primitives/Grid', () => {
+  test('should have responsive styles', async ({page}) => {
+    await page.goto('/iframe.html?id=primitives-grid--responsive&viewMode=story')
 
     const sizes = [
       {
@@ -67,14 +69,16 @@ context('Primitives/Grid', () => {
       },
     ]
 
+    const grid = page.locator('#responsive-grid')
+
     for (const size of sizes) {
       const {css, viewport} = size
 
-      cy.viewport(viewport[0], viewport[1])
+      await page.setViewportSize({width: viewport[0], height: viewport[1]})
 
-      cy.get('#responsive-grid').should('have.css', 'gridGap', css.gridGap)
-      cy.get('#responsive-grid').should('have.css', 'gridTemplateColumns', css.gridTemplateColumns)
-      cy.get('#responsive-grid').should('have.css', 'gridTemplateRows', css.gridTemplateRows)
+      await expect(grid).toHaveCSS('grid-gap', css.gridGap)
+      await expect(grid).toHaveCSS('grid-template-columns', css.gridTemplateColumns)
+      await expect(grid).toHaveCSS('grid-template-rows', css.gridTemplateRows)
     }
   })
 })

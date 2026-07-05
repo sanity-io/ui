@@ -53,7 +53,7 @@ export const Columns: Story = {
 }
 
 export const Responsive: Story = {
-  // The Cypress test for this story depends on exact viewport dimensions, so the decorator
+  // The Playwright test for this story depends on exact viewport dimensions, so the decorator
   // padding is disabled
   parameters: {controls: {include: []}, padding: 0},
   render: () => (
