@@ -21,9 +21,7 @@
     "directory": "packages/ui"
   },
   "files": [
-    "dist",
-    "exports",
-    "src"
+    "dist"
   ],
   "type": "commonjs",
   "sideEffects": false,
