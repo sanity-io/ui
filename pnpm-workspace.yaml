@@ -17,9 +17,9 @@ minimumReleaseAgeExclude:
   - '@sanity/tsdown-config'
 
 overrides:
-  '@types/react': ^19.2.2
-  '@types/react-dom': ^19.2.2
+  '@types/react': ^19.2.17
+  '@types/react-dom': ^19.2.3
   '@types/react-is': ^19.2.0
-  react: ^19.2.0
-  react-dom: ^19.2.0
-  react-is: ^19.2.0
+  react: ^19.2.7
+  react-dom: ^19.2.7
+  react-is: ^19.2.7
