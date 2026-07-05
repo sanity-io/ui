@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "include": ["./.storybook/**/*", "./stories", "./tests", "./typings", "./vitest.config.ts"],
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "types": ["node"],
+    // Setting "jsx" to anything but "preserve" is usually incorrect, but at the moment Storybook needs it
+    "jsx": "react-jsx"
+  }
+}

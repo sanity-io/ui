@@ -1,0 +1,97 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "react",
+    "react-perf",
+    "oxc",
+    "import",
+    "jsx-a11y",
+    "promise"
+  ],
+  "ignorePatterns": [
+    "**/.workshop/*",
+    "**/dist/*",
+    "**/etc/*",
+    "**/storybook-static/*",
+    "storybook/*"
+  ],
+  "options": {
+    "denyWarnings": true,
+    "reportUnusedDisableDirectives": "error",
+    "typeAware": true,
+    "typeCheck": true
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "perf": "error"
+  },
+  "rules": {
+    "no-underscore-dangle": "off",
+    "consistent-function-scoping": "off",
+    "eslint/no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "styled-components",
+            "importNames": ["default"],
+            "message": "Please use `import {styled} from \"styled-components\"` instead."
+          }
+        ]
+      }
+    ],
+
+    // React Compiler checks
+    "react/react-compiler": "error",
+
+    "typescript/ban-ts-comment": "error",
+    "typescript/no-deprecated": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
+    "typescript/no-unnecessary-type-arguments": "error",
+    "typescript/prefer-ts-expect-error": "error",
+    "import/no-commonjs": "error",
+    "import/no-unassigned-import": ["error", {"allow": ["**/*.css"]}],
+    "no-restricted-globals": [
+      "error",
+      {"name": "__dirname", "message": "Use path.dirname(fileURLToPath(import.meta.url)) instead"},
+      {"name": "__filename", "message": "Use fileURLToPath(import.meta.url) instead"}
+    ],
+    "react/jsx-key": "error",
+    "unicorn/no-abusive-eslint-disable": "error",
+    // Not relevant as we use the modern jsx-runtime transform
+    "react-in-jsx-scope": "off",
+    // Not relevant due to React Compiler
+    "react_perf/jsx-no-new-array-as-prop": "off",
+    "react_perf/jsx-no-new-object-as-prop": "off",
+    "react_perf/jsx-no-new-function-as-prop": "off",
+    "react_perf/jsx-no-jsx-as-prop": "off",
+    // False negatives
+    "jsx_a11y/anchor-is-valid": "off",
+    "jsx_a11y/no-autofocus": "off",
+    // Handy rules that are disabled by default
+    "react/exhaustive-deps": "error",
+    "react/rules-of-hooks": "error",
+    "eslint/no-console": ["error", {"allow": ["warn", "error"]}],
+    // Requires polyfills for older browsers
+    "no-array-reverse": "off",
+    "no-array-sort": "off",
+    // Too noisy, common in callbacks/closures
+    "no-shadow": "off"
+  },
+  "overrides": [
+    {
+      // tsgolint non-deterministically reports either no-unsafe-type-assertion or
+      // no-unnecessary-type-assertion for the `as HTMLElement[]` assertion in this file,
+      // so an inline disable comment cannot be used (it would be flagged as unused on
+      // runs where the other rule fires).
+      "files": ["packages/ui/src/core/components/tree/tree.tsx"],
+      "rules": {
+        "typescript/no-unnecessary-type-assertion": "off",
+        "typescript/no-unsafe-type-assertion": "off"
+      }
+    }
+  ]
+}

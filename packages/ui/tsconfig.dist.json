@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "include": ["./exports", "./src", "./typings"],
+  "exclude": [
+    "./src/**/__fixtures__",
+    "./src/**/__mocks__",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx"
+  ],
+  "compilerOptions": {
+    "sourceMap": true,
+    "rootDir": ".",
+    "outDir": "./dist",
+    "types": ["node"],
+    // The shared settings use "preserve" (for Storybook), but the tsdown
+    // build must compile JSX for the published output
+    "jsx": "react-jsx"
+  }
+}

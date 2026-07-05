@@ -1,0 +1,201 @@
+import {
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import {isValidElementType} from 'react-is'
+
+import {Box, Flex, Text} from '../../primitives'
+import {Selectable} from '../../primitives/_selectable'
+import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
+import {_getArrayProp} from '../../styles'
+import {useRootTheme} from '../../theme'
+import {ElementType, Props} from '../../types'
+import {SelectableTone} from '../../types/selectable'
+import {Hotkeys} from '../hotkeys'
+import {useMenu} from './useMenu'
+
+/**
+ * @public
+ */
+export interface MenuItemOwnProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
+  fontSize?: number | number[]
+  hotkeys?: string[]
+  // oxlint-disable-next-line no-redundant-type-constituents
+  icon?: React.ElementType | React.ReactNode
+  // oxlint-disable-next-line no-redundant-type-constituents
+  iconRight?: React.ElementType | React.ReactNode
+  pressed?: boolean
+  selected?: boolean
+  gap?: number | number[]
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
+  space?: number | number[]
+  text?: React.ReactNode
+  tone?: SelectableTone
+}
+
+/**
+ * @public
+ */
+export type MenuItemProps<E extends ElementType = 'button'> = Props<MenuItemOwnProps, E>
+
+const MenuItemComponent = forwardRef(function MenuItem(
+  props: MenuItemOwnProps & {as?: ElementType} & Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'height' | 'ref' | 'selected' | 'tabIndex'
+    >,
+  forwardedRef: React.ForwardedRef<HTMLDivElement>,
+) {
+  const {
+    as = 'button',
+    children,
+    disabled,
+    fontSize = 1,
+    hotkeys,
+    icon: IconComponent,
+    iconRight: IconRightComponent,
+    onClick,
+    padding = 3,
+    paddingX,
+    paddingY,
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft,
+    pressed,
+    radius = 2,
+    selected: selectedProp,
+    gap,
+    // oxlint-disable-next-line no-deprecated
+    space: deprecated_space = 3,
+    text,
+    tone = 'default',
+    ...restProps
+  } = props
+  const spacing = gap === undefined ? deprecated_space : gap
+  const {scheme} = useRootTheme()
+  const menu = useMenu()
+  const {
+    activeElement,
+    mount,
+    onItemClick,
+    onItemMouseEnter: _onItemMouseEnter,
+    onItemMouseLeave: _onItemMouseLeave,
+  } = menu
+  const onItemMouseEnter = _onItemMouseEnter ?? menu.onItemMouseEnter
+  const onItemMouseLeave = _onItemMouseLeave ?? menu.onItemMouseLeave
+  const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
+  const active = Boolean(activeElement) && activeElement === rootElement
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
+
+  useEffect(() => mount(rootElement, selectedProp), [mount, rootElement, selectedProp])
+
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      if (disabled) return
+      if (onClick) onClick(event)
+      if (onItemClick) onItemClick()
+    },
+    [disabled, onClick, onItemClick],
+  )
+
+  const paddingProps = useMemo(
+    () => ({
+      padding,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingRight,
+      paddingBottom,
+      paddingLeft,
+    }),
+    [padding, paddingX, paddingY, paddingTop, paddingRight, paddingBottom, paddingLeft],
+  )
+
+  const hotkeysFontSize = _getArrayProp(fontSize).map((s) => s - 1)
+
+  const setRef = useCallback((el: HTMLDivElement | null) => {
+    ref.current = el
+    setRootElement(el)
+  }, [])
+
+  return (
+    <Selectable
+      data-ui="MenuItem"
+      role="menuitem"
+      {...restProps}
+      data-pressed={as !== 'button' && pressed ? '' : undefined}
+      data-selected={active ? '' : undefined}
+      data-disabled={disabled ? '' : undefined}
+      forwardedAs={as}
+      $radius={_getArrayProp(radius)}
+      $padding={_getArrayProp(0)}
+      $tone={disabled ? 'default' : tone}
+      $scheme={scheme}
+      disabled={disabled}
+      onClick={handleClick}
+      onMouseEnter={onItemMouseEnter}
+      onMouseLeave={onItemMouseLeave}
+      ref={setRef}
+      tabIndex={-1}
+      type={as === 'button' ? 'button' : undefined}
+    >
+      {(IconComponent || text || IconRightComponent) && (
+        <Flex as="span" gap={spacing} align="center" {...paddingProps}>
+          {IconComponent && (
+            <Text size={fontSize}>
+              {isValidElement(IconComponent) && IconComponent}
+              {isValidElementType(IconComponent) && <IconComponent />}
+            </Text>
+          )}
+
+          {text && (
+            <Box flex={1}>
+              <Text size={fontSize} textOverflow="ellipsis" weight="medium">
+                {text}
+              </Text>
+            </Box>
+          )}
+
+          {hotkeys && (
+            <Hotkeys
+              fontSize={hotkeysFontSize}
+              keys={hotkeys}
+              style={{marginTop: -4, marginBottom: -4}}
+            />
+          )}
+
+          {IconRightComponent && (
+            <Text size={fontSize}>
+              {isValidElement(IconRightComponent) && IconRightComponent}
+              {isValidElementType(IconRightComponent) && <IconRightComponent />}
+            </Text>
+          )}
+        </Flex>
+      )}
+      {children && (
+        <Box as="span" {...paddingProps}>
+          {children}
+        </Box>
+      )}
+    </Selectable>
+  )
+})
+MenuItemComponent.displayName = 'ForwardRef(MenuItem)'
+
+/**
+ * @public
+ */
+// oxlint-disable-next-line no-unsafe-type-assertion
+export const MenuItem = MenuItemComponent as unknown as <E extends ElementType = 'button'>(
+  props: MenuItemProps<E>,
+) => React.JSX.Element

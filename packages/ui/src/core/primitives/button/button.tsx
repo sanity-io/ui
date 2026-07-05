@@ -1,0 +1,214 @@
+import {ThemeFontWeightKey} from '@sanity/ui/theme'
+import {forwardRef, isValidElement, useMemo} from 'react'
+import {isValidElementType} from 'react-is'
+import {styled} from 'styled-components'
+
+import {_getArrayProp, ThemeProps} from '../../styles'
+import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
+import {useTheme_v2} from '../../theme'
+import {
+  ButtonMode,
+  ButtonTextAlign,
+  ButtonTone,
+  ButtonWidth,
+  ElementType,
+  FlexJustify,
+  Props,
+} from '../../types'
+import {Box} from '../box'
+import {Flex} from '../flex'
+import {Spinner} from '../spinner'
+import {Text} from '../text'
+import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
+import {buttonBaseStyles, buttonColorStyles} from './styles'
+
+/**
+ * @public
+ */
+export interface ButtonOwnProps extends ResponsivePaddingProps, ResponsiveRadiusProps {
+  fontSize?: number | number[]
+  mode?: ButtonMode
+  // oxlint-disable-next-line no-redundant-type-constituents
+  icon?: React.ElementType | React.ReactNode
+  // oxlint-disable-next-line no-redundant-type-constituents
+  iconRight?: React.ElementType | React.ReactNode
+  justify?: FlexJustify | FlexJustify[]
+  /**
+   * @beta Do not use in production, as this might change.
+   */
+  loading?: boolean
+  selected?: boolean
+  /**
+   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   */
+  space?: number | number[]
+  gap?: number | number[]
+  muted?: boolean
+  text?: React.ReactNode
+  textAlign?: ButtonTextAlign
+  textWeight?: ThemeFontWeightKey
+  tone?: ButtonTone
+  type?: 'button' | 'reset' | 'submit'
+  width?: ButtonWidth
+}
+
+/**
+ * @public
+ */
+export type ButtonProps<E extends ElementType = 'button'> = Props<ButtonOwnProps, E>
+
+const StyledButton = styled.button<
+  {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps &
+    ThemeProps
+>(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
+
+const LoadingBox = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-bg-color);
+  border-radius: inherit;
+  z-index: 1;
+  box-shadow: inherit;
+`
+
+const ButtonComponent = forwardRef(function Button(
+  props: ButtonOwnProps & {as?: ElementType} & Omit<
+      React.HTMLProps<HTMLButtonElement>,
+      'as' | 'width'
+    >,
+  ref: React.ForwardedRef<HTMLButtonElement>,
+) {
+  const {
+    children,
+    disabled,
+    fontSize = 1,
+    icon: IconComponent,
+    iconRight: IconRightComponent,
+    justify: justifyProp = 'center',
+    loading,
+    mode = 'default',
+    padding: paddingProp = 3,
+    paddingX: paddingXProp,
+    paddingY: paddingYProp,
+    paddingTop: paddingTopProp,
+    paddingBottom: paddingBottomProp,
+    paddingLeft: paddingLeftProp,
+    paddingRight: paddingRightProp,
+    radius: radiusProp = 2,
+    selected,
+    gap,
+    // oxlint-disable-next-line no-deprecated
+    space: deprecated_space = 3,
+    text,
+    textAlign,
+    textWeight,
+    tone = 'default',
+    type = 'button',
+    muted = false,
+    width,
+    ...restProps
+  } = props
+  const {button} = useTheme_v2()
+
+  const justify = _getArrayProp(justifyProp)
+  const padding = _getArrayProp(paddingProp)
+  const paddingX = _getArrayProp(paddingXProp)
+  const paddingY = _getArrayProp(paddingYProp)
+  const paddingTop = _getArrayProp(paddingTopProp)
+  const paddingBottom = _getArrayProp(paddingBottomProp)
+  const paddingLeft = _getArrayProp(paddingLeftProp)
+  const paddingRight = _getArrayProp(paddingRightProp)
+  const radius = _getArrayProp(radiusProp)
+  const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
+
+  const boxProps = useMemo(
+    () => ({
+      // flex: 1,
+      padding,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
+    }),
+    [padding, paddingX, paddingY, paddingTop, paddingBottom, paddingLeft, paddingRight],
+  )
+
+  return (
+    <StyledButton
+      data-ui="Button"
+      {...restProps}
+      $mode={mode}
+      $radius={radius}
+      $tone={tone}
+      data-disabled={Boolean(loading || disabled)}
+      data-selected={selected ? '' : undefined}
+      disabled={Boolean(loading || disabled)}
+      ref={ref}
+      type={type}
+      $width={width}
+    >
+      {Boolean(loading) && (
+        <LoadingBox>
+          <Spinner />
+        </LoadingBox>
+      )}
+
+      {(IconComponent || text || IconRightComponent) && (
+        <Box as="span" {...boxProps}>
+          <Flex as="span" justify={justify} gap={spacing}>
+            {IconComponent && (
+              <Text size={fontSize}>
+                {isValidElement(IconComponent) && IconComponent}
+                {isValidElementType(IconComponent) && <IconComponent />}
+              </Text>
+            )}
+
+            {text && (
+              <Box>
+                <Text
+                  muted={muted}
+                  align={textAlign}
+                  size={fontSize}
+                  textOverflow="ellipsis"
+                  weight={textWeight ?? button.textWeight}
+                >
+                  {text}
+                </Text>
+              </Box>
+            )}
+
+            {IconRightComponent && (
+              <Text size={fontSize}>
+                {isValidElement(IconRightComponent) && IconRightComponent}
+                {isValidElementType(IconRightComponent) && <IconRightComponent />}
+              </Text>
+            )}
+          </Flex>
+        </Box>
+      )}
+
+      {children && (
+        <Box as="span" {...boxProps}>
+          {children}
+        </Box>
+      )}
+    </StyledButton>
+  )
+})
+ButtonComponent.displayName = 'ForwardRef(Button)'
+
+/**
+ * @public
+ */
+// oxlint-disable-next-line no-unsafe-type-assertion
+export const Button = ButtonComponent as unknown as <E extends ElementType = 'button'>(
+  props: ButtonProps<E>,
+) => React.JSX.Element
