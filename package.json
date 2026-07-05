@@ -16,7 +16,7 @@
     "lint": "pnpm --recursive lint",
     "release": "changeset publish",
     "storybook:build": "pnpm --filter sanity-ui-storybook build",
-    "storybook:start": "http-server -a localhost -c-0 -p 6006 -s apps/storybook/storybook-static",
+    "storybook:start": "http-server apps/storybook/storybook-static -a localhost -c-0 -p 6006 -s",
     "test": "pnpm --filter @sanity/ui test",
     "test:browser": "start-server-and-test 'run-s storybook:build storybook:start' http://localhost:6006 'run-s cypress:run'",
     "ts:check": "pnpm --recursive ts:check",

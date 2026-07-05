@@ -61,6 +61,12 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
   }
+  /* Make the preview body fill the viewport (like the app frame the components are designed
+     for), so that stories – and tests that click outside of them – behave predictably */
+  html,
+  body {
+    height: 100%;
+  }
   /* Temporarily hide docs + story preloader skeletons, which currently show an unsightly flash when loading */
   .sb-preparing-docs,
   .sb-preparing-story {
