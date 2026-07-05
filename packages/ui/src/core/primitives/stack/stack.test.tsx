@@ -1,20 +1,22 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Stack} from './stack'
 import {responsiveStackSpaceStyle} from './styles'
 
-jest.mock('./styles', () => {
-  const actual = jest.requireActual('./styles')
+vi.mock('./styles', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./styles')>()
 
   return {
     ...actual,
-    responsiveStackSpaceStyle: jest.fn(actual.responsiveStackSpaceStyle),
+    responsiveStackSpaceStyle: vi.fn(actual.responsiveStackSpaceStyle),
   }
 })
 
 describe('primitives/stack', () => {
-  const mockedResponsiveStackSpaceStyle = jest.mocked(responsiveStackSpaceStyle)
+  const mockedResponsiveStackSpaceStyle = vi.mocked(responsiveStackSpaceStyle)
   beforeEach(() => {
     mockedResponsiveStackSpaceStyle.mockClear()
   })

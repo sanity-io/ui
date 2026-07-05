@@ -1,6 +1,6 @@
 import {LabelSkeleton, Skeleton} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {getFontSizeControls, getSpaceControls} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'

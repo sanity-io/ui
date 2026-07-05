@@ -25,21 +25,25 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   the Node version in CI cannot import TS config files otherwise). The build
   regenerates package.json `exports` (dev exports): in the monorepo,
   `@sanity/ui` and `@sanity/ui/theme` resolve directly to TypeScript source
-  for every tool (tsc, oxlint's type checker, jest, vite), so there are no
+  for every tool (tsc, oxlint's type checker, vitest, vite), so there are no
   tsconfig `paths`, no `customConditions`, and no vite aliases. The publishable
   `exports` (dist `import`/`require`) live under `publishConfig` and are
   applied by `pnpm pack`/`publish`.
-- Tests do not require a build: jest resolves `@sanity/ui` to source through
-  the dev `exports` and applies the React Compiler in its babel transform
-  (see `jest.config.js`) to match the shipped `dist` behavior.
+- `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`).
+  `@sanity/ui` resolves to the `packages/ui/exports/` source through the dev
+  `exports`, so unit tests run directly against source and do not require a
+  `pnpm build` first.
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. It
   resolves `@sanity/ui` to the `packages/ui/exports/` source through the dev
   `exports`, so it hot-reloads source edits directly (no rebuild needed).
-- Cypress end-to-end tests run against the built Storybook: `pnpm test:browser`
-  builds Storybook, serves it on http://localhost:6006 (`pnpm storybook:start`),
-  and runs `cypress run`. The specs visit stories via
-  `/iframe.html?id=<story-id>` URLs, so renaming stories referenced by
-  `cy.visit()` breaks them.- Releases are managed with Changesets: run `pnpm changeset` to add a changeset
+- `pnpm test:browser` runs the Storybook tests (`apps/storybook`): vitest
+  renders every story in headless Chromium via `@storybook/addon-vitest` and
+  executes story `play` interactions, plus the browser tests in
+  `apps/storybook/tests/` (see `apps/storybook/vitest.config.ts`). The
+  Playwright-provided browser must be installed once via
+  `pnpm --filter sanity-ui-storybook exec playwright install chromium`.
+  Stories opt out of being tested with the `!test` tag.
+- Releases are managed with Changesets: run `pnpm changeset` to add a changeset
   to a PR that should trigger a release. Merging to `main` opens/updates a
   "Version Packages" PR, and merging that publishes to npm via trusted
   publishing.

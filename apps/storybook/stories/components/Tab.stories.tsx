@@ -1,7 +1,8 @@
 import {OkHandIcon, RocketIcon, SearchIcon, SunIcon} from '@sanity/icons'
 import {Box, Card, Tab, TabList, TabPanel, Text} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'
+import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {BUTTON_TONES} from '../constants'
 import {getFontSizeControls, getIconControls, getSpaceControls} from '../controls'
@@ -143,4 +144,27 @@ function ExampleStory() {
 export const Example: Story = {
   parameters: {controls: {include: []}},
   render: () => <ExampleStory />,
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+    const el = (id: string) => doc.getElementById(id)
+
+    await step('should use keys to navigate tabs', async () => {
+      await userEvent.click(el('example-tab-foo')!)
+      await userEvent.keyboard('{ArrowRight}')
+
+      await waitFor(() => expect(el('example-tab-bar')).toHaveFocus())
+      await userEvent.keyboard('{ArrowRight}')
+
+      await waitFor(() => expect(el('example-tab-baz')).toHaveFocus())
+      await userEvent.keyboard('{ArrowRight}')
+
+      await waitFor(() => expect(el('example-tab-foo')).toHaveFocus())
+
+      // Trigger "Tab"
+      await userEvent.tab()
+
+      // Expect the panel to be focused
+      await waitFor(() => expect(el('example-panel-foo')).toHaveFocus())
+    })
+  },
 }

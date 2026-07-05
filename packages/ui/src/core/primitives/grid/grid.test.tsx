@@ -1,20 +1,22 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {responsiveGridStyle} from '../../styles/internal'
 import {Grid} from './grid'
 
-jest.mock('../../styles/internal', () => {
-  const actual = jest.requireActual('../../styles/internal')
+vi.mock('../../styles/internal', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../styles/internal')>()
 
   return {
     ...actual,
-    responsiveGridStyle: jest.fn(actual.responsiveGridStyle),
+    responsiveGridStyle: vi.fn(actual.responsiveGridStyle),
   }
 })
 
 describe('primitives/grid', () => {
-  const mockedResponsiveGridStyle = jest.mocked(responsiveGridStyle)
+  const mockedResponsiveGridStyle = vi.mocked(responsiveGridStyle)
 
   beforeEach(() => {
     mockedResponsiveGridStyle.mockClear()

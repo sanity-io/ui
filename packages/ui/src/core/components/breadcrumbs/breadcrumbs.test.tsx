@@ -1,16 +1,17 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Box} from '../../primitives'
 import {Breadcrumbs} from './breadcrumbs'
 
-jest.mock('../../primitives', () => {
-  const actual = jest.requireActual('../../primitives')
+vi.mock('../../primitives', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives')>()
 
   return {
     ...actual,
-    // oxlint-disable-next-line no-unnecessary-type-assertion
-    Box: jest.fn((props: Record<string, unknown>) => (actual.Box as any).render(props, null)),
+    Box: vi.fn((props: Record<string, unknown>) => (actual.Box as any).render(props, null)),
   }
 })
 
@@ -24,7 +25,7 @@ function renderBreadcrumbs(props: Partial<React.ComponentProps<typeof Breadcrumb
 }
 
 describe('components/breadcrumbs spacing', () => {
-  const mockedBox = jest.mocked(Box)
+  const mockedBox = vi.mocked(Box)
 
   beforeEach(() => {
     mockedBox.mockClear()

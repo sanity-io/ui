@@ -1,28 +1,28 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Inline} from '../../primitives'
 import {Hotkeys} from './hotkeys'
 
-jest.mock('../../primitives', () => {
-  const actual = jest.requireActual('../../primitives')
+vi.mock('../../primitives', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives')>()
 
   return {
     ...actual,
-    // oxlint-disable-next-line no-unnecessary-type-assertion
-    Inline: jest.fn((props: Record<string, unknown>) => (actual.Inline as any).render(props, null)),
+    Inline: vi.fn((props: Record<string, unknown>) => (actual.Inline as any).render(props, null)),
   }
 })
 
 describe('components/hotkeys spacing', () => {
-  const mockedInline = jest.mocked(Inline)
+  const mockedInline = vi.mocked(Inline)
 
   beforeEach(() => {
     mockedInline.mockClear()
   })
 
   it('should support `space` and `gap` with the same behavior', () => {
-    // oxlint-disable-next-line no-deprecated
     render(<Hotkeys keys={['Ctrl', 'S']} space={2} />)
     expect(mockedInline.mock.calls.map(([props]) => props)).toContainEqual(
       expect.objectContaining({gap: [2]}),
@@ -36,7 +36,6 @@ describe('components/hotkeys spacing', () => {
   })
 
   it('should prefer `gap` over `space` when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
     render(<Hotkeys gap={3} keys={['Ctrl', 'S']} space={1} />)
     const propsList = mockedInline.mock.calls.map(([props]) => props)
     expect(propsList).toContainEqual(expect.objectContaining({gap: [3]}))

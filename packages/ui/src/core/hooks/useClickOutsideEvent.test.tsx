@@ -1,8 +1,9 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
 
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {useRef} from 'react'
+import {describe, expect, it, vi} from 'vitest'
 
 import {useClickOutsideEvent} from './useClickOutsideEvent'
 
@@ -13,7 +14,7 @@ describe('useClickOutsideEvent', () => {
 
   it('calls the handler when clicking outside of the array of elements', async () => {
     const user = userEvent.setup()
-    const handler = jest.fn()
+    const handler = vi.fn()
 
     const TestComponent = () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
@@ -43,7 +44,7 @@ describe('useClickOutsideEvent', () => {
 
   it('the elements array flattens nested arrays one level deep', async () => {
     const user = userEvent.setup()
-    const handler = jest.fn()
+    const handler = vi.fn()
 
     const TestComponent = () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
@@ -78,7 +79,7 @@ describe('useClickOutsideEvent', () => {
 
   it('it can set a boundary to scope outside click events', async () => {
     const user = userEvent.setup()
-    const handler = jest.fn()
+    const handler = vi.fn()
 
     const TestComponent = () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)

@@ -1,7 +1,7 @@
 import {Card, studioTheme, ThemeProvider} from '@sanity/ui'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {DecoratorHelpers} from '@storybook/addon-themes'
-import {Decorator} from '@storybook/react'
+import {Decorator} from '@storybook/react-vite'
 import {createGlobalStyle} from 'styled-components'
 
 const {initializeThemeState, pluckThemeFromContext} = DecoratorHelpers

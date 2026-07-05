@@ -1,3 +1,5 @@
+import {expect, it} from 'vitest'
+
 import {buildTheme} from './buildTheme'
 import {getContrastRatio} from './lib/color-fns'
 

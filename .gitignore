@@ -6,3 +6,7 @@ dist
 etc
 node_modules
 storybook-static
+
+# Vitest browser mode failure screenshots and attachments
+__screenshots__
+.vitest-attachments

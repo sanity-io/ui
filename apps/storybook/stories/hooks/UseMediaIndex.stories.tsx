@@ -1,5 +1,5 @@
 import {Card, Stack, Text, useMediaIndex} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 const meta: Meta = {
   parameters: {controls: {include: []}},

@@ -1,6 +1,7 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
 
 import React, {useCallback, useMemo} from 'react'
+import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {MenuContext, MenuContextValue} from './menuContext'
@@ -9,7 +10,7 @@ import {useMenu} from './useMenu'
 describe('components/menu', () => {
   describe('useMenu', () => {
     it('should get context value', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         const rootMenu = useMenu()
@@ -65,7 +66,7 @@ describe('components/menu', () => {
     })
 
     it('should fail when no context value is provided', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {
@@ -93,7 +94,7 @@ describe('components/menu', () => {
     })
 
     it('should fail when context value is not compatible', async () => {
-      const log = jest.fn()
+      const log = vi.fn()
 
       function Debug() {
         try {

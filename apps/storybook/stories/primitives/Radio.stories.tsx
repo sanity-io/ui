@@ -1,5 +1,5 @@
 import {Flex, Radio, Stack} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {ChangeEvent, useCallback, useState} from 'react'
 
 import {matrixBuilder} from '../helpers/matrixBuilder'

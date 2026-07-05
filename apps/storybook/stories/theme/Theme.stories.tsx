@@ -14,7 +14,7 @@ import {
   TreeItem,
   useRootTheme,
 } from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 
 import {BuildStory} from './build/BuildStory'
@@ -36,11 +36,17 @@ export const Debug: Story = {
 export const Build: Story = {
   parameters: {padding: 0},
   render: () => <BuildStory />,
+  // The theme-builder preview renders an enormous DOM which crashes headless
+  // Chromium when it runs as a browser test
+  tags: ['!test'],
 }
 
 export const Canvas: Story = {
   parameters: {padding: 0},
   render: () => <CanvasStory />,
+  // The color canvas preview is too heavy to render within the browser test
+  // timeout
+  tags: ['!test'],
 }
 
 export const NestedProvider: Story = {
@@ -206,4 +212,6 @@ function ColorPreview({name, value}: {name: string; value: string}) {
 
 export const Color: Story = {
   render: () => <ColorStory />,
+  // The color tree preview is too heavy to render as a browser test
+  tags: ['!test'],
 }

@@ -18,7 +18,7 @@ import {
   useLayer,
 } from '@sanity/ui'
 import {ThemeColorToneKey} from '@sanity/ui/theme'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import {PLACEMENT_OPTIONS, RADII} from '../constants'

@@ -11,7 +11,7 @@ import {
   Stack,
   Text,
 } from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useRef} from 'react'
 import {styled} from 'styled-components'
 

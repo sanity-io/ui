@@ -1,6 +1,6 @@
 import {BottleIcon, IceCreamIcon, LemonIcon, LinkIcon, TrolleyIcon} from '@sanity/icons'
 import {Box, Text, TextInput, Tree, TreeItem} from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 
 import {getSpaceControls} from '../controls'

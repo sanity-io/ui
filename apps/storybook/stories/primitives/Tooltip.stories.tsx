@@ -11,9 +11,9 @@ import {
   Tooltip,
   TooltipDelayGroupProvider,
 } from '@sanity/ui'
-import type {Meta, StoryFn, StoryObj} from '@storybook/react'
-import {userEvent, within} from '@storybook/test'
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useCallback, useMemo, useState} from 'react'
+import {userEvent, within} from 'storybook/test'
 
 import {PLACEMENT_OPTIONS} from '../constants'
 import {getShadowControls, getSpaceControls} from '../controls'
@@ -102,7 +102,7 @@ export const WithOpenDelay: Story = {
     const button = canvas.getByText('Hover me')
 
     await userEvent.hover(button)
-    await canvas.findByText('Content', undefined, {timeout: 300})
+    await canvas.findByText("I'm a tooltip")
   },
 }
 
@@ -129,10 +129,11 @@ export const WithDelayGroup: Story = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement)
 
-    const button = canvas.getByText('Hover me')
+    // The story renders multiple tooltips, hover the first one
+    const button = canvas.getAllByText('Hover me')[0]
 
     await userEvent.hover(button)
-    await canvas.findByText('Content', undefined, {timeout: 300})
+    await canvas.findByText("I'm a tooltip")
   },
 }
 

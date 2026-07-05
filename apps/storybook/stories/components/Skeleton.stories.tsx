@@ -12,7 +12,7 @@ import {
   Text,
   TextSkeleton,
 } from '@sanity/ui'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {getSpaceControls} from '../controls'
 

@@ -1,20 +1,22 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
+
+import {beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test'
 import {Inline} from './inline'
 import {inlineSpaceStyle} from './styles'
 
-jest.mock('./styles', () => {
-  const actual = jest.requireActual('./styles')
+vi.mock('./styles', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./styles')>()
 
   return {
     ...actual,
-    inlineSpaceStyle: jest.fn(actual.inlineSpaceStyle),
+    inlineSpaceStyle: vi.fn(actual.inlineSpaceStyle),
   }
 })
 
 describe('primitives/inline', () => {
-  const mockedInlineSpaceStyle = jest.mocked(inlineSpaceStyle)
+  const mockedInlineSpaceStyle = vi.mocked(inlineSpaceStyle)
 
   beforeEach(() => {
     mockedInlineSpaceStyle.mockClear()

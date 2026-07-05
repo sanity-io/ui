@@ -3,22 +3,17 @@ import viteReact from '@vitejs/plugin-react'
 import {mergeConfig} from 'vite'
 
 const config: StorybookConfig = {
-  stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: ['../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-a11y',
+    '@storybook/addon-docs',
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-storysource',
     '@storybook/addon-themes',
-    '@storybook/addon-mdx-gfm',
+    '@storybook/addon-vitest',
   ],
   framework: {
     name: '@storybook/react-vite',
     options: {},
-  },
-  docs: {
-    autodocs: 'tag',
   },
   viteFinal(config) {
     return mergeConfig(config, {
