@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 3.3.2
+
+### Patch Changes
+
+- [#2220](https://github.com/sanity-io/ui/pull/2220) [`edb7248`](https://github.com/sanity-io/ui/commit/edb7248a6e0c3d61c441a28e1f6dbabb5578bb94) Thanks [@stipsan](https://github.com/stipsan)! - The package is now built with [tsdown](https://tsdown.dev). It continues to ship both CJS (`require`) and ESM (`import`) builds with identical entry points and named exports.
+
 ## 3.3.1
 
 ### Patch Changes
