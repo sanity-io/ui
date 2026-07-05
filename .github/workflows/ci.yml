@@ -59,7 +59,7 @@ jobs:
         if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
         run: pnpm --filter sanity-ui-storybook exec playwright install --with-deps chromium
       - run: pnpm test:browser
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: vitest-failure-screenshots
