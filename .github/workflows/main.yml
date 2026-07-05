@@ -68,7 +68,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: lts/*
-      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v7.4.1
         with:
           build: pnpm workshop:build
           start: pnpm workshop:start
