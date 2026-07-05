@@ -7,7 +7,6 @@ strictPeerDependencies: false
 
 allowBuilds:
   core-js: false
-  cypress: set this to true or false
   esbuild: false
   fsevents: false
   unrs-resolver: true
