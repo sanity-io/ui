@@ -9,6 +9,7 @@ const meta: Meta = {
 export default meta
 type Story = StoryObj
 
+// oxlint-disable-next-line no-new-array
 const data = Array.from(new Array(1000)).map((_, key) => ({key}))
 
 function WindowScrollStory() {
@@ -63,6 +64,7 @@ interface InfiniteItem {
 }
 
 function getInfiniteData(len: number, offsetIndex = 0): InfiniteItem[] {
+  // oxlint-disable-next-line no-new-array
   return Array.from(new Array(len)).map((_, index) => ({key: String(offsetIndex + index)}))
 }
 

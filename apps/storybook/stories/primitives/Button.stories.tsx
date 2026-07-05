@@ -321,6 +321,7 @@ export const Stacked: Story = {
       <Flex align="center" height="fill" justify="center">
         <Container width={0} style={{textAlign: 'center'}}>
           <Box padding={4}>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={1}>
               {BUTTON_TONES.map((tone) => (
                 <Button {...props} key={tone} text={tone} tone={tone} />
@@ -430,8 +431,11 @@ export const CustomIcons: Story = {
   parameters: {controls: {include: []}},
   render: () => (
     <Flex align="center" height="fill" justify="center">
+      {/* oxlint-disable-next-line no-deprecated */}
       <Inline space={1}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Button fontSize={1} icon={RocketIcon} padding={2} space={2} text="Rocket" />
+        {/* oxlint-disable-next-line no-deprecated */}
         <Button fontSize={1} icon={CustomIcon} padding={2} space={2} text="Heart" />
       </Inline>
     </Flex>
@@ -446,7 +450,9 @@ const DISABLED_DEFAULT_PROPS: ButtonOwnProps = {
 function DisabledLayout() {
   return (
     <Container width={2}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={4}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Grid columns={3} gap={4}>
           <Text size={1} weight="semibold">
             Default
@@ -459,8 +465,11 @@ function DisabledLayout() {
           </Text>
         </Grid>
 
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={2}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Grid columns={3} gap={4}>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={2}>
               <Button {...DISABLED_DEFAULT_PROPS} mode="default" text="Enabled" />
               <Button {...DISABLED_DEFAULT_PROPS} disabled mode="default" text="Disabled" />
@@ -473,6 +482,7 @@ function DisabledLayout() {
               />
             </Stack>
 
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={2}>
               <Button {...DISABLED_DEFAULT_PROPS} mode="ghost" text="Enabled" />
               <Button {...DISABLED_DEFAULT_PROPS} disabled mode="ghost" text="Disabled" />
@@ -485,6 +495,7 @@ function DisabledLayout() {
               />
             </Stack>
 
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={2}>
               <Button {...DISABLED_DEFAULT_PROPS} mode="bleed" text="Enabled" />
               <Button {...DISABLED_DEFAULT_PROPS} mode="bleed" disabled text="Disabled" />
@@ -506,6 +517,7 @@ function DisabledLayout() {
 export const Disabled: Story = {
   parameters: {controls: {include: []}},
   render: () => (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={4}>
       <Card padding={5} scheme="light">
         <DisabledLayout />

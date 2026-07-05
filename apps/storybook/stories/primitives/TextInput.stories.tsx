@@ -210,6 +210,7 @@ export const Typed: Story = {
 function TonesColumn({scheme}: {scheme: 'light' | 'dark'}) {
   return (
     <Card flex={1} scheme={scheme}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack padding={[3, 4, 5]} space={4}>
         <Card padding={3}>
           <TextInput

@@ -122,7 +122,9 @@ function CustomStory() {
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
       <Container width={0}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={5}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text as="label" htmlFor="custom" id="custom-label" size={1} weight="medium">
               Country
@@ -218,6 +220,7 @@ function AsyncStory() {
         setLoadingCurrentRef,
       )
     } else {
+      // oxlint-disable-next-line react-compiler
       setOptionTitle(null)
       setLoadingCurrentRef(false)
     }
@@ -229,6 +232,7 @@ function AsyncStory() {
 
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={[3, 3, 4]}>
         <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="medium">
           Country
@@ -322,6 +326,7 @@ function ConstrainedHeightStory() {
           style={{position: 'relative'}}
         >
           <Box height="fill" overflow="auto" padding={[4, 4, 5]} sizing="border">
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={5}>
               <BoundaryElementProvider element={boundaryElement}>
                 <ConstrainedHeightExampleField id="example-1" label="Example 1" />
@@ -405,6 +410,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
   )
 
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={3}>
       <Text size={1} weight="medium">
         {label}
@@ -442,6 +448,7 @@ function FocusAndBlurStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={3}>
         <Autocomplete
           id="focus-and-blur"
@@ -453,6 +460,7 @@ function FocusAndBlurStory() {
           placeholder="Search"
           value={value}
         />
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Card overflow="auto" padding={3} radius={2} tone="transparent">
             <Code id="focus-and-blur-log" language="json" size={1}>
@@ -490,6 +498,7 @@ function FullscreenStory() {
   const [value, setValue] = useState<string>('')
 
   const relatedElements = useMemo(
+    // oxlint-disable-next-line no-unsafe-type-assertion
     () => [closeSearchButtonElement].filter(Boolean) as HTMLElement[],
     [closeSearchButtonElement],
   )
@@ -597,6 +606,7 @@ function FullscreenStory() {
         setLoadingCurrentRef,
       )
     } else {
+      // oxlint-disable-next-line react-compiler
       setOptionTitle(null)
       setLoadingCurrentRef(false)
     }
@@ -692,6 +702,7 @@ function FullscreenAsyncOption(props: {
       <Flex align="center">
         <Skeleton radius={2} style={{width: 35, height: 35}} />
         <Box flex={1} marginLeft={3}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={2}>
             {loading && (
               <>

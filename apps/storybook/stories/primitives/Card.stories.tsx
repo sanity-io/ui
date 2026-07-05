@@ -485,6 +485,7 @@ export const Interactive: Story = {
     <Flex align="center" height="fill" justify="center">
       <div>
         <Card __unstable_focusRing as="button" padding={3} tabIndex={0}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <Text>
               Text <code>Code</code>
@@ -502,6 +503,7 @@ function CardListPreview() {
   return (
     <Flex align="center" gap={2}>
       <Skeleton radius="full" style={{width: 33, height: 33}} />
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack flex={1} space={2}>
         <Text size={1} weight="medium">
           Preview
@@ -521,6 +523,7 @@ export const ListNavigation: Story = {
       <Card height="fill" shadow={1}>
         <Flex height="fill">
           <Card flex={1} padding={2}>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={1}>
               <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
                 <CardListPreview />
@@ -540,6 +543,7 @@ export const ListNavigation: Story = {
             </Stack>
           </Card>
           <Card borderLeft flex={1} padding={2}>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Stack space={1}>
               <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
                 <CardListPreview />
@@ -568,6 +572,7 @@ export const Checkered: Story = {
   parameters: {controls: {include: []}},
   render: () => (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={1}>
         {THEME_COLOR_CARD_TONES.map((tone) => (
           <Card
@@ -647,6 +652,7 @@ function SelectedStoryPreview({selected}: {selected: boolean}) {
       <Box flex={1}>
         <Text size={1}>Title</Text>
       </Box>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Inline space={3}>
         <TextWithTone
           data-selected={selected ? '' : undefined}
@@ -674,6 +680,7 @@ function SelectedStory({disabled, selected}: {disabled: boolean; selected: boole
   return (
     <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
       <Container width={0}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={1}>
           <Card
             __unstable_focusRing
@@ -706,6 +713,7 @@ function SelectedStory({disabled, selected}: {disabled: boolean; selected: boole
 export const Selected: Story = {
   parameters: {controls: {include: []}},
   render: () => (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={4}>
       <SelectedStory disabled={false} selected={false} />
       <SelectedStory disabled={false} selected />

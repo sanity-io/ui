@@ -51,6 +51,7 @@ function NestedRoot() {
           </Text>
         </Box>
         <Box padding={3}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <LayerDebugInfo id="layer-debug-info-1" />
             <Button id="open-layer-1" mode="ghost" onClick={handleOpen} text="Open layer 1" />
@@ -84,6 +85,7 @@ function NestedLayer1({onClose}: {onClose: () => void}) {
         </Box>
       </Flex>
       <Box padding={3}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <LayerDebugInfo />
           <Button id="open-layer-2" mode="ghost" onClick={handleOpen} text="Open layer 2" />
@@ -112,6 +114,7 @@ function NestedLayer2({onClose}: {onClose: () => void}) {
         </Box>
       </Flex>
       <Box padding={3}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <LayerDebugInfo />
         </Stack>
@@ -132,13 +135,16 @@ export const Nested: Story = {
 
 export const MultipleRoots: Story = {
   render: () => (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={4}>
       <LayerProvider zOffset={100}>
         <Card padding={3} shadow={1}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <LayerDebugInfo />
             <Layer>
               <Card padding={3} shadow={1}>
+                {/* oxlint-disable-next-line no-deprecated */}
                 <Stack space={3}>
                   <LayerDebugInfo />
                   <Layer>
@@ -155,10 +161,12 @@ export const MultipleRoots: Story = {
 
       <LayerProvider zOffset={200}>
         <Card as={Layer} padding={3} shadow={5} style={{top: -50, left: 30}}>
+          {/* oxlint-disable-next-line no-deprecated */}
           <Stack space={3}>
             <LayerDebugInfo />
             <Layer>
               <Card padding={3} shadow={1}>
+                {/* oxlint-disable-next-line no-deprecated */}
                 <Stack space={3}>
                   <LayerDebugInfo />
                   <Layer>

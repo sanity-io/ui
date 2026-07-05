@@ -61,8 +61,10 @@ export const Responsive: Story = {
       <Container width="auto">
         <Grid
           id="responsive-grid"
+          // oxlint-disable-next-line no-deprecated
           columns={[1, 2, 3, 4, 5, 6, 7]}
           gap={[0, 1, 2, 3, 4, 5, 6]}
+          // oxlint-disable-next-line no-deprecated
           rows={[1, 2, 3, 4, 5, 6, 7]}
           style={{textAlign: 'center'}}
         >

@@ -8,12 +8,9 @@
   "scripts": {
     "build": "storybook build",
     "clean": "rimraf storybook-static",
-    "dev": "storybook dev -p 6006",
-    "lint": "eslint .",
-    "ts:check": "tsc"
+    "dev": "storybook dev -p 6006"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.7.4",
     "@sanity/ui": "workspace:*",
@@ -36,14 +33,6 @@
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.0.4",
     "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9.39.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-formatter-gha": "^1.6.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "7.0.1",
-    "eslint-plugin-storybook": "^0.12.0",
-    "globals": "^16.3.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-is": "^19.2.0",
@@ -52,8 +41,7 @@
     "rimraf": "^5.0.5",
     "storybook": "^8.6.14",
     "styled-components": "npm:@sanity/styled-components@^6.1.23",
-    "typescript": "5.9.3",
-    "typescript-eslint": "^8.46.3",
+    "typescript": "6.0.3",
     "vite": "^7.2.2"
   }
 }

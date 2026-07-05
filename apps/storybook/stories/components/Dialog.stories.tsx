@@ -126,8 +126,11 @@ export const WithoutClose: Story = {
 
 export const OpenDialogWithButton: Story = {
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [open, setOpen] = useState(false)
+    // oxlint-disable-next-line rules-of-hooks
     const onClose = useCallback(() => setOpen(false), [])
+    // oxlint-disable-next-line rules-of-hooks
     const onOpen = useCallback(() => setOpen(true), [])
 
     return (
@@ -155,6 +158,7 @@ export const OpenDialogWithButton: Story = {
 
 export const DynamicContent: Story = {
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [numParagraphs, setNumParagraphs] = useState(1)
 
     return (
@@ -176,13 +180,16 @@ export const DynamicContent: Story = {
           </Flex>
         }
       >
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack padding={4} space={4}>
           {numParagraphs === 0 && (
             <Text muted size={1}>
               (No content)
             </Text>
           )}
+          {/* oxlint-disable-next-line no-new-array */}
           {[...new Array(numParagraphs).fill(undefined)].map((_, index) => (
+            // oxlint-disable-next-line no-array-index-key
             <Text key={index}>
               Paragraph {index + 1}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Quisque at nisl at sem tempor hendrerit scelerisque ut libero. Maecenas iaculis
@@ -211,6 +218,7 @@ export const Positioning: Story = {
   render: (props) => {
     return (
       <Box>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3} style={{padding: 'calc(100vh - 100px) 0 '}}>
           <Text align="center">
             <ArrowUpIcon />
@@ -228,8 +236,11 @@ export const Positioning: Story = {
 
 export const DeleteDocumentDialog: Story = {
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [open, setOpen] = useState(true)
+    // oxlint-disable-next-line rules-of-hooks
     const onClose = useCallback(() => setOpen(false), [])
+    // oxlint-disable-next-line rules-of-hooks
     const onOpen = useCallback(() => setOpen(true), [])
 
     return (
@@ -281,6 +292,7 @@ function PropsStory() {
         {open && (
           <Dialog header="Props example" id="dialog" onClose={handleClose} open={open} width={0}>
             <Box padding={4}>
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={4}>
                 <Text>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et orci vitae diam
@@ -345,6 +357,7 @@ function ActivateStory() {
               onActivate={({activeElement}) => activeElement?.focus()}
               onClose={() => setFirstDialogOpen(false)}
             >
+              {/* oxlint-disable-next-line no-deprecated */}
               <Stack space={2} padding={3}>
                 <Button
                   mode="ghost"
@@ -373,6 +386,7 @@ function ActivateStory() {
                   onActivate={({activeElement}) => activeElement?.focus()}
                   onClose={() => setSecondDialogOpen(false)}
                 >
+                  {/* oxlint-disable-next-line no-deprecated */}
                   <Stack space={2} padding={3}>
                     <Button
                       mode="ghost"
@@ -401,6 +415,7 @@ function ActivateStory() {
                       onActivate={({activeElement}) => activeElement?.focus()}
                       onClose={() => setThirdDialogOpen(false)}
                     >
+                      {/* oxlint-disable-next-line no-deprecated */}
                       <Stack space={2} padding={3}>
                         <MenuButton
                           id="menu"
@@ -433,6 +448,7 @@ function ActivateStory() {
                           onActivate={({activeElement}) => activeElement?.focus()}
                           onClose={() => setFourthDialogOpen(false)}
                         >
+                          {/* oxlint-disable-next-line no-deprecated */}
                           <Stack space={2} padding={3}>
                             <Text>👋</Text>
                           </Stack>
@@ -512,6 +528,7 @@ function NestedStory() {
                           <MenuItem text="Test" />
                         </Menu>
                       }
+                      // oxlint-disable-next-line no-deprecated
                       portal
                     />
                   </Box>
@@ -540,6 +557,7 @@ function OnScrollStory({onScroll}: {onScroll: () => void}) {
 
     el.addEventListener('scroll', onScroll, {passive: true})
 
+    // oxlint-disable-next-line consistent-return
     return () => el.removeEventListener('scroll', onScroll)
   }, [onScroll])
 
@@ -640,6 +658,7 @@ export const Position: Story = {
   render: () => (
     <Box padding={4}>
       <Box style={{padding: 'calc(100vh - 100px) 0'}}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Text align="center">
             <ArrowUpIcon />
@@ -782,6 +801,7 @@ function WrappedDialog(props: DialogProps & {children?: ReactNode}) {
     const containsActiveElement = dialogRef.current?.contains(document.activeElement)
 
     if (containsActiveElement) {
+      // oxlint-disable-next-line no-unsafe-type-assertion
       setLastFocusedElement(document.activeElement as HTMLElement)
     }
   }, [])

@@ -60,6 +60,7 @@ function Color(props: {color: ThemeColorCard_v2; tone: CardTone}) {
 
   return (
     <Card padding={[3, 4]} tone={tone}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={[3, 4]}>
         <ColorBase color={color} />
 
@@ -69,7 +70,6 @@ function Color(props: {color: ThemeColorCard_v2; tone: CardTone}) {
           <Text style={{color: 'inherit'}}>Input</Text>
         </Box>
 
-        {/* eslint-disable-next-line no-warning-comments */}
         {/* @todo: remove use of `muted` here */}
         <ColorSelectable color={color.selectable || color.muted} />
 
@@ -97,6 +97,7 @@ function ColorBase(props: {color: ThemeColorCard_v2}) {
   return (
     <Stack
       padding={3}
+      // oxlint-disable-next-line no-deprecated
       space={2}
       style={{
         borderRadius: 3,
@@ -108,7 +109,6 @@ function ColorBase(props: {color: ThemeColorCard_v2}) {
 
       <Text accent>Accent</Text>
       <Text>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a href="#">Link</a>
       </Text>
       <Text>
@@ -128,6 +128,7 @@ function ColorButton(props: {color: ThemeColorButton_v2}) {
   const {color} = props
 
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={3}>
       <ColorButtonMode color={color.default} />
       <ColorButtonMode color={color.ghost} />
@@ -140,7 +141,9 @@ function ColorButtonMode(props: {color: ThemeColorButtonMode_v2}) {
   const {color} = props
 
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={1}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Grid columns={5} marginBottom={1} gap={1}>
         <Box>
           <Text align="center" muted size={1}>
@@ -181,6 +184,7 @@ function ColorGenericStates(props: {color: ThemeColorButtonTone_v2}) {
   const {color} = props
 
   return (
+    // oxlint-disable-next-line no-deprecated
     <Grid columns={5} gap={1}>
       <ColorGenericState color={color.enabled} />
       <ColorGenericState color={color.hovered} />
@@ -208,6 +212,7 @@ function ColorGenericState(props: {color: ThemeColorState_v2}) {
   return (
     <Stack
       padding={2}
+      // oxlint-disable-next-line no-deprecated
       space={2}
       style={{
         backgroundColor: color.bg,
@@ -259,6 +264,7 @@ function ColorSelectable(props: {color: ThemeColorSelectable_v2}) {
   const {color} = props
 
   return (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={1}>
       <ColorSelectableTone color={color.default} />
       <ColorSelectableTone color={color.primary} />
@@ -273,6 +279,7 @@ function ColorSelectableTone(props: {color: ThemeColorSelectableTone_v2}) {
   const {color} = props
 
   return (
+    // oxlint-disable-next-line no-deprecated
     <Grid columns={5} gap={1}>
       <ColorGenericState color={color.enabled} />
       <ColorGenericState color={color.hovered} />

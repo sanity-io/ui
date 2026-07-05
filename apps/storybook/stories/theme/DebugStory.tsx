@@ -60,8 +60,10 @@ function DebugCard(props: {card: ThemeColorCard_v2; features: Features}) {
       {features.base && <DebugState />}
 
       {features.button && (
+        // oxlint-disable-next-line no-deprecated
         <Stack padding={2} space={1}>
           {THEME_COLOR_BUTTON_MODES.map((mode) => (
+            // oxlint-disable-next-line no-deprecated
             <Stack key={mode} space={1}>
               {THEME_COLOR_STATE_TONES.map((stateTone) => (
                 <Flex key={stateTone} gap={1}>
@@ -82,6 +84,7 @@ function DebugCard(props: {card: ThemeColorCard_v2; features: Features}) {
       )}
 
       {features.selectable && (
+        // oxlint-disable-next-line no-deprecated
         <Stack padding={2} space={1}>
           {THEME_COLOR_STATE_TONES.map((stateTone) => (
             <Flex key={stateTone} gap={1}>
@@ -115,6 +118,7 @@ function DebugState() {
     <Stack
       overflow="auto"
       padding={4}
+      // oxlint-disable-next-line no-deprecated
       space={3}
       style={{border: '1px solid var(--card-border-color)'}}
     >
@@ -133,7 +137,6 @@ function DebugState() {
         Accent
       </Text>
       <Text size={1}>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a href="#" style={{color: 'var(--card-link-fg-color)'}}>
           Link
         </a>
@@ -172,6 +175,7 @@ function DebugState() {
             overflow="hidden"
             padding={1}
             style={
+              // oxlint-disable-next-line no-unsafe-type-assertion
               {
                 '--card-fg-color': `var(--card-avatar-${color}-fg-color)`,
                 'backgroundColor': `var(--card-avatar-${color}-bg-color)`,

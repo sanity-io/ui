@@ -85,6 +85,7 @@ export const Sizes: Story = {
     },
   },
   render: (props) => (
+    // oxlint-disable-next-line no-deprecated
     <Stack space={3}>
       <Avatar {...props} size={0} />
       <Avatar {...props} size={1} />
@@ -100,6 +101,7 @@ export const WithinButton: Story = {
   parameters: {controls: {include: []}},
   render: () => (
     <Container width={1}>
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack paddingX={4} paddingY={[5, 6, 7]} space={1}>
         <Button padding={1}>
           <Flex align="center" gap={3} padding={2}>
@@ -155,6 +157,7 @@ export const WithinMenuItem: Story = {
       <Layer>
         <Box paddingX={4} paddingY={[5, 6, 7]}>
           <Card radius={3} shadow={3}>
+            {/* oxlint-disable-next-line no-deprecated */}
             <Menu space={1}>
               {[1, 2, 3].map((index) => (
                 <MenuItem key={index} padding={0}>

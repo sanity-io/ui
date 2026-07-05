@@ -165,6 +165,7 @@ export const TextInCard: Story = {
   },
 }
 
+// oxlint-disable-next-line no-deprecated
 const ColoredText = styled(Text)<{$color?: ThemeColorSpotKey}>((
   props: {
     $color?: ThemeColorAvatarColorKey
@@ -181,6 +182,7 @@ export const Colored: Story = {
   parameters: {controls: {include: []}},
   render: () => (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      {/* oxlint-disable-next-line no-deprecated */}
       <Stack space={4}>
         {Object.values(SPOT_COLOR_OPTIONS).map((color) => (
           <ColoredText align="center" $color={color} key={color} size={4} weight="bold">

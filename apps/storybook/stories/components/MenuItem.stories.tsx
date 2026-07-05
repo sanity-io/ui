@@ -52,6 +52,7 @@ export const Custom: Story = {
   render: () => (
     <>
       <MenuItem padding={3}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Text weight="medium" size={1}>
             First option
@@ -62,6 +63,7 @@ export const Custom: Story = {
         </Stack>
       </MenuItem>
       <MenuItem padding={3}>
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Text weight="medium" size={1}>
             Second option
@@ -73,6 +75,7 @@ export const Custom: Story = {
       </MenuItem>
       <MenuDivider />
       <MenuItem padding={3} tone="critical">
+        {/* oxlint-disable-next-line no-deprecated */}
         <Stack space={3}>
           <Text weight="medium" size={1}>
             Dangerous option
@@ -93,7 +96,6 @@ const CustomLink = forwardRef(function CustomLink(
   const {children, req, ...restProps} = props
 
   return (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <a data-required={req} {...restProps} href="#" ref={ref}>
       {children}
     </a>
