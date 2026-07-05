@@ -30,12 +30,14 @@ test.describe('Utils/Layer', () => {
   test('should calculate size of nested layers', async ({page}) => {
     await page.goto('/iframe.html?id=utils-layer--nested&viewMode=story')
 
-    await page.locator('#open-layer-1').click()
+    // The story renders multiple stacked examples with the same ids, so only
+    // interact with the first one
+    await page.locator('#open-layer-1').first().click()
 
-    await expect(page.locator('#layer-debug-info-1')).toContainText('size=1')
+    await expect(page.locator('#layer-debug-info-1').first()).toContainText('size=1')
 
-    await page.locator('#open-layer-2').click()
+    await page.locator('#open-layer-2').first().click()
 
-    await expect(page.locator('#layer-debug-info-1')).toContainText('size=2')
+    await expect(page.locator('#layer-debug-info-1').first()).toContainText('size=2')
   })
 })

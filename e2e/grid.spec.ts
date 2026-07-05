@@ -8,7 +8,7 @@ test.describe('Primitives/Grid', () => {
       {
         viewport: [320, 600],
         css: {
-          gridGap: 'normal normal',
+          gap: 'normal',
           gridTemplateColumns: '280px',
           gridTemplateRows: '19px 19px 19px 19px 19px 19px 19px 19px 19px 19px 19px 19px',
         },
@@ -17,7 +17,7 @@ test.describe('Primitives/Grid', () => {
       {
         viewport: [360, 375],
         css: {
-          gridGap: '4px 4px',
+          gap: '4px',
           gridTemplateColumns: '146px 146px',
           gridTemplateRows: '27px 27px 27px 27px 27px 27px',
         },
@@ -26,7 +26,7 @@ test.describe('Primitives/Grid', () => {
       {
         viewport: [600, 768],
         css: {
-          gridGap: '8px 8px',
+          gap: '8px',
           gridTemplateColumns: '160px 160px 160px',
           gridTemplateRows: '35px 35px 35px 35px',
         },
@@ -35,7 +35,7 @@ test.describe('Primitives/Grid', () => {
       {
         viewport: [900, 1024],
         css: {
-          gridGap: '12px 12px',
+          gap: '12px',
           gridTemplateColumns: '190px 190px 190px 190px',
           gridTemplateRows: '35px 35px 35px 35px',
         },
@@ -44,7 +44,7 @@ test.describe('Primitives/Grid', () => {
       {
         viewport: [1204, 1600],
         css: {
-          gridGap: '20px 20px',
+          gap: '20px',
           gridTemplateColumns: '204px 204px 204px 204px 204px',
           gridTemplateRows: '35px 35px 35px 35px 35px',
         },
@@ -53,7 +53,7 @@ test.describe('Primitives/Grid', () => {
       {
         viewport: [1800, 1920],
         css: {
-          gridGap: '32px 32px',
+          gap: '32px',
           gridTemplateColumns: '256px 256px 256px 256px 256px 256px',
           gridTemplateRows: '35px 35px 35px 35px 35px 35px',
         },
@@ -62,7 +62,7 @@ test.describe('Primitives/Grid', () => {
       {
         viewport: [2404, 3840],
         css: {
-          gridGap: '52px 52px',
+          gap: '52px',
           gridTemplateColumns: '284px 284px 284px 284px 284px 284px 284px',
           gridTemplateRows: '35px 35px 35px 35px 35px 35px 35px',
         },
@@ -76,7 +76,8 @@ test.describe('Primitives/Grid', () => {
 
       await page.setViewportSize({width: viewport[0], height: viewport[1]})
 
-      await expect(grid).toHaveCSS('grid-gap', css.gridGap)
+      await expect(grid).toHaveCSS('row-gap', css.gap)
+      await expect(grid).toHaveCSS('column-gap', css.gap)
       await expect(grid).toHaveCSS('grid-template-columns', css.gridTemplateColumns)
       await expect(grid).toHaveCSS('grid-template-rows', css.gridTemplateRows)
     }
