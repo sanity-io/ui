@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 3.3.5
+
+### Patch Changes
+
+- [#2275](https://github.com/sanity-io/ui/pull/2275) [`6546a45`](https://github.com/sanity-io/ui/commit/6546a45cf4060cc507443bc1c3a2b00b92d50c89) Thanks [@stipsan](https://github.com/stipsan)! - fix(build): restore named exports in `dist/theme.d.ts` so `import {buildTheme} from '@sanity/ui/theme'` type-checks again (TS2460). Shared chunks are now emitted to `dist/_chunks/` so they can no longer take an entry point's `.d.ts` filename.
+
 ## 3.3.4
 
 ### Patch Changes
