@@ -4,9 +4,10 @@
 
 This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
 the published package lives in `packages/ui`, the Figma plugin in
-`packages/figma`, and the Storybook app in `apps/storybook`
-(`pnpm-workspace.yaml`). The root `package.json` is a private workspace root
-whose scripts orchestrate via pnpm filters. Package manager is pnpm
+`packages/figma`, the Storybook app in `apps/storybook`, and the
+sanity.io/ui docs site (a Next.js app with an embedded Sanity Studio) in
+`apps/docs` (`pnpm-workspace.yaml`). The root `package.json` is a private
+workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
 (`packageManager` pin in `package.json`); developing in this repo requires Node
 `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
 supports `>=20.19 <22 || >=22.12` (see `packages/ui/package.json` engines).
@@ -47,3 +48,15 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   to a PR that should trigger a release. Merging to `main` opens/updates a
   "Version Packages" PR, and merging that publishes to npm via trusted
   publishing.
+- `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo and
+  keeps its own tooling: it is excluded from root oxlint/oxfmt and instead uses
+  its own eslint + prettier setup (`pnpm --filter sanity-ui-docs lint`). It
+  depends on `@sanity/ui` v2 from npm (not the workspace version) and is
+  deployed via Vercel, not released through Changesets.
+- `pnpm dev:docs` runs the docs app: Next.js on http://localhost:3000 (the
+  site is served under the `/ui` base path, so open http://localhost:3000/ui)
+  and the Sanity Studio dev server on http://localhost:3333. Rendering draft
+  content requires a viewer token in `apps/docs/.env.local`
+  (`SANITY_API_READ_TOKEN`); the production dataset is publicly readable. To
+  sign in to the studio, open `http://localhost:3333/#token={SANITY_AUTH_TOKEN}`
+  (Sanity consumes the token from the URL hash on load).

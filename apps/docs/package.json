@@ -1,8 +1,8 @@
 {
-  "name": "ui-docs",
+  "name": "sanity-ui-docs",
   "version": "2.0.0",
   "private": true,
-  "description": "",
+  "description": "Documentation app for @sanity/ui (sanity.io/ui)",
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "type": "commonjs",
@@ -58,7 +58,7 @@
     "@types/qs": "^6.14.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "eslint": "^  9.30.0",
+    "eslint": "^9.30.0",
     "eslint-config-next": "15.5.7",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
@@ -68,6 +68,5 @@
     "prettier-plugin-packagejson": "^2.5.17",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
-  },
-  "packageManager": "pnpm@10.12.4"
+  }
 }

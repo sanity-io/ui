@@ -9,6 +9,7 @@
     "changeset": "changeset",
     "clean": "pnpm --recursive clean",
     "dev": "pnpm --filter sanity-ui-storybook dev",
+    "dev:docs": "pnpm --filter sanity-ui-docs dev",
     "format": "oxfmt . --no-error-on-unmatched-pattern",
     "lint": "pnpm run oxlint",
     "lint:fix": "pnpm lint --fix --fix-suggestions",
