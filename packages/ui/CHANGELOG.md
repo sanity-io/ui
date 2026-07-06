@@ -1,5 +1,17 @@
 # @sanity/ui
 
+## 3.3.3
+
+### Patch Changes
+
+- [#2250](https://github.com/sanity-io/ui/pull/2250) [`9211258`](https://github.com/sanity-io/ui/commit/9211258c4b73ed37b14dcdffd3760eaced0cd87a) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency @floating-ui/react-dom to ^2.1.8
+
+- [#2255](https://github.com/sanity-io/ui/pull/2255) [`129e9fa`](https://github.com/sanity-io/ui/commit/129e9fa72cc0c641da423443ec7a08db0703a487) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency @sanity/icons to ^3.8.0
+
+- [#2257](https://github.com/sanity-io/ui/pull/2257) [`2f3bc04`](https://github.com/sanity-io/ui/commit/2f3bc040d8821abcf6dde24e13252cd3c512328c) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^12.42.2
+
+- [#2242](https://github.com/sanity-io/ui/pull/2242) [`e301806`](https://github.com/sanity-io/ui/commit/e3018067640459bb05b4c03c9262e565eaae5a4d) Thanks [@stipsan](https://github.com/stipsan)! - The npm package no longer ships the `src` and `exports` folders — only `dist` (plus `package.json`, `README.md`, and `LICENSE`) is published. Nothing resolvable referenced those folders: the published `exports` map points exclusively at `dist`, and the JS sourcemaps embed `sourcesContent`. This cuts the unpacked package size roughly in half.
+
 ## 3.3.2
 
 ### Patch Changes
