@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "include": ["./exports", "./src", "./typings"],
+  "exclude": [
+    "./src/**/__fixtures__",
+    "./src/**/__mocks__",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx"
+  ],
+  "compilerOptions": {
+    "sourceMap": true,
+    "rootDir": ".",
+    "outDir": "./dist",
+    "paths": {
+      "@sanity/ui/theme": ["./exports/theme.ts"],
+      "@sanity/ui": ["./exports"]
+    }
+  }
+}

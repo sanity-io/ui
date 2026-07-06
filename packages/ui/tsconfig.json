@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "include": [
+    "./exports",
+    "./package.config.ts",
+    "./scripts",
+    "./src",
+    "./test",
+    "./typings",
+    "./vitest.config.ts"
+  ],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist/types",
+    "baseUrl": ".",
+    "paths": {
+      "@sanity/ui/*": ["./exports/*"],
+      "@sanity/ui": ["./exports"]
+    },
+    "jsx": "react-jsx"
+  }
+}

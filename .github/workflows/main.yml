@@ -57,10 +57,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: pnpm install
-      - run: pnpm build
       - run: pnpm test
 
-  cypress:
+  storybook-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -68,31 +67,35 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: lts/*
-      - uses: cypress-io/github-action@v6
+      - run: pnpm install
+      - name: Store Playwright's version
+        id: playwright-version
+        run: |
+          PLAYWRIGHT_VERSION=$(pnpm --filter sanity-ui-storybook exec playwright --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+          echo "Playwright's version: $PLAYWRIGHT_VERSION"
+          echo "version=${PLAYWRIGHT_VERSION}" >> "$GITHUB_OUTPUT"
+      - name: Cache Playwright browsers for Playwright's version
+        id: cache-playwright-browsers
+        uses: actions/cache@v4
         with:
-          build: pnpm workshop:build
-          start: pnpm workshop:start
-          wait-on: http://localhost:1337
-        env:
-          NODE_OPTIONS: "--no-experimental-require-module --no-experimental-detect-module"
+          path: ~/.cache/ms-playwright
+          key: ${{ steps.playwright-version.outputs.version }}-playwright-browsers-chromium
+      - name: Install Playwright browsers
+        if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
+        run: pnpm --filter sanity-ui-storybook exec playwright install --with-deps chromium
+      - run: pnpm test:browser
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-          if-no-files-found: ignore
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: cypress-videos
-          path: cypress/videos
+          name: vitest-failure-screenshots
+          path: apps/storybook/**/__screenshots__/
           if-no-files-found: ignore
 
   release:
     permissions:
       id-token: write # to enable use of OIDC for npm provenance
     name: "Semantic release"
-    needs: [lint, test, cypress]
+    needs: [lint, test, storybook-test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/create-github-app-token@v2
@@ -114,8 +117,8 @@ jobs:
         with:
           node-version: lts/*
       - run: pnpm install
-      # Branches that will release new versions are defined in .releaserc.json
-      - run: pnpm exec semantic-release
+      # Branches that will release new versions are defined in packages/ui/package.json
+      - run: pnpm --filter @sanity/ui exec semantic-release
         env:
           NPM_CONFIG_PROVENANCE: true
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
