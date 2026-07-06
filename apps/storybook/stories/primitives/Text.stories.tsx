@@ -1,8 +1,11 @@
 import {AddCircleIcon} from '@sanity/icons'
+import {Card, Flex, Stack, Text, ThemeProps} from '@sanity/ui'
+import {getTheme_v2, ThemeColorAvatarColorKey, ThemeColorSpotKey} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
+import {css, styled} from 'styled-components'
 
-import {Card, Flex, Stack, Text} from '../../../../packages/ui/src/core/primitives'
 import {getAlignControls, getFontSizeControls, getTextOverflowControls} from '../controls'
+import {SPOT_COLOR_OPTIONS} from '../options'
 
 const meta: Meta<typeof Text> = {
   args: {
@@ -141,7 +144,7 @@ export const TextInCard: Story = {
   render: () => {
     return (
       <Flex>
-        <Stack space={4} wrap={'wrap'}>
+        <Stack space={4}>
           <Text>Text without card</Text>
           <Text muted>Text muted</Text>
 
@@ -155,4 +158,31 @@ export const TextInCard: Story = {
       </Flex>
     )
   },
+}
+
+const ColoredText = styled(Text)<{$color?: ThemeColorSpotKey}>((
+  props: {
+    $color?: ThemeColorAvatarColorKey
+  } & ThemeProps,
+) => {
+  const {color} = getTheme_v2(props.theme)
+
+  return css`
+    color: ${color.avatar[props.$color || 'gray'].bg};
+  `
+})
+
+export const Colored: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      <Stack space={4}>
+        {Object.values(SPOT_COLOR_OPTIONS).map((color) => (
+          <ColoredText align="center" $color={color} key={color} size={4} weight="bold">
+            {color}
+          </ColoredText>
+        ))}
+      </Stack>
+    </Flex>
+  ),
 }

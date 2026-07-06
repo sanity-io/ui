@@ -1,24 +1,30 @@
 import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
-import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
-import {useCallback, useRef, useState} from 'react'
-import {expect, userEvent, waitFor} from 'storybook/test'
-
-import {Dialog, Menu, MenuButton, MenuItem} from '../../../../packages/ui/src/core/components'
 import {
+  BoundaryElementProvider,
   Box,
   Button,
   Card,
+  Code,
+  Dialog,
+  DialogProps,
+  DialogProvider,
   Flex,
   Inline,
-  Stack,
-  Text,
-} from '../../../../packages/ui/src/core/primitives'
-import {
-  BoundaryElementProvider,
   Layer,
   LayerProvider,
+  Menu,
+  MenuButton,
+  MenuItem,
   PortalProvider,
-} from '../../../../packages/ui/src/core/utils'
+  Stack,
+  Text,
+  useLayer,
+} from '@sanity/ui'
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
+import {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
+import {expect, fn, userEvent, waitFor} from 'storybook/test'
+import {styled} from 'styled-components'
+
 import {
   getContainerWidthControls,
   getPositionControls,
@@ -236,7 +242,7 @@ export const DeleteDocumentDialog: Story = {
             header="Delete document"
             padding={3}
             footer={
-              <Flex width="full" gap={3} justify={'flex-end'} padding={3}>
+              <Flex gap={3} justify={'flex-end'} padding={3}>
                 <Button onClick={onClose} mode="bleed" text="Cancel" tone="default" />
                 <Button onClick={onClose} mode="default" text="Close" tone="critical" />
               </Flex>
@@ -504,4 +510,356 @@ export const Activate: Story = {
       await waitFor(() => expect(el('open-dialog-1-button')).toHaveFocus())
     })
   },
+}
+
+function NestedStory() {
+  const [open1] = useState(true)
+  const [open2, setOpen2] = useState(false)
+  const [open3, setOpen3] = useState(false)
+
+  const dialog2Button = useRef<HTMLButtonElement>(null)
+  const dialog3Button = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (!open2) dialog2Button.current?.focus()
+  }, [open2])
+
+  useEffect(() => {
+    if (!open3) dialog3Button.current?.focus()
+  }, [open3])
+
+  return (
+    <LayerProvider>
+      {open1 && (
+        <Dialog animate cardShadow={1} header="Dialog 1" id="dialog1">
+          <Box padding={4}>
+            <Button onClick={() => setOpen2(true)} ref={dialog2Button} text="Open Dialog 2" />
+          </Box>
+
+          {open2 && (
+            <Dialog
+              animate
+              cardShadow={2}
+              header="Dialog 2"
+              id="dialog2"
+              onClose={() => setOpen2(false)}
+              onClickOutside={() => setOpen2(false)}
+            >
+              <Box padding={4}>
+                <Button onClick={() => setOpen3(true)} ref={dialog3Button} text="Open Dialog 3" />
+              </Box>
+
+              {open3 && (
+                <Dialog
+                  animate
+                  cardShadow={4}
+                  header="Dialog 3"
+                  id="dialog3"
+                  onClose={() => setOpen3(false)}
+                  onClickOutside={() => setOpen3(false)}
+                >
+                  <Box padding={4}>
+                    <MenuButton
+                      button={<Button text="Test" />}
+                      id="menu3"
+                      popover={{animate: true}}
+                      menu={
+                        <Menu>
+                          <MenuItem text="Test" />
+                          <MenuItem text="Test" />
+                        </Menu>
+                      }
+                      portal
+                    />
+                  </Box>
+                </Dialog>
+              )}
+            </Dialog>
+          )}
+        </Dialog>
+      )}
+    </LayerProvider>
+  )
+}
+
+export const Nested: Story = {
+  parameters: {controls: {include: []}},
+  render: () => <NestedStory />,
+}
+
+function OnScrollStory({onScroll}: {onScroll: () => void}) {
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const el = ref.current
+
+    if (!el) return
+
+    el.addEventListener('scroll', onScroll, {passive: true})
+
+    return () => el.removeEventListener('scroll', onScroll)
+  }, [onScroll])
+
+  return (
+    <LayerProvider>
+      <Dialog contentRef={ref} header="On scroll example" id="on-scroll-example">
+        <Box padding={4}>
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at nisl at sem tempor
+            hendrerit scelerisque ut libero. Maecenas iaculis efficitur lorem, ac faucibus mi
+            imperdiet quis. Cras a consectetur erat. Fusce imperdiet, dolor et pellentesque iaculis,
+            ex quam luctus felis, non ultrices enim sem vitae quam. Duis lorem velit, lacinia at
+            rhoncus a, tempus vel neque. Vestibulum ante ipsum primis in faucibus orci luctus et
+            ultrices posuere cubilia curae; Sed id mauris quam. Nam finibus sapien non lacinia
+            ultricies. Integer fermentum tortor at pellentesque faucibus. In venenatis commodo
+            placerat. Curabitur commodo tortor libero, vel pellentesque elit luctus sodales. Donec
+            mattis tristique nunc ac lacinia. Vestibulum non pulvinar turpis, posuere consequat
+            arcu. Fusce ut urna blandit, finibus nisi a, molestie elit. Nulla sed eleifend mi.
+          </Text>
+        </Box>
+      </Dialog>
+    </LayerProvider>
+  )
+}
+
+export const OnScroll: Story = {
+  parameters: {controls: {include: []}},
+  render: () => <OnScrollStory onScroll={fn()} />,
+}
+
+function DebugLayer() {
+  const layer = useLayer()
+
+  return (
+    <Code language="json" size={1}>
+      {JSON.stringify(layer, null, 2)}
+    </Code>
+  )
+}
+
+export const Layering: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Box padding={[4, 5, 6]}>
+      <LayerProvider>
+        <Layer zOffset={10} id="a">
+          <Card padding={2} shadow={2}>
+            <DebugLayer />
+          </Card>
+        </Layer>
+        <Layer zOffset={10} id="b">
+          <Card padding={2} shadow={2}>
+            <DebugLayer />
+          </Card>
+        </Layer>
+        <Dialog header="Layering example" id="layering-example" onClose={fn()} zOffset={100}>
+          <Box padding={4}>
+            <DebugLayer />
+          </Box>
+        </Dialog>
+      </LayerProvider>
+    </Box>
+  ),
+}
+
+function AutoFocusStory() {
+  const [open, setOpen] = useState(false)
+
+  if (!open) {
+    return (
+      <Box padding={4}>
+        <Button onClick={() => setOpen(true)} text="Open dialog" />
+      </Box>
+    )
+  }
+
+  return (
+    <Dialog
+      __unstable_autoFocus
+      header="Auto-focus example"
+      id="auto-focus-example"
+      onClose={() => setOpen(false)}
+    >
+      <Box padding={4}>
+        <Button text="Focusable button" />
+      </Box>
+    </Dialog>
+  )
+}
+
+export const AutoFocus: Story = {
+  parameters: {controls: {include: []}},
+  render: () => <AutoFocusStory />,
+}
+
+export const Position: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Box padding={4}>
+      <Box style={{padding: 'calc(100vh - 100px) 0'}}>
+        <Stack space={3}>
+          <Text align="center">
+            <ArrowUpIcon />
+          </Text>
+          <Text align="center">Scrollable</Text>
+          <Text align="center">
+            <ArrowDownIcon />
+          </Text>
+        </Stack>
+
+        <LayerProvider>
+          <Dialog header="Position example" id="position-example" position="fixed" />
+        </LayerProvider>
+      </Box>
+    </Box>
+  ),
+}
+
+const PaneRoot = styled(Card)`
+  position: relative;
+`
+
+const PanePortal = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+
+  & > * {
+    pointer-events: auto;
+  }
+`
+
+function Pane(props: {borderLeft?: boolean; id: string}) {
+  const {borderLeft, id} = props
+  const [element, setElement] = useState<HTMLDivElement | null>(null)
+  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
+  const [dialogOpen, setDialogOpen] = useState(false)
+
+  const handleClose = useCallback(() => {
+    setDialogOpen(false)
+  }, [])
+
+  return (
+    <BoundaryElementProvider element={element}>
+      <PortalProvider element={portalElement}>
+        <PaneRoot borderLeft={borderLeft} flex={1} ref={setElement}>
+          <Box padding={4}>
+            <Button onClick={() => setDialogOpen(true)} selected={dialogOpen} text="Open dialog" />
+          </Box>
+
+          <PanePortal ref={setPortalElement} />
+        </PaneRoot>
+
+        {dialogOpen && (
+          <Dialog
+            header={`Dialog ${id}`}
+            id={id}
+            onClickOutside={handleClose}
+            onClose={handleClose}
+            position="absolute"
+          >
+            <Box padding={4}>
+              <MenuButton
+                button={<Button text="Open menu" />}
+                id={`${id}-menu`}
+                menu={
+                  <Menu>
+                    <MenuItem text="Item 1" />
+                    <MenuItem text="Item 2" />
+                    <MenuItem text="Item 3" />
+                  </Menu>
+                }
+              />
+            </Box>
+          </Dialog>
+        )}
+      </PortalProvider>
+    </BoundaryElementProvider>
+  )
+}
+
+export const Panes: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Flex height="fill">
+      <Pane id="A" />
+      <Pane id="B" borderLeft />
+    </Flex>
+  ),
+}
+
+export const WithDialogProvider: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <DialogProvider position="absolute" zOffset={1000}>
+      <Dialog header="Outer" id="provider-example">
+        <Dialog header="Inner" id="nested-provider-example" />
+      </Dialog>
+    </DialogProvider>
+  ),
+}
+
+function WrappedDialogButton(props: {level: number}) {
+  const {level} = props
+  const [open, setOpen] = useState(false)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)} ref={buttonRef} text={`Open dialog ${level + 1}`} />
+
+      {open && (
+        <WrappedDialog
+          header={`WrappedDialog ${level + 1}`}
+          id={`wrapped-${level + 1}`}
+          onClickOutside={() => setOpen(false)}
+          onClose={() => setOpen(false)}
+        >
+          <Box padding={4}>
+            <WrappedDialogButton level={level + 1} />
+          </Box>
+        </WrappedDialog>
+      )}
+    </>
+  )
+}
+
+function WrappedDialog(props: DialogProps & {children?: ReactNode}) {
+  const layer = useLayer()
+  const isTopLayer = layer.size === 1
+
+  const dialogRef = useRef<HTMLDivElement>(null)
+
+  const [lastFocusedElement, setLastFocusedElement] = useState<HTMLElement | null>(null)
+
+  const handleContentFocus = useCallback(() => {
+    const containsActiveElement = dialogRef.current?.contains(document.activeElement)
+
+    if (containsActiveElement) {
+      setLastFocusedElement(document.activeElement as HTMLElement)
+    }
+  }, [])
+
+  // Set focus on the last focused element when the dialog becomes the top layer.
+  useEffect(() => {
+    if (isTopLayer && lastFocusedElement) {
+      lastFocusedElement.focus()
+    }
+  }, [isTopLayer, lastFocusedElement])
+
+  return <Dialog {...props} data-size={layer.size} onFocus={handleContentFocus} ref={dialogRef} />
+}
+
+export const Wrapped: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <LayerProvider zOffset={100}>
+      <Box padding={4}>
+        <WrappedDialogButton level={0} />
+      </Box>
+    </LayerProvider>
+  ),
 }

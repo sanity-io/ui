@@ -1,18 +1,19 @@
 import {CloseIcon} from '@sanity/icons'
-import type {Meta, StoryObj} from '@storybook/react-vite'
-import {useCallback, useState} from 'react'
-import {expect, userEvent, waitFor} from 'storybook/test'
-
 import {
   Box,
   Button,
   Card,
   Code,
   Flex,
+  Layer,
+  LayerProvider,
   Stack,
   Text,
-} from '../../../../packages/ui/src/core/primitives'
-import {Layer, LayerProvider, useLayer} from '../../../../packages/ui/src/core/utils'
+  useLayer,
+} from '@sanity/ui'
+import type {Meta, StoryObj} from '@storybook/react-vite'
+import {useCallback, useState} from 'react'
+import {expect, userEvent, waitFor} from 'storybook/test'
 
 const meta: Meta = {
   parameters: {controls: {include: []}},
@@ -124,9 +125,13 @@ export const Nested: Story = {
   render: () => (
     <Box padding={3}>
       <NestedRoot />
+      <NestedRoot />
+      <NestedRoot />
     </Box>
   ),
   play: async ({canvasElement, step}) => {
+    // The story renders multiple stacked examples with the same ids, so only
+    // interact with the first one
     const el = (id: string) => canvasElement.querySelector<HTMLElement>(`#${id}`)
 
     await step('should calculate size of nested layers', async () => {
@@ -139,6 +144,52 @@ export const Nested: Story = {
       await waitFor(() => expect(el('layer-debug-info-1')).toHaveTextContent('size=2'))
     })
   },
+}
+
+export const MultipleRoots: Story = {
+  render: () => (
+    <Stack space={4}>
+      <LayerProvider zOffset={100}>
+        <Card padding={3} shadow={1}>
+          <Stack space={3}>
+            <LayerDebugInfo />
+            <Layer>
+              <Card padding={3} shadow={1}>
+                <Stack space={3}>
+                  <LayerDebugInfo />
+                  <Layer>
+                    <Card padding={3} shadow={1}>
+                      <LayerDebugInfo />
+                    </Card>
+                  </Layer>
+                </Stack>
+              </Card>
+            </Layer>
+          </Stack>
+        </Card>
+      </LayerProvider>
+
+      <LayerProvider zOffset={200}>
+        <Card as={Layer} padding={3} shadow={5} style={{top: -50, left: 30}}>
+          <Stack space={3}>
+            <LayerDebugInfo />
+            <Layer>
+              <Card padding={3} shadow={1}>
+                <Stack space={3}>
+                  <LayerDebugInfo />
+                  <Layer>
+                    <Card padding={3} shadow={1}>
+                      <LayerDebugInfo />
+                    </Card>
+                  </Layer>
+                </Stack>
+              </Card>
+            </Layer>
+          </Stack>
+        </Card>
+      </LayerProvider>
+    </Stack>
+  ),
 }
 
 export const ResponsiveZOffset: Story = {

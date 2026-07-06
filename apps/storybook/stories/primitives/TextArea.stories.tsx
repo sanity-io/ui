@@ -1,6 +1,6 @@
+import {Box, Card, Grid, Text, TextArea} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Box, Card, Grid, Text, TextArea} from '../../../../packages/ui/src/core/primitives'
 import {RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'

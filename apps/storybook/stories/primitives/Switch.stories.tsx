@@ -1,7 +1,7 @@
+import {Flex, Stack, Switch} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 
-import {Flex, Stack, Switch} from '../../../../packages/ui/src/core/primitives'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Switch> = {

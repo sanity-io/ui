@@ -1,15 +1,8 @@
+import {Box, Card, Container, Flex, Grid, Stack, Text, TextInput} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
 
-import {
-  Box,
-  Container,
-  Flex,
-  Grid,
-  Text,
-  TextInput,
-} from '../../../../packages/ui/src/core/primitives'
 import {RADII} from '../constants'
 import {
   getFontSizeControls,
@@ -185,6 +178,95 @@ export const InputStates: Story = {
       </Grid>
     )
   },
+}
+
+function TypedStory() {
+  const [value, setValue] = useState('')
+
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value)
+  }, [])
+
+  return (
+    <Box padding={4}>
+      <Container width={1}>
+        <TextInput onChange={handleChange} type="date" value={value} />
+      </Container>
+    </Box>
+  )
+}
+
+export const Typed: Story = {
+  parameters: {controls: {include: []}},
+  render: () => <TypedStory />,
+}
+
+function TonesColumn({scheme}: {scheme: 'light' | 'dark'}) {
+  return (
+    <Card flex={1} scheme={scheme}>
+      <Stack padding={[3, 4, 5]} space={4}>
+        <Card padding={3}>
+          <TextInput
+            placeholder="default"
+            prefix={
+              <Box padding={3}>
+                <Text>prefix</Text>
+              </Box>
+            }
+            suffix={
+              <Box padding={3}>
+                <Text>suffix</Text>
+              </Box>
+            }
+          />
+        </Card>
+
+        {(
+          [
+            'transparent',
+            'neutral',
+            'primary',
+            'suggest',
+            'positive',
+            'caution',
+            'critical',
+          ] as const
+        ).map((tone) => (
+          <Card key={tone} padding={3} tone={tone}>
+            <TextInput
+              placeholder={tone}
+              prefix={
+                <Box padding={3}>
+                  <Text>prefix</Text>
+                </Box>
+              }
+              suffix={
+                <Box padding={3}>
+                  <Text>suffix</Text>
+                </Box>
+              }
+            />
+          </Card>
+        ))}
+      </Stack>
+    </Card>
+  )
+}
+
+export const Tones: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Card height="fill" tone="transparent">
+      <Flex align="center" height="fill" justify="center">
+        <Container width={1}>
+          <Flex>
+            <TonesColumn scheme="light" />
+            <TonesColumn scheme="dark" />
+          </Flex>
+        </Container>
+      </Flex>
+    </Card>
+  ),
 }
 
 export const ReadOnly: Story = {

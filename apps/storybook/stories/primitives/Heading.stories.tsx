@@ -1,7 +1,7 @@
 import {AddCircleIcon} from '@sanity/icons'
+import {Card, Flex, Heading, Stack, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Card, Flex, Heading, Stack, Text} from '../../../../packages/ui/src/core/primitives'
 import {getAlignControls, getFontSizeControls} from '../controls'
 
 const meta: Meta<typeof Heading> = {

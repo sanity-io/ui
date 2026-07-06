@@ -1,6 +1,6 @@
+import {Card, KBD, Stack} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Card, KBD, Stack} from '../../../../packages/ui/src/core/primitives'
 import {CARD_TONES, RADII} from '../constants'
 import {getFontSizeControls, getRadiusControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'

@@ -1,6 +1,7 @@
+import {AddCircleIcon} from '@sanity/icons'
+import {Box, Card, Flex, Label, Stack} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Label, Stack} from '../../../../packages/ui/src/core/primitives'
 import {getAlignControls, getFontSizeControls} from '../controls'
 
 const meta: Meta<typeof Label> = {
@@ -85,4 +86,29 @@ export const Weights: Story = {
       </Stack>
     )
   },
+}
+
+export const OpticalAlignment: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Box padding={[4, 5, 6]}>
+      <Stack space={1}>
+        {([4, 3, 2, 1, 0] as const).map((size) => (
+          <Flex key={size}>
+            <Card padding={0} tone="suggest">
+              <Label size={size}>Hamburgefonstiv M</Label>
+            </Card>
+          </Flex>
+        ))}
+
+        <Flex>
+          <Card padding={2} tone="suggest">
+            <Label>
+              <AddCircleIcon />
+            </Label>
+          </Card>
+        </Flex>
+      </Stack>
+    </Box>
+  ),
 }

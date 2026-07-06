@@ -1,7 +1,6 @@
+import {Card, Stack} from '@sanity/ui'
+import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {ComponentProps, ReactNode} from 'react'
-
-import {Card, Stack} from '../../../../packages/ui/src/core/primitives'
-import {ThemeColorSchemeKey} from '../../../../packages/ui/src/theme'
 
 interface ColumnBuilderProps<T> {
   gap?: ComponentProps<typeof Stack>['space']

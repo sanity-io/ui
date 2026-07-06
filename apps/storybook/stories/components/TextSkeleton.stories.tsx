@@ -1,7 +1,7 @@
+import {Skeleton, TextSkeleton} from '@sanity/ui'
+import {buildTheme} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Skeleton, TextSkeleton} from '../../../../packages/ui/src/core/components'
-import {defaultThemeFonts} from '../../../../packages/ui/src/theme/defaults/fonts'
 import {getFontSizeControls, getSpaceControls} from '../controls'
 import {columnBuilder} from '../helpers/columnBuilder'
 
@@ -42,7 +42,7 @@ export const Sizes: Story = {
         {columnBuilder({
           gap: 4,
           renderItem: ({value, index}) => <TextSkeleton {...props} key={index} size={value} />,
-          rows: [...Array(defaultThemeFonts['code'].sizes.length).keys()],
+          rows: [...Array(buildTheme().fonts.code.sizes.length).keys()],
         })}
       </>
     )

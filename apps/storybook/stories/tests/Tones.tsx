@@ -1,5 +1,3 @@
-import {ReactNode, useState} from 'react'
-
 import {
   Avatar,
   Badge,
@@ -38,8 +36,9 @@ import {
   TextInput,
   TextSkeleton,
   ThemeProvider,
-} from '../../../../packages/ui/src/core'
-import {buildTheme, ThemeColorSchemeKey} from '../../../../packages/ui/src/theme'
+} from '@sanity/ui'
+import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {ReactNode, useState} from 'react'
 
 const theme = buildTheme()
 
@@ -120,7 +119,7 @@ export function Tones(): ReactNode {
             onClick={() => setScheme(scheme === 'light' ? 'dark' : 'light')}
           />
         </Box>
-        <Flex gap={2} paddingTop={2} wrap={'wrap'} width={1400}>
+        <Flex gap={2} paddingTop={2} wrap={'wrap'}>
           {tones.map((tone) => (
             <Card tone={tone} {...props} key={tone}>
               <Stack space={6}>

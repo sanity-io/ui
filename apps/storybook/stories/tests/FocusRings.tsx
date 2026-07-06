@@ -7,8 +7,6 @@ import {
   SearchIcon,
   SunIcon,
 } from '@sanity/icons'
-import {ReactNode} from 'react'
-
 import {
   Autocomplete,
   Avatar,
@@ -31,8 +29,9 @@ import {
   TextArea,
   TextInput,
   ThemeProvider,
-} from '../../../../packages/ui/src/core'
-import {buildTheme} from '../../../../packages/ui/src/theme'
+} from '@sanity/ui'
+import {buildTheme} from '@sanity/ui/theme'
+import {ReactNode} from 'react'
 
 const theme = buildTheme()
 

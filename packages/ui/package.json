@@ -63,7 +63,7 @@
   ],
   "scripts": {
     "build": "run-s clean pkg:build pkg:check",
-    "clean": "rimraf .workshop dist",
+    "clean": "rimraf dist",
     "lint": "eslint --cache .",
     "prepack": "pnpm build",
     "pkg:build": "pkg build --strict",
@@ -72,9 +72,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "ts:check": "tsc",
-    "watch": "pkg watch --strict",
-    "workshop:build": "pnpm build && workshop build",
-    "workshop:dev": "workshop dev"
+    "watch": "pkg watch --strict"
   },
   "release": {
     "branches": [
@@ -107,7 +105,6 @@
     "@eslint/js": "^9.37.0",
     "@sanity/pkg-utils": "^8.1.29",
     "@sanity/semantic-release-preset": "^5.0.0",
-    "@sanity/ui-workshop": "^2.1.6",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",

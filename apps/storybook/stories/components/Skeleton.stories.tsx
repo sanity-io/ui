@@ -1,13 +1,19 @@
-import type {Meta, StoryObj} from '@storybook/react-vite'
-
 import {
+  Box,
+  Card,
   CodeSkeleton,
+  Container,
+  Flex,
+  Grid,
   HeadingSkeleton,
   LabelSkeleton,
   Skeleton,
+  Stack,
+  Text,
   TextSkeleton,
-} from '../../../../packages/ui/src/core/components'
-import {Box, Card, Container, Flex, Grid, Stack} from '../../../../packages/ui/src/core/primitives'
+} from '@sanity/ui'
+import type {Meta, StoryObj} from '@storybook/react-vite'
+
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Skeleton> = {
@@ -40,6 +46,48 @@ export const Default: Story = {
     style: {width: 200, height: 40},
   },
   render: (props) => <Skeleton {...props} />,
+}
+
+export const WithDelay: Story = {
+  parameters: {controls: {include: ['animated']}},
+  render: (props) => {
+    return (
+      <Box padding={[4, 5, 6]}>
+        <Container width={1}>
+          <Text muted>Delayed by 1000ms</Text>
+          <Card marginTop={4} padding={2} radius={2} border>
+            <Flex align="center">
+              <Skeleton
+                {...props}
+                style={{width: 90, height: 90}}
+                radius={2}
+                marginRight={3}
+                delay={1000}
+              />
+              <Stack space={2} flex={1}>
+                <HeadingSkeleton
+                  {...props}
+                  size={4}
+                  style={{width: '100%'}}
+                  radius={1}
+                  delay={1000}
+                />
+                <TextSkeleton {...props} size={1} style={{width: '100%'}} radius={1} delay={1000} />
+                <LabelSkeleton
+                  {...props}
+                  size={1}
+                  style={{width: '100%'}}
+                  radius={1}
+                  delay={1000}
+                />
+                <CodeSkeleton {...props} size={1} style={{width: '100%'}} radius={1} delay={1000} />
+              </Stack>
+            </Flex>
+          </Card>
+        </Container>
+      </Box>
+    )
+  },
 }
 
 export const CardSkeleton: Story = {

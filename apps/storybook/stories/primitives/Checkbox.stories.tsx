@@ -1,7 +1,7 @@
+import {Card, Checkbox, Flex, Stack} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 
-import {Checkbox, Flex, Stack} from '../../../../packages/ui/src/core/primitives'
 import {matrixBuilder} from '../helpers/matrixBuilder'
 
 const meta: Meta<typeof Checkbox> = {
@@ -94,4 +94,32 @@ export const InputStates: Story = {
       </Stack>
     )
   },
+}
+
+export const MultipleTones: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      <Stack>
+        <Card padding={3} tone="neutral">
+          <Checkbox />
+        </Card>
+        <Card padding={3} tone="primary">
+          <Checkbox />
+        </Card>
+        <Card padding={3} tone="suggest">
+          <Checkbox />
+        </Card>
+        <Card padding={3} tone="positive">
+          <Checkbox />
+        </Card>
+        <Card padding={3} tone="caution">
+          <Checkbox />
+        </Card>
+        <Card padding={3} tone="critical">
+          <Checkbox />
+        </Card>
+      </Stack>
+    </Flex>
+  ),
 }

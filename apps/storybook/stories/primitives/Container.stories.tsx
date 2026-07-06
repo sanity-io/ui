@@ -1,6 +1,6 @@
+import {Card, Container, Stack, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Card, Container, Stack, Text} from '../../../../packages/ui/src/core/primitives'
 import {getContainerWidthControls, getHeightControls, getOverflowControls} from '../controls'
 
 const meta: Meta<typeof Container> = {

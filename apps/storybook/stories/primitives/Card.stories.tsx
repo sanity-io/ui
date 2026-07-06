@@ -1,16 +1,24 @@
-import type {Meta, StoryObj} from '@storybook/react-vite'
-
+import {EditIcon, PublishIcon} from '@sanity/icons'
 import {
   Box,
   Button,
   Card,
+  CardTone,
   Container,
   Flex,
   Grid,
+  Inline,
+  Skeleton,
   Stack,
   Text,
-} from '../../../../packages/ui/src/core/primitives'
-import {CardTone} from '../../../../packages/ui/src/core/types'
+  ThemeProps,
+  useRootTheme,
+} from '@sanity/ui'
+import {getTheme_v2, THEME_COLOR_CARD_TONES, ThemeColorStateToneKey} from '@sanity/ui/theme'
+import type {Meta, StoryObj} from '@storybook/react-vite'
+import {forwardRef} from 'react'
+import {css, styled} from 'styled-components'
+
 import {CARD_TONES, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
 import {matrixBuilder} from '../helpers/matrixBuilder'
@@ -459,4 +467,252 @@ export const NestedToneChanges: Story = {
       </Flex>
     )
   },
+}
+
+export const Interactive: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Flex align="center" height="fill" justify="center">
+      <div>
+        <Card __unstable_focusRing as="button" padding={3} tabIndex={0}>
+          <Stack space={3}>
+            <Text>
+              Text <code>Code</code>
+            </Text>
+            <Text muted>Muted</Text>
+            <Text accent>Accent</Text>
+          </Stack>
+        </Card>
+      </div>
+    </Flex>
+  ),
+}
+
+function CardListPreview() {
+  return (
+    <Flex align="center" gap={2}>
+      <Skeleton radius="full" style={{width: 33, height: 33}} />
+      <Stack flex={1} space={2}>
+        <Text size={1} weight="medium">
+          Preview
+        </Text>
+        <Text muted size={1}>
+          Preview
+        </Text>
+      </Stack>
+    </Flex>
+  )
+}
+
+export const ListNavigation: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Box height="fill" padding={[3, 4, 5]} sizing="border">
+      <Card height="fill" shadow={1}>
+        <Flex height="fill">
+          <Card flex={1} padding={2}>
+            <Stack space={1}>
+              <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
+                <CardListPreview />
+              </Card>
+              <Card __unstable_focusRing as="a" href="#" padding={2} pressed radius={2}>
+                <CardListPreview />
+              </Card>
+              <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
+                <CardListPreview />
+              </Card>
+              <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
+                <CardListPreview />
+              </Card>
+              <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
+                <CardListPreview />
+              </Card>
+            </Stack>
+          </Card>
+          <Card borderLeft flex={1} padding={2}>
+            <Stack space={1}>
+              <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
+                <CardListPreview />
+              </Card>
+              <Card __unstable_focusRing as="a" href="#" padding={2} pressed radius={2} selected>
+                <CardListPreview />
+              </Card>
+              <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
+                <CardListPreview />
+              </Card>
+              <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
+                <CardListPreview />
+              </Card>
+              <Card __unstable_focusRing as="a" href="#" padding={2} radius={2}>
+                <CardListPreview />
+              </Card>
+            </Stack>
+          </Card>
+        </Flex>
+      </Card>
+    </Box>
+  ),
+}
+
+export const Checkered: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
+      <Stack space={1}>
+        {THEME_COLOR_CARD_TONES.map((tone) => (
+          <Card
+            __unstable_checkered
+            border
+            key={tone}
+            padding={3}
+            sizing="border"
+            style={{width: 120, height: 60}}
+            tone={tone}
+          >
+            <Text muted size={1}>
+              {tone}
+            </Text>
+          </Card>
+        ))}
+      </Stack>
+    </Flex>
+  ),
+}
+
+const CustomCardLink = forwardRef(function CustomCardLink(
+  props: {req?: string} & Omit<React.HTMLProps<HTMLAnchorElement>, 'as' | 'href'>,
+  ref: React.ForwardedRef<HTMLAnchorElement>,
+): React.JSX.Element {
+  const {children, req, ...restProps} = props
+
+  return (
+    <a data-required={req} {...restProps} ref={ref}>
+      {children}
+    </a>
+  )
+})
+
+export const AsComponent: Story = {
+  parameters: {controls: {include: []}},
+  render: () => {
+    const props = {href: '#'}
+
+    return (
+      <Flex align="center" height="fill" justify="center">
+        <Card as={CustomCardLink} data-as="a" {...props} padding={3}>
+          <Text size={1}>As component</Text>
+        </Card>
+      </Flex>
+    )
+  },
+}
+
+const TextWithTone = styled(Text)<{$tone: ThemeColorStateToneKey}>((
+  props: {
+    $tone: ThemeColorStateToneKey
+  } & ThemeProps,
+) => {
+  const {$tone} = props
+  const {color} = getTheme_v2(props.theme)
+  const tone = color.button.default[$tone]
+
+  return css`
+    &:not([data-selected]) {
+      --card-fg-color: ${tone.enabled.bg};
+      --card-muted-fg-color: ${tone.enabled.bg};
+    }
+
+    [data-ui='Card']:disabled & {
+      --card-fg-color: inherit;
+      --card-muted-fg-color: inherit;
+    }
+  `
+})
+
+function SelectedStoryPreview({selected}: {selected: boolean}) {
+  const rootTheme = useRootTheme()
+
+  return (
+    <Flex>
+      <Box flex={1}>
+        <Text size={1}>Title</Text>
+      </Box>
+      <Inline space={3}>
+        <TextWithTone
+          data-selected={selected ? '' : undefined}
+          muted
+          size={1}
+          weight="medium"
+          $tone={rootTheme.tone === 'default' ? 'caution' : 'default'}
+        >
+          <EditIcon />
+        </TextWithTone>
+        <TextWithTone
+          data-selected={selected ? '' : undefined}
+          muted
+          size={1}
+          $tone={rootTheme.tone === 'default' ? 'positive' : 'default'}
+        >
+          <PublishIcon />
+        </TextWithTone>
+      </Inline>
+    </Flex>
+  )
+}
+
+function SelectedStory({disabled, selected}: {disabled: boolean; selected: boolean}) {
+  return (
+    <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
+      <Container width={0}>
+        <Stack space={1}>
+          <Card
+            __unstable_focusRing
+            as="button"
+            disabled={disabled}
+            padding={3}
+            radius={2}
+            selected={selected}
+          >
+            <SelectedStoryPreview selected={selected} />
+          </Card>
+
+          <Card
+            __unstable_focusRing
+            as="button"
+            disabled={disabled}
+            padding={3}
+            radius={2}
+            selected={selected}
+            tone="critical"
+          >
+            <SelectedStoryPreview selected={selected} />
+          </Card>
+        </Stack>
+      </Container>
+    </Flex>
+  )
+}
+
+export const Selected: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Stack space={4}>
+      <SelectedStory disabled={false} selected={false} />
+      <SelectedStory disabled={false} selected />
+      <SelectedStory disabled selected={false} />
+    </Stack>
+  ),
+}
+
+const StyledCard = styled(Card).attrs({forwardedAs: 'ol'})``
+
+export const Styled: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Flex align="center" height="fill" justify="center">
+      <StyledCard>
+        <Text as="li">Styled</Text>
+      </StyledCard>
+    </Flex>
+  ),
 }

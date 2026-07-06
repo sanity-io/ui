@@ -13,7 +13,7 @@ import ts from 'typescript-eslint'
 export default ts.config(
   [
     {
-      ignores: ['.workshop', 'dist'],
+      ignores: ['dist'],
     },
 
     {
@@ -96,9 +96,9 @@ export default ts.config(
       ...react.configs.flat['jsx-runtime'],
     },
 
-    // Ignore workshop stories and test files for the react compiler
+    // Ignore test files for the react compiler
     {
-      files: ['**/__workshop__/*.{js,ts,tsx}', '**/*.test.{js,ts,tsx}'],
+      files: ['**/*.test.{js,ts,tsx}'],
       rules: {
         'react-hooks/set-state-in-effect': 'off',
         'react-hooks/refs': 'off',
@@ -113,7 +113,7 @@ export default ts.config(
       plugins: {boundaries},
 
       settings: {
-        'boundaries/ignore': ['src/**/*.test.ts', 'src/**/*.test.tsx', 'src/**/__workshop__/**/*'],
+        'boundaries/ignore': ['src/**/*.test.ts', 'src/**/*.test.tsx'],
 
         'boundaries/elements': [
           // entry points
@@ -155,7 +155,7 @@ export default ts.config(
           // configs
           {
             type: 'configs',
-            pattern: ['package.config.ts', 'workshop.config.ts', 'workshop.runtime.ts'],
+            pattern: ['package.config.ts'],
             mode: 'file',
           },
           {

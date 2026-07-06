@@ -1,35 +1,39 @@
 import {
+  AddIcon,
   CheckmarkIcon,
+  ChevronDownIcon,
   ClockIcon,
   CommentIcon,
   EllipsisHorizontalIcon,
+  ErrorOutlineIcon,
   ExpandIcon,
   LaunchIcon,
   SearchIcon,
 } from '@sanity/icons'
-import type {Meta, StoryObj} from '@storybook/react-vite'
-import {useState} from 'react'
-import {expect, fn, userEvent, waitFor, within} from 'storybook/test'
-
 import {
-  Menu,
-  MenuButton,
-  MenuButtonProps,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-} from '../../../../packages/ui/src/core/components'
-import {
+  BoundaryElementProvider,
   Box,
   Button,
   Card,
   Code,
   Flex,
   Grid,
+  LayerProvider,
+  Menu,
+  MenuButton,
+  MenuButtonProps,
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  SelectableTone,
   Stack,
   Text,
-} from '../../../../packages/ui/src/core/primitives'
-import {LayerProvider} from '../../../../packages/ui/src/core/utils'
+  ToastProvider,
+  useToast,
+} from '@sanity/ui'
+import type {Meta, StoryObj} from '@storybook/react-vite'
+import {useCallback, useRef, useState} from 'react'
+import {expect, fn, userEvent, waitFor, within} from 'storybook/test'
 
 const meta: Meta<typeof MenuButton> = {
   args: {
@@ -397,4 +401,219 @@ export const SelectedItemFocus: Story = {
       await waitFor(() => expect(el('menu-button')).toHaveAttribute('aria-expanded', 'false'))
     })
   },
+}
+
+function ClosableStory() {
+  const ref = useRef<HTMLButtonElement | null>(null)
+
+  return (
+    <Box padding={[4, 5, 6]}>
+      <Stack>
+        <MenuButton
+          button={<Button text="Open" />}
+          id="closable-example"
+          menu={
+            <Menu padding={0} space={0}>
+              <Stack padding={1} space={1}>
+                <MenuItem text="Item 1" />
+                <MenuItem text="Item 2" />
+                <MenuItem text="Item 3" />
+                <MenuItem text="Item 4" />
+              </Stack>
+              <Stack padding={1} style={{borderTop: '1px solid var(--card-border-color)'}}>
+                <Button
+                  icon={AddIcon}
+                  onClick={() => {
+                    ref.current?.click()
+                    ref.current?.focus()
+                  }}
+                  mode="bleed"
+                  text="Add item"
+                  tone="primary"
+                />
+              </Stack>
+            </Menu>
+          }
+          popover={{constrainSize: true}}
+          ref={ref}
+        />
+      </Stack>
+    </Box>
+  )
+}
+
+export const Closable: Story = {
+  parameters: {controls: {include: []}},
+  render: () => <ClosableStory />,
+}
+
+const WITHOUT_ARROW_POPOVER_PROPS: MenuButtonProps['popover'] = {
+  __unstable_margins: [1, 1, 1, 1],
+  arrow: false,
+  constrainSize: true,
+  fallbackPlacements: ['top-start'],
+  matchReferenceWidth: true,
+  radius: 0,
+  placement: 'bottom-start',
+}
+
+export const WithoutArrow: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Box padding={[4, 5, 6]}>
+      <Stack>
+        <MenuButton
+          button={<Button mode="ghost" text="Open menu" />}
+          id="without-arrow-example"
+          menu={
+            <Menu>
+              <MenuItem text="Item 1" />
+              <MenuItem text="Item 2" />
+              <MenuItem text="Item 3" />
+            </Menu>
+          }
+          popover={WITHOUT_ARROW_POPOVER_PROPS}
+        />
+      </Stack>
+    </Box>
+  ),
+}
+
+const CONSTRAINED_ITEMS: {tone: SelectableTone; message: string}[] = Array.from(
+  {length: 17},
+  () => ({
+    tone: 'critical',
+    message: 'Critical message',
+  }),
+)
+
+function ConstrainedInBoundaryStory() {
+  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
+
+  return (
+    <Box height="fill" padding={[4, 5, 6]} sizing="border">
+      <Card height="fill" shadow={1}>
+        <Flex height="fill">
+          <Card flex={1} padding={4}>
+            <Text>Pane</Text>
+          </Card>
+          <Card borderLeft flex={1} padding={2} ref={setBoundaryElement}>
+            <Flex>
+              <Box flex={1} padding={3}>
+                <Text>Pane</Text>
+              </Box>
+              <Box>
+                <BoundaryElementProvider element={boundaryElement}>
+                  <MenuButton
+                    button={<Button icon={ErrorOutlineIcon} mode="bleed" tone="critical" />}
+                    id="validation-menu"
+                    menu={
+                      <Menu>
+                        {CONSTRAINED_ITEMS.map((item, itemIndex) => (
+                          <MenuItem key={itemIndex} padding={5} tone={item.tone}>
+                            <Text>{item.message}</Text>
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    }
+                    popover={{constrainSize: true, placement: 'bottom', portal: true}}
+                  />
+                </BoundaryElementProvider>
+              </Box>
+            </Flex>
+          </Card>
+        </Flex>
+      </Card>
+    </Box>
+  )
+}
+
+export const ConstrainedInBoundary: Story = {
+  parameters: {controls: {include: []}},
+  render: () => <ConstrainedInBoundaryStory />,
+}
+
+export const DisableFocusOnClose: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
+      <MenuButton
+        __unstable_disableRestoreFocusOnClose
+        button={
+          <Button iconRight={ChevronDownIcon} mode="ghost" text="Should not focus after close" />
+        }
+        id="example"
+        menu={
+          <Menu>
+            <MenuItem text="Test 1" />
+            <MenuItem text="Test 2" />
+            <MenuItem text="Test 3" />
+          </Menu>
+        }
+        popover={{constrainSize: true, matchReferenceWidth: true}}
+      />
+    </Flex>
+  ),
+}
+
+function WithOnCloseStory() {
+  const {push} = useToast()
+
+  const handleClose = useCallback(() => {
+    push({
+      title: 'Menu closed',
+      status: 'success',
+    })
+  }, [push])
+
+  return (
+    <Box padding={[4, 5, 6]}>
+      <Stack space={2}>
+        <MenuButton
+          button={<Button text="With onClose callback" />}
+          id="closable-example"
+          onClose={handleClose}
+          menu={
+            <Menu padding={0} space={0}>
+              <Stack padding={1} space={1}>
+                <MenuItem text="Item 1" />
+                <MenuItem text="Item 2" />
+                <MenuItem text="Item 3" />
+                <MenuItem text="Item 4" />
+              </Stack>
+            </Menu>
+          }
+          popover={{constrainSize: true}}
+        />
+        <Button text="Blur test button" mode="ghost" />
+      </Stack>
+    </Box>
+  )
+}
+
+export const WithOnClose: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <ToastProvider>
+      <WithOnCloseStory />
+    </ToastProvider>
+  ),
+}
+
+export const CustomSelectedState: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Box padding={4}>
+      <MenuButton
+        button={<Button icon={ChevronDownIcon} mode="bleed" selected={false} text="Menu" />}
+        id="test-menu"
+        menu={
+          <Menu>
+            <MenuItem text="Item 1" />
+            <MenuItem text="Item 2" />
+          </Menu>
+        }
+      />
+    </Box>
+  ),
 }

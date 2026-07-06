@@ -1,6 +1,5 @@
 import {icons} from '@sanity/icons'
-
-import {buildTheme, ThemeFontKey} from '../../../packages/ui/src/theme'
+import {buildTheme, ThemeFontKey} from '@sanity/ui/theme'
 
 const theme = buildTheme()
 

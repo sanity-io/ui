@@ -1,13 +1,5 @@
-import {
-  BadgeMode,
-  BadgeTone,
-  ButtonMode,
-  ButtonTone,
-  CardTone,
-  Placement,
-  Radius,
-} from '../../../packages/ui/src/core'
-import {buildTheme} from '../../../packages/ui/src/theme'
+import {BadgeMode, BadgeTone, ButtonMode, ButtonTone, CardTone, Placement, Radius} from '@sanity/ui'
+import {buildTheme} from '@sanity/ui/theme'
 
 const theme = buildTheme()
 

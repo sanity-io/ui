@@ -1,18 +1,8 @@
 import {black, COLOR_HUES, ColorTint, ColorTints, hues, white} from '@sanity/color'
+import {Box, Card, Code, Flex, Grid, Heading, Stack, ThemeProvider} from '@sanity/ui'
+import {buildTheme, hexToRgb, rgbToHsl} from '@sanity/ui/theme'
 import {ReactNode} from 'react'
 import {styled} from 'styled-components'
-
-import {
-  Box,
-  Card,
-  Code,
-  Flex,
-  Grid,
-  Heading,
-  Stack,
-  ThemeProvider,
-} from '../../../../packages/ui/src/core'
-import {buildTheme, hexToRgb, rgbToHsl} from '../../../../packages/ui/src/theme'
 
 const theme = buildTheme()
 

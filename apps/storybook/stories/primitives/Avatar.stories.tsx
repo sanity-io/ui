@@ -1,6 +1,19 @@
+import {
+  Avatar,
+  AvatarStack,
+  Box,
+  Button,
+  Card,
+  Container,
+  Flex,
+  Layer,
+  Menu,
+  MenuItem,
+  Stack,
+  Text,
+} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Avatar, Flex, Stack} from '../../../../packages/ui/src/core/primitives'
 import {AVATAR_SRC} from '../constants'
 import {getAvatarSizeControls} from '../controls'
 
@@ -80,5 +93,89 @@ export const Sizes: Story = {
       <Avatar {...props} size={1} src={undefined} />
       <Avatar {...props} size={2} src={undefined} />
     </Stack>
+  ),
+}
+
+export const WithinButton: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Container width={1}>
+      <Stack paddingX={4} paddingY={[5, 6, 7]} space={1}>
+        <Button padding={1}>
+          <Flex align="center" gap={3} padding={2}>
+            <Box flex={1}>
+              <Text size={1}>Default button</Text>
+            </Box>
+            <Box flex="none">
+              <AvatarStack>
+                <Avatar color="blue" initials="AB" />
+                <Avatar color="magenta" initials="CD" />
+                <Avatar color="purple" initials="EF" />
+              </AvatarStack>
+            </Box>
+          </Flex>
+        </Button>
+        <Button mode="ghost" padding={1}>
+          <Flex align="center" gap={3} padding={2}>
+            <Box flex={1}>
+              <Text size={1}>Ghost button</Text>
+            </Box>
+            <Box flex="none">
+              <AvatarStack>
+                <Avatar color="blue" initials="AB" />
+                <Avatar color="magenta" initials="CD" />
+                <Avatar color="purple" initials="EF" />
+              </AvatarStack>
+            </Box>
+          </Flex>
+        </Button>
+        <Button mode="bleed" padding={1}>
+          <Flex align="center" gap={3} padding={2}>
+            <Box flex={1}>
+              <Text size={1}>Bleed button</Text>
+            </Box>
+            <Box flex="none">
+              <AvatarStack>
+                <Avatar color="blue" initials="AB" />
+                <Avatar color="magenta" initials="CD" />
+                <Avatar color="purple" initials="EF" />
+              </AvatarStack>
+            </Box>
+          </Flex>
+        </Button>
+      </Stack>
+    </Container>
+  ),
+}
+
+export const WithinMenuItem: Story = {
+  parameters: {controls: {include: []}},
+  render: () => (
+    <Container width={1}>
+      <Layer>
+        <Box paddingX={4} paddingY={[5, 6, 7]}>
+          <Card radius={3} shadow={3}>
+            <Menu space={1}>
+              {[1, 2, 3].map((index) => (
+                <MenuItem key={index} padding={0}>
+                  <Flex align="center" gap={2} padding={2}>
+                    <Box flex={1}>
+                      <Text size={1}>Menu item {index}</Text>
+                    </Box>
+                    <Box flex="none">
+                      <AvatarStack>
+                        <Avatar color="blue" initials="AB" />
+                        <Avatar color="magenta" initials="CD" />
+                        <Avatar color="purple" initials="EF" />
+                      </AvatarStack>
+                    </Box>
+                  </Flex>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Card>
+        </Box>
+      </Layer>
+    </Container>
   ),
 }

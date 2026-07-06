@@ -1,7 +1,6 @@
+import {Breadcrumbs, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Breadcrumbs} from '../../../../packages/ui/src/core/components'
-import {Text} from '../../../../packages/ui/src/core/primitives'
 import {getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Breadcrumbs> = {

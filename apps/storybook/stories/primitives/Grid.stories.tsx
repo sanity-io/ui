@@ -1,6 +1,6 @@
+import {Card, Code, Container, Flex, Grid} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Card, Code, Container, Flex, Grid} from '../../../../packages/ui/src/core/primitives'
 import {getHeightControls, getOverflowControls, getSpaceControls} from '../controls'
 
 const meta: Meta<typeof Grid> = {
@@ -32,6 +32,8 @@ const meta: Meta<typeof Grid> = {
     height: getHeightControls(),
     overflow: getOverflowControls(),
     gap: getSpaceControls(),
+    columns: {control: {type: 'number', min: 1, max: 12}},
+    rows: {control: {type: 'number', min: 1, max: 12}},
   },
   tags: ['autodocs'],
 }
@@ -49,7 +51,7 @@ export const Columns: Story = {
 }
 
 export const Responsive: Story = {
-  // The browser test for this story depends on exact viewport dimensions, so the decorator
+  // The Playwright test for this story depends on exact viewport dimensions, so the decorator
   // padding is disabled
   parameters: {controls: {include: []}, padding: 0},
   render: () => (

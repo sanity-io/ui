@@ -1,6 +1,6 @@
+import {AvatarCounter, AvatarStack} from '@sanity/ui'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 
-import {AvatarCounter, AvatarStack} from '../../../../packages/ui/src/core/primitives'
 import {getAvatarSizeControls} from '../controls'
 
 const meta: Meta<typeof AvatarCounter> = {

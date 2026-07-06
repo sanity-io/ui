@@ -16,14 +16,9 @@ obvious from the scripts:
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`).
   `@sanity/ui` is aliased to the `packages/ui/exports/` source, so unit tests
   run directly against source and do not require a `pnpm build` first.
-- `pnpm dev` runs two servers in parallel: Storybook (`apps/storybook`) on
-  http://localhost:6006 and the Workshop (`packages/ui`) on
-  http://localhost:1337. Both are Vite-based and resolve `@sanity/ui` to the
-  `packages/ui` source, so they hot-reload source edits directly (no rebuild
-  needed).
-- The Workshop's first component render can show a long loading spinner while
-  Vite optimizes deps on demand; it is warm after the first load. This is
-  expected, not a failure.
+- `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. It
+  resolves `@sanity/ui` to the `packages/ui` source, so it hot-reloads source
+  edits directly (no rebuild needed).
 - `pnpm test:browser` runs the Storybook tests (`apps/storybook`): vitest
   renders every story in headless Chromium via `@storybook/addon-vitest` and
   executes story `play` interactions, plus the browser tests in

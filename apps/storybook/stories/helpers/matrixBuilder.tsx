@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import {Card, Flex, Grid, Text} from '../../../../packages/ui/src/core/primitives'
-import {ThemeColorSchemeKey} from '../../../../packages/ui/src/theme'
+import {Card, Flex, Grid, Text} from '@sanity/ui'
+import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 
 interface MatrixBuilderProps<Rows extends string[], Cols extends string[]> {
   scheme?: ThemeColorSchemeKey

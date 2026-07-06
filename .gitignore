@@ -2,7 +2,6 @@
 
 .DS_Store
 .env.local
-.workshop
 dist
 etc
 node_modules

@@ -6,9 +6,9 @@
   "author": "Sanity.io <hello@sanity.io>",
   "scripts": {
     "build": "pnpm --filter @sanity/ui build && pnpm --filter figma-plugin-sanity-ui build",
-    "clean": "rimraf dist storybook-static && pnpm --recursive clean",
+    "clean": "rimraf storybook-static && pnpm --recursive clean",
     "commit": "cz",
-    "dev": "run-p storybook:dev workshop:dev",
+    "dev": "pnpm --filter sanity-ui-storybook dev",
     "format": "prettier --write --cache --ignore-unknown .",
     "lint": "pnpm --recursive lint",
     "prepare": "husky install",
@@ -18,10 +18,7 @@
     "test": "pnpm --filter @sanity/ui test",
     "test:browser": "pnpm --filter sanity-ui-storybook test",
     "ts:check": "pnpm --recursive ts:check",
-    "watch": "pnpm --filter @sanity/ui watch",
-    "workshop:build": "pnpm --filter @sanity/ui workshop:build && cpx 'packages/ui/dist/**' dist/",
-    "workshop:dev": "pnpm --filter @sanity/ui workshop:dev",
-    "workshop:start": "http-server -a localhost -c-0 -p 1337 -s -P http://localhost:1337/index.html? dist"
+    "watch": "pnpm --filter @sanity/ui watch"
   },
   "commitlint": {
     "extends": [
@@ -41,10 +38,8 @@
     "commitizen": "^4.3.1",
     "cpx": "^1.5.0",
     "cz-conventional-changelog": "^3.3.0",
-    "http-server": "^14.1.1",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
-    "npm-run-all2": "^5.0.2",
     "prettier": "^3.6.2",
     "rimraf": "^5.0.5",
     "typescript": "5.9.3"

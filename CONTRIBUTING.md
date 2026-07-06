@@ -13,8 +13,9 @@ pnpm build
 pnpm test
 ```
 
-Run `pnpm dev` to start Storybook (http://localhost:6006) and the Workshop
-(http://localhost:1337) in parallel.
+Run `pnpm dev` to start Storybook (http://localhost:6006). Storybook resolves
+`@sanity/ui` from the package source, so edits to `packages/ui/src` hot-reload
+without a rebuild.
 
 ## Testing
 

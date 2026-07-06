@@ -1,6 +1,6 @@
+import {Spinner} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
-import {Spinner} from '../../../../packages/ui/src/core/primitives'
 import {getFontSizeControls} from '../controls'
 
 const meta: Meta<typeof Spinner> = {

@@ -1,8 +1,6 @@
+import {Box, Button, Grid, Heading, Inline, Toast, ToastProvider, useToast} from '@sanity/ui'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useId} from 'react'
-
-import {Toast, ToastProvider, useToast} from '../../../../packages/ui/src/core/components'
-import {Box, Button, Grid, Heading, Inline} from '../../../../packages/ui/src/core/primitives'
 
 const meta: Meta<typeof Toast> = {
   args: {title: 'Toast title', description: 'Toast description'},

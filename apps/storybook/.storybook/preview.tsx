@@ -38,7 +38,7 @@ const preview: Preview = {
     layout: 'fullscreen',
     options: {
       storySort: {
-        order: ['primitives', 'components', 'utils', '*'],
+        order: ['primitives', 'components', 'hooks', 'utils', 'theme', '*'],
       },
     },
   },

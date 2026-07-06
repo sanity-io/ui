@@ -1,10 +1,9 @@
 import {OkHandIcon, RocketIcon, SearchIcon, SunIcon} from '@sanity/icons'
+import {Box, Card, Tab, TabList, TabPanel, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
 
-import {Tab, TabList, TabPanel} from '../../../../packages/ui/src/core/components'
-import {Box, Card, Text} from '../../../../packages/ui/src/core/primitives'
 import {BUTTON_TONES} from '../constants'
 import {getFontSizeControls, getIconControls, getSpaceControls} from '../controls'
 import {rowBuilder} from '../helpers/rowBuilder'
