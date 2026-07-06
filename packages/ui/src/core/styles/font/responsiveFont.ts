@@ -2,7 +2,7 @@ import {CSSObject, getTheme_v2, ThemeFontKey, ThemeFontSize} from '@sanity/ui/th
 
 import {_responsive, rem} from '../helpers'
 import {ThemeProps} from '../types'
-import {ResponsiveFontStyleProps} from './types'
+import {FontWeightStyleProps, ResponsiveFontSizeStyleProps} from './types'
 
 /**
  * A utility function getting responsive font styles.
@@ -10,7 +10,7 @@ import {ResponsiveFontStyleProps} from './types'
  */
 export function responsiveFont(
   fontKey: ThemeFontKey,
-  props: ResponsiveFontStyleProps & ThemeProps,
+  props: FontWeightStyleProps & ResponsiveFontSizeStyleProps & ThemeProps,
 ): CSSObject[] {
   const {$size, $weight} = props
   const {font, media} = getTheme_v2(props.theme)

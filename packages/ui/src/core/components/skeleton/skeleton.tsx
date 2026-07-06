@@ -24,7 +24,7 @@ export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxOwnProps, 
  * @beta
  */
 export const Skeleton = forwardRef(function Skeleton(
-  props: SkeletonProps & React.HTMLProps<HTMLDivElement>,
+  props: SkeletonProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>,
   ref: React.Ref<HTMLDivElement>,
 ) {
   const {animated = false, delay, radius, ...restProps} = props
