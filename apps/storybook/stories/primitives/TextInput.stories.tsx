@@ -73,12 +73,15 @@ export const Radius: Story = {
 
 export const WithClearButton: Story = {
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [value, setValue] = useState('')
 
+    // oxlint-disable-next-line rules-of-hooks
     const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
       setValue(event.currentTarget.value)
     }, [])
 
+    // oxlint-disable-next-line rules-of-hooks
     const handleClear = useCallback(() => {
       setValue('')
     }, [])

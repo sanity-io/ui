@@ -18,4 +18,5 @@ export function ConditionalWrapper({
   return wrapper(children)
 }
 
+// oxlint-disable-next-line no-deprecated
 ConditionalWrapper.displayName = 'ConditionalWrapper'

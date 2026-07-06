@@ -23,15 +23,16 @@ export function useMenuController(props: {
   onKeyDown?: React.KeyboardEventHandler
   originElement?: HTMLElement | null
   shouldFocus: 'first' | 'last' | null
+  // oxlint-disable-next-line no-deprecated
   rootElementRef: React.MutableRefObject<HTMLDivElement | null>
 }): MenuController {
   const {onKeyDown, originElement, shouldFocus, rootElementRef} = props
   const elementsRef = useRef<HTMLElement[]>([])
   const [activeIndex, _setActiveIndex] = useState(-1)
   const activeIndexRef = useRef(activeIndex)
-  // eslint-disable-next-line react-hooks/refs
+  // oxlint-disable-next-line react-compiler
   const activeElement = useMemo(() => elementsRef.current[activeIndex] || null, [activeIndex])
-  // eslint-disable-next-line react-hooks/refs
+  // oxlint-disable-next-line react-compiler
   const mounted = Boolean(rootElementRef.current)
 
   const setActiveIndex = useCallback((nextActiveIndex: number) => {
@@ -219,12 +220,13 @@ export function useMenuController(props: {
       element?.focus()
     })
 
+    // oxlint-disable-next-line consistent-return
     return () => cancelAnimationFrame(rafId)
   }, [activeIndex, mounted, setActiveIndex, shouldFocus])
 
-  // eslint-disable-next-line react-hooks/refs
+  // oxlint-disable-next-line react-compiler
   return {
-    // eslint-disable-next-line react-hooks/refs
+    // oxlint-disable-next-line react-compiler
     activeElement,
     activeIndex,
     handleItemMouseEnter,

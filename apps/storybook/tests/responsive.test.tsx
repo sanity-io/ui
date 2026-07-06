@@ -1,7 +1,7 @@
 import {composeStories} from '@storybook/react-vite'
 import {describe, expect, test} from 'vitest'
-import {page} from 'vitest/browser'
 import {render} from 'vitest-browser-react'
+import {page} from 'vitest/browser'
 
 import * as boxStories from '../stories/primitives/Box.stories'
 import * as gridStories from '../stories/primitives/Grid.stories'
@@ -28,8 +28,10 @@ describe('Primitives/Box', () => {
     const box = document.getElementById('responsive-box')!
 
     for (const {css, viewport} of sizes) {
+      // oxlint-disable-next-line no-await-in-loop
       await page.viewport(viewport[0], viewport[1])
 
+      // oxlint-disable-next-line no-await-in-loop
       await expect.poll(() => getComputedStyle(box).display).toBe(css.display)
       expect(getComputedStyle(box).flex).toBe(css.flex)
       expect(getComputedStyle(box).boxSizing).toBe(css.boxSizing)
@@ -103,8 +105,10 @@ describe('Primitives/Grid', () => {
     const grid = document.getElementById('responsive-grid')!
 
     for (const {css, viewport} of sizes) {
+      // oxlint-disable-next-line no-await-in-loop
       await page.viewport(viewport[0], viewport[1])
 
+      // oxlint-disable-next-line no-await-in-loop
       await expect.poll(() => getComputedStyle(grid).rowGap).toBe(css.gap)
       expect(getComputedStyle(grid).columnGap).toBe(css.gap)
       expect(getComputedStyle(grid).gridTemplateColumns).toBe(css.gridTemplateColumns)
@@ -126,16 +130,20 @@ describe('Utils/Layer', () => {
     ]
 
     for (const {css, viewport} of sizes) {
+      // oxlint-disable-next-line no-await-in-loop
       await page.viewport(viewport[0], viewport[1])
 
       // The z-offset is resolved when the layer mounts, so remount per viewport
       // (the original end-to-end test reloaded the page instead)
+      // oxlint-disable-next-line no-await-in-loop
       const screen = await render(<ResponsiveZOffset />)
 
+      // oxlint-disable-next-line no-await-in-loop
       await expect
         .poll(() => document.getElementById('responsive-layer')?.getAttribute('style'))
         .toBe(`z-index: ${css.zIndex};`)
 
+      // oxlint-disable-next-line no-await-in-loop
       await screen.unmount()
     }
   })

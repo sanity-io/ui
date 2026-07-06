@@ -23,6 +23,7 @@ export interface PortalProviderProps {
  * @public
  */
 export function PortalProvider(props: PortalProviderProps): React.JSX.Element {
+  // oxlint-disable-next-line no-deprecated
   const {boundaryElement, children, element, __unstable_elements: elementsProp} = props
   const elements = useUnique(elementsProp)
   const fallbackElement = useSyncExternalStore(
@@ -54,13 +55,13 @@ const emptySubscribe = () => () => {}
 function useUnique<ValueType extends Comparable = Comparable>(value: ValueType): ValueType {
   const valueRef = useRef<ValueType>(value)
 
-  // eslint-disable-next-line react-hooks/refs
+  // oxlint-disable-next-line react-compiler
   if (!_isEqual(valueRef.current, value)) {
-    // eslint-disable-next-line react-hooks/refs
+    // oxlint-disable-next-line react-compiler
     valueRef.current = value
   }
 
-  // eslint-disable-next-line react-hooks/refs
+  // oxlint-disable-next-line react-compiler
   return valueRef.current
 }
 

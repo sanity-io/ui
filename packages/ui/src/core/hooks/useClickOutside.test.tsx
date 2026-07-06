@@ -23,10 +23,12 @@ describe('useClickOutside', () => {
       const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
       const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [buttonElement, popoverElement])
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={setButtonElement} />
           <div data-testid="popover" ref={setPopoverElement} />
           <div data-testid="outside" />
@@ -52,10 +54,12 @@ describe('useClickOutside', () => {
       const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
       const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [null, [null, buttonElement], [popoverElement, null], null])
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={setButtonElement} />
           <div data-testid="popover" ref={setPopoverElement} />
           <div data-testid="outside" />
@@ -82,11 +86,13 @@ describe('useClickOutside', () => {
       const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
       const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [buttonElement, popoverElement], boundaryElement)
 
       return (
         <>
           <div ref={setBoundaryElement}>
+            {/* oxlint-disable-next-line control-has-associated-label */}
             <button data-testid="button" ref={setButtonElement} />
             <div data-testid="popover" ref={setPopoverElement} />
             <div data-testid="inside" />
@@ -121,10 +127,12 @@ describe('useClickOutside', () => {
       const {open = false} = props
       const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       const setElement = useClickOutside(handler, [buttonElement])
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={setButtonElement} />
           {open && <div data-testid="popover" ref={setElement} />}
           <div data-testid="outside" />
@@ -163,10 +171,12 @@ describe('useClickOutside', () => {
       const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
       const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [buttonElement, popoverElement])
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={setButtonElement} />
           {open && <div data-testid="popover" ref={setPopoverElement} />}
           <div data-testid="outside" />
@@ -211,10 +221,12 @@ describe('useClickOutside', () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const popoverRef = useRef<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [buttonRef.current, popoverRef.current])
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={buttonRef} />
           <div data-testid="popover" ref={popoverRef} />
         </>
@@ -235,10 +247,12 @@ describe('useClickOutside', () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [buttonRef.current, popoverElement])
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={buttonRef} />
           <div data-testid="popover" ref={setPopoverElement} />
           <div data-testid="outside" />
@@ -260,6 +274,7 @@ describe('useClickOutside', () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const popoverRef = useRef<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [buttonRef.current, popoverRef.current])
 
       const [, tick] = useState(0)
@@ -273,6 +288,7 @@ describe('useClickOutside', () => {
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={buttonRef} />
           <div data-testid="popover" ref={popoverRef} />
           <div data-testid="outside" />
@@ -290,6 +306,7 @@ describe('useClickOutside', () => {
      * When using the legacy version of the `useClickOutside` API it's necessary to synchronize mutable ref values
      * with a effect and state loop to ensure they're not stale
      */
+    // oxlint-disable-next-line no-deprecated
     const useElementsFromRefs = (refs: React.MutableRefObject<HTMLElement | null>[]) => {
       const [elements, setElements] = useState(() => refs.map((ref) => ref.current))
 
@@ -313,10 +330,12 @@ describe('useClickOutside', () => {
       const popoverRef = useRef<HTMLDivElement | null>(null)
 
       const elements = useElementsFromRefs([buttonRef, popoverRef])
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, elements)
 
       return (
         <>
+          {/* oxlint-disable-next-line control-has-associated-label */}
           <button data-testid="button" ref={buttonRef} />
           <div data-testid="popover" ref={popoverRef} />
           <div data-testid="outside" />
@@ -348,6 +367,7 @@ describe('useClickOutside', () => {
     let TestComponent = () => {
       const boundaryRef = useRef<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [], boundaryRef.current)
 
       return (
@@ -375,11 +395,13 @@ describe('useClickOutside', () => {
       const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
       const boundaryRef = useRef<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [buttonRef.current, popoverElement], boundaryRef.current)
 
       return (
         <>
           <div ref={boundaryRef}>
+            {/* oxlint-disable-next-line control-has-associated-label */}
             <button data-testid="button" ref={buttonRef} />
             <div data-testid="popover" ref={setPopoverElement} />
             <div data-testid="inside" />
@@ -405,6 +427,7 @@ describe('useClickOutside', () => {
       const popoverRef = useRef<HTMLDivElement | null>(null)
       const boundaryRef = useRef<HTMLDivElement | null>(null)
 
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [buttonRef.current, popoverRef.current], boundaryRef.current)
 
       const [, tick] = useState(0)
@@ -419,6 +442,7 @@ describe('useClickOutside', () => {
       return (
         <>
           <div ref={boundaryRef}>
+            {/* oxlint-disable-next-line control-has-associated-label */}
             <button data-testid="button" ref={buttonRef} />
             <div data-testid="popover" ref={popoverRef} />
             <div data-testid="inside" />
@@ -439,10 +463,11 @@ describe('useClickOutside', () => {
      * When using the legacy version of the `useClickOutside` API it's necessary to synchronize mutable ref values
      * with a effect and state loop to ensure they're not stale
      */
+    // oxlint-disable-next-line no-deprecated
     const useBoundaryElementFromRef = (ref: React.MutableRefObject<HTMLElement | null>) => {
       const [element, setElement] = useState(() => ref.current)
 
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // oxlint-disable-next-line exhaustive-deps
       useEffect(() => {
         // If the ref has mutated since the last render, update the state and schedule a re-render
         if (ref.current !== element) {
@@ -459,11 +484,13 @@ describe('useClickOutside', () => {
       const boundaryRef = useRef<HTMLDivElement | null>(null)
 
       const boundaryElement = useBoundaryElementFromRef(boundaryRef)
+      // oxlint-disable-next-line no-deprecated
       useClickOutside(handler, [buttonRef.current, popoverRef.current], boundaryElement)
 
       return (
         <>
           <div ref={boundaryRef}>
+            {/* oxlint-disable-next-line control-has-associated-label */}
             <button data-testid="button" ref={buttonRef} />
             <div data-testid="popover" ref={popoverRef} />
             <div data-testid="inside" />

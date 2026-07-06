@@ -13,5 +13,6 @@ export function useRootTheme(): ThemeContextValue {
     throw new Error('useRootTheme(): missing context value')
   }
 
+  // oxlint-disable-next-line no-unnecessary-type-assertion, no-unsafe-type-assertion
   return value as unknown as ThemeContextValue
 }

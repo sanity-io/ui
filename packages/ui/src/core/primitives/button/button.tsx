@@ -22,7 +22,9 @@ export interface ButtonProps extends ResponsivePaddingProps, ResponsiveRadiusPro
   as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
   mode?: ButtonMode
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: React.ElementType | React.ReactNode
+  // oxlint-disable-next-line no-redundant-type-constituents
   iconRight?: React.ElementType | React.ReactNode
   justify?: FlexJustify | FlexJustify[]
   /**

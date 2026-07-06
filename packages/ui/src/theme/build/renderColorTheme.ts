@@ -43,6 +43,7 @@ function renderThemeColorScheme(
   colorPalette: ThemeColorPalette,
   value: ThemeColorScheme_v2,
 ): ThemeColorScheme_v2 {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const toneEntries = Object.entries(value) as [ThemeColorCardToneKey, ThemeColorCard_v2][]
 
   const [, transparentTone] = toneEntries.find(([k]) => k === 'transparent')!
@@ -61,6 +62,7 @@ function renderThemeColorScheme(
     throw new Error('Cannot blend with white background')
   }
 
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return Object.fromEntries([
     ['transparent', renderedTransparentTone],
     ['default', renderedDefaultTone],
@@ -190,6 +192,7 @@ function renderThemeColorAvatar(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorAvatar_v2 {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorAvatar = {} as ThemeColorAvatar_v2
 
   for (const hue of COLOR_HUES) {
@@ -239,6 +242,7 @@ function renderThemeColorBadge(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorBadge_v2 {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorBadge = {} as ThemeColorBadge_v2
 
   for (const tone of THEME_COLOR_STATE_TONES) {
@@ -305,6 +309,7 @@ function renderThemeColorButtonTones(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorButtonMode_v2 {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorButtonMode = {} as ThemeColorButtonMode_v2
 
   for (const tone of THEME_COLOR_STATE_TONES) {
@@ -454,6 +459,7 @@ function renderThemeColorSelectable(
     colorPalette: ThemeColorPalette
   },
 ): ThemeColorSelectable_v2 {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   const colorSelectable = {} as ThemeColorSelectable_v2
 
   for (const tone of THEME_COLOR_STATE_TONES) {

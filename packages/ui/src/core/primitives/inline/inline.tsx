@@ -38,6 +38,7 @@ export const Inline = forwardRef(function Inline(
       {...restProps}
       $space={useArrayProp(space)}
       forwardedAs={as}
+      // oxlint-disable-next-line no-unnecessary-type-assertion, no-unsafe-type-assertion
       ref={ref as any}
     >
       {children}

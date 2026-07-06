@@ -16,26 +16,31 @@ import {parseTokenValue} from './tokens'
 
 /** @internal */
 export function isColorConfigBaseTone(str: string): str is ColorConfigCardTone {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return COLOR_CONFIG_CARD_TONES.includes(str as ColorConfigCardTone)
 }
 
 /** @internal */
 export function isColorConfigBaseKey(str: string): str is ColorConfigCardKey {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return COLOR_CONFIG_CARD_KEYS.includes(str as ColorConfigCardKey)
 }
 
 /** @internal */
 export function isColorConfigStateKey(str: string): str is ColorConfigStateKey {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return COLOR_CONFIG_STATE_KEYS.includes(str as ColorConfigStateKey)
 }
 
 /** @internal */
 export function isColorConfigStateTone(str: string): str is ColorConfigStateTone {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return COLOR_CONFIG_STATE_TONES.includes(str as ColorConfigStateTone)
 }
 
 /** @internal */
 export function isColorConfigBlendKey(str: string): str is ColorConfigBlendKey {
+  // oxlint-disable-next-line no-unsafe-type-assertion
   return COLOR_CONFIG_BLEND_KEYS.includes(str as ColorConfigBlendKey)
 }
 

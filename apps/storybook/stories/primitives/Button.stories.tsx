@@ -241,7 +241,6 @@ export const CustomButton: Story = {
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="">Link</a>
                   </Text>
                   <Text>
@@ -259,7 +258,6 @@ export const CustomButton: Story = {
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="">Link</a>
                   </Text>
                   <Text>
@@ -278,7 +276,6 @@ export const CustomButton: Story = {
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a href="">Link</a>
                   </Text>
                   <Text>

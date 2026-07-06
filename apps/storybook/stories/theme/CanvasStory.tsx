@@ -69,7 +69,6 @@ function Color(props: {color: ThemeColorCard_v2; tone: CardTone}) {
           <Text style={{color: 'inherit'}}>Input</Text>
         </Box>
 
-        {/* eslint-disable-next-line no-warning-comments */}
         {/* @todo: remove use of `muted` here */}
         <ColorSelectable color={color.selectable || color.muted} />
 
@@ -108,7 +107,6 @@ function ColorBase(props: {color: ThemeColorCard_v2}) {
 
       <Text accent>Accent</Text>
       <Text>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a href="#">Link</a>
       </Text>
       <Text>

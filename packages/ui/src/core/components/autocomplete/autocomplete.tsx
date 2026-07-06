@@ -51,6 +51,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   customValidity?: string
   filterOption?: (query: string, option: Option) => boolean
   fontSize?: number | number[]
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: ElementType | ReactNode
   id: string
   /** @beta */
@@ -243,6 +244,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
           }
         }
 
+        // oxlint-disable-next-line no-unnecessary-boolean-literal-compare
         if (focusInside === false) {
           dispatch({type: 'root/blur'})
           popoverMouseWithinRef.current = false
@@ -332,6 +334,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         return
       }
 
+      // oxlint-disable-next-line no-unsafe-type-assertion
       const target = event.target as Node
       const listEl = listBoxElementRef.current
 
@@ -436,6 +439,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
 
     if (activeOption) {
       const activeIndex = filteredOptions.indexOf(activeOption)
+      // oxlint-disable-next-line no-unsafe-type-assertion
       const activeItemElement = listElement.childNodes[activeIndex] as HTMLLIElement | undefined
 
       if (activeItemElement) {
@@ -556,6 +560,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
       radius={radius}
       readOnly={readOnly}
       ref={inputElementRef}
+      // oxlint-disable-next-line prefer-tag-over-role, role-has-required-aria-props
       role="combobox"
       spellCheck={false}
       suffix={suffix || openButtonNode}
@@ -590,6 +595,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
           data-ui="AutoComplete__resultsList"
           id={listBoxId}
           ref={listBoxElementRef}
+          // oxlint-disable-next-line prefer-tag-over-role
           role="listbox"
           space={1}
         >
@@ -633,16 +639,16 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
   const results = useMemo(() => {
     if (renderPopover) {
       return renderPopover(
-        // eslint-disable-next-line react-hooks/refs
+        // oxlint-disable-next-line react-compiler
         {
           content,
           hidden: !expanded,
-          // eslint-disable-next-line react-hooks/refs
+          // oxlint-disable-next-line react-compiler
           inputElement: inputElementRef.current,
           onMouseEnter: handlePopoverMouseEnter,
           onMouseLeave: handlePopoverMouseLeave,
         },
-        // eslint-disable-next-line react-hooks/refs
+        // oxlint-disable-next-line react-compiler
         resultsPopoverElementRef,
       )
     }
@@ -666,7 +672,7 @@ const InnerAutocomplete = forwardRef(function InnerAutocomplete<
         portal
         radius={radius}
         ref={resultsPopoverElementRef}
-        // eslint-disable-next-line react-hooks/refs
+        // oxlint-disable-next-line react-compiler
         referenceElement={inputElementRef.current}
         {...popover}
       />
@@ -704,6 +710,7 @@ InnerAutocomplete.displayName = 'ForwardRef(Autocomplete)'
  *
  * @public
  */
+// oxlint-disable-next-line no-unsafe-type-assertion
 export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
     Omit<

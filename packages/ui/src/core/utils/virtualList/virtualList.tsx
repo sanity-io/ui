@@ -92,6 +92,7 @@ export const VirtualList = forwardRef(function VirtualList(
 
       handleScroll()
 
+      // oxlint-disable-next-line consistent-return
       return () => {
         scrollEl.removeEventListener('scroll', handleScroll)
 
@@ -111,11 +112,11 @@ export const VirtualList = forwardRef(function VirtualList(
     window.addEventListener('scroll', handleScroll, {passive: true})
     window.addEventListener('resize', handleResize)
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setScrollHeight(window.innerHeight)
 
     handleScroll()
 
+    // oxlint-disable-next-line consistent-return
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleResize)

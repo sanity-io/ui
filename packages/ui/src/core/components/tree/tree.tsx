@@ -218,6 +218,7 @@ export const Tree = memo(
 
     return (
       <TreeContext.Provider value={contextValue}>
+        {/* oxlint-disable-next-line interactive-supports-focus */}
         <Stack
           as="ul"
           data-ui="Tree"

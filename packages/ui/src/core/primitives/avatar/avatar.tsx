@@ -77,7 +77,6 @@ export const Avatar = forwardRef(function Avatar(
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = useArrayProp(sizeProp)
 
-  // eslint-disable-next-line no-warning-comments
   // @todo: remove this
   const avatarSize = avatar.sizes[size[0]] || avatar.sizes[0]
   const _sizeRem = avatarSize.size
@@ -102,7 +101,7 @@ export const Avatar = forwardRef(function Avatar(
   }, [arrowPosition, arrowPositionProp])
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // oxlint-disable-next-line react-compiler
     if (src) setImageFailed(false)
   }, [src])
 

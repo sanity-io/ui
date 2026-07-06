@@ -160,6 +160,7 @@ export const TextInCard: Story = {
   },
 }
 
+// oxlint-disable-next-line no-deprecated
 const ColoredText = styled(Text)<{$color?: ThemeColorSpotKey}>((
   props: {
     $color?: ThemeColorAvatarColorKey

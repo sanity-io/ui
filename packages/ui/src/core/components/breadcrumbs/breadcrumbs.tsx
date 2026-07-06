@@ -84,6 +84,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
   return (
     <StyledBreadcrumbs data-ui="Breadcrumbs" {...restProps} ref={ref}>
       {items.map((item, itemIndex) => (
+        // oxlint-disable-next-line no-array-index-key
         <Fragment key={itemIndex}>
           {itemIndex > 0 && (
             <Box aria-hidden as="li" paddingX={space}>

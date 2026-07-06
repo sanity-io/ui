@@ -17,6 +17,7 @@ export interface BadgeProps extends BoxProps, ResponsiveRadiusProps {
   as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
   /** @deprecated No longer used. */
+  // oxlint-disable-next-line no-deprecated
   mode?: BadgeMode
   tone?: BadgeTone
 }
@@ -38,7 +39,7 @@ export const Badge = forwardRef(function Badge(
   const {
     children,
     fontSize = 1,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // oxlint-disable-next-line no-deprecated
     mode: _deprecated_mode,
     padding = 1,
     radius = 'full',

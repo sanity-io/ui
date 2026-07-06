@@ -54,7 +54,6 @@ export const Default: Story = {
   },
 }
 
-// eslint-disable-next-line no-warning-comments
 // @todo: understand why this story doesn't render in storybook docs
 // (but renders correctly in the individual story preview)
 export const Radius: Story = {
@@ -80,6 +79,7 @@ export const Radius: Story = {
 
 export const Controlled: Story = {
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [open, setOpen] = useState(false)
 
     return (
@@ -102,6 +102,7 @@ export const Placements: Story = {
     },
   },
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [open, setOpen] = useState(false)
 
     return (
@@ -140,6 +141,7 @@ export const DefaultOpen: Story = {
 
 export const WithReferenceElement: Story = {
   render: () => {
+    // oxlint-disable-next-line rules-of-hooks
     const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null)
 
     return (
@@ -184,12 +186,15 @@ export const PlacementStrategy: Story = {
     },
   },
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [height, setHeight] = useState(100)
 
+    // oxlint-disable-next-line rules-of-hooks
     const handleUpdate = useCallback(() => {
       setHeight(height === 100 ? 800 : 100)
     }, [height])
 
+    // oxlint-disable-next-line rules-of-hooks
     useEffect(() => {
       const interval = setInterval(handleUpdate, 2000)
       return () => {
@@ -289,6 +294,7 @@ export const BoundaryTest: Story = {
 }
 
 const RECURSIVE_PLACEMENTS: Placement[] = ['top', 'right', 'bottom', 'left']
+// oxlint-disable-next-line no-deprecated
 const RECURSIVE_TONES: ThemeColorToneKey[] = ['primary', 'positive', 'caution', 'critical']
 
 function RecursiveExample({onClose}: {onClose?: () => void}) {
@@ -304,7 +310,7 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
   }, [seed])
 
   useEffect(() => {
-    if (open === false) buttonRef.current?.focus()
+    if (!open) buttonRef.current?.focus()
   }, [open])
 
   useEffect(() => {
@@ -446,6 +452,7 @@ function AlignedStory() {
       <Card height="fill" padding={2} ref={setBoundaryElement} shadow={1} sizing="border">
         <Flex align="flex-start" height="fill" justify="flex-end">
           <Popover
+            // oxlint-disable-next-line no-deprecated
             boundaryElement={boundaryElement}
             content={content}
             open={open}

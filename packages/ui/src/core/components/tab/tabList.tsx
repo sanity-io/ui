@@ -56,6 +56,7 @@ export const TabList = forwardRef(function TabList(
   )
 
   return (
+    // oxlint-disable-next-line interactive-supports-focus
     <CustomInline
       data-ui="TabList"
       {...restProps}

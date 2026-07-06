@@ -64,7 +64,9 @@ export interface TextInputProps {
   clearButton?: boolean | TextInputClearButtonProps
   customValidity?: string
   fontSize?: number | number[]
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: React.ElementType | React.ReactNode
+  // oxlint-disable-next-line no-redundant-type-constituents
   iconRight?: React.ElementType | React.ReactNode
   /**
    * @beta

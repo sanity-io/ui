@@ -42,6 +42,7 @@ export const Sizes: Story = {
         {columnBuilder({
           gap: 4,
           renderItem: ({value, index}) => <HeadingSkeleton {...props} key={index} size={value} />,
+          // oxlint-disable-next-line no-deprecated
           rows: [...Array(buildTheme().fonts.code.sizes.length).keys()],
         })}
       </>

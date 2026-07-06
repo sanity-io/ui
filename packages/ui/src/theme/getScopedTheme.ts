@@ -29,8 +29,11 @@ export function getScopedTheme(
   const v0 = is_v2(themeProp) ? v2_v0(themeProp) : themeProp
   const v2 = is_v2(themeProp) ? themeProp : v0_v2(themeProp)
 
+  // oxlint-disable-next-line no-deprecated
   const colorScheme_v0 = v0.color[scheme] || v0.color.light
+  // oxlint-disable-next-line no-deprecated
   const color_v0 = (colorScheme_v0 as Record<string, ThemeColor>)[tone] || colorScheme_v0.default
+  // oxlint-disable-next-line no-deprecated
   const layer_v0 = v0.layer || defaultThemeConfig.layer
 
   const colorScheme_v2 = v2.color[scheme] || v2.color.light
@@ -41,7 +44,9 @@ export function getScopedTheme(
   const theme: Theme = {
     sanity: {
       ...v0,
+      // oxlint-disable-next-line no-deprecated
       color: color_v0,
+      // oxlint-disable-next-line no-deprecated
       layer: layer_v0,
       v2: {
         ...v2,

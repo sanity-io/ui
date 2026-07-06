@@ -27,6 +27,7 @@ describe('utils/boundaryElement', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values
           <BoundaryElementContext.Provider value={value}>
             <Debug />
           </BoundaryElementContext.Provider>
@@ -54,6 +55,7 @@ describe('utils/boundaryElement', () => {
         const value = undefined
 
         return (
+          // oxlint-disable-next-line no-unsafe-type-assertion
           <BoundaryElementContext.Provider value={value as any}>
             <Debug />
           </BoundaryElementContext.Provider>
@@ -86,6 +88,7 @@ describe('utils/boundaryElement', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values, no-unsafe-type-assertion
           <BoundaryElementContext.Provider value={value as any}>
             <Debug />
           </BoundaryElementContext.Provider>

@@ -23,6 +23,7 @@ describe('theme', () => {
 
       function Root() {
         const value: ThemeContextValue = {
+          // oxlint-disable-next-line no-deprecated
           version: 0.0,
           scheme: 'light',
           theme: buildTheme(),
@@ -30,6 +31,7 @@ describe('theme', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values
           <ThemeContext.Provider value={value}>
             <Debug />
           </ThemeContext.Provider>
@@ -60,6 +62,7 @@ describe('theme', () => {
         const value = undefined
 
         return (
+          // oxlint-disable-next-line no-unsafe-type-assertion
           <ThemeContext.Provider value={value as any}>
             <Debug />
           </ThemeContext.Provider>

@@ -26,7 +26,9 @@ export interface MenuItemProps extends ResponsivePaddingProps, ResponsiveRadiusP
   as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
   hotkeys?: string[]
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: React.ElementType | React.ReactNode
+  // oxlint-disable-next-line no-redundant-type-constituents
   iconRight?: React.ElementType | React.ReactNode
   pressed?: boolean
   selected?: boolean
@@ -76,7 +78,9 @@ export const MenuItem = forwardRef(function MenuItem(
     onItemMouseEnter: _onItemMouseEnter,
     onItemMouseLeave: _onItemMouseLeave,
   } = menu
+  // oxlint-disable-next-line no-deprecated
   const onItemMouseEnter = _onItemMouseEnter ?? menu.onMouseEnter
+  // oxlint-disable-next-line no-deprecated
   const onItemMouseLeave = _onItemMouseLeave ?? menu.onMouseLeave
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement

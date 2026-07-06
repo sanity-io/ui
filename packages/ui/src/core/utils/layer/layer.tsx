@@ -49,6 +49,7 @@ const LayerChildren = forwardRef(function LayerChildren(
   }, [isTopLayer, onActivate])
 
   const handleFocus = useCallback(
+    // oxlint-disable-next-line no-unnecessary-type-arguments
     (event: FocusEvent<HTMLDivElement, Element>) => {
       // Call the user-provided onFocus handler if any
       onFocus?.(event)

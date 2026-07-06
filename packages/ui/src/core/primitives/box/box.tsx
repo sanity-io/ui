@@ -27,7 +27,8 @@ import {
  * @public
  */
 export interface BoxProps
-  extends ResponsiveFlexItemProps,
+  extends
+    ResponsiveFlexItemProps,
     ResponsiveBoxProps,
     ResponsiveGridItemProps,
     ResponsiveMarginProps,

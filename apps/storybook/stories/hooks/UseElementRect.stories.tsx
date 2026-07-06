@@ -11,6 +11,7 @@ type Story = StoryObj
 
 function ExampleStory() {
   const [element, setElement] = useState<HTMLElement | null>(null)
+  // oxlint-disable-next-line no-deprecated
   const rect = useElementRect(element)
   const size = {width: rect?.width || 0, height: rect?.height || 0}
 

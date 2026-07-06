@@ -16,6 +16,7 @@ import {useMenu} from './useMenu'
 export interface MenuGroupProps {
   as?: React.ElementType | keyof React.JSX.IntrinsicElements
   fontSize?: number | number[]
+  // oxlint-disable-next-line no-redundant-type-constituents
   icon?: React.ElementType | React.ReactNode
   menu?: Omit<
     MenuProps,
@@ -69,6 +70,7 @@ export function MenuGroup(
     onItemMouseEnter: _onItemMouseEnter,
     registerElement,
   } = menu
+  // oxlint-disable-next-line no-deprecated
   const onItemMouseEnter = _onItemMouseEnter ?? menu.onMouseEnter
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
   const [open, setOpen] = useState(false)
@@ -122,13 +124,13 @@ export function MenuGroup(
 
   // Close child menu when a sibling item becomes active
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // oxlint-disable-next-line react-compiler
     if (!active) setOpen(false)
   }, [active])
 
   // Update state when child menu is no longer open
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // oxlint-disable-next-line react-compiler
     if (!open) setWithinMenu(false)
   }, [open])
 
@@ -139,6 +141,7 @@ export function MenuGroup(
     // By doing the same here, we ensure that the reset is processed after the focus change.
     const rafId = requestAnimationFrame(() => setShouldFocus(null))
 
+    // oxlint-disable-next-line consistent-return
     return () => cancelAnimationFrame(rafId)
   }, [shouldFocus])
 

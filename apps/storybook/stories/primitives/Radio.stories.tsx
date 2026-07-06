@@ -28,8 +28,10 @@ export const Controlled: Story = {
     },
   },
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [value, setValue] = useState('a')
 
+    // oxlint-disable-next-line rules-of-hooks
     const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
       setValue(event.currentTarget.value)
     }, [])
