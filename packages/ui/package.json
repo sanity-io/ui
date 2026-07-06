@@ -70,7 +70,7 @@
     "watch": "tsdown --watch"
   },
   "dependencies": {
-    "@floating-ui/react-dom": "^2.1.6",
+    "@floating-ui/react-dom": "^2.1.8",
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.7.4",
