@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 3.3.4
+
+### Patch Changes
+
+- [#2267](https://github.com/sanity-io/ui/pull/2267) [`5553766`](https://github.com/sanity-io/ui/commit/55537662c4f8de3939474d0f8cb77e7db6a85589) Thanks [@stipsan](https://github.com/stipsan)! - fix(deps): update dependency csstype to ^3.2.3, and use regular `styled-components` instead of the `@sanity/styled-components` fork for development and testing
+
 ## 3.3.3
 
 ### Patch Changes
