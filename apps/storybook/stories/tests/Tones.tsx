@@ -291,7 +291,9 @@ export function Tones(): ReactNode {
                 </Wrapper>
                 <Wrapper title="Tab / TabList">
                   <TabList space={2}>
+                    {/* oxlint-disable-next-line aria-proptypes */}
                     <Tab label="Content" selected id={''} aria-controls={''} />
+                    {/* oxlint-disable-next-line aria-proptypes */}
                     <Tab label="Preview" aria-controls={''} id={''} />
                   </TabList>
                 </Wrapper>

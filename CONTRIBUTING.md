@@ -5,6 +5,10 @@ This repository is a pnpm monorepo. The published `@sanity/ui` package lives in
 [`packages/figma`](packages/figma), and the Storybook app lives in
 [`apps/storybook`](apps/storybook).
 
+This is the `v2` maintenance branch: it receives bug fixes and dependency
+updates for the `2.x` release line, while new feature development happens on
+[`main`](https://github.com/sanity-io/ui/tree/main).
+
 ## Getting started
 
 ```sh
@@ -16,6 +20,18 @@ pnpm test
 Run `pnpm dev` to start Storybook (http://localhost:6006). Storybook resolves
 `@sanity/ui` from the package source, so edits to `packages/ui/src` hot-reload
 without a rebuild.
+
+## Linting & formatting
+
+Linting uses [oxlint](https://oxc.rs/docs/guide/usage/linter.html) (type-aware,
+including TypeScript type checking) and formatting uses
+[oxfmt](https://oxc.rs/docs/guide/usage/formatter.html):
+
+```sh
+pnpm lint
+pnpm lint:fix
+pnpm format
+```
 
 ## Testing
 
@@ -38,40 +54,20 @@ interactively through the testing panel in the Storybook UI.
 
 ## Releasing
 
-Releases are automated with
-[semantic-release](https://github.com/semantic-release/semantic-release):
-commits that land on the `v2` branch are analyzed (commit messages must follow
-[Conventional Commits](https://www.conventionalcommits.org)), and new versions
-of `@sanity/ui` are published to npm from `packages/ui` by the
-[CI & Release workflow](https://github.com/sanity-io/ui/actions/workflows/main.yml).
+Releases are managed with [Changesets](https://github.com/changesets/changesets).
 
-## Working with prereleases
-
-### Going from `alpha => beta`
+When you make a change that should be released, add a changeset to your pull
+request:
 
 ```sh
-git checkout alpha
-git pull --rebase
-git fetch origin main
-git rebase origin/main
-git push origin alpha # optional
-
-git checkout beta
-git reset --hard alpha
-git push origin main
+pnpm changeset
 ```
 
-### Going from `beta => main`
-
-```sh
-git checkout beta
-git pull --rebase
-git fetch origin main
-git rebase origin/main
-git push origin beta # optional
-
-git checkout -b v2 # make a new release branch
-git reset --hard beta
-git push origin v2
-# make a PR to `main`
-```
+Once pull requests with changesets are merged into `v2`, a "Version Packages"
+pull request is opened (and kept up to date) that bumps the affected package
+versions and updates their changelogs. Merging that pull request publishes the
+packages to npm through the
+[`Release` workflow](https://github.com/sanity-io/ui/actions/workflows/release.yml),
+which uses npm [Trusted Publishing](https://docs.npmjs.com/trusted-publishers)
+(OIDC). Releases from this branch are published under the `release-v2`
+dist-tag — the `latest` dist-tag tracks releases from `main`.

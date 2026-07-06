@@ -50,6 +50,7 @@ function _createElementRectValueListener(): _ElementSizeListener {
     subscribe(element, subscriber) {
       const resizeObserver = new _ResizeObserver(([entry]) => {
         subscriber({
+          // oxlint-disable-next-line no-deprecated
           _contentRect: entry.contentRect,
           border: {
             width: entry.borderBoxSize[0].inlineSize,

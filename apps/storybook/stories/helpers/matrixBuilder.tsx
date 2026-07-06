@@ -1,5 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
-
 import {Card, Flex, Grid, Text} from '@sanity/ui'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 

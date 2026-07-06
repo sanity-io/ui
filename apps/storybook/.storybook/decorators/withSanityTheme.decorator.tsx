@@ -1,8 +1,7 @@
-/* eslint-disable react-refresh/only-export-components */
-
 import {Card, studioTheme, ThemeProvider} from '@sanity/ui'
+import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {DecoratorHelpers} from '@storybook/addon-themes'
-import {StoryFn} from '@storybook/react-vite'
+import {Decorator} from '@storybook/react-vite'
 import {createGlobalStyle} from 'styled-components'
 
 const {initializeThemeState, pluckThemeFromContext} = DecoratorHelpers
@@ -10,7 +9,10 @@ const {initializeThemeState, pluckThemeFromContext} = DecoratorHelpers
 export const GlobalStyle = createGlobalStyle`
   body,
   .docs-story {
-    background-color: ${({theme}) => theme.sanity.color.base.bg};
+    background-color: ${
+      // oxlint-disable-next-line no-deprecated
+      ({theme}) => theme.sanity.color.base.bg
+    };
   }
 `
 
@@ -23,17 +25,25 @@ export const GlobalStyle = createGlobalStyle`
  * viewport dimensions.
  */
 
-export const withSanityTheme = ({themes, defaultTheme}) => {
+export const withSanityTheme = ({
+  themes,
+  defaultTheme,
+}: {
+  themes: Record<string, string>
+  defaultTheme: string
+}): Decorator => {
   initializeThemeState(Object.keys(themes), defaultTheme)
 
-  return (Story: StoryFn, context) => {
+  return (Story, context) => {
     const selectedTheme = pluckThemeFromContext(context)
     const {themeOverride} = context.parameters.themes ?? {}
     const {padding = 4} = context.parameters
 
-    const selected = themeOverride || selectedTheme || defaultTheme
+    // oxlint-disable-next-line no-unsafe-type-assertion
+    const selected = (themeOverride || selectedTheme || defaultTheme) as ThemeColorSchemeKey
 
     return (
+      // oxlint-disable-next-line no-deprecated
       <ThemeProvider scheme={selected} theme={studioTheme}>
         <GlobalStyle />
         <Card padding={padding}>

@@ -124,6 +124,7 @@ export const PopoverCard = memo(
     return (
       <MotionCard
         data-ui="Popover"
+        // oxlint-disable-next-line no-unsafe-type-assertion
         {...(restProps as CardProps & MotionProps)}
         data-placement={placement}
         radius={radius}

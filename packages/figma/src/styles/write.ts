@@ -10,6 +10,7 @@ import {theme} from '../theme'
 import {SCHEMES} from '../vars/types'
 
 export function writeStyles(): void {
+  // oxlint-disable-next-line no-deprecated
   const figmaEffectStyles = figma.getLocalEffectStyles()
 
   const len = theme.shadow.length

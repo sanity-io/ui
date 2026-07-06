@@ -45,9 +45,7 @@ import {PopoverUpdateCallback, PopoverWidth} from './types'
 
 /** @public */
 export interface PopoverProps
-  extends Omit<LayerProps, 'as'>,
-    ResponsiveRadiusProps,
-    ResponsiveShadowProps {
+  extends Omit<LayerProps, 'as'>, ResponsiveRadiusProps, ResponsiveShadowProps {
   /** @beta */
   __unstable_margins?: PopoverMargins
   /**
@@ -120,6 +118,7 @@ export interface PopoverProps
   tone?: CardTone
   /** @beta */
   updateRef?:
+    // oxlint-disable-next-line no-deprecated
     | MutableRefObject<PopoverUpdateCallback | undefined>
     | RefCallback<PopoverUpdateCallback | undefined>
   width?: PopoverWidth | PopoverWidth[]
@@ -149,6 +148,7 @@ export const Popover = memo(
       __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
       animate: _animate = false,
       arrow: arrowProp = false,
+      // oxlint-disable-next-line no-deprecated
       boundaryElement = boundaryElementContext.element,
       children: childProp,
       constrainSize = false,
@@ -157,6 +157,7 @@ export const Popover = memo(
       fallbackPlacements = props.fallbackPlacements ??
         DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom'],
       matchReferenceWidth,
+      // oxlint-disable-next-line no-deprecated
       floatingBoundary = props.boundaryElement ?? boundaryElementContext.element,
       modal,
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -169,6 +170,7 @@ export const Popover = memo(
       portal,
       preventOverflow = true,
       radius: radiusProp = 3,
+      // oxlint-disable-next-line no-deprecated
       referenceBoundary = props.boundaryElement ?? boundaryElementContext.element,
       referenceElement,
       scheme,
@@ -276,6 +278,7 @@ export const Popover = memo(
       // Track sizes
       if (constrainSize || matchReferenceWidth) {
         ret.push(
+          // oxlint-disable-next-line react-compiler
           size({
             apply({availableWidth, availableHeight, elements, referenceWidth}) {
               // not fresh, so use refs
@@ -323,7 +326,9 @@ export const Popover = memo(
       // Place arrow
       if (arrowProp) {
         ret.push(
+          // oxlint-disable-next-line react-compiler
           arrow({
+            // oxlint-disable-next-line react-compiler
             element: arrowRef,
             padding: DEFAULT_POPOVER_PADDING,
           }),
@@ -379,6 +384,7 @@ export const Popover = memo(
     const originY = middlewareData['@sanity/ui/origin']?.originY
 
     const setArrow = useCallback((arrowEl: HTMLDivElement | null) => {
+      // oxlint-disable-next-line react-compiler
       arrowRef.current = arrowEl
     }, [])
 
@@ -394,6 +400,7 @@ export const Popover = memo(
       (node: HTMLElement | null) => {
         refs.setReference(node)
 
+        // oxlint-disable-next-line no-unsafe-type-assertion
         const childRef = getElementRef(childProp as any)
 
         if (typeof childRef === 'function') {
@@ -419,6 +426,7 @@ export const Popover = memo(
         if (typeof updateRef === 'function') {
           updateRef(update)
         } else if (updateRef) {
+          // oxlint-disable-next-line react-compiler
           updateRef.current = update
         }
       }
@@ -453,6 +461,7 @@ export const Popover = memo(
           originY={originY}
           strategy={strategy}
           tone={tone}
+          // oxlint-disable-next-line react-compiler
           width={matchReferenceWidth ? referenceWidthRef.current : width}
           x={x}
           y={y}

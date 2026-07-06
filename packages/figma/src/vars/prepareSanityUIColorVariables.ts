@@ -37,6 +37,7 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
           scheme,
           tone,
           key,
+          // oxlint-disable-next-line no-unsafe-type-assertion
           value: get(toneColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
         })
       }
@@ -71,6 +72,7 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
                   scheme,
                   tone,
                   key: `button/${mode}/${buttonTone}/${state}/${key}`,
+                  // oxlint-disable-next-line no-unsafe-type-assertion
                   value: get(buttonColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
                 })
               }
@@ -90,6 +92,7 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
                 scheme,
                 tone,
                 key: `input/${mode}/${state}/${key}`,
+                // oxlint-disable-next-line no-unsafe-type-assertion
                 value: get(inputColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
               })
             }
@@ -122,7 +125,9 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
                 scheme,
                 tone,
                 key: `selectable/${selectableTone}/${state}/${key}`,
+                // oxlint-disable-next-line no-unsafe-type-assertion
                 value: get(
+                  // oxlint-disable-next-line no-unsafe-type-assertion
                   selectableColor as any,
                   key.replace(/\./g, '/').replace(/-/g, '/'),
                 ) as any,

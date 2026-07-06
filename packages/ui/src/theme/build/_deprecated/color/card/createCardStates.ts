@@ -8,12 +8,18 @@ import {
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createCardStates(
+  // oxlint-disable-next-line no-deprecated
   opts: ThemeColorBuilderOpts,
+  // oxlint-disable-next-line no-deprecated
   base: ThemeColorBase,
   dark: boolean,
+  // oxlint-disable-next-line no-deprecated
   name: ThemeColorName,
+  // oxlint-disable-next-line no-deprecated
   solid: ThemeColorSolid,
+  // oxlint-disable-next-line no-deprecated
   muted: ThemeColorMuted,
+  // oxlint-disable-next-line no-deprecated
 ): ThemeColorCard {
   return {
     enabled: opts.card({

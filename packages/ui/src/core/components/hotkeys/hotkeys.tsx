@@ -51,6 +51,7 @@ export const Hotkeys = forwardRef(function Hotkeys(
     <StyledHotkeys data-ui="Hotkeys" {...restProps} ref={ref}>
       <Inline as="span" space={space}>
         {keys.map((key, i) => (
+          // oxlint-disable-next-line no-array-index-key
           <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
             {key}
           </Key>

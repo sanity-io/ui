@@ -48,9 +48,9 @@ export const Menu = forwardRef(function Menu(
 ) {
   const {
     children,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // oxlint-disable-next-line no-deprecated, no-unused-vars
     focusFirst,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // oxlint-disable-next-line no-deprecated, no-unused-vars
     focusLast,
     onClickOutside,
     onEscape,
@@ -65,6 +65,7 @@ export const Menu = forwardRef(function Menu(
     ...restProps
   } = props
   const shouldFocus =
+    // oxlint-disable-next-line no-deprecated
     _shouldFocus ?? ((props.focusFirst && 'first') || (props.focusLast && 'last') || null)
 
   const ref = useRef<HTMLDivElement | null>(null)

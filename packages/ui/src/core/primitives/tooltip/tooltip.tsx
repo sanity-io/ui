@@ -156,6 +156,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
     // Place arrow
     if (arrowProp) {
+      // oxlint-disable-next-line react-compiler
       ret.push(arrow({element: arrowRef, padding: DEFAULT_TOOLTIP_PADDING}))
     }
 
@@ -297,6 +298,7 @@ export const Tooltip = forwardRef(function Tooltip(
 
     window.addEventListener('keydown', handleWindowKeyDown)
 
+    // oxlint-disable-next-line consistent-return
     return () => {
       window.removeEventListener('keydown', handleWindowKeyDown)
     }
@@ -312,11 +314,13 @@ export const Tooltip = forwardRef(function Tooltip(
       portalElement?.offsetWidth || document.body.offsetWidth,
     ]
 
+    // oxlint-disable-next-line react-compiler
     setTooltipMaxWidth(Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2)
   }, [boundaryElement, portalElement])
 
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
+      // oxlint-disable-next-line react-compiler
       arrowRef.current = arrowEl
       update()
     },
@@ -460,6 +464,7 @@ function useCloseOnMouseLeave({
 
     window.addEventListener('mousemove', handleMouseMove)
 
+    // oxlint-disable-next-line consistent-return
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [isInsideGroup, showTooltip])
 }

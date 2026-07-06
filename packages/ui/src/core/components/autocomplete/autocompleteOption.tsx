@@ -35,6 +35,7 @@ export function AutocompleteOption(props: AutocompleteOptionProps): React.JSX.El
       aria-selected={selected}
       data-ui="AutocompleteOption"
       id={id}
+      // oxlint-disable-next-line no-noninteractive-element-to-interactive-role, prefer-tag-over-role
       role="option"
       onClick={handleClick}
       onKeyDown={handleKeyDown}

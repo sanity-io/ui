@@ -21,6 +21,7 @@ export const TreeGroup = memo(function TreeGroup(
       {...restProps}
       hidden={!expanded}
       marginTop={tree.space}
+      // oxlint-disable-next-line prefer-tag-over-role
       role="group"
       space={tree.space}
     >

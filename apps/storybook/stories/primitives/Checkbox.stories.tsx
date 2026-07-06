@@ -28,8 +28,10 @@ export const Controlled: Story = {
     },
   },
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [selected, setChecked] = useState(false)
 
+    // oxlint-disable-next-line rules-of-hooks
     const handleChange = useCallback(() => {
       setChecked((prev) => !prev)
     }, [])

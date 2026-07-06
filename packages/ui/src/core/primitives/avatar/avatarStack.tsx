@@ -93,6 +93,7 @@ export const AvatarStack = forwardRef(function AvatarStack(
       )}
 
       {visibleChildren.map((child, childIndex) => (
+        // oxlint-disable-next-line no-array-index-key
         <div key={String(childIndex)}>{cloneElement(child, {size})}</div>
       ))}
     </StyledAvatarStack>

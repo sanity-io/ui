@@ -33,9 +33,13 @@ export function v2_v0(v2: RootTheme_v2): RootTheme {
 
   return {
     _version: 0,
+    // oxlint-disable-next-line no-deprecated
     avatar,
+    // oxlint-disable-next-line no-deprecated
     button,
+    // oxlint-disable-next-line no-deprecated
     container,
+    // oxlint-disable-next-line no-deprecated
     color: {
       light: {
         transparent: themeColor_v2_v0(color.light.transparent),
@@ -54,19 +58,28 @@ export function v2_v0(v2: RootTheme_v2): RootTheme {
         critical: themeColor_v2_v0(color.dark.critical),
       },
     },
+    // oxlint-disable-next-line no-deprecated
     focusRing: input.text.focusRing,
+    // oxlint-disable-next-line no-deprecated
     fonts,
+    // oxlint-disable-next-line no-deprecated
     input,
+    // oxlint-disable-next-line no-deprecated
     media,
+    // oxlint-disable-next-line no-deprecated
     radius,
+    // oxlint-disable-next-line no-deprecated
     shadows,
+    // oxlint-disable-next-line no-deprecated
     space,
+    // oxlint-disable-next-line no-deprecated
     styles,
 
     v2,
   }
 }
 
+// oxlint-disable-next-line no-deprecated
 function themeColor_v2_v0(color_v2: ThemeColorCard_v2): ThemeColor {
   return {
     base: {
@@ -107,6 +120,7 @@ function themeColor_v2_v0(color_v2: ThemeColorCard_v2): ThemeColor {
   }
 }
 
+// oxlint-disable-next-line no-deprecated
 function inputStatesThemeColor_v2_v0(t: ThemeColorInputMode_v2): ThemeColorInputStates {
   return {
     enabled: inputStateThemeColor_v2_v0(t.enabled),
@@ -116,6 +130,7 @@ function inputStatesThemeColor_v2_v0(t: ThemeColorInputMode_v2): ThemeColorInput
   }
 }
 
+// oxlint-disable-next-line no-deprecated
 function inputStateThemeColor_v2_v0(t: ThemeColorInputState_v2): ThemeColorInputState {
   return {
     bg: t.bg,

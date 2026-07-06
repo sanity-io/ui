@@ -11,9 +11,11 @@ import {
   ThemeColorState_v2,
 } from '../system'
 
+// oxlint-disable-next-line no-deprecated
 const cache = new WeakMap<ThemeColor, ThemeColorCard_v2>()
 
 /** @internal */
+// oxlint-disable-next-line no-deprecated
 export function themeColor_v0_v2(color_v0: ThemeColor): ThemeColorCard_v2 {
   const cached_v2 = cache.get(color_v0)
 
@@ -64,7 +66,9 @@ export function themeColor_v0_v2(color_v0: ThemeColor): ThemeColorCard_v2 {
 }
 
 function stateTonesThemeColor_v0_v2(
+  // oxlint-disable-next-line no-deprecated
   v0: ThemeColor,
+  // oxlint-disable-next-line no-deprecated
   t: Omit<ThemeColorMuted, 'transparent'>,
 ): ThemeColorSelectable_v2 {
   return {
@@ -120,6 +124,7 @@ function stateTonesThemeColor_v0_v2(
   }
 }
 
+// oxlint-disable-next-line no-deprecated
 function stateThemeColor_v0_v2(v0: ThemeColor, state: ThemeColorGenericState): ThemeColorState_v2 {
   return {
     ...state,
@@ -221,6 +226,7 @@ function stateThemeColor_v0_v2(v0: ThemeColor, state: ThemeColorGenericState): T
   }
 }
 
+// oxlint-disable-next-line no-deprecated
 function inputStatesThemeColor_v0_v2(states: ThemeColorInputStates): ThemeColorInputMode_v2 {
   return {
     enabled: inputStateThemeColor_v0_v2(states.enabled),
@@ -230,6 +236,7 @@ function inputStatesThemeColor_v0_v2(states: ThemeColorInputStates): ThemeColorI
   }
 }
 
+// oxlint-disable-next-line no-deprecated
 function inputStateThemeColor_v0_v2(state: ThemeColorInputState): ThemeColorInputState_v2 {
   return {
     bg: state.bg,

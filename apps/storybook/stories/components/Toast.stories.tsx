@@ -35,9 +35,13 @@ export const WithHook: Story = {
     },
   },
   render: () => {
+    // oxlint-disable-next-line rules-of-hooks
     const toast = useToast()
+    // oxlint-disable-next-line rules-of-hooks
     const id1 = useId()
+    // oxlint-disable-next-line rules-of-hooks
     const id2 = useId()
+    // oxlint-disable-next-line rules-of-hooks
     const id3 = useId()
 
     // Based on https://github.com/sanity-io/sanity/blob/54af2dd01d670367ace54f34d0f479af4b2b28db/packages/sanity/src/structure/panes/document/documentPanel/documentViews/useConditionalToast.ts#L5-L29

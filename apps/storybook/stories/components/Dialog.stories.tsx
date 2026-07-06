@@ -126,8 +126,11 @@ export const WithoutClose: Story = {
 
 export const OpenDialogWithButton: Story = {
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [open, setOpen] = useState(false)
+    // oxlint-disable-next-line rules-of-hooks
     const onClose = useCallback(() => setOpen(false), [])
+    // oxlint-disable-next-line rules-of-hooks
     const onOpen = useCallback(() => setOpen(true), [])
 
     return (
@@ -155,6 +158,7 @@ export const OpenDialogWithButton: Story = {
 
 export const DynamicContent: Story = {
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [numParagraphs, setNumParagraphs] = useState(1)
 
     return (
@@ -182,7 +186,9 @@ export const DynamicContent: Story = {
               (No content)
             </Text>
           )}
+          {/* oxlint-disable-next-line no-new-array */}
           {[...new Array(numParagraphs).fill(undefined)].map((_, index) => (
+            // oxlint-disable-next-line no-array-index-key
             <Text key={index}>
               Paragraph {index + 1}. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Quisque at nisl at sem tempor hendrerit scelerisque ut libero. Maecenas iaculis
@@ -228,8 +234,11 @@ export const Positioning: Story = {
 
 export const DeleteDocumentDialog: Story = {
   render: (props) => {
+    // oxlint-disable-next-line rules-of-hooks
     const [open, setOpen] = useState(true)
+    // oxlint-disable-next-line rules-of-hooks
     const onClose = useCallback(() => setOpen(false), [])
+    // oxlint-disable-next-line rules-of-hooks
     const onOpen = useCallback(() => setOpen(true), [])
 
     return (
@@ -569,6 +578,7 @@ function NestedStory() {
                           <MenuItem text="Test" />
                         </Menu>
                       }
+                      // oxlint-disable-next-line no-deprecated
                       portal
                     />
                   </Box>
@@ -597,6 +607,7 @@ function OnScrollStory({onScroll}: {onScroll: () => void}) {
 
     el.addEventListener('scroll', onScroll, {passive: true})
 
+    // oxlint-disable-next-line consistent-return
     return () => el.removeEventListener('scroll', onScroll)
   }, [onScroll])
 
@@ -839,6 +850,7 @@ function WrappedDialog(props: DialogProps & {children?: ReactNode}) {
     const containsActiveElement = dialogRef.current?.contains(document.activeElement)
 
     if (containsActiveElement) {
+      // oxlint-disable-next-line no-unsafe-type-assertion
       setLastFocusedElement(document.activeElement as HTMLElement)
     }
   }, [])

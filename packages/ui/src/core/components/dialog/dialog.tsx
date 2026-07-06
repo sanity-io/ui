@@ -180,6 +180,7 @@ const DialogCard = forwardRef(function DialogCard(
   const layer = useLayer()
   const {isTopLayer} = layer
   const labelId = `${id}_label`
+  // oxlint-disable-next-line no-unnecessary-boolean-literal-compare
   const showCloseButton = Boolean(onClose) && hideCloseButton === false
   const showHeader = Boolean(header) || showCloseButton
 
@@ -224,6 +225,7 @@ const DialogCard = forwardRef(function DialogCard(
     isTopLayer &&
       onClickOutside &&
       ((event) => {
+        // oxlint-disable-next-line no-unsafe-type-assertion
         const target = event.target as Node | null
 
         if (target && !isTargetWithinScope(boundaryElement, portalElement, target)) {
@@ -402,6 +404,7 @@ export const Dialog = forwardRef(function Dialog(
         onClick={handleRootClick}
         onFocus={handleFocus}
         ref={ref}
+        // oxlint-disable-next-line prefer-tag-over-role
         role="dialog"
         zOffset={zOffset}
       >

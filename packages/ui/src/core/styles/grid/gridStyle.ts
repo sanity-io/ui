@@ -87,6 +87,7 @@ function responsiveGridGapStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   const {media, space} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$gap, (gap) => ({
+    // oxlint-disable-next-line no-deprecated
     gridGap: gap ? rem(space[gap]) : undefined,
   }))
 }

@@ -66,17 +66,23 @@ export const MenuButton = forwardRef(function MenuButton(
 ) {
   const {
     __unstable_disableRestoreFocusOnClose: disableRestoreFocusOnClose = false,
+    // oxlint-disable-next-line no-deprecated
     boundaryElement: deprecated_boundaryElement,
     button: buttonProp,
     id,
     menu: menuProp,
     onClose,
     onOpen,
+    // oxlint-disable-next-line no-deprecated
     placement: deprecated_placement,
+    // oxlint-disable-next-line no-deprecated
     popoverScheme: deprecated_popoverScheme,
+    // oxlint-disable-next-line no-deprecated
     portal: deprecated_portal = true,
     popover,
+    // oxlint-disable-next-line no-deprecated
     popoverRadius: deprecated_popoverRadius,
+    // oxlint-disable-next-line no-deprecated
     preventOverflow: deprecated_preventOverflow,
   } = props
   const [open, setOpen] = useState(false)
@@ -239,6 +245,7 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
     () => ({
+      // oxlint-disable-next-line no-deprecated
       boundaryElement: deprecated_boundaryElement,
       overflow: 'auto',
       placement: deprecated_placement,
@@ -246,6 +253,7 @@ export const MenuButton = forwardRef(function MenuButton(
       preventOverflow: deprecated_preventOverflow,
       radius: deprecated_popoverRadius,
       scheme: deprecated_popoverScheme,
+      // oxlint-disable-next-line no-useless-fallback-in-spread
       ...(popover || {}),
     }),
     [

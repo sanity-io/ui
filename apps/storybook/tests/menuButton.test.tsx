@@ -1,7 +1,7 @@
 import {composeStories} from '@storybook/react-vite'
 import {describe, expect, test} from 'vitest'
-import {userEvent} from 'vitest/browser'
 import {render} from 'vitest-browser-react'
+import {userEvent} from 'vitest/browser'
 
 import * as menuButtonStories from '../stories/components/MenuButton.stories'
 

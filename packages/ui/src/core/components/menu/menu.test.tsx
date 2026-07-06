@@ -115,6 +115,7 @@ describe('components/menu', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values
           <MenuContext.Provider value={value}>
             <Debug />
           </MenuContext.Provider>

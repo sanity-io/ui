@@ -28,6 +28,7 @@ describe('utils/portal', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values
           <PortalContext.Provider value={value}>
             <Debug />
           </PortalContext.Provider>
@@ -58,6 +59,7 @@ describe('utils/portal', () => {
         const value = undefined
 
         return (
+          // oxlint-disable-next-line no-unsafe-type-assertion
           <PortalContext.Provider value={value as any}>
             <Debug />
           </PortalContext.Provider>
@@ -89,6 +91,7 @@ describe('utils/portal', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values, no-unsafe-type-assertion
           <PortalContext.Provider value={value as any}>
             <Debug />
           </PortalContext.Provider>

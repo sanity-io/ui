@@ -133,7 +133,6 @@ function DebugState() {
         Accent
       </Text>
       <Text size={1}>
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a href="#" style={{color: 'var(--card-link-fg-color)'}}>
           Link
         </a>
@@ -172,6 +171,7 @@ function DebugState() {
             overflow="hidden"
             padding={1}
             style={
+              // oxlint-disable-next-line no-unsafe-type-assertion
               {
                 '--card-fg-color': `var(--card-avatar-${color}-fg-color)`,
                 'backgroundColor': `var(--card-avatar-${color}-bg-color)`,

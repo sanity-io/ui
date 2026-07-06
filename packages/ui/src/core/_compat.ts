@@ -160,34 +160,63 @@ export type ThemeLayer = _ThemeLayer
 export type ThemeShadow = _ThemeShadow
 
 export {
+  // oxlint-disable-next-line no-deprecated
   type PartialThemeColorBuilderOpts,
+  // oxlint-disable-next-line no-deprecated
   type ThemeAvatar,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColor,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorBase,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorBuilderOpts,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorButton,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorButtonState,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorButtonStates,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorButtonTones,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorCard,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorCardState,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorGenericState,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorInput,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorInputState,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorInputStates,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorMuted,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorMutedTone,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorName,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorScheme,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorSchemes,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorSelectable,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorSelectableState,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorSelectableStates,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorSolid,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorSolidTone,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorSpot,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorSpotKey,
+  // oxlint-disable-next-line no-deprecated
   type ThemeColorToneKey,
+  // oxlint-disable-next-line no-deprecated
   type ThemeInput,
 }
 
@@ -207,6 +236,7 @@ import {
  * @public
  * @deprecated Use `createColorTheme` from `@sanity/ui/theme` instead.
  */
+// oxlint-disable-next-line no-deprecated
 export const createColorTheme = _createColorTheme
 
 /**

@@ -6,58 +6,38 @@
   "author": "Sanity.io <hello@sanity.io>",
   "scripts": {
     "build": "pnpm --filter @sanity/ui build && pnpm --filter figma-plugin-sanity-ui build",
+    "changeset": "changeset",
     "clean": "rimraf storybook-static && pnpm --recursive clean",
-    "commit": "cz",
     "dev": "pnpm --filter sanity-ui-storybook dev",
-    "format": "prettier --write --cache --ignore-unknown .",
-    "lint": "pnpm --recursive lint",
-    "prepare": "husky install",
-    "release": "pnpm --filter @sanity/ui release",
+    "format": "oxfmt . --no-error-on-unmatched-pattern",
+    "lint": "pnpm run oxlint",
+    "lint:fix": "pnpm lint --fix --fix-suggestions",
+    "oxlint": "oxlint --disable-nested-config",
+    "release": "changeset publish --tag release-v2",
     "storybook:build": "pnpm --filter sanity-ui-storybook build && cpx 'apps/storybook/storybook-static/**' storybook-static/",
-    "storybook:dev": "pnpm --filter sanity-ui-storybook dev",
     "test": "pnpm --filter @sanity/ui test",
     "test:browser": "pnpm --filter sanity-ui-storybook test",
-    "ts:check": "pnpm --recursive ts:check",
     "watch": "pnpm --filter @sanity/ui watch"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "lint-staged": {
-    "*": [
-      "prettier --write --cache --ignore-unknown"
-    ]
-  },
-  "prettier": "@sanity/prettier-config",
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@sanity/prettier-config": "^2.0.1",
-    "commitizen": "^4.3.1",
+    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/cli": "^2.31.0",
+    "@types/node": "^22.18.1",
     "cpx": "^1.5.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
-    "prettier": "^3.6.2",
+    "oxfmt": "^0.57.0",
+    "oxlint": "^1.72.0",
+    "oxlint-tsgolint": "^0.24.0",
     "rimraf": "^5.0.5",
     "typescript": "5.9.3"
   },
-  "packageManager": "pnpm@9.15.9",
-  "engines": {
-    "node": ">=14.0.0"
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,jsonc,md}": [
+      "oxfmt --no-error-on-unmatched-pattern"
+    ]
   },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "^19.2.2",
-      "@types/react-dom": "^19.2.1",
-      "@types/react-is": "^19.2.0",
-      "conventional-changelog-conventionalcommits": ">= 8.0.0",
-      "react": "^19.2.0",
-      "react-dom": "^19.2.0",
-      "react-is": "^19.2.0",
-      "styled-components": "npm:@sanity/styled-components@6.1.23"
-    }
-  }
+  "engines": {
+    "node": ">=22.13"
+  },
+  "packageManager": "pnpm@11.10.0"
 }

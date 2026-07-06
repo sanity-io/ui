@@ -1,0 +1,4 @@
+{
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.typeAware": true
+}

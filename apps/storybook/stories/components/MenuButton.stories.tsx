@@ -139,6 +139,7 @@ export const WithSelectedItem: Story = {
     const menu = within(document.documentElement).queryByTestId('menu')
 
     // Assertion: <Menu> with a selected item should not be visible when clicking the original <MenuButton> to close
+    // oxlint-disable-next-line no-floating-promises
     expect(menu).toBeNull()
   },
 }
@@ -510,6 +511,7 @@ function ConstrainedInBoundaryStory() {
                     menu={
                       <Menu>
                         {CONSTRAINED_ITEMS.map((item, itemIndex) => (
+                          // oxlint-disable-next-line no-array-index-key
                           <MenuItem key={itemIndex} padding={5} tone={item.tone}>
                             <Text>{item.message}</Text>
                           </MenuItem>

@@ -27,6 +27,7 @@ describe('components/toast', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values
           <ToastContext.Provider value={value}>
             <Debug />
           </ToastContext.Provider>
@@ -56,6 +57,7 @@ describe('components/toast', () => {
         const value = undefined
 
         return (
+          // oxlint-disable-next-line no-unsafe-type-assertion
           <ToastContext.Provider value={value as any}>
             <Debug />
           </ToastContext.Provider>
@@ -87,6 +89,7 @@ describe('components/toast', () => {
         }
 
         return (
+          // oxlint-disable-next-line jsx-no-constructed-context-values, no-unsafe-type-assertion
           <ToastContext.Provider value={value as any}>
             <Debug />
           </ToastContext.Provider>
