@@ -8,7 +8,7 @@ overrides:
   '@types/react': ^19.2.2
   '@types/react-dom': ^19.2.1
   '@types/react-is': ^19.2.0
-  conventional-changelog-conventionalcommits: '>= 8.0.0'
+  conventional-changelog-conventionalcommits: '>= 10.2.1'
   react: ^19.2.0
   react-dom: ^19.2.0
   react-is: ^19.2.0
@@ -609,6 +609,10 @@ packages:
   '@commitlint/types@19.8.1':
     resolution: {integrity: sha512-/yCrWGCoA1SVKOks25EGadP9Pnj0oAIHGpl2wH2M2Y46dPM2ueb8wyCVOD7O3WCTkaJ0IkKvzhl1JY7+uCT2Dw==}
     engines: {node: '>=v18'}
+
+  '@conventional-changelog/template@1.2.1':
+    resolution: {integrity: sha512-TzlTVpKPjaqW6qOYjQcYUDuGsLCNsvFHVBXkYGTAnf5V37jCWrE5haKNXzz0WZUtVHjrpV76L1buANjwXMfT8w==}
+    engines: {node: '>=22'}
 
   '@csstools/color-helpers@6.1.0':
     resolution: {integrity: sha512-064IFJdjTfUqnjpCVpMOdbr8FLQBhinbZj6yRv2An2E41O/pLEXqfFRWqGq/SxlE5PEUYTlvWsG2r8MswAVvkg==}
@@ -2952,9 +2956,9 @@ packages:
     resolution: {integrity: sha512-CLf+zr6St0wIxos4bmaKHRXWAcsCXrJU6F4VdNDrGRK3B8LDLKoX3zuMV5GhtbGkVR/LohZ6MT6im43vZLSjmA==}
     engines: {node: '>=18'}
 
-  conventional-changelog-conventionalcommits@9.1.0:
-    resolution: {integrity: sha512-MnbEysR8wWa8dAEvbj5xcBgJKQlX/m0lhS8DsyAAWDHdfs2faDJxTgzRYlRYpXSe7UiKrIIlB4TrBKU9q9DgkA==}
-    engines: {node: '>=18'}
+  conventional-changelog-conventionalcommits@10.2.1:
+    resolution: {integrity: sha512-n4Kr1HFMTf3iMbES0TMxKIcYtUUv4rKqyQQp2JwfOEfFCOfGT3Tq4mCyJ8S9/YPyWhydjfKrrvnyl+gCjA+mJQ==}
+    engines: {node: '>=22'}
 
   conventional-changelog-writer@8.2.0:
     resolution: {integrity: sha512-Y2aW4596l9AEvFJRwFGJGiQjt2sBYTjPD18DdvxX9Vpz0Z7HQ+g1Z+6iYDAm1vR3QOJrDBkRHixHK/+FhkR6Pw==}
@@ -6915,7 +6919,7 @@ snapshots:
   '@commitlint/config-conventional@19.8.1':
     dependencies:
       '@commitlint/types': 19.8.1
-      conventional-changelog-conventionalcommits: 9.1.0
+      conventional-changelog-conventionalcommits: 10.2.1
 
   '@commitlint/config-validator@19.8.1':
     dependencies:
@@ -7008,6 +7012,8 @@ snapshots:
     dependencies:
       '@types/conventional-commits-parser': 5.0.1
       chalk: 5.6.2
+
+  '@conventional-changelog/template@1.2.1': {}
 
   '@csstools/color-helpers@6.1.0': {}
 
@@ -8038,7 +8044,7 @@ snapshots:
       '@semantic-release/changelog': 6.0.3(semantic-release@24.2.9(typescript@5.9.3))
       '@semantic-release/exec': 6.0.3(semantic-release@24.2.9(typescript@5.9.3))
       '@semantic-release/git': 10.0.1(semantic-release@24.2.9(typescript@5.9.3))
-      conventional-changelog-conventionalcommits: 9.1.0
+      conventional-changelog-conventionalcommits: 10.2.1
       semantic-release: 24.2.9(typescript@5.9.3)
       semantic-release-license: 1.0.3
     transitivePeerDependencies:
@@ -9363,9 +9369,9 @@ snapshots:
     dependencies:
       compare-func: 2.0.0
 
-  conventional-changelog-conventionalcommits@9.1.0:
+  conventional-changelog-conventionalcommits@10.2.1:
     dependencies:
-      compare-func: 2.0.0
+      '@conventional-changelog/template': 1.2.1
 
   conventional-changelog-writer@8.2.0:
     dependencies:
