@@ -1,3 +1,25 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+
+linkWorkspacePackages: deep
+strictPeerDependencies: false
+
+allowBuilds:
+  core-js: false
+  esbuild: false
+  fsevents: false
+
+# Sanity-owned build tooling releases frequently; don't gate it on the
+# default minimum release age (1 day)
+minimumReleaseAgeExclude:
+  - '@sanity/pkg-utils'
+
+overrides:
+  '@types/react': ^19.2.2
+  '@types/react-dom': ^19.2.1
+  '@types/react-is': ^19.2.0
+  react: ^19.2.0
+  react-dom: ^19.2.0
+  react-is: ^19.2.0
+  styled-components: npm:@sanity/styled-components@6.1.23

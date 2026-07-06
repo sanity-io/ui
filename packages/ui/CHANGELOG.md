@@ -1,9 +1,4 @@
-<!-- markdownlint-disable --><!-- textlint-disable -->
-
-# 📓 Changelog
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+# @sanity/ui
 
 ## [2.16.22](https://github.com/sanity-io/ui/compare/v2.16.21...v2.16.22) (2025-10-21)
 

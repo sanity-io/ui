@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  # Build on pushes branches that have a PR (including drafts)
+  pull_request:
+  # Build on commits pushed to the release branch
+  push:
+    branches: [v2]
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: pnpm lint --format github
+      - run: pnpm build
+
+  test:
+    needs: [build]
+    runs-on: ${{ matrix.os }}
+    name: Test ${{ matrix.runtime }} / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        runtime: [node@lts]
+        include:
+          - os: macos-latest
+            runtime: node@lts
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          runtime: ${{ matrix.runtime }}
+      - run: pnpm test
+
+  storybook-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - name: Store Playwright's version
+        id: playwright-version
+        run: |
+          PLAYWRIGHT_VERSION=$(pnpm --filter sanity-ui-storybook exec playwright --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+          echo "Playwright's version: $PLAYWRIGHT_VERSION"
+          echo "version=${PLAYWRIGHT_VERSION}" >> "$GITHUB_OUTPUT"
+      - name: Cache Playwright browsers for Playwright's version
+        id: cache-playwright-browsers
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ steps.playwright-version.outputs.version }}-playwright-browsers-chromium
+      - name: Install Playwright browsers
+        if: steps.cache-playwright-browsers.outputs.cache-hit != 'true'
+        run: pnpm --filter sanity-ui-storybook exec playwright install --with-deps chromium
+      - run: pnpm test:browser
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: vitest-failure-screenshots
+          path: apps/storybook/**/__screenshots__/
+          if-no-files-found: ignore

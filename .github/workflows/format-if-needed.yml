@@ -1,0 +1,15 @@
+name: Auto format
+
+on:
+  push:
+    branches: [v2]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  if-needed:
+    uses: sanity-io/.github/.github/workflows/format.yml@main
+    secrets: inherit
