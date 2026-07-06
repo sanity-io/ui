@@ -1,4 +1,4 @@
-import type {Meta, StoryFn, StoryObj} from '@storybook/react'
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useId} from 'react'
 
 import {Toast, ToastProvider, useToast} from '../../../../packages/ui/src/core/components'

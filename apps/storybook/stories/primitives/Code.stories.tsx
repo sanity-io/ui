@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Code, Stack} from '../../../../packages/ui/src/core/primitives'
 import {getFontSizeControls} from '../controls'

@@ -1,5 +1,5 @@
 import {AddCircleIcon} from '@sanity/icons'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Card, Flex, Heading, Stack, Text} from '../../../../packages/ui/src/core/primitives'
 import {getAlignControls, getFontSizeControls} from '../controls'

@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 
 import {Flex, Stack, Switch} from '../../../../packages/ui/src/core/primitives'

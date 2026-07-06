@@ -1,6 +1,6 @@
 import {BinaryDocumentIcon, CircleIcon, RestoreIcon} from '@sanity/icons'
-import type {Meta, StoryObj} from '@storybook/react'
-import {fn} from '@storybook/test'
+import type {Meta, StoryObj} from '@storybook/react-vite'
+import {fn} from 'storybook/test'
 
 import {Menu, MenuDivider, MenuGroup, MenuItem} from '../../../../packages/ui/src/core/components'
 import {

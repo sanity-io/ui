@@ -1,4 +1,4 @@
-import type {Meta, StoryFn, StoryObj} from '@storybook/react'
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 
 import {AvatarCounter, AvatarStack} from '../../../../packages/ui/src/core/primitives'
 import {getAvatarSizeControls} from '../controls'

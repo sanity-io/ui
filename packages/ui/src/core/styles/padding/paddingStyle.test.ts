@@ -1,6 +1,7 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
 
 import {buildTheme, getScopedTheme} from '@sanity/ui/theme'
+import {describe, expect, it} from 'vitest'
 
 import {responsivePaddingStyle} from './paddingStyle'
 

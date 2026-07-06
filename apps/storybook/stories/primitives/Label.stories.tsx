@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Label, Stack} from '../../../../packages/ui/src/core/primitives'
 import {getAlignControls, getFontSizeControls} from '../controls'

@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {HeadingSkeleton, Skeleton} from '../../../../packages/ui/src/core/components'
 import {defaultThemeFonts} from '../../../../packages/ui/src/theme/defaults/fonts'

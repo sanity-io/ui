@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Hotkeys} from '../../../../packages/ui/src/core/components'
 import {RADII} from '../constants'

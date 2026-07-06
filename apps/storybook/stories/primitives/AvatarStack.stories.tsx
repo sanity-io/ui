@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Avatar, AvatarCounter, AvatarStack} from '../../../../packages/ui/src/core/primitives'
 import {AVATAR_SRC} from '../constants'

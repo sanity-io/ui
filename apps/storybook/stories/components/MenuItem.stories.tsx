@@ -1,4 +1,4 @@
-import type {Meta, StoryFn, StoryObj} from '@storybook/react'
+import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 
 import {Menu, MenuItem} from '../../../../packages/ui/src/core/components'
 import {Card, Container} from '../../../../packages/ui/src/core/primitives'

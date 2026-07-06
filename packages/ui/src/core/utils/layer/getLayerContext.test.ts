@@ -1,3 +1,5 @@
+import {describe, expect, it} from 'vitest'
+
 import {getLayerContext} from './getLayerContext'
 import {LayerContextValue} from './types'
 

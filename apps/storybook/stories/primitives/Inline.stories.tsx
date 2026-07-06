@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Card, Inline, Text} from '../../../../packages/ui/src/core/primitives'
 import {getHeightControls, getOverflowControls, getSpaceControls} from '../controls'

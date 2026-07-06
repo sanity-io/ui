@@ -1,5 +1,5 @@
 import {CloseIcon, SearchIcon} from '@sanity/icons'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Button, Flex, Grid, Stack, Text} from '../../../../packages/ui/src/core/primitives'
 import {BUTTON_MODES, BUTTON_TONES, RADII} from '../constants'

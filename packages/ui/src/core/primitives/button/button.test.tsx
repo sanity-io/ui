@@ -1,8 +1,9 @@
-/** @jest-environment jsdom */
+/** @vitest-environment jsdom */
 
 import {AddIcon} from '@sanity/icons'
 import {screen} from '@testing-library/react'
-import {axe} from 'jest-axe'
+import {describe, expect, it} from 'vitest'
+import {axe} from 'vitest-axe'
 
 import {render} from '../../../../test'
 import {Button, ButtonProps} from './button'

@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Badge, Card, Flex, Stack} from '../../../../packages/ui/src/core/primitives'
 import {BADGE_TONES, CARD_TONES, RADII} from '../constants'

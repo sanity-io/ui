@@ -1,4 +1,4 @@
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Breadcrumbs} from '../../../../packages/ui/src/core/components'
 import {Text} from '../../../../packages/ui/src/core/primitives'

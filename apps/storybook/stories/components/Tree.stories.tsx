@@ -1,5 +1,5 @@
 import {BottleIcon, IceCreamIcon, LemonIcon, TrolleyIcon} from '@sanity/icons'
-import type {Meta, StoryObj} from '@storybook/react'
+import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {Tree, TreeItem} from '../../../../packages/ui/src/core/components'
 import {getSpaceControls} from '../controls'
