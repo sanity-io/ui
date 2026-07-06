@@ -23,7 +23,7 @@
     "watch": "tsdown --watch"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.117.0",
+    "@figma/plugin-typings": "^1.130.0",
     "@sanity/color": "^3.0.6",
     "@sanity/tsdown-config": "^0.11.0",
     "@sanity/ui": "workspace:*",

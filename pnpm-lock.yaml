@@ -134,8 +134,8 @@ importers:
   packages/figma:
     devDependencies:
       '@figma/plugin-typings':
-        specifier: ^1.117.0
-        version: 1.117.0
+        specifier: ^1.130.0
+        version: 1.130.0
       '@sanity/color':
         specifier: ^3.0.6
         version: 3.0.6
@@ -761,8 +761,8 @@ packages:
       '@noble/hashes':
         optional: true
 
-  '@figma/plugin-typings@1.117.0':
-    resolution: {integrity: sha512-EDirBOeOcS90SQ5SwrJyTiL6iJxG/81U9nzJJkBqdWRHGMfFWAOydbAlcRylgETKwIKRlflL92nNSt+WmnweKA==}
+  '@figma/plugin-typings@1.130.0':
+    resolution: {integrity: sha512-kz+eU4TXBr99YrMyF2/WtcsdS6K4Ksy3datZZtuCUUSDPRknJAVLZpjhBESCd0tCtHRWKeo4l/I7Aze6lHB52A==}
 
   '@floating-ui/core@1.7.5':
     resolution: {integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==}
@@ -4374,7 +4374,7 @@ snapshots:
 
   '@exodus/bytes@1.15.1': {}
 
-  '@figma/plugin-typings@1.117.0': {}
+  '@figma/plugin-typings@1.130.0': {}
 
   '@floating-ui/core@1.7.5':
     dependencies:
