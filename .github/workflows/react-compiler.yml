@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: lts/*
       - run: pnpm -r up --ignore-scripts react-compiler-runtime@latest babel-plugin-react-compiler@latest eslint-plugin-react-hooks@latest
-      - uses: actions/create-github-app-token@v2
+      - uses: actions/create-github-app-token@v3
         id: generate-token
         with:
           app-id: ${{ secrets.ECOSPARK_APP_ID }}
