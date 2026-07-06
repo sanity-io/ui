@@ -41,8 +41,11 @@ const StyledHeading = styled.div<
 >(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
 
 const HeadingComponent = forwardRef(function Heading(
-  props: HeadingOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLElement>,
+  props: HeadingOwnProps & {as?: ElementType} & Omit<
+      React.HTMLProps<HTMLDivElement>,
+      'as' | 'size'
+    >,
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     accent = false,

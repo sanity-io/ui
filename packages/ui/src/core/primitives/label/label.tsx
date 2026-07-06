@@ -35,6 +35,7 @@ const StyledLabel = styled.div<{
   $align: TextAlign[]
   $muted: boolean
   $size: number[]
+  $weight?: ThemeFontWeightKey
 }>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
 
 const LabelComponent = forwardRef(function Label(

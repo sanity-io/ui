@@ -37,7 +37,7 @@
     "refractor": "^5.0.0",
     "rimraf": "^5.0.5",
     "storybook": "^10.4.6",
-    "styled-components": "npm:@sanity/styled-components@^6.1.23",
+    "styled-components": "^6.4.3",
     "typescript": "6.0.3",
     "vite": "^7.3.6",
     "vitest": "^4.1.9",

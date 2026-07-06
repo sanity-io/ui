@@ -3,7 +3,7 @@ import {forwardRef, isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
-import {_getArrayProp, ThemeProps} from '../../styles'
+import {_getArrayProp} from '../../styles'
 import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
 import {useTheme_v2} from '../../theme'
 import {
@@ -58,8 +58,7 @@ export interface ButtonOwnProps extends ResponsivePaddingProps, ResponsiveRadius
 export type ButtonProps<E extends ElementType = 'button'> = Props<ButtonOwnProps, E>
 
 const StyledButton = styled.button<
-  {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps &
-    ThemeProps
+  {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps
 >(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
 
 const LoadingBox = styled.div`
