@@ -46,7 +46,7 @@ export function Article(props: {article: WrappedValue<ArticleData>}): ReactEleme
       <TocBox forwardedAs="aside" flex={1} style={{order: 2, maxWidth: 300}}>
         <Box padding={[3, 3, 3, 4]}>
           {toc.length > 0 && (
-            <Stack padding={2} space={4}>
+            <Stack padding={2} gap={4}>
               <Text size={1}>On this page</Text>
               <HeadingsNav headings={toc} />
             </Stack>

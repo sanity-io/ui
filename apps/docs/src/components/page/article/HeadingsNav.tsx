@@ -13,7 +13,7 @@ export function HeadingsNav({
   space?: number
 }): ReactElement {
   return (
-    <Stack space={space}>
+    <Stack gap={space}>
       {headings.map((heading) => (
         <Box key={heading.slug}>
           <Text size={1}>

@@ -4,6 +4,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  // The workspace @sanity/ui resolves to its TypeScript source in the
+  // monorepo (dev `exports`), so Next.js must transpile it.
+  transpilePackages: ['@sanity/ui'],
   experimental: {
     reactCompiler: true,
     taint: true,

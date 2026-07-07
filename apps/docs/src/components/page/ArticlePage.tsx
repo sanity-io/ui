@@ -137,7 +137,7 @@ function NavBreadcrumbs(props: {nav: NavNode; path: string[]}) {
           <ChevronRightIcon />
         </Text>
       }
-      space={2}
+      gap={2}
     >
       {crumbs.map(({node: crumbNode, segment}, index) => (
         <Text key={segment} size={1} weight="medium">

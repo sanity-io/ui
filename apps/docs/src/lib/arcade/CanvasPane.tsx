@@ -76,8 +76,8 @@ function MetaEditor({
   useGlobalKeyDown(handleGlobalKeyDown)
 
   return (
-    <Stack as="form" padding={4} onSubmit={handleEditorSubmit} space={4}>
-      <Stack space={3}>
+    <Stack as="form" padding={4} onSubmit={handleEditorSubmit} gap={4}>
+      <Stack gap={3}>
         <Text size={1} weight="semibold">
           Title
         </Text>
@@ -89,7 +89,7 @@ function MetaEditor({
           value={formTitle}
         />
       </Stack>
-      <Stack space={3}>
+      <Stack gap={3}>
         <Text size={1} weight="semibold">
           Description
         </Text>
@@ -190,7 +190,7 @@ export function CanvasPane(props: {
             />
           </Flex>
 
-          <Inline space={1}>
+          <Inline gap={1}>
             <Button
               fontSize={1}
               mode="bleed"
