@@ -56,10 +56,14 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   Vercel, not released through Changesets.
 - `pnpm dev:docs` runs the docs app: Next.js on http://localhost:3000 (the
   site is served under the `/ui` base path, so open http://localhost:3000/ui)
-  and the Sanity Studio dev server on http://localhost:3333. Rendering draft
-  content requires a viewer token in `apps/docs/.env.local`
-  (`SANITY_API_READ_TOKEN`); the production dataset is publicly readable. To
-  sign in to the studio, open `http://localhost:3333/#token={SANITY_AUTH_TOKEN}`
-  (Sanity consumes the token from the URL hash on load). The same hash-token
-  sign-in also works for the studio embedded in the Next.js app at
+  and the Sanity Studio dev server on http://localhost:3333. The Next.js app
+  requires a viewer token in `SANITY_API_READ_TOKEN` (environment variable or
+  `apps/docs/.env.local`) — without it every route fails with "Missing
+  SANITY_API_READ_TOKEN", even though the production dataset itself is
+  publicly readable. In Cloud Agent VMs, `SANITY_API_READ_TOKEN` and
+  `SANITY_AUTH_TOKEN` are available as runtime secrets (injected as env vars
+  when the VM starts). To sign in to the studio, open
+  `http://localhost:3333/#token={SANITY_AUTH_TOKEN}` (Sanity consumes the
+  token from the URL hash on load). The same hash-token sign-in also works for
+  the studio embedded in the Next.js app at
   `http://localhost:3000/ui/studio#token={SANITY_AUTH_TOKEN}`.
