@@ -20,6 +20,10 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   checking is included in `pnpm lint` via the `typeCheck` option — there is no
   separate `tsc`/`ts:check` command. Run `pnpm lint:fix` to auto-fix issues
   when possible. Suppressions use `oxlint-disable-next-line` comments.
+  Storybook-specific rules come from `eslint-plugin-storybook`, loaded through
+  oxlint's [JS plugins](https://oxc.rs/docs/guide/usage/linter/js-plugins.html)
+  support (`jsPlugins` in `.oxlintrc.json`) and enabled via config `overrides`
+  scoped to story files and `.storybook/main.ts`.
 - Packages are built with [tsdown](https://tsdown.dev) via
   `@sanity/tsdown-config` (`tsdown.config.mts` in each package — the `.mts`
   extension is required because these packages are not `"type": "module"` and
