@@ -48,11 +48,12 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   to a PR that should trigger a release. Merging to `main` opens/updates a
   "Version Packages" PR, and merging that publishes to npm via trusted
   publishing.
-- `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo and
-  keeps its own tooling: it is excluded from root oxlint/oxfmt and instead uses
-  its own eslint + prettier setup (`pnpm --filter sanity-ui-docs lint`). It
-  depends on `@sanity/ui` v2 from npm (not the workspace version) and is
-  deployed via Vercel, not released through Changesets.
+- `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo. It is
+  formatted by the root oxfmt config (`pnpm format`) like the rest of the repo,
+  but for linting it is excluded from root oxlint and instead uses its own
+  eslint setup (`pnpm --filter sanity-ui-docs lint`). It depends on
+  `@sanity/ui` v2 from npm (not the workspace version) and is deployed via
+  Vercel, not released through Changesets.
 - `pnpm dev:docs` runs the docs app: Next.js on http://localhost:3000 (the
   site is served under the `/ui` base path, so open http://localhost:3000/ui)
   and the Sanity Studio dev server on http://localhost:3333. Rendering draft

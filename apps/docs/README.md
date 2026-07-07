@@ -2,8 +2,9 @@
 
 This is the source code of [sanity.io/ui](https://www.sanity.io/ui). It was
 migrated from the standalone [`sanity-io/ui-docs`](https://github.com/sanity-io/ui-docs)
-repository (with its full git history) and keeps its own eslint + prettier
-setup, separate from the root oxlint/oxfmt configuration.
+repository (with its full git history). Formatting is handled by the root
+oxfmt configuration (`pnpm format` at the repo root), while linting keeps its
+own eslint setup, separate from the root oxlint configuration.
 
 ## Development
 

@@ -9,7 +9,7 @@
   "scripts": {
     "build": "run-s next:build sanity:manifest:extract",
     "dev": "run-p next:dev sanity:dev",
-    "fix": "prettier --write --cache --ignore-unknown . && eslint . --ext .cjs,.js,.ts,.tsx --fix --quiet",
+    "fix": "eslint . --fix --quiet",
     "lint": "next lint",
     "next:build": "next build",
     "next:dev": "next dev",
@@ -60,12 +60,8 @@
     "@types/react-dom": "^19.1.6",
     "eslint": "^9.30.0",
     "eslint-config-next": "15.5.7",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.5.1",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
     "mkdirp": "^3.0.1",
     "npm-run-all2": "^8.0.4",
-    "prettier-plugin-packagejson": "^2.5.17",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }
