@@ -9,12 +9,26 @@ allowBuilds:
   core-js: false
   esbuild: false
   fsevents: false
+  sharp: true
   unrs-resolver: true
 
 # Sanity-owned build tooling releases frequently; don't gate it on the
 # default minimum release age (1 day)
 minimumReleaseAgeExclude:
   - '@sanity/tsdown-config'
+
+# @testing-library/jest-dom/vitest imports `vitest` without declaring it, so it
+# falls back to pnpm's hidden hoist — which can resolve to another workspace
+# package's vitest version (e.g. apps/docs uses vitest 3, packages/ui vitest 4),
+# registering the matchers on the wrong `expect` instance. Declare the peer so
+# each consumer gets its own vitest linked.
+packageExtensions:
+  '@testing-library/jest-dom':
+    peerDependencies:
+      vitest: '*'
+    peerDependenciesMeta:
+      vitest:
+        optional: true
 
 overrides:
   '@types/react': ^19.2.17
