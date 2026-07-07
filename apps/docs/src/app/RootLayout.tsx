@@ -4,7 +4,7 @@ import {WrappedValue} from '@sanity/react-loader/jsx'
 import {LayerProvider, ThemeProvider, ToastProvider, usePrefersDark} from '@sanity/ui'
 import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {Inter} from 'next/font/google'
-import {ReactNode, useEffect, useMemo, useState} from 'react'
+import {ReactNode, useMemo, useSyncExternalStore} from 'react'
 import Refractor from 'react-refractor'
 import bash from 'refractor/lang/bash'
 import json from 'refractor/lang/json'
@@ -27,6 +27,38 @@ const inter = Inter({subsets: ['latin']})
 
 const theme = buildTheme()
 
+// The color scheme lives in `localStorage` (an external store) and is read
+// with `useSyncExternalStore`: the server (and hydration) renders `system`,
+// and the persisted value is picked up in the client render that follows.
+const COLOR_SCHEME_KEY = 'sanityStudio:ui:colorScheme'
+
+const colorSchemeListeners = new Set<() => void>()
+
+function subscribeToColorScheme(listener: () => void): () => void {
+  colorSchemeListeners.add(listener)
+
+  return () => colorSchemeListeners.delete(listener)
+}
+
+function getColorScheme(): ThemeColorSchemeKey | 'system' {
+  const stored = window.localStorage.getItem(COLOR_SCHEME_KEY)
+
+  // Ignore invalid persisted values
+  return stored === 'dark' || stored === 'light' ? stored : 'system'
+}
+
+function getServerColorScheme(): 'system' {
+  return 'system'
+}
+
+function setColorScheme(scheme: ThemeColorSchemeKey | 'system'): void {
+  window.localStorage.setItem(COLOR_SCHEME_KEY, scheme)
+
+  for (const listener of colorSchemeListeners) {
+    listener()
+  }
+}
+
 export function RootLayout(props: {
   children?: ReactNode
   data: WrappedValue<GlobalData>
@@ -48,24 +80,11 @@ export function RootLayout(props: {
   } = props
   const prefersDark = usePrefersDark(() => prefersDarkServerSnapshot)
 
-  const [colorScheme, setColorScheme] = useState<ThemeColorSchemeKey | 'system'>('system')
-
-  useEffect(() => {
-    const localColorScheme = window.localStorage.getItem('sanityStudio:ui:colorScheme') || 'system'
-    if (
-      localColorScheme !== 'system' &&
-      localColorScheme !== 'dark' &&
-      localColorScheme !== 'light'
-    ) {
-      // If the restored value is invalid then ignore it
-      return
-    }
-    if (localColorScheme !== colorScheme) {
-      // If the value from local storage is different from the current state, update the state
-      // this typically only happens on mount
-      setColorScheme(localColorScheme)
-    }
-  }, [colorScheme])
+  const colorScheme = useSyncExternalStore(
+    subscribeToColorScheme,
+    getColorScheme,
+    getServerColorScheme,
+  )
 
   const {nav: navNode, settings} = data
 
@@ -80,13 +99,10 @@ export function RootLayout(props: {
       imageUrlBuilder: getImageUrlBuilder({dataset, projectId}).imageUrlBuilder,
       nav,
       projectId,
-      setColorScheme: (s) => {
-        window.localStorage.setItem('sanityStudio:ui:colorScheme', s)
-        setColorScheme(s)
-      },
+      setColorScheme,
       settings,
     }),
-    [colorScheme, dataset, hintHiddenContent, nav, projectId, setColorScheme, settings],
+    [colorScheme, dataset, hintHiddenContent, nav, projectId, settings],
   )
 
   return (
