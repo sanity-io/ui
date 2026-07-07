@@ -5,6 +5,7 @@ const nextConfig = {
     styledComponents: true,
   },
   experimental: {
+    reactCompiler: true,
     taint: true,
   },
   eslint: {
