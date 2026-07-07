@@ -1,14 +1,13 @@
 import {defineCliConfig} from 'sanity/cli'
 
+// Object configs are merged into the base config with vite's `mergeConfig`,
+// which handles both array and object forms of `resolve.alias`.
 export default defineCliConfig({
-  vite: (viteConfig) => ({
-    ...viteConfig,
+  vite: {
     resolve: {
-      ...viteConfig.resolve,
       alias: {
-        ...viteConfig.resolve?.alias,
         '@': './src',
       },
     },
-  }),
+  },
 })

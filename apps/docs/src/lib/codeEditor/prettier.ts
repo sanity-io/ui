@@ -1,7 +1,7 @@
 import {CursorResult} from 'prettier'
 import parserBabel from 'prettier/plugins/babel'
 import prettierPluginEstree from 'prettier/plugins/estree'
-import prettier from 'prettier/standalone'
+import {formatWithCursor} from 'prettier/standalone'
 
 export function runPrettier({
   code,
@@ -11,7 +11,7 @@ export function runPrettier({
   cursorOffset: number
 }): Promise<CursorResult> | null {
   try {
-    return prettier.formatWithCursor(code, {
+    return formatWithCursor(code, {
       bracketSpacing: false,
       cursorOffset,
       filepath: 'index.jsx',
@@ -21,7 +21,7 @@ export function runPrettier({
       semi: false,
       singleQuote: true,
     })
-  } catch (err) {
+  } catch {
     // Just a formatting error so we pass
     return null
   }

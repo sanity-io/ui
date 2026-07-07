@@ -10,7 +10,7 @@ export function NpmPackageBadge(props: {data: WrappedValue<NpmPackageBadgeData>}
 
   return (
     <a href={href} rel="noreferrer" target="_blank">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
+      {/* oxlint-disable-next-line nextjs/no-img-element */}
       <img alt="" src={src} />
     </a>
   )

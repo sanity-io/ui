@@ -48,15 +48,19 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   to a PR that should trigger a release. Merging to `main` opens/updates a
   "Version Packages" PR, and merging that publishes to npm via trusted
   publishing.
-- `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo and
-  keeps its own tooling: it is excluded from root oxlint/oxfmt and instead uses
-  its own eslint + prettier setup (`pnpm --filter sanity-ui-docs lint`). It
-  depends on `@sanity/ui` v2 from npm (not the workspace version) and is
-  deployed via Vercel, not released through Changesets.
+- `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo. It is
+  linted by the root oxlint config like everything else (an override in
+  `.oxlintrc.json` additionally enables the Next.js plugin rules for it), but
+  it is still excluded from root oxfmt and formatted with its own prettier
+  setup (`pnpm --filter sanity-ui-docs fix`). It depends on `@sanity/ui` v2
+  from npm (not the workspace version) and is deployed via Vercel, not
+  released through Changesets.
 - `pnpm dev:docs` runs the docs app: Next.js on http://localhost:3000 (the
   site is served under the `/ui` base path, so open http://localhost:3000/ui)
   and the Sanity Studio dev server on http://localhost:3333. Rendering draft
   content requires a viewer token in `apps/docs/.env.local`
   (`SANITY_API_READ_TOKEN`); the production dataset is publicly readable. To
   sign in to the studio, open `http://localhost:3333/#token={SANITY_AUTH_TOKEN}`
-  (Sanity consumes the token from the URL hash on load).
+  (Sanity consumes the token from the URL hash on load). This also works for
+  the studio embedded in the Next.js app:
+  `http://localhost:3000/ui/studio#token={SANITY_AUTH_TOKEN}`.

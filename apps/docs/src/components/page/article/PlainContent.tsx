@@ -7,7 +7,7 @@ import {
 import {sanity, unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Heading, Text} from '@sanity/ui'
 import React from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {SanityBlockValue} from '@/lib/sanity/types'
 

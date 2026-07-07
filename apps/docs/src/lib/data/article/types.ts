@@ -94,9 +94,7 @@ export type ArticleContentData = SanityArrayItemValue<
   | CodeExampleData
   | CalloutData
   | CodeData
-  | CodeExampleData
   | GroqLogoGridData
-  | SanityLogoGridData
   | SanityLogoGridData
   | ColorGridData
   | FigmaButtonData

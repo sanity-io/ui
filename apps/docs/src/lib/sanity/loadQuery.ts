@@ -32,7 +32,7 @@ export const loadQuery = (async (query, params = {}, options = {}) => {
     ...options,
     next: {
       revalidate,
-      ...(options.next || {}),
+      ...options.next,
     },
     perspective,
   })

@@ -20,6 +20,18 @@ export function ColorGrid() {
             {COLOR_TINTS.map((tintKey) => {
               const tint = hues[hueKey][tintKey]
 
+              const handleCopyClick = () => {
+                void navigator.clipboard.writeText(tint.hex)
+                toast.push({
+                  title: (
+                    <>
+                      Copied <em>{tint.title}</em> to clipboard
+                    </>
+                  ),
+                  status: 'info',
+                })
+              }
+
               return (
                 <Flex align="center" key={tintKey}>
                   <Box flex={1} padding={3} style={{backgroundColor: tint.hex, color: tint.hex}}>
@@ -34,17 +46,7 @@ export function ColorGrid() {
                     <Button
                       icon={ClipboardIcon}
                       mode="bleed"
-                      onClick={() => {
-                        navigator.clipboard.writeText(tint.hex)
-                        toast.push({
-                          title: (
-                            <>
-                              Copied <em>{tint.title}</em> to clipboard
-                            </>
-                          ),
-                          status: 'info',
-                        })
-                      }}
+                      onClick={handleCopyClick}
                       padding={2}
                       size={1}
                       title="Copy hex value"
