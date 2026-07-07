@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 2.16.24
+
+### Patch Changes
+
+- [#2284](https://github.com/sanity-io/ui/pull/2284) [`1d103ff`](https://github.com/sanity-io/ui/commit/1d103ffbb13b0aae2fa5ba144ba599b35ce5db09) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency @sanity/icons to ^3.8.0
+
 ## 2.16.23
 
 ### Patch Changes
