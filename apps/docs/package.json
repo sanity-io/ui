@@ -55,6 +55,7 @@
     "@types/qs": "^6.14.0",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "babel-plugin-react-compiler": "1.0.0",
     "mkdirp": "^3.0.1",
     "npm-run-all2": "^8.0.4",
     "typescript": "^5.8.3",

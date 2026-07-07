@@ -103,8 +103,6 @@
       "rules": {
         // `import "server-only"` marks modules as server-only in Next.js
         "import/no-unassigned-import": ["error", {"allow": ["**/*.css", "server-only"]}],
-        // apps/docs does not build with the React Compiler
-        "react/react-compiler": "off",
         // The docs app narrows loosely-typed CMS (Portable Text) data with
         // `as` assertions throughout; too noisy to be useful here
         "typescript/no-unsafe-type-assertion": "off"

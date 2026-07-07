@@ -1,3 +1,4 @@
+import {type QueryResponseInitial} from '@sanity/react-loader'
 import {wrapData} from '@sanity/react-loader/jsx'
 import {Metadata} from 'next'
 import {draftMode} from 'next/headers'
@@ -48,20 +49,27 @@ export async function generateMetadata(props: {params: {slug: string[]}}): Promi
 export default async function SlugRoute(props: {params: {slug: string[]}}) {
   const {params} = props
 
+  let initial: QueryResponseInitial<TargetData | null>
+
+  // Only the data loading is guarded: JSX must not be constructed inside
+  // try/catch, since components render later and rendering errors would not
+  // be caught here anyway.
   try {
-    const {data: rawData, sourceMap} = await loadQuery<TargetData | null>(TARGET_QUERY, {
+    initial = await loadQuery<TargetData | null>(TARGET_QUERY, {
       memberTypes: API_DOCUMENT_TYPES,
       path: params.slug,
     })
-
-    if ((await draftMode()).isEnabled) {
-      return <PreviewPage initial={{data: rawData, sourceMap}} path={params.slug} />
-    }
-
-    const data = rawData ? wrapData({baseUrl: '/studio'}, rawData, sourceMap) : null
-
-    return <Page data={data} path={params.slug} />
   } catch (error) {
     return <Page error={error as Error} path={params.slug} />
   }
+
+  const {data: rawData, sourceMap} = initial
+
+  if ((await draftMode()).isEnabled) {
+    return <PreviewPage initial={{data: rawData, sourceMap}} path={params.slug} />
+  }
+
+  const data = rawData ? wrapData({baseUrl: '/studio'}, rawData, sourceMap) : null
+
+  return <Page data={data} path={params.slug} />
 }

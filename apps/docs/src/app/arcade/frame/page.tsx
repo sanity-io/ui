@@ -3,7 +3,7 @@
 import * as icons from '@sanity/icons'
 import * as ui from '@sanity/ui'
 import {Card, Code, ErrorBoundary, Text} from '@sanity/ui'
-import React, {ReactElement, useCallback, useEffect, useState} from 'react'
+import React, {ReactElement, useCallback, useEffect, useMemo, useState} from 'react'
 import {keyframes, styled} from 'styled-components'
 
 import {isRecord} from '@/lib/common'
@@ -13,7 +13,6 @@ import {useApp} from '../../useApp'
 
 export default function ArcadeFrameRoute(): ReactElement {
   const {setColorScheme} = useApp()
-  const [evalResult, setEvalResult] = useState<EvalComponentResult | null>(null)
   const [evalReady, setEvalReady] = useState(false)
   const [hookCode, setHookCode] = useState<string | null>(null)
   const [jsxCode, setJSXCode] = useState<string | null>(null)
@@ -31,6 +30,10 @@ export default function ArcadeFrameRoute(): ReactElement {
           setJSXCode(msg.jsxCode as any)
           setHookCode(msg.hookCode as any)
 
+          // New input: clear errors from the previous code
+          setRenderError(null)
+          setWindowError(null)
+
           return
         }
 
@@ -47,24 +50,17 @@ export default function ArcadeFrameRoute(): ReactElement {
     }
   }, [setColorScheme])
 
-  useEffect(() => {
-    if (!evalReady) return
-    if (hookCode === null) return
-    if (jsxCode === null) return
+  const evalResult = useMemo<EvalComponentResult | null>(() => {
+    if (!evalReady) return null
+    if (hookCode === null) return null
+    if (jsxCode === null) return null
 
-    setEvalResult(
-      evalComponent({
-        hookCode,
-        jsxCode,
-        scope: {...icons, ...ui, ...React, React, styled, keyframes},
-      }),
-    )
+    return evalComponent({
+      hookCode,
+      jsxCode,
+      scope: {...icons, ...ui, ...React, React, styled, keyframes},
+    })
   }, [hookCode, jsxCode, evalReady])
-
-  useEffect(() => {
-    setRenderError(null)
-    setWindowError(null)
-  }, [hookCode, jsxCode])
 
   useEffect(() => {
     void readyCheck().then(() => setEvalReady(true))
