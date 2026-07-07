@@ -1,5 +1,12 @@
 'use client'
-import {createElement, lazy, ReactNode, Suspense, useSyncExternalStore} from 'react'
+import {
+  createElement,
+  lazy,
+  ReactNode,
+  Suspense,
+  useDeferredValue,
+  useSyncExternalStore,
+} from 'react'
 
 import {Layout} from '@/components/Layout'
 
@@ -18,7 +25,13 @@ export function ArcadePage(props: {
 }): ReactNode {
   const {searchParams: _searchParams} = props
 
-  const mounted = useSyncExternalStore(emptySubscribe, getIsMounted, getServerIsMounted)
+  // `useDeferredValue` with the server snapshot as its initial value keeps
+  // hydration non-blocking: the arcade mounts in a deferred re-render instead
+  // of forcing a synchronous one
+  const mounted = useDeferredValue(
+    useSyncExternalStore(emptySubscribe, getIsMounted, getServerIsMounted),
+    getServerIsMounted(),
+  )
 
   if (!mounted) return null
 

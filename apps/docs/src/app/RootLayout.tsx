@@ -4,7 +4,7 @@ import {WrappedValue} from '@sanity/react-loader/jsx'
 import {LayerProvider, ThemeProvider, ToastProvider, usePrefersDark} from '@sanity/ui'
 import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {Inter} from 'next/font/google'
-import {ReactNode, useMemo, useSyncExternalStore} from 'react'
+import {ReactNode, useDeferredValue, useMemo, useSyncExternalStore} from 'react'
 import Refractor from 'react-refractor'
 import bash from 'refractor/lang/bash'
 import json from 'refractor/lang/json'
@@ -80,10 +80,12 @@ export function RootLayout(props: {
   } = props
   const prefersDark = usePrefersDark(() => prefersDarkServerSnapshot)
 
-  const colorScheme = useSyncExternalStore(
-    subscribeToColorScheme,
-    getColorScheme,
-    getServerColorScheme,
+  // `useDeferredValue` with the server snapshot as its initial value keeps
+  // hydration non-blocking: the persisted color scheme is applied in a
+  // deferred re-render instead of forcing a synchronous one
+  const colorScheme = useDeferredValue(
+    useSyncExternalStore(subscribeToColorScheme, getColorScheme, getServerColorScheme),
+    getServerColorScheme(),
   )
 
   const {nav: navNode, settings} = data
