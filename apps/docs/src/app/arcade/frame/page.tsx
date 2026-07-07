@@ -67,7 +67,7 @@ export default function ArcadeFrameRoute(): ReactElement {
   }, [hookCode, jsxCode])
 
   useEffect(() => {
-    readyCheck().then(() => setEvalReady(true))
+    void readyCheck().then(() => setEvalReady(true))
   }, [])
 
   const handleCatch = useCallback((params: {error: Error; info: React.ErrorInfo}) => {

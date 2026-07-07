@@ -6,7 +6,7 @@ import {Box, Breadcrumbs, Button, Card, Flex, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
 import Link from 'next/link'
 import {ReactElement, useState} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {ArticleData} from '@/lib/data'
 import {NavNode} from '@/lib/nav'

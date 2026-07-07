@@ -7,12 +7,9 @@ const nextConfig = {
   experimental: {
     taint: true,
   },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
+  eslint: {
+    // Linting is handled by oxlint at the repo root (`pnpm lint`)
+    ignoreDuringBuilds: true,
   },
   async headers() {
     return [
@@ -37,4 +34,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default nextConfig

@@ -13,8 +13,8 @@ export function Nav(props: {nav: NavNode; path: string}): ReactElement {
 
   return (
     <Tree space={1}>
-      {nav.children?.map((node, idx) => (
-        <NavMenuItem key={idx} level={1} node={node} path={path} />
+      {nav.children?.map((node) => (
+        <NavMenuItem key={node.href} level={1} node={node} path={path} />
       ))}
     </Tree>
   )
@@ -52,7 +52,7 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
 
   return (
     <TreeItem
-      expanded={node.collapsed !== true || path.startsWith(`${node.href}/`)}
+      expanded={!node.collapsed || path.startsWith(`${node.href}/`)}
       href={hrefWithBasePath}
       onClick={handleClick}
       selected={href ? href === path : false}
@@ -71,8 +71,8 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
         )
       }
     >
-      {node.children?.map((child, idx) => (
-        <NavMenuItem key={idx} level={level + 1} node={child} path={path} />
+      {node.children?.map((child) => (
+        <NavMenuItem key={child.href} level={level + 1} node={child} path={path} />
       ))}
     </TreeItem>
   )

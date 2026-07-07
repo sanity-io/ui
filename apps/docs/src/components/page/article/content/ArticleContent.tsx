@@ -3,7 +3,7 @@ import {GroqLogo, GroqMonogram, SanityLogo, SanityMonogram} from '@sanity/logos'
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Box} from '@sanity/ui'
 import {ReactElement} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {
   ArticleData,
@@ -117,10 +117,7 @@ const components: Partial<PortableTextReactComponents> = {
     'content.figmaButton': ({value}) => (
       <FigmaButton data={value as WrappedValue<FigmaButtonData>} />
     ),
-    'image': ({value}) => (
-      // eslint-disable-next-line jsx-a11y/alt-text
-      <Image data={value as WrappedValue<ImageData>} />
-    ),
+    'image': ({value}) => <Image data={value as WrappedValue<ImageData>} />,
     'npmPackageBadge': ({value}) => (
       <NpmPackageBadge data={value as WrappedValue<NpmPackageBadgeData>} />
     ),

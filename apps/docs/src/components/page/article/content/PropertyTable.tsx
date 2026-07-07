@@ -1,7 +1,7 @@
 import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Card, Code, Stack, Text} from '@sanity/ui'
 import {ReactElement} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {isArray} from '@/lib/common'
 import {PropertyData, PropertyTableData} from '@/lib/data'

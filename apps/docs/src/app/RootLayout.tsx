@@ -67,7 +67,7 @@ export function RootLayout(props: {
     }
   }, [colorScheme])
 
-  const {nav: navNode = null, settings = null} = data || {}
+  const {nav: navNode, settings} = data
 
   const nav = useMemo(() => navNode && parseNav(navNode, []), [navNode])
 

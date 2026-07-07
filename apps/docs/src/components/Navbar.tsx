@@ -1,5 +1,5 @@
 import {gray, white} from '@sanity/color'
-import {SanityMonogram, SanityMonogramColor} from '@sanity/logos'
+import {SanityMonogram} from '@sanity/logos'
 import {sanity} from '@sanity/react-loader/jsx'
 import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
@@ -12,7 +12,10 @@ export function Navbar(props: {path: string[]}): ReactElement {
   const {path} = props
   const {dataset, features, nav} = useApp()
 
-  const monogramColor: SanityMonogramColor | undefined = useMemo(
+  // Grayscale monogram hints that the app is not reading from the production
+  // dataset (the deprecated `SanityMonogramColor` type is left inferred; the
+  // `scheme` prop replacement has no gray variant)
+  const monogramColor = useMemo(
     () =>
       dataset === 'production'
         ? undefined
@@ -47,7 +50,7 @@ export function Navbar(props: {path: string[]}): ReactElement {
 
         {nav && (
           <Flex align="center" flex={1} gap={1}>
-            {nav.children?.map((node, idx) => {
+            {nav.children?.map((node) => {
               if (node.hidden && !features.hintHiddenContent) {
                 return null
               }
@@ -62,7 +65,7 @@ export function Navbar(props: {path: string[]}): ReactElement {
                   data-as="a"
                   fontSize={[1, 1, 2]}
                   href={node.href}
-                  key={idx}
+                  key={node.href}
                   mode="bleed"
                   padding={3}
                   radius={2}

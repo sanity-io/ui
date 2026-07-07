@@ -11,7 +11,7 @@ import {
   Text,
   TextArea,
   TextInput,
-  useClickOutside,
+  useClickOutsideEvent,
   useGlobalKeyDown,
   useLayer,
   useToast,
@@ -38,7 +38,7 @@ function MetaEditor({
   const {isTopLayer} = useLayer()
 
   const handleEditorSubmit = useCallback(
-    (event: React.FormEvent) => {
+    (event: React.SubmitEvent) => {
       event.preventDefault()
       onChange({title: formTitle, description: formDescription})
       toast.push({
@@ -117,8 +117,8 @@ export function CanvasPane(props: {
 }): ReactElement {
   const {hookCode, jsxCode, meta, onMetaChange, onWidthChange, width} = props
   const [editorOpen, setEditorOpen] = useState(false)
-  const [popoverElement, setPopoverElement] = useState<HTMLDivElement | null>(null)
-  const [editButtonElement, setEditButtonElement] = useState<HTMLButtonElement | null>(null)
+  const popoverRef = useRef<HTMLDivElement | null>(null)
+  const editButtonRef = useRef<HTMLButtonElement | null>(null)
 
   const handleMetaChange = useCallback(
     (value: ArcadeMeta) => {
@@ -138,7 +138,10 @@ export function CanvasPane(props: {
     setEditorOpen((v) => !v)
   }, [])
 
-  useClickOutside(handleMetaEditorClickOutside, [editButtonElement, popoverElement])
+  useClickOutsideEvent(handleMetaEditorClickOutside, () => [
+    editButtonRef.current,
+    popoverRef.current,
+  ])
 
   return (
     <Flex direction="column" height="fill">
@@ -154,7 +157,7 @@ export function CanvasPane(props: {
               placement="bottom"
               portal
               preventOverflow
-              ref={setPopoverElement}
+              ref={popoverRef}
             >
               <Box padding={2} paddingRight={1}>
                 <Text muted={!meta.title} size={1} weight="semibold">
@@ -177,7 +180,7 @@ export function CanvasPane(props: {
               mode="bleed"
               padding={2}
               onClick={handleEditButtonClick}
-              ref={setEditButtonElement}
+              ref={editButtonRef}
             />
           </Flex>
 

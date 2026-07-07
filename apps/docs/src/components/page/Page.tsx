@@ -45,7 +45,7 @@ export function Page(props: PageProps) {
     return (
       <Layout path={path}>
         <ArticlePage
-          article={(data?._type === 'article' ? data : undefined) as any}
+          article={data?._type === 'article' ? data : undefined}
           nav={pageNav}
           path={path}
         />

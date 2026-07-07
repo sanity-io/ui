@@ -15,7 +15,7 @@ export function Image(props: {data: WrappedValue<ImageData>}) {
   return (
     <Box as="figure" marginY={[4, 4, 5]}>
       <Card overflow="hidden" radius={2} shadow={1}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* oxlint-disable-next-line nextjs/no-img-element */}
         <img alt={alt || undefined} src={src} style={{verticalAlign: 'top', width: '100%'}} />
       </Card>
       <Box marginTop={2}>

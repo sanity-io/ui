@@ -16,5 +16,5 @@ export async function GET(request: Request) {
 
   ;(await draftMode()).enable()
 
-  redirect(redirectTo)
+  return redirect(redirectTo)
 }
