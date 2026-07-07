@@ -20,7 +20,7 @@ export function CodeExample(props: {
   hookCode?: string
   title?: string
 }): ReactElement {
-  const {code: codeProp = '', description, hookCode: hookCodeProp = '', title} = props
+  const {code: codeProp, description, hookCode: hookCodeProp = '', title} = props
   const [jsxCode, setJSXCode] = useState<string>(codeProp)
   const [jsxCursor, setJSXCursor] = useState({anchor: 0, focus: 0})
   const [hookCode, setScopeCode] = useState<string>(hookCodeProp)

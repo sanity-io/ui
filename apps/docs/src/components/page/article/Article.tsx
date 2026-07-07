@@ -4,7 +4,7 @@ import {sanity, unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Container, Flex, Heading, Stack, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
 import {ReactElement, useMemo} from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {ArticleData} from '@/lib/data'
 

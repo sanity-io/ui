@@ -47,7 +47,7 @@ export function VisualEditing(props: {dataset: string; projectId: string}) {
             case 'replace':
               return routerRef.current.replace(url)
             default:
-              throw new Error(`Unknown update type: ${update.type}`)
+              throw new Error(`Unknown update type: ${String(update.type)}`)
           }
         },
       },

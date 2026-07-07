@@ -72,8 +72,8 @@ export function ArcadeScreen(props: {title: string; description: string}): React
       jsxCode: tryDecode(query.jsx) || DEFAULT_CODE,
       canvasWidth: typeof query.width === 'string' ? (Number(query.width) as any) : null,
       meta: {
-        title: String(query.title || ''),
-        description: String(query.description || ''),
+        title: typeof query.title === 'string' ? query.title : '',
+        description: typeof query.description === 'string' ? query.description : '',
       },
     })
   }, [])

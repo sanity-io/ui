@@ -1,7 +1,7 @@
 import {unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Card} from '@sanity/ui'
 import React from 'react'
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {FigmaEmbedData} from '@/lib/data'
 

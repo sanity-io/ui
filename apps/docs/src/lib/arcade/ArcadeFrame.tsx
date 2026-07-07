@@ -26,7 +26,7 @@ export function ArcadeFrame({
 
   // Handle messages from frame
   useEffect(() => {
-    if (!frame) return
+    if (!frame) return undefined
 
     const handleMessage = (event: MessageEvent) => {
       const msg = event.data

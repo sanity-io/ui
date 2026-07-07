@@ -13,16 +13,7 @@
   // ESLint plugins loaded through oxlint's JS plugins support. Rules from these
   // plugins are enabled per-file-pattern in "overrides".
   "jsPlugins": ["eslint-plugin-storybook"],
-  "ignorePatterns": [
-    "**/.workshop/*",
-    "**/dist/*",
-    "**/etc/*",
-    "**/storybook-static/*",
-    // apps/docs was migrated from the standalone sanity-io/ui-docs repo and
-    // still uses its own eslint setup (see apps/docs/eslint.config.mjs).
-    // It is formatted by the root oxfmt config like the rest of the repo.
-    "apps/docs/*"
-  ],
+  "ignorePatterns": ["**/.workshop/*", "**/dist/*", "**/etc/*", "**/storybook-static/*"],
   "options": {
     "denyWarnings": true,
     "reportUnusedDisableDirectives": "error",
@@ -87,6 +78,11 @@
     // Too noisy, common in callbacks/closures
     "no-shadow": "off"
   },
+  "settings": {
+    "next": {
+      "rootDir": "apps/docs/"
+    }
+  },
   "overrides": [
     {
       // tsgolint non-deterministically reports either no-unsafe-type-assertion or
@@ -96,6 +92,21 @@
       "files": ["packages/ui/src/core/components/tree/tree.tsx"],
       "rules": {
         "typescript/no-unnecessary-type-assertion": "off",
+        "typescript/no-unsafe-type-assertion": "off"
+      }
+    },
+    {
+      // apps/docs is a Next.js app; enable the Next.js rules on top of the
+      // base plugins (override plugins extend the base `plugins` set).
+      "files": ["apps/docs/**"],
+      "plugins": ["nextjs"],
+      "rules": {
+        // `import "server-only"` marks modules as server-only in Next.js
+        "import/no-unassigned-import": ["error", {"allow": ["**/*.css", "server-only"]}],
+        // apps/docs does not build with the React Compiler
+        "react/react-compiler": "off",
+        // The docs app narrows loosely-typed CMS (Portable Text) data with
+        // `as` assertions throughout; too noisy to be useful here
         "typescript/no-unsafe-type-assertion": "off"
       }
     },

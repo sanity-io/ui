@@ -54,28 +54,19 @@ export function evalComponent(opts: {
   }
 }
 
-const hasProp = {}.hasOwnProperty
-
 function scopeEval(source: string, scope: Record<string, any>) {
   const keys: string[] = []
   const values = []
 
-  let value: any
-
-  for (const key in scope) {
-    if (!hasProp.call(scope, key)) continue
-
-    value = scope[key]
-
+  for (const key of Object.keys(scope)) {
     if (key === 'this') {
       continue
     }
 
     keys.push(key)
-    values.push(value)
+    values.push(scope[key])
   }
 
-  // eslint-disable-next-line prefer-spread
   return Function.apply(null, keys.concat([`return eval(${JSON.stringify(source)})`])).apply(
     scope['this'],
     values,
