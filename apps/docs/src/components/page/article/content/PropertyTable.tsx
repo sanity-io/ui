@@ -49,8 +49,8 @@ function Property(props: {property: WrappedValue<PropertyData>}) {
 
   return (
     <PropertyBox padding={3}>
-      <Stack space={3}>
-        <Code language="typescript" muted size={1}>
+      <Stack gap={3}>
+        <Code language="typescript" size={1}>
           {tsType}
         </Code>
 

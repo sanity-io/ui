@@ -54,7 +54,7 @@ export function CodeExample(props: {
         )}
 
         <Card borderTop borderBottom paddingX={4} paddingY={2}>
-          <TabList space={1} style={{textAlign: 'center'}}>
+          <TabList gap={1} style={{textAlign: 'center'}}>
             <Tab
               aria-controls="mode-jsx-panel"
               fontSize={1}
@@ -129,7 +129,7 @@ export function CodeExample(props: {
           iconRight={ArrowRightIcon}
           mode="bleed"
           padding={2}
-          space={2}
+          gap={2}
           text="Open in Arcade"
         />
       </Box>

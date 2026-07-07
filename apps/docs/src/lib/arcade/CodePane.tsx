@@ -33,7 +33,7 @@ export function CodePane(props: {
   return (
     <Flex direction="column" height="fill" overflow="hidden">
       <Card padding={2} shadow={1} style={{minHeight: 'auto', zIndex: 2}}>
-        <TabList space={1}>
+        <TabList gap={1}>
           <Tab
             aria-controls="mode-jsx-panel"
             fontSize={1}

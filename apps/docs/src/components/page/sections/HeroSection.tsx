@@ -62,7 +62,7 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
       />
 
       <Container width={0}>
-        <Stack space={[4, 4, 5]}>
+        <Stack gap={[4, 4, 5]}>
           <Heading align="center" as="h1" size={[2, 3, 4, 5]}>
             <sanity.span>{data.headline}</sanity.span>
           </Heading>
@@ -74,7 +74,7 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
           )}
 
           {data.ctas && (
-            <Inline space={2} style={{textAlign: 'center'}}>
+            <Inline gap={2} style={{textAlign: 'center'}}>
               {data.ctas
                 .filter((cta) => cta.href?.value)
                 .map((cta) => (
@@ -82,7 +82,7 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
                     as={Link}
                     data-as="a"
                     fontSize={2}
-                    href={cta.href?.value}
+                    href={cta.href?.value || ''}
                     key={cta._key}
                     mode={(cta.mode?.value || 'default') as any}
                     paddingX={5}
@@ -107,7 +107,7 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
       {data.links && (
         <Container width={2}>
           <Box marginTop={[4, 4, 5]}>
-            <Grid columns={[1, 1, 2, 3]} gap={[3, 4, 4, 5]}>
+            <Grid gap={[3, 4, 4, 5]} gridTemplateColumns={[1, 1, 2, 3]}>
               {data.links
                 .filter((link) => link.href?.value)
                 .map((link) => (
@@ -120,7 +120,7 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
                     padding={4}
                     radius={2}
                   >
-                    <Stack space={3}>
+                    <Stack gap={3}>
                       <Heading as="h2" size={1}>
                         {link.title ? <sanity.span>{link.title}</sanity.span> : <em>Untitled</em>}
                       </Heading>

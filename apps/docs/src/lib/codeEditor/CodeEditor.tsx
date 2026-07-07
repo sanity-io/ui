@@ -60,7 +60,9 @@ const basicSetup = {
 }
 
 export function CodeEditor(
-  props: CodeEditorProps & Omit<CardProps, '__unstable_focusRing' | 'overflow'>,
+  // `CardProps` includes the intrinsic `onChange` handler, which conflicts
+  // with the `onChange(value: string)` signature in `CodeEditorProps`
+  props: CodeEditorProps & Omit<CardProps, '__unstable_focusRing' | 'onChange' | 'overflow'>,
 ): ReactElement {
   const {
     border = true,

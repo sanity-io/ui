@@ -122,7 +122,7 @@ function NavBreadcrumbs(props: {nav: NavNode; path: string[]}) {
           <ChevronRightIcon />
         </Text>
       }
-      space={2}
+      gap={2}
     >
       {path.reduce<ReactElement[]>((children, segment, index) => {
         if (index > 0) {

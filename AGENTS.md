@@ -52,8 +52,12 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   linted by the root oxlint config like everything else (an override in
   `.oxlintrc.json` additionally enables the Next.js plugin rules for it) and
   formatted by the root oxfmt config (`pnpm format`) like the rest of the
-  repo. It depends on `@sanity/ui` v2 from npm (not the workspace version)
-  and is deployed via Vercel, not released through Changesets.
+  repo. It depends on the workspace `@sanity/ui` (`workspace:*`), which
+  resolves to the TypeScript source through the dev `exports`, so Next.js
+  transpiles it via `transpilePackages` in `apps/docs/next.config.mjs` (the
+  embedded Sanity Studio still bundles its own `@sanity/ui` v2 via the
+  `sanity` package). It is deployed via Vercel, not released through
+  Changesets.
 - `pnpm dev:docs` runs the docs app: Next.js on http://localhost:3000 (the
   site is served under the `/ui` base path, so open http://localhost:3000/ui)
   and the Sanity Studio dev server on http://localhost:3333. The Next.js app

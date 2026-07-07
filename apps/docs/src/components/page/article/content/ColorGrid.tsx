@@ -9,9 +9,9 @@ export function ColorGrid() {
   const toast = useToast()
 
   return (
-    <Grid columns={[1, 1, 1, 3]} gap={5}>
+    <Grid gap={5} gridTemplateColumns={[1, 1, 1, 3]}>
       {COLOR_HUES.map((hueKey) => (
-        <Stack key={hueKey} space={3}>
+        <Stack key={hueKey} gap={3}>
           <Heading as="h2" size={[0, 0, 1, 2]}>
             {hueKey}
           </Heading>
@@ -48,7 +48,6 @@ export function ColorGrid() {
                       mode="bleed"
                       onClick={handleCopyClick}
                       padding={2}
-                      size={1}
                       title="Copy hex value"
                     />
                   </Box>
