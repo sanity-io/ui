@@ -17,7 +17,8 @@
     "**/storybook-static/*",
     "storybook/*",
     // apps/docs was migrated from the standalone sanity-io/ui-docs repo and
-    // still uses its own eslint setup (see apps/docs/eslint.config.mjs)
+    // still uses its own eslint setup (see apps/docs/eslint.config.mjs).
+    // It is formatted by the root oxfmt config like the rest of the repo.
     "apps/docs/*"
   ],
   "options": {

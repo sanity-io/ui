@@ -6,8 +6,8 @@ import {AppFooter} from './Footer'
 import {Navbar} from './Navbar'
 
 const Root = styled.div({
-  height: '100%',
-  flexDirection: 'column',
+  'height': '100%',
+  'flexDirection': 'column',
 
   '&:not([hidden])': {
     display: 'flex',
