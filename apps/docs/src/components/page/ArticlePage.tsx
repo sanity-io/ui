@@ -113,7 +113,22 @@ export function ArticlePage(props: {
 function NavBreadcrumbs(props: {nav: NavNode; path: string[]}) {
   const {nav, path} = props
 
+  // Resolve the nav node for each path segment up front, so that no variable
+  // is reassigned from within the JSX below (the React Compiler cannot prove
+  // that a callback which reassigns an outer variable runs during render)
+  const crumbs: {node: NavNode; segment: string}[] = []
+
   let node: NavNode | undefined = nav
+
+  for (const [index, segment] of path.entries()) {
+    if (index > 0) {
+      node = node?.children?.find((child) => child.segment === segment)
+    }
+
+    if (!node) break
+
+    crumbs.push({node, segment})
+  }
 
   return (
     <Breadcrumbs
@@ -124,28 +139,17 @@ function NavBreadcrumbs(props: {nav: NavNode; path: string[]}) {
       }
       gap={2}
     >
-      {path.reduce<ReactElement[]>((children, segment, index) => {
-        if (index > 0) {
-          node = node?.children?.find((child) => child.segment === segment)
-        }
-
-        if (!node) {
-          return children
-        }
-
-        return [
-          ...children,
-          <Text key={segment} size={1} weight="medium">
-            {index === 0 ? (
-              <Link href={`/${node.segment}`} style={{color: 'inherit'}}>
-                <sanity.span>{node.title}</sanity.span>
-              </Link>
-            ) : (
-              <sanity.span>{node.title}</sanity.span>
-            )}
-          </Text>,
-        ]
-      }, [])}
+      {crumbs.map(({node: crumbNode, segment}, index) => (
+        <Text key={segment} size={1} weight="medium">
+          {index === 0 ? (
+            <Link href={`/${crumbNode.segment}`} style={{color: 'inherit'}}>
+              <sanity.span>{crumbNode.title}</sanity.span>
+            </Link>
+          ) : (
+            <sanity.span>{crumbNode.title}</sanity.span>
+          )}
+        </Text>
+      ))}
     </Breadcrumbs>
   )
 }

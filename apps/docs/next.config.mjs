@@ -8,6 +8,7 @@ const nextConfig = {
   // monorepo (dev `exports`), so Next.js must transpile it.
   transpilePackages: ['@sanity/ui'],
   experimental: {
+    reactCompiler: true,
     taint: true,
   },
   eslint: {

@@ -1,9 +1,9 @@
 'use client'
 
 import {ArrowRightIcon} from '@sanity/icons'
-import {Box, Button, Card, Tab, TabList, TabPanel, Text} from '@sanity/ui'
+import {Box, Button, Card, Tab, TabList, TabPanel} from '@sanity/ui'
 import Link from 'next/link'
-import {ReactElement, useEffect, useState} from 'react'
+import {ReactElement, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {getArcadeQuery} from '@/lib/arcade'
@@ -25,11 +25,6 @@ export function CodeExample(props: {
   const [jsxCursor, setJSXCursor] = useState({anchor: 0, focus: 0})
   const [hookCode, setScopeCode] = useState<string>(hookCodeProp)
   const [hookCursor, setScopeCursor] = useState({anchor: 0, focus: 0})
-  const [renderError, setRenderError] = useState<Error | null>(null)
-
-  useEffect(() => {
-    setRenderError(null)
-  }, [hookCode, jsxCode])
 
   const arcadeQuery = getArcadeQuery({
     description,
@@ -46,12 +41,6 @@ export function CodeExample(props: {
         <FrameCard tone="transparent">
           <ArcadeFrame hookCode={hookCode} jsxCode={jsxCode} />
         </FrameCard>
-
-        {renderError && (
-          <Card padding={4} tone="critical">
-            <Text>An error occured while rendering</Text>
-          </Card>
-        )}
 
         <Card borderTop borderBottom paddingX={4} paddingY={2}>
           <TabList gap={1} style={{textAlign: 'center'}}>

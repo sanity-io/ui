@@ -37,6 +37,16 @@ function MetaEditor({
   const titleInputRef = useRef<HTMLInputElement | null>(null)
   const {isTopLayer} = useLayer()
 
+  // Reset the form state when the value prop changes, by adjusting the state
+  // while rendering (https://react.dev/learn/you-might-not-need-an-effect)
+  const [prevValue, setPrevValue] = useState(value)
+
+  if (prevValue !== value) {
+    setPrevValue(value)
+    setFormTitle(value.title)
+    setFormDescription(value.description)
+  }
+
   const handleEditorSubmit = useCallback(
     (event: React.SubmitEvent) => {
       event.preventDefault()
@@ -52,10 +62,6 @@ function MetaEditor({
   useEffect(() => {
     titleInputRef.current?.focus()
   }, [])
-
-  useEffect(() => setFormTitle(value.title), [value.title])
-
-  useEffect(() => setFormDescription(value.description), [value.description])
 
   const handleGlobalKeyDown = useCallback(
     (event: KeyboardEvent) => {

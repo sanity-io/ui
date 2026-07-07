@@ -24,6 +24,7 @@
     "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.0",
     "@types/node": "^22.20.0",
+    "eslint-plugin-storybook": "^10.4.6",
     "lint-staged": "^14.0.1",
     "oxfmt": "^0.57.0",
     "oxlint": "^1.72.0",

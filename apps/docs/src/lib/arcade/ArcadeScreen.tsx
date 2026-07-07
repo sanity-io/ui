@@ -29,7 +29,11 @@ export function ArcadeScreen(props: {title: string; description: string}): React
 
   const saveFnRef = useRef<DebouncedFunc<SaveFn> | null>(null)
 
-  routerRef.current = router
+  // Keep a ref to the latest router for the debounced save callback (refs
+  // must not be written to during render)
+  useEffect(() => {
+    routerRef.current = router
+  }, [router])
 
   // Create `saveFn` callback
   useEffect(() => {
