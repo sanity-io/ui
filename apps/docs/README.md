@@ -3,9 +3,8 @@
 This is the source code of [sanity.io/ui](https://www.sanity.io/ui). It was
 migrated from the standalone [`sanity-io/ui-docs`](https://github.com/sanity-io/ui-docs)
 repository (with its full git history). It is linted by the root oxlint config
-(with the Next.js plugin rules enabled via an override in `.oxlintrc.json`),
-but keeps its own prettier setup for formatting, separate from the root oxfmt
-configuration.
+(with the Next.js plugin rules enabled via an override in `.oxlintrc.json`) and
+formatted by the root oxfmt configuration (`pnpm format` at the repo root).
 
 ## Development
 

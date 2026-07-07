@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle((props) => {
       height: '100%',
     },
 
-    html: {
+    'html': {
       font: `100%/${textSize.lineHeight / textSize.fontSize} ${font.text.family}`,
       WebkitTextSizeAdjust: '100%',
       MoxTextSizeAdjust: '100%',
@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle((props) => {
       WebkitTapHighlightColor: 'transparent',
     },
 
-    body: {
+    'body': {
       backgroundColor: color.bg,
       color: color.fg,
       colorScheme: color._dark ? 'dark' : 'light',
@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle((props) => {
       minWidth: 320,
     },
 
-    a: {
+    'a': {
       textDecoration: 'none',
     },
   }

@@ -9,7 +9,6 @@
   "scripts": {
     "build": "run-s next:build sanity:manifest:extract",
     "dev": "run-p next:dev sanity:dev",
-    "fix": "prettier --write --cache --ignore-unknown .",
     "next:build": "next build",
     "next:dev": "next dev",
     "sanity:dev": "sanity dev",
@@ -58,7 +57,6 @@
     "@types/react-dom": "^19.1.6",
     "mkdirp": "^3.0.1",
     "npm-run-all2": "^8.0.4",
-    "prettier-plugin-packagejson": "^2.5.17",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }

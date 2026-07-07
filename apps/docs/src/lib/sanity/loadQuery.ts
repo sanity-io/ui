@@ -1,5 +1,4 @@
 import 'server-only'
-
 import {loadQuery as _loadQuery, setServerClient} from '@sanity/react-loader/rsc'
 import {draftMode} from 'next/headers'
 
