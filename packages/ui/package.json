@@ -83,7 +83,7 @@
     "use-effect-event": "^2.0.3"
   },
   "devDependencies": {
-    "@sanity/pkg-utils": "^8.1.29",
+    "@sanity/pkg-utils": "^9.2.3",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
