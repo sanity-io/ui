@@ -32,6 +32,23 @@ const valueStyle: CSSProperties = {
   fontWeight: 700,
 }
 
+const labelStyle: CSSProperties = {
+  opacity: 0.7,
+}
+
+// Each headline metric renders identically — a label above a large value — so
+// the three read as equally important rather than one being the "hero".
+function Metric({label, value}: {label: string; value: number | null}) {
+  return (
+    <div style={{marginTop: 6}}>
+      <div style={labelStyle}>{label}</div>
+      <div style={{...valueStyle, color: value === null ? '#e5e5e5' : ratingColor(value)}}>
+        {value === null ? '—' : `${Math.round(value)} ms`}
+      </div>
+    </div>
+  )
+}
+
 /**
  * Live interaction-latency readout. Deliberately built with plain HTML so the
  * monitor is byte-identical on both library pages and adds no library work of
@@ -42,6 +59,7 @@ export function InpMonitor() {
   const [inp, setInp] = useState<number | null>(null)
   const [last, setLast] = useState<number | null>(null)
   const [count, setCount] = useState(0)
+  const [avg, setAvg] = useState<number | null>(null)
 
   useEffect(() => {
     // The page's official INP score (worst interaction so far).
@@ -65,7 +83,13 @@ export function InpMonitor() {
           setLast(duration)
         }
       }
+      // Average each interaction's own latency over all interactions. Summing
+      // the map values (rather than a running total) keeps it correct when an
+      // interactionId's max duration grows across separate observer batches.
+      let sum = 0
+      for (const duration of maxDurationById.values()) sum += duration
       setCount(maxDurationById.size)
+      setAvg(maxDurationById.size === 0 ? null : sum / maxDurationById.size)
     })
 
     // 16 ms is the smallest threshold the browser accepts.
@@ -75,18 +99,13 @@ export function InpMonitor() {
 
   return (
     <div style={panelStyle}>
-      <div>Last interaction</div>
-      <div style={{...valueStyle, color: last === null ? '#e5e5e5' : ratingColor(last)}}>
-        {last === null ? '— (click something)' : `${Math.round(last)} ms`}
+      <Metric label="Average INP" value={avg} />
+      <Metric label="Page INP" value={inp} />
+      <Metric label="Last interaction" value={last} />
+      <div style={{marginTop: 6}}>Interactions: {count}</div>
+      <div style={{marginTop: 6, opacity: 0.6}}>
+        {count === 0 ? 'click something · ' : ''}good ≤ 200 ms · reload to reset
       </div>
-      <div style={{marginTop: 6}}>
-        Page INP:{' '}
-        <span style={{fontWeight: 700, color: inp === null ? '#e5e5e5' : ratingColor(inp)}}>
-          {inp === null ? '—' : `${Math.round(inp)} ms`}
-        </span>
-      </div>
-      <div>Interactions: {count}</div>
-      <div style={{marginTop: 6, opacity: 0.6}}>good ≤ 200 ms · reload to reset</div>
     </div>
   )
 }
