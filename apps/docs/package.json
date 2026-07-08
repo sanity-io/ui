@@ -34,7 +34,7 @@
     "@sindresorhus/slugify": "^2.2.1",
     "@uiw/codemirror-themes": "^4.23.14",
     "@uiw/react-codemirror": "^4.23.14",
-    "groq": "^3.95.0",
+    "groq": "^3.99.0",
     "lodash-es": "^4.17.21",
     "next": "^15.5.15",
     "pako": "^2.1.0",
@@ -44,7 +44,7 @@
     "react-dom": "^19.2.5",
     "react-refractor": "^4.0.0",
     "refractor": "^5.0.0",
-    "sanity": "^3.95.0",
+    "sanity": "^3.99.0",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
