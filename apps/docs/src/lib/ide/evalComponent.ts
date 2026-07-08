@@ -1,3 +1,5 @@
+import {Babel} from './loadBabel'
+
 export interface EvalComponentSuccessResult {
   type: 'success'
   node: React.ReactNode
@@ -11,6 +13,7 @@ export interface EvalComponentErrorResult {
 export type EvalComponentResult = EvalComponentSuccessResult | EvalComponentErrorResult
 
 export function evalComponent(opts: {
+  babel: Babel
   hookCode: string
   jsxCode: string
   scope: Record<string, any>
@@ -31,7 +34,7 @@ export function evalComponent(opts: {
   ].join('\n')
 
   try {
-    const babelResult = (window as any).Babel.transform(code, {
+    const babelResult = opts.babel.transform(code, {
       presets: [
         'env',
         // Force the classic JSX runtime so the output uses `React.createElement`
@@ -43,6 +46,10 @@ export function evalComponent(opts: {
         ['react', {runtime: 'classic'}],
       ],
     })
+
+    if (babelResult.code === null) {
+      throw new Error('Babel returned no code')
+    }
 
     return scopeEval(babelResult.code, opts.scope)
   } catch (error) {

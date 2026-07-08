@@ -18,6 +18,7 @@
     "typecheck": "tsc --build"
   },
   "dependencies": {
+    "@babel/standalone": "^8.0.3",
     "@codemirror/lang-javascript": "^6.2.4",
     "@lezer/highlight": "^1.2.1",
     "@portabletext/react": "^3.2.1",
