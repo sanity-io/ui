@@ -23,14 +23,14 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.0",
-    "@types/node": "^22.20.0",
+    "@types/node": "catalog:",
     "eslint-plugin-storybook": "^10.4.6",
     "lint-staged": "^14.0.1",
     "oxfmt": "^0.57.0",
-    "oxlint": "^1.72.0",
+    "oxlint": "^1.73.0",
     "oxlint-tsgolint": "^0.24.0",
-    "rimraf": "^5.0.5",
-    "typescript": "6.0.3"
+    "rimraf": "catalog:",
+    "typescript": "catalog:"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,jsonc,md}": [

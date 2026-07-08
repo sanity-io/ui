@@ -24,13 +24,13 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.130.0",
-    "@sanity/color": "^3.0.6",
-    "@sanity/tsdown-config": "^0.11.0",
+    "@sanity/color": "catalog:",
+    "@sanity/tsdown-config": "catalog:",
     "@sanity/ui": "workspace:*",
     "segmented-property": "^4.0.0",
-    "tsdown": "^0.22.3",
-    "typescript": "6.0.3",
-    "unrun": "^0.3.1"
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "unrun": "catalog:"
   },
   "inlinedDependencies": {
     "@sanity/color": "3.0.6",
