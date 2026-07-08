@@ -97,7 +97,12 @@ function SelectAllSection() {
         <div style={scrollAreaStyle}>
           <Stack gap={2}>
             {checked.map((value, index) => (
-              <Inline key={index} gap={3}>
+              <Inline
+                // Fixed-length list that never reorders — index is a stable key here.
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                gap={3}
+              >
                 <Checkbox
                   id={`row-${index}`}
                   checked={value}
@@ -135,7 +140,7 @@ function ToneToggleSection() {
           />
         </Inline>
         <div style={scrollAreaStyle}>
-          <Grid columns={5} gap={2}>
+          <Grid gridTemplateColumns={5} gap={2}>
             {Array.from({length: TONE_CARD_COUNT}, (_, index) => (
               <Card key={index} padding={3} tone={tone}>
                 <Text size={1}>Card {index + 1}</Text>
@@ -167,7 +172,7 @@ function PanelSwapSection() {
         </Inline>
         {open && (
           <div style={scrollAreaStyle}>
-            <Grid columns={5} gap={2}>
+            <Grid gridTemplateColumns={5} gap={2}>
               {Array.from({length: PANEL_CARD_COUNT}, (_, index) => (
                 <Card key={index} padding={3}>
                   <Text size={1}>Item {index + 1}</Text>

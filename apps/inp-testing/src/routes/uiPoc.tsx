@@ -77,6 +77,8 @@ function SelectAllSection() {
           <VStack gap={2}>
             {checked.map((value, index) => (
               <Checkbox
+                // Fixed-length list that never reorders — index is a stable key here.
+                // eslint-disable-next-line react/no-array-index-key
                 key={index}
                 label={`Row ${index + 1}`}
                 checked={value}
