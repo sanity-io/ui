@@ -7,13 +7,13 @@ import React, {ReactElement, useCallback, useEffect, useMemo, useState} from 're
 import {keyframes, styled} from 'styled-components'
 
 import {isRecord} from '@/lib/common'
-import {evalComponent, EvalComponentResult, ready as readyCheck} from '@/lib/ide'
+import {Babel, evalComponent, EvalComponentResult, loadBabel} from '@/lib/ide'
 
 import {useApp} from '../../useApp'
 
 export default function ArcadeFrameRoute(): ReactElement {
   const {setColorScheme} = useApp()
-  const [evalReady, setEvalReady] = useState(false)
+  const [babel, setBabel] = useState<Babel | null>(null)
   const [hookCode, setHookCode] = useState<string | null>(null)
   const [jsxCode, setJSXCode] = useState<string | null>(null)
   const [renderError, setRenderError] = useState<Error | null>(null)
@@ -51,19 +51,20 @@ export default function ArcadeFrameRoute(): ReactElement {
   }, [setColorScheme])
 
   const evalResult = useMemo<EvalComponentResult | null>(() => {
-    if (!evalReady) return null
+    if (babel === null) return null
     if (hookCode === null) return null
     if (jsxCode === null) return null
 
     return evalComponent({
+      babel,
       hookCode,
       jsxCode,
       scope: {...icons, ...ui, ...React, React, styled, keyframes},
     })
-  }, [hookCode, jsxCode, evalReady])
+  }, [babel, hookCode, jsxCode])
 
   useEffect(() => {
-    void readyCheck().then(() => setEvalReady(true))
+    void loadBabel().then(setBabel)
   }, [])
 
   const handleCatch = useCallback((params: {error: Error; info: React.ErrorInfo}) => {
@@ -94,15 +95,6 @@ export default function ArcadeFrameRoute(): ReactElement {
 
   return (
     <>
-      {/*
-        Pin @babel/standalone to an exact version. The unversioned URL resolves
-        to the latest release, so a new major (e.g. the v7 -> v8 jump that
-        switched @babel/preset-react to the automatic runtime) can silently
-        change the transform output and break the live preview. See the matching
-        preset configuration in `src/lib/ide/evalComponent.ts`.
-      */}
-      <script async src="https://unpkg.com/@babel/standalone@8.0.2/babel.min.js" />
-
       {evalResult?.type === 'success' && !renderError && (
         <Card height="fill" key={`${hookCode};${jsxCode}`}>
           <ErrorBoundary onCatch={handleCatch}>{evalResult.node}</ErrorBoundary>
