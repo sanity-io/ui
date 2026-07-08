@@ -39,15 +39,16 @@ export function evalComponent(opts: {
         'env',
         // Force the classic JSX runtime so the output uses `React.createElement`
         // (which is provided via `scope`) instead of injecting an
-        // `import {jsx} from "react/jsx-runtime"` statement. As of
-        // @babel/standalone v8 the automatic runtime is the default, and the
-        // injected ESM `import` throws a SyntaxError when evaluated in the
-        // non-module `Function`/`eval` context used by `scopeEval`.
+        // `import {jsx} from "react/jsx-runtime"` statement. Classic is already
+        // the default in @babel/standalone v7, but as of v8 the automatic
+        // runtime is the default, and the injected ESM `import` throws a
+        // SyntaxError when evaluated in the non-module `Function`/`eval`
+        // context used by `scopeEval` — so pin it explicitly.
         ['react', {runtime: 'classic'}],
       ],
     })
 
-    if (babelResult.code === null) {
+    if (typeof babelResult.code !== 'string') {
       throw new Error('Babel returned no code')
     }
 
