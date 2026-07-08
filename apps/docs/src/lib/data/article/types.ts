@@ -39,19 +39,19 @@ export interface CodeExampleData {
   _type: 'codeExample'
 }
 
-export interface GroqLogoGridData {
+interface GroqLogoGridData {
   _type: 'content.groqLogoGrid'
 }
 
-export interface SanityLogoGridData {
+interface SanityLogoGridData {
   _type: 'content.sanityLogoGrid'
 }
 
-export interface SanityLogoGridData {
+interface SanityLogoGridData {
   _type: 'content.sanityLogoGrid'
 }
 
-export interface ColorGridData {
+interface ColorGridData {
   _type: 'content.colorGrid'
 }
 
@@ -89,7 +89,7 @@ export interface PropertyTableData {
   properties: PropertyData[] | null
 }
 
-export type ArticleContentData = SanityArrayItemValue<
+type ArticleContentData = SanityArrayItemValue<
   | SanityBlockValue
   | CodeExampleData
   | CalloutData

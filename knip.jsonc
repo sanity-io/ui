@@ -1,9 +1,5 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignoreExportsUsedInFile": {
-    "interface": true,
-    "type": true,
-  },
   "ignoreDependencies": [
     // Referenced only as a string in babel plugin arrays (packages/ui/tsdown.config.mts,
     // apps/storybook/.storybook/main.ts) and via `experimental.reactCompiler` in

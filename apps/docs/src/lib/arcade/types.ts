@@ -28,7 +28,7 @@ export interface ArcadeState {
   codeMode: ArcadeCodeMode
 }
 
-export interface ArcadeInitMsg {
+interface ArcadeInitMsg {
   type: 'init'
   canvasWidth: CanvasWidth | null
   codeMode: ArcadeCodeMode
@@ -37,37 +37,37 @@ export interface ArcadeInitMsg {
   meta: ArcadeMeta
 }
 
-export interface ArcadeSetCanvasWidthMsg {
+interface ArcadeSetCanvasWidthMsg {
   type: 'setCanvasWidth'
   value: CanvasWidth | null
 }
 
-export interface ArcadeSetCodeModeMsg {
+interface ArcadeSetCodeModeMsg {
   type: 'setCodeMode'
   value: ArcadeCodeMode
 }
 
-export interface ArcadeSetHookCodeMsg {
+interface ArcadeSetHookCodeMsg {
   type: 'setHookCode'
   value: string
 }
 
-export interface ArcadeSetHookCursorMsg {
+interface ArcadeSetHookCursorMsg {
   type: 'setHookCursor'
   value: CodeEditorSelection
 }
 
-export interface ArcadeSetJSXCodeMsg {
+interface ArcadeSetJSXCodeMsg {
   type: 'setJSXCode'
   value: string
 }
 
-export interface ArcadeSetJSXCursorMsg {
+interface ArcadeSetJSXCursorMsg {
   type: 'setJSXCursor'
   value: CodeEditorSelection
 }
 
-export interface ArcadeSetMetaCodeMsg {
+interface ArcadeSetMetaCodeMsg {
   type: 'setMeta'
   value: ArcadeMeta
 }
