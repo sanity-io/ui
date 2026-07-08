@@ -1,22 +1,37 @@
-import {Box, Card, Heading, HStack, VStack} from '@sanity-labs/ui-poc'
-import {NavLink, Outlet} from 'react-router'
+import {Outlet} from 'react-router'
 
+import {InpMonitor} from './components/InpMonitor'
+
+// The shell is plain HTML on purpose: neither library's components should
+// render on the other library's page. Nav uses full-page links (not client
+// routing) because INP is scored per page load — switching libraries should
+// start a fresh measurement session.
 function App() {
   return (
-    <Box padding={4}>
-      <VStack gap={4}>
-        <Heading>INP Testing</Heading>
+    <>
+      <header
+        style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: 16,
+          padding: '12px 16px',
+          borderBottom: '1px solid #ddd',
+          fontFamily: 'system-ui, sans-serif',
+        }}
+      >
+        <strong>INP test harness</strong>
+        <nav style={{display: 'flex', gap: 12}}>
+          <a href="/">UI POC</a>
+          <a href="/ui3">UI 3</a>
+        </nav>
+      </header>
 
-        <Card>
-          <HStack gap={3}>
-            <NavLink to="/">UI POC</NavLink>
-            <NavLink to="/ui3">UI 3</NavLink>
-          </HStack>
-        </Card>
-
+      <main style={{padding: 16}}>
         <Outlet />
-      </VStack>
-    </Box>
+      </main>
+
+      <InpMonitor />
+    </>
   )
 }
 
