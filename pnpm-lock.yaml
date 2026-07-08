@@ -223,7 +223,7 @@ importers:
         specifier: 1.0.0
         version: 1.0.0
       babel-plugin-styled-components:
-        specifier: ^2.1.4
+        specifier: ^2.3.0
         version: 2.3.0(@babel/core@7.29.7)(@sanity/styled-components@6.1.23(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       jsdom:
         specifier: ^29.1.1
