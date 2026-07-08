@@ -24,7 +24,7 @@
     "@sanity/client": "^7.6.0",
     "@sanity/code-input": "^5.1.2",
     "@sanity/color": "^3.0.6",
-    "@sanity/icons": "^3.7.4",
+    "@sanity/icons": "^3.8.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/logos": "^2.2.1",
     "@sanity/preview-url-secret": "^2.1.11",
