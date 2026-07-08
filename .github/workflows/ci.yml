@@ -19,6 +19,14 @@ jobs:
       - run: pnpm lint --format github
       - run: pnpm build
 
+  knip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - name: Run Knip
+        run: pnpm knip --reporter github-actions
+
   test:
     needs: [build]
     runs-on: ${{ matrix.os }}
