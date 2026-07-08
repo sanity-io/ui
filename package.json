@@ -7,10 +7,12 @@
   "scripts": {
     "build": "pnpm --filter @sanity/ui build && pnpm --filter figma-plugin-sanity-ui build",
     "changeset": "changeset",
+    "check:deps": "knip --dependencies",
     "clean": "pnpm --recursive clean",
     "dev": "pnpm --filter sanity-ui-storybook dev",
     "dev:docs": "pnpm --filter sanity-ui-docs dev",
     "format": "oxfmt . --no-error-on-unmatched-pattern",
+    "knip": "knip",
     "lint": "pnpm run oxlint",
     "lint:fix": "pnpm lint --fix --fix-suggestions",
     "oxlint": "oxlint --disable-nested-config",
@@ -25,17 +27,11 @@
     "@changesets/cli": "^2.31.0",
     "@types/node": "^22.20.0",
     "eslint-plugin-storybook": "^10.4.6",
-    "lint-staged": "^14.0.1",
+    "knip": "^6.25.0",
     "oxfmt": "^0.57.0",
     "oxlint": "^1.72.0",
     "oxlint-tsgolint": "^0.24.0",
-    "rimraf": "^5.0.5",
     "typescript": "6.0.3"
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx,json,jsonc,md}": [
-      "oxfmt --no-error-on-unmatched-pattern"
-    ]
   },
   "engines": {
     "node": ">=22.13"

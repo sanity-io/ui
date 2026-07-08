@@ -10,7 +10,7 @@ const atob =
     ? (str: string) => Buffer.from(str, 'base64').toString('binary')
     : window.atob
 
-export const uint8ArrayToBase64 = (uint8array: Uint8Array): string => {
+const uint8ArrayToBase64 = (uint8array: Uint8Array): string => {
   let str = ''
 
   for (let i = 0, {length} = uint8array; i < length; i++) {

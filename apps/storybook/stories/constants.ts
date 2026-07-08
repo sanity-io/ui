@@ -1,13 +1,10 @@
-import {BadgeMode, BadgeTone, ButtonMode, ButtonTone, CardTone, Placement, Radius} from '@sanity/ui'
+import {BadgeTone, ButtonMode, ButtonTone, CardTone, Placement, Radius} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
 
 const theme = buildTheme()
 
 export const AVATAR_SRC =
   'https://avatars3.githubusercontent.com/u/406933?s=400&u=af898b0a50ef2ef1248be32dfa1410ccb55f6f65&v=4'
-
-// oxlint-disable-next-line no-deprecated
-export const BADGE_MODES: BadgeMode[] = ['default', 'outline']
 
 export const BADGE_TONES: BadgeTone[] = ['default', 'primary', 'positive', 'caution', 'critical']
 

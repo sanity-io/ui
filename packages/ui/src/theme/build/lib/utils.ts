@@ -1,8 +1,8 @@
-export function lerp(x: number, y: number, a: number): number {
+function lerp(x: number, y: number, a: number): number {
   return x * (1 - a) + y * a
 }
 
-export function invlerp(x: number, y: number, a: number): number {
+function invlerp(x: number, y: number, a: number): number {
   return clamp((a - x) / (y - x))
 }
 

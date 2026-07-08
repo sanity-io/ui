@@ -45,6 +45,7 @@
     "react-refractor": "^4.0.0",
     "refractor": "^5.0.0",
     "sanity": "^3.99.0",
+    "server-only": "^0.0.1",
     "styled-components": "^6.1.19"
   },
   "devDependencies": {

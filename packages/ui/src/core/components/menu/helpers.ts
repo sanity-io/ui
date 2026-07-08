@@ -17,10 +17,7 @@ export function _getFocusableElements(elements: HTMLElement[]): HTMLElement[] {
   return elements.filter(_isFocusable)
 }
 
-/**
- * @internal
- */
-export function _getDOMPath(rootElement: HTMLElement, el: HTMLElement): number[] {
+function _getDOMPath(rootElement: HTMLElement, el: HTMLElement): number[] {
   const path: number[] = []
 
   let e = el

@@ -6,7 +6,7 @@ import {createGlobalStyle} from 'styled-components'
 
 const {initializeThemeState, pluckThemeFromContext} = DecoratorHelpers
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   body,
   .docs-story {
     background-color: ${

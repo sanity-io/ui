@@ -47,26 +47,6 @@ export function responsiveInputPaddingStyle(
   })
 }
 
-export function responsiveInputPaddingIconsStyle(
-  props: {
-    $fontSize: number[]
-    $padding: number[]
-    $space: number[]
-  } & ThemeProps,
-): CSSObject[] {
-  return responsiveInputPaddingStyle({...props, $iconLeft: true, $iconRight: true})
-}
-
-export function responsiveInputPaddingIconLeftStyle(
-  props: {
-    $fontSize: number[]
-    $padding: number[]
-    $space: number[]
-  } & ThemeProps,
-): CSSObject[] {
-  return responsiveInputPaddingStyle({...props, $iconLeft: true})
-}
-
 export function responsiveInputPaddingIconRightStyle(
   props: {
     $fontSize: number[]
