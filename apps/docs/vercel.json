@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "ignoreCommand": "echo 'The docs app only exists on the main branch — skipping build on v2' && exit 0"
+}
