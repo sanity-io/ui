@@ -18,7 +18,7 @@
     "typecheck": "tsc --build"
   },
   "dependencies": {
-    "@babel/standalone": "^8.0.3",
+    "@babel/standalone": "^7.29.7",
     "@codemirror/lang-javascript": "^6.2.4",
     "@lezer/highlight": "^1.2.1",
     "@portabletext/react": "^3.2.1",
@@ -49,6 +49,7 @@
     "styled-components": "catalog:"
   },
   "devDependencies": {
+    "@types/babel__standalone": "^7.1.9",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^24.0.7",
     "@types/pako": "^2.0.3",
