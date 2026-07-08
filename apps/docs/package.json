@@ -48,7 +48,6 @@
     "styled-components": "^6.1.19"
   },
   "devDependencies": {
-    "@swc/plugin-styled-components": "^8.0.2",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^24.0.7",
     "@types/pako": "^2.0.3",
