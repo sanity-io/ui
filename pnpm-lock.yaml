@@ -46,7 +46,7 @@ catalogs:
       specifier: ^8.1.3
       version: 8.1.3
     vitest:
-      specifier: ^4.1.9
+      specifier: ^4.1.10
       version: 4.1.10
 
 overrides:
@@ -218,8 +218,8 @@ importers:
         specifier: ^5.8.3
         version: 5.9.3
       vitest:
-        specifier: ^3.2.4
-        version: 3.2.7(@types/node@24.13.2)(jiti@2.7.0)(jsdom@23.2.0(supports-color@8.1.1))(lightningcss@1.32.0)(supports-color@8.1.1)(yaml@2.9.0)
+        specifier: ^3.2.7
+        version: 3.2.7(@types/node@24.13.2)(jiti@2.7.0)(jsdom@23.2.0(supports-color@8.1.1))(lightningcss@1.32.0)(yaml@2.9.0)
 
   apps/storybook:
     devDependencies:
@@ -263,7 +263,7 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0(vite@8.1.3(@types/node@22.20.0)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       '@vitest/browser-playwright':
-        specifier: ^4.1.9
+        specifier: ^4.1.10
         version: 4.1.10(playwright@1.61.1)(vite@8.1.3(@types/node@22.20.0)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))(vitest@4.1.10)
       babel-plugin-react-compiler:
         specifier: 'catalog:'
@@ -16163,7 +16163,7 @@ snapshots:
     dependencies:
       builtins: 1.0.3
 
-  vite-node@3.2.4(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(supports-color@8.1.1)(yaml@2.9.0):
+  vite-node@3.2.4(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3(supports-color@8.1.1)
@@ -16270,7 +16270,7 @@ snapshots:
       '@types/react': 19.2.17
       '@types/react-dom': 19.2.3(@types/react@19.2.17)
 
-  vitest@3.2.7(@types/node@24.13.2)(jiti@2.7.0)(jsdom@23.2.0(supports-color@8.1.1))(lightningcss@1.32.0)(supports-color@8.1.1)(yaml@2.9.0):
+  vitest@3.2.7(@types/node@24.13.2)(jiti@2.7.0)(jsdom@23.2.0(supports-color@8.1.1))(lightningcss@1.32.0)(yaml@2.9.0):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/expect': 3.2.7
@@ -16293,7 +16293,7 @@ snapshots:
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
       vite: 7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
-      vite-node: 3.2.4(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(supports-color@8.1.1)(yaml@2.9.0)
+      vite-node: 3.2.4(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.13.2

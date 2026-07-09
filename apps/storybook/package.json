@@ -27,7 +27,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^5.2.0",
-    "@vitest/browser-playwright": "^4.1.9",
+    "@vitest/browser-playwright": "^4.1.10",
     "babel-plugin-react-compiler": "catalog:",
     "playwright": "^1.61.1",
     "react": "catalog:",
