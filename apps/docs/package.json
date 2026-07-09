@@ -21,7 +21,7 @@
     "@babel/standalone": "^7.29.7",
     "@codemirror/lang-javascript": "^6.2.4",
     "@lezer/highlight": "^1.2.1",
-    "@portabletext/react": "^3.2.1",
+    "@portabletext/react": "^3.2.4",
     "@sanity/client": "^7.23.0",
     "@sanity/code-input": "^5.1.2",
     "@sanity/color": "catalog:",
