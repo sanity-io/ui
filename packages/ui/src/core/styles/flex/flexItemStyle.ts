@@ -16,9 +16,7 @@ export function flexItemStyle(): Array<
   return [BASE_STYLE, responsiveFlexItemStyle]
 }
 
-export function responsiveFlexItemStyle(
-  props: ResponsiveFlexItemStyleProps & ThemeProps,
-): CSSObject[] {
+function responsiveFlexItemStyle(props: ResponsiveFlexItemStyleProps & ThemeProps): CSSObject[] {
   const {media} = getTheme_v2(props.theme)
 
   if (!props.$flex) return EMPTY_ARRAY

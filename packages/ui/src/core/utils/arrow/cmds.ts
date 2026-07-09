@@ -1,11 +1,11 @@
-export interface PointCmd {
+interface PointCmd {
   type: 'point'
   x: number
   y: number
   radius?: number
 }
 
-export interface CurveCmd {
+interface CurveCmd {
   type: 'curve'
   startControl: Point
   endControl: Point

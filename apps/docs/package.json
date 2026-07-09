@@ -46,6 +46,7 @@
     "react-refractor": "catalog:",
     "refractor": "catalog:",
     "sanity": "^3.99.0",
+    "server-only": "^0.0.1",
     "styled-components": "catalog:"
   },
   "devDependencies": {

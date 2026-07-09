@@ -1,6 +1,6 @@
 import {type IconSymbol} from '@sanity/icons'
 
-export interface NavItemData {
+interface NavItemData {
   collapsed: boolean | null
   hidden: boolean | null
   isComponent: boolean | null
@@ -25,7 +25,7 @@ export interface NavData {
   title: string | null
 }
 
-export interface BannerData {
+interface BannerData {
   hidden: boolean | null
   icon: IconSymbol | null
   title: string | null

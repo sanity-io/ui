@@ -1,11 +1,11 @@
 import {Babel} from './loadBabel'
 
-export interface EvalComponentSuccessResult {
+interface EvalComponentSuccessResult {
   type: 'success'
   node: React.ReactNode
 }
 
-export interface EvalComponentErrorResult {
+interface EvalComponentErrorResult {
   type: 'error'
   error: Error
 }

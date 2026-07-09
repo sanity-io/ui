@@ -1,6 +1,6 @@
 import {defineArrayMember} from 'sanity'
 
-export const propertyField = defineArrayMember({
+const propertyField = defineArrayMember({
   type: 'object',
   name: 'property',
   title: 'Property',

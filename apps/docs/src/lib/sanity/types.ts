@@ -7,12 +7,12 @@ export interface SanityImageValue {
   hotspot: SanityImageHotspotValue | null
 }
 
-export interface SanityReferenceValue {
+interface SanityReferenceValue {
   _type: 'reference'
   _ref: string
 }
 
-export interface SanityImageCropValue {
+interface SanityImageCropValue {
   _type: 'sanity.imageCrop'
   top: number
   left: number
@@ -20,7 +20,7 @@ export interface SanityImageCropValue {
   right: number
 }
 
-export interface SanityImageHotspotValue {
+interface SanityImageHotspotValue {
   _type: 'sanity.imageHotspot'
   width: number
   x: number
@@ -28,7 +28,7 @@ export interface SanityImageHotspotValue {
   height: number
 }
 
-export interface SanitySpanValue {
+interface SanitySpanValue {
   _type: 'span'
   text: string
 }

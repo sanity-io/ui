@@ -66,14 +66,3 @@ export const POPOVER_MOTION_PROPS: {
     bounce: 0.25,
   },
 }
-
-/**
- * @internal
- * @deprecated No longer used.
- */
-export const FLOATING_STATIC_SIDES: Record<string, 'bottom' | 'left' | 'top' | 'right'> = {
-  top: 'bottom',
-  right: 'left',
-  bottom: 'top',
-  left: 'right',
-}

@@ -1,5 +1,2 @@
-export * from './Canvas'
 export * from './evalComponent'
-export * from './helpers'
 export * from './loadBabel'
-export * from './types'

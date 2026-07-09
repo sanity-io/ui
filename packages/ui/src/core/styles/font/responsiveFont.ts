@@ -65,7 +65,7 @@ export function responsiveFont(
   return [base, ...resp]
 }
 
-export function fontSize(size: ThemeFontSize): CSSObject {
+function fontSize(size: ThemeFontSize): CSSObject {
   const {ascenderHeight, descenderHeight, fontSize, iconSize, letterSpacing, lineHeight} = size
   const negHeight = ascenderHeight + descenderHeight
   const capHeight = lineHeight - negHeight

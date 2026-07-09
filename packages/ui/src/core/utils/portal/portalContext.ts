@@ -7,7 +7,7 @@ const elementKey = Symbol.for(`${key}/element`)
 
 globalScope[elementKey] = null
 
-export const defaultContextValue: PortalContextValue = {
+const defaultContextValue: PortalContextValue = {
   version: 0.0,
   boundaryElement: null,
   get element() {

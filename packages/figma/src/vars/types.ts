@@ -10,7 +10,7 @@ import {
 } from '@sanity/ui/theme'
 
 export const INPUT_KEYS = ['bg', 'border', 'fg', 'muted-bg', 'placeholder'] as const
-export type InputColorKey = (typeof INPUT_KEYS)[number]
+type InputColorKey = (typeof INPUT_KEYS)[number]
 
 export const STATE_KEYS = [
   'bg',
@@ -75,10 +75,10 @@ export const STATE_KEYS = [
   'kbd-fg',
   'kbd-border',
 ] as const
-export type StateColorKey = (typeof STATE_KEYS)[number]
+type StateColorKey = (typeof STATE_KEYS)[number]
 
 export const BASE_KEYS = [...STATE_KEYS, 'focusRing', 'shadow-outline'] as const
-export type BaseColorKey = (typeof BASE_KEYS)[number]
+type BaseColorKey = (typeof BASE_KEYS)[number]
 
 export interface FigmaSanityUIColorVariable {
   scheme: 'light' | 'dark'

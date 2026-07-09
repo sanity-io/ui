@@ -2,7 +2,7 @@ import groq from 'groq'
 
 import {API_SYMBOL_PROJECTION} from '../api'
 
-export const TARGET_PROJECTION = groq`
+const TARGET_PROJECTION = groq`
 ...,
 content[]{
   ...,

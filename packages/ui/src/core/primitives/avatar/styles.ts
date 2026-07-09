@@ -56,7 +56,7 @@ function avatarArrowStyle(): CSSObject {
   }
 }
 
-export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSObject {
+function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSObject {
   const {$color} = props
   const {avatar} = getTheme_v2(props.theme)
 
@@ -124,13 +124,13 @@ export function responsiveAvatarSizeStyle(
   })
 }
 
-export function avatarImageStyle(): CSSObject {
+function avatarImageStyle(): CSSObject {
   return {
     position: 'relative',
   }
 }
 
-export function avatarInitialsStyle(): CSSObject {
+function avatarInitialsStyle(): CSSObject {
   return {
     'width': '100%',
     'height': '100%',
