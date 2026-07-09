@@ -1,3 +1,5 @@
+import {Babel} from './loadBabel'
+
 interface EvalComponentSuccessResult {
   type: 'success'
   node: React.ReactNode
@@ -11,6 +13,7 @@ interface EvalComponentErrorResult {
 export type EvalComponentResult = EvalComponentSuccessResult | EvalComponentErrorResult
 
 export function evalComponent(opts: {
+  babel: Babel
   hookCode: string
   jsxCode: string
   scope: Record<string, any>
@@ -31,18 +34,23 @@ export function evalComponent(opts: {
   ].join('\n')
 
   try {
-    const babelResult = (window as any).Babel.transform(code, {
+    const babelResult = opts.babel.transform(code, {
       presets: [
         'env',
         // Force the classic JSX runtime so the output uses `React.createElement`
         // (which is provided via `scope`) instead of injecting an
-        // `import {jsx} from "react/jsx-runtime"` statement. As of
-        // @babel/standalone v8 the automatic runtime is the default, and the
-        // injected ESM `import` throws a SyntaxError when evaluated in the
-        // non-module `Function`/`eval` context used by `scopeEval`.
+        // `import {jsx} from "react/jsx-runtime"` statement. Classic is already
+        // the default in @babel/standalone v7, but as of v8 the automatic
+        // runtime is the default, and the injected ESM `import` throws a
+        // SyntaxError when evaluated in the non-module `Function`/`eval`
+        // context used by `scopeEval` — so pin it explicitly.
         ['react', {runtime: 'classic'}],
       ],
     })
+
+    if (typeof babelResult.code !== 'string') {
+      throw new Error('Babel returned no code')
+    }
 
     return scopeEval(babelResult.code, opts.scope)
   } catch (error) {

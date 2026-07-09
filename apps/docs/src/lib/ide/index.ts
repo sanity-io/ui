@@ -1,2 +1,2 @@
 export * from './evalComponent'
-export * from './ready'
+export * from './loadBabel'
