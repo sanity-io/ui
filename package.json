@@ -7,12 +7,11 @@
   "scripts": {
     "build": "pnpm --filter @sanity/ui build && pnpm --filter figma-plugin-sanity-ui build",
     "changeset": "changeset",
-    "check:deps": "knip --dependencies",
     "clean": "pnpm --recursive clean",
     "dev": "pnpm --filter sanity-ui-storybook dev",
     "dev:docs": "pnpm --filter sanity-ui-docs dev",
     "format": "oxfmt . --no-error-on-unmatched-pattern",
-    "knip": "knip",
+    "knip": "knip --treat-config-hints-as-errors",
     "lint": "pnpm run oxlint",
     "lint:fix": "pnpm lint --fix --fix-suggestions",
     "oxlint": "oxlint --disable-nested-config",

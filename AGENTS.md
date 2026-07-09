@@ -29,8 +29,10 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   types alike) that is only used within its own module should not be exported
   — knip reports such exports. Dependencies that are referenced but invisible
   to knip (e.g. only as strings in babel plugin arrays) are listed in
-  `ignoreDependencies` with a comment explaining why. `pnpm check:deps` runs
-  only the dependency checks.
+  `ignoreDependencies` with a comment explaining why. The script passes
+  `--treat-config-hints-as-errors`, so stale knip config (e.g. an
+  `ignoreDependencies` entry that no longer matches anything) also fails the
+  run.
 - Packages are built with [tsdown](https://tsdown.dev) via
   `@sanity/tsdown-config` (`tsdown.config.mts` in each package — the `.mts`
   extension is required because these packages are not `"type": "module"` and
