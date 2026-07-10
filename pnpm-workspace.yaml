@@ -14,7 +14,7 @@ catalog:
   '@sanity/color': ^3.0.6
   '@sanity/icons': ^3.8.0
   '@sanity/tsdown-config': ^0.11.0
-  '@types/node': ^22.20.0
+  '@types/node': ^22.20.1
   '@types/react': ^19.2.17
   '@types/react-dom': ^19.2.3
   '@types/react-is': ^19.2.0
