@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 2.16.25
+
+### Patch Changes
+
+- [#2299](https://github.com/sanity-io/ui/pull/2299) [`83326c8`](https://github.com/sanity-io/ui/commit/83326c8e6841a4ab06cac38dfe8c8515017cf27e) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^12.42.2
+
 ## 2.16.24
 
 ### Patch Changes
