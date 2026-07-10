@@ -10,8 +10,8 @@ catalogs:
       specifier: ^3.0.6
       version: 3.0.6
     '@sanity/icons':
-      specifier: ^3.8.0
-      version: 3.8.0
+      specifier: ^5.0.0
+      version: 5.0.0
     '@sanity/tsdown-config':
       specifier: ^0.12.0
       version: 0.12.1
@@ -116,7 +116,7 @@ importers:
         version: 3.0.6
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 3.8.0(react@19.2.7)
+        version: 5.0.0(react@19.2.7)
       '@sanity/image-url':
         specifier: ^1.1.0
         version: 1.2.0
@@ -125,7 +125,7 @@ importers:
         version: 2.2.2(react@19.2.7)
       '@sanity/preview-url-secret':
         specifier: ^2.1.11
-        version: 2.1.16(@sanity/client@7.23.0)(@sanity/icons@3.8.0(react@19.2.7))(sanity@3.99.0(@emotion/is-prop-valid@1.4.0)(@types/node@24.13.2)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(immer@10.2.0)(jiti@2.7.0)(lightningcss@1.32.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(styled-components@6.4.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(supports-color@8.1.1)(typescript@5.9.3)(yaml@2.9.0))
+        version: 2.1.16(@sanity/client@7.23.0)(@sanity/icons@5.0.0(react@19.2.7))(sanity@3.99.0(@emotion/is-prop-valid@1.4.0)(@types/node@24.13.2)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(immer@10.2.0)(jiti@2.7.0)(lightningcss@1.32.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(styled-components@6.4.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(supports-color@8.1.1)(typescript@5.9.3)(yaml@2.9.0))
       '@sanity/react-loader':
         specifier: ^1.11.11
         version: 1.11.22(@sanity/types@3.99.0(@types/react@19.2.17))(react@19.2.7)(typescript@5.9.3)
@@ -228,7 +228,7 @@ importers:
         version: 3.0.6
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 3.8.0(react@19.2.7)
+        version: 5.0.0(react@19.2.7)
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -345,7 +345,7 @@ importers:
         version: 3.0.6
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 3.8.0(react@19.2.7)
+        version: 5.0.0(react@19.2.7)
       csstype:
         specifier: ^3.2.3
         version: 3.2.3
@@ -3396,6 +3396,12 @@ packages:
   '@sanity/icons@3.8.0':
     resolution: {integrity: sha512-LXa8eoE6U2e46L/9Pk6VU1aOWNxEqEG1osTb2YWItPIAa8MyXkICRwdNRWwW3kr5gmf+Sh2ZmfKol/Q+oGKSqw==}
     engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: ^19.2.7
+
+  '@sanity/icons@5.0.0':
+    resolution: {integrity: sha512-fINQLovVnCANwQbQ63iO2mUVh2ZX3T4h3hiSEaIStvladI5tmrGAuT+XbUuk3jTmBwOHDGD0EL9lpsghGAS+Sg==}
+    engines: {node: '>=22.12'}
     peerDependencies:
       react: ^19.2.7
 
@@ -11228,6 +11234,10 @@ snapshots:
     dependencies:
       react: 19.2.7
 
+  '@sanity/icons@5.0.0(react@19.2.7)':
+    dependencies:
+      react: 19.2.7
+
   '@sanity/id-utils@1.0.0':
     dependencies:
       '@sanity/uuid': 3.0.3
@@ -11356,6 +11366,14 @@ snapshots:
       '@sanity/uuid': 3.0.2
     optionalDependencies:
       '@sanity/icons': 3.8.0(react@19.2.7)
+      sanity: 3.99.0(@emotion/is-prop-valid@1.4.0)(@types/node@24.13.2)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(immer@10.2.0)(jiti@2.7.0)(lightningcss@1.32.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(styled-components@6.4.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(supports-color@8.1.1)(typescript@5.9.3)(yaml@2.9.0)
+
+  '@sanity/preview-url-secret@2.1.16(@sanity/client@7.23.0)(@sanity/icons@5.0.0(react@19.2.7))(sanity@3.99.0(@emotion/is-prop-valid@1.4.0)(@types/node@24.13.2)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(immer@10.2.0)(jiti@2.7.0)(lightningcss@1.32.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(styled-components@6.4.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(supports-color@8.1.1)(typescript@5.9.3)(yaml@2.9.0))':
+    dependencies:
+      '@sanity/client': 7.23.0
+      '@sanity/uuid': 3.0.2
+    optionalDependencies:
+      '@sanity/icons': 5.0.0(react@19.2.7)
       sanity: 3.99.0(@emotion/is-prop-valid@1.4.0)(@types/node@24.13.2)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(immer@10.2.0)(jiti@2.7.0)(lightningcss@1.32.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(styled-components@6.4.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(supports-color@8.1.1)(typescript@5.9.3)(yaml@2.9.0)
 
   '@sanity/react-loader@1.11.22(@sanity/types@3.99.0(@types/react@19.2.17))(react@19.2.7)(typescript@5.9.3)':
