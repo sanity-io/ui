@@ -3,9 +3,10 @@
   "workspaces": {
     ".": {},
     "apps/blueprints/docs": {
-      // The blueprint definition and function handlers are entry points for the
-      // Sanity runtime (deployed via @sanity/runtime-cli), not imported anywhere
-      "entry": ["sanity.blueprint.ts", "functions/*/index.ts"],
+      // The function handlers are entry points for the Sanity runtime (deployed
+      // via @sanity/runtime-cli), not imported anywhere (sanity.blueprint.ts is
+      // already a default entry of knip's Sanity plugin)
+      "entry": ["functions/*/index.ts"],
       // Only used for its CLI (`sanity functions env ...`, `sanity blueprints ...`)
       "ignoreDependencies": ["sanity"],
     },

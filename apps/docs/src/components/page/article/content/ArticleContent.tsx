@@ -142,7 +142,7 @@ export function ArticleContent(props: {
 }): ReactElement {
   return (
     <Root>
-      <PortableText components={components} value={props.content as any[]} />
+      <PortableText components={components} value={props.content} />
     </Root>
   )
 }

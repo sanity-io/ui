@@ -18,10 +18,6 @@ const nextConfig = {
   experimental: {
     taint: true,
   },
-  eslint: {
-    // Linting is handled by oxlint at the repo root (`pnpm lint`)
-    ignoreDuringBuilds: true,
-  },
 }
 
 export default nextConfig

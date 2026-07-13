@@ -76,7 +76,10 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `apps/docs`, follow the vendored
   `.agents/skills/sanity-live-cache-components` skill (three-layer
   Page/Dynamic/Cached pattern with explicit `perspective`/`stega` props;
-  `'use cache'` only on the cached layer). On-demand revalidation flows from
+  `'use cache'` only on the cached layer). The app builds and devs with
+  `next --webpack` (see the `next:*` scripts): Turbopack cannot compile the
+  workspace `@sanity/ui` TypeScript source, which the dev `exports` resolve
+  to, because the package is `"type": "commonjs"` while its source is ESM. On-demand revalidation flows from
   the Live Content API through the `invalidate-sync-tags` Sanity Function
   (defined in `apps/blueprints/docs`) to `POST /ui/api/expire-tags`, which
   calls `revalidateTag('sanity:<tag>', 'max')`; the route is guarded by the
