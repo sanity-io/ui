@@ -68,11 +68,7 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
       {trigger}
 
       <Box
-        className={clsx(
-          tooltipClassName,
-          dismissed ? tooltipDismissedClassName : '',
-          className,
-        )}
+        className={clsx(tooltipClassName, dismissed ? tooltipDismissedClassName : '', className)}
         role="tooltip"
         style={{
           ...style,

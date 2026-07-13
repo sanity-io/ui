@@ -29,12 +29,7 @@ export function Text<T extends ElementType = 'span'>({
   }
 
   return (
-    <Component
-      className={clsx(textClassName, className)}
-      style={style}
-      data-ui="Text"
-      {...rest}
-    >
+    <Component className={clsx(textClassName, className)} style={style} data-ui="Text" {...rest}>
       {children}
     </Component>
   )

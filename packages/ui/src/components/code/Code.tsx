@@ -20,24 +20,14 @@ export function Code<T extends CodeTag = 'pre'>({
 
   if (!language) {
     return (
-      <Component
-        className={clsx(codeClassName, className)}
-        style={style}
-        data-ui="Code"
-        {...rest}
-      >
+      <Component className={clsx(codeClassName, className)} style={style} data-ui="Code" {...rest}>
         <code>{children}</code>
       </Component>
     )
   }
 
   return (
-    <Component
-      className={clsx(codeClassName, className)}
-      style={style}
-      data-ui="Code"
-      {...rest}
-    >
+    <Component className={clsx(codeClassName, className)} style={style} data-ui="Code" {...rest}>
       <Suspense fallback={<code>{children}</code>}>
         <LazyRefractor language={language} value={children} />
       </Suspense>

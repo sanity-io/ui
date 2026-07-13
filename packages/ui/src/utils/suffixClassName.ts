@@ -1,4 +1,4 @@
-import {VERSION} from "../version"
+import {VERSION} from '../version'
 
 export function suffixClassName(className: string) {
   return `${className}-${VERSION}`
