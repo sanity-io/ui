@@ -83,4 +83,4 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `http://localhost:3333/#token={SANITY_AUTH_TOKEN}` (Sanity consumes the
   token from the URL hash on load). The same hash-token sign-in also works for
   the studio embedded in the Next.js app at
-  `http://localhost:3000/ui/studio#token={SANITY_AUTH_TOKEN}`.
+  `http://localhost:3000/ui/studio/production#token={SANITY_AUTH_TOKEN}`.
