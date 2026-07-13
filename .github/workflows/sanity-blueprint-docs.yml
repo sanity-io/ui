@@ -20,10 +20,9 @@ permissions:
 
 env:
   SANITY_PROJECT_ID: mos42crl
-  # TODO: replace with the stack id (`ST-...`) printed by the first manual
   # `pnpm dlx @sanity/runtime-cli@latest blueprints deploy` from
   # apps/blueprints/docs (the first deploy creates the stack)
-  SANITY_BLUEPRINT_STACK_ID: ST-XXXXXXXXXX
+  SANITY_BLUEPRINT_STACK_ID: ST-6hmzgz9rrn
 
 jobs:
   blueprint-docs-plan:
