@@ -19,6 +19,7 @@ const SRC_EXPORTS_PATH = path.resolve(ROOT_PATH, 'src/exports')
 // matters: tsdown/rolldown derives declaration chunk names from the source basename, and a
 // second `index` module would collide with the root barrel's `index.d.ts` and swap them.
 const SRC_ICONS_PATH = path.resolve(ROOT_PATH, 'src/icons.ts')
+const SRC_DEPRECATIONS_PATH = path.resolve(ROOT_PATH, 'src/deprecations.ts')
 
 const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
@@ -151,6 +152,31 @@ async function writeIconsMap(files: IconMeta[]) {
   await writeFile(SRC_ICONS_PATH, code)
 }
 
+// v5 removed the deprecated per-icon barrel exports, but a bare removal turns
+// `import {RocketIcon} from '@sanity/icons'` into TS2305 ("has no exported member"), which is
+// indistinguishable from the icon having been deleted. So the root entry keeps a *declaration-only*
+// tombstone per icon: `export declare const RocketIcon: never` with a `@deprecated` tag pointing at
+// the icon's own subpath. `declare` is erased from the runtime output – the root entry still ships
+// no icon code, and bundlers/Node.js still reject the import – but in the type system the name
+// resolves, the editor strikes it through, and the tag says where the import lives now. The `never`
+// type marks the value as unusable, since it does not exist at runtime.
+async function writeDeprecations(files: IconMeta[]) {
+  const stubs = files
+    .map(
+      (f) =>
+        `/**\n * @deprecated \`${f.componentName}\` is no longer exported from the \`@sanity/icons\` root entry (removed in v5) – the icon itself still exists. Import it from its own subpath instead: \`import {${f.componentName}} from '@sanity/icons/${f.exportName}'\`\n */\nexport declare const ${f.componentName}: never`,
+    )
+    .join('\n\n')
+
+  const {code} = await format(
+    SRC_DEPRECATIONS_PATH,
+    [GENERATED_BANNER, stubs].join('\n\n'),
+    formatConfig as unknown as FormatConfig,
+  )
+
+  await writeFile(SRC_DEPRECATIONS_PATH, code)
+}
+
 async function generate() {
   await mkdirp(SRC_EXPORTS_PATH)
 
@@ -184,6 +210,7 @@ async function generate() {
 
   await Promise.all(files.map(writeIcon))
   await writeIconsMap(files)
+  await writeDeprecations(files)
 
   console.log(`generated ${files.length} icons:`, files.map((f) => f.name).join(', '))
 }

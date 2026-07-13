@@ -14,6 +14,9 @@ export interface IconProps {
 /**
  * Renders the icon for the given `symbol` from the lazy `icons` map.
  *
+ * The searchable icon catalog at {@link https://icons.sanity.dev} helps finding the right
+ * icon – each one is shown with a copyable import snippet.
+ *
  * While the icon chunk loads, a fallback svg with the exact same shell as every generated
  * icon (`data-sanity-icon`, `width`/`height` of `1em`, the shared `viewBox`, and the spread
  * props) is rendered, so the icon slot reserves its final size and responds to the same

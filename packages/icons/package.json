@@ -7,7 +7,7 @@
     "sanity",
     "ui"
   ],
-  "homepage": "https://www.sanity.io/",
+  "homepage": "https://icons.sanity.dev/",
   "bugs": {
     "url": "https://github.com/sanity-io/icons/issues"
   },
@@ -513,7 +513,7 @@
     "dev": "vite",
     "embeddings:enable": "sanity datasets embeddings enable icons --projection '{ filename, namedExport, tags, description }' --wait",
     "format": "oxfmt .",
-    "generate": "rimraf src/icons src/icons.ts src/exports && node scripts/generate.ts",
+    "generate": "rimraf src/icons src/icons.ts src/exports src/deprecations.ts && node scripts/generate.ts",
     "knip": "knip",
     "lint": "oxlint",
     "prebuild": "pnpm generate",
