@@ -121,7 +121,7 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@sanity/logos':
-        specifier: ^2.2.1
+        specifier: ^2.2.2
         version: 2.2.2(react@19.2.7)
       '@sanity/preview-url-secret':
         specifier: ^2.1.16
