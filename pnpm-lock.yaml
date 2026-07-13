@@ -124,7 +124,7 @@ importers:
         specifier: ^2.2.1
         version: 2.2.2(react@19.2.7)
       '@sanity/preview-url-secret':
-        specifier: ^2.1.11
+        specifier: ^2.1.16
         version: 2.1.16(@sanity/client@7.23.0)(@sanity/icons@3.8.0(react@19.2.7))(sanity@3.99.0(@emotion/is-prop-valid@1.4.0)(@types/node@24.13.2)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(immer@10.2.0)(jiti@2.7.0)(lightningcss@1.32.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(styled-components@6.4.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(supports-color@8.1.1)(typescript@5.9.3)(yaml@2.9.0))
       '@sanity/react-loader':
         specifier: ^1.11.11
@@ -16542,7 +16542,7 @@ snapshots:
       lightningcss: 1.32.0
       picomatch: 4.0.5
       postcss: 8.5.16
-      rolldown: 1.1.4
+      rolldown: 1.1.5
       tinyglobby: 0.2.17
     optionalDependencies:
       '@types/node': 22.20.1
@@ -16556,7 +16556,7 @@ snapshots:
       lightningcss: 1.32.0
       picomatch: 4.0.5
       postcss: 8.5.16
-      rolldown: 1.1.4
+      rolldown: 1.1.5
       tinyglobby: 0.2.17
     optionalDependencies:
       '@types/node': 24.13.2
