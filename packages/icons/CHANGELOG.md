@@ -1,5 +1,11 @@
 # @sanity/icons
 
+## 5.1.0
+
+### Minor Changes
+
+- [#223](https://github.com/sanity-io/icons/pull/223) [`e5657d5`](https://github.com/sanity-io/icons/commit/e5657d56fff354900cdf0998d0a2ee31bdae7643) Thanks [@stipsan](https://github.com/stipsan)! - Importing an icon from the root entry now resolves in the type system to a `@deprecated` `never`-typed tombstone instead of failing with a bare "has no exported member" error. Since v5 removed the per-icon barrel exports, `import {RocketIcon} from '@sanity/icons'` was indistinguishable from the icon having been deleted; the tombstone's deprecation message now points at the subpath the icon lives on, e.g. `import {RocketIcon} from '@sanity/icons/Rocket'`. The tombstones are declaration-only (`export declare const RocketIcon: never`), so nothing changes at runtime: the root entry still ships no icon code and bundlers/Node.js still reject root icon imports.
+
 ## 5.0.0
 
 ### Major Changes
