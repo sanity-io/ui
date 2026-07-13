@@ -1,40 +1,26 @@
+import {sanity} from 'next-sanity/live/cache-life'
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: '/ui',
+  cacheComponents: true,
+  // Sanity Live handles on-demand revalidation (see `api/expire-tags` and the
+  // `apps/blueprints/docs` invalidate-sync-tags function), so the default
+  // time-based revalidation is stretched to 1 year.
+  cacheLife: {default: sanity},
   compiler: {
     styledComponents: true,
   },
   // The workspace @sanity/ui resolves to its TypeScript source in the
   // monorepo (dev `exports`), so Next.js must transpile it.
   transpilePackages: ['@sanity/ui'],
+  reactCompiler: true,
   experimental: {
-    reactCompiler: true,
     taint: true,
   },
   eslint: {
     // Linting is handled by oxlint at the repo root (`pnpm lint`)
     ignoreDuringBuilds: true,
-  },
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Accept-CH',
-            value: 'Sec-CH-Prefers-Color-Scheme, Sec-CH-Prefers-Reduced-Motion',
-          },
-          {
-            key: 'Vary',
-            value: 'Sec-CH-Prefers-Color-Scheme',
-          },
-          {
-            key: 'Critical-CH',
-            value: 'Sec-CH-Prefers-Color-Scheme',
-          },
-        ],
-      },
-    ]
   },
 }
 

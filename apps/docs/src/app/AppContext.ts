@@ -1,7 +1,6 @@
 'use client'
 
 import {ImageUrlBuilder} from '@sanity/image-url/lib/types/builder'
-import {WrappedValue} from '@sanity/react-loader/jsx'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {createContext} from 'react'
 
@@ -17,8 +16,9 @@ export interface AppContextValue {
   }
   imageUrlBuilder: ImageUrlBuilder
   nav: NavNode | null
+  projectId: string | undefined
   setColorScheme: (scheme: ThemeColorSchemeKey | 'system') => void
-  settings: WrappedValue<SettingsData> | null
+  settings: SettingsData | null
 }
 
 export const AppContext = createContext<AppContextValue | null>(null)

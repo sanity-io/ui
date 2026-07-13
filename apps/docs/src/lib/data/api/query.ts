@@ -1,4 +1,4 @@
-import groq from 'groq'
+import {groq} from 'next-sanity'
 
 const API_CLASS_PROJECTION = groq`
 _id,

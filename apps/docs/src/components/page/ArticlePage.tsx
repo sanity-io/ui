@@ -1,7 +1,6 @@
 'use client'
 
 import {ChevronRightIcon, CloseIcon, MenuIcon} from '@sanity/icons'
-import {sanity, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Breadcrumbs, Button, Card, Flex, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
 import Link from 'next/link'
@@ -54,7 +53,7 @@ const BreadcrumbsNavCard = styled(Card)<{$menuOpen: boolean}>((props) => {
 })
 
 export function ArticlePage(props: {
-  article?: WrappedValue<ArticleData>
+  article?: ArticleData
   nav?: NavNode
   path: string[]
 }): ReactElement {
@@ -143,10 +142,10 @@ function NavBreadcrumbs(props: {nav: NavNode; path: string[]}) {
         <Text key={segment} size={1} weight="medium">
           {index === 0 ? (
             <Link href={`/${crumbNode.segment}`} style={{color: 'inherit'}}>
-              <sanity.span>{crumbNode.title}</sanity.span>
+              {crumbNode.title}
             </Link>
           ) : (
-            <sanity.span>{crumbNode.title}</sanity.span>
+            crumbNode.title
           )}
         </Text>
       ))}

@@ -1,4 +1,4 @@
-import groq from 'groq'
+import {groq} from 'next-sanity'
 
 const MAIN_NAV_QUERY = groq`
 *[_type == "nav" && id in ["main"]]{

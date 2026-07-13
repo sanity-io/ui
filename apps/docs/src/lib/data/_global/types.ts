@@ -1,6 +1,6 @@
 import {type IconSymbol} from '@sanity/icons'
 
-interface NavItemData {
+export interface NavItemData {
   collapsed: boolean | null
   hidden: boolean | null
   isComponent: boolean | null

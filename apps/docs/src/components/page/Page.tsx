@@ -1,6 +1,5 @@
 'use client'
 
-import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Card, Text} from '@sanity/ui'
 
 import {useApp} from '@/app/useApp'
@@ -10,7 +9,7 @@ import {TargetData} from '@/lib/data'
 import {Layout} from '../Layout'
 
 export interface PageProps {
-  data?: WrappedValue<TargetData> | null
+  data?: TargetData | null
   error?: Error
   path: string[]
 }

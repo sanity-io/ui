@@ -2,6 +2,13 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "workspaces": {
     ".": {},
+    "apps/blueprints/docs": {
+      // The blueprint definition and function handlers are entry points for the
+      // Sanity runtime (deployed via @sanity/runtime-cli), not imported anywhere
+      "entry": ["sanity.blueprint.ts", "functions/*/index.ts"],
+      // Only used for its CLI (`sanity functions env ...`, `sanity blueprints ...`)
+      "ignoreDependencies": ["sanity"],
+    },
     "packages/ui": {
       "ignoreDependencies": [
         // babel-plugin-react-compiler (target '18') injects imports of this runtime

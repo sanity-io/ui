@@ -1,10 +1,10 @@
-import {unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
+import {stegaClean} from 'next-sanity'
 import React from 'react'
 
 import {NpmPackageBadgeData} from '@/lib/data'
 
-export function NpmPackageBadge(props: {data: WrappedValue<NpmPackageBadgeData>}) {
-  const {name} = unwrapData(props.data)
+export function NpmPackageBadge(props: {data: NpmPackageBadgeData}) {
+  const {name} = stegaClean(props.data)
   const href = `https://www.npmjs.com/package/${name}`
   const src = `https://img.shields.io/npm/v/${name}.svg?style=flat-square`
 

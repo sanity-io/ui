@@ -1,5 +1,5 @@
-import {unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Card} from '@sanity/ui'
+import {stegaClean} from 'next-sanity'
 import React from 'react'
 import {styled} from 'styled-components'
 
@@ -11,8 +11,8 @@ const IFrame = styled.iframe`
   display: block;
 `
 
-export function FigmaEmbed(props: {data: WrappedValue<FigmaEmbedData>}) {
-  const {url} = unwrapData(props.data)
+export function FigmaEmbed(props: {data: FigmaEmbedData}) {
+  const {url} = stegaClean(props.data)
 
   if (!url) return null
 

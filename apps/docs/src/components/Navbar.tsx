@@ -1,6 +1,5 @@
 import {gray, white} from '@sanity/color'
 import {SanityMonogram} from '@sanity/logos'
-import {sanity} from '@sanity/react-loader/jsx'
 import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {ReactElement, useMemo} from 'react'
@@ -71,7 +70,7 @@ export function Navbar(props: {path: string[]}): ReactElement {
                   radius={2}
                   selected={node.segment === path[0]}
                   style={{opacity: node.hidden ? 0.25 : undefined}}
-                  text={<sanity.span>{node.title}</sanity.span>}
+                  text={node.title}
                 />
               )
             })}

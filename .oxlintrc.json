@@ -96,6 +96,14 @@
       }
     },
     {
+      // apps/blueprints packages contain server-side Sanity Functions, where
+      // structured console logging (including `console.info`) is the norm
+      "files": ["apps/blueprints/**"],
+      "rules": {
+        "eslint/no-console": ["error", {"allow": ["info", "warn", "error"]}]
+      }
+    },
+    {
       // apps/docs is a Next.js app; enable the Next.js rules on top of the
       // base plugins (override plugins extend the base `plugins` set).
       "files": ["apps/docs/**"],

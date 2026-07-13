@@ -1,22 +1,26 @@
-import {WrappedValue} from '@sanity/react-loader/jsx'
+import {stegaClean} from 'next-sanity'
 
-import {NavData} from '../data'
+import {NavItemData} from '../data'
 import {NavNode} from './types'
 
-export function parseNav(item: WrappedValue<NavData>, basePath: string[]): NavNode {
+export function parseNav(item: NavItemData, basePath: string[]): NavNode {
+  // Segments and target ids drive routing and lookups, so they must be
+  // cleaned of stega-encoded metadata; titles stay encoded for click-to-edit
+  const segment = stegaClean(item.segment) || undefined
+
   const children = item.items
-    ? item.items.map((i: any) => parseNav(i, basePath.concat(item.segment?.value || '')))
+    ? item.items.map((i) => parseNav(i, basePath.concat(segment || '')))
     : []
 
   return {
-    collapsed: item.collapsed?.value || false,
-    hidden: item.hidden?.value || false,
-    href: basePath.concat(item.segment?.value || []).join('/'),
-    isComponent: item.isComponent?.value === true,
-    isHook: item.isHook?.value === true,
+    collapsed: item.collapsed || false,
+    hidden: item.hidden || false,
+    href: basePath.concat(segment ?? []).join('/'),
+    isComponent: item.isComponent === true,
+    isHook: item.isHook === true,
     menuTitle: item.menuTitle || undefined,
-    segment: item.segment?.value || undefined,
-    targetId: item.targetId?.value || undefined,
+    segment,
+    targetId: stegaClean(item.targetId) || undefined,
     title: item.title || undefined,
 
     children: children.length ? children : undefined,

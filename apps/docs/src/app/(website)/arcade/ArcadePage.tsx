@@ -17,14 +17,7 @@ const emptySubscribe = () => () => {}
 const getIsMounted = () => true
 const getServerIsMounted = () => false
 
-export function ArcadePage(props: {
-  searchParams: {
-    title?: string
-    description?: string
-  }
-}): ReactNode {
-  const {searchParams: _searchParams} = props
-
+export function ArcadePage(): ReactNode {
   // `useDeferredValue` with the server snapshot as its initial value keeps
   // hydration non-blocking: the arcade mounts in a deferred re-render instead
   // of forcing a synchronous one

@@ -1,13 +1,9 @@
-import {wrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Metadata} from 'next'
-import {draftMode, headers} from 'next/headers'
+import {Inter} from 'next/font/google'
 import {PropsWithChildren} from 'react'
 
-import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
-import {loadQuery} from '@/lib/sanity/loadQuery'
-
+import {AppProviders} from './AppProviders'
 import {DEFAULT_META_DESCRIPTION, DEFAULT_META_OG_IMAGE} from './constants'
-import {RootLayout} from './RootLayout'
 
 export const metadata: Metadata = {
   title: 'Sanity UI',
@@ -30,21 +26,25 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayoutLoader(props: PropsWithChildren) {
-  const {data: rawData, sourceMap} = await loadQuery<GlobalData>(GLOBAL_QUERY)
-  const data: WrappedValue<GlobalData> = wrapData({baseUrl: '/studio'}, rawData, sourceMap)
-  const prefersDarkServerSnapshot = (await headers()).get('sec-ch-prefers-color-scheme') === 'dark'
+const inter = Inter({subsets: ['latin']})
 
+export default function RootLayout(props: PropsWithChildren) {
   return (
-    <RootLayout
-      {...props}
-      data={data}
-      dataset={process.env.SANITY_DATASET!}
-      draftMode={(await draftMode()).isEnabled}
-      hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
-      projectId={process.env.SANITY_PROJECT_ID!}
-      studioOrigin={process.env.SANITY_STUDIO_ORIGIN}
-      prefersDarkServerSnapshot={prefersDarkServerSnapshot}
-    />
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+      </head>
+      <body className={inter.className}>
+        <AppProviders
+          dataset={process.env.SANITY_DATASET!}
+          hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
+          projectId={process.env.SANITY_PROJECT_ID!}
+        >
+          {props.children}
+        </AppProviders>
+      </body>
+    </html>
   )
 }

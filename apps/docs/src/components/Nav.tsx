@@ -1,6 +1,5 @@
 'use client'
 
-import {sanity} from '@sanity/react-loader/jsx'
 import {Tree, TreeItem} from '@sanity/ui'
 import {useRouter} from 'next/navigation'
 import {MouseEvent, ReactElement, useCallback} from 'react'
@@ -57,19 +56,7 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
       onClick={handleClick}
       selected={href ? href === path : false}
       style={{opacity: node.hidden ? 0.25 : undefined}}
-      text={
-        title ? (
-          node.isHook ? (
-            <>
-              <sanity.span>{title}</sanity.span>()
-            </>
-          ) : (
-            <sanity.span>{title}</sanity.span>
-          )
-        ) : (
-          <em>Untitled</em>
-        )
-      }
+      text={title ? node.isHook ? <>{title}()</> : title : <em>Untitled</em>}
     >
       {node.children?.map((child) => (
         <NavMenuItem key={child.href} level={level + 1} node={child} path={path} />

@@ -4,9 +4,10 @@
 
 This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
 the published package lives in `packages/ui`, the Figma plugin in
-`packages/figma`, the Storybook app in `apps/storybook`, and the
+`packages/figma`, the Storybook app in `apps/storybook`, the
 sanity.io/ui docs site (a Next.js app with an embedded Sanity Studio) in
-`apps/docs` (`pnpm-workspace.yaml`). The root `package.json` is a private
+`apps/docs`, and a Sanity Blueprint (serverless functions for the docs site)
+in `apps/blueprints/docs` (`pnpm-workspace.yaml`). The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
 (`packageManager` pin in `package.json`); developing in this repo requires Node
 `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
@@ -67,10 +68,25 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   formatted by the root oxfmt config (`pnpm format`) like the rest of the
   repo. It depends on the workspace `@sanity/ui` (`workspace:*`), which
   resolves to the TypeScript source through the dev `exports`, so Next.js
-  transpiles it via `transpilePackages` in `apps/docs/next.config.mjs` (the
-  embedded Sanity Studio still bundles its own `@sanity/ui` v2 via the
-  `sanity` package). It is deployed via Vercel, not released through
-  Changesets.
+  transpiles it via `transpilePackages` in `apps/docs/next.config.mjs`. It is
+  deployed via Vercel, not released through Changesets.
+- `apps/docs` runs `next@preview` with `cacheComponents: true` and fetches
+  content with `next-sanity`'s `defineLive`/`sanityFetch` (Sanity Live) plus
+  stega-based visual editing. When touching data fetching or draft mode in
+  `apps/docs`, follow the vendored
+  `.agents/skills/sanity-live-cache-components` skill (three-layer
+  Page/Dynamic/Cached pattern with explicit `perspective`/`stega` props;
+  `'use cache'` only on the cached layer). On-demand revalidation flows from
+  the Live Content API through the `invalidate-sync-tags` Sanity Function
+  (defined in `apps/blueprints/docs`) to `POST /ui/api/expire-tags`, which
+  calls `revalidateTag('sanity:<tag>', 'max')`; the route is guarded by the
+  `EXPIRE_TAGS_SECRET` env var.
+- `apps/blueprints/docs` is deployed by
+  `.github/workflows/sanity-blueprint-docs.yml` via `@sanity/runtime-cli`
+  (`blueprints doctor`/`plan` on PRs, `blueprints deploy` on pushes to
+  `main`). It needs the `SANITY_UI_DOCS_AUTH_TOKEN` repo secret and the
+  stack id in the workflow's `SANITY_BLUEPRINT_STACK_ID` env (created by the
+  first manual deploy; see `apps/blueprints/docs/README.md`).
 - `pnpm dev:docs` runs the docs app: Next.js on http://localhost:3000 (the
   site is served under the `/ui` base path, so open http://localhost:3000/ui)
   and the Sanity Studio dev server on http://localhost:3333. The Next.js app

@@ -1,12 +1,13 @@
-import {unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box} from '@sanity/ui'
+import {stegaClean} from 'next-sanity'
 
 import {CodeExampleData} from '@/lib/data'
 
 import {CodeExample} from './CodeExample'
 
-export function CodeExampleBlock(props: {data: WrappedValue<CodeExampleData>}) {
-  const data = unwrapData(props.data)
+export function CodeExampleBlock(props: {data: CodeExampleData}) {
+  // Code must render (and copy) without stega metadata
+  const data = stegaClean(props.data)
 
   if (!data.code?.code) {
     return null
