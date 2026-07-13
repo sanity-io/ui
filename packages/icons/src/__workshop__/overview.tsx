@@ -5,6 +5,8 @@ import {CopyIcon} from '@sanity/icons/Copy'
 import {ErrorOutlineIcon} from '@sanity/icons/ErrorOutline'
 import {SearchIcon} from '@sanity/icons/Search'
 import {SpinnerIcon} from '@sanity/icons/Spinner'
+import {ThLargeIcon} from '@sanity/icons/ThLarge'
+import {ThListIcon} from '@sanity/icons/ThList'
 import {
   Box,
   Button,
@@ -24,6 +26,8 @@ import {registerLanguage} from 'react-refractor'
 import tsx from 'refractor/typescript'
 import {keyframes, styled} from 'styled-components'
 
+import {GridView} from './grid-view'
+import {getImportCode} from './icon-code'
 import {useIconSearch} from './use-icon-search'
 
 registerLanguage(tsx)
@@ -45,14 +49,34 @@ const COPY_FEEDBACK_DURATION = 1500
 
 type CopyState = 'idle' | 'copied' | 'error'
 
-function ucfirst(str: string) {
-  return str.slice(0, 1).toUpperCase() + str.slice(1)
-}
+type ViewMode = 'list' | 'grid'
 
-function toPascalCase(str: string) {
-  const p = str.split('-')
-
-  return p.map(ucfirst).join('')
+function ViewToggle({view, onChange}: {view: ViewMode; onChange: (view: ViewMode) => void}) {
+  return (
+    <Card border overflow="hidden" radius={2}>
+      <Flex>
+        <Button
+          aria-label="List view"
+          icon={ThListIcon}
+          mode="bleed"
+          onClick={() => onChange('list')}
+          padding={3}
+          radius={0}
+          selected={view === 'list'}
+        />
+        <Card borderLeft />
+        <Button
+          aria-label="Grid view"
+          icon={ThLargeIcon}
+          mode="bleed"
+          onClick={() => onChange('grid')}
+          padding={3}
+          radius={0}
+          selected={view === 'grid'}
+        />
+      </Flex>
+    </Card>
+  )
 }
 
 function CopyCodeButton({code}: {code: string}) {
@@ -118,6 +142,10 @@ export default function OverviewStory() {
     const searchParams = new URLSearchParams(window.location.search)
     return searchParams.get('query') ?? ''
   })
+  const [view, setView] = useState<ViewMode>(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    return searchParams.get('view') === 'grid' ? 'grid' : 'list'
+  })
   const {results: iconKeys, loading} = useIconSearch(query)
 
   useEffect(() => {
@@ -125,43 +153,49 @@ export default function OverviewStory() {
       const id = requestIdleCallback(() => {
         const searchParams = new URLSearchParams(window.location.search)
         searchParams.set('query', query)
+        searchParams.set('view', view)
         window.history.replaceState(null, '', `?${searchParams}`)
       })
       return () => cancelIdleCallback(id)
     }
     return undefined
-  }, [query])
+  }, [query, view])
 
   return (
     <Card padding={[4, 5, 6]}>
       <Container width={1}>
-        <Box marginBottom={4}>
-          <TextInput
-            icon={loading ? <SpinningIcon /> : SearchIcon}
-            onChange={(event) => startTransition(() => setQuery(event.currentTarget.value))}
-            placeholder="Fuzzy search icons by name or meaning, e.g. “oh no” or “delete”…"
-            radius={2}
-            defaultValue={query}
-          />
-        </Box>
+        <Flex gap={2} marginBottom={4}>
+          <Box flex={1}>
+            <TextInput
+              icon={loading ? <SpinningIcon /> : SearchIcon}
+              onChange={(event) => startTransition(() => setQuery(event.currentTarget.value))}
+              placeholder="Fuzzy search icons by name or meaning, e.g. “oh no” or “delete”…"
+              radius={2}
+              defaultValue={query}
+            />
+          </Box>
+          <ViewToggle onChange={setView} view={view} />
+        </Flex>
 
         {iconKeys.length === 0 && !loading && <Text>No matches</Text>}
 
-        {iconKeys.length > 0 && (
-          <Stack gap={3}>
-            {iconKeys.map((key) => (
-              <CodeSnippet key={key} icon={key} />
-            ))}
-          </Stack>
-        )}
+        {iconKeys.length > 0 &&
+          (view === 'grid' ? (
+            <GridView iconKeys={iconKeys} />
+          ) : (
+            <Stack gap={3}>
+              {iconKeys.map((key) => (
+                <CodeSnippet key={key} icon={key} />
+              ))}
+            </Stack>
+          ))}
       </Container>
     </Card>
   )
 }
 
 function CodeSnippet({icon}: {icon: string}) {
-  const pascalCase = toPascalCase(icon)
-  const code = `import {${pascalCase}Icon} from '@sanity/icons/${pascalCase}'`
+  const code = getImportCode(icon)
 
   return (
     <Card border overflow="hidden" radius={2}>
