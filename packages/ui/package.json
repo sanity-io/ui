@@ -72,7 +72,7 @@
     "watch": "pkg watch --strict"
   },
   "dependencies": {
-    "@floating-ui/react-dom": "^2.1.8",
+    "@floating-ui/react-dom": "^2.1.9",
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/color": "^3.0.6",
     "@sanity/icons": "^3.8.0",
