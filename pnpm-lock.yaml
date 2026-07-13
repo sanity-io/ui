@@ -13,8 +13,8 @@ catalogs:
       specifier: ^3.8.0
       version: 3.8.0
     '@sanity/tsdown-config':
-      specifier: ^0.12.0
-      version: 0.12.1
+      specifier: ^0.13.0
+      version: 0.13.0
     '@types/node':
       specifier: ^22.20.1
       version: 22.20.1
@@ -315,7 +315,7 @@ importers:
         version: 1.130.0
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.12.1(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.4(oxc-resolver@11.23.0)(publint@0.3.21)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+        version: 0.13.0(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.4(oxc-resolver@11.23.0)(publint@0.3.21)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       '@sanity/ui':
         specifier: workspace:*
         version: link:../ui
@@ -367,7 +367,7 @@ importers:
         version: 0.2.3(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.1.4)(vite@8.1.4(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.12.1(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.4(oxc-resolver@11.23.0)(publint@0.3.21)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.4(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
+        version: 0.13.0(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.4(oxc-resolver@11.23.0)(publint@0.3.21)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.4(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.1
@@ -3506,13 +3506,13 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  '@sanity/tsdown-config@0.12.1':
-    resolution: {integrity: sha512-xqo5+AMEvLuPpgo8RAoTUukwMqTJNQv0sRum2/yNosKLcNmKkzd+1VZoXb224ub1FzboiiFDL0SXjP21THESQQ==}
+  '@sanity/tsdown-config@0.13.0':
+    resolution: {integrity: sha512-YLXKNqO/gQEAwqM8INHu2peilpSwzz+qH1h8GakM/KVFUaO3oLokeZsZsuDzr49izRdhax8kWxe2+PDHayiIhg==}
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       babel-plugin-react-compiler: '*'
-      tsdown: 0.22.3
-      typescript: 5.8.x || 5.9.x || 6.0.x
+      tsdown: 0.22.4
+      typescript: 6.x || 7.x
     peerDependenciesMeta:
       babel-plugin-react-compiler:
         optional: true
@@ -11456,7 +11456,7 @@ snapshots:
       '@actions/github': 9.1.1
       yaml: 2.9.0
 
-  '@sanity/tsdown-config@0.12.1(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.4(oxc-resolver@11.23.0)(publint@0.3.21)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.4(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))':
+  '@sanity/tsdown-config@0.13.0(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.4(oxc-resolver@11.23.0)(publint@0.3.21)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.4(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
       '@babel/core': 7.29.7
       '@rolldown/plugin-babel': 0.2.3(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.1.4)(vite@8.1.4(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
@@ -11479,7 +11479,7 @@ snapshots:
       - supports-color
       - vite
 
-  '@sanity/tsdown-config@0.12.1(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.4(oxc-resolver@11.23.0)(publint@0.3.21)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))':
+  '@sanity/tsdown-config@0.13.0(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.1.4)(rollup@4.62.2)(tsdown@0.22.4(oxc-resolver@11.23.0)(publint@0.3.21)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
       '@babel/core': 7.29.7
       '@rolldown/plugin-babel': 0.2.3(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0))
