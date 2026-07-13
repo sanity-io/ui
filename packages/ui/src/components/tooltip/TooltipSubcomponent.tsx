@@ -1,41 +1,45 @@
-import classNames from 'classnames'
-import {type ComponentPropsWithRef, type ElementType, type FocusEvent, type MouseEvent} from 'react'
+import clsx from 'clsx'
+import {Activity, type ComponentPropsWithRef, type ElementType, type FocusEvent, type MouseEvent} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {Box} from '../box/Box'
 import {
-  type TooltipSubcomponentContentProps,
+  type TooltipContentProps,
   type TooltipSubcomponentRootProps,
-  type TooltipSubcomponentTriggerProps,
-  tooltipSubcomponentContentProps,
+  type TooltipTriggerProps,
+  tooltipContentProps,
   tooltipSubcomponentRootProps,
-  tooltipSubcomponentTriggerProps,
+  tooltipTriggerProps,
 } from './tooltip.props'
 import {TooltipContext, useTooltip, useTooltipContext} from './useTooltip'
+import { suffixClassName } from '../../utils/suffixClassName'
 
-function TooltipSubcomponentRoot(props: TooltipSubcomponentRootProps) {
+const tooltiptriggerClassName = suffixClassName('sui-TooltipTrigger')
+const tooltipContentClassName = suffixClassName('sui-TooltipContent')
+
+function TooltipRoot(props: TooltipSubcomponentRootProps) {
   const {children, disabled, id} = getProps(props, tooltipSubcomponentRootProps)
   const value = useTooltip({disabled, id})
 
   return <TooltipContext.Provider value={value}>{children}</TooltipContext.Provider>
 }
 
-export function TooltipSubcomponentTrigger<T extends ElementType = 'button'>(
-  props: TooltipSubcomponentTriggerProps<T> &
-    Omit<ComponentPropsWithRef<T>, keyof TooltipSubcomponentTriggerProps<T>>,
+export function TooltipTrigger<T extends ElementType = 'button'>(
+  props: TooltipTriggerProps<T> &
+    Omit<ComponentPropsWithRef<T>, keyof TooltipTriggerProps<T>>,
 ) {
   const {id, disabled, setDismissed} = useTooltipContext()
-  const {as, children, className, style, onMouseEnter, onFocus, onClick, ...rest} = getProps(
+  const {as, children, className, style, onMouseLeave, onBlur, onClick, ...rest} = getProps(
     props,
-    tooltipSubcomponentTriggerProps,
+    tooltipTriggerProps,
   )
   const Component = as || 'button'
 
   return (
     <Component
       aria-describedby={disabled ? undefined : id}
-      data-ui="TooltipSubcomponentTrigger"
-      className={classNames('sui-TooltipSubcomponentTrigger', className)}
+      data-ui="TooltipTrigger"
+      className={clsx(tooltiptriggerClassName, className)}
       style={
         disabled
           ? style
@@ -44,13 +48,13 @@ export function TooltipSubcomponentTrigger<T extends ElementType = 'button'>(
               anchorName: `--tooltip-anchor-${id}`,
             }
       }
-      onMouseEnter={(e: MouseEvent<Element>) => {
+      onMouseLeave={(e: MouseEvent<Element>) => {
         setDismissed(false)
-        onMouseEnter?.(e)
+        onMouseLeave?.(e)
       }}
-      onFocus={(e: FocusEvent<Element>) => {
+      onBlur={(e: FocusEvent<Element>) => {
         setDismissed(false)
-        onFocus?.(e)
+        onBlur?.(e)
       }}
       onClick={(e: MouseEvent<Element>) => {
         setDismissed(true)
@@ -63,39 +67,41 @@ export function TooltipSubcomponentTrigger<T extends ElementType = 'button'>(
   )
 }
 
-export function TooltipSubcomponentContent({placement = 'bottom', ...props}: TooltipSubcomponentContentProps) {
+export function TooltipContent({placement = 'bottom', ...props}: TooltipContentProps) {
   const {id, dismissed, disabled} = useTooltipContext()
-  const {className, style, text, ...rest} = getProps({placement, ...props}, tooltipSubcomponentContentProps)
+  const {className, style, text, ...rest} = getProps({placement, ...props}, tooltipContentProps)
 
   if (disabled) {
     return null
   }
 
   return (
-    <Box
-      className={classNames('sui-Tooltip', dismissed ? 'sui-Tooltip-Dismissed' : '', className)}
-      role="tooltip"
-      style={{
-        ...style,
-        positionAnchor: `--tooltip-anchor-${id}`,
-      }}
-      data-ui="Tooltip"
-      id={id}
-      paddingX={2}
-      paddingY={1}
-      radius={2}
-      position="fixed"
-      zIndex={9999}
-      shadow={2}
-      {...rest}
-    >
-      {text}
-    </Box>
+    <Activity mode={dismissed ? 'hidden' : 'visible'}>
+      <Box
+        className={clsx(tooltipContentClassName, dismissed ? 'sui-tooltip-dismissed' : '', className)}
+        role="tooltip"
+        style={{
+          ...style,
+          positionAnchor: `--tooltip-anchor-${id}`,
+        }}
+        data-ui="TooltipContent"
+        id={id}
+        paddingX={2}
+        paddingY={1}
+        radius={2}
+        position="fixed"
+        zIndex={9999}
+        shadow={2}
+        {...rest}
+      >
+        {text}
+      </Box>
+    </Activity>
   )
 }
 
 /** @public */
-export const TooltipSubcomponent = Object.assign(TooltipSubcomponentRoot, {
-  Trigger: TooltipSubcomponentTrigger,
-  Content: TooltipSubcomponentContent,
+export const TooltipSubcomponent = Object.assign(TooltipRoot, {
+  Trigger: TooltipTrigger,
+  Content: TooltipContent,
 })

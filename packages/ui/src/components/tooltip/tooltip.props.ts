@@ -20,19 +20,6 @@ export const tooltipProps: Record<string, PropDef> = {
 }
 
 
-export interface TooltipSubcomponentTriggerProps<T extends React.ElementType> {
-  /** Element to render */
-  as?: T
-}
-
-export const tooltipSubcomponentTriggerProps: Record<string, PropDef> = {
-  as: {
-    type: 'string',
-  },
-}
-
-
-
 export interface TooltipSubcomponentRootProps {
   /** Disabled state */
   disabled?: boolean
@@ -50,12 +37,23 @@ export const tooltipSubcomponentRootProps: Record<string, PropDef> = {
   },
 }
 
-export interface TooltipSubcomponentContentProps extends React.ComponentProps<'div'>, PlacementProps {
+export interface TooltipTriggerProps<T extends React.ElementType> {
+  /** Element to render */
+  as?: T
+}
+
+export const tooltipTriggerProps: Record<string, PropDef> = {
+  as: {
+    type: 'string',
+  },
+}
+
+export interface TooltipContentProps extends React.ComponentProps<'div'>, PlacementProps {
   /** Tooltip text */
   text?: React.ReactNode
 }
 
-export const tooltipSubcomponentContentProps: Record<string, PropDef> = {
+export const tooltipContentProps: Record<string, PropDef> = {
   text: {
     type: 'string',
   },

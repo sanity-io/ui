@@ -5,6 +5,7 @@ import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
 import {Tooltip} from '../../../../packages/ui/src/components/tooltip/Tooltip'
 import {tooltipProps} from '../../../../packages/ui/src/components/tooltip/tooltip.props'
+import {TooltipSubcomponent} from '../../../../packages/ui/src/components/tooltip/TooltipSubcomponent'
 import {PLACEMENT} from '../../../../packages/ui/src/types/Placement'
 import {getArgTypes} from '../utils/getArgTypes'
 
@@ -31,9 +32,10 @@ type Story = StoryObj<typeof Tooltip>
 export const Default: Story = {
   render: (props) => {
     return (
-      <Tooltip {...props}>
-        <Button text="Open Tooltip" />
-      </Tooltip>
+      <TooltipSubcomponent {...props}>
+        <TooltipSubcomponent.Trigger as={Button} text="Open Tooltip" />
+        <TooltipSubcomponent.Content text="Tooltip text" />
+      </TooltipSubcomponent>
     )
   },
   play: async ({canvas}) => {

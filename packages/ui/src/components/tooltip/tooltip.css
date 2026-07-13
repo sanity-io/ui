@@ -1,4 +1,4 @@
-.sui-Tooltip {
+.sui-TooltipContent {
   --tooltip-delay-open: var(--tooltip-delay-group, 500ms);
   --tooltip-delay-close: var(--tooltip-delay-group, 100ms);
   background: var(--backdrop);
@@ -11,7 +11,8 @@
     visibility 0s linear calc(var(--tooltip-delay-close) + 200ms);
 }
 
-[aria-describedby]:is(:hover, :focus-visible) + [role="tooltip"]:not(.sui-Tooltip-Dismissed) {
+[aria-describedby]:is(:hover, :focus-visible)
+  + [role="tooltip"]:not(.sui-tooltip-dismissed) {
   visibility: visible;
   opacity: 1;
   scale: 1;
@@ -21,32 +22,33 @@
     visibility 0s linear var(--tooltip-delay-open);
 }
 
-[aria-describedby]:is(:hover, :focus-visible) + .sui-Tooltip-Dismissed[role="tooltip"] {
+[aria-describedby]:is(:hover, :focus-visible)
+  + .sui-tooltip-dismissed[role="tooltip"] {
   transition: none;
 }
 
-.sui-Tooltip[class*='placement-bottom'],
-.sui-Tooltip[class*='placement-top'] {
+.sui-TooltipContent[class*="placement-bottom"],
+.sui-TooltipContent[class*="placement-top"] {
   margin-block: var(--space-1);
 }
 
-.sui-Tooltip[class*='placement-left'],
-.sui-Tooltip[class*='placement-right'] {
+.sui-TooltipContent[class*="placement-left"],
+.sui-TooltipContent[class*="placement-right"] {
   margin-inline: var(--space-1);
 }
 
-.sui-Tooltip[class*='bottom'] {
+.sui-TooltipContent[class*="bottom"] {
   transform-origin: center top;
 }
 
-.sui-Tooltip[class*='top'] {
+.sui-TooltipContent[class*="top"] {
   transform-origin: center bottom;
 }
 
-.sui-Tooltip[class*='left'] {
+.sui-TooltipContent[class*="left"] {
   transform-origin: right center;
 }
 
-.sui-Tooltip[class*='right'] {
+.sui-TooltipContent[class*="right"] {
   transform-origin: left center;
 }
