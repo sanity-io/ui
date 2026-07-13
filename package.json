@@ -25,7 +25,7 @@
     "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.0",
     "@types/node": "catalog:",
-    "eslint-plugin-storybook": "^10.4.6",
+    "eslint-plugin-storybook": "^10.5.0",
     "knip": "^6.25.0",
     "oxfmt": "^0.58.0",
     "oxlint": "^1.73.0",
