@@ -16,12 +16,7 @@ export function Box<T extends ElementType = 'div'>({
   const Component = as || 'div'
 
   return (
-    <Component
-      className={clsx(boxClassName, className)}
-      style={style}
-      data-ui="Box"
-      {...rest}
-    >
+    <Component className={clsx(boxClassName, className)} style={style} data-ui="Box" {...rest}>
       {children}
     </Component>
   )

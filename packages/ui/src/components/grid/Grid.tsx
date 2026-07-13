@@ -16,12 +16,7 @@ export function Grid<T extends ElementType = 'div'>({
   const Component = as || 'div'
 
   return (
-    <Component
-      className={clsx(gridClassName, className)}
-      style={style}
-      data-ui="Grid"
-      {...rest}
-    >
+    <Component className={clsx(gridClassName, className)} style={style} data-ui="Grid" {...rest}>
       {children}
     </Component>
   )

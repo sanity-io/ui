@@ -16,12 +16,7 @@ export function Flex<T extends ElementType = 'div'>({
   const Component = as || 'div'
 
   return (
-    <Component
-      className={clsx(flexClassName, className)}
-      style={style}
-      data-ui="Flex"
-      {...rest}
-    >
+    <Component className={clsx(flexClassName, className)} style={style} data-ui="Flex" {...rest}>
       {children}
     </Component>
   )
