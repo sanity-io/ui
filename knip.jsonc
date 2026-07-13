@@ -1,19 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignoreDependencies": [
-    // Referenced only as a string in babel plugin arrays (packages/ui/tsdown.config.mts,
-    // apps/storybook/.storybook/main.ts) and via `experimental.reactCompiler` in
-    // apps/docs/next.config.mjs, never imported
-    "babel-plugin-react-compiler",
-  ],
   "workspaces": {
-    ".": {
-      "ignoreDependencies": [
-        // Referenced by the @testing-library/jest-dom packageExtension in
-        // pnpm-workspace.yaml (declares an optional peer), not a root dependency
-        "vitest",
-      ],
-    },
+    ".": {},
     "packages/ui": {
       "ignoreDependencies": [
         // babel-plugin-react-compiler (target '18') injects imports of this runtime
