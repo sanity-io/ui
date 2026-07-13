@@ -44,7 +44,7 @@ const meta: Meta<typeof IconButton> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-IconButton',
+      context: '[data-ui="IconButton"]',
     },
   },
 }
@@ -57,9 +57,7 @@ export const Default: Story = {
     return <IconButton {...props} aria-label="Icon Button" />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByLabelText('Icon Button')).classList).toContain(
-      'sui-IconButton',
-    )
+    await expect((await canvas.findByLabelText('Icon Button')).dataset.ui).toBe('IconButton')
   },
 }
 

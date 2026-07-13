@@ -2,8 +2,11 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Flex} from '../flex/Flex'
 import {type HStackProps, hStackProps} from './hStack.props'
+
+const hStackClassName = suffixClassName('sui-HStack')
 
 /** @public */
 export function HStack<T extends ElementType = 'div'>(
@@ -15,7 +18,7 @@ export function HStack<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={clsx('sui-HStack', className)}
+      className={clsx(hStackClassName, className)}
       style={style}
       data-ui="HStack"
       display="inline-flex"

@@ -66,11 +66,14 @@ function getName(name, isCapitalized) {
 }
 
 function getComponentFile(componentName, propsName) {
-  return `import classNames from 'classnames'
+  return `import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type ${componentName}Props, ${propsName}Props} from './${propsName}.props'
+
+const ${propsName}ClassName = suffixClassName('sui-${componentName}')
 
 /** @public */
 export function ${componentName}<T extends ElementType = 'div'>(
@@ -81,7 +84,7 @@ export function ${componentName}<T extends ElementType = 'div'>(
 
   return (
     <Component
-      className={classNames('sui-${componentName}', className)}
+      className={clsx(${propsName}ClassName, className)}
       style={style}
       data-ui="${componentName}"
       {...rest}

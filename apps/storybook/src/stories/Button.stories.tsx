@@ -21,7 +21,7 @@ const meta: Meta<typeof Button> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Button',
+      context: '[data-ui="Button"]',
     },
   },
 }
@@ -34,9 +34,7 @@ export const Default: Story = {
     return <Button {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('Button')).parentElement?.classList).toContain(
-      'sui-Button',
-    )
+    await expect((await canvas.findByText('Button')).parentElement?.dataset.ui).toBe('Button')
   },
 }
 

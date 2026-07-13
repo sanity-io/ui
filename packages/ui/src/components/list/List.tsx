@@ -3,6 +3,7 @@ import type {ComponentProps, ComponentPropsWithRef, ElementType} from 'react'
 
 import type {ListTag} from '../../types/List'
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Flex} from '../flex/Flex'
 import {Text} from '../text/Text'
 import {
@@ -13,6 +14,11 @@ import {
   type ListProps,
 } from './list.props'
 
+const listClassName = suffixClassName('sui-List')
+const listItemClassName = suffixClassName('sui-ListItem')
+const listItemTextClassName = suffixClassName('sui-ListItemText')
+const listItemImageClassName = suffixClassName('sui-ListItemImage')
+
 function ListRoot<T extends ListTag = 'ul'>(
   props: ListProps<T> & Omit<ComponentPropsWithRef<T>, keyof ListProps<T>>,
 ) {
@@ -20,7 +26,12 @@ function ListRoot<T extends ListTag = 'ul'>(
   const Component = as || 'ul'
 
   return (
-    <Component className={clsx('sui-List', className)} style={style} data-ui="List" {...rest}>
+    <Component
+      className={clsx(listClassName, className)}
+      style={style}
+      data-ui="List"
+      {...rest}
+    >
       {children}
     </Component>
   )
@@ -35,7 +46,7 @@ function ListItem({density = 'regular', ...props}: ListItemProps) {
   return (
     <Flex
       as="li"
-      className={clsx('sui-ListItem', className)}
+      className={clsx(listItemClassName, className)}
       style={style}
       data-ui="ListItem"
       alignItems="center"
@@ -59,7 +70,7 @@ function ListItemText<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={clsx('sui-ListItemText', className)}
+      className={clsx(listItemTextClassName, className)}
       style={style}
       data-ui="ListItemText"
       flexDirection="column"
@@ -88,7 +99,7 @@ function ListItemImage(props: ComponentProps<'img'>) {
 
   return (
     <img
-      className={clsx('sui-ListItemImage sui-radius2', className)}
+      className={clsx(listItemImageClassName, 'sui-radius2', className)}
       style={style}
       data-ui="ListItemImage"
       {...rest}

@@ -21,7 +21,7 @@ const meta: Meta<typeof Text> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Text',
+      context: '[data-ui="Text"]',
     },
   },
 }

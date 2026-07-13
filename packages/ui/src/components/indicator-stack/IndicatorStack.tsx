@@ -2,8 +2,11 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {HStack} from '../h-stack/HStack'
 import {type IndicatorStackProps, indicatorStackProps} from './indicatorStack.props'
+
+const indicatorStackClassName = suffixClassName('sui-IndicatorStack')
 
 /** @public */
 export function IndicatorStack<T extends ElementType = 'div'>(
@@ -15,7 +18,7 @@ export function IndicatorStack<T extends ElementType = 'div'>(
   return (
     <HStack
       as={Component}
-      className={clsx('sui-IndicatorStack', className)}
+      className={clsx(indicatorStackClassName, className)}
       style={style}
       data-ui="IndicatorStack"
       {...rest}

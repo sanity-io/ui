@@ -17,7 +17,7 @@ const meta: Meta<typeof VisuallyHidden> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-VisuallyHidden',
+      context: '[data-ui="VisuallyHidden"]',
     },
   },
 }
@@ -30,8 +30,8 @@ export const Default: Story = {
     return <VisuallyHidden {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('Screen reader only text')).classList).toContain(
-      'sui-VisuallyHidden',
+    await expect((await canvas.findByText('Screen reader only text')).dataset.ui).toBe(
+      'VisuallyHidden',
     )
   },
 }

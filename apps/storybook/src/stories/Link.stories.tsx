@@ -17,7 +17,7 @@ const meta: Meta<typeof Link> = {
   },
   argTypes,
   parameters: {
-    a11y: {context: '.sui-Link'},
+    a11y: {context: '[data-ui="Link"]'},
   },
 }
 
@@ -27,8 +27,8 @@ type Story = StoryObj<typeof Link>
 export const Default: Story = {
   play: async ({canvas}) => {
     const link = await canvas.findByRole('link', {name: 'Sanity'})
-    await expect(link.classList).toContain('sui-Link')
-    await expect(link.classList).toContain('sui-Link-Underlined')
+    await expect(link.dataset.ui).toBe('Link')
+    await expect(link.classList).toContain('sui-underlined')
   },
 }
 
@@ -38,7 +38,7 @@ export const NotUnderlined: Story = {
   },
   play: async ({canvas}) => {
     const link = await canvas.findByRole('link', {name: 'Sanity'})
-    await expect(link.classList).not.toContain('sui-Link-Underlined')
+    await expect(link.classList).not.toContain('sui-underlined')
   },
 }
 

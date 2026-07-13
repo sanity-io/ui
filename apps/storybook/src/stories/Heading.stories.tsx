@@ -21,7 +21,7 @@ const meta: Meta<typeof Heading> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Heading',
+      context: '[data-ui="Heading"]',
     },
   },
 }

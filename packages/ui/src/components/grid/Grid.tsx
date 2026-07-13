@@ -2,7 +2,10 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {type GridProps, gridProps} from './grid.props'
+
+const gridClassName = suffixClassName('sui-Grid')
 
 /** @public */
 export function Grid<T extends ElementType = 'div'>({
@@ -13,7 +16,12 @@ export function Grid<T extends ElementType = 'div'>({
   const Component = as || 'div'
 
   return (
-    <Component className={clsx('sui-Grid', className)} style={style} data-ui="Grid" {...rest}>
+    <Component
+      className={clsx(gridClassName, className)}
+      style={style}
+      data-ui="Grid"
+      {...rest}
+    >
       {children}
     </Component>
   )

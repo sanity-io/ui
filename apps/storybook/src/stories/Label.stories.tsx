@@ -17,7 +17,7 @@ const meta: Meta<typeof Label> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Label',
+      context: '[data-ui="Label"]',
     },
   },
 }
@@ -30,7 +30,7 @@ export const Default: Story = {
     return <Label {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('Label')).classList).toContain('sui-Label')
+    await expect((await canvas.findByText('Label')).dataset.ui).toBe('Label')
   },
 }
 

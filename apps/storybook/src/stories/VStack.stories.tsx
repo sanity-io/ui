@@ -19,7 +19,7 @@ const meta: Meta<typeof VStack> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-VStack',
+      context: '[data-ui="VStack"]',
     },
   },
 }
@@ -39,7 +39,7 @@ export const Default: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-VStack')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('[data-ui="VStack"]')?.classList,
     ).toContain('sui-gap3')
   },
 }

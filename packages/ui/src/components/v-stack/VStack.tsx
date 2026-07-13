@@ -2,8 +2,11 @@ import clsx from 'clsx'
 import type {ComponentPropsWithRef, ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Flex} from '../flex/Flex'
 import {type VStackProps, vStackProps} from './vStack.props'
+
+const vStackClassName = suffixClassName('sui-VStack')
 
 /** @public */
 export function VStack<T extends ElementType = 'div'>(
@@ -15,7 +18,7 @@ export function VStack<T extends ElementType = 'div'>(
   return (
     <Flex
       as={Component}
-      className={clsx('sui-VStack', className)}
+      className={clsx(vStackClassName, className)}
       style={style}
       data-ui="VStack"
       flexDirection="column"

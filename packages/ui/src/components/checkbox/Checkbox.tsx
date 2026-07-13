@@ -3,10 +3,15 @@ import clsx from 'clsx'
 import {useEffect, useRef} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
 import {Label} from '../label/Label'
 import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
 import {type CheckboxProps, checkboxProps} from './checkbox.props'
+
+const checkboxClassName = suffixClassName('sui-Checkbox')
+const checkboxInputClassName = suffixClassName('sui-CheckboxInput')
+const checkboxMarkClassName = suffixClassName('sui-CheckboxMark')
 
 /** @beta */
 export function Checkbox(props: CheckboxProps) {
@@ -24,7 +29,7 @@ export function Checkbox(props: CheckboxProps) {
 
   return (
     <Label
-      className={clsx('sui-Checkbox', className)}
+      className={clsx(checkboxClassName, className)}
       style={style}
       data-ui="Checkbox"
       disabled={disabled}
@@ -33,7 +38,7 @@ export function Checkbox(props: CheckboxProps) {
       <VisuallyHidden
         as="input"
         type="checkbox"
-        className="sui-CheckboxInput"
+        className={checkboxInputClassName}
         ref={inputRef}
         disabled={disabled}
         {...rest}
@@ -41,7 +46,7 @@ export function Checkbox(props: CheckboxProps) {
 
       <Box
         as="span"
-        className={clsx('sui-CheckboxMark', error && 'sui-error')}
+        className={clsx(checkboxMarkClassName, error && 'sui-error')}
         position="relative"
         radius={2}
         width="17px"

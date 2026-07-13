@@ -14,7 +14,7 @@ const meta: Meta<typeof Divider> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Divider',
+      context: '[data-ui="Divider"]',
     },
   },
 }
@@ -34,7 +34,8 @@ export const Default: Story = {
   },
   play: async ({canvas}) => {
     const hr = canvas.getByRole('separator')
-    await expect(hr.classList).toContain('sui-Divider')
+
+    await expect(hr.dataset.ui).toBe('Divider')
     await expect(hr.classList).toContain('sui-border-none')
     await expect(hr.classList).toContain('sui-border-top')
   },

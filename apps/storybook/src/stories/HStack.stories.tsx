@@ -19,7 +19,7 @@ const meta: Meta<typeof HStack> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-HStack',
+      context: '[data-ui="HStack"]',
     },
   },
 }
@@ -39,7 +39,7 @@ export const Default: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Child 1')).parentElement?.closest('.sui-HStack')?.classList,
+      (await canvas.findByText('Child 1')).parentElement?.closest('[data-ui="HStack"]')?.classList,
     ).toContain('sui-gap3')
   },
 }

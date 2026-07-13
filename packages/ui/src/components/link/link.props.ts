@@ -18,6 +18,6 @@ export const linkProps: Record<string, PropDef> = {
   },
   underlined: {
     type: 'boolean',
-    className: 'Link-Underlined',
+    className: 'underlined',
   },
 }
