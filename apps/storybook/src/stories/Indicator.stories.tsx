@@ -21,6 +21,9 @@ const meta: Meta<typeof Indicator> = {
     a11y: {
       context: '[data-ui="Indicator"]',
     },
+    performance: {
+      component: Indicator,
+    },
   },
 }
 

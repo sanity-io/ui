@@ -16,6 +16,9 @@ const meta: Meta<typeof Divider> = {
     a11y: {
       context: '[data-ui="Divider"]',
     },
+    performance: {
+      component: Divider,
+    },
   },
 }
 

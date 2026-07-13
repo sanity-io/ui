@@ -1,3 +1,4 @@
+import {Text as TextV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -22,6 +23,10 @@ const meta: Meta<typeof Text> = {
   parameters: {
     a11y: {
       context: '[data-ui="Text"]',
+    },
+    performance: {
+      component: Text,
+      compareComponent: TextV3,
     },
   },
 }

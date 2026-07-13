@@ -2,6 +2,21 @@
   list-style-type: none;
 }
 
+.sui-ListButtonItem:hover,
+.sui-ListButtonItem:focus-visible {
+  background: var(--background-low);
+}
+
+.sui-ListButtonItem:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+.sui-ListButtonItem[data-selected] {
+  background: var(--active-background-emphasized);
+  color: var(--active-foreground-emphasized);
+}
+
 .sui-ListItemImage {
   max-width: 42px;
   aspect-ratio: var(--aspect-ratio, 1 / 1);

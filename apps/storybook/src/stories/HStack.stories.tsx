@@ -21,6 +21,9 @@ const meta: Meta<typeof HStack> = {
     a11y: {
       context: '[data-ui="HStack"]',
     },
+    performance: {
+      component: HStack,
+    },
   },
 }
 

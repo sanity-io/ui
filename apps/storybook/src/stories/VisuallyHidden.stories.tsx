@@ -19,6 +19,9 @@ const meta: Meta<typeof VisuallyHidden> = {
     a11y: {
       context: '[data-ui="VisuallyHidden"]',
     },
+    performance: {
+      component: VisuallyHidden,
+    },
   },
 }
 

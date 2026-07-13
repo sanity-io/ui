@@ -1,10 +1,28 @@
+import {Tooltip as TooltipV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
+import type {ComponentProps} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
 import {Tooltip} from '../../../../packages/ui/src/components/tooltip/Tooltip'
 import {PLACEMENT} from '../../../../packages/ui/src/types/Placement'
+
+const PerformanceTooltip = (props: ComponentProps<typeof Tooltip>) => {
+  return (
+    <Tooltip {...props}>
+      <button>Open Tooltip</button>
+    </Tooltip>
+  )
+}
+
+const PerformanceTooltipV3 = (props: ComponentProps<typeof Tooltip>) => {
+  return (
+    <TooltipV3 {...props}>
+      <button>Open Tooltip</button>
+    </TooltipV3>
+  )
+}
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Components/Tooltip',
@@ -13,6 +31,10 @@ const meta: Meta<typeof Tooltip> = {
   parameters: {
     a11y: {
       context: '[data-ui="Tooltip"]',
+    },
+    performance: {
+      component: PerformanceTooltip,
+      compareComponent: PerformanceTooltipV3,
     },
   },
 }

@@ -1,3 +1,4 @@
+import {Spinner as SpinnerV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -18,6 +19,10 @@ const meta: Meta<typeof Spinner> = {
   parameters: {
     a11y: {
       context: '[data-ui="Spinner"]',
+    },
+    performance: {
+      component: Spinner,
+      compareComponent: SpinnerV3,
     },
   },
 }

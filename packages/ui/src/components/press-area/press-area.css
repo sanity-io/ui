@@ -15,3 +15,8 @@
 .sui-PressArea:disabled {
   pointer-events: none;
 }
+
+.sui-PressArea .sui-Text,
+.sui-PressArea [data-sanity-icon] {
+  color: inherit;
+}

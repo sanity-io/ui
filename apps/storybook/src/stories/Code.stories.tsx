@@ -1,3 +1,4 @@
+import {Code as CodeV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect, waitFor} from 'storybook/test'
 
@@ -21,6 +22,10 @@ const meta: Meta<typeof Code> = {
   parameters: {
     a11y: {
       context: '[data-ui="Code"]',
+    },
+    performance: {
+      component: Code,
+      compareComponent: CodeV3,
     },
   },
 }

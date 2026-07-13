@@ -46,6 +46,9 @@ const meta: Meta<typeof IconButton> = {
     a11y: {
       context: '[data-ui="IconButton"]',
     },
+    performance: {
+      component: IconButton,
+    },
   },
 }
 

@@ -1,4 +1,5 @@
 import {EditIcon} from '@sanity/icons'
+import {Button as ButtonV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -22,6 +23,10 @@ const meta: Meta<typeof Button> = {
   parameters: {
     a11y: {
       context: '[data-ui="Button"]',
+    },
+    performance: {
+      component: Button,
+      compareComponent: ButtonV3,
     },
   },
 }

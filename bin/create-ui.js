@@ -131,6 +131,9 @@ const meta: Meta<typeof ${componentName}> = {
     a11y: {
       context: '.sui-${componentName}',
     },
+    performance: {
+      component: ${componentName},
+    },
   },
 }
 

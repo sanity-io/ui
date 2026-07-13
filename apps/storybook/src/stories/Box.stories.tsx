@@ -1,3 +1,4 @@
+import {Box as BoxV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -20,6 +21,10 @@ const meta: Meta<typeof Box> = {
   parameters: {
     a11y: {
       context: '[data-ui="Box"]',
+    },
+    performance: {
+      component: Box,
+      compareComponent: BoxV3,
     },
   },
 }

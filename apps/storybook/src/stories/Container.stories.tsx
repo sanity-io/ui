@@ -1,3 +1,4 @@
+import {Container as ContainerV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -21,6 +22,10 @@ const meta: Meta<typeof Text> = {
   parameters: {
     a11y: {
       context: '[data-ui="Container"]',
+    },
+    performance: {
+      component: Container,
+      compareComponent: ContainerV3,
     },
   },
 }

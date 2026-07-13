@@ -20,6 +20,9 @@ const meta: Meta<typeof SkipToContent> = {
   argTypes,
   parameters: {
     a11y: {context: '[data-ui="SkipToContent"]'},
+    performance: {
+      component: SkipToContent,
+    },
   },
 }
 

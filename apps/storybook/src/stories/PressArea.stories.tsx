@@ -17,6 +17,9 @@ const meta: Meta<typeof PressArea> = {
     a11y: {
       context: '[data-ui="PressArea"]',
     },
+    performance: {
+      component: PressArea,
+    },
   },
 }
 
