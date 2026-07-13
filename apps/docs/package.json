@@ -27,7 +27,7 @@
     "@sanity/color": "catalog:",
     "@sanity/icons": "catalog:",
     "@sanity/image-url": "^1.2.0",
-    "@sanity/logos": "^2.2.1",
+    "@sanity/logos": "^2.2.2",
     "@sanity/preview-url-secret": "^2.1.16",
     "@sanity/react-loader": "^1.11.11",
     "@sanity/ui": "workspace:*",
