@@ -154,7 +154,7 @@ importers:
         specifier: ^15.5.20
         version: 15.5.20(@babel/core@7.29.7)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       pako:
-        specifier: ^2.1.0
+        specifier: ^2.2.0
         version: 2.2.0
       prettier:
         specifier: ^3.9.5
@@ -194,7 +194,7 @@ importers:
         specifier: ^24.0.7
         version: 24.13.2
       '@types/pako':
-        specifier: ^2.0.3
+        specifier: ^2.0.4
         version: 2.0.4
       '@types/qs':
         specifier: ^6.15.1
