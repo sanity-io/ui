@@ -1,5 +1,6 @@
 import {ComposeIcon, EditIcon, ImageIcon, SparkleIcon} from '@sanity/icons'
 import type {Meta, StoryObj} from '@storybook/react-vite'
+import type {ComponentProps} from 'react'
 import {expect} from 'storybook/test'
 
 import {Icon} from '../../../../packages/ui/src/components/icon/Icon'
@@ -9,6 +10,16 @@ import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(listProps)
 
+const PerformanceList = (props: ComponentProps<typeof List>) => {
+  return (
+    <List {...props}>
+      <List.Item>
+        <List.ItemText title="Title" subtitle="Subtitle" />
+      </List.Item>
+    </List>
+  )
+}
+
 const meta: Meta<typeof List> = {
   title: 'Components/List',
   argTypes,
@@ -17,6 +28,9 @@ const meta: Meta<typeof List> = {
   parameters: {
     a11y: {
       context: '[data-ui="List"]',
+    },
+    performance: {
+      component: PerformanceList,
     },
   },
 }

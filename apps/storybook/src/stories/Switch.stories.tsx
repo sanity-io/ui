@@ -1,3 +1,4 @@
+import {Switch as SwitchV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -19,6 +20,10 @@ const meta: Meta<typeof Switch> = {
   parameters: {
     a11y: {
       context: '[data-ui="Switch"]',
+    },
+    performance: {
+      component: Switch,
+      compareComponent: SwitchV3,
     },
   },
 }

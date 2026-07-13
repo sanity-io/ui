@@ -19,6 +19,9 @@ const meta: Meta<typeof Label> = {
     a11y: {
       context: '[data-ui="Label"]',
     },
+    performance: {
+      component: Label,
+    },
   },
 }
 

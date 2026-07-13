@@ -1,3 +1,4 @@
+import {Stack as StackV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -20,6 +21,10 @@ const meta: Meta<typeof VStack> = {
   parameters: {
     a11y: {
       context: '[data-ui="VStack"]',
+    },
+    performance: {
+      component: VStack,
+      compareComponent: StackV3,
     },
   },
 }

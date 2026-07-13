@@ -1,4 +1,6 @@
+import {Tooltip as TooltipV3, TooltipDelayGroupProvider} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
+import type {ComponentProps} from 'react'
 import {expect, waitFor} from 'storybook/test'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
@@ -10,6 +12,34 @@ import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(tooltipGroupProps)
 
+const PerformanceTooltipGroup = (props: ComponentProps<typeof TooltipGroup>) => {
+  return (
+    <TooltipGroup {...props}>
+      <Tooltip text="Tooltip 1 Text">
+        <button>Open Tooltip 1</button>
+      </Tooltip>
+
+      <Tooltip text="Tooltip 2 Text">
+        <button>Open Tooltip 2</button>
+      </Tooltip>
+    </TooltipGroup>
+  )
+}
+
+const PerformanceTooltipGroupV3 = (props: ComponentProps<typeof TooltipDelayGroupProvider>) => {
+  return (
+    <TooltipDelayGroupProvider {...props}>
+      <TooltipV3 content="Tooltip 1 Text">
+        <button>Open Tooltip 1</button>
+      </TooltipV3>
+
+      <TooltipV3 content="Tooltip 2 Text">
+        <button>Open Tooltip 2</button>
+      </TooltipV3>
+    </TooltipDelayGroupProvider>
+  )
+}
+
 const meta: Meta<typeof TooltipGroup> = {
   title: 'Components/TooltipGroup',
   argTypes,
@@ -18,6 +48,10 @@ const meta: Meta<typeof TooltipGroup> = {
   parameters: {
     a11y: {
       context: '[data-ui="TooltipGroup"]',
+    },
+    performance: {
+      component: PerformanceTooltipGroup,
+      compareComponent: PerformanceTooltipGroupV3,
     },
   },
 }

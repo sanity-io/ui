@@ -47,6 +47,9 @@ const meta: Meta<typeof Icon> = {
     a11y: {
       context: '[data-ui="Icon"]',
     },
+    performance: {
+      component: Icon,
+    },
   },
 }
 
@@ -86,8 +89,8 @@ export const Tones: Story = {
       <Flex alignItems="center" gap={4}>
         {TONE.map((tone) => (
           <Icon
-            key={tone}
             {...props}
+            key={tone}
             tone={tone}
             aria-label={`Icon Tone ${tone[0].toUpperCase() + tone.slice(1)}`}
           />

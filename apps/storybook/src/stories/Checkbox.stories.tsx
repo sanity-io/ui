@@ -1,3 +1,4 @@
+import {Checkbox as CheckboxV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect, waitFor} from 'storybook/test'
 
@@ -19,6 +20,10 @@ const meta: Meta<typeof Checkbox> = {
   parameters: {
     a11y: {
       context: '[data-ui="Checkbox"]',
+    },
+    performance: {
+      component: Checkbox,
+      compareComponent: CheckboxV3,
     },
   },
 }

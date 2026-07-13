@@ -1,3 +1,4 @@
+import {Flex as FlexV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -20,6 +21,10 @@ const meta: Meta<typeof Flex> = {
   parameters: {
     a11y: {
       context: '[data-ui="Flex"]',
+    },
+    performance: {
+      component: Flex,
+      compareComponent: FlexV3,
     },
   },
 }

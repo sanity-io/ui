@@ -18,6 +18,9 @@ const meta: Meta<typeof Link> = {
   argTypes,
   parameters: {
     a11y: {context: '[data-ui="Link"]'},
+    performance: {
+      component: Link,
+    },
   },
 }
 

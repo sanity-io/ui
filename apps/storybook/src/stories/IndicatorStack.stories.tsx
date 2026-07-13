@@ -1,4 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
+import type {ComponentProps} from 'react'
 import {expect} from 'storybook/test'
 
 import {IndicatorStack} from '../../../../packages/ui/src/components/indicator-stack/IndicatorStack'
@@ -7,6 +8,15 @@ import {Indicator} from '../../../../packages/ui/src/components/indicator/Indica
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(indicatorStackProps)
+
+const PerformanceIndicatorStack = (props: ComponentProps<typeof IndicatorStack>) => {
+  return (
+    <IndicatorStack {...props}>
+      <Indicator />
+      <Indicator />
+    </IndicatorStack>
+  )
+}
 
 const meta: Meta<typeof IndicatorStack> = {
   title: 'Components/IndicatorStack',
@@ -17,6 +27,9 @@ const meta: Meta<typeof IndicatorStack> = {
   parameters: {
     a11y: {
       context: '[data-ui="IndicatorStack"]',
+    },
+    performance: {
+      component: PerformanceIndicatorStack,
     },
   },
 }

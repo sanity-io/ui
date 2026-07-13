@@ -1,3 +1,4 @@
+import {Inline as InlineV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -19,6 +20,10 @@ const meta: Meta<typeof Inline> = {
   parameters: {
     a11y: {
       context: '[data-ui="Inline"]',
+    },
+    performance: {
+      component: Inline,
+      compareComponent: InlineV3,
     },
   },
 }
