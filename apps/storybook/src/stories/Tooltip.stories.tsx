@@ -4,19 +4,10 @@ import {expect, userEvent, waitFor} from 'storybook/test'
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
 import {Tooltip} from '../../../../packages/ui/src/components/tooltip/Tooltip'
-import {tooltipProps} from '../../../../packages/ui/src/components/tooltip/tooltip.props'
-import {TooltipSubcomponent} from '../../../../packages/ui/src/components/tooltip/TooltipSubcomponent'
 import {PLACEMENT} from '../../../../packages/ui/src/types/Placement'
-import {getArgTypes} from '../utils/getArgTypes'
-
-const argTypes = getArgTypes(tooltipProps)
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Components/Tooltip',
-  args: {
-    text: 'Tooltip text',
-  },
-  argTypes,
   component: Tooltip,
   tags: ['autodocs'],
   parameters: {
@@ -32,10 +23,10 @@ type Story = StoryObj<typeof Tooltip>
 export const Default: Story = {
   render: (props) => {
     return (
-      <TooltipSubcomponent {...props}>
-        <TooltipSubcomponent.Trigger as={Button} text="Open Tooltip" />
-        <TooltipSubcomponent.Content text="Tooltip text" />
-      </TooltipSubcomponent>
+      <Tooltip {...props}>
+        <Tooltip.Trigger as={Button} text="Open Tooltip" />
+        <Tooltip.Content text="Tooltip text" />
+      </Tooltip>
     )
   },
   play: async ({canvas}) => {
@@ -64,41 +55,22 @@ export const Default: Story = {
   },
 }
 
-export const Disabled: Story = {
-  parameters: {
-    a11y: {disable: true},
-  },
-  render: (props) => {
-    return (
-      <Tooltip {...props} disabled>
-        <Button text="Open Disabled Tooltip" />
-      </Tooltip>
-    )
-  },
-  play: async ({canvas}) => {
-    await (await canvas.findByRole('button', {name: 'Open Disabled Tooltip'})).focus()
-    expect(canvas.queryByRole('tooltip')).not.toBeInTheDocument()
-    await new Promise((resolve) => setTimeout(resolve, 750))
-    expect(canvas.queryByRole('tooltip')).not.toBeInTheDocument()
-  },
-}
-
 export const Placements: Story = {
   render: (props) => {
     return (
       <Grid gridTemplateColumns="repeat(3, 1fr)" gap={3} paddingX={3} paddingY={4}>
         {PLACEMENT.map((placement) => (
           <div key={placement}>
-            <Tooltip
-              {...props}
-              key={placement}
-              placement={placement}
-              text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Text`}
-            >
-              <Button
+            <Tooltip {...props}>
+              <Tooltip.Trigger
+                as={Button}
                 text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip`}
                 density="loose"
                 fullWidth
+              />
+              <Tooltip.Content
+                placement={placement}
+                text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Text`}
               />
             </Tooltip>
           </div>

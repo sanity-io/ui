@@ -1,6 +1,7 @@
 .sui-TooltipContent {
   --tooltip-delay-open: var(--tooltip-delay-group, 500ms);
   --tooltip-delay-close: var(--tooltip-delay-group, 100ms);
+
   background: var(--backdrop);
   opacity: 0;
   scale: 0.9;

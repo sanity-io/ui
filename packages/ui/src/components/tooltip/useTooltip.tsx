@@ -5,7 +5,6 @@ export interface TooltipContextValue {
   id: string
   dismissed: boolean
   setDismissed: (dismissed: boolean) => void
-  disabled?: boolean
 }
 
 export const TooltipContext = createContext<TooltipContextValue | null>(null)
@@ -15,20 +14,20 @@ export function useTooltipContext(): TooltipContextValue {
   const context = useContext(TooltipContext)
 
   if (context === null) {
-    throw new Error('Tooltip compound components must be rendered within Tooltip')
+    throw new Error('Tooltip subcomponents must be rendered within Tooltip')
   }
 
   return context
 }
 
 /** @public */
-export function useTooltip({disabled, id: idProp}: {disabled?: boolean; id?: string}): TooltipContextValue {
+export function useTooltip(): TooltipContextValue {
   const reactId = useId()
-  const id = idProp || reactId
+  const id = reactId
   const [dismissed, setDismissed] = useState(false)
 
   useEffect(() => {
-    if (dismissed || disabled) {
+    if (dismissed) {
       return
     }
 
@@ -40,7 +39,7 @@ export function useTooltip({disabled, id: idProp}: {disabled?: boolean; id?: str
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [dismissed, disabled])
+  }, [dismissed])
 
-  return {id, dismissed, setDismissed, disabled}
+  return {id, dismissed, setDismissed}
 }
