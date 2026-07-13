@@ -32,21 +32,22 @@ function exactFromRange(range: string | undefined): string | null {
 
 /**
  * Builds the exact specs to install from this package's own manifest: the
- * package at its shipped version and the peers at the versions it declares.
- * Nothing here is invented. React/react-dom are peers too but belong to the
- * host app, so they are intentionally left out (the prereq check verifies them).
+ * package at its shipped version and icons/refractor at the versions it
+ * declares in dependencies. Nothing here is invented. React/react-dom are
+ * peers that belong to the host app, so they are intentionally left out
+ * (the prereq check verifies them).
  */
 export function resolveInstallSpecs({includeCode = false} = {}): string[] {
   const self = readSelfPackage()
-  const peers = self.peerDependencies ?? {}
+  const deps = self.dependencies ?? {}
 
   const specs = [`${PACKAGE_NAME}@${self.version ?? 'latest'}`]
 
-  const iconsVersion = exactFromRange(peers[ICONS_PEER])
+  const iconsVersion = exactFromRange(deps[ICONS_PEER])
   specs.push(iconsVersion ? `${ICONS_PEER}@${iconsVersion}` : ICONS_PEER)
 
   if (includeCode) {
-    const refractorVersion = exactFromRange(peers[REFRACTOR_PEER])
+    const refractorVersion = exactFromRange(deps[REFRACTOR_PEER])
     specs.push(refractorVersion ? `${REFRACTOR_PEER}@${refractorVersion}` : REFRACTOR_PEER)
   }
 

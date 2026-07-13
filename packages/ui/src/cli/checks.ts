@@ -81,9 +81,9 @@ export function collectChecks(cwd: string): CheckReport {
   const iconsInstalled = isPackageInstalled(cwd, ICONS_PEER)
   checks.push(
     check('icons', iconsInstalled, {
-      title: 'Icons peer installed',
+      title: 'Icons installed',
       detail: iconsInstalled ? `${ICONS_PEER} present` : `${ICONS_PEER} missing`,
-      fix: `Install the peer: add ${ICONS_PEER}`,
+      fix: `Install it: add ${ICONS_PEER}`,
     }),
   )
 
