@@ -2,7 +2,10 @@ import {readdirSync} from 'node:fs'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 
-import ts from 'typescript'
+// TypeScript 7's npm package no longer ships the JS compiler API (`ts.sys`,
+// `ts.createLanguageService`, …), so the language service driving these probes
+// comes from the official `@typescript/typescript6` compat package instead.
+import ts from '@typescript/typescript6'
 import {describe, expect, test} from 'vitest'
 
 const SRC_PATH = path.dirname(fileURLToPath(import.meta.url))

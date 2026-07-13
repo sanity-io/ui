@@ -18,6 +18,14 @@ minimumReleaseAgeExclude:
   - sanity-plugin-media
   - vite
   - '@architect/hydrate@6.0.2'
+  # tsdown 0.22.7 and the yuku parser/codegen family it pulls in via
+  # rolldown-plugin-dts are freshly published alongside each other.
+  - '@yuku-codegen/*'
+  - '@yuku-parser/*'
+  - rolldown-plugin-dts
+  - tsdown
+  - yuku-codegen
+  - yuku-parser
 
 publicHoistPattern:
   - 'react-refractor'

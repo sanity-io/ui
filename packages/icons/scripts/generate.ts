@@ -15,9 +15,9 @@ import formatConfig from '../.oxfmtrc.json' with {type: 'json'}
 const ROOT_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const IMPORT_PATH = path.resolve(ROOT_PATH, 'export')
 const SRC_EXPORTS_PATH = path.resolve(ROOT_PATH, 'src/exports')
-// The `icons` map lives in a flat `src/icons.ts` (not `src/icons/index.ts`). The basename
-// matters: tsdown/rolldown derives declaration chunk names from the source basename, and a
-// second `index` module would collide with the root barrel's `index.d.ts` and swap them.
+// The `icons` map lives in a flat `src/icons.ts`. It is not a build entry point: only the
+// root barrel imports it, so the bundle inlines it into `dist/index.js` (the lazy per-icon
+// `import()` calls still point at the per-icon entry chunks).
 const SRC_ICONS_PATH = path.resolve(ROOT_PATH, 'src/icons.ts')
 const SRC_DEPRECATIONS_PATH = path.resolve(ROOT_PATH, 'src/deprecations.ts')
 
