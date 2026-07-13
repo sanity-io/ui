@@ -1,7 +1,15 @@
 import clsx from 'clsx'
-import {Activity, type ComponentPropsWithRef, type ElementType, type FocusEvent, type MouseEvent, type PropsWithChildren} from 'react'
+import {
+  Activity,
+  type ComponentPropsWithRef,
+  type ElementType,
+  type FocusEvent,
+  type MouseEvent,
+  type PropsWithChildren,
+} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
 import {
   type TooltipContentProps,
@@ -10,7 +18,8 @@ import {
   tooltipTriggerProps,
 } from './tooltip.props'
 import {TooltipContext, useTooltip, useTooltipContext} from './useTooltip'
-import { suffixClassName } from '../../utils/suffixClassName'
+
+console.log('teste')
 
 const tooltiptriggerClassName = suffixClassName('sui-TooltipTrigger')
 const tooltipContentClassName = suffixClassName('sui-TooltipContent')
@@ -22,8 +31,7 @@ function TooltipRoot({children}: PropsWithChildren) {
 }
 
 export function TooltipTrigger<T extends ElementType = 'button'>(
-  props: TooltipTriggerProps<T> &
-    Omit<ComponentPropsWithRef<T>, keyof TooltipTriggerProps<T>>,
+  props: TooltipTriggerProps<T> & Omit<ComponentPropsWithRef<T>, keyof TooltipTriggerProps<T>>,
 ) {
   const {id, setDismissed} = useTooltipContext()
   const {as, children, className, style, onMouseLeave, onBlur, onClick, ...rest} = getProps(
@@ -38,10 +46,9 @@ export function TooltipTrigger<T extends ElementType = 'button'>(
       data-ui="TooltipTrigger"
       className={clsx(tooltiptriggerClassName, className)}
       style={{
-          ...style,
-          anchorName: `--tooltip-anchor-${id}`,
-        }
-      }
+        ...style,
+        anchorName: `--tooltip-anchor-${id}`,
+      }}
       onMouseLeave={(e: MouseEvent) => {
         setDismissed(false)
         onMouseLeave?.(e)
@@ -68,7 +75,11 @@ export function TooltipContent({placement = 'bottom', ...props}: TooltipContentP
   return (
     <Activity mode={dismissed ? 'hidden' : 'visible'}>
       <Box
-        className={clsx(tooltipContentClassName, dismissed ? 'sui-tooltip-dismissed' : '', className)}
+        className={clsx(
+          tooltipContentClassName,
+          dismissed ? 'sui-tooltip-dismissed' : '',
+          className,
+        )}
         role="tooltip"
         style={{
           ...style,
