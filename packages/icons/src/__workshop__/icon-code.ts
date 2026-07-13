@@ -2,7 +2,7 @@ function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)
 }
 
-export function toPascalCase(str: string) {
+function toPascalCase(str: string) {
   const p = str.split('-')
 
   return p.map(ucfirst).join('')
