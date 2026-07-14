@@ -17,6 +17,9 @@ const nextConfig = {
   reactCompiler: true,
   experimental: {
     taint: true,
+    // Use the native Rust port of the React Compiler (runs directly on
+    // Turbopack's swc AST) instead of the Babel transform
+    turbopackRustReactCompiler: true,
   },
 }
 

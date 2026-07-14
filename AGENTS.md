@@ -77,9 +77,11 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `.agents/skills/sanity-live-cache-components` skill (three-layer
   Page/Dynamic/Cached pattern with explicit `perspective`/`stega` props;
   `'use cache'` only on the cached layer). The app builds and devs with
-  `next --webpack` (see the `next:*` scripts): Turbopack cannot compile the
-  workspace `@sanity/ui` TypeScript source, which the dev `exports` resolve
-  to, because the package is `"type": "commonjs"` while its source is ESM. On-demand revalidation flows from
+  Turbopack and the native Rust React Compiler
+  (`experimental.turbopackRustReactCompiler`). To make that work,
+  `packages/ui` and `apps/docs` omit the package.json `type` field: an
+  explicit `"type": "commonjs"` makes Turbopack refuse the ESM-syntax
+  TypeScript source that the dev `exports` resolve to. On-demand revalidation flows from
   the Live Content API through the `invalidate-sync-tags` Sanity Function
   (defined in `apps/blueprints/docs`) to `POST /ui/api/expire-tags`, which
   calls `revalidateTag('sanity:<tag>', 'max')`; the route is guarded by the
