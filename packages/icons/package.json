@@ -538,7 +538,7 @@
     "@sanity/client": "^7.23.1",
     "@sanity/functions": "^1.4.0",
     "@sanity/tsconfig": "^2.2.0",
-    "@sanity/tsdown-config": "^0.13.1",
+    "@sanity/tsdown-config": "^0.14.0",
     "@sanity/ui": "^3.3.5",
     "@svgr/core": "^8.1.0",
     "@testing-library/jest-dom": "^6.9.1",
