@@ -1,0 +1,62 @@
+name: Sanity Docs Blueprint Deploy
+
+on:
+  push:
+    paths:
+      - 'apps/blueprints/docs/sanity.blueprint.ts'
+      - 'apps/blueprints/docs/functions/**'
+      - '.github/workflows/sanity-blueprint-docs.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'apps/blueprints/docs/sanity.blueprint.ts'
+      - 'apps/blueprints/docs/functions/**'
+      - '.github/workflows/sanity-blueprint-docs.yml'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  SANITY_PROJECT_ID: mos42crl
+  # `pnpm dlx @sanity/runtime-cli@latest blueprints deploy` from
+  # apps/blueprints/docs (the first deploy creates the stack)
+  SANITY_BLUEPRINT_STACK_ID: ST-6hmzgz9rrn
+
+jobs:
+  blueprint-docs-plan:
+    name: Docs Blueprint Plan
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/setup
+
+      - name: Doctor Blueprint
+        working-directory: apps/blueprints/docs
+        run: pnpm dlx @sanity/runtime-cli@latest blueprints doctor
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_UI_DOCS_AUTH_TOKEN }}
+
+      - name: Plan Blueprint
+        working-directory: apps/blueprints/docs
+        run: pnpm dlx @sanity/runtime-cli@latest blueprints plan
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_UI_DOCS_AUTH_TOKEN }}
+
+  blueprint-docs-deploy:
+    name: Docs Blueprint Deploy
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/setup
+
+      - name: Deploy Blueprint
+        working-directory: apps/blueprints/docs
+        run: pnpm dlx @sanity/runtime-cli@latest blueprints deploy
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_UI_DOCS_AUTH_TOKEN }}
