@@ -25,7 +25,7 @@ catalogs:
       specifier: ^22.20.1
       version: 22.20.1
     babel-plugin-react-compiler:
-      specifier: 1.0.0
+      specifier: ^1.0.0
       version: 1.0.0
     react-refractor:
       specifier: ^4.0.0
