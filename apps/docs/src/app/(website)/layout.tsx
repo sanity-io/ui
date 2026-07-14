@@ -12,6 +12,7 @@ import {
 } from '@/lib/sanity/live'
 
 import {AppDataProvider} from './AppDataProvider'
+import { StyledComponentsRegistry } from '@/lib/styled/registry';
 
 const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 export default async function WebsiteLayout(props: PropsWithChildren) {
@@ -38,7 +39,7 @@ export default async function WebsiteLayout(props: PropsWithChildren) {
         // handle events immediately.
         waitFor={process.env.VERCEL_ENV === 'production' ? 'function' : undefined}
       />
-      {isDraftMode && <VisualEditing basePath={basePath} />}
+      {isDraftMode && <StyledComponentsRegistry><VisualEditing basePath={basePath} /></StyledComponentsRegistry>}
     </>
   )
 }
