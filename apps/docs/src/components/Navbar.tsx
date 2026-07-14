@@ -1,9 +1,8 @@
-import {gray, white} from '@sanity/color'
 import {SanityMonogram} from '@sanity/logos'
 import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
-import {ReactElement, useMemo} from 'react'
+import {ReactElement} from 'react'
 
 import {useApp} from '../app/useApp'
 import {GitHubMark} from './assets'
@@ -11,18 +10,7 @@ import {GitHubMark} from './assets'
 export function Navbar(): ReactElement {
   // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs
   const segment = usePathname().split('/').find(Boolean)
-  const {dataset, features, nav} = useApp()
-
-  // Grayscale monogram hints that the app is not reading from the production
-  // dataset (the deprecated `SanityMonogramColor` type is left inferred; the
-  // `scheme` prop replacement has no gray variant)
-  const monogramColor = useMemo(
-    () =>
-      dataset === 'production'
-        ? undefined
-        : {bg1: gray['500'].hex, bg2: gray['200'].hex, fg: white.hex},
-    [dataset],
-  )
+  const {features, nav} = useApp()
 
   return (
     <Card flex="none" padding={[2, 2, 3, 4]} style={{lineHeight: 0}}>
@@ -32,11 +20,7 @@ export function Navbar(): ReactElement {
             <Flex align="center" gap={[3, 3, 4]}>
               <Box flex="none">
                 <Text size={[1, 1, 2]}>
-                  {monogramColor ? (
-                    <SanityMonogram color={monogramColor} style={{borderRadius: 3}} />
-                  ) : (
-                    <SanityMonogram style={{borderRadius: 3}} />
-                  )}
+                  <SanityMonogram style={{borderRadius: 3}} />
                 </Text>
               </Box>
 

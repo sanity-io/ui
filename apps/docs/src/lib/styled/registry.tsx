@@ -15,7 +15,7 @@ export function StyledComponentsRegistry({children}: {children: React.ReactNode}
 
   useServerInsertedHTML(() => {
     if (insertRef.current) {
-      return
+      return undefined
     }
     insertRef.current = true
     const styles = styledComponentsStyleSheet.getStyleElement()

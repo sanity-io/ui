@@ -9,7 +9,6 @@ import {NavNode} from '@/lib/nav'
 
 export interface AppContextValue {
   colorScheme: ThemeColorSchemeKey | 'system'
-  dataset: string | undefined
   features: {
     hintHiddenContent: boolean
   }

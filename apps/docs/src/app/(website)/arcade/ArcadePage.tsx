@@ -1,12 +1,10 @@
 'use client'
-import {
-  createElement,
-  lazy,
-  ReactNode,
-  Suspense,
-  useDeferredValue,
-  useSyncExternalStore,
-} from 'react'
+import dynamic from 'next/dynamic'
+import {ReactNode, useDeferredValue, useSyncExternalStore} from 'react'
+
+const ArcadeScreen = dynamic(() => import('@/lib/arcade/default'), {
+  ssr: false,
+})
 
 // The arcade can only run in the browser: `useSyncExternalStore` renders the
 // server snapshot (`false`) on the server and during hydration, and flips to
@@ -26,5 +24,5 @@ export function ArcadePage(): ReactNode {
 
   if (!mounted) return null
 
-  return <Suspense>{createElement(lazy(() => import('@/lib/arcade/default')))}</Suspense>
+  return <ArcadeScreen />
 }

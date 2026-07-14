@@ -1,7 +1,6 @@
 'use client'
 
 import {Box, Card, Code, Grid, Heading, useTheme_v2} from '@sanity/ui'
-import React, {createElement} from 'react'
 
 export function LogoGrid({
   logos,
@@ -16,7 +15,7 @@ export function LogoGrid({
         <Card border key={logo.name} overflow="hidden" radius={2} style={{textAlign: 'center'}}>
           <Card borderBottom padding={5}>
             <Heading as="span" size={[3, 3, 4, 5]}>
-              {createElement(logo.component, {dark: color._dark})}
+              <logo.component dark={color._dark} />
             </Heading>
           </Card>
           <Box padding={4}>

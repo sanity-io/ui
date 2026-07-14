@@ -1,6 +1,5 @@
 import {Button} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
-import React from 'react'
 
 import {FigmaLogo} from '@/components/assets'
 import {FigmaButtonData} from '@/lib/data'

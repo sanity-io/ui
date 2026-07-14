@@ -1,6 +1,5 @@
 import {Card} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
-import React from 'react'
 import {styled} from 'styled-components'
 
 import {FigmaEmbedData} from '@/lib/data'

@@ -1,5 +1,4 @@
 import {stegaClean} from 'next-sanity'
-import React from 'react'
 
 import {NpmPackageBadgeData} from '@/lib/data'
 

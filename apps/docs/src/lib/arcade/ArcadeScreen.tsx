@@ -20,7 +20,7 @@ function compileSearch(params: Record<string, string>): string {
 }
 
 const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
-export function ArcadeScreen(props: {title: string; description: string}): ReactElement {
+export function ArcadeScreen(props: {title?: string; description?: string}): ReactElement {
   const router = useRouter()
   const routerRef = useRef(router)
   const [state, dispatch] = useReducer(arcadeReducer, {

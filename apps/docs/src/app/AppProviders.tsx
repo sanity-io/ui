@@ -80,7 +80,6 @@ export function AppProviders(props: {
     () =>
       ({
         colorScheme,
-        dataset,
         features: {hintHiddenContent},
         imageUrlBuilder: getImageUrlBuilder({dataset, projectId}).imageUrlBuilder,
         nav: null,
