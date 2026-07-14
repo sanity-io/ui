@@ -2,7 +2,7 @@ import {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 import {PropsWithChildren} from 'react'
 
-import {StyledComponentsRegistry} from '@/lib/styled/registry'
+// import {StyledComponentsRegistry} from '@/lib/styled/registry'
 
 import {AppProviders} from './AppProviders'
 import {DEFAULT_META_DESCRIPTION, DEFAULT_META_OG_IMAGE} from './constants'
@@ -39,7 +39,7 @@ export default function RootLayout(props: PropsWithChildren) {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       </head>
       <body className={inter.className}>
-        <StyledComponentsRegistry>
+        {/* <StyledComponentsRegistry> */}
           <AppProviders
             dataset={process.env.SANITY_DATASET!}
             hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
@@ -47,7 +47,7 @@ export default function RootLayout(props: PropsWithChildren) {
           >
             {props.children}
           </AppProviders>
-        </StyledComponentsRegistry>
+        {/* </StyledComponentsRegistry> */}
       </body>
     </html>
   )
