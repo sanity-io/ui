@@ -1,3 +1,4 @@
+'use client'
 import {SanityMonogram} from '@sanity/logos'
 import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
@@ -53,9 +54,6 @@ export function Navbar(): ReactElement {
                   key={node.href}
                   mode="bleed"
                   padding={3}
-                  // The destination pages are fully cached, so ship their
-                  // content with the prefetch for instant navigations
-                  prefetch
                   radius={2}
                   selected={node.segment === segment}
                   style={{opacity: node.hidden ? 0.25 : undefined}}

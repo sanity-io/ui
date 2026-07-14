@@ -1,8 +1,11 @@
 import {VisualEditing} from 'next-sanity/visual-editing'
 import {draftMode} from 'next/headers'
-import {PropsWithChildren, Suspense} from 'react'
+import {PropsWithChildren, Suspense, ReactElement, ReactNode} from 'react'
+import {styled} from 'styled-components'
 
-import {Layout} from '@/components/Layout'
+import {Banner} from '@/components/Banner'
+import {AppFooter} from '@/components/Footer'
+import {Navbar} from '@/components/Navbar'
 import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
 import {
   DynamicFetchOptions,
@@ -65,5 +68,27 @@ async function CachedGlobalData(props: PropsWithChildren<DynamicFetchOptions>) {
     <AppDataProvider nav={global?.nav ?? null} settings={global?.settings ?? null}>
       <Layout>{children}</Layout>
     </AppDataProvider>
+  )
+}
+
+const Root = styled.div({
+  'height': '100%',
+  'flexDirection': 'column',
+
+  '&:not([hidden])': {
+    display: 'flex',
+  },
+})
+
+function Layout(props: {children?: ReactNode}): ReactElement {
+  const {children} = props
+
+  return (
+    <Root>
+      <Banner />
+      <Navbar />
+      {children}
+      <AppFooter />
+    </Root>
   )
 }

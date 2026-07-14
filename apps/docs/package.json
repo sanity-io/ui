@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "private": true,
   "license": "MIT",
+  "imports": {
+    "#context/*": "./src/context/*.tsx"
+  },
   "scripts": {
     "build": "run-s next:build sanity:manifest:extract",
     "dev": "run-p next:dev sanity:dev",

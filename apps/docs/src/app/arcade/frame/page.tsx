@@ -9,10 +9,7 @@ import {keyframes, styled} from 'styled-components'
 import {isRecord} from '@/lib/common'
 import {Babel, evalComponent, EvalComponentResult, loadBabel} from '@/lib/ide'
 
-import {useApp} from '../../useApp'
-
 export default function ArcadeFrameRoute(): ReactElement {
-  const {setColorScheme} = useApp()
   const [babel, setBabel] = useState<Babel | null>(null)
   const [hookCode, setHookCode] = useState<string | null>(null)
   const [jsxCode, setJSXCode] = useState<string | null>(null)
@@ -36,10 +33,6 @@ export default function ArcadeFrameRoute(): ReactElement {
 
           return
         }
-
-        if (msg.type === 'arcadeFrame/colorScheme') {
-          setColorScheme(msg.colorScheme as any)
-        }
       }
     }
 
@@ -48,7 +41,7 @@ export default function ArcadeFrameRoute(): ReactElement {
     return () => {
       window.removeEventListener('message', handleMessage)
     }
-  }, [setColorScheme])
+  }, [])
 
   const evalResult = useMemo<EvalComponentResult | null>(() => {
     if (babel === null) return null

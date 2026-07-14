@@ -1,3 +1,5 @@
+'use client'
+
 import {HeartFilledIcon} from '@sanity/icons'
 import {SanityLogo} from '@sanity/logos'
 import {Box, Button, Card, Flex, Text, useTheme_v2} from '@sanity/ui'
