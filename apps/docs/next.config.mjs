@@ -21,6 +21,30 @@ const nextConfig = {
     // Turbopack's swc AST) instead of the Babel transform
     turbopackRustReactCompiler: true,
   },
+  // The color-scheme client hints aren't read server-side right now (the
+  // static shell prerenders without request data), but keep advertising them
+  // so they're available to future use (e.g. runtime prefetching)
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Accept-CH',
+            value: 'Sec-CH-Prefers-Color-Scheme, Sec-CH-Prefers-Reduced-Motion',
+          },
+          {
+            key: 'Vary',
+            value: 'Sec-CH-Prefers-Color-Scheme',
+          },
+          {
+            key: 'Critical-CH',
+            value: 'Sec-CH-Prefers-Color-Scheme',
+          },
+        ],
+      },
+    ]
+  },
 }
 
 export default nextConfig
