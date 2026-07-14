@@ -1,24 +1,15 @@
 import {syncTagInvalidateEventHandler} from '@sanity/functions'
 
-/*
- * Per-environment env vars — set via `sanity functions env add invalidate-sync-tags <KEY> <VALUE>`:
- *
- *   PRODUCTION_URLS                       comma-separated /api/expire-tags endpoints for production
- *   PRODUCTION_SECRET                     shared secret for those endpoints
- *   STAGING_URLS                          comma-separated /api/expire-tags endpoints for staging
- *   STAGING_SECRET                        shared secret for those endpoints
- *   STAGING_VERCEL_PROTECTION_BYPASS      x-vercel-protection-bypass token for staging (optional)
- *
- * A single deployment of this function fans out to every configured environment.
- * Either environment can be omitted — only targets with both URLS and SECRET are called.
- */
+// The sanity.io/ui docs deployment (apps/docs). `www` is required: the apex
+// domain 301-redirects, which would downgrade the POST to a GET.
+const EXPIRE_TAGS_URLS = ['https://www.sanity.io/ui/api/expire-tags']
 
-interface Target {
-  env: string
-  secret: string
-  urls: string[]
-  vercelProtectionBypass?: string
-}
+/*
+ * Env vars — set via
+ * `pnpm dlx @sanity/runtime-cli@latest functions env add invalidate-sync-tags <KEY> <VALUE>`:
+ *
+ *   EXPIRE_TAGS_SECRET   shared secret, must match the docs deployment's EXPIRE_TAGS_SECRET
+ */
 
 async function ack(done: (tags: string[]) => Promise<Response>, tags: string[]) {
   const start = performance.now()
@@ -32,90 +23,48 @@ async function ack(done: (tags: string[]) => Promise<Response>, tags: string[]) 
   }
 }
 
-async function expireTags(target: Target, tags: string[]) {
-  const results = await Promise.allSettled(
-    target.urls.map(async (url) => {
-      const start = performance.now()
-      const res = await fetch(url, {
-        body: JSON.stringify({secret: target.secret, tags}),
-        headers: {
-          'Content-Type': 'application/json',
-          ...(target.vercelProtectionBypass && {
-            'x-vercel-protection-bypass': target.vercelProtectionBypass,
-          }),
-        },
-        method: 'POST',
-      })
-      const ms = Math.round(performance.now() - start)
+async function expireTags(url: string, secret: string, tags: string[]) {
+  const start = performance.now()
+  const res = await fetch(url, {
+    body: JSON.stringify({secret, tags}),
+    headers: {'Content-Type': 'application/json'},
+    method: 'POST',
+  })
+  const ms = Math.round(performance.now() - start)
 
-      if (res.ok) {
-        console.info(
-          `[${target.env}] Revalidated ${tags.length} tags via ${url} (${ms}ms)`,
-          res.status,
-        )
-      } else {
-        const body = await res.text()
-        console.error(`[${target.env}] Non-OK response from ${url} (${ms}ms)`, res.status, body)
-      }
-    }),
-  )
-
-  for (let i = 0; i < results.length; i++) {
-    const result = results[i]
-    if (result.status === 'rejected') {
-      console.error(`[${target.env}] Failed to call ${target.urls[i]}`, result.reason)
-    }
+  if (res.ok) {
+    console.info(`Revalidated ${tags.length} tags via ${url} (${ms}ms)`, res.status)
+  } else {
+    const body = await res.text()
+    console.error(`Non-OK response from ${url} (${ms}ms)`, res.status, body)
   }
-}
-
-function getTargets(): Target[] {
-  const envs = ['PRODUCTION', 'STAGING'] as const
-  const targets: Target[] = []
-
-  for (const env of envs) {
-    const rawUrls = process.env[`${env}_URLS`]
-    const secret = process.env[`${env}_SECRET`]
-    if (!rawUrls || !secret) continue
-
-    const urls = parseUrls(rawUrls)
-    if (urls.length > 0) {
-      targets.push({
-        env: env.toLowerCase(),
-        secret,
-        urls,
-        vercelProtectionBypass: process.env[`${env}_VERCEL_PROTECTION_BYPASS`],
-      })
-    }
-  }
-
-  return targets
-}
-
-function parseUrls(raw: string): string[] {
-  return raw
-    .split(',')
-    .map((u) => u.trim())
-    .filter(Boolean)
 }
 
 export const handler = syncTagInvalidateEventHandler(async ({done, event}) => {
   const start = performance.now()
   const syncTags = event.data.syncTags
-  const targets = getTargets()
+  const secret = process.env.EXPIRE_TAGS_SECRET
 
-  if (targets.length === 0) {
-    console.error('No targets configured — set PRODUCTION_URLS/SECRET and/or STAGING_URLS/SECRET')
+  if (!secret) {
+    console.error(
+      'EXPIRE_TAGS_SECRET is not configured — set it with `functions env add invalidate-sync-tags EXPIRE_TAGS_SECRET <value>`',
+    )
     await ack(done, syncTags)
     return
   }
 
-  const totalEndpoints = targets.reduce((sum, t) => sum + t.urls.length, 0)
-  const envNames = targets.map((t) => t.env).join(', ')
-  console.info(
-    `Forwarding ${syncTags.length} tags to ${totalEndpoints} endpoint(s) across ${envNames}`,
+  console.info(`Forwarding ${syncTags.length} tags to ${EXPIRE_TAGS_URLS.length} endpoint(s)`)
+
+  const results = await Promise.allSettled(
+    EXPIRE_TAGS_URLS.map((url) => expireTags(url, secret, syncTags)),
   )
 
-  await Promise.all(targets.map((target) => expireTags(target, syncTags)))
+  for (let i = 0; i < results.length; i++) {
+    const result = results[i]
+    if (result.status === 'rejected') {
+      console.error(`Failed to call ${EXPIRE_TAGS_URLS[i]}`, result.reason)
+    }
+  }
 
   await ack(done, syncTags)
   console.info(`Total handler time: ${Math.round(performance.now() - start)}ms`)

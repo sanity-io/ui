@@ -11,33 +11,27 @@ content changes.
 
 Listens for [sync tag invalidation events](https://www.sanity.io/docs/compute-and-ai/functions)
 on the `mos42crl.production` dataset and forwards the invalidated sync tags to
-the docs app's `/ui/api/expire-tags` endpoint(s), which call
+the docs deployment's expire-tags endpoint
+(`https://www.sanity.io/ui/api/expire-tags`, hardcoded in
+`functions/invalidate-sync-tags/index.ts`), which calls
 `revalidateTag('sanity:<tag>', 'max')` so cached pages are background-revalidated.
 
-Per-environment configuration is provided via function env vars
-(`sanity functions env add invalidate-sync-tags <KEY> <VALUE>`):
+The endpoint is guarded by a single shared secret, which must be set in two
+places with the same value:
 
-| Key                                | Value                                                                                  |
-| ---------------------------------- | -------------------------------------------------------------------------------------- |
-| `PRODUCTION_URLS`                  | comma-separated expire-tags endpoints, e.g. `https://www.sanity.io/ui/api/expire-tags` |
-| `PRODUCTION_SECRET`                | must match `EXPIRE_TAGS_SECRET` on the production deployment                           |
-| `STAGING_URLS`                     | comma-separated expire-tags endpoints for staging (optional)                           |
-| `STAGING_SECRET`                   | must match `EXPIRE_TAGS_SECRET` on the staging deployment                              |
-| `STAGING_VERCEL_PROTECTION_BYPASS` | `x-vercel-protection-bypass` token for staging (optional)                              |
-
-An environment is skipped unless both its `_URLS` and `_SECRET` are set.
+| Where                               | Key                  | How                                                                                                                           |
+| ----------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| the deployed function               | `EXPIRE_TAGS_SECRET` | `pnpm dlx @sanity/runtime-cli@latest functions env add invalidate-sync-tags EXPIRE_TAGS_SECRET <value>` (from this directory) |
+| the docs Vercel project (apps/docs) | `EXPIRE_TAGS_SECRET` | `vercel env add EXPIRE_TAGS_SECRET production` (or the Vercel dashboard), then redeploy                                       |
 
 ## Deploys
 
 `.github/workflows/sanity-blueprint-docs.yml` runs
 `blueprints doctor` + `blueprints plan` on pull requests and
-`blueprints deploy` on pushes to `main`, via `@sanity/runtime-cli`. It needs:
-
-- the `SANITY_UI_DOCS_AUTH_TOKEN` repository secret (a token with deploy
-  permissions on project `mos42crl`)
-- the `SANITY_BLUEPRINT_STACK_ID` value in the workflow, which is printed by the
-  first manual `pnpm dlx @sanity/runtime-cli@latest blueprints deploy` from this
-  directory (the first deploy creates the stack)
+`blueprints deploy` on pushes to `main`, via `@sanity/runtime-cli`. It uses the
+`SANITY_UI_DOCS_AUTH_TOKEN` repository secret (a token with deploy permissions
+on project `mos42crl`) and the stack id in the workflow's
+`SANITY_BLUEPRINT_STACK_ID` env.
 
 ## Local development
 
@@ -49,8 +43,12 @@ pnpm dlx @sanity/runtime-cli@latest blueprints doctor
 pnpm dlx @sanity/runtime-cli@latest blueprints plan
 
 # Manage function env vars
-pnpm --filter blueprints-docs exec sanity functions env list invalidate-sync-tags
+pnpm dlx @sanity/runtime-cli@latest functions env list invalidate-sync-tags
+
+# Tail function logs
+pnpm dlx @sanity/runtime-cli@latest functions logs invalidate-sync-tags
 ```
 
-All commands expect `SANITY_AUTH_TOKEN`, `SANITY_PROJECT_ID=mos42crl` and (once
-created) `SANITY_BLUEPRINT_STACK_ID` in the environment.
+All commands expect `SANITY_AUTH_TOKEN`, `SANITY_PROJECT_ID=mos42crl` and
+`SANITY_BLUEPRINT_STACK_ID` in the environment (or a `.sanity/blueprint.config.json`
+from a previous `blueprints deploy`).
