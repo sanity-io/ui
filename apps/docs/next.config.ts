@@ -9,9 +9,8 @@ const nextConfig: NextConfig = {
   // `apps/blueprints/docs` invalidate-sync-tags function), so the default
   // time-based revalidation is stretched to 1 year.
   cacheLife: {default: sanity},
-  compiler: {styledComponents: true},
   // Matches the behavior of `sanity dev` which sets styled-components to use the fastest way of inserting CSS rules in both dev and production. It's default behavior is to disable it in dev mode.
-  env: {SC_DISABLE_SPEEDY: 'false'},
+  compiler: {styledComponents: true, define: {SC_DISABLE_SPEEDY: 'false'}},
   // The workspace @sanity/ui resolves to its TypeScript source in the
   // monorepo (dev `exports`), so Next.js must transpile it.
   transpilePackages: ['@sanity/ui'],
