@@ -6,9 +6,15 @@ settings:
 
 catalogs:
   default:
+    '@sanity/blueprints':
+      specifier: ^0.21.0
+      version: 0.21.0
     '@sanity/color':
       specifier: ^3.0.6
       version: 3.0.6
+    '@sanity/functions':
+      specifier: ^1.4.0
+      version: 1.4.0
     '@sanity/icons':
       specifier: ^3.8.0
       version: 3.8.0
@@ -90,6 +96,18 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
+
+  apps/blueprints/docs:
+    devDependencies:
+      '@sanity/blueprints':
+        specifier: 'catalog:'
+        version: 0.21.0
+      '@sanity/functions':
+        specifier: 'catalog:'
+        version: 1.4.0(@aws-lite/client@0.21.10)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.20.1
 
   apps/docs:
     dependencies:
@@ -507,8 +525,24 @@ packages:
     resolution: {integrity: sha512-fOn3lg1ynBAxqcELRf084bNJ6gu+GGoNyC+hwitW/hg3Vc1z1ZbK5HWWTrDw8HdM/fEQ0UN++g7GXVN1GVctdQ==}
     engines: {node: '>=16'}
 
+  '@aws-lite/dynamodb@0.3.9':
+    resolution: {integrity: sha512-jrMAWwxoAMVJ3z0/mI/GzPM5AfGmH+xzTpNIbjg3+2WdYJRqvIf8025XJdCDtS9/4x8zogdchEp3ZelXnwYyqw==}
+    engines: {node: '>=16'}
+
+  '@aws-lite/lambda@0.1.5':
+    resolution: {integrity: sha512-Sa6AxBQwzqGsUr2ifxcpAvFlTkoDwIQIYgcEFVQ+0qKeV9ci+ggsOOSRGBxrGEdRsnQxUsQ2x0ES/29c8crzQw==}
+    engines: {node: '>=16'}
+
   '@aws-lite/s3@0.1.22':
     resolution: {integrity: sha512-9OL95fTvHV80JvFTxLx8hhWQ6DgwHUts02KpXITA8syCDnYgua2rNcpwQ5b6GZzpL7yNXU0dud/Y6edThbffig==}
+    engines: {node: '>=16'}
+
+  '@aws-lite/sns@0.0.8':
+    resolution: {integrity: sha512-MIzHe66kLNyzPFY/DX30uN7DlVQsnBiHPYbq/7syNWuoYSG8bkWuUX2CVIuSL7Ji5jaLpQ4lf8/VQ+SiAeoIZA==}
+    engines: {node: '>=16'}
+
+  '@aws-lite/sqs@0.2.4':
+    resolution: {integrity: sha512-a1M3HDdkNE/xJfASlfisAaZ8XF6FpvoJbJsH/gr6pogEFWgNQyvmPVNRElnDY7JW3ee82sEOkMukYRdAbjytNQ==}
     engines: {node: '>=16'}
 
   '@aws-lite/ssm@0.2.5':
@@ -3449,6 +3483,10 @@ packages:
   '@sanity/bifur-client@0.4.1':
     resolution: {integrity: sha512-mHM8WR7pujbIw2qxuV0lzinS1izOoyLza/ejWV6quITTLpBhUoPIQGPER3Ar0SON5JV0VEEqkJGa1kjiYYgx2w==}
 
+  '@sanity/blueprints@0.21.0':
+    resolution: {integrity: sha512-gWUkqvNB5YHHclKUGVVr1wPBV65/4Vs0Lch8JPWM5sTV56sM7EEoNsjOOl/zYmOx11YDYLUDXVyXYPClANjTQw==}
+    engines: {node: '>=20'}
+
   '@sanity/browserslist-config@1.0.5':
     resolution: {integrity: sha512-so+/UtCge8t1jq509hH0otbbptRz0zM/Aa0dh5MhMD7HGT6n2igWIL2VWH/9QR9e77Jn3dJsjz23mW1WCxT+sg==}
 
@@ -3512,6 +3550,16 @@ packages:
   '@sanity/export@3.45.3':
     resolution: {integrity: sha512-NmN7nfilwza7ztdA8/SPnX1V4RjKVUL8epbcIvIymYRwfjclbjOLP4DgZlvhVS1mtgZAo9kB4pC49HjuGi/Cng==}
     engines: {node: '>=18'}
+
+  '@sanity/functions@1.4.0':
+    resolution: {integrity: sha512-4PIGV0Ec/SyJpYhHv/VHnAo+z3rO4GvqXk0EJiPsRTjn6hB6+j7n8WyBgZqVHrdUKcCGgXvmB3RmgcYcnah+sQ==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      '@aws-lite/client': ^0.23.6
+      '@aws-lite/dynamodb': ^0.3.9
+      '@aws-lite/lambda': ^0.1.5
+      '@aws-lite/sns': ^0.0.8
+      '@aws-lite/sqs': ^0.2.4
 
   '@sanity/generate-help-url@3.0.1':
     resolution: {integrity: sha512-bKqCEqFP7qXpNcHxJZnXFLrti8/HYQhhJtMRYFSNJ8bkUXCuUmhHKckzoyiH1n1WAZpI2Y05z2h5yZWbi3gThQ==}
@@ -8630,7 +8678,15 @@ snapshots:
     dependencies:
       aws4: 1.13.2
 
+  '@aws-lite/dynamodb@0.3.9': {}
+
+  '@aws-lite/lambda@0.1.5': {}
+
   '@aws-lite/s3@0.1.22': {}
+
+  '@aws-lite/sns@0.0.8': {}
+
+  '@aws-lite/sqs@0.2.4': {}
 
   '@aws-lite/ssm@0.2.5': {}
 
@@ -11263,6 +11319,8 @@ snapshots:
       nanoid: 3.3.15
       rxjs: 7.8.2
 
+  '@sanity/blueprints@0.21.0': {}
+
   '@sanity/browserslist-config@1.0.5': {}
 
   '@sanity/cli@3.99.0(@types/node@24.13.2)(@types/react@19.2.17)(lightningcss@1.32.0)(react@19.2.7)(supports-color@8.1.1)(typescript@5.9.3)(yaml@2.9.0)':
@@ -11434,6 +11492,14 @@ snapshots:
       - bare-buffer
       - react-native-b4a
       - supports-color
+
+  '@sanity/functions@1.4.0(@aws-lite/client@0.21.10)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)':
+    dependencies:
+      '@aws-lite/client': 0.21.10
+      '@aws-lite/dynamodb': 0.3.9
+      '@aws-lite/lambda': 0.1.5
+      '@aws-lite/sns': 0.0.8
+      '@aws-lite/sqs': 0.2.4
 
   '@sanity/generate-help-url@3.0.1': {}
 

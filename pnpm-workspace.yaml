@@ -1,5 +1,6 @@
 packages:
   - 'apps/*'
+  - 'apps/blueprints/*'
   - 'packages/*'
 
 linkWorkspacePackages: deep
@@ -11,7 +12,9 @@ strictPeerDependencies: false
 # v6), @types/node (v24 vs v22) and vitest (v3 vs v4, see the
 # packageExtensions note) versions, so those keep explicit ranges there.
 catalog:
+  '@sanity/blueprints': ^0.21.0
   '@sanity/color': ^3.0.6
+  '@sanity/functions': ^1.4.0
   '@sanity/icons': ^3.8.0
   '@sanity/tsdown-config': ^0.13.0
   '@types/node': ^22.20.1
