@@ -1,0 +1,8 @@
+# Local deploy state written by `blueprints deploy` (stack id etc.)
+.sanity
+
+# Build artifacts emitted next to the source when the runtime CLI bundles the
+# functions (deploy/test)
+functions/*/index.js
+functions/*/index.js.map
+functions/*/package.json
