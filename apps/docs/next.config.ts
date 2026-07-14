@@ -1,5 +1,5 @@
+import type {NextConfig} from 'next'
 import {sanity} from 'next-sanity/live/cache-life'
-import type { NextConfig } from 'next'
 
 const basePath = '/ui'
 const nextConfig: NextConfig = {
@@ -53,7 +53,7 @@ const nextConfig: NextConfig = {
         basePath: false, // CRITICAL: Tells Next.js not to prefix the source path
         permanent: true,
       },
-    ];
+    ]
   },
 }
 

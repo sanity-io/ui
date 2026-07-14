@@ -9,7 +9,6 @@ import json from 'refractor/json'
 import tsx from 'refractor/tsx'
 
 import {getImageUrlBuilder} from '@/lib/sanity/image'
-import {StyledComponentsRegistry} from '@/lib/styled/registry'
 
 import {AppContext, AppContextValue} from './AppContext'
 import {GlobalStyle} from './GlobalStyle'
@@ -78,33 +77,31 @@ export function AppProviders(props: {
   )
 
   const app = useMemo(
-    () => ({
-
-      colorScheme,
-      dataset,
-      features: {hintHiddenContent},
-      imageUrlBuilder: getImageUrlBuilder({dataset, projectId}).imageUrlBuilder,
-      nav: null,
-      projectId,
-      setColorScheme,
-      settings: null,
-    }) satisfies AppContextValue,
+    () =>
+      ({
+        colorScheme,
+        dataset,
+        features: {hintHiddenContent},
+        imageUrlBuilder: getImageUrlBuilder({dataset, projectId}).imageUrlBuilder,
+        nav: null,
+        projectId,
+        setColorScheme,
+        settings: null,
+      }) satisfies AppContextValue,
     [colorScheme, dataset, hintHiddenContent, projectId],
   )
 
   return (
-    <StyledComponentsRegistry>
-      <ThemeProvider
-        scheme={colorScheme === 'system' ? (prefersDark ? 'dark' : 'light') : colorScheme}
-        theme={theme}
-      >
-        <GlobalStyle />
-        <AppContext.Provider value={app}>
-          <LayerProvider>
-            <ToastProvider>{children}</ToastProvider>
-          </LayerProvider>
-        </AppContext.Provider>
-      </ThemeProvider>
-    </StyledComponentsRegistry>
+    <ThemeProvider
+      scheme={colorScheme === 'system' ? (prefersDark ? 'dark' : 'light') : colorScheme}
+      theme={theme}
+    >
+      <GlobalStyle />
+      <AppContext.Provider value={app}>
+        <LayerProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </LayerProvider>
+      </AppContext.Provider>
+    </ThemeProvider>
   )
 }

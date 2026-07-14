@@ -4,11 +4,11 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "prepare": "next typegen",
     "build": "run-s next:build sanity:manifest:extract",
     "dev": "run-p next:dev sanity:dev",
     "next:build": "next build",
     "next:dev": "next dev",
+    "prepare": "next typegen",
     "sanity:dev": "sanity dev",
     "sanity:manifest:extract": "mkdirp public/studio/static && sanity manifest extract --path public/studio/static",
     "start": "next start",

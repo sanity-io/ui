@@ -16,7 +16,6 @@ const Root = styled.div({
   },
 })
 
-
 export function Layout(props: {children?: ReactNode}): ReactElement {
   const {children} = props
 

@@ -13,6 +13,7 @@ import {
 
 import {AppDataProvider} from './AppDataProvider'
 
+const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 export default async function WebsiteLayout(props: PropsWithChildren) {
   const {children} = props
   const {isEnabled: isDraftMode} = await draftMode()
@@ -37,7 +38,7 @@ export default async function WebsiteLayout(props: PropsWithChildren) {
         // handle events immediately.
         waitFor={process.env.VERCEL_ENV === 'production' ? 'function' : undefined}
       />
-      {isDraftMode && <VisualEditing />}
+      {isDraftMode && <VisualEditing basePath={basePath} />}
     </>
   )
 }
