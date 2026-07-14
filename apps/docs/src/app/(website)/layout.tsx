@@ -28,7 +28,15 @@ export default async function WebsiteLayout(props: PropsWithChildren) {
           {children}
         </CachedGlobalData>
       )}
-      <SanityLive includeDrafts={isDraftMode} />
+      <SanityLive
+        includeDrafts={isDraftMode}
+        // In production the invalidate-sync-tags Sanity Function (deployed
+        // from apps/blueprints/docs) revalidates the cache via
+        // /ui/api/expire-tags, so live events wait for it before refreshing.
+        // Previews and local dev aren't called by the function, so they
+        // handle events immediately.
+        waitFor={process.env.VERCEL_ENV === 'production' ? 'function' : undefined}
+      />
       {isDraftMode && <VisualEditing />}
     </>
   )
