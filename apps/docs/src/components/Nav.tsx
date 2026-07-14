@@ -25,10 +25,11 @@ function ensureBasePath(path: string, basePath: string = '') {
   return `${basePath}${path}`
 }
 
+const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   const {level, node, path} = props
   const router = useRouter()
-  const {features, basePath} = useApp()
+  const {features} = useApp()
   const hidden = node.hidden && !features.hintHiddenContent
   const href = node.targetId && node.href ? node.href : undefined
   const hrefWithBasePath =

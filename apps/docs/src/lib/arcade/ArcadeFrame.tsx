@@ -12,6 +12,7 @@ const Root = styled.iframe`
   border: 0;
 `
 
+const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 export function ArcadeFrame({
   hookCode,
   jsxCode,
@@ -19,7 +20,7 @@ export function ArcadeFrame({
   hookCode: string
   jsxCode: string
 }): ReactElement {
-  const {basePath = '', colorScheme} = useApp()
+  const {colorScheme} = useApp()
   const [frame, setFrame] = useState<HTMLIFrameElement | null>(null)
   const [ready, setReady] = useState(false)
   const msgQueueRef = useRef<any[]>([])

@@ -19,6 +19,7 @@ function compileSearch(params: Record<string, string>): string {
   return qs.stringify(params)
 }
 
+const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 export function ArcadeScreen(props: {title: string; description: string}): ReactElement {
   const router = useRouter()
   const routerRef = useRef(router)
@@ -40,7 +41,7 @@ export function ArcadeScreen(props: {title: string; description: string}): React
     const saveFn = debounce((params: ArcadeQueryParams) => {
       const href = `/arcade?${compileSearch(getArcadeQuery(params))}`
       document.title = `${params.title ?? 'Arcade'} | Sanity UI`
-      window.history.replaceState({}, '', `/ui${href}`)
+      window.history.replaceState({}, '', `${basePath}${href}`)
       routerRef.current.replace(href, {scroll: false})
     }, 100)
 

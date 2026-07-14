@@ -8,7 +8,6 @@ import {SettingsData} from '@/lib/data'
 import {NavNode} from '@/lib/nav'
 
 export interface AppContextValue {
-  basePath?: string
   colorScheme: ThemeColorSchemeKey | 'system'
   dataset: string | undefined
   features: {

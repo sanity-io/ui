@@ -77,9 +77,9 @@ export function AppProviders(props: {
     getServerColorScheme(),
   )
 
-  const app: AppContextValue = useMemo(
+  const app = useMemo(
     () => ({
-      basePath: '/ui',
+
       colorScheme,
       dataset,
       features: {hintHiddenContent},
@@ -88,7 +88,7 @@ export function AppProviders(props: {
       projectId,
       setColorScheme,
       settings: null,
-    }),
+    }) satisfies AppContextValue,
     [colorScheme, dataset, hintHiddenContent, projectId],
   )
 

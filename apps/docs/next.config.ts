@@ -1,8 +1,9 @@
 import {sanity} from 'next-sanity/live/cache-life'
 import type { NextConfig } from 'next'
 
+const basePath = '/ui'
 const nextConfig: NextConfig = {
-  basePath: '/ui',
+  basePath,
   cacheComponents: true,
   // Sanity Live handles on-demand revalidation (see `api/expire-tags` and the
   // `apps/blueprints/docs` invalidate-sync-tags function), so the default
@@ -49,8 +50,8 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/',
-        destination: '/ui',
-        basePath: false,
+        destination: basePath,
+        basePath: false, // CRITICAL: Tells Next.js not to prefix the source path
         permanent: true,
       },
     ];
