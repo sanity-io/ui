@@ -21,7 +21,7 @@ import {
   TextInput,
 } from '@sanity/ui'
 import copy from 'copy-to-clipboard'
-import {startTransition, useEffect, useState} from 'react'
+import {Activity, startTransition, useEffect, useState} from 'react'
 import {registerLanguage} from 'react-refractor'
 import tsx from 'refractor/typescript'
 import {keyframes, styled} from 'styled-components'
@@ -125,11 +125,11 @@ function CopyCodeButton({code}: {code: string}) {
         aria-label={label}
         icon={icon}
         mode="bleed"
-        onBlur={() => setHovered(false)}
+        onBlur={() => startTransition(() => setHovered(false))}
         onClick={handleCopy}
-        onFocus={() => setHovered(true)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        onFocus={() => startTransition(() => setHovered(true))}
+        onMouseEnter={() => startTransition(() => setHovered(true))}
+        onMouseLeave={() => startTransition(() => setHovered(false))}
         padding={2}
         tone={tone}
       />
@@ -174,21 +174,25 @@ export default function OverviewStory() {
               defaultValue={query}
             />
           </Box>
-          <ViewToggle onChange={setView} view={view} />
+          <ViewToggle onChange={(_view) => startTransition(() => setView(_view))} view={view} />
         </Flex>
 
         {iconKeys.length === 0 && !loading && <Text>No matches</Text>}
 
-        {iconKeys.length > 0 &&
-          (view === 'grid' ? (
-            <GridView iconKeys={iconKeys} />
-          ) : (
-            <Stack gap={3}>
-              {iconKeys.map((key) => (
-                <CodeSnippet key={key} icon={key} />
-              ))}
-            </Stack>
-          ))}
+        {iconKeys.length > 0 && (
+          <>
+            <Activity key="grid" mode={view === 'grid' ? 'visible' : 'hidden'}>
+              <GridView iconKeys={iconKeys} />
+            </Activity>
+            <Activity key="list" mode={view === 'list' ? 'visible' : 'hidden'}>
+              <Stack gap={3}>
+                {iconKeys.map((key) => (
+                  <CodeSnippet key={key} icon={key} />
+                ))}
+              </Stack>
+            </Activity>
+          </>
+        )}
       </Container>
     </Card>
   )

@@ -1,5 +1,5 @@
 import {icons} from '@sanity/icons'
-import {useEffect, useState} from 'react'
+import {startTransition, useCallback, useEffect, useState} from 'react'
 
 import {searchClient} from './sanity-client'
 
@@ -39,7 +39,11 @@ export interface IconSearchState {
 export function useIconSearch(query: string): IconSearchState {
   const trimmed = query.trim()
 
-  const [remote, setRemote] = useState<RemoteResult | null>(null)
+  const [remote, _setRemote] = useState<RemoteResult | null>(null)
+  const setRemote = useCallback(
+    (result: RemoteResult) => startTransition(() => _setRemote(result)),
+    [_setRemote],
+  )
 
   useEffect(() => {
     if (trimmed === '') return undefined
@@ -74,7 +78,7 @@ export function useIconSearch(query: string): IconSearchState {
       cancelled = true
       clearTimeout(timeout)
     }
-  }, [trimmed])
+  }, [trimmed, setRemote])
 
   if (trimmed === '') {
     return {results: allIconKeys, loading: false, semantic: false}

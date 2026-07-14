@@ -3,7 +3,7 @@ import {CheckmarkIcon} from '@sanity/icons/Checkmark'
 import {ErrorOutlineIcon} from '@sanity/icons/ErrorOutline'
 import {Card, Grid, Text, Tooltip} from '@sanity/ui'
 import copy from 'copy-to-clipboard'
-import {useEffect, useState} from 'react'
+import {startTransition, useEffect, useState} from 'react'
 
 import {getImportCode} from './icon-code'
 
@@ -56,14 +56,17 @@ function GridIconTile({icon}: {icon: string}) {
   useEffect(() => {
     if (state === 'idle') return undefined
 
-    const timeout = setTimeout(() => setState('idle'), COPY_FEEDBACK_DURATION)
+    const timeout = setTimeout(
+      () => startTransition(() => setState('idle')),
+      COPY_FEEDBACK_DURATION,
+    )
     return () => clearTimeout(timeout)
   }, [state])
 
   function handleCopy() {
     copy(getImportCode(icon)).then(
-      (ok) => setState(ok ? 'copied' : 'error'),
-      () => setState('error'),
+      (ok) => startTransition(() => setState(ok ? 'copied' : 'error')),
+      () => startTransition(() => setState('error')),
     )
   }
 
