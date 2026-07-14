@@ -1,3 +1,5 @@
+'use client'
+
 import {codeInput} from '@sanity/code-input'
 import {SanityMonogram} from '@sanity/logos'
 import {defineConfig} from 'sanity'
@@ -24,7 +26,6 @@ const prodStudio = defineConfig({
         initial: `${previewOrigin}/ui`,
         previewMode: {
           enable: `${previewOrigin}/ui/api/draft-mode/enable`,
-          disable: `${previewOrigin}/ui/api/disable-draft`,
         },
       },
     }),
