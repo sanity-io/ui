@@ -41,11 +41,7 @@ export async function POST(request: NextRequest) {
   console.info('Expiring tags from expirator service', tags)
 
   for (const tag of tags) {
-    // The 'max' profile is recommended so that it's background revalidated, and
-    // serves stale content for as long as necessary until the background
-    // revalidation is complete. Otherwise it might cause affected URLs to
-    // suddenly switch to dynamic rendering.
-    revalidateTag(`sanity:${tag}`, 'max')
+    revalidateTag(`sanity:${tag}`)
   }
 
   return Response.json({service: 'sanity-ui-docs', tags})

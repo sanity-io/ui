@@ -14,7 +14,7 @@ on the `mos42crl.production` dataset and forwards the invalidated sync tags to
 the docs deployment's expire-tags endpoint
 (`https://www.sanity.io/ui/api/expire-tags`, hardcoded in
 `functions/invalidate-sync-tags/index.ts`), which calls
-`revalidateTag('sanity:<tag>', 'max')` so cached pages are background-revalidated.
+`revalidateTag('sanity:<tag>')` so cached pages are revalidated.
 
 The endpoint is guarded by a single shared secret, which must be set in two
 places with the same value:
