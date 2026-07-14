@@ -8,8 +8,6 @@ import {
   useSyncExternalStore,
 } from 'react'
 
-import {Layout} from '@/components/Layout'
-
 // The arcade can only run in the browser: `useSyncExternalStore` renders the
 // server snapshot (`false`) on the server and during hydration, and flips to
 // the client snapshot (`true`) right after
@@ -28,9 +26,5 @@ export function ArcadePage(): ReactNode {
 
   if (!mounted) return null
 
-  return (
-    <Layout path={['arcade']}>
-      <Suspense>{createElement(lazy(() => import('@/lib/arcade/default')))}</Suspense>
-    </Layout>
-  )
+  return <Suspense>{createElement(lazy(() => import('@/lib/arcade/default')))}</Suspense>
 }

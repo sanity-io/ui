@@ -1,8 +1,8 @@
 'use client'
 
 import {Tree, TreeItem} from '@sanity/ui'
-import {useRouter} from 'next/navigation'
-import {MouseEvent, ReactElement, useCallback} from 'react'
+import Link from 'next/link'
+import {ComponentProps, ReactElement} from 'react'
 
 import {useApp} from '@/app/useApp'
 import {NavNode} from '@/lib/nav'
@@ -19,29 +19,20 @@ export function Nav(props: {nav: NavNode; path: string}): ReactElement {
   )
 }
 
-function ensureBasePath(path: string, basePath: string = '') {
-  if (path.startsWith(basePath)) return path
+// The destination pages are fully cached, so ship their content with the
+// prefetch for instant navigations (`next/link` also prepends the basePath)
+function PrefetchLink(props: ComponentProps<typeof Link> & {as?: unknown}) {
+  // TreeItem's inner box is `styled(Box).attrs({forwardedAs: 'a'})`, which
+  // forwards `as="a"` — next/link would treat that legacy prop as the URL
+  const {as: _as, ...rest} = props
 
-  return `${basePath}${path}`
+  return <Link {...rest} prefetch />
 }
 
 function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   const {level, node, path} = props
-  const router = useRouter()
-  const {features, basePath} = useApp()
+  const {features} = useApp()
   const href = node.targetId && node.href ? node.href : undefined
-  const hrefWithBasePath =
-    node.targetId && node.href ? ensureBasePath(node.href, basePath) : undefined
-
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLLIElement>) => {
-      if (!(event.ctrlKey || event.metaKey || event.shiftKey)) {
-        event.preventDefault()
-        if (href) router.push(href)
-      }
-    },
-    [href, router],
-  )
 
   if (node.hidden && !features.hintHiddenContent) {
     return null
@@ -52,8 +43,8 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   return (
     <TreeItem
       expanded={!node.collapsed || path.startsWith(`${node.href}/`)}
-      href={hrefWithBasePath}
-      onClick={handleClick}
+      href={href}
+      linkAs={PrefetchLink}
       selected={href ? href === path : false}
       style={{opacity: node.hidden ? 0.25 : undefined}}
       text={title ? node.isHook ? <>{title}()</> : title : <em>Untitled</em>}

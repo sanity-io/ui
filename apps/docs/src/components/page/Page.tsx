@@ -6,8 +6,6 @@ import {useApp} from '@/app/useApp'
 import {ArticlePage, PageBuilder} from '@/components/page'
 import {TargetData} from '@/lib/data'
 
-import {Layout} from '../Layout'
-
 export interface PageProps {
   data?: TargetData | null
   error?: Error
@@ -22,59 +20,43 @@ export function Page(props: PageProps) {
 
   if (error) {
     return (
-      <Layout path={path}>
-        <Card flex={1}>
-          <pre>{error.message}</pre>
-        </Card>
-      </Layout>
+      <Card flex={1}>
+        <pre>{error.message}</pre>
+      </Card>
     )
   }
 
   if (data === null) {
     return (
-      <Layout path={path}>
-        <Card flex={1}>
-          <div>no target</div>
-        </Card>
-      </Layout>
+      <Card flex={1}>
+        <div>no target</div>
+      </Card>
     )
   }
 
   if (pageNav) {
     return (
-      <Layout path={path}>
-        <ArticlePage
-          article={data?._type === 'article' ? data : undefined}
-          nav={pageNav}
-          path={path}
-        />
-      </Layout>
+      <ArticlePage
+        article={data?._type === 'article' ? data : undefined}
+        nav={pageNav}
+        path={path}
+      />
     )
   }
 
   if (!data) {
     return (
-      <Layout path={path}>
-        <Card flex={1} padding={[4, 4, 5]}>
-          <Text muted size={1}>
-            Loading…
-          </Text>
-        </Card>
-      </Layout>
+      <Card flex={1} padding={[4, 4, 5]}>
+        <Text muted size={1}>
+          Loading…
+        </Text>
+      </Card>
     )
   }
 
   if (data._type === 'article') {
-    return (
-      <Layout path={path}>
-        <ArticlePage article={data} nav={pageNav} path={path} />
-      </Layout>
-    )
+    return <ArticlePage article={data} nav={pageNav} path={path} />
   }
 
-  return (
-    <Layout path={path}>
-      <PageBuilder page={data} />
-    </Layout>
-  )
+  return <PageBuilder page={data} />
 }

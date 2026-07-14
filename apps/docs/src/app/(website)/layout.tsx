@@ -2,6 +2,7 @@ import {VisualEditing} from 'next-sanity/visual-editing'
 import {draftMode} from 'next/headers'
 import {PropsWithChildren, Suspense} from 'react'
 
+import {Layout} from '@/components/Layout'
 import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
 import {
   DynamicFetchOptions,
@@ -49,9 +50,11 @@ async function CachedGlobalData(props: PropsWithChildren<DynamicFetchOptions>) {
   const {data} = await sanityFetch({query: GLOBAL_QUERY, perspective, stega})
   const global = data as GlobalData | null
 
+  // The banner/navbar/footer chrome lives in the layout so it stays mounted
+  // (and doesn't flash a fallback) while pages swap during navigations
   return (
     <AppDataProvider nav={global?.nav ?? null} settings={global?.settings ?? null}>
-      {children}
+      <Layout>{children}</Layout>
     </AppDataProvider>
   )
 }

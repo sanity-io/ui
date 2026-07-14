@@ -2,13 +2,15 @@ import {gray, white} from '@sanity/color'
 import {SanityMonogram} from '@sanity/logos'
 import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import Link from 'next/link'
+import {usePathname} from 'next/navigation'
 import {ReactElement, useMemo} from 'react'
 
 import {useApp} from '../app/useApp'
 import {GitHubMark} from './assets'
 
-export function Navbar(props: {path: string[]}): ReactElement {
-  const {path} = props
+export function Navbar(): ReactElement {
+  // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs
+  const segment = usePathname().split('/').find(Boolean)
   const {dataset, features, nav} = useApp()
 
   // Grayscale monogram hints that the app is not reading from the production
@@ -67,8 +69,11 @@ export function Navbar(props: {path: string[]}): ReactElement {
                   key={node.href}
                   mode="bleed"
                   padding={3}
+                  // The destination pages are fully cached, so ship their
+                  // content with the prefetch for instant navigations
+                  prefetch
                   radius={2}
-                  selected={node.segment === path[0]}
+                  selected={node.segment === segment}
                   style={{opacity: node.hidden ? 0.25 : undefined}}
                   text={node.title}
                 />

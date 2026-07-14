@@ -1,3 +1,5 @@
+'use client'
+
 import {ReactElement, ReactNode} from 'react'
 import {styled} from 'styled-components'
 
@@ -14,13 +16,13 @@ const Root = styled.div({
   },
 })
 
-export function Layout(props: {children?: ReactNode; path: string[]}): ReactElement {
-  const {children, path} = props
+export function Layout(props: {children?: ReactNode}): ReactElement {
+  const {children} = props
 
   return (
     <Root>
       <Banner />
-      <Navbar path={path} />
+      <Navbar />
       {children}
       <AppFooter />
     </Root>
