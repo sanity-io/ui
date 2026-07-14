@@ -76,23 +76,6 @@ export default function ArcadeFrameRoute(): ReactElement {
 
   const renderErrorMessage = renderError?.message
 
-  useEffect(() => {
-    function handleWindowError(event: ErrorEvent) {
-      setWindowError(event.error)
-
-      // Attempt to prevent Next.js dev overlay from rendering
-      // todo: make this work
-      event.error.stack = null
-      event.stopImmediatePropagation()
-    }
-
-    window.addEventListener('error', handleWindowError, true)
-
-    return () => {
-      window.removeEventListener('error', handleWindowError)
-    }
-  }, [setWindowError])
-
   return (
     <>
       {evalResult?.type === 'success' && !renderError && (
