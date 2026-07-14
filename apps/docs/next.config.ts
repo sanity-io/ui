@@ -1,7 +1,7 @@
 import {sanity} from 'next-sanity/live/cache-life'
+import type { NextConfig } from 'next'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   basePath: '/ui',
   cacheComponents: true,
   // Sanity Live handles on-demand revalidation (see `api/expire-tags` and the
@@ -44,6 +44,16 @@ const nextConfig = {
         ],
       },
     ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/ui',
+        basePath: false,
+        permanent: true,
+      },
+    ];
   },
 }
 

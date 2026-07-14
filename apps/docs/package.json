@@ -2,10 +2,9 @@
   "name": "sanity-ui-docs",
   "version": "2.0.0",
   "private": true,
-  "description": "Documentation app for @sanity/ui (sanity.io/ui)",
   "license": "MIT",
-  "author": "Sanity.io <hello@sanity.io>",
   "scripts": {
+    "prepare": "next typegen",
     "build": "run-s next:build sanity:manifest:extract",
     "dev": "run-p next:dev sanity:dev",
     "next:build": "next build",
