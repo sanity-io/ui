@@ -113,8 +113,5 @@
   },
   "engines": {
     "node": ">=20.19 <22 || >=22.12"
-  },
-  "esm.sh": {
-    "bundle": false
   }
 }
