@@ -1,3 +1,4 @@
+import {Popover as PopoverV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 
@@ -7,6 +8,23 @@ import {Popover} from '../../../../packages/ui/src/components/popover/Popover'
 import {getArgTypes} from '../utils/getArgTypes'
 
 // const argTypes = getArgTypes(popoverProps)
+
+const PerformancePopover = () => {
+  return (
+    <Popover>
+      <Popover.Trigger>Open Popover</Popover.Trigger>
+      <Popover.Content>Popover content</Popover.Content>
+    </Popover>
+  )
+}
+
+const PerformancePopoverV3 = () => {
+  return (
+    <PopoverV3 content="Popover content">
+      <button>Open Popover</button>
+    </PopoverV3>
+  )
+}
 
 const meta: Meta<typeof Popover> = {
   title: 'Components/Popover',
@@ -19,7 +37,8 @@ const meta: Meta<typeof Popover> = {
       context: '.sui-Popover',
     },
     performance: {
-      component: Popover,
+      component: PerformancePopover,
+      compareComponent: PerformancePopoverV3,
     },
   },
 }
