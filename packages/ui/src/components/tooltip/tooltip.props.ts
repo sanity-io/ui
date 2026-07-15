@@ -25,4 +25,3 @@ export const tooltipContentProps: Record<string, PropDef> = {
   },
   ...placementProps,
 }
-

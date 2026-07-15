@@ -19,8 +19,6 @@ import {
 } from './tooltip.props'
 import {TooltipContext, useTooltip, useTooltipContext} from './useTooltip'
 
-console.log('teste')
-
 const tooltiptriggerClassName = suffixClassName('sui-TooltipTrigger')
 const tooltipContentClassName = suffixClassName('sui-TooltipContent')
 
