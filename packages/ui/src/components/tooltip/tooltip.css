@@ -3,13 +3,13 @@
   --tooltip-delay-close: var(--tooltip-delay-group, 100ms);
 
   background: var(--backdrop);
+  visibility: hidden;
   opacity: 0;
   scale: 0.9;
-  visibility: hidden;
-  transition:
-    opacity 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-close),
-    scale 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-close),
-    visibility 0s linear calc(var(--tooltip-delay-close) + 200ms);
+  transition: var(--fade-out-transition);
+  transition-delay:
+    var(--tooltip-delay-close), var(--tooltip-delay-close),
+    calc(var(--tooltip-delay-close) + 200ms);
 }
 
 [aria-describedby]:is(:hover, :focus-visible)
@@ -17,39 +17,13 @@
   visibility: visible;
   opacity: 1;
   scale: 1;
-  transition:
-    opacity 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-open),
-    scale 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-open),
-    visibility 0s linear var(--tooltip-delay-open);
+  transition: var(--fade-in-transition);
+  transition-delay:
+    var(--tooltip-delay-open), var(--tooltip-delay-open),
+    var(--tooltip-delay-open);
 }
 
 [aria-describedby]:is(:hover, :focus-visible)
   + .sui-tooltip-dismissed[role="tooltip"] {
   transition: none;
-}
-
-.sui-TooltipContent[class*="placement-bottom"],
-.sui-TooltipContent[class*="placement-top"] {
-  margin-block: var(--space-1);
-}
-
-.sui-TooltipContent[class*="placement-left"],
-.sui-TooltipContent[class*="placement-right"] {
-  margin-inline: var(--space-1);
-}
-
-.sui-TooltipContent[class*="bottom"] {
-  transform-origin: center top;
-}
-
-.sui-TooltipContent[class*="top"] {
-  transform-origin: center bottom;
-}
-
-.sui-TooltipContent[class*="left"] {
-  transform-origin: right center;
-}
-
-.sui-TooltipContent[class*="right"] {
-  transform-origin: left center;
 }
