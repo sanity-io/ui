@@ -75,15 +75,8 @@ export function TooltipContent({placement = 'bottom', ...props}: TooltipContentP
   )
 
   const handleBeforeToggle = (e: ToggleEvent) => {
-    if (e.newState === 'open') {
-      if (dismissedRef.current) {
-        e.preventDefault()
-        return
-      }
-
-      e.currentTarget.removeAttribute('data-dismissed')
-    } else {
-      e.currentTarget.toggleAttribute('data-dismissed', dismissedRef.current)
+    if (e.newState === 'open' && dismissedRef.current) {
+      e.preventDefault()
     }
   }
 

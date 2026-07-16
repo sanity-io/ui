@@ -1,15 +1,10 @@
 .sui-TooltipContent {
-  --tooltip-delay-open: var(--tooltip-delay-group, 500ms);
-  --tooltip-delay-close: var(--tooltip-delay-group, 100ms);
-
+  --tooltip-delay: var(--tooltip-delay-group, 500ms);
   background: var(--backdrop);
   visibility: hidden;
   opacity: 0;
   scale: 0.9;
-  transition: var(--fade-out-transition);
-  transition-delay:
-    var(--tooltip-delay-close), var(--tooltip-delay-close),
-    calc(var(--tooltip-delay-close) + 200ms);
+  transition: none;
 }
 
 .sui-TooltipContent:popover-open {
@@ -18,8 +13,8 @@
   scale: 1;
   transition: var(--fade-in-transition);
   transition-delay:
-    var(--tooltip-delay-open), var(--tooltip-delay-open),
-    var(--tooltip-delay-open);
+    var(--tooltip-delay), var(--tooltip-delay),
+    var(--tooltip-delay);
 }
 
 @starting-style {
@@ -28,8 +23,4 @@
     opacity: 0;
     scale: 0.9;
   }
-}
-
-.sui-TooltipContent[data-dismissed] {
-  transition: none;
 }
