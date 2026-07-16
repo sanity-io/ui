@@ -1,4 +1,4 @@
-import {createContext, startTransition, useContext, useId, useState} from 'react'
+import {createContext, useContext, useId, useState} from 'react'
 
 /** @public */
 export interface PopoverContextValue {
@@ -24,8 +24,7 @@ export function usePopoverContext(): PopoverContextValue {
 export function usePopover(): PopoverContextValue {
   const reactId = useId()
   const id = reactId
-  const [open, _setOpen] = useState(false)
-  const setOpen: typeof _setOpen = (state) => startTransition(() => _setOpen(state))
+  const [open, setOpen] = useState(false)
 
   return {id, open, setOpen}
 }

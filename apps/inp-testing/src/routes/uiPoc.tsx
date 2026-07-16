@@ -6,6 +6,7 @@ import {
   Grid,
   Heading,
   HStack,
+  Popover,
   Radio,
   Switch,
   Text,
@@ -203,6 +204,41 @@ function TooltipMountSection() {
   )
 }
 
+/** Mount cost: one click renders (or removes) a large set of tooltip-wrapped triggers. */
+function PopoverMountSection() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Card density="regular">
+      <VStack gap={3}>
+        <Text size={1} weight="semibold">
+          5. Popover mount ({TOOLTIP_COUNT} popovers)
+        </Text>
+        <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} popover-wrapped buttons.</Text>
+        <HStack gap={2}>
+          <Button
+            text={open ? 'Close panel' : 'Open panel'}
+            onClick={() => setOpen((value) => !value)}
+          />
+        </HStack>
+
+        {open && (
+          <div style={scrollAreaStyle}>
+            <HStack gap={2}>
+              {Array.from({length: TOOLTIP_COUNT}, (_, index) => (
+                <Popover key={index}>
+                  <Popover.Trigger as={Button} text="Open Popover" />
+                  <Popover.Content>Popover text</Popover.Content>
+                </Popover>
+              ))}
+            </HStack>
+          </div>
+        )}
+      </VStack>
+    </Card>
+  )
+}
+
 function UiPoc() {
   return (
     <VStack gap={4}>
@@ -212,6 +248,7 @@ function UiPoc() {
       <ToneToggleSection />
       <PanelSwapSection />
       <TooltipMountSection />
+      <PopoverMountSection />
     </VStack>
   )
 }

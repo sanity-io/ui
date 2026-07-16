@@ -60,3 +60,18 @@ export const Default: Story = {
     await expect((await canvas.findByText('')).classList).toContain('')
   },
 }
+
+export const WithTooltip: Story = {
+  render: (props) => {
+    return (
+      <Popover {...props}>
+        <Popover.Trigger as={Button} text="Open Popover" />
+
+        <Popover.Content>Popover Content</Popover.Content>
+      </Popover>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText('')).classList).toContain('')
+  },
+}

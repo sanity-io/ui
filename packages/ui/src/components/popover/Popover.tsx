@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import {
   Activity,
-  useState,
   type ComponentPropsWithRef,
   type ElementType,
   type PropsWithChildren,
@@ -51,9 +50,8 @@ function PopoverTrigger<T extends ElementType = 'button'>(
 }
 
 function PopoverContent({placement = 'bottom', ...props}: PopoverContentProps) {
-  const {id} = usePopoverContext()
+  const {id, open, setOpen} = usePopoverContext()
   const {children, className, style, ...rest} = getProps({placement, ...props}, popoverContentProps)
-  const [open, setOpen] = useState(false)
 
   const handleToggle = (e: ToggleEvent) => {
     setOpen(e.newState === 'open')
