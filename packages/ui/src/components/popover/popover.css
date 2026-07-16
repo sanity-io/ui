@@ -2,7 +2,7 @@
   visibility: hidden;
   opacity: 0;
   scale: 0.9;
-  transition: var(--fade-out-transition);
+  transition: none;
 }
 
 .sui-PopoverContent:popover-open {

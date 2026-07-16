@@ -22,8 +22,4 @@
     opacity 200ms cubic-bezier(0.34, 1.2, 0.64, 1),
     scale 200ms cubic-bezier(0.34, 1.2, 0.64, 1), visibility 0s linear,
     display 200ms linear allow-discrete;
-  --fade-out-transition:
-    opacity 200ms cubic-bezier(0.34, 1.2, 0.64, 1),
-    scale 200ms cubic-bezier(0.34, 1.2, 0.64, 1), visibility 0s linear 200ms,
-    display 200ms linear allow-discrete;
 }
