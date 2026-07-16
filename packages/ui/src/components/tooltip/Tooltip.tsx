@@ -27,7 +27,7 @@ function TooltipRoot({children}: PropsWithChildren) {
   return <TooltipContext.Provider value={value}>{children}</TooltipContext.Provider>
 }
 
-export function TooltipTrigger<T extends ElementType = 'button'>(
+function TooltipTrigger<T extends ElementType = 'button'>(
   props: TooltipTriggerProps<T> & Omit<ComponentPropsWithRef<T>, keyof TooltipTriggerProps<T>>,
 ) {
   const {id, dismissedRef} = useTooltipContext()
@@ -67,7 +67,7 @@ export function TooltipTrigger<T extends ElementType = 'button'>(
   )
 }
 
-export function TooltipContent({placement = 'bottom', ...props}: TooltipContentProps) {
+function TooltipContent({placement = 'bottom', ...props}: TooltipContentProps) {
   const {id, dismissedRef} = useTooltipContext()
   const {children, className, style, text, ...rest} = getProps(
     {placement, ...props},

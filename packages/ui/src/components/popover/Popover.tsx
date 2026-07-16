@@ -27,7 +27,7 @@ function PopoverRoot({children}: PropsWithChildren) {
   return <PopoverContext.Provider value={value}>{children}</PopoverContext.Provider>
 }
 
-export function PopoverTrigger<T extends ElementType = 'button'>(
+function PopoverTrigger<T extends ElementType = 'button'>(
   props: PopoverTriggerProps<T> & Omit<ComponentPropsWithRef<T>, keyof PopoverTriggerProps<T>>,
 ) {
   const {id} = usePopoverContext()
@@ -50,7 +50,7 @@ export function PopoverTrigger<T extends ElementType = 'button'>(
   )
 }
 
-export function PopoverContent({placement = 'bottom', ...props}: PopoverContentProps) {
+function PopoverContent({placement = 'bottom', ...props}: PopoverContentProps) {
   const {id} = usePopoverContext()
   const {children, className, style, ...rest} = getProps({placement, ...props}, popoverContentProps)
   const [open, setOpen] = useState(false)

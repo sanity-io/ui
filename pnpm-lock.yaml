@@ -393,6 +393,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      interestfor:
+        specifier: ^1.0.8
+        version: 1.0.8
       react:
         specifier: ^19.2.6
         version: 19.2.6
@@ -4490,6 +4493,9 @@ packages:
   ini@6.0.0:
     resolution: {integrity: sha512-IBTdIkzZNOpqm7q3dRqJvMaldXjDHWkEDfrwGEQTs5eaQMWV+djAhR+wahyNNMAa+qpbDUhBMVt4ZKNwpPm7xQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
+
+  interestfor@1.0.8:
+    resolution: {integrity: sha512-qYwTmxzDnrosGZX/1lDEOsAv73aYiFKLniN20SS78588WhRMHj8z7u2uFe9QZPIVmkCyIbJwiMQ/85Up7hrseQ==}
 
   ipaddr.js@1.9.1:
     resolution: {integrity: sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==}
@@ -10800,6 +10806,8 @@ snapshots:
   ini@5.0.0: {}
 
   ini@6.0.0: {}
+
+  interestfor@1.0.8: {}
 
   ipaddr.js@1.9.1: {}
 

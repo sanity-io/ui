@@ -19,7 +19,9 @@
   ],
   "type": "module",
   "sideEffects": [
-    "*.css"
+    "*.css",
+    "./src/polyfills.ts",
+    "./dist/polyfills.js"
   ],
   "types": "./dist/index.d.ts",
   "exports": {
@@ -27,12 +29,17 @@
       "source": "./src/index.ts",
       "default": "./dist/index.js"
     },
+    "./polyfills": {
+      "source": "./src/polyfills.ts",
+      "default": "./dist/polyfills.js"
+    },
     "./package.json": "./package.json",
     "./styles.css": "./dist/styles.css"
   },
   "publishConfig": {
     "exports": {
       ".": "./dist/index.js",
+      "./polyfills": "./dist/polyfills.js",
       "./package.json": "./package.json",
       "./styles.css": "./dist/styles.css"
     }
@@ -53,6 +60,7 @@
     "@sanity-labs/design-tokens": "0.0.2-alpha.4",
     "@sanity/icons": "^3.7.4",
     "clsx": "^2.1.1",
+    "interestfor": "^1.0.8",
     "react-refractor": "^4.0.0"
   },
   "devDependencies": {
