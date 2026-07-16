@@ -5,9 +5,11 @@ import {
   Checkbox,
   Grid,
   Heading,
+  HStack,
   Radio,
   Switch,
   Text,
+  Tooltip,
   VStack,
 } from '@sanity-labs/ui-poc'
 import {useState} from 'react'
@@ -16,6 +18,7 @@ import {useState} from 'react'
 const ROW_COUNT = 200
 const TONE_CARD_COUNT = 500
 const PANEL_CARD_COUNT = 300
+const TOOLTIP_COUNT = 300
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -158,6 +161,41 @@ function PanelSwapSection() {
   )
 }
 
+/** Mount cost: one click renders (or removes) a large set of tooltip-wrapped triggers. */
+function TooltipMountSection() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Card density="regular">
+      <VStack gap={3}>
+        <Text size={1} weight="semibold">
+          5. Tooltip mount ({TOOLTIP_COUNT} tooltips)
+        </Text>
+        <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} tooltip-wrapped buttons.</Text>
+        <div>
+          <Button
+            text={open ? 'Close panel' : 'Open panel'}
+            onClick={() => setOpen((value) => !value)}
+          />
+        </div>
+
+        {open && (
+          <div style={scrollAreaStyle}>
+            <HStack gap={2}>
+              {Array.from({length: TOOLTIP_COUNT}, (_, index) => (
+                <Tooltip key={index}>
+                  <Tooltip.Trigger as={Button} text="Open Tooltip" />
+                  <Tooltip.Content text="Tooltip text" />
+                </Tooltip>
+              ))}
+            </HStack>
+          </div>
+        )}
+      </VStack>
+    </Card>
+  )
+}
+
 function UiPoc() {
   return (
     <VStack gap={4}>
@@ -166,6 +204,7 @@ function UiPoc() {
       <SelectAllSection />
       <ToneToggleSection />
       <PanelSwapSection />
+      <TooltipMountSection />
     </VStack>
   )
 }
