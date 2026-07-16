@@ -1,12 +1,13 @@
-import {unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Button} from '@sanity/ui'
-import React from 'react'
+import {stegaClean} from 'next-sanity'
 
 import {FigmaLogo} from '@/components/assets'
-import {FigmaButtonData} from '@/lib/data'
+import type {PortableTextValue} from '@/types'
 
-export function FigmaButton(props: {data: WrappedValue<FigmaButtonData>}) {
-  const {title, url} = unwrapData(props.data)
+export function FigmaButton(props: {
+  data: Extract<PortableTextValue[number], {_type: 'content.figmaButton'}>
+}) {
+  const {title, url} = stegaClean(props.data)
 
   if (!url) return null
 

@@ -1,31 +1,32 @@
-import {Icon, IconSymbol} from '@sanity/icons'
-import {sanity} from '@sanity/react-loader/jsx'
+'use client'
+import {Icon} from '@sanity/icons'
 import {Card, Flex, Text} from '@sanity/ui'
+import {stegaClean} from 'next-sanity'
 import {ReactNode} from 'react'
 
-import {useApp} from '../app/useApp'
+import type {SettingsData} from '#lib/data/_global/types.ts'
 
-export function Banner(): ReactNode {
-  const {settings} = useApp()
-
+export function Banner({settings}: {settings: SettingsData | null}): ReactNode {
   if (!settings?.banner || settings.banner.hidden) return null
+
+  const {banner} = settings
 
   return (
     <Card padding={3} tone="primary">
       <Flex align="center" gap={2} justify="center">
-        {settings.banner.icon?.value && (
+        {banner.icon && (
           <Text muted size={1}>
-            <Icon symbol={settings.banner.icon.value as IconSymbol} />
+            <Icon symbol={stegaClean(banner.icon)} />
           </Text>
         )}
 
         <Text muted size={1}>
-          <sanity.strong>{settings.banner.title}</sanity.strong>
-          {settings.banner.link?.href && (
+          <strong>{banner.title}</strong>
+          {banner.link?.href && (
             <>
               {' '}
-              <a href={settings.banner.link.href.value} target="_blank" rel="noreferrer">
-                <sanity.span>{settings.banner.link.title}</sanity.span> &rarr;
+              <a href={stegaClean(banner.link.href)} target="_blank" rel="noreferrer">
+                {banner.link.title} &rarr;
               </a>
             </>
           )}

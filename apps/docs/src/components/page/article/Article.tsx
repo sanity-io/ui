@@ -1,12 +1,12 @@
 'use client'
 
-import {sanity, unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Container, Flex, Heading, Stack, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
+import {stegaClean} from 'next-sanity'
 import {ReactElement, useMemo} from 'react'
 import {styled} from 'styled-components'
 
-import {ArticleData} from '@/lib/data'
+import type {TargetByPathQueryResult} from '#sanity.types'
 
 import {ArticleHeadingsContext} from './ArticleHeadingsContext'
 import {ArticleContent} from './content'
@@ -31,13 +31,15 @@ const TocBox = styled(Box)((props) => {
   }
 })
 
-export function Article(props: {article: WrappedValue<ArticleData>}): ReactElement {
+// @TODO pick the type with `article'` from union of TargetByPathQueryResult, without a ternary just pick in TS or something
+// do not use extends
+export function Article(props: {
+  article: Extract<NonNullable<TargetByPathQueryResult>, {_type: 'article'}>
+}): ReactElement {
   const {article} = props
 
-  const headings = useMemo(
-    () => getHeadings(unwrapData(article.content) as ArticleData['content']),
-    [article],
-  )
+  // Heading slugs are derived from the text, so strip stega metadata first
+  const headings = useMemo(() => getHeadings(stegaClean(article.content)), [article])
 
   const toc = useMemo(() => getTOCTree(headings), [headings])
 
@@ -59,15 +61,11 @@ export function Article(props: {article: WrappedValue<ArticleData>}): ReactEleme
           <Box marginBottom={[5, 5, 5, 6]}>
             <Heading as="h1" size={[2, 2, 3, 4, 5]}>
               {article.apiMember?.isComponent ? (
-                <code>
-                  &lt;<sanity.span>{article.title}</sanity.span> /&gt;
-                </code>
+                <code>&lt;{article.title} /&gt;</code>
               ) : article.apiMember?.isHook ? (
-                <code>
-                  <sanity.span>{article.title}</sanity.span>()
-                </code>
+                <code>{article.title}()</code>
               ) : (
-                <sanity.span>{article.title}</sanity.span>
+                article.title
               )}
             </Heading>
           </Box>

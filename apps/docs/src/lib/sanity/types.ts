@@ -1,33 +1,5 @@
 import {PortableTextObject} from 'sanity'
 
-export interface SanityImageValue {
-  _type: 'image'
-  asset: SanityReferenceValue | null
-  crop: SanityImageCropValue | null
-  hotspot: SanityImageHotspotValue | null
-}
-
-interface SanityReferenceValue {
-  _type: 'reference'
-  _ref: string
-}
-
-interface SanityImageCropValue {
-  _type: 'sanity.imageCrop'
-  top: number
-  left: number
-  bottom: number
-  right: number
-}
-
-interface SanityImageHotspotValue {
-  _type: 'sanity.imageHotspot'
-  width: number
-  x: number
-  y: number
-  height: number
-}
-
 interface SanitySpanValue {
   _type: 'span'
   text: string
@@ -40,8 +12,4 @@ export interface SanityBlockValue {
   listItem?: 'bullet' | 'number'
   markDefs: PortableTextObject[]
   style: string
-}
-
-export type SanityArrayItemValue<T extends {}> = T & {
-  _key: string
 }

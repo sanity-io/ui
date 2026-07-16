@@ -1,6 +1,4 @@
-import groq from 'groq'
-
-const API_CLASS_PROJECTION = groq`
+const API_CLASS_PROJECTION = `// groq
 _id,
 _type,
 _updatedAt,
@@ -68,15 +66,14 @@ release->{version},
 releaseTag
 `
 
-// TODO
-const API_ENUM_PROJECTION = groq`
+const API_ENUM_PROJECTION = `// groq
 ...,
 export->{name,path},
 package->{scope,name},
 release->{version}
 `
 
-const API_FUNCTION_PROJECTION = groq`
+const API_FUNCTION_PROJECTION = `// groq
 _id,
 _type,
 _updatedAt,
@@ -111,7 +108,7 @@ returnType[]{
 typeParameters
 `
 
-const API_INTERFACE_PROJECTION = groq`
+const API_INTERFACE_PROJECTION = `//groq
 _id,
 _type,
 _updatedAt,
@@ -215,7 +212,7 @@ slug,
 typeParameters
 `
 
-const API_NAMESPACE_PROJECTION = groq`
+const API_NAMESPACE_PROJECTION = `// groq
 _id,
 _type,
 _updatedAt,
@@ -251,7 +248,7 @@ release->{version},
 releaseTag
 `
 
-const API_TYPE_ALIAS_PROJECTION = groq`
+const API_TYPE_ALIAS_PROJECTION = `// groq
 _id,
 _type,
 _updatedAt,
@@ -267,7 +264,7 @@ type[]{
 }
 `
 
-const API_VARIABLE_PROJECTION = groq`
+const API_VARIABLE_PROJECTION = `// groq
 _id,
 _type,
 comment,
@@ -291,7 +288,7 @@ type[]{
 }
 `
 
-export const API_SYMBOL_PROJECTION = groq`
+export const API_SYMBOL_PROJECTION = `// groq
 _type == 'api.class' => {
   ${API_CLASS_PROJECTION}
 },

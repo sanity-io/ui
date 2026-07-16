@@ -13,6 +13,7 @@ strictPeerDependencies: false
 # packageExtensions note) versions, so those keep explicit ranges there.
 catalog:
   '@sanity/blueprints': ^0.21.0
+  '@sanity/client': ^7.23.2
   '@sanity/color': ^3.0.6
   '@sanity/functions': ^1.4.0
   '@sanity/icons': ^3.8.0
@@ -21,13 +22,14 @@ catalog:
   '@types/react': ^19.2.17
   '@types/react-dom': ^19.2.3
   '@types/react-is': ^19.2.0
-  babel-plugin-react-compiler: 1.0.0
+  babel-plugin-react-compiler: ^1.0.0
   react: ^19.2.7
   react-dom: ^19.2.7
   react-is: ^19.2.7
   react-refractor: ^4.0.0
   refractor: ^5.0.0
   rimraf: ^5.0.5
+  sanity: ^6.4.0
   styled-components: ^6.4.3
   tsdown: ^0.22.5
   typescript: 6.0.3
@@ -43,9 +45,14 @@ allowBuilds:
   unrs-resolver: true
 
 # Sanity-owned build tooling releases frequently; don't gate it on the
-# default minimum release age (1 day)
+# default minimum release age (1 day). Same for next's `preview` dist-tag
+# (apps/docs pins an exact preview version, so the exclusion only lifts the
+# age gate for versions we deliberately pick).
 minimumReleaseAgeExclude:
+  - '@next/*'
+  - '@sanity/code-input@7.2.7'
   - '@sanity/tsdown-config'
+  - next
 
 # @testing-library/jest-dom/vitest imports `vitest` without declaring it, so it
 # falls back to pnpm's hidden hoist — which can resolve to another workspace

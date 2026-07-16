@@ -7,6 +7,7 @@
       // deployed via @sanity/runtime-cli, not imported by application code
       "entry": ["sanity.blueprint.ts", "functions/*/index.ts"],
     },
+    "apps/docs": {},
     "packages/ui": {
       "ignoreDependencies": [
         // babel-plugin-react-compiler (target '18') injects imports of this runtime

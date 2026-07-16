@@ -1,15 +1,14 @@
-import {wrapData, WrappedValue} from '@sanity/react-loader/jsx'
-import {Metadata} from 'next'
-import {draftMode, headers} from 'next/headers'
+import {type Metadata, type Viewport} from 'next'
+import {Inter} from 'next/font/google'
 import {PropsWithChildren} from 'react'
 
-import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
-import {loadQuery} from '@/lib/sanity/loadQuery'
+import {StyledComponentsRegistry} from '@/lib/styled/registry'
 
+import {AppProviders} from './AppProviders'
+import {ColorSchemeProvider} from './ColorSchemeProvider'
 import {DEFAULT_META_DESCRIPTION, DEFAULT_META_OG_IMAGE} from './constants'
-import {RootLayout} from './RootLayout'
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Sanity UI',
   description: DEFAULT_META_DESCRIPTION,
   icons: {
@@ -28,23 +27,26 @@ export const metadata: Metadata = {
     card: 'summary',
     site: '@sanity_io',
   },
-}
+} satisfies Metadata
 
-export default async function RootLayoutLoader(props: PropsWithChildren) {
-  const {data: rawData, sourceMap} = await loadQuery<GlobalData>(GLOBAL_QUERY)
-  const data: WrappedValue<GlobalData> = wrapData({baseUrl: '/studio'}, rawData, sourceMap)
-  const prefersDarkServerSnapshot = (await headers()).get('sec-ch-prefers-color-scheme') === 'dark'
+const inter = Inter({subsets: ['latin']})
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+} satisfies Viewport
+
+export default function RootLayout(props: PropsWithChildren) {
   return (
-    <RootLayout
-      {...props}
-      data={data}
-      dataset={process.env.SANITY_DATASET!}
-      draftMode={(await draftMode()).isEnabled}
-      hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
-      projectId={process.env.SANITY_PROJECT_ID!}
-      studioOrigin={process.env.SANITY_STUDIO_ORIGIN}
-      prefersDarkServerSnapshot={prefersDarkServerSnapshot}
-    />
+    <html lang="en">
+      <body className={inter.className}>
+        <StyledComponentsRegistry>
+          <ColorSchemeProvider>
+            <AppProviders>{props.children}</AppProviders>
+          </ColorSchemeProvider>
+        </StyledComponentsRegistry>
+      </body>
+    </html>
   )
 }

@@ -1,7 +1,7 @@
 import {ReactElement, useCallback, useEffect, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {useApp} from '@/app/useApp'
+import {basePath} from '@/constants'
 import {isRecord} from '@/lib/common'
 
 const Root = styled.iframe`
@@ -19,7 +19,6 @@ export function ArcadeFrame({
   hookCode: string
   jsxCode: string
 }): ReactElement {
-  const {basePath = '', colorScheme} = useApp()
   const [frame, setFrame] = useState<HTMLIFrameElement | null>(null)
   const [ready, setReady] = useState(false)
   const msgQueueRef = useRef<any[]>([])
@@ -66,12 +65,6 @@ export function ArcadeFrame({
       }
     },
     [frame, ready],
-  )
-
-  // Send color scheme to frame
-  useEffect(
-    () => postMessage({type: 'arcadeFrame/colorScheme', colorScheme}),
-    [colorScheme, postMessage],
   )
 
   // Send input to frame

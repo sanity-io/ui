@@ -4,6 +4,7 @@ import {useRouter} from 'next/navigation'
 import qs from 'qs'
 import {ReactElement, useCallback, useEffect, useReducer, useRef} from 'react'
 
+import {basePath} from '@/constants'
 import {CodeEditorSelection} from '@/lib/codeEditor'
 
 import {arcadeReducer} from './arcadeReducer'
@@ -19,7 +20,7 @@ function compileSearch(params: Record<string, string>): string {
   return qs.stringify(params)
 }
 
-export function ArcadeScreen(props: {title: string; description: string}): ReactElement {
+export function ArcadeScreen(props: {title?: string; description?: string}): ReactElement {
   const router = useRouter()
   const routerRef = useRef(router)
   const [state, dispatch] = useReducer(arcadeReducer, {
@@ -40,7 +41,7 @@ export function ArcadeScreen(props: {title: string; description: string}): React
     const saveFn = debounce((params: ArcadeQueryParams) => {
       const href = `/arcade?${compileSearch(getArcadeQuery(params))}`
       document.title = `${params.title ?? 'Arcade'} | Sanity UI`
-      window.history.replaceState({}, '', `/ui${href}`)
+      window.history.replaceState({}, '', `${basePath}${href}`)
       routerRef.current.replace(href, {scroll: false})
     }, 100)
 

@@ -1,7 +1,5 @@
 'use client'
 
-import {WrappedValue} from '@sanity/react-loader/jsx'
-import {sanity} from '@sanity/react-loader/jsx'
 import {
   Box,
   Button,
@@ -14,12 +12,13 @@ import {
   Text,
   useTheme_v2,
 } from '@sanity/ui'
+import {stegaClean} from 'next-sanity'
 import Link from 'next/link'
 import {ReactElement} from 'react'
 import {styled} from 'styled-components'
 
-import {useApp} from '@/app/useApp'
-import {HeroSectionData} from '@/lib/data'
+import {imageUrlBuilder} from '#lib/sanity/image.ts'
+import type {TargetByPathQueryResult} from '#sanity.types'
 
 const Root = styled(Card)`
   position: relative;
@@ -38,10 +37,15 @@ const BackgroundBox = styled(Box)`
   z-index: 0;
 `
 
-export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): ReactElement {
+export function HeroSection(props: {
+  data: Extract<
+    NonNullable<
+      Extract<NonNullable<TargetByPathQueryResult>, {_type: 'screen'}>['sections']
+    >[number],
+    {_type: 'screenSection.hero'}
+  >
+}): ReactElement {
   const {data} = props
-
-  const {imageUrlBuilder} = useApp()
 
   const {color} = useTheme_v2()
 
@@ -64,31 +68,31 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
       <Container width={0}>
         <Stack gap={[4, 4, 5]}>
           <Heading align="center" as="h1" size={[2, 3, 4, 5]}>
-            <sanity.span>{data.headline}</sanity.span>
+            {data.headline}
           </Heading>
 
           {data.copy && (
             <Text align="center" as="p" muted size={[2, 2, 3]}>
-              <sanity.span>{data.copy}</sanity.span>
+              {data.copy}
             </Text>
           )}
 
           {data.ctas && (
             <Inline gap={2} style={{textAlign: 'center'}}>
               {data.ctas
-                .filter((cta) => cta.href?.value)
+                .filter((cta) => cta.href)
                 .map((cta) => (
                   <Button
                     as={Link}
                     data-as="a"
                     fontSize={2}
-                    href={cta.href?.value || ''}
+                    href={stegaClean(cta.href) || ''}
                     key={cta._key}
-                    mode={(cta.mode?.value || 'default') as any}
+                    mode={stegaClean(cta.mode) || 'default'}
                     paddingX={5}
                     paddingY={4}
-                    text={<sanity.span>{cta.label}</sanity.span>}
-                    tone={(cta.tone?.value || 'default') as any}
+                    text={cta.label}
+                    tone={stegaClean(cta.tone) || 'default'}
                   />
                 ))}
             </Inline>
@@ -99,7 +103,7 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
       {data.linksHeader && (
         <Box marginTop={[5, 6, 7]}>
           <Heading align="center" size={[1, 1, 2]}>
-            <sanity.span>{data.linksHeader}</sanity.span>
+            {data.linksHeader}
           </Heading>
         </Box>
       )}
@@ -109,28 +113,24 @@ export function HeroSection(props: {data: WrappedValue<HeroSectionData>}): React
           <Box marginTop={[4, 4, 5]}>
             <Grid gap={[3, 4, 4, 5]} gridTemplateColumns={[1, 1, 2, 3]}>
               {data.links
-                .filter((link) => link.href?.value)
+                .filter((link) => link.href)
                 .map((link) => (
                   <Card
                     as={Link}
                     border
                     data-as="a"
-                    href={link.href?.value || '/docs/motivation'}
+                    href={stegaClean(link.href) || '/docs/motivation'}
                     key={link._key}
                     padding={4}
                     radius={2}
                   >
                     <Stack gap={3}>
                       <Heading as="h2" size={1}>
-                        {link.title ? <sanity.span>{link.title}</sanity.span> : <em>Untitled</em>}
+                        {link.title || <em>Untitled</em>}
                       </Heading>
                       {link.subtitle && (
                         <Text as="p" muted size={1}>
-                          {link.subtitle ? (
-                            <sanity.span>{link.subtitle}</sanity.span>
-                          ) : (
-                            <em>Unsubtitled</em>
-                          )}
+                          {link.subtitle}
                         </Text>
                       )}
                     </Stack>

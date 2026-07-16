@@ -1,12 +1,11 @@
-import {unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Card, Text} from '@sanity/ui'
+import {stegaClean} from 'next-sanity'
 
-import {useApp} from '@/app/useApp'
-import {ImageData} from '@/lib/data'
+import {imageUrlBuilder} from '#lib/sanity/image.ts'
+import type {PortableTextValue} from '@/types'
 
-export function Image(props: {data: WrappedValue<ImageData>}) {
-  const {imageUrlBuilder} = useApp()
-  const {alt, asset, caption} = unwrapData(props.data)
+export function Image(props: {data: Extract<PortableTextValue[number], {_type: 'image'}>}) {
+  const {alt, asset, caption} = props.data
 
   if (!asset) return null
 
@@ -16,7 +15,11 @@ export function Image(props: {data: WrappedValue<ImageData>}) {
     <Box as="figure" marginY={[4, 4, 5]}>
       <Card overflow="hidden" radius={2} shadow={1}>
         {/* oxlint-disable-next-line nextjs/no-img-element */}
-        <img alt={alt || undefined} src={src} style={{verticalAlign: 'top', width: '100%'}} />
+        <img
+          alt={stegaClean(alt) || undefined}
+          src={src}
+          style={{verticalAlign: 'top', width: '100%'}}
+        />
       </Card>
       <Box marginTop={2}>
         <Text as="figcaption" muted size={1}>

@@ -1,11 +1,10 @@
 'use client'
 
-import {sanity} from '@sanity/react-loader/jsx'
 import {Tree, TreeItem} from '@sanity/ui'
 import {useRouter} from 'next/navigation'
-import {MouseEvent, ReactElement, useCallback} from 'react'
+import {MouseEvent, ReactElement, useCallback, useEffect} from 'react'
 
-import {useApp} from '@/app/useApp'
+import {basePath} from '@/constants'
 import {NavNode} from '@/lib/nav'
 
 export function Nav(props: {nav: NavNode; path: string}): ReactElement {
@@ -29,10 +28,18 @@ function ensureBasePath(path: string, basePath: string = '') {
 function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   const {level, node, path} = props
   const router = useRouter()
-  const {features, basePath} = useApp()
+  const hidden = node.hidden
   const href = node.targetId && node.href ? node.href : undefined
   const hrefWithBasePath =
     node.targetId && node.href ? ensureBasePath(node.href, basePath) : undefined
+
+  // The destination pages are fully cached, so prefetching their content makes
+  // sidebar navigations instant. (TreeItem renders a plain anchor — its
+  // `linkAs` prop bypasses the Box styles — so prefetch imperatively instead
+  // of through `next/link`.)
+  useEffect(() => {
+    if (href && !hidden) router.prefetch(href)
+  }, [hidden, href, router])
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLLIElement>) => {
@@ -44,7 +51,7 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
     [href, router],
   )
 
-  if (node.hidden && !features.hintHiddenContent) {
+  if (hidden) {
     return null
   }
 
@@ -52,24 +59,13 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
 
   return (
     <TreeItem
+      // @TODO support passing linkAs={Link}, or just as={Link}
       expanded={!node.collapsed || path.startsWith(`${node.href}/`)}
       href={hrefWithBasePath}
       onClick={handleClick}
       selected={href ? href === path : false}
       style={{opacity: node.hidden ? 0.25 : undefined}}
-      text={
-        title ? (
-          node.isHook ? (
-            <>
-              <sanity.span>{title}</sanity.span>()
-            </>
-          ) : (
-            <sanity.span>{title}</sanity.span>
-          )
-        ) : (
-          <em>Untitled</em>
-        )
-      }
+      text={title ? node.isHook ? <>{title}()</> : title : <em>Untitled</em>}
     >
       {node.children?.map((child) => (
         <NavMenuItem key={child.href} level={level + 1} node={child} path={path} />

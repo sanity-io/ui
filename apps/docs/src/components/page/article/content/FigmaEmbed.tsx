@@ -1,9 +1,8 @@
-import {unwrapData, WrappedValue} from '@sanity/react-loader/jsx'
 import {Card} from '@sanity/ui'
-import React from 'react'
+import {stegaClean} from 'next-sanity'
 import {styled} from 'styled-components'
 
-import {FigmaEmbedData} from '@/lib/data'
+import type {PortableTextValue} from '@/types'
 
 const IFrame = styled.iframe`
   border: 0;
@@ -11,8 +10,10 @@ const IFrame = styled.iframe`
   display: block;
 `
 
-export function FigmaEmbed(props: {data: WrappedValue<FigmaEmbedData>}) {
-  const {url} = unwrapData(props.data)
+export function FigmaEmbed(props: {
+  data: Extract<PortableTextValue[number], {_type: 'content.figmaEmbed'}>
+}) {
+  const {url} = stegaClean(props.data)
 
   if (!url) return null
 

@@ -1,28 +1,30 @@
-import {WrappedValue} from '@sanity/react-loader/jsx'
 import {Box, Card, Code, Stack, Text} from '@sanity/ui'
+import {stegaClean} from 'next-sanity'
 import {ReactElement} from 'react'
 import {styled} from 'styled-components'
 
 import {isArray} from '@/lib/common'
-import {PropertyData, PropertyTableData} from '@/lib/data'
+import type {PortableTextValue} from '@/types'
 
 import {PlainContent} from '../PlainContent'
 
-export function PropertyTable(props: {data: WrappedValue<PropertyTableData>}): ReactElement {
+type PropertyTableValue = Extract<PortableTextValue[number], {_type: 'propertyTable'}>
+
+export function PropertyTable(props: {data: PropertyTableValue}): ReactElement {
   const {properties, caption} = props.data
 
   return (
     <Box marginY={[2, 2, 3, 4]}>
       <Card radius={2} shadow={1}>
         {properties?.map((property) => (
-          <Property key={property.name?.value} property={property} />
+          <Property key={stegaClean(property.name)} property={property} />
         ))}
       </Card>
 
-      {caption?.value && (
+      {caption && (
         <Box marginTop={[3, 3, 4, 5]}>
           <Text muted size={1}>
-            {caption?.value}
+            {caption}
           </Text>
         </Box>
       )}
@@ -38,14 +40,16 @@ const PropertyBox = styled(Box)`
   }
 `
 
-function Property(props: {property: WrappedValue<PropertyData>}) {
-  const {property} = props
+type PropertyValue = NonNullable<PropertyTableValue['properties']>[number]
+function Property(props: {property: PropertyValue}) {
+  // The type signature is rendered as (copyable) code, so strip stega metadata
+  const {name, required, type} = stegaClean(props.property)
 
-  let tsType = property.name?.value
+  let tsType = name
 
-  if (!property.required?.value) tsType += '?'
+  if (!required) tsType += '?'
 
-  tsType += `: ${property.type?.value}`
+  tsType += `: ${type}`
 
   return (
     <PropertyBox padding={3}>
@@ -54,7 +58,9 @@ function Property(props: {property: WrappedValue<PropertyData>}) {
           {tsType}
         </Code>
 
-        {isArray(property.description) && <PlainContent blocks={property.description} />}
+        {isArray(props.property.description) && (
+          <PlainContent blocks={props.property.description} />
+        )}
       </Stack>
     </PropertyBox>
   )
