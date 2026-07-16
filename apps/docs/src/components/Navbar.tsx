@@ -5,13 +5,13 @@ import Link from 'next/link'
 import {usePathname} from 'next/navigation'
 import {ReactElement} from 'react'
 
-import {useApp} from '../app/useApp'
+import type {NavNode} from '#lib/nav/types.ts'
+
 import {GitHubMark} from './assets'
 
-export function Navbar(): ReactElement {
+export function Navbar({nav}: {nav: NavNode | null}): ReactElement {
   // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs
   const segment = usePathname().split('/').find(Boolean)
-  const {nav} = useApp()
 
   return (
     <Card flex="none" padding={[2, 2, 3, 4]} style={{lineHeight: 0}}>

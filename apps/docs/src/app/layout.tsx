@@ -43,7 +43,7 @@ export default function RootLayout(props: PropsWithChildren) {
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <ColorSchemeProvider>
-            <AppProviders projectId={process.env.SANITY_PROJECT_ID!}>{props.children}</AppProviders>
+            <AppProviders>{props.children}</AppProviders>
           </ColorSchemeProvider>
         </StyledComponentsRegistry>
       </body>

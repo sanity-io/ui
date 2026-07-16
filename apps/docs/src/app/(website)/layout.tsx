@@ -1,9 +1,10 @@
 import {VisualEditing} from 'next-sanity/visual-editing'
 import dynamic from 'next/dynamic'
 import {draftMode} from 'next/headers'
-import {PropsWithChildren, Suspense, ReactElement, ReactNode} from 'react'
+import {PropsWithChildren, Suspense} from 'react'
 import {styled} from 'styled-components'
 
+import {parseNav} from '#lib/nav/parseNav.ts'
 import {Banner} from '@/components/Banner'
 import {AppFooter} from '@/components/Footer'
 import {Navbar} from '@/components/Navbar'
@@ -15,8 +16,6 @@ import {
   sanityFetch,
   SanityLive,
 } from '@/lib/sanity/live'
-
-import {AppDataProvider} from './AppDataProvider'
 
 const DraftModeToast = dynamic(() => import('@/app/DraftModeToast'))
 
@@ -80,13 +79,15 @@ async function CachedGlobalData(props: PropsWithChildren<DynamicFetchOptions>) {
   const {children, perspective, stega} = props
   const {data} = await sanityFetch({query: GLOBAL_QUERY, perspective, stega})
   const global = data as GlobalData | null
+  const nav = global?.nav ? parseNav(global.nav, []) : null
 
-  // The banner/navbar/footer chrome lives in the layout so it stays mounted
-  // (and doesn't flash a fallback) while pages swap during navigations
   return (
-    <AppDataProvider nav={global?.nav ?? null} settings={global?.settings ?? null}>
-      <Layout>{children}</Layout>
-    </AppDataProvider>
+    <Root>
+      <Banner settings={global?.settings ?? null} />
+      <Navbar nav={nav} />
+      {children}
+      <AppFooter />
+    </Root>
   )
 }
 
@@ -98,16 +99,3 @@ const Root = styled.div({
     display: 'flex',
   },
 })
-
-function Layout(props: {children?: ReactNode}): ReactElement {
-  const {children} = props
-
-  return (
-    <Root>
-      <Banner />
-      <Navbar />
-      {children}
-      <AppFooter />
-    </Root>
-  )
-}

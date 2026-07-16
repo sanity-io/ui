@@ -4,11 +4,9 @@ import {Card, Flex, Text} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
 import {ReactNode} from 'react'
 
-import {useApp} from '../app/useApp'
+import type {SettingsData} from '#lib/data/_global/types.ts'
 
-export function Banner(): ReactNode {
-  const {settings} = useApp()
-
+export function Banner({settings}: {settings: SettingsData | null}): ReactNode {
   if (!settings?.banner || settings.banner.hidden) return null
 
   const {banner} = settings
