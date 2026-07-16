@@ -1,4 +1,5 @@
 import {VisualEditing} from 'next-sanity/visual-editing'
+import dynamic from 'next/dynamic'
 import {draftMode} from 'next/headers'
 import {PropsWithChildren, Suspense, ReactElement, ReactNode} from 'react'
 import {styled} from 'styled-components'
@@ -15,6 +16,8 @@ import {
 } from '@/lib/sanity/live'
 
 import {AppDataProvider} from './AppDataProvider'
+
+const DraftModeToast = dynamic(() => import('@/app/DraftModeToast'))
 
 const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 export default async function WebsiteLayout(props: PropsWithChildren) {
@@ -41,7 +44,23 @@ export default async function WebsiteLayout(props: PropsWithChildren) {
         // handle events immediately.
         waitFor={process.env.VERCEL_ENV === 'production' ? 'function' : undefined}
       />
-      {isDraftMode && <VisualEditing basePath={basePath} />}
+      {isDraftMode && (
+        <>
+          <DraftModeToast
+            action={async () => {
+              'use server'
+
+              await Promise.allSettled([
+                // oxlint-disable-next-line typescript/await-thenable
+                (await draftMode()).disable(),
+                // Simulate a delay to show the loading state
+                new Promise((resolve) => setTimeout(resolve, 1000)),
+              ])
+            }}
+          />
+          <VisualEditing basePath={basePath} />
+        </>
+      )}
     </>
   )
 }

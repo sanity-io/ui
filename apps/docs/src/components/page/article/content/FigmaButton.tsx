@@ -2,9 +2,11 @@ import {Button} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
 
 import {FigmaLogo} from '@/components/assets'
-import {FigmaButtonData} from '@/lib/data'
+import type {PortableTextValue} from '@/types'
 
-export function FigmaButton(props: {data: FigmaButtonData}) {
+export function FigmaButton(props: {
+  data: Extract<PortableTextValue[number], {_type: 'content.figmaButton'}>
+}) {
   const {title, url} = stegaClean(props.data)
 
   if (!url) return null

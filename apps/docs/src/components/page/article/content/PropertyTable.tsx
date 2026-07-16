@@ -4,11 +4,13 @@ import {ReactElement} from 'react'
 import {styled} from 'styled-components'
 
 import {isArray} from '@/lib/common'
-import {PropertyData, PropertyTableData} from '@/lib/data'
+import type {PortableTextValue} from '@/types'
 
 import {PlainContent} from '../PlainContent'
 
-export function PropertyTable(props: {data: PropertyTableData}): ReactElement {
+type PropertyTableValue = Extract<PortableTextValue[number], {_type: 'propertyTable'}>
+
+export function PropertyTable(props: {data: PropertyTableValue}): ReactElement {
   const {properties, caption} = props.data
 
   return (
@@ -38,7 +40,8 @@ const PropertyBox = styled(Box)`
   }
 `
 
-function Property(props: {property: PropertyData}) {
+type PropertyValue = NonNullable<PropertyTableValue['properties']>[number]
+function Property(props: {property: PropertyValue}) {
   // The type signature is rendered as (copyable) code, so strip stega metadata
   const {name, required, type} = stegaClean(props.property)
 

@@ -1,12 +1,15 @@
 import {Icon} from '@sanity/icons'
 import {Box, Card, Flex, Text} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
+import type React from 'react'
 
-import {CalloutData} from '@/lib/data'
+import type {PortableTextValue} from '@/types'
 
 import {PlainContent} from '../PlainContent'
 
-export function Callout(props: {data: CalloutData}) {
+export function Callout(props: {
+  data: Extract<PortableTextValue[number], {_type: 'callout'}>
+}): React.JSX.Element {
   const {content, icon, tone} = props.data
 
   return (

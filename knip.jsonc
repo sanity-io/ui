@@ -8,7 +8,7 @@
       "entry": ["sanity.blueprint.ts", "functions/*/index.ts"],
     },
     "apps/docs": {
-      "entry": ["sanity.types.ts"]
+      "entry": ["sanity.types.ts"],
     },
     "packages/ui": {
       "ignoreDependencies": [

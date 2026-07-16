@@ -1,7 +1,4 @@
-import {groq} from 'next-sanity'
-
-// @sanity-typegen-ignore
-const API_CLASS_PROJECTION = groq`
+const API_CLASS_PROJECTION = `// groq
 _id,
 _type,
 _updatedAt,
@@ -69,16 +66,14 @@ release->{version},
 releaseTag
 `
 
-// @sanity-typegen-ignore
-const API_ENUM_PROJECTION = groq`
+const API_ENUM_PROJECTION = `// groq
 ...,
 export->{name,path},
 package->{scope,name},
 release->{version}
 `
 
-// @sanity-typegen-ignore
-const API_FUNCTION_PROJECTION = groq`
+const API_FUNCTION_PROJECTION = `// groq
 _id,
 _type,
 _updatedAt,
@@ -113,8 +108,7 @@ returnType[]{
 typeParameters
 `
 
-// @sanity-typegen-ignore
-const API_INTERFACE_PROJECTION = groq`
+const API_INTERFACE_PROJECTION = `//groq
 _id,
 _type,
 _updatedAt,
@@ -218,8 +212,7 @@ slug,
 typeParameters
 `
 
-// @sanity-typegen-ignore
-const API_NAMESPACE_PROJECTION = groq`
+const API_NAMESPACE_PROJECTION = `// groq
 _id,
 _type,
 _updatedAt,
@@ -255,8 +248,7 @@ release->{version},
 releaseTag
 `
 
-// @sanity-typegen-ignore
-const API_TYPE_ALIAS_PROJECTION = groq`
+const API_TYPE_ALIAS_PROJECTION = `// groq
 _id,
 _type,
 _updatedAt,
@@ -272,8 +264,7 @@ type[]{
 }
 `
 
-// @sanity-typegen-ignore
-const API_VARIABLE_PROJECTION = groq`
+const API_VARIABLE_PROJECTION = `// groq
 _id,
 _type,
 comment,
@@ -297,8 +288,7 @@ type[]{
 }
 `
 
-// @sanity-typegen-ignore
-export const API_SYMBOL_PROJECTION = groq`
+export const API_SYMBOL_PROJECTION = `// groq
 _type == 'api.class' => {
   ${API_CLASS_PROJECTION}
 },

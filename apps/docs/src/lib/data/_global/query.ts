@@ -1,6 +1,6 @@
-import {groq} from 'next-sanity'
+import {defineQuery, groq} from 'next-sanity'
 
-const MAIN_NAV_QUERY = groq`
+const MAIN_NAV_QUERY = defineQuery(`
 *[_type == "nav" && id in ["main"]]{
   _id,
   title,
@@ -37,11 +37,11 @@ const MAIN_NAV_QUERY = groq`
     }
   }
 }[0]
-`
+`)
 
-const SETTINGS_QUERY = groq`*[_id == "settings"]{_id,banner}[0]`
+const SETTINGS_QUERY = defineQuery(`*[_id == "settings"]{_id,banner}[0]`)
 
-export const GLOBAL_QUERY = groq`{
+export const GLOBAL_QUERY = defineQuery(`{
   "nav": ${MAIN_NAV_QUERY},
   "settings": ${SETTINGS_QUERY}
-}`
+}`)

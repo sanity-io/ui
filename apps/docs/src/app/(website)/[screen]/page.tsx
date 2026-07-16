@@ -4,10 +4,10 @@ import {notFound} from 'next/navigation'
 import {Suspense} from 'react'
 
 import {
-  articlesQuery,
   buildTargetByPathParams,
+  screensQuery,
   targetByPathQuery,
-  type ArticlesQueryParams,
+  type ScreensQueryParams,
 } from '#lib/sanity/queries.ts'
 import {DEFAULT_META_DESCRIPTION} from '@/app/constants'
 import {Article} from '@/components/page/article/Article'
@@ -23,18 +23,18 @@ import {
   sanityFetchStaticParams,
 } from '@/lib/sanity/live'
 
+import {ArcadePage} from './ArcadePage'
+
 export async function generateStaticParams() {
-  const {data: screens} = await sanityFetchStaticParams({
-    query: articlesQuery,
-    params: {id: primaryNavId} satisfies ArticlesQueryParams,
+  const {data} = await sanityFetchStaticParams({
+    query: screensQuery,
+    params: {id: primaryNavId} satisfies ScreensQueryParams,
   })
 
-  return screens
+  return data
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps<'/[screen]/[...article]'>): Promise<Metadata> {
+export async function generateMetadata({params}: PageProps<'/[screen]'>): Promise<Metadata> {
   const [{screen}, {perspective}] = await Promise.all([params, getDynamicFetchOptions()])
   const {data} = await sanityFetchMetadata({
     query: targetByPathQuery,
@@ -71,13 +71,11 @@ export async function generateMetadata({
   }
 }
 
-export default async function ArticlePage({params}: PageProps<'/[screen]/[...article]'>) {
+export default async function ScreenPage({params}: PageProps<'/[screen]'>) {
   const {isEnabled: isDraftMode} = await draftMode()
   if (!isDraftMode) {
-    const {screen, article} = await params
-    return (
-      <CachedScreenPage screen={screen} article={article} perspective="published" stega={false} />
-    )
+    const {screen} = await params
+    return <CachedScreenPage screen={screen} perspective="published" stega={false} />
   }
   return (
     <Suspense>
@@ -86,27 +84,25 @@ export default async function ArticlePage({params}: PageProps<'/[screen]/[...art
   )
 }
 
-async function DynamicScreenPage({params}: Pick<PageProps<'/[screen]/[...article]'>, 'params'>) {
-  const [{screen, article}, {perspective, stega}] = await Promise.all([
-    params,
-    getDynamicFetchOptions(),
-  ])
-  return (
-    <CachedScreenPage screen={screen} article={article} perspective={perspective} stega={stega} />
-  )
+async function DynamicScreenPage({params}: Pick<PageProps<'/[screen]'>, 'params'>) {
+  const [{screen}, {perspective, stega}] = await Promise.all([params, getDynamicFetchOptions()])
+  return <CachedScreenPage screen={screen} perspective={perspective} stega={stega} />
 }
 
 async function CachedScreenPage({
   screen,
-  article,
   perspective,
   stega,
-}: Awaited<PageProps<'/[screen]/[...article]'>['params']> & DynamicFetchOptions) {
+}: Awaited<PageProps<'/[screen]'>['params']> & DynamicFetchOptions) {
   'use cache'
+
+  if (screen === 'arcade') {
+    return <ArcadePage />
+  }
 
   const {data} = await sanityFetch({
     query: targetByPathQuery,
-    params: buildTargetByPathParams({screen, article}),
+    params: buildTargetByPathParams({screen}),
     perspective,
     stega,
   })

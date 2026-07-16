@@ -2,6 +2,7 @@
 
 import {codeInput} from '@sanity/code-input'
 import {SanityMonogram} from '@sanity/logos'
+import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {presentationTool} from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
@@ -29,6 +30,7 @@ const prodStudio = defineConfig({
         },
       },
     }),
+    visionTool(),
   ],
   schema,
   icon: SanityMonogram,

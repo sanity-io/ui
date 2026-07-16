@@ -5,10 +5,11 @@ import {defineCliConfig} from 'sanity/cli'
 export default defineCliConfig({
   reactCompiler: {target: '19'},
   schemaExtraction: {
-    enabled: true
+    enabled: true,
   },
   typegen: {
-    enabled: true
+    enabled: true,
+    overloadClientMethods: true,
   },
   vite: {
     resolve: {

@@ -1,7 +1,7 @@
 import slugify from '@sindresorhus/slugify'
 
+import type {TargetByPathQueryResult} from '#sanity.types'
 import {blocksToText} from '@/lib/blocksToText'
-import {ArticleData} from '@/lib/data'
 import {SanityBlockValue} from '@/lib/sanity/types'
 
 export interface HeadingType {
@@ -16,7 +16,9 @@ function isBlock(record: {_type: string}): record is SanityBlockValue {
   return record._type === 'block'
 }
 
-export function getHeadings(article: ArticleData['content']): HeadingType[] {
+export function getHeadings(
+  article: Extract<NonNullable<TargetByPathQueryResult>, {_type: 'article'}>['content'],
+): HeadingType[] {
   const blocks = (article || []).filter(isBlock) as unknown as SanityBlockValue[]
 
   // todo: uniqify `slug`

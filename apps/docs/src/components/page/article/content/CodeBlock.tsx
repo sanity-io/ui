@@ -1,9 +1,9 @@
 import {Card, Code} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
 
-import {CodeData} from '@/lib/data'
+import type {PortableTextValue} from '@/types'
 
-export function CodeBlock(props: {data: CodeData}) {
+export function CodeBlock(props: {data: Extract<PortableTextValue[number], {_type: 'code'}>}) {
   // Code must render (and copy) without stega metadata
   const value = stegaClean(props.data)
 

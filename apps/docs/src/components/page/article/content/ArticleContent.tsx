@@ -1,21 +1,11 @@
-import {PortableText, PortableTextReactComponents} from '@portabletext/react'
 import {GroqLogo, GroqMonogram, SanityLogo, SanityMonogram} from '@sanity/logos'
 import {Box} from '@sanity/ui'
+import {PortableText, type InferStrictComponents} from 'next-sanity'
 import {stegaClean} from 'next-sanity'
 import {ReactElement} from 'react'
 import {styled} from 'styled-components'
 
-import {
-  ArticleData,
-  CalloutData,
-  CodeData,
-  CodeExampleData,
-  FigmaButtonData,
-  FigmaEmbedData,
-  ImageData,
-  NpmPackageBadgeData,
-  PropertyTableData,
-} from '@/lib/data'
+import type {PortableTextValue} from '@/types'
 
 import {HeadingType} from '../getHeadings'
 import {Block} from './Block'
@@ -77,7 +67,7 @@ const sanityLogos = [
   {name: 'SanityMonogram', component: SanityMonogram as any},
 ]
 
-const components: Partial<PortableTextReactComponents> = {
+const components = {
   block: Block,
 
   list: {
@@ -107,10 +97,10 @@ const components: Partial<PortableTextReactComponents> = {
   },
 
   marks: {
-    // Internal links are not resolved to URLs (yet); render the plain text
-    internalLink: ({children}) => <>{children}</>,
+    // // Internal links are not resolved to URLs (yet); render the plain text
+    // internalLink: ({children}) => <>{children}</>,
     link: ({children, value}) => {
-      const href = stegaClean(value?.href as string | undefined)
+      const href = stegaClean(value?.href)
       const target = (href || '').startsWith('http') ? '_blank' : undefined
 
       return (
@@ -122,27 +112,31 @@ const components: Partial<PortableTextReactComponents> = {
   },
 
   types: {
-    'callout': ({value}) => <Callout data={value as CalloutData} />,
-    'code': ({value}) => <CodeBlock data={value as CodeData} />,
-    'codeExample': ({value}) => <CodeExampleBlock data={value as CodeExampleData} />,
+    'callout': ({value}) => <Callout data={value} />,
+    'code': ({value}) => <CodeBlock data={value} />,
+    'codeExample': ({value}) => <CodeExampleBlock data={value} />,
     'content.groqLogoGrid': () => <LogoGrid logos={groqLogos} />,
     'content.sanityLogoGrid': () => <LogoGrid logos={sanityLogos} />,
     'content.colorGrid': () => <ColorGrid />,
-    'content.figmaEmbed': ({value}) => <FigmaEmbed data={value as FigmaEmbedData} />,
-    'content.figmaButton': ({value}) => <FigmaButton data={value as FigmaButtonData} />,
-    'image': ({value}) => <Image data={value as ImageData} />,
-    'npmPackageBadge': ({value}) => <NpmPackageBadge data={value as NpmPackageBadgeData} />,
-    'propertyTable': ({value}) => <PropertyTable data={value as PropertyTableData} />,
+    'content.figmaEmbed': ({value}) => <FigmaEmbed data={value} />,
+    'content.figmaButton': ({value}) => <FigmaButton data={value} />,
+    'image': ({value}) => <Image data={value} />,
+    'npmPackageBadge': ({value}) => <NpmPackageBadge data={value} />,
+    'propertyTable': ({value}) => <PropertyTable data={value} />,
   },
-}
+} satisfies InferStrictComponents<PortableTextValue>
 
 export function ArticleContent(props: {
-  content: NonNullable<ArticleData['content']>
+  content: PortableTextValue
   headings: HeadingType[]
 }): ReactElement {
   return (
     <Root>
-      <PortableText components={components} value={props.content} />
+      <PortableText
+        // @ts-expect-error - TODO: fix this, maybe upstream in PT?
+        components={components}
+        value={props.content}
+      />
     </Root>
   )
 }

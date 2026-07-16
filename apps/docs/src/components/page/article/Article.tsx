@@ -6,7 +6,7 @@ import {stegaClean} from 'next-sanity'
 import {ReactElement, useMemo} from 'react'
 import {styled} from 'styled-components'
 
-import {ArticleData} from '@/lib/data'
+import type {TargetByPathQueryResult} from '#sanity.types'
 
 import {ArticleHeadingsContext} from './ArticleHeadingsContext'
 import {ArticleContent} from './content'
@@ -31,7 +31,11 @@ const TocBox = styled(Box)((props) => {
   }
 })
 
-export function Article(props: {article: ArticleData}): ReactElement {
+// @TODO pick the type with `article'` from union of TargetByPathQueryResult, without a ternary just pick in TS or something
+// do not use extends
+export function Article(props: {
+  article: Extract<NonNullable<TargetByPathQueryResult>, {_type: 'article'}>
+}): ReactElement {
   const {article} = props
 
   // Heading slugs are derived from the text, so strip stega metadata first

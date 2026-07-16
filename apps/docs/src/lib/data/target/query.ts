@@ -2,8 +2,7 @@ import {groq} from 'next-sanity'
 
 import {API_SYMBOL_PROJECTION} from '../api'
 
-// @sanity-typegen-ignore
-const TARGET_PROJECTION = groq`
+export const TARGET_PROJECTION = `// groq
 ...,
 content[]{
   ...,

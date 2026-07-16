@@ -5,6 +5,7 @@ const basePath = '/ui'
 const nextConfig: NextConfig = {
   basePath,
   cacheComponents: true,
+  partialPrefetching: true,
   // Sanity Live handles on-demand revalidation (see `api/expire-tags` and the
   // `apps/blueprints/docs` invalidate-sync-tags function), so the default
   // time-based revalidation is stretched to 1 year.
