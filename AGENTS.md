@@ -83,4 +83,14 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `http://localhost:3333/#token={SANITY_AUTH_TOKEN}` (Sanity consumes the
   token from the URL hash on load). The same hash-token sign-in also works for
   the studio embedded in the Next.js app at
-  `http://localhost:3000/ui/studio/production#token={SANITY_AUTH_TOKEN}`.
+  `http://localhost:3000/ui/studio/production#token={SANITY_AUTH_TOKEN}`. The
+  standalone studio (`pnpm dev:docs`, project `mos42crl`) exposes two
+  workspaces — `/production` (dataset `production`) and `/development` (dataset
+  `development`); prefer `/development` when creating/publishing test documents
+  so you don't pollute production. When driving the studio through the browser
+  (e.g. computer-use), tokens are redacted from tool output, so you cannot paste
+  the `#token=...` URL into browser instructions. A reliable workaround is a
+  tiny local HTTP server that reads `SANITY_AUTH_TOKEN` from env and serves an
+  HTML page doing `location.replace(<studio-url-with-token>)`, then point the
+  browser at that server — this keeps the secret out of prompts/screenshots
+  while still landing you authenticated in the workspace.
