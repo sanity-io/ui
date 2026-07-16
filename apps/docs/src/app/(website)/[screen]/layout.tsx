@@ -21,13 +21,15 @@ import {
 
 import {ArticleLayout} from './layout.client'
 
+export const instant = false
+
 export async function generateStaticParams() {
-  const {data: screens} = await sanityFetchStaticParams({
+  const {data} = await sanityFetchStaticParams({
     query: screensQuery,
     params: {id: primaryNavId} satisfies ScreensQueryParams,
   })
 
-  return screens
+  return data?.map(({screen}) => ({screen: screen!})) ?? []
 }
 
 export default async function ScreenLayout({params, children}: LayoutProps<'/[screen]'>) {

@@ -23,12 +23,12 @@ import {
 } from '@/lib/sanity/live'
 
 export async function generateStaticParams() {
-  const {data: screens} = await sanityFetchStaticParams({
+  const {data} = await sanityFetchStaticParams({
     query: articlesQuery,
     params: {id: primaryNavId} satisfies ArticlesQueryParams,
   })
 
-  return screens
+  return data?.map(({screen, article}) => ({screen: screen!, article: article as string[]})) ?? []
 }
 
 export async function generateMetadata({

@@ -30,7 +30,7 @@ export async function generateStaticParams() {
     params: {id: primaryNavId} satisfies ScreensQueryParams,
   })
 
-  return data
+  return data?.map(({screen}) => ({screen: screen!})) ?? []
 }
 
 export async function generateMetadata({params}: PageProps<'/[screen]'>): Promise<Metadata> {

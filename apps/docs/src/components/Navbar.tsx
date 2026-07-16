@@ -11,7 +11,7 @@ import {GitHubMark} from './assets'
 export function Navbar(): ReactElement {
   // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs
   const segment = usePathname().split('/').find(Boolean)
-  const {features, nav} = useApp()
+  const {nav} = useApp()
 
   return (
     <Card flex="none" padding={[2, 2, 3, 4]} style={{lineHeight: 0}}>
@@ -37,7 +37,7 @@ export function Navbar(): ReactElement {
         {nav && (
           <Flex align="center" flex={1} gap={1}>
             {nav.children?.map((node) => {
-              if (node.hidden && !features.hintHiddenContent) {
+              if (node.hidden) {
                 return null
               }
 

@@ -4,7 +4,6 @@ import {Tree, TreeItem} from '@sanity/ui'
 import {useRouter} from 'next/navigation'
 import {MouseEvent, ReactElement, useCallback, useEffect} from 'react'
 
-import {useApp} from '@/app/useApp'
 import {basePath} from '@/constants'
 import {NavNode} from '@/lib/nav'
 
@@ -29,8 +28,7 @@ function ensureBasePath(path: string, basePath: string = '') {
 function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   const {level, node, path} = props
   const router = useRouter()
-  const {features} = useApp()
-  const hidden = node.hidden && !features.hintHiddenContent
+  const hidden = node.hidden
   const href = node.targetId && node.href ? node.href : undefined
   const hrefWithBasePath =
     node.targetId && node.href ? ensureBasePath(node.href, basePath) : undefined
@@ -61,6 +59,7 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
 
   return (
     <TreeItem
+      // @TODO support passing linkAs={Link}, or just as={Link}
       expanded={!node.collapsed || path.startsWith(`${node.href}/`)}
       href={hrefWithBasePath}
       onClick={handleClick}

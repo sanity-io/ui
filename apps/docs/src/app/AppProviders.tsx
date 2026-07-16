@@ -24,22 +24,17 @@ const theme = buildTheme()
  * and the arcade frame). Sanity content (nav, settings) is provided per route
  * group by `AppDataProvider`, which overrides this context with fetched data.
  */
-export function AppProviders(props: {
-  children?: ReactNode
-  hintHiddenContent: boolean
-  projectId: string
-}) {
-  const {children, hintHiddenContent, projectId} = props
+export function AppProviders(props: {children?: ReactNode; projectId: string}) {
+  const {children, projectId} = props
 
   const app = useMemo(
     () =>
       ({
-        features: {hintHiddenContent},
         nav: null,
         projectId,
         settings: null,
       }) satisfies AppContextValue,
-    [hintHiddenContent, projectId],
+    [projectId],
   )
   const scheme = use(ColorSchemeContext)
 

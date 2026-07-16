@@ -6,9 +6,6 @@ import {SettingsData} from '@/lib/data'
 import {NavNode} from '@/lib/nav'
 
 export interface AppContextValue {
-  features: {
-    hintHiddenContent: boolean
-  }
   nav: NavNode | null
   projectId: string | undefined
   settings: SettingsData | null
