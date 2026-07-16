@@ -1,90 +1,62 @@
 import clsx from 'clsx'
-import {
-  Activity,
-  useState,
-  type ComponentPropsWithRef,
-  type ElementType,
-  type PropsWithChildren,
-  type ToggleEvent,
-} from 'react'
+import {Activity, cloneElement, useId, useState, type ToggleEvent} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
-import {
-  popoverContentProps,
-  popoverTriggerProps,
-  type PopoverContentProps,
-  type PopoverTriggerProps,
-} from './popover.props'
-import {PopoverContext, usePopover, usePopoverContext} from './usePopover'
+import {type PopoverProps, popoverProps} from './popover.props'
 
-const popovertriggerClassName = suffixClassName('sui-PopoverTrigger')
-const popoverContentClassName = suffixClassName('sui-PopoverContent')
+const popoverClassName = suffixClassName('sui-PopoverContent')
 
-function PopoverRoot({children}: PropsWithChildren) {
-  const value = usePopover()
-
-  return <PopoverContext.Provider value={value}>{children}</PopoverContext.Provider>
-}
-
-function PopoverTrigger<T extends ElementType = 'button'>(
-  props: PopoverTriggerProps<T> & Omit<ComponentPropsWithRef<T>, keyof PopoverTriggerProps<T>>,
-) {
-  const {id} = usePopoverContext()
-  const {as, children, className, style, ...rest} = getProps(props, popoverTriggerProps)
-  const Component = as || 'button'
-
-  return (
-    <Component
-      popoverTarget={id}
-      data-ui="PopoverTrigger"
-      className={clsx(popovertriggerClassName, className)}
-      style={{
-        ...style,
-        anchorName: `--popover-anchor-${id}`,
-      }}
-      {...rest}
-    >
-      {children}
-    </Component>
-  )
-}
-
-function PopoverContent({placement = 'bottom', ...props}: PopoverContentProps) {
-  const {id} = usePopoverContext()
-  const {children, className, style, ...rest} = getProps({placement, ...props}, popoverContentProps)
+/** @public */
+export function Popover({placement = 'bottom', ...props}: PopoverProps) {
+  const {
+    children,
+    className,
+    style,
+    id: idProp,
+    content,
+    ...rest
+  } = getProps({placement, ...props}, popoverProps)
+  const reactId = useId()
+  const id = idProp || reactId
   const [open, setOpen] = useState(false)
 
   const handleToggle = (e: ToggleEvent) => {
     setOpen(e.newState === 'open')
   }
 
+  const trigger = cloneElement(children, {
+    popoverTarget: `popover-${id}`,
+    style: {
+      ...children.props.style,
+      anchorName: `--anchor-${id}`,
+    },
+  })
+
   return (
-    <Activity mode={open ? 'visible' : 'hidden'}>
-      <div
-        className={clsx(
-          popoverContentClassName,
-          'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
-          className,
-        )}
-        style={{
-          ...style,
-          positionAnchor: `--popover-anchor-${id}`,
-        }}
-        data-ui="PopoverContent"
-        popover="auto"
-        id={id}
-        onToggle={handleToggle}
-        {...rest}
-      >
-        {children}
-      </div>
-    </Activity>
+    <>
+      {trigger}
+
+      <Activity mode={open ? 'visible' : 'hidden'}>
+        <div
+          className={clsx(
+            popoverClassName,
+            'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+            className,
+          )}
+          style={{
+            ...style,
+            positionAnchor: `--anchor-${id}`,
+          }}
+          data-ui="Popover"
+          popover="auto"
+          id={`popover-${id}`}
+          onToggle={handleToggle}
+          {...rest}
+        >
+          {content}
+        </div>
+      </Activity>
+    </>
   )
 }
-
-/** @public */
-export const Popover = Object.assign(PopoverRoot, {
-  Trigger: PopoverTrigger,
-  Content: PopoverContent,
-})

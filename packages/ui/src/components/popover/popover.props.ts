@@ -2,20 +2,17 @@ import {type PlacementProps, placementProps} from '../../props/placement'
 import {type PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface PopoverTriggerProps<T extends React.ElementType> {
-  /** Element to render */
-  as?: T
+export interface PopoverProps
+  extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
+  /** Element that triggers the popover. Must be a single, focusable element. */
+  children: React.ReactElement<Record<string, unknown>>
+  /** Popover content */
+  content: React.ReactNode
 }
 
-export const popoverTriggerProps: Record<string, PropDef> = {
-  as: {
+export const popoverProps: Record<string, PropDef> = {
+  content: {
     type: 'string',
   },
-}
-
-/** @public */
-export interface PopoverContentProps extends React.ComponentProps<'div'>, PlacementProps {}
-
-export const popoverContentProps: Record<string, PropDef> = {
   ...placementProps,
 }

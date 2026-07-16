@@ -16,11 +16,17 @@ const tooltipClassName = suffixClassName('sui-Tooltip')
 
 /** @public */
 export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
-  const {children, className, style, disabled, text, ...rest} = getProps(
-    {placement, ...props},
-    tooltipProps,
-  )
-  const id = useId()
+  const {
+    children,
+    className,
+    style,
+    id: idProp,
+    disabled,
+    text,
+    ...rest
+  } = getProps({placement, ...props}, tooltipProps)
+  const reactId = useId()
+  const id = idProp || reactId
   const tooltipRef = useRef<HTMLDivElement>(null)
   const dismissedRef = useRef(false)
 
@@ -35,11 +41,11 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
   }
 
   const trigger = cloneElement(children, {
-    'aria-describedby': id,
-    'interestfor': id,
+    'aria-describedby': `tooltip-${id}`,
+    'interestfor': `tooltip-${id}`,
     'style': {
       ...children.props.style,
-      anchorName: `--tooltip-anchor-${id}`,
+      anchorName: `--anchor-${id}`,
     },
     'onMouseLeave': (e: MouseEvent) => {
       dismissedRef.current = false
@@ -68,12 +74,12 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
         )}
         style={{
           ...style,
-          positionAnchor: `--tooltip-anchor-${id}`,
+          positionAnchor: `--anchor-${id}`,
         }}
         data-ui="Tooltip"
         role="tooltip"
         popover="hint"
-        id={id}
+        id={`tooltip-${id}`}
         ref={tooltipRef}
         onBeforeToggle={handleBeforeToggle}
         {...rest}
