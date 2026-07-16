@@ -5,6 +5,7 @@ import {
   Grid,
   Heading,
   Inline,
+  Popover,
   Radio,
   Stack,
   Switch,
@@ -229,6 +230,40 @@ function TooltipMountSection() {
   )
 }
 
+/** Mount cost: one click renders (or removes) a large set of tooltip-wrapped triggers. */
+function PopoverMountSection() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Card tone="neutral" padding={4}>
+      <Stack gap={3}>
+        <Text size={1} weight="semibold">
+          5. Popover mount ({TOOLTIP_COUNT} popovers)
+        </Text>
+        <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} popover-wrapped buttons.</Text>
+        <Inline gap={2}>
+          <Button
+            text={open ? 'Close panel' : 'Open panel'}
+            onClick={() => setOpen((value) => !value)}
+          />
+        </Inline>
+
+        {open && (
+          <div style={scrollAreaStyle}>
+            <Inline gap={2}>
+              {Array.from({length: TOOLTIP_COUNT}, (_, index) => (
+                <Popover key={index} content="Popover text">
+                  <Button text="Open Popover" />
+                </Popover>
+              ))}
+            </Inline>
+          </div>
+        )}
+      </Stack>
+    </Card>
+  )
+}
+
 function Ui3() {
   return (
     <ThemeProvider theme={theme}>
@@ -239,6 +274,7 @@ function Ui3() {
         <ToneToggleSection />
         <PanelSwapSection />
         <TooltipMountSection />
+        <PopoverMountSection />
       </Stack>
     </ThemeProvider>
   )
