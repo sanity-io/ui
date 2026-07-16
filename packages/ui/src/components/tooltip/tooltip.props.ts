@@ -1,10 +1,11 @@
 import {type PlacementProps, placementProps} from '../../props/placement'
+import type {InteractiveAs} from '../../types/Interactive'
 import {type PropDef} from '../../types/PropDef'
 
 /** @public */
 export interface TooltipTriggerProps<T extends React.ElementType> {
   /** Element to render */
-  as?: T
+  as?: InteractiveAs<T>
 }
 
 export const tooltipTriggerProps: Record<string, PropDef> = {

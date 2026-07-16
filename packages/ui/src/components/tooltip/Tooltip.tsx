@@ -1,16 +1,15 @@
 import clsx from 'clsx'
 import {
-  Activity,
   type ComponentPropsWithRef,
   type ElementType,
   type FocusEvent,
   type MouseEvent,
   type PropsWithChildren,
+  type ToggleEvent,
 } from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
-import {Box} from '../box/Box'
 import {
   type TooltipContentProps,
   type TooltipTriggerProps,
@@ -31,7 +30,7 @@ function TooltipRoot({children}: PropsWithChildren) {
 export function TooltipTrigger<T extends ElementType = 'button'>(
   props: TooltipTriggerProps<T> & Omit<ComponentPropsWithRef<T>, keyof TooltipTriggerProps<T>>,
 ) {
-  const {id, setDismissed} = useTooltipContext()
+  const {id, dismissedRef} = useTooltipContext()
   const {as, children, className, style, onMouseLeave, onBlur, onClick, ...rest} = getProps(
     props,
     tooltipTriggerProps,
@@ -47,16 +46,18 @@ export function TooltipTrigger<T extends ElementType = 'button'>(
         ...style,
         anchorName: `--tooltip-anchor-${id}`,
       }}
+      interestfor={id}
       onMouseLeave={(e: MouseEvent) => {
-        setDismissed(false)
+        dismissedRef.current = false
         onMouseLeave?.(e)
       }}
       onBlur={(e: FocusEvent) => {
-        setDismissed(false)
+        dismissedRef.current = false
         onBlur?.(e)
       }}
       onClick={(e: MouseEvent) => {
-        setDismissed(true)
+        dismissedRef.current = true
+        document.getElementById(id)?.togglePopover(false)
         onClick?.(e)
       }}
       {...rest}
@@ -67,35 +68,45 @@ export function TooltipTrigger<T extends ElementType = 'button'>(
 }
 
 export function TooltipContent({placement = 'bottom', ...props}: TooltipContentProps) {
-  const {id, dismissed} = useTooltipContext()
-  const {className, style, text, ...rest} = getProps({placement, ...props}, tooltipContentProps)
+  const {id, dismissedRef} = useTooltipContext()
+  const {children, className, style, text, ...rest} = getProps(
+    {placement, ...props},
+    tooltipContentProps,
+  )
+
+  const handleBeforeToggle = (e: ToggleEvent) => {
+    if (e.newState === 'open') {
+      if (dismissedRef.current) {
+        e.preventDefault()
+        return
+      }
+
+      e.currentTarget.removeAttribute('data-dismissed')
+    } else {
+      e.currentTarget.toggleAttribute('data-dismissed', dismissedRef.current)
+    }
+  }
 
   return (
-    <Activity mode={dismissed ? 'hidden' : 'visible'}>
-      <Box
-        className={clsx(
-          tooltipContentClassName,
-          dismissed ? 'sui-tooltip-dismissed' : '',
-          className,
-        )}
-        role="tooltip"
-        style={{
-          ...style,
-          positionAnchor: `--tooltip-anchor-${id}`,
-        }}
-        data-ui="TooltipContent"
-        id={id}
-        paddingX={2}
-        paddingY={1}
-        radius={2}
-        position="fixed"
-        zIndex={9999}
-        shadow={2}
-        {...rest}
-      >
-        {text}
-      </Box>
-    </Activity>
+    <div
+      className={clsx(
+        tooltipContentClassName,
+        'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+        className,
+      )}
+      style={{
+        ...style,
+        positionAnchor: `--tooltip-anchor-${id}`,
+      }}
+      data-ui="TooltipContent"
+      role="tooltip"
+      popover="hint"
+      id={id}
+      onBeforeToggle={handleBeforeToggle}
+      {...rest}
+    >
+      {text}
+    </div>
   )
 }
 
