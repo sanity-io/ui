@@ -17,8 +17,8 @@ import Link from 'next/link'
 import {ReactElement} from 'react'
 import {styled} from 'styled-components'
 
+import type {TargetByPathQueryResult} from '#sanity.types'
 import {useApp} from '@/app/useApp'
-import {HeroSectionData} from '@/lib/data'
 
 const Root = styled(Card)`
   position: relative;
@@ -37,7 +37,14 @@ const BackgroundBox = styled(Box)`
   z-index: 0;
 `
 
-export function HeroSection(props: {data: HeroSectionData}): ReactElement {
+export function HeroSection(props: {
+  data: Extract<
+    NonNullable<
+      Extract<NonNullable<TargetByPathQueryResult>, {_type: 'screen'}>['sections']
+    >[number],
+    {_type: 'screenSection.hero'}
+  >
+}): ReactElement {
   const {data} = props
 
   const {imageUrlBuilder} = useApp()

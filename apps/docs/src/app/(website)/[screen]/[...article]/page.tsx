@@ -13,7 +13,6 @@ import {DEFAULT_META_DESCRIPTION} from '@/app/constants'
 import {Article} from '@/components/page/article/Article'
 import {PageBuilder} from '@/components/page/PageBuilder'
 import {primaryNavId} from '@/constants'
-import {TargetData} from '@/lib/data'
 import {getImageUrlBuilder} from '@/lib/sanity/image'
 import {
   DynamicFetchOptions,
@@ -36,12 +35,11 @@ export async function generateMetadata({
   params,
 }: PageProps<'/[screen]/[...article]'>): Promise<Metadata> {
   const [{screen}, {perspective}] = await Promise.all([params, getDynamicFetchOptions()])
-  const {data} = await sanityFetchMetadata({
+  const {data: target} = await sanityFetchMetadata({
     query: targetByPathQuery,
     params: buildTargetByPathParams({screen}),
     perspective,
   })
-  const target = data as TargetData | null
 
   const title = target?.title
   const ogImage = target?.seo?.og?.image

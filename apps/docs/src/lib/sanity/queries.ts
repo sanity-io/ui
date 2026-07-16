@@ -55,7 +55,7 @@ export const targetByPathQuery = defineQuery(`
 }{target->{${TARGET_PROJECTION}}}.target`)
 export interface TargetByPathQueryParams {
   id: NavId
-  path: string[]
+  path: (string | null)[]
   memberTypes: string[]
 }
 export function buildTargetByPathParams({
@@ -66,7 +66,7 @@ export function buildTargetByPathParams({
 }: {
   id?: NavId
   memberTypes?: string[]
-  screen: string
+  screen: string | null
   article?: string[]
 }): TargetByPathQueryParams {
   return {

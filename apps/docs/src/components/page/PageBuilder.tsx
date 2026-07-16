@@ -3,11 +3,13 @@
 import {Code} from '@sanity/ui'
 import {ReactElement} from 'react'
 
-import {ScreenData} from '@/lib/data'
+import type {TargetByPathQueryResult} from '#sanity.types'
 
 import {HeroSection} from './sections/HeroSection'
 
-export function PageBuilder(props: {page: ScreenData}): ReactElement {
+export function PageBuilder(props: {
+  page: Extract<NonNullable<TargetByPathQueryResult>, {_type: 'screen'}>
+}): ReactElement {
   const {page} = props
 
   return (

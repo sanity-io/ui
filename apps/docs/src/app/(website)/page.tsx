@@ -1,8 +1,9 @@
 import {draftMode} from 'next/headers'
+import {notFound} from 'next/navigation'
 import {Suspense} from 'react'
 
-import {Page} from '@/components/page'
-import {API_DOCUMENT_TYPES, TARGET_QUERY, TargetData} from '@/lib/data'
+import {buildTargetByPathParams, targetByPathQuery} from '#lib/sanity/queries.ts'
+import {PageBuilder} from '@/components/page'
 import {DynamicFetchOptions, getDynamicFetchOptions, sanityFetch} from '@/lib/sanity/live'
 
 export default async function RootRoute() {
@@ -27,11 +28,15 @@ async function CachedRootPage(props: DynamicFetchOptions) {
   'use cache'
   const {perspective, stega} = props
   const {data} = await sanityFetch({
-    query: TARGET_QUERY,
-    params: {memberTypes: API_DOCUMENT_TYPES, path: [null]},
+    query: targetByPathQuery,
+    params: buildTargetByPathParams({screen: null}),
     perspective,
     stega,
   })
 
-  return <Page data={data as TargetData | null} path={[]} />
+  if (!data?._type || data._type === 'article') {
+    notFound()
+  }
+
+  return <PageBuilder page={data} />
 }

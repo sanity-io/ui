@@ -88,7 +88,7 @@ async function CachedScreenLayout({
       (item) => params.path.length && item.segment === params.path[0],
     )
     return (
-      <ArticleLayout path={params.path} nav={pageNav}>
+      <ArticleLayout path={params.path as string[]} nav={pageNav}>
         {children}
       </ArticleLayout>
     )

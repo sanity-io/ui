@@ -1,4 +1,4 @@
-import {defineQuery, groq} from 'next-sanity'
+import {defineQuery} from 'next-sanity'
 
 const MAIN_NAV_QUERY = defineQuery(`
 *[_type == "nav" && id in ["main"]]{
