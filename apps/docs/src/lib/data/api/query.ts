@@ -1,5 +1,6 @@
 import {groq} from 'next-sanity'
 
+// @sanity-typegen-ignore
 const API_CLASS_PROJECTION = groq`
 _id,
 _type,
@@ -68,7 +69,7 @@ release->{version},
 releaseTag
 `
 
-// TODO
+// @sanity-typegen-ignore
 const API_ENUM_PROJECTION = groq`
 ...,
 export->{name,path},
@@ -76,6 +77,7 @@ package->{scope,name},
 release->{version}
 `
 
+// @sanity-typegen-ignore
 const API_FUNCTION_PROJECTION = groq`
 _id,
 _type,
@@ -111,6 +113,7 @@ returnType[]{
 typeParameters
 `
 
+// @sanity-typegen-ignore
 const API_INTERFACE_PROJECTION = groq`
 _id,
 _type,

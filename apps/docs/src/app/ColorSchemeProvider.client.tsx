@@ -19,6 +19,5 @@ export function ColorSchemeProviderClient({
     initiallyPrefersDark,
   )
 
-  // @TODO DO NOT ALLOW MERGING THIS PR BEFORE THE TEMPORARY SUSPENSE BOUNDARY IS RMOVED
   return <ColorSchemeContext value={prefersDark ? 'dark' : 'light'}>{children}</ColorSchemeContext>
 }
