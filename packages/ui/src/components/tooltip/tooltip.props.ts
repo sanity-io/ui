@@ -1,28 +1,23 @@
 import {type PlacementProps, placementProps} from '../../props/placement'
-import type {InteractiveAs} from '../../types/Interactive'
 import {type PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface TooltipTriggerProps<T extends React.ElementType> {
-  /** Element to render */
-  as?: InteractiveAs<T>
-}
-
-export const tooltipTriggerProps: Record<string, PropDef> = {
-  as: {
-    type: 'string',
-  },
-}
-
-/** @public */
-export interface TooltipContentProps extends React.ComponentProps<'div'>, PlacementProps {
+export interface TooltipProps
+  extends Omit<React.ComponentProps<'div'>, 'children'>, PlacementProps {
+  /** Element that triggers the tooltip. Must be a single, focusable element. */
+  children: React.ReactElement<Record<string, unknown>>
   /** Tooltip text */
   text: React.ReactNode
+  /** Disabled state */
+  disabled?: boolean
 }
 
-export const tooltipContentProps: Record<string, PropDef> = {
+export const tooltipProps: Record<string, PropDef> = {
   text: {
     type: 'string',
+  },
+  disabled: {
+    type: 'boolean',
   },
   ...placementProps,
 }

@@ -1,4 +1,4 @@
-.sui-TooltipContent {
+.sui-Tooltip {
   --tooltip-delay: var(--tooltip-delay-group, 500ms);
   background: var(--backdrop);
   visibility: hidden;
@@ -7,7 +7,7 @@
   transition: none;
 }
 
-.sui-TooltipContent:popover-open {
+.sui-Tooltip:popover-open {
   visibility: visible;
   opacity: 1;
   scale: 1;
@@ -18,7 +18,7 @@
 }
 
 @starting-style {
-  .sui-TooltipContent:popover-open {
+  .sui-Tooltip:popover-open {
     visibility: hidden;
     opacity: 0;
     scale: 0.9;

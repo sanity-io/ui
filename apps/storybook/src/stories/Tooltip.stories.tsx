@@ -9,9 +9,8 @@ import {PLACEMENT} from '../../../../packages/ui/src/types/Placement'
 
 const PerformanceTooltip = () => {
   return (
-    <Tooltip>
-      <Tooltip.Trigger>Open Tooltip</Tooltip.Trigger>
-      <Tooltip.Content text="Tooltip content" />
+    <Tooltip text="Tooltip content">
+      <button>Open Tooltip</button>
     </Tooltip>
   )
 }
@@ -45,9 +44,8 @@ type Story = StoryObj<typeof Tooltip>
 export const Default: Story = {
   render: (props) => {
     return (
-      <Tooltip {...props}>
-        <Tooltip.Trigger as={Button} text="Open Tooltip" />
-        <Tooltip.Content text="Tooltip text" />
+      <Tooltip {...props} text="Tooltip text">
+        <Button text="Open Tooltip" />
       </Tooltip>
     )
   },
@@ -83,16 +81,15 @@ export const Placements: Story = {
       <Grid gridTemplateColumns="repeat(3, 1fr)" gap={3} paddingX={3} paddingY={4}>
         {PLACEMENT.map((placement) => (
           <div key={placement}>
-            <Tooltip {...props}>
-              <Tooltip.Trigger
-                as={Button}
+            <Tooltip
+              {...props}
+              placement={placement}
+              text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Text`}
+            >
+              <Button
                 text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip`}
                 density="loose"
                 fullWidth
-              />
-              <Tooltip.Content
-                placement={placement}
-                text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Text`}
               />
             </Tooltip>
           </div>
