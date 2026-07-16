@@ -218,6 +218,7 @@ slug,
 typeParameters
 `
 
+// @sanity-typegen-ignore
 const API_NAMESPACE_PROJECTION = groq`
 _id,
 _type,
@@ -254,6 +255,7 @@ release->{version},
 releaseTag
 `
 
+// @sanity-typegen-ignore
 const API_TYPE_ALIAS_PROJECTION = groq`
 _id,
 _type,
@@ -270,6 +272,7 @@ type[]{
 }
 `
 
+// @sanity-typegen-ignore
 const API_VARIABLE_PROJECTION = groq`
 _id,
 _type,
@@ -294,6 +297,7 @@ type[]{
 }
 `
 
+// @sanity-typegen-ignore
 export const API_SYMBOL_PROJECTION = groq`
 _type == 'api.class' => {
   ${API_CLASS_PROJECTION}
