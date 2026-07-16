@@ -1,16 +1,13 @@
-import createImageUrlBuilder from '@sanity/image-url'
-import {ImageUrlBuilder} from '@sanity/image-url/lib/types/builder'
-import {SanityImageSource} from '@sanity/image-url/lib/types/types'
+import {
+  createImageUrlBuilder,
+  // type ImageUrlBuilder,
+  // type SanityImageSource,
+} from '@sanity/image-url'
 
-export function getImageUrlBuilder(options: {projectId: string; dataset: string}): {
-  imageUrlBuilder: ImageUrlBuilder
-  urlForImage: (source: SanityImageSource) => ImageUrlBuilder
-} {
-  const imageUrlBuilder = createImageUrlBuilder(options)
+import {dataset, projectId} from '@/constants'
 
-  function urlForImage(source: SanityImageSource): ImageUrlBuilder {
-    return imageUrlBuilder.image(source).auto('format').fit('max')
-  }
+export const imageUrlBuilder = createImageUrlBuilder({dataset, projectId})
 
-  return {imageUrlBuilder, urlForImage}
-}
+// export function urlForImage(source: SanityImageSource): ImageUrlBuilder {
+//   return imageUrlBuilder.image(source).auto('format').fit('max')
+// }

@@ -13,7 +13,7 @@ import {DEFAULT_META_DESCRIPTION} from '@/app/constants'
 import {Article} from '@/components/page/article/Article'
 import {PageBuilder} from '@/components/page/PageBuilder'
 import {primaryNavId} from '@/constants'
-import {getImageUrlBuilder} from '@/lib/sanity/image'
+import {imageUrlBuilder} from '@/lib/sanity/image'
 import {
   DynamicFetchOptions,
   getDynamicFetchOptions,
@@ -43,14 +43,7 @@ export async function generateMetadata({params}: PageProps<'/[screen]'>): Promis
 
   const title = target?.title
   const ogImage = target?.seo?.og?.image
-  const ogImageUrl = ogImage?.asset
-    ? getImageUrlBuilder({
-        projectId: process.env.SANITY_PROJECT_ID!,
-        dataset: process.env.SANITY_DATASET!,
-      })
-        .imageUrlBuilder.image(ogImage.asset)
-        .url()
-    : null
+  const ogImageUrl = ogImage?.asset ? imageUrlBuilder.image(ogImage.asset).url() : null
 
   return {
     title: title ? `${title} | Sanity UI` : 'Sanity UI',

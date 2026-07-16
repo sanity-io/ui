@@ -7,7 +7,13 @@
   "quoteProps": "consistent",
   "sortImports": true,
   "sortPackageJson": {"sortScripts": true},
-  "ignorePatterns": ["dist/**", "storybook-static/**", "pnpm-lock.yaml", "CHANGELOG.md"],
+  "ignorePatterns": [
+    "dist/**",
+    "storybook-static/**",
+    "pnpm-lock.yaml",
+    "CHANGELOG.md",
+    "**/sanity.types.ts"
+  ],
   "overrides": [
     {
       "files": [".changeset/*.md"],

@@ -30,7 +30,7 @@
     "@sanity/code-input": "^7.2.7",
     "@sanity/color": "catalog:",
     "@sanity/icons": "catalog:",
-    "@sanity/image-url": "^1.2.0",
+    "@sanity/image-url": "^2.1.1",
     "@sanity/logos": "^2.2.2",
     "@sanity/ui": "workspace:*",
     "@sanity/vision": "^6.5.0",

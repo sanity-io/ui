@@ -142,8 +142,8 @@ importers:
         specifier: 'catalog:'
         version: 3.8.0(react@19.2.7)
       '@sanity/image-url':
-        specifier: ^1.2.0
-        version: 1.2.0
+        specifier: ^2.1.1
+        version: 2.1.1
       '@sanity/logos':
         specifier: ^2.2.2
         version: 2.2.2(react@19.2.7)
@@ -3617,10 +3617,6 @@ packages:
       babel-plugin-react-compiler:
         optional: true
 
-  '@sanity/client@7.23.0':
-    resolution: {integrity: sha512-4VFcLeP/lD0lhe5TD102tSnoW72ERT6xD/ZLb9pdLNMbZgbOciAy3m0hAYvs1vjA6663ZjNM6SLwl1Utq97DHA==}
-    engines: {node: '>=20'}
-
   '@sanity/client@7.23.2':
     resolution: {integrity: sha512-WC0vsGGpe4IGVFBvYMFFPa3KLH0vzgZwzvHIN20IDmPjuifDHSCbpq299Yj7jJQb2xBMJ7zQj45RyOzOIC7PUA==}
     engines: {node: '>=20'}
@@ -3711,10 +3707,6 @@ packages:
   '@sanity/id-utils@1.0.0':
     resolution: {integrity: sha512-2sb7tbdMDuUuVyocJPKG0gZBiOML/ovCe+mJiLrv1j69ODOfa2LfUjDVR+dRw/A/+XuxoJSSP8ebG7NiwTOgIA==}
     engines: {node: '>=18'}
-
-  '@sanity/image-url@1.2.0':
-    resolution: {integrity: sha512-pYRhti+lDi22it+npWXkEGuYyzbXJLF+d0TYLiyWbKu46JHhYhTDKkp6zmGu4YKF5cXUjT6pnUjFsaf2vlB9nQ==}
-    engines: {node: '>=10.0.0'}
 
   '@sanity/image-url@2.1.1':
     resolution: {integrity: sha512-qVXsF1teWR6FO3ZFAz46HDcRU+E6EQkpyncPnkGOzeJ1PgnaOiWMVbiSrZtX10s3txzzu/tAjKwbxbGHfDWgGw==}
@@ -11075,7 +11067,7 @@ snapshots:
     dependencies:
       '@inquirer/prompts': 8.5.2(@types/node@24.13.2)
       '@oclif/core': 4.11.14
-      '@sanity/client': 7.23.0
+      '@sanity/client': 7.23.2
       boxen: 8.0.1
       debug: 4.4.3(supports-color@8.1.1)
       get-it: 8.8.0
@@ -11209,13 +11201,6 @@ snapshots:
       - utf-8-validate
       - vue-tsc
       - xstate
-
-  '@sanity/client@7.23.0':
-    dependencies:
-      '@sanity/eventsource': 5.0.2
-      get-it: 8.8.0
-      nanoid: 3.3.15
-      rxjs: 7.8.2
 
   '@sanity/client@7.23.2':
     dependencies:
@@ -11363,8 +11348,6 @@ snapshots:
       '@sanity/uuid': 3.0.3
       lodash: 4.18.1
       ts-brand: 0.2.0
-
-  '@sanity/image-url@1.2.0': {}
 
   '@sanity/image-url@2.1.1':
     dependencies:
@@ -11630,7 +11613,7 @@ snapshots:
 
   '@sanity/types@6.4.0(@types/react@19.2.17)':
     dependencies:
-      '@sanity/client': 7.23.0
+      '@sanity/client': 7.23.2
       '@sanity/media-library-types': 1.5.0
       '@types/react': 19.2.17
 

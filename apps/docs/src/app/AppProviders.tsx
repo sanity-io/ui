@@ -9,7 +9,6 @@ import json from 'refractor/json'
 import tsx from 'refractor/tsx'
 
 import {ColorSchemeContext} from '#context/color-scheme'
-import {getImageUrlBuilder} from '@/lib/sanity/image'
 
 import {AppContext, AppContextValue} from './AppContext'
 import {GlobalStyle} from './GlobalStyle'
@@ -27,22 +26,20 @@ const theme = buildTheme()
  */
 export function AppProviders(props: {
   children?: ReactNode
-  dataset: string
   hintHiddenContent: boolean
   projectId: string
 }) {
-  const {children, dataset, hintHiddenContent, projectId} = props
+  const {children, hintHiddenContent, projectId} = props
 
   const app = useMemo(
     () =>
       ({
         features: {hintHiddenContent},
-        imageUrlBuilder: getImageUrlBuilder({dataset, projectId}).imageUrlBuilder,
         nav: null,
         projectId,
         settings: null,
       }) satisfies AppContextValue,
-    [dataset, hintHiddenContent, projectId],
+    [hintHiddenContent, projectId],
   )
   const scheme = use(ColorSchemeContext)
 

@@ -17,8 +17,8 @@ import Link from 'next/link'
 import {ReactElement} from 'react'
 import {styled} from 'styled-components'
 
+import {imageUrlBuilder} from '#lib/sanity/image.ts'
 import type {TargetByPathQueryResult} from '#sanity.types'
-import {useApp} from '@/app/useApp'
 
 const Root = styled(Card)`
   position: relative;
@@ -46,8 +46,6 @@ export function HeroSection(props: {
   >
 }): ReactElement {
   const {data} = props
-
-  const {imageUrlBuilder} = useApp()
 
   const {color} = useTheme_v2()
 

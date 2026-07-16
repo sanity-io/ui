@@ -44,9 +44,8 @@ export default function RootLayout(props: PropsWithChildren) {
         <StyledComponentsRegistry>
           <ColorSchemeProvider>
             <AppProviders
-              dataset={process.env.SANITY_DATASET!}
-              hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
               projectId={process.env.SANITY_PROJECT_ID!}
+              hintHiddenContent={process.env.APP_FEATURE_HINT_HIDDEN_CONTENT === 'true'}
             >
               {props.children}
             </AppProviders>

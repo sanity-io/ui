@@ -10,6 +10,7 @@ export default defineCliConfig({
   typegen: {
     enabled: true,
     overloadClientMethods: true,
+    formatGeneratedCode: false,
   },
   vite: {
     resolve: {

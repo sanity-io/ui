@@ -1,11 +1,10 @@
 import {Box, Card, Text} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
 
-import {useApp} from '@/app/useApp'
+import {imageUrlBuilder} from '#lib/sanity/image.ts'
 import type {PortableTextValue} from '@/types'
 
 export function Image(props: {data: Extract<PortableTextValue[number], {_type: 'image'}>}) {
-  const {imageUrlBuilder} = useApp()
   const {alt, asset, caption} = props.data
 
   if (!asset) return null
