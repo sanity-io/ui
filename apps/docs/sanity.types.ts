@@ -12,2023 +12,779 @@
  * ---------------------------------------------------------------------------------
  */
 
-export declare const internalGroqTypeReferenceTo: unique symbol
+export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
 export type Twitter = {
-  cardType?: 'summary' | 'summary_large_image'
-}
+  cardType?: "summary" | "summary_large_image";
+};
 
 export type Og = {
-  type?: 'website'
-  title?: string
-  description?: string
-  image?: OgImage
-}
+  type?: "website";
+  title?: string;
+  description?: string;
+  image?: OgImage;
+};
 
 export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-}
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
 
 export type OgImage = {
-  asset?: SanityImageAssetReference
+  asset?: SanityImageAssetReference;
   media?: unknown // Unable to locate the referenced type "media" in schema
-  hotspot?: SanityImageHotspot
-  crop?: SanityImageCrop
-  _type: 'image'
-}
+;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  _type: "image";
+};
 
 export type Settings = {
-  _id: string
-  _type: 'settings'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
+  _id: string;
+  _type: "settings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   banner?: {
-    hidden?: boolean
-    icon?:
-      | 'access-denied'
-      | 'activity'
-      | 'add-circle'
-      | 'add-comment'
-      | 'add-document'
-      | 'add'
-      | 'add-user'
-      | 'api'
-      | 'archive'
-      | 'arrow-down'
-      | 'arrow-left'
-      | 'arrow-right'
-      | 'arrow-top-right'
-      | 'arrow-up'
-      | 'asterisk'
-      | 'bar-chart'
-      | 'basket'
-      | 'bell'
-      | 'bill'
-      | 'binary-document'
-      | 'block-content'
-      | 'block-element'
-      | 'blockquote'
-      | 'bold'
-      | 'bolt'
-      | 'book'
-      | 'bookmark-filled'
-      | 'bookmark'
-      | 'bottle'
-      | 'bug'
-      | 'bulb-filled'
-      | 'bulb-outline'
-      | 'calendar'
-      | 'case'
-      | 'chart-upward'
-      | 'checkmark-circle'
-      | 'checkmark'
-      | 'chevron-down'
-      | 'chevron-left'
-      | 'chevron-right'
-      | 'chevron-up'
-      | 'circle'
-      | 'clipboard'
-      | 'clipboard-image'
-      | 'clock'
-      | 'close-circle'
-      | 'close'
-      | 'code-block'
-      | 'code'
-      | 'cog'
-      | 'collapse'
-      | 'color-wheel'
-      | 'comment'
-      | 'component'
-      | 'compose'
-      | 'compose-sparkles'
-      | 'confetti'
-      | 'controls'
-      | 'copy'
-      | 'credit-card'
-      | 'crop'
-      | 'cube'
-      | 'dashboard'
-      | 'database'
-      | 'desktop'
-      | 'diamond'
-      | 'document'
-      | 'document-pdf'
-      | 'document-remove'
-      | 'document-sheet'
-      | 'document-text'
-      | 'document-video'
-      | 'document-word'
-      | 'document-zip'
-      | 'documents'
-      | 'dot'
-      | 'double-chevron-down'
-      | 'double-chevron-left'
-      | 'double-chevron-right'
-      | 'double-chevron-up'
-      | 'double-quote'
-      | 'download'
-      | 'drag-handle'
-      | 'drop'
-      | 'earth-americas'
-      | 'earth-globe'
-      | 'edit'
-      | 'ellipsis-horizontal'
-      | 'ellipsis-vertical'
-      | 'empty'
-      | 'enter'
-      | 'enter-right'
-      | 'envelope'
-      | 'equal'
-      | 'error-filled'
-      | 'error-outline'
-      | 'error-screen'
-      | 'expand'
-      | 'eye-closed'
-      | 'eye-open'
-      | 'face-happy'
-      | 'face-indifferent'
-      | 'face-sad'
-      | 'feedback'
-      | 'filter'
-      | 'folder'
-      | 'generate'
-      | 'github'
-      | 'groq'
-      | 'hash'
-      | 'heart-filled'
-      | 'heart'
-      | 'help-circle'
-      | 'highlight'
-      | 'home'
-      | 'ice-cream'
-      | 'image'
-      | 'image-remove'
-      | 'images'
-      | 'inbox'
-      | 'info-filled'
-      | 'info-outline'
-      | 'inline-element'
-      | 'inline'
-      | 'insert-above'
-      | 'insert-below'
-      | 'italic'
-      | 'joystick'
-      | 'json'
-      | 'launch'
-      | 'leave'
-      | 'lemon'
-      | 'link'
-      | 'link-removed'
-      | 'linkedin'
-      | 'list'
-      | 'lock'
-      | 'logo-js'
-      | 'logo-ts'
-      | 'marker'
-      | 'marker-removed'
-      | 'master-detail'
-      | 'menu'
-      | 'microphone'
-      | 'microphone-slash'
-      | 'mobile-device'
-      | 'moon'
-      | 'number'
-      | 'ok-hand'
-      | 'olist'
-      | 'overage'
-      | 'package'
-      | 'panel-left'
-      | 'panel-right'
-      | 'pause'
-      | 'pin-filled'
-      | 'pin'
-      | 'pin-removed'
-      | 'play'
-      | 'plug'
-      | 'presentation'
-      | 'progress-50'
-      | 'progress-75'
-      | 'projects'
-      | 'publish'
-      | 'read-only'
-      | 'redo'
-      | 'refresh'
-      | 'remove-circle'
-      | 'remove'
-      | 'reset'
-      | 'restore'
-      | 'retrieve'
-      | 'retry'
-      | 'revert'
-      | 'robot'
-      | 'rocket'
-      | 'schema'
-      | 'search'
-      | 'select'
-      | 'share'
-      | 'sort'
-      | 'sparkle'
-      | 'sparkles'
-      | 'spinner'
-      | 'split-horizontal'
-      | 'split-vertical'
-      | 'square'
-      | 'stack-compact'
-      | 'stack'
-      | 'star-filled'
-      | 'star'
-      | 'stop'
-      | 'strikethrough'
-      | 'string'
-      | 'sun'
-      | 'sync'
-      | 'tablet-device'
-      | 'tag'
-      | 'tags'
-      | 'target'
-      | 'task'
-      | 'terminal'
-      | 'text'
-      | 'th-large'
-      | 'th-list'
-      | 'thumbs-down'
-      | 'thumbs-up'
-      | 'tiers'
-      | 'timeline'
-      | 'toggle-arrow-right'
-      | 'token'
-      | 'transfer'
-      | 'translate'
-      | 'trash'
-      | 'trend-upward'
-      | 'triangle-outline'
-      | 'trolley'
-      | 'truncate'
-      | 'twitter'
-      | 'ulist'
-      | 'unarchive'
-      | 'underline'
-      | 'undo'
-      | 'unknown'
-      | 'unlink'
-      | 'unlock'
-      | 'unpublish'
-      | 'upload'
-      | 'user'
-      | 'users'
-      | 'versions'
-      | 'video'
-      | 'warning-filled'
-      | 'warning-outline'
-      | 'wrench'
-    title?: string
+    hidden?: boolean;
+    icon?: "access-denied" | "activity" | "add-circle" | "add-comment" | "add-document" | "add" | "add-user" | "api" | "archive" | "arrow-down" | "arrow-left" | "arrow-right" | "arrow-top-right" | "arrow-up" | "asterisk" | "bar-chart" | "basket" | "bell" | "bill" | "binary-document" | "block-content" | "block-element" | "blockquote" | "bold" | "bolt" | "book" | "bookmark-filled" | "bookmark" | "bottle" | "bug" | "bulb-filled" | "bulb-outline" | "calendar" | "case" | "chart-upward" | "checkmark-circle" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle" | "clipboard" | "clipboard-image" | "clock" | "close-circle" | "close" | "code-block" | "code" | "cog" | "collapse" | "color-wheel" | "comment" | "component" | "compose" | "compose-sparkles" | "confetti" | "controls" | "copy" | "credit-card" | "crop" | "cube" | "dashboard" | "database" | "desktop" | "diamond" | "document" | "document-pdf" | "document-remove" | "document-sheet" | "document-text" | "document-video" | "document-word" | "document-zip" | "documents" | "dot" | "double-chevron-down" | "double-chevron-left" | "double-chevron-right" | "double-chevron-up" | "double-quote" | "download" | "drag-handle" | "drop" | "earth-americas" | "earth-globe" | "edit" | "ellipsis-horizontal" | "ellipsis-vertical" | "empty" | "enter" | "enter-right" | "envelope" | "equal" | "error-filled" | "error-outline" | "error-screen" | "expand" | "eye-closed" | "eye-open" | "face-happy" | "face-indifferent" | "face-sad" | "feedback" | "filter" | "folder" | "generate" | "github" | "groq" | "hash" | "heart-filled" | "heart" | "help-circle" | "highlight" | "home" | "ice-cream" | "image" | "image-remove" | "images" | "inbox" | "info-filled" | "info-outline" | "inline-element" | "inline" | "insert-above" | "insert-below" | "italic" | "joystick" | "json" | "launch" | "leave" | "lemon" | "link" | "link-removed" | "linkedin" | "list" | "lock" | "logo-js" | "logo-ts" | "marker" | "marker-removed" | "master-detail" | "menu" | "microphone" | "microphone-slash" | "mobile-device" | "moon" | "number" | "ok-hand" | "olist" | "overage" | "package" | "panel-left" | "panel-right" | "pause" | "pin-filled" | "pin" | "pin-removed" | "play" | "plug" | "presentation" | "progress-50" | "progress-75" | "projects" | "publish" | "read-only" | "redo" | "refresh" | "remove-circle" | "remove" | "reset" | "restore" | "retrieve" | "retry" | "revert" | "robot" | "rocket" | "schema" | "search" | "select" | "share" | "sort" | "sparkle" | "sparkles" | "spinner" | "split-horizontal" | "split-vertical" | "square" | "stack-compact" | "stack" | "star-filled" | "star" | "stop" | "strikethrough" | "string" | "sun" | "sync" | "tablet-device" | "tag" | "tags" | "target" | "task" | "terminal" | "text" | "th-large" | "th-list" | "thumbs-down" | "thumbs-up" | "tiers" | "timeline" | "toggle-arrow-right" | "token" | "transfer" | "translate" | "trash" | "trend-upward" | "triangle-outline" | "trolley" | "truncate" | "twitter" | "ulist" | "unarchive" | "underline" | "undo" | "unknown" | "unlink" | "unlock" | "unpublish" | "upload" | "user" | "users" | "versions" | "video" | "warning-filled" | "warning-outline" | "wrench";
+    title?: string;
     link?: {
-      title?: string
-      href?: string
-    }
-  }
-}
+      title?: string;
+      href?: string;
+    };
+  };
+};
 
 export type Nav = {
-  _id: string
-  _type: 'nav'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  id?: string
-  title?: string
-  items?: Array<
-    {
-      _key: string
-    } & NavItem
-  >
-}
+  _id: string;
+  _type: "nav";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  id?: string;
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & NavItem>;
+};
 
 export type Seo = {
-  _type: 'seo'
-  title?: string
-  description?: string
-  twitter?: Twitter
-  og?: Og
-}
+  _type: "seo";
+  title?: string;
+  description?: string;
+  twitter?: Twitter;
+  og?: Og;
+};
 
 export type ArticleReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'article'
-}
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "article";
+};
 
 export type ScreenReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'screen'
-}
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "screen";
+};
 
 export type NavItem = {
-  _type: 'nav.item'
-  hidden?: boolean
-  collapsed?: boolean
-  title?: string
-  menuTitle?: string
-  segment?: string
-  target?: ArticleReference | ScreenReference
-  items?: Array<
-    {
-      _key: string
-    } & NavItem
-  >
-}
+  _type: "nav.item";
+  hidden?: boolean;
+  collapsed?: boolean;
+  title?: string;
+  menuTitle?: string;
+  segment?: string;
+  target?: ArticleReference | ScreenReference;
+  items?: Array<{
+    _key: string;
+  } & NavItem>;
+};
 
 export type Screen = {
-  _id: string
-  _type: 'screen'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
+  _id: string;
+  _type: "screen";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
   sections?: Array<{
-    headline?: string
-    copy?: string
+    headline?: string;
+    copy?: string;
     ctas?: Array<{
-      label?: string
-      href?: string
-      tone?: 'default' | 'primary'
-      mode?: 'default' | 'ghost'
-      _type: 'cta'
-      _key: string
-    }>
-    linksHeader?: string
+      label?: string;
+      href?: string;
+      tone?: "default" | "primary";
+      mode?: "default" | "ghost";
+      _type: "cta";
+      _key: string;
+    }>;
+    linksHeader?: string;
     links?: Array<{
-      title?: string
-      subtitle?: string
-      href?: string
-      _type: 'link'
-      _key: string
-    }>
+      title?: string;
+      subtitle?: string;
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
     backgroundImage?: {
       dark?: {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
       light?: {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      }
-    }
-    _type: 'screenSection.hero'
-    _key: string
-  }>
-  seo?: Seo
-}
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+    _type: "screenSection.hero";
+    _key: string;
+  }>;
+  seo?: Seo;
+};
 
 export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
-}
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
 
 export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
 
 export type Article = {
-  _id: string
-  _type: 'article'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
+  _id: string;
+  _type: "article";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
   figma?: {
-    title?: string
-    url?: string
-  }
-  content?: Array<
-    | {
+    title?: string;
+    url?: string;
+  };
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    _key: string;
+  } & Code | {
+    title?: string;
+    description?: string;
+    code?: Code;
+    hook?: Code;
+    caption?: string;
+    _type: "codeExample";
+    _key: string;
+  } | {
+    name?: string;
+    _type: "npmPackageBadge";
+    _key: string;
+  } | {
+    properties?: Array<{
+      name?: string;
+      type?: string;
+      required?: boolean;
+      description?: Array<{
         children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-        listItem?: 'bullet' | 'number'
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+        listItem?: "bullet" | "number";
         markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-    | {
-        title?: string
-        description?: string
-        code?: Code
-        hook?: Code
-        caption?: string
-        _type: 'codeExample'
-        _key: string
-      }
-    | {
-        name?: string
-        _type: 'npmPackageBadge'
-        _key: string
-      }
-    | {
-        properties?: Array<{
-          name?: string
-          type?: string
-          required?: boolean
-          description?: Array<{
-            children?: Array<{
-              marks?: Array<string>
-              text?: string
-              _type: 'span'
-              _key: string
-            }>
-            style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-            listItem?: 'bullet' | 'number'
-            markDefs?: Array<{
-              href?: string
-              _type: 'link'
-              _key: string
-            }>
-            level?: number
-            _type: 'block'
-            _key: string
-          }>
-          _type: 'property'
-          _key: string
-        }>
-        caption?: string
-        _type: 'propertyTable'
-        _key: string
-      }
-    | {
-        test?: boolean
-        _type: 'content.colorGrid'
-        _key: string
-      }
-    | {
-        test?: boolean
-        _type: 'content.sanityLogoGrid'
-        _key: string
-      }
-    | {
-        test?: boolean
-        _type: 'content.groqLogoGrid'
-        _key: string
-      }
-    | {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        alt?: string
-        caption?: string
-        _type: 'image'
-        _key: string
-      }
-    | {
-        icon?:
-          | 'access-denied'
-          | 'activity'
-          | 'add-circle'
-          | 'add-comment'
-          | 'add-document'
-          | 'add'
-          | 'add-user'
-          | 'api'
-          | 'archive'
-          | 'arrow-down'
-          | 'arrow-left'
-          | 'arrow-right'
-          | 'arrow-top-right'
-          | 'arrow-up'
-          | 'asterisk'
-          | 'bar-chart'
-          | 'basket'
-          | 'bell'
-          | 'bill'
-          | 'binary-document'
-          | 'block-content'
-          | 'block-element'
-          | 'blockquote'
-          | 'bold'
-          | 'bolt'
-          | 'book'
-          | 'bookmark-filled'
-          | 'bookmark'
-          | 'bottle'
-          | 'bug'
-          | 'bulb-filled'
-          | 'bulb-outline'
-          | 'calendar'
-          | 'case'
-          | 'chart-upward'
-          | 'checkmark-circle'
-          | 'checkmark'
-          | 'chevron-down'
-          | 'chevron-left'
-          | 'chevron-right'
-          | 'chevron-up'
-          | 'circle'
-          | 'clipboard'
-          | 'clipboard-image'
-          | 'clock'
-          | 'close-circle'
-          | 'close'
-          | 'code-block'
-          | 'code'
-          | 'cog'
-          | 'collapse'
-          | 'color-wheel'
-          | 'comment'
-          | 'component'
-          | 'compose'
-          | 'compose-sparkles'
-          | 'confetti'
-          | 'controls'
-          | 'copy'
-          | 'credit-card'
-          | 'crop'
-          | 'cube'
-          | 'dashboard'
-          | 'database'
-          | 'desktop'
-          | 'diamond'
-          | 'document'
-          | 'document-pdf'
-          | 'document-remove'
-          | 'document-sheet'
-          | 'document-text'
-          | 'document-video'
-          | 'document-word'
-          | 'document-zip'
-          | 'documents'
-          | 'dot'
-          | 'double-chevron-down'
-          | 'double-chevron-left'
-          | 'double-chevron-right'
-          | 'double-chevron-up'
-          | 'double-quote'
-          | 'download'
-          | 'drag-handle'
-          | 'drop'
-          | 'earth-americas'
-          | 'earth-globe'
-          | 'edit'
-          | 'ellipsis-horizontal'
-          | 'ellipsis-vertical'
-          | 'empty'
-          | 'enter'
-          | 'enter-right'
-          | 'envelope'
-          | 'equal'
-          | 'error-filled'
-          | 'error-outline'
-          | 'error-screen'
-          | 'expand'
-          | 'eye-closed'
-          | 'eye-open'
-          | 'face-happy'
-          | 'face-indifferent'
-          | 'face-sad'
-          | 'feedback'
-          | 'filter'
-          | 'folder'
-          | 'generate'
-          | 'github'
-          | 'groq'
-          | 'hash'
-          | 'heart-filled'
-          | 'heart'
-          | 'help-circle'
-          | 'highlight'
-          | 'home'
-          | 'ice-cream'
-          | 'image'
-          | 'image-remove'
-          | 'images'
-          | 'inbox'
-          | 'info-filled'
-          | 'info-outline'
-          | 'inline-element'
-          | 'inline'
-          | 'insert-above'
-          | 'insert-below'
-          | 'italic'
-          | 'joystick'
-          | 'json'
-          | 'launch'
-          | 'leave'
-          | 'lemon'
-          | 'link'
-          | 'link-removed'
-          | 'linkedin'
-          | 'list'
-          | 'lock'
-          | 'logo-js'
-          | 'logo-ts'
-          | 'marker'
-          | 'marker-removed'
-          | 'master-detail'
-          | 'menu'
-          | 'microphone'
-          | 'microphone-slash'
-          | 'mobile-device'
-          | 'moon'
-          | 'number'
-          | 'ok-hand'
-          | 'olist'
-          | 'overage'
-          | 'package'
-          | 'panel-left'
-          | 'panel-right'
-          | 'pause'
-          | 'pin-filled'
-          | 'pin'
-          | 'pin-removed'
-          | 'play'
-          | 'plug'
-          | 'presentation'
-          | 'progress-50'
-          | 'progress-75'
-          | 'projects'
-          | 'publish'
-          | 'read-only'
-          | 'redo'
-          | 'refresh'
-          | 'remove-circle'
-          | 'remove'
-          | 'reset'
-          | 'restore'
-          | 'retrieve'
-          | 'retry'
-          | 'revert'
-          | 'robot'
-          | 'rocket'
-          | 'schema'
-          | 'search'
-          | 'select'
-          | 'share'
-          | 'sort'
-          | 'sparkle'
-          | 'sparkles'
-          | 'spinner'
-          | 'split-horizontal'
-          | 'split-vertical'
-          | 'square'
-          | 'stack-compact'
-          | 'stack'
-          | 'star-filled'
-          | 'star'
-          | 'stop'
-          | 'strikethrough'
-          | 'string'
-          | 'sun'
-          | 'sync'
-          | 'tablet-device'
-          | 'tag'
-          | 'tags'
-          | 'target'
-          | 'task'
-          | 'terminal'
-          | 'text'
-          | 'th-large'
-          | 'th-list'
-          | 'thumbs-down'
-          | 'thumbs-up'
-          | 'tiers'
-          | 'timeline'
-          | 'toggle-arrow-right'
-          | 'token'
-          | 'transfer'
-          | 'translate'
-          | 'trash'
-          | 'trend-upward'
-          | 'triangle-outline'
-          | 'trolley'
-          | 'truncate'
-          | 'twitter'
-          | 'ulist'
-          | 'unarchive'
-          | 'underline'
-          | 'undo'
-          | 'unknown'
-          | 'unlink'
-          | 'unlock'
-          | 'unpublish'
-          | 'upload'
-          | 'user'
-          | 'users'
-          | 'versions'
-          | 'video'
-          | 'warning-filled'
-          | 'warning-outline'
-          | 'wrench'
-        tone?: 'primary' | 'positive' | 'caution' | 'critical'
-        content?: Array<{
-          children?: Array<{
-            marks?: Array<string>
-            text?: string
-            _type: 'span'
-            _key: string
-          }>
-          style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-          listItem?: 'bullet' | 'number'
-          markDefs?: Array<{
-            href?: string
-            _type: 'link'
-            _key: string
-          }>
-          level?: number
-          _type: 'block'
-          _key: string
-        }>
-        _type: 'callout'
-        _key: string
-      }
-    | {
-        title?: string
-        url?: string
-        _type: 'content.figmaEmbed'
-        _key: string
-      }
-    | {
-        title?: string
-        url?: string
-        _type: 'content.figmaButton'
-        _key: string
-      }
-  >
-  seo?: Seo
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      _type: "property";
+      _key: string;
+    }>;
+    caption?: string;
+    _type: "propertyTable";
+    _key: string;
+  } | {
+    test?: boolean;
+    _type: "content.colorGrid";
+    _key: string;
+  } | {
+    test?: boolean;
+    _type: "content.sanityLogoGrid";
+    _key: string;
+  } | {
+    test?: boolean;
+    _type: "content.groqLogoGrid";
+    _key: string;
+  } | {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+    _type: "image";
+    _key: string;
+  } | {
+    icon?: "access-denied" | "activity" | "add-circle" | "add-comment" | "add-document" | "add" | "add-user" | "api" | "archive" | "arrow-down" | "arrow-left" | "arrow-right" | "arrow-top-right" | "arrow-up" | "asterisk" | "bar-chart" | "basket" | "bell" | "bill" | "binary-document" | "block-content" | "block-element" | "blockquote" | "bold" | "bolt" | "book" | "bookmark-filled" | "bookmark" | "bottle" | "bug" | "bulb-filled" | "bulb-outline" | "calendar" | "case" | "chart-upward" | "checkmark-circle" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle" | "clipboard" | "clipboard-image" | "clock" | "close-circle" | "close" | "code-block" | "code" | "cog" | "collapse" | "color-wheel" | "comment" | "component" | "compose" | "compose-sparkles" | "confetti" | "controls" | "copy" | "credit-card" | "crop" | "cube" | "dashboard" | "database" | "desktop" | "diamond" | "document" | "document-pdf" | "document-remove" | "document-sheet" | "document-text" | "document-video" | "document-word" | "document-zip" | "documents" | "dot" | "double-chevron-down" | "double-chevron-left" | "double-chevron-right" | "double-chevron-up" | "double-quote" | "download" | "drag-handle" | "drop" | "earth-americas" | "earth-globe" | "edit" | "ellipsis-horizontal" | "ellipsis-vertical" | "empty" | "enter" | "enter-right" | "envelope" | "equal" | "error-filled" | "error-outline" | "error-screen" | "expand" | "eye-closed" | "eye-open" | "face-happy" | "face-indifferent" | "face-sad" | "feedback" | "filter" | "folder" | "generate" | "github" | "groq" | "hash" | "heart-filled" | "heart" | "help-circle" | "highlight" | "home" | "ice-cream" | "image" | "image-remove" | "images" | "inbox" | "info-filled" | "info-outline" | "inline-element" | "inline" | "insert-above" | "insert-below" | "italic" | "joystick" | "json" | "launch" | "leave" | "lemon" | "link" | "link-removed" | "linkedin" | "list" | "lock" | "logo-js" | "logo-ts" | "marker" | "marker-removed" | "master-detail" | "menu" | "microphone" | "microphone-slash" | "mobile-device" | "moon" | "number" | "ok-hand" | "olist" | "overage" | "package" | "panel-left" | "panel-right" | "pause" | "pin-filled" | "pin" | "pin-removed" | "play" | "plug" | "presentation" | "progress-50" | "progress-75" | "projects" | "publish" | "read-only" | "redo" | "refresh" | "remove-circle" | "remove" | "reset" | "restore" | "retrieve" | "retry" | "revert" | "robot" | "rocket" | "schema" | "search" | "select" | "share" | "sort" | "sparkle" | "sparkles" | "spinner" | "split-horizontal" | "split-vertical" | "square" | "stack-compact" | "stack" | "star-filled" | "star" | "stop" | "strikethrough" | "string" | "sun" | "sync" | "tablet-device" | "tag" | "tags" | "target" | "task" | "terminal" | "text" | "th-large" | "th-list" | "thumbs-down" | "thumbs-up" | "tiers" | "timeline" | "toggle-arrow-right" | "token" | "transfer" | "translate" | "trash" | "trend-upward" | "triangle-outline" | "trolley" | "truncate" | "twitter" | "ulist" | "unarchive" | "underline" | "undo" | "unknown" | "unlink" | "unlock" | "unpublish" | "upload" | "user" | "users" | "versions" | "video" | "warning-filled" | "warning-outline" | "wrench";
+    tone?: "primary" | "positive" | "caution" | "critical";
+    content?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    _type: "callout";
+    _key: string;
+  } | {
+    title?: string;
+    url?: string;
+    _type: "content.figmaEmbed";
+    _key: string;
+  } | {
+    title?: string;
+    url?: string;
+    _type: "content.figmaButton";
+    _key: string;
+  }>;
+  seo?: Seo;
   layout?: {
-    wide?: boolean
-  }
+    wide?: boolean;
+  };
   apiMember?: {
-    isComponent?: boolean
-    isHook?: boolean
-  }
-}
+    isComponent?: boolean;
+    isHook?: boolean;
+  };
+};
 
 export type Code = {
-  _type: 'code'
-  language?: string
-  filename?: string
-  code?: string
-  highlightedLines?: Array<number>
-}
+  _type: "code";
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
+};
 
 export type SanityImagePaletteSwatch = {
-  _type: 'sanity.imagePaletteSwatch'
-  background?: string
-  foreground?: string
-  population?: number
-  title?: string
-}
+  _type: "sanity.imagePaletteSwatch";
+  background?: string;
+  foreground?: string;
+  population?: number;
+  title?: string;
+};
 
 export type SanityImagePalette = {
-  _type: 'sanity.imagePalette'
-  darkMuted?: SanityImagePaletteSwatch
-  lightVibrant?: SanityImagePaletteSwatch
-  darkVibrant?: SanityImagePaletteSwatch
-  vibrant?: SanityImagePaletteSwatch
-  dominant?: SanityImagePaletteSwatch
-  lightMuted?: SanityImagePaletteSwatch
-  muted?: SanityImagePaletteSwatch
-}
+  _type: "sanity.imagePalette";
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
+};
 
 export type SanityImageDimensions = {
-  _type: 'sanity.imageDimensions'
-  height?: number
-  width?: number
-  aspectRatio?: number
-}
+  _type: "sanity.imageDimensions";
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
+};
 
 export type SanityImageMetadata = {
-  _type: 'sanity.imageMetadata'
-  location?: Geopoint
-  dimensions?: SanityImageDimensions
-  palette?: SanityImagePalette
-  lqip?: string
-  blurHash?: string
-  thumbHash?: string
-  hasAlpha?: boolean
-  isOpaque?: boolean
-}
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  thumbHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
+};
 
 export type SanityFileAsset = {
-  _id: string
-  _type: 'sanity.fileAsset'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  originalFilename?: string
-  label?: string
-  title?: string
-  description?: string
-  altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
-  uploadId?: string
-  path?: string
-  url?: string
-  source?: SanityAssetSourceData
-}
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+};
 
 export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData'
-  name?: string
-  id?: string
-  url?: string
-}
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
 
 export type SanityImageAsset = {
-  _id: string
-  _type: 'sanity.imageAsset'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  originalFilename?: string
-  label?: string
-  title?: string
-  description?: string
-  altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
-  uploadId?: string
-  path?: string
-  url?: string
-  metadata?: SanityImageMetadata
-  source?: SanityAssetSourceData
-}
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+};
 
 export type Geopoint = {
-  _type: 'geopoint'
-  lat?: number
-  lng?: number
-  alt?: number
-}
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
 
 export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
-}
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
 
-export type AllSanitySchemaTypes =
-  | Twitter
-  | Og
-  | SanityImageAssetReference
-  | OgImage
-  | Settings
-  | Nav
-  | Seo
-  | ArticleReference
-  | ScreenReference
-  | NavItem
-  | Screen
-  | SanityImageCrop
-  | SanityImageHotspot
-  | Article
-  | Code
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | SanityImageMetadata
-  | SanityFileAsset
-  | SanityAssetSourceData
-  | SanityImageAsset
-  | Geopoint
-  | Slug
+export type AllSanitySchemaTypes = Twitter | Og | SanityImageAssetReference | OgImage | Settings | Nav | Seo | ArticleReference | ScreenReference | NavItem | Screen | SanityImageCrop | SanityImageHotspot | Article | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint | Slug;
 
 // Source: src/lib/data/_global/query.ts
 // Variable: MAIN_NAV_QUERY
 // Query: *[_type == "nav" && id in ["main"]]{  _id,  title,  items[]{    hidden,    collapsed,    "title": coalesce(title, route.title),    menuTitle,    segment,    "targetId": target->_id,    "isComponent": target->apiMember.isComponent,    "isHook": target->apiMember.isHook,    items[]{      hidden,      collapsed,      "title": coalesce(title, route.title),      menuTitle,      segment,      "targetId": target->_id,      "isComponent": target->apiMember.isComponent,      "isHook": target->apiMember.isHook,      title,      items[]{        hidden,        collapsed,        "title": coalesce(title, route.title),        menuTitle,        segment,        "targetId": target->_id,        "isComponent": target->apiMember.isComponent,        "isHook": target->apiMember.isHook,        title      }    }  }}[0]
 export type MAIN_NAV_QUERY_RESULT = {
-  _id: string
-  title: string | null
+  _id: string;
+  title: string | null;
   items: Array<{
-    hidden: boolean | null
-    collapsed: boolean | null
-    title: string | null
-    menuTitle: string | null
-    segment: string | null
-    targetId: string | null
-    isComponent: boolean | null
-    isHook: boolean | null
+    hidden: boolean | null;
+    collapsed: boolean | null;
+    title: string | null;
+    menuTitle: string | null;
+    segment: string | null;
+    targetId: string | null;
+    isComponent: boolean | null;
+    isHook: boolean | null;
     items: Array<{
-      hidden: boolean | null
-      collapsed: boolean | null
-      title: string | null
-      menuTitle: string | null
-      segment: string | null
-      targetId: string | null
-      isComponent: boolean | null
-      isHook: boolean | null
+      hidden: boolean | null;
+      collapsed: boolean | null;
+      title: string | null;
+      menuTitle: string | null;
+      segment: string | null;
+      targetId: string | null;
+      isComponent: boolean | null;
+      isHook: boolean | null;
       items: Array<{
-        hidden: boolean | null
-        collapsed: boolean | null
-        title: string | null
-        menuTitle: string | null
-        segment: string | null
-        targetId: string | null
-        isComponent: boolean | null
-        isHook: boolean | null
-      }> | null
-    }> | null
-  }> | null
-} | null
+        hidden: boolean | null;
+        collapsed: boolean | null;
+        title: string | null;
+        menuTitle: string | null;
+        segment: string | null;
+        targetId: string | null;
+        isComponent: boolean | null;
+        isHook: boolean | null;
+      }> | null;
+    }> | null;
+  }> | null;
+} | null;
 
 // Source: src/lib/data/_global/query.ts
 // Variable: SETTINGS_QUERY
 // Query: *[_id == "settings"]{_id,banner}[0]
-export type SETTINGS_QUERY_RESULT =
-  | {
-      _id: 'settings'
-      banner: null
-    }
-  | {
-      _id: 'settings'
-      banner: {
-        hidden?: boolean
-        icon?:
-          | 'access-denied'
-          | 'activity'
-          | 'add-circle'
-          | 'add-comment'
-          | 'add-document'
-          | 'add-user'
-          | 'add'
-          | 'api'
-          | 'archive'
-          | 'arrow-down'
-          | 'arrow-left'
-          | 'arrow-right'
-          | 'arrow-top-right'
-          | 'arrow-up'
-          | 'asterisk'
-          | 'bar-chart'
-          | 'basket'
-          | 'bell'
-          | 'bill'
-          | 'binary-document'
-          | 'block-content'
-          | 'block-element'
-          | 'blockquote'
-          | 'bold'
-          | 'bolt'
-          | 'book'
-          | 'bookmark-filled'
-          | 'bookmark'
-          | 'bottle'
-          | 'bug'
-          | 'bulb-filled'
-          | 'bulb-outline'
-          | 'calendar'
-          | 'case'
-          | 'chart-upward'
-          | 'checkmark-circle'
-          | 'checkmark'
-          | 'chevron-down'
-          | 'chevron-left'
-          | 'chevron-right'
-          | 'chevron-up'
-          | 'circle'
-          | 'clipboard-image'
-          | 'clipboard'
-          | 'clock'
-          | 'close-circle'
-          | 'close'
-          | 'code-block'
-          | 'code'
-          | 'cog'
-          | 'collapse'
-          | 'color-wheel'
-          | 'comment'
-          | 'component'
-          | 'compose-sparkles'
-          | 'compose'
-          | 'confetti'
-          | 'controls'
-          | 'copy'
-          | 'credit-card'
-          | 'crop'
-          | 'cube'
-          | 'dashboard'
-          | 'database'
-          | 'desktop'
-          | 'diamond'
-          | 'document-pdf'
-          | 'document-remove'
-          | 'document-sheet'
-          | 'document-text'
-          | 'document-video'
-          | 'document-word'
-          | 'document-zip'
-          | 'document'
-          | 'documents'
-          | 'dot'
-          | 'double-chevron-down'
-          | 'double-chevron-left'
-          | 'double-chevron-right'
-          | 'double-chevron-up'
-          | 'double-quote'
-          | 'download'
-          | 'drag-handle'
-          | 'drop'
-          | 'earth-americas'
-          | 'earth-globe'
-          | 'edit'
-          | 'ellipsis-horizontal'
-          | 'ellipsis-vertical'
-          | 'empty'
-          | 'enter-right'
-          | 'enter'
-          | 'envelope'
-          | 'equal'
-          | 'error-filled'
-          | 'error-outline'
-          | 'error-screen'
-          | 'expand'
-          | 'eye-closed'
-          | 'eye-open'
-          | 'face-happy'
-          | 'face-indifferent'
-          | 'face-sad'
-          | 'feedback'
-          | 'filter'
-          | 'folder'
-          | 'generate'
-          | 'github'
-          | 'groq'
-          | 'hash'
-          | 'heart-filled'
-          | 'heart'
-          | 'help-circle'
-          | 'highlight'
-          | 'home'
-          | 'ice-cream'
-          | 'image-remove'
-          | 'image'
-          | 'images'
-          | 'inbox'
-          | 'info-filled'
-          | 'info-outline'
-          | 'inline-element'
-          | 'inline'
-          | 'insert-above'
-          | 'insert-below'
-          | 'italic'
-          | 'joystick'
-          | 'json'
-          | 'launch'
-          | 'leave'
-          | 'lemon'
-          | 'link-removed'
-          | 'link'
-          | 'linkedin'
-          | 'list'
-          | 'lock'
-          | 'logo-js'
-          | 'logo-ts'
-          | 'marker-removed'
-          | 'marker'
-          | 'master-detail'
-          | 'menu'
-          | 'microphone-slash'
-          | 'microphone'
-          | 'mobile-device'
-          | 'moon'
-          | 'number'
-          | 'ok-hand'
-          | 'olist'
-          | 'overage'
-          | 'package'
-          | 'panel-left'
-          | 'panel-right'
-          | 'pause'
-          | 'pin-filled'
-          | 'pin-removed'
-          | 'pin'
-          | 'play'
-          | 'plug'
-          | 'presentation'
-          | 'progress-50'
-          | 'progress-75'
-          | 'projects'
-          | 'publish'
-          | 'read-only'
-          | 'redo'
-          | 'refresh'
-          | 'remove-circle'
-          | 'remove'
-          | 'reset'
-          | 'restore'
-          | 'retrieve'
-          | 'retry'
-          | 'revert'
-          | 'robot'
-          | 'rocket'
-          | 'schema'
-          | 'search'
-          | 'select'
-          | 'share'
-          | 'sort'
-          | 'sparkle'
-          | 'sparkles'
-          | 'spinner'
-          | 'split-horizontal'
-          | 'split-vertical'
-          | 'square'
-          | 'stack-compact'
-          | 'stack'
-          | 'star-filled'
-          | 'star'
-          | 'stop'
-          | 'strikethrough'
-          | 'string'
-          | 'sun'
-          | 'sync'
-          | 'tablet-device'
-          | 'tag'
-          | 'tags'
-          | 'target'
-          | 'task'
-          | 'terminal'
-          | 'text'
-          | 'th-large'
-          | 'th-list'
-          | 'thumbs-down'
-          | 'thumbs-up'
-          | 'tiers'
-          | 'timeline'
-          | 'toggle-arrow-right'
-          | 'token'
-          | 'transfer'
-          | 'translate'
-          | 'trash'
-          | 'trend-upward'
-          | 'triangle-outline'
-          | 'trolley'
-          | 'truncate'
-          | 'twitter'
-          | 'ulist'
-          | 'unarchive'
-          | 'underline'
-          | 'undo'
-          | 'unknown'
-          | 'unlink'
-          | 'unlock'
-          | 'unpublish'
-          | 'upload'
-          | 'user'
-          | 'users'
-          | 'versions'
-          | 'video'
-          | 'warning-filled'
-          | 'warning-outline'
-          | 'wrench'
-        title?: string
-        link?: {
-          title?: string
-          href?: string
-        }
-      } | null
-    }
-  | null
+export type SETTINGS_QUERY_RESULT = {
+  _id: "settings";
+  banner: null;
+} | {
+  _id: "settings";
+  banner: {
+    hidden?: boolean;
+    icon?: "access-denied" | "activity" | "add-circle" | "add-comment" | "add-document" | "add-user" | "add" | "api" | "archive" | "arrow-down" | "arrow-left" | "arrow-right" | "arrow-top-right" | "arrow-up" | "asterisk" | "bar-chart" | "basket" | "bell" | "bill" | "binary-document" | "block-content" | "block-element" | "blockquote" | "bold" | "bolt" | "book" | "bookmark-filled" | "bookmark" | "bottle" | "bug" | "bulb-filled" | "bulb-outline" | "calendar" | "case" | "chart-upward" | "checkmark-circle" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle" | "clipboard-image" | "clipboard" | "clock" | "close-circle" | "close" | "code-block" | "code" | "cog" | "collapse" | "color-wheel" | "comment" | "component" | "compose-sparkles" | "compose" | "confetti" | "controls" | "copy" | "credit-card" | "crop" | "cube" | "dashboard" | "database" | "desktop" | "diamond" | "document-pdf" | "document-remove" | "document-sheet" | "document-text" | "document-video" | "document-word" | "document-zip" | "document" | "documents" | "dot" | "double-chevron-down" | "double-chevron-left" | "double-chevron-right" | "double-chevron-up" | "double-quote" | "download" | "drag-handle" | "drop" | "earth-americas" | "earth-globe" | "edit" | "ellipsis-horizontal" | "ellipsis-vertical" | "empty" | "enter-right" | "enter" | "envelope" | "equal" | "error-filled" | "error-outline" | "error-screen" | "expand" | "eye-closed" | "eye-open" | "face-happy" | "face-indifferent" | "face-sad" | "feedback" | "filter" | "folder" | "generate" | "github" | "groq" | "hash" | "heart-filled" | "heart" | "help-circle" | "highlight" | "home" | "ice-cream" | "image-remove" | "image" | "images" | "inbox" | "info-filled" | "info-outline" | "inline-element" | "inline" | "insert-above" | "insert-below" | "italic" | "joystick" | "json" | "launch" | "leave" | "lemon" | "link-removed" | "link" | "linkedin" | "list" | "lock" | "logo-js" | "logo-ts" | "marker-removed" | "marker" | "master-detail" | "menu" | "microphone-slash" | "microphone" | "mobile-device" | "moon" | "number" | "ok-hand" | "olist" | "overage" | "package" | "panel-left" | "panel-right" | "pause" | "pin-filled" | "pin-removed" | "pin" | "play" | "plug" | "presentation" | "progress-50" | "progress-75" | "projects" | "publish" | "read-only" | "redo" | "refresh" | "remove-circle" | "remove" | "reset" | "restore" | "retrieve" | "retry" | "revert" | "robot" | "rocket" | "schema" | "search" | "select" | "share" | "sort" | "sparkle" | "sparkles" | "spinner" | "split-horizontal" | "split-vertical" | "square" | "stack-compact" | "stack" | "star-filled" | "star" | "stop" | "strikethrough" | "string" | "sun" | "sync" | "tablet-device" | "tag" | "tags" | "target" | "task" | "terminal" | "text" | "th-large" | "th-list" | "thumbs-down" | "thumbs-up" | "tiers" | "timeline" | "toggle-arrow-right" | "token" | "transfer" | "translate" | "trash" | "trend-upward" | "triangle-outline" | "trolley" | "truncate" | "twitter" | "ulist" | "unarchive" | "underline" | "undo" | "unknown" | "unlink" | "unlock" | "unpublish" | "upload" | "user" | "users" | "versions" | "video" | "warning-filled" | "warning-outline" | "wrench";
+    title?: string;
+    link?: {
+      title?: string;
+      href?: string;
+    };
+  } | null;
+} | null;
 
 // Source: src/lib/data/_global/query.ts
 // Variable: GLOBAL_QUERY
 // Query: {  "nav": *[_type == "nav" && id in ["main"]]{  _id,  title,  items[]{    hidden,    collapsed,    "title": coalesce(title, route.title),    menuTitle,    segment,    "targetId": target->_id,    "isComponent": target->apiMember.isComponent,    "isHook": target->apiMember.isHook,    items[]{      hidden,      collapsed,      "title": coalesce(title, route.title),      menuTitle,      segment,      "targetId": target->_id,      "isComponent": target->apiMember.isComponent,      "isHook": target->apiMember.isHook,      title,      items[]{        hidden,        collapsed,        "title": coalesce(title, route.title),        menuTitle,        segment,        "targetId": target->_id,        "isComponent": target->apiMember.isComponent,        "isHook": target->apiMember.isHook,        title      }    }  }}[0],  "settings": *[_id == "settings"]{_id,banner}[0]}
 export type GLOBAL_QUERY_RESULT = {
   nav: {
-    _id: string
-    title: string | null
+    _id: string;
+    title: string | null;
     items: Array<{
-      hidden: boolean | null
-      collapsed: boolean | null
-      title: string | null
-      menuTitle: string | null
-      segment: string | null
-      targetId: string | null
-      isComponent: boolean | null
-      isHook: boolean | null
+      hidden: boolean | null;
+      collapsed: boolean | null;
+      title: string | null;
+      menuTitle: string | null;
+      segment: string | null;
+      targetId: string | null;
+      isComponent: boolean | null;
+      isHook: boolean | null;
       items: Array<{
-        hidden: boolean | null
-        collapsed: boolean | null
-        title: string | null
-        menuTitle: string | null
-        segment: string | null
-        targetId: string | null
-        isComponent: boolean | null
-        isHook: boolean | null
+        hidden: boolean | null;
+        collapsed: boolean | null;
+        title: string | null;
+        menuTitle: string | null;
+        segment: string | null;
+        targetId: string | null;
+        isComponent: boolean | null;
+        isHook: boolean | null;
         items: Array<{
-          hidden: boolean | null
-          collapsed: boolean | null
-          title: string | null
-          menuTitle: string | null
-          segment: string | null
-          targetId: string | null
-          isComponent: boolean | null
-          isHook: boolean | null
-        }> | null
-      }> | null
-    }> | null
-  } | null
-  settings:
-    | {
-        _id: 'settings'
-        banner: null
-      }
-    | {
-        _id: 'settings'
-        banner: {
-          hidden?: boolean
-          icon?:
-            | 'access-denied'
-            | 'activity'
-            | 'add-circle'
-            | 'add-comment'
-            | 'add-document'
-            | 'add-user'
-            | 'add'
-            | 'api'
-            | 'archive'
-            | 'arrow-down'
-            | 'arrow-left'
-            | 'arrow-right'
-            | 'arrow-top-right'
-            | 'arrow-up'
-            | 'asterisk'
-            | 'bar-chart'
-            | 'basket'
-            | 'bell'
-            | 'bill'
-            | 'binary-document'
-            | 'block-content'
-            | 'block-element'
-            | 'blockquote'
-            | 'bold'
-            | 'bolt'
-            | 'book'
-            | 'bookmark-filled'
-            | 'bookmark'
-            | 'bottle'
-            | 'bug'
-            | 'bulb-filled'
-            | 'bulb-outline'
-            | 'calendar'
-            | 'case'
-            | 'chart-upward'
-            | 'checkmark-circle'
-            | 'checkmark'
-            | 'chevron-down'
-            | 'chevron-left'
-            | 'chevron-right'
-            | 'chevron-up'
-            | 'circle'
-            | 'clipboard-image'
-            | 'clipboard'
-            | 'clock'
-            | 'close-circle'
-            | 'close'
-            | 'code-block'
-            | 'code'
-            | 'cog'
-            | 'collapse'
-            | 'color-wheel'
-            | 'comment'
-            | 'component'
-            | 'compose-sparkles'
-            | 'compose'
-            | 'confetti'
-            | 'controls'
-            | 'copy'
-            | 'credit-card'
-            | 'crop'
-            | 'cube'
-            | 'dashboard'
-            | 'database'
-            | 'desktop'
-            | 'diamond'
-            | 'document-pdf'
-            | 'document-remove'
-            | 'document-sheet'
-            | 'document-text'
-            | 'document-video'
-            | 'document-word'
-            | 'document-zip'
-            | 'document'
-            | 'documents'
-            | 'dot'
-            | 'double-chevron-down'
-            | 'double-chevron-left'
-            | 'double-chevron-right'
-            | 'double-chevron-up'
-            | 'double-quote'
-            | 'download'
-            | 'drag-handle'
-            | 'drop'
-            | 'earth-americas'
-            | 'earth-globe'
-            | 'edit'
-            | 'ellipsis-horizontal'
-            | 'ellipsis-vertical'
-            | 'empty'
-            | 'enter-right'
-            | 'enter'
-            | 'envelope'
-            | 'equal'
-            | 'error-filled'
-            | 'error-outline'
-            | 'error-screen'
-            | 'expand'
-            | 'eye-closed'
-            | 'eye-open'
-            | 'face-happy'
-            | 'face-indifferent'
-            | 'face-sad'
-            | 'feedback'
-            | 'filter'
-            | 'folder'
-            | 'generate'
-            | 'github'
-            | 'groq'
-            | 'hash'
-            | 'heart-filled'
-            | 'heart'
-            | 'help-circle'
-            | 'highlight'
-            | 'home'
-            | 'ice-cream'
-            | 'image-remove'
-            | 'image'
-            | 'images'
-            | 'inbox'
-            | 'info-filled'
-            | 'info-outline'
-            | 'inline-element'
-            | 'inline'
-            | 'insert-above'
-            | 'insert-below'
-            | 'italic'
-            | 'joystick'
-            | 'json'
-            | 'launch'
-            | 'leave'
-            | 'lemon'
-            | 'link-removed'
-            | 'link'
-            | 'linkedin'
-            | 'list'
-            | 'lock'
-            | 'logo-js'
-            | 'logo-ts'
-            | 'marker-removed'
-            | 'marker'
-            | 'master-detail'
-            | 'menu'
-            | 'microphone-slash'
-            | 'microphone'
-            | 'mobile-device'
-            | 'moon'
-            | 'number'
-            | 'ok-hand'
-            | 'olist'
-            | 'overage'
-            | 'package'
-            | 'panel-left'
-            | 'panel-right'
-            | 'pause'
-            | 'pin-filled'
-            | 'pin-removed'
-            | 'pin'
-            | 'play'
-            | 'plug'
-            | 'presentation'
-            | 'progress-50'
-            | 'progress-75'
-            | 'projects'
-            | 'publish'
-            | 'read-only'
-            | 'redo'
-            | 'refresh'
-            | 'remove-circle'
-            | 'remove'
-            | 'reset'
-            | 'restore'
-            | 'retrieve'
-            | 'retry'
-            | 'revert'
-            | 'robot'
-            | 'rocket'
-            | 'schema'
-            | 'search'
-            | 'select'
-            | 'share'
-            | 'sort'
-            | 'sparkle'
-            | 'sparkles'
-            | 'spinner'
-            | 'split-horizontal'
-            | 'split-vertical'
-            | 'square'
-            | 'stack-compact'
-            | 'stack'
-            | 'star-filled'
-            | 'star'
-            | 'stop'
-            | 'strikethrough'
-            | 'string'
-            | 'sun'
-            | 'sync'
-            | 'tablet-device'
-            | 'tag'
-            | 'tags'
-            | 'target'
-            | 'task'
-            | 'terminal'
-            | 'text'
-            | 'th-large'
-            | 'th-list'
-            | 'thumbs-down'
-            | 'thumbs-up'
-            | 'tiers'
-            | 'timeline'
-            | 'toggle-arrow-right'
-            | 'token'
-            | 'transfer'
-            | 'translate'
-            | 'trash'
-            | 'trend-upward'
-            | 'triangle-outline'
-            | 'trolley'
-            | 'truncate'
-            | 'twitter'
-            | 'ulist'
-            | 'unarchive'
-            | 'underline'
-            | 'undo'
-            | 'unknown'
-            | 'unlink'
-            | 'unlock'
-            | 'unpublish'
-            | 'upload'
-            | 'user'
-            | 'users'
-            | 'versions'
-            | 'video'
-            | 'warning-filled'
-            | 'warning-outline'
-            | 'wrench'
-          title?: string
-          link?: {
-            title?: string
-            href?: string
-          }
-        } | null
-      }
-    | null
-}
+          hidden: boolean | null;
+          collapsed: boolean | null;
+          title: string | null;
+          menuTitle: string | null;
+          segment: string | null;
+          targetId: string | null;
+          isComponent: boolean | null;
+          isHook: boolean | null;
+        }> | null;
+      }> | null;
+    }> | null;
+  } | null;
+  settings: {
+    _id: "settings";
+    banner: null;
+  } | {
+    _id: "settings";
+    banner: {
+      hidden?: boolean;
+      icon?: "access-denied" | "activity" | "add-circle" | "add-comment" | "add-document" | "add-user" | "add" | "api" | "archive" | "arrow-down" | "arrow-left" | "arrow-right" | "arrow-top-right" | "arrow-up" | "asterisk" | "bar-chart" | "basket" | "bell" | "bill" | "binary-document" | "block-content" | "block-element" | "blockquote" | "bold" | "bolt" | "book" | "bookmark-filled" | "bookmark" | "bottle" | "bug" | "bulb-filled" | "bulb-outline" | "calendar" | "case" | "chart-upward" | "checkmark-circle" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle" | "clipboard-image" | "clipboard" | "clock" | "close-circle" | "close" | "code-block" | "code" | "cog" | "collapse" | "color-wheel" | "comment" | "component" | "compose-sparkles" | "compose" | "confetti" | "controls" | "copy" | "credit-card" | "crop" | "cube" | "dashboard" | "database" | "desktop" | "diamond" | "document-pdf" | "document-remove" | "document-sheet" | "document-text" | "document-video" | "document-word" | "document-zip" | "document" | "documents" | "dot" | "double-chevron-down" | "double-chevron-left" | "double-chevron-right" | "double-chevron-up" | "double-quote" | "download" | "drag-handle" | "drop" | "earth-americas" | "earth-globe" | "edit" | "ellipsis-horizontal" | "ellipsis-vertical" | "empty" | "enter-right" | "enter" | "envelope" | "equal" | "error-filled" | "error-outline" | "error-screen" | "expand" | "eye-closed" | "eye-open" | "face-happy" | "face-indifferent" | "face-sad" | "feedback" | "filter" | "folder" | "generate" | "github" | "groq" | "hash" | "heart-filled" | "heart" | "help-circle" | "highlight" | "home" | "ice-cream" | "image-remove" | "image" | "images" | "inbox" | "info-filled" | "info-outline" | "inline-element" | "inline" | "insert-above" | "insert-below" | "italic" | "joystick" | "json" | "launch" | "leave" | "lemon" | "link-removed" | "link" | "linkedin" | "list" | "lock" | "logo-js" | "logo-ts" | "marker-removed" | "marker" | "master-detail" | "menu" | "microphone-slash" | "microphone" | "mobile-device" | "moon" | "number" | "ok-hand" | "olist" | "overage" | "package" | "panel-left" | "panel-right" | "pause" | "pin-filled" | "pin-removed" | "pin" | "play" | "plug" | "presentation" | "progress-50" | "progress-75" | "projects" | "publish" | "read-only" | "redo" | "refresh" | "remove-circle" | "remove" | "reset" | "restore" | "retrieve" | "retry" | "revert" | "robot" | "rocket" | "schema" | "search" | "select" | "share" | "sort" | "sparkle" | "sparkles" | "spinner" | "split-horizontal" | "split-vertical" | "square" | "stack-compact" | "stack" | "star-filled" | "star" | "stop" | "strikethrough" | "string" | "sun" | "sync" | "tablet-device" | "tag" | "tags" | "target" | "task" | "terminal" | "text" | "th-large" | "th-list" | "thumbs-down" | "thumbs-up" | "tiers" | "timeline" | "toggle-arrow-right" | "token" | "transfer" | "translate" | "trash" | "trend-upward" | "triangle-outline" | "trolley" | "truncate" | "twitter" | "ulist" | "unarchive" | "underline" | "undo" | "unknown" | "unlink" | "unlock" | "unpublish" | "upload" | "user" | "users" | "versions" | "video" | "warning-filled" | "warning-outline" | "wrench";
+      title?: string;
+      link?: {
+        title?: string;
+        href?: string;
+      };
+    } | null;
+  } | null;
+};
 
 // Source: src/lib/sanity/queries.ts
 // Variable: screensQuery
 // Query: *[_type == "nav" && id == $id][0].items[defined(segment) && segment != ""] {  "screen": segment}
 export type ScreensQueryResult = Array<{
-  screen: string | null
-}> | null
+  screen: string | null;
+}> | null;
 
 // Source: src/lib/sanity/queries.ts
 // Variable: articlesQuery
 // Query: *[_type == "nav" && id == $id][0].items[defined(segment) && segment != ""] {    "params": coalesce(items[defined(segment) && segment != ""] {      "params": [{        "screen": ^.segment,        "article": [segment]      }] + coalesce(items[defined(segment) && segment != ""] {        "screen": ^.^.segment,        "article": [^.segment, segment]      }, [])    }.params[], [])  }.params[]
-export type ArticlesQueryResult = Array<
-  | {
-      screen: string | null
-      article: Array<string | null>
-    }
-  | {
-      screen: string | null
-      article: Array<string | null>
-    }
-> | null
+export type ArticlesQueryResult = Array<{
+  screen: string | null;
+  article: Array<string | null>;
+} | {
+  screen: string | null;
+  article: Array<string | null>;
+}> | null;
 
 // Source: src/lib/sanity/queries.ts
 // Variable: targetByPathQuery
 // Query: *[_type == "nav" && id == $id][0]{  'child': items[segment == $path[0]][0]{    length($path) == 1 => {target},    'child': items[defined($path[1]) && segment == $path[1]][0]{      length($path) == 2 => {target},      'child': items[defined($path[2]) && segment == $path[2]][0]{        length($path) == 3 => {target},        'child': items[defined($path[3]) && segment == $path[3]][0]{          length($path) == 4 => {target},        }      }    }  }}{  length($path) == 1 => child,  length($path) == 2 => child.child,  length($path) == 3 => child.child.child,  length($path) == 4 => child.child.child.child,}{target->{// groq...,content[]{  ...,  // expand inline symbol  children[]{    _type == 'symbol' => @->{      _type,      "member": *[_type in $memberTypes && package._ref == ^.package._ref && name == ^.name]{        // groq_type == 'api.class' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},members[]{  _type == 'api.constructorMember' => {    _key,    _type,    comment,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag  },  _type == 'api.methodMember' => {    _key,    _type,    comment,    name,    isOptional,    isStatic,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  },  _type == 'api.propertyMember' => {    _key,    _type,    comment,    name,    isEventProperty,    isOptional,    isStatic,    releaseTag,    type[]{      ...,      symbol->    }  }},name,package->{scope,name},release->{version},releaseTag},_type == 'api.enum' => {  // groq...,export->{name,path},package->{scope,name},release->{version}},_type == 'api.function' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},isReactComponentType,name,package->{scope,name},parameters[]{  _key,  _type,  name,  releaseTag,  type[]{    ...,    symbol->  }},'referrers': *[references(^._id)] {  _type,  name,  export->{path},  package->{scope,name},  release->{version}},release->{version},releaseTag,returnType[]{  ...,  symbol->},typeParameters},_type == 'api.interface' => {  //groq_id,_type,_updatedAt,comment,export->{name,path},extends,members[]{  _type == 'api.callSignatureMember' => {    _key,    _type,    comment,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  },  _type == 'api.methodSignatureMember' => {    _key,    _type,    comment,    isOptional,    name,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  },  _type == 'api.indexSignatureMember' => {    _key,    _type,    comment,    releaseTag,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    returnType[]{      ...,      symbol->    }  },  _type == 'api.propertySignatureMember' => {    _key,    _type,    comment,    isOptional,    name,    releaseTag,    comment,    type[]{      ...,      symbol->    }  }},name,package->{scope,name},'referrers': *[references(^._id)] {  _type,  name,  export->{path},  package->{scope,name},  release->{version}},release->{version},releaseTag,slug,typeParameters},_type == 'api.namespace' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},members[]{  _type == 'api.functionMember' => {    _key,    _type,    comment,    name,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  }},name,package->{scope,name},release->{version},releaseTag},_type == 'api.typeAlias' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},name,package->{scope,name},release->{version},releaseTag,type[]{  ...,  symbol->}},_type == 'api.variable' => {  // groq_id,_type,comment,export->{name,path},isReactComponentType,name,package->{scope,name},propsType->,release->{version},releaseTag,'referrers': *[references(^._id)] {  _type,  name,  export->{path},  package->{scope,name},  release->{version}},type[]{  ...,  symbol->}}      }[0]    },    _type != 'symbol' => @  },  // expand symbol mark  markDefs[]{    _type == 'internalLink' => {      _key,      _type,      "targetId": reference._ref    },    _type == 'symbol' => @->{      "_key": ^._key,      _type,      "member": *[_type in $memberTypes && package._ref == ^.package._ref && name == ^.name]{        // groq_type == 'api.class' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},members[]{  _type == 'api.constructorMember' => {    _key,    _type,    comment,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag  },  _type == 'api.methodMember' => {    _key,    _type,    comment,    name,    isOptional,    isStatic,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  },  _type == 'api.propertyMember' => {    _key,    _type,    comment,    name,    isEventProperty,    isOptional,    isStatic,    releaseTag,    type[]{      ...,      symbol->    }  }},name,package->{scope,name},release->{version},releaseTag},_type == 'api.enum' => {  // groq...,export->{name,path},package->{scope,name},release->{version}},_type == 'api.function' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},isReactComponentType,name,package->{scope,name},parameters[]{  _key,  _type,  name,  releaseTag,  type[]{    ...,    symbol->  }},'referrers': *[references(^._id)] {  _type,  name,  export->{path},  package->{scope,name},  release->{version}},release->{version},releaseTag,returnType[]{  ...,  symbol->},typeParameters},_type == 'api.interface' => {  //groq_id,_type,_updatedAt,comment,export->{name,path},extends,members[]{  _type == 'api.callSignatureMember' => {    _key,    _type,    comment,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  },  _type == 'api.methodSignatureMember' => {    _key,    _type,    comment,    isOptional,    name,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  },  _type == 'api.indexSignatureMember' => {    _key,    _type,    comment,    releaseTag,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    returnType[]{      ...,      symbol->    }  },  _type == 'api.propertySignatureMember' => {    _key,    _type,    comment,    isOptional,    name,    releaseTag,    comment,    type[]{      ...,      symbol->    }  }},name,package->{scope,name},'referrers': *[references(^._id)] {  _type,  name,  export->{path},  package->{scope,name},  release->{version}},release->{version},releaseTag,slug,typeParameters},_type == 'api.namespace' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},members[]{  _type == 'api.functionMember' => {    _key,    _type,    comment,    name,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  }},name,package->{scope,name},release->{version},releaseTag},_type == 'api.typeAlias' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},name,package->{scope,name},release->{version},releaseTag,type[]{  ...,  symbol->}},_type == 'api.variable' => {  // groq_id,_type,comment,export->{name,path},isReactComponentType,name,package->{scope,name},propsType->,release->{version},releaseTag,'referrers': *[references(^._id)] {  _type,  name,  export->{path},  package->{scope,name},  release->{version}},type[]{  ...,  symbol->}}      }[0]    },    _type != 'internalLink' && _type != 'symbol' => @  },  // expand "symbol"  symbol->{    _type,    "member": *[_type in $memberTypes && package._ref == ^.package._ref && name == ^.name]{      // groq_type == 'api.class' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},members[]{  _type == 'api.constructorMember' => {    _key,    _type,    comment,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag  },  _type == 'api.methodMember' => {    _key,    _type,    comment,    name,    isOptional,    isStatic,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  },  _type == 'api.propertyMember' => {    _key,    _type,    comment,    name,    isEventProperty,    isOptional,    isStatic,    releaseTag,    type[]{      ...,      symbol->    }  }},name,package->{scope,name},release->{version},releaseTag},_type == 'api.enum' => {  // groq...,export->{name,path},package->{scope,name},release->{version}},_type == 'api.function' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},isReactComponentType,name,package->{scope,name},parameters[]{  _key,  _type,  name,  releaseTag,  type[]{    ...,    symbol->  }},'referrers': *[references(^._id)] {  _type,  name,  export->{path},  package->{scope,name},  release->{version}},release->{version},releaseTag,returnType[]{  ...,  symbol->},typeParameters},_type == 'api.interface' => {  //groq_id,_type,_updatedAt,comment,export->{name,path},extends,members[]{  _type == 'api.callSignatureMember' => {    _key,    _type,    comment,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  },  _type == 'api.methodSignatureMember' => {    _key,    _type,    comment,    isOptional,    name,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  },  _type == 'api.indexSignatureMember' => {    _key,    _type,    comment,    releaseTag,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    returnType[]{      ...,      symbol->    }  },  _type == 'api.propertySignatureMember' => {    _key,    _type,    comment,    isOptional,    name,    releaseTag,    comment,    type[]{      ...,      symbol->    }  }},name,package->{scope,name},'referrers': *[references(^._id)] {  _type,  name,  export->{path},  package->{scope,name},  release->{version}},release->{version},releaseTag,slug,typeParameters},_type == 'api.namespace' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},members[]{  _type == 'api.functionMember' => {    _key,    _type,    comment,    name,    parameters[]{      _key,      _type,      name,      releaseTag,      type[]{        ...,        symbol->      }    },    releaseTag,    returnType[]{      ...,      symbol->    },    typeParameters  }},name,package->{scope,name},release->{version},releaseTag},_type == 'api.typeAlias' => {  // groq_id,_type,_updatedAt,comment,export->{name,path},name,package->{scope,name},release->{version},releaseTag,type[]{  ...,  symbol->}},_type == 'api.variable' => {  // groq_id,_type,comment,export->{name,path},isReactComponentType,name,package->{scope,name},propsType->,release->{version},releaseTag,'referrers': *[references(^._id)] {  _type,  name,  export->{path},  package->{scope,name},  release->{version}},type[]{  ...,  symbol->}}    }[0]  }}}}.target
-export type TargetByPathQueryResult =
-  | null
-  | {
-      _id: string
-      _type: 'article'
-      _createdAt: string
-      _updatedAt: string
-      _rev: string
-      title?: string
-      figma?: {
-        title?: string
-        url?: string
-      }
-      content: Array<
-        | {
-            children: Array<{
-              marks?: Array<string>
-              text?: string
-              _type: 'span'
-              _key: string
-            }> | null
-            style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-            listItem?: 'bullet' | 'number'
-            markDefs: Array<{
-              href?: string
-              _type: 'link'
-              _key: string
-            }> | null
-            level?: number
-            _type: 'block'
-            _key: string
-            symbol: null
-          }
-        | {
-            icon?:
-              | 'access-denied'
-              | 'activity'
-              | 'add-circle'
-              | 'add-comment'
-              | 'add-document'
-              | 'add-user'
-              | 'add'
-              | 'api'
-              | 'archive'
-              | 'arrow-down'
-              | 'arrow-left'
-              | 'arrow-right'
-              | 'arrow-top-right'
-              | 'arrow-up'
-              | 'asterisk'
-              | 'bar-chart'
-              | 'basket'
-              | 'bell'
-              | 'bill'
-              | 'binary-document'
-              | 'block-content'
-              | 'block-element'
-              | 'blockquote'
-              | 'bold'
-              | 'bolt'
-              | 'book'
-              | 'bookmark-filled'
-              | 'bookmark'
-              | 'bottle'
-              | 'bug'
-              | 'bulb-filled'
-              | 'bulb-outline'
-              | 'calendar'
-              | 'case'
-              | 'chart-upward'
-              | 'checkmark-circle'
-              | 'checkmark'
-              | 'chevron-down'
-              | 'chevron-left'
-              | 'chevron-right'
-              | 'chevron-up'
-              | 'circle'
-              | 'clipboard-image'
-              | 'clipboard'
-              | 'clock'
-              | 'close-circle'
-              | 'close'
-              | 'code-block'
-              | 'code'
-              | 'cog'
-              | 'collapse'
-              | 'color-wheel'
-              | 'comment'
-              | 'component'
-              | 'compose-sparkles'
-              | 'compose'
-              | 'confetti'
-              | 'controls'
-              | 'copy'
-              | 'credit-card'
-              | 'crop'
-              | 'cube'
-              | 'dashboard'
-              | 'database'
-              | 'desktop'
-              | 'diamond'
-              | 'document-pdf'
-              | 'document-remove'
-              | 'document-sheet'
-              | 'document-text'
-              | 'document-video'
-              | 'document-word'
-              | 'document-zip'
-              | 'document'
-              | 'documents'
-              | 'dot'
-              | 'double-chevron-down'
-              | 'double-chevron-left'
-              | 'double-chevron-right'
-              | 'double-chevron-up'
-              | 'double-quote'
-              | 'download'
-              | 'drag-handle'
-              | 'drop'
-              | 'earth-americas'
-              | 'earth-globe'
-              | 'edit'
-              | 'ellipsis-horizontal'
-              | 'ellipsis-vertical'
-              | 'empty'
-              | 'enter-right'
-              | 'enter'
-              | 'envelope'
-              | 'equal'
-              | 'error-filled'
-              | 'error-outline'
-              | 'error-screen'
-              | 'expand'
-              | 'eye-closed'
-              | 'eye-open'
-              | 'face-happy'
-              | 'face-indifferent'
-              | 'face-sad'
-              | 'feedback'
-              | 'filter'
-              | 'folder'
-              | 'generate'
-              | 'github'
-              | 'groq'
-              | 'hash'
-              | 'heart-filled'
-              | 'heart'
-              | 'help-circle'
-              | 'highlight'
-              | 'home'
-              | 'ice-cream'
-              | 'image-remove'
-              | 'image'
-              | 'images'
-              | 'inbox'
-              | 'info-filled'
-              | 'info-outline'
-              | 'inline-element'
-              | 'inline'
-              | 'insert-above'
-              | 'insert-below'
-              | 'italic'
-              | 'joystick'
-              | 'json'
-              | 'launch'
-              | 'leave'
-              | 'lemon'
-              | 'link-removed'
-              | 'link'
-              | 'linkedin'
-              | 'list'
-              | 'lock'
-              | 'logo-js'
-              | 'logo-ts'
-              | 'marker-removed'
-              | 'marker'
-              | 'master-detail'
-              | 'menu'
-              | 'microphone-slash'
-              | 'microphone'
-              | 'mobile-device'
-              | 'moon'
-              | 'number'
-              | 'ok-hand'
-              | 'olist'
-              | 'overage'
-              | 'package'
-              | 'panel-left'
-              | 'panel-right'
-              | 'pause'
-              | 'pin-filled'
-              | 'pin-removed'
-              | 'pin'
-              | 'play'
-              | 'plug'
-              | 'presentation'
-              | 'progress-50'
-              | 'progress-75'
-              | 'projects'
-              | 'publish'
-              | 'read-only'
-              | 'redo'
-              | 'refresh'
-              | 'remove-circle'
-              | 'remove'
-              | 'reset'
-              | 'restore'
-              | 'retrieve'
-              | 'retry'
-              | 'revert'
-              | 'robot'
-              | 'rocket'
-              | 'schema'
-              | 'search'
-              | 'select'
-              | 'share'
-              | 'sort'
-              | 'sparkle'
-              | 'sparkles'
-              | 'spinner'
-              | 'split-horizontal'
-              | 'split-vertical'
-              | 'square'
-              | 'stack-compact'
-              | 'stack'
-              | 'star-filled'
-              | 'star'
-              | 'stop'
-              | 'strikethrough'
-              | 'string'
-              | 'sun'
-              | 'sync'
-              | 'tablet-device'
-              | 'tag'
-              | 'tags'
-              | 'target'
-              | 'task'
-              | 'terminal'
-              | 'text'
-              | 'th-large'
-              | 'th-list'
-              | 'thumbs-down'
-              | 'thumbs-up'
-              | 'tiers'
-              | 'timeline'
-              | 'toggle-arrow-right'
-              | 'token'
-              | 'transfer'
-              | 'translate'
-              | 'trash'
-              | 'trend-upward'
-              | 'triangle-outline'
-              | 'trolley'
-              | 'truncate'
-              | 'twitter'
-              | 'ulist'
-              | 'unarchive'
-              | 'underline'
-              | 'undo'
-              | 'unknown'
-              | 'unlink'
-              | 'unlock'
-              | 'unpublish'
-              | 'upload'
-              | 'user'
-              | 'users'
-              | 'versions'
-              | 'video'
-              | 'warning-filled'
-              | 'warning-outline'
-              | 'wrench'
-            tone?: 'caution' | 'critical' | 'positive' | 'primary'
-            content?: Array<{
-              children?: Array<{
-                marks?: Array<string>
-                text?: string
-                _type: 'span'
-                _key: string
-              }>
-              style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-              listItem?: 'bullet' | 'number'
-              markDefs?: Array<{
-                href?: string
-                _type: 'link'
-                _key: string
-              }>
-              level?: number
-              _type: 'block'
-              _key: string
-            }>
-            _type: 'callout'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            _key: string
-            _type: 'code'
-            language?: string
-            filename?: string
-            code?: string
-            highlightedLines?: Array<number>
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            title?: string
-            description?: string
-            code?: Code
-            hook?: Code
-            caption?: string
-            _type: 'codeExample'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            test?: boolean
-            _type: 'content.colorGrid'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            title?: string
-            url?: string
-            _type: 'content.figmaButton'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            title?: string
-            url?: string
-            _type: 'content.figmaEmbed'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            test?: boolean
-            _type: 'content.groqLogoGrid'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            test?: boolean
-            _type: 'content.sanityLogoGrid'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            asset?: SanityImageAssetReference
-            media?: unknown
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            alt?: string
-            caption?: string
-            _type: 'image'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            name?: string
-            _type: 'npmPackageBadge'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-        | {
-            properties?: Array<{
-              name?: string
-              type?: string
-              required?: boolean
-              description?: Array<{
-                children?: Array<{
-                  marks?: Array<string>
-                  text?: string
-                  _type: 'span'
-                  _key: string
-                }>
-                style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
-                listItem?: 'bullet' | 'number'
-                markDefs?: Array<{
-                  href?: string
-                  _type: 'link'
-                  _key: string
-                }>
-                level?: number
-                _type: 'block'
-                _key: string
-              }>
-              _type: 'property'
-              _key: string
-            }>
-            caption?: string
-            _type: 'propertyTable'
-            _key: string
-            children: null
-            markDefs: null
-            symbol: null
-          }
-      > | null
-      seo?: Seo
-      layout?: {
-        wide?: boolean
-      }
-      apiMember?: {
-        isComponent?: boolean
-        isHook?: boolean
-      }
-    }
-  | {
-      _id: string
-      _type: 'screen'
-      _createdAt: string
-      _updatedAt: string
-      _rev: string
-      title?: string
-      sections?: Array<{
-        headline?: string
-        copy?: string
-        ctas?: Array<{
-          label?: string
-          href?: string
-          tone?: 'default' | 'primary'
-          mode?: 'default' | 'ghost'
-          _type: 'cta'
-          _key: string
-        }>
-        linksHeader?: string
-        links?: Array<{
-          title?: string
-          subtitle?: string
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        backgroundImage?: {
-          dark?: {
-            asset?: SanityImageAssetReference
-            media?: unknown
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            _type: 'image'
-          }
-          light?: {
-            asset?: SanityImageAssetReference
-            media?: unknown
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            _type: 'image'
-          }
-        }
-        _type: 'screenSection.hero'
-        _key: string
-      }>
-      seo?: Seo
-      content: null
-    }
+export type TargetByPathQueryResult = null | {
+  _id: string;
+  _type: "article";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  figma?: {
+    title?: string;
+    url?: string;
+  };
+  content: Array<{
+    children: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }> | null;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }> | null;
+    level?: number;
+    _type: "block";
+    _key: string;
+    symbol: null;
+  } | {
+    icon?: "access-denied" | "activity" | "add-circle" | "add-comment" | "add-document" | "add-user" | "add" | "api" | "archive" | "arrow-down" | "arrow-left" | "arrow-right" | "arrow-top-right" | "arrow-up" | "asterisk" | "bar-chart" | "basket" | "bell" | "bill" | "binary-document" | "block-content" | "block-element" | "blockquote" | "bold" | "bolt" | "book" | "bookmark-filled" | "bookmark" | "bottle" | "bug" | "bulb-filled" | "bulb-outline" | "calendar" | "case" | "chart-upward" | "checkmark-circle" | "checkmark" | "chevron-down" | "chevron-left" | "chevron-right" | "chevron-up" | "circle" | "clipboard-image" | "clipboard" | "clock" | "close-circle" | "close" | "code-block" | "code" | "cog" | "collapse" | "color-wheel" | "comment" | "component" | "compose-sparkles" | "compose" | "confetti" | "controls" | "copy" | "credit-card" | "crop" | "cube" | "dashboard" | "database" | "desktop" | "diamond" | "document-pdf" | "document-remove" | "document-sheet" | "document-text" | "document-video" | "document-word" | "document-zip" | "document" | "documents" | "dot" | "double-chevron-down" | "double-chevron-left" | "double-chevron-right" | "double-chevron-up" | "double-quote" | "download" | "drag-handle" | "drop" | "earth-americas" | "earth-globe" | "edit" | "ellipsis-horizontal" | "ellipsis-vertical" | "empty" | "enter-right" | "enter" | "envelope" | "equal" | "error-filled" | "error-outline" | "error-screen" | "expand" | "eye-closed" | "eye-open" | "face-happy" | "face-indifferent" | "face-sad" | "feedback" | "filter" | "folder" | "generate" | "github" | "groq" | "hash" | "heart-filled" | "heart" | "help-circle" | "highlight" | "home" | "ice-cream" | "image-remove" | "image" | "images" | "inbox" | "info-filled" | "info-outline" | "inline-element" | "inline" | "insert-above" | "insert-below" | "italic" | "joystick" | "json" | "launch" | "leave" | "lemon" | "link-removed" | "link" | "linkedin" | "list" | "lock" | "logo-js" | "logo-ts" | "marker-removed" | "marker" | "master-detail" | "menu" | "microphone-slash" | "microphone" | "mobile-device" | "moon" | "number" | "ok-hand" | "olist" | "overage" | "package" | "panel-left" | "panel-right" | "pause" | "pin-filled" | "pin-removed" | "pin" | "play" | "plug" | "presentation" | "progress-50" | "progress-75" | "projects" | "publish" | "read-only" | "redo" | "refresh" | "remove-circle" | "remove" | "reset" | "restore" | "retrieve" | "retry" | "revert" | "robot" | "rocket" | "schema" | "search" | "select" | "share" | "sort" | "sparkle" | "sparkles" | "spinner" | "split-horizontal" | "split-vertical" | "square" | "stack-compact" | "stack" | "star-filled" | "star" | "stop" | "strikethrough" | "string" | "sun" | "sync" | "tablet-device" | "tag" | "tags" | "target" | "task" | "terminal" | "text" | "th-large" | "th-list" | "thumbs-down" | "thumbs-up" | "tiers" | "timeline" | "toggle-arrow-right" | "token" | "transfer" | "translate" | "trash" | "trend-upward" | "triangle-outline" | "trolley" | "truncate" | "twitter" | "ulist" | "unarchive" | "underline" | "undo" | "unknown" | "unlink" | "unlock" | "unpublish" | "upload" | "user" | "users" | "versions" | "video" | "warning-filled" | "warning-outline" | "wrench";
+    tone?: "caution" | "critical" | "positive" | "primary";
+    content?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    _type: "callout";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    _key: string;
+    _type: "code";
+    language?: string;
+    filename?: string;
+    code?: string;
+    highlightedLines?: Array<number>;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    title?: string;
+    description?: string;
+    code?: Code;
+    hook?: Code;
+    caption?: string;
+    _type: "codeExample";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    test?: boolean;
+    _type: "content.colorGrid";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    title?: string;
+    url?: string;
+    _type: "content.figmaButton";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    title?: string;
+    url?: string;
+    _type: "content.figmaEmbed";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    test?: boolean;
+    _type: "content.groqLogoGrid";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    test?: boolean;
+    _type: "content.sanityLogoGrid";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+    _type: "image";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    name?: string;
+    _type: "npmPackageBadge";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  } | {
+    properties?: Array<{
+      name?: string;
+      type?: string;
+      required?: boolean;
+      description?: Array<{
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }>;
+      _type: "property";
+      _key: string;
+    }>;
+    caption?: string;
+    _type: "propertyTable";
+    _key: string;
+    children: null;
+    markDefs: null;
+    symbol: null;
+  }> | null;
+  seo?: Seo;
+  layout?: {
+    wide?: boolean;
+  };
+  apiMember?: {
+    isComponent?: boolean;
+    isHook?: boolean;
+  };
+} | {
+  _id: string;
+  _type: "screen";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  sections?: Array<{
+    headline?: string;
+    copy?: string;
+    ctas?: Array<{
+      label?: string;
+      href?: string;
+      tone?: "default" | "primary";
+      mode?: "default" | "ghost";
+      _type: "cta";
+      _key: string;
+    }>;
+    linksHeader?: string;
+    links?: Array<{
+      title?: string;
+      subtitle?: string;
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    backgroundImage?: {
+      dark?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      light?: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+    };
+    _type: "screenSection.hero";
+    _key: string;
+  }>;
+  seo?: Seo;
+  content: null;
+};
 
 // Query TypeMap
-import '@sanity/client'
-declare module '@sanity/client' {
+import "@sanity/client";
+declare module "@sanity/client" {
   interface SanityQueries {
-    '\n*[_type == "nav" && id in ["main"]]{\n  _id,\n  title,\n  items[]{\n    hidden,\n    collapsed,\n    "title": coalesce(title, route.title),\n    menuTitle,\n    segment,\n    "targetId": target->_id,\n    "isComponent": target->apiMember.isComponent,\n    "isHook": target->apiMember.isHook,\n    items[]{\n      hidden,\n      collapsed,\n      "title": coalesce(title, route.title),\n      menuTitle,\n      segment,\n      "targetId": target->_id,\n      "isComponent": target->apiMember.isComponent,\n      "isHook": target->apiMember.isHook,\n      title,\n      items[]{\n        hidden,\n        collapsed,\n        "title": coalesce(title, route.title),\n        menuTitle,\n        segment,\n        "targetId": target->_id,\n        "isComponent": target->apiMember.isComponent,\n        "isHook": target->apiMember.isHook,\n        title\n      }\n    }\n  }\n}[0]\n': MAIN_NAV_QUERY_RESULT
-    '*[_id == "settings"]{_id,banner}[0]': SETTINGS_QUERY_RESULT
-    '{\n  "nav": \n*[_type == "nav" && id in ["main"]]{\n  _id,\n  title,\n  items[]{\n    hidden,\n    collapsed,\n    "title": coalesce(title, route.title),\n    menuTitle,\n    segment,\n    "targetId": target->_id,\n    "isComponent": target->apiMember.isComponent,\n    "isHook": target->apiMember.isHook,\n    items[]{\n      hidden,\n      collapsed,\n      "title": coalesce(title, route.title),\n      menuTitle,\n      segment,\n      "targetId": target->_id,\n      "isComponent": target->apiMember.isComponent,\n      "isHook": target->apiMember.isHook,\n      title,\n      items[]{\n        hidden,\n        collapsed,\n        "title": coalesce(title, route.title),\n        menuTitle,\n        segment,\n        "targetId": target->_id,\n        "isComponent": target->apiMember.isComponent,\n        "isHook": target->apiMember.isHook,\n        title\n      }\n    }\n  }\n}[0]\n,\n  "settings": *[_id == "settings"]{_id,banner}[0]\n}': GLOBAL_QUERY_RESULT
-    '\n*[_type == "nav" && id == $id][0].items[defined(segment) && segment != ""] {\n  "screen": segment\n}': ScreensQueryResult
-    '\n  *[_type == "nav" && id == $id][0].items[defined(segment) && segment != ""] {\n    "params": coalesce(items[defined(segment) && segment != ""] {\n      "params": [{\n        "screen": ^.segment,\n        "article": [segment]\n      }] + coalesce(items[defined(segment) && segment != ""] {\n        "screen": ^.^.segment,\n        "article": [^.segment, segment]\n      }, [])\n    }.params[], [])\n  }.params[]': ArticlesQueryResult
-    "\n*[_type == \"nav\" && id == $id][0]{\n  'child': items[segment == $path[0]][0]{\n    length($path) == 1 => {target},\n    'child': items[defined($path[1]) && segment == $path[1]][0]{\n      length($path) == 2 => {target},\n      'child': items[defined($path[2]) && segment == $path[2]][0]{\n        length($path) == 3 => {target},\n        'child': items[defined($path[3]) && segment == $path[3]][0]{\n          length($path) == 4 => {target},\n        }\n      }\n    }\n  }\n}{\n  length($path) == 1 => child,\n  length($path) == 2 => child.child,\n  length($path) == 3 => child.child.child,\n  length($path) == 4 => child.child.child.child,\n}{target->{// groq\n...,\ncontent[]{\n  ...,\n\n  // expand inline symbol\n  children[]{\n    _type == 'symbol' => @->{\n      _type,\n      \"member\": *[_type in $memberTypes && package._ref == ^.package._ref && name == ^.name]{\n        // groq\n_type == 'api.class' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.constructorMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag\n  },\n  _type == 'api.methodMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isOptional,\n    isStatic,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n  _type == 'api.propertyMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isEventProperty,\n    isOptional,\n    isStatic,\n    releaseTag,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.enum' => {\n  // groq\n...,\nexport->{name,path},\npackage->{scope,name},\nrelease->{version}\n\n},\n\n_type == 'api.function' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\nparameters[]{\n  _key,\n  _type,\n  name,\n  releaseTag,\n  type[]{\n    ...,\n    symbol->\n  }\n},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nreturnType[]{\n  ...,\n  symbol->\n},\ntypeParameters\n\n},\n\n_type == 'api.interface' => {\n  //groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nextends,\nmembers[]{\n  _type == 'api.callSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.methodSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.indexSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    releaseTag,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    returnType[]{\n      ...,\n      symbol->\n    }\n  },\n\n  _type == 'api.propertySignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    releaseTag,\n    comment,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nslug,\ntypeParameters\n\n},\n\n_type == 'api.namespace' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.functionMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.typeAlias' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag,\ntype[]{\n  ...,\n  symbol->\n}\n\n},\n\n_type == 'api.variable' => {\n  // groq\n_id,\n_type,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\npropsType->,\nrelease->{version},\nreleaseTag,\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\ntype[]{\n  ...,\n  symbol->\n}\n\n}\n\n      }[0]\n    },\n    _type != 'symbol' => @\n  },\n\n  // expand symbol mark\n  markDefs[]{\n    _type == 'internalLink' => {\n      _key,\n      _type,\n      \"targetId\": reference._ref\n    },\n    _type == 'symbol' => @->{\n      \"_key\": ^._key,\n      _type,\n      \"member\": *[_type in $memberTypes && package._ref == ^.package._ref && name == ^.name]{\n        // groq\n_type == 'api.class' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.constructorMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag\n  },\n  _type == 'api.methodMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isOptional,\n    isStatic,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n  _type == 'api.propertyMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isEventProperty,\n    isOptional,\n    isStatic,\n    releaseTag,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.enum' => {\n  // groq\n...,\nexport->{name,path},\npackage->{scope,name},\nrelease->{version}\n\n},\n\n_type == 'api.function' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\nparameters[]{\n  _key,\n  _type,\n  name,\n  releaseTag,\n  type[]{\n    ...,\n    symbol->\n  }\n},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nreturnType[]{\n  ...,\n  symbol->\n},\ntypeParameters\n\n},\n\n_type == 'api.interface' => {\n  //groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nextends,\nmembers[]{\n  _type == 'api.callSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.methodSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.indexSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    releaseTag,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    returnType[]{\n      ...,\n      symbol->\n    }\n  },\n\n  _type == 'api.propertySignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    releaseTag,\n    comment,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nslug,\ntypeParameters\n\n},\n\n_type == 'api.namespace' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.functionMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.typeAlias' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag,\ntype[]{\n  ...,\n  symbol->\n}\n\n},\n\n_type == 'api.variable' => {\n  // groq\n_id,\n_type,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\npropsType->,\nrelease->{version},\nreleaseTag,\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\ntype[]{\n  ...,\n  symbol->\n}\n\n}\n\n      }[0]\n    },\n    _type != 'internalLink' && _type != 'symbol' => @\n  },\n\n  // expand \"symbol\"\n  symbol->{\n    _type,\n    \"member\": *[_type in $memberTypes && package._ref == ^.package._ref && name == ^.name]{\n      // groq\n_type == 'api.class' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.constructorMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag\n  },\n  _type == 'api.methodMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isOptional,\n    isStatic,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n  _type == 'api.propertyMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isEventProperty,\n    isOptional,\n    isStatic,\n    releaseTag,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.enum' => {\n  // groq\n...,\nexport->{name,path},\npackage->{scope,name},\nrelease->{version}\n\n},\n\n_type == 'api.function' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\nparameters[]{\n  _key,\n  _type,\n  name,\n  releaseTag,\n  type[]{\n    ...,\n    symbol->\n  }\n},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nreturnType[]{\n  ...,\n  symbol->\n},\ntypeParameters\n\n},\n\n_type == 'api.interface' => {\n  //groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nextends,\nmembers[]{\n  _type == 'api.callSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.methodSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.indexSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    releaseTag,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    returnType[]{\n      ...,\n      symbol->\n    }\n  },\n\n  _type == 'api.propertySignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    releaseTag,\n    comment,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nslug,\ntypeParameters\n\n},\n\n_type == 'api.namespace' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.functionMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.typeAlias' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag,\ntype[]{\n  ...,\n  symbol->\n}\n\n},\n\n_type == 'api.variable' => {\n  // groq\n_id,\n_type,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\npropsType->,\nrelease->{version},\nreleaseTag,\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\ntype[]{\n  ...,\n  symbol->\n}\n\n}\n\n    }[0]\n  }\n}\n}}.target": TargetByPathQueryResult
+    "\n*[_type == \"nav\" && id in [\"main\"]]{\n  _id,\n  title,\n  items[]{\n    hidden,\n    collapsed,\n    \"title\": coalesce(title, route.title),\n    menuTitle,\n    segment,\n    \"targetId\": target->_id,\n    \"isComponent\": target->apiMember.isComponent,\n    \"isHook\": target->apiMember.isHook,\n    items[]{\n      hidden,\n      collapsed,\n      \"title\": coalesce(title, route.title),\n      menuTitle,\n      segment,\n      \"targetId\": target->_id,\n      \"isComponent\": target->apiMember.isComponent,\n      \"isHook\": target->apiMember.isHook,\n      title,\n      items[]{\n        hidden,\n        collapsed,\n        \"title\": coalesce(title, route.title),\n        menuTitle,\n        segment,\n        \"targetId\": target->_id,\n        \"isComponent\": target->apiMember.isComponent,\n        \"isHook\": target->apiMember.isHook,\n        title\n      }\n    }\n  }\n}[0]\n": MAIN_NAV_QUERY_RESULT;
+    "*[_id == \"settings\"]{_id,banner}[0]": SETTINGS_QUERY_RESULT;
+    "{\n  \"nav\": \n*[_type == \"nav\" && id in [\"main\"]]{\n  _id,\n  title,\n  items[]{\n    hidden,\n    collapsed,\n    \"title\": coalesce(title, route.title),\n    menuTitle,\n    segment,\n    \"targetId\": target->_id,\n    \"isComponent\": target->apiMember.isComponent,\n    \"isHook\": target->apiMember.isHook,\n    items[]{\n      hidden,\n      collapsed,\n      \"title\": coalesce(title, route.title),\n      menuTitle,\n      segment,\n      \"targetId\": target->_id,\n      \"isComponent\": target->apiMember.isComponent,\n      \"isHook\": target->apiMember.isHook,\n      title,\n      items[]{\n        hidden,\n        collapsed,\n        \"title\": coalesce(title, route.title),\n        menuTitle,\n        segment,\n        \"targetId\": target->_id,\n        \"isComponent\": target->apiMember.isComponent,\n        \"isHook\": target->apiMember.isHook,\n        title\n      }\n    }\n  }\n}[0]\n,\n  \"settings\": *[_id == \"settings\"]{_id,banner}[0]\n}": GLOBAL_QUERY_RESULT;
+    "\n*[_type == \"nav\" && id == $id][0].items[defined(segment) && segment != \"\"] {\n  \"screen\": segment\n}": ScreensQueryResult;
+    "\n  *[_type == \"nav\" && id == $id][0].items[defined(segment) && segment != \"\"] {\n    \"params\": coalesce(items[defined(segment) && segment != \"\"] {\n      \"params\": [{\n        \"screen\": ^.segment,\n        \"article\": [segment]\n      }] + coalesce(items[defined(segment) && segment != \"\"] {\n        \"screen\": ^.^.segment,\n        \"article\": [^.segment, segment]\n      }, [])\n    }.params[], [])\n  }.params[]": ArticlesQueryResult;
+    "\n*[_type == \"nav\" && id == $id][0]{\n  'child': items[segment == $path[0]][0]{\n    length($path) == 1 => {target},\n    'child': items[defined($path[1]) && segment == $path[1]][0]{\n      length($path) == 2 => {target},\n      'child': items[defined($path[2]) && segment == $path[2]][0]{\n        length($path) == 3 => {target},\n        'child': items[defined($path[3]) && segment == $path[3]][0]{\n          length($path) == 4 => {target},\n        }\n      }\n    }\n  }\n}{\n  length($path) == 1 => child,\n  length($path) == 2 => child.child,\n  length($path) == 3 => child.child.child,\n  length($path) == 4 => child.child.child.child,\n}{target->{// groq\n...,\ncontent[]{\n  ...,\n\n  // expand inline symbol\n  children[]{\n    _type == 'symbol' => @->{\n      _type,\n      \"member\": *[_type in $memberTypes && package._ref == ^.package._ref && name == ^.name]{\n        // groq\n_type == 'api.class' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.constructorMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag\n  },\n  _type == 'api.methodMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isOptional,\n    isStatic,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n  _type == 'api.propertyMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isEventProperty,\n    isOptional,\n    isStatic,\n    releaseTag,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.enum' => {\n  // groq\n...,\nexport->{name,path},\npackage->{scope,name},\nrelease->{version}\n\n},\n\n_type == 'api.function' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\nparameters[]{\n  _key,\n  _type,\n  name,\n  releaseTag,\n  type[]{\n    ...,\n    symbol->\n  }\n},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nreturnType[]{\n  ...,\n  symbol->\n},\ntypeParameters\n\n},\n\n_type == 'api.interface' => {\n  //groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nextends,\nmembers[]{\n  _type == 'api.callSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.methodSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.indexSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    releaseTag,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    returnType[]{\n      ...,\n      symbol->\n    }\n  },\n\n  _type == 'api.propertySignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    releaseTag,\n    comment,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nslug,\ntypeParameters\n\n},\n\n_type == 'api.namespace' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.functionMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.typeAlias' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag,\ntype[]{\n  ...,\n  symbol->\n}\n\n},\n\n_type == 'api.variable' => {\n  // groq\n_id,\n_type,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\npropsType->,\nrelease->{version},\nreleaseTag,\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\ntype[]{\n  ...,\n  symbol->\n}\n\n}\n\n      }[0]\n    },\n    _type != 'symbol' => @\n  },\n\n  // expand symbol mark\n  markDefs[]{\n    _type == 'internalLink' => {\n      _key,\n      _type,\n      \"targetId\": reference._ref\n    },\n    _type == 'symbol' => @->{\n      \"_key\": ^._key,\n      _type,\n      \"member\": *[_type in $memberTypes && package._ref == ^.package._ref && name == ^.name]{\n        // groq\n_type == 'api.class' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.constructorMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag\n  },\n  _type == 'api.methodMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isOptional,\n    isStatic,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n  _type == 'api.propertyMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isEventProperty,\n    isOptional,\n    isStatic,\n    releaseTag,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.enum' => {\n  // groq\n...,\nexport->{name,path},\npackage->{scope,name},\nrelease->{version}\n\n},\n\n_type == 'api.function' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\nparameters[]{\n  _key,\n  _type,\n  name,\n  releaseTag,\n  type[]{\n    ...,\n    symbol->\n  }\n},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nreturnType[]{\n  ...,\n  symbol->\n},\ntypeParameters\n\n},\n\n_type == 'api.interface' => {\n  //groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nextends,\nmembers[]{\n  _type == 'api.callSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.methodSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.indexSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    releaseTag,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    returnType[]{\n      ...,\n      symbol->\n    }\n  },\n\n  _type == 'api.propertySignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    releaseTag,\n    comment,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nslug,\ntypeParameters\n\n},\n\n_type == 'api.namespace' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.functionMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.typeAlias' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag,\ntype[]{\n  ...,\n  symbol->\n}\n\n},\n\n_type == 'api.variable' => {\n  // groq\n_id,\n_type,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\npropsType->,\nrelease->{version},\nreleaseTag,\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\ntype[]{\n  ...,\n  symbol->\n}\n\n}\n\n      }[0]\n    },\n    _type != 'internalLink' && _type != 'symbol' => @\n  },\n\n  // expand \"symbol\"\n  symbol->{\n    _type,\n    \"member\": *[_type in $memberTypes && package._ref == ^.package._ref && name == ^.name]{\n      // groq\n_type == 'api.class' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.constructorMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag\n  },\n  _type == 'api.methodMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isOptional,\n    isStatic,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n  _type == 'api.propertyMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    isEventProperty,\n    isOptional,\n    isStatic,\n    releaseTag,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.enum' => {\n  // groq\n...,\nexport->{name,path},\npackage->{scope,name},\nrelease->{version}\n\n},\n\n_type == 'api.function' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\nparameters[]{\n  _key,\n  _type,\n  name,\n  releaseTag,\n  type[]{\n    ...,\n    symbol->\n  }\n},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nreturnType[]{\n  ...,\n  symbol->\n},\ntypeParameters\n\n},\n\n_type == 'api.interface' => {\n  //groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nextends,\nmembers[]{\n  _type == 'api.callSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.methodSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  },\n\n  _type == 'api.indexSignatureMember' => {\n    _key,\n    _type,\n    comment,\n    releaseTag,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    returnType[]{\n      ...,\n      symbol->\n    }\n  },\n\n  _type == 'api.propertySignatureMember' => {\n    _key,\n    _type,\n    comment,\n    isOptional,\n    name,\n    releaseTag,\n    comment,\n    type[]{\n      ...,\n      symbol->\n    }\n  }\n},\nname,\npackage->{scope,name},\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\nrelease->{version},\nreleaseTag,\nslug,\ntypeParameters\n\n},\n\n_type == 'api.namespace' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nmembers[]{\n  _type == 'api.functionMember' => {\n    _key,\n    _type,\n    comment,\n    name,\n    parameters[]{\n      _key,\n      _type,\n      name,\n      releaseTag,\n      type[]{\n        ...,\n        symbol->\n      }\n    },\n    releaseTag,\n    returnType[]{\n      ...,\n      symbol->\n    },\n    typeParameters\n  }\n},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag\n\n},\n\n_type == 'api.typeAlias' => {\n  // groq\n_id,\n_type,\n_updatedAt,\ncomment,\nexport->{name,path},\nname,\npackage->{scope,name},\nrelease->{version},\nreleaseTag,\ntype[]{\n  ...,\n  symbol->\n}\n\n},\n\n_type == 'api.variable' => {\n  // groq\n_id,\n_type,\ncomment,\nexport->{name,path},\nisReactComponentType,\nname,\npackage->{scope,name},\npropsType->,\nrelease->{version},\nreleaseTag,\n'referrers': *[references(^._id)] {\n  _type,\n  name,\n  export->{path},\n  package->{scope,name},\n  release->{version}\n},\ntype[]{\n  ...,\n  symbol->\n}\n\n}\n\n    }[0]\n  }\n}\n}}.target": TargetByPathQueryResult;
   }
 }
+

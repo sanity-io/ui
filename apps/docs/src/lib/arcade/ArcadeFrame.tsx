@@ -1,6 +1,7 @@
 import {ReactElement, useCallback, useEffect, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
+import {basePath} from '@/constants'
 import {isRecord} from '@/lib/common'
 
 const Root = styled.iframe`
@@ -11,7 +12,6 @@ const Root = styled.iframe`
   border: 0;
 `
 
-const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 export function ArcadeFrame({
   hookCode,
   jsxCode,

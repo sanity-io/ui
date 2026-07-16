@@ -5,6 +5,7 @@ import {useRouter} from 'next/navigation'
 import {MouseEvent, ReactElement, useCallback, useEffect} from 'react'
 
 import {useApp} from '@/app/useApp'
+import {basePath} from '@/constants'
 import {NavNode} from '@/lib/nav'
 
 export function Nav(props: {nav: NavNode; path: string}): ReactElement {
@@ -25,7 +26,6 @@ function ensureBasePath(path: string, basePath: string = '') {
   return `${basePath}${path}`
 }
 
-const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   const {level, node, path} = props
   const router = useRouter()

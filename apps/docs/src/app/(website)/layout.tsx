@@ -7,6 +7,7 @@ import {styled} from 'styled-components'
 import {Banner} from '@/components/Banner'
 import {AppFooter} from '@/components/Footer'
 import {Navbar} from '@/components/Navbar'
+import {basePath} from '@/constants'
 import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
 import {
   DynamicFetchOptions,
@@ -19,7 +20,6 @@ import {AppDataProvider} from './AppDataProvider'
 
 const DraftModeToast = dynamic(() => import('@/app/DraftModeToast'))
 
-const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 export default async function WebsiteLayout(props: PropsWithChildren) {
   const {children} = props
   const {isEnabled: isDraftMode} = await draftMode()

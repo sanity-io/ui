@@ -4,6 +4,7 @@ import {useRouter} from 'next/navigation'
 import qs from 'qs'
 import {ReactElement, useCallback, useEffect, useReducer, useRef} from 'react'
 
+import {basePath} from '@/constants'
 import {CodeEditorSelection} from '@/lib/codeEditor'
 
 import {arcadeReducer} from './arcadeReducer'
@@ -19,7 +20,6 @@ function compileSearch(params: Record<string, string>): string {
   return qs.stringify(params)
 }
 
-const basePath = (process.env.__NEXT_ROUTER_BASEPATH as string) || ''
 export function ArcadeScreen(props: {title?: string; description?: string}): ReactElement {
   const router = useRouter()
   const routerRef = useRef(router)
