@@ -21,6 +21,7 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
     tooltipProps,
   )
   const id = useId()
+  const tooltipRef = useRef<HTMLDivElement>(null)
   const dismissedRef = useRef(false)
 
   if (disabled) {
@@ -50,7 +51,7 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
     },
     'onClick': (e: MouseEvent) => {
       dismissedRef.current = true
-      document.getElementById(id)?.togglePopover(false)
+      tooltipRef.current?.togglePopover(false)
       children.props.onClick?.(e)
     },
   })
@@ -73,6 +74,7 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
         role="tooltip"
         popover="hint"
         id={id}
+        ref={tooltipRef}
         onBeforeToggle={handleBeforeToggle}
         {...rest}
       >

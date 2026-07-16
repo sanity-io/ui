@@ -191,6 +191,9 @@ function PanelSwapSection() {
 /** Mount cost: one click renders (or removes) a large set of tooltip-wrapped triggers. */
 function TooltipMountSection() {
   const [open, setOpen] = useState(false)
+  const [clickVariant, setClickVariant] = useState(0)
+
+  const handleTriggerClick = () => console.log(`Tooltip trigger clicked (variant ${clickVariant})`)
 
   return (
     <Card tone="neutral" padding={4}>
@@ -199,10 +202,14 @@ function TooltipMountSection() {
           5. Tooltip mount ({TOOLTIP_COUNT} tooltips)
         </Text>
         <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} tooltip-wrapped buttons.</Text>
-        <Inline>
+        <Inline gap={2}>
           <Button
             text={open ? 'Close panel' : 'Open panel'}
             onClick={() => setOpen((value) => !value)}
+          />
+          <Button
+            text={`Update onClick prop (variant ${clickVariant})`}
+            onClick={() => setClickVariant((value) => value + 1)}
           />
         </Inline>
 
@@ -211,7 +218,7 @@ function TooltipMountSection() {
             <Inline gap={2}>
               {Array.from({length: TOOLTIP_COUNT}, (_, index) => (
                 <Tooltip key={index} content="Tooltip text">
-                  <Button text="Open Tooltip" />
+                  <Button text="Open Tooltip" onClick={handleTriggerClick} />
                 </Tooltip>
               ))}
             </Inline>
