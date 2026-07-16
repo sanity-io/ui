@@ -20,9 +20,9 @@ export function useTooltipContext(): TooltipContextValue {
 }
 
 /** @public */
-export function useTooltip(): TooltipContextValue {
-  const id = useId()
+export function useTooltip(props?: {id?: string}): TooltipContextValue {
+  const reactId = useId()
   const dismissedRef = useRef(false)
 
-  return {id, dismissedRef}
+  return {id: props?.id || reactId, dismissedRef}
 }

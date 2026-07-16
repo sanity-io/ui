@@ -21,10 +21,9 @@ export function usePopoverContext(): PopoverContextValue {
 }
 
 /** @public */
-export function usePopover(): PopoverContextValue {
+export function usePopover(props?: {id?: string}): PopoverContextValue {
   const reactId = useId()
-  const id = reactId
   const [open, setOpen] = useState(false)
 
-  return {id, open, setOpen}
+  return {id: props?.id || reactId, open, setOpen}
 }

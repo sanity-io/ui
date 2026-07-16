@@ -1,11 +1,5 @@
 import clsx from 'clsx'
-import {
-  Activity,
-  type ComponentPropsWithRef,
-  type ElementType,
-  type PropsWithChildren,
-  type ToggleEvent,
-} from 'react'
+import {Activity, type ComponentPropsWithRef, type ElementType, type ToggleEvent} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -13,6 +7,7 @@ import {
   popoverContentProps,
   popoverTriggerProps,
   type PopoverContentProps,
+  type PopoverRootProps,
   type PopoverTriggerProps,
 } from './popover.props'
 import {PopoverContext, usePopover, usePopoverContext} from './usePopover'
@@ -20,8 +15,8 @@ import {PopoverContext, usePopover, usePopoverContext} from './usePopover'
 const popovertriggerClassName = suffixClassName('sui-PopoverTrigger')
 const popoverContentClassName = suffixClassName('sui-PopoverContent')
 
-function PopoverRoot({children}: PropsWithChildren) {
-  const value = usePopover()
+function PopoverRoot({children, id}: PopoverRootProps) {
+  const value = usePopover({id})
 
   return <PopoverContext.Provider value={value}>{children}</PopoverContext.Provider>
 }
@@ -35,12 +30,12 @@ function PopoverTrigger<T extends ElementType = 'button'>(
 
   return (
     <Component
-      popoverTarget={id}
+      popoverTarget={`popover-${id}`}
       data-ui="PopoverTrigger"
       className={clsx(popovertriggerClassName, className)}
       style={{
         ...style,
-        anchorName: `--popover-anchor-${id}`,
+        anchorName: `--anchor-${id}`,
       }}
       {...rest}
     >
@@ -67,11 +62,11 @@ function PopoverContent({placement = 'bottom', ...props}: PopoverContentProps) {
         )}
         style={{
           ...style,
-          positionAnchor: `--popover-anchor-${id}`,
+          positionAnchor: `--anchor-${id}`,
         }}
         data-ui="PopoverContent"
         popover="auto"
-        id={id}
+        id={`popover-${id}`}
         onToggle={handleToggle}
         {...rest}
       >

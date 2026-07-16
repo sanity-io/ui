@@ -4,7 +4,6 @@ import {
   type ElementType,
   type FocusEvent,
   type MouseEvent,
-  type PropsWithChildren,
   type ToggleEvent,
 } from 'react'
 
@@ -12,6 +11,7 @@ import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {
   type TooltipContentProps,
+  type TooltipRootProps,
   type TooltipTriggerProps,
   tooltipContentProps,
   tooltipTriggerProps,
@@ -21,8 +21,8 @@ import {TooltipContext, useTooltip, useTooltipContext} from './useTooltip'
 const tooltiptriggerClassName = suffixClassName('sui-TooltipTrigger')
 const tooltipContentClassName = suffixClassName('sui-TooltipContent')
 
-function TooltipRoot({children}: PropsWithChildren) {
-  const value = useTooltip()
+function TooltipRoot({children, id}: TooltipRootProps) {
+  const value = useTooltip({id})
 
   return <TooltipContext.Provider value={value}>{children}</TooltipContext.Provider>
 }
@@ -39,14 +39,14 @@ function TooltipTrigger<T extends ElementType = 'button'>(
 
   return (
     <Component
-      aria-describedby={id}
+      aria-describedby={`tooltip-${id}`}
       data-ui="TooltipTrigger"
       className={clsx(tooltiptriggerClassName, className)}
       style={{
         ...style,
-        anchorName: `--tooltip-anchor-${id}`,
+        anchorName: `--anchor-${id}`,
       }}
-      interestfor={id}
+      interestfor={`tooltip-${id}`}
       onMouseLeave={(e: MouseEvent) => {
         dismissedRef.current = false
         onMouseLeave?.(e)
@@ -57,7 +57,7 @@ function TooltipTrigger<T extends ElementType = 'button'>(
       }}
       onClick={(e: MouseEvent) => {
         dismissedRef.current = true
-        document.getElementById(id)?.togglePopover(false)
+        document.getElementById(`tooltip-${id}`)?.togglePopover(false)
         onClick?.(e)
       }}
       {...rest}
@@ -89,12 +89,12 @@ function TooltipContent({placement = 'bottom', ...props}: TooltipContentProps) {
       )}
       style={{
         ...style,
-        positionAnchor: `--tooltip-anchor-${id}`,
+        positionAnchor: `--anchor-${id}`,
       }}
       data-ui="TooltipContent"
       role="tooltip"
       popover="hint"
-      id={id}
+      id={`tooltip-${id}`}
       onBeforeToggle={handleBeforeToggle}
       {...rest}
     >

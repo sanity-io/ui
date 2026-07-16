@@ -3,6 +3,12 @@ import type {InteractiveAs} from '../../types/Interactive'
 import {type PropDef} from '../../types/PropDef'
 
 /** @public */
+export type TooltipRootProps = React.PropsWithChildren<{
+  /** Optional ID */
+  id?: string
+}>
+
+/** @public */
 export interface TooltipTriggerProps<T extends React.ElementType> {
   /** Element to render */
   as?: InteractiveAs<T>
