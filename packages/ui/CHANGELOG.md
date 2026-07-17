@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.19
+
+### Patch Changes
+
+- 2eff581: fix: add new top level `sui` CSS layer to avoid layer collisions w/ other stylesheets
+
 ## 0.0.1-alpha.18
 
 ### Patch Changes

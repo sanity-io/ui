@@ -10,7 +10,8 @@
     "ui-poc-frameworks": "1.0.0",
     "ui-poc-next": "0.1.0",
     "ui-poc-vite": "0.0.0",
-    "ui-poc-performance-testing": "0.0.0"
+    "ui-poc-performance-testing": "0.0.0",
+    "inp-testing": "0.0.0"
   },
   "changesets": [
     "brave-knives-cross",
@@ -25,6 +26,7 @@
     "plain-sides-camp",
     "puny-shirts-punch",
     "ready-windows-tell",
+    "salty-planes-feel",
     "shaggy-cats-dig",
     "silent-teeth-occur",
     "soft-hands-swim",
@@ -32,6 +34,7 @@
     "swift-pumas-jump",
     "tame-rules-doubt",
     "tricky-sails-laugh",
+    "warm-swans-decide",
     "wicked-papayas-pull",
     "wide-tables-jump"
   ]
