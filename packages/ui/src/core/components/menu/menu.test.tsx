@@ -70,6 +70,7 @@ describe('components/menu', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           useMenu()
         } catch (err) {
           log(err)
@@ -98,6 +99,7 @@ describe('components/menu', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           useMenu()
         } catch (err) {
           log(err)

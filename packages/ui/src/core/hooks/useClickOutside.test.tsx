@@ -221,7 +221,7 @@ describe('useClickOutside', () => {
       const buttonRef = useRef<HTMLButtonElement | null>(null)
       const popoverRef = useRef<HTMLDivElement | null>(null)
 
-      // oxlint-disable-next-line no-deprecated
+      // oxlint-disable-next-line no-deprecated, react-compiler
       useClickOutside(handler, [buttonRef.current, popoverRef.current])
 
       return (
@@ -308,10 +308,12 @@ describe('useClickOutside', () => {
      */
     // oxlint-disable-next-line no-deprecated
     const useElementsFromRefs = (refs: React.MutableRefObject<HTMLElement | null>[]) => {
+      // oxlint-disable-next-line react-compiler
       const [elements, setElements] = useState(() => refs.map((ref) => ref.current))
 
       useEffect(() => {
         if (refs.length !== elements.length) {
+          // oxlint-disable-next-line react-compiler
           setElements(refs.map((ref) => ref.current))
         }
         for (const ref of refs) {
@@ -367,7 +369,7 @@ describe('useClickOutside', () => {
     let TestComponent = () => {
       const boundaryRef = useRef<HTMLDivElement | null>(null)
 
-      // oxlint-disable-next-line no-deprecated
+      // oxlint-disable-next-line no-deprecated, react-compiler
       useClickOutside(handler, [], boundaryRef.current)
 
       return (
@@ -465,6 +467,7 @@ describe('useClickOutside', () => {
      */
     // oxlint-disable-next-line no-deprecated
     const useBoundaryElementFromRef = (ref: React.MutableRefObject<HTMLElement | null>) => {
+      // oxlint-disable-next-line react-compiler
       const [element, setElement] = useState(() => ref.current)
 
       // oxlint-disable-next-line exhaustive-deps
