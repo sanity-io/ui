@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "pnpm sanity:build && pnpm next:build",
-    "dev": "run-p next:dev sanity:dev",
+    "dev": "pnpm run \"/:dev$/\"",
     "next:build": "next build",
     "next:dev": "next dev",
     "prepare": "next typegen",
@@ -60,7 +60,6 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "babel-plugin-react-compiler": "catalog:",
-    "npm-run-all2": "^8.0.4",
     "typescript": "^5.9.3",
     "vitest": "^3.2.7"
   }

@@ -52,6 +52,12 @@ const nextConfig: NextConfig = {
       return {
         beforeFiles: [
           {
+            // Vite only serves its base with a trailing slash, so map the
+            // bare path explicitly.
+            source: '/studio',
+            destination: 'http://localhost:3333/ui/studio/',
+          },
+          {
             source: '/studio/:path*', // basePath auto-prefixes to /ui/studio/:path*
             destination: 'http://localhost:3333/ui/studio/:path*',
           },
