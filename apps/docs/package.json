@@ -16,7 +16,7 @@
     "next:dev": "next dev",
     "prepare": "next typegen",
     "sanity:dev": "sanity dev",
-    "sanity:build": "sanity build",
+    "sanity:build": "sanity build public/studio",
     "start": "next start",
     "test": "vitest",
     "typecheck": "tsc --build"

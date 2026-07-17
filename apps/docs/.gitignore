@@ -17,7 +17,8 @@
 
 # production
 /build
-/public/studio/static
+/dist
+/public/studio
 
 # misc
 .DS_Store

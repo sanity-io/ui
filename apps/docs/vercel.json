@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/ui/studio(.*)",
-      "destination": "/dist/index.html"
+      "destination": "/ui/studio/index.html"
     }
   ]
 }
