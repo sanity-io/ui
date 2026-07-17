@@ -1,4 +1,4 @@
-import {Box, Card, Code, Stack, Text} from '@sanity/ui'
+import {Badge, Box, Card, Code, Flex, Stack, Text} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
 import {ReactElement} from 'react'
 import {styled} from 'styled-components'
@@ -44,6 +44,7 @@ type PropertyValue = NonNullable<PropertyTableValue['properties']>[number]
 function Property(props: {property: PropertyValue}) {
   // The type signature is rendered as (copyable) code, so strip stega metadata
   const {name, required, type} = stegaClean(props.property)
+  const {deprecated} = props.property
 
   let tsType = name
 
@@ -54,9 +55,23 @@ function Property(props: {property: PropertyValue}) {
   return (
     <PropertyBox padding={3}>
       <Stack gap={3}>
-        <Code language="typescript" size={1}>
-          {tsType}
-        </Code>
+        <Flex align="center" gap={2} wrap="wrap">
+          <Code language="typescript" size={1}>
+            {tsType}
+          </Code>
+
+          {deprecated && (
+            <Badge fontSize={0} tone="caution">
+              deprecated
+            </Badge>
+          )}
+        </Flex>
+
+        {deprecated && (
+          <Text muted size={1}>
+            {deprecated}
+          </Text>
+        )}
 
         {isArray(props.property.description) && (
           <PlainContent blocks={props.property.description} />
