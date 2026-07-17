@@ -15,11 +15,11 @@ const argTypes = getArgTypes(tooltipGroupProps)
 const PerformanceTooltipGroup = (props: ComponentProps<typeof TooltipGroup>) => {
   return (
     <TooltipGroup {...props}>
-      <Tooltip text="Tooltip 1 Text">
+      <Tooltip content="Tooltip 1 Text">
         <button>Open Tooltip 1</button>
       </Tooltip>
 
-      <Tooltip text="Tooltip 2 Text">
+      <Tooltip content="Tooltip 2 Text">
         <button>Open Tooltip 2</button>
       </Tooltip>
     </TooltipGroup>
@@ -63,15 +63,15 @@ export const Default: Story = {
   render: (props) => {
     return (
       <TooltipGroup as={HStack} gap={2} {...props}>
-        <Tooltip text="Tooltip 1 Text">
+        <Tooltip content="Tooltip 1 Text">
           <Button text="Open Tooltip 1" />
         </Tooltip>
 
-        <Tooltip text="Tooltip 2 Text">
+        <Tooltip content="Tooltip 2 Text">
           <Button text="Open Tooltip 2" />
         </Tooltip>
 
-        <Tooltip text="Tooltip 3 Text">
+        <Tooltip content="Tooltip 3 Text">
           <Button text="Open Tooltip 3" />
         </Tooltip>
       </TooltipGroup>

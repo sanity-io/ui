@@ -191,7 +191,7 @@ function TooltipMountSection() {
           <div style={scrollAreaStyle}>
             <HStack gap={2}>
               {Array.from({length: TOOLTIP_COUNT}, (_, index) => (
-                <Tooltip key={index} text="Tooltip text">
+                <Tooltip key={index} content="Tooltip text">
                   <Button text="Open Tooltip" onClick={handleTriggerClick} />
                 </Tooltip>
               ))}

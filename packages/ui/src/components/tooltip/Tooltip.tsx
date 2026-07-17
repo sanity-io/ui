@@ -1,30 +1,27 @@
 import clsx from 'clsx'
-import {
-  cloneElement,
-  useId,
-  useRef,
-  type FocusEvent,
-  type MouseEvent,
-  type ToggleEvent,
-} from 'react'
+import {cloneElement, useId, useRef, type ToggleEvent} from 'react'
 
 import {getProps} from '../../utils/getProps'
+import {mergeTriggerProps} from '../../utils/mergeTriggerProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {type TooltipProps, tooltipProps} from './tooltip.props'
 
 const tooltipClassName = suffixClassName('sui-Tooltip')
 
-/** @public */
-export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
+function TooltipRoot({
+  placement = 'bottom',
+  ...props
+}: TooltipProps & {
+  triggerProps?: Record<string, unknown>
+}) {
   const {
     children,
     className,
     style,
     id: idProp,
     disabled,
-    text,
-    asTrigger,
-    triggerProps,
+    content,
+    triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, tooltipProps)
   const reactId = useId()
@@ -33,8 +30,30 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
   const tooltipRef = useRef<HTMLDivElement>(null)
   const dismissedRef = useRef(false)
 
+  const triggerProps = disabled
+    ? undefined
+    : {
+        'aria-describedby': tooltipId,
+        'interestfor': tooltipId,
+        'style': {anchorName: `--anchor-${id}`},
+        'onMouseLeave': () => {
+          dismissedRef.current = false
+        },
+        'onBlur': () => {
+          dismissedRef.current = false
+        },
+        'onClick': () => {
+          dismissedRef.current = true
+          tooltipRef.current?.togglePopover(false)
+        },
+      }
+
+  const trigger = children.type.forwardsTriggerProps
+    ? cloneElement(children, {triggerProps: disabled ? forwardedTriggerProps : triggerProps})
+    : cloneElement(children, mergeTriggerProps(children.props, forwardedTriggerProps, triggerProps))
+
   if (disabled) {
-    return asTrigger ? cloneElement(children, triggerProps) : children
+    return trigger
   }
 
   const handleBeforeToggle = (e: ToggleEvent) => {
@@ -42,56 +61,6 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
       e.preventDefault()
     }
   }
-
-  const handleMouseLeave = (e: MouseEvent) => {
-    dismissedRef.current = false
-    children.props.onMouseLeave?.(e)
-  }
-
-  const handleOnBlur = (e: FocusEvent) => {
-    dismissedRef.current = false
-    children.props.onBlur?.(e)
-  }
-
-  const handleOnClick = (e: MouseEvent) => {
-    dismissedRef.current = true
-    tooltipRef.current?.togglePopover(false)
-    children.props.onClick?.(e)
-  }
-
-  const trigger = children.props.asTrigger
-    ? cloneElement(children, {
-        triggerProps: {
-          'aria-describedby': tooltipId,
-          'interestfor': tooltipId,
-          'style': {anchorName: `--anchor-${id}`},
-          'onMouseLeave': handleMouseLeave,
-          'onBlur': handleOnBlur,
-          'onClick': handleOnClick,
-        },
-      })
-    : cloneElement(children, {
-        ...triggerProps,
-        'aria-describedby': tooltipId,
-        'interestfor': tooltipId,
-        'style': {
-          ...children.props.style,
-          ...triggerProps?.style,
-          anchorName: `--anchor-${id}`,
-        },
-        'onMouseLeave': (e: MouseEvent) => {
-          triggerProps?.onMouseLeave?.(e)
-          handleMouseLeave(e)
-        },
-        'onBlur': (e: FocusEvent) => {
-          triggerProps?.onBlur?.(e)
-          handleOnBlur(e)
-        },
-        'onClick': (e: MouseEvent) => {
-          triggerProps?.onClick?.(e)
-          handleOnClick(e)
-        },
-      })
 
   return (
     <>
@@ -110,13 +79,18 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
         data-ui="Tooltip"
         role="tooltip"
         popover="hint"
-        id={`tooltip-${id}`}
+        id={tooltipId}
         ref={tooltipRef}
         onBeforeToggle={handleBeforeToggle}
         {...rest}
       >
-        {text}
+        {content}
       </div>
     </>
   )
 }
+
+/** @public */
+export const Tooltip = Object.assign(TooltipRoot, {
+  forwardsTriggerProps: true,
+}) as typeof TooltipRoot

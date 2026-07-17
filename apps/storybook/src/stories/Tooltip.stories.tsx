@@ -9,7 +9,7 @@ import {PLACEMENT} from '../../../../packages/ui/src/types/Placement'
 
 const PerformanceTooltip = () => {
   return (
-    <Tooltip text="Tooltip content">
+    <Tooltip content="Tooltip content">
       <button>Open Tooltip</button>
     </Tooltip>
   )
@@ -44,7 +44,7 @@ type Story = StoryObj<typeof Tooltip>
 export const Default: Story = {
   render: (props) => {
     return (
-      <Tooltip {...props} text="Tooltip text">
+      <Tooltip {...props} content="Tooltip text">
         <Button text="Open Tooltip" />
       </Tooltip>
     )
@@ -84,7 +84,7 @@ export const Placements: Story = {
             <Tooltip
               {...props}
               placement={placement}
-              text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Text`}
+              content={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Text`}
             >
               <Button
                 text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip`}

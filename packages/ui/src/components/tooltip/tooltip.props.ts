@@ -3,29 +3,22 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @public */
 export interface TooltipProps
-  extends Omit<React.ComponentProps<'div'>, 'children'>, PlacementProps {
-  /** Element that triggers the tooltip. Must be a single, focusable element. */
+  extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
+  /** Focusable trigger element */
   children: React.ReactElement<Record<string, unknown>>
-  /** Tooltip text */
-  text: React.ReactNode
+  /** Tooltip content */
+  content: React.ReactNode
   /** Disabled state */
   disabled?: boolean
-  /** Merge parent trigger props onto the child element instead of this wrapper */
-  asTrigger?: boolean
   /** Shared id with Popover for combined tooltip + popover triggers */
   id?: string
-  /** Trigger props forwarded from a parent wrapper via cloneElement */
-  triggerProps?: Record<string, unknown>
 }
 
 export const tooltipProps: Record<string, PropDef> = {
-  text: {
+  content: {
     type: 'string',
   },
   disabled: {
-    type: 'boolean',
-  },
-  asTrigger: {
     type: 'boolean',
   },
   ...placementProps,
