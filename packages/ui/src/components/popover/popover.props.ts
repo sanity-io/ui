@@ -1,6 +1,5 @@
 import {type PlacementProps, placementProps} from '../../props/placement'
 import {type PropDef} from '../../types/PropDef'
-import {type TriggerProps} from '../trigger/trigger.props'
 
 /** @public */
 export interface PopoverProps
@@ -14,7 +13,7 @@ export interface PopoverProps
   /** Shared id with Tooltip for combined tooltip + popover triggers */
   id?: string
   /** Trigger props forwarded from a parent wrapper via cloneElement */
-  triggerProps?: TriggerProps
+  triggerProps?: Record<string, unknown>
 }
 
 export const popoverProps: Record<string, PropDef> = {

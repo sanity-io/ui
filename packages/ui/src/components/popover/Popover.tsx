@@ -11,7 +11,6 @@ import {
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
-import {type TriggerProps} from '../trigger/trigger.props'
 import {type PopoverProps, popoverProps} from './popover.props'
 
 const popoverClassName = suffixClassName('sui-PopoverContent')
@@ -24,12 +23,12 @@ export function Popover({placement = 'bottom', ...props}: PopoverProps) {
     style,
     id: idProp,
     content,
-    asTrigger,
-    triggerProps: forwardedTriggerProps,
+    triggerProps,
     ...rest
   } = getProps({placement, ...props}, popoverProps)
   const reactId = useId()
   const id = idProp || reactId
+  const popoverId = `popover-${id}`
   const [open, setOpen] = useState(false)
   const {anchorName: _anchorName, ...contentStyle} = style ?? {}
 
@@ -37,47 +36,31 @@ export function Popover({placement = 'bottom', ...props}: PopoverProps) {
     setOpen(e.newState === 'open')
   }
 
-  const popoverTriggerProps: TriggerProps = {
-    popoverTarget: `popover-${id}`,
-    style: {anchorName: `--anchor-${id}`},
-  }
-
-  let trigger
-
-  if (asTrigger) {
-    const triggerProps: TriggerProps = {
-      ...forwardedTriggerProps,
-      ...popoverTriggerProps,
-      style: {
-        ...children.props.style,
-        ...forwardedTriggerProps?.style,
-        ...popoverTriggerProps.style,
-      },
-      onClick: (e: MouseEvent) => {
-        forwardedTriggerProps?.onClick?.(e)
-        children.props.onClick?.(e)
-      },
-      onBlur: (e: FocusEvent) => {
-        forwardedTriggerProps?.onBlur?.(e)
-        children.props.onBlur?.(e)
-      },
-      onMouseLeave: (e: MouseEvent) => {
-        forwardedTriggerProps?.onMouseLeave?.(e)
-        children.props.onMouseLeave?.(e)
-      },
-    }
-
-    trigger = cloneElement(children, triggerProps)
-  } else if (children.props.asTrigger) {
-    trigger = cloneElement(children, {
-      triggerProps: {popoverTarget: popoverTriggerProps.popoverTarget},
-    })
-  } else {
-    trigger = cloneElement(children, {
-      ...popoverTriggerProps,
-      style: {...children.props.style, ...popoverTriggerProps.style},
-    })
-  }
+  const trigger = children.props.asTrigger
+    ? cloneElement(children, {
+        triggerProps: {popoverTarget: popoverId},
+      })
+    : cloneElement(children, {
+        ...triggerProps,
+        popoverTarget: popoverId,
+        style: {
+          ...children.props.style,
+          ...triggerProps?.style,
+          anchorName: `--anchor-${id}`,
+        },
+        onClick: (e: MouseEvent) => {
+          triggerProps?.onClick?.(e)
+          children.props.onClick?.(e)
+        },
+        onBlur: (e: FocusEvent) => {
+          triggerProps?.onBlur?.(e)
+          children.props.onBlur?.(e)
+        },
+        onMouseLeave: (e: MouseEvent) => {
+          triggerProps?.onMouseLeave?.(e)
+          children.props.onMouseLeave?.(e)
+        },
+      })
 
   return (
     <>

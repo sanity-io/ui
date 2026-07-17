@@ -10,7 +10,6 @@ import {
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
-import {type TriggerProps} from '../trigger/trigger.props'
 import {type TooltipProps, tooltipProps} from './tooltip.props'
 
 const tooltipClassName = suffixClassName('sui-Tooltip')
@@ -25,18 +24,17 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
     disabled,
     text,
     asTrigger,
-    triggerProps: forwardedTriggerProps,
+    triggerProps,
     ...rest
   } = getProps({placement, ...props}, tooltipProps)
   const reactId = useId()
   const id = idProp || reactId
+  const tooltipId = `tooltip-${id}`
   const tooltipRef = useRef<HTMLDivElement>(null)
   const dismissedRef = useRef(false)
 
   if (disabled) {
-    return asTrigger && forwardedTriggerProps?.popoverTarget
-      ? cloneElement(children, {popoverTarget: forwardedTriggerProps.popoverTarget})
-      : children
+    return asTrigger ? cloneElement(children, triggerProps) : children
   }
 
   const handleBeforeToggle = (e: ToggleEvent) => {
@@ -45,54 +43,55 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
     }
   }
 
-  const tooltipTriggerProps: TriggerProps = {
-    'aria-describedby': `tooltip-${id}`,
-    'interestfor': `tooltip-${id}`,
-    'style': {anchorName: `--anchor-${id}`},
-    'onMouseLeave': (e: MouseEvent) => {
-      dismissedRef.current = false
-      children.props.onMouseLeave?.(e)
-    },
-    'onBlur': (e: FocusEvent) => {
-      dismissedRef.current = false
-      children.props.onBlur?.(e)
-    },
-    'onClick': (e: MouseEvent) => {
-      dismissedRef.current = true
-      tooltipRef.current?.togglePopover(false)
-      children.props.onClick?.(e)
-    },
+  const handleMouseLeave = (e: MouseEvent) => {
+    dismissedRef.current = false
+    children.props.onMouseLeave?.(e)
   }
 
-  let trigger
-
-  if (children.props.asTrigger) {
-    trigger = cloneElement(children, {triggerProps: tooltipTriggerProps})
-  } else {
-    const triggerProps: TriggerProps = {
-      ...forwardedTriggerProps,
-      ...tooltipTriggerProps,
-      style: {
-        ...children.props.style,
-        ...forwardedTriggerProps?.style,
-        ...tooltipTriggerProps.style,
-      },
-      onMouseLeave: (e: MouseEvent) => {
-        forwardedTriggerProps?.onMouseLeave?.(e)
-        tooltipTriggerProps.onMouseLeave?.(e)
-      },
-      onBlur: (e: FocusEvent) => {
-        forwardedTriggerProps?.onBlur?.(e)
-        tooltipTriggerProps.onBlur?.(e)
-      },
-      onClick: (e: MouseEvent) => {
-        forwardedTriggerProps?.onClick?.(e)
-        tooltipTriggerProps.onClick?.(e)
-      },
-    }
-
-    trigger = cloneElement(children, triggerProps)
+  const handleOnBlur = (e: FocusEvent) => {
+    dismissedRef.current = false
+    children.props.onBlur?.(e)
   }
+
+  const handleOnClick = (e: MouseEvent) => {
+    dismissedRef.current = true
+    tooltipRef.current?.togglePopover(false)
+    children.props.onClick?.(e)
+  }
+
+  const trigger = children.props.asTrigger
+    ? cloneElement(children, {
+        triggerProps: {
+          'aria-describedby': tooltipId,
+          'interestfor': tooltipId,
+          'style': {anchorName: `--anchor-${id}`},
+          'onMouseLeave': handleMouseLeave,
+          'onBlur': handleOnBlur,
+          'onClick': handleOnClick,
+        },
+      })
+    : cloneElement(children, {
+        ...triggerProps,
+        'aria-describedby': tooltipId,
+        'interestfor': tooltipId,
+        'style': {
+          ...children.props.style,
+          ...triggerProps?.style,
+          anchorName: `--anchor-${id}`,
+        },
+        'onMouseLeave': (e: MouseEvent) => {
+          triggerProps?.onMouseLeave?.(e)
+          handleMouseLeave(e)
+        },
+        'onBlur': (e: FocusEvent) => {
+          triggerProps?.onBlur?.(e)
+          handleOnBlur(e)
+        },
+        'onClick': (e: MouseEvent) => {
+          triggerProps?.onClick?.(e)
+          handleOnClick(e)
+        },
+      })
 
   return (
     <>
