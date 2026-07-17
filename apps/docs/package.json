@@ -10,7 +10,7 @@
     "#context/*": "./src/context/*.tsx"
   },
   "scripts": {
-    "build": "run-s next:build sanity:build",
+    "build": "run-s sanity:build next:build",
     "dev": "run-p next:dev sanity:dev",
     "next:build": "next build",
     "next:dev": "next dev",
