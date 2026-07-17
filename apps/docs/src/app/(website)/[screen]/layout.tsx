@@ -78,7 +78,7 @@ async function CachedScreenLayout({
       perspective,
       stega,
     }),
-    sanityFetch({query: GLOBAL_QUERY, perspective, stega}),
+    sanityFetch({query: GLOBAL_QUERY, params: {id: primaryNavId}, perspective, stega}),
   ])
 
   if (!data?._id) notFound()

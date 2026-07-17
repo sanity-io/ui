@@ -8,7 +8,7 @@ import {parseNav} from '#lib/nav/parseNav.ts'
 import {Banner} from '@/components/Banner'
 import {AppFooter} from '@/components/Footer'
 import {Navbar} from '@/components/Navbar'
-import {basePath} from '@/constants'
+import {basePath, primaryNavId} from '@/constants'
 import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
 import {
   DynamicFetchOptions,
@@ -77,7 +77,12 @@ async function DynamicGlobalData(props: PropsWithChildren) {
 async function CachedGlobalData(props: PropsWithChildren<DynamicFetchOptions>) {
   'use cache'
   const {children, perspective, stega} = props
-  const {data} = await sanityFetch({query: GLOBAL_QUERY, perspective, stega})
+  const {data} = await sanityFetch({
+    query: GLOBAL_QUERY,
+    params: {id: primaryNavId},
+    perspective,
+    stega,
+  })
   const global = data as GlobalData | null
   const nav = global?.nav ? parseNav(global.nav, []) : null
 

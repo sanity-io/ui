@@ -1,7 +1,7 @@
 import {defineQuery} from 'next-sanity'
 
 const MAIN_NAV_QUERY = defineQuery(`
-*[_type == "nav" && id in ["main"]]{
+*[_type == "nav" && id in [$id]]{
   _id,
   title,
   items[]{
