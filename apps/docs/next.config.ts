@@ -45,6 +45,32 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  async rewrites() {
+    // `next dev` runs alongside `sanity dev` (see the `dev` script), which
+    // serves the studio under the same /ui/studio base path on :3333.
+    if (process.env.NODE_ENV === 'development') {
+      return {
+        beforeFiles: [
+          {
+            source: '/studio/:path*', // basePath auto-prefixes to /ui/studio/:path*
+            destination: 'http://localhost:3333/ui/studio/:path*',
+          },
+        ],
+      }
+    }
+    return {
+      afterFiles: [
+        // In production `sanity build public/studio` emits a static SPA. Its
+        // assets resolve from the filesystem first (afterFiles), and every
+        // other /ui/studio route falls through to the SPA entrypoint so the
+        // studio router can handle it.
+        {
+          source: '/studio/:path*',
+          destination: '/studio/index.html',
+        },
+      ],
+    }
+  },
   async redirects() {
     return [
       {
@@ -52,6 +78,15 @@ const nextConfig: NextConfig = {
         destination: basePath,
         basePath: false, // CRITICAL: Tells Next.js not to prefix the source path
         permanent: true,
+      },
+      // The built studio's document hardcodes favicon/manifest links to the
+      // domain root (/static/...), which the /ui basePath leaves unclaimed.
+      // Rewrites can't target outside the basePath, so redirect instead.
+      {
+        source: '/static/:path*',
+        destination: `${basePath}/studio/static/:path*`,
+        basePath: false,
+        permanent: false,
       },
     ]
   },

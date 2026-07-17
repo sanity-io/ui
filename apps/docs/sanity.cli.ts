@@ -7,6 +7,12 @@ export default defineCliConfig({
     projectId: 'mos42crl',
     dataset: 'production',
   },
+  project: {
+    // `sanity build`/`sanity dev` don't read the basePath from
+    // sanity.config.ts — without this, built asset URLs resolve from `/`
+    // instead of /ui/studio/.
+    basePath: '/ui/studio',
+  },
   reactCompiler: {target: '19'},
   schemaExtraction: {
     enabled: true,
