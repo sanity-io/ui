@@ -8,8 +8,6 @@ export interface PopoverProps
   children: React.ReactElement<Record<string, unknown>>
   /** Popover content */
   content: React.ReactNode
-  /** Shared id with Tooltip for combined tooltip + popover triggers */
-  id?: string
 }
 
 export const popoverProps: Record<string, PropDef> = {
