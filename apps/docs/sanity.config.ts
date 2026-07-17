@@ -14,8 +14,11 @@ const localStudioRuntime =
   typeof window !== 'undefined' && window.location.origin === 'http://localhost:3333'
 const previewOrigin = localStudioRuntime ? 'http://localhost:3000' : ''
 
+// The studio is served at /ui/studio, configured ONLY via `project.basePath`
+// in sanity.cli.ts. Setting `basePath` here too would double it up: the CLI
+// basePath becomes the router's root path and the workspace basePath is
+// joined onto it (/ui/studio/ui/studio -> "Workspace not found").
 const prodStudio = defineConfig({
-  basePath: '/ui/studio',
   name: 'production',
   title: 'Sanity UI',
   projectId: 'mos42crl',
