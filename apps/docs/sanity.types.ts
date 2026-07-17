@@ -218,6 +218,7 @@ export type Article = {
       name?: string;
       type?: string;
       required?: boolean;
+      deprecated?: string;
       description?: Array<{
         children?: Array<{
           marks?: Array<string>;
@@ -690,6 +691,7 @@ export type TargetByPathQueryResult = null | {
       name?: string;
       type?: string;
       required?: boolean;
+      deprecated?: string;
       description?: Array<{
         children?: Array<{
           marks?: Array<string>;
