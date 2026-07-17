@@ -1,9 +1,11 @@
 import {Popover as PopoverV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
+import {useId} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {Popover} from '../../../../packages/ui/src/components/popover/Popover'
+import {Tooltip} from '../../../../packages/ui/src/components/tooltip/Tooltip'
 
 const PerformancePopover = () => {
   return (
@@ -68,4 +70,72 @@ export const Default: Story = {
       {timeout: 350},
     )
   },
+}
+
+const withTooltipPlay: Story['play'] = async ({canvas}) => {
+  const trigger = await canvas.findByRole('button', {name: 'Hover or click'})
+  const tooltip = await canvas.findByRole('tooltip', {hidden: true})
+
+  await userEvent.hover(trigger)
+
+  await waitFor(
+    async () => {
+      await expect(tooltip).toBeVisible()
+    },
+    {timeout: 750},
+  )
+
+  await userEvent.unhover(trigger)
+
+  await userEvent.click(trigger)
+
+  await waitFor(
+    async () => {
+      await expect(await canvas.findByText('Popover Content')).toBeVisible()
+    },
+    {timeout: 750},
+  )
+
+  await userEvent.keyboard('{Escape}')
+
+  await waitFor(
+    async () => {
+      await expect(canvas.queryByText('Popover Content')).not.toBeVisible()
+    },
+    {timeout: 350},
+  )
+}
+
+function WithTooltipPopoverOuter(props: React.ComponentProps<typeof Popover>) {
+  const id = useId()
+
+  return (
+    <Popover {...props} id={id} content="Popover Content">
+      <Tooltip asTrigger id={id} text="Tooltip Content">
+        <Button text="Hover or click" />
+      </Tooltip>
+    </Popover>
+  )
+}
+
+function WithTooltipPopoverInner(props: React.ComponentProps<typeof Popover>) {
+  const id = useId()
+
+  return (
+    <Tooltip id={id} text="Tooltip Content">
+      <Popover {...props} asTrigger id={id} content="Popover Content">
+        <Button text="Hover or click" />
+      </Popover>
+    </Tooltip>
+  )
+}
+
+export const WithTooltip: Story = {
+  render: (props) => <WithTooltipPopoverOuter {...props} />,
+  play: withTooltipPlay,
+}
+
+export const WithTooltipReversed: Story = {
+  render: (props) => <WithTooltipPopoverInner {...props} />,
+  play: withTooltipPlay,
 }

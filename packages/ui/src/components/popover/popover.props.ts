@@ -1,5 +1,6 @@
 import {type PlacementProps, placementProps} from '../../props/placement'
 import {type PropDef} from '../../types/PropDef'
+import {type TriggerProps} from '../trigger/trigger.props'
 
 /** @public */
 export interface PopoverProps
@@ -8,11 +9,20 @@ export interface PopoverProps
   children: React.ReactElement<Record<string, unknown>>
   /** Popover content */
   content: React.ReactNode
+  /** Merge parent trigger props onto the child element instead of this wrapper */
+  asTrigger?: boolean
+  /** Shared id with Tooltip for combined tooltip + popover triggers */
+  id?: string
+  /** Trigger props forwarded from a parent wrapper via cloneElement */
+  triggerProps?: TriggerProps
 }
 
 export const popoverProps: Record<string, PropDef> = {
   content: {
     type: 'string',
+  },
+  asTrigger: {
+    type: 'boolean',
   },
   ...placementProps,
 }

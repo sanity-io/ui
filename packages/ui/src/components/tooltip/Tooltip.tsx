@@ -10,6 +10,7 @@ import {
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
+import {type TriggerProps} from '../trigger/trigger.props'
 import {type TooltipProps, tooltipProps} from './tooltip.props'
 
 const tooltipClassName = suffixClassName('sui-Tooltip')
@@ -23,6 +24,8 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
     id: idProp,
     disabled,
     text,
+    asTrigger,
+    triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, tooltipProps)
   const reactId = useId()
@@ -31,7 +34,9 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
   const dismissedRef = useRef(false)
 
   if (disabled) {
-    return children
+    return asTrigger && forwardedTriggerProps?.popoverTarget
+      ? cloneElement(children, {popoverTarget: forwardedTriggerProps.popoverTarget})
+      : children
   }
 
   const handleBeforeToggle = (e: ToggleEvent) => {
@@ -40,13 +45,10 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
     }
   }
 
-  const trigger = cloneElement(children, {
+  const tooltipTriggerProps: TriggerProps = {
     'aria-describedby': `tooltip-${id}`,
     'interestfor': `tooltip-${id}`,
-    'style': {
-      ...children.props.style,
-      anchorName: `--anchor-${id}`,
-    },
+    'style': {anchorName: `--anchor-${id}`},
     'onMouseLeave': (e: MouseEvent) => {
       dismissedRef.current = false
       children.props.onMouseLeave?.(e)
@@ -60,7 +62,37 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
       tooltipRef.current?.togglePopover(false)
       children.props.onClick?.(e)
     },
-  })
+  }
+
+  let trigger
+
+  if (children.props.asTrigger) {
+    trigger = cloneElement(children, {triggerProps: tooltipTriggerProps})
+  } else {
+    const triggerProps: TriggerProps = {
+      ...forwardedTriggerProps,
+      ...tooltipTriggerProps,
+      style: {
+        ...children.props.style,
+        ...forwardedTriggerProps?.style,
+        ...tooltipTriggerProps.style,
+      },
+      onMouseLeave: (e: MouseEvent) => {
+        forwardedTriggerProps?.onMouseLeave?.(e)
+        tooltipTriggerProps.onMouseLeave?.(e)
+      },
+      onBlur: (e: FocusEvent) => {
+        forwardedTriggerProps?.onBlur?.(e)
+        tooltipTriggerProps.onBlur?.(e)
+      },
+      onClick: (e: MouseEvent) => {
+        forwardedTriggerProps?.onClick?.(e)
+        tooltipTriggerProps.onClick?.(e)
+      },
+    }
+
+    trigger = cloneElement(children, triggerProps)
+  }
 
   return (
     <>
