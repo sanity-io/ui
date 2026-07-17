@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/ui/studio(.*)",
+      "destination": "/dist/index.html"
+    }
+  ]
+}

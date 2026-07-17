@@ -15,6 +15,7 @@ const localStudioRuntime =
 const previewOrigin = localStudioRuntime ? 'http://localhost:3000' : ''
 
 const prodStudio = defineConfig({
+  basePath: '/ui/studio',
   name: 'production',
   title: 'Sanity UI',
   projectId: 'mos42crl',

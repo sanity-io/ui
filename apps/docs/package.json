@@ -10,13 +10,13 @@
     "#context/*": "./src/context/*.tsx"
   },
   "scripts": {
-    "build": "run-s next:build sanity:manifest:extract",
+    "build": "run-s next:build sanity:build",
     "dev": "run-p next:dev sanity:dev",
     "next:build": "next build",
     "next:dev": "next dev",
     "prepare": "next typegen",
     "sanity:dev": "sanity dev",
-    "sanity:manifest:extract": "mkdirp public/studio/static && sanity manifest extract --path public/studio/static",
+    "sanity:build": "sanity build",
     "start": "next start",
     "test": "vitest",
     "typecheck": "tsc --build"
@@ -60,7 +60,6 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "babel-plugin-react-compiler": "catalog:",
-    "mkdirp": "^3.0.1",
     "npm-run-all2": "^8.0.4",
     "typescript": "^5.9.3",
     "vitest": "^3.2.7"
