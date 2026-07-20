@@ -31,7 +31,12 @@ config.outputOptions = async (outputOptions, format, context) => {
       : baseOutputOptions
 
   return {
+    ...outputOptions,
     ...base,
+    // Preserve dir/file from the resolved options: spreading only `base` can
+    // drop them, and tsdown's report plugin then crashes on path.resolve(cwd, undefined).
+    dir: base?.dir ?? outputOptions.dir,
+    file: base?.file ?? outputOptions.file,
     chunkFileNames: `_chunks/[name].${format === 'cjs' ? 'js' : 'mjs'}`,
   }
 }
