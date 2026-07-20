@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {Activity, cloneElement, useId, useRef, useState, type ToggleEvent} from 'react'
+import {cloneElement, useId, useRef, type ToggleEvent} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {mergeTriggerProps} from '../../utils/mergeTriggerProps'
@@ -29,7 +29,6 @@ function TooltipRoot({
   const tooltipId = `tooltip-${id}`
   const tooltipRef = useRef<HTMLDivElement>(null)
   const dismissedRef = useRef(false)
-  const [open, setOpen] = useState(false)
 
   const triggerProps = disabled
     ? undefined
@@ -63,37 +62,30 @@ function TooltipRoot({
     }
   }
 
-  const handleToggle = (e: ToggleEvent) => {
-    setOpen(e.newState === 'open')
-  }
-
   return (
     <>
       {trigger}
 
-      <Activity mode={open ? 'visible' : 'hidden'}>
-        <div
-          className={clsx(
-            tooltipClassName,
-            'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
-            className,
-          )}
-          style={{
-            ...style,
-            positionAnchor: `--anchor-${id}`,
-          }}
-          data-ui="Tooltip"
-          role="tooltip"
-          popover="hint"
-          id={tooltipId}
-          ref={tooltipRef}
-          onBeforeToggle={handleBeforeToggle}
-          onToggle={handleToggle}
-          {...rest}
-        >
-          {content}
-        </div>
-      </Activity>
+      <div
+        className={clsx(
+          tooltipClassName,
+          'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+          className,
+        )}
+        style={{
+          ...style,
+          positionAnchor: `--anchor-${id}`,
+        }}
+        data-ui="Tooltip"
+        role="tooltip"
+        popover="hint"
+        id={tooltipId}
+        ref={tooltipRef}
+        onBeforeToggle={handleBeforeToggle}
+        {...rest}
+      >
+        {content}
+      </div>
     </>
   )
 }
