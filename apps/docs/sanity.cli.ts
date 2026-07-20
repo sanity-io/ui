@@ -7,6 +7,10 @@ export default defineCliConfig({
     projectId: 'mos42crl',
     dataset: 'production',
   },
+  deployment: {
+    appId: 'hamwtfu4n5tnwz05fq2fnrj1',
+    autoUpdates: true,
+  },
   project: {
     // `sanity build`/`sanity dev` don't read the basePath from
     // sanity.config.ts — without this, built asset URLs resolve from `/`
