@@ -1,97 +1,126 @@
+[class*="sui-placement-"] {
+  inset: auto;
+  margin: 0;
+}
+
 @position-try --top-center {
-  top: auto;
-  right: auto;
+  inset: auto;
+  margin: 0;
   bottom: anchor(top);
   left: anchor(center);
   translate: -50% 0;
+}
+
+@supports (justify-self: anchor-center) {
+  @position-try --top-center {
+    left: auto;
+    translate: none;
+    justify-self: anchor-center;
+  }
 }
 
 @position-try --top-start {
-  top: auto;
-  right: auto;
+  inset: auto;
+  margin: 0;
   bottom: anchor(top);
   left: anchor(left);
-  translate: none;
 }
 
 @position-try --top-end {
-  top: auto;
-  left: auto;
+  inset: auto;
+  margin: 0;
   bottom: anchor(top);
   right: anchor(right);
-  translate: none;
 }
 
 @position-try --bottom-center {
-  bottom: auto;
-  right: auto;
+  inset: auto;
+  margin: 0;
   top: anchor(bottom);
   left: anchor(center);
   translate: -50% 0;
 }
 
+@supports (justify-self: anchor-center) {
+  @position-try --bottom-center {
+    left: auto;
+    translate: none;
+    justify-self: anchor-center;
+  }
+}
+
 @position-try --bottom-start {
-  bottom: auto;
-  right: auto;
+  inset: auto;
+  margin: 0;
   top: anchor(bottom);
   left: anchor(left);
-  translate: none;
 }
 
 @position-try --bottom-end {
-  bottom: auto;
-  left: auto;
+  inset: auto;
+  margin: 0;
   top: anchor(bottom);
   right: anchor(right);
-  translate: none;
 }
 
 @position-try --right-center {
-  right: auto;
-  bottom: auto;
+  inset: auto;
+  margin: 0;
   left: anchor(right);
   top: anchor(center);
   translate: 0 -50%;
+}
+
+@supports (align-self: anchor-center) {
+  @position-try --right-center {
+    top: auto;
+    translate: none;
+    align-self: anchor-center;
+  }
 }
 
 @position-try --right-start {
-  right: auto;
-  bottom: auto;
+  inset: auto;
+  margin: 0;
   left: anchor(right);
   top: anchor(top);
-  translate: none;
 }
 
 @position-try --right-end {
-  right: auto;
-  top: auto;
+  inset: auto;
+  margin: 0;
   left: anchor(right);
   bottom: anchor(bottom);
-  translate: none;
 }
 
 @position-try --left-center {
-  left: auto;
-  bottom: auto;
+  inset: auto;
+  margin: 0;
   right: anchor(left);
   top: anchor(center);
   translate: 0 -50%;
 }
 
+@supports (align-self: anchor-center) {
+  @position-try --left-center {
+    top: auto;
+    translate: none;
+    align-self: anchor-center;
+  }
+}
+
 @position-try --left-start {
-  left: auto;
-  bottom: auto;
+  inset: auto;
+  margin: 0;
   right: anchor(left);
   top: anchor(top);
-  translate: none;
 }
 
 @position-try --left-end {
-  left: auto;
-  top: auto;
+  inset: auto;
+  margin: 0;
   right: anchor(left);
   bottom: anchor(bottom);
-  translate: none;
 }
 
 .sui-placement-bottom {
@@ -99,6 +128,14 @@
   left: anchor(center);
   translate: -50% 0;
   position-try-fallbacks: --top-center;
+}
+
+@supports (justify-self: anchor-center) {
+  .sui-placement-bottom {
+    left: auto;
+    translate: none;
+    justify-self: anchor-center;
+  }
 }
 
 .sui-placement-bottom-start {
@@ -120,6 +157,14 @@
   position-try-fallbacks: --bottom-center;
 }
 
+@supports (justify-self: anchor-center) {
+  .sui-placement-top {
+    left: auto;
+    translate: none;
+    justify-self: anchor-center;
+  }
+}
+
 .sui-placement-top-start {
   bottom: anchor(top);
   left: anchor(left);
@@ -139,6 +184,14 @@
   position-try-fallbacks: --right-center;
 }
 
+@supports (align-self: anchor-center) {
+  .sui-placement-left {
+    top: auto;
+    translate: none;
+    align-self: anchor-center;
+  }
+}
+
 .sui-placement-left-start {
   right: anchor(left);
   top: anchor(top);
@@ -156,6 +209,14 @@
   top: anchor(center);
   translate: 0 -50%;
   position-try-fallbacks: --left-center;
+}
+
+@supports (align-self: anchor-center) {
+  .sui-placement-right {
+    top: auto;
+    translate: none;
+    align-self: anchor-center;
+  }
 }
 
 .sui-placement-right-start {
