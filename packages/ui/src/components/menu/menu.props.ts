@@ -7,7 +7,7 @@ export interface MenuProps<T extends React.ElementType> {
 }
 
 export const menuProps: Record<string, PropDef> = {
-  button: {
+  trigger: {
     type: 'string',
   },
 }
