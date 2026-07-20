@@ -1,5 +1,13 @@
 import clsx from 'clsx'
-import {Activity, cloneElement, useId, useState, type ToggleEvent} from 'react'
+import {
+  Activity,
+  cloneElement,
+  useId,
+  useState,
+  type ComponentPropsWithRef,
+  type ElementType,
+  type ToggleEvent,
+} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {mergeTriggerProps} from '../../utils/mergeTriggerProps'
@@ -8,13 +16,15 @@ import {type PopoverProps, popoverProps} from './popover.props'
 
 const popoverClassName = suffixClassName('sui-PopoverContent')
 
-function PopoverRoot({
+function PopoverRoot<T extends ElementType = 'div'>({
   placement = 'bottom',
   ...props
-}: PopoverProps & {
-  triggerProps?: Record<string, unknown>
-}) {
+}: PopoverProps<T> &
+  Omit<ComponentPropsWithRef<T>, keyof PopoverProps<T>> & {
+    triggerProps?: Record<string, unknown>
+  }) {
   const {
+    as,
     children,
     className,
     style,
@@ -26,6 +36,7 @@ function PopoverRoot({
   const reactId = useId()
   const id = idProp || reactId
   const popoverId = `popover-${id}`
+  const Component = as || 'div'
   const [open, setOpen] = useState(false)
 
   const handleToggle = (e: ToggleEvent) => {
@@ -41,15 +52,17 @@ function PopoverRoot({
     ? cloneElement(children, {triggerProps})
     : cloneElement(children, mergeTriggerProps(children.props, forwardedTriggerProps, triggerProps))
 
+  console.log('popover trigger', trigger)
+
   return (
     <>
       {trigger}
 
       <Activity mode={open ? 'visible' : 'hidden'}>
-        <div
+        <Component
           className={clsx(
             popoverClassName,
-            'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+            'sui-p1 sui-radius2 sui-position-fixed sui-shadow2',
             className,
           )}
           style={{
@@ -63,7 +76,7 @@ function PopoverRoot({
           {...rest}
         >
           {content}
-        </div>
+        </Component>
       </Activity>
     </>
   )
