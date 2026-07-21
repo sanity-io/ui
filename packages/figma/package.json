@@ -6,6 +6,9 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "types": "./dist/index.d.ts",
   "exports": {
