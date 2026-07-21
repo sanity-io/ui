@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 3.3.6
+
+### Patch Changes
+
+- [#2336](https://github.com/sanity-io/ui/pull/2336) [`94b067c`](https://github.com/sanity-io/ui/commit/94b067cb87c39bf1ca337df9e2695a9e9d5455f2) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency @floating-ui/react-dom to ^2.1.9
+
+- [#2377](https://github.com/sanity-io/ui/pull/2377) [`20893cd`](https://github.com/sanity-io/ui/commit/20893cda81b108454e429056e0a0c68dbfda3f69) Thanks [@stipsan](https://github.com/stipsan)! - Remove unused `esm.sh` property from package.json
+
 ## 3.3.5
 
 ### Patch Changes
