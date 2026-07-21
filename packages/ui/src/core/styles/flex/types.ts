@@ -15,7 +15,12 @@ export interface ResponsiveFlexStyleProps {
  * @internal
  */
 export interface ResponsiveFlexItemStyleProps {
-  $flex: FlexValue[]
+  /**
+   * Optional: `Flex` applies `flexItemStyle` without passing `$flex` — its public
+   * `flex` prop is forwarded to the inner `Box`, which resolves it to `$flex`.
+   * `flexItemStyle` guards for the missing value.
+   */
+  $flex?: FlexValue[]
 }
 
 /**
