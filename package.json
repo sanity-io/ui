@@ -27,7 +27,7 @@
     "@types/node": "catalog:",
     "eslint-plugin-storybook": "^10.5.2",
     "knip": "^6.26.0",
-    "oxfmt": "^0.58.0",
+    "oxfmt": "^0.59.0",
     "oxlint": "^1.74.0",
     "oxlint-tsgolint": "^0.24.0",
     "typescript": "catalog:"
