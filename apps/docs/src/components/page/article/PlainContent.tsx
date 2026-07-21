@@ -2,7 +2,7 @@ import {
   PortableText,
   PortableTextBlockComponent,
   PortableTextReactComponents,
-} from '@portabletext/react'
+} from 'next-sanity'
 import {Box, Heading, Text} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
 import {styled} from 'styled-components'
