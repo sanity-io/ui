@@ -1,6 +1,8 @@
 'use client'
 
-import {CloseIcon, MenuIcon, ChevronRightIcon} from '@sanity/icons'
+import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
+import {CloseIcon} from '@sanity/icons/Close'
+import {MenuIcon} from '@sanity/icons/Menu'
 import {Box, Button, Breadcrumbs, Card, Flex, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
 import Link from 'next/link'

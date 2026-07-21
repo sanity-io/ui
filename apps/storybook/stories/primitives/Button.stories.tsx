@@ -1,4 +1,9 @@
-import {AddIcon, CloseIcon, RocketIcon, SearchIcon, SquareIcon, UploadIcon} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
+import {CloseIcon} from '@sanity/icons/Close'
+import {RocketIcon} from '@sanity/icons/Rocket'
+import {SearchIcon} from '@sanity/icons/Search'
+import {SquareIcon} from '@sanity/icons/Square'
+import {UploadIcon} from '@sanity/icons/Upload'
 import {
   Box,
   Button,

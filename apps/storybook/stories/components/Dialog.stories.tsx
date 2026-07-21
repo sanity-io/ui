@@ -1,4 +1,5 @@
-import {ArrowDownIcon, ArrowUpIcon} from '@sanity/icons'
+import {ArrowDownIcon} from '@sanity/icons/ArrowDown'
+import {ArrowUpIcon} from '@sanity/icons/ArrowUp'
 import {
   BoundaryElementProvider,
   Box,

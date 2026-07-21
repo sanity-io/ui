@@ -1,4 +1,6 @@
-import {CloseIcon, EarthAmericasIcon, SearchIcon} from '@sanity/icons'
+import {CloseIcon} from '@sanity/icons/Close'
+import {EarthAmericasIcon} from '@sanity/icons/EarthAmericas'
+import {SearchIcon} from '@sanity/icons/Search'
 import {
   Autocomplete,
   AutocompleteProps,

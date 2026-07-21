@@ -1,7 +1,20 @@
-import {icons} from '@sanity/icons'
+import {Icon, icons, type IconSymbol} from '@sanity/icons'
 import {buildTheme, ThemeFontKey} from '@sanity/ui/theme'
+import {createElement} from 'react'
 
 const theme = buildTheme()
+
+// The entries in the v5 `icons` map are `React.lazy` components that suspend
+// on first render, and stories don't render a `Suspense` boundary. Map each
+// option to the dynamic `Icon` component instead, which wraps the lazy icon
+// in its own `Suspense` boundary (with an svg-shell fallback).
+const iconOptions = Object.fromEntries(
+  // oxlint-disable-next-line no-unsafe-type-assertion -- Object.keys() widens to string[]
+  (Object.keys(icons) as IconSymbol[]).map((symbol) => [
+    symbol,
+    () => createElement(Icon, {symbol}),
+  ]),
+)
 
 export const getAlignControls = () => {
   return {
@@ -84,9 +97,9 @@ export const getIconControls = () => {
     control: {type: 'select'},
     mapping: {
       '(none)': '',
-      ...icons,
+      ...iconOptions,
     },
-    options: ['(none)', ...Object.keys(icons)],
+    options: ['(none)', ...Object.keys(iconOptions)],
   } as const
 }
 

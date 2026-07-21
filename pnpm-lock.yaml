@@ -19,8 +19,8 @@ catalogs:
       specifier: ^1.4.0
       version: 1.4.0
     '@sanity/icons':
-      specifier: ^3.8.0
-      version: 3.8.0
+      specifier: ^5.2.0
+      version: 5.2.0
     '@sanity/tsdown-config':
       specifier: ^0.19.6
       version: 0.19.6
@@ -137,7 +137,7 @@ importers:
         version: 3.0.6
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 3.8.0(react@19.2.7)
+        version: 5.2.0(react@19.2.7)
       '@sanity/image-url':
         specifier: ^2.1.1
         version: 2.1.1
@@ -237,7 +237,7 @@ importers:
         version: 3.0.6
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 3.8.0(react@19.2.7)
+        version: 5.2.0(react@19.2.7)
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -354,7 +354,7 @@ importers:
         version: 3.0.6
       '@sanity/icons':
         specifier: 'catalog:'
-        version: 3.8.0(react@19.2.7)
+        version: 5.2.0(react@19.2.7)
       csstype:
         specifier: ^3.2.3
         version: 3.2.3
@@ -3664,15 +3664,15 @@ packages:
   '@sanity/generate-help-url@4.0.0':
     resolution: {integrity: sha512-Ooa4xkLT3TLaX+mw/13fq3IeGdnAkx4rbpVASvRVixzBBvvcL6jPqj50fjlCd+EhgB5GRXBCNNAy/hWXwjZEUA==}
 
-  '@sanity/icons@3.8.0':
-    resolution: {integrity: sha512-LXa8eoE6U2e46L/9Pk6VU1aOWNxEqEG1osTb2YWItPIAa8MyXkICRwdNRWwW3kr5gmf+Sh2ZmfKol/Q+oGKSqw==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: ^19.2.7
-
   '@sanity/icons@5.1.0':
     resolution: {integrity: sha512-BPvLFBWnxpXCn9XKb5OgBzNNRZJI29TXRpuSXx1/nKJ8FaYuitFmKSAD0L8jC0kF/BKKUMThaY3TYJ0UuubbTQ==}
     engines: {node: '>=22.12'}
+    peerDependencies:
+      react: ^19.2.7
+
+  '@sanity/icons@5.2.0':
+    resolution: {integrity: sha512-Mu552fC2QljfHHy3dvPBJLol3HpQLr9RPAvJdfu9UloPoSaOT1dYTFUPbrDVpUUWtDZSRPvwvoPkiMSKUyeSvA==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       react: ^19.2.7
 
@@ -11072,11 +11072,11 @@ snapshots:
 
   '@sanity/generate-help-url@4.0.0': {}
 
-  '@sanity/icons@3.8.0(react@19.2.7)':
+  '@sanity/icons@5.1.0(react@19.2.7)':
     dependencies:
       react: 19.2.7
 
-  '@sanity/icons@5.1.0(react@19.2.7)':
+  '@sanity/icons@5.2.0(react@19.2.7)':
     dependencies:
       react: 19.2.7
 

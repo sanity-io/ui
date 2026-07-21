@@ -1,4 +1,4 @@
-import {ChevronRightIcon} from '@sanity/icons'
+import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
 import {isValidElement, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 

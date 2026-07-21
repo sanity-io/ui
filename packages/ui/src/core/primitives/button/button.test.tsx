@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 
-import {AddIcon} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
 import {screen} from '@testing-library/react'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 import {axe} from 'vitest-axe'

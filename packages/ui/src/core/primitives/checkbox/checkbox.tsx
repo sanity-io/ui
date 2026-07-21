@@ -1,4 +1,5 @@
-import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
+import {CheckmarkIcon} from '@sanity/icons/Checkmark'
+import {RemoveIcon} from '@sanity/icons/Remove'
 import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 

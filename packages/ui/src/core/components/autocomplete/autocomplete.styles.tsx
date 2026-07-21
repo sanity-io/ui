@@ -1,4 +1,4 @@
-import {SpinnerIcon} from '@sanity/icons'
+import {SpinnerIcon} from '@sanity/icons/Spinner'
 import {keyframes, styled} from 'styled-components'
 
 import {Box} from '../../primitives'

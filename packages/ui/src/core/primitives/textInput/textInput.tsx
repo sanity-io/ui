@@ -1,4 +1,4 @@
-import {CloseIcon} from '@sanity/icons'
+import {CloseIcon} from '@sanity/icons/Close'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
