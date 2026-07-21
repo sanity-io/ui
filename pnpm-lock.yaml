@@ -166,7 +166,7 @@ importers:
         specifier: 16.3.0-preview.6
         version: 16.3.0-preview.6(@babel/core@7.29.7)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       next-sanity:
-        specifier: ^13.1.1
+        specifier: ^13.1.3
         version: 13.1.3(bc0e3b5767e39d463fc6ac54bc087ab7)
       pako:
         specifier: ^2.2.0
