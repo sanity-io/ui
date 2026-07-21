@@ -23,10 +23,12 @@ minimumReleaseAgeExclude:
   # tsdown 0.22.7 and the yuku parser/codegen family it pulls in via
   # rolldown-plugin-dts are freshly published alongside each other.
   - '@yuku-codegen/*'
+  - '@yuku-toolchain/*'
   - '@yuku-parser/*'
   - rolldown-plugin-dts
   - tsdown
   - yuku-codegen
+  - yuku-ast
   - yuku-parser
 
 publicHoistPattern:
