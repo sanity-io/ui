@@ -52,13 +52,11 @@ allowBuilds:
 # bump the catalog.
 minimumReleaseAgeExclude:
   - '@next/*'
-  - '@sanity/code-input@7.2.7'
-  - '@sanity/icons@5.2.0'
-  - '@sanity/tsdown-config'
-  - '@sanity/vanilla-extract-*'
+  - '@sanity/*'
   - lightningcss
   - lightningcss-*
   - next
+  - sanity
   - tsdown
   - verkit
 
