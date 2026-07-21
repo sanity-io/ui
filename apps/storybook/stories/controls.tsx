@@ -9,10 +9,7 @@ const theme = buildTheme()
 // in its own `Suspense` boundary (with an svg-shell fallback).
 const iconOptions = Object.fromEntries(
   // oxlint-disable-next-line no-unsafe-type-assertion -- Object.keys() widens to string[]
-  (Object.keys(icons) as IconSymbol[]).map((symbol) => [
-    symbol,
-    () => <Icon symbol={symbol} />,
-  ]),
+  (Object.keys(icons) as IconSymbol[]).map((symbol) => [symbol, () => <Icon symbol={symbol} />]),
 )
 
 export const getAlignControls = () => {
