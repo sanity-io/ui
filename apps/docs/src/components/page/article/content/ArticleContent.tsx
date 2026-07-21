@@ -133,8 +133,8 @@ export function ArticleContent(props: {
   return (
     <Root>
       <PortableText
-        // @ts-expect-error - TODO: fix this, maybe upstream in PT?
         components={components}
+        // @ts-expect-error - TODO: fix this, maybe upstream in PT?
         value={props.content}
       />
     </Root>
