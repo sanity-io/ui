@@ -2,16 +2,19 @@
 
 import {LinkIcon} from '@sanity/icons'
 import {Box, Heading} from '@sanity/ui'
-import {PortableTextBlockComponent, stegaClean} from 'next-sanity'
+import {stegaClean, type InferStrictComponents} from 'next-sanity'
 import {useContext} from 'react'
 
 import {blocksToText} from '@/lib/blocksToText'
 import {SanityBlockValue} from '@/lib/sanity/types'
+import type {PortableTextValue} from '@/types'
 
 import {ArticleHeadingsContext} from '../ArticleHeadingsContext'
 import {Paragraph} from './Paragraph'
 
-export const Block: PortableTextBlockComponent = (props) => {
+type BlockComponent = NonNullable<InferStrictComponents<PortableTextValue>['block']>
+
+export const Block: BlockComponent = (props) => {
   const {children, value} = props
   const block = value as unknown as SanityBlockValue
   const style = stegaClean(block.style)
