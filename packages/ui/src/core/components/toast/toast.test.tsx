@@ -45,6 +45,7 @@ describe('components/toast', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           useToast()
         } catch (err) {
           log(err)
@@ -74,6 +75,7 @@ describe('components/toast', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           useToast()
         } catch (err) {
           log(err)

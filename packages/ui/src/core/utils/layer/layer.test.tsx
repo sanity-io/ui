@@ -52,6 +52,7 @@ describe('utils/layer', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           useLayer()
         } catch (err) {
           log(err)
@@ -81,6 +82,7 @@ describe('utils/layer', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           useLayer()
         } catch (err) {
           log(err)

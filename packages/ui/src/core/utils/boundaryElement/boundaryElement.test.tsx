@@ -73,6 +73,7 @@ describe('utils/boundaryElement', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           useBoundaryElement()
         } catch (err) {
           log(err)

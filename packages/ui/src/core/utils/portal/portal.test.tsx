@@ -47,6 +47,7 @@ describe('utils/portal', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           usePortal()
         } catch (err) {
           log(err)
@@ -76,6 +77,7 @@ describe('utils/portal', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           usePortal()
         } catch (err) {
           log(err)

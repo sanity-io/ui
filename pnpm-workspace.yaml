@@ -17,7 +17,7 @@ catalog:
   '@sanity/color': ^3.0.6
   '@sanity/functions': ^1.4.0
   '@sanity/icons': ^3.8.0
-  '@sanity/tsdown-config': ^0.13.0
+  '@sanity/tsdown-config': ^0.19.6
   '@types/node': ^22.20.1
   '@types/react': ^19.2.17
   '@types/react-dom': ^19.2.3
@@ -31,7 +31,7 @@ catalog:
   rimraf: ^5.0.5
   sanity: ^6.4.0
   styled-components: ^6.4.3
-  tsdown: ^0.22.5
+  tsdown: ^0.22.12
   typescript: 6.0.3
   unrun: ^0.3.1
   vite: ^8.1.4
@@ -47,12 +47,19 @@ allowBuilds:
 # Sanity-owned build tooling releases frequently; don't gate it on the
 # default minimum release age (1 day). Same for next's `preview` dist-tag
 # (apps/docs pins an exact preview version, so the exclusion only lifts the
-# age gate for versions we deliberately pick).
+# age gate for versions we deliberately pick). tsdown and its lightningcss /
+# verkit transitive deps are included for the same reason when we deliberately
+# bump the catalog.
 minimumReleaseAgeExclude:
   - '@next/*'
   - '@sanity/code-input@7.2.7'
   - '@sanity/tsdown-config'
+  - '@sanity/vanilla-extract-*'
+  - lightningcss
+  - lightningcss-*
   - next
+  - tsdown
+  - verkit
 
 # @testing-library/jest-dom/vitest imports `vitest` without declaring it, so it
 # falls back to pnpm's hidden hoist — which can resolve to another workspace
