@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 2.16.26
+
+### Patch Changes
+
+- [#2330](https://github.com/sanity-io/ui/pull/2330) [`322f4cb`](https://github.com/sanity-io/ui/commit/322f4cbae2c498af354a7d5815f675a1b8c4ed96) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency @floating-ui/react-dom to ^2.1.9
+
+- [#2331](https://github.com/sanity-io/ui/pull/2331) [`ca4ff0b`](https://github.com/sanity-io/ui/commit/ca4ff0bb245fe3c0a21aef2f28017f6becd20760) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency csstype to ^3.2.3
+
 ## 2.16.25
 
 ### Patch Changes
