@@ -23,7 +23,7 @@
     "watch": "tsdown --watch"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.130.0",
+    "@figma/plugin-typings": "^1.131.0",
     "@sanity/tsdown-config": "catalog:",
     "@sanity/ui": "workspace:*",
     "segmented-property": "^4.0.0",
