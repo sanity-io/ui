@@ -24,7 +24,7 @@ export function IconButton<T extends ElementType = 'button'>(
       data-ui="IconButton"
       {...rest}
     >
-      <Icon icon={IconProp} margin={-2} />
+      <Icon icon={IconProp} margin={-2} size={1} />
     </Button>
   )
 }

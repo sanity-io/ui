@@ -35,17 +35,7 @@
   outline-offset: var(--focus-offset);
 }
 
-.sui-Button [data-sanity-icon] {
-  margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-1));
-  font-size: 21px;
-  color: inherit;
-}
-
-.sui-Button .sui-Spinner {
-  color: inherit;
-}
-
-.sui-Button .sui-Text {
+.sui-Button :is([data-sanity-icon], .sui-Spinner, .sui-Text) {
   color: inherit;
 }
 
