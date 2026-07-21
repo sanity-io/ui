@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.20
+
+### Patch Changes
+
+- e444c47: feat!: remove cascade layers and revert to import order for managing specificity resolution
+
 ## 0.0.1-alpha.19
 
 ### Patch Changes
