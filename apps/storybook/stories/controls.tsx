@@ -1,6 +1,5 @@
 import {Icon, icons, type IconSymbol} from '@sanity/icons'
 import {buildTheme, ThemeFontKey} from '@sanity/ui/theme'
-import {createElement} from 'react'
 
 const theme = buildTheme()
 
@@ -12,7 +11,7 @@ const iconOptions = Object.fromEntries(
   // oxlint-disable-next-line no-unsafe-type-assertion -- Object.keys() widens to string[]
   (Object.keys(icons) as IconSymbol[]).map((symbol) => [
     symbol,
-    () => createElement(Icon, {symbol}),
+    () => <Icon symbol={symbol} />,
   ]),
 )
 
