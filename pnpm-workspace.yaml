@@ -12,7 +12,7 @@ strictPeerDependencies: false
 # v6), @types/node (v24 vs v22) and vitest (v3 vs v4, see the
 # packageExtensions note) versions, so those keep explicit ranges there.
 catalog:
-  '@sanity/blueprints': ^0.21.0
+  '@sanity/blueprints': ^0.22.0
   '@sanity/client': ^7.24.0
   '@sanity/color': ^3.0.6
   '@sanity/functions': ^1.4.0
