@@ -27,7 +27,7 @@
     "@lezer/highlight": "^1.2.3",
     "@portabletext/react": "^5.0.0",
     "@sanity/client": "catalog:",
-    "@sanity/code-input": "^7.2.7",
+    "@sanity/code-input": "^7.2.10",
     "@sanity/color": "catalog:",
     "@sanity/icons": "catalog:",
     "@sanity/image-url": "^2.1.1",

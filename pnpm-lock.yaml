@@ -133,8 +133,8 @@ importers:
         specifier: 'catalog:'
         version: 7.23.2
       '@sanity/code-input':
-        specifier: ^7.2.7
-        version: 7.2.9(df7815221c41a70255f9149c83fe94b3)
+        specifier: ^7.2.10
+        version: 7.2.10(df7815221c41a70255f9149c83fe94b3)
       '@sanity/color':
         specifier: 'catalog:'
         version: 3.0.6
@@ -3613,8 +3613,8 @@ packages:
     resolution: {integrity: sha512-WC0vsGGpe4IGVFBvYMFFPa3KLH0vzgZwzvHIN20IDmPjuifDHSCbpq299Yj7jJQb2xBMJ7zQj45RyOzOIC7PUA==}
     engines: {node: '>=20'}
 
-  '@sanity/code-input@7.2.9':
-    resolution: {integrity: sha512-dMwN3RWYXdfh3nSexQdk2I5VG+PljDNTrmznmU2Hx9SOcQs5SOLMEnPeD+ADzFFRxSxkKuQoCSvMMfO9TmKh8g==}
+  '@sanity/code-input@7.2.10':
+    resolution: {integrity: sha512-NYDuYP7OCDjPeToZxpbI4CyRPE8Hfs7VaHTNo9zp1ta/1J9O+emSlA2CAqUUJz/LxdzqBDHaO5I4bAEtniotnQ==}
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       react: ^19.2.7
@@ -11108,7 +11108,7 @@ snapshots:
       nanoid: 3.3.16
       rxjs: 7.8.2
 
-  '@sanity/code-input@7.2.9(df7815221c41a70255f9149c83fe94b3)':
+  '@sanity/code-input@7.2.10(df7815221c41a70255f9149c83fe94b3)':
     dependencies:
       '@codemirror/lang-html': 6.4.11
       '@codemirror/lang-java': 6.0.2
