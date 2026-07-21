@@ -55,7 +55,7 @@ catalogs:
       specifier: ^0.3.1
       version: 0.3.1
     vite:
-      specifier: ^8.1.4
+      specifier: ^8.1.5
       version: 8.1.5
     vitest:
       specifier: ^4.1.10
@@ -3591,10 +3591,6 @@ packages:
     peerDependenciesMeta:
       babel-plugin-react-compiler:
         optional: true
-
-  '@sanity/client@7.23.2':
-    resolution: {integrity: sha512-WC0vsGGpe4IGVFBvYMFFPa3KLH0vzgZwzvHIN20IDmPjuifDHSCbpq299Yj7jJQb2xBMJ7zQj45RyOzOIC7PUA==}
-    engines: {node: '>=20'}
 
   '@sanity/client@7.24.0':
     resolution: {integrity: sha512-YfXm/MzcknFiOe4Y5nYIFEhqqYwrQaWt7f4Vy3sbt3ZbDbd8oMoPaQ/WeSSbWFkHV8RFm01dE16u4Z1VNude+g==}
@@ -10816,7 +10812,7 @@ snapshots:
     dependencies:
       '@inquirer/prompts': 8.5.2(@types/node@24.13.3)
       '@oclif/core': 4.11.14
-      '@sanity/client': 7.23.2
+      '@sanity/client': 7.24.0
       boxen: 8.0.1
       debug: 4.4.3(supports-color@8.1.1)
       empathic: 2.0.1
@@ -10949,13 +10945,6 @@ snapshots:
       - utf-8-validate
       - vue-tsc
       - xstate
-
-  '@sanity/client@7.23.2':
-    dependencies:
-      '@sanity/eventsource': 5.0.4
-      get-it: 8.8.0
-      nanoid: 3.3.16
-      rxjs: 7.8.2
 
   '@sanity/client@7.24.0':
     dependencies:
