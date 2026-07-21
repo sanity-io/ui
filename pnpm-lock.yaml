@@ -88,7 +88,7 @@ importers:
         specifier: ^10.5.2
         version: 10.5.2(eslint@10.7.0(jiti@2.7.0))(storybook@10.5.2(@types/react@19.2.17)(prettier@3.9.5)(react@19.2.7)(vitest@4.1.10))(typescript@6.0.3)
       knip:
-        specifier: ^6.26.0
+        specifier: ^6.27.0
         version: 6.27.0
       oxfmt:
         specifier: ^0.59.0
