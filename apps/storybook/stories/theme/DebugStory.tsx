@@ -1,4 +1,4 @@
-import {CropIcon} from '@sanity/icons'
+import {CropIcon} from '@sanity/icons/Crop'
 import {Badge, Box, Flex, KBD, Stack, Text, useRootTheme} from '@sanity/ui'
 import {
   THEME_COLOR_BUTTON_MODES,

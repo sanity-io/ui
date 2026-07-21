@@ -1,15 +1,13 @@
-import {
-  AddIcon,
-  CheckmarkIcon,
-  ChevronDownIcon,
-  ClockIcon,
-  CommentIcon,
-  EllipsisHorizontalIcon,
-  ErrorOutlineIcon,
-  ExpandIcon,
-  LaunchIcon,
-  SearchIcon,
-} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
+import {CheckmarkIcon} from '@sanity/icons/Checkmark'
+import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
+import {ClockIcon} from '@sanity/icons/Clock'
+import {CommentIcon} from '@sanity/icons/Comment'
+import {EllipsisHorizontalIcon} from '@sanity/icons/EllipsisHorizontal'
+import {ErrorOutlineIcon} from '@sanity/icons/ErrorOutline'
+import {ExpandIcon} from '@sanity/icons/Expand'
+import {LaunchIcon} from '@sanity/icons/Launch'
+import {SearchIcon} from '@sanity/icons/Search'
 import {
   BoundaryElementProvider,
   Box,

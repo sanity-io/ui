@@ -1,4 +1,5 @@
-import {EditIcon, PublishIcon} from '@sanity/icons'
+import {EditIcon} from '@sanity/icons/Edit'
+import {PublishIcon} from '@sanity/icons/Publish'
 import {
   Box,
   Button,

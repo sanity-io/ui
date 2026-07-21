@@ -1,4 +1,4 @@
-import {EllipsisVerticalIcon} from '@sanity/icons'
+import {EllipsisVerticalIcon} from '@sanity/icons/EllipsisVertical'
 import {
   BoundaryElementProvider,
   Box,

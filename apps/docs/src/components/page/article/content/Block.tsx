@@ -1,6 +1,6 @@
 'use client'
 
-import {LinkIcon} from '@sanity/icons'
+import {LinkIcon} from '@sanity/icons/Link'
 import {Box, Heading} from '@sanity/ui'
 import {stegaClean, type InferStrictComponents} from 'next-sanity'
 import {useContext} from 'react'

@@ -1,16 +1,14 @@
-import {
-  AddIcon,
-  BinaryDocumentIcon,
-  BookIcon,
-  CircleIcon,
-  CopyIcon,
-  CubeIcon,
-  EllipsisVerticalIcon,
-  ImageIcon,
-  RestoreIcon,
-  TrashIcon,
-  UsersIcon,
-} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
+import {BinaryDocumentIcon} from '@sanity/icons/BinaryDocument'
+import {BookIcon} from '@sanity/icons/Book'
+import {CircleIcon} from '@sanity/icons/Circle'
+import {CopyIcon} from '@sanity/icons/Copy'
+import {CubeIcon} from '@sanity/icons/Cube'
+import {EllipsisVerticalIcon} from '@sanity/icons/EllipsisVertical'
+import {ImageIcon} from '@sanity/icons/Image'
+import {RestoreIcon} from '@sanity/icons/Restore'
+import {TrashIcon} from '@sanity/icons/Trash'
+import {UsersIcon} from '@sanity/icons/Users'
 import {
   Avatar,
   Badge,

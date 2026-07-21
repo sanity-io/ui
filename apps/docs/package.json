@@ -12,8 +12,8 @@
   "scripts": {
     "build": "pnpm sanity:build && pnpm next:build",
     "dev": "pnpm run \"/:dev$/\"",
-    "next:build": "next build",
-    "next:dev": "next dev",
+    "next:build": "next build --turbopack",
+    "next:dev": "next dev --turbopack",
     "prepare": "next typegen",
     "sanity:build": "sanity build public/studio",
     "sanity:dev": "sanity dev",

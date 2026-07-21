@@ -1,6 +1,6 @@
 'use client'
 
-import {ArrowRightIcon} from '@sanity/icons'
+import {ArrowRightIcon} from '@sanity/icons/ArrowRight'
 import {Box, Button, Card, Tab, TabList, TabPanel} from '@sanity/ui'
 import Link from 'next/link'
 import {ReactElement, useState} from 'react'

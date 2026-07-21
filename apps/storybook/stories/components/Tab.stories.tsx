@@ -1,4 +1,7 @@
-import {OkHandIcon, RocketIcon, SearchIcon, SunIcon} from '@sanity/icons'
+import {OkHandIcon} from '@sanity/icons/OkHand'
+import {RocketIcon} from '@sanity/icons/Rocket'
+import {SearchIcon} from '@sanity/icons/Search'
+import {SunIcon} from '@sanity/icons/Sun'
 import {Box, Card, Tab, TabList, TabPanel, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'

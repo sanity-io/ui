@@ -1,4 +1,4 @@
-import {CloseIcon} from '@sanity/icons'
+import {CloseIcon} from '@sanity/icons/Close'
 import {motion, type Variant, type Variants} from 'motion/react'
 
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'

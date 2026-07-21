@@ -1,4 +1,6 @@
-import {OkHandIcon, RocketIcon, SunIcon} from '@sanity/icons'
+import {OkHandIcon} from '@sanity/icons/OkHand'
+import {RocketIcon} from '@sanity/icons/Rocket'
+import {SunIcon} from '@sanity/icons/Sun'
 import {Tab, TabList} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 

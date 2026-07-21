@@ -1,7 +1,7 @@
 'use client'
 
 import {COLOR_HUES, COLOR_TINTS, hues} from '@sanity/color'
-import {ClipboardIcon} from '@sanity/icons'
+import {ClipboardIcon} from '@sanity/icons/Clipboard'
 import {Box, Button, Code, Flex, Grid, Heading, Stack, Text, useToast} from '@sanity/ui'
 
 export function ColorGrid() {

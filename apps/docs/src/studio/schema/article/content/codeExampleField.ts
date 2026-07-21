@@ -1,4 +1,4 @@
-import {CodeBlockIcon} from '@sanity/icons'
+import {CodeBlockIcon} from '@sanity/icons/CodeBlock'
 import {defineArrayMember} from 'sanity'
 
 export const codeExampleField = defineArrayMember({
