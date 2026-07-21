@@ -1,9 +1,5 @@
-import {
-  PortableText,
-  PortableTextBlockComponent,
-  PortableTextReactComponents,
-} from 'next-sanity'
 import {Box, Heading, Text} from '@sanity/ui'
+import {PortableText, PortableTextBlockComponent, PortableTextReactComponents} from 'next-sanity'
 import {stegaClean} from 'next-sanity'
 import {styled} from 'styled-components'
 
