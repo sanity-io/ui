@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function CreditCardIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const CreditCardIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function CreditCardIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="credit-card"
@@ -15,6 +17,7 @@ export function CreditCardIcon(props: ComponentPropsWithRef<'svg'>): ReactElemen
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M20.5 9.5H4.5V11.5H20.5V9.5Z"
@@ -31,6 +34,6 @@ export function CreditCardIcon(props: ComponentPropsWithRef<'svg'>): ReactElemen
       />
     </svg>
   )
-}
+})
 
 export {CreditCardIcon as default}

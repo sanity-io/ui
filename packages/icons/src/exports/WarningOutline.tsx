@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function WarningOutlineIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const WarningOutlineIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function WarningOutlineIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="warning-outline"
@@ -15,6 +17,7 @@ export function WarningOutlineIcon(props: ComponentPropsWithRef<'svg'>): ReactEl
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M12.5 9V13M12.5 16V14.5M14.2239 5.43058L20.727 16.486C21.5113 17.8192 20.55 19.5 19.0032 19.5H5.99683C4.45 19.5 3.48869 17.8192 4.27297 16.486L10.7761 5.43058C11.5494 4.11596 13.4506 4.11596 14.2239 5.43058Z"
@@ -24,6 +27,6 @@ export function WarningOutlineIcon(props: ComponentPropsWithRef<'svg'>): ReactEl
       />
     </svg>
   )
-}
+})
 
 export {WarningOutlineIcon as default}

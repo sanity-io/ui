@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function DocumentWordIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const DocumentWordIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function DocumentWordIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="document-word"
@@ -15,6 +17,7 @@ export function DocumentWordIcon(props: ComponentPropsWithRef<'svg'>): ReactElem
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M12.4699 13.4588H12.5263L13.6328 17H14.5435L16 12H14.9952L14.0656 15.7214H14.0129L12.929 12H12.0672L10.9984 15.7214H10.9419L10.0124 12H9L10.4565 17H11.371L12.4699 13.4588Z"
@@ -29,6 +32,6 @@ export function DocumentWordIcon(props: ComponentPropsWithRef<'svg'>): ReactElem
       />
     </svg>
   )
-}
+})
 
 export {DocumentWordIcon as default}

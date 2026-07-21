@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function CircleIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const CircleIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function CircleIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="circle"
@@ -15,6 +17,7 @@ export function CircleIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <circle
         cx={12.5}
@@ -26,6 +29,6 @@ export function CircleIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {CircleIcon as default}

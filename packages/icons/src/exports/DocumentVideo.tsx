@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function DocumentVideoIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const DocumentVideoIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function DocumentVideoIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="document-video"
@@ -15,6 +17,7 @@ export function DocumentVideoIcon(props: ComponentPropsWithRef<'svg'>): ReactEle
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M11.5 16.5V13.5L14 15L11.5 16.5Z"
@@ -31,6 +34,6 @@ export function DocumentVideoIcon(props: ComponentPropsWithRef<'svg'>): ReactEle
       />
     </svg>
   )
-}
+})
 
 export {DocumentVideoIcon as default}

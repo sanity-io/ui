@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function PanelRightIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const PanelRightIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function PanelRightIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="panel-right"
@@ -15,6 +17,7 @@ export function PanelRightIcon(props: ComponentPropsWithRef<'svg'>): ReactElemen
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M14.5 6.5H19.5V18.5H14.5M14.5 6.5H5.5V18.5H14.5M14.5 6.5V18.5"
@@ -24,6 +27,6 @@ export function PanelRightIcon(props: ComponentPropsWithRef<'svg'>): ReactElemen
       />
     </svg>
   )
-}
+})
 
 export {PanelRightIcon as default}

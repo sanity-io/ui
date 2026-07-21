@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function UlistIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const UlistIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function UlistIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="ulist"
@@ -15,6 +17,7 @@ export function UlistIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M7.10153 17.5C7.10153 17.8322 6.83221 18.1016 6.5 18.1016C6.16778 18.1016 5.89847 17.8322 5.89847 17.5C5.89847 17.1678 6.16778 16.8985 6.5 16.8985C6.83221 16.8985 7.10153 17.1678 7.10153 17.5Z"
@@ -42,6 +45,6 @@ export function UlistIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {UlistIcon as default}

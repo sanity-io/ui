@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function MarkerIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const MarkerIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function MarkerIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="marker"
@@ -15,6 +17,7 @@ export function MarkerIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M6.5 10.5C6.5 7 9 4.5 12.5 4.5C16 4.5 18.5 7 18.5 10.5C18.5 14 15.5 17.5 12.5 20.5C9.5 17.5 6.5 14 6.5 10.5Z"
@@ -30,6 +33,6 @@ export function MarkerIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {MarkerIcon as default}

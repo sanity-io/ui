@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function ChartUpwardIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const ChartUpwardIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function ChartUpwardIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="chart-upward"
@@ -15,6 +17,7 @@ export function ChartUpwardIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M5.5 5V19.5H20M7.5 16L11.5 11.5L15.5 14L19.5 8.5"
@@ -24,6 +27,6 @@ export function ChartUpwardIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       />
     </svg>
   )
-}
+})
 
 export {ChartUpwardIcon as default}

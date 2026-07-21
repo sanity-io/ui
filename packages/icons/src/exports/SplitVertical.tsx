@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function SplitVerticalIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const SplitVerticalIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function SplitVerticalIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="split-vertical"
@@ -15,6 +17,7 @@ export function SplitVerticalIcon(props: ComponentPropsWithRef<'svg'>): ReactEle
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M10.5 5.5V19.5M13 12.5H15.5M18 12.5H15.5M15.5 12.5V15M15.5 12.5V10M4.5 5.5H20.5V19.5H4.5V5.5Z"
@@ -24,6 +27,6 @@ export function SplitVerticalIcon(props: ComponentPropsWithRef<'svg'>): ReactEle
       />
     </svg>
   )
-}
+})
 
 export {SplitVerticalIcon as default}

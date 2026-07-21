@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function OverageIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const OverageIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function OverageIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="overage"
@@ -15,6 +17,7 @@ export function OverageIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path d="M18.5 11V6.5H14" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path
@@ -25,6 +28,6 @@ export function OverageIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {OverageIcon as default}

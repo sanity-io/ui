@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function GroqIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const GroqIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function GroqIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="groq"
@@ -15,12 +17,13 @@ export function GroqIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path d="M13 13H21L13 21L13 13Z" fill="currentColor" />
       <path d="M12 12V4L4 12H12Z" fill="currentColor" />
       <path d="M12 13H4L12 21V13Z" fill="currentColor" />
     </svg>
   )
-}
+})
 
 export {GroqIcon as default}

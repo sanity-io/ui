@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function TagIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const TagIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function TagIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="tag"
@@ -15,6 +17,7 @@ export function TagIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M12.5 20L5 20L5 12.5L12.5 5L20 12.5L12.5 20Z"
@@ -30,6 +33,6 @@ export function TagIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {TagIcon as default}

@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function ToggleArrowRightIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const ToggleArrowRightIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function ToggleArrowRightIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="toggle-arrow-right"
@@ -15,6 +17,7 @@ export function ToggleArrowRightIcon(props: ComponentPropsWithRef<'svg'>): React
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M10.5 16V9L16 12.5L10.5 16Z"
@@ -24,6 +27,6 @@ export function ToggleArrowRightIcon(props: ComponentPropsWithRef<'svg'>): React
       />
     </svg>
   )
-}
+})
 
 export {ToggleArrowRightIcon as default}

@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function ChevronLeftIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const ChevronLeftIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function ChevronLeftIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="chevron-left"
@@ -15,6 +17,7 @@ export function ChevronLeftIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M15 17L10.5 12.5L15 8"
@@ -24,6 +27,6 @@ export function ChevronLeftIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       />
     </svg>
   )
-}
+})
 
 export {ChevronLeftIcon as default}

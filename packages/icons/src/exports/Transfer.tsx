@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function TransferIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const TransferIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function TransferIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="transfer"
@@ -15,6 +17,7 @@ export function TransferIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M19.5 16.5H6M5.5 8.5L19 8.5"
@@ -30,6 +33,6 @@ export function TransferIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       />
     </svg>
   )
-}
+})
 
 export {TransferIcon as default}

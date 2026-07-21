@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function DoubleChevronUpIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const DoubleChevronUpIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function DoubleChevronUpIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="double-chevron-up"
@@ -15,6 +17,7 @@ export function DoubleChevronUpIcon(props: ComponentPropsWithRef<'svg'>): ReactE
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M8 12.5L12.5 8L17 12.5M8 17.5L12.5 13L17 17.5"
@@ -24,6 +27,6 @@ export function DoubleChevronUpIcon(props: ComponentPropsWithRef<'svg'>): ReactE
       />
     </svg>
   )
-}
+})
 
 export {DoubleChevronUpIcon as default}

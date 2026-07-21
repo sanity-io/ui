@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function WarningFilledIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const WarningFilledIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function WarningFilledIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="warning-filled"
@@ -15,6 +17,7 @@ export function WarningFilledIcon(props: ComponentPropsWithRef<'svg'>): ReactEle
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         fillRule="evenodd"
@@ -24,6 +27,6 @@ export function WarningFilledIcon(props: ComponentPropsWithRef<'svg'>): ReactEle
       />
     </svg>
   )
-}
+})
 
 export {WarningFilledIcon as default}

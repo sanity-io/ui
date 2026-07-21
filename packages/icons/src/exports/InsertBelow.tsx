@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function InsertBelowIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const InsertBelowIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function InsertBelowIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="insert-below"
@@ -15,6 +17,7 @@ export function InsertBelowIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M10.5 14.5H14.5M12.5 12.5V16.5M6.5 19.5H18.5M6.5 5.5H18.5V9.5H6.5V5.5Z"
@@ -25,6 +28,6 @@ export function InsertBelowIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       />
     </svg>
   )
-}
+})
 
 export {InsertBelowIcon as default}

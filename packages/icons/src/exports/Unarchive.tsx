@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function UnarchiveIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const UnarchiveIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function UnarchiveIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="unarchive"
@@ -15,6 +17,7 @@ export function UnarchiveIcon(props: ComponentPropsWithRef<'svg'>): ReactElement
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M12.5 10.5V18M20.5 7.5V20.5H4.5V7.5L7.5 4.5H17.5L20.5 7.5Z"
@@ -30,6 +33,6 @@ export function UnarchiveIcon(props: ComponentPropsWithRef<'svg'>): ReactElement
       />
     </svg>
   )
-}
+})
 
 export {UnarchiveIcon as default}

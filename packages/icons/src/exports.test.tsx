@@ -3,8 +3,9 @@ import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 
 import {render, waitFor} from '@testing-library/react'
-import {Suspense} from 'react'
-import {isLazy} from 'react-is'
+import type {ComponentType} from 'react'
+import {createElement, Suspense} from 'react'
+import {isForwardRef, isLazy} from 'react-is'
 import {describe, expect, test} from 'vitest'
 
 import {icons} from './icons'
@@ -39,8 +40,10 @@ describe('per-icon subpath exports', () => {
       const namedExport = `${exportName}Icon`
       expect(Object.keys(mod).filter((key) => key !== 'default')).toEqual([namedExport])
 
+      // Icons are `React.forwardRef` components (not plain functions relying on React 19's
+      // ref-as-prop model) so refs attach on React 18 too.
       const named = mod[namedExport]
-      expect(typeof named).toBe('function')
+      expect(isForwardRef(createElement(named as ComponentType))).toBe(true)
 
       // The default export backs both `React.lazy(() => import('@sanity/icons/AccessDenied'))`
       // in userland and the lazy `icons` map entries, and it must be the very same component

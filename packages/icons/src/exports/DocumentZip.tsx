@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function DocumentZipIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const DocumentZipIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function DocumentZipIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="document-zip"
@@ -15,6 +17,7 @@ export function DocumentZipIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path d="M11.5 4.5V9.5H6.5" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round" />
       <path
@@ -25,6 +28,6 @@ export function DocumentZipIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       />
     </svg>
   )
-}
+})
 
 export {DocumentZipIcon as default}

@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function TerminalIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const TerminalIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function TerminalIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="terminal"
@@ -15,6 +17,7 @@ export function TerminalIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M8.5 9.5L11.5 12.5L8.5 15.5M13 15.5H17M5.5 6.5H19.5V18.5H5.5V6.5Z"
@@ -24,6 +27,6 @@ export function TerminalIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       />
     </svg>
   )
-}
+})
 
 export {TerminalIcon as default}

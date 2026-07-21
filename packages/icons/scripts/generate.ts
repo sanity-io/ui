@@ -28,18 +28,23 @@ const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 // style, `import {AccessDeniedIcon} from '@sanity/icons/AccessDenied'` – and as the default
 // export, so `React.lazy(() => import('@sanity/icons/AccessDenied'))` works out of the box.
 // The generated `icons` map relies on that default export for its own lazy entries.
+//
+// Icons are wrapped in `React.forwardRef` (instead of relying on React 19's ref-as-prop
+// model) so refs attach on React 18 too – the `react` peer dependency range spans both.
 const __TEMPLATE__ = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function __NAME__(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const __NAME__: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function __NAME__(props, ref) {
   return (
     __JSX__
   )
-}
+})
 
 export {__NAME__ as default}
 `
@@ -76,7 +81,7 @@ async function readIcon(filePath: string) {
 
   code = code.replace(
     /xmlns="http:\/\/www.w3.org\/2000\/svg"/g,
-    ' xmlns="http://www.w3.org/2000/svg" {...props}',
+    ' xmlns="http://www.w3.org/2000/svg" {...props} ref={ref}',
   )
 
   code = code.replace(/width="25"/g, `width="1em"`)

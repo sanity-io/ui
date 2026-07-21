@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function EyeOpenIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const EyeOpenIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function EyeOpenIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="eye-open"
@@ -15,6 +17,7 @@ export function EyeOpenIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         fillRule="evenodd"
@@ -30,6 +33,6 @@ export function EyeOpenIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {EyeOpenIcon as default}

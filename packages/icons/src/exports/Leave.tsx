@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function LeaveIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const LeaveIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function LeaveIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="leave"
@@ -15,6 +17,7 @@ export function LeaveIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M14.5 15V18.5H5.5V6.5H14.5V10M9 12.5H21.5"
@@ -30,6 +33,6 @@ export function LeaveIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {LeaveIcon as default}

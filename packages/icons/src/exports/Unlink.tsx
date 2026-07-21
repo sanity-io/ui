@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function UnlinkIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const UnlinkIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function UnlinkIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="unlink"
@@ -15,6 +17,7 @@ export function UnlinkIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M15 13.5L17.5 11C18.281 10.219 18.281 8.78105 17.5 8L17 7.5C16.2189 6.71895 14.781 6.71895 14 7.5L11.5 10M10 11.5L7.5 14C6.71896 14.781 6.71895 16.219 7.5 17L8 17.5C8.78105 18.281 10.2189 18.281 11 17.5L13.5 15M9.5 8V5M8 9.5H5M17 15.5H20M15.5 17V20"
@@ -24,6 +27,6 @@ export function UnlinkIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {UnlinkIcon as default}

@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function ActivityIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const ActivityIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function ActivityIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="activity"
@@ -15,6 +17,7 @@ export function ActivityIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M21 15H19L15.5 7L11 18L8 12L6 15H4"
@@ -24,6 +27,6 @@ export function ActivityIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       />
     </svg>
   )
-}
+})
 
 export {ActivityIcon as default}

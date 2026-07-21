@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function BlockElementIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const BlockElementIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function BlockElementIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="block-element"
@@ -15,6 +17,7 @@ export function BlockElementIcon(props: ComponentPropsWithRef<'svg'>): ReactElem
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M5 19.5H20M5 5.5H20M6.5 8.5H18.5V16.5H6.5V8.5Z"
@@ -24,6 +27,6 @@ export function BlockElementIcon(props: ComponentPropsWithRef<'svg'>): ReactElem
       />
     </svg>
   )
-}
+})
 
 export {BlockElementIcon as default}

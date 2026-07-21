@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function EditIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const EditIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function EditIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="edit"
@@ -15,6 +17,7 @@ export function EditIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M15 7L18 10M6 19L7 15L17 5L20 8L10 18L6 19Z"
@@ -24,6 +27,6 @@ export function EditIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {EditIcon as default}

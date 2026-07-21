@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function EqualIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const EqualIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function EqualIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="equal"
@@ -15,6 +17,7 @@ export function EqualIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path d="M7.5 4.5H3.5V20.5H7.5" stroke="currentColor" strokeWidth={1.2} />
       <path d="M17.5 20.5L21.5 20.5L21.5 4.5L17.5 4.5" stroke="currentColor" strokeWidth={1.2} />
@@ -22,6 +25,6 @@ export function EqualIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       <path d="M9 14.5H16" stroke="currentColor" strokeWidth={1.2} />
     </svg>
   )
-}
+})
 
 export {EqualIcon as default}

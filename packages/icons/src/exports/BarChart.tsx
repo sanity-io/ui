@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function BarChartIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const BarChartIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function BarChartIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="bar-chart"
@@ -15,6 +17,7 @@ export function BarChartIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M5.5 5V19.5H20M8.5 18V13M11.5 18V9M14.5 18V11M17.5 18V7"
@@ -24,6 +27,6 @@ export function BarChartIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       />
     </svg>
   )
-}
+})
 
 export {BarChartIcon as default}

@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function ConfettiIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const ConfettiIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function ConfettiIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="confetti"
@@ -15,6 +17,7 @@ export function ConfettiIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M16.5 6.25C16.9142 6.25 17.25 5.91421 17.25 5.5C17.25 5.08579 16.9142 4.75 16.5 4.75C16.0858 4.75 15.75 5.08579 15.75 5.5C15.75 5.91421 16.0858 6.25 16.5 6.25Z"
@@ -38,6 +41,6 @@ export function ConfettiIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       />
     </svg>
   )
-}
+})
 
 export {ConfettiIcon as default}

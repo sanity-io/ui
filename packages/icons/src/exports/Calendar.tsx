@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function CalendarIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const CalendarIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function CalendarIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="calendar"
@@ -15,6 +17,7 @@ export function CalendarIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M5.5 18.5H19.5V6.5H5.5V18.5Z"
@@ -30,6 +33,6 @@ export function CalendarIcon(props: ComponentPropsWithRef<'svg'>): ReactElement 
       />
     </svg>
   )
-}
+})
 
 export {CalendarIcon as default}

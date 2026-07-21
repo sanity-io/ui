@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function CodeIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const CodeIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function CodeIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="code"
@@ -15,6 +17,7 @@ export function CodeIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M11 16L7.5 12.5L11 9M14 9L17.5 12.5L14 16"
@@ -24,6 +27,6 @@ export function CodeIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {CodeIcon as default}

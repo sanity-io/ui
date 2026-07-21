@@ -5,7 +5,7 @@ The Sanity icons.
 ```sh
 npm install @sanity/icons
 
-# Install peer dependencies (requires React 19 or newer)
+# Install peer dependencies (requires React 18 or newer)
 npm install react
 ```
 

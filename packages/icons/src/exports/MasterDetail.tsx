@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function MasterDetailIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const MasterDetailIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function MasterDetailIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="master-detail"
@@ -15,6 +17,7 @@ export function MasterDetailIcon(props: ComponentPropsWithRef<'svg'>): ReactElem
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M9.5 6.5V10.5M9.5 10.5V14.5M9.5 10.5H5.5M9.5 14.5V18.5M9.5 14.5H5.5M5.5 6.5H19.5V18.5H5.5V6.5Z"
@@ -24,6 +27,6 @@ export function MasterDetailIcon(props: ComponentPropsWithRef<'svg'>): ReactElem
       />
     </svg>
   )
-}
+})
 
 export {MasterDetailIcon as default}

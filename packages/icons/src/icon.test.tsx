@@ -1,5 +1,6 @@
 import {render, waitFor} from '@testing-library/react'
 import {createRef} from 'react'
+import {isForwardRef} from 'react-is'
 import {expect, test} from 'vitest'
 
 import {RocketIcon} from './exports/Rocket'
@@ -68,6 +69,13 @@ test('should forward a ref to the underlying svg element', () => {
 
   expect(ref.current).toBeInstanceOf(SVGSVGElement)
   expect(ref.current).toHaveAttribute('data-sanity-icon', 'rocket')
+})
+
+test('Icon and the generated icons are `React.forwardRef` components', () => {
+  // `forwardRef` (rather than React 19's ref-as-prop model) is what makes refs attach on
+  // React 18 as well – the `react` peer dependency range spans both majors.
+  expect(isForwardRef(<Icon symbol="rocket" />)).toBe(true)
+  expect(isForwardRef(<RocketIcon />)).toBe(true)
 })
 
 test(

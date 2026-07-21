@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function ErrorScreenIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const ErrorScreenIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function ErrorScreenIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="error-screen"
@@ -15,6 +17,7 @@ export function ErrorScreenIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M10 8.5L15 13.5M15 8.5L10 13.5"
@@ -30,6 +33,6 @@ export function ErrorScreenIcon(props: ComponentPropsWithRef<'svg'>): ReactEleme
       />
     </svg>
   )
-}
+})
 
 export {ErrorScreenIcon as default}

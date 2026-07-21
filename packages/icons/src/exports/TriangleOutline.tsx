@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function TriangleOutlineIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const TriangleOutlineIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function TriangleOutlineIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="triangle-outline"
@@ -15,6 +17,7 @@ export function TriangleOutlineIcon(props: ComponentPropsWithRef<'svg'>): ReactE
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M20.5 18.5H4.5L12.5 5.5L20.5 18.5Z"
@@ -24,6 +27,6 @@ export function TriangleOutlineIcon(props: ComponentPropsWithRef<'svg'>): ReactE
       />
     </svg>
   )
-}
+})
 
 export {TriangleOutlineIcon as default}

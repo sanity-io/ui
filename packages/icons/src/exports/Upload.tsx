@@ -1,11 +1,13 @@
 /* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
 
-import type {ComponentPropsWithRef, ReactElement} from 'react'
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
 
 /**
  * @public
  */
-export function UploadIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
+export const UploadIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function UploadIcon(props, ref) {
   return (
     <svg
       data-sanity-icon="upload"
@@ -15,6 +17,7 @@ export function UploadIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
+      ref={ref}
     >
       <path
         d="M12.5 6V15.5M5.5 15.5H19.5V19.5H5.5V15.5Z"
@@ -30,6 +33,6 @@ export function UploadIcon(props: ComponentPropsWithRef<'svg'>): ReactElement {
       />
     </svg>
   )
-}
+})
 
 export {UploadIcon as default}
