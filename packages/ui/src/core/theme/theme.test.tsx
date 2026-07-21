@@ -50,6 +50,7 @@ describe('theme', () => {
 
       function Debug() {
         try {
+          // oxlint-disable-next-line react-compiler
           useRootTheme()
         } catch (err) {
           log(err)
