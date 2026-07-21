@@ -53,6 +53,7 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - '@next/*'
   - '@sanity/code-input@7.2.7'
+  - '@sanity/sdk'
   - '@sanity/tsdown-config'
   - '@sanity/vanilla-extract-*'
   - lightningcss
