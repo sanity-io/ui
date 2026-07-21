@@ -40,7 +40,7 @@ catalogs:
       specifier: ^5.0.5
       version: 5.0.10
     sanity:
-      specifier: ^6.4.0
+      specifier: ^6.5.0
       version: 6.5.0
     styled-components:
       specifier: ^6.4.3
