@@ -27,9 +27,15 @@ catalogs:
     '@types/node':
       specifier: ^24.13.3
       version: 24.13.3
+    '@types/react-is':
+      specifier: ^19.2.0
+      version: 19.2.0
     babel-plugin-react-compiler:
       specifier: ^1.0.0
       version: 1.0.0
+    react-is:
+      specifier: ^19.2.7
+      version: 19.2.7
     react-refractor:
       specifier: ^4.0.0
       version: 4.0.0
@@ -64,10 +70,8 @@ catalogs:
 overrides:
   '@types/react': ^19.2.17
   '@types/react-dom': ^19.2.3
-  '@types/react-is': ^19.2.0
   react: ^19.2.7
   react-dom: ^19.2.7
-  react-is: ^19.2.7
 
 packageExtensionsChecksum: sha256-/YfwHsFiPIyrsa7w+LrMbcvcAF2Tq98gf6TNdIQqOm0=
 
@@ -287,7 +291,7 @@ importers:
         specifier: ^19.2.7
         version: 19.2.7(react@19.2.7)
       react-is:
-        specifier: ^19.2.7
+        specifier: 'catalog:'
         version: 19.2.7
       react-refractor:
         specifier: 'catalog:'
@@ -399,7 +403,7 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.17)
       '@types/react-is':
-        specifier: ^19.2.0
+        specifier: 'catalog:'
         version: 19.2.0
       babel-plugin-react-compiler:
         specifier: 'catalog:'
@@ -414,7 +418,7 @@ importers:
         specifier: ^19.2.7
         version: 19.2.7(react@19.2.7)
       react-is:
-        specifier: ^19.2.7
+        specifier: 'catalog:'
         version: 19.2.7
       rimraf:
         specifier: 'catalog:'
@@ -3664,12 +3668,6 @@ packages:
   '@sanity/generate-help-url@4.0.0':
     resolution: {integrity: sha512-Ooa4xkLT3TLaX+mw/13fq3IeGdnAkx4rbpVASvRVixzBBvvcL6jPqj50fjlCd+EhgB5GRXBCNNAy/hWXwjZEUA==}
 
-  '@sanity/icons@5.1.0':
-    resolution: {integrity: sha512-BPvLFBWnxpXCn9XKb5OgBzNNRZJI29TXRpuSXx1/nKJ8FaYuitFmKSAD0L8jC0kF/BKKUMThaY3TYJ0UuubbTQ==}
-    engines: {node: '>=22.12'}
-    peerDependencies:
-      react: ^19.2.7
-
   '@sanity/icons@5.2.0':
     resolution: {integrity: sha512-Mu552fC2QljfHHy3dvPBJLol3HpQLr9RPAvJdfu9UloPoSaOT1dYTFUPbrDVpUUWtDZSRPvwvoPkiMSKUyeSvA==}
     engines: {node: '>=20.19 <22 || >=22.12'}
@@ -6747,6 +6745,12 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  react-is@16.13.1:
+    resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react-is@17.0.2:
+    resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
   react-is@19.2.7:
     resolution: {integrity: sha512-kZFnouyVv7eP/Phmrlo9FK+zcAdriZJvzxXHF1Sl1P377WSGe2G/JxVolhTrB/jeV47lKImhNUsijjHAAbcl/A==}
@@ -10967,7 +10971,7 @@ snapshots:
       '@codemirror/state': 6.7.1
       '@codemirror/view': 6.43.6
       '@lezer/highlight': 1.2.3
-      '@sanity/icons': 5.1.0(react@19.2.7)
+      '@sanity/icons': 5.2.0(react@19.2.7)
       '@sanity/lezer-groq': 1.0.4
       '@sanity/ui': link:packages/ui
       '@uiw/codemirror-themes': 4.25.11(@codemirror/language@6.12.4)(@codemirror/state@6.7.1)(@codemirror/view@6.43.6)
@@ -11072,10 +11076,6 @@ snapshots:
 
   '@sanity/generate-help-url@4.0.0': {}
 
-  '@sanity/icons@5.1.0(react@19.2.7)':
-    dependencies:
-      react: 19.2.7
-
   '@sanity/icons@5.2.0(react@19.2.7)':
     dependencies:
       react: 19.2.7
@@ -11111,7 +11111,7 @@ snapshots:
 
   '@sanity/insert-menu@3.0.9(@sanity/types@6.5.0(@types/react@19.2.17))(react@19.2.7)':
     dependencies:
-      '@sanity/icons': 5.1.0(react@19.2.7)
+      '@sanity/icons': 5.2.0(react@19.2.7)
       '@sanity/types': 6.5.0(@types/react@19.2.17)
       '@sanity/ui': link:packages/ui
       lodash-es: 4.18.1
@@ -11389,7 +11389,7 @@ snapshots:
       '@rexxars/react-json-inspector': 9.0.1(react@19.2.7)
       '@rexxars/react-split-pane': 1.0.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@sanity/color': 3.0.6
-      '@sanity/icons': 5.1.0(react@19.2.7)
+      '@sanity/icons': 5.2.0(react@19.2.7)
       '@sanity/lezer-groq': 1.0.4
       '@sanity/ui': link:packages/ui
       '@sanity/uuid': 3.0.3
@@ -11435,7 +11435,7 @@ snapshots:
   '@sanity/visual-editing@5.5.0(@sanity/client@7.24.0)(@types/react@19.2.17)(next@16.3.0-preview.6(@babel/core@7.29.7)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(styled-components@6.4.4(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)':
     dependencies:
       '@sanity/comlink': 4.0.1
-      '@sanity/icons': 5.1.0(react@19.2.7)
+      '@sanity/icons': 5.2.0(react@19.2.7)
       '@sanity/mutate': 0.18.1(xstate@5.32.5)
       '@sanity/presentation-comlink': 2.1.0(@sanity/client@7.24.0)(@sanity/types@6.5.0(@types/react@19.2.17))
       '@sanity/preview-url-secret': 4.0.8(@sanity/client@7.24.0)
@@ -14222,7 +14222,7 @@ snapshots:
     dependencies:
       ansi-regex: 5.0.1
       ansi-styles: 5.2.0
-      react-is: 19.2.7
+      react-is: 17.0.2
 
   pretty-ms@9.3.0:
     dependencies:
@@ -14238,7 +14238,7 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-      react-is: 19.2.7
+      react-is: 16.13.1
 
   property-information@7.2.0: {}
 
@@ -14345,6 +14345,10 @@ snapshots:
     optionalDependencies:
       react-dom: 19.2.7(react@19.2.7)
       typescript: 6.0.3
+
+  react-is@16.13.1: {}
+
+  react-is@17.0.2: {}
 
   react-is@19.2.7: {}
 
@@ -14626,7 +14630,7 @@ snapshots:
       '@sanity/diff-match-patch': 3.2.0
       '@sanity/diff-patch': 5.0.0
       '@sanity/eventsource': 5.0.4
-      '@sanity/icons': 5.1.0(react@19.2.7)
+      '@sanity/icons': 5.2.0(react@19.2.7)
       '@sanity/id-utils': 1.0.0
       '@sanity/image-url': 2.1.1
       '@sanity/insert-menu': 3.0.9(@sanity/types@6.5.0(@types/react@19.2.17))(react@19.2.7)

@@ -77,7 +77,5 @@ packageExtensions:
 overrides:
   '@types/react': 'catalog:'
   '@types/react-dom': 'catalog:'
-  '@types/react-is': 'catalog:'
   react: 'catalog:'
   react-dom: 'catalog:'
-  react-is: 'catalog:'
