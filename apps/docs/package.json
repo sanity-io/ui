@@ -54,7 +54,7 @@
   "devDependencies": {
     "@types/babel__standalone": "^7.1.9",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^24.0.7",
+    "@types/node": "^24.13.3",
     "@types/pako": "^2.0.4",
     "@types/qs": "^6.15.1",
     "@types/react": "catalog:",
