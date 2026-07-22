@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "jsx": "preserve",
+    "target": "ES2022",
+    "declaration": true,
+    "declarationMap": true,
+
+    // Strict type-checking
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    // Additional checks
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
+  }
+}
