@@ -146,8 +146,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       '@sanity/logos':
-        specifier: ^2.2.2
-        version: 2.2.2(react@19.2.7)
+        specifier: workspace:*
+        version: link:../../packages/logos
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -242,6 +242,9 @@ importers:
       '@sanity/icons':
         specifier: 'catalog:'
         version: 5.2.0(react@19.2.7)
+      '@sanity/logos':
+        specifier: workspace:*
+        version: link:../../packages/logos
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -335,6 +338,37 @@ importers:
       segmented-property:
         specifier: ^4.0.0
         version: 4.0.0
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.22.12(oxc-resolver@11.24.2)(publint@0.3.21)(tsx@4.23.1)(typescript@6.0.3)(unrun@0.3.1)
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      unrun:
+        specifier: 'catalog:'
+        version: 0.3.1
+
+  packages/logos:
+    dependencies:
+      '@sanity/color':
+        specifier: 'catalog:'
+        version: 3.0.6
+    devDependencies:
+      '@sanity/tsdown-config':
+        specifier: 'catalog:'
+        version: 0.19.6(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.2.0)(tsdown@0.22.12(oxc-resolver@11.24.2)(publint@0.3.21)(tsx@4.23.1)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.13.3
+      '@types/react':
+        specifier: ^19.2.17
+        version: 19.2.17
+      react:
+        specifier: ^19.2.7
+        version: 19.2.7
+      rimraf:
+        specifier: 'catalog:'
+        version: 5.0.10
       tsdown:
         specifier: 'catalog:'
         version: 0.22.12(oxc-resolver@11.24.2)(publint@0.3.21)(tsx@4.23.1)(typescript@6.0.3)(unrun@0.3.1)
@@ -3701,12 +3735,6 @@ packages:
 
   '@sanity/lezer-groq@1.0.4':
     resolution: {integrity: sha512-KgCmAY7yXll+g3+1z+GZiQhlEW7ulJGUH8gGzbUgKVZShPop/dDjfwNAdGZKFY3AkF+m62oSa1X8m1P3sonD4A==}
-
-  '@sanity/logos@2.2.2':
-    resolution: {integrity: sha512-KIWFL7nYEOINXIzaTF9aVhd481hFF/ak+SRnpgksYuJXlo2hbY/UoEJBz6KhsEP5dfO/NwqG82QrkwzLvd6izA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      react: ^19.2.7
 
   '@sanity/media-library-types@1.6.0':
     resolution: {integrity: sha512-1Nqw8GSUr7E8AFue9luyTOM4Ev0ZlJ35SHcQrHZ6T68G5llfXw99e3GkLXzk6qYFk9r9fJaBTSpW5IyO2mObZQ==}
@@ -11137,11 +11165,6 @@ snapshots:
       '@lezer/highlight': 1.2.3
       '@lezer/lr': 1.4.10
 
-  '@sanity/logos@2.2.2(react@19.2.7)':
-    dependencies:
-      '@sanity/color': 3.0.6
-      react: 19.2.7
-
   '@sanity/media-library-types@1.6.0': {}
 
   '@sanity/message-protocol@0.23.0':
@@ -14657,7 +14680,7 @@ snapshots:
       '@sanity/id-utils': 1.0.0
       '@sanity/image-url': 2.1.1
       '@sanity/insert-menu': 3.0.9(@sanity/types@6.5.0(@types/react@19.2.17))(react@19.2.7)
-      '@sanity/logos': 2.2.2(react@19.2.7)
+      '@sanity/logos': link:packages/logos
       '@sanity/media-library-types': 1.6.0
       '@sanity/message-protocol': 0.23.0
       '@sanity/migrate': 7.0.3(@oclif/core@4.11.14)(@sanity/cli-core@2.4.0(@noble/hashes@2.2.0)(@types/node@24.13.3)(babel-plugin-react-compiler@1.0.0)(esbuild@0.28.1)(yaml@2.9.0))(@types/react@19.2.17)(xstate@5.32.5)
