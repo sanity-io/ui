@@ -19,6 +19,8 @@ export default defineConfig({
           // imported module" / "Cannot connect to the iframe", per
           // https://storybook.js.org/docs/writing-tests/integrations/vitest-addon#why-do-my-tests-fail-in-ci-with-failed-to-fetch-dynamically-imported-module-or-cannot-connect-to-the-iframe
           isolate: false,
+          fileParallelism: false,
+          retry: process.env.CI ? 2 : 0,
           browser: {
             enabled: true,
             headless: true,
@@ -33,6 +35,11 @@ export default defineConfig({
         test: {
           name: 'tests',
           include: ['tests/**/*.test.{ts,tsx}'],
+          // Keep maxWorkers identical to the storybook project — vitest
+          // refuses to schedule projects with different maxWorkers in the
+          // same sequence group
+          fileParallelism: false,
+          retry: process.env.CI ? 2 : 0,
           browser: {
             enabled: true,
             headless: true,
