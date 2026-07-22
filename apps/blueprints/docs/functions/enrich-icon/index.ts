@@ -1,5 +1,3 @@
-// oxlint-disable no-console
-
 import {createClient} from '@sanity/client'
 import {documentEventHandler} from '@sanity/functions'
 
@@ -29,7 +27,9 @@ export const handler = documentEventHandler<IconEvent>(async ({context, event}) 
   // 1. Use Sanity's native vision model (Agent Actions) to look at the
   //    rasterized icon and write a search-friendly description.
   await client.agent.action.transform({
-    schemaId: '_.schemas.default',
+    // The deployed schema of the docs studio's `production` workspace
+    // (`sanity schema deploy` from apps/docs)
+    schemaId: '_.schemas.production',
     documentId: _id,
     // Write to the published document (not a draft) so dataset embeddings index it.
     forcePublishedWrite: true,
@@ -49,7 +49,7 @@ export const handler = documentEventHandler<IconEvent>(async ({context, event}) 
 
   // 2. Derive concise search tags (keywords live here, not in the description).
   await client.agent.action.generate({
-    schemaId: '_.schemas.default',
+    schemaId: '_.schemas.production',
     documentId: _id,
     forcePublishedWrite: true,
     instruction: [
@@ -65,5 +65,5 @@ export const handler = documentEventHandler<IconEvent>(async ({context, event}) 
     target: [{path: ['tags']}],
   })
 
-  console.log(`Enriched ${_id}`)
+  console.info(`Enriched ${_id}`)
 })
