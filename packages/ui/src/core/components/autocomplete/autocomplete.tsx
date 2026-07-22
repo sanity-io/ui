@@ -100,9 +100,9 @@ const DEFAULT_RENDER_VALUE = (value: string, option?: BaseAutocompleteOption) =>
 const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
   option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
 
-const InnerAutocomplete = forwardRef(function InnerAutocomplete<
-  Option extends BaseAutocompleteOption,
->(
+// The inner function is named after the public `Autocomplete` export (the
+// wrapper below is only a type cast), so DevTools shows the public name.
+const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
     Omit<
       HTMLProps<HTMLInputElement>,

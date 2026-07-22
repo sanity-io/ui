@@ -76,7 +76,7 @@ export const TextSkeleton = forwardRef(function TextSkeleton(
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const LabelSkeleton = forwardRef(function TextSkeleton(
+export const LabelSkeleton = forwardRef(function LabelSkeleton(
   props: LabelSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
   ref: React.Ref<HTMLDivElement>,
@@ -91,7 +91,7 @@ export const LabelSkeleton = forwardRef(function TextSkeleton(
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const HeadingSkeleton = forwardRef(function TextSkeleton(
+export const HeadingSkeleton = forwardRef(function HeadingSkeleton(
   props: HeadingSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
   ref: React.Ref<HTMLDivElement>,
@@ -106,7 +106,7 @@ export const HeadingSkeleton = forwardRef(function TextSkeleton(
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const CodeSkeleton = forwardRef(function TextSkeleton(
+export const CodeSkeleton = forwardRef(function CodeSkeleton(
   props: CodeSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
   ref: React.Ref<HTMLDivElement>,
