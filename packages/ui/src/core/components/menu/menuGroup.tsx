@@ -45,9 +45,6 @@ export interface MenuGroupOwnProps {
  */
 export type MenuGroupProps<E extends ElementType = 'button'> = Props<MenuGroupOwnProps, E>
 
-// The function expression is named after the public `MenuGroup` export (the
-// module-scope `MenuGroup` binding below is only a type cast), so DevTools
-// shows the public name.
 const MenuGroupComponent = function MenuGroup(
   props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'popover' | 'ref' | 'tabIndex'> &
     MenuGroupOwnProps & {as?: ElementType},

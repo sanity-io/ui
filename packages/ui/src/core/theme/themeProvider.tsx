@@ -6,11 +6,8 @@ import {
   type ThemeColorSchemeKey,
 } from '@sanity/ui/theme'
 import {useContext, useMemo} from 'react'
-// Namespace import (restricted-imports suppression): a named `ThemeProvider`
-// import binding would claim the top-level name in the bundled ESM dist
-// chunk, deconflicting this component's function name to `ThemeProvider$1` —
-// which is what React DevTools would then display, now that component names
-// come from `Function.name` instead of `displayName` assignments.
+// A named `ThemeProvider` import would claim the name in the bundled dist
+// chunk, renaming this component's function to `ThemeProvider$1`.
 // oxlint-disable-next-line no-restricted-imports
 import * as styledComponents from 'styled-components'
 
