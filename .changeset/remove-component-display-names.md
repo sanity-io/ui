@@ -10,7 +10,18 @@ If you profile or debug production builds with React DevTools and want component
 export default defineConfig({
   // Allows running React Profiler and better debugging
   resolve: {alias: {"react-dom/client": require.resolve("react-dom/profiling")}},
-  esbuild: {minifyIdentifiers: false},
-  build: {sourcemap: true},
+  build: {
+    // Enable production source maps to easier debug deployed test studios
+    sourcemap: true,
+    rolldownOptions: {
+      output: {
+        // Disabling `mangle` (while keeping compression and whitespace removal) ensures that
+        // the React DevTools components inspector has readable component names.
+        // This overrides the `build.minify: 'oxc'` default set by `sanity build`, replacing
+        // `esbuild: {minifyIdentifiers: false}` which the rolldown-powered Vite silently ignores.
+        minify: {compress: true, mangle: false, codegen: true},
+      },
+    },
+  },
 })
 ```
