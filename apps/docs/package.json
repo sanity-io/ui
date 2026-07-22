@@ -18,6 +18,7 @@
     "prepare": "next typegen",
     "sanity:build": "sanity build public/studio",
     "sanity:dev": "sanity dev",
+    "schema:deploy": "sanity schema deploy",
     "start": "next start",
     "test": "vitest",
     "typecheck": "tsc --build"
@@ -29,7 +30,7 @@
     "@sanity/client": "catalog:",
     "@sanity/code-input": "^7.2.10",
     "@sanity/color": "catalog:",
-    "@sanity/icons": "catalog:",
+    "@sanity/icons": "workspace:*",
     "@sanity/image-url": "^2.1.1",
     "@sanity/logos": "^2.2.2",
     "@sanity/ui": "workspace:*",

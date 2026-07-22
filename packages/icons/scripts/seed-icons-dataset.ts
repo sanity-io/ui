@@ -13,8 +13,10 @@ import {globby} from 'globby'
 const ROOT_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const IMPORT_PATH = path.resolve(ROOT_PATH, 'export')
 
-const projectId = process.env['SANITY_API_PROJECT_ID'] || 'ppsg7ml5'
-const dataset = process.env['SANITY_API_DATASET'] || 'icons'
+// The Sanity project of the sanity.io/ui docs (see apps/docs), where the
+// icon documents live alongside the docs content
+const projectId = process.env['SANITY_API_PROJECT_ID'] || 'mos42crl'
+const dataset = process.env['SANITY_API_DATASET'] || 'production'
 // SANITY_AUTH_TOKEN is a special-cased fallback so the seed can also run in the
 // cloud-agent env where only the CLI/deploy token is available.
 const token = process.env['SANITY_API_WRITE_TOKEN'] || process.env['SANITY_AUTH_TOKEN']

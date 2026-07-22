@@ -1,1 +1,0 @@
-../../../.agents/skills/ui-demo/SKILL.md

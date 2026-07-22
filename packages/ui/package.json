@@ -72,7 +72,7 @@
     "@floating-ui/react-dom": "^2.1.9",
     "@juggle/resize-observer": "^3.4.0",
     "@sanity/color": "catalog:",
-    "@sanity/icons": "catalog:",
+    "@sanity/icons": "workspace:^",
     "csstype": "^3.2.3",
     "motion": "^12.42.2",
     "react-compiler-runtime": "1.0.0",

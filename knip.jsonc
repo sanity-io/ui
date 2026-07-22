@@ -8,6 +8,8 @@
       "entry": ["sanity.blueprint.ts", "functions/*/index.ts"],
     },
     "apps/docs": {},
+    "apps/icons": {},
+    "packages/icons": {},
     "packages/ui": {
       "ignoreDependencies": [
         // babel-plugin-react-compiler (target '18') injects imports of this runtime

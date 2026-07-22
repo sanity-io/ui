@@ -3,10 +3,12 @@
 ## Cursor Cloud specific instructions
 
 This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
-the published package lives in `packages/ui`, the Figma plugin in
+the published `@sanity/ui` package lives in `packages/ui`, the published
+`@sanity/icons` icon library in `packages/icons`, the Figma plugin in
 `packages/figma`, the Storybook app in `apps/storybook`, the
 sanity.io/ui docs site (a Next.js app with an embedded Sanity Studio) in
-`apps/docs`, and a Sanity Blueprint (serverless functions for the docs site)
+`apps/docs`, the icons.sanity.dev icon showcase (a Vite SPA) in `apps/icons`,
+and a Sanity Blueprint (serverless functions for the docs site)
 in `apps/blueprints/docs` (`pnpm-workspace.yaml`). The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
 (`packageManager` pin in `package.json`); developing in this repo requires Node
@@ -35,22 +37,43 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `ignoreDependencies` entry that no longer matches anything) also fails the
   run.
 - Packages are built with [tsdown](https://tsdown.dev) via
-  `@sanity/tsdown-config` (`tsdown.config.mts` in each package — the `.mts`
-  extension is required because these packages are not `"type": "module"` and
-  the Node version in CI cannot import TS config files otherwise). The build
-  regenerates package.json `exports` (dev exports): in the monorepo,
-  `@sanity/ui` and `@sanity/ui/theme` resolve directly to TypeScript source
-  for every tool (tsc, oxlint's type checker, vitest, vite), so there are no
-  tsconfig `paths`, no `customConditions`, and no vite aliases. The publishable
-  `exports` (dist `import`/`require`) live under `publishConfig` and are
-  applied by `pnpm pack`/`publish`.
-- `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`).
-  `@sanity/ui` resolves to the `packages/ui/exports/` source through the dev
-  `exports`, so unit tests run directly against source and do not require a
-  `pnpm build` first.
+  `@sanity/tsdown-config` (`tsdown.config.mts` in `packages/ui` and
+  `packages/figma` — the `.mts` extension is required because those packages
+  are not `"type": "module"` and the Node version in CI cannot import TS
+  config files otherwise; `packages/icons` is `"type": "module"` and uses a
+  plain `tsdown.config.ts`). The build regenerates package.json `exports`
+  (dev exports): in the monorepo, `@sanity/ui`, `@sanity/ui/theme` and
+  `@sanity/icons` (incl. its per-icon subpaths) resolve directly to
+  TypeScript source for every tool (tsc, oxlint's type checker, vitest,
+  vite), so there are no tsconfig `paths`, no `customConditions`, and no vite
+  aliases. The publishable `exports` (dist `import`/`require`) live under
+  `publishConfig` and are applied by `pnpm pack`/`publish`.
+- `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`
+  and `packages/icons/vitest.config.ts`). `@sanity/ui` resolves to the
+  `packages/ui/exports/` source through the dev `exports`, so unit tests run
+  directly against source and do not require a `pnpm build` first.
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. It
   resolves `@sanity/ui` to the `packages/ui/exports/` source through the dev
   `exports`, so it hot-reloads source edits directly (no rebuild needed).
+- `packages/icons` (migrated from the standalone `sanity-io/icons` repo)
+  generates its icon components from the SVG sources in
+  `packages/icons/export/`: `pnpm --filter @sanity/icons generate` (also run
+  via `prebuild`) deletes and regenerates `src/exports/*`, `src/icons.ts` and
+  `src/deprecations.ts`. These generated files are committed — edit the SVGs
+  or `scripts/generate.ts` instead of the generated output.
+- `pnpm dev:icons` starts the icons.sanity.dev showcase (`apps/icons`) on
+  http://localhost:5173. Its icon search queries `icon` documents in the docs
+  Sanity project (`mos42crl`, dataset `production`; override with
+  `VITE_SANITY_API_PROJECT_ID`/`VITE_SANITY_API_DATASET`) and falls back to
+  local substring filtering when the remote query fails (e.g. embeddings not
+  enabled, or CORS). The icon documents are (re)seeded with
+  `pnpm --filter @sanity/icons seed:icons` (needs `SANITY_API_WRITE_TOKEN` or
+  `SANITY_AUTH_TOKEN`; `SANITY_API_PROJECT_ID`/`SANITY_API_DATASET` override
+  the `mos42crl`/`production` defaults), which uploads rasterized previews
+  and clears `description`/`tags` of changed icons so the `enrich-icon`
+  Sanity Function (`apps/blueprints/docs`) re-enriches them via Agent
+  Actions (this requires the docs studio schema to be deployed:
+  `pnpm --filter sanity-ui-docs schema:deploy`).
 - `pnpm test:browser` runs the Storybook tests (`apps/storybook`): vitest
   renders every story in headless Chromium via `@storybook/addon-vitest` and
   executes story `play` interactions, plus the browser tests in

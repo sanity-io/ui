@@ -1,8 +1,0 @@
-*.tgz
-
-.DS_Store
-.workshop
-.sanity
-dist
-node_modules
-.husky/pre-commit

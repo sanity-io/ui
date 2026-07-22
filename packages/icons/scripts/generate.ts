@@ -10,7 +10,7 @@ import {globby} from 'globby'
 import {mkdirp} from 'mkdirp'
 import {format, type FormatConfig} from 'oxfmt'
 
-import formatConfig from '../.oxfmtrc.json' with {type: 'json'}
+import formatConfig from '../../../.oxfmtrc.json' with {type: 'json'}
 
 const ROOT_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const IMPORT_PATH = path.resolve(ROOT_PATH, 'export')
