@@ -12,11 +12,11 @@ import {
   ToastProvider,
   useToast,
 } from '@sanity/ui'
-import {buildTheme, hexToRgb, rgbToHsl} from '@sanity/ui/theme'
+import {buildTheme, getContrastRatio, hexToRgb, rgbToHsl} from '@sanity/ui/theme'
 import {ReactNode} from 'react'
 import {styled} from 'styled-components'
 
-import {AA_CONTRAST_THRESHOLD, AAA_CONTRAST_THRESHOLD, getContrast} from './contrast'
+import {AA_CONTRAST_THRESHOLD, AAA_CONTRAST_THRESHOLD} from './contrast'
 
 const theme = buildTheme()
 
@@ -94,8 +94,8 @@ function ColorTintPreview(props: {tint: ColorTint}) {
   const toast = useToast()
 
   const contrast = {
-    dark: getContrast(tint.hex, black.hex),
-    light: getContrast(tint.hex, white.hex),
+    dark: getContrastRatio(tint.hex, black.hex),
+    light: getContrastRatio(tint.hex, white.hex),
   }
 
   const handleClick = () => {

@@ -1,7 +1,8 @@
 import {black, HSL, hslToRgb, rgbToHex, white} from '@sanity/color'
 import {Box, Card, Flex, Text, useRootTheme} from '@sanity/ui'
+import {getContrastRatio} from '@sanity/ui/theme'
 
-import {AA_CONTRAST_THRESHOLD, getContrast} from '../contrast'
+import {AA_CONTRAST_THRESHOLD} from '../contrast'
 
 export function ColorPreview(props: {hsl: HSL; showAABadges?: boolean; showContrast?: boolean}) {
   const {hsl, showAABadges, showContrast} = props
@@ -10,8 +11,8 @@ export function ColorPreview(props: {hsl: HSL; showAABadges?: boolean; showContr
   const hex = rgbToHex(hslToRgb(hsl))
 
   const contrast = {
-    dark: getContrast(hex, black.hex),
-    light: getContrast(hex, white.hex),
+    dark: getContrastRatio(hex, black.hex),
+    light: getContrastRatio(hex, white.hex),
   }
 
   return (

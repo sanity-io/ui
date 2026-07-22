@@ -164,12 +164,14 @@ function SliderHandle(props: {
   }
 
   const handleKeyDown = (event: ReactKeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === 'ArrowDown') {
+    // Arrow keys follow the value (up = increase), like a native slider,
+    // even though larger values sit lower in this layout
+    if (event.key === 'ArrowUp') {
       event.preventDefault()
       onChange(clamp(value + 1, 0, max))
     }
 
-    if (event.key === 'ArrowUp') {
+    if (event.key === 'ArrowDown') {
       event.preventDefault()
       onChange(clamp(value - 1, 0, max))
     }
