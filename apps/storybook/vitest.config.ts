@@ -13,6 +13,8 @@ export default defineConfig({
         plugins: [storybookTest({configDir: path.join(import.meta.dirname, '.storybook')})],
         test: {
           name: 'storybook',
+          fileParallelism: false,
+          retry: process.env.CI ? 2 : 0,
           browser: {
             enabled: true,
             headless: true,
@@ -27,6 +29,7 @@ export default defineConfig({
         test: {
           name: 'tests',
           include: ['tests/**/*.test.{ts,tsx}'],
+          retry: process.env.CI ? 2 : 0,
           browser: {
             enabled: true,
             headless: true,
