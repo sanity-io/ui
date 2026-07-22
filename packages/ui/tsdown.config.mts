@@ -13,14 +13,9 @@ const config: UserConfig = await defineConfig({
   styledComponents: true,
 })
 
-// Components are named through their function names alone (there are no
-// `displayName` assignments: as top-level side effects in the dist they'd pin
-// every component into consuming bundles, defeating tree-shaking). The default
-// compress pass strips the (otherwise unreferenced) name from expressions like
-// `forwardRef(function Button(…) {…})`, which would leave components anonymous
-// in React DevTools, so keep function/class names. Unlike `displayName`
-// assignments, names inside the `/* @__PURE__ */`-annotated factory calls
-// don't block tree-shaking.
+// The default compress pass strips the (otherwise unreferenced) inner names
+// from `forwardRef(function Button(…) {…})` — the names React DevTools shows
+// now that there are no `displayName` assignments.
 config.minify = {
   compress: {keepNames: {function: true, class: true}},
   codegen: false,
