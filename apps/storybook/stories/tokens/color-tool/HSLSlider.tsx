@@ -183,10 +183,18 @@ function SliderHandle(props: {
       <Handle
         $color={color}
         aria-label={label}
+        aria-orientation="vertical"
+        aria-valuemax={max}
+        aria-valuemin={0}
+        aria-valuenow={value}
         onKeyDown={handleKeyDown}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
+        // oxlint-disable-next-line jsx_a11y/prefer-tag-over-role -- a native <input type="range"> cannot be styled as this 12px overlay thumb; the button implements the slider contract (drag + arrow keys + value ARIA)
+        role="slider"
         style={{top}}
+        // Buttons are natively focusable; explicit for jsx_a11y/interactive-supports-focus, which only sees the slider role
+        tabIndex={0}
         type="button"
       />
     </Tooltip>
