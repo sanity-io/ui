@@ -1,9 +1,4 @@
-<!-- markdownlint-disable --><!-- textlint-disable -->
-
-# 📓 Changelog
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+# @sanity/color
 
 ## [3.0.6](https://github.com/sanity-io/color/compare/color-v3.0.5...color-v3.0.6) (2024-04-09)
 
