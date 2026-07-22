@@ -171,17 +171,23 @@ function SliderHandle(props: {
   }
 
   const handleKeyDown = (event: ReactKeyboardEvent<HTMLButtonElement>) => {
-    // Arrow keys follow the value (up = increase), like a native slider,
-    // even though larger values sit lower in this layout
-    if (event.key === 'ArrowUp') {
-      event.preventDefault()
-      onChange(clamp(value + 1, 0, max))
-    }
+    // ARIA slider keyboard contract: the keys follow the value (Up/Right
+    // increase, even though larger values sit lower in this layout)
+    const next =
+      event.key === 'ArrowUp' || event.key === 'ArrowRight'
+        ? clamp(value + 1, 0, max)
+        : event.key === 'ArrowDown' || event.key === 'ArrowLeft'
+          ? clamp(value - 1, 0, max)
+          : event.key === 'Home'
+            ? 0
+            : event.key === 'End'
+              ? max
+              : null
 
-    if (event.key === 'ArrowDown') {
-      event.preventDefault()
-      onChange(clamp(value - 1, 0, max))
-    }
+    if (next === null) return
+
+    event.preventDefault()
+    onChange(next)
   }
 
   return (
