@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "scripts": {
-    "build": "pnpm --filter @sanity/ui build && pnpm --filter figma-plugin-sanity-ui build",
+    "build": "pnpm --filter @sanity/logos build && pnpm --filter @sanity/ui build && pnpm --filter figma-plugin-sanity-ui build",
     "changeset": "changeset",
     "clean": "pnpm --recursive clean",
     "dev": "pnpm --filter sanity-ui-storybook dev",

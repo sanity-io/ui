@@ -1,5 +1,6 @@
 import {white} from '@sanity/color'
 import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+
 import {NEW_SANITY_BLACK} from './colors'
 
 /**

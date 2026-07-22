@@ -1,5 +1,6 @@
 import {white} from '@sanity/color'
 import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+
 import {NEW_SANITY_BLACK, NEW_SANITY_ORANGE} from './colors'
 
 /**
@@ -24,6 +25,7 @@ export interface SanityMonogramColor {
  * @public
  */
 export type SanityMonogramProps =
+  // oxlint-disable-next-line no-deprecated -- the deprecated `color` prop is still supported
   | {color: SanityMonogramColor; scheme?: undefined}
   | {color?: undefined; scheme: SanityMonogramScheme}
   | {color?: undefined; scheme?: undefined}

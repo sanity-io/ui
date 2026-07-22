@@ -1,7 +1,10 @@
 {
-  "extends": "./tsconfig.settings",
-  "include": ["./package.config.ts", "./src", "./workshop.config.ts"],
+  "extends": "../../tsconfig.settings.json",
+  "include": ["./src", "./tsdown.config.mts"],
   "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist/types",
+    "types": ["node"],
     "jsx": "react-jsx"
   }
 }

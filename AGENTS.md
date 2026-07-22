@@ -3,8 +3,10 @@
 ## Cursor Cloud specific instructions
 
 This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
-the published package lives in `packages/ui`, the Figma plugin in
-`packages/figma`, the Storybook app in `apps/storybook`, the
+the published `@sanity/ui` package lives in `packages/ui`, the published
+`@sanity/logos` package (Sanity/GROQ logo components, migrated from the
+standalone `sanity-io/logos` repo with full git history) in `packages/logos`,
+the Figma plugin in `packages/figma`, the Storybook app in `apps/storybook`, the
 sanity.io/ui docs site (a Next.js app with an embedded Sanity Studio) in
 `apps/docs`, and a Sanity Blueprint (serverless functions for the docs site)
 in `apps/blueprints/docs` (`pnpm-workspace.yaml`). The root `package.json` is a private
