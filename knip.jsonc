@@ -9,7 +9,11 @@
     },
     "apps/docs": {},
     "apps/icons": {},
-    "packages/icons": {},
+    "packages/icons": {
+      // The generate/seed package.json scripts run these through unrun, which
+      // knip does not recognize as a script runner
+      "entry": ["scripts/*.ts"],
+    },
     "packages/ui": {
       "ignoreDependencies": [
         // babel-plugin-react-compiler (target '18') injects imports of this runtime
