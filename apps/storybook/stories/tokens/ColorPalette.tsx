@@ -16,31 +16,12 @@ import {buildTheme, hexToRgb, rgbToHsl} from '@sanity/ui/theme'
 import {ReactNode} from 'react'
 import {styled} from 'styled-components'
 
-const theme = buildTheme()
+import {AA_CONTRAST_THRESHOLD, AAA_CONTRAST_THRESHOLD, getContrast} from './contrast'
 
-const AA_CONTRAST_THRESHOLD = 4.5
-const AAA_CONTRAST_THRESHOLD = 7
+const theme = buildTheme()
 
 function ucfirst(str: string) {
   return str.slice(0, 1).toUpperCase() + str.slice(1)
-}
-
-/** WCAG 2.x relative luminance (https://www.w3.org/TR/WCAG22/#dfn-relative-luminance) */
-function luminance(hex: string): number {
-  const {r, g, b} = hexToRgb(hex)
-  const [lr, lg, lb] = [r, g, b].map((channel) => {
-    const s = channel / 255
-    return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4
-  })
-  return 0.2126 * lr + 0.7152 * lg + 0.0722 * lb
-}
-
-/** WCAG 2.x contrast ratio (https://www.w3.org/TR/WCAG22/#dfn-contrast-ratio) */
-function getContrast(hexA: string, hexB: string): number {
-  const a = luminance(hexA)
-  const b = luminance(hexB)
-
-  return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)
 }
 
 export function ColorPalette(): ReactNode {
