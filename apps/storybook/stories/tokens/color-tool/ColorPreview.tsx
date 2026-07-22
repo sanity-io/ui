@@ -45,7 +45,9 @@ export function ColorPreview(props: {hsl: HSL; showAABadges?: boolean; showContr
 
           {showContrast && (
             <Box padding={1}>
-              <Text size={0} weight="bold">
+              {/* Color by tint lightness: the Card behind is the swatch color,
+                  not a theme background */}
+              <Text size={0} style={{color: hsl[2] < 50 ? white.hex : black.hex}} weight="bold">
                 {contrast[dark ? 'dark' : 'light'].toFixed(2)}:1
               </Text>
             </Box>

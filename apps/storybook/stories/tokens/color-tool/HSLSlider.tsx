@@ -7,6 +7,7 @@ import {
   ReactNode,
   RefObject,
   useRef,
+  useState,
 } from 'react'
 import {styled} from 'styled-components'
 
@@ -44,11 +45,19 @@ export function HSLSlider(props: {onChange: (hsl: HSL) => void; value: HSL}): Re
   const hexValue = rgbToHex(hslToRgb(value))
   const wrapperRef = useRef<HTMLDivElement | null>(null)
 
+  // While the hex input is focused, show what the user typed (the canonical
+  // hex would otherwise reset the field on every keystroke that doesn't parse)
+  const [hexDraft, setHexDraft] = useState<string | null>(null)
+
   const handleHexChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const draft = event.currentTarget.value
+
+    setHexDraft(draft)
+
     try {
-      onChange(rgbToHsl(hexToRgb(event.currentTarget.value)))
+      onChange(rgbToHsl(hexToRgb(draft)))
     } catch {
-      // ignore incomplete hex values while typing
+      // incomplete hex value; keep the draft until it parses
     }
   }
 
@@ -88,7 +97,14 @@ export function HSLSlider(props: {onChange: (hsl: HSL) => void; value: HSL}): Re
           <StyledTextInput fontSize={0} padding={1} readOnly value={String(l)} />
         </Flex>
         <Flex gap={1}>
-          <StyledTextInput fontSize={0} onChange={handleHexChange} padding={1} value={hexValue} />
+          <StyledTextInput
+            fontSize={0}
+            onBlur={() => setHexDraft(null)}
+            onChange={handleHexChange}
+            onFocus={(event) => setHexDraft(event.currentTarget.value)}
+            padding={1}
+            value={hexDraft ?? hexValue}
+          />
         </Flex>
       </Stack>
     </div>

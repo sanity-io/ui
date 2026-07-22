@@ -48,18 +48,20 @@ export function ColorSwatchesEditor(props: {
         </Flex>
       </button>
 
-      <div hidden={!expanded} ref={setWrapper}>
-        <Connectors swatches={swatches} wrapper={wrapper} />
-        <Flex gap={1}>
-          {swatches.map((t) => (
-            <HSLSlider
-              key={t.key}
-              onChange={(hsl) => dispatch({type: 'swatch/update', hue, tint: t.key, hsl})}
-              value={t.hsl}
-            />
-          ))}
-        </Flex>
-      </div>
+      {expanded && (
+        <div ref={setWrapper} style={{position: 'relative'}}>
+          <Connectors swatches={swatches} wrapper={wrapper} />
+          <Flex gap={1}>
+            {swatches.map((t) => (
+              <HSLSlider
+                key={t.key}
+                onChange={(hsl) => dispatch({type: 'swatch/update', hue, tint: t.key, hsl})}
+                value={t.hsl}
+              />
+            ))}
+          </Flex>
+        </div>
+      )}
     </div>
   )
 }

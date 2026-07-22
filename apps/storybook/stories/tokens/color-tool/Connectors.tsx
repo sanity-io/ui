@@ -15,11 +15,15 @@ export function Connectors(props: {
   const cellW = w / swatches.length
   const H = cellW / 2
 
+  // No valid geometry until the wrapper has been measured
+  if (!w) return null
+
   return (
     <svg
       viewBox={`0 0 ${w} ${SLIDER_H + 12}`}
+      width={w}
       height={SLIDER_H + 12}
-      style={{position: 'absolute', display: 'block'}}
+      style={{position: 'absolute', top: 0, left: 0, display: 'block', pointerEvents: 'none'}}
     >
       <path
         d={swatches
