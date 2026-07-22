@@ -15,7 +15,7 @@ import {ColorTool} from './color-tool/ColorTool'
  */
 const meta: Meta<typeof ColorTool> = {
   argTypes: {
-    visibleHues: {control: 'check', options: [...COLOR_HUES]},
+    visibleHues: {control: {type: 'check'}, options: [...COLOR_HUES]},
   },
   component: ColorTool,
   parameters: {

@@ -129,13 +129,17 @@ function SliderHandle(props: {
   const {color, label, max, onChange, value, wrapperRef} = props
   const top = (value / max) * SLIDER_H
 
-  const valueFromPointer = (pointer: {clientY: number}): number | null => {
+  // Pointer-y distance from the handle center at grab time, applied while
+  // dragging so grabbing the 12px thumb off-center doesn't snap the value
+  const grabOffsetRef = useRef(0)
+
+  const valueFromCenterY = (centerY: number): number | null => {
     const wrapper = wrapperRef.current
 
     if (!wrapper) return null
 
     const rect = wrapper.getBoundingClientRect()
-    const nextTop = clamp(pointer.clientY - rect.top - 6, 0, SLIDER_H)
+    const nextTop = clamp(centerY - rect.top - 6, 0, SLIDER_H)
 
     return Math.round((nextTop / SLIDER_H) * max)
   }
@@ -149,9 +153,11 @@ function SliderHandle(props: {
     event.currentTarget.focus()
     event.currentTarget.setPointerCapture(event.pointerId)
 
-    const next = valueFromPointer(event)
+    const wrapper = wrapperRef.current
+    const centerY = wrapper ? wrapper.getBoundingClientRect().top + top + 6 : event.clientY
 
-    if (next !== null) onChange(next)
+    // Grabbing the thumb doesn't change the value; dragging is relative
+    grabOffsetRef.current = event.clientY - centerY
   }
 
   const handlePointerMove = (event: ReactPointerEvent<HTMLButtonElement>) => {
@@ -159,7 +165,7 @@ function SliderHandle(props: {
 
     event.preventDefault()
 
-    const next = valueFromPointer(event)
+    const next = valueFromCenterY(event.clientY - grabOffsetRef.current)
 
     if (next !== null) onChange(next)
   }
