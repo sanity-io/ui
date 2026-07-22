@@ -16,6 +16,7 @@
   "devDependencies": {
     "@sanity/color": "workspace:*",
     "@sanity/icons": "catalog:",
+    "@sanity/logos": "workspace:*",
     "@sanity/ui": "workspace:*",
     "@storybook/addon-a11y": "^10.5.3",
     "@storybook/addon-docs": "^10.5.3",
