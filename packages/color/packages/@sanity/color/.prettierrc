@@ -1,7 +1,0 @@
-{
-  "plugins": ["prettier-plugin-packagejson"],
-  "semi": false,
-  "printWidth": 100,
-  "bracketSpacing": false,
-  "singleQuote": true
-}

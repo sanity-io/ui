@@ -1,5 +1,0 @@
-.workshop
-dist
-pnpm-lock.yaml
-.release-please-manifest.json
-packages/@sanity/color/CHANGELOG.md
