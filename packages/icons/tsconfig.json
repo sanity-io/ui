@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.settings",
-  "include": ["./scripts", "./src", "./test", "./tsdown.config.ts", "./vite.config.ts"],
+  "include": ["./scripts", "./src", "./test", "./tsdown.config.ts", "./vitest.config.ts"],
   "compilerOptions": {
     "noEmit": true,
     "jsx": "react-jsx"
