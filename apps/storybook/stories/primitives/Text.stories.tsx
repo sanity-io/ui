@@ -1,4 +1,4 @@
-import {AddCircleIcon} from '@sanity/icons'
+import {AddCircleIcon} from '@sanity/icons/AddCircle'
 import {Card, Flex, Stack, Text, ThemeProps} from '@sanity/ui'
 import {getTheme_v2, ThemeColorAvatarColorKey, ThemeColorSpotKey} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'

@@ -1,4 +1,4 @@
-import {SpinnerIcon} from '@sanity/icons'
+import {SpinnerIcon} from '@sanity/icons/Spinner'
 import {forwardRef} from 'react'
 import {keyframes, styled} from 'styled-components'
 

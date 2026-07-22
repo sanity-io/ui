@@ -1,4 +1,4 @@
-import {CubeIcon} from '@sanity/icons'
+import {CubeIcon} from '@sanity/icons/Cube'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const screenType = defineType({

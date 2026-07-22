@@ -1,0 +1,65 @@
+{
+  "name": "@sanity/color",
+  "version": "3.0.7",
+  "description": "The Sanity color palette.",
+  "keywords": [
+    "color",
+    "palette",
+    "sanity"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/ui/issues"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/ui.git",
+    "directory": "packages/color"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf dist",
+    "generate": "unrun scripts/generate.ts && pnpm --workspace-root exec oxfmt packages/color/src/color.ts",
+    "prepack": "pnpm build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "watch": "tsdown --watch"
+  },
+  "devDependencies": {
+    "@sanity/tsdown-config": "catalog:",
+    "@types/node": "catalog:",
+    "rimraf": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "unrun": "catalog:",
+    "vitest": "catalog:"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "esm.sh": {
+    "bundle": false
+  }
+}

@@ -1,13 +1,27 @@
 'use client'
 
-import * as icons from '@sanity/icons'
+import {Icon, icons, type IconSymbol} from '@sanity/icons'
 import * as ui from '@sanity/ui'
 import {Card, Code, ErrorBoundary, Text} from '@sanity/ui'
-import React, {ReactElement, useCallback, useEffect, useMemo, useState} from 'react'
+import React, {ReactElement, Suspense, useCallback, useEffect, useMemo, useState} from 'react'
 import {keyframes, styled} from 'styled-components'
 
 import {isRecord} from '@/lib/common'
 import {Babel, evalComponent, EvalComponentResult, loadBabel} from '@/lib/ide'
+
+// @sanity/icons v5 removed the per-icon barrel exports that
+// `import * as icons` used to provide here. Rebuild the legacy `XxxIcon`
+// names (e.g. `AddIcon`) for the eval scope so existing arcade snippets keep
+// working. Each name renders the dynamic `Icon` component, which lazy-loads
+// the icon inside its own `Suspense` boundary (with an svg-shell fallback).
+const iconScope: Record<string, React.ComponentType> = Object.fromEntries(
+  Object.keys(icons).map((symbol) => [
+    `${symbol.replace(/(?:^|-)(\w)/g, (_, letter: string) => letter.toUpperCase())}Icon`,
+    function ScopedIcon(props: Omit<React.ComponentProps<typeof Icon>, 'symbol'>) {
+      return <Icon {...props} symbol={symbol as IconSymbol} />
+    },
+  ]),
+)
 
 export default function ArcadeFrameRoute(): ReactElement {
   const [babel, setBabel] = useState<Babel | null>(null)
@@ -52,7 +66,7 @@ export default function ArcadeFrameRoute(): ReactElement {
       babel,
       hookCode,
       jsxCode,
-      scope: {...icons, ...ui, ...React, React, styled, keyframes},
+      scope: {Icon, icons, ...iconScope, ...ui, ...React, React, styled, keyframes},
     })
   }, [babel, hookCode, jsxCode])
 
@@ -73,7 +87,10 @@ export default function ArcadeFrameRoute(): ReactElement {
     <>
       {evalResult?.type === 'success' && !renderError && (
         <Card height="fill" key={`${hookCode};${jsxCode}`}>
-          <ErrorBoundary onCatch={handleCatch}>{evalResult.node}</ErrorBoundary>
+          <ErrorBoundary onCatch={handleCatch}>
+            {/* Safety net for snippets that render the lazy `icons` map entries directly */}
+            <Suspense fallback={null}>{evalResult.node}</Suspense>
+          </ErrorBoundary>
         </Card>
       )}
 

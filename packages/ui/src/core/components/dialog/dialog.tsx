@@ -1,4 +1,4 @@
-import {CloseIcon} from '@sanity/icons'
+import {CloseIcon} from '@sanity/icons/Close'
 import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'

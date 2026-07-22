@@ -1,10 +1,16 @@
 # Contributing guidelines
 
 This repository is a pnpm monorepo. The published `@sanity/ui` package lives in
-[`packages/ui`](packages/ui), the Figma plugin lives in
-[`packages/figma`](packages/figma), the Storybook lives in
-[`apps/storybook`](apps/storybook), and the [sanity.io/ui](https://www.sanity.io/ui)
-docs site lives in [`apps/docs`](apps/docs).
+[`packages/ui`](packages/ui), the published `@sanity/icons` package lives in
+[`packages/icons`](packages/icons), the published `@sanity/color` package lives
+in [`packages/color`](packages/color), the published `@sanity/logos` package
+lives in [`packages/logos`](packages/logos), the Figma plugins live in
+[`packages/figma`](packages/figma) and [`packages/figma-color`](packages/figma-color),
+the Storybook lives in
+[`apps/storybook`](apps/storybook), the [sanity.io/ui](https://www.sanity.io/ui)
+docs site lives in [`apps/docs`](apps/docs), and the
+[icons.sanity.dev](https://icons.sanity.dev) icon showcase lives in
+[`apps/icons`](apps/icons).
 
 ## Getting started
 
@@ -21,8 +27,9 @@ without a rebuild.
 ## Testing
 
 Unit tests are written with [vitest](https://vitest.dev) and live next to the
-source in `packages/ui/src`. Run them with `pnpm test` (or
-`pnpm test:watch` in `packages/ui` for watch mode). They run against the
+source in `packages/ui/src`, `packages/icons/src` and `packages/color/src`. Run
+them with `pnpm test`
+(or `pnpm test:watch` in the package for watch mode). They run against the
 package source, so no build is required.
 
 Browser tests live in the Storybook app (`apps/storybook`) and use

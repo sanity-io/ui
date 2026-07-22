@@ -1,5 +1,31 @@
 # @sanity/ui
 
+## 3.4.2
+
+### Patch Changes
+
+- Updated dependencies [[`18c0323`](https://github.com/sanity-io/ui/commit/18c03236ad559cff62c41ea103ce73154088e199)]:
+  - @sanity/icons@5.2.1
+
+## 3.4.1
+
+### Patch Changes
+
+- Updated dependencies [[`528c3c9`](https://github.com/sanity-io/ui/commit/528c3c9fc5360ba313c2fa73261e9b476cab3154)]:
+  - @sanity/color@3.0.7
+
+## 3.4.0
+
+### Minor Changes
+
+- [#2410](https://github.com/sanity-io/ui/pull/2410) [`e151988`](https://github.com/sanity-io/ui/commit/e151988c4628f6249cb2ac0d9e57dccbe5557187) Thanks [@stipsan](https://github.com/stipsan)! - update dependency @sanity/icons to ^5.2.0
+
+  `@sanity/ui` now imports every icon from its per-icon export path (e.g. `@sanity/icons/Close`) instead of the root barrel, so only the handful of icons the components actually render are pulled into your bundle.
+
+### Patch Changes
+
+- [#2409](https://github.com/sanity-io/ui/pull/2409) [`4f7947b`](https://github.com/sanity-io/ui/commit/4f7947bdb137d8768e95472ce6ce8ff49118f04e) Thanks [@stipsan](https://github.com/stipsan)! - fix(deps): update dependency styled-components to ^6.4.4
+
 ## 3.3.6
 
 ### Patch Changes

@@ -1,0 +1,96 @@
+import {icons, type IconSymbol} from '@sanity/icons'
+import {startTransition, useCallback, useEffect, useState} from 'react'
+
+import {searchClient} from './sanity-client'
+
+// Hybrid ranking: exact filename, then prefix, then keyword matches across
+// filename/namedExport/tags/description, and finally semantic similarity.
+// Keyword boosts are weighted high so exact/partial matches always rank above
+// fuzzy ones. The icon key is recovered from `_id` ("icon_<key>").
+const SEARCH_QUERY = `*[_type == "icon"] | score(
+  boost(filename == $qExact, 12),
+  boost(filename match $qPrefix, 8),
+  boost([filename, namedExport, tags] match $qWords, 4),
+  boost(description match $qWords, 2),
+  text::semanticSimilarity($q)
+) | order(_score desc) [0...80] { "id": _id }`
+
+function isIconSymbol(key: string): key is IconSymbol {
+  return key in icons
+}
+
+const allIconKeys = Object.keys(icons).filter(isIconSymbol)
+
+function localFilter(query: string): IconSymbol[] {
+  const q = query.toLowerCase()
+
+  return allIconKeys.filter((key) => key.includes(q))
+}
+
+interface RemoteResult {
+  query: string
+  names: IconSymbol[]
+  semantic: boolean
+}
+
+export interface IconSearchState {
+  results: IconSymbol[]
+  loading: boolean
+  /** True when results came from the semantic index, false for the offline fallback. */
+  semantic: boolean
+}
+
+export function useIconSearch(query: string): IconSearchState {
+  const trimmed = query.trim()
+
+  const [remote, _setRemote] = useState<RemoteResult | null>(null)
+  const setRemote = useCallback(
+    (result: RemoteResult) => startTransition(() => _setRemote(result)),
+    [_setRemote],
+  )
+
+  useEffect(() => {
+    if (trimmed === '') return undefined
+
+    let cancelled = false
+
+    const timeout = setTimeout(async () => {
+      try {
+        const rows = await searchClient.fetch<{id: string}[]>(SEARCH_QUERY, {
+          q: trimmed,
+          qExact: `${trimmed.toLowerCase()}.svg`,
+          qPrefix: `${trimmed}*`,
+          qWords: `${trimmed}*`,
+        })
+
+        if (cancelled) return
+
+        // Recover the icon key from `_id` and keep only icons in the shipped set.
+        const names = rows.map((row) => row.id.replace(/^icon_/, '')).filter(isIconSymbol)
+
+        setRemote({query: trimmed, names, semantic: true})
+      } catch {
+        if (cancelled) return
+
+        setRemote({query: trimmed, names: localFilter(trimmed), semantic: false})
+      }
+    }, 200)
+
+    return () => {
+      cancelled = true
+      clearTimeout(timeout)
+    }
+  }, [trimmed, setRemote])
+
+  if (trimmed === '') {
+    return {results: allIconKeys, loading: false, semantic: false}
+  }
+
+  // Results for the current query have arrived from Sanity.
+  if (remote && remote.query === trimmed) {
+    return {results: remote.names, loading: false, semantic: remote.semantic}
+  }
+
+  // Awaiting the semantic query: show instant local substring matches meanwhile.
+  return {results: localFilter(trimmed), loading: true, semantic: false}
+}

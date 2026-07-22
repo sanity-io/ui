@@ -1,4 +1,4 @@
-import {ToggleArrowRightIcon} from '@sanity/icons'
+import {ToggleArrowRightIcon} from '@sanity/icons/ToggleArrowRight'
 import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {startTransition, useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'

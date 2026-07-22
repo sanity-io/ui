@@ -1,4 +1,4 @@
-import {CogIcon} from '@sanity/icons'
+import {CogIcon} from '@sanity/icons/Cog'
 import {StructureResolver} from 'sanity/structure'
 
 const singletonTypes = new Set(['settings'])

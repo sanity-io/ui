@@ -1,0 +1,54 @@
+/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */
+
+import {forwardRef, type ForwardRefExoticComponent, type RefAttributes, type SVGProps} from 'react'
+
+/**
+ * @public
+ */
+export const BlockContentIcon: ForwardRefExoticComponent<
+  Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
+> = /* @__PURE__ */ forwardRef(function BlockContentIcon(props, ref) {
+  return (
+    <svg
+      data-sanity-icon="block-content"
+      width="1em"
+      height="1em"
+      viewBox="0 0 25 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+      ref={ref}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21 7.60002L11 7.60003V6.40003L21 6.40002V7.60002Z"
+        fill="currentColor"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21 11.2667L12.4833 11.2667V10.0667L21 10.0667V11.2667Z"
+        fill="currentColor"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21 14.9334H13.9254V13.7334L21 13.7334V14.9334Z"
+        fill="currentColor"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21 18.6002H4V17.4002H21V18.6002Z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.86438 15.6H11.2L8.27623 7.60003H6.92377L4 15.6H5.29072L6.0371 13.4767H9.12362L9.86438 15.6ZM7.53546 9.05255H7.63086L8.80374 12.4344H6.35698L7.53546 9.05255Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+})
+
+export {BlockContentIcon as default}

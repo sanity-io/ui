@@ -1,12 +1,10 @@
-import {
-  ClockIcon,
-  CommentIcon,
-  ExpandIcon,
-  OkHandIcon,
-  RocketIcon,
-  SearchIcon,
-  SunIcon,
-} from '@sanity/icons'
+import {ClockIcon} from '@sanity/icons/Clock'
+import {CommentIcon} from '@sanity/icons/Comment'
+import {ExpandIcon} from '@sanity/icons/Expand'
+import {OkHandIcon} from '@sanity/icons/OkHand'
+import {RocketIcon} from '@sanity/icons/Rocket'
+import {SearchIcon} from '@sanity/icons/Search'
+import {SunIcon} from '@sanity/icons/Sun'
 import {
   Autocomplete,
   Avatar,
