@@ -222,4 +222,3 @@ export function TreeItem(
     </StyledTreeItem>
   )
 }
-TreeItem.displayName = 'TreeItem'

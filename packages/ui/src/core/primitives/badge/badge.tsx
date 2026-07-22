@@ -59,7 +59,6 @@ const BadgeComponent = forwardRef(function Badge(
     </StyledBadge>
   )
 })
-BadgeComponent.displayName = 'ForwardRef(Badge)'
 
 /**
  * Badges are used to tag resources.

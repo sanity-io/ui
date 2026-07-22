@@ -65,4 +65,3 @@ export const Switch = forwardRef(function Switch(
     </StyledSwitch>
   )
 })
-Switch.displayName = 'ForwardRef(Switch)'

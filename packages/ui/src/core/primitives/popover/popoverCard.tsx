@@ -164,4 +164,3 @@ export const PopoverCard = forwardRef(function PopoverCard(
     </MotionCard>
   )
 })
-PopoverCard.displayName = 'ForwardRef(PopoverCard)'

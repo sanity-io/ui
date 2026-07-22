@@ -33,4 +33,3 @@ export const SrOnly = forwardRef(function SrOnly(
     </StyledSrOnly>
   )
 })
-SrOnly.displayName = 'ForwardRef(SrOnly)'

@@ -372,7 +372,6 @@ export const Popover = forwardRef(function Popover(
     </>
   )
 })
-Popover.displayName = 'ForwardRef(Popover)'
 
 function useMiddleware({
   animate,

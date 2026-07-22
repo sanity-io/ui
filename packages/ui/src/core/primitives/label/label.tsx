@@ -76,7 +76,6 @@ const LabelComponent = forwardRef(function Label(
     </StyledLabel>
   )
 })
-LabelComponent.displayName = 'ForwardRef(Label)'
 
 /**
  * Typographic labels.

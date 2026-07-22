@@ -275,8 +275,6 @@ const DialogCard = forwardRef(function DialogCard(
   )
 })
 
-DialogCard.displayName = 'ForwardRef(DialogCard)'
-
 /**
  * The Dialog component.
  *
@@ -430,4 +428,3 @@ export const Dialog = forwardRef(function Dialog(
     </Portal>
   )
 })
-Dialog.displayName = 'ForwardRef(Dialog)'

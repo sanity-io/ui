@@ -148,7 +148,6 @@ const BoxComponent = forwardRef(function Box(
     </StyledBox>
   )
 })
-BoxComponent.displayName = 'ForwardRef(Box)'
 
 /**
  * The `Box` component is a basic layout wrapper component which provides utility properties

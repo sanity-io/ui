@@ -50,7 +50,6 @@ const FlexComponent = forwardRef(function Flex(
     />
   )
 })
-FlexComponent.displayName = 'ForwardRef(Flex)'
 
 /**
  * The `Flex` component is a wrapper component for flexible elements (`Box`, `Card` and `Flex`).

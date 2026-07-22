@@ -71,13 +71,12 @@ export const TextSkeleton = forwardRef(function TextSkeleton(
 
   return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="text" />
 })
-TextSkeleton.displayName = 'ForwardRef(TextSkeleton)'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const LabelSkeleton = forwardRef(function TextSkeleton(
+export const LabelSkeleton = forwardRef(function LabelSkeleton(
   props: LabelSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
   ref: React.Ref<HTMLDivElement>,
@@ -87,13 +86,12 @@ export const LabelSkeleton = forwardRef(function TextSkeleton(
 
   return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="label" />
 })
-LabelSkeleton.displayName = 'ForwardRef(LabelSkeleton)'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const HeadingSkeleton = forwardRef(function TextSkeleton(
+export const HeadingSkeleton = forwardRef(function HeadingSkeleton(
   props: HeadingSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
   ref: React.Ref<HTMLDivElement>,
@@ -103,13 +101,12 @@ export const HeadingSkeleton = forwardRef(function TextSkeleton(
 
   return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="heading" />
 })
-HeadingSkeleton.displayName = 'ForwardRef(HeadingSkeleton)'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const CodeSkeleton = forwardRef(function TextSkeleton(
+export const CodeSkeleton = forwardRef(function CodeSkeleton(
   props: CodeSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
   ref: React.Ref<HTMLDivElement>,
@@ -119,4 +116,3 @@ export const CodeSkeleton = forwardRef(function TextSkeleton(
 
   return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="code" />
 })
-CodeSkeleton.displayName = 'ForwardRef(CodeSkeleton)'

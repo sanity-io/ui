@@ -202,7 +202,6 @@ const ButtonComponent = forwardRef(function Button(
     </StyledButton>
   )
 })
-ButtonComponent.displayName = 'ForwardRef(Button)'
 
 /**
  * @public

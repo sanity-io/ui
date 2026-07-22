@@ -60,7 +60,6 @@ const KBDComponent = forwardRef(function KBD(
     </StyledKBD>
   )
 })
-KBDComponent.displayName = 'ForwardRef(KBD)'
 
 /**
  * Used to define some text as keyboard input.

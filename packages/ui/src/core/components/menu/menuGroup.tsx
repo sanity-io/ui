@@ -45,7 +45,7 @@ export interface MenuGroupOwnProps {
  */
 export type MenuGroupProps<E extends ElementType = 'button'> = Props<MenuGroupOwnProps, E>
 
-function MenuGroupComponent(
+const MenuGroupComponent = function MenuGroup(
   props: Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'popover' | 'ref' | 'tabIndex'> &
     MenuGroupOwnProps & {as?: ElementType},
 ): React.JSX.Element {
@@ -225,8 +225,6 @@ function MenuGroupComponent(
     </Popover>
   )
 }
-
-MenuGroupComponent.displayName = 'MenuGroup'
 
 /**
  * @public

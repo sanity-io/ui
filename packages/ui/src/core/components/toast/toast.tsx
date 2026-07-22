@@ -152,8 +152,6 @@ export function Toast(
   )
 }
 
-Toast.displayName = 'Toast'
-
 const container = {
   initial: {y: 32, scale: 0.5, zIndex: 1},
   hidden: {opacity: 0},
