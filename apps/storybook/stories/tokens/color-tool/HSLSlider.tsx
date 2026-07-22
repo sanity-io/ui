@@ -3,7 +3,7 @@ import {Code, Flex, Stack, TextInput, Tooltip} from '@sanity/ui'
 import {
   ChangeEvent,
   KeyboardEvent as ReactKeyboardEvent,
-  MouseEvent as ReactMouseEvent,
+  PointerEvent as ReactPointerEvent,
   ReactNode,
   RefObject,
   useRef,
@@ -24,6 +24,8 @@ const Handle = styled.button<{$color: string}>`
   border-radius: 50%;
   margin: 0;
   padding: 0;
+  /* The handle is dragged with pointer events; don't let touch scroll instead */
+  touch-action: none;
 
   &:focus {
     outline: ${({$color}) => `2px solid ${$color}`};
@@ -127,40 +129,39 @@ function SliderHandle(props: {
   const {color, label, max, onChange, value, wrapperRef} = props
   const top = (value / max) * SLIDER_H
 
-  const handleMouseDown = (event: ReactMouseEvent<HTMLButtonElement>) => {
+  const valueFromPointer = (pointer: {clientY: number}): number | null => {
+    const wrapper = wrapperRef.current
+
+    if (!wrapper) return null
+
+    const rect = wrapper.getBoundingClientRect()
+    const nextTop = clamp(pointer.clientY - rect.top - 6, 0, SLIDER_H)
+
+    return Math.round((nextTop / SLIDER_H) * max)
+  }
+
+  // Drag with pointer capture: move/up events keep arriving on the handle
+  // even when the pointer leaves the iframe/window, and the capture is
+  // implicitly released on pointerup/pointercancel — so a drag can never
+  // get stuck (no window listeners to leak)
+  const handlePointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
     event.preventDefault()
     event.currentTarget.focus()
+    event.currentTarget.setPointerCapture(event.pointerId)
 
-    const valueFromPointer = (pointer: {clientY: number}): number | null => {
-      const wrapper = wrapperRef.current
+    const next = valueFromPointer(event)
 
-      if (!wrapper) return null
+    if (next !== null) onChange(next)
+  }
 
-      const rect = wrapper.getBoundingClientRect()
-      const nextTop = clamp(pointer.clientY - rect.top - 6, 0, SLIDER_H)
+  const handlePointerMove = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    if (!event.currentTarget.hasPointerCapture(event.pointerId)) return
 
-      return Math.round((nextTop / SLIDER_H) * max)
-    }
+    event.preventDefault()
 
-    const initial = valueFromPointer(event)
+    const next = valueFromPointer(event)
 
-    if (initial !== null) onChange(initial)
-
-    const handleMouseMove = (moveEvent: MouseEvent) => {
-      moveEvent.preventDefault()
-
-      const next = valueFromPointer(moveEvent)
-
-      if (next !== null) onChange(next)
-    }
-
-    const handleMouseUp = () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mouseup', handleMouseUp)
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    window.addEventListener('mouseup', handleMouseUp)
+    if (next !== null) onChange(next)
   }
 
   const handleKeyDown = (event: ReactKeyboardEvent<HTMLButtonElement>) => {
@@ -183,7 +184,8 @@ function SliderHandle(props: {
         $color={color}
         aria-label={label}
         onKeyDown={handleKeyDown}
-        onMouseDown={handleMouseDown}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
         style={{top}}
         type="button"
       />
