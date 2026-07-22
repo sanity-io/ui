@@ -42,7 +42,7 @@
     "next": "16.3.0-preview.6",
     "next-sanity": "^13.1.4",
     "pako": "^2.2.0",
-    "prettier": "^3.9.5",
+    "prettier": "^3.9.6",
     "qs": "^6.15.3",
     "react": "catalog:",
     "react-dom": "catalog:",
