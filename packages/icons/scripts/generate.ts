@@ -10,7 +10,13 @@ import {globby} from 'globby'
 import {mkdirp} from 'mkdirp'
 import {format, type FormatConfig} from 'oxfmt'
 
-import formatConfig from '../../../.oxfmtrc.json' with {type: 'json'}
+import rawFormatConfig from '../../../.oxfmtrc.json' with {type: 'json'}
+
+// The JSON module's inferred types are widened (e.g. `quoteProps: string`), so
+// they don't satisfy FormatConfig's literal unions – but the file is the
+// repo's own known-valid oxfmt config.
+// oxlint-disable-next-line typescript/no-unsafe-type-assertion
+const formatConfig = rawFormatConfig as unknown as FormatConfig
 
 const ROOT_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const IMPORT_PATH = path.resolve(ROOT_PATH, 'export')
@@ -101,7 +107,7 @@ async function readIcon(filePath: string) {
     .replace(/"#([0-9a-fA-F]{6})"/g, '"currentColor"')
     .replace('<svg ', `<svg data-sanity-icon="${name}" `)
 
-  code = (await format(targetPath, code, formatConfig as unknown as FormatConfig)).code
+  code = (await format(targetPath, code, formatConfig)).code
 
   return {
     code,
@@ -151,7 +157,7 @@ async function writeIconsMap(files: IconMeta[]) {
     [GENERATED_BANNER, importReact, importTypes, typesExports, iconMapInterface, iconsExport].join(
       '\n\n',
     ),
-    formatConfig as unknown as FormatConfig,
+    formatConfig,
   )
 
   await writeFile(SRC_ICONS_PATH, code)
@@ -176,7 +182,7 @@ async function writeDeprecations(files: IconMeta[]) {
   const {code} = await format(
     SRC_DEPRECATIONS_PATH,
     [GENERATED_BANNER, stubs].join('\n\n'),
-    formatConfig as unknown as FormatConfig,
+    formatConfig,
   )
 
   await writeFile(SRC_DEPRECATIONS_PATH, code)

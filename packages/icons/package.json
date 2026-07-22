@@ -509,10 +509,10 @@
   "scripts": {
     "build": "tsdown",
     "clean": "rimraf dist",
-    "generate": "rimraf src/icons src/icons.ts src/exports src/deprecations.ts && node scripts/generate.ts",
+    "generate": "rimraf src/icons src/icons.ts src/exports src/deprecations.ts && unrun scripts/generate.ts",
     "prebuild": "pnpm generate",
     "prepack": "pnpm build",
-    "seed:icons": "node scripts/seed-icons-dataset.ts",
+    "seed:icons": "unrun scripts/seed-icons-dataset.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -540,6 +540,7 @@
     "rimraf": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
+    "unrun": "catalog:",
     "vitest": "catalog:"
   },
   "peerDependencies": {

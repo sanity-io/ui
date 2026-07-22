@@ -19,17 +19,22 @@ const iconExportNames = readdirSync(path.join(SRC_PATH, 'exports'))
 // generated `@deprecated` tombstone for a per-icon barrel export that was removed in v5.
 const dynamicExportNames = ['Icon', 'IconComponent', 'IconMap', 'IconProps', 'IconSymbol', 'icons']
 
+const barrelProbe = path.join(SRC_PATH, '__probe_barrel__.ts')
+const movedIconProbe = path.join(SRC_PATH, '__probe_moved_barrel_icon__.ts')
+const deletedIconProbe = path.join(SRC_PATH, '__probe_deleted_barrel_icon__.ts')
+const subpathProbe = path.join(SRC_PATH, '__probe_subpath__.ts')
+
 // In-memory consumer files probing the import styles against the source entry points
 // (the same modules the published `exports` map points to in development).
 const probes: Record<string, string> = {
-  [path.join(SRC_PATH, '__probe_barrel__.ts')]: [
+  [barrelProbe]: [
     `import {Icon, icons, type IconComponent, type IconMap, type IconSymbol} from './index'`,
     `const rocket: IconComponent = icons['rocket' satisfies IconSymbol]`,
     `const map: IconMap = icons`,
     `console.log(Icon, rocket, map)`,
     ``,
   ].join('\n'),
-  [path.join(SRC_PATH, '__probe_moved_barrel_icon__.ts')]: [
+  [movedIconProbe]: [
     `import {AccessDeniedIcon} from './index'`,
     // Only a `never`-typed value is assignable to `never`, so this line proves the tombstone
     // has exactly the declared type.
@@ -37,12 +42,12 @@ const probes: Record<string, string> = {
     `console.log(tombstone)`,
     ``,
   ].join('\n'),
-  [path.join(SRC_PATH, '__probe_deleted_barrel_icon__.ts')]: [
+  [deletedIconProbe]: [
     `import {ThisIconNeverExistedIcon} from './index'`,
     `console.log(ThisIconNeverExistedIcon)`,
     ``,
   ].join('\n'),
-  [path.join(SRC_PATH, '__probe_subpath__.ts')]: [
+  [subpathProbe]: [
     `import {AccessDeniedIcon} from './exports/AccessDenied'`,
     `import LazyDefault from './exports/AccessDenied'`,
     `console.log(AccessDeniedIcon, LazyDefault)`,
@@ -84,12 +89,6 @@ function createLanguageService() {
 
 describe('root entry surface', () => {
   const languageService = createLanguageService()
-  const [barrelProbe, movedIconProbe, deletedIconProbe, subpathProbe] = Object.keys(probes) as [
-    string,
-    string,
-    string,
-    string,
-  ]
 
   function getSemanticErrors(probe: string) {
     return languageService

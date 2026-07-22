@@ -40,7 +40,7 @@ const ICON_STYLE = {fontSize: '33px', lineHeight: 0}
 
 type CopyState = 'idle' | 'copied' | 'error'
 
-export function GridView({iconKeys}: {iconKeys: string[]}) {
+export function GridView({iconKeys}: {iconKeys: IconSymbol[]}) {
   return (
     <Grid gap={2} style={GRID_STYLE}>
       {iconKeys.map((key) => (
@@ -50,7 +50,7 @@ export function GridView({iconKeys}: {iconKeys: string[]}) {
   )
 }
 
-function GridIconTile({icon}: {icon: string}) {
+function GridIconTile({icon}: {icon: IconSymbol}) {
   const [state, setState] = useState<CopyState>('idle')
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function GridIconTile({icon}: {icon: string}) {
     ) : state === 'error' ? (
       <ErrorOutlineIcon />
     ) : (
-      <Icon symbol={icon as IconSymbol} />
+      <Icon symbol={icon} />
     )
 
   return (

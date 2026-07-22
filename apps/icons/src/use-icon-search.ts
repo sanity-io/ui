@@ -1,4 +1,4 @@
-import {icons} from '@sanity/icons'
+import {icons, type IconSymbol} from '@sanity/icons'
 import {startTransition, useCallback, useEffect, useState} from 'react'
 
 import {searchClient} from './sanity-client'
@@ -15,9 +15,13 @@ const SEARCH_QUERY = `*[_type == "icon"] | score(
   text::semanticSimilarity($q)
 ) | order(_score desc) [0...80] { "id": _id }`
 
-const allIconKeys = Object.keys(icons)
+function isIconSymbol(key: string): key is IconSymbol {
+  return key in icons
+}
 
-function localFilter(query: string): string[] {
+const allIconKeys = Object.keys(icons).filter(isIconSymbol)
+
+function localFilter(query: string): IconSymbol[] {
   const q = query.toLowerCase()
 
   return allIconKeys.filter((key) => key.includes(q))
@@ -25,12 +29,12 @@ function localFilter(query: string): string[] {
 
 interface RemoteResult {
   query: string
-  names: string[]
+  names: IconSymbol[]
   semantic: boolean
 }
 
 export interface IconSearchState {
-  results: string[]
+  results: IconSymbol[]
   loading: boolean
   /** True when results came from the semantic index, false for the offline fallback. */
   semantic: boolean
@@ -62,9 +66,7 @@ export function useIconSearch(query: string): IconSearchState {
         if (cancelled) return
 
         // Recover the icon key from `_id` and keep only icons in the shipped set.
-        const names = rows
-          .map((row) => row.id.replace(/^icon_/, ''))
-          .filter((name) => name in icons)
+        const names = rows.map((row) => row.id.replace(/^icon_/, '')).filter(isIconSymbol)
 
         setRemote({query: trimmed, names, semantic: true})
       } catch {

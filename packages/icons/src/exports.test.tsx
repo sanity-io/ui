@@ -19,9 +19,9 @@ const exportNames = readdirSync(EXPORTS_DIR)
   .map((file) => file.slice(0, -'.tsx'.length))
   .toSorted()
 
-const pkg = JSON.parse(readFileSync(path.join(ROOT_PATH, 'package.json'), 'utf8')) as {
-  exports: Record<string, unknown>
-}
+const pkg: {exports: Record<string, unknown>} = JSON.parse(
+  readFileSync(path.join(ROOT_PATH, 'package.json'), 'utf8'),
+)
 
 const barrelExports = barrel as Record<string, unknown>
 
@@ -33,7 +33,7 @@ describe('per-icon subpath exports', () => {
   test.each(exportNames)(
     '"%s" exposes the icon as both a matching named export and the default export',
     async (exportName) => {
-      const mod = (await import(`./exports/${exportName}.tsx`)) as Record<string, unknown>
+      const mod: Record<string, unknown> = await import(`./exports/${exportName}.tsx`)
 
       // The named export is the PascalCase name *with* the `Icon` suffix, e.g.
       // `@sanity/icons/AccessDenied` exports `AccessDeniedIcon`.
@@ -43,6 +43,9 @@ describe('per-icon subpath exports', () => {
       // Icons are `React.forwardRef` components (not plain functions relying on React 19's
       // ref-as-prop model) so refs attach on React 18 too.
       const named = mod[namedExport]
+      // The module's export type is unknown to TS here – its runtime shape is
+      // exactly what this test asserts.
+      // oxlint-disable-next-line typescript/no-unsafe-type-assertion
       expect(isForwardRef(createElement(named as ComponentType))).toBe(true)
 
       // The default export backs both `React.lazy(() => import('@sanity/icons/AccessDenied'))`

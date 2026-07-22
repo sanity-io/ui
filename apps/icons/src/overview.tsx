@@ -198,14 +198,14 @@ export default function OverviewStory() {
   )
 }
 
-function CodeSnippet({icon}: {icon: string}) {
+function CodeSnippet({icon}: {icon: IconSymbol}) {
   const code = getImportCode(icon)
 
   return (
     <Card border overflow="hidden" radius={2}>
       <Flex align="center" gap={4} padding={4}>
         <Heading>
-          <Icon symbol={icon as IconSymbol} />
+          <Icon symbol={icon} />
         </Heading>
         <Text>{icon}</Text>
         <Box flex={1} />
