@@ -12,6 +12,7 @@
   "scripts": {
     "build": "pnpm sanity:build && pnpm next:build",
     "dev": "pnpm run \"/:dev$/\"",
+    "embeddings:enable": "sanity datasets embeddings enable production --projection '{ filename, namedExport, tags, description }' --wait",
     "next:build": "next build --turbopack",
     "next:dev": "next dev --turbopack",
     "prepare": "next typegen",
@@ -47,6 +48,7 @@
     "react-refractor": "catalog:",
     "refractor": "catalog:",
     "sanity": "catalog:",
+    "sanity-plugin-media": "^6.0.4",
     "server-only": "^0.0.1",
     "styled-components": "catalog:"
   },

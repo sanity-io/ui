@@ -8,7 +8,8 @@ export const iconType = defineType({
     defineField({
       name: 'filename',
       title: 'Filename',
-      description: 'The SVG filename as it exists in the `export/` directory, e.g. "add-user.svg".',
+      description:
+        'The SVG filename as it exists in the `packages/icons/export/` directory, e.g. "add-user.svg".',
       type: 'string',
       readOnly: true,
     }),

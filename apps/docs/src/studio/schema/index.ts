@@ -1,6 +1,7 @@
 import {SchemaPluginOptions} from 'sanity'
 
 import {articleType} from './article/article'
+import {iconType} from './icon'
 import {navItemType, navType} from './nav'
 import {screenType} from './screen'
 import {seoType} from './seo'
@@ -14,6 +15,7 @@ export const schema: SchemaPluginOptions = {
 
     // documents
     articleType,
+    iconType,
     navType,
     screenType,
     settingsType,
