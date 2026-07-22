@@ -2,6 +2,8 @@
 
 .DS_Store
 .env.local
+# Local Sanity CLI/blueprint state (e.g. .sanity/blueprint.config.json)
+.sanity
 dist
 etc
 node_modules

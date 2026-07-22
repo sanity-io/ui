@@ -7,6 +7,20 @@ content changes.
 
 ## Functions
 
+### `enrich-icon`
+
+Listens for created/updated `icon` documents on the `mos42crl.production`
+dataset that don't have a `description` yet (see
+`packages/icons/scripts/seed-icons-dataset.ts`, which clears it when an icon
+changes) and uses [Agent Actions](https://www.sanity.io/docs/agent-actions)
+to look at the rasterized icon preview and write a search-friendly
+`description` plus search `tags`, which power the semantic icon search on
+[icons.sanity.dev](https://icons.sanity.dev) (`apps/icons`).
+
+It resolves the schema as `_.schemas.production`, so the docs studio schema
+must be deployed (`pnpm --filter sanity-ui-docs exec sanity schema deploy`)
+for the agent actions to work.
+
 ### `invalidate-sync-tags`
 
 Listens for [sync tag invalidation events](https://www.sanity.io/docs/compute-and-ai/functions)

@@ -1,0 +1,32 @@
+name: Seed icons dataset
+
+# Syncs the icon documents (and their rasterized previews) in the docs Sanity
+# project from packages/icons/export/*.svg whenever a new @sanity/icons
+# version is tagged, so icons.sanity.dev search stays in step with the
+# published icon set. The seed is idempotent: unchanged icons are skipped, and
+# changed icons get their description/tags cleared so the enrich-icon Sanity
+# Function (apps/blueprints/docs) re-enriches them.
+
+on:
+  push:
+    tags:
+      - '@sanity/icons@*'
+  workflow_dispatch:
+
+concurrency:
+  group: seed-icons
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+      - run: pnpm --filter @sanity/icons seed:icons
+        env:
+          # Needs write access to the mos42crl/production dataset
+          SANITY_API_WRITE_TOKEN: ${{ secrets.SANITY_API_WRITE_TOKEN }}

@@ -1,5 +1,19 @@
 # @sanity/ui
 
+## 3.4.2
+
+### Patch Changes
+
+- Updated dependencies [[`18c0323`](https://github.com/sanity-io/ui/commit/18c03236ad559cff62c41ea103ce73154088e199)]:
+  - @sanity/icons@5.2.1
+
+## 3.4.1
+
+### Patch Changes
+
+- Updated dependencies [[`528c3c9`](https://github.com/sanity-io/ui/commit/528c3c9fc5360ba313c2fa73261e9b476cab3154)]:
+  - @sanity/color@3.0.7
+
 ## 3.4.0
 
 ### Minor Changes

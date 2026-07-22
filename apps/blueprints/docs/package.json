@@ -6,6 +6,7 @@
   "type": "module",
   "devDependencies": {
     "@sanity/blueprints": "catalog:",
+    "@sanity/client": "catalog:",
     "@sanity/functions": "catalog:",
     "@types/node": "catalog:"
   }

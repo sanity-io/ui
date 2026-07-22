@@ -72,6 +72,42 @@ export type Nav = {
   } & NavItem>;
 };
 
+export type Icon = {
+  _id: string;
+  _type: "icon";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  filename?: string;
+  namedExport?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  svgHash?: string;
+  tags?: Array<string>;
+  description?: string;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type Seo = {
   _type: "seo";
   title?: string;
@@ -153,22 +189,6 @@ export type Screen = {
     _key: string;
   }>;
   seo?: Seo;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type Article = {
@@ -316,6 +336,21 @@ export type Code = {
   highlightedLines?: Array<number>;
 };
 
+export type MediaTag = {
+  _id: string;
+  _type: "media.tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -413,13 +448,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type AllSanitySchemaTypes = Twitter | Og | SanityImageAssetReference | OgImage | Settings | Nav | Seo | ArticleReference | ScreenReference | NavItem | Screen | SanityImageCrop | SanityImageHotspot | Article | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint | Slug;
+export type AllSanitySchemaTypes = Twitter | Og | SanityImageAssetReference | OgImage | Settings | Nav | Icon | SanityImageCrop | SanityImageHotspot | Seo | ArticleReference | ScreenReference | NavItem | Screen | Article | Code | MediaTag | Slug | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
 // Source: src/lib/data/_global/query.ts
 // Variable: MAIN_NAV_QUERY
