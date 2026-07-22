@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm build:showcase",
+  "outputDirectory": "dist",
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}

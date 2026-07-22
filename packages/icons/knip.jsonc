@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/knip/schema-jsonc.json",
+  "entry": [
+    // Sanity Functions entry points, consumed by the Sanity runtime rather than
+    // through an import graph knip can follow.
+    "functions/*/index.ts",
+  ],
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 100,
+  "semi": false,
+  "singleQuote": true,
+  "bracketSpacing": false,
+  "quoteProps": "consistent",
+  "sortImports": true,
+  "sortPackageJson": {"sortScripts": true},
+  "ignorePatterns": ["dist/**", "pnpm-lock.yaml"],
+  "overrides": [
+    {
+      "files": [".changeset/*.md"],
+      "options": {"singleQuote": false}
+    }
+  ]
+}

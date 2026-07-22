@@ -1,0 +1,11 @@
+{
+  "extends": ["./tsconfig.settings", "@sanity/tsconfig/isolated-declarations"],
+  "include": ["./src"],
+  "exclude": [
+    "./src/**/__fixtures__",
+    "./src/**/__mocks__",
+    "./src/**/__workshop__",
+    "./src/**/*.test.ts",
+    "./src/**/*.test.tsx"
+  ]
+}

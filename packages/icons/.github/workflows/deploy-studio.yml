@@ -1,0 +1,29 @@
+name: Deploy Sanity Studio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sanity.config.ts'
+      - 'sanity.cli.ts'
+      - 'schemas/**'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-studio
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v1
+        with:
+          cache: true
+      - run: pnpm studio:deploy
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
