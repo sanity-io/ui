@@ -6,10 +6,7 @@ import {
   type ThemeColorSchemeKey,
 } from '@sanity/ui/theme'
 import {useContext, useMemo} from 'react'
-// A named `ThemeProvider` import would claim the name in the bundled dist
-// chunk, renaming this component's function to `ThemeProvider$1`.
-// oxlint-disable-next-line no-restricted-imports
-import * as styledComponents from 'styled-components'
+import {ThemeProvider as StyledThemeProvider} from 'styled-components'
 
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
@@ -57,7 +54,7 @@ export function ThemeProvider(props: ThemeProviderProps): React.JSX.Element {
 
   return (
     <ThemeContext.Provider value={themeContext}>
-      <styledComponents.ThemeProvider theme={theme}>{children}</styledComponents.ThemeProvider>
+      <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   )
 }
