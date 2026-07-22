@@ -1,32 +1,34 @@
 # @sanity/color
 
-## [3.0.6](https://github.com/sanity-io/color/compare/color-v3.0.5...color-v3.0.6) (2024-04-09)
+## 3.0.7
 
+### Patch Changes
+
+- [#2417](https://github.com/sanity-io/ui/pull/2417) [`528c3c9`](https://github.com/sanity-io/ui/commit/528c3c9fc5360ba313c2fa73261e9b476cab3154) Thanks [@stipsan](https://github.com/stipsan)! - `@sanity/color` is now developed and published from the [sanity-io/ui](https://github.com/sanity-io/ui) monorepo (`packages/color`), with the full git history of the [sanity-io/color](https://github.com/sanity-io/color) repository preserved. The package is now built with tsdown and released with changesets. The public API is unchanged.
+
+## [3.0.6](https://github.com/sanity-io/color/compare/color-v3.0.5...color-v3.0.6) (2024-04-09)
 
 ### Bug Fixes
 
-* improve esm.sh compat ([6193876](https://github.com/sanity-io/color/commit/61938762c54621c862c8d403a573581361e92385))
+- improve esm.sh compat ([6193876](https://github.com/sanity-io/color/commit/61938762c54621c862c8d403a573581361e92385))
 
 ## [3.0.5](https://github.com/sanity-io/color/compare/color-v3.0.4...color-v3.0.5) (2024-04-05)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @sanity/pkg-utils to v5.1.11 ([#97](https://github.com/sanity-io/color/issues/97)) ([29d198a](https://github.com/sanity-io/color/commit/29d198a57905052f74c2c8e039fb953776c5cd45))
+- **deps:** update dependency @sanity/pkg-utils to v5.1.11 ([#97](https://github.com/sanity-io/color/issues/97)) ([29d198a](https://github.com/sanity-io/color/commit/29d198a57905052f74c2c8e039fb953776c5cd45))
 
 ## [3.0.4](https://github.com/sanity-io/color/compare/color-v3.0.3...color-v3.0.4) (2024-04-02)
 
-
 ### Bug Fixes
 
-* **deps:** update dependency @sanity/icons to ^2.11.4 ([#78](https://github.com/sanity-io/color/issues/78)) ([c827ae9](https://github.com/sanity-io/color/commit/c827ae9e2c0dab5993ac8eb5a91e4440e32dacf4))
+- **deps:** update dependency @sanity/icons to ^2.11.4 ([#78](https://github.com/sanity-io/color/issues/78)) ([c827ae9](https://github.com/sanity-io/color/commit/c827ae9e2c0dab5993ac8eb5a91e4440e32dacf4))
 
 ## [3.0.3](https://github.com/sanity-io/color/compare/color-v3.0.2...color-v3.0.3) (2024-04-02)
 
-
 ### Bug Fixes
 
-* **deps:** update `@sanity/pkg-utils` to `5.1.6` ([0ce3260](https://github.com/sanity-io/color/commit/0ce3260e48c8b9075a3153824f20a6b3aa4685b7))
+- **deps:** update `@sanity/pkg-utils` to `5.1.6` ([0ce3260](https://github.com/sanity-io/color/commit/0ce3260e48c8b9075a3153824f20a6b3aa4685b7))
 
 ## [3.0.2](https://github.com/sanity-io/color/compare/color-v3.0.1...color-v3.0.2) (2024-03-20)
 
