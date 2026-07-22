@@ -1,5 +1,5 @@
 import {hexToRgb, HSL, hslToRgb, rgbToHex, rgbToHsl} from '@sanity/color'
-import {Code, Flex, Stack, TextInput, Tooltip} from '@sanity/ui'
+import {Box, Code, Flex, Stack, TextInput, Tooltip} from '@sanity/ui'
 import {
   ChangeEvent,
   KeyboardEvent as ReactKeyboardEvent,
@@ -30,10 +30,6 @@ const Handle = styled.button<{$color: string}>`
   &:focus {
     outline: ${({$color}) => `2px solid ${$color}`};
   }
-`
-
-const StyledTextInput = styled(TextInput)`
-  flex: 1;
 `
 
 function clamp(value: number, min: number, max: number) {
@@ -93,21 +89,27 @@ export function HSLSlider(props: {onChange: (hsl: HSL) => void; value: HSL}): Re
       </div>
 
       <Stack gap={1} padding={1}>
+        {/* TextInput forwards className (and thus styled-components styles) to
+            the inner <input>, so flex sizing has to live on Box wrappers */}
         <Flex gap={1}>
-          <StyledTextInput fontSize={0} padding={1} readOnly value={String(h)} />
-          <StyledTextInput fontSize={0} padding={1} readOnly value={String(s)} />
-          <StyledTextInput fontSize={0} padding={1} readOnly value={String(l)} />
+          <Box flex={1}>
+            <TextInput fontSize={0} padding={1} readOnly value={String(h)} />
+          </Box>
+          <Box flex={1}>
+            <TextInput fontSize={0} padding={1} readOnly value={String(s)} />
+          </Box>
+          <Box flex={1}>
+            <TextInput fontSize={0} padding={1} readOnly value={String(l)} />
+          </Box>
         </Flex>
-        <Flex gap={1}>
-          <StyledTextInput
-            fontSize={0}
-            onBlur={() => setHexDraft(null)}
-            onChange={handleHexChange}
-            onFocus={(event) => setHexDraft(event.currentTarget.value)}
-            padding={1}
-            value={hexDraft ?? hexValue}
-          />
-        </Flex>
+        <TextInput
+          fontSize={0}
+          onBlur={() => setHexDraft(null)}
+          onChange={handleHexChange}
+          onFocus={(event) => setHexDraft(event.currentTarget.value)}
+          padding={1}
+          value={hexDraft ?? hexValue}
+        />
       </Stack>
     </div>
   )
