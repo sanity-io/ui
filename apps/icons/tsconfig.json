@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.settings.json",
+  "include": ["./src", "./vite.config.ts"],
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "jsx": "react-jsx"
+  }
+}

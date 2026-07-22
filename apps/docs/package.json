@@ -12,11 +12,13 @@
   "scripts": {
     "build": "pnpm sanity:build && pnpm next:build",
     "dev": "pnpm run \"/:dev$/\"",
+    "embeddings:enable": "sanity datasets embeddings enable production --projection '{ filename, namedExport, tags, description }' --wait",
     "next:build": "next build --turbopack",
     "next:dev": "next dev --turbopack",
     "prepare": "next typegen",
     "sanity:build": "sanity build public/studio",
     "sanity:dev": "sanity dev",
+    "schema:deploy": "sanity schema deploy",
     "start": "next start",
     "test": "vitest",
     "typecheck": "tsc --build"
@@ -28,7 +30,7 @@
     "@sanity/client": "catalog:",
     "@sanity/code-input": "^7.2.10",
     "@sanity/color": "workspace:*",
-    "@sanity/icons": "catalog:",
+    "@sanity/icons": "workspace:*",
     "@sanity/image-url": "^2.1.1",
     "@sanity/logos": "workspace:*",
     "@sanity/ui": "workspace:*",
@@ -47,6 +49,7 @@
     "react-refractor": "catalog:",
     "refractor": "catalog:",
     "sanity": "catalog:",
+    "sanity-plugin-media": "^6.0.4",
     "server-only": "^0.0.1",
     "styled-components": "catalog:"
   },
