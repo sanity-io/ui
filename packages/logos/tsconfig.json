@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.settings",
+  "include": ["./package.config.ts", "./src", "./workshop.config.ts"],
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  }
+}
