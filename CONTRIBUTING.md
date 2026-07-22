@@ -2,7 +2,8 @@
 
 This repository is a pnpm monorepo. The published `@sanity/ui` package lives in
 [`packages/ui`](packages/ui), the published `@sanity/icons` package lives in
-[`packages/icons`](packages/icons), the Figma plugin lives in
+[`packages/icons`](packages/icons), the published `@sanity/logos` package lives
+in [`packages/logos`](packages/logos), the Figma plugin lives in
 [`packages/figma`](packages/figma), the Storybook lives in
 [`apps/storybook`](apps/storybook), the [sanity.io/ui](https://www.sanity.io/ui)
 docs site lives in [`apps/docs`](apps/docs), and the

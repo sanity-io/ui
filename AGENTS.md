@@ -4,8 +4,10 @@
 
 This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
 the published `@sanity/ui` package lives in `packages/ui`, the published
-`@sanity/icons` icon library in `packages/icons`, the Figma plugin in
-`packages/figma`, the Storybook app in `apps/storybook`, the
+`@sanity/icons` icon library in `packages/icons`, the published
+`@sanity/logos` package (Sanity/GROQ logo components, migrated from the
+standalone `sanity-io/logos` repo with full git history) in `packages/logos`,
+the Figma plugin in `packages/figma`, the Storybook app in `apps/storybook`, the
 sanity.io/ui docs site (a Next.js app with an embedded Sanity Studio) in
 `apps/docs`, the icons.sanity.dev icon showcase (a Vite SPA) in `apps/icons`,
 and a Sanity Blueprint (serverless functions for the docs site)
@@ -37,11 +39,11 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `ignoreDependencies` entry that no longer matches anything) also fails the
   run.
 - Packages are built with [tsdown](https://tsdown.dev) via
-  `@sanity/tsdown-config` (`tsdown.config.mts` in `packages/ui` and
-  `packages/figma` — the `.mts` extension is required because those packages
-  are not `"type": "module"` and the Node version in CI cannot import TS
-  config files otherwise; `packages/icons` is `"type": "module"` and uses a
-  plain `tsdown.config.ts`). The build regenerates package.json `exports`
+  `@sanity/tsdown-config` (`tsdown.config.mts` in `packages/ui`,
+  `packages/figma` and `packages/logos` — the `.mts` extension is required
+  where the package is not `"type": "module"` and the Node version in CI
+  cannot import TS config files otherwise; `packages/icons` is
+  `"type": "module"` and uses a plain `tsdown.config.ts`). The build regenerates package.json `exports`
   (dev exports): in the monorepo, `@sanity/ui`, `@sanity/ui/theme` and
   `@sanity/icons` (incl. its per-icon subpaths) resolve directly to
   TypeScript source for every tool (tsc, oxlint's type checker, vitest,

@@ -1,0 +1,67 @@
+{
+  "name": "@sanity/logos",
+  "version": "2.2.2",
+  "keywords": [
+    "logos",
+    "sanity",
+    "ui"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/ui/issues"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/ui.git",
+    "directory": "packages/logos"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      },
+      "./package.json": "./package.json"
+    },
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf dist",
+    "prepack": "pnpm build",
+    "watch": "tsdown --watch"
+  },
+  "dependencies": {
+    "@sanity/color": "catalog:"
+  },
+  "devDependencies": {
+    "@sanity/tsdown-config": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "rimraf": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "unrun": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "^18.3 || ^19.0.0-0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
