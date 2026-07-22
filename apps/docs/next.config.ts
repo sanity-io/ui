@@ -12,10 +12,10 @@ const nextConfig: NextConfig = {
   cacheLife: {default: sanity},
   // Matches the behavior of `sanity dev` which sets styled-components to use the fastest way of inserting CSS rules in both dev and production. It's default behavior is to disable it in dev mode.
   compiler: {styledComponents: true, define: {SC_DISABLE_SPEEDY: 'false'}},
-  // The workspace @sanity/logos and @sanity/ui packages resolve to their
-  // TypeScript source in the monorepo (dev `exports`), so Next.js must
-  // transpile them.
-  transpilePackages: ['@sanity/logos', '@sanity/ui'],
+  // The workspace @sanity/color, @sanity/logos and @sanity/ui packages resolve
+  // to their TypeScript source in the monorepo (dev `exports`), so Next.js
+  // must transpile them.
+  transpilePackages: ['@sanity/color', '@sanity/logos', '@sanity/ui'],
   reactCompiler: true,
   experimental: {
     // Use the native Rust port of the React Compiler (runs directly on

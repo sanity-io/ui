@@ -8,6 +8,11 @@
       "entry": ["sanity.blueprint.ts", "functions/*/index.ts"],
     },
     "apps/docs": {},
+    "packages/color": {
+      // The palette generator is invoked via the package's `generate` script,
+      // not imported by application code
+      "entry": ["scripts/generate.ts"],
+    },
     "packages/ui": {
       "ignoreDependencies": [
         // babel-plugin-react-compiler (target '18') injects imports of this runtime

@@ -14,7 +14,7 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
-    "@sanity/color": "catalog:",
+    "@sanity/color": "workspace:*",
     "@sanity/icons": "catalog:",
     "@sanity/logos": "workspace:*",
     "@sanity/ui": "workspace:*",
