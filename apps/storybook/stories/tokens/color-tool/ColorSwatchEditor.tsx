@@ -4,6 +4,7 @@ import {Dispatch, ReactNode, useState} from 'react'
 
 import {ColorPreview} from './ColorPreview'
 import {Connectors} from './Connectors'
+import {SLIDER_GAP} from './constants'
 import {HSLSlider} from './HSLSlider'
 import {ColorToolMsg, ColorToolSwatch} from './types'
 
@@ -51,7 +52,9 @@ export function ColorSwatchesEditor(props: {
       {expanded && (
         <div ref={setWrapper} style={{position: 'relative'}}>
           <Connectors swatches={swatches} wrapper={wrapper} />
-          <Flex gap={1}>
+          {/* Gap in px from the shared constant so the connector geometry
+              always matches the column layout */}
+          <Flex style={{gap: SLIDER_GAP}}>
             {swatches.map((t) => (
               <HSLSlider
                 key={t.key}

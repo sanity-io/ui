@@ -1,7 +1,7 @@
 import {useElementSize} from '@sanity/ui'
 import {ReactNode} from 'react'
 
-import {CHANNEL_COLORS, SLIDER_H} from './constants'
+import {CHANNEL_COLORS, SLIDER_GAP, SLIDER_H} from './constants'
 import {ColorToolSwatch} from './types'
 
 /** Lines connecting the H, S and L handle positions across the tint sliders */
@@ -12,8 +12,11 @@ export function Connectors(props: {
   const {swatches, wrapper} = props
   const size = useElementSize(wrapper)
   const w = size?.border.width ?? 0
-  const cellW = w / swatches.length
-  const H = cellW / 2
+
+  // The slider row is a flex layout of equally sized columns with
+  // SLIDER_GAP px between them; the lines must hit each column's center
+  const cellW = (w - SLIDER_GAP * (swatches.length - 1)) / swatches.length
+  const centerX = (index: number) => index * (cellW + SLIDER_GAP) + cellW / 2
 
   // No valid geometry until the wrapper has been measured
   if (!w) return null
@@ -30,7 +33,7 @@ export function Connectors(props: {
           .map((t, i) => {
             const command = i === 0 ? 'M' : 'L'
 
-            return `${command}${cellW * i + H},${(t.hsl[0] / 360) * SLIDER_H + 6}`
+            return `${command}${centerX(i)},${(t.hsl[0] / 360) * SLIDER_H + 6}`
           })
           .join(' ')}
         stroke={CHANNEL_COLORS.h}
@@ -42,7 +45,7 @@ export function Connectors(props: {
           .map((t, i) => {
             const command = i === 0 ? 'M' : 'L'
 
-            return `${command}${cellW * i + H},${(t.hsl[1] / 100) * SLIDER_H + 6}`
+            return `${command}${centerX(i)},${(t.hsl[1] / 100) * SLIDER_H + 6}`
           })
           .join(' ')}
         stroke={CHANNEL_COLORS.s}
@@ -54,7 +57,7 @@ export function Connectors(props: {
           .map((t, i) => {
             const command = i === 0 ? 'M' : 'L'
 
-            return `${command}${cellW * i + H},${(t.hsl[2] / 100) * SLIDER_H + 6}`
+            return `${command}${centerX(i)},${(t.hsl[2] / 100) * SLIDER_H + 6}`
           })
           .join(' ')}
         stroke={CHANNEL_COLORS.l}
