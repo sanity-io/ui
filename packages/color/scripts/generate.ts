@@ -1,22 +1,18 @@
-import {writeFileSync, readFileSync} from 'fs'
-import path from 'path'
-import {format} from 'prettier'
-import {COLOR_HUES, ColorHueKey, buildTints, config, hslToRgb, rgbToHex} from '../src'
+import {writeFileSync} from 'node:fs'
+import path from 'node:path'
+import {fileURLToPath} from 'node:url'
 
-const ROOT_PATH = path.resolve(__dirname, '..')
+import {buildTints, COLOR_HUES, ColorHueKey, config, hslToRgb, rgbToHex} from '../src'
+
+const ROOT_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 
 const GENERATED_BANNER = `/* THIS FILE IS AUTO-GENERATED – DO NOT EDIT */`
 
-generate().catch((err) => {
-  // eslint-disable-next-line no-console
-  console.error(err)
-  process.exit(1)
-})
-
 /**
- * Generates `src/color.ts` based on `COLOR_HUES` constant + values in `src/config.js`
+ * Generates `src/color.ts` based on the `COLOR_HUES` constant + values in `src/config.ts`.
+ * The output is formatted with oxfmt by the `generate` package script.
  */
-async function generate() {
+function generate() {
   // Actual "template" to output
   const tpl = `${GENERATED_BANNER}
 
@@ -43,13 +39,11 @@ export const hues: ColorHues = {${COLOR_HUES.join(', ')}};
 export const color: Color = {black, white, ...hues};
 `
 
-  // Format generated file with prettier so it can be commited without us being ashamed
-  const prettierConfig = JSON.parse(readFileSync(path.resolve(ROOT_PATH, '.prettierrc'), 'utf8'))
-  const filepath = path.resolve(__dirname, '../src/color.ts')
+  const filepath = path.resolve(ROOT_PATH, 'src/color.ts')
 
-  writeFileSync(filepath, await format(tpl, {filepath, ...prettierConfig}), {encoding: 'utf8'})
+  writeFileSync(filepath, tpl, {encoding: 'utf8'})
 
-  // eslint-disable-next-line no-console
+  // oxlint-disable-next-line no-console
   console.log('generated', path.relative(ROOT_PATH, filepath))
 }
 
@@ -64,3 +58,5 @@ function buildHueExport(hue: ColorHueKey) {
 
   return `/** @public */\nexport const ${hue}: ColorTints = ${JSON.stringify(tints, null, 2)}`
 }
+
+generate()

@@ -1,17 +1,10 @@
 {
-  "extends": "../../../tsconfig.settings",
+  "extends": "../../tsconfig.settings.json",
   "include": ["./src"],
-  "exclude": [
-    "./src/**/__fixtures__",
-    "./src/**/__mocks__",
-    "./src/**/__workshop__",
-    "./src/**/*.test.ts",
-    "./src/**/*.test.tsx"
-  ],
+  "exclude": ["./src/**/*.test.ts"],
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "./dist",
     "sourceMap": true,
-    "emitDeclarationOnly": false
+    "rootDir": ".",
+    "outDir": "./dist"
   }
 }

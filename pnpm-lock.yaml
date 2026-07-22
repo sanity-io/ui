@@ -12,9 +12,6 @@ catalogs:
     '@sanity/client':
       specifier: ^7.24.0
       version: 7.24.0
-    '@sanity/color':
-      specifier: ^3.0.6
-      version: 3.0.6
     '@sanity/functions':
       specifier: ^1.4.0
       version: 1.4.0
@@ -137,8 +134,8 @@ importers:
         specifier: ^7.2.10
         version: 7.2.10(716854695e74c79b542c4442a42b94ee)
       '@sanity/color':
-        specifier: 'catalog:'
-        version: 3.0.6
+        specifier: workspace:*
+        version: link:../../packages/color
       '@sanity/icons':
         specifier: 'catalog:'
         version: 5.2.0(react@19.2.7)
@@ -237,8 +234,8 @@ importers:
   apps/storybook:
     devDependencies:
       '@sanity/color':
-        specifier: 'catalog:'
-        version: 3.0.6
+        specifier: workspace:*
+        version: link:../../packages/color
       '@sanity/icons':
         specifier: 'catalog:'
         version: 5.2.0(react@19.2.7)
@@ -321,6 +318,30 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(vitest@4.1.10)
 
+  packages/color:
+    devDependencies:
+      '@sanity/tsdown-config':
+        specifier: 'catalog:'
+        version: 0.19.6(@babel/runtime@7.29.7)(babel-plugin-react-compiler@1.0.0)(rolldown@1.2.0)(tsdown@0.22.12(oxc-resolver@11.24.2)(publint@0.3.21)(tsx@4.23.1)(typescript@6.0.3)(unrun@0.3.1))(typescript@6.0.3)(vite@8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.13.3
+      rimraf:
+        specifier: 'catalog:'
+        version: 5.0.10
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.22.12(oxc-resolver@11.24.2)(publint@0.3.21)(tsx@4.23.1)(typescript@6.0.3)(unrun@0.3.1)
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      unrun:
+        specifier: 'catalog:'
+        version: 0.3.1
+      vitest:
+        specifier: 'catalog:'
+        version: 4.1.10(@types/node@24.13.3)(@vitest/browser-playwright@4.1.10)(jsdom@29.1.1(@noble/hashes@2.2.0))(vite@8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))
+
   packages/figma:
     devDependencies:
       '@figma/plugin-typings':
@@ -354,8 +375,8 @@ importers:
         specifier: ^3.4.0
         version: 3.4.0
       '@sanity/color':
-        specifier: 'catalog:'
-        version: 3.0.6
+        specifier: workspace:^
+        version: link:../color
       '@sanity/icons':
         specifier: 'catalog:'
         version: 5.2.0(react@19.2.7)
@@ -3618,10 +3639,6 @@ packages:
     peerDependenciesMeta:
       oxfmt:
         optional: true
-
-  '@sanity/color@3.0.6':
-    resolution: {integrity: sha512-2TjYEvOftD0v7ukx3Csdh9QIu44P2z7NDJtlC3qITJRYV36J7R6Vfd3trVhFnN77/7CZrGjqngrtohv8VqO5nw==}
-    engines: {node: '>=18.0.0'}
 
   '@sanity/comlink@4.0.1':
     resolution: {integrity: sha512-vdGOd6sxNjqTo2H3Q3L2/Gepy+cDBiQ1mr9ck7c/A9o4NnmBLoDliifsNHIwgNwBUz37oH4+EIz/lIjNy8hSew==}
@@ -11029,8 +11046,6 @@ snapshots:
       - react
       - supports-color
 
-  '@sanity/color@3.0.6': {}
-
   '@sanity/comlink@4.0.1':
     dependencies:
       rxjs: 7.8.2
@@ -11139,7 +11154,7 @@ snapshots:
 
   '@sanity/logos@2.2.2(react@19.2.7)':
     dependencies:
-      '@sanity/color': 3.0.6
+      '@sanity/color': link:packages/color
       react: 19.2.7
 
   '@sanity/media-library-types@1.6.0': {}
@@ -11411,7 +11426,7 @@ snapshots:
       '@lezer/highlight': 1.2.3
       '@rexxars/react-json-inspector': 9.0.1(react@19.2.7)
       '@rexxars/react-split-pane': 1.0.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@sanity/color': 3.0.6
+      '@sanity/color': link:packages/color
       '@sanity/icons': 5.2.0(react@19.2.7)
       '@sanity/lezer-groq': 1.0.4
       '@sanity/ui': link:packages/ui
@@ -14647,7 +14662,7 @@ snapshots:
       '@sanity/bifur-client': 1.0.0
       '@sanity/cli': 7.9.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.2.0)(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.0)(vite@8.1.5(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)))(@types/node@24.13.3)(@types/react@19.2.17)(babel-plugin-react-compiler@1.0.0)(esbuild@0.28.1)(jiti@2.7.0)(oxfmt@0.59.0)(rolldown@1.2.0)(typescript@6.0.3)(xstate@5.32.5)
       '@sanity/client': 7.24.0
-      '@sanity/color': 3.0.6
+      '@sanity/color': link:packages/color
       '@sanity/comlink': 4.0.1
       '@sanity/diff': 6.5.0
       '@sanity/diff-match-patch': 3.2.0

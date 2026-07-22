@@ -32,7 +32,6 @@
     "unrun": "catalog:"
   },
   "inlinedDependencies": {
-    "@sanity/color": "3.0.6",
     "segmented-property": "4.0.0"
   }
 }

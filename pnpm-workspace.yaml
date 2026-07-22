@@ -14,7 +14,6 @@ strictPeerDependencies: false
 catalog:
   '@sanity/blueprints': ^0.22.0
   '@sanity/client': ^7.24.0
-  '@sanity/color': ^3.0.6
   '@sanity/functions': ^1.4.0
   '@sanity/icons': ^5.2.0
   '@sanity/tsdown-config': ^0.19.6

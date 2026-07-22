@@ -11,6 +11,7 @@ export function buildTints(options: {
 }): ColorTints {
   const {hueKey, color} = options
 
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- the reduce assigns every COLOR_TINTS key, so the Partial is complete
   return COLOR_TINTS.reduce<Partial<ColorTints>>((acc, tintKey) => {
     const tint = Number(tintKey)
     const rgb = hslToRgb(color.tints[tintKey].hsl)

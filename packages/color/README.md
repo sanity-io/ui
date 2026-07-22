@@ -32,4 +32,4 @@ console.log(COLOR_TINTS)
 
 ## License
 
-MIT-licensed. See LICENSE.
+MIT-licensed. See [LICENSE](https://github.com/sanity-io/ui/blob/main/LICENSE).
