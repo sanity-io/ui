@@ -226,8 +226,6 @@ function MenuGroupComponent(
   )
 }
 
-MenuGroupComponent.displayName = 'MenuGroup'
-
 /**
  * @public
  */

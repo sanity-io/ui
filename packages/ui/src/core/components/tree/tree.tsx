@@ -239,4 +239,3 @@ export const Tree = forwardRef(function Tree(
     </TreeContext.Provider>
   )
 })
-Tree.displayName = 'ForwardRef(Tree)'

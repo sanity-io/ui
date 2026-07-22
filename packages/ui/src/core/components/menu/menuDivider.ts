@@ -8,7 +8,6 @@ const StyledMenuDivider = styled.hr`
   background: var(--card-hairline-soft-color);
   margin: 0;
 `
-StyledMenuDivider.displayName = 'MenuDivider'
 
 /**
  * @public

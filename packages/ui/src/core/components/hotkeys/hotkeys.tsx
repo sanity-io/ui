@@ -65,4 +65,3 @@ export const Hotkeys = forwardRef(function Hotkeys(
     </StyledHotkeys>
   )
 })
-Hotkeys.displayName = 'ForwardRef(Hotkeys)'

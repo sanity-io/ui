@@ -109,5 +109,3 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
     </ToastContext.Provider>
   )
 }
-
-ToastProvider.displayName = 'ToastProvider'

@@ -96,4 +96,3 @@ export const Layer = forwardRef(function Layer(
     </LayerProvider>
   )
 })
-Layer.displayName = 'ForwardRef(Layer)'

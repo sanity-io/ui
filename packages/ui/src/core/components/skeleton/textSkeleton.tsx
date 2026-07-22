@@ -71,7 +71,6 @@ export const TextSkeleton = forwardRef(function TextSkeleton(
 
   return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="text" />
 })
-TextSkeleton.displayName = 'ForwardRef(TextSkeleton)'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -87,7 +86,6 @@ export const LabelSkeleton = forwardRef(function TextSkeleton(
 
   return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="label" />
 })
-LabelSkeleton.displayName = 'ForwardRef(LabelSkeleton)'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -103,7 +101,6 @@ export const HeadingSkeleton = forwardRef(function TextSkeleton(
 
   return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="heading" />
 })
-HeadingSkeleton.displayName = 'ForwardRef(HeadingSkeleton)'
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -119,4 +116,3 @@ export const CodeSkeleton = forwardRef(function TextSkeleton(
 
   return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="code" />
 })
-CodeSkeleton.displayName = 'ForwardRef(CodeSkeleton)'

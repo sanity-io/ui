@@ -79,7 +79,6 @@ const HeadingComponent = forwardRef(function Heading(
     </StyledHeading>
   )
 })
-HeadingComponent.displayName = 'ForwardRef(Heading)'
 
 /**
  * Typographic headings.

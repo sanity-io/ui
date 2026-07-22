@@ -43,4 +43,3 @@ export const Spinner = forwardRef(function Spinner(
     </StyledSpinner>
   )
 })
-Spinner.displayName = 'ForwardRef(Spinner)'

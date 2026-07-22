@@ -88,4 +88,3 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
     </StyledAvatarCounter>
   )
 })
-AvatarCounter.displayName = 'ForwardRef(AvatarCounter)'

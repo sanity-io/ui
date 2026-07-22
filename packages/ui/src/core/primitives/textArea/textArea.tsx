@@ -117,4 +117,3 @@ export const TextArea = forwardRef(function TextArea(
     </StyledTextArea>
   )
 })
-TextArea.displayName = 'ForwardRef(TextArea)'

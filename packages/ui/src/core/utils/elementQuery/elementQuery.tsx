@@ -50,4 +50,3 @@ export const ElementQuery = forwardRef(function ElementQuery(
     </div>
   )
 })
-ElementQuery.displayName = 'ForwardRef(ElementQuery)'
