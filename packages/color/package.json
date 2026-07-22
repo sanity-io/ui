@@ -1,10 +1,11 @@
 {
-  "name": "@sanity/logos",
-  "version": "2.2.3",
+  "name": "@sanity/color",
+  "version": "3.0.6",
+  "description": "The Sanity color palette.",
   "keywords": [
-    "logos",
-    "sanity",
-    "ui"
+    "color",
+    "palette",
+    "sanity"
   ],
   "homepage": "https://www.sanity.io/",
   "bugs": {
@@ -15,16 +16,15 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sanity-io/ui.git",
-    "directory": "packages/logos"
+    "directory": "packages/color"
   },
   "files": [
     "dist"
   ],
-  "type": "module",
   "sideEffects": false,
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.cts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
     "./package.json": "./package.json"
@@ -32,36 +32,34 @@
   "publishConfig": {
     "exports": {
       ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js"
       },
       "./package.json": "./package.json"
-    },
-    "access": "public"
+    }
   },
   "scripts": {
     "build": "tsdown",
     "clean": "rimraf dist",
+    "generate": "unrun scripts/generate.ts && pnpm --workspace-root exec oxfmt packages/color/src/color.ts",
     "prepack": "pnpm build",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "watch": "tsdown --watch"
-  },
-  "dependencies": {
-    "@sanity/color": "workspace:^"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
     "@types/node": "catalog:",
-    "@types/react": "catalog:",
-    "react": "catalog:",
     "rimraf": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
-    "unrun": "catalog:"
-  },
-  "peerDependencies": {
-    "react": "^18.3 || ^19.0.0-0"
+    "unrun": "catalog:",
+    "vitest": "catalog:"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
+  },
+  "esm.sh": {
+    "bundle": false
   }
 }

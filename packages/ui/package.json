@@ -71,7 +71,7 @@
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.9",
     "@juggle/resize-observer": "^3.4.0",
-    "@sanity/color": "catalog:",
+    "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
     "csstype": "^3.2.3",
     "motion": "^12.42.2",

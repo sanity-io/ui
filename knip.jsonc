@@ -9,6 +9,11 @@
     },
     "apps/docs": {},
     "apps/icons": {},
+    "packages/color": {
+      // The palette generator is invoked via the package's `generate` script,
+      // not imported by application code
+      "entry": ["scripts/generate.ts"],
+    },
     "packages/icons": {
       // The generate/seed package.json scripts run these through unrun, which
       // knip does not recognize as a script runner

@@ -1,5 +1,11 @@
 # @sanity/logos
 
+## 2.2.3
+
+### Patch Changes
+
+- [#2416](https://github.com/sanity-io/ui/pull/2416) [`9ab5ea4`](https://github.com/sanity-io/ui/commit/9ab5ea4e3799eab954178f6d5edbbfc5c5c0611e) Thanks [@stipsan](https://github.com/stipsan)! - `@sanity/logos` now lives in the [`sanity-io/ui` monorepo](https://github.com/sanity-io/ui) and is released with Changesets. The components are unchanged; this release updates the package metadata to point at the new repository location and switches the build tooling to tsdown.
+
 ## [2.2.2](https://github.com/sanity-io/logos/compare/v2.2.1...v2.2.2) (2025-08-06)
 
 ### Bug Fixes
