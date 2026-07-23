@@ -5,6 +5,9 @@
   "description": "Figma plugin for syncing from `@sanity/color` to color styles and variables in Figma.",
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "sideEffects": false,
   "types": "./dist/index.d.ts",
