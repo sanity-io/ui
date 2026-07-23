@@ -15,19 +15,23 @@ Published packages installable from npm.
 
 Internal apps — not published.
 
-| App                                                      | Description                                                                               |
-| -------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| [`apps/storybook`](./apps/storybook)                     | Component stories. Browse variants, test props, verify visual behavior.                   |
-| [`apps/performance-testing`](./apps/performance-testing) | Render benchmarks. Compares v3 and v4 render times across component counts.               |
-| [`apps/frameworks`](./apps/frameworks)                   | E2E tests across Next.js, React Router, and Vite to verify cross-framework compatibility. |
+| App                                          | Description                                                                               |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| [`apps/storybook`](./apps/storybook)         | Component stories. Browse variants, test props, verify visual behavior.                   |
+| [`apps/depth-testing`](./apps/depth-testing) | DOM depth comparison. Compares the DOM each library emits between v3 and the POC.         |
+| [`apps/inp-testing`](./apps/inp-testing)     | INP comparison. Compares avg, max, and current INP between v3 and the POC.                |
+| [`apps/mount-testing`](./apps/mount-testing) | Mount time comparison. Compares v3 and v4 mount times across component counts.            |
+| [`apps/frameworks`](./apps/frameworks)       | E2E tests across Next.js, React Router, and Vite to verify cross-framework compatibility. |
 
 ## Repo structure
 
 ```
 ui-poc/
 ├── apps/
+│   ├── depth-testing/       # DOM depth testing app
 │   ├── frameworks/          # E2E tests across Next, React Router, Vite
-│   ├── performance-testing/ # Render benchmarks
+│   ├── inp-testing/         # INP testing app
+│   ├── mount-testing/       # Mount performance testing app
 │   └── storybook/           # Component stories
 ├── packages/
 │   ├── @repo/

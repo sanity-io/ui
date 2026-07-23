@@ -12,7 +12,7 @@
     "ui-poc-next",
     "ui-poc-react-router",
     "ui-poc-vite",
-    "ui-poc-performance-testing",
+    "ui-poc-mount-testing",
     "ui-poc-storybook"
   ]
 }

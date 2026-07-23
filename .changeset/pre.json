@@ -2,7 +2,7 @@
   "mode": "pre",
   "tag": "alpha",
   "initialVersions": {
-    "performance-testing": "0.0.0",
+    "mount-testing": "0.0.0",
     "ui-poc-storybook": "0.0.0",
     "@repo/eslint-config": "0.0.0",
     "@sanity-labs/ui-poc": "0.0.1-alpha.10",
@@ -10,8 +10,8 @@
     "ui-poc-frameworks": "1.0.0",
     "ui-poc-next": "0.1.0",
     "ui-poc-vite": "0.0.0",
-    "ui-poc-performance-testing": "0.0.0",
-    "inp-testing": "0.0.0"
+    "inp-testing": "0.0.0",
+    "depth-testing": "0.0.0"
   },
   "changesets": [
     "brave-knives-cross",
