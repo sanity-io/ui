@@ -15,7 +15,7 @@ catalog:
   '@sanity/blueprints': ^0.23.0
   '@sanity/client': ^7.24.0
   '@sanity/functions': ^1.4.0
-  '@sanity/tsdown-config': ^0.19.6
+  '@sanity/tsdown-config': ^0.21.0
   '@types/node': ^24.13.3
   '@types/react': ^19.2.17
   '@types/react-dom': ^19.2.3
