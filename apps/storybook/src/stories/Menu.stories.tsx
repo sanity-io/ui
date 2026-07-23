@@ -47,3 +47,25 @@ export const Default: Story = {
     await expect((await canvas.findByText('')).classList).toContain('')
   },
 }
+
+export const WithSubmenus: Story = {
+  render: (props) => {
+    return (
+      <Menu {...props} trigger={<Button text="Open Menu" />}>
+        <Menu.ButtonItem>Test link</Menu.ButtonItem>
+        <Menu.ButtonItem>Test link two</Menu.ButtonItem>
+        <Divider />
+        <Menu.ButtonItem start={<Icon size={1} marginLeft={-1} icon={ExpandIcon} />}>
+          Test link three
+        </Menu.ButtonItem>
+        <Menu.Submenu trigger={<Menu.ButtonItem>Open submenu</Menu.ButtonItem>}>
+          <Menu.ButtonItem>Submenu test linke one</Menu.ButtonItem>
+          <Menu.ButtonItem>Submenu test link two</Menu.ButtonItem>
+        </Menu.Submenu>
+      </Menu>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText('')).classList).toContain('')
+  },
+}

@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {type ComponentPropsWithRef, type ElementType} from 'react'
+import {cloneElement, useId, type ComponentPropsWithRef, type ElementType} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -8,6 +8,7 @@ import {Popover} from '../popover/Popover'
 import {type MenuProps, menuProps} from './menu.props'
 
 const menuClassName = suffixClassName('sui-Menu')
+const menuSubmenuClassName = suffixClassName('sui-Menu')
 // const menuContentClassName = suffixClassName('sui-MenuContent')
 
 function MenuRoot<T extends ElementType = 'div'>(
@@ -47,8 +48,54 @@ const MenuButtonItem: typeof List.ButtonItem = (props) => (
   />
 )
 
+function MenuSubmenu<T extends ElementType = 'div'>(
+  props: MenuProps<T> & Omit<ComponentPropsWithRef<T>, keyof MenuProps<T>>,
+) {
+  const {
+    children,
+    className,
+    style,
+    id: idProp,
+    trigger: triggerProp,
+    ...rest
+  } = getProps(props, menuProps)
+  const reactId = useId()
+  const id = idProp || reactId
+  const submenuId = `submenu-${id}`
+
+  const trigger = cloneElement(triggerProp, {
+    interestFor: submenuId,
+    style: {anchorName: `--anchor-${id}`},
+  })
+
+  return (
+    <>
+      {trigger}
+
+      <ul
+        className={clsx(
+          menuSubmenuClassName,
+          'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+          className,
+        )}
+        style={{
+          ...style,
+          positionAnchor: `--anchor-${id}`,
+        }}
+        data-ui="MenuSubmenu"
+        id={submenuId}
+        popover="hint"
+        {...rest}
+      >
+        {children}
+      </ul>
+    </>
+  )
+}
+
 /** @public */
 export const Menu = Object.assign(MenuRoot, {
   Item: MenuItem,
   ButtonItem: MenuButtonItem,
+  Submenu: MenuSubmenu,
 })
