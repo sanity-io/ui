@@ -54,6 +54,8 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   vitest, vite), so there are no tsconfig `paths`, no `customConditions`, and
   no vite aliases. The publishable `exports` (dist `import`/`require`) live
   under `publishConfig` and are applied by `pnpm pack`/`publish`.
+  `packages/ui` is `"type": "module"`, so the dist ESM build uses
+  `.js`/`.d.ts` and the dist CJS build `.cjs`/`.d.cts`.
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
   `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
   `@sanity/ui` resolves to the `packages/ui/exports/` source (and
@@ -112,9 +114,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `'use cache'` only on the cached layer). The app builds and devs with
   Turbopack and the native Rust React Compiler
   (`experimental.turbopackRustReactCompiler`). To make that work,
-  `packages/ui` and `apps/docs` omit the package.json `type` field: an
-  explicit `"type": "commonjs"` makes Turbopack refuse the ESM-syntax
-  TypeScript source that the dev `exports` resolve to. On-demand revalidation flows from
+  `packages/ui` is `"type": "module"` and `apps/docs` omits the package.json
+  `type` field: an explicit `"type": "commonjs"` makes Turbopack refuse the
+  ESM-syntax TypeScript source that the dev `exports` resolve to. On-demand revalidation flows from
   the Live Content API through the `invalidate-sync-tags` Sanity Function
   (defined in `apps/blueprints/docs`) to `POST /ui/api/expire-tags`, which
   calls `revalidateTag('sanity:<tag>', 'max')`; the route is guarded by the
