@@ -42,10 +42,13 @@ function UiPoc() {
         <Divider marginY={4} />
         <Box marginY={3}>
           <HStack gap={3}>
-            <Button>Make it so, Number One</Button>
-            <Button level="secondary" tone="critical">
-              Belay that order, Commander
-            </Button>
+            <Button density="loose" text="Make it so, Number One" />
+            <Button
+              density="loose"
+              level="secondary"
+              tone="critical"
+              text="Belay that order, Commander"
+            />
             <Link href="https://example.org">Refer to the Prime Directive</Link>
           </HStack>
         </Box>
