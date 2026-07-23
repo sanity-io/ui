@@ -27,7 +27,7 @@ function Ui3() {
           <Text as="p">A measure of the USS Sanity’s DOM engines</Text>
         </Box>
         <Card tone="neutral" padding={5} radius={3} shadow={1}>
-          <Container>
+          <Container marginLeft={0}>
             <Stack gap={[1, 2]}>
               <Inline gap={3}>
                 <Checkbox id="checkbox-hey" name="checkboxes" defaultChecked />
