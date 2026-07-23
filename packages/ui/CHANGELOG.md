@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.21
+
+### Patch Changes
+
+- build all components as client components
+
 ## 0.0.1-alpha.20
 
 ### Patch Changes

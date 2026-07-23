@@ -2,19 +2,20 @@
   "mode": "pre",
   "tag": "alpha",
   "initialVersions": {
-    "mount-testing": "0.0.0",
     "ui-poc-storybook": "0.0.0",
     "@repo/eslint-config": "0.0.0",
     "@sanity-labs/ui-poc": "0.0.1-alpha.10",
     "@sanity-labs/ui-poc-codemod": "0.0.1-alpha.9",
+    "depth-testing": "0.0.1-alpha.0",
     "ui-poc-frameworks": "1.0.0",
     "ui-poc-next": "0.1.0",
     "ui-poc-vite": "0.0.0",
-    "inp-testing": "0.0.0",
-    "depth-testing": "0.0.0"
+    "inp-testing": "0.0.1-alpha.2",
+    "mount-testing": "0.0.0"
   },
   "changesets": [
     "brave-knives-cross",
+    "eager-actors-pump",
     "eager-yaks-live",
     "funky-comics-type",
     "light-berries-fry",

@@ -12,7 +12,9 @@
     "ui-poc-next",
     "ui-poc-react-router",
     "ui-poc-vite",
-    "ui-poc-mount-testing",
-    "ui-poc-storybook"
+    "ui-poc-storybook",
+    "depth-testing",
+    "inp-testing",
+    "mount-testing"
   ]
 }
