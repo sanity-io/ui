@@ -19,7 +19,7 @@
     "@sanity/ui": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@vitejs/plugin-react": "^6.0.4",
     "babel-plugin-react-compiler": "catalog:",
     "copy-to-clipboard": "^4.0.2",
     "react": "catalog:",
