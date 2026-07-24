@@ -145,6 +145,9 @@ importers:
       '@sanity/logos':
         specifier: workspace:*
         version: link:../../packages/logos
+      '@sanity/themer':
+        specifier: workspace:*
+        version: link:../../packages/themer
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui

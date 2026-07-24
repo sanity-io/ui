@@ -33,6 +33,7 @@
     "@sanity/icons": "workspace:*",
     "@sanity/image-url": "^2.1.1",
     "@sanity/logos": "workspace:*",
+    "@sanity/themer": "workspace:*",
     "@sanity/ui": "workspace:*",
     "@sanity/vision": "^6.6.0",
     "@sindresorhus/slugify": "^2.2.1",
