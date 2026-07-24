@@ -61,13 +61,19 @@ function ListItem({density = 'regular', ...props}: ListItemProps) {
       data-ui="ListItem"
       {...rest}
     >
-      {start}
+      {start || end ? (
+        <>
+          {start}
 
-      <Flex flexGrow={1} gap="inherit">
-        {children}
-      </Flex>
+          <Flex flexGrow={1} gap="inherit">
+            {children}
+          </Flex>
 
-      {end}
+          {end}
+        </>
+      ) : (
+        children
+      )}
     </li>
   )
 }
@@ -83,28 +89,32 @@ function ListButtonItem<T extends ElementType = 'button'>({
   const Component = as || 'button'
 
   return (
-    <li>
-      <PressArea
-        as={Component}
-        className={clsx(
-          listButtonItemClassName,
-          'sui-width-full sui-display-flex sui-align-items-center sui-radius2',
-          className,
-        )}
-        style={style}
-        data-ui="ListButtonItem"
-        data-selected={selected}
-        {...rest}
-      >
-        {start}
+    <PressArea
+      as={Component}
+      className={clsx(
+        listButtonItemClassName,
+        'sui-width-full sui-display-flex sui-align-items-center sui-radius2',
+        className,
+      )}
+      style={style}
+      data-ui="ListButtonItem"
+      data-selected={selected}
+      {...rest}
+    >
+      {start || end ? (
+        <>
+          {start}
 
-        <Flex flexGrow={1} gap="inherit">
-          {children}
-        </Flex>
+          <Flex flexGrow={1} gap="inherit">
+            {children}
+          </Flex>
 
-        {end}
-      </PressArea>
-    </li>
+          {end}
+        </>
+      ) : (
+        children
+      )}
+    </PressArea>
   )
 }
 

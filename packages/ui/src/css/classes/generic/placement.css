@@ -1,12 +1,14 @@
-[class*="sui-placement-"] {
+[class*='sui-placement-'] {
   inset: auto;
   margin: 0;
+  overflow-y: auto;
 }
 
 @position-try --top-center {
   inset: auto;
   margin: 0;
   bottom: anchor(top);
+  top: var(--space-1, 8px);
   left: anchor(center);
   translate: -50% 0;
 }
@@ -23,6 +25,7 @@
   inset: auto;
   margin: 0;
   bottom: anchor(top);
+  top: var(--space-1, 8px);
   left: anchor(left);
 }
 
@@ -30,6 +33,7 @@
   inset: auto;
   margin: 0;
   bottom: anchor(top);
+  top: var(--space-1, 8px);
   right: anchor(right);
 }
 
@@ -37,6 +41,7 @@
   inset: auto;
   margin: 0;
   top: anchor(bottom);
+  bottom: var(--space-1, 8px);
   left: anchor(center);
   translate: -50% 0;
 }
@@ -53,6 +58,7 @@
   inset: auto;
   margin: 0;
   top: anchor(bottom);
+  bottom: var(--space-1, 8px);
   left: anchor(left);
 }
 
@@ -60,6 +66,7 @@
   inset: auto;
   margin: 0;
   top: anchor(bottom);
+  bottom: var(--space-1, 8px);
   right: anchor(right);
 }
 
@@ -69,6 +76,7 @@
   left: anchor(right);
   top: anchor(center);
   translate: 0 -50%;
+  max-height: calc(100dvh - 2 * var(--space-1, 8px));
 }
 
 @supports (align-self: anchor-center) {
@@ -84,6 +92,7 @@
   margin: 0;
   left: anchor(right);
   top: anchor(top);
+  bottom: var(--space-1, 8px);
 }
 
 @position-try --right-end {
@@ -91,6 +100,7 @@
   margin: 0;
   left: anchor(right);
   bottom: anchor(bottom);
+  top: var(--space-1, 8px);
 }
 
 @position-try --left-center {
@@ -99,6 +109,7 @@
   right: anchor(left);
   top: anchor(center);
   translate: 0 -50%;
+  max-height: calc(100dvh - 2 * var(--space-1, 8px));
 }
 
 @supports (align-self: anchor-center) {
@@ -114,6 +125,7 @@
   margin: 0;
   right: anchor(left);
   top: anchor(top);
+  bottom: var(--space-1, 8px);
 }
 
 @position-try --left-end {
@@ -121,6 +133,7 @@
   margin: 0;
   right: anchor(left);
   bottom: anchor(bottom);
+  top: var(--space-1, 8px);
 }
 
 .sui-placement-bottom {
@@ -141,13 +154,13 @@
 .sui-placement-bottom-start {
   top: anchor(bottom);
   left: anchor(left);
-  position-try-fallbacks: --top-start;
+  position-try-fallbacks: --top-start, --bottom-start;
 }
 
 .sui-placement-bottom-end {
   top: anchor(bottom);
   right: anchor(right);
-  position-try-fallbacks: --top-end;
+  position-try-fallbacks: --top-end, --bottom-end;
 }
 
 .sui-placement-top {
@@ -168,19 +181,20 @@
 .sui-placement-top-start {
   bottom: anchor(top);
   left: anchor(left);
-  position-try-fallbacks: --bottom-start;
+  position-try-fallbacks: --bottom-start, --top-start;
 }
 
 .sui-placement-top-end {
   bottom: anchor(top);
   right: anchor(right);
-  position-try-fallbacks: --bottom-end;
+  position-try-fallbacks: --bottom-end, --top-end;
 }
 
 .sui-placement-left {
   right: anchor(left);
   top: anchor(center);
   translate: 0 -50%;
+  max-height: calc(100dvh - 2 * var(--space-1, 8px));
   position-try-fallbacks: --right-center;
 }
 
@@ -195,19 +209,20 @@
 .sui-placement-left-start {
   right: anchor(left);
   top: anchor(top);
-  position-try-fallbacks: --right-start;
+  position-try-fallbacks: --left-end, --right-start, --right-end;
 }
 
 .sui-placement-left-end {
   right: anchor(left);
   bottom: anchor(bottom);
-  position-try-fallbacks: --right-end;
+  position-try-fallbacks: --left-start, --right-end, --right-start;
 }
 
 .sui-placement-right {
   left: anchor(right);
   top: anchor(center);
   translate: 0 -50%;
+  max-height: calc(100dvh - 2 * var(--space-1, 8px));
   position-try-fallbacks: --left-center;
 }
 
@@ -222,37 +237,37 @@
 .sui-placement-right-start {
   left: anchor(right);
   top: anchor(top);
-  position-try-fallbacks: --left-start;
+  position-try-fallbacks: --right-end, --right-start, --left-start, --left-end;
 }
 
 .sui-placement-right-end {
   left: anchor(right);
   bottom: anchor(bottom);
-  position-try-fallbacks: --left-end;
+  position-try-fallbacks: --right-start, --left-end, --left-start;
 }
 
-[class*="placement-bottom"],
-[class*="placement-top"] {
+[class*='placement-bottom'],
+[class*='placement-top'] {
   margin-block: var(--space-1);
 }
 
-[class*="placement-left"],
-[class*="placement-right"] {
+[class*='placement-left'],
+[class*='placement-right'] {
   margin-inline: var(--space-1);
 }
 
-[class*="placement-bottom"] {
+[class*='placement-bottom'] {
   transform-origin: center top;
 }
 
-[class*="placement-top"] {
+[class*='placement-top'] {
   transform-origin: center bottom;
 }
 
-[class*="placement-left"] {
+[class*='placement-left'] {
   transform-origin: right center;
 }
 
-[class*="placement-right"] {
+[class*='placement-right'] {
   transform-origin: left center;
 }

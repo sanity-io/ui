@@ -1,0 +1,53 @@
+/*
+ * Submenu viewport containment.
+ *
+ * Portaled submenus anchor to the viewport. Pin the block-end edge so long
+ * menus scroll instead of running off-screen.
+ */
+[data-ui='MenuSubmenu'] {
+  overflow-y: auto;
+}
+
+[data-ui='MenuSubmenu'][class*='placement-right-start'],
+[data-ui='MenuSubmenu'][class*='placement-right-end'] {
+  bottom: var(--space-1, 8px);
+}
+
+[data-ui='MenuSubmenu'][class*='placement-left-start'],
+[data-ui='MenuSubmenu'][class*='placement-left-end'] {
+  bottom: var(--space-1, 8px);
+}
+
+@supports (position-area: inline-end span-block-end) {
+  [data-ui='MenuSubmenu'][class*='placement-right-start'],
+  [data-ui='MenuSubmenu'][class*='placement-right-end'] {
+    inset: auto;
+    bottom: auto;
+    translate: none;
+    position-area: inline-end span-block-end;
+    align-self: start;
+    position-try-fallbacks: --submenu-right-scroll, flip-block;
+    position-try-order: most-block-size;
+  }
+
+  [data-ui='MenuSubmenu'][class*='placement-left-start'],
+  [data-ui='MenuSubmenu'][class*='placement-left-end'] {
+    inset: auto;
+    bottom: auto;
+    translate: none;
+    position-area: inline-start span-block-end;
+    align-self: start;
+    position-try-fallbacks: --submenu-left-scroll, flip-block;
+    position-try-order: most-block-size;
+  }
+
+  @position-try --submenu-right-scroll {
+    position-area: inline-end span-block-end;
+    align-self: stretch;
+  }
+
+  @position-try --submenu-left-scroll {
+    position-area: inline-start span-block-end;
+    align-self: stretch;
+  }
+}

@@ -71,17 +71,23 @@ export const Menu: Story = {
   render: (props) => {
     return (
       <List {...props} gap={2}>
-        <List.ButtonItem density="compact" start={<Icon size={1} icon={SparkleIcon} />}>
-          <List.ItemText title="Content Agent" />
-        </List.ButtonItem>
+        <List.Item density="none">
+          <List.ButtonItem density="compact" start={<Icon size={1} icon={SparkleIcon} />}>
+            <List.ItemText title="Content Agent" />
+          </List.ButtonItem>
+        </List.Item>
 
-        <List.ButtonItem density="compact" start={<Icon size={1} icon={ComposeIcon} />}>
-          <List.ItemText title="Canvas" />
-        </List.ButtonItem>
+        <List.Item density="none">
+          <List.ButtonItem density="compact" start={<Icon size={1} icon={ComposeIcon} />}>
+            <List.ItemText title="Canvas" />
+          </List.ButtonItem>
+        </List.Item>
 
-        <List.ButtonItem density="compact" start={<Icon size={1} icon={ImageIcon} />} selected>
-          <List.ItemText title="Media Library" />
-        </List.ButtonItem>
+        <List.Item density="none">
+          <List.ButtonItem density="compact" start={<Icon size={1} icon={ImageIcon} />} selected>
+            <List.ItemText title="Media Library" />
+          </List.ButtonItem>
+        </List.Item>
       </List>
     )
   },

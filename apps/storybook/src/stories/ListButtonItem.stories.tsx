@@ -27,12 +27,10 @@ type Story = StoryObj<typeof List.ButtonItem>
 export const Default: Story = {
   render: (props) => {
     return (
-      <List>
-        <List.ButtonItem {...props} end={<Icon size={1} icon={EditIcon} />}>
-          <List.ItemImage src="https://placehold.co/600x400" alt="Image" />
-          <List.ItemText title="Title" subtitle="Subtitle" />
-        </List.ButtonItem>
-      </List>
+      <List.ButtonItem {...props} end={<Icon size={1} icon={EditIcon} />}>
+        <List.ItemImage src="https://placehold.co/600x400" alt="Image" />
+        <List.ItemText title="Title" subtitle="Subtitle" />
+      </List.ButtonItem>
     )
   },
   play: async ({canvas}) => {

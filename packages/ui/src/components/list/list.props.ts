@@ -3,7 +3,7 @@ import type React from 'react'
 import {type GapProps, gapProps} from '../../props/gap'
 import {heightProps} from '../../props/height'
 import {paddingProps} from '../../props/padding'
-import {DENSITY, type Density} from '../../types/Density'
+import {DENSITY_NONE, type DensityNone} from '../../types/Density'
 import type {InteractiveAs} from '../../types/Interactive'
 import type {ListTag} from '../../types/List'
 import {type PropDef} from '../../types/PropDef'
@@ -25,7 +25,7 @@ export const listProps: Record<string, PropDef> = {
 /** @beta */
 export interface ListItemProps extends React.ComponentProps<'li'> {
   /** Composite prop for setting padding and gap */
-  density?: Responsive<Density>
+  density?: Responsive<DensityNone>
   /** Starting slot */
   start?: React.ReactNode
   /** Ending slot */
@@ -35,11 +35,12 @@ export interface ListItemProps extends React.ComponentProps<'li'> {
 export const listItemProps: Record<string, PropDef> = {
   density: {
     type: 'composite',
-    values: DENSITY,
+    values: DENSITY_NONE,
     composition: {
       gap: {
         propDef: gapProps['gap'] as PropDef,
         mapping: {
+          none: undefined,
           compact: 2,
           regular: 2,
           loose: 3,
@@ -48,6 +49,7 @@ export const listItemProps: Record<string, PropDef> = {
       minHeight: {
         propDef: heightProps['minHeight'] as PropDef,
         mapping: {
+          none: undefined,
           compact: '33px',
           regular: '37px',
           loose: '45px',
@@ -56,6 +58,7 @@ export const listItemProps: Record<string, PropDef> = {
       paddingX: {
         propDef: paddingProps['padding'] as PropDef,
         mapping: {
+          none: undefined,
           compact: 1,
           regular: 2,
           loose: 3,

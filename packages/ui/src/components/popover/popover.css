@@ -3,6 +3,7 @@
   opacity: 0;
   scale: 0.9;
   transition: none;
+  overflow-y: auto;
 }
 
 .sui-PopoverContent:popover-open {
