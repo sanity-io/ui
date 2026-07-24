@@ -1,7 +1,7 @@
 import type {AttributeMods} from '../../../types/AttributeMods'
 
 /** @internal */
-export const TEXT_MODS: AttributeMods = {
+export const LABEL_MODS: AttributeMods = {
   accent: {
     type: 'rename-mapped',
     name: 'tone',

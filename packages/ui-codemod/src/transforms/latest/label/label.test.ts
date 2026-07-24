@@ -1,30 +1,30 @@
 import {defineInlineTest} from '../../../utils/testUtils'
-import transform from './text'
+import transform from './label'
 
 defineInlineTest(
   transform,
   {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
   `
-  import {Text} from '@legacy/ui'
+  import {Label} from '@legacy/ui'
 
-  <Text />
+  <Label />
   `,
   `
-  import {Text} from "@sanity/ui"
+  import {Eyebrow} from "@sanity/ui"
 
-  <Text as="div" trim={true} />
+  <Eyebrow as="div" trim={true} />
   `,
-  'updates Text import path based on fromPackage and toPackage',
+  'updates Eyebrow import path based on fromPackage and toPackage',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Text />
+  <Label />
   `,
   `
-  <Text as="div" trim={true} />
+  <Eyebrow as="div" trim={true} />
   `,
   'adds trim prop',
 )
@@ -33,10 +33,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Text />
+  <Label />
   `,
   `
-  <Text as="div" trim={true} />
+  <Eyebrow as="div" trim={true} />
   `,
   'adds as prop',
 )
@@ -45,10 +45,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Text as="span" />
+  <Label as="span" />
   `,
   `
-  <Text as="span" trim={true} />
+  <Eyebrow as="span" trim={true} />
   `,
   'does not add as prop if already set',
 )
@@ -57,10 +57,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Text flex="auto" />
+  <Label flex="auto" />
   `,
   `
-  <Text
+  <Eyebrow
     style={{
       flex: "1 1 auto"
     }}
@@ -74,10 +74,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Text accent />
+  <Label accent />
   `,
   `
-  <Text tone="suggest" as="div" trim={true} />
+  <Eyebrow tone="suggest" as="div" trim={true} />
   `,
   'renames accent prop and updates mapped values',
 )
@@ -86,10 +86,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Text textOverflow="ellipsis" />
+  <Label textOverflow="ellipsis" />
   `,
   `
-  <Text lineClamp={1} as="div" trim={true} />
+  <Eyebrow lineClamp={1} as="div" trim={true} />
   `,
   'renames textOverflow prop and updates mapped values',
 )
@@ -98,10 +98,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Text width={1} maxWidth="fill" />
+  <Label width={1} maxWidth="fill" />
   `,
   `
-  <Text
+  <Eyebrow
     style={{
       width: "40rem",
       maxWidth: "100%"
@@ -110,4 +110,16 @@ defineInlineTest(
     trim={true} />
   `,
   'moves width props to style and updates mapped value',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <label htmlFor="inputId" />
+  `,
+  `
+  <label htmlFor="inputId" />
+  `,
+  'preserves label HTML elements',
 )
