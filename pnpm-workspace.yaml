@@ -50,6 +50,7 @@ allowBuilds:
 # reason when we deliberately bump the catalog to `latest`.
 minimumReleaseAgeExclude:
   - '@next/*'
+  - '@portabletext/react'
   - '@sanity/*'
   - '@tsdown/*'
   - lightningcss
