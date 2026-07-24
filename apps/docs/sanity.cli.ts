@@ -1,8 +1,33 @@
 import {createRequire} from 'node:module'
+import path from 'node:path'
+
 import {defineCliConfig} from 'sanity/cli'
-import {mergeConfig, type UserConfig} from 'vite'
+import {mergeConfig, type Plugin, type UserConfig} from 'vite'
 
 const require = createRequire(import.meta.url)
+
+const reactDomDir = path.dirname(require.resolve('react-dom/package.json'))
+const reactDomClientProduction = path.join(reactDomDir, 'cjs/react-dom-client.production.js')
+const reactDomProfiling = path.join(reactDomDir, 'cjs/react-dom-profiling.profiling.js')
+
+/**
+ * With `deployment.autoUpdates`, Sanity builds `react-dom/client` as a vendor
+ * entry that points at the absolute production CJS path — Vite `resolve.alias`
+ * never sees the `react-dom/client` specifier. Redirect that entry (and any
+ * other resolve of the production client) to the profiling build instead.
+ */
+function reactDomProfilingPlugin(): Plugin {
+  return {
+    name: 'sanity-ui-docs/react-dom-profiling',
+    enforce: 'pre',
+    resolveId(source) {
+      if (source === reactDomClientProduction || source === 'react-dom/client') {
+        return reactDomProfiling
+      }
+      return null
+    },
+  }
+}
 
 export default defineCliConfig({
   api: {
@@ -41,9 +66,13 @@ export default defineCliConfig({
     // DevTools can profile with readable component names (see sanity-io/sanity#13674).
     if (command === 'build') {
       return mergeConfig(nextConfig, {
-        // Aliasing to react-dom/profiling is necessary in the production build,
-        // otherwise React can't run the profiler on the deployed studio
-        resolve: {alias: {'react-dom/client': require.resolve('react-dom/profiling')}},
+        plugins: [reactDomProfilingPlugin()],
+        // Also alias the package specifier for any non-vendor resolution path
+        resolve: {
+          alias: {
+            'react-dom/client': reactDomProfiling,
+          },
+        },
         build: {
           // Enable production source maps to easier debug the deployed studio
           sourcemap: true,
