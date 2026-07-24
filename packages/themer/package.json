@@ -25,19 +25,7 @@
   ],
   "type": "module",
   "sideEffects": false,
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.cts",
-  "typesVersions": {
-    "*": {
-      "legacy": [
-        "./dist/legacy.d.cts"
-      ],
-      "tool": [
-        "./dist/tool.d.cts"
-      ]
-    }
-  },
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
     "./legacy": "./src/legacy/index.ts",
@@ -46,18 +34,9 @@
   },
   "publishConfig": {
     "exports": {
-      ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
-      },
-      "./legacy": {
-        "import": "./dist/legacy.js",
-        "require": "./dist/legacy.cjs"
-      },
-      "./tool": {
-        "import": "./dist/tool.js",
-        "require": "./dist/tool.cjs"
-      },
+      ".": "./dist/index.js",
+      "./legacy": "./dist/legacy.js",
+      "./tool": "./dist/tool.js",
       "./package.json": "./package.json"
     }
   },

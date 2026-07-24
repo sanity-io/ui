@@ -61,7 +61,7 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   comes from the Changesets config (`access: public`), so packages don't set
   `publishConfig.access`. All published packages are `"type": "module"`: dist
   ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
-  (`@sanity/icons` ships ESM only).
+  (`@sanity/icons` and `@sanity/themer` ship ESM only).
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
   `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
   `@sanity/ui` resolves to the `packages/ui/exports/` source (and

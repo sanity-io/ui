@@ -7,7 +7,6 @@ const config: UserConfig = await defineConfig({
     legacy: './src/legacy/index.ts',
     tool: './src/tool/index.ts',
   },
-  format: ['esm', 'cjs'],
   tsconfig: 'tsconfig.dist.json',
 })
 
@@ -28,7 +27,7 @@ config.outputOptions = async (outputOptions, format, context) => {
     ...base,
     dir: base?.dir ?? outputOptions.dir,
     file: base?.file ?? outputOptions.file,
-    chunkFileNames: `_chunks/[name].${format === 'cjs' ? 'cjs' : 'js'}`,
+    chunkFileNames: '_chunks/[name].js',
   }
 }
 
