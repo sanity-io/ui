@@ -9,7 +9,6 @@ import {Flex} from '../flex/Flex'
 import {type AvatarProps, avatarProps} from './avatar.props'
 
 const avatarClassName = suffixClassName('sui-Avatar')
-const eyebrowClassName = suffixClassName('sui-Eyebrow')
 const avatarImgClassName = suffixClassName('sui-AvatarImg')
 
 /** @public */
@@ -34,7 +33,7 @@ export function Avatar<T extends ElementType = 'div'>({
   return (
     <Flex
       as={Component}
-      className={clsx(avatarClassName, eyebrowClassName, className)}
+      className={clsx(avatarClassName, className)}
       style={style}
       data-ui="Avatar"
       display="inline-flex"
@@ -54,7 +53,7 @@ export function Avatar<T extends ElementType = 'div'>({
         />
       ) : (
         <Eyebrow role="img" aria-label={ariaLabel || initials}>
-          {initials}
+          {initials.slice(0, 2)}
         </Eyebrow>
       )}
     </Flex>

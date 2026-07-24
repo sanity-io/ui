@@ -1,0 +1,11 @@
+.sui-AvatarStack .sui-Avatar + .sui-Avatar {
+  margin-left: calc(-1 * var(--space-1));
+}
+
+.sui-AvatarStack .sui-Avatar:has(+ .sui-Avatar) {
+  mask-image: radial-gradient(
+    50% 50% at calc(150% - var(--space-1) - 1.5px) 50%,
+    transparent 95%,
+    #000 100%
+  );
+}
