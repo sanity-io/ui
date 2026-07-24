@@ -11,8 +11,8 @@ export interface AvatarProps<T extends React.ElementType> {
   /** Avatar color */
   color?: AvatarColor
   /** Avatar initials */
-  initials?: string
-  /** Composite prop for setting width, height, and font font */
+  initials: string
+  /** Composite prop for setting width, height, and font */
   size?: AvatarSize
   /** Avatar image src */
   src?: string
@@ -37,7 +37,7 @@ export const avatarProps: Record<string, PropDef> = {
       size: {
         propDef: {
           type: 'union',
-          className: 'text-label',
+          className: 'text-eyebrow',
           values: TEXT_SIZE,
         },
         mapping: {

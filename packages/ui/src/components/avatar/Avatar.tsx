@@ -4,10 +4,12 @@ import {useState, type ComponentPropsWithRef, type ElementType} from 'react'
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
+import {Eyebrow} from '../eyebrow/Eyebrow'
 import {Flex} from '../flex/Flex'
 import {type AvatarProps, avatarProps} from './avatar.props'
 
 const avatarClassName = suffixClassName('sui-Avatar')
+const eyebrowClassName = suffixClassName('sui-Eyebrow')
 const avatarImgClassName = suffixClassName('sui-AvatarImg')
 
 /** @public */
@@ -16,21 +18,25 @@ export function Avatar<T extends ElementType = 'div'>({
   size = 1,
   ...props
 }: AvatarProps<T> & Omit<ComponentPropsWithRef<T>, keyof AvatarProps<T>>) {
-  const {as, children, className, style, initials, src, ...rest} = getProps(
-    {color, size, ...props},
-    avatarProps,
-  )
+  const {
+    as,
+    children,
+    className,
+    style,
+    'aria-label': ariaLabel,
+    initials,
+    src,
+    ...rest
+  } = getProps({color, size, ...props}, avatarProps)
   const Component = as || 'div'
   const [error, setError] = useState(false)
 
   return (
     <Flex
       as={Component}
-      className={clsx(avatarClassName, className)}
+      className={clsx(avatarClassName, eyebrowClassName, className)}
       style={style}
       data-ui="Avatar"
-      role="img"
-      aria-label={props['aria-label'] || initials}
       display="inline-flex"
       alignItems="center"
       justifyContent="center"
@@ -42,15 +48,15 @@ export function Avatar<T extends ElementType = 'div'>({
           as="img"
           className={avatarImgClassName}
           src={src}
-          aria-hidden
+          alt={ariaLabel || initials}
           radius="full"
           onError={() => setError(true)}
         />
       ) : (
-        <Box aria-hidden>{initials}</Box>
+        <Eyebrow role="img" aria-label={ariaLabel || initials}>
+          {initials}
+        </Eyebrow>
       )}
     </Flex>
   )
 }
-
-// https://avatars3.githubusercontent.com/u/406933?s=400&u=af898b0a50ef2ef1248be32dfa1410ccb55f6f65&v=4

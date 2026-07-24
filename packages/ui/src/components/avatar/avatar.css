@@ -1,6 +1,15 @@
 .sui-Avatar {
   border: 1px solid transparent;
+}
+
+.sui-AvatarImg {
+  border: 1px solid var(--white);
+  object-fit: cover;
+}
+
+.sui-Avatar .sui-Eyebrow {
   color: var(--white);
+  font-size: inherit;
 }
 
 .sui-Avatar.sui-avatar-gray {
@@ -37,9 +46,4 @@
 
 .sui-Avatar.sui-avatar-cyan {
   background-color: var(--cyan-500);
-}
-
-.sui-AvatarImg {
-  border: 1px solid var(--white);
-  object-fit: cover;
 }
