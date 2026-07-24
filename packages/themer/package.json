@@ -1,0 +1,101 @@
+{
+  "name": "@sanity/themer",
+  "version": "0.0.0",
+  "description": "Generate Sanity Studio themes, and preview them with a Studio tool.",
+  "keywords": [
+    "sanity",
+    "studio",
+    "theme",
+    "themer",
+    "ui"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/ui/issues"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/ui.git",
+    "directory": "packages/themer"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "typesVersions": {
+    "*": {
+      "legacy": [
+        "./dist/legacy.d.cts"
+      ],
+      "tool": [
+        "./dist/tool.d.cts"
+      ]
+    }
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./legacy": "./src/legacy/index.ts",
+    "./tool": "./src/tool/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      },
+      "./legacy": {
+        "import": "./dist/legacy.js",
+        "require": "./dist/legacy.cjs"
+      },
+      "./tool": {
+        "import": "./dist/tool.js",
+        "require": "./dist/tool.cjs"
+      },
+      "./package.json": "./package.json"
+    },
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf dist",
+    "prepack": "pnpm build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "watch": "tsdown --watch"
+  },
+  "dependencies": {
+    "@sanity/color": "workspace:^",
+    "@sanity/icons": "workspace:^",
+    "@sanity/ui": "workspace:^"
+  },
+  "devDependencies": {
+    "@sanity/tsdown-config": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "rimraf": "catalog:",
+    "sanity": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "^18 || >=19.0.0-0",
+    "sanity": "^5 || ^6"
+  },
+  "peerDependenciesMeta": {
+    "sanity": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20.19 <22 || >=22.12"
+  }
+}
