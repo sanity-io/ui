@@ -1,5 +1,3 @@
-// Client-component boundary for Next.js App Router / RSC. Rolldown preserves
-// this directive on the published entry chunk.
 'use client'
 
 /**
