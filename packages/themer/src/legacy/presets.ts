@@ -2,11 +2,7 @@ import {applyHues} from './applyHues'
 import {parseHuesFromSearchParams} from './parseHuesFromSearchParams'
 import {ThemePreset} from './types'
 
-function definePreset(
-  slug: string,
-  title: string,
-  searchParams: string,
-): ThemePreset {
+function definePreset(slug: string, title: string, searchParams: string): ThemePreset {
   return {
     slug,
     title,

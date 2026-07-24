@@ -1,7 +1,6 @@
 import {ColorTints} from '@sanity/color'
 import {
   buildTheme,
-  // oxlint-disable-next-line no-deprecated
   createColorTheme,
   multiply as multiplyRgb,
   parseColor,
@@ -15,7 +14,7 @@ import {createTonesFromHues} from './createTonesFromHues'
 import {blue, cyan, gray, green, magenta, orange, purple, red, yellow} from './palette'
 import {LegacyTheme, PartialHues} from './types'
 
-const NEUTRAL_TONES: string[] = ['default', 'transparent']
+const NEUTRAL_TONES: ReadonlySet<string> = new Set(['default', 'transparent'])
 
 /** The static tints used for spot colors, syntax highlighting and input states */
 const SPOT_TINTS: Record<string, ColorTints> = {
@@ -141,7 +140,7 @@ export function themeFromHues(partialHues: PartialHues): LegacyTheme {
       const mix = dark ? screen : multiply
       const mix2 = dark ? multiply : screen
       const defaultTints = tones[name] || tones.default
-      const isNeutral = NEUTRAL_TONES.includes(name) && NEUTRAL_TONES.includes(tone)
+      const isNeutral = NEUTRAL_TONES.has(name) && NEUTRAL_TONES.has(tone)
 
       let tints = tones[tone === 'default' ? name : tone] || defaultTints
 
@@ -303,7 +302,7 @@ export function themeFromHues(partialHues: PartialHues): LegacyTheme {
     muted: ({base, dark, name, state, tone}) => {
       const mix = dark ? screen : multiply
       const defaultTints = tones[name] || tones.default
-      const isNeutral = NEUTRAL_TONES.includes(name) && NEUTRAL_TONES.includes(tone)
+      const isNeutral = NEUTRAL_TONES.has(name) && NEUTRAL_TONES.has(tone)
 
       let tints = tones[tone === 'default' ? name : tone] || defaultTints
 
@@ -519,7 +518,7 @@ export function themeFromHues(partialHues: PartialHues): LegacyTheme {
         return muted[name].disabled
       }
 
-      const isNeutral = NEUTRAL_TONES.includes(name)
+      const isNeutral = NEUTRAL_TONES.has(name)
       const tints = tones[name] || tones.default
       const mix = dark ? screen : multiply
 
@@ -708,5 +707,6 @@ export function themeFromHues(partialHues: PartialHues): LegacyTheme {
     },
   })
 
+  // oxlint-disable-next-line no-deprecated -- the legacy API intentionally targets the deprecated v0 color property, like the hosted service did
   return {...studioTheme, color, __themer: true, v2: undefined}
 }

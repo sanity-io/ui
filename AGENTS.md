@@ -9,6 +9,10 @@ the published `@sanity/ui` package lives in `packages/ui`, the published
 sanity-io/color repo with full git history) in `packages/color`, the published
 `@sanity/logos` package (Sanity/GROQ logo components, migrated from the
 standalone `sanity-io/logos` repo with full git history) in `packages/logos`,
+the published `@sanity/themer` package (Studio theme generators — a modern
+`createTheme` on the root export, a `/legacy` subpath that replicates the
+hosted themer.sanity.build `/api/hues` module byte-for-byte for migration, and
+a `/tool` subpath with the `themerTool` Studio plugin) in `packages/themer`,
 the Figma plugins in `packages/figma` (Sanity UI theme tokens) and
 `packages/figma-color` (the raw `@sanity/color` palette), the Storybook app in
 `apps/storybook`, the

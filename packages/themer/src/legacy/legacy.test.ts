@@ -1,3 +1,4 @@
+// oxlint-disable no-deprecated -- the legacy API intentionally targets the deprecated v0 theme properties, like the hosted service did
 import {createHash} from 'node:crypto'
 
 import {describe, expect, it} from 'vitest'
@@ -20,19 +21,25 @@ function hashColor(color: LegacyTheme['color']): string {
       return Object.fromEntries(
         Object.keys(value)
           .sort()
-          .map((key) => [key, canonicalize((value as Record<string, unknown>)[key])]),
+          .map((key) => [key, canonicalize(Reflect.get(value, key))]),
       )
     }
     return value
   }
 
-  return createHash('sha256').update(JSON.stringify(canonicalize(color))).digest('hex')
+  return createHash('sha256')
+    .update(JSON.stringify(canonicalize(color)))
+    .digest('hex')
 }
 
 function getPath(value: unknown, path: string): unknown {
-  return path
-    .split('.')
-    .reduce((acc: unknown, key) => (acc as Record<string, unknown>)[key], value)
+  return path.split('.').reduce((acc: unknown, key) => {
+    if (!acc || typeof acc !== 'object') {
+      throw new Error(`Cannot resolve "${key}" in "${path}"`)
+    }
+
+    return Reflect.get(acc, key)
+  }, value)
 }
 
 function expectSamples(color: LegacyTheme['color'], samples: Record<string, string>) {

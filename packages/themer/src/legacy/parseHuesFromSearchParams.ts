@@ -115,8 +115,8 @@ function throwDuplicate(key: string, a: unknown, b: unknown, input: string): nev
   throw new TypeError(
     `Duplicate params detected. Remove at least ${
       a === b
-        ? `one of the ${JSON.stringify(`${a}`)}`
-        : `${JSON.stringify(`${a}`)} or ${JSON.stringify(`${b}`)}`
+        ? `one of the ${JSON.stringify(String(a))}`
+        : `${JSON.stringify(String(a))} or ${JSON.stringify(String(b))}`
     } from the ${key} hue: ${JSON.stringify(input)}`,
   )
 }

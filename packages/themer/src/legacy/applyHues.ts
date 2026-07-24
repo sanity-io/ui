@@ -9,7 +9,7 @@ const darkest = black.hex.toLowerCase()
  * The hues of the default Studio theme, matching the `default` preset of the
  * hosted Themer service.
  */
-export const defaultHues: Hues = {
+const defaultHues: Hues = {
   default: {
     lightest,
     darkest,
