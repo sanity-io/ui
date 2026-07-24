@@ -41,4 +41,10 @@ describe('createThemeSnippet', () => {
       ].join('\n'),
     )
   })
+
+  it('serializes preset colors that have no sidebar picker', () => {
+    expect(createThemeSnippet({gray: '#5c9199', primary: '#1cb485'})).toContain(
+      "  gray: '#5c9199',",
+    )
+  })
 })

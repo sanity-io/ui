@@ -1,6 +1,5 @@
 import {isColor} from '../lib/mix'
-import {CreateThemeOptions} from '../types'
-import {THEMER_FIELDS} from './fields'
+import {COLOR_OPTION_KEYS, CreateThemeOptions} from '../types'
 
 const STORAGE_KEY = 'sanityStudio:themer:colors'
 
@@ -24,7 +23,7 @@ export function readStoredColors(): CreateThemeOptions | null {
 
     const colors: CreateThemeOptions = {}
 
-    for (const {key} of THEMER_FIELDS) {
+    for (const key of COLOR_OPTION_KEYS) {
       const value: unknown = Reflect.get(parsed, key)
 
       if (typeof value === 'string' && isColor(value)) {

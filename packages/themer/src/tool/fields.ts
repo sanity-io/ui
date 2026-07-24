@@ -11,37 +11,19 @@ export interface ThemerField {
   defaultValue: string
 }
 
-/** @internal */
+/**
+ * The colors the sidebar exposes pickers for. Presets can set the other
+ * `CreateThemeOptions` colors, and the generated snippet always serializes
+ * all of them — the pickers are just the simplified editing surface.
+ *
+ * @internal
+ */
 export const THEMER_FIELDS: ThemerField[] = [
   {
     key: 'primary',
     title: 'Primary',
     description: 'Buttons, focus rings and links',
     defaultValue: color.blue[500].hex,
-  },
-  {
-    key: 'gray',
-    title: 'Gray',
-    description: 'Neutral surfaces, borders and text',
-    defaultValue: color.gray[500].hex,
-  },
-  {
-    key: 'positive',
-    title: 'Positive',
-    description: 'Success accents',
-    defaultValue: color.green[500].hex,
-  },
-  {
-    key: 'caution',
-    title: 'Caution',
-    description: 'Warning accents',
-    defaultValue: color.yellow[500].hex,
-  },
-  {
-    key: 'critical',
-    title: 'Critical',
-    description: 'Errors and destructive actions',
-    defaultValue: color.red[500].hex,
   },
   {
     key: 'lightest',

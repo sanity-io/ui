@@ -1,4 +1,20 @@
 /**
+ * The colors of `CreateThemeOptions`, in the order `createTheme` snippets
+ * serialize them.
+ *
+ * @public
+ */
+export const COLOR_OPTION_KEYS = [
+  'primary',
+  'gray',
+  'positive',
+  'caution',
+  'critical',
+  'lightest',
+  'darkest',
+] as const satisfies ReadonlyArray<keyof CreateThemeOptions>
+
+/**
  * The colors that `createTheme` derives a Sanity Studio theme from.
  *
  * Every color is optional — omitted colors keep their default Sanity ramps.

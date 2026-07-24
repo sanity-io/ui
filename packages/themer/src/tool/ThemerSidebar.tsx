@@ -4,7 +4,7 @@ import {ResetIcon} from '@sanity/icons/Reset'
 import {Box, Button, Card, Code, Flex, Select, Stack, Text, useToast} from '@sanity/ui'
 
 import {presets} from '../presets'
-import {CreateThemeOptions} from '../types'
+import {COLOR_OPTION_KEYS, CreateThemeOptions} from '../types'
 import {useThemer} from './context'
 import {THEMER_FIELDS, ThemerField} from './fields'
 import {createThemeSnippet} from './snippet'
@@ -21,8 +21,8 @@ const swatchStyle: React.CSSProperties = {
 }
 
 function sameColors(a: CreateThemeOptions, b: CreateThemeOptions): boolean {
-  return THEMER_FIELDS.every(
-    ({key}) => (a[key]?.toLowerCase() ?? undefined) === (b[key]?.toLowerCase() ?? undefined),
+  return COLOR_OPTION_KEYS.every(
+    (key) => (a[key]?.toLowerCase() ?? undefined) === (b[key]?.toLowerCase() ?? undefined),
   )
 }
 
@@ -36,9 +36,9 @@ function expandHex(hex: string): string {
 }
 
 /**
- * The themer sidebar: a preset picker and a handful of color pickers that
- * generate the previewed theme, plus the `createTheme` snippet to make it
- * permanent.
+ * The themer sidebar: a preset picker and the primary/lightest/darkest color
+ * pickers that generate the previewed theme, plus the `createTheme` snippet
+ * to make it permanent.
  *
  * @internal
  */
