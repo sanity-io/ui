@@ -18,6 +18,7 @@ const meta: Meta<typeof MenuItem> = {
     paddingRight: getSpaceControls(),
     paddingTop: getSpaceControls(),
     gap: getSpaceControls(),
+    // oxlint-disable-next-line no-deprecated
     space: getSpaceControls(),
   },
   component: MenuItem,

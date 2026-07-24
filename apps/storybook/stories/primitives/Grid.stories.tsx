@@ -32,8 +32,10 @@ const meta: Meta<typeof Grid> = {
     height: getHeightControls(),
     overflow: getOverflowControls(),
     gap: getSpaceControls(),
+    // oxlint-disable-next-line no-deprecated
     columns: {control: {type: 'number', min: 1, max: 12}},
     gridTemplateColumns: {control: {type: 'number', min: 1, max: 12}},
+    // oxlint-disable-next-line no-deprecated
     rows: {control: {type: 'number', min: 1, max: 12}},
     gridTemplateRows: {control: {type: 'number', min: 1, max: 12}},
   },
@@ -48,6 +50,7 @@ export const Default: Story = {
 }
 
 export const Columns: Story = {
+  // oxlint-disable-next-line no-deprecated
   args: {columns: [1, 2, 3, 4, 5, 6, 7]},
   render: (props) => <Grid {...props} />,
 }

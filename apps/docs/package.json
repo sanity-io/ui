@@ -28,7 +28,7 @@
     "@codemirror/lang-javascript": "^6.2.5",
     "@lezer/highlight": "^1.2.3",
     "@sanity/client": "catalog:",
-    "@sanity/code-input": "^7.2.10",
+    "@sanity/code-input": "^7.3.2",
     "@sanity/color": "workspace:*",
     "@sanity/icons": "workspace:*",
     "@sanity/image-url": "^2.1.1",
@@ -49,7 +49,7 @@
     "react-refractor": "catalog:",
     "refractor": "catalog:",
     "sanity": "catalog:",
-    "sanity-plugin-media": "^6.0.4",
+    "sanity-plugin-media": "^6.0.6",
     "server-only": "^0.0.1",
     "styled-components": "catalog:"
   },
@@ -62,7 +62,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "babel-plugin-react-compiler": "catalog:",
-    "typescript": "^6.0.3",
-    "vitest": "^4.1.10"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }
