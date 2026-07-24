@@ -8,9 +8,9 @@ strictPeerDependencies: false
 
 # Version ranges for dependencies used by more than one workspace package.
 # Referenced from package.json files via the `catalog:` protocol.
-# apps/docs may diverge from the workspace-wide @types/node / vitest catalog
-# pins (see the packageExtensions note for vitest), so those keep explicit
-# ranges there when needed. TypeScript is aligned on the catalog version.
+# apps/docs may still diverge from the workspace-wide @types/node catalog pin,
+# so that keeps an explicit range there when needed. (See packageExtensions for
+# vitest peer wiring across packages that share different vitest versions.)
 catalog:
   '@sanity/blueprints': ^0.23.0
   '@sanity/client': ^7.24.0
