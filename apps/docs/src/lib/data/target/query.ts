@@ -1,4 +1,4 @@
-import {API_SYMBOL_PROJECTION} from '../api'
+import {API_SYMBOL_PROJECTION} from '../api/query'
 
 export const TARGET_PROJECTION = `// groq
 ...,

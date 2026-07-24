@@ -3,7 +3,7 @@ import {defineQuery} from 'next-sanity'
 import {API_DOCUMENT_TYPES} from '#lib/data/api/constants.ts'
 import {primaryNavId} from '@/constants'
 
-import {TARGET_PROJECTION} from '../data/target'
+import {TARGET_PROJECTION} from '../data/target/query'
 
 // @TODO add 'v4' when it's ready
 // type Id = 'v3' | 'v4'

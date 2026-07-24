@@ -5,7 +5,7 @@ import {useRouter} from 'next/navigation'
 import {MouseEvent, ReactElement, useCallback, useEffect} from 'react'
 
 import {basePath} from '@/constants'
-import {NavNode} from '@/lib/nav'
+import {NavNode} from '@/lib/nav/types'
 
 export function Nav(props: {nav: NavNode; path: string}): ReactElement {
   const {nav, path} = props

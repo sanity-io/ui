@@ -9,7 +9,7 @@ import {styled} from 'styled-components'
 import type {TargetByPathQueryResult} from '#sanity.types'
 
 import {ArticleHeadingsContext} from './ArticleHeadingsContext'
-import {ArticleContent} from './content'
+import {ArticleContent} from './content/ArticleContent'
 import {getHeadings} from './getHeadings'
 import {getTOCTree} from './getToc'
 import {HeadingsNav} from './HeadingsNav'
