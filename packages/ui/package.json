@@ -83,7 +83,7 @@
     "@rolldown/plugin-babel": "^0.2.3",
     "@sanity/tsdown-config": "catalog:",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "catalog:",
