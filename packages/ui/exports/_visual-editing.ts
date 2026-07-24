@@ -1,3 +1,7 @@
+// Client-component boundary for Next.js App Router / RSC. Rolldown preserves
+// this directive on the published entry chunk.
+'use client'
+
 /**
  * These are internal exports for usage in `@sanity/visual-editing` and `@sanity/insert-menu`,
  * which are used in environments where the regular `@sanity/ui` export is far too heavy due to imports from refractor and more.
