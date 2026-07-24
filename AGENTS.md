@@ -48,16 +48,20 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   run.
 - Packages are built with [tsdown](https://tsdown.dev) via
   `@sanity/tsdown-config` (`tsdown.config.mts` in every package except
-  `packages/icons`, which is `"type": "module"` and uses a plain
-  `tsdown.config.ts` — the `.mts` extension is required where the package is
-  not `"type": "module"` because the Node version in CI cannot import TS
-  config files otherwise). The build regenerates package.json `exports`
+  `packages/icons`, which uses a plain `tsdown.config.ts` — a bare `.ts`
+  config only imports on the Node version in CI when the package is
+  `"type": "module"`, while `.mts` always works). The build regenerates
+  package.json `exports`
   (dev exports): in the monorepo, `@sanity/ui`, `@sanity/ui/theme`,
   `@sanity/icons` (incl. its per-icon subpaths) and `@sanity/color` resolve
   directly to TypeScript source for every tool (tsc, oxlint's type checker,
   vitest, vite), so there are no tsconfig `paths`, no `customConditions`, and
   no vite aliases. The publishable `exports` (dist `import`/`require`) live
-  under `publishConfig` and are applied by `pnpm pack`/`publish`.
+  under `publishConfig` and are applied by `pnpm pack`/`publish`; npm access
+  comes from the Changesets config (`access: public`), so packages don't set
+  `publishConfig.access`. All published packages are `"type": "module"`: dist
+  ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
+  (`@sanity/icons` ships ESM only).
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
   `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
   `@sanity/ui` resolves to the `packages/ui/exports/` source (and
@@ -116,9 +120,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `'use cache'` only on the cached layer). The app builds and devs with
   Turbopack and the native Rust React Compiler
   (`experimental.turbopackRustReactCompiler`). To make that work,
-  `packages/ui` and `apps/docs` omit the package.json `type` field: an
-  explicit `"type": "commonjs"` makes Turbopack refuse the ESM-syntax
-  TypeScript source that the dev `exports` resolve to. On-demand revalidation flows from
+  `packages/ui` is `"type": "module"` and `apps/docs` omits the package.json
+  `type` field: an explicit `"type": "commonjs"` makes Turbopack refuse the
+  ESM-syntax TypeScript source that the dev `exports` resolve to. On-demand revalidation flows from
   the Live Content API through the `invalidate-sync-tags` Sanity Function
   (defined in `apps/blueprints/docs`) to `POST /ui/api/expire-tags`, which
   calls `revalidateTag('sanity:<tag>', 'max')`; the route is guarded by the

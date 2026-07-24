@@ -43,6 +43,7 @@ const meta: Meta<typeof Button> = {
     padding: getSpaceControls(),
     radius: getRadiusControls(),
     gap: getSpaceControls(),
+    // oxlint-disable-next-line no-deprecated
     space: getSpaceControls(),
     text: {control: 'text'},
     width: getButtonWidthControls(),

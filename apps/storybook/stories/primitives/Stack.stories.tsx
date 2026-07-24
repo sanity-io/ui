@@ -6,6 +6,7 @@ import {getHeightControls, getOverflowControls, getSpaceControls} from '../contr
 const meta: Meta<typeof Stack> = {
   component: Stack,
   args: {
+    // oxlint-disable-next-line no-deprecated
     space: 0,
     children: [
       <Card key="card1" padding={2}>
@@ -37,6 +38,7 @@ const meta: Meta<typeof Stack> = {
     height: getHeightControls(),
     overflow: getOverflowControls(),
     gap: getSpaceControls(),
+    // oxlint-disable-next-line no-deprecated
     space: getSpaceControls(),
   },
   tags: ['autodocs'],

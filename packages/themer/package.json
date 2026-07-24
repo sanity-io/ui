@@ -59,8 +59,7 @@
         "require": "./dist/tool.cjs"
       },
       "./package.json": "./package.json"
-    },
-    "access": "public"
+    }
   },
   "scripts": {
     "build": "tsdown",
