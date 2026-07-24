@@ -38,7 +38,13 @@ export interface TreeItemProps {
 
 const StyledTreeItem = styled.li(treeItemRootStyle, treeItemRootColorStyle)
 
-const TreeItemBox = styled(Box).attrs({forwardedAs: 'a'})<TreeItemBoxStyleProps>(treeItemBoxStyle)
+/**
+ * Styles a plain element (rather than wrapping `Box`) so that `as={linkAs}` renders the custom
+ * link component directly, the same way `<Button as={...}>` works. Wrapping `Box` with
+ * `.attrs({forwardedAs: 'a'})` made styled-components pass `as="a"` on to the custom component
+ * (breaking e.g. `next/link`, which treats `as` as a URL override) and skip the `Box` styles.
+ */
+const TreeItemBox = styled.a<TreeItemBoxStyleProps>(treeItemBoxStyle)
 
 const ToggleArrowText = styled(Text)`
   & > svg {
@@ -84,7 +90,7 @@ export function TreeItem(
     startTransition(() => _setRootElement(node))
   }, [])
 
-  const treeitemRef = useRef<HTMLDivElement | null>(null)
+  const treeitemRef = useRef<HTMLAnchorElement | null>(null)
   const tree = useTree()
   const {path, registerItem, setExpanded, setFocusedElement} = tree
   const _id = useId()
@@ -182,6 +188,7 @@ export function TreeItem(
           $level={tree.level}
           aria-expanded={expanded}
           as={linkAs}
+          data-as={typeof linkAs === 'string' ? linkAs : 'a'}
           data-ui="TreeItem__box"
           href={href}
           ref={treeitemRef}
