@@ -1,0 +1,45 @@
+.sui-Avatar {
+  border: 1px solid transparent;
+  color: var(--white);
+}
+
+.sui-Avatar.sui-avatar-gray {
+  background-color: var(--gray-500);
+}
+
+.sui-Avatar.sui-avatar-blue {
+  background-color: var(--blue-500);
+}
+
+.sui-Avatar.sui-avatar-purple {
+  background-color: var(--purple-500);
+}
+
+.sui-Avatar.sui-avatar-magenta {
+  background-color: var(--magenta-500);
+}
+
+.sui-Avatar.sui-avatar-red {
+  background-color: var(--red-500);
+}
+
+.sui-Avatar.sui-avatar-orange {
+  background-color: var(--orange-500);
+}
+
+.sui-Avatar.sui-avatar-yellow {
+  background-color: var(--yellow-500);
+}
+
+.sui-Avatar.sui-avatar-green {
+  background-color: var(--green-500);
+}
+
+.sui-Avatar.sui-avatar-cyan {
+  background-color: var(--cyan-500);
+}
+
+.sui-AvatarImg {
+  border: 1px solid var(--white);
+  object-fit: cover;
+}
