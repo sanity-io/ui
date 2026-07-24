@@ -46,7 +46,7 @@ catalogs:
       specifier: ^6.4.4
       version: 6.4.4
     tsdown:
-      specifier: ^0.22.12
+      specifier: ^0.22.13
       version: 0.22.13
     typescript:
       specifier: 6.0.3
