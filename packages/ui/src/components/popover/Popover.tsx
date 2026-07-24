@@ -41,7 +41,7 @@ function PopoverRoot({
 
   const triggerProps = {
     popoverTarget: id,
-    style: {anchorName: `--anchor-${anchorName}`},
+    style: {anchorName: `--anchor-${anchorName || id}`},
   }
 
   const trigger = children.type.forwardsTriggerProps
@@ -62,7 +62,7 @@ function PopoverRoot({
             )}
             style={{
               ...style,
-              positionAnchor: `--anchor-${anchorName}`,
+              positionAnchor: `--anchor-${anchorName || id}`,
             }}
             data-ui="Popover"
             popover="auto"

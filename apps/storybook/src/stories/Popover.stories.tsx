@@ -110,8 +110,8 @@ function WithTooltipPopoverOuter(props: React.ComponentProps<typeof Popover>) {
   const id = useId()
 
   return (
-    <Popover {...props} id={id} content="Popover Content">
-      <Tooltip id={id} content="Tooltip Content">
+    <Popover {...props} anchorName={id} content="Popover Content">
+      <Tooltip anchorName={id} content="Tooltip Content">
         <Button text="Hover or click" />
       </Tooltip>
     </Popover>
@@ -122,8 +122,8 @@ function WithTooltipPopoverInner(props: React.ComponentProps<typeof Popover>) {
   const id = useId()
 
   return (
-    <Tooltip id={id} content="Tooltip Content">
-      <Popover {...props} id={id} content="Popover Content">
+    <Tooltip anchorName={id} content="Tooltip Content">
+      <Popover {...props} anchorName={id} content="Popover Content">
         <Button text="Hover or click" />
       </Popover>
     </Tooltip>

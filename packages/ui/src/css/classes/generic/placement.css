@@ -1,3 +1,8 @@
+[class*='placement-'] {
+  inset: auto;
+  margin: 0;
+}
+
 @position-try --top-center {
   top: auto;
   right: auto;

@@ -39,7 +39,7 @@ function TooltipRoot({
   const triggerProps = {
     'aria-describedby': id,
     'interestfor': id,
-    'style': {anchorName: `--anchor-${anchorName}`},
+    'style': {anchorName: `--anchor-${anchorName || id}`},
     'onMouseLeave': () => {
       dismissedRef.current = false
     },
@@ -75,7 +75,7 @@ function TooltipRoot({
           )}
           style={{
             ...style,
-            positionAnchor: `--anchor-${anchorName}`,
+            positionAnchor: `--anchor-${anchorName || id}`,
           }}
           data-ui="Tooltip"
           role="tooltip"
