@@ -119,7 +119,9 @@ export function CodeExample(props: {
           mode="bleed"
           padding={2}
           gap={2}
-          prefetch={true}
+          // href embeds live editor state; prefetching would refetch on every
+          // keystroke for throwaway query strings.
+          prefetch={false}
           text="Open in Arcade"
         />
       </Box>
