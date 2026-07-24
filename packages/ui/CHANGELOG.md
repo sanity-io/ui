@@ -1,5 +1,14 @@
 # @sanity/ui
 
+## 3.4.4
+
+### Patch Changes
+
+- [#2408](https://github.com/sanity-io/ui/pull/2408) [`3989592`](https://github.com/sanity-io/ui/commit/3989592b8537a331f5a3bddd603ca91236ecf39b) Thanks [@stipsan](https://github.com/stipsan)! - The package now declares `"type": "module"`. It continues to ship both ESM (`import`) and CJS (`require`) builds with identical entry points and named exports — only the file extensions in `dist` changed: the ESM build is now `.js`/`.d.ts` (was `.mjs`/`.d.mts`) and the CJS build is now `.cjs`/`.d.cts` (was `.js`/`.d.ts`).
+
+- Updated dependencies [[`3989592`](https://github.com/sanity-io/ui/commit/3989592b8537a331f5a3bddd603ca91236ecf39b)]:
+  - @sanity/color@3.0.8
+
 ## 3.4.3
 
 ### Patch Changes

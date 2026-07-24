@@ -8,14 +8,14 @@ strictPeerDependencies: false
 
 # Version ranges for dependencies used by more than one workspace package.
 # Referenced from package.json files via the `catalog:` protocol.
-# apps/docs deliberately diverges from the workspace-wide typescript (v5 vs
-# v6), @types/node (v24 vs v22) and vitest (v3 vs v4, see the
-# packageExtensions note) versions, so those keep explicit ranges there.
+# apps/docs may still diverge from the workspace-wide @types/node catalog pin,
+# so that keeps an explicit range there when needed. (See packageExtensions for
+# vitest peer wiring across packages that share different vitest versions.)
 catalog:
   '@sanity/blueprints': ^0.23.0
   '@sanity/client': ^7.24.0
   '@sanity/functions': ^1.4.0
-  '@sanity/tsdown-config': ^0.19.6
+  '@sanity/tsdown-config': ^0.21.1
   '@types/node': ^24.13.3
   '@types/react': ^19.2.17
   '@types/react-dom': ^19.2.3
@@ -29,8 +29,8 @@ catalog:
   rimraf: ^5.0.5
   sanity: ^6.6.0
   styled-components: ^6.4.4
-  tsdown: ^0.22.13
-  typescript: 6.0.3
+  tsdown: ^0.22.14
+  typescript: 7.0.2
   unrun: ^0.3.1
   vite: ^8.1.5
   vitest: ^4.1.10
@@ -46,15 +46,17 @@ allowBuilds:
 # default minimum release age (1 day). Same for next's `preview` dist-tag
 # (apps/docs pins an exact preview version, so the exclusion only lifts the
 # age gate for versions we deliberately pick). tsdown and its lightningcss /
-# verkit transitive deps are included for the same reason when we deliberately
-# bump the catalog.
+# verkit / @tsdown/* / publint transitive deps are included for the same
+# reason when we deliberately bump the catalog to `latest`.
 minimumReleaseAgeExclude:
   - '@next/*'
   - '@sanity/*'
+  - '@tsdown/*'
   - lightningcss
   - lightningcss-*
   - next
   - next-sanity
+  - publint
   - sanity
   - tsdown
   - verkit
