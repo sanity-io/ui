@@ -22,10 +22,10 @@
   .sui-text-heading8 { font: var(--heading-8); }
   .sui-text-heading9 { font: var(--heading-9); }
 
-  .sui-text-label0 { font: var(--label-0); }
-  .sui-text-label1 { font: var(--label-1); }
-  .sui-text-label2 { font: var(--label-2); }
-  .sui-text-label3 { font: var(--label-3); }
-  .sui-text-label4 { font: var(--label-4); }
-  .sui-text-label5 { font: var(--label-5); }
+  .sui-text-eyebrow0 { font: var(--label-0); }
+  .sui-text-eyebrow1 { font: var(--label-1); }
+  .sui-text-eyebrow2 { font: var(--label-2); }
+  .sui-text-eyebrow3 { font: var(--label-3); }
+  .sui-text-eyebrow4 { font: var(--label-4); }
+  .sui-text-eyebrow5 { font: var(--label-5); }
 }

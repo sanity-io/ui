@@ -40,4 +40,4 @@ Test sizes (`ROW_COUNT`, `TONE_CARD_COUNT`, `PANEL_CARD_COUNT`) are constants at
 
 - Numbers vary by machine, browser, and throttling level. Compare libraries within one session, not across sessions.
 - The browser rounds interaction durations to 8 ms steps and ignores anything under 16 ms — at high speed, differences can hide below that floor. Throttle harder or raise the counts.
-- This measures interaction latency only. First-render speed is covered by the sibling `performance-testing` app.
+- This measures interaction latency only. First-render speed is covered by the sibling `mount-testing` app.
