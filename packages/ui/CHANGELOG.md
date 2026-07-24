@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 3.4.5
+
+### Patch Changes
+
+- [#2445](https://github.com/sanity-io/ui/pull/2445) [`f4766f9`](https://github.com/sanity-io/ui/commit/f4766f98391ec0c7dded069d9f7bfb7427918ec6) Thanks [@stipsan](https://github.com/stipsan)! - Make `react-is` a regular dependency instead of a peer dependency
+
 ## 3.4.4
 
 ### Patch Changes

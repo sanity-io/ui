@@ -97,10 +97,8 @@ export function treeItemBoxStyle(
   const {space} = getTheme_v2(props.theme)
 
   return css`
+    display: block;
     padding-left: ${rem(space[2] * $level)};
-
-    &[data-as='a'] {
-      text-decoration: none;
-    }
+    text-decoration: none;
   `
 }

@@ -34,7 +34,6 @@
     "playwright": "^1.61.1",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-is": "catalog:",
     "react-refractor": "catalog:",
     "refractor": "catalog:",
     "rimraf": "catalog:",

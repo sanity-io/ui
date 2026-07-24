@@ -1,10 +1,9 @@
 'use client'
 
 import {Tree, TreeItem} from '@sanity/ui'
-import {useRouter} from 'next/navigation'
-import {MouseEvent, ReactElement, useCallback, useEffect} from 'react'
+import Link from 'next/link'
+import {ReactElement} from 'react'
 
-import {basePath} from '@/constants'
 import {NavNode} from '@/lib/nav/types'
 
 export function Nav(props: {nav: NavNode; path: string}): ReactElement {
@@ -19,39 +18,11 @@ export function Nav(props: {nav: NavNode; path: string}): ReactElement {
   )
 }
 
-function ensureBasePath(path: string, basePath: string = '') {
-  if (path.startsWith(basePath)) return path
-
-  return `${basePath}${path}`
-}
-
 function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   const {level, node, path} = props
-  const router = useRouter()
-  const hidden = node.hidden
   const href = node.targetId && node.href ? node.href : undefined
-  const hrefWithBasePath =
-    node.targetId && node.href ? ensureBasePath(node.href, basePath) : undefined
 
-  // The destination pages are fully cached, so prefetching their content makes
-  // sidebar navigations instant. (TreeItem renders a plain anchor — its
-  // `linkAs` prop bypasses the Box styles — so prefetch imperatively instead
-  // of through `next/link`.)
-  useEffect(() => {
-    if (href && !hidden) router.prefetch(href)
-  }, [hidden, href, router])
-
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLLIElement>) => {
-      if (!(event.ctrlKey || event.metaKey || event.shiftKey)) {
-        event.preventDefault()
-        if (href) router.push(href)
-      }
-    },
-    [href, router],
-  )
-
-  if (hidden) {
+  if (node.hidden) {
     return null
   }
 
@@ -59,12 +30,16 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
 
   return (
     <TreeItem
-      // @TODO support passing linkAs={Link}, or just as={Link}
       expanded={!node.collapsed || path.startsWith(`${node.href}/`)}
-      href={hrefWithBasePath}
-      onClick={handleClick}
+      href={href}
+      // `next/link` adds the `/ui` basePath and prefetches the fully cached
+      // destination pages, making sidebar navigations instant.
+      // `prefetch={true}` upgrades the shared App Shell prefetch to a per-link
+      // runtime prefetch that resolves the article content ahead of the click
+      // (the `[screen]` segment allows this with `prefetch = 'allow-runtime'`).
+      linkAs={Link}
+      linkProps={{prefetch: true}}
       selected={href ? href === path : false}
-      style={{opacity: node.hidden ? 0.25 : undefined}}
       text={title ? node.isHook ? <>{title}()</> : title : <em>Untitled</em>}
     >
       {node.children?.map((child) => (
