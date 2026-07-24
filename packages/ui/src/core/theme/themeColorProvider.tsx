@@ -25,5 +25,3 @@ export function ThemeColorProvider(props: ThemeColorProviderProps): React.JSX.El
     </ThemeProvider>
   )
 }
-
-ThemeColorProvider.displayName = 'ThemeColorProvider'

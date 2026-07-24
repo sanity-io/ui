@@ -46,7 +46,6 @@ const StackComponent = forwardRef(function Stack(
     />
   )
 })
-StackComponent.displayName = 'ForwardRef(Stack)'
 
 /**
  * The `Stack` component is used to place elements on top of each other.

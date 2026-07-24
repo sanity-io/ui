@@ -92,4 +92,3 @@ export const Select = forwardRef(function Select(
     </StyledSelect>
   )
 })
-Select.displayName = 'ForwardRef(Select)'

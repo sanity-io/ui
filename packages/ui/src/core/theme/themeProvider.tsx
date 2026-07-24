@@ -58,5 +58,3 @@ export function ThemeProvider(props: ThemeProviderProps): React.JSX.Element {
     </ThemeContext.Provider>
   )
 }
-
-ThemeProvider.displayName = 'ThemeProvider'

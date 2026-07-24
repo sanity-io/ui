@@ -54,7 +54,6 @@ const CodeComponent = forwardRef(function Code(
     </StyledCode>
   )
 })
-CodeComponent.displayName = 'ForwardRef(Code)'
 
 /**
  * @public

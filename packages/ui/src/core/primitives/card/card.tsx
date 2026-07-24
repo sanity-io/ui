@@ -111,7 +111,6 @@ const CardComponent = forwardRef(function Card(
     </ThemeColorProvider>
   )
 })
-CardComponent.displayName = 'ForwardRef(Card)'
 
 /**
  * The `Card` component acts much like a `Box`, but with a background and foreground color.

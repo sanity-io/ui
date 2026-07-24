@@ -53,5 +53,3 @@ export function TooltipDelayGroupProvider(
     <TooltipDelayGroupContext.Provider value={value}>{children}</TooltipDelayGroupContext.Provider>
   )
 }
-
-TooltipDelayGroupProvider.displayName = 'TooltipDelayGroupProvider'

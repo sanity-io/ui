@@ -395,4 +395,3 @@ export const TextInput = forwardRef(function TextInput(
     </StyledTextInput>
   )
 })
-TextInput.displayName = 'ForwardRef(TextInput)'

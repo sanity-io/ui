@@ -190,7 +190,6 @@ const MenuItemComponent = forwardRef(function MenuItem(
     </Selectable>
   )
 })
-MenuItemComponent.displayName = 'ForwardRef(MenuItem)'
 
 /**
  * @public

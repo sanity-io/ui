@@ -43,6 +43,4 @@ export function PortalProvider(props: PortalProviderProps): React.JSX.Element {
   return <PortalContext.Provider value={value}>{children}</PortalContext.Provider>
 }
 
-PortalProvider.displayName = 'PortalProvider'
-
 const emptySubscribe = () => () => {}

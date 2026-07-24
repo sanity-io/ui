@@ -77,7 +77,6 @@ const TextComponent = forwardRef(function Text(
     </StyledText>
   )
 })
-TextComponent.displayName = 'ForwardRef(Text)'
 
 /**
  * The `Text` component is an agile, themed typographic element.

@@ -100,9 +100,7 @@ const DEFAULT_RENDER_VALUE = (value: string, option?: BaseAutocompleteOption) =>
 const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
   option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
 
-const InnerAutocomplete = forwardRef(function InnerAutocomplete<
-  Option extends BaseAutocompleteOption,
->(
+const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
     Omit<
       HTMLProps<HTMLInputElement>,
@@ -736,8 +734,6 @@ function RenderPopover({
     resultsPopoverElementRef,
   )
 }
-
-InnerAutocomplete.displayName = 'ForwardRef(Autocomplete)'
 
 /**
  * The Autocomplete component is typically used for search components.

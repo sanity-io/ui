@@ -98,4 +98,3 @@ export const AvatarStack = forwardRef(function AvatarStack(
     </StyledAvatarStack>
   )
 })
-AvatarStack.displayName = 'ForwardRef(AvatarStack)'

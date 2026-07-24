@@ -152,7 +152,6 @@ export const VirtualList = forwardRef(function VirtualList(
     </StyledVirtualList>
   )
 })
-VirtualList.displayName = 'ForwardRef(VirtualList)'
 
 function useChildren({
   fromIndex,

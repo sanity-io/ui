@@ -1,0 +1,216 @@
+import {hexToRgb, HSL, hslToRgb, rgbToHex, rgbToHsl} from '@sanity/color'
+import {Box, Code, Flex, Stack, TextInput, Tooltip} from '@sanity/ui'
+import {
+  ChangeEvent,
+  KeyboardEvent as ReactKeyboardEvent,
+  PointerEvent as ReactPointerEvent,
+  ReactNode,
+  RefObject,
+  useRef,
+  useState,
+} from 'react'
+import {styled} from 'styled-components'
+
+import {CHANNEL_COLORS, SLIDER_H} from './constants'
+
+const Handle = styled.button<{$color: string}>`
+  appearance: none;
+  border: 0;
+  position: absolute;
+  background-color: ${({$color}) => $color};
+  width: 12px;
+  height: 12px;
+  left: calc(50% - 6px);
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+  /* The handle is dragged with pointer events; don't let touch scroll instead */
+  touch-action: none;
+
+  &:focus {
+    outline: ${({$color}) => `2px solid ${$color}`};
+  }
+`
+
+function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max)
+}
+
+/** Vertical slider with draggable handles for each HSL channel + a hex input */
+export function HSLSlider(props: {onChange: (hsl: HSL) => void; value: HSL}): ReactNode {
+  const {onChange, value} = props
+  const [h, s, l] = value
+  const hexValue = rgbToHex(hslToRgb(value))
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
+
+  // While the hex input is focused, show what the user typed (the canonical
+  // hex would otherwise reset the field on every keystroke that doesn't parse)
+  const [hexDraft, setHexDraft] = useState<string | null>(null)
+
+  const handleHexChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const draft = event.currentTarget.value
+
+    setHexDraft(draft)
+
+    try {
+      onChange(rgbToHsl(hexToRgb(draft)))
+    } catch {
+      // incomplete hex value; keep the draft until it parses
+    }
+  }
+
+  return (
+    <div style={{flex: 1}}>
+      <div ref={wrapperRef} style={{position: 'relative', height: SLIDER_H + 12}}>
+        <SliderHandle
+          color={CHANNEL_COLORS.h}
+          label={`H=${h}`}
+          max={360}
+          onChange={(next) => onChange([next, s, l])}
+          value={h}
+          wrapperRef={wrapperRef}
+        />
+        <SliderHandle
+          color={CHANNEL_COLORS.s}
+          label={`S=${s}`}
+          max={100}
+          onChange={(next) => onChange([h, next, l])}
+          value={s}
+          wrapperRef={wrapperRef}
+        />
+        <SliderHandle
+          color={CHANNEL_COLORS.l}
+          label={`L=${l}`}
+          max={100}
+          onChange={(next) => onChange([h, s, next])}
+          value={l}
+          wrapperRef={wrapperRef}
+        />
+      </div>
+
+      <Stack gap={1} padding={1}>
+        {/* TextInput forwards className (and thus styled-components styles) to
+            the inner <input>, so flex sizing has to live on Box wrappers */}
+        <Flex gap={1}>
+          <Box flex={1}>
+            <TextInput fontSize={0} padding={1} readOnly value={String(h)} />
+          </Box>
+          <Box flex={1}>
+            <TextInput fontSize={0} padding={1} readOnly value={String(s)} />
+          </Box>
+          <Box flex={1}>
+            <TextInput fontSize={0} padding={1} readOnly value={String(l)} />
+          </Box>
+        </Flex>
+        <TextInput
+          fontSize={0}
+          onBlur={() => setHexDraft(null)}
+          onChange={handleHexChange}
+          onFocus={(event) => setHexDraft(event.currentTarget.value)}
+          padding={1}
+          value={hexDraft ?? hexValue}
+        />
+      </Stack>
+    </div>
+  )
+}
+
+/**
+ * A draggable channel handle. Fully controlled: its vertical position derives
+ * from `value`, and dragging (or the arrow keys) reports the next value
+ * through `onChange`.
+ */
+function SliderHandle(props: {
+  color: string
+  label: string
+  max: number
+  onChange: (value: number) => void
+  value: number
+  wrapperRef: RefObject<HTMLDivElement | null>
+}) {
+  const {color, label, max, onChange, value, wrapperRef} = props
+  const top = (value / max) * SLIDER_H
+
+  // Pointer-y distance from the handle center at grab time, applied while
+  // dragging so grabbing the 12px thumb off-center doesn't snap the value
+  const grabOffsetRef = useRef(0)
+
+  const valueFromCenterY = (centerY: number): number | null => {
+    const wrapper = wrapperRef.current
+
+    if (!wrapper) return null
+
+    const rect = wrapper.getBoundingClientRect()
+    const nextTop = clamp(centerY - rect.top - 6, 0, SLIDER_H)
+
+    return Math.round((nextTop / SLIDER_H) * max)
+  }
+
+  // Drag with pointer capture: move/up events keep arriving on the handle
+  // even when the pointer leaves the iframe/window, and the capture is
+  // implicitly released on pointerup/pointercancel — so a drag can never
+  // get stuck (no window listeners to leak)
+  const handlePointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    event.currentTarget.focus()
+    event.currentTarget.setPointerCapture(event.pointerId)
+
+    const wrapper = wrapperRef.current
+    const centerY = wrapper ? wrapper.getBoundingClientRect().top + top + 6 : event.clientY
+
+    // Grabbing the thumb doesn't change the value; dragging is relative
+    grabOffsetRef.current = event.clientY - centerY
+  }
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    if (!event.currentTarget.hasPointerCapture(event.pointerId)) return
+
+    event.preventDefault()
+
+    const next = valueFromCenterY(event.clientY - grabOffsetRef.current)
+
+    if (next !== null) onChange(next)
+  }
+
+  const handleKeyDown = (event: ReactKeyboardEvent<HTMLButtonElement>) => {
+    // ARIA slider keyboard contract: the keys follow the value (Up/Right
+    // increase, even though larger values sit lower in this layout)
+    const next =
+      event.key === 'ArrowUp' || event.key === 'ArrowRight'
+        ? clamp(value + 1, 0, max)
+        : event.key === 'ArrowDown' || event.key === 'ArrowLeft'
+          ? clamp(value - 1, 0, max)
+          : event.key === 'Home'
+            ? 0
+            : event.key === 'End'
+              ? max
+              : null
+
+    if (next === null) return
+
+    event.preventDefault()
+    onChange(next)
+  }
+
+  return (
+    <Tooltip content={<Code size={1}>{label}</Code>} padding={2} placement="top" portal>
+      <Handle
+        $color={color}
+        aria-label={label}
+        aria-orientation="vertical"
+        aria-valuemax={max}
+        aria-valuemin={0}
+        aria-valuenow={value}
+        onKeyDown={handleKeyDown}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        // oxlint-disable-next-line jsx_a11y/prefer-tag-over-role -- a native <input type="range"> cannot be styled as this 12px overlay thumb; the button implements the slider contract (drag + arrow keys + value ARIA)
+        role="slider"
+        style={{top}}
+        // Buttons are natively focusable; explicit for jsx_a11y/interactive-supports-focus, which only sees the slider role
+        tabIndex={0}
+        type="button"
+      />
+    </Tooltip>
+  )
+}

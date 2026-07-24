@@ -75,7 +75,6 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
     </StyledBreadcrumbs>
   )
 })
-Breadcrumbs.displayName = 'ForwardRef(Breadcrumbs)'
 
 function useItems({
   collapse,

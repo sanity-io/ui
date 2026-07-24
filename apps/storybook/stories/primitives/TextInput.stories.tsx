@@ -23,6 +23,7 @@ const meta: Meta<typeof TextInput> = {
     iconRight: getIconControls(),
     radius: getRadiusControls(),
     gap: getSpaceControls(),
+    // oxlint-disable-next-line no-deprecated
     space: getSpaceControls(),
   },
   component: TextInput,

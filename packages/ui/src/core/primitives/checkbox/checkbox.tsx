@@ -71,4 +71,3 @@ export const Checkbox = forwardRef(function Checkbox(
     </StyledCheckbox>
   )
 })
-Checkbox.displayName = 'ForwardRef(Checkbox)'
