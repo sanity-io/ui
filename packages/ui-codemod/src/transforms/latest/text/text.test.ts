@@ -98,15 +98,16 @@ defineInlineTest(
   transform,
   {},
   `
-  <Text maxWidth="fill" />
+  <Text width={1} maxWidth="fill" />
   `,
   `
   <Text
     style={{
+      width: "40rem",
       maxWidth: "100%"
     }}
     as="div"
     trim={true} />
   `,
-  'moves maxWidth prop to style and updates mapped value',
+  'moves width props to style and updates mapped value',
 )
