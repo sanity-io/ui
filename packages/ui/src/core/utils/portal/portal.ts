@@ -28,5 +28,3 @@ export function Portal(props: PortalProps): React.ReactPortal | null {
 
   return createPortal(children, portalElement)
 }
-
-Portal.displayName = 'Portal'

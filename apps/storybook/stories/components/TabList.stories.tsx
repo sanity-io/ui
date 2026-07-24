@@ -31,6 +31,7 @@ const meta: Meta<typeof TabList> = {
     paddingX: getSpaceControls(),
     paddingY: getSpaceControls(),
     gap: getSpaceControls(),
+    // oxlint-disable-next-line no-deprecated
     space: getSpaceControls(),
   },
   component: TabList,

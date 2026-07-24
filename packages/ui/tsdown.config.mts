@@ -13,6 +13,15 @@ const config: UserConfig = await defineConfig({
   styledComponents: true,
 })
 
+// The default compress pass strips the (otherwise unreferenced) inner names
+// from `forwardRef(function Button(…) {…})` — the names React DevTools shows
+// now that there are no `displayName` assignments.
+config.minify = {
+  compress: {keepNames: {function: true, class: true}},
+  codegen: false,
+  mangle: false,
+}
+
 const baseOutputOptions = config.outputOptions
 
 // Emit shared (non-entry) chunks to `dist/_chunks/` so they can never collide

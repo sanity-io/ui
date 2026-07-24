@@ -245,7 +245,6 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
     () => ({
-      // oxlint-disable-next-line no-deprecated
       boundaryElement: deprecated_boundaryElement,
       overflow: 'auto',
       placement: deprecated_placement,
@@ -273,4 +272,3 @@ export const MenuButton = forwardRef(function MenuButton(
     </Popover>
   )
 })
-MenuButton.displayName = 'ForwardRef(MenuButton)'

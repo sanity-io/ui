@@ -48,4 +48,3 @@ export const Radio = forwardRef(function Radio(
     </StyledRadio>
   )
 })
-Radio.displayName = 'ForwardRef(Radio)'

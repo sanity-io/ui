@@ -391,7 +391,6 @@ export const Tooltip = forwardRef(function Tooltip(
     </>
   )
 })
-Tooltip.displayName = 'ForwardRef(Tooltip)'
 
 function useMiddleware({
   animate,

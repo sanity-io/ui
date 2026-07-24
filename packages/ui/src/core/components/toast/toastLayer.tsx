@@ -37,8 +37,6 @@ export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
   )
 }
 
-ToastLayer.displayName = 'ToastLayer'
-
 const StyledLayer = styled(Grid)`
   box-sizing: border-box;
   position: fixed;

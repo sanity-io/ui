@@ -107,5 +107,3 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
 
   return <LayerContext.Provider value={value}>{children}</LayerContext.Provider>
 }
-
-LayerProvider.displayName = 'LayerProvider'

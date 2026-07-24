@@ -19,6 +19,7 @@ const meta: Meta<typeof Tree> = {
   },
   argTypes: {
     gap: getSpaceControls(),
+    // oxlint-disable-next-line no-deprecated
     space: getSpaceControls(),
   },
   component: Tree,

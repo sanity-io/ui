@@ -53,7 +53,6 @@ const InlineComponent = forwardRef(function Inline(
     </StyledInline>
   )
 })
-InlineComponent.displayName = 'ForwardRef(Inline)'
 
 /**
  * The `Inline` component is a layout utility for aligning and spacing items horizontally.

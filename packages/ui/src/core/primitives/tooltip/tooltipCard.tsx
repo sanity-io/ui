@@ -107,4 +107,3 @@ export const TooltipCard = forwardRef(function TooltipCard(
     </MotionCard>
   )
 })
-TooltipCard.displayName = 'ForwardRef(TooltipCard)'

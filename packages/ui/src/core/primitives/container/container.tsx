@@ -42,7 +42,6 @@ const ContainerComponent = forwardRef(function Container(
     />
   )
 })
-ContainerComponent.displayName = 'ForwardRef(Container)'
 
 /**
  * The `Container` component wraps content layout in a defined set of widths.

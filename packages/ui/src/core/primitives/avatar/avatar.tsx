@@ -187,7 +187,6 @@ const AvatarComponent = forwardRef(function Avatar(
     </StyledAvatar>
   )
 })
-AvatarComponent.displayName = 'ForwardRef(Avatar)'
 
 /**
  * Avatars are used to represent people and other agents (e.g. bots).

@@ -64,7 +64,6 @@ const GridComponent = forwardRef(function Grid(
     </StyledGrid>
   )
 })
-GridComponent.displayName = 'ForwardRef(Grid)'
 
 /**
  * The `Grid` component is for building 2-dimensional layers (based on CSS grid).

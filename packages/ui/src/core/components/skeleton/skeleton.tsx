@@ -55,4 +55,3 @@ export const Skeleton = forwardRef(function Skeleton(
     />
   )
 })
-Skeleton.displayName = 'ForwardRef(Skeleton)'

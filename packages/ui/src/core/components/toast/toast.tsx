@@ -152,8 +152,6 @@ export function Toast(
   )
 }
 
-Toast.displayName = 'Toast'
-
 const container = {
   initial: {y: 32, scale: 0.5, zIndex: 1},
   hidden: {opacity: 0},
@@ -164,6 +162,7 @@ const container = {
       opacity: 1,
       transition: {
         when: 'beforeChildren',
+        // oxlint-disable-next-line no-deprecated
         staggerChildren: visualDuration / 3,
         duration: visualDuration / 3,
       },

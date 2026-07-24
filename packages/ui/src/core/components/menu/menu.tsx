@@ -177,4 +177,3 @@ export const Menu = forwardRef(function Menu(
     </MenuContext.Provider>
   )
 })
-Menu.displayName = 'ForwardRef(Menu)'

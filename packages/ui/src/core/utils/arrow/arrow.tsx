@@ -121,4 +121,3 @@ export const Arrow = forwardRef(function Arrow(
     </StyledArrow>
   )
 })
-Arrow.displayName = 'ForwardRef(Arrow)'
