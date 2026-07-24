@@ -31,10 +31,10 @@
   "typesVersions": {
     "*": {
       "_visual-editing": [
-        "./dist/_visual-editing.d.ts"
+        "./dist/_visual-editing.d.cts"
       ],
       "theme": [
-        "./dist/theme.d.ts"
+        "./dist/theme.d.cts"
       ]
     }
   },
