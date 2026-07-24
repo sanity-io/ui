@@ -65,8 +65,8 @@
     "vitest": "catalog:"
   },
   "peerDependencies": {
-    "react": "^18 || >=19.0.0-0",
-    "sanity": "^5 || ^6"
+    "react": "^19",
+    "sanity": "^6"
   },
   "peerDependenciesMeta": {
     "sanity": {

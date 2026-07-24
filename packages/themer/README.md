@@ -58,7 +58,7 @@ const theme = buildTheme({
 
 ## The Studio tool
 
-The `themerTool` plugin previews generated themes live on your own Studio:
+The `themerTool` plugin previews generated themes live on your own Studio (requires `sanity` v6):
 
 ```ts
 // sanity.config.ts
