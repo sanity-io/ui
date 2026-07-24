@@ -1,11 +1,29 @@
 import {ColorWheelIcon} from '@sanity/icons/ColorWheel'
+import {Button, Text, Tooltip} from '@sanity/ui'
 import {type NavbarProps} from 'sanity'
 
 import {useThemer} from './context'
 
+function ThemerNavbarButton() {
+  const {open, setOpen} = useThemer()
+
+  return (
+    <Tooltip content={<Text size={1}>Themer</Text>} portal>
+      <Button
+        aria-label="Themer"
+        icon={ColorWheelIcon}
+        mode="bleed"
+        onClick={() => setOpen(!open)}
+        selected={open}
+      />
+    </Tooltip>
+  )
+}
+
 /**
  * Adds the toggle that opens and closes the themer sidebar to the Studio
- * navbar.
+ * navbar — an icon button with a tooltip in the top bar (like the Tasks
+ * toggle), and a regular titled action in the narrow-screen sidebar menu.
  *
  * @internal
  */
@@ -17,9 +35,14 @@ export function ThemerNavbar(props: NavbarProps) {
     __internal_actions: [
       ...(props.__internal_actions ?? []),
       {
-        icon: ColorWheelIcon,
         location: 'topbar',
-        name: 'themer',
+        name: 'themer-topbar',
+        render: () => <ThemerNavbarButton />,
+      },
+      {
+        icon: ColorWheelIcon,
+        location: 'sidebar',
+        name: 'themer-sidebar',
         onAction: () => setOpen(!open),
         selected: open,
         title: 'Themer',

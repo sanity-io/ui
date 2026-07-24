@@ -12,6 +12,22 @@ export interface ThemerField {
 }
 
 /**
+ * The stock color each themeable option falls back to when unset (6-digit
+ * hex, for `<input type="color">` and the preset palette swatches).
+ *
+ * @internal
+ */
+export const DEFAULT_COLORS: Required<CreateThemeOptions> = {
+  gray: color.gray[500].hex,
+  primary: color.blue[500].hex,
+  positive: color.green[500].hex,
+  caution: color.yellow[500].hex,
+  critical: color.red[500].hex,
+  lightest: color.white.hex,
+  darkest: color.black.hex,
+}
+
+/**
  * The colors the sidebar exposes pickers for. Presets can set the other
  * `CreateThemeOptions` colors, and the generated snippet always serializes
  * all of them — the pickers are just the simplified editing surface.
@@ -23,24 +39,24 @@ export const THEMER_FIELDS: ThemerField[] = [
     key: 'primary',
     title: 'Primary',
     description: 'Buttons, focus rings and links',
-    defaultValue: color.blue[500].hex,
+    defaultValue: DEFAULT_COLORS.primary,
   },
   {
     key: 'gray',
     title: 'Text',
     description: 'Text, icons and neutral surfaces',
-    defaultValue: color.gray[500].hex,
+    defaultValue: DEFAULT_COLORS.gray,
   },
   {
     key: 'lightest',
     title: 'Light background',
     description: 'The background of the light scheme',
-    defaultValue: color.white.hex,
+    defaultValue: DEFAULT_COLORS.lightest,
   },
   {
     key: 'darkest',
     title: 'Dark background',
     description: 'The background of the dark scheme',
-    defaultValue: color.black.hex,
+    defaultValue: DEFAULT_COLORS.darkest,
   },
 ]

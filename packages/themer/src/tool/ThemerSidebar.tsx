@@ -1,12 +1,12 @@
 import {ClipboardIcon} from '@sanity/icons/Clipboard'
 import {CloseIcon} from '@sanity/icons/Close'
 import {ResetIcon} from '@sanity/icons/Reset'
-import {Box, Button, Card, Code, Flex, Select, Stack, Text, useToast} from '@sanity/ui'
+import {Box, Button, Card, Code, Flex, Grid, Stack, Text, useToast} from '@sanity/ui'
 
-import {presets} from '../presets'
+import {presets, ThemePreset} from '../presets'
 import {COLOR_OPTION_KEYS, CreateThemeOptions} from '../types'
 import {useThemer} from './context'
-import {THEMER_FIELDS, ThemerField} from './fields'
+import {DEFAULT_COLORS, THEMER_FIELDS, ThemerField} from './fields'
 import {createThemeSnippet} from './snippet'
 
 const swatchStyle: React.CSSProperties = {
@@ -103,19 +103,18 @@ export function ThemerSidebar() {
           <Stack gap={5}>
             <Stack gap={3}>
               <Text size={1} weight="medium">
-                Preset
+                Presets
               </Text>
-              <Select
-                onChange={(event) => handlePresetChange(event.currentTarget.value)}
-                value={activePresetSlug}
-              >
-                {activePresetSlug === '' && <option value="">Custom</option>}
+              <Grid gap={2} gridTemplateColumns={2}>
                 {presets.map((preset) => (
-                  <option key={preset.slug} value={preset.slug}>
-                    {preset.title}
-                  </option>
+                  <PresetButton
+                    active={preset.slug === activePresetSlug}
+                    key={preset.slug}
+                    onClick={handlePresetChange}
+                    preset={preset}
+                  />
                 ))}
-              </Select>
+              </Grid>
             </Stack>
 
             <Stack gap={4}>
@@ -159,6 +158,41 @@ export function ThemerSidebar() {
         </Box>
       </Flex>
     </Card>
+  )
+}
+
+const paletteStyle: React.CSSProperties = {
+  display: 'flex',
+  height: 21,
+  borderRadius: 3,
+  overflow: 'hidden',
+  boxShadow: 'inset 0 0 0 1px var(--card-border-color)',
+}
+
+/** A little color palette of the colors a preset would apply */
+function PresetButton(props: {
+  active: boolean
+  onClick: (slug: string) => void
+  preset: ThemePreset
+}) {
+  const {active, onClick, preset} = props
+
+  return (
+    <Button mode="ghost" onClick={() => onClick(preset.slug)} padding={2} selected={active}>
+      <Stack as="span" gap={2}>
+        <span style={paletteStyle}>
+          {COLOR_OPTION_KEYS.map((key) => (
+            <span
+              key={key}
+              style={{flex: 1, background: preset.colors[key] ?? DEFAULT_COLORS[key]}}
+            />
+          ))}
+        </span>
+        <Text align="left" size={1} textOverflow="ellipsis">
+          {preset.title}
+        </Text>
+      </Stack>
+    </Button>
   )
 }
 
