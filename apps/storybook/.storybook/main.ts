@@ -1,5 +1,6 @@
 import type {StorybookConfig} from '@storybook/react-vite'
-import viteReact from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
+import viteReact, {reactCompilerPreset} from '@vitejs/plugin-react'
 import {mergeConfig} from 'vite'
 
 const config: StorybookConfig = {
@@ -17,11 +18,7 @@ const config: StorybookConfig = {
   },
   viteFinal(config) {
     return mergeConfig(config, {
-      plugins: [
-        viteReact({
-          babel: {plugins: [['babel-plugin-react-compiler', {target: '19'}]]},
-        }),
-      ],
+      plugins: [viteReact(), babel({presets: [reactCompilerPreset({target: '19'})]})],
     })
   },
 }
