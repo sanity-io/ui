@@ -347,9 +347,6 @@ importers:
       react-dom:
         specifier: ^19.2.8
         version: 19.2.8(react@19.2.8)
-      react-is:
-        specifier: 'catalog:'
-        version: 19.2.8
       react-refractor:
         specifier: 'catalog:'
         version: 4.0.0(react@19.2.8)
@@ -579,6 +576,9 @@ importers:
       react-compiler-runtime:
         specifier: 1.0.0
         version: 1.0.0(react@19.2.8)
+      react-is:
+        specifier: 'catalog:'
+        version: 19.2.8
       react-refractor:
         specifier: 'catalog:'
         version: 4.0.0(react@19.2.8)
@@ -625,9 +625,6 @@ importers:
       react-dom:
         specifier: ^19.2.8
         version: 19.2.8(react@19.2.8)
-      react-is:
-        specifier: 'catalog:'
-        version: 19.2.8
       rimraf:
         specifier: 'catalog:'
         version: 5.0.10
