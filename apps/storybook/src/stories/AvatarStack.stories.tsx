@@ -33,7 +33,11 @@ export const Default: Story = {
       <AvatarStack {...props}>
         <Avatar initials="AB" />
         <Avatar color="green" initials="CD" />
-        <Avatar color="blue" initials="EF" />
+        <Avatar
+          color="blue"
+          initials="EF"
+          src="https://avatars3.githubusercontent.com/u/406933?s=400&u=af898b0a50ef2ef1248be32dfa1410ccb55f6f65&v=4"
+        />
       </AvatarStack>
     )
   },
