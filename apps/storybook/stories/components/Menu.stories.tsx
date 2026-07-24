@@ -47,6 +47,7 @@ const meta: Meta<typeof Menu> = {
   argTypes: {
     padding: getSpaceControls(),
     gap: getSpaceControls(),
+    // oxlint-disable-next-line no-deprecated
     space: getSpaceControls(),
     disabled: {control: 'boolean'},
     paddingX: getSpaceControls(),
