@@ -1,7 +1,9 @@
+import {createRequire} from 'node:module'
 import {defineCliConfig} from 'sanity/cli'
+import {mergeConfig, type UserConfig} from 'vite'
 
-// Object configs are merged into the base config with vite's `mergeConfig`,
-// which handles both array and object forms of `resolve.alias`.
+const require = createRequire(import.meta.url)
+
 export default defineCliConfig({
   api: {
     projectId: 'mos42crl',
@@ -26,11 +28,39 @@ export default defineCliConfig({
     overloadClientMethods: true,
     formatGeneratedCode: false,
   },
-  vite: {
-    resolve: {
-      alias: {
-        '@': './src',
+  vite(viteConfig, {command}): UserConfig {
+    const nextConfig = mergeConfig(viteConfig, {
+      resolve: {
+        alias: {
+          '@': './src',
+        },
       },
-    },
+    } satisfies UserConfig)
+
+    // Enable React production profiling on the deployed docs studio so React
+    // DevTools can profile with readable component names (see sanity-io/sanity#13674).
+    if (command === 'build') {
+      return mergeConfig(nextConfig, {
+        // Aliasing to react-dom/profiling is necessary in the production build,
+        // otherwise React can't run the profiler on the deployed studio
+        resolve: {alias: {'react-dom/client': require.resolve('react-dom/profiling')}},
+        build: {
+          // Enable production source maps to easier debug the deployed studio
+          sourcemap: true,
+          rolldownOptions: {
+            output: {
+              // Disabling `mangle` (while keeping compression and whitespace removal)
+              // ensures that the React DevTools components inspector has readable
+              // component names. This overrides the `build.minify: 'oxc'` default set
+              // by `sanity build`, replacing `esbuild: {minifyIdentifiers: false}`
+              // which the rolldown-powered Vite silently ignores.
+              minify: {compress: true, mangle: false, codegen: true},
+            },
+          },
+        },
+      } satisfies UserConfig)
+    }
+
+    return nextConfig
   },
 })
