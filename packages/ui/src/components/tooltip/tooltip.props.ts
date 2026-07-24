@@ -4,22 +4,22 @@ import {type PropDef} from '../../types/PropDef'
 /** @public */
 export interface TooltipProps
   extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
+  /** Anchor name for positioning */
+  anchorName?: React.ReactNode
   /** Focusable trigger element */
   children: React.ReactElement<Record<string, unknown>>
   /** Tooltip content */
-  content: React.ReactNode
-  /** Disabled state */
-  disabled?: boolean
-  /** Render tooltip content in a portal attached to `document.body` */
+  content?: React.ReactNode
+  /** Render tooltip in portal */
   portal?: boolean
 }
 
 export const tooltipProps: Record<string, PropDef> = {
-  content: {
+  anchorName: {
     type: 'string',
   },
-  disabled: {
-    type: 'boolean',
+  content: {
+    type: 'string',
   },
   portal: {
     type: 'boolean',

@@ -20,15 +20,14 @@ function TooltipRoot({
     className,
     style,
     id: idProp,
-    disabled,
+    anchorName,
     content,
-    portal = false,
+    portal,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, tooltipProps)
   const reactId = useId()
   const id = idProp || reactId
-  const tooltipId = `tooltip-${id}`
   const tooltipRef = useRef<HTMLDivElement>(null)
   const dismissedRef = useRef(false)
   const [mounted, setMounted] = useState(false)
@@ -37,31 +36,25 @@ function TooltipRoot({
     setMounted(true)
   }, [])
 
-  const triggerProps = disabled
-    ? undefined
-    : {
-        'aria-describedby': tooltipId,
-        'interestfor': tooltipId,
-        'style': {anchorName: `--anchor-${id}`},
-        'onMouseLeave': () => {
-          dismissedRef.current = false
-        },
-        'onBlur': () => {
-          dismissedRef.current = false
-        },
-        'onClick': () => {
-          dismissedRef.current = true
-          tooltipRef.current?.togglePopover(false)
-        },
-      }
+  const triggerProps = {
+    'aria-describedby': id,
+    'interestfor': id,
+    'style': {anchorName: `--anchor-${anchorName}`},
+    'onMouseLeave': () => {
+      dismissedRef.current = false
+    },
+    'onBlur': () => {
+      dismissedRef.current = false
+    },
+    'onClick': () => {
+      dismissedRef.current = true
+      tooltipRef.current?.togglePopover(false)
+    },
+  }
 
   const trigger = children.type.forwardsTriggerProps
-    ? cloneElement(children, {triggerProps: disabled ? forwardedTriggerProps : triggerProps})
+    ? cloneElement(children, {triggerProps})
     : cloneElement(children, mergeTriggerProps(children.props, forwardedTriggerProps, triggerProps))
-
-  if (disabled) {
-    return trigger
-  }
 
   const handleBeforeToggle = (e: ToggleEvent) => {
     if (e.newState === 'open' && dismissedRef.current) {
@@ -82,12 +75,12 @@ function TooltipRoot({
           )}
           style={{
             ...style,
-            positionAnchor: `--anchor-${id}`,
+            positionAnchor: `--anchor-${anchorName}`,
           }}
           data-ui="Tooltip"
           role="tooltip"
           popover="hint"
-          id={tooltipId}
+          id={id}
           ref={tooltipRef}
           onBeforeToggle={handleBeforeToggle}
           {...rest}

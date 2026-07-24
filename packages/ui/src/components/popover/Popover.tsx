@@ -20,14 +20,14 @@ function PopoverRoot({
     className,
     style,
     id: idProp,
+    anchorName,
     content,
-    portal = false,
+    portal,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, popoverProps)
   const reactId = useId()
   const id = idProp || reactId
-  const popoverId = `popover-${id}`
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -40,8 +40,8 @@ function PopoverRoot({
   }
 
   const triggerProps = {
-    popoverTarget: popoverId,
-    style: {anchorName: `--anchor-${id}`},
+    popoverTarget: id,
+    style: {anchorName: `--anchor-${anchorName}`},
   }
 
   const trigger = children.type.forwardsTriggerProps
@@ -62,11 +62,11 @@ function PopoverRoot({
             )}
             style={{
               ...style,
-              positionAnchor: `--anchor-${id}`,
+              positionAnchor: `--anchor-${anchorName}`,
             }}
             data-ui="Popover"
             popover="auto"
-            id={popoverId}
+            id={id}
             onToggle={handleToggle}
             {...rest}
           >
