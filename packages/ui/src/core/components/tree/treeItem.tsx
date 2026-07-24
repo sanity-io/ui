@@ -26,6 +26,12 @@ export interface TreeItemProps {
    * Allows passing a custom element type to the link component
    */
   linkAs?: ElementType
+  /**
+   * Additional props for the link element that is rendered when `href` is set — e.g. `next/link`'s
+   * `prefetch` together with `linkAs={Link}`. Props controlled by `TreeItem` itself (`href`,
+   * `role`, `tabIndex`, `aria-expanded` and the ref) take precedence.
+   */
+  linkProps?: React.HTMLProps<HTMLAnchorElement> & Record<string, unknown>
   padding?: number | number[]
   gap?: number | number[]
   /**
@@ -67,6 +73,7 @@ export function TreeItem(
     icon: IconComponent,
     id: idProp,
     linkAs,
+    linkProps,
     muted,
     onClick,
     padding = 2,
@@ -185,6 +192,7 @@ export function TreeItem(
         role="none"
       >
         <TreeItemBox
+          {...linkProps}
           $level={tree.level}
           aria-expanded={expanded}
           as={linkAs}

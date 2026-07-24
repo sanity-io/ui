@@ -93,6 +93,37 @@ describe('components/treeItem links', () => {
     expect(box).not.toHaveAttribute('as')
     expect(box).not.toHaveAttribute('href')
   })
+
+  it('forwards `linkProps` to the link, without overriding controlled props', () => {
+    const receivedProps: Record<string, unknown>[] = []
+
+    function CustomLink({children, ...props}: React.ComponentProps<'a'> & {prefetch?: boolean}) {
+      receivedProps.push(props)
+
+      const {prefetch, ...anchorProps} = props
+
+      return (
+        <a data-prefetch={prefetch} {...anchorProps}>
+          {children}
+        </a>
+      )
+    }
+
+    renderTreeItem({
+      href: '/foo',
+      linkAs: CustomLink,
+      linkProps: {prefetch: true, hrefLang: 'en', href: '/overridden', role: 'button'},
+    })
+
+    expect(receivedProps.length).toBeGreaterThan(0)
+    for (const props of receivedProps) {
+      expect(props).toHaveProperty('prefetch', true)
+      expect(props).toHaveProperty('hrefLang', 'en')
+      // Props controlled by TreeItem take precedence over `linkProps`
+      expect(props).toHaveProperty('href', '/foo')
+      expect(props).toHaveProperty('role', 'treeitem')
+    }
+  })
 })
 
 describe('components/treeItem spacing', () => {
