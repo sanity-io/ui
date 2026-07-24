@@ -23,17 +23,18 @@
   "files": [
     "dist"
   ],
+  "type": "module",
   "sideEffects": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
   "typesVersions": {
     "*": {
       "_visual-editing": [
-        "./dist/_visual-editing.d.ts"
+        "./dist/_visual-editing.d.cts"
       ],
       "theme": [
-        "./dist/theme.d.ts"
+        "./dist/theme.d.cts"
       ]
     }
   },
@@ -46,16 +47,16 @@
   "publishConfig": {
     "exports": {
       ".": {
-        "import": "./dist/index.mjs",
-        "require": "./dist/index.js"
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
       },
       "./_visual-editing": {
-        "import": "./dist/_visual-editing.mjs",
-        "require": "./dist/_visual-editing.js"
+        "import": "./dist/_visual-editing.js",
+        "require": "./dist/_visual-editing.cjs"
       },
       "./theme": {
-        "import": "./dist/theme.mjs",
-        "require": "./dist/theme.js"
+        "import": "./dist/theme.js",
+        "require": "./dist/theme.cjs"
       },
       "./package.json": "./package.json"
     }
