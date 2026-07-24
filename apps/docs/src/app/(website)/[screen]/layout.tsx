@@ -21,15 +21,14 @@ import {
 
 import {ArticleLayout} from './layout.client'
 
-export const instant = false
-
-// Let `<Link prefetch={true}>` (the sidebar nav) runtime-prefetch these routes:
-// the shared App Shell can't include the `params`-dependent article content,
-// but it is fully cached (`'use cache'` + the Sanity cache profile), so a
-// per-link runtime prefetch resolves the entire page ahead of navigation.
-// Downstream segments (`[screen]` and `[screen]/[...article]` pages) are
-// included in the same runtime prefetch request.
-export const prefetch = 'allow-runtime'
+// NOTE: this layout previously exported `instant = false` (added when
+// migrating to next@preview to silence the instant-navigation validation).
+// That flag maps to the `PrefetchDisabled` hint, which opts the segment out
+// of BOTH static and runtime prefetching — so every sidebar navigation had to
+// dynamically stream this segment, flashing the `loading.tsx` boundary.
+// Without it, the layout's per-URL prerendered output is served to static
+// per-segment prefetches, and the pages opt into runtime prefetching (see
+// `prefetch = 'allow-runtime'` in the page modules).
 
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({

@@ -24,6 +24,13 @@ import {
 
 import {ArcadePage} from './ArcadePage'
 
+// Let `<Link prefetch={true}>` (the sidebar nav) runtime-prefetch this page:
+// the shared App Shell can't include `params`-dependent content, but it is
+// fully cached (`'use cache'` + the Sanity cache profile), so a per-link
+// runtime prefetch resolves it ahead of navigation — including URLs that
+// aren't covered by a build-time prerender (fresh or revalidated articles).
+export const prefetch = 'allow-runtime'
+
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({
     query: screensQuery,
