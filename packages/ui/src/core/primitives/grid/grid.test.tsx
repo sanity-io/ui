@@ -2,12 +2,12 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {responsiveGridStyle} from '../../styles/internal'
+import {render} from '../../../../test/utils'
+import {responsiveGridStyle} from '../../styles/grid/gridStyle'
 import {Grid} from './grid'
 
-vi.mock('../../styles/internal', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../styles/internal')>()
+vi.mock('../../styles/grid/gridStyle', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../styles/grid/gridStyle')>()
 
   return {
     ...actual,

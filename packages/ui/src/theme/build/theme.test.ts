@@ -1,7 +1,7 @@
 import {expect, it} from 'vitest'
 
 import {buildTheme} from './buildTheme'
-import {getContrastRatio} from './lib/color-fns'
+import {getContrastRatio} from './lib/color-fns/contrastRatio'
 
 const AA_MIN = 4.5
 

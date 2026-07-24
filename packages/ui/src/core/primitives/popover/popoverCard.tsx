@@ -1,14 +1,19 @@
 import {Strategy} from '@floating-ui/react-dom'
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {motion, type MotionProps} from 'motion/react'
 import React, {CSSProperties, forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
 
+import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {POPOVER_MOTION_PROPS} from '../../constants'
-import {BoxOverflow, CardTone, Placement, PopoverMargins, Radius} from '../../types'
-import {Arrow, useLayer} from '../../utils'
-import {Card, CardProps} from '../card'
-import {Flex} from '../flex'
+import {BoxOverflow} from '../../types/box'
+import {CardTone} from '../../types/card'
+import {Placement} from '../../types/placement'
+import {PopoverMargins} from '../../types/popover'
+import {Radius} from '../../types/radius'
+import {Arrow} from '../../utils/arrow/arrow'
+import {useLayer} from '../../utils/layer/useLayer'
+import {Card, CardProps} from '../card/card'
+import {Flex} from '../flex/flex'
 import {
   DEFAULT_POPOVER_ARROW_HEIGHT,
   DEFAULT_POPOVER_ARROW_RADIUS,

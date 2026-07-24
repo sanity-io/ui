@@ -1,8 +1,8 @@
 import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
-import {Button} from '../../primitives'
-import {ButtonTone} from '../../types'
+import {Button} from '../../primitives/button/button'
+import {ButtonTone} from '../../types/button'
 
 /**
  * @public

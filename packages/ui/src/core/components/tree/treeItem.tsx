@@ -1,10 +1,12 @@
 import {ToggleArrowRightIcon} from '@sanity/icons/ToggleArrowRight'
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {startTransition, useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {Box, Flex, Text} from '../../primitives'
-import {ElementType} from '../../types'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {Box} from '../../primitives/box/box'
+import {Flex} from '../../primitives/flex/flex'
+import {Text} from '../../primitives/text/text'
+import {ElementType} from '../../types/component'
 import {
   treeItemBoxStyle,
   TreeItemBoxStyleProps,

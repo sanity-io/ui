@@ -1,8 +1,9 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {rem, ThemeProps} from '../../styles'
-import {focusRingStyle} from '../../styles/internal'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {focusRingStyle} from '../../styles/focusRing'
+import {rem} from '../../styles/helpers'
+import {ThemeProps} from '../../styles/types'
 
 /* Root */
 export function switchBaseStyles(): ReturnType<typeof css> {

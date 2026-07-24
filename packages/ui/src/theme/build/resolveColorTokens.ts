@@ -5,6 +5,8 @@ import {
   ColorConfigInputMode,
   ColorConfigInputState,
   ColorConfigStateTone,
+} from '../config/system'
+import {
   ThemeColorAvatarTokens,
   ThemeColorBadgeTokens,
   ThemeColorBaseTokens,
@@ -14,7 +16,7 @@ import {
   ThemeColorStatesTokens,
   ThemeColorStateTokens,
   ThemeColorTokens,
-} from '../config'
+} from '../config/tokens/color/types'
 import {defaultColorTokens} from '../defaults/colorTokens'
 import {
   THEME_COLOR_BUTTON_MODES,
@@ -23,11 +25,13 @@ import {
   THEME_COLOR_INPUT_STATES,
   THEME_COLOR_STATE_TONES,
   THEME_COLOR_STATES,
+} from '../system/color/_constants'
+import {
   ThemeColorButtonModeKey,
   ThemeColorCardToneKey,
   ThemeColorStateKey,
   ThemeColorStateToneKey,
-} from '../system'
+} from '../system/color/_system'
 import {merge} from './merge'
 
 /**

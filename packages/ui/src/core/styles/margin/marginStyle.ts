@@ -1,5 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
-
+import {CSSObject} from '../../../theme/system/css'
 import {_getResponsiveSpace} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveMarginStyleProps} from './types'

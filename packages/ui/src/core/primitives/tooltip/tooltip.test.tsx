@@ -8,9 +8,11 @@ import '../../../../test/mocks/resizeObserver.mock'
 import '../../../../test/mocks/matchMedia.mock'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {Button, Text} from '../../primitives'
-import {Tooltip, TooltipDelayGroupProvider} from '../tooltip'
+import {render} from '../../../../test/utils'
+import {Button} from '../button/button'
+import {Text} from '../text/text'
+import {Tooltip} from './tooltip'
+import {TooltipDelayGroupProvider} from './tooltipDelayGroup/tooltipDelayGroupProvider'
 
 beforeEach(() => {
   vi.useFakeTimers()

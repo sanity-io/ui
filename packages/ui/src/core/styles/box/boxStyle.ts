@@ -1,6 +1,7 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {Property} from 'csstype'
 
+import {CSSObject} from '../../../theme/system/css'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {_responsive} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBoxStyleProps} from './types'
