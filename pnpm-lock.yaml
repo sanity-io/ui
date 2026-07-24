@@ -350,9 +350,6 @@ importers:
       react-dom:
         specifier: ^19.2.8
         version: 19.2.8(react@19.2.8)
-      react-is:
-        specifier: 'catalog:'
-        version: 19.2.8
       react-refractor:
         specifier: 'catalog:'
         version: 4.0.0(react@19.2.8)
@@ -8539,7 +8536,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.29.7
       '@babel/helper-validator-option': 7.29.7
-      browserslist: 4.28.6
+      browserslist: 4.28.7
       lru-cache: 5.1.1
       semver: 6.3.1
 
