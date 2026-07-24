@@ -8,11 +8,16 @@ export interface PopoverProps
   children: React.ReactElement<Record<string, unknown>>
   /** Popover content */
   content: React.ReactNode
+  /** Render popover content in a portal attached to `document.body` */
+  portal?: boolean
 }
 
 export const popoverProps: Record<string, PropDef> = {
   content: {
     type: 'string',
+  },
+  portal: {
+    type: 'boolean',
   },
   ...placementProps,
 }

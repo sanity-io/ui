@@ -1,8 +1,9 @@
 import clsx from 'clsx'
-import {Activity, cloneElement, useId, useState, type ToggleEvent} from 'react'
+import {Activity, cloneElement, useEffect, useId, useState, type ToggleEvent} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {mergeTriggerProps} from '../../utils/mergeTriggerProps'
+import {renderPortal} from '../../utils/renderPortal'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {type PopoverProps, popoverProps} from './popover.props'
 
@@ -20,6 +21,7 @@ function PopoverRoot({
     style,
     id: idProp,
     content,
+    portal = false,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, popoverProps)
@@ -27,6 +29,11 @@ function PopoverRoot({
   const id = idProp || reactId
   const popoverId = `popover-${id}`
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const handleToggle = (e: ToggleEvent) => {
     setOpen(e.newState === 'open')
@@ -45,26 +52,30 @@ function PopoverRoot({
     <>
       {trigger}
 
-      <Activity mode={open ? 'visible' : 'hidden'}>
-        <div
-          className={clsx(
-            popoverClassName,
-            'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
-            className,
-          )}
-          style={{
-            ...style,
-            positionAnchor: `--anchor-${id}`,
-          }}
-          data-ui="Popover"
-          popover="auto"
-          id={popoverId}
-          onToggle={handleToggle}
-          {...rest}
-        >
-          {content}
-        </div>
-      </Activity>
+      {renderPortal(
+        <Activity mode={open ? 'visible' : 'hidden'}>
+          <div
+            className={clsx(
+              popoverClassName,
+              'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+              className,
+            )}
+            style={{
+              ...style,
+              positionAnchor: `--anchor-${id}`,
+            }}
+            data-ui="Popover"
+            popover="auto"
+            id={popoverId}
+            onToggle={handleToggle}
+            {...rest}
+          >
+            {content}
+          </div>
+        </Activity>,
+        mounted,
+        portal,
+      )}
     </>
   )
 }

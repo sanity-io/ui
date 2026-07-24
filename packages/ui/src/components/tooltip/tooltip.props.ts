@@ -10,6 +10,8 @@ export interface TooltipProps
   content: React.ReactNode
   /** Disabled state */
   disabled?: boolean
+  /** Render tooltip content in a portal attached to `document.body` */
+  portal?: boolean
 }
 
 export const tooltipProps: Record<string, PropDef> = {
@@ -17,6 +19,9 @@ export const tooltipProps: Record<string, PropDef> = {
     type: 'string',
   },
   disabled: {
+    type: 'boolean',
+  },
+  portal: {
     type: 'boolean',
   },
   ...placementProps,

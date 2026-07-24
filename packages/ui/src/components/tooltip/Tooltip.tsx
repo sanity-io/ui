@@ -1,8 +1,9 @@
 import clsx from 'clsx'
-import {cloneElement, useId, useRef, type ToggleEvent} from 'react'
+import {cloneElement, useEffect, useId, useRef, useState, type ToggleEvent} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {mergeTriggerProps} from '../../utils/mergeTriggerProps'
+import {renderPortal} from '../../utils/renderPortal'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {type TooltipProps, tooltipProps} from './tooltip.props'
 
@@ -21,6 +22,7 @@ function TooltipRoot({
     id: idProp,
     disabled,
     content,
+    portal = false,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, tooltipProps)
@@ -29,6 +31,11 @@ function TooltipRoot({
   const tooltipId = `tooltip-${id}`
   const tooltipRef = useRef<HTMLDivElement>(null)
   const dismissedRef = useRef(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const triggerProps = disabled
     ? undefined
@@ -66,26 +73,30 @@ function TooltipRoot({
     <>
       {trigger}
 
-      <div
-        className={clsx(
-          tooltipClassName,
-          'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
-          className,
-        )}
-        style={{
-          ...style,
-          positionAnchor: `--anchor-${id}`,
-        }}
-        data-ui="Tooltip"
-        role="tooltip"
-        popover="hint"
-        id={tooltipId}
-        ref={tooltipRef}
-        onBeforeToggle={handleBeforeToggle}
-        {...rest}
-      >
-        {content}
-      </div>
+      {renderPortal(
+        <div
+          className={clsx(
+            tooltipClassName,
+            'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+            className,
+          )}
+          style={{
+            ...style,
+            positionAnchor: `--anchor-${id}`,
+          }}
+          data-ui="Tooltip"
+          role="tooltip"
+          popover="hint"
+          id={tooltipId}
+          ref={tooltipRef}
+          onBeforeToggle={handleBeforeToggle}
+          {...rest}
+        >
+          {content}
+        </div>,
+        mounted,
+        portal,
+      )}
     </>
   )
 }
