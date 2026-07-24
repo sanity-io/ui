@@ -91,6 +91,7 @@ export function HeroSection(props: {
                     mode={stegaClean(cta.mode) || 'default'}
                     paddingX={5}
                     paddingY={4}
+                    prefetch={true}
                     text={cta.label}
                     tone={stegaClean(cta.tone) || 'default'}
                   />
@@ -122,6 +123,7 @@ export function HeroSection(props: {
                     href={stegaClean(link.href) || '/docs/motivation'}
                     key={link._key}
                     padding={4}
+                    prefetch={true}
                     radius={2}
                   >
                     <Stack gap={3}>

@@ -119,6 +119,7 @@ export function CodeExample(props: {
           mode="bleed"
           padding={2}
           gap={2}
+          prefetch={true}
           text="Open in Arcade"
         />
       </Box>
