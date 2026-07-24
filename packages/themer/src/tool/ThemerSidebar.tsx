@@ -36,9 +36,9 @@ function expandHex(hex: string): string {
 }
 
 /**
- * The themer sidebar: a preset picker and the primary/lightest/darkest color
- * pickers that generate the previewed theme, plus the `createTheme` snippet
- * to make it permanent.
+ * The themer sidebar: a preset picker and the primary, text, light and dark
+ * background color pickers that generate the previewed theme, plus the
+ * `createTheme` snippet to make it permanent.
  *
  * @internal
  */

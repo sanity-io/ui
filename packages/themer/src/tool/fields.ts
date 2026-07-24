@@ -26,15 +26,21 @@ export const THEMER_FIELDS: ThemerField[] = [
     defaultValue: color.blue[500].hex,
   },
   {
+    key: 'gray',
+    title: 'Text',
+    description: 'Text, icons and neutral surfaces',
+    defaultValue: color.gray[500].hex,
+  },
+  {
     key: 'lightest',
-    title: 'Lightest',
-    description: 'Light mode background',
+    title: 'Light background',
+    description: 'The background of the light scheme',
     defaultValue: color.white.hex,
   },
   {
     key: 'darkest',
-    title: 'Darkest',
-    description: 'Dark mode background',
+    title: 'Dark background',
+    description: 'The background of the dark scheme',
     defaultValue: color.black.hex,
   },
 ]
