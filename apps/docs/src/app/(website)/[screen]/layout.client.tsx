@@ -143,7 +143,7 @@ function NavBreadcrumbs(props: {nav: NavNode; path: string[]}) {
       {crumbs.map(({node: crumbNode, segment}, index) => (
         <Text key={segment} size={1} weight="medium">
           {index === 0 ? (
-            <Link href={`/${crumbNode.segment}`} style={{color: 'inherit'}}>
+            <Link href={`/${crumbNode.segment}`} prefetch={true} style={{color: 'inherit'}}>
               {crumbNode.title}
             </Link>
           ) : (

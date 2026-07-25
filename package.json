@@ -26,7 +26,7 @@
     "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.1",
     "@types/node": "catalog:",
-    "eslint-plugin-storybook": "^10.5.3",
+    "eslint-plugin-storybook": "^10.5.4",
     "knip": "^6.29.0",
     "oxfmt": "^0.60.0",
     "oxlint": "^1.75.0",
@@ -36,5 +36,5 @@
   "engines": {
     "node": ">=22.13"
   },
-  "packageManager": "pnpm@11.16.0"
+  "packageManager": "pnpm@11.17.0"
 }
