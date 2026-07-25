@@ -4,8 +4,13 @@ import {type ActiveToolLayoutProps} from 'sanity'
 import {useThemer} from './context'
 import {ThemerSidebar} from './ThemerSidebar'
 
+/**
+ * Narrow enough to leave the studio preview as much room as possible: it fits
+ * the widest picker label next to its swatch, and the code snippet scrolls
+ * horizontally rather than widening the sidebar.
+ */
 const sidebarStyle: React.CSSProperties = {
-  width: 360,
+  width: 240,
   flex: 'none',
   borderLeft: '1px solid var(--card-border-color)',
   boxSizing: 'border-box',

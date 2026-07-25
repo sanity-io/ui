@@ -99,8 +99,8 @@ export function ThemerSidebar() {
           </Flex>
         </Card>
 
-        <Box flex={1} overflow="auto" padding={4}>
-          <Stack gap={5}>
+        <Box flex={1} overflow="auto" padding={3}>
+          <Stack gap={4}>
             <Stack gap={3}>
               <Text size={1} weight="medium">
                 Presets
@@ -117,7 +117,7 @@ export function ThemerSidebar() {
               </Grid>
             </Stack>
 
-            <Stack gap={4}>
+            <Stack gap={3}>
               {THEMER_FIELDS.map((field) => (
                 <ColorField
                   field={field}
@@ -132,7 +132,7 @@ export function ThemerSidebar() {
               <Text size={1} weight="medium">
                 Add to your config
               </Text>
-              <Card border overflow="auto" padding={3} radius={2} tone="transparent">
+              <Card border overflow="auto" padding={2} radius={2} tone="transparent">
                 <Code language="ts" size={0}>
                   {snippet}
                 </Code>
@@ -178,7 +178,13 @@ function PresetButton(props: {
   const {active, onClick, preset} = props
 
   return (
-    <Button mode="ghost" onClick={() => onClick(preset.slug)} padding={2} selected={active}>
+    <Button
+      mode="ghost"
+      onClick={() => onClick(preset.slug)}
+      padding={2}
+      selected={active}
+      title={preset.title}
+    >
       <Stack as="span" gap={2}>
         <span style={paletteStyle}>
           {COLOR_OPTION_KEYS.map((key) => (
@@ -204,7 +210,7 @@ function ColorField(props: {
   const {field, value, onChange} = props
 
   return (
-    <Flex align="center" gap={3}>
+    <Flex align="center" gap={2}>
       <Stack flex={1} gap={2}>
         <Text size={1} weight="medium">
           {field.title}
