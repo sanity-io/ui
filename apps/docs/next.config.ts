@@ -17,6 +17,15 @@ const nextConfig: NextConfig = {
   transpilePackages: ['@sanity/color', '@sanity/icons', '@sanity/logos', '@sanity/ui'],
   reactCompiler: true,
   experimental: {
+    // The segment cache's optimistic route prediction (default-on in this
+    // canary) doesn't strip `basePath` when pattern-matching pathnames, so it
+    // predicts `{screen: 'ui'}` for e.g. /ui/docs/…. Every predicted
+    // navigation then mismatches the server's route tree, which triggers a
+    // soft-refresh retry, invalidates the whole route cache and re-prefetches
+    // every visible link — the prefetched content is never used and the
+    // `loading.tsx` boundary flashes on click. Disable it until the basePath
+    // handling is fixed upstream.
+    optimisticRouting: false,
     // Use the native Rust port of the React Compiler (runs directly on
     // Turbopack's swc AST) instead of the Babel transform
     turbopackRustReactCompiler: true,
