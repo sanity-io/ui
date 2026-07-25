@@ -7,23 +7,23 @@ and serverless functions live under `apps/`.
 
 ## Packages
 
-| Package | Description |
-| --- | --- |
-| [`@sanity/ui`](packages/ui) | React component library |
-| [`@sanity/icons`](packages/icons) | Icon components (SVG → React) |
-| [`@sanity/color`](packages/color) | Color palette |
-| [`@sanity/logos`](packages/logos) | Sanity / GROQ logo components |
-| [`figma-plugin-sanity-ui`](packages/figma) | Figma plugin for Sanity UI theme tokens |
+| Package                                             | Description                                  |
+| --------------------------------------------------- | -------------------------------------------- |
+| [`@sanity/ui`](packages/ui)                         | React component library                      |
+| [`@sanity/icons`](packages/icons)                   | Icon components (SVG → React)                |
+| [`@sanity/color`](packages/color)                   | Color palette                                |
+| [`@sanity/logos`](packages/logos)                   | Sanity / GROQ logo components                |
+| [`figma-plugin-sanity-ui`](packages/figma)          | Figma plugin for Sanity UI theme tokens      |
 | [`figma-plugin-sanity-color`](packages/figma-color) | Figma plugin for the `@sanity/color` palette |
 
 ## Apps
 
-| App | Description |
-| --- | --- |
-| [`apps/storybook`](apps/storybook) | Component Storybook ([localhost:6006](http://localhost:6006) via `pnpm dev`) |
-| [`apps/docs`](apps/docs) | [sanity.io/ui](https://www.sanity.io/ui) docs site (Next.js + embedded Studio) |
-| [`apps/icons`](apps/icons) | [icons.sanity.dev](https://icons.sanity.dev) searchable icon catalog |
-| [`apps/blueprints/docs`](apps/blueprints/docs) | Sanity Blueprint (serverless functions for the docs site) |
+| App                                            | Description                                                                    |
+| ---------------------------------------------- | ------------------------------------------------------------------------------ |
+| [`apps/storybook`](apps/storybook)             | Component Storybook ([localhost:6006](http://localhost:6006) via `pnpm dev`)   |
+| [`apps/docs`](apps/docs)                       | [sanity.io/ui](https://www.sanity.io/ui) docs site (Next.js + embedded Studio) |
+| [`apps/icons`](apps/icons)                     | [icons.sanity.dev](https://icons.sanity.dev) searchable icon catalog           |
+| [`apps/blueprints/docs`](apps/blueprints/docs) | Sanity Blueprint (serverless functions for the docs site)                      |
 
 ## Requirements
 
@@ -52,15 +52,15 @@ Storybook and the apps hot-reload package edits without a rebuild.
 
 ### Common scripts
 
-| Script | What it does |
-| --- | --- |
-| `pnpm build` | Build all publishable packages and Figma plugins |
-| `pnpm test` | Unit tests (`@sanity/ui`, `@sanity/icons`, `@sanity/color`) |
-| `pnpm test:browser` | Storybook browser tests (Chromium via Playwright) |
-| `pnpm lint` | Lint + type-check (oxlint) |
-| `pnpm format` | Format with oxfmt |
-| `pnpm knip` | Unused files / dependencies / exports |
-| `pnpm changeset` | Add a changeset for a release |
+| Script              | What it does                                                |
+| ------------------- | ----------------------------------------------------------- |
+| `pnpm build`        | Build all publishable packages and Figma plugins            |
+| `pnpm test`         | Unit tests (`@sanity/ui`, `@sanity/icons`, `@sanity/color`) |
+| `pnpm test:browser` | Storybook browser tests (Chromium via Playwright)           |
+| `pnpm lint`         | Lint + type-check (oxlint)                                  |
+| `pnpm format`       | Format with oxfmt                                           |
+| `pnpm knip`         | Unused files / dependencies / exports                       |
+| `pnpm changeset`    | Add a changeset for a release                               |
 
 ## Contributing & releasing
 
