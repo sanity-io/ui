@@ -1,4 +1,4 @@
-import {ThemeColorButtonModeKey, ThemeColorStateToneKey} from '@sanity/ui/theme'
+import {ThemeColorButtonModeKey, ThemeColorStateToneKey} from '../../theme/system/color/_system'
 
 /**
  * @public

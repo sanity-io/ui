@@ -1,10 +1,12 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {responsiveLabelFont, responsiveTextAlignStyle} from '../../styles/internal'
-import {ElementType, Props, TextAlign} from '../../types'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {responsiveLabelFont} from '../../styles/font/labelFontStyle'
+import {responsiveTextAlignStyle} from '../../styles/font/textAlignStyle'
+import {_getArrayProp} from '../../styles/helpers'
+import {ElementType, Props} from '../../types/component'
+import {TextAlign} from '../../types/text'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {labelBaseStyle} from './styles'
 

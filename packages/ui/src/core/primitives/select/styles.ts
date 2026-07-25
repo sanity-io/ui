@@ -1,14 +1,14 @@
-import {CSSObject, getTheme_v2, ThemeFontSize} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {_responsive, rem, ThemeProps} from '../../styles'
-import {
-  focusRingBorderStyle,
-  focusRingStyle,
-  responsiveInputPaddingIconRightStyle,
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
-} from '../../styles/internal'
+import {CSSObject} from '../../../theme/system/css'
+import {ThemeFontSize} from '../../../theme/system/font'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
+import {_responsive, rem} from '../../styles/helpers'
+import {responsiveInputPaddingIconRightStyle} from '../../styles/input/responsiveInputPaddingStyle'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {ThemeProps} from '../../styles/types'
 
 function rootStyle(): ReturnType<typeof css> {
   return css`

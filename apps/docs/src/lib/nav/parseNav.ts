@@ -1,6 +1,6 @@
 import {stegaClean} from 'next-sanity'
 
-import {NavItemData} from '../data'
+import {NavItemData} from '../data/_global/types'
 import {NavNode} from './types'
 
 export function parseNav(item: NavItemData, basePath: string[]): NavNode {

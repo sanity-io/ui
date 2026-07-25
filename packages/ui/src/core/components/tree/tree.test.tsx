@@ -2,13 +2,13 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {Stack} from '../../primitives'
+import {render} from '../../../../test/utils'
+import {Stack} from '../../primitives/stack/stack'
 import {Tree} from './tree'
 import {TreeItem} from './treeItem'
 
-vi.mock('../../primitives', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../primitives')>()
+vi.mock('../../primitives/stack/stack', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives/stack/stack')>()
 
   return {
     ...actual,

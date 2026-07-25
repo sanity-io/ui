@@ -1,21 +1,18 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {
-  boxStyle,
-  flexItemStyle,
-  FlexItemStyleProps,
-  responsiveBoxStyle,
-  ResponsiveBoxStyleProps,
-  responsiveGridItemStyle,
-  ResponsiveGridItemStyleProps,
-  responsiveMarginStyle,
-  ResponsiveMarginStyleProps,
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
-} from '../../styles/internal'
-import {ElementType, Props} from '../../types'
+import {boxStyle, responsiveBoxStyle} from '../../styles/box/boxStyle'
+import {ResponsiveBoxStyleProps} from '../../styles/box/types'
+import {flexItemStyle} from '../../styles/flex/flexItemStyle'
+import {FlexItemStyleProps} from '../../styles/flex/types'
+import {responsiveGridItemStyle} from '../../styles/grid/gridItemStyle'
+import {ResponsiveGridItemStyleProps} from '../../styles/grid/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsiveMarginStyle} from '../../styles/margin/marginStyle'
+import {ResponsiveMarginStyleProps} from '../../styles/margin/types'
+import {responsivePaddingStyle} from '../../styles/padding/paddingStyle'
+import {ResponsivePaddingStyleProps} from '../../styles/padding/types'
+import {ElementType, Props} from '../../types/component'
 import {
   ResponsiveBoxProps,
   ResponsiveFlexItemProps,

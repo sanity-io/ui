@@ -1,5 +1,6 @@
-import {CSSObject, getTheme_v2, ThemeBoxShadow, ThemeShadow} from '@sanity/ui/theme'
-
+import {CSSObject} from '../../../theme/system/css'
+import {ThemeBoxShadow, ThemeShadow} from '../../../theme/system/shadow'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {EMPTY_RECORD} from '../../constants'
 import {_responsive, rem} from '../helpers'
 import {ThemeProps} from '../types'

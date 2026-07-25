@@ -1,22 +1,24 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
-import {useCustomValidity} from '../../hooks'
-import {_getArrayProp} from '../../styles'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {useCustomValidity} from '../../hooks/useCustomValidity'
+import {_getArrayProp} from '../../styles/helpers'
 import {
   responsiveInputPaddingStyle,
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
+  TextInputResponsivePaddingStyleProps,
+} from '../../styles/input/responsiveInputPaddingStyle'
+import {
   textInputBaseStyle,
   textInputFontSizeStyle,
   TextInputInputStyleProps,
   textInputRepresentationStyle,
   TextInputRepresentationStyleProps,
-  TextInputResponsivePaddingStyleProps,
   textInputRootStyle,
-} from '../../styles/internal'
-import {useRootTheme} from '../../theme'
+} from '../../styles/input/textInputStyle'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {useRootTheme} from '../../theme/useRootTheme'
 import {ResponsiveRadiusProps} from '../types'
 
 /**
