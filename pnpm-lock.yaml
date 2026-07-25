@@ -167,7 +167,7 @@ importers:
         specifier: 16.3.0-preview.9
         version: 16.3.0-preview.9(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       next-sanity:
-        specifier: ^13.2.0
+        specifier: ^13.2.1
         version: 13.2.1(8b9930341ec1f4be5542f81c804c7394)
       pako:
         specifier: ^3.0.1
