@@ -1,6 +1,6 @@
 import {styled} from 'styled-components'
 
-import {ElementType, EmptyProps, Props} from '../../types'
+import {ElementType, EmptyProps, Props} from '../../types/component'
 
 /**
  * @public

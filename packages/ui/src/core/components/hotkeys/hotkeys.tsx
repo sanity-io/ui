@@ -1,9 +1,10 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {Inline, KBD} from '../../primitives'
-import {_getArrayProp} from '../../styles'
-import {Radius} from '../../types'
+import {Inline} from '../../primitives/inline/inline'
+import {KBD} from '../../primitives/kbd/kbd'
+import {_getArrayProp} from '../../styles/helpers'
+import {Radius} from '../../types/radius'
 
 /**
  * @public

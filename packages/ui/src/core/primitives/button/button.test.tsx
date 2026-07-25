@@ -5,12 +5,12 @@ import {screen} from '@testing-library/react'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 import {axe} from 'vitest-axe'
 
-import {render} from '../../../../test'
-import {Flex} from '../flex'
+import {render} from '../../../../test/utils'
+import {Flex} from '../flex/flex'
 import {Button, ButtonOwnProps} from './button'
 
-vi.mock('../flex', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../flex')>()
+vi.mock('../flex/flex', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../flex/flex')>()
 
   return {
     ...actual,

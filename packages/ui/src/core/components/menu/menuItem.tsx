@@ -10,14 +10,16 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
-import {Box, Flex, Text} from '../../primitives'
-import {Selectable} from '../../primitives/_selectable'
+import {Selectable} from '../../primitives/_selectable/selectable'
+import {Box} from '../../primitives/box/box'
+import {Flex} from '../../primitives/flex/flex'
+import {Text} from '../../primitives/text/text'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
-import {_getArrayProp} from '../../styles'
-import {useRootTheme} from '../../theme'
-import {ElementType, Props} from '../../types'
+import {_getArrayProp} from '../../styles/helpers'
+import {useRootTheme} from '../../theme/useRootTheme'
+import {ElementType, Props} from '../../types/component'
 import {SelectableTone} from '../../types/selectable'
-import {Hotkeys} from '../hotkeys'
+import {Hotkeys} from '../hotkeys/hotkeys'
 import {useMenu} from './useMenu'
 
 /**

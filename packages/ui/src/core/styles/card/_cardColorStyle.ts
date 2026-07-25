@@ -1,4 +1,6 @@
-import {CSSObject, ThemeColorCard_v2, ThemeColorState_v2} from '@sanity/ui/theme'
+import {ThemeColorCard_v2} from '../../../theme/system/color/color'
+import {ThemeColorState_v2} from '../../../theme/system/color/state'
+import {CSSObject} from '../../../theme/system/css'
 
 /**
  * @internal

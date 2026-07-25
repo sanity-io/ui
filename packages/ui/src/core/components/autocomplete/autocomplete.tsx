@@ -21,20 +21,17 @@ import {
 } from 'react'
 
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
-import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
-import {
-  Box,
-  BoxProps,
-  Button,
-  Card,
-  Popover,
-  PopoverProps,
-  Stack,
-  Text,
-  TextInput,
-} from '../../primitives'
-import {_getArrayProp} from '../../styles'
-import {Radius} from '../../types'
+import {_raf} from '../../helpers/animation'
+import {_hasFocus, focusFirstDescendant} from '../../helpers/focus'
+import {Box, BoxProps} from '../../primitives/box/box'
+import {Button} from '../../primitives/button/button'
+import {Card} from '../../primitives/card/card'
+import {Popover, PopoverProps} from '../../primitives/popover/popover'
+import {Stack} from '../../primitives/stack/stack'
+import {Text} from '../../primitives/text/text'
+import {TextInput} from '../../primitives/textInput/textInput'
+import {_getArrayProp} from '../../styles/helpers'
+import {Radius} from '../../types/radius'
 import {AnimatedSpinnerIcon, ListBox, StyledAutocomplete} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'

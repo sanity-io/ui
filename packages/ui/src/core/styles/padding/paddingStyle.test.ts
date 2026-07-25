@@ -1,8 +1,9 @@
 /** @vitest-environment jsdom */
 
-import {buildTheme, getScopedTheme} from '@sanity/ui/theme'
 import {describe, expect, it} from 'vitest'
 
+import {buildTheme} from '../../../theme/build/buildTheme'
+import {getScopedTheme} from '../../../theme/getScopedTheme'
 import {responsivePaddingStyle} from './paddingStyle'
 
 const theme = getScopedTheme(buildTheme(), 'light', 'default')

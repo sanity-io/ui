@@ -3,16 +3,16 @@ import {defineField, defineType} from 'sanity'
 import {
   calloutBlock,
   codeBlock,
-  codeExampleField,
   colorGridBlock,
   figmaButtonBlock,
   figmaEmbedBlock,
   groqLogoGridBlock,
   imageBlock,
-  npmPackageBadgeField,
-  propertyTableField,
   sanityLogoGridBlock,
-} from './content'
+} from './content/blocks'
+import {codeExampleField} from './content/codeExampleField'
+import {npmPackageBadgeField} from './content/npmPackageBadgeField'
+import {propertyTableField} from './content/propertyTableField'
 
 export const articleType = defineType({
   type: 'document',

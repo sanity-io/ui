@@ -1,6 +1,6 @@
 import {detectOverflow, Middleware} from '@floating-ui/react-dom'
 
-import {PopoverMargins} from '../../../types'
+import {PopoverMargins} from '../../../types/popover'
 
 export function size(options: {
   boundaryElement?: HTMLElement | null

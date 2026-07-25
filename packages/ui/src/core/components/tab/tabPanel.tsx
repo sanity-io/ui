@@ -1,6 +1,6 @@
 import {forwardRef} from 'react'
 
-import {Box, BoxOwnProps} from '../../primitives'
+import {Box, BoxOwnProps} from '../../primitives/box/box'
 
 /**
  * @public

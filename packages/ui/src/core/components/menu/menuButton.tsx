@@ -1,4 +1,3 @@
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {
   cloneElement,
   forwardRef,
@@ -10,8 +9,10 @@ import {
   useState,
 } from 'react'
 
-import {Popover, PopoverProps} from '../../primitives'
-import {Placement, Radius} from '../../types'
+import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {Popover, PopoverProps} from '../../primitives/popover/popover'
+import {Placement} from '../../types/placement'
+import {Radius} from '../../types/radius'
 import {MenuProps} from './menu'
 
 /**

@@ -10,7 +10,6 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
@@ -24,13 +23,23 @@ import {
   useState,
 } from 'react'
 
-import {useElementSize, useMediaIndex, usePrefersReducedMotion} from '../../hooks'
+import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {useElementSize} from '../../hooks/useElementSize'
+import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
+import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
-import {_getArrayProp} from '../../styles'
-import {useTheme_v2} from '../../theme'
-import {BoxOverflow, CardTone, Placement, PopoverMargins} from '../../types'
-import {LayerProps, LayerProvider, Portal, useBoundaryElement, useLayer} from '../../utils'
+import {_getArrayProp} from '../../styles/helpers'
+import {useTheme_v2} from '../../theme/useTheme'
+import {BoxOverflow} from '../../types/box'
+import {CardTone} from '../../types/card'
+import {Placement} from '../../types/placement'
+import {PopoverMargins} from '../../types/popover'
+import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
+import {LayerProps} from '../../utils/layer/layer'
+import {LayerProvider} from '../../utils/layer/layerProvider'
+import {useLayer} from '../../utils/layer/useLayer'
+import {Portal} from '../../utils/portal/portal'
 import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,

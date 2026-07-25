@@ -1,11 +1,14 @@
-import {Card, ThemeProvider} from '@sanity/ui'
-import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {
   render as _testRender,
   RenderOptions as _TestRenderOptions,
   RenderResult,
 } from '@testing-library/react'
 import {Fragment, ReactNode, StrictMode} from 'react'
+
+import {Card} from '../src/core/primitives/card/card'
+import {ThemeProvider} from '../src/core/theme/themeProvider'
+import {buildTheme} from '../src/theme/build/buildTheme'
+import {ThemeColorSchemeKey} from '../src/theme/system/color/_system'
 
 export interface TestRenderOptions extends _TestRenderOptions {
   scheme?: ThemeColorSchemeKey

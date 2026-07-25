@@ -1,14 +1,11 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, lazy, Suspense} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {
-  FontWeightStyleProps,
-  responsiveCodeFontStyle,
-  ResponsiveFontSizeStyleProps,
-} from '../../styles/internal'
-import {ElementType, Props} from '../../types'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {responsiveCodeFontStyle} from '../../styles/font/codeFontStyle'
+import {FontWeightStyleProps, ResponsiveFontSizeStyleProps} from '../../styles/font/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {ElementType, Props} from '../../types/component'
 import {codeBaseStyle} from './styles'
 
 const LazyRefractor = lazy(() => import('./refractor'))

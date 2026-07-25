@@ -1,24 +1,19 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {useTheme_v2} from '../../theme'
-import {
-  ButtonMode,
-  ButtonTextAlign,
-  ButtonTone,
-  ButtonWidth,
-  ElementType,
-  FlexJustify,
-  Props,
-} from '../../types'
-import {Box} from '../box'
-import {Flex} from '../flex'
-import {Spinner} from '../spinner'
-import {Text} from '../text'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {useTheme_v2} from '../../theme/useTheme'
+import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth} from '../../types/button'
+import {ElementType, Props} from '../../types/component'
+import {FlexJustify} from '../../types/flex'
+import {Box} from '../box/box'
+import {Flex} from '../flex/flex'
+import {Spinner} from '../spinner/spinner'
+import {Text} from '../text/text'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 

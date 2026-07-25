@@ -8,7 +8,6 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
@@ -25,14 +24,18 @@ import {
 import {styled} from 'styled-components'
 import {useEffectEvent} from 'use-effect-event'
 
-import {usePrefersReducedMotion} from '../../hooks'
+import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {useDelayedState} from '../../hooks/useDelayedState'
+import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
-import {_getArrayProp} from '../../styles'
-import {useTheme_v2} from '../../theme'
-import type {Placement} from '../../types'
-import {Layer, type LayerProps, Portal, useBoundaryElement, usePortal} from '../../utils'
+import {_getArrayProp} from '../../styles/helpers'
+import {useTheme_v2} from '../../theme/useTheme'
+import type {Placement} from '../../types/placement'
+import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
+import {Layer, type LayerProps} from '../../utils/layer/layer'
+import {Portal} from '../../utils/portal/portal'
+import {usePortal} from '../../utils/portal/usePortal'
 import type {Delay} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
@@ -40,7 +43,7 @@ import {
   DEFAULT_TOOLTIP_PADDING,
 } from './constants'
 import {TooltipCard} from './tooltipCard'
-import {useTooltipDelayGroup} from './tooltipDelayGroup'
+import {useTooltipDelayGroup} from './tooltipDelayGroup/useTooltipDelayGroup'
 
 /**
  * @public

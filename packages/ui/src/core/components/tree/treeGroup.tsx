@@ -1,4 +1,4 @@
-import {Stack} from '../../primitives'
+import {Stack} from '../../primitives/stack/stack'
 import {useTree} from './useTree'
 
 export interface TreeGroupProps {
