@@ -2,12 +2,12 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {Stack} from '../../primitives'
+import {render} from '../../../../test/utils'
+import {Stack} from '../../primitives/stack/stack'
 import {Menu} from './menu'
 
-vi.mock('../../primitives', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../primitives')>()
+vi.mock('../../primitives/stack/stack', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives/stack/stack')>()
 
   return {
     ...actual,
@@ -16,8 +16,8 @@ vi.mock('../../primitives', async (importOriginal) => {
   }
 })
 
-vi.mock('../../utils', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../utils')>()
+vi.mock('../../utils/layer/useLayer', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../utils/layer/useLayer')>()
 
   return {
     ...actual,

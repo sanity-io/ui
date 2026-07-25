@@ -1,5 +1,4 @@
-import {ThemeColorCardToneKey, ThemeColorSchemeKey} from '@sanity/ui/theme'
-
+import {ThemeColorCardToneKey, ThemeColorSchemeKey} from '../../theme/system/color/_system'
 import {ThemeProvider} from './themeProvider'
 import {useRootTheme} from './useRootTheme'
 

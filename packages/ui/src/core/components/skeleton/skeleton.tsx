@@ -1,9 +1,11 @@
 import {forwardRef, useEffect, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {Box, BoxOwnProps, ResponsiveRadiusProps} from '../../primitives'
-import {_getArrayProp} from '../../styles'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
+import {Box, BoxOwnProps} from '../../primitives/box/box'
+import {ResponsiveRadiusProps} from '../../primitives/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
 import {skeletonStyle} from './styles'
 
 const StyledSkeleton = styled(Box)<

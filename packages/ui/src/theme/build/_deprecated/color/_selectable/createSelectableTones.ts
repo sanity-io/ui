@@ -1,10 +1,10 @@
+import {ThemeColorBase} from '../../../../system/v0/color/base'
+import {ThemeColorMuted} from '../../../../system/v0/color/muted'
 import {
-  ThemeColorBase,
-  ThemeColorMuted,
   ThemeColorSelectable,
   ThemeColorSelectableStates,
-  ThemeColorSolid,
-} from '../../../../system'
+} from '../../../../system/v0/color/selectable'
+import {ThemeColorSolid} from '../../../../system/v0/color/solid'
 import {ThemeColorBuilderOpts} from '../factory'
 
 export function createSelectableTones(

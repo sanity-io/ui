@@ -2,7 +2,7 @@ import {FocusEvent, forwardRef, useCallback, useEffect, useImperativeHandle, use
 import {styled} from 'styled-components'
 
 import {EMPTY_RECORD} from '../../constants'
-import {containsOrEqualsElement, isHTMLElement} from '../../helpers'
+import {containsOrEqualsElement, isHTMLElement} from '../../helpers/element'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
 

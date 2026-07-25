@@ -9,9 +9,12 @@ import {
   useState,
 } from 'react'
 
-import {useClickOutsideEvent} from '../../hooks'
-import {Box, Popover, Stack, Text} from '../../primitives'
-import {_getArrayProp} from '../../styles'
+import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
+import {Box} from '../../primitives/box/box'
+import {Popover} from '../../primitives/popover/popover'
+import {Stack} from '../../primitives/stack/stack'
+import {Text} from '../../primitives/text/text'
+import {_getArrayProp} from '../../styles/helpers'
 import {ExpandButton, StyledBreadcrumbs} from './breadcrumbs.styles'
 
 /**

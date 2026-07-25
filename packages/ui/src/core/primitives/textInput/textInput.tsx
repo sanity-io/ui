@@ -1,30 +1,32 @@
 import {CloseIcon} from '@sanity/icons/Close'
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
+import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {EMPTY_RECORD} from '../../constants'
-import {useCustomValidity} from '../../hooks'
-import {_getArrayProp} from '../../styles'
+import {useCustomValidity} from '../../hooks/useCustomValidity'
+import {_getArrayProp} from '../../styles/helpers'
 import {
   responsiveInputPaddingStyle,
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
+  TextInputResponsivePaddingStyleProps,
+} from '../../styles/input/responsiveInputPaddingStyle'
+import {
   textInputBaseStyle,
   textInputFontSizeStyle,
   TextInputInputStyleProps,
   textInputRepresentationStyle,
   TextInputRepresentationStyleProps,
-  TextInputResponsivePaddingStyleProps,
   textInputRootStyle,
-} from '../../styles/internal'
-import {useRootTheme} from '../../theme'
-import {Radius} from '../../types'
-import {Box} from '../box'
-import {Button, ButtonOwnProps} from '../button'
-import {Card} from '../card'
-import {Text} from '../text'
+} from '../../styles/input/textInputStyle'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {useRootTheme} from '../../theme/useRootTheme'
+import {Radius} from '../../types/radius'
+import {Box} from '../box/box'
+import {Button, ButtonOwnProps} from '../button/button'
+import {Card} from '../card/card'
+import {Text} from '../text/text'
 
 /**
  * @public

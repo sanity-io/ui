@@ -9,7 +9,8 @@ import {Banner} from '@/components/Banner'
 import {AppFooter} from '@/components/Footer'
 import {Navbar} from '@/components/Navbar'
 import {basePath, primaryNavId} from '@/constants'
-import {GLOBAL_QUERY, GlobalData} from '@/lib/data'
+import {GLOBAL_QUERY} from '@/lib/data/_global/query'
+import {GlobalData} from '@/lib/data/_global/types'
 import {
   DynamicFetchOptions,
   getDynamicFetchOptions,

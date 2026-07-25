@@ -1,5 +1,5 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
-
+import {CSSObject} from '../../../theme/system/css'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {_responsive, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexStyleProps} from './types'

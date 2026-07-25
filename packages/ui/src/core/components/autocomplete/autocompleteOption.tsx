@@ -1,6 +1,6 @@
 import {useCallback} from 'react'
 
-import {_isEnterToClickElement} from '../../helpers'
+import {_isEnterToClickElement} from '../../helpers/element'
 
 export interface AutocompleteOptionProps {
   children: React.ReactNode

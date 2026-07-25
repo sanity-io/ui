@@ -2,7 +2,8 @@
 
 import {describe, expect, it} from 'vitest'
 
-import {multiply, screen} from './blend'
+import {multiply} from './blend/multiply'
+import {screen} from './blend/screen'
 import {hexToRgb, rgbToHex} from './convert'
 import {parseColor} from './parse'
 import {rgba} from './rgba'

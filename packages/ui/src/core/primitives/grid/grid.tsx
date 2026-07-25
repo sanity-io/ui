@@ -1,10 +1,11 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {responsiveGridStyle, ResponsiveGridStyleProps} from '../../styles/internal'
-import {ElementType, Props} from '../../types'
-import {Box, BoxOwnProps} from '../box'
+import {responsiveGridStyle} from '../../styles/grid/gridStyle'
+import {ResponsiveGridStyleProps} from '../../styles/grid/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {ElementType, Props} from '../../types/component'
+import {Box, BoxOwnProps} from '../box/box'
 import {ResponsiveGridProps} from '../types'
 
 /**

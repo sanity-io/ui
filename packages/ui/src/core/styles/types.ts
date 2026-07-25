@@ -1,4 +1,4 @@
-import {Theme} from '@sanity/ui/theme'
+import {Theme} from '../../theme/system/theme'
 
 /**
  * @internal

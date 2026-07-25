@@ -1,5 +1,6 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css, ExecutionContext} from 'styled-components'
+
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 
 function codeSyntaxHighlightingStyle({theme}: ExecutionContext) {
   const {

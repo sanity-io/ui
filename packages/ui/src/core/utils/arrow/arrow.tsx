@@ -1,7 +1,7 @@
 import {ForwardedRef, forwardRef, HTMLProps} from 'react'
 import {css, styled} from 'styled-components'
 
-import {useTheme_v2} from '../../theme'
+import {useTheme_v2} from '../../theme/useTheme'
 import {compileCommands, getRoundedCommands, Point} from './cmds'
 
 const StyledArrow = styled.div<{$w: number}>(

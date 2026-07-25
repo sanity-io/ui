@@ -3,7 +3,7 @@ import {notFound} from 'next/navigation'
 import {Suspense} from 'react'
 
 import {buildTargetByPathParams, targetByPathQuery} from '#lib/sanity/queries.ts'
-import {PageBuilder} from '@/components/page'
+import {PageBuilder} from '@/components/page/PageBuilder'
 import {DynamicFetchOptions, getDynamicFetchOptions, sanityFetch} from '@/lib/sanity/live'
 
 export default async function RootRoute() {
