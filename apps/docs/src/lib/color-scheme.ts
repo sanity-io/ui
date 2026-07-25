@@ -2,13 +2,13 @@ import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
 
 export const COLOR_SCHEME_COOKIE = 'sanity-ui:color-scheme'
 
-export const COLOR_SCHEME_PREFERENCES = ['light', 'dark', 'system'] as const
+const COLOR_SCHEME_PREFERENCES = ['light', 'dark', 'system'] as const
 
 export type ColorSchemePreference = (typeof COLOR_SCHEME_PREFERENCES)[number]
 
 const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365
 
-export function isColorSchemePreference(value: unknown): value is ColorSchemePreference {
+function isColorSchemePreference(value: unknown): value is ColorSchemePreference {
   return (
     typeof value === 'string' && (COLOR_SCHEME_PREFERENCES as readonly string[]).includes(value)
   )
