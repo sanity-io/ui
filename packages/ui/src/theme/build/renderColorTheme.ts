@@ -1,30 +1,27 @@
 import {COLOR_HUES} from '@sanity/color'
 
-import {ThemeColorPalette, ThemeConfig} from '../config'
+import {ThemeColorPalette, ThemeConfig} from '../config/types'
 import {defaultColorPalette} from '../defaults/colorPalette'
+import {THEME_COLOR_CARD_TONES, THEME_COLOR_STATE_TONES} from '../system/color/_constants'
+import {ThemeColorBlendModeKey} from '../system/color/_system'
+import {ThemeColorAvatar_v2} from '../system/color/avatar'
+import {ThemeColorBadge_v2, ThemeColorBadgeTone_v2} from '../system/color/badge'
 import {
-  THEME_COLOR_CARD_TONES,
-  THEME_COLOR_STATE_TONES,
-  ThemeColorAvatar_v2,
-  ThemeColorBadge_v2,
-  ThemeColorBadgeTone_v2,
-  ThemeColorBlendModeKey,
   ThemeColorButton_v2,
   ThemeColorButtonMode_v2,
   ThemeColorButtonTone_v2,
-  ThemeColorCard_v2,
+} from '../system/color/button'
+import {ThemeColorCard_v2, ThemeColorScheme_v2, ThemeColorSchemes_v2} from '../system/color/color'
+import {
   ThemeColorInput_v2,
   ThemeColorInputMode_v2,
   ThemeColorInputState_v2,
-  ThemeColorKBD,
-  ThemeColorScheme_v2,
-  ThemeColorSchemes_v2,
-  ThemeColorSelectable_v2,
-  ThemeColorSelectableTone_v2,
-  ThemeColorShadow,
-  ThemeColorState_v2,
-  ThemeColorSyntax,
-} from '../system'
+} from '../system/color/input'
+import {ThemeColorKBD} from '../system/color/kbd'
+import {ThemeColorSelectable_v2, ThemeColorSelectableTone_v2} from '../system/color/selectable'
+import {ThemeColorShadow} from '../system/color/shadow'
+import {ThemeColorState_v2} from '../system/color/state'
+import {ThemeColorSyntax} from '../system/color/syntax'
 import {defineLazyProperty} from './lib/lazy'
 import {renderColorValue, RenderColorValueOptions} from './renderColorValue'
 

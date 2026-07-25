@@ -23,6 +23,14 @@ import {ArticleLayout} from './layout.client'
 
 export const instant = false
 
+// Let `<Link prefetch={true}>` (the sidebar nav) runtime-prefetch these routes:
+// the shared App Shell can't include the `params`-dependent article content,
+// but it is fully cached (`'use cache'` + the Sanity cache profile), so a
+// per-link runtime prefetch resolves the entire page ahead of navigation.
+// Downstream segments (`[screen]` and `[screen]/[...article]` pages) are
+// included in the same runtime prefetch request.
+export const prefetch = 'allow-runtime'
+
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({
     query: screensQuery,

@@ -6,9 +6,9 @@ import Link from 'next/link'
 import {ReactElement, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {getArcadeQuery} from '@/lib/arcade'
 import {ArcadeFrame} from '@/lib/arcade/ArcadeFrame'
-import {CodeEditor} from '@/lib/codeEditor'
+import {getArcadeQuery} from '@/lib/arcade/helpers'
+import {CodeEditor} from '@/lib/codeEditor/CodeEditor'
 
 const FrameCard = styled(Card)`
   height: 200px;

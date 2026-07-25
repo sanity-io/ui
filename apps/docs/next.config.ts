@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
     // Use the native Rust port of the React Compiler (runs directly on
     // Turbopack's swc AST) instead of the Babel transform
     turbopackRustReactCompiler: true,
+    // TypeScript 7 no longer ships the JS compiler API that Next.js uses by
+    // default; run the project-local `tsc` CLI for typegen/build type-checks.
+    useTypeScriptCli: true,
   },
   // The color-scheme client hints aren't read server-side right now (the
   // static shell prerenders without request data), but keep advertising them

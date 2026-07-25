@@ -1,12 +1,13 @@
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {motion, type MotionProps} from 'motion/react'
 import React, {CSSProperties, forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
 
+import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {POPOVER_MOTION_PROPS} from '../../constants'
-import {Placement, Radius} from '../../types'
-import {Arrow} from '../../utils'
-import {Card, CardProps} from '../card'
+import {Placement} from '../../types/placement'
+import {Radius} from '../../types/radius'
+import {Arrow} from '../../utils/arrow/arrow'
+import {Card, CardProps} from '../card/card'
 import {
   DEFAULT_TOOLTIP_ARROW_HEIGHT,
   DEFAULT_TOOLTIP_ARROW_RADIUS,

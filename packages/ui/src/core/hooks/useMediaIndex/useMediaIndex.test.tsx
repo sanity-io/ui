@@ -1,10 +1,10 @@
 /** @vitest-environment node */
 
-import {buildTheme} from '@sanity/ui/theme'
 import {renderToStaticMarkup, renderToString} from 'react-dom/server'
 import {describe, expect, it} from 'vitest'
 
-import {ThemeProvider} from '../../theme'
+import {buildTheme} from '../../../theme/build/buildTheme'
+import {ThemeProvider} from '../../theme/themeProvider'
 import {useMediaIndex} from './useMediaIndex'
 
 const theme = buildTheme()

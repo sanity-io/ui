@@ -1,8 +1,10 @@
-import {getTheme_v2, ThemeColorStateToneKey} from '@sanity/ui/theme'
 import {styled} from 'styled-components'
 
-import {Card, type CardProps, Flex} from '../../primitives'
-import type {ButtonTone} from '../../types'
+import {ThemeColorStateToneKey} from '../../../theme/system/color/_system'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {Card, type CardProps} from '../../primitives/card/card'
+import {Flex} from '../../primitives/flex/flex'
+import type {ButtonTone} from '../../types/button'
 
 const LOADING_BAR_HEIGHT = 2
 

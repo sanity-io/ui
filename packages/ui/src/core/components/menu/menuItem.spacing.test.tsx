@@ -2,13 +2,13 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {Flex} from '../../primitives'
+import {render} from '../../../../test/utils'
+import {Flex} from '../../primitives/flex/flex'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {MenuItem} from './menuItem'
 
-vi.mock('../../primitives', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../primitives')>()
+vi.mock('../../primitives/flex/flex', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives/flex/flex')>()
 
   return {
     ...actual,

@@ -37,7 +37,7 @@ export function decode(input: string): string {
 
   const arr = base64ToUint8Array(input)
 
-  return inflate(arr, {to: 'string'})
+  return inflate(arr, {toText: true})
 }
 
 export function encode(input: string): string {

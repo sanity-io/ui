@@ -1,4 +1,4 @@
-import {CodeEditorSelection} from '@/lib/codeEditor'
+import {CodeEditorSelection} from '@/lib/codeEditor/types'
 
 export type CanvasWidth = 0 | 1 | 2 | 3
 

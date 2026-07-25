@@ -1,15 +1,9 @@
 import {defineLazyProperty} from '../build/lib/lazy'
-import {
-  RootTheme,
-  RootTheme_v2,
-  ThemeColor,
-  ThemeColorCard_v2,
-  ThemeColorInputMode_v2,
-  ThemeColorInputState,
-  ThemeColorInputState_v2,
-  ThemeColorInputStates,
-  ThemeColorScheme,
-} from '../system'
+import {ThemeColorCard_v2} from '../system/color/color'
+import {ThemeColorInputMode_v2, ThemeColorInputState_v2} from '../system/color/input'
+import {RootTheme, RootTheme_v2} from '../system/theme'
+import {ThemeColor, ThemeColorScheme} from '../system/v0/color/color'
+import {ThemeColorInputState, ThemeColorInputStates} from '../system/v0/color/input'
 
 const cache = new WeakMap<RootTheme_v2, RootTheme>()
 

@@ -2,12 +2,12 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {Inline} from '../../primitives'
+import {render} from '../../../../test/utils'
+import {Inline} from '../../primitives/inline/inline'
 import {Hotkeys} from './hotkeys'
 
-vi.mock('../../primitives', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../primitives')>()
+vi.mock('../../primitives/inline/inline', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives/inline/inline')>()
 
   return {
     ...actual,

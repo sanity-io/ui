@@ -1,8 +1,11 @@
 import {ColorTint as ColorPaletteValue} from '@sanity/color'
 
-import {parseTokenValue, ThemeColorPalette} from '../config'
-import {ThemeColorBlendModeKey} from '../system'
-import {hexToRgb, mix, rgba, rgbToHex} from './lib/color-fns'
+import {parseTokenValue} from '../config/tokens/parseTokenValue'
+import {ThemeColorPalette} from '../config/types'
+import {ThemeColorBlendModeKey} from '../system/color/_system'
+import {mix} from './lib/color-fns/blend/mix'
+import {hexToRgb, rgbToHex} from './lib/color-fns/convert'
+import {rgba} from './lib/color-fns/rgba'
 import {mixThemeColor} from './mixThemeColor'
 
 export interface RenderColorValueOptions {

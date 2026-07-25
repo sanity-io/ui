@@ -1,6 +1,6 @@
 {
   "name": "@sanity/logos",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "keywords": [
     "logos",
     "sanity",
@@ -36,8 +36,7 @@
         "require": "./dist/index.cjs"
       },
       "./package.json": "./package.json"
-    },
-    "access": "public"
+    }
   },
   "scripts": {
     "build": "tsdown",

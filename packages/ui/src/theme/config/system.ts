@@ -7,8 +7,8 @@ import {
   THEME_COLOR_INPUT_STATES,
   THEME_COLOR_STATE_TONES,
   THEME_COLOR_STATES,
-  ThemeColorBlendModeKey,
-} from '../system'
+} from '../system/color/_constants'
+import {ThemeColorBlendModeKey} from '../system/color/_system'
 
 /** @public */
 export const COLOR_CONFIG_STATE_KEYS = [

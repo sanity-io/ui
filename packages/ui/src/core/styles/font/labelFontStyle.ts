@@ -1,5 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
-
+import {CSSObject} from '../../../theme/system/css'
 import {ThemeProps} from '../types'
 import {responsiveFont} from './responsiveFont'
 import {ResponsiveFontStyleProps} from './types'

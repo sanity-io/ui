@@ -1,20 +1,20 @@
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {
-  responsiveBorderStyle,
-  ResponsiveBorderStyleProps,
-  responsiveRadiusStyle,
-  ResponsiveRadiusStyleProps,
-  responsiveShadowStyle,
-  ResponsiveShadowStyleProps,
-} from '../../styles/internal'
-import {ThemeColorProvider, useRootTheme} from '../../theme'
-import {CardTone, ElementType, Props} from '../../types'
-import {Box, BoxOwnProps} from '../box'
+import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {responsiveBorderStyle} from '../../styles/border/borderStyle'
+import {ResponsiveBorderStyleProps} from '../../styles/border/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {responsiveShadowStyle} from '../../styles/shadow/shadowStyle'
+import {ResponsiveShadowStyleProps} from '../../styles/shadow/types'
+import {ThemeColorProvider} from '../../theme/themeColorProvider'
+import {useRootTheme} from '../../theme/useRootTheme'
+import {CardTone} from '../../types/card'
+import {ElementType, Props} from '../../types/component'
+import {Box, BoxOwnProps} from '../box/box'
 import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {cardStyle} from './styles'
 import {CardStyleProps} from './types'
