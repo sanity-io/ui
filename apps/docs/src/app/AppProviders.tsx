@@ -26,7 +26,7 @@ const theme = buildTheme()
 export function AppProviders(props: {children?: ReactNode}) {
   const {children} = props
 
-  const {scheme} = useColorScheme()
+  const scheme = useColorScheme()
 
   return (
     <ThemeProvider scheme={scheme} theme={theme}>

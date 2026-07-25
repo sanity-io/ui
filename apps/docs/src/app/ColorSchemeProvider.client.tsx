@@ -4,7 +4,11 @@ import {usePrefersDark} from '@sanity/ui'
 import type {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useDeferredValue, useState} from 'react'
 
-import {ColorSchemeContext} from '#context/color-scheme'
+import {
+  ColorSchemePreferenceProvider,
+  ColorSchemeValueProvider,
+  SetColorSchemePreferenceProvider,
+} from '#context/color-scheme'
 import {
   type ColorSchemePreference,
   resolveColorScheme,
@@ -35,7 +39,15 @@ export function ColorSchemeProviderClient({
     setColorSchemeCookie(next)
   }
 
+  // Nested so the least volatile value sits innermost, letting the compiler
+  // reuse those subtrees when only the resolved scheme changes.
   return (
-    <ColorSchemeContext value={{scheme, preference, setPreference}}>{children}</ColorSchemeContext>
+    <ColorSchemeValueProvider scheme={scheme}>
+      <ColorSchemePreferenceProvider preference={preference}>
+        <SetColorSchemePreferenceProvider setPreference={setPreference}>
+          {children}
+        </SetColorSchemePreferenceProvider>
+      </ColorSchemePreferenceProvider>
+    </ColorSchemeValueProvider>
   )
 }
