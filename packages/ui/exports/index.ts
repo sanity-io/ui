@@ -1,3 +1,5 @@
+'use client'
+
 // oxlint-disable no-deprecated -- deprecated API members are re-exported for backwards compatibility
 // This entry point deliberately avoids `export *` barrels: every member of
 // the public API is re-exported here directly from the module that defines
