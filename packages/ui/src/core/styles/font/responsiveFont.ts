@@ -1,5 +1,6 @@
-import {CSSObject, getTheme_v2, ThemeFontKey, ThemeFontSize} from '@sanity/ui/theme'
-
+import {CSSObject} from '../../../theme/system/css'
+import {ThemeFontKey, ThemeFontSize} from '../../../theme/system/font'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {_responsive, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {FontWeightStyleProps, ResponsiveFontSizeStyleProps} from './types'

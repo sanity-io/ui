@@ -1,6 +1,5 @@
-import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
-
-import {AvatarSize} from '../../types'
+import {ThemeColorAvatarColorKey} from '../../../theme/system/color/_system'
+import {AvatarSize} from '../../types/avatar'
 
 /**
  * @internal

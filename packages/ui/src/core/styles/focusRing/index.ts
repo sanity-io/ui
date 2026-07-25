@@ -1,4 +1,4 @@
-import {ThemeFocusRing} from '@sanity/ui/theme'
+import {ThemeFocusRing} from '../../../theme/system/focusRing'
 
 export function focusRingBorderStyle(border: {color: string; width: number}): string {
   return `inset 0 0 0 ${border.width}px ${border.color}`

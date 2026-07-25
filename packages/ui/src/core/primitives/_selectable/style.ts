@@ -1,9 +1,9 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {ThemeProps} from '../../styles'
-import {_cardColorStyle} from '../../styles/card'
-import {SelectableTone} from '../../types'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {_cardColorStyle} from '../../styles/card/_cardColorStyle'
+import {ThemeProps} from '../../styles/types'
+import {SelectableTone} from '../../types/selectable'
 
 /**
  * @internal

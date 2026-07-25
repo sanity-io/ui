@@ -1,7 +1,8 @@
 import {Card, Flex, Tab, TabList, TabPanel} from '@sanity/ui'
 import {ReactElement} from 'react'
 
-import {CodeEditor, CodeEditorSelection} from '@/lib/codeEditor'
+import {CodeEditor} from '@/lib/codeEditor/CodeEditor'
+import {CodeEditorSelection} from '@/lib/codeEditor/types'
 
 import {ArcadeCodeMode} from './types'
 

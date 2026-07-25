@@ -2,7 +2,7 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '../../../../test/utils'
 import {inlineSpaceStyle} from '../../primitives/inline/styles'
 import {Tab} from './tab'
 import {TabList} from './tabList'

@@ -1,9 +1,9 @@
 /** @vitest-environment jsdom */
 
-import {buildTheme} from '@sanity/ui/theme'
 import {describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../test'
+import {render} from '../../../test/utils'
+import {buildTheme} from '../../theme/build/buildTheme'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
 import {useRootTheme} from './useRootTheme'

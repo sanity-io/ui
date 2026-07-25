@@ -1,7 +1,7 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {ThemeProps} from '../../styles'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {ThemeProps} from '../../styles/types'
 import {HeadingStyleProps} from './types'
 
 export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnType<typeof css> {

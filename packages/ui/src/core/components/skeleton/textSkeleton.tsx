@@ -1,8 +1,10 @@
-import {getTheme_v2, ThemeFontKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp, _responsive, ThemeProps} from '../../styles'
+import {ThemeFontKey} from '../../../theme/system/font'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {_getArrayProp, _responsive} from '../../styles/helpers'
+import {ThemeProps} from '../../styles/types'
 import {Skeleton, SkeletonProps} from './skeleton'
 
 const StyledSkeleton = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>((

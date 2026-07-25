@@ -1,32 +1,37 @@
-import {ThemeColorBadgeTokens, ThemeColorStateTokens, ThemeConfig} from '../config'
+import {ThemeColorBadgeTokens, ThemeColorStateTokens} from '../config/tokens/color/types'
+import {ThemeConfig} from '../config/types'
 import {
   THEME_COLOR_BUTTON_MODES,
   THEME_COLOR_CARD_TONES,
   THEME_COLOR_STATE_TONES,
   THEME_COLOR_STATES,
-  ThemeColorAvatar_v2,
+} from '../system/color/_constants'
+import {
   ThemeColorAvatarColorKey,
-  ThemeColorAvatarHue_v2,
-  ThemeColorBadge_v2,
+  ThemeColorButtonModeKey,
+  ThemeColorCardToneKey,
+  ThemeColorSchemeKey,
+  ThemeColorStateKey,
+  ThemeColorStateToneKey,
+} from '../system/color/_system'
+import {ThemeColorAvatar_v2, ThemeColorAvatarHue_v2} from '../system/color/avatar'
+import {ThemeColorBadge_v2} from '../system/color/badge'
+import {
   ThemeColorButton_v2,
   ThemeColorButtonMode_v2,
-  ThemeColorButtonModeKey,
   ThemeColorButtonTone_v2,
-  ThemeColorCard_v2,
-  ThemeColorCardToneKey,
+} from '../system/color/button'
+import {ThemeColorCard_v2, ThemeColorScheme_v2, ThemeColorSchemes_v2} from '../system/color/color'
+import {
   ThemeColorInput_v2,
   ThemeColorInputMode_v2,
   ThemeColorInputState_v2,
-  ThemeColorScheme_v2,
-  ThemeColorSchemeKey,
-  ThemeColorSchemes_v2,
-  ThemeColorShadow,
-  ThemeColorState_v2,
-  ThemeColorStateKey,
-  ThemeColorStateToneKey,
-  ThemeColorSyntax,
-} from '../system'
-import {ColorTokenContext, resolveColorTokenValue as _color} from './colorToken'
+} from '../system/color/input'
+import {ThemeColorShadow} from '../system/color/shadow'
+import {ThemeColorState_v2} from '../system/color/state'
+import {ThemeColorSyntax} from '../system/color/syntax'
+import {resolveColorTokenValue as _color} from './colorToken/colorToken'
+import {ColorTokenContext} from './colorToken/types'
 import {defineLazyProperty} from './lib/lazy'
 import {resolveColorTokens} from './resolveColorTokens'
 

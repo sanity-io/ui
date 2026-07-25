@@ -1,4 +1,4 @@
-import {ThemeColorToneKey} from '@sanity/ui/theme'
+import {ThemeColorToneKey} from '../../../theme/system/v0/color/_system'
 
 /**
  * @internal
