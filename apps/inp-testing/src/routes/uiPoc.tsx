@@ -20,6 +20,7 @@ const ROW_COUNT = 200
 const TONE_CARD_COUNT = 500
 const PANEL_CARD_COUNT = 300
 const TOOLTIP_COUNT = 300
+const POPOVER_COUNT = 300
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -203,7 +204,7 @@ function TooltipMountSection() {
   )
 }
 
-/** Mount cost: one click renders (or removes) a large set of tooltip-wrapped triggers. */
+/** Mount cost: one click renders (or removes) a large set of popover-wrapped triggers. */
 function PopoverMountSection() {
   const [open, setOpen] = useState(false)
 
@@ -211,7 +212,7 @@ function PopoverMountSection() {
     <Card density="regular">
       <VStack gap={3}>
         <Text size={1} weight="semibold">
-          5. Popover mount ({TOOLTIP_COUNT} popovers)
+          5. Popover mount ({POPOVER_COUNT} popovers)
         </Text>
         <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} popover-wrapped buttons.</Text>
         <HStack gap={2}>
@@ -224,7 +225,7 @@ function PopoverMountSection() {
         {open && (
           <div style={scrollAreaStyle}>
             <HStack gap={2}>
-              {Array.from({length: TOOLTIP_COUNT}, (_, index) => (
+              {Array.from({length: POPOVER_COUNT}, (_, index) => (
                 <Popover key={index} content="Popover content">
                   <Button text="Open Popover" />
                 </Popover>

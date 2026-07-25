@@ -94,7 +94,7 @@ function TooltipRoot({
   )
 }
 
-/** @public */
+/** @beta */
 export const Tooltip = Object.assign(TooltipRoot, {
   forwardsTriggerProps: true,
 }) as typeof TooltipRoot

@@ -1,7 +1,7 @@
 import {type PlacementProps, placementProps} from '../../props/placement'
 import {type PropDef} from '../../types/PropDef'
 
-/** @public */
+/** @beta */
 export interface PopoverProps
   extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
   /** Anchor name for positioning */
