@@ -83,8 +83,8 @@ importers:
         specifier: 'catalog:'
         version: 24.13.3
       eslint-plugin-storybook:
-        specifier: ^10.5.3
-        version: 10.5.3(eslint@10.7.0(jiti@2.7.0)(supports-color@8.1.1))(storybook@10.5.4(@types/react@19.2.17)(prettier@3.9.6)(react@19.2.8)(vitest@4.1.10))(supports-color@8.1.1)(typescript@7.0.2)
+        specifier: ^10.5.4
+        version: 10.5.4(eslint@10.7.0(jiti@2.7.0)(supports-color@8.1.1))(storybook@10.5.4(@types/react@19.2.17)(prettier@3.9.6)(react@19.2.8)(vitest@4.1.10))(supports-color@8.1.1)(typescript@7.0.2)
       knip:
         specifier: ^6.29.0
         version: 6.29.0
@@ -5590,11 +5590,11 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-plugin-storybook@10.5.3:
-    resolution: {integrity: sha512-dreVGgQvTTOvPTrnn71uogs3E7skbODW3Ya1cHxupznzuIofLCzy+7zWJ4ObsEZ1MsOcofQlSaQuV9oJBszLoA==}
+  eslint-plugin-storybook@10.5.4:
+    resolution: {integrity: sha512-IEG6GK9iMKH45WxiBUoDu3AajUyz+AcRXsLRkwnsNz9TwzZI6tbyHgdZ1Tkvs2RXOovYUYYksNpbtnmY746LAw==}
     peerDependencies:
       eslint: '>=8'
-      storybook: ^10.5.3
+      storybook: ^10.5.4
 
   eslint-scope@9.1.2:
     resolution: {integrity: sha512-xS90H51cKw0jltxmvmHy2Iai1LIqrfbw57b79w/J7MfvDfkIkFZ+kj6zC3BjtUwh150HsSSdxXZcsuv72miDFQ==}
@@ -13434,7 +13434,7 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-plugin-storybook@10.5.3(eslint@10.7.0(jiti@2.7.0)(supports-color@8.1.1))(storybook@10.5.4(@types/react@19.2.17)(prettier@3.9.6)(react@19.2.8)(vitest@4.1.10))(supports-color@8.1.1)(typescript@7.0.2):
+  eslint-plugin-storybook@10.5.4(eslint@10.7.0(jiti@2.7.0)(supports-color@8.1.1))(storybook@10.5.4(@types/react@19.2.17)(prettier@3.9.6)(react@19.2.8)(vitest@4.1.10))(supports-color@8.1.1)(typescript@7.0.2):
     dependencies:
       '@typescript-eslint/types': 8.65.0
       '@typescript-eslint/utils': 8.65.0(eslint@10.7.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2)
