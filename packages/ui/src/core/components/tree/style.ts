@@ -1,8 +1,9 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {rem, ThemeProps} from '../../styles'
-import {_cardColorStyle} from '../../styles/card'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {_cardColorStyle} from '../../styles/card/_cardColorStyle'
+import {rem} from '../../styles/helpers'
+import {ThemeProps} from '../../styles/types'
 
 export function treeItemRootStyle(): ReturnType<typeof css> {
   return css`

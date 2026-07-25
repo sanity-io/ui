@@ -2,19 +2,27 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {Flex} from '../../primitives'
+import {render} from '../../../../test/utils'
+import {Flex} from '../../primitives/flex/flex'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {MenuGroup} from './menuGroup'
 import {MenuItem} from './menuItem'
 
-vi.mock('../../primitives', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../primitives')>()
+vi.mock('../../primitives/flex/flex', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives/flex/flex')>()
 
   return {
     ...actual,
     // oxlint-disable-next-line no-unsafe-type-assertion
     Flex: vi.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
+  }
+})
+
+vi.mock('../../primitives/popover/popover', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives/popover/popover')>()
+
+  return {
+    ...actual,
     Popover: vi.fn(({children}: {children?: React.ReactNode}) => children),
   }
 })

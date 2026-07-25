@@ -1,9 +1,9 @@
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {ElementType, Props} from '../../types'
-import {Box, BoxOwnProps} from '../box'
+import {_getArrayProp} from '../../styles/helpers'
+import {ElementType, Props} from '../../types/component'
+import {Box, BoxOwnProps} from '../box/box'
 import {responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps, stackBaseStyle} from './styles'
 
 /**

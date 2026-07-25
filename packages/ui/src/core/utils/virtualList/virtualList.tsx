@@ -1,10 +1,10 @@
 import {forwardRef, useEffect, useImperativeHandle, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {_isScrollable} from '../../helpers'
-import {_ResizeObserver} from '../../observers'
-import {StackOwnProps} from '../../primitives'
-import {useTheme_v2} from '../../theme'
+import {_isScrollable} from '../../helpers/scroll'
+import {_ResizeObserver} from '../../observers/resizeObserver'
+import {StackOwnProps} from '../../primitives/stack/stack'
+import {useTheme_v2} from '../../theme/useTheme'
 
 /**
  * @beta

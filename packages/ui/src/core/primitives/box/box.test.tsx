@@ -3,12 +3,12 @@
 import {type ComponentProps} from 'react'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {responsiveGridItemStyle} from '../../styles/internal'
+import {render} from '../../../../test/utils'
+import {responsiveGridItemStyle} from '../../styles/grid/gridItemStyle'
 import {Box} from './box'
 
-vi.mock('../../styles/internal', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../styles/internal')>()
+vi.mock('../../styles/grid/gridItemStyle', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../styles/grid/gridItemStyle')>()
 
   return {
     ...actual,

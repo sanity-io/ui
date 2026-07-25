@@ -1,15 +1,13 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
 import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {
-  ResponsiveFontStyleProps,
-  responsiveHeadingFont,
-  responsiveTextAlignStyle,
-  ResponsiveTextAlignStyleProps,
-} from '../../styles/internal'
-import {ElementType, Props, TextAlign} from '../../types'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {responsiveHeadingFont} from '../../styles/font/headingFontStyle'
+import {responsiveTextAlignStyle} from '../../styles/font/textAlignStyle'
+import {ResponsiveFontStyleProps, ResponsiveTextAlignStyleProps} from '../../styles/font/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {ElementType, Props} from '../../types/component'
+import {TextAlign} from '../../types/text'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {headingBaseStyle} from './styles'
 import {HeadingStyleProps} from './types'

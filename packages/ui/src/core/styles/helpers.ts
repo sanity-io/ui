@@ -1,5 +1,6 @@
-import {CSSObject, getTheme_v2, Theme} from '@sanity/ui/theme'
-
+import {CSSObject} from '../../theme/system/css'
+import {Theme} from '../../theme/system/theme'
+import {getTheme_v2} from '../../theme/versioning/getTheme_v2'
 import {EMPTY_ARRAY} from '../constants'
 
 /**

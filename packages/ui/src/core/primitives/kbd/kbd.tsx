@@ -1,11 +1,13 @@
 import {forwardRef} from 'react'
 import {css, styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {ElementType, Props, Radius} from '../../types'
-import {Box} from '../box'
-import {Text} from '../text'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {ElementType, Props} from '../../types/component'
+import {Radius} from '../../types/radius'
+import {Box} from '../box/box'
+import {Text} from '../text/text'
 
 /**
  * @public

@@ -2,12 +2,13 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {responsiveInputPaddingStyle} from '../../styles/internal'
+import {render} from '../../../../test/utils'
+import {responsiveInputPaddingStyle} from '../../styles/input/responsiveInputPaddingStyle'
 import {TextInput} from './textInput'
 
-vi.mock('../../styles/internal', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../styles/internal')>()
+vi.mock('../../styles/input/responsiveInputPaddingStyle', async (importOriginal) => {
+  const actual =
+    await importOriginal<typeof import('../../styles/input/responsiveInputPaddingStyle')>()
 
   return {
     ...actual,

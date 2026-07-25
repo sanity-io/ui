@@ -4,7 +4,7 @@ import {Tree, TreeItem} from '@sanity/ui'
 import Link from 'next/link'
 import {ReactElement} from 'react'
 
-import {NavNode} from '@/lib/nav'
+import {NavNode} from '@/lib/nav/types'
 
 export function Nav(props: {nav: NavNode; path: string}): ReactElement {
   const {nav, path} = props
