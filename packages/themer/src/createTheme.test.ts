@@ -41,7 +41,7 @@ describe('themeConfigFromColors', () => {
   })
 
   it('re-anchors every ramp when the surface endpoints move', () => {
-    const config = themeConfigFromColors({darkest: '#0d1415'})
+    const config = themeConfigFromColors({darkBackground: '#0d1415'})
 
     expect(config.palette?.black).toBe('#0d1415')
     expect(config.palette?.gray).not.toBe(color.gray)
@@ -72,19 +72,19 @@ describe('createTheme', () => {
     expect(color.light.default.focusRing).toBe('#1cb485')
   })
 
-  it('drives the surface colors from lightest and darkest', () => {
-    const {color} = getV2(createTheme({lightest: '#fcfdfd', darkest: '#0d1415'}))
+  it('drives the surface colors from the light and dark backgrounds', () => {
+    const {color} = getV2(createTheme({lightBackground: '#fcfdfd', darkBackground: '#0d1415'}))
 
     expect(color.light.default.bg).toBe('#fcfdfd')
     expect(color.dark.transparent.bg).toBe('#0d1415')
   })
 
-  it('tints the neutral colors with the gray color', () => {
+  it('tints the neutral colors with the text color', () => {
     const defaultColor = getV2(createTheme()).color
-    const {color} = getV2(createTheme({gray: '#5c9199'}))
+    const {color} = getV2(createTheme({text: '#5c9199'}))
 
     expect(color.light.transparent.bg).not.toBe(defaultColor.light.transparent.bg)
-    // The light scheme's default surface stays anchored to the lightest color
+    // The light scheme's default surface stays anchored to the light background
     expect(color.light.default.bg).toBe(defaultColor.light.default.bg)
   })
 

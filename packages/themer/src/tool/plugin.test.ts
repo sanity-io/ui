@@ -29,13 +29,13 @@ describe('createThemeSnippet', () => {
   })
 
   it('serializes colors in a stable order', () => {
-    expect(createThemeSnippet({darkest: '#0d1415', primary: '#1cb485'})).toBe(
+    expect(createThemeSnippet({darkBackground: '#0d1415', primary: '#1cb485'})).toBe(
       [
         "import {createTheme} from '@sanity/themer'",
         '',
         'export const theme = createTheme({',
         "  primary: '#1cb485',",
-        "  darkest: '#0d1415',",
+        "  darkBackground: '#0d1415',",
         '})',
         '',
       ].join('\n'),
@@ -43,8 +43,8 @@ describe('createThemeSnippet', () => {
   })
 
   it('serializes preset colors that have no sidebar picker', () => {
-    expect(createThemeSnippet({gray: '#5c9199', primary: '#1cb485'})).toContain(
-      "  gray: '#5c9199',",
+    expect(createThemeSnippet({critical: '#fe3459', primary: '#1cb485'})).toContain(
+      "  critical: '#fe3459',",
     )
   })
 })

@@ -6,8 +6,8 @@ import {CreateThemeOptions} from './types'
 
 /** The palette hue that each themeable color drives */
 const HUE_MAPPING: ReadonlyArray<[option: keyof CreateThemeOptions, hueKey: ColorHueKey]> = [
-  ['gray', 'gray'],
   ['primary', 'blue'],
+  ['text', 'gray'],
   ['positive', 'green'],
   ['caution', 'yellow'],
   ['critical', 'red'],
@@ -38,14 +38,14 @@ export function themeConfigFromColors(colors: CreateThemeOptions): ThemeConfig {
     }
   }
 
-  const anchored = Boolean(colors.lightest || colors.darkest)
+  const anchored = Boolean(colors.lightBackground || colors.darkBackground)
 
   if (!anchored && !HUE_MAPPING.some(([option]) => colors[option])) {
     return {}
   }
 
-  const lightest = (colors.lightest ?? color.white.hex).toLowerCase()
-  const darkest = (colors.darkest ?? color.black.hex).toLowerCase()
+  const lightest = (colors.lightBackground ?? color.white.hex).toLowerCase()
+  const darkest = (colors.darkBackground ?? color.black.hex).toLowerCase()
 
   const palette: ThemeColorPalette = {...color, black: darkest, white: lightest}
 

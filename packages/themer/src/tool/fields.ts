@@ -18,13 +18,13 @@ export interface ThemerField {
  * @internal
  */
 export const DEFAULT_COLORS: Required<CreateThemeOptions> = {
-  gray: color.gray[500].hex,
   primary: color.blue[500].hex,
+  text: color.gray[500].hex,
   positive: color.green[500].hex,
   caution: color.yellow[500].hex,
   critical: color.red[500].hex,
-  lightest: color.white.hex,
-  darkest: color.black.hex,
+  lightBackground: color.white.hex,
+  darkBackground: color.black.hex,
 }
 
 /**
@@ -42,21 +42,21 @@ export const THEMER_FIELDS: ThemerField[] = [
     defaultValue: DEFAULT_COLORS.primary,
   },
   {
-    key: 'gray',
+    key: 'text',
     title: 'Text',
     description: 'Text, icons and neutral surfaces',
-    defaultValue: DEFAULT_COLORS.gray,
+    defaultValue: DEFAULT_COLORS.text,
   },
   {
-    key: 'lightest',
+    key: 'lightBackground',
     title: 'Light background',
     description: 'The background of the light scheme',
-    defaultValue: DEFAULT_COLORS.lightest,
+    defaultValue: DEFAULT_COLORS.lightBackground,
   },
   {
-    key: 'darkest',
+    key: 'darkBackground',
     title: 'Dark background',
     description: 'The background of the dark scheme',
-    defaultValue: DEFAULT_COLORS.darkest,
+    defaultValue: DEFAULT_COLORS.darkBackground,
   },
 ]

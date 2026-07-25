@@ -25,15 +25,17 @@ export default defineConfig({
 
 Every color is optional — omitted colors keep their default Sanity ramps:
 
-| Color      | Drives                                  |
-| ---------- | --------------------------------------- |
-| `primary`  | Buttons, focus rings, links, selections |
-| `gray`     | Neutral surfaces, borders and text      |
-| `positive` | Success accents                         |
-| `caution`  | Warning accents                         |
-| `critical` | Errors and destructive actions          |
-| `lightest` | Light mode background                   |
-| `darkest`  | Dark mode background                    |
+| Color             | Drives                                    |
+| ----------------- | ----------------------------------------- |
+| `primary`         | Buttons, focus rings, links, selections   |
+| `text`            | Text, icons, borders and neutral surfaces |
+| `positive`        | Success accents                           |
+| `caution`         | Warning accents                           |
+| `critical`        | Errors and destructive actions            |
+| `lightBackground` | Light mode background                     |
+| `darkBackground`  | Dark mode background                      |
+
+Each color is the midpoint of a generated tint ramp rather than a literal token value, so `text` also tints borders and muted surfaces, and `lightBackground`/`darkBackground` anchor the light and dark ends of every ramp.
 
 Preset themes are available from the `presets` export:
 
