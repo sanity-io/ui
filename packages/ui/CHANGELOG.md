@@ -1,5 +1,23 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.21
+
+### Patch Changes
+
+- build all components as client components
+
+## 0.0.1-alpha.20
+
+### Patch Changes
+
+- e444c47: feat!: remove cascade layers and revert to import order for managing specificity resolution
+
+## 0.0.1-alpha.19
+
+### Patch Changes
+
+- 2eff581: fix: add new top level `sui` CSS layer to avoid layer collisions w/ other stylesheets
+
 ## 0.0.1-alpha.18
 
 ### Patch Changes

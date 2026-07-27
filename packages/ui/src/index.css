@@ -1,10 +1,18 @@
-@layer core, components, classes;
-@layer core.global, core.tokens;
+/* SUI layer for base styles (currently just our global styles) */
+@layer sui;
 
-/* Write tokens first for ease of reference */
-@import '@sanity-labs/design-tokens/dist/css/index.css' layer(core.tokens);
-@import './css/tokens/index.css' layer(core.tokens);
+/* Import order is important in this file as it maintains
+   correct specificity resolution within the package. */
 
-@import './css/global/index.css' layer(core.global);
-@import './components/index.css' layer(components);
-@import './css/classes/index.css' layer(classes);
+/* 1. Globals (layered to avoid conflicts with end user resets) */
+@import './css/global/index.css' layer(sui.global);
+
+/* 2. Tokens */
+@import '@sanity-labs/design-tokens/dist/css/index.css';
+@import './css/tokens/index.css';
+
+/* 3. Component styles */
+@import './components/index.css';
+
+/* 4. Classes */
+@import './css/classes/index.css';

@@ -8,7 +8,7 @@ import prefixer from 'postcss-prefix-selector'
 
 import breakpoints from './postcss-breakpoints'
 import {suffixSelectors} from './postcss-suffix-selectors'
-import {VERSION} from './src/version'
+import {HASH} from './src/version'
 
 const config = {
   plugins: [
@@ -16,7 +16,7 @@ const config = {
       path: [path.relative(process.cwd(), '../')],
     }),
     prefixer({
-      prefix: VERSION,
+      prefix: HASH,
       transform: suffixSelectors,
     } as Parameters<typeof prefixer>[0]),
     breakpoints,

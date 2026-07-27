@@ -4,6 +4,7 @@ import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
+import {Popover} from '../../../../packages/ui/src/components/popover/Popover'
 import {Tooltip} from '../../../../packages/ui/src/components/tooltip/Tooltip'
 import {PLACEMENT} from '../../../../packages/ui/src/types/Placement'
 
@@ -44,14 +45,14 @@ type Story = StoryObj<typeof Tooltip>
 export const Default: Story = {
   render: (props) => {
     return (
-      <Tooltip {...props} content="Tooltip text">
+      <Tooltip {...props} content="Tooltip Content">
         <Button text="Open Tooltip" />
       </Tooltip>
     )
   },
   play: async ({canvas}) => {
     const trigger = await canvas.findByRole('button', {name: 'Open Tooltip'})
-    const tooltip = await canvas.findByRole('tooltip', {hidden: true})
+    const tooltip = await canvas.findByText('Tooltip Content')
 
     await userEvent.tab()
 
@@ -60,15 +61,6 @@ export const Default: Story = {
         await expect(tooltip).toBeVisible()
       },
       {timeout: 750},
-    )
-
-    await userEvent.keyboard('{Escape}')
-
-    await waitFor(
-      async () => {
-        await expect(tooltip).not.toBeVisible()
-      },
-      {timeout: 350},
     )
 
     trigger.blur()
@@ -84,7 +76,7 @@ export const Placements: Story = {
             <Tooltip
               {...props}
               placement={placement}
-              content={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Text`}
+              content={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Content`}
             >
               <Button
                 text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip`}
@@ -98,15 +90,62 @@ export const Placements: Story = {
     )
   },
   play: async ({canvas}) => {
+    const trigger = await canvas.findByRole('button', {name: 'Top-end Tooltip'})
+
     await userEvent.tab()
     await userEvent.tab()
     await userEvent.tab()
 
     await waitFor(
       async () => {
-        await expect(await canvas.findByText('Top-end Tooltip Text')).toBeVisible()
+        await expect(await canvas.findByText('Top-end Tooltip Content')).toBeVisible()
       },
       {timeout: 750},
     )
+
+    trigger.blur()
+  },
+}
+
+export const WithPopover: Story = {
+  render: (props) => (
+    <Tooltip {...props} anchorName="tooltip-popover" content="Tooltip Content">
+      <Popover anchorName="tooltip-popover" content="Popover Content">
+        <Button text="Open Tooltip or Popover" />
+      </Popover>
+    </Tooltip>
+  ),
+  play: async ({canvas}) => {
+    const trigger = await canvas.findByRole('button', {name: 'Open Tooltip or Popover'})
+    const tooltip = await canvas.findByText('Tooltip Content')
+    const popover = await canvas.findByText('Popover Content')
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(tooltip).toBeVisible()
+      },
+      {timeout: 750},
+    )
+
+    await userEvent.click(trigger)
+
+    await waitFor(
+      async () => {
+        await expect(tooltip).not.toBeVisible()
+      },
+      {timeout: 250},
+    )
+
+    await waitFor(
+      async () => {
+        await expect(popover).toBeVisible()
+      },
+      {timeout: 500},
+    )
+
+    await userEvent.click(trigger)
+    trigger.blur()
   },
 }

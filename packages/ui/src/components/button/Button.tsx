@@ -4,6 +4,7 @@ import {type ComponentPropsWithRef, type ElementType, isValidElement} from 'reac
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Flex} from '../flex/Flex'
+import {Icon} from '../icon/Icon'
 import {Spinner} from '../spinner/Spinner'
 import {Text} from '../text/Text'
 import {type ButtonProps, buttonProps} from './button.props'
@@ -50,7 +51,12 @@ export function Button<T extends ElementType = 'button'>({
         </Flex>
       )}
 
-      {IconStart && (isValidElement(IconStart) ? IconStart : <IconStart />)}
+      {IconStart &&
+        (isValidElement(IconStart) ? (
+          IconStart
+        ) : (
+          <Icon icon={IconStart} marginX={-1} marginY={-2} size={1} />
+        ))}
 
       {text && (
         <Text size={1} weight="medium" trim>
@@ -59,7 +65,12 @@ export function Button<T extends ElementType = 'button'>({
       )}
 
       {children}
-      {IconEnd && (isValidElement(IconEnd) ? IconEnd : <IconEnd />)}
+      {IconEnd &&
+        (isValidElement(IconEnd) ? (
+          IconEnd
+        ) : (
+          <Icon icon={IconEnd} marginX={-1} marginY={-2} size={1} />
+        ))}
     </Component>
   )
 }

@@ -1,6 +1,6 @@
-# Performance testing tool
+# Mount testing tool
 
-This is a basic performance testing tool used to vet component render times.
+This is a basic mount testing tool used to vet component render times.
 
 The app is quite manually driven right now: edit the count in the page of the UI library you want to test. The page will render count number of components specified in the iterator.map of that page, and this render will be wrapped in React’s Profiler component in order to gauge the render time.
 

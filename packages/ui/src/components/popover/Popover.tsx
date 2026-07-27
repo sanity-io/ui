@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import {
   Activity,
   cloneElement,
+  useEffect,
   useId,
   useState,
   type ComponentPropsWithRef,
@@ -11,6 +12,7 @@ import {
 
 import {getProps} from '../../utils/getProps'
 import {mergeTriggerProps} from '../../utils/mergeTriggerProps'
+import {renderPortal} from '../../utils/renderPortal'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {type PopoverProps, popoverProps} from './popover.props'
 
@@ -24,65 +26,72 @@ function PopoverRoot<T extends ElementType = 'div'>({
     triggerProps?: Record<string, unknown>
   }) {
   const {
-    as,
     children,
     className,
     style,
     id: idProp,
+    anchorName,
     content,
+    portal,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, popoverProps)
   const reactId = useId()
   const id = idProp || reactId
-  const popoverId = `popover-${id}`
   const Component = as || 'div'
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const handleToggle = (e: ToggleEvent) => {
     setOpen(e.newState === 'open')
   }
 
   const triggerProps = {
-    popoverTarget: popoverId,
-    style: {anchorName: `--anchor-${id}`},
+    popoverTarget: id,
+    style: {anchorName: `--anchor-${anchorName || id}`},
   }
 
   const trigger = children.type.forwardsTriggerProps
     ? cloneElement(children, {triggerProps})
     : cloneElement(children, mergeTriggerProps(children.props, forwardedTriggerProps, triggerProps))
 
-  console.log('popover trigger', trigger)
-
   return (
     <>
       {trigger}
 
-      <Activity mode={open ? 'visible' : 'hidden'}>
-        <Component
-          className={clsx(
-            popoverClassName,
-            'sui-p1 sui-radius2 sui-position-fixed sui-shadow2',
-            className,
-          )}
-          style={{
-            ...style,
-            positionAnchor: `--anchor-${id}`,
-          }}
-          data-ui="Popover"
-          popover="auto"
-          id={popoverId}
-          onToggle={handleToggle}
-          {...rest}
-        >
-          {content}
-        </Component>
-      </Activity>
+      {renderPortal(
+        <Activity mode={open ? 'visible' : 'hidden'}>
+          <Component
+            className={clsx(
+              popoverClassName,
+              'sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+              className,
+            )}
+            style={{
+              ...style,
+              positionAnchor: `--anchor-${anchorName || id}`,
+            }}
+            data-ui="Popover"
+            popover="auto"
+            id={id}
+            onToggle={handleToggle}
+            {...rest}
+          >
+            {content}
+          </Component>
+        </Activity>,
+        mounted,
+        portal,
+      )}
     </>
   )
 }
 
-/** @public */
+/** @beta */
 export const Popover = Object.assign(PopoverRoot, {
   forwardsTriggerProps: true,
 })

@@ -18,6 +18,7 @@
     "format": "oxfmt . --no-error-on-unmatched-pattern",
     "lint": "oxlint --disable-nested-config",
     "lint:fix": "pnpm lint --fix",
+    "perf": "turbo dev --ui=tui --filter=./apps/*-testing",
     "prepare": "husky",
     "release": "pnpm run changeset:version && pnpm run build && pnpm run changeset:publish",
     "test": "turbo test -- --run",

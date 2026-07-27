@@ -1,0 +1,11 @@
+.sui-Eyebrow {
+  --eyebrow-color: var(--foreground-high);
+  color: var(--eyebrow-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sui-Eyebrow:where(.sui-text-muted) {
+  --eyebrow-color-muted: var(--foreground-low);
+  color: var(--eyebrow-color-muted);
+}

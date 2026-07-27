@@ -9,6 +9,10 @@
       "cache": false,
       "persistent": true
     },
+    "perf": {
+      "cache": false,
+      "persistent": true
+    },
     "test": {
       "dependsOn": ["^build"]
     },

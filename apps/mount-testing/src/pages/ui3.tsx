@@ -71,7 +71,7 @@ export default function Ui3() {
       <h2>{count} Grids</h2>
       <Profiler id="Grid" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Grid key={i} columns={2} gap={3}>
+          <Grid key={i} gridTemplateColumns={2} gap={3}>
             <span>Grid content</span>
             <span>Grid content</span>
             <span>Grid content</span>
@@ -83,7 +83,7 @@ export default function Ui3() {
       <h2>{count} Inlines</h2>
       <Profiler id="Inline" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Inline key={i} space={3}>
+          <Inline key={i} gap={3}>
             <span>Inline content</span>
             <span>Inline content</span>
           </Inline>
@@ -93,7 +93,7 @@ export default function Ui3() {
       <h2>{count} Stacks</h2>
       <Profiler id="Stack" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Stack key={i} space={3}>
+          <Stack key={i} gap={3}>
             <span>Stack content</span>
             <span>Stack content</span>
             <span>Stack content</span>

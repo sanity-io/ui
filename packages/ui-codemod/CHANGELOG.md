@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc-codemod
 
+## 0.0.1-alpha.16
+
+### Patch Changes
+
+- 389d9c6: migrate to @sanity/pkg-utils v10 (consumed via the pnpm catalog)
+
 ## 0.0.1-alpha.15
 
 ### Patch Changes

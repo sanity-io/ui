@@ -17,7 +17,7 @@ export function Radio(props: RadioProps) {
 
   return (
     <Label
-      className={clsx(radioClassName, className)}
+      className={clsx(radioClassName, 'sui-position-relative', className)}
       style={style}
       data-ui="Radio"
       disabled={disabled}

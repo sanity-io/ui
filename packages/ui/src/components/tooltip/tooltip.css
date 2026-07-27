@@ -1,5 +1,12 @@
-.sui-Tooltip {
+[interestfor]:has(+ .sui-Tooltip) {
   --tooltip-delay: var(--tooltip-delay-group, 500ms);
+  --interest-delay-start: var(--tooltip-delay);
+  --interest-delay-end: 0;
+  interest-delay-start: var(--tooltip-delay);
+  interest-delay-end: 0;
+}
+
+.sui-Tooltip {
   background: var(--backdrop);
   visibility: hidden;
   opacity: 0;
@@ -12,9 +19,6 @@
   opacity: 1;
   scale: 1;
   transition: var(--fade-in-transition);
-  transition-delay:
-    var(--tooltip-delay), var(--tooltip-delay),
-    var(--tooltip-delay);
 }
 
 @starting-style {
