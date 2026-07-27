@@ -1,6 +1,7 @@
 // oxlint-disable no-deprecated -- the legacy API intentionally targets the deprecated v0 theme properties, like the hosted service did
 import {createHash} from 'node:crypto'
 
+import {buildTheme, RootTheme} from '@sanity/ui/theme'
 import {describe, expect, it} from 'vitest'
 
 import {hostedCustom, hostedDefault, hostedVerdant} from './__fixtures__/hosted'
@@ -48,6 +49,24 @@ function expectSamples(color: LegacyTheme['color'], samples: Record<string, stri
   }
 }
 
+/**
+ * How Sanity Studio resolves a custom `theme`: it reads only `color`, `fonts`
+ * and `v2` off it, and substitutes its own fonts for themes flagged
+ * `__themer: true` — the workaround this package should not need.
+ * https://github.com/sanity-io/sanity/blob/bae53feb46ab7f5630259a264968b50bdbc728bb/packages/sanity/src/core/studio/StudioThemeProvider.tsx#L13-L17
+ */
+function resolveStudioTheme(candidate: RootTheme & {__themer?: true}): RootTheme {
+  const defaultTheme = buildTheme()
+
+  return {
+    ...defaultTheme,
+    v2: candidate.v2,
+    fonts:
+      candidate.__themer === true ? defaultTheme.fonts : (candidate.fonts ?? defaultTheme.fonts),
+    color: candidate.color ?? defaultTheme.color,
+  }
+}
+
 describe('theme and hues', () => {
   it('serves the same default hues as the hosted service', () => {
     expect(hues).toEqual(hostedDefault.hues)
@@ -58,10 +77,18 @@ describe('theme and hues', () => {
     expect(hashColor(theme.color)).toBe(hostedDefault.colorSha256)
   })
 
-  it('marks the theme for Sanity Studio', () => {
-    expect(theme.__themer).toBe(true)
-    expect(theme.v2).toBeUndefined()
-    expect(theme.fonts).toBeDefined()
+  it('resolves in the Studio without the __themer font workaround', () => {
+    expect('__themer' in theme).toBe(false)
+
+    const resolved = resolveStudioTheme(theme)
+    const flagged = resolveStudioTheme({...theme, __themer: true})
+
+    // The Studio substitutes its own fonts for flagged themes, and these fonts
+    // already are those — so it resolves the same fonts either way, while the
+    // generated v0 colors, and the absent v2, come through untouched
+    expect(resolved.fonts).toEqual(flagged.fonts)
+    expect(resolved.color).toBe(theme.color)
+    expect(resolved.v2).toBeUndefined()
   })
 
   it('theme equals createTheme(hues)', () => {

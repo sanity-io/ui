@@ -39,7 +39,7 @@ function getTint(key: string): ColorTints {
   return tints
 }
 
-const studioTheme = buildTheme()
+const defaultTheme = buildTheme()
 
 /**
  * Generates a Studio theme from hues, producing the exact same colors as the
@@ -707,6 +707,13 @@ export function themeFromHues(partialHues: PartialHues): LegacyTheme {
     },
   })
 
+  // Sanity Studio only reads `color`, `fonts` and `v2` off a custom theme, and
+  // throws away the `fonts` of themes flagged `__themer: true` — a workaround
+  // for the hosted service serving the fonts of the `@sanity/ui` version it was
+  // bundled with, which drifted from the Studio's own. These fonts come from the
+  // `@sanity/ui` installed next to the Studio instead, so they already are the
+  // ones the workaround substitutes and the theme needs no flag:
+  // https://github.com/sanity-io/sanity/blob/bae53feb46ab7f5630259a264968b50bdbc728bb/packages/sanity/src/core/studio/StudioThemeProvider.tsx#L13-L17
   // oxlint-disable-next-line no-deprecated -- the legacy API intentionally targets the deprecated v0 color property, like the hosted service did
-  return {...studioTheme, color, __themer: true, v2: undefined}
+  return {...defaultTheme, color, v2: undefined}
 }

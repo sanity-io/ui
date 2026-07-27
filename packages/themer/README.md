@@ -133,6 +133,8 @@ const theme = createTheme(getPreset('verdant').hues)
 
 Once migrated, remove any `themer.d.ts` module declarations and `urlImports` config that the URL imports needed.
 
+The generated theme carries no `__themer` flag, which is the one intentional difference from the hosted module. Sanity Studio uses that flag to throw away the fonts the hosted module bundled, because they had drifted from the Studio's own; here the fonts come from the `@sanity/ui` installed next to the Studio, so there is nothing to throw away.
+
 The legacy API is frozen — it exists to make leaving the hosted service painless. New themes should use `createTheme` from the `@sanity/themer` root export instead.
 
 ## License
