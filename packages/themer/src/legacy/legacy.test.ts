@@ -5,7 +5,7 @@ import {buildTheme, RootTheme} from '@sanity/ui/theme'
 import {describe, expect, it} from 'vitest'
 
 import {hostedCustom, hostedDefault, hostedVerdant} from './__fixtures__/hosted'
-import {createTheme, createThemeFromUrl, parseHuesFromUrl} from './createTheme'
+import {buildThemeFromUrl, createTheme, parseHuesFromUrl} from './createTheme'
 import {hues, theme} from './defaults'
 import {getPreset, presets} from './presets'
 import {LegacyTheme} from './types'
@@ -135,7 +135,7 @@ describe('parseHuesFromUrl', () => {
   })
 
   it('generates the same theme colors as the hosted service', () => {
-    const {color} = createThemeFromUrl(hostedCustom.url)
+    const {color} = buildThemeFromUrl(hostedCustom.url)
 
     expectSamples(color, hostedCustom.samples)
     expect(hashColor(color)).toBe(hostedCustom.colorSha256)

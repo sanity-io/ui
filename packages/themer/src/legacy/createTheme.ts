@@ -56,15 +56,15 @@ export function parseHuesFromUrl(url: string | URL): Hues {
  * // import {theme} from 'https://themer.sanity.build/api/hues?preset=verdant'
  *
  * // After:
- * import {createThemeFromUrl} from '@sanity/themer/legacy'
+ * import {buildThemeFromUrl} from '@sanity/themer/legacy'
  *
- * const theme = createThemeFromUrl(
+ * const theme = buildThemeFromUrl(
  *   'https://themer.sanity.build/api/hues?preset=verdant',
  * )
  * ```
  *
  * @public
  */
-export function createThemeFromUrl(url: string | URL): LegacyTheme {
+export function buildThemeFromUrl(url: string | URL): LegacyTheme {
   return createTheme(parseHuesFromUrl(url))
 }

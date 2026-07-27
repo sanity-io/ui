@@ -10,16 +10,16 @@ npm install @sanity/themer
 
 ## Migrating from themer.sanity.build
 
-`@sanity/themer/legacy` generates the exact same colors as the hosted service, with the same `createTheme`, `hues` and `theme` exports that `https://themer.sanity.build/api/hues` served. Replace the URL import with `createThemeFromUrl` and the URL as a string:
+`@sanity/themer/legacy` generates the exact same colors as the hosted service, with the same `createTheme`, `hues` and `theme` exports that `https://themer.sanity.build/api/hues` served. Replace the URL import with `buildThemeFromUrl` and the URL as a string:
 
 ```ts
 // Before:
 import {theme} from 'https://themer.sanity.build/api/hues?preset=verdant&primary=22fca8'
 
 // After:
-import {createThemeFromUrl} from '@sanity/themer/legacy'
+import {buildThemeFromUrl} from '@sanity/themer/legacy'
 
-const theme = createThemeFromUrl(
+const theme = buildThemeFromUrl(
   'https://themer.sanity.build/api/hues?preset=verdant&primary=22fca8',
 )
 ```
