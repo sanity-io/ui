@@ -22,9 +22,10 @@ const defaultPreset = definePreset(
  * the same slugs and hues:
  *
  * ```ts
- * import {createTheme, getPreset} from '@sanity/themer/legacy'
+ * import {createTheme, presets} from '@sanity/themer/legacy'
  *
- * const theme = createTheme(getPreset('verdant').hues)
+ * const verdant = presets.find((preset) => preset.slug === 'verdant')
+ * const theme = createTheme(verdant.hues)
  * ```
  *
  * @public
@@ -75,9 +76,10 @@ export const presets: ThemePreset[] = [
 
 /**
  * Finds a preset by its slug, falling back to the default Studio preset for
- * unknown slugs — the same behavior as the hosted Themer service.
+ * unknown slugs — the behavior of the hosted Themer service's `?preset`
+ * param, which `parseHuesFromUrl` exposes.
  *
- * @public
+ * @internal
  */
 export function getPreset(slug: string | null | undefined): ThemePreset {
   const needle = slug?.toLowerCase()

@@ -7,7 +7,7 @@ import {describe, expect, it} from 'vitest'
 import {hostedCustom, hostedDefault, hostedVerdant} from './__fixtures__/hosted'
 import {buildThemeFromUrl, createTheme, parseHuesFromUrl} from './createTheme'
 import {hues, theme} from './defaults'
-import {getPreset, presets} from './presets'
+import {presets} from './presets'
 import {LegacyTheme} from './types'
 
 /**
@@ -98,11 +98,13 @@ describe('theme and hues', () => {
 
 describe('presets', () => {
   it('resolves the same verdant hues as the hosted service', () => {
-    expect(getPreset('verdant').hues).toEqual(hostedVerdant.hues)
+    expect(parseHuesFromUrl('https://themer.sanity.build/api/hues?preset=verdant')).toEqual(
+      hostedVerdant.hues,
+    )
   })
 
   it('generates the same verdant theme colors as the hosted service', () => {
-    const {color} = createTheme(getPreset('verdant').hues)
+    const {color} = buildThemeFromUrl('?preset=verdant')
 
     expectSamples(color, hostedVerdant.samples)
     expect(hashColor(color)).toBe(hostedVerdant.colorSha256)
@@ -123,9 +125,8 @@ describe('presets', () => {
   })
 
   it('falls back to the default preset for unknown slugs', () => {
-    expect(getPreset('does-not-exist').slug).toBe('default')
-    expect(getPreset(null).slug).toBe('default')
-    expect(getPreset('VERDANT').slug).toBe('verdant')
+    expect(parseHuesFromUrl('?preset=does-not-exist')).toEqual(hues)
+    expect(parseHuesFromUrl('?preset=VERDANT')).toEqual(hostedVerdant.hues)
   })
 })
 

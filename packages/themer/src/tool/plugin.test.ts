@@ -1,8 +1,9 @@
 import {describe, expect, it, vi} from 'vitest'
 
 import {applyHues} from '../legacy/applyHues'
+import {parseHuesFromUrl} from '../legacy/createTheme'
 import {hues as defaultHues} from '../legacy/defaults'
-import {getPreset, presets} from '../legacy/presets'
+import {presets} from '../legacy/presets'
 import {diffHues} from './diffHues'
 import {themerTool} from './plugin'
 import {createThemeSnippet} from './snippet'
@@ -54,7 +55,7 @@ describe('createThemeSnippet', () => {
   })
 
   it('serializes only what differs from the default hues', () => {
-    expect(createThemeSnippet(getPreset('verdant').hues)).toBe(
+    expect(createThemeSnippet(parseHuesFromUrl('?preset=verdant'))).toBe(
       [
         "import {createTheme} from '@sanity/themer/legacy'",
         '',

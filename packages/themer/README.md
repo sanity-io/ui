@@ -41,12 +41,12 @@ export default defineConfig({
 })
 ```
 
-The hosted presets are also available directly:
+The hosted presets are addressed by query, exactly like the service:
 
 ```ts
-import {createTheme, getPreset} from '@sanity/themer/legacy'
+import {buildThemeFromUrl} from '@sanity/themer/legacy'
 
-const theme = createTheme(getPreset('verdant').hues)
+const theme = buildThemeFromUrl('?preset=verdant')
 ```
 
 Once migrated, remove any `themer.d.ts` module declarations and `urlImports` config that the URL imports needed.
