@@ -49,6 +49,7 @@
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
     "@sanity/ui": "workspace:^",
+    "react-compiler-runtime": "1.0.0",
     "react-refractor": "catalog:",
     "refractor": "catalog:"
   },
@@ -56,6 +57,7 @@
     "@sanity/tsdown-config": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
+    "babel-plugin-react-compiler": "catalog:",
     "react": "catalog:",
     "rimraf": "catalog:",
     "sanity": "catalog:",

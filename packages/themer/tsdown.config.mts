@@ -9,6 +9,8 @@ const config: UserConfig = await defineConfig({
     legacy: './src/legacy/index.ts',
     tool: './src/tool/index.ts',
   },
+  styledComponents: true,
+  reactCompiler: {target: '18'},
 })
 
 export default config

@@ -567,6 +567,9 @@ importers:
       '@sanity/ui':
         specifier: workspace:^
         version: link:../ui
+      react-compiler-runtime:
+        specifier: 1.0.0
+        version: 1.0.0(react@19.2.8)
       react-refractor:
         specifier: 'catalog:'
         version: 4.0.0(react@19.2.8)
@@ -583,6 +586,9 @@ importers:
       '@types/react':
         specifier: ^19.2.17
         version: 19.2.17
+      babel-plugin-react-compiler:
+        specifier: 'catalog:'
+        version: 1.0.0
       react:
         specifier: ^19.2.8
         version: 19.2.8
