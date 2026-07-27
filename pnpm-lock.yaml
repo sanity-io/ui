@@ -567,6 +567,12 @@ importers:
       '@sanity/ui':
         specifier: workspace:^
         version: link:../ui
+      react-refractor:
+        specifier: 'catalog:'
+        version: 4.0.0(react@19.2.8)
+      refractor:
+        specifier: 'catalog:'
+        version: 5.0.0
     devDependencies:
       '@sanity/tsdown-config':
         specifier: 'catalog:'

@@ -51,7 +51,9 @@
   "dependencies": {
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
-    "@sanity/ui": "workspace:^"
+    "@sanity/ui": "workspace:^",
+    "react-refractor": "catalog:",
+    "refractor": "catalog:"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",

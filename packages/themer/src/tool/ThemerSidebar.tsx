@@ -2,12 +2,20 @@ import {ClipboardIcon} from '@sanity/icons/Clipboard'
 import {CloseIcon} from '@sanity/icons/Close'
 import {ResetIcon} from '@sanity/icons/Reset'
 import {Box, Button, Card, Code, Flex, Grid, Stack, Text, useToast} from '@sanity/ui'
+import {registerLanguage} from 'react-refractor'
+import typescript from 'refractor/typescript'
 
 import {presets, ThemePreset} from '../presets'
 import {COLOR_OPTION_KEYS, CreateThemeOptions} from '../types'
 import {useThemer} from './context'
 import {DEFAULT_COLORS, THEMER_FIELDS, ThemerField} from './fields'
 import {createThemeSnippet} from './snippet'
+
+// `Code` only highlights languages the surrounding app has registered with
+// react-refractor, and the Studio registers its own set from an async import
+// during startup — a race this sidebar keeps losing. Registering the one
+// language the snippet needs keeps it highlighted from the first render.
+registerLanguage(typescript)
 
 const swatchStyle: React.CSSProperties = {
   width: 33,
