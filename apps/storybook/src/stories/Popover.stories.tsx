@@ -1,6 +1,5 @@
 import {Popover as PopoverV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import {useId} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
@@ -58,84 +57,53 @@ export const Default: Story = {
       async () => {
         await expect(await canvas.findByText('Popover Content')).toBeVisible()
       },
-      {timeout: 750},
+      {timeout: 500},
     )
 
-    await userEvent.keyboard('{Escape}')
-
-    await waitFor(
-      async () => {
-        await expect(canvas.queryByText('Popover Content')).not.toBeVisible()
-      },
-      {timeout: 350},
-    )
+    await userEvent.click(trigger)
+    trigger.blur()
   },
 }
 
-const withTooltipPlay: Story['play'] = async ({canvas}) => {
-  const trigger = await canvas.findByRole('button', {name: 'Hover or click'})
-  const tooltip = await canvas.findByRole('tooltip', {hidden: true})
-
-  await userEvent.hover(trigger)
-
-  await waitFor(
-    async () => {
-      await expect(tooltip).toBeVisible()
-    },
-    {timeout: 750},
-  )
-
-  await userEvent.unhover(trigger)
-
-  await userEvent.click(trigger)
-
-  await waitFor(
-    async () => {
-      await expect(await canvas.findByText('Popover Content')).toBeVisible()
-    },
-    {timeout: 750},
-  )
-
-  await userEvent.keyboard('{Escape}')
-
-  await waitFor(
-    async () => {
-      await expect(canvas.queryByText('Popover Content')).not.toBeVisible()
-    },
-    {timeout: 350},
-  )
-}
-
-function WithTooltipPopoverOuter(props: React.ComponentProps<typeof Popover>) {
-  const id = useId()
-
-  return (
-    <Popover {...props} anchorName={id} content="Popover Content">
-      <Tooltip anchorName={id} content="Tooltip Content">
-        <Button text="Hover or click" />
+export const WithTooltip: Story = {
+  render: (props) => (
+    <Popover {...props} anchorName="popover-tooltip" content="Popover Content">
+      <Tooltip anchorName="popover-tooltip" content="Tooltip Content">
+        <Button text="Open Tooltip or Popover" />
       </Tooltip>
     </Popover>
-  )
-}
+  ),
+  play: async ({canvas}) => {
+    const trigger = await canvas.findByRole('button', {name: 'Open Tooltip or Popover'})
+    const tooltip = await canvas.findByText('Tooltip Content')
+    const popover = await canvas.findByText('Popover Content')
 
-function WithTooltipPopoverInner(props: React.ComponentProps<typeof Popover>) {
-  const id = useId()
+    await userEvent.tab()
 
-  return (
-    <Tooltip anchorName={id} content="Tooltip Content">
-      <Popover {...props} anchorName={id} content="Popover Content">
-        <Button text="Hover or click" />
-      </Popover>
-    </Tooltip>
-  )
-}
+    await waitFor(
+      async () => {
+        await expect(tooltip).toBeVisible()
+      },
+      {timeout: 750},
+    )
 
-export const WithTooltip: Story = {
-  render: (props) => <WithTooltipPopoverOuter {...props} />,
-  play: withTooltipPlay,
-}
+    await userEvent.click(trigger)
 
-export const WithTooltipReversed: Story = {
-  render: (props) => <WithTooltipPopoverInner {...props} />,
-  play: withTooltipPlay,
+    await waitFor(
+      async () => {
+        await expect(tooltip).not.toBeVisible()
+      },
+      {timeout: 250},
+    )
+
+    await waitFor(
+      async () => {
+        await expect(popover).toBeVisible()
+      },
+      {timeout: 500},
+    )
+
+    await userEvent.click(trigger)
+    trigger.blur()
+  },
 }

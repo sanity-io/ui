@@ -18,7 +18,7 @@ Each page has six test sections. Every control is wired to React state, so a cli
 3. **Tone toggle (500 cards)** — one button changes a style prop (`tone`) on 500 cards. This targets the styling engine, which is where the two libraries differ most: v3 computes styles in the browser during render; the POC's styles are prebuilt CSS.
 4. **Panel swap (300 cards)** — one button mounts or unmounts 300 cards, like opening a pane or dialog.
 5. **Tooltip mount (300 tooltips)** — one button mounts or unmounts 300 tooltip-wrapped buttons. Deliberately skips simulating interactions because the Popover API only allows one tooltip to be visible at a time in the POC.
-6. **Popover mount (300 tooltips)** — one button mounts or unmounts 300 popover-wrapped buttons. Same Popover API restrictions as tooltip.
+6. **Popover mount (300 popovers)** — one button mounts or unmounts 300 popover-wrapped buttons. Same Popover API restrictions as tooltip.
 
 A monitor in the bottom-right corner shows:
 
