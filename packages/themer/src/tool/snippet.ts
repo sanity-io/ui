@@ -1,43 +1,43 @@
-import {Hue, Hues} from '../legacy/types'
-import {diffHues} from './diffHues'
-import {HUE_KEYS} from './hues'
-
-function serializeHue(hue: Partial<Hue>): string {
-  const parts: string[] = []
-
-  if (hue.mid !== undefined) parts.push(`mid: '${hue.mid}'`)
-  if (hue.midPoint !== undefined) parts.push(`midPoint: ${hue.midPoint}`)
-  if (hue.lightest !== undefined) parts.push(`lightest: '${hue.lightest}'`)
-  if (hue.darkest !== undefined) parts.push(`darkest: '${hue.darkest}'`)
-
-  return `{${parts.join(', ')}}`
-}
+import {BuildThemeOptions} from '../theme/options'
+import {minimizeOptions} from './options'
 
 /**
- * Serializes hues into the `createTheme` call to paste into
- * `sanity.config.ts`, keeping only what differs from the default hues.
+ * Serializes theme options into the `buildTheme` call to paste into
+ * `sanity.config.ts`, keeping only what differs from the derived defaults.
  *
- * Hues that match the defaults entirely are the stock Studio theme, which
- * needs nothing from this package — so they serialize to a bare `buildTheme()`
+ * Options that boil down to the stock Studio theme need nothing from this
+ * package — so they serialize to a bare `buildTheme()` from `@sanity/ui/theme`
  * instead.
  *
  * @internal
  */
-export function createThemeSnippet(hues: Hues): string {
-  const diff = diffHues(hues)
-  const entries: string[] = []
+export function createThemeSnippet(options: BuildThemeOptions): string {
+  const minimized = minimizeOptions(options)
 
-  for (const key of HUE_KEYS) {
-    const patch = diff[key]
-
-    if (patch) {
-      entries.push(`  ${key}: ${serializeHue(patch)},`)
-    }
-  }
-
-  if (entries.length === 0) {
+  if (minimized === null) {
     return "import {buildTheme} from '@sanity/ui/theme'\n\nexport const theme = buildTheme()\n"
   }
 
-  return `import {createTheme} from '@sanity/themer/legacy'\n\nexport const theme = createTheme({\n${entries.join('\n')}\n})\n`
+  const entries: string[] = [`  accent: '${minimized.accent}',`]
+
+  if (minimized.text !== undefined) {
+    entries.push(`  text: '${minimized.text}',`)
+  }
+
+  if (minimized.background) {
+    const parts: string[] = []
+
+    if (minimized.background.dark !== undefined) parts.push(`dark: '${minimized.background.dark}'`)
+    if (minimized.background.light !== undefined) {
+      parts.push(`light: '${minimized.background.light}'`)
+    }
+
+    entries.push(`  background: {${parts.join(', ')}},`)
+  }
+
+  if (minimized.contrast !== undefined) {
+    entries.push(`  contrast: ${minimized.contrast},`)
+  }
+
+  return `import {buildTheme} from '@sanity/themer'\n\nexport const theme = buildTheme({\n${entries.join('\n')}\n})\n`
 }

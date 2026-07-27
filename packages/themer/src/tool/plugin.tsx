@@ -1,7 +1,6 @@
 import {definePlugin, type LayoutProps} from 'sanity'
 
-import {applyHues} from '../legacy/applyHues'
-import {PartialHues} from '../legacy/types'
+import {BuildThemeOptions, DEFAULT_ACCENT} from '../theme/options'
 import {ThemerActiveToolLayout} from './ThemerActiveToolLayout'
 import {ThemerLayout} from './ThemerLayout'
 import {ThemerNavbar} from './ThemerNavbar'
@@ -16,27 +15,27 @@ import {ThemerNavbar} from './ThemerNavbar'
  */
 export interface ThemerToolOptions {
   /**
-   * The hues that the Studio's configured theme was generated from — the
-   * themer starts editing from these, so pass the same object that the
-   * `theme` in the Studio config uses:
+   * The `buildTheme` options that the Studio's configured theme was generated
+   * from — the themer starts editing from these, so pass the same object that
+   * the `theme` in the Studio config uses:
    *
    * ```ts
-   * const hues = parseHuesFromUrl('https://themer.sanity.build/api/hues?preset=verdant')
+   * const config: BuildThemeOptions = {accent: '#1cb485'}
    *
    * export default defineConfig({
-   *   theme: createTheme(hues),
-   *   plugins: [themerTool({hues})],
+   *   theme: buildTheme(config),
+   *   plugins: [themerTool({config})],
    * })
    * ```
    */
-  hues?: PartialHues
+  config?: BuildThemeOptions
 }
 
 /**
- * A Studio plugin that adds a themer sidebar for the legacy Themer themes:
- * a navbar toggle opens the sidebar next to the active tool, where presets,
- * per-hue editors and pasted themer.sanity.build URLs preview a legacy
- * `createTheme` theme live on the whole Studio while you browse around.
+ * A Studio plugin that adds a themer sidebar for `buildTheme` themes: a
+ * navbar toggle opens the sidebar next to the active tool, where presets, the
+ * accent/text/background pickers and the contrast slider preview a
+ * `buildTheme` theme live on the whole Studio while you browse around.
  * Toggle between light and dark mode with the regular appearance menu — the
  * preview follows it.
  *
@@ -56,10 +55,10 @@ export interface ThemerToolOptions {
  * @alpha
  */
 export const themerTool = definePlugin<ThemerToolOptions | void>((options) => {
-  const baseHues = applyHues(options?.hues ?? {})
+  const baseOptions = options?.config ?? {accent: DEFAULT_ACCENT}
 
   function ThemerLayoutWithOptions(props: LayoutProps) {
-    return <ThemerLayout {...props} baseHues={baseHues} />
+    return <ThemerLayout {...props} baseOptions={baseOptions} />
   }
 
   return {
