@@ -4,6 +4,7 @@ import {ResetIcon} from '@sanity/icons/Reset'
 import {Box, Button, Card, Code, Flex, Grid, Stack, Text, useToast} from '@sanity/ui'
 import {registerLanguage} from 'react-refractor'
 import typescript from 'refractor/typescript'
+import {styled} from 'styled-components'
 
 import {presets, ThemePreset} from '../presets'
 import {COLOR_OPTION_KEYS, CreateThemeOptions} from '../types'
@@ -17,16 +18,36 @@ import {createThemeSnippet} from './snippet'
 // language the snippet needs keeps it highlighted from the first render.
 registerLanguage(typescript)
 
-const swatchStyle: React.CSSProperties = {
-  width: 33,
-  height: 33,
-  padding: 0,
-  border: '1px solid var(--card-border-color)',
-  borderRadius: 6,
-  background: 'transparent',
-  cursor: 'pointer',
-  flex: 'none',
-}
+/**
+ * `<input type="color">` paints the color into a shadow-DOM swatch that brings
+ * its own border and padding, which then sits inside ours as a second border.
+ * Stripping that chrome leaves the themed border as the only one.
+ */
+const Swatch = styled.input`
+  box-sizing: border-box;
+  flex: none;
+  width: 33px;
+  height: 33px;
+  padding: 0;
+  border: 1px solid var(--card-border-color);
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  &::-webkit-color-swatch {
+    border: none;
+    border-radius: 3px;
+  }
+
+  &::-moz-color-swatch {
+    border: none;
+    border-radius: 3px;
+  }
+`
 
 function sameColors(a: CreateThemeOptions, b: CreateThemeOptions): boolean {
   return COLOR_OPTION_KEYS.every(
@@ -240,10 +261,9 @@ function ColorField(props: {
           title={`Reset ${field.title}`}
         />
       )}
-      <input
+      <Swatch
         aria-label={`${field.title} color`}
         onChange={(event) => onChange(field.key, event.currentTarget.value)}
-        style={swatchStyle}
         type="color"
         value={expandHex(value ?? field.defaultValue)}
       />

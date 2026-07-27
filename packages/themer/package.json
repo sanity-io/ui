@@ -62,13 +62,15 @@
     "react": "catalog:",
     "rimraf": "catalog:",
     "sanity": "catalog:",
+    "styled-components": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
   "peerDependencies": {
     "react": "^19",
-    "sanity": "^6"
+    "sanity": "^6",
+    "styled-components": "^6"
   },
   "peerDependenciesMeta": {
     "sanity": {
