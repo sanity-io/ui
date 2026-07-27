@@ -573,8 +573,7 @@ const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAu
           ref={listBoxElementRef}
           // oxlint-disable-next-line prefer-tag-over-role
           role="listbox"
-          // oxlint-disable-next-line no-deprecated
-          space={1}
+          gap={1}
         >
           {filteredOptions.map((option) => {
             const active =

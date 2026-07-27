@@ -306,8 +306,7 @@ describe('useClickOutside', () => {
      * When using the legacy version of the `useClickOutside` API it's necessary to synchronize mutable ref values
      * with a effect and state loop to ensure they're not stale
      */
-    // oxlint-disable-next-line no-deprecated
-    const useElementsFromRefs = (refs: React.MutableRefObject<HTMLElement | null>[]) => {
+    const useElementsFromRefs = (refs: React.RefObject<HTMLElement | null>[]) => {
       // oxlint-disable-next-line react-compiler
       const [elements, setElements] = useState(() => refs.map((ref) => ref.current))
 
@@ -465,8 +464,7 @@ describe('useClickOutside', () => {
      * When using the legacy version of the `useClickOutside` API it's necessary to synchronize mutable ref values
      * with a effect and state loop to ensure they're not stale
      */
-    // oxlint-disable-next-line no-deprecated
-    const useBoundaryElementFromRef = (ref: React.MutableRefObject<HTMLElement | null>) => {
+    const useBoundaryElementFromRef = (ref: React.RefObject<HTMLElement | null>) => {
       // oxlint-disable-next-line react-compiler
       const [element, setElement] = useState(() => ref.current)
 
