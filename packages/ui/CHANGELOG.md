@@ -1,5 +1,23 @@
 # @sanity/ui
 
+## 3.5.0
+
+### Minor Changes
+
+- [#2457](https://github.com/sanity-io/ui/pull/2457) [`834c3d6`](https://github.com/sanity-io/ui/commit/834c3d688bd3eeec2af4db6065087885e5b7bb6d) Thanks [@stipsan](https://github.com/stipsan)! - `TreeItem` accepts a new `linkProps` prop with additional props for the link element that is rendered when `href` is set — for example `next/link`'s `prefetch`: `<TreeItem linkAs={Link} linkProps={{prefetch: true}} href="…">`. Props controlled by `TreeItem` itself (`href`, `role`, `tabIndex`, `aria-expanded` and the ref) take precedence.
+
+- [#2440](https://github.com/sanity-io/ui/pull/2440) [`e72e56b`](https://github.com/sanity-io/ui/commit/e72e56b7897f0c4089d5518f34f343b640f39a57) Thanks [@stipsan](https://github.com/stipsan)! - Ship a `'use client'` directive on the `@sanity/ui` and `@sanity/ui/_visual-editing` entrypoints so React Compiler output loads correctly under Next.js App Router / RSC. Components can now be rendered directly from Server Components without a hand-written client wrapper. `@sanity/ui/theme` is left unmarked — it remains a pure theme-token export safe for Server Components.
+
+### Patch Changes
+
+- [#2461](https://github.com/sanity-io/ui/pull/2461) [`cf1a9d0`](https://github.com/sanity-io/ui/commit/cf1a9d0f9c4e71e6339ae7a84152616206ddd8e2) Thanks [@stipsan](https://github.com/stipsan)! - fix: replace deprecated external APIs instead of suppressing them
+
+  - `Toast` now orchestrates its child animations with `delayChildren: stagger(interval)` instead of `motion`'s deprecated `staggerChildren`.
+  - `useForwardedRef` and the internal menu controller type refs as `RefObject` instead of React's deprecated `MutableRefObject` (identical shape, so no API change).
+  - `Toast` and `Autocomplete` pass `gap` instead of the deprecated `space` prop internally.
+
+- [#2457](https://github.com/sanity-io/ui/pull/2457) [`834c3d6`](https://github.com/sanity-io/ui/commit/834c3d688bd3eeec2af4db6065087885e5b7bb6d) Thanks [@stipsan](https://github.com/stipsan)! - `TreeItem` now renders custom link components passed via `linkAs` correctly. Previously the internal styled wrapper forwarded a stray `as="a"` prop to the custom component — breaking components like `next/link`, which interpret `as` as a URL override — and dropped the `display: block`/`text-decoration: none` styles from the rendered link. `<TreeItem linkAs={Link} href="…">` now behaves like `<Button as={Link} href="…">`.
+
 ## 3.4.5
 
 ### Patch Changes
