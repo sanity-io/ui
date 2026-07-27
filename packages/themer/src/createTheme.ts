@@ -8,10 +8,14 @@ import {CreateThemeOptions} from './types'
 const HUE_MAPPING: ReadonlyArray<[option: keyof CreateThemeOptions, hueKey: ColorHueKey]> = [
   ['primary', 'blue'],
   ['text', 'gray'],
-  ['positive', 'green'],
-  ['caution', 'yellow'],
-  ['critical', 'red'],
 ]
+
+/**
+ * The hues the Studio tones are built from. The accent tones aren't themeable,
+ * but their ramps still have to be re-anchored when the backgrounds move, or
+ * they would keep ending in the stock white and black.
+ */
+const TONE_HUES: readonly ColorHueKey[] = ['blue', 'gray', 'green', 'yellow', 'red']
 
 /**
  * Maps themeable colors to a `@sanity/ui` `ThemeConfig`, for when a theme
@@ -39,8 +43,17 @@ export function themeConfigFromColors(colors: CreateThemeOptions): ThemeConfig {
   }
 
   const anchored = Boolean(colors.lightBackground || colors.darkBackground)
+  const mids = new Map<ColorHueKey, string>()
 
-  if (!anchored && !HUE_MAPPING.some(([option]) => colors[option])) {
+  for (const [option, hueKey] of HUE_MAPPING) {
+    const mid = colors[option]?.toLowerCase()
+
+    if (mid) {
+      mids.set(hueKey, mid)
+    }
+  }
+
+  if (!anchored && mids.size === 0) {
     return {}
   }
 
@@ -49,8 +62,8 @@ export function themeConfigFromColors(colors: CreateThemeOptions): ThemeConfig {
 
   const palette: ThemeColorPalette = {...color, black: darkest, white: lightest}
 
-  for (const [option, hueKey] of HUE_MAPPING) {
-    const mid = colors[option]?.toLowerCase()
+  for (const hueKey of TONE_HUES) {
+    const mid = mids.get(hueKey)
 
     // Untouched ramps only need regenerating when the surface endpoints moved
     if (mid || anchored) {

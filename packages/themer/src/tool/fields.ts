@@ -20,17 +20,13 @@ export interface ThemerField {
 export const DEFAULT_COLORS: Required<CreateThemeOptions> = {
   primary: color.blue[500].hex,
   text: color.gray[500].hex,
-  positive: color.green[500].hex,
-  caution: color.yellow[500].hex,
-  critical: color.red[500].hex,
   lightBackground: color.white.hex,
   darkBackground: color.black.hex,
 }
 
 /**
- * The colors the sidebar exposes pickers for. Presets can set the other
- * `CreateThemeOptions` colors, and the generated snippet always serializes
- * all of them — the pickers are just the simplified editing surface.
+ * The colors the sidebar exposes pickers for, one per `CreateThemeOptions`
+ * color.
  *
  * @internal
  */

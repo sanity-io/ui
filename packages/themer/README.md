@@ -23,19 +23,18 @@ export default defineConfig({
 })
 ```
 
-Every color is optional — omitted colors keep their default Sanity ramps:
+There are four colors, and every one of them is optional — omitted colors keep their default Sanity ramps:
 
 | Color             | Drives                                    |
 | ----------------- | ----------------------------------------- |
 | `primary`         | Buttons, focus rings, links, selections   |
 | `text`            | Text, icons, borders and neutral surfaces |
-| `positive`        | Success accents                           |
-| `caution`         | Warning accents                           |
-| `critical`        | Errors and destructive actions            |
 | `lightBackground` | Light mode background                     |
 | `darkBackground`  | Dark mode background                      |
 
-Each color is the midpoint of a generated tint ramp rather than a literal token value, so `text` also tints borders and muted surfaces, and `lightBackground`/`darkBackground` anchor the light and dark ends of every ramp.
+Each color is the midpoint of a generated tint ramp rather than a literal token value, so `text` also tints borders and muted surfaces, and `lightBackground`/`darkBackground` anchor the light and dark ends of every ramp — including the ramps behind the positive, caution and critical tones, which keep their own hues.
+
+`createTheme()` without colors is the stock Studio theme, which `buildTheme()` from [`@sanity/ui`](https://github.com/sanity-io/ui) gives you without this package.
 
 Preset themes are available from the `presets` export:
 

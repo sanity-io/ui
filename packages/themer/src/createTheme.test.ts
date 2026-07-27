@@ -46,6 +46,16 @@ describe('themeConfigFromColors', () => {
     expect(config.palette?.black).toBe('#0d1415')
     expect(config.palette?.gray).not.toBe(color.gray)
     expect(config.palette?.gray[950]).toBe(mix(450 / 500, '#0d1415', color.gray[500].hex))
+    // The accent tones aren't themeable, but they follow the backgrounds too
+    expect(config.palette?.red).not.toBe(color.red)
+    expect(config.palette?.green[950]).toBe(mix(450 / 500, '#0d1415', color.green[500].hex))
+  })
+
+  it('generates nothing for the Studio preset', () => {
+    const studio = presets[0]
+
+    expect(studio.title).toBe('Studio')
+    expect(themeConfigFromColors(studio.colors)).toEqual({})
   })
 
   it('rejects invalid colors', () => {
