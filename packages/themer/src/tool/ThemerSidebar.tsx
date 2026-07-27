@@ -171,6 +171,10 @@ export function ThemerSidebar() {
 
 const paletteStyle: React.CSSProperties = {
   display: 'flex',
+  // The gaps let the border color through, so a near-white light background
+  // still reads as a swatch rather than a hole in the palette
+  gap: 1,
+  background: 'var(--card-border-color)',
   height: 21,
   borderRadius: 3,
   overflow: 'hidden',
