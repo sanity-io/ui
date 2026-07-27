@@ -170,8 +170,8 @@ importers:
         specifier: 16.3.0-preview.9
         version: 16.3.0-preview.9(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       next-sanity:
-        specifier: ^13.2.1
-        version: 13.2.1(0778c36b8475edb5490ada133e0238e6)
+        specifier: ^13.2.2
+        version: 13.2.2(0778c36b8475edb5490ada133e0238e6)
       pako:
         specifier: ^3.0.1
         version: 3.0.1
@@ -6647,11 +6647,11 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  next-sanity@13.2.1:
-    resolution: {integrity: sha512-luDsMhO8cTCt3RAdnTpafqG2ZmM9GY0Kyah7QepSzzxHB2LMJM1yVwCddpVYc4mC1WUeAk3yNtaFJzR+N/Ee9Q==}
+  next-sanity@13.2.2:
+    resolution: {integrity: sha512-LCRM+WP7nWV00jZ0rE9wW37ubuQPYpOnrZHiJtGdLQGccYmUkAcj0qayRDx64zVu/5/HhYWl3PC2spitlYfOcQ==}
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
-      '@sanity/client': ^7.24.0
+      '@sanity/client': ^7.25.0
       next: ^16.0.0-0
       react: ^19.2.8
       react-dom: ^19.2.8
@@ -14415,7 +14415,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next-sanity@13.2.1(0778c36b8475edb5490ada133e0238e6):
+  next-sanity@13.2.2(0778c36b8475edb5490ada133e0238e6):
     dependencies:
       '@portabletext/react': 7.0.1(react@19.2.8)
       '@sanity/client': 7.25.0
