@@ -14,6 +14,9 @@ function ThemerNavbarButton() {
         icon={ColorWheelIcon}
         mode="bleed"
         onClick={() => setOpen(!open)}
+        // The Studio's own navbar buttons go through a wrapper that pins them
+        // to this padding, where `@sanity/ui` defaults to a roomier 3
+        padding={2}
         selected={open}
       />
     </Tooltip>
