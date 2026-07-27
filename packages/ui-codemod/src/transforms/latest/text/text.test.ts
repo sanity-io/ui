@@ -89,7 +89,7 @@ defineInlineTest(
   <Text textOverflow="ellipsis" />
   `,
   `
-  <Text lineClamp={1} as="div" trim={true} />
+  <Text truncate={1} as="div" trim={true} />
   `,
   'renames textOverflow prop and updates mapped values',
 )

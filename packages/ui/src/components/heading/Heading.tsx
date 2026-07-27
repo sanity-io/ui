@@ -16,22 +16,32 @@ export function Heading<T extends ElementType = 'h2'>({
   const {as, children, className, style, ...rest} = getProps({size, weight, ...props}, headingProps)
   const Component = as || 'h2'
 
-  if (props.lineClamp && props.trim) {
+  if (props.truncate && props.trim) {
     return (
       <Component
-        className={clsx(headingClassName, className?.replace('sui-line-clamp', ''))}
+        className={clsx(
+          headingClassName,
+          className?.replace('sui-line-clamp', '').replace('sui-text-overflow', ''),
+        )}
         style={style}
         data-ui="Heading"
         {...rest}
       >
-        <span className="sui-line-clamp">{children}</span>
+        <span
+          className={clsx(
+            'sui-overflow-hidden',
+            props.truncate === 1 ? 'sui-text-overflow' : 'sui-line-clamp',
+          )}
+        >
+          {children}
+        </span>
       </Component>
     )
   }
 
   return (
     <Component
-      className={clsx(headingClassName, className)}
+      className={clsx(headingClassName, 'sui-overflow-hidden', className)}
       style={style}
       data-ui="Heading"
       {...rest}

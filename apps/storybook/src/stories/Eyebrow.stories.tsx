@@ -83,11 +83,11 @@ export const Tones: Story = {
   },
 }
 
-export const TrimLineClamp: Story = {
-  name: 'Trim & Line Clamp',
+export const TrimTruncate: Story = {
+  name: 'Trim & Truncate',
   render: (props) => {
     return (
-      <Eyebrow trim lineClamp={1} {...props}>
+      <Eyebrow trim truncate={2} {...props}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
         laboris nisi ut aliquip ex ea commodo consequat.
@@ -97,6 +97,28 @@ export const TrimLineClamp: Story = {
   play: async ({canvas}) => {
     await expect((await canvas.findByText(/Lorem ipsum dolor sit amet/)).classList).toContain(
       'sui-line-clamp',
+    )
+
+    await expect(
+      (await canvas.findByText(/Lorem ipsum dolor sit amet/)).parentElement?.classList,
+    ).toContain('sui-text-trim')
+  },
+}
+
+export const TrimTruncateOneLine: Story = {
+  name: 'Trim & Truncate One Line',
+  render: (props) => {
+    return (
+      <Eyebrow trim truncate={1} {...props}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.
+      </Eyebrow>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText(/Lorem ipsum dolor sit amet/)).classList).toContain(
+      'sui-text-overflow',
     )
 
     await expect(

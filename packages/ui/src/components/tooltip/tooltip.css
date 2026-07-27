@@ -1,9 +1,10 @@
 [interestfor]:has(+ .sui-Tooltip) {
   --tooltip-delay: var(--tooltip-delay-group, 500ms);
+  /* The interestfor polyfill looks for intereset delay variables */
   --interest-delay-start: var(--tooltip-delay);
-  --interest-delay-end: 0;
+  --interest-delay-end: 0ms;
   interest-delay-start: var(--tooltip-delay);
-  interest-delay-end: 0;
+  interest-delay-end: 0ms;
 }
 
 .sui-Tooltip {

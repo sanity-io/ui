@@ -2,5 +2,4 @@
   display: -webkit-box;
   -webkit-line-clamp: var(--line-clamp);
   -webkit-box-orient: vertical;
-  overflow: hidden;
 }

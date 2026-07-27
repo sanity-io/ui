@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import {cloneElement, useEffect, useId, useRef, useState, type ToggleEvent} from 'react'
+import {cloneElement, useId, useState, type ToggleEvent} from 'react'
 
+import {useIsClient} from '../../hooks/useIsClient'
 import {getProps} from '../../utils/getProps'
 import {mergeTriggerProps} from '../../utils/mergeTriggerProps'
 import {renderPortal} from '../../utils/renderPortal'
@@ -28,27 +29,22 @@ function TooltipRoot({
   } = getProps({placement, ...props}, tooltipProps)
   const reactId = useId()
   const id = idProp || reactId
-  const tooltipRef = useRef<HTMLDivElement>(null)
-  const dismissedRef = useRef(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const [dismissed, setDismissed] = useState(false)
+  const isClient = useIsClient()
 
   const triggerProps = {
     'aria-describedby': id,
     'interestfor': id,
     'style': {anchorName: `--anchor-${anchorName || id}`},
     'onMouseLeave': () => {
-      dismissedRef.current = false
+      setDismissed(false)
     },
     'onBlur': () => {
-      dismissedRef.current = false
+      setDismissed(false)
     },
     'onClick': () => {
-      dismissedRef.current = true
-      tooltipRef.current?.togglePopover(false)
+      setDismissed(true)
+      document.getElementById(id)?.hidePopover()
     },
   }
 
@@ -57,7 +53,7 @@ function TooltipRoot({
     : cloneElement(children, mergeTriggerProps(children.props, forwardedTriggerProps, triggerProps))
 
   const handleBeforeToggle = (e: ToggleEvent) => {
-    if (e.newState === 'open' && dismissedRef.current) {
+    if (e.newState === 'open' && dismissed) {
       e.preventDefault()
     }
   }
@@ -81,13 +77,12 @@ function TooltipRoot({
           role="tooltip"
           popover="hint"
           id={id}
-          ref={tooltipRef}
           onBeforeToggle={handleBeforeToggle}
           {...rest}
         >
           {content}
         </div>,
-        mounted,
+        isClient,
         portal,
       )}
     </>

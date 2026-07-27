@@ -16,22 +16,32 @@ export function Eyebrow<T extends ElementType = 'span'>({
   const {as, children, className, style, ...rest} = getProps({size, weight, ...props}, eyebrowProps)
   const Component = as || 'span'
 
-  if (props.lineClamp && props.trim) {
+  if (props.truncate && props.trim) {
     return (
       <Component
-        className={clsx(eyebrowClassName, className?.replace('sui-line-clamp', ''))}
+        className={clsx(
+          eyebrowClassName,
+          className?.replace('sui-line-clamp', '').replace('sui-text-overflow', ''),
+        )}
         style={style}
         data-ui="Eyebrow"
         {...rest}
       >
-        <span className="sui-line-clamp">{children}</span>
+        <span
+          className={clsx(
+            'sui-overflow-hidden',
+            props.truncate === 1 ? 'sui-text-overflow' : 'sui-line-clamp',
+          )}
+        >
+          {children}
+        </span>
       </Component>
     )
   }
 
   return (
     <Component
-      className={clsx(eyebrowClassName, className)}
+      className={clsx(eyebrowClassName, 'sui-overflow-hidden', className)}
       style={style}
       data-ui="Eyebrow"
       {...rest}

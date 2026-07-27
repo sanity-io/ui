@@ -21,7 +21,7 @@ export function getProps(
   let style = componentProps?.style || {}
 
   for (const key in allComponentProps) {
-    const propDef = allPropDefs?.[key]
+    const propDef = getPropDef(allComponentProps[key], allPropDefs?.[key])
     const propValue = allComponentProps[key]
 
     if (!propDef || !('className' in propDef) || !propDef.className) {
@@ -43,6 +43,14 @@ export function getProps(
   }
 
   return {...restProps, className, style}
+}
+
+function getPropDef(propValue: any, propDef?: PropDef) {
+  if (propDef?.type === 'conditional') {
+    return propDef.resolve(propValue)
+  }
+
+  return propDef
 }
 
 function getClassName(propValue: any, propDef: PropDef, bp?: number) {
