@@ -46,7 +46,7 @@ export const TEXT_MODS: AttributeMods = {
   },
   textOverflow: {
     type: 'rename-mapped',
-    name: 'lineClamp',
+    name: 'truncate',
     mapping: {
       ellipsis: 1,
       clip: 1,
