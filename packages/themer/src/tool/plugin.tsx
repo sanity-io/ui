@@ -9,7 +9,10 @@ import {ThemerNavbar} from './ThemerNavbar'
 /**
  * Options for the {@link themerTool} plugin.
  *
- * @public
+ * This is experimental and may change or be removed in any release without
+ * notice — use at your own risk.
+ *
+ * @alpha
  */
 export interface ThemerToolOptions {
   /**
@@ -47,7 +50,10 @@ export interface ThemerToolOptions {
  * })
  * ```
  *
- * @public
+ * This is experimental and may change or be removed in any release without
+ * notice — use at your own risk.
+ *
+ * @alpha
  */
 export const themerTool = definePlugin<ThemerToolOptions | void>((options) => {
   const baseHues = applyHues(options?.hues ?? {})
