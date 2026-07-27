@@ -1,5 +1,3 @@
-'use client'
-
 import {Card, Text} from '@sanity/ui'
 
 export default function SlugLoading() {

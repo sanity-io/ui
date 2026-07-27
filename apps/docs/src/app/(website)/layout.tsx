@@ -1,8 +1,8 @@
+import {Flex} from '@sanity/ui'
 import {VisualEditing} from 'next-sanity/visual-editing'
 import dynamic from 'next/dynamic'
 import {draftMode} from 'next/headers'
 import {PropsWithChildren, Suspense} from 'react'
-import {styled} from 'styled-components'
 
 import {parseNav} from '#lib/nav/parseNav.ts'
 import {Banner} from '@/components/Banner'
@@ -88,20 +88,11 @@ async function CachedGlobalData(props: PropsWithChildren<DynamicFetchOptions>) {
   const nav = global?.nav ? parseNav(global.nav, []) : null
 
   return (
-    <Root>
+    <Flex direction="column" height="fill">
       <Banner settings={global?.settings ?? null} />
       <Navbar nav={nav} />
       {children}
       <AppFooter />
-    </Root>
+    </Flex>
   )
 }
-
-const Root = styled.div({
-  'height': '100%',
-  'flexDirection': 'column',
-
-  '&:not([hidden])': {
-    display: 'flex',
-  },
-})

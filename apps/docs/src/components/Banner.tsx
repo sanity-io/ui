@@ -1,4 +1,3 @@
-'use client'
 import {Icon} from '@sanity/icons'
 import {Card, Flex, Text} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'

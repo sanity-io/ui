@@ -23,8 +23,7 @@ export function useMenuController(props: {
   onKeyDown?: React.KeyboardEventHandler
   originElement?: HTMLElement | null
   shouldFocus: 'first' | 'last' | null
-  // oxlint-disable-next-line no-deprecated
-  rootElementRef: React.MutableRefObject<HTMLDivElement | null>
+  rootElementRef: React.RefObject<HTMLDivElement | null>
 }): MenuController {
   const {onKeyDown, originElement, shouldFocus, rootElementRef} = props
   const elementsRef = useRef<HTMLElement[]>([])

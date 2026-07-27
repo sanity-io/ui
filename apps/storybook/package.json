@@ -31,7 +31,7 @@
     "@vitejs/plugin-react": "^6.0.4",
     "@vitest/browser-playwright": "^4.1.10",
     "babel-plugin-react-compiler": "catalog:",
-    "playwright": "^1.61.1",
+    "playwright": "^1.62.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-refractor": "catalog:",

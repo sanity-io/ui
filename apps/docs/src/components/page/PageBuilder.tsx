@@ -1,5 +1,3 @@
-'use client'
-
 import {Code} from '@sanity/ui'
 import {ReactElement} from 'react'
 
