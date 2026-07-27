@@ -23,10 +23,7 @@ export function TooltipGroup<T extends ElementType = 'div'>(
       return
     }
 
-    if (
-      e.propertyName === 'visibility' &&
-      window.getComputedStyle(tooltip).visibility !== 'hidden'
-    ) {
+    if (e.propertyName === 'opacity' && window.getComputedStyle(tooltip).visibility !== 'opacity') {
       setIsActive(true)
     }
   }
@@ -49,7 +46,7 @@ export function TooltipGroup<T extends ElementType = 'div'>(
       style={{
         ...style,
         ...(isActive && {
-          '--tooltip-delay-group': 0,
+          '--tooltip-delay-group': '0ms',
         }),
       }}
       data-ui="TooltipGroup"

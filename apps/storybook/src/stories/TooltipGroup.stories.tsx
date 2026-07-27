@@ -1,7 +1,7 @@
 import {Tooltip as TooltipV3, TooltipDelayGroupProvider} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import type {ComponentProps} from 'react'
-import {expect, waitFor} from 'storybook/test'
+import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
@@ -77,9 +77,10 @@ export const Default: Story = {
       </TooltipGroup>
     )
   },
-  play: async ({canvas}) => {
-    await (await canvas.findByRole('button', {name: 'Open Tooltip 1'})).focus()
-    await expect(await canvas.findByText('Tooltip 1 Text')).not.toBeVisible()
+  play: async ({canvas, canvasElement}) => {
+    const group = canvasElement.querySelector('[data-ui="TooltipGroup"]') as HTMLElement
+
+    await userEvent.tab()
 
     await waitFor(
       async () => {
@@ -88,9 +89,26 @@ export const Default: Story = {
       {timeout: 750},
     )
 
-    await (await canvas.findByRole('button', {name: 'Open Tooltip 2'})).focus()
-    await expect(await canvas.findByText('Tooltip 2 Text')).toBeVisible()
-    await (await canvas.findByRole('button', {name: 'Open Tooltip 1'})).focus()
-    await expect(await canvas.findByText('Tooltip 1 Text')).toBeVisible()
+    await waitFor(() => {
+      expect(group.style.getPropertyValue('--tooltip-group-delay')).toBe('0ms')
+    })
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(await canvas.findByText('Tooltip 2 Text')).toBeVisible()
+      },
+      {timeout: 200},
+    )
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(await canvas.findByText('Tooltip 3 Text')).toBeVisible()
+      },
+      {timeout: 200},
+    )
   },
 }

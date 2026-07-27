@@ -168,6 +168,7 @@ function TooltipMountSection() {
   const [open, setOpen] = useState(false)
   const [clickVariant, setClickVariant] = useState(0)
 
+  // oxlint-disable-next-line no-console
   const handleTriggerClick = () => console.log(`Tooltip trigger clicked (variant ${clickVariant})`)
 
   return (
