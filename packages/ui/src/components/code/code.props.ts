@@ -7,7 +7,7 @@ import type {Responsive} from '../../types/Responsive'
 /** @public */
 export interface CodeProps<T extends CodeTag> extends Omit<
   TypographyProps,
-  'align' | 'lineClamp' | 'tone'
+  'align' | 'truncate' | 'tone'
 > {
   /** Element to render */
   as?: T

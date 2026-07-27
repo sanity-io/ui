@@ -89,7 +89,7 @@ defineInlineTest(
   <Label textOverflow="ellipsis" />
   `,
   `
-  <Eyebrow lineClamp={1} as="div" trim={true} />
+  <Eyebrow truncate={1} as="div" trim={true} />
   `,
   'renames textOverflow prop and updates mapped values',
 )

@@ -1,0 +1,5 @@
+.sui-text-overflow {
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

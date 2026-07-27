@@ -50,6 +50,18 @@ defineInlineTest(
   transform,
   {},
   `
+  <Heading as="h1" textOverflow="ellipsis" />
+  `,
+  `
+  <Heading as="h1" truncate={1} trim={true} />
+  `,
+  'renames textOverflow prop and updates mapped values',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
   <Heading as="h1" width={1} maxWidth="fill" />
   `,
   `

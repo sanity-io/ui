@@ -7,12 +7,12 @@ import {type ToneProps, toneProps} from './tone'
 export interface TypographyProps extends MarginProps, ToneProps {
   /** CSS **text-align** property */
   align?: TextAlign
-  /** CSS **-webkit-line-clamp** property */
-  lineClamp?: number
   /** CSS **color** property */
   muted?: boolean
   /** CSS **text-box-trim** property */
   trim?: boolean
+  /** Number of lines to truncate */
+  truncate?: number
   /** CSS **font-weight** property */
   weight?: FontWeight
 }
@@ -23,11 +23,6 @@ export const typographyProps: Record<string, PropDef> = {
     className: 'text',
     values: TEXT_ALIGN,
   },
-  lineClamp: {
-    type: 'number',
-    className: 'line-clamp',
-    variable: '--line-clamp',
-  },
   muted: {
     type: 'boolean',
     className: 'text-muted',
@@ -37,6 +32,23 @@ export const typographyProps: Record<string, PropDef> = {
     type: 'boolean',
     className: 'text-trim',
     inverseClassName: 'text-trim-none',
+  },
+  truncate: {
+    type: 'conditional',
+    resolve: (value) => {
+      if (value === 1) {
+        return {
+          type: 'number',
+          className: 'text-overflow',
+        }
+      } else {
+        return {
+          type: 'number',
+          className: 'line-clamp',
+          variable: '--line-clamp',
+        }
+      }
+    },
   },
   weight: {
     type: 'union',

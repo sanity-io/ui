@@ -55,9 +55,19 @@ type CompositePropDef<T> = {
   >
 }
 
+/**
+ * Prop is a composite of other props. Requires a resolve callback with
+ * a value param that returns another prop def.
+ */
+type ConditionalPropDef<T> = {
+  type: 'conditional'
+  resolve: (value: T) => PropDef<T>
+}
+
 export type PropDef<T = unknown> =
   | BooleanPropDef
   | NumberPropDef
   | StringPropDef
   | UnionPropDef<T>
   | CompositePropDef<T>
+  | ConditionalPropDef<T>
