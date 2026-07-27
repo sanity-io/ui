@@ -1,0 +1,85 @@
+{
+  "name": "@sanity/themer",
+  "version": "0.0.0",
+  "description": "Generate Sanity Studio themes, and preview them with a Studio tool.",
+  "keywords": [
+    "sanity",
+    "studio",
+    "theme",
+    "themer",
+    "ui"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/ui/issues"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/ui.git",
+    "directory": "packages/themer"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./legacy": "./src/legacy/index.ts",
+    "./tool": "./src/tool/index.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "exports": {
+      "./legacy": "./dist/legacy.js",
+      "./tool": "./dist/tool.js",
+      "./package.json": "./package.json"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf dist",
+    "prepack": "pnpm build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "watch": "tsdown --watch"
+  },
+  "dependencies": {
+    "@sanity/color": "workspace:^",
+    "@sanity/icons": "workspace:^",
+    "@sanity/ui": "workspace:^",
+    "react-compiler-runtime": "1.0.0",
+    "react-refractor": "catalog:",
+    "refractor": "catalog:"
+  },
+  "devDependencies": {
+    "@sanity/tsdown-config": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "babel-plugin-react-compiler": "catalog:",
+    "react": "catalog:",
+    "rimraf": "catalog:",
+    "sanity": "catalog:",
+    "styled-components": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "sanity": "^6",
+    "styled-components": "^6"
+  },
+  "peerDependenciesMeta": {
+    "sanity": {
+      "optional": true
+    },
+    "styled-components": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20.19 <22 || >=22.12"
+  }
+}

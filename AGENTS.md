@@ -9,6 +9,11 @@ the published `@sanity/ui` package lives in `packages/ui`, the published
 sanity-io/color repo with full git history) in `packages/color`, the published
 `@sanity/logos` package (Sanity/GROQ logo components, migrated from the
 standalone `sanity-io/logos` repo with full git history) in `packages/logos`,
+the published `@sanity/themer` package (no root export — a `/legacy` subpath
+that replicates the hosted themer.sanity.build `/api/hues` module
+byte-for-byte for migration, and a `/tool` subpath with the `themerTool`
+Studio plugin that edits and previews those legacy themes) in
+`packages/themer`,
 the Figma plugins in `packages/figma` (Sanity UI theme tokens) and
 `packages/figma-color` (the raw `@sanity/color` palette), the Storybook app in
 `apps/storybook`, the
@@ -57,7 +62,7 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   comes from the Changesets config (`access: public`), so packages don't set
   `publishConfig.access`. All published packages are `"type": "module"`: dist
   ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
-  (`@sanity/icons` ships ESM only).
+  (`@sanity/icons` and `@sanity/themer` ship ESM only).
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
   `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
   `@sanity/ui` resolves to the `packages/ui/exports/` source (and
