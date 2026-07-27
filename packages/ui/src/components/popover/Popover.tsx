@@ -26,6 +26,7 @@ function PopoverRoot<T extends ElementType = 'div'>({
     triggerProps?: Record<string, unknown>
   }) {
   const {
+    as,
     children,
     className,
     style,
@@ -51,7 +52,7 @@ function PopoverRoot<T extends ElementType = 'div'>({
     style: {anchorName: `--anchor-${anchorName || id}`},
   }
 
-  const trigger = children.type.forwardsTriggerProps
+  const trigger = children.type?.forwardsTriggerProps
     ? cloneElement(children, {triggerProps})
     : cloneElement(children, mergeTriggerProps(children.props, forwardedTriggerProps, triggerProps))
 

@@ -1,13 +1,5 @@
 import clsx from 'clsx'
-import {
-  cloneElement,
-  useEffect,
-  useId,
-  useState,
-  type ComponentPropsWithRef,
-  type ElementType,
-} from 'react'
-import {createPortal} from 'react-dom'
+import {cloneElement, useId} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -16,13 +8,11 @@ import {Popover} from '../popover/Popover'
 import {type MenuProps, menuProps, menuSubmenuProps, type MenuSubmenuProps} from './menu.props'
 
 const menuClassName = suffixClassName('sui-Menu')
-const menuSubmenuClassName = suffixClassName('sui-Menu')
+const menuSubmenuClassName = suffixClassName('sui-MenuSubmenu')
 // const menuContentClassName = suffixClassName('sui-MenuContent')
 
-function MenuRoot<T extends ElementType = 'div'>(
-  props: MenuProps<T> & Omit<ComponentPropsWithRef<T>, keyof MenuProps<T>>,
-) {
-  const {children, className, style, trigger, ...rest} = getProps(props, menuProps)
+function MenuRoot(props: MenuProps) {
+  const {children, className, style, menu, ...rest} = getProps(props, menuProps)
 
   return (
     <Popover
@@ -30,11 +20,10 @@ function MenuRoot<T extends ElementType = 'div'>(
       className={clsx(menuClassName, className)}
       style={style}
       data-ui="Menu"
-      content={<List gap={1}>{children}</List>}
-      placement="bottom-start"
+      content={<List gap={1}>{menu}</List>}
       {...rest}
     >
-      {trigger}
+      {children}
     </Popover>
   )
 }
@@ -57,57 +46,30 @@ const MenuButtonItem: typeof List.ButtonItem = (props) => (
   />
 )
 
-function MenuSubmenu({placement = 'right-start', ...props}: MenuSubmenuProps) {
-  const {
-    children,
-    className,
-    style,
-    id: idProp,
-    trigger: triggerProp,
-    ...rest
-  } = getProps({placement, ...props}, menuSubmenuProps)
+function MenuSubmenu(props: MenuSubmenuProps) {
+  const {children, className, style, id: idProp, menu, ...rest} = getProps(props, menuSubmenuProps)
   const reactId = useId()
   const id = idProp || reactId
-  const submenuId = `submenu-${id}`
-  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  const trigger = cloneElement(triggerProp, {
-    interestFor: submenuId,
-    style: {
-      ...(typeof triggerProp.props.style === 'object' ? triggerProp.props.style : {}),
-      anchorName: `--anchor-${id}`,
-    },
+  const trigger = cloneElement(children, {
+    interestfor: id,
   })
 
-  const submenu = (
-    <ul
-      className={clsx(
-        menuSubmenuClassName,
-        'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
-        className,
-      )}
-      style={{
-        ...style,
-        positionAnchor: `--anchor-${id}`,
-      }}
+  return (
+    <Popover
+      as={List}
+      className={clsx(menuSubmenuClassName, 'sui-m0', className)}
+      style={style}
       data-ui="MenuSubmenu"
-      id={submenuId}
+      content={menu}
+      id={id}
+      placement="right-start"
+      portal
       popover="hint"
       {...rest}
     >
-      {children}
-    </ul>
-  )
-
-  return (
-    <>
       {trigger}
-      {mounted ? createPortal(submenu, document.body) : null}
-    </>
+    </Popover>
   )
 }
 
