@@ -47,16 +47,16 @@
   },
   "dependencies": {
     "@sanity/color": "workspace:^",
-    "@sanity/icons": "workspace:^",
-    "@sanity/ui": "workspace:^",
-    "react-refractor": "catalog:",
-    "refractor": "catalog:"
+    "@sanity/ui": "workspace:^"
   },
   "devDependencies": {
+    "@sanity/icons": "workspace:^",
     "@sanity/tsdown-config": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "react": "catalog:",
+    "react-refractor": "catalog:",
+    "refractor": "catalog:",
     "rimraf": "catalog:",
     "sanity": "catalog:",
     "styled-components": "catalog:",
@@ -65,12 +65,30 @@
     "vitest": "catalog:"
   },
   "peerDependencies": {
+    "@sanity/icons": "^5",
     "react": "^19",
+    "react-refractor": "^4",
+    "refractor": "^5",
     "sanity": "^6",
     "styled-components": "^6"
   },
   "peerDependenciesMeta": {
+    "@sanity/icons": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-refractor": {
+      "optional": true
+    },
+    "refractor": {
+      "optional": true
+    },
     "sanity": {
+      "optional": true
+    },
+    "styled-components": {
       "optional": true
     }
   },

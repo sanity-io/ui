@@ -37,11 +37,18 @@ import {createThemeSnippet} from './snippet'
 registerLanguage(typescript)
 
 /**
- * The tool hides the hosted service's Tailwind Cyan preset, like it dropped it
- * from the modern presets — the legacy `presets` export itself keeps it for
- * parity with `https://themer.sanity.build/api/hues`.
+ * The tool's take on the hosted service's presets: Tailwind Cyan is hidden and
+ * the default "Studio v3" preset reads just "Studio". The legacy `presets`
+ * export itself keeps both untouched, for parity with
+ * `https://themer.sanity.build/api/hues`.
  */
-const TOOL_PRESETS = presets.filter((preset) => preset.slug !== 'tw-cyan')
+const TOOL_PRESETS: ThemePreset[] = []
+
+for (const preset of presets) {
+  if (preset.slug === 'tw-cyan') continue
+
+  TOOL_PRESETS.push(preset.slug === 'default' ? {...preset, title: 'Studio'} : preset)
+}
 
 /**
  * `<input type="color">` paints the color into a shadow-DOM swatch that brings

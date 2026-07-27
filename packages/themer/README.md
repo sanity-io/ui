@@ -55,7 +55,7 @@ The generated theme carries no `__themer` flag, which is the one intentional dif
 
 ## The Studio tool
 
-The `themerTool` plugin edits and previews legacy themes live on your own Studio (requires `sanity` v6):
+The `themerTool` plugin edits and previews legacy themes live on your own Studio. Everything the tool needs beyond the generator — `sanity` v6, `react` 19, `styled-components`, `@sanity/icons`, `react-refractor` and `refractor` — is an optional peer dependency that a Studio project already has, so using only `@sanity/themer/legacy` pulls in none of it:
 
 ```ts
 // sanity.config.ts
