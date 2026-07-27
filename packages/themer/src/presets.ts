@@ -93,16 +93,6 @@ export const presets: ThemePreset[] = [
     },
   },
   {
-    slug: 'tw-cyan',
-    title: 'Tailwind Cyan',
-    colors: {
-      primary: '#51b4d0',
-      text: '#677389',
-      lightBackground: '#f9fafb',
-      darkBackground: '#101728',
-    },
-  },
-  {
     slug: 'verdant',
     title: 'Verdant',
     colors: {
