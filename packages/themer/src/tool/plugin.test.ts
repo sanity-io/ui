@@ -22,9 +22,9 @@ describe('themerTool', () => {
 })
 
 describe('createThemeSnippet', () => {
-  it('serializes an empty draft to a plain createTheme call', () => {
+  it('points a draft without colors at buildTheme', () => {
     expect(createThemeSnippet({})).toBe(
-      "import {createTheme} from '@sanity/themer'\n\nexport const theme = createTheme()\n",
+      "import {buildTheme} from '@sanity/ui/theme'\n\nexport const theme = buildTheme()\n",
     )
   })
 
@@ -42,9 +42,16 @@ describe('createThemeSnippet', () => {
     )
   })
 
-  it('serializes preset colors that have no sidebar picker', () => {
-    expect(createThemeSnippet({critical: '#fe3459', primary: '#1cb485'})).toContain(
-      "  critical: '#fe3459',",
+  it('omits the colors a draft leaves unset', () => {
+    expect(createThemeSnippet({primary: '#1cb485'})).toBe(
+      [
+        "import {createTheme} from '@sanity/themer'",
+        '',
+        'export const theme = createTheme({',
+        "  primary: '#1cb485',",
+        '})',
+        '',
+      ].join('\n'),
     )
   })
 })
