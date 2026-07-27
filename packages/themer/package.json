@@ -26,12 +26,14 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    ".": "./src/index.ts",
     "./legacy": "./src/legacy/index.ts",
     "./tool": "./src/tool/index.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "exports": {
+      ".": "./dist/index.js",
       "./legacy": "./dist/legacy.js",
       "./tool": "./dist/tool.js",
       "./package.json": "./package.json"
