@@ -1,22 +1,43 @@
-import {COLOR_OPTION_KEYS, CreateThemeOptions} from '../types'
+import {Hue, Hues} from '../legacy/types'
+import {diffHues} from './diffHues'
+import {HUE_KEYS} from './hues'
+
+function serializeHue(hue: Partial<Hue>): string {
+  const parts: string[] = []
+
+  if (hue.mid !== undefined) parts.push(`mid: '${hue.mid}'`)
+  if (hue.midPoint !== undefined) parts.push(`midPoint: ${hue.midPoint}`)
+  if (hue.lightest !== undefined) parts.push(`lightest: '${hue.lightest}'`)
+  if (hue.darkest !== undefined) parts.push(`darkest: '${hue.darkest}'`)
+
+  return `{${parts.join(', ')}}`
+}
 
 /**
- * Serializes colors into the `createTheme` call to paste into
- * `sanity.config.ts`.
+ * Serializes hues into the `createTheme` call to paste into
+ * `sanity.config.ts`, keeping only what differs from the default hues.
  *
- * A draft without colors is the stock Studio theme, which needs nothing from
- * this package — so it serializes to a bare `buildTheme()` instead.
+ * Hues that match the defaults entirely are the stock Studio theme, which
+ * needs nothing from this package — so they serialize to a bare `buildTheme()`
+ * instead.
  *
  * @internal
  */
-export function createThemeSnippet(colors: CreateThemeOptions): string {
-  const entries = COLOR_OPTION_KEYS.filter((key) => colors[key]).map(
-    (key) => `  ${key}: '${colors[key]}',`,
-  )
+export function createThemeSnippet(hues: Hues): string {
+  const diff = diffHues(hues)
+  const entries: string[] = []
+
+  for (const key of HUE_KEYS) {
+    const patch = diff[key]
+
+    if (patch) {
+      entries.push(`  ${key}: ${serializeHue(patch)},`)
+    }
+  }
 
   if (entries.length === 0) {
     return "import {buildTheme} from '@sanity/ui/theme'\n\nexport const theme = buildTheme()\n"
   }
 
-  return `import {createTheme} from '@sanity/themer'\n\nexport const theme = createTheme({\n${entries.join('\n')}\n})\n`
+  return `import {createTheme} from '@sanity/themer/legacy'\n\nexport const theme = createTheme({\n${entries.join('\n')}\n})\n`
 }

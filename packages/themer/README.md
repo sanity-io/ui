@@ -1,92 +1,11 @@
 # @sanity/themer
 
-Generate [Sanity Studio](https://www.sanity.io/studio) themes, and preview them with a Studio tool.
+Recreate [Sanity Studio](https://www.sanity.io/studio) themes from the hosted Themer service locally, and preview them with a Studio tool.
 
-This package is the npm migration path off the hosted Themer service ([themer.sanity.build](https://themer.sanity.build)) — the generators run locally, so Studio configs no longer need to import modules from a hosted URL.
+This package is the npm migration path off the hosted Themer service ([themer.sanity.build](https://themer.sanity.build)) — the generators run locally, so Studio configs no longer need to import modules from a hosted URL. The `@sanity/themer/legacy` subpath generates the exact same colors the service serves, and `@sanity/themer/tool` is a Studio plugin for editing and previewing those themes on your own Studio. There is no root export yet — a modern generator API may come later.
 
 ```sh
 npm install @sanity/themer
-```
-
-## Usage
-
-Generate a theme from a handful of colors:
-
-```ts
-// sanity.config.ts
-import {createTheme} from '@sanity/themer'
-import {defineConfig} from 'sanity'
-
-export default defineConfig({
-  theme: createTheme({primary: '#2276fc'}),
-  // ...rest of the config
-})
-```
-
-There are four colors, and every one of them is optional — omitted colors keep their default Sanity ramps:
-
-| Color             | Drives                                    |
-| ----------------- | ----------------------------------------- |
-| `primary`         | Buttons, focus rings, links, selections   |
-| `text`            | Text, icons, borders and neutral surfaces |
-| `lightBackground` | Light mode background                     |
-| `darkBackground`  | Dark mode background                      |
-
-Each color is the midpoint of a generated tint ramp rather than a literal token value, so `text` also tints borders and muted surfaces, and `lightBackground`/`darkBackground` anchor the light and dark ends of every ramp — including the ramps behind the positive, caution and critical tones, which keep their own hues.
-
-`createTheme()` without colors is the stock Studio theme, which `buildTheme()` from [`@sanity/ui`](https://github.com/sanity-io/ui) gives you without this package.
-
-Preset themes are available from the `presets` export:
-
-```ts
-import {createTheme, presets} from '@sanity/themer'
-
-const verdant = presets.find((preset) => preset.slug === 'verdant')
-const theme = createTheme(verdant.colors)
-```
-
-For customization beyond colors, `themeConfigFromColors` maps colors to a [`@sanity/ui`](https://github.com/sanity-io/ui) `ThemeConfig` to pass to `buildTheme`:
-
-```ts
-import {themeConfigFromColors} from '@sanity/themer'
-import {buildTheme} from '@sanity/ui/theme'
-
-const theme = buildTheme({
-  ...themeConfigFromColors({primary: '#2276fc'}),
-  // ...other ThemeConfig properties
-})
-```
-
-## The Studio tool
-
-The `themerTool` plugin previews generated themes live on your own Studio (requires `sanity` v6):
-
-```ts
-// sanity.config.ts
-import {themerTool} from '@sanity/themer/tool'
-import {defineConfig} from 'sanity'
-
-export default defineConfig({
-  plugins: [themerTool()],
-  // ...rest of the config
-})
-```
-
-A color wheel toggle in the navbar opens the themer sidebar next to the active tool, so you can browse around the Studio while tweaking presets and colors. Toggle between light and dark mode with the regular appearance menu — the preview follows it. When the theme looks right, copy the generated `createTheme` snippet into the Studio config.
-
-If the Studio is already themed, pass the same colors to the plugin so the sidebar starts editing from them:
-
-```ts
-import {createTheme} from '@sanity/themer'
-import {themerTool} from '@sanity/themer/tool'
-import {defineConfig} from 'sanity'
-
-const colors = {primary: '#2276fc'}
-
-export default defineConfig({
-  theme: createTheme(colors),
-  plugins: [themerTool({colors})],
-})
 ```
 
 ## Migrating from themer.sanity.build
@@ -134,7 +53,43 @@ Once migrated, remove any `themer.d.ts` module declarations and `urlImports` con
 
 The generated theme carries no `__themer` flag, which is the one intentional difference from the hosted module. Sanity Studio uses that flag to throw away the fonts the hosted module bundled, because they had drifted from the Studio's own; here the fonts come from the `@sanity/ui` installed next to the Studio, so there is nothing to throw away.
 
-The legacy API is frozen — it exists to make leaving the hosted service painless. New themes should use `createTheme` from the `@sanity/themer` root export instead.
+## The Studio tool
+
+The `themerTool` plugin edits and previews legacy themes live on your own Studio (requires `sanity` v6):
+
+```ts
+// sanity.config.ts
+import {themerTool} from '@sanity/themer/tool'
+import {defineConfig} from 'sanity'
+
+export default defineConfig({
+  plugins: [themerTool()],
+  // ...rest of the config
+})
+```
+
+A color wheel toggle in the navbar opens the themer sidebar next to the active tool, so you can browse around the Studio while tweaking the theme. It has the hosted tool's editing model:
+
+- Presets — the hosted service's preset themes as one-click starting points.
+- Import — paste a `themer.sanity.build` URL (or just its query string) to load the exact theme it described, presets and per-hue overrides included.
+- Hues — the six hues of a legacy theme (default, primary, transparent, positive, caution and critical), each with the mid color, the mid point tint it sits at, and the lightest and darkest ramp ends, previewed as the generated 50–950 tint ramp.
+
+Toggle between light and dark mode with the regular appearance menu — the preview follows it. When the theme looks right, copy the generated `createTheme` snippet into the Studio config; it serializes only what differs from the default Studio hues.
+
+If the Studio is already themed, pass the same hues to the plugin so the sidebar starts editing from them:
+
+```ts
+import {createTheme, parseHuesFromUrl} from '@sanity/themer/legacy'
+import {themerTool} from '@sanity/themer/tool'
+import {defineConfig} from 'sanity'
+
+const hues = parseHuesFromUrl('https://themer.sanity.build/api/hues?preset=verdant')
+
+export default defineConfig({
+  theme: createTheme(hues),
+  plugins: [themerTool({hues})],
+})
+```
 
 ## License
 

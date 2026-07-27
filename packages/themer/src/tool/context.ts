@@ -1,14 +1,14 @@
 import {createContext, useContext} from 'react'
 
-import {CreateThemeOptions} from '../types'
+import {Hues} from '../legacy/types'
 
 /** @internal */
 export interface ThemerContextValue {
-  /** The colors the Studio's configured theme was generated from */
-  baseColors: CreateThemeOptions
-  /** The draft colors, or `null` when the configured theme is untouched */
-  colors: CreateThemeOptions | null
-  setColors: (colors: CreateThemeOptions | null) => void
+  /** The hues the Studio's configured theme was generated from */
+  baseHues: Hues
+  /** The draft hues, or `null` when the configured theme is untouched */
+  hues: Hues | null
+  setHues: (hues: Hues | null) => void
   /** Whether the themer sidebar is open */
   open: boolean
   setOpen: (open: boolean) => void
