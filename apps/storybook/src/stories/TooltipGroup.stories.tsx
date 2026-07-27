@@ -90,7 +90,7 @@ export const Default: Story = {
     )
 
     await waitFor(() => {
-      expect(group.style.getPropertyValue('--tooltip-group-delay')).toBe('0ms')
+      expect(group.style.getPropertyValue('--tooltip-delay-group')).toBe('0ms')
     })
 
     await userEvent.tab()

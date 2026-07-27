@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import {Activity, cloneElement, useEffect, useId, useState, type ToggleEvent} from 'react'
+import {Activity, cloneElement, useId, useState, type ToggleEvent} from 'react'
 
+import {useIsClient} from '../../hooks/useIsClient'
 import {getProps} from '../../utils/getProps'
 import {mergeTriggerProps} from '../../utils/mergeTriggerProps'
 import {renderPortal} from '../../utils/renderPortal'
@@ -29,11 +30,7 @@ function PopoverRoot({
   const reactId = useId()
   const id = idProp || reactId
   const [open, setOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const isClient = useIsClient()
 
   const handleToggle = (e: ToggleEvent) => {
     setOpen(e.newState === 'open')
@@ -73,7 +70,7 @@ function PopoverRoot({
             {content}
           </div>
         </Activity>,
-        mounted,
+        isClient,
         portal,
       )}
     </>
