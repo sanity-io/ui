@@ -45,8 +45,8 @@ export const avatarCounterProps: Record<string, PropDef> = {
           2: '33px',
         },
       },
-      width: {
-        propDef: widthProps['width'] as PropDef,
+      minWidth: {
+        propDef: widthProps['minWidth'] as PropDef,
         mapping: {
           0: '19px',
           1: '25px',

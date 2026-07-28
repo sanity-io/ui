@@ -10,10 +10,19 @@ import {type AvatarCounterProps, avatarCounterProps} from './avatarCounter.props
 const avatarCounterClassName = suffixClassName('sui-AvatarCounter')
 
 /** @public */
-export function AvatarCounter<T extends ElementType = 'div'>(
-  props: AvatarCounterProps<T> & Omit<ComponentPropsWithRef<T>, keyof AvatarCounterProps<T>>,
-) {
-  const {as, children, className, style, count, ...rest} = getProps(props, avatarCounterProps)
+export function AvatarCounter<T extends ElementType = 'div'>({
+  size = 1,
+  ...props
+}: AvatarCounterProps<T> & Omit<ComponentPropsWithRef<T>, keyof AvatarCounterProps<T>>) {
+  const {
+    as,
+    children,
+    className,
+    style,
+    'aria-label': ariaLabel,
+    count,
+    ...rest
+  } = getProps({size, ...props}, avatarCounterProps)
   const Component = as || 'div'
 
   return (
@@ -29,7 +38,9 @@ export function AvatarCounter<T extends ElementType = 'div'>(
       border
       {...rest}
     >
-      <Eyebrow>{count}</Eyebrow>
+      <Eyebrow role="img" aria-label={ariaLabel ?? `+ ${count} more`}>
+        {count}
+      </Eyebrow>
     </Flex>
   )
 }
