@@ -86,7 +86,7 @@ const nextConfig: NextConfig = {
         source: '/',
         destination: basePath,
         basePath: false, // CRITICAL: Tells Next.js not to prefix the source path
-        permanent: true,
+        permanent: false,
       },
       // The built studio's document hardcodes favicon/manifest links to the
       // domain root (/static/...), which the /ui basePath leaves unclaimed.
