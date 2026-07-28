@@ -6,6 +6,7 @@ import type {UserConfig} from 'tsdown'
 // dist), and the inferred config type cannot be named without it (TS2883).
 const config: UserConfig = await defineConfig({
   entry: {
+    index: './src/index.ts',
     legacy: './src/legacy/index.ts',
     tool: './src/tool/index.ts',
   },

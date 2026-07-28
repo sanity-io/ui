@@ -1,10 +1,8 @@
 import {describe, expect, it, vi} from 'vitest'
 
-import {applyHues} from '../legacy/applyHues'
-import {parseHuesFromUrl} from '../legacy/createTheme'
-import {hues as defaultHues} from '../legacy/defaults'
-import {presets} from '../legacy/presets'
-import {diffHues} from './diffHues'
+import {DEFAULT_ACCENT, deriveTextColor} from '../theme/options'
+import {presets} from '../theme/presets'
+import {minimizeOptions, sameOptions} from './options'
 import {themerTool} from './plugin'
 import {createThemeSnippet} from './snippet'
 
@@ -26,46 +24,87 @@ describe('themerTool', () => {
   })
 })
 
-describe('diffHues', () => {
-  it('reduces the default hues to nothing', () => {
-    expect(diffHues(defaultHues)).toEqual({})
+describe('minimizeOptions', () => {
+  it('reduces the stock options to nothing', () => {
+    expect(minimizeOptions({accent: DEFAULT_ACCENT})).toBeNull()
+    expect(
+      minimizeOptions({
+        accent: '#556bfc',
+        text: '#727892',
+        background: {dark: '#0d0e12', light: '#ffffff'},
+        contrast: 85,
+      }),
+    ).toBeNull()
   })
 
-  it('round-trips every preset through applyHues', () => {
+  it('drops a text color that matches the derived one', () => {
+    expect(minimizeOptions({accent: '#1cb485', text: deriveTextColor('#1cb485')})).toEqual({
+      accent: '#1cb485',
+    })
+  })
+
+  it('keeps only what differs from the defaults', () => {
+    expect(
+      minimizeOptions({
+        accent: '#1CB485',
+        text: '#5c9199',
+        background: {dark: '#0d0e12', light: '#fcfdfd'},
+        contrast: 70,
+      }),
+    ).toEqual({
+      accent: '#1cb485',
+      text: '#5c9199',
+      background: {light: '#fcfdfd'},
+      contrast: 70,
+    })
+  })
+
+  it('round-trips every preset', () => {
     for (const preset of presets) {
-      expect(applyHues(diffHues(preset.hues)), preset.slug).toEqual(preset.hues)
+      const minimized = minimizeOptions(preset.options) ?? {accent: DEFAULT_ACCENT}
+
+      expect(sameOptions(minimized, preset.options), preset.slug).toBe(true)
     }
-  })
-
-  it('keeps a default mid point that a customized mid would otherwise reset', () => {
-    // caution's default midPoint is 300, and `applyHues` resets the midPoint
-    // of a hue whose mid changed to 500 unless the diff carries it explicitly
-    const custom = {...defaultHues, caution: {...defaultHues.caution, mid: '#ff0000'}}
-
-    expect(diffHues(custom).caution).toEqual({mid: '#ff0000', midPoint: 300})
-    expect(applyHues(diffHues(custom))).toEqual(custom)
   })
 })
 
 describe('createThemeSnippet', () => {
-  it('points untouched hues at buildTheme', () => {
-    expect(createThemeSnippet(defaultHues)).toBe(
+  it('points untouched options at buildTheme from @sanity/ui/theme', () => {
+    expect(createThemeSnippet({accent: DEFAULT_ACCENT})).toBe(
       "import {buildTheme} from '@sanity/ui/theme'\n\nexport const theme = buildTheme()\n",
     )
   })
 
-  it('serializes only what differs from the default hues', () => {
-    expect(createThemeSnippet(parseHuesFromUrl('?preset=verdant'))).toBe(
+  it('serializes only what differs from the defaults', () => {
+    expect(
+      createThemeSnippet({
+        accent: '#1cb485',
+        text: '#5c9199',
+        background: {dark: '#0d1415', light: '#fcfdfd'},
+        contrast: 70,
+      }),
+    ).toBe(
       [
-        "import {createTheme} from '@sanity/themer/legacy'",
+        "import {buildTheme} from '@sanity/themer'",
         '',
-        'export const theme = createTheme({',
-        "  default: {mid: '#5c9199', lightest: '#fcfdfd', darkest: '#0d1415'},",
-        "  primary: {mid: '#1cb485', midPoint: 400, lightest: '#fcfdfd', darkest: '#0d1415'},",
-        "  transparent: {mid: '#5c9199', lightest: '#fcfdfd', darkest: '#0d1415'},",
-        "  positive: {midPoint: 300, lightest: '#fcfdfd', darkest: '#0d1415'},",
-        "  caution: {midPoint: 200, lightest: '#fcfdfd', darkest: '#0d1415'},",
-        "  critical: {lightest: '#fcfdfd', darkest: '#0d1415'},",
+        'export const theme = buildTheme({',
+        "  accent: '#1cb485',",
+        "  text: '#5c9199',",
+        "  background: {dark: '#0d1415', light: '#fcfdfd'},",
+        '  contrast: 70,',
+        '})',
+        '',
+      ].join('\n'),
+    )
+  })
+
+  it('keeps a customized accent even when everything else is derived', () => {
+    expect(createThemeSnippet({accent: '#1cb485'})).toBe(
+      [
+        "import {buildTheme} from '@sanity/themer'",
+        '',
+        'export const theme = buildTheme({',
+        "  accent: '#1cb485',",
         '})',
         '',
       ].join('\n'),

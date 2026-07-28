@@ -1,39 +1,53 @@
-import {Hue, HueMidPoint, Hues} from '../legacy/types'
 import {isColor} from '../lib/mix'
-import {HUE_KEYS, MID_POINTS} from './hues'
+import {BuildThemeOptions, MAXIMUM_CONTRAST, MINIMUM_CONTRAST} from '../theme/options'
 
-const STORAGE_KEY = 'sanityStudio:themer:hues'
+const STORAGE_KEY = 'sanityStudio:themer:options'
 
-function sanitizeHue(value: unknown): Hue | null {
+function sanitizeColor(value: unknown): string | null {
+  return typeof value === 'string' && isColor(value) ? value.toLowerCase() : null
+}
+
+function sanitizeOptions(value: unknown): BuildThemeOptions | null {
   if (!value || typeof value !== 'object') return null
 
-  const mid: unknown = Reflect.get(value, 'mid')
-  const midPoint: unknown = Reflect.get(value, 'midPoint')
-  const lightest: unknown = Reflect.get(value, 'lightest')
-  const darkest: unknown = Reflect.get(value, 'darkest')
+  const accent = sanitizeColor(Reflect.get(value, 'accent'))
 
-  if (typeof mid !== 'string' || !isColor(mid)) return null
-  if (typeof lightest !== 'string' || !isColor(lightest)) return null
-  if (typeof darkest !== 'string' || !isColor(darkest)) return null
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- narrowed by the includes check
-  if (typeof midPoint !== 'number' || !MID_POINTS.includes(midPoint as HueMidPoint)) return null
+  if (!accent) return null
 
-  return {
-    mid: mid.toLowerCase(),
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- narrowed by the includes check
-    midPoint: midPoint as HueMidPoint,
-    lightest: lightest.toLowerCase(),
-    darkest: darkest.toLowerCase(),
+  const options: BuildThemeOptions = {accent}
+  const text = sanitizeColor(Reflect.get(value, 'text'))
+
+  if (text) options.text = text
+
+  const background: unknown = Reflect.get(value, 'background')
+
+  if (background && typeof background === 'object') {
+    const dark = sanitizeColor(Reflect.get(background, 'dark'))
+    const light = sanitizeColor(Reflect.get(background, 'light'))
+
+    if (dark || light) {
+      options.background = {}
+      if (dark) options.background.dark = dark
+      if (light) options.background.light = light
+    }
   }
+
+  const contrast: unknown = Reflect.get(value, 'contrast')
+
+  if (typeof contrast === 'number' && Number.isFinite(contrast)) {
+    options.contrast = Math.min(MAXIMUM_CONTRAST, Math.max(MINIMUM_CONTRAST, contrast))
+  }
+
+  return options
 }
 
 /**
- * Restores draft hues from localStorage, so theme drafts survive studio
- * reloads.
+ * Restores draft theme options from localStorage, so theme drafts survive
+ * studio reloads.
  *
  * @internal
  */
-export function readStoredHues(): Hues | null {
+export function readStoredOptions(): BuildThemeOptions | null {
   try {
     if (typeof localStorage === 'undefined') return null
 
@@ -41,36 +55,21 @@ export function readStoredHues(): Hues | null {
 
     if (!raw) return null
 
-    const parsed: unknown = JSON.parse(raw)
-
-    if (!parsed || typeof parsed !== 'object') return null
-
-    const hues: Partial<Hues> = {}
-
-    for (const key of HUE_KEYS) {
-      const hue = sanitizeHue(Reflect.get(parsed, key))
-
-      if (!hue) return null
-
-      hues[key] = hue
-    }
-
-    // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- the loop assigns every HUE_KEYS key or returns
-    return hues as Hues
+    return sanitizeOptions(JSON.parse(raw))
   } catch {
     return null
   }
 }
 
 /** @internal */
-export function writeStoredHues(hues: Hues | null): void {
+export function writeStoredOptions(options: BuildThemeOptions | null): void {
   try {
     if (typeof localStorage === 'undefined') return
 
-    if (hues === null) {
+    if (options === null) {
       localStorage.removeItem(STORAGE_KEY)
     } else {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(hues))
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(options))
     }
   } catch {
     // Storage can be unavailable (e.g. private browsing) — drafts just won't persist

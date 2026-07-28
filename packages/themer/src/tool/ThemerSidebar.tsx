@@ -1,33 +1,18 @@
-import {COLOR_TINTS, ColorTints} from '@sanity/color'
-import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
-import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
+import {COLOR_TINTS, ColorTintKey} from '@sanity/color'
 import {ClipboardIcon} from '@sanity/icons/Clipboard'
 import {CloseIcon} from '@sanity/icons/Close'
 import {ResetIcon} from '@sanity/icons/Reset'
-import {
-  Box,
-  Button,
-  Card,
-  Code,
-  Flex,
-  Grid,
-  Select,
-  Stack,
-  Text,
-  TextInput,
-  useToast,
-} from '@sanity/ui'
-import {useMemo, useState} from 'react'
+import {Box, Button, Card, Code, Flex, Grid, Stack, Text, useToast} from '@sanity/ui'
+import {useMemo} from 'react'
 import {registerLanguage} from 'react-refractor'
 import typescript from 'refractor/typescript'
 import {styled} from 'styled-components'
 
-import {parseHuesFromUrl} from '../legacy/createTheme'
-import {createTonesFromHues} from '../legacy/createTonesFromHues'
-import {presets} from '../legacy/presets'
-import {Hue, ThemePreset} from '../legacy/types'
+import {buildPalette} from '../theme/buildPalette'
+import {BuildThemeOptions, resolveThemeOptions} from '../theme/options'
+import {presets, ThemePreset} from '../theme/presets'
 import {useThemer} from './context'
-import {HUE_FIELDS, HUE_KEYS, HueField, HueKey, MID_POINTS, sameHues} from './hues'
+import {sameOptions} from './options'
 import {createThemeSnippet} from './snippet'
 
 // `Code` only highlights languages the surrounding app has registered with
@@ -35,20 +20,6 @@ import {createThemeSnippet} from './snippet'
 // during startup — a race this sidebar keeps losing. Registering the one
 // language the snippet needs keeps it highlighted from the first render.
 registerLanguage(typescript)
-
-/**
- * The tool's take on the hosted service's presets: Tailwind Cyan is hidden and
- * the default "Studio v3" preset reads just "Studio". The legacy `presets`
- * export itself keeps both untouched, for parity with
- * `https://themer.sanity.build/api/hues`.
- */
-const TOOL_PRESETS: ThemePreset[] = []
-
-for (const preset of presets) {
-  if (preset.slug === 'tw-cyan') continue
-
-  TOOL_PRESETS.push(preset.slug === 'default' ? {...preset, title: 'Studio'} : preset)
-}
 
 /**
  * `<input type="color">` paints the color into a shadow-DOM swatch that brings
@@ -81,67 +52,61 @@ const Swatch = styled.input`
   }
 `
 
-/** Expands `#abc` to `#aabbcc`, which is the only format `<input type="color">` accepts */
-function expandHex(hex: string): string {
-  if (hex.length === 4) {
-    return `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
-  }
-
-  return hex
-}
-
-/** Prefixes bare query strings so `parseHuesFromUrl` accepts them too */
-function normalizeImportUrl(input: string): string {
-  const trimmed = input.trim()
-
-  return trimmed.startsWith('http') || trimmed.startsWith('?') ? trimmed : `?${trimmed}`
-}
+/** A native range input, themed through `accent-color` */
+const Range = styled.input`
+  display: block;
+  width: 100%;
+  margin: 0;
+  accent-color: var(--card-focus-ring-color);
+`
 
 /**
- * The themer sidebar: presets, a themer.sanity.build URL importer and the
- * per-hue editors of the hosted Themer service — mid color, mid point,
- * lightest and darkest — that generate the previewed legacy theme, plus the
- * `createTheme` snippet to make it permanent.
+ * The themer sidebar: presets, the accent/text/background pickers and the
+ * contrast slider that generate the previewed `buildTheme` theme, plus the
+ * `buildTheme` snippet to make it permanent.
  *
  * @internal
  */
 export function ThemerSidebar() {
-  const {baseHues, hues, setHues, setOpen} = useThemer()
+  const {baseOptions, options, setOptions, setOpen} = useThemer()
   const toast = useToast()
-  const [expandedHue, setExpandedHue] = useState<HueKey | null>(null)
-  const [importUrl, setImportUrl] = useState('')
 
-  const active = hues ?? baseHues
-  const tones = useMemo(() => createTonesFromHues(active), [active])
-  const activePresetSlug = TOOL_PRESETS.find((preset) => sameHues(preset.hues, active))?.slug ?? ''
+  const active = options ?? baseOptions
+  const resolved = useMemo(() => resolveThemeOptions(active), [active])
+  const palette = useMemo(() => buildPalette(active), [active])
+  const activePresetSlug =
+    presets.find((preset) => sameOptions(preset.options, active))?.slug ?? ''
   const snippet = createThemeSnippet(active)
 
-  const handleHueChange = (key: HueKey, patch: Partial<Hue>) => {
-    setHues({...active, [key]: {...active[key], ...patch}})
+  const patch = (changes: Partial<BuildThemeOptions>) => {
+    setOptions({...active, ...changes})
   }
 
-  const handlePresetChange = (slug: string) => {
-    const preset = TOOL_PRESETS.find((candidate) => candidate.slug === slug)
-
-    if (preset) {
-      setHues(preset.hues)
-    }
+  const patchBackground = (changes: {dark?: string; light?: string}) => {
+    setOptions({...active, background: {...active.background, ...changes}})
   }
 
-  const handleImport = () => {
-    if (!importUrl.trim()) return
+  const clearField = (field: 'text' | 'contrast') => {
+    const next = {...active}
 
-    try {
-      setHues(parseHuesFromUrl(normalizeImportUrl(importUrl)))
-      setImportUrl('')
-      toast.push({status: 'success', title: 'Imported theme from URL'})
-    } catch (error) {
-      toast.push({
-        status: 'error',
-        title: 'Could not import the URL',
-        description: error instanceof Error ? error.message : String(error),
-      })
+    delete next[field]
+    setOptions(next)
+  }
+
+  const clearBackground = (key: 'dark' | 'light') => {
+    const background = {...active.background}
+
+    delete background[key]
+
+    const next = {...active}
+
+    if (background.dark === undefined && background.light === undefined) {
+      delete next.background
+    } else {
+      next.background = background
     }
+
+    setOptions(next)
   }
 
   const handleCopy = async () => {
@@ -180,11 +145,11 @@ export function ThemerSidebar() {
                 Presets
               </Text>
               <Grid gap={2} gridTemplateColumns={2}>
-                {TOOL_PRESETS.map((preset) => (
+                {presets.map((preset) => (
                   <PresetButton
                     active={preset.slug === activePresetSlug}
                     key={preset.slug}
-                    onClick={handlePresetChange}
+                    onClick={() => setOptions(preset.options)}
                     preset={preset}
                   />
                 ))}
@@ -193,47 +158,75 @@ export function ThemerSidebar() {
 
             <Stack gap={3}>
               <Text size={1} weight="medium">
-                Import
+                Colors
               </Text>
-              <form
-                onSubmit={(event) => {
-                  event.preventDefault()
-                  handleImport()
-                }}
-              >
-                <Flex gap={2}>
-                  <Box flex={1}>
-                    <TextInput
-                      aria-label="Hosted Themer URL"
-                      fontSize={1}
-                      onChange={(event) => setImportUrl(event.currentTarget.value)}
-                      padding={2}
-                      placeholder="themer.sanity.build URL"
-                      value={importUrl}
-                    />
-                  </Box>
-                  <Button mode="ghost" padding={2} text="Import" type="submit" />
-                </Flex>
-              </form>
+              <Stack gap={4}>
+                <ColorRow
+                  onChange={(accent) => patch({accent})}
+                  tints={palette.blue}
+                  title="Accent"
+                  value={resolved.accent}
+                />
+                <ColorRow
+                  auto={active.text === undefined}
+                  onChange={(text) => patch({text})}
+                  onClear={() => clearField('text')}
+                  tints={palette.gray}
+                  title="Text"
+                  value={resolved.text}
+                />
+                <ColorRow
+                  adjusted={palette.black}
+                  auto={active.background?.dark === undefined}
+                  onChange={(dark) => patchBackground({dark})}
+                  onClear={() => clearBackground('dark')}
+                  title="Background · dark"
+                  value={resolved.background.dark}
+                />
+                <ColorRow
+                  adjusted={palette.white}
+                  auto={active.background?.light === undefined}
+                  onChange={(light) => patchBackground({light})}
+                  onClear={() => clearBackground('light')}
+                  title="Background · light"
+                  value={resolved.background.light}
+                />
+              </Stack>
             </Stack>
 
             <Stack gap={3}>
-              <Text size={1} weight="medium">
-                Hues
-              </Text>
-              <Stack gap={1}>
-                {HUE_FIELDS.map((field) => (
-                  <HueSection
-                    expanded={expandedHue === field.key}
-                    field={field}
-                    hue={active[field.key]}
-                    key={field.key}
-                    onChange={handleHueChange}
-                    onToggle={() => setExpandedHue(expandedHue === field.key ? null : field.key)}
-                    tints={tones[field.key]}
+              <Flex align="center" gap={2}>
+                <Stack flex={1} gap={2}>
+                  <Text size={1} weight="medium">
+                    Contrast
+                  </Text>
+                  <Text muted size={0}>
+                    {resolved.contrast}
+                    {active.contrast === undefined ? ' · auto' : ''}
+                  </Text>
+                </Stack>
+                {active.contrast !== undefined && (
+                  <Button
+                    icon={ResetIcon}
+                    mode="bleed"
+                    onClick={() => clearField('contrast')}
+                    padding={2}
+                    title="Reset to auto"
                   />
-                ))}
-              </Stack>
+                )}
+              </Flex>
+              <Range
+                aria-label="Contrast"
+                max={100}
+                min={15}
+                onChange={(event) => patch({contrast: Number(event.currentTarget.value)})}
+                step={1}
+                type="range"
+                value={resolved.contrast}
+              />
+              <Text muted size={0}>
+                100 keeps text and borders neutral — lower values blend in the accent
+              </Text>
             </Stack>
 
             <Stack gap={3}>
@@ -253,10 +246,10 @@ export function ThemerSidebar() {
                   text="Copy"
                 />
                 <Button
-                  disabled={hues === null}
+                  disabled={options === null}
                   icon={ResetIcon}
                   mode="ghost"
-                  onClick={() => setHues(null)}
+                  onClick={() => setOptions(null)}
                   text="Reset"
                   tone="critical"
                 />
@@ -281,26 +274,27 @@ const paletteStyle: React.CSSProperties = {
   boxShadow: 'inset 0 0 0 1px var(--card-border-color)',
 }
 
-/** A little color palette of the hue mid colors a preset would apply */
-function PresetButton(props: {
-  active: boolean
-  onClick: (slug: string) => void
-  preset: ThemePreset
-}) {
+/** A little palette of the colors a preset would apply */
+function PresetButton(props: {active: boolean; onClick: () => void; preset: ThemePreset}) {
   const {active, onClick, preset} = props
 
+  const swatches = useMemo(() => {
+    const resolved = resolveThemeOptions(preset.options)
+
+    return [
+      ['accent', resolved.accent],
+      ['text', resolved.text],
+      ['dark', resolved.background.dark],
+      ['light', resolved.background.light],
+    ] as const
+  }, [preset])
+
   return (
-    <Button
-      mode="ghost"
-      onClick={() => onClick(preset.slug)}
-      padding={2}
-      selected={active}
-      title={preset.title}
-    >
+    <Button mode="ghost" onClick={onClick} padding={2} selected={active} title={preset.title}>
       <Stack as="span" gap={2}>
         <span style={paletteStyle}>
-          {HUE_KEYS.map((key) => (
-            <span key={key} style={{flex: 1, background: preset.hues[key].mid}} />
+          {swatches.map(([key, background]) => (
+            <span key={key} style={{flex: 1, background}} />
           ))}
         </span>
         <Text align="left" size={1} textOverflow="ellipsis">
@@ -317,111 +311,58 @@ const rampStyle: React.CSSProperties = {
   borderRadius: 2,
 }
 
-/** One hue of the theme: a collapsible header with the generated tint ramp */
-function HueSection(props: {
-  expanded: boolean
-  field: HueField
-  hue: Hue
-  onChange: (key: HueKey, patch: Partial<Hue>) => void
-  onToggle: () => void
-  /** The hue's generated 50–950 tint ramp, for the header preview */
-  tints: ColorTints
+/**
+ * One color of the theme: a swatch with its value, an optional reset-to-auto
+ * button, and the generated 50–950 tint ramp for the scales it anchors.
+ */
+function ColorRow(props: {
+  /** The color the generator actually applied, when it may differ from the input */
+  adjusted?: string
+  /** Whether the value is derived rather than explicitly set */
+  auto?: boolean
+  onChange: (value: string) => void
+  onClear?: () => void
+  /** The generated tint ramp this color anchors */
+  tints?: Record<ColorTintKey, string>
+  title: string
+  value: string
 }) {
-  const {expanded, field, hue, onChange, onToggle, tints} = props
+  const {adjusted, auto, onChange, onClear, tints, title, value} = props
 
   return (
-    <Card border={expanded} radius={2} tone={expanded ? 'transparent' : undefined}>
-      <Stack gap={expanded ? 3 : 0} paddingBottom={expanded ? 3 : 0}>
-        <Button
-          aria-expanded={expanded}
-          mode="bleed"
-          onClick={onToggle}
-          padding={2}
-          title={field.description}
-        >
-          <Flex align="center" as="span" gap={2}>
-            <Text size={1}>{expanded ? <ChevronDownIcon /> : <ChevronRightIcon />}</Text>
-            <Box as="span" style={{width: 76}}>
-              <Text size={1} textOverflow="ellipsis" weight="medium">
-                {field.title}
-              </Text>
-            </Box>
-            <span style={{...rampStyle, flex: 1}}>
-              {COLOR_TINTS.map((tint) => (
-                <span key={tint} style={{flex: 1, background: tints[tint].hex}} />
-              ))}
-            </span>
-          </Flex>
-        </Button>
-
-        {expanded && (
-          <Stack gap={3} paddingX={3}>
-            <Text muted size={0}>
-              {field.description}
-            </Text>
-            <ColorRow onChange={(mid) => onChange(field.key, {mid})} title="Mid" value={hue.mid} />
-            <Flex align="center" gap={2}>
-              <Stack flex={1} gap={2}>
-                <Text size={1}>Mid point</Text>
-                <Text muted size={0}>
-                  The tint the mid color sits at
-                </Text>
-              </Stack>
-              <Select
-                aria-label={`${field.title} mid point`}
-                fontSize={1}
-                onChange={(event) => {
-                  const value = Number(event.currentTarget.value)
-                  const midPoint = MID_POINTS.find((candidate) => candidate === value)
-
-                  if (midPoint !== undefined) {
-                    onChange(field.key, {midPoint})
-                  }
-                }}
-                padding={2}
-                value={hue.midPoint}
-              >
-                {MID_POINTS.map((midPoint) => (
-                  <option key={midPoint} value={midPoint}>
-                    {midPoint}
-                  </option>
-                ))}
-              </Select>
-            </Flex>
-            <ColorRow
-              onChange={(lightest) => onChange(field.key, {lightest})}
-              title="Lightest"
-              value={hue.lightest}
-            />
-            <ColorRow
-              onChange={(darkest) => onChange(field.key, {darkest})}
-              title="Darkest"
-              value={hue.darkest}
-            />
-          </Stack>
+    <Stack gap={2}>
+      <Flex align="center" gap={2}>
+        <Stack flex={1} gap={2}>
+          <Text size={1}>{title}</Text>
+          <Text muted size={0} textOverflow="ellipsis">
+            {value}
+            {adjusted !== undefined && adjusted !== value ? ` → ${adjusted}` : ''}
+            {auto ? ' · auto' : ''}
+          </Text>
+        </Stack>
+        {onClear && !auto && (
+          <Button
+            icon={ResetIcon}
+            mode="bleed"
+            onClick={onClear}
+            padding={2}
+            title="Reset to auto"
+          />
         )}
-      </Stack>
-    </Card>
-  )
-}
-
-function ColorRow(props: {onChange: (value: string) => void; title: string; value: string}) {
-  const {onChange, title, value} = props
-
-  return (
-    <Flex align="center" gap={2}>
-      <Stack flex={1} gap={2}>
-        <Text size={1}>{title}</Text>
-        <Text muted size={0}>
-          {value}
-        </Text>
-      </Stack>
-      <Swatch
-        aria-label={`${title} color`}
-        onChange={(event) => onChange(event.currentTarget.value)}
-        type="color"
-        value={expandHex(value)}
-      />
-    </Flex>
+        <Swatch
+          aria-label={`${title} color`}
+          onChange={(event) => onChange(event.currentTarget.value)}
+          type="color"
+          value={value}
+        />
+      </Flex>
+      {tints && (
+        <span style={rampStyle}>
+          {COLOR_TINTS.map((tint) => (
+            <span key={tint} style={{flex: 1, background: tints[tint]}} />
+          ))}
+        </span>
+      )}
+    </Stack>
   )
 }
