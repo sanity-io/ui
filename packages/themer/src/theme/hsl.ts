@@ -113,9 +113,7 @@ function linearChannel(value: number): number {
 /** Parses `#abc` and `#aabbcc` hex colors into channel fractions of 1 */
 function parseHex(hex: string): [number, number, number] {
   const expanded =
-    hex.length === 4
-      ? `${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
-      : hex.slice(1)
+    hex.length === 4 ? `${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}` : hex.slice(1)
 
   return [
     parseInt(expanded.slice(0, 2), 16) / 255,

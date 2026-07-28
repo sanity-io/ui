@@ -25,7 +25,8 @@ export function minimizeOptions(options: BuildThemeOptions): BuildThemeOptions |
     minimized.text = resolved.text
   }
 
-  const dark = resolved.background.dark === DEFAULT_BACKGROUND_DARK ? null : resolved.background.dark
+  const dark =
+    resolved.background.dark === DEFAULT_BACKGROUND_DARK ? null : resolved.background.dark
   const light =
     resolved.background.light === DEFAULT_BACKGROUND_LIGHT ? null : resolved.background.light
 

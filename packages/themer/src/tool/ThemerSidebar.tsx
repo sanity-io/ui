@@ -74,8 +74,7 @@ export function ThemerSidebar() {
   const active = options ?? baseOptions
   const resolved = useMemo(() => resolveThemeOptions(active), [active])
   const palette = useMemo(() => buildPalette(active), [active])
-  const activePresetSlug =
-    presets.find((preset) => sameOptions(preset.options, active))?.slug ?? ''
+  const activePresetSlug = presets.find((preset) => sameOptions(preset.options, active))?.slug ?? ''
   const snippet = createThemeSnippet(active)
 
   const patch = (changes: Partial<BuildThemeOptions>) => {
