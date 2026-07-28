@@ -138,3 +138,89 @@ defineInlineTest(
   `,
   'replaces element and combines imports',
 )
+
+function transformWithStyled(fileInfo: FileInfo, api: API): string {
+  const j = api.jscodeshift
+  const root = j(fileInfo.source)
+
+  replaceElement(
+    j,
+    root,
+    (attrs) => !getAttribute(attrs, 'margin'),
+    {
+      element: 'Card',
+    },
+    {
+      element: 'Box',
+    },
+    {replaceInStyled: true},
+  )
+
+  return root.toSource()
+}
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  import {Card} from '@sanity/ui'
+
+  const RootCard = styled(Card)(({theme}) => {})
+  `,
+  `
+  import {Card} from '@sanity/ui'
+
+  const RootCard = styled(Card)(({theme}) => {})
+  `,
+  'does not replace styled usage by default',
+)
+
+defineInlineTest(
+  transformWithStyled,
+  {},
+  `
+  import {Card} from '@sanity/ui'
+
+  const RootCard = styled(Card)(({theme}) => {})
+  `,
+  `
+  import {Box} from '@sanity/ui'
+
+  const RootCard = styled(Box)(({theme}) => {})
+  `,
+  'replaces styled usage when replaceInStyled is enabled',
+)
+
+defineInlineTest(
+  transformWithStyled,
+  {},
+  `
+  import {Card} from '@sanity/ui'
+
+  function Example() {
+    const RootCard = styled(Card)(({theme}) => {})
+
+    return (
+      <>
+        <Card margin={1} />
+        <Card padding={1} />
+      </>
+    )
+  }
+  `,
+  `
+  import { Card, Box } from '@sanity/ui';
+
+  function Example() {
+    const RootCard = styled(Box)(({theme}) => {})
+
+    return (
+      <>
+        <Card margin={1} />
+        <Box padding={1} />
+      </>
+    );
+  }
+  `,
+  'replaces styled and jsx usage',
+)

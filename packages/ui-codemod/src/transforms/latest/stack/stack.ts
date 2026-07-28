@@ -66,6 +66,7 @@ export default function transform(fileInfo: FileInfo, api: API, options?: BaseOp
       element: 'VStack',
       callback: (path) => transformAttributes(j, path, STACK_MODS, STACK_TODO_WARNING),
     },
+    {replaceInStyled: true},
   )
 
   return root.toSource()

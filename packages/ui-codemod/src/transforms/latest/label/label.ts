@@ -32,6 +32,7 @@ export default function transform(fileInfo: FileInfo, api: API, options: BaseOpt
         addAttribute(j, path.node, 'trim', true)
       },
     },
+    {replaceInStyled: true},
   )
 
   return root.toSource()

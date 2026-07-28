@@ -15,6 +15,9 @@ export function replaceElement(
     element: string
     callback?: (path: ASTPath<JSXOpeningElement>) => void
   },
+  options?: {
+    replaceInStyled?: boolean
+  },
 ) {
   let needsImportUpdate = false
 
@@ -54,6 +57,21 @@ export function replaceElement(
       to.callback?.(path)
       needsImportUpdate = true
     })
+
+  if (options?.replaceInStyled) {
+    root
+      .find(j.CallExpression, {
+        callee: {type: 'Identifier', name: 'styled'},
+      })
+      .forEach((path) => {
+        const arg = path.node.arguments[0]
+
+        if (arg?.type === 'Identifier' && arg.name === from.element) {
+          arg.name = to.element
+          needsImportUpdate = true
+        }
+      })
+  }
 
   if (needsImportUpdate) {
     addImportSpecifier(j, root, from.element, to.element)

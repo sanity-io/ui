@@ -48,6 +48,7 @@ export default function transform(fileInfo: FileInfo, api: API, options?: BaseOp
       element: 'Box',
       callback: (path) => transformAttributes(j, path, BOX_MODS, BOX_TODO_WARNING),
     },
+    {replaceInStyled: true},
   )
 
   return root.toSource()
