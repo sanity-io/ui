@@ -1,6 +1,6 @@
 {
   "name": "@sanity/themer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Generate Sanity Studio themes, and preview them with a Studio tool.",
   "keywords": [
     "sanity",
