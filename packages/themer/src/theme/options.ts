@@ -116,7 +116,8 @@ export function resolveThemeOptions(options: BuildThemeOptions): ResolvedThemeOp
           : normalizeColor(options.background.light, 'background.light'),
     },
     contrast: normalizeContrast(options.contrast),
-    text: options.text === undefined ? deriveTextColor(accent) : normalizeColor(options.text, 'text'),
+    text:
+      options.text === undefined ? deriveTextColor(accent) : normalizeColor(options.text, 'text'),
   }
 }
 
@@ -150,7 +151,9 @@ function normalizeColor(value: string, name: string): string {
 
   const lower = value.toLowerCase()
 
-  return lower.length === 4 ? `#${lower[1]}${lower[1]}${lower[2]}${lower[2]}${lower[3]}${lower[3]}` : lower
+  return lower.length === 4
+    ? `#${lower[1]}${lower[1]}${lower[2]}${lower[2]}${lower[3]}${lower[3]}`
+    : lower
 }
 
 function normalizeContrast(value: number | undefined): number {

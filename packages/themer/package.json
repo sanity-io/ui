@@ -24,8 +24,8 @@
     "dist"
   ],
   "type": "module",
-  "types": "./dist/index.d.ts",
   "sideEffects": false,
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
     "./legacy": "./src/legacy/index.ts",
