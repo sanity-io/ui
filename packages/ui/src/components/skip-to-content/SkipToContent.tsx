@@ -11,12 +11,11 @@ const skipToContentClassName = suffixClassName('sui-SkipToContent')
 
 /** @beta */
 export function SkipToContent(props: SkipToContentProps) {
-  const {className, hash, label, style, ...rest} = getProps(props, skipToContentProps)
+  const {className, label, style, ...rest} = getProps(props, skipToContentProps)
 
   return (
     <VisuallyHidden
       as={Link}
-      href={hash}
       underlined={false}
       className={clsx(
         skipToContentClassName,

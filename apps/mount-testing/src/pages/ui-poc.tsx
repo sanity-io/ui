@@ -111,7 +111,7 @@ export default function UiPoc() {
       <h2>{count} Containers</h2>
       <Profiler id="Container" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Container key={i} contentSize={1}>
+          <Container key={i} size={1}>
             <span>Container content</span>
           </Container>
         ))}

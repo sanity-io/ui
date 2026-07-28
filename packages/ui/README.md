@@ -131,10 +131,10 @@ All components below are from `@sanity-labs/ui-poc`.
 
 ### Accessibility
 
-| Component        | What it does                                                                                     |
-| ---------------- | ------------------------------------------------------------------------------------------------ |
-| `SkipToContent`  | Visually hidden skip-nav link. Must be the first focusable element. Requires `hash` and `label`. |
-| `VisuallyHidden` | Hides content visually while keeping it in the accessibility tree.                               |
+| Component        | What it does                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| `SkipToContent`  | Visually hidden skip-nav link. Must be the first focusable element. Requires `href` and `label`. |
+| `VisuallyHidden` | Hides content visually while keeping it in the accessibility tree.                    |
 
 ### Still from `@sanity/ui`
 

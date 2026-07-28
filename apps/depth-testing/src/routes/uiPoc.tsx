@@ -26,7 +26,7 @@ function UiPoc() {
         A measure of the USS Sanity’s DOM engines
       </Text>
       <Card tone="neutral" density="loose">
-        <Container contentSize={2} marginLeft={0}>
+        <Container size={2} marginLeft={0}>
           <VStack gap={[1, 2]}>
             <Checkbox name="checkboxes" label="Hey" defaultChecked />
             <Checkbox name="checkboxes" label="Ho" />

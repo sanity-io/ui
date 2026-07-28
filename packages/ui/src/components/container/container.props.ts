@@ -8,14 +8,14 @@ export interface ContainerProps<T extends React.ElementType> extends LayoutProps
   /** Element to render */
   as?: T
   /** CSS **max-width** property */
-  contentSize?: Responsive<ContainerSize>
+  size?: Responsive<ContainerSize>
 }
 
 export const containerProps: Record<string, PropDef> = {
   as: {
     type: 'string',
   },
-  contentSize: {
+  size: {
     type: 'union',
     className: 'container',
     values: CONTAINER_SIZE,

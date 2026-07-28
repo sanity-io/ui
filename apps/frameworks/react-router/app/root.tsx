@@ -41,7 +41,7 @@ export function ErrorBoundary({error}: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <Container contentSize={2} paddingY={4}>
+    <Container size={2} paddingY={4}>
       <Flex flexDirection="column" rowGap={2}>
         <Heading as="h1" size={4}>
           {message}

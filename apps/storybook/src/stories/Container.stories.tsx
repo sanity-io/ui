@@ -55,14 +55,7 @@ export const Sizes: Story = {
     return (
       <>
         {CONTAINER_SIZE.map((size) => (
-          <Container
-            {...props}
-            key={size}
-            contentSize={size}
-            padding={3}
-            marginY={2}
-            tone="neutral"
-          >
+          <Container {...props} key={size} size={size} padding={3} marginY={2} tone="neutral">
             <Text>
               Container Size {size} (
               {['320px', '640px', '960px', '1280px', '1600px', '1920px'][size]})
