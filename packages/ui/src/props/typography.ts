@@ -1,18 +1,19 @@
 import {FONT_WEIGHT, type FontWeight} from '../types/FontWeight'
 import {type PropDef} from '../types/PropDef'
+import type {Responsive} from '../types/Responsive'
 import {TEXT_ALIGN, type TextAlign} from '../types/TextAlign'
 import {type MarginProps, marginProps} from './margin'
 import {type ToneProps, toneProps} from './tone'
 
 export interface TypographyProps extends MarginProps, ToneProps {
   /** CSS **text-align** property */
-  align?: TextAlign
+  align?: Responsive<TextAlign>
   /** CSS **color** property */
   muted?: boolean
   /** CSS **text-box-trim** property */
   trim?: boolean
   /** Number of lines to truncate */
-  truncate?: number
+  truncate?: Responsive<number>
   /** CSS **font-weight** property */
   weight?: FontWeight
 }
