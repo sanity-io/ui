@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.22
+
+### Patch Changes
+
+- dc46671: fix: update web font source URLs
+
 ## 0.0.1-alpha.21
 
 ### Patch Changes
