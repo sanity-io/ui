@@ -28,13 +28,19 @@
       "default": "./dist/index.js"
     },
     "./package.json": "./package.json",
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": {
+      "types": "./src/index.css.d.ts",
+      "default": "./dist/styles.css"
+    }
   },
   "publishConfig": {
     "exports": {
       ".": "./dist/index.js",
       "./package.json": "./package.json",
-      "./styles.css": "./dist/styles.css"
+      "./styles.css": {
+        "types": "./src/index.css.d.ts",
+        "default": "./dist/styles.css"
+      }
     }
   },
   "scripts": {
