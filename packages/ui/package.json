@@ -75,7 +75,7 @@
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
     "csstype": "^3.2.3",
-    "motion": "^12.42.2",
+    "motion": "^12.43.0",
     "react-compiler-runtime": "1.0.0",
     "react-is": "catalog:",
     "react-refractor": "catalog:",
