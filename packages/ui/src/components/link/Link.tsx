@@ -25,3 +25,5 @@ export function Link({underlined = true, ...props}: LinkProps) {
     </a>
   )
 }
+
+export type {LinkProps}

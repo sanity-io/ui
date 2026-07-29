@@ -2,6 +2,7 @@ import {GRID_AUTO_FLOW, type GridAutoFlow} from '../types/Grid'
 import {type PropDef} from '../types/PropDef'
 import {type Responsive} from '../types/Responsive'
 
+/** @public */
 export type GridParentProps = {
   /** CSS **grid-auto-flow** property */
   gridAutoFlow?: Responsive<GridAutoFlow>

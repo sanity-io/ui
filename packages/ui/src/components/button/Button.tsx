@@ -74,3 +74,5 @@ export function Button<T extends ElementType = 'button'>({
     </Component>
   )
 }
+
+export type {ButtonProps}

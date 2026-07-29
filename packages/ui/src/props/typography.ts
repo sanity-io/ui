@@ -5,6 +5,7 @@ import {TEXT_ALIGN, type TextAlign} from '../types/TextAlign'
 import {type MarginProps, marginProps} from './margin'
 import {type ToneProps, toneProps} from './tone'
 
+/** @public */
 export interface TypographyProps extends MarginProps, ToneProps {
   /** CSS **text-align** property */
   align?: Responsive<TextAlign>

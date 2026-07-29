@@ -124,6 +124,12 @@ describe('getProps', () => {
     expect(result.style).toEqual({})
   })
 
+  it('generates responsive className with null values', () => {
+    const result = getProps({padding: [1, 2, null, 3]}, layoutProps)
+    expect(result.className).toBe('sui-p1 sui-p2-bp-1 sui-p3-bp-3')
+    expect(result.style).toEqual({})
+  })
+
   it('generates responsive className without unsupported values', () => {
     const result = getProps({padding: [1, 2, 10, 3]}, layoutProps)
     expect(result.className).toBe('sui-p1 sui-p2-bp-1 sui-p3-bp-3')

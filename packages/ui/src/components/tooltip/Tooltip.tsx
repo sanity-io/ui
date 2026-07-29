@@ -89,3 +89,5 @@ export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
     </>
   )
 }
+
+export type {TooltipProps}

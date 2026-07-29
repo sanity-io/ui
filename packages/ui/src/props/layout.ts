@@ -12,6 +12,7 @@ import {type ToneProps, toneProps} from './tone'
 import {type WidthProps, widthProps} from './width'
 import {type ZIndexProps, zIndexProps} from './zIndex'
 
+/** @public */
 export interface LayoutProps
   extends
     ToneProps,

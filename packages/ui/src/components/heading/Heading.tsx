@@ -50,3 +50,5 @@ export function Heading<T extends ElementType = 'h2'>({
     </Component>
   )
 }
+
+export type {HeadingProps}

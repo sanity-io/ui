@@ -21,3 +21,5 @@ export function Flex<T extends ElementType = 'div'>({
     </Component>
   )
 }
+
+export type {FlexProps}

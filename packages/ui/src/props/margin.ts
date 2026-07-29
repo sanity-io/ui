@@ -2,6 +2,7 @@ import {type PropDef} from '../types/PropDef'
 import {type Responsive} from '../types/Responsive'
 import {SPACE_AUTO_NEGATIVE, type SpaceAutoNegative} from '../types/Space'
 
+/** @public */
 export type MarginProps = {
   /** CSS **margin** property */
   margin?: Responsive<SpaceAutoNegative>

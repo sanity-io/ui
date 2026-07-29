@@ -92,7 +92,9 @@ export function ${componentName}<T extends ElementType = 'div'>(
       {children}
     </Component>
   )
-}\n`
+}
+
+export type {${componentName}Props}\n`
 }
 
 function getPropsFile(componentName, propsName) {

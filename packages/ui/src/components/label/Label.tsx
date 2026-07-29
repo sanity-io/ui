@@ -30,3 +30,5 @@ export function Label(props: LabelProps) {
     </Text>
   )
 }
+
+export type {LabelProps}

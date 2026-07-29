@@ -24,3 +24,5 @@ export function Spinner({size = 2, ...props}: SpinnerProps) {
     />
   )
 }
+
+export type {SpinnerProps}

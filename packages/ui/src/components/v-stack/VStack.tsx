@@ -28,3 +28,5 @@ export function VStack<T extends ElementType = 'div'>(
     </Flex>
   )
 }
+
+export type {VStackProps}

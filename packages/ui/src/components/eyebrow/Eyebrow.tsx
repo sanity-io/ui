@@ -50,3 +50,5 @@ export function Eyebrow<T extends ElementType = 'span'>({
     </Component>
   )
 }
+
+export type {EyebrowProps}

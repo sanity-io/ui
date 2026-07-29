@@ -31,3 +31,5 @@ export function SkipToContent(props: SkipToContentProps) {
     </VisuallyHidden>
   )
 }
+
+export type {SkipToContentProps}

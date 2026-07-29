@@ -59,3 +59,5 @@ export function Checkbox(props: CheckboxProps) {
     </Label>
   )
 }
+
+export type {CheckboxProps}

@@ -49,3 +49,5 @@ export function Text<T extends ElementType = 'span'>({
     </Component>
   )
 }
+
+export type {TextProps}
