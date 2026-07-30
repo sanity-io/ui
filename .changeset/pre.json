@@ -15,7 +15,7 @@
     "@sanity/ui": "3.5.0"
   },
   "changesets": [
-    "dependencies-GH-2496",
-    "next-prerelease-kickoff"
+    "next-prerelease-kickoff",
+    "ui-deprecated-tombstones"
   ]
 }
