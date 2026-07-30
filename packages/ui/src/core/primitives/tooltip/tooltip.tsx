@@ -8,7 +8,6 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {AnimatePresence} from 'motion/react'
 import {
   cloneElement,
   forwardRef,
@@ -31,6 +30,7 @@ import {origin} from '../../middleware/origin'
 import {_getArrayProp} from '../../styles/helpers'
 import {useTheme_v2} from '../../theme/useTheme'
 import type {Placement} from '../../types/placement'
+import {AnimateActivity} from '../../utils/animateActivity'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
 import {Layer, type LayerProps} from '../../utils/layer/layer'
@@ -374,20 +374,24 @@ export const Tooltip = forwardRef(function Tooltip(
     </StyledTooltip>
   )
 
-  const children =
-    showTooltip &&
-    (portalProp ? (
-      <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        {tooltip}
-      </Portal>
-    ) : (
-      tooltip
-    ))
+  const tooltipNode = portalProp ? (
+    <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
+      {tooltip}
+    </Portal>
+  ) : (
+    tooltip
+  )
 
   return (
     <>
       {/* the tooltip */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate ? (
+        <AnimateActivity layoutMode="default" mode={showTooltip ? 'visible' : 'hidden'}>
+          {tooltipNode}
+        </AnimateActivity>
+      ) : (
+        showTooltip && tooltipNode
+      )}
 
       {/* the referred element */}
       {child}

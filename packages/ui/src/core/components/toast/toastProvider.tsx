@@ -1,7 +1,7 @@
-import {AnimatePresence} from 'motion/react'
 import {startTransition, useMemo, useState} from 'react'
 
 import {useMounted} from '../../hooks/useMounted'
+import {AnimateActivity} from '../../utils/animateActivity'
 import {LayerProvider} from '../../utils/layer/layerProvider'
 import {Toast} from './toast'
 import {ToastContext} from './toastContext'
@@ -14,6 +14,7 @@ type ToastState = {
   id: string
   updatedAt: number
   params: ToastParams
+  mode: 'visible' | 'hidden'
 }[]
 
 /**
@@ -53,10 +54,16 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
            * Creates a function to dismiss this specific toast.
            * This function will be passed to the Toast component
            * and called either on close button click or after duration.
+           * Sets mode to "hidden" so AnimateActivity can play the exit animation
+           * before the toast is removed from state.
            */
           const dismiss = () =>
             startTransition(() =>
-              setState((currentState) => currentState.filter((toast) => toast.id !== id)),
+              setState((currentState) =>
+                currentState.map((toast) =>
+                  toast.id === id ? {...toast, mode: 'hidden' as const} : toast,
+                ),
+              ),
             )
 
           /**
@@ -72,6 +79,7 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
               id,
               updatedAt: Date.now(),
               params: {...params, duration},
+              mode: 'visible',
             },
           ]
         })
@@ -89,10 +97,18 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
       {mounted && (
         <LayerProvider zOffset={zOffset}>
           <ToastLayer padding={padding} paddingX={paddingX} paddingY={paddingY} gap={gap}>
-            <AnimatePresence initial={false} mode="popLayout">
-              {state.map(({dismiss, id, params, updatedAt}) => (
+            {state.map(({dismiss, id, params, updatedAt, mode}) => (
+              <AnimateActivity
+                key={id}
+                layoutMode="pop"
+                mode={mode}
+                onExitComplete={() =>
+                  startTransition(() =>
+                    setState((currentState) => currentState.filter((toast) => toast.id !== id)),
+                  )
+                }
+              >
                 <Toast
-                  key={id}
                   closable={params.closable}
                   description={params.description}
                   onClose={dismiss}
@@ -101,8 +117,8 @@ export function ToastProvider(props: ToastProviderProps): React.JSX.Element {
                   duration={params.duration}
                   updatedAt={updatedAt}
                 />
-              ))}
-            </AnimatePresence>
+              </AnimateActivity>
+            ))}
           </ToastLayer>
         </LayerProvider>
       )}
