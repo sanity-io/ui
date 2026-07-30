@@ -14,7 +14,6 @@ Migrate:
 - MenuButton top-level popover props → `popover={{…}}`
 - Popover `boundaryElement` → `floatingBoundary` / `referenceBoundary`
 - Tooltip `allowedAutoPlacements` → `fallbackPlacements`
-- PortalProvider `boundaryElement` → `<BoundaryElementProvider />`
 - `useClickOutside` → `useClickOutsideEvent`
 - `useElementRect` → `useElementSize`
 - `useForwardedRef` → `useRef` + `useImperativeHandle`
