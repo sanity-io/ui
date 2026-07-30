@@ -3,9 +3,9 @@ name: CI
 on:
   # Build on pushes branches that have a PR (including drafts)
   pull_request:
-  # Build on commits pushed to the default branch
+  # Build on commits pushed to the default / prerelease branches
   push:
-    branches: [main]
+    branches: [main, next]
 
 permissions:
   contents: read # for checkout
