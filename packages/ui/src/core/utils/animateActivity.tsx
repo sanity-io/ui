@@ -25,10 +25,7 @@
 import {invariant, PresenceChild} from 'motion/react'
 import {Activity, useState} from 'react'
 
-/**
- * @internal
- */
-export interface AnimateActivityProps {
+interface AnimateActivityProps {
   mode: 'visible' | 'hidden'
   layoutMode: 'default' | 'pop'
   children: React.ReactNode
