@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   isValidElement,
   useCallback,
   useEffect,
@@ -48,12 +47,11 @@ export interface MenuItemOwnProps extends ResponsivePaddingProps, ResponsiveRadi
  */
 export type MenuItemProps<E extends ElementType = 'button'> = Props<MenuItemOwnProps, E>
 
-const MenuItemComponent = forwardRef(function MenuItem(
+const MenuItemComponent = function MenuItem(
   props: MenuItemOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLDivElement>,
-      'as' | 'height' | 'ref' | 'selected' | 'tabIndex'
+      'as' | 'height' | 'selected' | 'tabIndex'
     >,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     as = 'button',
@@ -73,6 +71,7 @@ const MenuItemComponent = forwardRef(function MenuItem(
     paddingLeft,
     pressed,
     radius = 2,
+    ref: forwardedRef,
     selected: selectedProp,
     gap = 3,
     text,
@@ -188,7 +187,7 @@ const MenuItemComponent = forwardRef(function MenuItem(
       )}
     </Selectable>
   )
-})
+}
 
 /**
  * @public

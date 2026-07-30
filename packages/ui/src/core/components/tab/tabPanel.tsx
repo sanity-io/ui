@@ -1,5 +1,3 @@
-import {forwardRef} from 'react'
-
 import {Box, BoxOwnProps} from '../../primitives/box/box'
 
 /**
@@ -16,10 +14,9 @@ export interface TabPanelProps extends BoxOwnProps {
 /**
  * @public
  */
-export const TabPanel = forwardRef(function TabPanel(
+export const TabPanel = function TabPanel(
   props: TabPanelProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'aria-labelledby' | 'id' | 'role'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {flex, ...restProps} = props
 
@@ -28,11 +25,10 @@ export const TabPanel = forwardRef(function TabPanel(
       data-ui="TabPanel"
       {...restProps}
       flex={flex}
-      ref={ref}
       role="tabpanel"
       tabIndex={props.tabIndex === undefined ? 0 : props.tabIndex}
     >
       {props.children}
     </Box>
   )
-})
+}

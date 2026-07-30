@@ -1,13 +1,4 @@
-import {
-  Children,
-  forwardRef,
-  Fragment,
-  isValidElement,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import {Children, Fragment, isValidElement, useCallback, useMemo, useRef, useState} from 'react'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {Box} from '../../primitives/box/box'
@@ -33,11 +24,10 @@ export interface BreadcrumbsProps {
 /**
  * @beta
  */
-export const Breadcrumbs = forwardRef(function Breadcrumbs(
-  props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
-  ref: React.ForwardedRef<HTMLOListElement>,
+export const Breadcrumbs = function Breadcrumbs(
+  props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'type'>,
 ) {
-  const {children, gap = 2, maxLength, separator, ...restProps} = props
+  const {children, gap = 2, maxLength, ref, separator, ...restProps} = props
   const space = _getArrayProp(gap)
   const [open, setOpen] = useState(false)
   const expandElementRef = useRef<HTMLButtonElement | null>(null)
@@ -76,7 +66,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
       ))}
     </StyledBreadcrumbs>
   )
-})
+}
 
 function useItems({
   collapse,

@@ -1,4 +1,4 @@
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
+import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
@@ -48,9 +48,8 @@ const StyledMenu = styled(Box)`
  *
  * @public
  */
-export const Menu = forwardRef(function Menu(
+export const Menu = function Menu(
   props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'role' | 'tabIndex'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     children,
@@ -61,6 +60,7 @@ export const Menu = forwardRef(function Menu(
     onKeyDown,
     originElement,
     padding = 1,
+    ref: forwardedRef,
     registerElement,
     shouldFocus = null,
     gap = 1,
@@ -168,4 +168,4 @@ export const Menu = forwardRef(function Menu(
       </StyledMenu>
     </MenuContext.Provider>
   )
-})
+}
