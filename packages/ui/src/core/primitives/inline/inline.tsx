@@ -1,4 +1,4 @@
-import {Children, forwardRef, useMemo} from 'react'
+import {Children, useMemo} from 'react'
 import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles/helpers'
@@ -26,11 +26,10 @@ export type InlineProps<E extends ElementType = 'div'> = Props<InlineOwnProps, E
 
 const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
 
-const InlineComponent = forwardRef(function Inline(
+const InlineComponent = function Inline(
   props: InlineOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,
-  ref,
 ) {
-  const {as, children: childrenProp, gap, ...restProps} = props
+  const {as, children: childrenProp, gap, ref, ...restProps} = props
 
   const children = useMemo(
     () => Children.map(childrenProp, (child) => child && <div>{child}</div>),
@@ -43,13 +42,12 @@ const InlineComponent = forwardRef(function Inline(
       {...restProps}
       $space={_getArrayProp(gap)}
       forwardedAs={as}
-      // oxlint-disable-next-line no-unnecessary-type-assertion, no-unsafe-type-assertion
-      ref={ref as any}
+      ref={ref}
     >
       {children}
     </StyledInline>
   )
-})
+}
 
 /**
  * The `Inline` component is a layout utility for aligning and spacing items horizontally.

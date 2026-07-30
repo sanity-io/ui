@@ -1,4 +1,3 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
 /**
@@ -21,15 +20,14 @@ const StyledSrOnly = styled.div`
 /**
  * @public
  */
-export const SrOnly = forwardRef(function SrOnly(
+export const SrOnly = function SrOnly(
   props: SrOnlyProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-hidden' | 'as'>,
-  ref: React.Ref<HTMLDivElement>,
 ) {
-  const {as, children} = props
+  const {as, children, ref} = props
 
   return (
     <StyledSrOnly aria-hidden as={as} data-ui="SrOnly" ref={ref}>
       {children}
     </StyledSrOnly>
   )
-})
+}

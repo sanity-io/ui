@@ -1,4 +1,4 @@
-import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
+import {useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {
@@ -29,11 +29,19 @@ const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switch
  *
  * @public
  */
-export const Switch = forwardRef(function Switch(
+export const Switch = function Switch(
   props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
-  const {checked, className, disabled, indeterminate, readOnly, style, ...restProps} = props
+  const {
+    checked,
+    className,
+    disabled,
+    indeterminate,
+    readOnly,
+    ref: forwardedRef,
+    style,
+    ...restProps
+  } = props
   const ref = useRef<HTMLInputElement | null>(null)
 
   useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
@@ -64,4 +72,4 @@ export const Switch = forwardRef(function Switch(
       </Representation>
     </StyledSwitch>
   )
-})
+}

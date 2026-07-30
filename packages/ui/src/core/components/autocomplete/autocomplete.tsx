@@ -4,7 +4,6 @@ import {
   cloneElement,
   ElementType,
   FocusEvent,
-  forwardRef,
   HTMLProps,
   KeyboardEvent,
   MouseEvent,
@@ -97,7 +96,13 @@ const DEFAULT_RENDER_VALUE = (value: string, option?: BaseAutocompleteOption) =>
 const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
   option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
 
-const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAutocompleteOption>(
+/**
+ * The Autocomplete component is typically used for search components.
+ * It consists of a text input for writing a query, and properties for rendering suggestions.
+ *
+ * @public
+ */
+export const Autocomplete = function Autocomplete<Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
     Omit<
       HTMLProps<HTMLInputElement>,
@@ -115,13 +120,11 @@ const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAu
       | 'onSelect'
       | 'popover'
       | 'prefix'
-      | 'ref'
       | 'role'
       | 'spellCheck'
       | 'type'
       | 'value'
     >,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {
     border = true,
@@ -146,6 +149,7 @@ const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAu
     prefix,
     radius = 2,
     readOnly,
+    ref: forwardedRef,
     relatedElements,
     renderOption: renderOptionProp,
     renderPopover,
@@ -705,7 +709,7 @@ const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAu
       {results}
     </StyledAutocomplete>
   )
-})
+}
 
 function RenderPopover({
   renderPopover,
@@ -730,38 +734,3 @@ function RenderPopover({
     resultsPopoverElementRef,
   )
 }
-
-/**
- * The Autocomplete component is typically used for search components.
- * It consists of a text input for writing a query, and properties for rendering suggestions.
- *
- * @public
- */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocompleteOption>(
-  props: AutocompleteProps<Option> &
-    Omit<
-      HTMLProps<HTMLInputElement>,
-      | 'aria-activedescendant'
-      | 'aria-autocomplete'
-      | 'aria-expanded'
-      | 'aria-owns'
-      | 'as'
-      | 'autoCapitalize'
-      | 'autoComplete'
-      | 'autoCorrect'
-      | 'id'
-      | 'inputMode'
-      | 'onChange'
-      | 'onSelect'
-      | 'popover'
-      | 'prefix'
-      | 'ref'
-      | 'role'
-      | 'spellCheck'
-      | 'type'
-      | 'value'
-    > & {
-      ref?: Ref<HTMLInputElement>
-    },
-) => React.JSX.Element

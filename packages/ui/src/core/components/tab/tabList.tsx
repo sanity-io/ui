@@ -1,4 +1,4 @@
-import {Children, cloneElement, forwardRef, isValidElement, useCallback, useState} from 'react'
+import {Children, cloneElement, isValidElement, useCallback, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {Inline, InlineOwnProps} from '../../primitives/inline/inline'
@@ -23,11 +23,10 @@ const CustomInline = styled(Inline)`
 /**
  * @public
  */
-export const TabList = forwardRef(function TabList(
+export const TabList = function TabList(
   props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref,
 ) {
-  const {children: childrenProp, ...restProps} = props
+  const {children: childrenProp, ref, ...restProps} = props
   const [focusedIndex, setFocusedIndex] = useState(-1)
 
   const children: React.JSX.Element[] = Children.toArray(childrenProp).filter(isValidElement)
@@ -66,4 +65,4 @@ export const TabList = forwardRef(function TabList(
       {tabs}
     </CustomInline>
   )
-})
+}

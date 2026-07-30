@@ -12,7 +12,7 @@ vi.mock('../../primitives/inline/inline', async (importOriginal) => {
   return {
     ...actual,
     // oxlint-disable-next-line no-unsafe-type-assertion
-    Inline: vi.fn((props: Record<string, unknown>) => (actual.Inline as any).render(props, null)),
+    Inline: vi.fn((props: Record<string, unknown>) => (actual.Inline as any)(props)),
   }
 })
 
