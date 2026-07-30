@@ -29,7 +29,6 @@ export const instant = false
 // per-link runtime prefetch resolves the entire page ahead of navigation.
 // Downstream segments (`[screen]` and `[screen]/[...article]` pages) are
 // included in the same runtime prefetch request.
-// `partial` replaces the former `allow-runtime` value (Next.js 16.3+).
 export const prefetch = 'partial'
 
 export async function generateStaticParams() {
