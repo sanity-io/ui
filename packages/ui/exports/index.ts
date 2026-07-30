@@ -142,7 +142,6 @@ export {
   type ElementRectValue,
   type ElementSize,
 } from '../src/core/observers/elementSizeObserver'
-export {_ResizeObserver} from '../src/core/observers/resizeObserver'
 export {Avatar, type AvatarOwnProps, type AvatarProps} from '../src/core/primitives/avatar/avatar'
 export {AvatarCounter, type AvatarCounterProps} from '../src/core/primitives/avatar/avatarCounter'
 export {AvatarStack, type AvatarStackProps} from '../src/core/primitives/avatar/avatarStack'
