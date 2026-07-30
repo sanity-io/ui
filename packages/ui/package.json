@@ -92,7 +92,7 @@
     "@types/react-dom": "catalog:",
     "@types/react-is": "catalog:",
     "babel-plugin-react-compiler": "catalog:",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.1",
     "react": "catalog:",
     "react-dom": "catalog:",
     "rimraf": "catalog:",
