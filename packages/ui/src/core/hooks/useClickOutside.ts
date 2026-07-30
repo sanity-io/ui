@@ -1,7 +1,3 @@
-import {useEffect, useRef, useState} from 'react'
-
-import {EMPTY_ARRAY} from '../constants'
-
 /**
  * @public
  */
@@ -11,24 +7,6 @@ export type ClickOutsideListener = (event: MouseEvent) => void
  * @public
  */
 export type ClickOutsideElements = (HTMLElement | null | (HTMLElement | null)[])[]
-
-function _getElements(
-  element: HTMLElement | null,
-  elementsArg: ClickOutsideElements,
-): HTMLElement[] {
-  const ret = [element]
-
-  for (const el of elementsArg) {
-    if (Array.isArray(el)) {
-      ret.push(...el)
-    } else {
-      ret.push(el)
-    }
-  }
-
-  // oxlint-disable-next-line no-unsafe-type-assertion
-  return ret.filter(Boolean) as HTMLElement[]
-}
 
 /**
  * @public
@@ -46,73 +24,11 @@ function _getElements(
  * ```
  */
 export function useClickOutside(
-  listener: ClickOutsideListener,
-  elementsArg: ClickOutsideElements = EMPTY_ARRAY,
-  boundaryElement?: HTMLElement | null,
-): (el: HTMLElement | null) => void {
-  const [element, setElement] = useState<HTMLElement | null>(null)
-  const [elements, setElements] = useState(() => _getElements(element, elementsArg))
-  const elementsRef = useRef(elements)
-
-  useEffect(() => {
-    const prevElements = elementsRef.current
-    const nextElements = _getElements(element, elementsArg)
-
-    if (prevElements.length !== nextElements.length) {
-      setElements(nextElements)
-      elementsRef.current = nextElements
-
-      return
-    }
-
-    for (const el of prevElements) {
-      if (!nextElements.includes(el)) {
-        setElements(nextElements)
-        elementsRef.current = nextElements
-
-        return
-      }
-    }
-
-    for (const el of nextElements) {
-      if (!prevElements.includes(el)) {
-        setElements(nextElements)
-        elementsRef.current = nextElements
-
-        return
-      }
-    }
-  }, [element, elementsArg])
-
-  useEffect(() => {
-    if (!listener) return undefined
-
-    const handleWindowMouseDown = (evt: MouseEvent) => {
-      const target = evt.target
-
-      if (!(target instanceof Node)) {
-        return
-      }
-
-      if (boundaryElement && !boundaryElement.contains(target)) {
-        return
-      }
-
-      for (const el of elements) {
-        if (target === el || el.contains(target)) {
-          return
-        }
-      }
-
-      listener(evt)
-    }
-
-    window.addEventListener('mousedown', handleWindowMouseDown)
-
-    return () => {
-      window.removeEventListener('mousedown', handleWindowMouseDown)
-    }
-  }, [boundaryElement, listener, elements])
-
-  return setElement
+  _listener?: never,
+  _elementsArg?: never,
+  _boundaryElement?: never,
+): never {
+  throw new Error(
+    '`useClickOutside` was removed in @sanity/ui v4. Use `useClickOutsideEvent` instead.',
+  )
 }

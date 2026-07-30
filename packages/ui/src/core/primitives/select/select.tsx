@@ -18,9 +18,9 @@ export interface SelectProps {
   padding?: number | number[]
   radius?: Radius | Radius[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   customValidity?: string
 }
 
@@ -49,15 +49,12 @@ export const Select = forwardRef(function Select(
     customValidity,
     disabled,
     fontSize = 2,
-    gap,
+    gap = 3,
     padding = 3,
     radius = 2,
     readOnly,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 3,
     ...restProps
   } = props
-  const spacing = gap === undefined ? deprecated_space : gap
 
   const ref = useRef<HTMLSelectElement | null>(null)
 
@@ -77,7 +74,7 @@ export const Select = forwardRef(function Select(
         $fontSize={_getArrayProp(fontSize)}
         $padding={_getArrayProp(padding)}
         $radius={_getArrayProp(radius)}
-        $space={_getArrayProp(spacing)}
+        $space={_getArrayProp(gap)}
         disabled={disabled || readOnly}
         ref={ref}
       >

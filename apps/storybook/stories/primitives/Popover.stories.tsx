@@ -451,28 +451,28 @@ function AlignedStory() {
   return (
     <Card height="fill" padding={[4, 5, 6]} sizing="border" tone="transparent">
       <Card height="fill" padding={2} ref={setBoundaryElement} shadow={1} sizing="border">
-        <BoundaryElementProvider element={boundaryElement}>
-          <Flex align="flex-start" height="fill" justify="flex-end">
-            <Popover
-              content={content}
-              open={open}
-              overflow="auto"
-              padding={3}
-              portal
-              placement="bottom"
-              ref={popoverElementRef}
-              width="auto"
-            >
-              <Button
-                icon={EllipsisVerticalIcon}
-                mode="bleed"
-                onClick={handleToggleOpen}
-                ref={buttonElementRef}
-                selected={open}
-              />
-            </Popover>
-          </Flex>
-        </BoundaryElementProvider>
+        <Flex align="flex-start" height="fill" justify="flex-end">
+          <Popover
+            floatingBoundary={boundaryElement}
+            referenceBoundary={boundaryElement}
+            content={content}
+            open={open}
+            overflow="auto"
+            padding={3}
+            portal
+            placement="bottom"
+            ref={popoverElementRef}
+            width="auto"
+          >
+            <Button
+              icon={EllipsisVerticalIcon}
+              mode="bleed"
+              onClick={handleToggleOpen}
+              ref={buttonElementRef}
+              selected={open}
+            />
+          </Popover>
+        </Flex>
       </Card>
     </Card>
   )
