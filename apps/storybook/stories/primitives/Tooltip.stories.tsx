@@ -104,8 +104,8 @@ export const WithOpenDelay: Story = {
     await userEvent.hover(button)
     // Animated tooltips are pre-rendered in the DOM inside a hidden <Activity>,
     // so wait for the tooltip to become visible rather than just present.
-    await waitFor(() => {
-      expect(canvas.getByText("I'm a tooltip").checkVisibility()).toBe(true)
+    await waitFor(async () => {
+      await expect(canvas.getByText("I'm a tooltip").checkVisibility()).toBe(true)
     })
   },
 }
@@ -139,9 +139,9 @@ export const WithDelayGroup: Story = {
     await userEvent.hover(button)
     // All animated tooltips are pre-rendered in the DOM inside hidden
     // <Activity> boundaries, so wait for one of them to become visible.
-    await waitFor(() => {
+    await waitFor(async () => {
       const tooltips = canvas.getAllByText("I'm a tooltip")
-      expect(tooltips.some((element) => element.checkVisibility())).toBe(true)
+      await expect(tooltips.some((element) => element.checkVisibility())).toBe(true)
     })
   },
 }
