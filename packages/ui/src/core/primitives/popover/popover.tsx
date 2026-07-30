@@ -66,7 +66,7 @@ export interface PopoverProps
   animate?: boolean
   arrow?: boolean
   /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
-  boundaryElement?: HTMLElement | null
+  boundaryElement?: never
   children?: React.JSX.Element
   /**
    * When `true`, prevent overflow within the current boundary:
@@ -153,8 +153,6 @@ export const Popover = forwardRef(function Popover(
     __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
     animate: _animate = false,
     arrow: arrowProp = false,
-    // oxlint-disable-next-line no-deprecated
-    boundaryElement: _boundaryElement,
     children: childProp,
     constrainSize = false,
     content,
@@ -183,15 +181,11 @@ export const Popover = forwardRef(function Popover(
     updateRef,
     ...restProps
   } = props
-  const boundaryElement = _boundaryElement ?? boundaryElementContext?.element
+  const boundaryElement = boundaryElementContext?.element
   const fallbackPlacements =
     _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
-  const floatingBoundary =
-    // oxlint-disable-next-line no-deprecated
-    _floatingBoundary ?? props.boundaryElement ?? boundaryElementContext.element
-  const referenceBoundary =
-    // oxlint-disable-next-line no-deprecated
-    _referenceBoundary ?? props.boundaryElement ?? boundaryElementContext.element
+  const floatingBoundary = _floatingBoundary ?? boundaryElementContext.element
+  const referenceBoundary = _referenceBoundary ?? boundaryElementContext.element
   const zOffsetProp = _zOffsetProp ?? layer.popover.zOffset
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate

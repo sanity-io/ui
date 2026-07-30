@@ -10,7 +10,7 @@ export interface PortalProviderProps {
   /**
    * @deprecated Use `<BoundaryElementProvider element={...} />` instead
    */
-  boundaryElement?: HTMLElement | null
+  boundaryElement?: never
   children: React.ReactNode
   element?: HTMLElement | null
   /**
@@ -23,8 +23,7 @@ export interface PortalProviderProps {
  * @public
  */
 export function PortalProvider(props: PortalProviderProps): React.JSX.Element {
-  // oxlint-disable-next-line no-deprecated
-  const {boundaryElement, children, element, __unstable_elements: elements} = props
+  const {children, element, __unstable_elements: elements} = props
   const fallbackElement = useSyncExternalStore(
     emptySubscribe,
     () => document.body,
@@ -34,11 +33,11 @@ export function PortalProvider(props: PortalProviderProps): React.JSX.Element {
   const value: PortalContextValue = useMemo(() => {
     return {
       version: 0.0,
-      boundaryElement: boundaryElement || null,
+      boundaryElement: null,
       element: element || fallbackElement,
       elements,
     }
-  }, [boundaryElement, element, elements, fallbackElement])
+  }, [element, elements, fallbackElement])
 
   return <PortalContext.Provider value={value}>{children}</PortalContext.Provider>
 }

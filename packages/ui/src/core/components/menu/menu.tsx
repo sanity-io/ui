@@ -17,11 +17,11 @@ export interface MenuProps extends ResponsivePaddingProps {
   /**
    * @deprecated Use `shouldFocus="first"` instead.
    */
-  'focusFirst'?: boolean
+  'focusFirst'?: never
   /**
    * @deprecated Use `shouldFocus="last"` instead.
    */
-  'focusLast'?: boolean
+  'focusLast'?: never
   'onClickOutside'?: (event: MouseEvent) => void
   'onEscape'?: () => void
   'onItemClick'?: () => void
@@ -31,9 +31,9 @@ export interface MenuProps extends ResponsivePaddingProps {
   'shouldFocus'?: 'first' | 'last' | null
   'gap'?: number | number[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  'space'?: number | number[]
+  'space'?: never
   'aria-labelledby'?: string
   'onBlurCapture'?: (event: FocusEvent) => void
 }
@@ -54,10 +54,6 @@ export const Menu = forwardRef(function Menu(
 ) {
   const {
     children,
-    // oxlint-disable-next-line no-deprecated, no-unused-vars
-    focusFirst,
-    // oxlint-disable-next-line no-deprecated, no-unused-vars
-    focusLast,
     onClickOutside,
     onEscape,
     onItemClick,
@@ -66,16 +62,10 @@ export const Menu = forwardRef(function Menu(
     originElement,
     padding = 1,
     registerElement,
-    shouldFocus: _shouldFocus,
-    gap,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 1,
+    shouldFocus = null,
+    gap = 1,
     ...restProps
   } = props
-  const spacing = gap === undefined ? deprecated_space : gap
-  const shouldFocus =
-    // oxlint-disable-next-line no-deprecated
-    _shouldFocus ?? ((props.focusFirst && 'first') || (props.focusLast && 'last') || null)
 
   const ref = useRef<HTMLDivElement | null>(null)
 
@@ -174,7 +164,7 @@ export const Menu = forwardRef(function Menu(
         role="menu"
         tabIndex={-1}
       >
-        <Stack gap={spacing}>{children}</Stack>
+        <Stack gap={gap}>{children}</Stack>
       </StyledMenu>
     </MenuContext.Provider>
   )

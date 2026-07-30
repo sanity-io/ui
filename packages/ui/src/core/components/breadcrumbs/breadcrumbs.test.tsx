@@ -32,25 +32,10 @@ describe('components/breadcrumbs spacing', () => {
     mockedBox.mockClear()
   })
 
-  it('should support `space` and `gap` with the same behavior', () => {
-    // oxlint-disable-next-line no-deprecated
-    renderBreadcrumbs({space: 2})
-    expect(mockedBox.mock.calls.map(([props]) => props)).toContainEqual(
-      expect.objectContaining({paddingX: [2]}),
-    )
-
-    mockedBox.mockClear()
+  it('should support `gap`', () => {
     renderBreadcrumbs({gap: 2})
     expect(mockedBox.mock.calls.map(([props]) => props)).toContainEqual(
       expect.objectContaining({paddingX: [2]}),
     )
-  })
-
-  it('should prefer `gap` over `space` when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    renderBreadcrumbs({gap: 3, space: 1})
-    const propsList = mockedBox.mock.calls.map(([props]) => props)
-    expect(propsList).toContainEqual(expect.objectContaining({paddingX: [3]}))
-    expect(propsList).not.toContainEqual(expect.objectContaining({paddingX: [1]}))
   })
 })
