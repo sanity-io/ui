@@ -53,7 +53,7 @@ export interface AvatarStackProps {
   maxLength?: number
   size?: AvatarSize | AvatarSize[]
   /** @deprecated No longer supported. */
-  tone?: 'navbar'
+  tone?: never
 }
 
 /**

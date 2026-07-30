@@ -63,14 +63,8 @@ const BoxComponent = forwardRef(function Box(
   const {
     as: asProp = 'div',
     gridColumn,
-    // oxlint-disable-next-line no-deprecated
-    column: deprecated_column,
     gridColumnStart,
-    // oxlint-disable-next-line no-deprecated
-    columnStart: deprecated_columnStart,
     gridColumnEnd,
-    // oxlint-disable-next-line no-deprecated
-    columnEnd: deprecated_columnEnd,
     display = 'block',
     flex,
     height,
@@ -90,32 +84,20 @@ const BoxComponent = forwardRef(function Box(
     paddingBottom,
     paddingLeft,
     gridRow,
-    // oxlint-disable-next-line no-deprecated
-    row: deprecated_row,
     gridRowStart,
-    // oxlint-disable-next-line no-deprecated
-    rowStart: deprecated_rowStart,
     gridRowEnd,
-    // oxlint-disable-next-line no-deprecated
-    rowEnd: deprecated_rowEnd,
     sizing,
     ...restProps
   } = props
-  const column = gridColumn === undefined ? deprecated_column : gridColumn
-  const columnStart = gridColumnStart === undefined ? deprecated_columnStart : gridColumnStart
-  const columnEnd = gridColumnEnd === undefined ? deprecated_columnEnd : gridColumnEnd
-  const row = gridRow === undefined ? deprecated_row : gridRow
-  const rowStart = gridRowStart === undefined ? deprecated_rowStart : gridRowStart
-  const rowEnd = gridRowEnd === undefined ? deprecated_rowEnd : gridRowEnd
 
   return (
     <StyledBox
       data-as={typeof asProp === 'string' ? asProp : undefined}
       data-ui="Box"
       {...restProps}
-      $column={_getArrayProp(column)}
-      $columnStart={_getArrayProp(columnStart)}
-      $columnEnd={_getArrayProp(columnEnd)}
+      $column={_getArrayProp(gridColumn)}
+      $columnStart={_getArrayProp(gridColumnStart)}
+      $columnEnd={_getArrayProp(gridColumnEnd)}
       $display={_getArrayProp(display)}
       $flex={_getArrayProp(flex)}
       $height={_getArrayProp(height)}
@@ -134,9 +116,9 @@ const BoxComponent = forwardRef(function Box(
       $paddingRight={_getArrayProp(paddingRight)}
       $paddingBottom={_getArrayProp(paddingBottom)}
       $paddingLeft={_getArrayProp(paddingLeft)}
-      $row={_getArrayProp(row)}
-      $rowStart={_getArrayProp(rowStart)}
-      $rowEnd={_getArrayProp(rowEnd)}
+      $row={_getArrayProp(gridRow)}
+      $rowStart={_getArrayProp(gridRowStart)}
+      $rowEnd={_getArrayProp(gridRowEnd)}
       $sizing={_getArrayProp(sizing)}
       // styled-components 6.5 distributes PolymorphicCallProps over ElementType and
       // hits TS2589; narrow the call-site target while still passing the real value.

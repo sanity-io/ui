@@ -15,9 +15,9 @@ export interface HotkeysProps {
   padding?: number | number[]
   radius?: Radius | Radius[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   keys?: string[]
 }
 
@@ -45,9 +45,8 @@ export const Hotkeys = forwardRef(function Hotkeys(
   props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
   ref: React.Ref<HTMLElement>,
 ) {
-  // oxlint-disable-next-line no-deprecated
-  const {fontSize, gap, keys, padding, radius, space: deprecated_space = 0.5, ...restProps} = props
-  const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
+  const {fontSize, gap = 0.5, keys, padding, radius, ...restProps} = props
+  const spacing = _getArrayProp(gap)
 
   if (!keys || keys.length === 0) {
     return <></>
