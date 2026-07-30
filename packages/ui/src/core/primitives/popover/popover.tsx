@@ -199,6 +199,8 @@ export const Popover = forwardRef(function Popover(
   const zOffset = _getArrayProp(zOffsetProp)
   const ref = useRef<HTMLDivElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
+  /** Once opened with `animate`, keep the popover mounted under Activity for exit/re-entry. */
+  const hasBeenShownRef = useRef(false)
   const rootBoundary: RootBoundary = 'viewport'
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
@@ -365,16 +367,20 @@ export const Popover = forwardRef(function Popover(
     popover
   )
 
+  if (open) {
+    hasBeenShownRef.current = true
+  }
+
   return (
     <>
       {/* the popover */}
-      {animate ? (
-        <AnimateActivity layoutMode="default" mode={open ? 'visible' : 'hidden'}>
-          {popoverNode}
-        </AnimateActivity>
-      ) : (
-        open && popoverNode
-      )}
+      {animate
+        ? hasBeenShownRef.current && (
+            <AnimateActivity layoutMode="default" mode={open ? 'visible' : 'hidden'}>
+              {popoverNode}
+            </AnimateActivity>
+          )
+        : open && popoverNode}
 
       {/* the referred element */}
       {child}
