@@ -1,10 +1,4 @@
-import {
-  type API,
-  type ASTPath,
-  type ImportDeclaration,
-  type JSXOpeningElement,
-  type VariableDeclarator,
-} from 'jscodeshift'
+import {type API, type ASTPath, type ImportDeclaration, type JSXOpeningElement} from 'jscodeshift'
 
 type CommentableNode = {
   comments?: {type: string; value: string; leading?: boolean}[] | null
@@ -16,19 +10,13 @@ type CommentableNode = {
  */
 export function insertTodoWarning(
   j: API['jscodeshift'],
-  path: ASTPath<JSXOpeningElement | ImportDeclaration | VariableDeclarator>,
+  path: ASTPath<JSXOpeningElement | ImportDeclaration>,
   warning: string,
 ): boolean {
   let target: CommentableNode | null = null
 
   if (path.node.type === 'ImportDeclaration') {
     target = path.node
-  } else if (path.node.type === 'VariableDeclarator') {
-    const parent = path.parent
-
-    if (parent?.node.type === 'VariableDeclaration') {
-      target = parent.node
-    }
   } else if (path.parent?.node.type === 'JSXElement') {
     target = path.parent.node
   }

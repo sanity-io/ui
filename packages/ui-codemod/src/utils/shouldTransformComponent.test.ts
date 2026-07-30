@@ -18,6 +18,20 @@ describe('shouldTransformComponent', () => {
     expect(shouldTransformComponent(j, root, 'Box', new Set())).toBe(false)
   })
 
+  it('returns true when styled aliases are passed in', () => {
+    const root = j(`
+      import {RootBox} from './Component.styled'
+
+      export function Component() {
+        return <RootBox />
+      }
+    `)
+
+    expect(
+      shouldTransformComponent(j, root, 'Box', new Set(), undefined, new Set(['RootBox'])),
+    ).toBe(true)
+  })
+
   it('returns false when fromPackage and toPackage are the same', () => {
     const root = j(`
       import {Box} from '@legacy/ui'
