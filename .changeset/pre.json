@@ -16,6 +16,8 @@
   },
   "changesets": [
     "next-prerelease-kickoff",
+    "react-19-compiler-target",
+    "remove-visual-editing-export",
     "ui-deprecated-tombstones"
   ]
 }
