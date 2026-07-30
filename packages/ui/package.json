@@ -30,9 +30,6 @@
   "types": "./dist/index.d.cts",
   "typesVersions": {
     "*": {
-      "_visual-editing": [
-        "./dist/_visual-editing.d.cts"
-      ],
       "theme": [
         "./dist/theme.d.cts"
       ]
@@ -40,7 +37,6 @@
   },
   "exports": {
     ".": "./exports/index.ts",
-    "./_visual-editing": "./exports/_visual-editing.ts",
     "./theme": "./exports/theme.ts",
     "./package.json": "./package.json"
   },
@@ -49,10 +45,6 @@
       ".": {
         "import": "./dist/index.js",
         "require": "./dist/index.cjs"
-      },
-      "./_visual-editing": {
-        "import": "./dist/_visual-editing.js",
-        "require": "./dist/_visual-editing.cjs"
       },
       "./theme": {
         "import": "./dist/theme.js",
