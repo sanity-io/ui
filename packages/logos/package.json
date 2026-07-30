@@ -22,14 +22,19 @@
   ],
   "type": "module",
   "sideEffects": false,
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
   "exports": {
     ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "exports": {
-      ".": "./dist/index.js",
+      ".": {
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      },
       "./package.json": "./package.json"
     }
   },
@@ -56,6 +61,6 @@
     "react": "^18.3 || ^19.0.0-0"
   },
   "engines": {
-    "node": ">=22.12"
+    "node": ">=14.0.0"
   }
 }
