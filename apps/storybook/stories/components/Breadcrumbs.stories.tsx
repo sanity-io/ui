@@ -17,8 +17,7 @@ const meta: Meta<typeof Breadcrumbs> = {
       <Text key="item">Item</Text>,
     ],
   },
-  // oxlint-disable-next-line no-deprecated
-  argTypes: {gap: getSpaceControls(), space: getSpaceControls()},
+  argTypes: {gap: getSpaceControls()},
   component: Breadcrumbs,
   tags: ['autodocs'],
 }

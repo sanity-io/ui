@@ -11,8 +11,6 @@ const meta: Meta<typeof Hotkeys> = {
   },
   argTypes: {
     gap: getSpaceControls(),
-    // oxlint-disable-next-line no-deprecated
-    space: getSpaceControls(),
   },
   component: Hotkeys,
   tags: ['autodocs'],
