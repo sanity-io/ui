@@ -334,6 +334,9 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
   return (
     <Popover
       fallbackPlacements={fallbackPlacements}
+      // Closed popovers keep their content mounted inside a hidden <Activity> boundary, so an
+      // unconditionally recursive `content` would render an infinitely deep hidden tree.
+      // Recursive structures must gate the recursion on `open`.
       content={open ? <RecursiveExample onClose={handleClose} /> : null}
       open={open}
       padding={1}
