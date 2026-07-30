@@ -52,7 +52,6 @@
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
     "@sanity/ui": "workspace:^",
-    "react-compiler-runtime": "1.0.0",
     "react-refractor": "catalog:",
     "refractor": "catalog:"
   },
@@ -70,7 +69,7 @@
     "vitest": "catalog:"
   },
   "peerDependencies": {
-    "react": "^19",
+    "react": "^19.2",
     "sanity": "^6",
     "styled-components": "^6"
   },
