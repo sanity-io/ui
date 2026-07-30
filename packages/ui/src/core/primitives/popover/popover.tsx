@@ -181,11 +181,13 @@ export const Popover = forwardRef(function Popover(
     updateRef,
     ...restProps
   } = props
-  const boundaryElement = boundaryElementContext?.element
   const fallbackPlacements =
     _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
   const floatingBoundary = _floatingBoundary ?? boundaryElementContext.element
   const referenceBoundary = _referenceBoundary ?? boundaryElementContext.element
+  // Max-width uses BoundaryElementProvider when present; otherwise the floating
+  // boundary (same element the old `boundaryElement` prop used for both).
+  const boundaryElement = boundaryElementContext.element ?? floatingBoundary
   const zOffsetProp = _zOffsetProp ?? layer.popover.zOffset
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
