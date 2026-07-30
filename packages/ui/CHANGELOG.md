@@ -1,5 +1,16 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.23
+
+### Patch Changes
+
+- 8eec624: switch container contentSize to size and skipToContent hash to href
+- 2100631: chore: export empty types module for styles.css
+- 941e471: - support conditional prop defs
+  - add eyebrow component
+  - rename typography lineClamp prop to truncate, make align and truncate responsive
+- 8531e04: re-export types
+
 ## 0.0.1-alpha.22
 
 ### Patch Changes
