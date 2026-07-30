@@ -1,5 +1,5 @@
 import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
-import {forwardRef, useImperativeHandle, useRef} from 'react'
+import {useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -40,9 +40,8 @@ const IconBox = styled(Box)(selectStyle.iconBox)
  *
  * @public
  */
-export const Select = forwardRef(function Select(
+export const Select = function Select(
   props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>,
-  forwardedRef: React.ForwardedRef<HTMLSelectElement>,
 ) {
   const {
     children,
@@ -53,6 +52,7 @@ export const Select = forwardRef(function Select(
     padding = 3,
     radius = 2,
     readOnly,
+    ref: forwardedRef,
     ...restProps
   } = props
 
@@ -88,4 +88,4 @@ export const Select = forwardRef(function Select(
       </IconBox>
     </StyledSelect>
   )
-})
+}

@@ -1,4 +1,4 @@
-import {forwardRef, useImperativeHandle, useMemo, useState} from 'react'
+import {useImperativeHandle, useMemo, useState} from 'react'
 
 import {useElementSize} from '../../hooks/useElementSize'
 import {useTheme_v2} from '../../theme/useTheme'
@@ -17,12 +17,11 @@ export interface MediaQueryProps {
  * DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const ElementQuery = forwardRef(function ElementQuery(
+export const ElementQuery = function ElementQuery(
   props: MediaQueryProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'media'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const theme = useTheme_v2()
-  const {children, media: _media, ...restProps} = props
+  const {children, media: _media, ref: forwardedRef, ...restProps} = props
   const media = _media ?? theme.media
 
   const [element, setElement] = useState<HTMLDivElement | null>(null)
@@ -49,4 +48,4 @@ export const ElementQuery = forwardRef(function ElementQuery(
       {children}
     </div>
   )
-})
+}

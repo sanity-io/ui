@@ -1,4 +1,4 @@
-import {forwardRef, isValidElement, useMemo} from 'react'
+import {isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
@@ -71,16 +71,16 @@ const LoadingBox = styled.div`
   box-shadow: inherit;
 `
 
-const ButtonComponent = forwardRef(function Button(
+const ButtonComponent = function Button(
   props: ButtonOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLButtonElement>,
       'as' | 'width'
     >,
-  ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
     children,
     disabled,
+    ref,
     fontSize = 1,
     icon: IconComponent,
     iconRight: IconRightComponent,
@@ -194,7 +194,7 @@ const ButtonComponent = forwardRef(function Button(
       )}
     </StyledButton>
   )
-})
+}
 
 /**
  * @public

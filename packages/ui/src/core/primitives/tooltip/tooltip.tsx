@@ -11,7 +11,6 @@ import {
 import {
   Activity,
   cloneElement,
-  forwardRef,
   useCallback,
   useEffect,
   useId,
@@ -26,7 +25,7 @@ import {styled} from 'styled-components'
 // https://github.com/facebook/react/issues/34818 is fixed in the lowest React
 // version we support: on React 19.2 the native hook never sees values past
 // the first render when the calling component is wrapped in `forwardRef` or
-// `memo`, and `Tooltip` is a `forwardRef` component.
+// `memo`, and consumers may wrap `Tooltip` in `memo`.
 import {useEffectEvent} from 'use-effect-event'
 
 import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
@@ -99,9 +98,8 @@ const StyledTooltip = styled(Layer)`
  *
  * @public
  */
-export const Tooltip = forwardRef(function Tooltip(
+export const Tooltip = function Tooltip(
   props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const boundaryElementContext = useBoundaryElement()
   const {layer} = useTheme_v2()
@@ -117,6 +115,7 @@ export const Tooltip = forwardRef(function Tooltip(
     placement: placementProp = 'bottom',
     portal: portalProp,
     radius = 2,
+    ref: forwardedRef,
     scheme,
     shadow = 2,
     zOffset: _zOffset,
@@ -403,7 +402,7 @@ export const Tooltip = forwardRef(function Tooltip(
       {child}
     </>
   )
-})
+}
 
 function useMiddleware({
   animate,
