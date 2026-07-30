@@ -55,7 +55,12 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   config only imports on the Node version in CI when the package is
   `"type": "module"`, while `.mts` always works). The build regenerates
   package.json `exports`
-  (dev exports): in the monorepo, `@sanity/ui`, `@sanity/ui/theme`,
+  (dev exports): in the monorepo, `@sanity/ui` (incl. its subpath entry
+  points — one per file in `packages/ui/src/exports/`, e.g. `@sanity/ui/theme`
+  and `@sanity/ui/toast`; components with heavy dependencies like `motion`,
+  `@floating-ui/react-dom` and `react-refractor` live on their own subpaths so
+  the root entry never references them, and adding a file to `src/exports/`
+  plus running the build is all it takes to publish a new subpath),
   `@sanity/icons` (incl. its per-icon subpaths) and `@sanity/color` resolve
   directly to TypeScript source for every tool (tsc, oxlint's type checker,
   vitest, vite), so there are no tsconfig `paths`, no `customConditions`, and
@@ -67,15 +72,15 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   (`@sanity/ui`, `@sanity/icons` and `@sanity/themer` ship ESM only).
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
   `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
-  `@sanity/ui` resolves to the `packages/ui/exports/` source (and
+  `@sanity/ui` resolves to the `packages/ui/src/exports/` source (and
   `@sanity/color` to `packages/color/src`) through the dev `exports`, so unit
   tests run directly against source and do not require a `pnpm build` first.
 - `packages/color/src/color.ts` is generated from `packages/color/src/config.ts`:
   regenerate it with `pnpm --filter @sanity/color generate` after changing the
   palette config; never edit it by hand.
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. It
-  resolves `@sanity/ui` to the `packages/ui/exports/` source through the dev
-  `exports`, so it hot-reloads source edits directly (no rebuild needed).
+  resolves `@sanity/ui` to the `packages/ui/src/exports/` source through the
+  dev `exports`, so it hot-reloads source edits directly (no rebuild needed).
 - `packages/icons` (migrated from the standalone `sanity-io/icons` repo)
   generates its icon components from the SVG sources in
   `packages/icons/export/`: `pnpm --filter @sanity/icons generate` (also run

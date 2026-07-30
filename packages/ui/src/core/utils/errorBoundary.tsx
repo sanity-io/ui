@@ -1,7 +1,5 @@
 import {Component, PropsWithChildren} from 'react'
 
-import {Code} from '../primitives/code/code'
-
 /**
  * DO NOT USE IN PRODUCTION
  * @beta
@@ -40,7 +38,14 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     if (error) {
       const message = typeof error?.message === 'string' ? error.message : 'Error'
 
-      return <Code>{message}</Code>
+      // A plain element rather than the `Code` primitive: `Code` lives on the
+      // `@sanity/ui/code` entry point (it lazy-loads `react-refractor`), and
+      // the root entry point must not reference that module graph.
+      return (
+        <pre data-ui="ErrorBoundary">
+          <code>{message}</code>
+        </pre>
+      )
     }
 
     return this.props.children
