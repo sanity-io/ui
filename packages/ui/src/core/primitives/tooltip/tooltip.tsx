@@ -127,8 +127,6 @@ export const Tooltip = forwardRef(function Tooltip(
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
-  /** Once opened with `animate`, keep the tooltip mounted under Activity for exit/re-entry. */
-  const hasBeenShownRef = useRef(false)
   const rootBoundary: RootBoundary = 'viewport'
   const [tooltipMaxWidth, setTooltipMaxWidth] = useState(0)
 
@@ -384,20 +382,16 @@ export const Tooltip = forwardRef(function Tooltip(
     tooltip
   )
 
-  if (showTooltip) {
-    hasBeenShownRef.current = true
-  }
-
   return (
     <>
       {/* the tooltip */}
-      {animate
-        ? hasBeenShownRef.current && (
-            <AnimateActivity layoutMode="default" mode={showTooltip ? 'visible' : 'hidden'}>
-              {tooltipNode}
-            </AnimateActivity>
-          )
-        : showTooltip && tooltipNode}
+      {animate ? (
+        <AnimateActivity layoutMode="default" mode={showTooltip ? 'visible' : 'hidden'}>
+          {tooltipNode}
+        </AnimateActivity>
+      ) : (
+        showTooltip && tooltipNode
+      )}
 
       {/* the referred element */}
       {child}

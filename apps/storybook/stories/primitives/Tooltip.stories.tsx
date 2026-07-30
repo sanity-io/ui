@@ -13,7 +13,7 @@ import {
 } from '@sanity/ui'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useCallback, useMemo, useState} from 'react'
-import {userEvent, within} from 'storybook/test'
+import {expect, userEvent, waitFor, within} from 'storybook/test'
 
 import {PLACEMENT_OPTIONS} from '../constants'
 import {getShadowControls, getSpaceControls} from '../controls'
@@ -102,7 +102,11 @@ export const WithOpenDelay: Story = {
     const button = canvas.getByText('Hover me')
 
     await userEvent.hover(button)
-    await canvas.findByText("I'm a tooltip")
+    // Animated tooltips are pre-rendered in the DOM inside a hidden <Activity>,
+    // so wait for the tooltip to become visible rather than just present.
+    await waitFor(() => {
+      expect(canvas.getByText("I'm a tooltip").checkVisibility()).toBe(true)
+    })
   },
 }
 
@@ -133,7 +137,12 @@ export const WithDelayGroup: Story = {
     const button = canvas.getAllByText('Hover me')[0]
 
     await userEvent.hover(button)
-    await canvas.findByText("I'm a tooltip")
+    // All animated tooltips are pre-rendered in the DOM inside hidden
+    // <Activity> boundaries, so wait for one of them to become visible.
+    await waitFor(() => {
+      const tooltips = canvas.getAllByText("I'm a tooltip")
+      expect(tooltips.some((element) => element.checkVisibility())).toBe(true)
+    })
   },
 }
 
