@@ -22,8 +22,6 @@ const meta: Meta<typeof Select> = {
     padding: getSpaceControls(),
     radius: getRadiusControls(),
     gap: getSpaceControls(),
-    // oxlint-disable-next-line no-deprecated
-    space: getSpaceControls(),
   },
   component: Select,
   tags: ['autodocs'],

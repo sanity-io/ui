@@ -37,23 +37,11 @@ export const AsGridItem: Story = {
   },
   argTypes: {
     gridColumn: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    column: {control: {type: 'number', min: 1, max: 12}},
     gridColumnStart: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    columnStart: {control: {type: 'number', min: 1, max: 12}},
     gridColumnEnd: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    columnEnd: {control: {type: 'number', min: 1, max: 12}},
     gridRow: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    row: {control: {type: 'number', min: 1, max: 12}},
     gridRowStart: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    rowStart: {control: {type: 'number', min: 1, max: 12}},
     gridRowEnd: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    rowEnd: {control: {type: 'number', min: 1, max: 12}},
   },
   render: (props) => {
     return (

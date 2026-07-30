@@ -79,9 +79,9 @@ export interface TextInputProps {
   prefix?: React.ReactNode
   radius?: Radius | Radius[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   gap?: number | number[]
   suffix?: React.ReactNode
   type?: TextInputType
@@ -170,7 +170,7 @@ export const TextInput = forwardRef(function TextInput(
     clearButton,
     disabled = false,
     fontSize: fontSizeProp = 2,
-    gap,
+    gap = 3,
     icon: IconComponent,
     iconRight: IconRightComponent,
     onClear,
@@ -178,8 +178,6 @@ export const TextInput = forwardRef(function TextInput(
     prefix,
     radius: radiusProp = 2,
     readOnly,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 3,
     suffix,
     customValidity,
     type = 'text',
@@ -193,7 +191,7 @@ export const TextInput = forwardRef(function TextInput(
   const fontSize = _getArrayProp(fontSizeProp)
   const padding = _getArrayProp(paddingProp)
   const radius = _getArrayProp(radiusProp)
-  const space = _getArrayProp(gap === undefined ? deprecated_space : gap)
+  const space = _getArrayProp(gap)
 
   // Transient properties
   const $hasClearButton = Boolean(clearButton)

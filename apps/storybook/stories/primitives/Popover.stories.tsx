@@ -453,8 +453,8 @@ function AlignedStory() {
       <Card height="fill" padding={2} ref={setBoundaryElement} shadow={1} sizing="border">
         <Flex align="flex-start" height="fill" justify="flex-end">
           <Popover
-            // oxlint-disable-next-line no-deprecated
-            boundaryElement={boundaryElement}
+            floatingBoundary={boundaryElement}
+            referenceBoundary={boundaryElement}
             content={content}
             open={open}
             overflow="auto"
@@ -498,8 +498,7 @@ function SidePanelStory() {
       </Card>
       <BoundaryElementProvider element={sidePanel}>
         <Card borderLeft flex="none" ref={setSidePanel} style={{width: 400}}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack padding={4} space={5}>
+          <Stack padding={4} gap={5}>
             <Text muted size={1}>
               Click the <code>reference</code> text below to toggle the popover.
             </Text>

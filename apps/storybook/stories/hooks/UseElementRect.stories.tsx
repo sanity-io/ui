@@ -1,4 +1,4 @@
-import {Box, Card, Code, Container, Grid, Stack, Text, useElementRect} from '@sanity/ui'
+import {Box, Card, Code, Container, Grid, Stack, Text, useElementSize} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'
 
@@ -11,17 +11,17 @@ type Story = StoryObj
 
 function ExampleStory() {
   const [element, setElement] = useState<HTMLElement | null>(null)
-  // oxlint-disable-next-line no-deprecated
-  const rect = useElementRect(element)
-  const size = {width: rect?.width || 0, height: rect?.height || 0}
+  const elementSize = useElementSize(element)
+  const size = {
+    width: elementSize?.border.width || 0,
+    height: elementSize?.border.height || 0,
+  }
 
   return (
     <Box padding={[3, 4, 5]}>
       <Container width={1}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={4}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Grid columns={[1, 2, 3]}>
+        <Stack gap={4}>
+          <Grid gridTemplateColumns={[1, 2, 3]}>
             <Card ref={setElement} tone="transparent">
               <Text>rect</Text>
             </Card>

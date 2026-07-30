@@ -32,14 +32,10 @@ const GridComponent = forwardRef(function Grid(
     autoRows,
     autoCols,
     autoFlow,
-    // oxlint-disable-next-line no-deprecated
-    columns,
     gridTemplateColumns,
     gap,
     gapX,
     gapY,
-    // oxlint-disable-next-line no-deprecated
-    rows,
     gridTemplateRows,
     children,
     ...restProps
@@ -53,11 +49,11 @@ const GridComponent = forwardRef(function Grid(
       $autoRows={_getArrayProp(autoRows)}
       $autoCols={_getArrayProp(autoCols)}
       $autoFlow={_getArrayProp(autoFlow)}
-      $columns={_getArrayProp(gridTemplateColumns === undefined ? columns : gridTemplateColumns)}
+      $columns={_getArrayProp(gridTemplateColumns)}
       $gap={_getArrayProp(gap)}
       $gapX={_getArrayProp(gapX)}
       $gapY={_getArrayProp(gapY)}
-      $rows={_getArrayProp(gridTemplateRows === undefined ? rows : gridTemplateRows)}
+      $rows={_getArrayProp(gridTemplateRows)}
       forwardedAs={as}
       ref={ref}
     >

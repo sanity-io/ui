@@ -34,9 +34,9 @@ export interface ButtonOwnProps extends ResponsivePaddingProps, ResponsiveRadius
   loading?: boolean
   selected?: boolean
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   gap?: number | number[]
   muted?: boolean
   text?: React.ReactNode
@@ -96,9 +96,7 @@ const ButtonComponent = forwardRef(function Button(
     paddingRight: paddingRightProp,
     radius: radiusProp = 2,
     selected,
-    gap,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 3,
+    gap = 3,
     text,
     textAlign,
     textWeight,
@@ -119,7 +117,7 @@ const ButtonComponent = forwardRef(function Button(
   const paddingLeft = _getArrayProp(paddingLeftProp)
   const paddingRight = _getArrayProp(paddingRightProp)
   const radius = _getArrayProp(radiusProp)
-  const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
+  const spacing = _getArrayProp(gap)
 
   const boxProps = useMemo(
     () => ({

@@ -60,8 +60,7 @@ function Color(props: {color: ThemeColorCard_v2; tone: CardTone}) {
 
   return (
     <Card padding={[3, 4]} tone={tone}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack space={[3, 4]}>
+      <Stack gap={[3, 4]}>
         <ColorBase color={color} />
 
         <ColorButton color={color.button} />
@@ -97,8 +96,7 @@ function ColorBase(props: {color: ThemeColorCard_v2}) {
   return (
     <Stack
       padding={3}
-      // oxlint-disable-next-line no-deprecated
-      space={2}
+      gap={2}
       style={{
         borderRadius: 3,
         boxShadow: `inset 0 0 0 1px ${color.border}`,
@@ -128,8 +126,7 @@ function ColorButton(props: {color: ThemeColorButton_v2}) {
   const {color} = props
 
   return (
-    // oxlint-disable-next-line no-deprecated
-    <Stack space={3}>
+    <Stack gap={3}>
       <ColorButtonMode color={color.default} />
       <ColorButtonMode color={color.ghost} />
       <ColorButtonMode color={color.bleed} />
@@ -141,10 +138,8 @@ function ColorButtonMode(props: {color: ThemeColorButtonMode_v2}) {
   const {color} = props
 
   return (
-    // oxlint-disable-next-line no-deprecated
-    <Stack space={1}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Grid columns={5} marginBottom={1} gap={1}>
+    <Stack gap={1}>
+      <Grid gridTemplateColumns={5} marginBottom={1} gap={1}>
         <Box>
           <Text align="center" muted size={1}>
             Enabled
@@ -184,8 +179,7 @@ function ColorGenericStates(props: {color: ThemeColorButtonTone_v2}) {
   const {color} = props
 
   return (
-    // oxlint-disable-next-line no-deprecated
-    <Grid columns={5} gap={1}>
+    <Grid gridTemplateColumns={5} gap={1}>
       <ColorGenericState color={color.enabled} />
       <ColorGenericState color={color.hovered} />
       <ColorGenericState color={color.pressed} />
@@ -212,8 +206,7 @@ function ColorGenericState(props: {color: ThemeColorState_v2}) {
   return (
     <Stack
       padding={2}
-      // oxlint-disable-next-line no-deprecated
-      space={2}
+      gap={2}
       style={{
         backgroundColor: color.bg,
         color: color.fg,
@@ -264,8 +257,7 @@ function ColorSelectable(props: {color: ThemeColorSelectable_v2}) {
   const {color} = props
 
   return (
-    // oxlint-disable-next-line no-deprecated
-    <Stack space={1}>
+    <Stack gap={1}>
       <ColorSelectableTone color={color.default} />
       <ColorSelectableTone color={color.primary} />
       <ColorSelectableTone color={color.positive} />
@@ -279,8 +271,7 @@ function ColorSelectableTone(props: {color: ThemeColorSelectableTone_v2}) {
   const {color} = props
 
   return (
-    // oxlint-disable-next-line no-deprecated
-    <Grid columns={5} gap={1}>
+    <Grid gridTemplateColumns={5} gap={1}>
       <ColorGenericState color={color.enabled} />
       <ColorGenericState color={color.hovered} />
       <ColorGenericState color={color.pressed} />

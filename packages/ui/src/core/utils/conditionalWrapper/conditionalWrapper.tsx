@@ -1,19 +1,9 @@
 /**
  * @internal
- * @deprecated this component will be removed in the next major release
+ * @deprecated ConditionalWrapper was removed in @sanity/ui v4. Inline the conditional wrapping logic instead.
  */
-export function ConditionalWrapper({
-  children,
-  condition,
-  wrapper,
-}: {
-  children: React.ReactNode
-  condition: boolean
-  wrapper: (children: React.ReactNode) => React.ReactNode
-}): React.ReactNode {
-  if (!condition) {
-    return children
-  }
-
-  return wrapper(children)
+export function ConditionalWrapper(_props?: never): never {
+  throw new Error(
+    '`ConditionalWrapper` was removed in @sanity/ui v4. Inline the conditional wrapping logic instead.',
+  )
 }
