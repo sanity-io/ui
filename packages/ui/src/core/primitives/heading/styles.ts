@@ -9,15 +9,19 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
   const {font} = getTheme_v2(props.theme)
 
   return css`
-    ${$accent &&
-    css`
-      color: var(--card-accent-fg-color);
-    `}
+    ${
+      $accent &&
+      css`
+        color: var(--card-accent-fg-color);
+      `
+    }
 
-    ${$muted &&
-    css`
-      color: var(--card-muted-fg-color);
-    `}
+    ${
+      $muted &&
+      css`
+        color: var(--card-muted-fg-color);
+      `
+    }
 
     & code {
       font-family: ${font.code.family};

@@ -12,15 +12,19 @@ export function textBaseStyle(
   return css`
     color: var(--card-fg-color);
 
-    ${$accent &&
-    css`
-      color: var(--card-accent-fg-color);
-    `}
+    ${
+      $accent &&
+      css`
+        color: var(--card-accent-fg-color);
+      `
+    }
 
-    ${$muted &&
-    css`
-      color: var(--card-muted-fg-color);
-    `}
+    ${
+      $muted &&
+      css`
+        color: var(--card-muted-fg-color);
+      `
+    }
 
     & code {
       font-family: ${font.code.family};
