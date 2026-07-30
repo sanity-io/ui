@@ -1,6 +1,7 @@
-import {useDebugValue, useEffect, useEffectEvent} from 'react'
+import {useDebugValue, useEffect} from 'react'
 
 import {EMPTY_ARRAY} from '../constants'
+import {useEffectEvent} from './useEffectEvent'
 
 /**
  * @public

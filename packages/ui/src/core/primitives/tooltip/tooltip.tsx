@@ -17,7 +17,6 @@ import {
   useId,
   useImperativeHandle,
   useLayoutEffect,
-  useEffectEvent,
   useMemo,
   useRef,
   useState,
@@ -26,6 +25,7 @@ import {styled} from 'styled-components'
 
 import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {useDelayedState} from '../../hooks/useDelayedState'
+import {useEffectEvent} from '../../hooks/useEffectEvent'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
 import {_getArrayProp} from '../../styles/helpers'

@@ -1,4 +1,6 @@
-import {useEffect, useEffectEvent} from 'react'
+import {useEffect} from 'react'
+
+import {useEffectEvent} from './useEffectEvent'
 
 /**
  * Adds global keydown event listener to the window.
