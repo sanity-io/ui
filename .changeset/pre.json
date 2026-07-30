@@ -15,6 +15,7 @@
     "@sanity/ui": "3.5.0"
   },
   "changesets": [
+    "esm-only-node-22",
     "next-prerelease-kickoff",
     "react-19-compiler-target",
     "remove-visual-editing-export",
