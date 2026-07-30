@@ -50,7 +50,7 @@ import {useTooltipDelayGroup} from './tooltipDelayGroup/useTooltipDelayGroup'
  */
 export interface TooltipProps extends Omit<LayerProps, 'as'> {
   /** @deprecated Use `fallbackPlacements` instead. */
-  allowedAutoPlacements?: Placement[]
+  allowedAutoPlacements?: never
   arrow?: boolean
   boundaryElement?: HTMLElement | null
   children?: React.JSX.Element
