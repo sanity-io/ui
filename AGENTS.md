@@ -26,7 +26,7 @@ in `apps/blueprints/docs` (`pnpm-workspace.yaml`). The root `package.json` is a 
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
 (`packageManager` pin in `package.json`); developing in this repo requires Node
 `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
-supports `>=20.19 <22 || >=22.12` (see `packages/ui/package.json` engines).
+requires `>=22.12` (matching `sanity`; see `packages/ui/package.json` engines).
 
 Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
 `dev`). Notes that are not obvious from the scripts:
@@ -64,7 +64,7 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   comes from the Changesets config (`access: public`), so packages don't set
   `publishConfig.access`. All published packages are `"type": "module"`: dist
   ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
-  (`@sanity/icons` and `@sanity/themer` ship ESM only).
+  (`@sanity/ui`, `@sanity/icons` and `@sanity/themer` ship ESM only).
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
   `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
   `@sanity/ui` resolves to the `packages/ui/exports/` source (and
