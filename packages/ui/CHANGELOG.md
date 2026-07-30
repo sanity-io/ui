@@ -1,5 +1,18 @@
 # @sanity/ui
 
+## 4.0.0-next.3
+
+### Major Changes
+
+- [#2510](https://github.com/sanity-io/ui/pull/2510) [`c67e012`](https://github.com/sanity-io/ui/commit/c67e012e35455d57f0436e45d1a7fc2ec8af8656) Thanks [@stipsan](https://github.com/stipsan)! - Drop CommonJS support and require Node.js `>=22.12`
+
+  `@sanity/ui` is now ESM-only. The `require` export condition and CommonJS build
+  outputs (`.cjs` / `.d.cts`) have been removed, so it must be consumed via ESM
+  `import`. `@sanity/themer` was already ESM-only.
+
+  The Node.js `engines` range on `@sanity/ui` and `@sanity/themer` is raised to
+  `>=22.12` to match `sanity`.
+
 ## 4.0.0-next.2
 
 ### Major Changes
