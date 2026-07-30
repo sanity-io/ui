@@ -29,8 +29,6 @@ interface AnimateActivityProps {
   mode: 'visible' | 'hidden'
   layoutMode: 'default' | 'pop'
   children: React.ReactNode
-  /** Called after exit animations finish and the activity is about to hide. */
-  onExitComplete?: () => void
 }
 
 /**
@@ -39,12 +37,7 @@ interface AnimateActivityProps {
  *
  * @internal
  */
-export function AnimateActivity({
-  mode: modeFromProps,
-  layoutMode,
-  children,
-  onExitComplete: onExitCompleteProp,
-}: AnimateActivityProps) {
+export function AnimateActivity({mode: modeFromProps, layoutMode, children}: AnimateActivityProps) {
   /**
    * This is the mode that we'll render.
    */
@@ -67,10 +60,7 @@ export function AnimateActivity({
   /**
    * Set mode to "hidden" only when the exit animation is complete.
    */
-  const onExitComplete = () => {
-    setMode('hidden')
-    onExitCompleteProp?.()
-  }
+  const onExitComplete = () => setMode('hidden')
 
   invariant(Boolean(Activity), 'Activity component not found - upgrade to React 19.2.0 or higher')
 
