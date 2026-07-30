@@ -1,4 +1,3 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
 import {Inline} from '../../primitives/inline/inline'
@@ -41,11 +40,10 @@ const Key = styled(KBD)`
  *
  * @public
  */
-export const Hotkeys = forwardRef(function Hotkeys(
-  props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-  ref: React.Ref<HTMLElement>,
+export const Hotkeys = function Hotkeys(
+  props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
 ) {
-  const {fontSize, gap = 0.5, keys, padding, radius, ...restProps} = props
+  const {fontSize, gap = 0.5, keys, padding, radius, ref, ...restProps} = props
   const spacing = _getArrayProp(gap)
 
   if (!keys || keys.length === 0) {
@@ -64,4 +62,4 @@ export const Hotkeys = forwardRef(function Hotkeys(
       </Inline>
     </StyledHotkeys>
   )
-})
+}

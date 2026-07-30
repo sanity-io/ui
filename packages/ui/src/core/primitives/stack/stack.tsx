@@ -1,4 +1,3 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles/helpers'
@@ -27,11 +26,10 @@ const StyledStack = styled(Box)<ResponsiveStackSpaceStyleProps>(
   responsiveStackSpaceStyle,
 )
 
-const StackComponent = forwardRef(function Stack(
-  props: StackOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+const StackComponent = function Stack(
+  props: StackOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
 ) {
-  const {as, gap, ...restProps} = props
+  const {as, gap, ref, ...restProps} = props
 
   return (
     <StyledStack
@@ -43,7 +41,7 @@ const StackComponent = forwardRef(function Stack(
       ref={ref}
     />
   )
-})
+}
 
 /**
  * The `Stack` component is used to place elements on top of each other.

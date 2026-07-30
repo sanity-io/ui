@@ -1,5 +1,4 @@
 import {SpinnerIcon} from '@sanity/icons/Spinner'
-import {forwardRef} from 'react'
 import {keyframes, styled} from 'styled-components'
 
 import {Text} from '../text/text'
@@ -33,13 +32,12 @@ const StyledSpinner = styled(Text)`
  *
  * @public
  */
-export const Spinner = forwardRef(function Spinner(
+export const Spinner = function Spinner(
   props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   return (
-    <StyledSpinner data-ui="Spinner" {...props} ref={ref}>
+    <StyledSpinner data-ui="Spinner" {...props}>
       <SpinnerIcon />
     </StyledSpinner>
   )
-})
+}
