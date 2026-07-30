@@ -451,28 +451,28 @@ function AlignedStory() {
   return (
     <Card height="fill" padding={[4, 5, 6]} sizing="border" tone="transparent">
       <Card height="fill" padding={2} ref={setBoundaryElement} shadow={1} sizing="border">
-        <Flex align="flex-start" height="fill" justify="flex-end">
-          <Popover
-            // oxlint-disable-next-line no-deprecated
-            boundaryElement={boundaryElement}
-            content={content}
-            open={open}
-            overflow="auto"
-            padding={3}
-            portal
-            placement="bottom"
-            ref={popoverElementRef}
-            width="auto"
-          >
-            <Button
-              icon={EllipsisVerticalIcon}
-              mode="bleed"
-              onClick={handleToggleOpen}
-              ref={buttonElementRef}
-              selected={open}
-            />
-          </Popover>
-        </Flex>
+        <BoundaryElementProvider element={boundaryElement}>
+          <Flex align="flex-start" height="fill" justify="flex-end">
+            <Popover
+              content={content}
+              open={open}
+              overflow="auto"
+              padding={3}
+              portal
+              placement="bottom"
+              ref={popoverElementRef}
+              width="auto"
+            >
+              <Button
+                icon={EllipsisVerticalIcon}
+                mode="bleed"
+                onClick={handleToggleOpen}
+                ref={buttonElementRef}
+                selected={open}
+              />
+            </Popover>
+          </Flex>
+        </BoundaryElementProvider>
       </Card>
     </Card>
   )
@@ -498,8 +498,7 @@ function SidePanelStory() {
       </Card>
       <BoundaryElementProvider element={sidePanel}>
         <Card borderLeft flex="none" ref={setSidePanel} style={{width: 400}}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack padding={4} space={5}>
+          <Stack padding={4} gap={5}>
             <Text muted size={1}>
               Click the <code>reference</code> text below to toggle the popover.
             </Text>

@@ -59,8 +59,7 @@ export const Sizes: Story = {
   },
   render: (props) => {
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={3}>
+      <Stack gap={3}>
         <Label {...props} size={4} />
         <Label {...props} size={3} />
         <Label {...props} size={2} />
@@ -79,8 +78,7 @@ export const Weights: Story = {
   },
   render: (props) => {
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={3}>
+      <Stack gap={3}>
         <Label {...props} />
         <Label {...props} weight="medium" />
         <Label {...props} weight="semibold" />
@@ -94,8 +92,7 @@ export const OpticalAlignment: Story = {
   parameters: {controls: {include: []}},
   render: () => (
     <Box padding={[4, 5, 6]}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack space={1}>
+      <Stack gap={1}>
         {([4, 3, 2, 1, 0] as const).map((size) => (
           <Flex key={size}>
             <Card padding={0} tone="suggest">

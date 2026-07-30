@@ -3,7 +3,7 @@ import {ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {ComponentProps, ReactNode} from 'react'
 
 interface ColumnBuilderProps<T> {
-  gap?: ComponentProps<typeof Stack>['space']
+  gap?: ComponentProps<typeof Stack>['gap']
   renderItem: ({value, index}: {value: T; index: number}) => ReactNode
   rows: T[]
   scheme?: ThemeColorSchemeKey
@@ -17,8 +17,7 @@ export const columnBuilder = function <T>({
 }: ColumnBuilderProps<T>): ReactNode {
   return (
     <Card border={!!scheme} padding={scheme ? 4 : 0} radius={scheme ? 2 : 0} scheme={scheme}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack space={gap}>{rows.map((value, index) => renderItem({index, value}))}</Stack>
+      <Stack gap={gap}>{rows.map((value, index) => renderItem({index, value}))}</Stack>
     </Card>
   )
 }

@@ -156,8 +156,7 @@ export const PopoverModal: Story = {
   },
   render: (props) => {
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={4}>
+      <Stack gap={4}>
         <Flex gap={4} wrap="wrap">
           <MenuButton {...props} button={<Button text="Default " />} />
           <MenuButton
@@ -218,8 +217,7 @@ export const KeyboardNavigation: Story = {
   render: () => (
     <Card height="fill">
       <Box padding={[4, 5, 6]}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid columns={3} gap={2}>
+        <Grid gridTemplateColumns={3} gap={2}>
           <Button id="prev-button" mode="ghost" text="Prev" />
           <LayerProvider>
             <MenuButton
@@ -331,8 +329,7 @@ function SelectedItemFocusStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack space={4}>
+      <Stack gap={4}>
         <Code>selectedIndex={selectedIndex}</Code>
 
         <MenuButton
@@ -415,10 +412,8 @@ function ClosableStory() {
           button={<Button text="Open" />}
           id="closable-example"
           menu={
-            // oxlint-disable-next-line no-deprecated
-            <Menu padding={0} space={0}>
-              {/* oxlint-disable-next-line no-deprecated */}
-              <Stack padding={1} space={1}>
+            <Menu padding={0} gap={0}>
+              <Stack padding={1} gap={1}>
                 <MenuItem text="Item 1" />
                 <MenuItem text="Item 2" />
                 <MenuItem text="Item 3" />
@@ -573,17 +568,14 @@ function WithOnCloseStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack space={2}>
+      <Stack gap={2}>
         <MenuButton
           button={<Button text="With onClose callback" />}
           id="closable-example"
           onClose={handleClose}
           menu={
-            // oxlint-disable-next-line no-deprecated
-            <Menu padding={0} space={0}>
-              {/* oxlint-disable-next-line no-deprecated */}
-              <Stack padding={1} space={1}>
+            <Menu padding={0} gap={0}>
+              <Stack padding={1} gap={1}>
                 <MenuItem text="Item 1" />
                 <MenuItem text="Item 2" />
                 <MenuItem text="Item 3" />

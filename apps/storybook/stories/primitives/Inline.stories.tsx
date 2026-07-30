@@ -20,8 +20,6 @@ const meta: Meta<typeof Inline> = {
   },
   argTypes: {
     gap: getSpaceControls(),
-    // oxlint-disable-next-line no-deprecated
-    space: getSpaceControls(),
     padding: getSpaceControls(),
     paddingBottom: getSpaceControls(),
     paddingLeft: getSpaceControls(),
