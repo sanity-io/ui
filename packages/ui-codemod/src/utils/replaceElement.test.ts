@@ -3,6 +3,7 @@ import {type API, type FileInfo} from 'jscodeshift'
 import type {AttributeMods} from '../types/AttributeMods'
 import {defineInlineTest} from '../utils/testUtils'
 import {getAttribute} from './getAttribute'
+import {getComponentLocalNames} from './getComponentLocalNames'
 import {replaceElement} from './replaceElement'
 import {transformAttributes} from './transformAttributes'
 
@@ -139,9 +140,10 @@ defineInlineTest(
   'replaces element and combines imports',
 )
 
-function transformWithStyled(fileInfo: FileInfo, api: API): string {
+function transformWithLocalNames(fileInfo: FileInfo, api: API): string {
   const j = api.jscodeshift
   const root = j(fileInfo.source)
+  const localNames = getComponentLocalNames(j, root, 'Card')
 
   replaceElement(
     j,
@@ -149,78 +151,31 @@ function transformWithStyled(fileInfo: FileInfo, api: API): string {
     (attrs) => !getAttribute(attrs, 'margin'),
     {
       element: 'Card',
+      localNames,
+      callback: (path) => transformAttributes(j, path, FROM_MOD, 'Warning'),
     },
     {
       element: 'Box',
+      callback: (path) => transformAttributes(j, path, TO_MOD, 'Warning'),
     },
-    {replaceInStyled: true},
   )
 
   return root.toSource()
 }
 
 defineInlineTest(
-  transform,
+  transformWithLocalNames,
   {},
   `
-  import {Card} from '@sanity/ui'
+  import {Card as LegacyCard} from '@sanity/ui'
 
-  const RootCard = styled(Card)(({theme}) => {})
+  <LegacyCard padding={1}>Content</LegacyCard>
   `,
   `
-  import {Card} from '@sanity/ui'
+  // UI-POC-CODEMOD TODO: Consider renaming LegacyCard to Box
+  import { Box as LegacyCard } from '@sanity/ui';
 
-  const RootCard = styled(Card)(({theme}) => {})
+  <LegacyCard padding={1}>Content</LegacyCard>
   `,
-  'does not replace styled usage by default',
-)
-
-defineInlineTest(
-  transformWithStyled,
-  {},
-  `
-  import {Card} from '@sanity/ui'
-
-  const RootCard = styled(Card)(({theme}) => {})
-  `,
-  `
-  import {Box} from '@sanity/ui'
-
-  const RootCard = styled(Box)(({theme}) => {})
-  `,
-  'replaces styled usage when replaceInStyled is enabled',
-)
-
-defineInlineTest(
-  transformWithStyled,
-  {},
-  `
-  import {Card} from '@sanity/ui'
-
-  function Example() {
-    const RootCard = styled(Card)(({theme}) => {})
-
-    return (
-      <>
-        <Card margin={1} />
-        <Card padding={1} />
-      </>
-    )
-  }
-  `,
-  `
-  import { Card, Box } from '@sanity/ui';
-
-  function Example() {
-    const RootCard = styled(Box)(({theme}) => {})
-
-    return (
-      <>
-        <Card margin={1} />
-        <Box padding={1} />
-      </>
-    );
-  }
-  `,
-  'replaces styled and jsx usage',
+  'preserves aliased jsx name and rewrites import',
 )

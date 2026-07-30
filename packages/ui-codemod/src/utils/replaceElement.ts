@@ -2,6 +2,7 @@ import type {API, ASTPath, JSXAttribute, JSXOpeningElement, JSXSpreadAttribute} 
 
 import {addImportSpecifier} from './addImportSpecifier'
 import {removeUnusedImport} from './removeUnusedImport'
+import {transformImportAlias} from './transformImportAlias'
 
 export function replaceElement(
   j: API['jscodeshift'],
@@ -9,71 +10,73 @@ export function replaceElement(
   filter: (attrs: (JSXAttribute | JSXSpreadAttribute)[]) => boolean,
   from: {
     element: string
+    localNames?: Iterable<string>
     callback?: (path: ASTPath<JSXOpeningElement>) => void
   },
   to: {
     element: string
     callback?: (path: ASTPath<JSXOpeningElement>) => void
   },
-  options?: {
-    replaceInStyled?: boolean
-  },
 ) {
-  let needsImportUpdate = false
+  const names = new Set(from.localNames)
 
-  root
-    .find(j.JSXOpeningElement, {
-      name: {type: 'JSXIdentifier', name: from.element},
-    })
-    .forEach((path) => {
-      const openingEl = path.node
-      const attrs = openingEl.attributes
+  if (names.size === 0) {
+    names.add(from.element)
+  }
 
-      if (!attrs || !filter(attrs)) {
-        from.callback?.(path)
-        return
+  let needsDefaultImportUpdate = false
+  const aliases = new Set<string>()
+
+  root.find(j.JSXOpeningElement).forEach((path) => {
+    const openingEl = path.node
+    const openingName = openingEl.name
+
+    if (openingName.type !== 'JSXIdentifier' || !names.has(openingName.name)) {
+      return
+    }
+
+    const attrs = openingEl.attributes
+
+    if (!attrs || !filter(attrs)) {
+      from.callback?.(path)
+      return
+    }
+
+    const localTag = openingName.name
+    const preserveAlias = localTag !== from.element && localTag !== to.element
+
+    if (preserveAlias) {
+      if (!aliases.has(localTag)) {
+        transformImportAlias(
+          j,
+          root,
+          from.element,
+          to.element,
+          localTag,
+          `Consider renaming ${localTag} to ${to.element}`,
+        )
+        aliases.add(localTag)
       }
-
-      const opening = openingEl.name
-
-      if (opening.type === 'JSXIdentifier') {
-        opening.name = to.element
-      }
+    } else {
+      openingName.name = to.element
 
       const parentNode = path.parent?.node
 
       if (parentNode?.type === 'JSXElement') {
         const closing = parentNode.closingElement
 
-        if (closing) {
-          const closingName = closing.name
-
-          if (closingName.type === 'JSXIdentifier') {
-            closingName.name = to.element
-          }
+        if (closing?.name.type === 'JSXIdentifier') {
+          closing.name.name = to.element
         }
       }
 
-      to.callback?.(path)
-      needsImportUpdate = true
-    })
+      needsDefaultImportUpdate = true
+    }
 
-  if (options?.replaceInStyled) {
-    root
-      .find(j.CallExpression, {
-        callee: {type: 'Identifier', name: 'styled'},
-      })
-      .forEach((path) => {
-        const arg = path.node.arguments[0]
+    to.callback?.(path)
+  })
 
-        if (arg?.type === 'Identifier' && arg.name === from.element) {
-          arg.name = to.element
-          needsImportUpdate = true
-        }
-      })
-  }
-
-  if (needsImportUpdate) {
+  if (needsDefaultImportUpdate) {
     addImportSpecifier(j, root, from.element, to.element)
     removeUnusedImport(j, root, from.element)
   }

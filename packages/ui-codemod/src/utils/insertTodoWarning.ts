@@ -1,25 +1,43 @@
-import {type API, type ASTPath, type JSXOpeningElement} from 'jscodeshift'
+import {
+  type API,
+  type ASTPath,
+  type ImportDeclaration,
+  type JSXOpeningElement,
+  type VariableDeclarator,
+} from 'jscodeshift'
+
+type CommentableNode = {
+  comments?: {type: string; value: string; leading?: boolean}[] | null
+}
 
 export function insertTodoWarning(
   j: API['jscodeshift'],
-  path: ASTPath<JSXOpeningElement>,
+  path: ASTPath<JSXOpeningElement | ImportDeclaration | VariableDeclarator>,
   warning: string,
 ) {
-  const parent = path.parent
+  let target: CommentableNode | null = null
 
-  if (!parent || parent.node.type !== 'JSXElement') {
+  if (path.node.type === 'ImportDeclaration') {
+    target = path.node
+  } else if (path.node.type === 'VariableDeclarator') {
+    const parent = path.parent
+
+    if (parent?.node.type === 'VariableDeclaration') {
+      target = parent.node
+    }
+  } else if (path.parent?.node.type === 'JSXElement') {
+    target = path.parent.node
+  }
+
+  if (!target) {
     return
   }
 
-  const el = parent.node as {
-    comments?: {type: string; value: string; leading?: boolean}[]
-  }
+  target.comments ??= []
 
-  el.comments ??= []
-
-  if (el.comments.some((c) => c.value.includes(warning))) {
+  if (target.comments.some((comment) => comment.value.includes(warning))) {
     return
   }
 
-  el.comments.unshift(j.commentLine(` UI-POC-CODEMOD TODO: ${warning}`, true))
+  target.comments.unshift(j.commentLine(` UI-POC-CODEMOD TODO: ${warning}`, true))
 }
