@@ -15,9 +15,12 @@
     "@sanity/ui": "3.5.0"
   },
   "changesets": [
+    "animate-activity",
     "esm-only-node-22",
+    "native-resize-observer",
     "next-prerelease-kickoff",
     "react-19-compiler-target",
+    "remove-forward-ref",
     "remove-visual-editing-export",
     "ui-deprecated-tombstones"
   ]
