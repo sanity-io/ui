@@ -25,32 +25,12 @@ describe('primitives/select spacing', () => {
     mockedSelectInputStyle.mockClear()
   })
 
-  it('should support `space` and `gap` with the same behavior', () => {
-    render(
-      // oxlint-disable-next-line no-deprecated
-      <Select space={2}>
-        <option>Option A</option>
-      </Select>,
-    )
-    expect(mockedSelectInputStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
-
-    mockedSelectInputStyle.mockClear()
+  it('should support `gap`', () => {
     render(
       <Select gap={2}>
         <option>Option A</option>
       </Select>,
     )
     expect(mockedSelectInputStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
-  })
-
-  it('should prefer `gap` over `space` when both are provided', () => {
-    render(
-      // oxlint-disable-next-line no-deprecated
-      <Select gap={3} space={1}>
-        <option>Option A</option>
-      </Select>,
-    )
-    expect(mockedSelectInputStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [3]}))
-    expect(mockedSelectInputStyle).not.toHaveBeenCalledWith(expect.objectContaining({$space: [1]}))
   })
 })
