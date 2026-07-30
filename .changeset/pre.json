@@ -14,5 +14,8 @@
     "@sanity/themer": "0.2.0",
     "@sanity/ui": "3.5.0"
   },
-  "changesets": []
+  "changesets": [
+    "dependencies-GH-2496",
+    "next-prerelease-kickoff"
+  ]
 }
