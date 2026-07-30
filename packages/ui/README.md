@@ -18,6 +18,10 @@ import {Button, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
 import {createRoot} from 'react-dom/client'
 
+// Static styles are shipped as a plain stylesheet (not injected at runtime) —
+// import it once, wherever your app loads global CSS
+import '@sanity/ui/styles.css'
+
 const root = createRoot(document.getElementById('root'))
 const theme = buildTheme()
 

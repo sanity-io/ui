@@ -1,5 +1,6 @@
 import {forwardRef} from 'react'
-import {styled} from 'styled-components'
+
+import {srOnly} from './srOnly.css'
 
 /**
  * @public
@@ -9,15 +10,6 @@ export interface SrOnlyProps {
   children?: React.ReactNode
 }
 
-const StyledSrOnly = styled.div`
-  display: block;
-  width: 0;
-  height: 0;
-  position: absolute;
-  overflow: hidden;
-  overflow: clip;
-`
-
 /**
  * @public
  */
@@ -25,11 +17,16 @@ export const SrOnly = forwardRef(function SrOnly(
   props: SrOnlyProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-hidden' | 'as'>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {as, children} = props
+  const {as = 'div', children} = props
+  // Rendering the polymorphic `as` needs one concrete element type for JSX to
+  // type-check the div-flavored props (the same widening styled-components'
+  // `as` prop performed here before).
+  // oxlint-disable-next-line no-unsafe-type-assertion
+  const Component = as as 'div'
 
   return (
-    <StyledSrOnly aria-hidden as={as} data-ui="SrOnly" ref={ref}>
+    <Component aria-hidden className={srOnly} data-ui="SrOnly" ref={ref}>
       {children}
-    </StyledSrOnly>
+    </Component>
   )
 })
