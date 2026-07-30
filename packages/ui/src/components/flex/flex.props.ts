@@ -6,7 +6,7 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface FlexProps<T extends React.ElementType>
+export interface FlexProps<T extends React.ElementType = 'div'>
   extends FlexParentProps, GapProps, LayoutProps {
   /** Element to render */
   as?: T

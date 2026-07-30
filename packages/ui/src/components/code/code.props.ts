@@ -5,7 +5,7 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface CodeProps<T extends CodeTag> extends Omit<
+export interface CodeProps<T extends CodeTag = 'pre'> extends Omit<
   TypographyProps,
   'align' | 'truncate' | 'tone'
 > {

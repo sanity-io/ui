@@ -8,7 +8,7 @@ import {type PropDef} from '../../types/PropDef'
 import {type Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface CardProps<T extends React.ElementType> extends MarginProps, ToneProps {
+export interface CardProps<T extends React.ElementType = 'div'> extends MarginProps, ToneProps {
   /** Element to render */
   as?: T
   /** Composite prop for setting padding and border radius */

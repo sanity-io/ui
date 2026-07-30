@@ -4,7 +4,7 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface EyebrowProps<T extends React.ElementType> extends TypographyProps {
+export interface EyebrowProps<T extends React.ElementType = 'span'> extends TypographyProps {
   /** Element to render */
   as?: T
   /** CSS **font-size** property */

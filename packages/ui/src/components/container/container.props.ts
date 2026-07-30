@@ -4,7 +4,7 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface ContainerProps<T extends React.ElementType> extends LayoutProps {
+export interface ContainerProps<T extends React.ElementType = 'div'> extends LayoutProps {
   /** Element to render */
   as?: T
   /** CSS **max-width** property */

@@ -5,7 +5,7 @@ import {type PropDef} from '../../types/PropDef'
 import {type ButtonProps, buttonProps} from '../button/button.props'
 
 /** @public */
-export interface IconButtonProps<T extends React.ElementType> extends Pick<
+export interface IconButtonProps<T extends React.ElementType = 'button'> extends Pick<
   ButtonProps<T>,
   'as' | 'density' | 'level' | 'loading' | 'tone'
 > {

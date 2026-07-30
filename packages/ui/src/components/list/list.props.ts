@@ -10,7 +10,7 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @beta */
-export interface ListProps<T extends ListTag> extends Pick<GapProps, 'gap'> {
+export interface ListProps<T extends ListTag = 'ul'> extends Pick<GapProps, 'gap'> {
   /** Element to render */
   as?: T
 }
@@ -72,7 +72,7 @@ export const listItemProps: Record<string, PropDef> = {
 }
 
 /** @beta */
-export interface ListButtonItemProps<T extends React.ElementType> extends ListItemProps {
+export interface ListButtonItemProps<T extends React.ElementType = 'button'> extends ListItemProps {
   /** Element to render */
   as?: InteractiveAs<T>
   /** Selected state */
@@ -90,7 +90,7 @@ export const listButtonItemProps: Record<string, PropDef> = {
 }
 
 /** @beta */
-export interface ListItemTextProps<T extends React.ElementType> {
+export interface ListItemTextProps<T extends React.ElementType = 'div'> {
   /** Element to render */
   as?: T
   /** Title text */

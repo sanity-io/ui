@@ -15,7 +15,7 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface ButtonProps<T extends React.ElementType> {
+export interface ButtonProps<T extends React.ElementType = 'button'> {
   /** Element to render */
   as?: InteractiveAs<T>
   /** Composite prop for setting padding and gap */
