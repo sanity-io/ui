@@ -10,7 +10,7 @@ const config: UserConfig = await defineConfig({
   format: ['esm', 'cjs'],
   tsconfig: 'tsconfig.dist.json',
   styledComponents: true,
-  reactCompiler: {target: '18'},
+  reactCompiler: {target: '19'},
 })
 
 const baseOutputOptions = config.outputOptions
