@@ -23,8 +23,6 @@ const meta: Meta<typeof TextInput> = {
     iconRight: getIconControls(),
     radius: getRadiusControls(),
     gap: getSpaceControls(),
-    // oxlint-disable-next-line no-deprecated
-    space: getSpaceControls(),
   },
   component: TextInput,
   tags: ['autodocs'],
@@ -114,8 +112,7 @@ export const InputStates: Story = {
   },
   render: (props) => {
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Grid columns={[1, 1, 4]} gapX={3} gapY={5}>
+      <Grid gridTemplateColumns={[1, 1, 4]} gapX={3} gapY={5}>
         {/* oxlint-disable-next-line no-deprecated */}
         <Box columnStart={1} columnEnd={[1, 1, 5]}>
           <Text weight="medium">Without error</Text>
@@ -212,8 +209,7 @@ export const Typed: Story = {
 function TonesColumn({scheme}: {scheme: 'light' | 'dark'}) {
   return (
     <Card flex={1} scheme={scheme}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack padding={[3, 4, 5]} space={4}>
+      <Stack padding={[3, 4, 5]} gap={4}>
         <Card padding={3}>
           <TextInput
             placeholder="default"

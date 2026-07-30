@@ -19,8 +19,6 @@ const meta: Meta<typeof Tree> = {
   },
   argTypes: {
     gap: getSpaceControls(),
-    // oxlint-disable-next-line no-deprecated
-    space: getSpaceControls(),
   },
   component: Tree,
   tags: ['autodocs'],
@@ -100,8 +98,7 @@ function TabFromElementStory() {
         <Text>Focus: {focus}</Text>
       </Box>
       <TextInput />
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Tree space={1} onFocus={handleFocus}>
+      <Tree gap={1} onFocus={handleFocus}>
         <TreeItem data-testid="fruit" onClick={handleClick} expanded text="Fruit">
           <TreeItem
             data-testid="oranges"

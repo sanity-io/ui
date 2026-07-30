@@ -74,8 +74,7 @@ function LayerStory() {
         {dialogOpen && (
           <Dialog header="Dialog" id="dialog" onClickOutside={closeDialog} onClose={closeDialog}>
             <Box padding={4}>
-              {/* oxlint-disable-next-line no-deprecated */}
-              <Stack space={[4, 5, 6]}>
+              <Stack gap={[4, 5, 6]}>
                 <Popover
                   content={
                     <Box padding={2}>
@@ -106,8 +105,7 @@ function LayerStory() {
           </Dialog>
         )}
 
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={[4, 5, 6]}>
+        <Stack gap={[4, 5, 6]}>
           <Popover
             content={
               <Box padding={2}>
@@ -155,8 +153,7 @@ function ColorStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Tree space={1}>
+      <Tree gap={1}>
         {/* oxlint-disable-next-line no-deprecated */}
         {Object.entries(theme.color).map(([key, value]) => (
           <ColorGroup key={key} name={key} value={value} />

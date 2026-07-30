@@ -47,8 +47,6 @@ const meta: Meta<typeof Menu> = {
   argTypes: {
     padding: getSpaceControls(),
     gap: getSpaceControls(),
-    // oxlint-disable-next-line no-deprecated
-    space: getSpaceControls(),
     disabled: {control: 'boolean'},
     paddingX: getSpaceControls(),
     paddingY: getSpaceControls(),
@@ -107,8 +105,7 @@ export const MenuItemsVariants: Story = {
         <MenuItem disabled={disabled} id="menu-item-1" tone={tone}>
           <Flex as="span" gap={3} align="center">
             {(text || subText) && (
-              // oxlint-disable-next-line no-deprecated
-              <Stack flex={1} space={2}>
+              <Stack flex={1} gap={2}>
                 {text && (
                   <Text size={fontSize} textOverflow="ellipsis" weight="medium">
                     {text}
@@ -300,8 +297,7 @@ export const NestedMenuItems: Story = {
         id="nested-example"
         menu={
           <Menu>
-            {/* oxlint-disable-next-line no-deprecated */}
-            <Stack space={1}>
+            <Stack gap={1}>
               <MenuItem text="Item 1" />
               <MenuItem text="Item 2" />
             </Stack>
@@ -331,8 +327,7 @@ export const Groups: Story = {
   render: () => (
     <Box padding={[4, 5, 6]}>
       <Card padding={1} radius={3} shadow={1}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Inline space={1}>
+        <Inline gap={1}>
           <LayerProvider>
             <MenuButton
               button={<Button fontSize={1} mode="bleed" padding={2} text="File" />}

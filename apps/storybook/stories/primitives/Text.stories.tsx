@@ -65,8 +65,7 @@ export const Sizes: Story = {
   },
   render: (props) => {
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={3}>
+      <Stack gap={3}>
         <Text {...props} size={4} />
         <Text {...props} size={3} />
         <Text {...props} size={2} />
@@ -85,8 +84,7 @@ export const Weights: Story = {
   },
   render: (props) => {
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={3}>
+      <Stack gap={3}>
         <Text {...props} />
         <Text {...props} weight="medium" />
         <Text {...props} weight="semibold" />
@@ -104,8 +102,7 @@ export const OpticalAlignment: Story = {
   },
   render: (props) => {
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={1}>
+      <Stack gap={1}>
         <Flex>
           <Card padding={0}>
             <Text {...props} size={4} />
@@ -147,14 +144,12 @@ export const TextInCard: Story = {
   render: () => {
     return (
       <Flex>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={4}>
+        <Stack gap={4}>
           <Text>Text without card</Text>
           <Text muted>Text muted</Text>
 
           <Card padding={4} shadow={1}>
-            {/* oxlint-disable-next-line no-deprecated */}
-            <Stack space={4}>
+            <Stack gap={4}>
               <Text>Text wrapped in card</Text>
               <Text muted>Text muted</Text>
             </Stack>
@@ -182,8 +177,7 @@ export const Colored: Story = {
   parameters: {controls: {include: []}},
   render: () => (
     <Flex align="center" height="fill" justify="center" padding={[4, 5, 6]} sizing="border">
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack space={4}>
+      <Stack gap={4}>
         {Object.values(SPOT_COLOR_OPTIONS).map((color) => (
           <ColoredText align="center" $color={color} key={color} size={4} weight="bold">
             {color}

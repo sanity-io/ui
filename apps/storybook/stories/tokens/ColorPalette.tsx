@@ -29,8 +29,7 @@ export function ColorPalette(): ReactNode {
     <ThemeProvider theme={theme}>
       <ToastProvider>
         <Card scheme="light">
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Grid columns={[1, 1, 2, 3]} gapX={[4, 4, 5]} gapY={[5, 5, 6]} padding={[4, 5, 6]}>
+          <Grid gridTemplateColumns={[1, 1, 2, 3]} gapX={[4, 4, 5]} gapY={[5, 5, 6]} padding={[4, 5, 6]}>
             {COLOR_HUES.map((hueKey) => (
               <ColorHuePreview tints={hues[hueKey]} hueKey={hueKey} key={hueKey} />
             ))}
@@ -50,8 +49,7 @@ function ColorHuePreview(props: {hueKey: string; tints: ColorTints}) {
         {ucfirst(hueKey)}
       </Heading>
 
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack marginTop={[3, 3, 4]} space={1}>
+      <Stack marginTop={[3, 3, 4]} gap={1}>
         {Object.entries(tints).map(([tintKey, tint]) => {
           return <ColorTintPreview key={tintKey} tint={tint} />
         })}
