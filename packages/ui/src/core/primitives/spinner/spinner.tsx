@@ -1,8 +1,6 @@
 import {SpinnerIcon} from '@sanity/icons/Spinner'
-import {forwardRef} from 'react'
 
 import {Text} from '../text/text'
-
 import {spinnerIcon} from './spinner.css'
 
 /**
@@ -18,13 +16,12 @@ export interface SpinnerProps {
  *
  * @public
  */
-export const Spinner = forwardRef(function Spinner(
+export const Spinner = function Spinner(
   props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   return (
-    <Text data-ui="Spinner" {...props} ref={ref}>
+    <Text data-ui="Spinner" {...props}>
       <SpinnerIcon className={spinnerIcon} />
     </Text>
   )
-})
+}

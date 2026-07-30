@@ -13,7 +13,6 @@ import {
 import {
   Activity,
   cloneElement,
-  forwardRef,
   type Ref,
   useCallback,
   useEffect,
@@ -142,10 +141,9 @@ const ViewportOverlay = () => {
  *
  * @public
  */
-export const Popover = forwardRef(function Popover(
+export const Popover = function Popover(
   props: PopoverProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ): React.JSX.Element {
   const {container, layer} = useTheme_v2()
   const boundaryElementContext = useBoundaryElement()
@@ -172,6 +170,7 @@ export const Popover = forwardRef(function Popover(
     portal,
     preventOverflow = true,
     radius: radiusProp = 3,
+    ref: forwardedRef,
     referenceBoundary: _referenceBoundary,
     referenceElement,
     scheme,
@@ -381,7 +380,7 @@ export const Popover = forwardRef(function Popover(
       {child}
     </>
   )
-})
+}
 
 function useMiddleware({
   animate,

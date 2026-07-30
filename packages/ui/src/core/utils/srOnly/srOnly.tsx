@@ -1,5 +1,3 @@
-import {forwardRef} from 'react'
-
 import {srOnly} from './srOnly.css'
 
 /**
@@ -13,11 +11,10 @@ export interface SrOnlyProps {
 /**
  * @public
  */
-export const SrOnly = forwardRef(function SrOnly(
+export const SrOnly = function SrOnly(
   props: SrOnlyProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-hidden' | 'as'>,
-  ref: React.Ref<HTMLDivElement>,
 ) {
-  const {as = 'div', children} = props
+  const {as = 'div', children, ref} = props
   // Rendering the polymorphic `as` needs one concrete element type for JSX to
   // type-check the div-flavored props (the same widening styled-components'
   // `as` prop performed here before).
@@ -29,4 +26,4 @@ export const SrOnly = forwardRef(function SrOnly(
       {children}
     </Component>
   )
-})
+}

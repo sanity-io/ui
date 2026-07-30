@@ -631,9 +631,6 @@ importers:
       '@floating-ui/react-dom':
         specifier: ^2.1.9
         version: 2.1.9(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@juggle/resize-observer':
-        specifier: ^3.4.0
-        version: 3.4.0
       '@sanity/color':
         specifier: workspace:^
         version: link:../color
