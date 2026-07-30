@@ -4,19 +4,25 @@ import {insertTodoWarning} from './insertTodoWarning'
 
 const DEFAULT_WARNING = 'Please double check styled-component migration(s) below'
 
+/**
+ * Runs callback on JSX styled-component if `filter` passes. Otherwise, adds
+ * a TODO on the styled definition if manual review is needed.
+ * Returns whether the AST was updated.
+ */
 export function transformStyledComponents(
   j: API['jscodeshift'],
   root: ReturnType<API['jscodeshift']>,
   aliases: Iterable<string>,
   filter: (attrs: (JSXAttribute | JSXSpreadAttribute)[]) => boolean,
   options: {
-    callback?: (path: ASTPath<JSXOpeningElement>) => void
+    callback?: (path: ASTPath<JSXOpeningElement>) => boolean | void
     warning?: string
   } = {},
-): void {
+): boolean {
   const names = new Set(aliases)
   const {callback, warning = DEFAULT_WARNING} = options
   const aliasesToWarn = new Set<string>()
+  let hasChanges = false
 
   root.find(j.JSXOpeningElement).forEach((path) => {
     const name = path.node.name
@@ -32,7 +38,9 @@ export function transformStyledComponents(
     }
 
     if (filter(attrs)) {
-      callback?.(path)
+      if (callback?.(path)) {
+        hasChanges = true
+      }
     }
   })
 
@@ -40,7 +48,11 @@ export function transformStyledComponents(
     const {id} = path.node
 
     if (id.type === 'Identifier' && aliasesToWarn.has(id.name)) {
-      insertTodoWarning(j, path, warning)
+      if (insertTodoWarning(j, path, warning)) {
+        hasChanges = true
+      }
     }
   })
+
+  return hasChanges
 }

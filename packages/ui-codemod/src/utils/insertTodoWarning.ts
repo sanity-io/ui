@@ -10,11 +10,15 @@ type CommentableNode = {
   comments?: {type: string; value: string; leading?: boolean}[] | null
 }
 
+/**
+ * Inserts a `UI-POC-CODEMOD TODO` comment.
+ * Returns whether the AST was updated.
+ */
 export function insertTodoWarning(
   j: API['jscodeshift'],
   path: ASTPath<JSXOpeningElement | ImportDeclaration | VariableDeclarator>,
   warning: string,
-) {
+): boolean {
   let target: CommentableNode | null = null
 
   if (path.node.type === 'ImportDeclaration') {
@@ -30,14 +34,15 @@ export function insertTodoWarning(
   }
 
   if (!target) {
-    return
+    return false
   }
 
   target.comments ??= []
 
   if (target.comments.some((comment) => comment.value.includes(warning))) {
-    return
+    return false
   }
 
   target.comments.unshift(j.commentLine(` UI-POC-CODEMOD TODO: ${warning}`, true))
+  return true
 }

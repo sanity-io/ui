@@ -19,6 +19,10 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
     toPackage: Flags.string({
       description: 'New package name',
     }),
+    extensions: Flags.string({
+      description: 'File extensions to transform (comma-separated, without dots)',
+      default: 'ts,tsx,js,jsx',
+    }),
     dry: Flags.boolean({
       description: 'Dry run without changing files',
       default: false,

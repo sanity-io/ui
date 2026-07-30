@@ -4,6 +4,10 @@ import {addImportSpecifier} from './addImportSpecifier'
 import {removeUnusedImport} from './removeUnusedImport'
 import {transformImportAlias} from './transformImportAlias'
 
+/**
+ * Replaces JSX component if `filter` passes. Runs callbacks and updates imports.
+ * Returns whether the AST was updated.
+ */
 export function replaceElement(
   j: API['jscodeshift'],
   root: ReturnType<API['jscodeshift']>,
@@ -11,19 +15,20 @@ export function replaceElement(
   from: {
     element: string
     localNames?: Iterable<string>
-    callback?: (path: ASTPath<JSXOpeningElement>) => void
+    callback?: (path: ASTPath<JSXOpeningElement>) => boolean | void
   },
   to: {
     element: string
-    callback?: (path: ASTPath<JSXOpeningElement>) => void
+    callback?: (path: ASTPath<JSXOpeningElement>) => boolean | void
   },
-) {
+): boolean {
   const names = new Set(from.localNames)
 
   if (names.size === 0) {
     names.add(from.element)
   }
 
+  let hasChanges = false
   let needsDefaultImportUpdate = false
   const aliases = new Set<string>()
 
@@ -38,7 +43,10 @@ export function replaceElement(
     const attrs = openingEl.attributes
 
     if (!attrs || !filter(attrs)) {
-      from.callback?.(path)
+      if (from.callback?.(path)) {
+        hasChanges = true
+      }
+
       return
     }
 
@@ -47,14 +55,19 @@ export function replaceElement(
 
     if (preserveAlias) {
       if (!aliases.has(localTag)) {
-        transformImportAlias(
-          j,
-          root,
-          from.element,
-          to.element,
-          localTag,
-          `Consider renaming ${localTag} to ${to.element}`,
-        )
+        if (
+          transformImportAlias(
+            j,
+            root,
+            from.element,
+            to.element,
+            localTag,
+            `Consider renaming ${localTag} to ${to.element}`,
+          )
+        ) {
+          hasChanges = true
+        }
+
         aliases.add(localTag)
       }
     } else {
@@ -71,13 +84,23 @@ export function replaceElement(
       }
 
       needsDefaultImportUpdate = true
+      hasChanges = true
     }
 
-    to.callback?.(path)
+    if (to.callback?.(path)) {
+      hasChanges = true
+    }
   })
 
   if (needsDefaultImportUpdate) {
-    addImportSpecifier(j, root, from.element, to.element)
-    removeUnusedImport(j, root, from.element)
+    if (addImportSpecifier(j, root, from.element, to.element)) {
+      hasChanges = true
+    }
+
+    if (removeUnusedImport(j, root, from.element)) {
+      hasChanges = true
+    }
   }
+
+  return hasChanges
 }
