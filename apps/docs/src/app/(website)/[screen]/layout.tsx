@@ -29,7 +29,7 @@ export const instant = false
 // per-link runtime prefetch resolves the entire page ahead of navigation.
 // Downstream segments (`[screen]` and `[screen]/[...article]` pages) are
 // included in the same runtime prefetch request.
-export const prefetch = 'allow-runtime'
+export const prefetch = 'partial'
 
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({

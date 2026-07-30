@@ -36,7 +36,7 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
       // destination pages, making sidebar navigations instant.
       // `prefetch={true}` upgrades the shared App Shell prefetch to a per-link
       // runtime prefetch that resolves the article content ahead of the click
-      // (the `[screen]` segment allows this with `prefetch = 'allow-runtime'`).
+      // (the `[screen]` segment allows this with `prefetch = 'partial'`).
       linkAs={Link}
       linkProps={{prefetch: true}}
       selected={href ? href === path : false}
