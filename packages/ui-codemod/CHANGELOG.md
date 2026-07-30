@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc-codemod
 
+## 0.0.1-alpha.18
+
+### Patch Changes
+
+- dcac985: prevent transforms in unrelated code
+
 ## 0.0.1-alpha.17
 
 ### Patch Changes

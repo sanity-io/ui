@@ -1,5 +1,11 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.24
+
+### Patch Changes
+
+- 2313b23: update component types to include defaults for generic as props
+
 ## 0.0.1-alpha.23
 
 ### Patch Changes
