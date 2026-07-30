@@ -1,7 +1,5 @@
 ---
 "@sanity/ui": major
-"@sanity/icons": major
-"@sanity/logos": major
 "@sanity/themer": major
 ---
 
