@@ -1,4 +1,3 @@
-import {forwardRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
@@ -54,9 +53,8 @@ const StyledCard = styled(Box)<
     ResponsiveShadowStyleProps
 >(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
 
-const CardComponent = forwardRef(function Card(
+const CardComponent = function Card(
   props: CardOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     __unstable_checkered: checkered = false,
@@ -70,6 +68,7 @@ const CardComponent = forwardRef(function Card(
     muted,
     pressed,
     radius = 0,
+    ref,
     scheme,
     selected,
     shadow,
@@ -110,7 +109,7 @@ const CardComponent = forwardRef(function Card(
       />
     </ThemeColorProvider>
   )
-})
+}
 
 /**
  * The `Card` component acts much like a `Box`, but with a background and foreground color.

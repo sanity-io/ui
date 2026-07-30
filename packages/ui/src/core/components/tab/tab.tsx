@@ -1,4 +1,4 @@
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
+import {useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {Button} from '../../primitives/button/button'
@@ -30,13 +30,12 @@ const CustomButton = styled(Button)`
 /**
  * @public
  */
-export const Tab = forwardRef(function Tab(
+export const Tab = function Tab(
   props: TabProps &
     Omit<
       React.HTMLProps<HTMLButtonElement>,
       'aria-controls' | 'as' | 'id' | 'label' | 'type' | 'width'
     >,
-  forwardedRef: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
     icon,
@@ -47,6 +46,7 @@ export const Tab = forwardRef(function Tab(
     onClick,
     onFocus,
     padding = 2,
+    ref: forwardedRef,
     selected,
     ...restProps
   } = props
@@ -98,4 +98,4 @@ export const Tab = forwardRef(function Tab(
       type="button"
     />
   )
-})
+}

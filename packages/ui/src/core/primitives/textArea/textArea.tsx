@@ -1,4 +1,4 @@
-import {forwardRef, useImperativeHandle, useRef} from 'react'
+import {useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
@@ -62,9 +62,8 @@ const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresenta
 
  * @public
  */
-export const TextArea = forwardRef(function TextArea(
+export const TextArea = function TextArea(
   props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>,
-  forwardedRef: React.ForwardedRef<HTMLTextAreaElement>,
 ) {
   const {
     border = true,
@@ -73,6 +72,7 @@ export const TextArea = forwardRef(function TextArea(
     fontSize = 2,
     padding = 3,
     radius = 2,
+    ref: forwardedRef,
     weight,
     __unstable_disableFocusRing,
     ...restProps
@@ -118,4 +118,4 @@ export const TextArea = forwardRef(function TextArea(
       </InputRoot>
     </StyledTextArea>
   )
-})
+}

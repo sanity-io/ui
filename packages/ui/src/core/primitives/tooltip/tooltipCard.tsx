@@ -1,5 +1,5 @@
 import {motion} from 'motion/react'
-import React, {CSSProperties, forwardRef, useMemo} from 'react'
+import React, {CSSProperties, useMemo} from 'react'
 import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
@@ -21,7 +21,7 @@ const MotionCard = styled(motion.create(Card))`
 /**
  * @internal
  */
-export const TooltipCard = forwardRef(function TooltipCard(
+export const TooltipCard = function TooltipCard(
   props: {
     animate?: boolean
     arrow: boolean
@@ -36,7 +36,6 @@ export const TooltipCard = forwardRef(function TooltipCard(
     scheme?: ThemeColorSchemeKey
     shadow?: number | number[]
   } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     animate,
@@ -50,6 +49,7 @@ export const TooltipCard = forwardRef(function TooltipCard(
     padding,
     placement,
     radius,
+    ref,
     scheme,
     shadow,
     style,
@@ -106,4 +106,4 @@ export const TooltipCard = forwardRef(function TooltipCard(
       )}
     </MotionCard>
   )
-})
+}
