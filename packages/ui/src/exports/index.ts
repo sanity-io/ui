@@ -36,10 +36,7 @@ export {
 } from '../core/_compat'
 export {Dialog, type DialogProps} from '../core/components/dialog/dialog'
 export {DialogContext, type DialogContextValue} from '../core/components/dialog/dialogContext'
-export {
-  DialogProvider,
-  type DialogProviderProps,
-} from '../core/components/dialog/dialogProvider'
+export {DialogProvider, type DialogProviderProps} from '../core/components/dialog/dialogProvider'
 export {useDialog} from '../core/components/dialog/useDialog'
 export {Hotkeys, type HotkeysProps} from '../core/components/hotkeys/hotkeys'
 export {Skeleton, type SkeletonProps} from '../core/components/skeleton/skeleton'
@@ -127,11 +124,7 @@ export {
 export type {ResponsiveWidthStyleProps} from '../core/primitives/container/types'
 export {Flex, type FlexOwnProps, type FlexProps} from '../core/primitives/flex/flex'
 export {Grid, type GridOwnProps, type GridProps} from '../core/primitives/grid/grid'
-export {
-  Heading,
-  type HeadingOwnProps,
-  type HeadingProps,
-} from '../core/primitives/heading/heading'
+export {Heading, type HeadingOwnProps, type HeadingProps} from '../core/primitives/heading/heading'
 export {Inline, type InlineOwnProps, type InlineProps} from '../core/primitives/inline/inline'
 export {KBD, type KBDOwnProps, type KBDProps} from '../core/primitives/kbd/kbd'
 export {Label, type LabelOwnProps, type LabelProps} from '../core/primitives/label/label'
@@ -181,10 +174,7 @@ export {
   rem,
 } from '../core/styles/helpers'
 export type {ThemeProps} from '../core/styles/types'
-export {
-  ThemeColorProvider,
-  type ThemeColorProviderProps,
-} from '../core/theme/themeColorProvider'
+export {ThemeColorProvider, type ThemeColorProviderProps} from '../core/theme/themeColorProvider'
 export {ThemeProvider, type ThemeProviderProps} from '../core/theme/themeProvider'
 export type {ThemeContextValue} from '../core/theme/types'
 export {useRootTheme} from '../core/theme/useRootTheme'
@@ -204,13 +194,7 @@ export type {
   TagType,
 } from '../core/types/component'
 export type {DialogPosition} from '../core/types/dialog'
-export type {
-  FlexAlign,
-  FlexDirection,
-  FlexJustify,
-  FlexValue,
-  FlexWrap,
-} from '../core/types/flex'
+export type {FlexAlign, FlexDirection, FlexJustify, FlexValue, FlexWrap} from '../core/types/flex'
 export type {GridAutoCols, GridAutoFlow, GridAutoRows} from '../core/types/grid'
 export type {
   GridItemColumn,
@@ -267,11 +251,7 @@ export type {
   ThemeColorButtonTones,
 } from '../theme/system/v0/color/button'
 export type {ThemeColorCard, ThemeColorCardState} from '../theme/system/v0/color/card'
-export type {
-  ThemeColor,
-  ThemeColorScheme,
-  ThemeColorSchemes,
-} from '../theme/system/v0/color/color'
+export type {ThemeColor, ThemeColorScheme, ThemeColorSchemes} from '../theme/system/v0/color/color'
 export type {
   ThemeColorInput,
   ThemeColorInputState,

@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   Card,
-  Code,
   Dialog,
   DialogProps,
   DialogProvider,
@@ -13,14 +12,13 @@ import {
   Inline,
   Layer,
   LayerProvider,
-  Menu,
-  MenuButton,
-  MenuItem,
   PortalProvider,
   Stack,
   Text,
   useLayer,
 } from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {Menu, MenuButton, MenuItem} from '@sanity/ui/menu'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
 import {expect, fn, userEvent, waitFor} from 'storybook/test'

@@ -162,11 +162,7 @@ export type {
   ThemeColorButtonTones,
 } from '../theme/system/v0/color/button'
 export type {ThemeColorCard, ThemeColorCardState} from '../theme/system/v0/color/card'
-export type {
-  ThemeColor,
-  ThemeColorScheme,
-  ThemeColorSchemes,
-} from '../theme/system/v0/color/color'
+export type {ThemeColor, ThemeColorScheme, ThemeColorSchemes} from '../theme/system/v0/color/color'
 export type {
   ThemeColorInput,
   ThemeColorInputState,

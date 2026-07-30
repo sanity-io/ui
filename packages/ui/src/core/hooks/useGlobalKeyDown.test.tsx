@@ -23,12 +23,13 @@ describe('useGlobalKeyDown', () => {
       })
     }
 
-    const ForwardRefComp = forwardRef<HTMLDivElement, {n: number}>(
-      function ForwardRefComp({n}, ref) {
-        usePush('forwardRef', n)
-        return <div ref={ref} />
-      },
-    )
+    const ForwardRefComp = forwardRef<HTMLDivElement, {n: number}>(function ForwardRefComp(
+      {n},
+      ref,
+    ) {
+      usePush('forwardRef', n)
+      return <div ref={ref} />
+    })
 
     const MemoComp = memo(function MemoComp({n}: {n: number}) {
       usePush('memo', n)

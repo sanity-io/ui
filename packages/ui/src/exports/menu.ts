@@ -12,8 +12,4 @@ export {
   type MenuGroupOwnProps,
   type MenuGroupProps,
 } from '../core/components/menu/menuGroup'
-export {
-  MenuItem,
-  type MenuItemOwnProps,
-  type MenuItemProps,
-} from '../core/components/menu/menuItem'
+export {MenuItem, type MenuItemOwnProps, type MenuItemProps} from '../core/components/menu/menuItem'

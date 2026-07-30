@@ -1,4 +1,5 @@
-import {Box, Card, Code, Container, Grid, Stack, Text, useElementSize} from '@sanity/ui'
+import {Box, Card, Container, Grid, Stack, Text, useElementSize} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'
 

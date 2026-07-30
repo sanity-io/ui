@@ -6,17 +6,12 @@ import {RocketIcon} from '@sanity/icons/Rocket'
 import {SearchIcon} from '@sanity/icons/Search'
 import {SunIcon} from '@sanity/icons/Sun'
 import {
-  Autocomplete,
   Avatar,
   Button,
   Card,
   Checkbox,
   Flex,
   Heading,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
   Radio,
   Select,
   Stack,
@@ -28,6 +23,8 @@ import {
   TextInput,
   ThemeProvider,
 } from '@sanity/ui'
+import {Autocomplete} from '@sanity/ui/autocomplete'
+import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import {buildTheme} from '@sanity/ui/theme'
 import {ReactNode} from 'react'
 
