@@ -1,5 +1,14 @@
 # @sanity/themer
 
+## 0.2.1
+
+### Patch Changes
+
+- [#2497](https://github.com/sanity-io/ui/pull/2497) [`b9ed08d`](https://github.com/sanity-io/ui/commit/b9ed08de271bf5306b6bae48b843742eae461572) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update sanity monorepo to ^6.7.0
+
+- Updated dependencies [[`1ecf846`](https://github.com/sanity-io/ui/commit/1ecf846993c94f671856cb09e01caa93a3d7cece)]:
+  - @sanity/ui@3.5.1
+
 ## 0.2.0
 
 ### Minor Changes
