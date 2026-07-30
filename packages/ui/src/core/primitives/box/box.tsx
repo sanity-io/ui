@@ -1,4 +1,3 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
 import {boxStyle, responsiveBoxStyle} from '../../styles/box/boxStyle'
@@ -56,12 +55,12 @@ const StyledBox = styled.div<
   responsivePaddingStyle,
 )
 
-const BoxComponent = forwardRef(function Box(
+const BoxComponent = function Box(
   props: BoxOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     as: asProp = 'div',
+    ref,
     gridColumn,
     gridColumnStart,
     gridColumnEnd,
@@ -126,7 +125,7 @@ const BoxComponent = forwardRef(function Box(
       {props.children}
     </StyledBox>
   )
-})
+}
 
 /**
  * The `Box` component is a basic layout wrapper component which provides utility properties

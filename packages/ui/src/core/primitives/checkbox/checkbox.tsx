@@ -1,6 +1,6 @@
 import {CheckmarkIcon} from '@sanity/icons/Checkmark'
 import {RemoveIcon} from '@sanity/icons/Remove'
-import {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
+import {useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -22,9 +22,8 @@ const Input = styled.input(inputElementStyles)
  *
  * @public
  */
-export const Checkbox = forwardRef(function Checkbox(
+export const Checkbox = function Checkbox(
   props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & CheckboxProps,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {
     checked,
@@ -33,6 +32,7 @@ export const Checkbox = forwardRef(function Checkbox(
     indeterminate,
     customValidity,
     readOnly,
+    ref: forwardedRef,
     style,
     ...restProps
   } = props
@@ -70,4 +70,4 @@ export const Checkbox = forwardRef(function Checkbox(
       </span>
     </StyledCheckbox>
   )
-})
+}

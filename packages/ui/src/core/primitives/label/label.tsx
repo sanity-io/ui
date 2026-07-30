@@ -1,4 +1,3 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
@@ -40,15 +39,15 @@ const StyledLabel = styled.div<{
   $weight?: ThemeFontWeightKey
 }>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
 
-const LabelComponent = forwardRef(function Label(
+const LabelComponent = function Label(
   props: LabelOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     accent,
     align,
     children: childrenProp,
     muted = false,
+    ref,
     size = 2,
     textOverflow,
     weight,
@@ -77,7 +76,7 @@ const LabelComponent = forwardRef(function Label(
       {children}
     </StyledLabel>
   )
-})
+}
 
 /**
  * Typographic labels.

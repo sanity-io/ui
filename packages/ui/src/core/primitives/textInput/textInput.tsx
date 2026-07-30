@@ -1,5 +1,5 @@
 import {CloseIcon} from '@sanity/icons/Close'
-import {forwardRef, isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
+import {isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
@@ -160,9 +160,8 @@ const TextInputClearButton = styled(Button)({
  *
  * @public
  */
-export const TextInput = forwardRef(function TextInput(
+export const TextInput = function TextInput(
   props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type'>,
-  forwardedRef: React.Ref<HTMLInputElement>,
 ) {
   const {
     __unstable_disableFocusRing,
@@ -178,6 +177,7 @@ export const TextInput = forwardRef(function TextInput(
     prefix,
     radius: radiusProp = 2,
     readOnly,
+    ref: forwardedRef,
     suffix,
     customValidity,
     type = 'text',
@@ -394,4 +394,4 @@ export const TextInput = forwardRef(function TextInput(
       {suffixNode}
     </StyledTextInput>
   )
-})
+}

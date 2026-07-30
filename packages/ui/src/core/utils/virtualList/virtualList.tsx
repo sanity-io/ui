@@ -1,4 +1,4 @@
-import {forwardRef, useEffect, useImperativeHandle, useRef, useState} from 'react'
+import {useEffect, useImperativeHandle, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {_isScrollable} from '../../helpers/scroll'
@@ -43,13 +43,21 @@ const ItemWrapper = styled.div`
 /**
  * @beta
  */
-export const VirtualList = forwardRef(function VirtualList(
+export const VirtualList = function VirtualList(
   props: VirtualListProps &
     StackOwnProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange' | 'ref'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange'>,
 ): React.JSX.Element {
-  const {as = 'div', gap = 0, getItemKey, items = [], onChange, renderItem, ...restProps} = props
+  const {
+    as = 'div',
+    gap = 0,
+    getItemKey,
+    items = [],
+    onChange,
+    ref: forwardedRef,
+    renderItem,
+    ...restProps
+  } = props
   const {space} = useTheme_v2()
   const ref = useRef<HTMLDivElement | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
@@ -151,7 +159,7 @@ export const VirtualList = forwardRef(function VirtualList(
       </div>
     </StyledVirtualList>
   )
-})
+}
 
 function useChildren({
   fromIndex,
