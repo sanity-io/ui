@@ -223,7 +223,6 @@ export const Tree = forwardRef(function Tree(
 
   return (
     <TreeContext.Provider value={contextValue}>
-      {/* oxlint-disable-next-line interactive-supports-focus */}
       <Stack
         as="ul"
         data-ui="Tree"
