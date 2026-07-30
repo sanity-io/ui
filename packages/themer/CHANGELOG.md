@@ -1,5 +1,18 @@
 # @sanity/themer
 
+## 1.0.0-next.2
+
+### Major Changes
+
+- [#2505](https://github.com/sanity-io/ui/pull/2505) [`b8c74ba`](https://github.com/sanity-io/ui/commit/b8c74bace6b3db6a4abf7328a18bc9dcee614625) Thanks [@stipsan](https://github.com/stipsan)! - Require React 19.2+, compile with the React 19 compiler target, and drop `react-compiler-runtime`.
+
+  With `babel-plugin-react-compiler` targeting `'19'`, the compiler uses React’s built-in runtime instead of the separate `react-compiler-runtime` package. Peer dependency ranges are tightened to `^19.2` (and `react-dom` for `@sanity/ui`).
+
+### Patch Changes
+
+- Updated dependencies [[`b8c74ba`](https://github.com/sanity-io/ui/commit/b8c74bace6b3db6a4abf7328a18bc9dcee614625), [`8b3366d`](https://github.com/sanity-io/ui/commit/8b3366d21ab014b1705bfcab26fb55a23187f0bc)]:
+  - @sanity/ui@4.0.0-next.2
+
 ## 0.2.1-next.1
 
 ### Patch Changes
