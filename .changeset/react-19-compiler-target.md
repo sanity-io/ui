@@ -2,7 +2,7 @@
 "@sanity/ui": major
 "@sanity/icons": major
 "@sanity/logos": major
-"@sanity/themer": minor
+"@sanity/themer": major
 ---
 
 Require React 19.2+, compile with the React 19 compiler target, and drop `react-compiler-runtime`.
