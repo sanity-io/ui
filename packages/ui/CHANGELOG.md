@@ -1,5 +1,19 @@
 # @sanity/ui
 
+## 4.0.0-next.2
+
+### Major Changes
+
+- [#2505](https://github.com/sanity-io/ui/pull/2505) [`b8c74ba`](https://github.com/sanity-io/ui/commit/b8c74bace6b3db6a4abf7328a18bc9dcee614625) Thanks [@stipsan](https://github.com/stipsan)! - Require React 19.2+, compile with the React 19 compiler target, and drop `react-compiler-runtime`.
+
+  With `babel-plugin-react-compiler` targeting `'19'`, the compiler uses React’s built-in runtime instead of the separate `react-compiler-runtime` package. Peer dependency ranges are tightened to `^19.2` (and `react-dom` for `@sanity/ui`).
+
+- [#2505](https://github.com/sanity-io/ui/pull/2505) [`8b3366d`](https://github.com/sanity-io/ui/commit/8b3366d21ab014b1705bfcab26fb55a23187f0bc) Thanks [@stipsan](https://github.com/stipsan)! - Remove the private `@sanity/ui/_visual-editing` entrypoint.
+
+  Import from `@sanity/ui` instead. Tree-shaking no longer needs this slim
+  subset now that `displayName` side effects are gone and unused components
+  are dropped from consuming bundles.
+
 ## 4.0.0-next.1
 
 ### Major Changes
