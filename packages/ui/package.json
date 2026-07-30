@@ -54,7 +54,8 @@
     "csstype": "^3.2.3",
     "motion": "^12.43.0",
     "react-is": "catalog:",
-    "react-refractor": "catalog:"
+    "react-refractor": "catalog:",
+    "use-effect-event": "^2.0.3"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
