@@ -36,9 +36,9 @@ export interface MenuItemOwnProps extends ResponsivePaddingProps, ResponsiveRadi
   selected?: boolean
   gap?: number | number[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   text?: React.ReactNode
   tone?: SelectableTone
 }
@@ -74,14 +74,11 @@ const MenuItemComponent = forwardRef(function MenuItem(
     pressed,
     radius = 2,
     selected: selectedProp,
-    gap,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 3,
+    gap = 3,
     text,
     tone = 'default',
     ...restProps
   } = props
-  const spacing = gap === undefined ? deprecated_space : gap
   const {scheme} = useRootTheme()
   const menu = useMenu()
   const {
@@ -152,7 +149,7 @@ const MenuItemComponent = forwardRef(function MenuItem(
       type={as === 'button' ? 'button' : undefined}
     >
       {(IconComponent || text || IconRightComponent) && (
-        <Flex as="span" gap={spacing} align="center" {...paddingProps}>
+        <Flex as="span" gap={gap} align="center" {...paddingProps}>
           {IconComponent && (
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}

@@ -58,7 +58,7 @@ export interface AvatarCounterProps {
   count: number
   size?: AvatarSize | AvatarSize[]
   /** @deprecated No longer supported. */
-  tone?: 'navbar'
+  tone?: never
 }
 
 /**
