@@ -37,12 +37,14 @@ export function buttonBaseStyles(
     position: relative;
     vertical-align: top;
 
-    ${$width === 'fill' &&
-    css`
-      width: -moz-available;
-      width: -webkit-fill-available;
-      width: stretch;
-    `}
+    ${
+      $width === 'fill' &&
+      css`
+        width: -moz-available;
+        width: -webkit-fill-available;
+        width: stretch;
+      `
+    }
 
     & > span {
       display: block;

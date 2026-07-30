@@ -12,15 +12,19 @@ export function labelBaseStyle(
   return css`
     text-transform: uppercase;
 
-    ${$accent &&
-    css`
-      color: var(--card-accent-fg-color);
-    `}
+    ${
+      $accent &&
+      css`
+        color: var(--card-accent-fg-color);
+      `
+    }
 
-    ${$muted &&
-    css`
-      color: var(--card-muted-fg-color);
-    `}
+    ${
+      $muted &&
+      css`
+        color: var(--card-muted-fg-color);
+      `
+    }
 
     & code {
       font-family: ${font.code.family};

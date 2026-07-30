@@ -44,13 +44,15 @@ const EditorContainer = styled(Card)<{$focusRing: boolean}>(({$focusRing, theme}
     }
 
     &:focus-within {
-      --input-box-shadow: ${$focusRing
-        ? focusRingStyle({
-            base: color,
-            border,
-            focusRing: input.text.focusRing,
-          })
-        : undefined};
+      --input-box-shadow: ${
+        $focusRing
+          ? focusRingStyle({
+              base: color,
+              border,
+              focusRing: input.text.focusRing,
+            })
+          : undefined
+      };
     }
   `
 })

@@ -161,14 +161,18 @@ export function switchThumbStyles(
     transform: translate3d(0, 0, 0);
     box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
 
-    ${checked &&
-    css`
-      transform: translate3d(${checkedOffset}px, 0, 0);
-    `}
+    ${
+      checked &&
+      css`
+        transform: translate3d(${checkedOffset}px, 0, 0);
+      `
+    }
 
-    ${$indeterminate &&
-    css`
-      transform: translate3d(${indeterminateOffset}px, 0, 0);
-    `}
+    ${
+      $indeterminate &&
+      css`
+        transform: translate3d(${indeterminateOffset}px, 0, 0);
+      `
+    }
   `
 }
