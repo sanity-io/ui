@@ -12,7 +12,7 @@ Migrate:
 - Grid `columns`/`rows`/`column*`/`row*` → `gridTemplateColumns`/`gridTemplateRows`/`gridColumn*`/`gridRow*`
 - Menu `focusFirst`/`focusLast` → `shouldFocus`
 - MenuButton top-level popover props → `popover={{…}}`
-- Popover `boundaryElement` → `floatingBoundary` / `referenceBoundary`
+- Popover `boundaryElement` → `floatingBoundary` / `referenceBoundary` (and `BoundaryElementProvider` for max-width / `constrainSize`)
 - Tooltip `allowedAutoPlacements` → `fallbackPlacements`
 - `useClickOutside` → `useClickOutsideEvent`
 - `useElementRect` → `useElementSize`
