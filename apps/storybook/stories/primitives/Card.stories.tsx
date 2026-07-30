@@ -17,7 +17,6 @@ import {
 } from '@sanity/ui'
 import {getTheme_v2, THEME_COLOR_CARD_TONES, ThemeColorStateToneKey} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import {forwardRef} from 'react'
 import {css, styled} from 'styled-components'
 
 import {CARD_TONES, RADII} from '../constants'
@@ -580,18 +579,17 @@ export const Checkered: Story = {
   ),
 }
 
-const CustomCardLink = forwardRef(function CustomCardLink(
+const CustomCardLink = function CustomCardLink(
   props: {req: string} & Omit<React.HTMLProps<HTMLAnchorElement>, 'as' | 'href'>,
-  ref: React.ForwardedRef<HTMLAnchorElement>,
 ): React.JSX.Element {
   const {children, req, ...restProps} = props
 
   return (
-    <a data-required={req} {...restProps} ref={ref}>
+    <a data-required={req} {...restProps}>
       {children}
     </a>
   )
-})
+}
 
 export const AsComponent: Story = {
   parameters: {controls: {include: []}},

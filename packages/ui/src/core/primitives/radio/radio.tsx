@@ -1,4 +1,4 @@
-import {forwardRef, useImperativeHandle, useRef} from 'react'
+import {useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -19,11 +19,18 @@ const Input = styled.input(inputElementStyle)
  *
  * @public
  */
-export const Radio = forwardRef(function Radio(
+export const Radio = function Radio(
   props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & RadioProps,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
-  const {className, disabled, style, customValidity, readOnly, ...restProps} = props
+  const {
+    className,
+    disabled,
+    style,
+    customValidity,
+    readOnly,
+    ref: forwardedRef,
+    ...restProps
+  } = props
   const ref = useRef<HTMLInputElement | null>(null)
 
   useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
@@ -47,4 +54,4 @@ export const Radio = forwardRef(function Radio(
       <span />
     </StyledRadio>
   )
-})
+}

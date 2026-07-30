@@ -1,12 +1,4 @@
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import {useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
 
 import {Stack} from '../../primitives/stack/stack'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
@@ -29,12 +21,11 @@ export interface TreeProps {
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const Tree = forwardRef(function Tree(
+export const Tree = function Tree(
   props: TreeProps &
-    Omit<React.HTMLProps<HTMLUListElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
-  forwardedRef: React.ForwardedRef<HTMLUListElement>,
+    Omit<React.HTMLProps<HTMLUListElement>, 'align' | 'as' | 'height' | 'role' | 'wrap'>,
 ): React.JSX.Element {
-  const {children, gap = 1, onFocus, ...restProps} = props
+  const {children, gap = 1, onFocus, ref: forwardedRef, ...restProps} = props
   const ref = useRef<HTMLUListElement | null>(null)
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const focusedElementRef = useRef(focusedElement)
@@ -234,4 +225,4 @@ export const Tree = forwardRef(function Tree(
       </Stack>
     </TreeContext.Provider>
   )
-})
+}

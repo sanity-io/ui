@@ -1,7 +1,6 @@
 import {Card, Container, LayerProvider, Stack, Text} from '@sanity/ui'
 import {Menu, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
-import {forwardRef} from 'react'
 
 import {getSpaceControls} from '../controls'
 
@@ -86,18 +85,17 @@ export const Custom: Story = {
   ),
 }
 
-const CustomLink = forwardRef(function CustomLink(
+const CustomLink = function CustomLink(
   props: {req: string} & Omit<React.HTMLProps<HTMLAnchorElement>, 'as' | 'href'>,
-  ref: React.ForwardedRef<HTMLAnchorElement>,
 ): React.JSX.Element {
   const {children, req, ...restProps} = props
 
   return (
-    <a data-required={req} {...restProps} href="#" ref={ref}>
+    <a data-required={req} {...restProps} href="#">
       {children}
     </a>
   )
-})
+}
 
 export const AsComponent: Story = {
   parameters: {controls: {include: []}},
