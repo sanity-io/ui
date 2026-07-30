@@ -59,17 +59,17 @@ export interface ResponsiveGridProps {
   autoFlow?: GridAutoFlow | GridAutoFlow[]
 
   /**
-   * @deprecated Use `gridTemplateColumns` instead. `columns` will be removed in v4.
+   * @deprecated Use `gridTemplateColumns` instead.
    */
-  columns?: number | number[]
+  columns?: never
   gridTemplateColumns?: number | number[]
   gap?: number | number[]
   gapX?: number | number[]
   gapY?: number | number[]
   /**
-   * @deprecated Use `gridTemplateRows` instead. `rows` will be removed in v4.
+   * @deprecated Use `gridTemplateRows` instead.
    */
-  rows?: number | number[]
+  rows?: never
   gridTemplateRows?: number | number[]
 }
 
@@ -79,34 +79,34 @@ export interface ResponsiveGridProps {
 export interface ResponsiveGridItemProps {
   gridColumn?: GridItemColumn | GridItemColumn[]
   /**
-   * @deprecated Use `gridColumn` instead. `column` will be removed in v4.
+   * @deprecated Use `gridColumn` instead.
    */
-  column?: GridItemColumn | GridItemColumn[]
+  column?: never
   gridColumnStart?: GridItemColumnStart | GridItemColumnStart[]
   /**
-   * @deprecated Use `gridColumnStart` instead. `columnStart` will be removed in v4.
+   * @deprecated Use `gridColumnStart` instead.
    */
-  columnStart?: GridItemColumnStart | GridItemColumnStart[]
+  columnStart?: never
   gridColumnEnd?: GridItemColumnEnd | GridItemColumnEnd[]
   /**
-   * @deprecated Use `gridColumnEnd` instead. `columnEnd` will be removed in v4.
+   * @deprecated Use `gridColumnEnd` instead.
    */
-  columnEnd?: GridItemColumnEnd | GridItemColumnEnd[]
+  columnEnd?: never
   gridRow?: GridItemRow | GridItemRow[]
   /**
-   * @deprecated Use `gridRow` instead. `row` will be removed in v4.
+   * @deprecated Use `gridRow` instead.
    */
-  row?: GridItemRow | GridItemRow[]
+  row?: never
   gridRowStart?: GridItemRowStart | GridItemRowStart[]
   /**
-   * @deprecated Use `gridRowStart` instead. `rowStart` will be removed in v4.
+   * @deprecated Use `gridRowStart` instead.
    */
-  rowStart?: GridItemRowStart | GridItemRowStart[]
+  rowStart?: never
   gridRowEnd?: GridItemRowEnd | GridItemRowEnd[]
   /**
-   * @deprecated Use `gridRowEnd` instead. `rowEnd` will be removed in v4.
+   * @deprecated Use `gridRowEnd` instead.
    */
-  rowEnd?: GridItemRowEnd | GridItemRowEnd[]
+  rowEnd?: never
 }
 
 /**
