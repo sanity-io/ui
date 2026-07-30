@@ -1,4 +1,4 @@
-import {forwardRef, lazy, Suspense} from 'react'
+import {lazy, Suspense} from 'react'
 import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
@@ -30,11 +30,10 @@ const StyledCode = styled.pre<FontWeightStyleProps & ResponsiveFontSizeStyleProp
   responsiveCodeFontStyle,
 )
 
-const CodeComponent = forwardRef(function Code(
+const CodeComponent = function Code(
   props: CodeOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLPreElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLPreElement>,
 ) {
-  const {children, language, size = 2, weight, ...restProps} = props
+  const {children, language, ref, size = 2, weight, ...restProps} = props
 
   return (
     <StyledCode
@@ -50,7 +49,7 @@ const CodeComponent = forwardRef(function Code(
       </Suspense>
     </StyledCode>
   )
-})
+}
 
 /**
  * @public

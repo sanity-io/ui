@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import {act, render} from '@testing-library/react'
+// oxlint-disable-next-line no-restricted-imports -- this test deliberately renders a `forwardRef` component (consumers may still use it on React 19) to pin the freshness contract below
 import {forwardRef, memo} from 'react'
 import {describe, expect, test} from 'vitest'
 
@@ -23,12 +24,13 @@ describe('useGlobalKeyDown', () => {
       })
     }
 
-    const ForwardRefComp = forwardRef<HTMLDivElement, {n: number}>(
-      function ForwardRefComp({n}, ref) {
-        usePush('forwardRef', n)
-        return <div ref={ref} />
-      },
-    )
+    const ForwardRefComp = forwardRef<HTMLDivElement, {n: number}>(function ForwardRefComp(
+      {n},
+      ref,
+    ) {
+      usePush('forwardRef', n)
+      return <div ref={ref} />
+    })
 
     const MemoComp = memo(function MemoComp({n}: {n: number}) {
       usePush('memo', n)

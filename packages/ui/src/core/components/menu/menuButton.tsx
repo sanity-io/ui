@@ -1,6 +1,5 @@
 import {
   cloneElement,
-  forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -51,6 +50,7 @@ export interface MenuButtonProps {
    * @deprecated Use `popover={{preventOverflow: true}}` instead.
    */
   preventOverflow?: never
+  ref?: React.Ref<HTMLButtonElement | null>
 }
 
 /**
@@ -58,10 +58,7 @@ export interface MenuButtonProps {
  *
  * @public
  */
-export const MenuButton = forwardRef(function MenuButton(
-  props: MenuButtonProps,
-  forwardedRef: React.ForwardedRef<HTMLButtonElement | null>,
-) {
+export const MenuButton = function MenuButton(props: MenuButtonProps) {
   const {
     __unstable_disableRestoreFocusOnClose: disableRestoreFocusOnClose = false,
     button: buttonProp,
@@ -70,6 +67,7 @@ export const MenuButton = forwardRef(function MenuButton(
     onClose,
     onOpen,
     popover,
+    ref: forwardedRef,
   } = props
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
@@ -244,4 +242,4 @@ export const MenuButton = forwardRef(function MenuButton(
       {button || <></>}
     </Popover>
   )
-})
+}

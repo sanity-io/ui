@@ -1,4 +1,3 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles/helpers'
@@ -32,15 +31,15 @@ const StyledBadge = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
   badgeStyle,
 )
 
-const BadgeComponent = forwardRef(function Badge(
+const BadgeComponent = function Badge(
   props: BadgeOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,
-  ref,
 ) {
   const {
     children,
     fontSize = 1,
     padding = 1,
     radius = 'full',
+    ref,
     tone = 'default',
     ...restProps
   } = props
@@ -57,7 +56,7 @@ const BadgeComponent = forwardRef(function Badge(
       <Text size={fontSize}>{children}</Text>
     </StyledBadge>
   )
-})
+}
 
 /**
  * Badges are used to tag resources.
