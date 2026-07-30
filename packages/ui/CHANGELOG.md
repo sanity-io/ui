@@ -1,5 +1,19 @@
 # @sanity/ui
 
+## 4.0.0-next.4
+
+### Major Changes
+
+- [#2518](https://github.com/sanity-io/ui/pull/2518) [`7a3d86b`](https://github.com/sanity-io/ui/commit/7a3d86bc7c56031a710aa947f2d239baff07d7bf) Thanks [@stipsan](https://github.com/stipsan)! - Use the native `ResizeObserver` API directly, dropping the
+  `@juggle/resize-observer` polyfill dependency and the internal
+  `_ResizeObserver` export. Use the global `ResizeObserver` instead.
+
+### Minor Changes
+
+- [#2508](https://github.com/sanity-io/ui/pull/2508) [`9088ea6`](https://github.com/sanity-io/ui/commit/9088ea686cb905f381fa3942b1300d5a82c7928b) Thanks [@stipsan](https://github.com/stipsan)! - Tooltip and Popover now keep their content mounted with React's `<Activity>` when closed, preserving internal state and pre-rendering hidden content. When `animate` is enabled they use `AnimateActivity` (vendored from Motion), which defers hiding until exit animations complete. Popovers with recursive content must gate the recursion on `open` to avoid rendering an infinitely deep hidden tree.
+
+- [#2519](https://github.com/sanity-io/ui/pull/2519) [`304f7a7`](https://github.com/sanity-io/ui/commit/304f7a7720326156a712e041f1ed6e919e9fd6fb) Thanks [@stipsan](https://github.com/stipsan)! - All components are now plain function components that receive `ref` as a regular prop (React 19 semantics) instead of being wrapped in `forwardRef`. Refs keep working exactly as before, but the components no longer pass `react-is` checks like `isForwardRef`. The legacy React APIs (`forwardRef`, `createRef`, `createElement`, `Component`, `PureComponent`) are now banned via oxlint across the repo.
+
 ## 4.0.0-next.3
 
 ### Major Changes
