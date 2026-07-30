@@ -11,6 +11,7 @@ import {
   useFloating,
 } from '@floating-ui/react-dom'
 import {
+  Activity,
   cloneElement,
   forwardRef,
   type Ref,
@@ -373,7 +374,7 @@ export const Popover = forwardRef(function Popover(
           {popoverNode}
         </AnimateActivity>
       ) : (
-        open && popoverNode
+        <Activity mode={open ? 'visible' : 'hidden'}>{popoverNode}</Activity>
       )}
 
       {/* the referred element */}

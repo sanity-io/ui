@@ -9,6 +9,7 @@ import {
   useFloating,
 } from '@floating-ui/react-dom'
 import {
+  Activity,
   cloneElement,
   forwardRef,
   useCallback,
@@ -390,7 +391,7 @@ export const Tooltip = forwardRef(function Tooltip(
           {tooltipNode}
         </AnimateActivity>
       ) : (
-        showTooltip && tooltipNode
+        <Activity mode={showTooltip ? 'visible' : 'hidden'}>{tooltipNode}</Activity>
       )}
 
       {/* the referred element */}
