@@ -634,9 +634,6 @@ importers:
       react-refractor:
         specifier: 'catalog:'
         version: 4.0.0(react@19.2.8)
-      use-effect-event:
-        specifier: ^2.0.3
-        version: 2.0.3(react@19.2.8)
     devDependencies:
       '@sanity/tsdown-config':
         specifier: 'catalog:'

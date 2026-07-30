@@ -17,12 +17,12 @@ import {
   useId,
   useImperativeHandle,
   useLayoutEffect,
+  useEffectEvent,
   useMemo,
   useRef,
   useState,
 } from 'react'
 import {styled} from 'styled-components'
-import {useEffectEvent} from 'use-effect-event'
 
 import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {useDelayedState} from '../../hooks/useDelayedState'
