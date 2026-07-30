@@ -47,7 +47,9 @@ describe('useEffectEvent', () => {
     function App() {
       const [n, setN] = useState(0)
 
-      bump = () => setN((x) => x + 1)
+      useEffect(() => {
+        bump = () => setN((x) => x + 1)
+      }, [])
 
       return (
         <>
@@ -62,9 +64,9 @@ describe('useEffectEvent', () => {
 
     act(() => bump!())
 
-    calls['plain']!()
-    calls['forwardRef']!()
-    calls['memo']!()
+    calls['plain']()
+    calls['forwardRef']()
+    calls['memo']()
 
     expect(seen).toEqual(['plain:1', 'forwardRef:1', 'memo:1'])
   })
