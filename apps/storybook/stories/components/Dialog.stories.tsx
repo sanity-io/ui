@@ -572,15 +572,13 @@ function NestedStory() {
                     <MenuButton
                       button={<Button text="Test" />}
                       id="menu3"
-                      popover={{animate: true}}
+                      popover={{animate: true, portal: true}}
                       menu={
                         <Menu>
                           <MenuItem text="Test" />
                           <MenuItem text="Test" />
                         </Menu>
                       }
-                      // oxlint-disable-next-line no-deprecated
-                      portal
                     />
                   </Box>
                 </Dialog>

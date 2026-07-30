@@ -191,14 +191,7 @@ export const MultipleStyles: Story = {
                   <Button {...props} tone={row} mode={column} text={props.text} muted />
                 )}
                 {/* Small button */}
-                <Button
-                  {...props}
-                  gap={2}
-                  padding={2}
-                  tone={row}
-                  mode={column}
-                  text={props.text}
-                />
+                <Button {...props} gap={2} padding={2} tone={row} mode={column} text={props.text} />
               </Flex>
             ),
           })}
@@ -217,14 +210,7 @@ export const MultipleStyles: Story = {
                   <Button {...props} tone={row} mode={column} text={props.text} muted />
                 )}
                 {/* Small button */}
-                <Button
-                  {...props}
-                  gap={2}
-                  padding={2}
-                  tone={row}
-                  mode={column}
-                  text={props.text}
-                />
+                <Button {...props} gap={2} padding={2} tone={row} mode={column} text={props.text} />
               </Flex>
             ),
           })}

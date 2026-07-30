@@ -29,7 +29,12 @@ export function ColorPalette(): ReactNode {
     <ThemeProvider theme={theme}>
       <ToastProvider>
         <Card scheme="light">
-          <Grid gridTemplateColumns={[1, 1, 2, 3]} gapX={[4, 4, 5]} gapY={[5, 5, 6]} padding={[4, 5, 6]}>
+          <Grid
+            gridTemplateColumns={[1, 1, 2, 3]}
+            gapX={[4, 4, 5]}
+            gapY={[5, 5, 6]}
+            padding={[4, 5, 6]}
+          >
             {COLOR_HUES.map((hueKey) => (
               <ColorHuePreview tints={hues[hueKey]} hueKey={hueKey} key={hueKey} />
             ))}

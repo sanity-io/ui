@@ -453,8 +453,8 @@ function AlignedStory() {
       <Card height="fill" padding={2} ref={setBoundaryElement} shadow={1} sizing="border">
         <Flex align="flex-start" height="fill" justify="flex-end">
           <Popover
-            // oxlint-disable-next-line no-deprecated
-            boundaryElement={boundaryElement}
+            floatingBoundary={boundaryElement}
+            referenceBoundary={boundaryElement}
             content={content}
             open={open}
             overflow="auto"

@@ -118,12 +118,7 @@ export const MenuItemsVariants: Story = {
                 )}
               </Stack>
             )}
-            {badgeText && (
-              // oxlint-disable-next-line no-deprecated
-              <Badge fontSize={fontSize} mode="default">
-                {badgeText}
-              </Badge>
-            )}
+            {badgeText && <Badge fontSize={fontSize}>{badgeText}</Badge>}
           </Flex>
         </MenuItem>
       )
