@@ -10,8 +10,8 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {AnimatePresence} from 'motion/react'
 import {
+  Activity,
   cloneElement,
   forwardRef,
   type Ref,
@@ -34,6 +34,7 @@ import {BoxOverflow} from '../../types/box'
 import {CardTone} from '../../types/card'
 import {Placement} from '../../types/placement'
 import {PopoverMargins} from '../../types/popover'
+import {AnimateActivity} from '../../utils/animateActivity'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
 import {LayerProps} from '../../utils/layer/layer'
@@ -359,18 +360,22 @@ export const Popover = forwardRef(function Popover(
     </LayerProvider>
   )
 
-  const children =
-    open &&
-    (portal ? (
-      <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>{popover}</Portal>
-    ) : (
-      popover
-    ))
+  const popoverNode = portal ? (
+    <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>{popover}</Portal>
+  ) : (
+    popover
+  )
 
   return (
     <>
       {/* the popover */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate ? (
+        <AnimateActivity layoutMode="default" mode={open ? 'visible' : 'hidden'}>
+          {popoverNode}
+        </AnimateActivity>
+      ) : (
+        <Activity mode={open ? 'visible' : 'hidden'}>{popoverNode}</Activity>
+      )}
 
       {/* the referred element */}
       {child}
