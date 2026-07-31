@@ -102,7 +102,7 @@ const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
  *
  * @public
  */
-export const Autocomplete = function Autocomplete<Option extends BaseAutocompleteOption>(
+export function Autocomplete<Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
     Omit<
       HTMLProps<HTMLInputElement>,

@@ -160,7 +160,7 @@ const TextInputClearButton = styled(Button)({
  *
  * @public
  */
-export const TextInput = function TextInput(
+export function TextInput(
   props: TextInputProps & Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'prefix' | 'type'>,
 ) {
   const {

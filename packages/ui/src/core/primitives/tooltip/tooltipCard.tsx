@@ -21,7 +21,7 @@ const MotionCard = styled(motion.create(Card))`
 /**
  * @internal
  */
-export const TooltipCard = function TooltipCard(
+export function TooltipCard(
   props: {
     animate?: boolean
     arrow: boolean

@@ -40,9 +40,7 @@ const IconBox = styled(Box)(selectStyle.iconBox)
  *
  * @public
  */
-export const Select = function Select(
-  props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>,
-) {
+export function Select(props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>) {
   const {
     children,
     customValidity,

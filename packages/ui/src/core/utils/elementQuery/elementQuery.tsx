@@ -17,7 +17,7 @@ export interface MediaQueryProps {
  * DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const ElementQuery = function ElementQuery(
+export function ElementQuery(
   props: MediaQueryProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'media'>,
 ) {
   const theme = useTheme_v2()
