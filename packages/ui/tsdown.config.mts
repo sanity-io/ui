@@ -18,7 +18,16 @@ const config: UserConfig = await defineConfig({
   },
   // `src/exports/styles.ts` emits the declaration for the CSS export, but its
   // JavaScript output is not a separate public `@sanity/ui/styles` entry point.
-  exports: {exclude: ['styles']},
+  exports: {
+    exclude: ['styles'],
+    customExports: (packageExports, {isPublish}) => ({
+      ...packageExports,
+      './styles.css': {
+        types: isPublish ? './dist/styles.d.ts' : './src/exports/styles.ts',
+        default: './dist/styles.css',
+      },
+    }),
+  },
   tsconfig: 'tsconfig.dist.json',
   styledComponents: true,
   reactCompiler: {target: '19'},
