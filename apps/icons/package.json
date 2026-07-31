@@ -20,7 +20,7 @@
     "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "^6.0.4",
+    "@vitejs/plugin-react": "^6.0.5",
     "babel-plugin-react-compiler": "catalog:",
     "copy-to-clipboard": "^4.0.2",
     "react": "catalog:",
