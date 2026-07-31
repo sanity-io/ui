@@ -25,7 +25,16 @@ const config: UserConfig = await defineConfig({
   // the stylesheet to the consumer: `import '@sanity/ui/styles.css'` — the
   // same file name and consumer contract as the vanilla-extract based
   // successor of this library, to minimize churn when upgrading later.
-  vanillaExtract: {fileName: 'styles.css', inject: false},
+  //
+  // `minify: false` keeps the output readable so CSS diffs between published
+  // versions are easy to eval. The lightningcss pass still runs with the
+  // lowering targets resolved from `@sanity/browserslist-config` (the
+  // `@sanity/tsdown-config` default when no `target` is set). Note that it
+  // collapses duplicate declarations to the last value regardless of targets
+  // (e.g. an authored `overflow: hidden` fallback before `overflow: clip`
+  // ships as just `overflow: clip` — fine, since `overflow: clip` is
+  // Baseline).
+  vanillaExtract: {fileName: 'styles.css', inject: false, minify: false},
 })
 
 export default config
