@@ -25,7 +25,19 @@ const config: UserConfig = await defineConfig({
   // the stylesheet to the consumer: `import '@sanity/ui/styles.css'` — the
   // same file name and consumer contract as the vanilla-extract based
   // successor of this library, to minimize churn when upgrading later.
-  vanillaExtract: {fileName: 'styles.css', inject: false},
+  //
+  // `minify: false` + `target: false` skip the lightningcss pass entirely, so
+  // the stylesheet ships exactly as authored. That is what keeps the
+  // `overflow: hidden` fallback ahead of `overflow: clip` (needed by browsers
+  // in the support matrix without `overflow: clip`, e.g. iOS Safari 15): no
+  // browser target can preserve it, because lightningcss's OverflowHandler
+  // always collapses duplicate `overflow` declarations to the last value —
+  // unlike e.g. colors, it never consults compat data for the `clip` keyword —
+  // and setting any of `minify`, `target` or `lightningcss` runs that pass.
+  // Revisit when lightningcss learns to preserve keyword fallbacks, or when
+  // every supported browser understands `overflow: clip` and the `hidden`
+  // fallbacks can be deleted from the `.css.ts` sources instead.
+  vanillaExtract: {fileName: 'styles.css', inject: false, minify: false, target: false},
 })
 
 export default config
