@@ -22,7 +22,7 @@ const Input = styled.input(inputElementStyles)
  *
  * @public
  */
-export const Checkbox = function Checkbox(
+export function Checkbox(
   props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & CheckboxProps,
 ) {
   const {

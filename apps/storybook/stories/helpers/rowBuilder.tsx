@@ -9,12 +9,7 @@ interface RowBuilderProps<T> {
   scheme?: ThemeColorSchemeKey
 }
 
-export const rowBuilder = function <T>({
-  gap = 3,
-  renderItem,
-  rows,
-  scheme,
-}: RowBuilderProps<T>): ReactNode {
+export function rowBuilder<T>({gap = 3, renderItem, rows, scheme}: RowBuilderProps<T>): ReactNode {
   return (
     <Card border={!!scheme} padding={scheme ? 4 : 0} radius={scheme ? 2 : 0} scheme={scheme}>
       <Flex gap={gap} wrap="wrap">

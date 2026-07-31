@@ -98,7 +98,7 @@ const StyledTooltip = styled(Layer)`
  *
  * @public
  */
-export const Tooltip = function Tooltip(
+export function Tooltip(
   props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
 ) {
   const boundaryElementContext = useBoundaryElement()

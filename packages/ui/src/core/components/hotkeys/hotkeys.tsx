@@ -40,9 +40,7 @@ const Key = styled(KBD)`
  *
  * @public
  */
-export const Hotkeys = function Hotkeys(
-  props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,
-) {
+export function Hotkeys(props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>) {
   const {fontSize, gap = 0.5, keys, padding, radius, ref, ...restProps} = props
   const spacing = _getArrayProp(gap)
 

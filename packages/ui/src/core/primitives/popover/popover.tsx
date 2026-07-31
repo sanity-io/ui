@@ -141,7 +141,7 @@ const ViewportOverlay = () => {
  *
  * @public
  */
-export const Popover = function Popover(
+export function Popover(
   props: PopoverProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
 ): React.JSX.Element {

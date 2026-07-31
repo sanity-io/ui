@@ -21,7 +21,7 @@ export interface TreeProps {
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const Tree = function Tree(
+export function Tree(
   props: TreeProps &
     Omit<React.HTMLProps<HTMLUListElement>, 'align' | 'as' | 'height' | 'role' | 'wrap'>,
 ): React.JSX.Element {

@@ -58,7 +58,7 @@ export interface MenuButtonProps {
  *
  * @public
  */
-export const MenuButton = function MenuButton(props: MenuButtonProps) {
+export function MenuButton(props: MenuButtonProps) {
   const {
     __unstable_disableRestoreFocusOnClose: disableRestoreFocusOnClose = false,
     button: buttonProp,

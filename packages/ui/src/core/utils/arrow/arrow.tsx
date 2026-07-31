@@ -63,7 +63,7 @@ const ShapePath = styled.path`
 `
 
 /** @internal */
-export const Arrow = function Arrow(
+export function Arrow(
   props: {width: number; height: number; radius?: number} & Omit<
     HTMLProps<HTMLDivElement>,
     'width' | 'height'

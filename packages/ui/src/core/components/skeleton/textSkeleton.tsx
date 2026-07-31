@@ -62,7 +62,7 @@ export interface CodeSkeletonProps extends SkeletonProps {
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const TextSkeleton = function TextSkeleton(
+export function TextSkeleton(
   props: TextSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
 ) {
@@ -76,7 +76,7 @@ export const TextSkeleton = function TextSkeleton(
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const LabelSkeleton = function LabelSkeleton(
+export function LabelSkeleton(
   props: LabelSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
 ) {
@@ -90,7 +90,7 @@ export const LabelSkeleton = function LabelSkeleton(
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const HeadingSkeleton = function HeadingSkeleton(
+export function HeadingSkeleton(
   props: HeadingSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
 ) {
@@ -104,7 +104,7 @@ export const HeadingSkeleton = function HeadingSkeleton(
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const CodeSkeleton = function CodeSkeleton(
+export function CodeSkeleton(
   props: CodeSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
 ) {
