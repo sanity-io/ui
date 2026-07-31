@@ -1,4 +1,5 @@
-import {Badge, Box, Card, Code, Flex, Stack, Text} from '@sanity/ui'
+import {Badge, Box, Card, Flex, Stack, Text} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import {stegaClean} from 'next-sanity'
 import {ReactElement} from 'react'
 import {styled} from 'styled-components'

@@ -1,4 +1,4 @@
-import {Code} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import {ReactElement} from 'react'
 
 import type {TargetByPathQueryResult} from '#sanity.types'

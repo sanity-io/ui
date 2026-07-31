@@ -1,4 +1,5 @@
-import {Card, Code, Container, Flex, Grid} from '@sanity/ui'
+import {Card, Container, Flex, Grid} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {getHeightControls, getOverflowControls, getSpaceControls} from '../controls'
