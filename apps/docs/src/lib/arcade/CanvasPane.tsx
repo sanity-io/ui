@@ -6,7 +6,6 @@ import {
   Container,
   Flex,
   Inline,
-  Popover,
   Stack,
   Text,
   TextArea,
@@ -14,8 +13,9 @@ import {
   useClickOutsideEvent,
   useGlobalKeyDown,
   useLayer,
-  useToast,
 } from '@sanity/ui'
+import {Popover} from '@sanity/ui/popover'
+import {useToast} from '@sanity/ui/toast'
 import React, {ReactElement, useCallback, useEffect, useRef, useState} from 'react'
 
 import {ArcadeFrame} from './ArcadeFrame'

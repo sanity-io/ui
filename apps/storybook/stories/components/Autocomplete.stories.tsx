@@ -2,30 +2,27 @@ import {CloseIcon} from '@sanity/icons/Close'
 import {EarthAmericasIcon} from '@sanity/icons/EarthAmericas'
 import {SearchIcon} from '@sanity/icons/Search'
 import {
-  Autocomplete,
-  AutocompleteProps,
-  BaseAutocompleteOption,
   BoundaryElementProvider,
   Box,
   Button,
   Card,
-  Code,
   Container,
   Flex,
   Heading,
   Label,
   Layer,
   LayerProvider,
-  Popover,
   Portal,
   PortalProvider,
   Skeleton,
   Stack,
   Text,
   TextSkeleton,
-  ToastProvider,
-  useToast,
 } from '@sanity/ui'
+import {Autocomplete, AutocompleteProps, BaseAutocompleteOption} from '@sanity/ui/autocomplete'
+import {Code} from '@sanity/ui/code'
+import {Popover} from '@sanity/ui/popover'
+import {ToastProvider, useToast} from '@sanity/ui/toast'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
