@@ -3,7 +3,7 @@ import readline from 'node:readline/promises'
 
 // Colorize only a real terminal, and honor the NO_COLOR convention (https://no-color.org).
 const noColor = process.env['NO_COLOR'] !== undefined
-const supportsColor = Boolean(process.stdout.isTTY) && !noColor
+const supportsColor = process.stdout.isTTY && !noColor
 
 function paint(code: string, text: string): string {
   if (!supportsColor) return text
@@ -44,7 +44,7 @@ export function fail(message: string): void {
 export function errorLine(message: string): void {
   // Gate color on stderr (where this writes), not stdout, so a redirected stderr
   // doesn't receive ANSI codes while stdout is still a TTY.
-  const mark = Boolean(process.stderr.isTTY) && !noColor ? '\u001b[31m✗\u001b[0m' : '✗'
+  const mark = process.stderr.isTTY && !noColor ? '\u001b[31m✗\u001b[0m' : '✗'
   process.stderr.write(`${mark} ${message}\n`)
 }
 
@@ -68,7 +68,9 @@ export async function confirm(question: string, options: ConfirmOptions = {}): P
   const rl = readline.createInterface({input: process.stdin, output: process.stdout})
   try {
     const hint = defaultValue ? 'Y/n' : 'y/N'
-    const answer = (await rl.question(`${question} ${color.dim(`(${hint})`)} `)).trim().toLowerCase()
+    const answer = (await rl.question(`${question} ${color.dim(`(${hint})`)} `))
+      .trim()
+      .toLowerCase()
     if (answer === '') return defaultValue
     return answer === 'y' || answer === 'yes'
   } finally {

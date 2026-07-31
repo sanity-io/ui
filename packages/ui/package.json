@@ -33,8 +33,11 @@
     },
     "./package.json": "./package.json",
     "./styles.css": {
-      "types": "./src/index.css.d.ts",
-      "default": "./dist/styles.css"
+      "types": "./src/styles.css.d.ts",
+      "browser": "./dist/styles.css",
+      "style": "./dist/styles.css",
+      "node": "./src/styles.css.node.js",
+      "default": "./src/styles.css.node.js"
     }
   },
   "publishConfig": {
@@ -42,8 +45,11 @@
       ".": "./dist/index.js",
       "./package.json": "./package.json",
       "./styles.css": {
-        "types": "./src/index.css.d.ts",
-        "default": "./dist/styles.css"
+        "types": "./src/styles.css.d.ts",
+        "browser": "./dist/styles.css",
+        "style": "./dist/styles.css",
+        "node": "./src/styles.css.node.js",
+        "default": "./src/styles.css.node.js"
       }
     }
   },

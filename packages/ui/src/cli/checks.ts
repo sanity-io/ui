@@ -1,21 +1,22 @@
 import {existsSync, readFileSync} from 'node:fs'
 import {createRequire} from 'node:module'
-import {join} from 'node:path'
+import {dirname, join} from 'node:path'
 import process from 'node:process'
 
 import {detect, isPackageInstalled, PACKAGE_NAME, readInstalledPackageVersion} from './detect.js'
 import {inspectStylesheet, STYLES_SPECIFIER} from './styles.js'
 import {inspectTsconfig} from './tsconfig.js'
-import {meetsNode, meetsReact, NODE_REQUIREMENT, REACT_MIN} from './versions.js'
 import type {Check, CheckStatus, Detected} from './types.js'
+import {meetsNode, meetsReact, NODE_REQUIREMENT, REACT_MIN} from './versions.js'
 
 const ICONS = '@sanity/icons'
 
-/** Resolves the published stylesheet through the package `exports` map. */
+/** Resolves the built stylesheet on disk (not the Node no-op shim). */
 function resolveStylesheet(cwd: string): string | null {
   try {
     const require = createRequire(join(cwd, 'noop.js'))
-    const path = require.resolve(`${PACKAGE_NAME}/styles.css`)
+    const pkgJsonPath = require.resolve(`${PACKAGE_NAME}/package.json`)
+    const path = join(dirname(pkgJsonPath), 'dist/styles.css')
     return existsSync(path) ? path : null
   } catch {
     return null
@@ -170,7 +171,9 @@ export function verifyAfterInit(cwd: string): Check[] {
     title: 'Probe renders with background',
     ok: probeOk,
     status: probeOk ? 'pass' : 'fail',
-    detail: stylesheetPath ? 'Card ships a background declaration' : 'stylesheet not resolved, cannot probe',
+    detail: stylesheetPath
+      ? 'Card ships a background declaration'
+      : 'stylesheet not resolved, cannot probe',
     fix: 'Ensure the package is installed and built',
   })
 
