@@ -1,7 +1,7 @@
 import {SpinnerIcon} from '@sanity/icons/Spinner'
-import {keyframes, styled} from 'styled-components'
 
 import {Text} from '../text/text'
+import {spinnerIcon} from './spinner.css'
 
 /**
  * @public
@@ -10,22 +10,6 @@ export interface SpinnerProps {
   muted?: boolean
   size?: number | number[]
 }
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`
-
-const StyledSpinner = styled(Text)`
-  & > span > svg {
-    animation: ${rotate} 500ms linear infinite;
-  }
-`
 
 /**
  * Indicate that something is loading for an indeterminate amount of time.
@@ -36,8 +20,8 @@ export const Spinner = function Spinner(
   props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
 ) {
   return (
-    <StyledSpinner data-ui="Spinner" {...props}>
-      <SpinnerIcon />
-    </StyledSpinner>
+    <Text data-ui="Spinner" {...props}>
+      <SpinnerIcon className={spinnerIcon} />
+    </Text>
   )
 }

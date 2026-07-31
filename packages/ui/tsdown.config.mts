@@ -19,6 +19,13 @@ const config: UserConfig = await defineConfig({
   tsconfig: 'tsconfig.dist.json',
   styledComponents: true,
   reactCompiler: {target: '19'},
+  // Extract vanilla-extract `.css.ts` styles into dist/styles.css. Unlike the
+  // default (`inject: {nodeCompat: true}`, which self-imports
+  // `@sanity/ui/bundle.css` from every entry), `inject: false` leaves loading
+  // the stylesheet to the consumer: `import '@sanity/ui/styles.css'` — the
+  // same file name and consumer contract as the vanilla-extract based
+  // successor of this library, to minimize churn when upgrading later.
+  vanillaExtract: {fileName: 'styles.css', inject: false},
 })
 
 export default config
