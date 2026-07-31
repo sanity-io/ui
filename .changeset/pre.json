@@ -22,6 +22,8 @@
     "react-19-compiler-target",
     "remove-forward-ref",
     "remove-visual-editing-export",
-    "ui-deprecated-tombstones"
+    "ui-deprecated-tombstones",
+    "ui-subpath-entry-points",
+    "vanilla-extract-styles-css"
   ]
 }
