@@ -19,6 +19,7 @@
     "@sanity/icons": "workspace:*",
     "@sanity/logos": "workspace:*",
     "@sanity/ui": "workspace:*",
+    "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@storybook/addon-a11y": "^10.5.5",
     "@storybook/addon-docs": "^10.5.5",
     "@storybook/addon-links": "^10.5.5",

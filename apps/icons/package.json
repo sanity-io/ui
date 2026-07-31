@@ -17,6 +17,7 @@
     "@sanity/client": "catalog:",
     "@sanity/icons": "workspace:*",
     "@sanity/ui": "workspace:*",
+    "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^6.0.4",
