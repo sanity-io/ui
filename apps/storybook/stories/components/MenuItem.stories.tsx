@@ -85,7 +85,7 @@ export const Custom: Story = {
   ),
 }
 
-const CustomLink = function CustomLink(
+function CustomLink(
   props: {req: string} & Omit<React.HTMLProps<HTMLAnchorElement>, 'as' | 'href'>,
 ): React.JSX.Element {
   const {children, req, ...restProps} = props

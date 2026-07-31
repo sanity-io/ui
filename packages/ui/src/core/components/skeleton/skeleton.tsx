@@ -25,9 +25,7 @@ export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxOwnProps, 
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const Skeleton = function Skeleton(
-  props: SkeletonProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>,
-) {
+export function Skeleton(props: SkeletonProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>) {
   const {animated = false, delay, radius, ref, ...restProps} = props
   // oxlint-disable-next-line no-unneeded-ternary
   const [visible, setVisible] = useState<boolean>(delay ? false : true)

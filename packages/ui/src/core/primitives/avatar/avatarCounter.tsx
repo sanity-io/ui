@@ -63,9 +63,7 @@ export interface AvatarCounterProps {
 /**
  * @public
  */
-export const AvatarCounter = function AvatarCounter(
-  props: AvatarCounterProps & {ref?: React.Ref<HTMLDivElement>},
-) {
+export function AvatarCounter(props: AvatarCounterProps & {ref?: React.Ref<HTMLDivElement>}) {
   const {count, ref, size: sizeProp = 1} = props
   const size = _getArrayProp(sizeProp)
 

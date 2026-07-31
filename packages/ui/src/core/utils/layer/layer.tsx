@@ -23,9 +23,7 @@ interface LayerChildrenProps {
 
 const StyledLayer = styled.div({position: 'relative'})
 
-const LayerChildren = function LayerChildren(
-  props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-) {
+function LayerChildren(props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>) {
   const {
     children,
     onActivate,
@@ -88,9 +86,7 @@ const LayerChildren = function LayerChildren(
 /**
  * @public
  */
-export const Layer = function Layer(
-  props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-) {
+export function Layer(props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>) {
   const {children, zOffset = 1, ...restProps} = props
 
   return (

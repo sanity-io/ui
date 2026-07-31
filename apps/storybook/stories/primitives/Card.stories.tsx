@@ -579,7 +579,7 @@ export const Checkered: Story = {
   ),
 }
 
-const CustomCardLink = function CustomCardLink(
+function CustomCardLink(
   props: {req: string} & Omit<React.HTMLProps<HTMLAnchorElement>, 'as' | 'href'>,
 ): React.JSX.Element {
   const {children, req, ...restProps} = props

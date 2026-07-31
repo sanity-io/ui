@@ -30,7 +30,7 @@ const CustomButton = styled(Button)`
 /**
  * @public
  */
-export const Tab = function Tab(
+export function Tab(
   props: TabProps &
     Omit<
       React.HTMLProps<HTMLButtonElement>,

@@ -59,9 +59,7 @@ export interface AvatarStackProps {
 /**
  * @public
  */
-export const AvatarStack = function AvatarStack(
-  props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-) {
+export function AvatarStack(props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>) {
   const {
     children: childrenProp,
     maxLength: maxLengthProp = 4,

@@ -23,7 +23,7 @@ const CustomInline = styled(Inline)`
 /**
  * @public
  */
-export const TabList = function TabList(
+export function TabList(
   props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
 ) {
   const {children: childrenProp, ref, ...restProps} = props
