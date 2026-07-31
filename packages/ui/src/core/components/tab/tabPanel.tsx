@@ -14,7 +14,7 @@ export interface TabPanelProps extends BoxOwnProps {
 /**
  * @public
  */
-export const TabPanel = function TabPanel(
+export function TabPanel(
   props: TabPanelProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'aria-labelledby' | 'id' | 'role'>,
 ) {

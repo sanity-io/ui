@@ -48,7 +48,7 @@ const StyledMenu = styled(Box)`
  *
  * @public
  */
-export const Menu = function Menu(
+export function Menu(
   props: MenuProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'role' | 'tabIndex'>,
 ) {
   const {

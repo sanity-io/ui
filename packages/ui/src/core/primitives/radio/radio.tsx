@@ -19,9 +19,7 @@ const Input = styled.input(inputElementStyle)
  *
  * @public
  */
-export const Radio = function Radio(
-  props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & RadioProps,
-) {
+export function Radio(props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & RadioProps) {
   const {
     className,
     disabled,

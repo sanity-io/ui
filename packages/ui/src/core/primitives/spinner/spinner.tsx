@@ -17,7 +17,7 @@ export interface SpinnerProps {
  *
  * @public
  */
-export const Spinner = function Spinner(
+export function Spinner(
   props: SpinnerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
 ) {
   return (

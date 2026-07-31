@@ -62,9 +62,7 @@ const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresenta
 
  * @public
  */
-export const TextArea = function TextArea(
-  props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>,
-) {
+export function TextArea(props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAreaElement>, 'as'>) {
   const {
     border = true,
     customValidity,
