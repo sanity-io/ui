@@ -7,19 +7,9 @@ import {SearchIcon} from '@sanity/icons/Search'
 import {SpinnerIcon} from '@sanity/icons/Spinner'
 import {ThLargeIcon} from '@sanity/icons/ThLarge'
 import {ThListIcon} from '@sanity/icons/ThList'
-import {
-  Box,
-  Button,
-  Card,
-  Code,
-  Container,
-  Flex,
-  Heading,
-  Popover,
-  Stack,
-  Text,
-  TextInput,
-} from '@sanity/ui'
+import {Box, Button, Card, Container, Flex, Heading, Stack, Text, TextInput} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {Popover} from '@sanity/ui/popover'
 import copy from 'copy-to-clipboard'
 import {Activity, startTransition, useEffect, useState} from 'react'
 import {registerLanguage} from 'react-refractor'
