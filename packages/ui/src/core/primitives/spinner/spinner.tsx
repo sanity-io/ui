@@ -1,6 +1,7 @@
 import {SpinnerIcon} from '@sanity/icons/Spinner'
 
 import {Text} from '../text/text'
+
 import {spinnerIcon} from './spinner.css'
 
 /**
