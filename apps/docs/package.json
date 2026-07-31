@@ -55,12 +55,14 @@
     "styled-components": "catalog:"
   },
   "devDependencies": {
+    "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@types/babel__standalone": "^7.1.9",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^24.13.3",
     "@types/qs": "^6.15.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "@vanilla-extract/next-plugin": "^2.5.2",
     "babel-plugin-react-compiler": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"

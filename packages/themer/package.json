@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
+    "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "babel-plugin-react-compiler": "catalog:",

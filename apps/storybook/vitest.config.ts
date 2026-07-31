@@ -1,5 +1,6 @@
 import path from 'node:path'
 
+import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
 import {storybookTest} from '@storybook/addon-vitest/vitest-plugin'
 import viteReact from '@vitejs/plugin-react'
 import {playwright} from '@vitest/browser-playwright'
@@ -31,7 +32,9 @@ export default defineConfig({
       },
       {
         // Browser tests that need direct control over the viewport
-        plugins: [viteReact()],
+        // (vanillaExtractPlugin compiles the `.css.ts` modules of the
+        // @sanity/ui source that the dev `exports` resolve to)
+        plugins: [viteReact(), vanillaExtractPlugin()],
         test: {
           name: 'tests',
           include: ['tests/**/*.test.{ts,tsx}'],
