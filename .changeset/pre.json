@@ -24,6 +24,7 @@
     "remove-visual-editing-export",
     "ui-deprecated-tombstones",
     "ui-subpath-entry-points",
+    "unminified-styles-css",
     "vanilla-extract-styles-css"
   ]
 }
