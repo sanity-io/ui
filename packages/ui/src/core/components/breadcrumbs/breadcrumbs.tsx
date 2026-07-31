@@ -24,7 +24,7 @@ export interface BreadcrumbsProps {
 /**
  * @beta
  */
-export const Breadcrumbs = function Breadcrumbs(
+export function Breadcrumbs(
   props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'type'>,
 ) {
   const {children, gap = 2, maxLength, ref, separator, ...restProps} = props

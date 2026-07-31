@@ -11,7 +11,7 @@ export interface SrOnlyProps {
 /**
  * @public
  */
-export const SrOnly = function SrOnly(
+export function SrOnly(
   props: SrOnlyProps & Omit<React.HTMLProps<HTMLDivElement>, 'aria-hidden' | 'as'>,
 ) {
   const {as = 'div', children, ref} = props
