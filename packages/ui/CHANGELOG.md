@@ -1,5 +1,12 @@
 # @sanity-labs/ui-poc
 
+## 0.0.1-alpha.25
+
+### Patch Changes
+
+- 92a9bc6: add init and doctor cli commands
+- 0c0ef8f: add node-safe shim for styles.css export
+
 ## 0.0.1-alpha.24
 
 ### Patch Changes
