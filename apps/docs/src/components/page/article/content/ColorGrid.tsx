@@ -2,7 +2,9 @@
 
 import {COLOR_HUES, COLOR_TINTS, hues} from '@sanity/color'
 import {ClipboardIcon} from '@sanity/icons/Clipboard'
-import {Box, Button, Code, Flex, Grid, Heading, Stack, Text, useToast} from '@sanity/ui'
+import {Box, Button, Flex, Grid, Heading, Stack, Text} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {useToast} from '@sanity/ui/toast'
 
 export function ColorGrid() {
   const toast = useToast()

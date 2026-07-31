@@ -20,16 +20,11 @@ import {
   Hotkeys,
   Inline,
   LayerProvider,
-  Menu,
-  MenuButton,
-  MenuButtonProps,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  Popover,
   Stack,
   Text,
 } from '@sanity/ui'
+import {Menu, MenuButton, MenuButtonProps, MenuDivider, MenuGroup, MenuItem} from '@sanity/ui/menu'
+import {Popover} from '@sanity/ui/popover'
 import {THEME_COLOR_STATE_TONES} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {Fragment, useCallback, useState} from 'react'
