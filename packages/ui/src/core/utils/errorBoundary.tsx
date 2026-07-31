@@ -1,4 +1,3 @@
-// oxlint-disable-next-line no-restricted-imports -- error boundaries require a class component; React has no function-component equivalent for `getDerivedStateFromError`/`componentDidCatch`
 import {Component, PropsWithChildren} from 'react'
 
 /**
