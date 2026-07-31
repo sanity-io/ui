@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.0.0-next.6
+
+### Patch Changes
+
+- [#2528](https://github.com/sanity-io/ui/pull/2528) [`aa14abf`](https://github.com/sanity-io/ui/commit/aa14abf55550c8aa1fa5848e6d637e807e35712b) Thanks [@stipsan](https://github.com/stipsan)! - Ship `styles.css` unminified so the CSS output is easy to diff between published versions. It is still processed by lightningcss with the `@sanity/browserslist-config` lowering targets.
+
 ## 4.0.0-next.5
 
 ### Major Changes
