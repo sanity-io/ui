@@ -1,5 +1,16 @@
+import {createVanillaExtractPlugin} from '@vanilla-extract/next-plugin'
 import type {NextConfig} from 'next'
 import {sanity} from 'next-sanity/live/cache-life'
+
+// The workspace @sanity/ui resolves to its TypeScript source (dev `exports`),
+// so its vanilla-extract `.css.ts` modules must be compiled here. Turbopack
+// support is forced `on` (rather than `auto`) because this app devs and
+// builds exclusively with `--turbopack`, and `auto`'s version sniffing would
+// quietly fall back to webpack-only wiring if it failed to parse a `next`
+// preview version.
+const withVanillaExtract = createVanillaExtractPlugin({
+  unstable_turbopack: {mode: 'on'},
+})
 
 const basePath = '/ui'
 const nextConfig: NextConfig = {
@@ -101,4 +112,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+export default withVanillaExtract(nextConfig)
