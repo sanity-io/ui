@@ -16,6 +16,9 @@ const config: UserConfig = await defineConfig({
   entry: {
     '*': './src/exports/*.{ts,tsx}',
   },
+  // `src/exports/styles.ts` emits the declaration for the CSS export, but its
+  // JavaScript output is not a separate public `@sanity/ui/styles` entry point.
+  exports: {exclude: ['styles']},
   tsconfig: 'tsconfig.dist.json',
   styledComponents: true,
   reactCompiler: {target: '19'},
