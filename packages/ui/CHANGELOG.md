@@ -1,5 +1,57 @@
 # @sanity/ui
 
+## 4.0.0-next.5
+
+### Major Changes
+
+- [#2522](https://github.com/sanity-io/ui/pull/2522) [`41d0dc3`](https://github.com/sanity-io/ui/commit/41d0dc3ef3e80f0f1993ee56f0dd0de1bbfc9016) Thanks [@stipsan](https://github.com/stipsan)! - Move components with heavy dependencies to dedicated subpath entry points.
+
+  Importing `@sanity/ui` no longer references `@floating-ui/react-dom`, `motion`
+  or `react-refractor` — regardless of bundler treeshaking. Components that need
+  those dependencies now live on their own entry points, grouped with the APIs
+  they are used together with:
+
+  - `@sanity/ui/toast`: `Toast`, `ToastProvider`, `useToast` (motion)
+  - `@sanity/ui/popover`: `Popover` (@floating-ui/react-dom, motion)
+  - `@sanity/ui/tooltip`: `Tooltip`, `TooltipDelayGroupProvider`,
+    `useTooltipDelayGroup` (@floating-ui/react-dom, motion)
+  - `@sanity/ui/menu`: `Menu`, `MenuButton`, `MenuDivider`, `MenuGroup`,
+    `MenuItem` (renders `Popover`)
+  - `@sanity/ui/autocomplete`: `Autocomplete` (renders `Popover`)
+  - `@sanity/ui/breadcrumbs`: `Breadcrumbs` (renders `Popover`)
+  - `@sanity/ui/code`: `Code` (lazy-loads react-refractor)
+
+  Prop, context and message types moved along with their components (e.g.
+  `PopoverProps`, `ToastParams`, `MenuItemProps`, `AutocompleteState`,
+  `TooltipDelayGroupContextValue`).
+
+  Migrate by importing from the new entry points:
+
+  ```diff
+  -import {MenuButton, ToastProvider, useToast} from '@sanity/ui'
+  +import {MenuButton} from '@sanity/ui/menu'
+  +import {ToastProvider, useToast} from '@sanity/ui/toast'
+  ```
+
+  The root entry point keeps `@deprecated` `never`-typed tombstones for every
+  moved symbol, so TypeScript surfaces the new location instead of a bare “does
+  not exist” error. `ErrorBoundary` now renders a plain `<pre><code>` instead of
+  the `Code` primitive, keeping the root entry free of the `react-refractor`
+  module graph.
+
+  `@sanity/themer` is republished with its imports updated to the new
+  `@sanity/ui` entry points.
+
+- [#2523](https://github.com/sanity-io/ui/pull/2523) [`2205690`](https://github.com/sanity-io/ui/commit/22056903c06566c9dc260add3b89cd7807bda110) Thanks [@stipsan](https://github.com/stipsan)! - Ship static CSS as a stylesheet that consumers import themselves: `import '@sanity/ui/styles.css'`.
+
+  Styles that don't depend on the theme or props are migrating from styled-components to [vanilla-extract](https://vanilla-extract.style/), extracted at build time into `dist/styles.css` instead of being injected at runtime. The stylesheet is not loaded automatically — add the import once, e.g. next to where the app renders `<ThemeProvider>`:
+
+  ```js
+  import "@sanity/ui/styles.css";
+  ```
+
+  The `styles.css` export path is the same one the vanilla-extract based next major version of this library uses, so the import carries over unchanged when upgrading later. This release migrates the first slice (`SrOnly`, `Spinner`, and internal text-overflow styling); more styles will move to the stylesheet over time.
+
 ## 4.0.0-next.4
 
 ### Major Changes
