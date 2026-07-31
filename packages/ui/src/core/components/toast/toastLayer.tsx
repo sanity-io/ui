@@ -29,7 +29,7 @@ export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
       paddingX={paddingX}
       paddingY={paddingY}
       gap={gap}
-      columns={1}
+      gridTemplateColumns={1}
       style={{zIndex}}
     >
       {children}
