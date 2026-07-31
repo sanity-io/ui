@@ -447,6 +447,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      comment-json:
+        specifier: ^5.0.0
+        version: 5.0.0
       react:
         specifier: ^19.2.6
         version: 19.2.6
@@ -3550,6 +3553,9 @@ packages:
   array-ify@1.0.0:
     resolution: {integrity: sha512-c5AMf34bKdvPhQ7tBGhqkgKNUzMr4WUs+WDtC2ZUGOUncbxKMTvqxYctiseW3+L4bA8ec+GcZ6/A/FW4m8ukng==}
 
+  array-timsort@1.0.3:
+    resolution: {integrity: sha512-/+3GRL7dDAGEfM6TseQk/U+mi18TU2Ms9I3UlLdUMhz2hbvGNTKdj9xniwXfUqgYhHxRx0+8UnKkvlNwVU+cWQ==}
+
   array-union@2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
     engines: {node: '>=8'}
@@ -3794,6 +3800,10 @@ packages:
 
   commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
+
+  comment-json@5.0.0:
+    resolution: {integrity: sha512-uiqLcOiVDJtBP8WGkZHEP+FZIhTzP1dxvn59EfoYUi9gqupjrBWVQkO2atDrbnKPwLeotFYDsuNb26uBMqB+hw==}
+    engines: {node: '>= 6'}
 
   commondir@1.0.1:
     resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==}
@@ -9692,6 +9702,8 @@ snapshots:
 
   array-ify@1.0.0: {}
 
+  array-timsort@1.0.3: {}
+
   array-union@2.1.0: {}
 
   assertion-error@2.0.1: {}
@@ -9927,6 +9939,11 @@ snapshots:
   commander@13.1.0: {}
 
   commander@2.20.3: {}
+
+  comment-json@5.0.0:
+    dependencies:
+      array-timsort: 1.0.3
+      esprima: 4.0.1
 
   commondir@1.0.1: {}
 
