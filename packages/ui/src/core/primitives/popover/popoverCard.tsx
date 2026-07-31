@@ -38,7 +38,7 @@ const MotionFlex = styled(motion.create(Flex))`
 /**
  * @internal
  */
-export const PopoverCard = function PopoverCard(
+export function PopoverCard(
   props: {
     /** @beta*/
     __unstable_margins?: PopoverMargins

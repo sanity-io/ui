@@ -42,7 +42,7 @@ const ItemWrapper = styled.div`
 /**
  * @beta
  */
-export const VirtualList = function VirtualList(
+export function VirtualList(
   props: VirtualListProps &
     StackOwnProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange'>,

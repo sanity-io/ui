@@ -29,7 +29,7 @@ const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switch
  *
  * @public
  */
-export const Switch = function Switch(
+export function Switch(
   props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'type'> & SwitchProps,
 ) {
   const {

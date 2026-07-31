@@ -155,7 +155,7 @@ const DialogFooter = styled(Box)`
   z-index: 3;
 `
 
-const DialogCard = function DialogCard(props: DialogCardProps) {
+function DialogCard(props: DialogCardProps) {
   const {
     __unstable_autoFocus: autoFocus,
     __unstable_hideCloseButton: hideCloseButton,
@@ -288,7 +288,7 @@ const DialogCard = function DialogCard(props: DialogCardProps) {
  *
  * @public
  */
-export const Dialog = function Dialog(
+export function Dialog(
   props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
 ) {
   const dialog = useDialog()
