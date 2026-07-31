@@ -1,3 +1,4 @@
+import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
 import {defineCliConfig} from 'sanity/cli'
 
 // Object configs are merged into the base config with vite's `mergeConfig`,
@@ -27,6 +28,10 @@ export default defineCliConfig({
     formatGeneratedCode: false,
   },
   vite: {
+    // The workspace @sanity/ui resolves to its TypeScript source (dev
+    // `exports`), so the studio's vite must compile its vanilla-extract
+    // `.css.ts` modules
+    plugins: [vanillaExtractPlugin()],
     resolve: {
       alias: {
         '@': './src',
