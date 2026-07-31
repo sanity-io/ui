@@ -16,6 +16,7 @@
   },
   "changesets": [
     "animate-activity",
+    "css-declaration",
     "esm-only-node-22",
     "native-resize-observer",
     "next-prerelease-kickoff",
