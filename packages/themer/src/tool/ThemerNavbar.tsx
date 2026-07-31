@@ -1,5 +1,6 @@
 import {ColorWheelIcon} from '@sanity/icons/ColorWheel'
-import {Button, Text, Tooltip} from '@sanity/ui'
+import {Button, Text} from '@sanity/ui'
+import {Tooltip} from '@sanity/ui/tooltip'
 import {type NavbarProps} from 'sanity'
 
 import {useThemer} from './context'

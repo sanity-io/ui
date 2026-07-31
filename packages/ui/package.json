@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "4.0.0-next.3",
+  "version": "4.0.0-next.4",
   "keywords": [
     "components",
     "design-system",
@@ -29,15 +29,29 @@
   ],
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./exports/index.ts",
-    "./theme": "./exports/theme.ts",
+    ".": "./src/exports/index.ts",
+    "./autocomplete": "./src/exports/autocomplete.ts",
+    "./breadcrumbs": "./src/exports/breadcrumbs.ts",
+    "./code": "./src/exports/code.ts",
+    "./menu": "./src/exports/menu.ts",
+    "./popover": "./src/exports/popover.ts",
+    "./theme": "./src/exports/theme.ts",
+    "./toast": "./src/exports/toast.ts",
+    "./tooltip": "./src/exports/tooltip.ts",
     "./package.json": "./package.json",
     "./styles.css": "./dist/styles.css"
   },
   "publishConfig": {
     "exports": {
       ".": "./dist/index.js",
+      "./autocomplete": "./dist/autocomplete.js",
+      "./breadcrumbs": "./dist/breadcrumbs.js",
+      "./code": "./dist/code.js",
+      "./menu": "./dist/menu.js",
+      "./popover": "./dist/popover.js",
       "./theme": "./dist/theme.js",
+      "./toast": "./dist/toast.js",
+      "./tooltip": "./dist/tooltip.js",
       "./package.json": "./package.json",
       "./styles.css": "./dist/styles.css"
     }

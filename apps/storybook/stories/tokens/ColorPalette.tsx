@@ -1,18 +1,8 @@
 import {black, COLOR_HUES, ColorTint, ColorTints, hues, white} from '@sanity/color'
-import {
-  Box,
-  Card,
-  Code,
-  Flex,
-  Grid,
-  Heading,
-  Stack,
-  Text,
-  ThemeProvider,
-  ToastProvider,
-  useToast,
-} from '@sanity/ui'
+import {Box, Card, Flex, Grid, Heading, Stack, Text, ThemeProvider} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import {buildTheme, getContrastRatio, hexToRgb, rgbToHsl} from '@sanity/ui/theme'
+import {ToastProvider, useToast} from '@sanity/ui/toast'
 import {ReactNode} from 'react'
 import {styled} from 'styled-components'
 
