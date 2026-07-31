@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.0.0-next.7
+
+### Patch Changes
+
+- [#2536](https://github.com/sanity-io/ui/pull/2536) [`ab6c8f0`](https://github.com/sanity-io/ui/commit/ab6c8f0166a98e1e9e149829db1748c2cb9a297e) Thanks [@stipsan](https://github.com/stipsan)! - Emit a declaration for `@sanity/ui/styles.css` so TypeScript can validate the side-effect import.
+
 ## 4.0.0-next.6
 
 ### Patch Changes
