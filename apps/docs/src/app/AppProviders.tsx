@@ -1,7 +1,8 @@
 'use client'
 
-import {LayerProvider, ThemeProvider, ToastProvider} from '@sanity/ui'
+import {LayerProvider, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
+import {ToastProvider} from '@sanity/ui/toast'
 import {ReactNode, use} from 'react'
 import {registerLanguage} from 'react-refractor'
 import bash from 'refractor/bash'

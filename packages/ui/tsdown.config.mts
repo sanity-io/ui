@@ -5,9 +5,16 @@ import type {UserConfig} from 'tsdown'
 // same TypeScript program as the build (there is no separate tsconfig for
 // dist), and the inferred config type cannot be named without it (TS2883).
 const config: UserConfig = await defineConfig({
+  // One entry point per file in `src/exports/`. The glob form maps e.g.
+  // `src/exports/toast.ts` → `@sanity/ui/toast` (the matched filename replaces
+  // the `*` in the key, which is what drives the generated `package.json`
+  // `exports` subpaths; `index.ts` maps to the root `.` export). Adding a file
+  // to `src/exports/` is all it takes to publish a new subpath. Components
+  // with heavy dependencies (motion, @floating-ui/react-dom, react-refractor)
+  // live on their own subpaths so that importing the root entry never
+  // references those dependencies, regardless of bundler treeshaking.
   entry: {
-    'index': './exports/index.ts',
-    'theme': './exports/theme.ts',
+    '*': './src/exports/*.{ts,tsx}',
   },
   tsconfig: 'tsconfig.dist.json',
   styledComponents: true,

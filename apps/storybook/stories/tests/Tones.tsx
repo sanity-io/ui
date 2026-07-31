@@ -5,7 +5,6 @@ import {
   Button,
   Card,
   Checkbox,
-  Code,
   CodeSkeleton,
   Container,
   Flex,
@@ -18,11 +17,6 @@ import {
   Label,
   LabelSkeleton,
   LayerProvider,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  Popover,
   Radio,
   Select,
   Skeleton,
@@ -37,6 +31,9 @@ import {
   TextSkeleton,
   ThemeProvider,
 } from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
+import {Popover} from '@sanity/ui/popover'
 import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {ReactNode, useState} from 'react'
 

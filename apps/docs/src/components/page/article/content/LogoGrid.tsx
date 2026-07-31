@@ -1,6 +1,7 @@
 'use client'
 
-import {Box, Card, Code, Grid, Heading, useTheme_v2} from '@sanity/ui'
+import {Box, Card, Grid, Heading, useTheme_v2} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 
 export function LogoGrid({
   logos,
