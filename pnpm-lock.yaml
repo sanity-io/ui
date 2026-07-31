@@ -10,7 +10,7 @@ catalogs:
       specifier: ^0.23.1
       version: 0.23.1
     '@sanity/client':
-      specifier: ^7.25.0
+      specifier: ^7.26.0
       version: 7.26.0
     '@sanity/functions':
       specifier: ^1.5.0
