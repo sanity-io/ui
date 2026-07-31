@@ -1,5 +1,7 @@
 import {hexToRgb, HSL, hslToRgb, rgbToHex, rgbToHsl} from '@sanity/color'
-import {Box, Code, Flex, Stack, TextInput, Tooltip} from '@sanity/ui'
+import {Box, Flex, Stack, TextInput} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {Tooltip} from '@sanity/ui/tooltip'
 import {
   ChangeEvent,
   KeyboardEvent as ReactKeyboardEvent,

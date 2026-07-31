@@ -1,16 +1,6 @@
 import {CloseIcon} from '@sanity/icons/Close'
-import {
-  Box,
-  Button,
-  Card,
-  Code,
-  Flex,
-  Layer,
-  LayerProvider,
-  Stack,
-  Text,
-  useLayer,
-} from '@sanity/ui'
+import {Box, Button, Card, Flex, Layer, LayerProvider, Stack, Text, useLayer} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'

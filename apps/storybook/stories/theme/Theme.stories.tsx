@@ -5,15 +5,15 @@ import {
   Container,
   Dialog,
   Flex,
-  Popover,
   Stack,
   Text,
   ThemeProvider,
-  Tooltip,
   Tree,
   TreeItem,
   useRootTheme,
 } from '@sanity/ui'
+import {Popover} from '@sanity/ui/popover'
+import {Tooltip} from '@sanity/ui/tooltip'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 
