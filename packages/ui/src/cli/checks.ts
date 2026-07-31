@@ -9,7 +9,7 @@ import {inspectTsconfig} from './tsconfig.js'
 import {meetsNode, meetsReact, NODE_REQUIREMENT, REACT_MIN} from './versions.js'
 import type {Check, CheckStatus, Detected} from './types.js'
 
-const ICONS_PEER = '@sanity/icons'
+const ICONS = '@sanity/icons'
 
 /** Resolves the published stylesheet through the package `exports` map. */
 function resolveStylesheet(cwd: string): string | null {
@@ -78,12 +78,12 @@ export function collectChecks(cwd: string): CheckReport {
     }),
   )
 
-  const iconsInstalled = isPackageInstalled(cwd, ICONS_PEER)
+  const iconsInstalled = isPackageInstalled(cwd, ICONS)
   checks.push(
     check('icons', iconsInstalled, {
       title: 'Icons installed',
-      detail: iconsInstalled ? `${ICONS_PEER} present` : `${ICONS_PEER} missing`,
-      fix: `Install it: add ${ICONS_PEER}`,
+      detail: iconsInstalled ? `${ICONS} present` : `${ICONS} missing`,
+      fix: `Install it: add ${ICONS}`,
     }),
   )
 

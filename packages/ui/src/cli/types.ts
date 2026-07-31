@@ -15,7 +15,6 @@ export interface PackageJson {
   dependencies?: Record<string, string>
   devDependencies?: Record<string, string>
   peerDependencies?: Record<string, string>
-  peerDependenciesMeta?: Record<string, {optional?: boolean}>
   packageManager?: string
   eslintConfig?: unknown
 }
@@ -73,5 +72,4 @@ export interface CliOptions {
   cwd: string
   dry: boolean
   yes: boolean
-  code: boolean
 }

@@ -59,8 +59,8 @@ function parseReactMajor(version: string | null): number {
   return match ? Number(match[0]) : 19
 }
 
-function buildPlan(cwd: string, detected: Detected, {includeCode}: {includeCode: boolean}): Plan {
-  const specs = resolveInstallSpecs({includeCode})
+function buildPlan(cwd: string, detected: Detected): Plan {
+  const specs = resolveInstallSpecs()
   const {command, args} = installCommand(detected.packageManager, specs)
   const reactMajor = parseReactMajor(detected.react.version)
   const typeSpecs = detected.typescript ? resolveTypeSpecs(cwd, {reactMajor}) : []
@@ -107,7 +107,7 @@ function printPlan(cwd: string, detected: Detected, plan: Plan): void {
  * `--yes` accepts the confirmation without prompting.
  */
 export async function runInit(options: CliOptions): Promise<number> {
-  const {cwd, dry, yes, code} = options
+  const {cwd, dry, yes} = options
   const detected = detect(cwd)
 
   heading('Sanity UI init')
@@ -120,16 +120,7 @@ export async function runInit(options: CliOptions): Promise<number> {
   heading('Requirements')
   const {blocking} = reportPrereqs(detected)
 
-  // Only ask about the optional <Code> peer when it wasn't already requested via
-  // --code, we have a real terminal to prompt on, and this isn't a dry run.
-  let includeCode = code
-  if (!includeCode && !yes && process.stdin.isTTY && !dry) {
-    includeCode = await confirm('Install react-refractor for the <Code> component?', {
-      defaultValue: false,
-    })
-  }
-
-  const plan = buildPlan(cwd, detected, {includeCode})
+  const plan = buildPlan(cwd, detected)
   printPlan(cwd, detected, plan)
 
   if (dry) {

@@ -20,7 +20,6 @@ ${color.bold('Options')}
   --dry        Print the plan and exit without changing anything (init)
   --yes, -y    Accept every prompt with its default (non-interactive)
   --cwd <dir>  Run against another directory (default: current directory)
-  --code       Also install the optional react-refractor peer for <Code> (init)
   --version    Print the CLI version
   --help, -h   Show this help
 `
@@ -38,7 +37,6 @@ export async function main(argv: string[]): Promise<number> {
       dry: {type: 'boolean', default: false},
       yes: {type: 'boolean', short: 'y', default: false},
       cwd: {type: 'string'},
-      code: {type: 'boolean', default: false},
       version: {type: 'boolean', default: false},
       help: {type: 'boolean', short: 'h', default: false},
     },
@@ -63,7 +61,6 @@ export async function main(argv: string[]): Promise<number> {
   const options = {
     dry: values.dry ?? false,
     yes: values.yes ?? false,
-    code: values.code ?? false,
     cwd: values.cwd ? resolve(process.cwd(), values.cwd) : process.cwd(),
   }
 

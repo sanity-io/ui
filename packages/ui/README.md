@@ -18,11 +18,12 @@ Requires React 19.2+ and Node >=20.19 <22 || >=22.12.
 npx @sanity-labs/ui-poc init
 ```
 
-`init` detects your framework and package manager, checks your React and Node versions, then installs the package and its `@sanity/icons` peer, adds the stylesheet import to your entry file, reconciles `tsconfig.json`, and writes a `sanity-ui.json`. It prints a plan and asks before changing anything.
+`init` detects your framework and package manager, checks your React and Node versions, then installs the package along with `@sanity/icons`, adds the stylesheet import to your entry file, reconciles `tsconfig.json`, and writes a `sanity-ui.json`. It prints a plan and asks before changing anything.
+
+`@sanity/icons` is a dependency of this package, so your package manager installs it either way. `init` also adds it to your own `package.json` because you import icons directly to pass to components, and under pnpm an import that isn't declared in your project doesn't resolve.
 
 - `--dry` print the plan and exit without changing anything
 - `--yes` accept every prompt with its default (non-interactive, for CI and agents)
-- `--code` also install the optional `react-refractor` peer used by `<Code>`
 - `--cwd <dir>` run against another directory
 
 ### Manual
@@ -65,7 +66,7 @@ Run `doctor` at any time to verify an install and get a one-line fix for anythin
 npx @sanity-labs/ui-poc doctor
 ```
 
-It checks that the package and its `@sanity/icons` peer are installed, the stylesheet resolves and is imported, `tsconfig.json` has the options the components need, and your React and Node versions are supported.
+It checks that the package and `@sanity/icons` are installed, the stylesheet resolves and is imported, `tsconfig.json` has the options the components need, and your React and Node versions are supported.
 
 ## Usage
 

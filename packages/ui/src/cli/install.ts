@@ -5,8 +5,7 @@ import {isPackageInstalled, PACKAGE_NAME} from './detect.js'
 import {readSelfPackage} from './selfPackage.js'
 import type {PackageManager} from './types.js'
 
-const ICONS_PEER = '@sanity/icons'
-const REFRACTOR_PEER = 'react-refractor'
+const ICONS = '@sanity/icons'
 const DEV_FLAG: Record<PackageManager, string> = {
   npm: '--save-dev',
   pnpm: '-D',
@@ -32,24 +31,25 @@ function exactFromRange(range: string | undefined): string | null {
 
 /**
  * Builds the exact specs to install from this package's own manifest: the
- * package at its shipped version and icons/refractor at the versions it
- * declares in dependencies. Nothing here is invented. React/react-dom are
- * peers that belong to the host app, so they are intentionally left out
- * (the prereq check verifies them).
+ * package at its shipped version, and icons at the version it declares in
+ * dependencies. Nothing here is invented.
+ *
+ * Icons is already a dependency, so the package manager installs it either way.
+ * It is listed explicitly because apps import icons directly to pass to
+ * components (`<Button iconStart={AddIcon} />`), and under pnpm an import that
+ * isn't in the app's own package.json doesn't resolve. Dependencies the app
+ * never imports itself (react-refractor, clsx) are left to the package manager.
+ * React/react-dom are peers that belong to the host app, so they are left out
+ * too (the prereq check verifies them).
  */
-export function resolveInstallSpecs({includeCode = false} = {}): string[] {
+export function resolveInstallSpecs(): string[] {
   const self = readSelfPackage()
   const deps = self.dependencies ?? {}
 
   const specs = [`${PACKAGE_NAME}@${self.version ?? 'latest'}`]
 
-  const iconsVersion = exactFromRange(deps[ICONS_PEER])
-  specs.push(iconsVersion ? `${ICONS_PEER}@${iconsVersion}` : ICONS_PEER)
-
-  if (includeCode) {
-    const refractorVersion = exactFromRange(deps[REFRACTOR_PEER])
-    specs.push(refractorVersion ? `${REFRACTOR_PEER}@${refractorVersion}` : REFRACTOR_PEER)
-  }
+  const iconsVersion = exactFromRange(deps[ICONS])
+  specs.push(iconsVersion ? `${ICONS}@${iconsVersion}` : ICONS)
 
   return specs
 }

@@ -7,16 +7,16 @@ import {afterEach, beforeEach, describe, expect, it} from 'vitest'
 import {installCommand, resolveInstallSpecs, resolveTypeSpecs} from './install.js'
 
 describe('resolveInstallSpecs', () => {
-  it('pins the package to its shipped version and icons to the declared peer', () => {
+  it('pins the package to its shipped version and icons to the declared version', () => {
     const specs = resolveInstallSpecs()
     expect(specs[0]).toMatch(/^@sanity-labs\/ui-poc@\d+\.\d+\.\d+/)
     expect(specs.some((s) => s.startsWith('@sanity/icons@'))).toBe(true)
-    expect(specs.some((s) => s.startsWith('react-refractor@'))).toBe(false)
   })
 
-  it('adds react-refractor only when the Code component is requested', () => {
-    const specs = resolveInstallSpecs({includeCode: true})
-    expect(specs.some((s) => s.startsWith('react-refractor@'))).toBe(true)
+  it('leaves dependencies the app never imports itself to the package manager', () => {
+    const specs = resolveInstallSpecs()
+    expect(specs.some((s) => s.startsWith('react-refractor'))).toBe(false)
+    expect(specs.some((s) => s.startsWith('clsx'))).toBe(false)
   })
 })
 
