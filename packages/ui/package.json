@@ -39,7 +39,10 @@
     "./toast": "./src/exports/toast.ts",
     "./tooltip": "./src/exports/tooltip.ts",
     "./package.json": "./package.json",
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": {
+      "types": "./src/exports/styles.ts",
+      "default": "./dist/styles.css"
+    }
   },
   "publishConfig": {
     "exports": {
@@ -53,7 +56,10 @@
       "./toast": "./dist/toast.js",
       "./tooltip": "./dist/tooltip.js",
       "./package.json": "./package.json",
-      "./styles.css": "./dist/styles.css"
+      "./styles.css": {
+        "types": "./dist/styles.d.ts",
+        "default": "./dist/styles.css"
+      }
     }
   },
   "scripts": {
