@@ -134,11 +134,16 @@ export const WithSelectedItem: Story = {
     await userEvent.click(button)
     await userEvent.click(button)
 
-    const menu = within(document.documentElement).queryByTestId('menu')
+    // Assertion: <Menu> with a selected item should not be visible when clicking the original
+    // <MenuButton> to close. The closed menu stays in the DOM inside a hidden <Activity>
+    // boundary, so assert visibility rather than absence.
+    await waitFor(async () => {
+      const menu = within(document.documentElement).queryByTestId('menu')
 
-    // Assertion: <Menu> with a selected item should not be visible when clicking the original <MenuButton> to close
-    // oxlint-disable-next-line no-floating-promises
-    expect(menu).toBeNull()
+      if (menu) {
+        await expect(menu).not.toBeVisible()
+      }
+    })
   },
 }
 

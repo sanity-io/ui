@@ -47,6 +47,10 @@
       }
     ],
 
+    // Prefer function components; error boundaries (getDerivedStateFromError /
+    // componentDidCatch) remain allowed via allowErrorBoundary.
+    "react/prefer-function-component": ["error", {"allowErrorBoundary": true}],
+
     // React Compiler checks
     "react/react-compiler": "error",
 

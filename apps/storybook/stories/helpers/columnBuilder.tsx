@@ -9,7 +9,7 @@ interface ColumnBuilderProps<T> {
   scheme?: ThemeColorSchemeKey
 }
 
-export const columnBuilder = function <T>({
+export function columnBuilder<T>({
   gap = 3,
   renderItem,
   rows,

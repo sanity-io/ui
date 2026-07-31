@@ -334,7 +334,7 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
   return (
     <Popover
       fallbackPlacements={fallbackPlacements}
-      content={<RecursiveExample onClose={handleClose} />}
+      content={open ? <RecursiveExample onClose={handleClose} /> : null}
       open={open}
       padding={1}
       placement={fallbackPlacements[3]}

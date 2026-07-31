@@ -1,4 +1,4 @@
-import {ButtonMode} from '@sanity/ui'
+import type {ButtonMode} from '@sanity/ui'
 import {ThemeColorCardToneKey, ThemeColorStateToneKey} from '@sanity/ui/theme'
 
 interface StateWriteConfig {
