@@ -12,7 +12,4 @@ What to do — add this import once, next to where the app renders `<ThemeProvid
 import "@sanity/ui/styles.css"
 ```
 
-Good to know:
-
-- These styles moved from styled-components to [vanilla-extract](https://vanilla-extract.style/). This release migrates the first slice (`SrOnly`, `Spinner`, and internal text-overflow styling); more styles move to the stylesheet over time.
-- The export path is the same one the fully vanilla-extract-based next major uses, so the import carries over unchanged when upgrading later.
+Good to know: these styles moved from styled-components to [vanilla-extract](https://vanilla-extract.style/) — in this release that covers `SrOnly`, `Spinner`, and internal text-overflow styling.

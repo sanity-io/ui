@@ -34,7 +34,7 @@ Add this import once, next to where the app renders `<ThemeProvider>`:
 import '@sanity/ui/styles.css'
 ```
 
-Without it, `SrOnly`, `Spinner` and internal text-overflow styling render unstyled. This is the first slice — more styles move into the stylesheet over time, so the import is required from v4 on. The export path is the same one future versions use, so it carries over unchanged.
+Without it, `SrOnly`, `Spinner` and internal text-overflow styling render unstyled.
 
 ### 3. Update imports for moved components
 
