@@ -5,14 +5,11 @@
 
 **ESM-only. Node.js 22.12+ required.**
 
-What breaks:
+What changes:
 
-- `require('@sanity/ui')` no longer works — the CommonJS build (`.cjs` / `.d.cts`) and the `require` export condition are removed.
+- The CommonJS build (`.cjs` / `.d.cts`) and the `require` export condition are removed — the package now ships ESM only.
 - Node.js below 22.12 is no longer supported (`engines` is now `>=22.12`, matching `sanity`).
 
-What to do:
-
-- Consume the package with ESM `import`.
-- Run Node.js 22.12 or later.
+What to do: run Node.js 22.12 or later — that's it. Modern Node supports `require(esm)`, so `require('@sanity/ui')` keeps working; things only break if the Node.js version is too old.
 
 `@sanity/themer` was already ESM-only — it only picks up the new Node.js range.
