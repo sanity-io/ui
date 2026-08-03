@@ -8,21 +8,39 @@ The next version of Sanity's component library. Faster, simpler, and built on CS
 - **Direct props for layout.** Width, height, position, border, and overflow are first-class props — no more `style={{ ... }}` escape hatches.
 - **Works alongside v3.** Install both packages in the same app. No forced migration.
 
-## Install
-
-```sh
-pnpm add @sanity-labs/ui-poc
-```
-
 Requires React 19.2+ and Node >=20.19 <22 || >=22.12.
 
-## Setup
+## Install
 
-Import the stylesheet at your app entry point. Without it, components render as unstyled HTML with no error.
+### Recommended: the setup CLI
+
+```sh
+npx @sanity-labs/ui-poc init
+```
+
+`init` detects your framework and package manager, checks your React and Node versions, then installs the package along with `@sanity/icons`, adds the stylesheet import to your entry file, reconciles `tsconfig.json`, and writes a `sanity-ui.json`. It prints a plan and asks before changing anything.
+
+`@sanity/icons` is a dependency of this package, so your package manager installs it either way. `init` also adds it to your own `package.json` because you import icons directly to pass to components, and under pnpm an import that isn't declared in your project doesn't resolve.
+
+- `--dry` print the plan and exit without changing anything
+- `--yes` accept every prompt with its default (non-interactive, for CI and agents)
+- `--cwd <dir>` run against another directory
+
+### Manual
+
+```sh
+npm install @sanity-labs/ui-poc
+```
+
+Using pnpm or yarn? Use `pnpm add` or `yarn add` instead. (`init` above picks the right one for you.)
+
+Then import the stylesheet at your app entry point. Without it, components render as unstyled HTML with no error.
 
 ```tsx
 import '@sanity-labs/ui-poc/styles.css'
 ```
+
+## Using alongside Sanity UI v3
 
 If your app uses Sanity UI v3, keep the existing `ThemeProvider` setup.
 
@@ -39,6 +57,16 @@ createRoot(document.getElementById('root')!).render(
   </ThemeProvider>,
 )
 ```
+
+## Checking your setup
+
+Run `doctor` at any time to verify an install and get a one-line fix for anything broken:
+
+```sh
+npx @sanity-labs/ui-poc doctor
+```
+
+It checks that the package and `@sanity/icons` are installed, the stylesheet resolves and is imported, `tsconfig.json` has the options the components need, and your React and Node versions are supported.
 
 ## Usage
 
