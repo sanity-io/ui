@@ -5,9 +5,7 @@ import {primaryNavId} from '@/constants'
 
 import {TARGET_PROJECTION} from '../data/target/query'
 
-// @TODO add 'v4' when it's ready
-// type Id = 'v3' | 'v4'
-type NavId = 'v3'
+type NavId = 'v4'
 
 export const screensQuery = defineQuery(`
 *[_type == "nav" && id == $id][0].items[defined(segment) && segment != ""] {
