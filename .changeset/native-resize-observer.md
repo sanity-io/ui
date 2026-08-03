@@ -2,6 +2,6 @@
 "@sanity/ui": major
 ---
 
-Use the native `ResizeObserver` API directly, dropping the
-`@juggle/resize-observer` polyfill dependency and the internal
-`_ResizeObserver` export. Use the global `ResizeObserver` instead.
+**The `@juggle/resize-observer` polyfill is removed — the native `ResizeObserver` is used directly.**
+
+The internal `_ResizeObserver` export is gone. If you imported it, use the global `ResizeObserver` instead.
