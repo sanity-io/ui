@@ -1,6 +1,5 @@
 ---
 "@sanity/ui": major
-"@sanity/themer": patch
 ---
 
 **Heavy components moved out of the root entry point.**
@@ -29,7 +28,4 @@ What to do — update the imports:
 
 TypeScript points the way: every moved symbol stays on the root entry as a `@deprecated` `never` tombstone naming its new location, instead of a bare "does not exist" error.
 
-Also part of this change:
-
-- `ErrorBoundary` renders a plain `<pre><code>` instead of the `Code` primitive, keeping the root entry free of the `react-refractor` module graph.
-- `@sanity/themer` is republished with its imports updated to the new entry points.
+Also part of this change: `ErrorBoundary` renders a plain `<pre><code>` instead of the `Code` primitive, keeping the root entry free of the `react-refractor` module graph.
