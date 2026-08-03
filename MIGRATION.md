@@ -15,7 +15,7 @@ Work through the checklist top to bottom:
 
 ### 1. Upgrade the runtime
 
-- **ESM-only.** The CommonJS build (`.cjs` / `.d.cts`) and the `require` export condition are removed — consume the package with ESM `import`. `require('@sanity/ui')` no longer works.
+- **ESM-only.** The CommonJS build (`.cjs` / `.d.cts`) and the `require` export condition are removed — the package now ships ESM only. This is not a code change for consumers: modern Node.js supports `require(esm)`, so `require('@sanity/ui')` keeps working on the supported Node.js versions.
 - **Node.js 22.12 or later** (`engines` is `>=22.12`, matching `sanity`).
 - **React 19.2 or later** — peer dependencies are `react: ^19.2` and `react-dom: ^19.2`. Components are compiled with the React Compiler targeting React 19, using React's built-in runtime.
 - `styled-components` stays a peer dependency (`^5.2 || ^6`).
