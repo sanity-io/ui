@@ -88,6 +88,6 @@ Everything that was deprecated during v3 is removed in v4. Removed props stay on
 - **`Tooltip` and `Popover` keep closed content mounted** with React's `<Activity>`, preserving internal state and pre-rendering hidden content. With `animate` enabled, hiding is deferred until exit animations finish. Popovers with recursive `content` must gate the recursion on `open` — otherwise they render an infinitely deep hidden tree.
 - **All components are plain function components** that take `ref` as a regular prop (React 19 semantics). Refs keep working exactly as before, but components no longer pass `react-is` checks such as `isForwardRef`.
 
-## `@sanity/themer`: from 0.2.x to 1.0
+## `@sanity/themer`: from 0.2 to 0.3
 
-`@sanity/themer` 1.0 has no API changes — it adopts the same runtime requirements as `@sanity/ui` v4 (ESM-only, Node.js 22.12+, React 19.2+) and updates its internals to the new `@sanity/ui` entry points.
+`@sanity/themer` 0.3 has no API changes — it adopts the same runtime requirements as `@sanity/ui` v4 (ESM-only, Node.js 22.12+, React 19.2+) and updates its internals to the new `@sanity/ui` entry points.
