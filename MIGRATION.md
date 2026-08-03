@@ -4,6 +4,8 @@
 
 v4 modernizes the runtime without redesigning components. If your app is already on current tooling, the migration is one stylesheet import plus some import path updates — TypeScript walks you through the rest: every removed or moved API is kept in the types as a `@deprecated` tombstone whose message names its replacement.
 
+Not ready to upgrade? v3 is maintained on the [`v3` branch](https://github.com/sanity-io/ui/tree/v3): `3.x` fixes land there and are published under the `release-v3` npm dist-tag.
+
 Work through the checklist top to bottom:
 
 1. [Upgrade the runtime](#1-upgrade-the-runtime) — Node.js 22.12+, React 19.2+, ESM-only
