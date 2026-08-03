@@ -2,8 +2,6 @@
 "@sanity/ui": major
 ---
 
-Remove the private `@sanity/ui/_visual-editing` entrypoint.
+**The private `@sanity/ui/_visual-editing` entry point is removed.**
 
-Import from `@sanity/ui` instead. Tree-shaking no longer needs this slim
-subset now that `displayName` side effects are gone and unused components
-are dropped from consuming bundles.
+Import from `@sanity/ui` instead. The slim subset is no longer needed: `displayName` side effects are gone, so unused components tree-shake out of consuming bundles.

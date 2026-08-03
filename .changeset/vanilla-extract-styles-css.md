@@ -2,12 +2,17 @@
 "@sanity/ui": major
 ---
 
-Ship static CSS as a stylesheet that consumers import themselves: `import '@sanity/ui/styles.css'`.
+**New required import: `@sanity/ui/styles.css`.**
 
-Styles that don't depend on the theme or props are migrating from styled-components to [vanilla-extract](https://vanilla-extract.style/), extracted at build time into `dist/styles.css` instead of being injected at runtime. The stylesheet is not loaded automatically — add the import once, e.g. next to where the app renders `<ThemeProvider>`:
+Static styles (the ones that don't depend on theme or props) are now extracted into a stylesheet at build time instead of being injected at runtime. The stylesheet is **not** loaded automatically.
+
+What to do — add this import once, next to where the app renders `<ThemeProvider>`:
 
 ```js
 import "@sanity/ui/styles.css"
 ```
 
-The `styles.css` export path is the same one the vanilla-extract based next major version of this library uses, so the import carries over unchanged when upgrading later. This release migrates the first slice (`SrOnly`, `Spinner`, and internal text-overflow styling); more styles will move to the stylesheet over time.
+Good to know:
+
+- These styles moved from styled-components to [vanilla-extract](https://vanilla-extract.style/). This release migrates the first slice (`SrOnly`, `Spinner`, and internal text-overflow styling); more styles move to the stylesheet over time.
+- The export path is the same one the fully vanilla-extract-based next major uses, so the import carries over unchanged when upgrading later.

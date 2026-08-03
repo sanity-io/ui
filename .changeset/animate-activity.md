@@ -2,4 +2,9 @@
 "@sanity/ui": minor
 ---
 
-Tooltip and Popover now keep their content mounted with React's `<Activity>` when closed, preserving internal state and pre-rendering hidden content. When `animate` is enabled they use `AnimateActivity` (vendored from Motion), which defers hiding until exit animations complete. Popovers with recursive content must gate the recursion on `open` to avoid rendering an infinitely deep hidden tree.
+**`Tooltip` and `Popover` keep closed content mounted with React's `<Activity>`.**
+
+- Internal state is preserved and hidden content pre-renders while closed.
+- With `animate` enabled, hiding is deferred until exit animations finish (via `AnimateActivity`, vendored from Motion).
+
+Watch out: popovers with recursive `content` must gate the recursion on `open` — otherwise they render an infinitely deep hidden tree.
