@@ -1,6 +1,6 @@
 ---
 "@sanity/ui": major
-"@sanity/themer": major
+"@sanity/themer": minor
 ---
 
 **React 19.2+ required.**

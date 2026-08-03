@@ -1,6 +1,6 @@
 ---
 "@sanity/ui": major
-"@sanity/themer": major
+"@sanity/themer": minor
 ---
 
 **ESM-only. Node.js 22.12+ required.**
