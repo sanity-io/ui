@@ -2,4 +2,4 @@
 "@sanity/ui": patch
 ---
 
-Emit a declaration for `@sanity/ui/styles.css` so TypeScript can validate the side-effect import.
+Emit a TypeScript declaration for `@sanity/ui/styles.css`, so the side-effect import type-checks.
