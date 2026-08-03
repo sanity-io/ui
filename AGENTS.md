@@ -110,7 +110,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
 - Releases are managed with Changesets: run `pnpm changeset` to add a changeset
   to a PR that should trigger a release. Merging to `main` opens/updates a
   "Version Packages" PR, and merging that publishes to npm via trusted
-  publishing.
+  publishing under the `latest` dist-tag. The `3.x` line is maintained on the
+  `v3` branch and publishes under the `release-v3` dist-tag, like `v2` for
+  `2.x` (`release-v2`).
 - `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo. It is
   linted by the root oxlint config like everything else (an override in
   `.oxlintrc.json` additionally enables the Next.js plugin rules for it) and
