@@ -1,6 +1,5 @@
 ---
 "@sanity/ui": major
-"@sanity/themer": minor
 ---
 
 **ESM-only. Node.js 22.12+ required.**
@@ -11,5 +10,3 @@ What changes:
 - Node.js below 22.12 is no longer supported (`engines` is now `>=22.12`, matching `sanity`).
 
 What to do: run Node.js 22.12 or later — that's it. Modern Node supports `require(esm)`, so `require('@sanity/ui')` keeps working; things only break if the Node.js version is too old.
-
-`@sanity/themer` was already ESM-only — it only picks up the new Node.js range.
