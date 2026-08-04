@@ -19,6 +19,7 @@ jobs:
     secrets: inherit
 
   keep-v2-release-from-latest:
+    if: github.repository_owner == 'sanity-io'
     needs: release
     runs-on: ubuntu-latest
     steps:
