@@ -10,7 +10,7 @@ import {readSelfPackage} from './selfPackage.js'
 const HELP = `${color.bold('@sanity/ui')} setup CLI
 
 ${color.bold('Usage')}
-  npx @sanity/ui@5 <command> [options]
+  npx @sanity/ui@alpha <command> [options]
 
 ${color.bold('Commands')}
   init      Scaffold a correct Sanity UI install (deps, stylesheet, tsconfig)

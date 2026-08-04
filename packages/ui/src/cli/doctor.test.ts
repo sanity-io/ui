@@ -40,7 +40,7 @@ describe('runDoctor', () => {
   it('warns and skips checks when v5 is installed under an alias', () => {
     writeFileSync(
       join(dir, 'package.json'),
-      JSON.stringify({dependencies: {ui5: 'npm:@sanity/ui@5'}}),
+      JSON.stringify({dependencies: {ui5: 'npm:@sanity/ui@alpha'}}),
     )
     const collectChecks = vi.spyOn(checks, 'collectChecks')
 

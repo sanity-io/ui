@@ -219,7 +219,7 @@ export async function runInit(options: CliOptions): Promise<number> {
     return 0
   }
   fail(
-    `${failed.length} check${failed.length === 1 ? '' : 's'} failed. Run \`npx ${PACKAGE_NAME}@5 doctor\` for details.`,
+    `${failed.length} check${failed.length === 1 ? '' : 's'} failed. Run \`npx ${PACKAGE_NAME}@alpha doctor\` for details.`,
   )
   return 1
 }

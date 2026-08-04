@@ -81,7 +81,7 @@ export function collectChecks(cwd: string): CheckReport {
     check('install', Boolean(installedVersion), {
       title: 'Package installed',
       detail: installedVersion ? `${PACKAGE_NAME}@${installedVersion}` : 'not installed',
-      fix: `Run \`npx ${PACKAGE_NAME}@5 init\` or install it with your package manager`,
+      fix: `Run \`npx ${PACKAGE_NAME}@alpha init\` or install it with your package manager`,
     }),
   )
 
@@ -150,7 +150,7 @@ export function collectChecks(cwd: string): CheckReport {
               : `needs: ${loadBearing.map((c) => `${c.key}: ${String(c.to)}`).join(', ')}`,
         fix: tsconfig.unreadable
           ? 'Fix the JSON syntax in tsconfig.json'
-          : `Run \`npx ${PACKAGE_NAME}@5 init\` to reconcile tsconfig.json`,
+          : `Run \`npx ${PACKAGE_NAME}@alpha init\` to reconcile tsconfig.json`,
       }),
     )
   }
