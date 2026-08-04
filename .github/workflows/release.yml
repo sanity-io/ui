@@ -8,16 +8,15 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
-  contents: read # for checkout
+  contents: read
 
 jobs:
   release:
     uses: sanity-io/.github/.github/workflows/changesets.yml@main
     permissions:
-      contents: read # for checkout
-      id-token: write # to enable use of OIDC for npm provenance
+      contents: read
+      id-token: write
     secrets: inherit
     with:
-      # Satisfy conventional-commit PR title checks used on this branch
       versionPrTitle: 'chore: version packages'
       versionCommitMessage: 'chore: version packages'
