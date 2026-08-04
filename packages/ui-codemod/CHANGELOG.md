@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.1
+
+### Major Changes
+
+- Relocate @sanity/ui-codemod v1 alpha to sanity-io/ui (from sanity-labs/ui-poc)
+
 ## 0.0.1-alpha.18
 
 ### Patch Changes
@@ -58,4 +64,4 @@
 
 ---
 
-Versions `0.0.1-alpha.0` through `0.0.1-alpha.18` were published as `@sanity-labs/ui-poc-codemod` from the `sanity-labs/ui-poc` repository.
+Versions `0.0.1-alpha.0` through `0.0.1-alpha.18` were published as [`@sanity-labs/ui-poc-codemod`](https://www.npmjs.com/package/@sanity-labs/ui-poc-codemod) from the [`sanity-labs/ui-poc`](https://github.com/sanity-labs/ui-poc/) repository.

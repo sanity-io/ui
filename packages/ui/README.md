@@ -17,7 +17,7 @@ Requires React 19.2+ and Node >=20.19 <22 || >=22.12.
 #### Recommended: the setup CLI
 
 ```sh
-npx @sanity/ui@5 init
+npx @sanity/ui@alpha init
 ```
 
 `init` detects your framework and package manager, checks your React and Node versions, then installs the package along with `@sanity/icons`, adds the stylesheet import to your entry file, reconciles `tsconfig.json`, and writes a `sanity-ui.json`. It prints a plan and asks before changing anything.
@@ -31,7 +31,7 @@ npx @sanity/ui@5 init
 #### Manual
 
 ```sh
-pnpm add @sanity/ui@5
+pnpm add @sanity/ui@alpha
 ```
 
 Using npm or yarn? Use `npm add` or `yarn add` instead. (`init` above picks the right one for you.)
@@ -82,7 +82,7 @@ export default function App() {
 Run `doctor` at any time to verify an install and get a one-line fix for anything broken:
 
 ```sh
-npx @sanity/ui@5 doctor
+npx @sanity/ui@alpha doctor
 ```
 
 It checks that the package and `@sanity/icons` are installed, the stylesheet resolves and is imported, `tsconfig.json` has the options the components need, and your React and Node versions are supported.
@@ -96,7 +96,7 @@ v3 and v5 are the same npm package at different majors, so an app that wants bot
 In apps still using v3 components, we recommend installing v5 with a package alias. This way, your existing `@sanity/ui` imports keep resolving to v3, so nothing you have already written needs to change.
 
 ```sh
-pnpm add ui5@npm:@sanity/ui@5
+pnpm add ui5@npm:@sanity/ui@alpha
 ```
 
 This gives you:
@@ -105,7 +105,7 @@ This gives you:
 {
   "dependencies": {
     "@sanity/ui": "^3.5.1",
-    "ui5": "npm:@sanity/ui@5"
+    "ui5": "npm:@sanity/ui@alpha"
   }
 }
 ```
