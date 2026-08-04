@@ -1,5 +1,15 @@
 # @sanity/themer
 
+## 0.3.0
+
+### Minor Changes
+
+- [#2553](https://github.com/sanity-io/ui/pull/2553) [`e4bff6d`](https://github.com/sanity-io/ui/commit/e4bff6de1c5923107596c87bd54099a3816cd6ed) Thanks [@stipsan](https://github.com/stipsan)! - Widen `@sanity/themer` peer dependencies. `react` now allows `^18 || ^19`, `sanity` allows `^3 || ^4 || ^5 || ^6`, and `styled-components` allows `^5.2 || ^6`. This avoids peer dependency errors for consumers using only `@sanity/themer/legacy` as a migration path off the hosted themer.sanity.build service. These peer dependency ranges do not indicate whether `themerTool` itself will work.
+
+### Patch Changes
+
+- [#2543](https://github.com/sanity-io/ui/pull/2543) [`1af3fbd`](https://github.com/sanity-io/ui/commit/1af3fbd608a40718c9eb20dfd71c520550206a60) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update sanity monorepo to ^6.8.0
+
 ## 0.2.1
 
 ### Patch Changes
