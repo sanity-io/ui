@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.1
+
+### Major Changes
+
+- Relocate @sanity/ui v5 alpha to sanity-io/ui (from sanity-labs/ui-poc)
+
 ## 0.0.1-alpha.25
 
 ### Patch Changes
@@ -2510,4 +2516,4 @@
 
 ---
 
-Versions `0.0.1-alpha.0` through `0.0.1-alpha.24` were published as `@sanity-labs/ui-poc` from the `sanity-labs/ui-poc` repository.
+Versions `0.0.1-alpha.0` through `0.0.1-alpha.25` were published as [`@sanity-labs/ui-poc`](https://www.npmjs.com/package/@sanity-labs/ui-poc) from the [`sanity-labs/ui-poc`](https://github.com/sanity-labs/ui-poc/) repository.
