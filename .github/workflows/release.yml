@@ -17,3 +17,27 @@ jobs:
       contents: read # for checkout
       id-token: write # to enable use of OIDC for npm provenance
     secrets: inherit
+
+  keep-v3-releases-from-latest:
+    name: Keep v3 releases from becoming latest
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/create-github-app-token@v3
+        id: app-token
+        with:
+          client-id: ${{ vars.ECOSPARK_CLIENT_ID }}
+          private-key: ${{ secrets.ECOSPARK_APP_PRIVATE_KEY }}
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Mark releases from this commit as not latest
+        run: |
+          git tag --points-at "$GITHUB_SHA" | while IFS= read -r tag; do
+            if gh release view "$tag" >/dev/null 2>&1; then
+              gh release edit "$tag" --latest=false
+            fi
+          done
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
