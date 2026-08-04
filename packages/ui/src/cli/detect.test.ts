@@ -4,7 +4,14 @@ import {join} from 'node:path'
 
 import {afterEach, beforeEach, describe, expect, it} from 'vitest'
 
-import {detect, detectEntry, detectFramework, detectPackageManager} from './detect.js'
+import {
+  detect,
+  detectEntry,
+  detectFramework,
+  detectPackageManager,
+  isLegacyUiVersion,
+} from './detect.js'
+import {writeInstalledUiVersion} from './test-utils.js'
 
 describe('detectPackageManager', () => {
   let dir: string
@@ -109,5 +116,76 @@ describe('detect typescript flag', () => {
     writeFileSync(join(dir, 'src/main.tsx'), '')
     writeFileSync(join(dir, 'package.json'), JSON.stringify({devDependencies: {vite: '8.0.0'}}))
     expect(detect(dir).typescript).toBe(true)
+  })
+})
+
+describe('isLegacyUiVersion', () => {
+  it('treats majors 1–4 as legacy and 5+ as v5', () => {
+    expect(isLegacyUiVersion('3.5.1')).toBe(true)
+    expect(isLegacyUiVersion('5.0.0-alpha.1')).toBe(false)
+    expect(isLegacyUiVersion('5.0.0')).toBe(false)
+  })
+})
+
+describe('detect ui install', () => {
+  let dir: string
+  beforeEach(() => {
+    dir = mkdtempSync(join(tmpdir(), 'sui-ui-install-'))
+  })
+  afterEach(() => {
+    rmSync(dir, {recursive: true, force: true})
+  })
+
+  it('detects a declared pre-v5 range', () => {
+    writeFileSync(
+      join(dir, 'package.json'),
+      JSON.stringify({dependencies: {'@sanity/ui': '^3.5.1'}}),
+    )
+    expect(detect(dir).legacyInstall).toBe('^3.5.1')
+  })
+
+  it('detects an installed pre-v5 version', () => {
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({dependencies: {}}))
+    writeInstalledUiVersion(dir, '3.5.1')
+    expect(detect(dir).legacyInstall).toBe('3.5.1')
+  })
+
+  it('detects a v5 npm alias alongside legacy @sanity/ui', () => {
+    writeFileSync(
+      join(dir, 'package.json'),
+      JSON.stringify({dependencies: {'ui5': 'npm:@sanity/ui@5', '@sanity/ui': '^3.5.1'}}),
+    )
+    const result = detect(dir)
+    expect(result.aliasedInstall).toBe('ui5')
+    expect(result.legacyInstall).toBe('^3.5.1')
+  })
+
+  it('detects a versioned v5 npm alias', () => {
+    writeFileSync(
+      join(dir, 'package.json'),
+      JSON.stringify({dependencies: {ui5: 'npm:@sanity/ui@5.0.0-alpha.1'}}),
+    )
+    expect(detect(dir).aliasedInstall).toBe('ui5')
+  })
+
+  it('detects the alpha dist-tag npm alias', () => {
+    writeFileSync(
+      join(dir, 'package.json'),
+      JSON.stringify({dependencies: {ui5: 'npm:@sanity/ui@alpha'}}),
+    )
+    expect(detect(dir).aliasedInstall).toBe('ui5')
+  })
+
+  it('does not detect uninstalled ui as legacy or alias', () => {
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({dependencies: {react: '19.2.0'}}))
+    expect(detect(dir).legacyInstall).toBeNull()
+    expect(detect(dir).aliasedInstall).toBeNull()
+  })
+
+  it('does not detect installed v5 as legacy or alias', () => {
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({dependencies: {}}))
+    writeInstalledUiVersion(dir, '5.0.0-alpha.1')
+    expect(detect(dir).legacyInstall).toBeNull()
+    expect(detect(dir).aliasedInstall).toBeNull()
   })
 })

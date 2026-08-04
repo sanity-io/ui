@@ -1,7 +1,7 @@
-import {Tooltip as TooltipV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import type {ComponentProps} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
+import {Tooltip as TooltipV3} from 'ui3'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'

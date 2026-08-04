@@ -9,7 +9,7 @@ import {installCommand, resolveInstallSpecs, resolveTypeSpecs} from './install.j
 describe('resolveInstallSpecs', () => {
   it('pins the package to its shipped version and icons to the declared version', () => {
     const specs = resolveInstallSpecs()
-    expect(specs[0]).toMatch(/^@sanity-labs\/ui-poc@\d+\.\d+\.\d+/)
+    expect(specs[0]).toMatch(/^@sanity\/ui@\d+\.\d+\.\d+/)
     expect(specs.some((s) => s.startsWith('@sanity/icons@'))).toBe(true)
   })
 
@@ -44,6 +44,9 @@ describe('resolveTypeSpecs', () => {
   })
 
   it('returns React type packages pinned to the major when none are installed', () => {
-    expect(resolveTypeSpecs(dir, {reactMajor: 19})).toEqual(['@types/react@^19', '@types/react-dom@^19'])
+    expect(resolveTypeSpecs(dir, {reactMajor: 19})).toEqual([
+      '@types/react@^19',
+      '@types/react-dom@^19',
+    ])
   })
 })

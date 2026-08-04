@@ -1,4 +1,4 @@
-# @sanity-labs/ui-poc-codemod
+# @sanity/ui-codemod
 
 ## 0.0.1-alpha.18
 
@@ -55,3 +55,7 @@
 ### Patch Changes
 
 - 1b8dedb: chore: add typescript dev dependency
+
+---
+
+Versions `0.0.1-alpha.0` through `0.0.1-alpha.18` were published as `@sanity-labs/ui-poc-codemod` from the `sanity-labs/ui-poc` repository.

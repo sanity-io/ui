@@ -1,5 +1,5 @@
 {
-  "name": "ui-poc",
+  "name": "sanity-ui-monorepo",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -12,7 +12,7 @@
     "changeset": "changeset",
     "changeset:publish": "changeset publish",
     "changeset:status": "changeset status",
-    "changeset:version": "changeset version && pnpm --filter @sanity-labs/ui-poc sync-version",
+    "changeset:version": "changeset version && pnpm --filter @sanity/ui sync-version",
     "create:ui": "node bin/create-ui.js",
     "dev": "turbo dev --ui=tui --filter=./packages/ui --filter=./apps/storybook",
     "format": "oxfmt . --no-error-on-unmatched-pattern",

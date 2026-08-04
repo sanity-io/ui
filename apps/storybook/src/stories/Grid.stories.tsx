@@ -1,6 +1,6 @@
-import {Grid as GridV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Grid as GridV3} from 'ui3'
 
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
 import {gridProps} from '../../../../packages/ui/src/components/grid/grid.props'

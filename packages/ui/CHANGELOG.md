@@ -1,4 +1,4 @@
-# @sanity-labs/ui-poc
+# @sanity/ui
 
 ## 0.0.1-alpha.25
 
@@ -105,3 +105,7 @@
 
 - c84e2fb: - add code, container, and icon components
   - use css layers and minify in prod
+
+---
+
+Versions `0.0.1-alpha.0` through `0.0.1-alpha.24` were published as `@sanity-labs/ui-poc` from the `sanity-labs/ui-poc` repository.

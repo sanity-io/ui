@@ -1,6 +1,6 @@
-import {Text as TextV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Text as TextV3} from 'ui3'
 
 import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {textProps} from '../../../../packages/ui/src/components/text/text.props'

@@ -11,7 +11,7 @@ type CommentableNode = {
 }
 
 /**
- * Inserts a `UI-POC-CODEMOD TODO` comment.
+ * Inserts a `UI-CODEMOD TODO` comment.
  * Returns whether the AST was updated.
  */
 export function insertTodoWarning(
@@ -43,6 +43,6 @@ export function insertTodoWarning(
     return false
   }
 
-  target.comments.unshift(j.commentLine(` UI-POC-CODEMOD TODO: ${warning}`, true))
+  target.comments.unshift(j.commentLine(` UI-CODEMOD TODO: ${warning}`, true))
   return true
 }

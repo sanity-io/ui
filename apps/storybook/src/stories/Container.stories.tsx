@@ -1,6 +1,6 @@
-import {Container as ContainerV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Container as ContainerV3} from 'ui3'
 
 import {Container} from '../../../../packages/ui/src/components/container/Container'
 import {containerProps} from '../../../../packages/ui/src/components/container/container.props'

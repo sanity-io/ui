@@ -48,7 +48,7 @@ defineInlineTest(
   const RootCard = styled(LegacyCard)(({theme}) => {})
   `,
   `
-  // UI-POC-CODEMOD TODO: Consider renaming LegacyCard to Box
+  // UI-CODEMOD TODO: Consider renaming LegacyCard to Box
   import { Box as LegacyCard } from '@sanity/ui';
 
   const RootCard = styled(LegacyCard)(({theme}) => {})

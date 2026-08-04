@@ -50,7 +50,7 @@ defineInlineTest(
   <Inline margin={2} />
   `,
   `
-  // UI-POC-CODEMOD TODO: Please double check the Inline migration below. Margin is not supported in either version.
+  // UI-CODEMOD TODO: Please double check the Inline migration below. Margin is not supported in either version.
   <Inline margin={2} />
   `,
   'warns if margin prop is present',

@@ -194,7 +194,7 @@ defineInlineTest(
   import {Box} from '@sanity/ui'
 
   function Example() {
-    // UI-POC-CODEMOD TODO: Please double check styled(Box) migration(s) below
+    // UI-CODEMOD TODO: Please double check styled(Box) migration(s) below
     const RootBox = styled(Box)(({theme}) => ({}));
 
     return <RootBox display="flex" alignItems="center" />

@@ -10,11 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@sanity-labs/ui-poc": "workspace:*",
-    "@sanity/ui": "^3.3.0",
+    "@sanity/ui": "workspace:*",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router": "7.15.0",
+    "ui3": "catalog:",
     "web-vitals": "^5.3.0"
   },
   "devDependencies": {

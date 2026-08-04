@@ -1,4 +1,4 @@
-import {Container, Flex, Heading, Text} from '@sanity-labs/ui-poc'
+import {Container, Flex, Heading, Text} from '@sanity/ui'
 import {isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration} from 'react-router'
 
 import type {Route} from './+types/root'

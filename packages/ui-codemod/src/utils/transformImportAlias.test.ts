@@ -21,7 +21,7 @@ defineInlineTest(
   import {Card as LegacyCard} from '@sanity/ui'
   `,
   `
-  // UI-POC-CODEMOD TODO: ${WARNING}
+  // UI-CODEMOD TODO: ${WARNING}
   import { Box as LegacyCard } from '@sanity/ui';
   `,
   'transforms aliased import and adds todo comment',

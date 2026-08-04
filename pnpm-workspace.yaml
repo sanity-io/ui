@@ -12,6 +12,7 @@ catalog:
   babel-plugin-react-compiler: ^1.0.0
   react: ^19.2.6
   react-dom: ^19.2.6
+  ui3: npm:@sanity/ui@^3.3.0
 
 overrides:
   '@types/react': 'catalog:'

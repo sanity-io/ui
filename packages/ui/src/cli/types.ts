@@ -37,6 +37,8 @@ export interface Detected {
   entry: string
   exists: boolean
   react: ReactInfo
+  aliasedInstall: string | null
+  legacyInstall: string | null
 }
 
 export type CheckStatus = 'pass' | 'warn' | 'fail'

@@ -80,7 +80,7 @@ defineInlineTest(
   <Heading />
   `,
   `
-  // UI-POC-CODEMOD TODO: Please double check the Heading migration below. The as prop is missing and will default to h2.
+  // UI-CODEMOD TODO: Please double check the Heading migration below. The as prop is missing and will default to h2.
   <Heading trim={true} />
   `,
   'warns if as props is missing',

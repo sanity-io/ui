@@ -1,15 +1,5 @@
-import '@sanity-labs/ui-poc/styles.css'
-import {
-  Button,
-  Card,
-  Checkbox,
-  Grid,
-  Heading,
-  Radio,
-  Switch,
-  Text,
-  VStack,
-} from '@sanity-labs/ui-poc'
+import '@sanity/ui/styles.css'
+import {Button, Card, Checkbox, Grid, Heading, Radio, Switch, Text, VStack} from '@sanity/ui'
 import {useState} from 'react'
 
 // Shared test sizes — keep in sync with ui3.tsx so the comparison stays fair.
@@ -158,10 +148,10 @@ function PanelSwapSection() {
   )
 }
 
-function UiPoc() {
+function Ui5() {
   return (
     <VStack gap={4}>
-      <Heading>UI POC</Heading>
+      <Heading>UI 5</Heading>
       <SingleControlSection />
       <SelectAllSection />
       <ToneToggleSection />
@@ -170,4 +160,4 @@ function UiPoc() {
   )
 }
 
-export default UiPoc
+export default Ui5

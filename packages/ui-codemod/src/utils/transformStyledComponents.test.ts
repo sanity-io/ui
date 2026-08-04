@@ -111,7 +111,7 @@ defineInlineTest(
   import {Card} from '@sanity/ui'
 
   function Example() {
-    // UI-POC-CODEMOD TODO: ${DEFAULT_WARNING}
+    // UI-CODEMOD TODO: ${DEFAULT_WARNING}
     const RootCard = styled(Card)(({theme}) => ({}));
 
     return <RootCard padding={1} />
@@ -136,7 +136,7 @@ defineInlineTest(
   import {Card} from '@sanity/ui'
 
   function Example() {
-    // UI-POC-CODEMOD TODO: ${CUSTOM_WARNING}
+    // UI-CODEMOD TODO: ${CUSTOM_WARNING}
     const RootCard = styled(Card)(({theme}) => ({}));
 
     return <RootCard padding={1} />
@@ -152,7 +152,7 @@ defineInlineTest(
   import {Card} from '@sanity/ui'
 
   function Example() {
-    // UI-POC-CODEMOD TODO: ${DEFAULT_WARNING}
+    // UI-CODEMOD TODO: ${DEFAULT_WARNING}
     const RootCard = styled(Card)(({theme}) => ({}))
 
     return <RootCard padding={1} />
@@ -162,7 +162,7 @@ defineInlineTest(
   import {Card} from '@sanity/ui'
 
   function Example() {
-    // UI-POC-CODEMOD TODO: ${DEFAULT_WARNING}
+    // UI-CODEMOD TODO: ${DEFAULT_WARNING}
     const RootCard = styled(Card)(({theme}) => ({}))
 
     return <RootCard padding={1} />

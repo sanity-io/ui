@@ -1,6 +1,6 @@
-import {Stack as StackV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Stack as StackV3} from 'ui3'
 
 import {Card} from '../../../../packages/ui/src/components/card/Card'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
