@@ -276,7 +276,7 @@ export default function Ui5() {
       <Profiler id="List" onRender={handleOnRender}>
         {iterator.map((i) => (
           <List key={i}>
-            <List.Item trailing={<Icon size={1} icon={EditIcon} />}>
+            <List.Item end={<Icon size={1} icon={EditIcon} />}>
               <List.ItemText title="Item title" subtitle="Item subtitle" />
             </List.Item>
           </List>
@@ -286,7 +286,7 @@ export default function Ui5() {
       <h2>{count} SkipToContents</h2>
       <Profiler id="SkipToContent" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <SkipToContent key={i} hash="#main" target="_self" label="Skip to content" />
+          <SkipToContent key={i} href="#main" target="_self" label="Skip to content" />
         ))}
       </Profiler>
 
