@@ -1,0 +1,16 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "depth-testing": "0.0.1-alpha.0",
+    "ui-frameworks": "1.0.0",
+    "ui-next": "0.1.0",
+    "ui-vite": "0.0.0",
+    "inp-testing": "0.0.1-alpha.2",
+    "mount-testing": "0.0.0",
+    "ui-storybook": "0.0.0",
+    "@sanity/ui": "5.0.0-alpha.1",
+    "@sanity/ui-codemod": "1.0.0-alpha.1"
+  },
+  "changesets": []
+}
