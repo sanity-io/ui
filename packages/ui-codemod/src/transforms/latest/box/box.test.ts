@@ -287,7 +287,7 @@ describe('cross-file styled aliases', () => {
     const source = readFileSync(importerPath, 'utf8')
     const output = applyTransform(transform, {}, {source, path: importerPath}, {parser: 'tsx'})
 
-    expect(output).toContain('UI-POC-CODEMOD TODO: Please double check styled(Box) migration below')
+    expect(output).toContain('UI-CODEMOD TODO: Please double check styled(Box) migration below')
     expect(output).toContain('<RootBox display="flex" alignItems="center" />')
     expect(output).not.toContain('const RootBox = styled(Box)')
   })

@@ -232,7 +232,7 @@ describe('imported styled aliases', () => {
       warning: DEFAULT_WARNING,
     })
 
-    expect(root.toSource()).toContain(`UI-POC-CODEMOD TODO: ${DEFAULT_WARNING}`)
+    expect(root.toSource()).toContain(`UI-CODEMOD TODO: ${DEFAULT_WARNING}`)
     expect(root.toSource()).not.toContain('const RootCard = styled(Card)')
   })
 })
