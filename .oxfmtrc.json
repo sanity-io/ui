@@ -8,8 +8,6 @@
   "sortImports": true,
   "sortPackageJson": {"sortScripts": true},
   "ignorePatterns": [
-    ".agents/skills/**",
-    ".claude/skills/**",
     "dist/**",
     "storybook-static/**",
     "pnpm-lock.yaml",
