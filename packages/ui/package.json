@@ -61,7 +61,7 @@
     }
   },
   "scripts": {
-    "build": "pnpm run clean && pnpm run build:css && pnpm run build:js && pnpm run build:cli",
+    "build": "pnpm run sync-version && pnpm run clean && pnpm run build:css && pnpm run build:js && pnpm run build:cli",
     "build:cli": "tsc -p tsconfig.cli.json",
     "build:css": "NODE_ENV=production postcss src/index.css -o dist/styles.css",
     "build:js": "pkg build --strict --check",
