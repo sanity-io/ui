@@ -3,6 +3,10 @@ packages:
   - apps/frameworks/*
   - packages/*
 
+allowBuilds:
+  esbuild: false
+  sharp: false
+
 catalog:
   '@babel/core': ^8.0.1
   '@rolldown/plugin-babel': ^0.2.3
