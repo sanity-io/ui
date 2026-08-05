@@ -39,5 +39,8 @@
       "oxfmt --no-error-on-unmatched-pattern"
     ]
   },
+  "engines": {
+    "node": ">=22.13"
+  },
   "packageManager": "pnpm@11.20.0"
 }
