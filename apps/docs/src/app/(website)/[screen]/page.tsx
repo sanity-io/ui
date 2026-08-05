@@ -23,6 +23,7 @@ import {
 } from '@/lib/sanity/live'
 
 import {ArcadePage} from './ArcadePage'
+import {ArticleLoading} from './ArticleLoading'
 
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({
@@ -62,20 +63,22 @@ export async function generateMetadata({params}: PageProps<'/[screen]'>): Promis
   }
 }
 
-export default async function ScreenPage({params}: PageProps<'/[screen]'>) {
+// Same boundary as `[...article]`: the screen's own landing page is keyed by
+// `params`, so it streams in behind the shell instead of blocking it.
+export default function ScreenPage({params}: PageProps<'/[screen]'>) {
+  return (
+    <Suspense fallback={<ArticleLoading />}>
+      <ScreenRoute params={params} />
+    </Suspense>
+  )
+}
+
+async function ScreenRoute({params}: Pick<PageProps<'/[screen]'>, 'params'>) {
   const {isEnabled: isDraftMode} = await draftMode()
   if (!isDraftMode) {
     const {screen} = await params
     return <CachedScreenPage screen={screen} perspective="published" stega={false} />
   }
-  return (
-    <Suspense>
-      <DynamicScreenPage params={params} />
-    </Suspense>
-  )
-}
-
-async function DynamicScreenPage({params}: Pick<PageProps<'/[screen]'>, 'params'>) {
   const [{screen}, {perspective, stega}] = await Promise.all([params, getDynamicFetchOptions()])
   return <CachedScreenPage screen={screen} perspective={perspective} stega={stega} />
 }

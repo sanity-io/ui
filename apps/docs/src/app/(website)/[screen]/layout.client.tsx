@@ -6,6 +6,7 @@ import {MenuIcon} from '@sanity/icons/Menu'
 import {Box, Button, Breadcrumbs, Card, Flex, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
 import Link from 'next/link'
+import {usePathname} from 'next/navigation'
 import {useState} from 'react'
 import {styled} from 'styled-components'
 
@@ -54,19 +55,27 @@ const BreadcrumbsNavCard = styled(Card)<{$menuOpen: boolean}>((props) => {
 
 export function ArticleLayout({
   children,
-  nav,
-  path,
+  nav: root,
 }: {
   children: React.ReactNode
-  nav?: NavNode
-  path: string[]
+  nav: NavNode | null
 }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  // The router knows the URL on the client, so reading the screen segment here
+  // keeps the chrome out of the server's `params` and inside the App Shell.
+  const pathname = usePathname()
+  const screen = pathname.split('/').find(Boolean)
+  const path = screen ? [screen] : []
+  // Screens without nav entries of their own (the arcade) render bare, the
+  // same as when this branch was decided by the screen document's type.
+  const section = root?.children?.find((item) => item.segment === screen)
+  const nav = section?.children?.length ? section : undefined
 
   return (
     <Card flex={1} style={{minHeight: 'auto'}}>
       {nav && (
         <BreadcrumbsNavCard
+          data-testid="article-breadcrumbs-nav"
           data-ui="BreadcrumbsNavCard"
           $menuOpen={menuOpen}
           paddingX={[2, 2, 3, 4]}
@@ -98,7 +107,7 @@ export function ArticleLayout({
 
       <Flex hidden={menuOpen}>
         {nav && (
-          <NavCard flex={1} overflow="auto">
+          <NavCard data-testid="article-sidebar-nav" flex={1} overflow="auto">
             <Box padding={[2, 2, 3, 4]}>
               <Nav nav={nav} path={`/${path.join('/')}`} />
             </Box>
