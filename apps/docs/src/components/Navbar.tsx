@@ -31,15 +31,7 @@ export function Navbar({
     <Card flex="none" padding={[2, 2, 3, 4]} style={{lineHeight: 0}}>
       <Flex gap={1}>
         <Box flex="none">
-          <Button
-            as={Link}
-            data-as="a"
-            href="/"
-            mode="bleed"
-            padding={3}
-            prefetch={true}
-            radius={2}
-          >
+          <Button as={Link} data-as="a" href="/" mode="bleed" padding={3} radius={2}>
             <Flex align="center" gap={[3, 3, 4]}>
               <Box flex="none">
                 <Text size={[1, 1, 2]}>
