@@ -182,6 +182,18 @@ defineInlineTest(
   transform,
   {},
   `
+  <Box display={['none', 'flex']} />
+  `,
+  `
+  <Flex display={['none', 'flex']} />
+  `,
+  'replaces Box with Flex when display is an array with flex',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
   import {Box} from '@sanity/ui'
 
   function Example() {
