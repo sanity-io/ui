@@ -74,10 +74,10 @@
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.9",
     "@juggle/resize-observer": "^3.4.0",
-    "@sanity/color": "^3.0.6",
+    "@sanity/color": "^3.0.8",
     "@sanity/icons": "^3.8.0",
     "csstype": "^3.2.3",
-    "motion": "^12.42.2",
+    "motion": "^12.43.0",
     "react-compiler-runtime": "1.0.0",
     "react-refractor": "^2.2.0",
     "use-effect-event": "^2.0.3"

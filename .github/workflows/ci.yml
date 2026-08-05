@@ -19,6 +19,12 @@ jobs:
       - run: pnpm lint --format github
       - run: pnpm build
 
+  # Stub: knip is required on the repo but not implemented on this legacy branch
+  knip:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'true'
+
   test:
     needs: [build]
     runs-on: ${{ matrix.os }}
