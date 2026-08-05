@@ -52,7 +52,7 @@ importers:
     devDependencies:
       '@sanity/color':
         specifier: ^3.0.6
-        version: 3.0.6
+        version: 3.0.8
       '@sanity/icons':
         specifier: ^3.8.0
         version: 3.8.0(react@19.2.7)
@@ -145,7 +145,7 @@ importers:
         version: 1.130.0
       '@sanity/color':
         specifier: ^3.0.6
-        version: 3.0.6
+        version: 3.0.8
       '@sanity/pkg-utils':
         specifier: ^8.1.29
         version: 8.1.29(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/babel__core@7.20.5)(@types/node@22.20.1)(babel-plugin-react-compiler@1.0.0)(oxc-resolver@11.23.0)(typescript@5.9.3)
@@ -1888,10 +1888,6 @@ packages:
 
   '@sanity/browserslist-config@1.0.5':
     resolution: {integrity: sha512-so+/UtCge8t1jq509hH0otbbptRz0zM/Aa0dh5MhMD7HGT6n2igWIL2VWH/9QR9e77Jn3dJsjz23mW1WCxT+sg==}
-
-  '@sanity/color@3.0.6':
-    resolution: {integrity: sha512-2TjYEvOftD0v7ukx3Csdh9QIu44P2z7NDJtlC3qITJRYV36J7R6Vfd3trVhFnN77/7CZrGjqngrtohv8VqO5nw==}
-    engines: {node: '>=18.0.0'}
 
   '@sanity/color@3.0.8':
     resolution: {integrity: sha512-MBQ082q7GRvzSH7Xzx4ul1Kxm/AEKDgwTz5cd13oXIlenl3VAM0Un0QpeTjkC5IZTC7SHbnhwkgoVHTZDz9WKQ==}
@@ -6159,8 +6155,6 @@ snapshots:
 
   '@sanity/browserslist-config@1.0.5': {}
 
-  '@sanity/color@3.0.6': {}
-
   '@sanity/color@3.0.8': {}
 
   '@sanity/icons@3.8.0(react@19.2.7)':
@@ -6515,7 +6509,7 @@ snapshots:
       '@vanilla-extract/babel-plugin-debug-ids': 1.2.2
       '@vanilla-extract/css': 1.21.1
       dedent: 1.7.2
-      esbuild: 0.25.12
+      esbuild: 0.28.1
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
