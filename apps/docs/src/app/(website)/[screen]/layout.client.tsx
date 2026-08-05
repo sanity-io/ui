@@ -7,7 +7,7 @@ import {Box, Button, Breadcrumbs, Card, Flex, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
-import {useState} from 'react'
+import {Suspense, useState} from 'react'
 import {styled} from 'styled-components'
 
 import type {NavNode} from '#lib/nav/types.ts'
@@ -53,6 +53,11 @@ const BreadcrumbsNavCard = styled(Card)<{$menuOpen: boolean}>((props) => {
   }
 })
 
+/**
+ * Which screen's nav branch to show is URL data, so the two nav regions read
+ * the pathname behind their own `<Suspense>` boundaries. `children` and the
+ * frame stay outside, in the App Shell every link into the section shares.
+ */
 export function ArticleLayout({
   children,
   nav: root,
@@ -61,62 +66,95 @@ export function ArticleLayout({
   nav: NavNode | null
 }) {
   const [menuOpen, setMenuOpen] = useState(false)
-  // The router knows the URL on the client, so reading the screen segment here
-  // keeps the chrome out of the server's `params` and inside the App Shell.
-  const pathname = usePathname()
-  const screen = pathname.split('/').find(Boolean)
-  const path = screen ? [screen] : []
-  // Screens without nav entries of their own (the arcade) render bare, the
-  // same as when this branch was decided by the screen document's type.
-  const section = root?.children?.find((item) => item.segment === screen)
-  const nav = section?.children?.length ? section : undefined
 
   return (
     <Card flex={1} style={{minHeight: 'auto'}}>
-      {nav && (
-        <BreadcrumbsNavCard
-          data-testid="article-breadcrumbs-nav"
-          data-ui="BreadcrumbsNavCard"
-          $menuOpen={menuOpen}
-          paddingX={[2, 2, 3, 4]}
-          paddingY={2}
-          shadow={1}
-        >
-          <Flex align="center" gap={1}>
-            <Box flex={1} padding={3}>
-              <NavBreadcrumbs nav={nav} path={path} />
-            </Box>
-            <Box flex="none">
-              <Button
-                fontSize={1}
-                icon={menuOpen ? CloseIcon : MenuIcon}
-                mode="bleed"
-                onClick={() => setMenuOpen((o) => !o)}
-                padding={3}
-              />
-            </Box>
-          </Flex>
-
-          {menuOpen && (
-            <Box marginTop={2}>
-              <Nav nav={nav} path={`/${path.join('/')}`} />
-            </Box>
-          )}
-        </BreadcrumbsNavCard>
-      )}
+      <Suspense>
+        <BreadcrumbsNav menuOpen={menuOpen} onToggleMenu={setMenuOpen} root={root} />
+      </Suspense>
 
       <Flex hidden={menuOpen}>
-        {nav && (
-          <NavCard data-testid="article-sidebar-nav" flex={1} overflow="auto">
-            <Box padding={[2, 2, 3, 4]}>
-              <Nav nav={nav} path={`/${path.join('/')}`} />
-            </Box>
-          </NavCard>
-        )}
+        <Suspense>
+          <SidebarNav root={root} />
+        </Suspense>
 
         <Box flex={3}>{children}</Box>
       </Flex>
     </Card>
+  )
+}
+
+/**
+ * The nav branch for the screen in the current URL, or `undefined` for screens
+ * that have no entries of their own (the arcade) — the same branch this used
+ * to take from the screen document's type.
+ */
+function useSectionNav(root: NavNode | null) {
+  // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs
+  const screen = usePathname().split('/').find(Boolean)
+  const section = root?.children?.find((item) => item.segment === screen)
+  return {
+    nav: section?.children?.length ? section : undefined,
+    // The nav has only ever highlighted the screen, not the current article
+    path: screen ? [screen] : [],
+  }
+}
+
+function SidebarNav({root}: {root: NavNode | null}) {
+  const {nav, path} = useSectionNav(root)
+  if (!nav) return null
+
+  return (
+    <NavCard data-testid="article-sidebar-nav" flex={1} overflow="auto">
+      <Box padding={[2, 2, 3, 4]}>
+        <Nav nav={nav} path={`/${path.join('/')}`} />
+      </Box>
+    </NavCard>
+  )
+}
+
+function BreadcrumbsNav({
+  menuOpen,
+  onToggleMenu,
+  root,
+}: {
+  menuOpen: boolean
+  onToggleMenu: (update: (open: boolean) => boolean) => void
+  root: NavNode | null
+}) {
+  const {nav, path} = useSectionNav(root)
+  if (!nav) return null
+
+  return (
+    <BreadcrumbsNavCard
+      data-testid="article-breadcrumbs-nav"
+      data-ui="BreadcrumbsNavCard"
+      $menuOpen={menuOpen}
+      paddingX={[2, 2, 3, 4]}
+      paddingY={2}
+      shadow={1}
+    >
+      <Flex align="center" gap={1}>
+        <Box flex={1} padding={3}>
+          <NavBreadcrumbs nav={nav} path={path} />
+        </Box>
+        <Box flex="none">
+          <Button
+            fontSize={1}
+            icon={menuOpen ? CloseIcon : MenuIcon}
+            mode="bleed"
+            onClick={() => onToggleMenu((open) => !open)}
+            padding={3}
+          />
+        </Box>
+      </Flex>
+
+      {menuOpen && (
+        <Box marginTop={2}>
+          <Nav nav={nav} path={`/${path.join('/')}`} />
+        </Box>
+      )}
+    </BreadcrumbsNavCard>
   )
 }
 
