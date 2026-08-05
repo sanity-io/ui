@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@sanity/blueprints':
-      specifier: ^0.23.1
-      version: 0.23.1
+      specifier: ^0.23.2
+      version: 0.23.2
     '@sanity/client':
       specifier: ^7.26.2
       version: 7.26.2
@@ -105,7 +105,7 @@ importers:
     devDependencies:
       '@sanity/blueprints':
         specifier: 'catalog:'
-        version: 0.23.1(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))
+        version: 0.23.2(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))
       '@sanity/client':
         specifier: 'catalog:'
         version: 7.26.2
@@ -3657,6 +3657,15 @@ packages:
 
   '@sanity/blueprints@0.23.1':
     resolution: {integrity: sha512-rp2FB4WRDLo4t5GVWXChFr0pyHEQrRgvJIKla6R58MjaIYSOPe8JUZdL49v+xaGa4zTYaE1cyKQ+2LE8OGd3/Q==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      vite: '>= 8'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+
+  '@sanity/blueprints@0.23.2':
+    resolution: {integrity: sha512-wEa07Qimd+dnbT03Yofx+zcleDuFPd/7Jm4XU9FRsqe7Be+2t28IcFU5cjNpczF1XgtKYGKgqr11ige7qUhhtw==}
     engines: {node: '>=22'}
     peerDependencies:
       vite: '>= 8'
@@ -11297,6 +11306,10 @@ snapshots:
   '@sanity/blueprints-parser@0.4.0': {}
 
   '@sanity/blueprints@0.23.1(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))':
+    optionalDependencies:
+      vite: 8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)
+
+  '@sanity/blueprints@0.23.2(vite@8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))':
     optionalDependencies:
       vite: 8.2.0(@types/node@24.13.3)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0)
 
