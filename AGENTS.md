@@ -114,7 +114,7 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   resolves to the TypeScript source through the dev `exports`, so Next.js
   transpiles it via `transpilePackages` in `apps/docs/next.config.mjs`. It is
   deployed via Vercel, not released through Changesets.
-- `apps/docs` runs `next@^16.3` with `cacheComponents: true` and fetches
+- `apps/docs` runs `next@16` with `cacheComponents: true` and fetches
   content with `next-sanity`'s `defineLive`/`sanityFetch` (Sanity Live) plus
   stega-based visual editing. When touching data fetching or draft mode in
   `apps/docs`, follow the vendored
