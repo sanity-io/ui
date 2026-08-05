@@ -1,4 +1,9 @@
-# Migration guide
+# Migration guides
+
+- [Upgrade from `@sanity/ui` v3 to v4](#sanityui-from-v3-to-v4)
+- [Upgrade from `@sanity/ui` v2 to v3](#sanityui-from-v2-to-v3)
+
+If you upgrade directly from v2 to v4, complete the v2-to-v3 steps first, and then complete the v3-to-v4 steps.
 
 ## `@sanity/ui`: from v3 to v4
 
@@ -90,6 +95,112 @@ Everything that was deprecated during v3 is removed in v4. Removed props stay on
 - **`Tooltip` and `Popover` keep closed content mounted** with React's `<Activity>`, preserving internal state and pre-rendering hidden content. With `animate` enabled, hiding is deferred until exit animations finish. Popovers with recursive `content` must gate the recursion on `open` — otherwise they render an infinitely deep hidden tree.
 - **All components are plain function components** that take `ref` as a regular prop (React 19 semantics). Refs keep working exactly as before, but components no longer pass `react-is` checks such as `isForwardRef`.
 
-## `@sanity/themer`: from 0.2 to 0.3
+## `@sanity/themer`: from 0.3 to 0.4
 
-`@sanity/themer` 0.3 has no API changes — it adopts the same runtime requirements as `@sanity/ui` v4 (ESM-only, Node.js 22.12+, React 19.2+) and updates its internals to the new `@sanity/ui` entry points.
+`@sanity/themer` 0.4 has no API changes — it adopts the same runtime requirements as `@sanity/ui` v4 (ESM-only, Node.js 22.12+, React 19.2+) and updates its internals to the new `@sanity/ui` entry points.
+
+## `@sanity/ui`: from v2 to v3
+
+v3 updates the Node.js requirement and the syntax-highlighting dependencies. Most applications only need to update Node.js and `@sanity/ui`. Applications that use `react-refractor` or `refractor` directly must also update those imports.
+
+Work through the checklist top to bottom:
+
+1. [Upgrade Node.js](#1-upgrade-nodejs)
+2. [Upgrade `@sanity/ui`](#2-upgrade-sanityui)
+3. [Update direct `react-refractor` usage](#3-update-direct-react-refractor-usage)
+4. [Test syntax highlighting](#4-test-syntax-highlighting)
+
+### 1. Upgrade Node.js
+
+v2 supports Node.js 14 or later. v3 supports these Node.js versions:
+
+- `>=20.19 <22`
+- `>=22.12`
+
+Node.js 22.0 through 22.11 is not supported.
+
+Check the installed version:
+
+```sh
+node --version
+```
+
+Upgrade Node.js before you install v3 if the installed version is outside the supported ranges.
+
+### 2. Upgrade `@sanity/ui`
+
+Install the latest v3 release:
+
+```sh
+npm install @sanity/ui@^3
+```
+
+You do not need to change code that only uses the `Code` component from `@sanity/ui`. Its internal implementation already supports the updated syntax-highlighting dependencies.
+
+### 3. Update direct `react-refractor` usage
+
+v3 updates these dependencies:
+
+- `refractor`: 4.9.0 → 5.0.0
+- `react-refractor`: 2.2.0 → 4.0.0
+
+This update addresses [CVE-2024-53382](https://github.com/advisories/GHSA-x7hr-w5r2-h6wg).
+
+If your application imports `react-refractor` or `refractor` directly, make these changes:
+
+- Use the named `Refractor` export instead of the default export.
+- Import languages from `refractor/<language>` instead of `refractor/lang/<language>`.
+- Use the separate `registerLanguage` and `hasLanguage` functions instead of methods on `Refractor`.
+
+```diff
+-import Refractor from 'react-refractor'
+-import javascript from 'refractor/lang/javascript'
++import {Refractor, hasLanguage, registerLanguage} from 'react-refractor'
++import javascript from 'refractor/javascript'
+
+-Refractor.registerLanguage(javascript)
+-const registered = Refractor.hasLanguage('javascript')
++registerLanguage(javascript)
++const registered = hasLanguage('javascript')
+```
+
+Complete example:
+
+```tsx
+// v2
+import Refractor from 'react-refractor'
+import javascript from 'refractor/lang/javascript'
+import json from 'refractor/lang/json'
+
+Refractor.registerLanguage(javascript)
+Refractor.registerLanguage(json)
+
+function MyComponent() {
+  return <Refractor language="javascript" value="const x = 1" />
+}
+```
+
+```tsx
+// v3
+import {Refractor, registerLanguage} from 'react-refractor'
+import javascript from 'refractor/javascript'
+import json from 'refractor/json'
+
+registerLanguage(javascript)
+registerLanguage(json)
+
+function MyComponent() {
+  return <Refractor language="javascript" value="const x = 1" />
+}
+```
+
+### 4. Test syntax highlighting
+
+Test each code path that uses syntax highlighting. Confirm that each registered language still works.
+
+For more information:
+
+- [`@sanity/ui` changelog](packages/ui/CHANGELOG.md)
+- [`refractor` 5.0.0 release notes](https://github.com/wooorm/refractor/releases/tag/5.0.0)
+- [`react-refractor` 4.0.0 release notes](https://github.com/rexxars/react-refractor/releases/tag/v4.0.0)
+- [Open an issue](https://github.com/sanity-io/ui/issues/new)
