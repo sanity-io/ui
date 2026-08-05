@@ -10,9 +10,6 @@
   "scripts": {
     "build": "turbo build --filter=./packages/*",
     "changeset": "changeset",
-    "changeset:publish": "changeset publish",
-    "changeset:status": "changeset status",
-    "changeset:version": "changeset version && pnpm --filter @sanity/ui sync-version",
     "create:ui": "node bin/create-ui.js",
     "dev": "turbo dev --ui=tui --filter=./packages/ui --filter=./apps/storybook",
     "format": "oxfmt . --no-error-on-unmatched-pattern",
@@ -20,14 +17,14 @@
     "lint:fix": "pnpm lint --fix",
     "perf": "turbo dev --ui=tui --filter=./apps/*-testing",
     "prepare": "husky",
-    "release": "pnpm run changeset:version && pnpm run build && pnpm run changeset:publish",
+    "release": "pnpm --filter @sanity/ui sync-version && pnpm run build && changeset publish",
     "test": "turbo test -- --run",
     "test:e2e": "turbo test:e2e --filter=./apps/frameworks",
     "ts:check": "turbo ts:check --filter=./packages/*"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.6.0",
-    "@changesets/cli": "^2.31.0",
+    "@changesets/cli": "^2.31.1",
     "@commitlint/cli": "^20.5.3",
     "@commitlint/config-conventional": "^20.5.3",
     "husky": "^9.1.7",
@@ -42,5 +39,8 @@
       "oxfmt --no-error-on-unmatched-pattern"
     ]
   },
-  "packageManager": "pnpm@10.17.0"
+  "engines": {
+    "node": ">=22.13"
+  },
+  "packageManager": "pnpm@11.20.0"
 }
