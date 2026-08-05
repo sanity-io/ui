@@ -12,7 +12,7 @@ import {
   Text,
   useTheme_v2,
 } from '@sanity/ui'
-import {stegaClean} from 'next-sanity'
+import {stegaClean, type StegaBranded} from 'next-sanity'
 import Link from 'next/link'
 import {ReactElement} from 'react'
 import {styled} from 'styled-components'
@@ -38,11 +38,13 @@ const BackgroundBox = styled(Box)`
 `
 
 export function HeroSection(props: {
-  data: Extract<
-    NonNullable<
-      Extract<NonNullable<TargetByPathQueryResult>, {_type: 'screen'}>['sections']
-    >[number],
-    {_type: 'screenSection.hero'}
+  data: StegaBranded<
+    Extract<
+      NonNullable<
+        Extract<NonNullable<TargetByPathQueryResult>, {_type: 'screen'}>['sections']
+      >[number],
+      {_type: 'screenSection.hero'}
+    >
   >
 }): ReactElement {
   const {data} = props

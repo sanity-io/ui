@@ -2,7 +2,7 @@
 
 import {Box, Container, Flex, Heading, Stack, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
-import {stegaClean} from 'next-sanity'
+import {stegaClean, type StegaBranded} from 'next-sanity'
 import {ReactElement, useMemo} from 'react'
 import {styled} from 'styled-components'
 
@@ -34,7 +34,7 @@ const TocBox = styled(Box)((props) => {
 // @TODO pick the type with `article'` from union of TargetByPathQueryResult, without a ternary just pick in TS or something
 // do not use extends
 export function Article(props: {
-  article: Extract<NonNullable<TargetByPathQueryResult>, {_type: 'article'}>
+  article: StegaBranded<Extract<NonNullable<TargetByPathQueryResult>, {_type: 'article'}>>
 }): ReactElement {
   const {article} = props
 

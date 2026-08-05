@@ -1,4 +1,5 @@
 import {Code} from '@sanity/ui'
+import type {StegaBranded} from 'next-sanity'
 import {ReactElement} from 'react'
 
 import type {TargetByPathQueryResult} from '#sanity.types'
@@ -6,7 +7,7 @@ import type {TargetByPathQueryResult} from '#sanity.types'
 import {HeroSection} from './sections/HeroSection'
 
 export function PageBuilder(props: {
-  page: Extract<NonNullable<TargetByPathQueryResult>, {_type: 'screen'}>
+  page: StegaBranded<Extract<NonNullable<TargetByPathQueryResult>, {_type: 'screen'}>>
 }): ReactElement {
   const {page} = props
 
