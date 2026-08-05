@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 2.16.27
+
+### Patch Changes
+
+- [#2594](https://github.com/sanity-io/ui/pull/2594) [`4eaf646`](https://github.com/sanity-io/ui/commit/4eaf6464321aeb7b97f0c17e642d7cee2c5a43a4) Thanks [@stipsan](https://github.com/stipsan)! - fix(deps): update dependency @sanity/color to ^3.0.8
+
+  fix(deps): update dependency motion to ^12.43.0
+
 ## 2.16.26
 
 ### Patch Changes
