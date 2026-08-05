@@ -67,6 +67,7 @@ export function ArticleLayout({
     <Card flex={1} style={{minHeight: 'auto'}}>
       {nav && (
         <BreadcrumbsNavCard
+          data-testid="article-breadcrumbs-nav"
           data-ui="BreadcrumbsNavCard"
           $menuOpen={menuOpen}
           paddingX={[2, 2, 3, 4]}
@@ -98,7 +99,7 @@ export function ArticleLayout({
 
       <Flex hidden={menuOpen}>
         {nav && (
-          <NavCard flex={1} overflow="auto">
+          <NavCard data-testid="article-sidebar-nav" flex={1} overflow="auto">
             <Box padding={[2, 2, 3, 4]}>
               <Nav nav={nav} path={`/${path.join('/')}`} />
             </Box>
