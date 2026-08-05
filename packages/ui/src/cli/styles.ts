@@ -1,12 +1,12 @@
 import {existsSync, readdirSync, readFileSync, statSync, writeFileSync} from 'node:fs'
 import {dirname, join, relative} from 'node:path'
 
-export const STYLES_SPECIFIER = '@sanity-labs/ui-poc/styles.css'
+export const STYLES_SPECIFIER = '@sanity/ui/styles.css'
 const IMPORT_LINE = `import '${STYLES_SPECIFIER}'`
 // Match a real import/require of the stylesheet, not a bare mention. A
 // commented-out or string occurrence of the path must not count as "wired",
 // or doctor/init would report success when the import isn't active.
-const SPEC = String.raw`@sanity-labs/ui-poc/styles\.css`
+const SPEC = String.raw`@sanity/ui/styles\.css`
 const PRESENT = new RegExp(
   String.raw`(?:^|\n)\s*import\s+(?:[^\n'"]*\bfrom\s+)?['"]${SPEC}['"]` +
     String.raw`|\brequire\(\s*['"]${SPEC}['"]\s*\)`,

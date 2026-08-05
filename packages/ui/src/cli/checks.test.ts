@@ -5,6 +5,7 @@ import {join} from 'node:path'
 import {afterEach, beforeEach, describe, expect, it} from 'vitest'
 
 import {collectChecks} from './checks.js'
+import {writeInstalledUiVersion} from './test-utils.js'
 
 describe('collectChecks tsconfig', () => {
   let dir: string
@@ -23,5 +24,15 @@ describe('collectChecks tsconfig', () => {
     const tsconfig = checks.find((c) => c.id === 'tsconfig')
     expect(tsconfig?.status).toBe('fail')
     expect(tsconfig?.detail).toMatch(/could not be parsed/)
+  })
+
+  it('fails the version check when @sanity/ui is pre-v5', () => {
+    writeFileSync(join(dir, 'package.json'), JSON.stringify({dependencies: {}}))
+    writeInstalledUiVersion(dir, '3.5.1')
+    const {checks} = collectChecks(dir)
+    expect(checks.find((c) => c.id === 'install')?.status).toBe('pass')
+    const version = checks.find((c) => c.id === 'version')
+    expect(version?.status).toBe('fail')
+    expect(version?.detail).toMatch(/pre-v5 \(expected v5\)/)
   })
 })

@@ -1,5 +1,5 @@
 {
-  "name": "ui-poc-react-router",
+  "name": "ui-react-router",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "@react-router/node": "7.15.0",
     "@react-router/serve": "7.15.0",
-    "@sanity-labs/ui-poc": "workspace:*",
+    "@sanity/ui": "workspace:*",
     "isbot": "^5.1.36",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",

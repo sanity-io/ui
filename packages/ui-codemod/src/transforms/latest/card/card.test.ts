@@ -187,7 +187,7 @@ defineInlineTest(
   <Card scheme="light" />
   `,
   `
-  // UI-POC-CODEMOD TODO: Please double check the Card migration below. The scheme prop has been deprecated.
+  // UI-CODEMOD TODO: Please double check the Card migration below. The scheme prop has been deprecated.
   <Card scheme="light" />
   `,
   'warns if Card includes scheme prop',
@@ -200,7 +200,7 @@ defineInlineTest(
   <Card muted />
   `,
   `
-  // UI-POC-CODEMOD TODO: Please double check the Card migration below. The muted prop has been deprecated.
+  // UI-CODEMOD TODO: Please double check the Card migration below. The muted prop has been deprecated.
   <Card muted />
   `,
   'warns if Card includes muted prop',

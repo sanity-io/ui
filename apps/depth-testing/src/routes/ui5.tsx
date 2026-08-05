@@ -12,15 +12,15 @@ import {
   Switch,
   Text,
   VStack,
-} from '@sanity-labs/ui-poc'
+} from '@sanity/ui'
 
-import '@sanity-labs/ui-poc/styles.css'
+import '@sanity/ui/styles.css'
 
-function UiPoc() {
+function Ui5() {
   return (
     <Box margin={4}>
       <Heading as="h2" marginBottom={5}>
-        UI POC
+        UI 5
       </Heading>
       <Text as="p" marginBottom={4}>
         A measure of the USS Sanity’s DOM engines
@@ -57,4 +57,4 @@ function UiPoc() {
   )
 }
 
-export default UiPoc
+export default Ui5

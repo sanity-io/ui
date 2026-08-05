@@ -1,12 +1,12 @@
 {
-  "name": "@sanity-labs/ui-poc-codemod",
-  "version": "0.0.1-alpha.18",
+  "name": "@sanity/ui-codemod",
+  "version": "1.0.0-alpha.1",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "",
   "bin": {
-    "ui-poc-codemod": "./bin/run.js"
+    "ui-codemod": "./bin/run.js"
   },
   "files": [
     "dist",
@@ -124,9 +124,9 @@
   },
   "browserslist": "extends @sanity/browserslist-config",
   "oclif": {
-    "bin": "@sanity-labs/ui-poc-codemod",
+    "bin": "@sanity/ui-codemod",
     "commands": "./dist/commands",
-    "dirname": "ui-poc-codemod",
+    "dirname": "ui-codemod",
     "topicSeparator": ":",
     "topics": {
       "latest": {

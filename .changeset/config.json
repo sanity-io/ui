@@ -8,11 +8,11 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "ui-poc-frameworks",
-    "ui-poc-next",
-    "ui-poc-react-router",
-    "ui-poc-vite",
-    "ui-poc-storybook",
+    "ui-frameworks",
+    "ui-next",
+    "ui-react-router",
+    "ui-vite",
+    "ui-storybook",
     "depth-testing",
     "inp-testing",
     "mount-testing"

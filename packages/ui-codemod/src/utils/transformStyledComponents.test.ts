@@ -121,7 +121,7 @@ defineInlineTest(
     const RootCard = styled(Card)(({theme}) => ({}))
 
     return (
-      // UI-POC-CODEMOD TODO: ${DEFAULT_WARNING}
+      // UI-CODEMOD TODO: ${DEFAULT_WARNING}
       <RootCard padding={1} />
     );
   }
@@ -148,7 +148,7 @@ defineInlineTest(
     const RootCard = styled(Card)(({theme}) => ({}))
 
     return (
-      // UI-POC-CODEMOD TODO: ${CUSTOM_WARNING}
+      // UI-CODEMOD TODO: ${CUSTOM_WARNING}
       <RootCard padding={1} />
     );
   }
@@ -166,7 +166,7 @@ defineInlineTest(
     const RootCard = styled(Card)(({theme}) => ({}))
 
     return (
-      // UI-POC-CODEMOD TODO: ${DEFAULT_WARNING}
+      // UI-CODEMOD TODO: ${DEFAULT_WARNING}
       <RootCard padding={1} />
     );
   }
@@ -178,7 +178,7 @@ defineInlineTest(
     const RootCard = styled(Card)(({theme}) => ({}))
 
     return (
-      // UI-POC-CODEMOD TODO: ${DEFAULT_WARNING}
+      // UI-CODEMOD TODO: ${DEFAULT_WARNING}
       <RootCard padding={1} />
     );
   }

@@ -1,6 +1,6 @@
-import {Heading as HeadingV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Heading as HeadingV3} from 'ui3'
 
 import {Heading} from '../../../../packages/ui/src/components/heading/Heading'
 import {headingProps} from '../../../../packages/ui/src/components/heading/heading.props'

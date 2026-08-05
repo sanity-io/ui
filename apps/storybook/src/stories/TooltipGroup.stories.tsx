@@ -1,7 +1,7 @@
-import {Tooltip as TooltipV3, TooltipDelayGroupProvider} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import type {ComponentProps} from 'react'
 import {expect, waitFor} from 'storybook/test'
+import {Tooltip as TooltipV3, TooltipDelayGroupProvider} from 'ui3'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'

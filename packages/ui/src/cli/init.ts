@@ -3,16 +3,16 @@ import process from 'node:process'
 
 import {verifyAfterInit} from './checks.js'
 import {buildConfig, CONFIG_FILE, configExists, writeConfig} from './config.js'
-import {detect, PACKAGE_NAME} from './detect.js'
+import {detect, LEGACY_COEXISTENCE_HINT, PACKAGE_NAME} from './detect.js'
 import {printChecks} from './doctor.js'
 import {installCommand, resolveInstallSpecs, resolveTypeSpecs, runInstall} from './install.js'
 import {color, confirm, fail, heading, info, step, success, warn} from './log.js'
 import {inspectStylesheet, STYLES_SPECIFIER, wireStylesheet} from './styles.js'
-import {inspectTsconfig, reconcileTsconfig} from './tsconfig.js'
-import {meetsNode, meetsReact, NODE_REQUIREMENT, REACT_MIN} from './versions.js'
-import type {CliOptions, Detected} from './types.js'
 import type {StylesheetInfo} from './styles.js'
+import {inspectTsconfig, reconcileTsconfig} from './tsconfig.js'
 import type {TsconfigInspection} from './tsconfig.js'
+import type {CliOptions, Detected} from './types.js'
+import {meetsNode, meetsReact, NODE_REQUIREMENT, REACT_MIN} from './versions.js'
 
 interface Plan {
   specs: string[]
@@ -117,6 +117,22 @@ export async function runInit(options: CliOptions): Promise<number> {
     ),
   )
 
+  if (detected.aliasedInstall) {
+    fail(
+      `This project installs v5 under the alias "${detected.aliasedInstall}". init is for new apps only.`,
+    )
+    info(`  ${color.dim('fix:')} ${LEGACY_COEXISTENCE_HINT}`)
+    return 1
+  }
+
+  if (detected.legacyInstall) {
+    fail(
+      `This project already has ${PACKAGE_NAME}@${detected.legacyInstall} (pre-v5). init is for new apps only.`,
+    )
+    info(`  ${color.dim('fix:')} ${LEGACY_COEXISTENCE_HINT}`)
+    return 1
+  }
+
   heading('Requirements')
   const {blocking} = reportPrereqs(detected)
 
@@ -199,11 +215,11 @@ export async function runInit(options: CliOptions): Promise<number> {
   const failed = results.filter((c) => c.status === 'fail')
   info('')
   if (failed.length === 0) {
-    success('Setup verified. Import components from @sanity-labs/ui-poc and start building.')
+    success('Setup verified. Import components from @sanity/ui and start building.')
     return 0
   }
   fail(
-    `${failed.length} check${failed.length === 1 ? '' : 's'} failed. Run \`npx ${PACKAGE_NAME} doctor\` for details.`,
+    `${failed.length} check${failed.length === 1 ? '' : 's'} failed. Run \`npx ${PACKAGE_NAME}@alpha doctor\` for details.`,
   )
   return 1
 }

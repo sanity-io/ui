@@ -1,5 +1,5 @@
 {
-  "name": "ui-poc-storybook",
+  "name": "ui-storybook",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@sanity/icons": "^3.7.4",
-    "@sanity/ui": "^3.1.14",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-refractor": "^4.0.0",
-    "refractor": "^5.0.0"
+    "refractor": "^5.0.0",
+    "ui3": "catalog:"
   },
   "devDependencies": {
     "@babel/core": "catalog:",

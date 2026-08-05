@@ -206,7 +206,7 @@ defineInlineTest(
     const RootBox = styled(Box)(({theme}) => ({}))
 
     return (
-      // UI-POC-CODEMOD TODO: Please double check styled(Box) migration below
+      // UI-CODEMOD TODO: Please double check styled(Box) migration below
       <RootBox display="flex" alignItems="center" />
     );
   }

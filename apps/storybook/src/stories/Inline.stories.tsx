@@ -1,6 +1,6 @@
-import {Inline as InlineV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Inline as InlineV3} from 'ui3'
 
 import {Inline} from '../../../../packages/ui/src/components/inline/Inline'
 import {inlineProps} from '../../../../packages/ui/src/components/inline/inline.props'

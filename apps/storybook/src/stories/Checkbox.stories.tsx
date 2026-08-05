@@ -1,6 +1,6 @@
-import {Checkbox as CheckboxV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect, waitFor} from 'storybook/test'
+import {Checkbox as CheckboxV3} from 'ui3'
 
 import {Checkbox} from '../../../../packages/ui/src/components/checkbox/Checkbox'
 import {checkboxProps} from '../../../../packages/ui/src/components/checkbox/checkbox.props'

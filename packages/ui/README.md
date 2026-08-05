@@ -1,4 +1,4 @@
-# Sanity UI 4
+# Sanity UI 5
 
 The next version of Sanity's component library. Faster, simpler, and built on CSS instead of styled-components.
 
@@ -6,16 +6,18 @@ The next version of Sanity's component library. Faster, simpler, and built on CS
 
 - **CSS classes instead of styled-components.** No runtime style generation. Smaller bundles, faster renders.
 - **Direct props for layout.** Width, height, position, border, and overflow are first-class props — no more `style={{ ... }}` escape hatches.
-- **Works alongside v3.** Install both packages in the same app. No forced migration.
+- **Works alongside v3.** Both versions run in the same app, in the same component tree. No forced migration.
 
 Requires React 19.2+ and Node >=20.19 <22 || >=22.12.
 
-## Install
+## For new apps
 
-### Recommended: the setup CLI
+### Install
+
+#### Recommended: the setup CLI
 
 ```sh
-npx @sanity-labs/ui-poc init
+npx @sanity/ui@alpha init
 ```
 
 `init` detects your framework and package manager, checks your React and Node versions, then installs the package along with `@sanity/icons`, adds the stylesheet import to your entry file, reconciles `tsconfig.json`, and writes a `sanity-ui.json`. It prints a plan and asks before changing anything.
@@ -26,54 +28,24 @@ npx @sanity-labs/ui-poc init
 - `--yes` accept every prompt with its default (non-interactive, for CI and agents)
 - `--cwd <dir>` run against another directory
 
-### Manual
+#### Manual
 
 ```sh
-npm install @sanity-labs/ui-poc
+pnpm add @sanity/ui@alpha
 ```
 
-Using pnpm or yarn? Use `pnpm add` or `yarn add` instead. (`init` above picks the right one for you.)
+Using npm or yarn? Use `npm add` or `yarn add` instead. (`init` above picks the right one for you.)
 
-Then import the stylesheet at your app entry point. Without it, components render as unstyled HTML with no error.
+Then import the stylesheet at your app entry point. Without it, components render as unstyled HTML.
 
 ```tsx
-import '@sanity-labs/ui-poc/styles.css'
+import '@sanity/ui/styles.css'
 ```
 
-## Using alongside Sanity UI v3
-
-If your app uses Sanity UI v3, keep the existing `ThemeProvider` setup.
+### Usage
 
 ```tsx
-import {ThemeProvider, studioTheme, ToastProvider} from '@sanity/ui'
-import '@sanity-labs/ui-poc/styles.css'
-import App from './App'
-
-createRoot(document.getElementById('root')!).render(
-  <ThemeProvider theme={studioTheme}>
-    <ToastProvider>
-      <App />
-    </ToastProvider>
-  </ThemeProvider>,
-)
-```
-
-## Checking your setup
-
-Run `doctor` at any time to verify an install and get a one-line fix for anything broken:
-
-```sh
-npx @sanity-labs/ui-poc doctor
-```
-
-It checks that the package and `@sanity/icons` are installed, the stylesheet resolves and is imported, `tsconfig.json` has the options the components need, and your React and Node versions are supported.
-
-## Usage
-
-Import from `@sanity-labs/ui-poc`. Components not yet in v4 — Menu, Dialog, TextInput, Badge — remain in `@sanity/ui`.
-
-```tsx
-import {Box, Flex, Card, Heading, Text, Button} from '@sanity-labs/ui-poc'
+import {Box, Flex, Card, Heading, Text, Button} from '@sanity/ui'
 import {AddIcon} from '@sanity/icons'
 
 export default function App() {
@@ -105,9 +77,73 @@ export default function App() {
 }
 ```
 
-## Components
+### Checking your setup
 
-All components below are from `@sanity-labs/ui-poc`.
+Run `doctor` at any time to verify an install and get a one-line fix for anything broken:
+
+```sh
+npx @sanity/ui@alpha doctor
+```
+
+It checks that the package and `@sanity/icons` are installed, the stylesheet resolves and is imported, `tsconfig.json` has the options the components need, and your React and Node versions are supported.
+
+## For apps using Sanity UI v3
+
+### Install
+
+v3 and v5 are the same npm package at different majors, so an app that wants both needs a package alias to tell them apart.
+
+In apps still using v3 components, we recommend installing v5 with a package alias. This way, your existing `@sanity/ui` imports keep resolving to v3, so nothing you have already written needs to change.
+
+```sh
+pnpm add ui5@npm:@sanity/ui@alpha
+```
+
+This gives you:
+
+```json
+{
+  "dependencies": {
+    "@sanity/ui": "^3.5.1",
+    "ui5": "npm:@sanity/ui@alpha"
+  }
+}
+```
+
+Now `@sanity/ui` means v3 everywhere in your codebase and `ui5` means v5. You migrate one import at a time, at whatever pace suits you, instead of rewriting every file before anything runs.
+
+The alias name is yours to choose. `ui5` is what we use internally. npm, pnpm, and yarn all support the `npm:` protocol.
+
+### Setup
+
+v5 has no `ThemeProvider`, and it does not read v3's theme. Keep your existing provider setup exactly as it is: v3 components still need it, and it has no effect on v5.
+
+With v5 installed under an alias, the stylesheet comes from the alias too.
+
+```tsx
+import {ThemeProvider, studioTheme, ToastProvider} from '@sanity/ui' // v3
+import 'ui5/styles.css' // v5
+import App from './App'
+
+createRoot(document.getElementById('root')!).render(
+  <ThemeProvider theme={studioTheme}>
+    <ToastProvider>
+      <App />
+    </ToastProvider>
+  </ThemeProvider>,
+)
+```
+
+### Usage
+
+With v5 aliased, which version you get is just which specifier you import from. Anything without a v5 equivalent keeps coming from `@sanity/ui`, and the two sit next to each other in the same tree.
+
+```tsx
+import {Dialog} from '@sanity/ui' // v3
+import {Button, Card, Text} from 'ui5' // v5
+```
+
+## Components
 
 ### Layout
 
@@ -148,7 +184,7 @@ All components below are from `@sanity-labs/ui-poc`.
 | `Divider`        | Horizontal rule between content sections.                                                                            |
 | `Icon`           | Renders a `@sanity/icons` icon component. Always set `aria-label` or `aria-hidden`.                                  |
 | `Indicator`      | Status dot with `tone`.                                                                                              |
-| `IndicatorGroup` | Grouped `Indicator` elements.                                                                                        |
+| `IndicatorStack` | Grouped `Indicator` elements.                                                                                        |
 | `Spinner`        | Loading indicator.                                                                                                   |
 
 ### Lists
@@ -159,14 +195,14 @@ All components below are from `@sanity-labs/ui-poc`.
 
 ### Accessibility
 
-| Component        | What it does                                                                          |
-| ---------------- | ------------------------------------------------------------------------------------- |
+| Component        | What it does                                                                                     |
+| ---------------- | ------------------------------------------------------------------------------------------------ |
 | `SkipToContent`  | Visually hidden skip-nav link. Must be the first focusable element. Requires `href` and `label`. |
-| `VisuallyHidden` | Hides content visually while keeping it in the accessibility tree.                    |
+| `VisuallyHidden` | Hides content visually while keeping it in the accessibility tree.                               |
 
-### Still from `@sanity/ui`
+### Still only in v3
 
-Menu, Dialog, TextInput, Select, Stack, Badge, ThemeProvider, ToastProvider, and other components not yet migrated to v4.
+Menu, Dialog, TextInput, Select, Stack, Badge, ThemeProvider, ToastProvider, and other components not yet migrated to v5. Import these from `@sanity/ui` exactly as you do today.
 
 ## Contributing
 

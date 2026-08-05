@@ -1,6 +1,6 @@
-import {Code as CodeV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect, waitFor} from 'storybook/test'
+import {Code as CodeV3} from 'ui3'
 
 import {Code} from '../../../../packages/ui/src/components/code/Code'
 import {codeProps} from '../../../../packages/ui/src/components/code/code.props'

@@ -1,6 +1,6 @@
-import {Box as BoxV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Box as BoxV3} from 'ui3'
 
 import {Box} from '../../../../packages/ui/src/components/box/Box'
 import {boxProps} from '../../../../packages/ui/src/components/box/box.props'

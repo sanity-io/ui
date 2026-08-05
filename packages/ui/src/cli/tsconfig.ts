@@ -73,7 +73,11 @@ function readJsonc(file: string): TsconfigDoc {
  * real options in a referenced file, so we follow the first reference that
  * actually carries compilerOptions.
  */
-export function resolveTargetTsconfig(cwd: string): {file: string; exists: boolean; unreadable?: boolean} {
+export function resolveTargetTsconfig(cwd: string): {
+  file: string
+  exists: boolean
+  unreadable?: boolean
+} {
   const root = join(cwd, 'tsconfig.json')
   if (!existsSync(root)) return {file: root, exists: false}
 
@@ -125,7 +129,11 @@ function effectiveCompilerOptions(file: string, seen = new Set<string>()): Recor
 
   const base: Record<string, unknown> = {}
   const extendsField = data.extends
-  const extendsList = Array.isArray(extendsField) ? extendsField : extendsField ? [extendsField] : []
+  const extendsList = Array.isArray(extendsField)
+    ? extendsField
+    : extendsField
+      ? [extendsField]
+      : []
   for (const ext of extendsList) {
     if (typeof ext !== 'string') continue
     if (ext.startsWith('.') || isAbsolute(ext)) {

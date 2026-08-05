@@ -344,7 +344,7 @@ defineInlineTest(
   <div scheme="light" width="fill" />
   `,
   `
-  // UI-POC-CODEMOD TODO: Custom warning
+  // UI-CODEMOD TODO: Custom warning
   <div scheme="light" width="100%" />
   `,
   'warns with custom warning for warn prop',
@@ -357,7 +357,7 @@ defineInlineTest(
   <div width={3} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div width={3} />
   `,
   'warns if mapped prop value does not match mappings',
@@ -370,7 +370,7 @@ defineInlineTest(
   <div width={[2, 3]} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div width={[2, 3]} />
   `,
   'warns if responsive mapped prop value does not match mappings',
@@ -383,7 +383,7 @@ defineInlineTest(
   <div width={variable} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div width={variable} />
   `,
   'warns if mapped prop value is a variable',
@@ -396,7 +396,7 @@ defineInlineTest(
   <div width={variable ? 'fill' : 0} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div width={variable ? 'fill' : 0} />
   `,
   'warns if mapped prop value is a ternary',
@@ -409,7 +409,7 @@ defineInlineTest(
   <div width={\`fil\${\`l\`}\`} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div width={\`fil\${\`l\`}\`} />
   `,
   'warns if mapped prop value is a template literal with variable',
@@ -422,7 +422,7 @@ defineInlineTest(
   <div textAlign={["center", "left"]} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div textAlign={["center", "left"]} />
   `,
   'warns if responsive prop should be moved to style',
@@ -435,7 +435,7 @@ defineInlineTest(
   <div sizing={["content", "box"]} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div sizing={["content", "box"]} />
   `,
   'warns if responsive prop should be moved to style with updated values',
@@ -448,7 +448,7 @@ defineInlineTest(
   <div textAlign={\`cente\${\`r\`}\`} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div textAlign={\`cente\${\`r\`}\`} />
   `,
   'warns if prop with template literal value with variable should be moved to style',
@@ -461,7 +461,7 @@ defineInlineTest(
   <div padding={3} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div padding={3} />
   `,
   'warns if composite prop does not include all mappings',
@@ -474,7 +474,7 @@ defineInlineTest(
   <div padding={[3, 4]} radius={2} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div padding={[3, 4]} radius={2} />
   `,
   'warns if composite prop includes responsive values',
@@ -487,7 +487,7 @@ defineInlineTest(
   <div padding={3} radius={variable} />
   `,
   `
-  // UI-POC-CODEMOD TODO: ${TODO_WARNING}
+  // UI-CODEMOD TODO: ${TODO_WARNING}
   <div padding={3} radius={variable} />
   `,
   'warns if composite prop includes variable',
@@ -525,7 +525,7 @@ defineInlineTest(
   <div />
   `,
   `
-  // UI-POC-CODEMOD TODO: Missing
+  // UI-CODEMOD TODO: Missing
   <div />
   `,
   'warns with custom warning for warn missing prop',

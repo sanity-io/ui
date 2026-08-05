@@ -172,7 +172,7 @@ defineInlineTest(
   <LegacyCard padding={1}>Content</LegacyCard>
   `,
   `
-  // UI-POC-CODEMOD TODO: Consider renaming LegacyCard to Box
+  // UI-CODEMOD TODO: Consider renaming LegacyCard to Box
   import { Box as LegacyCard } from '@sanity/ui';
 
   <LegacyCard padding={1}>Content</LegacyCard>

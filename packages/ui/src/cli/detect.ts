@@ -1,9 +1,20 @@
 import {existsSync, readFileSync} from 'node:fs'
 import {join} from 'node:path'
 
-import type {Detected, EntryInfo, Framework, PackageJson, PackageManager, ReactInfo} from './types.js'
+import type {
+  Detected,
+  EntryInfo,
+  Framework,
+  PackageJson,
+  PackageManager,
+  ReactInfo,
+} from './types.js'
+import {parseVersion} from './versions.js'
 
-export const PACKAGE_NAME = '@sanity-labs/ui-poc'
+export const PACKAGE_NAME = '@sanity/ui'
+
+export const LEGACY_COEXISTENCE_HINT =
+  'To add v5 alongside an existing @sanity/ui install, use a package alias — see the README section "For apps using Sanity UI v3".'
 
 /**
  * Framework ids map 1:1 to the `framework` field written into sanity-ui.json.
@@ -14,10 +25,10 @@ const FRAMEWORK_ENTRIES: Record<Framework, string[]> = {
   'next-app': ['app/layout.tsx', 'app/layout.jsx', 'src/app/layout.tsx', 'src/app/layout.jsx'],
   'next-pages': ['pages/_app.tsx', 'pages/_app.jsx', 'src/pages/_app.tsx', 'src/pages/_app.jsx'],
   'react-router': ['app/root.tsx', 'app/root.jsx'],
-  remix: ['app/root.tsx', 'app/root.jsx'],
-  vite: ['src/main.tsx', 'src/main.jsx', 'src/main.ts'],
-  astro: [],
-  react: ['src/index.tsx', 'src/main.tsx', 'src/index.jsx', 'src/main.jsx'],
+  'remix': ['app/root.tsx', 'app/root.jsx'],
+  'vite': ['src/main.tsx', 'src/main.jsx', 'src/main.ts'],
+  'astro': [],
+  'react': ['src/index.tsx', 'src/main.tsx', 'src/index.jsx', 'src/main.jsx'],
 }
 
 export function readPackageJson(cwd: string): PackageJson | null {
@@ -30,7 +41,7 @@ export function readPackageJson(cwd: string): PackageJson | null {
   }
 }
 
-function allDeps(pkg: PackageJson | null): Record<string, string | undefined> {
+export function allDeps(pkg: PackageJson | null): Record<string, string | undefined> {
   if (!pkg) return {}
   return {...pkg.dependencies, ...pkg.devDependencies, ...pkg.peerDependencies}
 }
@@ -49,7 +60,10 @@ export function detectPackageManager(cwd: string): PackageManager {
   return 'npm'
 }
 
-export function detectFramework(cwd: string, pkg: PackageJson | null = readPackageJson(cwd)): Framework {
+export function detectFramework(
+  cwd: string,
+  pkg: PackageJson | null = readPackageJson(cwd),
+): Framework {
   const deps = allDeps(pkg)
   const has = (name: string): boolean => Boolean(deps[name])
   const dir = (relative: string): boolean => existsSync(join(cwd, relative))
@@ -66,7 +80,10 @@ export function detectFramework(cwd: string, pkg: PackageJson | null = readPacka
   return 'react'
 }
 
-export function detectTypeScript(cwd: string, pkg: PackageJson | null = readPackageJson(cwd)): boolean {
+export function detectTypeScript(
+  cwd: string,
+  pkg: PackageJson | null = readPackageJson(cwd),
+): boolean {
   return existsSync(join(cwd, 'tsconfig.json')) || Boolean(allDeps(pkg)['typescript'])
 }
 
@@ -98,7 +115,10 @@ function detectAstroLayout(cwd: string): EntryInfo {
  * Resolves the installed React version from node_modules, falling back to the
  * declared range in package.json (carets/tildes stripped).
  */
-export function detectReactVersion(cwd: string, pkg: PackageJson | null = readPackageJson(cwd)): ReactInfo {
+export function detectReactVersion(
+  cwd: string,
+  pkg: PackageJson | null = readPackageJson(cwd),
+): ReactInfo {
   const installed = readInstalledVersion(cwd, 'react')
   if (installed) return {version: installed, source: 'installed'}
 
@@ -128,8 +148,47 @@ export function readInstalledPackageVersion(cwd: string, name: string): string |
   return readInstalledVersion(cwd, name)
 }
 
+export function isLegacyUiVersion(version: unknown): boolean {
+  const major = parseVersion(version)?.[0]
+  return major !== undefined && major < 5
+}
+
+function detectAliasedInstall(deps: Record<string, string | undefined>): string | null {
+  for (const [name, spec] of Object.entries(deps)) {
+    if (typeof spec === 'string' && /^npm:@sanity\/ui@(5(?:\..*)?|alpha)$/.test(spec)) return name
+  }
+  return null
+}
+
+/** Reads the major from a declared range, skipping workspace/catalog/link specs. */
+function declaredMajor(spec: string | undefined): number | null {
+  if (typeof spec !== 'string') return null
+  if (/^(workspace:|catalog:|link:|file:)/.test(spec)) return null
+
+  const npmAlias = spec.match(/^npm:@sanity\/ui@(\d+)/)
+  if (npmAlias) return Number(npmAlias[1])
+
+  return parseVersion(spec.replace(/^[\^~>=<\s]+/, ''))?.[0] ?? null
+}
+
+function detectLegacyInstall(cwd: string, deps: Record<string, string | undefined>): string | null {
+  const installed = readInstalledPackageVersion(cwd, PACKAGE_NAME)
+  if (installed && isLegacyUiVersion(installed)) {
+    return installed
+  }
+
+  const declared = deps[PACKAGE_NAME]
+  const major = declaredMajor(declared)
+  if (major !== null && major < 5) {
+    return declared ?? 'unknown'
+  }
+
+  return null
+}
+
 export function detect(cwd: string): Detected {
   const pkg = readPackageJson(cwd)
+  const deps = allDeps(pkg)
   const framework = detectFramework(cwd, pkg)
   const entry = detectEntry(cwd, framework)
   const typescript = detectTypeScript(cwd, pkg) || (entry.exists && /\.tsx?$/.test(entry.entry))
@@ -140,5 +199,7 @@ export function detect(cwd: string): Detected {
     typescript,
     ...entry,
     react: detectReactVersion(cwd, pkg),
+    aliasedInstall: detectAliasedInstall(deps),
+    legacyInstall: detectLegacyInstall(cwd, deps),
   }
 }

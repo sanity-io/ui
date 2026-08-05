@@ -1,6 +1,6 @@
 'use client'
 
-import {Button, Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
+import {Button, Container, Divider, Flex, Heading, Text} from '@sanity/ui'
 import Link from 'next/link'
 
 export default function Home() {

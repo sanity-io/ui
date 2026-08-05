@@ -1,9 +1,9 @@
 import {lazy, Suspense} from 'react'
 
 const routes: Record<string, React.LazyExoticComponent<() => React.JSX.Element>> = {
-  'ui-poc': lazy(() => import('./pages/ui-poc')),
-  'ui3': lazy(() => import('./pages/ui3')),
-  'ui4': lazy(() => import('./pages/ui4')),
+  ui5: lazy(() => import('./pages/ui5')),
+  ui3: lazy(() => import('./pages/ui3')),
+  ui4: lazy(() => import('./pages/ui4')),
 }
 
 function Index() {
@@ -12,7 +12,7 @@ function Index() {
       <h1>Performance tests</h1>
       <ul>
         <li>
-          <a href="?route=ui-poc">ui-poc</a>
+          <a href="?route=ui5">ui5</a>
         </li>
         <li>
           <a href="?route=ui3">ui3</a>

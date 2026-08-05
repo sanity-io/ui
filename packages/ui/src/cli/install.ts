@@ -91,7 +91,11 @@ export function runInstall(
   // On Windows the package managers are .cmd shims, and spawning them without a
   // shell throws (ENOENT, or EINVAL since the Node .cmd security fix). The args
   // are package specs we build ourselves, so there is nothing to escape.
-  const result = spawnSync(command, args, {cwd, stdio: 'inherit', shell: process.platform === 'win32'})
+  const result = spawnSync(command, args, {
+    cwd,
+    stdio: 'inherit',
+    shell: process.platform === 'win32',
+  })
 
   if (result.error) {
     return {ok: false, reason: 'spawn', message: result.error.message, command, args}

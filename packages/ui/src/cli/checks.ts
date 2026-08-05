@@ -3,7 +3,13 @@ import {createRequire} from 'node:module'
 import {dirname, join} from 'node:path'
 import process from 'node:process'
 
-import {detect, isPackageInstalled, PACKAGE_NAME, readInstalledPackageVersion} from './detect.js'
+import {
+  detect,
+  isPackageInstalled,
+  isLegacyUiVersion,
+  PACKAGE_NAME,
+  readInstalledPackageVersion,
+} from './detect.js'
 import {inspectStylesheet, STYLES_SPECIFIER} from './styles.js'
 import {inspectTsconfig} from './tsconfig.js'
 import type {Check, CheckStatus, Detected} from './types.js'
@@ -75,9 +81,22 @@ export function collectChecks(cwd: string): CheckReport {
     check('install', Boolean(installedVersion), {
       title: 'Package installed',
       detail: installedVersion ? `${PACKAGE_NAME}@${installedVersion}` : 'not installed',
-      fix: `Run \`npx ${PACKAGE_NAME} init\` or install it with your package manager`,
+      fix: `Run \`npx ${PACKAGE_NAME}@alpha init\` or install it with your package manager`,
     }),
   )
+
+  if (installedVersion) {
+    const legacyInstalled = isLegacyUiVersion(installedVersion)
+    checks.push(
+      check('version', !legacyInstalled, {
+        title: 'Package version',
+        detail: legacyInstalled
+          ? `${PACKAGE_NAME}@${installedVersion} is pre-v5 (expected v5)`
+          : `${PACKAGE_NAME}@${installedVersion}`,
+        fix: `Remove the existing @sanity/ui version, or install v5 with a package alias — see README "For apps using Sanity UI v3"`,
+      }),
+    )
+  }
 
   const iconsInstalled = isPackageInstalled(cwd, ICONS)
   checks.push(
@@ -131,7 +150,7 @@ export function collectChecks(cwd: string): CheckReport {
               : `needs: ${loadBearing.map((c) => `${c.key}: ${String(c.to)}`).join(', ')}`,
         fix: tsconfig.unreadable
           ? 'Fix the JSON syntax in tsconfig.json'
-          : `Run \`npx ${PACKAGE_NAME} init\` to reconcile tsconfig.json`,
+          : `Run \`npx ${PACKAGE_NAME}@alpha init\` to reconcile tsconfig.json`,
       }),
     )
   }

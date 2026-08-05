@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import {
   Button,
   Card,
@@ -10,11 +11,10 @@ import {
   Switch,
   Text,
   ThemeProvider,
-} from '@sanity/ui'
-import {buildTheme} from '@sanity/ui/theme'
-import {useState} from 'react'
+} from 'ui3'
+import {buildTheme} from 'ui3/theme'
 
-// Shared test sizes — keep in sync with uiPoc.tsx so the comparison stays fair.
+// Shared test sizes — keep in sync with ui5.tsx so the comparison stays fair.
 const ROW_COUNT = 200
 const TONE_CARD_COUNT = 500
 const PANEL_CARD_COUNT = 300

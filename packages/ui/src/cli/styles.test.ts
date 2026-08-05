@@ -8,18 +8,18 @@ import {hasStylesImport, inspectStylesheet, wireStylesheet} from './styles.js'
 
 describe('hasStylesImport', () => {
   it('matches single and double quoted imports', () => {
-    expect(hasStylesImport(`import '@sanity-labs/ui-poc/styles.css'`)).toBe(true)
-    expect(hasStylesImport(`import "@sanity-labs/ui-poc/styles.css"`)).toBe(true)
+    expect(hasStylesImport(`import '@sanity/ui/styles.css'`)).toBe(true)
+    expect(hasStylesImport(`import "@sanity/ui/styles.css"`)).toBe(true)
     expect(hasStylesImport(`import './app.css'`)).toBe(false)
   })
 
   it('matches a require of the stylesheet', () => {
-    expect(hasStylesImport(`require('@sanity-labs/ui-poc/styles.css')`)).toBe(true)
+    expect(hasStylesImport(`require('@sanity/ui/styles.css')`)).toBe(true)
   })
 
   it('ignores a commented-out or string mention of the path', () => {
-    expect(hasStylesImport(`// import '@sanity-labs/ui-poc/styles.css'`)).toBe(false)
-    expect(hasStylesImport(`const note = 'see @sanity-labs/ui-poc/styles.css'`)).toBe(false)
+    expect(hasStylesImport(`// import '@sanity/ui/styles.css'`)).toBe(false)
+    expect(hasStylesImport(`const note = 'see @sanity/ui/styles.css'`)).toBe(false)
   })
 })
 
@@ -47,7 +47,7 @@ describe('wireStylesheet', () => {
     const result = wireStylesheet(dir, 'src/main.tsx')
     expect(result.wrote).toBe(true)
     const lines = readFileSync(join(dir, 'src/main.tsx'), 'utf8').split('\n')
-    expect(lines[2]).toBe(`import '@sanity-labs/ui-poc/styles.css'`)
+    expect(lines[2]).toBe(`import '@sanity/ui/styles.css'`)
   })
 
   it('inserts after a multiline import without splitting it', () => {
@@ -58,7 +58,9 @@ describe('wireStylesheet', () => {
     wireStylesheet(dir, 'src/main.tsx')
     const content = readFileSync(join(dir, 'src/main.tsx'), 'utf8')
     // The import must land after the whole react import, not between its lines.
-    expect(content).toContain(`} from 'react'\nimport App from './App'\nimport '@sanity-labs/ui-poc/styles.css'`)
+    expect(content).toContain(
+      `} from 'react'\nimport App from './App'\nimport '@sanity/ui/styles.css'`,
+    )
     expect(content).not.toMatch(/import \{\nimport '@sanity-labs/)
   })
 
@@ -67,15 +69,17 @@ describe('wireStylesheet', () => {
     wireStylesheet(dir, 'app/layout.tsx')
     const lines = readFileSync(join(dir, 'app/layout.tsx'), 'utf8').split('\n')
     expect(lines[0]).toBe(`'use client'`)
-    expect(lines.includes(`import '@sanity-labs/ui-poc/styles.css'`)).toBe(true)
+    expect(lines.includes(`import '@sanity/ui/styles.css'`)).toBe(true)
   })
 
   it('injects into astro frontmatter', () => {
     write('src/layouts/Layout.astro', `---\nconst {title} = Astro.props\n---\n<html></html>\n`)
     wireStylesheet(dir, 'src/layouts/Layout.astro')
     const content = readFileSync(join(dir, 'src/layouts/Layout.astro'), 'utf8')
-    expect(content).toContain(`import '@sanity-labs/ui-poc/styles.css'`)
-    expect(content.indexOf(`import '@sanity-labs/ui-poc/styles.css'`)).toBeLessThan(content.indexOf('<html>'))
+    expect(content).toContain(`import '@sanity/ui/styles.css'`)
+    expect(content.indexOf(`import '@sanity/ui/styles.css'`)).toBeLessThan(
+      content.indexOf('<html>'),
+    )
   })
 
   it('is idempotent', () => {
@@ -104,7 +108,7 @@ describe('inspectStylesheet', () => {
   it('finds the import in a sibling file when not in the entry', () => {
     mkdirSync(join(dir, 'src'), {recursive: true})
     writeFileSync(join(dir, 'src/main.tsx'), `import App from './App'\n`)
-    writeFileSync(join(dir, 'src/App.tsx'), `import '@sanity-labs/ui-poc/styles.css'\n`)
+    writeFileSync(join(dir, 'src/App.tsx'), `import '@sanity/ui/styles.css'\n`)
     const result = inspectStylesheet(dir, 'src/main.tsx')
     expect(result.imported).toBe(true)
     expect(result.importedIn).toBe(join('src', 'App.tsx'))
@@ -113,7 +117,7 @@ describe('inspectStylesheet', () => {
   it('finds the import in a nested route file', () => {
     mkdirSync(join(dir, 'app/routes'), {recursive: true})
     writeFileSync(join(dir, 'app/root.tsx'), `export default function Root() {}\n`)
-    writeFileSync(join(dir, 'app/routes/home.tsx'), `import '@sanity-labs/ui-poc/styles.css'\n`)
+    writeFileSync(join(dir, 'app/routes/home.tsx'), `import '@sanity/ui/styles.css'\n`)
     const result = inspectStylesheet(dir, 'app/root.tsx')
     expect(result.imported).toBe(true)
   })

@@ -1,4 +1,5 @@
-import '@sanity-labs/ui-poc/styles.css'
+import '@sanity/ui/styles.css'
+import {AddIcon, EditIcon} from '@sanity/icons'
 import {
   Box,
   Button,
@@ -28,8 +29,7 @@ import {
   TooltipGroup,
   VisuallyHidden,
   VStack,
-} from '@sanity-labs/ui-poc'
-import {AddIcon, EditIcon} from '@sanity/icons'
+} from '@sanity/ui'
 import {Profiler} from 'react'
 
 const count = 5000
@@ -51,10 +51,10 @@ function handleOnRender(
   console.log(`per ${id} component: ${perComponent}`)
 }
 
-export default function UiPoc() {
+export default function Ui5() {
   return (
     <div>
-      <h1>UI POC</h1>
+      <h1>UI v5</h1>
 
       <h2>{count} Boxes</h2>
       <Profiler id="Box" onRender={handleOnRender}>
@@ -276,7 +276,7 @@ export default function UiPoc() {
       <Profiler id="List" onRender={handleOnRender}>
         {iterator.map((i) => (
           <List key={i}>
-            <List.Item trailing={<Icon size={1} icon={EditIcon} />}>
+            <List.Item end={<Icon size={1} icon={EditIcon} />}>
               <List.ItemText title="Item title" subtitle="Item subtitle" />
             </List.Item>
           </List>
@@ -286,7 +286,7 @@ export default function UiPoc() {
       <h2>{count} SkipToContents</h2>
       <Profiler id="SkipToContent" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <SkipToContent key={i} hash="#main" target="_self" label="Skip to content" />
+          <SkipToContent key={i} href="#main" target="_self" label="Skip to content" />
         ))}
       </Profiler>
 
