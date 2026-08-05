@@ -3,6 +3,7 @@ import {draftMode} from 'next/headers'
 import {notFound} from 'next/navigation'
 import {Suspense} from 'react'
 
+import {ArticleLoading} from '#app/(website)/[screen]/ArticleLoading.tsx'
 import {
   articlesQuery,
   buildTargetByPathParams,
@@ -62,7 +63,19 @@ export async function generateMetadata({
   }
 }
 
-export default async function ArticlePage({params}: PageProps<'/[screen]/[...article]'>) {
+// `params` identifies one article, so it can never be part of the App Shell
+// that every link into this route shares. Awaiting it below a boundary lets
+// the shell commit on navigation while the article streams in behind the
+// segment's loading UI.
+export default function ArticlePage({params}: PageProps<'/[screen]/[...article]'>) {
+  return (
+    <Suspense fallback={<ArticleLoading />}>
+      <ScreenPage params={params} />
+    </Suspense>
+  )
+}
+
+async function ScreenPage({params}: Pick<PageProps<'/[screen]/[...article]'>, 'params'>) {
   const {isEnabled: isDraftMode} = await draftMode()
   if (!isDraftMode) {
     const {screen, article} = await params
@@ -70,14 +83,6 @@ export default async function ArticlePage({params}: PageProps<'/[screen]/[...art
       <CachedScreenPage screen={screen} article={article} perspective="published" stega={false} />
     )
   }
-  return (
-    <Suspense>
-      <DynamicScreenPage params={params} />
-    </Suspense>
-  )
-}
-
-async function DynamicScreenPage({params}: Pick<PageProps<'/[screen]/[...article]'>, 'params'>) {
   const [{screen, article}, {perspective, stega}] = await Promise.all([
     params,
     getDynamicFetchOptions(),

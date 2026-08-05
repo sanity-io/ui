@@ -42,6 +42,9 @@ run.
   `e2e:build` → `e2e` (starts the server) → read the failure → fix → repeat.
   The Playwright `webServer` owns port 3000; stop any `next dev`/`next start`
   already holding it first, or the suite silently measures the old process.
+  Not wired into GitHub Actions: CI never builds `apps/docs` (Vercel does)
+  and the repo has no `SANITY_API_READ_TOKEN` secret, so running the suite
+  there needs that secret added first.
 - **LIVENESS**: n/a. The measured artifact is the one just built in the same
   working tree, so there is no deployed-SHA skew to probe for. Add one only if
   the rig ever moves to preview deploys.

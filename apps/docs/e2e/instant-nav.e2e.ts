@@ -47,10 +47,15 @@ test.describe('instant navigation: /ui/docs/primitive/popover', () => {
 
     await instant(page, async () => {
       await trigger.click()
+      // The destination's slot commits its loading UI while the body — which
+      // is keyed by `params` and so can never be in the shared App Shell — is
+      // still gated. The chrome is part of that shell, so it must not blink.
       await expect(articleFallback(page)).toBeVisible()
+      await expect(articleChrome(page)).toBeVisible()
       await expect(articleContent(page)).toHaveCount(0)
     })
 
     await expect(articleContent(page)).toBeVisible()
+    await expect(page).toHaveURL(new RegExp(`${ARTICLE_PATH}$`))
   })
 })
