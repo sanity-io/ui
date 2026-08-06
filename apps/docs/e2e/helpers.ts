@@ -72,3 +72,8 @@ export function arcadeLink(page: Page) {
 export function arcadeScreen(page: Page) {
   return page.locator('[data-testid="arcade-screen"]')
 }
+
+/** The home page hero. Not rendered on any other screen. */
+export function heroSection(page: Page) {
+  return page.locator('[data-testid="hero-section"]:visible')
+}
