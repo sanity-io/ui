@@ -18,15 +18,15 @@ import {
   DynamicFetchOptions,
   getDynamicFetchOptions,
   sanityFetch,
-  sanityFetchMetadata,
-  sanityFetchStaticParams,
+  cachedSanityMetadata,
+  cachedSanityStaticParams,
 } from '@/lib/sanity/live'
 
 import {ArcadePage} from './ArcadePage'
 import {ArticleLoading} from './ArticleLoading'
 
 export async function generateStaticParams() {
-  const {data} = await sanityFetchStaticParams({
+  const {data} = await cachedSanityStaticParams({
     query: screensQuery,
     params: {id: primaryNavId} satisfies ScreensQueryParams,
   })
@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({params}: PageProps<'/[screen]'>): Promise<Metadata> {
   const [{screen}, {perspective}] = await Promise.all([params, getDynamicFetchOptions()])
-  const {data: target} = await sanityFetchMetadata({
+  const {data: target} = await cachedSanityMetadata({
     query: targetByPathQuery,
     params: buildTargetByPathParams({screen}),
     perspective,
@@ -93,6 +93,8 @@ async function CachedScreenPage({
   perspective,
   stega,
 }: Awaited<PageProps<'/[screen]'>['params']> & DynamicFetchOptions) {
+  // Its own boundary rather than `cachedSanity`, so the rendered page tree is
+  // cached alongside the data it comes from.
   'use cache'
 
   if (screen === 'arcade') {

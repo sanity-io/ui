@@ -19,12 +19,12 @@ import {
   DynamicFetchOptions,
   getDynamicFetchOptions,
   sanityFetch,
-  sanityFetchMetadata,
-  sanityFetchStaticParams,
+  cachedSanityMetadata,
+  cachedSanityStaticParams,
 } from '@/lib/sanity/live'
 
 export async function generateStaticParams() {
-  const {data} = await sanityFetchStaticParams({
+  const {data} = await cachedSanityStaticParams({
     query: articlesQuery,
     params: {id: primaryNavId} satisfies ArticlesQueryParams,
   })
@@ -36,7 +36,7 @@ export async function generateMetadata({
   params,
 }: PageProps<'/[screen]/[...article]'>): Promise<Metadata> {
   const [{screen}, {perspective}] = await Promise.all([params, getDynamicFetchOptions()])
-  const {data: target} = await sanityFetchMetadata({
+  const {data: target} = await cachedSanityMetadata({
     query: targetByPathQuery,
     params: buildTargetByPathParams({screen}),
     perspective,
@@ -103,6 +103,8 @@ async function CachedScreenPage({
   perspective,
   stega,
 }: Awaited<PageProps<'/[screen]/[...article]'>['params']> & DynamicFetchOptions) {
+  // Its own boundary rather than `cachedSanity`, so the Portable Text render
+  // tree is cached alongside the data it comes from.
   'use cache'
 
   const {data} = await sanityFetch({
