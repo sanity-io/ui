@@ -1,5 +1,5 @@
 import {Strategy} from '@floating-ui/react-dom'
-import {motion, type MotionProps} from 'motion/react'
+import {motion} from 'motion/react'
 import React, {CSSProperties, forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
 
@@ -12,7 +12,7 @@ import {PopoverMargins} from '../../types/popover'
 import {Radius} from '../../types/radius'
 import {Arrow} from '../../utils/arrow/arrow'
 import {useLayer} from '../../utils/layer/useLayer'
-import {Card, CardProps} from '../card/card'
+import {Card} from '../card/card'
 import {Flex} from '../flex/flex'
 import {
   DEFAULT_POPOVER_ARROW_HEIGHT,
@@ -128,8 +128,7 @@ export const PopoverCard = forwardRef(function PopoverCard(
   return (
     <MotionCard
       data-ui="Popover"
-      // oxlint-disable-next-line no-unsafe-type-assertion
-      {...(restProps as CardProps & MotionProps)}
+      {...restProps}
       data-placement={placement}
       radius={radius}
       ref={ref}

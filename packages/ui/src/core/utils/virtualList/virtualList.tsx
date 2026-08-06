@@ -145,7 +145,10 @@ export const VirtualList = forwardRef(function VirtualList(
   })
 
   return (
-    <StyledVirtualList as={as} data-ui="VirtualList" {...restProps} ref={ref}>
+    // styled-components 6.5 distributes PolymorphicCallProps over ElementType and hits TS2589;
+    // narrow the call-site target while still passing the real value.
+    // oxlint-disable-next-line no-unsafe-type-assertion
+    <StyledVirtualList as={as as 'div'} data-ui="VirtualList" {...restProps} ref={ref}>
       <div ref={wrapperRef} style={{height}}>
         {children}
       </div>
