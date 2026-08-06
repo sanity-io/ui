@@ -6,7 +6,7 @@ import {getAttributeExpression} from './getAttributeExpression'
 
 export type CompositePrimitive = string | number | boolean
 
-export type StaticAttributeValue = CompositePrimitive | (CompositePrimitive | null)[]
+export type StaticAttributeValue = CompositePrimitive | (CompositePrimitive | null | undefined)[]
 
 function getStaticPrimitive(expr: AnyExpression): CompositePrimitive | undefined {
   if (
@@ -53,7 +53,7 @@ export function getStaticAttributeExpression(
   }
 
   const elements = expr.elements as (AnyExpression | null)[]
-  const values: (CompositePrimitive | null)[] = []
+  const values: (CompositePrimitive | null | undefined)[] = []
 
   for (const element of elements) {
     if (element === null || element.type === 'NullLiteral') {
@@ -67,6 +67,11 @@ export function getStaticAttributeExpression(
 
     if (element.type === 'Literal' && element.value === null) {
       values.push(null)
+      continue
+    }
+
+    if (element.type === 'Identifier' && element.name === 'undefined') {
+      values.push(undefined)
       continue
     }
 

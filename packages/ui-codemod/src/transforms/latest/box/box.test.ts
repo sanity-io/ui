@@ -182,10 +182,10 @@ defineInlineTest(
   transform,
   {},
   `
-  <Box display={['none', 'flex']} />
+  <Box display={['none', undefined, null, 'flex']} />
   `,
   `
-  <Flex display={['none', 'flex']} />
+  <Flex display={['none', undefined, null, 'flex']} />
   `,
   'replaces Box with Flex when display is an array with flex',
 )
