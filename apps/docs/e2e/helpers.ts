@@ -16,6 +16,14 @@ export const SIDEBAR_BREAKPOINT = 600
 export const SIBLING_ARTICLE_PATH = '/ui/docs/primitive/button'
 export const ARTICLE_PATH = '/ui/docs/primitive/popover'
 
+export const HOME_PATH = '/ui'
+export const DOCS_PATH = '/ui/docs'
+
+/** The navbar link into the docs screen. */
+export function docsLink(page: Page) {
+  return page.locator(`a[href="${DOCS_PATH}"]`).first()
+}
+
 /**
  * A synchronous node of the article chrome: the docs navigation. It comes from
  * the `[screen]` layout, which reads no `params`, so it belongs to the App
