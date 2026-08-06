@@ -63,10 +63,11 @@ export async function generateMetadata({
   }
 }
 
-// TODO(runtime-prefetch): assess with the user whether URL data should resolve before click.
+// The home page's three hero links ask for a full prefetch, so the article they
+// all point at is resolved before the click; they dedupe into one cached read.
+// The ~90 sidebar links deliberately don't — one prefetch per visible link is
+// the case the guide warns about.
 // See: https://nextjs.org/docs/app/guides/runtime-prefetching
-// The home page's hero links still ask for a full prefetch of an article; the
-// ~90 sidebar links deliberately do not.
 //
 // `params` identifies one article, so it can never be part of the App Shell
 // that every link into this route shares. Awaiting it below a boundary lets

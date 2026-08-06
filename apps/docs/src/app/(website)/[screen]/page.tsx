@@ -63,10 +63,10 @@ export async function generateMetadata({params}: PageProps<'/[screen]'>): Promis
   }
 }
 
-// TODO(runtime-prefetch): assess with the user whether URL data should resolve before click.
-// See: https://nextjs.org/docs/app/guides/runtime-prefetching
-// The navbar links here still ask for a full prefetch, which resolves this
-// page's content ahead of the click at the cost of a server render per link.
+// The navbar's two links ask for a full prefetch, so this page's content is
+// resolved before the click: the shared App Shell can't cover a screen change,
+// and the content is cached, so the prefetch is a cache read rather than a
+// render. See: https://nextjs.org/docs/app/guides/runtime-prefetching
 //
 // Same boundary as `[...article]`: the screen's own landing page is keyed by
 // `params`, so it streams in behind the shell instead of blocking it.
