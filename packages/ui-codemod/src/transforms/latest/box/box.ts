@@ -35,17 +35,34 @@ export default function transform(
       return
     }
 
-    const matchesDisplayValue = (attrs: (JSXAttribute | JSXSpreadAttribute)[], suffix: string) => {
+    const matchesDisplayValue = (
+      attrs: (JSXAttribute | JSXSpreadAttribute)[],
+      suffix: string,
+      exclude: string[],
+    ) => {
       const display = getStaticAttributeExpression(j, attrs, 'display') || []
       const values = Array.isArray(display) ? display : [display]
+      let matchesExclude
+
+      for (const excluded of exclude) {
+        if (values.some((value) => typeof value === 'string' && value.endsWith(excluded))) {
+          matchesExclude = true
+          break
+        }
+      }
+
+      if (matchesExclude) {
+        return false
+      }
+
       return values.some((value) => typeof value === 'string' && value.endsWith(suffix))
     }
 
     const replaceWithFlex = (attrs: (JSXAttribute | JSXSpreadAttribute)[]) =>
-      matchesDisplayValue(attrs, 'flex')
+      matchesDisplayValue(attrs, 'flex', ['block', 'inline', 'grid'])
 
     const replaceWithGrid = (attrs: (JSXAttribute | JSXSpreadAttribute)[]) =>
-      matchesDisplayValue(attrs, 'grid')
+      matchesDisplayValue(attrs, 'grid', ['block', 'inline', 'flex'])
 
     if (transformImport(j, root, 'Box', fromPackage, toPackage)) {
       markChanged()
