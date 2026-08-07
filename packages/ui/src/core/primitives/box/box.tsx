@@ -138,7 +138,10 @@ const BoxComponent = forwardRef(function Box(
       $rowStart={_getArrayProp(rowStart)}
       $rowEnd={_getArrayProp(rowEnd)}
       $sizing={_getArrayProp(sizing)}
-      as={asProp}
+      // styled-components 6.5 distributes PolymorphicCallProps over ElementType and
+      // hits TS2589; narrow the call-site target while still passing the real value.
+      // oxlint-disable-next-line no-unsafe-type-assertion
+      as={asProp as 'div'}
       ref={ref}
     >
       {props.children}

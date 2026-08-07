@@ -1,4 +1,4 @@
-import {motion, type MotionProps} from 'motion/react'
+import {motion} from 'motion/react'
 import React, {CSSProperties, forwardRef, useMemo} from 'react'
 import {styled} from 'styled-components'
 
@@ -7,7 +7,7 @@ import {POPOVER_MOTION_PROPS} from '../../constants'
 import {Placement} from '../../types/placement'
 import {Radius} from '../../types/radius'
 import {Arrow} from '../../utils/arrow/arrow'
-import {Card, CardProps} from '../card/card'
+import {Card} from '../card/card'
 import {
   DEFAULT_TOOLTIP_ARROW_HEIGHT,
   DEFAULT_TOOLTIP_ARROW_RADIUS,
@@ -79,8 +79,7 @@ export const TooltipCard = forwardRef(function TooltipCard(
   return (
     <MotionCard
       data-ui="Tooltip__card"
-      // oxlint-disable-next-line no-unsafe-type-assertion
-      {...(restProps as CardProps & MotionProps)}
+      {...restProps}
       data-placement={placement}
       padding={padding}
       radius={radius}
