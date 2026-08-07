@@ -191,6 +191,38 @@ defineInlineTest(
   transform,
   {},
   `
+  <Box display={['none', undefined, null, 'flex']} />
+  `,
+  `
+  <Flex display={['none', undefined, null, 'flex']} />
+  `,
+  'replaces Box with Flex when display is an array with flex',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <>
+    <Box display={['block', undefined, null, 'flex']} />
+    {/* This forces a change to avoid the transform return null */}
+    <Box display="flex" />
+  </>
+  `,
+  `
+  <>
+    <Box display={['block', undefined, null, 'flex']} />
+    {/* This forces a change to avoid the transform return null */}
+    <Flex display="flex" />
+  </>
+  `,
+  'does not replace Box with Flex when display is a mixed array',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
   import {Box} from '@sanity/ui'
 
   function Example() {
