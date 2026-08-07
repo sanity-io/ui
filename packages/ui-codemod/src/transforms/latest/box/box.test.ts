@@ -1,3 +1,12 @@
+import {mkdtempSync, readFileSync, rmSync, writeFileSync} from 'node:fs'
+import {tmpdir} from 'node:os'
+import {join} from 'node:path'
+
+import {afterEach, describe, expect, it} from 'vitest'
+
+const applyTransform = require('jscodeshift/dist/testUtils').applyTransform
+
+import {clearModuleParseCache} from '../../../utils/parseModule'
 import {defineInlineTest} from '../../../utils/testUtils'
 import transform from './box'
 
@@ -226,11 +235,168 @@ defineInlineTest(
   import {Box} from '@sanity/ui'
 
   function Example() {
-    // UI-CODEMOD TODO: Please double check styled(Box) migration(s) below
-    const RootBox = styled(Box)(({theme}) => ({}));
+    const RootBox = styled(Box)(({theme}) => ({}))
 
-    return <RootBox display="flex" alignItems="center" />
+    return (
+      // UI-CODEMOD TODO: Please double check styled(Box) migration below
+      <RootBox display="flex" alignItems="center" />
+    );
   }
   `,
-  'warns and does not transform attributes if styled Box definition should be replaced',
+  'warns and does not transform attributes if styled Box should be replaced',
 )
+
+const tempDirs: string[] = []
+
+afterEach(() => {
+  clearModuleParseCache()
+
+  for (const dir of tempDirs.splice(0)) {
+    rmSync(dir, {recursive: true, force: true})
+  }
+})
+
+describe('cross-file styled aliases', () => {
+  it('transforms attributes on imported styled Box wrappers', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ui-codemod-box-crossfile-'))
+
+    tempDirs.push(dir)
+
+    writeFileSync(
+      join(dir, 'Component.styled.tsx'),
+      `
+        import {Box} from '@sanity/ui'
+
+        export const RootBox = styled(Box)(({theme}) => ({}))
+      `,
+    )
+
+    writeFileSync(
+      join(dir, 'Component.tsx'),
+      `
+        import {RootBox} from './Component.styled'
+
+        export function Component() {
+          return <RootBox alignItems="center" />
+        }
+      `,
+    )
+
+    const importerPath = join(dir, 'Component.tsx')
+    const source = readFileSync(importerPath, 'utf8')
+    const output = applyTransform(transform, {}, {source, path: importerPath}, {parser: 'tsx'})
+
+    expect(output).toContain('alignItems: "center"')
+    expect(output).not.toContain('<RootBox alignItems="center" />')
+  })
+
+  it('adds todo warning when imported styled Box wrapper should be replaced', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ui-codemod-box-crossfile-todo-'))
+
+    tempDirs.push(dir)
+
+    writeFileSync(
+      join(dir, 'Component.styled.tsx'),
+      `
+        import {Box} from '@sanity/ui'
+
+        export const RootBox = styled(Box)(({theme}) => ({}))
+      `,
+    )
+
+    writeFileSync(
+      join(dir, 'Component.tsx'),
+      `
+        import {RootBox} from './Component.styled'
+
+        export function Component() {
+          return <RootBox display="flex" alignItems="center" />
+        }
+      `,
+    )
+
+    const importerPath = join(dir, 'Component.tsx')
+    const source = readFileSync(importerPath, 'utf8')
+    const output = applyTransform(transform, {}, {source, path: importerPath}, {parser: 'tsx'})
+
+    expect(output).toContain('UI-CODEMOD TODO: Please double check styled(Box) migration below')
+    expect(output).toContain('<RootBox display="flex" alignItems="center" />')
+    expect(output).not.toContain('const RootBox = styled(Box)')
+  })
+
+  it('does not rewrite unrelated Box from another package', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ui-codemod-box-crossfile-unrelated-'))
+
+    tempDirs.push(dir)
+
+    writeFileSync(
+      join(dir, 'Component.styled.tsx'),
+      `
+        import {Box} from '@sanity/ui'
+
+        export const RootBox = styled(Box)(({theme}) => ({}))
+      `,
+    )
+
+    writeFileSync(
+      join(dir, 'Component.tsx'),
+      `
+        import {Box} from 'another-package'
+        import {RootBox} from './Component.styled'
+
+        export function Component() {
+          return (
+            <>
+              <RootBox alignItems="center" />
+              <Box display="flex" />
+            </>
+          )
+        }
+      `,
+    )
+
+    const importerPath = join(dir, 'Component.tsx')
+    const source = readFileSync(importerPath, 'utf8')
+    const output = applyTransform(transform, {}, {source, path: importerPath}, {parser: 'tsx'})
+
+    expect(output).toContain('alignItems: "center"')
+    expect(output).not.toContain('<RootBox alignItems="center" />')
+    expect(output).toContain('<Box display="flex" />')
+    expect(output).not.toContain('<Flex')
+  })
+
+  it('transforms styled Box wrappers imported through barrel re-exports', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ui-codemod-box-crossfile-barrel-'))
+
+    tempDirs.push(dir)
+
+    writeFileSync(
+      join(dir, 'Component.styled.tsx'),
+      `
+        import {Box} from '@sanity/ui'
+
+        export const RootBox = styled(Box)(({theme}) => ({}))
+      `,
+    )
+
+    writeFileSync(join(dir, 'index.ts'), `export {RootBox} from './Component.styled'`)
+
+    writeFileSync(
+      join(dir, 'Component.tsx'),
+      `
+        import {RootBox} from './index'
+
+        export function Component() {
+          return <RootBox alignItems="center" />
+        }
+      `,
+    )
+
+    const importerPath = join(dir, 'Component.tsx')
+    const source = readFileSync(importerPath, 'utf8')
+    const output = applyTransform(transform, {}, {source, path: importerPath}, {parser: 'tsx'})
+
+    expect(output).toContain('alignItems: "center"')
+    expect(output).not.toContain('<RootBox alignItems="center" />')
+  })
+})

@@ -1,6 +1,7 @@
 import type {API} from 'jscodeshift'
 
 import {addImportSpecifier} from './addImportSpecifier'
+import {getElementMatchNames} from './getElementMatchNames'
 import {removeUnusedImport} from './removeUnusedImport'
 import {transformImportAlias} from './transformImportAlias'
 
@@ -13,11 +14,7 @@ export function replaceStyledComponent(
   },
   to: string,
 ): void {
-  const names = new Set(from.localNames)
-
-  if (names.size === 0) {
-    names.add(from.element)
-  }
+  const names = getElementMatchNames(from.element, from.localNames)
 
   let needsDefaultImportUpdate = false
   const aliases = new Set<string>()

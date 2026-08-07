@@ -17,7 +17,7 @@ import {BOX_MODS} from './box.mods'
 const BOX_TODO_WARNING = 'Please double check the Box migration below'
 const FLEX_TODO_WARNING = 'Please double check the Flex migration below'
 const GRID_TODO_WARNING = 'Please double check the Grid migration below'
-const STYLED_TODO_WARNING = 'Please double check styled(Box) migration(s) below'
+const STYLED_TODO_WARNING = 'Please double check styled(Box) migration below'
 
 /** @internal */
 export default function transform(
@@ -29,9 +29,16 @@ export default function transform(
 
   return transformComponent(fileInfo, api, ({j, root, markChanged}) => {
     const localNames = getComponentLocalNames(j, root, 'Box', options)
-    const styledAliases = getStyledComponentAliases(j, root, localNames)
+    const styledAliases = getStyledComponentAliases(
+      j,
+      root,
+      'Box',
+      fileInfo.path,
+      localNames,
+      options,
+    )
 
-    if (!shouldTransformComponent(j, root, 'Box', localNames, options)) {
+    if (!shouldTransformComponent(j, root, 'Box', localNames, options, styledAliases)) {
       return
     }
 

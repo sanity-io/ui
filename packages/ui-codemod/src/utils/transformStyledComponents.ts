@@ -2,11 +2,11 @@ import type {API, ASTPath, JSXAttribute, JSXOpeningElement, JSXSpreadAttribute} 
 
 import {insertTodoWarning} from './insertTodoWarning'
 
-const DEFAULT_WARNING = 'Please double check styled-component migration(s) below'
+const DEFAULT_WARNING = 'Please double check styled-component migration below'
 
 /**
  * Runs callback on JSX styled-component if `filter` passes. Otherwise, adds
- * a TODO on the styled definition if manual review is needed.
+ * a TODO on the component JSX instance when manual review is needed.
  * Returns whether the AST was updated.
  */
 export function transformStyledComponents(
@@ -21,7 +21,6 @@ export function transformStyledComponents(
 ): boolean {
   const names = new Set(aliases)
   const {callback, warning = DEFAULT_WARNING} = options
-  const aliasesToWarn = new Set<string>()
   let hasChanges = false
 
   root.find(j.JSXOpeningElement).forEach((path) => {
@@ -34,23 +33,15 @@ export function transformStyledComponents(
     const attrs = path.node.attributes ?? []
 
     if (!filter(attrs)) {
-      aliasesToWarn.add(name.name)
-    }
-
-    if (filter(attrs)) {
-      if (callback?.(path)) {
-        hasChanges = true
-      }
-    }
-  })
-
-  root.find(j.VariableDeclarator).forEach((path) => {
-    const {id} = path.node
-
-    if (id.type === 'Identifier' && aliasesToWarn.has(id.name)) {
       if (insertTodoWarning(j, path, warning)) {
         hasChanges = true
       }
+
+      return
+    }
+
+    if (callback?.(path)) {
+      hasChanges = true
     }
   })
 

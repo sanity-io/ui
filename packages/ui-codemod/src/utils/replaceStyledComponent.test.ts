@@ -4,21 +4,31 @@ import {getComponentLocalNames} from './getComponentLocalNames'
 import {replaceStyledComponent} from './replaceStyledComponent'
 import {defineInlineTest} from './testUtils'
 
-function transform(fileInfo: FileInfo, api: API): string {
+function transform(
+  fileInfo: FileInfo,
+  api: API,
+  options?: {
+    setLocalNames?: boolean
+    unsetLocalNames?: boolean
+  },
+): string {
   const j = api.jscodeshift
   const root = j(fileInfo.source)
+  const localNames = options?.unsetLocalNames
+    ? (new Set() as Set<string>)
+    : options?.setLocalNames
+      ? getComponentLocalNames(j, root, 'Card')
+      : undefined
 
-  replaceStyledComponent(j, root, {element: 'Card'}, 'Box')
-
-  return root.toSource()
-}
-
-function transformWithLocalNames(fileInfo: FileInfo, api: API): string {
-  const j = api.jscodeshift
-  const root = j(fileInfo.source)
-  const localNames = getComponentLocalNames(j, root, 'Card')
-
-  replaceStyledComponent(j, root, {element: 'Card', localNames}, 'Box')
+  replaceStyledComponent(
+    j,
+    root,
+    {
+      element: 'Card',
+      ...(localNames !== undefined ? {localNames} : {}),
+    },
+    'Box',
+  )
 
   return root.toSource()
 }
@@ -40,8 +50,8 @@ defineInlineTest(
 )
 
 defineInlineTest(
-  transformWithLocalNames,
-  {},
+  transform,
+  {setLocalNames: true},
   `
   import {Card as LegacyCard} from '@sanity/ui'
 
@@ -54,4 +64,20 @@ defineInlineTest(
   const RootCard = styled(LegacyCard)(({theme}) => {})
   `,
   'preserves aliased styled import and rewrites import',
+)
+
+defineInlineTest(
+  transform,
+  {unsetLocalNames: true},
+  `
+  import {Card} from '@sanity/ui'
+
+  const RootCard = styled(Card)(({theme}) => {})
+  `,
+  `
+  import {Card} from '@sanity/ui'
+
+  const RootCard = styled(Card)(({theme}) => {})
+  `,
+  'does not match styled component when localNames is empty',
 )

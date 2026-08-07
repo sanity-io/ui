@@ -14,8 +14,13 @@ export function shouldTransformComponent(
   componentName: string,
   localNames: Set<string>,
   options?: BaseOptions,
+  styledAliases?: Set<string>,
 ): boolean {
   if (localNames.size > 0) {
+    return true
+  }
+
+  if (styledAliases && styledAliases.size > 0) {
     return true
   }
 
