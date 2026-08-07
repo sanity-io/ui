@@ -12,5 +12,5 @@
     "@sanity/ui": "5.0.0-alpha.1",
     "@sanity/ui-codemod": "1.0.0-alpha.1"
   },
-  "changesets": []
+  "changesets": ["many-towns-grab"]
 }

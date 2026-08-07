@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.2
+
+### Patch Changes
+
+- 31c5b9d: fix: swap columnGap and rowGap mods
+
 ## 1.0.0-alpha.1
 
 ### Major Changes
