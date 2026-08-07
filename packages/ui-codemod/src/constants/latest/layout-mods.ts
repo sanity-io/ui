@@ -143,11 +143,11 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   gapX: {
     type: 'rename-only',
-    name: 'rowGap',
+    name: 'columnGap',
   },
   gapY: {
     type: 'rename-only',
-    name: 'columnGap',
+    name: 'rowGap',
   },
   gridColumn: {
     type: 'mapped-only',
