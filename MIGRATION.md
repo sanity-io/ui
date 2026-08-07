@@ -41,7 +41,7 @@ Add this import once, next to where the app renders `<ThemeProvider>`:
 import '@sanity/ui/styles.css'
 ```
 
-Without it, `SrOnly`, `Spinner` and internal text-overflow styling render unstyled.
+Without it, `SrOnly`, `Spinner` and internal text-overflow styling render unstyled. These components have moved off styled-components — more components follow in future 4.x minors, and UI5 ships without styled-components or any other runtime CSS-in-JS.
 
 ### 3. Update imports for moved components
 

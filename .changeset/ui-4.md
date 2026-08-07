@@ -24,7 +24,7 @@ Static styles (the ones that don't depend on theme or props) are now extracted i
 import "@sanity/ui/styles.css"
 ```
 
-Without it, `SrOnly`, `Spinner` and internal text-overflow styling render unstyled. These styles moved from styled-components to [vanilla-extract](https://vanilla-extract.style/).
+Without it, `SrOnly`, `Spinner` and internal text-overflow styling render unstyled. These components have moved off styled-components — more components follow in future 4.x minors, and UI5 ships without styled-components or any other runtime CSS-in-JS.
 
 **Heavy components moved out of the root entry point.**
 
