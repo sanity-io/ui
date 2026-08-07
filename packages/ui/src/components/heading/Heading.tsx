@@ -41,7 +41,7 @@ export function Heading<T extends ElementType = 'h2'>({
 
   return (
     <Component
-      className={clsx(headingClassName, className)}
+      className={clsx(headingClassName, props.truncate && 'sui-overflow-hidden', className)}
       style={style}
       data-ui="Heading"
       {...rest}
