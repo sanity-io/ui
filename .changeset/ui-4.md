@@ -8,6 +8,7 @@
 
 - The CommonJS build (`.cjs` / `.d.cts`) and the `require` export condition are removed — the package now ships ESM only.
 - Node.js below 22.12 is no longer supported (`engines` is now `>=22.12`, matching `sanity`).
+- TypeScript needs an `exports`-aware `moduleResolution` (`node16`, `nodenext`, or `bundler`): v4 resolves everything through package `exports` and no longer ships `typesVersions`, so the legacy `node` (node10) mode cannot resolve the subpath entry points' types.
 - What to do: run Node.js 22.12 or later — that's it. Modern Node supports `require(esm)`, so `require('@sanity/ui')` keeps working; things only break if the Node.js version is too old.
 
 **React 19.2+ required.**

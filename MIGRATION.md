@@ -26,6 +26,7 @@ Work through the checklist top to bottom:
 - **Node.js 22.12 or later** (`engines` is `>=22.12`, matching `sanity`).
 - **React 19.2 or later** — peer dependencies are `react: ^19.2` and `react-dom: ^19.2`. The 19.2 floor is set by the new [`<Activity>`](https://react.dev/reference/react/Activity) component, which shipped in React 19.2.0 and which v4 uses to keep closed `Tooltip` and `Popover` content mounted. Components are compiled with the React Compiler targeting React 19, using React's built-in runtime.
 - `styled-components` stays a peer dependency (`^5.2 || ^6`).
+- **TypeScript: use an `exports`-aware `moduleResolution`** (`node16`, `nodenext`, or `bundler`). v4 resolves everything through package `exports` and no longer ships `typesVersions`, so the legacy `moduleResolution: "node"` (node10) mode cannot resolve the types for the subpath entry points.
 
 ```sh
 npm install @sanity/ui@^4 react@^19.2 react-dom@^19.2
