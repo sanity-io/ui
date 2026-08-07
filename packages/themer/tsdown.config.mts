@@ -11,7 +11,7 @@ const config: UserConfig = await defineConfig({
     tool: './src/tool/index.ts',
   },
   styledComponents: true,
-  reactCompiler: {target: '19'},
+  reactCompiler: {target: '18'},
 })
 
 export default config
