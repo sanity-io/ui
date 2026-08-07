@@ -1,5 +1,12 @@
 # @sanity/ui
 
+## 5.0.0-alpha.2
+
+### Patch Changes
+
+- 636e826: fix: reduce specificity of element selectors in CSS reset to 0,0,0
+- 1b8d438: fix: remove hidden overflow on untruncated typography components
+
 ## 5.0.0-alpha.1
 
 ### Major Changes
@@ -131,6 +138,7 @@
 ### Patch Changes
 
 - [#2461](https://github.com/sanity-io/ui/pull/2461) [`cf1a9d0`](https://github.com/sanity-io/ui/commit/cf1a9d0f9c4e71e6339ae7a84152616206ddd8e2) Thanks [@stipsan](https://github.com/stipsan)! - fix: replace deprecated external APIs instead of suppressing them
+
   - `Toast` now orchestrates its child animations with `delayChildren: stagger(interval)` instead of `motion`'s deprecated `staggerChildren`.
   - `useForwardedRef` and the internal menu controller type refs as `RefObject` instead of React's deprecated `MutableRefObject` (identical shape, so no API change).
   - `Toast` and `Autocomplete` pass `gap` instead of the deprecated `space` prop internally.
