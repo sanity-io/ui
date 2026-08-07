@@ -2,13 +2,13 @@
 
 import {LayerProvider, ThemeProvider, ToastProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
-import {ReactNode, use} from 'react'
+import {ReactNode} from 'react'
 import {registerLanguage} from 'react-refractor'
 import bash from 'refractor/bash'
 import json from 'refractor/json'
 import tsx from 'refractor/tsx'
 
-import {ColorSchemeContext} from '#context/color-scheme'
+import {useColorScheme} from '#context/color-scheme'
 
 import {GlobalStyle} from './GlobalStyle'
 
@@ -26,7 +26,7 @@ const theme = buildTheme()
 export function AppProviders(props: {children?: ReactNode}) {
   const {children} = props
 
-  const scheme = use(ColorSchemeContext)
+  const scheme = useColorScheme()
 
   return (
     <ThemeProvider scheme={scheme} theme={theme}>

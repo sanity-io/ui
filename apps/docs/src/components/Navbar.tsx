@@ -8,6 +8,7 @@ import {ReactElement} from 'react'
 import type {NavNode} from '#lib/nav/types.ts'
 
 import {GitHubMark} from './assets'
+import {ColorSchemeMenu} from './ColorSchemeMenu'
 
 export function Navbar({nav}: {nav: NavNode | null}): ReactElement {
   // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs
@@ -73,7 +74,8 @@ export function Navbar({nav}: {nav: NavNode | null}): ReactElement {
           </Flex>
         )}
 
-        <Box marginLeft={[1, 1, 2]}>
+        <Flex align="center" gap={1} marginLeft={[1, 1, 2]}>
+          <ColorSchemeMenu />
           <Button
             aria-label="Open GitHub repository"
             as="a"
@@ -86,7 +88,7 @@ export function Navbar({nav}: {nav: NavNode | null}): ReactElement {
             rel="noopener noreferrer"
             target="_blank"
           />
-        </Box>
+        </Flex>
       </Flex>
     </Card>
   )
