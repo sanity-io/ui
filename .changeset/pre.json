@@ -12,5 +12,11 @@
     "@sanity/ui": "5.0.0-alpha.1",
     "@sanity/ui-codemod": "1.0.0-alpha.1"
   },
-  "changesets": ["many-towns-grab"]
+  "changesets": [
+    "brown-trees-lay",
+    "cozy-steaks-spend",
+    "fresh-impalas-fly",
+    "many-towns-grab",
+    "twenty-chefs-sleep"
+  ]
 }

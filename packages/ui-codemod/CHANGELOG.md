@@ -1,5 +1,12 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.3
+
+### Patch Changes
+
+- ad5ff6c: update codemods to find cross-file styled components
+- ad5ff6c: update box codemod to handle responsive display arrays
+
 ## 1.0.0-alpha.2
 
 ### Patch Changes
