@@ -1,4 +1,4 @@
-import type {API, Expression} from 'jscodeshift'
+import type {API, Expression, ExportSpecifier} from 'jscodeshift'
 
 import {parseModule} from './parseModule'
 import {resolveRelativeModulePath} from './resolveRelativeModulePath'
@@ -26,17 +26,9 @@ function findVariableInit(
   return init
 }
 
-function getExportSpecifierName(exported: {
-  type: string
-  name?: string
-  value?: string | number | boolean | null
-}): string | null {
-  if (exported.type === 'Identifier') {
-    return exported.name ?? null
-  }
-
-  if ('value' in exported) {
-    return String(exported.value)
+function getExportSpecifierName(exported: ExportSpecifier['exported']): string | null {
+  if (exported.type === 'Identifier' || exported.type === 'JSXIdentifier') {
+    return exported.name
   }
 
   return null
