@@ -8,15 +8,13 @@ import {
   Flex,
   LayerProvider,
   Placement,
-  Popover,
-  PopoverProps,
-  PopoverUpdateCallback,
   PortalProvider,
   Stack,
   Text,
   useClickOutsideEvent,
   useLayer,
 } from '@sanity/ui'
+import {Popover, PopoverProps, PopoverUpdateCallback} from '@sanity/ui/popover'
 import {ThemeColorToneKey} from '@sanity/ui/theme'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
@@ -334,6 +332,9 @@ function RecursiveExample({onClose}: {onClose?: () => void}) {
   return (
     <Popover
       fallbackPlacements={fallbackPlacements}
+      // Closed popovers keep their content mounted inside a hidden <Activity> boundary, so an
+      // unconditionally recursive `content` would render an infinitely deep hidden tree.
+      // Recursive structures must gate the recursion on `open`.
       content={open ? <RecursiveExample onClose={handleClose} /> : null}
       open={open}
       padding={1}

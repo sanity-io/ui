@@ -73,6 +73,20 @@ export function Navbar({nav}: {nav: NavNode | null}): ReactElement {
           </Flex>
         )}
 
+        <Box flex="none" marginLeft={[1, 1, 2]}>
+          <Button
+            as="a"
+            fontSize={[1, 1, 2]}
+            href="https://github.com/sanity-io/ui/blob/main/MIGRATION.md"
+            mode="bleed"
+            padding={3}
+            radius={2}
+            rel="noopener noreferrer"
+            target="_blank"
+            text="Migrate to v4"
+          />
+        </Box>
+
         <Box marginLeft={[1, 1, 2]}>
           <Button
             aria-label="Open GitHub repository"

@@ -10,10 +10,9 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {AnimatePresence} from 'motion/react'
 import {
+  Activity,
   cloneElement,
-  forwardRef,
   type Ref,
   useCallback,
   useEffect,
@@ -34,6 +33,7 @@ import {BoxOverflow} from '../../types/box'
 import {CardTone} from '../../types/card'
 import {Placement} from '../../types/placement'
 import {PopoverMargins} from '../../types/popover'
+import {AnimateActivity} from '../../utils/animateActivity'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
 import {LayerProps} from '../../utils/layer/layer'
@@ -66,7 +66,7 @@ export interface PopoverProps
   animate?: boolean
   arrow?: boolean
   /** @deprecated Use `floatingBoundary` and/or `referenceBoundary` instead */
-  boundaryElement?: HTMLElement | null
+  boundaryElement?: never
   children?: React.JSX.Element
   /**
    * When `true`, prevent overflow within the current boundary:
@@ -141,10 +141,9 @@ const ViewportOverlay = () => {
  *
  * @public
  */
-export const Popover = forwardRef(function Popover(
+export function Popover(
   props: PopoverProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content' | 'width'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ): React.JSX.Element {
   const {container, layer} = useTheme_v2()
   const boundaryElementContext = useBoundaryElement()
@@ -153,8 +152,6 @@ export const Popover = forwardRef(function Popover(
     __unstable_margins: margins = DEFAULT_POPOVER_MARGINS,
     animate: _animate = false,
     arrow: arrowProp = false,
-    // oxlint-disable-next-line no-deprecated
-    boundaryElement: _boundaryElement,
     children: childProp,
     constrainSize = false,
     content,
@@ -173,6 +170,7 @@ export const Popover = forwardRef(function Popover(
     portal,
     preventOverflow = true,
     radius: radiusProp = 3,
+    ref: forwardedRef,
     referenceBoundary: _referenceBoundary,
     referenceElement,
     scheme,
@@ -183,15 +181,13 @@ export const Popover = forwardRef(function Popover(
     updateRef,
     ...restProps
   } = props
-  const boundaryElement = _boundaryElement ?? boundaryElementContext?.element
   const fallbackPlacements =
     _fallbackPlacements ?? DEFAULT_FALLBACK_PLACEMENTS[props.placement ?? 'bottom']
-  const floatingBoundary =
-    // oxlint-disable-next-line no-deprecated
-    _floatingBoundary ?? props.boundaryElement ?? boundaryElementContext.element
-  const referenceBoundary =
-    // oxlint-disable-next-line no-deprecated
-    _referenceBoundary ?? props.boundaryElement ?? boundaryElementContext.element
+  const floatingBoundary = _floatingBoundary ?? boundaryElementContext.element
+  const referenceBoundary = _referenceBoundary ?? boundaryElementContext.element
+  // Max-width uses BoundaryElementProvider when present; otherwise the floating
+  // boundary (same element the old `boundaryElement` prop used for both).
+  const boundaryElement = boundaryElementContext.element ?? floatingBoundary
   const zOffsetProp = _zOffsetProp ?? layer.popover.zOffset
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
@@ -363,24 +359,28 @@ export const Popover = forwardRef(function Popover(
     </LayerProvider>
   )
 
-  const children =
-    open &&
-    (portal ? (
-      <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>{popover}</Portal>
-    ) : (
-      popover
-    ))
+  const popoverNode = portal ? (
+    <Portal __unstable_name={typeof portal === 'string' ? portal : undefined}>{popover}</Portal>
+  ) : (
+    popover
+  )
 
   return (
     <>
       {/* the popover */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate ? (
+        <AnimateActivity layoutMode="default" mode={open ? 'visible' : 'hidden'}>
+          {popoverNode}
+        </AnimateActivity>
+      ) : (
+        <Activity mode={open ? 'visible' : 'hidden'}>{popoverNode}</Activity>
+      )}
 
       {/* the referred element */}
       {child}
     </>
   )
-})
+}
 
 function useMiddleware({
   animate,

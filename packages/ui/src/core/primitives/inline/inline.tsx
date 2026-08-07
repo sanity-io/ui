@@ -1,4 +1,4 @@
-import {Children, forwardRef, useMemo} from 'react'
+import {Children, useMemo} from 'react'
 import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles/helpers'
@@ -12,10 +12,9 @@ import {ResponsiveInlineSpaceStyleProps} from './types'
  */
 export interface InlineOwnProps extends Omit<BoxOwnProps, 'display'> {
   /**
-   * The spacing between children.
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   /** The spacing between children. */
   gap?: number | number[]
 }
@@ -27,13 +26,10 @@ export type InlineProps<E extends ElementType = 'div'> = Props<InlineOwnProps, E
 
 const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
 
-const InlineComponent = forwardRef(function Inline(
+const InlineComponent = function Inline(
   props: InlineOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,
-  ref,
 ) {
-  // oxlint-disable-next-line no-deprecated
-  const {as, children: childrenProp, gap, space: deprecated_space, ...restProps} = props
-  const spacing = gap === undefined ? deprecated_space : gap
+  const {as, children: childrenProp, gap, ref, ...restProps} = props
 
   const children = useMemo(
     () => Children.map(childrenProp, (child) => child && <div>{child}</div>),
@@ -44,15 +40,14 @@ const InlineComponent = forwardRef(function Inline(
     <StyledInline
       data-ui="Inline"
       {...restProps}
-      $space={_getArrayProp(spacing)}
+      $space={_getArrayProp(gap)}
       forwardedAs={as}
-      // oxlint-disable-next-line no-unnecessary-type-assertion, no-unsafe-type-assertion
-      ref={ref as any}
+      ref={ref}
     >
       {children}
     </StyledInline>
   )
-})
+}
 
 /**
  * The `Inline` component is a layout utility for aligning and spacing items horizontally.

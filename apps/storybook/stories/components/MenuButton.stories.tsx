@@ -13,22 +13,16 @@ import {
   Box,
   Button,
   Card,
-  Code,
   Flex,
   Grid,
   LayerProvider,
-  Menu,
-  MenuButton,
-  MenuButtonProps,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
   SelectableTone,
   Stack,
   Text,
-  ToastProvider,
-  useToast,
 } from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {Menu, MenuButton, MenuButtonProps, MenuDivider, MenuGroup, MenuItem} from '@sanity/ui/menu'
+import {ToastProvider, useToast} from '@sanity/ui/toast'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useRef, useState} from 'react'
 import {expect, fn, userEvent, waitFor, within} from 'storybook/test'

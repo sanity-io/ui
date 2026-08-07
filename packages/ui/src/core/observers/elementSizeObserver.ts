@@ -1,5 +1,3 @@
-import {_ResizeObserver} from './resizeObserver'
-
 /**
  * @beta
  */
@@ -48,7 +46,7 @@ export const _elementSizeObserver = _createElementSizeObserver()
 function _createElementRectValueListener(): _ElementSizeListener {
   return {
     subscribe(element, subscriber) {
-      const resizeObserver = new _ResizeObserver(([entry]) => {
+      const resizeObserver = new ResizeObserver(([entry]) => {
         subscriber({
           // oxlint-disable-next-line no-deprecated
           _contentRect: entry.contentRect,

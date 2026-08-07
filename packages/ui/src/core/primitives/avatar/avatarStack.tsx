@@ -1,4 +1,4 @@
-import {Children, cloneElement, forwardRef, isValidElement} from 'react'
+import {Children, cloneElement, isValidElement} from 'react'
 import {css, styled} from 'styled-components'
 
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
@@ -53,19 +53,17 @@ export interface AvatarStackProps {
   maxLength?: number
   size?: AvatarSize | AvatarSize[]
   /** @deprecated No longer supported. */
-  tone?: 'navbar'
+  tone?: never
 }
 
 /**
  * @public
  */
-export const AvatarStack = forwardRef(function AvatarStack(
-  props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
-) {
+export function AvatarStack(props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>) {
   const {
     children: childrenProp,
     maxLength: maxLengthProp = 4,
+    ref,
     size: sizeProp = 1,
     ...restProps
   } = props
@@ -98,4 +96,4 @@ export const AvatarStack = forwardRef(function AvatarStack(
       ))}
     </StyledAvatarStack>
   )
-})
+}

@@ -1,7 +1,8 @@
 import {Icon, type IconSymbol} from '@sanity/icons'
 import {CheckmarkIcon} from '@sanity/icons/Checkmark'
 import {ErrorOutlineIcon} from '@sanity/icons/ErrorOutline'
-import {Card, Grid, Text, Tooltip} from '@sanity/ui'
+import {Card, Grid, Text} from '@sanity/ui'
+import {Tooltip} from '@sanity/ui/tooltip'
 import copy from 'copy-to-clipboard'
 import {startTransition, useEffect, useState} from 'react'
 

@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "3.5.2",
+  "version": "4.0.0-next.7",
   "keywords": [
     "components",
     "design-system",
@@ -24,41 +24,42 @@
     "dist"
   ],
   "type": "module",
-  "sideEffects": false,
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.cts",
-  "typesVersions": {
-    "*": {
-      "_visual-editing": [
-        "./dist/_visual-editing.d.cts"
-      ],
-      "theme": [
-        "./dist/theme.d.cts"
-      ]
-    }
-  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./exports/index.ts",
-    "./_visual-editing": "./exports/_visual-editing.ts",
-    "./theme": "./exports/theme.ts",
-    "./package.json": "./package.json"
+    ".": "./src/exports/index.ts",
+    "./autocomplete": "./src/exports/autocomplete.ts",
+    "./breadcrumbs": "./src/exports/breadcrumbs.ts",
+    "./code": "./src/exports/code.ts",
+    "./menu": "./src/exports/menu.ts",
+    "./popover": "./src/exports/popover.ts",
+    "./theme": "./src/exports/theme.ts",
+    "./toast": "./src/exports/toast.ts",
+    "./tooltip": "./src/exports/tooltip.ts",
+    "./package.json": "./package.json",
+    "./styles.css": {
+      "types": "./src/exports/styles.ts",
+      "default": "./dist/styles.css"
+    }
   },
   "publishConfig": {
     "exports": {
-      ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
-      },
-      "./_visual-editing": {
-        "import": "./dist/_visual-editing.js",
-        "require": "./dist/_visual-editing.cjs"
-      },
-      "./theme": {
-        "import": "./dist/theme.js",
-        "require": "./dist/theme.cjs"
-      },
-      "./package.json": "./package.json"
+      ".": "./dist/index.js",
+      "./autocomplete": "./dist/autocomplete.js",
+      "./breadcrumbs": "./dist/breadcrumbs.js",
+      "./code": "./dist/code.js",
+      "./menu": "./dist/menu.js",
+      "./popover": "./dist/popover.js",
+      "./theme": "./dist/theme.js",
+      "./toast": "./dist/toast.js",
+      "./tooltip": "./dist/tooltip.js",
+      "./package.json": "./package.json",
+      "./styles.css": {
+        "types": "./dist/styles.d.ts",
+        "default": "./dist/styles.css"
+      }
     }
   },
   "scripts": {
@@ -71,18 +72,17 @@
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.9",
-    "@juggle/resize-observer": "^3.4.0",
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
     "csstype": "^3.2.3",
     "motion": "^13.0.0",
-    "react-compiler-runtime": "1.0.0",
     "react-is": "catalog:",
     "react-refractor": "catalog:",
     "use-effect-event": "^2.0.3"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
+    "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
@@ -91,6 +91,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/react-is": "catalog:",
+    "@vanilla-extract/css": "^1.21.2",
     "babel-plugin-react-compiler": "catalog:",
     "jsdom": "^30.0.1",
     "react": "catalog:",
@@ -105,11 +106,11 @@
     "vitest-axe": "^1.0.0-pre.5"
   },
   "peerDependencies": {
-    "react": "^18 || >=19.0.0-0",
-    "react-dom": "^18 || >=19.0.0-0",
+    "react": "^19.2",
+    "react-dom": "^19.2",
     "styled-components": "^5.2 || ^6"
   },
   "engines": {
-    "node": ">=20.19 <22 || >=22.12"
+    "node": ">=22.12"
   }
 }

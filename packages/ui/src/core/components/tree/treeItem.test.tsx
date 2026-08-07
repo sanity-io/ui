@@ -14,7 +14,7 @@ vi.mock('../../primitives/box/box', async (importOriginal) => {
   return {
     ...actual,
     // oxlint-disable-next-line no-unsafe-type-assertion
-    Box: vi.fn((props: Record<string, unknown>) => (actual.Box as any).render(props, null)),
+    Box: vi.fn((props: Record<string, unknown>) => (actual.Box as any)(props)),
   }
 })
 
@@ -27,8 +27,6 @@ const treeContextValue: TreeContextValue = {
   registerItem: () => () => undefined,
   setExpanded: () => undefined,
   setFocusedElement: () => undefined,
-  // oxlint-disable-next-line no-deprecated
-  space: 1,
   // oxlint-disable-next-line no-unnecessary-type-assertion
   state: {} as TreeState,
 }
@@ -133,25 +131,10 @@ describe('components/treeItem spacing', () => {
     mockedBox.mockClear()
   })
 
-  it('should support `space` and `gap` with the same behavior', () => {
-    // oxlint-disable-next-line no-deprecated
-    renderTreeItem({space: 2})
-    expect(mockedBox.mock.calls.map(([props]) => props)).toContainEqual(
-      expect.objectContaining({marginRight: 2}),
-    )
-
-    mockedBox.mockClear()
+  it('should support `gap`', () => {
     renderTreeItem({gap: 2})
     expect(mockedBox.mock.calls.map(([props]) => props)).toContainEqual(
       expect.objectContaining({marginRight: 2}),
     )
-  })
-
-  it('should prefer `gap` over `space` when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    renderTreeItem({gap: 3, space: 1})
-    const propsList = mockedBox.mock.calls.map(([props]) => props)
-    expect(propsList).toContainEqual(expect.objectContaining({marginRight: 3}))
-    expect(propsList).not.toContainEqual(expect.objectContaining({marginRight: 1}))
   })
 })

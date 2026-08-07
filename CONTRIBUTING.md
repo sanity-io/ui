@@ -12,6 +12,12 @@ docs site lives in [`apps/docs`](apps/docs), and the
 [icons.sanity.dev](https://icons.sanity.dev) icon showcase lives in
 [`apps/icons`](apps/icons).
 
+Development of the current major happens here on `main`. Previous release lines
+receive bug fixes on maintenance branches:
+[`v3`](https://github.com/sanity-io/ui/tree/v3) for `3.x` (published under the
+`release-v3` dist-tag) and [`v2`](https://github.com/sanity-io/ui/tree/v2) for
+`2.x` (`release-v2`).
+
 ## Getting started
 
 ```sh
@@ -61,4 +67,6 @@ versions and updates their changelogs. Merging that pull request publishes the
 packages to npm through the
 [`Release` workflow](https://github.com/sanity-io/ui/actions/workflows/release.yml),
 which uses npm [Trusted Publishing](https://docs.npmjs.com/trusted-publishers)
-(OIDC).
+(OIDC). Releases from `main` are published under the `latest` dist-tag — `3.x`
+maintenance releases come from the [`v3`](https://github.com/sanity-io/ui/tree/v3)
+branch under `release-v3`.

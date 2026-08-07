@@ -1,13 +1,4 @@
-import {
-  Children,
-  forwardRef,
-  Fragment,
-  isValidElement,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import {Children, Fragment, isValidElement, useCallback, useMemo, useRef, useState} from 'react'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {Box} from '../../primitives/box/box'
@@ -25,21 +16,19 @@ export interface BreadcrumbsProps {
   separator?: React.ReactNode
   gap?: number | number[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
 }
 
 /**
  * @beta
  */
-export const Breadcrumbs = forwardRef(function Breadcrumbs(
-  props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'ref' | 'type'>,
-  ref: React.ForwardedRef<HTMLOListElement>,
+export function Breadcrumbs(
+  props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'type'>,
 ) {
-  // oxlint-disable-next-line no-deprecated
-  const {children, gap, maxLength, separator, space: deprecated_space = 2, ...restProps} = props
-  const space = _getArrayProp(gap === undefined ? deprecated_space : gap)
+  const {children, gap = 2, maxLength, ref, separator, ...restProps} = props
+  const space = _getArrayProp(gap)
   const [open, setOpen] = useState(false)
   const expandElementRef = useRef<HTMLButtonElement | null>(null)
   const popoverElementRef = useRef<HTMLDivElement | null>(null)
@@ -77,7 +66,7 @@ export const Breadcrumbs = forwardRef(function Breadcrumbs(
       ))}
     </StyledBreadcrumbs>
   )
-})
+}
 
 function useItems({
   collapse,

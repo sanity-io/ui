@@ -1,5 +1,5 @@
 import {CloseIcon} from '@sanity/icons/Close'
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
+import {useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
@@ -88,6 +88,7 @@ interface DialogCardProps extends ResponsiveWidthProps {
   onClose?: () => void
   portal?: string
   radius: Radius | Radius[]
+  ref?: React.Ref<HTMLDivElement>
   scheme?: ThemeColorSchemeKey
   shadow: number | number[]
 }
@@ -154,10 +155,7 @@ const DialogFooter = styled(Box)`
   z-index: 3;
 `
 
-const DialogCard = forwardRef(function DialogCard(
-  props: DialogCardProps,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
-) {
+function DialogCard(props: DialogCardProps) {
   const {
     __unstable_autoFocus: autoFocus,
     __unstable_hideCloseButton: hideCloseButton,
@@ -170,6 +168,7 @@ const DialogCard = forwardRef(function DialogCard(
     onClose,
     portal: portalProp,
     radius: radiusProp,
+    ref: forwardedRef,
     scheme,
     shadow: shadowProp,
     width: widthProp,
@@ -282,16 +281,15 @@ const DialogCard = forwardRef(function DialogCard(
       </DialogCardRoot>
     </DialogContainer>
   )
-})
+}
 
 /**
  * The Dialog component.
  *
  * @public
  */
-export const Dialog = forwardRef(function Dialog(
+export function Dialog(
   props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
-  ref: React.Ref<HTMLDivElement>,
 ) {
   const dialog = useDialog()
   const {layer} = useTheme_v2()
@@ -312,6 +310,7 @@ export const Dialog = forwardRef(function Dialog(
     padding: paddingProp = 3,
     portal: portalProp,
     position: _positionProp,
+    ref,
     scheme,
     width: widthProp = 0,
     zOffset: _zOffsetProp,
@@ -436,4 +435,4 @@ export const Dialog = forwardRef(function Dialog(
       </StyledDialog>
     </Portal>
   )
-})
+}

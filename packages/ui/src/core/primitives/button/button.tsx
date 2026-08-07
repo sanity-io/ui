@@ -1,4 +1,4 @@
-import {forwardRef, isValidElement, useMemo} from 'react'
+import {isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
@@ -34,9 +34,9 @@ export interface ButtonOwnProps extends ResponsivePaddingProps, ResponsiveRadius
   loading?: boolean
   selected?: boolean
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   gap?: number | number[]
   muted?: boolean
   text?: React.ReactNode
@@ -71,16 +71,16 @@ const LoadingBox = styled.div`
   box-shadow: inherit;
 `
 
-const ButtonComponent = forwardRef(function Button(
+const ButtonComponent = function Button(
   props: ButtonOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLButtonElement>,
       'as' | 'width'
     >,
-  ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
     children,
     disabled,
+    ref,
     fontSize = 1,
     icon: IconComponent,
     iconRight: IconRightComponent,
@@ -96,9 +96,7 @@ const ButtonComponent = forwardRef(function Button(
     paddingRight: paddingRightProp,
     radius: radiusProp = 2,
     selected,
-    gap,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 3,
+    gap = 3,
     text,
     textAlign,
     textWeight,
@@ -119,7 +117,7 @@ const ButtonComponent = forwardRef(function Button(
   const paddingLeft = _getArrayProp(paddingLeftProp)
   const paddingRight = _getArrayProp(paddingRightProp)
   const radius = _getArrayProp(radiusProp)
-  const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
+  const spacing = _getArrayProp(gap)
 
   const boxProps = useMemo(
     () => ({
@@ -196,7 +194,7 @@ const ButtonComponent = forwardRef(function Button(
       )}
     </StyledButton>
   )
-})
+}
 
 /**
  * @public

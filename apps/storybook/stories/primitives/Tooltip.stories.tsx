@@ -2,15 +2,14 @@ import {
   BoundaryElementProvider,
   Button,
   Card,
-  Code,
   Flex,
   Portal,
   PortalProvider,
   Stack,
   Text,
-  Tooltip,
-  TooltipDelayGroupProvider,
 } from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {Tooltip, TooltipDelayGroupProvider} from '@sanity/ui/tooltip'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useCallback, useMemo, useState} from 'react'
 import {expect, userEvent, waitFor, within} from 'storybook/test'
