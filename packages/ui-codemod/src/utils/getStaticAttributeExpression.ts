@@ -52,7 +52,7 @@ export function getStaticAttributeExpression(
     return null
   }
 
-  const elements = expr.elements as (AnyExpression | null)[]
+  const elements = expr.elements as ((AnyExpression & {name?: string}) | null)[]
   const values: (CompositePrimitive | null | undefined)[] = []
 
   for (const element of elements) {
