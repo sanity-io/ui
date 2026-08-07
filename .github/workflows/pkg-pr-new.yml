@@ -6,7 +6,7 @@ permissions:
 on:
   push:
     branches:
-      - main
+      - v3
   pull_request:
     types: [opened, synchronize, labeled]
 

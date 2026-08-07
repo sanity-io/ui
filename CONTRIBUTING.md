@@ -12,6 +12,10 @@ docs site lives in [`apps/docs`](apps/docs), and the
 [icons.sanity.dev](https://icons.sanity.dev) icon showcase lives in
 [`apps/icons`](apps/icons).
 
+This is the `v3` maintenance branch: it receives bug fixes and dependency
+updates for the `3.x` release line, while new feature development happens on
+[`main`](https://github.com/sanity-io/ui/tree/main).
+
 ## Getting started
 
 ```sh
@@ -55,10 +59,11 @@ request:
 pnpm changeset
 ```
 
-Once pull requests with changesets are merged into `main`, a "Version Packages"
+Once pull requests with changesets are merged into `v3`, a "Version Packages"
 pull request is opened (and kept up to date) that bumps the affected package
 versions and updates their changelogs. Merging that pull request publishes the
 packages to npm through the
 [`Release` workflow](https://github.com/sanity-io/ui/actions/workflows/release.yml),
 which uses npm [Trusted Publishing](https://docs.npmjs.com/trusted-publishers)
-(OIDC).
+(OIDC). Releases from this branch are published under the `release-v3`
+dist-tag — the `latest` dist-tag tracks releases from `main`.

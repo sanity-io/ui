@@ -16,7 +16,7 @@
     "lint": "pnpm run oxlint",
     "lint:fix": "pnpm lint --fix --fix-suggestions",
     "oxlint": "oxlint --disable-nested-config",
-    "release": "changeset publish",
+    "release": "changeset publish --tag release-v3",
     "storybook:build": "pnpm --filter sanity-ui-storybook build",
     "test": "pnpm --filter @sanity/color --filter @sanity/icons --filter @sanity/themer --filter @sanity/ui test",
     "test:browser": "pnpm --filter sanity-ui-storybook test",
