@@ -126,7 +126,7 @@ defineInlineTest(
     );
   }
   `,
-  'adds todo warning on jsx usage when filter does not match',
+  'adds todo warning on styled component jsx usage when filter does not match',
 )
 
 defineInlineTest(
@@ -153,7 +153,7 @@ defineInlineTest(
     );
   }
   `,
-  'adds custom todo warning on jsx usage when filter does not match',
+  'adds custom todo warning on styled component jsx usage when filter does not match',
 )
 
 defineInlineTest(
@@ -198,7 +198,7 @@ describe('imported styled aliases', () => {
     }
   })
 
-  it('adds todo warning on jsx usage when filter does not match', () => {
+  it('adds todo warning on styled component jsx usage when filter does not match', () => {
     const dir = mkdtempSync(join(tmpdir(), 'ui-codemod-styled-crossfile-'))
 
     tempDirs.push(dir)

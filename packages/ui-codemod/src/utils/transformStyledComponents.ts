@@ -6,7 +6,7 @@ const DEFAULT_WARNING = 'Please double check styled-component migration below'
 
 /**
  * Runs callback on JSX styled-component if `filter` passes. Otherwise, adds
- * a TODO on the JSX usage when manual review is needed.
+ * a TODO on the component JSX instance when manual review is needed.
  * Returns whether the AST was updated.
  */
 export function transformStyledComponents(

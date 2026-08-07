@@ -258,7 +258,7 @@ describe('cross-file styled aliases', () => {
     expect(output).not.toContain('<RootBox alignItems="center" />')
   })
 
-  it('adds todo warning on when imported styled Box wrapper should be replaced', () => {
+  it('adds todo warning when imported styled Box wrapper should be replaced', () => {
     const dir = mkdtempSync(join(tmpdir(), 'ui-codemod-box-crossfile-todo-'))
 
     tempDirs.push(dir)
