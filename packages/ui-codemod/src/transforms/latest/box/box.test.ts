@@ -364,4 +364,39 @@ describe('cross-file styled aliases', () => {
     expect(output).toContain('<Box display="flex" />')
     expect(output).not.toContain('<Flex')
   })
+
+  it('transforms styled Box wrappers imported through barrel re-exports', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ui-codemod-box-crossfile-barrel-'))
+
+    tempDirs.push(dir)
+
+    writeFileSync(
+      join(dir, 'Component.styled.tsx'),
+      `
+        import {Box} from '@sanity/ui'
+
+        export const RootBox = styled(Box)(({theme}) => ({}))
+      `,
+    )
+
+    writeFileSync(join(dir, 'index.ts'), `export {RootBox} from './Component.styled'`)
+
+    writeFileSync(
+      join(dir, 'Component.tsx'),
+      `
+        import {RootBox} from './index'
+
+        export function Component() {
+          return <RootBox alignItems="center" />
+        }
+      `,
+    )
+
+    const importerPath = join(dir, 'Component.tsx')
+    const source = readFileSync(importerPath, 'utf8')
+    const output = applyTransform(transform, {}, {source, path: importerPath}, {parser: 'tsx'})
+
+    expect(output).toContain('alignItems: "center"')
+    expect(output).not.toContain('<RootBox alignItems="center" />')
+  })
 })

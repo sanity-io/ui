@@ -1,8 +1,16 @@
-import type {API, Collection, Expression} from 'jscodeshift'
+import type {API, Expression} from 'jscodeshift'
+
+import {parseModule} from './parseModule'
+import {resolveRelativeModulePath} from './resolveRelativeModulePath'
+
+export type NamedExportInit = {
+  init: Expression
+  modulePath: string
+}
 
 function findVariableInit(
   j: API['jscodeshift'],
-  root: Collection,
+  root: ReturnType<API['jscodeshift']>,
   name: string,
 ): Expression | null {
   let init: Expression | null = null
@@ -18,19 +26,43 @@ function findVariableInit(
   return init
 }
 
+function getExportSpecifierName(exported: {
+  type: string
+  name?: string
+  value?: string | number | boolean | null
+}): string | null {
+  if (exported.type === 'Identifier') {
+    return exported.name ?? null
+  }
+
+  if ('value' in exported) {
+    return String(exported.value)
+  }
+
+  return null
+}
+
 export function getNamedExportInit(
   j: API['jscodeshift'],
-  root: Collection,
   exportName: string,
-): Expression | null {
-  let init: Expression | null = null
+  filePath: string,
+  visited: Set<string> = new Set(),
+): NamedExportInit | null {
+  if (visited.has(filePath)) {
+    return null
+  }
 
-  root.find(j.ExportNamedDeclaration).forEach((path) => {
-    if (init) {
-      return
-    }
+  visited.add(filePath)
 
-    const {declaration, specifiers} = path.node
+  const root = parseModule(j, filePath)
+
+  if (!root) {
+    return null
+  }
+
+  for (const path of root.find(j.ExportNamedDeclaration).paths()) {
+    const {declaration, specifiers, source} = path.node
+    const reexportSource = typeof source?.value === 'string' ? source.value : null
 
     if (declaration?.type === 'VariableDeclaration') {
       for (const declarator of declaration.declarations) {
@@ -43,7 +75,7 @@ export function getNamedExportInit(
           declarator.id.name === exportName &&
           declarator.init
         ) {
-          init = declarator.init
+          return {init: declarator.init, modulePath: filePath}
         }
       }
     }
@@ -53,19 +85,35 @@ export function getNamedExportInit(
         continue
       }
 
-      const exported =
-        spec.exported.type === 'Identifier'
-          ? spec.exported.name
-          : 'value' in spec.exported
-            ? String(spec.exported.value)
-            : null
+      const exported = getExportSpecifierName(spec.exported)
+
+      if (!exported || exported !== exportName) {
+        continue
+      }
+
       const local = spec.local?.type === 'Identifier' ? spec.local.name : exported
 
-      if (exported === exportName && local) {
-        init = findVariableInit(j, root, local)
+      if (reexportSource) {
+        const resolvedPath = resolveRelativeModulePath(filePath, reexportSource)
+
+        if (resolvedPath) {
+          const followed = getNamedExportInit(j, local, resolvedPath, visited)
+
+          if (followed) {
+            return followed
+          }
+        }
+
+        continue
+      }
+
+      const init = findVariableInit(j, root, local)
+
+      if (init) {
+        return {init, modulePath: filePath}
       }
     }
-  })
+  }
 
-  return init
+  return null
 }

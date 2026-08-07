@@ -1,11 +1,14 @@
 import type {API, ASTPath, JSXAttribute, JSXOpeningElement, JSXSpreadAttribute} from 'jscodeshift'
 
 import {addImportSpecifier} from './addImportSpecifier'
+import {getElementMatchNames} from './getElementMatchNames'
 import {removeUnusedImport} from './removeUnusedImport'
 import {transformImportAlias} from './transformImportAlias'
 
 /**
  * Replaces JSX component if `filter` passes. Runs callbacks and updates imports.
+ * If `localNames` is omitted, matches `from.element`. `localNames` may be an empty set,
+ * to avoid rewriting unrelated JSX when only cross-file styled aliases are present.
  * Returns whether the AST was updated.
  */
 export function replaceElement(
@@ -22,11 +25,7 @@ export function replaceElement(
     callback?: (path: ASTPath<JSXOpeningElement>) => boolean | void
   },
 ): boolean {
-  const names = new Set(from.localNames)
-
-  if (names.size === 0) {
-    names.add(from.element)
-  }
+  const names = getElementMatchNames(from.element, from.localNames)
 
   let hasChanges = false
   let needsDefaultImportUpdate = false

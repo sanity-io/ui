@@ -58,18 +58,6 @@ export function getImportedStyledComponentAliases(
       return
     }
 
-    const exportRoot = parseModule(j, resolvedPath)
-
-    if (!exportRoot) {
-      return
-    }
-
-    const exportLocalNames = getComponentLocalNames(j, exportRoot, componentName, options)
-
-    if (exportLocalNames.size === 0) {
-      return
-    }
-
     for (const spec of path.node.specifiers ?? []) {
       if (spec.type !== 'ImportSpecifier') {
         continue
@@ -85,8 +73,20 @@ export function getImportedStyledComponentAliases(
 
       const exportName = spec.imported.name
       const localName = spec.local?.type === 'Identifier' ? spec.local.name : exportName
-      const init = getNamedExportInit(j, exportRoot, exportName)
-      const baseComponent = init ? getStyledComponentName(init) : null
+      const namedExport = getNamedExportInit(j, exportName, resolvedPath)
+
+      if (!namedExport) {
+        continue
+      }
+
+      const sourceRoot = parseModule(j, namedExport.modulePath)
+
+      if (!sourceRoot) {
+        continue
+      }
+
+      const exportLocalNames = getComponentLocalNames(j, sourceRoot, componentName, options)
+      const baseComponent = getStyledComponentName(namedExport.init)
 
       if (baseComponent && exportLocalNames.has(baseComponent)) {
         aliases.add(localName)

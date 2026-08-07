@@ -75,43 +75,41 @@ export default function transform(
       markChanged()
     }
 
-    if (localNames.size > 0) {
-      if (
-        replaceElement(
-          j,
-          root,
-          replaceWithFlex,
-          {
-            element: 'Box',
-            localNames,
-          },
-          {
-            element: 'Flex',
-            callback: (path) => transformAttributes(j, path, FLEX_MODS, FLEX_TODO_WARNING),
-          },
-        )
-      ) {
-        markChanged()
-      }
+    if (
+      replaceElement(
+        j,
+        root,
+        replaceWithFlex,
+        {
+          element: 'Box',
+          localNames,
+        },
+        {
+          element: 'Flex',
+          callback: (path) => transformAttributes(j, path, FLEX_MODS, FLEX_TODO_WARNING),
+        },
+      )
+    ) {
+      markChanged()
+    }
 
-      if (
-        replaceElement(
-          j,
-          root,
-          replaceWithGrid,
-          {
-            element: 'Box',
-            localNames,
-            callback: (path) => transformAttributes(j, path, BOX_MODS, BOX_TODO_WARNING),
-          },
-          {
-            element: 'Grid',
-            callback: (path) => transformAttributes(j, path, GRID_MODS, GRID_TODO_WARNING),
-          },
-        )
-      ) {
-        markChanged()
-      }
+    if (
+      replaceElement(
+        j,
+        root,
+        replaceWithGrid,
+        {
+          element: 'Box',
+          localNames,
+          callback: (path) => transformAttributes(j, path, BOX_MODS, BOX_TODO_WARNING),
+        },
+        {
+          element: 'Grid',
+          callback: (path) => transformAttributes(j, path, GRID_MODS, GRID_TODO_WARNING),
+        },
+      )
+    ) {
+      markChanged()
     }
 
     if (
