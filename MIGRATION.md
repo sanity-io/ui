@@ -87,7 +87,7 @@ Everything that was deprecated during v3 is removed in v4. Removed props stay on
 
 ### 5. Less common removals
 
-- **`@sanity/ui/_visual-editing` is removed.** Import from `@sanity/ui` instead. The slim private subset is no longer needed: `displayName` side effects are gone, so unused components tree-shake out of consuming bundles.
+- **`@sanity/ui/_visual-editing` is removed.** Import from `@sanity/ui` instead — except the moved components (`Menu`, `MenuDivider`, `MenuGroup`, `MenuItem`, `Popover`), which now live on `@sanity/ui/menu` and `@sanity/ui/popover` (see [step 3](#3-update-imports-for-moved-components)). The slim private subset is no longer needed: `displayName` side effects are gone, so unused components tree-shake out of consuming bundles.
 - **The internal `_ResizeObserver` export is removed** along with the `@juggle/resize-observer` polyfill. Use the global `ResizeObserver`.
 
 ### 6. Behavior changes to review

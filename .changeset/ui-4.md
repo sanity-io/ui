@@ -66,7 +66,7 @@ Removed props stay on the public types as `@deprecated` `never`, so you get the 
 
 **The private `@sanity/ui/_visual-editing` entry point is removed.**
 
-Import from `@sanity/ui` instead. The slim subset is no longer needed: `displayName` side effects are gone, so unused components tree-shake out of consuming bundles.
+Import from `@sanity/ui` instead — except the moved components (`Menu`, `MenuDivider`, `MenuGroup`, `MenuItem`, `Popover`), which now live on `@sanity/ui/menu` and `@sanity/ui/popover`. The slim subset is no longer needed: `displayName` side effects are gone, so unused components tree-shake out of consuming bundles.
 
 **The `@juggle/resize-observer` polyfill is removed — the native `ResizeObserver` is used directly.**
 

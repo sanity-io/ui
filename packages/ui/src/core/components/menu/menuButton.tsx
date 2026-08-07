@@ -20,7 +20,7 @@ export interface MenuButtonProps {
    */
   __unstable_disableRestoreFocusOnClose?: boolean
   /**
-   * @deprecated Use `popover={{boundaryElement: element}}` instead.
+   * @deprecated Use `popover={{floatingBoundary: element}}` and/or `popover={{referenceBoundary: element}}` instead.
    */
   boundaryElement?: never
   button: React.JSX.Element
