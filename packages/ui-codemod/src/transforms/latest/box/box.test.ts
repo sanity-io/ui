@@ -323,4 +323,45 @@ describe('cross-file styled aliases', () => {
     expect(output).toContain('<RootBox display="flex" alignItems="center" />')
     expect(output).not.toContain('const RootBox = styled(Box)')
   })
+
+  it('does not rewrite unrelated Box from another package', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ui-codemod-box-crossfile-unrelated-'))
+
+    tempDirs.push(dir)
+
+    writeFileSync(
+      join(dir, 'Component.styled.tsx'),
+      `
+        import {Box} from '@sanity/ui'
+
+        export const RootBox = styled(Box)(({theme}) => ({}))
+      `,
+    )
+
+    writeFileSync(
+      join(dir, 'Component.tsx'),
+      `
+        import {Box} from 'another-package'
+        import {RootBox} from './Component.styled'
+
+        export function Component() {
+          return (
+            <>
+              <RootBox alignItems="center" />
+              <Box display="flex" />
+            </>
+          )
+        }
+      `,
+    )
+
+    const importerPath = join(dir, 'Component.tsx')
+    const source = readFileSync(importerPath, 'utf8')
+    const output = applyTransform(transform, {}, {source, path: importerPath}, {parser: 'tsx'})
+
+    expect(output).toContain('alignItems: "center"')
+    expect(output).not.toContain('<RootBox alignItems="center" />')
+    expect(output).toContain('<Box display="flex" />')
+    expect(output).not.toContain('<Flex')
+  })
 })
