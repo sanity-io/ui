@@ -1,5 +1,26 @@
 # @sanity/ui
 
+## 3.5.2
+
+### Patch Changes
+
+- [#2637](https://github.com/sanity-io/ui/pull/2637) [`df34007`](https://github.com/sanity-io/ui/commit/df34007552a4c195ab2eacce0aff7a7139624c6e) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency vite to ^8.2.1
+
+- [#2609](https://github.com/sanity-io/ui/pull/2609) [`c3726c9`](https://github.com/sanity-io/ui/commit/c3726c9ce471cd793ca8d7731c2f433d206031d7) Thanks [@stipsan](https://github.com/stipsan)! - fix(deps): update dependency motion to ^13.0.0
+
+  Motion 13 no longer loads the optional `@emotion/is-prop-valid` dependency to decide which props a
+  `motion` component forwards to the DOM; it now only does so when an `isValidProp` function is passed
+  to `MotionConfig`. `@sanity/ui` composes motion the way the upgrade guide recommends
+  (`motion.create(StyledComponent)`, never `styled(motion.div)`), so its own components are unaffected:
+  for custom components motion still forwards every non-motion prop and lets the styled component
+  filter, exactly as before. Apps that wrap a DOM-level motion component in a CSS-in-JS factory —
+  `styled(motion.div)` — may need to pass `isValidProp` to `MotionConfig`, use transient props, or
+  reverse the composition.
+
+- [#2632](https://github.com/sanity-io/ui/pull/2632) [`5207572`](https://github.com/sanity-io/ui/commit/52075727765ec68b2a718c0b9d9220feaf48df4f) Thanks [@stipsan](https://github.com/stipsan)! - fix(deps): update dependency styled-components to ^6.5.0
+
+  styled-components 6.5 tightens polymorphic call-site and `style` prop typing. Adjust `@sanity/ui` for the new checks: narrow `as` at `Box`/`VirtualList` call sites to avoid TS2589, align `Card`'s `$tone`/`$muted` with the values actually passed, and drop now-unnecessary assertions on `motion.create(Card)` wrappers.
+
 ## 3.5.1
 
 ### Patch Changes
