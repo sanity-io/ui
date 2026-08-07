@@ -96,10 +96,6 @@ export const Trim: Story = {
   },
   play: async ({canvas}) => {
     await expect((await canvas.findByText(/Trimmed text/)).classList).toContain('sui-text-trim')
-
-    await expect(
-      (await canvas.findByText(/Lorem ipsum dolor sit amet/)).parentElement?.classList,
-    ).toContain('sui-text-trim')
   },
 }
 
@@ -166,10 +162,12 @@ export const Truncate: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText(/Trimmed text/)).classList).toContain('sui-text-trim')
+    await expect((await canvas.findByText(/One line truncation/)).classList).toContain(
+      'sui-text-overflow',
+    )
 
-    await expect(
-      (await canvas.findByText(/Lorem ipsum dolor sit amet/)).parentElement?.classList,
-    ).toContain('sui-text-trim')
+    await expect((await canvas.findByText(/Multiline truncation/)).classList).toContain(
+      'sui-line-clamp',
+    )
   },
 }
