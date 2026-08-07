@@ -40,7 +40,7 @@ export function Text<T extends ElementType = 'span'>({
 
   return (
     <Component
-      className={clsx(textClassName, 'sui-overflow-hidden', className)}
+      className={clsx(textClassName, props.truncate && 'sui-overflow-hidden', className)}
       style={style}
       data-ui="Text"
       {...rest}
