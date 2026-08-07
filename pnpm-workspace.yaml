@@ -14,7 +14,7 @@ strictPeerDependencies: false
 catalog:
   '@sanity/blueprints': ^0.23.2
   '@sanity/client': ^7.26.2
-  '@sanity/functions': ^1.5.0
+  '@sanity/functions': ^1.6.0
   '@sanity/tsdown-config': ^0.24.0
   '@types/node': ^24.13.3
   '@types/react': ^19.2.18
