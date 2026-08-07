@@ -24,7 +24,7 @@ Work through the checklist top to bottom:
 
 - **ESM-only.** The CommonJS build (`.cjs` / `.d.cts`) and the `require` export condition are removed — the package now ships ESM only. This is not a code change for consumers: modern Node.js supports `require(esm)`, so `require('@sanity/ui')` keeps working on the supported Node.js versions.
 - **Node.js 22.12 or later** (`engines` is `>=22.12`, matching `sanity`).
-- **React 19.2 or later** — peer dependencies are `react: ^19.2` and `react-dom: ^19.2`. Components are compiled with the React Compiler targeting React 19, using React's built-in runtime.
+- **React 19.2 or later** — peer dependencies are `react: ^19.2` and `react-dom: ^19.2`. The 19.2 floor is set by the new [`<Activity>`](https://react.dev/reference/react/Activity) component, which shipped in React 19.2.0 and which v4 uses to keep closed `Tooltip` and `Popover` content mounted. Components are compiled with the React Compiler targeting React 19, using React's built-in runtime.
 - `styled-components` stays a peer dependency (`^5.2 || ^6`).
 
 ```sh

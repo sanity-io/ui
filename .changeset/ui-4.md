@@ -12,7 +12,7 @@
 
 **React 19.2+ required.**
 
-- Peer dependency ranges are tightened to `react: ^19.2` and `react-dom: ^19.2`.
+- Peer dependency ranges are tightened to `react: ^19.2` and `react-dom: ^19.2`. The 19.2 floor is set by the new [`<Activity>`](https://react.dev/reference/react/Activity) component, which shipped in React 19.2.0 and which v4 uses to keep closed `Tooltip` and `Popover` content mounted.
 - Components are compiled with the React Compiler targeting `'19'`, which uses React's built-in runtime — the `react-compiler-runtime` dependency is dropped.
 - What to do: upgrade `react` and `react-dom` to 19.2 or later. No code changes needed.
 
