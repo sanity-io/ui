@@ -26,7 +26,7 @@ const StyledStack = styled(Box)<ResponsiveStackSpaceStyleProps>(
   responsiveStackSpaceStyle,
 )
 
-const StackComponent = function Stack(
+function StackComponent(
   props: StackOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
 ) {
   const {as, gap, ref, ...restProps} = props
