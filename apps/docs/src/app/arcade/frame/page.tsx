@@ -2,7 +2,15 @@
 
 import {Icon, icons, type IconSymbol} from '@sanity/icons'
 import * as ui from '@sanity/ui'
-import {Card, Code, ErrorBoundary, Text} from '@sanity/ui'
+import {Card, ErrorBoundary, Text} from '@sanity/ui'
+import * as uiAutocomplete from '@sanity/ui/autocomplete'
+import * as uiBreadcrumbs from '@sanity/ui/breadcrumbs'
+import * as uiCode from '@sanity/ui/code'
+import {Code} from '@sanity/ui/code'
+import * as uiMenu from '@sanity/ui/menu'
+import * as uiPopover from '@sanity/ui/popover'
+import * as uiToast from '@sanity/ui/toast'
+import * as uiTooltip from '@sanity/ui/tooltip'
 import React, {ReactElement, Suspense, useCallback, useEffect, useMemo, useState} from 'react'
 import {keyframes, styled} from 'styled-components'
 
@@ -62,11 +70,30 @@ export default function ArcadeFrameRoute(): ReactElement {
     if (hookCode === null) return null
     if (jsxCode === null) return null
 
+    // The root barrel no longer exports the components that live on their own
+    // entry points (so that it never references their heavy dependencies), but
+    // arcade snippets should still have the full component set in scope.
     return evalComponent({
       babel,
       hookCode,
       jsxCode,
-      scope: {Icon, icons, ...iconScope, ...ui, ...React, React, styled, keyframes},
+      scope: {
+        Icon,
+        icons,
+        ...iconScope,
+        ...ui,
+        ...uiAutocomplete,
+        ...uiBreadcrumbs,
+        ...uiCode,
+        ...uiMenu,
+        ...uiPopover,
+        ...uiToast,
+        ...uiTooltip,
+        ...React,
+        React,
+        styled,
+        keyframes,
+      },
     })
   }, [babel, hookCode, jsxCode])
 

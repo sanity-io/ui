@@ -1,4 +1,5 @@
-import {Card, Container, LayerProvider, Menu, MenuDivider, MenuItem, Stack, Text} from '@sanity/ui'
+import {Card, Container, LayerProvider, Stack, Text} from '@sanity/ui'
+import {Menu, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 
 import {getSpaceControls} from '../controls'

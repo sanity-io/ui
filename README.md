@@ -16,6 +16,10 @@ and serverless functions live under `apps/`.
 | [`figma-plugin-sanity-ui`](packages/figma)          | Figma plugin for Sanity UI theme tokens      |
 | [`figma-plugin-sanity-color`](packages/figma-color) | Figma plugin for the `@sanity/color` palette |
 
+## Migration
+
+See the [`@sanity/ui` migration guides](MIGRATION.md) when you upgrade from v2 to v3 or from v3 to v4.
+
 ## Apps
 
 | App                                            | Description                                                                    |

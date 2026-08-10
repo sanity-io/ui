@@ -18,8 +18,8 @@ export interface TreeContextValue {
   setFocusedElement: (focusedElement: HTMLElement | null) => void
   gap: number | number[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space: number | number[]
+  space?: never
   state: TreeState
 }

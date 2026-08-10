@@ -8,10 +8,9 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
-import {AnimatePresence} from 'motion/react'
 import {
+  Activity,
   cloneElement,
-  forwardRef,
   useCallback,
   useEffect,
   useId,
@@ -22,6 +21,11 @@ import {
   useState,
 } from 'react'
 import {styled} from 'styled-components'
+// TODO: switch to `useEffectEvent` from `react` once
+// https://github.com/facebook/react/issues/34818 is fixed in the lowest React
+// version we support: on React 19.2 the native hook never sees values past
+// the first render when the calling component is wrapped in `forwardRef` or
+// `memo`, and consumers may wrap `Tooltip` in `memo`.
 import {useEffectEvent} from 'use-effect-event'
 
 import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
@@ -31,6 +35,7 @@ import {origin} from '../../middleware/origin'
 import {_getArrayProp} from '../../styles/helpers'
 import {useTheme_v2} from '../../theme/useTheme'
 import type {Placement} from '../../types/placement'
+import {AnimateActivity} from '../../utils/animateActivity'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
 import {Layer, type LayerProps} from '../../utils/layer/layer'
@@ -50,7 +55,7 @@ import {useTooltipDelayGroup} from './tooltipDelayGroup/useTooltipDelayGroup'
  */
 export interface TooltipProps extends Omit<LayerProps, 'as'> {
   /** @deprecated Use `fallbackPlacements` instead. */
-  allowedAutoPlacements?: Placement[]
+  allowedAutoPlacements?: never
   arrow?: boolean
   boundaryElement?: HTMLElement | null
   children?: React.JSX.Element
@@ -93,9 +98,8 @@ const StyledTooltip = styled(Layer)`
  *
  * @public
  */
-export const Tooltip = forwardRef(function Tooltip(
+export function Tooltip(
   props: TooltipProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const boundaryElementContext = useBoundaryElement()
   const {layer} = useTheme_v2()
@@ -111,6 +115,7 @@ export const Tooltip = forwardRef(function Tooltip(
     placement: placementProp = 'bottom',
     portal: portalProp,
     radius = 2,
+    ref: forwardedRef,
     scheme,
     shadow = 2,
     zOffset: _zOffset,
@@ -374,26 +379,30 @@ export const Tooltip = forwardRef(function Tooltip(
     </StyledTooltip>
   )
 
-  const children =
-    showTooltip &&
-    (portalProp ? (
-      <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-        {tooltip}
-      </Portal>
-    ) : (
-      tooltip
-    ))
+  const tooltipNode = portalProp ? (
+    <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
+      {tooltip}
+    </Portal>
+  ) : (
+    tooltip
+  )
 
   return (
     <>
       {/* the tooltip */}
-      {animate ? <AnimatePresence>{children}</AnimatePresence> : children}
+      {animate ? (
+        <AnimateActivity layoutMode="default" mode={showTooltip ? 'visible' : 'hidden'}>
+          {tooltipNode}
+        </AnimateActivity>
+      ) : (
+        <Activity mode={showTooltip ? 'visible' : 'hidden'}>{tooltipNode}</Activity>
+      )}
 
       {/* the referred element */}
       {child}
     </>
   )
-})
+}
 
 function useMiddleware({
   animate,

@@ -1,5 +1,20 @@
 # @sanity/themer
 
+## 0.3.1
+
+### Patch Changes
+
+- [#2598](https://github.com/sanity-io/ui/pull/2598) [`aafba15`](https://github.com/sanity-io/ui/commit/aafba1501b03b76f6b2337e136f1d5db1ce4d16a) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update sanity monorepo to ^6.9.0
+
+- [#2629](https://github.com/sanity-io/ui/pull/2629) [`8109c67`](https://github.com/sanity-io/ui/commit/8109c678c5e04aa2acf51a8db4e85ac7b05a9f92) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update sanity monorepo to ^6.9.1
+
+- [#2632](https://github.com/sanity-io/ui/pull/2632) [`5207572`](https://github.com/sanity-io/ui/commit/52075727765ec68b2a718c0b9d9220feaf48df4f) Thanks [@stipsan](https://github.com/stipsan)! - fix(deps): update dependency styled-components to ^6.5.0
+
+  styled-components 6.5 tightens polymorphic call-site and `style` prop typing. Adjust `@sanity/ui` for the new checks: narrow `as` at `Box`/`VirtualList` call sites to avoid TS2589, align `Card`'s `$tone`/`$muted` with the values actually passed, and drop now-unnecessary assertions on `motion.create(Card)` wrappers.
+
+- Updated dependencies [[`df34007`](https://github.com/sanity-io/ui/commit/df34007552a4c195ab2eacce0aff7a7139624c6e), [`c3726c9`](https://github.com/sanity-io/ui/commit/c3726c9ce471cd793ca8d7731c2f433d206031d7), [`5207572`](https://github.com/sanity-io/ui/commit/52075727765ec68b2a718c0b9d9220feaf48df4f)]:
+  - @sanity/ui@3.5.2
+
 ## 0.3.0
 
 ### Minor Changes

@@ -1,5 +1,5 @@
 import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
-import {forwardRef, useImperativeHandle, useRef} from 'react'
+import {useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -18,9 +18,9 @@ export interface SelectProps {
   padding?: number | number[]
   radius?: Radius | Radius[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   customValidity?: string
 }
 
@@ -40,24 +40,19 @@ const IconBox = styled(Box)(selectStyle.iconBox)
  *
  * @public
  */
-export const Select = forwardRef(function Select(
-  props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>,
-  forwardedRef: React.ForwardedRef<HTMLSelectElement>,
-) {
+export function Select(props: SelectProps & Omit<React.HTMLProps<HTMLSelectElement>, 'as'>) {
   const {
     children,
     customValidity,
     disabled,
     fontSize = 2,
-    gap,
+    gap = 3,
     padding = 3,
     radius = 2,
     readOnly,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 3,
+    ref: forwardedRef,
     ...restProps
   } = props
-  const spacing = gap === undefined ? deprecated_space : gap
 
   const ref = useRef<HTMLSelectElement | null>(null)
 
@@ -77,7 +72,7 @@ export const Select = forwardRef(function Select(
         $fontSize={_getArrayProp(fontSize)}
         $padding={_getArrayProp(padding)}
         $radius={_getArrayProp(radius)}
-        $space={_getArrayProp(spacing)}
+        $space={_getArrayProp(gap)}
         disabled={disabled || readOnly}
         ref={ref}
       >
@@ -91,4 +86,4 @@ export const Select = forwardRef(function Select(
       </IconBox>
     </StyledSelect>
   )
-})
+}

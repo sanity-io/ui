@@ -1,4 +1,10 @@
 import {useDebugValue, useEffect} from 'react'
+// TODO: switch to `useEffectEvent` from `react` once
+// https://github.com/facebook/react/issues/34818 is fixed in the lowest React
+// version we support: on React 19.2 the native hook never sees values past
+// the first render when the calling component is wrapped in `forwardRef` or
+// `memo`. This public hook runs in the fiber of whatever component calls it
+// (consumers may call it from `forwardRef` or `memo` components).
 import {useEffectEvent} from 'use-effect-event'
 
 import {EMPTY_ARRAY} from '../constants'

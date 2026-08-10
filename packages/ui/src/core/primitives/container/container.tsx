@@ -1,4 +1,3 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles/helpers'
@@ -23,14 +22,13 @@ const StyledContainer = styled(Box)<ResponsiveWidthStyleProps>(
   responsiveContainerWidthStyle,
 )
 
-const ContainerComponent = forwardRef(function Container(
+function ContainerComponent(
   props: ContainerOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLDivElement>,
       'as' | 'height' | 'width'
     >,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {as, width = 2, ...restProps} = props
+  const {as, ref, width = 2, ...restProps} = props
 
   return (
     <StyledContainer
@@ -41,7 +39,7 @@ const ContainerComponent = forwardRef(function Container(
       ref={ref}
     />
   )
-})
+}
 
 /**
  * The `Container` component wraps content layout in a defined set of widths.

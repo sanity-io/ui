@@ -1,4 +1,5 @@
-import {BoundaryElementProvider, Button, Card, Text, Tooltip} from '@sanity/ui'
+import {BoundaryElementProvider, Button, Card, Text} from '@sanity/ui'
+import {Tooltip} from '@sanity/ui/tooltip'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'
 
