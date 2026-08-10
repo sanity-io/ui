@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "3.5.2",
+  "version": "4.0.0",
   "keywords": [
     "components",
     "design-system",
@@ -38,11 +38,14 @@
     "./theme": "./src/exports/theme.ts",
     "./toast": "./src/exports/toast.ts",
     "./tooltip": "./src/exports/tooltip.ts",
-    "./package.json": "./package.json",
     "./styles.css": {
-      "types": "./src/exports/styles.ts",
-      "default": "./dist/styles.css"
-    }
+      "types": "./dist/styles-css.d.ts",
+      "browser": "./dist/styles.css",
+      "style": "./dist/styles.css",
+      "node": "./dist/styles-css.js",
+      "default": "./dist/styles-css.js"
+    },
+    "./package.json": "./package.json"
   },
   "publishConfig": {
     "exports": {
@@ -55,11 +58,14 @@
       "./theme": "./dist/theme.js",
       "./toast": "./dist/toast.js",
       "./tooltip": "./dist/tooltip.js",
-      "./package.json": "./package.json",
       "./styles.css": {
-        "types": "./dist/styles.d.ts",
-        "default": "./dist/styles.css"
-      }
+        "types": "./dist/styles-css.d.ts",
+        "browser": "./dist/styles.css",
+        "style": "./dist/styles.css",
+        "node": "./dist/styles-css.js",
+        "default": "./dist/styles-css.js"
+      },
+      "./package.json": "./package.json"
     }
   },
   "scripts": {
