@@ -30,7 +30,7 @@ const StyledCode = styled.pre<FontWeightStyleProps & ResponsiveFontSizeStyleProp
   responsiveCodeFontStyle,
 )
 
-const CodeComponent = function Code(
+function CodeComponent(
   props: CodeOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLPreElement>, 'as' | 'size'>,
 ) {
   const {children, language, ref, size = 2, weight, ...restProps} = props
