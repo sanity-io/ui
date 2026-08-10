@@ -26,7 +26,7 @@ export type InlineProps<E extends ElementType = 'div'> = Props<InlineOwnProps, E
 
 const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
 
-const InlineComponent = function Inline(
+function InlineComponent(
   props: InlineOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,
 ) {
   const {as, children: childrenProp, gap, ref, ...restProps} = props
