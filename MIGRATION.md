@@ -13,7 +13,7 @@ Not ready to upgrade? v3 is maintained on the [`v3` branch](https://github.com/s
 
 Work through the checklist top to bottom:
 
-1. [Upgrade the runtime](#1-upgrade-the-runtime) — Node.js 22.12+, React 19.2+, ESM-only
+1. [Upgrade the runtime](#1-upgrade-the-runtime) — Node.js 22.12+, React 19.2+, styled-components 6.1+, ESM-only
 2. [Import the stylesheet](#2-import-the-stylesheet) — `import '@sanity/ui/styles.css'`
 3. [Update imports for moved components](#3-update-imports-for-moved-components)
 4. [Replace removed deprecated APIs](#4-replace-removed-deprecated-apis)
@@ -25,11 +25,11 @@ Work through the checklist top to bottom:
 - **ESM-only.** The CommonJS build (`.cjs` / `.d.cts`) and the `require` export condition are removed — the package now ships ESM only. This is not a code change for consumers: modern Node.js supports `require(esm)`, so `require('@sanity/ui')` keeps working on the supported Node.js versions.
 - **Node.js 22.12 or later** (`engines` is `>=22.12`, matching `sanity`).
 - **React 19.2 or later** — peer dependencies are `react: ^19.2` and `react-dom: ^19.2`. The 19.2 floor is set by the new [`<Activity>`](https://react.dev/reference/react/Activity) component, which shipped in React 19.2.0 and which v4 uses to keep closed `Tooltip` and `Popover` content mounted. Components are compiled with the React Compiler targeting React 19, using React's built-in runtime.
-- `styled-components` stays a peer dependency (`^5.2 || ^6`).
+- **styled-components 6.1 or later.** It stays a peer dependency, now declared as `^6.1`. v4.0.0 already required v6 — it imports the named `styled` export and v6-only types such as `ExecutionContext`, neither of which exist in v5 — but the peer range was left at `^5.2 || ^6` and the 4.0.0 release notes forgot to mention the dropped v5 support. The corrected range also excludes 6.0.x, which ships the Babel macro (and with it the entire `@babel/*` toolchain) as runtime dependencies until 6.1.0 removed it, and whose last release, 6.0.9, was published without its type declarations.
 - **TypeScript: use an `exports`-aware `moduleResolution`** (`node16`, `nodenext`, or `bundler`). v4 resolves everything through package `exports` and no longer ships `typesVersions`, so the legacy `moduleResolution: "node"` (node10) mode cannot resolve the types for the subpath entry points.
 
 ```sh
-npm install @sanity/ui@^4 react@^19.2 react-dom@^19.2
+npm install @sanity/ui@^4 react@^19.2 react-dom@^19.2 styled-components@^6.1
 ```
 
 ### 2. Import the stylesheet
