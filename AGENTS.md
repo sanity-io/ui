@@ -2,7 +2,8 @@
 
 ## Cursor Cloud specific instructions
 
-This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
+This is the `v3` maintenance branch of the `@sanity/ui` React component
+library, structured as a pnpm monorepo:
 the published `@sanity/ui` package lives in `packages/ui`, the published
 `@sanity/icons` icon library in `packages/icons`, the published
 `@sanity/color` package (the Sanity color palette, migrated from the
@@ -103,9 +104,10 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `pnpm --filter sanity-ui-storybook exec playwright install chromium`.
   Stories opt out of being tested with the `!test` tag.
 - Releases are managed with Changesets: run `pnpm changeset` to add a changeset
-  to a PR that should trigger a release. Merging to `main` opens/updates a
-  "Version Packages" PR, and merging that publishes to npm via trusted
-  publishing.
+  to a PR that should trigger a release. Merging to `v3` opens/updates a
+  "Version Packages" PR, and merging that publishes to npm under the
+  `release-v3` dist-tag (the `latest` dist-tag belongs to the `main`
+  branch).
 - `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo. It is
   linted by the root oxlint config like everything else (an override in
   `.oxlintrc.json` additionally enables the Next.js plugin rules for it) and
