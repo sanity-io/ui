@@ -39,7 +39,7 @@ const StyledLabel = styled.div<{
   $weight?: ThemeFontWeightKey
 }>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
 
-const LabelComponent = function Label(
+function LabelComponent(
   props: LabelOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
 ) {
   const {
