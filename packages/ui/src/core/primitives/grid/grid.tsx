@@ -19,7 +19,7 @@ export type GridProps<E extends ElementType = 'div'> = Props<GridOwnProps, E>
 
 const StyledGrid = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
 
-const GridComponent = function Grid(
+function GridComponent(
   props: GridOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLDivElement>,
       'as' | 'height' | 'rows'
