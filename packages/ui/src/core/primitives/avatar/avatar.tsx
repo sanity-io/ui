@@ -55,7 +55,7 @@ const InitialsLabel = styled(Label)({
 
 const AvatarImage = styled.svg(avatarStyle.image)
 
-const AvatarComponent = function Avatar(
+function AvatarComponent(
   props: AvatarOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
 ) {
   const {
