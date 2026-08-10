@@ -7,11 +7,10 @@ import {
   Container,
   Flex,
   Layer,
-  Menu,
-  MenuItem,
   Stack,
   Text,
 } from '@sanity/ui'
+import {Menu, MenuItem} from '@sanity/ui/menu'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {AVATAR_SRC} from '../constants'

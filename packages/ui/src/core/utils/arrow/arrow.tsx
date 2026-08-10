@@ -1,4 +1,4 @@
-import {ForwardedRef, forwardRef, HTMLProps} from 'react'
+import {HTMLProps} from 'react'
 import {css, styled} from 'styled-components'
 
 import {useTheme_v2} from '../../theme/useTheme'
@@ -63,14 +63,13 @@ const ShapePath = styled.path`
 `
 
 /** @internal */
-export const Arrow = forwardRef(function Arrow(
+export function Arrow(
   props: {width: number; height: number; radius?: number} & Omit<
     HTMLProps<HTMLDivElement>,
     'width' | 'height'
   >,
-  ref: ForwardedRef<HTMLDivElement>,
 ): React.JSX.Element {
-  const {width: w, height: h, radius = 0, ...restProps} = props
+  const {width: w, height: h, radius = 0, ref, ...restProps} = props
   const {card} = useTheme_v2()
   const strokeWidth = card.shadow.outline
 
@@ -120,4 +119,4 @@ export const Arrow = forwardRef(function Arrow(
       </svg>
     </StyledArrow>
   )
-})
+}
