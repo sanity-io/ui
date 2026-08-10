@@ -71,7 +71,7 @@ const LoadingBox = styled.div`
   box-shadow: inherit;
 `
 
-const ButtonComponent = function Button(
+function ButtonComponent(
   props: ButtonOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLButtonElement>,
       'as' | 'width'
