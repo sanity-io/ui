@@ -78,6 +78,7 @@ The internal `_ResizeObserver` export is gone. If you imported it, use the globa
 - Internal state is preserved and hidden content pre-renders while closed.
 - With `animate` enabled, hiding is deferred until exit animations finish (via `AnimateActivity`, vendored from Motion).
 - Watch out: popovers with recursive `content` must gate the recursion on `open` — otherwise they render an infinitely deep hidden tree.
+- Watch out: tests have to assert on visibility instead of existence, since `<Activity mode="hidden">` keeps closed content in the DOM and hides it with `display: none`. In end-to-end tests, `await expect(page.getByText('Tooltip content')).toHaveCount(0)` becomes `await expect(page.getByText('Tooltip content')).toBeHidden()`; in unit tests, `expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()` becomes `expect(screen.getByText('Tooltip content')).not.toBeVisible()`. Queries that skip inaccessible elements (`*ByRole`, `getByRole()`) need no change — `display: none` keeps closed content out of the accessibility tree.
 
 **All components are plain function components — `ref` is a regular prop (React 19 semantics).**
 
