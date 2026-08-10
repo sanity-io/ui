@@ -65,6 +65,15 @@ export function ArticleLayout({
   // The router knows the URL on the client, so reading the screen segment here
   // keeps the chrome out of the server's `params` and inside the App Shell.
   const pathname = usePathname()
+  // Close the mobile menu on navigation: this layout stays mounted across
+  // `[screen]` routes, so without a reset an open menu can hide the body
+  // after leaving a screen that had the close control. Adjust state while
+  // rendering (https://react.dev/learn/you-might-not-need-an-effect).
+  const [menuPathname, setMenuPathname] = useState(pathname)
+  if (menuPathname !== pathname) {
+    setMenuPathname(pathname)
+    setMenuOpen(false)
+  }
   const screen = pathname.split('/').find(Boolean)
   const path = screen ? [screen] : []
   // Screens without nav entries of their own (the arcade) render bare, the
