@@ -290,24 +290,12 @@ defineInlineTest(
   transform,
   {},
   `
-  <div flex="1" />
-  `,
-  `
-  <div flexGrow={1} />
-  `,
-  'splits up shorthand props and updates mapped prop value skipping if undefined',
-)
-
-defineInlineTest(
-  transform,
-  {},
-  `
   <div flex={1} />
   `,
   `
   <div flexGrow={1} />
   `,
-  'splits up numeric flex shorthand without matching unrelated mapping values',
+  'splits up shorthand props and updates mapped prop value skipping if undefined',
 )
 
 defineInlineTest(
@@ -326,7 +314,7 @@ defineInlineTest(
   transform,
   {},
   `
-  <div flex={["2", "none"]} />
+  <div flex={[2, "none"]} />
   `,
   `
   <div
