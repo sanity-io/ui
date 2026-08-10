@@ -22,7 +22,7 @@ const StyledContainer = styled(Box)<ResponsiveWidthStyleProps>(
   responsiveContainerWidthStyle,
 )
 
-const ContainerComponent = function Container(
+function ContainerComponent(
   props: ContainerOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLDivElement>,
       'as' | 'height' | 'width'
