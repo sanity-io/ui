@@ -26,7 +26,7 @@ const StyledFlex = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
   responsiveFlexStyle,
 )
 
-const FlexComponent = function Flex(
+function FlexComponent(
   props: FlexOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'wrap'>,
 ) {
   const {align, as, direction = 'row', gap, justify, ref, wrap, ...restProps} = props
