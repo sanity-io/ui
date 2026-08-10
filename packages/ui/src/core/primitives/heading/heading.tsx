@@ -37,7 +37,7 @@ const StyledHeading = styled.div<
   HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
 >(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
 
-const HeadingComponent = function Heading(
+function HeadingComponent(
   props: HeadingOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLDivElement>,
       'as' | 'size'
