@@ -39,7 +39,7 @@ const StyledText = styled.div<ResponsiveFontStyleProps>(
   textBaseStyle,
 )
 
-const TextComponent = function Text(
+function TextComponent(
   props: TextOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
 ) {
   const {
