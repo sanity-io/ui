@@ -16,27 +16,24 @@ const config: UserConfig = await defineConfig({
   entry: {
     '*': './src/exports/*.{ts,tsx}',
   },
-  // `src/exports/styles.ts` emits the declaration for the CSS export, but its
-  // JavaScript output is not a separate public `@sanity/ui/styles` entry point.
-  exports: {
-    exclude: ['styles'],
-    customExports: (packageExports, {isPublish}) => ({
-      ...packageExports,
-      './styles.css': {
-        types: isPublish ? './dist/styles.d.ts' : './src/exports/styles.ts',
-        default: './dist/styles.css',
-      },
-    }),
-  },
   tsconfig: 'tsconfig.dist.json',
   styledComponents: true,
   reactCompiler: {target: '19'},
   // Extract vanilla-extract `.css.ts` styles into dist/styles.css. Unlike the
-  // default (`inject: {nodeCompat: true}`, which self-imports
-  // `@sanity/ui/bundle.css` from every entry), `inject: false` leaves loading
-  // the stylesheet to the consumer: `import '@sanity/ui/styles.css'` — the
-  // same file name and consumer contract as the vanilla-extract based
-  // successor of this library, to minimize churn when upgrading later.
+  // default (`inject: true`, which self-imports `@sanity/ui/styles.css` from
+  // every entry), `inject: false` leaves loading the stylesheet to the
+  // consumer: `import '@sanity/ui/styles.css'` — the same file name and
+  // consumer contract as the vanilla-extract based successor of this library,
+  // to minimize churn when upgrading later.
+  //
+  // `exports: {nodeCompat: true}` (the default, spelled out because it carries
+  // the whole consumer contract while `inject` is off) publishes the
+  // stylesheet as the `./styles.css` subpath through a conditional export: the
+  // `browser`/`style` conditions resolve to `dist/styles.css`, while
+  // `node`/`default` resolve to a generated no-op `dist/styles-css.js` shim
+  // (with `dist/styles-css.d.ts` for `types`). Runtimes that cannot load CSS —
+  // plain `node`, SSR test runners, RSC bundlers — therefore import a valid
+  // module instead of throwing on the stylesheet.
   //
   // `minify: false` keeps the output readable so CSS diffs between published
   // versions are easy to eval. The lightningcss pass still runs with the
@@ -46,7 +43,12 @@ const config: UserConfig = await defineConfig({
   // (e.g. an authored `overflow: hidden` fallback before `overflow: clip`
   // ships as just `overflow: clip` — fine, since `overflow: clip` is
   // Baseline).
-  vanillaExtract: {fileName: 'styles.css', inject: false, minify: false},
+  vanillaExtract: {
+    fileName: 'styles.css',
+    inject: false,
+    exports: {nodeCompat: true},
+    minify: false,
+  },
 })
 
 export default config
