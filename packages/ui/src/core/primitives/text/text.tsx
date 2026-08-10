@@ -1,4 +1,3 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
@@ -40,15 +39,15 @@ const StyledText = styled.div<ResponsiveFontStyleProps>(
   textBaseStyle,
 )
 
-const TextComponent = forwardRef(function Text(
+function TextComponent(
   props: TextOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     accent = false,
     align,
     children: childrenProp,
     muted = false,
+    ref,
     size = 2,
     textOverflow,
     weight,
@@ -75,7 +74,7 @@ const TextComponent = forwardRef(function Text(
       <span>{children}</span>
     </StyledText>
   )
-})
+}
 
 /**
  * The `Text` component is an agile, themed typographic element.

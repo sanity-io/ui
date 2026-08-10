@@ -23,32 +23,11 @@ describe('<Box />', () => {
     mockedResponsiveGridItemStyle.mockClear()
   })
 
-  it('uses column when gridColumn is not provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box column={3} />)
-
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
-      expect.objectContaining({$column: [3]}),
-    )
-  })
-
   it('uses gridColumn when provided', () => {
     render(<Box gridColumn={4} />)
 
     expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
       expect.objectContaining({$column: [4]}),
-    )
-  })
-
-  it('prefers gridColumn over column when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box column={3} gridColumn={5} />)
-
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
-      expect.objectContaining({$column: [5]}),
-    )
-    expect(mockedResponsiveGridItemStyle).not.toHaveBeenCalledWith(
-      expect.objectContaining({$column: [3]}),
     )
   })
 
@@ -62,94 +41,36 @@ describe('<Box />', () => {
     )
   })
 
-  it('uses columnStart when gridColumnStart is not provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box columnStart={2} />)
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
-      expect.objectContaining({$columnStart: [2]}),
-    )
-  })
-
-  it('prefers gridColumnStart over columnStart when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box columnStart={2} gridColumnStart={4} />)
+  it('uses gridColumnStart when provided', () => {
+    render(<Box gridColumnStart={4} />)
     expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
       expect.objectContaining({$columnStart: [4]}),
     )
-    expect(mockedResponsiveGridItemStyle).not.toHaveBeenCalledWith(
-      expect.objectContaining({$columnStart: [2]}),
-    )
   })
 
-  it('uses columnEnd when gridColumnEnd is not provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box columnEnd={3} />)
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
-      expect.objectContaining({$columnEnd: [3]}),
-    )
-  })
-
-  it('prefers gridColumnEnd over columnEnd when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box columnEnd={3} gridColumnEnd={5} />)
+  it('uses gridColumnEnd when provided', () => {
+    render(<Box gridColumnEnd={5} />)
     expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
       expect.objectContaining({$columnEnd: [5]}),
     )
-    expect(mockedResponsiveGridItemStyle).not.toHaveBeenCalledWith(
-      expect.objectContaining({$columnEnd: [3]}),
-    )
   })
 
-  it('uses row when gridRow is not provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box row={1} />)
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(expect.objectContaining({$row: [1]}))
-  })
-
-  it('prefers gridRow over row when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box row={1} gridRow={2} />)
+  it('uses gridRow when provided', () => {
+    render(<Box gridRow={2} />)
     expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(expect.objectContaining({$row: [2]}))
-    expect(mockedResponsiveGridItemStyle).not.toHaveBeenCalledWith(
-      expect.objectContaining({$row: [1]}),
-    )
   })
 
-  it('uses rowStart when gridRowStart is not provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box rowStart={2} />)
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
-      expect.objectContaining({$rowStart: [2]}),
-    )
-  })
-
-  it('prefers gridRowStart over rowStart when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box rowStart={2} gridRowStart={4} />)
+  it('uses gridRowStart when provided', () => {
+    render(<Box gridRowStart={4} />)
     expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
       expect.objectContaining({$rowStart: [4]}),
     )
-    expect(mockedResponsiveGridItemStyle).not.toHaveBeenCalledWith(
-      expect.objectContaining({$rowStart: [2]}),
-    )
   })
 
-  it('uses rowEnd when gridRowEnd is not provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box rowEnd={3} />)
-    expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
-      expect.objectContaining({$rowEnd: [3]}),
-    )
-  })
-
-  it('prefers gridRowEnd over rowEnd when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    render(<Box rowEnd={3} gridRowEnd={5} />)
+  it('uses gridRowEnd when provided', () => {
+    render(<Box gridRowEnd={5} />)
     expect(mockedResponsiveGridItemStyle).toHaveBeenCalledWith(
       expect.objectContaining({$rowEnd: [5]}),
-    )
-    expect(mockedResponsiveGridItemStyle).not.toHaveBeenCalledWith(
-      expect.objectContaining({$rowEnd: [3]}),
     )
   })
 })

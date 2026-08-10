@@ -42,6 +42,21 @@
             "name": "styled-components",
             "importNames": ["default"],
             "message": "Please use `import {styled} from \"styled-components\"` instead."
+          },
+          {
+            "name": "react",
+            "importNames": ["forwardRef"],
+            "message": "React 19 passes `ref` as a regular prop — write a plain function component that reads `props.ref` instead of wrapping it in `forwardRef`."
+          },
+          {
+            "name": "react",
+            "importNames": ["createRef"],
+            "message": "Use `useRef` instead of `createRef`."
+          },
+          {
+            "name": "react",
+            "importNames": ["createElement"],
+            "message": "Use JSX instead of `createElement`."
           }
         ]
       }
@@ -106,6 +121,28 @@
       "rules": {
         "typescript/no-unnecessary-type-assertion": "off",
         "typescript/no-unsafe-type-assertion": "off"
+      }
+    },
+    {
+      // `@sanity/icons` and `@sanity/logos` support React 18 (`react` peers of
+      // `^18 || ^19`), where refs only attach to function components wrapped in
+      // `forwardRef` — so `forwardRef` stays allowed there (along with the
+      // `createRef`/`createElement` used by the tests that pin that contract).
+      // Class components remain banned via the root `react/prefer-function-component`.
+      "files": ["packages/icons/**", "packages/logos/**"],
+      "rules": {
+        "eslint/no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "styled-components",
+                "importNames": ["default"],
+                "message": "Please use `import {styled} from \"styled-components\"` instead."
+              }
+            ]
+          }
+        ]
       }
     },
     {

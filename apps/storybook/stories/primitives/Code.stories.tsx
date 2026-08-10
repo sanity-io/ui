@@ -1,5 +1,6 @@
 import {AddCircleIcon} from '@sanity/icons/AddCircle'
-import {Box, Card, Code, Flex, Stack} from '@sanity/ui'
+import {Box, Card, Flex, Stack} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {getFontSizeControls} from '../controls'

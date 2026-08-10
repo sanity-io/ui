@@ -1,4 +1,4 @@
-import {Code} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import type {StegaBranded} from 'next-sanity'
 import {ReactElement} from 'react'
 

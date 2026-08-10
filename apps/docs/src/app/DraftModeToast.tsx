@@ -1,6 +1,7 @@
 'use client'
 
-import {Box, Button, useToast, type ToastParams} from '@sanity/ui'
+import {Box, Button} from '@sanity/ui'
+import {useToast, type ToastParams} from '@sanity/ui/toast'
 import {useIsPresentationTool} from 'next-sanity/hooks'
 import {useEffect, useEffectEvent, useTransition} from 'react'
 

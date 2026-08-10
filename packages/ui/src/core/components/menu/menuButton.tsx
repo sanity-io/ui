@@ -1,6 +1,5 @@
 import {
   cloneElement,
-  forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -9,10 +8,7 @@ import {
   useState,
 } from 'react'
 
-import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
-import {Placement} from '../../types/placement'
-import {Radius} from '../../types/radius'
 import {MenuProps} from './menu'
 
 /**
@@ -24,9 +20,9 @@ export interface MenuButtonProps {
    */
   __unstable_disableRestoreFocusOnClose?: boolean
   /**
-   * @deprecated Use `popover={{boundaryElement: element}}` instead.
+   * @deprecated Use `popover={{floatingBoundary: element}}` and/or `popover={{referenceBoundary: element}}` instead.
    */
-  boundaryElement?: HTMLElement
+  boundaryElement?: never
   button: React.JSX.Element
   id: string
   menu?: React.JSX.Element
@@ -35,25 +31,26 @@ export interface MenuButtonProps {
   /**
    * @deprecated Use `popover={{placement: 'top'}}` instead.
    */
-  placement?: Placement
+  placement?: never
   popover?: Omit<PopoverProps, 'content' | 'open'>
   /**
    * @deprecated Use `popover={{scheme: 'dark'}}` instead.
    */
-  popoverScheme?: ThemeColorSchemeKey
+  popoverScheme?: never
   /**
    * @deprecated Use `popover={{radius: 2}}` instead.
    */
-  popoverRadius?: Radius | Radius[]
+  popoverRadius?: never
   /**
    * @beta Do not use in production.
    * @deprecated Use `popover={{portal: true}}` instead.
    */
-  portal?: boolean
+  portal?: never
   /**
    * @deprecated Use `popover={{preventOverflow: true}}` instead.
    */
-  preventOverflow?: boolean
+  preventOverflow?: never
+  ref?: React.Ref<HTMLButtonElement | null>
 }
 
 /**
@@ -61,30 +58,16 @@ export interface MenuButtonProps {
  *
  * @public
  */
-export const MenuButton = forwardRef(function MenuButton(
-  props: MenuButtonProps,
-  forwardedRef: React.ForwardedRef<HTMLButtonElement | null>,
-) {
+export function MenuButton(props: MenuButtonProps) {
   const {
     __unstable_disableRestoreFocusOnClose: disableRestoreFocusOnClose = false,
-    // oxlint-disable-next-line no-deprecated
-    boundaryElement: deprecated_boundaryElement,
     button: buttonProp,
     id,
     menu: menuProp,
     onClose,
     onOpen,
-    // oxlint-disable-next-line no-deprecated
-    placement: deprecated_placement,
-    // oxlint-disable-next-line no-deprecated
-    popoverScheme: deprecated_popoverScheme,
-    // oxlint-disable-next-line no-deprecated
-    portal: deprecated_portal = true,
     popover,
-    // oxlint-disable-next-line no-deprecated
-    popoverRadius: deprecated_popoverRadius,
-    // oxlint-disable-next-line no-deprecated
-    preventOverflow: deprecated_preventOverflow,
+    ref: forwardedRef,
   } = props
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
@@ -246,25 +229,12 @@ export const MenuButton = forwardRef(function MenuButton(
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
     () => ({
-      boundaryElement: deprecated_boundaryElement,
       overflow: 'auto',
-      placement: deprecated_placement,
-      portal: deprecated_portal,
-      preventOverflow: deprecated_preventOverflow,
-      radius: deprecated_popoverRadius,
-      scheme: deprecated_popoverScheme,
+      portal: true,
       // oxlint-disable-next-line no-useless-fallback-in-spread
       ...(popover || {}),
     }),
-    [
-      deprecated_boundaryElement,
-      deprecated_placement,
-      deprecated_popoverRadius,
-      deprecated_popoverScheme,
-      deprecated_portal,
-      deprecated_preventOverflow,
-      popover,
-    ],
+    [popover],
   )
 
   return (
@@ -272,4 +242,4 @@ export const MenuButton = forwardRef(function MenuButton(
       {button || <></>}
     </Popover>
   )
-})
+}

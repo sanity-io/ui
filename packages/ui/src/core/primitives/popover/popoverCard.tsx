@@ -1,6 +1,6 @@
 import {Strategy} from '@floating-ui/react-dom'
-import {motion, type MotionProps} from 'motion/react'
-import React, {CSSProperties, forwardRef, useMemo} from 'react'
+import {motion} from 'motion/react'
+import React, {CSSProperties, useMemo} from 'react'
 import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
@@ -12,7 +12,7 @@ import {PopoverMargins} from '../../types/popover'
 import {Radius} from '../../types/radius'
 import {Arrow} from '../../utils/arrow/arrow'
 import {useLayer} from '../../utils/layer/useLayer'
-import {Card, CardProps} from '../card/card'
+import {Card} from '../card/card'
 import {Flex} from '../flex/flex'
 import {
   DEFAULT_POPOVER_ARROW_HEIGHT,
@@ -38,7 +38,7 @@ const MotionFlex = styled(motion.create(Flex))`
 /**
  * @internal
  */
-export const PopoverCard = forwardRef(function PopoverCard(
+export function PopoverCard(
   props: {
     /** @beta*/
     __unstable_margins?: PopoverMargins
@@ -61,7 +61,6 @@ export const PopoverCard = forwardRef(function PopoverCard(
     x: number | null
     y: number | null
   } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     __unstable_margins: marginsProp,
@@ -77,6 +76,7 @@ export const PopoverCard = forwardRef(function PopoverCard(
     originY,
     overflow,
     radius,
+    ref,
     scheme,
     shadow,
     strategy,
@@ -128,8 +128,7 @@ export const PopoverCard = forwardRef(function PopoverCard(
   return (
     <MotionCard
       data-ui="Popover"
-      // oxlint-disable-next-line no-unsafe-type-assertion
-      {...(restProps as CardProps & MotionProps)}
+      {...restProps}
       data-placement={placement}
       radius={radius}
       ref={ref}
@@ -168,4 +167,4 @@ export const PopoverCard = forwardRef(function PopoverCard(
       )}
     </MotionCard>
   )
-})
+}

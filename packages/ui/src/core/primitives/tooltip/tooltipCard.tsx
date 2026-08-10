@@ -1,5 +1,5 @@
-import {motion, type MotionProps} from 'motion/react'
-import React, {CSSProperties, forwardRef, useMemo} from 'react'
+import {motion} from 'motion/react'
+import React, {CSSProperties, useMemo} from 'react'
 import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
@@ -7,7 +7,7 @@ import {POPOVER_MOTION_PROPS} from '../../constants'
 import {Placement} from '../../types/placement'
 import {Radius} from '../../types/radius'
 import {Arrow} from '../../utils/arrow/arrow'
-import {Card, CardProps} from '../card/card'
+import {Card} from '../card/card'
 import {
   DEFAULT_TOOLTIP_ARROW_HEIGHT,
   DEFAULT_TOOLTIP_ARROW_RADIUS,
@@ -21,7 +21,7 @@ const MotionCard = styled(motion.create(Card))`
 /**
  * @internal
  */
-export const TooltipCard = forwardRef(function TooltipCard(
+export function TooltipCard(
   props: {
     animate?: boolean
     arrow: boolean
@@ -36,7 +36,6 @@ export const TooltipCard = forwardRef(function TooltipCard(
     scheme?: ThemeColorSchemeKey
     shadow?: number | number[]
   } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     animate,
@@ -50,6 +49,7 @@ export const TooltipCard = forwardRef(function TooltipCard(
     padding,
     placement,
     radius,
+    ref,
     scheme,
     shadow,
     style,
@@ -79,8 +79,7 @@ export const TooltipCard = forwardRef(function TooltipCard(
   return (
     <MotionCard
       data-ui="Tooltip__card"
-      // oxlint-disable-next-line no-unsafe-type-assertion
-      {...(restProps as CardProps & MotionProps)}
+      {...restProps}
       data-placement={placement}
       padding={padding}
       radius={radius}
@@ -107,4 +106,4 @@ export const TooltipCard = forwardRef(function TooltipCard(
       )}
     </MotionCard>
   )
-})
+}

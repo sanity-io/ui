@@ -26,12 +26,5 @@
         "react-compiler-runtime",
       ],
     },
-    "packages/ui": {
-      "ignoreDependencies": [
-        // babel-plugin-react-compiler (target '18') injects imports of this runtime
-        // package into the compiled dist output, so it is never imported in source
-        "react-compiler-runtime",
-      ],
-    },
   },
 }
