@@ -53,7 +53,7 @@ const StyledCard = styled(Box)<
     ResponsiveShadowStyleProps
 >(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
 
-const CardComponent = function Card(
+function CardComponent(
   props: CardOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
 ) {
   const {
