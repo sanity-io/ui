@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.3
+
+### Patch Changes
+
+- 06a27f8: add default min-height and min-width to box/flex/grid
+
 ## 5.0.0-alpha.2
 
 ### Patch Changes
