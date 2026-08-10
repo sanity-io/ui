@@ -302,6 +302,18 @@ defineInlineTest(
   transform,
   {},
   `
+  <div flex={1} />
+  `,
+  `
+  <div flexGrow={1} />
+  `,
+  'splits up numeric flex shorthand without matching unrelated mapping values',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
   <div flex={["auto", "none"]} />
   `,
   `
