@@ -110,7 +110,13 @@ export function ArcadeScreen(props: {title?: string; description?: string}): Rea
   )
 
   return (
-    <Card flex={1} overflow="hidden" shadow={1} style={{minHeight: 'auto'}}>
+    <Card
+      data-testid="arcade-screen"
+      flex={1}
+      overflow="hidden"
+      shadow={1}
+      style={{minHeight: 'auto'}}
+    >
       <Flex direction={['column', 'column', 'row']} height="fill">
         <Card
           flex={1}

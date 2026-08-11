@@ -7,6 +7,7 @@ import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import {Breadcrumbs} from '@sanity/ui/breadcrumbs'
 import {getTheme_v2} from '@sanity/ui/theme'
 import Link from 'next/link'
+import {usePathname} from 'next/navigation'
 import {useState} from 'react'
 import {styled} from 'styled-components'
 
@@ -55,56 +56,65 @@ const BreadcrumbsNavCard = styled(Card)<{$menuOpen: boolean}>((props) => {
 
 export function ArticleLayout({
   children,
-  nav,
-  path,
+  nav: root,
 }: {
   children: React.ReactNode
-  nav?: NavNode
-  path: string[]
+  nav: NavNode | null
 }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  // The router knows the URL on the client, so reading the screen segment here
+  // keeps the chrome out of the server's `params` and inside the App Shell.
+  const pathname = usePathname()
+  const path = pathname.split('/').filter(Boolean)
+  const screen = path[0]
+  // Screens without nav entries of their own (the arcade) render bare, the
+  // same as when this branch was decided by the screen document's type.
+  const section = root?.children?.find((item) => item.segment === screen)
+  const nav = section?.children?.length ? section : undefined
+
+  // Screens without article navigation (the arcade) must stay direct children
+  // of the website column so their `height="fill"` resolves against the
+  // remaining viewport instead of an un-sized Card/Flex/Box wrapper chain.
+  if (!nav) return <>{children}</>
 
   return (
     <Card flex={1} style={{minHeight: 'auto'}}>
-      {nav && (
-        <BreadcrumbsNavCard
-          data-ui="BreadcrumbsNavCard"
-          $menuOpen={menuOpen}
-          paddingX={[2, 2, 3, 4]}
-          paddingY={2}
-          shadow={1}
-        >
-          <Flex align="center" gap={1}>
-            <Box flex={1} padding={3}>
-              <NavBreadcrumbs nav={nav} path={path} />
-            </Box>
-            <Box flex="none">
-              <Button
-                fontSize={1}
-                icon={menuOpen ? CloseIcon : MenuIcon}
-                mode="bleed"
-                onClick={() => setMenuOpen((o) => !o)}
-                padding={3}
-              />
-            </Box>
-          </Flex>
+      <BreadcrumbsNavCard
+        data-testid="article-breadcrumbs-nav"
+        data-ui="BreadcrumbsNavCard"
+        $menuOpen={menuOpen}
+        paddingX={[2, 2, 3, 4]}
+        paddingY={2}
+        shadow={1}
+      >
+        <Flex align="center" gap={1}>
+          <Box flex={1} padding={3}>
+            <NavBreadcrumbs nav={nav} path={path} />
+          </Box>
+          <Box flex="none">
+            <Button
+              fontSize={1}
+              icon={menuOpen ? CloseIcon : MenuIcon}
+              mode="bleed"
+              onClick={() => setMenuOpen((o) => !o)}
+              padding={3}
+            />
+          </Box>
+        </Flex>
 
-          {menuOpen && (
-            <Box marginTop={2}>
-              <Nav nav={nav} path={`/${path.join('/')}`} />
-            </Box>
-          )}
-        </BreadcrumbsNavCard>
-      )}
+        {menuOpen && (
+          <Box marginTop={2}>
+            <Nav nav={nav} path={`/${path.join('/')}`} />
+          </Box>
+        )}
+      </BreadcrumbsNavCard>
 
       <Flex hidden={menuOpen}>
-        {nav && (
-          <NavCard flex={1} overflow="auto">
-            <Box padding={[2, 2, 3, 4]}>
-              <Nav nav={nav} path={`/${path.join('/')}`} />
-            </Box>
-          </NavCard>
-        )}
+        <NavCard data-testid="article-sidebar-nav" flex={1} overflow="auto">
+          <Box padding={[2, 2, 3, 4]}>
+            <Nav nav={nav} path={`/${path.join('/')}`} />
+          </Box>
+        </NavCard>
 
         <Box flex={3}>{children}</Box>
       </Flex>
