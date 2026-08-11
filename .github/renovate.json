@@ -10,6 +10,12 @@
       "rangeStrategy": "bump"
     },
     {
+      "description": "v3 branch only receives production dependency updates",
+      "matchBaseBranches": ["v3"],
+      "matchDepTypes": ["devDependencies"],
+      "enabled": false
+    },
+    {
       "description": "v2 cannot bump refractor due to ESM requirenment",
       "matchPackageNames": ["refractor"],
       "matchBaseBranches": ["v2"],
