@@ -50,7 +50,7 @@
     "react-refractor": "catalog:",
     "refractor": "catalog:",
     "sanity": "catalog:",
-    "sanity-plugin-media": "^6.1.1",
+    "sanity-plugin-media": "^6.1.2",
     "server-only": "^0.0.1",
     "styled-components": "catalog:"
   },
