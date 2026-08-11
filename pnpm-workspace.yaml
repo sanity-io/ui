@@ -3,12 +3,7 @@ packages:
   - 'apps/blueprints/*'
   - 'packages/*'
 
-# Prefer `deep` once transitive consumers (notably `sanity` and
-# `@sanity/visual-editing`) have been updated for breaking `@sanity/ui`
-# changes — e.g. removal of `@sanity/ui/_visual-editing`. Until then,
-# deep-linking forces those packages onto the workspace package and breaks
-# apps/docs (and other) builds that pull them in.
-linkWorkspacePackages: true
+linkWorkspacePackages: deep
 strictPeerDependencies: false
 
 # Version ranges for dependencies used by more than one workspace package.
