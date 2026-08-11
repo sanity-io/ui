@@ -11,7 +11,7 @@ overrides:
   react: ^19.2.7
   react-dom: ^19.2.7
   react-is: ^19.2.7
-  styled-components: npm:@sanity/styled-components@6.1.23
+  styled-components: npm:@sanity/styled-components@6.1.24
 
 importers:
 
@@ -120,8 +120,8 @@ importers:
         specifier: ^10.4.6
         version: 10.5.0(@types/react@19.2.17)(prettier@3.9.5)(react@19.2.7)
       styled-components:
-        specifier: npm:@sanity/styled-components@6.1.23
-        version: '@sanity/styled-components@6.1.23(react-dom@19.2.7(react@19.2.7))(react@19.2.7)'
+        specifier: npm:@sanity/styled-components@6.1.24
+        version: '@sanity/styled-components@6.1.24(react-dom@19.2.7(react@19.2.7))(react@19.2.7)'
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -186,8 +186,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(react@19.2.7)
       styled-components:
-        specifier: npm:@sanity/styled-components@6.1.23
-        version: '@sanity/styled-components@6.1.23(react-dom@19.2.7(react@19.2.7))(react@19.2.7)'
+        specifier: npm:@sanity/styled-components@6.1.24
+        version: '@sanity/styled-components@6.1.24(react-dom@19.2.7(react@19.2.7))(react@19.2.7)'
       use-effect-event:
         specifier: ^2.0.3
         version: 2.0.3(react@19.2.7)
@@ -224,7 +224,7 @@ importers:
         version: 1.0.0
       babel-plugin-styled-components:
         specifier: ^2.3.0
-        version: 2.3.0(@babel/core@7.29.7)(@sanity/styled-components@6.1.23(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
+        version: 2.3.0(@babel/core@7.29.7)(@sanity/styled-components@6.1.24(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       jsdom:
         specifier: ^29.1.1
         version: 29.1.1
@@ -1911,8 +1911,8 @@ packages:
       babel-plugin-react-compiler:
         optional: true
 
-  '@sanity/styled-components@6.1.23':
-    resolution: {integrity: sha512-zhyX17Qx/9AwXrV13T1qAM02zhZOtI9R9nEsoMampAKwyR155P8Kw7n2MBTADvxWaYBCAgh77wtOuNGAjCWeNw==}
+  '@sanity/styled-components@6.1.24':
+    resolution: {integrity: sha512-082MiJ6tufcXeuJGHgNbT7PhUHdFkk9GGKrlbBmHSPNnlJUCzZ6nKJC9nwjmeIIo7gDupOHuY9gP5f+Mu0yE0Q==}
     engines: {node: '>= 20'}
     deprecated: No longer maintained. Please migrate to StyleX or vanilla-extract.
     peerDependencies:
@@ -2589,9 +2589,6 @@ packages:
 
   css.escape@1.5.1:
     resolution: {integrity: sha512-YUifsXXuknHlUsmlgyY0PKzgPOr7/FjCePfHNt0jxm83wHZi44VDMQ7/fGNkjY3/jV1MC+1CmZbaHzugyeRtpg==}
-
-  csstype@3.1.3:
-    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
@@ -6223,12 +6220,12 @@ snapshots:
       - supports-color
       - vue-tsc
 
-  '@sanity/styled-components@6.1.23(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@sanity/styled-components@6.1.24(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@emotion/is-prop-valid': 1.4.0
       '@emotion/unitless': 0.10.0
       '@types/stylis': 4.2.7
-      csstype: 3.1.3
+      csstype: 3.2.3
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
       shallowequal: 1.1.0
@@ -6738,14 +6735,14 @@ snapshots:
     dependencies:
       '@babel/types': 7.29.7
 
-  babel-plugin-styled-components@2.3.0(@babel/core@7.29.7)(@sanity/styled-components@6.1.23(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
+  babel-plugin-styled-components@2.3.0(@babel/core@7.29.7)(@sanity/styled-components@6.1.24(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
     dependencies:
       '@babel/core': 7.29.7
       '@babel/helper-annotate-as-pure': 7.29.7
       '@babel/helper-module-imports': 7.29.7
       '@babel/plugin-syntax-jsx': 7.29.7(@babel/core@7.29.7)
       picomatch: 4.0.5
-      styled-components: '@sanity/styled-components@6.1.23(react-dom@19.2.7(react@19.2.7))(react@19.2.7)'
+      styled-components: '@sanity/styled-components@6.1.24(react-dom@19.2.7(react@19.2.7))(react@19.2.7)'
     transitivePeerDependencies:
       - supports-color
 
@@ -6992,8 +6989,6 @@ snapshots:
   css-what@6.2.2: {}
 
   css.escape@1.5.1: {}
-
-  csstype@3.1.3: {}
 
   csstype@3.2.3: {}
 
