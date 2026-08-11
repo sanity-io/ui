@@ -10,8 +10,8 @@
       "rangeStrategy": "bump"
     },
      {
-      "description": "v3 branch only receives production dependency updates",
-      "matchBaseBranches": ["v3"],
+      "description": "v2 and v3 branches only receives production dependency updates",
+      "matchBaseBranches": ["v2", "v3"],
       "matchDepTypes": ["devDependencies"],
       "enabled": false
     },
