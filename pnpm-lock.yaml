@@ -13,8 +13,8 @@ catalogs:
       specifier: ^7.26.2
       version: 7.26.2
     '@sanity/functions':
-      specifier: ^1.6.0
-      version: 1.6.1
+      specifier: ^1.6.2
+      version: 1.6.2
     '@sanity/tsdown-config':
       specifier: ^0.24.0
       version: 0.24.0
@@ -111,7 +111,7 @@ importers:
         version: 7.26.2
       '@sanity/functions':
         specifier: 'catalog:'
-        version: 1.6.1(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)
+        version: 1.6.2(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -3773,8 +3773,8 @@ packages:
     engines: {node: '>=20.19 <22 || >=22.12'}
     hasBin: true
 
-  '@sanity/functions@1.6.1':
-    resolution: {integrity: sha512-oTNvh0r7sQKKrtoGeBQ+Q6vN9Fz713jf177gyKDFBQVoI/OCMEbJYu+GFzfzoOuqEjXFY/WiGJaEv2iVLsULSQ==}
+  '@sanity/functions@1.6.2':
+    resolution: {integrity: sha512-G5MacqeHKrQAEhXW9OH56IxnCbjU/QRu2jCA4cyMMVthXQRxQAQD3AOKiNPpcybEw2FrgBxRvZQINeww/nY68Q==}
     engines: {node: '>=22'}
     peerDependencies:
       '@aws-lite/client': ^0.23.6
@@ -11652,7 +11652,7 @@ snapshots:
       - react-native-b4a
       - supports-color
 
-  '@sanity/functions@1.6.1(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)':
+  '@sanity/functions@1.6.2(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)':
     dependencies:
       '@aws-lite/client': 0.23.7
       '@aws-lite/dynamodb': 0.3.9
