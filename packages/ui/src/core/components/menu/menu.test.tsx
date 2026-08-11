@@ -4,6 +4,7 @@ import React, {act, Activity, useCallback, useMemo} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
+import {LayerProvider} from '../../utils/layer/layerProvider'
 import {Menu} from './menu'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {useMenu} from './useMenu'
@@ -13,9 +14,11 @@ describe('components/menu', () => {
     const unregisterElement = vi.fn()
     const registerElement = vi.fn(() => unregisterElement)
     const renderMenu = (mode: 'hidden' | 'visible') => (
-      <Activity mode={mode}>
-        <Menu registerElement={registerElement}>Item</Menu>
-      </Activity>
+      <LayerProvider>
+        <Activity mode={mode}>
+          <Menu registerElement={registerElement}>Item</Menu>
+        </Activity>
+      </LayerProvider>
     )
     const {rerender, unmount} = render(renderMenu('visible'))
 
