@@ -9,15 +9,14 @@ the Figma plugins in `packages/figma` (Sanity UI theme tokens) and
 `packages/figma-color` (the raw `@sanity/color` palette), the Storybook app in
 `apps/storybook`, the
 sanity.io/ui docs site (a Next.js app with an embedded Sanity Studio) in
-`apps/docs`, the icons.sanity.dev icon showcase (a Vite SPA) in `apps/icons`,
-and a Sanity Blueprint (serverless functions for the docs site)
-in `apps/blueprints/docs` (`pnpm-workspace.yaml`).
+`apps/docs`, and the icons.sanity.dev icon showcase (a Vite SPA) in
+`apps/icons` (`pnpm-workspace.yaml`).
 
 `@sanity/color`, `@sanity/icons`, and `@sanity/logos` are published from
 `main` and installed from npm on this branch (via the pnpm `catalog:` pins in
-`pnpm-workspace.yaml`). `@sanity/themer` is also published from `main` and is
-not used on this branch. Do not reintroduce those packages as workspace
-packages here.
+`pnpm-workspace.yaml`). `@sanity/themer` and the docs Sanity Blueprint
+(`apps/blueprints/docs`) also live on `main` and are not present on this
+branch. Do not reintroduce those packages/apps as workspace packages here.
 
 The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
@@ -102,17 +101,12 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   (`experimental.turbopackRustReactCompiler`). To make that work,
   `packages/ui` is `"type": "module"` and `apps/docs` omits the package.json
   `type` field: an explicit `"type": "commonjs"` makes Turbopack refuse the
-  ESM-syntax TypeScript source that the dev `exports` resolve to. On-demand revalidation flows from
-  the Live Content API through the `invalidate-sync-tags` Sanity Function
-  (defined in `apps/blueprints/docs`) to `POST /ui/api/expire-tags`, which
-  calls `revalidateTag('sanity:<tag>', 'max')`; the route is guarded by the
+  ESM-syntax TypeScript source that the dev `exports` resolve to. On-demand
+  revalidation flows from the Live Content API through the
+  `invalidate-sync-tags` Sanity Function (deployed from `main`'s
+  `apps/blueprints/docs`) to `POST /ui/api/expire-tags`, which calls
+  `revalidateTag('sanity:<tag>', 'max')`; the route is guarded by the
   `EXPIRE_TAGS_SECRET` env var.
-- `apps/blueprints/docs` is deployed by
-  `.github/workflows/sanity-blueprint-docs.yml` via `@sanity/runtime-cli`
-  (`blueprints doctor`/`plan` on PRs, `blueprints deploy` on pushes to
-  `main`). It needs the `SANITY_UI_DOCS_AUTH_TOKEN` repo secret and the
-  stack id in the workflow's `SANITY_BLUEPRINT_STACK_ID` env (created by the
-  first manual deploy; see `apps/blueprints/docs/README.md`).
 - `pnpm dev:docs` runs the docs app: Next.js on http://localhost:3000 (the
   site is served under the `/ui` base path, so open http://localhost:3000/ui)
   and the Sanity Studio dev server on http://localhost:3333. The Next.js app

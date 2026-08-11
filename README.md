@@ -2,8 +2,8 @@
 
 pnpm workspace for Sanity’s design-system packages and related apps.
 
-Published packages live under `packages/`. Docs, Storybook, the icon showcase,
-and serverless functions live under `apps/`.
+Published packages live under `packages/`. Docs, Storybook, and the icon
+showcase live under `apps/`.
 
 This is the `v3` maintenance branch for `@sanity/ui` `3.x`. `@sanity/color`,
 `@sanity/icons`, and `@sanity/logos` are published from
@@ -22,10 +22,9 @@ This is the `v3` maintenance branch for `@sanity/ui` `3.x`. `@sanity/color`,
 
 | App                                            | Description                                                                    |
 | ---------------------------------------------- | ------------------------------------------------------------------------------ |
-| [`apps/storybook`](apps/storybook)             | Component Storybook ([localhost:6006](http://localhost:6006) via `pnpm dev`)   |
-| [`apps/docs`](apps/docs)                       | [sanity.io/ui](https://www.sanity.io/ui) docs site (Next.js + embedded Studio) |
-| [`apps/icons`](apps/icons)                     | [icons.sanity.dev](https://icons.sanity.dev) searchable icon catalog           |
-| [`apps/blueprints/docs`](apps/blueprints/docs) | Sanity Blueprint (serverless functions for the docs site)                      |
+| [`apps/storybook`](apps/storybook) | Component Storybook ([localhost:6006](http://localhost:6006) via `pnpm dev`)   |
+| [`apps/docs`](apps/docs)           | [sanity.io/ui](https://www.sanity.io/ui) docs site (Next.js + embedded Studio) |
+| [`apps/icons`](apps/icons)         | [icons.sanity.dev](https://icons.sanity.dev) searchable icon catalog           |
 
 ## Requirements
 

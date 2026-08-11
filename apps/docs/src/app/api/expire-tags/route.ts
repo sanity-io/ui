@@ -5,8 +5,8 @@ const expireTagsSecret = process.env.EXPIRE_TAGS_SECRET
 
 /**
  * Called by the `invalidate-sync-tags` Sanity Function (deployed from
- * `apps/blueprints/docs`) whenever content changes, with the sync tags that
- * the Live Content API reported as expired.
+ * `main`'s `apps/blueprints/docs`) whenever content changes, with the sync
+ * tags that the Live Content API reported as expired.
  */
 export async function POST(request: NextRequest) {
   const url = new URL(request.url)
