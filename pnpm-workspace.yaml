@@ -69,6 +69,7 @@ minimumReleaseAgeExclude:
   - lightningcss-*
   - next
   - next-sanity
+  - groq@6.9.2
   - publint
   - sanity
   - tsdown
