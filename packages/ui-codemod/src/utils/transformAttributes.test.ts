@@ -290,7 +290,7 @@ defineInlineTest(
   transform,
   {},
   `
-  <div flex="1" />
+  <div flex={1} />
   `,
   `
   <div flexGrow={1} />
@@ -314,7 +314,7 @@ defineInlineTest(
   transform,
   {},
   `
-  <div flex={["2", "none"]} />
+  <div flex={[2, "none"]} />
   `,
   `
   <div
