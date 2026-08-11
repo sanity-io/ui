@@ -1,5 +1,7 @@
 /** @vitest-environment jsdom */
 
+// oxlint-disable-next-line no-unassigned-import
+import '../../../../test/mocks/matchMedia.mock'
 import React, {act, Activity, useCallback, useMemo} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
