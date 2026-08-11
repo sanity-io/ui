@@ -71,8 +71,8 @@
   "scripts": {
     "build": "tsdown",
     "clean": "rimraf dist",
-    "prepare": "pnpm build",
     "prepack": "pnpm build",
+    "prepare": "pnpm build",
     "test": "vitest run",
     "test:watch": "vitest",
     "watch": "tsdown --watch"
