@@ -10,7 +10,7 @@ overrides:
   '@types/react-is': ^19.2.0
   react: ^19.2.7
   react-dom: ^19.2.7
-  react-is: ^19.2.7
+  react-is: ^19.2.8
   styled-components: npm:@sanity/styled-components@6.1.23
 
 importers:
@@ -105,8 +105,8 @@ importers:
         specifier: ^19.2.7
         version: 19.2.7(react@19.2.7)
       react-is:
-        specifier: ^19.2.7
-        version: 19.2.7
+        specifier: ^19.2.8
+        version: 19.2.8
       react-refractor:
         specifier: ^2.2.0
         version: 2.2.0(react@19.2.7)
@@ -238,8 +238,8 @@ importers:
         specifier: ^19.2.7
         version: 19.2.7(react@19.2.7)
       react-is:
-        specifier: ^19.2.7
-        version: 19.2.7
+        specifier: ^19.2.8
+        version: 19.2.8
       refractor:
         specifier: ^4.9.0
         version: 4.9.0
@@ -4009,8 +4009,8 @@ packages:
     peerDependencies:
       react: ^19.2.7
 
-  react-is@19.2.7:
-    resolution: {integrity: sha512-kZFnouyVv7eP/Phmrlo9FK+zcAdriZJvzxXHF1Sl1P377WSGe2G/JxVolhTrB/jeV47lKImhNUsijjHAAbcl/A==}
+  react-is@19.2.8:
+    resolution: {integrity: sha512-s5un28nYxKJw5gvUHyW5PCC28CvBqLu9r3cWgzHT4Vo/5fqqkFcdRYsGcKf50WMPpjjFZS5d76fn3YCo2njKwQ==}
 
   react-refractor@2.2.0:
     resolution: {integrity: sha512-UvWkBVqH/2b9nkkkt4UNFtU3aY1orQfd4plPjx5rxbefy6vGajNHU9n+tv8CbykFyVirr3vEBfN2JTxyK0d36g==}
@@ -8388,7 +8388,7 @@ snapshots:
     dependencies:
       ansi-regex: 5.0.1
       ansi-styles: 5.2.0
-      react-is: 19.2.7
+      react-is: 19.2.8
 
   prismjs@1.27.0: {}
 
@@ -8460,7 +8460,7 @@ snapshots:
       react: 19.2.7
       scheduler: 0.27.0
 
-  react-is@19.2.7: {}
+  react-is@19.2.8: {}
 
   react-refractor@2.2.0(react@19.2.7):
     dependencies:
