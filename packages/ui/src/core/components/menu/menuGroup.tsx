@@ -2,6 +2,7 @@ import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
 import {isValidElement, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 
+import {useConnectedRef} from '../../hooks/useConnectedRef'
 import {Selectable} from '../../primitives/_selectable/selectable'
 import {Box} from '../../primitives/box/box'
 import {Flex} from '../../primitives/flex/flex'
@@ -82,6 +83,7 @@ const MenuGroupComponent = function MenuGroup(
   } = menu
   const onItemMouseEnter = _onItemMouseEnter ?? menu.onItemMouseEnter
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
+  const rootElementRef = useConnectedRef(setRootElement)
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
@@ -201,7 +203,7 @@ const MenuGroupComponent = function MenuGroup(
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}
-        ref={setRootElement}
+        ref={rootElementRef}
         tabIndex={-1}
         type={as === 'button' ? 'button' : undefined}
       >

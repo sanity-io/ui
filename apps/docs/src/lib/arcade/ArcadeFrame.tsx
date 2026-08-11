@@ -22,6 +22,9 @@ export function ArcadeFrame({
   const [frame, setFrame] = useState<HTMLIFrameElement | null>(null)
   const [ready, setReady] = useState(false)
   const msgQueueRef = useRef<any[]>([])
+  const handleFrameRef = useCallback((element: HTMLIFrameElement | null) => {
+    if (element) setFrame(element)
+  }, [])
 
   // Handle messages from frame
   useEffect(() => {
@@ -73,5 +76,5 @@ export function ArcadeFrame({
     [hookCode, jsxCode, postMessage],
   )
 
-  return <Root ref={setFrame} src={`${basePath}/arcade/frame`} />
+  return <Root ref={handleFrameRef} src={`${basePath}/arcade/frame`} />
 }

@@ -23,6 +23,7 @@ import {
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_raf} from '../../helpers/animation'
 import {_hasFocus, focusFirstDescendant} from '../../helpers/focus'
+import {useConnectedRef} from '../../hooks/useConnectedRef'
 import {Box, BoxProps} from '../../primitives/box/box'
 import {Button} from '../../primitives/button/button'
 import {Card} from '../../primitives/card/card'
@@ -202,9 +203,10 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
    * This doesn't happen on React 19 due to automatic batching of all state updates, the startTransition wrapper here gives a type of batching for 18 users in a way that still works with 19.
    * NOTE: The startTransition wrapper is not needed in UI v4, since the baseline there is React 19.
    */
-  const setInputElement = useCallback((node: HTMLInputElement | null) => {
+  const handleInputElementChange = useCallback((node: HTMLInputElement | null) => {
     startTransition(() => _setInputElement(node))
   }, [])
+  const setInputElement = useConnectedRef(handleInputElementChange)
 
   // Value refs
   const listFocusedRef = useRef(false)

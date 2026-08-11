@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react'
 
+import {useConnectedRef} from '../../hooks/useConnectedRef'
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
 import {MenuProps} from './menu'
 
@@ -72,6 +73,7 @@ export function MenuButton(props: MenuButtonProps) {
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
+  const buttonElementRef = useConnectedRef(setButtonElement)
   const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
   const openRef = useRef<boolean>(open)
 
@@ -214,10 +216,18 @@ export function MenuButton(props: MenuButtonProps) {
         'onMouseDown': handleMouseDown,
         'aria-haspopup': true,
         'aria-expanded': open,
-        'ref': setButtonElement,
+        'ref': buttonElementRef,
         'selected': buttonProp.props.selected ?? open,
       }),
-    [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open],
+    [
+      buttonElementRef,
+      buttonProp,
+      handleButtonClick,
+      handleButtonKeyDown,
+      handleMouseDown,
+      id,
+      open,
+    ],
   )
 
   // Forward button ref to parent
