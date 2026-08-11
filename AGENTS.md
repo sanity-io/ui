@@ -4,26 +4,22 @@
 
 This is the `v3` maintenance branch of the `@sanity/ui` React component
 library, structured as a pnpm monorepo:
-the published `@sanity/ui` package lives in `packages/ui`, the published
-`@sanity/icons` icon library in `packages/icons`, the published
-`@sanity/color` package (the Sanity color palette, migrated from the
-sanity-io/color repo with full git history) in `packages/color`, the published
-`@sanity/logos` package (Sanity/GROQ logo components, migrated from the
-standalone `sanity-io/logos` repo with full git history) in `packages/logos`,
-the published `@sanity/themer` package (a root `buildTheme` export that
-generates a Studio theme from a few colors by replacing the `@sanity/color`
-palette that `buildTheme` from `@sanity/ui/theme` uses, a `/legacy` subpath
-that replicates the hosted themer.sanity.build `/api/hues` module
-byte-for-byte for migration, and a `/tool` subpath with the `themerTool`
-Studio plugin that edits and previews the root `buildTheme` themes) in
-`packages/themer`,
+the published `@sanity/ui` package lives in `packages/ui`,
 the Figma plugins in `packages/figma` (Sanity UI theme tokens) and
 `packages/figma-color` (the raw `@sanity/color` palette), the Storybook app in
 `apps/storybook`, the
 sanity.io/ui docs site (a Next.js app with an embedded Sanity Studio) in
 `apps/docs`, the icons.sanity.dev icon showcase (a Vite SPA) in `apps/icons`,
 and a Sanity Blueprint (serverless functions for the docs site)
-in `apps/blueprints/docs` (`pnpm-workspace.yaml`). The root `package.json` is a private
+in `apps/blueprints/docs` (`pnpm-workspace.yaml`).
+
+`@sanity/color`, `@sanity/icons`, `@sanity/logos`, and `@sanity/themer` are
+published from `main` and installed from npm on this branch (via the pnpm
+`catalog:` pins in `pnpm-workspace.yaml`, except `@sanity/themer` which is
+pinned to `0.3.1` in `apps/docs` — later 0.3.x releases depend on `@sanity/ui`
+v4). Do not reintroduce those packages as workspace packages here.
+
+The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
 (`packageManager` pin in `package.json`); developing in this repo requires Node
 `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
@@ -51,51 +47,30 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `ignoreDependencies` entry that no longer matches anything) also fails the
   run.
 - Packages are built with [tsdown](https://tsdown.dev) via
-  `@sanity/tsdown-config` (`tsdown.config.mts` in every package except
-  `packages/icons`, which uses a plain `tsdown.config.ts` — a bare `.ts`
-  config only imports on the Node version in CI when the package is
-  `"type": "module"`, while `.mts` always works). The build regenerates
-  package.json `exports`
-  (dev exports): in the monorepo, `@sanity/ui`, `@sanity/ui/theme`,
-  `@sanity/icons` (incl. its per-icon subpaths) and `@sanity/color` resolve
-  directly to TypeScript source for every tool (tsc, oxlint's type checker,
-  vitest, vite), so there are no tsconfig `paths`, no `customConditions`, and
-  no vite aliases. The publishable `exports` (dist `import`/`require`) live
-  under `publishConfig` and are applied by `pnpm pack`/`publish`; npm access
-  comes from the Changesets config (`access: public`), so packages don't set
-  `publishConfig.access`. All published packages are `"type": "module"`: dist
-  ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
-  (`@sanity/icons` and `@sanity/themer` ship ESM only).
-- `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
-  `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
-  `@sanity/ui` resolves to the `packages/ui/exports/` source (and
-  `@sanity/color` to `packages/color/src`) through the dev `exports`, so unit
-  tests run directly against source and do not require a `pnpm build` first.
-- `packages/color/src/color.ts` is generated from `packages/color/src/config.ts`:
-  regenerate it with `pnpm --filter @sanity/color generate` after changing the
-  palette config; never edit it by hand.
+  `@sanity/tsdown-config` (`tsdown.config.mts` in every package). The build
+  regenerates package.json `exports` (dev exports): in the monorepo,
+  `@sanity/ui` and `@sanity/ui/theme` resolve directly to TypeScript source for
+  every tool (tsc, oxlint's type checker, vitest, vite), so there are no
+  tsconfig `paths`, no `customConditions`, and no vite aliases. The publishable
+  `exports` (dist `import`/`require`) live under `publishConfig` and are
+  applied by `pnpm pack`/`publish`; npm access comes from the Changesets config
+  (`access: public`), so packages don't set `publishConfig.access`. Published
+  packages are `"type": "module"`: dist ESM builds use `.js`/`.d.ts` and dist
+  CJS builds `.cjs`/`.d.cts`.
+- `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`).
+  `@sanity/ui` resolves to the `packages/ui/exports/` source through the dev
+  `exports`, so unit tests run directly against source and do not require a
+  `pnpm build` first.
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. It
   resolves `@sanity/ui` to the `packages/ui/exports/` source through the dev
   `exports`, so it hot-reloads source edits directly (no rebuild needed).
-- `packages/icons` (migrated from the standalone `sanity-io/icons` repo)
-  generates its icon components from the SVG sources in
-  `packages/icons/export/`: `pnpm --filter @sanity/icons generate` (also run
-  via `prebuild`) deletes and regenerates `src/exports/*`, `src/icons.ts` and
-  `src/deprecations.ts`. These generated files are committed — edit the SVGs
-  or `scripts/generate.ts` instead of the generated output.
 - `pnpm dev:icons` starts the icons.sanity.dev showcase (`apps/icons`) on
   http://localhost:5173. Its icon search queries `icon` documents in the docs
   Sanity project (`mos42crl`, dataset `production`; override with
   `VITE_SANITY_API_PROJECT_ID`/`VITE_SANITY_API_DATASET`) and falls back to
   local substring filtering when the remote query fails (e.g. embeddings not
-  enabled, or CORS). The icon documents are (re)seeded with
-  `pnpm --filter @sanity/icons seed:icons` (needs `SANITY_API_WRITE_TOKEN` or
-  `SANITY_AUTH_TOKEN`; `SANITY_API_PROJECT_ID`/`SANITY_API_DATASET` override
-  the `mos42crl`/`production` defaults), which uploads rasterized previews
-  and clears `description`/`tags` of changed icons so the `enrich-icon`
-  Sanity Function (`apps/blueprints/docs`) re-enriches them via Agent
-  Actions (this requires the docs studio schema to be deployed:
-  `pnpm --filter sanity-ui-docs schema:deploy`).
+  enabled, or CORS). Icon documents are seeded from `main` (where
+  `@sanity/icons` still lives) via `pnpm --filter @sanity/icons seed:icons`.
 - `pnpm test:browser` runs the Storybook tests (`apps/storybook`): vitest
   renders every story in headless Chromium via `@storybook/addon-vitest` and
   executes story `play` interactions, plus the browser tests in
@@ -105,7 +80,7 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   Stories opt out of being tested with the `!test` tag.
 - Releases are managed with Changesets: run `pnpm changeset` to add a changeset
   to a PR that should trigger a release. Merging to `v3` opens/updates a
-  "Version Packages" PR, and merging that publishes to npm under the
+  "Version Packages" PR, and merging that publishes `@sanity/ui` to npm under the
   `release-v3` dist-tag (the `latest` dist-tag belongs to the `main`
   branch).
 - `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo. It is
@@ -114,7 +89,7 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   formatted by the root oxfmt config (`pnpm format`) like the rest of the
   repo. It depends on the workspace `@sanity/ui` (`workspace:*`), which
   resolves to the TypeScript source through the dev `exports`, so Next.js
-  transpiles it via `transpilePackages` in `apps/docs/next.config.mjs`. It is
+  transpiles it via `transpilePackages` in `apps/docs/next.config.ts`. It is
   deployed via Vercel, not released through Changesets.
 - `apps/docs` runs `next@preview` with `cacheComponents: true` and fetches
   content with `next-sanity`'s `defineLive`/`sanityFetch` (Sanity Live) plus

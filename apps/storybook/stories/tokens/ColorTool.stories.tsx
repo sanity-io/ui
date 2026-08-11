@@ -9,9 +9,9 @@ import {ColorTool} from './color-tool/ColorTool'
  *
  * Click a hue strip to expand its tint sliders, then drag the H (red), S
  * (green) and L (blue) handles — or type a hex value — to adjust each tint.
- * Enable `showCode` to get a `packages/color/src/config.ts` snippet of the
- * edited palette, ready to paste into the package (regenerate `src/color.ts`
- * with `pnpm --filter @sanity/color generate` afterwards).
+ * Enable `showCode` to get an `@sanity/color` `src/config.ts` snippet of the
+ * edited palette, ready to paste into that package on `main` (regenerate
+ * `src/color.ts` with `pnpm --filter @sanity/color generate` afterwards).
  */
 const meta: Meta<typeof ColorTool> = {
   argTypes: {

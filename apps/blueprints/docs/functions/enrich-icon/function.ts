@@ -1,7 +1,7 @@
 import {defineDocumentFunction} from '@sanity/blueprints'
 
 // The dataset operated by https://www.sanity.io/ui, where
-// packages/icons/scripts/seed-icons-dataset.ts seeds the icon documents
+// `@sanity/icons` `seed:icons` (on `main`) seeds the icon documents
 export const enrichIconFunction = defineDocumentFunction({
   name: 'enrich-icon',
   src: 'functions/enrich-icon',

@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.132.0",
-    "@sanity/color": "workspace:*",
+    "@sanity/color": "catalog:",
     "@sanity/tsdown-config": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",

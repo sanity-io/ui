@@ -38,7 +38,7 @@ const prodStudio = defineConfig({
     }),
     visionTool(),
     // Browse the uploaded image assets, e.g. the rasterized icon previews
-    // that `packages/icons/scripts/seed-icons-dataset.ts` uploads.
+    // that `@sanity/icons` `seed:icons` (on `main`) uploads.
     media(),
     themerTool(),
   ],
