@@ -71,6 +71,7 @@ minimumReleaseAgeExclude:
   - next-sanity
   - publint
   - sanity
+  - sanity-plugin-media@6.1.3
   - tsdown
   - verkit
   - framer-motion@13.0.0
