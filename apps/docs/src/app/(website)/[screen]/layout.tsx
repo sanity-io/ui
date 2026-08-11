@@ -1,16 +1,16 @@
 import {draftMode} from 'next/headers'
-import {Suspense} from 'react'
 
 import {GLOBAL_QUERY} from '#lib/data/_global/query.ts'
 import type {NavData} from '#lib/data/_global/types.ts'
 import {parseNav} from '#lib/nav/parseNav.ts'
+import type {NavNode} from '#lib/nav/types.ts'
 import {screensQuery, type ScreensQueryParams} from '#lib/sanity/queries.ts'
 import {primaryNavId} from '@/constants'
 import {
+  cachedSanity,
+  cachedSanityStaticParams,
   DynamicFetchOptions,
   getDynamicFetchOptions,
-  sanityFetch,
-  sanityFetchStaticParams,
 } from '@/lib/sanity/live'
 
 import {ArticleLayout} from './layout.client'
@@ -20,7 +20,7 @@ import {ArticleLayout} from './layout.client'
 // frame immediately and streams only the article body and the nav branch the
 // URL selects.
 export async function generateStaticParams() {
-  const {data} = await sanityFetchStaticParams({
+  const {data} = await cachedSanityStaticParams({
     query: screensQuery,
     params: {id: primaryNavId} satisfies ScreensQueryParams,
   })
@@ -30,37 +30,23 @@ export async function generateStaticParams() {
 
 export default async function ScreenLayout({children}: LayoutProps<'/[screen]'>) {
   const {isEnabled: isDraftMode} = await draftMode()
-  if (!isDraftMode) {
-    return (
-      <CachedScreenLayout perspective="published" stega={false}>
-        {children}
-      </CachedScreenLayout>
-    )
-  }
-  return (
-    <Suspense>
-      <DynamicScreenLayout>{children}</DynamicScreenLayout>
-    </Suspense>
-  )
+
+  // Deliberately not awaited. The nav is handed to the client as a promise and
+  // unwrapped inside the boundaries that render it, so `children` streams
+  // independently instead of waiting on this fetch.
+  const nav = isDraftMode ? fetchNav() : fetchNav({perspective: 'published', stega: false})
+
+  return <ArticleLayout nav={nav}>{children}</ArticleLayout>
 }
 
-async function DynamicScreenLayout({children}: Pick<LayoutProps<'/[screen]'>, 'children'>) {
-  const {perspective, stega} = await getDynamicFetchOptions()
-  return (
-    <CachedScreenLayout perspective={perspective} stega={stega}>
-      {children}
-    </CachedScreenLayout>
-  )
-}
-
-async function CachedScreenLayout({
-  perspective,
-  stega,
-  children,
-}: DynamicFetchOptions & {children: React.ReactNode}) {
-  'use cache'
-
-  const {data: global} = await sanityFetch({
+/**
+ * The whole nav goes to the client, which picks the current screen's branch
+ * from the pathname. Reading the `screen` param here instead would put URL
+ * data in the shell and make every navigation wait for the server.
+ */
+async function fetchNav(options?: DynamicFetchOptions): Promise<NavNode | null> {
+  const {perspective, stega} = options ?? (await getDynamicFetchOptions())
+  const {data: global} = await cachedSanity({
     query: GLOBAL_QUERY,
     params: {id: primaryNavId},
     perspective,
@@ -68,9 +54,5 @@ async function CachedScreenLayout({
   })
 
   const navData = (global?.nav ?? null) as NavData | null | undefined
-
-  // The whole nav goes to the client, which picks the current screen's branch
-  // from the pathname. Reading the `screen` param here instead would put URL
-  // data in the shell and make every navigation wait for the server.
-  return <ArticleLayout nav={navData ? parseNav(navData, []) : null}>{children}</ArticleLayout>
+  return navData ? parseNav(navData, []) : null
 }

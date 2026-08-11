@@ -8,7 +8,7 @@ import {Breadcrumbs} from '@sanity/ui/breadcrumbs'
 import {getTheme_v2} from '@sanity/ui/theme'
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
-import {Suspense, useState} from 'react'
+import {Suspense, use, useState} from 'react'
 import {styled} from 'styled-components'
 
 import type {NavNode} from '#lib/nav/types.ts'
@@ -64,7 +64,7 @@ export function ArticleLayout({
   nav: root,
 }: {
   children: React.ReactNode
-  nav: NavNode | null
+  nav: Promise<NavNode | null>
 }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -92,18 +92,18 @@ export function ArticleLayout({
  * that have no entries of their own (the arcade) — the same branch this used
  * to take from the screen document's type.
  */
-function useSectionNav(root: NavNode | null) {
+function useSectionNav(root: Promise<NavNode | null>) {
   // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs
   const path = usePathname().split('/').filter(Boolean)
   const screen = path[0]
-  const section = root?.children?.find((item) => item.segment === screen)
+  const section = use(root)?.children?.find((item) => item.segment === screen)
   return {
     nav: section?.children?.length ? section : undefined,
     path,
   }
 }
 
-function SidebarNav({root}: {root: NavNode | null}) {
+function SidebarNav({root}: {root: Promise<NavNode | null>}) {
   const {nav, path} = useSectionNav(root)
   if (!nav) return null
 
@@ -123,7 +123,7 @@ function BreadcrumbsNav({
 }: {
   menuOpen: boolean
   onToggleMenu: (update: (open: boolean) => boolean) => void
-  root: NavNode | null
+  root: Promise<NavNode | null>
 }) {
   const {nav, path} = useSectionNav(root)
   if (!nav) return null
