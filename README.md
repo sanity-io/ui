@@ -20,8 +20,8 @@ This is the `v3` maintenance branch for `@sanity/ui` `3.x`. `@sanity/color`,
 
 ## Apps
 
-| App                                            | Description                                                                    |
-| ---------------------------------------------- | ------------------------------------------------------------------------------ |
+| App                                | Description                                                                    |
+| ---------------------------------- | ------------------------------------------------------------------------------ |
 | [`apps/storybook`](apps/storybook) | Component Storybook ([localhost:6006](http://localhost:6006) via `pnpm dev`)   |
 | [`apps/docs`](apps/docs)           | [sanity.io/ui](https://www.sanity.io/ui) docs site (Next.js + embedded Studio) |
 | [`apps/icons`](apps/icons)         | [icons.sanity.dev](https://icons.sanity.dev) searchable icon catalog           |
