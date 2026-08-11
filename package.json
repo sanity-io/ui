@@ -29,7 +29,7 @@
     "eslint-plugin-storybook": "^10.5.7",
     "knip": "^6.32.1",
     "oxfmt": "^0.63.0",
-    "oxlint": "^1.77.0",
+    "oxlint": "^1.78.0",
     "oxlint-tsgolint": "^7.0.2001",
     "typescript": "catalog:"
   },
