@@ -73,7 +73,7 @@ export function MenuButton(props: MenuButtonProps) {
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
-  const buttonElementRef = useConnectedRef(setButtonElement)
+  const buttonElementRef = useConnectedRef<HTMLButtonElement>(setButtonElement)
   const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
   const openRef = useRef<boolean>(open)
 

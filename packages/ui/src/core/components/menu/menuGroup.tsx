@@ -83,7 +83,7 @@ const MenuGroupComponent = function MenuGroup(
   } = menu
   const onItemMouseEnter = _onItemMouseEnter ?? menu.onItemMouseEnter
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
-  const rootElementRef = useConnectedRef(setRootElement)
+  const rootElementRef = useConnectedRef<HTMLButtonElement | HTMLDivElement>(setRootElement)
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement

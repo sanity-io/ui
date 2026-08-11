@@ -26,7 +26,7 @@ export function ElementQuery(
   const media = _media ?? theme.media
 
   const [element, setElement] = useState<HTMLDivElement | null>(null)
-  const elementRef = useConnectedRef(setElement)
+  const elementRef = useConnectedRef<HTMLDivElement>(setElement)
   const elementSize = useElementSize(element)
   const width = useMemo(() => elementSize?.border.width ?? window.innerWidth, [elementSize])
 

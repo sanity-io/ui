@@ -286,7 +286,11 @@ export function Popover(
         }
       : undefined,
   })
-  const referenceRef = useConnectedRef(refs.setReference)
+  const handleReferenceChange = useCallback(
+    (node: Element | null) => refs.setReference(node),
+    [refs],
+  )
+  const referenceRef = useConnectedRef(handleReferenceChange)
 
   const referenceHidden = middlewareData.hide?.referenceHidden
 

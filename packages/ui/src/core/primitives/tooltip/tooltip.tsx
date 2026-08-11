@@ -132,7 +132,7 @@ export function Tooltip(
   const fallbackPlacements = _getArrayProp(fallbackPlacementsProp)
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
-  const referenceElementRef = useConnectedRef(setReferenceElement)
+  const referenceElementRef = useConnectedRef<HTMLElement>(setReferenceElement)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
   const [tooltipMaxWidth, setTooltipMaxWidth] = useState(0)
