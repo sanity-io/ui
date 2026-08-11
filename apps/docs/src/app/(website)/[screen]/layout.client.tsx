@@ -69,17 +69,21 @@ export function ArticleLayout({
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <Card flex={1} style={{minHeight: 'auto'}}>
+    <Card flex={1} style={{display: 'flex', flexDirection: 'column', minHeight: 'auto'}}>
       <Suspense>
         <BreadcrumbsNav menuOpen={menuOpen} onToggleMenu={setMenuOpen} root={root} />
       </Suspense>
 
-      <Flex height="fill" hidden={menuOpen}>
+      <Flex flex={1} hidden={menuOpen} style={{minHeight: 'auto'}}>
         <Suspense>
           <SidebarNav root={root} />
         </Suspense>
 
-        <Box flex={3} height="fill" style={{display: 'flex', minHeight: 'auto'}}>
+        <Box
+          flex={3}
+          height="fill"
+          style={{display: 'flex', flexDirection: 'column', minHeight: 'auto'}}
+        >
           {children}
         </Box>
       </Flex>
