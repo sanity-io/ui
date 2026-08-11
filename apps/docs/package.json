@@ -12,6 +12,8 @@
   "scripts": {
     "build": "pnpm sanity:build && pnpm next:build",
     "dev": "pnpm run \"/:dev$/\"",
+    "e2e": "playwright test",
+    "e2e:build": "EXPOSE_TESTING_API=1 next build --turbopack",
     "embeddings:enable": "sanity datasets embeddings enable production --projection '{ filename, namedExport, tags, description }' --wait",
     "next:build": "next build --turbopack",
     "next:dev": "next dev --turbopack",
@@ -55,6 +57,8 @@
     "styled-components": "catalog:"
   },
   "devDependencies": {
+    "@next/playwright": "^16.3.0",
+    "@playwright/test": "^1.62.1",
     "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@types/babel__standalone": "^7.1.9",
     "@types/lodash-es": "^4.17.12",

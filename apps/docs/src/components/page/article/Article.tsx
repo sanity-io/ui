@@ -56,7 +56,14 @@ export function Article(props: {
         </Box>
       </TocBox>
 
-      <Box as="article" flex={3} paddingX={[4, 5, 6]} paddingY={[5, 6]} style={{order: 1}}>
+      <Box
+        as="article"
+        data-testid="article-content"
+        flex={3}
+        paddingX={[4, 5, 6]}
+        paddingY={[5, 6]}
+        style={{order: 1}}
+      >
         <Container width={article.layout?.wide ? 2 : 1}>
           <Box marginBottom={[5, 5, 5, 6]}>
             <Heading as="h1" size={[2, 2, 3, 4, 5]}>
