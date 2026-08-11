@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "baseBranchPatterns": ["v2", "v3", "$default", "next"],
+  "baseBranchPatterns": ["v2", "v3", "$default"],
   "extends": ["github>sanity-io/renovate-config"],
   "ignorePresets": ["github>sanity-io/renovate-config:group-non-major"],
   "packageRules": [
@@ -9,10 +9,38 @@
       "semanticCommitType": "fix",
       "rangeStrategy": "bump"
     },
-     {
+    {
       "description": "v2 and v3 branches only receives production dependency updates",
       "matchBaseBranches": ["v2", "v3"],
       "matchDepTypes": ["devDependencies"],
+      "enabled": false
+    },
+    {
+      "description": "v2 and v3 branches should skip selected dependencies",
+      "matchBaseBranches": ["v2", "v3"],
+      "matchPackageNames": [
+        "@sanity/styled-components",
+        "@types/react",
+        "@types/react-dom",
+        "react",
+        "react-dom",
+        "pnpm",
+        "pnpm/action-setup",
+        "pnpm/setup",
+        "@sanity/code-input",
+        "next-sanity",
+        "sanity-plugin-media",
+        "@sanity/vision",
+        "sanity",
+        "styled-components",
+        "actions/upload-artifact",
+        "@sanity/icons",
+        "renovatebot/github-action",
+        "@sanity/functions",
+        "@sanity/tsdown-config",
+        "next",
+        "@babel/standalone"
+      ],
       "enabled": false
     },
     {
@@ -44,6 +72,12 @@
       "matchPackageNames": ["npm-run-all2", "vite"],
       "matchBaseBranches": ["v2"],
       "allowedVersions": "<=5"
+    },
+    {
+      "description": "v2 cannot bump motion to v13",
+      "matchPackageNames": ["motion"],
+      "matchBaseBranches": ["v2"],
+      "allowedVersions": "<13"
     },
     {
       "description": "v4 is upgrading storybook, do not update it elsewhere",

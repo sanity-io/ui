@@ -82,7 +82,7 @@
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
     "csstype": "^3.2.3",
-    "motion": "^13.0.0",
+    "motion": "^13.1.0",
     "react-is": "catalog:",
     "react-refractor": "catalog:",
     "use-effect-event": "^2.0.3"

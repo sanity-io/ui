@@ -67,6 +67,7 @@ minimumReleaseAgeExclude:
   - groq@6.9.2
   - publint
   - sanity
+  - sanity-plugin-media@6.1.3
   - tsdown
   - verkit
   - framer-motion@13.0.0
