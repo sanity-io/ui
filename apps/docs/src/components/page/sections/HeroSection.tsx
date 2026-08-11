@@ -59,7 +59,13 @@ export function HeroSection(props: {
   const backgroundImageUrl = color._dark ? backgroundImage.dark : backgroundImage.light
 
   return (
-    <Root flex={1} paddingX={[3, 4, 5]} paddingY={[6, 7, 8]} style={{minHeight: 'auto'}}>
+    <Root
+      data-testid="hero-section"
+      flex={1}
+      paddingX={[3, 4, 5]}
+      paddingY={[6, 7, 8]}
+      style={{minHeight: 'auto'}}
+    >
       <BackgroundBox
         display={['none', 'none', 'block']}
         style={{
