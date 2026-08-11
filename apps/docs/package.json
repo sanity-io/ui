@@ -10,7 +10,7 @@
     "#context/*": "./src/context/*.tsx"
   },
   "scripts": {
-    "build": "pnpm --filter @sanity/ui... build && pnpm sanity:build && pnpm next:build",
+    "build": "pnpm sanity:build && pnpm next:build",
     "dev": "pnpm run \"/:dev$/\"",
     "embeddings:enable": "sanity datasets embeddings enable production --projection '{ filename, namedExport, tags, description }' --wait",
     "next:build": "next build --turbopack",
