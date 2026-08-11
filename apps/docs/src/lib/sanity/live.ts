@@ -15,6 +15,22 @@ export const {SanityLive, sanityFetch} = defineLive({
   strict: true,
 })
 
+/**
+ * The app's one shared `'use cache'` boundary. `sanityFetch` calls
+ * `cacheTag`/`cacheLife` internally but doesn't create the boundary, so this
+ * wrapper provides it once and callers don't add their own. `query`, `params`,
+ * `perspective` and `stega` are all serializable, so they key the cache entry:
+ * identical fetches from different components share one entry, and published
+ * and draft content never collide.
+ *
+ * Call `sanityFetch` directly only from a component that carries its own
+ * `'use cache'` because caching the rendered JSX is worth a second boundary.
+ */
+export const cachedSanity: typeof sanityFetch = async (options) => {
+  'use cache'
+  return sanityFetch(options)
+}
+
 export interface DynamicFetchOptions {
   perspective: LivePerspective
   stega: boolean
@@ -39,16 +55,16 @@ export async function getDynamicFetchOptions(): Promise<DynamicFetchOptions> {
 
 /**
  * For usage within `generateMetadata` and other metadata routes, where stega
- * is never wanted. Carries its own `'use cache'` boundary.
+ * is never wanted. `perspective` still has to be resolved, so a standalone
+ * preview window reflects the content release it is previewing.
  */
-export async function sanityFetchMetadata<const QueryString extends string>(options: {
+export async function cachedSanityMetadata<const QueryString extends string>(options: {
   query: QueryString
   params?: QueryParams
   perspective: LivePerspective
 }) {
-  'use cache'
   const {query, params = {}, perspective} = options
-  const {data} = await sanityFetch({query, params, perspective, stega: false})
+  const {data} = await cachedSanity({query, params, perspective, stega: false})
   return {data}
 }
 
@@ -56,12 +72,11 @@ export async function sanityFetchMetadata<const QueryString extends string>(opti
  * For usage within `generateStaticParams` only: `perspective` cookies aren't
  * available at build time and `stega` is never wanted in route params.
  */
-export async function sanityFetchStaticParams<const QueryString extends string>(options: {
+export async function cachedSanityStaticParams<const QueryString extends string>(options: {
   query: QueryString
   params?: QueryParams
 }) {
-  'use cache'
   const {query, params = {}} = options
-  const {data} = await sanityFetch({query, params, perspective: 'published', stega: false})
+  const {data} = await cachedSanity({query, params, perspective: 'published', stega: false})
   return {data}
 }

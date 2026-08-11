@@ -12,9 +12,9 @@ import {basePath, primaryNavId} from '@/constants'
 import {GLOBAL_QUERY} from '@/lib/data/_global/query'
 import {GlobalData} from '@/lib/data/_global/types'
 import {
+  cachedSanity,
   DynamicFetchOptions,
   getDynamicFetchOptions,
-  sanityFetch,
   SanityLive,
 } from '@/lib/sanity/live'
 
@@ -26,15 +26,17 @@ export default async function WebsiteLayout(props: PropsWithChildren) {
 
   return (
     <>
-      {isDraftMode ? (
-        <Suspense>
-          <DynamicGlobalData>{children}</DynamicGlobalData>
-        </Suspense>
-      ) : (
-        <CachedGlobalData perspective="published" stega={false}>
-          {children}
-        </CachedGlobalData>
-      )}
+      <Flex direction="column" height="fill">
+        {isDraftMode ? (
+          <Suspense fallback={<GlobalChromeFallback />}>
+            <DynamicGlobalChrome />
+          </Suspense>
+        ) : (
+          <CachedGlobalChrome perspective="published" stega={false} />
+        )}
+        {children}
+        <AppFooter />
+      </Flex>
       <SanityLive
         includeDrafts={isDraftMode}
         // In production the invalidate-sync-tags Sanity Function (deployed
@@ -65,20 +67,19 @@ export default async function WebsiteLayout(props: PropsWithChildren) {
   )
 }
 
-async function DynamicGlobalData(props: PropsWithChildren) {
+async function DynamicGlobalChrome() {
   const {perspective, stega} = await getDynamicFetchOptions()
 
-  return (
-    <CachedGlobalData perspective={perspective} stega={stega}>
-      {props.children}
-    </CachedGlobalData>
-  )
+  return <CachedGlobalChrome perspective={perspective} stega={stega} />
 }
 
-async function CachedGlobalData(props: PropsWithChildren<DynamicFetchOptions>) {
-  'use cache'
-  const {children, perspective, stega} = props
-  const {data} = await sanityFetch({
+/**
+ * Only the banner and navbar, never `children`: a cached component that wraps
+ * `children` would make the page wait on this fetch instead of streaming
+ * independently.
+ */
+async function CachedGlobalChrome({perspective, stega}: DynamicFetchOptions) {
+  const {data} = await cachedSanity({
     query: GLOBAL_QUERY,
     params: {id: primaryNavId},
     perspective,
@@ -88,13 +89,15 @@ async function CachedGlobalData(props: PropsWithChildren<DynamicFetchOptions>) {
   const nav = global?.nav ? parseNav(global.nav, []) : null
 
   return (
-    <Flex direction="column" height="fill">
+    <>
       <Banner settings={global?.settings ?? null} />
       <Suspense fallback={<Navbar nav={nav} />}>
         <NavbarWithActiveSegment nav={nav} />
       </Suspense>
-      {children}
-      <AppFooter />
-    </Flex>
+    </>
   )
+}
+
+function GlobalChromeFallback() {
+  return <Navbar nav={null} />
 }

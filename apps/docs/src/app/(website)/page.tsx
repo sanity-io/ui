@@ -24,6 +24,8 @@ async function DynamicRootPage() {
   return <CachedRootPage perspective={perspective} stega={stega} />
 }
 
+// Its own boundary rather than `cachedSanity`, so the rendered page tree is
+// cached alongside the data it comes from.
 async function CachedRootPage(props: DynamicFetchOptions) {
   'use cache'
   const {perspective, stega} = props
