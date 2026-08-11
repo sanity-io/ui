@@ -47,11 +47,10 @@ allowBuilds:
   unrs-resolver: true
 
 # Sanity-owned build tooling releases frequently; don't gate it on the
-# default minimum release age (1 day). Same for next's `preview` dist-tag
-# (apps/docs pins an exact preview version, so the exclusion only lifts the
-# age gate for versions we deliberately pick). tsdown and its lightningcss /
-# verkit / @tsdown/* / publint transitive deps are included for the same
-# reason when we deliberately bump the catalog to `latest`.
+# default minimum release age (1 day). Same for next, which apps/docs tracks
+# closely. tsdown and its lightningcss / verkit / @tsdown/* / publint
+# transitive deps are included for the same reason when we deliberately bump
+# the catalog to `latest`.
 # Version-pinned entries approve one specific release we deliberately picked
 # before it aged out of the gate; the lockfile is re-verified against these on
 # every install, so they have to stay until the version is a day old.
