@@ -114,7 +114,7 @@
   "peerDependencies": {
     "react": "^19.2",
     "react-dom": "^19.2",
-    "styled-components": "^5.2 || ^6"
+    "styled-components": "^6.1"
   },
   "engines": {
     "node": ">=22.12"
