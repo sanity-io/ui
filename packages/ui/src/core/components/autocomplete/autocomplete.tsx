@@ -27,7 +27,6 @@ import {Box, BoxProps} from '../../primitives/box/box'
 import {Button} from '../../primitives/button/button'
 import {Card} from '../../primitives/card/card'
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
-import {spinnerIcon} from '../../primitives/spinner/spinner.css'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
 import {TextInput} from '../../primitives/textInput/textInput'
@@ -42,6 +41,8 @@ import {
   AUTOCOMPLETE_POPOVER_PLACEMENT,
 } from './constants'
 import {AutocompleteOpenButtonProps, BaseAutocompleteOption} from './types'
+
+import {spinnerIcon} from '../../primitives/spinner/spinner.css'
 
 /**
  * @public
