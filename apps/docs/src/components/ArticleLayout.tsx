@@ -59,6 +59,7 @@ export function ArticleLayout({children, nav}: {children: React.ReactNode; nav?:
     <Card flex={1} style={{minHeight: 'auto'}}>
       {nav && (
         <BreadcrumbsNavCard
+          data-testid="article-breadcrumbs-nav"
           data-ui="BreadcrumbsNavCard"
           paddingX={[2, 2, 3, 4]}
           paddingY={2}
@@ -89,7 +90,7 @@ export function ArticleLayout({children, nav}: {children: React.ReactNode; nav?:
 
       <Flex hidden={menuOpen}>
         {nav && (
-          <NavCard flex={1} overflow="auto">
+          <NavCard data-testid="article-sidebar-nav" flex={1} overflow="auto">
             <Box padding={[2, 2, 3, 4]}>
               <Nav nav={nav} path={pathname} />
             </Box>
