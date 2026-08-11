@@ -28,7 +28,7 @@
     "@codemirror/lang-javascript": "^6.2.5",
     "@lezer/highlight": "^1.2.3",
     "@sanity/client": "catalog:",
-    "@sanity/code-input": "^7.3.3",
+    "@sanity/code-input": "^7.3.4",
     "@sanity/color": "workspace:*",
     "@sanity/icons": "workspace:*",
     "@sanity/image-url": "^2.1.1",
