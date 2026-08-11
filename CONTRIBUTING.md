@@ -9,9 +9,10 @@ docs site lives in [`apps/docs`](apps/docs), and the
 [icons.sanity.dev](https://icons.sanity.dev) icon showcase lives in
 [`apps/icons`](apps/icons).
 
-`@sanity/color`, `@sanity/icons`, `@sanity/logos`, and `@sanity/themer` are
-published from [`main`](https://github.com/sanity-io/ui/tree/main) and installed
-from npm on this branch.
+`@sanity/color`, `@sanity/icons`, and `@sanity/logos` are published from
+[`main`](https://github.com/sanity-io/ui/tree/main) and installed from npm on
+this branch. `@sanity/themer` is also published from `main` and is not used
+here.
 
 This branch receives bug fixes and dependency updates for the `3.x` release
 line, while new feature development happens on

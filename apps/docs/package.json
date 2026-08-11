@@ -33,7 +33,6 @@
     "@sanity/icons": "catalog:",
     "@sanity/image-url": "^2.1.1",
     "@sanity/logos": "catalog:",
-    "@sanity/themer": "0.3.1",
     "@sanity/ui": "workspace:*",
     "@sanity/vision": "^6.9.1",
     "@sindresorhus/slugify": "^2.2.1",

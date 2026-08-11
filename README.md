@@ -6,8 +6,9 @@ Published packages live under `packages/`. Docs, Storybook, the icon showcase,
 and serverless functions live under `apps/`.
 
 This is the `v3` maintenance branch for `@sanity/ui` `3.x`. `@sanity/color`,
-`@sanity/icons`, `@sanity/logos`, and `@sanity/themer` are published from
+`@sanity/icons`, and `@sanity/logos` are published from
 [`main`](https://github.com/sanity-io/ui/tree/main) and consumed here from npm.
+`@sanity/themer` is also published from `main` and is not used on this branch.
 
 ## Packages
 
@@ -49,8 +50,8 @@ pnpm dev:icons    # Icon showcase at http://localhost:5173
 
 In the monorepo, `@sanity/ui` resolves to TypeScript source through package
 `exports`, so Storybook and the apps hot-reload UI package edits without a
-rebuild. `@sanity/color`, `@sanity/icons`, `@sanity/logos`, and `@sanity/themer`
-are installed from npm.
+rebuild. `@sanity/color`, `@sanity/icons`, and `@sanity/logos` are installed
+from npm.
 
 ### Common scripts
 

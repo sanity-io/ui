@@ -13,11 +13,11 @@ sanity.io/ui docs site (a Next.js app with an embedded Sanity Studio) in
 and a Sanity Blueprint (serverless functions for the docs site)
 in `apps/blueprints/docs` (`pnpm-workspace.yaml`).
 
-`@sanity/color`, `@sanity/icons`, `@sanity/logos`, and `@sanity/themer` are
-published from `main` and installed from npm on this branch (via the pnpm
-`catalog:` pins in `pnpm-workspace.yaml`, except `@sanity/themer` which is
-pinned to `0.3.1` in `apps/docs` — later 0.3.x releases depend on `@sanity/ui`
-v4). Do not reintroduce those packages as workspace packages here.
+`@sanity/color`, `@sanity/icons`, and `@sanity/logos` are published from
+`main` and installed from npm on this branch (via the pnpm `catalog:` pins in
+`pnpm-workspace.yaml`). `@sanity/themer` is also published from `main` and is
+not used on this branch. Do not reintroduce those packages as workspace
+packages here.
 
 The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
