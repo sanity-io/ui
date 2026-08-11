@@ -46,7 +46,7 @@ catalogs:
       specifier: ^6.9.1
       version: 6.9.1
     styled-components:
-      specifier: ^6.5.0
+      specifier: ^6.5.1
       version: 6.5.1
     tsdown:
       specifier: ^0.22.14
