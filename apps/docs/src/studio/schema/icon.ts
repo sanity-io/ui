@@ -9,7 +9,7 @@ export const iconType = defineType({
       name: 'filename',
       title: 'Filename',
       description:
-        'The SVG filename as it exists in the `packages/icons/export/` directory, e.g. "add-user.svg".',
+        'The SVG filename as it exists in the `@sanity/icons` export directory on `main`, e.g. "add-user.svg".',
       type: 'string',
       readOnly: true,
     }),

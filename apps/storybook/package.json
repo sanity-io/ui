@@ -15,9 +15,9 @@
   },
   "devDependencies": {
     "@rolldown/plugin-babel": "^0.2.3",
-    "@sanity/color": "workspace:*",
-    "@sanity/icons": "workspace:*",
-    "@sanity/logos": "workspace:*",
+    "@sanity/color": "catalog:",
+    "@sanity/icons": "catalog:",
+    "@sanity/logos": "catalog:",
     "@sanity/ui": "workspace:*",
     "@storybook/addon-a11y": "^10.5.7",
     "@storybook/addon-docs": "^10.5.7",

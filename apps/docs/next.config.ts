@@ -7,14 +7,15 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   // Sanity Live handles on-demand revalidation (see `api/expire-tags` and the
-  // `apps/blueprints/docs` invalidate-sync-tags function), so the default
+  // invalidate-sync-tags function deployed from `main`), so the default
   // time-based revalidation is stretched to 1 year.
   cacheLife: {default: sanity},
   // Matches the behavior of `sanity dev` which sets styled-components to use the fastest way of inserting CSS rules in both dev and production. It's default behavior is to disable it in dev mode.
   compiler: {styledComponents: true, define: {SC_DISABLE_SPEEDY: 'false'}},
-  // These workspace packages resolve to their TypeScript source in the
-  // monorepo (dev `exports`), so Next.js must transpile them.
-  transpilePackages: ['@sanity/color', '@sanity/icons', '@sanity/logos', '@sanity/ui'],
+  // `@sanity/ui` resolves to its TypeScript source in the monorepo (dev
+  // `exports`), so Next.js must transpile it. Other @sanity/* deps come from
+  // npm as prebuilt packages.
+  transpilePackages: ['@sanity/ui'],
   reactCompiler: true,
   experimental: {
     // Use the native Rust port of the React Compiler (runs directly on
