@@ -7,7 +7,7 @@ import {PropsWithChildren, Suspense} from 'react'
 import {parseNav} from '#lib/nav/parseNav.ts'
 import {Banner} from '@/components/Banner'
 import {AppFooter} from '@/components/Footer'
-import {Navbar} from '@/components/Navbar'
+import {Navbar, NavbarWithActiveSegment} from '@/components/Navbar'
 import {basePath, primaryNavId} from '@/constants'
 import {GLOBAL_QUERY} from '@/lib/data/_global/query'
 import {GlobalData} from '@/lib/data/_global/types'
@@ -90,7 +90,9 @@ async function CachedGlobalData(props: PropsWithChildren<DynamicFetchOptions>) {
   return (
     <Flex direction="column" height="fill">
       <Banner settings={global?.settings ?? null} />
-      <Navbar nav={nav} />
+      <Suspense fallback={<Navbar nav={nav} />}>
+        <NavbarWithActiveSegment nav={nav} />
+      </Suspense>
       {children}
       <AppFooter />
     </Flex>
