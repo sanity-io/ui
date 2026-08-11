@@ -1,6 +1,24 @@
 {
   "version": 1,
   "skills": {
+    "next-cache-components-optimizer": {
+      "source": "vercel/next.js",
+      "sourceType": "github",
+      "skillPath": "skills/next-cache-components-optimizer/SKILL.md",
+      "computedHash": "6d714d91375cd84ee38cddbe526ca83143224a3124c36a44502afe378abe788c"
+    },
+    "next-dev-loop": {
+      "source": "vercel/next.js",
+      "sourceType": "github",
+      "skillPath": "skills/next-dev-loop/SKILL.md",
+      "computedHash": "aad97b32ba6efd31e92d063ec77120a694fe0d4a9401daf9af4c205cd5e21b07"
+    },
+    "next-partial-prefetching-adoption": {
+      "source": "vercel/next.js",
+      "sourceType": "github",
+      "skillPath": "skills/next-partial-prefetching-adoption/SKILL.md",
+      "computedHash": "cfed44cfce68b08b2a7edf3d6f07b230a49dfbf180825ca49a5bbf12b27a558a"
+    },
     "sanity-live-cache-components": {
       "source": "sanity-io/next-sanity",
       "sourceType": "github",

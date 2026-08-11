@@ -121,13 +121,19 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   resolves to the TypeScript source through the dev `exports`, so Next.js
   transpiles it via `transpilePackages` in `apps/docs/next.config.mjs`. It is
   deployed via Vercel, not released through Changesets.
-- `apps/docs` runs `next@preview` with `cacheComponents: true` and fetches
+- `apps/docs` runs `next@16` with `cacheComponents: true` and fetches
   content with `next-sanity`'s `defineLive`/`sanityFetch` (Sanity Live) plus
   stega-based visual editing. When touching data fetching or draft mode in
   `apps/docs`, follow the vendored
   `.agents/skills/sanity-live-cache-components` skill (three-layer
   Page/Dynamic/Cached pattern with explicit `perspective`/`stega` props;
-  `'use cache'` only on the cached layer). The app builds and devs with
+  `'use cache'` only on the cached layer). The vendored `vercel/next.js`
+  skills apply here too: `.agents/skills/next-dev-loop` (verify changes
+  against a running `next dev` via `/_next/mcp` + `agent-browser`),
+  `.agents/skills/next-cache-components-optimizer` (tighten Suspense
+  boundaries and `'use cache'` placement) and
+  `.agents/skills/next-partial-prefetching-adoption` (adopt partial
+  prefetching). The app builds and devs with
   Turbopack and the native Rust React Compiler
   (`experimental.turbopackRustReactCompiler`). To make that work,
   `packages/ui` is `"type": "module"` and `apps/docs` omits the package.json
