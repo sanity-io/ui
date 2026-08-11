@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "baseBranchPatterns": ["v3", "$default", "next"],
+  "baseBranchPatterns": ["v2", "v3", "$default", "next"],
   "extends": ["github>sanity-io/renovate-config"],
   "ignorePresets": ["github>sanity-io/renovate-config:group-non-major"],
   "packageRules": [
@@ -8,6 +8,12 @@
       "matchDepTypes": ["dependencies"],
       "semanticCommitType": "fix",
       "rangeStrategy": "bump"
+    },
+     {
+      "description": "v3 branch only receives production dependency updates",
+      "matchBaseBranches": ["v3"],
+      "matchDepTypes": ["devDependencies"],
+      "enabled": false
     },
     {
       "description": "v2 cannot bump refractor due to ESM requirenment",
@@ -51,7 +57,7 @@
         "@storybook/react-vite",
         "storybook"
       ],
-      "matchBaseBranches": ["v2", "$default"],
+      "matchBaseBranches": ["v2", "v3"],
       "allowedVersions": "<=8"
     }
   ]
