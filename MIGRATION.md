@@ -19,6 +19,7 @@ Work through the checklist top to bottom:
 4. [Replace removed deprecated APIs](#4-replace-removed-deprecated-apis)
 5. [Less common removals](#5-less-common-removals)
 6. [Behavior changes to review](#6-behavior-changes-to-review)
+7. [Update test assertions on closed tooltip and popover content](#7-update-test-assertions-on-closed-tooltip-and-popover-content) — check visibility, not existence
 
 ### 1. Upgrade the runtime
 
@@ -93,8 +94,40 @@ Everything that was deprecated during v3 is removed in v4. Removed props stay on
 
 ### 6. Behavior changes to review
 
-- **`Tooltip` and `Popover` keep closed content mounted** with React's `<Activity>`, preserving internal state and pre-rendering hidden content. With `animate` enabled, hiding is deferred until exit animations finish. Popovers with recursive `content` must gate the recursion on `open` — otherwise they render an infinitely deep hidden tree.
+- **`Tooltip` and `Popover` keep closed content mounted** with React's `<Activity>`, preserving internal state and pre-rendering hidden content. With `animate` enabled, hiding is deferred until exit animations finish. Popovers with recursive `content` must gate the recursion on `open` — otherwise they render an infinitely deep hidden tree. Tests that assert on closed content need updating, see [step 7](#7-update-test-assertions-on-closed-tooltip-and-popover-content).
 - **All components are plain function components** that take `ref` as a regular prop (React 19 semantics). Refs keep working exactly as before, but components no longer pass `react-is` checks such as `isForwardRef`.
+
+### 7. Update test assertions on closed tooltip and popover content
+
+`<Activity mode="hidden">` keeps closed content in the DOM and hides it with `display: none`. "Closed" therefore means "not visible", not "not in the document": assertions that check whether content _exists_ have to check its _visibility_ instead. This applies to unit tests and end-to-end tests alike.
+
+End-to-end tests (Playwright):
+
+```diff
+-await expect(page.getByText('Tooltip content')).toHaveCount(0)
++await expect(page.getByText('Tooltip content')).toBeHidden()
+```
+
+Unit tests (Testing Library and `jest-dom`):
+
+```diff
+-expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
++expect(screen.getByText('Tooltip content')).not.toBeVisible()
+```
+
+Assertions on _open_ content are unchanged, and so are queries that skip inaccessible elements: `display: none` keeps closed content out of the accessibility tree, so Testing Library's `*ByRole` queries and Playwright's `getByRole()` still don't match it (unless you opt in with `hidden: true` / `includeHidden: true`).
+
+React renders hidden activities at a lower priority than visible ones, so closed content isn't guaranteed to be in the DOM yet — the most robust assertions accept both "absent" and "present but hidden". Playwright's `toBeHidden()` does that by definition. `jest-dom`'s `toBeVisible()` requires an element, so query first and only assert on what you find:
+
+```ts
+function expectHidden(text: string) {
+  const element = screen.queryByText(text)
+
+  if (element) {
+    expect(element).not.toBeVisible()
+  }
+}
+```
 
 ## `@sanity/ui`: from v2 to v3
 
