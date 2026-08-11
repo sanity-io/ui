@@ -15,13 +15,10 @@ import {
 
 import {ArticleLayout} from './layout.client'
 
-// The article chrome below is `params`-free, so the App Shell that
-// `<Link>` prefetches already contains it: a navigation into any screen
-// commits the navbar, sidebar and breadcrumbs immediately and streams only
-// the article body. `prefetch = 'partial'` keeps that shell shared across
-// every link instead of one full prefetch per link.
-export const prefetch = 'partial'
-
+// The article chrome below is `params`-free, so the App Shell that `<Link>`
+// prefetches already contains it: a navigation into any screen commits the
+// frame immediately and streams only the article body and the nav branch the
+// URL selects.
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({
     query: screensQuery,
