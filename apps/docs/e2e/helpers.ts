@@ -63,3 +63,18 @@ export function articleFallback(page: Page) {
 export function popoverLink(page: Page) {
   return articleChrome(page).locator(`a[href="${ARTICLE_PATH}"]`)
 }
+
+export const ARCADE_PATH = '/ui/arcade'
+
+/** The navbar link into the arcade screen. */
+export function arcadeLink(page: Page) {
+  return page
+    .locator(`a[href="${ARCADE_PATH}"]:visible`)
+    .filter({hasText: /^Arcade$/})
+    .first()
+}
+
+/** The arcade editor screen. Client-only, so it never appears in the shell. */
+export function arcadeScreen(page: Page) {
+  return page.locator('[data-testid="arcade-screen"]:visible')
+}
