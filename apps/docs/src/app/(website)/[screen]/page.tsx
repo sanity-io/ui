@@ -63,6 +63,12 @@ export async function generateMetadata({params}: PageProps<'/[screen]'>): Promis
   }
 }
 
+// TODO(runtime-prefetch): assess with the user whether URL data should resolve before click.
+// See: https://nextjs.org/docs/app/guides/runtime-prefetching
+// The navbar and mobile breadcrumbs links here still ask for a full prefetch,
+// which resolves this page's content ahead of the click at the cost of a
+// server render per link.
+//
 // Same boundary as `[...article]`: the screen's own landing page is keyed by
 // `params`, so it streams in behind the shell instead of blocking it.
 export default function ScreenPage({params}: PageProps<'/[screen]'>) {

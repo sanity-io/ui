@@ -9,23 +9,29 @@ import type {NavNode} from '#lib/nav/types.ts'
 
 import {GitHubMark} from './assets'
 
-export function Navbar({nav}: {nav: NavNode | null}): ReactElement {
+/**
+ * Which top-level entry is highlighted is URL data, so it cannot be part of
+ * the App Shell every link shares. Reading it in a wrapper keeps the shell
+ * with the whole navbar in it and lets only the highlight resolve per URL —
+ * synchronously on a client navigation, streamed on a page load.
+ */
+export function NavbarWithActiveSegment({nav}: {nav: NavNode | null}): ReactElement {
   // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs
-  const segment = usePathname().split('/').find(Boolean)
+  return <Navbar nav={nav} activeSegment={usePathname().split('/').find(Boolean)} />
+}
 
+export function Navbar({
+  nav,
+  activeSegment,
+}: {
+  nav: NavNode | null
+  activeSegment?: string
+}): ReactElement {
   return (
     <Card flex="none" padding={[2, 2, 3, 4]} style={{lineHeight: 0}}>
       <Flex gap={1}>
         <Box flex="none">
-          <Button
-            as={Link}
-            data-as="a"
-            href="/"
-            mode="bleed"
-            padding={3}
-            prefetch={true}
-            radius={2}
-          >
+          <Button as={Link} data-as="a" href="/" mode="bleed" padding={3} radius={2}>
             <Flex align="center" gap={[3, 3, 4]}>
               <Box flex="none">
                 <Text size={[1, 1, 2]}>
@@ -64,7 +70,7 @@ export function Navbar({nav}: {nav: NavNode | null}): ReactElement {
                   padding={3}
                   prefetch={true}
                   radius={2}
-                  selected={node.segment === segment}
+                  selected={node.segment === activeSegment}
                   style={{opacity: node.hidden ? 0.25 : undefined}}
                   text={node.title}
                 />
