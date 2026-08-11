@@ -16,6 +16,34 @@
       "enabled": false
     },
     {
+      "description": "v2 and v3 branches should skip selected dependencies",
+      "matchBaseBranches": ["v2", "v3"],
+      "matchPackageNames": [
+        "@sanity/styled-components",
+        "@types/react",
+        "@types/react-dom",
+        "react",
+        "react-dom",
+        "pnpm",
+        "pnpm/action-setup",
+        "pnpm/setup",
+        "@sanity/code-input",
+        "next-sanity",
+        "sanity-plugin-media",
+        "@sanity/vision",
+        "sanity",
+        "styled-components",
+        "actions/upload-artifact",
+        "@sanity/icons",
+        "renovatebot/github-action",
+        "@sanity/functions",
+        "@sanity/tsdown-config",
+        "next",
+        "@babel/standalone"
+      ],
+      "enabled": false
+    },
+    {
       "description": "v2 cannot bump refractor due to ESM requirenment",
       "matchPackageNames": ["refractor"],
       "matchBaseBranches": ["v2"],
@@ -44,6 +72,12 @@
       "matchPackageNames": ["npm-run-all2", "vite"],
       "matchBaseBranches": ["v2"],
       "allowedVersions": "<=5"
+    },
+    {
+      "description": "v2 cannot bump motion to v13",
+      "matchPackageNames": ["motion"],
+      "matchBaseBranches": ["v2"],
+      "allowedVersions": "<13"
     },
     {
       "description": "v4 is upgrading storybook, do not update it elsewhere",
