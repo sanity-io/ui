@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
     // Use the native Rust port of the React Compiler (runs directly on
     // Turbopack's swc AST) instead of the Babel transform
     turbopackRustReactCompiler: true,
+    // Lets the `instant()` helper from `@next/playwright` gate dynamic data in
+    // the local e2e suite (see `instant-nav.rig.md`). Explicitly reject every
+    // Vercel build even if EXPOSE_TESTING_API is accidentally configured there.
+    exposeTestingApiInProductionBuild:
+      process.env.EXPOSE_TESTING_API === '1' && process.env.VERCEL !== '1',
     // TypeScript 7 no longer ships the JS compiler API that Next.js uses by
     // default; run the project-local `tsc` CLI for typegen/build type-checks.
     useTypeScriptCli: true,

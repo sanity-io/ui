@@ -32,13 +32,11 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
     <TreeItem
       expanded={!node.collapsed || path.startsWith(`${node.href}/`)}
       href={href}
-      // `next/link` adds the `/ui` basePath and prefetches the fully cached
-      // destination pages, making sidebar navigations instant.
-      // `prefetch={true}` upgrades the shared App Shell prefetch to a per-link
-      // runtime prefetch that resolves the article content ahead of the click
-      // (the `[screen]` segment allows this with `prefetch = 'partial'`).
+      // `next/link` adds the `/ui` basePath and prefetches the App Shell the
+      // whole docs section shares, so a click commits the chrome immediately
+      // and only the article body streams. Asking for a full prefetch here
+      // instead would fetch every one of the ~90 visible links in full.
       linkAs={Link}
-      linkProps={{prefetch: true}}
       selected={href ? href === path : false}
       text={title ? node.isHook ? <>{title}()</> : title : <em>Untitled</em>}
     >
