@@ -1,4 +1,5 @@
 import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
+import {SpinnerIcon} from '@sanity/icons/Spinner'
 import {
   ChangeEvent,
   cloneElement,
@@ -26,12 +27,13 @@ import {Box, BoxProps} from '../../primitives/box/box'
 import {Button} from '../../primitives/button/button'
 import {Card} from '../../primitives/card/card'
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
+import {spinnerIcon} from '../../primitives/spinner/spinner.css'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
 import {TextInput} from '../../primitives/textInput/textInput'
 import {_getArrayProp} from '../../styles/helpers'
 import {Radius} from '../../types/radius'
-import {AnimatedSpinnerIcon, ListBox, StyledAutocomplete} from './autocomplete.styles'
+import {ListBox, StyledAutocomplete} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
 import {
@@ -689,7 +691,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
         disabled={disabled}
         fontSize={fontSize}
         icon={icon}
-        iconRight={loading && AnimatedSpinnerIcon}
+        iconRight={loading && <SpinnerIcon className={spinnerIcon} />}
         id={id}
         inputMode="search"
         onChange={handleInputChange}

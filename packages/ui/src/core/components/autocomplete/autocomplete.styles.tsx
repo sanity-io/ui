@@ -1,5 +1,4 @@
-import {SpinnerIcon} from '@sanity/icons/Spinner'
-import {keyframes, styled} from 'styled-components'
+import {styled} from 'styled-components'
 
 import {Box} from '../../primitives/box/box'
 
@@ -19,21 +18,4 @@ export const ListBox = styled(Box)`
     padding: 0;
     margin: 0;
   }
-`
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-`
-
-/**
- * @internal
- */
-export const AnimatedSpinnerIcon = styled(SpinnerIcon)`
-  animation: ${rotate} 500ms linear infinite;
 `
