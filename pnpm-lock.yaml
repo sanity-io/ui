@@ -420,7 +420,7 @@ importers:
   packages/figma:
     devDependencies:
       '@figma/plugin-typings':
-        specifier: ^1.132.0
+        specifier: ^1.133.0
         version: 1.133.0
       '@sanity/tsdown-config':
         specifier: 'catalog:'
@@ -444,7 +444,7 @@ importers:
   packages/figma-color:
     devDependencies:
       '@figma/plugin-typings':
-        specifier: ^1.132.0
+        specifier: ^1.133.0
         version: 1.133.0
       '@sanity/color':
         specifier: workspace:*
