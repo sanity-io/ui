@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.4
+
+### Patch Changes
+
+- 3444568: fixed bugs transforming shorthand flex attribute
+
 ## 1.0.0-alpha.3
 
 ### Patch Changes
