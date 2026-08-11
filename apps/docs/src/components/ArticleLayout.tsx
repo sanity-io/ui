@@ -8,7 +8,7 @@ import {Breadcrumbs} from '@sanity/ui/breadcrumbs'
 import {getTheme_v2} from '@sanity/ui/theme'
 import Link from 'next/link'
 import {usePathname} from 'next/navigation'
-import {useState} from 'react'
+import {Suspense, useState} from 'react'
 import {styled} from 'styled-components'
 
 import type {NavNode} from '#lib/nav/types.ts'
@@ -51,55 +51,87 @@ const BreadcrumbsNavCard = styled(Card)((props) => {
 export function ArticleLayout({children, nav}: {children: React.ReactNode; nav?: NavNode}) {
   const [menuOpen, setMenuOpen] = useState(false)
 
-  // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs
-  const pathname = usePathname()
-  const path = pathname.split('/').filter(Boolean)
-
   return (
     <Card flex={1} style={{minHeight: 'auto'}}>
       {nav && (
-        <BreadcrumbsNavCard
-          data-testid="article-breadcrumbs-nav"
-          data-ui="BreadcrumbsNavCard"
-          paddingX={[2, 2, 3, 4]}
-          paddingY={2}
-          shadow={1}
-        >
-          <Flex align="center" gap={1}>
-            <Box flex={1} padding={3}>
-              <NavBreadcrumbs nav={nav} path={path} />
-            </Box>
-            <Box flex="none">
-              <Button
-                fontSize={1}
-                icon={menuOpen ? CloseIcon : MenuIcon}
-                mode="bleed"
-                onClick={() => setMenuOpen((o) => !o)}
-                padding={3}
-              />
-            </Box>
-          </Flex>
-
-          {menuOpen && (
-            <Box marginTop={2}>
-              <Nav nav={nav} path={pathname} />
-            </Box>
-          )}
-        </BreadcrumbsNavCard>
+        <Suspense>
+          <BreadcrumbsNav menuOpen={menuOpen} nav={nav} onToggleMenu={setMenuOpen} />
+        </Suspense>
       )}
 
-      <Flex hidden={menuOpen}>
+      <Flex height="fill" hidden={menuOpen}>
         {nav && (
-          <NavCard data-testid="article-sidebar-nav" flex={1} overflow="auto">
-            <Box padding={[2, 2, 3, 4]}>
-              <Nav nav={nav} path={pathname} />
-            </Box>
-          </NavCard>
+          <Suspense>
+            <SidebarNav nav={nav} />
+          </Suspense>
         )}
 
-        <Box flex={3}>{children}</Box>
+        <Box flex={3} height="fill" style={{display: 'flex', minHeight: 'auto'}}>
+          {children}
+        </Box>
       </Flex>
     </Card>
+  )
+}
+
+function useNavPath() {
+  // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs.
+  const pathname = usePathname()
+  return {path: pathname.split('/').filter(Boolean), pathname}
+}
+
+function SidebarNav({nav}: {nav: NavNode}) {
+  const {pathname} = useNavPath()
+
+  return (
+    <NavCard data-testid="article-sidebar-nav" flex={1} overflow="auto">
+      <Box padding={[2, 2, 3, 4]}>
+        <Nav nav={nav} path={pathname} />
+      </Box>
+    </NavCard>
+  )
+}
+
+function BreadcrumbsNav({
+  menuOpen,
+  nav,
+  onToggleMenu,
+}: {
+  menuOpen: boolean
+  nav: NavNode
+  onToggleMenu: (update: (open: boolean) => boolean) => void
+}) {
+  const {path, pathname} = useNavPath()
+
+  return (
+    <BreadcrumbsNavCard
+      data-testid="article-breadcrumbs-nav"
+      data-ui="BreadcrumbsNavCard"
+      paddingX={[2, 2, 3, 4]}
+      paddingY={2}
+      shadow={1}
+    >
+      <Flex align="center" gap={1}>
+        <Box flex={1} padding={3}>
+          <NavBreadcrumbs nav={nav} path={path} />
+        </Box>
+        <Box flex="none">
+          <Button
+            fontSize={1}
+            icon={menuOpen ? CloseIcon : MenuIcon}
+            mode="bleed"
+            onClick={() => onToggleMenu((open) => !open)}
+            padding={3}
+          />
+        </Box>
+      </Flex>
+
+      {menuOpen && (
+        <Box marginTop={2}>
+          <Nav nav={nav} path={pathname} />
+        </Box>
+      )}
+    </BreadcrumbsNavCard>
   )
 }
 
