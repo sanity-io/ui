@@ -81,9 +81,8 @@ export function HeroSection(props: {
 
           {data.ctas && (
             <Inline gap={2} style={{textAlign: 'center'}}>
-              {data.ctas
-                .filter((cta) => cta.href)
-                .map((cta) => (
+              {data.ctas.map((cta) =>
+                !cta.href ? null : (
                   <Button
                     as={Link}
                     data-as="a"
@@ -97,7 +96,8 @@ export function HeroSection(props: {
                     text={cta.label}
                     tone={stegaClean(cta.tone) || 'default'}
                   />
-                ))}
+                ),
+              )}
             </Inline>
           )}
         </Stack>
@@ -115,9 +115,8 @@ export function HeroSection(props: {
         <Container width={2}>
           <Box marginTop={[4, 4, 5]}>
             <Grid gap={[3, 4, 4, 5]} gridTemplateColumns={[1, 1, 2, 3]}>
-              {data.links
-                .filter((link) => link.href)
-                .map((link) => (
+              {data.links.map((link) =>
+                !link.href ? null : (
                   <Card
                     as={Link}
                     border
@@ -139,7 +138,8 @@ export function HeroSection(props: {
                       )}
                     </Stack>
                   </Card>
-                ))}
+                ),
+              )}
             </Grid>
           </Box>
         </Container>

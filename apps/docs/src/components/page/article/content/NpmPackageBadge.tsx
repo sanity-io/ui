@@ -12,7 +12,7 @@ export function NpmPackageBadge(props: {
   return (
     <a href={href} rel="noreferrer" target="_blank">
       {/* oxlint-disable-next-line nextjs/no-img-element */}
-      <img alt="" src={src} />
+      <img alt={`${name} on npm`} src={src} />
     </a>
   )
 }

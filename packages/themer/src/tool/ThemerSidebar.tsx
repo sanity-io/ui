@@ -5,7 +5,6 @@ import {ResetIcon} from '@sanity/icons/Reset'
 import {Box, Button, Card, Flex, Grid, Stack, Text} from '@sanity/ui'
 import {Code} from '@sanity/ui/code'
 import {useToast} from '@sanity/ui/toast'
-import {useMemo} from 'react'
 import {registerLanguage} from 'react-refractor'
 import typescript from 'refractor/typescript'
 import {styled} from 'styled-components'
@@ -74,8 +73,8 @@ export function ThemerSidebar() {
   const toast = useToast()
 
   const active = options ?? baseOptions
-  const resolved = useMemo(() => resolveThemeOptions(active), [active])
-  const palette = useMemo(() => buildPalette(active), [active])
+  const resolved = resolveThemeOptions(active)
+  const palette = buildPalette(active)
   const activePresetSlug = presets.find((preset) => sameOptions(preset.options, active))?.slug ?? ''
   const snippet = createThemeSnippet(active)
 
@@ -279,16 +278,14 @@ const paletteStyle: React.CSSProperties = {
 function PresetButton(props: {active: boolean; onClick: () => void; preset: ThemePreset}) {
   const {active, onClick, preset} = props
 
-  const swatches = useMemo(() => {
-    const resolved = resolveThemeOptions(preset.options)
+  const resolved = resolveThemeOptions(preset.options)
 
-    return [
-      ['accent', resolved.accent],
-      ['text', resolved.text],
-      ['dark', resolved.background.dark],
-      ['light', resolved.background.light],
-    ] as const
-  }, [preset])
+  const swatches = [
+    ['accent', resolved.accent],
+    ['text', resolved.text],
+    ['dark', resolved.background.dark],
+    ['light', resolved.background.light],
+  ] as const
 
   return (
     <Button mode="ghost" onClick={onClick} padding={2} selected={active} title={preset.title}>

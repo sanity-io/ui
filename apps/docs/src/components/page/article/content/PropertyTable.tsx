@@ -4,7 +4,7 @@ import {stegaClean} from 'next-sanity'
 import {ReactElement} from 'react'
 import {styled} from 'styled-components'
 
-import {isArray} from '@/lib/common'
+import {isArray} from '@/lib/common/isArray'
 import type {PortableTextValue} from '@/types'
 
 import {PlainContent} from '../PlainContent'
