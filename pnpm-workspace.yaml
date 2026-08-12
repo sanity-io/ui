@@ -29,7 +29,7 @@ catalog:
   refractor: ^5.0.0
   rimraf: ^5.0.5
   sanity: ^6.9.2
-  styled-components: ^6.5.1
+  styled-components: ^6.5.2
   tsdown: ^0.22.14
   typescript: 7.0.2
   unrun: ^0.3.1
@@ -74,6 +74,7 @@ minimumReleaseAgeExclude:
   - motion-dom@13.0.0
   - motion-utils@13.0.0
   - motion@13.0.0
+  - styled-components@6.5.2
 
 # @testing-library/jest-dom/vitest imports `vitest` without declaring it, so it
 # falls back to pnpm's hidden hoist — which can resolve to another workspace
