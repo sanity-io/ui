@@ -11,7 +11,7 @@ strictPeerDependencies: false
 # so that keeps an explicit range there when needed. (See packageExtensions for
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
-  '@sanity/client': ^7.26.2
+  '@sanity/client': ^8.0.0
   # Published from `main`; v3 consumes the npm releases.
   '@sanity/color': ^3.0.8
   '@sanity/icons': ^5.2.1
