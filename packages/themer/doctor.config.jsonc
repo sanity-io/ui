@@ -7,7 +7,7 @@
         // the dist output — invisible to static import analysis. The same
         // reasoning is documented in the root knip.jsonc ignoreDependencies.
         "files": ["package.json"],
-        "rules": ["deslop/unused-dependency"]
+        "rules": ["deslop/unused-dependency"],
       },
       {
         // Intentional: the JSON round-trip forces the theme's lazy
@@ -15,7 +15,7 @@
         // `forceTree` comment in the test); structuredClone would keep
         // non-JSON values and change the comparison semantics.
         "files": ["src/theme/theme.test.ts"],
-        "rules": ["react-doctor/no-json-parse-stringify-clone"]
+        "rules": ["react-doctor/no-json-parse-stringify-clone"],
       },
       {
         // `readStoredOptions` validates and sanitizes the stored shape on
@@ -23,8 +23,8 @@
         // discarding the draft instead of breaking — a version field would
         // only add a migration burden for a throwaway draft cache.
         "files": ["src/tool/storage.ts"],
-        "rules": ["react-doctor/client-localstorage-no-version"]
-      }
-    ]
-  }
+        "rules": ["react-doctor/client-localstorage-no-version"],
+      },
+    ],
+  },
 }

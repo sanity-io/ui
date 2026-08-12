@@ -5,7 +5,7 @@
     // with `peerDependencies.react: "^18 || ^19"`, so the generated icon
     // components must keep `forwardRef` for refs to attach on React 18 (see
     // the template comment in scripts/generate.ts).
-    "eslint/no-restricted-imports": "off"
+    "eslint/no-restricted-imports": "off",
   },
   "ignore": {
     "overrides": [
@@ -14,8 +14,8 @@
         // sources in `export/` (scripts/generate.ts); path precision is owned
         // by the design export pipeline, not hand-tuned per component.
         "files": ["src/exports/**"],
-        "rules": ["react-doctor/rendering-svg-precision"]
-      }
-    ]
-  }
+        "rules": ["react-doctor/rendering-svg-precision"],
+      },
+    ],
+  },
 }

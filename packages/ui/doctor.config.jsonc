@@ -18,15 +18,15 @@
         "files": ["src/core/components/tree/tree.tsx"],
         "rules": [
           "typescript/no-unnecessary-type-assertion",
-          "typescript/no-unsafe-type-assertion"
-        ]
+          "typescript/no-unsafe-type-assertion",
+        ],
       },
       {
         // Deliberate index keys (also suppressed inline for oxlint's
         // no-array-index-key): the key captions are static and may repeat, so
         // they cannot serve as keys themselves.
         "files": ["src/core/components/hotkeys/hotkeys.tsx"],
-        "rules": ["react-doctor/no-array-index-as-key"]
+        "rules": ["react-doctor/no-array-index-as-key"],
       },
       {
         // Not dead code: reachable from the `@sanity/ui/theme` entry point —

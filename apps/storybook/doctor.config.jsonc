@@ -6,8 +6,8 @@
         // regression fixture renders no tab panels, so they are deliberately
         // blank (also suppressed inline for oxlint's aria-proptypes).
         "files": ["stories/tests/Tones.tsx"],
-        "rules": ["react-doctor/aria-proptypes"]
-      }
-    ]
-  }
+        "rules": ["react-doctor/aria-proptypes"],
+      },
+    ],
+  },
 }
