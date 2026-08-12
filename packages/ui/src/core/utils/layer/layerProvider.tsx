@@ -37,11 +37,14 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
   const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
 
-  // A state value that is used to keep track of the number of child layers on each level
-  const [, setChildLayers] = useState<Record<number, number>>({})
-
-  // A state value that is used to keep track of the number of child levels
-  const [size, setSize] = useState(0)
+  // Track the number of child layers on each level together with the number of
+  // child levels ("size") in a single state value, so each transition is a pure
+  // updater — React may invoke updater functions more than once, so they must
+  // not perform nested state updates.
+  const [{size}, setLayerState] = useState<{
+    childLayers: Record<number, number>
+    size: number
+  }>({childLayers: {}, size: 0})
 
   const isTopLayer = size === 0
 
@@ -51,43 +54,41 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
       const parentDispose = parentRegisterChild?.(childLevel)
 
       if (childLevel !== undefined) {
-        setChildLayers((state) => {
-          const prevLen = state[childLevel] ?? 0
-          const nextState = {...state, [childLevel]: prevLen + 1}
+        setLayerState(({childLayers}) => {
+          const prevLen = childLayers[childLevel] ?? 0
+          const nextChildLayers = {...childLayers, [childLevel]: prevLen + 1}
 
-          setSize(Object.keys(nextState).length)
-
-          return nextState
+          return {childLayers: nextChildLayers, size: Object.keys(nextChildLayers).length}
         })
       } else {
         // Legacy behavior: if no child level is provided, increment the size by 1
-        setSize((v) => v + 1)
+        setLayerState((state) => ({...state, size: state.size + 1}))
       }
 
       return () => {
         if (childLevel !== undefined) {
-          setChildLayers((state) => {
-            const nextState = {...state}
+          setLayerState((state) => {
+            const nextChildLayers = {...state.childLayers}
 
-            if (nextState[childLevel] === 1) {
-              delete nextState[childLevel]
+            if (nextChildLayers[childLevel] === 1) {
+              delete nextChildLayers[childLevel]
 
-              setSize(Object.keys(nextState).length)
-            } else {
-              nextState[childLevel] -= 1
+              return {childLayers: nextChildLayers, size: Object.keys(nextChildLayers).length}
             }
 
-            return nextState
+            nextChildLayers[childLevel] -= 1
+
+            return {...state, childLayers: nextChildLayers}
           })
         } else {
           // Legacy behavior: if no child level is provided, decrement the size by 1
-          setSize((v) => v - 1)
+          setLayerState((state) => ({...state, size: state.size - 1}))
         }
 
         parentDispose?.()
       }
     },
-    [parentRegisterChild, setSize, setChildLayers],
+    [parentRegisterChild],
   )
 
   // Register this layer on mount

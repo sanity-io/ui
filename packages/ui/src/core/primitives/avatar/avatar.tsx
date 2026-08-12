@@ -100,10 +100,15 @@ function AvatarComponent(
     return () => cancelAnimationFrame(raf)
   }, [arrowPosition, arrowPositionProp])
 
-  useEffect(() => {
-    // oxlint-disable-next-line react-compiler
+  // Reset the failed state when the image source changes, by adjusting the
+  // state while rendering instead of in an effect, so users never see a stale
+  // fallback frame (https://react.dev/learn/you-might-not-need-an-effect)
+  const [prevSrc, setPrevSrc] = useState(src)
+
+  if (prevSrc !== src) {
+    setPrevSrc(src)
     if (src) setImageFailed(false)
-  }, [src])
+  }
 
   const handleImageError = useCallback(() => {
     setImageFailed(true)
@@ -129,10 +134,7 @@ function AvatarComponent(
     >
       <Arrow>
         <svg width="11" height="7" viewBox="0 0 11 7" fill="none">
-          <path
-            d="M6.67948 1.50115L11 7L0 7L4.32052 1.50115C4.92109 0.736796 6.07891 0.736795 6.67948 1.50115Z"
-            fill={color}
-          />
+          <path d="M6.68 1.5L11 7L0 7L4.32 1.5C4.92 0.74 6.08 0.74 6.68 1.5Z" fill={color} />
         </svg>
       </Arrow>
 
