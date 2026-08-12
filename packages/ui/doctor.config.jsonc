@@ -1,0 +1,28 @@
+{
+  "rules": {
+    // False positive: the package ships `usePrefersReducedMotion` (a public
+    // export) and every motion-animated component (toast, dialog, popover,
+    // tooltip) consumes it to zero out animation durations, while the
+    // skeleton styles gate their animation on the `prefers-reduced-motion`
+    // media query. The detector only recognizes motion's own
+    // `useReducedMotion` hook.
+    "react-doctor/require-reduced-motion": "off"
+  },
+  "ignore": {
+    "overrides": [
+      {
+        // Not dead code: reachable from the `@sanity/ui/theme` entry point —
+        // `src/exports/theme.ts` re-exports `buildTheme`, which imports these
+        // defaults (via `theme/build/buildTheme.ts`, `renderColorTheme.ts`
+        // and `resolveColorTokens.ts`). knip tracks unused files for this
+        // repo in CI and agrees they are used.
+        "files": [
+          "src/theme/defaults/colorPalette.ts",
+          "src/theme/defaults/colorTokens.ts",
+          "src/theme/defaults/fonts.ts"
+        ],
+        "rules": ["deslop/unused-file"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "ignore": {
+    "overrides": [
+      {
+        // Not unused: `tsdown.config.mts` compiles with the React Compiler at
+        // `target: '18'`, which injects `react-compiler-runtime` imports into
+        // the dist output — invisible to static import analysis. The same
+        // reasoning is documented in the root knip.jsonc ignoreDependencies.
+        "files": ["package.json"],
+        "rules": ["deslop/unused-dependency"]
+      },
+      {
+        // Intentional: the JSON round-trip forces the theme's lazy
+        // self-replacing getters into a comparable plain tree (see the
+        // `forceTree` comment in the test); structuredClone would keep
+        // non-JSON values and change the comparison semantics.
+        "files": ["src/theme/theme.test.ts"],
+        "rules": ["react-doctor/no-json-parse-stringify-clone"]
+      },
+      {
+        // `readStoredOptions` validates and sanitizes the stored shape on
+        // every read (`sanitizeOptions`), so schema drift degrades to
+        // discarding the draft instead of breaking — a version field would
+        // only add a migration burden for a throwaway draft cache.
+        "files": ["src/tool/storage.ts"],
+        "rules": ["react-doctor/client-localstorage-no-version"]
+      }
+    ]
+  }
+}

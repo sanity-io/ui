@@ -1,0 +1,11 @@
+{
+  "rules": {
+    // Published with `peerDependencies.react: "^18.3 || ^19.0.0-0"`:
+    // `forwardRef` is required for refs to attach on React 18, so React
+    // Doctor's React 19-only ref-as-prop restriction does not apply here.
+    "eslint/no-restricted-imports": "off",
+    // The logo path data is the mastered brand asset — decimal precision is
+    // owned by the brand source, not hand-tuned per component.
+    "react-doctor/rendering-svg-precision": "off"
+  }
+}
