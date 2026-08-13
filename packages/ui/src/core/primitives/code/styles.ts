@@ -69,6 +69,8 @@ export function codeBaseStyle(): ReturnType<typeof css> {
       /* Certain popular CSS libraries changes the defaults for SVG display */
       /* Make sure SVGs are rendered as inline elements */
       display: inline;
+      /* ...and aren't squeezed by resets that set max-width: 100% */
+      max-width: unset;
     }
 
     & [data-sanity-icon] {
