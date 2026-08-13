@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.0.3
+
+### Patch Changes
+
+- [#2702](https://github.com/sanity-io/ui/pull/2702) [`e93ebeb`](https://github.com/sanity-io/ui/commit/e93ebebc030d3f6e4b6872496f8ccc30247138f6) Thanks [@stipsan](https://github.com/stipsan)! - Unset `max-width` on inline SVGs in `Text`, `Label`, `Heading`, and `Code` so CSS resets that set `max-width: 100%` no longer squash icons.
+
 ## 4.0.2
 
 ### Patch Changes
