@@ -2,7 +2,7 @@ import {javascript} from '@codemirror/lang-javascript'
 import {Card, CardProps, useRootTheme, useTheme_v2} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
 import CodeMirror, {EditorView, Statistics} from '@uiw/react-codemirror'
-import {ReactElement, useCallback, useEffect, useMemo, useRef} from 'react'
+import {ReactElement, useEffect, useRef} from 'react'
 import {css, styled} from 'styled-components'
 
 import {isHotkey} from '@/lib/hotkey'
@@ -83,94 +83,84 @@ export function CodeEditor(
   const rootTheme = useRootTheme()
   const theme = useTheme_v2()
 
-  const editorThemeExtension = useMemo(
-    () =>
-      getEditorThemeExtension({
-        theme: rootTheme.theme.v2!,
-        tone: rootTheme.tone,
-      }),
-    [rootTheme],
-  )
+  // The React Compiler caches the extensions and the theme, so CodeMirror is
+  // only reconfigured when the underlying theme actually changes
+  const editorThemeExtension = getEditorThemeExtension({
+    theme: rootTheme.theme.v2!,
+    tone: rootTheme.tone,
+  })
 
-  const fontSizeExtension = useMemo(
-    () => getFontSizeExtension({fontSize: 1, theme: rootTheme.theme.v2!}),
-    [rootTheme],
-  )
+  const fontSizeExtension = getFontSizeExtension({fontSize: 1, theme: rootTheme.theme.v2!})
 
-  const javascriptExtension = useMemo(() => javascript({jsx: true}), [])
+  const javascriptExtension = javascript({jsx: true})
 
-  const extensions = useMemo(
-    () => [editorThemeExtension, fontSizeExtension, javascriptExtension],
-    [editorThemeExtension, fontSizeExtension, javascriptExtension],
-  )
+  const extensions = [editorThemeExtension, fontSizeExtension, javascriptExtension]
 
-  const codeMirrorTheme = useMemo(() => getSyntaxTheme({theme}), [theme])
+  const codeMirrorTheme = getSyntaxTheme({theme})
 
   const viewRef = useRef<EditorView | null>(null)
 
-  const handleCreateEditor = useCallback((view: EditorView) => {
+  const handleCreateEditor = (view: EditorView) => {
     viewRef.current = view
-  }, [])
+  }
 
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (isHotkey(['mod', 's'], event.nativeEvent)) {
-        event.preventDefault()
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (isHotkey(['mod', 's'], event.nativeEvent)) {
+      event.preventDefault()
 
-        const run = async () => {
-          const anchorResult = await runPrettier({
+      const run = async () => {
+        // The two formatting passes are independent (they only differ in the
+        // tracked cursor offset), so run them concurrently
+        const [anchorResult, focusResult] = await Promise.all([
+          runPrettier({
             code: value,
             cursorOffset: selection.anchor,
-          })
-          const focusResult = await runPrettier({
+          }),
+          runPrettier({
             code: value,
             cursorOffset: selection.focus,
-          })
+          }),
+        ])
 
-          if (anchorResult !== null && focusResult !== null) {
-            let newVal = anchorResult.formatted
-            let anchorOffset = anchorResult.cursorOffset
-            let focusOffset = focusResult.cursorOffset
+        if (anchorResult !== null && focusResult !== null) {
+          let newVal = anchorResult.formatted
+          let anchorOffset = anchorResult.cursorOffset
+          let focusOffset = focusResult.cursorOffset
 
-            if (newVal[0] === ';') {
-              newVal = newVal.slice(1)
-              anchorOffset -= 1
-              focusOffset -= 1
-            }
-
-            const sel: CodeEditorSelection = {
-              anchor: anchorOffset,
-              focus: focusOffset,
-            }
-
-            onChange(newVal)
-            onSelectionChange(sel)
+          if (newVal[0] === ';') {
+            newVal = newVal.slice(1)
+            anchorOffset -= 1
+            focusOffset -= 1
           }
+
+          const sel: CodeEditorSelection = {
+            anchor: anchorOffset,
+            focus: focusOffset,
+          }
+
+          onChange(newVal)
+          onSelectionChange(sel)
         }
-
-        run().catch((err) => {
-          console.error(err)
-        })
-      }
-    },
-    [onChange, onSelectionChange, selection, value],
-  )
-
-  const handleStatistics = useCallback(
-    (data: Statistics) => {
-      const range = data.selectionAsSingle
-
-      const sel: CodeEditorSelection = {
-        anchor: range.anchor,
-        focus: range.head,
       }
 
-      selectionRef.current = sel
+      run().catch((err) => {
+        console.error(err)
+      })
+    }
+  }
 
-      onSelectionChange(sel)
-    },
-    [onSelectionChange],
-  )
+  const handleStatistics = (data: Statistics) => {
+    const range = data.selectionAsSingle
+
+    const sel: CodeEditorSelection = {
+      anchor: range.anchor,
+      focus: range.head,
+    }
+
+    selectionRef.current = sel
+
+    onSelectionChange(sel)
+  }
 
   useEffect(() => {
     if (JSON.stringify(selection) !== JSON.stringify(selectionRef.current)) {

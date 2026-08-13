@@ -2,7 +2,7 @@ import {Card, Flex} from '@sanity/ui'
 import {debounce, DebouncedFunc} from 'lodash-es'
 import {useRouter} from 'next/navigation'
 import qs from 'qs'
-import {ReactElement, useCallback, useEffect, useReducer, useRef} from 'react'
+import {ReactElement, useEffect, useReducer, useRef} from 'react'
 
 import {basePath} from '@/constants'
 import {CodeEditorSelection} from '@/lib/codeEditor/types'
@@ -83,31 +83,20 @@ export function ArcadeScreen(props: {title?: string; description?: string}): Rea
     })
   }, [])
 
-  const setCodeMode = useCallback(
-    (value: ArcadeCodeMode) => dispatch({type: 'setCodeMode', value}),
-    [],
-  )
+  // The React Compiler caches these dispatch wrappers
+  const setCodeMode = (value: ArcadeCodeMode) => dispatch({type: 'setCodeMode', value})
 
-  const setMeta = useCallback((value: ArcadeMeta) => dispatch({type: 'setMeta', value}), [])
+  const setMeta = (value: ArcadeMeta) => dispatch({type: 'setMeta', value})
 
-  const setJSXCode = useCallback((value: string) => dispatch({type: 'setJSXCode', value}), [])
+  const setJSXCode = (value: string) => dispatch({type: 'setJSXCode', value})
 
-  const setJSXCursor = useCallback(
-    (value: CodeEditorSelection) => dispatch({type: 'setJSXCursor', value}),
-    [],
-  )
+  const setJSXCursor = (value: CodeEditorSelection) => dispatch({type: 'setJSXCursor', value})
 
-  const setHookCode = useCallback((value: string) => dispatch({type: 'setHookCode', value}), [])
+  const setHookCode = (value: string) => dispatch({type: 'setHookCode', value})
 
-  const setHookCursor = useCallback(
-    (value: CodeEditorSelection) => dispatch({type: 'setHookCursor', value}),
-    [],
-  )
+  const setHookCursor = (value: CodeEditorSelection) => dispatch({type: 'setHookCursor', value})
 
-  const setCanvasWidth = useCallback(
-    (value: CanvasWidth | null) => dispatch({type: 'setCanvasWidth', value}),
-    [],
-  )
+  const setCanvasWidth = (value: CanvasWidth | null) => dispatch({type: 'setCanvasWidth', value})
 
   return (
     <Card flex={1} overflow="hidden" shadow={1} style={{minHeight: 'auto'}}>

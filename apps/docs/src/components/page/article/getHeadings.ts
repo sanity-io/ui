@@ -19,12 +19,20 @@ function isBlock(record: {_type: string}): record is SanityBlockValue {
 export function getHeadings(
   article: Extract<NonNullable<TargetByPathQueryResult>, {_type: 'article'}>['content'],
 ): HeadingType[] {
-  const blocks = (article || []).filter(isBlock) as unknown as SanityBlockValue[]
-
   // todo: uniqify `slug`
-  return blocks
-    .filter((block) => block.style && HEADER_RE.test(block.style))
-    .map((block) => getHeadingInfo(block))
+  const headings: HeadingType[] = []
+
+  for (const record of article || []) {
+    if (!isBlock(record)) continue
+
+    const block = record as unknown as SanityBlockValue
+
+    if (block.style && HEADER_RE.test(block.style)) {
+      headings.push(getHeadingInfo(block))
+    }
+  }
+
+  return headings
 }
 
 function getHeadingInfo(block: SanityBlockValue): HeadingType {

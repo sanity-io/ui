@@ -86,9 +86,6 @@ export function Toast(
     : {duration: 0}
 
   const hasDuration = duration && isFinite(duration) && duration < LONG_ENOUGH_BUT_NOT_TOO_LONG
-  const initial: ContainerVariants[] = ['hidden', 'initial']
-  const animate: ContainerVariants[] = ['visible', 'slideIn']
-  const exit: ContainerVariants[] = ['hidden', 'slideOut']
 
   return (
     <MotionToast
@@ -180,6 +177,10 @@ const container = {
   },
 } satisfies Variants
 type ContainerVariants = keyof typeof container
+
+const initial: ContainerVariants[] = ['hidden', 'initial']
+const animate: ContainerVariants[] = ['visible', 'slideIn']
+const exit: ContainerVariants[] = ['hidden', 'slideOut']
 
 const content = {
   initial: {

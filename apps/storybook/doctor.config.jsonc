@@ -1,0 +1,13 @@
+{
+  "ignore": {
+    "overrides": [
+      {
+        // `id`/`aria-controls` are required Tab props, but this visual
+        // regression fixture renders no tab panels, so they are deliberately
+        // blank (also suppressed inline for oxlint's aria-proptypes).
+        "files": ["stories/tests/Tones.tsx"],
+        "rules": ["react-doctor/aria-proptypes"],
+      },
+    ],
+  },
+}

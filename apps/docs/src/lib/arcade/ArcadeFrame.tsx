@@ -1,8 +1,8 @@
-import {ReactElement, useCallback, useEffect, useRef, useState} from 'react'
+import {ReactElement, useEffect, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {basePath} from '@/constants'
-import {isRecord} from '@/lib/common'
+import {isRecord} from '@/lib/common/isRecord'
 
 const Root = styled.iframe`
   background: none;
@@ -54,24 +54,18 @@ export function ArcadeFrame({
     }
   }, [frame])
 
-  const postMessage = useCallback(
-    (msg: any) => {
-      if (!frame) return
+  // Send input to frame (queued until the frame reports ready)
+  useEffect(() => {
+    const msg = {type: 'arcadeFrame/input', hookCode, jsxCode}
 
-      if (ready) {
-        frame.contentWindow?.postMessage(msg, location.origin)
-      } else {
-        msgQueueRef.current.push(msg)
-      }
-    },
-    [frame, ready],
-  )
+    if (!frame) return
 
-  // Send input to frame
-  useEffect(
-    () => postMessage({type: 'arcadeFrame/input', hookCode, jsxCode}),
-    [hookCode, jsxCode, postMessage],
-  )
+    if (ready) {
+      frame.contentWindow?.postMessage(msg, location.origin)
+    } else {
+      msgQueueRef.current.push(msg)
+    }
+  }, [frame, hookCode, jsxCode, ready])
 
   return <Root ref={setFrame} src={`${basePath}/arcade/frame`} />
 }

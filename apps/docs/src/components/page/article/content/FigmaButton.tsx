@@ -1,7 +1,7 @@
 import {Button} from '@sanity/ui'
 import {stegaClean} from 'next-sanity'
 
-import {FigmaLogo} from '@/components/assets'
+import {FigmaLogo} from '@/components/assets/FigmaLogo'
 import type {PortableTextValue} from '@/types'
 
 export function FigmaButton(props: {

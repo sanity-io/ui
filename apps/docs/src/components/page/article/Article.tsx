@@ -3,7 +3,7 @@
 import {Box, Container, Flex, Heading, Stack, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
 import {stegaClean, type StegaBranded} from 'next-sanity'
-import {ReactElement, useMemo} from 'react'
+import {ReactElement} from 'react'
 import {styled} from 'styled-components'
 
 import type {TargetByPathQueryResult} from '#sanity.types'
@@ -39,9 +39,10 @@ export function Article(props: {
   const {article} = props
 
   // Heading slugs are derived from the text, so strip stega metadata first
-  const headings = useMemo(() => getHeadings(stegaClean(article.content)), [article])
+  // (the React Compiler caches these derivations)
+  const headings = getHeadings(stegaClean(article.content))
 
-  const toc = useMemo(() => getTOCTree(headings), [headings])
+  const toc = getTOCTree(headings)
 
   return (
     <Flex>

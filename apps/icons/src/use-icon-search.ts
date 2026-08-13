@@ -1,5 +1,5 @@
 import {icons, type IconSymbol} from '@sanity/icons'
-import {startTransition, useCallback, useEffect, useState} from 'react'
+import {startTransition, useEffect, useState} from 'react'
 
 import {searchClient} from './sanity-client'
 
@@ -44,13 +44,11 @@ export function useIconSearch(query: string): IconSearchState {
   const trimmed = query.trim()
 
   const [remote, _setRemote] = useState<RemoteResult | null>(null)
-  const setRemote = useCallback(
-    (result: RemoteResult) => startTransition(() => _setRemote(result)),
-    [_setRemote],
-  )
 
   useEffect(() => {
     if (trimmed === '') return undefined
+
+    const setRemote = (result: RemoteResult) => startTransition(() => _setRemote(result))
 
     let cancelled = false
 
@@ -66,7 +64,11 @@ export function useIconSearch(query: string): IconSearchState {
         if (cancelled) return
 
         // Recover the icon key from `_id` and keep only icons in the shipped set.
-        const names = rows.map((row) => row.id.replace(/^icon_/, '')).filter(isIconSymbol)
+        const names = rows.flatMap((row) => {
+          const key = row.id.replace(/^icon_/, '')
+
+          return isIconSymbol(key) ? [key] : []
+        })
 
         setRemote({query: trimmed, names, semantic: true})
       } catch {
@@ -80,7 +82,7 @@ export function useIconSearch(query: string): IconSearchState {
       cancelled = true
       clearTimeout(timeout)
     }
-  }, [trimmed, setRemote])
+  }, [trimmed])
 
   if (trimmed === '') {
     return {results: allIconKeys, loading: false, semantic: false}

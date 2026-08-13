@@ -1,6 +1,7 @@
 import {SanityBlockValue} from '@/lib/sanity/types'
 
-import {isArray, isRecord} from './common'
+import {isArray} from './common/isArray'
+import {isRecord} from './common/isRecord'
 
 const blocksToText_defaults = {nonTextBehavior: 'remove'}
 

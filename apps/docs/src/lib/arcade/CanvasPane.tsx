@@ -16,7 +16,7 @@ import {
 } from '@sanity/ui'
 import {Popover} from '@sanity/ui/popover'
 import {useToast} from '@sanity/ui/toast'
-import React, {ReactElement, useCallback, useEffect, useRef, useState} from 'react'
+import React, {ReactElement, useEffect, useRef, useState} from 'react'
 
 import {ArcadeFrame} from './ArcadeFrame'
 import {SIZES} from './constants'
@@ -47,31 +47,27 @@ function MetaEditor({
     setFormDescription(value.description)
   }
 
-  const handleEditorSubmit = useCallback(
-    (event: React.SubmitEvent) => {
-      event.preventDefault()
-      onChange({title: formTitle, description: formDescription})
-      toast.push({
-        status: 'success',
-        title: 'Successfully updated meta data!',
-      })
-    },
-    [formTitle, formDescription, onChange, toast],
-  )
+  const handleEditorSubmit = (event: React.SubmitEvent) => {
+    event.preventDefault()
+    onChange({title: formTitle, description: formDescription})
+    toast.push({
+      status: 'success',
+      title: 'Successfully updated meta data!',
+    })
+  }
 
   useEffect(() => {
     titleInputRef.current?.focus()
   }, [])
 
-  const handleGlobalKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (isTopLayer && event.key === 'Escape') {
-        event.stopPropagation()
-        onCancel()
-      }
-    },
-    [isTopLayer, onCancel],
-  )
+  // The React Compiler caches this on `isTopLayer`/`onCancel`, so
+  // `useGlobalKeyDown` only re-subscribes when they change
+  const handleGlobalKeyDown = (event: KeyboardEvent) => {
+    if (isTopLayer && event.key === 'Escape') {
+      event.stopPropagation()
+      onCancel()
+    }
+  }
 
   useGlobalKeyDown(handleGlobalKeyDown)
 
@@ -126,23 +122,20 @@ export function CanvasPane(props: {
   const popoverRef = useRef<HTMLDivElement | null>(null)
   const editButtonRef = useRef<HTMLButtonElement | null>(null)
 
-  const handleMetaChange = useCallback(
-    (value: ArcadeMeta) => {
-      setEditorOpen(false)
-      onMetaChange(value)
-    },
-    [onMetaChange],
-  )
-
-  const handleMetaCancel = useCallback(() => {
+  const handleMetaChange = (value: ArcadeMeta) => {
     setEditorOpen(false)
-  }, [])
+    onMetaChange(value)
+  }
+
+  const handleMetaCancel = () => {
+    setEditorOpen(false)
+  }
 
   const handleMetaEditorClickOutside = () => setEditorOpen(false)
 
-  const handleEditButtonClick = useCallback(() => {
+  const handleEditButtonClick = () => {
     setEditorOpen((v) => !v)
-  }, [])
+  }
 
   useClickOutsideEvent(handleMetaEditorClickOutside, () => [
     editButtonRef.current,

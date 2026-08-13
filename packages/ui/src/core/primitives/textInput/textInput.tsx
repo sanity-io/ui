@@ -308,10 +308,9 @@ export function TextInput(
       }),
     [padding],
   )
-  const clearButtonProps: TextInputClearButtonProps = useMemo(
-    () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
-    [clearButton],
-  )
+  // Both branches are already referentially stable, so no memoization is needed
+  const clearButtonProps: TextInputClearButtonProps =
+    typeof clearButton === 'object' ? clearButton : EMPTY_RECORD
   const clearButtonNode = useMemo(
     () =>
       !disabled &&

@@ -35,7 +35,7 @@ export const Block: BlockComponent = (props) => {
           {heading && (
             <>
               &nbsp;&nbsp;
-              <a href={`#${heading.slug}`}>
+              <a aria-label={`Link to “${text}”`} href={`#${heading.slug}`}>
                 <LinkIcon />
               </a>
             </>
@@ -56,7 +56,7 @@ export const Block: BlockComponent = (props) => {
           {heading && (
             <>
               &nbsp;&nbsp;
-              <a href={`#${heading.slug}`}>
+              <a aria-label={`Link to “${text}”`} href={`#${heading.slug}`}>
                 <LinkIcon />
               </a>
             </>

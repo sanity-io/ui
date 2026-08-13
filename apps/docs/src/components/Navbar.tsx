@@ -7,7 +7,7 @@ import {ReactElement} from 'react'
 
 import type {NavNode} from '#lib/nav/types.ts'
 
-import {GitHubMark} from './assets'
+import {GitHubMark} from './assets/GitHubMark'
 
 export function Navbar({nav}: {nav: NavNode | null}): ReactElement {
   // `usePathname` excludes the `/ui` basePath, matching the nav tree hrefs

@@ -11,10 +11,10 @@ import * as uiMenu from '@sanity/ui/menu'
 import * as uiPopover from '@sanity/ui/popover'
 import * as uiToast from '@sanity/ui/toast'
 import * as uiTooltip from '@sanity/ui/tooltip'
-import React, {ReactElement, Suspense, useCallback, useEffect, useMemo, useState} from 'react'
+import React, {ReactElement, Suspense, useEffect, useState} from 'react'
 import {keyframes, styled} from 'styled-components'
 
-import {isRecord} from '@/lib/common'
+import {isRecord} from '@/lib/common/isRecord'
 import {Babel, evalComponent, EvalComponentResult, loadBabel} from '@/lib/ide'
 
 // @sanity/icons v5 removed the per-icon barrel exports that
@@ -65,46 +65,44 @@ export default function ArcadeFrameRoute(): ReactElement {
     }
   }, [])
 
-  const evalResult = useMemo<EvalComponentResult | null>(() => {
-    if (babel === null) return null
-    if (hookCode === null) return null
-    if (jsxCode === null) return null
-
-    // The root barrel no longer exports the components that live on their own
-    // entry points (so that it never references their heavy dependencies), but
-    // arcade snippets should still have the full component set in scope.
-    return evalComponent({
-      babel,
-      hookCode,
-      jsxCode,
-      scope: {
-        Icon,
-        icons,
-        ...iconScope,
-        ...ui,
-        ...uiAutocomplete,
-        ...uiBreadcrumbs,
-        ...uiCode,
-        ...uiMenu,
-        ...uiPopover,
-        ...uiToast,
-        ...uiTooltip,
-        ...React,
-        React,
-        styled,
-        keyframes,
-      },
-    })
-  }, [babel, hookCode, jsxCode])
+  // The root barrel no longer exports the components that live on their own
+  // entry points (so that it never references their heavy dependencies), but
+  // arcade snippets should still have the full component set in scope. The
+  // React Compiler caches the evaluation on `babel`/`hookCode`/`jsxCode`.
+  const evalResult: EvalComponentResult | null =
+    babel === null || hookCode === null || jsxCode === null
+      ? null
+      : evalComponent({
+          babel,
+          hookCode,
+          jsxCode,
+          scope: {
+            Icon,
+            icons,
+            ...iconScope,
+            ...ui,
+            ...uiAutocomplete,
+            ...uiBreadcrumbs,
+            ...uiCode,
+            ...uiMenu,
+            ...uiPopover,
+            ...uiToast,
+            ...uiTooltip,
+            ...React,
+            React,
+            styled,
+            keyframes,
+          },
+        })
 
   useEffect(() => {
     void loadBabel().then(setBabel)
   }, [])
 
-  const handleCatch = useCallback((params: {error: Error; info: React.ErrorInfo}) => {
+  const handleCatch = (params: {error: Error; info: React.ErrorInfo}) => {
     params.error.stack = ''
     setRenderError(params.error)
-  }, [])
+  }
 
   const errorMessage = evalResult?.type === 'error' && evalResult.error.message
 

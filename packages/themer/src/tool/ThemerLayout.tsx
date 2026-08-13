@@ -27,9 +27,12 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
 
   // The theme identity must be stable between renders: it feeds the
   // styled-components theme context for the whole Studio, and rebuilding it
-  // would re-render everything
-  const theme = useMemo(() => (options === null ? null : buildTheme(options)), [options])
+  // would re-render everything (the React Compiler caches it on `options`)
+  const theme = options === null ? null : buildTheme(options)
 
+  // The explicit useMemo is kept for oxlint's jsx-no-constructed-context-values,
+  // which cannot know that the React Compiler already caches this object
+  // react-doctor-disable-next-line react-doctor/react-compiler-no-manual-memoization
   const context = useMemo<ThemerContextValue>(
     () => ({baseOptions, options, setOptions, open, setOpen}),
     [baseOptions, options, open],
