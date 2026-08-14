@@ -13,6 +13,12 @@
       // The one-shot DS-276 docs export script is run via unrun, which knip
       // does not recognize as a script runner
       "entry": ["scripts/*.ts"],
+      "ignoreDependencies": [
+        // Not imported by studio source, but must be a direct dependency so
+        // vite can resolve it as an `optimizeDeps.exclude`d external from the
+        // prebundled sanity/plugin chunks (see sanity.cli.ts)
+        "@sanity/ui",
+      ],
     },
     "packages/color": {
       // The palette generator is invoked via the package's `generate` script,
