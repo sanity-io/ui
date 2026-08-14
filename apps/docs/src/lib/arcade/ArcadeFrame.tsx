@@ -28,6 +28,13 @@ export function ArcadeFrame({
     if (!frame) return undefined
 
     const handleMessage = (event: MessageEvent) => {
+      // Several ArcadeFrames can be on one page (e.g. articles with multiple
+      // code examples) and `message` events fire on the shared window. Only
+      // react to this component's own iframe — otherwise the first frame to
+      // signal ready flushes every frame's queue, and frames that are still
+      // loading miss their code until the next edit re-sends it.
+      if (event.source !== frame.contentWindow) return
+
       const msg = event.data
 
       if (isRecord(msg)) {
