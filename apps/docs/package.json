@@ -20,7 +20,6 @@
     "@babel/standalone": "^7.29.8",
     "@codemirror/lang-javascript": "^6.2.5",
     "@lezer/highlight": "^1.2.3",
-    "@sanity/color": "workspace:*",
     "@sanity/icons": "workspace:*",
     "@sanity/logos": "workspace:*",
     "@sanity/ui": "workspace:*",

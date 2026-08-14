@@ -15,6 +15,8 @@
  * Run with: pnpm --filter sanity-ui-studio export:docs
  */
 
+// oxlint-disable no-console, no-await-in-loop
+
 import {mkdir, rm, writeFile} from 'node:fs/promises'
 import {dirname, join} from 'node:path'
 import {fileURLToPath} from 'node:url'
@@ -37,7 +39,7 @@ interface SanityReference {
 }
 
 interface SpanChild {
-  _type: 'span'
+  _type: string
   text: string
   marks?: string[]
 }
@@ -48,24 +50,20 @@ interface MarkDef {
   href?: string
 }
 
-interface Block {
-  _type: 'block'
-  _key: string
-  style?: string
-  listItem?: 'bullet' | 'number'
-  level?: number
-  children?: SpanChild[]
-  markDefs?: MarkDef[]
-}
-
 interface CodeValue {
   code?: string
   language?: string
 }
 
-interface ContentItem extends Partial<Block> {
+interface ContentItem {
   _type: string
   _key: string
+  // block
+  style?: string
+  listItem?: 'bullet' | 'number'
+  level?: number
+  children?: SpanChild[]
+  markDefs?: MarkDef[]
   // code
   code?: string | CodeValue
   language?: string
@@ -76,14 +74,14 @@ interface ContentItem extends Partial<Block> {
   // callout
   tone?: string
   icon?: string
-  content?: Block[]
+  content?: ContentItem[]
   // propertyTable
   properties?: {
     name?: string
     type?: string
     required?: boolean
     deprecated?: string
-    description?: Block[]
+    description?: ContentItem[]
   }[]
   caption?: string
   // image
@@ -155,7 +153,7 @@ async function query<T>(groq: string): Promise<T> {
   url.searchParams.set('perspective', 'published')
   const res = await fetch(url)
   if (!res.ok) throw new Error(`Query failed (${res.status}): ${await res.text()}`)
-  const body = (await res.json()) as {result: T}
+  const body: {result: T} = await res.json()
   return body.result
 }
 
@@ -171,7 +169,7 @@ function assetUrl(ref: string): string {
 
 /** Registers an asset for download and returns its basePath-relative URL */
 function localImage(ref: string, suggestedName: string): string {
-  const extension = ref.split('-').at(-1)
+  const extension = ref.split('-').at(-1) ?? 'png'
   let name = imageFiles.get(ref)
   if (!name) {
     name = `${suggestedName}.${extension}`
@@ -258,7 +256,7 @@ function spanToJsx(span: SpanChild, markDefs: MarkDef[]): string {
   return out
 }
 
-function blockChildrenToJsx(block: Block): string {
+function blockChildrenToJsx(block: ContentItem): string {
   const markDefs = block.markDefs ?? []
   const parts: string[] = []
   for (const span of block.children ?? []) {
@@ -268,7 +266,7 @@ function blockChildrenToJsx(block: Block): string {
   return parts.join('')
 }
 
-function blockText(block: Block): string {
+function blockText(block: ContentItem): string {
   return (block.children ?? []).map((span) => span.text).join('')
 }
 
@@ -280,10 +278,7 @@ interface Heading {
 
 function getHeadings(content: ContentItem[]): Heading[] {
   return content
-    .filter(
-      (item): item is ContentItem & Block =>
-        item._type === 'block' && /^h\d/.test(item.style ?? ''),
-    )
+    .filter((item) => item._type === 'block' && /^h\d/.test(item.style ?? ''))
     .map((block) => {
       const text = blockText(block)
       return {
@@ -299,7 +294,7 @@ interface Emitter {
   lines: string[]
 }
 
-function emitBlock(block: Block, emitter: Emitter): string {
+function emitBlock(block: ContentItem, emitter: Emitter): string {
   const children = blockChildrenToJsx(block)
   const style = block.style ?? 'normal'
   if (style === 'normal') {
@@ -315,7 +310,7 @@ function emitBlock(block: Block, emitter: Emitter): string {
   throw new Error(`Unsupported block style: ${style}`)
 }
 
-function emitPlainBlocks(blocks: Block[], emitter: Emitter): string {
+function emitPlainBlocks(blocks: ContentItem[], emitter: Emitter): string {
   // Callout content and property descriptions only ever use `normal` blocks
   return blocks
     .map((block) => {
@@ -333,12 +328,13 @@ function emitContentItem(item: ContentItem, emitter: Emitter, imageName: string)
     case 'code': {
       emitter.imports.add('CodeBlock')
       const language = item.language ? ` ${jsxStringAttr('language', item.language)}` : ''
-      return `<CodeBlock${language} code={${jsTemplate((item.code as string) ?? '')}} />`
+      const code = typeof item.code === 'string' ? item.code : ''
+      return `<CodeBlock${language} code={${jsTemplate(code)}} />`
     }
 
     case 'codeExample': {
       emitter.imports.add('CodeExampleBlock')
-      const code = item.code as CodeValue | undefined
+      const code = typeof item.code === 'object' ? item.code : undefined
       if (!code?.code) return ''
       const attrs = [
         item.title ? jsxStringAttr('title', item.title) : '',
@@ -374,7 +370,7 @@ function emitContentItem(item: ContentItem, emitter: Emitter, imageName: string)
         if (property.description) emitter.imports.add('PlainContent')
         return `{${fields.join(', ')}}`
       })
-      const caption = item.caption ? `\ncaption=${`{${jsString(item.caption)}}`}` : ''
+      const caption = item.caption ? `\ncaption={${jsString(item.caption)}}` : ''
       return `<PropertyTable${caption}\nproperties={[\n${properties.join(',\n')},\n]}\n/>`
     }
 
@@ -438,14 +434,14 @@ function emitContent(content: ContentItem[], emitter: Emitter, imageName: string
       const items: string[] = []
       while (content[index]?._type === 'block' && content[index]?.listItem === 'bullet') {
         emitter.imports.add('ListItem')
-        items.push(`<ListItem>${blockChildrenToJsx(content[index] as Block)}</ListItem>`)
+        items.push(`<ListItem>${blockChildrenToJsx(content[index])}</ListItem>`)
         index++
       }
       index--
       emitter.imports.add('BulletList')
       out.push(`<BulletList>\n${items.join('\n')}\n</BulletList>`)
     } else if (item._type === 'block') {
-      out.push(emitBlock(item as Block, emitter))
+      out.push(emitBlock(item, emitter))
     } else {
       out.push(emitContentItem(item, emitter, `${imageName}-${index}`))
     }
@@ -602,8 +598,8 @@ function emitHomePage(screen: ScreenDoc): string {
 export default function Page() {
 return (
 <HeroSection
-headline=${`{${jsString(hero.headline ?? '')}}`}
-copy=${`{${jsString(hero.copy ?? '')}}`}
+headline={${jsString(hero.headline ?? '')}}
+copy={${jsString(hero.copy ?? '')}}
 backgroundImage={{
 dark: ${jsString(dark ? localImage(dark, 'home-hero-dark') : '')},
 light: ${jsString(light ? localImage(light, 'home-hero-light') : '')},
@@ -611,7 +607,7 @@ light: ${jsString(light ? localImage(light, 'home-hero-light') : '')},
 ctas={[
 ${ctas.join(',\n')},
 ]}
-linksHeader=${`{${jsString(hero.linksHeader ?? '')}}`}
+linksHeader={${jsString(hero.linksHeader ?? '')}}
 links={[
 ${links.join(',\n')},
 ]}

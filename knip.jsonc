@@ -9,6 +9,11 @@
     },
     "apps/docs": {},
     "apps/icons": {},
+    "apps/studio": {
+      // The one-shot DS-276 docs export script is run via unrun, which knip
+      // does not recognize as a script runner
+      "entry": ["scripts/*.ts"],
+    },
     "packages/color": {
       // The palette generator is invoked via the package's `generate` script,
       // not imported by application code
