@@ -1,21 +1,23 @@
-import {Icon} from '@sanity/icons'
+import {Icon, type IconSymbol} from '@sanity/icons'
 import {Card, Flex, Text} from '@sanity/ui'
-import {stegaClean} from 'next-sanity'
 import {ReactNode} from 'react'
 
-import type {SettingsData} from '#lib/data/_global/types.ts'
+export interface BannerData {
+  hidden?: boolean
+  icon?: IconSymbol
+  title?: string
+  link?: {title?: string; href?: string}
+}
 
-export function Banner({settings}: {settings: SettingsData | null}): ReactNode {
-  if (!settings?.banner || settings.banner.hidden) return null
-
-  const {banner} = settings
+export function Banner({banner}: {banner: BannerData | null}): ReactNode {
+  if (!banner || banner.hidden) return null
 
   return (
     <Card padding={3} tone="primary">
       <Flex align="center" gap={2} justify="center">
         {banner.icon && (
           <Text muted size={1}>
-            <Icon symbol={stegaClean(banner.icon)} />
+            <Icon symbol={banner.icon} />
           </Text>
         )}
 
@@ -24,7 +26,7 @@ export function Banner({settings}: {settings: SettingsData | null}): ReactNode {
           {banner.link?.href && (
             <>
               {' '}
-              <a href={stegaClean(banner.link.href)} target="_blank" rel="noreferrer">
+              <a href={banner.link.href} target="_blank" rel="noreferrer">
                 {banner.link.title} &rarr;
               </a>
             </>

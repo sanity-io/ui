@@ -1,0 +1,7 @@
+# Sanity
+/dist
+/.sanity
+
+# Environment variables
+.env
+.env.local

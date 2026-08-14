@@ -1,9 +1,11 @@
 'use client'
 
+import {GroqLogo, GroqMonogram, SanityLogo, SanityMonogram} from '@sanity/logos'
 import {Box, Card, Grid, Heading, useTheme_v2} from '@sanity/ui'
 import {Code} from '@sanity/ui/code'
+import {ReactElement} from 'react'
 
-export function LogoGrid({
+function LogoGrid({
   logos,
 }: {
   logos: {name: string; component: React.ComponentType<{dark?: boolean}>}[]
@@ -26,4 +28,22 @@ export function LogoGrid({
       ))}
     </Grid>
   )
+}
+
+const groqLogos = [
+  {name: 'GroqLogo', component: GroqLogo as any},
+  {name: 'GroqMonogram', component: GroqMonogram},
+]
+
+const sanityLogos = [
+  {name: 'SanityLogo', component: SanityLogo as any},
+  {name: 'SanityMonogram', component: SanityMonogram as any},
+]
+
+export function GroqLogoGrid(): ReactElement {
+  return <LogoGrid logos={groqLogos} />
+}
+
+export function SanityLogoGrid(): ReactElement {
+  return <LogoGrid logos={sanityLogos} />
 }
