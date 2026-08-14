@@ -241,11 +241,11 @@ function spanToJsx(span: SpanChild, markDefs: MarkDef[]): string {
     if (def) {
       if (def._type !== 'link') throw new Error(`Unsupported annotation: ${def._type}`)
       const href = def.href
-      // Matches the old renderer: absent hrefs render a bare <a>, external
-      // hrefs open in a new tab
+      // Like the old renderer, external hrefs open in a new tab (absent
+      // hrefs render a bare <a> — fix those up manually)
       const attrs = [
         href ? jsxStringAttr('href', href) : '',
-        href?.startsWith('http') ? `target="_blank" rel="noindex nofollow"` : '',
+        href?.startsWith('http') ? `target="_blank" rel="nofollow noopener noreferrer"` : '',
       ].filter(Boolean)
       out = `<a${attrs.length ? ` ${attrs.join(' ')}` : ''}>${out}</a>`
     } else {
@@ -298,6 +298,9 @@ function emitBlock(block: ContentItem, emitter: Emitter): string {
   const children = blockChildrenToJsx(block)
   const style = block.style ?? 'normal'
   if (style === 'normal') {
+    // Empty blocks (authoring artifacts) would only render stray vertical
+    // whitespace
+    if (!children) return ''
     emitter.imports.add('Paragraph')
     return `<Paragraph>${children}</Paragraph>`
   }

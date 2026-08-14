@@ -91,14 +91,18 @@ function App () {
 
       <Paragraph>
         {'Try out the various components in '}
-        <a href="https://www.sanity.io/ui/arcade" target="_blank" rel="noindex nofollow">
+        <a
+          href="https://www.sanity.io/ui/arcade"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >
           the JSX playground
         </a>
         {' or '}
         <a
           href="https://www.sanity.io/guides/your-first-input-component-for-sanity-studio-v3"
           target="_blank"
-          rel="noindex nofollow"
+          rel="nofollow noopener noreferrer"
         >
           learn how to create an input component in Sanity Studio
         </a>

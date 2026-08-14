@@ -42,7 +42,7 @@ export default function Page() {
             <a
               href="https://www.sanity.io/ui/docs/hook/use-click-outside-event"
               target="_blank"
-              rel="noindex nofollow"
+              rel="nofollow noopener noreferrer"
             >
               useClickOutsideEvent
             </a>

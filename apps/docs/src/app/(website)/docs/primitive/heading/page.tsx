@@ -77,7 +77,7 @@ export default function Page() {
         <a
           href="https://hiddedevries.nl/en/blog/2018-09-01-heading-structures-are-tables-of-contents"
           target="_blank"
-          rel="noindex nofollow"
+          rel="nofollow noopener noreferrer"
         >
           a bit like a table of contents
         </a>

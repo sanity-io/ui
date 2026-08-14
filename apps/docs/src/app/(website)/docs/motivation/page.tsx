@@ -165,7 +165,7 @@ export default function Page() {
           <a
             href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html"
             target="_blank"
-            rel="noindex nofollow"
+            rel="nofollow noopener noreferrer"
           >
             WAI-ARIA design pattern
           </a>
@@ -178,7 +178,7 @@ export default function Page() {
           <a
             href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/menu-button/menu-button-links.html"
             target="_blank"
-            rel="noindex nofollow"
+            rel="nofollow noopener noreferrer"
           >
             WAI-ARIA
           </a>
@@ -216,15 +216,11 @@ export default function Page() {
 
       <Paragraph>
         {'Test coverage with '}
-        <a href="https://www.cypress.io/" target="_blank" rel="noindex nofollow">
+        <a href="https://www.cypress.io/" target="_blank" rel="nofollow noopener noreferrer">
           Cypress
         </a>
         , to avoid regressions between releases.
       </Paragraph>
-
-      <Paragraph></Paragraph>
-
-      <Paragraph></Paragraph>
     </Article>
   )
 }

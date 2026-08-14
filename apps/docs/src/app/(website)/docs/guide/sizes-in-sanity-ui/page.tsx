@@ -64,7 +64,7 @@ export default function Page() {
         <a
           href="https://v2.chakra-ui.com/docs/components/button"
           target="_blank"
-          rel="noindex nofollow"
+          rel="nofollow noopener noreferrer"
         >
           Chakra UI
         </a>
@@ -168,19 +168,23 @@ export default function Page() {
       <BulletList>
         <ListItem>
           Material UI<em>{': '}</em>
-          <a href="https://mui.com/system/spacing/" target="_blank" rel="noindex nofollow">
+          <a
+            href="https://mui.com/system/spacing/"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+          >
             https://mui.com/system/spacing/
           </a>
         </ListItem>
         <ListItem>
           {'Theme UI: '}
-          <a href="https://theme-ui.com/" target="_blank" rel="noindex nofollow">
+          <a href="https://theme-ui.com/" target="_blank" rel="nofollow noopener noreferrer">
             https://theme-ui.com/
           </a>
         </ListItem>
         <ListItem>
           {'Styled System: '}
-          <a href="https://styled-system.com/" target="_blank" rel="noindex nofollow">
+          <a href="https://styled-system.com/" target="_blank" rel="nofollow noopener noreferrer">
             https://styled-system.com/
           </a>
         </ListItem>
@@ -189,7 +193,7 @@ export default function Page() {
           <a
             href="https://seek-oss.github.io/braid-design-system/"
             target="_blank"
-            rel="noindex nofollow"
+            rel="nofollow noopener noreferrer"
           >
             https://seek-oss.github.io/braid-design-system/
           </a>

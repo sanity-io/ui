@@ -10,8 +10,8 @@ export function Heading2(props: {children?: ReactNode; id: string}): ReactElemen
       <Heading as="h2" size={[1, 1, 2]}>
         {children}
         &nbsp;&nbsp;
-        <a href={`#${id}`}>
-          <LinkIcon />
+        <a aria-label="Link to this section" href={`#${id}`}>
+          <LinkIcon aria-hidden />
         </a>
       </Heading>
     </Box>
@@ -26,8 +26,8 @@ export function Heading3(props: {children?: ReactNode; id: string}): ReactElemen
       <Heading as="h3" size={1}>
         {children}
         &nbsp;&nbsp;
-        <a href={`#${id}`}>
-          <LinkIcon />
+        <a aria-label="Link to this section" href={`#${id}`}>
+          <LinkIcon aria-hidden />
         </a>
       </Heading>
     </Box>

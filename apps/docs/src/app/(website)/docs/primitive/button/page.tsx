@@ -142,7 +142,11 @@ export default function Page() {
 
       <Paragraph>
         {'How accessible names are calculated exactly: '}
-        <a href="https://www.w3.org/TR/accname-1.1/" target="_blank" rel="noindex nofollow">
+        <a
+          href="https://www.w3.org/TR/accname-1.1/"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >
           Accessible Name and Description Computation 1.1
         </a>
         .

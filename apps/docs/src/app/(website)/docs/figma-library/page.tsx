@@ -47,7 +47,7 @@ export default function Page() {
         <a
           href="https://www.figma.com/community/file/946703925105795979"
           target="_blank"
-          rel="noindex nofollow"
+          rel="nofollow noopener noreferrer"
         >
           a fully-featured Figma library
         </a>

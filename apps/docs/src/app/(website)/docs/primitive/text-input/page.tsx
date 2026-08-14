@@ -139,14 +139,20 @@ export default function Page() {
           <a
             href="https://www.w3.org/TR/using-aria/#fifthrule"
             target="_blank"
-            rel="noindex nofollow"
+            rel="nofollow noopener noreferrer"
           >
             Fifth rule of ARIA: accessible name
           </a>
           {' (W3C)'}
         </ListItem>
         <ListItem>
-          <a>Composing effective and user friendly names</a>
+          <a
+            href="https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/#composingeffectiveanduser-friendlyaccessiblenames"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+          >
+            Composing effective and user friendly names
+          </a>
           {' (W3C)'}
         </ListItem>
       </BulletList>

@@ -36,7 +36,7 @@ export default function Page() {
         <a
           href="https://www.w3.org/TR/wai-aria-practices/examples/menu-button/menu-button-links.html"
           target="_blank"
-          rel="noindex nofollow"
+          rel="nofollow noopener noreferrer"
         >
           the WAI-ARIA specification
         </a>
