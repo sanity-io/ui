@@ -23,7 +23,10 @@ export default function Page() {
           subtitle: 'Great DX with carefully designed APIs and UI principles.',
         },
         {
-          href: '/docs/motivation#theming-with-javascript',
+          // The heading slugs decamelize "JavaScript"/"TypeScript" (these two
+          // links pointed at non-existent anchors even on the Sanity-backed
+          // site)
+          href: '/docs/motivation#theming-with-java-script',
           title: 'Themeable with JS',
           subtitle: 'A flexible system for theming with design tokens.',
         },
@@ -33,7 +36,7 @@ export default function Page() {
           subtitle: 'Apply common layout patterns using simple utility components.',
         },
         {
-          href: '/docs/motivation#typescript-support',
+          href: '/docs/motivation#type-script-support',
           title: 'TypeScript support',
           subtitle: 'Leverage the safety and utility provided by strictly typed props.',
         },
