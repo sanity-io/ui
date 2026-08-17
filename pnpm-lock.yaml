@@ -442,8 +442,8 @@ importers:
   packages/figma:
     devDependencies:
       '@figma/plugin-typings':
-        specifier: ^1.133.0
-        version: 1.133.0
+        specifier: ^1.134.0
+        version: 1.134.0
       '@sanity/tsdown-config':
         specifier: 'catalog:'
         version: 0.24.1(@babel/runtime@7.29.7)(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(babel-plugin-react-compiler@1.0.0)(rolldown@1.2.3)(supports-color@8.1.1)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.23)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.2)(tsx@4.23.12)(yaml@2.9.0))
@@ -466,8 +466,8 @@ importers:
   packages/figma-color:
     devDependencies:
       '@figma/plugin-typings':
-        specifier: ^1.133.0
-        version: 1.133.0
+        specifier: ^1.134.0
+        version: 1.134.0
       '@sanity/color':
         specifier: workspace:*
         version: link:../color
@@ -1874,8 +1874,8 @@ packages:
       '@noble/hashes':
         optional: true
 
-  '@figma/plugin-typings@1.133.0':
-    resolution: {integrity: sha512-MAM1zACY7JB18gO6B0ZaMquCk/xPhbk4Dkug3KGTN7H/M3fO2tZ0h/05b1umDiKA/P1ZEXbLraNyffaVFkFpXw==}
+  '@figma/plugin-typings@1.134.0':
+    resolution: {integrity: sha512-e0JSSt7lczdi748/NLVEb7rhf/PG1IZyzieMiQ1AsaPN+A+sqvyYlIfxjzodPKrcdc9Pw9ZVjcHsT36oU744IA==}
 
   '@floating-ui/core@1.8.0':
     resolution: {integrity: sha512-0CIZ5itps/8x7BG8dEIhs53BvCUH2PCoogtakwRTut+Arm58sJooJ0AuZhLw2HJYIR5cMLNPBSS728sPho2khQ==}
@@ -10157,7 +10157,7 @@ snapshots:
     optionalDependencies:
       '@noble/hashes': 2.3.0
 
-  '@figma/plugin-typings@1.133.0': {}
+  '@figma/plugin-typings@1.134.0': {}
 
   '@floating-ui/core@1.8.0':
     dependencies:
