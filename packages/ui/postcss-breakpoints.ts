@@ -1,5 +1,6 @@
 import type {PluginCreator, Rule} from 'postcss'
 import postcss from 'postcss'
+import selectorParser from 'postcss-selector-parser'
 import type {ContainerWithChildren} from 'postcss/lib/container'
 
 export const BREAKPOINTS = ['360px', '600px', '900px', '1200px', '1800px'] as const
@@ -16,10 +17,18 @@ function getIsDynamicCssPath(fromPath: string | undefined) {
   return fromPath.replace(/\\/g, '/').includes('/classes/dynamic/')
 }
 
+function suffixSelector(selector: string, suffix: string) {
+  return selectorParser((selectors) => {
+    selectors.walkClasses((classNode) => {
+      classNode.value = `${classNode.value}${suffix}`
+    })
+  }).processSync(selector)
+}
+
 function getClone(rule: Rule, suffix: string) {
   const clone = rule.clone()
 
-  clone.selector = `${clone.selector}${suffix}`
+  clone.selector = suffixSelector(clone.selector, suffix)
   clone.raws.before = `\n${'  '}`
   clone.raws.after = `\n${'  '}`
 
