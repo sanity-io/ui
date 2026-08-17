@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.4
+
+### Patch Changes
+
+- af4d4b7: exclude hidden attribute in display css
+
 ## 5.0.0-alpha.3
 
 ### Patch Changes
