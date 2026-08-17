@@ -8,12 +8,12 @@ import {Box} from '../box/Box'
 import {Flex} from '../flex/Flex'
 import {Heading} from '../heading/Heading'
 import {IconButton} from '../icon-button/IconButton'
-import {type DialogProps, dialogProps} from './dialog.props'
+import {type ModalProps, modalProps} from './modal.props'
 
-const dialogClassName = suffixClassName('sui-Dialog')
+const modalClassName = suffixClassName('sui-Modal')
 
 /** @public */
-export function Dialog(props: DialogProps) {
+export function Modal(props: ModalProps) {
   const {
     children,
     className,
@@ -22,38 +22,38 @@ export function Dialog(props: DialogProps) {
     isOpen = false,
     onClose,
     ...rest
-  } = getProps(props, dialogProps)
+  } = getProps(props, modalProps)
 
-  const dialogRef = useRef<HTMLDialogElement>(null)
+  const modalRef = useRef<HTMLDialogElement>(null)
 
-  const dialogClasses = clsx(
-    dialogClassName,
+  const modalClasses = clsx(
+    modalClassName,
     'sui-inset0 sui-m-auto sui-radius5 sui-shadow3 sui-position-relative',
   )
 
   useEffect(() => {
-    const dialogElement = dialogRef.current
-    if (!dialogElement) return
+    const modalElement = modalRef.current
+    if (!modalElement) return
 
     if (isOpen) {
-      if (!dialogElement.open) {
-        dialogElement.showModal()
+      if (!modalElement.open) {
+        modalElement.showModal()
       }
     } else {
-      if (dialogElement.open) {
-        dialogElement.close()
+      if (modalElement.open) {
+        modalElement.close()
       }
     }
   }, [isOpen])
 
   return (
     <dialog
-      ref={dialogRef}
+      ref={modalRef}
       closedby="any"
       onClose={onClose}
-      className={clsx(dialogClasses, className)}
+      className={clsx(modalClasses, className)}
       style={style}
-      data-ui="Dialog"
+      data-ui="Modal"
       {...rest}
     >
       <Flex justifyContent="space-between" alignItems="center" padding={4}>
@@ -64,7 +64,7 @@ export function Dialog(props: DialogProps) {
           aria-label="Close"
           level="tertiary"
           icon={CloseIcon}
-          onClick={() => dialogRef.current?.close()}
+          onClick={() => modalRef.current?.close()}
         />
       </Flex>
       <Box flexGrow={1} overflowY="auto" paddingX={4} paddingBottom={4}>
@@ -74,4 +74,4 @@ export function Dialog(props: DialogProps) {
   )
 }
 
-export type {DialogProps}
+export type {ModalProps}

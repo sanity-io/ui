@@ -5,58 +5,55 @@ import {expect} from 'storybook/test'
 import {Box} from '../../../../packages/ui/src/components/box/Box'
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {Container} from '../../../../packages/ui/src/components/container/Container'
-import {Dialog} from '../../../../packages/ui/src/components/dialog/Dialog'
-import {
-  type DialogProps,
-  dialogProps,
-} from '../../../../packages/ui/src/components/dialog/dialog.props'
+import {Modal} from '../../../../packages/ui/src/components/modal/Modal'
+import {type ModalProps, modalProps} from '../../../../packages/ui/src/components/modal/modal.props'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
 import {getArgTypes} from '../utils/getArgTypes'
 
-const argTypes = getArgTypes(dialogProps)
+const argTypes = getArgTypes(modalProps)
 
-const meta: Meta<typeof Dialog> = {
-  title: 'Components/Dialog',
+const meta: Meta<typeof Modal> = {
+  title: 'Components/Modal',
   args: {
     header: 'Modal heading',
   },
   argTypes,
-  component: Dialog,
+  component: Modal,
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Dialog',
+      context: '[data-ui="Modal"]',
     },
     performance: {
-      component: Dialog,
+      component: Modal,
     },
   },
 }
 
 export default meta
-type Story = StoryObj<typeof Dialog>
+type Story = StoryObj<typeof Modal>
 
-function DialogDefaultStory(props: DialogProps) {
-  const [dialogOpen, setDialogOpen] = useState(false)
+function ModalDefaultStory(props: ModalProps) {
+  const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <Box padding={4}>
-      <Button text="Open dialog" onClick={() => setDialogOpen(true)} />
-      <Dialog {...props} isOpen={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <Text>Dialog body content</Text>
-      </Dialog>
+      <Button text="Open modal" onClick={() => setModalOpen(true)} />
+      <Modal {...props} isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+        <Text>Modal body content</Text>
+      </Modal>
     </Box>
   )
 }
 
-function DialogScrollingContentStory(props: DialogProps) {
-  const [dialogOpen, setDialogOpen] = useState(false)
+function ModalScrollingContentStory(props: ModalProps) {
+  const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <Box padding={4}>
-      <Button text="Open dialog" onClick={() => setDialogOpen(true)} />
-      <Dialog {...props} isOpen={dialogOpen} onClose={() => setDialogOpen(false)}>
+      <Button text="Open modal" onClick={() => setModalOpen(true)} />
+      <Modal {...props} isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <Container size={0}>
           <VStack gap={3}>
             <Text>
@@ -87,21 +84,21 @@ function DialogScrollingContentStory(props: DialogProps) {
             </Text>
           </VStack>
         </Container>
-      </Dialog>
+      </Modal>
     </Box>
   )
 }
 export const Default: Story = {
-  render: (props) => <DialogDefaultStory {...props} />,
+  render: (props) => <ModalDefaultStory {...props} />,
   play: async ({canvas}) => {
-    await expect((await canvas.findByRole('dialog', {hidden: true})).dataset.ui).toBe('Dialog')
+    await expect((await canvas.findByRole('dialog', {hidden: true})).dataset.ui).toBe('Modal')
   },
 }
 
 export const ScrollingContent: Story = {
   name: 'Scrolling content',
-  render: (props) => <DialogScrollingContentStory {...props} />,
+  render: (props) => <ModalScrollingContentStory {...props} />,
   play: async ({canvas}) => {
-    await expect((await canvas.findByRole('dialog', {hidden: true})).dataset.ui).toBe('Dialog')
+    await expect((await canvas.findByRole('dialog', {hidden: true})).dataset.ui).toBe('Modal')
   },
 }
