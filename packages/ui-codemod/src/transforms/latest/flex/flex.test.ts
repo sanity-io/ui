@@ -1,4 +1,6 @@
-import {defineInlineTest} from '../../../utils/testUtils'
+import {expect} from 'vitest'
+
+import {defineCrossFileTest, defineInlineTest} from '../../../utils/testUtils'
 import transform from './flex'
 
 defineInlineTest(
@@ -77,4 +79,79 @@ defineInlineTest(
     }} />
   `,
   'moves grid props to style and updates mapped values',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Flex} from '@sanity/ui'
+
+    export const RootFlex = styled(Flex)(({theme}) => ({}))
+  `,
+  `
+    import {RootFlex} from './Component.styled'
+
+    export function Component() {
+      return <RootFlex align="center" />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootFlex alignItems="center" />')
+  },
+  'transforms attributes on imported styled Flex wrappers',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Flex} from '@sanity/ui'
+
+    export const RootFlex = styled(Flex)(({theme}) => ({}))
+  `,
+  `
+    import {Flex} from 'another-package'
+    import {RootFlex} from './Component.styled'
+
+    export function Component() {
+      return (
+        <>
+          <RootFlex align="center" />
+          <Flex direction="column" />
+        </>
+      )
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootFlex alignItems="center" />')
+    expect(output).toContain('<Flex direction="column" />')
+  },
+  'does not transform attributes on unrelated Flex from another package',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Flex} from '@sanity/ui'
+
+    export const RootFlex = styled(Flex)(({theme}) => ({}))
+  `,
+  `
+    import {RootFlex} from './index'
+
+    export function Component() {
+      return <RootFlex align="center" />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootFlex alignItems="center" />')
+  },
+  'transforms styled Box wrappers imported through barrel re-exports',
+  {
+    extraFiles: {
+      'index.ts': `export {RootFlex} from './Component.styled'`,
+    },
+  },
 )
