@@ -7,7 +7,7 @@ function post(init?: RequestInit & {url?: string}) {
   return POST(new Request(url, {method: 'POST', ...requestInit}))
 }
 
-describe('POST /api/expire-tags', () => {
+describe('/api/expire-tags', () => {
   it('echoes tags from a JSON body and does not require a secret', async () => {
     const response = await post({
       body: JSON.stringify({secret: 'unused', tags: ['s1:abc', 's1:def']}),
