@@ -1,8 +1,9 @@
-import {getTheme_v2, ThemeFontKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp, _responsive, ThemeProps} from '../../styles'
+import {ThemeFontKey} from '../../../theme/system/font'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {_getArrayProp, _responsive} from '../../styles/helpers'
+import {ThemeProps} from '../../styles/types'
 import {Skeleton, SkeletonProps} from './skeleton'
 
 const StyledSkeleton = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>((
@@ -61,58 +62,54 @@ export interface CodeSkeletonProps extends SkeletonProps {
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const TextSkeleton = forwardRef(function TextSkeleton(
+export function TextSkeleton(
   props: TextSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
   const $size = _getArrayProp(size)
 
-  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="text" />
-})
+  return <StyledSkeleton {...restProps} $size={$size} $style="text" />
+}
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const LabelSkeleton = forwardRef(function LabelSkeleton(
+export function LabelSkeleton(
   props: LabelSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
   const $size = _getArrayProp(size)
 
-  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="label" />
-})
+  return <StyledSkeleton {...restProps} $size={$size} $style="label" />
+}
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const HeadingSkeleton = forwardRef(function HeadingSkeleton(
+export function HeadingSkeleton(
   props: HeadingSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
   const $size = _getArrayProp(size)
 
-  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="heading" />
-})
+  return <StyledSkeleton {...restProps} $size={$size} $style="heading" />
+}
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const CodeSkeleton = forwardRef(function CodeSkeleton(
+export function CodeSkeleton(
   props: CodeSkeletonProps &
     Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'height' | 'size'>,
-  ref: React.Ref<HTMLDivElement>,
 ) {
   const {size = 2, ...restProps} = props
   const $size = _getArrayProp(size)
 
-  return <StyledSkeleton {...restProps} $size={$size} ref={ref} $style="code" />
-})
+  return <StyledSkeleton {...restProps} $size={$size} $style="code" />
+}

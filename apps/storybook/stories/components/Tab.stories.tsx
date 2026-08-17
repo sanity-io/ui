@@ -77,8 +77,7 @@ function ExampleStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <TabList space={[1, 2, 3]}>
+      <TabList gap={[1, 2, 3]}>
         <Tab
           aria-controls="example-panel-foo"
           icon={SunIcon}

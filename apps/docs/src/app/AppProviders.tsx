@@ -1,7 +1,8 @@
 'use client'
 
-import {LayerProvider, ThemeProvider, ToastProvider} from '@sanity/ui'
+import {LayerProvider, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
+import {ToastProvider} from '@sanity/ui/toast'
 import {ReactNode} from 'react'
 import {registerLanguage} from 'react-refractor'
 import bash from 'refractor/bash'
@@ -19,9 +20,7 @@ registerLanguage(tsx)
 const theme = buildTheme()
 
 /**
- * Global providers shared by every route (the website, the embedded studio
- * and the arcade frame). Sanity content (nav, settings) is provided per route
- * group by `AppDataProvider`, which overrides this context with fetched data.
+ * Global providers shared by every route (the website and the arcade frame).
  */
 export function AppProviders(props: {children?: ReactNode}) {
   const {children} = props

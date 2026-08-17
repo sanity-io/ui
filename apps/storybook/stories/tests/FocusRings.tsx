@@ -6,17 +6,12 @@ import {RocketIcon} from '@sanity/icons/Rocket'
 import {SearchIcon} from '@sanity/icons/Search'
 import {SunIcon} from '@sanity/icons/Sun'
 import {
-  Autocomplete,
   Avatar,
   Button,
   Card,
   Checkbox,
   Flex,
   Heading,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
   Radio,
   Select,
   Stack,
@@ -28,6 +23,8 @@ import {
   TextInput,
   ThemeProvider,
 } from '@sanity/ui'
+import {Autocomplete} from '@sanity/ui/autocomplete'
+import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import {buildTheme} from '@sanity/ui/theme'
 import {ReactNode} from 'react'
 
@@ -35,8 +32,7 @@ const theme = buildTheme()
 
 const Wrapper = ({children, title}: {children: ReactNode; title: string}) => {
   return (
-    // oxlint-disable-next-line no-deprecated
-    <Stack space={3}>
+    <Stack gap={3}>
       <Text size={1} weight="semibold">
         {title}
       </Text>
@@ -49,10 +45,8 @@ export function FocusRings(): ReactNode {
   return (
     <ThemeProvider scheme="light" theme={theme}>
       <Card padding={5}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={7}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack space={6}>
+        <Stack gap={7}>
+          <Stack gap={6}>
             <Heading>Primitives</Heading>
             <Wrapper title="Avatar (as button)">
               <Flex gap={3} wrap="wrap">
@@ -160,8 +154,7 @@ export function FocusRings(): ReactNode {
               </Flex>
             </Wrapper>
           </Stack>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack space={6}>
+          <Stack gap={6}>
             <Heading>Components</Heading>
             <Wrapper title="Autocomplete">
               <Autocomplete
@@ -187,8 +180,7 @@ export function FocusRings(): ReactNode {
               />
             </Wrapper>
             <Wrapper title="TabList">
-              {/* oxlint-disable-next-line no-deprecated */}
-              <TabList space={2}>
+              <TabList gap={2}>
                 <Tab
                   aria-controls="example-panel-foo"
                   icon={SunIcon}

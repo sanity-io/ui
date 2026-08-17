@@ -1,8 +1,8 @@
-import {FocusEvent, forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
+import {FocusEvent, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {EMPTY_RECORD} from '../../constants'
-import {containsOrEqualsElement, isHTMLElement} from '../../helpers'
+import {containsOrEqualsElement, isHTMLElement} from '../../helpers/element'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
 
@@ -23,11 +23,15 @@ interface LayerChildrenProps {
 
 const StyledLayer = styled.div({position: 'relative'})
 
-const LayerChildren = forwardRef(function LayerChildren(
-  props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-  forwardedRef: React.Ref<HTMLDivElement>,
-) {
-  const {children, onActivate, onFocus, style = EMPTY_RECORD, ...restProps} = props
+function LayerChildren(props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>) {
+  const {
+    children,
+    onActivate,
+    onFocus,
+    ref: forwardedRef,
+    style = EMPTY_RECORD,
+    ...restProps
+  } = props
   const {zIndex, isTopLayer} = useLayer()
   const lastFocusedRef = useRef<HTMLElement | null>(null)
   const ref = useRef<HTMLDivElement | null>(null)
@@ -77,22 +81,17 @@ const LayerChildren = forwardRef(function LayerChildren(
       {children}
     </StyledLayer>
   )
-})
+}
 
 /**
  * @public
  */
-export const Layer = forwardRef(function Layer(
-  props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
-  ref: React.Ref<HTMLDivElement>,
-) {
+export function Layer(props: LayerProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>) {
   const {children, zOffset = 1, ...restProps} = props
 
   return (
     <LayerProvider zOffset={zOffset}>
-      <LayerChildren {...restProps} ref={ref}>
-        {children}
-      </LayerChildren>
+      <LayerChildren {...restProps}>{children}</LayerChildren>
     </LayerProvider>
   )
-})
+}

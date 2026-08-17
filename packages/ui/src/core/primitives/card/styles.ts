@@ -1,9 +1,9 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {ThemeProps} from '../../styles'
-import {_cardColorStyle} from '../../styles/card'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {_cardColorStyle} from '../../styles/card/_cardColorStyle'
 import {focusRingStyle} from '../../styles/focusRing'
+import {ThemeProps} from '../../styles/types'
 import {CardStyleProps} from './types'
 
 export function cardStyle(
@@ -17,12 +17,14 @@ function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof cs
   const {space} = getTheme_v2(props.theme)
 
   return css`
-    ${$checkered &&
-    css`
-      background-size: ${space[3]}px ${space[3]}px;
-      background-position: 50% 50%;
-      background-image: var(--card-bg-image);
-    `}
+    ${
+      $checkered &&
+      css`
+        background-size: ${space[3]}px ${space[3]}px;
+        background-position: 50% 50%;
+        background-image: var(--card-bg-image);
+      `
+    }
 
     &[data-as='button'] {
       -webkit-font-smoothing: inherit;
@@ -96,9 +98,11 @@ function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof c
         }
 
         &:focus-visible {
-          --card-focus-ring-box-shadow: ${$focusRing
-            ? focusRingStyle({base: color, border, focusRing: card.focusRing})
-            : undefined};
+          --card-focus-ring-box-shadow: ${
+            $focusRing
+              ? focusRingStyle({base: color, border, focusRing: card.focusRing})
+              : undefined
+          };
         }
       }
     }
@@ -135,9 +139,11 @@ function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof c
         }
 
         &:focus-visible {
-          --card-focus-ring-box-shadow: ${$focusRing
-            ? focusRingStyle({base: color, border, focusRing: card.focusRing})
-            : undefined};
+          --card-focus-ring-box-shadow: ${
+            $focusRing
+              ? focusRingStyle({base: color, border, focusRing: card.focusRing})
+              : undefined
+          };
         }
       }
     }

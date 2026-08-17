@@ -2,16 +2,10 @@
 
 import {Box, Container, Flex, Heading, Stack, Text} from '@sanity/ui'
 import {getTheme_v2} from '@sanity/ui/theme'
-import {stegaClean} from 'next-sanity'
-import {ReactElement, useMemo} from 'react'
+import {ReactElement, ReactNode} from 'react'
 import {styled} from 'styled-components'
 
-import type {TargetByPathQueryResult} from '#sanity.types'
-
-import {ArticleHeadingsContext} from './ArticleHeadingsContext'
-import {ArticleContent} from './content'
-import {getHeadings} from './getHeadings'
-import {getTOCTree} from './getToc'
+import {getTOCTree, type HeadingType} from './getToc'
 import {HeadingsNav} from './HeadingsNav'
 
 const TocBox = styled(Box)((props) => {
@@ -31,17 +25,27 @@ const TocBox = styled(Box)((props) => {
   }
 })
 
-// @TODO pick the type with `article'` from union of TargetByPathQueryResult, without a ternary just pick in TS or something
-// do not use extends
+const Content = styled.div`
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+`
+
 export function Article(props: {
-  article: Extract<NonNullable<TargetByPathQueryResult>, {_type: 'article'}>
+  children?: ReactNode
+  headings?: HeadingType[]
+  isComponent?: boolean
+  isHook?: boolean
+  title: string
+  wide?: boolean
 }): ReactElement {
-  const {article} = props
+  const {children, headings = [], isComponent, isHook, title, wide} = props
 
-  // Heading slugs are derived from the text, so strip stega metadata first
-  const headings = useMemo(() => getHeadings(stegaClean(article.content)), [article])
-
-  const toc = useMemo(() => getTOCTree(headings), [headings])
+  const toc = getTOCTree(headings)
 
   return (
     <Flex>
@@ -57,22 +61,20 @@ export function Article(props: {
       </TocBox>
 
       <Box as="article" flex={3} paddingX={[4, 5, 6]} paddingY={[5, 6]} style={{order: 1}}>
-        <Container width={article.layout?.wide ? 2 : 1}>
+        <Container width={wide ? 2 : 1}>
           <Box marginBottom={[5, 5, 5, 6]}>
             <Heading as="h1" size={[2, 2, 3, 4, 5]}>
-              {article.apiMember?.isComponent ? (
-                <code>&lt;{article.title} /&gt;</code>
-              ) : article.apiMember?.isHook ? (
-                <code>{article.title}()</code>
+              {isComponent ? (
+                <code>&lt;{title} /&gt;</code>
+              ) : isHook ? (
+                <code>{title}()</code>
               ) : (
-                article.title
+                title
               )}
             </Heading>
           </Box>
 
-          <ArticleHeadingsContext.Provider value={headings}>
-            {article.content && <ArticleContent content={article.content} headings={headings} />}
-          </ArticleHeadingsContext.Provider>
+          <Content>{children}</Content>
         </Container>
       </Box>
     </Flex>

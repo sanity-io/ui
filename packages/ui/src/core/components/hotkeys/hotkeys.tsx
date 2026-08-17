@@ -1,9 +1,9 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {Inline, KBD} from '../../primitives'
-import {_getArrayProp} from '../../styles'
-import {Radius} from '../../types'
+import {Inline} from '../../primitives/inline/inline'
+import {KBD} from '../../primitives/kbd/kbd'
+import {_getArrayProp} from '../../styles/helpers'
+import {Radius} from '../../types/radius'
 
 /**
  * @public
@@ -14,9 +14,9 @@ export interface HotkeysProps {
   padding?: number | number[]
   radius?: Radius | Radius[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   keys?: string[]
 }
 
@@ -40,13 +40,9 @@ const Key = styled(KBD)`
  *
  * @public
  */
-export const Hotkeys = forwardRef(function Hotkeys(
-  props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'ref' | 'size'>,
-  ref: React.Ref<HTMLElement>,
-) {
-  // oxlint-disable-next-line no-deprecated
-  const {fontSize, gap, keys, padding, radius, space: deprecated_space = 0.5, ...restProps} = props
-  const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
+export function Hotkeys(props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>) {
+  const {fontSize, gap = 0.5, keys, padding, radius, ref, ...restProps} = props
+  const spacing = _getArrayProp(gap)
 
   if (!keys || keys.length === 0) {
     return <></>
@@ -64,4 +60,4 @@ export const Hotkeys = forwardRef(function Hotkeys(
       </Inline>
     </StyledHotkeys>
   )
-})
+}

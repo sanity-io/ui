@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "3.4.4",
+  "version": "4.0.3",
   "keywords": [
     "components",
     "design-system",
@@ -24,39 +24,46 @@
     "dist"
   ],
   "type": "module",
-  "sideEffects": false,
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.cts",
-  "typesVersions": {
-    "*": {
-      "_visual-editing": [
-        "./dist/_visual-editing.d.cts"
-      ],
-      "theme": [
-        "./dist/theme.d.cts"
-      ]
-    }
-  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./exports/index.ts",
-    "./_visual-editing": "./exports/_visual-editing.ts",
-    "./theme": "./exports/theme.ts",
+    ".": "./src/exports/index.ts",
+    "./autocomplete": "./src/exports/autocomplete.ts",
+    "./breadcrumbs": "./src/exports/breadcrumbs.ts",
+    "./code": "./src/exports/code.ts",
+    "./menu": "./src/exports/menu.ts",
+    "./popover": "./src/exports/popover.ts",
+    "./theme": "./src/exports/theme.ts",
+    "./toast": "./src/exports/toast.ts",
+    "./tooltip": "./src/exports/tooltip.ts",
+    "./styles.css": {
+      "types": "./dist/styles-css.d.ts",
+      "browser": "./dist/styles.css",
+      "style": "./dist/styles.css",
+      "node": "./dist/styles-css.js",
+      "default": "./dist/styles-css.js"
+    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "exports": {
-      ".": {
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
-      },
-      "./_visual-editing": {
-        "import": "./dist/_visual-editing.js",
-        "require": "./dist/_visual-editing.cjs"
-      },
-      "./theme": {
-        "import": "./dist/theme.js",
-        "require": "./dist/theme.cjs"
+      ".": "./dist/index.js",
+      "./autocomplete": "./dist/autocomplete.js",
+      "./breadcrumbs": "./dist/breadcrumbs.js",
+      "./code": "./dist/code.js",
+      "./menu": "./dist/menu.js",
+      "./popover": "./dist/popover.js",
+      "./theme": "./dist/theme.js",
+      "./toast": "./dist/toast.js",
+      "./tooltip": "./dist/tooltip.js",
+      "./styles.css": {
+        "types": "./dist/styles-css.d.ts",
+        "browser": "./dist/styles.css",
+        "style": "./dist/styles.css",
+        "node": "./dist/styles-css.js",
+        "default": "./dist/styles-css.js"
       },
       "./package.json": "./package.json"
     }
@@ -65,34 +72,35 @@
     "build": "tsdown",
     "clean": "rimraf dist",
     "prepack": "pnpm build",
+    "prepare": "pnpm build",
     "test": "vitest run",
     "test:watch": "vitest",
     "watch": "tsdown --watch"
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.9",
-    "@juggle/resize-observer": "^3.4.0",
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
     "csstype": "^3.2.3",
-    "motion": "^12.42.2",
-    "react-compiler-runtime": "1.0.0",
+    "motion": "^13.1.0",
     "react-is": "catalog:",
     "react-refractor": "catalog:",
     "use-effect-event": "^2.0.3"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
+    "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
+    "@testing-library/user-event": "^14.6.3",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/react-is": "catalog:",
+    "@vanilla-extract/css": "^1.21.2",
     "babel-plugin-react-compiler": "catalog:",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.1",
     "react": "catalog:",
     "react-dom": "catalog:",
     "rimraf": "catalog:",
@@ -105,11 +113,11 @@
     "vitest-axe": "^1.0.0-pre.5"
   },
   "peerDependencies": {
-    "react": "^18 || >=19.0.0-0",
-    "react-dom": "^18 || >=19.0.0-0",
-    "styled-components": "^5.2 || ^6"
+    "react": "^19.2",
+    "react-dom": "^19.2",
+    "styled-components": "^6.1"
   },
   "engines": {
-    "node": ">=20.19 <22 || >=22.12"
+    "node": ">=22.12"
   }
 }

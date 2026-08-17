@@ -1,4 +1,5 @@
-import {Box, Button, Grid, Heading, Inline, Toast, ToastProvider, useToast} from '@sanity/ui'
+import {Box, Button, Grid, Heading, Inline} from '@sanity/ui'
+import {Toast, ToastProvider, useToast} from '@sanity/ui/toast'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useId} from 'react'
 
@@ -66,13 +67,10 @@ export const WithHook: Story = {
     }
 
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Grid columns={1} gap={4}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid columns={1} gap={2}>
+      <Grid gridTemplateColumns={1} gap={4}>
+        <Grid gridTemplateColumns={1} gap={2}>
           <Heading>Default duration</Heading>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Inline space={2}>
+          <Inline gap={2}>
             <Button
               onClick={() =>
                 toast.push({
@@ -127,11 +125,9 @@ export const WithHook: Story = {
             />
           </Inline>
         </Grid>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid columns={1} gap={2}>
+        <Grid gridTemplateColumns={1} gap={2}>
           <Heading>10s duration</Heading>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Inline space={2}>
+          <Inline gap={2}>
             <Button
               onClick={() =>
                 toast.push({
@@ -190,11 +186,9 @@ export const WithHook: Story = {
             />
           </Inline>
         </Grid>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid columns={1} gap={2}>
+        <Grid gridTemplateColumns={1} gap={2}>
           <Heading>Infinite duration</Heading>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Inline space={2}>
+          <Inline gap={2}>
             <Button
               onClick={() =>
                 toast.push({
@@ -253,11 +247,9 @@ export const WithHook: Story = {
             />
           </Inline>
         </Grid>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid columns={1} gap={2}>
+        <Grid gridTemplateColumns={1} gap={2}>
           <Heading>Sanity Studio patterns</Heading>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Inline space={2}>
+          <Inline gap={2}>
             <Button
               onClick={() =>
                 toast.push({
@@ -267,8 +259,7 @@ export const WithHook: Story = {
                   description: (
                     <Box paddingTop={2}>
                       <Button
-                        // oxlint-disable-next-line no-deprecated
-                        space={3}
+                        gap={3}
                         padding={3}
                         onClick={() => window.location.reload()}
                         text="Push to reload"

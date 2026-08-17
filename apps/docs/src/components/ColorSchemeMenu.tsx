@@ -5,7 +5,8 @@ import {CheckmarkIcon} from '@sanity/icons/Checkmark'
 import {DesktopIcon} from '@sanity/icons/Desktop'
 import {MoonIcon} from '@sanity/icons/Moon'
 import {SunIcon} from '@sanity/icons/Sun'
-import {Button, Menu, MenuButton, MenuItem} from '@sanity/ui'
+import {Button} from '@sanity/ui'
+import {Menu, MenuButton, MenuItem} from '@sanity/ui/menu'
 import type {ReactElement} from 'react'
 
 import {useColorSchemePreference, useSetColorSchemePreference} from '#context/color-scheme'
@@ -45,9 +46,6 @@ export function ColorSchemeMenu(): ReactElement {
             const selected = preference === option.preference
 
             return (
-              // MenuItem always renders `tabIndex={-1}`, so the rule's focusability
-              // requirement is already met.
-              // oxlint-disable-next-line jsx-a11y/interactive-supports-focus
               <MenuItem
                 aria-checked={selected}
                 icon={option.icon}

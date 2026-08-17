@@ -51,8 +51,7 @@ export const Radius: Story = {
 export const InheritedTones: Story = {
   render: (props) => {
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={3}>
+      <Stack gap={3}>
         {rowBuilder({
           renderItem: ({value}) => (
             <Card border key={value} padding={4} tone={value}>

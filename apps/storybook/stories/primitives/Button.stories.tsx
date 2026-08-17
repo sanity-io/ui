@@ -43,8 +43,6 @@ const meta: Meta<typeof Button> = {
     padding: getSpaceControls(),
     radius: getRadiusControls(),
     gap: getSpaceControls(),
-    // oxlint-disable-next-line no-deprecated
-    space: getSpaceControls(),
     text: {control: 'text'},
     width: getButtonWidthControls(),
   },
@@ -140,8 +138,7 @@ export const MultipleStyles: Story = {
     const SubHeader = () => (
       <>
         <div />
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid columns={2} marginY={2}>
+        <Grid gridTemplateColumns={2} marginY={2}>
           <Text size={0} align={'center'}>
             Default
           </Text>
@@ -149,8 +146,7 @@ export const MultipleStyles: Story = {
             Size small
           </Text>
         </Grid>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid columns={3} marginY={2}>
+        <Grid gridTemplateColumns={3} marginY={2}>
           <Text size={0} align={'center'}>
             Default
           </Text>
@@ -162,8 +158,7 @@ export const MultipleStyles: Story = {
             Size small
           </Text>
         </Grid>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid columns={3} marginY={2}>
+        <Grid gridTemplateColumns={3} marginY={2}>
           <Text size={0} align={'center'}>
             Default
           </Text>
@@ -180,8 +175,7 @@ export const MultipleStyles: Story = {
     )
 
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={3}>
+      <Stack gap={3}>
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({
             scheme: 'light',
@@ -197,15 +191,7 @@ export const MultipleStyles: Story = {
                   <Button {...props} tone={row} mode={column} text={props.text} muted />
                 )}
                 {/* Small button */}
-                <Button
-                  {...props}
-                  // oxlint-disable-next-line no-deprecated
-                  space={2}
-                  padding={2}
-                  tone={row}
-                  mode={column}
-                  text={props.text}
-                />
+                <Button {...props} gap={2} padding={2} tone={row} mode={column} text={props.text} />
               </Flex>
             ),
           })}
@@ -224,15 +210,7 @@ export const MultipleStyles: Story = {
                   <Button {...props} tone={row} mode={column} text={props.text} muted />
                 )}
                 {/* Small button */}
-                <Button
-                  {...props}
-                  // oxlint-disable-next-line no-deprecated
-                  space={2}
-                  padding={2}
-                  tone={row}
-                  mode={column}
-                  text={props.text}
-                />
+                <Button {...props} gap={2} padding={2} tone={row} mode={column} text={props.text} />
               </Flex>
             ),
           })}
@@ -246,14 +224,11 @@ export const CustomButton: Story = {
   render: (props) => {
     return (
       <Flex align="center" height="fill" justify="center">
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={2}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Grid columns={5} gap={1}>
+        <Stack gap={2}>
+          <Grid gridTemplateColumns={5} gap={1}>
             {BUTTON_TONES.map((tone) => (
               <Button {...props} key={tone} mode="bleed" padding={3} tone={tone} text={undefined}>
-                {/* oxlint-disable-next-line no-deprecated */}
-                <Stack space={2}>
+                <Stack gap={2}>
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
@@ -267,12 +242,10 @@ export const CustomButton: Story = {
               </Button>
             ))}
           </Grid>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Grid columns={5} gap={1}>
+          <Grid gridTemplateColumns={5} gap={1}>
             {BUTTON_TONES.map((tone) => (
               <Button {...props} key={tone} mode="ghost" padding={3} tone={tone} text={undefined}>
-                {/* oxlint-disable-next-line no-deprecated */}
-                <Stack space={2}>
+                <Stack gap={2}>
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
@@ -287,12 +260,10 @@ export const CustomButton: Story = {
             ))}
           </Grid>
 
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Grid columns={5} gap={1}>
+          <Grid gridTemplateColumns={5} gap={1}>
             {BUTTON_TONES.map((tone) => (
               <Button {...props} key={tone} mode="default" padding={3} tone={tone} text={undefined}>
-                {/* oxlint-disable-next-line no-deprecated */}
-                <Stack space={2}>
+                <Stack gap={2}>
                   <Text>{tone}</Text>
                   <Text muted>Muted</Text>
                   <Text muted>
@@ -327,8 +298,7 @@ export const Stacked: Story = {
       <Flex align="center" height="fill" justify="center">
         <Container width={0} style={{textAlign: 'center'}}>
           <Box padding={4}>
-            {/* oxlint-disable-next-line no-deprecated */}
-            <Stack space={1}>
+            <Stack gap={1}>
               {BUTTON_TONES.map((tone) => (
                 <Button {...props} key={tone} text={tone} tone={tone} />
               ))}
@@ -437,12 +407,9 @@ export const CustomIcons: Story = {
   parameters: {controls: {include: []}},
   render: () => (
     <Flex align="center" height="fill" justify="center">
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Inline space={1}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Button fontSize={1} icon={RocketIcon} padding={2} space={2} text="Rocket" />
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Button fontSize={1} icon={CustomIcon} padding={2} space={2} text="Heart" />
+      <Inline gap={1}>
+        <Button fontSize={1} icon={RocketIcon} padding={2} gap={2} text="Rocket" />
+        <Button fontSize={1} icon={CustomIcon} padding={2} gap={2} text="Heart" />
       </Inline>
     </Flex>
   ),
@@ -456,10 +423,8 @@ const DISABLED_DEFAULT_PROPS: ButtonOwnProps = {
 function DisabledLayout() {
   return (
     <Container width={2}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack space={4}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid columns={3} gap={4}>
+      <Stack gap={4}>
+        <Grid gridTemplateColumns={3} gap={4}>
           <Text size={1} weight="semibold">
             Default
           </Text>
@@ -471,12 +436,9 @@ function DisabledLayout() {
           </Text>
         </Grid>
 
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={2}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Grid columns={3} gap={4}>
-            {/* oxlint-disable-next-line no-deprecated */}
-            <Stack space={2}>
+        <Stack gap={2}>
+          <Grid gridTemplateColumns={3} gap={4}>
+            <Stack gap={2}>
               <Button {...DISABLED_DEFAULT_PROPS} mode="default" text="Enabled" />
               <Button {...DISABLED_DEFAULT_PROPS} disabled mode="default" text="Disabled" />
               <Button
@@ -488,8 +450,7 @@ function DisabledLayout() {
               />
             </Stack>
 
-            {/* oxlint-disable-next-line no-deprecated */}
-            <Stack space={2}>
+            <Stack gap={2}>
               <Button {...DISABLED_DEFAULT_PROPS} mode="ghost" text="Enabled" />
               <Button {...DISABLED_DEFAULT_PROPS} disabled mode="ghost" text="Disabled" />
               <Button
@@ -501,8 +462,7 @@ function DisabledLayout() {
               />
             </Stack>
 
-            {/* oxlint-disable-next-line no-deprecated */}
-            <Stack space={2}>
+            <Stack gap={2}>
               <Button {...DISABLED_DEFAULT_PROPS} mode="bleed" text="Enabled" />
               <Button {...DISABLED_DEFAULT_PROPS} mode="bleed" disabled text="Disabled" />
               <Button
@@ -523,8 +483,7 @@ function DisabledLayout() {
 export const Disabled: Story = {
   parameters: {controls: {include: []}},
   render: () => (
-    // oxlint-disable-next-line no-deprecated
-    <Stack space={4}>
+    <Stack gap={4}>
       <Card padding={5} scheme="light">
         <DisabledLayout />
       </Card>

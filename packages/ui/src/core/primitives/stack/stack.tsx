@@ -1,9 +1,8 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {ElementType, Props} from '../../types'
-import {Box, BoxOwnProps} from '../box'
+import {_getArrayProp} from '../../styles/helpers'
+import {ElementType, Props} from '../../types/component'
+import {Box, BoxOwnProps} from '../box/box'
 import {responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps, stackBaseStyle} from './styles'
 
 /**
@@ -12,9 +11,9 @@ import {responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps, stackBaseStyl
 export interface StackOwnProps extends BoxOwnProps {
   gap?: number | number[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
 }
 
 /**
@@ -27,25 +26,22 @@ const StyledStack = styled(Box)<ResponsiveStackSpaceStyleProps>(
   responsiveStackSpaceStyle,
 )
 
-const StackComponent = forwardRef(function Stack(
-  props: StackOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+function StackComponent(
+  props: StackOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
 ) {
-  // oxlint-disable-next-line no-deprecated
-  const {as, gap, space: deprecated_space, ...restProps} = props
-  const spacing = gap === undefined ? deprecated_space : gap
+  const {as, gap, ref, ...restProps} = props
 
   return (
     <StyledStack
       data-as={typeof as === 'string' ? as : undefined}
       data-ui="Stack"
       {...restProps}
-      $space={_getArrayProp(spacing)}
+      $space={_getArrayProp(gap)}
       forwardedAs={as}
       ref={ref}
     />
   )
-})
+}
 
 /**
  * The `Stack` component is used to place elements on top of each other.

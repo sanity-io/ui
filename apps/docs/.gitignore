@@ -18,7 +18,6 @@
 # production
 /build
 /dist
-/public/studio
 
 # misc
 .DS_Store
@@ -35,12 +34,8 @@ yarn-error.log*
 # vercel
 .vercel
 
-# sanity
-.sanity
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
 .env*
-!.env.example

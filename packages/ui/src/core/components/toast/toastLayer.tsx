@@ -1,7 +1,7 @@
 import {styled} from 'styled-components'
 
-import {Grid} from '../../primitives/grid'
-import {useLayer} from '../../utils'
+import {Grid} from '../../primitives/grid/grid'
+import {useLayer} from '../../utils/layer/useLayer'
 
 /**
  * @public
@@ -29,7 +29,7 @@ export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
       paddingX={paddingX}
       paddingY={paddingY}
       gap={gap}
-      columns={1}
+      gridTemplateColumns={1}
       style={{zIndex}}
     >
       {children}

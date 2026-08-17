@@ -13,13 +13,7 @@
   // ESLint plugins loaded through oxlint's JS plugins support. Rules from these
   // plugins are enabled per-file-pattern in "overrides".
   "jsPlugins": ["eslint-plugin-storybook"],
-  "ignorePatterns": [
-    "**/.workshop/*",
-    "**/dist/*",
-    "**/etc/*",
-    "**/storybook-static/*",
-    "**/sanity.types.ts"
-  ],
+  "ignorePatterns": ["**/.workshop/*", "**/dist/*", "**/etc/*", "**/storybook-static/*"],
   "options": {
     "denyWarnings": true,
     "reportUnusedDisableDirectives": "error",
@@ -42,10 +36,29 @@
             "name": "styled-components",
             "importNames": ["default"],
             "message": "Please use `import {styled} from \"styled-components\"` instead."
+          },
+          {
+            "name": "react",
+            "importNames": ["forwardRef"],
+            "message": "React 19 passes `ref` as a regular prop — write a plain function component that reads `props.ref` instead of wrapping it in `forwardRef`."
+          },
+          {
+            "name": "react",
+            "importNames": ["createRef"],
+            "message": "Use `useRef` instead of `createRef`."
+          },
+          {
+            "name": "react",
+            "importNames": ["createElement"],
+            "message": "Use JSX instead of `createElement`."
           }
         ]
       }
     ],
+
+    // Prefer function components; error boundaries (getDerivedStateFromError /
+    // componentDidCatch) remain allowed via allowErrorBoundary.
+    "react/prefer-function-component": ["error", {"allowErrorBoundary": true}],
 
     // React Compiler checks
     "react/react-compiler": "error",
@@ -57,6 +70,9 @@
     "typescript/prefer-ts-expect-error": "error",
     "import/no-commonjs": "error",
     "import/no-unassigned-import": ["error", {"allow": ["**/*.css"]}],
+    // Ban `export *` barrel files that pull in large module graphs; import
+    // directly from the module that defines a symbol instead
+    "oxc/no-barrel-file": "error",
     "no-restricted-globals": [
       "error",
       {"name": "__dirname", "message": "Use path.dirname(fileURLToPath(import.meta.url)) instead"},
@@ -102,6 +118,28 @@
       }
     },
     {
+      // `@sanity/icons` and `@sanity/logos` support React 18 (`react` peers of
+      // `^18 || ^19`), where refs only attach to function components wrapped in
+      // `forwardRef` — so `forwardRef` stays allowed there (along with the
+      // `createRef`/`createElement` used by the tests that pin that contract).
+      // Class components remain banned via the root `react/prefer-function-component`.
+      "files": ["packages/icons/**", "packages/logos/**"],
+      "rules": {
+        "eslint/no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "styled-components",
+                "importNames": ["default"],
+                "message": "Please use `import {styled} from \"styled-components\"` instead."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       // apps/blueprints packages contain server-side Sanity Functions, where
       // structured console logging (including `console.info`) is the norm
       "files": ["apps/blueprints/**"],
@@ -115,10 +153,8 @@
       "files": ["apps/docs/**"],
       "plugins": ["nextjs"],
       "rules": {
-        // `import "server-only"` marks modules as server-only in Next.js
-        "import/no-unassigned-import": ["error", {"allow": ["**/*.css", "server-only"]}],
-        // The docs app narrows loosely-typed CMS (Portable Text) data with
-        // `as` assertions throughout; too noisy to be useful here
+        // The arcade/code-editor stack narrows loosely-typed runtime data
+        // with `as` assertions throughout; too noisy to be useful here
         "typescript/no-unsafe-type-assertion": "off"
       }
     },

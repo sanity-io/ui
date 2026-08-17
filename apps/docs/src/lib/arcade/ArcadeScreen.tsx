@@ -5,7 +5,7 @@ import qs from 'qs'
 import {ReactElement, useCallback, useEffect, useReducer, useRef} from 'react'
 
 import {basePath} from '@/constants'
-import {CodeEditorSelection} from '@/lib/codeEditor'
+import {CodeEditorSelection} from '@/lib/codeEditor/types'
 
 import {arcadeReducer} from './arcadeReducer'
 import {CanvasPane} from './CanvasPane'

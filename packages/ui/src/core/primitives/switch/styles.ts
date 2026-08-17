@@ -1,8 +1,9 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {rem, ThemeProps} from '../../styles'
-import {focusRingStyle} from '../../styles/internal'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {focusRingStyle} from '../../styles/focusRing'
+import {rem} from '../../styles/helpers'
+import {ThemeProps} from '../../styles/types'
 
 /* Root */
 export function switchBaseStyles(): ReturnType<typeof css> {
@@ -160,14 +161,18 @@ export function switchThumbStyles(
     transform: translate3d(0, 0, 0);
     box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
 
-    ${checked &&
-    css`
-      transform: translate3d(${checkedOffset}px, 0, 0);
-    `}
+    ${
+      checked &&
+      css`
+        transform: translate3d(${checkedOffset}px, 0, 0);
+      `
+    }
 
-    ${$indeterminate &&
-    css`
-      transform: translate3d(${indeterminateOffset}px, 0, 0);
-    `}
+    ${
+      $indeterminate &&
+      css`
+        transform: translate3d(${indeterminateOffset}px, 0, 0);
+      `
+    }
   `
 }

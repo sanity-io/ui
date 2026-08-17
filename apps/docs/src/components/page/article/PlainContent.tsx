@@ -1,9 +1,8 @@
-import {Box, Heading, Text} from '@sanity/ui'
-import {PortableText, PortableTextBlockComponent, PortableTextReactComponents} from 'next-sanity'
-import {stegaClean} from 'next-sanity'
-import {styled} from 'styled-components'
+'use client'
 
-import {SanityBlockValue} from '@/lib/sanity/types'
+import {Text} from '@sanity/ui'
+import {ReactElement, ReactNode} from 'react'
+import {styled} from 'styled-components'
 
 const Root = styled.div`
   & > *:first-child {
@@ -15,52 +14,11 @@ const Root = styled.div`
   }
 `
 
-const Block: PortableTextBlockComponent = (props) => {
-  const {children, value} = props
-  const block = value as unknown as SanityBlockValue
-  const style = stegaClean(block.style)
-
-  if (style === 'h1') {
-    return (
-      <Box marginTop={6} marginBottom={4}>
-        <Heading as="h1" size={2}>
-          {children}
-        </Heading>
-      </Box>
-    )
-  }
-
-  if (style === 'h2') {
-    return (
-      <Box marginTop={6} marginBottom={4}>
-        <Heading as="h2" size={1}>
-          {children}
-        </Heading>
-      </Box>
-    )
-  }
-
-  if (style === 'h3') {
-    return (
-      <Box marginTop={6} marginBottom={4}>
-        <Heading as="h3" size={0}>
-          {children}
-        </Heading>
-      </Box>
-    )
-  }
-
-  return <Text muted>{children}</Text>
+/** Wrapper for simple prose (callouts, property descriptions) */
+export function PlainContent(props: {children?: ReactNode}): ReactElement {
+  return <Root data-ui="PlainContent">{props.children}</Root>
 }
 
-const components: Partial<PortableTextReactComponents> = {
-  block: Block,
-}
-
-export function PlainContent({blocks}: {blocks: any[]}) {
-  return (
-    <Root data-ui="PlainContent">
-      <PortableText components={components} value={blocks} />
-    </Root>
-  )
+export function PlainParagraph(props: {children?: ReactNode}): ReactElement {
+  return <Text muted>{props.children}</Text>
 }

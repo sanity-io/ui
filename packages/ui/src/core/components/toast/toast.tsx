@@ -1,8 +1,12 @@
 import {CloseIcon} from '@sanity/icons/Close'
-import {motion, type Variant, type Variants} from 'motion/react'
+import {motion, stagger, type Variant, type Variants} from 'motion/react'
 
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
-import {Box, Button, Flex, Stack, Text} from '../../primitives'
+import {Box} from '../../primitives/box/box'
+import {Button} from '../../primitives/button/button'
+import {Flex} from '../../primitives/flex/flex'
+import {Stack} from '../../primitives/stack/stack'
+import {Text} from '../../primitives/text/text'
 import {
   BUTTON_TONE,
   LoadingBar,
@@ -106,8 +110,7 @@ export function Toast(
     >
       <MotionFlex align="flex-start" variants={content} transition={transition}>
         <TextBox flex={1} padding={3}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack space={3}>
+          <Stack gap={3}>
             {title && (
               <Text size={1} weight="medium">
                 {title}
@@ -162,8 +165,7 @@ const container = {
       opacity: 1,
       transition: {
         when: 'beforeChildren',
-        // oxlint-disable-next-line no-deprecated
-        staggerChildren: visualDuration / 3,
+        delayChildren: stagger(visualDuration / 3),
         duration: visualDuration / 3,
       },
     }

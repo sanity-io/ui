@@ -1,12 +1,13 @@
-import {ThemeColorAvatarColorKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useId, useState} from 'react'
+import {useCallback, useEffect, useId, useState} from 'react'
 import ReactIs from 'react-is'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {useTheme_v2} from '../../theme'
-import {AvatarPosition, AvatarSize, AvatarStatus, ElementType, Props} from '../../types'
-import {Label} from '../label'
+import {ThemeColorAvatarColorKey} from '../../../theme/system/color/_system'
+import {_getArrayProp} from '../../styles/helpers'
+import {useTheme_v2} from '../../theme/useTheme'
+import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types/avatar'
+import {ElementType, Props} from '../../types/component'
+import {Label} from '../label/label'
 import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
 
 /**
@@ -54,9 +55,8 @@ const InitialsLabel = styled(Label)({
 
 const AvatarImage = styled.svg(avatarStyle.image)
 
-const AvatarComponent = forwardRef(function Avatar(
-  props: AvatarOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'ref'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
+function AvatarComponent(
+  props: AvatarOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
 ) {
   const {
     __unstable_hideInnerStroke,
@@ -68,6 +68,7 @@ const AvatarComponent = forwardRef(function Avatar(
     onImageLoadError,
     arrowPosition: arrowPositionProp,
     animateArrowFrom,
+    ref,
     status = 'online',
     size: sizeProp = 1,
     ...restProps
@@ -186,7 +187,7 @@ const AvatarComponent = forwardRef(function Avatar(
       )}
     </StyledAvatar>
   )
-})
+}
 
 /**
  * Avatars are used to represent people and other agents (e.g. bots).

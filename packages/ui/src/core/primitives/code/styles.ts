@@ -1,5 +1,6 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css, ExecutionContext} from 'styled-components'
+
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 
 function codeSyntaxHighlightingStyle({theme}: ExecutionContext) {
   const {
@@ -68,6 +69,8 @@ export function codeBaseStyle(): ReturnType<typeof css> {
       /* Certain popular CSS libraries changes the defaults for SVG display */
       /* Make sure SVGs are rendered as inline elements */
       display: inline;
+      /* ...and aren't squeezed by resets that set max-width: 100% */
+      max-width: unset;
     }
 
     & [data-sanity-icon] {

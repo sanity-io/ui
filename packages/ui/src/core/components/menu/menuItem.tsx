@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   isValidElement,
   useCallback,
   useEffect,
@@ -10,14 +9,16 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
-import {Box, Flex, Text} from '../../primitives'
-import {Selectable} from '../../primitives/_selectable'
+import {Selectable} from '../../primitives/_selectable/selectable'
+import {Box} from '../../primitives/box/box'
+import {Flex} from '../../primitives/flex/flex'
+import {Text} from '../../primitives/text/text'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../../primitives/types'
-import {_getArrayProp} from '../../styles'
-import {useRootTheme} from '../../theme'
-import {ElementType, Props} from '../../types'
+import {_getArrayProp} from '../../styles/helpers'
+import {useRootTheme} from '../../theme/useRootTheme'
+import {ElementType, Props} from '../../types/component'
 import {SelectableTone} from '../../types/selectable'
-import {Hotkeys} from '../hotkeys'
+import {Hotkeys} from '../hotkeys/hotkeys'
 import {useMenu} from './useMenu'
 
 /**
@@ -34,9 +35,9 @@ export interface MenuItemOwnProps extends ResponsivePaddingProps, ResponsiveRadi
   selected?: boolean
   gap?: number | number[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   text?: React.ReactNode
   tone?: SelectableTone
 }
@@ -46,12 +47,11 @@ export interface MenuItemOwnProps extends ResponsivePaddingProps, ResponsiveRadi
  */
 export type MenuItemProps<E extends ElementType = 'button'> = Props<MenuItemOwnProps, E>
 
-const MenuItemComponent = forwardRef(function MenuItem(
+const MenuItemComponent = function MenuItem(
   props: MenuItemOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLDivElement>,
-      'as' | 'height' | 'ref' | 'selected' | 'tabIndex'
+      'as' | 'height' | 'selected' | 'tabIndex'
     >,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     as = 'button',
@@ -71,15 +71,13 @@ const MenuItemComponent = forwardRef(function MenuItem(
     paddingLeft,
     pressed,
     radius = 2,
+    ref: forwardedRef,
     selected: selectedProp,
-    gap,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 3,
+    gap = 3,
     text,
     tone = 'default',
     ...restProps
   } = props
-  const spacing = gap === undefined ? deprecated_space : gap
   const {scheme} = useRootTheme()
   const menu = useMenu()
   const {
@@ -150,7 +148,7 @@ const MenuItemComponent = forwardRef(function MenuItem(
       type={as === 'button' ? 'button' : undefined}
     >
       {(IconComponent || text || IconRightComponent) && (
-        <Flex as="span" gap={spacing} align="center" {...paddingProps}>
+        <Flex as="span" gap={gap} align="center" {...paddingProps}>
           {IconComponent && (
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
@@ -189,7 +187,7 @@ const MenuItemComponent = forwardRef(function MenuItem(
       )}
     </Selectable>
   )
-})
+}
 
 /**
  * @public

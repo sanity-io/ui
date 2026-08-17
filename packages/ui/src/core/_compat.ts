@@ -1,55 +1,28 @@
 // This file re-exports API members which existed in the `@sanity/ui` export in v1.
 
+import {buildTheme} from '../theme/build/buildTheme'
+import {type HSL as _HSL, type RGB as _RGB} from '../theme/build/lib/color-fns/types'
 import {
-  type BaseTheme as _BaseTheme,
-  buildTheme,
-  type HSL as _HSL,
-  type PartialThemeColorBuilderOpts,
-  type RGB as _RGB,
-  type RootTheme as _RootTheme,
-  type Theme as _Theme,
-  type ThemeAvatar,
-  type ThemeBoxShadow,
-  type ThemeColor,
-  type ThemeColorBase,
-  type ThemeColorBuilderOpts,
-  type ThemeColorButton,
   type ThemeColorButtonModeKey as _ThemeColorButtonModeKey,
-  type ThemeColorButtonState,
-  type ThemeColorButtonStates,
-  type ThemeColorButtonTones,
-  type ThemeColorCard,
-  type ThemeColorCardState,
-  type ThemeColorGenericState,
-  type ThemeColorInput,
-  type ThemeColorInputState,
-  type ThemeColorInputStates,
-  type ThemeColorMuted,
-  type ThemeColorMutedTone,
-  type ThemeColorName,
-  type ThemeColorScheme,
   type ThemeColorSchemeKey as _ThemeColorSchemeKey,
-  type ThemeColorSchemes,
-  type ThemeColorSelectable,
-  type ThemeColorSelectableState,
-  type ThemeColorSelectableStates,
-  type ThemeColorSolid,
-  type ThemeColorSolidTone,
-  type ThemeColorSpot,
-  type ThemeColorSpotKey,
-  type ThemeColorSyntax as _ThemeColorSyntax,
-  type ThemeColorToneKey,
+} from '../theme/system/color/_system'
+import {type ThemeColorSyntax as _ThemeColorSyntax} from '../theme/system/color/syntax'
+import {
   type ThemeFont as _ThemeFont,
   type ThemeFontKey as _ThemeFontKey,
   type ThemeFonts as _ThemeFonts,
   type ThemeFontSize as _ThemeFontSize,
   type ThemeFontWeight as _ThemeFontWeight,
   type ThemeFontWeightKey as _ThemeFontWeightKey,
-  type ThemeInput,
-  type ThemeLayer as _ThemeLayer,
-  type ThemeShadow as _ThemeShadow,
-  type ThemeStyles,
-} from '@sanity/ui/theme'
+} from '../theme/system/font'
+import {type ThemeLayer as _ThemeLayer} from '../theme/system/layer'
+import {type ThemeBoxShadow, type ThemeShadow as _ThemeShadow} from '../theme/system/shadow'
+import {type ThemeStyles} from '../theme/system/styles'
+import {
+  type BaseTheme as _BaseTheme,
+  type RootTheme as _RootTheme,
+  type Theme as _Theme,
+} from '../theme/system/theme'
 
 /**
  * @public
@@ -159,78 +132,17 @@ export type ThemeLayer = _ThemeLayer
  */
 export type ThemeShadow = _ThemeShadow
 
-export {
-  // oxlint-disable-next-line no-deprecated
-  type PartialThemeColorBuilderOpts,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeAvatar,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColor,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorBase,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorBuilderOpts,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorButton,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorButtonState,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorButtonStates,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorButtonTones,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorCard,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorCardState,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorGenericState,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorInput,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorInputState,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorInputStates,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorMuted,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorMutedTone,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorName,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorScheme,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorSchemes,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorSelectable,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorSelectableState,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorSelectableStates,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorSolid,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorSolidTone,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorSpot,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorSpotKey,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeColorToneKey,
-  // oxlint-disable-next-line no-deprecated
-  type ThemeInput,
-}
-
+import {createColorTheme as _createColorTheme} from '../theme/build/_deprecated/color/factory'
+import {multiply as _multiply} from '../theme/build/lib/color-fns/blend/multiply'
+import {screen as _screen} from '../theme/build/lib/color-fns/blend/screen'
 import {
-  createColorTheme as _createColorTheme,
   hexToRgb as _hexToRgb,
   hslToRgb as _hslToRgb,
-  multiply as _multiply,
-  parseColor as _parseColor,
-  rgba as _rgba,
   rgbToHex as _rgbToHex,
   rgbToHsl as _rgbToHsl,
-  screen as _screen,
-} from '@sanity/ui/theme'
+} from '../theme/build/lib/color-fns/convert'
+import {parseColor as _parseColor} from '../theme/build/lib/color-fns/parse'
+import {rgba as _rgba} from '../theme/build/lib/color-fns/rgba'
 
 /**
  * @public

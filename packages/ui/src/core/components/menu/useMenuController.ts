@@ -23,8 +23,7 @@ export function useMenuController(props: {
   onKeyDown?: React.KeyboardEventHandler
   originElement?: HTMLElement | null
   shouldFocus: 'first' | 'last' | null
-  // oxlint-disable-next-line no-deprecated
-  rootElementRef: React.MutableRefObject<HTMLDivElement | null>
+  rootElementRef: React.RefObject<HTMLDivElement | null>
 }): MenuController {
   const {onKeyDown, originElement, shouldFocus, rootElementRef} = props
   const elementsRef = useRef<HTMLElement[]>([])
@@ -63,6 +62,13 @@ export function useMenuController(props: {
     },
     [rootElementRef, setActiveIndex],
   )
+
+  // Reset the active item when the menu unmounts, or is hidden inside an <Activity> boundary
+  // (which unmounts effects while preserving state), so that reopening behaves like a fresh
+  // mount: `shouldFocus` applies again and `selected` items re-register through `mount`.
+  useEffect(() => {
+    return () => setActiveIndex(-1)
+  }, [setActiveIndex])
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {

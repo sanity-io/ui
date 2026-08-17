@@ -2,11 +2,16 @@ import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
 import {isValidElement, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 
-import {Box, Flex, Popover, PopoverProps, Text} from '../../primitives'
-import {Selectable} from '../../primitives/_selectable'
-import {_getArrayProp} from '../../styles'
-import {useRootTheme} from '../../theme'
-import {ElementType, Props, Radius, SelectableTone} from '../../types'
+import {Selectable} from '../../primitives/_selectable/selectable'
+import {Box} from '../../primitives/box/box'
+import {Flex} from '../../primitives/flex/flex'
+import {Popover, PopoverProps} from '../../primitives/popover/popover'
+import {Text} from '../../primitives/text/text'
+import {_getArrayProp} from '../../styles/helpers'
+import {useRootTheme} from '../../theme/useRootTheme'
+import {ElementType, Props} from '../../types/component'
+import {Radius} from '../../types/radius'
+import {SelectableTone} from '../../types/selectable'
 import {Menu, MenuProps} from './menu'
 import {useMenu} from './useMenu'
 
@@ -33,9 +38,9 @@ export interface MenuGroupOwnProps {
   radius?: Radius | Radius[]
   gap?: number | number[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   text: React.ReactNode
   tone?: SelectableTone
 }
@@ -59,14 +64,11 @@ const MenuGroupComponent = function MenuGroup(
     padding = 3,
     popover,
     radius = 2,
-    gap,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 3,
+    gap = 3,
     text,
     tone = 'default',
     ...restProps
   } = props
-  const spacing = gap === undefined ? deprecated_space : gap
   const menu = useMenu()
   const {scheme} = useRootTheme()
   const {
@@ -203,7 +205,7 @@ const MenuGroupComponent = function MenuGroup(
         tabIndex={-1}
         type={as === 'button' ? 'button' : undefined}
       >
-        <Flex gap={spacing} padding={padding}>
+        <Flex gap={gap} padding={padding}>
           {IconComponent && (
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}

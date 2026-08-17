@@ -1,5 +1,4 @@
-import {CSSObject} from '@sanity/ui/theme'
-
+import {CSSObject} from '../../../theme/system/css'
 import {BadgeStyleProps} from './types'
 
 export function badgeStyle(props: BadgeStyleProps): CSSObject {

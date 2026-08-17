@@ -2,18 +2,17 @@ import {
   BoundaryElementProvider,
   Button,
   Card,
-  Code,
   Flex,
   Portal,
   PortalProvider,
   Stack,
   Text,
-  Tooltip,
-  TooltipDelayGroupProvider,
 } from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {Tooltip, TooltipDelayGroupProvider} from '@sanity/ui/tooltip'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useCallback, useMemo, useState} from 'react'
-import {userEvent, within} from 'storybook/test'
+import {expect, userEvent, waitFor, within} from 'storybook/test'
 
 import {PLACEMENT_OPTIONS} from '../constants'
 import {getShadowControls, getSpaceControls} from '../controls'
@@ -102,7 +101,11 @@ export const WithOpenDelay: Story = {
     const button = canvas.getByText('Hover me')
 
     await userEvent.hover(button)
-    await canvas.findByText("I'm a tooltip")
+    // Animated tooltips are pre-rendered in the DOM inside a hidden <Activity>,
+    // so wait for the tooltip to become visible rather than just present.
+    await waitFor(async () => {
+      await expect(canvas.getByText("I'm a tooltip").checkVisibility()).toBe(true)
+    })
   },
 }
 
@@ -133,7 +136,12 @@ export const WithDelayGroup: Story = {
     const button = canvas.getAllByText('Hover me')[0]
 
     await userEvent.hover(button)
-    await canvas.findByText("I'm a tooltip")
+    // All animated tooltips are pre-rendered in the DOM inside hidden
+    // <Activity> boundaries, so wait for one of them to become visible.
+    await waitFor(async () => {
+      const tooltips = canvas.getAllByText("I'm a tooltip")
+      await expect(tooltips.some((element) => element.checkVisibility())).toBe(true)
+    })
   },
 }
 
@@ -243,8 +251,7 @@ function OverflowingBoundaryStory() {
         >
           <Flex align="center" height="fill" justify="center">
             <Flex justify="center">
-              {/* oxlint-disable-next-line no-deprecated */}
-              <Stack space={2}>
+              <Stack gap={2}>
                 <Code size={1}>Placement: top</Code>
                 <Button
                   disabled={buttonsVisible}
@@ -304,8 +311,7 @@ function CustomPortalStory() {
             <Text>Boundary element</Text>
             <Flex align="center" height="fill" justify="center">
               <Flex justify="center">
-                {/* oxlint-disable-next-line no-deprecated */}
-                <Stack space={2}>
+                <Stack gap={2}>
                   <Tooltip
                     boundaryElement={boundaryElement}
                     content={<Text size={1}>{LOREM_CONTENT}</Text>}
@@ -337,8 +343,7 @@ function CustomPortalStory() {
       />
 
       <Portal __unstable_name="portal1">
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={4}>
+        <Stack gap={4}>
           <Text size={1} weight="medium">
             Portal 1 content
           </Text>

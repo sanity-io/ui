@@ -2,7 +2,7 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '../../../../test/utils'
 import {inlineSpaceStyle} from '../../primitives/inline/styles'
 import {Tab} from './tab'
 import {TabList} from './tabList'
@@ -34,19 +34,8 @@ describe('components/tabList', () => {
     )
   }
 
-  it('should support `space` and `gap` with the same behavior', () => {
-    // oxlint-disable-next-line no-deprecated
-    renderTabList({space: 2})
-    expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
-
-    mockedInlineSpaceStyle.mockClear()
+  it('should support `gap`', () => {
     renderTabList({gap: 2})
     expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
-  })
-
-  it('should prefer `gap` over `space` when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    renderTabList({gap: 3, space: 1})
-    expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [3]}))
   })
 })

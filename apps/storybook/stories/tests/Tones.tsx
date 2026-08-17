@@ -5,7 +5,6 @@ import {
   Button,
   Card,
   Checkbox,
-  Code,
   CodeSkeleton,
   Container,
   Flex,
@@ -18,11 +17,6 @@ import {
   Label,
   LabelSkeleton,
   LayerProvider,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  Popover,
   Radio,
   Select,
   Skeleton,
@@ -37,6 +31,9 @@ import {
   TextSkeleton,
   ThemeProvider,
 } from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
+import {Popover} from '@sanity/ui/popover'
 import {buildTheme, ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {ReactNode, useState} from 'react'
 
@@ -45,8 +42,7 @@ const theme = buildTheme()
 const tones = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 
 const Wrapper = ({title, children}: {title: string; children: React.ReactNode}) => (
-  // oxlint-disable-next-line no-deprecated
-  <Stack space={2}>
+  <Stack gap={2}>
     <Box marginBottom={3}>
       <Text weight="semibold" size={1}>
         {title}
@@ -60,15 +56,13 @@ const SkeletonComponent = () => (
   <Box>
     <Container width={1}>
       <Flex align="center">
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Grid gap={2} columns={2} marginRight={3}>
+        <Grid gap={2} gridTemplateColumns={2} marginRight={3}>
           <Skeleton style={{width: 40, height: 40}} radius={2} animated />
           <Skeleton style={{width: 40, height: 40}} radius={2} animated />
           <Skeleton style={{width: 40, height: 40}} radius={2} animated />
           <Skeleton style={{width: 40, height: 40}} radius={2} animated />
         </Grid>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={2} flex={1}>
+        <Stack gap={2} flex={1}>
           <HeadingSkeleton style={{width: '100%'}} radius={1} animated />
           <TextSkeleton style={{width: '100%'}} radius={1} animated />
           <LabelSkeleton style={{width: '100%'}} radius={1} animated />
@@ -125,8 +119,7 @@ export function Tones(): ReactNode {
         <Flex gap={2} paddingTop={2} wrap={'wrap'}>
           {tones.map((tone) => (
             <Card tone={tone} {...props} key={tone}>
-              {/* oxlint-disable-next-line no-deprecated */}
-              <Stack space={6}>
+              <Stack gap={6}>
                 <Card border padding={2} radius={2} tone={tone}>
                   <Text
                     align="center"
@@ -228,8 +221,7 @@ export function Tones(): ReactNode {
                       <Menu>
                         <MenuItem text="Plain text" />
                         <MenuItem>
-                          {/* oxlint-disable-next-line no-deprecated */}
-                          <Stack space={2}>
+                          <Stack gap={2}>
                             <Text size={1} weight="medium">
                               Badge
                             </Text>
@@ -239,8 +231,7 @@ export function Tones(): ReactNode {
                           </Stack>
                         </MenuItem>
                         <MenuItem>
-                          {/* oxlint-disable-next-line no-deprecated */}
-                          <Stack space={2}>
+                          <Stack gap={2}>
                             <Text size={1} weight="medium">
                               KBD
                             </Text>
@@ -250,8 +241,7 @@ export function Tones(): ReactNode {
                           </Stack>
                         </MenuItem>
                         <MenuItem>
-                          {/* oxlint-disable-next-line no-deprecated */}
-                          <Stack space={2}>
+                          <Stack gap={2}>
                             <Text size={1} weight="medium">
                               Label
                             </Text>
@@ -259,8 +249,7 @@ export function Tones(): ReactNode {
                           </Stack>
                         </MenuItem>
                         <MenuItem>
-                          {/* oxlint-disable-next-line no-deprecated */}
-                          <Stack space={2}>
+                          <Stack gap={2}>
                             <Text size={1} weight="medium">
                               Hotkeys
                             </Text>
@@ -291,16 +280,14 @@ export function Tones(): ReactNode {
                   <Spinner muted />
                 </Wrapper>
                 <Wrapper title="Switch">
-                  {/* oxlint-disable-next-line no-deprecated */}
-                  <Inline space={3}>
+                  <Inline gap={3}>
                     <Switch checked />
                     <Switch indeterminate />
                     <Switch />
                   </Inline>
                 </Wrapper>
                 <Wrapper title="Tab / TabList">
-                  {/* oxlint-disable-next-line no-deprecated */}
-                  <TabList space={2}>
+                  <TabList gap={2}>
                     {/* oxlint-disable-next-line aria-proptypes */}
                     <Tab label="Content" selected id={''} aria-controls={''} />
                     {/* oxlint-disable-next-line aria-proptypes */}

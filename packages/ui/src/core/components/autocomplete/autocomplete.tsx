@@ -1,10 +1,10 @@
 import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
+import {SpinnerIcon} from '@sanity/icons/Spinner'
 import {
   ChangeEvent,
   cloneElement,
   ElementType,
   FocusEvent,
-  forwardRef,
   HTMLProps,
   KeyboardEvent,
   MouseEvent,
@@ -21,21 +21,18 @@ import {
 } from 'react'
 
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
-import {_hasFocus, _raf, focusFirstDescendant} from '../../helpers'
-import {
-  Box,
-  BoxProps,
-  Button,
-  Card,
-  Popover,
-  PopoverProps,
-  Stack,
-  Text,
-  TextInput,
-} from '../../primitives'
-import {_getArrayProp} from '../../styles'
-import {Radius} from '../../types'
-import {AnimatedSpinnerIcon, ListBox, StyledAutocomplete} from './autocomplete.styles'
+import {_raf} from '../../helpers/animation'
+import {_hasFocus, focusFirstDescendant} from '../../helpers/focus'
+import {Box, BoxProps} from '../../primitives/box/box'
+import {Button} from '../../primitives/button/button'
+import {Card} from '../../primitives/card/card'
+import {Popover, PopoverProps} from '../../primitives/popover/popover'
+import {Stack} from '../../primitives/stack/stack'
+import {Text} from '../../primitives/text/text'
+import {TextInput} from '../../primitives/textInput/textInput'
+import {_getArrayProp} from '../../styles/helpers'
+import {Radius} from '../../types/radius'
+import {ListBox, StyledAutocomplete} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
 import {
@@ -44,6 +41,8 @@ import {
   AUTOCOMPLETE_POPOVER_PLACEMENT,
 } from './constants'
 import {AutocompleteOpenButtonProps, BaseAutocompleteOption} from './types'
+
+import {spinnerIcon} from '../../primitives/spinner/spinner.css'
 
 /**
  * @public
@@ -100,7 +99,13 @@ const DEFAULT_RENDER_VALUE = (value: string, option?: BaseAutocompleteOption) =>
 const DEFAULT_FILTER_OPTION = (query: string, option: BaseAutocompleteOption) =>
   option.value.toLowerCase().indexOf(query.toLowerCase()) > -1
 
-const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAutocompleteOption>(
+/**
+ * The Autocomplete component is typically used for search components.
+ * It consists of a text input for writing a query, and properties for rendering suggestions.
+ *
+ * @public
+ */
+export function Autocomplete<Option extends BaseAutocompleteOption>(
   props: AutocompleteProps<Option> &
     Omit<
       HTMLProps<HTMLInputElement>,
@@ -118,13 +123,11 @@ const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAu
       | 'onSelect'
       | 'popover'
       | 'prefix'
-      | 'ref'
       | 'role'
       | 'spellCheck'
       | 'type'
       | 'value'
     >,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {
     border = true,
@@ -149,6 +152,7 @@ const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAu
     prefix,
     radius = 2,
     readOnly,
+    ref: forwardedRef,
     relatedElements,
     renderOption: renderOptionProp,
     renderPopover,
@@ -576,8 +580,7 @@ const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAu
           ref={listBoxElementRef}
           // oxlint-disable-next-line prefer-tag-over-role
           role="listbox"
-          // oxlint-disable-next-line no-deprecated
-          space={1}
+          gap={1}
         >
           {filteredOptions.map((option) => {
             const active =
@@ -689,7 +692,7 @@ const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAu
         disabled={disabled}
         fontSize={fontSize}
         icon={icon}
-        iconRight={loading && AnimatedSpinnerIcon}
+        iconRight={loading && <SpinnerIcon className={spinnerIcon} />}
         id={id}
         inputMode="search"
         onChange={handleInputChange}
@@ -709,7 +712,7 @@ const InnerAutocomplete = forwardRef(function Autocomplete<Option extends BaseAu
       {results}
     </StyledAutocomplete>
   )
-})
+}
 
 function RenderPopover({
   renderPopover,
@@ -734,38 +737,3 @@ function RenderPopover({
     resultsPopoverElementRef,
   )
 }
-
-/**
- * The Autocomplete component is typically used for search components.
- * It consists of a text input for writing a query, and properties for rendering suggestions.
- *
- * @public
- */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Autocomplete = InnerAutocomplete as <Option extends BaseAutocompleteOption>(
-  props: AutocompleteProps<Option> &
-    Omit<
-      HTMLProps<HTMLInputElement>,
-      | 'aria-activedescendant'
-      | 'aria-autocomplete'
-      | 'aria-expanded'
-      | 'aria-owns'
-      | 'as'
-      | 'autoCapitalize'
-      | 'autoComplete'
-      | 'autoCorrect'
-      | 'id'
-      | 'inputMode'
-      | 'onChange'
-      | 'onSelect'
-      | 'popover'
-      | 'prefix'
-      | 'ref'
-      | 'role'
-      | 'spellCheck'
-      | 'type'
-      | 'value'
-    > & {
-      ref?: Ref<HTMLInputElement>
-    },
-) => React.JSX.Element

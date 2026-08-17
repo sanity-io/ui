@@ -54,8 +54,7 @@ export const InputStates: Story = {
   },
   render: (props) => {
     return (
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={3}>
+      <Stack gap={3}>
         <Flex direction={'row'} wrap={'wrap'} gap={4} align={'center'}>
           {matrixBuilder({
             scheme: 'light',

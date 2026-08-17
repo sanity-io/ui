@@ -1,15 +1,12 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {
-  ResponsiveFontStyleProps,
-  responsiveHeadingFont,
-  responsiveTextAlignStyle,
-  ResponsiveTextAlignStyleProps,
-} from '../../styles/internal'
-import {ElementType, Props, TextAlign} from '../../types'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {responsiveHeadingFont} from '../../styles/font/headingFontStyle'
+import {responsiveTextAlignStyle} from '../../styles/font/textAlignStyle'
+import {ResponsiveFontStyleProps, ResponsiveTextAlignStyleProps} from '../../styles/font/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {ElementType, Props} from '../../types/component'
+import {TextAlign} from '../../types/text'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {headingBaseStyle} from './styles'
 import {HeadingStyleProps} from './types'
@@ -40,18 +37,18 @@ const StyledHeading = styled.div<
   HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
 >(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
 
-const HeadingComponent = forwardRef(function Heading(
+function HeadingComponent(
   props: HeadingOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLDivElement>,
       'as' | 'size'
     >,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     accent = false,
     align,
     children: childrenProp,
     muted = false,
+    ref,
     size = 2,
     textOverflow,
     weight,
@@ -78,7 +75,7 @@ const HeadingComponent = forwardRef(function Heading(
       <span>{children}</span>
     </StyledHeading>
   )
-})
+}
 
 /**
  * Typographic headings.

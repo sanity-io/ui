@@ -1,9 +1,7 @@
 # blueprints-docs
 
 [Sanity Blueprint](https://www.sanity.io/docs/compute-and-ai/blueprints) for the
-sanity.io/ui docs (Sanity project `mos42crl`). It deploys the serverless
-functions that keep the Next.js cache of [`apps/docs`](../../docs) in sync with
-content changes.
+sanity.io/ui docs (Sanity project `mos42crl`).
 
 ## Functions
 
@@ -17,26 +15,18 @@ to look at the rasterized icon preview and write a search-friendly
 `description` plus search `tags`, which power the semantic icon search on
 [icons.sanity.dev](https://icons.sanity.dev) (`apps/icons`).
 
-It resolves the schema as `_.schemas.production`, so the docs studio schema
-must be deployed (`pnpm --filter sanity-ui-docs exec sanity schema deploy`)
+It resolves the schema as `_.schemas.production`, so the studio schema
+must be deployed (`pnpm --filter sanity-ui-studio schema:deploy`)
 for the agent actions to work.
 
-### `invalidate-sync-tags`
+### Removed: `invalidate-sync-tags`
 
-Listens for [sync tag invalidation events](https://www.sanity.io/docs/compute-and-ai/functions)
-on the `mos42crl.production` dataset and forwards the invalidated sync tags to
-the docs deployment's expire-tags endpoint
-(`https://www.sanity.io/ui/api/expire-tags`, hardcoded in
-`functions/invalidate-sync-tags/index.ts`), which calls
-`revalidateTag('sanity:<tag>', 'max')` so cached pages are background-revalidated.
-
-The endpoint is guarded by a single shared secret, which must be set in two
-places with the same value:
-
-| Where                               | Key                  | How                                                                                                                           |
-| ----------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| the deployed function               | `EXPIRE_TAGS_SECRET` | `pnpm dlx @sanity/runtime-cli@latest functions env add invalidate-sync-tags EXPIRE_TAGS_SECRET <value>` (from this directory) |
-| the docs Vercel project (apps/docs) | `EXPIRE_TAGS_SECRET` | `vercel env add EXPIRE_TAGS_SECRET production` (or the Vercel dashboard), then redeploy                                       |
+The blueprint used to also deploy an `invalidate-sync-tags` function that
+forwarded sync tag invalidation events to the docs deployment's
+`/ui/api/expire-tags` endpoint. The docs app (`apps/docs`) is fully static now
+— it doesn't fetch from Sanity at all — so both the function and the endpoint
+are gone. The `EXPIRE_TAGS_SECRET` env vars (on the deployed function and the
+docs Vercel project) are no longer used and can be deleted.
 
 ## Deploys
 
@@ -56,11 +46,8 @@ pnpm dlx @sanity/runtime-cli@latest blueprints doctor
 # Diff against the deployed stack
 pnpm dlx @sanity/runtime-cli@latest blueprints plan
 
-# Manage function env vars
-pnpm dlx @sanity/runtime-cli@latest functions env list invalidate-sync-tags
-
 # Tail function logs
-pnpm dlx @sanity/runtime-cli@latest functions logs invalidate-sync-tags
+pnpm dlx @sanity/runtime-cli@latest functions logs enrich-icon
 ```
 
 All commands expect `SANITY_AUTH_TOKEN`, `SANITY_PROJECT_ID=mos42crl` and

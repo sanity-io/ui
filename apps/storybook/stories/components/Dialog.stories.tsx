@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   Card,
-  Code,
   Dialog,
   DialogProps,
   DialogProvider,
@@ -13,14 +12,13 @@ import {
   Inline,
   Layer,
   LayerProvider,
-  Menu,
-  MenuButton,
-  MenuItem,
   PortalProvider,
   Stack,
   Text,
   useLayer,
 } from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {Menu, MenuButton, MenuItem} from '@sanity/ui/menu'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {ReactNode, useCallback, useEffect, useRef, useState} from 'react'
 import {expect, fn, userEvent, waitFor} from 'storybook/test'
@@ -181,8 +179,7 @@ export const DynamicContent: Story = {
           </Flex>
         }
       >
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack padding={4} space={4}>
+        <Stack padding={4} gap={4}>
           {numParagraphs === 0 && (
             <Text muted size={1}>
               (No content)
@@ -219,8 +216,7 @@ export const Positioning: Story = {
   render: (props) => {
     return (
       <Box>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={3} style={{padding: 'calc(100vh - 100px) 0 '}}>
+        <Stack gap={3} style={{padding: 'calc(100vh - 100px) 0 '}}>
           <Text align="center">
             <ArrowUpIcon />
           </Text>
@@ -293,8 +289,7 @@ function PropsStory() {
         {open && (
           <Dialog header="Props example" id="dialog" onClose={handleClose} open={open} width={0}>
             <Box padding={4}>
-              {/* oxlint-disable-next-line no-deprecated */}
-              <Stack space={4}>
+              <Stack gap={4}>
                 <Text>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et orci vitae diam
                   aliquet imperdiet.
@@ -392,8 +387,7 @@ function ActivateStory() {
               onActivate={({activeElement}) => activeElement?.focus()}
               onClose={() => setFirstDialogOpen(false)}
             >
-              {/* oxlint-disable-next-line no-deprecated */}
-              <Stack space={2} padding={3}>
+              <Stack gap={2} padding={3}>
                 <Button
                   mode="ghost"
                   text="Open dialog 2"
@@ -421,8 +415,7 @@ function ActivateStory() {
                   onActivate={({activeElement}) => activeElement?.focus()}
                   onClose={() => setSecondDialogOpen(false)}
                 >
-                  {/* oxlint-disable-next-line no-deprecated */}
-                  <Stack space={2} padding={3}>
+                  <Stack gap={2} padding={3}>
                     <Button
                       mode="ghost"
                       text="Open dialog 3"
@@ -450,8 +443,7 @@ function ActivateStory() {
                       onActivate={({activeElement}) => activeElement?.focus()}
                       onClose={() => setThirdDialogOpen(false)}
                     >
-                      {/* oxlint-disable-next-line no-deprecated */}
-                      <Stack space={2} padding={3}>
+                      <Stack gap={2} padding={3}>
                         <MenuButton
                           id="menu"
                           button={
@@ -483,8 +475,7 @@ function ActivateStory() {
                           onActivate={({activeElement}) => activeElement?.focus()}
                           onClose={() => setFourthDialogOpen(false)}
                         >
-                          {/* oxlint-disable-next-line no-deprecated */}
-                          <Stack space={2} padding={3}>
+                          <Stack gap={2} padding={3}>
                             <Text>👋</Text>
                           </Stack>
                         </Dialog>
@@ -579,15 +570,13 @@ function NestedStory() {
                     <MenuButton
                       button={<Button text="Test" />}
                       id="menu3"
-                      popover={{animate: true}}
+                      popover={{animate: true, portal: true}}
                       menu={
                         <Menu>
                           <MenuItem text="Test" />
                           <MenuItem text="Test" />
                         </Menu>
                       }
-                      // oxlint-disable-next-line no-deprecated
-                      portal
                     />
                   </Box>
                 </Dialog>
@@ -716,8 +705,7 @@ export const Position: Story = {
   render: () => (
     <Box padding={4}>
       <Box style={{padding: 'calc(100vh - 100px) 0'}}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={3}>
+        <Stack gap={3}>
           <Text align="center">
             <ArrowUpIcon />
           </Text>

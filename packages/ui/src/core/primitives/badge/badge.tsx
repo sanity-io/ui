@@ -1,11 +1,12 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {BadgeMode, BadgeTone, ElementType, Props} from '../../types'
-import {Box, BoxOwnProps} from '../box'
-import {Text} from '../text'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {BadgeTone} from '../../types/badge'
+import {ElementType, Props} from '../../types/component'
+import {Box, BoxOwnProps} from '../box/box'
+import {Text} from '../text/text'
 import {ResponsiveRadiusProps} from '../types'
 import {badgeStyle} from './styles'
 import {BadgeStyleProps} from './types'
@@ -16,8 +17,7 @@ import {BadgeStyleProps} from './types'
 export interface BadgeOwnProps extends BoxOwnProps, ResponsiveRadiusProps {
   fontSize?: number | number[]
   /** @deprecated No longer used. */
-  // oxlint-disable-next-line no-deprecated
-  mode?: BadgeMode
+  mode?: never
   tone?: BadgeTone
 }
 
@@ -31,17 +31,15 @@ const StyledBadge = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
   badgeStyle,
 )
 
-const BadgeComponent = forwardRef(function Badge(
+const BadgeComponent = function Badge(
   props: BadgeOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,
-  ref,
 ) {
   const {
     children,
     fontSize = 1,
-    // oxlint-disable-next-line no-deprecated
-    mode: _deprecated_mode,
     padding = 1,
     radius = 'full',
+    ref,
     tone = 'default',
     ...restProps
   } = props
@@ -58,7 +56,7 @@ const BadgeComponent = forwardRef(function Badge(
       <Text size={fontSize}>{children}</Text>
     </StyledBadge>
   )
-})
+}
 
 /**
  * Badges are used to tag resources.

@@ -1,4 +1,5 @@
-import {Card, Code, Container, Flex, Grid} from '@sanity/ui'
+import {Card, Container, Flex, Grid} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {getHeightControls, getOverflowControls, getSpaceControls} from '../controls'
@@ -32,11 +33,7 @@ const meta: Meta<typeof Grid> = {
     height: getHeightControls(),
     overflow: getOverflowControls(),
     gap: getSpaceControls(),
-    // oxlint-disable-next-line no-deprecated
-    columns: {control: {type: 'number', min: 1, max: 12}},
     gridTemplateColumns: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    rows: {control: {type: 'number', min: 1, max: 12}},
     gridTemplateRows: {control: {type: 'number', min: 1, max: 12}},
   },
   tags: ['autodocs'],
@@ -50,8 +47,7 @@ export const Default: Story = {
 }
 
 export const Columns: Story = {
-  // oxlint-disable-next-line no-deprecated
-  args: {columns: [1, 2, 3, 4, 5, 6, 7]},
+  args: {gridTemplateColumns: [1, 2, 3, 4, 5, 6, 7]},
   render: (props) => <Grid {...props} />,
 }
 
@@ -64,11 +60,9 @@ export const Responsive: Story = {
       <Container width="auto">
         <Grid
           id="responsive-grid"
-          // oxlint-disable-next-line no-deprecated
-          columns={[1, 2, 3, 4, 5, 6, 7]}
+          gridTemplateColumns={[1, 2, 3, 4, 5, 6, 7]}
           gap={[0, 1, 2, 3, 4, 5, 6]}
-          // oxlint-disable-next-line no-deprecated
-          rows={[1, 2, 3, 4, 5, 6, 7]}
+          gridTemplateRows={[1, 2, 3, 4, 5, 6, 7]}
           style={{textAlign: 'center'}}
         >
           {Array.from({length: 12}, (_, index) => (

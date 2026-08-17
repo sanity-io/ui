@@ -1,11 +1,11 @@
-import {getTheme_v2} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
 import {css, styled} from 'styled-components'
 
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {EMPTY_RECORD} from '../../constants'
-import {_getArrayProp, _responsive, rem, ThemeProps} from '../../styles'
-import {AvatarSize} from '../../types'
-import {Label} from '../label'
+import {_getArrayProp, _responsive, rem} from '../../styles/helpers'
+import {ThemeProps} from '../../styles/types'
+import {AvatarSize} from '../../types/avatar'
+import {Label} from '../label/label'
 
 function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {avatar, media} = getTheme_v2(props.theme)
@@ -57,17 +57,14 @@ export interface AvatarCounterProps {
   count: number
   size?: AvatarSize | AvatarSize[]
   /** @deprecated No longer supported. */
-  tone?: 'navbar'
+  tone?: never
 }
 
 /**
  * @public
  */
-export const AvatarCounter = forwardRef(function AvatarCounter(
-  props: AvatarCounterProps,
-  ref: React.Ref<HTMLDivElement>,
-) {
-  const {count, size: sizeProp = 1} = props
+export function AvatarCounter(props: AvatarCounterProps & {ref?: React.Ref<HTMLDivElement>}) {
+  const {count, ref, size: sizeProp = 1} = props
   const size = _getArrayProp(sizeProp)
 
   return (
@@ -87,4 +84,4 @@ export const AvatarCounter = forwardRef(function AvatarCounter(
       </Label>
     </StyledAvatarCounter>
   )
-})
+}

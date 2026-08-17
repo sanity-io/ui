@@ -1,6 +1,5 @@
 import {Box, Flex, Grid, Text} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import {forwardRef} from 'react'
 
 import {getSpaceControls} from '../controls'
 
@@ -37,23 +36,11 @@ export const AsGridItem: Story = {
   },
   argTypes: {
     gridColumn: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    column: {control: {type: 'number', min: 1, max: 12}},
     gridColumnStart: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    columnStart: {control: {type: 'number', min: 1, max: 12}},
     gridColumnEnd: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    columnEnd: {control: {type: 'number', min: 1, max: 12}},
     gridRow: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    row: {control: {type: 'number', min: 1, max: 12}},
     gridRowStart: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    rowStart: {control: {type: 'number', min: 1, max: 12}},
     gridRowEnd: {control: {type: 'number', min: 1, max: 12}},
-    // oxlint-disable-next-line no-deprecated
-    rowEnd: {control: {type: 'number', min: 1, max: 12}},
   },
   render: (props) => {
     return (
@@ -93,21 +80,16 @@ export const Responsive: Story = {
 // A custom component with its own props. When passed to `Box`'s `as` prop, these props are
 // inferred on `Box` itself: `href` is required and `target` is optional, and unknown props
 // are rejected by the type checker.
-const Link = forwardRef(function Link(
+function Link(
   props: {href: string; target?: string} & Omit<
     React.HTMLProps<HTMLAnchorElement>,
     'as' | 'href' | 'target'
   >,
-  ref: React.ForwardedRef<HTMLAnchorElement>,
 ): React.JSX.Element {
   const {children, ...restProps} = props
 
-  return (
-    <a {...restProps} ref={ref}>
-      {children}
-    </a>
-  )
-})
+  return <a {...restProps}>{children}</a>
+}
 
 export const AsComponent: Story = {
   parameters: {controls: {include: []}},

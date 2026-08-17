@@ -1,23 +1,26 @@
-import {Badge, Box, Card, Code, Flex, Stack, Text} from '@sanity/ui'
-import {stegaClean} from 'next-sanity'
-import {ReactElement} from 'react'
+'use client'
+
+import {Badge, Box, Card, Flex, Stack, Text} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
+import {ReactElement, ReactNode} from 'react'
 import {styled} from 'styled-components'
 
-import {isArray} from '@/lib/common'
-import type {PortableTextValue} from '@/types'
+export interface Property {
+  deprecated?: string
+  description?: ReactNode
+  name: string
+  required?: boolean
+  type: string
+}
 
-import {PlainContent} from '../PlainContent'
-
-type PropertyTableValue = Extract<PortableTextValue[number], {_type: 'propertyTable'}>
-
-export function PropertyTable(props: {data: PropertyTableValue}): ReactElement {
-  const {properties, caption} = props.data
+export function PropertyTable(props: {caption?: string; properties: Property[]}): ReactElement {
+  const {caption, properties} = props
 
   return (
     <Box marginY={[2, 2, 3, 4]}>
       <Card radius={2} shadow={1}>
-        {properties?.map((property) => (
-          <Property key={stegaClean(property.name)} property={property} />
+        {properties.map((property) => (
+          <PropertyRow key={property.name} property={property} />
         ))}
       </Card>
 
@@ -40,11 +43,8 @@ const PropertyBox = styled(Box)`
   }
 `
 
-type PropertyValue = NonNullable<PropertyTableValue['properties']>[number]
-function Property(props: {property: PropertyValue}) {
-  // The type signature is rendered as (copyable) code, so strip stega metadata
-  const {name, required, type} = stegaClean(props.property)
-  const {deprecated} = props.property
+function PropertyRow(props: {property: Property}) {
+  const {deprecated, description, name, required, type} = props.property
 
   let tsType = name
 
@@ -73,9 +73,7 @@ function Property(props: {property: PropertyValue}) {
           </Text>
         )}
 
-        {isArray(props.property.description) && (
-          <PlainContent blocks={props.property.description} />
-        )}
+        {description}
       </Stack>
     </PropertyBox>
   )

@@ -1,16 +1,6 @@
 import {CloseIcon} from '@sanity/icons/Close'
-import {
-  Box,
-  Button,
-  Card,
-  Code,
-  Flex,
-  Layer,
-  LayerProvider,
-  Stack,
-  Text,
-  useLayer,
-} from '@sanity/ui'
+import {Box, Button, Card, Flex, Layer, LayerProvider, Stack, Text, useLayer} from '@sanity/ui'
+import {Code} from '@sanity/ui/code'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useState} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
@@ -52,8 +42,7 @@ function NestedRoot() {
           </Text>
         </Box>
         <Box padding={3}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack space={3}>
+          <Stack gap={3}>
             <LayerDebugInfo id="layer-debug-info-1" />
             <Button id="open-layer-1" mode="ghost" onClick={handleOpen} text="Open layer 1" />
             {open && (
@@ -86,8 +75,7 @@ function NestedLayer1({onClose}: {onClose: () => void}) {
         </Box>
       </Flex>
       <Box padding={3}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={3}>
+        <Stack gap={3}>
           <LayerDebugInfo />
           <Button id="open-layer-2" mode="ghost" onClick={handleOpen} text="Open layer 2" />
           {open && (
@@ -115,8 +103,7 @@ function NestedLayer2({onClose}: {onClose: () => void}) {
         </Box>
       </Flex>
       <Box padding={3}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={3}>
+        <Stack gap={3}>
           <LayerDebugInfo />
         </Stack>
       </Box>
@@ -151,17 +138,14 @@ export const Nested: Story = {
 
 export const MultipleRoots: Story = {
   render: () => (
-    // oxlint-disable-next-line no-deprecated
-    <Stack space={4}>
+    <Stack gap={4}>
       <LayerProvider zOffset={100}>
         <Card padding={3} shadow={1}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack space={3}>
+          <Stack gap={3}>
             <LayerDebugInfo />
             <Layer>
               <Card padding={3} shadow={1}>
-                {/* oxlint-disable-next-line no-deprecated */}
-                <Stack space={3}>
+                <Stack gap={3}>
                   <LayerDebugInfo />
                   <Layer>
                     <Card padding={3} shadow={1}>
@@ -177,13 +161,11 @@ export const MultipleRoots: Story = {
 
       <LayerProvider zOffset={200}>
         <Card as={Layer} padding={3} shadow={5} style={{top: -50, left: 30}}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack space={3}>
+          <Stack gap={3}>
             <LayerDebugInfo />
             <Layer>
               <Card padding={3} shadow={1}>
-                {/* oxlint-disable-next-line no-deprecated */}
-                <Stack space={3}>
+                <Stack gap={3}>
                   <LayerDebugInfo />
                   <Layer>
                     <Card padding={3} shadow={1}>

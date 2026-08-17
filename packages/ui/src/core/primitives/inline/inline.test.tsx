@@ -2,7 +2,7 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '../../../../test/utils'
 import {Inline} from './inline'
 import {inlineSpaceStyle} from './styles'
 
@@ -22,17 +22,7 @@ describe('primitives/inline', () => {
     mockedInlineSpaceStyle.mockClear()
   })
 
-  it('should support `space` and `gap` with the same behavior', () => {
-    render(
-      // oxlint-disable-next-line no-deprecated
-      <Inline space={2}>
-        <span>One</span>
-        <span>Two</span>
-      </Inline>,
-    )
-    expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
-
-    mockedInlineSpaceStyle.mockClear()
+  it('should support `gap`', () => {
     render(
       <Inline gap={2}>
         <span>One</span>
@@ -40,16 +30,5 @@ describe('primitives/inline', () => {
       </Inline>,
     )
     expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [2]}))
-  })
-
-  it('should prefer `gap` over `space` when both are provided', () => {
-    render(
-      // oxlint-disable-next-line no-deprecated
-      <Inline gap={3} space={1}>
-        <span>One</span>
-        <span>Two</span>
-      </Inline>,
-    )
-    expect(mockedInlineSpaceStyle).toHaveBeenCalledWith(expect.objectContaining({$space: [3]}))
   })
 })

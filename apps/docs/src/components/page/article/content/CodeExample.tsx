@@ -3,12 +3,13 @@
 import {ArrowRightIcon} from '@sanity/icons/ArrowRight'
 import {Box, Button, Card, Tab, TabList, TabPanel} from '@sanity/ui'
 import Link from 'next/link'
+import {useRouter} from 'next/navigation'
 import {ReactElement, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {getArcadeQuery} from '@/lib/arcade'
 import {ArcadeFrame} from '@/lib/arcade/ArcadeFrame'
-import {CodeEditor} from '@/lib/codeEditor'
+import {getArcadeQuery} from '@/lib/arcade/helpers'
+import {CodeEditor} from '@/lib/codeEditor/CodeEditor'
 
 const FrameCard = styled(Card)`
   height: 200px;
@@ -21,6 +22,7 @@ export function CodeExample(props: {
   title?: string
 }): ReactElement {
   const {code: codeProp, description, hookCode: hookCodeProp = '', title} = props
+  const router = useRouter()
   const [jsxCode, setJSXCode] = useState<string>(codeProp)
   const [jsxCursor, setJSXCursor] = useState({anchor: 0, focus: 0})
   const [hookCode, setScopeCode] = useState<string>(hookCodeProp)
@@ -117,8 +119,12 @@ export function CodeExample(props: {
           href={`/arcade${encodeQueryParams(arcadeQuery)}`}
           iconRight={ArrowRightIcon}
           mode="bleed"
+          // href embeds live editor state; Link prefetch would refetch on every
+          // keystroke. Warm the stable /arcade shell on hover instead.
+          onMouseEnter={() => router.prefetch('/arcade')}
           padding={2}
           gap={2}
+          prefetch={false}
           text="Open in Arcade"
         />
       </Box>

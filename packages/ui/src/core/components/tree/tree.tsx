@@ -1,14 +1,6 @@
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import {useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react'
 
-import {Stack} from '../../primitives'
+import {Stack} from '../../primitives/stack/stack'
 import {_findNextItemElement, _findPrevItemElement, _focusItemElement} from './helpers'
 import {TreeContext} from './treeContext'
 import {TreeContextValue, TreeState} from './types'
@@ -20,23 +12,20 @@ import {TreeContextValue, TreeState} from './types'
 export interface TreeProps {
   gap?: number | number[]
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
 }
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const Tree = forwardRef(function Tree(
+export function Tree(
   props: TreeProps &
-    Omit<React.HTMLProps<HTMLUListElement>, 'align' | 'as' | 'height' | 'ref' | 'role' | 'wrap'>,
-  forwardedRef: React.ForwardedRef<HTMLUListElement>,
+    Omit<React.HTMLProps<HTMLUListElement>, 'align' | 'as' | 'height' | 'role' | 'wrap'>,
 ): React.JSX.Element {
-  // oxlint-disable-next-line no-deprecated
-  const {children, gap, space: deprecated_space = 1, onFocus, ...restProps} = props
-  const spacing = gap === undefined ? deprecated_space : gap
+  const {children, gap = 1, onFocus, ref: forwardedRef, ...restProps} = props
   const ref = useRef<HTMLUListElement | null>(null)
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const focusedElementRef = useRef(focusedElement)
@@ -98,11 +87,10 @@ export const Tree = forwardRef(function Tree(
       registerItem,
       setExpanded,
       setFocusedElement,
-      gap: spacing,
-      space: spacing,
+      gap,
       state,
     }),
-    [focusedElement, itemElements, path, registerItem, setExpanded, spacing, state],
+    [focusedElement, gap, itemElements, path, registerItem, setExpanded, state],
   )
 
   const handleKeyDown = useCallback(
@@ -223,7 +211,6 @@ export const Tree = forwardRef(function Tree(
 
   return (
     <TreeContext.Provider value={contextValue}>
-      {/* oxlint-disable-next-line interactive-supports-focus */}
       <Stack
         as="ul"
         data-ui="Tree"
@@ -232,10 +219,10 @@ export const Tree = forwardRef(function Tree(
         onKeyDown={handleKeyDown}
         ref={ref}
         role="tree"
-        gap={spacing}
+        gap={gap}
       >
         {children}
       </Stack>
     </TreeContext.Provider>
   )
-})
+}

@@ -1,21 +1,17 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {
-  boxStyle,
-  flexItemStyle,
-  FlexItemStyleProps,
-  responsiveBoxStyle,
-  ResponsiveBoxStyleProps,
-  responsiveGridItemStyle,
-  ResponsiveGridItemStyleProps,
-  responsiveMarginStyle,
-  ResponsiveMarginStyleProps,
-  responsivePaddingStyle,
-  ResponsivePaddingStyleProps,
-} from '../../styles/internal'
-import {ElementType, Props} from '../../types'
+import {boxStyle, responsiveBoxStyle} from '../../styles/box/boxStyle'
+import {ResponsiveBoxStyleProps} from '../../styles/box/types'
+import {flexItemStyle} from '../../styles/flex/flexItemStyle'
+import {FlexItemStyleProps} from '../../styles/flex/types'
+import {responsiveGridItemStyle} from '../../styles/grid/gridItemStyle'
+import {ResponsiveGridItemStyleProps} from '../../styles/grid/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsiveMarginStyle} from '../../styles/margin/marginStyle'
+import {ResponsiveMarginStyleProps} from '../../styles/margin/types'
+import {responsivePaddingStyle} from '../../styles/padding/paddingStyle'
+import {ResponsivePaddingStyleProps} from '../../styles/padding/types'
+import {ElementType, Props} from '../../types/component'
 import {
   ResponsiveBoxProps,
   ResponsiveFlexItemProps,
@@ -59,21 +55,15 @@ const StyledBox = styled.div<
   responsivePaddingStyle,
 )
 
-const BoxComponent = forwardRef(function Box(
+const BoxComponent = function Box(
   props: BoxOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     as: asProp = 'div',
+    ref,
     gridColumn,
-    // oxlint-disable-next-line no-deprecated
-    column: deprecated_column,
     gridColumnStart,
-    // oxlint-disable-next-line no-deprecated
-    columnStart: deprecated_columnStart,
     gridColumnEnd,
-    // oxlint-disable-next-line no-deprecated
-    columnEnd: deprecated_columnEnd,
     display = 'block',
     flex,
     height,
@@ -93,32 +83,20 @@ const BoxComponent = forwardRef(function Box(
     paddingBottom,
     paddingLeft,
     gridRow,
-    // oxlint-disable-next-line no-deprecated
-    row: deprecated_row,
     gridRowStart,
-    // oxlint-disable-next-line no-deprecated
-    rowStart: deprecated_rowStart,
     gridRowEnd,
-    // oxlint-disable-next-line no-deprecated
-    rowEnd: deprecated_rowEnd,
     sizing,
     ...restProps
   } = props
-  const column = gridColumn === undefined ? deprecated_column : gridColumn
-  const columnStart = gridColumnStart === undefined ? deprecated_columnStart : gridColumnStart
-  const columnEnd = gridColumnEnd === undefined ? deprecated_columnEnd : gridColumnEnd
-  const row = gridRow === undefined ? deprecated_row : gridRow
-  const rowStart = gridRowStart === undefined ? deprecated_rowStart : gridRowStart
-  const rowEnd = gridRowEnd === undefined ? deprecated_rowEnd : gridRowEnd
 
   return (
     <StyledBox
       data-as={typeof asProp === 'string' ? asProp : undefined}
       data-ui="Box"
       {...restProps}
-      $column={_getArrayProp(column)}
-      $columnStart={_getArrayProp(columnStart)}
-      $columnEnd={_getArrayProp(columnEnd)}
+      $column={_getArrayProp(gridColumn)}
+      $columnStart={_getArrayProp(gridColumnStart)}
+      $columnEnd={_getArrayProp(gridColumnEnd)}
       $display={_getArrayProp(display)}
       $flex={_getArrayProp(flex)}
       $height={_getArrayProp(height)}
@@ -137,17 +115,20 @@ const BoxComponent = forwardRef(function Box(
       $paddingRight={_getArrayProp(paddingRight)}
       $paddingBottom={_getArrayProp(paddingBottom)}
       $paddingLeft={_getArrayProp(paddingLeft)}
-      $row={_getArrayProp(row)}
-      $rowStart={_getArrayProp(rowStart)}
-      $rowEnd={_getArrayProp(rowEnd)}
+      $row={_getArrayProp(gridRow)}
+      $rowStart={_getArrayProp(gridRowStart)}
+      $rowEnd={_getArrayProp(gridRowEnd)}
       $sizing={_getArrayProp(sizing)}
-      as={asProp}
+      // styled-components 6.5 distributes PolymorphicCallProps over ElementType and
+      // hits TS2589; narrow the call-site target while still passing the real value.
+      // oxlint-disable-next-line no-unsafe-type-assertion
+      as={asProp as 'div'}
       ref={ref}
     >
       {props.children}
     </StyledBox>
   )
-})
+}
 
 /**
  * The `Box` component is a basic layout wrapper component which provides utility properties

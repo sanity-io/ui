@@ -2,30 +2,27 @@ import {CloseIcon} from '@sanity/icons/Close'
 import {EarthAmericasIcon} from '@sanity/icons/EarthAmericas'
 import {SearchIcon} from '@sanity/icons/Search'
 import {
-  Autocomplete,
-  AutocompleteProps,
-  BaseAutocompleteOption,
   BoundaryElementProvider,
   Box,
   Button,
   Card,
-  Code,
   Container,
   Flex,
   Heading,
   Label,
   Layer,
   LayerProvider,
-  Popover,
   Portal,
   PortalProvider,
   Skeleton,
   Stack,
   Text,
   TextSkeleton,
-  ToastProvider,
-  useToast,
 } from '@sanity/ui'
+import {Autocomplete, AutocompleteProps, BaseAutocompleteOption} from '@sanity/ui/autocomplete'
+import {Code} from '@sanity/ui/code'
+import {Popover} from '@sanity/ui/popover'
+import {ToastProvider, useToast} from '@sanity/ui/toast'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
@@ -125,10 +122,8 @@ function CustomStory() {
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
       <Container width={0}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={5}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack space={3}>
+        <Stack gap={5}>
+          <Stack gap={3}>
             <Text as="label" htmlFor="custom" id="custom-label" size={1} weight="medium">
               Country
             </Text>
@@ -377,8 +372,7 @@ function AsyncStory() {
 
   return (
     <Box paddingX={[4, 5, 6]} paddingY={[5, 6, 7]}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack space={[3, 3, 4]}>
+      <Stack gap={[3, 3, 4]}>
         <Text as="label" htmlFor="async" size={[1, 1, 2]} weight="medium">
           Country
         </Text>
@@ -471,8 +465,7 @@ function ConstrainedHeightStory() {
           style={{position: 'relative'}}
         >
           <Box height="fill" overflow="auto" padding={[4, 4, 5]} sizing="border">
-            {/* oxlint-disable-next-line no-deprecated */}
-            <Stack space={5}>
+            <Stack gap={5}>
               <BoundaryElementProvider element={boundaryElement}>
                 <ConstrainedHeightExampleField id="example-1" label="Example 1" />
                 <ConstrainedHeightExampleField id="example-2" label="Example 2" />
@@ -555,8 +548,7 @@ function ConstrainedHeightExampleField({id, label}: {id: string; label: string})
   )
 
   return (
-    // oxlint-disable-next-line no-deprecated
-    <Stack space={3}>
+    <Stack gap={3}>
       <Text size={1} weight="medium">
         {label}
       </Text>
@@ -593,8 +585,7 @@ function FocusAndBlurStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      {/* oxlint-disable-next-line no-deprecated */}
-      <Stack space={3}>
+      <Stack gap={3}>
         <Autocomplete
           id="focus-and-blur"
           onBlur={handleBlur}
@@ -605,8 +596,7 @@ function FocusAndBlurStory() {
           placeholder="Search"
           value={value}
         />
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={3}>
+        <Stack gap={3}>
           <Card overflow="auto" padding={3} radius={2} tone="transparent">
             <Code id="focus-and-blur-log" language="json" size={1}>
               {JSON.stringify(log)}
@@ -890,8 +880,7 @@ function FullscreenAsyncOption(props: {
       <Flex align="center">
         <Skeleton radius={2} style={{width: 35, height: 35}} />
         <Box flex={1} marginLeft={3}>
-          {/* oxlint-disable-next-line no-deprecated */}
-          <Stack space={2}>
+          <Stack gap={2}>
             {loading && (
               <>
                 <TextSkeleton style={{maxWidth: 200}} />

@@ -1,7 +1,3 @@
-import {useMemo} from 'react'
-
-import {_getArrayProp} from '../styles'
-
 /** @beta */
 export type ArrayPropPrimitive = string | number | boolean | undefined | null
 
@@ -9,9 +5,8 @@ export type ArrayPropPrimitive = string | number | boolean | undefined | null
  * @deprecated instead of `useArrayProp(width)` use `Array.isArray(width) ? width : [width]` instead
  * @beta
  */
-export function useArrayProp<T extends ArrayPropPrimitive = ArrayPropPrimitive>(
-  val: T | T[] | undefined,
-  defaultVal?: T[],
-): T[] {
-  return useMemo(() => _getArrayProp(val, defaultVal), [val, defaultVal])
+export function useArrayProp(_val?: never, _defaultVal?: never): never {
+  throw new Error(
+    '`useArrayProp` was removed in @sanity/ui v4. Use `Array.isArray(value) ? value : [value]` instead.',
+  )
 }

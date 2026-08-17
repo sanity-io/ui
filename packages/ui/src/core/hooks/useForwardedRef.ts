@@ -1,5 +1,3 @@
-import {useImperativeHandle, useRef} from 'react'
-
 /**
  * @beta
  * @deprecated use `useImperativeHandle` instead
@@ -10,11 +8,8 @@ import {useImperativeHandle, useRef} from 'react'
  * +useImperativeHandle(forwardedRef, () => ref.current)
  * ```
  */
-// oxlint-disable-next-line no-deprecated
-export function useForwardedRef<T>(ref: React.ForwardedRef<T>): React.MutableRefObject<T | null> {
-  const innerRef = useRef<T | null>(null)
-
-  useImperativeHandle(ref, () => innerRef.current!)
-
-  return innerRef
+export function useForwardedRef(_ref?: never): never {
+  throw new Error(
+    '`useForwardedRef` was removed in @sanity/ui v4. Use `useRef` and `useImperativeHandle` instead.',
+  )
 }

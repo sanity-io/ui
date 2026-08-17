@@ -1,24 +1,19 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef, isValidElement, useMemo} from 'react'
+import {isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
-import {useTheme_v2} from '../../theme'
-import {
-  ButtonMode,
-  ButtonTextAlign,
-  ButtonTone,
-  ButtonWidth,
-  ElementType,
-  FlexJustify,
-  Props,
-} from '../../types'
-import {Box} from '../box'
-import {Flex} from '../flex'
-import {Spinner} from '../spinner'
-import {Text} from '../text'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {useTheme_v2} from '../../theme/useTheme'
+import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth} from '../../types/button'
+import {ElementType, Props} from '../../types/component'
+import {FlexJustify} from '../../types/flex'
+import {Box} from '../box/box'
+import {Flex} from '../flex/flex'
+import {Spinner} from '../spinner/spinner'
+import {Text} from '../text/text'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 
@@ -39,9 +34,9 @@ export interface ButtonOwnProps extends ResponsivePaddingProps, ResponsiveRadius
   loading?: boolean
   selected?: boolean
   /**
-   * @deprecated Use `gap` instead. `space` will be removed in v4.
+   * @deprecated Use `gap` instead.
    */
-  space?: number | number[]
+  space?: never
   gap?: number | number[]
   muted?: boolean
   text?: React.ReactNode
@@ -76,16 +71,16 @@ const LoadingBox = styled.div`
   box-shadow: inherit;
 `
 
-const ButtonComponent = forwardRef(function Button(
+function ButtonComponent(
   props: ButtonOwnProps & {as?: ElementType} & Omit<
       React.HTMLProps<HTMLButtonElement>,
       'as' | 'width'
     >,
-  ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {
     children,
     disabled,
+    ref,
     fontSize = 1,
     icon: IconComponent,
     iconRight: IconRightComponent,
@@ -101,9 +96,7 @@ const ButtonComponent = forwardRef(function Button(
     paddingRight: paddingRightProp,
     radius: radiusProp = 2,
     selected,
-    gap,
-    // oxlint-disable-next-line no-deprecated
-    space: deprecated_space = 3,
+    gap = 3,
     text,
     textAlign,
     textWeight,
@@ -124,7 +117,7 @@ const ButtonComponent = forwardRef(function Button(
   const paddingLeft = _getArrayProp(paddingLeftProp)
   const paddingRight = _getArrayProp(paddingRightProp)
   const radius = _getArrayProp(radiusProp)
-  const spacing = _getArrayProp(gap === undefined ? deprecated_space : gap)
+  const spacing = _getArrayProp(gap)
 
   const boxProps = useMemo(
     () => ({
@@ -201,7 +194,7 @@ const ButtonComponent = forwardRef(function Button(
       )}
     </StyledButton>
   )
-})
+}
 
 /**
  * @public

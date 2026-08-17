@@ -2,19 +2,27 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
-import {Flex} from '../../primitives'
+import {render} from '../../../../test/utils'
+import {Flex} from '../../primitives/flex/flex'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {MenuGroup} from './menuGroup'
 import {MenuItem} from './menuItem'
 
-vi.mock('../../primitives', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('../../primitives')>()
+vi.mock('../../primitives/flex/flex', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives/flex/flex')>()
 
   return {
     ...actual,
     // oxlint-disable-next-line no-unsafe-type-assertion
-    Flex: vi.fn((props: Record<string, unknown>) => (actual.Flex as any).render(props, null)),
+    Flex: vi.fn((props: Record<string, unknown>) => (actual.Flex as any)(props)),
+  }
+})
+
+vi.mock('../../primitives/popover/popover', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('../../primitives/popover/popover')>()
+
+  return {
+    ...actual,
     Popover: vi.fn(({children}: {children?: React.ReactNode}) => children),
   }
 })
@@ -44,25 +52,10 @@ describe('components/menuGroup spacing', () => {
     mockedFlex.mockClear()
   })
 
-  it('should support `space` and `gap` with the same behavior', () => {
-    // oxlint-disable-next-line no-deprecated
-    renderMenuGroup({space: 2})
-    expect(mockedFlex.mock.calls.map(([props]) => props)).toContainEqual(
-      expect.objectContaining({gap: 2}),
-    )
-
-    mockedFlex.mockClear()
+  it('should support `gap`', () => {
     renderMenuGroup({gap: 2})
     expect(mockedFlex.mock.calls.map(([props]) => props)).toContainEqual(
       expect.objectContaining({gap: 2}),
     )
-  })
-
-  it('should prefer `gap` over `space` when both are provided', () => {
-    // oxlint-disable-next-line no-deprecated
-    renderMenuGroup({gap: 3, space: 1})
-    const propsList = mockedFlex.mock.calls.map(([props]) => props)
-    expect(propsList).toContainEqual(expect.objectContaining({gap: 3}))
-    expect(propsList).not.toContainEqual(expect.objectContaining({gap: 1}))
   })
 })

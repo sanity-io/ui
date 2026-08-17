@@ -1,15 +1,11 @@
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {
-  flexItemStyle,
-  FlexItemStyleProps,
-  responsiveFlexStyle,
-  ResponsiveFlexStyleProps,
-} from '../../styles/internal'
-import {ElementType, Props} from '../../types'
-import {Box, BoxOwnProps} from '../box'
+import {flexItemStyle} from '../../styles/flex/flexItemStyle'
+import {responsiveFlexStyle} from '../../styles/flex/flexStyle'
+import {FlexItemStyleProps, ResponsiveFlexStyleProps} from '../../styles/flex/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {ElementType, Props} from '../../types/component'
+import {Box, BoxOwnProps} from '../box/box'
 import {ResponsiveFlexItemProps, ResponsiveFlexProps} from '../types'
 
 /**
@@ -30,11 +26,10 @@ const StyledFlex = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>(
   responsiveFlexStyle,
 )
 
-const FlexComponent = forwardRef(function Flex(
+function FlexComponent(
   props: FlexOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'wrap'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {align, as, direction = 'row', gap, justify, wrap, ...restProps} = props
+  const {align, as, direction = 'row', gap, justify, ref, wrap, ...restProps} = props
 
   return (
     <StyledFlex
@@ -49,7 +44,7 @@ const FlexComponent = forwardRef(function Flex(
       ref={ref}
     />
   )
-})
+}
 
 /**
  * The `Flex` component is a wrapper component for flexible elements (`Box`, `Card` and `Flex`).

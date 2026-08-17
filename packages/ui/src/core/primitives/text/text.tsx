@@ -1,14 +1,12 @@
-import {ThemeFontWeightKey} from '@sanity/ui/theme'
-import {forwardRef} from 'react'
 import {styled} from 'styled-components'
 
-import {_getArrayProp} from '../../styles'
-import {
-  ResponsiveFontStyleProps,
-  responsiveTextAlignStyle,
-  responsiveTextFont,
-} from '../../styles/internal'
-import {ElementType, Props, TextAlign} from '../../types'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {responsiveTextAlignStyle} from '../../styles/font/textAlignStyle'
+import {responsiveTextFont} from '../../styles/font/textFontStyle'
+import {ResponsiveFontStyleProps} from '../../styles/font/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {ElementType, Props} from '../../types/component'
+import {TextAlign} from '../../types/text'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
 import {textBaseStyle} from './styles'
 
@@ -41,15 +39,15 @@ const StyledText = styled.div<ResponsiveFontStyleProps>(
   textBaseStyle,
 )
 
-const TextComponent = forwardRef(function Text(
+function TextComponent(
   props: TextOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,
-  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     accent = false,
     align,
     children: childrenProp,
     muted = false,
+    ref,
     size = 2,
     textOverflow,
     weight,
@@ -76,7 +74,7 @@ const TextComponent = forwardRef(function Text(
       <span>{children}</span>
     </StyledText>
   )
-})
+}
 
 /**
  * The `Text` component is an agile, themed typographic element.

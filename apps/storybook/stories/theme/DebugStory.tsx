@@ -60,11 +60,9 @@ function DebugCard(props: {card: ThemeColorCard_v2; features: Features}) {
       {features.base && <DebugState />}
 
       {features.button && (
-        // oxlint-disable-next-line no-deprecated
-        <Stack padding={2} space={1}>
+        <Stack padding={2} gap={1}>
           {THEME_COLOR_BUTTON_MODES.map((mode) => (
-            // oxlint-disable-next-line no-deprecated
-            <Stack key={mode} space={1}>
+            <Stack key={mode} gap={1}>
               {THEME_COLOR_STATE_TONES.map((stateTone) => (
                 <Flex key={stateTone} gap={1}>
                   {THEME_COLOR_STATES.map((state) => (
@@ -84,8 +82,7 @@ function DebugCard(props: {card: ThemeColorCard_v2; features: Features}) {
       )}
 
       {features.selectable && (
-        // oxlint-disable-next-line no-deprecated
-        <Stack padding={2} space={1}>
+        <Stack padding={2} gap={1}>
           {THEME_COLOR_STATE_TONES.map((stateTone) => (
             <Flex key={stateTone} gap={1}>
               {THEME_COLOR_STATES.map((state) => (
@@ -118,8 +115,7 @@ function DebugState() {
     <Stack
       overflow="auto"
       padding={4}
-      // oxlint-disable-next-line no-deprecated
-      space={3}
+      gap={3}
       style={{border: '1px solid var(--card-border-color)'}}
     >
       <Flex gap={3}>

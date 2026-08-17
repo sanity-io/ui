@@ -1,10 +1,9 @@
-import {forwardRef, useEffect, useImperativeHandle, useRef, useState} from 'react'
+import {useEffect, useImperativeHandle, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {_isScrollable} from '../../helpers'
-import {_ResizeObserver} from '../../observers'
-import {StackOwnProps} from '../../primitives'
-import {useTheme_v2} from '../../theme'
+import {_isScrollable} from '../../helpers/scroll'
+import {StackOwnProps} from '../../primitives/stack/stack'
+import {useTheme_v2} from '../../theme/useTheme'
 
 /**
  * @beta
@@ -43,13 +42,21 @@ const ItemWrapper = styled.div`
 /**
  * @beta
  */
-export const VirtualList = forwardRef(function VirtualList(
+export function VirtualList(
   props: VirtualListProps &
     StackOwnProps &
-    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange' | 'ref'>,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
+    Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'onChange'>,
 ): React.JSX.Element {
-  const {as = 'div', gap = 0, getItemKey, items = [], onChange, renderItem, ...restProps} = props
+  const {
+    as = 'div',
+    gap = 0,
+    getItemKey,
+    items = [],
+    onChange,
+    ref: forwardedRef,
+    renderItem,
+    ...restProps
+  } = props
   const {space} = useTheme_v2()
   const ref = useRef<HTMLDivElement | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
@@ -84,7 +91,7 @@ export const VirtualList = forwardRef(function VirtualList(
 
       scrollEl.addEventListener('scroll', handleScroll, {passive: true})
 
-      const ro = new _ResizeObserver((entries) => {
+      const ro = new ResizeObserver((entries) => {
         setScrollHeight(entries[0].contentRect.height)
       })
 
@@ -145,13 +152,16 @@ export const VirtualList = forwardRef(function VirtualList(
   })
 
   return (
-    <StyledVirtualList as={as} data-ui="VirtualList" {...restProps} ref={ref}>
+    // styled-components 6.5 distributes PolymorphicCallProps over ElementType and hits TS2589;
+    // narrow the call-site target while still passing the real value.
+    // oxlint-disable-next-line no-unsafe-type-assertion
+    <StyledVirtualList as={as as 'div'} data-ui="VirtualList" {...restProps} ref={ref}>
       <div ref={wrapperRef} style={{height}}>
         {children}
       </div>
     </StyledVirtualList>
   )
-})
+}
 
 function useChildren({
   fromIndex,

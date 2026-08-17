@@ -1,44 +1,54 @@
 import {defineConfig} from '@sanity/tsdown-config'
 import type {UserConfig} from 'tsdown'
 
+// The annotation keeps the declaration emit portable: this file is part of the
+// same TypeScript program as the build (there is no separate tsconfig for
+// dist), and the inferred config type cannot be named without it (TS2883).
 const config: UserConfig = await defineConfig({
+  // One entry point per file in `src/exports/`. The glob form maps e.g.
+  // `src/exports/toast.ts` → `@sanity/ui/toast` (the matched filename replaces
+  // the `*` in the key, which is what drives the generated `package.json`
+  // `exports` subpaths; `index.ts` maps to the root `.` export). Adding a file
+  // to `src/exports/` is all it takes to publish a new subpath. Components
+  // with heavy dependencies (motion, @floating-ui/react-dom, react-refractor)
+  // live on their own subpaths so that importing the root entry never
+  // references those dependencies, regardless of bundler treeshaking.
   entry: {
-    'index': './exports/index.ts',
-    'theme': './exports/theme.ts',
-    '_visual-editing': './exports/_visual-editing.ts',
+    '*': './src/exports/*.{ts,tsx}',
   },
-  format: ['esm', 'cjs'],
   tsconfig: 'tsconfig.dist.json',
   styledComponents: true,
-  reactCompiler: {target: '18'},
+  reactCompiler: {target: '19'},
+  // Extract vanilla-extract `.css.ts` styles into dist/styles.css. Unlike the
+  // default (`inject: true`, which self-imports `@sanity/ui/styles.css` from
+  // every entry), `inject: false` leaves loading the stylesheet to the
+  // consumer: `import '@sanity/ui/styles.css'` — the same file name and
+  // consumer contract as the vanilla-extract based successor of this library,
+  // to minimize churn when upgrading later.
+  //
+  // `exports: {nodeCompat: true}` (the default, spelled out because it carries
+  // the whole consumer contract while `inject` is off) publishes the
+  // stylesheet as the `./styles.css` subpath through a conditional export: the
+  // `browser`/`style` conditions resolve to `dist/styles.css`, while
+  // `node`/`default` resolve to a generated no-op `dist/styles-css.js` shim
+  // (with `dist/styles-css.d.ts` for `types`). Runtimes that cannot load CSS —
+  // plain `node`, SSR test runners, RSC bundlers — therefore import a valid
+  // module instead of throwing on the stylesheet.
+  //
+  // `minify: false` keeps the output readable so CSS diffs between published
+  // versions are easy to eval. The lightningcss pass still runs with the
+  // lowering targets resolved from `@sanity/browserslist-config` (the
+  // `@sanity/tsdown-config` default when no `target` is set). Note that it
+  // collapses duplicate declarations to the last value regardless of targets
+  // (e.g. an authored `overflow: hidden` fallback before `overflow: clip`
+  // ships as just `overflow: clip` — fine, since `overflow: clip` is
+  // Baseline).
+  vanillaExtract: {
+    fileName: 'styles.css',
+    inject: false,
+    exports: {nodeCompat: true},
+    minify: false,
+  },
 })
-
-const baseOutputOptions = config.outputOptions
-
-// Emit shared (non-entry) chunks to `dist/_chunks/` so they can never collide
-// with entry filenames. Code shared between the `index` and `theme` entries
-// forms a chunk that rolldown also names `theme`: the JS output deduplicates
-// in favor of the entry (`theme.mjs` + `theme2.mjs`), but the d.ts output
-// resolved the collision the other way around, placing the shared chunk (which
-// re-exports everything under minified aliases like `buildTheme as x`) at
-// `theme.d.ts` and the entry's declarations at `theme2.d.ts`. TypeScript picks
-// up the `theme.d.(m)ts` sibling of `theme.(m)js`, so named imports from
-// `@sanity/ui/theme` failed with TS2460 (https://github.com/sanity-io/ui/issues/2262).
-config.outputOptions = async (outputOptions, format, context) => {
-  const base =
-    typeof baseOutputOptions === 'function'
-      ? await baseOutputOptions(outputOptions, format, context)
-      : baseOutputOptions
-
-  return {
-    ...outputOptions,
-    ...base,
-    // Preserve dir/file from the resolved options: spreading only `base` can
-    // drop them, and tsdown's report plugin then crashes on path.resolve(cwd, undefined).
-    dir: base?.dir ?? outputOptions.dir,
-    file: base?.file ?? outputOptions.file,
-    chunkFileNames: `_chunks/[name].${format === 'cjs' ? 'cjs' : 'js'}`,
-  }
-}
 
 export default config

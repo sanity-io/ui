@@ -1,4 +1,5 @@
-import {Breadcrumbs, Text} from '@sanity/ui'
+import {Text} from '@sanity/ui'
+import {Breadcrumbs} from '@sanity/ui/breadcrumbs'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 
 import {getSpaceControls} from '../controls'
@@ -17,8 +18,7 @@ const meta: Meta<typeof Breadcrumbs> = {
       <Text key="item">Item</Text>,
     ],
   },
-  // oxlint-disable-next-line no-deprecated
-  argTypes: {gap: getSpaceControls(), space: getSpaceControls()},
+  argTypes: {gap: getSpaceControls()},
   component: Breadcrumbs,
   tags: ['autodocs'],
 }

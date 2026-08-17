@@ -1,7 +1,10 @@
-import {CSSObject, getTheme_v2, ThemeColorSchemeKey, ThemeFontWeightKey} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {CardTone} from '../../types'
+import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {CSSObject} from '../../../theme/system/css'
+import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {CardTone} from '../../types/card'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
 import {_responsive, rem} from '../helpers'
 import {ThemeProps} from '../types'
@@ -179,18 +182,22 @@ export function textInputRepresentationStyle(
       /* focused */
       *:not(:disabled):focus + & {
         &[data-border] {
-          --input-box-shadow: ${$unstableDisableFocusRing
-            ? undefined
-            : focusRingStyle({
-                border: {color: color.input.default.enabled.border, width: input.border.width},
-                focusRing: input.text.focusRing,
-              })};
+          --input-box-shadow: ${
+            $unstableDisableFocusRing
+              ? undefined
+              : focusRingStyle({
+                  border: {color: color.input.default.enabled.border, width: input.border.width},
+                  focusRing: input.text.focusRing,
+                })
+          };
         }
 
         &:not([data-border]) {
-          --input-box-shadow: ${$unstableDisableFocusRing
-            ? undefined
-            : focusRingStyle({focusRing: input.text.focusRing})};
+          --input-box-shadow: ${
+            $unstableDisableFocusRing
+              ? undefined
+              : focusRingStyle({focusRing: input.text.focusRing})
+          };
         }
       }
 

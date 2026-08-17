@@ -2,7 +2,7 @@
 
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {render} from '../../../../test'
+import {render} from '../../../../test/utils'
 import {Stack} from './stack'
 import {responsiveStackSpaceStyle} from './styles'
 
@@ -21,19 +21,7 @@ describe('primitives/stack', () => {
     mockedResponsiveStackSpaceStyle.mockClear()
   })
 
-  it('should support `space` and `gap` with the same behavior', () => {
-    render(
-      // oxlint-disable-next-line no-deprecated
-      <Stack space={2}>
-        <span>One</span>
-        <span>Two</span>
-      </Stack>,
-    )
-
-    expect(mockedResponsiveStackSpaceStyle).toHaveBeenCalledWith(
-      expect.objectContaining({$space: [2]}),
-    )
-    mockedResponsiveStackSpaceStyle.mockClear()
+  it('should support `gap`', () => {
     render(
       <Stack gap={2}>
         <span>One</span>
@@ -43,19 +31,6 @@ describe('primitives/stack', () => {
 
     expect(mockedResponsiveStackSpaceStyle).toHaveBeenCalledWith(
       expect.objectContaining({$space: [2]}),
-    )
-  })
-
-  it('should prefer `gap` over `space` when both are provided', () => {
-    render(
-      // oxlint-disable-next-line no-deprecated
-      <Stack gap={3} space={1}>
-        <span>One</span>
-        <span>Two</span>
-      </Stack>,
-    )
-    expect(mockedResponsiveStackSpaceStyle).toHaveBeenCalledWith(
-      expect.objectContaining({$space: [3]}),
     )
   })
 })

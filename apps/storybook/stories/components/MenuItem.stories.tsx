@@ -1,6 +1,6 @@
-import {Card, Container, LayerProvider, Menu, MenuDivider, MenuItem, Stack, Text} from '@sanity/ui'
+import {Card, Container, LayerProvider, Stack, Text} from '@sanity/ui'
+import {Menu, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
-import {forwardRef} from 'react'
 
 import {getSpaceControls} from '../controls'
 
@@ -18,8 +18,6 @@ const meta: Meta<typeof MenuItem> = {
     paddingRight: getSpaceControls(),
     paddingTop: getSpaceControls(),
     gap: getSpaceControls(),
-    // oxlint-disable-next-line no-deprecated
-    space: getSpaceControls(),
   },
   component: MenuItem,
   decorators: [
@@ -53,8 +51,7 @@ export const Custom: Story = {
   render: () => (
     <>
       <MenuItem padding={3}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={3}>
+        <Stack gap={3}>
           <Text weight="medium" size={1}>
             First option
           </Text>
@@ -64,8 +61,7 @@ export const Custom: Story = {
         </Stack>
       </MenuItem>
       <MenuItem padding={3}>
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={3}>
+        <Stack gap={3}>
           <Text weight="medium" size={1}>
             Second option
           </Text>
@@ -76,8 +72,7 @@ export const Custom: Story = {
       </MenuItem>
       <MenuDivider />
       <MenuItem padding={3} tone="critical">
-        {/* oxlint-disable-next-line no-deprecated */}
-        <Stack space={3}>
+        <Stack gap={3}>
           <Text weight="medium" size={1}>
             Dangerous option
           </Text>
@@ -90,18 +85,17 @@ export const Custom: Story = {
   ),
 }
 
-const CustomLink = forwardRef(function CustomLink(
+function CustomLink(
   props: {req: string} & Omit<React.HTMLProps<HTMLAnchorElement>, 'as' | 'href'>,
-  ref: React.ForwardedRef<HTMLAnchorElement>,
 ): React.JSX.Element {
   const {children, req, ...restProps} = props
 
   return (
-    <a data-required={req} {...restProps} href="#" ref={ref}>
+    <a data-required={req} {...restProps} href="#">
       {children}
     </a>
   )
-})
+}
 
 export const AsComponent: Story = {
   parameters: {controls: {include: []}},

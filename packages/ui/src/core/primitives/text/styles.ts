@@ -1,7 +1,7 @@
-import {getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {ThemeProps} from '../../styles'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {ThemeProps} from '../../styles/types'
 
 export function textBaseStyle(
   props: {$accent?: boolean; $muted?: boolean} & ThemeProps,
@@ -12,15 +12,19 @@ export function textBaseStyle(
   return css`
     color: var(--card-fg-color);
 
-    ${$accent &&
-    css`
-      color: var(--card-accent-fg-color);
-    `}
+    ${
+      $accent &&
+      css`
+        color: var(--card-accent-fg-color);
+      `
+    }
 
-    ${$muted &&
-    css`
-      color: var(--card-muted-fg-color);
-    `}
+    ${
+      $muted &&
+      css`
+        color: var(--card-muted-fg-color);
+      `
+    }
 
     & code {
       font-family: ${font.code.family};
@@ -60,6 +64,8 @@ export function textBaseStyle(
       /* Certain popular CSS libraries changes the defaults for SVG display */
       /* Make sure SVGs are rendered as inline elements */
       display: inline;
+      /* ...and aren't squeezed by resets that set max-width: 100% */
+      max-width: unset;
     }
 
     & [data-sanity-icon] {

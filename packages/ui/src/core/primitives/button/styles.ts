@@ -1,10 +1,11 @@
-import {CSSObject, getTheme_v2} from '@sanity/ui/theme'
 import {css} from 'styled-components'
 
-import {ThemeProps} from '../../styles'
-import {_cardColorStyle} from '../../styles/card'
-import {focusRingBorderStyle, focusRingStyle} from '../../styles/internal'
-import {ButtonMode, ButtonTone, ButtonWidth} from '../../types'
+import {CSSObject} from '../../../theme/system/css'
+import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {_cardColorStyle} from '../../styles/card/_cardColorStyle'
+import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
+import {ThemeProps} from '../../styles/types'
+import {ButtonMode, ButtonTone, ButtonWidth} from '../../types/button'
 
 /**
  * @internal
@@ -36,12 +37,14 @@ export function buttonBaseStyles(
     position: relative;
     vertical-align: top;
 
-    ${$width === 'fill' &&
-    css`
-      width: -moz-available;
-      width: -webkit-fill-available;
-      width: stretch;
-    `}
+    ${
+      $width === 'fill' &&
+      css`
+        width: -moz-available;
+        width: -webkit-fill-available;
+        width: stretch;
+      `
+    }
 
     & > span {
       display: block;

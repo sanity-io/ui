@@ -1,5 +1,162 @@
 # @sanity/ui
 
+## 4.0.3
+
+### Patch Changes
+
+- [#2702](https://github.com/sanity-io/ui/pull/2702) [`e93ebeb`](https://github.com/sanity-io/ui/commit/e93ebebc030d3f6e4b6872496f8ccc30247138f6) Thanks [@stipsan](https://github.com/stipsan)! - Unset `max-width` on inline SVGs in `Text`, `Label`, `Heading`, and `Code` so CSS resets that set `max-width: 100%` no longer squash icons.
+
+## 4.0.2
+
+### Patch Changes
+
+- [#2602](https://github.com/sanity-io/ui/pull/2602) [`adf0894`](https://github.com/sanity-io/ui/commit/adf0894ba356d15b2af522f4f86fe532b09b6f21) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^13.1.0
+
+## 4.0.1
+
+### Patch Changes
+
+- [#2655](https://github.com/sanity-io/ui/pull/2655) [`7dd3171`](https://github.com/sanity-io/ui/commit/7dd317198bd5c7826d5936b7303869c356f8a9af) Thanks [@stipsan](https://github.com/stipsan)! - refactor: reuse Spinner's vanilla-extract rotate animation for Autocomplete's loading icon instead of a styled-components `keyframes` duplicate
+
+- [#2656](https://github.com/sanity-io/ui/pull/2656) [`55410de`](https://github.com/sanity-io/ui/commit/55410ded964ac0406c0441e0256d834c7cb5f2f6) Thanks [@stipsan](https://github.com/stipsan)! - Require `styled-components` 6.1 or later. The peer dependency is now `^6.1` instead of `^5.2 || ^6`. v4.0.0 already required v6 — it imports the named `styled` export and v6-only types such as `ExecutionContext`, neither of which exist in v5 — but the peer range still allowed `^5.2` and the 4.0.0 release notes forgot to mention the dropped v5 support. The new range also excludes 6.0.x, which ships the Babel macro (and with it the entire `@babel/*` toolchain) as runtime dependencies until 6.1.0 removed it, and whose last release, 6.0.9, was published without its type declarations. See the [migration guide](https://github.com/sanity-io/ui/blob/main/MIGRATION.md#1-upgrade-the-runtime).
+
+## 4.0.0
+
+### Major Changes
+
+- [#2505](https://github.com/sanity-io/ui/pull/2505) [`6069d4e`](https://github.com/sanity-io/ui/commit/6069d4e61a01da3a5124a3c4f68e3c530497912d) Thanks [@stipsan](https://github.com/stipsan)! - **`@sanity/ui` 4.0.** The full upgrade procedure is in the [migration guide](https://github.com/sanity-io/ui/blob/main/MIGRATION.md). TypeScript walks you through most of it: every removed or moved API stays in the types as a `@deprecated` tombstone whose message names its replacement.
+
+  **ESM-only. Node.js 22.12+ required.**
+
+  - The CommonJS build (`.cjs` / `.d.cts`) and the `require` export condition are removed — the package now ships ESM only.
+  - Node.js below 22.12 is no longer supported (`engines` is now `>=22.12`, matching `sanity`).
+  - TypeScript needs an `exports`-aware `moduleResolution` (`node16`, `nodenext`, or `bundler`): v4 resolves everything through package `exports` and no longer ships `typesVersions`, so the legacy `node` (node10) mode cannot resolve the subpath entry points' types.
+  - What to do: run Node.js 22.12 or later — that's it. Modern Node supports `require(esm)`, so `require('@sanity/ui')` keeps working; things only break if the Node.js version is too old.
+
+  **React 19.2+ required.**
+
+  - Peer dependency ranges are tightened to `react: ^19.2` and `react-dom: ^19.2`. The 19.2 floor is set by the new [`<Activity>`](https://react.dev/reference/react/Activity) component, which shipped in React 19.2.0 and which v4 uses to keep closed `Tooltip` and `Popover` content mounted.
+  - Components are compiled with the React Compiler targeting `'19'`, which uses React's built-in runtime — the `react-compiler-runtime` dependency is dropped.
+  - What to do: upgrade `react` and `react-dom` to 19.2 or later. No code changes needed.
+
+  **New required import: `@sanity/ui/styles.css`.**
+
+  Static styles (the ones that don't depend on theme or props) are now extracted into a stylesheet at build time instead of being injected at runtime. The stylesheet is **not** loaded automatically — add this import once, next to where the app renders `<ThemeProvider>`:
+
+  ```js
+  import "@sanity/ui/styles.css";
+  ```
+
+  Without it, `SrOnly`, `Spinner` and internal text-overflow styling render unstyled. These components have moved off styled-components — more components follow in future 4.x minors, and UI5 ships without styled-components or any other runtime CSS-in-JS.
+
+  **Heavy components moved out of the root entry point.**
+
+  Importing `@sanity/ui` no longer pulls in `@floating-ui/react-dom`, `motion` or `react-refractor` — even without bundler treeshaking. What moved where:
+
+  - `@sanity/ui/toast` — `Toast`, `ToastProvider`, `useToast` (motion)
+  - `@sanity/ui/popover` — `Popover` (@floating-ui/react-dom, motion)
+  - `@sanity/ui/tooltip` — `Tooltip`, `TooltipDelayGroupProvider`, `useTooltipDelayGroup` (@floating-ui/react-dom, motion)
+  - `@sanity/ui/menu` — `Menu`, `MenuButton`, `MenuDivider`, `MenuGroup`, `MenuItem` (renders `Popover`)
+  - `@sanity/ui/autocomplete` — `Autocomplete` (renders `Popover`)
+  - `@sanity/ui/breadcrumbs` — `Breadcrumbs` (renders `Popover`)
+  - `@sanity/ui/code` — `Code` (lazy-loads react-refractor)
+
+  Prop, context and message types moved along with their components (`PopoverProps`, `ToastParams`, `MenuItemProps`, `AutocompleteState`, `TooltipDelayGroupContextValue`, …). Update the imports:
+
+  ```diff
+  -import {MenuButton, ToastProvider, useToast} from '@sanity/ui'
+  +import {MenuButton} from '@sanity/ui/menu'
+  +import {ToastProvider, useToast} from '@sanity/ui/toast'
+  ```
+
+  Also part of this change: `ErrorBoundary` renders a plain `<pre><code>` instead of the `Code` primitive, keeping the root entry free of the `react-refractor` module graph.
+
+  **Deprecated props, hooks, and components are removed.**
+
+  Removed props stay on the public types as `@deprecated` `never`, so you get the migration message instead of a bare "does not exist" error. The removed hooks and `ConditionalWrapper` are still exported but throw when called. What to replace:
+
+  - `space` → `gap`
+  - Grid `columns` / `rows` / `column*` / `row*` → `gridTemplateColumns` / `gridTemplateRows` / `gridColumn*` / `gridRow*`
+  - Menu `focusFirst` / `focusLast` → `shouldFocus`
+  - MenuButton top-level popover props → `popover={{…}}`
+  - Popover `boundaryElement` → `floatingBoundary` / `referenceBoundary` (and `BoundaryElementProvider` for max-width / `constrainSize`)
+  - Tooltip `allowedAutoPlacements` → `fallbackPlacements`
+  - `useClickOutside` → `useClickOutsideEvent`
+  - `useElementRect` → `useElementSize`
+  - `useForwardedRef` → `useRef` + `useImperativeHandle`
+  - `useArrayProp(value)` → `Array.isArray(value) ? value : [value]`
+  - `ConditionalWrapper` → inline the conditional wrapping logic
+
+  **The private `@sanity/ui/_visual-editing` entry point is removed.**
+
+  Import from `@sanity/ui` instead — except the moved components (`Menu`, `MenuDivider`, `MenuGroup`, `MenuItem`, `Popover`), which now live on `@sanity/ui/menu` and `@sanity/ui/popover`. The slim subset is no longer needed: `displayName` side effects are gone, so unused components tree-shake out of consuming bundles.
+
+  **The `@juggle/resize-observer` polyfill is removed — the native `ResizeObserver` is used directly.**
+
+  The internal `_ResizeObserver` export is gone. If you imported it, use the global `ResizeObserver` instead.
+
+  **`Tooltip` and `Popover` keep closed content mounted with React's `<Activity>`.**
+
+  - Internal state is preserved and hidden content pre-renders while closed.
+  - With `animate` enabled, hiding is deferred until exit animations finish (via `AnimateActivity`, vendored from Motion).
+  - Watch out: popovers with recursive `content` must gate the recursion on `open` — otherwise they render an infinitely deep hidden tree.
+  - Watch out: tests have to assert on visibility instead of existence, since `<Activity mode="hidden">` keeps closed content in the DOM and hides it with `display: none`. In end-to-end tests, `await expect(page.getByText('Tooltip content')).toHaveCount(0)` becomes `await expect(page.getByText('Tooltip content')).toBeHidden()`; in unit tests, `expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()` becomes `expect(screen.getByText('Tooltip content')).not.toBeVisible()`. Queries that skip inaccessible elements (`*ByRole`, `getByRole()`) need no change — `display: none` keeps closed content out of the accessibility tree.
+
+  **All components are plain function components — `ref` is a regular prop (React 19 semantics).**
+
+  Refs keep working exactly as before. The one observable change: components no longer pass `react-is` checks such as `isForwardRef`.
+
+## 3.5.2
+
+### Patch Changes
+
+- [#2637](https://github.com/sanity-io/ui/pull/2637) [`df34007`](https://github.com/sanity-io/ui/commit/df34007552a4c195ab2eacce0aff7a7139624c6e) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency vite to ^8.2.1
+
+- [#2609](https://github.com/sanity-io/ui/pull/2609) [`c3726c9`](https://github.com/sanity-io/ui/commit/c3726c9ce471cd793ca8d7731c2f433d206031d7) Thanks [@stipsan](https://github.com/stipsan)! - fix(deps): update dependency motion to ^13.0.0
+
+  Motion 13 no longer loads the optional `@emotion/is-prop-valid` dependency to decide which props a
+  `motion` component forwards to the DOM; it now only does so when an `isValidProp` function is passed
+  to `MotionConfig`. `@sanity/ui` composes motion the way the upgrade guide recommends
+  (`motion.create(StyledComponent)`, never `styled(motion.div)`), so its own components are unaffected:
+  for custom components motion still forwards every non-motion prop and lets the styled component
+  filter, exactly as before. Apps that wrap a DOM-level motion component in a CSS-in-JS factory —
+  `styled(motion.div)` — may need to pass `isValidProp` to `MotionConfig`, use transient props, or
+  reverse the composition.
+
+- [#2632](https://github.com/sanity-io/ui/pull/2632) [`5207572`](https://github.com/sanity-io/ui/commit/52075727765ec68b2a718c0b9d9220feaf48df4f) Thanks [@stipsan](https://github.com/stipsan)! - fix(deps): update dependency styled-components to ^6.5.0
+
+  styled-components 6.5 tightens polymorphic call-site and `style` prop typing. Adjust `@sanity/ui` for the new checks: narrow `as` at `Box`/`VirtualList` call sites to avoid TS2589, align `Card`'s `$tone`/`$muted` with the values actually passed, and drop now-unnecessary assertions on `motion.create(Card)` wrappers.
+
+## 3.5.1
+
+### Patch Changes
+
+- [#2496](https://github.com/sanity-io/ui/pull/2496) [`1ecf846`](https://github.com/sanity-io/ui/commit/1ecf846993c94f671856cb09e01caa93a3d7cece) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^12.43.0
+
+## 3.5.0
+
+### Minor Changes
+
+- [#2457](https://github.com/sanity-io/ui/pull/2457) [`834c3d6`](https://github.com/sanity-io/ui/commit/834c3d688bd3eeec2af4db6065087885e5b7bb6d) Thanks [@stipsan](https://github.com/stipsan)! - `TreeItem` accepts a new `linkProps` prop with additional props for the link element that is rendered when `href` is set — for example `next/link`'s `prefetch`: `<TreeItem linkAs={Link} linkProps={{prefetch: true}} href="…">`. Props controlled by `TreeItem` itself (`href`, `role`, `tabIndex`, `aria-expanded` and the ref) take precedence.
+
+- [#2440](https://github.com/sanity-io/ui/pull/2440) [`e72e56b`](https://github.com/sanity-io/ui/commit/e72e56b7897f0c4089d5518f34f343b640f39a57) Thanks [@stipsan](https://github.com/stipsan)! - Ship a `'use client'` directive on the `@sanity/ui` and `@sanity/ui/_visual-editing` entrypoints so React Compiler output loads correctly under Next.js App Router / RSC. Components can now be rendered directly from Server Components without a hand-written client wrapper. `@sanity/ui/theme` is left unmarked — it remains a pure theme-token export safe for Server Components.
+
+### Patch Changes
+
+- [#2461](https://github.com/sanity-io/ui/pull/2461) [`cf1a9d0`](https://github.com/sanity-io/ui/commit/cf1a9d0f9c4e71e6339ae7a84152616206ddd8e2) Thanks [@stipsan](https://github.com/stipsan)! - fix: replace deprecated external APIs instead of suppressing them
+
+  - `Toast` now orchestrates its child animations with `delayChildren: stagger(interval)` instead of `motion`'s deprecated `staggerChildren`.
+  - `useForwardedRef` and the internal menu controller type refs as `RefObject` instead of React's deprecated `MutableRefObject` (identical shape, so no API change).
+  - `Toast` and `Autocomplete` pass `gap` instead of the deprecated `space` prop internally.
+
+- [#2457](https://github.com/sanity-io/ui/pull/2457) [`834c3d6`](https://github.com/sanity-io/ui/commit/834c3d688bd3eeec2af4db6065087885e5b7bb6d) Thanks [@stipsan](https://github.com/stipsan)! - `TreeItem` now renders custom link components passed via `linkAs` correctly. Previously the internal styled wrapper forwarded a stray `as="a"` prop to the custom component — breaking components like `next/link`, which interpret `as` as a URL override — and dropped the `display: block`/`text-decoration: none` styles from the rendered link. `<TreeItem linkAs={Link} href="…">` now behaves like `<Button as={Link} href="…">`.
+
+## 3.4.5
+
+### Patch Changes
+
+- [#2445](https://github.com/sanity-io/ui/pull/2445) [`f4766f9`](https://github.com/sanity-io/ui/commit/f4766f98391ec0c7dded069d9f7bfb7427918ec6) Thanks [@stipsan](https://github.com/stipsan)! - Make `react-is` a regular dependency instead of a peer dependency
+
 ## 3.4.4
 
 ### Patch Changes

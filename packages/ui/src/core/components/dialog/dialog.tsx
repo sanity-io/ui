@@ -1,22 +1,31 @@
 import {CloseIcon} from '@sanity/icons/Close'
-import {ThemeColorSchemeKey} from '@sanity/ui/theme'
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
+import {useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
-import {
-  containsOrEqualsElement,
-  focusFirstDescendant,
-  focusLastDescendant,
-  isHTMLElement,
-} from '../../helpers'
-import {useClickOutsideEvent, useGlobalKeyDown, usePrefersReducedMotion} from '../../hooks'
-import {Box, Button, Card, Container, Flex, Text} from '../../primitives'
+import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {containsOrEqualsElement, isHTMLElement} from '../../helpers/element'
+import {focusFirstDescendant, focusLastDescendant} from '../../helpers/focus'
+import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
+import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
+import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
+import {Box} from '../../primitives/box/box'
+import {Button} from '../../primitives/button/button'
+import {Card} from '../../primitives/card/card'
+import {Container} from '../../primitives/container/container'
+import {Flex} from '../../primitives/flex/flex'
+import {Text} from '../../primitives/text/text'
 import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/types'
-import {_getArrayProp} from '../../styles'
-import {responsivePaddingStyle, ResponsivePaddingStyleProps} from '../../styles/internal'
-import {useTheme_v2} from '../../theme'
-import {DialogPosition, Radius} from '../../types'
-import {Layer, LayerProps, Portal, useBoundaryElement, useLayer, usePortal} from '../../utils'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsivePaddingStyle} from '../../styles/padding/paddingStyle'
+import {ResponsivePaddingStyleProps} from '../../styles/padding/types'
+import {useTheme_v2} from '../../theme/useTheme'
+import {DialogPosition} from '../../types/dialog'
+import {Radius} from '../../types/radius'
+import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
+import {Layer, LayerProps} from '../../utils/layer/layer'
+import {useLayer} from '../../utils/layer/useLayer'
+import {Portal} from '../../utils/portal/portal'
+import {usePortal} from '../../utils/portal/usePortal'
 import {
   animationDialogStyle,
   AnimationDialogStyleProps,
@@ -79,6 +88,7 @@ interface DialogCardProps extends ResponsiveWidthProps {
   onClose?: () => void
   portal?: string
   radius: Radius | Radius[]
+  ref?: React.Ref<HTMLDivElement>
   scheme?: ThemeColorSchemeKey
   shadow: number | number[]
 }
@@ -145,10 +155,7 @@ const DialogFooter = styled(Box)`
   z-index: 3;
 `
 
-const DialogCard = forwardRef(function DialogCard(
-  props: DialogCardProps,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>,
-) {
+function DialogCard(props: DialogCardProps) {
   const {
     __unstable_autoFocus: autoFocus,
     __unstable_hideCloseButton: hideCloseButton,
@@ -161,6 +168,7 @@ const DialogCard = forwardRef(function DialogCard(
     onClose,
     portal: portalProp,
     radius: radiusProp,
+    ref: forwardedRef,
     scheme,
     shadow: shadowProp,
     width: widthProp,
@@ -273,16 +281,15 @@ const DialogCard = forwardRef(function DialogCard(
       </DialogCardRoot>
     </DialogContainer>
   )
-})
+}
 
 /**
  * The Dialog component.
  *
  * @public
  */
-export const Dialog = forwardRef(function Dialog(
+export function Dialog(
   props: DialogProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'id' | 'width'>,
-  ref: React.Ref<HTMLDivElement>,
 ) {
   const dialog = useDialog()
   const {layer} = useTheme_v2()
@@ -303,6 +310,7 @@ export const Dialog = forwardRef(function Dialog(
     padding: paddingProp = 3,
     portal: portalProp,
     position: _positionProp,
+    ref,
     scheme,
     width: widthProp = 0,
     zOffset: _zOffsetProp,
@@ -427,4 +435,4 @@ export const Dialog = forwardRef(function Dialog(
       </StyledDialog>
     </Portal>
   )
-})
+}

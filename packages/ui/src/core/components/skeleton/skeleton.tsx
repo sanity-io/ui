@@ -1,9 +1,11 @@
-import {forwardRef, useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {styled} from 'styled-components'
 
-import {Box, BoxOwnProps, ResponsiveRadiusProps} from '../../primitives'
-import {_getArrayProp} from '../../styles'
-import {responsiveRadiusStyle, ResponsiveRadiusStyleProps} from '../../styles/internal'
+import {Box, BoxOwnProps} from '../../primitives/box/box'
+import {ResponsiveRadiusProps} from '../../primitives/types'
+import {_getArrayProp} from '../../styles/helpers'
+import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
 import {skeletonStyle} from './styles'
 
 const StyledSkeleton = styled(Box)<
@@ -23,11 +25,8 @@ export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxOwnProps, 
  * This API might change. DO NOT USE IN PRODUCTION.
  * @beta
  */
-export const Skeleton = forwardRef(function Skeleton(
-  props: SkeletonProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>,
-  ref: React.Ref<HTMLDivElement>,
-) {
-  const {animated = false, delay, radius, ...restProps} = props
+export function Skeleton(props: SkeletonProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>) {
+  const {animated = false, delay, radius, ref, ...restProps} = props
   // oxlint-disable-next-line no-unneeded-ternary
   const [visible, setVisible] = useState<boolean>(delay ? false : true)
 
@@ -54,4 +53,4 @@ export const Skeleton = forwardRef(function Skeleton(
       ref={ref}
     />
   )
-})
+}

@@ -9,17 +9,26 @@ the published `@sanity/ui` package lives in `packages/ui`, the published
 sanity-io/color repo with full git history) in `packages/color`, the published
 `@sanity/logos` package (Sanity/GROQ logo components, migrated from the
 standalone `sanity-io/logos` repo with full git history) in `packages/logos`,
+the published `@sanity/themer` package (a root `buildTheme` export that
+generates a Studio theme from a few colors by replacing the `@sanity/color`
+palette that `buildTheme` from `@sanity/ui/theme` uses, a `/legacy` subpath
+that replicates the hosted themer.sanity.build `/api/hues` module
+byte-for-byte for migration, and a `/tool` subpath with the `themerTool`
+Studio plugin that edits and previews the root `buildTheme` themes) in
+`packages/themer`,
 the Figma plugins in `packages/figma` (Sanity UI theme tokens) and
 `packages/figma-color` (the raw `@sanity/color` palette), the Storybook app in
 `apps/storybook`, the
-sanity.io/ui docs site (a Next.js app with an embedded Sanity Studio) in
-`apps/docs`, the icons.sanity.dev icon showcase (a Vite SPA) in `apps/icons`,
-and a Sanity Blueprint (serverless functions for the docs site)
+sanity.io/ui docs site (a fully static Next.js app — no Sanity client, all
+content lives in code) in
+`apps/docs`, the Sanity Studio for the legacy docs dataset in `apps/studio`,
+the icons.sanity.dev icon showcase (a Vite SPA) in `apps/icons`,
+and a Sanity Blueprint (serverless functions for the icon enrichment)
 in `apps/blueprints/docs` (`pnpm-workspace.yaml`). The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
 (`packageManager` pin in `package.json`); developing in this repo requires Node
 `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
-supports `>=20.19 <22 || >=22.12` (see `packages/ui/package.json` engines).
+requires `>=22.12` (matching `sanity`; see `packages/ui/package.json` engines).
 
 Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
 `dev`). Notes that are not obvious from the scripts:
@@ -48,7 +57,12 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   config only imports on the Node version in CI when the package is
   `"type": "module"`, while `.mts` always works). The build regenerates
   package.json `exports`
-  (dev exports): in the monorepo, `@sanity/ui`, `@sanity/ui/theme`,
+  (dev exports): in the monorepo, `@sanity/ui` (incl. its subpath entry
+  points — one per file in `packages/ui/src/exports/`, e.g. `@sanity/ui/theme`
+  and `@sanity/ui/toast`; components with heavy dependencies like `motion`,
+  `@floating-ui/react-dom` and `react-refractor` live on their own subpaths so
+  the root entry never references them, and adding a file to `src/exports/`
+  plus running the build is all it takes to publish a new subpath),
   `@sanity/icons` (incl. its per-icon subpaths) and `@sanity/color` resolve
   directly to TypeScript source for every tool (tsc, oxlint's type checker,
   vitest, vite), so there are no tsconfig `paths`, no `customConditions`, and
@@ -57,18 +71,18 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   comes from the Changesets config (`access: public`), so packages don't set
   `publishConfig.access`. All published packages are `"type": "module"`: dist
   ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
-  (`@sanity/icons` ships ESM only).
+  (`@sanity/ui`, `@sanity/icons` and `@sanity/themer` ship ESM only).
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
   `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
-  `@sanity/ui` resolves to the `packages/ui/exports/` source (and
+  `@sanity/ui` resolves to the `packages/ui/src/exports/` source (and
   `@sanity/color` to `packages/color/src`) through the dev `exports`, so unit
   tests run directly against source and do not require a `pnpm build` first.
 - `packages/color/src/color.ts` is generated from `packages/color/src/config.ts`:
   regenerate it with `pnpm --filter @sanity/color generate` after changing the
   palette config; never edit it by hand.
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. It
-  resolves `@sanity/ui` to the `packages/ui/exports/` source through the dev
-  `exports`, so it hot-reloads source edits directly (no rebuild needed).
+  resolves `@sanity/ui` to the `packages/ui/src/exports/` source through the
+  dev `exports`, so it hot-reloads source edits directly (no rebuild needed).
 - `packages/icons` (migrated from the standalone `sanity-io/icons` repo)
   generates its icon components from the SVG sources in
   `packages/icons/export/`: `pnpm --filter @sanity/icons generate` (also run
@@ -86,8 +100,8 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   the `mos42crl`/`production` defaults), which uploads rasterized previews
   and clears `description`/`tags` of changed icons so the `enrich-icon`
   Sanity Function (`apps/blueprints/docs`) re-enriches them via Agent
-  Actions (this requires the docs studio schema to be deployed:
-  `pnpm --filter sanity-ui-docs schema:deploy`).
+  Actions (this requires the studio schema to be deployed:
+  `pnpm --filter sanity-ui-studio schema:deploy`).
 - `pnpm test:browser` runs the Storybook tests (`apps/storybook`): vitest
   renders every story in headless Chromium via `@storybook/addon-vitest` and
   executes story `play` interactions, plus the browser tests in
@@ -98,31 +112,33 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
 - Releases are managed with Changesets: run `pnpm changeset` to add a changeset
   to a PR that should trigger a release. Merging to `main` opens/updates a
   "Version Packages" PR, and merging that publishes to npm via trusted
-  publishing.
+  publishing under the `latest` dist-tag. The `3.x` line is maintained on the
+  `v3` branch and publishes under the `release-v3` dist-tag, like `v2` for
+  `2.x` (`release-v2`).
 - `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo. It is
   linted by the root oxlint config like everything else (an override in
   `.oxlintrc.json` additionally enables the Next.js plugin rules for it) and
   formatted by the root oxfmt config (`pnpm format`) like the rest of the
   repo. It depends on the workspace `@sanity/ui` (`workspace:*`), which
   resolves to the TypeScript source through the dev `exports`, so Next.js
-  transpiles it via `transpilePackages` in `apps/docs/next.config.mjs`. It is
+  transpiles it via `transpilePackages` in `apps/docs/next.config.ts`. It is
   deployed via Vercel, not released through Changesets.
-- `apps/docs` runs `next@preview` with `cacheComponents: true` and fetches
-  content with `next-sanity`'s `defineLive`/`sanityFetch` (Sanity Live) plus
-  stega-based visual editing. When touching data fetching or draft mode in
-  `apps/docs`, follow the vendored
-  `.agents/skills/sanity-live-cache-components` skill (three-layer
-  Page/Dynamic/Cached pattern with explicit `perspective`/`stega` props;
-  `'use cache'` only on the cached layer). The app builds and devs with
-  Turbopack and the native Rust React Compiler
-  (`experimental.turbopackRustReactCompiler`). To make that work,
-  `packages/ui` is `"type": "module"` and `apps/docs` omits the package.json
-  `type` field: an explicit `"type": "commonjs"` makes Turbopack refuse the
-  ESM-syntax TypeScript source that the dev `exports` resolve to. On-demand revalidation flows from
-  the Live Content API through the `invalidate-sync-tags` Sanity Function
-  (defined in `apps/blueprints/docs`) to `POST /ui/api/expire-tags`, which
-  calls `revalidateTag('sanity:<tag>', 'max')`; the route is guarded by the
-  `EXPIRE_TAGS_SECRET` env var.
+- `apps/docs` is fully static (DS-276): it fetches nothing from Sanity at
+  runtime and needs no environment variables. Every URL is its own `page.tsx`
+  under `apps/docs/src/app/(website)/`, and the nav tree mirrors the route
+  file structure — each route folder has a colocated `nav.ts` (title, order,
+  display flags) collected with Turbopack's `import.meta.glob` in
+  `src/app/(website)/navTree.ts`, so there is no manually maintained route
+  list (group folders like `docs/primitive/` have a `nav.ts` but no
+  `page.tsx`). Edit the page files directly to change docs content. The pages
+  were generated from the `mos42crl`/`production` dataset by the one-shot
+  `apps/studio/scripts/export-docs-to-code.ts` script; the dataset is
+  preserved but no longer read. The app runs `next@preview` with
+  `cacheComponents: true` and builds and devs with Turbopack and the native
+  Rust React Compiler (`experimental.turbopackRustReactCompiler`). To make
+  that work, `packages/ui` is `"type": "module"` and `apps/docs` omits the
+  package.json `type` field: an explicit `"type": "commonjs"` makes Turbopack
+  refuse the ESM-syntax TypeScript source that the dev `exports` resolve to.
 - `apps/blueprints/docs` is deployed by
   `.github/workflows/sanity-blueprint-docs.yml` via `@sanity/runtime-cli`
   (`blueprints doctor`/`plan` on PRs, `blueprints deploy` on pushes to
@@ -130,25 +146,23 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   stack id in the workflow's `SANITY_BLUEPRINT_STACK_ID` env (created by the
   first manual deploy; see `apps/blueprints/docs/README.md`).
 - `pnpm dev:docs` runs the docs app: Next.js on http://localhost:3000 (the
-  site is served under the `/ui` base path, so open http://localhost:3000/ui)
-  and the Sanity Studio dev server on http://localhost:3333. The Next.js app
-  requires a viewer token in `SANITY_API_READ_TOKEN` (environment variable or
-  `apps/docs/.env.local`) — without it every route fails with "Missing
-  SANITY_API_READ_TOKEN", even though the production dataset itself is
-  publicly readable. In Cloud Agent VMs, `SANITY_API_READ_TOKEN` and
-  `SANITY_AUTH_TOKEN` are available as runtime secrets (injected as env vars
-  when the VM starts). To sign in to the studio, open
-  `http://localhost:3333/#token={SANITY_AUTH_TOKEN}` (Sanity consumes the
-  token from the URL hash on load). The same hash-token sign-in also works for
-  the studio embedded in the Next.js app at
-  `http://localhost:3000/ui/studio/production#token={SANITY_AUTH_TOKEN}`. The
-  standalone studio (`pnpm dev:docs`, project `mos42crl`) exposes two
-  workspaces — `/production` (dataset `production`) and `/development` (dataset
-  `development`); prefer `/development` when creating/publishing test documents
-  so you don't pollute production. When driving the studio through the browser
-  (e.g. computer-use), tokens are redacted from tool output, so you cannot paste
-  the `#token=...` URL into browser instructions. A reliable workaround is a
-  tiny local HTTP server that reads `SANITY_AUTH_TOKEN` from env and serves an
-  HTML page doing `location.replace(<studio-url-with-token>)`, then point the
-  browser at that server — this keeps the secret out of prompts/screenshots
-  while still landing you authenticated in the workspace.
+  site is served under the `/ui` base path, so open http://localhost:3000/ui).
+  No tokens or env vars are required.
+- `pnpm dev:studio` runs the Sanity Studio (`apps/studio`, project `mos42crl`,
+  dataset `production`) on http://localhost:3333. The studio keeps the legacy
+  docs schemas/content (nothing was deleted when the docs went static; there
+  is no presentation tool since there is no preview target anymore) and the
+  `icon` documents used by `apps/icons` and the `enrich-icon` function.
+  `pnpm --filter sanity-ui-studio deploy` updates the hosted studio (the
+  `appId` in `apps/studio/sanity.cli.ts`). In Cloud Agent VMs,
+  `SANITY_API_READ_TOKEN` and `SANITY_AUTH_TOKEN` are available as runtime
+  secrets (injected as env vars when the VM starts). To sign in to the studio,
+  open `http://localhost:3333/#token={SANITY_AUTH_TOKEN}` (Sanity consumes the
+  token from the URL hash on load). When driving the studio through the
+  browser (e.g. computer-use), tokens are redacted from tool output, so you
+  cannot paste the `#token=...` URL into browser instructions. A reliable
+  workaround is a tiny local HTTP server that reads `SANITY_AUTH_TOKEN` from
+  env and serves an HTML page doing
+  `location.replace(<studio-url-with-token>)`, then point the browser at that
+  server — this keeps the secret out of prompts/screenshots while still
+  landing you authenticated in the workspace.
