@@ -20,9 +20,7 @@ registerLanguage(tsx)
 const theme = buildTheme()
 
 /**
- * Global providers shared by every route (the website, the embedded studio
- * and the arcade frame). Sanity content (nav, settings) is provided per route
- * group by `AppDataProvider`, which overrides this context with fetched data.
+ * Global providers shared by every route (the website and the arcade frame).
  */
 export function AppProviders(props: {children?: ReactNode}) {
   const {children} = props
