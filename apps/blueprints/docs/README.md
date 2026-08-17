@@ -24,9 +24,11 @@ for the agent actions to work.
 The blueprint used to also deploy an `invalidate-sync-tags` function that
 forwarded sync tag invalidation events to the docs deployment's
 `/ui/api/expire-tags` endpoint. The docs app (`apps/docs`) is fully static now
-— it doesn't fetch from Sanity at all — so both the function and the endpoint
-are gone. The `EXPIRE_TAGS_SECRET` env vars (on the deployed function and the
-docs Vercel project) are no longer used and can be deleted.
+— it doesn't fetch from Sanity at all — so the function is gone. The endpoint
+remains as a no-op that returns `{service: 'sanity-ui-docs', tags}` so leftover
+callers don't spike error rates. The `EXPIRE_TAGS_SECRET` env vars (on the
+deployed function and the docs Vercel project) are no longer used and can be
+deleted.
 
 ## Deploys
 

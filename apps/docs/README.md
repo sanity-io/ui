@@ -7,7 +7,9 @@ repository (with its full git history). It is linted by the root oxlint config
 formatted by the root oxfmt configuration (`pnpm format` at the repo root).
 
 The site is fully static: it fetches nothing from Sanity at runtime (no
-`@sanity/client`, no Sanity Live) and needs no environment variables.
+`@sanity/client`, no Sanity Live) and needs no environment variables. A no-op
+`POST /ui/api/expire-tags` route remains so leftover callers of the pre-static
+revalidation endpoint still get a 200 JSON response.
 
 ## Content lives in code
 
