@@ -148,7 +148,7 @@ defineCrossFileTest(
   (output) => {
     expect(output).toContain('<RootFlex alignItems="center" />')
   },
-  'transforms styled Box wrappers imported through barrel re-exports',
+  'transforms styled Flex wrappers imported through barrel re-exports',
   {
     extraFiles: {
       'index.ts': `export {RootFlex} from './Component.styled'`,
