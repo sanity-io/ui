@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest'
 
-import {POST} from './route'
+import {GET, POST} from './route'
 
 function post(init?: RequestInit & {url?: string}) {
   const {url = 'https://www.sanity.io/ui/api/expire-tags', ...requestInit} = init ?? {}
@@ -44,5 +44,14 @@ describe('POST /api/expire-tags', () => {
     })
     expect(invalid.status).toBe(200)
     expect(await invalid.json()).toEqual({service: 'sanity-ui-docs', tags: []})
+  })
+
+  it('also 200s GET so redirected POSTs do not 405', async () => {
+    const response = await GET(
+      new Request('https://www.sanity.io/ui/api/expire-tags?tag=s1:abc', {method: 'GET'}),
+    )
+
+    expect(response.status).toBe(200)
+    expect(await response.json()).toEqual({service: 'sanity-ui-docs', tags: ['s1:abc']})
   })
 })

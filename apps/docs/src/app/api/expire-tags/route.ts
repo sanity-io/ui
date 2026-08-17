@@ -26,3 +26,6 @@ export async function POST(request: Request) {
 
   return Response.json({service: 'sanity-ui-docs', tags})
 }
+
+// Apex 301s would downgrade POST to GET; still 200 so those don't count as errors.
+export const GET = POST
