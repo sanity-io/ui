@@ -12,7 +12,7 @@ strictPeerDependencies: false
 # so that keeps an explicit range there when needed. (See packageExtensions for
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
-  '@sanity/blueprints': ^0.23.3
+  '@sanity/blueprints': ^0.23.6
   '@sanity/client': ^7.26.2
   '@sanity/functions': ^1.6.2
   '@sanity/tsdown-config': ^0.24.1
