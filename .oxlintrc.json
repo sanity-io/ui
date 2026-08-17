@@ -13,13 +13,7 @@
   // ESLint plugins loaded through oxlint's JS plugins support. Rules from these
   // plugins are enabled per-file-pattern in "overrides".
   "jsPlugins": ["eslint-plugin-storybook"],
-  "ignorePatterns": [
-    "**/.workshop/*",
-    "**/dist/*",
-    "**/etc/*",
-    "**/storybook-static/*",
-    "**/sanity.types.ts"
-  ],
+  "ignorePatterns": ["**/.workshop/*", "**/dist/*", "**/etc/*", "**/storybook-static/*"],
   "options": {
     "denyWarnings": true,
     "reportUnusedDisableDirectives": "error",
@@ -159,10 +153,8 @@
       "files": ["apps/docs/**"],
       "plugins": ["nextjs"],
       "rules": {
-        // `import "server-only"` marks modules as server-only in Next.js
-        "import/no-unassigned-import": ["error", {"allow": ["**/*.css", "server-only"]}],
-        // The docs app narrows loosely-typed CMS (Portable Text) data with
-        // `as` assertions throughout; too noisy to be useful here
+        // The arcade/code-editor stack narrows loosely-typed runtime data
+        // with `as` assertions throughout; too noisy to be useful here
         "typescript/no-unsafe-type-assertion": "off"
       }
     },

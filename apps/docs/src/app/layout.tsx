@@ -9,6 +9,9 @@ import {ColorSchemeProvider} from './ColorSchemeProvider'
 import {DEFAULT_META_DESCRIPTION, DEFAULT_META_OG_IMAGE} from './constants'
 
 export const metadata = {
+  // Relative og:image paths (e.g. /ui/images/...) resolve against the
+  // production origin
+  metadataBase: new URL('https://www.sanity.io'),
   title: 'Sanity UI',
   description: DEFAULT_META_DESCRIPTION,
   icons: {

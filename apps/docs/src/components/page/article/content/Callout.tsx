@@ -1,31 +1,30 @@
-import {Icon} from '@sanity/icons'
-import {Box, Card, Flex, Text} from '@sanity/ui'
-import {stegaClean} from 'next-sanity'
+import {Icon, type IconSymbol} from '@sanity/icons'
+import {Box, Card, type CardTone, Flex, Text} from '@sanity/ui'
 import type React from 'react'
-
-import type {PortableTextValue} from '@/types'
 
 import {PlainContent} from '../PlainContent'
 
 export function Callout(props: {
-  data: Extract<PortableTextValue[number], {_type: 'callout'}>
+  children?: React.ReactNode
+  icon?: IconSymbol
+  tone?: CardTone
 }): React.JSX.Element {
-  const {content, icon, tone} = props.data
+  const {children, icon, tone} = props
 
   return (
-    <Card marginY={[4, 4, 5]} padding={2} radius={2} tone={stegaClean(tone) || 'transparent'}>
+    <Card marginY={[4, 4, 5]} padding={2} radius={2} tone={tone || 'transparent'}>
       <Flex>
         {icon && (
           <Box padding={3}>
             <Text muted>
-              <Icon symbol={stegaClean(icon)} />
+              <Icon symbol={icon} />
             </Text>
           </Box>
         )}
 
-        {content && (
+        {children && (
           <Box flex={1} padding={3} paddingLeft={2}>
-            <PlainContent blocks={content} />
+            <PlainContent>{children}</PlainContent>
           </Box>
         )}
       </Flex>

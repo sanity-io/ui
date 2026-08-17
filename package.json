@@ -11,6 +11,7 @@
     "dev": "pnpm --filter sanity-ui-storybook dev",
     "dev:docs": "pnpm --filter sanity-ui-docs dev",
     "dev:icons": "pnpm --filter sanity-icons-showcase dev",
+    "dev:studio": "pnpm --filter sanity-ui-studio dev",
     "format": "oxfmt . --no-error-on-unmatched-pattern",
     "knip": "knip --treat-config-hints-as-errors",
     "lint": "pnpm run oxlint",

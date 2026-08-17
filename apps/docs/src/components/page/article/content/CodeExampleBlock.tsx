@@ -1,28 +1,19 @@
 import {Box} from '@sanity/ui'
-import {stegaClean} from 'next-sanity'
-
-import type {PortableTextValue} from '@/types'
+import {ReactElement} from 'react'
 
 import {CodeExample} from './CodeExample'
 
 export function CodeExampleBlock(props: {
-  data: Extract<PortableTextValue[number], {_type: 'codeExample'}>
-}) {
-  // Code must render (and copy) without stega metadata
-  const data = stegaClean(props.data)
-
-  if (!data.code?.code) {
-    return null
-  }
+  code: string
+  description?: string
+  hookCode?: string
+  title?: string
+}): ReactElement {
+  const {code, description, hookCode, title} = props
 
   return (
     <Box marginY={4}>
-      <CodeExample
-        code={data.code.code}
-        description={data.description || undefined}
-        hookCode={data.hook?.code}
-        title={data.title || undefined}
-      />
+      <CodeExample code={code} description={description} hookCode={hookCode} title={title} />
     </Box>
   )
 }

@@ -1,15 +1,12 @@
+'use client'
+
 import {Button} from '@sanity/ui'
-import {stegaClean} from 'next-sanity'
+import {ReactElement} from 'react'
 
 import {FigmaLogo} from '@/components/assets'
-import type {PortableTextValue} from '@/types'
 
-export function FigmaButton(props: {
-  data: Extract<PortableTextValue[number], {_type: 'content.figmaButton'}>
-}) {
-  const {title, url} = stegaClean(props.data)
-
-  if (!url) return null
+export function FigmaButton(props: {title?: string; url: string}): ReactElement {
+  const {title, url} = props
 
   return (
     <Button
