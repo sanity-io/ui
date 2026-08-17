@@ -1,5 +1,14 @@
 # @sanity/themer
 
+## 0.3.6
+
+### Patch Changes
+
+- [#2705](https://github.com/sanity-io/ui/pull/2705) [`5f7981a`](https://github.com/sanity-io/ui/commit/5f7981aa9d0686f25624773e91c9b79b31fd8baa) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency styled-components to ^6.5.3
+
+- Updated dependencies [[`5f7981a`](https://github.com/sanity-io/ui/commit/5f7981aa9d0686f25624773e91c9b79b31fd8baa)]:
+  - @sanity/ui@4.0.4
+
 ## 0.3.5
 
 ### Patch Changes
