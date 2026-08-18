@@ -26,7 +26,7 @@ export function Modal(props: ModalProps) {
 
   const modalRef = useRef<HTMLDialogElement>(null)
 
-  const modalClasses = clsx(modalClassName, 'sui-inset0 sui-m-auto sui-radius5 sui-shadow3')
+  const modalClasses = clsx(modalClassName, 'sui-inset0 sui-m-auto sui-radius5 sui-shadow3 sui-p4')
 
   useEffect(() => {
     const modalElement = modalRef.current
@@ -57,18 +57,20 @@ export function Modal(props: ModalProps) {
       data-ui="Modal"
       {...rest}
     >
-      <Flex justifyContent="space-between" alignItems="center" padding={4}>
-        <Heading trim size={1}>
-          {header}
-        </Heading>
-        <IconButton
-          aria-label="Close"
-          level="tertiary"
-          icon={CloseIcon}
-          onClick={() => modalRef.current?.close()}
-        />
-      </Flex>
-      <Box flexGrow={1} overflowY="auto" paddingX={4} paddingBottom={4}>
+      {header && (
+        <Flex justifyContent="space-between" alignItems="center">
+          <Heading trim size={1}>
+            {header}
+          </Heading>
+          <IconButton
+            aria-label="Close"
+            level="tertiary"
+            icon={CloseIcon}
+            onClick={() => modalRef.current?.close()}
+          />
+        </Flex>
+      )}
+      <Box flexGrow={1} overflowY="auto">
         {children}
       </Box>
     </dialog>
