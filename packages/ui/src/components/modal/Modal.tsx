@@ -41,6 +41,10 @@ export function Modal(props: ModalProps) {
         modalElement.close()
       }
     }
+
+    return () => {
+      modalElement.close()
+    }
   }, [isOpen])
 
   return (
