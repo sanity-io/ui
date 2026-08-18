@@ -50,6 +50,7 @@ export function Modal(props: ModalProps) {
 
   return (
     <dialog
+      {...rest}
       ref={modalRef}
       closedby="any"
       aria-labelledby={header ? headerId : undefined}
@@ -57,7 +58,6 @@ export function Modal(props: ModalProps) {
       className={clsx(modalClasses, className)}
       style={style}
       data-ui="Modal"
-      {...rest}
     >
       {header && (
         <Flex justifyContent="space-between" alignItems="center">
