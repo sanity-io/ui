@@ -26,10 +26,7 @@ export function Modal(props: ModalProps) {
 
   const modalRef = useRef<HTMLDialogElement>(null)
 
-  const modalClasses = clsx(
-    modalClassName,
-    'sui-inset0 sui-m-auto sui-radius5 sui-shadow3 sui-position-relative',
-  )
+  const modalClasses = clsx(modalClassName, 'sui-inset0 sui-m-auto sui-radius5 sui-shadow3')
 
   useEffect(() => {
     const modalElement = modalRef.current
