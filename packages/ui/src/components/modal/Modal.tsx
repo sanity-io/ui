@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import clsx from 'clsx'
-import {useEffect, useRef} from 'react'
+import {useEffect, useId, useRef} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -25,6 +25,7 @@ export function Modal(props: ModalProps) {
   } = getProps(props, modalProps)
 
   const modalRef = useRef<HTMLDialogElement>(null)
+  const headerId = useId()
 
   const modalClasses = clsx(modalClassName, 'sui-inset0 sui-m-auto sui-radius5 sui-shadow3 sui-p4')
 
@@ -51,6 +52,7 @@ export function Modal(props: ModalProps) {
     <dialog
       ref={modalRef}
       closedby="any"
+      aria-labelledby={header ? headerId : undefined}
       onClose={onClose}
       className={clsx(modalClasses, className)}
       style={style}
@@ -59,7 +61,7 @@ export function Modal(props: ModalProps) {
     >
       {header && (
         <Flex justifyContent="space-between" alignItems="center">
-          <Heading trim size={1}>
+          <Heading trim size={1} id={headerId}>
             {header}
           </Heading>
           <IconButton
