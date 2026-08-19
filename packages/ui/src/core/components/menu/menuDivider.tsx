@@ -1,3 +1,5 @@
+import {clsx} from 'clsx/lite'
+
 import {ElementType, EmptyProps, Props} from '../../types/component'
 
 import {menuDivider} from './menuDivider.css'
@@ -17,13 +19,7 @@ function MenuDividerComponent(
   // oxlint-disable-next-line no-unsafe-type-assertion
   const Component = as as 'hr'
 
-  return (
-    <Component
-      {...restProps}
-      className={className ? `${menuDivider} ${className}` : menuDivider}
-      ref={ref}
-    />
-  )
+  return <Component {...restProps} className={clsx(menuDivider, className)} ref={ref} />
 }
 
 /**
