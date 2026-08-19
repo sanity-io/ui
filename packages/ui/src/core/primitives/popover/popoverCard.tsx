@@ -47,6 +47,7 @@ export function PopoverCard(
     arrowRef: React.Ref<HTMLDivElement>
     arrowX?: number
     arrowY?: number
+    open?: boolean
     originX?: number
     originY?: number
     overflow?: BoxOverflow
@@ -70,6 +71,7 @@ export function PopoverCard(
     arrowX,
     arrowY,
     children,
+    open,
     padding,
     placement,
     originX,
@@ -148,8 +150,23 @@ export function PopoverCard(
         direction="column"
         flex={1}
         overflow={overflow}
-        variants={POPOVER_MOTION_PROPS.children}
         transition={POPOVER_MOTION_PROPS.transition}
+        initial={animate ? POPOVER_MOTION_PROPS.content.hidden : undefined}
+        // The content fade is deliberately driven by `open` as a plain
+        // target instead of participating in the card's variant/exit
+        // propagation. Re-entering while an exit is (or seems) in flight can
+        // leave motion's presence bookkeeping in a state where a variant
+        // child's fade-in is skipped (it waits for a parent-driven animation
+        // that never comes), permanently stuck at opacity 0. A target derived
+        // from `open` is recomputed on every render and always animates from
+        // the current value, so any rapid open/close/open sequence converges.
+        animate={
+          animate
+            ? open
+              ? POPOVER_MOTION_PROPS.content.visible
+              : POPOVER_MOTION_PROPS.content.hidden
+            : undefined
+        }
       >
         <Flex direction="column" flex={1} padding={padding}>
           {children}

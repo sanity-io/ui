@@ -339,6 +339,7 @@ export function Popover(
         arrowX={arrowX}
         arrowY={arrowY}
         hidden={referenceHidden}
+        open={open}
         overflow={overflow}
         padding={padding}
         placement={placement}
