@@ -153,7 +153,7 @@ export function VirtualList(
 
   return (
     <Component
-      className={className ? `${virtualList} ${className}` : virtualList}
+      className={clsx(virtualList, className)}
       data-ui="VirtualList"
       {...restProps}
       ref={ref}
