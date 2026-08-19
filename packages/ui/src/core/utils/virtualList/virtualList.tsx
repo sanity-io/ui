@@ -1,9 +1,10 @@
 import {useEffect, useImperativeHandle, useRef, useState} from 'react'
-import {styled} from 'styled-components'
 
 import {_isScrollable} from '../../helpers/scroll'
 import {StackOwnProps} from '../../primitives/stack/stack'
 import {useTheme_v2} from '../../theme/useTheme'
+
+import {virtualList, virtualListItem} from './virtualList.css'
 
 /**
  * @beta
@@ -29,16 +30,6 @@ export interface VirtualListProps<Item = any> {
   renderItem?: (item: Item) => React.ReactNode
 }
 
-const StyledVirtualList = styled.div`
-  position: relative;
-`
-
-const ItemWrapper = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-`
-
 /**
  * @beta
  */
@@ -49,6 +40,7 @@ export function VirtualList(
 ): React.JSX.Element {
   const {
     as = 'div',
+    className,
     gap = 0,
     getItemKey,
     items = [],
@@ -151,15 +143,23 @@ export function VirtualList(
     renderItem,
   })
 
+  // Rendering the polymorphic `as` needs one concrete element type for JSX to
+  // type-check the div-flavored props (the same widening styled-components'
+  // `as` prop performed here before).
+  // oxlint-disable-next-line no-unsafe-type-assertion
+  const Component = as as 'div'
+
   return (
-    // styled-components 6.5 distributes PolymorphicCallProps over ElementType and hits TS2589;
-    // narrow the call-site target while still passing the real value.
-    // oxlint-disable-next-line no-unsafe-type-assertion
-    <StyledVirtualList as={as as 'div'} data-ui="VirtualList" {...restProps} ref={ref}>
+    <Component
+      className={className ? `${virtualList} ${className}` : virtualList}
+      data-ui="VirtualList"
+      {...restProps}
+      ref={ref}
+    >
       <div ref={wrapperRef} style={{height}}>
         {children}
       </div>
-    </StyledVirtualList>
+    </Component>
   )
 }
 
@@ -183,7 +183,11 @@ function useChildren({
   if (!renderItem || items.length === 0) return null
 
   if (itemHeight === -1) {
-    return [<ItemWrapper key={0}>{renderItem(items[0])}</ItemWrapper>]
+    return [
+      <div className={virtualListItem} key={0}>
+        {renderItem(items[0])}
+      </div>,
+    ]
   }
 
   return items.slice(fromIndex, toIndex).map((item, _itemIndex) => {
@@ -192,9 +196,13 @@ function useChildren({
     const key = getItemKey ? getItemKey(item, itemIndex) : itemIndex
 
     return (
-      <ItemWrapper key={key} style={{top: itemIndex * (itemHeight + space[gap])}}>
+      <div
+        className={virtualListItem}
+        key={key}
+        style={{top: itemIndex * (itemHeight + space[gap])}}
+      >
         {node}
-      </ItemWrapper>
+      </div>
     )
   })
 }
