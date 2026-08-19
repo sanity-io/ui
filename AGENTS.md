@@ -124,7 +124,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   transpiles it via `transpilePackages` in `apps/docs/next.config.ts`. It is
   deployed via Vercel, not released through Changesets.
 - `apps/docs` is fully static (DS-276): it fetches nothing from Sanity at
-  runtime and needs no environment variables. Every URL is its own `page.tsx`
+  runtime and needs no environment variables. A no-op `POST /ui/api/expire-tags`
+  placeholder remains so leftover callers of the old revalidation endpoint
+  don't 404. Every URL is its own `page.tsx`
   under `apps/docs/src/app/(website)/`, and the nav tree mirrors the route
   file structure — each route folder has a colocated `nav.ts` (title, order,
   display flags) collected with Turbopack's `import.meta.glob` in
