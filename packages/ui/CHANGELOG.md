@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.0.4
+
+### Patch Changes
+
+- [#2730](https://github.com/sanity-io/ui/pull/2730) [`3970a7e`](https://github.com/sanity-io/ui/commit/3970a7e6dd0b4dc53d78eca6ed789cf92e39ad7a) Thanks [@stipsan](https://github.com/stipsan)! - fix(popover): prevent animated popovers from getting stuck with invisible content when rapidly toggled, and start the content fade-in halfway through the card fade instead of after it
+
 ## 4.0.3
 
 ### Patch Changes
