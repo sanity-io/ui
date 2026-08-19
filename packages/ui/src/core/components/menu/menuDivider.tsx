@@ -1,5 +1,3 @@
-import {clsx} from 'clsx/lite'
-
 import {ElementType, EmptyProps, Props} from '../../types/component'
 
 import {menuDivider} from './menuDivider.css'
@@ -21,10 +19,9 @@ function MenuDividerComponent(
 
   return (
     <Component
-      data-ui="MenuDivider"
-      className={clsx(menuDivider, className)}
-      ref={ref}
       {...restProps}
+      className={className ? `${menuDivider} ${className}` : menuDivider}
+      ref={ref}
     />
   )
 }
