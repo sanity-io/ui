@@ -60,3 +60,5 @@ export function TooltipGroup<T extends ElementType = 'div'>(
     </Component>
   )
 }
+
+export type {TooltipGroupProps}

@@ -10,15 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@sanity-labs/ui-poc": "workspace:*",
     "@sanity/icons": "^3.7.4",
+    "@sanity/ui": "workspace:*",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
     "@rolldown/plugin-babel": "catalog:",
-    "@sanity/ui": "^3.1.14",
     "@types/node": "^24.12.2",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
@@ -28,6 +27,7 @@
     "react-is": "^19.2.5",
     "styled-components": "^6.4.0",
     "typescript": "~6.0.2",
+    "ui3": "catalog:",
     "ui4": "npm:@sanity/ui@4.0.0-static.46",
     "vite": "^8.0.4"
   }

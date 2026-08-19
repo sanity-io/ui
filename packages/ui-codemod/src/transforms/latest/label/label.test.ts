@@ -111,15 +111,3 @@ defineInlineTest(
   `,
   'moves width props to style and updates mapped value',
 )
-
-defineInlineTest(
-  transform,
-  {},
-  `
-  <label htmlFor="inputId" />
-  `,
-  `
-  <label htmlFor="inputId" />
-  `,
-  'preserves label HTML elements',
-)

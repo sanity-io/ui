@@ -1,11 +1,11 @@
-import {Button, Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
+import {Button, Container, Divider, Flex, Heading, Text} from '@sanity/ui'
 
-import '@sanity-labs/ui-poc/styles.css'
+import '@sanity/ui/styles.css'
 import {Link} from 'react-router'
 
 export function Welcome() {
   return (
-    <Container contentSize={2} paddingY={4}>
+    <Container size={2} paddingY={4}>
       <Flex flexDirection="column" rowGap={2}>
         <Heading as="h1" size={4}>
           Sanity UI in React Router

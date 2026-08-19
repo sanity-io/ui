@@ -5,7 +5,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router'
 import App from './App.tsx'
 
 // Routes are lazy so each page loads only its own library's code and styles.
-const UiPoc = lazy(() => import('./routes/uiPoc.tsx'))
+const Ui5 = lazy(() => import('./routes/ui5.tsx'))
 const Ui3 = lazy(() => import('./routes/ui3.tsx'))
 
 const router = createBrowserRouter([
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <Suspense>
-            <UiPoc />
+            <Ui5 />
           </Suspense>
         ),
       },

@@ -1,25 +1,36 @@
-import {type API, type ASTPath, type JSXOpeningElement} from 'jscodeshift'
+import {type API, type ASTPath, type ImportDeclaration, type JSXOpeningElement} from 'jscodeshift'
 
+type CommentableNode = {
+  comments?: {type: string; value: string; leading?: boolean}[] | null
+}
+
+/**
+ * Inserts a `UI-CODEMOD TODO` comment.
+ * Returns whether the AST was updated.
+ */
 export function insertTodoWarning(
   j: API['jscodeshift'],
-  path: ASTPath<JSXOpeningElement>,
+  path: ASTPath<JSXOpeningElement | ImportDeclaration>,
   warning: string,
-) {
-  const parent = path.parent
+): boolean {
+  let target: CommentableNode | null = null
 
-  if (!parent || parent.node.type !== 'JSXElement') {
-    return
+  if (path.node.type === 'ImportDeclaration') {
+    target = path.node
+  } else if (path.parent?.node.type === 'JSXElement') {
+    target = path.parent.node
   }
 
-  const el = parent.node as {
-    comments?: {type: string; value: string; leading?: boolean}[]
+  if (!target) {
+    return false
   }
 
-  el.comments ??= []
+  target.comments ??= []
 
-  if (el.comments.some((c) => c.value.includes(warning))) {
-    return
+  if (target.comments.some((comment) => comment.value.includes(warning))) {
+    return false
   }
 
-  el.comments.unshift(j.commentLine(` UI-POC-CODEMOD TODO: ${warning}`, true))
+  target.comments.unshift(j.commentLine(` UI-CODEMOD TODO: ${warning}`, true))
+  return true
 }

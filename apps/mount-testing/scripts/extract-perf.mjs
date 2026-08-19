@@ -8,7 +8,7 @@
 /**
  * Extract React Profiler perf results from each codebase (route) and component.
  *
- * Each page (?route=ui3 | ui4 | ui-poc) mounts `count` copies of every component
+ * Each page (?route=ui3 | ui4 | ui5) mounts `count` copies of every component
  * wrapped in a <Profiler> that console.logs { id, phase, actualDuration,
  * baseDuration, ... }. This script loads each route in a real browser, collects
  * those entries, and writes a structured per-codebase / per-component report.
@@ -32,7 +32,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT_DIR = resolve(ROOT, 'perf-results')
 const PORT = 4190
 const RUNS = Number(process.env.PERF_RUNS || 1)
-const ROUTES = ['ui3', 'ui4', 'ui-poc']
+const ROUTES = ['ui3', 'ui4', 'ui5']
 const FINAL_ID = 'Composition' // the last <Profiler> on every page
 const PAGE_TIMEOUT = 120_000
 

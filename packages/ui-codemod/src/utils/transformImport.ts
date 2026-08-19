@@ -5,16 +5,22 @@ import {getSplitImportSpecifiers} from './getSplitImportSpecifiers'
 
 export const DEFAULT_UI_PACKAGE = '@sanity/ui'
 
+/**
+ * Rewrites imports from `fromPackage` to `toPackage`, splitting imports if needed.
+ * Returns whether the AST was updated.
+ */
 export function transformImport(
   j: API['jscodeshift'],
   root: Collection,
   componentName: string,
   fromPackage: string = DEFAULT_UI_PACKAGE,
   toPackage: string = DEFAULT_UI_PACKAGE,
-): void {
+): boolean {
   if (fromPackage === toPackage) {
-    return
+    return false
   }
+
+  let hasChanges = false
 
   root.find(j.ImportDeclaration).forEach((path) => {
     const node = path.node
@@ -35,11 +41,15 @@ export function transformImport(
         sourceLiteral.value = toPackage
       }
 
+      hasChanges = true
       return
     }
 
     path.node.specifiers = restSpecs
     const clonedImportSpecifiers = getClonedImportSpecifiers(j, componentSpecs)
     path.insertAfter(j.importDeclaration(clonedImportSpecifiers, j.stringLiteral(toPackage)))
+    hasChanges = true
   })
+
+  return hasChanges
 }

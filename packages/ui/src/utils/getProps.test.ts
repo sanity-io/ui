@@ -2,6 +2,7 @@ import {describe, expect, it} from 'vitest'
 
 import {cardProps} from '../components/card/card.props'
 import {layoutProps} from '../props/layout'
+import {typographyProps} from '../props/typography'
 import {getProps} from './getProps'
 
 describe('getProps', () => {
@@ -59,11 +60,24 @@ describe('getProps', () => {
     expect(result.style).toEqual({})
   })
 
+  it('preserves undefined props', () => {
+    const result = getProps({padding: 1, id: 'test'}, layoutProps)
+    expect(result.className).toBe('sui-p1')
+    expect(result['id']).toEqual('test')
+  })
+
   it('preserves non-styling props', () => {
     const result = getProps({padding: 1, as: 'div'}, layoutProps)
     expect(result.className).toBe('sui-p1')
     expect(result.style).toEqual({})
     expect(result['as']).toEqual('div')
+  })
+
+  it('preserves non-styling responsive props', () => {
+    const result = getProps({padding: 1, items: [{label: 'One'}, {label: 'Two'}]}, layoutProps)
+    expect(result.className).toBe('sui-p1')
+    expect(result.style).toEqual({})
+    expect(result['items']).toEqual([{label: 'One'}, {label: 'Two'}])
   })
 
   it('generates responsive className based on unions', () => {
@@ -88,7 +102,7 @@ describe('getProps', () => {
     expect(result.style).toEqual({})
   })
 
-  it('genereates responsive className based on composites', () => {
+  it('generates responsive className based on composites', () => {
     const result = getProps({density: ['compact', 'regular']}, cardProps)
     expect(result.className).toBe(
       'sui-gap2 sui-gap3-bp-1 sui-p3 sui-p4-bp-1 sui-radius2 sui-radius3-bp-1',
@@ -110,9 +124,33 @@ describe('getProps', () => {
     expect(result.style).toEqual({})
   })
 
+  it('generates responsive className with null values', () => {
+    const result = getProps({padding: [1, 2, null, 3]}, layoutProps)
+    expect(result.className).toBe('sui-p1 sui-p2-bp-1 sui-p3-bp-3')
+    expect(result.style).toEqual({})
+  })
+
   it('generates responsive className without unsupported values', () => {
     const result = getProps({padding: [1, 2, 10, 3]}, layoutProps)
     expect(result.className).toBe('sui-p1 sui-p2-bp-1 sui-p3-bp-3')
     expect(result.style).toEqual({})
+  })
+
+  it('generates className based on a conditional', () => {
+    const result = getProps({truncate: 1}, typographyProps)
+    expect(result.className).toBe('sui-text-overflow')
+    expect(result.style).toEqual({})
+  })
+
+  it('generates className and style based on a conditional', () => {
+    const result = getProps({truncate: 3}, typographyProps)
+    expect(result.className).toBe('sui-line-clamp')
+    expect(result.style).toEqual({'--line-clamp': 3})
+  })
+
+  it('generates responsive className and style based on a conditional', () => {
+    const result = getProps({truncate: [1, 3]}, typographyProps)
+    expect(result.className).toBe('sui-text-overflow sui-line-clamp-bp-1')
+    expect(result.style).toEqual({'--line-clamp-bp-1': 3})
   })
 })

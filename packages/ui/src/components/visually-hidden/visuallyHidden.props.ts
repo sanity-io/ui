@@ -1,7 +1,7 @@
 import {type PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface VisuallyHiddenProps<T extends React.ElementType> {
+export interface VisuallyHiddenProps<T extends React.ElementType = 'span'> {
   /** Element to render */
   as?: T
   /** If true, element is visible on :focus-visible */

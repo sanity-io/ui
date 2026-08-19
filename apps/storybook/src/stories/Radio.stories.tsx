@@ -1,6 +1,6 @@
-import {Radio as RadioV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Radio as RadioV3} from 'ui3'
 
 import {Radio} from '../../../../packages/ui/src/components/radio/Radio'
 import {radioProps} from '../../../../packages/ui/src/components/radio/radio.props'

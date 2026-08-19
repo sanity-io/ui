@@ -2,7 +2,7 @@ import type {InteractiveAs} from '../../types/Interactive'
 import {type PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface PressAreaProps<T extends React.ElementType> {
+export interface PressAreaProps<T extends React.ElementType = 'button'> {
   /** Element to render */
   as?: InteractiveAs<T>
 }

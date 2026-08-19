@@ -13,16 +13,21 @@ import {insertTodoWarning} from './insertTodoWarning'
 import {isValidStyleType} from './isValidStyleType'
 import {mergeStyle} from './mergeStyle'
 
+/**
+ * Applies attribute migration rules to a JSX opening element.
+ * Returns whether the AST was updated.
+ */
 export function transformAttributes(
   j: API['jscodeshift'],
   path: ASTPath<JSXOpeningElement>,
   mods: AttributeMods,
   todoWarning: string,
-) {
+): boolean {
   if (!path.node.attributes) {
-    return
+    return false
   }
 
+  let hasChanges = false
   const attrs = path.node.attributes
   const removeIdxs: number[] = []
 
@@ -35,7 +40,9 @@ export function transformAttributes(
       continue
     }
 
-    insertTodoWarning(j, path, mod.warning || todoWarning)
+    if (insertTodoWarning(j, path, mod.warning || todoWarning)) {
+      hasChanges = true
+    }
   }
 
   for (let i = 0; i < attrs.length; i++) {
@@ -57,18 +64,24 @@ export function transformAttributes(
     }
 
     if (mod.type === 'warn-only') {
-      insertTodoWarning(j, path, mod.warning || todoWarning)
+      if (insertTodoWarning(j, path, mod.warning || todoWarning)) {
+        hasChanges = true
+      }
     }
 
     if (mod.type === 'rename-only') {
       if (attr.name.type === 'JSXIdentifier') {
         attr.name.name = mod.name
+        hasChanges = true
       }
     }
 
     if (mod.type === 'style-only') {
       if (!expr || !isValidStyleType(expr)) {
-        insertTodoWarning(j, path, todoWarning)
+        if (insertTodoWarning(j, path, todoWarning)) {
+          hasChanges = true
+        }
+
         continue
       }
 
@@ -76,21 +89,27 @@ export function transformAttributes(
 
       if (merged) {
         removeIdxs.push(i)
-      } else {
-        insertTodoWarning(j, path, todoWarning)
+      } else if (insertTodoWarning(j, path, todoWarning)) {
+        hasChanges = true
       }
     }
 
     if (mod.type === 'style-mapped') {
       if (!expr || !isValidStyleType(expr)) {
-        insertTodoWarning(j, path, todoWarning)
+        if (insertTodoWarning(j, path, todoWarning)) {
+          hasChanges = true
+        }
+
         continue
       }
 
       const styleValue = getMappingValue(mod.mapping, expr)
 
       if (styleValue === undefined) {
-        insertTodoWarning(j, path, todoWarning)
+        if (insertTodoWarning(j, path, todoWarning)) {
+          hasChanges = true
+        }
+
         continue
       }
 
@@ -98,14 +117,17 @@ export function transformAttributes(
 
       if (merged) {
         removeIdxs.push(i)
-      } else {
-        insertTodoWarning(j, path, todoWarning)
+      } else if (insertTodoWarning(j, path, todoWarning)) {
+        hasChanges = true
       }
     }
 
     if (mod.type === 'shorthand-mapped') {
       if (expr.type === 'ConditionalExpression' || expr.type === 'Identifier') {
-        insertTodoWarning(j, path, todoWarning)
+        if (insertTodoWarning(j, path, todoWarning)) {
+          hasChanges = true
+        }
+
         continue
       }
 
@@ -114,8 +136,8 @@ export function transformAttributes(
       if (shorthandAttrs.length) {
         attrs.splice(i + 1, 0, ...shorthandAttrs)
         removeIdxs.push(i)
-      } else {
-        insertTodoWarning(j, path, todoWarning)
+      } else if (insertTodoWarning(j, path, todoWarning)) {
+        hasChanges = true
       }
     }
 
@@ -124,7 +146,10 @@ export function transformAttributes(
       const compositeValue = getCompositeAttrValue(j, attrs, mod.mapping)
 
       if (!compositeValue) {
-        insertTodoWarning(j, path, todoWarning)
+        if (insertTodoWarning(j, path, todoWarning)) {
+          hasChanges = true
+        }
+
         continue
       }
 
@@ -149,6 +174,8 @@ export function transformAttributes(
           }
         }
       }
+
+      hasChanges = true
     }
 
     if (mod.type === 'mapped-only' || mod.type === 'rename-mapped') {
@@ -159,7 +186,10 @@ export function transformAttributes(
       }
 
       if (expr.type === 'ConditionalExpression' || expr.type === 'Identifier') {
-        insertTodoWarning(j, path, todoWarning)
+        if (insertTodoWarning(j, path, todoWarning)) {
+          hasChanges = true
+        }
+
         continue
       }
 
@@ -167,7 +197,10 @@ export function transformAttributes(
         const styleArray = getMappingArray(j, expr, mod.mapping)
 
         if (!styleArray) {
-          insertTodoWarning(j, path, todoWarning)
+          if (insertTodoWarning(j, path, todoWarning)) {
+            hasChanges = true
+          }
+
           continue
         }
 
@@ -177,28 +210,39 @@ export function transformAttributes(
           attr.value = j.jsxExpressionContainer(styleArray)
         }
 
+        hasChanges = true
         continue
       }
 
       const styleValue = getMappingValue(mod.mapping, expr)
 
       if (styleValue === undefined) {
-        insertTodoWarning(j, path, todoWarning)
+        if (insertTodoWarning(j, path, todoWarning)) {
+          hasChanges = true
+        }
+
         continue
       }
 
       if (typeof styleValue === 'string') {
         attr.value = j.stringLiteral(styleValue)
-        continue
+      } else {
+        attr.value = j.jsxExpressionContainer(getMappingExpression(j, styleValue) as never)
       }
 
-      attr.value = j.jsxExpressionContainer(getMappingExpression(j, styleValue) as never)
+      hasChanges = true
     }
   }
 
   const idxsToRemove = [...new Set(removeIdxs)].sort((a, b) => b - a)
 
-  for (const i of idxsToRemove) {
-    attrs.splice(i, 1)
+  if (idxsToRemove.length > 0) {
+    hasChanges = true
+
+    for (const i of idxsToRemove) {
+      attrs.splice(i, 1)
+    }
   }
+
+  return hasChanges
 }

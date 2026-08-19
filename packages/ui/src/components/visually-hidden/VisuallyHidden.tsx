@@ -25,3 +25,5 @@ export function VisuallyHidden<T extends ElementType = 'span'>(
     </Component>
   )
 }
+
+export type {VisuallyHiddenProps}

@@ -109,6 +109,18 @@ export const LAYOUT_MODS: AttributeMods = {
           none: 'auto',
           auto: 'auto',
           initial: 'auto',
+          1: '0%',
+          2: '0%',
+          3: '0%',
+          4: '0%',
+          5: '0%',
+          6: '0%',
+          7: '0%',
+          8: '0%',
+          9: '0%',
+          10: '0%',
+          11: '0%',
+          12: '0%',
         },
       },
       {
@@ -143,11 +155,11 @@ export const LAYOUT_MODS: AttributeMods = {
   },
   gapX: {
     type: 'rename-only',
-    name: 'rowGap',
+    name: 'columnGap',
   },
   gapY: {
     type: 'rename-only',
-    name: 'columnGap',
+    name: 'rowGap',
   },
   gridColumn: {
     type: 'mapped-only',

@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - v5-alpha
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    uses: sanity-io/.github/.github/workflows/changesets.yml@main
+    permissions:
+      contents: read
+      id-token: write
+    secrets: inherit
+    with:
+      versionPrTitle: 'chore: version packages'
+      versionCommitMessage: 'chore: version packages'

@@ -2,11 +2,17 @@ import type {API, ASTPath, ImportSpecifier} from 'jscodeshift'
 
 import {isImportBindingUsed} from './isImportBindingUsed'
 
+/**
+ * Removes unused import specifier or the whole import if no specifiers remain.
+ * Returns whether the AST was updated.
+ */
 export function removeUnusedImport(
   j: API['jscodeshift'],
   root: ReturnType<API['jscodeshift']>,
   name: string,
-) {
+): boolean {
+  let hasChanges = false
+
   root.find(j.ImportDeclaration).forEach((path) => {
     const specs = path.node.specifiers
 
@@ -39,9 +45,13 @@ export function removeUnusedImport(
 
     if (next.length === 0) {
       j(path).remove()
+      hasChanges = true
       return
     }
 
     path.node.specifiers = next
+    hasChanges = true
   })
+
+  return hasChanges
 }

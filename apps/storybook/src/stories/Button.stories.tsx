@@ -1,7 +1,7 @@
 import {EditIcon} from '@sanity/icons'
-import {Button as ButtonV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Button as ButtonV3} from 'ui3'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {buttonProps} from '../../../../packages/ui/src/components/button/button.props'

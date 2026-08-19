@@ -1,6 +1,6 @@
-import {Spinner as SpinnerV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Spinner as SpinnerV3} from 'ui3'
 
 import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {Spinner} from '../../../../packages/ui/src/components/spinner/Spinner'

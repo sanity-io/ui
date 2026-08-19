@@ -92,14 +92,16 @@ export function ${componentName}<T extends ElementType = 'div'>(
       {children}
     </Component>
   )
-}\n`
+}
+
+export type {${componentName}Props}\n`
 }
 
 function getPropsFile(componentName, propsName) {
   return `import {type PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface ${componentName}Props<T extends React.ElementType> {
+export interface ${componentName}Props<T extends React.ElementType = 'div'> {
   /** Element to render */
   as?: T
 }

@@ -1,4 +1,5 @@
 import {AddIcon} from '@sanity/icons'
+import {Profiler} from 'react'
 import {
   Box,
   Button,
@@ -18,9 +19,8 @@ import {
   Text,
   ThemeProvider,
   Tooltip,
-} from '@sanity/ui'
-import {buildTheme} from '@sanity/ui/theme'
-import {Profiler} from 'react'
+} from 'ui3'
+import {buildTheme} from 'ui3/theme'
 
 const count = 5000
 const iterator = [...Array(count).keys()]

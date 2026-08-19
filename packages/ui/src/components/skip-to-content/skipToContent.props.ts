@@ -3,11 +3,9 @@ import {type PropDef} from '../../types/PropDef'
 /** @beta */
 export interface SkipToContentProps extends React.ComponentProps<'a'> {
   /**
-   * Anchor hash. The target element should be focusable or have `tabindex="-1"` applied.
+   * Anchor href. The target element should be focusable or have `tabindex="-1"`.
    */
-  hash: string
-  /** Use href instead */
-  href?: never
+  href: string
   /** Visible/announced label */
   label: string
   /** Use label instead */
@@ -15,9 +13,6 @@ export interface SkipToContentProps extends React.ComponentProps<'a'> {
 }
 
 export const skipToContentProps: Record<string, PropDef> = {
-  hash: {
-    type: 'string',
-  },
   label: {
     type: 'string',
   },

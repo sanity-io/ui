@@ -44,3 +44,5 @@ export function Radio(props: RadioProps) {
     </Label>
   )
 }
+
+export type {RadioProps}

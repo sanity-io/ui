@@ -30,3 +30,5 @@ export function HStack<T extends ElementType = 'div'>(
     </Flex>
   )
 }
+
+export type {HStackProps}

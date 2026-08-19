@@ -11,8 +11,8 @@ import {
   Switch,
   Text,
   ThemeProvider,
-} from '@sanity/ui'
-import {buildTheme} from '@sanity/ui/theme'
+} from 'ui3'
+import {buildTheme} from 'ui3/theme'
 
 const theme = buildTheme()
 

@@ -1,8 +1,8 @@
-import {ThemeProvider} from '@sanity/ui'
-import {buildTheme} from '@sanity/ui/theme'
 import type {Decorator} from '@storybook/react-vite'
 import {type ComponentType, createElement, type CSSProperties, Fragment, Profiler} from 'react'
 import {addons} from 'storybook/preview-api'
+import {ThemeProvider} from 'ui3'
+import {buildTheme} from 'ui3/theme'
 
 import {
   ADDON_ID,

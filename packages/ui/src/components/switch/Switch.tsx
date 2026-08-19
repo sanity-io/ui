@@ -44,3 +44,5 @@ export function Switch(props: SwitchProps) {
     </Label>
   )
 }
+
+export type {SwitchProps}

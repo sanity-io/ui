@@ -34,3 +34,5 @@ export function Code<T extends CodeTag = 'pre'>({
     </Component>
   )
 }
+
+export type {CodeProps}

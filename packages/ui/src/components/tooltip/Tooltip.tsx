@@ -93,3 +93,5 @@ function TooltipRoot({
 export const Tooltip = Object.assign(TooltipRoot, {
   forwardsTriggerProps: true,
 }) as typeof TooltipRoot
+
+export type {TooltipProps}

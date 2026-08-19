@@ -24,9 +24,9 @@ defineInlineTest(
   <Container width={2} />
   `,
   `
-  <Container contentSize={2} />
+  <Container size={2} />
   `,
-  'renames width to contentSize',
+  'renames width to size',
 )
 
 defineInlineTest(
@@ -36,9 +36,9 @@ defineInlineTest(
   <Container width={[1, 2, 3]} />
   `,
   `
-  <Container contentSize={[1, 2, 3]} />
+  <Container size={[1, 2, 3]} />
   `,
-  'renames responsive width to contentSize',
+  'renames responsive width to size',
 )
 
 defineInlineTest(

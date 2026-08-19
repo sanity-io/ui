@@ -1,6 +1,6 @@
-import {Label as EyebrowV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Label as EyebrowV3} from 'ui3'
 
 import {Eyebrow} from '../../../../packages/ui/src/components/eyebrow/Eyebrow'
 import {eyebrowProps} from '../../../../packages/ui/src/components/eyebrow/eyebrow.props'

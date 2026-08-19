@@ -2,7 +2,7 @@ import {type ToneProps, toneProps} from '../../props/tone'
 import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
-export interface IndicatorProps<T extends React.ElementType> extends ToneProps {
+export interface IndicatorProps<T extends React.ElementType = 'span'> extends ToneProps {
   /** Element to render */
   as?: T
   /** Label for aria-label attribute */
