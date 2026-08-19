@@ -81,6 +81,7 @@
     "@floating-ui/react-dom": "^2.1.9",
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
+    "clsx": "^2.1.1",
     "csstype": "^3.2.3",
     "motion": "^13.1.0",
     "react-is": "catalog:",

@@ -1,3 +1,4 @@
+import {clsx} from 'clsx/lite'
 import {useEffect, useImperativeHandle, useRef, useState} from 'react'
 
 import {_isScrollable} from '../../helpers/scroll'
@@ -151,7 +152,7 @@ export function VirtualList(
 
   return (
     <Component
-      className={className ? `${virtualList} ${className}` : virtualList}
+      className={clsx(virtualList, className)}
       data-ui="VirtualList"
       {...restProps}
       ref={ref}
