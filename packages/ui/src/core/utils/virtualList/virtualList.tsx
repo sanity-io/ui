@@ -153,10 +153,10 @@ export function VirtualList(
 
   return (
     <Component
-      className={clsx(virtualList, className)}
+      className={className ? `${virtualList} ${className}` : virtualList}
       data-ui="VirtualList"
-      ref={ref}
       {...restProps}
+      ref={ref}
     >
       <div ref={wrapperRef} style={{height}}>
         {children}
@@ -186,7 +186,7 @@ function useChildren({
 
   if (itemHeight === -1) {
     return [
-      <div key={0} className={virtualListItem}>
+      <div className={virtualListItem} key={0}>
         {renderItem(items[0])}
       </div>,
     ]
@@ -199,8 +199,8 @@ function useChildren({
 
     return (
       <div
-        key={key}
         className={virtualListItem}
+        key={key}
         style={{top: itemIndex * (itemHeight + space[gap])}}
       >
         {node}
