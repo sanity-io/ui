@@ -17,11 +17,11 @@
     "@sanity/logos": "workspace:*",
     "@sanity/themer": "workspace:*",
     "@sanity/ui": "workspace:*",
-    "@sanity/vision": "^6.9.2",
+    "@sanity/vision": "^6.10.1",
     "react": "catalog:",
     "react-dom": "catalog:",
     "sanity": "catalog:",
-    "sanity-plugin-media": "^6.1.3",
+    "sanity-plugin-media": "^6.1.4",
     "styled-components": "catalog:"
   },
   "devDependencies": {
