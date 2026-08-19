@@ -1,10 +1,12 @@
+import {clsx} from 'clsx/lite'
 import {FocusEvent, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 
 import {EMPTY_RECORD} from '../../constants'
 import {containsOrEqualsElement, isHTMLElement} from '../../helpers/element'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
+
+import {layer} from './layer.css'
 
 /**
  * @public
@@ -21,11 +23,11 @@ interface LayerChildrenProps {
   onActivate?: LayerProps['onActivate']
 }
 
-const StyledLayer = styled.div({position: 'relative'})
-
 function LayerChildren(props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>) {
   const {
+    as = 'div',
     children,
+    className,
     onActivate,
     onFocus,
     ref: forwardedRef,
@@ -70,16 +72,23 @@ function LayerChildren(props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivE
     [isTopLayer, onFocus],
   )
 
+  // Rendering the polymorphic `as` needs one concrete element type for JSX to
+  // type-check the div-flavored props (the same widening styled-components'
+  // `as` prop performed here before).
+  // oxlint-disable-next-line no-unsafe-type-assertion
+  const Component = as as 'div'
+
   return (
-    <StyledLayer
+    <Component
       {...restProps}
+      className={clsx(layer, className)}
       data-ui="Layer"
       onFocus={handleFocus}
       ref={ref}
       style={{...style, zIndex}}
     >
       {children}
-    </StyledLayer>
+    </Component>
   )
 }
 
