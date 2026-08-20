@@ -1,8 +1,15 @@
 .sui-Modal {
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow-y: auto;
   min-width: 320px;
   max-width: 80dvw;
   max-height: 80dvh;
-  transition: opacity 150ms var(--timing-linear), scale 150ms var(--timing-curve);
+  transition:
+    display 150ms allow-discrete,
+    overlay 150ms allow-discrete,
+    opacity 150ms var(--timing-linear),
+    scale 150ms var(--timing-curve);
 }
 
 .sui-Modal:not([open]) {
@@ -12,9 +19,6 @@
 
 .sui-Modal[open] {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  overflow-y: auto;
   opacity: 1;
   scale: 1;
 }
@@ -22,7 +26,10 @@
 .sui-Modal::backdrop {
   --modal-backdrop: hsl(from var(--separator-high) h s l / var(--overlay-opacity));
   background-color: var(--modal-backdrop);
-  transition: opacity 150ms var(--timing-linear);
+  transition:
+    display 150ms allow-discrete,
+    overlay 150ms allow-discrete,
+    opacity 150ms var(--timing-linear);
 }
 
 .sui-Modal:not([open])::backdrop {
