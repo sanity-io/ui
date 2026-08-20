@@ -26,5 +26,6 @@ export function useGlobalKeyDown(
     window.addEventListener('keydown', handler, options)
 
     return () => window.removeEventListener('keydown', handler, options)
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [options])
 }
