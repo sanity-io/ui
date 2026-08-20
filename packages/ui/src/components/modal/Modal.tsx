@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import clsx from 'clsx'
-import {type ComponentPropsWithRef, type ElementType, useEffect, useId, useRef} from 'react'
+import {type ReactNode, useEffect, useId, useRef} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -8,12 +8,7 @@ import {Box} from '../box/Box'
 import {Flex} from '../flex/Flex'
 import {Heading} from '../heading/Heading'
 import {IconButton} from '../icon-button/IconButton'
-import {
-  type ModalContentProps,
-  type ModalFooterProps,
-  type ModalProps,
-  modalProps,
-} from './modal.props'
+import {type ModalProps, modalProps} from './modal.props'
 
 const modalClassName = suffixClassName('sui-Modal')
 const modalContentClassName = suffixClassName('sui-ModalContent')
@@ -88,38 +83,19 @@ function ModalRoot(props: ModalProps) {
   )
 }
 
-function ModalContent<T extends ElementType = 'div'>(
-  props: ModalContentProps<T> & Omit<ComponentPropsWithRef<T>, keyof ModalContentProps<T>>,
-) {
-  const {children, className, style, ...rest} = getProps(props, {})
-
+/** Main content of the modal. Grows to fill the available space and scrolls if needed. */
+function ModalContent({children}: {children?: ReactNode}) {
   return (
-    <Box
-      {...rest}
-      flexGrow={1}
-      overflowY="auto"
-      className={clsx(modalContentClassName, className)}
-      style={style}
-      data-ui="ModalContent"
-    >
+    <Box className={modalContentClassName} flexGrow={1} overflowY="auto" data-ui="ModalContent">
       {children}
     </Box>
   )
 }
 
-function ModalFooter<T extends ElementType = 'div'>(
-  props: ModalFooterProps<T> & Omit<ComponentPropsWithRef<T>, keyof ModalFooterProps<T>>,
-) {
-  const {children, className, style, ...rest} = getProps(props, {})
-
+/** Optional footer area, below the modal content. */
+function ModalFooter({children}: {children?: ReactNode}) {
   return (
-    <Box
-      flexShrink={0}
-      {...rest}
-      className={clsx(modalFooterClassName, className)}
-      style={style}
-      data-ui="ModalFooter"
-    >
+    <Box className={modalFooterClassName} flexShrink={0} data-ui="ModalFooter">
       {children}
     </Box>
   )
@@ -133,4 +109,4 @@ export const Modal = ModalRoot
 ModalRoot.Content = ModalContent
 ModalRoot.Footer = ModalFooter
 
-export type {ModalContentProps, ModalFooterProps, ModalProps}
+export type {ModalProps}

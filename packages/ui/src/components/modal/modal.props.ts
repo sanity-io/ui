@@ -1,5 +1,4 @@
 import {type PropDef} from '../../types/PropDef'
-import {type BoxProps} from '../box/box.props'
 
 /** @beta */
 export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
@@ -19,17 +18,3 @@ export const modalProps: Record<string, PropDef> = {
     type: 'boolean',
   },
 }
-
-/**
- * Main content of the modal. Grows to fill the available space and scrolls if needed.
- *
- * @beta
- */
-export type ModalContentProps<T extends React.ElementType = 'div'> = BoxProps<T>
-
-/**
- * Optional footer area, below the modal content.
- *
- * @beta
- */
-export type ModalFooterProps<T extends React.ElementType = 'div'> = BoxProps<T>
