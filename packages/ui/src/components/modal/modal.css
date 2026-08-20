@@ -1,7 +1,4 @@
 .sui-Modal {
-  flex-direction: column;
-  gap: var(--space-4);
-  overflow-y: auto;
   min-width: 320px;
   max-width: 80dvw;
   max-height: 80dvh;

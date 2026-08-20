@@ -33,7 +33,10 @@ function ModalRoot(props: ModalProps) {
   const modalRef = useRef<HTMLDialogElement>(null)
   const headerId = useId()
 
-  const modalClasses = clsx(modalClassName, 'sui-inset0 sui-m-auto sui-radius5 sui-shadow3 sui-p4')
+  const modalClasses = clsx(
+    modalClassName,
+    'sui-inset0 sui-m-auto sui-radius5 sui-shadow3 sui-p4 sui-flex-direction-column sui-gap4 sui-overflow-y-auto',
+  )
 
   useEffect(() => {
     const modalElement = modalRef.current
