@@ -1,0 +1,49 @@
+.sui-Modal {
+  min-width: 320px;
+  max-width: 80dvw;
+  max-height: 80dvh;
+  transition:
+    display 150ms allow-discrete,
+    overlay 150ms allow-discrete,
+    opacity 150ms var(--timing-linear),
+    scale 150ms var(--timing-curve);
+}
+
+.sui-Modal:not([open]) {
+  opacity: 0;
+  scale: 0.9;
+}
+
+.sui-Modal[open] {
+  display: flex;
+  opacity: 1;
+  scale: 1;
+}
+
+.sui-Modal::backdrop {
+  --modal-backdrop: hsl(from var(--separator-high) h s l / var(--overlay-opacity));
+  background-color: var(--modal-backdrop);
+  transition:
+    display 150ms allow-discrete,
+    overlay 150ms allow-discrete,
+    opacity 150ms var(--timing-linear);
+}
+
+.sui-Modal:not([open])::backdrop {
+  opacity: 0;
+}
+
+.sui-Modal[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .sui-Modal[open] {
+    opacity: 0;
+    scale: 0.9;
+  }
+
+  .sui-Modal[open]::backdrop {
+    opacity: 0;
+  }
+}
