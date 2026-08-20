@@ -65,19 +65,21 @@ function ModalRoot(props: ModalProps) {
       style={style}
       data-ui="Modal"
     >
-      {header && (
-        <Flex flexShrink={0} justifyContent="space-between" alignItems="center">
+      <Flex flexShrink={0} justifyContent="space-between" alignItems="center">
+        {header ? (
           <Heading trim size={1} id={headerId}>
             {header}
           </Heading>
-          <IconButton
-            aria-label="Close"
-            level="tertiary"
-            icon={CloseIcon}
-            onClick={() => modalRef.current?.close()}
-          />
-        </Flex>
-      )}
+        ) : (
+          <div />
+        )}
+        <IconButton
+          aria-label="Close"
+          level="tertiary"
+          icon={CloseIcon}
+          onClick={() => modalRef.current?.close()}
+        />
+      </Flex>
       {children}
     </dialog>
   )

@@ -72,7 +72,7 @@ function LongBodyContent() {
   )
 }
 
-function ModalDefaultStory(props: ModalProps) {
+function ModalBasicStory(props: ModalProps) {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
@@ -123,8 +123,8 @@ function ModalWithFooterStory(props: ModalProps) {
   )
 }
 
-export const Default: Story = {
-  render: (props) => <ModalDefaultStory {...props} />,
+export const Basic: Story = {
+  render: (props) => <ModalBasicStory {...props} />,
   play: async ({canvas}) => {
     await expect((await canvas.findByRole('dialog', {hidden: true})).dataset.ui).toBe('Modal')
   },

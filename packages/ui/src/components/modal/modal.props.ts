@@ -3,7 +3,7 @@ import {type BoxProps} from '../box/box.props'
 
 /** @beta */
 export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
-  /** Text to be displayed as the modal's heading */
+  /** Text to be displayed as the modal's heading; optional but recommended for optimal accessibility and presentation */
   header?: string
   /** Whether the modal is open; defaults to false */
   isOpen?: boolean
