@@ -30,6 +30,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "oxc-transform-react": "catalog:",
     "typescript": "catalog:",
     "unrun": "catalog:"
   }
