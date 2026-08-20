@@ -122,7 +122,7 @@ function ModalFooter<T extends ElementType = 'div'>(
 
 ModalRoot.displayName = 'Modal'
 
-/** @public */
+/** @beta */
 export const Modal = ModalRoot
 
 ModalRoot.Content = ModalContent

@@ -1,7 +1,7 @@
 import {type PropDef} from '../../types/PropDef'
 import {type BoxProps} from '../box/box.props'
 
-/** @public */
+/** @beta */
 export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
   /** Text to be displayed as the modal's heading */
   header?: string
@@ -21,15 +21,15 @@ export const modalProps: Record<string, PropDef> = {
 }
 
 /**
- * Scrolling region of the modal. Grows to fill the space between the header and the footer.
+ * Main content of the modal. Grows to fill the available space and scrolls if needed.
  *
- * @public
+ * @beta
  */
 export type ModalContentProps<T extends React.ElementType = 'div'> = BoxProps<T>
 
 /**
- * Region pinned below the content. Sets no alignment of its own.
+ * Optional footer area, below the modal content.
  *
- * @public
+ * @beta
  */
 export type ModalFooterProps<T extends React.ElementType = 'div'> = BoxProps<T>
