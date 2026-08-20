@@ -21,6 +21,7 @@ catalog:
   '@types/react': ^19.2.18
   '@types/react-dom': ^19.2.4
   '@types/react-is': ^19.2.0
+  '@vitejs/plugin-react': ^6.1.0
   oxc-transform-react: ^0.145.0
   react: ^19.2.8
   react-dom: ^19.2.8
