@@ -31,7 +31,7 @@ function Ui5() {
       </Text>
       <Box marginY={5}>
         <Button text="Open a hailing frequency" onClick={() => setModalOpen(true)} />
-        <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} header="Greetings, Admiral">
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)} header="Greetings, Admiral">
           <Modal.Content>
             <Text>I believe you’ll find everything is in order for the festivities.</Text>
           </Modal.Content>

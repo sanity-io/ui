@@ -63,7 +63,7 @@ function ModalSection() {
   return (
     <Box marginY={5}>
       <Button text="Open Modal" onClick={() => setModalOpen(true)} />
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} header="Dialog header">
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} header="Dialog header">
         <Modal.Content>
           <Text>The text of the Modal</Text>
         </Modal.Content>

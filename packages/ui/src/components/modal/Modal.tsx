@@ -15,12 +15,14 @@ const modalContentClassName = suffixClassName('sui-ModalContent')
 const modalFooterClassName = suffixClassName('sui-ModalFooter')
 
 function ModalRoot(props: ModalProps) {
+  // `open` must stay out of `rest`. Spread onto the dialog it would set the native open
+  // attribute, which renders a non-modal dialog with no backdrop and no top layer.
   const {
     children,
     className,
     style,
     header,
-    isOpen = false,
+    open = false,
     onClose,
     ...rest
   } = getProps(props, modalProps)
@@ -34,23 +36,34 @@ function ModalRoot(props: ModalProps) {
   )
 
   useEffect(() => {
-    const modalElement = modalRef.current
-    if (!modalElement) return
+    const dialogElement = modalRef.current
+    if (!dialogElement) return
 
-    if (isOpen) {
-      if (!modalElement.open) {
-        modalElement.showModal()
+    // `open` = `open` prop
+    // dialogElement.open = the `open` attribute on the HTML dialog element
+    // The prop and the attribute are manipulated independently, thus they
+    // can get out of sync if not handled within this effect.
+    if (open) {
+      // The prop can be true even if the attribute is not; this syncs them on opening.
+      if (!dialogElement.open) {
+        dialogElement.showModal()
       }
     } else {
-      if (modalElement.open) {
-        modalElement.close()
+      // In this branch, the `open` prop has changed to falsy;
+      // thus we need to fire the dialog element's `close` method,
+      // which in turn will fire the `onClose` function provided by the consumer
+      // (see dialog's `onClose` assignment in the render function below).
+      if (dialogElement.open) {
+        dialogElement.close()
       }
     }
 
+    // Ensure the modal is closed (and thus its `open` attribute updated)
+    // when the component is unmounted.
     return () => {
-      modalElement.close()
+      dialogElement.close()
     }
-  }, [isOpen])
+  }, [open])
 
   return (
     <dialog

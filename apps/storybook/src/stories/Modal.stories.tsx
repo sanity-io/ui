@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'
-import {expect} from 'storybook/test'
+import {expect, userEvent, waitFor} from 'storybook/test'
 import {Dialog} from 'ui3'
 
 import {Box} from '../../../../packages/ui/src/components/box/Box'
@@ -78,7 +78,7 @@ function ModalBasicStory(props: ModalProps) {
   return (
     <Box padding={4}>
       <Button text="Open modal" onClick={() => setModalOpen(true)} />
-      <Modal {...props} isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+      <Modal {...props} open={modalOpen} onClose={() => setModalOpen(false)}>
         <Modal.Content>
           <Text>Modal body content</Text>
         </Modal.Content>
@@ -93,7 +93,7 @@ function ModalScrollingContentStory(props: ModalProps) {
   return (
     <Box padding={4}>
       <Button text="Open modal" onClick={() => setModalOpen(true)} />
-      <Modal {...props} isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+      <Modal {...props} open={modalOpen} onClose={() => setModalOpen(false)}>
         <Modal.Content>
           <LongBodyContent />
         </Modal.Content>
@@ -108,7 +108,7 @@ function ModalWithFooterStory(props: ModalProps) {
   return (
     <Box padding={4}>
       <Button text="Open modal" onClick={() => setModalOpen(true)} />
-      <Modal {...props} isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+      <Modal {...props} open={modalOpen} onClose={() => setModalOpen(false)}>
         <Modal.Content>
           <LongBodyContent />
         </Modal.Content>
@@ -126,7 +126,23 @@ function ModalWithFooterStory(props: ModalProps) {
 export const Basic: Story = {
   render: (props) => <ModalBasicStory {...props} />,
   play: async ({canvas}) => {
-    await expect((await canvas.findByRole('dialog', {hidden: true})).dataset.ui).toBe('Modal')
+    const modal = await canvas.findByRole('dialog', {hidden: true})
+
+    await expect(modal.dataset.ui).toBe('Modal')
+
+    await userEvent.click(await canvas.findByRole('button', {name: 'Open modal'}))
+
+    // Only a dialog in the top layer matches :modal. This proves `open` reached showModal()
+    // rather than the native open attribute, which renders a non-modal dialog.
+    await waitFor(async () => {
+      await expect(modal.matches(':modal')).toBe(true)
+    })
+
+    await userEvent.click(await canvas.findByRole('button', {name: 'Close'}))
+
+    await waitFor(async () => {
+      await expect(modal.matches(':modal')).toBe(false)
+    })
   },
 }
 
