@@ -1,5 +1,17 @@
 import '@sanity/ui/styles.css'
-import {Button, Card, Checkbox, Grid, Heading, Radio, Switch, Text, VStack} from '@sanity/ui'
+import {
+  Box,
+  Button,
+  Card,
+  Checkbox,
+  Grid,
+  Heading,
+  Modal,
+  Radio,
+  Switch,
+  Text,
+  VStack,
+} from '@sanity/ui'
 import {useState} from 'react'
 
 // Shared test sizes — keep in sync with ui3.tsx so the comparison stays fair.
@@ -43,6 +55,20 @@ function SingleControlSection() {
         />
       </VStack>
     </Card>
+  )
+}
+
+function ModalSection() {
+  const [modalOpen, setModalOpen] = useState(false)
+  return (
+    <Box marginY={5}>
+      <Button text="Open Modal" onClick={() => setModalOpen(true)} />
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} header="Dialog header">
+        <Modal.Content>
+          <Text>The text of the Modal</Text>
+        </Modal.Content>
+      </Modal>
+    </Box>
   )
 }
 
@@ -153,6 +179,7 @@ function Ui5() {
     <VStack gap={4}>
       <Heading>UI 5</Heading>
       <SingleControlSection />
+      <ModalSection />
       <SelectAllSection />
       <ToneToggleSection />
       <PanelSwapSection />

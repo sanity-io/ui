@@ -8,6 +8,7 @@ import {
   Heading,
   HStack,
   Link,
+  Modal,
   Radio,
   Switch,
   Text,
@@ -15,8 +16,11 @@ import {
 } from '@sanity/ui'
 
 import '@sanity/ui/styles.css'
+import {useState} from 'react'
 
 function Ui5() {
+  const [modalOpen, setModalOpen] = useState(false)
+
   return (
     <Box margin={4}>
       <Heading as="h2" marginBottom={5}>
@@ -25,6 +29,14 @@ function Ui5() {
       <Text as="p" marginBottom={4}>
         A measure of the USS Sanity’s DOM engines
       </Text>
+      <Box marginY={5}>
+        <Button text="Open a hailing frequency" onClick={() => setModalOpen(true)} />
+        <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} header="Greetings, Admiral">
+          <Modal.Content>
+            <Text>I believe you’ll find everything is in order for the festivities.</Text>
+          </Modal.Content>
+        </Modal>
+      </Box>
       <Card tone="neutral" density="loose">
         <Container size={2} marginLeft={0}>
           <VStack gap={[1, 2]}>

@@ -1,8 +1,10 @@
 import {useState} from 'react'
 import {
+  Box,
   Button,
   Card,
   Checkbox,
+  Dialog,
   Grid,
   Heading,
   Inline,
@@ -69,6 +71,28 @@ function SingleControlSection() {
         </Inline>
       </Stack>
     </Card>
+  )
+}
+
+function DialogSection() {
+  const [dialogOpen, setDialogOpen] = useState(false)
+  return (
+    <Box marginY={5}>
+      <Button text="Open Dialog" onClick={() => setDialogOpen(true)} />
+      {dialogOpen && (
+        <Dialog
+          animate={true}
+          id="inpDialog"
+          open={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          header="Dialog header"
+        >
+          <Box padding={4}>
+            <Text>The text of the Modal</Text>
+          </Box>
+        </Dialog>
+      )}
+    </Box>
   )
 }
 
@@ -192,6 +216,7 @@ function Ui3() {
       <Stack gap={4}>
         <Heading>UI 3</Heading>
         <SingleControlSection />
+        <DialogSection />
         <SelectAllSection />
         <ToneToggleSection />
         <PanelSwapSection />

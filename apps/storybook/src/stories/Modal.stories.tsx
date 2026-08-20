@@ -1,6 +1,7 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'
 import {expect} from 'storybook/test'
+import {Dialog} from 'ui3'
 
 import {Box} from '../../../../packages/ui/src/components/box/Box'
 import {Button} from '../../../../packages/ui/src/components/button/Button'
@@ -28,6 +29,7 @@ const meta: Meta<typeof Modal> = {
     },
     performance: {
       component: Modal,
+      compareComponent: Dialog,
     },
   },
 }
