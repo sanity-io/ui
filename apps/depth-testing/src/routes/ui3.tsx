@@ -35,7 +35,6 @@ function Ui3() {
           {dialogOpen && (
             <Dialog
               id="ui3Dialog"
-              open={dialogOpen}
               onClose={() => setDialogOpen(false)}
               header="Greetings, Admiral"
               animate={true}

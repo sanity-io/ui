@@ -83,7 +83,6 @@ function DialogSection() {
         <Dialog
           animate={true}
           id="inpDialog"
-          open={dialogOpen}
           onClose={() => setDialogOpen(false)}
           header="Dialog header"
         >
