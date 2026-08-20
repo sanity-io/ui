@@ -116,7 +116,21 @@ function ModalFooter({children}: {children?: ReactNode}) {
 
 ModalRoot.displayName = 'Modal'
 
-/** @beta */
+/**
+ * @beta
+ *
+ * Renders a modal dialog element — should not be used for nonmodal dialogs.
+ * Can be closed by clicking the modal's close button, hitting the Esc key, or clicking
+ * anywhere in the modal's backdrop (support for the latter is pending for Safari).
+ *
+ * Modal dialogs make their containing documents inert, and render on the topmost
+ * layer within that containing document; they must be dimissed before the containing
+ * document and its contents become unblocked. They also trap focus within the bounds
+ * of the modal element and its descendants.
+ *
+ * For more on dialogs and modality, refer to the HTML specification for the dialog element:
+ * https://html.spec.whatwg.org/dev/interactive-elements.html#the-dialog-element
+ */
 export const Modal = ModalRoot
 
 ModalRoot.Content = ModalContent
