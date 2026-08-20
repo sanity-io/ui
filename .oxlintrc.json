@@ -60,8 +60,17 @@
     // componentDidCatch) remain allowed via allowErrorBoundary.
     "react/prefer-function-component": ["error", {"allowErrorBoundary": true}],
 
-    // React Compiler checks
-    "react/react-compiler": "error",
+    // React Compiler: recommended rules live in `correctness`,
+    // recommended-latest `void-use-memo` in `correctness`, and the
+    // off-by-default compiler rules in `suspicious`/`perf` — all already
+    // enabled via `categories` above. `react/react-compiler` was removed
+    // in oxlint 1.79 in favor of these per-category rules.
+    // Restriction-category compiler rules are off unless listed here:
+    "react/unsupported-syntax": "error",
+    "react/invariant": "error",
+    "react/rule-suppression": "error",
+    "react/syntax": "error",
+    "react/todo": "error",
 
     "typescript/ban-ts-comment": "error",
     "typescript/no-deprecated": "error",
