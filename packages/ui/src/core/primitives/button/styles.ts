@@ -4,6 +4,7 @@ import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {_cardColorStyle} from '../../styles/card/_cardColorStyle'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
+import {_ruleSet} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {ButtonMode, ButtonTone, ButtonWidth} from '../../types/button'
 
@@ -82,8 +83,7 @@ export function buttonColorStyles(
   // const defaultBoxShadow = `inset 0px -1.5px 0px ${buttonTheme.border.width}px color-mix(in srgb, var(--card-border-color) 25%, var(--card-bg-color))`
   const defaultBoxShadow = undefined
 
-  // oxlint-disable-next-line no-unsafe-type-assertion
-  return [
+  return _ruleSet(
     _cardColorStyle(baseColor, color.enabled),
     {
       'backgroundColor': 'var(--card-bg-color)',
@@ -117,5 +117,5 @@ export function buttonColorStyles(
       },
     },
     style?.button?.root,
-  ].filter(Boolean) as CSSObject[]
+  )
 }

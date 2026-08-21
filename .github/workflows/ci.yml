@@ -30,27 +30,76 @@ jobs:
   test:
     needs: [build]
     runs-on: ${{ matrix.os }}
-    name: Test ${{ matrix.runtime }} / ${{ matrix.os }}
+    name: Test ${{ matrix.runtime }} / ${{ matrix.os }} / styled-components@${{ matrix.styled-components }}
+    # The styled-components v7 alpha (the `test` dist-tag) churns; don't let
+    # upstream breakage block PRs. Switch the matrix entry to '7.0.0' and drop
+    # `experimental` once v7 stable ships.
+    continue-on-error: ${{ matrix.experimental == true }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
         runtime: [node@lts]
+        # `devDependencies` runs the workspace catalog pin (no override).
+        # '6.1.0' is the oldest version the `^6.1` peer range claims.
+        # `test` is the npm dist-tag of the styled-components v7 prerelease.
+        styled-components: [devDependencies, '6.1.0']
         include:
           - os: macos-latest
             runtime: node@lts
+            styled-components: devDependencies
+          - os: ubuntu-latest
+            runtime: node@lts
+            styled-components: test
+            experimental: true
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with:
           runtime: ${{ matrix.runtime }}
+      - name: Pin styled-components@${{ matrix.styled-components }}
+        if: matrix.styled-components != 'devDependencies'
+        env:
+          SC_SPEC: ${{ matrix.styled-components }}
+        # Rewrite the workspace catalog entry to the resolved version and lift
+        # the minimum-release-age gate for it (a freshly published prerelease
+        # would otherwise be blocked). Nothing is committed; the lockfile stays
+        # on the catalog pin.
+        run: |
+          SC_VERSION="$(npm view "styled-components@${SC_SPEC}" version)"
+          echo "Resolved styled-components@${SC_SPEC} to ${SC_VERSION}"
+          grep -q '^  styled-components: ' pnpm-workspace.yaml
+          sed -i -E "s|^  styled-components: .+$|  styled-components: ${SC_VERSION}|" pnpm-workspace.yaml
+          sed -i '/^minimumReleaseAgeExclude:/a\  - styled-components' pnpm-workspace.yaml
+          pnpm install --no-frozen-lockfile
       - run: pnpm test
 
   storybook-test:
     runs-on: ubuntu-latest
+    name: Storybook test / styled-components@${{ matrix.styled-components }}
+    # See the `test` job: the v7 alpha entry must not block PRs.
+    continue-on-error: ${{ matrix.experimental == true }}
+    strategy:
+      fail-fast: false
+      matrix:
+        styled-components: [devDependencies, '6.1.0']
+        include:
+          - styled-components: test
+            experimental: true
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
+      - name: Pin styled-components@${{ matrix.styled-components }}
+        if: matrix.styled-components != 'devDependencies'
+        env:
+          SC_SPEC: ${{ matrix.styled-components }}
+        run: |
+          SC_VERSION="$(npm view "styled-components@${SC_SPEC}" version)"
+          echo "Resolved styled-components@${SC_SPEC} to ${SC_VERSION}"
+          grep -q '^  styled-components: ' pnpm-workspace.yaml
+          sed -i -E "s|^  styled-components: .+$|  styled-components: ${SC_VERSION}|" pnpm-workspace.yaml
+          sed -i '/^minimumReleaseAgeExclude:/a\  - styled-components' pnpm-workspace.yaml
+          pnpm install --no-frozen-lockfile
       - name: Store Playwright's version
         id: playwright-version
         run: |
@@ -70,6 +119,6 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
-          name: vitest-failure-screenshots
+          name: vitest-failure-screenshots-styled-components-${{ matrix.styled-components }}
           path: apps/storybook/**/__screenshots__/
           if-no-files-found: ignore
