@@ -75,7 +75,7 @@
     "@sanity/color": "catalog:",
     "@sanity/icons": "catalog:",
     "csstype": "^3.2.3",
-    "motion": "^13.1.0",
+    "motion": "^13.1.1",
     "react-compiler-runtime": "1.0.0",
     "react-is": "catalog:",
     "react-refractor": "catalog:",
