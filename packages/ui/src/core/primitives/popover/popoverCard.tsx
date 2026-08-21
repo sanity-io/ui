@@ -31,10 +31,6 @@ const MotionCard = styled(motion.create(Card))`
   will-change: transform;
 `
 
-const MotionFlex = styled(motion.create(Flex))`
-  will-change: opacity;
-`
-
 /**
  * @internal
  */
@@ -47,7 +43,6 @@ export function PopoverCard(
     arrowRef: React.Ref<HTMLDivElement>
     arrowX?: number
     arrowY?: number
-    open?: boolean
     originX?: number
     originY?: number
     overflow?: BoxOverflow
@@ -71,7 +66,6 @@ export function PopoverCard(
     arrowX,
     arrowY,
     children,
-    open,
     padding,
     placement,
     originX,
@@ -145,33 +139,11 @@ export function PopoverCard(
       animate={animate ? ['visible', 'scaleIn'] : undefined}
       exit={animate ? ['hidden', 'scaleOut'] : undefined}
     >
-      <MotionFlex
-        data-ui="Popover__wrapper"
-        direction="column"
-        flex={1}
-        overflow={overflow}
-        transition={POPOVER_MOTION_PROPS.transition}
-        initial={animate ? POPOVER_MOTION_PROPS.content.hidden : undefined}
-        // The content fade is deliberately driven by `open` as a plain
-        // target instead of participating in the card's variant/exit
-        // propagation. Re-entering while an exit is (or seems) in flight can
-        // leave motion's presence bookkeeping in a state where a variant
-        // child's fade-in is skipped (it waits for a parent-driven animation
-        // that never comes), permanently stuck at opacity 0. A target derived
-        // from `open` is recomputed on every render and always animates from
-        // the current value, so any rapid open/close/open sequence converges.
-        animate={
-          animate
-            ? open
-              ? POPOVER_MOTION_PROPS.content.visible
-              : POPOVER_MOTION_PROPS.content.hidden
-            : undefined
-        }
-      >
+      <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
         <Flex direction="column" flex={1} padding={padding}>
           {children}
         </Flex>
-      </MotionFlex>
+      </Flex>
 
       {arrow && (
         <Arrow

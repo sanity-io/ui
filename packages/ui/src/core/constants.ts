@@ -1,4 +1,4 @@
-import type {TargetAndTransition, Transition, Variant} from 'motion/react'
+import type {Transition, Variant} from 'motion/react'
 
 /**
  * @internal
@@ -24,10 +24,6 @@ export const POPOVER_MOTION_PROPS: {
     scaleIn: Variant
     scaleOut: Variant
   }
-  content: {
-    hidden: TargetAndTransition
-    visible: TargetAndTransition
-  }
   transition: Transition
 } = {
   card: {
@@ -49,29 +45,6 @@ export const POPOVER_MOTION_PROPS: {
     },
     scaleOut: {
       scale: 0.97,
-    },
-  },
-  /**
-   * Crossfade targets for the popover content wrapper. These are plain
-   * animation targets (not variants): the content fade is driven directly by
-   * the `open` prop rather than by variant/exit propagation from the card,
-   * so that any open/close/open sequence converges to the correct opacity.
-   * On enter, the content starts fading in halfway through the card fade
-   * (which lasts `POPOVER_MOTION_DURATION / 2`); on exit, it fades out
-   * together with the card.
-   */
-  content: {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        visualDuration: POPOVER_MOTION_DURATION,
-        bounce: 0.25,
-        delay: POPOVER_MOTION_DURATION / 4,
-      },
     },
   },
   transition: {
