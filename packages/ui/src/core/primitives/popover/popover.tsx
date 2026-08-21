@@ -23,6 +23,7 @@ import {
 } from 'react'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {useConnectedRef} from '../../hooks/useConnectedRef'
 import {useElementSize} from '../../hooks/useElementSize'
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
@@ -285,6 +286,11 @@ export function Popover(
         }
       : undefined,
   })
+  const handleReferenceChange = useCallback(
+    (node: Element | null) => refs.setReference(node),
+    [refs],
+  )
+  const referenceRef = useConnectedRef(handleReferenceChange)
 
   const referenceHidden = middlewareData.hide?.referenceHidden
 
@@ -298,13 +304,14 @@ export function Popover(
     arrowRef.current = arrowEl
   }, [])
 
-  const setFloating = useCallback(
+  const handleFloatingChange = useCallback(
     (node: HTMLDivElement | null) => {
       ref.current = node
       refs.setFloating(node)
     },
     [refs],
   )
+  const setFloating = useConnectedRef(handleFloatingChange)
 
   // If there's a child then we need to set the reference element to the cloned child ref
   // and if child changes we make sure to update or remove the reference element.
@@ -316,8 +323,8 @@ export function Popover(
 
     if (!childProp) return null
 
-    return cloneElement(childProp, {ref: refs.setReference})
-  }, [childProp, referenceElement, refs.setReference])
+    return cloneElement(childProp, {ref: referenceRef})
+  }, [childProp, referenceElement, referenceRef])
 
   useImperativeHandle(updateRef, () => update, [update])
 

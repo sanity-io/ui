@@ -29,6 +29,7 @@ import {styled} from 'styled-components'
 import {useEffectEvent} from 'use-effect-event'
 
 import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {useConnectedRef} from '../../hooks/useConnectedRef'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
@@ -131,6 +132,7 @@ export function Tooltip(
   const fallbackPlacements = _getArrayProp(fallbackPlacementsProp)
   const ref = useRef<HTMLDivElement | null>(null)
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
+  const referenceElementRef = useConnectedRef<HTMLElement>(setReferenceElement)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
   const [tooltipMaxWidth, setTooltipMaxWidth] = useState(0)
@@ -307,13 +309,14 @@ export function Tooltip(
     [update],
   )
 
-  const setFloating = useCallback(
+  const handleFloatingChange = useCallback(
     (node: HTMLDivElement | null) => {
       ref.current = node
       refs.setFloating(node)
     },
     [refs],
   )
+  const setFloating = useConnectedRef(handleFloatingChange)
 
   const child = useMemo(() => {
     if (!childProp) return null
@@ -325,7 +328,7 @@ export function Tooltip(
       onMouseLeave: handleMouseLeave,
       onClick: handleClick,
       onContextMenu: handleContextMenu,
-      ref: setReferenceElement,
+      ref: referenceElementRef,
     })
   }, [
     childProp,
@@ -335,6 +338,7 @@ export function Tooltip(
     handleFocus,
     handleMouseEnter,
     handleMouseLeave,
+    referenceElementRef,
   ])
 
   // If there's a child then we need to set the reference element to the cloned child ref

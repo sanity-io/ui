@@ -3,6 +3,7 @@ import {startTransition, useCallback, useEffect, useId, useMemo, useRef, useStat
 import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {useConnectedRef} from '../../hooks/useConnectedRef'
 import {Box} from '../../primitives/box/box'
 import {Flex} from '../../primitives/flex/flex'
 import {Text} from '../../primitives/text/text'
@@ -92,9 +93,10 @@ export function TreeItem(
    * This doesn't happen on React 19 due to automatic batching of all state updates, the startTransition wrapper here gives a type of batching for 18 users in a way that still works with 19.
    * NOTE: The startTransition wrapper is not needed in UI v4, since the baseline there is React 19.
    */
-  const setRootElement = useCallback((node: HTMLLIElement | null) => {
+  const handleRootElementChange = useCallback((node: HTMLLIElement | null) => {
     startTransition(() => _setRootElement(node))
   }, [])
+  const setRootElement = useConnectedRef(handleRootElementChange)
 
   const treeitemRef = useRef<HTMLAnchorElement | null>(null)
   const tree = useTree()
