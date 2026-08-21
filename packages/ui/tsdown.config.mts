@@ -18,7 +18,9 @@ const config: UserConfig = await defineConfig({
   },
   tsconfig: 'tsconfig.dist.json',
   styledComponents: true,
-  reactCompiler: {target: '19'},
+  // `transform: 'oxc'` runs the React Compiler natively via `oxc-transform-react`
+  // (the Rust port) instead of `babel-plugin-react-compiler`
+  reactCompiler: {target: '19', transform: 'oxc'},
   // Extract vanilla-extract `.css.ts` styles into dist/styles.css. Unlike the
   // default (`inject: true`, which self-imports `@sanity/ui/styles.css` from
   // every entry), `inject: false` leaves loading the stylesheet to the

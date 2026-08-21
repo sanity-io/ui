@@ -11,7 +11,10 @@ const config: UserConfig = await defineConfig({
     tool: './src/tool/index.ts',
   },
   styledComponents: true,
-  reactCompiler: {target: '18'},
+  // `transform: 'oxc'` runs the React Compiler natively via `oxc-transform-react`
+  // (the Rust port) instead of `babel-plugin-react-compiler`; `target: '18'`
+  // keeps emitting `react-compiler-runtime` imports for the React 18 peer range
+  reactCompiler: {target: '18', transform: 'oxc'},
 })
 
 export default config
