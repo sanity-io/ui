@@ -35,7 +35,7 @@ catalog:
   typescript: 7.0.2
   unrun: ^0.3.1
   vite: ^8.2.2
-  vitest: ^4.1.10
+  vitest: ^4.1.11
 
 allowBuilds:
   # Like esbuild, @swc/core's postinstall is only a fallback downloader — the
