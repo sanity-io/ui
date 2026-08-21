@@ -295,7 +295,7 @@ export function Tooltip(
       portalElement?.offsetWidth || document.body.offsetWidth,
     ]
 
-    // oxlint-disable-next-line react-compiler
+    // oxlint-disable-next-line react/set-state-in-effect
     setTooltipMaxWidth(Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2)
   }, [boundaryElement, portalElement])
 
@@ -504,5 +504,6 @@ function useCloseOnMouseLeave({
 
     // oxlint-disable-next-line consistent-return
     return () => window.removeEventListener('mousemove', handleMouseMove)
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [isInsideGroup, showTooltip])
 }

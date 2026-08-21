@@ -15,13 +15,14 @@ catalog:
   '@sanity/blueprints': ^0.23.6
   '@sanity/client': ^8.1.0
   '@sanity/functions': ^1.6.8
-  '@sanity/tsdown-config': ^0.25.0
+  '@sanity/tsdown-config': ^0.26.0
   '@sanity/vanilla-extract-vite-plugin': ^0.2.13
   '@types/node': ^24.13.3
   '@types/react': ^19.2.18
   '@types/react-dom': ^19.2.4
   '@types/react-is': ^19.2.0
-  babel-plugin-react-compiler: ^1.0.0
+  '@vitejs/plugin-react': ^6.1.0
+  oxc-transform-react: ^0.145.0
   react: ^19.2.8
   react-dom: ^19.2.8
   react-is: ^19.2.8
@@ -64,6 +65,7 @@ minimumReleaseAgeExclude:
   - lightningcss-*
   - next
   - next-sanity
+  - '@vitejs/plugin-react@6.1.0'
   - groq@6.9.2
   - publint
   - sanity
@@ -75,6 +77,7 @@ minimumReleaseAgeExclude:
   - motion-utils@13.0.0
   - motion@13.0.0
   - styled-components@6.5.2
+  - eslint-plugin-storybook@10.5.10
 
 # @testing-library/jest-dom/vitest imports `vitest` without declaring it, so it
 # falls back to pnpm's hidden hoist — which can resolve to another workspace

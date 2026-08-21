@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "keywords": [
     "components",
     "design-system",
@@ -100,8 +100,8 @@
     "@types/react-dom": "catalog:",
     "@types/react-is": "catalog:",
     "@vanilla-extract/css": "^1.21.2",
-    "babel-plugin-react-compiler": "catalog:",
     "jsdom": "^30.0.1",
+    "oxc-transform-react": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "rimraf": "catalog:",
