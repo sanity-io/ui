@@ -12,7 +12,7 @@
     "schema:deploy": "sanity schema deploy"
   },
   "dependencies": {
-    "@sanity/code-input": "^7.3.5",
+    "@sanity/code-input": "^7.3.7",
     "@sanity/icons": "workspace:*",
     "@sanity/logos": "workspace:*",
     "@sanity/themer": "workspace:*",
