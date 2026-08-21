@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 4.0.6
+
+### Patch Changes
+
+- [#2753](https://github.com/sanity-io/ui/pull/2753) [`2dc0627`](https://github.com/sanity-io/ui/commit/2dc06270810e696ebbc2aeb4729cf3eba7c7ec28) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^13.1.1
+
+- [#2750](https://github.com/sanity-io/ui/pull/2750) [`63ed976`](https://github.com/sanity-io/ui/commit/63ed97631eba7989a6d647a039dfc7df4abe143a) Thanks [@stipsan](https://github.com/stipsan)! - fix(popover): animate popovers with the same simplicity as tooltips — only the card fades and scales, the content is no longer animated separately, so it can never get stuck invisible (SAPP-4314)
+
 ## 4.0.5
 
 ### Patch Changes
