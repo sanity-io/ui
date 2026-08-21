@@ -50,12 +50,13 @@ export function rem(pixelValue: number): string | 0 {
 }
 
 /**
- * Builds the per-breakpoint styles as a single CSS object (base declarations
- * merged with `@media` keys) instead of a plain array. Plain objects are
- * resolved natively by both styled-components v6 and v7, whereas v7 drops
- * plain arrays returned from function interpolations. The emitted CSS is
- * byte-identical to the previous array form. Declared as `CSSObject[]` for
- * backwards compatibility with existing consumers of this internal helper.
+ * Builds the per-breakpoint styles (the base statement plus one `@media` block
+ * per following breakpoint) as a rule array tagged through {@link _ruleSet}.
+ * The result is still an array (spreading and composing keep working), but it
+ * carries the `css` helper's metadata that styled-components v7 requires for
+ * function-interpolation return values — v7 drops plain arrays, rendering the
+ * component without any styles. The emitted CSS is byte-identical to the
+ * previous plain-array form on both majors.
  *
  * @internal
  */
@@ -65,18 +66,14 @@ export function _responsive<T>(
   callback: (value: T, index: number, array: T[]) => CSSObject,
 ): CSSObject[] {
   const statements = values?.map(callback) || []
-  const merged: CSSObject = {}
 
-  statements.forEach((statement, mediaIndex) => {
-    if (mediaIndex === 0) {
-      Object.assign(merged, statement)
-    } else {
-      merged[`@media screen and (min-width: ${media[mediaIndex - 1]}px)`] = statement
-    }
-  })
+  return _ruleSet(
+    ...statements.map((statement, mediaIndex) => {
+      if (mediaIndex === 0) return statement
 
-  // oxlint-disable-next-line no-unsafe-type-assertion
-  return merged as unknown as CSSObject[]
+      return {[`@media screen and (min-width: ${media[mediaIndex - 1]}px)`]: statement}
+    }),
+  )
 }
 
 /**
