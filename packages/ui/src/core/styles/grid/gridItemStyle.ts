@@ -1,20 +1,20 @@
 import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive} from '../helpers'
+import {_responsive, _ruleSet} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveGridItemStyleProps} from './types'
 
-export function responsiveGridItemStyle(): Array<
-  (props: ResponsiveGridItemStyleProps & ThemeProps) => CSSObject[]
-> {
-  return [
-    responsiveGridItemRowStyle,
-    responsiveGridItemRowStartStyle,
-    responsiveGridItemRowEndStyle,
-    responsiveGridItemColumnStyle,
-    responsiveGridItemColumnStartStyle,
-    responsiveGridItemColumnEndStyle,
-  ]
+const RULES = _ruleSet(
+  responsiveGridItemRowStyle,
+  responsiveGridItemRowStartStyle,
+  responsiveGridItemRowEndStyle,
+  responsiveGridItemColumnStyle,
+  responsiveGridItemColumnStartStyle,
+  responsiveGridItemColumnEndStyle,
+)
+
+export function responsiveGridItemStyle(): CSSObject[] {
+  return RULES
 }
 
 const GRID_ITEM_ROW = {

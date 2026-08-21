@@ -1,15 +1,14 @@
 import {CSSObject} from '../../../theme/system/css'
-import {_getResponsiveSpace} from '../helpers'
+import {_getResponsiveSpace, _ruleSet} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveMarginStyleProps} from './types'
 
 export function responsiveMarginStyle(
   props: ResponsiveMarginStyleProps & ThemeProps,
-): CSSObject[][] {
+): CSSObject[] {
   const {theme} = props
 
-  // oxlint-disable-next-line no-unsafe-type-assertion
-  return [
+  return _ruleSet(
     _getResponsiveSpace(theme, ['margin'], props.$margin),
     _getResponsiveSpace(theme, ['marginLeft', 'marginRight'], props.$marginX),
     _getResponsiveSpace(theme, ['marginTop', 'marginBottom'], props.$marginY),
@@ -17,5 +16,5 @@ export function responsiveMarginStyle(
     _getResponsiveSpace(theme, ['marginRight'], props.$marginRight),
     _getResponsiveSpace(theme, ['marginBottom'], props.$marginBottom),
     _getResponsiveSpace(theme, ['marginLeft'], props.$marginLeft),
-  ].filter(Boolean) as CSSObject[][]
+  )
 }

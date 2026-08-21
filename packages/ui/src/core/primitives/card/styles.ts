@@ -1,15 +1,17 @@
 import {css} from 'styled-components'
 
+import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {_cardColorStyle} from '../../styles/card/_cardColorStyle'
 import {focusRingStyle} from '../../styles/focusRing'
+import {_ruleSet} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {CardStyleProps} from './types'
 
-export function cardStyle(
-  props: CardStyleProps & ThemeProps,
-): Array<ReturnType<typeof css> | (() => ReturnType<typeof css>)> {
-  return [cardBaseStyle(props), cardColorStyle(props)]
+const RULES = _ruleSet(cardBaseStyle, cardColorStyle)
+
+export function cardStyle(): CSSObject[] {
+  return RULES
 }
 
 function cardBaseStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof css> {
