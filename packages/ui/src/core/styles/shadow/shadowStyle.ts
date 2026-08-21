@@ -21,7 +21,7 @@ function shadowStyle(shadow: ThemeShadow | null, outlineWidth: number = 1): CSSO
   return {boxShadow: `${outline}, ${umbra}, ${penumbra}, ${ambient}`}
 }
 
-export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeProps): CSSObject[] {
+export function responsiveShadowStyle(props: ResponsiveShadowStyleProps & ThemeProps): CSSObject {
   const {card, media, shadow} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$shadow, (index) =>

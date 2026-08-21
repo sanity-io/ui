@@ -54,8 +54,7 @@ export function rem(pixelValue: number): string | 0 {
  * merged with `@media` keys) instead of a plain array. Plain objects are
  * resolved natively by both styled-components v6 and v7, whereas v7 drops
  * plain arrays returned from function interpolations. The emitted CSS is
- * byte-identical to the previous array form. Declared as `CSSObject[]` for
- * backwards compatibility with existing consumers of this internal helper.
+ * byte-identical to the previous array form.
  *
  * @internal
  */
@@ -63,7 +62,7 @@ export function _responsive<T>(
   media: number[],
   values: T[],
   callback: (value: T, index: number, array: T[]) => CSSObject,
-): CSSObject[] {
+): CSSObject {
   const statements = values?.map(callback) || []
   const merged: CSSObject = {}
 
@@ -75,8 +74,7 @@ export function _responsive<T>(
     }
   })
 
-  // oxlint-disable-next-line no-unsafe-type-assertion
-  return merged as unknown as CSSObject[]
+  return merged
 }
 
 /**
@@ -95,7 +93,7 @@ export function _getResponsiveSpace(
   theme: Theme,
   props: string[],
   spaceIndexes: number[] = EMPTY_ARRAY,
-): CSSObject[] | null {
+): CSSObject | null {
   if (!Array.isArray(spaceIndexes)) {
     throw new Error('the property must be array of numbers')
   }

@@ -105,7 +105,7 @@ function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSObject {
 
 export function responsiveAvatarSizeStyle(
   props: ResponsiveAvatarSizeStyleProps & ThemeProps,
-): CSSObject[] {
+): CSSObject {
   const {avatar, media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$size, (size) => {

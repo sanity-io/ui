@@ -115,7 +115,7 @@ export function textInputBaseStyle(
   `
 }
 
-export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject[] {
+export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject {
   const {font, media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$fontSize, (sizeIndex) => {

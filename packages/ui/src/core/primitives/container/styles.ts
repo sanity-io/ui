@@ -15,7 +15,7 @@ export function containerBaseStyle(): CSSObject {
 
 export function responsiveContainerWidthStyle(
   props: ResponsiveWidthStyleProps & ThemeProps,
-): CSSObject[] {
+): CSSObject {
   const {container, media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$width, (val) => ({

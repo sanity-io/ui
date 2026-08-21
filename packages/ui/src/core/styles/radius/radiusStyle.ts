@@ -4,7 +4,7 @@ import {_responsive, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveRadiusStyleProps} from './types'
 
-export function responsiveRadiusStyle(props: ResponsiveRadiusStyleProps & ThemeProps): CSSObject[] {
+export function responsiveRadiusStyle(props: ResponsiveRadiusStyleProps & ThemeProps): CSSObject {
   const {media, radius} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$radius, (value) => {

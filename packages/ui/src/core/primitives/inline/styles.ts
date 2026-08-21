@@ -19,7 +19,7 @@ export function inlineBaseStyle(): CSSObject {
   }
 }
 
-export function inlineSpaceStyle(props: ResponsiveInlineSpaceStyleProps & ThemeProps): CSSObject[] {
+export function inlineSpaceStyle(props: ResponsiveInlineSpaceStyleProps & ThemeProps): CSSObject {
   const {media, space} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$space, (spaceIndex) => {

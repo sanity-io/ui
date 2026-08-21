@@ -23,7 +23,7 @@ export function responsiveFlexStyle(): CSSObject[] {
   return RULES
 }
 
-function responsiveFlexAlignStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+function responsiveFlexAlignStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject {
   const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$align, (align) => {
@@ -39,7 +39,7 @@ function responsiveFlexGapStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
   }))
 }
 
-function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject {
   const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$wrap, (wrap) => {
@@ -47,7 +47,7 @@ function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeProps): 
   })
 }
 
-function responsiveFlexJustifyStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+function responsiveFlexJustifyStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject {
   const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$justify, (justify) => {
@@ -55,7 +55,7 @@ function responsiveFlexJustifyStyle(props: ResponsiveFlexStyleProps & ThemeProps
   })
 }
 
-function responsiveFlexDirectionStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+function responsiveFlexDirectionStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject {
   const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$direction, (direction) => {

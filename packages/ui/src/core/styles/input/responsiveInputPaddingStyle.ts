@@ -13,7 +13,7 @@ export interface TextInputResponsivePaddingStyleProps {
 
 export function responsiveInputPaddingStyle(
   props: TextInputResponsivePaddingStyleProps & ThemeProps,
-): CSSObject[] {
+): CSSObject {
   const {$fontSize, $iconLeft, $iconRight, $padding, $space} = props
   const {font, media, space} = getTheme_v2(props.theme)
   const len = Math.max($padding.length, $space.length, $fontSize.length)
@@ -53,6 +53,6 @@ export function responsiveInputPaddingIconRightStyle(
     $padding: number[]
     $space: number[]
   } & ThemeProps,
-): CSSObject[] {
+): CSSObject {
   return responsiveInputPaddingStyle({...props, $iconRight: true})
 }

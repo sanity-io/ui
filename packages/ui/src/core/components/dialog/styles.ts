@@ -34,7 +34,7 @@ export function dialogStyle({theme}: ThemeProps): CSSObject {
 
 export function responsiveDialogPositionStyle(
   props: ResponsiveDialogPositionStyleProps & ThemeProps,
-): CSSObject[] {
+): CSSObject {
   const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$position, (position) => ({'&&': {position}}))

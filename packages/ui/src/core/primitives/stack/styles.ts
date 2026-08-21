@@ -24,7 +24,7 @@ export function stackBaseStyle(): CSSObject {
 
 export function responsiveStackSpaceStyle(
   props: ResponsiveStackSpaceStyleProps & ThemeProps,
-): CSSObject[] {
+): CSSObject {
   const {media, space} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$space, (spaceIndex) => ({

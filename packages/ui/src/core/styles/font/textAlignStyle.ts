@@ -10,7 +10,7 @@ import {ResponsiveTextAlignStyleProps} from './types'
  */
 export function responsiveTextAlignStyle(
   props: ResponsiveTextAlignStyleProps & ThemeProps,
-): CSSObject[] {
+): CSSObject {
   const {media} = getTheme_v2(props.theme)
 
   return _responsive(media, props.$align, (textAlign) => {
