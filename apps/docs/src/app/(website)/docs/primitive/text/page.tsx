@@ -78,6 +78,22 @@ export default function Page() {
           },
           {name: 'size', type: 'number | number[]'},
           {name: 'textOverflow', type: "'ellipsis'", required: false},
+          {
+            name: 'trim',
+            type: '0 | 1',
+            required: false,
+            description: (
+              <PlainContent>
+                <PlainParagraph>
+                  {'When set to '}
+                  <code>1</code>
+                  {
+                    ', removes the vertical whitespace above the cap-height and below the baseline introduced by line-height. Use when aligning text flush with icons or when spacing should be measured from the visible glyph edge rather than the line box.'
+                  }
+                </PlainParagraph>
+              </PlainContent>
+            ),
+          },
           {name: 'weight', type: "'regular' | 'medium' | 'semibold' | 'bold'"},
         ]}
       />

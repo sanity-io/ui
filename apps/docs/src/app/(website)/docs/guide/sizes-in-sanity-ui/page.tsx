@@ -33,6 +33,7 @@ export default function Page() {
           text: 'Why does Sanity UI use a number-based spacing scale?',
         },
         {level: 2, slug: 'what-do-the-numbers-mean', text: 'What do the numbers mean?'},
+        {level: 2, slug: 'vertical-rhythm', text: 'Vertical rhythm'},
         {
           level: 2,
           slug: 'other-projects-using-number-based-spacing-scales',
@@ -160,6 +161,62 @@ export default function Page() {
       />
 
       <Paragraph>and so on.</Paragraph>
+
+      <Heading2 id="vertical-rhythm">Vertical rhythm</Heading2>
+
+      <Paragraph>
+        {
+          'Consistent vertical spacing between elements is the foundation of a readable layout. Use the '
+        }
+        <code>Stack</code>
+        {' component with the '}
+        <code>gap</code>
+        {' prop to place elements on top of each other with uniform spacing drawn from the spacing scale:'}
+      </Paragraph>
+
+      <CodeBlock
+        language="tsx"
+        code={`<Stack gap={3}>
+  <Heading size={2}>Section title</Heading>
+  <Text>Body text that follows the heading.</Text>
+</Stack>`}
+      />
+
+      <Paragraph>
+        {'Typographic components like '}
+        <code>Text</code>
+        {', '}
+        <code>Heading</code>
+        {', and '}
+        <code>Label</code>
+        {
+          ' carry invisible vertical whitespace above the cap-height and below the baseline that line-height adds. This extra space can make gaps look uneven when you measure from the spacing scale alone.'
+        }
+      </Paragraph>
+
+      <Paragraph>
+        {'The '}
+        <code>trim</code>
+        {
+          ' prop (available on all three components) removes that whitespace, so the rendered spacing matches the scale value exactly:'
+        }
+      </Paragraph>
+
+      <CodeBlock
+        language="tsx"
+        code={`<Stack gap={3}>
+  <Heading size={2} trim={1}>Section title</Heading>
+  <Text trim={1}>Body text that follows the heading.</Text>
+</Stack>`}
+      />
+
+      <Paragraph>
+        {'Use '}
+        <code>{'trim={1}'}</code>
+        {
+          ' when text sits next to icons, when you need pixel-accurate alignment with other elements, or when the extra line-box whitespace makes the layout feel unbalanced.'
+        }
+      </Paragraph>
 
       <Heading2 id="other-projects-using-number-based-spacing-scales">
         Other projects using number-based spacing scales

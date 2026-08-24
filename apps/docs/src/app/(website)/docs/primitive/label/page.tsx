@@ -5,6 +5,7 @@ import {CodeExampleBlock} from '@/components/page/article/content/CodeExampleBlo
 import {Heading2} from '@/components/page/article/content/headings'
 import {Paragraph} from '@/components/page/article/content/Paragraph'
 import {PropertyTable} from '@/components/page/article/content/PropertyTable'
+import {PlainContent, PlainParagraph} from '@/components/page/article/PlainContent'
 
 export const metadata: Metadata = {
   title: 'Label | Sanity UI',
@@ -61,6 +62,22 @@ export default function Page() {
           {name: 'muted', type: 'boolean'},
           {name: 'size', type: 'number | number[]'},
           {name: 'textOverflow', type: "'ellipsis'", required: false},
+          {
+            name: 'trim',
+            type: '0 | 1',
+            required: false,
+            description: (
+              <PlainContent>
+                <PlainParagraph>
+                  {'When set to '}
+                  <code>1</code>
+                  {
+                    ', removes the vertical whitespace above the cap-height and below the baseline introduced by line-height. Useful when the label sits next to an icon and the spacing should be measured from the visible glyph edge.'
+                  }
+                </PlainParagraph>
+              </PlainContent>
+            ),
+          },
           {name: 'weight', type: "'regular' | 'medium' | 'semibold' | 'bold'", required: false},
         ]}
       />

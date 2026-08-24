@@ -5,6 +5,7 @@ import {CodeExampleBlock} from '@/components/page/article/content/CodeExampleBlo
 import {Heading2} from '@/components/page/article/content/headings'
 import {Paragraph} from '@/components/page/article/content/Paragraph'
 import {PropertyTable} from '@/components/page/article/content/PropertyTable'
+import {PlainContent, PlainParagraph} from '@/components/page/article/PlainContent'
 
 export const metadata: Metadata = {
   title: 'Heading | Sanity UI',
@@ -64,6 +65,22 @@ export default function Page() {
         properties={[
           {name: 'as', type: 'React.ElementType | keyof JSX.IntrinsicElements'},
           {name: 'size', type: 'number | number[]'},
+          {
+            name: 'trim',
+            type: '0 | 1',
+            required: false,
+            description: (
+              <PlainContent>
+                <PlainParagraph>
+                  {'When set to '}
+                  <code>1</code>
+                  {
+                    ', removes the vertical whitespace above the cap-height and below the baseline introduced by line-height. Use when aligning a heading flush with adjacent content or measuring spacing from the visible glyph edge.'
+                  }
+                </PlainParagraph>
+              </PlainContent>
+            ),
+          },
           {name: 'weight', type: 'string'},
         ]}
       />
