@@ -1,6 +1,6 @@
-import {Popover as PopoverV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect, userEvent, waitFor} from 'storybook/test'
+import {Popover as PopoverV3} from 'ui3'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {Popover} from '../../../../packages/ui/src/components/popover/Popover'
