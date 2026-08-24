@@ -1,6 +1,6 @@
 import {CloseIcon} from '@sanity/icons'
 import clsx from 'clsx'
-import {type ReactNode, useEffect, useId, useRef} from 'react'
+import {type ComponentProps, useEffect, useId, useRef} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -89,17 +89,34 @@ function ModalRoot(props: ModalProps) {
   )
 }
 
-function ModalContent({children}: {children?: ReactNode}) {
+function ModalContent(props: ComponentProps<'div'>) {
+  const {children, className, style, ...rest} = getProps(props, {})
+
   return (
-    <Box className={modalContentClassName} flexGrow={1} overflowY="auto" data-ui="ModalContent">
+    <Box
+      {...rest}
+      className={clsx(modalContentClassName, className)}
+      style={style}
+      data-ui="ModalContent"
+      flexGrow={1}
+      overflowY="auto"
+    >
       {children}
     </Box>
   )
 }
 
-function ModalFooter({children}: {children?: ReactNode}) {
+function ModalFooter(props: ComponentProps<'div'>) {
+  const {children, className, style, ...rest} = getProps(props, {})
+
   return (
-    <Box className={modalFooterClassName} flexShrink={0} data-ui="ModalFooter">
+    <Box
+      {...rest}
+      className={clsx(modalFooterClassName, className)}
+      style={style}
+      data-ui="ModalFooter"
+      flexShrink={0}
+    >
       {children}
     </Box>
   )
