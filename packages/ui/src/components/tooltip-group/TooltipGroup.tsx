@@ -23,7 +23,7 @@ export function TooltipGroup<T extends ElementType = 'div'>(
       return
     }
 
-    if (e.propertyName === 'opacity' && window.getComputedStyle(tooltip).visibility !== 'opacity') {
+    if (e.propertyName === 'opacity' && window.getComputedStyle(tooltip).opacity !== '0') {
       setIsActive(true)
     }
   }
