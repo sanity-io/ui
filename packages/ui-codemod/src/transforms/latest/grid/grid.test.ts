@@ -1,4 +1,6 @@
-import {defineInlineTest} from '../../../utils/testUtils'
+import {expect} from 'vitest'
+
+import {defineCrossFileTest, defineInlineTest} from '../../../utils/testUtils'
 import transform from './grid'
 
 defineInlineTest(
@@ -94,4 +96,79 @@ defineInlineTest(
   />
   `,
   'updates v3 grid props mapped values',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Grid} from '@sanity/ui'
+
+    export const RootGrid = styled(Grid)(({theme}) => ({}))
+  `,
+  `
+    import {RootGrid} from './Component.styled'
+
+    export function Component() {
+      return <RootGrid autoCols="auto" />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootGrid gridAutoColumns="auto" />')
+  },
+  'transforms attributes on imported styled Grid wrappers',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Grid} from '@sanity/ui'
+
+    export const RootGrid = styled(Grid)(({theme}) => ({}))
+  `,
+  `
+    import {Grid} from 'another-package'
+    import {RootGrid} from './Component.styled'
+
+    export function Component() {
+      return (
+        <>
+          <RootGrid autoCols="auto" />
+          <Grid autoCols="auto" />
+        </>
+      )
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootGrid gridAutoColumns="auto" />')
+    expect(output).toContain('<Grid autoCols="auto" />')
+  },
+  'does not transform attributes on unrelated Grid from another package',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Grid} from '@sanity/ui'
+
+    export const RootGrid = styled(Grid)(({theme}) => ({}))
+  `,
+  `
+    import {RootGrid} from './index'
+
+    export function Component() {
+      return <RootGrid autoCols="auto" />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootGrid gridAutoColumns="auto" />')
+  },
+  'transforms styled Grid wrappers imported through barrel re-exports',
+  {
+    extraFiles: {
+      'index.ts': `export {RootGrid} from './Component.styled'`,
+    },
+  },
 )
