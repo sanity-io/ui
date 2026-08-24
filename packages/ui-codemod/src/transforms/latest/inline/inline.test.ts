@@ -1,4 +1,6 @@
-import {defineInlineTest} from '../../../utils/testUtils'
+import {expect} from 'vitest'
+
+import {defineCrossFileTest, defineInlineTest} from '../../../utils/testUtils'
 import transform from './inline'
 
 defineInlineTest(
@@ -54,4 +56,79 @@ defineInlineTest(
   <Inline margin={2} />
   `,
   'warns if margin prop is present',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Inline} from '@sanity/ui'
+
+    export const RootInline = styled(Inline)(({theme}) => ({}))
+  `,
+  `
+    import {RootInline} from './Component.styled'
+
+    export function Component() {
+      return <RootInline space={2} />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootInline gap={2} />')
+  },
+  'transforms attributes on imported styled Inline wrappers',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Inline} from '@sanity/ui'
+
+    export const RootInline = styled(Inline)(({theme}) => ({}))
+  `,
+  `
+    import {Inline} from 'another-package'
+    import {RootInline} from './Component.styled'
+
+    export function Component() {
+      return (
+        <>
+          <RootInline space={2} />
+          <Inline space={2} />
+        </>
+      )
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootInline gap={2} />')
+    expect(output).toContain('<Inline space={2} />')
+  },
+  'does not transform attributes on unrelated Inline from another package',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Inline} from '@sanity/ui'
+
+    export const RootInline = styled(Inline)(({theme}) => ({}))
+  `,
+  `
+    import {RootInline} from './index'
+
+    export function Component() {
+      return <RootInline space={2} />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootInline gap={2} />')
+  },
+  'transforms styled Inline wrappers imported through barrel re-exports',
+  {
+    extraFiles: {
+      'index.ts': `export {RootInline} from './Component.styled'`,
+    },
+  },
 )
