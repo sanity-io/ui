@@ -46,7 +46,7 @@
         ]
       }
     ],
-    "import/no-unassigned-import": ["error", {"allow": ["**/*.css"]}],
+    "import/no-unassigned-import": ["error", {"allow": ["**/*.css", "**/polyfills"]}],
     "react/exhaustive-deps": "error",
     "react/react-compiler": "error",
     "react/rules-of-hooks": "error",

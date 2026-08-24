@@ -6,10 +6,13 @@ import {
   Checkbox,
   Grid,
   Heading,
+  HStack,
   Modal,
+  Popover,
   Radio,
   Switch,
   Text,
+  Tooltip,
   VStack,
 } from '@sanity/ui'
 import {useState} from 'react'
@@ -18,6 +21,8 @@ import {useState} from 'react'
 const ROW_COUNT = 200
 const TONE_CARD_COUNT = 500
 const PANEL_CARD_COUNT = 300
+const TOOLTIP_COUNT = 300
+const POPOVER_COUNT = 300
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -174,6 +179,82 @@ function PanelSwapSection() {
   )
 }
 
+/** Mount cost: one click renders (or removes) a large set of tooltip-wrapped triggers. */
+function TooltipMountSection() {
+  const [open, setOpen] = useState(false)
+  const [clickVariant, setClickVariant] = useState(0)
+
+  // oxlint-disable-next-line no-console
+  const handleTriggerClick = () => console.log(`Tooltip trigger clicked (variant ${clickVariant})`)
+
+  return (
+    <Card density="regular">
+      <VStack gap={3}>
+        <Text size={1} weight="semibold">
+          5. Tooltip mount ({TOOLTIP_COUNT} tooltips)
+        </Text>
+        <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} tooltip-wrapped buttons.</Text>
+        <HStack gap={2}>
+          <Button
+            text={open ? 'Close panel' : 'Open panel'}
+            onClick={() => setOpen((value) => !value)}
+          />
+          <Button
+            text={`Update onClick prop (variant ${clickVariant})`}
+            onClick={() => setClickVariant((value) => value + 1)}
+          />
+        </HStack>
+
+        {open && (
+          <div style={scrollAreaStyle}>
+            <HStack gap={2}>
+              {Array.from({length: TOOLTIP_COUNT}, (_, index) => (
+                <Tooltip key={index} content="Tooltip text">
+                  <Button text="Open Tooltip" onClick={handleTriggerClick} />
+                </Tooltip>
+              ))}
+            </HStack>
+          </div>
+        )}
+      </VStack>
+    </Card>
+  )
+}
+
+/** Mount cost: one click renders (or removes) a large set of popover-wrapped triggers. */
+function PopoverMountSection() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Card density="regular">
+      <VStack gap={3}>
+        <Text size={1} weight="semibold">
+          5. Popover mount ({POPOVER_COUNT} popovers)
+        </Text>
+        <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} popover-wrapped buttons.</Text>
+        <HStack gap={2}>
+          <Button
+            text={open ? 'Close panel' : 'Open panel'}
+            onClick={() => setOpen((value) => !value)}
+          />
+        </HStack>
+
+        {open && (
+          <div style={scrollAreaStyle}>
+            <HStack gap={2}>
+              {Array.from({length: POPOVER_COUNT}, (_, index) => (
+                <Popover key={index} content="Popover content">
+                  <Button text="Open Popover" />
+                </Popover>
+              ))}
+            </HStack>
+          </div>
+        )}
+      </VStack>
+    </Card>
+  )
+}
+
 function Ui5() {
   return (
     <VStack gap={4}>
@@ -183,6 +264,8 @@ function Ui5() {
       <SelectAllSection />
       <ToneToggleSection />
       <PanelSwapSection />
+      <TooltipMountSection />
+      <PopoverMountSection />
     </VStack>
   )
 }

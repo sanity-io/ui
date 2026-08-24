@@ -18,4 +18,8 @@
   --hover-transition: border-color 100ms linear, background-color 100ms linear;
   --inert-background: light-dark(var(--gray-50), var(--gray-950));
   --inert-foreground: light-dark(var(--gray-400), var(--gray-600));
+  --fade-in-transition:
+    opacity 200ms cubic-bezier(0.34, 1.2, 0.64, 1),
+    scale 200ms cubic-bezier(0.34, 1.2, 0.64, 1), visibility 0s linear,
+    display 200ms linear allow-discrete;
 }

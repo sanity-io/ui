@@ -8,11 +8,13 @@ import {
   Grid,
   Heading,
   Inline,
+  Popover,
   Radio,
   Stack,
   Switch,
   Text,
   ThemeProvider,
+  Tooltip,
 } from 'ui3'
 import {buildTheme} from 'ui3/theme'
 
@@ -20,6 +22,8 @@ import {buildTheme} from 'ui3/theme'
 const ROW_COUNT = 200
 const TONE_CARD_COUNT = 500
 const PANEL_CARD_COUNT = 300
+const TOOLTIP_COUNT = 300
+const POPOVER_COUNT = 300
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -209,6 +213,82 @@ function PanelSwapSection() {
   )
 }
 
+/** Mount cost: one click renders (or removes) a large set of tooltip-wrapped triggers. */
+function TooltipMountSection() {
+  const [open, setOpen] = useState(false)
+  const [clickVariant, setClickVariant] = useState(0)
+
+  // oxlint-disable-next-line no-console
+  const handleTriggerClick = () => console.log(`Tooltip trigger clicked (variant ${clickVariant})`)
+
+  return (
+    <Card tone="neutral" padding={4}>
+      <Stack gap={3}>
+        <Text size={1} weight="semibold">
+          5. Tooltip mount ({TOOLTIP_COUNT} tooltips)
+        </Text>
+        <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} tooltip-wrapped buttons.</Text>
+        <Inline gap={2}>
+          <Button
+            text={open ? 'Close panel' : 'Open panel'}
+            onClick={() => setOpen((value) => !value)}
+          />
+          <Button
+            text={`Update onClick prop (variant ${clickVariant})`}
+            onClick={() => setClickVariant((value) => value + 1)}
+          />
+        </Inline>
+
+        {open && (
+          <div style={scrollAreaStyle}>
+            <Inline gap={2}>
+              {Array.from({length: TOOLTIP_COUNT}, (_, index) => (
+                <Tooltip key={index} content="Tooltip text">
+                  <Button text="Open Tooltip" onClick={handleTriggerClick} />
+                </Tooltip>
+              ))}
+            </Inline>
+          </div>
+        )}
+      </Stack>
+    </Card>
+  )
+}
+
+/** Mount cost: one click renders (or removes) a large set of popover-wrapped triggers. */
+function PopoverMountSection() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Card tone="neutral" padding={4}>
+      <Stack gap={3}>
+        <Text size={1} weight="semibold">
+          5. Popover mount ({POPOVER_COUNT} popovers)
+        </Text>
+        <Text size={1}>One click mounts or unmounts {TOOLTIP_COUNT} popover-wrapped buttons.</Text>
+        <Inline gap={2}>
+          <Button
+            text={open ? 'Close panel' : 'Open panel'}
+            onClick={() => setOpen((value) => !value)}
+          />
+        </Inline>
+
+        {open && (
+          <div style={scrollAreaStyle}>
+            <Inline gap={2}>
+              {Array.from({length: POPOVER_COUNT}, (_, index) => (
+                <Popover key={index} content="Popover text">
+                  <Button text="Open Popover" />
+                </Popover>
+              ))}
+            </Inline>
+          </div>
+        )}
+      </Stack>
+    </Card>
+  )
+}
+
 function Ui3() {
   return (
     <ThemeProvider theme={theme}>
@@ -219,6 +299,8 @@ function Ui3() {
         <SelectAllSection />
         <ToneToggleSection />
         <PanelSwapSection />
+        <TooltipMountSection />
+        <PopoverMountSection />
       </Stack>
     </ThemeProvider>
   )

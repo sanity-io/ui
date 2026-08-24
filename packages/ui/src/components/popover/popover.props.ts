@@ -2,19 +2,19 @@ import {type PlacementProps, placementProps} from '../../props/placement'
 import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
-export interface TooltipProps
+export interface PopoverProps
   extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
   /** Anchor name for positioning */
   anchorName?: React.ReactNode
   /** Focusable trigger element */
   children: React.ReactElement<Record<string, unknown>>
-  /** Tooltip content */
+  /** Popover content */
   content?: React.ReactNode
   /** Render tooltip in portal */
   portal?: boolean
 }
 
-export const tooltipProps: Record<string, PropDef> = {
+export const popoverProps: Record<string, PropDef> = {
   anchorName: {
     type: 'string',
   },

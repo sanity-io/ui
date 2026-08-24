@@ -1,52 +1,31 @@
+[interestfor] {
+  --tooltip-delay: var(--tooltip-delay-group, 500ms);
+  /* The interestfor polyfill looks for intereset delay variables */
+  --interest-delay-start: var(--tooltip-delay);
+  --interest-delay-end: 0ms;
+  interest-delay-start: var(--tooltip-delay);
+  interest-delay-end: 0ms;
+}
+
 .sui-Tooltip {
-  --tooltip-delay-open: var(--tooltip-delay-group, 500ms);
-  --tooltip-delay-close: var(--tooltip-delay-group, 100ms);
   background: var(--backdrop);
+  visibility: hidden;
   opacity: 0;
   scale: 0.9;
-  visibility: hidden;
-  transition:
-    opacity 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-close),
-    scale 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-close),
-    visibility 0s linear calc(var(--tooltip-delay-close) + 200ms);
-}
-
-[aria-describedby]:is(:hover, :focus-visible) + [role="tooltip"]:not(.sui-Tooltip-Dismissed) {
-  visibility: visible;
-  opacity: 1;
-  scale: 1;
-  transition:
-    opacity 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-open),
-    scale 200ms cubic-bezier(0.34, 1.2, 0.64, 1) var(--tooltip-delay-open),
-    visibility 0s linear var(--tooltip-delay-open);
-}
-
-[aria-describedby]:is(:hover, :focus-visible) + .sui-Tooltip-Dismissed[role="tooltip"] {
   transition: none;
 }
 
-.sui-Tooltip[class*='placement-bottom'],
-.sui-Tooltip[class*='placement-top'] {
-  margin-block: var(--space-1);
+.sui-Tooltip:popover-open {
+  visibility: visible;
+  opacity: 1;
+  scale: 1;
+  transition: var(--fade-in-transition);
 }
 
-.sui-Tooltip[class*='placement-left'],
-.sui-Tooltip[class*='placement-right'] {
-  margin-inline: var(--space-1);
-}
-
-.sui-Tooltip[class*='bottom'] {
-  transform-origin: center top;
-}
-
-.sui-Tooltip[class*='top'] {
-  transform-origin: center bottom;
-}
-
-.sui-Tooltip[class*='left'] {
-  transform-origin: right center;
-}
-
-.sui-Tooltip[class*='right'] {
-  transform-origin: left center;
+@starting-style {
+  .sui-Tooltip:popover-open {
+    visibility: hidden;
+    opacity: 0;
+    scale: 0.9;
+  }
 }

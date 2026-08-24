@@ -1,93 +1,97 @@
 import clsx from 'clsx'
-import {cloneElement, useEffect, useId, useState} from 'react'
+import {cloneElement, useId, useState, type ToggleEvent} from 'react'
 
+import {useIsClient} from '../../hooks/useIsClient'
 import {getProps} from '../../utils/getProps'
+import {mergeTriggerProps} from '../../utils/mergeTriggerProps'
+import {renderPortal} from '../../utils/renderPortal'
 import {suffixClassName} from '../../utils/suffixClassName'
-import {Box} from '../box/Box'
 import {type TooltipProps, tooltipProps} from './tooltip.props'
 
 const tooltipClassName = suffixClassName('sui-Tooltip')
-const tooltipDismissedClassName = suffixClassName('sui-Tooltip-Dismissed')
 
-/** @public */
-export function Tooltip({placement = 'bottom', ...props}: TooltipProps) {
+function TooltipRoot({
+  placement = 'bottom',
+  ...props
+}: TooltipProps & {
+  triggerProps?: Record<string, unknown>
+}) {
   const {
     children,
     className,
     style,
-    disabled,
     id: idProp,
-    text,
+    anchorName,
+    content,
+    portal,
+    triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, tooltipProps)
   const reactId = useId()
   const id = idProp || reactId
   const [dismissed, setDismissed] = useState(false)
+  const isClient = useIsClient()
 
-  useEffect(() => {
-    if (dismissed) {
-      return
-    }
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setDismissed(true)
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [dismissed])
-
-  const trigger = cloneElement(children, {
+  const triggerProps = {
     'aria-describedby': id,
-    'onMouseEnter': (e) => {
+    'interestfor': id,
+    'style': {anchorName: `--anchor-${anchorName || id}`},
+    'onMouseLeave': () => {
       setDismissed(false)
-      children.props.onMouseEnter?.(e)
     },
-    'onFocus': (e) => {
+    'onBlur': () => {
       setDismissed(false)
-      children.props.onFocus?.(e)
     },
-    'onClick': (e) => {
+    'onClick': () => {
       setDismissed(true)
-      children.props.onClick?.(e)
+      document.getElementById(id)?.hidePopover()
     },
-    'style': {
-      ...children.props.style,
-      anchorName: `--tooltip-anchor-${id}`,
-    },
-  })
+  }
 
-  if (disabled) {
-    return children
+  const trigger = children.type.forwardsTriggerProps
+    ? cloneElement(children, {triggerProps})
+    : cloneElement(children, mergeTriggerProps(children.props, forwardedTriggerProps, triggerProps))
+
+  const handleBeforeToggle = (e: ToggleEvent) => {
+    if (e.newState === 'open' && dismissed) {
+      e.preventDefault()
+    }
   }
 
   return (
     <>
       {trigger}
 
-      <Box
-        className={clsx(tooltipClassName, dismissed ? tooltipDismissedClassName : '', className)}
-        role="tooltip"
-        style={{
-          ...style,
-          positionAnchor: `--tooltip-anchor-${id}`,
-        }}
-        data-ui="Tooltip"
-        id={id}
-        paddingX={2}
-        paddingY={1}
-        radius={2}
-        position="fixed"
-        zIndex={9999}
-        shadow={2}
-        {...rest}
-      >
-        {text}
-      </Box>
+      {renderPortal(
+        <div
+          className={clsx(
+            tooltipClassName,
+            'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+            className,
+          )}
+          style={{
+            ...style,
+            positionAnchor: `--anchor-${anchorName || id}`,
+          }}
+          data-ui="Tooltip"
+          role="tooltip"
+          popover="hint"
+          id={id}
+          onBeforeToggle={handleBeforeToggle}
+          {...rest}
+        >
+          {content}
+        </div>,
+        isClient,
+        portal,
+      )}
     </>
   )
 }
+
+/** @beta */
+export const Tooltip = Object.assign(TooltipRoot, {
+  forwardsTriggerProps: true,
+}) as typeof TooltipRoot
 
 export type {TooltipProps}

@@ -29,7 +29,7 @@ export function Checkbox(props: CheckboxProps) {
 
   return (
     <Label
-      className={clsx(checkboxClassName, className)}
+      className={clsx(checkboxClassName, 'sui-position-relative', className)}
       style={style}
       data-ui="Checkbox"
       disabled={disabled}

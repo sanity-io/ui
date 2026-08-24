@@ -1,28 +1,24 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import type {ComponentProps} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
 import {Tooltip as TooltipV3} from 'ui3'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
+import {Popover} from '../../../../packages/ui/src/components/popover/Popover'
 import {Tooltip} from '../../../../packages/ui/src/components/tooltip/Tooltip'
-import {tooltipProps} from '../../../../packages/ui/src/components/tooltip/tooltip.props'
 import {PLACEMENT} from '../../../../packages/ui/src/types/Placement'
-import {getArgTypes} from '../utils/getArgTypes'
 
-const argTypes = getArgTypes(tooltipProps)
-
-const PerformanceTooltip = (props: ComponentProps<typeof Tooltip>) => {
+const PerformanceTooltip = () => {
   return (
-    <Tooltip {...props}>
+    <Tooltip content="Tooltip content">
       <button>Open Tooltip</button>
     </Tooltip>
   )
 }
 
-const PerformanceTooltipV3 = (props: ComponentProps<typeof Tooltip>) => {
+const PerformanceTooltipV3 = () => {
   return (
-    <TooltipV3 {...props}>
+    <TooltipV3 content="Tooltip content">
       <button>Open Tooltip</button>
     </TooltipV3>
   )
@@ -30,10 +26,6 @@ const PerformanceTooltipV3 = (props: ComponentProps<typeof Tooltip>) => {
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Components/Tooltip',
-  args: {
-    text: 'Tooltip text',
-  },
-  argTypes,
   component: Tooltip,
   tags: ['autodocs'],
   parameters: {
@@ -53,14 +45,14 @@ type Story = StoryObj<typeof Tooltip>
 export const Default: Story = {
   render: (props) => {
     return (
-      <Tooltip {...props}>
+      <Tooltip {...props} content="Tooltip Content">
         <Button text="Open Tooltip" />
       </Tooltip>
     )
   },
   play: async ({canvas}) => {
     const trigger = await canvas.findByRole('button', {name: 'Open Tooltip'})
-    const tooltip = await canvas.findByRole('tooltip', {hidden: true})
+    const tooltip = await canvas.findByText('Tooltip Content')
 
     await userEvent.tab()
 
@@ -71,35 +63,7 @@ export const Default: Story = {
       {timeout: 750},
     )
 
-    await userEvent.keyboard('{Escape}')
-
-    await waitFor(
-      async () => {
-        await expect(tooltip).not.toBeVisible()
-      },
-      {timeout: 350},
-    )
-
     trigger.blur()
-  },
-}
-
-export const Disabled: Story = {
-  parameters: {
-    a11y: {disable: true},
-  },
-  render: (props) => {
-    return (
-      <Tooltip {...props} disabled>
-        <Button text="Open Disabled Tooltip" />
-      </Tooltip>
-    )
-  },
-  play: async ({canvas}) => {
-    await (await canvas.findByRole('button', {name: 'Open Disabled Tooltip'})).focus()
-    expect(canvas.queryByRole('tooltip')).not.toBeInTheDocument()
-    await new Promise((resolve) => setTimeout(resolve, 750))
-    expect(canvas.queryByRole('tooltip')).not.toBeInTheDocument()
   },
 }
 
@@ -111,9 +75,8 @@ export const Placements: Story = {
           <div key={placement}>
             <Tooltip
               {...props}
-              key={placement}
               placement={placement}
-              text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Text`}
+              content={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip Content`}
             >
               <Button
                 text={`${placement[0].toUpperCase() + placement.slice(1)} Tooltip`}
@@ -127,15 +90,62 @@ export const Placements: Story = {
     )
   },
   play: async ({canvas}) => {
+    const trigger = await canvas.findByRole('button', {name: 'Top-end Tooltip'})
+
     await userEvent.tab()
     await userEvent.tab()
     await userEvent.tab()
 
     await waitFor(
       async () => {
-        await expect(await canvas.findByText('Top-end Tooltip Text')).toBeVisible()
+        await expect(await canvas.findByText('Top-end Tooltip Content')).toBeVisible()
       },
       {timeout: 750},
     )
+
+    trigger.blur()
+  },
+}
+
+export const WithPopover: Story = {
+  render: (props) => (
+    <Tooltip {...props} anchorName="tooltip-popover" content="Tooltip Content">
+      <Popover anchorName="tooltip-popover" content="Popover Content">
+        <Button text="Open Tooltip or Popover" />
+      </Popover>
+    </Tooltip>
+  ),
+  play: async ({canvas}) => {
+    const trigger = await canvas.findByRole('button', {name: 'Open Tooltip or Popover'})
+    const tooltip = await canvas.findByText('Tooltip Content')
+    const popover = await canvas.findByText('Popover Content')
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(tooltip).toBeVisible()
+      },
+      {timeout: 750},
+    )
+
+    await userEvent.click(trigger)
+
+    await waitFor(
+      async () => {
+        await expect(tooltip).not.toBeVisible()
+      },
+      {timeout: 250},
+    )
+
+    await waitFor(
+      async () => {
+        await expect(popover).toBeVisible()
+      },
+      {timeout: 500},
+    )
+
+    await userEvent.click(trigger)
+    trigger.blur()
   },
 }

@@ -1,0 +1,21 @@
+.sui-PopoverContent {
+  visibility: hidden;
+  opacity: 0;
+  scale: 0.9;
+  transition: none;
+}
+
+.sui-PopoverContent:popover-open {
+  visibility: visible;
+  opacity: 1;
+  scale: 1;
+  transition: var(--fade-in-transition);
+}
+
+@starting-style {
+  .sui-PopoverContent:popover-open {
+    visibility: hidden;
+    opacity: 0;
+    scale: 0.9;
+  }
+}

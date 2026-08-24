@@ -30,13 +30,19 @@
   ],
   "type": "module",
   "sideEffects": [
-    "*.css"
+    "*.css",
+    "./src/polyfills.ts",
+    "./dist/polyfills.js"
   ],
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "source": "./src/index.ts",
       "default": "./dist/index.js"
+    },
+    "./polyfills": {
+      "source": "./src/polyfills.ts",
+      "default": "./dist/polyfills.js"
     },
     "./package.json": "./package.json",
     "./styles.css": {
@@ -50,6 +56,7 @@
   "publishConfig": {
     "exports": {
       ".": "./dist/index.js",
+      "./polyfills": "./dist/polyfills.js",
       "./package.json": "./package.json",
       "./styles.css": {
         "types": "./src/styles.css.d.ts",
@@ -78,6 +85,7 @@
     "@sanity/icons": "^3.7.4",
     "clsx": "^2.1.1",
     "comment-json": "^5.0.0",
+    "interestfor": "^1.0.8",
     "react-refractor": "^4.0.0"
   },
   "devDependencies": {
@@ -88,6 +96,7 @@
     "@types/postcss-import": "^14.0.3",
     "@types/postcss-prefix-selector": "^1.16.3",
     "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "autoprefixer": "^10.4.27",
     "babel-plugin-react-compiler": "catalog:",
     "concurrently": "^9.2.1",

@@ -16,6 +16,7 @@
 @import './link/link.css';
 @import './list/list.css';
 @import './modal/modal.css';
+@import './popover/popover.css';
 @import './press-area/press-area.css';
 @import './radio/radio.css';
 @import './spinner/spinner.css';

@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import type {ComponentProps} from 'react'
-import {expect, waitFor} from 'storybook/test'
+import {expect, userEvent, waitFor} from 'storybook/test'
 import {Tooltip as TooltipV3, TooltipDelayGroupProvider} from 'ui3'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
@@ -15,11 +15,11 @@ const argTypes = getArgTypes(tooltipGroupProps)
 const PerformanceTooltipGroup = (props: ComponentProps<typeof TooltipGroup>) => {
   return (
     <TooltipGroup {...props}>
-      <Tooltip text="Tooltip 1 Text">
+      <Tooltip content="Tooltip 1 Text">
         <button>Open Tooltip 1</button>
       </Tooltip>
 
-      <Tooltip text="Tooltip 2 Text">
+      <Tooltip content="Tooltip 2 Text">
         <button>Open Tooltip 2</button>
       </Tooltip>
     </TooltipGroup>
@@ -63,23 +63,24 @@ export const Default: Story = {
   render: (props) => {
     return (
       <TooltipGroup as={HStack} gap={2} {...props}>
-        <Tooltip text="Tooltip 1 Text">
+        <Tooltip content="Tooltip 1 Text">
           <Button text="Open Tooltip 1" />
         </Tooltip>
 
-        <Tooltip text="Tooltip 2 Text">
+        <Tooltip content="Tooltip 2 Text">
           <Button text="Open Tooltip 2" />
         </Tooltip>
 
-        <Tooltip text="Tooltip 3 Text">
+        <Tooltip content="Tooltip 3 Text">
           <Button text="Open Tooltip 3" />
         </Tooltip>
       </TooltipGroup>
     )
   },
-  play: async ({canvas}) => {
-    await (await canvas.findByRole('button', {name: 'Open Tooltip 1'})).focus()
-    await expect(await canvas.findByText('Tooltip 1 Text')).not.toBeVisible()
+  play: async ({canvas, canvasElement}) => {
+    const group = canvasElement.querySelector('[data-ui="TooltipGroup"]') as HTMLElement
+
+    await userEvent.tab()
 
     await waitFor(
       async () => {
@@ -88,9 +89,26 @@ export const Default: Story = {
       {timeout: 750},
     )
 
-    await (await canvas.findByRole('button', {name: 'Open Tooltip 2'})).focus()
-    await expect(await canvas.findByText('Tooltip 2 Text')).toBeVisible()
-    await (await canvas.findByRole('button', {name: 'Open Tooltip 1'})).focus()
-    await expect(await canvas.findByText('Tooltip 1 Text')).toBeVisible()
+    await waitFor(() => {
+      expect(group.style.getPropertyValue('--tooltip-delay-group')).toBe('0ms')
+    })
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(await canvas.findByText('Tooltip 2 Text')).toBeVisible()
+      },
+      {timeout: 200},
+    )
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(await canvas.findByText('Tooltip 3 Text')).toBeVisible()
+      },
+      {timeout: 200},
+    )
   },
 }

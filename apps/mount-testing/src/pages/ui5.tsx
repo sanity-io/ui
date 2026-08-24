@@ -245,7 +245,7 @@ export default function Ui5() {
       <h2>{count} Tooltips</h2>
       <Profiler id="Tooltip" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Tooltip key={i} text="Tooltip">
+          <Tooltip key={i} content="Tooltip">
             <Button text="Open tooltip" />
           </Tooltip>
         ))}
@@ -255,10 +255,10 @@ export default function Ui5() {
       <Profiler id="TooltipGroup" onRender={handleOnRender}>
         {iterator.map((i) => (
           <TooltipGroup key={i} as={HStack} gap={2}>
-            <Tooltip text="Tooltip 1">
+            <Tooltip content="Tooltip 1">
               <Button text="Open 1" />
             </Tooltip>
-            <Tooltip text="Tooltip 2">
+            <Tooltip content="Tooltip 2">
               <Button text="Open 2" />
             </Tooltip>
           </TooltipGroup>
