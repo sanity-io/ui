@@ -1,5 +1,6 @@
 ---
+"@sanity/icons": patch
 "@sanity/ui": patch
 ---
 
-Stop setting `font-size` on descendant icons so Safari page zoom can scale them (WebKit 199236 / SAPP-933). Theme `iconSize` is applied as rem `width`/`height` only while the SVG still has the default `1em` presentation attributes, so consumer `width`/`height` props and `@sanity/logos` height-only shells keep working.
+Emit `@sanity/icons` glyphs with `height="1em"` only (the `@sanity/logos` shell that already scales in Safari) and stop setting `font-size` on descendant SVGs in `@sanity/ui` `responsiveFont()` so Cmd+/- page zoom can scale them (WebKit 199236 / SAPP-933).
