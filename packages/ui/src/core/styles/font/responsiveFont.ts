@@ -88,14 +88,31 @@ function fontSize(size: ThemeFontSize): CSSObject {
       marginBottom: '-1px',
     },
 
+    // WebKit 199236: font-size on an SVG means page zoom does not scale 1em
+    // width/height. Size default 1em axes with rem instead. Do not restore
+    // fontSize on these selectors (SAPP-933).
     '& svg:not([data-sanity-icon])': {
-      fontSize: `calc(${customIconSize} / 16 * 1rem)`,
       margin: rem(customIconOffset),
     },
 
+    '& svg:not([data-sanity-icon])[width="1em"]': {
+      width: rem(customIconSize),
+    },
+
+    '& svg:not([data-sanity-icon])[height="1em"]': {
+      height: rem(customIconSize),
+    },
+
     '& [data-sanity-icon]': {
-      fontSize: `calc(${iconSize} / 16 * 1rem)`,
       margin: rem(iconOffset),
+    },
+
+    '& [data-sanity-icon][width="1em"]': {
+      width: rem(iconSize),
+    },
+
+    '& [data-sanity-icon][height="1em"]': {
+      height: rem(iconSize),
     },
   }
 }
