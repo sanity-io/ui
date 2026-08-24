@@ -6,7 +6,7 @@ export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'>
   header?: string
   /** Used to set the value of open to false. Fires whenever the modal is closed, either programmatically or by the user (via Esc key, clicking background, clicking the modal's close button, or any other means.)  */
   onClose: React.ReactEventHandler<HTMLDialogElement>
-  /** Whether the modal is open; defaults to false. Drives showModal() and close(). Never reaches the dialog's native open attribute, which would render a non-modal dialog */
+  /** Whether the modal is open; defaults to false. */
   open?: boolean
 }
 
