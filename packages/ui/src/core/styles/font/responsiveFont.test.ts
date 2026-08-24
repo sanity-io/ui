@@ -6,6 +6,7 @@ import {buildTheme} from '../../../theme/build/buildTheme'
 import {getScopedTheme} from '../../../theme/getScopedTheme'
 import {CSSObject} from '../../../theme/system/css'
 import {ThemeFontKey, ThemeFontSize} from '../../../theme/system/font'
+import {Theme} from '../../../theme/system/theme'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {rem} from '../helpers'
 import {responsiveFont} from './responsiveFont'
@@ -15,14 +16,39 @@ const fonts = getTheme_v2(theme).font
 
 const FONT_KEYS: ThemeFontKey[] = ['code', 'heading', 'label', 'text']
 
+const ICON_SELECTORS = [
+  '& svg:not([data-sanity-icon])',
+  '& svg:not([data-sanity-icon])[width="1em"]',
+  '& svg:not([data-sanity-icon])[height="1em"]',
+  '& [data-sanity-icon]',
+  '& [data-sanity-icon][width="1em"]',
+  '& [data-sanity-icon][height="1em"]',
+] as const
+
 function sizeStyle(fontKey: ThemeFontKey, sizeIndex: number): CSSObject {
   return responsiveFont(fontKey, {$size: [sizeIndex], theme})[1]
 }
 
-function iconRules(style: CSSObject): CSSObject[] {
-  return Object.entries(style)
-    .filter(([key]) => key.includes('[data-sanity-icon]') || key.includes('svg:not'))
-    .map(([, value]) => value as CSSObject)
+function themeWithTextIconSize(iconSize: number): Theme {
+  const v2 = getTheme_v2(theme)
+  const sizes = v2.font.text.sizes.slice()
+  sizes[2] = Object.assign({}, sizes[2], {iconSize})
+
+  return {
+    sanity: {
+      ...theme.sanity,
+      v2: {
+        ...v2,
+        font: {
+          ...v2.font,
+          text: {
+            ...v2.font.text,
+            sizes,
+          },
+        },
+      },
+    },
+  }
 }
 
 function iconBox(size: ThemeFontSize) {
@@ -46,9 +72,9 @@ describe('responsiveFont icon sizing', () => {
     )
 
     for (const style of styles) {
-      for (const rule of iconRules(style)) {
-        expect(rule).not.toHaveProperty('fontSize')
-        expect(JSON.stringify(rule)).not.toMatch(/font-size/i)
+      for (const selector of ICON_SELECTORS) {
+        expect(style[selector]).not.toHaveProperty('fontSize')
+        expect(JSON.stringify(style[selector])).not.toMatch(/font-size/i)
       }
     }
   })
@@ -71,25 +97,7 @@ describe('responsiveFont icon sizing', () => {
   })
 
   it('reads iconSize from the theme instead of baking in default tokens', () => {
-    const customTheme = {
-      sanity: {
-        ...theme.sanity,
-        v2: {
-          ...theme.sanity.v2,
-          font: {
-            ...fonts,
-            text: {
-              ...fonts.text,
-              sizes: fonts.text.sizes.map((size, index) =>
-                index === 2 ? {...size, iconSize: 99} : size,
-              ),
-            },
-          },
-        },
-      },
-    }
-
-    const style = responsiveFont('text', {$size: [2], theme: customTheme})[1]
+    const style = responsiveFont('text', {$size: [2], theme: themeWithTextIconSize(99)})[1]
 
     expect(style['& [data-sanity-icon][width="1em"]']).toEqual({width: rem(99)})
     expect(style['& [data-sanity-icon][height="1em"]']).toEqual({height: rem(99)})
@@ -100,9 +108,11 @@ describe('responsiveFont icon sizing', () => {
   it('keeps the rem icon box on responsive breakpoints', () => {
     const styles = responsiveFont('text', {$size: [1, 2], theme})
     const expected = iconBox(fonts.text.sizes[2])
-    const mediaStyle = Object.values(styles[2])[0] as CSSObject
+    const mediaKey = Object.keys(styles[2])[0]
 
-    expect(mediaStyle['& [data-sanity-icon][height="1em"]']).toEqual({height: expected.iconSize})
-    expect(iconRules(mediaStyle).every((rule) => !('fontSize' in rule))).toBe(true)
+    expect(styles[2][mediaKey]).toMatchObject({
+      '& [data-sanity-icon][height="1em"]': {height: expected.iconSize},
+    })
+    expect(JSON.stringify(styles[2][mediaKey])).not.toMatch(/font-size/i)
   })
 })
