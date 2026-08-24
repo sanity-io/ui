@@ -1,4 +1,3 @@
-/** @public */
 function isReactEventHandler(key: string, value: unknown): value is (e: never) => void {
   return /^on[A-Z]/.test(key) && typeof value === 'function'
 }
@@ -23,7 +22,6 @@ function chainEventHandlers<E>(
   }
 }
 
-/** @public */
 export function mergeTriggerProps(
   childProps: Record<string, unknown>,
   forwardedProps?: Record<string, unknown>,
