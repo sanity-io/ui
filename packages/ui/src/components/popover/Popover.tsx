@@ -81,3 +81,5 @@ function PopoverRoot({
 export const Popover = Object.assign(PopoverRoot, {
   forwardsTriggerProps: true,
 })
+
+export type {PopoverProps}
