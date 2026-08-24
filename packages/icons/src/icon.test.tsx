@@ -21,7 +21,7 @@ test(
     // just has no drawing content yet, like an `<img>` before its `src` has arrived.
     const fallback = container.querySelector('svg[data-sanity-icon="rocket"]')
     expect(fallback).toBeInTheDocument()
-    expect(fallback).toHaveAttribute('width', '1em')
+    expect(fallback).not.toHaveAttribute('width')
     expect(fallback).toHaveAttribute('height', '1em')
     expect(fallback).toHaveAttribute('viewBox', '0 0 25 25')
     expect(fallback).toHaveAttribute('fill', 'none')
@@ -33,7 +33,7 @@ test(
     }, LOAD_TIMEOUT)
 
     const icon = container.querySelector('svg[data-sanity-icon="rocket"]')
-    expect(icon).toHaveAttribute('width', '1em')
+    expect(icon).not.toHaveAttribute('width')
     expect(icon).toHaveAttribute('height', '1em')
     expect(icon).toHaveAttribute('viewBox', '0 0 25 25')
     expect(icon).toHaveAttribute('fill', 'none')

@@ -23,10 +23,11 @@ export interface IconProps {
  * icon – each one is shown with a copyable import snippet.
  *
  * While the icon chunk loads, a fallback svg with the exact same shell as every generated
- * icon (`data-sanity-icon`, `width`/`height` of `1em`, the shared `viewBox`, and the spread
- * props) is rendered, so the icon slot reserves its final size and responds to the same
- * styling from the first paint – the way an `<img>` with intrinsic dimensions behaves while
- * its `src` is still downloading.
+ * icon (`data-sanity-icon`, `height` of `1em`, no default `width`, the shared `viewBox`, and
+ * the spread props) is rendered, so the icon slot reserves its final size and responds to
+ * the same styling from the first paint – the way an `<img>` with intrinsic dimensions
+ * behaves while its `src` is still downloading. Height-only matches `@sanity/logos` so
+ * Safari Cmd+/- can scale the box (WebKit 199236 / SAPP-933).
  *
  * @public
  */
@@ -45,7 +46,6 @@ export const Icon: ForwardRefExoticComponent<
       fallback={
         <svg
           data-sanity-icon={symbol}
-          width="1em"
           height="1em"
           viewBox="0 0 25 25"
           fill="none"

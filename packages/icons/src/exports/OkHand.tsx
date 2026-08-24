@@ -11,7 +11,6 @@ export const OkHandIcon: ForwardRefExoticComponent<
   return (
     <svg
       data-sanity-icon="ok-hand"
-      width="1em"
       height="1em"
       viewBox="0 0 25 25"
       fill="none"

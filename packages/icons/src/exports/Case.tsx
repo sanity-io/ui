@@ -11,7 +11,6 @@ export const CaseIcon: ForwardRefExoticComponent<
   return (
     <svg
       data-sanity-icon="case"
-      width="1em"
       height="1em"
       viewBox="0 0 25 25"
       fill="none"

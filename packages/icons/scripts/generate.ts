@@ -90,8 +90,13 @@ async function readIcon(filePath: string) {
     ' xmlns="http://www.w3.org/2000/svg" {...props} ref={ref}',
   )
 
-  code = code.replace(/width="25"/g, `width="1em"`)
-  code = code.replace(/height="25"/g, `height="1em"`)
+  // WebKit 199236: width+height 1em plus font-size on the SVG does not
+  // scale with Safari Cmd+/-. Match the @sanity/logos shell that does
+  // scale (SanityMonogram / SanityLogo): height="1em" only. Square
+  // viewBoxes keep the used width. SVGR `icon: true` already emits 1em
+  // on both axes; strip width whether it is still 25 or already 1em.
+  code = code.replace(/\s*width="(?:25|1em)"/g, '')
+  code = code.replace(/height="25"/g, 'height="1em"')
 
   code = code.replace(/stroke-width=/g, `strokeWidth=`)
   code = code.replace(/stroke-linecap=/g, `strokeLinecap=`)

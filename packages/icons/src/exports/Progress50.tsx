@@ -11,7 +11,6 @@ export const Progress50Icon: ForwardRefExoticComponent<
   return (
     <svg
       data-sanity-icon="progress-50"
-      width="1em"
       height="1em"
       viewBox="0 0 25 25"
       fill="none"
