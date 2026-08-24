@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.5
+
+### Patch Changes
+
+- 1a9c219: flex codemod cross-file styled component support
+
 ## 1.0.0-alpha.4
 
 ### Patch Changes

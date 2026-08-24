@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.5
+
+### Patch Changes
+
+- fb077b4: adds new Modal component (replaces UI v3 Dialog)
+
 ## 5.0.0-alpha.4
 
 ### Patch Changes

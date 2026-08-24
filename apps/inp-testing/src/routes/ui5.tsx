@@ -1,11 +1,13 @@
 import '@sanity/ui/styles.css'
 import {
+  Box,
   Button,
   Card,
   Checkbox,
   Grid,
   Heading,
   HStack,
+  Modal,
   Popover,
   Radio,
   Switch,
@@ -58,6 +60,20 @@ function SingleControlSection() {
         />
       </VStack>
     </Card>
+  )
+}
+
+function ModalSection() {
+  const [modalOpen, setModalOpen] = useState(false)
+  return (
+    <Box marginY={5}>
+      <Button text="Open Modal" onClick={() => setModalOpen(true)} />
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} header="Dialog header">
+        <Modal.Content>
+          <Text>The text of the Modal</Text>
+        </Modal.Content>
+      </Modal>
+    </Box>
   )
 }
 
@@ -244,6 +260,7 @@ function Ui5() {
     <VStack gap={4}>
       <Heading>UI 5</Heading>
       <SingleControlSection />
+      <ModalSection />
       <SelectAllSection />
       <ToneToggleSection />
       <PanelSwapSection />
