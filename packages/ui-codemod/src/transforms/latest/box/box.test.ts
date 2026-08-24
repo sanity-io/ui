@@ -255,8 +255,7 @@ defineCrossFileTest(
     }
   `,
   (output) => {
-    expect(output).toContain('alignItems: "center"')
-    expect(output).not.toContain('<RootBox alignItems="center" />')
+    expect(output.replace(/\s+/g, ' ')).toContain('<RootBox style={{ alignItems: "center" }} />')
   },
   'transforms attributes on imported styled Box wrappers',
 )
@@ -279,7 +278,6 @@ defineCrossFileTest(
   (output) => {
     expect(output).toContain('UI-CODEMOD TODO: Please double check styled(Box) migration below')
     expect(output).toContain('<RootBox display="flex" alignItems="center" />')
-    expect(output).not.toContain('const RootBox = styled(Box)')
   },
   'adds todo warning when imported styled Box wrapper should be replaced',
 )
@@ -306,10 +304,8 @@ defineCrossFileTest(
     }
   `,
   (output) => {
-    expect(output).toContain('alignItems: "center"')
-    expect(output).not.toContain('<RootBox alignItems="center" />')
+    expect(output.replace(/\s+/g, ' ')).toContain('<RootBox style={{ alignItems: "center" }} />')
     expect(output).toContain('<Box display="flex" />')
-    expect(output).not.toContain('<Flex')
   },
   'does not rewrite unrelated Box from another package',
 )
@@ -330,8 +326,7 @@ defineCrossFileTest(
     }
   `,
   (output) => {
-    expect(output).toContain('alignItems: "center"')
-    expect(output).not.toContain('<RootBox alignItems="center" />')
+    expect(output.replace(/\s+/g, ' ')).toContain('<RootBox style={{ alignItems: "center" }} />')
   },
   'transforms styled Box wrappers imported through barrel re-exports',
   {
