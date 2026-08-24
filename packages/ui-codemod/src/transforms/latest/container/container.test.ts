@@ -1,4 +1,6 @@
-import {defineInlineTest} from '../../../utils/testUtils'
+import {expect} from 'vitest'
+
+import {defineCrossFileTest, defineInlineTest} from '../../../utils/testUtils'
 import transform from './container'
 
 defineInlineTest(
@@ -102,4 +104,79 @@ defineInlineTest(
     }} />
   `,
   'moves grid props to style and updates mapped values',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Container} from '@sanity/ui'
+
+    export const RootContainer = styled(Container)(({theme}) => ({}))
+  `,
+  `
+    import {RootContainer} from './Component.styled'
+
+    export function Component() {
+      return <RootContainer width={2} />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootContainer size={2} />')
+  },
+  'transforms attributes on imported styled Container wrappers',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Container} from '@sanity/ui'
+
+    export const RootContainer = styled(Container)(({theme}) => ({}))
+  `,
+  `
+    import {Container} from 'another-package'
+    import {RootContainer} from './Component.styled'
+
+    export function Component() {
+      return (
+        <>
+          <RootContainer width={2} />
+          <Container width={2} />
+        </>
+      )
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootContainer size={2} />')
+    expect(output).toContain('<Container width={2} />')
+  },
+  'does not transform attributes on unrelated Container from another package',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Container} from '@sanity/ui'
+
+    export const RootContainer = styled(Container)(({theme}) => ({}))
+  `,
+  `
+    import {RootContainer} from './index'
+
+    export function Component() {
+      return <RootContainer width={2} />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootContainer size={2} />')
+  },
+  'transforms styled Container wrappers imported through barrel re-exports',
+  {
+    extraFiles: {
+      'index.ts': `export {RootContainer} from './Component.styled'`,
+    },
+  },
 )
