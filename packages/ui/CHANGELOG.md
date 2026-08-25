@@ -1,5 +1,12 @@
 # @sanity/ui
 
+## 5.0.0-alpha.6
+
+### Patch Changes
+
+- cb03ad8: add popover, refactor tooltip removing text and disabled and adding anchorName, content, portal
+- 83efb0f: adds `size` prop for Modal, and polyfill for closedby=any
+
 ## 5.0.0-alpha.5
 
 ### Patch Changes
