@@ -5,7 +5,6 @@ import {Dialog} from 'ui3'
 
 import {Box} from '../../../../packages/ui/src/components/box/Box'
 import {Button} from '../../../../packages/ui/src/components/button/Button'
-import {Container} from '../../../../packages/ui/src/components/container/Container'
 import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {Modal} from '../../../../packages/ui/src/components/modal/Modal'
 import {type ModalProps, modalProps} from '../../../../packages/ui/src/components/modal/modal.props'
