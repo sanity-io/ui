@@ -10,6 +10,6 @@ if (
   void import('interestfor')
 }
 
-if (!isClosedBySupported()) {
+if (typeof HTMLDialogElement !== 'undefined' && !isClosedBySupported()) {
   applyClosedByPolyfill()
 }
