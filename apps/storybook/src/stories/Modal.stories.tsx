@@ -5,7 +5,6 @@ import {Dialog} from 'ui3'
 
 import {Box} from '../../../../packages/ui/src/components/box/Box'
 import {Button} from '../../../../packages/ui/src/components/button/Button'
-import {Container} from '../../../../packages/ui/src/components/container/Container'
 import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {Modal} from '../../../../packages/ui/src/components/modal/Modal'
 import {type ModalProps, modalProps} from '../../../../packages/ui/src/components/modal/modal.props'
@@ -19,6 +18,7 @@ const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
   args: {
     header: 'Modal heading',
+    size: 0,
   },
   argTypes,
   component: Modal,
@@ -39,36 +39,32 @@ type Story = StoryObj<typeof Modal>
 
 function LongBodyContent() {
   return (
-    <Container size={0}>
-      <VStack gap={3}>
-        <Text>
-          Sanity is a fully customizable all-code backend for all your content-driven websites and
-          apps—their builders and creators.
-        </Text>
-        <Text>
-          It provides the structured foundation, automation layer, and agentic context companies
-          need to move faster, work smarter, and power every content experience—from websites to AI
-          agents.
-        </Text>
-        <Text>
-          Build a content system that matches how your business operates with three interconnected
-          layers.
-        </Text>
-        <Text>
-          Sanity is a fully customizable all-code backend for all your content-driven websites and
-          apps—their builders and creators.
-        </Text>
-        <Text>
-          It provides the structured foundation, automation layer, and agentic context companies
-          need to move faster, work smarter, and power every content experience—from websites to AI
-          agents.
-        </Text>
-        <Text>
-          Build a content system that matches how your business operates with three interconnected
-          layers.
-        </Text>
-      </VStack>
-    </Container>
+    <VStack gap={3}>
+      <Text>
+        Sanity is a fully customizable all-code backend for all your content-driven websites and
+        apps—their builders and creators.
+      </Text>
+      <Text>
+        It provides the structured foundation, automation layer, and agentic context companies need
+        to move faster, work smarter, and power every content experience—from websites to AI agents.
+      </Text>
+      <Text>
+        Build a content system that matches how your business operates with three interconnected
+        layers.
+      </Text>
+      <Text>
+        Sanity is a fully customizable all-code backend for all your content-driven websites and
+        apps—their builders and creators.
+      </Text>
+      <Text>
+        It provides the structured foundation, automation layer, and agentic context companies need
+        to move faster, work smarter, and power every content experience—from websites to AI agents.
+      </Text>
+      <Text>
+        Build a content system that matches how your business operates with three interconnected
+        layers.
+      </Text>
+    </VStack>
   )
 }
 
