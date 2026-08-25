@@ -14,16 +14,11 @@ const modalClassName = suffixClassName('sui-Modal')
 const modalContentClassName = suffixClassName('sui-ModalContent')
 const modalFooterClassName = suffixClassName('sui-ModalFooter')
 
-function ModalRoot(props: ModalProps) {
-  const {
-    children,
-    className,
-    style,
-    header,
-    open = false,
-    onClose,
-    ...rest
-  } = getProps(props, modalProps)
+function ModalRoot({open = false, size = 0, ...props}: ModalProps) {
+  const {children, className, style, header, onClose, ...rest} = getProps(
+    {size, ...props},
+    modalProps,
+  )
 
   const modalRef = useRef<HTMLDialogElement>(null)
   const headerId = useId()

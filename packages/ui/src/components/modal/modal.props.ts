@@ -1,4 +1,6 @@
+import {CONTAINER_SIZE, type ContainerSize} from '../../types/Container'
 import {type PropDef} from '../../types/PropDef'
+import type {Responsive} from '../../types/Responsive'
 
 /** @beta */
 export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
@@ -8,6 +10,8 @@ export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'>
   onClose: React.ReactEventHandler<HTMLDialogElement>
   /** Whether the modal is open; defaults to false. */
   open?: boolean
+  /** Max width of the modal */
+  size?: Responsive<ContainerSize>
 }
 
 export const modalProps: Record<string, PropDef> = {
@@ -16,5 +20,10 @@ export const modalProps: Record<string, PropDef> = {
   },
   open: {
     type: 'boolean',
+  },
+  size: {
+    type: 'union',
+    className: 'container',
+    values: CONTAINER_SIZE,
   },
 }

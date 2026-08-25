@@ -1,7 +1,7 @@
 .sui-Modal {
-  min-width: 320px;
-  max-width: 80dvw;
-  max-height: 80dvh;
+  /* Computed width is moderated by Modal's size prop, which controls max-width */
+  width: calc(100dvw - 2rem);
+  max-height: calc(100dvh - 2rem);
   transition:
     display 150ms allow-discrete,
     overlay 150ms allow-discrete,
