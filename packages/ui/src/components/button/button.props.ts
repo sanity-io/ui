@@ -33,14 +33,16 @@ export interface ButtonProps<T extends React.ElementType = 'button'> {
   fullWidth?: Responsive<boolean>
   /**
    * Shows an icon in the start position (left side in left-to-right languages). Accepts Boolean value.
+   * @default: null
    */
   iconStart?: React.ElementType | React.ReactNode
   /**
    * Shows an icon in the end position (right side in left-to-right languages). Accepts Boolean value.
+   * @default: null
    */
   iconEnd?: React.ElementType | React.ReactNode
   /**
-   * Sets the importance of the button's action. Accepts `'primary'`, `'secondary'`, `'tertiary'`.
+   * Sets the importance of Button's action. Accepts `'primary'`, `'secondary'`, `'tertiary'`.
    * @default "primary"
    */
   level?: ButtonLevel
@@ -51,6 +53,7 @@ export interface ButtonProps<T extends React.ElementType = 'button'> {
   loading?: boolean
   /**
    * Sets Button's text label. Accepts any string value.
+   * @default null
    */
   text?: string
   /**
