@@ -2,10 +2,12 @@ import {type API, type FileInfo} from 'jscodeshift'
 
 import type {BaseOptions} from '../../../types/BaseOptions'
 import {getComponentLocalNames} from '../../../utils/getComponentLocalNames'
+import {getStyledComponentAliases} from '../../../utils/getStyledComponentAliases'
 import {shouldTransformComponent} from '../../../utils/shouldTransformComponent'
 import {transformAttributes} from '../../../utils/transformAttributes'
 import {transformComponent} from '../../../utils/transformComponent'
 import {transformImport} from '../../../utils/transformImport'
+import {transformStyledComponents} from '../../../utils/transformStyledComponents'
 import {GRID_MODS} from './grid.mods'
 
 const TODO_WARNING = 'Please double check the Grid migration below'
@@ -20,8 +22,16 @@ export default function transform(
 
   return transformComponent(fileInfo, api, ({j, root, markChanged}) => {
     const localNames = getComponentLocalNames(j, root, 'Grid', options)
+    const styledAliases = getStyledComponentAliases(
+      j,
+      root,
+      'Grid',
+      fileInfo.path,
+      localNames,
+      options,
+    )
 
-    if (!shouldTransformComponent(j, root, 'Grid', localNames, options)) {
+    if (!shouldTransformComponent(j, root, 'Grid', localNames, options, styledAliases)) {
       return
     }
 
@@ -29,14 +39,24 @@ export default function transform(
       markChanged()
     }
 
-    root
-      .find(j.JSXOpeningElement, {
-        name: {type: 'JSXIdentifier', name: 'Grid'},
+    root.find(j.JSXOpeningElement).forEach((path) => {
+      const name = path.node.name
+
+      if (name.type !== 'JSXIdentifier' || !localNames.has(name.name)) {
+        return
+      }
+
+      if (transformAttributes(j, path, GRID_MODS, TODO_WARNING)) {
+        markChanged()
+      }
+    })
+
+    if (
+      transformStyledComponents(j, root, styledAliases, () => true, {
+        callback: (path) => transformAttributes(j, path, GRID_MODS, TODO_WARNING),
       })
-      .forEach((path) => {
-        if (transformAttributes(j, path, GRID_MODS, TODO_WARNING)) {
-          markChanged()
-        }
-      })
+    ) {
+      markChanged()
+    }
   })
 }

@@ -411,6 +411,10 @@ export const LAYOUT_MODS: AttributeMods = {
       border: 'border-box',
     },
   },
+  space: {
+    type: 'rename-only',
+    name: 'gap',
+  },
   textAlign: {
     type: 'style-only',
     style: 'textAlign',
