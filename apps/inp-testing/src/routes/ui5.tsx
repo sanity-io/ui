@@ -4,10 +4,10 @@ import {
   Button,
   Card,
   Checkbox,
+  Dialog,
   Grid,
   Heading,
   HStack,
-  Modal,
   Popover,
   Radio,
   Switch,
@@ -63,16 +63,16 @@ function SingleControlSection() {
   )
 }
 
-function ModalSection() {
-  const [modalOpen, setModalOpen] = useState(false)
+function DialogSection() {
+  const [dialogOpen, setDialogOpen] = useState(false)
   return (
     <Box marginY={5}>
-      <Button text="Open Modal" onClick={() => setModalOpen(true)} />
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} header="Dialog header">
-        <Modal.Content>
-          <Text>The text of the Modal</Text>
-        </Modal.Content>
-      </Modal>
+      <Button text="Open Dialog" onClick={() => setDialogOpen(true)} />
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} header="Dialog header">
+        <Dialog.Content>
+          <Text>The text of the Dialog</Text>
+        </Dialog.Content>
+      </Dialog>
     </Box>
   )
 }
@@ -260,7 +260,7 @@ function Ui5() {
     <VStack gap={4}>
       <Heading>UI 5</Heading>
       <SingleControlSection />
-      <ModalSection />
+      <DialogSection />
       <SelectAllSection />
       <ToneToggleSection />
       <PanelSwapSection />

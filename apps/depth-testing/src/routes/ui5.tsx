@@ -4,11 +4,11 @@ import {
   Card,
   Checkbox,
   Container,
+  Dialog,
   Divider,
   Heading,
   HStack,
   Link,
-  Modal,
   Radio,
   Switch,
   Text,
@@ -19,7 +19,7 @@ import '@sanity/ui/styles.css'
 import {useState} from 'react'
 
 function Ui5() {
-  const [modalOpen, setModalOpen] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   return (
     <Box margin={4}>
@@ -30,12 +30,12 @@ function Ui5() {
         A measure of the USS Sanity’s DOM engines
       </Text>
       <Box marginY={5}>
-        <Button text="Open a hailing frequency" onClick={() => setModalOpen(true)} />
-        <Modal open={modalOpen} onClose={() => setModalOpen(false)} header="Greetings, Admiral">
-          <Modal.Content>
+        <Button text="Open a hailing frequency" onClick={() => setDialogOpen(true)} />
+        <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} header="Greetings, Admiral">
+          <Dialog.Content>
             <Text>I believe you’ll find everything is in order for the festivities.</Text>
-          </Modal.Content>
-        </Modal>
+          </Dialog.Content>
+        </Dialog>
       </Box>
       <Card tone="neutral" density="loose">
         <Container size={2} marginLeft={0}>

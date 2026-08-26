@@ -8,28 +8,28 @@ import {Box} from '../box/Box'
 import {Flex} from '../flex/Flex'
 import {Heading} from '../heading/Heading'
 import {IconButton} from '../icon-button/IconButton'
-import {type ModalProps, modalProps} from './modal.props'
+import {type DialogProps, dialogProps} from './dialog.props'
 
-const modalClassName = suffixClassName('sui-Modal')
-const modalContentClassName = suffixClassName('sui-ModalContent')
-const modalFooterClassName = suffixClassName('sui-ModalFooter')
+const dialogClassName = suffixClassName('sui-Dialog')
+const dialogContentClassName = suffixClassName('sui-DialogContent')
+const dialogFooterClassName = suffixClassName('sui-DialogFooter')
 
-function ModalRoot({open = false, size = 0, ...props}: ModalProps) {
+function DialogRoot({open = false, size = 0, ...props}: DialogProps) {
   const {children, className, style, header, onClose, ...rest} = getProps(
     {size, ...props},
-    modalProps,
+    dialogProps,
   )
 
-  const modalRef = useRef<HTMLDialogElement>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
   const headerId = useId()
 
-  const modalClasses = clsx(
-    modalClassName,
+  const dialogClasses = clsx(
+    dialogClassName,
     'sui-inset0 sui-m-auto sui-radius5 sui-shadow3 sui-p4 sui-flex-direction-column sui-gap4 sui-overflow-y-auto',
   )
 
   useEffect(() => {
-    const dialogElement = modalRef.current
+    const dialogElement = dialogRef.current
     if (!dialogElement) return
 
     // `open` = `open` prop
@@ -46,7 +46,7 @@ function ModalRoot({open = false, size = 0, ...props}: ModalProps) {
       }
     }
 
-    // Ensure the modal is closed (and thus its `open` attribute updated)
+    // Ensure the dialog is closed (and thus its `open` attribute updated)
     // when the component is unmounted.
     return () => {
       dialogElement.close()
@@ -56,13 +56,13 @@ function ModalRoot({open = false, size = 0, ...props}: ModalProps) {
   return (
     <dialog
       {...rest}
-      ref={modalRef}
+      ref={dialogRef}
       closedby="any"
       aria-labelledby={header ? headerId : undefined}
       onClose={onClose}
-      className={clsx(modalClasses, className)}
+      className={clsx(dialogClasses, className)}
       style={style}
-      data-ui="Modal"
+      data-ui="Dialog"
     >
       <Flex flexShrink={0} justifyContent="space-between" alignItems="center">
         {header ? (
@@ -76,7 +76,7 @@ function ModalRoot({open = false, size = 0, ...props}: ModalProps) {
           aria-label="Close"
           level="tertiary"
           icon={CloseIcon}
-          onClick={() => modalRef.current?.close()}
+          onClick={() => dialogRef.current?.close()}
         />
       </Flex>
       {children}
@@ -84,15 +84,15 @@ function ModalRoot({open = false, size = 0, ...props}: ModalProps) {
   )
 }
 
-function ModalContent(props: ComponentProps<'div'>) {
+function DialogContent(props: ComponentProps<'div'>) {
   const {children, className, style, ...rest} = getProps(props, {})
 
   return (
     <Box
       {...rest}
-      className={clsx(modalContentClassName, className)}
+      className={clsx(dialogContentClassName, className)}
       style={style}
-      data-ui="ModalContent"
+      data-ui="DialogContent"
       flexGrow={1}
       overflowY="auto"
     >
@@ -101,15 +101,15 @@ function ModalContent(props: ComponentProps<'div'>) {
   )
 }
 
-function ModalFooter(props: ComponentProps<'div'>) {
+function DialogFooter(props: ComponentProps<'div'>) {
   const {children, className, style, ...rest} = getProps(props, {})
 
   return (
     <Box
       {...rest}
-      className={clsx(modalFooterClassName, className)}
+      className={clsx(dialogFooterClassName, className)}
       style={style}
-      data-ui="ModalFooter"
+      data-ui="DialogFooter"
       flexShrink={0}
     >
       {children}
@@ -117,7 +117,7 @@ function ModalFooter(props: ComponentProps<'div'>) {
   )
 }
 
-ModalRoot.displayName = 'Modal'
+DialogRoot.displayName = 'Dialog'
 
 /**
  * @beta
@@ -126,14 +126,14 @@ ModalRoot.displayName = 'Modal'
  * Modal dialogs make their containing documents inert, and render on the topmost
  * layer within that containing document; they must be dimissed before the containing
  * document and its contents become unblocked. They also trap focus within the bounds
- * of the modal element and its descendants.
+ * of the dialog element and its descendants.
  *
  * For more on dialogs and modality, refer to the HTML specification for the dialog element:
  * https://html.spec.whatwg.org/dev/interactive-elements.html#the-dialog-element
  */
-export const Modal = ModalRoot
+export const Dialog = DialogRoot
 
-ModalRoot.Content = ModalContent
-ModalRoot.Footer = ModalFooter
+DialogRoot.Content = DialogContent
+DialogRoot.Footer = DialogFooter
 
-export type {ModalProps}
+export type {DialogProps}
