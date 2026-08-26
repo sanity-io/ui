@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.7
+
+### Patch Changes
+
+- 1b1fa1e: rename Modal to Dialog (`Modal` -> `Dialog`, `Modal.Content` -> `Dialog.Content`, `Modal.Footer` -> `Dialog.Footer`, `ModalProps` -> `DialogProps`)
+
 ## 5.0.0-alpha.6
 
 ### Patch Changes
