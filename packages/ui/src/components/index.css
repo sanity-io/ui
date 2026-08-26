@@ -4,6 +4,7 @@
 @import './checkbox/checkbox.css';
 @import './code/code.css';
 @import './container/container.css';
+@import './dialog/dialog.css';
 @import './eyebrow/eyebrow.css';
 @import './flex/flex.css';
 @import './grid/grid.css';
@@ -15,7 +16,6 @@
 @import './label/label.css';
 @import './link/link.css';
 @import './list/list.css';
-@import './modal/modal.css';
 @import './popover/popover.css';
 @import './press-area/press-area.css';
 @import './radio/radio.css';

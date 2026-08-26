@@ -91,7 +91,7 @@ function DialogSection() {
           header="Dialog header"
         >
           <Box padding={4}>
-            <Text>The text of the Modal</Text>
+            <Text>The text of the Dialog</Text>
           </Box>
         </Dialog>
       )}

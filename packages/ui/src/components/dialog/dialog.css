@@ -1,5 +1,5 @@
-.sui-Modal {
-  /* Computed width is moderated by Modal's size prop, which controls max-width */
+.sui-Dialog {
+  /* Computed width is moderated by Dialog's size prop, which controls max-width */
   width: calc(100dvw - 2rem);
   max-height: calc(100dvh - 2rem);
   transition:
@@ -9,41 +9,41 @@
     scale 150ms var(--timing-curve);
 }
 
-.sui-Modal:not([open]) {
+.sui-Dialog:not([open]) {
   opacity: 0;
   scale: 0.9;
 }
 
-.sui-Modal[open] {
+.sui-Dialog[open] {
   display: flex;
   opacity: 1;
   scale: 1;
 }
 
-.sui-Modal::backdrop {
-  --modal-backdrop: hsl(from var(--separator-high) h s l / var(--overlay-opacity));
-  background-color: var(--modal-backdrop);
+.sui-Dialog::backdrop {
+  --dialog-backdrop: hsl(from var(--separator-high) h s l / var(--overlay-opacity));
+  background-color: var(--dialog-backdrop);
   transition:
     display 150ms allow-discrete,
     overlay 150ms allow-discrete,
     opacity 150ms var(--timing-linear);
 }
 
-.sui-Modal:not([open])::backdrop {
+.sui-Dialog:not([open])::backdrop {
   opacity: 0;
 }
 
-.sui-Modal[open]::backdrop {
+.sui-Dialog[open]::backdrop {
   opacity: 1;
 }
 
 @starting-style {
-  .sui-Modal[open] {
+  .sui-Dialog[open] {
     opacity: 0;
     scale: 0.9;
   }
 
-  .sui-Modal[open]::backdrop {
+  .sui-Dialog[open]::backdrop {
     opacity: 0;
   }
 }
