@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "deslop": {
+      "source": "cursor/plugins",
+      "sourceType": "github",
+      "skillPath": "cursor-team-kit/skills/deslop/SKILL.md",
+      "computedHash": "8883a7d459c07a0b2ee06972e79baa634009aa3bab969a6650acbefac394ad41"
+    },
     "sanity-live-cache-components": {
       "source": "sanity-io/next-sanity",
       "sourceType": "github",
