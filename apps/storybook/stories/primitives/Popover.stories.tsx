@@ -16,8 +16,10 @@ import {
 } from '@sanity/ui'
 import {Popover, PopoverProps, PopoverUpdateCallback} from '@sanity/ui/popover'
 import {ThemeColorToneKey} from '@sanity/ui/theme'
+import {Tooltip} from '@sanity/ui/tooltip'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {PLACEMENT_OPTIONS, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
@@ -73,6 +75,82 @@ export const Radius: Story = {
       })}
     </Card>
   ),
+}
+
+function NestedInAnimatedStory() {
+  const [animatedOpen, setAnimatedOpen] = useState(false)
+  const [nestedOpen, setNestedOpen] = useState(false)
+
+  return (
+    <Card padding={6}>
+      <Flex justify="center">
+        <Popover
+          animate
+          content={
+            <Stack gap={2} padding={2}>
+              <Popover
+                content={<Text size={1}>nested popover content</Text>}
+                data-testid="nested-popover"
+                open={nestedOpen}
+                padding={3}
+                placement="right"
+              >
+                <Button
+                  id="nested-popover-reference"
+                  onClick={() => setNestedOpen(true)}
+                  text="Open nested popover"
+                />
+              </Popover>
+
+              <Tooltip content={<Text size={1}>nested tooltip content</Text>} placement="right">
+                <Button id="nested-tooltip-reference" text="Hover for nested tooltip" />
+              </Tooltip>
+            </Stack>
+          }
+          data-testid="animated-popover"
+          open={animatedOpen}
+          padding={3}
+        >
+          <Button
+            id="animated-popover-reference"
+            onClick={() => setAnimatedOpen(true)}
+            text="Open animated popover"
+          />
+        </Popover>
+      </Flex>
+    </Card>
+  )
+}
+
+export const NestedInAnimated: Story = {
+  parameters: {controls: {include: []}},
+  render: () => <NestedInAnimatedStory />,
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+    const opacityOf = (selector: string) => {
+      const el = doc.querySelector(selector)
+
+      return el ? getComputedStyle(el).opacity : undefined
+    }
+
+    // The nested popovers must open only once the outer enter animation has
+    // settled: a nested card that mounts in the same commit as the outer one
+    // is carried along by the outer animation and hides the bug
+    await step('the animated popover becomes visible', async () => {
+      await userEvent.click(doc.getElementById('animated-popover-reference')!)
+      await waitFor(() => expect(opacityOf('[data-testid="animated-popover"]')).toBe('1'))
+    })
+
+    await step('the nested non-animated popover becomes visible', async () => {
+      await userEvent.click(doc.getElementById('nested-popover-reference')!)
+      await waitFor(() => expect(opacityOf('[data-testid="nested-popover"]')).toBe('1'))
+    })
+
+    await step('the nested non-animated tooltip becomes visible', async () => {
+      await userEvent.hover(doc.getElementById('nested-tooltip-reference')!)
+      await waitFor(() => expect(opacityOf('[data-ui="Tooltip__card"]')).toBe('1'))
+    })
+  },
 }
 
 export const Controlled: Story = {

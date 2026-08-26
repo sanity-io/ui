@@ -1,4 +1,4 @@
-import type {Transition, Variant} from 'motion/react'
+import type {MotionProps} from 'motion/react'
 
 /**
  * @internal
@@ -13,20 +13,18 @@ export const EMPTY_RECORD: Record<string, never> = {}
 const POPOVER_MOTION_DURATION = 0.2
 
 /**
- * Shared `framer-motion` variants used by `Popover` and `Tooltip` components.
+ * The `motion` props shared by the `Popover` and `Tooltip` cards.
+ *
+ * Spread as a whole, and only while animating. `motion` treats any component
+ * with `variants` as a variant node and hands it the variant labels of the
+ * nearest animating ancestor, so a card that keeps its `variants` while
+ * dropping `initial`/`animate` mounts on an ancestor popover's `hidden`
+ * variant and never leaves it.
+ *
  * @internal
  */
-export const POPOVER_MOTION_PROPS: {
-  card: {
-    initial: Variant
-    hidden: Variant
-    visible: Variant
-    scaleIn: Variant
-    scaleOut: Variant
-  }
-  transition: Transition
-} = {
-  card: {
+export const POPOVER_MOTION_PROPS = {
+  variants: {
     initial: {
       scale: 0.97,
       willChange: 'transform',
@@ -52,4 +50,7 @@ export const POPOVER_MOTION_PROPS: {
     visualDuration: POPOVER_MOTION_DURATION,
     bounce: 0.25,
   },
-}
+  initial: ['hidden', 'initial'],
+  animate: ['visible', 'scaleIn'],
+  exit: ['hidden', 'scaleOut'],
+} satisfies MotionProps
