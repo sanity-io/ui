@@ -3,8 +3,14 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
 export interface LabelProps extends React.ComponentProps<'label'>, MarginProps {
-  /** Element to render */
+  /**
+   * Renders the label in a muted color. Accepts Boolean value.
+   */
   disabled?: boolean
+  /**
+   * Renders the label in the error color. Accepts Boolean value.
+   * @remarks Use when the linked input has a validation error.
+   */
   error?: boolean
 }
 

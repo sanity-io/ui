@@ -2,7 +2,9 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @public */
 export interface TooltipGroupProps<T extends React.ElementType = 'div'> {
-  /** Element to render */
+  /**
+   * HTML element to render as. Accepts any HTML tag.
+   */
   as?: T
 }
 

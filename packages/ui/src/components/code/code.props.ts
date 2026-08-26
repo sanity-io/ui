@@ -9,11 +9,18 @@ export interface CodeProps<T extends CodeTag = 'pre'> extends Omit<
   TypographyProps,
   'align' | 'truncate' | 'tone'
 > {
-  /** Element to render */
+  /**
+   * HTML element or component to render. Accepts `'pre'`, `'span'`.
+   * @remarks The defined element wraps an inner `<code>` tag.
+   */
   as?: T
-  /** Refractor language for syntax highlighting */
+  /**
+   * Refractor language for syntax highlighting. Accepts any language registered with Refractor.
+   */
   language?: string
-  /** CSS **font-size** property */
+  /**
+   * Font size and line height from the code scale. Accepts `0`, `1`, `2`, `3`, `4`.
+   */
   size?: Responsive<CodeSize>
 }
 

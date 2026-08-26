@@ -8,9 +8,13 @@ import type {Responsive} from '../../types/Responsive'
 /** @public */
 export interface FlexProps<T extends React.ElementType = 'div'>
   extends FlexParentProps, GapProps, LayoutProps {
-  /** Element to render */
+  /**
+   * HTML element or component to render. Accepts any valid HTML tag or component (ex: `'nav'`, `'main'`, `'section'`).
+   */
   as?: T
-  /** CSS **display** property */
+  /**
+   * CSS `display` property. Accepts `'flex'`, `'inline-flex'`, `'none'`.
+   */
   display?: Responsive<DisplayFlex>
 }
 

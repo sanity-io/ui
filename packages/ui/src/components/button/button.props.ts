@@ -21,19 +21,19 @@ export interface ButtonProps<T extends React.ElementType = 'button'> {
    */
   as?: InteractiveAs<T>
   /**
-   * Sets padding and gap to specify its size. Accepts `'regular', 'loose'`.
+   * Sets padding and gap to specify its size. Accepts `'regular'`, `'loose'`.
    */
   density?: ButtonDensity
   /**
-   * Sets Button to fill the width of its container. Accepts any icon component.
+   * Sets Button to fill the width of its container. Accepts Boolean value.
    */
   fullWidth?: Responsive<boolean>
   /**
-   * Shows an icon in the start position (left side in left-to-right languages). Accepts Boolean value.
+   * Shows an icon in the start position (left side in left-to-right languages). Accepts any icon component.
    */
   iconStart?: React.ElementType | React.ReactNode
   /**
-   * Shows an icon in the end position (right side in left-to-right languages). Accepts Boolean value.
+   * Shows an icon in the end position (right side in left-to-right languages). Accepts any icon component.
    */
   iconEnd?: React.ElementType | React.ReactNode
   /**

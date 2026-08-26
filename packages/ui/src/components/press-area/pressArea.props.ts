@@ -3,7 +3,9 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @public */
 export interface PressAreaProps<T extends React.ElementType = 'button'> {
-  /** Element to render */
+  /**
+   * Element or component to render. Accepts `'button'`, `'a'`.
+   */
   as?: InteractiveAs<T>
 }
 

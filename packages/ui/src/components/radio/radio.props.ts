@@ -3,9 +3,14 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
 export interface RadioProps extends React.ComponentProps<'input'>, MarginProps {
-  /** Error state */
+  /**
+   * Applies error styling to the radio mark. Accepts Boolean value.
+   * @remarks Use when form validation fails. Pair with a visible error message. The prop is visual only.
+   */
   error?: boolean
-  /** Input label */
+  /**
+   * Visible label next to the radio. Accepts any renderable node.
+   */
   label: React.ReactNode
 }
 

@@ -10,9 +10,13 @@ import type {Responsive} from '../../types/Responsive'
 /** @public */
 export interface IconProps
   extends ComponentProps<'svg'>, Pick<TypographyProps, 'muted'>, MarginProps, ToneProps {
-  /** Icon to render */
+  /**
+   * The icon component to render. Accepts any icon from `@sanity/icons` or a compatible SVG component.
+   */
   icon: React.ComponentType<SVGProps<SVGSVGElement>>
-  /** CSS **font-size** property */
+  /**
+   * Visual size of the icon. Accepts `0`, `1`, `2`, `3`, `4`.
+   */
   size?: Responsive<IconSize>
 }
 

@@ -3,9 +3,13 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
 export interface IndicatorProps<T extends React.ElementType = 'span'> extends ToneProps {
-  /** Element to render */
+  /**
+   * HTML element to render. Accepts any valid HTML tag.
+   */
   as?: T
-  /** Label for aria-label attribute */
+  /**
+   * Accessible label. Accepts any string value.
+   */
   label?: string
 }
 

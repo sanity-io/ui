@@ -2,7 +2,9 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @public */
 export interface IndicatorStackProps<T extends React.ElementType = 'div'> {
-  /** Element to render */
+  /**
+   * HTML element to render. Accepts any valid HTML tag.
+   */
   as?: T
 }
 

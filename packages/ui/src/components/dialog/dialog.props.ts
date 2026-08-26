@@ -3,14 +3,23 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @beta */
-export interface DialogProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
-  /** Text to be displayed as the dialog's heading; optional but recommended for optimal accessibility and presentation */
+export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
+  /**
+   * Text for the dialog heading. Accepts any string value.
+   * @remarks Recommended for accessibility. The component sets `aria-labelledby` to the heading when you give this prop.
+   */
   header?: string
-  /** Used to set the value of open to false. Fires whenever the dialog is closed, either programmatically or by the user (via Esc key, clicking background, clicking the dialog's close button, or any other means.)  */
+  /**
+   * A function to call alongside the native `close` event. Accepts a function.
+   * @remarks Use it to set `open` back to `false`. It runs for every close cause: the Escape key, a backdrop click, the close button, or a programmatic close.
+   */
   onClose: React.ReactEventHandler<HTMLDialogElement>
-  /** Whether the dialog is open; defaults to false. */
+  /**
+   * Controls the dialog. Accepts Boolean value.
+   * @remarks `true` calls `showModal()` on the element. `false` calls `close()`.
+   */
   open?: boolean
-  /** Max width of the dialog */
+  /** Sets the max width of the dialog */
   size?: Responsive<ContainerSize>
 }
 
