@@ -134,8 +134,8 @@ export const NestedInAnimated: Story = {
     }
 
     // The nested popovers must open only once the outer enter animation has
-    // settled: a nested card that mounts in the same commit as the outer one
-    // is carried along by the outer animation and hides the bug
+    // settled. A nested card that mounts in the same commit as the outer one
+    // is carried along by the outer animation, which hides the bug.
     await step('the animated popover becomes visible', async () => {
       await userEvent.click(doc.getElementById('animated-popover-reference')!)
       await waitFor(() => expect(opacityOf('[data-testid="animated-popover"]')).toBe('1'))
