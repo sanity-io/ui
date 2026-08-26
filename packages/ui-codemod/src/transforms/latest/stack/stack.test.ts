@@ -248,7 +248,7 @@ defineCrossFileTest(
     }
   `,
   (output) => {
-    expect(output).not.toContain('<RootStack space={2} />')
+    expect(output).toContain('<RootStack gap={2} />')
   },
   'transforms styled Stack wrappers imported through barrel re-exports',
   {
