@@ -5,21 +5,21 @@ import {type PropDef} from '../../types/PropDef'
 export interface TooltipProps
   extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
   /**
-   * Shared anchor identifier. Accepts any string value.
+   * Shared anchor identifier.
    * @remarks Set the same value on a Tooltip and a Popover to point both at one trigger.
    */
   anchorName?: React.ReactNode
   /**
-   * The trigger element. Accepts a single React element that renders a `<button>` or an `<a href>`.
+   * The trigger element.
    * @remarks Tooltip clones it to attach `aria-describedby` and the `interestfor` attribute that opens the label.
    */
   children: React.ReactElement<Record<string, unknown>>
   /**
-   * The tooltip label. Accepts any React node.
+   * The tooltip label.
    */
   content?: React.ReactNode
   /**
-   * Renders the label into `document.body` through a React portal instead of inline. Accepts Boolean value.
+   * Renders the label into `document.body` through a React portal instead of inline.
    */
   portal?: boolean
 }

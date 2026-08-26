@@ -3,11 +3,11 @@ import {type PropDef} from '../../types/PropDef'
 /** @beta */
 export interface LinkProps extends React.ComponentProps<'a'> {
   /**
-   * Sets `target="_blank"` and `rel="noopener noreferrer"` on its own. Accepts Boolean value.
+   * Sets `target="_blank"` and `rel="noopener noreferrer"` on its own.
    */
   openInNewTab?: boolean
   /**
-   * Adds `text-decoration: underline`. Accepts Boolean value.
+   * Adds `text-decoration: underline`.
    */
   underlined?: boolean
 }

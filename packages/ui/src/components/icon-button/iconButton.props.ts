@@ -10,12 +10,12 @@ export interface IconButtonProps<T extends React.ElementType = 'button'> extends
   'as' | 'density' | 'level' | 'loading' | 'tone'
 > {
   /**
-   * Accessible name for the button. Accepts any string value.
+   * Accessible name for the button.
    * @remarks Because IconButtons have no visible text, this is required.
    */
   'aria-label': string
   /**
-   * Icon to render. Accepts any icon component.
+   * Icon to render.
    */
   'icon': React.ComponentType<SVGProps<SVGSVGElement>>
 }

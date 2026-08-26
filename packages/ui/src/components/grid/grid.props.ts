@@ -9,11 +9,11 @@ import type {Responsive} from '../../types/Responsive'
 export interface GridProps<T extends React.ElementType = 'div'>
   extends GridParentProps, GapProps, LayoutProps {
   /**
-   * HTML element or component to render. Accepts any valid HTML tag or component.
+   * HTML element or component to render.
    */
   as?: T
   /**
-   * CSS `display` property. Accepts `'grid'`, `'inline-grid'`, `'none'`.
+   * CSS `display` property.
    */
   display?: Responsive<DisplayGrid>
 }

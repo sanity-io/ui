@@ -8,11 +8,11 @@ import {SPACE, type SpaceInherit} from '../../types/Space'
 /** @public */
 export interface InlineProps<T extends React.ElementType = 'div'> extends PaddingProps {
   /**
-   * HTML element or component to render. Accepts any valid HTML tag or component.
+   * HTML element or component to render.
    */
   as?: T
   /**
-   * Space between children. Accepts `0`–`9`, `'inherit'`.
+   * Space between children.
    */
   gap?: Responsive<SpaceInherit>
 }

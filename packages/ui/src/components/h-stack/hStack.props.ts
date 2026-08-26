@@ -4,7 +4,7 @@ import {type PropDef} from '../../types/PropDef'
 /** @public */
 export interface HStackProps<T extends React.ElementType = 'div'> extends Pick<GapProps, 'gap'> {
   /**
-   * HTML element or component to render. Accepts any valid HTML tag or component (ex: `'nav'`, `'header'`).
+   * HTML element or component to render.
    */
   as?: T
 }

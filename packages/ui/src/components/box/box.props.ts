@@ -6,11 +6,11 @@ import type {Responsive} from '../../types/Responsive'
 /** @public */
 export interface BoxProps<T extends React.ElementType = 'div'> extends LayoutProps {
   /**
-   * HTML element or component to render. Accepts any valid HTML tag or component (ex: `'nav'`, `'section'`, `'main'`).
+   * HTML element or component to render.
    */
   as?: T
   /**
-   * CSS `display` property. Accepts `'block'`, `'inline-block'`, `'none'`.
+   * CSS `display` property.
    * @remarks Does not include `'flex'` or `'grid'`. Use the Flex or Grid components for those.
    */
   display?: Responsive<DisplayBlock>

@@ -5,7 +5,7 @@ import type {Responsive} from '../../types/Responsive'
 /** @public */
 export interface SpinnerProps extends React.ComponentProps<'svg'> {
   /**
-   * Size of the spinner icon. Accepts `0`, `1`, `2`, `3`, `4`.
+   * Size of the spinner icon.
    */
   size?: Responsive<IconSize>
 }

@@ -12,7 +12,7 @@ import type {Responsive} from '../../types/Responsive'
 /** @beta */
 export interface ListProps<T extends ListTag = 'ul'> extends Pick<GapProps, 'gap'> {
   /**
-   * HTML element to render. Accepts any valid HTML tag.
+   * HTML element to render.
    */
   as?: T
 }
@@ -27,15 +27,15 @@ export const listProps: Record<string, PropDef> = {
 /** @beta */
 export interface ListItemProps extends React.ComponentProps<'li'> {
   /**
-   * Sets horizontal padding, gap, and minimum row height together. Accepts `'compact'`, `'regular'`, `'loose'`.
+   * Sets horizontal padding, gap, and minimum row height together.
    */
   density?: Responsive<Density>
   /**
-   * Slot at the left edge of the row. Accepts any React node.
+   * Slot at the left edge of the row.
    */
   start?: React.ReactNode
   /**
-   * Slot at the right edge of the row. Accepts any React node.
+   * Slot at the right edge of the row.
    */
   end?: React.ReactNode
 }
@@ -86,7 +86,7 @@ export interface ListButtonItemProps<T extends React.ElementType = 'button'> ext
    */
   as?: InteractiveAs<T>
   /**
-   * Marks the row as the current selection. Accepts Boolean value.
+   * Marks the row as the current selection.
    */
   selected?: boolean
 }
@@ -104,15 +104,15 @@ export const listButtonItemProps: Record<string, PropDef> = {
 /** @beta */
 export interface ListItemTextProps<T extends React.ElementType = 'div'> {
   /**
-   * HTML element to render. Accepts any valid HTML tag.
+   * HTML element to render.
    */
   as?: T
   /**
-   * Main label. Accepts any React node.
+   * Main label.
    */
   title?: React.ReactNode
   /**
-   * Text below the title. Accepts any React node.
+   * Text below the title.
    */
   subtitle?: React.ReactNode
 }

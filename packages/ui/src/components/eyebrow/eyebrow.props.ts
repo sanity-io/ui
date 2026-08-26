@@ -6,11 +6,11 @@ import type {Responsive} from '../../types/Responsive'
 /** @public */
 export interface EyebrowProps<T extends React.ElementType = 'span'> extends TypographyProps {
   /**
-   * HTML element to render. Accepts any valid HTML tag (ex: `'span'`, `'p'`, `'div'`).
+   * HTML element to render.
    */
   as?: T
   /**
-   * Font size and line height, drawn from the same scale as Label. Accepts `0`, `1`, `2`, `3`, `4`.
+   * Font size and line height, drawn from the same scale as Label.
    */
   size?: Responsive<EyebrowSize>
 }

@@ -6,11 +6,11 @@ import {TEXT_SIZE, type TextSize} from '../../types/Text'
 /** @public */
 export interface TextProps<T extends React.ElementType = 'span'> extends TypographyProps {
   /**
-   * HTML element to render. Accepts any valid HTML tag (ex: `'span'`, `'label'`, `'li'`).
+   * HTML element to render.
    */
   as?: T
   /**
-   * Font size and line height from the body text scale. Accepts `0`, `1`, `2`, `3`, `4`.
+   * Font size and line height from the body text scale.
    */
   size?: Responsive<TextSize>
 }

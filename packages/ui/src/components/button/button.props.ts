@@ -17,39 +17,39 @@ import type {Responsive} from '../../types/Responsive'
 /** @public */
 export interface ButtonProps<T extends React.ElementType = 'button'> {
   /**
-   * HTML element to render. Accepts `'button'`, `'a'`.
+   * HTML element to render.
    */
   as?: InteractiveAs<T>
   /**
-   * Sets padding and gap to specify its size. Accepts `'regular'`, `'loose'`.
+   * Sets padding and gap to specify its size.
    */
   density?: ButtonDensity
   /**
-   * Sets Button to fill the width of its container. Accepts Boolean value.
+   * Sets Button to fill the width of its container.
    */
   fullWidth?: Responsive<boolean>
   /**
-   * Shows an icon in the start position (left side in left-to-right languages). Accepts any icon component.
+   * Shows an icon in the start position (left side in left-to-right languages).
    */
   iconStart?: React.ElementType | React.ReactNode
   /**
-   * Shows an icon in the end position (right side in left-to-right languages). Accepts any icon component.
+   * Shows an icon in the end position (right side in left-to-right languages).
    */
   iconEnd?: React.ElementType | React.ReactNode
   /**
-   * Sets the importance of Button's action. Accepts `'primary'`, `'secondary'`, `'tertiary'`.
+   * Sets the importance of Button's action.
    */
   level?: ButtonLevel
   /**
-   * Places Button into a loading state. Accepts Boolean value.
+   * Places Button into a loading state.
    */
   loading?: boolean
   /**
-   * Sets Button's text label. Accepts any string value.
+   * Sets Button's text label.
    */
   text?: string
   /**
-   * Sets Button's semantic meaning and related color. Accepts `'neutral'`, `'critical'`.
+   * Sets Button's semantic meaning and related color.
    */
   tone?: ButtonTone
 }

@@ -5,17 +5,17 @@ import type {Responsive} from '../../types/Responsive'
 /** @beta */
 export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
   /**
-   * Text for the dialog heading. Accepts any string value.
+   * Text for the dialog heading.
    * @remarks Recommended for accessibility. The component sets `aria-labelledby` to the heading when you give this prop.
    */
   header?: string
   /**
-   * A function to call alongside the native `close` event. Accepts a function.
+   * A function to call alongside the native `close` event.
    * @remarks Use it to set `open` back to `false`. It runs for every close cause: the Escape key, a backdrop click, the close button, or a programmatic close.
    */
   onClose: React.ReactEventHandler<HTMLDialogElement>
   /**
-   * Controls the dialog. Accepts Boolean value.
+   * Controls the dialog.
    * @remarks `true` calls `showModal()` on the element. `false` calls `close()`.
    */
   open?: boolean

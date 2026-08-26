@@ -3,12 +3,12 @@ import {type PropDef} from '../../types/PropDef'
 /** @beta */
 export interface SkipToContentProps extends React.ComponentProps<'a'> {
   /**
-   * Same-page fragment to jump to. Accepts any fragment id (ex: `'#main'`).
+   * Same-page fragment to jump to.
    * @remarks Note: The hash character # is required for proper linking.
    */
   href: string
   /**
-   * Visible and announced text. Accepts any short phrase (ex: `"Skip to content"`).
+   * Visible and announced text.
    */
   label: string
   /**

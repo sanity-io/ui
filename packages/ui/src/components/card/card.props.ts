@@ -10,11 +10,11 @@ import {type Responsive} from '../../types/Responsive'
 /** @public */
 export interface CardProps<T extends React.ElementType = 'div'> extends MarginProps, ToneProps {
   /**
-   * HTML element or component to render. Accepts any valid HTML tag or component (ex: `'article'`, `'section'`).
+   * HTML element or component to render.
    */
   as?: T
   /**
-   * Composite prop that sets padding, gap, and border-radius together. Accepts `'compact'`, `'regular'`, `'loose'`.
+   * Composite prop that sets padding, gap, and border-radius together.
    */
   density?: Responsive<Density>
 }
