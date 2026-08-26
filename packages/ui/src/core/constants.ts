@@ -19,7 +19,8 @@ const POPOVER_MOTION_DURATION = 0.2
  * with `variants` as a variant node and hands it the variant labels of the
  * nearest animating ancestor, so a card that keeps its `variants` while
  * dropping `initial`/`animate` mounts on an ancestor popover's `hidden`
- * variant and never leaves it.
+ * variant. It only leaves that variant if the ancestor changes label again,
+ * which a card mounting after the ancestor's enter animation never sees.
  *
  * @internal
  */
