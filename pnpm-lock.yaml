@@ -19,7 +19,7 @@ catalogs:
       specifier: ^0.26.2
       version: 0.26.2
     '@sanity/vanilla-extract-vite-plugin':
-      specifier: ^0.2.13
+      specifier: ^0.2.15
       version: 0.2.15
     '@types/node':
       specifier: ^24.13.3
