@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 4.0.7
+
+### Patch Changes
+
+- [#2792](https://github.com/sanity-io/ui/pull/2792) [`7258b02`](https://github.com/sanity-io/ui/commit/7258b02024d233c4270c59a55f813574796006c5) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency use-effect-event to ^2.0.4
+
+- [#2782](https://github.com/sanity-io/ui/pull/2782) [`80d25c2`](https://github.com/sanity-io/ui/commit/80d25c2e4ebb2b6bb5c82eded7b0329663da8759) Thanks [@stipsan](https://github.com/stipsan)! - Fixed non-animated `Popover` and `Tooltip` cards inheriting motion variants from an animated ancestor popover, which left them stuck at `opacity: 0`. `MenuGroup` submenus inside a `MenuButton` with `popover={{animate: true}}` never became visible as a result.
+
 ## 4.0.6
 
 ### Patch Changes
