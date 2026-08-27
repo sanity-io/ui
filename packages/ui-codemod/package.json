@@ -71,6 +71,30 @@
       "source": "./src/commands/latest/heading.ts",
       "default": "./dist/commands/latest/heading.js"
     },
+    "./transforms/latest/inline": {
+      "source": "./src/transforms/latest/inline/inline.ts",
+      "default": "./dist/transforms/latest/inline/inline.js"
+    },
+    "./latest/inline": {
+      "source": "./src/commands/latest/inline.ts",
+      "default": "./dist/commands/latest/inline.js"
+    },
+    "./transforms/latest/label": {
+      "source": "./src/transforms/latest/label/label.ts",
+      "default": "./dist/transforms/latest/label/label.js"
+    },
+    "./latest/label": {
+      "source": "./src/commands/latest/label.ts",
+      "default": "./dist/commands/latest/label.js"
+    },
+    "./transforms/latest/stack": {
+      "source": "./src/transforms/latest/stack/stack.ts",
+      "default": "./dist/transforms/latest/stack/stack.js"
+    },
+    "./latest/stack": {
+      "source": "./src/commands/latest/stack.ts",
+      "default": "./dist/commands/latest/stack.js"
+    },
     "./transforms/latest/text": {
       "source": "./src/transforms/latest/text/text.ts",
       "default": "./dist/transforms/latest/text/text.js"
