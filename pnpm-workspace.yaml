@@ -78,6 +78,7 @@ minimumReleaseAgeExclude:
   - motion@13.0.0
   - styled-components@6.5.2
   - eslint-plugin-storybook@10.5.10
+  - use-effect-event@2.0.4
 
 minimumReleaseAgeExcludePrune: true
 
