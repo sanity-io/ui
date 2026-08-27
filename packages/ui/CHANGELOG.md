@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 2.16.29
+
+### Patch Changes
+
+- [#2798](https://github.com/sanity-io/ui/pull/2798) [`90e64b7`](https://github.com/sanity-io/ui/commit/90e64b7fb45de16f21ff34820d12a24436ec431d) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency use-effect-event to ^2.0.4
+
 ## 2.16.28
 
 ### Patch Changes
