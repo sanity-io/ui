@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.6
+
+### Patch Changes
+
+- c202fb5: update codemods to support cross-file styled component transformations
+
 ## 1.0.0-alpha.5
 
 ### Patch Changes
