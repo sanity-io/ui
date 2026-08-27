@@ -79,6 +79,8 @@ minimumReleaseAgeExclude:
   - styled-components@6.5.2
   - eslint-plugin-storybook@10.5.10
 
+minimumReleaseAgeExcludePrune: true
+
 # @testing-library/jest-dom/vitest imports `vitest` without declaring it, so it
 # falls back to pnpm's hidden hoist — which can resolve to another workspace
 # package's vitest version (e.g. apps/docs uses vitest 3, packages/ui vitest 4),
