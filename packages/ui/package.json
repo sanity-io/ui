@@ -79,7 +79,7 @@
     "react-compiler-runtime": "1.0.0",
     "react-is": "catalog:",
     "react-refractor": "catalog:",
-    "use-effect-event": "^2.0.3"
+    "use-effect-event": "^2.0.4"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
