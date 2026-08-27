@@ -1,4 +1,6 @@
-import {defineInlineTest} from '../../../utils/testUtils'
+import {expect} from 'vitest'
+
+import {defineCrossFileTest, defineInlineTest} from '../../../utils/testUtils'
 import transform from './card'
 
 defineInlineTest(
@@ -204,4 +206,101 @@ defineInlineTest(
   <Card muted />
   `,
   'warns if Card includes muted prop',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Card} from '@sanity/ui'
+
+    export const RootCard = styled(Card)(({theme}) => ({}))
+  `,
+  `
+    import {RootCard} from './Component.styled'
+
+    export function Component() {
+      return <RootCard padding={4} radius={3} border />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootCard density="regular" />')
+  },
+  'transforms attributes on imported styled Card wrappers',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Card} from '@sanity/ui'
+
+    export const RootCard = styled(Card)(({theme}) => ({}))
+  `,
+  `
+    import {RootCard} from './Component.styled'
+
+    export function Component() {
+      return <RootCard padding={1} />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('UI-CODEMOD TODO: Please double check styled(Card) migration below')
+    expect(output).toContain('<RootCard padding={1} />')
+  },
+  'adds todo warning when imported styled Card wrapper should be replaced',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Card} from '@sanity/ui'
+
+    export const RootCard = styled(Card)(({theme}) => ({}))
+  `,
+  `
+    import {Card} from 'another-package'
+    import {RootCard} from './Component.styled'
+
+    export function Component() {
+      return (
+        <>
+          <RootCard padding={4} radius={3} border />
+          <Card padding={4} radius={3} border />
+        </>
+      )
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootCard density="regular" />')
+    expect(output).toContain('<Card padding={4} radius={3} border />')
+  },
+  'does not rewrite unrelated Card from another package',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Card} from '@sanity/ui'
+
+    export const RootCard = styled(Card)(({theme}) => ({}))
+  `,
+  `
+    import {RootCard} from './index'
+
+    export function Component() {
+      return <RootCard padding={4} radius={3} border />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootCard density="regular" />')
+  },
+  'transforms styled Card wrappers imported through barrel re-exports',
+  {
+    extraFiles: {
+      'index.ts': `export {RootCard} from './Component.styled'`,
+    },
+  },
 )
