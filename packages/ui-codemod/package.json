@@ -121,6 +121,12 @@
       "./latest/grid": "./dist/commands/latest/grid.js",
       "./transforms/latest/heading": "./dist/transforms/latest/heading/heading.js",
       "./latest/heading": "./dist/commands/latest/heading.js",
+      "./transforms/latest/inline": "./dist/transforms/latest/inline/inline.js",
+      "./latest/inline": "./dist/commands/latest/inline.js",
+      "./transforms/latest/label": "./dist/transforms/latest/label/label.js",
+      "./latest/label": "./dist/commands/latest/label.js",
+      "./transforms/latest/stack": "./dist/transforms/latest/stack/stack.js",
+      "./latest/stack": "./dist/commands/latest/stack.js",
       "./transforms/latest/text": "./dist/transforms/latest/text/text.js",
       "./latest/text": "./dist/commands/latest/text.js",
       "./package.json": "./package.json"
