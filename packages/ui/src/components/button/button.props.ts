@@ -16,23 +16,41 @@ import type {Responsive} from '../../types/Responsive'
 
 /** @public */
 export interface ButtonProps<T extends React.ElementType = 'button'> {
-  /** Element to render */
+  /**
+   * HTML element to render.
+   */
   as?: InteractiveAs<T>
-  /** Composite prop for setting padding and gap */
+  /**
+   * Sets padding and gap together to specify size.
+   */
   density?: ButtonDensity
-  /** Set CSS **width** property to 100% */
+  /**
+   * Sets Button to fill the width of its container.
+   */
   fullWidth?: Responsive<boolean>
-  /** Starting icon */
+  /**
+   * Shows an icon in the start position (left side in left-to-right languages).
+   */
   iconStart?: React.ElementType | React.ReactNode
-  /** Ending icon */
+  /**
+   * Shows an icon in the end position (right side in left-to-right languages).
+   */
   iconEnd?: React.ElementType | React.ReactNode
-  /** Button level */
+  /**
+   * Sets the importance of Button's action.
+   */
   level?: ButtonLevel
-  /** Loading state */
+  /**
+   * Places Button into a loading state.
+   */
   loading?: boolean
-  /** Button text */
+  /**
+   * Sets Button's text label.
+   */
   text?: string
-  /** Button tone */
+  /**
+   * Sets Button's semantic meaning and related color.
+   */
   tone?: ButtonTone
 }
 

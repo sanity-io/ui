@@ -4,13 +4,23 @@ import {type PropDef} from '../../types/PropDef'
 /** @beta */
 export interface PopoverProps
   extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
-  /** Anchor name for positioning */
+  /**
+   * Shared anchor identifier.
+   * @remarks Set the same value on a Tooltip and a Popover to point both at one trigger.
+   */
   anchorName?: React.ReactNode
-  /** Focusable trigger element */
+  /**
+   * The trigger element.
+   * @remarks Popover clones it and attaches the `popovertarget` attribute that opens the floating layer.
+   */
   children: React.ReactElement<Record<string, unknown>>
-  /** Popover content */
+  /**
+   * The floating content.
+   */
   content?: React.ReactNode
-  /** Render tooltip in portal */
+  /**
+   * Renders the content into `document.body` through a React portal instead of inline.
+   */
   portal?: boolean
 }
 

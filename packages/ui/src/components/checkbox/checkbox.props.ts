@@ -3,11 +3,19 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
 export interface CheckboxProps extends React.ComponentProps<'input'>, MarginProps {
-  /** Error state */
+  /**
+   * Applies error styling to the checkbox mark.
+   * @remarks Use when form validation fails. Pair with a visible error message. The prop is visual only.
+   */
   error?: boolean
-  /** Indeterminate state */
+  /**
+   * Renders the "mixed state" mark (a horizontal line).
+   * @remarks Use when the checkbox controls a group with some-but-not-all children checked.
+   */
   indeterminate?: boolean
-  /** Input label */
+  /**
+   * Visible label next to the checkbox.
+   */
   label: React.ReactNode
 }
 

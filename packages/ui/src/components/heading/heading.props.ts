@@ -5,9 +5,15 @@ import type {Responsive} from '../../types/Responsive'
 
 /** @public */
 export interface HeadingProps extends TypographyProps {
-  /** Element to render */
+  /**
+   * Semantic heading element to render.
+   * @remarks Always set this explicitly.
+   */
   as?: HeadingTag
-  /** CSS **font-size** property */
+  /**
+   * Sets font size.
+   * @remarks Independent of `as`.
+   */
   size?: Responsive<HeadingSize>
 }
 

@@ -5,9 +5,13 @@ import type {Responsive} from '../../types/Responsive'
 
 /** @public */
 export interface ContainerProps<T extends React.ElementType = 'div'> extends LayoutProps {
-  /** Element to render */
+  /**
+   * HTML element or component to render.
+   */
   as?: T
-  /** CSS **max-width** property */
+  /**
+   * Maximum width of the container.
+   */
   size?: Responsive<ContainerSize>
 }
 

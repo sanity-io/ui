@@ -7,9 +7,13 @@ import {SPACE, type SpaceInherit} from '../../types/Space'
 /** @deprecated Use HStack component instead */
 /** @public */
 export interface InlineProps<T extends React.ElementType = 'div'> extends PaddingProps {
-  /** Element to render */
+  /**
+   * HTML element or component to render.
+   */
   as?: T
-  /** CSS **gap** property */
+  /**
+   * Space between children.
+   */
   gap?: Responsive<SpaceInherit>
 }
 

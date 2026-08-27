@@ -3,12 +3,18 @@ import {type PropDef} from '../../types/PropDef'
 /** @beta */
 export interface SkipToContentProps extends React.ComponentProps<'a'> {
   /**
-   * Anchor href. The target element should be focusable or have `tabindex="-1"`.
+   * Same-page fragment to jump to.
+   * @remarks Note: The hash character # is required for proper linking.
    */
   href: string
-  /** Visible/announced label */
+  /**
+   * Visible and announced text.
+   */
   label: string
-  /** Use label instead */
+  /**
+   * Not accepted.
+   * @remarks Pass text via `label`.
+   */
   children?: never
 }
 

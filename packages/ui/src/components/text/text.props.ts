@@ -5,9 +5,13 @@ import {TEXT_SIZE, type TextSize} from '../../types/Text'
 
 /** @public */
 export interface TextProps<T extends React.ElementType = 'span'> extends TypographyProps {
-  /** Element to render */
+  /**
+   * HTML element to render.
+   */
   as?: T
-  /** CSS **font-size** property */
+  /**
+   * Sets font size.
+   */
   size?: Responsive<TextSize>
 }
 

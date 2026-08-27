@@ -4,13 +4,21 @@ import {type PropDef} from '../../types/PropDef'
 /** @beta */
 export interface TooltipProps
   extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
-  /** Anchor name for positioning */
+  /**
+   * Shared anchor identifier.
+   */
   anchorName?: React.ReactNode
-  /** Focusable trigger element */
+  /**
+   * The trigger element.
+   */
   children: React.ReactElement<Record<string, unknown>>
-  /** Tooltip content */
+  /**
+   * The tooltip label.
+   */
   content?: React.ReactNode
-  /** Render tooltip in portal */
+  /**
+   * Renders the label into `document.body` through a React portal instead of inline.
+   */
   portal?: boolean
 }
 
