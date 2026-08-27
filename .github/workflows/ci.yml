@@ -54,7 +54,9 @@ jobs:
       - uses: ./.github/actions/setup
       - run: pnpm test:coverage
       - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
         with:
+          if-no-files-found: ignore
           name: ui-coverage
           path: packages/ui/coverage/
 
