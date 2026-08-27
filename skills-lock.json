@@ -13,6 +13,30 @@
       "skillPath": "skills/sanity-live-cache-components/SKILL.md",
       "computedHash": "354498f97fd57877d48f4cfe6e8838de610995a6d53bef0cee3fe5b5ef9fad7e"
     },
+    "stories": {
+      "source": "storybookjs/mcp",
+      "sourceType": "github",
+      "skillPath": "packages/claude-plugin/skills/stories/SKILL.md",
+      "computedHash": "0b56c8ef1f2d6df827c70ff2bbccc8b63ac35010f8c1685b5130d75c7f5747fc"
+    },
+    "storybook-init": {
+      "source": "storybookjs/mcp",
+      "sourceType": "github",
+      "skillPath": "packages/claude-plugin/skills/storybook-init/SKILL.md",
+      "computedHash": "0496ed0e8a3dac63832b592b27b2e9d239cf682d6e42c6fb1ac78762974fb897"
+    },
+    "storybook-setup": {
+      "source": "storybookjs/mcp",
+      "sourceType": "github",
+      "skillPath": "packages/claude-plugin/skills/storybook-setup/SKILL.md",
+      "computedHash": "385b4025a7d06e93bac71fe250df689385584d165a1baf2c146595db9c191742"
+    },
+    "storybook-upgrade": {
+      "source": "storybookjs/mcp",
+      "sourceType": "github",
+      "skillPath": "packages/claude-plugin/skills/storybook-upgrade/SKILL.md",
+      "computedHash": "4561acb46bf2e3537393e925c58122d8cc940a45a51906173212e2cf40f1c882"
+    },
     "ui-demo": {
       "source": "affaan-m/everything-claude-code",
       "sourceType": "github",
