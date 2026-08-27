@@ -21,7 +21,7 @@ export interface ButtonProps<T extends React.ElementType = 'button'> {
    */
   as?: InteractiveAs<T>
   /**
-   * Sets padding and gap to specify its size.
+   * Sets padding and gap together to specify size.
    */
   density?: ButtonDensity
   /**

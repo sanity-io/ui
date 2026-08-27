@@ -14,7 +14,7 @@ export interface CardProps<T extends React.ElementType = 'div'> extends MarginPr
    */
   as?: T
   /**
-   * Composite prop that sets padding, gap, and border-radius together.
+   * Sets padding, gap, and border-radius together to specify size. This prop is used in place of separate `padding`, `gap`, and `border-radius` props.
    */
   density?: Responsive<Density>
 }

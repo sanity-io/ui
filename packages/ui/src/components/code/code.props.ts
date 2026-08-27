@@ -19,7 +19,7 @@ export interface CodeProps<T extends CodeTag = 'pre'> extends Omit<
    */
   language?: string
   /**
-   * Font size and line height from the code scale.
+   * Sets font size.
    */
   size?: Responsive<CodeSize>
 }

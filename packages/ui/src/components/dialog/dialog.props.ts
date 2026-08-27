@@ -15,7 +15,7 @@ export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'>
    */
   onClose: React.ReactEventHandler<HTMLDialogElement>
   /**
-   * Controls the dialog.
+   * Toggles the dialog's open state.
    * @remarks `true` calls `showModal()` on the element. `false` calls `close()`.
    */
   open?: boolean

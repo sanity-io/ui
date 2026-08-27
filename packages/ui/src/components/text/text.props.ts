@@ -10,7 +10,7 @@ export interface TextProps<T extends React.ElementType = 'span'> extends Typogra
    */
   as?: T
   /**
-   * Font size and line height from the body text scale.
+   * Sets font size.
    */
   size?: Responsive<TextSize>
 }

@@ -10,7 +10,7 @@ export interface EyebrowProps<T extends React.ElementType = 'span'> extends Typo
    */
   as?: T
   /**
-   * Font size and line height, drawn from the same scale as Label.
+   * Sets font size. Uses the same scale as Label.
    */
   size?: Responsive<EyebrowSize>
 }

@@ -11,7 +11,7 @@ export interface HeadingProps extends TypographyProps {
    */
   as?: HeadingTag
   /**
-   * Visual font size from the heading text scale.
+   * Sets font size.
    * @remarks Independent of `as`.
    */
   size?: Responsive<HeadingSize>

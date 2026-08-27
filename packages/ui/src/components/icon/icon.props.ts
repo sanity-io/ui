@@ -15,7 +15,7 @@ export interface IconProps
    */
   icon: React.ComponentType<SVGProps<SVGSVGElement>>
   /**
-   * Visual size of the icon.
+   * Sets icon size.
    */
   size?: Responsive<IconSize>
 }
