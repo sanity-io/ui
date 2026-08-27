@@ -19,8 +19,8 @@ catalogs:
       specifier: ^0.26.2
       version: 0.26.2
     '@sanity/vanilla-extract-vite-plugin':
-      specifier: ^0.2.15
-      version: 0.2.15
+      specifier: ^0.2.16
+      version: 0.2.16
     '@types/node':
       specifier: ^24.13.3
       version: 24.13.3
@@ -220,7 +220,7 @@ importers:
         version: link:../../packages/ui
       '@sanity/vanilla-extract-vite-plugin':
         specifier: 'catalog:'
-        version: 0.2.15(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.2.16(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
       '@types/react':
         specifier: ^19.2.18
         version: 19.2.18
@@ -277,7 +277,7 @@ importers:
         version: link:../../packages/ui
       '@sanity/vanilla-extract-vite-plugin':
         specifier: 'catalog:'
-        version: 0.2.15(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.2.16(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
       '@storybook/addon-a11y':
         specifier: ^10.5.10
         version: 10.5.10(storybook@10.5.10(@types/react@19.2.18)(prettier@3.9.6)(react@19.2.8)(vitest@4.1.11))
@@ -389,7 +389,7 @@ importers:
     devDependencies:
       '@sanity/vanilla-extract-vite-plugin':
         specifier: 'catalog:'
-        version: 0.2.15(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.2.16(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
       '@sindresorhus/slugify':
         specifier: ^2.2.1
         version: 2.2.1
@@ -616,7 +616,7 @@ importers:
         version: 0.26.2(@babel/runtime@7.29.7)(@types/node@24.13.3)(oxc-transform-react@0.147.0)(supports-color@8.1.1)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
       '@sanity/vanilla-extract-vite-plugin':
         specifier: 'catalog:'
-        version: 0.2.15(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.2.16(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -680,7 +680,7 @@ importers:
         version: 0.26.2(@babel/runtime@7.29.7)(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.147.0)(supports-color@8.1.1)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
       '@sanity/vanilla-extract-vite-plugin':
         specifier: 'catalog:'
-        version: 0.2.15(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.2.16(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))
       '@testing-library/dom':
         specifier: ^10.4.1
         version: 10.4.1
@@ -4241,6 +4241,10 @@ packages:
     resolution: {integrity: sha512-fmTGTMpDkSZbLMPbNzGZB9rCdgPdTJ5fTTeysgL5hJ62oaOi2ZM3c1D/kkHKQzn1hYwabr8obiPrrlYv1PIriQ==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
+  '@sanity/vanilla-extract-integration@0.1.16':
+    resolution: {integrity: sha512-8Hp8vireCTeLyWEzXPu5tYtWlicHPClUH9T8uBFVf9u0imYTUubRuDDBei8yfPyFNz5wYIQk4YaWYcHJ7fI8ow==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+
   '@sanity/vanilla-extract-rolldown-plugin@0.4.4':
     resolution: {integrity: sha512-7fGN4uawU2CHyfnZ/U8jTCemvKOK74nfKtc+LhMZFbAyoPQEkW4LLrJi9qFmTqlV5lSstXjJmBDoOEWleegKsg==}
     engines: {node: '>=20.19 <22 || >=22.12'}
@@ -4256,8 +4260,8 @@ packages:
     peerDependencies:
       tsdown: ^0.22.5
 
-  '@sanity/vanilla-extract-vite-plugin@0.2.15':
-    resolution: {integrity: sha512-pkRzoUrsBqSTIwww8dJuA9YPkIFVngMYf7cyPegM+nrDnieGh1nftoO8wyVuP1ULNMh/72GBxdAnJpwhHLX1FQ==}
+  '@sanity/vanilla-extract-vite-plugin@0.2.16':
+    resolution: {integrity: sha512-C/K9ATo80iS7Q6q5zIrVTPHRXyA6V5zonmV0X/lMsV1JgsTZaRzQsWIx67aNEKI/Uiji1jdV7AeYb6erasyKyw==}
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       vite: ^8.0.0
@@ -12839,6 +12843,15 @@ snapshots:
     transitivePeerDependencies:
       - babel-plugin-macros
 
+  '@sanity/vanilla-extract-integration@0.1.16(babel-plugin-macros@3.1.0)':
+    dependencies:
+      '@vanilla-extract/css': 1.21.2(babel-plugin-macros@3.1.0)
+      javascript-stringify: 2.1.0
+      rolldown: 1.2.5
+      yuku-parser: 0.9.1
+    transitivePeerDependencies:
+      - babel-plugin-macros
+
   '@sanity/vanilla-extract-rolldown-plugin@0.4.4(babel-plugin-macros@3.1.0)(rolldown@1.2.5)':
     dependencies:
       '@sanity/vanilla-extract-integration': 0.1.15(babel-plugin-macros@3.1.0)
@@ -12856,9 +12869,9 @@ snapshots:
       - babel-plugin-macros
       - rolldown
 
-  '@sanity/vanilla-extract-vite-plugin@0.2.15(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))':
+  '@sanity/vanilla-extract-vite-plugin@0.2.16(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0))':
     dependencies:
-      '@sanity/vanilla-extract-integration': 0.1.15(babel-plugin-macros@3.1.0)
+      '@sanity/vanilla-extract-integration': 0.1.16(babel-plugin-macros@3.1.0)
       '@vanilla-extract/css': 1.21.2(babel-plugin-macros@3.1.0)
       vite: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.50.0)(tsx@4.23.12)(yaml@2.9.0)
     transitivePeerDependencies:

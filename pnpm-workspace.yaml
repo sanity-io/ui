@@ -16,7 +16,7 @@ catalog:
   '@sanity/client': ^8.3.0
   '@sanity/functions': ^1.6.9
   '@sanity/tsdown-config': ^0.26.2
-  '@sanity/vanilla-extract-vite-plugin': ^0.2.15
+  '@sanity/vanilla-extract-vite-plugin': ^0.2.16
   '@types/node': ^24.13.3
   '@types/react': ^19.2.18
   '@types/react-dom': ^19.2.5
