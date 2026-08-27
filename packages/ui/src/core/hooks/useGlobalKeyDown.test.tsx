@@ -11,8 +11,8 @@ import {useGlobalKeyDown} from './useGlobalKeyDown'
  * kind of component calls the hook. React's native `useEffectEvent` fails
  * this in `forwardRef` and `memo` components on React 19.2
  * (https://github.com/facebook/react/issues/34818), which is why the hook
- * uses `use-effect-event` instead — this test guards against switching to the
- * native hook before the upstream fix ships.
+ * inlines the `use-effect-event` ponyfill — this test guards against
+ * switching to the native hook before the upstream fix ships.
  */
 describe('useGlobalKeyDown', () => {
   test('handler sees the latest props in forwardRef and memo components', () => {
