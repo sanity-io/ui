@@ -96,8 +96,8 @@ describe('native React.useEffectEvent inside a memo component', () => {
     })
 
     // Frozen at the mount value — not merely one render behind. This is why `Tooltip`,
-    // `useGlobalKeyDown` and `useClickOutsideEvent` inline the `use-effect-event` ponyfill
-    // instead of using the native hook. When this assertion fails, the installed React contains
+    // `useGlobalKeyDown` and `useClickOutsideEvent` use the `use-effect-event` ponyfill
+    // instead of the native hook. When this assertion fails, the installed React contains
     // the fix (https://github.com/facebook/react/pull/34831): revisit the TODOs at those call
     // sites — switching also requires the fix to reach the lowest `react` peer version we
     // support.

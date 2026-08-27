@@ -1,4 +1,11 @@
-import {useDebugValue, useEffect, useInsertionEffect, useRef} from 'react'
+import {useDebugValue, useEffect} from 'react'
+// TODO: switch to `useEffectEvent` from `react` once
+// https://github.com/facebook/react/issues/34818 is fixed in the lowest React
+// version we support: on React 19.2 the native hook never sees values past
+// the first render when the calling component is wrapped in `forwardRef` or
+// `memo`. This public hook runs in the fiber of whatever component calls it
+// (consumers may call it from `forwardRef` or `memo` components).
+import {useEffectEvent} from 'use-effect-event'
 
 import {EMPTY_ARRAY} from '../constants'
 
@@ -21,19 +28,10 @@ export function useClickOutsideEvent(
   boundaryElement?: () => HTMLElement | null,
 ): void {
   /**
-   * The ref lets the `mousedown` listener see the latest value of `listener`, `elementsArg` and
-   * `boundaryElement` without the listener constantly being added and removed — the
-   * `useEffectEvent` pattern, inlined from
-   * https://github.com/sanity-io/use-effect-event/blob/v1.0.2/src/useEffectEvent.ts
-   *
-   * TODO: switch to `useEffectEvent` from `react` once
-   * https://github.com/facebook/react/issues/34818 is fixed in the lowest React
-   * version we support: on React 19.2 the native hook never sees values past
-   * the first render when the calling component is wrapped in `forwardRef` or
-   * `memo`. This public hook runs in the fiber of whatever component calls it
-   * (consumers may call it from `forwardRef` or `memo` components).
+   * The `useEffectEvent` hook allow us to always see the latest value of `listener`, `elementsArg` and `boundaryElement` without needing to
+   * juggle `useState`, `useRef` and `useState` to make sure the `mousedown` event listener isn't constantly being added and removed.
    */
-  const onEvent = (evt: MouseEvent) => {
+  const onEvent = useEffectEvent((evt: MouseEvent) => {
     if (!listener) {
       return
     }
@@ -61,10 +59,6 @@ export function useClickOutsideEvent(
     }
 
     listener(evt)
-  }
-  const onEventRef = useRef(onEvent)
-  useInsertionEffect(() => {
-    onEventRef.current = onEvent
   })
 
   const hasListener = Boolean(listener)
@@ -72,13 +66,14 @@ export function useClickOutsideEvent(
   useEffect(() => {
     if (!hasListener) return undefined
 
-    const handleEvent = (evt: MouseEvent) => onEventRef.current(evt)
+    const handleEvent = (evt: MouseEvent) => onEvent(evt)
 
     document.addEventListener('mousedown', handleEvent)
 
     return () => {
       document.removeEventListener('mousedown', handleEvent)
     }
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [hasListener])
 
   useDebugValue(listener ? 'MouseDown On' : 'MouseDown Off')

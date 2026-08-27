@@ -122,8 +122,8 @@ describe('useClickOutsideEvent', () => {
    * The listener must always see the latest props/state, no matter what kind of component calls
    * the hook. React's native `useEffectEvent` fails this in `forwardRef` and `memo` components
    * on React 19.2 (https://github.com/facebook/react/issues/34818), which is why the hook
-   * inlines the `use-effect-event` ponyfill — this test guards against switching to the native
-   * hook before the upstream fix ships.
+   * uses `use-effect-event` instead — this test guards against switching to the native hook
+   * before the upstream fix ships.
    */
   it('the listener sees the latest props in forwardRef and memo components', async () => {
     const user = userEvent.setup()
