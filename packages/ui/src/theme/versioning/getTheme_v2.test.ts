@@ -1,3 +1,5 @@
+// oxlint-disable no-deprecated -- this suite verifies conversion from the deprecated v0 theme shape
+
 import {describe, expect, it} from 'vitest'
 
 import {buildTheme} from '../build/buildTheme'
