@@ -80,7 +80,7 @@
     "motion": "^12.43.0",
     "react-compiler-runtime": "1.0.0",
     "react-refractor": "^2.2.0",
-    "use-effect-event": "^2.0.3"
+    "use-effect-event": "^2.0.4"
   },
   "devDependencies": {
     "@sanity/pkg-utils": "^8.1.29",
