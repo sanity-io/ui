@@ -12,14 +12,14 @@ strictPeerDependencies: false
 # so that keeps an explicit range there when needed. (See packageExtensions for
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
-  '@sanity/blueprints': ^0.23.6
-  '@sanity/client': ^8.2.0
-  '@sanity/functions': ^1.6.8
-  '@sanity/tsdown-config': ^0.26.2
-  '@sanity/vanilla-extract-vite-plugin': ^0.2.13
+  '@sanity/blueprints': ^0.24.0
+  '@sanity/client': ^8.3.0
+  '@sanity/functions': ^1.6.9
+  '@sanity/tsdown-config': ^0.27.0
+  '@sanity/vanilla-extract-vite-plugin': ^0.2.16
   '@types/node': ^24.13.3
   '@types/react': ^19.2.18
-  '@types/react-dom': ^19.2.4
+  '@types/react-dom': ^19.2.5
   '@types/react-is': ^19.2.0
   '@vitejs/plugin-react': ^6.1.0
   oxc-transform-react: ^0.147.0
@@ -29,7 +29,7 @@ catalog:
   react-refractor: ^4.0.0
   refractor: ^5.0.0
   rimraf: ^5.0.5
-  sanity: ^6.10.1
+  sanity: ^6.11.0
   styled-components: ^6.5.3
   tsdown: ^0.22.14
   typescript: 7.0.2
@@ -78,6 +78,9 @@ minimumReleaseAgeExclude:
   - motion@13.0.0
   - styled-components@6.5.2
   - eslint-plugin-storybook@10.5.10
+  - use-effect-event@2.0.4
+
+minimumReleaseAgeExcludePrune: true
 
 # @testing-library/jest-dom/vitest imports `vitest` without declaring it, so it
 # falls back to pnpm's hidden hoist — which can resolve to another workspace

@@ -12,16 +12,16 @@
     "schema:deploy": "sanity schema deploy"
   },
   "dependencies": {
-    "@sanity/code-input": "^7.3.5",
+    "@sanity/code-input": "^7.3.7",
     "@sanity/icons": "workspace:*",
     "@sanity/logos": "workspace:*",
     "@sanity/themer": "workspace:*",
     "@sanity/ui": "workspace:*",
-    "@sanity/vision": "^6.10.1",
+    "@sanity/vision": "^6.11.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "sanity": "catalog:",
-    "sanity-plugin-media": "^6.1.4",
+    "sanity-plugin-media": "^6.1.7",
     "styled-components": "catalog:"
   },
   "devDependencies": {
