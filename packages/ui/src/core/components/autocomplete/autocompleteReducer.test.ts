@@ -58,6 +58,18 @@ describe('autocompleteReducer', () => {
     expect(reduce({type: 'root/open', query: 'opening query'})).toEqual(state)
   })
 
+  it('preserves an empty query when opening', () => {
+    expect(
+      reduce(
+        {type: 'root/open', query: 'opening query'},
+        {
+          ...state,
+          query: '',
+        },
+      ),
+    ).toEqual({...state, query: ''})
+  })
+
   it('tracks the active option and list focus', () => {
     expect(
       reduce({
