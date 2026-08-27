@@ -3,10 +3,12 @@ import {type API, type FileInfo} from 'jscodeshift'
 import type {BaseOptions} from '../../../types/BaseOptions'
 import {addAttribute} from '../../../utils/addAttribute'
 import {getComponentLocalNames} from '../../../utils/getComponentLocalNames'
+import {getStyledComponentAliases} from '../../../utils/getStyledComponentAliases'
 import {shouldTransformComponent} from '../../../utils/shouldTransformComponent'
 import {transformAttributes} from '../../../utils/transformAttributes'
 import {transformComponent} from '../../../utils/transformComponent'
 import {transformImport} from '../../../utils/transformImport'
+import {transformStyledComponents} from '../../../utils/transformStyledComponents'
 import {HEADING_MODS} from './heading.mods'
 
 const TODO_WARNING = 'Please double check the Heading migration below'
@@ -21,8 +23,16 @@ export default function transform(
 
   return transformComponent(fileInfo, api, ({j, root, markChanged}) => {
     const localNames = getComponentLocalNames(j, root, 'Heading', options)
+    const styledAliases = getStyledComponentAliases(
+      j,
+      root,
+      'Heading',
+      fileInfo.path,
+      localNames,
+      options,
+    )
 
-    if (!shouldTransformComponent(j, root, 'Heading', localNames, options)) {
+    if (!shouldTransformComponent(j, root, 'Heading', localNames, options, styledAliases)) {
       return
     }
 
@@ -30,24 +40,45 @@ export default function transform(
       markChanged()
     }
 
-    root
-      .find(j.JSXOpeningElement, {
-        name: {type: 'JSXIdentifier', name: 'Heading'},
+    root.find(j.JSXOpeningElement).forEach((path) => {
+      let changed = false
+      const name = path.node.name
+
+      if (name.type !== 'JSXIdentifier' || !localNames.has(name.name)) {
+        return
+      }
+
+      if (transformAttributes(j, path, HEADING_MODS, TODO_WARNING)) {
+        changed = true
+      }
+
+      if (addAttribute(j, path.node, 'trim', true)) {
+        changed = true
+      }
+
+      if (changed) {
+        markChanged()
+      }
+    })
+
+    if (
+      transformStyledComponents(j, root, styledAliases, () => true, {
+        callback: (path) => {
+          let changed = false
+
+          if (transformAttributes(j, path, HEADING_MODS, TODO_WARNING)) {
+            changed = true
+          }
+
+          if (addAttribute(j, path.node, 'trim', true)) {
+            changed = true
+          }
+
+          return changed
+        },
       })
-      .forEach((path) => {
-        let changed = false
-
-        if (transformAttributes(j, path, HEADING_MODS, TODO_WARNING)) {
-          changed = true
-        }
-
-        if (addAttribute(j, path.node, 'trim', true)) {
-          changed = true
-        }
-
-        if (changed) {
-          markChanged()
-        }
-      })
+    ) {
+      markChanged()
+    }
   })
 }

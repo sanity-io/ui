@@ -1,4 +1,6 @@
-import {defineInlineTest} from '../../../utils/testUtils'
+import {expect} from 'vitest'
+
+import {defineCrossFileTest, defineInlineTest} from '../../../utils/testUtils'
 import transform from './heading'
 
 defineInlineTest(
@@ -84,4 +86,85 @@ defineInlineTest(
   <Heading trim={true} />
   `,
   'warns if as props is missing',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Heading} from '@sanity/ui'
+
+    export const RootHeading = styled(Heading)(({theme}) => ({}))
+  `,
+  `
+    import {RootHeading} from './Component.styled'
+
+    export function RootCode() {
+      return <RootHeading flex="auto" />
+    }
+  `,
+  (output) => {
+    expect(output.replace(/\s+/g, ' ')).toContain(
+      '<RootHeading style={{ flex: "1 1 auto" }} trim={true} />',
+    )
+  },
+  'transforms attributes on imported styled Heading wrappers',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Heading} from '@sanity/ui'
+
+    export const RootHeading = styled(Heading)(({theme}) => ({}))
+  `,
+  `
+    import {Heading} from 'another-package'
+    import {RootHeading} from './Component.styled'
+
+    export function Component() {
+      return (
+        <>
+          <RootHeading flex="auto" />
+          <Heading flex="auto" />
+        </>
+      )
+    }
+  `,
+  (output) => {
+    expect(output.replace(/\s+/g, ' ')).toContain(
+      '<RootHeading style={{ flex: "1 1 auto" }} trim={true} />',
+    )
+    expect(output).toContain('<Heading flex="auto" />')
+  },
+  'does not transform attributes on unrelated Heading from another package',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Heading} from '@sanity/ui'
+
+    export const RootHeading = styled(Heading)(({theme}) => ({}))
+  `,
+  `
+    import {RootHeading} from './index'
+
+    export function Component() {
+      return <RootHeading flex="auto" />
+    }
+  `,
+  (output) => {
+    expect(output.replace(/\s+/g, ' ')).toContain(
+      '<RootHeading style={{ flex: "1 1 auto" }} trim={true} />',
+    )
+  },
+  'transforms styled Heading wrappers imported through barrel re-exports',
+  {
+    extraFiles: {
+      'index.ts': `export {RootHeading} from './Component.styled'`,
+    },
+  },
 )
