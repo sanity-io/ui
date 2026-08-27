@@ -672,8 +672,8 @@ importers:
         specifier: 'catalog:'
         version: 4.0.0(react@19.2.8)
       use-effect-event:
-        specifier: ^2.0.3
-        version: 2.0.3(react@19.2.8)
+        specifier: ^2.0.4
+        version: 2.0.4(react@19.2.8)
     devDependencies:
       '@sanity/tsdown-config':
         specifier: 'catalog:'
@@ -8622,6 +8622,11 @@ packages:
 
   use-effect-event@2.0.3:
     resolution: {integrity: sha512-fz1en+z3fYXCXx3nMB8hXDMuygBltifNKZq29zDx+xNJ+1vEs6oJlYd9sK31vxJ0YI534VUsHEBY0k2BATsmBQ==}
+    peerDependencies:
+      react: ^19.2.8
+
+  use-effect-event@2.0.4:
+    resolution: {integrity: sha512-il5ezAwTIxg1dr+eXP+1SS1EpXe6IFy1oADvGxmiCNGCDX1X+ygERRDOFoCyzc+r6ktqag3VITmrw1ZPfoig1g==}
     peerDependencies:
       react: ^19.2.8
 
@@ -17424,6 +17429,10 @@ snapshots:
       react: 19.2.8
 
   use-effect-event@2.0.3(react@19.2.8):
+    dependencies:
+      react: 19.2.8
+
+  use-effect-event@2.0.4(react@19.2.8):
     dependencies:
       react: 19.2.8
 
