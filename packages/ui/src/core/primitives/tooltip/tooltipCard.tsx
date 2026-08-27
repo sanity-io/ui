@@ -87,11 +87,7 @@ export function TooltipCard(
       scheme={scheme}
       shadow={shadow}
       style={rootStyle}
-      variants={POPOVER_MOTION_PROPS.card}
-      transition={POPOVER_MOTION_PROPS.transition}
-      initial={animate ? ['hidden', 'initial'] : undefined}
-      animate={animate ? ['visible', 'scaleIn'] : undefined}
-      exit={animate ? ['hidden', 'scaleOut'] : undefined}
+      {...(animate ? POPOVER_MOTION_PROPS : undefined)}
     >
       {children}
 
