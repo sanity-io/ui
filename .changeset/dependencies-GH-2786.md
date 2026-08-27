@@ -2,4 +2,4 @@
 "@sanity/ui": patch
 ---
 
-fix(deps): update dependency use-effect-event to ^2.0.4
+fix(deps): pin use-effect-event to ^2.0.3 for CI policy
