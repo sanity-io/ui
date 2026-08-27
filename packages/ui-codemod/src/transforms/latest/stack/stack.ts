@@ -17,7 +17,7 @@ const STACK_TODO_WARNING = 'Please double check the Stack migration below'
 const FLEX_TODO_WARNING = 'Please double check the Flex migration below'
 const STYLED_TODO_WARNING = 'Please double check styled(Stack) migration below'
 
-function hasFlexAttrs(attrs: JSXElement['openingElement']['attributes']) {
+function replaceWithFlex(attrs: JSXElement['openingElement']['attributes']) {
   if (!attrs) {
     return false
   }
@@ -66,9 +66,7 @@ export default function transform(
       replaceElement(
         j,
         root,
-        (attrs) => {
-          return hasFlexAttrs(attrs)
-        },
+        (attrs) => replaceWithFlex(attrs),
         {
           element: 'Stack',
           localNames,
@@ -99,7 +97,7 @@ export default function transform(
         j,
         root,
         (attrs) => {
-          return !hasFlexAttrs(attrs)
+          return !replaceWithFlex(attrs)
         },
         {
           element: 'Stack',
@@ -115,7 +113,7 @@ export default function transform(
     }
 
     if (
-      transformStyledComponents(j, root, styledAliases, (attrs) => !hasFlexAttrs(attrs), {
+      transformStyledComponents(j, root, styledAliases, (attrs) => !replaceWithFlex(attrs), {
         warning: STYLED_TODO_WARNING,
         callback: (path) => transformAttributes(j, path, STACK_MODS, STACK_TODO_WARNING),
       })
