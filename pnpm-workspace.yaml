@@ -14,6 +14,7 @@ allowBuilds:
 # default minimum release age (1 day)
 minimumReleaseAgeExclude:
   - '@sanity/pkg-utils'
+  - use-effect-event
 
 overrides:
   '@types/react': ^19.2.17
