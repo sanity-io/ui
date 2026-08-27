@@ -19,7 +19,7 @@ catalog:
   '@sanity/vanilla-extract-vite-plugin': ^0.2.13
   '@types/node': ^24.13.3
   '@types/react': ^19.2.18
-  '@types/react-dom': ^19.2.4
+  '@types/react-dom': ^19.2.5
   '@types/react-is': ^19.2.0
   '@vitejs/plugin-react': ^6.1.0
   oxc-transform-react: ^0.147.0
