@@ -65,6 +65,7 @@ minimumReleaseAgeExclude:
   - sanity
   - tsdown
   - verkit
+  - use-effect-event@2.0.4
   - framer-motion@13.0.0
   - motion-dom@13.0.0
   - motion-utils@13.0.0
