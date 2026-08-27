@@ -3,12 +3,12 @@ import {describe, expect, it, vi} from 'vitest'
 import {defineLazyProperty} from './lazy'
 
 interface Subject {
-  value: string
+  value?: string
 }
 
 describe('defineLazyProperty', () => {
   it('computes the value once and replaces the getter', () => {
-    const subject = {} as Subject
+    const subject: Subject = {}
     const factory = vi.fn(() => 'computed')
 
     defineLazyProperty(subject, 'value', factory)
@@ -25,7 +25,7 @@ describe('defineLazyProperty', () => {
   })
 
   it('is enumerable before and after evaluation', () => {
-    const subject = {} as Subject
+    const subject: Subject = {}
 
     defineLazyProperty(subject, 'value', () => 'computed')
 
@@ -35,7 +35,7 @@ describe('defineLazyProperty', () => {
   })
 
   it('retries evaluation after the factory throws', () => {
-    const subject = {} as Subject
+    const subject: Subject = {}
     const factory = vi.fn<() => string>()
     factory.mockImplementationOnce(() => {
       throw new Error('not ready')
