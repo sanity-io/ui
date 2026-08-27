@@ -3,7 +3,7 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @beta */
-export interface ModalProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
+export interface DialogProps extends Omit<React.ComponentProps<'dialog'>, 'open'> {
   /**
    * Text for the dialog heading.
    * @remarks Recommended for accessibility. The component sets `aria-labelledby` to the heading when you give this prop.
