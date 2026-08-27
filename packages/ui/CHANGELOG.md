@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 3.5.4
+
+### Patch Changes
+
+- [#2756](https://github.com/sanity-io/ui/pull/2756) [`77bd0f4`](https://github.com/sanity-io/ui/commit/77bd0f4b12aa0c8550df591f828eaeafad36a1c3) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^13.1.1
+
+- [#2787](https://github.com/sanity-io/ui/pull/2787) [`05079f1`](https://github.com/sanity-io/ui/commit/05079f14d3baa8853de237f8beecd5fbf4ba2b1b) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency use-effect-event to ^2.0.4
+
 ## 3.5.3
 
 ### Patch Changes
