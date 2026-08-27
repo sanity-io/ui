@@ -189,8 +189,8 @@ importers:
         specifier: npm:@sanity/styled-components@6.1.23
         version: '@sanity/styled-components@6.1.23(react-dom@19.2.7(react@19.2.7))(react@19.2.7)'
       use-effect-event:
-        specifier: ^2.0.4
-        version: 2.0.4(react@19.2.7)
+        specifier: ^2.0.3
+        version: 2.0.3(react@19.2.7)
     devDependencies:
       '@sanity/pkg-utils':
         specifier: ^8.1.29
@@ -4617,8 +4617,8 @@ packages:
     resolution: {integrity: sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg==}
     deprecated: Please see https://github.com/lydell/urix#deprecated
 
-  use-effect-event@2.0.4:
-    resolution: {integrity: sha512-il5ezAwTIxg1dr+eXP+1SS1EpXe6IFy1oADvGxmiCNGCDX1X+ygERRDOFoCyzc+r6ktqag3VITmrw1ZPfoig1g==}
+  use-effect-event@2.0.3:
+    resolution: {integrity: sha512-fz1en+z3fYXCXx3nMB8hXDMuygBltifNKZq29zDx+xNJ+1vEs6oJlYd9sK31vxJ0YI534VUsHEBY0k2BATsmBQ==}
     peerDependencies:
       react: ^19.2.7
 
@@ -9094,7 +9094,7 @@ snapshots:
 
   urix@0.1.0: {}
 
-  use-effect-event@2.0.4(react@19.2.7):
+  use-effect-event@2.0.3(react@19.2.7):
     dependencies:
       react: 19.2.7
 
