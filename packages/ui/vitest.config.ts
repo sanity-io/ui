@@ -7,6 +7,19 @@ export default defineConfig({
   // exports must evaluate)
   plugins: [vanillaExtractPlugin()],
   test: {
+    coverage: {
+      exclude: ['src/**/*.test.{ts,tsx}', 'src/**/*.css.ts'],
+      include: ['src/**/*.{ts,tsx}'],
+      provider: 'v8',
+      reporter: ['text', 'json-summary', 'html'],
+      reportsDirectory: 'coverage',
+      thresholds: {
+        branches: 37,
+        functions: 53,
+        lines: 50,
+        statements: 48,
+      },
+    },
     experimental: {
       // Print the slowest imports after test runs, to keep the cost of heavy
       // import graphs (e.g. barrel files) visible in CI and local runs.
