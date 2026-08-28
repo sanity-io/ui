@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.7
+
+### Patch Changes
+
+- 99592db: add missing codemods to package.json for build
+
 ## 1.0.0-alpha.6
 
 ### Patch Changes
