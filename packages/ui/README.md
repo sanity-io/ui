@@ -24,6 +24,8 @@ npx @sanity/ui@alpha init
 
 `@sanity/icons` is a dependency of this package, so your package manager installs it either way. `init` also adds it to your own `package.json` because you import icons directly to pass to components, and under pnpm an import that isn't declared in your project doesn't resolve.
 
+Import each icon from its own subpath, as in `import {AddIcon} from '@sanity/icons/Add'`. The root entry stopped re-exporting individual icons in `@sanity/icons` v5. It now exports the dynamic `Icon` component and the `icons` map only.
+
 - `--dry` print the plan and exit without changing anything
 - `--yes` accept every prompt with its default (non-interactive, for CI and agents)
 - `--cwd <dir>` run against another directory
@@ -46,7 +48,7 @@ import '@sanity/ui/styles.css'
 
 ```tsx
 import {Box, Flex, Card, Heading, Text, Button} from '@sanity/ui'
-import {AddIcon} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
 
 export default function App() {
   return (

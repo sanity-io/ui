@@ -302,8 +302,8 @@ importers:
   apps/mount-testing:
     dependencies:
       '@sanity/icons':
-        specifier: ^3.7.4
-        version: 3.7.4(react@19.2.6)
+        specifier: ^5.2.1
+        version: 5.2.1(react@19.2.6)
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -360,8 +360,8 @@ importers:
   apps/storybook:
     dependencies:
       '@sanity/icons':
-        specifier: ^3.7.4
-        version: 3.7.4(react@19.2.6)
+        specifier: ^5.2.1
+        version: 5.2.1(react@19.2.6)
       react:
         specifier: ^19.2.6
         version: 19.2.6
@@ -445,8 +445,8 @@ importers:
         specifier: 0.0.2-alpha.4
         version: 0.0.2-alpha.4
       '@sanity/icons':
-        specifier: ^3.7.4
-        version: 3.7.4(react@19.2.6)
+        specifier: ^5.2.1
+        version: 5.2.1(react@19.2.6)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -2796,6 +2796,12 @@ packages:
   '@sanity/icons@3.7.4':
     resolution: {integrity: sha512-O9MnckiDsphFwlRS8Q3kj3n+JYUZ0UzKRujnSikMZOKI0dayucRe4U2XvxikRhJnFhcEJXW2RkWJoBaCoup9Sw==}
     engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: ^19.2.6
+
+  '@sanity/icons@5.2.1':
+    resolution: {integrity: sha512-P5gY1HRungh4RgCcypdIpu/SKoTwRBTttpbHntZjdW1MO3MK6xEOs+pbAzSARyhh22OcN9PkBBEYk2FL34BvfQ==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       react: ^19.2.6
 
@@ -8697,6 +8703,10 @@ snapshots:
   '@sanity/color@3.0.6': {}
 
   '@sanity/icons@3.7.4(react@19.2.6)':
+    dependencies:
+      react: 19.2.6
+
+  '@sanity/icons@5.2.1(react@19.2.6)':
     dependencies:
       react: 19.2.6
 

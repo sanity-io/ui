@@ -1,5 +1,6 @@
 import '@sanity/ui/styles.css'
-import {AddIcon, EditIcon} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
+import {EditIcon} from '@sanity/icons/Edit'
 import {
   Box,
   Button,
