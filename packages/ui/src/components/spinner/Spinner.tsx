@@ -1,4 +1,4 @@
-import {SpinnerIcon} from '@sanity/icons'
+import {SpinnerIcon} from '@sanity/icons/Spinner'
 import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'

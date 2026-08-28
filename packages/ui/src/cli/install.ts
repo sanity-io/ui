@@ -36,7 +36,8 @@ function exactFromRange(range: string | undefined): string | null {
  *
  * Icons is already a dependency, so the package manager installs it either way.
  * It is listed explicitly because apps import icons directly to pass to
- * components (`<Button iconStart={AddIcon} />`), and under pnpm an import that
+ * components (`import {AddIcon} from '@sanity/icons/Add'`, then
+ * `<Button iconStart={AddIcon} />`), and under pnpm an import that
  * isn't in the app's own package.json doesn't resolve. Dependencies the app
  * never imports itself (react-refractor, clsx) are left to the package manager.
  * React/react-dom are peers that belong to the host app, so they are left out

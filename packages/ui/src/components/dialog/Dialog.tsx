@@ -1,4 +1,4 @@
-import {CloseIcon} from '@sanity/icons'
+import {CloseIcon} from '@sanity/icons/Close'
 import clsx from 'clsx'
 import {type ComponentProps, useEffect, useId, useRef} from 'react'
 

@@ -46,7 +46,7 @@ import '@sanity/ui/styles.css'
 
 ```tsx
 import {Box, Flex, Card, Heading, Text, Button} from '@sanity/ui'
-import {AddIcon} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
 
 export default function App() {
   return (
