@@ -29,7 +29,7 @@
     "next": "^16.3.3",
     "pako": "^3.0.1",
     "prettier": "^3.9.6",
-    "qs": "^6.15.3",
+    "qs": "^6.16.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-refractor": "catalog:",
