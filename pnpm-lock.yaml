@@ -10,8 +10,8 @@ catalogs:
       specifier: ^0.24.0
       version: 0.24.0
     '@sanity/client':
-      specifier: ^8.3.0
-      version: 8.3.0
+      specifier: ^8.4.0
+      version: 8.4.0
     '@sanity/functions':
       specifier: ^1.7.1
       version: 1.7.1
@@ -114,7 +114,7 @@ importers:
         version: 0.24.0(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       '@sanity/client':
         specifier: 'catalog:'
-        version: 8.3.0(vitest@4.1.11)
+        version: 8.4.0(vitest@4.1.11)
       '@sanity/functions':
         specifier: 'catalog:'
         version: 1.7.1(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)
@@ -211,7 +211,7 @@ importers:
     devDependencies:
       '@sanity/client':
         specifier: 'catalog:'
-        version: 8.3.0(vitest@4.1.11)
+        version: 8.4.0(vitest@4.1.11)
       '@sanity/icons':
         specifier: workspace:*
         version: link:../../packages/icons
@@ -488,7 +488,7 @@ importers:
         version: 2.6.2
       '@sanity/client':
         specifier: 'catalog:'
-        version: 8.3.0(vitest@4.1.11)
+        version: 8.4.0(vitest@4.1.11)
       '@sanity/tsconfig':
         specifier: ^2.2.1
         version: 2.2.1
@@ -4023,6 +4023,10 @@ packages:
 
   '@sanity/client@8.3.0':
     resolution: {integrity: sha512-h4Xk8Xb91vbBpgbLNqQ8Wc37W4rFE4Rc9lcsC01XaEb2dDVp/B5EtvgKCRR5HmVfVcMVyiw4+r+Qmrr+wtjJ/g==}
+    engines: {node: '>=22.12.0'}
+
+  '@sanity/client@8.4.0':
+    resolution: {integrity: sha512-rwMtDxH3x9dc8ZiCMRDLStZoCr6MSPrH2LH4NIxWTCZ9Vz5OSgg0RolZy+ccM8p4yzK5lgC9XMF8tF6zsje0gQ==}
     engines: {node: '>=22.12.0'}
 
   '@sanity/code-input@7.3.7':
@@ -12425,6 +12429,15 @@ snapshots:
       rxjs: 7.8.2
 
   '@sanity/client@8.3.0(vitest@4.1.11)':
+    dependencies:
+      eventsource: 5.1.1
+      get-it: 9.5.1(vitest@4.1.11)
+      obug: 2.1.4
+      rxjs: 7.8.2
+    transitivePeerDependencies:
+      - vitest
+
+  '@sanity/client@8.4.0(vitest@4.1.11)':
     dependencies:
       eventsource: 5.1.1
       get-it: 9.5.1(vitest@4.1.11)
