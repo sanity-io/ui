@@ -3,10 +3,7 @@ import {styled} from 'styled-components'
 import {ThemeColorStateToneKey} from '../../../theme/system/color/_system'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {Card, type CardProps} from '../../primitives/card/card'
-import {Flex} from '../../primitives/flex/flex'
 import type {ButtonTone} from '../../types/button'
-
-const LOADING_BAR_HEIGHT = 2
 
 export const STATUS_CARD_TONE = {
   error: 'critical',
@@ -22,50 +19,12 @@ export const BUTTON_TONE = {
   info: 'neutral',
 } satisfies {[key: string]: ButtonTone}
 
-export const TextBox = styled(Flex)`
-  overflow-x: auto;
-`
-
-export const StyledToast = styled(Card)`
-  pointer-events: all;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  overflow: clip;
-
-  &[data-has-duration] {
-    padding-bottom: calc(${LOADING_BAR_HEIGHT}px / 2);
-  }
-`
-
-export const LoadingBar = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: 0px;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  pointer-events: none;
-  z-index: -1;
-  overflow: hidden;
-  overflow: clip;
-  background: transparent;
-  align-items: flex-end;
-  will-change: opacity;
-`
-
-export const LoadingBarMask = styled(Card)`
-  position: absolute;
-  top: 0;
-  left: -${LOADING_BAR_HEIGHT}px;
-  right: -${LOADING_BAR_HEIGHT}px;
-  bottom: ${LOADING_BAR_HEIGHT}px;
-  z-index: 1;
-`
-
 type LoadingBarProgressProps = Omit<CardProps, 'tone'> & {
   tone: ThemeColorStateToneKey
 }
+// Stays on styled-components: the theme-derived background-color must beat
+// Card's own runtime `background-color: var(--card-bg-color)` at the same
+// specificity, which only holds while both rules live in the runtime stylesheet.
 export const LoadingBarProgress = styled<React.ComponentType<LoadingBarProgressProps>>(Card)`
   display: block;
   height: 100%;
