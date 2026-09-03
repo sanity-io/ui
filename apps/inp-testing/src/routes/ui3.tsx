@@ -1,10 +1,12 @@
 import {useState} from 'react'
 import {
+  Badge,
   Box,
   Button,
   Card,
   Checkbox,
   Dialog,
+  Flex,
   Grid,
   Heading,
   Inline,
@@ -24,6 +26,7 @@ const TONE_CARD_COUNT = 500
 const PANEL_CARD_COUNT = 300
 const TOOLTIP_COUNT = 300
 const POPOVER_COUNT = 300
+const BADGE_COUNT = 500
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -289,6 +292,38 @@ function PopoverMountSection() {
   )
 }
 
+/** Large blast radius, style-focused: one click changes a style prop on every badge. */
+function BadgeToneToggleSection() {
+  const [tone, setTone] = useState<'neutral' | 'caution'>('neutral')
+
+  return (
+    <Card tone="neutral" padding={4}>
+      <Stack gap={3}>
+        <Text size={1} weight="semibold">
+          6. Badge tone toggle ({BADGE_COUNT} badges)
+        </Text>
+        <Text size={1}>One click restyles all {BADGE_COUNT} badges.</Text>
+        <Inline>
+          <Button
+            text={`Set badge tone: ${tone === 'neutral' ? 'caution' : 'neutral'}`}
+            onClick={() => setTone((value) => (value === 'neutral' ? 'caution' : 'neutral'))}
+          />
+        </Inline>
+        <div style={scrollAreaStyle}>
+          {/* UI 3 Badge has no text prop, so the label is children, as in real usage. */}
+          <Flex wrap="wrap" gap={2}>
+            {Array.from({length: BADGE_COUNT}, (_, index) => (
+              <Badge key={index} tone={tone}>
+                Badge {index + 1}
+              </Badge>
+            ))}
+          </Flex>
+        </div>
+      </Stack>
+    </Card>
+  )
+}
+
 function Ui3() {
   return (
     <ThemeProvider theme={theme}>
@@ -301,6 +336,7 @@ function Ui3() {
         <PanelSwapSection />
         <TooltipMountSection />
         <PopoverMountSection />
+        <BadgeToneToggleSection />
       </Stack>
     </ThemeProvider>
   )

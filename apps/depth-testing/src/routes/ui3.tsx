@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {
+  Badge,
   Box,
   Button,
   Card,
@@ -100,6 +101,13 @@ function Ui3() {
               <Text as="a" href="https://example.org">
                 Refer to the Prime Directive
               </Text>
+            </Inline>
+          </Box>
+          <Box marginY={3}>
+            <Inline gap={2}>
+              <Badge tone="positive">Shields nominal</Badge>
+              <Badge tone="caution">Deflector array offline</Badge>
+              <Badge tone="critical">Warp core breach</Badge>
             </Inline>
           </Box>
         </Card>

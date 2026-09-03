@@ -2,6 +2,7 @@ import 'ui4/css/index.css'
 import {AddIcon} from '@sanity/icons/Add'
 import {Profiler} from 'react'
 import {
+  Badge,
   Box,
   Button,
   Card,
@@ -206,6 +207,14 @@ export default function Ui4() {
       <Profiler id="Icon" onRender={handleOnRender}>
         {iterator.map((i) => (
           <AddIcon key={i} />
+        ))}
+      </Profiler>
+
+      {/* UI 4 Badge has no text prop, so the label is children. */}
+      <h2>{count} Badges</h2>
+      <Profiler id="Badge" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Badge key={i}>Badge</Badge>
         ))}
       </Profiler>
 

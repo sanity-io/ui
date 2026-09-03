@@ -1,10 +1,12 @@
 import '@sanity/ui/styles.css'
 import {
+  Badge,
   Box,
   Button,
   Card,
   Checkbox,
   Dialog,
+  Flex,
   Grid,
   Heading,
   HStack,
@@ -23,6 +25,7 @@ const TONE_CARD_COUNT = 500
 const PANEL_CARD_COUNT = 300
 const TOOLTIP_COUNT = 300
 const POPOVER_COUNT = 300
+const BADGE_COUNT = 500
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -255,6 +258,35 @@ function PopoverMountSection() {
   )
 }
 
+/** Large blast radius, style-focused: one click changes a style prop on every badge. */
+function BadgeToneToggleSection() {
+  const [tone, setTone] = useState<'neutral' | 'caution'>('neutral')
+
+  return (
+    <Card density="regular">
+      <VStack gap={3}>
+        <Text size={1} weight="semibold">
+          6. Badge tone toggle ({BADGE_COUNT} badges)
+        </Text>
+        <Text size={1}>One click restyles all {BADGE_COUNT} badges.</Text>
+        <div>
+          <Button
+            text={`Set badge tone: ${tone === 'neutral' ? 'caution' : 'neutral'}`}
+            onClick={() => setTone((value) => (value === 'neutral' ? 'caution' : 'neutral'))}
+          />
+        </div>
+        <div style={scrollAreaStyle}>
+          <Flex flexWrap="wrap" gap={2}>
+            {Array.from({length: BADGE_COUNT}, (_, index) => (
+              <Badge key={index} tone={tone} text={`Badge ${index + 1}`} />
+            ))}
+          </Flex>
+        </div>
+      </VStack>
+    </Card>
+  )
+}
+
 function Ui5() {
   return (
     <VStack gap={4}>
@@ -266,6 +298,7 @@ function Ui5() {
       <PanelSwapSection />
       <TooltipMountSection />
       <PopoverMountSection />
+      <BadgeToneToggleSection />
     </VStack>
   )
 }
