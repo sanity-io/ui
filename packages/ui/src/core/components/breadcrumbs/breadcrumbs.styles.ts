@@ -2,16 +2,9 @@ import {styled} from 'styled-components'
 
 import {Button} from '../../primitives/button/button'
 
-export const StyledBreadcrumbs = styled.ol`
-  margin: 0;
-  padding: 0;
-  display: flex;
-  list-style: none;
-  align-items: center;
-  white-space: nowrap;
-  line-height: 0;
-`
-
+// Stays on styled-components: `margin: -4px` has to beat Button's runtime
+// `margin: 0` at the same specificity, which only holds while both rules live
+// in the runtime stylesheet.
 export const ExpandButton = styled(Button)`
   appearance: none;
   margin: -4px;
