@@ -1,3 +1,4 @@
+import {clsx} from 'clsx/lite'
 import {Children, Fragment, isValidElement, useCallback, useMemo, useRef, useState} from 'react'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
@@ -6,7 +7,9 @@ import {Popover} from '../../primitives/popover/popover'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
 import {_getArrayProp} from '../../styles/helpers'
-import {ExpandButton, StyledBreadcrumbs} from './breadcrumbs.styles'
+import {ExpandButton} from './breadcrumbs.styles'
+
+import {breadcrumbs} from './breadcrumbs.css'
 
 /**
  * @beta
@@ -27,7 +30,7 @@ export interface BreadcrumbsProps {
 export function Breadcrumbs(
   props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'type'>,
 ) {
-  const {children, gap = 2, maxLength, ref, separator, ...restProps} = props
+  const {children, className, gap = 2, maxLength, ref, separator, ...restProps} = props
   const space = _getArrayProp(gap)
   const [open, setOpen] = useState(false)
   const expandElementRef = useRef<HTMLButtonElement | null>(null)
@@ -52,7 +55,7 @@ export function Breadcrumbs(
   })
 
   return (
-    <StyledBreadcrumbs data-ui="Breadcrumbs" {...restProps} ref={ref}>
+    <ol className={clsx(breadcrumbs, className)} data-ui="Breadcrumbs" {...restProps} ref={ref}>
       {items.map((item, itemIndex) => (
         // oxlint-disable-next-line no-array-index-key
         <Fragment key={itemIndex}>
@@ -64,7 +67,7 @@ export function Breadcrumbs(
           <Box as="li">{item}</Box>
         </Fragment>
       ))}
-    </StyledBreadcrumbs>
+    </ol>
   )
 }
 
