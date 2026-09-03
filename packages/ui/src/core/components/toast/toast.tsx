@@ -1,21 +1,17 @@
 import {CloseIcon} from '@sanity/icons/Close'
+import {clsx} from 'clsx/lite'
 import {motion, stagger, type Variant, type Variants} from 'motion/react'
 
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Box} from '../../primitives/box/box'
 import {Button} from '../../primitives/button/button'
+import {Card} from '../../primitives/card/card'
 import {Flex} from '../../primitives/flex/flex'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
-import {
-  BUTTON_TONE,
-  LoadingBar,
-  LoadingBarMask,
-  LoadingBarProgress,
-  STATUS_CARD_TONE,
-  StyledToast,
-  TextBox,
-} from './styles'
+import {BUTTON_TONE, LoadingBarProgress, STATUS_CARD_TONE} from './styles'
+
+import {loadingBar, loadingBarMask, toast, toastText} from './toast.css'
 
 /**
  * @public
@@ -64,6 +60,7 @@ export function Toast(
     >,
 ): React.JSX.Element {
   const {
+    className,
     closable,
     description,
     duration,
@@ -91,7 +88,8 @@ export function Toast(
   const exit: ContainerVariants[] = ['hidden', 'slideOut']
 
   return (
-    <MotionToast
+    <MotionCard
+      className={clsx(toast, className)}
       data-ui="Toast"
       role={role}
       {...restProps}
@@ -100,7 +98,7 @@ export function Toast(
       radius={radius}
       shadow={2}
       tone={cardTone}
-      forwardedAs="li"
+      as="li"
       layout="position"
       variants={container}
       initial={initial}
@@ -109,7 +107,7 @@ export function Toast(
       transition={transition}
     >
       <MotionFlex align="flex-start" variants={content} transition={transition}>
-        <TextBox flex={1} padding={3}>
+        <Flex className={toastText} flex={1} padding={3}>
           <Stack gap={3}>
             {title && (
               <Text size={1} weight="medium">
@@ -122,7 +120,7 @@ export function Toast(
               </MotionText>
             )}
           </Stack>
-        </TextBox>
+        </Flex>
 
         {closable && (
           <Box padding={1}>
@@ -139,8 +137,8 @@ export function Toast(
         )}
       </MotionFlex>
       {hasDuration && (
-        <MotionLoadingBar variants={content} transition={transition}>
-          <LoadingBarMask tone={cardTone} radius={radius} />
+        <motion.div className={loadingBar} variants={content} transition={transition}>
+          <Card className={loadingBarMask} tone={cardTone} radius={radius} />
           <MotionLoadingBarProgress
             key={`progress-${updatedAt}`}
             tone={cardTone}
@@ -149,9 +147,9 @@ export function Toast(
             transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
             onAnimationComplete={onClose}
           />
-        </MotionLoadingBar>
+        </motion.div>
       )}
-    </MotionToast>
+    </MotionCard>
   )
 }
 
@@ -193,8 +191,7 @@ const content = {
   },
 } satisfies Partial<Record<ContainerVariants, Variant>>
 
-const MotionToast = motion.create(StyledToast)
+const MotionCard = motion.create(Card)
 const MotionFlex = motion.create(Flex)
 const MotionText = motion.create(Text)
-const MotionLoadingBar = motion.create(LoadingBar)
 const MotionLoadingBarProgress = motion.create(LoadingBarProgress)
