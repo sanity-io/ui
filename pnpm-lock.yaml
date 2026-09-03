@@ -16,8 +16,8 @@ catalogs:
       specifier: ^1.7.1
       version: 1.7.1
     '@sanity/tsdown-config':
-      specifier: ^0.27.0
-      version: 0.27.0
+      specifier: ^0.27.1
+      version: 0.27.1
     '@sanity/vanilla-extract-vite-plugin':
       specifier: ^0.2.17
       version: 0.2.17
@@ -416,7 +416,7 @@ importers:
     devDependencies:
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.27.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.27.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -443,7 +443,7 @@ importers:
         version: 1.136.0
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.27.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.27.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       '@sanity/ui':
         specifier: workspace:*
         version: link:../ui
@@ -470,7 +470,7 @@ importers:
         version: link:../color
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.27.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.27.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1)
@@ -494,7 +494,7 @@ importers:
         version: 2.2.1
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.27.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.27.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       '@svgr/core':
         specifier: ^8.1.0
         version: 8.1.0(supports-color@8.1.1)(typescript@7.0.2)
@@ -567,7 +567,7 @@ importers:
     devDependencies:
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.27.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.27.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -613,7 +613,7 @@ importers:
     devDependencies:
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.27.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.27.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       '@sanity/vanilla-extract-vite-plugin':
         specifier: 'catalog:'
         version: 0.2.17(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
@@ -677,7 +677,7 @@ importers:
     devDependencies:
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.27.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+        version: 0.27.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       '@sanity/vanilla-extract-vite-plugin':
         specifier: 'catalog:'
         version: 0.2.17(babel-plugin-macros@3.1.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
@@ -4220,8 +4220,8 @@ packages:
   '@sanity/tsconfig@2.2.1':
     resolution: {integrity: sha512-1HbvN+W2bWixgXQnvJ9rev5vJaSbN62d+r0Y2pN6XsK6/MP9JfVyF90elBuIrDENTGgVmxB403+gZow45wq+Pg==}
 
-  '@sanity/tsdown-config@0.27.0':
-    resolution: {integrity: sha512-OvgXwgbcdbslE5bR02uNuYCmmBJA73TNurHOesoNVf7tSLDARlNO3OlwWiyKLfFzCHyktA08Utbk7GopkdhIbw==}
+  '@sanity/tsdown-config@0.27.1':
+    resolution: {integrity: sha512-UzCBeoCUoqHlzkTyz1J39m08Xu70bxPbL4qoZWWJ1kIf1pwccUeY5Gqn5IaQW9brEWs1vDZm37MDNGzVb1ci3w==}
     engines: {node: ^22.18.0 || >=24.11.0}
     peerDependencies:
       '@babel/core': '*'
@@ -4264,16 +4264,12 @@ packages:
   '@sanity/uuid@3.0.3':
     resolution: {integrity: sha512-aJvKuFwzcZKRwuIjrRPfXfXKpSdnLF4CnedV5WcX1n5SzhufvRNHIot5lkx1+Y1DwiMVQOZ5gDSPJH+P6Ao70A==}
 
-  '@sanity/vanilla-extract-integration@0.1.16':
-    resolution: {integrity: sha512-8Hp8vireCTeLyWEzXPu5tYtWlicHPClUH9T8uBFVf9u0imYTUubRuDDBei8yfPyFNz5wYIQk4YaWYcHJ7fI8ow==}
-    engines: {node: '>=20.19 <22 || >=22.12'}
-
   '@sanity/vanilla-extract-integration@0.1.17':
     resolution: {integrity: sha512-GPRCdeEfOOOoOiJb+6uOJxOt8sGTmSYfIz/U2/viQurytOOSz8v++fnSVBG6YLhtKhv2FzUIGgvSyPfiJ69FSQ==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
-  '@sanity/vanilla-extract-rolldown-plugin@0.4.5':
-    resolution: {integrity: sha512-4mMWLmzhrDm5AOUgKk9P+hR8qZbxREh57ZvF+lL+0bx/BXmJkKvwnTkJ2MWopdgnv2dlexDRrNqhN3p6N8aZbw==}
+  '@sanity/vanilla-extract-rolldown-plugin@0.4.6':
+    resolution: {integrity: sha512-vPFIsyAFBq7rqmY0lToNH2lI5UQTtiWkoMYkuwobVQjV9NECld2aLb6ptwHNUeIbKlQ0P/ow3P73V3hVYizf6g==}
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       rolldown: ^1.0.0
@@ -4281,8 +4277,8 @@ packages:
       rolldown:
         optional: true
 
-  '@sanity/vanilla-extract-tsdown-plugin@0.3.5':
-    resolution: {integrity: sha512-YBrc7MzUuDKGr6II/UtUWdTgXwEbs+lZF+VVT1ztnSouK6+dUoKx/Rt+WCperTHcybnp7EcQy2At7nsgzrUKCw==}
+  '@sanity/vanilla-extract-tsdown-plugin@0.3.6':
+    resolution: {integrity: sha512-7tLDT/dPeZY6hGqlvM+zG7PXWTpXCWz2Gnw0ZmSQCmMZ4rbdemfbiVSYwNIFd1Ol1FaepG89xQI+kdMxD2efKA==}
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       tsdown: ^0.22.5
@@ -5055,22 +5051,6 @@ packages:
   '@vercel/stega@1.1.0':
     resolution: {integrity: sha512-DFOm3Gk78nKDkppQEG5aj8Wj8R8hPKu/xrz4Rtp0AfiaNbZNCoJbxn7VI6iMxqhGeLdUDy/8mTuTWMz/izAtPA==}
 
-  '@vitejs/plugin-react@6.1.0':
-    resolution: {integrity: sha512-qd2BzUBehkov86WFhg0JkEFEYyCLG9uPCe6qWTY/kRlss9OvJrOF2UbIWT7p+8IzZHkEu0DNGHc4HSv+JdDLsw==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    peerDependencies:
-      '@rolldown/plugin-babel': ^0.1.7 || ^0.2.0
-      babel-plugin-react-compiler: ^1.0.0
-      oxc-transform-react: ^0.145.0
-      vite: ^8.0.0
-    peerDependenciesMeta:
-      '@rolldown/plugin-babel':
-        optional: true
-      babel-plugin-react-compiler:
-        optional: true
-      oxc-transform-react:
-        optional: true
-
   '@vitejs/plugin-react@6.1.1':
     resolution: {integrity: sha512-yxLaQV9gkhS8ezJqCM6+ndU7mDY6gqAg75NQ+0IjwEI8IYOmQCgkRwHKVSfWXW076DsqMo0Dk+0FK1U+M5RgFw==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -5276,11 +5256,6 @@ packages:
     cpu: [arm64]
     os: [android]
 
-  '@yuku-parser/binding-android-arm64@0.9.1':
-    resolution: {integrity: sha512-AohsA9tsg7xQkYnPNlP/upeXbVGXyVwSFNmDNictfNqiMaqks82H7wsz7zF/5yFYTren/mLGWVrzJ9vFw7ovrg==}
-    cpu: [arm64]
-    os: [android]
-
   '@yuku-parser/binding-android-arm64@0.9.3':
     resolution: {integrity: sha512-z3tDGTaUXD5Q4IuebFOY/QHxhR/SqujMhkMv9C5bh25upyFEXdafp0MsXQIIheWhVZzn5VMOniyxFni/7s9LgQ==}
     cpu: [arm64]
@@ -5288,11 +5263,6 @@ packages:
 
   '@yuku-parser/binding-darwin-arm64@0.8.7':
     resolution: {integrity: sha512-Re0RHelKLnjEURulY2/KxW+Ngb8zuNA4BRZuMwgGQNzVumT6u4U2N2hc01oeYVNVof0i7GrXE4UCNBgbpRRnjQ==}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@yuku-parser/binding-darwin-arm64@0.9.1':
-    resolution: {integrity: sha512-EMJbDXAR6CwOmq54SLKVr6fh3a9JaBQu8UNJKpUihClR2GpW2f4rF8qAgvOci07Q5AUJp00/FWZp8uZkNXj9eg==}
     cpu: [arm64]
     os: [darwin]
 
@@ -5306,11 +5276,6 @@ packages:
     cpu: [x64]
     os: [darwin]
 
-  '@yuku-parser/binding-darwin-x64@0.9.1':
-    resolution: {integrity: sha512-HFMB34UzToIqELUU71D5arkJDSOUiPuVGCt3a/p0n6YMUEHmlNGZntVkG0Gf70Qss7EECU75hx7fKWEtAmFLSQ==}
-    cpu: [x64]
-    os: [darwin]
-
   '@yuku-parser/binding-darwin-x64@0.9.3':
     resolution: {integrity: sha512-OM2PiVlPATvzlj/KGHNlu+t8FC3YzM5joVNjhsz/EaigQ8x2UUQ1Q0agQLiv5GZ2L8TSzrLUwBCZ7YOvP8q+tw==}
     cpu: [x64]
@@ -5321,11 +5286,6 @@ packages:
     cpu: [x64]
     os: [freebsd]
 
-  '@yuku-parser/binding-freebsd-x64@0.9.1':
-    resolution: {integrity: sha512-xw0O3G93kosvM+Byclp9W6ssHz6ngfduJDPuNki7rAG4OQ0nz1rZp/Zj4mAk8I8fR31vzwLuCH1qT1j1kv+09Q==}
-    cpu: [x64]
-    os: [freebsd]
-
   '@yuku-parser/binding-freebsd-x64@0.9.3':
     resolution: {integrity: sha512-WMn9M4LHNVysGNwsAJ9gpRPqQIW2lcPrDNGcyk0agx3IYqCJq1MQugh6Be8Otc5U08eGdE39o8Kx9YWJmXz7GA==}
     cpu: [x64]
@@ -5333,12 +5293,6 @@ packages:
 
   '@yuku-parser/binding-linux-arm-gnu@0.8.7':
     resolution: {integrity: sha512-kTYwJQQgmZeAWdDIWabiReIZMpmfLueIj1tCmjStUtFGhR1Z0qwxonKVfUC4N7h/VhGGzLZ//7O1kgt1QKqgCg==}
-    cpu: [arm]
-    os: [linux]
-    libc: [glibc]
-
-  '@yuku-parser/binding-linux-arm-gnu@0.9.1':
-    resolution: {integrity: sha512-ZZ3a/sKzEpsQGa9cFL3XjYc0ylVohiXK3cW/hHdg0cMU9es8Vtck94pQ/K8xwlX1kncjUn40XutFuAXx8Ow8vA==}
     cpu: [arm]
     os: [linux]
     libc: [glibc]
@@ -5355,12 +5309,6 @@ packages:
     os: [linux]
     libc: [musl]
 
-  '@yuku-parser/binding-linux-arm-musl@0.9.1':
-    resolution: {integrity: sha512-dtKTQ5CybtIAzll0EoN/jyUPvhgbcDCcoLSWcm9YsguTiW8LkHySe78Mnir3DS//QqwrO59O8C2NADtv21wnxg==}
-    cpu: [arm]
-    os: [linux]
-    libc: [musl]
-
   '@yuku-parser/binding-linux-arm-musl@0.9.3':
     resolution: {integrity: sha512-qohilhYOT+zkt2gYzym4F1T6BzRdvPqS9/sFB03pmnVV8LrvjOXVsGwEBAa3CEvzJKhAZjdTmVz7zsVdjyHWLg==}
     cpu: [arm]
@@ -5369,12 +5317,6 @@ packages:
 
   '@yuku-parser/binding-linux-arm64-gnu@0.8.7':
     resolution: {integrity: sha512-3gVN4pWSKZmXiNX7cU164dR9MPvesCHnlH6nPfpK+yQsCuYphjKKplcb4SnZBrhiqmXbgb2HR0c2TS0IZUPhgA==}
-    cpu: [arm64]
-    os: [linux]
-    libc: [glibc]
-
-  '@yuku-parser/binding-linux-arm64-gnu@0.9.1':
-    resolution: {integrity: sha512-csRtiN90U9Gfy/OnYvC/XR32eSd3E/+1GUIM2UmsEnTwnZ2mAd4VxW2CgbuCQCMNSEaeQzeueh5cu2dKEId1Pg==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
@@ -5391,12 +5333,6 @@ packages:
     os: [linux]
     libc: [musl]
 
-  '@yuku-parser/binding-linux-arm64-musl@0.9.1':
-    resolution: {integrity: sha512-HGmIyK1B8ve7EOPM/VCAq03LPWpWFsKW29lxQWQxlXryqGMs16m73EurMu+d+RgWmEQQLAj5gSoj1KVD+P4epw==}
-    cpu: [arm64]
-    os: [linux]
-    libc: [musl]
-
   '@yuku-parser/binding-linux-arm64-musl@0.9.3':
     resolution: {integrity: sha512-OWZBHW1wuChBpFlrF+On1yiBcFPMRrj2g0VKsM/PCBGffu1OM0ORkS+vLS3Snu6wYwndM5Dd9Ctvux6eUlrQjA==}
     cpu: [arm64]
@@ -5405,12 +5341,6 @@ packages:
 
   '@yuku-parser/binding-linux-x64-gnu@0.8.7':
     resolution: {integrity: sha512-lnbWdPmerE5D1uH1G4IEZKnPzCrWCStRGrtgpSIe1RibAo5bZIjDbbbPYXmMHCEh4F+x/JaJpElh26a3r+BPbg==}
-    cpu: [x64]
-    os: [linux]
-    libc: [glibc]
-
-  '@yuku-parser/binding-linux-x64-gnu@0.9.1':
-    resolution: {integrity: sha512-pp/acGgrUokF4KSh+EECfz4Nqwx3J23g24IM+Rh91pkCUj0/QfW7C6KwB2/ZhyuN6qWEZ8s1j+DAddcAXWtBBQ==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
@@ -5427,12 +5357,6 @@ packages:
     os: [linux]
     libc: [musl]
 
-  '@yuku-parser/binding-linux-x64-musl@0.9.1':
-    resolution: {integrity: sha512-XdBOP/a5Jx5C36w7XBrGsZKRy45oSrD6ZMyCR6xBHEnL3TihKadH9o+UExPGOh0dLnQ8vZ/6sWwU+CTsGzay0g==}
-    cpu: [x64]
-    os: [linux]
-    libc: [musl]
-
   '@yuku-parser/binding-linux-x64-musl@0.9.3':
     resolution: {integrity: sha512-u3+0sCso/mcjDvtc3866D2giV7l34PDyDVBkMesAWa3DWbIWPlybehi2SSnmScgArV22ctqSSgUzdBBVJ6zYAg==}
     cpu: [x64]
@@ -5441,11 +5365,6 @@ packages:
 
   '@yuku-parser/binding-win32-arm64@0.8.7':
     resolution: {integrity: sha512-mEB/9PlaAkisJ6KWGz0zvywXoU6+80dTlR2LwS7s/jcXXoU6fm2+sitBZXtqu3+Q4DcDgPxM45uWMCzPs0TSRw==}
-    cpu: [arm64]
-    os: [win32]
-
-  '@yuku-parser/binding-win32-arm64@0.9.1':
-    resolution: {integrity: sha512-sVA1I57uWAQsDD2ND6loFZXnMynxtCEcsR9L4O31lVd5/xCoGSOo5v+rbqJU2cDPSyAZTFBAFQLzipcYfwUO4w==}
     cpu: [arm64]
     os: [win32]
 
@@ -5459,11 +5378,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@yuku-parser/binding-win32-x64@0.9.1':
-    resolution: {integrity: sha512-hNzy7ZE4iFW4gkhYiHBB05BJPS6NE+oOw9oddyvBiBi9s+xP1keli3ZHxII8l7Qedh/3pNc8X43wo6UPoNarrw==}
-    cpu: [x64]
-    os: [win32]
-
   '@yuku-parser/binding-win32-x64@0.9.3':
     resolution: {integrity: sha512-N5eShGcuwnrXEprePFmEjtng6acZmtnC4zgazK9xxkavcx1q1uX8Nz8lU5RS973EMlNr902cIc6Cd2D4tqZDBg==}
     cpu: [x64]
@@ -5471,9 +5385,6 @@ packages:
 
   '@yuku-toolchain/types@0.8.7':
     resolution: {integrity: sha512-2Z53dNxAJL6UvFoIrDZvYf3zlO8s4VJK4O2hhaB4mXVwwpX/7ajtss3cmfqKvamlNLWyt9FSWs4eoYdlbxpnHA==}
-
-  '@yuku-toolchain/types@0.9.1':
-    resolution: {integrity: sha512-GhfAIaKmtC4fCKJVnzP6bdGhWZSd7U9Sk7/lexEfROQPDNzuFE9lZKrcIWqzgGVcIMqKvtvFxnfEIaZ5WiroyQ==}
 
   '@yuku-toolchain/types@0.9.3':
     resolution: {integrity: sha512-rFE+5P4g2wxko5C85MugJOlVjBHEQq87dIkhLkniLXLp63PEtgaFjD954i5HXlfnyzLxPcZHsSOVDVgmo1HToA==}
@@ -8983,9 +8894,6 @@ packages:
   yuku-ast@0.8.7:
     resolution: {integrity: sha512-h6+4bDfyootiMB9vckk5uKo5r5j0GHrkr17FQTDNfEsFT3DWlN9uu1HJwQwc64pgmLCI945fWM3lbTIqxjT3GQ==}
 
-  yuku-ast@0.9.1:
-    resolution: {integrity: sha512-JN45kc3sxzv/bDGug063IsIHu6LTkL1vDQUL/m1zvIFBIvMRtYivyRp5LjtMbZtIWnNjV6jaAvHPA1f70yD6gg==}
-
   yuku-ast@0.9.3:
     resolution: {integrity: sha512-Kt0PXlPCXdKF1fWFTl7N3DaxsVk6DHF8VAXHJMkwPtJnWYgbx20pYgGSweuC/86mIM7k1NUITQ4JffgOLUWTCw==}
 
@@ -8994,9 +8902,6 @@ packages:
 
   yuku-parser@0.8.7:
     resolution: {integrity: sha512-vRD9nwt4L3aYpxNqeSC4WqLv58xrXef0Ong1Mc45CTXTIpvLafx7JO05sczmQZwdLEZvywrLOGdNC5+Rp5N1BQ==}
-
-  yuku-parser@0.9.1:
-    resolution: {integrity: sha512-N4YmuFq7fPTaxhti0mC73nsmxYe30DKHlAxZdTYr4A88NAT3BckilMkuuusHofrfFSeswAdxfixcYy8MMhkvcQ==}
 
   yuku-parser@0.9.3:
     resolution: {integrity: sha512-96wPoHnwaXfkZv7UIOUkDb+s7ZH8lv8Qtg+MxdvHUV1LFa5jV9iKOaams1942YQt+krFQrWiD6lSg2ermv5kHA==}
@@ -12061,7 +11966,7 @@ snapshots:
       '@sanity/telemetry': 1.1.0(react@19.2.8)
       '@sanity/types': 6.11.0(@types/react@19.2.18)(vitest@4.1.11)
       '@sanity/workbench-cli': 2.2.2(@noble/hashes@2.3.0)(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(@types/react@19.2.18)(esbuild@0.28.2)(jiti@2.7.0)(oxc-transform-react@0.148.0)(terser@5.51.0)(tsx@4.23.12)(typescript@7.0.2)(vitest@4.1.11)(yaml@2.9.0)
-      '@vitejs/plugin-react': 6.1.0(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+      '@vitejs/plugin-react': 6.1.1(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       chokidar: 5.0.0
       cjs-module-lexer: 2.2.1
       empathic: 2.0.1
@@ -12114,7 +12019,7 @@ snapshots:
       '@sanity/telemetry': 1.1.0(react@19.2.8)
       '@sanity/types': 6.11.0(@types/react@19.2.18)(vitest@4.1.11)
       '@sanity/workbench-cli': 2.2.2(@noble/hashes@2.3.0)(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(@types/react@19.2.18)(esbuild@0.28.2)(jiti@2.7.0)(oxc-transform-react@0.148.0)(terser@5.51.0)(tsx@4.23.12)(typescript@7.0.2)(vitest@4.1.11)(yaml@2.9.0)
-      '@vitejs/plugin-react': 6.1.0(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+      '@vitejs/plugin-react': 6.1.1(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       chokidar: 5.0.0
       cjs-module-lexer: 2.2.1
       empathic: 2.0.1
@@ -12712,14 +12617,14 @@ snapshots:
 
   '@sanity/tsconfig@2.2.1': {}
 
-  '@sanity/tsdown-config@0.27.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))':
+  '@sanity/tsdown-config@0.27.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))':
     dependencies:
       '@microsoft/api-extractor': 7.59.0(@types/node@24.13.3)
       '@microsoft/tsdoc-config': 0.18.1
       '@sanity/browserslist-config': 1.0.5
-      '@sanity/vanilla-extract-tsdown-plugin': 0.3.5(babel-plugin-macros@3.1.0)(rolldown@1.2.6)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))
+      '@sanity/vanilla-extract-tsdown-plugin': 0.3.6(babel-plugin-macros@3.1.0)(rolldown@1.2.6)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))
       '@typescript/typescript6': 6.0.2
-      '@vitejs/plugin-react': 6.1.0(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+      '@vitejs/plugin-react': 6.1.1(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       browserslist: 4.28.8
       jsonc-parser: 3.3.1
       lightningcss: 1.33.0
@@ -12737,14 +12642,14 @@ snapshots:
       - babel-plugin-macros
       - vite
 
-  '@sanity/tsdown-config@0.27.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))':
+  '@sanity/tsdown-config@0.27.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(@types/node@24.13.3)(oxc-transform-react@0.148.0)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))':
     dependencies:
       '@microsoft/api-extractor': 7.59.0(@types/node@24.13.3)
       '@microsoft/tsdoc-config': 0.18.1
       '@sanity/browserslist-config': 1.0.5
-      '@sanity/vanilla-extract-tsdown-plugin': 0.3.5(babel-plugin-macros@3.1.0)(rolldown@1.2.6)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))
+      '@sanity/vanilla-extract-tsdown-plugin': 0.3.6(babel-plugin-macros@3.1.0)(rolldown@1.2.6)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))
       '@typescript/typescript6': 6.0.2
-      '@vitejs/plugin-react': 6.1.0(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+      '@vitejs/plugin-react': 6.1.1(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       browserslist: 4.28.8
       jsonc-parser: 3.3.1
       lightningcss: 1.33.0
@@ -12798,15 +12703,6 @@ snapshots:
     dependencies:
       uuid: 11.1.1
 
-  '@sanity/vanilla-extract-integration@0.1.16(babel-plugin-macros@3.1.0)':
-    dependencies:
-      '@vanilla-extract/css': 1.21.2(babel-plugin-macros@3.1.0)
-      javascript-stringify: 2.1.0
-      rolldown: 1.2.6
-      yuku-parser: 0.9.1
-    transitivePeerDependencies:
-      - babel-plugin-macros
-
   '@sanity/vanilla-extract-integration@0.1.17(babel-plugin-macros@3.1.0)':
     dependencies:
       '@vanilla-extract/css': 1.21.2(babel-plugin-macros@3.1.0)
@@ -12816,18 +12712,18 @@ snapshots:
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  '@sanity/vanilla-extract-rolldown-plugin@0.4.5(babel-plugin-macros@3.1.0)(rolldown@1.2.6)':
+  '@sanity/vanilla-extract-rolldown-plugin@0.4.6(babel-plugin-macros@3.1.0)(rolldown@1.2.6)':
     dependencies:
-      '@sanity/vanilla-extract-integration': 0.1.16(babel-plugin-macros@3.1.0)
+      '@sanity/vanilla-extract-integration': 0.1.17(babel-plugin-macros@3.1.0)
       lightningcss: 1.33.0
     optionalDependencies:
       rolldown: 1.2.6
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  '@sanity/vanilla-extract-tsdown-plugin@0.3.5(babel-plugin-macros@3.1.0)(rolldown@1.2.6)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))':
+  '@sanity/vanilla-extract-tsdown-plugin@0.3.6(babel-plugin-macros@3.1.0)(rolldown@1.2.6)(tsdown@0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1))':
     dependencies:
-      '@sanity/vanilla-extract-rolldown-plugin': 0.4.5(babel-plugin-macros@3.1.0)(rolldown@1.2.6)
+      '@sanity/vanilla-extract-rolldown-plugin': 0.4.6(babel-plugin-macros@3.1.0)(rolldown@1.2.6)
       tsdown: 0.22.14(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.12)(typescript@7.0.2)(unrun@0.3.1)
     transitivePeerDependencies:
       - babel-plugin-macros
@@ -12892,7 +12788,7 @@ snapshots:
       '@module-federation/vite': 1.20.7(typescript@7.0.2)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       '@sanity/cli-core': 3.4.0(@noble/hashes@2.3.0)(@types/node@24.13.3)(esbuild@0.28.2)(oxc-transform-react@0.148.0)(terser@5.51.0)(vitest@4.1.11)(yaml@2.9.0)
       '@sanity/types': 6.11.0(@types/react@19.2.18)(vitest@4.1.11)
-      '@vitejs/plugin-react': 6.1.0(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
+      '@vitejs/plugin-react': 6.1.1(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
       form-data: 4.0.6
       rxjs: 7.8.2
       tar-fs: 3.1.3
@@ -13702,14 +13598,6 @@ snapshots:
 
   '@vercel/stega@1.1.0': {}
 
-  '@vitejs/plugin-react@6.1.0(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))':
-    dependencies:
-      '@rolldown/pluginutils': 1.0.1
-      vite: 8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)
-    optionalDependencies:
-      '@rolldown/plugin-babel': 0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))
-      oxc-transform-react: 0.148.0
-
   '@vitejs/plugin-react@6.1.1(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.6)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0)))(oxc-transform-react@0.148.0)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.0)(tsx@4.23.12)(yaml@2.9.0))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
@@ -13946,16 +13834,10 @@ snapshots:
   '@yuku-parser/binding-android-arm64@0.8.7':
     optional: true
 
-  '@yuku-parser/binding-android-arm64@0.9.1':
-    optional: true
-
   '@yuku-parser/binding-android-arm64@0.9.3':
     optional: true
 
   '@yuku-parser/binding-darwin-arm64@0.8.7':
-    optional: true
-
-  '@yuku-parser/binding-darwin-arm64@0.9.1':
     optional: true
 
   '@yuku-parser/binding-darwin-arm64@0.9.3':
@@ -13964,16 +13846,10 @@ snapshots:
   '@yuku-parser/binding-darwin-x64@0.8.7':
     optional: true
 
-  '@yuku-parser/binding-darwin-x64@0.9.1':
-    optional: true
-
   '@yuku-parser/binding-darwin-x64@0.9.3':
     optional: true
 
   '@yuku-parser/binding-freebsd-x64@0.8.7':
-    optional: true
-
-  '@yuku-parser/binding-freebsd-x64@0.9.1':
     optional: true
 
   '@yuku-parser/binding-freebsd-x64@0.9.3':
@@ -13982,16 +13858,10 @@ snapshots:
   '@yuku-parser/binding-linux-arm-gnu@0.8.7':
     optional: true
 
-  '@yuku-parser/binding-linux-arm-gnu@0.9.1':
-    optional: true
-
   '@yuku-parser/binding-linux-arm-gnu@0.9.3':
     optional: true
 
   '@yuku-parser/binding-linux-arm-musl@0.8.7':
-    optional: true
-
-  '@yuku-parser/binding-linux-arm-musl@0.9.1':
     optional: true
 
   '@yuku-parser/binding-linux-arm-musl@0.9.3':
@@ -14000,16 +13870,10 @@ snapshots:
   '@yuku-parser/binding-linux-arm64-gnu@0.8.7':
     optional: true
 
-  '@yuku-parser/binding-linux-arm64-gnu@0.9.1':
-    optional: true
-
   '@yuku-parser/binding-linux-arm64-gnu@0.9.3':
     optional: true
 
   '@yuku-parser/binding-linux-arm64-musl@0.8.7':
-    optional: true
-
-  '@yuku-parser/binding-linux-arm64-musl@0.9.1':
     optional: true
 
   '@yuku-parser/binding-linux-arm64-musl@0.9.3':
@@ -14018,16 +13882,10 @@ snapshots:
   '@yuku-parser/binding-linux-x64-gnu@0.8.7':
     optional: true
 
-  '@yuku-parser/binding-linux-x64-gnu@0.9.1':
-    optional: true
-
   '@yuku-parser/binding-linux-x64-gnu@0.9.3':
     optional: true
 
   '@yuku-parser/binding-linux-x64-musl@0.8.7':
-    optional: true
-
-  '@yuku-parser/binding-linux-x64-musl@0.9.1':
     optional: true
 
   '@yuku-parser/binding-linux-x64-musl@0.9.3':
@@ -14036,24 +13894,16 @@ snapshots:
   '@yuku-parser/binding-win32-arm64@0.8.7':
     optional: true
 
-  '@yuku-parser/binding-win32-arm64@0.9.1':
-    optional: true
-
   '@yuku-parser/binding-win32-arm64@0.9.3':
     optional: true
 
   '@yuku-parser/binding-win32-x64@0.8.7':
     optional: true
 
-  '@yuku-parser/binding-win32-x64@0.9.1':
-    optional: true
-
   '@yuku-parser/binding-win32-x64@0.9.3':
     optional: true
 
   '@yuku-toolchain/types@0.8.7': {}
-
-  '@yuku-toolchain/types@0.9.1': {}
 
   '@yuku-toolchain/types@0.9.3': {}
 
@@ -17682,10 +17532,6 @@ snapshots:
     dependencies:
       '@yuku-toolchain/types': 0.8.7
 
-  yuku-ast@0.9.1:
-    dependencies:
-      '@yuku-toolchain/types': 0.9.1
-
   yuku-ast@0.9.3:
     dependencies:
       '@yuku-toolchain/types': 0.9.3
@@ -17724,24 +17570,6 @@ snapshots:
       '@yuku-parser/binding-linux-x64-musl': 0.8.7
       '@yuku-parser/binding-win32-arm64': 0.8.7
       '@yuku-parser/binding-win32-x64': 0.8.7
-
-  yuku-parser@0.9.1:
-    dependencies:
-      '@yuku-toolchain/types': 0.9.1
-      yuku-ast: 0.9.1
-    optionalDependencies:
-      '@yuku-parser/binding-android-arm64': 0.9.1
-      '@yuku-parser/binding-darwin-arm64': 0.9.1
-      '@yuku-parser/binding-darwin-x64': 0.9.1
-      '@yuku-parser/binding-freebsd-x64': 0.9.1
-      '@yuku-parser/binding-linux-arm-gnu': 0.9.1
-      '@yuku-parser/binding-linux-arm-musl': 0.9.1
-      '@yuku-parser/binding-linux-arm64-gnu': 0.9.1
-      '@yuku-parser/binding-linux-arm64-musl': 0.9.1
-      '@yuku-parser/binding-linux-x64-gnu': 0.9.1
-      '@yuku-parser/binding-linux-x64-musl': 0.9.1
-      '@yuku-parser/binding-win32-arm64': 0.9.1
-      '@yuku-parser/binding-win32-x64': 0.9.1
 
   yuku-parser@0.9.3:
     dependencies:
