@@ -10,8 +10,7 @@ const keyframe = keyframes`
 `
 
 const animation = css`
-  position: relative;
-  overflow: hidden;
+  contain: paint;
   -webkit-mask-image: linear-gradient(#fff, #fff);
   mask-image: linear-gradient(#fff, #fff);
 
