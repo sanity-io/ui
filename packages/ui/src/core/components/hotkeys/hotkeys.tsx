@@ -1,11 +1,12 @@
 import {clsx} from 'clsx/lite'
+import {styled} from 'styled-components'
 
 import {Inline} from '../../primitives/inline/inline'
 import {KBD} from '../../primitives/kbd/kbd'
 import {_getArrayProp} from '../../styles/helpers'
 import {Radius} from '../../types/radius'
 
-import {hotkey, hotkeys} from './hotkeys.css'
+import {hotkeys} from './hotkeys.css'
 
 /**
  * @public
@@ -22,6 +23,15 @@ export interface HotkeysProps {
   keys?: string[]
 }
 
+// Stays on styled-components: `display: block` has to beat KBD's runtime
+// `display: inline-block` at the same specificity, which only holds while both
+// rules live in the runtime stylesheet.
+const Key = styled(KBD)`
+  &:not([hidden]) {
+    display: block;
+  }
+`
+
 /**
  * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.
  *
@@ -36,7 +46,7 @@ export function Hotkeys(props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>,
   }
 
   return (
-    <kbd className={clsx(hotkeys, className)} data-ui="Hotkeys" ref={ref} {...restProps}>
+    <kbd className={clsx(hotkeys, className)} data-ui="Hotkeys" {...restProps} ref={ref}>
       <Inline as="span" gap={spacing}>
         {keys.map((key, i) => (
           // oxlint-disable-next-line no-array-index-key
