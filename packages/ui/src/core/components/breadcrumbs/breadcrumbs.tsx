@@ -3,13 +3,13 @@ import {Children, Fragment, isValidElement, useCallback, useMemo, useRef, useSta
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {Box} from '../../primitives/box/box'
-import {Button} from '../../primitives/button/button'
 import {Popover} from '../../primitives/popover/popover'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
 import {_getArrayProp} from '../../styles/helpers'
+import {ExpandButton} from './breadcrumbs.styles'
 
-import {breadcrumbs, expandButton} from './breadcrumbs.css'
+import {breadcrumbs} from './breadcrumbs.css'
 
 /**
  * @beta
@@ -55,7 +55,7 @@ export function Breadcrumbs(
   })
 
   return (
-    <ol className={clsx(breadcrumbs, className)} data-ui="Breadcrumbs" ref={ref} {...restProps}>
+    <ol className={clsx(breadcrumbs, className)} data-ui="Breadcrumbs" {...restProps} ref={ref}>
       {items.map((item, itemIndex) => (
         // oxlint-disable-next-line no-array-index-key
         <Fragment key={itemIndex}>
@@ -112,8 +112,7 @@ function useItems({
         portal
         ref={popoverElementRef}
       >
-        <Button
-          className={expandButton}
+        <ExpandButton
           fontSize={1}
           mode="bleed"
           onClick={open ? collapse : expand}
