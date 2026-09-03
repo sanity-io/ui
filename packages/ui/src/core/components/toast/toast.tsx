@@ -10,10 +10,9 @@ import {Card} from '../../primitives/card/card'
 import {Flex} from '../../primitives/flex/flex'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
-import {useTheme_v2} from '../../theme/useTheme'
-import {BUTTON_TONE, STATUS_CARD_TONE} from './styles'
+import {BUTTON_TONE, LoadingBarProgress, STATUS_CARD_TONE} from './styles'
 
-import {loadingBar, loadingBarMask, loadingBarProgress, toast, toastText} from './toast.css'
+import {loadingBar, loadingBarMask, toast, toastText} from './toast.css'
 
 /**
  * @public
@@ -146,7 +145,7 @@ export function Toast(
           transition={transition}
         >
           <Card className={loadingBarMask} tone={cardTone} radius={radius} />
-          <LoadingBarProgress
+          <MotionLoadingBarProgress
             key={`progress-${updatedAt}`}
             duration={duration}
             onComplete={onClose}
@@ -156,30 +155,6 @@ export function Toast(
         </motion.div>
       )}
     </MotionCard>
-  )
-}
-
-interface LoadingBarProgressProps {
-  duration: number
-  onComplete: () => void
-  tone: ThemeColorStateToneKey
-  visualDuration: number
-}
-
-function LoadingBarProgress(props: LoadingBarProgressProps) {
-  const {duration, onComplete, tone, visualDuration} = props
-  const {color} = useTheme_v2()
-
-  return (
-    <MotionCard
-      className={loadingBarProgress}
-      tone={tone}
-      style={{'--toast-loading-bar-bg': color.button.default[tone].enabled.bg}}
-      initial={{scaleX: 0}}
-      animate={{scaleX: 1}}
-      transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
-      onAnimationComplete={onComplete}
-    />
   )
 }
 
@@ -224,3 +199,4 @@ const content = {
 const MotionCard = motion.create(Card)
 const MotionFlex = motion.create(Flex)
 const MotionText = motion.create(Text)
+const MotionLoadingBarProgress = motion.create(LoadingBarProgress)
