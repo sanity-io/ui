@@ -13,7 +13,7 @@ strictPeerDependencies: false
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
   '@sanity/blueprints': ^0.24.0
-  '@sanity/client': ^8.4.0
+  '@sanity/client': ^8.5.0
   '@sanity/functions': ^1.7.1
   '@sanity/tsdown-config': ^0.27.1
   '@sanity/vanilla-extract-vite-plugin': ^0.2.17
