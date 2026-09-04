@@ -8,7 +8,15 @@ import {useTheme_v2} from '../../theme/useTheme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types/avatar'
 import {ElementType, Props} from '../../types/component'
 import {Label} from '../label/label'
-import {avatarStyle, responsiveAvatarSizeStyle} from './styles'
+import {avatarRootStyle, responsiveAvatarSizeStyle} from './styles'
+
+import {
+  avatarArrow,
+  avatarBgStroke,
+  avatarImage,
+  avatarInitials,
+  avatarStroke,
+} from './avatar.css'
 
 /**
  * @public
@@ -38,22 +46,14 @@ export type AvatarProps<E extends ElementType = 'div'> = Props<AvatarOwnProps, E
 
 const StyledAvatar = styled.div<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
-  avatarStyle.root,
+  avatarRootStyle,
 )
 
-const Arrow = styled.div(avatarStyle.arrow)
-
-const BgStroke = styled.ellipse(avatarStyle.bgStroke)
-
-const Stroke = styled.ellipse(avatarStyle.stroke)
-
-const Initials = styled.div(avatarStyle.initials)
-
+// Stays on styled-components: `color: inherit` has to beat Label's runtime
+// `color: var(--card-fg-color)` at the same specificity.
 const InitialsLabel = styled(Label)({
   color: 'inherit',
 })
-
-const AvatarImage = styled.svg(avatarStyle.image)
 
 function AvatarComponent(
   props: AvatarOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
@@ -127,17 +127,17 @@ function AvatarComponent(
       ref={ref}
       title={title}
     >
-      <Arrow>
+      <div className={avatarArrow}>
         <svg width="11" height="7" viewBox="0 0 11 7" fill="none">
           <path
             d="M6.67948 1.50115L11 7L0 7L4.32052 1.50115C4.92109 0.736796 6.07891 0.736795 6.67948 1.50115Z"
             fill={color}
           />
         </svg>
-      </Arrow>
+      </div>
 
       {!imageFailed && src && (
-        <AvatarImage viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
+        <svg className={avatarImage} viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
           <defs>
             <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
               <image href={src} width="1" height="1" onError={handleImageError} />
@@ -147,7 +147,8 @@ function AvatarComponent(
           <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
 
           {!__unstable_hideInnerStroke && (
-            <BgStroke
+            <ellipse
+              className={avatarBgStroke}
               cx={_radius}
               cy={_radius}
               rx={_radius}
@@ -156,19 +157,20 @@ function AvatarComponent(
             />
           )}
 
-          <Stroke
+          <ellipse
+            className={avatarStroke}
             cx={_radius}
             cy={_radius}
             rx={_radius}
             ry={_radius}
             vectorEffect="non-scaling-stroke"
           />
-        </AvatarImage>
+        </svg>
       )}
 
       {(imageFailed || !src) && initials && (
         <>
-          <Initials>
+          <div className={avatarInitials}>
             <InitialsLabel
               forwardedAs="span"
               size={size.map((s) => {
@@ -182,7 +184,7 @@ function AvatarComponent(
             >
               {initials}
             </InitialsLabel>
-          </Initials>
+          </div>
         </>
       )}
     </StyledAvatar>
