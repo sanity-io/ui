@@ -80,6 +80,10 @@ export default function transform(
               changed = true
             }
 
+            if (addAttribute(j, path.node, 'flexShrink', 0)) {
+              changed = true
+            }
+
             if (transformAttributes(j, path, FLEX_MODS, FLEX_TODO_WARNING)) {
               changed = true
             }

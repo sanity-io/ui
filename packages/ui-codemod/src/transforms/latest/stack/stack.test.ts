@@ -30,7 +30,7 @@ defineInlineTest(
   `
   import {Flex} from "@sanity/ui"
 
-  <Flex padding={2} flexDirection="column" />
+  <Flex padding={2} flexDirection="column" flexShrink={0} />
   `,
   'replaces Stack with Flex and updates import path based on fromPackage and toPackage',
 )
@@ -66,7 +66,7 @@ defineInlineTest(
 
   import { Flex } from "@sanity/ui";
 
-  <Flex margin={2} flexDirection="column" />
+  <Flex margin={2} flexDirection="column" flexShrink={0} />
   `,
   'replaces Stack and updates import path with multiple specifiers',
 )
@@ -111,7 +111,7 @@ defineInlineTest(
 
   <>
     <VStack />
-    <Flex overflow="auto" flexDirection="column" />
+    <Flex overflow="auto" flexDirection="column" flexShrink={0} />
   </>
   `,
   'replaces Stack with Flex and adds Flex import',
@@ -128,7 +128,7 @@ defineInlineTest(
   `
   import {Flex} from '@sanity/ui'
 
-  <Flex padding={1} flexDirection="column" />
+  <Flex padding={1} flexDirection="column" flexShrink={0} />
   `,
   'replaces Stack with Flex and removes Stack import',
 )
@@ -142,7 +142,7 @@ defineInlineTest(
   </Stack>
   `,
   `
-  <Flex padding={1} flexDirection="column">
+  <Flex padding={1} flexDirection="column" flexShrink={0}>
     <span />
   </Flex>
   `,
@@ -156,7 +156,7 @@ defineInlineTest(
   <Stack padding={1} width="fill" />
   `,
   `
-  <Flex padding={1} width="100%" flexDirection="column" />
+  <Flex padding={1} width="100%" flexDirection="column" flexShrink={0} />
   `,
   'replaces Stack with Flex and transforms attributes',
 )
