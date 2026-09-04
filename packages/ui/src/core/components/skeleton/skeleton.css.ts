@@ -14,6 +14,10 @@ export const skeleton = style({
   },
 })
 
+export const skeletonVisible = style({
+  opacity: 1,
+})
+
 export const skeletonHidden = style({
   opacity: 0,
 })
