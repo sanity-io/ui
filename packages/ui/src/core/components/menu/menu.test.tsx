@@ -1,13 +1,45 @@
 /** @vitest-environment jsdom */
 
-import React, {useCallback, useMemo} from 'react'
+// oxlint-disable-next-line no-unassigned-import
+import '../../../../test/mocks/matchMedia.mock'
+import React, {act, Activity, useCallback, useMemo} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
+import {LayerProvider} from '../../utils/layer/layerProvider'
+import {Menu} from './menu'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {useMenu} from './useMenu'
 
 describe('components/menu', () => {
+  it('preserves element registration across Activity hide and reveal', async () => {
+    const unregisterElement = vi.fn()
+    const registerElement = vi.fn(() => unregisterElement)
+    const renderMenu = (mode: 'hidden' | 'visible') => (
+      <LayerProvider>
+        <Activity mode={mode}>
+          <Menu registerElement={registerElement}>Item</Menu>
+        </Activity>
+      </LayerProvider>
+    )
+    const {rerender, unmount} = render(renderMenu('visible'))
+
+    expect(registerElement).toHaveBeenCalledOnce()
+
+    rerender(renderMenu('hidden'))
+    await act(async () => undefined)
+
+    expect(unregisterElement).not.toHaveBeenCalled()
+
+    rerender(renderMenu('visible'))
+    expect(registerElement).toHaveBeenCalledOnce()
+
+    unmount()
+    await act(async () => undefined)
+
+    expect(unregisterElement).toHaveBeenCalledOnce()
+  })
+
   describe('useMenu', () => {
     it('should get context value', async () => {
       const log = vi.fn()

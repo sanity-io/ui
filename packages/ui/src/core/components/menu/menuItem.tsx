@@ -9,6 +9,7 @@ import {
 } from 'react'
 import {isValidElementType} from 'react-is'
 
+import {useConnectedRef} from '../../hooks/useConnectedRef'
 import {Selectable} from '../../primitives/_selectable/selectable'
 import {Box} from '../../primitives/box/box'
 import {Flex} from '../../primitives/flex/flex'
@@ -121,10 +122,11 @@ const MenuItemComponent = function MenuItem(
 
   const hotkeysFontSize = _getArrayProp(fontSize).map((s) => s - 1)
 
-  const setRef = useCallback((el: HTMLDivElement | null) => {
+  const handleRootElementChange = useCallback((el: HTMLDivElement | null) => {
     ref.current = el
     setRootElement(el)
   }, [])
+  const setRef = useConnectedRef(handleRootElementChange)
 
   return (
     <Selectable

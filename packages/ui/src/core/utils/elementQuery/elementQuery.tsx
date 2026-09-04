@@ -1,5 +1,6 @@
 import {useImperativeHandle, useMemo, useState} from 'react'
 
+import {useConnectedRef} from '../../hooks/useConnectedRef'
 import {useElementSize} from '../../hooks/useElementSize'
 import {useTheme_v2} from '../../theme/useTheme'
 import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
@@ -25,6 +26,7 @@ export function ElementQuery(
   const media = _media ?? theme.media
 
   const [element, setElement] = useState<HTMLDivElement | null>(null)
+  const elementRef = useConnectedRef<HTMLDivElement>(setElement)
   const elementSize = useElementSize(element)
   const width = useMemo(() => elementSize?.border.width ?? window.innerWidth, [elementSize])
 
@@ -44,7 +46,7 @@ export function ElementQuery(
   ])
 
   return (
-    <div data-ui="ElementQuery" {...restProps} data-eq-max={max} data-eq-min={min} ref={setElement}>
+    <div data-ui="ElementQuery" {...restProps} data-eq-max={max} data-eq-min={min} ref={elementRef}>
       {children}
     </div>
   )

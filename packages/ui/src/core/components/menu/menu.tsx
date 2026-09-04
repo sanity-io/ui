@@ -2,6 +2,7 @@ import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'reac
 import {styled} from 'styled-components'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
+import {useConnectedRef} from '../../hooks/useConnectedRef'
 import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
 import {Box} from '../../primitives/box/box'
 import {Stack} from '../../primitives/stack/stack'
@@ -83,7 +84,7 @@ export function Menu(
   } = useMenuController({onKeyDown, originElement, shouldFocus, rootElementRef: ref})
 
   const unregisterElementRef = useRef<(() => void) | null>(null)
-  const handleRefChange = useCallback(
+  const handleRootElementChange = useCallback(
     (el: HTMLDivElement | null) => {
       // Run cleanup of previously registered elements
       if (unregisterElementRef.current) {
@@ -104,6 +105,7 @@ export function Menu(
     },
     [registerElement],
   )
+  const handleRefChange = useConnectedRef(handleRootElementChange)
 
   // Trigger `onItemSelect` when active index changes
   useEffect(() => {
