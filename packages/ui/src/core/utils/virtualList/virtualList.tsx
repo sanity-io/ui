@@ -186,7 +186,7 @@ function useChildren({
 
   if (itemHeight === -1) {
     return [
-      <div className={virtualListItem} key={0}>
+      <div key={0} className={virtualListItem}>
         {renderItem(items[0])}
       </div>,
     ]
@@ -199,8 +199,8 @@ function useChildren({
 
     return (
       <div
-        className={virtualListItem}
         key={key}
+        className={virtualListItem}
         style={{top: itemIndex * (itemHeight + space[gap])}}
       >
         {node}
