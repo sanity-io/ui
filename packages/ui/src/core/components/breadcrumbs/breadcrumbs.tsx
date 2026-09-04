@@ -3,6 +3,7 @@ import {Children, Fragment, isValidElement, useCallback, useMemo, useRef, useSta
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {Box} from '../../primitives/box/box'
+import {Button} from '../../primitives/button/button'
 import {Popover} from '../../primitives/popover/popover'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
