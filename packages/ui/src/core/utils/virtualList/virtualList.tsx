@@ -155,8 +155,8 @@ export function VirtualList(
     <Component
       className={clsx(virtualList, className)}
       data-ui="VirtualList"
-      {...restProps}
       ref={ref}
+      {...restProps}
     >
       <div ref={wrapperRef} style={{height}}>
         {children}
