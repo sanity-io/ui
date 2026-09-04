@@ -30,3 +30,9 @@ globalStyle(`${treeItem}[role='treeitem'] > div`, {
 globalStyle(`${treeItem}[role='treeitem']:focus > div`, {
   position: 'relative',
 })
+
+export const treeItemToggleArrow = style({})
+
+globalStyle(`${treeItemToggleArrow} > svg`, {
+  transition: 'transform 100ms',
+})
