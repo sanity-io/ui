@@ -6,16 +6,12 @@ const shimmer = keyframes({
 })
 
 export const skeleton = style({
-  'transition': 'opacity 200ms ease-in',
+  transition: 'opacity 200ms ease-in',
   '@media': {
     'screen and (prefers-reduced-motion: reduce)': {
       backgroundColor: 'var(--card-skeleton-color-from)',
     },
   },
-})
-
-export const skeletonVisible = style({
-  opacity: 1,
 })
 
 export const skeletonHidden = style({
