@@ -1,4 +1,5 @@
 import {CloseIcon} from '@sanity/icons/Close'
+import {clsx} from 'clsx/lite'
 import {useCallback, useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
@@ -27,13 +28,22 @@ import {useLayer} from '../../utils/layer/useLayer'
 import {Portal} from '../../utils/portal/portal'
 import {usePortal} from '../../utils/portal/usePortal'
 import {
-  animationDialogStyle,
-  AnimationDialogStyleProps,
   dialogStyle,
   responsiveDialogPositionStyle,
   ResponsiveDialogPositionStyleProps,
 } from './styles'
 import {useDialog} from './useDialog'
+
+import {
+  dialogAnimated,
+  dialogCard,
+  dialogContainer,
+  dialogContent,
+  dialogFooter,
+  dialogHeader,
+  dialogLayer,
+  dialogLayout,
+} from './dialog.css'
 
 /**
  * @public
@@ -107,53 +117,8 @@ function isTargetWithinScope(
 }
 
 const StyledDialog = styled(Layer)<
-  ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps & AnimationDialogStyleProps
->(responsivePaddingStyle, dialogStyle, responsiveDialogPositionStyle, animationDialogStyle)
-
-const DialogContainer = styled(Container)`
-  &:not([hidden]) {
-    display: flex;
-  }
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-
-const DialogCardRoot = styled(Card)`
-  &:not([hidden]) {
-    display: flex;
-  }
-  width: 100%;
-  min-height: 0;
-  max-height: 100%;
-  overflow: hidden;
-  overflow: clip;
-`
-
-const DialogLayout = styled(Flex)`
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-`
-
-const DialogHeader = styled(Box)`
-  position: relative;
-  z-index: 2;
-`
-
-const DialogContent = styled(Box)`
-  position: relative;
-  z-index: 1;
-  overflow: auto;
-  outline: none;
-`
-
-const DialogFooter = styled(Box)`
-  position: relative;
-  z-index: 3;
-`
+  ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps
+>(responsivePaddingStyle, dialogStyle, responsiveDialogPositionStyle)
 
 function DialogCard(props: DialogCardProps) {
   const {
@@ -243,11 +208,18 @@ function DialogCard(props: DialogCardProps) {
   )
 
   return (
-    <DialogContainer data-ui="DialogCard" width={width}>
-      <DialogCardRoot radius={radius} ref={ref} scheme={scheme} shadow={shadow}>
-        <DialogLayout direction="column">
+    <Container className={dialogContainer} data-ui="DialogCard" display="flex" width={width}>
+      <Card
+        className={dialogCard}
+        display="flex"
+        radius={radius}
+        ref={ref}
+        scheme={scheme}
+        shadow={shadow}
+      >
+        <Flex className={dialogLayout} direction="column" flex={1}>
           {showHeader && (
-            <DialogHeader>
+            <Box className={dialogHeader}>
               <Flex align="flex-start" padding={3}>
                 <Box flex={1} padding={2}>
                   {header && (
@@ -269,17 +241,17 @@ function DialogCard(props: DialogCardProps) {
                   </Box>
                 )}
               </Flex>
-            </DialogHeader>
+            </Box>
           )}
 
-          <DialogContent flex={1} ref={contentRef} tabIndex={-1}>
+          <Box className={dialogContent} flex={1} ref={contentRef} tabIndex={-1}>
             {children}
-          </DialogContent>
+          </Box>
 
-          {footer && <DialogFooter>{footer}</DialogFooter>}
-        </DialogLayout>
-      </DialogCardRoot>
-    </DialogContainer>
+          {footer && <Box className={dialogFooter}>{footer}</Box>}
+        </Flex>
+      </Card>
+    </Container>
   )
 }
 
@@ -315,6 +287,7 @@ export function Dialog(
     width: widthProp = 0,
     zOffset: _zOffsetProp,
     animate: _animate = false,
+    className,
     ...restProps
   } = props
   const positionProp = _positionProp ?? (dialog.position || 'fixed')
@@ -395,10 +368,10 @@ export function Dialog(
     <Portal __unstable_name={portalProp}>
       <StyledDialog
         {...restProps}
-        $animate={animate}
         $padding={padding}
         $position={position}
         aria-labelledby={labelId}
+        className={clsx(dialogLayer, animate && dialogAnimated, className)}
         aria-modal
         data-ui="Dialog"
         id={id}

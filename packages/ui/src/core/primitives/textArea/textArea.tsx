@@ -14,12 +14,13 @@ import {
   TextInputInputStyleProps,
   textInputRepresentationStyle,
   TextInputRepresentationStyleProps,
-  textInputRootStyle,
 } from '../../styles/input/textInputStyle'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
 import {useRootTheme} from '../../theme/useRootTheme'
 import {ResponsiveRadiusProps} from '../types'
+
+import {inputRoot, textInputRoot} from '../../styles/input/textInput.css'
 
 /**
  * @public
@@ -35,15 +36,6 @@ export interface TextAreaProps extends ResponsiveRadiusProps {
   padding?: number | number[]
   weight?: ThemeFontWeightKey
 }
-
-const StyledTextArea = styled.span(textInputRootStyle)
-
-const InputRoot = styled.span`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  position: relative;
-`
 
 const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
@@ -88,8 +80,8 @@ export function TextArea(props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAre
   useCustomValidity(ref, customValidity)
 
   return (
-    <StyledTextArea data-ui="TextArea">
-      <InputRoot>
+    <span className={textInputRoot} data-ui="TextArea">
+      <span className={inputRoot}>
         <Input
           data-as="textarea"
           data-scheme={rootTheme.scheme}
@@ -113,7 +105,7 @@ export function TextArea(props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAre
           data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
         />
-      </InputRoot>
-    </StyledTextArea>
+      </span>
+    </span>
   )
 }

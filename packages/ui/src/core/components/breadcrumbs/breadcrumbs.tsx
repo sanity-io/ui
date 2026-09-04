@@ -1,12 +1,15 @@
+import {clsx} from 'clsx/lite'
 import {Children, Fragment, isValidElement, useCallback, useMemo, useRef, useState} from 'react'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {Box} from '../../primitives/box/box'
+import {Button} from '../../primitives/button/button'
 import {Popover} from '../../primitives/popover/popover'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
 import {_getArrayProp} from '../../styles/helpers'
-import {ExpandButton, StyledBreadcrumbs} from './breadcrumbs.styles'
+
+import {breadcrumbs, expandButton} from './breadcrumbs.css'
 
 /**
  * @beta
@@ -27,7 +30,7 @@ export interface BreadcrumbsProps {
 export function Breadcrumbs(
   props: BreadcrumbsProps & Omit<React.HTMLProps<HTMLOListElement>, 'as' | 'type'>,
 ) {
-  const {children, gap = 2, maxLength, ref, separator, ...restProps} = props
+  const {children, className, gap = 2, maxLength, ref, separator, ...restProps} = props
   const space = _getArrayProp(gap)
   const [open, setOpen] = useState(false)
   const expandElementRef = useRef<HTMLButtonElement | null>(null)
@@ -52,7 +55,7 @@ export function Breadcrumbs(
   })
 
   return (
-    <StyledBreadcrumbs data-ui="Breadcrumbs" {...restProps} ref={ref}>
+    <ol className={clsx(breadcrumbs, className)} data-ui="Breadcrumbs" ref={ref} {...restProps}>
       {items.map((item, itemIndex) => (
         // oxlint-disable-next-line no-array-index-key
         <Fragment key={itemIndex}>
@@ -64,7 +67,7 @@ export function Breadcrumbs(
           <Box as="li">{item}</Box>
         </Fragment>
       ))}
-    </StyledBreadcrumbs>
+    </ol>
   )
 }
 
@@ -97,19 +100,20 @@ function useItems({
     return [
       ...rawItems.slice(0, beforeLength - 1),
       <Popover
+        key="button"
         constrainSize
         content={
           <Stack as="ol" overflow="auto" padding={space} gap={space}>
             {rawItems.slice(beforeLength - 1, len - afterLength)}
           </Stack>
         }
-        key="button"
         open={open}
         placement="top"
         portal
         ref={popoverElementRef}
       >
-        <ExpandButton
+        <Button
+          className={expandButton}
           fontSize={1}
           mode="bleed"
           onClick={open ? collapse : expand}
