@@ -100,13 +100,13 @@ function useItems({
     return [
       ...rawItems.slice(0, beforeLength - 1),
       <Popover
+        key="button"
         constrainSize
         content={
           <Stack as="ol" overflow="auto" padding={space} gap={space}>
             {rawItems.slice(beforeLength - 1, len - afterLength)}
           </Stack>
         }
-        key="button"
         open={open}
         placement="top"
         portal

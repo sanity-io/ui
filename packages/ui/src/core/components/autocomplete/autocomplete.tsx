@@ -590,8 +590,8 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
             return (
               <AutocompleteOption
-                id={`${id}-option-${option.value}`}
                 key={option.value}
+                id={`${id}-option-${option.value}`}
                 onSelect={handleOptionSelect}
                 selected={active}
                 value={option.value}

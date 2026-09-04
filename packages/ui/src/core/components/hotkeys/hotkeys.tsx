@@ -50,7 +50,7 @@ export function Hotkeys(props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>,
       <Inline as="span" gap={spacing}>
         {keys.map((key, i) => (
           // oxlint-disable-next-line no-array-index-key
-          <Key fontSize={fontSize} key={i} padding={padding} radius={radius}>
+          <Key key={i} fontSize={fontSize} padding={padding} radius={radius}>
             {key}
           </Key>
         ))}
