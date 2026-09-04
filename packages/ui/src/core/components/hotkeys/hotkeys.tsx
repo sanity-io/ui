@@ -23,9 +23,9 @@ export interface HotkeysProps {
   keys?: string[]
 }
 
-// Stays on styled-components: `display: block` has to beat KBD's runtime
-// `display: inline-block` at the same specificity, which only holds while both
-// rules live in the runtime stylesheet.
+// Stays on styled-components: `display: block` must beat KBD's runtime
+// `display: inline-block` at equal specificity, which needs both rules in the
+// runtime stylesheet.
 const Key = styled(KBD)`
   &:not([hidden]) {
     display: block;

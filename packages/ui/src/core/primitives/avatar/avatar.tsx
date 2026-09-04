@@ -49,8 +49,9 @@ const StyledAvatar = styled.div<{$color: ThemeColorAvatarColorKey; $size: Avatar
   avatarRootStyle,
 )
 
-// Stays on styled-components: `color: inherit` has to beat Label's runtime
-// `color: var(--card-fg-color)` at the same specificity.
+// Stays on styled-components: `color: inherit` must beat Label's runtime
+// `color: var(--card-fg-color)` at equal specificity, which needs both rules in
+// the runtime stylesheet.
 const InitialsLabel = styled(Label)({
   color: 'inherit',
 })
