@@ -7,9 +7,8 @@ import {Popover} from '../../primitives/popover/popover'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
 import {_getArrayProp} from '../../styles/helpers'
-import {ExpandButton} from './breadcrumbs.styles'
 
-import {breadcrumbs} from './breadcrumbs.css'
+import {breadcrumbs, expandButton} from './breadcrumbs.css'
 
 /**
  * @beta
@@ -112,7 +111,8 @@ function useItems({
         portal
         ref={popoverElementRef}
       >
-        <ExpandButton
+        <Button
+          className={expandButton}
           fontSize={1}
           mode="bleed"
           onClick={open ? collapse : expand}
