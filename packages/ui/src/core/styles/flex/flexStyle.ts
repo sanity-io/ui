@@ -1,6 +1,6 @@
 import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive, rem} from '../helpers'
+import {_responsive, _ruleSet, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexStyleProps} from './types'
 
@@ -10,17 +10,17 @@ const BASE_STYLE: CSSObject = {
   },
 }
 
-export function responsiveFlexStyle(): Array<
-  CSSObject | ((props: ResponsiveFlexStyleProps & ThemeProps) => CSSObject[])
-> {
-  return [
-    BASE_STYLE,
-    responsiveFlexAlignStyle,
-    responsiveFlexGapStyle,
-    responsiveFlexWrapStyle,
-    responsiveFlexJustifyStyle,
-    responsiveFlexDirectionStyle,
-  ]
+const RULES = _ruleSet(
+  BASE_STYLE,
+  responsiveFlexAlignStyle,
+  responsiveFlexGapStyle,
+  responsiveFlexWrapStyle,
+  responsiveFlexJustifyStyle,
+  responsiveFlexDirectionStyle,
+)
+
+export function responsiveFlexStyle(): CSSObject[] {
+  return RULES
 }
 
 function responsiveFlexAlignStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {

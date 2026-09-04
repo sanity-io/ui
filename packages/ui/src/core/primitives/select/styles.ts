@@ -4,10 +4,9 @@ import {CSSObject} from '../../../theme/system/css'
 import {ThemeFontSize} from '../../../theme/system/font'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
-import {_responsive, rem} from '../../styles/helpers'
+import {_responsive, _ruleSet, rem} from '../../styles/helpers'
 import {responsiveInputPaddingIconRightStyle} from '../../styles/input/responsiveInputPaddingStyle'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
-import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
 import {ThemeProps} from '../../styles/types'
 
 function rootStyle(): ReturnType<typeof css> {
@@ -109,23 +108,16 @@ function inputTextSizeStyle(props: {$fontSize: number[]} & ThemeProps) {
   )
 }
 
-function inputStyle(): Array<
-  | ((
-      props: ResponsiveRadiusStyleProps & {
-        $fontSize: number[]
-        $padding: number[]
-        $space: number[]
-      } & ThemeProps,
-    ) => CSSObject[])
-  | ((props: ThemeProps) => ReturnType<typeof css>)
-> {
-  return [
-    responsiveRadiusStyle,
-    inputBaseStyle,
-    inputColorStyle,
-    inputTextSizeStyle,
-    responsiveInputPaddingIconRightStyle,
-  ]
+const INPUT_RULES = _ruleSet(
+  responsiveRadiusStyle,
+  inputBaseStyle,
+  inputColorStyle,
+  inputTextSizeStyle,
+  responsiveInputPaddingIconRightStyle,
+)
+
+function inputStyle(): CSSObject[] {
+  return INPUT_RULES
 }
 
 function iconBoxStyle(props: ThemeProps): ReturnType<typeof css> {

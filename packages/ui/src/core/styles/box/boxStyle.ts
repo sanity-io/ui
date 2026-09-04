@@ -2,7 +2,7 @@ import {Property} from 'csstype'
 
 import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive} from '../helpers'
+import {_responsive, _ruleSet} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBoxStyleProps} from './types'
 
@@ -26,15 +26,15 @@ export function boxStyle(): CSSObject {
   return BASE_STYLE
 }
 
-export function responsiveBoxStyle(): Array<
-  (props: ResponsiveBoxStyleProps & ThemeProps) => CSSObject[]
-> {
-  return [
-    responsiveBoxSizingStyle,
-    responsiveBoxHeightStyle,
-    responsiveBoxOverflowStyle,
-    responsiveBoxDisplayStyle,
-  ]
+const RULES = _ruleSet(
+  responsiveBoxSizingStyle,
+  responsiveBoxHeightStyle,
+  responsiveBoxOverflowStyle,
+  responsiveBoxDisplayStyle,
+)
+
+export function responsiveBoxStyle(): CSSObject[] {
+  return RULES
 }
 
 function responsiveBoxDisplayStyle(props: ResponsiveBoxStyleProps & ThemeProps) {
