@@ -13,7 +13,7 @@ import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
 import {useTree} from './useTree'
 
-import {treeItem, treeItemToggleArrow} from './tree.css'
+import {treeItem} from './tree.css'
 
 /**
  * @beta
@@ -157,7 +157,7 @@ export function TreeItem(
           </Text>
         )}
         {!IconComponent && (
-          <Text className={treeItemToggleArrow} muted={muted} size={fontSize} weight={weight}>
+          <Text muted={muted} size={fontSize} weight={weight}>
             <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
           </Text>
         )}

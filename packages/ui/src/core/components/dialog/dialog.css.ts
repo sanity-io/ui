@@ -34,7 +34,6 @@ globalStyle(`${dialogAnimated} > [data-ui='DialogCard']`, {
 })
 
 export const dialogContainer = style({
-  width: '100%',
   height: '100%',
   flexDirection: 'column',
   alignItems: 'center',
@@ -45,7 +44,7 @@ export const dialogCard = style({
   width: '100%',
   minHeight: 0,
   maxHeight: '100%',
-  overflow: ['hidden', 'clip'],
+  overflow: 'clip',
 })
 
 export const dialogLayout = style({

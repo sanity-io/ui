@@ -9,9 +9,10 @@ import {Card} from '../../primitives/card/card'
 import {Flex} from '../../primitives/flex/flex'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
-import {BUTTON_TONE, LoadingBarProgress, STATUS_CARD_TONE} from './styles'
+import {useTheme_v2} from '../../theme/useTheme'
+import {BUTTON_TONE, STATUS_CARD_TONE} from './styles'
 
-import {loadingBar, loadingBarMask, toast, toastText} from './toast.css'
+import {loadingBar, loadingBarMask, loadingBarProgress, toast, toastText} from './toast.css'
 
 /**
  * @public
@@ -74,6 +75,7 @@ export function Toast(
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
   const buttonTone = status ? BUTTON_TONE[status] : 'default'
   const role = status ? ROLES[status] : 'status'
+  const {color} = useTheme_v2()
 
   const prefersReducedMotion = usePrefersReducedMotion()
 
@@ -139,9 +141,13 @@ export function Toast(
       {hasDuration && (
         <motion.div className={loadingBar} variants={content} transition={transition}>
           <Card className={loadingBarMask} tone={cardTone} radius={radius} />
-          <MotionLoadingBarProgress
+          <MotionCard
             key={`progress-${updatedAt}`}
+            className={loadingBarProgress}
             tone={cardTone}
+            style={{
+              '--toast-loading-bar-bg': color.button.default[cardTone].enabled.bg,
+            }}
             initial={{scaleX: 0}}
             animate={{scaleX: 1}}
             transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
@@ -194,4 +200,3 @@ const content = {
 const MotionCard = motion.create(Card)
 const MotionFlex = motion.create(Flex)
 const MotionText = motion.create(Text)
-const MotionLoadingBarProgress = motion.create(LoadingBarProgress)

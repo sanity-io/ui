@@ -6,7 +6,7 @@ export const toast = style({
   pointerEvents: 'all',
   width: '100%',
   position: 'relative',
-  overflow: ['hidden', 'clip'],
+  overflow: 'clip',
   selectors: {
     '&[data-has-duration]': {
       paddingBottom: `calc(${LOADING_BAR_HEIGHT}px / 2)`,
@@ -27,7 +27,7 @@ export const loadingBar = style({
   right: '0px',
   pointerEvents: 'none',
   zIndex: -1,
-  overflow: ['hidden', 'clip'],
+  overflow: 'clip',
   background: 'transparent',
   alignItems: 'flex-end',
   willChange: 'opacity',
@@ -40,4 +40,16 @@ export const loadingBarMask = style({
   right: `-${LOADING_BAR_HEIGHT}px`,
   bottom: `${LOADING_BAR_HEIGHT}px`,
   zIndex: 1,
+})
+
+export const loadingBarProgress = style({
+  display: 'block',
+  height: '100%',
+  width: '100%',
+  transformOrigin: '0% 50%',
+  selectors: {
+    '&&': {
+      backgroundColor: 'var(--toast-loading-bar-bg)',
+    },
+  },
 })
