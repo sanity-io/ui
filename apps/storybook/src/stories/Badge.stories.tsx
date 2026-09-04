@@ -1,4 +1,4 @@
-import {FaceHappyIcon} from '@sanity/icons'
+import {FaceHappyIcon} from '@sanity/icons/FaceHappy'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 import {Badge as BadgeV3} from 'ui3'
