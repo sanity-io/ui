@@ -43,11 +43,13 @@ export const dialogContainer = style({
 
 export const dialogCard = style({
   width: '100%',
+  minHeight: 0,
   maxHeight: '100%',
   overflow: ['hidden', 'clip'],
 })
 
 export const dialogLayout = style({
+  minHeight: 0,
   width: '100%',
 })
 
