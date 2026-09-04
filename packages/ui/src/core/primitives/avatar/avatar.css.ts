@@ -60,6 +60,18 @@ export const avatarStroke = style({
   },
 })
 
+export const avatarStack = style({
+  whiteSpace: 'nowrap',
+})
+
+globalStyle(`${avatarStack} > div`, {
+  verticalAlign: 'top',
+})
+
+globalStyle(`${avatarStack} > div:not([hidden])`, {
+  display: 'inline-block',
+})
+
 export const avatarInitials = style({
   width: '100%',
   height: '100%',
