@@ -29,7 +29,14 @@ import {Card} from '../card/card'
 import {Text} from '../text/text'
 
 import {inputRoot, textInputRoot} from '../../styles/input/textInput.css'
-import {textInputClearButton, textInputLeftBox, textInputRightBox} from './textInput.css'
+import {
+  textInputClearButton,
+  textInputLeftBox,
+  textInputPrefix,
+  textInputRightBox,
+  textInputRightCard,
+  textInputSuffix,
+} from './textInput.css'
 
 /**
  * @public
@@ -93,29 +100,6 @@ export interface TextInputProps {
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 
-// Prefix and Suffix stay on styled-components: their corner radius longhands
-// must beat Card's runtime `border-radius` shorthand at equal specificity,
-// which needs both rules in the runtime stylesheet.
-const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`
-
-const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`
-
 const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
   textInputBaseStyle,
@@ -126,16 +110,6 @@ const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresent
   responsiveRadiusStyle,
   textInputRepresentationStyle,
 )
-
-// Stays on styled-components: `background-color: transparent` must beat Card's
-// runtime `background-color: var(--card-bg-color)` at equal specificity, which
-// needs both rules in the runtime stylesheet.
-const RightCard = styled(Card)`
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-`
 
 /**
  * Single line text input.
@@ -212,9 +186,18 @@ export function TextInput(
   const prefixNode = useMemo(
     () =>
       prefix && (
-        <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border" tone="inherit">
+        <Card
+          borderTop
+          borderLeft
+          borderBottom
+          className={textInputPrefix}
+          as="span"
+          radius={radius}
+          sizing="border"
+          tone="inherit"
+        >
           <span>{prefix}</span>
-        </Prefix>
+        </Card>
       ),
     [prefix, radius],
   )
@@ -299,8 +282,9 @@ export function TextInput(
       !disabled &&
       !readOnly &&
       clearButton && (
-        <RightCard
-          forwardedAs="span"
+        <Card
+          className={textInputRightCard}
+          as="span"
           padding={clearButtonBoxPadding}
           style={CLEAR_BUTTON_BOX_STYLE}
           tone={customValidity ? 'critical' : 'inherit'}
@@ -318,7 +302,7 @@ export function TextInput(
             onClick={handleClearClick}
             onMouseDown={handleClearMouseDown}
           />
-        </RightCard>
+        </Card>
       ),
     [
       clearButton,
@@ -339,9 +323,18 @@ export function TextInput(
   const suffixNode = useMemo(
     () =>
       suffix && (
-        <Suffix borderTop borderRight borderBottom radius={radius} sizing="border" tone="inherit">
+        <Card
+          borderTop
+          borderRight
+          borderBottom
+          className={textInputSuffix}
+          as="span"
+          radius={radius}
+          sizing="border"
+          tone="inherit"
+        >
           <span>{suffix}</span>
-        </Suffix>
+        </Card>
       ),
     [radius, suffix],
   )
