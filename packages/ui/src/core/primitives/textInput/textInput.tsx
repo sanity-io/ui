@@ -93,9 +93,9 @@ export interface TextInputProps {
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 
-// Prefix and Suffix stay on styled-components: their corner radius overrides
-// have to beat Card's runtime `border-radius` shorthand at the same
-// specificity, which only holds while both rules live in the runtime stylesheet.
+// Prefix and Suffix stay on styled-components: their corner radius longhands
+// must beat Card's runtime `border-radius` shorthand at equal specificity,
+// which needs both rules in the runtime stylesheet.
 const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -127,8 +127,9 @@ const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresent
   textInputRepresentationStyle,
 )
 
-// Stays on styled-components: `background-color: transparent` has to beat
-// Card's runtime `background-color: var(--card-bg-color)` at the same specificity.
+// Stays on styled-components: `background-color: transparent` must beat Card's
+// runtime `background-color: var(--card-bg-color)` at equal specificity, which
+// needs both rules in the runtime stylesheet.
 const RightCard = styled(Card)`
   background-color: transparent;
   position: absolute;
