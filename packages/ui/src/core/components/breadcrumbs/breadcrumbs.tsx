@@ -54,7 +54,7 @@ export function Breadcrumbs(
   })
 
   return (
-    <ol className={clsx(breadcrumbs, className)} data-ui="Breadcrumbs" {...restProps} ref={ref}>
+    <ol className={clsx(breadcrumbs, className)} data-ui="Breadcrumbs" ref={ref} {...restProps}>
       {items.map((item, itemIndex) => (
         // oxlint-disable-next-line no-array-index-key
         <Fragment key={itemIndex}>
