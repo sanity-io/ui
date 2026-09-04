@@ -30,18 +30,6 @@ export interface TextInputRepresentationStyleProps {
   $unstableDisableFocusRing?: boolean
 }
 
-const ROOT_STYLE = css`
-  &:not([hidden]) {
-    display: flex;
-  }
-
-  align-items: center;
-`
-
-export function textInputRootStyle(): ReturnType<typeof css> {
-  return ROOT_STYLE
-}
-
 export function textInputBaseStyle(
   props: TextInputInputStyleProps & ThemeProps,
 ): ReturnType<typeof css> {
