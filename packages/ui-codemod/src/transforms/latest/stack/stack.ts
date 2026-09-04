@@ -76,11 +76,15 @@ export default function transform(
           callback: (path) => {
             let changed = false
 
+            if (transformAttributes(j, path, FLEX_MODS, FLEX_TODO_WARNING)) {
+              changed = true
+            }
+
             if (addAttribute(j, path.node, 'flexDirection', 'column')) {
               changed = true
             }
 
-            if (transformAttributes(j, path, FLEX_MODS, FLEX_TODO_WARNING)) {
+            if (addAttribute(j, path.node, 'flexShrink', 0)) {
               changed = true
             }
 

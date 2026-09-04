@@ -53,8 +53,8 @@ defineInlineTest(
   `,
   `
   <Grid
-    gridTemplateColumns="repeat(1, 1fr)"
-    gridTemplateRows="repeat(2, 1fr)"
+    gridTemplateColumns="repeat(1, minmax(0, 1fr))"
+    gridTemplateRows="repeat(2, minmax(0, 1fr))"
   />
   `,
   'updates grid props mapped values',
@@ -91,8 +91,8 @@ defineInlineTest(
   `,
   `
   <Grid
-    gridTemplateColumns="repeat(1, 1fr)"
-    gridTemplateRows="repeat(2, 1fr)"
+    gridTemplateColumns="repeat(1, minmax(0, 1fr))"
+    gridTemplateRows="repeat(2, minmax(0, 1fr))"
   />
   `,
   'updates v3 grid props mapped values',
