@@ -1,6 +1,5 @@
-import {clsx} from 'clsx/lite'
 import {Children, cloneElement, isValidElement} from 'react'
-import {styled} from 'styled-components'
+import {css, styled} from 'styled-components'
 
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {EMPTY_RECORD} from '../../constants'
@@ -9,7 +8,21 @@ import {ThemeProps} from '../../styles/types'
 import {AvatarSize} from '../../types/avatar'
 import {AvatarCounter} from './avatarCounter'
 
-import {avatarStack} from './avatar.css'
+const BASE_STYLES = css`
+  white-space: nowrap;
+
+  & > div {
+    vertical-align: top;
+
+    &:not([hidden]) {
+      display: inline-block;
+    }
+  }
+`
+
+function avatarStackStyle() {
+  return BASE_STYLES
+}
 
 function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {avatar, media} = getTheme_v2(props.theme)
@@ -27,7 +40,10 @@ function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProp
   })
 }
 
-const StyledAvatarStack = styled.div<{$size: AvatarSize[]}>(responsiveAvatarStackSizeStyle)
+const StyledAvatarStack = styled.div<{$size: AvatarSize[]}>(
+  responsiveAvatarStackSizeStyle,
+  avatarStackStyle,
+)
 
 /**
  * @public
@@ -46,7 +62,6 @@ export interface AvatarStackProps {
 export function AvatarStack(props: AvatarStackProps & Omit<React.HTMLProps<HTMLDivElement>, 'as'>) {
   const {
     children: childrenProp,
-    className,
     maxLength: maxLengthProp = 4,
     ref,
     size: sizeProp = 1,
@@ -62,13 +77,7 @@ export function AvatarStack(props: AvatarStackProps & Omit<React.HTMLProps<HTMLD
   const visibleChildren = extraCount > 1 ? children.slice(extraCount, len) : children
 
   return (
-    <StyledAvatarStack
-      className={clsx(avatarStack, className)}
-      data-ui="AvatarStack"
-      {...restProps}
-      ref={ref}
-      $size={size}
-    >
+    <StyledAvatarStack data-ui="AvatarStack" {...restProps} ref={ref} $size={size}>
       {len === 0 && (
         <div>
           <AvatarCounter count={len} size={size} />
