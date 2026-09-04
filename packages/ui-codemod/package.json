@@ -15,6 +15,14 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./transforms/latest/badge": {
+      "source": "./src/transforms/latest/badge/badge.ts",
+      "default": "./dist/transforms/latest/badge/badge.js"
+    },
+    "./latest/badge": {
+      "source": "./src/commands/latest/badge.ts",
+      "default": "./dist/commands/latest/badge.js"
+    },
     "./transforms/latest/box": {
       "source": "./src/transforms/latest/box/box.ts",
       "default": "./dist/transforms/latest/box/box.js"
@@ -107,6 +115,8 @@
   },
   "publishConfig": {
     "exports": {
+      "./transforms/latest/badge": "./dist/transforms/latest/badge/badge.js",
+      "./latest/badge": "./dist/commands/latest/badge.js",
       "./transforms/latest/box": "./dist/transforms/latest/box/box.js",
       "./latest/box": "./dist/commands/latest/box.js",
       "./transforms/latest/card": "./dist/transforms/latest/card/card.js",

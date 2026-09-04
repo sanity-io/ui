@@ -1,4 +1,5 @@
 import {
+  Badge,
   Box,
   Button,
   Card,
@@ -62,6 +63,13 @@ function Ui5() {
               text="Belay that order, Commander"
             />
             <Link href="https://example.org">Refer to the Prime Directive</Link>
+          </HStack>
+        </Box>
+        <Box marginY={3}>
+          <HStack gap={2}>
+            <Badge tone="positive" text="Shields nominal" />
+            <Badge tone="caution" text="Deflector array offline" />
+            <Badge tone="critical" text="Warp core breach" />
           </HStack>
         </Box>
       </Card>
