@@ -8,7 +8,13 @@ import {_getArrayProp} from '../../styles/helpers'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
 
-import {skeleton, skeletonAnimated, skeletonHidden, skeletonStatic} from './skeleton.css'
+import {
+  skeleton,
+  skeletonAnimated,
+  skeletonHidden,
+  skeletonStatic,
+  skeletonVisible,
+} from './skeleton.css'
 
 const StyledSkeleton = styled(Box)<ResponsiveRadiusStyleProps>(responsiveRadiusStyle)
 
@@ -50,7 +56,7 @@ export function Skeleton(props: SkeletonProps & Omit<React.HTMLProps<HTMLDivElem
       $radius={_getArrayProp(radius)}
       className={clsx(
         skeleton,
-        delay && !visible && skeletonHidden,
+        (delay ? visible : true) ? skeletonVisible : skeletonHidden,
         animated ? skeletonAnimated : skeletonStatic,
         className,
       )}
