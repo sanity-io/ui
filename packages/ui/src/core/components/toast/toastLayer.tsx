@@ -1,7 +1,7 @@
-import {styled} from 'styled-components'
-
 import {Grid} from '../../primitives/grid/grid'
 import {useLayer} from '../../utils/layer/useLayer'
+
+import {toastLayer} from './toastLayer.css'
 
 /**
  * @public
@@ -22,8 +22,9 @@ export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
   const {zIndex} = useLayer()
 
   return (
-    <StyledLayer
-      forwardedAs="ul"
+    <Grid
+      as="ul"
+      className={toastLayer}
       data-ui="ToastProvider"
       padding={padding}
       paddingX={paddingX}
@@ -33,17 +34,6 @@ export function ToastLayer(props: ToastLayerProps): React.JSX.Element {
       style={{zIndex}}
     >
       {children}
-    </StyledLayer>
+    </Grid>
   )
 }
-
-const StyledLayer = styled(Grid)`
-  box-sizing: border-box;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  list-style: none;
-  pointer-events: none;
-  max-width: 420px;
-  width: 100%;
-`
