@@ -212,7 +212,6 @@ export default function Ui3() {
         ))}
       </Profiler>
 
-      {/* UI 3 Badge has no text prop, so the label is children. */}
       <h2>{count} Badges</h2>
       <Profiler id="Badge" onRender={handleOnRender}>
         {iterator.map((i) => (

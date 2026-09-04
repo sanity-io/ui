@@ -292,7 +292,6 @@ function PopoverMountSection() {
   )
 }
 
-/** Large blast radius, style-focused: one click changes a style prop on every badge. */
 function BadgeToneToggleSection() {
   const [tone, setTone] = useState<'neutral' | 'caution'>('neutral')
 
@@ -310,7 +309,6 @@ function BadgeToneToggleSection() {
           />
         </Inline>
         <div style={scrollAreaStyle}>
-          {/* UI 3 Badge has no text prop, so the label is children, as in real usage. */}
           <Flex wrap="wrap" gap={2}>
             {Array.from({length: BADGE_COUNT}, (_, index) => (
               <Badge key={index} tone={tone}>

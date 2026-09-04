@@ -258,7 +258,6 @@ function PopoverMountSection() {
   )
 }
 
-/** Large blast radius, style-focused: one click changes a style prop on every badge. */
 function BadgeToneToggleSection() {
   const [tone, setTone] = useState<'neutral' | 'caution'>('neutral')
 
