@@ -20,7 +20,7 @@ import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
 import {useRootTheme} from '../../theme/useRootTheme'
 import {ResponsiveRadiusProps} from '../types'
 
-import {inputRoot, textAreaRoot} from '../../styles/input/textInput.css'
+import {inputRoot, textInputRoot} from '../../styles/input/textInput.css'
 
 /**
  * @public
@@ -80,7 +80,7 @@ export function TextArea(props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAre
   useCustomValidity(ref, customValidity)
 
   return (
-    <span className={textAreaRoot} data-ui="TextArea">
+    <span className={textInputRoot} data-ui="TextArea">
       <span className={inputRoot}>
         <Input
           data-as="textarea"
