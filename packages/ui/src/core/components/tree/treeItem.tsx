@@ -1,4 +1,5 @@
 import {ToggleArrowRightIcon} from '@sanity/icons/ToggleArrowRight'
+import {clsx} from 'clsx/lite'
 import {startTransition, useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
@@ -7,15 +8,12 @@ import {Box} from '../../primitives/box/box'
 import {Flex} from '../../primitives/flex/flex'
 import {Text} from '../../primitives/text/text'
 import {ElementType} from '../../types/component'
-import {
-  treeItemBoxStyle,
-  TreeItemBoxStyleProps,
-  treeItemRootColorStyle,
-  treeItemRootStyle,
-} from './style'
+import {treeItemBoxStyle, TreeItemBoxStyleProps, treeItemRootColorStyle} from './style'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
 import {useTree} from './useTree'
+
+import {treeItem, treeItemToggleArrow} from './tree.css'
 
 /**
  * @beta
@@ -44,7 +42,7 @@ export interface TreeItemProps {
   weight?: ThemeFontWeightKey
 }
 
-const StyledTreeItem = styled.li(treeItemRootStyle, treeItemRootColorStyle)
+const StyledTreeItem = styled.li(treeItemRootColorStyle)
 
 /**
  * Styles a plain element (rather than wrapping `Box`) so that `as={linkAs}` renders the custom
@@ -53,12 +51,6 @@ const StyledTreeItem = styled.li(treeItemRootStyle, treeItemRootColorStyle)
  * (breaking e.g. `next/link`, which treats `as` as a URL override) and skip the `Box` styles.
  */
 const TreeItemBox = styled.a<TreeItemBoxStyleProps>(treeItemBoxStyle)
-
-const ToggleArrowText = styled(Text)`
-  & > svg {
-    transition: transform 100ms;
-  }
-`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -165,9 +157,9 @@ export function TreeItem(
           </Text>
         )}
         {!IconComponent && (
-          <ToggleArrowText muted={muted} size={fontSize} weight={weight}>
+          <Text className={treeItemToggleArrow} muted={muted} size={fontSize} weight={weight}>
             <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
-          </ToggleArrowText>
+          </Text>
         )}
       </Box>
       <Box flex={1}>
@@ -186,6 +178,7 @@ export function TreeItem(
         data-tree-key={itemKey}
         data-ui="TreeItem"
         {...restProps}
+        className={clsx(treeItem, restProps.className)}
         onClick={handleClick}
         ref={setRootElement}
         role="none"
@@ -220,6 +213,7 @@ export function TreeItem(
       data-tree-key={itemKey}
       {...restProps}
       aria-expanded={expanded}
+      className={clsx(treeItem, restProps.className)}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       ref={setRootElement}

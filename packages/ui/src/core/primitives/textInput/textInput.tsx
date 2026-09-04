@@ -1,4 +1,5 @@
 import {CloseIcon} from '@sanity/icons/Close'
+import {clsx} from 'clsx/lite'
 import {isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
@@ -17,7 +18,6 @@ import {
   TextInputInputStyleProps,
   textInputRepresentationStyle,
   TextInputRepresentationStyleProps,
-  textInputRootStyle,
 } from '../../styles/input/textInputStyle'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
@@ -27,6 +27,9 @@ import {Box} from '../box/box'
 import {Button, ButtonOwnProps} from '../button/button'
 import {Card} from '../card/card'
 import {Text} from '../text/text'
+
+import {inputRoot, textInputRoot} from '../../styles/input/textInput.css'
+import {textInputClearButton, textInputLeftBox, textInputRightBox} from './textInput.css'
 
 /**
  * @public
@@ -90,15 +93,9 @@ export interface TextInputProps {
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 
-const StyledTextInput = styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle)
-
-const InputRoot = styled.span`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  position: relative;
-`
-
+// Prefix and Suffix stay on styled-components: their corner radius longhands
+// must beat Card's runtime `border-radius` shorthand at equal specificity,
+// which needs both rules in the runtime stylesheet.
 const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -130,30 +127,15 @@ const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresent
   textInputRepresentationStyle,
 )
 
-const LeftBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`
-
-const RightBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
-
+// Stays on styled-components: `background-color: transparent` must beat Card's
+// runtime `background-color: var(--card-bg-color)` at equal specificity, which
+// needs both rules in the runtime stylesheet.
 const RightCard = styled(Card)`
   background-color: transparent;
   position: absolute;
   top: 0;
   right: 0;
 `
-
-const TextInputClearButton = styled(Button)({
-  '&:not([hidden])': {
-    display: 'block',
-  },
-})
 
 /**
  * Single line text input.
@@ -252,21 +234,21 @@ export function TextInput(
         data-tone={rootTheme.tone}
       >
         {IconComponent && (
-          <LeftBox padding={padding}>
+          <Box className={textInputLeftBox} padding={padding}>
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
               {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
-          </LeftBox>
+          </Box>
         )}
 
         {!$hasClearButton && IconRightComponent && (
-          <RightBox padding={padding}>
+          <Box className={textInputRightBox} padding={padding}>
             <Text size={fontSize}>
               {isValidElement(IconRightComponent) && IconRightComponent}
               {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>
-          </RightBox>
+          </Box>
         )}
       </Presentation>
     ),
@@ -323,7 +305,7 @@ export function TextInput(
           style={CLEAR_BUTTON_BOX_STYLE}
           tone={customValidity ? 'critical' : 'inherit'}
         >
-          <TextInputClearButton
+          <Button
             aria-label="Clear"
             data-qa="clear-button"
             fontSize={fontSize}
@@ -332,6 +314,7 @@ export function TextInput(
             padding={clearButtonPadding}
             radius={radius}
             {...clearButtonProps}
+            className={clsx(textInputClearButton, clearButtonProps.className)}
             onClick={handleClearClick}
             onMouseDown={handleClearMouseDown}
           />
@@ -364,10 +347,16 @@ export function TextInput(
   )
 
   return (
-    <StyledTextInput data-ui="TextInput" tone={rootTheme.tone}>
+    <Card
+      as="span"
+      className={textInputRoot}
+      data-ui="TextInput"
+      display="flex"
+      tone={rootTheme.tone}
+    >
       {prefixNode}
 
-      <InputRoot>
+      <span className={inputRoot}>
         <Input
           data-as="input"
           data-scheme={rootTheme.scheme}
@@ -389,9 +378,9 @@ export function TextInput(
 
         {presentationNode}
         {clearButtonNode}
-      </InputRoot>
+      </span>
 
       {suffixNode}
-    </StyledTextInput>
+    </Card>
   )
 }

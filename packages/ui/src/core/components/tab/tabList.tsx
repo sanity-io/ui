@@ -1,7 +1,9 @@
+import {clsx} from 'clsx/lite'
 import {Children, cloneElement, isValidElement, useCallback, useState} from 'react'
-import {styled} from 'styled-components'
 
 import {Inline, InlineOwnProps} from '../../primitives/inline/inline'
+
+import {tabList} from './tabList.css'
 
 /**
  * @public
@@ -10,23 +12,13 @@ export interface TabListProps extends Omit<InlineOwnProps, 'height'> {
   children: Array<React.JSX.Element | null | undefined | false>
 }
 
-//Limits the width of tabs in tablist
-const CustomInline = styled(Inline)`
-  & > div {
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-`
-
 /**
  * @public
  */
 export function TabList(
   props: TabListProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,
 ) {
-  const {children: childrenProp, ref, ...restProps} = props
+  const {children: childrenProp, className, ref, ...restProps} = props
   const [focusedIndex, setFocusedIndex] = useState(-1)
 
   const children: React.JSX.Element[] = Children.toArray(childrenProp).filter(isValidElement)
@@ -55,7 +47,8 @@ export function TabList(
   )
 
   return (
-    <CustomInline
+    <Inline
+      className={clsx(tabList, className)}
       data-ui="TabList"
       {...restProps}
       onKeyDown={handleKeyDown}
@@ -63,6 +56,6 @@ export function TabList(
       role="tablist"
     >
       {tabs}
-    </CustomInline>
+    </Inline>
   )
 }

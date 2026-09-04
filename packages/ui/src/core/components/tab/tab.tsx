@@ -1,8 +1,10 @@
+import {clsx} from 'clsx/lite'
 import {useCallback, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 
 import {Button} from '../../primitives/button/button'
 import {ButtonTone} from '../../types/button'
+
+import {tab} from './tab.css'
 
 /**
  * @public
@@ -23,10 +25,6 @@ export interface TabProps {
   'tone'?: ButtonTone
 }
 
-const CustomButton = styled(Button)`
-  max-width: 100%;
-`
-
 /**
  * @public
  */
@@ -38,6 +36,7 @@ export function Tab(
     >,
 ) {
   const {
+    className,
     icon,
     id,
     focused,
@@ -78,7 +77,8 @@ export function Tab(
   }, [focused])
 
   return (
-    <CustomButton
+    <Button
+      className={clsx(tab, className)}
       data-ui="Tab"
       {...restProps}
       aria-selected={selected ? 'true' : 'false'}
