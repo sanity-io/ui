@@ -5,13 +5,6 @@ import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
 import {rem} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 
-export function checkboxBaseStyles(): ReturnType<typeof css> {
-  return css`
-    position: relative;
-    display: inline-block;
-  `
-}
-
 export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
   const {color, input, radius} = getTheme_v2(props.theme)
   const {focusRing} = input.checkbox

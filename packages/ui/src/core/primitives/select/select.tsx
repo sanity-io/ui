@@ -9,6 +9,8 @@ import {Box} from '../box/box'
 import {Text} from '../text/text'
 import {selectStyle} from './styles'
 
+import {select} from './select.css'
+
 /**
  * @public
  */
@@ -23,8 +25,6 @@ export interface SelectProps {
   space?: never
   customValidity?: string
 }
-
-const StyledSelect = styled.div(selectStyle.root)
 
 const Input = styled.select<{
   $fontSize: number[]
@@ -64,7 +64,7 @@ export function Select(props: SelectProps & Omit<React.HTMLProps<HTMLSelectEleme
   useCustomValidity(ref, customValidity)
 
   return (
-    <StyledSelect data-ui="Select">
+    <div className={select} data-ui="Select">
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-ui="Select"
@@ -84,6 +84,6 @@ export function Select(props: SelectProps & Omit<React.HTMLProps<HTMLSelectEleme
           <ChevronDownIcon />
         </Text>
       </IconBox>
-    </StyledSelect>
+    </div>
   )
 }
