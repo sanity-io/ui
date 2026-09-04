@@ -109,58 +109,82 @@ defineInlineTest(
   transform,
   {},
   `
-  <Badge padding={2} radius={3} margin={1}>Draft</Badge>
+  <Badge radius={3}>Draft</Badge>
   `,
   `
   <Badge
     style={{
-      padding: "var(--space-2)",
-      borderRadius: "var(--radius-3)",
-      margin: "var(--space-1)"
+      borderRadius: "var(--radius-3)"
     }}
     as="div"
     text="Draft" />
   `,
-  'moves padding, radius, and margin props to style',
+  'moves radius prop to style and updates mapped value',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Badge paddingX={2} paddingY={1} marginX={3} marginY={4}>Draft</Badge>
+  <Badge radius="full">Draft</Badge>
+  `,
+  `
+  <Badge
+    style={{
+      borderRadius: "var(--radius-round)"
+    }}
+    as="div"
+    text="Draft" />
+  `,
+  'maps the full radius to the round radius variable',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Badge paddingX={2} paddingY={1}>Draft</Badge>
   `,
   `
   <Badge
     style={{
       paddingInline: "var(--space-2)",
-      paddingBlock: "var(--space-1)",
-      marginInline: "var(--space-3)",
-      marginBlock: "var(--space-4)"
+      paddingBlock: "var(--space-1)"
     }}
     as="div"
     text="Draft" />
   `,
-  'moves axis padding and margin props to logical style properties',
+  'moves axis padding props to logical style properties',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Badge radius="full" flex="auto" sizing="border">Draft</Badge>
+  <Badge style={{color: 'red'}} paddingX={2}>Draft</Badge>
   `,
   `
   <Badge
     style={{
-      borderRadius: "var(--radius-round)",
-      flex: "1 1 auto",
-      boxSizing: "border-box"
+      color: 'red',
+      paddingInline: "var(--space-2)"
     }}
     as="div"
     text="Draft" />
   `,
-  'moves radius, flex, and sizing props to style and updates mapped values',
+  'merges mapped props into an existing style prop',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <Badge data-testid="status" tone="caution">Draft</Badge>
+  `,
+  `
+  <Badge data-testid="status" tone="caution" as="div" text="Draft" />
+  `,
+  'leaves pass-through props such as data-testid alone',
 )
 
 defineInlineTest(
@@ -232,11 +256,11 @@ defineInlineTest(
   transform,
   {},
   `
-  <Badge margin={24}>Draft</Badge>
+  <Badge paddingX={24}>Draft</Badge>
   `,
   `
   // UI-CODEMOD TODO: Please double check the Badge migration below
-  <Badge margin={24} as="div" text="Draft" />
+  <Badge paddingX={24} as="div" text="Draft" />
   `,
   'warns on a space value outside the scale',
 )
@@ -245,11 +269,11 @@ defineInlineTest(
   transform,
   {},
   `
-  <Badge margin={-1}>Draft</Badge>
+  <Badge paddingX={-1}>Draft</Badge>
   `,
   `
   // UI-CODEMOD TODO: Please double check the Badge migration below
-  <Badge margin={-1} as="div" text="Draft" />
+  <Badge paddingX={-1} as="div" text="Draft" />
   `,
   'warns on a negative space value',
 )
@@ -266,12 +290,12 @@ defineCrossFileTest(
     import {RootBadge} from './Component.styled'
 
     export function Component() {
-      return <RootBadge padding={2}>Draft</RootBadge>
+      return <RootBadge radius={3}>Draft</RootBadge>
     }
   `,
   (output) => {
     expect(output.replace(/\s+/g, ' ')).toContain(
-      '<RootBadge style={{ padding: "var(--space-2)" }} as="div" text="Draft" />',
+      '<RootBadge style={{ borderRadius: "var(--radius-3)" }} as="div" text="Draft" />',
     )
   },
   'transforms attributes on imported styled Badge wrappers',
@@ -292,17 +316,17 @@ defineCrossFileTest(
     export function Component() {
       return (
         <>
-          <RootBadge padding={2} />
-          <Badge padding={2} />
+          <RootBadge radius={3} />
+          <Badge radius={3} />
         </>
       )
     }
   `,
   (output) => {
     expect(output.replace(/\s+/g, ' ')).toContain(
-      '<RootBadge style={{ padding: "var(--space-2)" }} as="div" />',
+      '<RootBadge style={{ borderRadius: "var(--radius-3)" }} as="div" />',
     )
-    expect(output).toContain('<Badge padding={2} />')
+    expect(output).toContain('<Badge radius={3} />')
   },
   'does not transform attributes on unrelated Badge from another package',
 )
