@@ -1,3 +1,4 @@
+import {clsx} from 'clsx/lite'
 import {useEffect, useState} from 'react'
 import {styled} from 'styled-components'
 
@@ -6,11 +7,10 @@ import {ResponsiveRadiusProps} from '../../primitives/types'
 import {_getArrayProp} from '../../styles/helpers'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
-import {skeletonStyle} from './styles'
 
-const StyledSkeleton = styled(Box)<
-  {$animated: boolean; $visible: boolean} & ResponsiveRadiusStyleProps
->(responsiveRadiusStyle, skeletonStyle)
+import {skeleton, skeletonAnimated, skeletonHidden, skeletonStatic} from './skeleton.css'
+
+const StyledSkeleton = styled(Box)<ResponsiveRadiusStyleProps>(responsiveRadiusStyle)
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -26,7 +26,7 @@ export interface SkeletonProps extends ResponsiveRadiusProps, Omit<BoxOwnProps, 
  * @beta
  */
 export function Skeleton(props: SkeletonProps & Omit<React.HTMLProps<HTMLDivElement>, 'height'>) {
-  const {animated = false, delay, radius, ref, ...restProps} = props
+  const {animated = false, className, delay, radius, ref, ...restProps} = props
   // oxlint-disable-next-line no-unneeded-ternary
   const [visible, setVisible] = useState<boolean>(delay ? false : true)
 
@@ -47,9 +47,13 @@ export function Skeleton(props: SkeletonProps & Omit<React.HTMLProps<HTMLDivElem
   return (
     <StyledSkeleton
       {...restProps}
-      $animated={animated}
       $radius={_getArrayProp(radius)}
-      $visible={delay ? visible : true}
+      className={clsx(
+        skeleton,
+        delay && !visible && skeletonHidden,
+        animated ? skeletonAnimated : skeletonStatic,
+        className,
+      )}
       ref={ref}
     />
   )
