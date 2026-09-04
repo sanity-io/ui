@@ -10,13 +10,7 @@ import {ElementType, Props} from '../../types/component'
 import {Label} from '../label/label'
 import {avatarRootStyle, responsiveAvatarSizeStyle} from './styles'
 
-import {
-  avatarArrow,
-  avatarBgStroke,
-  avatarImage,
-  avatarInitials,
-  avatarStroke,
-} from './avatar.css'
+import {avatarArrow, avatarBgStroke, avatarImage, avatarInitials, avatarStroke} from './avatar.css'
 
 /**
  * @public
