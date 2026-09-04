@@ -22,9 +22,9 @@ export const BUTTON_TONE = {
 type LoadingBarProgressProps = Omit<CardProps, 'tone'> & {
   tone: ThemeColorStateToneKey
 }
-// Stays on styled-components: the theme-derived background-color must beat
-// Card's own runtime `background-color: var(--card-bg-color)` at the same
-// specificity, which only holds while both rules live in the runtime stylesheet.
+// Stays on styled-components: the theme-derived `background-color` must beat
+// Card's runtime `background-color: var(--card-bg-color)` at equal specificity,
+// which needs both rules in the runtime stylesheet.
 export const LoadingBarProgress = styled<React.ComponentType<LoadingBarProgressProps>>(Card)`
   display: block;
   height: 100%;
