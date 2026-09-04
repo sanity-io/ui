@@ -8,7 +8,6 @@ import {
 
 import type {BaseOptions} from '../../../types/BaseOptions'
 import {addAttribute} from '../../../utils/addAttribute'
-import {getAttribute} from '../../../utils/getAttribute'
 import {getComponentLocalNames} from '../../../utils/getComponentLocalNames'
 import {getStyledComponentAliases} from '../../../utils/getStyledComponentAliases'
 import {insertTodoWarning} from '../../../utils/insertTodoWarning'
@@ -23,38 +22,6 @@ const TODO_WARNING = 'Please double check the Badge migration below'
 const CHILDREN_TODO_WARNING =
   'Please double check the Badge migration below. Move the children into the text prop.'
 const STYLED_TODO_WARNING = 'Please double check styled(Badge) migration below'
-
-/**
- * Returns the value of a single simple text child, otherwise null. Anything
- * dynamic, mixed, or multiline is left for manual review.
- */
-function getSimpleText(children: NonNullable<JSXElement['children']>): string | null {
-  if (children.length !== 1) {
-    return null
-  }
-
-  const child = children[0]
-
-  if (child?.type === 'JSXText') {
-    const value = child.value.trim()
-
-    return value && !value.includes('\n') ? value : null
-  }
-
-  if (child?.type === 'JSXExpressionContainer') {
-    const expr = child.expression
-
-    if (expr.type === 'StringLiteral') {
-      return expr.value
-    }
-
-    if (expr.type === 'Literal' && typeof expr.value === 'string') {
-      return expr.value
-    }
-  }
-
-  return null
-}
 
 /** @internal */
 export default function transform(
@@ -83,7 +50,7 @@ export default function transform(
       markChanged()
     }
 
-    const moveChildrenToText = (path: ASTPath<JSXOpeningElement>): boolean => {
+    const warnOnChildren = (path: ASTPath<JSXOpeningElement>): boolean => {
       const parentNode = path.parent?.node
       const element: JSXElement | undefined =
         parentNode?.type === 'JSXElement' ? parentNode : undefined
@@ -92,26 +59,11 @@ export default function transform(
         return false
       }
 
-      const children = (element.children ?? []).filter(
+      const hasChildren = (element.children ?? []).some(
         (child) => !(child.type === 'JSXText' && child.value.trim() === ''),
       )
 
-      if (children.length === 0) {
-        return false
-      }
-
-      const text = getSimpleText(children)
-
-      if (text === null || getAttribute(path.node.attributes, 'text')) {
-        return insertTodoWarning(j, path, CHILDREN_TODO_WARNING)
-      }
-
-      addAttribute(j, path.node, 'text', text)
-      element.children = []
-      element.closingElement = null
-      path.node.selfClosing = true
-
-      return true
+      return hasChildren && insertTodoWarning(j, path, CHILDREN_TODO_WARNING)
     }
 
     const migrate = (path: ASTPath<JSXOpeningElement>): boolean => {
@@ -125,7 +77,7 @@ export default function transform(
         changed = true
       }
 
-      if (moveChildrenToText(path)) {
+      if (warnOnChildren(path)) {
         changed = true
       }
 
