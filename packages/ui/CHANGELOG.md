@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.0.8
+
+### Patch Changes
+
+- [#2821](https://github.com/sanity-io/ui/pull/2821) [`26a276d`](https://github.com/sanity-io/ui/commit/26a276d6adfe5d0ec41b2a92b09b45ec37e64480) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency oxc-transform-react to ^0.148.0
+
 ## 4.0.7
 
 ### Patch Changes
