@@ -1,8 +1,11 @@
+import {clsx} from 'clsx/lite'
 import {useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import {inputElementStyle, radioBaseStyle} from './styles'
+import {inputElementStyle} from './styles'
+
+import {radio} from './radio.css'
 
 /**
  * @public
@@ -11,7 +14,6 @@ export interface RadioProps {
   customValidity?: string
 }
 
-const StyledRadio = styled.div(radioBaseStyle)
 const Input = styled.input(inputElementStyle)
 
 /**
@@ -39,7 +41,7 @@ export function Radio(props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'typ
   useCustomValidity(ref, customValidity)
 
   return (
-    <StyledRadio className={className} data-ui="Radio" style={style}>
+    <div className={clsx(radio, className)} data-ui="Radio" style={style}>
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-error={customValidity ? '' : undefined}
@@ -50,6 +52,6 @@ export function Radio(props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'typ
         type="radio"
       />
       <span />
-    </StyledRadio>
+    </div>
   )
 }

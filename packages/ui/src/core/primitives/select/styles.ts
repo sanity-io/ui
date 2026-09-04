@@ -10,19 +10,6 @@ import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
 import {ThemeProps} from '../../styles/types'
 
-function rootStyle(): ReturnType<typeof css> {
-  return css`
-    position: relative;
-    width: -moz-available;
-    width: -webkit-fill-available;
-    width: stretch;
-
-    &:not([hidden]) {
-      display: inline-block;
-    }
-  `
-}
-
 function inputBaseStyle(props: ThemeProps): ReturnType<typeof css> {
   const {font} = getTheme_v2(props.theme)
 
@@ -160,7 +147,6 @@ function iconBoxStyle(props: ThemeProps): ReturnType<typeof css> {
 }
 
 export const selectStyle = {
-  root: rootStyle,
   input: inputStyle,
   iconBox: iconBoxStyle,
 }
