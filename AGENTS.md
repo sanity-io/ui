@@ -135,12 +135,15 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `page.tsx`). Edit the page files directly to change docs content. The pages
   were generated from the `mos42crl`/`production` dataset by the one-shot
   `apps/studio/scripts/export-docs-to-code.ts` script; the dataset is
-  preserved but no longer read. The app runs `next@preview` with
+  preserved but no longer read. The app runs `next@16` with
   `cacheComponents: true` and builds and devs with Turbopack and the native
   Rust React Compiler (`experimental.turbopackRustReactCompiler`). To make
   that work, `packages/ui` is `"type": "module"` and `apps/docs` omits the
   package.json `type` field: an explicit `"type": "commonjs"` makes Turbopack
   refuse the ESM-syntax TypeScript source that the dev `exports` resolve to.
+  For Next.js work, follow the vendored `.agents/skills/next-dev-loop`,
+  `.agents/skills/next-cache-components-optimizer`, and
+  `.agents/skills/next-partial-prefetching-adoption` skills.
 - `apps/blueprints/docs` is deployed by
   `.github/workflows/sanity-blueprint-docs.yml` via `@sanity/runtime-cli`
   (`blueprints doctor`/`plan` on PRs, `blueprints deploy` on pushes to
