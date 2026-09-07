@@ -1,13 +1,10 @@
+import {clsx} from 'clsx/lite'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
-import {
-  switchBaseStyles,
-  switchInputStyles,
-  switchRepresentationStyles,
-  switchThumbStyles,
-  switchTrackStyles,
-} from './styles'
+import {switchRepresentationStyles, switchThumbStyles, switchTrackStyles} from './styles'
+
+import {switchInput, switchRoot} from './switch.css'
 
 /**
  * @public
@@ -16,8 +13,6 @@ export interface SwitchProps {
   indeterminate?: boolean
 }
 
-const StyledSwitch = styled.span(switchBaseStyles)
-const Input = styled.input(switchInputStyles)
 const Representation = styled.span(switchRepresentationStyles)
 const Track = styled.span(switchTrackStyles)
 const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles)
@@ -57,8 +52,9 @@ export function Switch(
   }, [indeterminate])
 
   return (
-    <StyledSwitch className={className} data-ui="Switch" style={style}>
-      <Input
+    <span className={clsx(switchRoot, className)} data-ui="Switch" style={style}>
+      <input
+        className={switchInput}
         data-read-only={!disabled && readOnly ? '' : undefined}
         {...restProps}
         checked={indeterminate !== true && checked}
@@ -70,6 +66,6 @@ export function Switch(
         <Track />
         <Thumb $checked={checked} $indeterminate={indeterminate} />
       </Representation>
-    </StyledSwitch>
+    </span>
   )
 }
