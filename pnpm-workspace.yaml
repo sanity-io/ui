@@ -5,6 +5,9 @@ packages:
 
 linkWorkspacePackages: deep
 strictPeerDependencies: false
+# Keep the UI coverage provider from changing peer contexts in other packages.
+# Mixed Vitest browser majors otherwise produce incompatible plugin types.
+dedupePeerDependents: false
 
 # Version ranges for dependencies used by more than one workspace package.
 # Referenced from package.json files via the `catalog:` protocol.
