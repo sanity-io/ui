@@ -23,7 +23,7 @@ function opacityOf(element: Element): number {
 async function sampleOpacities(): Promise<Sample[]> {
   const container = document.querySelector('[data-ui="Toast"]')!
   const content = container.querySelector(':scope > [data-ui="Flex"]')!
-  const loadingBar = container.querySelector(':scope > div:not([data-ui])')!
+  const loadingBar = container.querySelector(':scope > [data-ui="ToastLoadingBar"]')!
   const samples: Sample[] = []
   const deadline = performance.now() + 2_000
 

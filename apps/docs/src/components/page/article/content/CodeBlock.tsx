@@ -1,17 +1,14 @@
 import {Card} from '@sanity/ui'
 import {Code} from '@sanity/ui/code'
-import {stegaClean} from 'next-sanity'
+import {ReactElement} from 'react'
 
-import type {PortableTextValue} from '@/types'
-
-export function CodeBlock(props: {data: Extract<PortableTextValue[number], {_type: 'code'}>}) {
-  // Code must render (and copy) without stega metadata
-  const value = stegaClean(props.data)
+export function CodeBlock(props: {code: string; language?: string}): ReactElement {
+  const {code, language} = props
 
   return (
     <Card marginY={5} overflow="auto" padding={3} radius={2} shadow={1}>
-      <Code language={value?.language || undefined} size={1}>
-        {value?.code}
+      <Code language={language} size={1}>
+        {code}
       </Code>
     </Card>
   )

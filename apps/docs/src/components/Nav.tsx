@@ -20,7 +20,7 @@ export function Nav(props: {nav: NavNode; path: string}): ReactElement {
 
 function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
   const {level, node, path} = props
-  const href = node.targetId && node.href ? node.href : undefined
+  const href = node.hasPage && node.href ? node.href : undefined
 
   if (node.hidden) {
     return null
@@ -32,11 +32,8 @@ function NavMenuItem(props: {level: number; node: NavNode; path: string}) {
     <TreeItem
       expanded={!node.collapsed || path.startsWith(`${node.href}/`)}
       href={href}
-      // `next/link` adds the `/ui` basePath and prefetches the fully cached
+      // `next/link` adds the `/ui` basePath and prefetches the fully static
       // destination pages, making sidebar navigations instant.
-      // `prefetch={true}` upgrades the shared App Shell prefetch to a per-link
-      // runtime prefetch that resolves the article content ahead of the click
-      // (the `[screen]` segment allows this with `prefetch = 'partial'`).
       linkAs={Link}
       linkProps={{prefetch: true}}
       selected={href ? href === path : false}

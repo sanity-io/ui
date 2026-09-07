@@ -22,12 +22,13 @@ See the [`@sanity/ui` migration guides](MIGRATION.md) when you upgrade from v2 t
 
 ## Apps
 
-| App                                            | Description                                                                    |
-| ---------------------------------------------- | ------------------------------------------------------------------------------ |
-| [`apps/storybook`](apps/storybook)             | Component Storybook ([localhost:6006](http://localhost:6006) via `pnpm dev`)   |
-| [`apps/docs`](apps/docs)                       | [sanity.io/ui](https://www.sanity.io/ui) docs site (Next.js + embedded Studio) |
-| [`apps/icons`](apps/icons)                     | [icons.sanity.dev](https://icons.sanity.dev) searchable icon catalog           |
-| [`apps/blueprints/docs`](apps/blueprints/docs) | Sanity Blueprint (serverless functions for the docs site)                      |
+| App                                            | Description                                                                  |
+| ---------------------------------------------- | ---------------------------------------------------------------------------- |
+| [`apps/storybook`](apps/storybook)             | Component Storybook ([localhost:6006](http://localhost:6006) via `pnpm dev`) |
+| [`apps/docs`](apps/docs)                       | [sanity.io/ui](https://www.sanity.io/ui) docs site (fully static Next.js)    |
+| [`apps/studio`](apps/studio)                   | Sanity Studio for the legacy docs dataset                                    |
+| [`apps/icons`](apps/icons)                     | [icons.sanity.dev](https://icons.sanity.dev) searchable icon catalog         |
+| [`apps/blueprints/docs`](apps/blueprints/docs) | Sanity Blueprint (serverless icon-enrichment function)                       |
 
 ## Requirements
 
@@ -46,8 +47,9 @@ pnpm test
 
 ```sh
 pnpm dev          # Storybook at http://localhost:6006
-pnpm dev:docs     # Docs at http://localhost:3000/ui (+ Studio at :3333)
+pnpm dev:docs     # Docs at http://localhost:3000/ui
 pnpm dev:icons    # Icon showcase at http://localhost:5173
+pnpm dev:studio   # Sanity Studio at http://localhost:3333
 ```
 
 In the monorepo, `@sanity/ui`, `@sanity/icons`, `@sanity/color`, and

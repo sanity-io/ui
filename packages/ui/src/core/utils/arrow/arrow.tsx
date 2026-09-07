@@ -1,66 +1,11 @@
-import {HTMLProps} from 'react'
-import {css, styled} from 'styled-components'
+import {assignInlineVars} from '@vanilla-extract/dynamic'
+import {clsx} from 'clsx/lite'
+import {HTMLProps, useId} from 'react'
 
 import {useTheme_v2} from '../../theme/useTheme'
 import {compileCommands, getRoundedCommands, Point} from './cmds'
 
-const StyledArrow = styled.div<{$w: number}>(
-  ({$w: w}) => css`
-    position: absolute;
-    width: ${w}px;
-    height: ${w}px;
-
-    :empty + & {
-      display: none;
-    }
-
-    & > svg {
-      display: block;
-      line-height: 0;
-      transform-origin: ${w / 2}px ${w / 2}px;
-    }
-
-    [data-placement^='top'] > & {
-      bottom: -${w}px;
-
-      & > svg {
-        transform: rotate(0);
-      }
-    }
-
-    [data-placement^='right'] > & {
-      left: -${w}px;
-
-      & > svg {
-        transform: rotate(90deg);
-      }
-    }
-
-    [data-placement^='left'] > & {
-      right: -${w}px;
-
-      & > svg {
-        transform: rotate(-90deg);
-      }
-    }
-
-    [data-placement^='bottom'] > & {
-      top: -${w}px;
-
-      & > svg {
-        transform: rotate(180deg);
-      }
-    }
-  `,
-)
-
-const StrokePath = styled.path`
-  stroke: var(--card-shadow-outline-color);
-`
-
-const ShapePath = styled.path`
-  fill: var(--card-bg-color);
-`
+import {arrow, arrowShape, arrowSize, arrowStroke} from './arrow.css'
 
 /** @internal */
 export function Arrow(
@@ -69,8 +14,9 @@ export function Arrow(
     'width' | 'height'
   >,
 ): React.JSX.Element {
-  const {width: w, height: h, radius = 0, ref, ...restProps} = props
+  const {className, width: w, height: h, radius = 0, ref, style, ...restProps} = props
   const {card} = useTheme_v2()
+  const strokeMaskId = `stroke-mask-${useId()}`
   const strokeWidth = card.shadow.outline
 
   const center = w / 2
@@ -109,14 +55,25 @@ export function Arrow(
   const fillPath = `${path} M ${w} -1 M 0 -1 Z`
 
   return (
-    <StyledArrow {...restProps} $w={w} ref={ref}>
+    <div
+      data-ui="Arrow"
+      {...restProps}
+      className={clsx(arrow, className)}
+      ref={ref}
+      style={{...style, ...assignInlineVars({[arrowSize]: `${w}px`})}}
+    >
       <svg width={w} height={w} viewBox={`0 0 ${w} ${w}`}>
-        <mask id="stroke-mask">
+        <mask id={strokeMaskId}>
           <rect x={0} y={strokeWidth} width={w} height={w} fill="white" />
         </mask>
-        <StrokePath d={strokePath} mask="url(#stroke-mask)" strokeWidth={strokeWidth * 2} />
-        <ShapePath d={fillPath} />
+        <path
+          className={arrowStroke}
+          d={strokePath}
+          mask={`url(#${strokeMaskId})`}
+          strokeWidth={strokeWidth * 2}
+        />
+        <path className={arrowShape} d={fillPath} />
       </svg>
-    </StyledArrow>
+    </div>
   )
 }

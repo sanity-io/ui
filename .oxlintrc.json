@@ -13,13 +13,7 @@
   // ESLint plugins loaded through oxlint's JS plugins support. Rules from these
   // plugins are enabled per-file-pattern in "overrides".
   "jsPlugins": ["eslint-plugin-storybook"],
-  "ignorePatterns": [
-    "**/.workshop/*",
-    "**/dist/*",
-    "**/etc/*",
-    "**/storybook-static/*",
-    "**/sanity.types.ts"
-  ],
+  "ignorePatterns": ["**/.workshop/*", "**/dist/*", "**/etc/*", "**/storybook-static/*"],
   "options": {
     "denyWarnings": true,
     "reportUnusedDisableDirectives": "error",
@@ -66,8 +60,17 @@
     // componentDidCatch) remain allowed via allowErrorBoundary.
     "react/prefer-function-component": ["error", {"allowErrorBoundary": true}],
 
-    // React Compiler checks
-    "react/react-compiler": "error",
+    // React Compiler: recommended rules live in `correctness`,
+    // recommended-latest `void-use-memo` in `correctness`, and the
+    // off-by-default compiler rules in `suspicious`/`perf` — all already
+    // enabled via `categories` above. `react/react-compiler` was removed
+    // in oxlint 1.79 in favor of these per-category rules.
+    // Restriction-category compiler rules are off unless listed here:
+    "react/unsupported-syntax": "error",
+    "react/invariant": "error",
+    "react/rule-suppression": "error",
+    "react/syntax": "error",
+    "react/todo": "error",
 
     "typescript/ban-ts-comment": "error",
     "typescript/no-deprecated": "error",
@@ -168,10 +171,8 @@
       "files": ["apps/docs/**"],
       "plugins": ["nextjs"],
       "rules": {
-        // `import "server-only"` marks modules as server-only in Next.js
-        "import/no-unassigned-import": ["error", {"allow": ["**/*.css", "server-only"]}],
-        // The docs app narrows loosely-typed CMS (Portable Text) data with
-        // `as` assertions throughout; too noisy to be useful here
+        // The arcade/code-editor stack narrows loosely-typed runtime data
+        // with `as` assertions throughout; too noisy to be useful here
         "typescript/no-unsafe-type-assertion": "off"
       }
     },

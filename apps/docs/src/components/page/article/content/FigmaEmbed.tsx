@@ -1,8 +1,8 @@
-import {Card} from '@sanity/ui'
-import {stegaClean} from 'next-sanity'
-import {styled} from 'styled-components'
+'use client'
 
-import type {PortableTextValue} from '@/types'
+import {Card} from '@sanity/ui'
+import {ReactElement} from 'react'
+import {styled} from 'styled-components'
 
 const IFrame = styled.iframe`
   border: 0;
@@ -10,12 +10,8 @@ const IFrame = styled.iframe`
   display: block;
 `
 
-export function FigmaEmbed(props: {
-  data: Extract<PortableTextValue[number], {_type: 'content.figmaEmbed'}>
-}) {
-  const {url} = stegaClean(props.data)
-
-  if (!url) return null
+export function FigmaEmbed(props: {url: string}): ReactElement {
+  const {url} = props
 
   return (
     <Card marginY={[2, 2, 3, 4]} overflow="hidden" radius={2} shadow={1}>

@@ -5,39 +5,6 @@ import {_cardColorStyle} from '../../styles/card/_cardColorStyle'
 import {rem} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 
-export function treeItemRootStyle(): ReturnType<typeof css> {
-  return css`
-    &[role='none'] > [role='treeitem'] {
-      outline: none;
-      cursor: default;
-      border-radius: 3px;
-
-      background-color: var(--card-bg-color);
-      color: var(--treeitem-fg-color);
-
-      &:focus {
-        position: relative;
-      }
-    }
-
-    &[role='treeitem'] {
-      outline: none;
-
-      & > div {
-        cursor: default;
-        border-radius: 3px;
-
-        background-color: var(--card-bg-color);
-        color: var(--treeitem-fg-color);
-      }
-
-      &:focus > div {
-        position: relative;
-      }
-    }
-  `
-}
-
 export function treeItemRootColorStyle(props: ThemeProps): ReturnType<typeof css> {
   const $tone = 'default'
   const {color} = getTheme_v2(props.theme)

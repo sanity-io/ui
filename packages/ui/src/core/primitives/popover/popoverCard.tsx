@@ -5,6 +5,7 @@ import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {POPOVER_MOTION_PROPS} from '../../constants'
+import {getTransformOrigin} from '../../middleware/origin'
 import {BoxOverflow} from '../../types/box'
 import {CardTone} from '../../types/card'
 import {Placement} from '../../types/placement'
@@ -29,10 +30,6 @@ const MotionCard = styled(motion.create(Card))`
   width: max-content;
   min-width: min-content;
   will-change: transform;
-`
-
-const MotionFlex = styled(motion.create(Flex))`
-  will-change: opacity;
 `
 
 /**
@@ -103,10 +100,9 @@ export function PopoverCard(
   const rootStyle: CSSProperties = useMemo(
     () => ({
       left: x,
-      originX,
-      originY,
       position: strategy,
       top: y,
+      transformOrigin: getTransformOrigin(originX, originY),
       width,
       zIndex,
       willChange: animate ? 'transform' : undefined,
@@ -137,24 +133,13 @@ export function PopoverCard(
       sizing="border"
       style={rootStyle}
       tone={tone}
-      variants={POPOVER_MOTION_PROPS.card}
-      transition={POPOVER_MOTION_PROPS.transition}
-      initial={animate ? ['hidden', 'initial'] : undefined}
-      animate={animate ? ['visible', 'scaleIn'] : undefined}
-      exit={animate ? ['hidden', 'scaleOut'] : undefined}
+      {...(animate ? POPOVER_MOTION_PROPS : undefined)}
     >
-      <MotionFlex
-        data-ui="Popover__wrapper"
-        direction="column"
-        flex={1}
-        overflow={overflow}
-        variants={POPOVER_MOTION_PROPS.children}
-        transition={POPOVER_MOTION_PROPS.transition}
-      >
+      <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
         <Flex direction="column" flex={1} padding={padding}>
           {children}
         </Flex>
-      </MotionFlex>
+      </Flex>
 
       {arrow && (
         <Arrow

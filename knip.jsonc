@@ -14,6 +14,21 @@
     },
     "apps/docs": {},
     "apps/icons": {},
+    "apps/studio": {
+      // The one-shot DS-276 docs export script is run via unrun, which knip
+      // does not recognize as a script runner
+      "entry": ["scripts/*.ts"],
+      "ignoreDependencies": [
+        // Not imported by studio source, but must be a direct dependency so
+        // vite can resolve it as an `optimizeDeps.exclude`d external from the
+        // prebundled sanity/plugin chunks (see sanity.cli.ts)
+        "@sanity/ui",
+        // Never imported: `reactCompiler: {transform: 'oxc'}` in sanity.cli.ts
+        // makes the sanity CLI load it as an optional peer of @sanity/cli,
+        // which knip cannot trace through the `sanity` package
+        "oxc-transform-react",
+      ],
+    },
     "packages/color": {
       // The palette generator is invoked via the package's `generate` script,
       // not imported by application code
@@ -26,8 +41,9 @@
     },
     "packages/themer": {
       "ignoreDependencies": [
-        // babel-plugin-react-compiler (target '18') injects imports of this runtime
-        // package into the compiled dist output, so it is never imported in source
+        // The React Compiler (oxc-transform-react, target '18') injects imports of
+        // this runtime package into the compiled dist output, so it is never
+        // imported in source
         "react-compiler-runtime",
       ],
     },
