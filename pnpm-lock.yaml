@@ -190,7 +190,7 @@ importers:
         specifier: 'catalog:'
         version: 24.13.3
       eslint-plugin-storybook:
-        specifier: ^10.5.10
+        specifier: ^10.6.0
         version: 10.6.0(eslint@10.10.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2)
       knip:
         specifier: ^6.34.0
@@ -199,7 +199,7 @@ importers:
         specifier: ^0.65.0
         version: 0.65.0
       oxlint:
-        specifier: ^1.80.0
+        specifier: ^1.81.0
         version: 1.81.0(oxlint-tsgolint@7.0.2001)
       oxlint-tsgolint:
         specifier: ^7.0.2001
