@@ -6,8 +6,5 @@ export const radio = style({
     '&:not([hidden])': {
       display: 'inline-block',
     },
-    '&[data-read-only]': {
-      outline: '1px solid red',
-    },
   },
 })

@@ -2,7 +2,6 @@ import {CloseIcon} from '@sanity/icons/Close'
 import {clsx} from 'clsx/lite'
 import {motion, stagger, type Variant, type Variants} from 'motion/react'
 
-import {ThemeColorStateToneKey} from '../../../theme/system/color/_system'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Box} from '../../primitives/box/box'
 import {Button} from '../../primitives/button/button'
@@ -147,10 +146,11 @@ export function Toast(
           <Card className={loadingBarMask} tone={cardTone} radius={radius} />
           <MotionLoadingBarProgress
             key={`progress-${updatedAt}`}
-            duration={duration}
-            onComplete={onClose}
             tone={cardTone}
-            visualDuration={visualDuration}
+            initial={{scaleX: 0}}
+            animate={{scaleX: 1}}
+            transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
+            onAnimationComplete={onClose}
           />
         </motion.div>
       )}

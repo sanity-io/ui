@@ -1,3 +1,5 @@
+import {styled} from 'styled-components'
+
 import {ThemeColorStateToneKey} from '../../../theme/system/color/_system'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {Card, type CardProps} from '../../primitives/card/card'

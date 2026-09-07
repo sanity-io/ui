@@ -52,7 +52,7 @@ export function Hotkeys(props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>,
           // oxlint-disable-next-line no-array-index-key
           <Key key={i} fontSize={fontSize} padding={padding} radius={radius}>
             {key}
-          </KBD>
+          </Key>
         ))}
       </Inline>
     </kbd>

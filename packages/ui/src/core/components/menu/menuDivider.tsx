@@ -19,7 +19,14 @@ function MenuDividerComponent(
   // oxlint-disable-next-line no-unsafe-type-assertion
   const Component = as as 'hr'
 
-  return <Component {...restProps} className={clsx(menuDivider, className)} ref={ref} />
+  return (
+    <Component
+      data-ui="MenuDivider"
+      className={clsx(menuDivider, className)}
+      ref={ref}
+      {...restProps}
+    />
+  )
 }
 
 /**

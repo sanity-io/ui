@@ -212,18 +212,9 @@ export function TextInput(
   const prefixNode = useMemo(
     () =>
       prefix && (
-        <Card
-          borderTop
-          borderLeft
-          borderBottom
-          className={textInputPrefix}
-          as="span"
-          radius={radius}
-          sizing="border"
-          tone="inherit"
-        >
+        <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border" tone="inherit">
           <span>{prefix}</span>
-        </Card>
+        </Prefix>
       ),
     [prefix, radius],
   )
@@ -308,9 +299,8 @@ export function TextInput(
       !disabled &&
       !readOnly &&
       clearButton && (
-        <Card
-          className={textInputRightCard}
-          as="span"
+        <RightCard
+          forwardedAs="span"
           padding={clearButtonBoxPadding}
           style={CLEAR_BUTTON_BOX_STYLE}
           tone={customValidity ? 'critical' : 'inherit'}
@@ -328,7 +318,7 @@ export function TextInput(
             onClick={handleClearClick}
             onMouseDown={handleClearMouseDown}
           />
-        </Card>
+        </RightCard>
       ),
     [
       clearButton,
@@ -349,18 +339,9 @@ export function TextInput(
   const suffixNode = useMemo(
     () =>
       suffix && (
-        <Card
-          borderTop
-          borderRight
-          borderBottom
-          className={textInputSuffix}
-          as="span"
-          radius={radius}
-          sizing="border"
-          tone="inherit"
-        >
+        <Suffix borderTop borderRight borderBottom radius={radius} sizing="border" tone="inherit">
           <span>{suffix}</span>
-        </Card>
+        </Suffix>
       ),
     [radius, suffix],
   )
