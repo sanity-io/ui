@@ -1,4 +1,5 @@
 import {CloseIcon} from '@sanity/icons/Close'
+import {clsx} from 'clsx/lite'
 import {isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
 import {styled} from 'styled-components'
@@ -17,7 +18,6 @@ import {
   TextInputInputStyleProps,
   textInputRepresentationStyle,
   TextInputRepresentationStyleProps,
-  textInputRootStyle,
 } from '../../styles/input/textInputStyle'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
@@ -27,6 +27,16 @@ import {Box} from '../box/box'
 import {Button, ButtonOwnProps} from '../button/button'
 import {Card} from '../card/card'
 import {Text} from '../text/text'
+
+import {inputRoot, textInputRoot} from '../../styles/input/textInput.css'
+import {
+  textInputClearButton,
+  textInputLeftBox,
+  textInputPrefix,
+  textInputRightBox,
+  textInputRightCard,
+  textInputSuffix,
+} from './textInput.css'
 
 /**
  * @public
@@ -90,35 +100,6 @@ export interface TextInputProps {
 
 const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 
-const StyledTextInput = styled(Card).attrs({forwardedAs: 'span'})(textInputRootStyle)
-
-const InputRoot = styled.span`
-  flex: 1;
-  min-width: 0;
-  display: block;
-  position: relative;
-`
-
-const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`
-
-const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-
-  & > span {
-    display: block;
-    margin: -1px;
-  }
-`
-
 const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
   textInputBaseStyle,
@@ -129,31 +110,6 @@ const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresent
   responsiveRadiusStyle,
   textInputRepresentationStyle,
 )
-
-const LeftBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`
-
-const RightBox = styled(Box)`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
-
-const RightCard = styled(Card)`
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
-`
-
-const TextInputClearButton = styled(Button)({
-  '&:not([hidden])': {
-    display: 'block',
-  },
-})
 
 /**
  * Single line text input.
@@ -230,9 +186,18 @@ export function TextInput(
   const prefixNode = useMemo(
     () =>
       prefix && (
-        <Prefix borderTop borderLeft borderBottom radius={radius} sizing="border" tone="inherit">
+        <Card
+          borderTop
+          borderLeft
+          borderBottom
+          className={textInputPrefix}
+          as="span"
+          radius={radius}
+          sizing="border"
+          tone="inherit"
+        >
           <span>{prefix}</span>
-        </Prefix>
+        </Card>
       ),
     [prefix, radius],
   )
@@ -252,21 +217,21 @@ export function TextInput(
         data-tone={rootTheme.tone}
       >
         {IconComponent && (
-          <LeftBox padding={padding}>
+          <Box className={textInputLeftBox} padding={padding}>
             <Text size={fontSize}>
               {isValidElement(IconComponent) && IconComponent}
               {isValidElementType(IconComponent) && <IconComponent />}
             </Text>
-          </LeftBox>
+          </Box>
         )}
 
         {!$hasClearButton && IconRightComponent && (
-          <RightBox padding={padding}>
+          <Box className={textInputRightBox} padding={padding}>
             <Text size={fontSize}>
               {isValidElement(IconRightComponent) && IconRightComponent}
               {isValidElementType(IconRightComponent) && <IconRightComponent />}
             </Text>
-          </RightBox>
+          </Box>
         )}
       </Presentation>
     ),
@@ -317,13 +282,14 @@ export function TextInput(
       !disabled &&
       !readOnly &&
       clearButton && (
-        <RightCard
-          forwardedAs="span"
+        <Card
+          className={textInputRightCard}
+          as="span"
           padding={clearButtonBoxPadding}
           style={CLEAR_BUTTON_BOX_STYLE}
           tone={customValidity ? 'critical' : 'inherit'}
         >
-          <TextInputClearButton
+          <Button
             aria-label="Clear"
             data-qa="clear-button"
             fontSize={fontSize}
@@ -332,10 +298,11 @@ export function TextInput(
             padding={clearButtonPadding}
             radius={radius}
             {...clearButtonProps}
+            className={clsx(textInputClearButton, clearButtonProps.className)}
             onClick={handleClearClick}
             onMouseDown={handleClearMouseDown}
           />
-        </RightCard>
+        </Card>
       ),
     [
       clearButton,
@@ -356,18 +323,33 @@ export function TextInput(
   const suffixNode = useMemo(
     () =>
       suffix && (
-        <Suffix borderTop borderRight borderBottom radius={radius} sizing="border" tone="inherit">
+        <Card
+          borderTop
+          borderRight
+          borderBottom
+          className={textInputSuffix}
+          as="span"
+          radius={radius}
+          sizing="border"
+          tone="inherit"
+        >
           <span>{suffix}</span>
-        </Suffix>
+        </Card>
       ),
     [radius, suffix],
   )
 
   return (
-    <StyledTextInput data-ui="TextInput" tone={rootTheme.tone}>
+    <Card
+      as="span"
+      className={textInputRoot}
+      data-ui="TextInput"
+      display="flex"
+      tone={rootTheme.tone}
+    >
       {prefixNode}
 
-      <InputRoot>
+      <span className={inputRoot}>
         <Input
           data-as="input"
           data-scheme={rootTheme.scheme}
@@ -389,9 +371,9 @@ export function TextInput(
 
         {presentationNode}
         {clearButtonNode}
-      </InputRoot>
+      </span>
 
       {suffixNode}
-    </StyledTextInput>
+    </Card>
   )
 }

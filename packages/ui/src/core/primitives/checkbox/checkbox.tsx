@@ -1,10 +1,13 @@
 import {CheckmarkIcon} from '@sanity/icons/Checkmark'
 import {RemoveIcon} from '@sanity/icons/Remove'
+import {clsx} from 'clsx/lite'
 import {useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import {checkboxBaseStyles, inputElementStyles} from './styles'
+import {inputElementStyles} from './styles'
+
+import {checkbox} from './checkbox.css'
 
 /**
  * @public
@@ -14,7 +17,6 @@ export interface CheckboxProps {
   customValidity?: string
 }
 
-const StyledCheckbox = styled.div(checkboxBaseStyles)
 const Input = styled.input(inputElementStyles)
 
 /**
@@ -53,7 +55,7 @@ export function Checkbox(
   useCustomValidity(ref, customValidity)
 
   return (
-    <StyledCheckbox className={className} data-ui="Checkbox" style={style}>
+    <div className={clsx(checkbox, className)} data-ui="Checkbox" style={style}>
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-error={customValidity ? '' : undefined}
@@ -68,6 +70,6 @@ export function Checkbox(
         <CheckmarkIcon />
         <RemoveIcon />
       </span>
-    </StyledCheckbox>
+    </div>
   )
 }
