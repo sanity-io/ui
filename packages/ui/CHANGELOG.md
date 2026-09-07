@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 4.1.1
+
+### Patch Changes
+
+- [#2831](https://github.com/sanity-io/ui/pull/2831) [`c9141df`](https://github.com/sanity-io/ui/commit/c9141df70b3c230a625c9531f66c2f9cbd572ee3) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^13.2.0
+
+- [#2858](https://github.com/sanity-io/ui/pull/2858) [`340baad`](https://github.com/sanity-io/ui/commit/340baad921b81721763cafc646a70042eed68adb) Thanks [@stipsan](https://github.com/stipsan)! - Fix animated `Popover` and `Tooltip` (and thereby `MenuButton`) scaling from the center instead of the reference element every time they are shown after the first. The `transform-origin` computed by the floating-ui `origin` middleware is now applied as a plain CSS property instead of motion's `originX`/`originY` style keys, which motion resets to their initial (unpositioned) values whenever the `Activity`-hidden element re-mounts.
+
 ## 4.1.0
 
 ### Minor Changes
