@@ -75,10 +75,12 @@ minimumReleaseAgeExclude:
 minimumReleaseAgeExcludePrune: true
 
 # @testing-library/jest-dom/vitest imports `vitest` without declaring it, so it
-# falls back to pnpm's hidden hoist — which can resolve to another workspace
-# package's vitest version (e.g. apps/docs uses vitest 3, packages/ui vitest 4),
-# registering the matchers on the wrong `expect` instance. Declare the peer so
-# each consumer gets its own vitest linked.
+# can resolve a different copy than the package under test. That happens across
+# vitest versions (hoist) and across same-version isolates (pnpm splits vitest
+# per vite optional-peer set). The `/vitest` entry then rebinds snapshot
+# matchers onto an expect whose SnapshotClient was never set up. Declare the
+# peer so each consumer gets a vitest linked, and extend matchers from the
+# package's own `expect` (see packages/ui/test/setup.ts).
 packageExtensions:
   '@testing-library/jest-dom':
     peerDependencies:
