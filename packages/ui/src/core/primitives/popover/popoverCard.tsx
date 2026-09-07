@@ -5,6 +5,7 @@ import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {POPOVER_MOTION_PROPS} from '../../constants'
+import {getTransformOrigin} from '../../middleware/origin'
 import {BoxOverflow} from '../../types/box'
 import {CardTone} from '../../types/card'
 import {Placement} from '../../types/placement'
@@ -99,10 +100,9 @@ export function PopoverCard(
   const rootStyle: CSSProperties = useMemo(
     () => ({
       left: x,
-      originX,
-      originY,
       position: strategy,
       top: y,
+      transformOrigin: getTransformOrigin(originX, originY),
       width,
       zIndex,
       willChange: animate ? 'transform' : undefined,
