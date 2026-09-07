@@ -16,6 +16,17 @@ export const SIDEBAR_BREAKPOINT = 600
 export const SIBLING_ARTICLE_PATH = '/ui/docs/primitive/button'
 export const ARTICLE_PATH = '/ui/docs/primitive/popover'
 
+export const HOME_PATH = '/ui'
+export const DOCS_PATH = '/ui/docs'
+
+/** The navbar link into the docs screen. */
+export function docsLink(page: Page) {
+  return page
+    .locator(`a[href="${DOCS_PATH}"]:visible`)
+    .filter({hasText: /^Docs$/})
+    .first()
+}
+
 /**
  * A synchronous node of the article chrome: the docs navigation. It comes from
  * the static docs layout, so it belongs to the prefetched route.
@@ -45,4 +56,24 @@ export function articleContent(page: Page) {
  */
 export function popoverLink(page: Page) {
   return articleChrome(page).locator(`a[href="${ARTICLE_PATH}"]`)
+}
+
+export const ARCADE_PATH = '/ui/arcade'
+
+/** The navbar link into the arcade screen. */
+export function arcadeLink(page: Page) {
+  return page
+    .locator(`a[href="${ARCADE_PATH}"]:visible`)
+    .filter({hasText: /^Arcade$/})
+    .first()
+}
+
+/** The arcade editor screen. Client-only, so it never appears in the shell. */
+export function arcadeScreen(page: Page) {
+  return page.locator('[data-testid="arcade-screen"]:visible')
+}
+
+/** The static placeholder shown while the client-only arcade mounts. */
+export function arcadeFallback(page: Page) {
+  return page.getByTestId('arcade-loading')
 }

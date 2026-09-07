@@ -2,8 +2,12 @@
 import dynamic from 'next/dynamic'
 import {ReactNode, useDeferredValue, useSyncExternalStore} from 'react'
 
+import {ArcadeLoading} from './ArcadeLoading'
+
 const ArcadeScreen = dynamic(() => import('@/lib/arcade/default'), {
   ssr: false,
+  // The segment's own loading UI, so the slot isn't empty while the chunk loads
+  loading: () => <ArcadeLoading />,
 })
 
 // The arcade can only run in the browser: `useSyncExternalStore` renders the
@@ -22,7 +26,9 @@ export function ArcadePage(): ReactNode {
     getServerIsMounted(),
   )
 
-  if (!mounted) return null
+  // Rendered on the server and during hydration, so the static shell carries
+  // the same placeholder the chunk load shows instead of an empty slot
+  if (!mounted) return <ArcadeLoading />
 
   return <ArcadeScreen />
 }

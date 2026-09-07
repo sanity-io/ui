@@ -1,9 +1,9 @@
 import {Flex} from '@sanity/ui'
-import {PropsWithChildren} from 'react'
+import {PropsWithChildren, Suspense} from 'react'
 
 import {Banner, type BannerData} from '@/components/Banner'
 import {AppFooter} from '@/components/Footer'
-import {Navbar} from '@/components/Navbar'
+import {Navbar, NavbarWithActiveSegment} from '@/components/Navbar'
 
 import {navTree} from './navTree'
 
@@ -25,7 +25,9 @@ export default function WebsiteLayout(props: PropsWithChildren) {
   return (
     <Flex direction="column" height="fill">
       <Banner banner={banner} />
-      <Navbar nav={navTree} />
+      <Suspense fallback={<Navbar nav={navTree} />}>
+        <NavbarWithActiveSegment nav={navTree} />
+      </Suspense>
       {children}
       <AppFooter />
     </Flex>
