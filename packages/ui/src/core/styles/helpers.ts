@@ -26,7 +26,7 @@ const EMPTY_CSS_OBJECT: CSSObject = {}
  */
 export function _ruleSet(...rules: unknown[]): CSSObject[] {
   // oxlint-disable-next-line no-unsafe-type-assertion
-  return css(EMPTY_CSS_OBJECT, ...(rules as [])) as unknown as CSSObject[]
+  return css(EMPTY_CSS_OBJECT, ...(rules as never[])) as unknown as CSSObject[]
 }
 
 /**
