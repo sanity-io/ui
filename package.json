@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
-    "@changesets/cli": "^3.0.1",
+    "@changesets/cli": "^3.0.2",
     "@types/node": "catalog:",
     "eslint-plugin-storybook": "^10.5.10",
     "knip": "^6.33.0",

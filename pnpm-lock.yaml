@@ -83,7 +83,7 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       '@changesets/cli':
-        specifier: ^3.0.1
+        specifier: ^3.0.2
         version: 3.0.2
       '@types/node':
         specifier: 'catalog:'
