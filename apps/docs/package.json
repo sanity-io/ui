@@ -39,7 +39,7 @@
     "styled-components": "catalog:"
   },
   "devDependencies": {
-    "@next/playwright": "^16.3.0",
+    "@next/playwright": "^16.3.4",
     "@playwright/test": "^1.63.0",
     "@types/babel__standalone": "^7.1.9",
     "@types/lodash-es": "^4.17.12",
