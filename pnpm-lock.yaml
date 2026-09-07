@@ -190,7 +190,7 @@ importers:
         specifier: 'catalog:'
         version: 24.13.3
       eslint-plugin-storybook:
-        specifier: ^10.5.10
+        specifier: ^10.6.0
         version: 10.6.0(eslint@10.10.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2)
       knip:
         specifier: ^6.34.0
@@ -199,7 +199,7 @@ importers:
         specifier: ^0.65.0
         version: 0.65.0
       oxlint:
-        specifier: ^1.80.0
+        specifier: ^1.81.0
         version: 1.81.0(oxlint-tsgolint@7.0.2001)
       oxlint-tsgolint:
         specifier: ^7.0.2001
@@ -456,7 +456,7 @@ importers:
     dependencies:
       '@sanity/code-input':
         specifier: ^7.3.8
-        version: 7.3.8(32c060898a5e48f6e6b038ddae7bdbbd)
+        version: 7.3.8(fa4ada957f9ce52f099b65afcb339dd9)
       '@sanity/icons':
         specifier: workspace:*
         version: link:../../packages/icons
@@ -471,7 +471,7 @@ importers:
         version: link:../../packages/ui
       '@sanity/vision':
         specifier: ^6.12.0
-        version: 6.12.0(@babel/runtime@7.29.7)(@codemirror/theme-one-dark@6.1.3)(codemirror@6.0.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sanity@6.12.0(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0)))(@sanity/sdk@3.1.0(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))(vitest@4.1.11)(xstate@5.32.6))(@types/node@24.13.3)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(esbuild@0.28.2)(immer@11.1.18)(jiti@2.7.0)(oxc-transform-react@0.148.0)(oxfmt@0.65.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(rolldown@1.2.7)(styled-components@6.5.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(terser@5.51.2)(tsx@4.23.13)(typescript@7.0.2)(vitest@4.1.11))(vitest@4.1.11)
+        version: 6.12.0(1f38590b51dd60996d0138e6a4fba266)
       react:
         specifier: ^19.2.8
         version: 19.2.8
@@ -12139,7 +12139,7 @@ snapshots:
     transitivePeerDependencies:
       - vitest
 
-  '@sanity/code-input@7.3.8(32c060898a5e48f6e6b038ddae7bdbbd)':
+  '@sanity/code-input@7.3.8(fa4ada957f9ce52f099b65afcb339dd9)':
     dependencies:
       '@codemirror/lang-html': 6.4.12
       '@codemirror/lang-java': 6.0.2
@@ -12616,7 +12616,7 @@ snapshots:
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  '@sanity/vision@6.12.0(@babel/runtime@7.29.7)(@codemirror/theme-one-dark@6.1.3)(codemirror@6.0.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sanity@6.12.0(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0)))(@sanity/sdk@3.1.0(@types/react@19.2.18)(immer@11.1.18)(react@19.2.8)(use-sync-external-store@1.6.0(react@19.2.8))(vitest@4.1.11)(xstate@5.32.6))(@types/node@24.13.3)(@types/react-dom@19.2.7(@types/react@19.2.18))(@types/react@19.2.18)(esbuild@0.28.2)(immer@11.1.18)(jiti@2.7.0)(oxc-transform-react@0.148.0)(oxfmt@0.65.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(rolldown@1.2.7)(styled-components@6.5.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(terser@5.51.2)(tsx@4.23.13)(typescript@7.0.2)(vitest@4.1.11))(vitest@4.1.11)':
+  '@sanity/vision@6.12.0(1f38590b51dd60996d0138e6a4fba266)':
     dependencies:
       '@codemirror/autocomplete': 6.20.3
       '@codemirror/commands': 6.11.0
