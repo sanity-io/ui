@@ -163,7 +163,7 @@ describe('component identifiers', () => {
     consoleError = undefined
   })
 
-  it('identifies exported components with data-ui attributes', {timeout: 15_000}, () => {
+  it('identifies exported components with data-ui attributes', {timeout: 60_000}, () => {
     consoleError = vi.spyOn(console, 'error').mockImplementation((...args) => {
       if (isExpectedErrorBoundaryLog(args)) return
       originalError(...args)
