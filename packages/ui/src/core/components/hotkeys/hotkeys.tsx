@@ -46,7 +46,7 @@ export function Hotkeys(props: HotkeysProps & Omit<React.HTMLProps<HTMLElement>,
   }
 
   return (
-    <kbd className={clsx(hotkeys, className)} data-ui="Hotkeys" {...restProps} ref={ref}>
+    <kbd className={clsx(hotkeys, className)} data-ui="Hotkeys" ref={ref} {...restProps}>
       <Inline as="span" gap={spacing}>
         {keys.map((key, i) => (
           // oxlint-disable-next-line no-array-index-key

@@ -9,3 +9,7 @@ export const breadcrumbs = style({
   whiteSpace: 'nowrap',
   lineHeight: 0,
 })
+
+export const expandButton = style({
+  appearance: 'none',
+})

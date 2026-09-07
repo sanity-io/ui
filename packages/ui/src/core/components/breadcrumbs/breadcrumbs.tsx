@@ -9,7 +9,7 @@ import {Text} from '../../primitives/text/text'
 import {_getArrayProp} from '../../styles/helpers'
 import {ExpandButton} from './breadcrumbs.styles'
 
-import {breadcrumbs} from './breadcrumbs.css'
+import {breadcrumbs, expandButton} from './breadcrumbs.css'
 
 /**
  * @beta
@@ -55,7 +55,7 @@ export function Breadcrumbs(
   })
 
   return (
-    <ol className={clsx(breadcrumbs, className)} data-ui="Breadcrumbs" {...restProps} ref={ref}>
+    <ol className={clsx(breadcrumbs, className)} data-ui="Breadcrumbs" ref={ref} {...restProps}>
       {items.map((item, itemIndex) => (
         // oxlint-disable-next-line no-array-index-key
         <Fragment key={itemIndex}>
@@ -113,6 +113,7 @@ function useItems({
         ref={popoverElementRef}
       >
         <ExpandButton
+          className={expandButton}
           fontSize={1}
           mode="bleed"
           onClick={open ? collapse : expand}

@@ -25,7 +25,7 @@ type LoadingBarProgressProps = Omit<CardProps, 'tone'> & {
 // Stays on styled-components: the theme-derived `background-color` must beat
 // Card's runtime `background-color: var(--card-bg-color)` at equal specificity,
 // which needs both rules in the runtime stylesheet.
-export const LoadingBarProgress = styled<React.ComponentType<LoadingBarProgressProps>>(Card)`
+export const LoadingBarProgress = styled(Card)<LoadingBarProgressProps>`
   display: block;
   height: 100%;
   width: 100%;
