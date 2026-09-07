@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 
-import {describe, expect, it, vi} from 'vitest'
+import {afterEach, describe, expect, it, vi} from 'vitest'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../test/mocks/matchMedia.mock'
@@ -136,6 +136,18 @@ function Boom(): React.JSX.Element {
   throw new Error('boom')
 }
 
+function isExpectedErrorBoundaryLog(args: unknown[]): boolean {
+  const hasBoomError = args.some((arg) => arg instanceof Error && arg.message === 'boom')
+
+  if (hasBoomError) return true
+
+  const strings = args.filter((arg): arg is string => typeof arg === 'string')
+  const mentionsBoom = strings.some((arg) => arg === 'Boom' || arg.includes('<Boom>'))
+  const isReactBoundaryLog = strings.some((arg) => arg.includes('The above error occurred'))
+
+  return mentionsBoom && isReactBoundaryLog
+}
+
 function expectIdentifiers(names: readonly string[]) {
   for (const name of names) {
     expect(document.querySelector(`[data-ui="${name}"]`), `data-ui="${name}"`).not.toBeNull()
@@ -143,8 +155,19 @@ function expectIdentifiers(names: readonly string[]) {
 }
 
 describe('component identifiers', () => {
+  const originalError = console.error.bind(console)
+  let consoleError: {mockRestore: () => void} | undefined
+
+  afterEach(() => {
+    consoleError?.mockRestore()
+    consoleError = undefined
+  })
+
   it('identifies exported components with data-ui attributes', {timeout: 15_000}, () => {
-    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+    consoleError = vi.spyOn(console, 'error').mockImplementation((...args) => {
+      if (isExpectedErrorBoundaryLog(args)) return
+      originalError(...args)
+    })
 
     render(
       <>
@@ -234,7 +257,5 @@ describe('component identifiers', () => {
 
     expectIdentifiers(PUBLIC_IDENTIFIERS)
     expectIdentifiers(COMPOSITE_IDENTIFIERS)
-
-    consoleError.mockRestore()
   })
 })
