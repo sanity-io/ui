@@ -80,9 +80,9 @@ function LayerChildren(props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivE
 
   return (
     <Component
+      data-ui="Layer"
       {...restProps}
       className={clsx(layer, className)}
-      data-ui="Layer"
       onFocus={handleFocus}
       ref={ref}
       style={{...style, zIndex}}

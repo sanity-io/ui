@@ -133,7 +133,12 @@ export interface PopoverProps
 const ViewportOverlay = () => {
   const {zIndex} = useLayer()
 
-  return <div style={{height: '100vh', inset: 0, position: 'fixed', width: '100vw', zIndex}} />
+  return (
+    <div
+      data-ui="Popover__overlay"
+      style={{height: '100vh', inset: 0, position: 'fixed', width: '100vw', zIndex}}
+    />
+  )
 }
 
 /**

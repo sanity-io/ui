@@ -1,42 +1,248 @@
 /** @vitest-environment jsdom */
 
-import {describe, expect, it} from 'vitest'
+import {render as testingLibraryRender} from '@testing-library/react'
+import {describe, expect, it, vi} from 'vitest'
 
+// oxlint-disable-next-line no-unassigned-import
+import '../../test/mocks/matchMedia.mock'
+// oxlint-disable-next-line no-unassigned-import
+import '../../test/mocks/resizeObserver.mock'
 import {render} from '../../test/utils'
 import {
   Arrow,
+  Avatar,
+  AvatarCounter,
+  AvatarStack,
+  Badge,
+  Box,
+  Button,
+  Card,
+  Checkbox,
   CodeSkeleton,
+  Container,
+  Dialog,
+  ElementQuery,
+  ErrorBoundary,
+  Flex,
+  Grid,
+  Heading,
   HeadingSkeleton,
+  Hotkeys,
+  Inline,
+  KBD,
+  Label,
   LabelSkeleton,
+  Layer,
+  LayerProvider,
+  Radio,
+  Select,
   Skeleton,
+  Spinner,
+  SrOnly,
+  Stack,
+  Switch,
+  Tab,
+  TabList,
+  TabPanel,
+  Text,
+  TextArea,
+  TextInput,
   TextSkeleton,
+  ThemeProvider,
+  Tree,
+  TreeItem,
+  VirtualList,
 } from '../exports'
-import {MenuDivider} from '../exports/menu'
+import {Autocomplete} from '../exports/autocomplete'
+import {Breadcrumbs} from '../exports/breadcrumbs'
+import {Code} from '../exports/code'
+import {Menu, MenuButton, MenuDivider, MenuGroup, MenuItem} from '../exports/menu'
+import {Popover} from '../exports/popover'
+import {Toast, ToastProvider} from '../exports/toast'
+import {Tooltip} from '../exports/tooltip'
+
+const PUBLIC_IDENTIFIERS = [
+  'Arrow',
+  'Autocomplete',
+  'Avatar',
+  'AvatarCounter',
+  'AvatarStack',
+  'Badge',
+  'Box',
+  'Breadcrumbs',
+  'Button',
+  'Card',
+  'Checkbox',
+  'Code',
+  'CodeSkeleton',
+  'Container',
+  'Dialog',
+  'ElementQuery',
+  'ErrorBoundary',
+  'Flex',
+  'Grid',
+  'Heading',
+  'HeadingSkeleton',
+  'Hotkeys',
+  'Inline',
+  'KBD',
+  'Label',
+  'LabelSkeleton',
+  'Layer',
+  'Menu',
+  'MenuButton',
+  'MenuDivider',
+  'MenuGroup',
+  'MenuItem',
+  'Popover',
+  'Radio',
+  'Select',
+  'Skeleton',
+  'Spinner',
+  'SrOnly',
+  'Stack',
+  'Switch',
+  'Tab',
+  'TabList',
+  'TabPanel',
+  'Text',
+  'TextArea',
+  'TextInput',
+  'TextSkeleton',
+  'Toast',
+  'ToastProvider',
+  'Tooltip',
+  'Tree',
+  'TreeItem',
+  'VirtualList',
+] as const
+
+const COMPOSITE_IDENTIFIERS = [
+  'Button__loading',
+  'Dialog__content',
+  'Dialog__footer',
+  'Dialog__header',
+  'DialogCard',
+  'MenuButton__popover',
+  'MenuGroup__popover',
+  'Popover__overlay',
+  'Popover__wrapper',
+  'TextOverflow',
+  'Toast__loadingBar',
+  'Tooltip__card',
+  'TreeGroup',
+  'TreeItem__box',
+] as const
+
+function Boom(): React.JSX.Element {
+  throw new Error('boom')
+}
+
+function expectIdentifiers(names: readonly string[]) {
+  for (const name of names) {
+    expect(document.querySelector(`[data-ui="${name}"]`), `data-ui="${name}"`).not.toBeNull()
+  }
+}
 
 describe('component identifiers', () => {
-  it('identifies exported components with data-ui attributes', () => {
-    const {container} = render(
+  it('identifies exported components with data-ui attributes', {timeout: 15_000}, () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    render(
       <>
         <Arrow height={5} width={10} />
-        <Skeleton />
-        <TextSkeleton />
-        <LabelSkeleton />
-        <HeadingSkeleton />
+        <Autocomplete id="autocomplete" />
+        <Avatar initials="AB" />
+        <AvatarCounter count={3} />
+        <AvatarStack>
+          <Avatar initials="AB" />
+        </AvatarStack>
+        <Badge>Badge</Badge>
+        <Box>Box</Box>
+        <Breadcrumbs>
+          <Text>Home</Text>
+          <Text>Docs</Text>
+        </Breadcrumbs>
+        <Button loading text="Loading" />
+        <Card>Card</Card>
+        <Checkbox />
+        <Code>const x = 1</Code>
         <CodeSkeleton />
-        <MenuDivider />
+        <Container>Container</Container>
+        <Dialog footer="Footer" header="Header" id="dialog" onClose={() => {}}>
+          Dialog
+        </Dialog>
+        <ElementQuery>ElementQuery</ElementQuery>
+        <ErrorBoundary onCatch={() => {}}>
+          <Boom />
+        </ErrorBoundary>
+        <Flex>Flex</Flex>
+        <Grid>Grid</Grid>
+        <Heading>Heading</Heading>
+        <HeadingSkeleton />
+        <Hotkeys keys={['Mod', 'K']} />
+        <Inline>Inline</Inline>
+        <KBD>K</KBD>
+        <Label>Label</Label>
+        <LabelSkeleton />
+        <Layer>Layer</Layer>
+        <LayerProvider>
+          <Menu>
+            <MenuItem text="Item" />
+            <MenuDivider />
+            <MenuGroup text="Group">
+              <MenuItem text="Nested" />
+            </MenuGroup>
+          </Menu>
+        </LayerProvider>
+        <MenuButton button={<Button text="Open" />} id="menu-button" menu={<Menu />} />
+        <Popover content="Popover" modal open>
+          <Button text="Reference" />
+        </Popover>
+        <Radio />
+        <Select>
+          <option value="a">A</option>
+        </Select>
+        <Skeleton />
+        <Spinner />
+        <SrOnly>SrOnly</SrOnly>
+        <Stack>Stack</Stack>
+        <Switch />
+        <Tab aria-controls="panel" id="tab" label="Tab" />
+        <TabList>
+          <Tab aria-controls="panel" id="tab-list-tab" label="Listed" />
+          <Tab aria-controls="panel-2" id="tab-list-tab-2" label="Listed 2" />
+        </TabList>
+        <TabPanel aria-labelledby="tab" id="panel">
+          Panel
+        </TabPanel>
+        <Text textOverflow="ellipsis">Text</Text>
+        <TextArea />
+        <TextInput />
+        <TextSkeleton />
+        <Toast duration={100} onClose={() => {}} title="Toast" />
+        <ToastProvider>ToastProvider</ToastProvider>
+        <Tooltip content="Tooltip">
+          <Button text="Hint" />
+        </Tooltip>
+        <Tree>
+          <TreeItem expanded text="Root">
+            <TreeItem text="Child" />
+          </TreeItem>
+        </Tree>
+        <VirtualList />
       </>,
     )
 
-    for (const componentName of [
-      'Arrow',
-      'Skeleton',
-      'TextSkeleton',
-      'LabelSkeleton',
-      'HeadingSkeleton',
-      'CodeSkeleton',
-      'MenuDivider',
-    ]) {
-      expect(container.querySelector(`[data-ui="${componentName}"]`)).not.toBeNull()
-    }
+    expectIdentifiers(PUBLIC_IDENTIFIERS)
+    expectIdentifiers(COMPOSITE_IDENTIFIERS)
+
+    consoleError.mockRestore()
+  })
+
+  it('identifies ThemeProvider when it renders a fallback', () => {
+    testingLibraryRender(<ThemeProvider />)
+
+    expect(document.querySelector('[data-ui="ThemeProvider"]')).not.toBeNull()
   })
 })

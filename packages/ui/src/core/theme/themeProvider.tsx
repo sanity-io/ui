@@ -48,7 +48,7 @@ export function ThemeProvider(props: ThemeProviderProps): React.JSX.Element {
   }, [scheme, rootTheme, tone])
 
   if (!theme) {
-    return <pre>ThemeProvider: no "theme" property provided</pre>
+    return <pre data-ui="ThemeProvider">ThemeProvider: no "theme" property provided</pre>
   }
 
   return (
