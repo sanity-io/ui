@@ -69,7 +69,7 @@ catalogs:
 
 overrides:
   '@types/react': ^19.2.18
-  '@types/react-dom': ^19.2.5
+  '@types/react-dom': ^19.2.7
   react: ^19.2.8
   react-dom: ^19.2.8
 
@@ -195,7 +195,7 @@ importers:
         specifier: ^19.2.18
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: ^19.2.7
         version: 19.2.7(@types/react@19.2.18)
       '@vanilla-extract/next-plugin':
         specifier: ^2.5.2
@@ -225,7 +225,7 @@ importers:
         specifier: ^19.2.18
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: ^19.2.7
         version: 19.2.7(@types/react@19.2.18)
       '@vitejs/plugin-react':
         specifier: 'catalog:'
@@ -303,7 +303,7 @@ importers:
         specifier: ^19.2.18
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: ^19.2.7
         version: 19.2.7(@types/react@19.2.18)
       '@vitejs/plugin-react':
         specifier: 'catalog:'
@@ -400,7 +400,7 @@ importers:
         specifier: ^19.2.18
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: ^19.2.7
         version: 19.2.7(@types/react@19.2.18)
       oxc-transform-react:
         specifier: 'catalog:'
@@ -511,7 +511,7 @@ importers:
         specifier: ^19.2.18
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: ^19.2.7
         version: 19.2.7(@types/react@19.2.18)
       '@types/react-is':
         specifier: 'catalog:'
@@ -703,7 +703,7 @@ importers:
         specifier: ^19.2.18
         version: 19.2.18
       '@types/react-dom':
-        specifier: ^19.2.5
+        specifier: ^19.2.7
         version: 19.2.7(@types/react@19.2.18)
       '@types/react-is':
         specifier: 'catalog:'
@@ -4403,7 +4403,7 @@ packages:
     resolution: {integrity: sha512-ZE0l4xL6d00rKFeJhRDuh0t3r+/2ffhx47lIyaSWrTD5kuM3nDjKDxCIWwX4E3gLV+oNX8E1prXRMuEWJUJwJg==}
     peerDependencies:
       '@types/react': ^19.2.18
-      '@types/react-dom': ^19.2.5
+      '@types/react-dom': ^19.2.7
       react: ^19.2.8
       react-dom: ^19.2.8
       storybook: ^10.6.0
@@ -4429,7 +4429,7 @@ packages:
     resolution: {integrity: sha512-0xfYYPRHcr5ta1hmXJCSezH4JGuUHJ+xVF9f1j+Y/MWEMOQE4wnaKWKsk/HLrDjZkT5hKfvmogt9b0yduP6zEQ==}
     peerDependencies:
       '@types/react': ^19.2.18
-      '@types/react-dom': ^19.2.5
+      '@types/react-dom': ^19.2.7
       react: ^19.2.8
       react-dom: ^19.2.8
       storybook: ^10.6.0
@@ -4640,7 +4640,7 @@ packages:
     peerDependencies:
       '@testing-library/dom': ^10.0.0
       '@types/react': ^19.2.18
-      '@types/react-dom': ^19.2.5
+      '@types/react-dom': ^19.2.7
       react: ^19.2.8
       react-dom: ^19.2.8
     peerDependenciesMeta:
@@ -8532,7 +8532,7 @@ packages:
     resolution: {integrity: sha512-S5vdGHHA93j2Z6dbmIJI1wtxT3AXPTRlmC1Meo+ekG011yNnEutMAnHrwyj8qFlGhgBYA8ENGK6+o1Q+vnFz6A==}
     peerDependencies:
       '@types/react': ^19.2.18
-      '@types/react-dom': ^19.2.5
+      '@types/react-dom': ^19.2.7
       react: ^19.2.8
       react-dom: ^19.2.8
       vitest: ^4.0.0 || ^5.0.0
