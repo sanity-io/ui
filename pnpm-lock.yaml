@@ -666,7 +666,7 @@ importers:
         specifier: ^3.2.3
         version: 3.2.3
       motion:
-        specifier: ^13.1.1
+        specifier: ^13.2.0
         version: 13.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react-is:
         specifier: 'catalog:'
