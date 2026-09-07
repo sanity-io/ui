@@ -1,5 +1,19 @@
 # @sanity/themer
 
+## 0.3.11
+
+### Patch Changes
+
+- Updated dependencies [[`c9141df`](https://github.com/sanity-io/ui/commit/c9141df70b3c230a625c9531f66c2f9cbd572ee3), [`340baad`](https://github.com/sanity-io/ui/commit/340baad921b81721763cafc646a70042eed68adb)]:
+  - @sanity/ui@4.1.1
+
+## 0.3.10
+
+### Patch Changes
+
+- Updated dependencies [[`b2e6cc1`](https://github.com/sanity-io/ui/commit/b2e6cc1377d8ecdbeb10be44c2539fecbb2d49da), [`7795b61`](https://github.com/sanity-io/ui/commit/7795b614dd3fbc77fa53a764ad81d11f4c3350be)]:
+  - @sanity/ui@4.1.0
+
 ## 0.3.9
 
 ### Patch Changes

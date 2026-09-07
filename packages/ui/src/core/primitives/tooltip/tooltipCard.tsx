@@ -1,9 +1,10 @@
+import {clsx} from 'clsx/lite'
 import {motion} from 'motion/react'
 import React, {CSSProperties, useMemo} from 'react'
-import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {POPOVER_MOTION_PROPS} from '../../constants'
+import {getTransformOrigin} from '../../middleware/origin'
 import {Placement} from '../../types/placement'
 import {Radius} from '../../types/radius'
 import {Arrow} from '../../utils/arrow/arrow'
@@ -14,9 +15,9 @@ import {
   DEFAULT_TOOLTIP_ARROW_WIDTH,
 } from './constants'
 
-const MotionCard = styled(motion.create(Card))`
-  will-change: transform;
-`
+import {tooltipCard} from './tooltip.css'
+
+const MotionCard = motion.create(Card)
 
 /**
  * @internal
@@ -44,6 +45,7 @@ export function TooltipCard(
     arrowX,
     arrowY,
     children,
+    className,
     originX,
     originY,
     padding,
@@ -58,8 +60,7 @@ export function TooltipCard(
 
   const rootStyle: CSSProperties = useMemo(
     () => ({
-      originX,
-      originY,
+      transformOrigin: getTransformOrigin(originX, originY),
       willChange: animate ? 'transform' : undefined,
       ...style,
     }),
@@ -78,6 +79,7 @@ export function TooltipCard(
 
   return (
     <MotionCard
+      className={clsx(tooltipCard, className)}
       data-ui="Tooltip__card"
       {...restProps}
       data-placement={placement}

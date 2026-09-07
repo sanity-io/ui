@@ -1,5 +1,5 @@
+import {clsx} from 'clsx/lite'
 import {useCallback, useEffect, useImperativeHandle, useMemo, useRef} from 'react'
-import {styled} from 'styled-components'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
@@ -9,6 +9,8 @@ import {ResponsivePaddingProps} from '../../primitives/types'
 import {useLayer} from '../../utils/layer/useLayer'
 import {MenuContext, MenuContextValue} from './menuContext'
 import {useMenuController} from './useMenuController'
+
+import {menu} from './menu.css'
 
 /**
  * @public
@@ -38,11 +40,6 @@ export interface MenuProps extends ResponsivePaddingProps {
   'onBlurCapture'?: (event: FocusEvent) => void
 }
 
-const StyledMenu = styled(Box)`
-  outline: none;
-  overflow: auto;
-`
-
 /**
  * The `Menu` component is a building block for application menus.
  *
@@ -53,6 +50,7 @@ export function Menu(
 ) {
   const {
     children,
+    className,
     onClickOutside,
     onEscape,
     onItemClick,
@@ -155,7 +153,8 @@ export function Menu(
 
   return (
     <MenuContext.Provider value={value}>
-      <StyledMenu
+      <Box
+        className={clsx(menu, className)}
         data-ui="Menu"
         {...restProps}
         onKeyDown={handleKeyDown}
@@ -165,7 +164,7 @@ export function Menu(
         tabIndex={-1}
       >
         <Stack gap={gap}>{children}</Stack>
-      </StyledMenu>
+      </Box>
     </MenuContext.Provider>
   )
 }
