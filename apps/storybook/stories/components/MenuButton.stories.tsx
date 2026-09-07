@@ -105,6 +105,41 @@ export const WithMenuGroup: Story = {
   },
 }
 
+export const AnimatedWithMenuGroup: Story = {
+  args: {
+    popover: {animate: true},
+    menu: (
+      <Menu>
+        <MenuItem id="menu-item-1" text="Search" />
+        <MenuGroup id="menu-group" text="More">
+          <MenuItem id="submenu-item-1" text="Email link" />
+          <MenuItem id="submenu-item-2" text="Messages" />
+        </MenuGroup>
+      </Menu>
+    ),
+  },
+  parameters: {controls: {include: []}},
+  render: (props) => <MenuButton {...props} id="menu-button" />,
+  play: async ({canvasElement, step}) => {
+    const doc = canvasElement.ownerDocument
+    const opacityOf = (selector: string) => {
+      const el = doc.querySelector(selector)
+
+      return el ? getComputedStyle(el).opacity : undefined
+    }
+
+    await step('the animated menu popover becomes visible', async () => {
+      await userEvent.click(doc.getElementById('menu-button')!)
+      await waitFor(() => expect(opacityOf('[data-ui="MenuButton__popover"]')).toBe('1'))
+    })
+
+    await step('the non-animated submenu popover becomes visible', async () => {
+      await userEvent.click(doc.getElementById('menu-group')!)
+      await waitFor(() => expect(opacityOf('[data-ui="MenuGroup__popover"]')).toBe('1'))
+    })
+  },
+}
+
 export const WithSelectedItem: Story = {
   args: {
     menu: (

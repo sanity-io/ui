@@ -1,5 +1,53 @@
 # @sanity/ui
 
+## 4.1.0
+
+### Minor Changes
+
+- [#2828](https://github.com/sanity-io/ui/pull/2828) [`7795b61`](https://github.com/sanity-io/ui/commit/7795b614dd3fbc77fa53a764ad81d11f4c3350be) Thanks [@stipsan](https://github.com/stipsan)! - Move fully static styled-components CSS to [vanilla-extract](https://vanilla-extract.style/), served from `@sanity/ui/styles.css`: `Autocomplete`, `Breadcrumbs`, `Button` (loading overlay), `Checkbox`, `Dialog`, `Hotkeys`, `Layer`, `Menu`, `MenuDivider`, `Radio`, `Select`, `Skeleton`, `Switch`, `Tab`, `TabList`, `TextArea`, `TextInput`, `Toast`, `Tooltip`, `TreeItem` and `VirtualList`. Styles that read the theme or props stay on styled-components. Equal-specificity overrides of those migrated components use doubled vanilla-extract class selectors (`&&`) where the library itself has to beat a runtime rule.
+  
+  `MenuDivider` is now a plain component rather than a `styled.hr`. `styled(MenuDivider)` wraps through `className` instead of extending the styled component, and `${MenuDivider}` component selectors no longer work.
+  
+  Equal-specificity consumer overrides of migrated components (for example `styled(Layer)` with `position: fixed`, or `styled(MenuDivider)` with `height: 20px`) win only if `@sanity/ui/styles.css` loads before styled-components' runtime style tags. That is the usual case when the stylesheet is in the entry chunk.
+  
+  As with `SrOnly` and `Spinner` since 4.0.0, these components render unstyled unless the app imports the stylesheet once:
+  
+  ```js
+  import "@sanity/ui/styles.css"
+  ```
+
+### Patch Changes
+
+- [#2839](https://github.com/sanity-io/ui/pull/2839) [`b2e6cc1`](https://github.com/sanity-io/ui/commit/b2e6cc1377d8ecdbeb10be44c2539fecbb2d49da) Thanks [@stipsan](https://github.com/stipsan)! - Add identifying `data-ui` attributes to Arrow, skeleton, and MenuDivider components.
+
+## 4.0.7
+
+### Patch Changes
+
+- [#2792](https://github.com/sanity-io/ui/pull/2792) [`7258b02`](https://github.com/sanity-io/ui/commit/7258b02024d233c4270c59a55f813574796006c5) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency use-effect-event to ^2.0.4
+
+- [#2782](https://github.com/sanity-io/ui/pull/2782) [`80d25c2`](https://github.com/sanity-io/ui/commit/80d25c2e4ebb2b6bb5c82eded7b0329663da8759) Thanks [@stipsan](https://github.com/stipsan)! - Fixed non-animated `Popover` and `Tooltip` cards inheriting motion variants from an animated ancestor popover, which left them stuck at `opacity: 0`. `MenuGroup` submenus inside a `MenuButton` with `popover={{animate: true}}` never became visible as a result.
+
+## 4.0.6
+
+### Patch Changes
+
+- [#2753](https://github.com/sanity-io/ui/pull/2753) [`2dc0627`](https://github.com/sanity-io/ui/commit/2dc06270810e696ebbc2aeb4729cf3eba7c7ec28) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^13.1.1
+
+- [#2750](https://github.com/sanity-io/ui/pull/2750) [`63ed976`](https://github.com/sanity-io/ui/commit/63ed97631eba7989a6d647a039dfc7df4abe143a) Thanks [@stipsan](https://github.com/stipsan)! - fix(popover): animate popovers with the same simplicity as tooltips — only the card fades and scales, the content is no longer animated separately, so it can never get stuck invisible (SAPP-4314)
+
+## 4.0.5
+
+### Patch Changes
+
+- [#2737](https://github.com/sanity-io/ui/pull/2737) [`465b379`](https://github.com/sanity-io/ui/commit/465b379531cea0fefb668ccddcd319851802d1cd) Thanks [@stipsan](https://github.com/stipsan)! - Build the published dist with the React Compiler running on `oxc-transform-react` (the native Rust port, via `@sanity/tsdown-config`'s new `reactCompiler.transform: 'oxc'`) instead of `babel-plugin-react-compiler`. The output is functionally equivalent — the Rust port tracks the latest React Compiler release, so memo-cache slot allocation differs slightly in places.
+
+## 4.0.4
+
+### Patch Changes
+
+- [#2730](https://github.com/sanity-io/ui/pull/2730) [`3970a7e`](https://github.com/sanity-io/ui/commit/3970a7e6dd0b4dc53d78eca6ed789cf92e39ad7a) Thanks [@stipsan](https://github.com/stipsan)! - fix(popover): prevent animated popovers from getting stuck with invisible content when rapidly toggled, and start the content fade-in halfway through the card fade instead of after it
+
 ## 4.0.3
 
 ### Patch Changes

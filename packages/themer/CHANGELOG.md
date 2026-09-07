@@ -1,5 +1,44 @@
 # @sanity/themer
 
+## 0.3.10
+
+### Patch Changes
+
+- Updated dependencies [[`b2e6cc1`](https://github.com/sanity-io/ui/commit/b2e6cc1377d8ecdbeb10be44c2539fecbb2d49da), [`7795b61`](https://github.com/sanity-io/ui/commit/7795b614dd3fbc77fa53a764ad81d11f4c3350be)]:
+  - @sanity/ui@4.1.0
+
+## 0.3.9
+
+### Patch Changes
+
+- Updated dependencies [[`7258b02`](https://github.com/sanity-io/ui/commit/7258b02024d233c4270c59a55f813574796006c5), [`80d25c2`](https://github.com/sanity-io/ui/commit/80d25c2e4ebb2b6bb5c82eded7b0329663da8759)]:
+  - @sanity/ui@4.0.7
+
+## 0.3.8
+
+### Patch Changes
+
+- Updated dependencies [[`2dc0627`](https://github.com/sanity-io/ui/commit/2dc06270810e696ebbc2aeb4729cf3eba7c7ec28), [`63ed976`](https://github.com/sanity-io/ui/commit/63ed97631eba7989a6d647a039dfc7df4abe143a)]:
+  - @sanity/ui@4.0.6
+
+## 0.3.7
+
+### Patch Changes
+
+- [#2737](https://github.com/sanity-io/ui/pull/2737) [`465b379`](https://github.com/sanity-io/ui/commit/465b379531cea0fefb668ccddcd319851802d1cd) Thanks [@stipsan](https://github.com/stipsan)! - Build the published dist with the React Compiler running on `oxc-transform-react` (the native Rust port, via `@sanity/tsdown-config`'s new `reactCompiler.transform: 'oxc'`) instead of `babel-plugin-react-compiler`. The output is functionally equivalent — the Rust port tracks the latest React Compiler release, so memo-cache slot allocation differs slightly in places.
+
+- Updated dependencies [[`465b379`](https://github.com/sanity-io/ui/commit/465b379531cea0fefb668ccddcd319851802d1cd)]:
+  - @sanity/ui@4.0.5
+
+## 0.3.6
+
+### Patch Changes
+
+- [#2729](https://github.com/sanity-io/ui/pull/2729) [`4f9e30f`](https://github.com/sanity-io/ui/commit/4f9e30f892f6f3fe7d7997280b1ba8b9e84c93d4) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update sanity monorepo to ^6.10.1
+
+- Updated dependencies [[`3970a7e`](https://github.com/sanity-io/ui/commit/3970a7e6dd0b4dc53d78eca6ed789cf92e39ad7a)]:
+  - @sanity/ui@4.0.4
+
 ## 0.3.5
 
 ### Patch Changes

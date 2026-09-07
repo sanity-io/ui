@@ -360,7 +360,7 @@ function AsyncStory() {
         setLoadingCurrentRef,
       )
     } else {
-      // oxlint-disable-next-line react-compiler
+      // oxlint-disable-next-line react/set-state-in-effect
       setOptionTitle(null)
       setLoadingCurrentRef(false)
     }
@@ -784,7 +784,7 @@ function FullscreenStory() {
         setLoadingCurrentRef,
       )
     } else {
-      // oxlint-disable-next-line react-compiler
+      // oxlint-disable-next-line react/set-state-in-effect
       setOptionTitle(null)
       setLoadingCurrentRef(false)
     }

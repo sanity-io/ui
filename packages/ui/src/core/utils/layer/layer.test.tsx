@@ -52,7 +52,7 @@ describe('utils/layer', () => {
 
       function Debug() {
         try {
-          // oxlint-disable-next-line react-compiler
+          // oxlint-disable-next-line react/hooks, react/rules-of-hooks
           useLayer()
         } catch (err) {
           log(err)
@@ -82,7 +82,7 @@ describe('utils/layer', () => {
 
       function Debug() {
         try {
-          // oxlint-disable-next-line react-compiler
+          // oxlint-disable-next-line react/hooks, react/rules-of-hooks
           useLayer()
         } catch (err) {
           log(err)

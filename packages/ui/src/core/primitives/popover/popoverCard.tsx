@@ -31,10 +31,6 @@ const MotionCard = styled(motion.create(Card))`
   will-change: transform;
 `
 
-const MotionFlex = styled(motion.create(Flex))`
-  will-change: opacity;
-`
-
 /**
  * @internal
  */
@@ -137,24 +133,13 @@ export function PopoverCard(
       sizing="border"
       style={rootStyle}
       tone={tone}
-      variants={POPOVER_MOTION_PROPS.card}
-      transition={POPOVER_MOTION_PROPS.transition}
-      initial={animate ? ['hidden', 'initial'] : undefined}
-      animate={animate ? ['visible', 'scaleIn'] : undefined}
-      exit={animate ? ['hidden', 'scaleOut'] : undefined}
+      {...(animate ? POPOVER_MOTION_PROPS : undefined)}
     >
-      <MotionFlex
-        data-ui="Popover__wrapper"
-        direction="column"
-        flex={1}
-        overflow={overflow}
-        variants={POPOVER_MOTION_PROPS.children}
-        transition={POPOVER_MOTION_PROPS.transition}
-      >
+      <Flex data-ui="Popover__wrapper" direction="column" flex={1} overflow={overflow}>
         <Flex direction="column" flex={1} padding={padding}>
           {children}
         </Flex>
-      </MotionFlex>
+      </Flex>
 
       {arrow && (
         <Arrow

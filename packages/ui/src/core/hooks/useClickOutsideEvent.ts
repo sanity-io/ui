@@ -73,6 +73,7 @@ export function useClickOutsideEvent(
     return () => {
       document.removeEventListener('mousedown', handleEvent)
     }
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [hasListener])
 
   useDebugValue(listener ? 'MouseDown On' : 'MouseDown Off')

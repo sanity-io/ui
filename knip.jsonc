@@ -18,6 +18,10 @@
         // vite can resolve it as an `optimizeDeps.exclude`d external from the
         // prebundled sanity/plugin chunks (see sanity.cli.ts)
         "@sanity/ui",
+        // Never imported: `reactCompiler: {transform: 'oxc'}` in sanity.cli.ts
+        // makes the sanity CLI load it as an optional peer of @sanity/cli,
+        // which knip cannot trace through the `sanity` package
+        "oxc-transform-react",
       ],
     },
     "packages/color": {
@@ -32,8 +36,9 @@
     },
     "packages/themer": {
       "ignoreDependencies": [
-        // babel-plugin-react-compiler (target '18') injects imports of this runtime
-        // package into the compiled dist output, so it is never imported in source
+        // The React Compiler (oxc-transform-react, target '18') injects imports of
+        // this runtime package into the compiled dist output, so it is never
+        // imported in source
         "react-compiler-runtime",
       ],
     },

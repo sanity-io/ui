@@ -69,7 +69,7 @@ export function TextSkeleton(
   const {size = 2, ...restProps} = props
   const $size = _getArrayProp(size)
 
-  return <StyledSkeleton {...restProps} $size={$size} $style="text" />
+  return <StyledSkeleton data-ui="TextSkeleton" {...restProps} $size={$size} $style="text" />
 }
 
 /**
@@ -83,7 +83,7 @@ export function LabelSkeleton(
   const {size = 2, ...restProps} = props
   const $size = _getArrayProp(size)
 
-  return <StyledSkeleton {...restProps} $size={$size} $style="label" />
+  return <StyledSkeleton data-ui="LabelSkeleton" {...restProps} $size={$size} $style="label" />
 }
 
 /**
@@ -97,7 +97,7 @@ export function HeadingSkeleton(
   const {size = 2, ...restProps} = props
   const $size = _getArrayProp(size)
 
-  return <StyledSkeleton {...restProps} $size={$size} $style="heading" />
+  return <StyledSkeleton data-ui="HeadingSkeleton" {...restProps} $size={$size} $style="heading" />
 }
 
 /**
@@ -111,5 +111,5 @@ export function CodeSkeleton(
   const {size = 2, ...restProps} = props
   const $size = _getArrayProp(size)
 
-  return <StyledSkeleton {...restProps} $size={$size} $style="code" />
+  return <StyledSkeleton data-ui="CodeSkeleton" {...restProps} $size={$size} $style="code" />
 }

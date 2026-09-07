@@ -133,13 +133,13 @@ const MenuGroupComponent = function MenuGroup(
 
   // Close child menu when a sibling item becomes active
   useEffect(() => {
-    // oxlint-disable-next-line react-compiler
+    // oxlint-disable-next-line react/set-state-in-effect
     if (!active) setOpen(false)
   }, [active])
 
   // Update state when child menu is no longer open
   useEffect(() => {
-    // oxlint-disable-next-line react-compiler
+    // oxlint-disable-next-line react/set-state-in-effect
     if (!open) setWithinMenu(false)
   }, [open])
 

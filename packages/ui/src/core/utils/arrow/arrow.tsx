@@ -109,7 +109,7 @@ export function Arrow(
   const fillPath = `${path} M ${w} -1 M 0 -1 Z`
 
   return (
-    <StyledArrow {...restProps} $w={w} ref={ref}>
+    <StyledArrow data-ui="Arrow" {...restProps} $w={w} ref={ref}>
       <svg width={w} height={w} viewBox={`0 0 ${w} ${w}`}>
         <mask id="stroke-mask">
           <rect x={0} y={strokeWidth} width={w} height={w} fill="white" />

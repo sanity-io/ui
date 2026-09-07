@@ -17,6 +17,8 @@ import {Text} from '../text/text'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
 import {buttonBaseStyles, buttonColorStyles} from './styles'
 
+import {buttonLoadingBox} from './button.css'
+
 /**
  * @public
  */
@@ -55,21 +57,6 @@ export type ButtonProps<E extends ElementType = 'button'> = Props<ButtonOwnProps
 const StyledButton = styled.button<
   {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps
 >(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
-
-const LoadingBox = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--card-bg-color);
-  border-radius: inherit;
-  z-index: 1;
-  box-shadow: inherit;
-`
 
 function ButtonComponent(
   props: ButtonOwnProps & {as?: ElementType} & Omit<
@@ -148,9 +135,9 @@ function ButtonComponent(
       $width={width}
     >
       {Boolean(loading) && (
-        <LoadingBox>
+        <div className={buttonLoadingBox}>
           <Spinner />
-        </LoadingBox>
+        </div>
       )}
 
       {(IconComponent || text || IconRightComponent) && (

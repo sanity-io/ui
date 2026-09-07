@@ -101,7 +101,7 @@ function AvatarComponent(
   }, [arrowPosition, arrowPositionProp])
 
   useEffect(() => {
-    // oxlint-disable-next-line react-compiler
+    // oxlint-disable-next-line react/set-state-in-effect
     if (src) setImageFailed(false)
   }, [src])
 

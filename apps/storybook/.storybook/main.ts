@@ -1,7 +1,6 @@
-import babel from '@rolldown/plugin-babel'
 import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
 import type {StorybookConfig} from '@storybook/react-vite'
-import viteReact, {reactCompilerPreset} from '@vitejs/plugin-react'
+import viteReact from '@vitejs/plugin-react'
 import {mergeConfig} from 'vite'
 
 const config: StorybookConfig = {
@@ -20,8 +19,9 @@ const config: StorybookConfig = {
   viteFinal(config) {
     return mergeConfig(config, {
       plugins: [
-        viteReact(),
-        babel({presets: [reactCompilerPreset({target: '19'})]}),
+        // `compiler` runs the React Compiler natively via `oxc-transform-react`
+        // (the Rust port) in the same pass as TypeScript/JSX — no babel
+        viteReact({compiler: {target: '19'}}),
         // @sanity/ui resolves to its TypeScript source (dev `exports`), so its
         // vanilla-extract `.css.ts` modules must be compiled here
         vanillaExtractPlugin(),
