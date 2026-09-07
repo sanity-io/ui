@@ -24,7 +24,7 @@
     "watch": "pnpm --filter @sanity/ui watch"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.1",
     "@types/node": "catalog:",
     "eslint-plugin-storybook": "^10.5.10",
