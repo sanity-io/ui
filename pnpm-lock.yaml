@@ -193,7 +193,7 @@ importers:
         specifier: ^10.5.10
         version: 10.6.0(eslint@10.10.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2)
       knip:
-        specifier: ^6.33.0
+        specifier: ^6.34.0
         version: 6.34.0
       oxfmt:
         specifier: ^0.65.0
