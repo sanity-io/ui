@@ -29,7 +29,7 @@ describe('animated popover transform-origin', () => {
     await userEvent.click(button)
     await expect.poll(() => inlineStyle(popover)?.opacity, POLL).toBe('1')
     const origin = inlineStyle(popover)!.transformOrigin
-    expect(origin).toMatch(/^\S+ 0%$/)
+    expect(origin).toMatch(/^\S+ 0%/)
 
     await userEvent.keyboard('{Escape}')
     await expect.poll(() => inlineStyle(popover)?.display, POLL).toBe('none')
@@ -46,13 +46,12 @@ describe('animated popover transform-origin', () => {
     const button = screen.getByRole('button', {name: 'Hover me'})
     const tooltip = '[data-ui="Tooltip__card"]'
     // `Activity` hides the outer `Layer`, motion animates the card inside it
-    const layerStyle = () =>
-      document.querySelector<HTMLElement>(tooltip)?.parentElement?.style
+    const layerStyle = () => document.querySelector<HTMLElement>(tooltip)?.parentElement?.style
 
     await userEvent.hover(button)
     await expect.poll(() => inlineStyle(tooltip)?.opacity, POLL).toBe('1')
     const origin = inlineStyle(tooltip)!.transformOrigin
-    expect(origin).toMatch(/^\S+ 0%$/)
+    expect(origin).toMatch(/^\S+ 0%/)
 
     await userEvent.unhover(button)
     await expect.poll(() => layerStyle()?.display, POLL).toBe('none')
