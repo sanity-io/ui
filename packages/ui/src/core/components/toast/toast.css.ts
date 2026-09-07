@@ -41,3 +41,15 @@ export const loadingBarMask = style({
   bottom: `${LOADING_BAR_HEIGHT}px`,
   zIndex: 1,
 })
+
+export const loadingBarProgress = style({
+  display: 'block',
+  height: '100%',
+  width: '100%',
+  transformOrigin: '0% 50%',
+  selectors: {
+    '&&': {
+      backgroundColor: 'var(--toast-loading-bar-bg)',
+    },
+  },
+})

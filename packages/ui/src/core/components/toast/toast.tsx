@@ -2,6 +2,7 @@ import {CloseIcon} from '@sanity/icons/Close'
 import {clsx} from 'clsx/lite'
 import {motion, stagger, type Variant, type Variants} from 'motion/react'
 
+import {ThemeColorStateToneKey} from '../../../theme/system/color/_system'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Box} from '../../primitives/box/box'
 import {Button} from '../../primitives/button/button'
@@ -9,9 +10,10 @@ import {Card} from '../../primitives/card/card'
 import {Flex} from '../../primitives/flex/flex'
 import {Stack} from '../../primitives/stack/stack'
 import {Text} from '../../primitives/text/text'
-import {BUTTON_TONE, LoadingBarProgress, STATUS_CARD_TONE} from './styles'
+import {useTheme_v2} from '../../theme/useTheme'
+import {BUTTON_TONE, STATUS_CARD_TONE} from './styles'
 
-import {loadingBar, loadingBarMask, toast, toastText} from './toast.css'
+import {loadingBar, loadingBarMask, loadingBarProgress, toast, toastText} from './toast.css'
 
 /**
  * @public
@@ -144,17 +146,40 @@ export function Toast(
           transition={transition}
         >
           <Card className={loadingBarMask} tone={cardTone} radius={radius} />
-          <MotionLoadingBarProgress
+          <LoadingBarProgress
             key={`progress-${updatedAt}`}
+            duration={duration}
+            onComplete={onClose}
             tone={cardTone}
-            initial={{scaleX: 0}}
-            animate={{scaleX: 1}}
-            transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
-            onAnimationComplete={onClose}
+            visualDuration={visualDuration}
           />
         </motion.div>
       )}
     </MotionCard>
+  )
+}
+
+interface LoadingBarProgressProps {
+  duration: number
+  onComplete: () => void
+  tone: ThemeColorStateToneKey
+  visualDuration: number
+}
+
+function LoadingBarProgress(props: LoadingBarProgressProps) {
+  const {duration, onComplete, tone, visualDuration} = props
+  const {color} = useTheme_v2()
+
+  return (
+    <MotionCard
+      className={loadingBarProgress}
+      tone={tone}
+      style={{'--toast-loading-bar-bg': color.button.default[tone].enabled.bg}}
+      initial={{scaleX: 0}}
+      animate={{scaleX: 1}}
+      transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
+      onAnimationComplete={onComplete}
+    />
   )
 }
 
@@ -199,4 +224,3 @@ const content = {
 const MotionCard = motion.create(Card)
 const MotionFlex = motion.create(Flex)
 const MotionText = motion.create(Text)
-const MotionLoadingBarProgress = motion.create(LoadingBarProgress)
