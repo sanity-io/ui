@@ -139,7 +139,12 @@ export function Toast(
         )}
       </MotionFlex>
       {hasDuration && (
-        <motion.div className={loadingBar} variants={content} transition={transition}>
+        <motion.div
+          className={loadingBar}
+          data-ui="ToastLoadingBar"
+          variants={content}
+          transition={transition}
+        >
           <Card className={loadingBarMask} tone={cardTone} radius={radius} />
           <LoadingBarProgress
             key={`progress-${updatedAt}`}
