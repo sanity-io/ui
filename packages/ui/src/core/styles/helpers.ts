@@ -19,8 +19,10 @@ const EMPTY_CSS_OBJECT: CSSObject = {}
  * must be an object, function, or template) and contributes no output, so the
  * emitted CSS is byte-identical to the v6 plain-array form.
  *
- * The result is declared as `CSSObject[]` (which it is at runtime — a rule
- * array) to keep styled-components types out of the public type surface.
+ * The result is declared as `CSSObject[]` to keep styled-components types out
+ * of the public type surface. It is a rule array at runtime, but its element
+ * shapes are styled-components internals and differ between majors (v6
+ * pre-serializes object rules to strings, while v7 keeps the objects).
  *
  * @internal
  */
