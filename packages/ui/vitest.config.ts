@@ -6,6 +6,11 @@ export default defineConfig({
   // under test (vitest stubs the resulting virtual CSS, but the class name
   // exports must evaluate)
   plugins: [vanillaExtractPlugin()],
+  resolve: {
+    // Keep every `from 'vitest'` (setup files, jest-dom, vitest-axe) on this
+    // package's copy. pnpm isolates the same vitest version per vite peer set.
+    dedupe: ['vitest'],
+  },
   test: {
     experimental: {
       // Print the slowest imports after test runs, to keep the cost of heavy
