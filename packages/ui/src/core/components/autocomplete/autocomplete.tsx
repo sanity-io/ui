@@ -1,5 +1,6 @@
 import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
 import {SpinnerIcon} from '@sanity/icons/Spinner'
+import {clsx} from 'clsx/lite'
 import {
   ChangeEvent,
   cloneElement,
@@ -32,7 +33,6 @@ import {Text} from '../../primitives/text/text'
 import {TextInput} from '../../primitives/textInput/textInput'
 import {_getArrayProp} from '../../styles/helpers'
 import {Radius} from '../../types/radius'
-import {ListBox, StyledAutocomplete} from './autocomplete.styles'
 import {AutocompleteOption} from './autocompleteOption'
 import {autocompleteReducer} from './autocompleteReducer'
 import {
@@ -43,6 +43,7 @@ import {
 import {AutocompleteOpenButtonProps, BaseAutocompleteOption} from './types'
 
 import {spinnerIcon} from '../../primitives/spinner/spinner.css'
+import {autocomplete, autocompleteListBox} from './autocomplete.css'
 
 /**
  * @public
@@ -565,11 +566,12 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     if (filteredOptions.length === 0) return null
 
     return (
-      <ListBox
+      <Box
         data-ui="AutoComplete__results"
         onKeyDown={handleListBoxKeyDown}
         padding={1}
         {...listBox}
+        className={clsx(autocompleteListBox, listBox?.className)}
         tabIndex={-1}
       >
         <Stack
@@ -588,8 +590,8 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
             return (
               <AutocompleteOption
-                id={`${id}-option-${option.value}`}
                 key={option.value}
+                id={`${id}-option-${option.value}`}
                 onSelect={handleOptionSelect}
                 selected={active}
                 value={option.value}
@@ -603,7 +605,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
             )
           })}
         </Stack>
-      </ListBox>
+      </Box>
     )
   }, [
     activeValue,
@@ -670,7 +672,11 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   ])
 
   return (
-    <StyledAutocomplete
+    // The handlers only observe focus and key events bubbling from the input and
+    // list box, which carry the roles; the wrapper itself is not interactive.
+    // oxlint-disable-next-line no-static-element-interactions
+    <div
+      className={autocomplete}
       data-ui="Autocomplete"
       onBlur={handleRootBlur}
       onFocus={handleRootFocus}
@@ -710,7 +716,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
         value={inputValue}
       />
       {results}
-    </StyledAutocomplete>
+    </div>
   )
 }
 

@@ -8,6 +8,7 @@ import {
   shift,
   useFloating,
 } from '@floating-ui/react-dom'
+import {clsx} from 'clsx/lite'
 import {
   Activity,
   cloneElement,
@@ -20,7 +21,6 @@ import {
   useRef,
   useState,
 } from 'react'
-import {styled} from 'styled-components'
 // TODO: switch to `useEffectEvent` from `react` once
 // https://github.com/facebook/react/issues/34818 is fixed in the lowest React
 // version we support: on React 19.2 the native hook never sees values past
@@ -49,6 +49,8 @@ import {
 } from './constants'
 import {TooltipCard} from './tooltipCard'
 import {useTooltipDelayGroup} from './tooltipDelayGroup/useTooltipDelayGroup'
+
+import {tooltipLayer} from './tooltip.css'
 
 /**
  * @public
@@ -88,10 +90,6 @@ export interface TooltipProps extends Omit<LayerProps, 'as'> {
    */
   animate?: boolean
 }
-
-const StyledTooltip = styled(Layer)`
-  pointer-events: none;
-`
 
 /**
  * Tooltips display information when hovering, focusing or tapping.
@@ -348,9 +346,10 @@ export function Tooltip(
   if (disabled) return child
 
   const tooltip = (
-    <StyledTooltip
+    <Layer
       data-ui="Tooltip"
       {...restProps}
+      className={clsx(tooltipLayer, restProps.className)}
       ref={setFloating}
       style={{
         ...floatingStyles,
@@ -376,7 +375,7 @@ export function Tooltip(
       >
         {content}
       </TooltipCard>
-    </StyledTooltip>
+    </Layer>
   )
 
   const tooltipNode = portalProp ? (

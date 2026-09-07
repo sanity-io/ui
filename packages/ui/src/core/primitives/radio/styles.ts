@@ -5,20 +5,6 @@ import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
 import {rem} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 
-export function radioBaseStyle(): ReturnType<typeof css> {
-  return css`
-    position: relative;
-
-    &:not([hidden]) {
-      display: inline-block;
-    }
-
-    &[data-read-only] {
-      outline: 1px solid red;
-    }
-  `
-}
-
 export function inputElementStyle(props: ThemeProps): ReturnType<typeof css> {
   const {color, input} = getTheme_v2(props.theme)
   const dist = (input.radio.size - input.radio.markSize) / 2
