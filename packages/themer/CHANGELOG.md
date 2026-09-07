@@ -1,5 +1,12 @@
 # @sanity/themer
 
+## 0.3.12
+
+### Patch Changes
+
+- Updated dependencies [[`0128e47`](https://github.com/sanity-io/ui/commit/0128e4725b37e11d305f454dab4e55d8840c5695), [`4b81730`](https://github.com/sanity-io/ui/commit/4b8173036ab1133a8ff6099ebbe5b48d08d2957f)]:
+  - @sanity/ui@4.2.0
+
 ## 0.3.11
 
 ### Patch Changes
