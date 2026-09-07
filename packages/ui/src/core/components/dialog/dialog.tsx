@@ -219,7 +219,7 @@ function DialogCard(props: DialogCardProps) {
       >
         <Flex className={dialogLayout} direction="column" flex={1}>
           {showHeader && (
-            <Box className={dialogHeader} data-ui="Dialog__header">
+            <Box className={dialogHeader} data-ui="DialogHeader">
               <Flex align="flex-start" padding={3}>
                 <Box flex={1} padding={2}>
                   {header && (
@@ -246,7 +246,7 @@ function DialogCard(props: DialogCardProps) {
 
           <Box
             className={dialogContent}
-            data-ui="Dialog__content"
+            data-ui="DialogContent"
             flex={1}
             ref={contentRef}
             tabIndex={-1}
@@ -255,7 +255,7 @@ function DialogCard(props: DialogCardProps) {
           </Box>
 
           {footer && (
-            <Box className={dialogFooter} data-ui="Dialog__footer">
+            <Box className={dialogFooter} data-ui="DialogFooter">
               {footer}
             </Box>
           )}

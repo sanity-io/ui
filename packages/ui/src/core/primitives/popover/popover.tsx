@@ -135,7 +135,7 @@ const ViewportOverlay = () => {
 
   return (
     <div
-      data-ui="Popover__overlay"
+      data-ui="PopoverOverlay"
       style={{height: '100vh', inset: 0, position: 'fixed', width: '100vw', zIndex}}
     />
   )

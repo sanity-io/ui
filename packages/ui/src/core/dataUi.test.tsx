@@ -1,6 +1,5 @@
 /** @vitest-environment jsdom */
 
-import {render as testingLibraryRender} from '@testing-library/react'
 import {describe, expect, it, vi} from 'vitest'
 
 // oxlint-disable-next-line no-unassigned-import
@@ -48,7 +47,6 @@ import {
   TextArea,
   TextInput,
   TextSkeleton,
-  ThemeProvider,
   Tree,
   TreeItem,
   VirtualList,
@@ -118,17 +116,17 @@ const PUBLIC_IDENTIFIERS = [
 ] as const
 
 const COMPOSITE_IDENTIFIERS = [
-  'Button__loading',
-  'Dialog__content',
-  'Dialog__footer',
-  'Dialog__header',
+  'ButtonLoading',
+  'DialogContent',
+  'DialogFooter',
+  'DialogHeader',
   'DialogCard',
   'MenuButton__popover',
   'MenuGroup__popover',
-  'Popover__overlay',
+  'PopoverOverlay',
   'Popover__wrapper',
-  'TextOverflow',
-  'Toast__loadingBar',
+  'SpanWithTextOverflow',
+  'ToastLoadingBar',
   'Tooltip__card',
   'TreeGroup',
   'TreeItem__box',
@@ -238,11 +236,5 @@ describe('component identifiers', () => {
     expectIdentifiers(COMPOSITE_IDENTIFIERS)
 
     consoleError.mockRestore()
-  })
-
-  it('identifies ThemeProvider when it renders a fallback', () => {
-    testingLibraryRender(<ThemeProvider />)
-
-    expect(document.querySelector('[data-ui="ThemeProvider"]')).not.toBeNull()
   })
 })

@@ -135,7 +135,7 @@ function ButtonComponent(
       $width={width}
     >
       {Boolean(loading) && (
-        <div className={buttonLoadingBox} data-ui="Button__loading">
+        <div className={buttonLoadingBox} data-ui="ButtonLoading">
           <Spinner />
         </div>
       )}

@@ -141,7 +141,7 @@ export function Toast(
       {hasDuration && (
         <motion.div
           className={loadingBar}
-          data-ui="Toast__loadingBar"
+          data-ui="ToastLoadingBar"
           variants={content}
           transition={transition}
         >
