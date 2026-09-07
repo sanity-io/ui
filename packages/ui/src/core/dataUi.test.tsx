@@ -125,7 +125,6 @@ const COMPOSITE_IDENTIFIERS = [
   'MenuGroup__popover',
   'PopoverOverlay',
   'Popover__wrapper',
-  'SpanWithTextOverflow',
   'ToastLoadingBar',
   'Tooltip__card',
   'TreeGroup',
