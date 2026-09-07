@@ -4,6 +4,7 @@ import React, {CSSProperties, useMemo} from 'react'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {POPOVER_MOTION_PROPS} from '../../constants'
+import {getTransformOrigin} from '../../middleware/origin'
 import {Placement} from '../../types/placement'
 import {Radius} from '../../types/radius'
 import {Arrow} from '../../utils/arrow/arrow'
@@ -59,8 +60,7 @@ export function TooltipCard(
 
   const rootStyle: CSSProperties = useMemo(
     () => ({
-      originX,
-      originY,
+      transformOrigin: getTransformOrigin(originX, originY),
       willChange: animate ? 'transform' : undefined,
       ...style,
     }),

@@ -42,6 +42,20 @@ export const origin: Middleware = {
   },
 }
 
+/**
+ * Converts the `origin` middleware data into a plain `transform-origin` CSS value.
+ *
+ * The value is intentionally applied as a regular CSS property rather than motion's
+ * `originX`/`originY` style keys: motion turns those into motion values that it resets to
+ * their initial (unpositioned, `undefined`) state whenever the element re-mounts, which is
+ * what happens every time an `Activity`-hidden popover or tooltip is shown again.
+ */
+export function getTransformOrigin(originX?: number, originY?: number): string | undefined {
+  if (originX === undefined || originY === undefined) return undefined
+
+  return `${originX * 100}% ${originY * 100}%`
+}
+
 function clamp(num: number, min: number, max: number) {
   return Math.min(Math.max(num, min), max)
 }
