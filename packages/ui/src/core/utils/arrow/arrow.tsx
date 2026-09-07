@@ -1,6 +1,6 @@
 import {assignInlineVars} from '@vanilla-extract/dynamic'
 import {clsx} from 'clsx/lite'
-import {HTMLProps} from 'react'
+import {HTMLProps, useId} from 'react'
 
 import {useTheme_v2} from '../../theme/useTheme'
 import {compileCommands, getRoundedCommands, Point} from './cmds'
@@ -16,6 +16,7 @@ export function Arrow(
 ): React.JSX.Element {
   const {className, width: w, height: h, radius = 0, ref, style, ...restProps} = props
   const {card} = useTheme_v2()
+  const strokeMaskId = `stroke-mask-${useId()}`
   const strokeWidth = card.shadow.outline
 
   const center = w / 2
@@ -62,13 +63,13 @@ export function Arrow(
       style={{...style, ...assignInlineVars({[arrowSize]: `${w}px`})}}
     >
       <svg width={w} height={w} viewBox={`0 0 ${w} ${w}`}>
-        <mask id="stroke-mask">
+        <mask id={strokeMaskId}>
           <rect x={0} y={strokeWidth} width={w} height={w} fill="white" />
         </mask>
         <path
           className={arrowStroke}
           d={strokePath}
-          mask="url(#stroke-mask)"
+          mask={`url(#${strokeMaskId})`}
           strokeWidth={strokeWidth * 2}
         />
         <path className={arrowShape} d={fillPath} />
