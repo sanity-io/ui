@@ -9,11 +9,3 @@ export const hotkeys = style({
     },
   },
 })
-
-export const hotkey = style({
-  selectors: {
-    '&&:not([hidden])': {
-      display: 'block',
-    },
-  },
-})

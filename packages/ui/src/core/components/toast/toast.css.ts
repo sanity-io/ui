@@ -6,7 +6,7 @@ export const toast = style({
   pointerEvents: 'all',
   width: '100%',
   position: 'relative',
-  overflow: 'clip',
+  overflow: ['hidden', 'clip'],
   selectors: {
     '&[data-has-duration]': {
       paddingBottom: `calc(${LOADING_BAR_HEIGHT}px / 2)`,
@@ -27,7 +27,7 @@ export const loadingBar = style({
   right: '0px',
   pointerEvents: 'none',
   zIndex: -1,
-  overflow: 'clip',
+  overflow: ['hidden', 'clip'],
   background: 'transparent',
   alignItems: 'flex-end',
   willChange: 'opacity',

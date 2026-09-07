@@ -29,6 +29,7 @@ describe('vanilla-extract cascade', () => {
 
     const button = document.querySelector('[data-ui="Breadcrumbs"] button')!
 
+    expect(getComputedStyle(button).appearance).toBe('none')
     expect(getComputedStyle(button).marginTop).toBe('-4px')
     expect(getComputedStyle(button).marginRight).toBe('-4px')
     expect(getComputedStyle(button).marginBottom).toBe('-4px')
