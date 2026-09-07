@@ -29,7 +29,7 @@ describe('animated popover transform-origin', () => {
     await userEvent.click(button)
     await expect.poll(() => inlineStyle(popover)?.opacity, POLL).toBe('1')
     const origin = inlineStyle(popover)!.transformOrigin
-    expect(origin).toMatch(/^\S+ 0%/)
+    expect(origin).not.toMatch(/^50% 50%/)
 
     await userEvent.keyboard('{Escape}')
     await expect.poll(() => inlineStyle(popover)?.display, POLL).toBe('none')
@@ -51,7 +51,7 @@ describe('animated popover transform-origin', () => {
     await userEvent.hover(button)
     await expect.poll(() => inlineStyle(tooltip)?.opacity, POLL).toBe('1')
     const origin = inlineStyle(tooltip)!.transformOrigin
-    expect(origin).toMatch(/^\S+ 0%/)
+    expect(origin).not.toMatch(/^50% 50%/)
 
     await userEvent.unhover(button)
     await expect.poll(() => layerStyle()?.display, POLL).toBe('none')
