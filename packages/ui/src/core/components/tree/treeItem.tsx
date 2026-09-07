@@ -157,8 +157,11 @@ export function TreeItem(
           </Text>
         )}
         {!IconComponent && (
-          <Text className={treeItemToggleArrow} muted={muted} size={fontSize} weight={weight}>
-            <ToggleArrowRightIcon style={{transform: expanded ? 'rotate(90deg)' : undefined}} />
+          <Text muted={muted} size={fontSize} weight={weight}>
+            <ToggleArrowRightIcon
+              className={treeItemToggleArrow}
+              style={{transform: expanded ? 'rotate(90deg)' : undefined}}
+            />
           </Text>
         )}
       </Box>
