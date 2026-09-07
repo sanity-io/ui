@@ -31,7 +31,7 @@
     "@vitejs/plugin-react": "catalog:",
     "@vitest/browser-playwright": "^4.1.11",
     "oxc-transform-react": "catalog:",
-    "playwright": "^1.62.1",
+    "playwright": "^1.63.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-refractor": "catalog:",
