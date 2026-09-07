@@ -11,7 +11,7 @@ export type MenuDividerProps<E extends ElementType = 'hr'> = Props<EmptyProps, E
  * @public
  */
 // oxlint-disable-next-line no-unsafe-type-assertion
-export const MenuDivider = styled.hr`
+export const MenuDivider = styled.hr.attrs({'data-ui': 'MenuDivider'})`
   height: 1px;
   border: 0;
   background: var(--card-hairline-soft-color);

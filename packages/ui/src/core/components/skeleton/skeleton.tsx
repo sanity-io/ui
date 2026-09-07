@@ -46,6 +46,7 @@ export function Skeleton(props: SkeletonProps & Omit<React.HTMLProps<HTMLDivElem
 
   return (
     <StyledSkeleton
+      data-ui="Skeleton"
       {...restProps}
       $animated={animated}
       $radius={_getArrayProp(radius)}
