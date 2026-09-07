@@ -455,7 +455,7 @@ importers:
   apps/studio:
     dependencies:
       '@sanity/code-input':
-        specifier: ^7.3.7
+        specifier: ^7.3.8
         version: 7.3.8(32c060898a5e48f6e6b038ddae7bdbbd)
       '@sanity/icons':
         specifier: workspace:*
