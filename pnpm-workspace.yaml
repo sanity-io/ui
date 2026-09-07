@@ -70,6 +70,26 @@ minimumReleaseAgeExclude:
   - motion-utils@13.0.0
   - eslint-plugin-storybook@10.5.10
   - use-effect-event@2.0.4
+  - '@oxc-transform-react/binding-android-arm-eabi@0.149.0'
+  - '@oxc-transform-react/binding-android-arm64@0.149.0'
+  - '@oxc-transform-react/binding-darwin-arm64@0.149.0'
+  - '@oxc-transform-react/binding-darwin-x64@0.149.0'
+  - '@oxc-transform-react/binding-freebsd-x64@0.149.0'
+  - '@oxc-transform-react/binding-linux-arm-gnueabihf@0.149.0'
+  - '@oxc-transform-react/binding-linux-arm-musleabihf@0.149.0'
+  - '@oxc-transform-react/binding-linux-arm64-gnu@0.149.0'
+  - '@oxc-transform-react/binding-linux-arm64-musl@0.149.0'
+  - '@oxc-transform-react/binding-linux-ppc64-gnu@0.149.0'
+  - '@oxc-transform-react/binding-linux-riscv64-gnu@0.149.0'
+  - '@oxc-transform-react/binding-linux-riscv64-musl@0.149.0'
+  - '@oxc-transform-react/binding-linux-s390x-gnu@0.149.0'
+  - '@oxc-transform-react/binding-linux-x64-gnu@0.149.0'
+  - '@oxc-transform-react/binding-linux-x64-musl@0.149.0'
+  - '@oxc-transform-react/binding-openharmony-arm64@0.149.0'
+  - '@oxc-transform-react/binding-win32-arm64-msvc@0.149.0'
+  - '@oxc-transform-react/binding-win32-ia32-msvc@0.149.0'
+  - '@oxc-transform-react/binding-win32-x64-msvc@0.149.0'
+  - oxc-transform-react@0.149.0
 
 minimumReleaseAgeExcludePrune: true
 
