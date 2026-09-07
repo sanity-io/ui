@@ -2,6 +2,7 @@ import {CloseIcon} from '@sanity/icons/Close'
 import {clsx} from 'clsx/lite'
 import {motion, stagger, type Variant, type Variants} from 'motion/react'
 
+import {ThemeColorStateToneKey} from '../../../theme/system/color/_system'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {Box} from '../../primitives/box/box'
 import {Button} from '../../primitives/button/button'
@@ -75,7 +76,6 @@ export function Toast(
   const cardTone = status ? STATUS_CARD_TONE[status] : 'default'
   const buttonTone = status ? BUTTON_TONE[status] : 'default'
   const role = status ? ROLES[status] : 'status'
-  const {color} = useTheme_v2()
 
   const prefersReducedMotion = usePrefersReducedMotion()
 
@@ -141,21 +141,40 @@ export function Toast(
       {hasDuration && (
         <motion.div className={loadingBar} variants={content} transition={transition}>
           <Card className={loadingBarMask} tone={cardTone} radius={radius} />
-          <MotionCard
+          <LoadingBarProgress
             key={`progress-${updatedAt}`}
-            className={loadingBarProgress}
+            duration={duration}
+            onComplete={onClose}
             tone={cardTone}
-            style={{
-              '--toast-loading-bar-bg': color.button.default[cardTone].enabled.bg,
-            }}
-            initial={{scaleX: 0}}
-            animate={{scaleX: 1}}
-            transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
-            onAnimationComplete={onClose}
+            visualDuration={visualDuration}
           />
         </motion.div>
       )}
     </MotionCard>
+  )
+}
+
+interface LoadingBarProgressProps {
+  duration: number
+  onComplete: () => void
+  tone: ThemeColorStateToneKey
+  visualDuration: number
+}
+
+function LoadingBarProgress(props: LoadingBarProgressProps) {
+  const {duration, onComplete, tone, visualDuration} = props
+  const {color} = useTheme_v2()
+
+  return (
+    <MotionCard
+      className={loadingBarProgress}
+      tone={tone}
+      style={{'--toast-loading-bar-bg': color.button.default[tone].enabled.bg}}
+      initial={{scaleX: 0}}
+      animate={{scaleX: 1}}
+      transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
+      onAnimationComplete={onComplete}
+    />
   )
 }
 
