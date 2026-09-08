@@ -21,6 +21,8 @@ export interface DialogProps extends Omit<React.ComponentProps<'dialog'>, 'open'
   open?: boolean
   /** Sets the max width of the dialog */
   size?: Responsive<ContainerSize>
+  /** CSS length value used to set the Dialog’s distance from the top of the viewport; Dialog is centered if not provided */
+  topAnchor?: string
 }
 
 export const dialogProps: Record<string, PropDef> = {
@@ -34,5 +36,10 @@ export const dialogProps: Record<string, PropDef> = {
     type: 'union',
     className: 'container',
     values: CONTAINER_SIZE,
+  },
+  topAnchor: {
+    type: 'string',
+    className: 'top-anchor',
+    variable: '--top-anchor',
   },
 }
