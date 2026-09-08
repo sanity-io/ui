@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.9
+
+### Patch Changes
+
+- 0d1bade: add Badge component
+
 ## 5.0.0-alpha.8
 
 ### Patch Changes
