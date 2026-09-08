@@ -21,7 +21,6 @@ import {BADGE_MODS} from './badge.mods'
 const TODO_WARNING = 'Please double check the Badge migration below'
 const CHILDREN_TODO_WARNING =
   'Please double check the Badge migration below. Move the children into the text prop.'
-const STYLED_TODO_WARNING = 'Please double check styled(Badge) migration below'
 
 /** @internal */
 export default function transform(
@@ -98,7 +97,6 @@ export default function transform(
 
     if (
       transformStyledComponents(j, root, styledAliases, () => true, {
-        warning: STYLED_TODO_WARNING,
         callback: (path) => migrate(path),
       })
     ) {
