@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.8
+
+### Patch Changes
+
+- 4315960: fixed grid mapped values and added flex-shrink when replacing stack with flex
+
 ## 1.0.0-alpha.7
 
 ### Patch Changes
