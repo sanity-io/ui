@@ -2,6 +2,7 @@ import '@sanity/ui/styles.css'
 import {AddIcon} from '@sanity/icons/Add'
 import {EditIcon} from '@sanity/icons/Edit'
 import {
+  Badge,
   Box,
   Button,
   Card,
@@ -295,6 +296,13 @@ export default function Ui5() {
       <Profiler id="VisuallyHidden" onRender={handleOnRender}>
         {iterator.map((i) => (
           <VisuallyHidden key={i}>Hidden content</VisuallyHidden>
+        ))}
+      </Profiler>
+
+      <h2>{count} Badges</h2>
+      <Profiler id="Badge" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Badge key={i} text="Badge" />
         ))}
       </Profiler>
 

@@ -1,0 +1,6 @@
+.sui-Badge {
+  --badge-background: var(--background-high);
+  --badge-color: var(--foreground-high);
+  background-color: var(--badge-background);
+  color: var(--badge-color);
+}
