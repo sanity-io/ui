@@ -37,7 +37,6 @@ import {useTheme_v2} from '../../theme/useTheme'
 import type {Placement} from '../../types/placement'
 import {AnimateActivity} from '../../utils/animateActivity'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
-import {getElementRef} from '../../utils/getElementRef'
 import {Layer, type LayerProps} from '../../utils/layer/layer'
 import {Portal} from '../../utils/portal/portal'
 import {usePortal} from '../../utils/portal/usePortal'
@@ -337,9 +336,7 @@ export function Tooltip(
 
   // If there's a child then we need to set the reference element to the cloned child ref
   // and if child changes we make sure to update or remove the reference element.
-  useImperativeHandle(childProp ? getElementRef(childProp) : null, () => referenceElement, [
-    referenceElement,
-  ])
+  useImperativeHandle(childProp?.props.ref, () => referenceElement, [referenceElement])
 
   if (!child) return <></>
 

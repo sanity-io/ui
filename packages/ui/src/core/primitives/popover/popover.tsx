@@ -35,7 +35,6 @@ import {Placement} from '../../types/placement'
 import {PopoverMargins} from '../../types/popover'
 import {AnimateActivity} from '../../utils/animateActivity'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
-import {getElementRef} from '../../utils/getElementRef'
 import {LayerProps} from '../../utils/layer/layer'
 import {LayerProvider} from '../../utils/layer/layerProvider'
 import {useLayer} from '../../utils/layer/useLayer'
@@ -313,7 +312,7 @@ export function Popover(
 
   // If there's a child then we need to set the reference element to the cloned child ref
   // and if child changes we make sure to update or remove the reference element.
-  useImperativeHandle(childProp ? getElementRef(childProp) : null, () => refs.reference.current)
+  useImperativeHandle(childProp?.props.ref, () => refs.reference.current)
 
   const child = useMemo(() => {
     // If a reference element is defined, we don't need to clone the child
