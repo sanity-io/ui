@@ -17,7 +17,7 @@ dedupePeerDependents: false
 catalog:
   '@sanity/blueprints': ^0.24.0
   '@sanity/client': ^8.5.0
-  '@sanity/functions': ^1.7.1
+  '@sanity/functions': ^1.7.2
   '@sanity/tsdown-config': ^0.28.0
   '@sanity/vanilla-extract-vite-plugin': ^0.2.18
   '@types/node': ^24.13.3
