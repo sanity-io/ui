@@ -38,14 +38,16 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
   const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
 
-  // Tracks the child layers on each level below this layer
-  const [{size}, dispatch] = useReducer(layerReducer, initialLayerState)
+  const [{childLayers, childrenWithoutLevel}, dispatch] = useReducer(
+    layerReducer,
+    initialLayerState,
+  )
 
+  const size = Object.keys(childLayers).length + childrenWithoutLevel
   const isTopLayer = size === 0
 
   const registerChild = useCallback(
     (childLevel?: number) => {
-      // Every ancestor tracks the child too, so `size` covers the whole subtree
       const parentDispose = parentRegisterChild?.(childLevel)
 
       dispatch({type: 'child/register', level: childLevel})

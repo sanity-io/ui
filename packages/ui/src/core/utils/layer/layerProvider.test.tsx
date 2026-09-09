@@ -26,7 +26,6 @@ function expectLayer(id: string, info: string) {
   expect(screen.getByTestId(id)).toHaveTextContent(info, {normalizeWhitespace: false})
 }
 
-/** A child from an older `@sanity/ui` copy, which registers without reporting its level. */
 function LegacyChild() {
   const {registerChild} = useLayer()
 
