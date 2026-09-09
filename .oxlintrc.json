@@ -84,12 +84,6 @@
   },
   "overrides": [
     {
-      "files": ["apps/storybook/src/addons/performance/withProfiler.tsx"],
-      "rules": {
-        "typescript/no-deprecated": "off"
-      }
-    },
-    {
       "files": ["**/stories/**/*.tsx"],
       "rules": {
         "no-deprecated": "off"

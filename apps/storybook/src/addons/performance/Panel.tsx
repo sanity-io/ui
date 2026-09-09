@@ -75,27 +75,15 @@ type PerformanceMeasurements = Partial<Record<ProfilerSlot, ProfilerMeasurement>
 export const Panel = React.memo(function PerformancePanel({active}: PanelProps) {
   const api = useStorybookApi()
   const story = api.getCurrentStoryData()
-  const performanceParameters = story?.parameters?.[ADDON_ID] as PerformanceParameters | undefined
-
-  return (
-    <AddonPanel active={!!active}>
-      {story?.type === 'story' ? (
-        <StoryPanel key={story.id} hasCompare={!!performanceParameters?.compareComponent} />
-      ) : (
-        <Placeholder>
-          <p>Select a story to collect profiler measurements.</p>
-        </Placeholder>
-      )}
-    </AddonPanel>
-  )
-})
-
-function StoryPanel({hasCompare}: {hasCompare: boolean}) {
   const [globals, updateGlobals] = useGlobals()
   const [measurements, setMeasurements] = useState<PerformanceMeasurements>(undefined)
+  const storyId = story?.type === 'story' ? story.id : undefined
+  const performanceParameters = story?.parameters?.[ADDON_ID] as PerformanceParameters | undefined
+  const hasCompare = !!performanceParameters?.compareComponent
   const benchmarkRun = Number(globals[GLOBAL_BENCHMARK_KEY] ?? 0) || 0
   const count = globals?.[GLOBAL_COUNT_KEY] ?? PERFORMANCE_COUNT_OPTIONS[0]
   const [pendingCount, setPendingCount] = useState(count)
+  const [prevStoryId, setPrevStoryId] = useState(storyId)
 
   useChannel({
     [EVENTS.RENDER]: (nextMeasurement: ProfilerMeasurement) => {
@@ -112,7 +100,9 @@ function StoryPanel({hasCompare}: {hasCompare: boolean}) {
 
   useEffect(() => {
     updateGlobals({[GLOBAL_BENCHMARK_KEY]: 0})
-  }, [updateGlobals])
+    // `storyId` re-runs the reset on story changes without being read here
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
+  }, [storyId, updateGlobals])
 
   useEffect(() => {
     if (benchmarkRun === 0 || !measurements?.primary) {
@@ -135,65 +125,79 @@ function StoryPanel({hasCompare}: {hasCompare: boolean}) {
     })
   }
 
+  if (prevStoryId !== storyId) {
+    setPrevStoryId(storyId)
+    setPendingCount(count)
+    setMeasurements(undefined)
+  }
+
   return (
-    <>
-      <ControlsForm>
-        <Form.Field label="Count">
-          <Select
-            onChange={(event) => {
-              setPendingCount(Number(event.currentTarget.value))
-            }}
-            value={pendingCount}
-          >
-            {PERFORMANCE_COUNT_OPTIONS.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </Select>
+    <AddonPanel active={!!active}>
+      {story?.type === 'story' ? (
+        <>
+          <ControlsForm>
+            <Form.Field label="Count">
+              <Select
+                onChange={(event) => {
+                  setPendingCount(Number(event.currentTarget.value))
+                }}
+                value={pendingCount}
+              >
+                {PERFORMANCE_COUNT_OPTIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </Select>
 
-          <SelectIcon
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M3.854 4.896a.5.5 0 10-.708.708l3.5 3.5a.5.5 0 00.708 0l3.5-3.5a.5.5 0 00-.708-.708L7 8.043 3.854 4.896z"
-              fill="currentColor"
-            ></path>
-          </SelectIcon>
-        </Form.Field>
+              <SelectIcon
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.854 4.896a.5.5 0 10-.708.708l3.5 3.5a.5.5 0 00.708 0l3.5-3.5a.5.5 0 00-.708-.708L7 8.043 3.854 4.896z"
+                  fill="currentColor"
+                ></path>
+              </SelectIcon>
+            </Form.Field>
 
-        <Form.Field label="Measure">
-          <Form.Button onClick={handleClick} size="medium" type="button">
-            Measure performance
-          </Form.Button>
-        </Form.Field>
-      </ControlsForm>
+            <Form.Field label="Measure">
+              <Form.Button onClick={handleClick} size="medium" type="button">
+                Measure performance
+              </Form.Button>
+            </Form.Field>
+          </ControlsForm>
 
-      {measurements?.primary ? (
-        <Row>
-          <Column>
-            <Measurement measurement={measurements.primary} />
-          </Column>
+          {measurements?.primary ? (
+            <Row>
+              <Column>
+                <Measurement measurement={measurements.primary} />
+              </Column>
 
-          {measurements.compare && (
-            <Column>
-              <Measurement measurement={measurements.compare} />
-            </Column>
+              {measurements.compare && (
+                <Column>
+                  <Measurement measurement={measurements.compare} />
+                </Column>
+              )}
+            </Row>
+          ) : (
+            <Placeholder>
+              <p>
+                {benchmarkRun === 0
+                  ? 'Click the Measure performance button above to run the profiler on this story.'
+                  : 'Waiting for profiler results…'}
+              </p>
+            </Placeholder>
           )}
-        </Row>
+        </>
       ) : (
         <Placeholder>
-          <p>
-            {benchmarkRun === 0
-              ? 'Click the Measure performance button above to run the profiler on this story.'
-              : 'Waiting for profiler results…'}
-          </p>
+          <p>Select a story to collect profiler measurements.</p>
         </Placeholder>
       )}
-    </>
+    </AddonPanel>
   )
-}
+})
