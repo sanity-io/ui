@@ -17,8 +17,7 @@ const channel = addons.getChannel()
 
 const HIDDEN_BENCHMARK_STYLE: CSSProperties = {
   border: 0,
-  // oxlint-disable-next-line typescript/no-deprecated
-  clip: 'rect(0, 0, 0, 0)',
+clipPath: 'rect(0, 0, 0, 0)',
   height: 1,
   margin: -1,
   overflow: 'hidden',
