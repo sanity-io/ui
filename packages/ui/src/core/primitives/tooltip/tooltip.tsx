@@ -265,8 +265,6 @@ export function Tooltip(
     if (!content && showTooltip) handleIsOpenChange(false)
   }, [content, handleIsOpenChange, showTooltip])
 
-  // An "effect event" keeps the listener attached while the tooltip is open,
-  // instead of detaching it whenever `handleIsOpenChange` changes identity.
   const onWindowEscape = useEffectEvent(() => handleIsOpenChange(false, true))
 
   useEffect(() => {
