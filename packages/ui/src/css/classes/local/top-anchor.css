@@ -1,4 +1,4 @@
 .sui-top-anchor {
   inset-block-start: var(--top-anchor);
-  max-height: calc(100dvh - var(--top-anchor) * 2);
+  max-block-size: calc(100dvh - var(--top-anchor) * 2);
 }
