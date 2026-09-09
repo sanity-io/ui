@@ -43,7 +43,7 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
     initialLayerState,
   )
 
-  const size = Object.keys(childLayers).length + childrenWithoutLevel
+  const size = childLayers.size + childrenWithoutLevel
   const isTopLayer = size === 0
 
   const registerChild = useCallback(

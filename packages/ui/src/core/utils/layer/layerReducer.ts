@@ -1,6 +1,6 @@
 /** @internal */
 export interface LayerState {
-  childLayers: Record<number, number>
+  childLayers: ReadonlyMap<number, number>
   childrenWithoutLevel: number
 }
 
@@ -15,7 +15,7 @@ export type LayerAction =
   | {type: 'child/unregister'; level?: number}
 
 /** @internal */
-export const initialLayerState: LayerState = {childLayers: {}, childrenWithoutLevel: 0}
+export const initialLayerState: LayerState = {childLayers: new Map(), childrenWithoutLevel: 0}
 
 /** @internal */
 export function layerReducer(state: LayerState, action: LayerAction): LayerState {
@@ -27,9 +27,11 @@ export function layerReducer(state: LayerState, action: LayerAction): LayerState
         return {...state, childrenWithoutLevel: state.childrenWithoutLevel + 1}
       }
 
-      const count = state.childLayers[level] ?? 0
+      const childLayers = new Map(state.childLayers)
 
-      return {...state, childLayers: {...state.childLayers, [level]: count + 1}}
+      childLayers.set(level, (childLayers.get(level) ?? 0) + 1)
+
+      return {...state, childLayers}
     }
 
     case 'child/unregister': {
@@ -37,21 +39,22 @@ export function layerReducer(state: LayerState, action: LayerAction): LayerState
         return {...state, childrenWithoutLevel: state.childrenWithoutLevel - 1}
       }
 
-      const count = state.childLayers[level]
+      const childLayers = new Map(state.childLayers)
+      const count = childLayers.get(level) ?? 0
 
       if (count === 1) {
-        const {[level]: _removed, ...childLayers} = state.childLayers
-
-        return {...state, childLayers}
+        childLayers.delete(level)
+      } else {
+        childLayers.set(level, count - 1)
       }
 
-      return {...state, childLayers: {...state.childLayers, [level]: count - 1}}
+      return {...state, childLayers}
     }
 
     default: {
-      const unhandled: never = action
+      action satisfies never
 
-      return unhandled
+      return state
     }
   }
 }
