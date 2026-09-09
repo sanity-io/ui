@@ -8,21 +8,8 @@ import {EMPTY_ARRAY} from '../constants'
 const EMPTY_CSS_OBJECT: CSSObject = {}
 
 /**
- * Tags a list of style chunks (CSS objects, style functions, or nested rules)
- * through the styled-components `css` helper so the result is accepted as a
- * function-interpolation return value by both styled-components v6 and v7.
- *
- * v6 recursively flattened plain arrays returned from style functions, but v7
- * only resolves composite returns that carry `css` metadata — a plain array
- * makes the component render without any styles. The leading empty object
- * satisfies the `css(styles, ...interpolations)` signature (the first argument
- * must be an object, function, or template) and contributes no output, so the
- * emitted CSS is byte-identical to the v6 plain-array form.
- *
- * The result is declared as `CSSObject[]` to keep styled-components types out
- * of the public type surface. It is a rule array at runtime, but its element
- * shapes are styled-components internals and differ between majors (v6
- * pre-serializes object rules to strings, while v7 keeps the objects).
+ * Tags style chunks with the metadata required for v7 function interpolations.
+ * The `CSSObject[]` return type avoids exposing styled-components types.
  *
  * @internal
  */
@@ -52,13 +39,7 @@ export function rem(pixelValue: number): string | 0 {
 }
 
 /**
- * Builds the per-breakpoint styles (the base statement plus one `@media` block
- * per following breakpoint) as a rule array tagged through {@link _ruleSet}.
- * The result is still an array (spreading and composing keep working), but it
- * carries the `css` helper's metadata that styled-components v7 requires for
- * function-interpolation return values — v7 drops plain arrays, rendering the
- * component without any styles. The emitted CSS is byte-identical to the
- * previous plain-array form on both majors.
+ * Builds a spreadable, v7-compatible rule array for responsive styles.
  *
  * @internal
  */

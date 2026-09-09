@@ -22,13 +22,7 @@ export default defineConfig({
           isolate: false,
           fileParallelism: false,
           retry: process.env.CI ? 2 : 0,
-          // The giant color-matrix stories (tokens/Colors, tests/Tones) render
-          // thousands of styled components. On the oldest supported
-          // styled-components (6.1.0, exercised by the CI version matrix, which
-          // predates the 6.4 render-performance work) they exceed the 15s
-          // default once the shared non-isolated iframe has accumulated the
-          // whole suite's styles. Passing tests are unaffected by the higher
-          // ceiling.
+          // Large color-matrix stories exceed 15s on styled-components 6.1.
           testTimeout: 120_000,
           browser: {
             enabled: true,

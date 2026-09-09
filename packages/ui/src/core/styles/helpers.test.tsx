@@ -24,9 +24,7 @@ describe('_responsive', () => {
   it('returns a spreadable rule array', () => {
     const rules = _responsive(media, [1, 2], (flex) => ({flex}))
 
-    // The exact element shapes differ between styled-components majors (v6
-    // pre-serializes object rules to strings, v7 keeps the objects), but the
-    // result must stay a real array that consumers can spread and compose.
+    // Rule elements are styled-components internals and differ between majors.
     expect(Array.isArray(rules)).toBe(true)
     expect(() => [...rules]).not.toThrow()
 

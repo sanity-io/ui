@@ -31,18 +31,13 @@ jobs:
     needs: [build]
     runs-on: ${{ matrix.os }}
     name: Test ${{ matrix.runtime }} / ${{ matrix.os }} / styled-components@${{ matrix.styled-components }}
-    # The styled-components v7 alpha (the `test` dist-tag) churns; don't let
-    # upstream breakage block PRs. Switch the matrix entry to '7.0.0' and drop
-    # `experimental` once v7 stable ships.
+    # Keep prerelease failures non-blocking until v7 is stable.
     continue-on-error: ${{ matrix.experimental == true }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
         runtime: [node@lts]
-        # `devDependencies` runs the workspace catalog pin (no override).
-        # '6.1.0' is the oldest version the `^6.1` peer range claims.
-        # `test` is the npm dist-tag of the styled-components v7 prerelease.
         styled-components: [devDependencies, '6.1.0']
         include:
           - os: macos-latest
@@ -61,10 +56,6 @@ jobs:
         if: matrix.styled-components != 'devDependencies'
         env:
           SC_SPEC: ${{ matrix.styled-components }}
-        # Rewrite the workspace catalog entry to the resolved version and lift
-        # the minimum-release-age gate for it (a freshly published prerelease
-        # would otherwise be blocked). Nothing is committed; the lockfile stays
-        # on the catalog pin.
         run: |
           SC_VERSION="$(npm view "styled-components@${SC_SPEC}" version)"
           echo "Resolved styled-components@${SC_SPEC} to ${SC_VERSION}"
@@ -77,7 +68,6 @@ jobs:
   storybook-test:
     runs-on: ubuntu-latest
     name: Storybook test / styled-components@${{ matrix.styled-components }}
-    # See the `test` job: the v7 alpha entry must not block PRs.
     continue-on-error: ${{ matrix.experimental == true }}
     strategy:
       fail-fast: false
