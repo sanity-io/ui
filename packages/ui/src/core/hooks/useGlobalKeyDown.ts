@@ -5,7 +5,7 @@ import {useEffect} from 'react'
 // the first render when the calling component is wrapped in `forwardRef` or
 // `memo`. This public hook runs in the fiber of whatever component calls it
 // (consumers may call it from `forwardRef` or `memo` components).
-import {useEffectEvent} from 'use-effect-event'
+import {useEffectEvent as useStableEffectEvent} from 'use-effect-event'
 
 /**
  * Adds global keydown event listener to the window.
@@ -18,7 +18,7 @@ export function useGlobalKeyDown(
   onKeyDown: (event: KeyboardEvent) => void,
   options?: AddEventListenerOptions,
 ): void {
-  const handleKeyDown = useEffectEvent((event: KeyboardEvent) => onKeyDown(event))
+  const handleKeyDown = useStableEffectEvent((event: KeyboardEvent) => onKeyDown(event))
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => handleKeyDown(event)
@@ -26,6 +26,5 @@ export function useGlobalKeyDown(
     window.addEventListener('keydown', handler, options)
 
     return () => window.removeEventListener('keydown', handler, options)
-    // oxlint-disable-next-line react/exhaustive-effect-dependencies
-  }, [options])
+  }, [handleKeyDown, options])
 }
