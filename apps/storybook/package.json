@@ -18,7 +18,9 @@
     "ui3": "catalog:"
   },
   "devDependencies": {
+    "@babel/core": "catalog:",
     "@chromatic-com/storybook": "^4.0.0",
+    "@rolldown/plugin-babel": "catalog:",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/addon-vitest": "^10.3.3",
@@ -26,10 +28,10 @@
     "@types/node": "^24.12.0",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "catalog:",
+    "@vitejs/plugin-react": "^6.0.1",
     "@vitest/browser-playwright": "^4.1.1",
     "@vitest/coverage-v8": "^4.1.1",
-    "oxc-transform-react": "catalog:",
+    "babel-plugin-react-compiler": "catalog:",
     "playwright": "^1.58.2",
     "storybook": "^10.3.3",
     "storybook-dark-mode": "^5.0.0",

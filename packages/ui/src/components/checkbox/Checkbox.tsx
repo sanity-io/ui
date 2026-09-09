@@ -26,7 +26,7 @@ export function Checkbox(props: CheckboxProps) {
     if (inputRef.current) {
       inputRef.current.indeterminate = indeterminate
     }
-  }, [indeterminate, inputRef])
+  }, [indeterminate])
 
   return (
     <Label

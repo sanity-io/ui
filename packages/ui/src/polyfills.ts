@@ -1,5 +1,3 @@
-'use client'
-
 import {
   apply as applyClosedByPolyfill,
   isSupported as isClosedBySupported,

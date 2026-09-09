@@ -1,5 +1,3 @@
-'use client'
-
 export * from './components/box/Box'
 export * from './components/button/Button'
 export * from './components/card/Card'

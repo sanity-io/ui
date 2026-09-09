@@ -100,8 +100,6 @@ export const Panel = React.memo(function PerformancePanel({active}: PanelProps) 
 
   useEffect(() => {
     updateGlobals({[GLOBAL_BENCHMARK_KEY]: 0})
-    // `storyId` is a trigger the effect never reads. The counter resets whenever the story changes.
-    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [storyId, updateGlobals])
 
   useEffect(() => {
