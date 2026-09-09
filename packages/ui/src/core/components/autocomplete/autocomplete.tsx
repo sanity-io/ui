@@ -485,10 +485,8 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     return v - 2
   })
   const openButtonPadding = padding.map((v) => Math.max(v - 1, 0))
-  const openButtonProps: AutocompleteOpenButtonProps = useMemo(
-    () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
-    [openButton],
-  )
+  const openButtonProps: AutocompleteOpenButtonProps =
+    typeof openButton === 'object' ? openButton : EMPTY_RECORD
 
   const handleOpenClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
