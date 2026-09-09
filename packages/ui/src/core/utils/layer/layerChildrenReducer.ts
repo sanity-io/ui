@@ -7,12 +7,7 @@ export interface LayerChildrenState {
   size: number
 }
 
-/**
- * @internal
- */
-export type LayerChildrenAction =
-  | {type: 'register'; level?: number}
-  | {type: 'unregister'; level?: number}
+type LayerChildrenAction = {type: 'register'; level?: number} | {type: 'unregister'; level?: number}
 
 /**
  * @internal

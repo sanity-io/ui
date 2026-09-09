@@ -4,6 +4,8 @@ import {fireEvent, screen} from '@testing-library/react'
 import {useEffect, useState} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
+// oxlint-disable-next-line no-unassigned-import
+import '../../../../test/mocks/matchMedia.mock'
 import {render} from '../../../../test/utils'
 import {Layer} from './layer'
 import {LayerContext} from './layerContext'
