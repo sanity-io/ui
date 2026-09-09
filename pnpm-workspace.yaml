@@ -19,8 +19,8 @@ minimumReleaseAgeExclude:
 overrides:
   '@types/react': ^19.2.17
   '@types/react-dom': ^19.2.3
-  '@types/react-is': ^19.2.0
+  '@types/react-is': ^19.3.0
   react: ^19.2.7
   react-dom: ^19.2.7
-  react-is: ^19.2.8
+  react-is: ^19.3.0
   styled-components: npm:@sanity/styled-components@6.1.23

@@ -7,10 +7,10 @@ settings:
 overrides:
   '@types/react': ^19.2.17
   '@types/react-dom': ^19.2.3
-  '@types/react-is': ^19.2.0
+  '@types/react-is': ^19.3.0
   react: ^19.2.7
   react-dom: ^19.2.7
-  react-is: ^19.2.8
+  react-is: ^19.3.0
   styled-components: npm:@sanity/styled-components@6.1.23
 
 importers:
@@ -105,8 +105,8 @@ importers:
         specifier: ^19.2.7
         version: 19.2.7(react@19.2.7)
       react-is:
-        specifier: ^19.2.8
-        version: 19.2.8
+        specifier: ^19.3.0
+        version: 19.3.0
       react-refractor:
         specifier: ^2.2.0
         version: 2.2.0(react@19.2.7)
@@ -217,8 +217,8 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.17)
       '@types/react-is':
-        specifier: ^19.2.0
-        version: 19.2.0
+        specifier: ^19.3.0
+        version: 19.3.0
       babel-plugin-react-compiler:
         specifier: 1.0.0
         version: 1.0.0
@@ -238,8 +238,8 @@ importers:
         specifier: ^19.2.7
         version: 19.2.7(react@19.2.7)
       react-is:
-        specifier: ^19.2.8
-        version: 19.2.8
+        specifier: ^19.3.0
+        version: 19.3.0
       refractor:
         specifier: ^4.9.0
         version: 4.9.0
@@ -2139,8 +2139,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.2.17
 
-  '@types/react-is@19.2.0':
-    resolution: {integrity: sha512-NP2xtcjZfORsOa4g2JwdseyEnF+wUCx25fTdG/J/HIY6yKga6+NozRBg2xR2gyh7kKYyd6DXndbq0YbQuTJ7Ew==}
+  '@types/react-is@19.3.0':
+    resolution: {integrity: sha512-pnL9JaaCgCeERlAwWLHBbv/sQV9jRFnp5ex7docWJ4/zA2UDwY2BrTSjEshBWJ81wyl37w9BSz22NW6i0qJhwA==}
 
   '@types/react@19.2.17':
     resolution: {integrity: sha512-MXfmqaVPEVgkBT/aY0aGCkRWWtByiYQXo3xdQ8r5RzuFrPiRn8Gar2tQdXSUQ2GKV3bkXckek89V8wQBY2Q/Aw==}
@@ -4009,8 +4009,8 @@ packages:
     peerDependencies:
       react: ^19.2.7
 
-  react-is@19.2.8:
-    resolution: {integrity: sha512-s5un28nYxKJw5gvUHyW5PCC28CvBqLu9r3cWgzHT4Vo/5fqqkFcdRYsGcKf50WMPpjjFZS5d76fn3YCo2njKwQ==}
+  react-is@19.3.0:
+    resolution: {integrity: sha512-UpMYezM4v5/18F28aC66AEsjXIgE02kyEMH6yLdgLXu/UTfa1Ntwck/nNLrbqJsEXW7gPb0coNO9FQse9WTovA==}
 
   react-refractor@2.2.0:
     resolution: {integrity: sha512-UvWkBVqH/2b9nkkkt4UNFtU3aY1orQfd4plPjx5rxbefy6vGajNHU9n+tv8CbykFyVirr3vEBfN2JTxyK0d36g==}
@@ -6464,7 +6464,7 @@ snapshots:
     dependencies:
       '@types/react': 19.2.17
 
-  '@types/react-is@19.2.0':
+  '@types/react-is@19.3.0':
     dependencies:
       '@types/react': 19.2.17
 
@@ -8388,7 +8388,7 @@ snapshots:
     dependencies:
       ansi-regex: 5.0.1
       ansi-styles: 5.2.0
-      react-is: 19.2.8
+      react-is: 19.3.0
 
   prismjs@1.27.0: {}
 
@@ -8460,7 +8460,7 @@ snapshots:
       react: 19.2.7
       scheduler: 0.27.0
 
-  react-is@19.2.8: {}
+  react-is@19.3.0: {}
 
   react-refractor@2.2.0(react@19.2.7):
     dependencies:
