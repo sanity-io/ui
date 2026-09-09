@@ -77,3 +77,16 @@ export function arcadeScreen(page: Page) {
 export function arcadeFallback(page: Page) {
   return page.getByTestId('arcade-loading')
 }
+
+/** The home page hero. Not rendered on any other screen. */
+export function heroSection(page: Page) {
+  return page.locator('[data-testid="hero-section"]:visible')
+}
+
+/** The visible Sanity UI brand link back to the home page. */
+export function homeLink(page: Page) {
+  return page
+    .locator(`a[href="${HOME_PATH}"]:visible`)
+    .filter({hasText: /^Sanity UI$/})
+    .first()
+}

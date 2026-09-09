@@ -14,7 +14,7 @@ strictPeerDependencies: false
 catalog:
   '@sanity/blueprints': ^0.24.0
   '@sanity/client': ^8.5.0
-  '@sanity/functions': ^1.7.1
+  '@sanity/functions': ^1.7.2
   '@sanity/tsdown-config': ^0.28.0
   '@sanity/vanilla-extract-vite-plugin': ^0.2.18
   '@types/node': ^24.13.3
@@ -35,7 +35,7 @@ catalog:
   typescript: 7.0.2
   unrun: ^0.3.1
   vite: ^8.2.2
-  vitest: ^4.1.11
+  vitest: ^5.0.0
 
 allowBuilds:
   # Like esbuild, @swc/core's postinstall is only a fallback downloader — the
@@ -71,6 +71,46 @@ minimumReleaseAgeExclude:
   - verkit
   - motion-utils@13.0.0
   - use-effect-event@2.0.4
+  - '@oxfmt/binding-android-arm-eabi@0.67.0'
+  - '@oxfmt/binding-android-arm64@0.67.0'
+  - '@oxfmt/binding-darwin-arm64@0.67.0'
+  - '@oxfmt/binding-darwin-x64@0.67.0'
+  - '@oxfmt/binding-freebsd-x64@0.67.0'
+  - '@oxfmt/binding-linux-arm-gnueabihf@0.67.0'
+  - '@oxfmt/binding-linux-arm-musleabihf@0.67.0'
+  - '@oxfmt/binding-linux-arm64-gnu@0.67.0'
+  - '@oxfmt/binding-linux-arm64-musl@0.67.0'
+  - '@oxfmt/binding-linux-ppc64-gnu@0.67.0'
+  - '@oxfmt/binding-linux-riscv64-gnu@0.67.0'
+  - '@oxfmt/binding-linux-riscv64-musl@0.67.0'
+  - '@oxfmt/binding-linux-s390x-gnu@0.67.0'
+  - '@oxfmt/binding-linux-x64-gnu@0.67.0'
+  - '@oxfmt/binding-linux-x64-musl@0.67.0'
+  - '@oxfmt/binding-openharmony-arm64@0.67.0'
+  - '@oxfmt/binding-win32-arm64-msvc@0.67.0'
+  - '@oxfmt/binding-win32-ia32-msvc@0.67.0'
+  - '@oxfmt/binding-win32-x64-msvc@0.67.0'
+  - oxfmt@0.67.0
+  - '@oxlint/binding-android-arm-eabi@1.82.0'
+  - '@oxlint/binding-android-arm64@1.82.0'
+  - '@oxlint/binding-darwin-arm64@1.82.0'
+  - '@oxlint/binding-darwin-x64@1.82.0'
+  - '@oxlint/binding-freebsd-x64@1.82.0'
+  - '@oxlint/binding-linux-arm-gnueabihf@1.82.0'
+  - '@oxlint/binding-linux-arm-musleabihf@1.82.0'
+  - '@oxlint/binding-linux-arm64-gnu@1.82.0'
+  - '@oxlint/binding-linux-arm64-musl@1.82.0'
+  - '@oxlint/binding-linux-ppc64-gnu@1.82.0'
+  - '@oxlint/binding-linux-riscv64-gnu@1.82.0'
+  - '@oxlint/binding-linux-riscv64-musl@1.82.0'
+  - '@oxlint/binding-linux-s390x-gnu@1.82.0'
+  - '@oxlint/binding-linux-x64-gnu@1.82.0'
+  - '@oxlint/binding-linux-x64-musl@1.82.0'
+  - '@oxlint/binding-openharmony-arm64@1.82.0'
+  - '@oxlint/binding-win32-arm64-msvc@1.82.0'
+  - '@oxlint/binding-win32-ia32-msvc@1.82.0'
+  - '@oxlint/binding-win32-x64-msvc@1.82.0'
+  - oxlint@1.82.0
 
 minimumReleaseAgeExcludePrune: true
 

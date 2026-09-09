@@ -1,5 +1,21 @@
 # @sanity/ui
 
+## 4.2.0
+
+### Minor Changes
+
+- [#2827](https://github.com/sanity-io/ui/pull/2827) [`4b81730`](https://github.com/sanity-io/ui/commit/4b8173036ab1133a8ff6099ebbe5b48d08d2957f) Thanks [@stipsan](https://github.com/stipsan)! - Move the remaining fully static styled-components CSS to [vanilla-extract](https://vanilla-extract.style/), served from `@sanity/ui/styles.css`: `Arrow`, `Avatar` and `AvatarStack`. Styles that read the theme or props stay on styled-components.
+  
+  No API changes. As with `SrOnly` and `Spinner` since 4.0.0, these components render unstyled unless the app imports the stylesheet once:
+  
+  ```js
+  import "@sanity/ui/styles.css"
+  ```
+
+### Patch Changes
+
+- [#2865](https://github.com/sanity-io/ui/pull/2865) [`0128e47`](https://github.com/sanity-io/ui/commit/0128e4725b37e11d305f454dab4e55d8840c5695) Thanks [@stipsan](https://github.com/stipsan)! - Stop `Layer` from overwriting `data-ui` on `Dialog` and `Tooltip`, and add identifiers on remaining component roots (`PopoverOverlay`, `ButtonLoading`, `ToastLoadingBar`, dialog regions, and `SpanWithTextOverflow`).
+
 ## 4.1.1
 
 ### Patch Changes

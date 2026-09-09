@@ -12,9 +12,4 @@ export const breadcrumbs = style({
 
 export const expandButton = style({
   appearance: 'none',
-  selectors: {
-    '&&': {
-      margin: -4,
-    },
-  },
 })
