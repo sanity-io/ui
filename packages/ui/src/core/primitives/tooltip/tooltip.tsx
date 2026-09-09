@@ -265,13 +265,17 @@ export function Tooltip(
     if (!content && showTooltip) handleIsOpenChange(false)
   }, [content, handleIsOpenChange, showTooltip])
 
+  // An "effect event" keeps the listener attached while the tooltip is open,
+  // instead of detaching it whenever `handleIsOpenChange` changes identity.
+  const onWindowEscape = useEffectEvent(() => handleIsOpenChange(false, true))
+
   useEffect(() => {
     // If the user clicks on escape key, close the tooltip.
     if (!showTooltip) return
 
     function handleWindowKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        handleIsOpenChange(false, true)
+        onWindowEscape()
       }
     }
 
@@ -281,7 +285,8 @@ export function Tooltip(
     return () => {
       window.removeEventListener('keydown', handleWindowKeyDown)
     }
-  }, [handleIsOpenChange, showTooltip])
+    // oxlint-disable-next-line react/exhaustive-effect-dependencies
+  }, [showTooltip])
 
   // // Set the max width of the tooltip based on boundaries and portals
   useLayoutEffect(() => {
