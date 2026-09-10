@@ -33,6 +33,8 @@ const rotate = keyframes`
 
 const SpinningIcon = styled(SpinnerIcon)`
   animation: ${rotate} 500ms linear infinite;
+  height: round(1em, 2px);
+  width: round(1em, 2px);
 `
 
 const COPY_FEEDBACK_DURATION = 1500
