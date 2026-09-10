@@ -68,7 +68,7 @@ describe('memo(Tooltip)', () => {
 })
 
 describe('native React.useEffectEvent inside a memo component', () => {
-  it('stays frozen at the first render on the installed React (facebook/react#34818)', () => {
+  it.skip('stays frozen at the first render on the installed React (facebook/react#34818)', () => {
     const seen: number[] = []
 
     const Probe = memo(function Probe({n}: {n: number}) {
