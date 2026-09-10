@@ -1,8 +1,8 @@
 import {keyframes, style} from '@vanilla-extract/css'
 
 const shimmer = keyframes({
-  '0%': {backgroundPosition: '100%'},
-  '100%': {backgroundPosition: '-100%'},
+  from: {transform: 'translateX(-100%)'},
+  to: {transform: 'translateX(100%)'},
 })
 
 export const skeleton = style({
@@ -25,21 +25,29 @@ export const skeletonHidden = style({
 export const skeletonAnimated = style({
   '@media': {
     'screen and (prefers-reduced-motion: no-preference)': {
-      backgroundImage: `linear-gradient(
-        to right,
-        var(--card-skeleton-color-from),
-        var(--card-skeleton-color-to),
-        var(--card-skeleton-color-from),
-        var(--card-skeleton-color-from),
-        var(--card-skeleton-color-from)
-      )`,
-      backgroundPosition: '100%',
-      backgroundSize: '200% 100%',
-      backgroundAttachment: 'fixed',
-      animationName: shimmer,
-      animationTimingFunction: 'ease-in-out',
-      animationIterationCount: 'infinite',
-      animationDuration: '2000ms',
+      backgroundColor: 'var(--card-skeleton-color-from)',
+      contain: 'paint',
+      WebkitMaskImage: 'linear-gradient(#fff, #fff)',
+      maskImage: 'linear-gradient(#fff, #fff)',
+      selectors: {
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `linear-gradient(
+            to right,
+            transparent,
+            var(--card-skeleton-color-to),
+            transparent
+          )`,
+          pointerEvents: 'none',
+          willChange: 'transform',
+          animationName: shimmer,
+          animationTimingFunction: 'ease-in-out',
+          animationIterationCount: 'infinite',
+          animationDuration: '2000ms',
+        },
+      },
     },
   },
 })
