@@ -5,7 +5,7 @@ import {useDebugValue, useEffect} from 'react'
 // the first render when the calling component is wrapped in `forwardRef` or
 // `memo`. This public hook runs in the fiber of whatever component calls it
 // (consumers may call it from `forwardRef` or `memo` components).
-import {useEffectEvent as useStableEffectEvent} from 'use-effect-event'
+import {useEffectEvent} from 'use-effect-event'
 
 import {EMPTY_ARRAY} from '../constants'
 
@@ -31,7 +31,7 @@ export function useClickOutsideEvent(
    * The `useEffectEvent` hook allow us to always see the latest value of `listener`, `elementsArg` and `boundaryElement` without needing to
    * juggle `useState`, `useRef` and `useState` to make sure the `mousedown` event listener isn't constantly being added and removed.
    */
-  const onEvent = useStableEffectEvent((evt: MouseEvent) => {
+  const onEvent = useEffectEvent((evt: MouseEvent) => {
     if (!listener) {
       return
     }
@@ -73,7 +73,7 @@ export function useClickOutsideEvent(
     return () => {
       document.removeEventListener('mousedown', handleEvent)
     }
-  }, [hasListener, onEvent])
+  }, [hasListener])
 
   useDebugValue(listener ? 'MouseDown On' : 'MouseDown Off')
 }

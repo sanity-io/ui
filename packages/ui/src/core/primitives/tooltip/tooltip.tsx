@@ -26,7 +26,7 @@ import {
 // version we support: on React 19.2 the native hook never sees values past
 // the first render when the calling component is wrapped in `forwardRef` or
 // `memo`, and consumers may wrap `Tooltip` in `memo`.
-import {useEffectEvent as useStableEffectEvent} from 'use-effect-event'
+import {useEffectEvent} from 'use-effect-event'
 
 import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {useDelayedState} from '../../hooks/useDelayedState'
@@ -265,7 +265,7 @@ export function Tooltip(
     if (!content && showTooltip) handleIsOpenChange(false)
   }, [content, handleIsOpenChange, showTooltip])
 
-  const onWindowEscape = useStableEffectEvent(() => handleIsOpenChange(false, true))
+  const onWindowEscape = useEffectEvent(() => handleIsOpenChange(false, true))
 
   useEffect(() => {
     // If the user clicks on escape key, close the tooltip.
@@ -283,7 +283,7 @@ export function Tooltip(
     return () => {
       window.removeEventListener('keydown', handleWindowKeyDown)
     }
-  }, [onWindowEscape, showTooltip])
+  }, [showTooltip])
 
   // // Set the max width of the tooltip based on boundaries and portals
   useLayoutEffect(() => {
@@ -478,7 +478,7 @@ function useCloseOnMouseLeave({
   // Since we don't want the `mouseevent` events to be attached and removed if the `referenceElement` is changed
   // we use a "effect event" (https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
   // in order to always see the latest `referenceElement` value inside the event handler itself.
-  const onMouseMove = useStableEffectEvent((target: EventTarget | null, teardown: () => void) => {
+  const onMouseMove = useEffectEvent((target: EventTarget | null, teardown: () => void) => {
     if (!referenceElement) return
 
     const isHoveringReference =
@@ -505,5 +505,5 @@ function useCloseOnMouseLeave({
 
     // oxlint-disable-next-line consistent-return
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [isInsideGroup, onMouseMove, showTooltip])
+  }, [isInsideGroup, showTooltip])
 }
