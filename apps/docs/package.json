@@ -43,7 +43,7 @@
     "@playwright/test": "^1.63.0",
     "@types/babel__standalone": "^7.1.9",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^24.13.3",
+    "@types/node": "^24.13.4",
     "@types/qs": "^6.15.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
