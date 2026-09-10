@@ -85,9 +85,6 @@ export function Toast(
     : {duration: 0}
 
   const hasDuration = duration && isFinite(duration) && duration < LONG_ENOUGH_BUT_NOT_TOO_LONG
-  const initial: ContainerVariants[] = ['hidden', 'initial']
-  const animate: ContainerVariants[] = ['visible', 'slideIn']
-  const exit: ContainerVariants[] = ['hidden', 'slideOut']
 
   return (
     <MotionCard
@@ -103,9 +100,9 @@ export function Toast(
       as="li"
       layout="position"
       variants={container}
-      initial={initial}
-      animate={animate}
-      exit={exit}
+      initial={containerInitial}
+      animate={containerAnimate}
+      exit={containerExit}
       transition={transition}
     >
       <MotionFlex align="flex-start" variants={content} transition={transition}>
@@ -208,6 +205,10 @@ const container = {
   },
 } satisfies Variants
 type ContainerVariants = keyof typeof container
+
+const containerInitial: ContainerVariants[] = ['hidden', 'initial']
+const containerAnimate: ContainerVariants[] = ['visible', 'slideIn']
+const containerExit: ContainerVariants[] = ['hidden', 'slideOut']
 
 const content = {
   initial: {

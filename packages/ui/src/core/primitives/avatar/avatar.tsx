@@ -84,6 +84,16 @@ function AvatarComponent(
 
   const [imageFailed, setImageFailed] = useState<boolean>(false)
 
+  // Adjusted during render rather than in an effect, so no committed frame
+  // shows the initials for an image that has not tried to load yet.
+  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+  const [prevSrc, setPrevSrc] = useState(src)
+
+  if (prevSrc !== src) {
+    setPrevSrc(src)
+    if (src) setImageFailed(false)
+  }
+
   const imageId = `avatar-image-${elementId}`
 
   useEffect(() => {
@@ -94,11 +104,6 @@ function AvatarComponent(
 
     return () => cancelAnimationFrame(raf)
   }, [arrowPosition, arrowPositionProp])
-
-  useEffect(() => {
-    // oxlint-disable-next-line react/set-state-in-effect
-    if (src) setImageFailed(false)
-  }, [src])
 
   const handleImageError = useCallback(() => {
     setImageFailed(true)
