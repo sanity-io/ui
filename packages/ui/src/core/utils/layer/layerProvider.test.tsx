@@ -47,6 +47,14 @@ function DisposeTwiceChild() {
   return null
 }
 
+function RegisteredChild() {
+  const {registerChild} = useLayer()
+
+  useEffect(() => registerChild(2), [registerChild])
+
+  return null
+}
+
 function Tree(props: {a?: boolean; b?: boolean; sibling?: boolean}) {
   const {a = false, b = false, sibling = false} = props
 
@@ -163,11 +171,12 @@ describe('utils/layer', () => {
       render(
         <LayerProvider>
           <LayerInfo id="root" />
+          <RegisteredChild />
           <DisposeTwiceChild />
         </LayerProvider>,
       )
 
-      expectLayer('root', 'level=1 size=0 isTopLayer=true zIndex=0')
+      expectLayer('root', 'level=1 size=1 isTopLayer=false zIndex=0')
     })
 
     it('should keep `registerChild` stable while child layers come and go', () => {
