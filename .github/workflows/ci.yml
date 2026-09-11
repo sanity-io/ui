@@ -65,6 +65,22 @@ jobs:
           pnpm install --no-frozen-lockfile
       - run: pnpm test
 
+  # Aggregates the matrix under the name the branch protection rule requires.
+  # Experimental legs can't fail it: `continue-on-error` legs that fail still
+  # aggregate to `success`.
+  test-required:
+    name: Test node@lts / ubuntu-latest
+    needs: [test]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check matrix result
+        env:
+          RESULT: ${{ needs.test.result }}
+        run: |
+          echo "Test matrix result: $RESULT"
+          test "$RESULT" = success
+
   storybook-test:
     runs-on: ubuntu-latest
     name: Storybook test / styled-components@${{ matrix.styled-components }}
@@ -112,3 +128,17 @@ jobs:
           name: vitest-failure-screenshots-styled-components-${{ matrix.styled-components }}
           path: apps/storybook/**/__screenshots__/
           if-no-files-found: ignore
+
+  # See `test-required`.
+  storybook-test-required:
+    name: storybook-test
+    needs: [storybook-test]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check matrix result
+        env:
+          RESULT: ${{ needs.storybook-test.result }}
+        run: |
+          echo "Storybook test matrix result: $RESULT"
+          test "$RESULT" = success
