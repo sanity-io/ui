@@ -5,8 +5,7 @@ export interface LayerState {
 }
 
 /**
- * Registers or unregisters a child layer. Children from older `@sanity/ui` copies that share the
- * layer context register without a `level`.
+ * Children from older `@sanity/ui` copies that share the layer context register without a `level`.
  *
  * @internal
  */
