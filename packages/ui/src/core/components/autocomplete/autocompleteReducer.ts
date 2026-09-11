@@ -28,7 +28,7 @@ export function autocompleteReducer(
   }
 
   if (msg.type === 'root/open') {
-    return {...state, query: state.query || msg.query}
+    return {...state, query: state.query ?? msg.query}
   }
 
   if (msg.type === 'root/setActiveValue') {
