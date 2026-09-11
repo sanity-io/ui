@@ -1,13 +1,13 @@
 import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive} from '../helpers'
+import {_responsive, _ruleSet} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveBorderStyleProps} from './types'
 
-export function responsiveBorderStyle(): Array<
-  (props: ResponsiveBorderStyleProps & ThemeProps) => CSSObject[]
-> {
-  return [border, borderTop, borderRight, borderBottom, borderLeft]
+const RULES = _ruleSet(border, borderTop, borderRight, borderBottom, borderLeft)
+
+export function responsiveBorderStyle(): CSSObject[] {
+  return RULES
 }
 
 function border(props: ResponsiveBorderStyleProps & ThemeProps) {
