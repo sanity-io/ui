@@ -27,14 +27,14 @@ function renderCSS(element: React.JSX.Element): string {
 }
 
 describe('styles/margin', () => {
-  it('should 1', () => {
+  it('applies a single value without media queries', () => {
     const css = renderCSS(<Probe $margin={[0]} theme={theme} />)
 
     expect(css).toMatch(/margin:\s*0\s*[;}]/)
     expect(css).not.toContain('@media')
   })
 
-  it('should 2', () => {
+  it('applies one value per breakpoint', () => {
     const css = renderCSS(<Probe $margin={[0, 1, 2]} theme={theme} />)
 
     expect(css).toMatch(/margin:\s*0\s*[;}]/)
