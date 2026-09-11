@@ -3,12 +3,8 @@ import {useCallback, useContext, useEffect, useMemo, useReducer} from 'react'
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {_getArrayProp} from '../../styles/helpers'
 import {getLayerContext} from './getLayerContext'
-import {
-  getLayerChildrenSize,
-  initialLayerChildrenState,
-  layerChildrenReducer,
-} from './layerChildrenReducer'
 import {LayerContext} from './layerContext'
+import {initialLayerState, layerReducer} from './layerReducer'
 import {LayerContextValue} from './types'
 
 /**
@@ -42,18 +38,22 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
   const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
 
-  const [childrenState, dispatch] = useReducer(layerChildrenReducer, initialLayerChildrenState)
-  const size = getLayerChildrenSize(childrenState)
+  const [{childLayers, childrenWithoutLevel}, dispatch] = useReducer(
+    layerReducer,
+    initialLayerState,
+  )
+
+  const size = childLayers.size + childrenWithoutLevel
   const isTopLayer = size === 0
 
   const registerChild = useCallback(
     (childLevel?: number) => {
       const parentDispose = parentRegisterChild?.(childLevel)
 
-      dispatch({level: childLevel, type: 'add'})
+      dispatch({type: 'child/register', level: childLevel})
 
       return () => {
-        dispatch({level: childLevel, type: 'remove'})
+        dispatch({type: 'child/unregister', level: childLevel})
 
         parentDispose?.()
       }
