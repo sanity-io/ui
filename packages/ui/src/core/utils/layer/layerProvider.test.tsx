@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 
-import {screen} from '@testing-library/react'
+import {act, screen} from '@testing-library/react'
 import {useEffect} from 'react'
 import {describe, expect, it} from 'vitest'
 
@@ -34,23 +34,17 @@ function LegacyChild() {
   return null
 }
 
-function DisposeTwiceChild() {
+function DisposableChild(props: {level: number; onRegister: (dispose: () => void) => void}) {
+  const {level, onRegister} = props
   const {registerChild} = useLayer()
 
   useEffect(() => {
-    const dispose = registerChild(2)
+    const dispose = registerChild(level)
 
-    dispose()
-    dispose()
-  }, [registerChild])
+    onRegister(dispose)
 
-  return null
-}
-
-function RegisteredChild() {
-  const {registerChild} = useLayer()
-
-  useEffect(() => registerChild(2), [registerChild])
+    return dispose
+  }, [level, onRegister, registerChild])
 
   return null
 }
@@ -167,12 +161,30 @@ describe('utils/layer', () => {
       expectLayer('root', 'level=1 size=0 isTopLayer=true zIndex=0')
     })
 
-    it('should ignore a repeated child disposer call', () => {
-      render(
+    it('should keep counting a sibling layer when a child disposer is called twice', () => {
+      let dispose: (() => void) | undefined
+      const onRegister = (fn: () => void) => {
+        dispose = fn
+      }
+
+      const {rerender} = render(
         <LayerProvider>
           <LayerInfo id="root" />
-          <RegisteredChild />
-          <DisposeTwiceChild />
+          <Layer />
+          <DisposableChild level={2} onRegister={onRegister} />
+        </LayerProvider>,
+      )
+
+      expectLayer('root', 'level=1 size=1 isTopLayer=false zIndex=0')
+
+      act(() => dispose?.())
+
+      expectLayer('root', 'level=1 size=1 isTopLayer=false zIndex=0')
+
+      rerender(
+        <LayerProvider>
+          <LayerInfo id="root" />
+          <Layer />
         </LayerProvider>,
       )
 

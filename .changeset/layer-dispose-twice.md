@@ -2,4 +2,5 @@
 "@sanity/ui": patch
 ---
 
-Keep `LayerProvider` state correct when a child disposer is called more than once.
+Calling the disposer returned by `useLayer().registerChild()` more than once no longer corrupts the
+parent layer's `size` and `isTopLayer`.
