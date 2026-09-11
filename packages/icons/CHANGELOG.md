@@ -1,5 +1,11 @@
 # @sanity/icons
 
+## 5.2.2
+
+### Patch Changes
+
+- [#2894](https://github.com/sanity-io/ui/pull/2894) [`63a6ca0`](https://github.com/sanity-io/ui/commit/63a6ca0dcfffd523e8f2ca8beae7a10aa7e2202d) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update react monorepo to ^19.3.0
+
 ## 5.2.1
 
 ### Patch Changes
