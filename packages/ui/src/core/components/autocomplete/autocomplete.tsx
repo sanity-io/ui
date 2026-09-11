@@ -11,7 +11,6 @@ import {
   MouseEvent,
   ReactNode,
   Ref,
-  startTransition,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -196,16 +195,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   const inputElementRef = useRef<HTMLInputElement | null>(null)
   const listBoxElementRef = useRef<HTMLUListElement | null>(null)
   // Element refs that need to be accessed during render
-  const [inputElement, _setInputElement] = useState<HTMLInputElement | null>(null)
-  /**
-   * The startTransition wrapper here is to avoid an issue when on React 18 where this error can happen:
-   * >Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
-   * This doesn't happen on React 19 due to automatic batching of all state updates, the startTransition wrapper here gives a type of batching for 18 users in a way that still works with 19.
-   * NOTE: The startTransition wrapper is not needed in UI v4, since the baseline there is React 19.
-   */
-  const setInputElement = useCallback((node: HTMLInputElement | null) => {
-    startTransition(() => _setInputElement(node))
-  }, [])
+  const [inputElement, setInputElement] = useState<HTMLInputElement | null>(null)
 
   // Value refs
   const listFocusedRef = useRef(false)
@@ -495,10 +485,8 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     return v - 2
   })
   const openButtonPadding = padding.map((v) => Math.max(v - 1, 0))
-  const openButtonProps: AutocompleteOpenButtonProps = useMemo(
-    () => (typeof openButton === 'object' ? openButton : EMPTY_RECORD),
-    [openButton],
-  )
+  const openButtonProps: AutocompleteOpenButtonProps =
+    typeof openButton === 'object' ? openButton : EMPTY_RECORD
 
   const handleOpenClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {

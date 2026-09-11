@@ -3,8 +3,8 @@ import {useCallback, useContext, useEffect, useMemo, useReducer} from 'react'
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {_getArrayProp} from '../../styles/helpers'
 import {getLayerContext} from './getLayerContext'
-import {INITIAL_LAYER_CHILDREN_STATE, layerChildrenReducer} from './layerChildrenReducer'
 import {LayerContext} from './layerContext'
+import {initialLayerState, layerReducer} from './layerReducer'
 import {LayerContextValue} from './types'
 
 /**
@@ -21,36 +21,47 @@ export interface LayerProviderProps {
 export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const {children, zOffset: zOffsetProp = 0} = props
 
+  // Get parent context values
   const parentContextValue = useContext(LayerContext)
   const parent = parentContextValue && getLayerContext(parentContextValue)
   const parentRegisterChild = parent?.registerChild
   const parentLevel = parent?.level ?? 0
 
+  // Get level
   const level = parentLevel + 1
 
+  // Get z-index offset
   const zOffset = _getArrayProp(zOffsetProp)
 
+  // Get responsive z-index value
   const maxMediaIndex = zOffset.length - 1
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
   const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
 
-  const [{size}, dispatch] = useReducer(layerChildrenReducer, INITIAL_LAYER_CHILDREN_STATE)
+  const [{childLayers, childrenWithoutLevel}, dispatch] = useReducer(
+    layerReducer,
+    initialLayerState,
+  )
+
+  const size = childLayers.size + childrenWithoutLevel
   const isTopLayer = size === 0
 
   const registerChild = useCallback(
     (childLevel?: number) => {
       const parentDispose = parentRegisterChild?.(childLevel)
 
-      dispatch({type: 'register', level: childLevel})
+      dispatch({type: 'child/register', level: childLevel})
 
       return () => {
-        dispatch({type: 'unregister', level: childLevel})
+        dispatch({type: 'child/unregister', level: childLevel})
+
         parentDispose?.()
       }
     },
     [parentRegisterChild],
   )
 
+  // Register this layer on mount
   useEffect(() => parentRegisterChild?.(level), [level, parentRegisterChild])
 
   const value: LayerContextValue = useMemo(

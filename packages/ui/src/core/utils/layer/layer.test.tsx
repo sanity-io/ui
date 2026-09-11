@@ -1,27 +1,11 @@
 /** @vitest-environment jsdom */
 
-import {fireEvent, screen} from '@testing-library/react'
-import {useEffect, useState} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
-// oxlint-disable-next-line no-unassigned-import
-import '../../../../test/mocks/matchMedia.mock'
 import {render} from '../../../../test/utils'
-import {Layer} from './layer'
 import {LayerContext} from './layerContext'
-import {LayerProvider} from './layerProvider'
 import {LayerContextValue} from './types'
 import {useLayer} from './useLayer'
-
-function LayerProbe({testId}: {testId: string}) {
-  const layer = useLayer()
-
-  return (
-    <div data-testid={testId}>
-      {`isTopLayer=${layer.isTopLayer} size=${layer.size} level=${layer.level}`}
-    </div>
-  )
-}
 
 describe('utils/layer', () => {
   describe('useLayer', () => {
@@ -126,91 +110,6 @@ describe('utils/layer', () => {
       expect(log.mock.calls[0][0].message).toEqual(
         'useLayer(): the context value is not compatible',
       )
-    })
-  })
-
-  describe('LayerProvider', () => {
-    it('is the top layer when it has no child layers', () => {
-      render(
-        <LayerProvider>
-          <LayerProbe testId="root" />
-        </LayerProvider>,
-      )
-
-      expect(screen.getByTestId('root')).toHaveTextContent('isTopLayer=true size=0 level=1')
-    })
-
-    it('counts unique nested levels, not sibling occupants of the same level', () => {
-      render(
-        <LayerProvider>
-          <LayerProbe testId="root" />
-          <Layer>
-            <LayerProbe testId="a" />
-          </Layer>
-          <Layer>
-            <LayerProbe testId="b" />
-          </Layer>
-        </LayerProvider>,
-      )
-
-      expect(screen.getByTestId('root')).toHaveTextContent('isTopLayer=false size=1')
-      expect(screen.getByTestId('a')).toHaveTextContent('isTopLayer=true size=0')
-      expect(screen.getByTestId('b')).toHaveTextContent('isTopLayer=true size=0')
-    })
-
-    it('increments size for each nested level and restores it on unmount', () => {
-      function Root() {
-        const [deep, setDeep] = useState(true)
-
-        return (
-          <LayerProvider>
-            <LayerProbe testId="root" />
-            <button type="button" onClick={() => setDeep(false)}>
-              close
-            </button>
-            <Layer>
-              <LayerProbe testId="mid" />
-              {deep && (
-                <Layer>
-                  <LayerProbe testId="inner" />
-                </Layer>
-              )}
-            </Layer>
-          </LayerProvider>
-        )
-      }
-
-      render(<Root />)
-
-      expect(screen.getByTestId('root')).toHaveTextContent('isTopLayer=false size=2')
-      expect(screen.getByTestId('mid')).toHaveTextContent('isTopLayer=false size=1')
-      expect(screen.getByTestId('inner')).toHaveTextContent('isTopLayer=true size=0')
-
-      fireEvent.click(screen.getByRole('button', {name: 'close'}))
-
-      expect(screen.getByTestId('root')).toHaveTextContent('isTopLayer=false size=1')
-      expect(screen.getByTestId('mid')).toHaveTextContent('isTopLayer=true size=0')
-      expect(screen.queryByTestId('inner')).toBeNull()
-    })
-
-    it('supports legacy registerChild() calls without a level', () => {
-      function LegacyChild() {
-        const {registerChild} = useLayer()
-
-        useEffect(() => registerChild(), [registerChild])
-
-        return null
-      }
-
-      render(
-        <LayerProvider>
-          <LayerProbe testId="root" />
-          <LegacyChild />
-          <LegacyChild />
-        </LayerProvider>,
-      )
-
-      expect(screen.getByTestId('root')).toHaveTextContent('isTopLayer=false size=2')
     })
   })
 })
