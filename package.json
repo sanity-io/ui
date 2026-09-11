@@ -21,6 +21,7 @@
     "storybook:build": "pnpm --filter sanity-ui-storybook build",
     "test": "pnpm --filter @sanity/color --filter @sanity/icons --filter @sanity/themer --filter @sanity/ui test",
     "test:browser": "pnpm --filter sanity-ui-storybook test",
+    "test:coverage": "pnpm --filter @sanity/ui exec vitest run --coverage",
     "watch": "pnpm --filter @sanity/ui watch"
   },
   "devDependencies": {

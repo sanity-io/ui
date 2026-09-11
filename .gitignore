@@ -8,6 +8,7 @@ dist
 etc
 node_modules
 storybook-static
+coverage
 
 # Vitest browser mode failure screenshots and attachments
 __screenshots__
