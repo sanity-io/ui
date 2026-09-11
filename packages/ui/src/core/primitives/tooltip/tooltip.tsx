@@ -265,9 +265,6 @@ export function Tooltip(
     if (!content && showTooltip) handleIsOpenChange(false)
   }, [content, handleIsOpenChange, showTooltip])
 
-  // Use an "effect event" (https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
-  // so the global listener is not detached and re-attached whenever
-  // `handleIsOpenChange` changes identity while the tooltip stays open.
   const onWindowEscape = useEffectEvent(() => handleIsOpenChange(false, true))
 
   useEffect(() => {
@@ -286,7 +283,6 @@ export function Tooltip(
     return () => {
       window.removeEventListener('keydown', handleWindowKeyDown)
     }
-    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [showTooltip])
 
   // // Set the max width of the tooltip based on boundaries and portals
@@ -509,6 +505,5 @@ function useCloseOnMouseLeave({
 
     // oxlint-disable-next-line consistent-return
     return () => window.removeEventListener('mousemove', handleMouseMove)
-    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [isInsideGroup, showTooltip])
 }

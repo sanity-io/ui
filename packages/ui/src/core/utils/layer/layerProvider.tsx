@@ -1,9 +1,10 @@
-import {useCallback, useContext, useEffect, useMemo, useState} from 'react'
+import {useCallback, useContext, useEffect, useMemo, useReducer} from 'react'
 
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {_getArrayProp} from '../../styles/helpers'
 import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './layerContext'
+import {initialLayerState, layerReducer} from './layerReducer'
 import {LayerContextValue} from './types'
 
 /**
@@ -37,53 +38,22 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
   const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
 
-  // Track the number of child layers on each level together with the number of
-  // child levels ("size") in a single state value, so each transition is a pure
-  // updater — React may invoke updater functions more than once, so they must
-  // not perform nested state updates.
-  const [{size}, setLayerState] = useState<{
-    childLayers: Record<number, number>
-    size: number
-  }>({childLayers: {}, size: 0})
+  const [{childLayers, childrenWithoutLevel}, dispatch] = useReducer(
+    layerReducer,
+    initialLayerState,
+  )
 
+  const size = childLayers.size + childrenWithoutLevel
   const isTopLayer = size === 0
 
   const registerChild = useCallback(
     (childLevel?: number) => {
-      // Register child layers to the parent layer
       const parentDispose = parentRegisterChild?.(childLevel)
 
-      if (childLevel !== undefined) {
-        setLayerState(({childLayers}) => {
-          const prevLen = childLayers[childLevel] ?? 0
-          const nextChildLayers = {...childLayers, [childLevel]: prevLen + 1}
-
-          return {childLayers: nextChildLayers, size: Object.keys(nextChildLayers).length}
-        })
-      } else {
-        // Legacy behavior: if no child level is provided, increment the size by 1
-        setLayerState((state) => ({...state, size: state.size + 1}))
-      }
+      dispatch({type: 'child/register', level: childLevel})
 
       return () => {
-        if (childLevel !== undefined) {
-          setLayerState((state) => {
-            const nextChildLayers = {...state.childLayers}
-
-            if (nextChildLayers[childLevel] === 1) {
-              delete nextChildLayers[childLevel]
-
-              return {childLayers: nextChildLayers, size: Object.keys(nextChildLayers).length}
-            }
-
-            nextChildLayers[childLevel] -= 1
-
-            return {...state, childLayers: nextChildLayers}
-          })
-        } else {
-          // Legacy behavior: if no child level is provided, decrement the size by 1
-          setLayerState((state) => ({...state, size: state.size - 1}))
-        }
+        dispatch({type: 'child/unregister', level: childLevel})
 
         parentDispose?.()
       }

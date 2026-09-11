@@ -99,8 +99,11 @@
     // False negatives
     "jsx_a11y/anchor-is-valid": "off",
     "jsx_a11y/no-autofocus": "off",
-    // Handy rules that are disabled by default
+    // Keep the established Hooks rule, which checks effects, memos, callbacks,
+    // and configured custom hooks. The compiler rule only checks effects and
+    // duplicates this coverage.
     "react/exhaustive-deps": "error",
+    "react/exhaustive-effect-dependencies": "off",
     "react/rules-of-hooks": "error",
     "eslint/no-console": ["error", {"allow": ["warn", "error"]}],
     // Requires polyfills for older browsers

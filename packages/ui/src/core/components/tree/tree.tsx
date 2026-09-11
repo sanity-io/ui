@@ -207,7 +207,6 @@ export function Tree(
     ) as HTMLElement[]
 
     setItemElements(_itemElements)
-    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [children])
 
   return (

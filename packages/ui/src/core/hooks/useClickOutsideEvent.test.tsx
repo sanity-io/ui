@@ -2,7 +2,8 @@
 
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {useRef} from 'react'
+// oxlint-disable-next-line no-restricted-imports -- this test deliberately renders a `forwardRef` component (consumers may still use it on React 19) to pin the freshness contract below
+import {forwardRef, memo, useRef} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {useClickOutsideEvent} from './useClickOutsideEvent'
@@ -115,5 +116,68 @@ describe('useClickOutsideEvent', () => {
 
     await user.click(screen.getByTestId('inside'))
     expect(handler).toHaveBeenCalledTimes(1)
+  })
+
+  /**
+   * The listener must always see the latest props/state, no matter what kind of component calls
+   * the hook. React's native `useEffectEvent` fails this in `forwardRef` and `memo` components
+   * on React 19.2 (https://github.com/facebook/react/issues/34818), which is why the hook
+   * uses `use-effect-event` instead — this test guards against switching to the native hook
+   * before the upstream fix ships.
+   */
+  it('the listener sees the latest props in forwardRef and memo components', async () => {
+    const user = userEvent.setup()
+    const seen: string[] = []
+
+    function useProbe(label: string, n: number) {
+      const elementRef = useRef<HTMLDivElement | null>(null)
+
+      useClickOutsideEvent(
+        () => {
+          seen.push(`${label}:${n}`)
+        },
+        () => [elementRef.current],
+      )
+
+      return elementRef
+    }
+
+    const ForwardRefComp = forwardRef<HTMLDivElement, {n: number}>(function ForwardRefComp(
+      {n},
+      ref,
+    ) {
+      const elementRef = useProbe('forwardRef', n)
+
+      return (
+        <div ref={ref}>
+          <div ref={elementRef} />
+        </div>
+      )
+    })
+
+    const MemoComp = memo(function MemoComp({n}: {n: number}) {
+      const elementRef = useProbe('memo', n)
+
+      return <div ref={elementRef} />
+    })
+
+    const {rerender} = render(
+      <>
+        <ForwardRefComp n={0} />
+        <MemoComp n={0} />
+        <div data-testid="outside" />
+      </>,
+    )
+
+    rerender(
+      <>
+        <ForwardRefComp n={1} />
+        <MemoComp n={1} />
+        <div data-testid="outside" />
+      </>,
+    )
+
+    await user.click(screen.getByTestId('outside'))
+    expect(seen).toEqual(['forwardRef:1', 'memo:1'])
   })
 })

@@ -1,5 +1,37 @@
 # @sanity/ui
 
+## 4.2.1
+
+### Patch Changes
+
+- [#2886](https://github.com/sanity-io/ui/pull/2886) [`7766a79`](https://github.com/sanity-io/ui/commit/7766a79e611de375ad964c0c486f0e8b1883f2e1) Thanks [@stipsan](https://github.com/stipsan)! - Fix `Avatar` rendering the initials fallback for one frame after `src` changes away from an image that failed to load. The failed state now resets while rendering instead of in an effect, so the replacement image renders in the same commit as the new `src`.
+
+- [#2894](https://github.com/sanity-io/ui/pull/2894) [`63a6ca0`](https://github.com/sanity-io/ui/commit/63a6ca0dcfffd523e8f2ca8beae7a10aa7e2202d) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update react monorepo to ^19.3.0
+
+- [#2811](https://github.com/sanity-io/ui/pull/2811) [`9c7a1a7`](https://github.com/sanity-io/ui/commit/9c7a1a776494dc9d8dc4b26a34be56357d5e0421) Thanks [@stipsan](https://github.com/stipsan)! - Animate `Skeleton` shimmer with a CSS mask and `transform` instead of `background-position`.
+
+- [#2884](https://github.com/sanity-io/ui/pull/2884) [`7056449`](https://github.com/sanity-io/ui/commit/7056449f9137e7f0681bf247c82f11acec16524d) Thanks [@stipsan](https://github.com/stipsan)! - `LayerProvider` tracks its child layers with a single `useReducer`, so registering or unregistering a child layer is one state update instead of two.
+
+- [#2873](https://github.com/sanity-io/ui/pull/2873) [`8c64db2`](https://github.com/sanity-io/ui/commit/8c64db2eeed2adf57adbec0b71aa8a637c5331b4) Thanks [@stipsan](https://github.com/stipsan)! - Remove the `startTransition` wrappers around the `Autocomplete` and `TreeItem` element-ref state setters. They guarded against a "Maximum update depth exceeded" loop that only occurred on React 18, which is no longer supported since React 19.2 is the minimum version.
+- Updated dependencies [[`63a6ca0`](https://github.com/sanity-io/ui/commit/63a6ca0dcfffd523e8f2ca8beae7a10aa7e2202d)]:
+  - @sanity/icons@5.2.2
+
+## 4.2.0
+
+### Minor Changes
+
+- [#2827](https://github.com/sanity-io/ui/pull/2827) [`4b81730`](https://github.com/sanity-io/ui/commit/4b8173036ab1133a8ff6099ebbe5b48d08d2957f) Thanks [@stipsan](https://github.com/stipsan)! - Move the remaining fully static styled-components CSS to [vanilla-extract](https://vanilla-extract.style/), served from `@sanity/ui/styles.css`: `Arrow`, `Avatar` and `AvatarStack`. Styles that read the theme or props stay on styled-components.
+  
+  No API changes. As with `SrOnly` and `Spinner` since 4.0.0, these components render unstyled unless the app imports the stylesheet once:
+  
+  ```js
+  import "@sanity/ui/styles.css"
+  ```
+
+### Patch Changes
+
+- [#2865](https://github.com/sanity-io/ui/pull/2865) [`0128e47`](https://github.com/sanity-io/ui/commit/0128e4725b37e11d305f454dab4e55d8840c5695) Thanks [@stipsan](https://github.com/stipsan)! - Stop `Layer` from overwriting `data-ui` on `Dialog` and `Tooltip`, and add identifiers on remaining component roots (`PopoverOverlay`, `ButtonLoading`, `ToastLoadingBar`, dialog regions, and `SpanWithTextOverflow`).
+
 ## 4.1.1
 
 ### Patch Changes

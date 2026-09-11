@@ -68,7 +68,6 @@ export function VirtualList(
     if (firstElement instanceof HTMLElement) {
       setItemHeight(firstElement.offsetHeight)
     }
-    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [renderItem])
 
   useEffect((): (() => void) | undefined => {
