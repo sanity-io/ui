@@ -34,6 +34,19 @@ function LegacyChild() {
   return null
 }
 
+function DisposeTwiceChild() {
+  const {registerChild} = useLayer()
+
+  useEffect(() => {
+    const dispose = registerChild(2)
+
+    dispose()
+    dispose()
+  }, [registerChild])
+
+  return null
+}
+
 function Tree(props: {a?: boolean; b?: boolean; sibling?: boolean}) {
   const {a = false, b = false, sibling = false} = props
 
@@ -140,6 +153,17 @@ describe('utils/layer', () => {
       rerender(
         <LayerProvider>
           <LayerInfo id="root" />
+        </LayerProvider>,
+      )
+
+      expectLayer('root', 'level=1 size=0 isTopLayer=true zIndex=0')
+    })
+
+    it('should ignore a repeated child disposer call', () => {
+      render(
+        <LayerProvider>
+          <LayerInfo id="root" />
+          <DisposeTwiceChild />
         </LayerProvider>,
       )
 
