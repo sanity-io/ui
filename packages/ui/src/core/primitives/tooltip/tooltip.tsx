@@ -265,13 +265,15 @@ export function Tooltip(
     if (!content && showTooltip) handleIsOpenChange(false)
   }, [content, handleIsOpenChange, showTooltip])
 
+  const onWindowEscape = useEffectEvent(() => handleIsOpenChange(false, true))
+
   useEffect(() => {
     // If the user clicks on escape key, close the tooltip.
     if (!showTooltip) return
 
     function handleWindowKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
-        handleIsOpenChange(false, true)
+        onWindowEscape()
       }
     }
 
@@ -281,7 +283,7 @@ export function Tooltip(
     return () => {
       window.removeEventListener('keydown', handleWindowKeyDown)
     }
-  }, [handleIsOpenChange, showTooltip])
+  }, [showTooltip])
 
   // // Set the max width of the tooltip based on boundaries and portals
   useLayoutEffect(() => {
@@ -503,6 +505,5 @@ function useCloseOnMouseLeave({
 
     // oxlint-disable-next-line consistent-return
     return () => window.removeEventListener('mousemove', handleMouseMove)
-    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [isInsideGroup, showTooltip])
 }

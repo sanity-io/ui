@@ -1,91 +1,60 @@
-/**
- * Occupancy of child layers registered on a `LayerProvider`.
- *
- * `size` is the number of unique child levels plus the number of
- * legacy `registerChild()` calls that omitted a level. A provider is
- * the top layer when `size === 0`.
- *
- * @internal
- */
+/** @internal */
 export interface LayerState {
-  readonly childLayers: Readonly<Record<number, number>>
-  readonly legacy: number
-  readonly size: number
+  childLayers: ReadonlyMap<number, number>
+  childrenWithoutLevel: number
 }
 
 /**
+ * Registers or unregisters a child layer. Children from older `@sanity/ui` copies that share the
+ * layer context register without a `level`.
+ *
  * @internal
  */
 export type LayerAction =
-  | {readonly type: 'register'; readonly level?: number}
-  | {readonly type: 'unregister'; readonly level?: number}
+  | {type: 'child/register'; level?: number}
+  | {type: 'child/unregister'; level?: number}
 
-/**
- * @internal
- */
-export const INITIAL_LAYER_STATE: LayerState = {
-  childLayers: {},
-  legacy: 0,
-  size: 0,
-}
+/** @internal */
+export const initialLayerState: LayerState = {childLayers: new Map(), childrenWithoutLevel: 0}
 
-function nextState(childLayers: Readonly<Record<number, number>>, legacy: number): LayerState {
-  return {
-    childLayers,
-    legacy,
-    size: legacy + Object.keys(childLayers).length,
-  }
-}
-
-/**
- * @internal
- */
+/** @internal */
 export function layerReducer(state: LayerState, action: LayerAction): LayerState {
-  switch (action.type) {
-    case 'register': {
-      const {level} = action
+  const {level} = action
 
+  switch (action.type) {
+    case 'child/register': {
       if (level === undefined) {
-        return nextState(state.childLayers, state.legacy + 1)
+        return {...state, childrenWithoutLevel: state.childrenWithoutLevel + 1}
       }
 
-      const count = state.childLayers[level] ?? 0
+      const childLayers = new Map(state.childLayers)
 
-      return nextState({...state.childLayers, [level]: count + 1}, state.legacy)
+      childLayers.set(level, (childLayers.get(level) ?? 0) + 1)
+
+      return {...state, childLayers}
     }
 
-    case 'unregister': {
-      const {level} = action
-
+    case 'child/unregister': {
       if (level === undefined) {
-        if (state.legacy === 0) {
-          return state
-        }
-
-        return nextState(state.childLayers, state.legacy - 1)
+        return {...state, childrenWithoutLevel: state.childrenWithoutLevel - 1}
       }
 
-      const count = state.childLayers[level]
-
-      if (!count) {
-        return state
-      }
+      const childLayers = new Map(state.childLayers)
+      const count = childLayers.get(level) ?? 0
 
       if (count === 1) {
-        const childLayers = {...state.childLayers}
-
-        delete childLayers[level]
-
-        return nextState(childLayers, state.legacy)
+        childLayers.delete(level)
+      } else {
+        childLayers.set(level, count - 1)
       }
 
-      return nextState({...state.childLayers, [level]: count - 1}, state.legacy)
+      return {...state, childLayers}
     }
 
     default: {
-      const _exhaustive: never = action
+      action satisfies never
 
-      return _exhaustive
+      return state
     }
   }
 }

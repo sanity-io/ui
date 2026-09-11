@@ -1,5 +1,13 @@
 # @sanity/themer
 
+## 0.3.13
+
+### Patch Changes
+
+- Updated dependencies [[`7766a79`](https://github.com/sanity-io/ui/commit/7766a79e611de375ad964c0c486f0e8b1883f2e1), [`63a6ca0`](https://github.com/sanity-io/ui/commit/63a6ca0dcfffd523e8f2ca8beae7a10aa7e2202d), [`9c7a1a7`](https://github.com/sanity-io/ui/commit/9c7a1a776494dc9d8dc4b26a34be56357d5e0421), [`7056449`](https://github.com/sanity-io/ui/commit/7056449f9137e7f0681bf247c82f11acec16524d), [`8c64db2`](https://github.com/sanity-io/ui/commit/8c64db2eeed2adf57adbec0b71aa8a637c5331b4)]:
+  - @sanity/ui@4.2.1
+  - @sanity/icons@5.2.2
+
 ## 0.3.12
 
 ### Patch Changes

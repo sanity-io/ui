@@ -290,10 +290,8 @@ export function TextInput(
       }),
     [padding],
   )
-  const clearButtonProps: TextInputClearButtonProps = useMemo(
-    () => (typeof clearButton === 'object' ? clearButton : EMPTY_RECORD),
-    [clearButton],
-  )
+  const clearButtonProps: TextInputClearButtonProps =
+    typeof clearButton === 'object' ? clearButton : EMPTY_RECORD
   const clearButtonNode = useMemo(
     () =>
       !disabled &&

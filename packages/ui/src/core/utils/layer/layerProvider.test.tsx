@@ -1,213 +1,182 @@
 /** @vitest-environment jsdom */
 
-import {act, screen} from '@testing-library/react'
-import {memo, useEffect, useState} from 'react'
+import {screen} from '@testing-library/react'
+import {useEffect} from 'react'
 import {describe, expect, it} from 'vitest'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
 import {render} from '../../../../test/utils'
+import {Layer} from './layer'
 import {LayerProvider} from './layerProvider'
+import {LayerContextValue} from './types'
 import {useLayer} from './useLayer'
 
-function LayerProbe({testId}: {testId: string}) {
-  const {isTopLayer, level, size} = useLayer()
+function LayerInfo({id}: {id: string}) {
+  const {isTopLayer, level, size, zIndex} = useLayer()
 
   return (
-    <div
-      data-is-top={String(isTopLayer)}
-      data-level={level}
-      data-size={size}
-      data-testid={testId}
-    />
+    <output data-testid={id}>
+      {`level=${level} size=${size} isTopLayer=${isTopLayer} zIndex=${zIndex}`}
+    </output>
+  )
+}
+
+function expectLayer(id: string, info: string) {
+  expect(screen.getByTestId(id)).toHaveTextContent(info, {normalizeWhitespace: false})
+}
+
+function LegacyChild() {
+  const {registerChild} = useLayer()
+
+  useEffect(() => registerChild(), [registerChild])
+
+  return null
+}
+
+function Tree(props: {a?: boolean; b?: boolean; sibling?: boolean}) {
+  const {a = false, b = false, sibling = false} = props
+
+  return (
+    <LayerProvider>
+      <LayerInfo id="root" />
+      {a && (
+        <Layer>
+          <LayerInfo id="a" />
+          {b && (
+            <Layer>
+              <LayerInfo id="b" />
+            </Layer>
+          )}
+        </Layer>
+      )}
+      {sibling && (
+        <Layer>
+          <LayerInfo id="sibling" />
+        </Layer>
+      )}
+    </LayerProvider>
   )
 }
 
 describe('utils/layer', () => {
   describe('LayerProvider', () => {
-    it('is the top layer when it has no children', () => {
+    it('should be the top layer while no child layers are mounted', () => {
       render(
-        <LayerProvider>
-          <LayerProbe testId="root" />
+        <LayerProvider zOffset={100}>
+          <LayerInfo id="root" />
         </LayerProvider>,
       )
 
-      expect(screen.getByTestId('root')).toHaveAttribute('data-is-top', 'true')
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '0')
-      expect(screen.getByTestId('root')).toHaveAttribute('data-level', '1')
+      expectLayer('root', 'level=1 size=0 isTopLayer=true zIndex=100')
     })
 
-    it('tracks nested layers by unique descendant level', () => {
+    it('should count the nested levels below each layer', () => {
       render(
-        <LayerProvider>
-          <LayerProbe testId="root" />
-          <LayerProvider>
-            <LayerProbe testId="child" />
-            <LayerProvider>
-              <LayerProbe testId="grandchild" />
-            </LayerProvider>
-          </LayerProvider>
+        <LayerProvider zOffset={100}>
+          <LayerInfo id="root" />
+          <Layer zOffset={10}>
+            <LayerInfo id="a" />
+            <Layer zOffset={10}>
+              <LayerInfo id="b" />
+            </Layer>
+          </Layer>
         </LayerProvider>,
       )
 
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '2')
-      expect(screen.getByTestId('root')).toHaveAttribute('data-is-top', 'false')
-      expect(screen.getByTestId('child')).toHaveAttribute('data-size', '1')
-      expect(screen.getByTestId('child')).toHaveAttribute('data-is-top', 'false')
-      expect(screen.getByTestId('grandchild')).toHaveAttribute('data-size', '0')
-      expect(screen.getByTestId('grandchild')).toHaveAttribute('data-is-top', 'true')
+      expectLayer('root', 'level=1 size=2 isTopLayer=false zIndex=100')
+      expectLayer('a', 'level=2 size=1 isTopLayer=false zIndex=110')
+      expectLayer('b', 'level=3 size=0 isTopLayer=true zIndex=120')
     })
 
-    it('counts sibling layers at the same level as one unique level', () => {
-      render(
+    it('should count sibling layers as one level', () => {
+      render(<Tree a sibling />)
+
+      expectLayer('root', 'level=1 size=1 isTopLayer=false zIndex=0')
+      expectLayer('a', 'level=2 size=0 isTopLayer=true zIndex=1')
+      expectLayer('sibling', 'level=2 size=0 isTopLayer=true zIndex=1')
+    })
+
+    it('should become the top layer again when the child layers unmount', () => {
+      const {rerender} = render(<Tree a b sibling />)
+
+      expectLayer('root', 'level=1 size=2 isTopLayer=false zIndex=0')
+      expectLayer('a', 'level=2 size=1 isTopLayer=false zIndex=1')
+
+      rerender(<Tree a sibling />)
+
+      expectLayer('root', 'level=1 size=1 isTopLayer=false zIndex=0')
+      expectLayer('a', 'level=2 size=0 isTopLayer=true zIndex=1')
+
+      rerender(<Tree sibling />)
+
+      expectLayer('root', 'level=1 size=1 isTopLayer=false zIndex=0')
+
+      rerender(<Tree />)
+
+      expectLayer('root', 'level=1 size=0 isTopLayer=true zIndex=0')
+    })
+
+    it('should count children that register without a level', () => {
+      const {rerender} = render(
         <LayerProvider>
-          <LayerProbe testId="root" />
-          <LayerProvider>
-            <LayerProbe testId="a" />
-          </LayerProvider>
-          <LayerProvider>
-            <LayerProbe testId="b" />
-          </LayerProvider>
+          <LayerInfo id="root" />
+          <LegacyChild />
+          <LegacyChild />
         </LayerProvider>,
       )
 
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '1')
-      expect(screen.getByTestId('root')).toHaveAttribute('data-is-top', 'false')
-      expect(screen.getByTestId('a')).toHaveAttribute('data-level', '2')
-      expect(screen.getByTestId('b')).toHaveAttribute('data-level', '2')
+      expectLayer('root', 'level=1 size=2 isTopLayer=false zIndex=0')
+
+      rerender(
+        <LayerProvider>
+          <LayerInfo id="root" />
+          <LegacyChild />
+        </LayerProvider>,
+      )
+
+      expectLayer('root', 'level=1 size=1 isTopLayer=false zIndex=0')
+
+      rerender(
+        <LayerProvider>
+          <LayerInfo id="root" />
+        </LayerProvider>,
+      )
+
+      expectLayer('root', 'level=1 size=0 isTopLayer=true zIndex=0')
     })
 
-    it('restores the parent as the top layer when children unmount', () => {
-      function App({nested}: {nested: boolean}) {
-        return (
-          <LayerProvider>
-            <LayerProbe testId="root" />
-            {nested && (
-              <LayerProvider>
-                <LayerProbe testId="child" />
-              </LayerProvider>
-            )}
-          </LayerProvider>
-        )
-      }
+    it('should keep `registerChild` stable while child layers come and go', () => {
+      const seen = new Set<LayerContextValue['registerChild']>()
 
-      const {rerender} = render(<App nested />)
-
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '1')
-      expect(screen.getByTestId('root')).toHaveAttribute('data-is-top', 'false')
-
-      rerender(<App nested={false} />)
-
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '0')
-      expect(screen.getByTestId('root')).toHaveAttribute('data-is-top', 'true')
-    })
-
-    it('keeps size when one of several siblings at the same level unmounts', () => {
-      function App({a, b}: {a: boolean; b: boolean}) {
-        return (
-          <LayerProvider>
-            <LayerProbe testId="root" />
-            {a && (
-              <LayerProvider>
-                <LayerProbe testId="a" />
-              </LayerProvider>
-            )}
-            {b && (
-              <LayerProvider>
-                <LayerProbe testId="b" />
-              </LayerProvider>
-            )}
-          </LayerProvider>
-        )
-      }
-
-      const {rerender} = render(<App a b />)
-
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '1')
-
-      rerender(<App a={false} b />)
-
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '1')
-      expect(screen.queryByTestId('a')).not.toBeInTheDocument()
-
-      rerender(<App a={false} b={false} />)
-
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '0')
-    })
-
-    it('supports the legacy registerChild() path that omits a level', () => {
-      function LegacyChild() {
-        const {registerChild} = useLayer()
-
-        useEffect(() => registerChild(), [registerChild])
+      function TrackRegisterChild() {
+        seen.add(useLayer().registerChild)
 
         return null
       }
 
-      function App({count}: {count: number}) {
-        return (
-          <LayerProvider>
-            <LayerProbe testId="root" />
-            {Array.from({length: count}, (_, index) => (
-              <LegacyChild key={index} />
-            ))}
-          </LayerProvider>
-        )
-      }
+      const {rerender} = render(
+        <LayerProvider>
+          <TrackRegisterChild />
+        </LayerProvider>,
+      )
 
-      const {rerender} = render(<App count={2} />)
+      rerender(
+        <LayerProvider>
+          <TrackRegisterChild />
+          <Layer>
+            <Layer />
+          </Layer>
+        </LayerProvider>,
+      )
 
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '2')
-      expect(screen.getByTestId('root')).toHaveAttribute('data-is-top', 'false')
+      rerender(
+        <LayerProvider>
+          <TrackRegisterChild />
+        </LayerProvider>,
+      )
 
-      rerender(<App count={0} />)
-
-      expect(screen.getByTestId('root')).toHaveAttribute('data-size', '0')
-      expect(screen.getByTestId('root')).toHaveAttribute('data-is-top', 'true')
-    })
-
-    it('does not notify memoized consumers when only occupancy of an existing level changes', () => {
-      const seenSizes: number[] = []
-
-      const MemoProbe = memo(function MemoProbe() {
-        const {size} = useLayer()
-
-        seenSizes.push(size)
-
-        return <div data-size={size} data-testid="probe" />
-      })
-
-      function App() {
-        const [siblings, setSiblings] = useState(1)
-
-        return (
-          <LayerProvider>
-            <button onClick={() => setSiblings(2)} type="button">
-              add sibling
-            </button>
-            <MemoProbe />
-            {Array.from({length: siblings}, (_, index) => (
-              <LayerProvider key={index}>
-                <LayerProbe testId={`child-${index}`} />
-              </LayerProvider>
-            ))}
-          </LayerProvider>
-        )
-      }
-
-      render(<App />)
-
-      expect(screen.getByTestId('probe')).toHaveAttribute('data-size', '1')
-
-      const rendersAfterFirstChild = seenSizes.length
-
-      act(() => {
-        screen.getByRole('button', {name: 'add sibling'}).click()
-      })
-
-      expect(screen.getByTestId('probe')).toHaveAttribute('data-size', '1')
-      expect(screen.getByTestId('child-1')).toBeInTheDocument()
-      expect(seenSizes.length).toBe(rendersAfterFirstChild)
+      expect(seen.size).toBe(1)
     })
   })
 })

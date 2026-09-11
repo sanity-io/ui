@@ -4,7 +4,7 @@ import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {_getArrayProp} from '../../styles/helpers'
 import {getLayerContext} from './getLayerContext'
 import {LayerContext} from './layerContext'
-import {INITIAL_LAYER_STATE, layerReducer} from './layerReducer'
+import {initialLayerState, layerReducer} from './layerReducer'
 import {LayerContextValue} from './types'
 
 /**
@@ -38,19 +38,23 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const mediaIndex = Math.min(useMediaIndex(), maxMediaIndex)
   const zIndex = parent ? parent.zIndex + zOffset[mediaIndex] : zOffset[mediaIndex]
 
-  const [{size}, dispatch] = useReducer(layerReducer, INITIAL_LAYER_STATE)
+  const [{childLayers, childrenWithoutLevel}, dispatch] = useReducer(
+    layerReducer,
+    initialLayerState,
+  )
 
+  const size = childLayers.size + childrenWithoutLevel
   const isTopLayer = size === 0
 
   const registerChild = useCallback(
     (childLevel?: number) => {
-      // Register child layers to the parent layer
       const parentDispose = parentRegisterChild?.(childLevel)
 
-      dispatch({type: 'register', level: childLevel})
+      dispatch({type: 'child/register', level: childLevel})
 
       return () => {
-        dispatch({type: 'unregister', level: childLevel})
+        dispatch({type: 'child/unregister', level: childLevel})
+
         parentDispose?.()
       }
     },
