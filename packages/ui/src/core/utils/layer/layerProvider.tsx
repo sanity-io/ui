@@ -49,10 +49,15 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   const registerChild = useCallback(
     (childLevel?: number) => {
       const parentDispose = parentRegisterChild?.(childLevel)
+      let disposed = false
 
       dispatch({type: 'child/register', level: childLevel})
 
       return () => {
+        if (disposed) return
+
+        disposed = true
+
         dispatch({type: 'child/unregister', level: childLevel})
 
         parentDispose?.()
