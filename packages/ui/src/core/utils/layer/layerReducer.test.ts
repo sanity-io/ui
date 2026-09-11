@@ -83,6 +83,18 @@ describe('utils/layer', () => {
         expect(reduce([{type: 'child/unregister'}], state)).toEqual(layerState([], 1))
       })
 
+      it('should ignore a level that is not registered', () => {
+        const state = layerState([[2, 1]])
+
+        expect(layerReducer(state, {type: 'child/unregister', level: 3})).toBe(state)
+      })
+
+      it('should ignore a child without a level when none are registered', () => {
+        const state = layerState([[2, 1]])
+
+        expect(layerReducer(state, {type: 'child/unregister'})).toBe(state)
+      })
+
       it('should return to the initial state once every child has unregistered', () => {
         expect(
           reduce([

@@ -36,11 +36,16 @@ export function layerReducer(state: LayerState, action: LayerAction): LayerState
 
     case 'child/unregister': {
       if (level === undefined) {
+        if (state.childrenWithoutLevel === 0) return state
+
         return {...state, childrenWithoutLevel: state.childrenWithoutLevel - 1}
       }
 
+      const count = state.childLayers.get(level)
+
+      if (count === undefined) return state
+
       const childLayers = new Map(state.childLayers)
-      const count = childLayers.get(level) ?? 0
 
       if (count === 1) {
         childLayers.delete(level)
