@@ -1,4 +1,6 @@
-import {defineInlineTest} from '../../../utils/testUtils'
+import {expect} from 'vitest'
+
+import {defineCrossFileTest, defineInlineTest} from '../../../utils/testUtils'
 import transform from './stack'
 
 defineInlineTest(
@@ -28,7 +30,7 @@ defineInlineTest(
   `
   import {Flex} from "@sanity/ui"
 
-  <Flex padding={2} flexDirection="column" />
+  <Flex padding={2} flexDirection="column" flexShrink={0} />
   `,
   'replaces Stack with Flex and updates import path based on fromPackage and toPackage',
 )
@@ -64,7 +66,7 @@ defineInlineTest(
 
   import { Flex } from "@sanity/ui";
 
-  <Flex margin={2} flexDirection="column" />
+  <Flex margin={2} flexDirection="column" flexShrink={0} />
   `,
   'replaces Stack and updates import path with multiple specifiers',
 )
@@ -109,7 +111,7 @@ defineInlineTest(
 
   <>
     <VStack />
-    <Flex overflow="auto" flexDirection="column" />
+    <Flex overflow="auto" flexDirection="column" flexShrink={0} />
   </>
   `,
   'replaces Stack with Flex and adds Flex import',
@@ -126,7 +128,7 @@ defineInlineTest(
   `
   import {Flex} from '@sanity/ui'
 
-  <Flex padding={1} flexDirection="column" />
+  <Flex padding={1} flexDirection="column" flexShrink={0} />
   `,
   'replaces Stack with Flex and removes Stack import',
 )
@@ -140,7 +142,7 @@ defineInlineTest(
   </Stack>
   `,
   `
-  <Flex padding={1} flexDirection="column">
+  <Flex padding={1} flexDirection="column" flexShrink={0}>
     <span />
   </Flex>
   `,
@@ -154,7 +156,104 @@ defineInlineTest(
   <Stack padding={1} width="fill" />
   `,
   `
-  <Flex padding={1} width="100%" flexDirection="column" />
+  <Flex padding={1} width="100%" flexDirection="column" flexShrink={0} />
   `,
   'replaces Stack with Flex and transforms attributes',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Stack} from '@sanity/ui'
+
+    export const RootStack = styled(Stack)(({theme}) => ({}))
+  `,
+  `
+    import {RootStack} from './Component.styled'
+
+    export function Component() {
+      return <RootStack space={2} />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootStack gap={2} />')
+  },
+  'transforms attributes on imported styled Stack wrappers',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Stack} from '@sanity/ui'
+
+    export const RootStack = styled(Stack)(({theme}) => ({}))
+  `,
+  `
+    import {RootStack} from './Component.styled'
+
+    export function Component() {
+      return <RootStack padding={2} />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('UI-CODEMOD TODO: Please double check styled(Stack) migration below')
+    expect(output).toContain('<RootStack padding={2} />')
+  },
+  'adds todo warning when imported styled Stack wrapper should be replaced',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Stack} from '@sanity/ui'
+
+    export const RootStack = styled(Stack)(({theme}) => ({}))
+  `,
+  `
+    import {Stack} from 'another-package'
+    import {RootStack} from './Component.styled'
+
+    export function Component() {
+      return (
+        <>
+          <RootStack space={2} />
+          <Stack space={2} />
+        </>
+      )
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootStack gap={2} />')
+    expect(output).toContain('<Stack space={2} />')
+  },
+  'does not rewrite unrelated Stack from another package',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Stack} from '@sanity/ui'
+
+    export const RootStack = styled(Stack)(({theme}) => ({}))
+  `,
+  `
+    import {RootStack} from './index'
+
+    export function Component() {
+      return <RootStack space={2} />
+    }
+  `,
+  (output) => {
+    expect(output).toContain('<RootStack gap={2} />')
+  },
+  'transforms styled Stack wrappers imported through barrel re-exports',
+  {
+    extraFiles: {
+      'index.ts': `export {RootStack} from './Component.styled'`,
+    },
+  },
 )

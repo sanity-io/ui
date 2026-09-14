@@ -17,6 +17,7 @@
     "**/out/**",
     "**/build/**",
     "**/next-env.d.ts",
+    "**/*.css.d.ts",
     "pnpm-lock.yaml"
   ],
   "options": {

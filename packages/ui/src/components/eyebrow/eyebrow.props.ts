@@ -4,10 +4,14 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface EyebrowProps<T extends React.ElementType> extends TypographyProps {
-  /** Element to render */
+export interface EyebrowProps<T extends React.ElementType = 'span'> extends TypographyProps {
+  /**
+   * HTML element to render.
+   */
   as?: T
-  /** CSS **font-size** property */
+  /**
+   * Sets font size. Uses the same scale as Label.
+   */
   size?: Responsive<EyebrowSize>
 }
 

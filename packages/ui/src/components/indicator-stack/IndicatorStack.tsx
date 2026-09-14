@@ -27,3 +27,5 @@ export function IndicatorStack<T extends ElementType = 'div'>(
     </HStack>
   )
 }
+
+export type {IndicatorStackProps}

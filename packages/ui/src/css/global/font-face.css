@@ -3,8 +3,8 @@
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: url('https://design-system-static.sanity.io/InterVariable.woff2') format('woff2-variations');
-  src: url('https://design-system-static.sanity.io/InterVariable.woff2') format('woff2')
+  src: url('https://design-system-static.sanity.io/InterVariable-latin-20260728.woff2') format('woff2-variations');
+  src: url('https://design-system-static.sanity.io/InterVariable-latin-20260728.woff2') format('woff2')
     tech('variations');
 }
 
@@ -13,8 +13,8 @@
   font-style: italic;
   font-weight: 400 700;
   font-display: swap;
-  src: url('https://design-system-static.sanity.io/InterVariable-Italic.woff2')
+  src: url('https://design-system-static.sanity.io/InterVariable-Italic-latin-20260728.woff2')
     format('woff2-variations');
-  src: url('https://design-system-static.sanity.io/InterVariable-Italic.woff2') format('woff2')
+  src: url('https://design-system-static.sanity.io/InterVariable-Italic-latin-20260728.woff2') format('woff2')
     tech('variations');
 }

@@ -1,7 +1,10 @@
+import {useState} from 'react'
 import {
+  Box,
   Button,
   Card,
   Checkbox,
+  Dialog,
   Grid,
   Heading,
   Inline,
@@ -12,11 +15,10 @@ import {
   Text,
   ThemeProvider,
   Tooltip,
-} from '@sanity/ui'
-import {buildTheme} from '@sanity/ui/theme'
-import {useState} from 'react'
+} from 'ui3'
+import {buildTheme} from 'ui3/theme'
 
-// Shared test sizes — keep in sync with uiPoc.tsx so the comparison stays fair.
+// Shared test sizes — keep in sync with ui5.tsx so the comparison stays fair.
 const ROW_COUNT = 200
 const TONE_CARD_COUNT = 500
 const PANEL_CARD_COUNT = 300
@@ -73,6 +75,27 @@ function SingleControlSection() {
         </Inline>
       </Stack>
     </Card>
+  )
+}
+
+function DialogSection() {
+  const [dialogOpen, setDialogOpen] = useState(false)
+  return (
+    <Box marginY={5}>
+      <Button text="Open Dialog" onClick={() => setDialogOpen(true)} />
+      {dialogOpen && (
+        <Dialog
+          animate={true}
+          id="inpDialog"
+          onClose={() => setDialogOpen(false)}
+          header="Dialog header"
+        >
+          <Box padding={4}>
+            <Text>The text of the Dialog</Text>
+          </Box>
+        </Dialog>
+      )}
+    </Box>
   )
 }
 
@@ -272,6 +295,7 @@ function Ui3() {
       <Stack gap={4}>
         <Heading>UI 3</Heading>
         <SingleControlSection />
+        <DialogSection />
         <SelectAllSection />
         <ToneToggleSection />
         <PanelSwapSection />

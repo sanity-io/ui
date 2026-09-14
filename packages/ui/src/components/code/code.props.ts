@@ -5,15 +5,22 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface CodeProps<T extends CodeTag> extends Omit<
+export interface CodeProps<T extends CodeTag = 'pre'> extends Omit<
   TypographyProps,
   'align' | 'truncate' | 'tone'
 > {
-  /** Element to render */
+  /**
+   * HTML element or component to render.
+   * @remarks The defined element wraps an inner `<code>` tag.
+   */
   as?: T
-  /** Refractor language for syntax highlighting */
+  /**
+   * Refractor language for syntax highlighting.
+   */
   language?: string
-  /** CSS **font-size** property */
+  /**
+   * Sets font size.
+   */
   size?: Responsive<CodeSize>
 }
 

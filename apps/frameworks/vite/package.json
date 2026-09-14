@@ -1,5 +1,5 @@
 {
-  "name": "ui-poc-vite",
+  "name": "ui-vite",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview --port 3002 --strictPort"
   },
   "dependencies": {
-    "@sanity-labs/ui-poc": "workspace:*",
+    "@sanity/ui": "workspace:*",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },

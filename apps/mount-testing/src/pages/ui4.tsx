@@ -1,5 +1,5 @@
 import 'ui4/css/index.css'
-import {AddIcon} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
 import {Profiler} from 'react'
 import {
   Box,

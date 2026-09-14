@@ -2,6 +2,7 @@ import {type PropDef} from '../types/PropDef'
 import {type Responsive} from '../types/Responsive'
 import {SPACE_INHERIT, type SpaceInherit} from '../types/Space'
 
+/** @public */
 export type GapProps = {
   /** CSS **gap** property */
   gap?: Responsive<SpaceInherit>

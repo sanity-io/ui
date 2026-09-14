@@ -10,9 +10,14 @@ const boxClassName = suffixClassName('sui-Box')
 /** @public */
 export function Box<T extends ElementType = 'div'>({
   display = 'block',
+  minHeight = '0',
+  minWidth = '0',
   ...props
 }: BoxProps<T> & Omit<ComponentPropsWithRef<T>, keyof BoxProps<T>>) {
-  const {as, children, className, style, ...rest} = getProps({display, ...props}, boxProps)
+  const {as, children, className, style, ...rest} = getProps(
+    {display, minHeight, minWidth, ...props},
+    boxProps,
+  )
   const Component = as || 'div'
 
   return (
@@ -21,3 +26,5 @@ export function Box<T extends ElementType = 'div'>({
     </Component>
   )
 }
+
+export type {BoxProps}

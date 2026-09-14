@@ -21,10 +21,12 @@ export function getProps(
   let style = componentProps?.style || {}
 
   for (const key in allComponentProps) {
-    const propDef = getPropDef(allComponentProps[key], allPropDefs?.[key])
+    const propDef = allPropDefs?.[key]
     const propValue = allComponentProps[key]
 
-    if (!propDef || !('className' in propDef) || !propDef.className) {
+    if (
+      !((propDef && 'className' in propDef && propDef.className) || propDef?.type === 'conditional')
+    ) {
       restProps[key] = propValue
       continue
     }
@@ -33,24 +35,43 @@ export function getProps(
       // @TODO: consider fixing this O(n^2) time complexity
       // oxlint-disable-next-line no-accumulating-spread
       for (let i = 0, len = Math.min(propValue.length, BREAKPOINTS_LENGTH); i < len; i++) {
-        className = clsx(className, getClassName(propValue[i], propDef, i))
-        style = {...style, ...getStyle(propValue[i], propDef, i)}
+        const resolvedPropDef = getResolvedPropDef(propValue[i], propDef)
+
+        if (!resolvedPropDef) {
+          continue
+        }
+
+        className = clsx(className, getClassName(propValue[i], resolvedPropDef, i))
+        style = {...style, ...getStyle(propValue[i], resolvedPropDef, i)}
       }
     } else {
-      className = clsx(className, getClassName(propValue, propDef))
-      style = {...style, ...getStyle(propValue, propDef)}
+      const resolvedPropDef = getResolvedPropDef(propValue, propDef)
+
+      if (!resolvedPropDef) {
+        restProps[key] = propValue
+        continue
+      }
+
+      className = clsx(className, getClassName(propValue, resolvedPropDef))
+      style = {...style, ...getStyle(propValue, resolvedPropDef)}
     }
   }
 
   return {...restProps, className, style}
 }
 
-function getPropDef(propValue: any, propDef?: PropDef) {
-  if (propDef?.type === 'conditional') {
-    return propDef.resolve(propValue)
+function getResolvedPropDef(propValue: any, propDef?: PropDef) {
+  if (propDef?.type !== 'conditional') {
+    return propDef
   }
 
-  return propDef
+  const resolvedPropDef = propDef.resolve(propValue)
+
+  if (!(resolvedPropDef && 'className' in resolvedPropDef && resolvedPropDef.className)) {
+    return null
+  }
+
+  return resolvedPropDef
 }
 
 function getClassName(propValue: any, propDef: PropDef, bp?: number) {
@@ -77,7 +98,7 @@ function getClassName(propValue: any, propDef: PropDef, bp?: number) {
 }
 
 function getStyle(propValue: any, propDef: PropDef, bp?: number) {
-  if (propDef.type === 'string' || propDef.type === 'number') {
+  if ((propDef.type === 'string' || propDef.type === 'number') && propDef.variable) {
     return {
       [`${propDef.variable}${bp ? `-bp-${bp}` : ''}`]: propValue,
     }

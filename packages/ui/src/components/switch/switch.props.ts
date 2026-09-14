@@ -3,9 +3,14 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
 export interface SwitchProps extends React.ComponentProps<'input'>, MarginProps {
-  /** Error state */
+  /**
+   * Applies error styling to the switch track.
+   * @remarks Use when form validation fails. Pair with a visible error message. The prop is visual only.
+   */
   error?: boolean
-  /** Input label */
+  /**
+   * Visible label next to the switch.
+   */
   label: React.ReactNode
 }
 

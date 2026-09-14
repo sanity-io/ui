@@ -1,4 +1,6 @@
-import {defineInlineTest} from '../../../utils/testUtils'
+import {expect} from 'vitest'
+
+import {defineCrossFileTest, defineInlineTest} from '../../../utils/testUtils'
 import transform from './text'
 
 defineInlineTest(
@@ -110,4 +112,85 @@ defineInlineTest(
     trim={true} />
   `,
   'moves width props to style and updates mapped value',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Text} from '@sanity/ui'
+
+    export const RootText = styled(Text)(({theme}) => ({}))
+  `,
+  `
+    import {RootText} from './Component.styled'
+
+    export function RootCode() {
+      return <RootText flex="auto" />
+    }
+  `,
+  (output) => {
+    expect(output.replace(/\s+/g, ' ')).toContain(
+      '<RootText style={{ flex: "1 1 auto" }} as="div" trim={true} />',
+    )
+  },
+  'transforms attributes on imported styled Text wrappers',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Text} from '@sanity/ui'
+
+    export const RootText = styled(Text)(({theme}) => ({}))
+  `,
+  `
+    import {Text} from 'another-package'
+    import {RootText} from './Component.styled'
+
+    export function Component() {
+      return (
+        <>
+          <RootText flex="auto" />
+          <Text flex="auto" />
+        </>
+      )
+    }
+  `,
+  (output) => {
+    expect(output.replace(/\s+/g, ' ')).toContain(
+      '<RootText style={{ flex: "1 1 auto" }} as="div" trim={true} />',
+    )
+    expect(output).toContain('<Text flex="auto" />')
+  },
+  'does not transform attributes on unrelated Text from another package',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Text} from '@sanity/ui'
+
+    export const RootText = styled(Text)(({theme}) => ({}))
+  `,
+  `
+    import {RootText} from './index'
+
+    export function Component() {
+      return <RootText flex="auto" />
+    }
+  `,
+  (output) => {
+    expect(output.replace(/\s+/g, ' ')).toContain(
+      '<RootText style={{ flex: "1 1 auto" }} as="div" trim={true} />',
+    )
+  },
+  'transforms styled Text wrappers imported through barrel re-exports',
+  {
+    extraFiles: {
+      'index.ts': `export {RootText} from './Component.styled'`,
+    },
+  },
 )

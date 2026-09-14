@@ -1,5 +1,5 @@
 {
-  "name": "ui-poc-next",
+  "name": "ui-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "start": "next start --port 3000"
   },
   "dependencies": {
-    "@sanity-labs/ui-poc": "workspace:*",
+    "@sanity/ui": "workspace:*",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"

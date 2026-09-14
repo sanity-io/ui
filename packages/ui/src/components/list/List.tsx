@@ -173,3 +173,5 @@ ListRoot.Item = ListItem
 ListRoot.ButtonItem = ListButtonItem
 ListRoot.ItemText = ListItemText
 ListRoot.ItemImage = ListItemImage
+
+export type {ListProps, ListItemProps, ListButtonItemProps, ListItemTextProps}

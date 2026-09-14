@@ -2,23 +2,29 @@ import {type PlacementProps, placementProps} from '../../props/placement'
 import {type PropDef} from '../../types/PropDef'
 
 /** @beta */
-export interface PopoverProps<T extends React.ElementType> extends PlacementProps {
-  /** Element to render */
-  as?: T
-  /** Anchor name for positioning */
+export interface PopoverProps
+  extends Omit<React.ComponentProps<'div'>, 'children' | 'content'>, PlacementProps {
+  /**
+   * Shared anchor identifier.
+   * @remarks Set the same value on a Tooltip and a Popover to point both at one trigger.
+   */
   anchorName?: React.ReactNode
-  /** Focusable trigger element */
+  /**
+   * The trigger element.
+   * @remarks Popover clones it and attaches the `popovertarget` attribute that opens the floating layer.
+   */
   children: React.ReactElement<Record<string, unknown>>
-  /** Popover content */
+  /**
+   * The floating content.
+   */
   content?: React.ReactNode
-  /** Render tooltip in portal */
+  /**
+   * Renders the content into `document.body` through a React portal instead of inline.
+   */
   portal?: boolean
 }
 
 export const popoverProps: Record<string, PropDef> = {
-  as: {
-    type: 'string',
-  },
   anchorName: {
     type: 'string',
   },

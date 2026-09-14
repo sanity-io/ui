@@ -3,6 +3,7 @@ import {type API, type FileInfo} from 'jscodeshift'
 import type {AttributeMods} from '../types/AttributeMods'
 import {defineInlineTest} from '../utils/testUtils'
 import {getAttribute} from './getAttribute'
+import {getComponentLocalNames} from './getComponentLocalNames'
 import {replaceElement} from './replaceElement'
 import {transformAttributes} from './transformAttributes'
 
@@ -20,9 +21,21 @@ const TO_MOD: AttributeMods = {
   },
 }
 
-function transform(fileInfo: FileInfo, api: API): string {
+function transform(
+  fileInfo: FileInfo,
+  api: API,
+  options?: {
+    setLocalNames?: boolean
+    unsetLocalNames?: boolean
+  },
+): string {
   const j = api.jscodeshift
   const root = j(fileInfo.source)
+  const localNames = options?.unsetLocalNames
+    ? (new Set() as Set<string>)
+    : options?.setLocalNames
+      ? getComponentLocalNames(j, root, 'Card')
+      : undefined
 
   replaceElement(
     j,
@@ -30,6 +43,7 @@ function transform(fileInfo: FileInfo, api: API): string {
     (attrs) => !getAttribute(attrs, 'margin'),
     {
       element: 'Card',
+      ...(localNames !== undefined ? {localNames} : {}),
       callback: (path) => transformAttributes(j, path, FROM_MOD, 'Warning'),
     },
     {
@@ -137,4 +151,33 @@ defineInlineTest(
   </>
   `,
   'replaces element and combines imports',
+)
+
+defineInlineTest(
+  transform,
+  {setLocalNames: true},
+  `
+  import {Card as LegacyCard} from '@sanity/ui'
+
+  <LegacyCard padding={1}>Content</LegacyCard>
+  `,
+  `
+  // UI-CODEMOD TODO: Consider renaming LegacyCard to Box
+  import { Box as LegacyCard } from '@sanity/ui';
+
+  <LegacyCard padding={1}>Content</LegacyCard>
+  `,
+  'preserves aliased jsx name and rewrites import',
+)
+
+defineInlineTest(
+  transform,
+  {unsetLocalNames: true},
+  `
+  <Card padding={1} />
+  `,
+  `
+  <Card padding={1} />
+  `,
+  'does not match bare element when localNames is empty',
 )

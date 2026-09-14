@@ -1,9 +1,9 @@
-import '@sanity-labs/ui-poc/styles.css'
-import {Button, Container, Divider, Flex, Heading, Text} from '@sanity-labs/ui-poc'
+import '@sanity/ui/styles.css'
+import {Button, Container, Divider, Flex, Heading, Text} from '@sanity/ui'
 
 function App() {
   return (
-    <Container contentSize={2} paddingY={4}>
+    <Container size={2} paddingY={4}>
       <Flex flexDirection="column" rowGap={2}>
         <Heading as="h1" size={4}>
           Sanity UI in Vite

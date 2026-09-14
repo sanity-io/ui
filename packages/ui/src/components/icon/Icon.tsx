@@ -20,3 +20,5 @@ export function Icon({size = 2, ...props}: IconProps) {
     />
   )
 }
+
+export type {IconProps}

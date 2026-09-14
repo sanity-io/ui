@@ -26,3 +26,5 @@ export function Container<T extends ElementType = 'div'>({
     </Component>
   )
 }
+
+export type {ContainerProps}

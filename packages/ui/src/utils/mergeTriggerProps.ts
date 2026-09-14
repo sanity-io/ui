@@ -1,4 +1,3 @@
-/** @public */
 function isReactEventHandler(key: string, value: unknown): value is (e: never) => void {
   return /^on[A-Z]/.test(key) && typeof value === 'function'
 }
@@ -23,9 +22,8 @@ function chainEventHandlers<E>(
   }
 }
 
-/** @public */
 export function mergeTriggerProps(
-  childProps?: Record<string, unknown>,
+  childProps: Record<string, unknown>,
   forwardedProps?: Record<string, unknown>,
   ownProps?: Record<string, unknown>,
 ) {
@@ -53,16 +51,14 @@ export function mergeTriggerProps(
   }
 
   result['style'] = {
-    ...(childProps?.['style'] as object),
+    ...(childProps['style'] as object),
     ...(forwardedProps?.['style'] as object),
     ...(ownProps?.['style'] as object),
   }
 
-  if (childProps) {
-    for (const [key, value] of Object.entries(childProps)) {
-      if (isReactEventHandler(key, value)) {
-        result[key] = chainEventHandlers(result[key] as (e: never) => void, value)
-      }
+  for (const [key, value] of Object.entries(childProps)) {
+    if (isReactEventHandler(key, value)) {
+      result[key] = chainEventHandlers(result[key] as (e: never) => void, value)
     }
   }
 

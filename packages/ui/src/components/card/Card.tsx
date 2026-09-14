@@ -27,3 +27,5 @@ export function Card<T extends ElementType = 'div'>({
     </Component>
   )
 }
+
+export type {CardProps}

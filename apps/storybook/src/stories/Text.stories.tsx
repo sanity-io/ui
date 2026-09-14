@@ -1,6 +1,6 @@
-import {Text as TextV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Text as TextV3} from 'ui3'
 
 import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {textProps} from '../../../../packages/ui/src/components/text/text.props'
@@ -81,6 +81,24 @@ export const Tones: Story = {
   },
 }
 
+export const Trim: Story = {
+  render: (props) => {
+    return (
+      <>
+        <Text trim {...props}>
+          Trimmed text
+        </Text>
+        <Text trim {...props}>
+          More trimmed text
+        </Text>
+      </>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText(/Trimmed text/)).classList).toContain('sui-text-trim')
+  },
+}
+
 export const TrimTruncate: Story = {
   name: 'Trim & Truncate',
   render: (props) => {
@@ -122,5 +140,34 @@ export const TrimTruncateOneLine: Story = {
     await expect(
       (await canvas.findByText(/Lorem ipsum dolor sit amet/)).parentElement?.classList,
     ).toContain('sui-text-trim')
+  },
+}
+
+export const Truncate: Story = {
+  render: (props) => {
+    return (
+      <>
+        <Text truncate={1} {...props}>
+          One line truncation lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </Text>
+        <br />
+        <Text truncate={3} {...props}>
+          Multiline truncation lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </Text>
+      </>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect((await canvas.findByText(/One line truncation/)).classList).toContain(
+      'sui-text-overflow',
+    )
+
+    await expect((await canvas.findByText(/Multiline truncation/)).classList).toContain(
+      'sui-line-clamp',
+    )
   },
 }

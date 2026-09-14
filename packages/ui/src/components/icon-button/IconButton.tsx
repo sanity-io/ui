@@ -28,3 +28,5 @@ export function IconButton<T extends ElementType = 'button'>(
     </Button>
   )
 }
+
+export type {IconButtonProps}

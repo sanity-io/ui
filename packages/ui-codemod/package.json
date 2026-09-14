@@ -1,12 +1,12 @@
 {
-  "name": "@sanity-labs/ui-poc-codemod",
-  "version": "0.0.1-alpha.16",
+  "name": "@sanity/ui-codemod",
+  "version": "1.0.0-alpha.8",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "",
   "bin": {
-    "ui-poc-codemod": "./bin/run.js"
+    "ui-codemod": "./bin/run.js"
   },
   "files": [
     "dist",
@@ -71,6 +71,30 @@
       "source": "./src/commands/latest/heading.ts",
       "default": "./dist/commands/latest/heading.js"
     },
+    "./transforms/latest/inline": {
+      "source": "./src/transforms/latest/inline/inline.ts",
+      "default": "./dist/transforms/latest/inline/inline.js"
+    },
+    "./latest/inline": {
+      "source": "./src/commands/latest/inline.ts",
+      "default": "./dist/commands/latest/inline.js"
+    },
+    "./transforms/latest/label": {
+      "source": "./src/transforms/latest/label/label.ts",
+      "default": "./dist/transforms/latest/label/label.js"
+    },
+    "./latest/label": {
+      "source": "./src/commands/latest/label.ts",
+      "default": "./dist/commands/latest/label.js"
+    },
+    "./transforms/latest/stack": {
+      "source": "./src/transforms/latest/stack/stack.ts",
+      "default": "./dist/transforms/latest/stack/stack.js"
+    },
+    "./latest/stack": {
+      "source": "./src/commands/latest/stack.ts",
+      "default": "./dist/commands/latest/stack.js"
+    },
     "./transforms/latest/text": {
       "source": "./src/transforms/latest/text/text.ts",
       "default": "./dist/transforms/latest/text/text.js"
@@ -97,6 +121,12 @@
       "./latest/grid": "./dist/commands/latest/grid.js",
       "./transforms/latest/heading": "./dist/transforms/latest/heading/heading.js",
       "./latest/heading": "./dist/commands/latest/heading.js",
+      "./transforms/latest/inline": "./dist/transforms/latest/inline/inline.js",
+      "./latest/inline": "./dist/commands/latest/inline.js",
+      "./transforms/latest/label": "./dist/transforms/latest/label/label.js",
+      "./latest/label": "./dist/commands/latest/label.js",
+      "./transforms/latest/stack": "./dist/transforms/latest/stack/stack.js",
+      "./latest/stack": "./dist/commands/latest/stack.js",
       "./transforms/latest/text": "./dist/transforms/latest/text/text.js",
       "./latest/text": "./dist/commands/latest/text.js",
       "./package.json": "./package.json"
@@ -124,9 +154,9 @@
   },
   "browserslist": "extends @sanity/browserslist-config",
   "oclif": {
-    "bin": "@sanity-labs/ui-poc-codemod",
+    "bin": "@sanity/ui-codemod",
     "commands": "./dist/commands",
-    "dirname": "ui-poc-codemod",
+    "dirname": "ui-codemod",
     "topicSeparator": ":",
     "topics": {
       "latest": {

@@ -1,6 +1,6 @@
-import {Switch as SwitchV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Switch as SwitchV3} from 'ui3'
 
 import {Switch} from '../../../../packages/ui/src/components/switch/Switch'
 import {switchProps} from '../../../../packages/ui/src/components/switch/switch.props'

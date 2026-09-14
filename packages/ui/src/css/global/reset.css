@@ -17,46 +17,48 @@
 }
 
 /* Prevent adjustments of font size after orientation changes in iOS. */
-html {
+:where(html) {
   -webkit-text-size-adjust: 100%;
 }
 
-body {
+:where(body) {
   background: light-dark(var(--white), var(--black));
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
 }
 
 /* Display multimedia as block by default */
-audio,
-canvas,
-embed,
-iframe,
-img,
-object,
-picture,
-video {
+:where(
+  audio,
+  canvas,
+  embed,
+  iframe,
+  img,
+  object,
+  picture,
+  video
+){
   display: block;
   max-width: 100%;
 }
-img,
-picture,
-video {
+:where(img, picture, video) {
   block-size: auto;
 }
 
 /* Inherit typography in form controls */
-button,
-input,
-select,
-textarea {
+:where(
+  button,
+  input,
+  select,
+  textarea
+) {
   font: inherit;
   line-height: inherit;
   color: inherit;
 }
 
 /* Remove excess space for table borders */
-table {
+:where(table) {
   border-collapse: collapse;
   border-spacing: 0;
 }

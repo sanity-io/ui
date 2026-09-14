@@ -38,3 +38,5 @@ export function Indicator<T extends ElementType = 'span'>({
     </Box>
   )
 }
+
+export type {IndicatorProps}
