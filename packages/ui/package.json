@@ -81,7 +81,7 @@
     "ts:check": "tsc --noEmit"
   },
   "dependencies": {
-    "@sanity-labs/design-tokens": "0.0.2-alpha.4",
+    "@sanity-labs/design-tokens": "0.0.2-alpha.5",
     "@sanity/icons": "^5.2.1",
     "clsx": "^2.1.1",
     "comment-json": "^5.0.0",
