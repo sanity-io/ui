@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect, userEvent} from 'storybook/test'
+import {Select as SelectV3} from 'ui3'
 
 import {Select} from '../../../../packages/ui/src/components/select/Select'
 import {selectProps} from '../../../../packages/ui/src/components/select/select.props'
@@ -19,6 +20,7 @@ const meta: Meta<typeof Select> = {
     },
     performance: {
       component: Select,
+      compareComponent: SelectV3,
     },
   },
 }
