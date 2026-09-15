@@ -73,7 +73,7 @@ function MenuSubmenu(props: MenuSubmenuProps) {
   )
 }
 
-/** @public */
+/** @beta */
 export const Menu = Object.assign(MenuRoot, {
   Item: MenuItem,
   ButtonItem: MenuButtonItem,
