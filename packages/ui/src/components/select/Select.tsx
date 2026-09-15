@@ -34,9 +34,10 @@ export function Select({
         className={clsx(selectClassName, error && 'sui-error', className)}
         style={style}
         {...rest}
-        radius={2}
-        padding={densityValues[density]}
+        aria-invalid={error || undefined}
         disabled={disabled}
+        padding={densityValues[density]}
+        radius={2}
       >
         {children}
       </Box>
