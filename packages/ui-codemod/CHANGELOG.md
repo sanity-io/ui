@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.9
+
+### Patch Changes
+
+- 0d1bade: add badge codemod
+
 ## 1.0.0-alpha.8
 
 ### Patch Changes

@@ -1,3 +1,5 @@
+'use client'
+
 export * from './components/box/Box'
 export * from './components/button/Button'
 export * from './components/card/Card'
@@ -63,3 +65,4 @@ export type {TextSize} from './types/Text'
 export type {TextAlign} from './types/TextAlign'
 export type {FontWeight} from './types/FontWeight'
 export type {Tone} from './types/Tone'
+export * from './components/badge/Badge'

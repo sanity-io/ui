@@ -1,6 +1,7 @@
 import {AddIcon} from '@sanity/icons/Add'
 import {Profiler} from 'react'
 import {
+  Badge,
   Box,
   Button,
   Card,
@@ -208,6 +209,13 @@ export default function Ui3() {
       <Profiler id="Icon" onRender={handleOnRender}>
         {iterator.map((i) => (
           <AddIcon key={i} />
+        ))}
+      </Profiler>
+
+      <h2>{count} Badges</h2>
+      <Profiler id="Badge" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Badge key={i}>Badge</Badge>
         ))}
       </Profiler>
 

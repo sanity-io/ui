@@ -1,5 +1,17 @@
 # @sanity/ui
 
+## 5.0.0-alpha.10
+
+### Patch Changes
+
+- c0f96c8: add topAnchor prop for Dialog
+
+## 5.0.0-alpha.9
+
+### Patch Changes
+
+- 0d1bade: add Badge component
+
 ## 5.0.0-alpha.8
 
 ### Patch Changes

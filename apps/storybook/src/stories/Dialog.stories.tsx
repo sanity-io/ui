@@ -122,12 +122,33 @@ function DialogWithFooterStory(props: DialogProps) {
   )
 }
 
+function DialogTopAnchorStory(props: DialogProps) {
+  const [dialogOpen, setDialogOpen] = useState(false)
+
+  return (
+    <Box padding={4}>
+      <Button text="Open dialog" onClick={() => setDialogOpen(true)} />
+      <Dialog
+        {...props}
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        topAnchor="clamp(1rem, 10dvh, 4rem)"
+      >
+        <Dialog.Content>
+          <Text>Dialog body content</Text>
+        </Dialog.Content>
+      </Dialog>
+    </Box>
+  )
+}
+
 export const Basic: Story = {
   render: (props) => <DialogBasicStory {...props} />,
   play: async ({canvas}) => {
     const dialog = await canvas.findByRole('dialog', {hidden: true})
 
     await expect(dialog.dataset.ui).toBe('Dialog')
+    await expect(dialog.classList).not.toContain('sui-top-anchor')
 
     await userEvent.click(await canvas.findByRole('button', {name: 'Open dialog'}))
 
@@ -162,5 +183,15 @@ export const WithFooter: Story = {
     await expect(dialog.dataset.ui).toBe('Dialog')
     await expect(dialog.querySelector('[data-ui="DialogContent"]')).toBeInTheDocument()
     await expect(dialog.querySelector('[data-ui="DialogFooter"]')).toBeInTheDocument()
+  },
+}
+
+export const TopAnchor: Story = {
+  name: 'With top anchor',
+  render: (props) => <DialogTopAnchorStory {...props} />,
+  play: async ({canvas}) => {
+    await expect((await canvas.findByRole('dialog', {hidden: true})).classList).toContain(
+      'sui-top-anchor',
+    )
   },
 }

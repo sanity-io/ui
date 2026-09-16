@@ -25,7 +25,7 @@ function DialogRoot({open = false, size = 0, ...props}: DialogProps) {
 
   const dialogClasses = clsx(
     dialogClassName,
-    'sui-inset0 sui-m-auto sui-radius5 sui-shadow3 sui-p4 sui-flex-direction-column sui-gap4 sui-overflow-y-auto',
+    `${props.topAnchor ? 'sui-mx-auto' : 'sui-m-auto'} sui-radius5 sui-shadow3 sui-p4 sui-flex-direction-column sui-gap4 sui-overflow-y-auto`,
   )
 
   useEffect(() => {
