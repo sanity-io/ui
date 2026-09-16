@@ -1,5 +1,12 @@
 # @sanity/ui
 
+## 5.0.0-alpha.11
+
+### Patch Changes
+
+- bc83e6d: Build with the native Rust React Compiler through `oxc-transform-react`, reducing the compiled index bundle by about 6% while preserving the public runtime and type exports.
+- 0713570: bump @sanity-labs/design-tokens and update shadow css
+
 ## 5.0.0-alpha.10
 
 ### Patch Changes
