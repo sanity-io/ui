@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {cloneElement, useId} from 'react'
+import {useId, type PointerEvent} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -17,10 +17,14 @@ function MenuRoot(props: MenuProps) {
   return (
     <Popover
       as="nav"
-      className={clsx(menuClassName, className)}
+      className={clsx(menuClassName, 'sui-radius3', className)}
       style={style}
       data-ui="Menu"
-      content={<List gap={1}>{menu}</List>}
+      content={
+        <List gap={1} className="sui-mx-1">
+          {menu}
+        </List>
+      }
       {...rest}
     >
       {children}
@@ -51,24 +55,30 @@ function MenuSubmenu(props: MenuSubmenuProps) {
   const reactId = useId()
   const id = idProp || reactId
 
-  const trigger = cloneElement(children, {
-    interestfor: id,
-  })
-
   return (
     <Popover
       as={List}
-      className={clsx(menuSubmenuClassName, 'sui-m0', className)}
+      className={clsx(menuSubmenuClassName, 'sui-radius3', className)}
       style={style}
       data-ui="MenuSubmenu"
       content={menu}
       id={id}
       placement="right-start"
       portal
-      popover="hint"
       {...rest}
+      triggerProps={{
+        onPointerEnter: (event: PointerEvent<HTMLElement>) => {
+          const popover = document.getElementById(id)
+
+          if (!popover || popover.matches(':popover-open')) {
+            return
+          }
+
+          popover.showPopover({source: event.currentTarget})
+        },
+      }}
     >
-      {trigger}
+      {children}
     </Popover>
   )
 }
