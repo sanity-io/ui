@@ -22,9 +22,14 @@ export interface PopoverProps<T extends React.ElementType> extends PlacementProp
    */
   content?: React.ReactNode
   /**
-   * Renders the content into `document.body` through a React portal instead of inline.
+   * Renders the content into a React portal instead of inline.
+   * @remarks Content can be rendered into `document.body` or an optional `portalElement`
    */
   portal?: boolean
+  /**
+   * Element to render the portal into.
+   */
+  portalElement?: Element | DocumentFragment
 }
 
 export const popoverProps: Record<string, PropDef> = {
@@ -39,6 +44,9 @@ export const popoverProps: Record<string, PropDef> = {
   },
   portal: {
     type: 'boolean',
+  },
+  portalElement: {
+    type: 'string',
   },
   ...placementProps,
 }

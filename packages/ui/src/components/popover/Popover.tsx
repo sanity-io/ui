@@ -34,6 +34,7 @@ function PopoverRoot<T extends ElementType = 'div'>({
     anchorName,
     content,
     portal,
+    portalElement,
     triggerProps: forwardedTriggerProps,
     ...rest
   } = getProps({placement, ...props}, popoverProps)
@@ -65,7 +66,7 @@ function PopoverRoot<T extends ElementType = 'div'>({
           <Component
             className={clsx(
               popoverClassName,
-              'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+              'sui-px2 sui-py1 sui-radius3 sui-position-fixed sui-shadow2',
               className,
             )}
             style={{
@@ -83,6 +84,7 @@ function PopoverRoot<T extends ElementType = 'div'>({
         </Activity>,
         isClient,
         portal,
+        portalElement,
       )}
     </>
   )
