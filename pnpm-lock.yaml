@@ -114,8 +114,8 @@ catalogs:
       specifier: ^8.6.1
       version: 8.6.1
     '@sanity/functions':
-      specifier: ^1.7.2
-      version: 1.7.2
+      specifier: ^1.7.3
+      version: 1.7.3
     '@sanity/tsdown-config':
       specifier: ^0.28.0
       version: 0.28.0
@@ -218,7 +218,7 @@ importers:
         version: 8.6.1(vitest@5.0.0)
       '@sanity/functions':
         specifier: 'catalog:'
-        version: 1.7.2(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)
+        version: 1.7.3(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -4308,8 +4308,8 @@ packages:
     engines: {node: '>=20.19 <22 || >=22.12'}
     hasBin: true
 
-  '@sanity/functions@1.7.2':
-    resolution: {integrity: sha512-5Lkt8bYblWMdofDRKBDwr+uEVFgKCJlxOL2qwSuKnD22KVs99Zi8brXNLcNLDcFVsD3tjhMnjHOAcl75+fY2xA==}
+  '@sanity/functions@1.7.3':
+    resolution: {integrity: sha512-hCvaA3Aflp8BzjQKDMGKma1CjCm0cnh0fFPb+h9L9cqqgd4qqHH88cPyC6+sMkD8H5Y87tjcqAMJWEFudUdHgw==}
     engines: {node: '>=22'}
     peerDependencies:
       '@aws-lite/client': ^0.23.6
@@ -12835,7 +12835,7 @@ snapshots:
       - react-native-b4a
       - supports-color
 
-  '@sanity/functions@1.7.2(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)':
+  '@sanity/functions@1.7.3(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)':
     dependencies:
       '@aws-lite/client': 0.23.7
       '@aws-lite/dynamodb': 0.3.9
