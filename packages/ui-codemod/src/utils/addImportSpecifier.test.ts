@@ -34,3 +34,15 @@ defineInlineTest(
   `,
   'adds import specifier to import with multiple',
 )
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  import { Card, Box } from '@sanity/ui';
+  `,
+  `
+  import { Card, Box } from '@sanity/ui';
+  `,
+  'does not add specifier if it already exists on another import',
+)
