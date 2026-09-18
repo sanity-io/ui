@@ -55,7 +55,7 @@ const MenuSubmenuButtonItem: typeof List.ButtonItem = (props) => (
   <List.ButtonItem
     data-ui="MenuButtonItem"
     density="compact"
-    className="sui-text-body1 sui-weight-medium"
+    className="sui-text-body1 sui-weight-medium sui-gap3"
     end={<Icon icon={ChevronRightIcon} size={1} marginRight={-1} />}
     {...props}
   />

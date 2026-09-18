@@ -1,53 +1,12 @@
 /*
- * Submenu viewport containment.
+ * Viewport containment lives in placement.css:
+ * overflow-y + max-height on every placement, then the pinned
+ * @position-try fallbacks (--bottom-start, --right-start, …) when
+ * content would overflow the viewport.
  *
- * Portaled submenus anchor to the viewport. Pin the block-end edge so long
- * menus scroll instead of running off-screen.
+ * Root menus skip the stretch-below try (it always fits) and instead
+ * fill the viewport to the left of the trigger, then the full window.
  */
-[data-ui='MenuSubmenu'] {
-  overflow-y: auto;
-}
-
-[data-ui='MenuSubmenu'][class*='placement-right-start'],
-[data-ui='MenuSubmenu'][class*='placement-right-end'] {
-  bottom: var(--space-1, 8px);
-}
-
-[data-ui='MenuSubmenu'][class*='placement-left-start'],
-[data-ui='MenuSubmenu'][class*='placement-left-end'] {
-  bottom: var(--space-1, 8px);
-}
-
-@supports (position-area: inline-end span-block-end) {
-  [data-ui='MenuSubmenu'][class*='placement-right-start'],
-  [data-ui='MenuSubmenu'][class*='placement-right-end'] {
-    inset: auto;
-    bottom: auto;
-    translate: none;
-    position-area: inline-end span-block-end;
-    align-self: start;
-    position-try-fallbacks: --submenu-right-scroll, flip-block;
-    position-try-order: most-block-size;
-  }
-
-  [data-ui='MenuSubmenu'][class*='placement-left-start'],
-  [data-ui='MenuSubmenu'][class*='placement-left-end'] {
-    inset: auto;
-    bottom: auto;
-    translate: none;
-    position-area: inline-start span-block-end;
-    align-self: start;
-    position-try-fallbacks: --submenu-left-scroll, flip-block;
-    position-try-order: most-block-size;
-  }
-
-  @position-try --submenu-right-scroll {
-    position-area: inline-end span-block-end;
-    align-self: stretch;
-  }
-
-  @position-try --submenu-left-scroll {
-    position-area: inline-start span-block-end;
-    align-self: stretch;
-  }
+[data-ui='Menu'][class*='placement-bottom'] {
+  position-try-fallbacks: --left-fill, --viewport-fill;
 }

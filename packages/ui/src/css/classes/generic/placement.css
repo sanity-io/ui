@@ -2,6 +2,7 @@
   inset: auto;
   margin: 0;
   overflow-y: auto;
+  max-height: calc(100dvh - 2 * var(--space-1, 8px));
 }
 
 @position-try --top-center {
@@ -91,7 +92,6 @@
   inset: auto;
   margin: 0;
   left: anchor(right);
-  top: anchor(top);
   bottom: var(--space-1, 8px);
 }
 
@@ -124,7 +124,6 @@
   inset: auto;
   margin: 0;
   right: anchor(left);
-  top: anchor(top);
   bottom: var(--space-1, 8px);
 }
 
@@ -136,11 +135,25 @@
   top: var(--space-1, 8px);
 }
 
+@position-try --left-fill {
+  inset: auto;
+  margin: 0;
+  top: var(--space-1, 8px);
+  bottom: var(--space-1, 8px);
+  left: var(--space-1, 8px);
+  right: anchor(left);
+}
+
+@position-try --viewport-fill {
+  inset: var(--space-1, 8px);
+  margin: 0;
+}
+
 .sui-placement-bottom {
   top: anchor(bottom);
   left: anchor(center);
   translate: -50% 0;
-  position-try-fallbacks: --top-center;
+  position-try-fallbacks: --bottom-center, --top-center;
 }
 
 @supports (justify-self: anchor-center) {
@@ -154,20 +167,20 @@
 .sui-placement-bottom-start {
   top: anchor(bottom);
   left: anchor(left);
-  position-try-fallbacks: --top-start, --bottom-start;
+  position-try-fallbacks: --bottom-start, --top-start;
 }
 
 .sui-placement-bottom-end {
   top: anchor(bottom);
   right: anchor(right);
-  position-try-fallbacks: --top-end, --bottom-end;
+  position-try-fallbacks: --bottom-end, --top-end;
 }
 
 .sui-placement-top {
   bottom: anchor(top);
   left: anchor(center);
   translate: -50% 0;
-  position-try-fallbacks: --bottom-center;
+  position-try-fallbacks: --top-center, --bottom-center;
 }
 
 @supports (justify-self: anchor-center) {
@@ -181,20 +194,19 @@
 .sui-placement-top-start {
   bottom: anchor(top);
   left: anchor(left);
-  position-try-fallbacks: --bottom-start, --top-start;
+  position-try-fallbacks: --top-start, --bottom-start;
 }
 
 .sui-placement-top-end {
   bottom: anchor(top);
   right: anchor(right);
-  position-try-fallbacks: --bottom-end, --top-end;
+  position-try-fallbacks: --top-end, --bottom-end;
 }
 
 .sui-placement-left {
   right: anchor(left);
   top: anchor(center);
   translate: 0 -50%;
-  max-height: calc(100dvh - 2 * var(--space-1, 8px));
   position-try-fallbacks: --right-center;
 }
 
@@ -209,7 +221,7 @@
 .sui-placement-left-start {
   right: anchor(left);
   top: anchor(top);
-  position-try-fallbacks: --left-end, --right-start, --right-end;
+  position-try-fallbacks: --left-start, --left-end, --right-start, --right-end;
 }
 
 .sui-placement-left-end {
@@ -222,7 +234,6 @@
   left: anchor(right);
   top: anchor(center);
   translate: 0 -50%;
-  max-height: calc(100dvh - 2 * var(--space-1, 8px));
   position-try-fallbacks: --left-center;
 }
 
@@ -237,7 +248,7 @@
 .sui-placement-right-start {
   left: anchor(right);
   top: anchor(top);
-  position-try-fallbacks: --right-end, --right-start, --left-start, --left-end;
+  position-try-fallbacks: --right-start, --right-end, --left-start, --left-end;
 }
 
 .sui-placement-right-end {
