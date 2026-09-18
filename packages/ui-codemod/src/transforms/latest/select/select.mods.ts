@@ -30,7 +30,7 @@ export const SELECT_MODS: AttributeMods = {
   readOnly: {
     type: 'warn-only',
     warning:
-      'Please double check the Select migration below. The readOnly prop is no longer applied. Use disabled, or handle the read-only state externally.',
+      'Please double check the Select migration below. The readOnly prop is no longer valid, as the readonly HTML attribute is invalid on select elements.',
   },
   space: {type: 'remove'},
 }
