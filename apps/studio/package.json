@@ -21,7 +21,7 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "sanity": "catalog:",
-    "sanity-plugin-media": "^6.1.8",
+    "sanity-plugin-media": "^6.2.0",
     "styled-components": "catalog:"
   },
   "devDependencies": {
