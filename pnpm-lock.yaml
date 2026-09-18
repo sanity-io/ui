@@ -114,8 +114,8 @@ catalogs:
       specifier: ^8.6.1
       version: 8.6.1
     '@sanity/functions':
-      specifier: ^1.7.2
-      version: 1.7.2
+      specifier: ^1.7.3
+      version: 1.7.3
     '@sanity/tsdown-config':
       specifier: ^0.28.0
       version: 0.28.0
@@ -218,7 +218,7 @@ importers:
         version: 8.6.1(vitest@5.0.0)
       '@sanity/functions':
         specifier: 'catalog:'
-        version: 1.7.2(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)
+        version: 1.7.3(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -523,7 +523,7 @@ importers:
     devDependencies:
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.150.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
+        version: 0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -601,7 +601,7 @@ importers:
         version: 2.2.1
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.150.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
+        version: 0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
       '@svgr/core':
         specifier: ^8.1.0
         version: 8.1.0(supports-color@8.1.1)(typescript@7.0.2)
@@ -4292,8 +4292,8 @@ packages:
     engines: {node: '>=20.19 <22 || >=22.12'}
     hasBin: true
 
-  '@sanity/functions@1.7.2':
-    resolution: {integrity: sha512-5Lkt8bYblWMdofDRKBDwr+uEVFgKCJlxOL2qwSuKnD22KVs99Zi8brXNLcNLDcFVsD3tjhMnjHOAcl75+fY2xA==}
+  '@sanity/functions@1.7.3':
+    resolution: {integrity: sha512-hCvaA3Aflp8BzjQKDMGKma1CjCm0cnh0fFPb+h9L9cqqgd4qqHH88cPyC6+sMkD8H5Y87tjcqAMJWEFudUdHgw==}
     engines: {node: '>=22'}
     peerDependencies:
       '@aws-lite/client': ^0.23.6
@@ -8094,6 +8094,7 @@ packages:
   sanity@6.13.1:
     resolution: {integrity: sha512-Do+s1rDTOj9agZ6pvzX72EpDzQO4MnOTo5ijcciIF3BuTLa3trunHyeZbcD5zS65/Xc/oq6Y+8q/Vh8TiSzkWw==}
     engines: {node: '>=22.12'}
+    deprecated: 'This version of Sanity Studio has a potential data-loss bug when working with Portable Text fields. This issue is resolved in 6.14.1. Upgrade with: npm install sanity@latest. See https://www.sanity.io/docs/studio/upgrade'
     hasBin: true
     peerDependencies:
       react: ^19.3.0
@@ -12706,7 +12707,7 @@ snapshots:
       - react-native-b4a
       - supports-color
 
-  '@sanity/functions@1.7.2(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)':
+  '@sanity/functions@1.7.3(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)':
     dependencies:
       '@aws-lite/client': 0.23.7
       '@aws-lite/dynamodb': 0.3.9
@@ -12987,14 +12988,14 @@ snapshots:
       - babel-plugin-macros
       - vite
 
-  '@sanity/tsdown-config@0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.150.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))':
+  '@sanity/tsdown-config@0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))':
     dependencies:
       '@microsoft/api-extractor': 7.59.1(@types/node@24.13.3)
       '@microsoft/tsdoc-config': 0.18.1
       '@sanity/browserslist-config': 1.0.5
       '@sanity/vanilla-extract-tsdown-plugin': 0.4.0(babel-plugin-macros@3.1.0)(rolldown@1.2.7)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))
       '@typescript/typescript6': 6.0.2
-      '@vitejs/plugin-react': 6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(oxc-transform-react@0.150.0)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
+      '@vitejs/plugin-react': 6.1.1(@rolldown/plugin-babel@0.2.4(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(oxc-transform-react@0.149.0)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
       browserslist: 4.28.9
       jsonc-parser: 3.3.1
       lightningcss: 1.33.0
@@ -13006,7 +13007,6 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.29.7(supports-color@8.1.1)
       '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
-      oxc-transform-react: 0.150.0
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -14086,14 +14086,6 @@ snapshots:
       vite: 8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0)
     optionalDependencies:
       '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13))
-      oxc-transform-react: 0.150.0
-
-  '@vitejs/plugin-react@6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(oxc-transform-react@0.150.0)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))':
-    dependencies:
-      '@rolldown/pluginutils': 1.0.1
-      vite: 8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0)
-    optionalDependencies:
-      '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
       oxc-transform-react: 0.150.0
 
   '@vitejs/plugin-react@6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(vite@8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0)))(oxc-transform-react@0.150.0)(vite@8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))':
