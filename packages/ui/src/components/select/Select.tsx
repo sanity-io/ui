@@ -5,54 +5,52 @@ import type {FormElementDensity} from '../../types/FormElement'
 import type {Space} from '../../types/Space'
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
-import {Box} from '../box/Box'
-import {Flex} from '../flex/Flex'
 import {Icon} from '../icon/Icon'
 import {type SelectProps, selectProps} from './select.props'
 
 const selectClassName = suffixClassName('sui-Select')
+const densityValues: Record<FormElementDensity, Space> = {
+  regular: 1,
+  loose: 2,
+}
 
 /** @public */
 export function Select({
   density = 'regular',
   disabled = false,
-  error = false,
+  hasError = false,
   ...props
 }: SelectProps) {
   const {children, className, style, ...rest} = getProps({density, disabled, ...props}, selectProps)
 
-  const densityValues: Record<FormElementDensity, Space> = {
-    regular: 2,
-    loose: 3,
-  }
+  const dv = densityValues[density]
+
+  const selectClasses = clsx(
+    selectClassName,
+    hasError && 'sui-error',
+    'sui-radius2',
+    'sui-text-body1',
+    `sui-p${dv}`,
+    className,
+  )
+
+  const iconClasses = `sui-position-absolute sui-display-flex sui-align-items-center sui-pl${dv} sui-right${dv}`
 
   return (
-    <Box position="relative">
-      <Box
-        as="select"
+    <div className="sui-position-relative">
+      <select
         data-ui="Select"
-        className={clsx(selectClassName, error && 'sui-error', className)}
+        className={selectClasses}
         style={style}
         {...rest}
-        aria-invalid={error || undefined}
+        aria-invalid={hasError || undefined}
         disabled={disabled}
-        padding={densityValues[density]}
-        radius={2}
       >
         {children}
-      </Box>
-      <Flex
-        data-ui="Select-picker-icon"
-        position="absolute"
-        right={densityValues[density]}
-        alignItems="center"
-        // Extend background leftwards for extra gap between icon and selected option
-        paddingLeft={densityValues[density]}
-      >
-        <Icon icon={SelectIcon} />
-      </Flex>
-    </Box>
+      </select>
+      <div className={iconClasses} data-ui="Select-picker-icon">
+        <Icon icon={SelectIcon} size={1} />
+      </div>
+    </div>
   )
 }
-
-export type {SelectProps}

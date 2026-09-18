@@ -12,9 +12,9 @@ export type SelectProps = React.ComponentProps<'select'> & {
    */
   disabled?: boolean
   /**
-   * Used to trigger error styling.
+   * Used to trigger styling for invalid states.
    */
-  error?: boolean
+  hasError?: boolean
 }
 
 export const selectProps: Record<string, PropDef> = {
@@ -25,7 +25,7 @@ export const selectProps: Record<string, PropDef> = {
   disabled: {
     type: 'boolean',
   },
-  error: {
+  hasError: {
     type: 'boolean',
   },
 }

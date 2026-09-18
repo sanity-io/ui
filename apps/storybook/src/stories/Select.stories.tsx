@@ -82,7 +82,7 @@ export const Disabled: Story = {
 
 export const Error: Story = {
   render: (props) => (
-    <Select {...props} aria-label="Select with error" error>
+    <Select {...props} aria-label="Select with error" hasError>
       {options}
     </Select>
   ),
