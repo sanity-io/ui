@@ -256,7 +256,7 @@ importers:
         specifier: ^0.68.0
         version: 0.68.0
       oxlint:
-        specifier: ^1.82.0
+        specifier: ^1.83.0
         version: 1.83.0(oxlint-tsgolint@7.0.2001)
       oxlint-tsgolint:
         specifier: ^7.0.2001
@@ -316,7 +316,7 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       prettier:
-        specifier: ^3.9.6
+        specifier: ^3.9.7
         version: 3.9.7
       qs:
         specifier: ^6.16.0
