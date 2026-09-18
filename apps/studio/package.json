@@ -17,7 +17,7 @@
     "@sanity/logos": "workspace:*",
     "@sanity/themer": "workspace:*",
     "@sanity/ui": "workspace:*",
-    "@sanity/vision": "^6.13.1",
+    "@sanity/vision": "^6.15.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "sanity": "catalog:",
