@@ -112,7 +112,7 @@ catalogs:
       version: 0.24.0
     '@sanity/client':
       specifier: ^8.6.1
-      version: 8.6.1
+      version: 8.6.2
     '@sanity/functions':
       specifier: ^1.7.2
       version: 1.7.2
@@ -184,8 +184,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1
       '@changesets/cli':
-        specifier: ^3.0.2
-        version: 3.0.2
+        specifier: ^3.0.3
+        version: 3.0.3
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -215,7 +215,7 @@ importers:
         version: 0.24.0(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))
       '@sanity/client':
         specifier: 'catalog:'
-        version: 8.6.1(vitest@5.0.0)
+        version: 8.6.2(vitest@5.0.0)
       '@sanity/functions':
         specifier: 'catalog:'
         version: 1.7.2(@aws-lite/client@0.23.7)(@aws-lite/dynamodb@0.3.9)(@aws-lite/lambda@0.1.5)(@aws-lite/sns@0.0.8)(@aws-lite/sqs@0.2.4)
@@ -318,7 +318,7 @@ importers:
     devDependencies:
       '@sanity/client':
         specifier: 'catalog:'
-        version: 8.6.1(vitest@5.0.0)
+        version: 8.6.2(vitest@5.0.0)
       '@sanity/icons':
         specifier: workspace:*
         version: link:../../packages/icons
@@ -523,7 +523,7 @@ importers:
     devDependencies:
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
+        version: 0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.150.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.3
@@ -595,13 +595,13 @@ importers:
         version: 2.6.2
       '@sanity/client':
         specifier: 'catalog:'
-        version: 8.6.1(vitest@5.0.0)
+        version: 8.6.2(vitest@5.0.0)
       '@sanity/tsconfig':
         specifier: ^2.2.1
         version: 2.2.1
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
+        version: 0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.150.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
       '@svgr/core':
         specifier: ^8.1.0
         version: 8.1.0(supports-color@8.1.1)(typescript@7.0.2)
@@ -1537,8 +1537,8 @@ packages:
   '@cacheable/utils@2.5.0':
     resolution: {integrity: sha512-buipgOVDkkPXNR5+xBpDw7Zk2n1EvU7qBJCNUcL7rhQ//kfpOXPAvQ511Os0vpLYJ1pZnvudNytkQt2hst3wqA==}
 
-  '@changesets/apply-release-plan@8.1.0':
-    resolution: {integrity: sha512-M93HOGyX3ssg6He3b5NotaHtQVu6uajHS6UIQ28xKt2RzskCy73ayX4I914qBKjTJmrE4YFlELQjfcqxbmGLJw==}
+  '@changesets/apply-release-plan@8.1.1':
+    resolution: {integrity: sha512-nk2Hbq3M9NeHMdaIRBDvawKrQJzXB9sGyBUE5yWnIKtvdcNCPj75zBekJYr0gTT2ecJH3eFeTrc8eisPImcv0Q==}
     engines: {node: ^22.11 || ^24 || >=26}
 
   '@changesets/assemble-release-plan@7.0.0':
@@ -1553,13 +1553,13 @@ packages:
     resolution: {integrity: sha512-QUcrV7878yHlWPXXPA6gqSxNKwtVHCd1K22L7ZAoJw2yGy8K4QvjwOStD75+1Q9KD9ZSUgGS94HuYdd7HOVtpA==}
     engines: {node: ^22.11 || ^24 || >=26}
 
-  '@changesets/cli@3.0.2':
-    resolution: {integrity: sha512-t/omGJj/I+Jv0kmJAkj5cstYEdUQiJnpip2F+2m3F4lQ3kAZ3o8Exep4/Fm1qq4rvw6ovlhJvZNrKdwLJ4lkuQ==}
+  '@changesets/cli@3.0.3':
+    resolution: {integrity: sha512-L1i67bMfkK6iC/kDejuNO4pFgTRcWIObsD6Qof2woP1I4M8tj17DGlcpRaTzTv1DYSP5EMwWdEtR8X0Pj5Jg3Q==}
     engines: {node: ^22.11 || ^24 || >=26, npm: '>=10.9.0', pnpm: '>=10.0.0', yarn: '>=4.5.2'}
     hasBin: true
 
-  '@changesets/config@4.0.0':
-    resolution: {integrity: sha512-mw95/YrkOuhZZxfnVAA4bSXOFUi+KlhzOBTM8C4x777NhUU6HWIl9Z+K+nME+E4PVsv5NQVQwTfiHihAS1A/ow==}
+  '@changesets/config@4.0.1':
+    resolution: {integrity: sha512-PxpxSQLQSLDjceAgRq+4FWlU+HflDIw03mmPVipxoQx9xrXFUjmqTy3SE+n/2t+DqPdpPiLWVr5NRiLZvjyLwg==}
     engines: {node: ^22.11 || ^24 || >=26}
 
   '@changesets/errors@1.0.0':
@@ -10043,9 +10043,9 @@ snapshots:
       hashery: 1.5.1
       keyv: 5.6.0
 
-  '@changesets/apply-release-plan@8.1.0':
+  '@changesets/apply-release-plan@8.1.1':
     dependencies:
-      '@changesets/config': 4.0.0
+      '@changesets/config': 4.0.1
       '@changesets/format': 0.1.2
       '@changesets/git': 4.0.1
       '@changesets/should-skip-package': 1.0.0
@@ -10071,12 +10071,12 @@ snapshots:
       '@changesets/get-github-info': 1.0.1
       '@changesets/types': 7.0.0
 
-  '@changesets/cli@3.0.2':
+  '@changesets/cli@3.0.3':
     dependencies:
-      '@changesets/apply-release-plan': 8.1.0
+      '@changesets/apply-release-plan': 8.1.1
       '@changesets/assemble-release-plan': 7.0.0
       '@changesets/changelog-git': 1.0.0
-      '@changesets/config': 4.0.0
+      '@changesets/config': 4.0.1
       '@changesets/errors': 1.0.0
       '@changesets/get-dependents-graph': 3.0.0
       '@changesets/git': 4.0.1
@@ -10095,7 +10095,7 @@ snapshots:
       semver: 7.8.5
       tinyexec: 1.3.1
 
-  '@changesets/config@4.0.0':
+  '@changesets/config@4.0.1':
     dependencies:
       '@changesets/get-dependents-graph': 3.0.0
       '@changesets/should-skip-package': 1.0.0
@@ -13210,14 +13210,14 @@ snapshots:
       - babel-plugin-macros
       - vite
 
-  '@sanity/tsdown-config@0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))':
+  '@sanity/tsdown-config@0.28.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(@types/node@24.13.3)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.150.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))':
     dependencies:
       '@microsoft/api-extractor': 7.59.1(@types/node@24.13.3)
       '@microsoft/tsdoc-config': 0.18.1
       '@sanity/browserslist-config': 1.0.5
       '@sanity/vanilla-extract-tsdown-plugin': 0.4.0(babel-plugin-macros@3.1.0)(rolldown@1.2.7)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(tsx@4.23.13)(typescript@7.0.2)(unrun@0.3.1))
       '@typescript/typescript6': 6.0.2
-      '@vitejs/plugin-react': 6.1.1(@rolldown/plugin-babel@0.2.4(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(oxc-transform-react@0.149.0)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
+      '@vitejs/plugin-react': 6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(oxc-transform-react@0.150.0)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
       browserslist: 4.28.9
       jsonc-parser: 3.3.1
       lightningcss: 1.33.0
@@ -13229,6 +13229,7 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.29.7(supports-color@8.1.1)
       '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
+      oxc-transform-react: 0.150.0
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -14372,6 +14373,14 @@ snapshots:
       vite: 8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0)
     optionalDependencies:
       '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13))
+      oxc-transform-react: 0.150.0
+
+  '@vitejs/plugin-react@6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13)))(oxc-transform-react@0.150.0)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))':
+    dependencies:
+      '@rolldown/pluginutils': 1.0.1
+      vite: 8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0)
+    optionalDependencies:
+      '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.7)(vite@8.3.0(@types/node@24.13.3)(jiti@2.7.0)(tsx@4.23.13))
       oxc-transform-react: 0.150.0
 
   '@vitejs/plugin-react@6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(vite@8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0)))(oxc-transform-react@0.150.0)(vite@8.3.0(@types/node@24.13.3)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.13)(yaml@2.9.0))':
