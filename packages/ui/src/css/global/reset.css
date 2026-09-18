@@ -57,6 +57,16 @@
   color: inherit;
 }
 
+/* Remove user agent reduced opacity on disabled form elements */
+:where(
+  button,
+  input,
+  select,
+  textarea
+):disabled {
+  opacity: 1;
+}
+
 /* Remove excess space for table borders */
 :where(table) {
   border-collapse: collapse;

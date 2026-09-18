@@ -1,0 +1,55 @@
+.sui-Select {
+  --background-color: var(--backdrop);
+  --border-color: var(--separator-high);
+  --color: var(--foreground-high);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  color: var(--color);
+  appearance: none;
+  inline-size: 100%;
+}
+
+[data-ui="Select-picker-icon"] {
+  --background-color: var(--backdrop);
+  background-color: var(--background-color);
+  pointer-events: none;
+  /* reduce block size by 1px at each end to not interrupt Select’s border */
+  inset-block: 1px;
+}
+
+.sui-Select.sui-error {
+  --border-color: var(--error-separator);
+  --color: var(--error-foreground);
+}
+
+/**
+  * Hover - uses relative border/background colours to darken/lighten in both normal & error state
+  */
+.sui-Select:hover {
+  border-color: light-dark(
+    oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
+    oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
+  );
+}
+
+/**
+  * Disabled
+  */
+.sui-Select:disabled {
+  --background-color: var(--inert-background);
+  --border-color: var(--separator-low);
+  --color: var(--inert-foreground);
+  pointer-events: none;
+}
+
+.sui-Select:disabled ~ [data-ui="Select-picker-icon"] {
+  --background-color: var(--inert-background);
+}
+
+/**
+  * Focus
+  */
+.sui-Select:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
