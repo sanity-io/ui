@@ -54,3 +54,5 @@ export function Select({
     </div>
   )
 }
+
+export type {SelectProps}
