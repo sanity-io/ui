@@ -46,7 +46,6 @@ function ContainerComponent(
  *
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Container = ContainerComponent as unknown as <E extends ElementType = 'div'>(
+export const Container: <E extends ElementType = 'div'>(
   props: ContainerProps<E>,
-) => React.JSX.Element
+) => React.JSX.Element = ContainerComponent

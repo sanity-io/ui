@@ -8,11 +8,11 @@
  *
  * @internal
  */
-export function defineLazyProperty<T extends object, K extends keyof T>(
+export function defineLazyProperty<T extends object, K extends PropertyKey, V>(
   obj: T,
   key: K,
-  factory: () => T[K],
-): void {
+  factory: () => V,
+): asserts obj is T & Record<K, V> {
   Object.defineProperty(obj, key, {
     get() {
       const value = factory()

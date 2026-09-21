@@ -8,7 +8,6 @@ export function responsivePaddingStyle(
 ): CSSObject[][] {
   const {theme} = props
 
-  // oxlint-disable-next-line no-unsafe-type-assertion
   return [
     _getResponsiveSpace(theme, ['padding'], props.$padding),
     _getResponsiveSpace(theme, ['paddingLeft', 'paddingRight'], props.$paddingX),
@@ -17,5 +16,5 @@ export function responsivePaddingStyle(
     _getResponsiveSpace(theme, ['paddingRight'], props.$paddingRight),
     _getResponsiveSpace(theme, ['paddingBottom'], props.$paddingBottom),
     _getResponsiveSpace(theme, ['paddingLeft'], props.$paddingLeft),
-  ].filter(Boolean) as CSSObject[][]
+  ].filter((value): value is CSSObject[] => value !== null)
 }

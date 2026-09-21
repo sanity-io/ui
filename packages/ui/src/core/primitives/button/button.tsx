@@ -186,7 +186,6 @@ function ButtonComponent(
 /**
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Button = ButtonComponent as unknown as <E extends ElementType = 'button'>(
+export const Button: <E extends ElementType = 'button'>(
   props: ButtonProps<E>,
-) => React.JSX.Element
+) => React.JSX.Element = ButtonComponent

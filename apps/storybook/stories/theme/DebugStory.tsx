@@ -12,6 +12,9 @@ import {
 } from '@sanity/ui/theme'
 import {CSSProperties} from 'react'
 
+type CSSPropertiesWithCustomProperties = CSSProperties &
+  Record<`--${string}`, string | number | undefined>
+
 interface Features {
   base: boolean
   button: boolean
@@ -165,19 +168,7 @@ function DebugState() {
       </Flex>
       <Flex style={{gap: 1}}>
         {AVATAR_COLORS.map((color) => (
-          <Box
-            flex={1}
-            key={color}
-            overflow="hidden"
-            padding={1}
-            style={
-              // oxlint-disable-next-line no-unsafe-type-assertion
-              {
-                '--card-fg-color': `var(--card-avatar-${color}-fg-color)`,
-                'backgroundColor': `var(--card-avatar-${color}-bg-color)`,
-              } as any
-            }
-          >
+          <Box flex={1} key={color} overflow="hidden" padding={1} style={getAvatarStyle(color)}>
             <Text size={1} weight="bold">
               A
             </Text>
@@ -188,7 +179,14 @@ function DebugState() {
   )
 }
 
-function getStateVars(state: ThemeColorState_v2) {
+function getAvatarStyle(color: (typeof AVATAR_COLORS)[number]): CSSPropertiesWithCustomProperties {
+  return {
+    '--card-fg-color': `var(--card-avatar-${color}-fg-color)`,
+    'backgroundColor': `var(--card-avatar-${color}-bg-color)`,
+  }
+}
+
+function getStateVars(state: ThemeColorState_v2): CSSPropertiesWithCustomProperties {
   return {
     '--card-accent-fg-color': state.accent.fg,
 
@@ -271,5 +269,5 @@ function getStateVars(state: ThemeColorState_v2) {
 
     'backgroundColor': 'var(--card-bg-color)',
     'color': 'var(--card-fg-color)',
-  } as CSSProperties
+  }
 }
