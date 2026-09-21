@@ -20,12 +20,18 @@ const originalMatchMedia = window.matchMedia
 
 describe('usePrefersReducedMotion SSR hydration', () => {
   beforeAll(() => {
-    window.matchMedia = (query) => {
-      const mediaQueryList = originalMatchMedia(query)
-      Object.defineProperty(mediaQueryList, 'matches', {value: true})
-
-      return mediaQueryList
-    }
+    window.matchMedia = (query) => ({
+      addEventListener: vi.fn(),
+      // oxlint-disable-next-line no-deprecated -- MediaQueryList requires this legacy method
+      addListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+      matches: true,
+      media: query,
+      onchange: null,
+      removeEventListener: vi.fn(),
+      // oxlint-disable-next-line no-deprecated -- MediaQueryList requires this legacy method
+      removeListener: vi.fn(),
+    })
   })
 
   afterAll(() => {
