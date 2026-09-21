@@ -34,6 +34,8 @@ const TILE_TONES = {dark: 'default', light: 'transparent'} as const
 
 const LOADING_STYLE = {transform: 'scale(calc(100vw / 640px))'}
 
+const SEARCH_STYLE = {paddingInline: 'calc(100vw / 6)', transform: 'scale(calc(100vw / 640px))'}
+
 function useVariantHotkeys(): void {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -69,7 +71,7 @@ function SearchTile({scheme, ui}: TileProps) {
 
   return (
     <Card height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
-      <Flex align="center" height="fill" padding={4} sizing="border">
+      <Flex align="center" height="fill" padding={4} sizing="border" style={SEARCH_STYLE}>
         <Box flex={1}>
           <Autocomplete
             fontSize={4}
