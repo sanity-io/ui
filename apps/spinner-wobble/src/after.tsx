@@ -6,7 +6,17 @@ import '@sanity/ui-fixed/styles.css'
 
 import {Scene, type UiKit} from './scene'
 
-const ui: UiKit = {Autocomplete, Box, Card, Flex, Grid, Spinner, Text, ThemeProvider, buildTheme}
+const ui: UiKit = {
+  Autocomplete,
+  Box,
+  Card,
+  Flex,
+  Grid,
+  Spinner,
+  Text,
+  ThemeProvider,
+  theme: buildTheme(),
+}
 
 export default function After() {
   return <Scene title="After · @sanity/ui 4.2.1" ui={ui} />

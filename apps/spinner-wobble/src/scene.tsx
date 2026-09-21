@@ -1,7 +1,7 @@
 import type {Box, Card, Flex, Grid, Spinner, Text, ThemeProvider} from '@sanity/ui-fixed'
 import type {Autocomplete} from '@sanity/ui-fixed/autocomplete'
-import type {buildTheme, RootTheme, ThemeFontSize} from '@sanity/ui-fixed/theme'
-import {useEffect, useMemo, useState} from 'react'
+import type {RootTheme} from '@sanity/ui-fixed/theme'
+import {useEffect, useState} from 'react'
 
 import styles from './scene.module.css'
 
@@ -16,7 +16,7 @@ export interface UiKit {
   Spinner: typeof Spinner
   Text: typeof Text
   ThemeProvider: typeof ThemeProvider
-  buildTheme: typeof buildTheme
+  theme: RootTheme
 }
 
 type Scheme = 'light' | 'dark'
@@ -31,40 +31,7 @@ const STAGE_HEIGHT = 360
 
 const VARIANT_KEYS: Record<string, string> = {a: 'after', b: 'before'}
 
-// Icon sizes stay odd on purpose: the Safari wobble is a 1px snap while an
-// odd-length spinner rotates, and `round(1em, 2px)` in 4.2.1 lands on an even
-// length. These are the default text sizes scaled up so that snap still reads
-// once a 16:9 capture is shown at 620px.
-const TEXT_SIZES: Partial<Record<number, ThemeFontSize>> = {
-  1: {
-    ascenderHeight: 11,
-    descenderHeight: 11,
-    fontSize: 27,
-    iconSize: 45,
-    letterSpacing: 0,
-    lineHeight: 41,
-  },
-  2: {
-    ascenderHeight: 13,
-    descenderHeight: 13,
-    fontSize: 33,
-    iconSize: 55,
-    letterSpacing: 0,
-    lineHeight: 51,
-  },
-}
-
-function createTheme(buildTheme: UiKit['buildTheme']): RootTheme {
-  const font = buildTheme().v2?.font
-
-  if (!font) {
-    throw new Error('Expected a v2 @sanity/ui theme')
-  }
-
-  const sizes = font.text.sizes.map((size, index) => TEXT_SIZES[index] ?? size)
-
-  return buildTheme({font: {...font, text: {...font.text, sizes}}})
-}
+const TILE_TONES = {dark: 'default', light: 'transparent'} as const
 
 // Snap the scale to whole device pixels so the 1px grid lines stay crisp.
 function fitScale(): number {
@@ -110,27 +77,27 @@ function LoadingTile({scheme, ui}: TileProps) {
   const {Card, Flex, Spinner, Text} = ui
 
   return (
-    <Card className={styles.blueprint} height="fill" scheme={scheme} tone="transparent">
-      <Flex align="center" gap={4} height="fill" justify="center">
-        <Spinner size={2} />
-        <Text size={2}>Loading&hellip;</Text>
+    <Card className={styles.blueprint} height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
+      <Flex align="center" gap={3} height="fill" justify="center">
+        <Spinner size={3} />
+        <Text size={3}>Loading&hellip;</Text>
       </Flex>
     </Card>
   )
 }
 
+// Same field as the icons.sanity.dev search: default size and padding, radius
+// 2, and the spinner in the leading icon slot while results load.
 function SearchTile({scheme, ui}: TileProps) {
   const {Autocomplete, Box, Card, Flex, Spinner} = ui
 
   return (
-    <Card height="fill" scheme={scheme} tone="transparent">
-      <Flex align="center" height="fill" padding={4}>
+    <Card height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
+      <Flex align="center" height="fill" padding={4} sizing="border">
         <Box className={styles.search} flex={1}>
           <Autocomplete
-            fontSize={1}
-            icon={<Spinner size={1} />}
+            icon={<Spinner />}
             id={`search-${scheme}`}
-            padding={4}
             radius={2}
             value="Searching&hellip;"
           />
@@ -141,8 +108,7 @@ function SearchTile({scheme, ui}: TileProps) {
 }
 
 export function Scene({title, ui}: {title: string; ui: UiKit}) {
-  const {Card, Flex, Grid, ThemeProvider} = ui
-  const theme = useMemo(() => createTheme(ui.buildTheme), [ui])
+  const {Card, Flex, Grid, ThemeProvider, theme} = ui
   const scale = useFitScale()
 
   useHotkeys()

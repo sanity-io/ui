@@ -6,7 +6,17 @@ import '@sanity/ui-wobbly/styles.css'
 
 import {Scene, type UiKit} from './scene'
 
-const ui: UiKit = {Autocomplete, Box, Card, Flex, Grid, Spinner, Text, ThemeProvider, buildTheme}
+const ui: UiKit = {
+  Autocomplete,
+  Box,
+  Card,
+  Flex,
+  Grid,
+  Spinner,
+  Text,
+  ThemeProvider,
+  theme: buildTheme(),
+}
 
 export default function Before() {
   return <Scene title="Before · @sanity/ui 4.2.0" ui={ui} />

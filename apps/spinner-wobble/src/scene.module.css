@@ -24,3 +24,16 @@
 .search {
   pointer-events: none;
 }
+
+/* TextInput already wraps its icon in a Text, so collapse the one Spinner adds
+   around its SVG. Otherwise the cap-height trimming runs twice and the icon
+   drifts off the text's centre line. The extra ancestor outranks the
+   library's `:not([hidden]) { display: block }`. */
+.search [data-ui='TextInput'] [data-ui='Spinner'] {
+  display: contents;
+}
+
+.search [data-ui='TextInput'] [data-ui='Spinner']::before,
+.search [data-ui='TextInput'] [data-ui='Spinner']::after {
+  content: none;
+}
