@@ -45,7 +45,7 @@ function createTintsFromHue(hue: Hue, title: string): ColorTints {
     '800': createTint('800'),
     '900': createTint('900'),
     '950': createTint('950'),
-  }
+  } satisfies ColorTints
 }
 
 function getColorHex(hue: Hue, tint: string): string {
