@@ -1,4 +1,4 @@
-import type {Box, Card, Flex, Grid, Spinner, Text, ThemeProvider} from '@sanity/ui-fixed'
+import type {Box, Card, Flex, Grid, Inline, Spinner, Text, ThemeProvider} from '@sanity/ui-fixed'
 import type {Autocomplete} from '@sanity/ui-fixed/autocomplete'
 import type {RootTheme} from '@sanity/ui-fixed/theme'
 import {useEffect, useState} from 'react'
@@ -13,6 +13,7 @@ export interface UiKit {
   Card: typeof Card
   Flex: typeof Flex
   Grid: typeof Grid
+  Inline: typeof Inline
   Spinner: typeof Spinner
   Text: typeof Text
   ThemeProvider: typeof ThemeProvider
@@ -74,13 +75,15 @@ function useHotkeys(): void {
 }
 
 function LoadingTile({scheme, ui}: TileProps) {
-  const {Card, Flex, Spinner, Text} = ui
+  const {Card, Flex, Inline, Spinner, Text} = ui
 
   return (
     <Card className={styles.blueprint} height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
-      <Flex align="center" gap={3} height="fill" justify="center">
-        <Spinner size={3} />
-        <Text size={3}>Loading&hellip;</Text>
+      <Flex align="center" height="fill" justify="center">
+        <Inline gap={3}>
+          <Spinner size={3} />
+          <Text size={3}>Loading&hellip;</Text>
+        </Inline>
       </Flex>
     </Card>
   )

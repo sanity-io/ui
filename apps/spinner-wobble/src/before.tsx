@@ -1,4 +1,4 @@
-import {Box, Card, Flex, Grid, Spinner, Text, ThemeProvider} from '@sanity/ui-wobbly'
+import {Box, Card, Flex, Grid, Inline, Spinner, Text, ThemeProvider} from '@sanity/ui-wobbly'
 import {Autocomplete} from '@sanity/ui-wobbly/autocomplete'
 import {buildTheme} from '@sanity/ui-wobbly/theme'
 
@@ -12,6 +12,7 @@ const ui: UiKit = {
   Card,
   Flex,
   Grid,
+  Inline,
   Spinner,
   Text,
   ThemeProvider,

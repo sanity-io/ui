@@ -1,4 +1,4 @@
-import {Box, Card, Flex, Grid, Spinner, Text, ThemeProvider} from '@sanity/ui-fixed'
+import {Box, Card, Flex, Grid, Inline, Spinner, Text, ThemeProvider} from '@sanity/ui-fixed'
 import {Autocomplete} from '@sanity/ui-fixed/autocomplete'
 import {buildTheme} from '@sanity/ui-fixed/theme'
 
@@ -12,6 +12,7 @@ const ui: UiKit = {
   Card,
   Flex,
   Grid,
+  Inline,
   Spinner,
   Text,
   ThemeProvider,
