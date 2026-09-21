@@ -20,5 +20,5 @@ const ui: UiKit = {
 }
 
 export default function After() {
-  return <Scene title="After · @sanity/ui 4.2.1" ui={ui} />
+  return <Scene ui={ui} />
 }

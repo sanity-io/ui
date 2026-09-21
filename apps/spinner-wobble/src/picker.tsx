@@ -14,8 +14,7 @@ export default function Picker() {
             <Stack gap={3}>
               <Heading size={3}>Safari spinner wobble</Heading>
               <Text muted size={2}>
-                Pick a version, then press <KBD>f</KBD> for fullscreen while recording.
-                <KBD>b</KBD> and <KBD>a</KBD> switch between them.
+                Pick a version. <KBD>b</KBD> and <KBD>a</KBD> switch between them.
               </Text>
             </Stack>
             <Flex gap={3}>

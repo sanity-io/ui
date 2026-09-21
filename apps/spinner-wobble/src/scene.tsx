@@ -1,7 +1,7 @@
 import type {Box, Card, Flex, Grid, Inline, Spinner, Text, ThemeProvider} from '@sanity/ui-fixed'
 import type {Autocomplete} from '@sanity/ui-fixed/autocomplete'
 import type {RootTheme} from '@sanity/ui-fixed/theme'
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 
 import styles from './scene.module.css'
 
@@ -27,45 +27,17 @@ interface TileProps {
   ui: UiKit
 }
 
-const STAGE_WIDTH = 640
-const STAGE_HEIGHT = 360
-
 const VARIANT_KEYS: Record<string, string> = {a: 'after', b: 'before'}
 
 const TILE_TONES = {dark: 'default', light: 'transparent'} as const
 
-// Snap the scale to whole device pixels so the 1px grid lines stay crisp.
-function fitScale(): number {
-  const dpr = window.devicePixelRatio || 1
-  const raw = Math.min(window.innerWidth / STAGE_WIDTH, window.innerHeight / STAGE_HEIGHT)
-
-  return Math.max(1 / dpr, Math.floor(raw * dpr) / dpr)
-}
-
-function useFitScale(): number {
-  const [scale, setScale] = useState(fitScale)
-
-  useEffect(() => {
-    const update = () => setScale(fitScale())
-
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [])
-
-  return scale
-}
-
-function useHotkeys(): void {
+function useVariantHotkeys(): void {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       const variant = VARIANT_KEYS[event.key]
 
       if (variant) {
         window.location.search = `?variant=${variant}`
-      } else if (event.key === 'f') {
-        void (document.fullscreenElement
-          ? document.exitFullscreen()
-          : document.documentElement.requestFullscreen())
       }
     }
 
@@ -97,7 +69,7 @@ function SearchTile({scheme, ui}: TileProps) {
   return (
     <Card height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
       <Flex align="center" height="fill" padding={4} sizing="border">
-        <Box className={styles.search} flex={1}>
+        <Box flex={1}>
           <Autocomplete
             icon={<Spinner />}
             id={`search-${scheme}`}
@@ -110,33 +82,19 @@ function SearchTile({scheme, ui}: TileProps) {
   )
 }
 
-export function Scene({title, ui}: {title: string; ui: UiKit}) {
-  const {Card, Flex, Grid, ThemeProvider, theme} = ui
-  const scale = useFitScale()
+export function Scene({ui}: {ui: UiKit}) {
+  const {Grid, ThemeProvider, theme} = ui
 
-  useHotkeys()
-
-  useEffect(() => {
-    document.title = title
-  }, [title])
+  useVariantHotkeys()
 
   return (
     <ThemeProvider theme={theme}>
-      <Card height="fill" scheme="dark">
-        <Flex align="center" height="fill" justify="center">
-          <Grid
-            className={styles.stage}
-            gridTemplateColumns={2}
-            gridTemplateRows={2}
-            style={{transform: `scale(${scale})`}}
-          >
-            <LoadingTile scheme="dark" ui={ui} />
-            <SearchTile scheme="light" ui={ui} />
-            <LoadingTile scheme="light" ui={ui} />
-            <SearchTile scheme="dark" ui={ui} />
-          </Grid>
-        </Flex>
-      </Card>
+      <Grid gridTemplateColumns={2} gridTemplateRows={2} height="fill">
+        <LoadingTile scheme="dark" ui={ui} />
+        <SearchTile scheme="light" ui={ui} />
+        <LoadingTile scheme="light" ui={ui} />
+        <SearchTile scheme="dark" ui={ui} />
+      </Grid>
     </ThemeProvider>
   )
 }

@@ -20,5 +20,5 @@ const ui: UiKit = {
 }
 
 export default function Before() {
-  return <Scene title="Before · @sanity/ui 4.2.0" ui={ui} />
+  return <Scene ui={ui} />
 }

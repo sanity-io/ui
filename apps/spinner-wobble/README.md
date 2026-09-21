@@ -25,8 +25,6 @@ pnpm --filter spinner-wobble dev
 - http://localhost:5199/?variant=before
 - http://localhost:5199/?variant=after
 
-Record in Safari — other engines do not wobble. The checkerboard is a 640×360
-stage (16:9) scaled to fit the window in whole device pixels. That composition
-is what a 620px-wide blog embed shows, so the odd-pixel snap stays about one
-pixel instead of being shrunk away. Press `f` for fullscreen, `b` / `a` to
-switch versions.
+Record in Safari — other engines do not wobble. The checkerboard stretches to
+the viewport, so size the window 16:9 before recording. `b` / `a` switch
+versions.
