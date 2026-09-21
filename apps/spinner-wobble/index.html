@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spinner wobble — recording rig</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #111;
+        color: #f6f6f8;
+      }
+
+      main {
+        box-sizing: border-box;
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 4rem;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+        font-weight: 560;
+        letter-spacing: -0.03em;
+        margin: 0 0 0.75rem;
+      }
+
+      p {
+        line-height: 1.5;
+        color: #c1c4cb;
+      }
+
+      code {
+        font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        font-size: 0.92em;
+        color: #f6f6f8;
+      }
+
+      .links {
+        display: grid;
+        gap: 0.75rem;
+        margin: 2rem 0;
+      }
+
+      a.tile {
+        display: block;
+        padding: 1rem 1.1rem;
+        border: 1px solid #2e323b;
+        border-radius: 0.6rem;
+        color: inherit;
+        text-decoration: none;
+        background: #1a1d24;
+      }
+
+      a.tile strong {
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+
+      a.tile span {
+        color: #9aa0ab;
+      }
+
+      a.tile:hover {
+        border-color: #5c6472;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Safari spinner wobble</h1>
+      <p>
+        Two copies of <code>@sanity/ui</code> are installed. <code>4.2.0</code> is the last
+        published release without the Safari fix. <code>4.2.1</code> is the current
+        <code>latest</code> release, which sizes the spinner with <code>round(1em, 2px)</code>.
+      </p>
+      <p>
+        Record each page in Safari. The checkerboard is a 640×360 stage (16:9) scaled to the window,
+        so a capture shown at 620px on the blog still carries about a pixel of wobble. Resize the
+        window to 16:9, or press <code>f</code> for fullscreen and crop to the checkerboard.
+        <code>b</code> and <code>a</code> switch versions.
+      </p>
+      <div class="links">
+        <a class="tile" href="/before.html">
+          <strong>Before · 4.2.0</strong>
+          <span>Wobbly spinner</span>
+        </a>
+        <a class="tile" href="/after.html">
+          <strong>After · 4.2.1</strong>
+          <span>Stable spinner</span>
+        </a>
+      </div>
+    </main>
+  </body>
+</html>

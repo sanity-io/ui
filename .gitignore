@@ -1,4 +1,6 @@
 *.tgz
+# Published @sanity/ui builds used by the spinner recording rig.
+!apps/spinner-wobble/vendor/*.tgz
 
 .DS_Store
 .env.local

@@ -425,6 +425,40 @@ importers:
         specifier: 'catalog:'
         version: 8.3.0(@types/node@24.13.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1)
 
+  apps/spinner-wobble:
+    dependencies:
+      '@sanity/ui-fixed':
+        specifier: file:./vendor/ui-4.2.1.tgz
+        version: file:apps/spinner-wobble/vendor/ui-4.2.1.tgz(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
+      '@sanity/ui-wobbly':
+        specifier: file:./vendor/ui-4.2.0.tgz
+        version: file:apps/spinner-wobble/vendor/ui-4.2.0.tgz(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
+      react:
+        specifier: ^19.3.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.3.0
+        version: 19.3.0(react@19.3.0)
+      styled-components:
+        specifier: 'catalog:'
+        version: 6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+    devDependencies:
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: ^19.3.0
+        version: 19.3.0(@types/react@19.3.0)
+      '@vitejs/plugin-react':
+        specifier: 'catalog:'
+        version: 6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(@types/node@24.13.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1)))(oxc-transform-react@0.150.0)(vite@8.3.0(@types/node@24.13.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
+      vite:
+        specifier: 'catalog:'
+        version: 8.3.0(@types/node@24.13.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1)
+
   apps/storybook:
     devDependencies:
       '@sanity/color':
@@ -4373,6 +4407,24 @@ packages:
     engines: {node: '>=22.12'}
     peerDependencies:
       '@types/react': ^19.3.0
+
+  '@sanity/ui-fixed@file:apps/spinner-wobble/vendor/ui-4.2.1.tgz':
+    resolution: {integrity: sha512-87s128/vs0Y4LgFg49Sel2KdOrtUD2DlPKGJZTSrJMr2kq3GDrZdB6zQGxKWEJ/+71c7R5XJfQrsBC4h+pM/3A==, tarball: file:apps/spinner-wobble/vendor/ui-4.2.1.tgz}
+    version: 4.2.1
+    engines: {node: '>=22.12'}
+    peerDependencies:
+      react: ^19.3.0
+      react-dom: ^19.3.0
+      styled-components: ^6.1
+
+  '@sanity/ui-wobbly@file:apps/spinner-wobble/vendor/ui-4.2.0.tgz':
+    resolution: {integrity: sha512-ihWhEFQ2aTpH1D8gDqDYRs/nMxKNns9OCGwi1UJ9yZOawhINlf/2iOuAD9nq8amaXdDK4Wwt4z9GTx422+J8CA==, tarball: file:apps/spinner-wobble/vendor/ui-4.2.0.tgz}
+    version: 4.2.0
+    engines: {node: '>=22.12'}
+    peerDependencies:
+      react: ^19.3.0
+      react-dom: ^19.3.0
+      styled-components: ^6.1
 
   '@sanity/ui@5.0.0-alpha.10':
     resolution: {integrity: sha512-CSfdb+UXaZksNqSg2YwIDg+dEkhULn94CvnG63ClmEPnloidMJwxndmImm2ipeQ6uzQjei7XOj95XFxgGrA9iw==}
@@ -12664,6 +12716,38 @@ snapshots:
       '@types/react': 19.3.0
     transitivePeerDependencies:
       - vitest
+
+  '@sanity/ui-fixed@file:apps/spinner-wobble/vendor/ui-4.2.1.tgz(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))':
+    dependencies:
+      '@floating-ui/react-dom': 2.1.9(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@sanity/color': link:packages/color
+      '@sanity/icons': link:packages/icons
+      '@vanilla-extract/dynamic': 2.1.5
+      clsx: 2.1.1
+      csstype: 3.2.3
+      motion: 13.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
+      react-is: 19.3.0
+      react-refractor: 4.0.0(react@19.3.0)
+      styled-components: 6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      use-effect-event: 2.0.4(react@19.3.0)
+
+  '@sanity/ui-wobbly@file:apps/spinner-wobble/vendor/ui-4.2.0.tgz(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))':
+    dependencies:
+      '@floating-ui/react-dom': 2.1.9(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      '@sanity/color': link:packages/color
+      '@sanity/icons': link:packages/icons
+      '@vanilla-extract/dynamic': 2.1.5
+      clsx: 2.1.1
+      csstype: 3.2.3
+      motion: 13.4.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
+      react-is: 19.3.0
+      react-refractor: 4.0.0(react@19.3.0)
+      styled-components: 6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      use-effect-event: 2.0.4(react@19.3.0)
 
   '@sanity/ui@5.0.0-alpha.10(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:

@@ -9,6 +9,9 @@
     },
     "apps/docs": {},
     "apps/icons": {},
+    "apps/spinner-wobble": {
+      "entry": ["src/before.tsx", "src/after.tsx"],
+    },
     "apps/studio": {
       // The one-shot DS-276 docs export script is run via unrun, which knip
       // does not recognize as a script runner
