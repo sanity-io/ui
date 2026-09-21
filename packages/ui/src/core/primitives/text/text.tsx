@@ -81,4 +81,5 @@ function TextComponent(
  *
  * @public
  */
-export const Text = TextComponent
+export const Text: <E extends ElementType = 'div'>(props: TextProps<E>) => React.JSX.Element =
+  TextComponent

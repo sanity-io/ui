@@ -192,4 +192,6 @@ const MenuItemComponent = function MenuItem(
 /**
  * @public
  */
-export const MenuItem = MenuItemComponent
+export const MenuItem: <E extends ElementType = 'button'>(
+  props: MenuItemProps<E>,
+) => React.JSX.Element = MenuItemComponent

@@ -231,4 +231,6 @@ const MenuGroupComponent = function MenuGroup(
 /**
  * @public
  */
-export const MenuGroup = MenuGroupComponent
+export const MenuGroup: <E extends ElementType = 'button'>(
+  props: MenuGroupProps<E>,
+) => React.JSX.Element = MenuGroupComponent

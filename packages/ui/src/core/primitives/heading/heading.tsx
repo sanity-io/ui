@@ -82,4 +82,5 @@ function HeadingComponent(
  *
  * @public
  */
-export const Heading = HeadingComponent
+export const Heading: <E extends ElementType = 'div'>(props: HeadingProps<E>) => React.JSX.Element =
+  HeadingComponent

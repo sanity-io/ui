@@ -117,4 +117,5 @@ function CardComponent(
  *
  * @public
  */
-export const Card = CardComponent
+export const Card: <E extends ElementType = 'div'>(props: CardProps<E>) => React.JSX.Element =
+  CardComponent

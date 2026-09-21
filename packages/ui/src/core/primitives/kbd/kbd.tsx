@@ -63,4 +63,5 @@ function KBDComponent(
  *
  * @public
  */
-export const KBD = KBDComponent
+export const KBD: <E extends ElementType = 'kbd'>(props: KBDProps<E>) => React.JSX.Element =
+  KBDComponent

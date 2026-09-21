@@ -46,4 +46,6 @@ function ContainerComponent(
  *
  * @public
  */
-export const Container = ContainerComponent
+export const Container: <E extends ElementType = 'div'>(
+  props: ContainerProps<E>,
+) => React.JSX.Element = ContainerComponent

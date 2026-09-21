@@ -186,4 +186,6 @@ function ButtonComponent(
 /**
  * @public
  */
-export const Button = ButtonComponent
+export const Button: <E extends ElementType = 'button'>(
+  props: ButtonProps<E>,
+) => React.JSX.Element = ButtonComponent

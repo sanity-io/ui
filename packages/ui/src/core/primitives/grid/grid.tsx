@@ -66,4 +66,5 @@ function GridComponent(
  *
  * @public
  */
-export const Grid = GridComponent
+export const Grid: <E extends ElementType = 'div'>(props: GridProps<E>) => React.JSX.Element =
+  GridComponent

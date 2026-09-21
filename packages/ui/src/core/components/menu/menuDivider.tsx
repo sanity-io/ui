@@ -32,4 +32,6 @@ function MenuDividerComponent(
 /**
  * @public
  */
-export const MenuDivider = MenuDividerComponent
+export const MenuDivider: <E extends ElementType = 'hr'>(
+  props: MenuDividerProps<E>,
+) => React.JSX.Element = MenuDividerComponent

@@ -136,4 +136,5 @@ const BoxComponent = function Box(
  *
  * @public
  */
-export const Box = BoxComponent
+export const Box: <E extends ElementType = 'div'>(props: BoxProps<E>) => React.JSX.Element =
+  BoxComponent

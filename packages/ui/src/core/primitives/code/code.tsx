@@ -54,4 +54,5 @@ function CodeComponent(
 /**
  * @public
  */
-export const Code = CodeComponent
+export const Code: <E extends ElementType = 'pre'>(props: CodeProps<E>) => React.JSX.Element =
+  CodeComponent

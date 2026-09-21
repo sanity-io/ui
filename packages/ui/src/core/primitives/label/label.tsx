@@ -83,4 +83,5 @@ function LabelComponent(
  *
  * @public
  */
-export const Label = LabelComponent
+export const Label: <E extends ElementType = 'div'>(props: LabelProps<E>) => React.JSX.Element =
+  LabelComponent

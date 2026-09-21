@@ -20,16 +20,12 @@ const originalMatchMedia = window.matchMedia
 
 describe('usePrefersDark SSR hydration', () => {
   beforeAll(() => {
-    window.matchMedia = (query) => ({
-      addEventListener: vi.fn(),
-      addListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-      matches: true,
-      media: query,
-      onchange: null,
-      removeEventListener: vi.fn(),
-      removeListener: vi.fn(),
-    })
+    window.matchMedia = (query) => {
+      const mediaQueryList = originalMatchMedia(query)
+      Object.defineProperty(mediaQueryList, 'matches', {value: true})
+
+      return mediaQueryList
+    }
   })
 
   afterAll(() => {
