@@ -231,7 +231,4 @@ const MenuGroupComponent = function MenuGroup(
 /**
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const MenuGroup = MenuGroupComponent as unknown as <E extends ElementType = 'button'>(
-  props: MenuGroupProps<E>,
-) => React.JSX.Element
+export const MenuGroup = MenuGroupComponent

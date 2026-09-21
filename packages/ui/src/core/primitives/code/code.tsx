@@ -54,7 +54,4 @@ function CodeComponent(
 /**
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Code = CodeComponent as unknown as <E extends ElementType = 'pre'>(
-  props: CodeProps<E>,
-) => React.JSX.Element
+export const Code = CodeComponent

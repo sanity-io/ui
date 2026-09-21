@@ -117,7 +117,4 @@ function CardComponent(
  *
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Card = CardComponent as unknown as <E extends ElementType = 'div'>(
-  props: CardProps<E>,
-) => React.JSX.Element
+export const Card = CardComponent

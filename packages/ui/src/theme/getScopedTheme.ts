@@ -38,7 +38,6 @@ export function getScopedTheme(
   // oxlint-disable-next-line no-deprecated
   const {color: _v0Color, ...v0Rest} = v0
 
-  // oxlint-disable-next-line no-unsafe-type-assertion
   const sanity = {
     ...v0Rest,
     // oxlint-disable-next-line no-deprecated
@@ -49,7 +48,7 @@ export function getScopedTheme(
       color: color_v2_9,
       layer: layer_v2,
     },
-  } as Theme['sanity']
+  } satisfies Omit<Theme['sanity'], 'color'>
 
   // Defer v0 color computation — only resolved if legacy code reads theme.sanity.color
   defineLazyProperty(sanity, 'color', () => {

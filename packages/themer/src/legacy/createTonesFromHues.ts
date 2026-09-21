@@ -1,4 +1,4 @@
-import {COLOR_TINTS, ColorTints} from '@sanity/color'
+import {ColorTint, ColorTintKey, ColorTints} from '@sanity/color'
 
 import {mix} from '../lib/mix'
 import {Hue, Hues} from './types'
@@ -26,15 +26,26 @@ export function createTonesFromHues(hues: Hues): {
 }
 
 function createTintsFromHue(hue: Hue, title: string): ColorTints {
-  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- the reduce assigns every COLOR_TINTS key, so the Partial is complete
-  return COLOR_TINTS.reduce<Partial<ColorTints>>((tints, tint) => {
-    tints[tint] = {
+  const createTint = (tint: ColorTintKey): ColorTint => {
+    return {
       title: `${title} ${tint}`,
       hex: getColorHex(hue, tint),
     }
+  }
 
-    return tints
-  }, {}) as ColorTints
+  return {
+    '50': createTint('50'),
+    '100': createTint('100'),
+    '200': createTint('200'),
+    '300': createTint('300'),
+    '400': createTint('400'),
+    '500': createTint('500'),
+    '600': createTint('600'),
+    '700': createTint('700'),
+    '800': createTint('800'),
+    '900': createTint('900'),
+    '950': createTint('950'),
+  }
 }
 
 function getColorHex(hue: Hue, tint: string): string {

@@ -136,7 +136,4 @@ const BoxComponent = function Box(
  *
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Box = BoxComponent as unknown as <E extends ElementType = 'div'>(
-  props: BoxProps<E>,
-) => React.JSX.Element
+export const Box = BoxComponent

@@ -66,7 +66,4 @@ function GridComponent(
  *
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Grid = GridComponent as unknown as <E extends ElementType = 'div'>(
-  props: GridProps<E>,
-) => React.JSX.Element
+export const Grid = GridComponent

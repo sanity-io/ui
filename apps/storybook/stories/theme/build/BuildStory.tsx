@@ -149,16 +149,13 @@ function StatePreview(props: {theme: ThemeColorState_v2}) {
 
   return (
     <div
-      style={
-        // oxlint-disable-next-line no-unsafe-type-assertion
-        {
-          ...getCSSProps({card}),
+      style={{
+        ...getCSSProps({card}),
 
-          display: 'flex',
-          flexDirection: 'column',
-          marginTop: -1,
-        } as any
-      }
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: -1,
+      }}
     >
       <div
         style={{
@@ -437,16 +434,13 @@ function InputPreview(props: {mode: ThemeColorInputModeKey; theme: ThemeColorInp
 
   return (
     <div
-      style={
-        // oxlint-disable-next-line no-unsafe-type-assertion
-        {
-          ...getCSSProps({input}),
+      style={{
+        ...getCSSProps({input}),
 
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 8,
-        } as any
-      }
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 8,
+      }}
     >
       <div
         className="input"

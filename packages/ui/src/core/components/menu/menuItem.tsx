@@ -192,7 +192,4 @@ const MenuItemComponent = function MenuItem(
 /**
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const MenuItem = MenuItemComponent as unknown as <E extends ElementType = 'button'>(
-  props: MenuItemProps<E>,
-) => React.JSX.Element
+export const MenuItem = MenuItemComponent

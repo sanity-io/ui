@@ -20,13 +20,16 @@ const originalMatchMedia = window.matchMedia
 
 describe('usePrefersDark SSR hydration', () => {
   beforeAll(() => {
-    window.matchMedia = () =>
-      // oxlint-disable-next-line no-unsafe-type-assertion
-      ({
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        matches: true,
-      }) as any
+    window.matchMedia = (query) => ({
+      addEventListener: vi.fn(),
+      addListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+      matches: true,
+      media: query,
+      onchange: null,
+      removeEventListener: vi.fn(),
+      removeListener: vi.fn(),
+    })
   })
 
   afterAll(() => {

@@ -82,7 +82,6 @@ export function buttonColorStyles(
   // const defaultBoxShadow = `inset 0px -1.5px 0px ${buttonTheme.border.width}px color-mix(in srgb, var(--card-border-color) 25%, var(--card-bg-color))`
   const defaultBoxShadow = undefined
 
-  // oxlint-disable-next-line no-unsafe-type-assertion
   return [
     _cardColorStyle(baseColor, color.enabled),
     {
@@ -117,5 +116,5 @@ export function buttonColorStyles(
       },
     },
     style?.button?.root,
-  ].filter(Boolean) as CSSObject[]
+  ].filter((value): value is CSSObject => Boolean(value))
 }

@@ -81,7 +81,4 @@ function TextComponent(
  *
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Text = TextComponent as unknown as <E extends ElementType = 'div'>(
-  props: TextProps<E>,
-) => React.JSX.Element
+export const Text = TextComponent

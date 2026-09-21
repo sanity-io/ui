@@ -32,7 +32,4 @@ function MenuDividerComponent(
 /**
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const MenuDivider = MenuDividerComponent as unknown as <E extends ElementType = 'hr'>(
-  props: MenuDividerProps<E>,
-) => React.JSX.Element
+export const MenuDivider = MenuDividerComponent

@@ -8,7 +8,6 @@ export function responsiveMarginStyle(
 ): CSSObject[][] {
   const {theme} = props
 
-  // oxlint-disable-next-line no-unsafe-type-assertion
   return [
     _getResponsiveSpace(theme, ['margin'], props.$margin),
     _getResponsiveSpace(theme, ['marginLeft', 'marginRight'], props.$marginX),
@@ -17,5 +16,5 @@ export function responsiveMarginStyle(
     _getResponsiveSpace(theme, ['marginRight'], props.$marginRight),
     _getResponsiveSpace(theme, ['marginBottom'], props.$marginBottom),
     _getResponsiveSpace(theme, ['marginLeft'], props.$marginLeft),
-  ].filter(Boolean) as CSSObject[][]
+  ].filter((value): value is CSSObject[] => value !== null)
 }

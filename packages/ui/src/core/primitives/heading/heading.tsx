@@ -82,7 +82,4 @@ function HeadingComponent(
  *
  * @public
  */
-// oxlint-disable-next-line no-unsafe-type-assertion
-export const Heading = HeadingComponent as unknown as <E extends ElementType = 'div'>(
-  props: HeadingProps<E>,
-) => React.JSX.Element
+export const Heading = HeadingComponent
