@@ -45,7 +45,7 @@ export function Select({
       </select>
       <div
         className={iconClasses}
-        data-ui="Select-picker-icon"
+        data-ui="Select-picker-icon-slot"
         style={{positionAnchor: anchorName}}
       >
         <Icon icon={SelectIcon} size={1} />

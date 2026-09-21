@@ -8,7 +8,7 @@
   color: var(--color);
 }
 
-[data-ui="Select-picker-icon"] {
+[data-ui="Select-picker-icon-slot"] {
   --background-color: var(--backdrop);
   background-color: var(--background-color);
   pointer-events: none;
@@ -18,9 +18,16 @@
   right: calc(anchor(right) + 2px);
 }
 
+/**
+  * Error
+  */
 .sui-Select.sui-error {
   --border-color: var(--error-separator);
   --color: var(--error-foreground);
+}
+
+.sui-Select.sui-error + [data-ui="Select-picker-icon-slot"] svg {
+  color: var(--error-foreground);
 }
 
 /**
@@ -43,8 +50,12 @@
   pointer-events: none;
 }
 
-.sui-Select:disabled + [data-ui="Select-picker-icon"] {
+.sui-Select:disabled + [data-ui="Select-picker-icon-slot"] {
   --background-color: var(--inert-background);
+}
+
+.sui-Select:disabled + [data-ui="Select-picker-icon-slot"] svg {
+  color: var(--inert-foreground);
 }
 
 /**
