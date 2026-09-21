@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@sanity/icons": "workspace:*",
     "@sanity/ui-fixed": "npm:@sanity/ui@4.2.1",
     "@sanity/ui-wobbly": "npm:@sanity/ui@4.2.0",
     "@sanity/vanilla-extract-vite-plugin": "catalog:",

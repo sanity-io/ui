@@ -427,6 +427,9 @@ importers:
 
   apps/spinner-wobble:
     devDependencies:
+      '@sanity/icons':
+        specifier: workspace:*
+        version: link:../../packages/icons
       '@sanity/ui-fixed':
         specifier: npm:@sanity/ui@4.2.1
         version: link:../../packages/ui

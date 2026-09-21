@@ -1,3 +1,4 @@
+import {SearchIcon} from '@sanity/icons/Search'
 import type {Box, Card, Flex, Grid, Inline, Spinner, Text, ThemeProvider} from '@sanity/ui-fixed'
 import type {Autocomplete} from '@sanity/ui-fixed/autocomplete'
 import type {RootTheme} from '@sanity/ui-fixed/theme'
@@ -68,7 +69,13 @@ function SearchTile({scheme, ui}: TileProps) {
     <Card height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
       <Flex align="center" height="fill" padding={4} sizing="border">
         <Box flex={1}>
-          <Autocomplete id={`search-${scheme}`} loading radius={2} value="Searching&hellip;" />
+          <Autocomplete
+            icon={SearchIcon}
+            id={`search-${scheme}`}
+            loading
+            radius={2}
+            value="Searching&hellip;"
+          />
         </Box>
       </Flex>
     </Card>
