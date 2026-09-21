@@ -52,9 +52,10 @@
   select,
   textarea
 ) {
+  appearance: none;
+  color: inherit;
   font: inherit;
   line-height: inherit;
-  color: inherit;
 }
 
 /* Remove user agent reduced opacity on disabled form elements */

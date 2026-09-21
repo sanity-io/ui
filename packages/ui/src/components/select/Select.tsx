@@ -1,18 +1,12 @@
 import SelectIcon from '@sanity/icons/Select'
 import clsx from 'clsx'
 
-import type {FormElementDensity} from '../../types/FormElement'
-import type {Space} from '../../types/Space'
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Icon} from '../icon/Icon'
 import {type SelectProps, selectProps} from './select.props'
 
 const selectClassName = suffixClassName('sui-Select')
-const densityValues: Record<FormElementDensity, Space> = {
-  regular: 1,
-  loose: 2,
-}
 
 /** @public */
 export function Select({
@@ -23,21 +17,18 @@ export function Select({
 }: SelectProps) {
   const {children, className, style, ...rest} = getProps({density, disabled, ...props}, selectProps)
 
-  const dv = densityValues[density]
-
   const selectClasses = clsx(
     selectClassName,
     hasError && 'sui-error',
     'sui-radius2',
-    'sui-text-body1',
-    `sui-p${dv}`,
+    'sui-width-full',
     className,
   )
 
-  const iconClasses = `sui-position-absolute sui-display-flex sui-align-items-center sui-pl${dv} sui-right${dv}`
+  const iconClasses = `sui-position-absolute sui-display-flex sui-align-items-center sui-px1`
 
   return (
-    <div className="sui-position-relative">
+    <>
       <select
         data-ui="Select"
         className={selectClasses}
@@ -51,7 +42,7 @@ export function Select({
       <div className={iconClasses} data-ui="Select-picker-icon">
         <Icon icon={SelectIcon} size={1} />
       </div>
-    </div>
+    </>
   )
 }
 
