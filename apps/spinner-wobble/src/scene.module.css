@@ -1,3 +1,6 @@
-.search :global([data-ui='TextInput'] [data-border] > [data-ui='Box'] > [data-ui='Text'] > span) {
+.search
+  :global(
+    [data-ui='TextInput'] [data-border] > [data-ui='Box']:last-child > [data-ui='Text'] > span
+  ) {
   transform: translateX(-1px) translateY(1px);
 }
