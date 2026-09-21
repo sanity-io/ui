@@ -1,32 +1,13 @@
-import {Card, Flex, Spinner, Text, ThemeProvider} from '@sanity/ui-fixed'
+import {Box, Card, Flex, Grid, Spinner, Text, ThemeProvider} from '@sanity/ui-fixed'
 import {Autocomplete} from '@sanity/ui-fixed/autocomplete'
 import {buildTheme} from '@sanity/ui-fixed/theme'
-import {StrictMode} from 'react'
-import {createRoot} from 'react-dom/client'
 
 import '@sanity/ui-fixed/styles.css'
 
-import {createDemoTheme} from './demoTheme'
-import {Scene} from './scene'
+import {Scene, type UiKit} from './scene'
 
-const theme = createDemoTheme(buildTheme())
-const rootElement = document.getElementById('root')
+const ui: UiKit = {Autocomplete, Box, Card, Flex, Grid, Spinner, Text, ThemeProvider, buildTheme}
 
-if (!rootElement) {
-  throw new Error('Could not find the root element to mount to')
+export default function After() {
+  return <Scene title="After · @sanity/ui 4.2.1" ui={ui} />
 }
-
-createRoot(rootElement).render(
-  <StrictMode>
-    <Scene
-      Autocomplete={Autocomplete}
-      Card={Card}
-      Flex={Flex}
-      Spinner={Spinner}
-      Text={Text}
-      ThemeProvider={ThemeProvider}
-      theme={theme}
-      version="after"
-    />
-  </StrictMode>,
-)

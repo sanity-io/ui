@@ -1,25 +1,14 @@
+import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
 import react from '@vitejs/plugin-react'
 import {defineConfig} from 'vite'
 
-// Two HTML entries so the wobbly and fixed builds never share a document.
-// Both publish the same vanilla-extract class for the spinner; loading both
-// stylesheets in one page makes the later rule win and hides the bug.
 export default defineConfig({
-  build: {
-    rolldownOptions: {
-      input: ['index.html', 'before.html', 'after.html'],
-    },
-  },
-  plugins: [react()],
-  preview: {
-    port: 5199,
-    strictPort: true,
-  },
-  resolve: {
-    dedupe: ['react', 'react-dom', 'styled-components'],
-  },
-  server: {
-    port: 5199,
-    strictPort: true,
-  },
+  plugins: [
+    react({compiler: {target: '19'}}),
+    // While packages/ui is at 4.2.1, pnpm links `@sanity/ui-fixed` to that
+    // TypeScript source instead of npm, so its `.css.ts` modules must be
+    // compiled here just like in apps/icons
+    vanillaExtractPlugin(),
+  ],
+  server: {port: 5199, strictPort: true},
 })

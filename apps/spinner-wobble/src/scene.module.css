@@ -1,0 +1,26 @@
+.stage {
+  flex: none;
+  width: 640px;
+  height: 360px;
+  transform-origin: center;
+}
+
+/* 10px cells divide both 320×180 tiles, so a centered spinner sits on a grid
+   intersection. Heavier lines every fifth cell read as a blueprint sheet. */
+.blueprint {
+  background-image:
+    linear-gradient(to right, rgb(47 111 237 / 0.42) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(47 111 237 / 0.42) 1px, transparent 1px),
+    linear-gradient(to right, rgb(47 111 237 / 0.78) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(47 111 237 / 0.78) 1px, transparent 1px);
+  background-size:
+    10px 10px,
+    10px 10px,
+    50px 50px,
+    50px 50px;
+}
+
+/* A stray click while recording must not focus the input and restyle it. */
+.search {
+  pointer-events: none;
+}

@@ -2,27 +2,26 @@
   "name": "spinner-wobble",
   "version": "0.0.0",
   "private": true,
-  "description": "Throwaway 16:9 recording rig for the Safari spinner wobble, before (@sanity/ui 4.2.0) and after (4.2.1).",
+  "description": "Throwaway 16:9 recording rig for the Safari spinner wobble fixed in @sanity/ui 4.2.1",
   "license": "MIT",
   "author": "Sanity.io <hello@sanity.io>",
   "type": "module",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "preview": "vite preview",
-    "vendor": "node scripts/vendor-ui.mjs"
-  },
-  "dependencies": {
-    "@sanity/ui-fixed": "file:./vendor/ui-4.2.1.tgz",
-    "@sanity/ui-wobbly": "file:./vendor/ui-4.2.0.tgz",
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "styled-components": "catalog:"
+    "preview": "vite preview"
   },
   "devDependencies": {
+    "@sanity/ui-fixed": "npm:@sanity/ui@4.2.1",
+    "@sanity/ui-wobbly": "npm:@sanity/ui@4.2.0",
+    "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
+    "oxc-transform-react": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
   }
