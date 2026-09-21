@@ -61,21 +61,14 @@ function LoadingTile({scheme, ui}: TileProps) {
   )
 }
 
-// Same field as the icons.sanity.dev search: default size and padding, radius
-// 2, and the spinner in the leading icon slot while results load.
 function SearchTile({scheme, ui}: TileProps) {
-  const {Autocomplete, Box, Card, Flex, Spinner} = ui
+  const {Autocomplete, Box, Card, Flex} = ui
 
   return (
     <Card height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
       <Flex align="center" height="fill" padding={4} sizing="border">
         <Box flex={1}>
-          <Autocomplete
-            icon={<Spinner />}
-            id={`search-${scheme}`}
-            radius={2}
-            value="Searching&hellip;"
-          />
+          <Autocomplete id={`search-${scheme}`} loading radius={2} value="Searching&hellip;" />
         </Box>
       </Flex>
     </Card>
