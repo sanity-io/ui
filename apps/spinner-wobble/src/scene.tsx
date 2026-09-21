@@ -70,10 +70,11 @@ function SearchTile({scheme, ui}: TileProps) {
       <Flex align="center" height="fill" padding={4} sizing="border">
         <Box flex={1}>
           <Autocomplete
+            fontSize={4}
             icon={SearchIcon}
             id={`search-${scheme}`}
             loading
-            radius={2}
+            radius={6}
             value="Searching&hellip;"
           />
         </Box>
