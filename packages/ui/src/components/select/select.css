@@ -12,7 +12,7 @@
   --background-color: var(--backdrop);
   background-color: var(--background-color);
   pointer-events: none;
-  /* reduce block size by 1px at each end to not interrupt Select’s border */
+  /* reduce block size by 1px at each end and inset from right to not interrupt Select’s border */
   top: calc(anchor(top) + 1px);
   bottom: calc(anchor(bottom) + 1px);
   right: calc(anchor(right) + 2px);
