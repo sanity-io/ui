@@ -44,7 +44,7 @@ const options = (
 
 export const Default: Story = {
   render: (props) => (
-    <Select {...props} aria-label="Choose an option">
+    <Select {...props} id="default-select" aria-label="Choose an option">
       {options}
     </Select>
   ),
@@ -69,7 +69,7 @@ export const Default: Story = {
 
 export const Disabled: Story = {
   render: (props) => (
-    <Select {...props} aria-label="Disabled select" disabled>
+    <Select {...props} id="disabled-select" aria-label="Disabled select" disabled>
       {options}
     </Select>
   ),
@@ -82,7 +82,7 @@ export const Disabled: Story = {
 
 export const Error: Story = {
   render: (props) => (
-    <Select {...props} aria-label="Select with error" hasError>
+    <Select {...props} id="error-select" aria-label="Select with error" hasError>
       {options}
     </Select>
   ),
