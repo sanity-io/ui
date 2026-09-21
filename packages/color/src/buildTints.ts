@@ -40,5 +40,5 @@ export function buildTints(options: {
     '800': buildTint('800'),
     '900': buildTint('900'),
     '950': buildTint('950'),
-  }
+  } satisfies ColorTints
 }
