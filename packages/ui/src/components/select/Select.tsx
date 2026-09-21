@@ -1,5 +1,6 @@
 import SelectIcon from '@sanity/icons/Select'
 import clsx from 'clsx'
+import {useId} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -17,6 +18,9 @@ export function Select({
 }: SelectProps) {
   const {children, className, style, ...rest} = getProps({density, disabled, ...props}, selectProps)
 
+  const anchorId = useId()
+  const anchorName = `--anchor-${anchorId}`
+
   const selectClasses = clsx(
     selectClassName,
     hasError && 'sui-error',
@@ -32,14 +36,18 @@ export function Select({
       <select
         data-ui="Select"
         className={selectClasses}
-        style={style}
+        style={{...style, anchorName}}
         {...rest}
         aria-invalid={hasError || undefined}
         disabled={disabled}
       >
         {children}
       </select>
-      <div className={iconClasses} data-ui="Select-picker-icon">
+      <div
+        className={iconClasses}
+        data-ui="Select-picker-icon"
+        style={{positionAnchor: anchorName}}
+      >
         <Icon icon={SelectIcon} size={1} />
       </div>
     </>

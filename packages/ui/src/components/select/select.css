@@ -2,7 +2,6 @@
   --background-color: var(--backdrop);
   --border-color: var(--separator-high);
   --color: var(--foreground-high);
-  anchor-name: --ui-select;
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
   font: var(--form-element-text);
@@ -14,7 +13,6 @@
   background-color: var(--background-color);
   pointer-events: none;
   /* reduce block size by 1px at each end to not interrupt Select’s border */
-  position-anchor: --ui-select;
   top: calc(anchor(top) + 1px);
   bottom: calc(anchor(bottom) + 1px);
   right: calc(anchor(right) + 2px);
@@ -45,7 +43,7 @@
   pointer-events: none;
 }
 
-.sui-Select:disabled ~ [data-ui="Select-picker-icon"] {
+.sui-Select:disabled + [data-ui="Select-picker-icon"] {
   --background-color: var(--inert-background);
 }
 
