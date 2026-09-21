@@ -32,6 +32,8 @@ const VARIANT_KEYS: Record<string, string> = {a: 'after', b: 'before'}
 
 const TILE_TONES = {dark: 'default', light: 'transparent'} as const
 
+const LOADING_STYLE = {transform: 'scale(calc(100vw / 640px))'}
+
 function useVariantHotkeys(): void {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -53,7 +55,7 @@ function LoadingTile({scheme, ui}: TileProps) {
   return (
     <Card className={styles.blueprint} height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
       <Flex align="center" height="fill" justify="center">
-        <Inline gap={3}>
+        <Inline gap={3} style={LOADING_STYLE}>
           <Spinner size={3} />
           <Text size={3}>Loading&hellip;</Text>
         </Inline>
