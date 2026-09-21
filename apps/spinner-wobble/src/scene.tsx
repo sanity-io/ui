@@ -32,7 +32,7 @@ const VARIANT_KEYS: Record<string, string> = {a: 'after', b: 'before'}
 
 const TILE_TONES = {dark: 'default', light: 'transparent'} as const
 
-const LOADING_STYLE = {transform: 'scale(calc(100vw / 640px))'}
+const LOADING_STYLE = {transform: 'scale(calc(100vw / 640px)) translateY(-3px)'}
 
 const SEARCH_STYLE = {paddingInline: 'calc(100vw / 6)', transform: 'scale(calc(100vw / 640px))'}
 

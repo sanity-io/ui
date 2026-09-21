@@ -2,5 +2,5 @@
   :global(
     [data-ui='TextInput'] [data-border] > [data-ui='Box']:last-child > [data-ui='Text'] > span
   ) {
-  transform: translateX(-1px) translateY(1px);
+  transform: translateX(-0.5px) translateY(0.5px);
 }
