@@ -1,13 +1,3 @@
-/* Heavier lines every fifth cell read as a blueprint sheet. */
-.blueprint {
-  background-image:
-    linear-gradient(to right, rgb(47 111 237 / 0.42) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(47 111 237 / 0.42) 1px, transparent 1px),
-    linear-gradient(to right, rgb(47 111 237 / 0.78) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(47 111 237 / 0.78) 1px, transparent 1px);
-  background-size:
-    10px 10px,
-    10px 10px,
-    50px 50px,
-    50px 50px;
+.search :global([data-ui='TextInput'] [data-border] > [data-ui='Box'] > [data-ui='Text'] > span) {
+  transform: translateX(-1px) translateY(1px);
 }

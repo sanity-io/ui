@@ -55,7 +55,7 @@ function LoadingTile({scheme, ui}: TileProps) {
   const {Card, Flex, Inline, Spinner, Text} = ui
 
   return (
-    <Card className={styles.blueprint} height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
+    <Card height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
       <Flex align="center" height="fill" justify="center">
         <Inline gap={3} style={LOADING_STYLE}>
           <Spinner size={3} />
@@ -72,7 +72,7 @@ function SearchTile({scheme, ui}: TileProps) {
   return (
     <Card height="fill" scheme={scheme} tone={TILE_TONES[scheme]}>
       <Flex align="center" height="fill" padding={4} sizing="border" style={SEARCH_STYLE}>
-        <Box flex={1}>
+        <Box className={styles.search} flex={1}>
           <Autocomplete
             fontSize={4}
             icon={SearchIcon}
