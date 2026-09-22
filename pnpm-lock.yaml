@@ -283,7 +283,7 @@ importers:
   apps/docs:
     dependencies:
       '@babel/standalone':
-        specifier: ^7.29.8
+        specifier: ^7.29.9
         version: 7.29.9
       '@codemirror/lang-javascript':
         specifier: ^6.2.5
