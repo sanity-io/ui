@@ -9,6 +9,7 @@ All CLI flags can also be set in the config file. CLI flags override config file
 ## Flag Patterns
 
 CLI flag mapping rules:
+
 - `--foo` sets `foo: true`
 - `--no-foo` sets `foo: false`
 - `--foo.bar` sets `foo: { bar: true }`
@@ -258,6 +259,7 @@ tsdown --exe
 ```
 
 When enabled:
+
 - Declaration file generation (`dts`) is disabled by default
 - Code splitting is disabled
 - Only single entry points are supported

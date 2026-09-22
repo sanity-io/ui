@@ -10,11 +10,11 @@ tsdown detects CI from the `CI` environment variable. CI mode is enabled when `p
 
 Several options accept CI-aware string values:
 
-| Value | Behavior |
-|-------|----------|
-| `true` | Always enabled |
-| `false` | Always disabled |
-| `'ci-only'` | Enabled only in CI, disabled locally |
+| Value          | Behavior                             |
+| -------------- | ------------------------------------ |
+| `true`         | Always enabled                       |
+| `false`        | Always disabled                      |
+| `'ci-only'`    | Enabled only in CI, disabled locally |
 | `'local-only'` | Enabled only locally, disabled in CI |
 
 ## Supported Options
@@ -36,9 +36,9 @@ These options accept CI-aware values:
 
 ```ts
 export default defineConfig({
-  dts: 'local-only',        // Skip DTS in CI for faster builds
-  publint: 'ci-only',       // Only run publint in CI
-  failOnWarn: 'ci-only',    // Fail on warnings in CI only (opt-in)
+  dts: 'local-only', // Skip DTS in CI for faster builds
+  publint: 'ci-only', // Only run publint in CI
+  failOnWarn: 'ci-only', // Fail on warnings in CI only (opt-in)
 })
 ```
 
@@ -64,7 +64,7 @@ export default defineConfig({
 The config function receives a `ci` boolean in its context:
 
 ```ts
-export default defineConfig((_, { ci }) => ({
+export default defineConfig((_, {ci}) => ({
   minify: ci,
   sourcemap: !ci,
 }))
