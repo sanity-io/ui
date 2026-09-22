@@ -180,7 +180,7 @@ catalogs:
       specifier: ^0.2.18
       version: 0.2.19
     '@types/node':
-      specifier: ^24.13.5
+      specifier: ^24.13.6
       version: 24.13.6
     '@types/react-is':
       specifier: ^19.3.0
@@ -350,7 +350,7 @@ importers:
         specifier: ^4.17.12
         version: 4.17.12
       '@types/node':
-        specifier: ^24.13.5
+        specifier: ^24.13.6
         version: 24.13.6
       '@types/qs':
         specifier: ^6.15.1
