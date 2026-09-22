@@ -1,5 +1,11 @@
 import {isColor} from '../lib/mix'
-import {BuildThemeOptions, MAXIMUM_CONTRAST, MINIMUM_CONTRAST} from '../theme/options'
+import {
+  BuildThemeOptions,
+  MAXIMUM_CONTRAST,
+  MINIMUM_CONTRAST,
+  SCHEMES,
+  SchemeThemeOptions,
+} from '../theme/options'
 import {presets} from '../theme/presets'
 import {
   CONFIG_SLUG,
@@ -25,35 +31,76 @@ function sanitizeColor(value: unknown): string | null {
   return typeof value === 'string' && isColor(value) ? value.toLowerCase() : null
 }
 
-function sanitizeOptions(value: unknown): BuildThemeOptions | null {
-  if (!value || typeof value !== 'object') return null
+function sanitizeContrast(value: unknown): number | null {
+  return typeof value === 'number' && Number.isFinite(value)
+    ? Math.min(MAXIMUM_CONTRAST, Math.max(MINIMUM_CONTRAST, value))
+    : null
+}
 
+function sanitizeSchemeOptions(value: unknown): SchemeThemeOptions {
+  const options: SchemeThemeOptions = {}
+
+  if (!value || typeof value !== 'object') return options
+
+  const accent = sanitizeColor(Reflect.get(value, 'accent'))
+  const text = sanitizeColor(Reflect.get(value, 'text'))
+  const background = sanitizeColor(Reflect.get(value, 'background'))
+  const contrast = sanitizeContrast(Reflect.get(value, 'contrast'))
+
+  if (accent) options.accent = accent
+  if (text) options.text = text
+  if (background) options.background = background
+  if (contrast !== null) options.contrast = contrast
+
+  return options
+}
+
+/**
+ * Options from before they were grouped by scheme: one accent, text color and
+ * contrast for both schemes, and a background per scheme. Both schemes get
+ * the shared colors, so the theme keeps looking the same.
+ */
+function sanitizeFlatOptions(value: object): BuildThemeOptions | null {
   const accent = sanitizeColor(Reflect.get(value, 'accent'))
 
   if (!accent) return null
 
-  const options: BuildThemeOptions = {accent}
+  const shared: SchemeThemeOptions = {accent}
   const text = sanitizeColor(Reflect.get(value, 'text'))
+  const contrast = sanitizeContrast(Reflect.get(value, 'contrast'))
 
-  if (text) options.text = text
+  if (text) shared.text = text
+  if (contrast !== null) shared.contrast = contrast
 
-  const background: unknown = Reflect.get(value, 'background')
+  const backgrounds: unknown = Reflect.get(value, 'background')
+  const options: BuildThemeOptions = {}
 
-  if (background && typeof background === 'object') {
-    const dark = sanitizeColor(Reflect.get(background, 'dark'))
-    const light = sanitizeColor(Reflect.get(background, 'light'))
+  for (const scheme of SCHEMES) {
+    const background =
+      backgrounds && typeof backgrounds === 'object'
+        ? sanitizeColor(Reflect.get(backgrounds, scheme))
+        : null
 
-    if (dark || light) {
-      options.background = {}
-      if (dark) options.background.dark = dark
-      if (light) options.background.light = light
-    }
+    options[scheme] = background ? {...shared, background} : {...shared}
   }
 
-  const contrast: unknown = Reflect.get(value, 'contrast')
+  return options
+}
 
-  if (typeof contrast === 'number' && Number.isFinite(contrast)) {
-    options.contrast = Math.min(MAXIMUM_CONTRAST, Math.max(MINIMUM_CONTRAST, contrast))
+function sanitizeOptions(value: unknown): BuildThemeOptions | null {
+  if (!value || typeof value !== 'object') return null
+
+  // The flat shape always had an accent, the scheme shape never has one at the top
+  if ('accent' in value) {
+    return sanitizeFlatOptions(value)
+  }
+
+  const options: BuildThemeOptions = {}
+
+  for (const scheme of SCHEMES) {
+    const schemeOptions = sanitizeSchemeOptions(Reflect.get(value, scheme))
+
+    if (Object.keys(schemeOptions).length > 0) options[scheme] = schemeOptions
   }
 
   return options

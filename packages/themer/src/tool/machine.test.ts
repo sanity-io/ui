@@ -5,8 +5,8 @@ import {presets} from '../theme/presets'
 import {selectStoredState, ThemerInput, themerMachine} from './machine'
 import {CONFIG_SLUG, CustomTheme, initialThemerState, ThemerState} from './themes'
 
-const baseOptions = {accent: '#123456'}
-const custom: CustomTheme = {slug: 'custom-1', title: 'Mine', options: {accent: '#ff0000'}}
+const baseOptions = {light: {accent: '#123456'}}
+const custom: CustomTheme = {slug: 'custom-1', title: 'Mine', options: {light: {accent: '#ff0000'}}}
 const verdant = presets.find((preset) => preset.slug === 'verdant')!
 
 function start(stored: ThemerState = initialThemerState, input: Partial<ThemerInput> = {}) {
@@ -128,11 +128,11 @@ describe('themerMachine', () => {
       expect(actor.getSnapshot().context.custom[0].title).toBe('Ours')
       expect(actor.getSnapshot().context.custom[0].options).toBe(custom.options)
 
-      actor.send({type: 'theme.update', slug: 'custom-1', options: {accent: '#00ff00'}})
+      actor.send({type: 'theme.update', slug: 'custom-1', options: {dark: {accent: '#00ff00'}}})
       expect(actor.getSnapshot().context.custom[0]).toEqual({
         slug: 'custom-1',
         title: 'Ours',
-        options: {accent: '#00ff00'},
+        options: {dark: {accent: '#00ff00'}},
       })
 
       actor.send({type: 'theme.update', slug: 'verdant', title: 'Nope'})

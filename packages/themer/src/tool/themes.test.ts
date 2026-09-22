@@ -14,12 +14,12 @@ import {
 } from './themes'
 
 const verdant = presets.find((preset) => preset.slug === 'verdant')!
-const custom: CustomTheme = {slug: 'custom-1', title: 'Mine', options: {accent: '#ff0000'}}
+const custom: CustomTheme = {slug: 'custom-1', title: 'Mine', options: {light: {accent: '#ff0000'}}}
 const stateWithCustom: ThemerState = {active: null, custom: [custom], removed: []}
 
 describe('resolveThemes', () => {
   it('lists the configured theme, the presets and the custom themes in that order', () => {
-    const {themes, removed, active} = resolveThemes(stateWithCustom, {accent: '#123456'})
+    const {themes, removed, active} = resolveThemes(stateWithCustom, {light: {accent: '#123456'}})
 
     expect(themes.map((theme) => theme.slug)).toEqual([
       CONFIG_SLUG,
@@ -44,11 +44,14 @@ describe('resolveThemes', () => {
   })
 
   it('hides presets that would only repeat the configured theme', () => {
-    const stock = resolveThemes(initialThemerState, {accent: DEFAULT_ACCENT})
+    const stock = resolveThemes(initialThemerState, {dark: {accent: DEFAULT_ACCENT}})
 
     expect(stock.themes.some((theme) => theme.slug === 'studio')).toBe(false)
 
-    const configured = resolveThemes(initialThemerState, {...verdant.options, accent: '#1CB485'})
+    const configured = resolveThemes(initialThemerState, {
+      ...verdant.options,
+      light: {...verdant.options.light, accent: '#1CB485'},
+    })
 
     expect(configured.themes.some((theme) => theme.slug === 'verdant')).toBe(false)
     expect(configured.themes.some((theme) => theme.slug === 'studio')).toBe(true)
@@ -60,7 +63,7 @@ describe('resolveThemes', () => {
       custom: [custom],
       removed: ['verdant', 'custom-1'],
     }
-    const {themes, removed, active} = resolveThemes(state, {accent: '#123456'})
+    const {themes, removed, active} = resolveThemes(state, {light: {accent: '#123456'}})
 
     expect(themes.some((theme) => theme.slug === 'verdant')).toBe(false)
     expect(removed.map((theme) => theme.slug)).toEqual(['verdant', 'custom-1'])
@@ -68,22 +71,26 @@ describe('resolveThemes', () => {
   })
 
   it('applies the picked theme', () => {
-    const {active} = resolveThemes({...stateWithCustom, active: 'custom-1'}, {accent: '#123456'})
+    const {active} = resolveThemes(
+      {...stateWithCustom, active: 'custom-1'},
+      {light: {accent: '#123456'}},
+    )
 
     expect(active).toMatchObject({...custom, source: 'custom'})
     expect(
-      resolveThemes({...stateWithCustom, active: 'unknown'}, {accent: '#123456'}).active.slug,
+      resolveThemes({...stateWithCustom, active: 'unknown'}, {light: {accent: '#123456'}}).active
+        .slug,
     ).toBe(CONFIG_SLUG)
   })
 })
 
 describe('theme helpers', () => {
   it('creates custom themes with slugs of their own', () => {
-    const created = createCustomTheme('Mine', {accent: '#ff0000'})
+    const created = createCustomTheme('Mine', {light: {accent: '#ff0000'}})
 
     expect(created.slug).toMatch(/^custom-/)
-    expect(created).toMatchObject({title: 'Mine', options: {accent: '#ff0000'}})
-    expect(createCustomTheme('Other', {accent: '#ff0000'}).slug).not.toBe(created.slug)
+    expect(created).toMatchObject({title: 'Mine', options: {light: {accent: '#ff0000'}}})
+    expect(createCustomTheme('Other', {}).slug).not.toBe(created.slug)
   })
 
   it('titles duplicates and untitled themes', () => {

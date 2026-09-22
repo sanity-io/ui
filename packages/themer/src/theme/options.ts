@@ -1,46 +1,40 @@
 import {black, blue, gray, white} from '@sanity/color'
+import {type ThemeColorSchemeKey} from '@sanity/ui/theme'
 
 import {isColor} from '../lib/mix'
 import {hexToHsl, hslToHex} from './hsl'
 
 /**
- * Options for {@link buildTheme} and {@link buildPalette}.
- *
- * Every color is a hex color (`#rgb` or `#rrggbb`). Passing the stock values
- * for every option — or just `accent: '#556bfc'` on its own — reproduces the
- * `@sanity/color` palette exactly, so the generated theme matches
- * `buildTheme()` from `@sanity/ui/theme` with no options.
+ * The colors of one color scheme, for {@link BuildThemeOptions}. Every color
+ * is a hex color (`#rgb` or `#rrggbb`), and everything is optional: omitted
+ * options fall back to the stock Studio colors, so an empty object reproduces
+ * the stock scheme exactly.
  *
  * @public
  */
-export interface BuildThemeOptions {
+export interface SchemeThemeOptions {
   /**
-   * The accent color — the brand color of the theme. Replaces the `blue`
+   * The accent color — the brand color of the scheme. Replaces the `blue`
    * scale of the palette, which Sanity UI uses for primary buttons, focus
    * rings and links.
    *
    * The stock accent is `#556bfc` (`blue/500` of `@sanity/color`).
    */
-  accent: string
+  accent?: string
 
   /**
-   * The backgrounds of the two color schemes. `dark` replaces `black` in the
-   * palette and `light` replaces `white` — every other color of a scheme is
-   * blended onto them.
+   * The background of the scheme — every other color of the scheme is
+   * blended onto it. The dark scheme's background replaces `black` in the
+   * palette and the light scheme's replaces `white`.
    *
-   * Both are kept far enough from the text and accent colors to stay usable:
-   * `dark` is made darker until it has enough contrast with them (it can
-   * never be lighter than either), and `light` can never be darker than
-   * either.
+   * It is kept far enough from the text and accent colors to stay usable:
+   * a dark background is made darker until it has enough contrast with them
+   * (it can never be lighter than either), and a light background can never
+   * be darker than either.
    *
    * The stock backgrounds are `#0d0e12` (dark) and `#ffffff` (light).
    */
-  background?: {
-    /** The dark scheme background — defaults to `#0d0e12` */
-    dark?: string
-    /** The light scheme background — defaults to `#ffffff` */
-    light?: string
-  }
+  background?: string
 
   /**
    * How strongly text and borders separate from the accent color, between 15
@@ -65,18 +59,41 @@ export interface BuildThemeOptions {
 }
 
 /**
- * {@link BuildThemeOptions} with every option filled in: colors normalized to
- * lowercase `#rrggbb`, the text color derived from the accent when it was
+ * Options for {@link buildTheme} and {@link buildPalette}: the colors of the
+ * dark and the light scheme, each with its own accent, text, background and
+ * contrast — so the two schemes can differ in more than their background.
+ * Both schemes are optional, and so is every color: whatever is omitted
+ * falls back to the stock Studio colors, so `buildTheme({})` matches
+ * `buildTheme()` from `@sanity/ui/theme` exactly.
+ *
+ * @public
+ */
+export interface BuildThemeOptions {
+  /** The colors of the dark scheme */
+  dark?: SchemeThemeOptions
+  /** The colors of the light scheme */
+  light?: SchemeThemeOptions
+}
+
+/**
+ * {@link SchemeThemeOptions} with every option filled in: colors normalized
+ * to lowercase `#rrggbb`, the text color derived from the accent when it was
  * omitted, and the contrast clamped into its valid range.
  *
  * @internal
  */
-export interface ResolvedThemeOptions {
+export interface ResolvedSchemeOptions {
   accent: string
-  background: {dark: string; light: string}
+  background: string
   contrast: number
   text: string
 }
+
+/** {@link BuildThemeOptions} with both schemes resolved @internal */
+export type ResolvedThemeOptions = Record<ThemeColorSchemeKey, ResolvedSchemeOptions>
+
+/** The color schemes, in the order the tool presents them @internal */
+export const SCHEMES: ThemeColorSchemeKey[] = ['light', 'dark']
 
 /** The stock accent color — `blue/500` of `@sanity/color` @internal */
 export const DEFAULT_ACCENT: string = blue[500].hex
@@ -84,11 +101,11 @@ export const DEFAULT_ACCENT: string = blue[500].hex
 /** The stock text color — `gray/500` of `@sanity/color` @internal */
 export const DEFAULT_TEXT: string = gray[500].hex
 
-/** The stock dark scheme background — `black` of `@sanity/color` @internal */
-export const DEFAULT_BACKGROUND_DARK: string = black.hex
-
-/** The stock light scheme background — `white` of `@sanity/color` @internal */
-export const DEFAULT_BACKGROUND_LIGHT: string = white.hex
+/** The stock backgrounds — `black` and `white` of `@sanity/color` @internal */
+export const DEFAULT_BACKGROUND: Record<ThemeColorSchemeKey, string> = {
+  dark: black.hex,
+  light: white.hex,
+}
 
 /** The contrast that applies the text color as-is @internal */
 export const DEFAULT_CONTRAST = 85
@@ -99,25 +116,43 @@ export const MINIMUM_CONTRAST = 15
 /** @internal */
 export const MAXIMUM_CONTRAST = 100
 
+/** The keys of the options shape before they were grouped by scheme */
+const FLAT_OPTION_KEYS = ['accent', 'text', 'background', 'contrast']
+
 /** @internal */
-export function resolveThemeOptions(options: BuildThemeOptions): ResolvedThemeOptions {
-  const accent = normalizeColor(options.accent, 'accent')
+export function resolveThemeOptions(options: BuildThemeOptions = {}): ResolvedThemeOptions {
+  if (FLAT_OPTION_KEYS.some((key) => key in options)) {
+    throw new TypeError(
+      'The `buildTheme` options are grouped by color scheme: pass `{light: {accent, text, background, contrast}, dark: {…}}` instead of one set of colors for both',
+    )
+  }
+
+  return {
+    dark: resolveSchemeOptions(options.dark ?? {}, 'dark'),
+    light: resolveSchemeOptions(options.light ?? {}, 'light'),
+  }
+}
+
+function resolveSchemeOptions(
+  options: SchemeThemeOptions,
+  scheme: ThemeColorSchemeKey,
+): ResolvedSchemeOptions {
+  const accent =
+    options.accent === undefined
+      ? DEFAULT_ACCENT
+      : normalizeColor(options.accent, `${scheme}.accent`)
 
   return {
     accent,
-    background: {
-      dark:
-        options.background?.dark === undefined
-          ? DEFAULT_BACKGROUND_DARK
-          : normalizeColor(options.background.dark, 'background.dark'),
-      light:
-        options.background?.light === undefined
-          ? DEFAULT_BACKGROUND_LIGHT
-          : normalizeColor(options.background.light, 'background.light'),
-    },
-    contrast: normalizeContrast(options.contrast),
+    background:
+      options.background === undefined
+        ? DEFAULT_BACKGROUND[scheme]
+        : normalizeColor(options.background, `${scheme}.background`),
+    contrast: normalizeContrast(options.contrast, scheme),
     text:
-      options.text === undefined ? deriveTextColor(accent) : normalizeColor(options.text, 'text'),
+      options.text === undefined
+        ? deriveTextColor(accent)
+        : normalizeColor(options.text, `${scheme}.text`),
   }
 }
 
@@ -156,14 +191,14 @@ function normalizeColor(value: string, name: string): string {
     : lower
 }
 
-function normalizeContrast(value: number | undefined): number {
+function normalizeContrast(value: number | undefined, scheme: ThemeColorSchemeKey): number {
   if (value === undefined) {
     return DEFAULT_CONTRAST
   }
 
   if (typeof value !== 'number' || !Number.isFinite(value)) {
     throw new TypeError(
-      `Invalid \`contrast\`: ${JSON.stringify(value)} — expected a number between ${MINIMUM_CONTRAST} and ${MAXIMUM_CONTRAST}`,
+      `Invalid \`${scheme}.contrast\`: ${JSON.stringify(value)} — expected a number between ${MINIMUM_CONTRAST} and ${MAXIMUM_CONTRAST}`,
     )
   }
 

@@ -1,9 +1,10 @@
-import {BuildThemeOptions} from '../theme/options'
+import {BuildThemeOptions, SCHEMES, SchemeThemeOptions} from '../theme/options'
 import {minimizeOptions} from './options'
 
 /**
  * Serializes theme options into the `buildTheme` call to paste into
- * `sanity.config.ts`, keeping only what differs from the derived defaults.
+ * `sanity.config.ts`, keeping only what differs from the derived defaults in
+ * each scheme.
  *
  * Options that boil down to the stock Studio theme need nothing from this
  * package — so they serialize to a bare `buildTheme()` from `@sanity/ui/theme`
@@ -18,26 +19,29 @@ export function createThemeSnippet(options: BuildThemeOptions): string {
     return "import {buildTheme} from '@sanity/ui/theme'\n\nexport const theme = buildTheme()\n"
   }
 
-  const entries: string[] = [`  accent: '${minimized.accent}',`]
+  const lines: string[] = []
 
-  if (minimized.text !== undefined) {
-    entries.push(`  text: '${minimized.text}',`)
+  for (const scheme of SCHEMES) {
+    const values = minimized[scheme]
+
+    if (values) lines.push(serializeScheme(scheme, values))
   }
 
-  if (minimized.background) {
-    const parts: string[] = []
+  return `import {buildTheme} from '@sanity/themer'\n\nexport const theme = buildTheme({\n${lines.join('\n')}\n})\n`
+}
 
-    if (minimized.background.dark !== undefined) parts.push(`dark: '${minimized.background.dark}'`)
-    if (minimized.background.light !== undefined) {
-      parts.push(`light: '${minimized.background.light}'`)
-    }
+/** A scheme with up to two options fits on one line, more spread out */
+function serializeScheme(scheme: string, values: SchemeThemeOptions): string {
+  const entries: string[] = []
 
-    entries.push(`  background: {${parts.join(', ')}},`)
+  if (values.accent !== undefined) entries.push(`accent: '${values.accent}'`)
+  if (values.text !== undefined) entries.push(`text: '${values.text}'`)
+  if (values.background !== undefined) entries.push(`background: '${values.background}'`)
+  if (values.contrast !== undefined) entries.push(`contrast: ${values.contrast}`)
+
+  if (entries.length <= 2) {
+    return `  ${scheme}: {${entries.join(', ')}},`
   }
 
-  if (minimized.contrast !== undefined) {
-    entries.push(`  contrast: ${minimized.contrast},`)
-  }
-
-  return `import {buildTheme} from '@sanity/themer'\n\nexport const theme = buildTheme({\n${entries.join('\n')}\n})\n`
+  return `  ${scheme}: {\n${entries.map((entry) => `    ${entry},`).join('\n')}\n  },`
 }
