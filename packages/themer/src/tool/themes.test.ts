@@ -11,75 +11,11 @@ import {
   initialThemerState,
   resolveThemes,
   ThemerState,
-  themerReducer,
 } from './themes'
 
 const verdant = presets.find((preset) => preset.slug === 'verdant')!
 const custom: CustomTheme = {slug: 'custom-1', title: 'Mine', options: {accent: '#ff0000'}}
 const stateWithCustom: ThemerState = {active: null, custom: [custom], removed: []}
-
-describe('themerReducer', () => {
-  it('picks a theme, and picking the configured theme applies nothing', () => {
-    const picked = themerReducer(initialThemerState, {type: 'pick', slug: 'verdant'})
-
-    expect(picked.active).toBe('verdant')
-    expect(themerReducer(picked, {type: 'pick', slug: CONFIG_SLUG}).active).toBeNull()
-    expect(themerReducer(picked, {type: 'pick', slug: 'verdant'})).toBe(picked)
-  })
-
-  it('adds a theme and applies it', () => {
-    const added = themerReducer(initialThemerState, {type: 'add', theme: custom})
-
-    expect(added).toEqual({active: 'custom-1', custom: [custom], removed: []})
-    expect(themerReducer(added, {type: 'add', theme: custom})).toBe(added)
-  })
-
-  it('updates only custom themes, keeping the options identity when only the title changes', () => {
-    const renamed = themerReducer(stateWithCustom, {type: 'update', slug: 'custom-1', title: 'Ours'})
-
-    expect(renamed.custom[0].title).toBe('Ours')
-    expect(renamed.custom[0].options).toBe(custom.options)
-
-    const recolored = themerReducer(stateWithCustom, {
-      type: 'update',
-      slug: 'custom-1',
-      options: {accent: '#00ff00'},
-    })
-
-    expect(recolored.custom[0]).toEqual({...custom, options: {accent: '#00ff00'}})
-    expect(themerReducer(stateWithCustom, {type: 'update', slug: 'verdant', title: 'Nope'})).toBe(
-      stateWithCustom,
-    )
-  })
-
-  it('removes themes, falling back to the configured theme when the applied one goes', () => {
-    const active: ThemerState = {...stateWithCustom, active: 'custom-1'}
-    const removed = themerReducer(active, {type: 'remove', slug: 'custom-1'})
-
-    expect(removed).toEqual({active: null, custom: [custom], removed: ['custom-1']})
-    expect(themerReducer(removed, {type: 'remove', slug: 'custom-1'})).toBe(removed)
-    expect(themerReducer(active, {type: 'remove', slug: CONFIG_SLUG})).toBe(active)
-
-    const other = themerReducer(active, {type: 'remove', slug: 'verdant'})
-
-    expect(other.active).toBe('custom-1')
-    expect(other.removed).toEqual(['verdant'])
-  })
-
-  it('restores removed themes', () => {
-    const removed: ThemerState = {...stateWithCustom, removed: ['verdant', 'custom-1']}
-
-    expect(themerReducer(removed, {type: 'restore', slug: 'verdant'}).removed).toEqual(['custom-1'])
-    expect(themerReducer(removed, {type: 'restore', slug: 'dew'})).toBe(removed)
-  })
-
-  it('deletes custom themes for good', () => {
-    const removed: ThemerState = {active: 'custom-1', custom: [custom], removed: ['custom-1']}
-
-    expect(themerReducer(removed, {type: 'delete', slug: 'custom-1'})).toEqual(initialThemerState)
-    expect(themerReducer(removed, {type: 'delete', slug: 'verdant'})).toBe(removed)
-  })
-})
 
 describe('resolveThemes', () => {
   it('lists the configured theme, the presets and the custom themes in that order', () => {
@@ -95,6 +31,16 @@ describe('resolveThemes', () => {
     expect(themes.at(-1)).toMatchObject({...custom, source: 'custom'})
     expect(removed).toEqual([])
     expect(active).toBe(themes[0])
+  })
+
+  it('keeps the options identity of every theme', () => {
+    const {themes} = resolveThemes(stateWithCustom, verdant.options)
+
+    expect(themes[0].options).toBe(verdant.options)
+    expect(themes.find((theme) => theme.slug === 'dew')?.options).toBe(
+      presets.find((preset) => preset.slug === 'dew')?.options,
+    )
+    expect(themes.at(-1)?.options).toBe(custom.options)
   })
 
   it('hides presets that would only repeat the configured theme', () => {

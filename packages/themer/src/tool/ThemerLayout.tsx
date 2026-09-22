@@ -1,26 +1,44 @@
 import {ThemeProvider} from '@sanity/ui'
-import {useCallback, useEffect, useMemo, useReducer, useState} from 'react'
+import {useActor, useSelector} from '@xstate/react'
+import {useEffect, useMemo, useState} from 'react'
 import {type LayoutProps} from 'sanity'
 
 import {buildTheme} from '../theme/buildTheme'
 import {BuildThemeOptions} from '../theme/options'
 import {ThemerContext, ThemerContextValue, ThemerView} from './context'
+import {selectStoredState, ThemerInput, themerMachine, ThemerSnapshot} from './machine'
 import {readStoredState, writeStoredState} from './storage'
-import {
-  createCustomTheme,
-  duplicateTitle,
-  resolveThemes,
-  themerReducer,
-  UNTITLED_THEME,
-} from './themes'
+import {resolveThemes, ThemerState} from './themes'
 
-const LIST_VIEW: ThemerView = {name: 'list'}
+function sameStoredState(a: ThemerState, b: ThemerState): boolean {
+  return a.active === b.active && a.custom === b.custom && a.removed === b.removed
+}
+
+function selectView(snapshot: ThemerSnapshot): ThemerView {
+  const {editing} = snapshot.context
+
+  if (snapshot.matches({flow: 'edit'}) && editing) {
+    return {name: 'edit', slug: editing.slug, focusTitle: editing.focusTitle}
+  }
+
+  if (snapshot.matches({flow: 'removed'})) {
+    return {name: 'removed'}
+  }
+
+  return {name: 'list'}
+}
+
+function sameView(a: ThemerView, b: ThemerView): boolean {
+  if (a.name !== b.name) return false
+
+  return a.name !== 'edit' || b.name !== 'edit' || (a.slug === b.slug && a.focusTitle === b.focusTitle)
+}
 
 /**
  * Wraps the whole Studio so that the theme picked in the themer sidebar
- * applies everywhere while the user browses around, and hosts the state that
- * the navbar toggle and the sidebar share: the user's themes, which one is
- * applied, and which flow the sidebar is in.
+ * applies everywhere while the user browses around, and runs the themer
+ * machine that the navbar toggle and the sidebar share: the user's themes,
+ * which one is applied, and which flow the sidebar is in.
  *
  * The theme provider inherits the color scheme from the Studio, so the
  * preview follows the appearance setting (light/dark/system) like any other
@@ -30,15 +48,17 @@ const LIST_VIEW: ThemerView = {name: 'list'}
  */
 export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOptions}) {
   const {baseOptions, ...layoutProps} = props
-  const [open, setOpen] = useState(false)
-  const [view, setView] = useState<ThemerView>(LIST_VIEW)
-  const [state, dispatch] = useReducer(themerReducer, undefined, readStoredState)
+  const [input] = useState<ThemerInput>(() => ({baseOptions, stored: readStoredState()}))
+  const [snapshot, send, actorRef] = useActor(themerMachine, {input})
+  const stored = useSelector(actorRef, selectStoredState, sameStoredState)
+  const view = useSelector(actorRef, selectView, sameView)
+  const open = snapshot.matches({sidebar: 'open'})
 
-  useEffect(() => writeStoredState(state), [state])
+  useEffect(() => writeStoredState(stored), [stored])
 
   const {themes, removed, active} = useMemo(
-    () => resolveThemes(state, baseOptions),
-    [state, baseOptions],
+    () => resolveThemes(stored, baseOptions),
+    [stored, baseOptions],
   )
 
   // The theme identity must be stable between renders: it feeds the
@@ -51,75 +71,9 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
     [activeOptions],
   )
 
-  const pick = useCallback((slug: string) => dispatch({type: 'pick', slug}), [])
-
-  const add = useCallback((title: string, options: BuildThemeOptions) => {
-    const created = createCustomTheme(title, options)
-
-    dispatch({type: 'add', theme: created})
-    setView({name: 'edit', slug: created.slug, focusTitle: true})
-  }, [])
-
-  const addTheme = useCallback(() => add(UNTITLED_THEME, active.options), [active, add])
-
-  const duplicateTheme = useCallback(
-    (slug: string) => {
-      const source = [...themes, ...removed].find((theme) => theme.slug === slug)
-
-      if (source) add(duplicateTitle(source.title), source.options)
-    },
-    [add, removed, themes],
-  )
-
-  const editTheme = useCallback((slug: string) => {
-    dispatch({type: 'pick', slug})
-    setView({name: 'edit', slug})
-  }, [])
-
-  const updateTheme = useCallback<ThemerContextValue['updateTheme']>(
-    (slug, changes) => dispatch({type: 'update', slug, ...changes}),
-    [],
-  )
-
-  const removeTheme = useCallback((slug: string) => dispatch({type: 'remove', slug}), [])
-  const restoreTheme = useCallback((slug: string) => dispatch({type: 'restore', slug}), [])
-  const deleteTheme = useCallback((slug: string) => dispatch({type: 'delete', slug}), [])
-
   const context = useMemo<ThemerContextValue>(
-    () => ({
-      baseOptions,
-      themes,
-      removed,
-      active,
-      view,
-      setView,
-      open,
-      setOpen,
-      pick,
-      addTheme,
-      duplicateTheme,
-      editTheme,
-      updateTheme,
-      removeTheme,
-      restoreTheme,
-      deleteTheme,
-    }),
-    [
-      active,
-      addTheme,
-      baseOptions,
-      deleteTheme,
-      duplicateTheme,
-      editTheme,
-      open,
-      pick,
-      removeTheme,
-      removed,
-      restoreTheme,
-      themes,
-      updateTheme,
-      view,
-    ],
+    () => ({baseOptions, themes, removed, active, view, open, send}),
+    [active, baseOptions, open, removed, send, themes, view],
   )
 
   return (

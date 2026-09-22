@@ -13,7 +13,7 @@ import {ThemeCard} from './ThemeCard'
  * @internal
  */
 export function ThemeList() {
-  const {themes, removed, active, addTheme, setView} = useThemer()
+  const {themes, removed, active, send} = useThemer()
 
   return (
     <>
@@ -30,7 +30,7 @@ export function ThemeList() {
           <Button
             icon={AddIcon}
             mode="ghost"
-            onClick={addTheme}
+            onClick={() => send({type: 'theme.add'})}
             text="Add theme"
             title="Add a theme based on the applied one"
             width="fill"
@@ -39,7 +39,7 @@ export function ThemeList() {
             <Button
               icon={RestoreIcon}
               mode="bleed"
-              onClick={() => setView({name: 'removed'})}
+              onClick={() => send({type: 'flow.removed'})}
               text={`Removed themes (${removed.length})`}
               width="fill"
             />

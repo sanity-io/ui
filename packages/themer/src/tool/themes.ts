@@ -7,10 +7,8 @@ import {sameOptions} from './options'
  * was generated from, one of the presets defined in code, or one the user
  * added in the tool. Only custom themes are editable — the others are
  * duplicated into a custom theme first.
- *
- * @internal
  */
-export type ThemerThemeSource = 'config' | 'preset' | 'custom'
+type ThemerThemeSource = 'config' | 'preset' | 'custom'
 
 /** A theme the themer tool lists @internal */
 export interface ThemerTheme {
@@ -40,91 +38,17 @@ export interface ThemerState {
   removed: string[]
 }
 
-/** @internal */
-export type ThemerAction =
-  | {type: 'pick'; slug: string}
-  | {type: 'add'; theme: CustomTheme}
-  | {type: 'update'; slug: string; title?: string; options?: BuildThemeOptions}
-  | {type: 'remove'; slug: string}
-  | {type: 'restore'; slug: string}
-  | {type: 'delete'; slug: string}
-
 /** The slug of the theme the Studio config was generated from @internal */
 export const CONFIG_SLUG = 'config'
 
-/** The title of the theme the Studio config was generated from @internal */
-export const CONFIG_TITLE = 'Studio config'
+/** The title of the theme the Studio config was generated from */
+const CONFIG_TITLE = 'Studio config'
 
 /** The title new themes start out with @internal */
 export const UNTITLED_THEME = 'Untitled theme'
 
 /** @internal */
 export const initialThemerState: ThemerState = {active: null, custom: [], removed: []}
-
-/** @internal */
-export function themerReducer(state: ThemerState, action: ThemerAction): ThemerState {
-  switch (action.type) {
-    case 'pick': {
-      const active = action.slug === CONFIG_SLUG ? null : action.slug
-
-      return active === state.active ? state : {...state, active}
-    }
-
-    case 'add': {
-      if (state.custom.some((theme) => theme.slug === action.theme.slug)) return state
-
-      return {...state, active: action.theme.slug, custom: [...state.custom, action.theme]}
-    }
-
-    case 'update': {
-      if (!state.custom.some((theme) => theme.slug === action.slug)) return state
-
-      return {
-        ...state,
-        custom: state.custom.map((theme) => {
-          if (theme.slug !== action.slug) return theme
-
-          // Keep the options identity when only the title changes, so the
-          // applied theme is not rebuilt on every keystroke
-          return {
-            ...theme,
-            title: action.title ?? theme.title,
-            options: action.options ?? theme.options,
-          }
-        }),
-      }
-    }
-
-    case 'remove': {
-      if (action.slug === CONFIG_SLUG || state.removed.includes(action.slug)) return state
-
-      return {
-        ...state,
-        active: state.active === action.slug ? null : state.active,
-        removed: [...state.removed, action.slug],
-      }
-    }
-
-    case 'restore': {
-      if (!state.removed.includes(action.slug)) return state
-
-      return {...state, removed: state.removed.filter((slug) => slug !== action.slug)}
-    }
-
-    case 'delete': {
-      if (!state.custom.some((theme) => theme.slug === action.slug)) return state
-
-      return {
-        active: state.active === action.slug ? null : state.active,
-        custom: state.custom.filter((theme) => theme.slug !== action.slug),
-        removed: state.removed.filter((slug) => slug !== action.slug),
-      }
-    }
-
-    default:
-      return state
-  }
-}
 
 /** The themes the tool works with, derived from the persisted state @internal */
 export interface ResolvedThemes {

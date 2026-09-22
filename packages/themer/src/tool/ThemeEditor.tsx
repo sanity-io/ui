@@ -2,7 +2,7 @@ import {COLOR_TINTS, ColorTintKey} from '@sanity/color'
 import {ResetIcon} from '@sanity/icons/Reset'
 import {TrashIcon} from '@sanity/icons/Trash'
 import {Box, Button, Card, Flex, Stack, Text, TextInput} from '@sanity/ui'
-import {useEffect, useMemo} from 'react'
+import {useMemo} from 'react'
 import {styled} from 'styled-components'
 
 import {buildPalette} from '../theme/buildPalette'
@@ -68,29 +68,22 @@ const rampStyle: React.CSSProperties = {
  *
  * @internal
  */
-export function ThemeEditor(props: {focusTitle?: boolean; slug: string}) {
+export function ThemeEditor(props: {focusTitle: boolean; slug: string}) {
   const {focusTitle, slug} = props
-  const {themes, updateTheme, removeTheme, setView} = useThemer()
+  const {themes, send} = useThemer()
   const theme = themes.find((candidate) => candidate.slug === slug && candidate.source === 'custom')
 
-  // The theme can disappear from under the editor, e.g. when another tab
-  // removed it — there is nothing to edit then
-  useEffect(() => {
-    if (!theme) setView({name: 'list'})
-  }, [setView, theme])
-
+  // The machine only enters the edit flow for a listed custom theme, and
+  // leaves it as soon as the theme is removed or deleted
   if (!theme) return null
 
   return (
     <ThemeEditorForm
       focusTitle={focusTitle}
-      onDone={() => setView({name: 'list'})}
-      onOptionsChange={(next) => updateTheme(slug, {options: next})}
-      onRemove={() => {
-        removeTheme(slug)
-        setView({name: 'list'})
-      }}
-      onTitleChange={(title) => updateTheme(slug, {title})}
+      onDone={() => send({type: 'flow.list'})}
+      onOptionsChange={(options) => send({type: 'theme.update', slug, options})}
+      onRemove={() => send({type: 'theme.remove', slug})}
+      onTitleChange={(title) => send({type: 'theme.update', slug, title})}
       options={theme.options}
       title={theme.title}
     />
@@ -100,7 +93,7 @@ export function ThemeEditor(props: {focusTitle?: boolean; slug: string}) {
 // Split from `ThemeEditor` so that the derived values below can be hooks
 // while the editor bails out early when the theme is gone
 function ThemeEditorForm(props: {
-  focusTitle?: boolean
+  focusTitle: boolean
   onDone: () => void
   onOptionsChange: (options: BuildThemeOptions) => void
   onRemove: () => void

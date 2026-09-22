@@ -102,7 +102,7 @@ const MenuSlot = styled.div`
  */
 export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
   const {active, theme} = props
-  const {pick, editTheme, duplicateTheme, removeTheme} = useThemer()
+  const {send} = useThemer()
   const [menuOpen, setMenuOpen] = useState(false)
   const title = displayTitle(theme.title)
 
@@ -110,7 +110,7 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
     <Root>
       <PickButton
         aria-pressed={active}
-        onClick={() => pick(theme.slug)}
+        onClick={() => send({type: 'theme.pick', slug: theme.slug})}
         title={active ? `${title} (applied)` : `Apply ${title}`}
         type="button"
       >
@@ -147,11 +147,15 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
           menu={
             <Menu>
               {theme.source === 'custom' && (
-                <MenuItem icon={EditIcon} onClick={() => editTheme(theme.slug)} text="Edit" />
+                <MenuItem
+                  icon={EditIcon}
+                  onClick={() => send({type: 'theme.edit', slug: theme.slug})}
+                  text="Edit"
+                />
               )}
               <MenuItem
                 icon={CopyIcon}
-                onClick={() => duplicateTheme(theme.slug)}
+                onClick={() => send({type: 'theme.duplicate', slug: theme.slug})}
                 text={theme.source === 'custom' ? 'Duplicate' : 'Duplicate to edit'}
               />
               {theme.source !== 'config' && (
@@ -159,7 +163,7 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
                   <MenuDivider />
                   <MenuItem
                     icon={TrashIcon}
-                    onClick={() => removeTheme(theme.slug)}
+                    onClick={() => send({type: 'theme.remove', slug: theme.slug})}
                     text="Remove"
                     tone="critical"
                   />

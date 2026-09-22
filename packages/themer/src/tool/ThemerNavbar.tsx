@@ -6,7 +6,7 @@ import {type NavbarProps} from 'sanity'
 import {useThemer} from './context'
 
 function ThemerNavbarButton() {
-  const {open, setOpen} = useThemer()
+  const {open, send} = useThemer()
 
   return (
     <Tooltip content={<Text size={1}>Themer</Text>} portal>
@@ -14,7 +14,7 @@ function ThemerNavbarButton() {
         aria-label="Themer"
         icon={ColorWheelIcon}
         mode="bleed"
-        onClick={() => setOpen(!open)}
+        onClick={() => send({type: 'sidebar.toggle'})}
         // The Studio's own navbar buttons go through a wrapper that pins them
         // to this padding, where `@sanity/ui` defaults to a roomier 3
         padding={2}
@@ -32,7 +32,7 @@ function ThemerNavbarButton() {
  * @internal
  */
 export function ThemerNavbar(props: NavbarProps) {
-  const {open, setOpen} = useThemer()
+  const {open, send} = useThemer()
 
   return props.renderDefault({
     ...props,
@@ -47,7 +47,7 @@ export function ThemerNavbar(props: NavbarProps) {
         icon: ColorWheelIcon,
         location: 'sidebar',
         name: 'themer-sidebar',
-        onAction: () => setOpen(!open),
+        onAction: () => send({type: 'sidebar.toggle'}),
         selected: open,
         title: 'Themer',
       },

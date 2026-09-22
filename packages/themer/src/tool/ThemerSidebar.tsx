@@ -24,7 +24,7 @@ const VIEW_TITLES = {
  * @internal
  */
 export function ThemerSidebar() {
-  const {active, view, setView, setOpen} = useThemer()
+  const {active, view, send} = useThemer()
   const [snippetOpen, setSnippetOpen] = useState(false)
   const inList = view.name === 'list'
 
@@ -37,7 +37,7 @@ export function ThemerSidebar() {
               <Button
                 icon={ArrowLeftIcon}
                 mode="bleed"
-                onClick={() => setView({name: 'list'})}
+                onClick={() => send({type: 'flow.list'})}
                 padding={2}
                 title="Back to the themes"
               />
@@ -59,7 +59,7 @@ export function ThemerSidebar() {
             <Button
               icon={CloseIcon}
               mode="bleed"
-              onClick={() => setOpen(false)}
+              onClick={() => send({type: 'sidebar.close'})}
               padding={2}
               title="Close themer"
             />
