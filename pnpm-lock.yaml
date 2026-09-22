@@ -250,7 +250,7 @@ importers:
         specifier: ^10.6.0
         version: 10.6.0(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2)
       knip:
-        specifier: ^6.36.0
+        specifier: ^6.37.0
         version: 6.37.0
       oxfmt:
         specifier: ^0.68.0
