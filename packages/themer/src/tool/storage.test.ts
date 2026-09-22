@@ -41,7 +41,12 @@ describe('themer storage', () => {
         {
           slug: 'custom-1',
           title: 'Mine',
-          options: {accent: '#ff0000', text: '#333333', background: {dark: '#000000'}, contrast: 70},
+          options: {
+            accent: '#ff0000',
+            text: '#333333',
+            background: {dark: '#000000'},
+            contrast: 70,
+          },
         },
       ],
       removed: ['verdant', 'custom-1'],

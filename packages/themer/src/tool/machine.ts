@@ -71,9 +71,13 @@ function themesOf(context: ThemerMachineContext) {
  * @internal
  */
 export const themerMachine = setup({
+  // XState reads `types` for their types only — the values are never used
   types: {
+    // oxlint-disable-next-line no-unsafe-type-assertion -- type-level placeholder
     context: {} as ThemerMachineContext,
+    // oxlint-disable-next-line no-unsafe-type-assertion -- type-level placeholder
     events: {} as ThemerEvent,
+    // oxlint-disable-next-line no-unsafe-type-assertion -- type-level placeholder
     input: {} as ThemerInput,
   },
   guards: {

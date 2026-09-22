@@ -200,7 +200,10 @@ function MockStudio(props: {style?: React.CSSProperties}) {
             }}
           >
             {FIELDS.map(([label, height]) => (
-              <div key={label} style={{flex: 'none', display: 'flex', flexDirection: 'column', gap: 3}}>
+              <div
+                key={label}
+                style={{flex: 'none', display: 'flex', flexDirection: 'column', gap: 3}}
+              >
                 <div style={line(label, color.fg)} />
                 <div
                   style={{

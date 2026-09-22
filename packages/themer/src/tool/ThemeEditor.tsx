@@ -176,20 +176,30 @@ function ThemeEditorForm(props: {
                 title="Text"
                 value={resolved.text}
               />
+            </Stack>
+          </Stack>
+
+          <Stack gap={3}>
+            <Text size={1} weight="medium">
+              Backgrounds
+            </Text>
+            <Stack gap={4}>
               <ColorRow
                 adjusted={palette.black}
                 auto={options.background?.dark === undefined}
+                label="Dark background"
                 onChange={(dark) => patchBackground({dark})}
                 onClear={() => clearBackground('dark')}
-                title="Dark background"
+                title="Dark"
                 value={resolved.background.dark}
               />
               <ColorRow
                 adjusted={palette.white}
                 auto={options.background?.light === undefined}
+                label="Light background"
                 onChange={(light) => patchBackground({light})}
                 onClear={() => clearBackground('light')}
-                title="Light background"
+                title="Light"
                 value={resolved.background.light}
               />
             </Stack>
@@ -259,6 +269,8 @@ function ColorRow(props: {
   adjusted?: string
   /** Whether the value is derived rather than explicitly set */
   auto?: boolean
+  /** The accessible name of the picker, when the title alone would be ambiguous */
+  label?: string
   onChange: (value: string) => void
   onClear?: () => void
   /** The generated tint ramp this color anchors */
@@ -266,13 +278,13 @@ function ColorRow(props: {
   title: string
   value: string
 }) {
-  const {adjusted, auto, onChange, onClear, tints, title, value} = props
+  const {adjusted, auto, label, onChange, onClear, tints, title, value} = props
 
   return (
     <Stack gap={2}>
       <Flex align="center" gap={2}>
         <Swatch
-          aria-label={`${title} color`}
+          aria-label={label ?? `${title} color`}
           onChange={(event) => onChange(event.currentTarget.value)}
           type="color"
           value={value}

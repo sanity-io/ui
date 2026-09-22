@@ -51,9 +51,9 @@ export function ThemeSnippetDialog(props: {onClose: () => void; theme: ThemerThe
       <Box padding={4}>
         <Stack gap={4}>
           <Text muted size={1}>
-            Export this from <code>sanity.config.ts</code> and pass it as the <code>theme</code>{' '}
-            of <code>defineConfig</code> to make “{displayTitle(theme.title)}” the Studio theme
-            without this tool.
+            Export this from <code>sanity.config.ts</code> and pass it as the <code>theme</code> of{' '}
+            <code>defineConfig</code> to make “{displayTitle(theme.title)}” the Studio theme without
+            this tool.
           </Text>
           <Card border overflow="auto" padding={3} radius={2} tone="transparent">
             <Code language="ts" size={1}>

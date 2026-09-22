@@ -31,7 +31,9 @@ function selectView(snapshot: ThemerSnapshot): ThemerView {
 function sameView(a: ThemerView, b: ThemerView): boolean {
   if (a.name !== b.name) return false
 
-  return a.name !== 'edit' || b.name !== 'edit' || (a.slug === b.slug && a.focusTitle === b.focusTitle)
+  return (
+    a.name !== 'edit' || b.name !== 'edit' || (a.slug === b.slug && a.focusTitle === b.focusTitle)
+  )
 }
 
 /**

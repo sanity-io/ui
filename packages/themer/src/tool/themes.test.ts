@@ -55,7 +55,11 @@ describe('resolveThemes', () => {
   })
 
   it('sets removed themes aside and falls back to the configured theme', () => {
-    const state: ThemerState = {active: 'verdant', custom: [custom], removed: ['verdant', 'custom-1']}
+    const state: ThemerState = {
+      active: 'verdant',
+      custom: [custom],
+      removed: ['verdant', 'custom-1'],
+    }
     const {themes, removed, active} = resolveThemes(state, {accent: '#123456'})
 
     expect(themes.some((theme) => theme.slug === 'verdant')).toBe(false)
