@@ -232,6 +232,7 @@ export function TextInput(
         data-border={border ? '' : undefined}
         data-scheme={rootTheme.scheme}
         data-tone={rootTheme.tone}
+        data-ui="TextInput__presentation"
       >
         {IconComponent && (
           <Box className={textInputLeftBox} padding={padding}>
@@ -359,6 +360,7 @@ export function TextInput(
           data-as="input"
           data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
+          data-ui="TextInput__input"
           {...restProps}
           $fontSize={fontSize}
           $iconLeft={$hasIcon}

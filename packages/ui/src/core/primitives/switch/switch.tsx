@@ -62,9 +62,9 @@ export function Switch(
         type="checkbox"
         ref={ref}
       />
-      <Representation aria-hidden data-name="representation">
-        <Track />
-        <Thumb $checked={checked} $indeterminate={indeterminate} />
+      <Representation aria-hidden data-name="representation" data-ui="Switch__representation">
+        <Track data-ui="Switch__track" />
+        <Thumb $checked={checked} $indeterminate={indeterminate} data-ui="Switch__thumb" />
       </Representation>
     </span>
   )

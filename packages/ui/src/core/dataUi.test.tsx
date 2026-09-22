@@ -131,6 +131,18 @@ const COMPOSITE_IDENTIFIERS = [
   'TreeItem__box',
 ] as const
 
+const STYLED_HOST_IDENTIFIERS = [
+  'Checkbox__input',
+  'Radio__input',
+  'Switch__representation',
+  'Switch__thumb',
+  'Switch__track',
+  'TextArea__input',
+  'TextArea__presentation',
+  'TextInput__input',
+  'TextInput__presentation',
+] as const
+
 function Boom(): React.JSX.Element {
   throw new Error('boom')
 }
@@ -150,6 +162,23 @@ function isExpectedErrorBoundaryLog(args: unknown[]): boolean {
 function expectIdentifiers(names: readonly string[]) {
   for (const name of names) {
     expect(document.querySelector(`[data-ui="${name}"]`), `data-ui="${name}"`).not.toBeNull()
+  }
+}
+
+function expectStyledComponentsHostsToHaveIdentifiers() {
+  const elements = document.querySelectorAll<HTMLElement>('[class*="sc-"]')
+
+  expect(elements.length).toBeGreaterThan(0)
+
+  for (const element of elements) {
+    const styledClasses = [...element.classList]
+      .filter((className) => className.startsWith('sc-'))
+      .join(' ')
+
+    expect(
+      element.getAttribute('data-ui'),
+      `styled-components host <${element.tagName.toLowerCase()}> (${styledClasses})`,
+    ).not.toBeNull()
   }
 }
 
@@ -256,5 +285,7 @@ describe('component identifiers', () => {
 
     expectIdentifiers(PUBLIC_IDENTIFIERS)
     expectIdentifiers(COMPOSITE_IDENTIFIERS)
+    expectIdentifiers(STYLED_HOST_IDENTIFIERS)
+    expectStyledComponentsHostsToHaveIdentifiers()
   })
 })

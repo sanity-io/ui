@@ -45,6 +45,7 @@ export function Radio(props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'typ
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-error={customValidity ? '' : undefined}
+        data-ui="Radio__input"
         {...restProps}
         disabled={disabled || readOnly}
         readOnly={readOnly}
