@@ -34,6 +34,7 @@ export default defineConfig({
 ### Single Entry
 
 **Config:**
+
 ```ts
 export default defineConfig({
   entry: ['src/index.ts'],
@@ -44,6 +45,7 @@ export default defineConfig({
 ```
 
 **Generated in package.json:**
+
 ```json
 {
   "exports": {
@@ -59,6 +61,7 @@ export default defineConfig({
 ### Multiple Entries
 
 **Config:**
+
 ```ts
 export default defineConfig({
   entry: {
@@ -72,6 +75,7 @@ export default defineConfig({
 ```
 
 **Generated in package.json:**
+
 ```json
 {
   "exports": {
@@ -136,10 +140,11 @@ export default defineConfig({
 ```
 
 **Generated:**
+
 ```json
 {
   "exports": {
-    ".": "./src/index.ts"  // Points to source
+    ".": "./src/index.ts" // Points to source
   },
   "publishConfig": {
     "exports": {
@@ -167,6 +172,7 @@ export default defineConfig({
 ```
 
 **Generated:**
+
 ```json
 {
   "exports": {
@@ -180,6 +186,7 @@ export default defineConfig({
 ```
 
 **Use with TypeScript customConditions:**
+
 ```json
 // tsconfig.json
 {
@@ -236,7 +243,7 @@ export default defineConfig({
   format: ['esm', 'cjs'],
   dts: true,
   exports: {
-    all: false,  // Only entries
+    all: false, // Only entries
     devExports: '@my-org/source',
   },
 })
@@ -250,7 +257,7 @@ export default defineConfig({
   entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
   dts: true,
-  exports: true,  // Generate for each package
+  exports: true, // Generate for each package
 })
 ```
 
@@ -269,7 +276,7 @@ Or in config:
 ```ts
 export default defineConfig({
   exports: true,
-  publint: true,  // Validate exports
+  publint: true, // Validate exports
 })
 ```
 

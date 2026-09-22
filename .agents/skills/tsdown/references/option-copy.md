@@ -45,13 +45,13 @@ Glob patterns support negation with a leading `!`.
 
 ## Object Options
 
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `from` | `string \| string[]` | Required | Source path or glob pattern; arrays can include negated patterns |
-| `to` | `string` | `outDir` | Destination path, resolved from the project root |
-| `flatten` | `boolean` | `true` | Place matched files directly in `to`. Set `false` to preserve the directory structure below the first segment |
-| `rename` | `string \| ((name, extension, fullPath) => string)` | — | Change the destination name. Callback receives the extension without a leading dot and the absolute path |
-| `verbose` | `boolean` | `false` | Log each copied source and destination |
+| Property  | Type                                                | Default  | Description                                                                                                   |
+| --------- | --------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| `from`    | `string \| string[]`                                | Required | Source path or glob pattern; arrays can include negated patterns                                              |
+| `to`      | `string`                                            | `outDir` | Destination path, resolved from the project root                                                              |
+| `flatten` | `boolean`                                           | `true`   | Place matched files directly in `to`. Set `false` to preserve the directory structure below the first segment |
+| `rename`  | `string \| ((name, extension, fullPath) => string)` | —        | Change the destination name. Callback receives the extension without a leading dot and the absolute path      |
+| `verbose` | `boolean`                                           | `false`  | Log each copied source and destination                                                                        |
 
 ### Preserve Directory Structure
 
@@ -72,7 +72,7 @@ export default defineConfig({
 ```ts
 export default defineConfig({
   copy: [
-    { from: 'src/file.txt', to: 'dist', rename: 'file.md' },
+    {from: 'src/file.txt', to: 'dist', rename: 'file.md'},
     {
       from: 'src/file.txt',
       to: 'dist',
@@ -90,7 +90,7 @@ Creates `dist/file.md` and `dist/file-renamed.txt`.
 
 ```ts
 export default defineConfig({
-  copy: ({ outDir }) => ({
+  copy: ({outDir}) => ({
     from: ['assets/**/*', '!assets/**/*.map'],
     to: `${outDir}/assets`,
     flatten: false,

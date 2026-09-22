@@ -47,24 +47,24 @@ Follow these steps to migrate a tsup project:
 
 ### File Rename
 
-| tsup | tsdown |
-|------|--------|
-| `tsup.config.ts` | `tsdown.config.ts` |
-| `tsup.config.cts` | `tsdown.config.cts` |
-| `tsup.config.mts` | `tsdown.config.mts` |
-| `tsup.config.js` | `tsdown.config.js` |
-| `tsup.config.cjs` | `tsdown.config.cjs` |
-| `tsup.config.mjs` | `tsdown.config.mjs` |
+| tsup               | tsdown               |
+| ------------------ | -------------------- |
+| `tsup.config.ts`   | `tsdown.config.ts`   |
+| `tsup.config.cts`  | `tsdown.config.cts`  |
+| `tsup.config.mts`  | `tsdown.config.mts`  |
+| `tsup.config.js`   | `tsdown.config.js`   |
+| `tsup.config.cjs`  | `tsdown.config.cjs`  |
+| `tsup.config.mjs`  | `tsdown.config.mjs`  |
 | `tsup.config.json` | `tsdown.config.json` |
 
 ### Import and Identifier Changes
 
 ```ts
 // Before
-import { defineConfig } from 'tsup'
+import {defineConfig} from 'tsup'
 
 // After
-import { defineConfig } from 'tsdown'
+import {defineConfig} from 'tsdown'
 ```
 
 Replace all identifiers: `tsup` → `tsdown`, `TSUP` → `TSDOWN`.
@@ -73,19 +73,19 @@ Replace all identifiers: `tsup` → `tsdown`, `TSUP` → `TSDOWN`.
 
 ### Property Renames
 
-| tsup | tsdown | Notes |
-|------|--------|-------|
-| `entryPoints` | `entry` | Also deprecated in tsup itself |
-| `cjsInterop` | `cjsDefault` | CJS default export handling |
-| `esbuildPlugins` | `plugins` | Now uses Rolldown/Unplugin plugins |
-| `outExtension` | `outExtensions` | Custom output extensions |
-| `publicDir` | `copy` | Copy static files to output |
-| `bundle: true` | _(remove)_ | Bundle is default behavior |
-| `bundle: false` | `unbundle: true` | Preserve file structure |
-| `removeNodeProtocol: true` | `nodeProtocol: 'strip'` | Strip `node:` prefix |
-| `injectStyle: true` | `css: { inject: true }` | CSS injection |
-| `injectStyle: false` | _(remove)_ | Default behavior |
-| `skipNodeModulesBundle` | `deps: { neverBundle: true }` | Externalize all dependencies |
+| tsup                       | tsdown                        | Notes                              |
+| -------------------------- | ----------------------------- | ---------------------------------- |
+| `entryPoints`              | `entry`                       | Also deprecated in tsup itself     |
+| `cjsInterop`               | `cjsDefault`                  | CJS default export handling        |
+| `esbuildPlugins`           | `plugins`                     | Now uses Rolldown/Unplugin plugins |
+| `outExtension`             | `outExtensions`               | Custom output extensions           |
+| `publicDir`                | `copy`                        | Copy static files to output        |
+| `bundle: true`             | _(remove)_                    | Bundle is default behavior         |
+| `bundle: false`            | `unbundle: true`              | Preserve file structure            |
+| `removeNodeProtocol: true` | `nodeProtocol: 'strip'`       | Strip `node:` prefix               |
+| `injectStyle: true`        | `css: { inject: true }`       | CSS injection                      |
+| `injectStyle: false`       | _(remove)_                    | Default behavior                   |
+| `skipNodeModulesBundle`    | `deps: { neverBundle: true }` | Externalize all dependencies       |
 
 None of the old names are recognized by tsdown v0.23+ — always emit the new names. The compatibility options (`outExtension`, `skipNodeModulesBundle`, `publicDir`, `bundle`, `removeNodeProtocol`, `injectStyle`) were accepted with deprecation warnings up to v0.22.14 and removed entirely in v0.23; on v0.23+ leftovers are silently ignored, not errors, so builds misbehave without warning. This is why Stage 1 runs on v0.22.14, where every leftover is flagged.
 
@@ -93,9 +93,9 @@ None of the old names are recognized by tsdown v0.23+ — always emit the new na
 
 `external` and `noExternal` are the **only** tsup option names tsdown v0.23 still accepts. They emit deprecation warnings, will be removed in a future version, and cannot be combined with their replacements (mixing `external` with `deps.neverBundle`, or `noExternal` with `deps.alwaysBundle`, throws an error). Always emit the replacements.
 
-| tsup (deprecated) | tsdown (preferred) | Notes |
-|--------------------|--------------------|-------|
-| `external: [...]` | `deps: { neverBundle: [...] }` | Moved to deps namespace |
+| tsup (deprecated)   | tsdown (preferred)              | Notes                   |
+| ------------------- | ------------------------------- | ----------------------- |
+| `external: [...]`   | `deps: { neverBundle: [...] }`  | Moved to deps namespace |
 | `noExternal: [...]` | `deps: { alwaysBundle: [...] }` | Moved to deps namespace |
 
 ### Output Filename Differences
@@ -147,14 +147,15 @@ For complete before/after examples of every transformation, see [guide-option-ma
 
 tsdown changes several defaults from tsup. When migrating, explicitly set these to preserve tsup behavior, then let the user decide which new defaults to adopt.
 
-| Option | tsup Default | tsdown Default | Migration Action |
-|--------|-------------|----------------|-----------------|
-| `format` | `'cjs'` | `'esm'` | Set `format: 'cjs'` to preserve |
-| `clean` | `false` | `true` | Set `clean: false` to preserve |
-| `dts` | `false` | Auto-enabled if `types`/`typings` in package.json | Set `dts: false` to preserve |
-| `target` | _(none)_ | Auto-reads from `engines.node` in package.json | Set `target: false` to preserve |
+| Option   | tsup Default | tsdown Default                                    | Migration Action                |
+| -------- | ------------ | ------------------------------------------------- | ------------------------------- |
+| `format` | `'cjs'`      | `'esm'`                                           | Set `format: 'cjs'` to preserve |
+| `clean`  | `false`      | `true`                                            | Set `clean: false` to preserve  |
+| `dts`    | `false`      | Auto-enabled if `types`/`typings` in package.json | Set `dts: false` to preserve    |
+| `target` | _(none)_     | Auto-reads from `engines.node` in package.json    | Set `target: false` to preserve |
 
 After migration, suggest the user review these — tsdown's defaults are generally better:
+
 - ESM is the modern standard
 - Cleaning output prevents stale files
 - Auto DTS from package.json reduces config
@@ -164,14 +165,14 @@ After migration, suggest the user review these — tsdown's defaults are general
 
 These tsup options have no direct equivalent in tsdown. Remove them and inform the user.
 
-| tsup Option | Status | Alternative |
-|-------------|--------|-------------|
-| `splitting` | Always enabled | Remove — code splitting cannot be disabled in tsdown |
-| `metafile` | Not available | Suggest `devtools: true` for Vite DevTools bundle analysis |
-| `swc` | Not supported | Remove — tsdown uses oxc for transformation (built-in) |
-| `experimentalDts` | Not supported | Use the `dts` option instead |
-| `legacyOutput` | Not supported | Remove — no alternative |
-| `plugins` (tsup experimental) | Incompatible | Migrate to Rolldown plugins manually; tsup's plugin API differs from Rolldown's |
+| tsup Option                   | Status         | Alternative                                                                     |
+| ----------------------------- | -------------- | ------------------------------------------------------------------------------- |
+| `splitting`                   | Always enabled | Remove — code splitting cannot be disabled in tsdown                            |
+| `metafile`                    | Not available  | Suggest `devtools: true` for Vite DevTools bundle analysis                      |
+| `swc`                         | Not supported  | Remove — tsdown uses oxc for transformation (built-in)                          |
+| `experimentalDts`             | Not supported  | Use the `dts` option instead                                                    |
+| `legacyOutput`                | Not supported  | Remove — no alternative                                                         |
+| `plugins` (tsup experimental) | Incompatible   | Migrate to Rolldown plugins manually; tsup's plugin API differs from Rolldown's |
 
 ## Package.json Migration
 
@@ -199,12 +200,12 @@ Replace `tsup` and `tsup-node` with `tsdown` in all script commands:
 
 ### Dependencies
 
-| Location | Action |
-|----------|--------|
-| `dependencies.tsup` | Rename to `dependencies.tsdown` |
-| `devDependencies.tsup` | Rename to `devDependencies.tsdown` |
+| Location                    | Action                                  |
+| --------------------------- | --------------------------------------- |
+| `dependencies.tsup`         | Rename to `dependencies.tsdown`         |
+| `devDependencies.tsup`      | Rename to `devDependencies.tsdown`      |
 | `optionalDependencies.tsup` | Rename to `optionalDependencies.tsdown` |
-| `peerDependencies.tsup` | Rename to `peerDependencies.tsdown` |
+| `peerDependencies.tsup`     | Rename to `peerDependencies.tsdown`     |
 | `peerDependenciesMeta.tsup` | Rename to `peerDependenciesMeta.tsdown` |
 
 ### Root Config Field
@@ -225,27 +226,27 @@ For detailed package.json examples, see [guide-package-json.md](references/guide
 
 After migration, suggest these tsdown-exclusive features to the user:
 
-| Feature | Config | Description |
-|---------|--------|-------------|
-| Node protocol | `nodeProtocol: true \| 'strip'` | Add or strip `node:` prefix on built-in imports |
-| Workspace | `workspace: 'packages/*'` | Build multiple packages in a monorepo |
-| Package exports | `exports: true` | Auto-generate `exports` field in package.json |
-| Package validation | `publint: true`, `attw: true` | Lint package and check type correctness |
-| Executable | `exe: true` | Bundle as Node.js standalone executable (SEA) |
-| DevTools | `devtools: true` | Vite DevTools integration for bundle analysis |
-| Hooks | `hooks: { 'build:done': ... }` | Lifecycle hooks: `build:prepare`, `build:before`, `build:done` |
-| CSS modules | `css: { modules: { ... } }` | Scoped class names for `.module.css` files |
-| Glob import | `globImport: true` | Support `import.meta.glob` (Vite-style) |
+| Feature            | Config                          | Description                                                    |
+| ------------------ | ------------------------------- | -------------------------------------------------------------- |
+| Node protocol      | `nodeProtocol: true \| 'strip'` | Add or strip `node:` prefix on built-in imports                |
+| Workspace          | `workspace: 'packages/*'`       | Build multiple packages in a monorepo                          |
+| Package exports    | `exports: true`                 | Auto-generate `exports` field in package.json                  |
+| Package validation | `publint: true`, `attw: true`   | Lint package and check type correctness                        |
+| Executable         | `exe: true`                     | Bundle as Node.js standalone executable (SEA)                  |
+| DevTools           | `devtools: true`                | Vite DevTools integration for bundle analysis                  |
+| Hooks              | `hooks: { 'build:done': ... }`  | Lifecycle hooks: `build:prepare`, `build:before`, `build:done` |
+| CSS modules        | `css: { modules: { ... } }`     | Scoped class names for `.module.css` files                     |
+| Glob import        | `globImport: true`              | Support `import.meta.glob` (Vite-style)                        |
 
 For detailed comparisons, see [guide-differences-detailed.md](references/guide-differences-detailed.md).
 
 ## References
 
-| Topic | Description | Reference |
-|-------|-------------|-----------|
-| Option Mappings | Complete before/after for every option transform | [guide-option-mappings](references/guide-option-mappings.md) |
+| Topic                | Description                                      | Reference                                                              |
+| -------------------- | ------------------------------------------------ | ---------------------------------------------------------------------- |
+| Option Mappings      | Complete before/after for every option transform | [guide-option-mappings](references/guide-option-mappings.md)           |
 | Detailed Differences | Architecture, features, compatibility comparison | [guide-differences-detailed](references/guide-differences-detailed.md) |
-| Package.json | Dependency, script, and config field migration | [guide-package-json](references/guide-package-json.md) |
+| Package.json         | Dependency, script, and config field migration   | [guide-package-json](references/guide-package-json.md)                 |
 
 ## Migration Checklist
 

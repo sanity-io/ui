@@ -62,13 +62,13 @@ Use **`0.22.14` for Stage 1** — the last tsdown version that still accepts the
 
 ### All Dependency Fields
 
-| Field | tsup version | Stage 1 (migration) | Stage 2 (final) |
-|-------|-------------|---------------------|-----------------|
-| `dependencies` | any | `0.22.14` | `^0.23.0` |
-| `devDependencies` | any | `0.22.14` | `^0.23.0` |
-| `optionalDependencies` | any | `0.22.14` | `^0.23.0` |
-| `peerDependencies` | any | `*` | `*` |
-| `peerDependenciesMeta` | rename key only | rename key only | rename key only |
+| Field                  | tsup version    | Stage 1 (migration) | Stage 2 (final) |
+| ---------------------- | --------------- | ------------------- | --------------- |
+| `dependencies`         | any             | `0.22.14`           | `^0.23.0`       |
+| `devDependencies`      | any             | `0.22.14`           | `^0.23.0`       |
+| `optionalDependencies` | any             | `0.22.14`           | `^0.23.0`       |
+| `peerDependencies`     | any             | `*`                 | `*`             |
+| `peerDependenciesMeta` | rename key only | rename key only     | rename key only |
 
 ## Root Config Field
 

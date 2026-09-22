@@ -48,10 +48,10 @@ export default defineConfig({
   entry: ['src/index.ts'],
   deps: {
     neverBundle: [
-      'react',              // Single package
+      'react', // Single package
       'react-dom',
-      /^@myorg\//,         // Regex pattern (all @myorg/* packages)
-      /^lodash/,           // All lodash packages
+      /^@myorg\//, // Regex pattern (all @myorg/* packages)
+      /^lodash/, // All lodash packages
     ],
   },
 })
@@ -79,7 +79,7 @@ export default defineConfig({
   entry: ['src/index.ts'],
   deps: {
     alwaysBundle: [
-      'some-package',      // Bundle this even if in dependencies
+      'some-package', // Bundle this even if in dependencies
       'vendor-lib',
     ],
   },
@@ -95,15 +95,16 @@ export default defineConfig({
   entry: ['src/index.ts'],
   deps: {
     onlyBundle: [
-      'cac',               // Allow bundling cac
-      'bumpp',             // Allow bundling bumpp
-      /^my-utils/,         // Regex patterns supported
+      'cac', // Allow bundling cac
+      'bumpp', // Allow bundling bumpp
+      /^my-utils/, // Regex patterns supported
     ],
   },
 })
 ```
 
 **Behavior:**
+
 - **Array** (`['cac', /^my-/]`): Only matching dependencies can be bundled. Error for others.
 - **`false`**: Suppress all warnings about bundled dependencies.
 - **Not set** (default): Warns if any node_modules dependencies are bundled.
@@ -119,14 +120,15 @@ export default defineConfig({
   entry: ['src/index.ts'],
   deps: {
     onlyImport: [
-      'cac',               // Also covers subpath imports like cac/deno
-      /^my-utils/,         // Regex patterns match the package name
+      'cac', // Also covers subpath imports like cac/deno
+      /^my-utils/, // Regex patterns match the package name
     ],
   },
 })
 ```
 
 **Behavior:**
+
 - Matching is based on the package name; subpath imports (`cac/deno`) match `cac`.
 - Node.js built-in modules are always allowed when `platform` is `node`.
 - Relative imports between code-split chunks are always allowed.
@@ -141,7 +143,7 @@ By default, tsdown preserves external dependency subpath imports as written. Ena
 ```ts
 export default defineConfig({
   deps: {
-    resolveDepSubpath: true,  // default: false
+    resolveDepSubpath: true, // default: false
   },
 })
 ```
@@ -158,7 +160,7 @@ export default defineConfig({
     neverBundle: [
       'react',
       'react-dom',
-      /^react\//,          // react/jsx-runtime, etc.
+      /^react\//, // react/jsx-runtime, etc.
     ],
   },
   dts: true,
@@ -186,7 +188,7 @@ export default defineConfig({
   format: ['esm', 'cjs'],
   deps: {
     neverBundle: [
-      /^@mycompany\//,     // Don't bundle other workspace packages
+      /^@mycompany\//, // Don't bundle other workspace packages
     ],
   },
   dts: true,
@@ -214,11 +216,7 @@ export default defineConfig({
   entry: ['src/index.ts'],
   format: ['esm', 'cjs'],
   deps: {
-    neverBundle: [
-      'vue',
-      '@vue/runtime-core',
-      '@vue/reactivity',
-    ],
+    neverBundle: ['vue', '@vue/runtime-core', '@vue/reactivity'],
   },
   dts: true,
 })
@@ -236,12 +234,13 @@ Use TypeScript resolver for complex third-party types:
 export default defineConfig({
   entry: ['src/index.ts'],
   dts: {
-    resolver: 'tsc',     // Use TypeScript resolver instead of Oxc
+    resolver: 'tsc', // Use TypeScript resolver instead of Oxc
   },
 })
 ```
 
 **When to use `tsc` resolver:**
+
 - Types in `@types/*` packages with non-standard naming (e.g., `@types/babel__generator`)
 - Complex type dependencies
 - Issues with default Oxc resolver
@@ -259,10 +258,10 @@ tsdown --deps.never-bundle '/^@myorg\/.*/'
 
 ## Migration from Deprecated Options
 
-| Deprecated Option | New Option |
-|---|---|
-| `external` | `deps.neverBundle` |
-| `noExternal` | `deps.alwaysBundle` |
+| Deprecated Option | New Option          |
+| ----------------- | ------------------- |
+| `external`        | `deps.neverBundle`  |
+| `noExternal`      | `deps.alwaysBundle` |
 
 ## Examples by Use Case
 
@@ -294,7 +293,7 @@ export default defineConfig({
 // Bundle only specific utils
 export default defineConfig({
   deps: {
-    neverBundle: [/.*/],        // External by default
+    neverBundle: [/.*/], // External by default
     alwaysBundle: ['tiny-utils'], // Except this one
   },
 })
@@ -307,12 +306,12 @@ export default defineConfig({
 export default defineConfig({
   deps: {
     neverBundle: [
-      /^@workspace\//,     // Other workspace packages
+      /^@workspace\//, // Other workspace packages
       'react',
       'react-dom',
     ],
     alwaysBundle: [
-      'lodash-es',         // Bundle utility libraries
+      'lodash-es', // Bundle utility libraries
     ],
   },
 })
@@ -379,10 +378,12 @@ export default defineConfig({
 ## Summary
 
 **Default behavior:**
+
 - `dependencies`, `peerDependencies`, & `optionalDependencies` → External
 - `devDependencies` & phantom deps → Bundled if imported
 
 **Override (under `deps`):**
+
 - `neverBundle` → Force external
 - `alwaysBundle` → Force bundled
 - `onlyBundle` → Whitelist bundled deps
@@ -391,6 +392,7 @@ export default defineConfig({
 - `resolveDepSubpath: true` → Resolve external dependency subpath imports to package-relative paths
 
 **Declaration files:**
+
 - Same bundling logic as JavaScript
 - Use `resolver: 'tsc'` for complex types
 

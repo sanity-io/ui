@@ -14,6 +14,7 @@ pnpm add -D typescript
 ```
 
 **Requirements:**
+
 - Node.js 22.18.0 or higher **to run tsdown** (build-time only)
 - Experimental support for Deno and Bun
 
@@ -31,6 +32,7 @@ pnpm create tsdown@latest
 ```
 
 Provides templates for:
+
 - Pure TypeScript libraries
 - React component libraries
 - Vue component libraries
@@ -42,7 +44,7 @@ Provides templates for:
 
 ```ts
 // src/index.ts
-import { hello } from './hello.ts'
+import {hello} from './hello.ts'
 hello()
 
 // src/hello.ts
@@ -55,7 +57,7 @@ export function hello() {
 
 ```ts
 // tsdown.config.ts
-import { defineConfig } from 'tsdown'
+import {defineConfig} from 'tsdown'
 
 export default defineConfig({
   entry: ['./src/index.ts'],
