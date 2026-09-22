@@ -33,11 +33,14 @@ export interface ThemerToolOptions {
 
 /**
  * A Studio plugin that adds a themer sidebar for `buildTheme` themes: a
- * navbar toggle opens the sidebar next to the active tool, where presets, the
- * accent/text/background pickers and the contrast slider preview a
- * `buildTheme` theme live on the whole Studio while you browse around.
- * Toggle between light and dark mode with the regular appearance menu — the
- * preview follows it.
+ * navbar toggle opens the sidebar next to the active tool, with a list of
+ * themes — the configured theme, the presets and your own — each previewed
+ * as a tiny Studio in both color schemes. Picking one applies it live to the
+ * whole Studio while you browse around; your own themes can be edited with
+ * accent/text/background pickers and a contrast slider, added, duplicated,
+ * removed and restored, and a dialog shows the `buildTheme` snippet that
+ * makes the applied theme permanent. Toggle between light and dark mode with
+ * the regular appearance menu — the preview follows it.
  *
  * ```ts
  * import {themerTool} from '@sanity/themer/tool'

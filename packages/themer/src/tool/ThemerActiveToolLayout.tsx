@@ -5,12 +5,13 @@ import {useThemer} from './context'
 import {ThemerSidebar} from './ThemerSidebar'
 
 /**
- * Narrow enough to leave the studio preview as much room as possible: it fits
- * the widest picker label next to its swatch, and the code snippet scrolls
- * horizontally rather than widening the sidebar.
+ * Narrow enough to leave the studio preview as much room as possible: the
+ * themes stack in a single column of preview cards, the editor fits a swatch
+ * next to its label, and the code snippet lives in a dialog rather than the
+ * sidebar.
  */
 const sidebarStyle: React.CSSProperties = {
-  width: 240,
+  width: 200,
   flex: 'none',
   borderLeft: '1px solid var(--card-border-color)',
   boxSizing: 'border-box',

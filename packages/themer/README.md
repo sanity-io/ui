@@ -47,7 +47,7 @@ const theme = buildTheme(verdant.options)
 
 ## Studio tool
 
-`@sanity/themer/tool` adds a themer sidebar to the Studio for these themes: presets, accent/text/background pickers and a contrast slider preview a `buildTheme` theme live on the whole Studio, plus the snippet to make it permanent:
+`@sanity/themer/tool` adds a themer sidebar to the Studio for these themes. It lists the configured theme, the presets and your own themes, each previewed as a tiny Studio in both color schemes, and picking one applies it live to the whole Studio while you browse around. Your own themes are edited with accent/text/background pickers and a contrast slider — add one from scratch or duplicate a preset to start from it — and can be removed and restored. A dialog shows the `buildTheme` snippet that makes the applied theme permanent:
 
 ```ts
 import {themerTool} from '@sanity/themer/tool'
