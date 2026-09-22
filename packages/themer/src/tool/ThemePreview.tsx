@@ -14,7 +14,7 @@ const DARK_CLIP_PATH = 'polygon(58% 0, 100% 0, 100% 100%, 42% 100%)'
 
 const Root = styled.div`
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 `
 
