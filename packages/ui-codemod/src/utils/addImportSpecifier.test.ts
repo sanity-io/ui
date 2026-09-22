@@ -44,5 +44,5 @@ defineInlineTest(
   `
   import { Card, Box } from '@sanity/ui';
   `,
-  'does not add specifier if it already exists on another import',
+  'does not add duplicate specifier if it already exists on another import',
 )
