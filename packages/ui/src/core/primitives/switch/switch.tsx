@@ -13,9 +13,13 @@ export interface SwitchProps {
   indeterminate?: boolean
 }
 
-const Representation = styled.span(switchRepresentationStyles)
-const Track = styled.span(switchTrackStyles)
-const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles)
+const Representation = styled.span.attrs({'data-ui': 'Switch__representation'})(
+  switchRepresentationStyles,
+)
+const Track = styled.span.attrs({'data-ui': 'Switch__track'})(switchTrackStyles)
+const Thumb = styled.span.attrs<{$checked?: boolean; $indeterminate?: boolean}>({
+  'data-ui': 'Switch__thumb',
+})(switchThumbStyles)
 
 /**
  * The `Switch` component allows the user to toggle a setting on and off.

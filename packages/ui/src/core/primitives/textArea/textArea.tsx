@@ -37,16 +37,13 @@ export interface TextAreaProps extends ResponsiveRadiusProps {
   weight?: ThemeFontWeightKey
 }
 
-const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
-  responsiveInputPaddingStyle,
-  textInputBaseStyle,
-  textInputFontSizeStyle,
-)
+const Input = styled.textarea.attrs({'data-ui': 'TextArea__input'})<
+  TextInputResponsivePaddingStyleProps & TextInputInputStyleProps
+>(responsiveInputPaddingStyle, textInputBaseStyle, textInputFontSizeStyle)
 
-const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputRepresentationStyle,
-)
+const Presentation = styled.div.attrs({'data-ui': 'TextArea__presentation'})<
+  ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps
+>(responsiveRadiusStyle, textInputRepresentationStyle)
 
 /**
  * A multiline text input.

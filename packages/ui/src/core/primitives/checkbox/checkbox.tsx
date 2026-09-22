@@ -17,7 +17,7 @@ export interface CheckboxProps {
   customValidity?: string
 }
 
-const Input = styled.input(inputElementStyles)
+const Input = styled.input.attrs({'data-ui': 'Checkbox__input'})(inputElementStyles)
 
 /**
  * Checkboxes allow the user to select one or more items from a set.

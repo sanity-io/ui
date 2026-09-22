@@ -14,7 +14,7 @@ export interface RadioProps {
   customValidity?: string
 }
 
-const Input = styled.input(inputElementStyle)
+const Input = styled.input.attrs({'data-ui': 'Radio__input'})(inputElementStyle)
 
 /**
  * The `Radio` component allows the user to select one option from a set.
