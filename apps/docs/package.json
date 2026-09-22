@@ -19,7 +19,7 @@
     "typecheck": "tsc --build"
   },
   "dependencies": {
-    "@babel/standalone": "^7.29.8",
+    "@babel/standalone": "^7.29.9",
     "@codemirror/lang-javascript": "^6.2.5",
     "@lezer/highlight": "^1.2.3",
     "@sanity/icons": "workspace:*",
@@ -43,7 +43,7 @@
     "@playwright/test": "^1.63.0",
     "@types/babel__standalone": "^7.1.9",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^24.13.5",
+    "@types/node": "^24.13.6",
     "@types/qs": "^6.15.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

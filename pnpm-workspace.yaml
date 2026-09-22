@@ -12,12 +12,12 @@ strictPeerDependencies: false
 # so that keeps an explicit range there when needed. (See packageExtensions for
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
-  '@sanity/blueprints': ^0.26.0
+  '@sanity/blueprints': ^0.27.0
   '@sanity/client': ^8.6.2
   '@sanity/functions': ^1.8.0
-  '@sanity/tsdown-config': ^0.28.0
+  '@sanity/tsdown-config': ^0.28.1
   '@sanity/vanilla-extract-vite-plugin': ^0.2.18
-  '@types/node': ^24.13.5
+  '@types/node': ^24.13.6
   '@types/react': ^19.3.0
   '@types/react-dom': ^19.3.0
   '@types/react-is': ^19.3.0
@@ -35,7 +35,7 @@ catalog:
   typescript: 7.0.2
   unrun: ^0.3.1
   vite: ^8.3.0
-  vitest: ^5.0.0
+  vitest: ^5.0.1
 
 allowBuilds:
   # Like esbuild, @swc/core's postinstall is only a fallback downloader — the
