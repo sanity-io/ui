@@ -9,7 +9,7 @@ import {Hues, LegacyTheme, PartialHues} from './types'
  * the theme from the hosted Themer service (themer.sanity.build):
  *
  * ```ts
- * import {createTheme, hues} from '@sanity/themer/legacy'
+ * import {createTheme, hues} from '@sanity/themer-legacy'
  * import {defineConfig} from 'sanity'
  *
  * export default defineConfig({
@@ -30,7 +30,7 @@ export function createTheme(hues: PartialHues = {}): LegacyTheme {
  * presets and overrides included.
  *
  * ```ts
- * import {createTheme, parseHuesFromUrl} from '@sanity/themer/legacy'
+ * import {createTheme, parseHuesFromUrl} from '@sanity/themer-legacy'
  *
  * const hues = parseHuesFromUrl(
  *   'https://themer.sanity.build/api/hues?preset=verdant&primary=22fca8',
@@ -56,7 +56,7 @@ export function parseHuesFromUrl(url: string | URL): Hues {
  * // import {theme} from 'https://themer.sanity.build/api/hues?preset=verdant'
  *
  * // After:
- * import {buildThemeFromUrl} from '@sanity/themer/legacy'
+ * import {buildThemeFromUrl} from '@sanity/themer-legacy'
  *
  * const theme = buildThemeFromUrl(
  *   'https://themer.sanity.build/api/hues?preset=verdant',

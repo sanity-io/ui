@@ -63,50 +63,14 @@ If the Studio already uses a `buildTheme` theme, pass the same options so the to
 
 ## Migrating from themer.sanity.build
 
-This package is also the npm migration path off the hosted Themer service ([themer.sanity.build](https://themer.sanity.build)) — the generator runs locally, so Studio configs no longer need to import modules from a hosted URL.
+The npm migration path off the hosted Themer service ([themer.sanity.build](https://themer.sanity.build)) is [`@sanity/themer-legacy`](https://www.npmjs.com/package/@sanity/themer-legacy): the exact same generator, running locally.
 
-`@sanity/themer/legacy` generates the exact same colors as the hosted service, with the same `createTheme`, `hues` and `theme` exports that `https://themer.sanity.build/api/hues` served. Replace the URL import with `buildThemeFromUrl` and the URL as a string:
+`@sanity/themer/legacy` still works as a deprecated re-export of that package until `@sanity/themer@1.0` removes it. Swap the import specifier to migrate:
 
-```ts
-// Before:
-import {theme} from 'https://themer.sanity.build/api/hues?preset=verdant&primary=22fca8'
-
-// After:
-import {buildThemeFromUrl} from '@sanity/themer/legacy'
-
-const theme = buildThemeFromUrl(
-  'https://themer.sanity.build/api/hues?preset=verdant&primary=22fca8',
-)
+```diff
+-import {buildThemeFromUrl} from '@sanity/themer/legacy'
++import {buildThemeFromUrl} from '@sanity/themer-legacy'
 ```
-
-Configs that used `createTheme` and `hues` from the URL import work the same way with `parseHuesFromUrl`:
-
-```ts
-// Before:
-// import {createTheme, hues} from 'https://themer.sanity.build/api/hues?preset=verdant'
-
-// After:
-import {createTheme, parseHuesFromUrl} from '@sanity/themer/legacy'
-
-const hues = parseHuesFromUrl('https://themer.sanity.build/api/hues?preset=verdant')
-
-export default defineConfig({
-  theme: createTheme({...hues, primary: {...hues.primary, mid: '#22fca8'}}),
-  // ...rest of the config
-})
-```
-
-The hosted presets are addressed by query, exactly like the service:
-
-```ts
-import {buildThemeFromUrl} from '@sanity/themer/legacy'
-
-const theme = buildThemeFromUrl('?preset=verdant')
-```
-
-Once migrated, remove any `themer.d.ts` module declarations and `urlImports` config that the URL imports needed.
-
-The generated theme carries no `__themer` flag, which is the one intentional difference from the hosted module. Sanity Studio uses that flag to throw away the fonts the hosted module bundled, because they had drifted from the Studio's own; here the fonts come from the `@sanity/ui` installed next to the Studio, so there is nothing to throw away.
 
 ## License
 

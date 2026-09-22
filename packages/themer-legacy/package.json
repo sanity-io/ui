@@ -1,7 +1,7 @@
 {
-  "name": "@sanity/themer",
-  "version": "0.3.15",
-  "description": "Generate Sanity Studio themes, and preview them with a Studio tool.",
+  "name": "@sanity/themer-legacy",
+  "version": "0.0.0",
+  "description": "The hosted Themer service (themer.sanity.build) as an npm package: the exact same Sanity Studio theme generator, running locally.",
   "keywords": [
     "sanity",
     "studio",
@@ -18,7 +18,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sanity-io/ui.git",
-    "directory": "packages/themer"
+    "directory": "packages/themer-legacy"
   },
   "files": [
     "dist"
@@ -28,15 +28,11 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./legacy": "./src/legacy/index.ts",
-    "./tool": "./src/tool/index.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "exports": {
       ".": "./dist/index.js",
-      "./legacy": "./dist/legacy.js",
-      "./tool": "./dist/tool.js",
       "./package.json": "./package.json"
     }
   },
@@ -50,39 +46,16 @@
   },
   "dependencies": {
     "@sanity/color": "workspace:^",
-    "@sanity/icons": "workspace:^",
-    "@sanity/themer-legacy": "workspace:^",
-    "@sanity/ui": "workspace:^",
-    "react-compiler-runtime": "1.0.0",
-    "react-refractor": "catalog:",
-    "refractor": "catalog:"
+    "@sanity/ui": "^4.2.3"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
     "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@types/node": "catalog:",
-    "@types/react": "catalog:",
-    "oxc-transform-react": "catalog:",
-    "react": "catalog:",
     "rimraf": "catalog:",
-    "sanity": "catalog:",
-    "styled-components": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
-  },
-  "peerDependencies": {
-    "react": "^18 || ^19",
-    "sanity": "^3 || ^4 || ^5 || ^6",
-    "styled-components": "^5.2 || ^6"
-  },
-  "peerDependenciesMeta": {
-    "sanity": {
-      "optional": true
-    },
-    "styled-components": {
-      "optional": true
-    }
   },
   "engines": {
     "node": ">=20.19 <22 || >=22.12"
