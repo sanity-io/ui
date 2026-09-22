@@ -14,7 +14,6 @@ const meta: Meta<typeof Text> = {
   title: 'Layout/Container',
   args: {
     as: 'div',
-    size: 0,
   },
   argTypes,
   component: Container,
