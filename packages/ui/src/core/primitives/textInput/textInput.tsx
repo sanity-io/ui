@@ -116,13 +116,16 @@ const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
   }
 `
 
-const Input = styled.input.attrs({'data-ui': 'TextInput__input'})<
-  TextInputResponsivePaddingStyleProps & TextInputInputStyleProps
->(responsiveInputPaddingStyle, textInputBaseStyle, textInputFontSizeStyle)
+const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
+  responsiveInputPaddingStyle,
+  textInputBaseStyle,
+  textInputFontSizeStyle,
+)
 
-const Presentation = styled.span.attrs({'data-ui': 'TextInput__presentation'})<
-  ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps
->(responsiveRadiusStyle, textInputRepresentationStyle)
+const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
+  responsiveRadiusStyle,
+  textInputRepresentationStyle,
+)
 
 // Stays on styled-components: `background-color: transparent` must beat Card's
 // runtime `background-color: var(--card-bg-color)` at equal specificity, which
@@ -229,6 +232,7 @@ export function TextInput(
         data-border={border ? '' : undefined}
         data-scheme={rootTheme.scheme}
         data-tone={rootTheme.tone}
+        data-ui="TextInput__presentation"
       >
         {IconComponent && (
           <Box className={textInputLeftBox} padding={padding}>
@@ -356,6 +360,7 @@ export function TextInput(
           data-as="input"
           data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
+          data-ui="TextInput__input"
           {...restProps}
           $fontSize={fontSize}
           $iconLeft={$hasIcon}

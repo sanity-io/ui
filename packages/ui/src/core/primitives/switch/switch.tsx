@@ -13,13 +13,9 @@ export interface SwitchProps {
   indeterminate?: boolean
 }
 
-const Representation = styled.span.attrs({'data-ui': 'Switch__representation'})(
-  switchRepresentationStyles,
-)
-const Track = styled.span.attrs({'data-ui': 'Switch__track'})(switchTrackStyles)
-const Thumb = styled.span.attrs<{$checked?: boolean; $indeterminate?: boolean}>({
-  'data-ui': 'Switch__thumb',
-})(switchThumbStyles)
+const Representation = styled.span(switchRepresentationStyles)
+const Track = styled.span(switchTrackStyles)
+const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles)
 
 /**
  * The `Switch` component allows the user to toggle a setting on and off.
@@ -66,9 +62,9 @@ export function Switch(
         type="checkbox"
         ref={ref}
       />
-      <Representation aria-hidden data-name="representation">
-        <Track />
-        <Thumb $checked={checked} $indeterminate={indeterminate} />
+      <Representation aria-hidden data-name="representation" data-ui="Switch__representation">
+        <Track data-ui="Switch__track" />
+        <Thumb $checked={checked} $indeterminate={indeterminate} data-ui="Switch__thumb" />
       </Representation>
     </span>
   )

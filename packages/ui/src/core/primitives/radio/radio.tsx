@@ -14,7 +14,7 @@ export interface RadioProps {
   customValidity?: string
 }
 
-const Input = styled.input.attrs({'data-ui': 'Radio__input'})(inputElementStyle)
+const Input = styled.input(inputElementStyle)
 
 /**
  * The `Radio` component allows the user to select one option from a set.
@@ -45,6 +45,7 @@ export function Radio(props: Omit<React.HTMLProps<HTMLInputElement>, 'as' | 'typ
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-error={customValidity ? '' : undefined}
+        data-ui="Radio__input"
         {...restProps}
         disabled={disabled || readOnly}
         readOnly={readOnly}
