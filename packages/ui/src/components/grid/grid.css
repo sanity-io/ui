@@ -1,3 +1,8 @@
+.sui-Grid {
+  min-width: 0;
+  min-height: 0;
+}
+
 .sui-Grid[class*='sui-tone'] {
   --grid-background: var(--background-low);
   background-color: var(--grid-background);
