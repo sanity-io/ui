@@ -5,6 +5,7 @@ packages:
 
 linkWorkspacePackages: deep
 strictPeerDependencies: false
+autoDedupe: true
 
 # Version ranges for dependencies used by more than one workspace package.
 # Referenced from package.json files via the `catalog:` protocol.
