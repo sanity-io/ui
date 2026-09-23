@@ -19,14 +19,13 @@ const Root = styled.div`
 `
 
 /** The document rows in the list pane — the widths of their title lines */
-const LIST_ROWS = ['58%', '44%', '66%', '50%', '60%', '40%']
+const LIST_ROWS = ['62%', '46%', '70%', '52%']
 
-/** The fields in the document form — the widths of their labels and their heights */
-const FIELDS: Array<[label: string, height: number]> = [
-  ['28%', 10],
-  ['20%', 10],
-  ['34%', 18],
-]
+/** The fields in the document form — the widths of their labels */
+const FIELDS = ['32%', '24%']
+
+/** The thickness of a line of text — bold enough to survive a half-size preview */
+const LINE = 4
 
 /**
  * A tiny, lo-fi mockup of a Studio in the given theme — the navbar over the
@@ -34,7 +33,8 @@ const FIELDS: Array<[label: string, height: number]> = [
  * the right — in both color schemes at once: the light scheme on the left and
  * the dark scheme on the right, split diagonally. It only paints colors the
  * theme options change (backgrounds, text, borders, the accent) so that a
- * glance shows what the theme does to the Studio.
+ * glance shows what the theme does to the Studio — with few and bold enough
+ * elements to still read when scaled down to a thumbnail.
  *
  * @internal
  */
@@ -57,7 +57,6 @@ export function ThemePreview(props: {options: BuildThemeOptions}) {
 function MockStudio(props: {style?: React.CSSProperties}) {
   const {color} = useTheme_v2()
   const primary = color.button.default.primary.enabled
-  const ghost = color.button.ghost.default.enabled
   const selected = color.selectable.default.selected
   const input = color.input.default.enabled
   const border = `1px solid ${color.border}`
@@ -65,22 +64,10 @@ function MockStudio(props: {style?: React.CSSProperties}) {
   const line = (width: string, background: string): React.CSSProperties => ({
     flex: 'none',
     width,
-    height: 3,
-    borderRadius: 2,
+    height: LINE,
+    borderRadius: LINE / 2,
     background,
   })
-
-  const paneHeader: React.CSSProperties = {
-    flex: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: '13%',
-    padding: '0 7%',
-    borderBottom: border,
-  }
-
-  const icon: React.CSSProperties = {width: 3, height: 3, borderRadius: 1, background: color.icon}
 
   return (
     <div
@@ -98,24 +85,15 @@ function MockStudio(props: {style?: React.CSSProperties}) {
           flex: 'none',
           display: 'flex',
           alignItems: 'center',
-          gap: 4,
-          height: '15%',
-          padding: '0 4%',
+          gap: 5,
+          height: '18%',
+          padding: '0 5%',
           borderBottom: border,
         }}
       >
-        <div style={{flex: 'none', width: 7, height: 7, borderRadius: 2, background: primary.bg}} />
-        <div style={line('17%', color.fg)} />
-        <div
-          style={{
-            flex: 1,
-            height: 8,
-            margin: '0 4%',
-            borderRadius: 3,
-            background: input.bg,
-            boxShadow: `inset 0 0 0 1px ${input.border}`,
-          }}
-        />
+        <div style={{flex: 'none', width: 8, height: 8, borderRadius: 2, background: primary.bg}} />
+        <div style={line('22%', color.fg)} />
+        <div style={{flex: 1}} />
         <div
           style={{
             flex: 'none',
@@ -133,14 +111,10 @@ function MockStudio(props: {style?: React.CSSProperties}) {
             flex: 'none',
             display: 'flex',
             flexDirection: 'column',
-            width: '38%',
+            width: '36%',
             borderRight: border,
           }}
         >
-          <div style={paneHeader}>
-            <div style={line('45%', color.fg)} />
-            <div style={icon} />
-          </div>
           {LIST_ROWS.map((width, index) => {
             const isSelected = index === 1
 
@@ -151,21 +125,11 @@ function MockStudio(props: {style?: React.CSSProperties}) {
                   flex: 'none',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 4,
-                  height: '12%',
-                  padding: '0 7%',
+                  height: '18%',
+                  padding: '0 9%',
                   background: isSelected ? selected.bg : undefined,
                 }}
               >
-                <div
-                  style={{
-                    flex: 'none',
-                    width: 7,
-                    height: 7,
-                    borderRadius: 2,
-                    background: isSelected ? selected.muted.fg : color.skeleton.from,
-                  }}
-                />
                 <div style={line(width, isSelected ? selected.fg : color.muted.fg)} />
               </div>
             )
@@ -173,31 +137,28 @@ function MockStudio(props: {style?: React.CSSProperties}) {
         </div>
 
         <div style={{flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0}}>
-          <div style={paneHeader}>
-            <div style={line('40%', color.fg)} />
-            <div style={icon} />
-          </div>
           <div
             style={{
               flex: 1,
               display: 'flex',
               flexDirection: 'column',
               gap: 7,
-              padding: '7% 7% 0',
+              padding: '9% 8% 0',
               minHeight: 0,
               overflow: 'hidden',
             }}
           >
-            {FIELDS.map(([label, height]) => (
+            <div style={line('45%', color.fg)} />
+            {FIELDS.map((width) => (
               <div
-                key={label}
+                key={width}
                 style={{flex: 'none', display: 'flex', flexDirection: 'column', gap: 3}}
               >
-                <div style={line(label, color.fg)} />
+                <div style={line(width, color.muted.fg)} />
                 <div
                   style={{
-                    height,
-                    borderRadius: 2,
+                    height: 12,
+                    borderRadius: 3,
                     background: input.bg,
                     boxShadow: `inset 0 0 0 1px ${input.border}`,
                   }}
@@ -211,22 +172,12 @@ function MockStudio(props: {style?: React.CSSProperties}) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-end',
-              gap: 4,
-              height: '16%',
-              padding: '0 7%',
+              height: '20%',
+              padding: '0 8%',
               borderTop: border,
             }}
           >
-            <div
-              style={{
-                width: '18%',
-                height: 8,
-                borderRadius: 2,
-                background: ghost.bg,
-                boxShadow: `inset 0 0 0 1px ${ghost.border}`,
-              }}
-            />
-            <div style={{width: '26%', height: 8, borderRadius: 2, background: primary.bg}} />
+            <div style={{width: '32%', height: '50%', borderRadius: 3, background: primary.bg}} />
           </div>
         </div>
       </div>
