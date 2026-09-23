@@ -7,6 +7,12 @@ linkWorkspacePackages: deep
 strictPeerDependencies: false
 autoDedupe: true
 
+# `pnpm add` writes `catalog:` when the requested version is covered by an
+# existing catalog entry, or when the dependency is not cataloged yet (the
+# entry is then added to `catalog` below). A version outside an existing
+# entry's range warns and is kept as a direct range (`strict` would error).
+catalogMode: prefer
+
 # Version ranges for dependencies used by more than one workspace package.
 # Referenced from package.json files via the `catalog:` protocol.
 # apps/docs may still diverge from the workspace-wide @types/node catalog pin,
