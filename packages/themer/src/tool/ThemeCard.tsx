@@ -122,12 +122,12 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
           clones its button to wire it up, which a tooltip in between would
           swallow */}
       <MenuSlot data-visible={menuOpen}>
-        <Tooltip animate content={<Text size={1}>Actions</Text>} placement="bottom" portal>
+        <Tooltip animate content={<Text size={1}>Show more</Text>} placement="bottom" portal>
           <span style={{display: 'inline-block'}}>
             <MenuButton
               button={
                 <Button
-                  aria-label={`Actions for ${title}`}
+                  aria-label={`Show more for ${title}`}
                   fontSize={1}
                   icon={EllipsisHorizontalIcon}
                   mode="ghost"
