@@ -10,7 +10,7 @@ import {styled} from 'styled-components'
 import {createTonesFromHues} from '../generator/createTonesFromHues'
 import {hues as defaultHues} from '../generator/defaults'
 import {presets} from '../generator/presets'
-import {Hue, Hues, ThemePreset} from '../generator/types'
+import {ThemePreset} from '../generator/types'
 import {useThemer} from './context'
 import {HueFields} from './HueFields'
 import {HUE_KEYS, sameHues} from './hues'
@@ -23,16 +23,12 @@ import {TOOL_TITLE} from './ThemerNavbar'
  * @internal
  */
 export function ThemerSidebar() {
-  const {hues, setHues, view, setView, setOpen} = useThemer()
+  const {hues, setHues, updateHue, view, setView, setOpen} = useThemer()
 
   // Until the first edit the Studio previews its configured theme, and the
   // editors show the default preset — what the hosted Themer opened with
   const active = hues ?? defaultHues
   const activePresetSlug = presets.find((preset) => sameHues(preset.hues, active))?.slug
-
-  const handleHueChange = (tone: keyof Hues, hue: Hue) => {
-    setHues({...active, [tone]: hue})
-  }
 
   return (
     <Card borderLeft height="fill">
@@ -111,7 +107,7 @@ export function ThemerSidebar() {
               </Label>
               <Stack gap={3}>
                 {HUE_KEYS.map((tone) => (
-                  <HueFields hue={active[tone]} key={tone} onChange={handleHueChange} tone={tone} />
+                  <HueFields hue={active[tone]} key={tone} onChange={updateHue} tone={tone} />
                 ))}
               </Stack>
             </Stack>

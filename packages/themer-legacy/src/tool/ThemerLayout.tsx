@@ -1,10 +1,11 @@
 import {Card, Flex, Layer, ThemeProvider} from '@sanity/ui'
-import {useEffect, useMemo, useState} from 'react'
+import {useDeferredValue, useEffect, useMemo, useReducer, useState} from 'react'
 import {type LayoutProps} from 'sanity'
 
 import {createTheme} from '../generator/createTheme'
-import {Hues, LegacyTheme} from '../generator/types'
+import {LegacyTheme} from '../generator/types'
 import {ThemerContext, ThemerContextValue, ThemerView} from './context'
+import {huesReducer} from './huesReducer'
 import {readStoredHues, writeStoredHues} from './storage'
 import {ThemerSidebar} from './ThemerSidebar'
 
@@ -37,17 +38,34 @@ const sidebarStyle: React.CSSProperties = {
 export function ThemerLayout(props: LayoutProps) {
   const [open, setOpen] = useState(false)
   const [view, setView] = useState<ThemerView>('single')
-  const [hues, setHues] = useState<Hues | null>(readStoredHues)
+  const [hues, dispatch] = useReducer(huesReducer, null, readStoredHues)
 
   useEffect(() => writeStoredHues(hues), [hues])
+
+  // Edits update `hues` urgently, so the sidebar's inputs follow the pointer,
+  // while the theme derives from a deferred copy: regenerating it re-renders
+  // the whole previewed Studio (twice in the split view), and React may
+  // interrupt that render for the next edit instead of blocking on it
+  const deferredHues = useDeferredValue(hues)
 
   // The theme identity must be stable between renders: it feeds the
   // styled-components theme context for the whole Studio, and rebuilding it
   // would re-render everything
-  const theme = useMemo(() => (hues === null ? null : createTheme(hues)), [hues])
+  const theme = useMemo(
+    () => (deferredHues === null ? null : createTheme(deferredHues)),
+    [deferredHues],
+  )
 
   const context = useMemo<ThemerContextValue>(
-    () => ({hues, setHues, view, setView, open, setOpen}),
+    () => ({
+      hues,
+      setHues: (next) => dispatch({type: 'set', hues: next}),
+      updateHue: (tone, changes) => dispatch({type: 'update', tone, changes}),
+      view,
+      setView,
+      open,
+      setOpen,
+    }),
     [hues, view, open],
   )
 

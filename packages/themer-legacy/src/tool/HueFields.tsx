@@ -1,6 +1,6 @@
 import {COLOR_TINTS} from '@sanity/color'
 import {Card, Grid, Stack, Text} from '@sanity/ui'
-import {startTransition, useId, useState} from 'react'
+import {useId, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {Hue, Hues} from '../generator/types'
@@ -51,7 +51,7 @@ const capitalize: React.CSSProperties = {textTransform: 'capitalize'}
 
 interface HueFieldsProps {
   hue: Hue
-  onChange: (tone: keyof Hues, hue: Hue) => void
+  onChange: (tone: keyof Hues, changes: Partial<Hue>) => void
   tone: keyof Hues
 }
 
@@ -61,41 +61,34 @@ interface HueFieldsProps {
  * pickers, the mid-point slider that places `mid` on the ramp, and the
  * generated tints.
  *
- * The inputs keep their own state so dragging a picker or the slider stays
- * smooth, while the theme regenerates in a transition that React may
- * interrupt for the next drag event — regenerating the theme re-renders the
- * whole previewed Studio, twice in the split view.
+ * The inputs are controlled by the shared draft. Only the slider keeps local
+ * state — its position moves in steps of 1 while the hue snaps to tints — and
+ * it repositions when the hue's mid point changes to a tint other than the
+ * one the slider is at (a preset, a reset), never while it is being dragged.
  */
 export function HueFields(props: HueFieldsProps) {
   const {hue, onChange, tone} = props
-  const [draft, setDraft] = useState(hue)
-  const [source, setSource] = useState(hue)
-  // The mid-point slider moves in steps of 1 while the hue snaps to tints, so
-  // the slider position is kept apart from the committed mid point
   const [midPointInput, setMidPointInput] = useState(String(hue.midPoint))
+  const [syncedMidPoint, setSyncedMidPoint] = useState(hue.midPoint)
   const midRangeId = useId()
   const midRangeListId = useId()
 
-  // Resync when the hue changes from outside (a preset was picked, or the
-  // draft was reset) — a committed edit arrives here too, matching `draft`
-  if (source !== hue) {
-    setSource(hue)
-    setDraft(hue)
-    setMidPointInput(String(hue.midPoint))
+  if (syncedMidPoint !== hue.midPoint) {
+    setSyncedMidPoint(hue.midPoint)
+    if (roundMidPoint(Number(midPointInput)) !== hue.midPoint) {
+      setMidPointInput(String(hue.midPoint))
+    }
   }
 
-  const commit = (changes: Partial<Hue>) => {
-    const next = {...draft, ...changes}
+  const commitMidPoint = (value: string) => {
+    const midPoint = roundMidPoint(Number(value))
 
-    setDraft(next)
-    startTransition(() => onChange(tone, next))
+    setMidPointInput(value)
+    if (midPoint !== hue.midPoint) onChange(tone, {midPoint})
   }
 
   const snapMidPoint = () => {
-    const midPoint = roundMidPoint(Number(midPointInput))
-
-    setMidPointInput(String(midPoint))
-    if (midPoint !== draft.midPoint) commit({midPoint})
+    setMidPointInput(String(roundMidPoint(Number(midPointInput))))
   }
 
   const handleMidPointKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -109,11 +102,7 @@ export function HueFields(props: HueFieldsProps) {
     if (direction === null) return
 
     event.preventDefault()
-
-    const midPoint = stepMidPoint(roundMidPoint(Number(midPointInput)), direction)
-
-    setMidPointInput(String(midPoint))
-    if (midPoint !== draft.midPoint) commit({midPoint})
+    commitMidPoint(String(stepMidPoint(roundMidPoint(Number(midPointInput)), direction)))
   }
 
   return (
@@ -124,16 +113,16 @@ export function HueFields(props: HueFieldsProps) {
         </Text>
 
         <Grid gap={2} gridTemplateColumns={3}>
-          <ColorField label="Mid" onChange={(mid) => commit({mid})} value={draft.mid} />
+          <ColorField label="Mid" onChange={(mid) => onChange(tone, {mid})} value={hue.mid} />
           <ColorField
             label="Lightest"
-            onChange={(lightest) => commit({lightest})}
-            value={draft.lightest}
+            onChange={(lightest) => onChange(tone, {lightest})}
+            value={hue.lightest}
           />
           <ColorField
             label="Darkest"
-            onChange={(darkest) => commit({darkest})}
-            value={draft.darkest}
+            onChange={(darkest) => onChange(tone, {darkest})}
+            value={hue.darkest}
           />
         </Grid>
 
@@ -149,7 +138,7 @@ export function HueFields(props: HueFieldsProps) {
             max={950}
             min={50}
             onBlur={snapMidPoint}
-            onChange={(event) => setMidPointInput(event.currentTarget.value)}
+            onChange={(event) => commitMidPoint(event.currentTarget.value)}
             onKeyDown={handleMidPointKeyDown}
             onPointerUp={snapMidPoint}
             step={1}
@@ -165,7 +154,7 @@ export function HueFields(props: HueFieldsProps) {
           </datalist>
         </Stack>
 
-        <TintStrip hue={draft} title={tone} />
+        <TintStrip hue={hue} title={tone} />
       </Stack>
     </Card>
   )
