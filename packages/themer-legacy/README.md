@@ -1,10 +1,28 @@
 # @sanity/themer-legacy
 
-The hosted Themer service ([themer.sanity.build](https://themer.sanity.build)) as an npm package: the exact same [Sanity Studio](https://www.sanity.io/studio) theme generator, running locally.
+The hosted Themer service ([themer.sanity.build](https://themer.sanity.build)) as an npm package: the exact same [Sanity Studio](https://www.sanity.io/studio) theme generator, running locally, and a Studio tool to edit its themes.
 
 ```sh
 npm install @sanity/themer-legacy
 ```
+
+## The Studio tool
+
+`themerTool` from `@sanity/themer-legacy/tool` re-hosts the Themer's editor inside your own Studio, so the theme previews on your real content instead of a demo:
+
+```ts
+import {themerTool} from '@sanity/themer-legacy/tool'
+import {defineConfig} from 'sanity'
+
+export default defineConfig({
+  plugins: [themerTool()],
+  // ...rest of the config
+})
+```
+
+A toggle in the navbar opens the sidebar with the hosted presets and the six hue editors — the mid, lightest and darkest colors, the mid-point slider that places `mid` on the 50–950 ramp, and the generated tints (click one to copy its hex). Every change applies to the whole Studio while you browse around. The preview follows the Studio's appearance setting, or shows light and dark side by side with **Split-screen**. Drafts are kept in `localStorage`, so they survive reloads; **Reset** returns to the theme the Studio is configured with.
+
+The plugin is named `themer-legacy` and titled "Themer (Legacy)", so it can be installed next to `themerTool` from [`@sanity/themer/tool`](https://www.npmjs.com/package/@sanity/themer), which edits the current `buildTheme` themes.
 
 ## Migrating from themer.sanity.build
 
