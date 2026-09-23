@@ -1,7 +1,3 @@
-.sui-Container {
-  width: 100%;
-}
-
 .sui-Container[class*='sui-tone'] {
   --container-background: var(--background-low);
   background-color: var(--container-background);
