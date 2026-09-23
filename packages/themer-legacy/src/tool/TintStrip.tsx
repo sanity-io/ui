@@ -49,13 +49,14 @@ export function TintStrip(props: {hue: Hue; title: string}) {
   const toast = useToast()
   const tints = useMemo(() => createTintsFromHue(hue, title), [hue, title])
 
-  const handleCopy = async (hex: string, tintTitle: string) => {
-    try {
-      await navigator.clipboard.writeText(hex)
-      toast.push({closable: true, status: 'success', title: `Copied ${tintTitle} to the clipboard`})
-    } catch {
-      toast.push({status: 'error', title: `Could not copy ${tintTitle}`})
-    }
+  const handleCopy = (hex: string, tintTitle: string) => {
+    // Confirm right away like the hosted Themer did: the clipboard promise can
+    // stay pending behind a permission prompt, and the write itself is instant
+    // once it goes through
+    toast.push({closable: true, status: 'success', title: `Copied ${tintTitle} to the clipboard`})
+    navigator.clipboard.writeText(hex).catch(() => {
+      toast.push({status: 'error', title: `Could not copy ${tintTitle} to the clipboard`})
+    })
   }
 
   return (
@@ -83,7 +84,7 @@ export function TintStrip(props: {hue: Hue; title: string}) {
           >
             <Swatch
               aria-label={`Copy ${tintTitle} (${hex})`}
-              onClick={() => void handleCopy(hex, tintTitle)}
+              onClick={() => handleCopy(hex, tintTitle)}
               style={{background: hex}}
               type="button"
             />
