@@ -122,18 +122,7 @@ function MockStudio(props: {style?: React.CSSProperties}) {
             width: 8,
             height: 8,
             borderRadius: '50%',
-            background: color.avatar.magenta.bg,
-          }}
-        />
-        <div
-          style={{
-            flex: 'none',
-            width: 8,
-            height: 8,
-            marginLeft: -7,
-            borderRadius: '50%',
             background: color.avatar.blue.bg,
-            boxShadow: `0 0 0 1px ${color.bg}`,
           }}
         />
       </div>
