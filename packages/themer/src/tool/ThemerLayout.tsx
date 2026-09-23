@@ -1,7 +1,7 @@
 import {ThemeProvider} from '@sanity/ui'
 import {useActor, useSelector} from '@xstate/react'
 import {useEffect, useMemo, useState} from 'react'
-import {type LayoutProps} from 'sanity'
+import {type LayoutProps, useColorSchemeValue} from 'sanity'
 
 import {buildTheme} from '../theme/buildTheme'
 import {BuildThemeOptions} from '../theme/options'
@@ -72,6 +72,26 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
     () => (activeOptions === null ? null : buildTheme(activeOptions)),
     [activeOptions],
   )
+
+  // The Studio paints the body with its configured theme from above this
+  // layout, and Safari tints its chrome from the body — so the applied theme
+  // has to reach the body too, in the scheme the Studio is showing
+  const scheme = useColorSchemeValue()
+
+  useEffect(() => {
+    const background = theme?.v2?.color[scheme].default.bg
+
+    if (background === undefined) return undefined
+
+    const {style} = document.body
+    const previous = style.backgroundColor
+
+    style.backgroundColor = background
+
+    return () => {
+      style.backgroundColor = previous
+    }
+  }, [scheme, theme])
 
   const context = useMemo<ThemerContextValue>(
     () => ({baseOptions, themes, removed, active, view, open, send}),
