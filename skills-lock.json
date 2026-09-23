@@ -55,6 +55,18 @@
       "skillPath": "packages/claude-plugin/skills/storybook-upgrade/SKILL.md",
       "computedHash": "4561acb46bf2e3537393e925c58122d8cc940a45a51906173212e2cf40f1c882"
     },
+    "tsdown": {
+      "source": "rolldown/tsdown",
+      "sourceType": "github",
+      "skillPath": "skills/tsdown/SKILL.md",
+      "computedHash": "5764d08af27a89c5fdaf3d49926116636ea33580b864e3aae201a90703a7ef53"
+    },
+    "tsdown-migrate": {
+      "source": "rolldown/tsdown",
+      "sourceType": "github",
+      "skillPath": "skills/tsdown-migrate/SKILL.md",
+      "computedHash": "ef840c62747ce5aed1e8b35197d767b022a690648f4a55d31e5e81ed8c21e0bd"
+    },
     "ui-demo": {
       "source": "affaan-m/everything-claude-code",
       "sourceType": "github",

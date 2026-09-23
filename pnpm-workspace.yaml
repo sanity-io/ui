@@ -5,6 +5,13 @@ packages:
 
 linkWorkspacePackages: deep
 strictPeerDependencies: false
+autoDedupe: true
+
+# `pnpm add` writes `catalog:` when the requested version is covered by an
+# existing catalog entry, or when the dependency is not cataloged yet (the
+# entry is then added to `catalog` below). A version outside an existing
+# entry's range warns and is kept as a direct range (`strict` would error).
+catalogMode: prefer
 
 # Version ranges for dependencies used by more than one workspace package.
 # Referenced from package.json files via the `catalog:` protocol.
@@ -29,7 +36,7 @@ catalog:
   react-refractor: ^4.0.0
   refractor: ^5.0.0
   rimraf: ^5.0.5
-  sanity: ^6.15.0
+  sanity: ^6.16.0
   styled-components: ^6.5.3
   tsdown: ^0.23.0
   typescript: 7.0.2
