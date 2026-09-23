@@ -1,6 +1,6 @@
 import {ArrowLeftIcon} from '@sanity/icons/ArrowLeft'
 import {CloseIcon} from '@sanity/icons/Close'
-import {CodeIcon} from '@sanity/icons/Code'
+import {CodeBlockIcon} from '@sanity/icons/CodeBlock'
 import {Box, Button, Card, Flex, Text} from '@sanity/ui'
 import {useState} from 'react'
 
@@ -51,7 +51,7 @@ export function ThemerSidebar() {
             </Box>
             {view.name !== 'removed' && (
               <Button
-                icon={CodeIcon}
+                icon={CodeBlockIcon}
                 mode="bleed"
                 onClick={() => setSnippetOpen(true)}
                 padding={2}
