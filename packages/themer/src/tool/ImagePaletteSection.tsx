@@ -1,7 +1,7 @@
 import {SparklesIcon} from '@sanity/icons/Sparkles'
 import {Box, Card, Flex, Stack, Text} from '@sanity/ui'
 import {Tooltip} from '@sanity/ui/tooltip'
-import {useMemo, useState} from 'react'
+import {useEffect, useMemo, useRef, useState} from 'react'
 import {styled} from 'styled-components'
 
 import {BuildThemeOptions} from '../theme/options'
@@ -35,9 +35,19 @@ const TILE_GAP = 4
 /** The image spans both rows of tiles */
 const IMAGE_SIZE = TILE_SIZE * 2 + TILE_GAP
 
-/** The variant previews are the theme thumbnails at half size */
-const VARIANT_SCALE = 0.5
+/** The variant previews are the theme thumbnails, laid out at this width and scaled down */
 const VARIANT_WIDTH = 144
+
+/**
+ * How many variants show at once: two and a half, so that the cut-off third
+ * one gives away that the row scrolls
+ */
+const VISIBLE_VARIANTS = 2.5
+const VARIANT_GAP = 8
+const ROW_PADDING = 12
+
+/** The width of one variant, before the row has been measured */
+const FALLBACK_VARIANT_WIDTH = 58
 
 const PaletteGrid = styled.div`
   display: grid;
@@ -80,12 +90,12 @@ const Tile = styled.span`
  */
 const VariantRow = styled.div`
   display: flex;
-  gap: 8px;
-  margin: 0 -12px;
-  padding: 2px 12px;
+  gap: ${VARIANT_GAP}px;
+  margin: 0 -${ROW_PADDING}px;
+  padding: 2px ${ROW_PADDING}px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-padding-left: 12px;
+  scroll-padding-left: ${ROW_PADDING}px;
   scrollbar-width: thin;
 `
 
@@ -94,7 +104,7 @@ const VariantButton = styled.button`
   flex: none;
   display: block;
   box-sizing: border-box;
-  width: ${VARIANT_WIDTH * VARIANT_SCALE}px;
+  width: calc(var(--variant-width) + 4px);
   margin: 0;
   padding: 0;
   border: 0;
@@ -110,12 +120,12 @@ const VariantButton = styled.button`
   }
 `
 
-/** Clips the scaled-down thumbnail to its visual size */
+/** Clips the scaled-down thumbnail to its visual size, plus room for the ring */
 const VariantFrame = styled.span`
   display: block;
   box-sizing: border-box;
-  width: ${VARIANT_WIDTH * VARIANT_SCALE}px;
-  height: ${(VARIANT_WIDTH * VARIANT_SCALE * 9) / 16}px;
+  width: calc(var(--variant-width) + 4px);
+  height: calc(var(--variant-width) * 9 / 16 + 4px);
   padding: 2px;
   border-radius: 6px;
   overflow: hidden;
@@ -138,7 +148,7 @@ const VariantFrame = styled.span`
 const VariantScale = styled.span`
   display: block;
   width: ${VARIANT_WIDTH}px;
-  transform: scale(${VARIANT_SCALE});
+  transform: scale(var(--variant-scale));
   transform-origin: top left;
 `
 
@@ -163,6 +173,30 @@ export function ImagePaletteSection(props: {
   const {busy, pickImage} = useImagePalette(onPalette)
   const [dragging, setDragging] = useState(false)
   const current = palette ? currentImageVariant(options, palette) : null
+  const rowRef = useRef<HTMLDivElement | null>(null)
+  const [variantWidth, setVariantWidth] = useState(FALLBACK_VARIANT_WIDTH)
+
+  // Size the variants to the row, so two and a half of them are in view
+  useEffect(() => {
+    const row = rowRef.current
+
+    if (!row) return undefined
+
+    const measure = () => {
+      const visible =
+        row.clientWidth - ROW_PADDING - (Math.ceil(VISIBLE_VARIANTS) - 1) * VARIANT_GAP
+
+      setVariantWidth(Math.max(24, Math.floor(visible / VISIBLE_VARIANTS)))
+    }
+
+    measure()
+
+    const observer = new ResizeObserver(measure)
+
+    observer.observe(row)
+
+    return () => observer.disconnect()
+  }, [palette])
 
   const variants = useMemo(() => {
     if (!palette) return []
@@ -242,7 +276,13 @@ export function ImagePaletteSection(props: {
               <Text muted size={0}>
                 Pick the swatch to build the theme around
               </Text>
-              <VariantRow>
+              <VariantRow
+                ref={rowRef}
+                style={{
+                  ['--variant-width' as string]: `${variantWidth}px`,
+                  ['--variant-scale' as string]: variantWidth / VARIANT_WIDTH,
+                }}
+              >
                 {variants.map(({variant, options: variantOptions}) => (
                   <VariantButton
                     aria-pressed={variant === current}
