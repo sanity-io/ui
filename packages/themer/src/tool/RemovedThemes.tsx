@@ -1,6 +1,7 @@
 import {Box, Button, Flex, Stack, Text} from '@sanity/ui'
 
 import {useThemer} from './context'
+import {ScrollArea} from './ScrollArea'
 import {displayTitle} from './themes'
 import {ThemeThumbnail} from './ThemeThumbnail'
 
@@ -16,7 +17,7 @@ export function RemovedThemes() {
   const {removed, send} = useThemer()
 
   return (
-    <Box flex={1} overflow="auto" padding={3}>
+    <ScrollArea flex={1} overflow="auto" padding={3}>
       <Stack gap={5}>
         {removed.map((theme) => (
           <Stack gap={3} key={theme.slug}>
@@ -48,6 +49,6 @@ export function RemovedThemes() {
           </Stack>
         ))}
       </Stack>
-    </Box>
+    </ScrollArea>
   )
 }

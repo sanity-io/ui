@@ -5,6 +5,7 @@ import {Box, Button, Card, Flex, Stack} from '@sanity/ui'
 import {useThemer} from './context'
 import {ImageFileButton} from './ImageFileButton'
 import {optionsFromImagePalette, titleFromFileName} from './imagePalette'
+import {ScrollArea} from './ScrollArea'
 import {ThemeCard} from './ThemeCard'
 import {useImagePalette} from './useImagePalette'
 
@@ -28,34 +29,13 @@ export function ThemeList() {
 
   return (
     <>
-      <Box flex={1} overflow="auto" padding={3}>
+      <ScrollArea flex={1} overflow="auto" padding={3}>
         <Stack gap={4}>
           {themes.map((theme) => (
             <ThemeCard active={theme.slug === active.slug} key={theme.slug} theme={theme} />
           ))}
-        </Stack>
-      </Box>
-
-      <Card borderTop padding={3}>
-        <Stack gap={2}>
-          <Flex gap={2}>
-            <Box flex={1}>
-              <Button
-                icon={AddIcon}
-                mode="ghost"
-                onClick={() => send({type: 'theme.add'})}
-                text="Add theme"
-                title="Add a theme based on the applied one"
-                width="fill"
-              />
-            </Box>
-            <ImageFileButton
-              loading={busy}
-              mode="ghost"
-              onFile={pickImage}
-              title="Add a theme from the colors of an image"
-            />
-          </Flex>
+          {/* Trails the list rather than sitting in the footer, so the footer
+              does not shift when the first theme gets removed */}
           {removed.length > 0 && (
             <Button
               icon={RestoreIcon}
@@ -66,6 +46,27 @@ export function ThemeList() {
             />
           )}
         </Stack>
+      </ScrollArea>
+
+      <Card borderTop padding={3}>
+        <Flex gap={2}>
+          <Box flex={1}>
+            <Button
+              icon={AddIcon}
+              mode="ghost"
+              onClick={() => send({type: 'theme.add'})}
+              text="Add theme"
+              title="Add a theme based on the applied one"
+              width="fill"
+            />
+          </Box>
+          <ImageFileButton
+            loading={busy}
+            mode="ghost"
+            onFile={pickImage}
+            title="Add a theme from the colors of an image"
+          />
+        </Flex>
       </Card>
     </>
   )

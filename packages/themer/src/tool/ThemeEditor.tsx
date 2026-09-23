@@ -18,6 +18,7 @@ import {
 import {useThemer} from './context'
 import {applyImagePalette, ImagePalette} from './imagePalette'
 import {ImagePaletteSection} from './ImagePaletteSection'
+import {ScrollArea} from './ScrollArea'
 import {ThemeThumbnail} from './ThemeThumbnail'
 
 const SCHEME_TITLES: Record<ThemeColorSchemeKey, string> = {
@@ -172,7 +173,7 @@ function ThemeEditorForm(props: {
 
   return (
     <>
-      <Box flex={1} overflow="auto" padding={3}>
+      <ScrollArea flex={1} overflow="auto" padding={3}>
         <Stack gap={4}>
           <ThemeThumbnail options={options} />
 
@@ -209,7 +210,7 @@ function ThemeEditorForm(props: {
             />
           ))}
         </Stack>
-      </Box>
+      </ScrollArea>
 
       <Card borderTop padding={3}>
         <Flex gap={2}>
