@@ -95,6 +95,14 @@
       "source": "./src/commands/latest/label.ts",
       "default": "./dist/commands/latest/label.js"
     },
+    "./transforms/latest/select": {
+      "source": "./src/transforms/latest/select/select.ts",
+      "default": "./dist/transforms/latest/select/select.js"
+    },
+    "./latest/select": {
+      "source": "./src/commands/latest/select.ts",
+      "default": "./dist/commands/latest/select.js"
+    },
     "./transforms/latest/stack": {
       "source": "./src/transforms/latest/stack/stack.ts",
       "default": "./dist/transforms/latest/stack/stack.js"
@@ -135,6 +143,8 @@
       "./latest/inline": "./dist/commands/latest/inline.js",
       "./transforms/latest/label": "./dist/transforms/latest/label/label.js",
       "./latest/label": "./dist/commands/latest/label.js",
+      "./transforms/latest/select": "./dist/transforms/latest/select/select.js",
+      "./latest/select": "./dist/commands/latest/select.js",
       "./transforms/latest/stack": "./dist/transforms/latest/stack/stack.js",
       "./latest/stack": "./dist/commands/latest/stack.js",
       "./transforms/latest/text": "./dist/transforms/latest/text/text.js",

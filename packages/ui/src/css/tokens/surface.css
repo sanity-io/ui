@@ -10,6 +10,8 @@
   --foreground-high-emphasized: light-dark(var(--white), var(--black));
   --foreground-low: light-dark(var(--gray-600), var(--gray-400));
   --foreground-low-emphasized: light-dark(var(--gray-100), var(--gray-900));
+  /* Used to create equivalent text + block size for form elements vs UI v3/4. Can drop once migration is complete. */
+  --form-element-text: var(--regular) 13px / 1.15 var(--sans);
 }
 
 [class*='sui-tone'] {
