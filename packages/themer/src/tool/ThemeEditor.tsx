@@ -16,7 +16,13 @@ import {
   SchemeThemeOptions,
 } from '../theme/options'
 import {useThemer} from './context'
-import {applyImagePalette, ImagePalette} from './imagePalette'
+import {
+  applyImagePalette,
+  currentImageVariant,
+  ImagePalette,
+  ImagePaletteVariant,
+  pickLuckyVariant,
+} from './imagePalette'
 import {ImagePaletteSection} from './ImagePaletteSection'
 import {ScrollArea} from './ScrollArea'
 import {ThemeThumbnail} from './ThemeThumbnail'
@@ -95,28 +101,50 @@ const rampStyle: React.CSSProperties = {
  */
 export function ThemeEditor(props: {focusTitle: boolean; slug: string}) {
   const {focusTitle, slug} = props
-  const {themes, send} = useThemer()
+  const {themes, images, send} = useThemer()
   const theme = themes.find((candidate) => candidate.slug === slug && candidate.source === 'custom')
 
   // The machine only enters the edit flow for a listed custom theme, and
   // leaves it as soon as the theme is removed or deleted
   if (!theme) return null
 
+  const applyVariant = (variant: ImagePaletteVariant | null) => {
+    if (!theme.palette || variant === null) return
+
+    send({
+      type: 'theme.update',
+      slug,
+      options: applyImagePalette(theme.options, theme.palette, variant),
+    })
+  }
+
   return (
     <ThemeEditorForm
       focusTitle={focusTitle}
+      imageUrl={images[slug]}
       onDone={() => send({type: 'flow.list'})}
+      onLucky={() => {
+        if (!theme.palette) return
+
+        applyVariant(
+          pickLuckyVariant(theme.palette, {
+            exclude: currentImageVariant(theme.options, theme.palette),
+          }),
+        )
+      }}
       onOptionsChange={(options) => send({type: 'theme.update', slug, options})}
-      onPalette={(palette) =>
+      onPalette={(palette, file) =>
         send({
           type: 'theme.update',
           slug,
           options: applyImagePalette(theme.options, palette),
           palette,
+          imageUrl: URL.createObjectURL(file),
         })
       }
       onRemove={() => send({type: 'theme.remove', slug})}
       onTitleChange={(title) => send({type: 'theme.update', slug, title})}
+      onVariant={applyVariant}
       options={theme.options}
       palette={theme.palette}
       title={theme.title}
@@ -128,22 +156,28 @@ export function ThemeEditor(props: {focusTitle: boolean; slug: string}) {
 // while the editor bails out early when the theme is gone
 function ThemeEditorForm(props: {
   focusTitle: boolean
+  imageUrl?: string
   onDone: () => void
+  onLucky: () => void
   onOptionsChange: (options: BuildThemeOptions) => void
-  onPalette: (palette: ImagePalette) => void
+  onPalette: (palette: ImagePalette, file: File) => void
   onRemove: () => void
   onTitleChange: (title: string) => void
+  onVariant: (variant: ImagePaletteVariant) => void
   options: BuildThemeOptions
   palette?: ImagePalette
   title: string
 }) {
   const {
     focusTitle,
+    imageUrl,
     onDone,
+    onLucky,
     onOptionsChange,
     onPalette,
     onRemove,
     onTitleChange,
+    onVariant,
     options,
     palette,
     title,
@@ -194,8 +228,11 @@ function ThemeEditorForm(props: {
           </Stack>
 
           <ImagePaletteSection
-            onAssign={(scheme, target, hex) => patchScheme(scheme, {[target]: hex})}
+            imageUrl={imageUrl}
+            onLucky={onLucky}
             onPalette={onPalette}
+            onVariant={onVariant}
+            options={options}
             palette={palette}
           />
 

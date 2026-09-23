@@ -113,6 +113,42 @@ describe('themerMachine', () => {
       })
     })
 
+    it('keeps the image of a theme for the session, and lets it go with the theme', () => {
+      const actor = start()
+      const palette = {
+        dominant: '#e11d48',
+        vibrant: '#e11d48',
+        lightVibrant: null,
+        darkVibrant: null,
+        muted: null,
+        lightMuted: null,
+        darkMuted: null,
+      }
+
+      actor.send({type: 'theme.add', title: 'sunset', palette, imageUrl: 'blob:one'})
+
+      const slug = actor.getSnapshot().context.custom[0].slug
+
+      expect(actor.getSnapshot().context.images).toEqual({[slug]: 'blob:one'})
+      expect(selectStoredState(actor.getSnapshot())).not.toHaveProperty('images')
+
+      actor.send({type: 'theme.update', slug, palette, imageUrl: 'blob:two'})
+      expect(actor.getSnapshot().context.images).toEqual({[slug]: 'blob:two'})
+
+      actor.send({type: 'theme.update', slug: 'verdant', imageUrl: 'blob:nope'})
+      expect(actor.getSnapshot().context.images).toEqual({[slug]: 'blob:two'})
+
+      actor.send({type: 'theme.duplicate', slug})
+      const copy = actor.getSnapshot().context.custom[1]
+
+      expect(copy.palette).toEqual(palette)
+      expect(actor.getSnapshot().context.images).toEqual({[slug]: 'blob:two'})
+
+      actor.send({type: 'theme.remove', slug})
+      actor.send({type: 'theme.delete', slug})
+      expect(actor.getSnapshot().context.images).toEqual({})
+    })
+
     it('duplicates listed and removed themes into the editor', () => {
       const actor = startWithCustom({removed: ['custom-1']})
 

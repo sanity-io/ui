@@ -1,6 +1,6 @@
 import {ThemeProvider} from '@sanity/ui'
 import {useActor, useSelector} from '@xstate/react'
-import {useEffect, useMemo, useState} from 'react'
+import {useEffect, useMemo, useRef, useState} from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
 
 import {buildTheme} from '../theme/buildTheme'
@@ -55,8 +55,30 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const stored = useSelector(actorRef, selectStoredState, sameStoredState)
   const view = useSelector(actorRef, selectView, sameView)
   const open = snapshot.matches({sidebar: 'open'})
+  const {images} = snapshot.context
 
   useEffect(() => writeStoredState(stored), [stored])
+
+  // The images live in memory as object URLs — release the ones no theme
+  // refers to anymore, and all of them on the way out
+  const previousImages = useRef(images)
+
+  useEffect(() => {
+    const current = new Set(Object.values(images))
+
+    for (const url of Object.values(previousImages.current)) {
+      if (!current.has(url)) URL.revokeObjectURL(url)
+    }
+
+    previousImages.current = images
+  }, [images])
+
+  useEffect(
+    () => () => {
+      for (const url of Object.values(previousImages.current)) URL.revokeObjectURL(url)
+    },
+    [],
+  )
 
   const {themes, removed, active} = useMemo(
     () => resolveThemes(stored, baseOptions),
@@ -94,8 +116,8 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   }, [scheme, theme])
 
   const context = useMemo<ThemerContextValue>(
-    () => ({baseOptions, themes, removed, active, view, open, send}),
-    [active, baseOptions, open, removed, send, themes, view],
+    () => ({baseOptions, themes, removed, active, images, view, open, send}),
+    [active, baseOptions, images, open, removed, send, themes, view],
   )
 
   return (

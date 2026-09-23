@@ -30,6 +30,8 @@ export interface ThemerContextValue {
   removed: ThemerTheme[]
   /** The applied theme */
   active: ThemerTheme
+  /** Object URLs of the images themes took their palette from this session, by slug */
+  images: Record<string, string>
   view: ThemerView
   /** Whether the themer sidebar is open */
   open: boolean

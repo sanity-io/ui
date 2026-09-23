@@ -28,6 +28,12 @@ export interface ThemerMachineContext extends ThemerState {
     /** Whether the title input should take focus, for themes that were just created */
     focusTitle: boolean
   } | null
+  /**
+   * Object URLs of the images that themes took their palette from, by theme
+   * slug — kept for the session only, so the image can be shown right after
+   * it was picked
+   */
+  images: Record<string, string>
 }
 
 /** @internal */
@@ -40,7 +46,13 @@ export type ThemerEvent =
    * Adds a theme and opens it in the editor — based on the applied theme, or
    * on the given title, options and image palette (e.g. from an image)
    */
-  | {type: 'theme.add'; title?: string; options?: BuildThemeOptions; palette?: ImagePalette}
+  | {
+      type: 'theme.add'
+      title?: string
+      options?: BuildThemeOptions
+      palette?: ImagePalette
+      imageUrl?: string
+    }
   /** Adds a copy of a theme and opens it in the editor */
   | {type: 'theme.duplicate'; slug: string}
   /** Opens one of the user's own themes in the editor */
@@ -51,6 +63,7 @@ export type ThemerEvent =
       title?: string
       options?: BuildThemeOptions
       palette?: ImagePalette
+      imageUrl?: string
     }
   /** Takes a theme out of the list — it can be restored until it is deleted */
   | {type: 'theme.remove'; slug: string}
@@ -109,7 +122,12 @@ export const themerMachine = setup({
     add: assign(
       (
         {context},
-        params: {title?: string; options?: BuildThemeOptions; palette?: ImagePalette},
+        params: {
+          title?: string
+          options?: BuildThemeOptions
+          palette?: ImagePalette
+          imageUrl?: string
+        },
       ) => {
         const theme = createCustomTheme(
           params.title ?? UNTITLED_THEME,
@@ -122,6 +140,9 @@ export const themerMachine = setup({
           custom: [...context.custom, theme],
           // A theme named after its image needs no renaming right away
           editing: {slug: theme.slug, focusTitle: params.title === undefined},
+          images: params.imageUrl
+            ? {...context.images, [theme.slug]: params.imageUrl}
+            : context.images,
         }
       },
     ),
@@ -131,7 +152,7 @@ export const themerMachine = setup({
 
       if (!source) return {}
 
-      const theme = createCustomTheme(duplicateTitle(source.title), source.options)
+      const theme = createCustomTheme(duplicateTitle(source.title), source.options, source.palette)
 
       return {
         active: theme.slug,
@@ -152,6 +173,7 @@ export const themerMachine = setup({
           title?: string
           options?: BuildThemeOptions
           palette?: ImagePalette
+          imageUrl?: string
         },
       ) => ({
         custom: context.custom.map((theme) => {
@@ -166,6 +188,10 @@ export const themerMachine = setup({
             ...(params.palette ? {palette: params.palette} : {}),
           }
         }),
+        images:
+          params.imageUrl && context.custom.some((theme) => theme.slug === params.slug)
+            ? {...context.images, [params.slug]: params.imageUrl}
+            : context.images,
       }),
     ),
     remove: assign(({context}, params: {slug: string}) => {
@@ -182,16 +208,24 @@ export const themerMachine = setup({
     delete: assign(({context}, params: {slug: string}) => {
       if (!context.custom.some((theme) => theme.slug === params.slug)) return {}
 
+      const {[params.slug]: _deleted, ...images} = context.images
+
       return {
         active: context.active === params.slug ? null : context.active,
         custom: context.custom.filter((theme) => theme.slug !== params.slug),
         removed: context.removed.filter((slug) => slug !== params.slug),
+        images,
       }
     }),
   },
 }).createMachine({
   id: 'themer',
-  context: ({input}) => ({...input.stored, baseOptions: input.baseOptions, editing: null}),
+  context: ({input}) => ({
+    ...input.stored,
+    baseOptions: input.baseOptions,
+    editing: null,
+    images: {},
+  }),
   type: 'parallel',
   states: {
     sidebar: {
@@ -219,6 +253,7 @@ export const themerMachine = setup({
               title: event.title,
               options: event.options,
               palette: event.palette,
+              imageUrl: event.imageUrl,
             }),
           },
         },
@@ -239,6 +274,7 @@ export const themerMachine = setup({
               title: event.title,
               options: event.options,
               palette: event.palette,
+              imageUrl: event.imageUrl,
             }),
           },
         },

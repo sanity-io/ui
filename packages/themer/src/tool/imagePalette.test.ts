@@ -2,9 +2,11 @@ import {describe, expect, it} from 'vitest'
 
 import {
   applyImagePalette,
+  currentImageVariant,
   extractImagePalette,
   ImagePalette,
   optionsFromImagePalette,
+  pickLuckyVariant,
   PixelData,
   titleFromFileName,
 } from './imagePalette'
@@ -166,6 +168,72 @@ describe('optionsFromImagePalette', () => {
       dark: {accent: '#7a7e8a'},
     })
     expect(optionsFromImagePalette(EMPTY)).toEqual({})
+  })
+})
+
+describe('variants', () => {
+  const palette: ImagePalette = {
+    dominant: '#e11d48',
+    vibrant: '#e11d48',
+    lightVibrant: '#f29cb0',
+    darkVibrant: '#5c0a1d',
+    muted: '#7a7e8a',
+    lightMuted: '#c9cbd1',
+    darkMuted: '#3a3c42',
+  }
+
+  it('builds the theme around the chosen swatch', () => {
+    const options = optionsFromImagePalette(palette, 'darkMuted')
+
+    expect(options.light?.accent).toBe('#3a3c42')
+    expect(options.dark?.accent).toBe('#3a3c42')
+    expect(options.light?.text).toBe('#7a7e8a')
+    expect(currentImageVariant(options, palette)).toBe('darkMuted')
+    expect(currentImageVariant(optionsFromImagePalette(palette), palette)).toBe('vibrant')
+    expect(currentImageVariant({light: {accent: '#000000'}}, palette)).toBeNull()
+    expect(currentImageVariant({}, palette)).toBeNull()
+  })
+
+  it('falls back to the automatic accent when the chosen swatch is missing', () => {
+    expect(optionsFromImagePalette({...palette, lightMuted: null}, 'lightMuted').light?.accent).toBe(
+      '#e11d48',
+    )
+  })
+
+  it('feels lucky about interesting swatches, never the current one', () => {
+    // A random of 0 always lands on the first candidate
+    expect(pickLuckyVariant(palette, {random: () => 0})).toBe('muted')
+    expect(pickLuckyVariant(palette, {exclude: 'muted', random: () => 0})).toBe('vibrant')
+    // A random just under 1 lands on the last candidate
+    expect(pickLuckyVariant(palette, {random: () => 0.999})).toBe('darkVibrant')
+
+    const picks = new Set<string>()
+
+    for (let index = 0; index < 200; index++) {
+      picks.add(pickLuckyVariant(palette, {exclude: 'vibrant'}) ?? 'null')
+    }
+
+    expect(picks.has('vibrant')).toBe(false)
+    expect(picks.size).toBeGreaterThan(1)
+  })
+
+  it('weighs saturated, mid-lightness swatches heavier', () => {
+    let vivid = 0
+    let dull = 0
+
+    for (let index = 0; index < 400; index++) {
+      const pick = pickLuckyVariant({...EMPTY, vibrant: '#ff0000', lightMuted: '#e0e0e6'})
+
+      if (pick === 'vibrant') vivid++
+      if (pick === 'lightMuted') dull++
+    }
+
+    expect(vivid).toBeGreaterThan(dull)
+  })
+
+  it('has nothing to feel lucky about without swatches, and keeps a lone one', () => {
+    expect(pickLuckyVariant(EMPTY)).toBeNull()
+    expect(pickLuckyVariant({...EMPTY, muted: '#7a7e8a'}, {exclude: 'muted'})).toBe('muted')
   })
 })
 

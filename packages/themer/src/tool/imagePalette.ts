@@ -1,3 +1,4 @@
+import {hexToHsl} from '../theme/hsl'
 import {BuildThemeOptions, DEFAULT_BACKGROUND, SCHEMES, SchemeThemeOptions} from '../theme/options'
 
 /**
@@ -32,6 +33,24 @@ export const IMAGE_PALETTE_KEYS: ImagePaletteKey[] = [
   'lightMuted',
   'darkMuted',
   'dominant',
+]
+
+/**
+ * The swatches a theme can be built around — every swatch but the dominant
+ * one, which only repeats one of them.
+ *
+ * @internal
+ */
+export type ImagePaletteVariant = Exclude<ImagePaletteKey, 'dominant'>
+
+/** The variants in the order the tool offers them @internal */
+export const IMAGE_PALETTE_VARIANTS: ImagePaletteVariant[] = [
+  'muted',
+  'vibrant',
+  'lightMuted',
+  'lightVibrant',
+  'darkMuted',
+  'darkVibrant',
 ]
 
 /** @internal */
@@ -261,26 +280,31 @@ function tint(base: string, color: string, amount: number): string {
 const BACKGROUND_TINT = {light: 0.08, dark: 0.3}
 
 /**
- * Derives theme options from an image palette: the vibrant swatch becomes the
- * accent of both schemes (each falling back to the vibrant swatch of its own
- * end of the scale), the muted swatch the text color, and the light and dark
- * muted swatches tint the stock backgrounds of their scheme — enough to
- * carry the image's tone without giving up a usable canvas. Whatever the
- * palette lacks stays at the theme defaults.
+ * Derives theme options from an image palette: the accent of both schemes is
+ * the swatch of the chosen variant — or, without one, the vibrant swatch,
+ * each scheme falling back to the vibrant swatch of its own end of the scale.
+ * The muted swatch becomes the text color, and the light and dark muted
+ * swatches tint the stock backgrounds of their scheme — enough to carry the
+ * image's tone without giving up a usable canvas. Whatever the palette lacks
+ * stays at the theme defaults.
  *
  * @internal
  */
-export function optionsFromImagePalette(palette: ImagePalette): BuildThemeOptions {
+export function optionsFromImagePalette(
+  palette: ImagePalette,
+  variant?: ImagePaletteVariant,
+): BuildThemeOptions {
   const options: BuildThemeOptions = {}
+  const accent = variant ? palette[variant] : null
 
   const light = schemeFromPalette(
-    palette.vibrant ?? palette.darkVibrant ?? palette.dominant,
+    accent ?? palette.vibrant ?? palette.darkVibrant ?? palette.dominant,
     palette.muted ?? palette.darkMuted,
     palette.lightMuted ?? palette.muted ?? palette.lightVibrant,
     'light',
   )
   const dark = schemeFromPalette(
-    palette.vibrant ?? palette.lightVibrant ?? palette.dominant,
+    accent ?? palette.vibrant ?? palette.lightVibrant ?? palette.dominant,
     palette.muted ?? palette.lightMuted,
     palette.darkMuted ?? palette.muted ?? palette.darkVibrant,
     'dark',
@@ -319,8 +343,9 @@ function schemeFromPalette(
 export function applyImagePalette(
   options: BuildThemeOptions,
   palette: ImagePalette,
+  variant?: ImagePaletteVariant,
 ): BuildThemeOptions {
-  const derived = optionsFromImagePalette(palette)
+  const derived = optionsFromImagePalette(palette, variant)
   const next: BuildThemeOptions = {...options}
 
   for (const scheme of SCHEMES) {
@@ -328,6 +353,66 @@ export function applyImagePalette(
   }
 
   return next
+}
+
+/**
+ * The variant a theme is built around: the one whose swatch is the theme's
+ * accent, or `null` when the accent comes from somewhere else.
+ *
+ * @internal
+ */
+export function currentImageVariant(
+  options: BuildThemeOptions,
+  palette: ImagePalette,
+): ImagePaletteVariant | null {
+  const accent = options.light?.accent ?? options.dark?.accent
+
+  if (!accent) return null
+
+  return IMAGE_PALETTE_VARIANTS.find((variant) => palette[variant] === accent) ?? null
+}
+
+/**
+ * How much a swatch has going for it as an accent: saturation first, then
+ * closeness to mid lightness — the range where an accent reads best.
+ */
+function interest(hex: string): number {
+  const {s, l} = hexToHsl(hex)
+
+  return 0.1 + 0.55 * s + 0.35 * (1 - Math.abs(l - 0.5) * 2)
+}
+
+/**
+ * Picks a variant for the "I'm feeling lucky" button: a random one, weighted
+ * by how interesting its swatch is as an accent, and never the one the theme
+ * already uses while there are others to pick from.
+ *
+ * @internal
+ */
+export function pickLuckyVariant(
+  palette: ImagePalette,
+  options: {exclude?: ImagePaletteVariant | null; random?: () => number} = {},
+): ImagePaletteVariant | null {
+  const {exclude = null, random = Math.random} = options
+  let candidates = IMAGE_PALETTE_VARIANTS.filter((variant) => palette[variant] !== null)
+
+  if (candidates.length > 1) {
+    candidates = candidates.filter((variant) => variant !== exclude)
+  }
+
+  if (candidates.length === 0) return null
+
+  const weights = candidates.map((variant) => interest(palette[variant]!))
+  const total = weights.reduce((sum, weight) => sum + weight, 0)
+  let pick = random() * total
+
+  for (const [index, variant] of candidates.entries()) {
+    pick -= weights[index]
+
+    if (pick < 0) return variant
+  }
+
+  return candidates.at(-1) ?? null
 }
 
 /** A theme title for the image a palette came from, e.g. `sunset-beach.jpg` → `sunset beach` @internal */

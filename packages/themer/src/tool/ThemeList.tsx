@@ -25,6 +25,7 @@ export function ThemeList() {
       title: titleFromFileName(file.name),
       options: optionsFromImagePalette(palette),
       palette,
+      imageUrl: URL.createObjectURL(file),
     }),
   )
 
