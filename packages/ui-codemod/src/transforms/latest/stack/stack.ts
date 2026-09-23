@@ -84,10 +84,6 @@ export default function transform(
               changed = true
             }
 
-            if (addAttribute(j, path.node, 'flexShrink', 0)) {
-              changed = true
-            }
-
             return changed
           },
         },

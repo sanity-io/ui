@@ -155,6 +155,29 @@ defineInlineTest(
 
 defineInlineTest(
   transform,
+  {},
+  `
+  import {Card} from '@sanity/ui'
+  import {Box} from '@sanity/ui'
+
+  <>
+    <Card padding={1}>Content</Card>
+    <Box />
+  </>
+  `,
+  `
+  import {Box} from '@sanity/ui'
+
+  <>
+    <Box padding={1}>Content</Box>
+    <Box />
+  </>
+  `,
+  'does not add import if replacement already exists',
+)
+
+defineInlineTest(
+  transform,
   {setLocalNames: true},
   `
   import {Card as LegacyCard} from '@sanity/ui'

@@ -12,6 +12,23 @@ export function addImportSpecifier(
 ): boolean {
   let hasChanges = false
 
+  const hasExistingSpecifier = root
+    .find(j.ImportDeclaration)
+    .some((path) =>
+      Boolean(
+        path.node.specifiers?.some(
+          (spec) =>
+            spec.type === 'ImportSpecifier' &&
+            spec.imported.type === 'Identifier' &&
+            spec.imported.name === name,
+        ),
+      ),
+    )
+
+  if (hasExistingSpecifier) {
+    return false
+  }
+
   root.find(j.ImportDeclaration).forEach((path) => {
     const specs = path.node.specifiers
 
@@ -25,14 +42,8 @@ export function addImportSpecifier(
         s.imported.type === 'Identifier' &&
         s.imported.name === addTo,
     )
-    const hasToSpecifier = specs.some(
-      (s) =>
-        s.type === 'ImportSpecifier' &&
-        s.imported.type === 'Identifier' &&
-        s.imported.name === name,
-    )
 
-    if (hasFromSpecifier && !hasToSpecifier) {
+    if (hasFromSpecifier) {
       specs.push(j.importSpecifier(j.identifier(name), j.identifier(name)))
       hasChanges = true
     }
