@@ -7,11 +7,11 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "dev": "sanity dev",
+    "embeddings:enable": "sanity datasets embeddings enable production --projection '{ filename, namedExport, tags, description }' --wait",
+    "export:docs": "unrun scripts/export-docs-to-code.ts",
     "prebuild": "pnpm --filter @sanity/ui build",
     "predeploy": "pnpm --filter @sanity/ui build",
     "predev": "pnpm --filter @sanity/ui build",
-    "embeddings:enable": "sanity datasets embeddings enable production --projection '{ filename, namedExport, tags, description }' --wait",
-    "export:docs": "unrun scripts/export-docs-to-code.ts",
     "schema:deploy": "sanity schema deploy"
   },
   "dependencies": {
