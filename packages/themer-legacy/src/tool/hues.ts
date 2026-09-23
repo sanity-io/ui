@@ -16,7 +16,7 @@ export const MID_POINTS: readonly HueMidPoint[] = [
 ]
 
 export function isMidPoint(value: number): value is HueMidPoint {
-  return (MID_POINTS as readonly number[]).includes(value)
+  return MID_POINTS.some((midPoint) => midPoint === value)
 }
 
 /**
