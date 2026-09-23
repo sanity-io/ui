@@ -37,27 +37,28 @@ const PickButton = styled.button`
 `
 
 /**
- * Wraps the thumbnail with a gap for the ring that marks the applied theme —
+ * Wraps the thumbnail with room for the ring that marks the applied theme —
  * hovering shows a faint ring, the applied theme the focus ring color, and
- * keyboard focus an outline further out so it shows on the applied theme too.
+ * keyboard focus an outline. The rings are drawn inside the frame's padding,
+ * so nothing sticks out to be clipped by the scrolling list.
  */
 const Frame = styled.span`
   display: block;
-  padding: 2px;
-  border-radius: 9px;
+  padding: 4px;
+  border-radius: 10px;
   transition: box-shadow 100ms;
 
   ${PickButton}:hover & {
-    box-shadow: 0 0 0 2px var(--card-border-color);
+    box-shadow: inset 0 0 0 2px var(--card-border-color);
   }
 
   ${PickButton}[aria-pressed='true'] & {
-    box-shadow: 0 0 0 2px var(--card-focus-ring-color);
+    box-shadow: inset 0 0 0 2px var(--card-focus-ring-color);
   }
 
   ${PickButton}:focus-visible & {
     outline: 2px solid var(--card-focus-ring-color);
-    outline-offset: 2px;
+    outline-offset: -2px;
   }
 `
 
@@ -69,8 +70,8 @@ const Frame = styled.span`
  */
 const MenuSlot = styled.div`
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 10px;
+  right: 10px;
   opacity: 0;
   transition: opacity 100ms;
 

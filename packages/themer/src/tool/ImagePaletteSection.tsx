@@ -92,7 +92,7 @@ const VariantRow = styled.div`
   display: flex;
   gap: ${VARIANT_GAP}px;
   margin: 0 -${ROW_PADDING}px;
-  padding: 2px ${ROW_PADDING}px;
+  padding: 0 ${ROW_PADDING}px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-left: ${ROW_PADDING}px;
@@ -104,7 +104,7 @@ const VariantButton = styled.button`
   flex: none;
   display: block;
   box-sizing: border-box;
-  width: calc(var(--variant-width) + 4px);
+  width: calc(var(--variant-width) + 8px);
   margin: 0;
   padding: 0;
   border: 0;
@@ -120,28 +120,32 @@ const VariantButton = styled.button`
   }
 `
 
-/** Clips the scaled-down thumbnail to its visual size, plus room for the ring */
+/**
+ * Clips the scaled-down thumbnail to its visual size, with room for the ring
+ * — drawn inside the frame, like the theme cards', so the scrolling row
+ * never clips it
+ */
 const VariantFrame = styled.span`
   display: block;
   box-sizing: border-box;
-  width: calc(var(--variant-width) + 4px);
-  height: calc(var(--variant-width) * 9 / 16 + 4px);
-  padding: 2px;
-  border-radius: 6px;
+  width: calc(var(--variant-width) + 8px);
+  height: calc(var(--variant-width) * 9 / 16 + 8px);
+  padding: 4px;
+  border-radius: 7px;
   overflow: hidden;
   transition: box-shadow 100ms;
 
   ${VariantButton}:hover & {
-    box-shadow: 0 0 0 2px var(--card-border-color);
+    box-shadow: inset 0 0 0 2px var(--card-border-color);
   }
 
   ${VariantButton}[aria-pressed='true'] & {
-    box-shadow: 0 0 0 2px var(--card-focus-ring-color);
+    box-shadow: inset 0 0 0 2px var(--card-focus-ring-color);
   }
 
   ${VariantButton}:focus-visible & {
     outline: 2px solid var(--card-focus-ring-color);
-    outline-offset: 1px;
+    outline-offset: -2px;
   }
 `
 
@@ -186,7 +190,8 @@ export function ImagePaletteSection(props: {
       const visible =
         row.clientWidth - ROW_PADDING - (Math.ceil(VISIBLE_VARIANTS) - 1) * VARIANT_GAP
 
-      setVariantWidth(Math.max(24, Math.floor(visible / VISIBLE_VARIANTS)))
+      // Each variant is its thumbnail plus the 4px frame on either side
+      setVariantWidth(Math.max(24, Math.floor(visible / VISIBLE_VARIANTS) - 8))
     }
 
     measure()
