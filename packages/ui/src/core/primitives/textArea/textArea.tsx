@@ -86,6 +86,7 @@ export function TextArea(props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAre
           data-as="textarea"
           data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
+          data-ui="TextArea__input"
           {...restProps}
           $fontSize={_getArrayProp(fontSize)}
           $padding={_getArrayProp(padding)}
@@ -104,6 +105,7 @@ export function TextArea(props: TextAreaProps & Omit<React.HTMLProps<HTMLTextAre
           data-border={border ? '' : undefined}
           data-scheme={rootTheme.scheme}
           data-tone={rootTheme.tone}
+          data-ui="TextArea__presentation"
         />
       </span>
     </span>

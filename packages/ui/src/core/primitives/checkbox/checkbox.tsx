@@ -59,6 +59,7 @@ export function Checkbox(
       <Input
         data-read-only={!disabled && readOnly ? '' : undefined}
         data-error={customValidity ? '' : undefined}
+        data-ui="Checkbox__input"
         {...restProps}
         checked={checked}
         disabled={disabled || readOnly}

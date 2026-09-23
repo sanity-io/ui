@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "4.2.1",
+  "version": "4.2.3",
   "keywords": [
     "components",
     "design-system",
@@ -84,7 +84,7 @@
     "@vanilla-extract/dynamic": "^2.1.5",
     "clsx": "^2.1.1",
     "csstype": "^3.2.3",
-    "motion": "^13.2.0",
+    "motion": "^13.4.0",
     "react-is": "catalog:",
     "react-refractor": "catalog:",
     "use-effect-event": "^2.0.4"
@@ -92,7 +92,7 @@
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
     "@sanity/vanilla-extract-vite-plugin": "catalog:",
-    "@testing-library/dom": "^10.4.1",
+    "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
@@ -101,8 +101,8 @@
     "@types/react-dom": "catalog:",
     "@types/react-is": "catalog:",
     "@vanilla-extract/css": "^1.21.2",
-    "@vitest/coverage-v8": "^5.0.0",
-    "jsdom": "^30.0.1",
+    "@vitest/coverage-v8": "^5.0.1",
+    "jsdom": "^30.1.0",
     "oxc-transform-react": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",

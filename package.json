@@ -26,17 +26,17 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
-    "@changesets/cli": "^3.0.2",
+    "@changesets/cli": "^3.0.3",
     "@types/node": "catalog:",
     "eslint-plugin-storybook": "^10.6.0",
-    "knip": "^6.35.1",
-    "oxfmt": "^0.67.0",
-    "oxlint": "^1.82.0",
-    "oxlint-tsgolint": "^7.0.2001",
+    "knip": "^6.37.0",
+    "oxfmt": "^0.70.0",
+    "oxlint": "^1.85.0",
+    "oxlint-tsgolint": "^7.0.2002",
     "typescript": "catalog:"
   },
   "engines": {
     "node": ">=22.13"
   },
-  "packageManager": "pnpm@12.3.4"
+  "packageManager": "pnpm@12.5.1"
 }

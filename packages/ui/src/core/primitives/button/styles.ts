@@ -84,38 +84,40 @@ export function buttonColorStyles(
   const defaultBoxShadow = undefined
 
   return _ruleSet(
-    _cardColorStyle(baseColor, color.enabled),
-    {
-      'backgroundColor': 'var(--card-bg-color)',
-      'color': 'var(--card-fg-color)',
-      'boxShadow': focusRingBorderStyle(border),
-      '&:disabled, &[data-disabled="true"]': _cardColorStyle(baseColor, color.disabled),
-      "&:not([data-disabled='true'])": {
-        'boxShadow': combineBoxShadow(
-          focusRingBorderStyle(border),
-          shadow ? defaultBoxShadow : undefined,
-        ),
-        '&:focus': {
-          boxShadow: focusRingStyle({
-            base: baseColor,
-            border: {width: 2, color: baseColor.bg},
-            focusRing: button.focusRing,
-          }),
-        },
-        '&:focus:not(:focus-visible)': {
-          boxShadow: combineBoxShadow(
+    ...[
+      _cardColorStyle(baseColor, color.enabled),
+      {
+        'backgroundColor': 'var(--card-bg-color)',
+        'color': 'var(--card-fg-color)',
+        'boxShadow': focusRingBorderStyle(border),
+        '&:disabled, &[data-disabled="true"]': _cardColorStyle(baseColor, color.disabled),
+        "&:not([data-disabled='true'])": {
+          'boxShadow': combineBoxShadow(
             focusRingBorderStyle(border),
             shadow ? defaultBoxShadow : undefined,
           ),
+          '&:focus': {
+            boxShadow: focusRingStyle({
+              base: baseColor,
+              border: {width: 2, color: baseColor.bg},
+              focusRing: button.focusRing,
+            }),
+          },
+          '&:focus:not(:focus-visible)': {
+            boxShadow: combineBoxShadow(
+              focusRingBorderStyle(border),
+              shadow ? defaultBoxShadow : undefined,
+            ),
+          },
+          '@media (hover: hover)': {
+            '&:hover': _cardColorStyle(baseColor, color.hovered),
+            '&:active': _cardColorStyle(baseColor, color.pressed),
+            '&[data-hovered]': _cardColorStyle(baseColor, color.hovered),
+          },
+          '&[data-selected]': _cardColorStyle(baseColor, color.pressed),
         },
-        '@media (hover: hover)': {
-          '&:hover': _cardColorStyle(baseColor, color.hovered),
-          '&:active': _cardColorStyle(baseColor, color.pressed),
-          '&[data-hovered]': _cardColorStyle(baseColor, color.hovered),
-        },
-        '&[data-selected]': _cardColorStyle(baseColor, color.pressed),
       },
-    },
-    style?.button?.root,
+      style?.button?.root,
+    ].filter((value): value is CSSObject => Boolean(value)),
   )
 }

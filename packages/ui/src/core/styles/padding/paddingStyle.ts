@@ -9,12 +9,14 @@ export function responsivePaddingStyle(
   const {theme} = props
 
   return _ruleSet(
-    _getResponsiveSpace(theme, ['padding'], props.$padding),
-    _getResponsiveSpace(theme, ['paddingLeft', 'paddingRight'], props.$paddingX),
-    _getResponsiveSpace(theme, ['paddingTop', 'paddingBottom'], props.$paddingY),
-    _getResponsiveSpace(theme, ['paddingTop'], props.$paddingTop),
-    _getResponsiveSpace(theme, ['paddingRight'], props.$paddingRight),
-    _getResponsiveSpace(theme, ['paddingBottom'], props.$paddingBottom),
-    _getResponsiveSpace(theme, ['paddingLeft'], props.$paddingLeft),
+    ...[
+      _getResponsiveSpace(theme, ['padding'], props.$padding),
+      _getResponsiveSpace(theme, ['paddingLeft', 'paddingRight'], props.$paddingX),
+      _getResponsiveSpace(theme, ['paddingTop', 'paddingBottom'], props.$paddingY),
+      _getResponsiveSpace(theme, ['paddingTop'], props.$paddingTop),
+      _getResponsiveSpace(theme, ['paddingRight'], props.$paddingRight),
+      _getResponsiveSpace(theme, ['paddingBottom'], props.$paddingBottom),
+      _getResponsiveSpace(theme, ['paddingLeft'], props.$paddingLeft),
+    ].filter((value): value is CSSObject[] => value !== null),
   )
 }

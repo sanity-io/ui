@@ -37,8 +37,7 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
           scheme,
           tone,
           key,
-          // oxlint-disable-next-line no-unsafe-type-assertion
-          value: get(toneColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
+          value: getColorValue(toneColor, key),
         })
       }
 
@@ -72,8 +71,7 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
                   scheme,
                   tone,
                   key: `button/${mode}/${buttonTone}/${state}/${key}`,
-                  // oxlint-disable-next-line no-unsafe-type-assertion
-                  value: get(buttonColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
+                  value: getColorValue(buttonColor, key),
                 })
               }
             }
@@ -92,8 +90,7 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
                 scheme,
                 tone,
                 key: `input/${mode}/${state}/${key}`,
-                // oxlint-disable-next-line no-unsafe-type-assertion
-                value: get(inputColor as any, key.replace(/\./g, '/').replace(/-/g, '/')) as any,
+                value: getColorValue(inputColor, key),
               })
             }
           }
@@ -125,12 +122,7 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
                 scheme,
                 tone,
                 key: `selectable/${selectableTone}/${state}/${key}`,
-                // oxlint-disable-next-line no-unsafe-type-assertion
-                value: get(
-                  // oxlint-disable-next-line no-unsafe-type-assertion
-                  selectableColor as any,
-                  key.replace(/\./g, '/').replace(/-/g, '/'),
-                ) as any,
+                value: getColorValue(selectableColor, key),
               })
             }
           }
@@ -140,4 +132,15 @@ export function prepareSanityUIColorVariables(config: WriteConfig): FigmaSanityU
   }
 
   return variables
+}
+
+function getColorValue(source: object | undefined, key: string): string | undefined {
+  if (!source) return undefined
+
+  const value = get(
+    Object.fromEntries(Object.entries(source)),
+    key.replace(/\./g, '/').replace(/-/g, '/'),
+  )
+
+  return typeof value === 'string' ? value : undefined
 }
