@@ -3,4 +3,4 @@
 '@sanity/ui': patch
 ---
 
-add Select component + codemod
+add Select component and its migration codemod
