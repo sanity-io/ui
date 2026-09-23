@@ -1,7 +1,7 @@
 {
   "name": "@sanity/themer-legacy",
   "version": "0.1.0",
-  "description": "The hosted Themer service (themer.sanity.build) as an npm package: the exact same Sanity Studio theme generator, running locally.",
+  "description": "The hosted Themer service (themer.sanity.build) as an npm package: the exact same Sanity Studio theme generator, running locally, and a Studio tool to edit its themes.",
   "keywords": [
     "sanity",
     "studio",
@@ -28,11 +28,13 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
+    "./tool": "./src/tool/index.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "exports": {
       ".": "./dist/index.js",
+      "./tool": "./dist/tool.js",
       "./package.json": "./package.json"
     }
   },
@@ -46,16 +48,36 @@
   },
   "dependencies": {
     "@sanity/color": "workspace:^",
-    "@sanity/ui": "^4.2.3"
+    "@sanity/icons": "workspace:^",
+    "@sanity/ui": "^4.2.3",
+    "react-compiler-runtime": "1.0.0"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
     "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "oxc-transform-react": "catalog:",
+    "react": "catalog:",
     "rimraf": "catalog:",
+    "sanity": "catalog:",
+    "styled-components": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "sanity": "^3 || ^4 || ^5 || ^6",
+    "styled-components": "^5.2 || ^6"
+  },
+  "peerDependenciesMeta": {
+    "sanity": {
+      "optional": true
+    },
+    "styled-components": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=20.19 <22 || >=22.12"

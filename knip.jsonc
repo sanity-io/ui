@@ -42,5 +42,9 @@
         "react-compiler-runtime",
       ],
     },
+    "packages/themer-legacy": {
+      // Same React Compiler runtime injection as packages/themer
+      "ignoreDependencies": ["react-compiler-runtime"],
+    },
   },
 }
