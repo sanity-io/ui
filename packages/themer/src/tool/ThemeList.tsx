@@ -41,7 +41,7 @@ export function ThemeList() {
               icon={RestoreIcon}
               mode="bleed"
               onClick={() => send({type: 'flow.removed'})}
-              text={`Removed themes (${removed.length})`}
+              text={`Show removed (${removed.length})`}
               width="fill"
             />
           )}
