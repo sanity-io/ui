@@ -1,5 +1,13 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.10
+
+### Patch Changes
+
+- 01ec789: fix codemod adding duplicate imports, not combing imports from same path
+- 0e13cbe: add Select component + codemod
+- 0e13cbe: add new Select component
+
 ## 1.0.0-alpha.9
 
 ### Patch Changes

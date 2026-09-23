@@ -1,5 +1,17 @@
 # @sanity/ui
 
+## 5.0.0-alpha.11
+
+### Patch Changes
+
+- 06f2cff: - move box, flex, and grid default min-width and min-height to css files
+  - remove extra getProps calls in hstack and vstack
+  - set container default size, add width to css file
+- bc83e6d: Build with the native Rust React Compiler through `oxc-transform-react`, reducing the compiled index bundle by about 6% while preserving the public runtime and type exports.
+- 0713570: bump @sanity-labs/design-tokens and update shadow css
+- 0e13cbe: add Select component + codemod
+- 0e13cbe: add new Select component
+
 ## 5.0.0-alpha.10
 
 ### Patch Changes
