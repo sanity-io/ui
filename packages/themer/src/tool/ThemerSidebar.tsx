@@ -1,7 +1,7 @@
 import {ArrowLeftIcon} from '@sanity/icons/ArrowLeft'
 import {CloseIcon} from '@sanity/icons/Close'
 import {CodeBlockIcon} from '@sanity/icons/CodeBlock'
-import {Box, Button, Card, Flex, Text} from '@sanity/ui'
+import {Box, Card, Flex, Text} from '@sanity/ui'
 import {useState} from 'react'
 
 import {useThemer} from './context'
@@ -9,6 +9,7 @@ import {RemovedThemes} from './RemovedThemes'
 import {ThemeEditor} from './ThemeEditor'
 import {ThemeList} from './ThemeList'
 import {ThemeSnippetDialog} from './ThemeSnippetDialog'
+import {TooltipButton} from './TooltipButton'
 
 const VIEW_TITLES = {
   list: 'Themer',
@@ -36,12 +37,12 @@ export function ThemerSidebar() {
         <Card padding={2}>
           <Flex align="center" gap={1}>
             {!inList && (
-              <Button
+              <TooltipButton
                 icon={ArrowLeftIcon}
                 mode="bleed"
                 onClick={() => send({type: 'flow.list'})}
                 padding={2}
-                title="Back to the themes"
+                tooltip="Back to the themes"
               />
             )}
             <Box flex={1} paddingLeft={inList ? 1 : 0} style={{minWidth: 0}}>
@@ -50,20 +51,20 @@ export function ThemerSidebar() {
               </Text>
             </Box>
             {view.name !== 'removed' && (
-              <Button
+              <TooltipButton
                 icon={CodeBlockIcon}
                 mode="bleed"
                 onClick={() => setSnippetOpen(true)}
                 padding={2}
-                title="Show the code for the applied theme"
+                tooltip="Show the code for the applied theme"
               />
             )}
-            <Button
+            <TooltipButton
               icon={CloseIcon}
               mode="bleed"
               onClick={() => send({type: 'sidebar.close'})}
               padding={2}
-              title="Close themer"
+              tooltip="Close themer"
             />
           </Flex>
         </Card>

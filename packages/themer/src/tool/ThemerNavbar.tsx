@@ -9,7 +9,7 @@ function ThemerNavbarButton() {
   const {open, send} = useThemer()
 
   return (
-    <Tooltip content={<Text size={1}>Themer</Text>} portal>
+    <Tooltip animate content={<Text size={1}>Themer</Text>} portal>
       <Button
         aria-label="Themer"
         icon={ColorWheelIcon}

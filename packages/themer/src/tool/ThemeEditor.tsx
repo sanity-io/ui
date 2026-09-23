@@ -20,6 +20,7 @@ import {applyImagePalette, ImagePalette} from './imagePalette'
 import {ImagePaletteSection} from './ImagePaletteSection'
 import {ScrollArea} from './ScrollArea'
 import {ThemeThumbnail} from './ThemeThumbnail'
+import {TooltipButton} from './TooltipButton'
 
 const SCHEME_TITLES: Record<ThemeColorSchemeKey, string> = {
   dark: 'Dark mode',
@@ -214,13 +215,13 @@ function ThemeEditorForm(props: {
 
       <Card borderTop padding={3}>
         <Flex gap={2}>
-          <Button
+          <TooltipButton
             icon={TrashIcon}
             mode="ghost"
             onClick={onRemove}
             text="Remove"
-            title="Remove the theme — it can be restored until it is deleted"
             tone="critical"
+            tooltip="Remove the theme — it can be restored until it is deleted"
           />
           <Box flex={1} />
           <Button mode="ghost" onClick={onDone} text="Done" />
@@ -309,12 +310,12 @@ function SchemeCard(props: {
               </Text>
             </Stack>
             {options.contrast !== undefined && (
-              <Button
+              <TooltipButton
                 icon={ResetIcon}
                 mode="bleed"
                 onClick={() => onChange({contrast: undefined})}
                 padding={2}
-                title="Reset to auto"
+                tooltip="Reset to auto"
               />
             )}
           </Flex>
@@ -376,12 +377,12 @@ function ColorRow(props: {
           </Text>
         </Stack>
         {onClear && !auto && (
-          <Button
+          <TooltipButton
             icon={ResetIcon}
             mode="bleed"
             onClick={onClear}
             padding={2}
-            title={`Reset to ${autoLabel}`}
+            tooltip={`Reset to ${autoLabel}`}
           />
         )}
       </Flex>

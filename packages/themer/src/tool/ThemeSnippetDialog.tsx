@@ -37,6 +37,7 @@ export function ThemeSnippetDialog(props: {onClose: () => void; theme: ThemerThe
 
   return (
     <Dialog
+      animate
       footer={
         <Flex gap={2} justify="flex-end" padding={3}>
           <Button icon={ClipboardIcon} mode="ghost" onClick={() => void handleCopy()} text="Copy" />

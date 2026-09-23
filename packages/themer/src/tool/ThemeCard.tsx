@@ -4,6 +4,7 @@ import {EllipsisHorizontalIcon} from '@sanity/icons/EllipsisHorizontal'
 import {TrashIcon} from '@sanity/icons/Trash'
 import {Box, Button, Text} from '@sanity/ui'
 import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
+import {Tooltip} from '@sanity/ui/tooltip'
 import {useState} from 'react'
 import {styled} from 'styled-components'
 
@@ -99,7 +100,6 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
       <PickButton
         aria-pressed={active}
         onClick={() => send({type: 'theme.pick', slug: theme.slug})}
-        title={active ? `${title} (applied)` : `Apply ${title}`}
         type="button"
       >
         <Frame>
@@ -118,50 +118,57 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
         </Box>
       </PickButton>
 
+      {/* The tooltip wraps a span rather than the button: the menu button
+          clones its button to wire it up, which a tooltip in between would
+          swallow */}
       <MenuSlot data-visible={menuOpen}>
-        <MenuButton
-          button={
-            <Button
-              aria-label={`Actions for ${title}`}
-              fontSize={1}
-              icon={EllipsisHorizontalIcon}
-              mode="ghost"
-              padding={1}
-              radius={2}
-            />
-          }
-          id={`themer-theme-${theme.slug}`}
-          menu={
-            <Menu>
-              {theme.source === 'custom' && (
-                <MenuItem
-                  icon={EditIcon}
-                  onClick={() => send({type: 'theme.edit', slug: theme.slug})}
-                  text="Edit"
+        <Tooltip animate content={<Text size={1}>Actions</Text>} placement="bottom" portal>
+          <span style={{display: 'inline-block'}}>
+            <MenuButton
+              button={
+                <Button
+                  aria-label={`Actions for ${title}`}
+                  fontSize={1}
+                  icon={EllipsisHorizontalIcon}
+                  mode="ghost"
+                  padding={1}
+                  radius={2}
                 />
-              )}
-              <MenuItem
-                icon={CopyIcon}
-                onClick={() => send({type: 'theme.duplicate', slug: theme.slug})}
-                text={theme.source === 'custom' ? 'Duplicate' : 'Duplicate to edit'}
-              />
-              {theme.source !== 'config' && (
-                <>
-                  <MenuDivider />
+              }
+              id={`themer-theme-${theme.slug}`}
+              menu={
+                <Menu>
+                  {theme.source === 'custom' && (
+                    <MenuItem
+                      icon={EditIcon}
+                      onClick={() => send({type: 'theme.edit', slug: theme.slug})}
+                      text="Edit"
+                    />
+                  )}
                   <MenuItem
-                    icon={TrashIcon}
-                    onClick={() => send({type: 'theme.remove', slug: theme.slug})}
-                    text="Remove"
-                    tone="critical"
+                    icon={CopyIcon}
+                    onClick={() => send({type: 'theme.duplicate', slug: theme.slug})}
+                    text={theme.source === 'custom' ? 'Duplicate' : 'Duplicate to edit'}
                   />
-                </>
-              )}
-            </Menu>
-          }
-          onClose={() => setMenuOpen(false)}
-          onOpen={() => setMenuOpen(true)}
-          popover={{placement: 'bottom-end', portal: true}}
-        />
+                  {theme.source !== 'config' && (
+                    <>
+                      <MenuDivider />
+                      <MenuItem
+                        icon={TrashIcon}
+                        onClick={() => send({type: 'theme.remove', slug: theme.slug})}
+                        text="Remove"
+                        tone="critical"
+                      />
+                    </>
+                  )}
+                </Menu>
+              }
+              onClose={() => setMenuOpen(false)}
+              onOpen={() => setMenuOpen(true)}
+              popover={{animate: true, placement: 'bottom-end', portal: true}}
+            />
+          </span>
+        </Tooltip>
       </MenuSlot>
     </Root>
   )

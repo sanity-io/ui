@@ -7,6 +7,7 @@ import {ImageFileButton} from './ImageFileButton'
 import {optionsFromImagePalette, titleFromFileName} from './imagePalette'
 import {ScrollArea} from './ScrollArea'
 import {ThemeCard} from './ThemeCard'
+import {TooltipButton} from './TooltipButton'
 import {useImagePalette} from './useImagePalette'
 
 /**
@@ -51,12 +52,12 @@ export function ThemeList() {
       <Card borderTop padding={3}>
         <Flex gap={2}>
           <Box flex={1}>
-            <Button
+            <TooltipButton
               icon={AddIcon}
               mode="ghost"
               onClick={() => send({type: 'theme.add'})}
               text="Add theme"
-              title="Add a theme based on the applied one"
+              tooltip="Add a theme based on the applied one"
               width="fill"
             />
           </Box>
@@ -64,7 +65,7 @@ export function ThemeList() {
             loading={busy}
             mode="ghost"
             onFile={pickImage}
-            title="Add a theme from the colors of an image"
+            tooltip="Add a theme from the colors of an image"
           />
         </Flex>
       </Card>

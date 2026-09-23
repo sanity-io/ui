@@ -1,6 +1,7 @@
 import {Box, Button, Card, Flex, Stack, Text} from '@sanity/ui'
 import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import {type ThemeColorSchemeKey} from '@sanity/ui/theme'
+import {Tooltip} from '@sanity/ui/tooltip'
 import {useState} from 'react'
 import {styled} from 'styled-components'
 
@@ -80,7 +81,7 @@ export function ImagePaletteSection(props: {
               mode="bleed"
               onFile={pickImage}
               padding={2}
-              title="Pick another image"
+              tooltip="Pick another image"
             />
           )}
         </Flex>
@@ -88,34 +89,45 @@ export function ImagePaletteSection(props: {
         {swatches.length > 0 ? (
           <Flex gap={1} wrap="wrap">
             {swatches.map(({key, hex, title}) => (
-              <MenuButton
-                button={
-                  <Button
-                    aria-label={`${title} ${hex}`}
-                    mode="bleed"
-                    padding={1}
-                    title={`${title} · ${hex}`}
-                  >
-                    <Swatch style={{background: hex}} />
-                  </Button>
+              // The tooltip wraps a span rather than the button: the menu
+              // button clones its button to wire it up, which a tooltip in
+              // between would swallow
+              <Tooltip
+                animate
+                content={
+                  <Text size={1}>
+                    {title} · {hex}
+                  </Text>
                 }
-                id={`themer-swatch-${key}`}
                 key={key}
-                menu={
-                  <Menu>
-                    {SCHEMES.map((scheme, index) => (
-                      <SchemeTargets
-                        hex={hex}
-                        key={scheme}
-                        onAssign={onAssign}
-                        scheme={scheme}
-                        withDivider={index > 0}
-                      />
-                    ))}
-                  </Menu>
-                }
-                popover={{placement: 'bottom-start', portal: true}}
-              />
+                placement="bottom"
+                portal
+              >
+                <span style={{display: 'inline-block'}}>
+                  <MenuButton
+                    button={
+                      <Button aria-label={`${title} ${hex}`} mode="bleed" padding={1}>
+                        <Swatch style={{background: hex}} />
+                      </Button>
+                    }
+                    id={`themer-swatch-${key}`}
+                    menu={
+                      <Menu>
+                        {SCHEMES.map((scheme, index) => (
+                          <SchemeTargets
+                            hex={hex}
+                            key={scheme}
+                            onAssign={onAssign}
+                            scheme={scheme}
+                            withDivider={index > 0}
+                          />
+                        ))}
+                      </Menu>
+                    }
+                    popover={{animate: true, placement: 'bottom-start', portal: true}}
+                  />
+                </span>
+              </Tooltip>
             ))}
           </Flex>
         ) : (
@@ -129,6 +141,7 @@ export function ImagePaletteSection(props: {
               mode="ghost"
               onFile={pickImage}
               text="Pick an image"
+              tooltip="Take the colors from an image on your device"
               width="fill"
             />
           </Stack>

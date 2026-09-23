@@ -1,6 +1,8 @@
 import {ImageIcon} from '@sanity/icons/Image'
-import {Button, ButtonProps} from '@sanity/ui'
+import {ButtonProps} from '@sanity/ui'
 import {useRef} from 'react'
+
+import {TooltipButton} from './TooltipButton'
 
 /**
  * A button that opens the file picker for an image, and hands the chosen file
@@ -9,9 +11,9 @@ import {useRef} from 'react'
  * @internal
  */
 export function ImageFileButton(
-  props: {onFile: (file: File) => void} & Pick<
+  props: {onFile: (file: File) => void; tooltip: string} & Pick<
     ButtonProps,
-    'disabled' | 'loading' | 'mode' | 'padding' | 'text' | 'title' | 'width'
+    'disabled' | 'loading' | 'mode' | 'padding' | 'text' | 'width'
   >,
 ) {
   const {onFile, ...buttonProps} = props
@@ -19,12 +21,7 @@ export function ImageFileButton(
 
   return (
     <>
-      <Button
-        {...buttonProps}
-        aria-label={buttonProps.text ? undefined : buttonProps.title}
-        icon={ImageIcon}
-        onClick={() => inputRef.current?.click()}
-      />
+      <TooltipButton {...buttonProps} icon={ImageIcon} onClick={() => inputRef.current?.click()} />
       <input
         accept="image/*"
         hidden
