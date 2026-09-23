@@ -1,5 +1,6 @@
 import {describe, expect, it} from 'vitest'
 
+import {relativeLuminance} from '../theme/hsl'
 import {
   applyImagePalette,
   currentImageVariant,
@@ -8,8 +9,15 @@ import {
   optionsFromImagePalette,
   pickLuckyVariant,
   PixelData,
+  readableAccent,
   titleFromFileName,
 } from './imagePalette'
+
+function contrast(a: string, b: string): number {
+  const [lighter, darker] = [relativeLuminance(a), relativeLuminance(b)].sort((x, y) => y - x)
+
+  return (lighter + 0.05) / (darker + 0.05)
+}
 
 /** Paints an image out of solid patches: `[hex, pixels, alpha?]` */
 function paint(patches: Array<[hex: string, pixels: number, alpha?: number]>): PixelData {
@@ -146,7 +154,8 @@ describe('optionsFromImagePalette', () => {
   it('takes the accent and text from the vibrant and muted swatches, and tints the backgrounds', () => {
     expect(optionsFromImagePalette(palette)).toEqual({
       light: {accent: '#e11d48', text: '#7a7e8a', background: '#fbfbfb'},
-      dark: {accent: '#e11d48', text: '#7a7e8a', background: '#1b1c20'},
+      // The red is a touch too dark for black button labels
+      dark: {accent: readableAccent('#e11d48', 'dark'), text: '#7a7e8a', background: '#1b1c20'},
     })
   })
 
@@ -164,7 +173,7 @@ describe('optionsFromImagePalette', () => {
       dark: {accent: '#f29cb0', background: '#250d15'},
     })
     expect(optionsFromImagePalette({...EMPTY, dominant: '#7a7e8a'})).toEqual({
-      light: {accent: '#7a7e8a'},
+      light: {accent: readableAccent('#7a7e8a', 'light')},
       dark: {accent: '#7a7e8a'},
     })
     expect(optionsFromImagePalette(EMPTY)).toEqual({})
@@ -186,7 +195,8 @@ describe('variants', () => {
     const options = optionsFromImagePalette(palette, 'darkMuted')
 
     expect(options.light?.accent).toBe('#3a3c42')
-    expect(options.dark?.accent).toBe('#3a3c42')
+    // Too dark for black button labels, so the dark scheme lightens it
+    expect(options.dark?.accent).toBe(readableAccent('#3a3c42', 'dark'))
     expect(options.light?.text).toBe('#7a7e8a')
     expect(currentImageVariant(options, palette)).toBe('darkMuted')
     expect(currentImageVariant(optionsFromImagePalette(palette), palette)).toBe('vibrant')
@@ -195,9 +205,9 @@ describe('variants', () => {
   })
 
   it('falls back to the automatic accent when the chosen swatch is missing', () => {
-    expect(optionsFromImagePalette({...palette, lightMuted: null}, 'lightMuted').light?.accent).toBe(
-      '#e11d48',
-    )
+    expect(
+      optionsFromImagePalette({...palette, lightMuted: null}, 'lightMuted').light?.accent,
+    ).toBe('#e11d48')
   })
 
   it('feels lucky about interesting swatches, never the current one', () => {
@@ -237,6 +247,62 @@ describe('variants', () => {
   })
 })
 
+describe('readableAccent', () => {
+  it('keeps accents that already read well on a button', () => {
+    expect(readableAccent('#e11d48', 'light')).toBe('#e11d48')
+    expect(readableAccent('#3a3c42', 'light')).toBe('#3a3c42')
+    expect(readableAccent('#f29cb0', 'dark')).toBe('#f29cb0')
+  })
+
+  it('darkens light scheme accents until white labels read, and lightens dark scheme ones for black labels', () => {
+    for (const hex of ['#f29cb0', '#c9cbd1', '#7a7e8a', '#a8f0c8', '#ffff00']) {
+      const light = readableAccent(hex, 'light')
+
+      expect(contrast(light, '#ffffff'), `${hex} light`).toBeGreaterThanOrEqual(4.5)
+      expect(relativeLuminance(light)).toBeLessThanOrEqual(relativeLuminance(hex))
+    }
+
+    for (const hex of ['#3a3c42', '#5c0a1d', '#e11d48', '#101010']) {
+      const dark = readableAccent(hex, 'dark')
+
+      expect(contrast(dark, '#000000'), `${hex} dark`).toBeGreaterThanOrEqual(4.5)
+      expect(relativeLuminance(dark)).toBeGreaterThanOrEqual(relativeLuminance(hex))
+    }
+  })
+
+  it('keeps the hue while adjusting', () => {
+    expect(readableAccent('#a8f0c8', 'light')).toMatch(/^#[0-9a-f]{6}$/)
+    expect(readableAccent('#a8f0c8', 'light')).not.toBe('#a8f0c8')
+  })
+
+  it('builds every variant readable on a button', () => {
+    const palette: ImagePalette = {
+      dominant: '#e11d48',
+      vibrant: '#e11d48',
+      lightVibrant: '#f29cb0',
+      darkVibrant: '#5c0a1d',
+      muted: '#7a7e8a',
+      lightMuted: '#c9cbd1',
+      darkMuted: '#3a3c42',
+    }
+
+    for (const variant of [
+      'muted',
+      'vibrant',
+      'lightMuted',
+      'lightVibrant',
+      'darkMuted',
+      'darkVibrant',
+    ] as const) {
+      const options = optionsFromImagePalette(palette, variant)
+
+      expect(contrast(options.light!.accent!, '#ffffff'), variant).toBeGreaterThanOrEqual(4.5)
+      expect(contrast(options.dark!.accent!, '#000000'), variant).toBeGreaterThanOrEqual(4.5)
+      expect(currentImageVariant(options, palette)).toBe(variant)
+    }
+  })
+})
+
 describe('applyImagePalette', () => {
   it('replaces the colors scheme by scheme and keeps the rest', () => {
     expect(
@@ -246,7 +312,7 @@ describe('applyImagePalette', () => {
       ),
     ).toEqual({
       light: {accent: '#e11d48', contrast: 60},
-      dark: {accent: '#e11d48', contrast: 40},
+      dark: {accent: readableAccent('#e11d48', 'dark'), contrast: 40},
     })
   })
 })

@@ -1,4 +1,6 @@
-import {hexToHsl} from '../theme/hsl'
+import {type ThemeColorSchemeKey} from '@sanity/ui/theme'
+
+import {hexToHsl, hslToHex, relativeLuminance} from '../theme/hsl'
 import {BuildThemeOptions, DEFAULT_BACKGROUND, SCHEMES, SchemeThemeOptions} from '../theme/options'
 
 /**
@@ -280,10 +282,68 @@ function tint(base: string, color: string, amount: number): string {
 const BACKGROUND_TINT = {light: 0.08, dark: 0.3}
 
 /**
+ * The WCAG AA contrast for normal text — what a button label needs against
+ * the button. Sanity UI labels solid buttons in white on the accent's 500
+ * tint in the light scheme and in black on its 400 tint in the dark scheme
+ * (lighter than the accent, so an accent that passes against black passes
+ * there too).
+ */
+const MINIMUM_ACCENT_CONTRAST = 4.5
+const BUTTON_LABEL: Record<ThemeColorSchemeKey, string> = {light: '#ffffff', dark: '#000000'}
+const ACCENT_LIGHTNESS_STEP = 0.01
+
+function contrastRatio(a: string, b: string): number {
+  const [lighter, darker] = [relativeLuminance(a), relativeLuminance(b)].sort((x, y) => y - x)
+
+  return (lighter + 0.05) / (darker + 0.05)
+}
+
+/**
+ * Makes an accent readable as a button in the given scheme: a light scheme
+ * accent is darkened until white text on it reaches AA contrast, a dark
+ * scheme accent lightened until black text does — as far as the accent's
+ * hue and saturation allow. Accents that already pass come back untouched.
+ *
+ * @internal
+ */
+export function readableAccent(hex: string, scheme: ThemeColorSchemeKey): string {
+  const label = BUTTON_LABEL[scheme]
+  const {h, s} = hexToHsl(hex)
+  let {l} = hexToHsl(hex)
+  let current = hex
+
+  while (contrastRatio(current, label) < MINIMUM_ACCENT_CONTRAST) {
+    const next = scheme === 'light' ? l - ACCENT_LIGHTNESS_STEP : l + ACCENT_LIGHTNESS_STEP
+
+    if (next < 0 || next > 1) break
+
+    l = next
+    current = hslToHex({h, s, l})
+  }
+
+  return current
+}
+
+/** The accent a variant gives a scheme, made readable on a button @internal */
+export function variantAccent(
+  palette: ImagePalette,
+  variant: ImagePaletteVariant | null,
+  scheme: ThemeColorSchemeKey,
+): string | null {
+  const swatch =
+    (variant ? palette[variant] : null) ??
+    palette.vibrant ??
+    (scheme === 'light' ? palette.darkVibrant : palette.lightVibrant) ??
+    palette.dominant
+
+  return swatch === null ? null : readableAccent(swatch, scheme)
+}
+
+/**
  * Derives theme options from an image palette: the accent of both schemes is
  * the swatch of the chosen variant — or, without one, the vibrant swatch,
- * each scheme falling back to the vibrant swatch of its own end of the scale.
- * The muted swatch becomes the text color, and the light and dark muted
+ * each scheme falling back to the vibrant swatch of its own end of the scale —
+ * adjusted until it is readable as a button. The muted swatch becomes the text color, and the light and dark muted
  * swatches tint the stock backgrounds of their scheme — enough to carry the
  * image's tone without giving up a usable canvas. Whatever the palette lacks
  * stays at the theme defaults.
@@ -295,16 +355,15 @@ export function optionsFromImagePalette(
   variant?: ImagePaletteVariant,
 ): BuildThemeOptions {
   const options: BuildThemeOptions = {}
-  const accent = variant ? palette[variant] : null
 
   const light = schemeFromPalette(
-    accent ?? palette.vibrant ?? palette.darkVibrant ?? palette.dominant,
+    variantAccent(palette, variant ?? null, 'light'),
     palette.muted ?? palette.darkMuted,
     palette.lightMuted ?? palette.muted ?? palette.lightVibrant,
     'light',
   )
   const dark = schemeFromPalette(
-    accent ?? palette.vibrant ?? palette.lightVibrant ?? palette.dominant,
+    variantAccent(palette, variant ?? null, 'dark'),
     palette.muted ?? palette.lightMuted,
     palette.darkMuted ?? palette.muted ?? palette.darkVibrant,
     'dark',
@@ -365,11 +424,15 @@ export function currentImageVariant(
   options: BuildThemeOptions,
   palette: ImagePalette,
 ): ImagePaletteVariant | null {
-  const accent = options.light?.accent ?? options.dark?.accent
+  const accent = options.light?.accent
 
   if (!accent) return null
 
-  return IMAGE_PALETTE_VARIANTS.find((variant) => palette[variant] === accent) ?? null
+  return (
+    IMAGE_PALETTE_VARIANTS.find(
+      (variant) => palette[variant] !== null && variantAccent(palette, variant, 'light') === accent,
+    ) ?? null
+  )
 }
 
 /**
