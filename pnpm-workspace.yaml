@@ -20,7 +20,7 @@ catalogMode: prefer
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
   '@sanity/blueprints': ^0.27.0
-  '@sanity/client': ^8.6.2
+  '@sanity/client': ^8.7.0
   '@sanity/functions': ^1.8.0
   '@sanity/tsdown-config': ^0.28.1
   '@sanity/vanilla-extract-vite-plugin': ^0.2.19
