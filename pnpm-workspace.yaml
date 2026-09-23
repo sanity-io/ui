@@ -65,7 +65,7 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - '@next/*'
   - '@oxc-transform-react/*'
-  - '@portabletext/react'
+  - '@portabletext/*'
   - '@sanity/*'
   - '@tsdown/*'
   - lightningcss
