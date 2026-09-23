@@ -11,9 +11,6 @@ import {useThemer} from './context'
 import {displayTitle, ThemerTheme} from './themes'
 import {ThemeThumbnail} from './ThemeThumbnail'
 
-/** The height of the title row, matching the menu button that overlays its right end */
-const TITLE_ROW_HEIGHT = 25
-
 const Root = styled.div`
   position: relative;
 `
@@ -63,25 +60,16 @@ const Frame = styled.span`
   }
 `
 
-const TitleRow = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  height: ${TITLE_ROW_HEIGHT}px;
-  margin-top: 4px;
-  padding: 0 ${TITLE_ROW_HEIGHT + 4}px;
-`
-
 /**
- * The actions menu sits at the right end of the title row, and only shows for
- * the applied theme, on hover, on keyboard focus, and while it is open —
- * its popover is portaled, so an open menu does not count as focus within
+ * The actions menu sits on the thumbnail's top right corner, like the actions
+ * of an image input, and only shows on hover, on keyboard focus, and while it
+ * is open — its popover is portaled, so an open menu does not count as focus
+ * within
  */
 const MenuSlot = styled.div`
   position: absolute;
-  right: 0;
-  bottom: 0;
+  top: 8px;
+  right: 8px;
   opacity: 0;
   transition: opacity 100ms;
 
@@ -117,30 +105,29 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
         <Frame>
           <ThemeThumbnail options={theme.options} />
         </Frame>
-        <TitleRow>
-          <Box as="span" flex={1} style={{minWidth: 0}}>
-            <Text
-              align="center"
-              as="span"
-              size={1}
-              textOverflow="ellipsis"
-              weight={active ? 'medium' : 'regular'}
-            >
-              {title}
-            </Text>
-          </Box>
-        </TitleRow>
+        <Box as="span" display="block" paddingTop={2} paddingX={2}>
+          <Text
+            align="center"
+            as="span"
+            size={1}
+            textOverflow="ellipsis"
+            weight={active ? 'medium' : 'regular'}
+          >
+            {title}
+          </Text>
+        </Box>
       </PickButton>
 
-      <MenuSlot data-visible={active || menuOpen}>
+      <MenuSlot data-visible={menuOpen}>
         <MenuButton
           button={
             <Button
               aria-label={`Actions for ${title}`}
               fontSize={1}
               icon={EllipsisHorizontalIcon}
-              mode="bleed"
+              mode="ghost"
               padding={1}
+              radius={2}
             />
           }
           id={`themer-theme-${theme.slug}`}
