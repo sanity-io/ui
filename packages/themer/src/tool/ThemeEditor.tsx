@@ -1,4 +1,3 @@
-import {COLOR_TINTS, ColorTintKey} from '@sanity/color'
 import {ResetIcon} from '@sanity/icons/Reset'
 import {TrashIcon} from '@sanity/icons/Trash'
 import {Badge, Box, Button, Card, Flex, Stack, Text, TextInput} from '@sanity/ui'
@@ -78,18 +77,6 @@ const Range = styled.input`
   margin: 0;
   accent-color: var(--card-focus-ring-color);
 `
-
-const rampStyle: React.CSSProperties = {
-  display: 'flex',
-  // The gaps let the border color through, so a near-white tint still reads
-  // as a swatch rather than a hole in the ramp
-  gap: 1,
-  background: 'var(--card-border-color)',
-  height: 13,
-  borderRadius: 2,
-  overflow: 'hidden',
-  boxShadow: 'inset 0 0 0 1px var(--card-border-color)',
-}
 
 /**
  * The flow for editing one of the user's own themes: its title, a live
@@ -314,7 +301,6 @@ function SchemeCard(props: {
           label={`${name} accent`}
           onChange={(accent) => onChange({accent})}
           onClear={() => onChange({accent: undefined})}
-          tints={palette.blue}
           title="Accent"
           value={resolved.accent}
         />
@@ -323,7 +309,6 @@ function SchemeCard(props: {
           label={`${name} text`}
           onChange={(text) => onChange({text})}
           onClear={() => onChange({text: undefined})}
-          tints={palette.gray}
           title="Text"
           value={resolved.text}
         />
@@ -374,10 +359,7 @@ function SchemeCard(props: {
   )
 }
 
-/**
- * One color of a scheme: a swatch with its value, an optional reset button,
- * and the generated 50–950 tint ramp for the scale it anchors.
- */
+/** One color of a scheme: a swatch with its value and an optional reset button */
 function ColorRow(props: {
   /** The color the generator actually applied, when it may differ from the input */
   adjusted?: string
@@ -389,47 +371,36 @@ function ColorRow(props: {
   label: string
   onChange: (value: string) => void
   onClear?: () => void
-  /** The generated tint ramp this color anchors */
-  tints?: Record<ColorTintKey, string>
   title: string
   value: string
 }) {
-  const {adjusted, auto, autoLabel = 'auto', label, onChange, onClear, tints, title, value} = props
+  const {adjusted, auto, autoLabel = 'auto', label, onChange, onClear, title, value} = props
 
   return (
-    <Stack gap={2}>
-      <Flex align="center" gap={2}>
-        <Swatch
-          aria-label={label}
-          onChange={(event) => onChange(event.currentTarget.value)}
-          type="color"
-          value={value}
+    <Flex align="center" gap={2}>
+      <Swatch
+        aria-label={label}
+        onChange={(event) => onChange(event.currentTarget.value)}
+        type="color"
+        value={value}
+      />
+      <Stack flex={1} gap={2} style={{minWidth: 0}}>
+        <Text size={1}>{title}</Text>
+        <Text muted size={0} textOverflow="ellipsis">
+          {value}
+          {adjusted !== undefined && adjusted !== value ? ` → ${adjusted}` : ''}
+          {auto ? ` · ${autoLabel}` : ''}
+        </Text>
+      </Stack>
+      {onClear && !auto && (
+        <TooltipButton
+          icon={ResetIcon}
+          mode="bleed"
+          onClick={onClear}
+          padding={2}
+          tooltip={`Reset to ${autoLabel}`}
         />
-        <Stack flex={1} gap={2} style={{minWidth: 0}}>
-          <Text size={1}>{title}</Text>
-          <Text muted size={0} textOverflow="ellipsis">
-            {value}
-            {adjusted !== undefined && adjusted !== value ? ` → ${adjusted}` : ''}
-            {auto ? ` · ${autoLabel}` : ''}
-          </Text>
-        </Stack>
-        {onClear && !auto && (
-          <TooltipButton
-            icon={ResetIcon}
-            mode="bleed"
-            onClick={onClear}
-            padding={2}
-            tooltip={`Reset to ${autoLabel}`}
-          />
-        )}
-      </Flex>
-      {tints && (
-        <span style={rampStyle}>
-          {COLOR_TINTS.map((tint) => (
-            <span key={tint} style={{flex: 1, background: tints[tint]}} />
-          ))}
-        </span>
       )}
-    </Stack>
+    </Flex>
   )
 }
