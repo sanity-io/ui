@@ -10,9 +10,13 @@ const containerClassName = suffixClassName('sui-Container')
 /** @public */
 export function Container<T extends ElementType = 'div'>({
   marginX = 'auto',
+  size = 2,
   ...props
 }: ContainerProps<T> & Omit<ComponentPropsWithRef<T>, keyof ContainerProps<T>>) {
-  const {as, children, className, style, ...rest} = getProps({marginX, ...props}, containerProps)
+  const {as, children, className, style, ...rest} = getProps(
+    {marginX, size, ...props},
+    containerProps,
+  )
   const Component = as || 'div'
 
   return (

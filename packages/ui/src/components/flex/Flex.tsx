@@ -10,14 +10,9 @@ const flexClassName = suffixClassName('sui-Flex')
 /** @public */
 export function Flex<T extends ElementType = 'div'>({
   display = 'flex',
-  minHeight = '0',
-  minWidth = '0',
   ...props
 }: FlexProps<T> & Omit<ComponentPropsWithRef<T>, keyof FlexProps<T>>) {
-  const {as, children, className, style, ...rest} = getProps(
-    {display, minHeight, minWidth, ...props},
-    flexProps,
-  )
+  const {as, children, className, style, ...rest} = getProps({display, ...props}, flexProps)
   const Component = as || 'div'
 
   return (

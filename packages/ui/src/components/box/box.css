@@ -1,3 +1,8 @@
+.sui-Box {
+  min-width: 0;
+  min-height: 0;
+}
+
 .sui-Box[class*='sui-tone'] {
   --box-background: var(--background-low);
   background-color: var(--box-background);
