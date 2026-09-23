@@ -17,7 +17,7 @@ export function RemovedThemes() {
   const {removed, send} = useThemer()
 
   return (
-    <ScrollArea flex={1} overflow="auto" padding={3}>
+    <ScrollArea padding={3}>
       <Stack gap={5}>
         {removed.map((theme) => (
           <Stack gap={3} key={theme.slug}>

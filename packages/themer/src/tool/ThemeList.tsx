@@ -29,7 +29,7 @@ export function ThemeList() {
 
   return (
     <>
-      <ScrollArea flex={1} overflow="auto" padding={3}>
+      <ScrollArea padding={3}>
         <Stack gap={4}>
           {themes.map((theme) => (
             <ThemeCard active={theme.slug === active.slug} key={theme.slug} theme={theme} />

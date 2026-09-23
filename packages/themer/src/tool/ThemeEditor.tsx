@@ -173,7 +173,7 @@ function ThemeEditorForm(props: {
 
   return (
     <>
-      <ScrollArea flex={1} overflow="auto" padding={3}>
+      <ScrollArea padding={3}>
         <Stack gap={4}>
           <ThemeThumbnail options={options} />
 
