@@ -21,7 +21,7 @@ export function Container<T extends ElementType = 'div'>({
 
   return (
     <Component
-      className={clsx(containerClassName, 'sui-width-full', className)}
+      className={clsx(containerClassName, className)}
       style={style}
       data-ui="Container"
       {...rest}
