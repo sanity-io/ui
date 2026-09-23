@@ -1,5 +1,6 @@
 import {BuildThemeOptions} from '../theme/options'
 import {presets} from '../theme/presets'
+import {ImagePalette} from './imagePalette'
 import {sameOptions} from './options'
 
 /**
@@ -16,6 +17,8 @@ export interface ThemerTheme {
   title: string
   options: BuildThemeOptions
   source: ThemerThemeSource
+  /** The palette of the image the theme's colors were taken from, for custom themes */
+  palette?: ImagePalette
 }
 
 /** A theme the user added in the tool, as persisted @internal */
@@ -23,6 +26,8 @@ export interface CustomTheme {
   slug: string
   title: string
   options: BuildThemeOptions
+  /** The palette of the image the theme's colors were taken from */
+  palette?: ImagePalette
 }
 
 /** The persisted themer state @internal */
@@ -86,7 +91,13 @@ export function resolveThemes(state: ThemerState, baseOptions: BuildThemeOptions
   }
 
   for (const theme of state.custom) {
-    all.push({slug: theme.slug, title: theme.title, options: theme.options, source: 'custom'})
+    all.push({
+      slug: theme.slug,
+      title: theme.title,
+      options: theme.options,
+      source: 'custom',
+      ...(theme.palette ? {palette: theme.palette} : {}),
+    })
   }
 
   const removedSlugs = new Set(state.removed)
@@ -103,8 +114,12 @@ export function resolveThemes(state: ThemerState, baseOptions: BuildThemeOptions
  *
  * @internal
  */
-export function createCustomTheme(title: string, options: BuildThemeOptions): CustomTheme {
-  return {slug: `custom-${randomId()}`, title, options}
+export function createCustomTheme(
+  title: string,
+  options: BuildThemeOptions,
+  palette?: ImagePalette,
+): CustomTheme {
+  return {slug: `custom-${randomId()}`, title, options, ...(palette ? {palette} : {})}
 }
 
 /** The title of a duplicated theme @internal */

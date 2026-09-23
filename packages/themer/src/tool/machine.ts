@@ -1,6 +1,7 @@
 import {assign, not, setup, SnapshotFrom} from 'xstate'
 
 import {BuildThemeOptions} from '../theme/options'
+import {ImagePalette} from './imagePalette'
 import {
   CONFIG_SLUG,
   createCustomTheme,
@@ -35,13 +36,22 @@ export type ThemerEvent =
   | {type: 'sidebar.close'}
   /** Applies a theme to the whole Studio */
   | {type: 'theme.pick'; slug: string}
-  /** Adds a theme based on the applied one and opens it in the editor */
-  | {type: 'theme.add'}
+  /**
+   * Adds a theme and opens it in the editor — based on the applied theme, or
+   * on the given title, options and image palette (e.g. from an image)
+   */
+  | {type: 'theme.add'; title?: string; options?: BuildThemeOptions; palette?: ImagePalette}
   /** Adds a copy of a theme and opens it in the editor */
   | {type: 'theme.duplicate'; slug: string}
   /** Opens one of the user's own themes in the editor */
   | {type: 'theme.edit'; slug: string}
-  | {type: 'theme.update'; slug: string; title?: string; options?: BuildThemeOptions}
+  | {
+      type: 'theme.update'
+      slug: string
+      title?: string
+      options?: BuildThemeOptions
+      palette?: ImagePalette
+    }
   /** Takes a theme out of the list — it can be restored until it is deleted */
   | {type: 'theme.remove'; slug: string}
   /** Puts a removed theme back in the list */
@@ -96,15 +106,25 @@ export const themerMachine = setup({
     pick: assign((_, params: {slug: string}) => ({
       active: params.slug === CONFIG_SLUG ? null : params.slug,
     })),
-    addFromActive: assign(({context}) => {
-      const theme = createCustomTheme(UNTITLED_THEME, themesOf(context).active.options)
+    add: assign(
+      (
+        {context},
+        params: {title?: string; options?: BuildThemeOptions; palette?: ImagePalette},
+      ) => {
+        const theme = createCustomTheme(
+          params.title ?? UNTITLED_THEME,
+          params.options ?? themesOf(context).active.options,
+          params.palette,
+        )
 
-      return {
-        active: theme.slug,
-        custom: [...context.custom, theme],
-        editing: {slug: theme.slug, focusTitle: true},
-      }
-    }),
+        return {
+          active: theme.slug,
+          custom: [...context.custom, theme],
+          // A theme named after its image needs no renaming right away
+          editing: {slug: theme.slug, focusTitle: params.title === undefined},
+        }
+      },
+    ),
     duplicate: assign(({context}, params: {slug: string}) => {
       const {themes, removed} = themesOf(context)
       const source = [...themes, ...removed].find((theme) => theme.slug === params.slug)
@@ -125,7 +145,15 @@ export const themerMachine = setup({
     })),
     stopEditing: assign({editing: null}),
     update: assign(
-      ({context}, params: {slug: string; title?: string; options?: BuildThemeOptions}) => ({
+      (
+        {context},
+        params: {
+          slug: string
+          title?: string
+          options?: BuildThemeOptions
+          palette?: ImagePalette
+        },
+      ) => ({
         custom: context.custom.map((theme) => {
           if (theme.slug !== params.slug) return theme
 
@@ -135,6 +163,7 @@ export const themerMachine = setup({
             ...theme,
             title: params.title ?? theme.title,
             options: params.options ?? theme.options,
+            ...(params.palette ? {palette: params.palette} : {}),
           }
         }),
       }),
@@ -184,7 +213,14 @@ export const themerMachine = setup({
         },
         'theme.add': {
           target: '.edit',
-          actions: 'addFromActive',
+          actions: {
+            type: 'add',
+            params: ({event}) => ({
+              title: event.title,
+              options: event.options,
+              palette: event.palette,
+            }),
+          },
         },
         'theme.duplicate': {
           target: '.edit',
@@ -198,7 +234,12 @@ export const themerMachine = setup({
         'theme.update': {
           actions: {
             type: 'update',
-            params: ({event}) => ({slug: event.slug, title: event.title, options: event.options}),
+            params: ({event}) => ({
+              slug: event.slug,
+              title: event.title,
+              options: event.options,
+              palette: event.palette,
+            }),
           },
         },
         'theme.remove': {

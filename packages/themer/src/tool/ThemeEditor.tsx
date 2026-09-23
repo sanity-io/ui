@@ -16,6 +16,8 @@ import {
   SchemeThemeOptions,
 } from '../theme/options'
 import {useThemer} from './context'
+import {applyImagePalette, ImagePalette} from './imagePalette'
+import {ImagePaletteSection} from './ImagePaletteSection'
 import {ThemeThumbnail} from './ThemeThumbnail'
 
 const SCHEME_TITLES: Record<ThemeColorSchemeKey, string> = {
@@ -103,9 +105,18 @@ export function ThemeEditor(props: {focusTitle: boolean; slug: string}) {
       focusTitle={focusTitle}
       onDone={() => send({type: 'flow.list'})}
       onOptionsChange={(options) => send({type: 'theme.update', slug, options})}
+      onPalette={(palette) =>
+        send({
+          type: 'theme.update',
+          slug,
+          options: applyImagePalette(theme.options, palette),
+          palette,
+        })
+      }
       onRemove={() => send({type: 'theme.remove', slug})}
       onTitleChange={(title) => send({type: 'theme.update', slug, title})}
       options={theme.options}
+      palette={theme.palette}
       title={theme.title}
     />
   )
@@ -117,12 +128,24 @@ function ThemeEditorForm(props: {
   focusTitle: boolean
   onDone: () => void
   onOptionsChange: (options: BuildThemeOptions) => void
+  onPalette: (palette: ImagePalette) => void
   onRemove: () => void
   onTitleChange: (title: string) => void
   options: BuildThemeOptions
+  palette?: ImagePalette
   title: string
 }) {
-  const {focusTitle, onDone, onOptionsChange, onRemove, onTitleChange, options, title} = props
+  const {
+    focusTitle,
+    onDone,
+    onOptionsChange,
+    onPalette,
+    onRemove,
+    onTitleChange,
+    options,
+    palette,
+    title,
+  } = props
   // The scheme the Studio is showing, with the appearance setting resolved
   const studioScheme = useColorSchemeValue()
   const resolved = useMemo(() => resolveThemeOptions(options), [options])
@@ -167,6 +190,12 @@ function ThemeEditorForm(props: {
               value={title}
             />
           </Stack>
+
+          <ImagePaletteSection
+            onAssign={(scheme, target, hex) => patchScheme(scheme, {[target]: hex})}
+            onPalette={onPalette}
+            palette={palette}
+          />
 
           {SCHEMES.map((scheme) => (
             <SchemeCard

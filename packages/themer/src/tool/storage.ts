@@ -7,6 +7,7 @@ import {
   SchemeThemeOptions,
 } from '../theme/options'
 import {presets} from '../theme/presets'
+import {IMAGE_PALETTE_KEYS, ImagePalette} from './imagePalette'
 import {
   CONFIG_SLUG,
   createCustomTheme,
@@ -122,8 +123,31 @@ function sanitizeCustomTheme(value: unknown): CustomTheme | null {
   if (!options) return null
 
   const title: unknown = Reflect.get(value, 'title')
+  const palette = sanitizePalette(Reflect.get(value, 'palette'))
 
-  return {slug, title: displayTitle(typeof title === 'string' ? title : ''), options}
+  return {
+    slug,
+    title: displayTitle(typeof title === 'string' ? title : ''),
+    options,
+    ...(palette ? {palette} : {}),
+  }
+}
+
+function sanitizePalette(value: unknown): ImagePalette | null {
+  if (!value || typeof value !== 'object') return null
+
+  const palette: Partial<ImagePalette> = {}
+  let swatches = 0
+
+  for (const key of IMAGE_PALETTE_KEYS) {
+    const swatch = sanitizeColor(Reflect.get(value, key))
+
+    palette[key] = swatch
+    if (swatch) swatches++
+  }
+
+  // oxlint-disable-next-line no-unsafe-type-assertion -- the loop assigns every key
+  return swatches > 0 ? (palette as ImagePalette) : null
 }
 
 function sanitizeState(value: unknown): ThemerState {

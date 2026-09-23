@@ -1,9 +1,12 @@
 import {AddIcon} from '@sanity/icons/Add'
 import {RestoreIcon} from '@sanity/icons/Restore'
-import {Box, Button, Card, Stack} from '@sanity/ui'
+import {Box, Button, Card, Flex, Stack} from '@sanity/ui'
 
 import {useThemer} from './context'
+import {ImageFileButton} from './ImageFileButton'
+import {optionsFromImagePalette, titleFromFileName} from './imagePalette'
 import {ThemeCard} from './ThemeCard'
+import {useImagePalette} from './useImagePalette'
 
 /**
  * The flow for picking a theme: one column of theme cards — the configured
@@ -14,6 +17,14 @@ import {ThemeCard} from './ThemeCard'
  */
 export function ThemeList() {
   const {themes, removed, active, send} = useThemer()
+  const {busy, pickImage} = useImagePalette((palette, file) =>
+    send({
+      type: 'theme.add',
+      title: titleFromFileName(file.name),
+      options: optionsFromImagePalette(palette),
+      palette,
+    }),
+  )
 
   return (
     <>
@@ -27,14 +38,24 @@ export function ThemeList() {
 
       <Card borderTop padding={3}>
         <Stack gap={2}>
-          <Button
-            icon={AddIcon}
-            mode="ghost"
-            onClick={() => send({type: 'theme.add'})}
-            text="Add theme"
-            title="Add a theme based on the applied one"
-            width="fill"
-          />
+          <Flex gap={2}>
+            <Box flex={1}>
+              <Button
+                icon={AddIcon}
+                mode="ghost"
+                onClick={() => send({type: 'theme.add'})}
+                text="Add theme"
+                title="Add a theme based on the applied one"
+                width="fill"
+              />
+            </Box>
+            <ImageFileButton
+              loading={busy}
+              mode="ghost"
+              onFile={pickImage}
+              title="Add a theme from the colors of an image"
+            />
+          </Flex>
           {removed.length > 0 && (
             <Button
               icon={RestoreIcon}

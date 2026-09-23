@@ -37,7 +37,8 @@ export interface ThemerToolOptions {
  * themes — the configured theme, the presets and your own — each previewed
  * as a tiny Studio in both color schemes. Picking one applies it live to the
  * whole Studio while you browse around; your own themes can be edited with
- * accent/text/background pickers and a contrast slider, added, duplicated,
+ * accent/text/background pickers and a contrast slider per scheme, added,
+ * duplicated, given the colors of an image (its palette is read on device),
  * removed and restored, and a dialog shows the `buildTheme` snippet that
  * makes the applied theme permanent. Toggle between light and dark mode with
  * the regular appearance menu — the preview follows it.

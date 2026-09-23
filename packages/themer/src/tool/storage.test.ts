@@ -90,6 +90,45 @@ describe('themer storage', () => {
     })
   })
 
+  it('keeps the image palette of a theme, dropping what is not a color', () => {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        active: null,
+        custom: [
+          {
+            slug: 'custom-1',
+            title: 'From image',
+            options: {},
+            palette: {dominant: '#E11D48', vibrant: 'red', muted: null, extra: '#000000'},
+          },
+          {slug: 'custom-2', title: 'No colors', options: {}, palette: {vibrant: 'nope'}},
+          {slug: 'custom-3', title: 'No palette', options: {}, palette: 'garbage'},
+        ],
+        removed: [],
+      }),
+    )
+
+    expect(readStoredState().custom).toEqual([
+      {
+        slug: 'custom-1',
+        title: 'From image',
+        options: {},
+        palette: {
+          dominant: '#e11d48',
+          vibrant: null,
+          lightVibrant: null,
+          darkVibrant: null,
+          muted: null,
+          lightMuted: null,
+          darkMuted: null,
+        },
+      },
+      {slug: 'custom-2', title: 'No colors', options: {}},
+      {slug: 'custom-3', title: 'No palette', options: {}},
+    ])
+  })
+
   it('falls back on corrupt storage', () => {
     localStorage.setItem(STORAGE_KEY, '{not json')
 

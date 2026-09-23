@@ -72,6 +72,47 @@ describe('themerMachine', () => {
       expect(context.editing).toEqual({slug: context.custom[0].slug, focusTitle: true})
     })
 
+    it('adds a theme from given colors, like the palette of an image, without asking for a title', () => {
+      const actor = start()
+      const palette = {
+        dominant: '#e11d48',
+        vibrant: '#e11d48',
+        lightVibrant: null,
+        darkVibrant: null,
+        muted: '#7a7e8a',
+        lightMuted: null,
+        darkMuted: null,
+      }
+
+      actor.send({
+        type: 'theme.add',
+        title: 'sunset beach',
+        options: {light: {accent: '#e11d48'}},
+        palette,
+      })
+
+      const {context} = actor.getSnapshot()
+
+      expect(actor.getSnapshot().matches({flow: 'edit'})).toBe(true)
+      expect(context.custom[0]).toMatchObject({
+        title: 'sunset beach',
+        options: {light: {accent: '#e11d48'}},
+        palette,
+      })
+      expect(context.editing).toEqual({slug: context.custom[0].slug, focusTitle: false})
+
+      actor.send({
+        type: 'theme.update',
+        slug: context.custom[0].slug,
+        options: {dark: {accent: '#7a7e8a'}},
+        palette: {...palette, vibrant: '#7a7e8a'},
+      })
+      expect(actor.getSnapshot().context.custom[0]).toMatchObject({
+        options: {dark: {accent: '#7a7e8a'}},
+        palette: {...palette, vibrant: '#7a7e8a'},
+      })
+    })
+
     it('duplicates listed and removed themes into the editor', () => {
       const actor = startWithCustom({removed: ['custom-1']})
 
