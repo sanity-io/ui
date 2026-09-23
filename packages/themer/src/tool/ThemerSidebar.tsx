@@ -31,7 +31,9 @@ export function ThemerSidebar() {
   return (
     <Card height="fill">
       <Flex direction="column" height="fill">
-        <Card borderBottom padding={2}>
+        {/* No bottom border: the tools' own toolbars come in different heights, so a
+            line here would never line up with theirs */}
+        <Card padding={2}>
           <Flex align="center" gap={1}>
             {!inList && (
               <Button
