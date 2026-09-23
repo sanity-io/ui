@@ -38,10 +38,11 @@ defineInlineTest(
   <Select padding={3} />
   `,
   `
-  // UI-CODEMOD TODO: Please double check the Select migration below. The padding prop is no longer supported. Use the density prop (regular or loose) instead.
-  <Select padding={3} />
+  <Select style={{
+    padding: "var(--space-3)"
+  }} />
   `,
-  'warns on the unsupported padding prop',
+  'moves the padding prop to a style value',
 )
 
 defineInlineTest(
@@ -51,10 +52,11 @@ defineInlineTest(
   <Select fontSize={2} />
   `,
   `
-  // UI-CODEMOD TODO: Please double check the Select migration below. The fontSize prop is no longer supported. Select renders at the body1 text size.
-  <Select fontSize={2} />
+  <Select style={{
+    font: "var(--body-2)"
+  }} />
   `,
-  'warns on the unsupported fontSize prop',
+  'moves the fontSize prop to a font style value',
 )
 
 defineInlineTest(
@@ -64,10 +66,11 @@ defineInlineTest(
   <Select radius={2} />
   `,
   `
-  // UI-CODEMOD TODO: Please double check the Select migration below. The radius prop is no longer supported. Select uses a fixed radius.
-  <Select radius={2} />
+  <Select style={{
+    borderRadius: "var(--radius-2)"
+  }} />
   `,
-  'warns on the unsupported radius prop',
+  'moves the radius prop to a borderRadius style value',
 )
 
 defineInlineTest(
@@ -77,10 +80,9 @@ defineInlineTest(
   <Select gap={2} />
   `,
   `
-  // UI-CODEMOD TODO: Please double check the Select migration below. The gap prop is no longer supported. The spacing between the control and the icon is fixed.
-  <Select gap={2} />
+  <Select />
   `,
-  'warns on the unsupported gap prop',
+  'removes the unsupported gap prop',
 )
 
 defineInlineTest(
@@ -155,10 +157,9 @@ defineCrossFileTest(
     }
   `,
   (output) => {
-    expect(output).toContain(
-      '// UI-CODEMOD TODO: Please double check the Select migration below. The radius prop is no longer supported. Select uses a fixed radius.',
+    expect(output.replace(/\s+/g, ' ')).toContain(
+      '<RootSelect style={{ borderRadius: "var(--radius-2)" }} />',
     )
-    expect(output).toContain('<RootSelect radius={2} />')
   },
   'transforms attributes on imported styled Select wrappers',
 )

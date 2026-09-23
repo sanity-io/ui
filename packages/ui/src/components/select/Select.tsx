@@ -10,13 +10,8 @@ import {type SelectProps, selectProps} from './select.props'
 const selectClassName = suffixClassName('sui-Select')
 
 /** @public */
-export function Select({
-  density = 'regular',
-  disabled = false,
-  hasError = false,
-  ...props
-}: SelectProps) {
-  const {children, className, style, ...rest} = getProps({density, disabled, ...props}, selectProps)
+export function Select({density = 'regular', hasError = false, ...props}: SelectProps) {
+  const {children, className, style, ...rest} = getProps({density, ...props}, selectProps)
 
   const anchorId = useId()
   const anchorName = `--anchor-${anchorId}`
@@ -39,15 +34,10 @@ export function Select({
         style={{...style, anchorName}}
         {...rest}
         aria-invalid={hasError || undefined}
-        disabled={disabled}
       >
         {children}
       </select>
-      <div
-        className={iconClasses}
-        data-ui="Select-picker-icon-slot"
-        style={{positionAnchor: anchorName}}
-      >
+      <div className={iconClasses} data-ui="Select-icon" style={{positionAnchor: anchorName}}>
         <Icon icon={SelectIcon} size={1} />
       </div>
     </>
