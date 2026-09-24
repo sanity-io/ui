@@ -65,13 +65,12 @@ If the Studio already uses a `buildTheme` theme, pass the same options so the to
 
 The npm migration path off the hosted Themer service ([themer.sanity.build](https://themer.sanity.build)) is [`@sanity/themer-legacy`](https://www.npmjs.com/package/@sanity/themer-legacy): the exact same generator, running locally.
 
-`@sanity/themer/legacy` still works as a deprecated re-export of that package until `@sanity/themer@1.0` removes it. Swap the import specifier to migrate:
+`@sanity/themer/legacy` still works as a deprecated re-export of that package until `@sanity/themer@1.0` removes it; import from `@sanity/themer-legacy` instead. Migrating a hosted URL import looks like this:
 
 ```diff
 -import {theme} from 'https://themer.sanity.build/api/hues?preset=verdant&primary=22fca8'
 +import {buildThemeFromUrl} from '@sanity/themer-legacy'
-+const theme = buildThemeFromUrl('https://themer.sanity.build/api/huespreset=verdant&primary=22fca8')
-+import {buildThemeFromUrl} from '@sanity/themer-legacy'
++const theme = buildThemeFromUrl('https://themer.sanity.build/api/hues?preset=verdant&primary=22fca8')
 ```
 
 ## License
