@@ -54,6 +54,7 @@
     "@sanity/themer-legacy": "workspace:^",
     "@sanity/ui": "workspace:^",
     "@xstate/react": "^6.1.0",
+    "motion": "catalog:",
     "react-compiler-runtime": "1.0.0",
     "react-refractor": "catalog:",
     "refractor": "catalog:",
