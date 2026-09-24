@@ -165,6 +165,12 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   docs schemas/content (nothing was deleted when the docs went static; there
   is no presentation tool since there is no preview target anymore) and the
   `icon` documents used by `apps/icons` and the `enrich-icon` function.
+  The studio's `dev`, `build` and `deploy` scripts build `@sanity/ui` first
+  (`pre*` scripts): `sanity` and its plugins import `@sanity/ui/styles.css`,
+  which the workspace `exports` map to `packages/ui/dist/styles.css` — the
+  one subpath that needs a build, and `pnpm install` only runs the package's
+  `prepare` build when it actually installs something (not with a cached
+  `node_modules`, as on Vercel).
   `pnpm --filter sanity-ui-studio deploy` updates the hosted studio (the
   `appId` in `apps/studio/sanity.cli.ts`). In Cloud Agent VMs,
   `SANITY_API_READ_TOKEN` and `SANITY_AUTH_TOKEN` are available as runtime

@@ -53,9 +53,11 @@
     "@sanity/icons": "workspace:^",
     "@sanity/themer-legacy": "workspace:^",
     "@sanity/ui": "workspace:^",
+    "@xstate/react": "^6.1.0",
     "react-compiler-runtime": "1.0.0",
     "react-refractor": "catalog:",
-    "refractor": "catalog:"
+    "refractor": "catalog:",
+    "xstate": "^5.33.2"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",
