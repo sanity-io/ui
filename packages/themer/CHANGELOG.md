@@ -1,5 +1,14 @@
 # @sanity/themer
 
+## 0.3.16
+
+### Patch Changes
+
+- [#2960](https://github.com/sanity-io/ui/pull/2960) [`5634e5f`](https://github.com/sanity-io/ui/commit/5634e5f2d19350ea373f530c2d461982b1d54f3d) Thanks [@stipsan](https://github.com/stipsan)! - Deprecate `@sanity/themer/legacy`: the legacy generator moved to the new `@sanity/themer-legacy` package, and the subpath now re-exports it unchanged (same functions, same generated colors). Import from `@sanity/themer-legacy` instead — the subpath will be removed in `@sanity/themer@1.0`.
+- Updated dependencies [[`a9fb87c`](https://github.com/sanity-io/ui/commit/a9fb87cad74344fa6d1600afd017431b884a7af7), [`5634e5f`](https://github.com/sanity-io/ui/commit/5634e5f2d19350ea373f530c2d461982b1d54f3d)]:
+  - @sanity/ui@4.2.4
+  - @sanity/themer-legacy@0.1.0
+
 ## 0.3.15
 
 ### Patch Changes
