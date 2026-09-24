@@ -529,6 +529,9 @@ importers:
       '@sanity/themer':
         specifier: workspace:*
         version: link:../../packages/themer
+      '@sanity/themer-legacy':
+        specifier: workspace:*
+        version: link:../../packages/themer-legacy
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
