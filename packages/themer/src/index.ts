@@ -1,4 +1,8 @@
-export {buildPalette, type GeneratedColorPalette} from './theme/buildPalette'
+export {
+  buildPalette,
+  type GeneratedColorPalette,
+  type GeneratedColorPalettes,
+} from './theme/buildPalette'
 export {buildTheme} from './theme/buildTheme'
-export type {BuildThemeOptions} from './theme/options'
+export type {BuildThemeOptions, SchemeThemeOptions} from './theme/options'
 export {presets, type ThemePreset} from './theme/presets'

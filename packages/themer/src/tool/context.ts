@@ -1,17 +1,42 @@
 import {createContext, useContext} from 'react'
 
 import {BuildThemeOptions} from '../theme/options'
+import {ThemerEvent} from './machine'
+import {ThemerTheme} from './themes'
+
+/**
+ * The flow the sidebar is in: picking a theme from the list, editing one of
+ * the user's own themes, or restoring removed ones.
+ *
+ * @internal
+ */
+export type ThemerView =
+  | {name: 'list'}
+  | {
+      name: 'edit'
+      slug: string
+      /** Whether the title input should take focus, for themes that were just created */
+      focusTitle: boolean
+    }
+  | {name: 'removed'}
 
 /** @internal */
 export interface ThemerContextValue {
   /** The theme options the Studio's configured theme was generated from */
   baseOptions: BuildThemeOptions
-  /** The draft options, or `null` when the configured theme is untouched */
-  options: BuildThemeOptions | null
-  setOptions: (options: BuildThemeOptions | null) => void
+  /** The themes to pick from, in list order */
+  themes: ThemerTheme[]
+  /** The removed themes, which can be restored */
+  removed: ThemerTheme[]
+  /** The applied theme */
+  active: ThemerTheme
+  /** Object URLs of the images themes took their palette from this session, by slug */
+  images: Record<string, string>
+  view: ThemerView
   /** Whether the themer sidebar is open */
   open: boolean
-  setOpen: (open: boolean) => void
+  /** Sends an event to the themer machine */
+  send: (event: ThemerEvent) => void
 }
 
 /** @internal */

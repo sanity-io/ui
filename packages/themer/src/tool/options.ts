@@ -1,50 +1,42 @@
 import {
   BuildThemeOptions,
   DEFAULT_ACCENT,
-  DEFAULT_BACKGROUND_DARK,
-  DEFAULT_BACKGROUND_LIGHT,
+  DEFAULT_BACKGROUND,
   DEFAULT_CONTRAST,
   deriveTextColor,
+  ResolvedSchemeOptions,
   resolveThemeOptions,
+  SCHEMES,
+  SchemeThemeOptions,
 } from '../theme/options'
 
 /**
  * Reduces theme options to the minimal object that recreates them through
- * `buildTheme`: the text color is dropped when it matches the one derived
- * from the accent, and backgrounds and contrast are dropped when they match
- * the defaults. Options that boil down to the stock Studio theme reduce to
- * `null` — they need nothing from this package.
+ * `buildTheme`: in each scheme the accent is dropped when it is the stock
+ * one, the text color when it matches the one derived from the accent, and
+ * the background and contrast when they match the defaults — and a scheme
+ * with nothing left is dropped altogether. Options that boil down to the
+ * stock Studio theme reduce to `null` — they need nothing from this package.
  *
  * @internal
  */
 export function minimizeOptions(options: BuildThemeOptions): BuildThemeOptions | null {
   const resolved = resolveThemeOptions(options)
-  const minimized: BuildThemeOptions = {accent: resolved.accent}
+  const minimized: BuildThemeOptions = {}
 
-  if (resolved.text !== deriveTextColor(resolved.accent)) {
-    minimized.text = resolved.text
+  for (const scheme of SCHEMES) {
+    const values = resolved[scheme]
+    const kept: SchemeThemeOptions = {}
+
+    if (values.accent !== DEFAULT_ACCENT) kept.accent = values.accent
+    if (values.text !== deriveTextColor(values.accent)) kept.text = values.text
+    if (values.background !== DEFAULT_BACKGROUND[scheme]) kept.background = values.background
+    if (values.contrast !== DEFAULT_CONTRAST) kept.contrast = values.contrast
+
+    if (Object.keys(kept).length > 0) minimized[scheme] = kept
   }
 
-  const dark =
-    resolved.background.dark === DEFAULT_BACKGROUND_DARK ? null : resolved.background.dark
-  const light =
-    resolved.background.light === DEFAULT_BACKGROUND_LIGHT ? null : resolved.background.light
-
-  if (dark !== null || light !== null) {
-    minimized.background = {}
-    if (dark !== null) minimized.background.dark = dark
-    if (light !== null) minimized.background.light = light
-  }
-
-  if (resolved.contrast !== DEFAULT_CONTRAST) {
-    minimized.contrast = resolved.contrast
-  }
-
-  if (minimized.accent === DEFAULT_ACCENT && Object.keys(minimized).length === 1) {
-    return null
-  }
-
-  return minimized
+  return Object.keys(minimized).length === 0 ? null : minimized
 }
 
 /**
@@ -58,11 +50,14 @@ export function sameOptions(a: BuildThemeOptions, b: BuildThemeOptions): boolean
   const left = resolveThemeOptions(a)
   const right = resolveThemeOptions(b)
 
+  return SCHEMES.every((scheme) => sameScheme(left[scheme], right[scheme]))
+}
+
+function sameScheme(a: ResolvedSchemeOptions, b: ResolvedSchemeOptions): boolean {
   return (
-    left.accent === right.accent &&
-    left.text === right.text &&
-    left.background.dark === right.background.dark &&
-    left.background.light === right.background.light &&
-    left.contrast === right.contrast
+    a.accent === b.accent &&
+    a.text === b.text &&
+    a.background === b.background &&
+    a.contrast === b.contrast
   )
 }

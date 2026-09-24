@@ -1,6 +1,6 @@
 import {definePlugin, type LayoutProps} from 'sanity'
 
-import {BuildThemeOptions, DEFAULT_ACCENT} from '../theme/options'
+import {BuildThemeOptions} from '../theme/options'
 import {ThemerActiveToolLayout} from './ThemerActiveToolLayout'
 import {ThemerLayout} from './ThemerLayout'
 import {ThemerNavbar} from './ThemerNavbar'
@@ -20,7 +20,7 @@ export interface ThemerToolOptions {
    * the `theme` in the Studio config uses:
    *
    * ```ts
-   * const config: BuildThemeOptions = {accent: '#1cb485'}
+   * const config: BuildThemeOptions = {light: {accent: '#1cb485'}, dark: {accent: '#22fca8'}}
    *
    * export default defineConfig({
    *   theme: buildTheme(config),
@@ -33,11 +33,15 @@ export interface ThemerToolOptions {
 
 /**
  * A Studio plugin that adds a themer sidebar for `buildTheme` themes: a
- * navbar toggle opens the sidebar next to the active tool, where presets, the
- * accent/text/background pickers and the contrast slider preview a
- * `buildTheme` theme live on the whole Studio while you browse around.
- * Toggle between light and dark mode with the regular appearance menu — the
- * preview follows it.
+ * navbar toggle opens the sidebar next to the active tool, with a list of
+ * themes — the configured theme, the presets and your own — each previewed
+ * as a tiny Studio in both color schemes. Picking one applies it live to the
+ * whole Studio while you browse around; your own themes can be edited with
+ * accent/text/background pickers and a contrast slider per scheme, added,
+ * duplicated, given the colors of an image (its palette is read on device),
+ * removed and restored, and a dialog shows the `buildTheme` snippet that
+ * makes the applied theme permanent. Toggle between light and dark mode with
+ * the regular appearance menu — the preview follows it.
  *
  * ```ts
  * import {themerTool} from '@sanity/themer/tool'
@@ -55,7 +59,9 @@ export interface ThemerToolOptions {
  * @alpha
  */
 export const themerTool = definePlugin<ThemerToolOptions | void>((options) => {
-  const baseOptions = options?.config ?? {accent: DEFAULT_ACCENT}
+  // No options generate the stock theme, which is what a Studio without a
+  // `theme` in its config gets
+  const baseOptions = options?.config ?? {}
 
   function ThemerLayoutWithOptions(props: LayoutProps) {
     return <ThemerLayout {...props} baseOptions={baseOptions} />
