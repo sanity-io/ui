@@ -22,7 +22,7 @@ const defaultPreset = definePreset(
  * the same slugs and hues:
  *
  * ```ts
- * import {createTheme, presets} from '@sanity/themer/legacy'
+ * import {createTheme, presets} from '@sanity/themer-legacy'
  *
  * const verdant = presets.find((preset) => preset.slug === 'verdant')
  * const theme = createTheme(verdant.hues)

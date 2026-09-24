@@ -11,11 +11,17 @@ sanity-io/color repo with full git history) in `packages/color`, the published
 standalone `sanity-io/logos` repo with full git history) in `packages/logos`,
 the published `@sanity/themer` package (a root `buildTheme` export that
 generates a Studio theme from a few colors by replacing the `@sanity/color`
-palette that `buildTheme` from `@sanity/ui/theme` uses, a `/legacy` subpath
-that replicates the hosted themer.sanity.build `/api/hues` module
-byte-for-byte for migration, and a `/tool` subpath with the `themerTool`
-Studio plugin that edits and previews the root `buildTheme` themes) in
-`packages/themer`,
+palette that `buildTheme` from `@sanity/ui/theme` uses, a deprecated `/legacy`
+subpath that re-exports `@sanity/themer-legacy` until `@sanity/themer@1.0`
+removes it, and a `/tool` subpath with the `themerTool` Studio plugin that
+edits and previews the root `buildTheme` themes) in `packages/themer`,
+the published `@sanity/themer-legacy` package (the hosted themer.sanity.build
+`/api/hues` generator replicated byte-for-byte for migration; it depends on a
+published `@sanity/ui` v4 range instead of `workspace:` so that `@sanity/ui@5`
+landing on `main` cannot change its output — pnpm links `packages/ui` only
+while its version satisfies that range, and `.changeset/config.json` sets
+`bumpVersionsWithWorkspaceProtocolOnly` so Changesets never rewrites the
+range) in `packages/themer-legacy`,
 the Figma plugins in `packages/figma` (Sanity UI theme tokens) and
 `packages/figma-color` (the raw `@sanity/color` palette), the Storybook app in
 `apps/storybook`, the
@@ -71,7 +77,8 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   comes from the Changesets config (`access: public`), so packages don't set
   `publishConfig.access`. All published packages are `"type": "module"`: dist
   ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
-  (`@sanity/ui`, `@sanity/icons` and `@sanity/themer` ship ESM only).
+  (`@sanity/ui`, `@sanity/icons`, `@sanity/themer` and `@sanity/themer-legacy`
+  ship ESM only).
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
   `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
   `@sanity/ui` resolves to the `packages/ui/src/exports/` source (and
