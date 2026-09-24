@@ -324,8 +324,8 @@ export function readableAccent(hex: string, scheme: ThemeColorSchemeKey): string
   return current
 }
 
-/** The accent a variant gives a scheme, made readable on a button @internal */
-export function variantAccent(
+/** The accent a variant gives a scheme, made readable on a button */
+function variantAccent(
   palette: ImagePalette,
   variant: ImagePaletteVariant | null,
   scheme: ThemeColorSchemeKey,
