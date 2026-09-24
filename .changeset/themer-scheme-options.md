@@ -1,17 +1,17 @@
 ---
-"@sanity/themer": minor
+'@sanity/themer': minor
 ---
 
 **Breaking:** the root `buildTheme` and `buildPalette` options are grouped by color scheme, so the light and the dark scheme can differ in every color rather than only their background:
 
 ```ts
 // Before
-buildTheme({accent: "#1cb485", text: "#5c9199", background: {dark: "#0d1415", light: "#fcfdfd"}})
+buildTheme({accent: '#1cb485', text: '#5c9199', background: {dark: '#0d1415', light: '#fcfdfd'}})
 
 // After
 buildTheme({
-  light: {accent: "#1cb485", text: "#5c9199", background: "#fcfdfd"},
-  dark: {accent: "#1cb485", text: "#5c9199", background: "#0d1415"},
+  light: {accent: '#1cb485', text: '#5c9199', background: '#fcfdfd'},
+  dark: {accent: '#1cb485', text: '#5c9199', background: '#0d1415'},
 })
 ```
 
