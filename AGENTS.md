@@ -16,12 +16,15 @@ subpath that re-exports `@sanity/themer-legacy` until `@sanity/themer@1.0`
 removes it, and a `/tool` subpath with the `themerTool` Studio plugin that
 edits and previews the root `buildTheme` themes) in `packages/themer`,
 the published `@sanity/themer-legacy` package (the hosted themer.sanity.build
-`/api/hues` generator replicated byte-for-byte for migration; it depends on a
-published `@sanity/ui` v4 range instead of `workspace:` so that `@sanity/ui@5`
-landing on `main` cannot change its output — pnpm links `packages/ui` only
-while its version satisfies that range, and `.changeset/config.json` sets
-`bumpVersionsWithWorkspaceProtocolOnly` so Changesets never rewrites the
-range) in `packages/themer-legacy`,
+`/api/hues` generator replicated byte-for-byte for migration, plus a `/tool`
+subpath with the `themerTool` Studio plugin — named `themer-legacy` so it runs
+next to `@sanity/themer/tool` — that re-hosts the hosted Themer's hue editor
+and previews the host Studio in a single or a split light/dark view; it
+depends on a published `@sanity/ui` v4 range instead of `workspace:` so that
+`@sanity/ui@5` landing on `main` cannot change its output — pnpm links
+`packages/ui` only while its version satisfies that range, and
+`.changeset/config.json` sets `bumpVersionsWithWorkspaceProtocolOnly` so
+Changesets never rewrites the range) in `packages/themer-legacy`,
 the Figma plugins in `packages/figma` (Sanity UI theme tokens) and
 `packages/figma-color` (the raw `@sanity/color` palette), the Storybook app in
 `apps/storybook`, the
