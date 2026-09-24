@@ -1,5 +1,28 @@
 # @sanity/themer
 
+## 0.4.0
+
+### Minor Changes
+
+- [#2955](https://github.com/sanity-io/ui/pull/2955) [`f2cd6b2`](https://github.com/sanity-io/ui/commit/f2cd6b290577ca8872e9893ad1f389b969510c5c) Thanks [@stipsan](https://github.com/stipsan)! - The themer tool can take a theme's colors from an image, on device: pick an image (or drop one on the editor's image palette card) and it is drawn onto a canvas and its palette extracted right there — vibrant, muted and their light and dark variants plus the dominant color, the way Sanity's image pipeline derives `metadata.palette` — without uploading anything. The vibrant color becomes the accent of both schemes — darkened or lightened along its hue until a button label reaches WCAG AA contrast on it — the muted one the text color, and the light and dark muted colors tint the backgrounds of their scheme. The palette stays with the theme: the image shows next to its swatches for the session, and a row of half-size previews offers the theme built around each swatch (muted, vibrant and their light and dark variants) plus an "I'm feeling lucky" button that picks an interesting one at random. The list has an "add a theme from an image" button next to "Add theme", which names the theme after the file.
+
+- [#2955](https://github.com/sanity-io/ui/pull/2955) [`f2cd6b2`](https://github.com/sanity-io/ui/commit/f2cd6b290577ca8872e9893ad1f389b969510c5c) Thanks [@stipsan](https://github.com/stipsan)! - **Breaking:** the root `buildTheme` and `buildPalette` options are grouped by color scheme, so the light and the dark scheme can differ in every color rather than only their background:
+  
+  ```ts
+  // Before
+  buildTheme({accent: '#1cb485', text: '#5c9199', background: {dark: '#0d1415', light: '#fcfdfd'}})
+  
+  // After
+  buildTheme({
+    light: {accent: '#1cb485', text: '#5c9199', background: '#fcfdfd'},
+    dark: {accent: '#1cb485', text: '#5c9199', background: '#0d1415'},
+  })
+  ```
+  
+  Each scheme takes an optional `accent`, `text`, `background` and `contrast`, and both schemes are optional too: whatever is omitted falls back to the stock Studio colors, so `buildTheme({})` matches `buildTheme()` from `@sanity/ui/theme`. `buildPalette` returns a palette per scheme (`{light, dark}`), `presets` carry their colors per scheme, and passing the old flat shape throws a `TypeError` that points at the new one. The themer tool edits themes scheme by scheme — a light mode and a dark mode card with pickers and a contrast slider each, the scheme the Studio is showing marked as active — and its stored themes and legacy drafts are converted from the flat shape automatically.
+
+- [#2955](https://github.com/sanity-io/ui/pull/2955) [`f2cd6b2`](https://github.com/sanity-io/ui/commit/f2cd6b290577ca8872e9893ad1f389b969510c5c) Thanks [@stipsan](https://github.com/stipsan)! - Redesign the `themerTool` sidebar around themes rather than a single draft. The narrower sidebar lists the configured theme, the presets and your own themes in one column of cards, each with a tiny lo-fi preview of a Studio — navbar, document list and document form — in both color schemes at once, split like the "Auto" appearance preview in macOS, with the title below. Picking a card applies the theme live to the whole Studio. Each flow is now its own: add a theme (or duplicate a preset to start from it), edit your own themes with the accent/text/background pickers and the contrast slider, remove themes, and restore removed ones — removed presets and custom themes alike — from a dedicated view. The `buildTheme` snippet moved out of the sidebar into a dialog behind a header button, so the sidebar no longer resizes as the snippet changes. A draft from the previous version is migrated into a custom theme. The tool's state — the open sidebar, the flow it is in and the themes — is modeled as an XState machine, which adds `xstate` and `@xstate/react` (the versions the Studio already ships) to the package's dependencies.
+
 ## 0.3.16
 
 ### Patch Changes
