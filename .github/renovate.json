@@ -3,6 +3,10 @@
   "baseBranchPatterns": ["v2", "v3", "$default"],
   "extends": ["github>sanity-io/renovate-config"],
   "ignorePresets": ["github>sanity-io/renovate-config:group-non-major"],
+  "lockFileMaintenance": {
+    "description": "A stale lockfile branch merges cleanly into a base branch that gained a workspace package, leaving that package's importer entries pointing at peer-resolved ids the regenerated snapshots no longer define",
+    "rebaseWhen": "behind-base-branch"
+  },
   "packageRules": [
     {
       "matchDepTypes": ["dependencies"],
