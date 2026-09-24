@@ -31,6 +31,12 @@
       "skillPath": "skills/sanity-live-cache-components/SKILL.md",
       "computedHash": "6ca6b6034d8f297b6984794480686a1b67badf8e7b157b8634751d4f4d263894"
     },
+    "sanity-tsdown-config": {
+      "source": "sanity-io/pkg-utils",
+      "sourceType": "github",
+      "skillPath": "skills/sanity-tsdown-config/SKILL.md",
+      "computedHash": "d38ce61157a0612f03c2e1fca63e05cbde69e30ba281889b6141f52ae83c6729"
+    },
     "stories": {
       "source": "storybookjs/mcp",
       "sourceType": "github",
