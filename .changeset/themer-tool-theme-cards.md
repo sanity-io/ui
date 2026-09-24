@@ -1,5 +1,0 @@
----
-'@sanity/themer': minor
----
-
-Redesign the `themerTool` sidebar around themes rather than a single draft. The narrower sidebar lists the configured theme, the presets and your own themes in one column of cards, each with a tiny lo-fi preview of a Studio — navbar, document list and document form — in both color schemes at once, split like the "Auto" appearance preview in macOS, with the title below. Picking a card applies the theme live to the whole Studio. Each flow is now its own: add a theme (or duplicate a preset to start from it), edit your own themes with the accent/text/background pickers and the contrast slider, remove themes, and restore removed ones — removed presets and custom themes alike — from a dedicated view. The `buildTheme` snippet moved out of the sidebar into a dialog behind a header button, so the sidebar no longer resizes as the snippet changes. A draft from the previous version is migrated into a custom theme. The tool's state — the open sidebar, the flow it is in and the themes — is modeled as an XState machine, which adds `xstate` and `@xstate/react` (the versions the Studio already ships) to the package's dependencies.
