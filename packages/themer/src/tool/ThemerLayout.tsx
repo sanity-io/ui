@@ -1,7 +1,8 @@
-import {Card, Flex, ThemeProvider} from '@sanity/ui'
+import {Card, Flex, ThemeProvider, useMediaIndex} from '@sanity/ui'
 import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
-import {useEffect, useMemo, useRef, useState} from 'react'
+import {AnimateView} from 'motion/react-animate-view'
+import {useDeferredValue, useEffect, useMemo, useRef, useState, ViewTransition} from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
 
 import {buildTheme} from '../theme/buildTheme'
@@ -11,6 +12,16 @@ import {selectStoredState, ThemerInput, themerMachine, ThemerSnapshot} from './m
 import {ResizableSidebar} from './ResizableSidebar'
 import {readStoredState, writeStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
+
+/**
+ * Below this media index the Studio collapses its navbar into a drawer, and
+ * the themer follows suit: the sidebar covers the Studio instead of standing
+ * next to it, and the split preview stacks instead of sitting side by side.
+ */
+const MOBILE_MEDIA_INDEX = 1
+
+/** `AnimateView` rides on React's view transitions, which React 18 lacks */
+const supportsViewTransitions = typeof ViewTransition !== 'undefined'
 
 function sameStoredState(a: ThemerState, b: ThemerState): boolean {
   return a.active === b.active && a.custom === b.custom && a.removed === b.removed
@@ -47,8 +58,10 @@ function sameView(a: ThemerView, b: ThemerView): boolean {
  * `layout` level rather than in `activeToolLayout` because the split preview
  * renders the Studio twice, and the sidebar must not come along.
  *
- * The single preview inherits the color scheme from the Studio, so it follows
- * the appearance setting (light/dark/system) like any other theme.
+ * The Studio next to the sidebar always follows the appearance setting
+ * (light/dark/system) and the picked theme like any other theme would. The
+ * split preview adds a second copy in the opposite scheme on the far side —
+ * or on top, on small screens — animated in with a view transition.
  *
  * @internal
  */
@@ -61,6 +74,12 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const open = snapshot.matches({sidebar: 'open'})
   const split = snapshot.matches({preview: 'split'})
   const {images} = snapshot.context
+  const mobile = useMediaIndex() <= MOBILE_MEDIA_INDEX
+
+  // The machine publishes its state synchronously, so the split copy mounts
+  // from a deferred value: that puts the mount in a transition, which is what
+  // lets the view transition animate it in and out
+  const deferredSplit = useDeferredValue(split)
 
   useEffect(() => writeStoredState(stored), [stored])
 
@@ -104,6 +123,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // layout, and Safari tints its chrome from the body — so the applied theme
   // has to reach the body too, in the scheme the Studio is showing
   const scheme = useColorSchemeValue()
+  const oppositeScheme: ThemeColorSchemeKey = scheme === 'dark' ? 'light' : 'dark'
 
   useEffect(() => {
     const background = theme?.v2?.color[scheme].default.bg
@@ -121,33 +141,67 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   }, [scheme, theme])
 
   const context = useMemo<ThemerContextValue>(
-    () => ({baseOptions, themes, removed, active, images, view, open, split, send}),
-    [active, baseOptions, images, open, removed, send, split, themes, view],
+    () => ({baseOptions, themes, removed, active, images, view, open, split, mobile, send}),
+    [active, baseOptions, images, mobile, open, removed, send, split, themes, view],
   )
 
   const studio = layoutProps.renderDefault(layoutProps)
 
   return (
     <ThemerContext.Provider value={context}>
-      <Flex height="fill" sizing="border">
-        {/* The first copy keeps its place when the preview splits, so the Studio
-            in it stays mounted and only changes scheme */}
-        <StudioPreview scheme={split ? 'light' : undefined} theme={theme}>
-          {studio}
-        </StudioPreview>
-        {split && (
-          <StudioPreview borderLeft scheme="dark" theme={theme}>
-            {studio}
-          </StudioPreview>
+      <Flex
+        direction={mobile ? 'column' : 'row'}
+        height="fill"
+        sizing="border"
+        style={{position: 'relative'}}
+      >
+        {/* The opposite scheme comes first — on the far side of the sidebar,
+            or on top on small screens — so the Studio the user was looking at
+            stays where it is, mounted, in its own scheme */}
+        {deferredSplit && (
+          <AnimateIn axis={mobile ? 'y' : 'x'}>
+            <StudioPreview
+              borderBottom={mobile}
+              borderRight={!mobile}
+              scheme={oppositeScheme}
+              theme={theme}
+            >
+              {studio}
+            </StudioPreview>
+          </AnimateIn>
         )}
+        <StudioPreview theme={theme}>{studio}</StudioPreview>
 
         {open && (
           <ThemeProvider theme={theme ?? undefined}>
-            <ResizableSidebar />
+            <ResizableSidebar overlay={mobile} />
           </ThemeProvider>
         )}
       </Flex>
     </ThemerContext.Provider>
+  )
+}
+
+/**
+ * Slides its child in from the side it appears on, with a view transition —
+ * or mounts it as-is where React cannot animate view transitions yet.
+ */
+function AnimateIn(props: {axis: 'x' | 'y'; children: React.ReactNode}) {
+  const {axis, children} = props
+
+  if (!supportsViewTransitions) return children
+
+  const from = axis === 'x' ? {x: [-40, 0]} : {y: [-40, 0]}
+  const to = axis === 'x' ? {x: [0, -40]} : {y: [0, -40]}
+
+  return (
+    <AnimateView
+      enter={{opacity: [0, 1], ...from}}
+      exit={{opacity: [1, 0], ...to}}
+      transition={{duration: 0.3, ease: 'easeOut'}}
+    >
+      {children}
+    </AnimateView>
   )
 }
 
@@ -163,17 +217,19 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
  * keeps native form controls and scrollbars in step with it.
  */
 function StudioPreview(props: {
-  borderLeft?: boolean
+  borderBottom?: boolean
+  borderRight?: boolean
   children: React.ReactNode
   scheme?: ThemeColorSchemeKey
   theme: RootTheme | null
 }) {
-  const {borderLeft, children, scheme, theme} = props
+  const {borderBottom, borderRight, children, scheme, theme} = props
 
   return (
     <ThemeProvider scheme={scheme} theme={theme ?? undefined}>
       <Card
-        borderLeft={borderLeft}
+        borderBottom={borderBottom}
+        borderRight={borderRight}
         flex={1}
         height="fill"
         overflow="hidden"
