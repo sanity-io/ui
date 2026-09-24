@@ -50,13 +50,22 @@ export function TintStrip(props: {hue: Hue; title: string}) {
   const tints = useMemo(() => createTintsFromHue(hue, title), [hue, title])
 
   const handleCopy = (hex: string, tintTitle: string) => {
+    const reportFailure = () => {
+      toast.push({status: 'error', title: `Could not copy ${tintTitle} to the clipboard`})
+    }
+
+    // The Clipboard API only exists in secure contexts, and reaching for
+    // `writeText` without it throws instead of rejecting
+    if (!navigator.clipboard) {
+      reportFailure()
+      return
+    }
+
     // Confirm right away like the hosted Themer did: the clipboard promise can
     // stay pending behind a permission prompt, and the write itself is instant
     // once it goes through
     toast.push({closable: true, status: 'success', title: `Copied ${tintTitle} to the clipboard`})
-    navigator.clipboard.writeText(hex).catch(() => {
-      toast.push({status: 'error', title: `Could not copy ${tintTitle} to the clipboard`})
-    })
+    navigator.clipboard.writeText(hex).catch(reportFailure)
   }
 
   return (
