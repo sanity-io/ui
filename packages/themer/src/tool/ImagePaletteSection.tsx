@@ -176,6 +176,9 @@ export function ImagePaletteSection(props: {
   const {imageUrl, onPalette, onVariant, onLucky, options, palette} = props
   const {busy, pickImage} = useImagePalette(onPalette)
   const [dragging, setDragging] = useState(false)
+  // `dragleave` also fires when the pointer crosses into a child, so the
+  // highlight tracks how deep the drag is rather than the last event
+  const dragDepth = useRef(0)
   const current = palette ? currentImageVariant(options, palette) : null
   const rowRef = useRef<HTMLDivElement | null>(null)
   const [variantWidth, setVariantWidth] = useState(FALLBACK_VARIANT_WIDTH)
@@ -216,13 +219,22 @@ export function ImagePaletteSection(props: {
   return (
     <Card
       border
-      onDragLeave={() => setDragging(false)}
+      onDragEnter={(event) => {
+        event.preventDefault()
+        dragDepth.current++
+        setDragging(true)
+      }}
+      onDragLeave={() => {
+        dragDepth.current = Math.max(0, dragDepth.current - 1)
+
+        if (dragDepth.current === 0) setDragging(false)
+      }}
       onDragOver={(event) => {
         event.preventDefault()
-        setDragging(true)
       }}
       onDrop={(event) => {
         event.preventDefault()
+        dragDepth.current = 0
         setDragging(false)
 
         const file = event.dataTransfer.files[0]
