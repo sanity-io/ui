@@ -1,5 +1,11 @@
 # @sanity/themer-legacy
 
+## 0.2.0
+
+### Minor Changes
+
+- [#2976](https://github.com/sanity-io/ui/pull/2976) [`0b080bd`](https://github.com/sanity-io/ui/commit/0b080bd4e378bf89b90ec1c22be8c741e9745a54) Thanks [@stipsan](https://github.com/stipsan)! - Add `themerTool` on the new `@sanity/themer-legacy/tool` subpath: a Studio plugin that brings the hosted Themer's editor into your own Studio. A navbar toggle opens a sidebar with the hosted presets and the six hue editors (mid, lightest and darkest colors, the mid-point slider and the generated tints, click to copy), and the resulting `createTheme` theme previews live on the whole Studio — following the Studio appearance, or in light and dark side by side. Drafts persist in `localStorage`. The plugin is named `themer-legacy`, so it runs next to `themerTool` from `@sanity/themer/tool`.
+
 ## 0.1.0
 
 ### Minor Changes

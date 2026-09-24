@@ -1,5 +1,17 @@
 # @sanity/themer
 
+## 0.5.0
+
+### Minor Changes
+
+- [#2982](https://github.com/sanity-io/ui/pull/2982) [`fae7826`](https://github.com/sanity-io/ui/commit/fae7826a3d1741cf42e7b77b3f983fc41b572fe1) Thanks [@stipsan](https://github.com/stipsan)! - The themer tool can preview the Studio in light and dark side by side: the split-screen toggle in the sidebar header renders the whole Studio twice, light on the left and dark on the right, in sync while you navigate, and the editor marks both scheme cards as shown. The sidebar now sits next to the whole Studio, navbar included, rather than next to the active tool, so it renders once and stays put when the preview splits.
+
+### Patch Changes
+
+- [#2982](https://github.com/sanity-io/ui/pull/2982) [`fae7826`](https://github.com/sanity-io/ui/commit/fae7826a3d1741cf42e7b77b3f983fc41b572fe1) Thanks [@stipsan](https://github.com/stipsan)! - Themer tool polish: the editor's light and dark mode cards run edge to edge with only a border between them, in the sidebar's own scheme rather than each painted in the scheme it edits — the "Active" badge marks the scheme the Studio is showing — and the menu button on a theme card stays dark, as it sits on the dark half of the thumbnail.
+- Updated dependencies [[`0b080bd`](https://github.com/sanity-io/ui/commit/0b080bd4e378bf89b90ec1c22be8c741e9745a54)]:
+  - @sanity/themer-legacy@0.2.0
+
 ## 0.4.0
 
 ### Minor Changes
