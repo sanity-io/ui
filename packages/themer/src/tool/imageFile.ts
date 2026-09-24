@@ -32,7 +32,8 @@ export async function readImagePixels(file: Blob): Promise<PixelData> {
 
     return {data: context.getImageData(0, 0, width, height).data, width, height}
   } finally {
-    if (image instanceof ImageBitmap) image.close()
+    // Where `createImageBitmap` is missing, `ImageBitmap` may be too
+    if (typeof ImageBitmap !== 'undefined' && image instanceof ImageBitmap) image.close()
   }
 }
 
