@@ -324,3 +324,21 @@ describe('titleFromFileName', () => {
     expect(titleFromFileName('.png')).toBe('Image theme')
   })
 })
+
+describe('short hex swatches', () => {
+  it('tints backgrounds and adjusts accents from #rgb swatches too', () => {
+    const options = optionsFromImagePalette({
+      ...EMPTY,
+      vibrant: '#e14',
+      lightMuted: '#abc',
+      darkMuted: '#345',
+    })
+
+    expect(options.light?.background).toMatch(/^#[0-9a-f]{6}$/)
+    expect(options.dark?.background).toMatch(/^#[0-9a-f]{6}$/)
+    expect(options.light?.accent).toMatch(/^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/)
+    expect(applyImagePalette({}, {...EMPTY, lightMuted: '#abc'}).light?.background).toBe(
+      applyImagePalette({}, {...EMPTY, lightMuted: '#aabbcc'}).light?.background,
+    )
+  })
+})

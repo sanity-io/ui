@@ -258,11 +258,15 @@ function rgbToHex(r: number, g: number, b: number): string {
   return `#${[r, g, b].map((channel) => channel.toString(16).padStart(2, '0')).join('')}`
 }
 
+/** Reads `#rgb` and `#rrggbb` alike — stored palettes may hold either */
 function hexToRgb(hex: string): [number, number, number] {
+  const expanded =
+    hex.length === 4 ? `${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}` : hex.slice(1)
+
   return [
-    parseInt(hex.slice(1, 3), 16),
-    parseInt(hex.slice(3, 5), 16),
-    parseInt(hex.slice(5, 7), 16),
+    parseInt(expanded.slice(0, 2), 16),
+    parseInt(expanded.slice(2, 4), 16),
+    parseInt(expanded.slice(4, 6), 16),
   ]
 }
 
