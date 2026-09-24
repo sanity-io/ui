@@ -68,7 +68,9 @@ The npm migration path off the hosted Themer service ([themer.sanity.build](http
 `@sanity/themer/legacy` still works as a deprecated re-export of that package until `@sanity/themer@1.0` removes it. Swap the import specifier to migrate:
 
 ```diff
--import {buildThemeFromUrl} from '@sanity/themer/legacy'
+-import {theme} from 'https://themer.sanity.build/api/hues?preset=verdant&primary=22fca8'
++import {buildThemeFromUrl} from '@sanity/themer-legacy'
++const theme = buildThemeFromUrl('https://themer.sanity.build/api/huespreset=verdant&primary=22fca8')
 +import {buildThemeFromUrl} from '@sanity/themer-legacy'
 ```
 
