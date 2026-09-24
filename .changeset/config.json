@@ -5,6 +5,7 @@
   "baseBranch": "main",
   "format": "oxfmt",
   "privatePackages": false,
+  "bumpVersionsWithWorkspaceProtocolOnly": true,
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always",
     "onlyUpdatePeerDependentsWhenOutOfRange": true
