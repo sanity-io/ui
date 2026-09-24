@@ -2,7 +2,7 @@ import {CopyIcon} from '@sanity/icons/Copy'
 import {EditIcon} from '@sanity/icons/Edit'
 import {EllipsisHorizontalIcon} from '@sanity/icons/EllipsisHorizontal'
 import {TrashIcon} from '@sanity/icons/Trash'
-import {Box, Button, Text} from '@sanity/ui'
+import {Box, Button, Card, Text, useRootTheme} from '@sanity/ui'
 import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import {Tooltip} from '@sanity/ui/tooltip'
 import {useState} from 'react'
@@ -93,6 +93,7 @@ const MenuSlot = styled.div`
 export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
   const {active, theme} = props
   const {send} = useThemer()
+  const {scheme} = useRootTheme()
   const [menuOpen, setMenuOpen] = useState(false)
   const title = displayTitle(theme.title)
 
@@ -119,12 +120,13 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
         </Box>
       </PickButton>
 
-      {/* The tooltip wraps a span rather than the button: the menu button
+      {/* The tooltip wraps a card rather than the button: the menu button
           clones its button to wire it up, which a tooltip in between would
-          swallow */}
+          swallow. The card keeps the button dark, as it sits on the dark
+          half of the thumbnail, while the menu opens in the sidebar's scheme */}
       <MenuSlot data-visible={menuOpen}>
         <Tooltip animate content={<Text size={1}>Show more</Text>} placement="bottom" portal>
-          <span style={{display: 'inline-block'}}>
+          <Card radius={2} scheme="dark" style={{display: 'inline-block'}}>
             <MenuButton
               button={
                 <Button
@@ -166,9 +168,9 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
               }
               onClose={() => setMenuOpen(false)}
               onOpen={() => setMenuOpen(true)}
-              popover={{animate: true, placement: 'bottom-end', portal: true}}
+              popover={{animate: true, placement: 'bottom-end', portal: true, scheme}}
             />
-          </span>
+          </Card>
         </Tooltip>
       </MenuSlot>
     </Root>
