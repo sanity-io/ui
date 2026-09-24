@@ -1,4 +1,5 @@
-import {ThemeProvider} from '@sanity/ui'
+import {Card, Flex, ThemeProvider} from '@sanity/ui'
+import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
 import {useEffect, useMemo, useRef, useState} from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
@@ -7,6 +8,7 @@ import {buildTheme} from '../theme/buildTheme'
 import {BuildThemeOptions} from '../theme/options'
 import {ThemerContext, ThemerContextValue, ThemerView} from './context'
 import {selectStoredState, ThemerInput, themerMachine, ThemerSnapshot} from './machine'
+import {ResizableSidebar} from './ResizableSidebar'
 import {readStoredState, writeStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
 
@@ -38,13 +40,15 @@ function sameView(a: ThemerView, b: ThemerView): boolean {
 
 /**
  * Wraps the whole Studio so that the theme picked in the themer sidebar
- * applies everywhere while the user browses around, and runs the themer
- * machine that the navbar toggle and the sidebar share: the user's themes,
- * which one is applied, and which flow the sidebar is in.
+ * applies everywhere while the user browses around, runs the themer machine
+ * that the navbar toggle and the sidebar share — the user's themes, which one
+ * is applied, which flow the sidebar is in and how the Studio is previewed —
+ * and renders the sidebar next to the Studio. The sidebar sits at the
+ * `layout` level rather than in `activeToolLayout` because the split preview
+ * renders the Studio twice, and the sidebar must not come along.
  *
- * The theme provider inherits the color scheme from the Studio, so the
- * preview follows the appearance setting (light/dark/system) like any other
- * theme.
+ * The single preview inherits the color scheme from the Studio, so it follows
+ * the appearance setting (light/dark/system) like any other theme.
  *
  * @internal
  */
@@ -55,6 +59,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const stored = useSelector(actorRef, selectStoredState, sameStoredState)
   const view = useSelector(actorRef, selectView, sameView)
   const open = snapshot.matches({sidebar: 'open'})
+  const split = snapshot.matches({preview: 'split'})
   const {images} = snapshot.context
 
   useEffect(() => writeStoredState(stored), [stored])
@@ -116,17 +121,66 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   }, [scheme, theme])
 
   const context = useMemo<ThemerContextValue>(
-    () => ({baseOptions, themes, removed, active, images, view, open, send}),
-    [active, baseOptions, images, open, removed, send, themes, view],
+    () => ({baseOptions, themes, removed, active, images, view, open, split, send}),
+    [active, baseOptions, images, open, removed, send, split, themes, view],
   )
+
+  const studio = layoutProps.renderDefault(layoutProps)
 
   return (
     <ThemerContext.Provider value={context}>
-      {theme === null ? (
-        layoutProps.renderDefault(layoutProps)
-      ) : (
-        <ThemeProvider theme={theme}>{layoutProps.renderDefault(layoutProps)}</ThemeProvider>
-      )}
+      <Flex height="fill" sizing="border">
+        {/* The first copy keeps its place when the preview splits, so the Studio
+            in it stays mounted and only changes scheme */}
+        <StudioPreview scheme={split ? 'light' : undefined} theme={theme}>
+          {studio}
+        </StudioPreview>
+        {split && (
+          <StudioPreview borderLeft scheme="dark" theme={theme}>
+            {studio}
+          </StudioPreview>
+        )}
+
+        {open && (
+          <ThemeProvider theme={theme ?? undefined}>
+            <ResizableSidebar />
+          </ThemeProvider>
+        )}
+      </Flex>
     </ThemerContext.Provider>
+  )
+}
+
+/**
+ * One copy of the Studio, in the given color scheme — or, without one, in the
+ * scheme the Studio is showing. The configured theme (`null`) goes through
+ * the provider too, inheriting the Studio's, so picking a theme swaps it
+ * instead of remounting the Studio under a new provider.
+ *
+ * The two copies of the split preview share the router, the document store
+ * and every other provider above the layout — only the scheme differs — so
+ * they stay in sync while navigating. The `color-scheme` of a forced scheme
+ * keeps native form controls and scrollbars in step with it.
+ */
+function StudioPreview(props: {
+  borderLeft?: boolean
+  children: React.ReactNode
+  scheme?: ThemeColorSchemeKey
+  theme: RootTheme | null
+}) {
+  const {borderLeft, children, scheme, theme} = props
+
+  return (
+    <ThemeProvider scheme={scheme} theme={theme ?? undefined}>
+      <Card
+        borderLeft={borderLeft}
+        flex={1}
+        height="fill"
+        overflow="hidden"
+        style={scheme ? {colorScheme: scheme} : undefined}
+      >
+        {children}
+      </Card>
+    </ThemeProvider>
   )
 }

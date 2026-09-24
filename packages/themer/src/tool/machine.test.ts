@@ -18,12 +18,12 @@ function startWithCustom(overrides: Partial<ThemerState> = {}) {
 }
 
 describe('themerMachine', () => {
-  it('starts closed in the list, from the stored state', () => {
+  it('starts closed in the list with a single preview, from the stored state', () => {
     const stored: ThemerState = {active: 'verdant', custom: [custom], removed: ['dew']}
     const actor = start(stored)
     const snapshot = actor.getSnapshot()
 
-    expect(snapshot.matches({sidebar: 'closed', flow: 'list'})).toBe(true)
+    expect(snapshot.matches({sidebar: 'closed', flow: 'list', preview: 'single'})).toBe(true)
     expect(selectStoredState(snapshot)).toEqual(stored)
     expect(snapshot.context.baseOptions).toBe(baseOptions)
     expect(snapshot.context.editing).toBeNull()
@@ -42,6 +42,37 @@ describe('themerMachine', () => {
     actor.send({type: 'sidebar.toggle'})
     actor.send({type: 'sidebar.close'})
     expect(actor.getSnapshot().matches({sidebar: 'closed', flow: 'edit'})).toBe(true)
+  })
+
+  it('splits the preview and back without touching the sidebar, the flow or the themes', () => {
+    const actor = startWithCustom({active: 'custom-1'})
+
+    actor.send({type: 'sidebar.toggle'})
+    actor.send({type: 'theme.edit', slug: 'custom-1'})
+    const stored = selectStoredState(actor.getSnapshot())
+
+    actor.send({type: 'preview.toggle'})
+    expect(actor.getSnapshot().matches({sidebar: 'open', flow: 'edit', preview: 'split'})).toBe(
+      true,
+    )
+    expect(selectStoredState(actor.getSnapshot())).toEqual(stored)
+
+    actor.send({type: 'preview.toggle'})
+    expect(actor.getSnapshot().matches({sidebar: 'open', flow: 'edit', preview: 'single'})).toBe(
+      true,
+    )
+  })
+
+  it('keeps the split preview while the sidebar is closed', () => {
+    const actor = start()
+
+    actor.send({type: 'sidebar.toggle'})
+    actor.send({type: 'preview.toggle'})
+    actor.send({type: 'sidebar.close'})
+    expect(actor.getSnapshot().matches({sidebar: 'closed', preview: 'split'})).toBe(true)
+
+    actor.send({type: 'sidebar.toggle'})
+    expect(actor.getSnapshot().matches({sidebar: 'open', preview: 'split'})).toBe(true)
   })
 
   describe('picking', () => {

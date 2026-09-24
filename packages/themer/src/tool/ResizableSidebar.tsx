@@ -1,9 +1,7 @@
-import {Box, Flex, Layer} from '@sanity/ui'
+import {Box, Card, Layer} from '@sanity/ui'
 import {useCallback, useEffect, useRef, useState} from 'react'
-import {type ActiveToolLayoutProps} from 'sanity'
 import {styled} from 'styled-components'
 
-import {useThemer} from './context'
 import {ThemerSidebar} from './ThemerSidebar'
 
 /**
@@ -47,15 +45,17 @@ function writeStoredWidth(width: number): void {
   }
 }
 
-/**
- * The sidebar itself does not clip, so the resize handle can straddle its
- * border — the content is clipped one level down instead
- */
 const Sidebar = styled(Layer)`
-  position: relative;
   flex: none;
-  box-sizing: border-box;
-  border-left: 1px solid var(--card-border-color);
+`
+
+/**
+ * Draws the sidebar's border and gives the resize handle its card colors. It
+ * does not clip, so the handle can straddle the border — the content is
+ * clipped one level down instead.
+ */
+const Frame = styled(Card)`
+  position: relative;
 `
 
 /**
@@ -96,15 +96,13 @@ const ResizeHandle = styled.div`
 `
 
 /**
- * Renders the themer sidebar next to the active tool, so the user can browse
- * around their own studio while tweaking the theme. The sidebar's left edge
- * drags (or arrow-keys) it wider, up to twice its default width — the width
- * sticks between sessions.
+ * The themer sidebar, in a layer along the right edge of the Studio. Its left
+ * edge drags (or arrow-keys) it wider, up to twice its default width — the
+ * width sticks between sessions.
  *
  * @internal
  */
-export function ThemerActiveToolLayout(props: ActiveToolLayoutProps) {
-  const {open} = useThemer()
+export function ResizableSidebar() {
   const [width, setWidth] = useState(readStoredWidth)
   const [dragging, setDragging] = useState(false)
   const drag = useRef<{pointerId: number; startX: number; startWidth: number} | null>(null)
@@ -153,35 +151,29 @@ export function ThemerActiveToolLayout(props: ActiveToolLayoutProps) {
   }, [])
 
   return (
-    <Flex height="fill" sizing="border">
-      <Box flex={1} height="fill" overflow="auto">
-        {props.renderDefault(props)}
-      </Box>
-
-      {open && (
-        <Sidebar height="fill" style={{width}} zOffset={100}>
-          <ResizeHandle
-            aria-label="Resize the themer"
-            aria-orientation="vertical"
-            aria-valuemax={MAXIMUM_WIDTH}
-            aria-valuemin={MINIMUM_WIDTH}
-            aria-valuenow={width}
-            data-dragging={dragging}
-            onDoubleClick={() => setWidth(MINIMUM_WIDTH)}
-            onKeyDown={handleKeyDown}
-            onPointerCancel={handlePointerUp}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            // oxlint-disable-next-line prefer-tag-over-role -- a window splitter is a focusable, draggable separator, which an hr is not
-            role="separator"
-            tabIndex={0}
-          />
-          <Box height="fill" overflow="hidden">
-            <ThemerSidebar />
-          </Box>
-        </Sidebar>
-      )}
-    </Flex>
+    <Sidebar style={{width}} zOffset={100}>
+      <Frame borderLeft height="fill">
+        <ResizeHandle
+          aria-label="Resize the themer"
+          aria-orientation="vertical"
+          aria-valuemax={MAXIMUM_WIDTH}
+          aria-valuemin={MINIMUM_WIDTH}
+          aria-valuenow={width}
+          data-dragging={dragging}
+          onDoubleClick={() => setWidth(MINIMUM_WIDTH)}
+          onKeyDown={handleKeyDown}
+          onPointerCancel={handlePointerUp}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          // oxlint-disable-next-line prefer-tag-over-role -- a window splitter is a focusable, draggable separator, which an hr is not
+          role="separator"
+          tabIndex={0}
+        />
+        <Box height="fill" overflow="hidden">
+          <ThemerSidebar />
+        </Box>
+      </Frame>
+    </Sidebar>
   )
 }
