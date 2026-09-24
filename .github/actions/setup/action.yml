@@ -14,3 +14,17 @@ runs:
       with:
         runtime: ${{ inputs.runtime }}
         cache: true
+
+    # An importer entry that points at a peer-resolved id missing from
+    # `snapshots:` installs without error, but leaves a dangling symlink where
+    # the package should be. Fail here instead of in whichever job first trips
+    # over a "Cannot find module" further down the line.
+    - name: Verify the install linked every dependency
+      shell: bash
+      run: |
+        dangling="$(find . -path '*/node_modules/*' -type l ! -exec test -e {} ';' -print)"
+        if [ -n "$dangling" ]; then
+          echo "::error::pnpm install left dangling symlinks in node_modules. Regenerate the lockfile with 'pnpm install --no-frozen-lockfile' and commit it."
+          echo "$dangling"
+          exit 1
+        fi
