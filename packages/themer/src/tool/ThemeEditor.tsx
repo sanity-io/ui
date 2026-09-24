@@ -270,12 +270,12 @@ function ThemeEditorForm(props: {
 }
 
 /**
- * The colors of one scheme, on a card painted in that scheme so that each
- * card shows the colors it edits. The cards span the sidebar edge to edge,
- * one after the other with a border between them. The scheme the Studio is
- * showing is marked as active: its changes show up in the Studio right away,
- * the other scheme's only once the appearance setting switches to it — or
- * both are active, in the split preview.
+ * The colors of one scheme. The cards span the sidebar edge to edge, one
+ * after the other with a border between them, in the sidebar's own scheme —
+ * the swatches show the colors they edit. The scheme the Studio is showing is
+ * marked as active: its changes show up in the Studio right away, the other
+ * scheme's only once the appearance setting switches to it — or both are
+ * active, in the split preview.
  */
 function SchemeCard(props: {
   active: boolean
@@ -290,7 +290,7 @@ function SchemeCard(props: {
   const name = SCHEME_TITLES[scheme]
 
   return (
-    <Card borderTop padding={3} scheme={scheme} tone="default">
+    <Card borderTop padding={3}>
       <Stack gap={4}>
         <Stack gap={2}>
           <Flex align="center" gap={2}>
