@@ -6,6 +6,8 @@ import {TEXT_SIZE} from '../../types/Text'
 
 /** @public */
 export interface AvatarProps<T extends React.ElementType> {
+  /** Arrow position */
+  arrowPosition?: 'top' | 'bottom'
   /** Element to render */
   as?: T
   /** Avatar color */
@@ -19,6 +21,11 @@ export interface AvatarProps<T extends React.ElementType> {
 }
 
 export const avatarProps: Record<string, PropDef> = {
+  arrowPosition: {
+    type: 'union',
+    className: 'arrow',
+    values: ['top', 'bottom'],
+  },
   as: {
     type: 'string',
   },

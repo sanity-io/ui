@@ -1,7 +1,7 @@
 .sui-IndicatorStack .sui-Indicator:has(+ .sui-Indicator) {
   mask-image: radial-gradient(
     circle 3px at calc(100% + 1.75px) 50%,
-    transparent 97.5%,
+    transparent 95%,
     #000 100%
   );
 }

@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Avatar as AvatarV3} from 'ui3'
 
 import {Avatar} from '../../../../packages/ui/src/components/avatar/Avatar'
 import {avatarProps} from '../../../../packages/ui/src/components/avatar/avatar.props'
@@ -23,6 +24,7 @@ const meta: Meta<typeof Avatar> = {
     },
     performance: {
       component: Avatar,
+      compareComponent: AvatarV3,
     },
   },
 }

@@ -19,7 +19,6 @@ export function Avatar<T extends ElementType = 'div'>({
 }: AvatarProps<T> & Omit<ComponentPropsWithRef<T>, keyof AvatarProps<T>>) {
   const {
     as,
-    children,
     className,
     style,
     'aria-label': ariaLabel,
@@ -40,6 +39,7 @@ export function Avatar<T extends ElementType = 'div'>({
       alignItems="center"
       justifyContent="center"
       radius="full"
+      position="relative"
       {...rest}
     >
       {src && !error ? (

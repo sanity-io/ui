@@ -16,7 +16,6 @@ export function AvatarCounter<T extends ElementType = 'div'>({
 }: AvatarCounterProps<T> & Omit<ComponentPropsWithRef<T>, keyof AvatarCounterProps<T>>) {
   const {
     as,
-    children,
     className,
     style,
     'aria-label': ariaLabel,
