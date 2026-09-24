@@ -61,11 +61,13 @@ export function TintStrip(props: {hue: Hue; title: string}) {
       return
     }
 
-    // Confirm right away like the hosted Themer did: the clipboard promise can
-    // stay pending behind a permission prompt, and the write itself is instant
-    // once it goes through
-    toast.push({closable: true, status: 'success', title: `Copied ${tintTitle} to the clipboard`})
-    navigator.clipboard.writeText(hex).catch(reportFailure)
+    const reportSuccess = () => {
+      toast.push({closable: true, status: 'success', title: `Copied ${tintTitle} to the clipboard`})
+    }
+
+    // Confirm once the write went through — a rejected write (permission
+    // denied, document not focused) reports like a missing API
+    navigator.clipboard.writeText(hex).then(reportSuccess, reportFailure)
   }
 
   return (
