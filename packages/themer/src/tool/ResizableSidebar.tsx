@@ -47,6 +47,13 @@ function writeStoredWidth(width: number): void {
 
 const Sidebar = styled(Layer)`
   flex: none;
+
+  /* On small screens the sidebar covers the Studio instead of standing next to it */
+  &[data-overlay='true'] {
+    position: absolute;
+    inset: 0;
+    width: auto;
+  }
 `
 
 /**
@@ -98,11 +105,13 @@ const ResizeHandle = styled.div`
 /**
  * The themer sidebar, in a layer along the right edge of the Studio. Its left
  * edge drags (or arrow-keys) it wider, up to twice its default width — the
- * width sticks between sessions.
+ * width sticks between sessions. As an overlay (small screens) it covers the
+ * Studio edge to edge instead, with nothing to resize.
  *
  * @internal
  */
-export function ResizableSidebar() {
+export function ResizableSidebar(props: {overlay: boolean}) {
+  const {overlay} = props
   const [width, setWidth] = useState(readStoredWidth)
   const [dragging, setDragging] = useState(false)
   const drag = useRef<{pointerId: number; startX: number; startWidth: number} | null>(null)
@@ -151,25 +160,27 @@ export function ResizableSidebar() {
   }, [])
 
   return (
-    <Sidebar style={{width}} zOffset={100}>
-      <Frame borderLeft height="fill">
-        <ResizeHandle
-          aria-label="Resize the themer"
-          aria-orientation="vertical"
-          aria-valuemax={MAXIMUM_WIDTH}
-          aria-valuemin={MINIMUM_WIDTH}
-          aria-valuenow={width}
-          data-dragging={dragging}
-          onDoubleClick={() => setWidth(MINIMUM_WIDTH)}
-          onKeyDown={handleKeyDown}
-          onPointerCancel={handlePointerUp}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          // oxlint-disable-next-line prefer-tag-over-role -- a window splitter is a focusable, draggable separator, which an hr is not
-          role="separator"
-          tabIndex={0}
-        />
+    <Sidebar data-overlay={overlay} style={overlay ? undefined : {width}} zOffset={100}>
+      <Frame borderLeft={!overlay} height="fill">
+        {!overlay && (
+          <ResizeHandle
+            aria-label="Resize the themer"
+            aria-orientation="vertical"
+            aria-valuemax={MAXIMUM_WIDTH}
+            aria-valuemin={MINIMUM_WIDTH}
+            aria-valuenow={width}
+            data-dragging={dragging}
+            onDoubleClick={() => setWidth(MINIMUM_WIDTH)}
+            onKeyDown={handleKeyDown}
+            onPointerCancel={handlePointerUp}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            // oxlint-disable-next-line prefer-tag-over-role -- a window splitter is a focusable, draggable separator, which an hr is not
+            role="separator"
+            tabIndex={0}
+          />
+        )}
         <Box height="fill" overflow="hidden">
           <ThemerSidebar />
         </Box>

@@ -37,6 +37,8 @@ export interface ThemerContextValue {
   open: boolean
   /** Whether the Studio shows twice side by side, in light and dark */
   split: boolean
+  /** Whether the Studio is on a small screen, where the sidebar covers it and the split preview stacks */
+  mobile: boolean
   /** Sends an event to the themer machine */
   send: (event: ThemerEvent) => void
 }

@@ -32,10 +32,15 @@ const SCHEME_TITLES: Record<ThemeColorSchemeKey, string> = {
   light: 'Light mode',
 }
 
-/** Where the split preview shows each scheme */
-const SPLIT_HINTS: Record<ThemeColorSchemeKey, string> = {
-  dark: 'Shown on the right',
-  light: 'Shown on the left',
+/**
+ * Where the split preview shows a scheme: the Studio's own scheme stays next
+ * to the sidebar (or at the bottom, stacked on small screens), the other one
+ * takes the far side
+ */
+function splitHint(own: boolean, mobile: boolean): string {
+  if (mobile) return own ? 'Shown at the bottom' : 'Shown at the top'
+
+  return own ? 'Shown on the right, next to the themer' : 'Shown on the left'
 }
 
 const SCHEME_OPTION_KEYS: Array<keyof SchemeThemeOptions> = [
@@ -95,7 +100,7 @@ const Range = styled.input`
  */
 export function ThemeEditor(props: {focusTitle: boolean; slug: string}) {
   const {focusTitle, slug} = props
-  const {themes, images, split, send} = useThemer()
+  const {themes, images, split, mobile, send} = useThemer()
   const theme = themes.find((candidate) => candidate.slug === slug && candidate.source === 'custom')
 
   // The machine only enters the edit flow for a listed custom theme, and
@@ -142,6 +147,7 @@ export function ThemeEditor(props: {focusTitle: boolean; slug: string}) {
       options={theme.options}
       palette={theme.palette}
       split={split}
+      mobile={mobile}
       title={theme.title}
     />
   )
@@ -163,6 +169,8 @@ function ThemeEditorForm(props: {
   palette?: ImagePalette
   /** Whether the Studio shows in light and dark side by side */
   split: boolean
+  /** Whether the split preview stacks, on a small screen */
+  mobile: boolean
   title: string
 }) {
   const {
@@ -178,6 +186,7 @@ function ThemeEditorForm(props: {
     options,
     palette,
     split,
+    mobile,
     title,
   } = props
   // The scheme the Studio is showing, with the appearance setting resolved
@@ -245,6 +254,7 @@ function ThemeEditorForm(props: {
                 resolved={resolved[scheme]}
                 scheme={scheme}
                 split={split}
+                splitHint={splitHint(scheme === studioScheme, mobile)}
               />
             ))}
           </ScrollAreaBleed>
@@ -285,8 +295,10 @@ function SchemeCard(props: {
   resolved: ResolvedSchemeOptions
   scheme: ThemeColorSchemeKey
   split: boolean
+  /** Where the split preview shows this scheme */
+  splitHint: string
 }) {
-  const {active, onChange, options, palette, resolved, scheme, split} = props
+  const {active, onChange, options, palette, resolved, scheme, split, splitHint} = props
   const name = SCHEME_TITLES[scheme]
 
   return (
@@ -307,7 +319,7 @@ function SchemeCard(props: {
           </Flex>
           <Text muted size={0}>
             {split
-              ? SPLIT_HINTS[scheme]
+              ? splitHint
               : active
                 ? 'Shown in the Studio right now'
                 : `Shown once the Studio appearance is ${scheme}`}
