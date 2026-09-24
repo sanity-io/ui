@@ -47,12 +47,15 @@ function writeStoredWidth(width: number): void {
   }
 }
 
+/**
+ * The sidebar itself does not clip, so the resize handle can straddle its
+ * border — the content is clipped one level down instead
+ */
 const Sidebar = styled(Layer)`
   position: relative;
   flex: none;
   box-sizing: border-box;
   border-left: 1px solid var(--card-border-color);
-  overflow: hidden;
 `
 
 /**
@@ -174,7 +177,9 @@ export function ThemerActiveToolLayout(props: ActiveToolLayoutProps) {
             role="separator"
             tabIndex={0}
           />
-          <ThemerSidebar />
+          <Box height="fill" overflow="hidden">
+            <ThemerSidebar />
+          </Box>
         </Sidebar>
       )}
     </Flex>
