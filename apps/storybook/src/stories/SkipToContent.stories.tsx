@@ -14,7 +14,7 @@ const meta: Meta<typeof SkipToContent> = {
   component: SkipToContent,
   tags: ['autodocs'],
   args: {
-    hash: '#main',
+    href: '#main',
     label: 'Skip to content',
   },
   argTypes,

@@ -1,10 +1,10 @@
 @breakpoints {
-  .sui-display-block { display: block; }
-  .sui-display-inline-block { display: inline-block; }
-  .sui-display-inline { display: inline; }
-  .sui-display-flex { display: flex; }
-  .sui-display-inline-flex { display: inline-flex; }
-  .sui-display-grid { display: grid; }
-  .sui-display-inline-grid { display: inline-grid; }
-  .sui-display-none { display: none; }
+  .sui-display-block:not([hidden]) { display: block; }
+  .sui-display-inline-block:not([hidden]) { display: inline-block; }
+  .sui-display-inline:not([hidden]) { display: inline; }
+  .sui-display-flex:not([hidden]) { display: flex; }
+  .sui-display-inline-flex:not([hidden]) { display: inline-flex; }
+  .sui-display-grid:not([hidden]) { display: grid; }
+  .sui-display-inline-grid:not([hidden]) { display: inline-grid; }
+  .sui-display-none:not([hidden]) { display: none; }
 }

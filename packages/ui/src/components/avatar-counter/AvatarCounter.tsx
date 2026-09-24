@@ -44,3 +44,5 @@ export function AvatarCounter<T extends ElementType = 'div'>({
     </Flex>
   )
 }
+
+export type {AvatarCounterProps}

@@ -10,8 +10,10 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @beta */
-export interface ListProps<T extends ListTag> extends Pick<GapProps, 'gap'> {
-  /** Element to render */
+export interface ListProps<T extends ListTag = 'ul'> extends Pick<GapProps, 'gap'> {
+  /**
+   * HTML element to render.
+   */
   as?: T
 }
 
@@ -24,11 +26,17 @@ export const listProps: Record<string, PropDef> = {
 
 /** @beta */
 export interface ListItemProps extends React.ComponentProps<'li'> {
-  /** Composite prop for setting padding and gap */
+  /**
+   * Sets horizontal padding, gap, and minimum row height together.
+   */
   density?: Responsive<Density>
-  /** Starting slot */
+  /**
+   * Slot at the left edge of the row.
+   */
   start?: React.ReactNode
-  /** Ending slot */
+  /**
+   * Slot at the right edge of the row.
+   */
   end?: React.ReactNode
 }
 
@@ -72,10 +80,14 @@ export const listItemProps: Record<string, PropDef> = {
 }
 
 /** @beta */
-export interface ListButtonItemProps<T extends React.ElementType> extends ListItemProps {
-  /** Element to render */
+export interface ListButtonItemProps<T extends React.ElementType = 'button'> extends ListItemProps {
+  /**
+   * Element or component to render for the press target.
+   */
   as?: InteractiveAs<T>
-  /** Selected state */
+  /**
+   * Marks the row as the current selection.
+   */
   selected?: boolean
 }
 
@@ -90,12 +102,18 @@ export const listButtonItemProps: Record<string, PropDef> = {
 }
 
 /** @beta */
-export interface ListItemTextProps<T extends React.ElementType> {
-  /** Element to render */
+export interface ListItemTextProps<T extends React.ElementType = 'div'> {
+  /**
+   * HTML element to render.
+   */
   as?: T
-  /** Title text */
+  /**
+   * Main label.
+   */
   title?: React.ReactNode
-  /** Subtitle text */
+  /**
+   * Text below the title.
+   */
   subtitle?: React.ReactNode
 }
 

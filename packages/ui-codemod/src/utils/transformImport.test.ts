@@ -128,6 +128,55 @@ defineInlineTest(
   transform,
   {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
   `
+  import {Box} from '@legacy/ui'
+  import {Card} from "@sanity/ui";
+
+  <>
+    <Box />
+    <Card />
+  </>
+  `,
+  `
+  import { Box, Card } from "@sanity/ui";
+
+  <>
+    <Box />
+    <Card />
+  </>
+  `,
+  'combines imports with the same import path',
+)
+
+defineInlineTest(
+  transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
+  import {Box, Stack} from '@legacy/ui'
+  import {Card} from "@sanity/ui";
+
+  <>
+    <Box />
+    <Stack />
+    <Card />
+  </>
+  `,
+  `
+  import { Stack } from '@legacy/ui';
+  import { Box, Card } from "@sanity/ui";
+
+  <>
+    <Box />
+    <Stack />
+    <Card />
+  </>
+  `,
+  'splits mixed imports and combines with existing import of the same path',
+)
+
+defineInlineTest(
+  transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
   import {Box, BoxProps} from '@legacy/ui'
 
   <Box />
@@ -166,8 +215,7 @@ defineInlineTest(
   <Box />
   `,
   `
-  import {Box} from "@sanity/ui"
-  import type {BoxProps} from "@sanity/ui"
+  import { Box, type BoxProps } from "@sanity/ui";
 
   <Box />
   `,

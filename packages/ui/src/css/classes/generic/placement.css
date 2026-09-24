@@ -1,3 +1,8 @@
+[class*='placement-'] {
+  inset: auto;
+  margin: 0;
+}
+
 @position-try --top-center {
   top: auto;
   right: auto;
@@ -168,4 +173,30 @@
   left: anchor(right);
   bottom: anchor(bottom);
   position-try-fallbacks: --left-end;
+}
+
+[class*="placement-bottom"],
+[class*="placement-top"] {
+  margin-block: var(--space-1);
+}
+
+[class*="placement-left"],
+[class*="placement-right"] {
+  margin-inline: var(--space-1);
+}
+
+[class*="placement-bottom"] {
+  transform-origin: center top;
+}
+
+[class*="placement-top"] {
+  transform-origin: center bottom;
+}
+
+[class*="placement-left"] {
+  transform-origin: right center;
+}
+
+[class*="placement-right"] {
+  transform-origin: left center;
 }

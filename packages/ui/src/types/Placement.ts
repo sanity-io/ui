@@ -12,4 +12,5 @@ export const PLACEMENT = [
   'left-start',
   'left-end',
 ] as const
+/** @public */
 export type Placement = (typeof PLACEMENT)[number]

@@ -47,3 +47,42 @@ it('generates responsive css', async () => {
 
   await run(input, output)
 })
+
+it('inserts the breakpoint suffix before pseudo selectors', async () => {
+  const input = `@breakpoints {
+  .sui-display-block:not([hidden]) {
+    display: block;
+  }
+}`
+
+  const output = `.sui-display-block:not([hidden]) {
+  display: block;
+}
+@media (min-width: 360px) {
+  .sui-display-block-bp-1:not([hidden]) {
+    display: block;
+  }
+}
+@media (min-width: 600px) {
+  .sui-display-block-bp-2:not([hidden]) {
+    display: block;
+  }
+}
+@media (min-width: 900px) {
+  .sui-display-block-bp-3:not([hidden]) {
+    display: block;
+  }
+}
+@media (min-width: 1200px) {
+  .sui-display-block-bp-4:not([hidden]) {
+    display: block;
+  }
+}
+@media (min-width: 1800px) {
+  .sui-display-block-bp-5:not([hidden]) {
+    display: block;
+  }
+}`
+
+  await run(input, output)
+})

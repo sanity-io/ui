@@ -1,15 +1,7 @@
-import {type GapProps, gapProps} from '../../props/gap'
-import {type PropDef} from '../../types/PropDef'
+import type {FlexProps} from '../flex/flex.props'
 
 /** @public */
-export interface HStackProps<T extends React.ElementType> extends Pick<GapProps, 'gap'> {
-  /** Element to render */
-  as?: T
-}
-
-export const hStackProps: Record<string, PropDef> = {
-  as: {
-    type: 'string',
-  },
-  gap: gapProps['gap'] as PropDef,
-}
+export interface HStackProps<T extends React.ElementType = 'div'> extends Pick<
+  FlexProps<T>,
+  'as' | 'gap'
+> {}

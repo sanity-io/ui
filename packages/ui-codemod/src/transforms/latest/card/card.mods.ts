@@ -163,7 +163,7 @@ export const CARD_MODS: AttributeMods = {
   },
   gapX: {
     type: 'style-mapped',
-    style: 'rowGap',
+    style: 'columnGap',
     mapping: {
       0: 'var(--space-0)',
       1: 'var(--space-1)',
@@ -179,7 +179,7 @@ export const CARD_MODS: AttributeMods = {
   },
   gapY: {
     type: 'style-mapped',
-    style: 'columnGap',
+    style: 'rowGap',
     mapping: {
       0: 'var(--space-0)',
       1: 'var(--space-1)',
@@ -537,12 +537,12 @@ export const CARD_MODS: AttributeMods = {
     type: 'style-mapped',
     style: 'boxShadow',
     mapping: {
-      0: 'var(--shadow0)',
-      1: 'var(--shadow1)',
-      2: 'var(--shadow2)',
-      3: 'var(--shadow3)',
-      4: 'var(--shadow4)',
-      5: 'var(--shadow5)',
+      0: 'var(--shadow-0)',
+      1: 'var(--shadow-1)',
+      2: 'var(--shadow-2)',
+      3: 'var(--shadow-3)',
+      4: 'var(--shadow-4)',
+      5: 'var(--shadow-5)',
     },
   },
   sizing: {

@@ -4,18 +4,22 @@ import {type PropDef} from '../../types/PropDef'
 import type {Responsive} from '../../types/Responsive'
 
 /** @public */
-export interface ContainerProps<T extends React.ElementType> extends LayoutProps {
-  /** Element to render */
+export interface ContainerProps<T extends React.ElementType = 'div'> extends LayoutProps {
+  /**
+   * HTML element or component to render.
+   */
   as?: T
-  /** CSS **max-width** property */
-  contentSize?: Responsive<ContainerSize>
+  /**
+   * Maximum width of the container.
+   */
+  size?: Responsive<ContainerSize>
 }
 
 export const containerProps: Record<string, PropDef> = {
   as: {
     type: 'string',
   },
-  contentSize: {
+  size: {
     type: 'union',
     className: 'container',
     values: CONTAINER_SIZE,

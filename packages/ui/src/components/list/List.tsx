@@ -127,13 +127,13 @@ function ListItemText<T extends ElementType = 'div'>(
       {...rest}
     >
       {title && (
-        <Text size={1} weight="medium" trim lineClamp={1}>
+        <Text size={1} weight="medium" trim truncate={1}>
           {title}
         </Text>
       )}
 
       {subtitle && (
-        <Text size={1} muted trim lineClamp={1}>
+        <Text size={1} muted trim truncate={1}>
           {subtitle}
         </Text>
       )}
@@ -163,3 +163,5 @@ ListRoot.Item = ListItem
 ListRoot.ButtonItem = ListButtonItem
 ListRoot.ItemText = ListItemText
 ListRoot.ItemImage = ListItemImage
+
+export type {ListProps, ListItemProps, ListButtonItemProps, ListItemTextProps}

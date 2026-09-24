@@ -1,12 +1,14 @@
 @import './avatar/avatar.css';
 @import './avatar-counter/avatar-counter.css';
 @import './avatar-stack/avatar-stack.css';
+@import './badge/badge.css';
 @import './box/box.css';
 @import './button/button.css';
 @import './card/card.css';
 @import './checkbox/checkbox.css';
 @import './code/code.css';
 @import './container/container.css';
+@import './dialog/dialog.css';
 @import './eyebrow/eyebrow.css';
 @import './flex/flex.css';
 @import './grid/grid.css';
@@ -18,8 +20,10 @@
 @import './label/label.css';
 @import './link/link.css';
 @import './list/list.css';
+@import './popover/popover.css';
 @import './press-area/press-area.css';
 @import './radio/radio.css';
+@import './select/select.css';
 @import './spinner/spinner.css';
 @import './skip-to-content/skip-to-content.css';
 @import './switch/switch.css';

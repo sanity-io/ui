@@ -1,6 +1,6 @@
-import {Flex as FlexV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Flex as FlexV3} from 'ui3'
 
 import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {flexProps} from '../../../../packages/ui/src/components/flex/flex.props'

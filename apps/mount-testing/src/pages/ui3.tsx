@@ -1,5 +1,7 @@
-import {AddIcon} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
+import {Profiler} from 'react'
 import {
+  Badge,
   Box,
   Button,
   Card,
@@ -18,9 +20,8 @@ import {
   Text,
   ThemeProvider,
   Tooltip,
-} from '@sanity/ui'
-import {buildTheme} from '@sanity/ui/theme'
-import {Profiler} from 'react'
+} from 'ui3'
+import {buildTheme} from 'ui3/theme'
 
 const count = 5000
 const iterator = [...Array(count).keys()]
@@ -208,6 +209,13 @@ export default function Ui3() {
       <Profiler id="Icon" onRender={handleOnRender}>
         {iterator.map((i) => (
           <AddIcon key={i} />
+        ))}
+      </Profiler>
+
+      <h2>{count} Badges</h2>
+      <Profiler id="Badge" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Badge key={i}>Badge</Badge>
         ))}
       </Profiler>
 

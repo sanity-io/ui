@@ -1,4 +1,7 @@
-import {ComposeIcon, EditIcon, ImageIcon, SparkleIcon} from '@sanity/icons'
+import {ComposeIcon} from '@sanity/icons/Compose'
+import {EditIcon} from '@sanity/icons/Edit'
+import {ImageIcon} from '@sanity/icons/Image'
+import {SparkleIcon} from '@sanity/icons/Sparkle'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import type {ComponentProps} from 'react'
 import {expect} from 'storybook/test'

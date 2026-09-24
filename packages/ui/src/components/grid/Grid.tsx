@@ -21,3 +21,5 @@ export function Grid<T extends ElementType = 'div'>({
     </Component>
   )
 }
+
+export type {GridProps}

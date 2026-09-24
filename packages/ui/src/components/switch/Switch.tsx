@@ -17,7 +17,7 @@ export function Switch(props: SwitchProps) {
 
   return (
     <Label
-      className={clsx(switchClassName, className)}
+      className={clsx(switchClassName, 'sui-position-relative', className)}
       style={style}
       data-ui="Switch"
       disabled={props.disabled}
@@ -44,3 +44,5 @@ export function Switch(props: SwitchProps) {
     </Label>
   )
 }
+
+export type {SwitchProps}

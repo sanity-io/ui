@@ -1,4 +1,4 @@
-import {EditIcon} from '@sanity/icons'
+import {EditIcon} from '@sanity/icons/Edit'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 

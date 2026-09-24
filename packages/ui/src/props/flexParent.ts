@@ -11,6 +11,7 @@ import {
 import {type PropDef} from '../types/PropDef'
 import {type Responsive} from '../types/Responsive'
 
+/** @public */
 export type FlexParentProps = {
   /** CSS **align-items** property */
   alignItems?: Responsive<AlignItems>

@@ -19,3 +19,5 @@ export function Divider(props: DividerProps) {
     />
   )
 }
+
+export type {DividerProps}

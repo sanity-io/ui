@@ -33,3 +33,6 @@ export function Inline<T extends ElementType = 'div'>(
     </Component>
   )
 }
+
+// oxlint-disable-next-line no-deprecated
+export type {InlineProps}

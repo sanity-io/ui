@@ -17,6 +17,7 @@
     "**/out/**",
     "**/build/**",
     "**/next-env.d.ts",
+    "**/*.css.d.ts",
     "pnpm-lock.yaml"
   ],
   "options": {
@@ -45,10 +46,15 @@
         ]
       }
     ],
-    "import/no-unassigned-import": ["error", {"allow": ["**/*.css"]}],
+    "import/no-unassigned-import": ["error", {"allow": ["**/*.css", "**/polyfills"]}],
     "react/exhaustive-deps": "error",
-    "react/react-compiler": "error",
     "react/rules-of-hooks": "error",
+    // React Compiler rules in the `restriction` category, which the configured categories do not enable
+    "react/unsupported-syntax": "error",
+    "react/invariant": "error",
+    "react/rule-suppression": "error",
+    "react/syntax": "error",
+    "react/todo": "error",
     "typescript/no-deprecated": "error",
     "unicorn/no-abusive-eslint-disable": "error",
     // Not necessary since react compiler handles it

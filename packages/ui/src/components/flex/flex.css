@@ -1,3 +1,8 @@
+.sui-Flex {
+  min-width: 0;
+  min-height: 0;
+}
+
 .sui-Flex[class*='sui-tone'] {
   --flex-background: var(--background-low);
   background-color: var(--flex-background);

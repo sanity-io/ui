@@ -1,9 +1,12 @@
+import {useState} from 'react'
 import {
+  Badge,
   Box,
   Button,
   Card,
   Checkbox,
   Container,
+  Dialog,
   Heading,
   Inline,
   Radio,
@@ -11,12 +14,14 @@ import {
   Switch,
   Text,
   ThemeProvider,
-} from '@sanity/ui'
-import {buildTheme} from '@sanity/ui/theme'
+} from 'ui3'
+import {buildTheme} from 'ui3/theme'
 
 const theme = buildTheme()
 
 function Ui3() {
+  const [dialogOpen, setDialogOpen] = useState(false)
+
   return (
     <ThemeProvider theme={theme}>
       <Box margin={4}>
@@ -25,6 +30,21 @@ function Ui3() {
         </Box>
         <Box marginBottom={4}>
           <Text as="p">A measure of the USS Sanity’s DOM engines</Text>
+        </Box>
+        <Box marginY={5}>
+          <Button text="Open a hailing frequency" onClick={() => setDialogOpen(true)} />
+          {dialogOpen && (
+            <Dialog
+              id="ui3Dialog"
+              onClose={() => setDialogOpen(false)}
+              header="Greetings, Admiral"
+              animate={true}
+            >
+              <Box padding={4}>
+                <Text>I believe you’ll find everything is in order for the festivities.</Text>
+              </Box>
+            </Dialog>
+          )}
         </Box>
         <Card tone="neutral" padding={5} radius={3} shadow={1}>
           <Container marginLeft={0}>
@@ -81,6 +101,13 @@ function Ui3() {
               <Text as="a" href="https://example.org">
                 Refer to the Prime Directive
               </Text>
+            </Inline>
+          </Box>
+          <Box marginY={3}>
+            <Inline gap={2}>
+              <Badge tone="positive">Shields nominal</Badge>
+              <Badge tone="caution">Deflector array offline</Badge>
+              <Badge tone="critical">Warp core breach</Badge>
             </Inline>
           </Box>
         </Card>

@@ -21,3 +21,5 @@ export function Box<T extends ElementType = 'div'>({
     </Component>
   )
 }
+
+export type {BoxProps}

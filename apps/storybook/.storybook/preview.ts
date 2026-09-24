@@ -1,3 +1,4 @@
+import '../../../packages/ui/src/polyfills'
 import '../../../packages/ui/dist/styles.css'
 import '../src/styles/storybook.css'
 import type {Preview} from '@storybook/react-vite'

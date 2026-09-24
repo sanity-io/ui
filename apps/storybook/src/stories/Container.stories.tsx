@@ -1,6 +1,6 @@
-import {Container as ContainerV3} from '@sanity/ui'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {Container as ContainerV3} from 'ui3'
 
 import {Container} from '../../../../packages/ui/src/components/container/Container'
 import {containerProps} from '../../../../packages/ui/src/components/container/container.props'
@@ -14,7 +14,6 @@ const meta: Meta<typeof Text> = {
   title: 'Layout/Container',
   args: {
     as: 'div',
-    size: 0,
   },
   argTypes,
   component: Container,
@@ -55,14 +54,7 @@ export const Sizes: Story = {
     return (
       <>
         {CONTAINER_SIZE.map((size) => (
-          <Container
-            {...props}
-            key={size}
-            contentSize={size}
-            padding={3}
-            marginY={2}
-            tone="neutral"
-          >
+          <Container {...props} key={size} size={size} padding={3} marginY={2} tone="neutral">
             <Text>
               Container Size {size} (
               {['320px', '640px', '960px', '1280px', '1600px', '1920px'][size]})

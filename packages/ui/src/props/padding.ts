@@ -2,6 +2,7 @@ import {type PropDef} from '../types/PropDef'
 import {type Responsive} from '../types/Responsive'
 import {SPACE, type Space} from '../types/Space'
 
+/** @public */
 export interface PaddingProps {
   /** CSS **padding** property */
   padding?: Responsive<Space>

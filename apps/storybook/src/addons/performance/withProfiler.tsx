@@ -1,8 +1,8 @@
-import {ThemeProvider} from '@sanity/ui'
-import {buildTheme} from '@sanity/ui/theme'
 import type {Decorator} from '@storybook/react-vite'
 import {type ComponentType, createElement, type CSSProperties, Fragment, Profiler} from 'react'
 import {addons} from 'storybook/preview-api'
+import {ThemeProvider} from 'ui3'
+import {buildTheme} from 'ui3/theme'
 
 import {
   ADDON_ID,
@@ -17,7 +17,7 @@ const channel = addons.getChannel()
 
 const HIDDEN_BENCHMARK_STYLE: CSSProperties = {
   border: 0,
-  clip: 'rect(0, 0, 0, 0)',
+  clipPath: 'rect(0, 0, 0, 0)',
   height: 1,
   margin: -1,
   overflow: 'hidden',

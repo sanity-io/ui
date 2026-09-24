@@ -25,3 +25,5 @@ export function PressArea<T extends ElementType = 'button'>(
     </Component>
   )
 }
+
+export type {PressAreaProps}

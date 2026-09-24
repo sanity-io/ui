@@ -1,15 +1,15 @@
-# Sanity UI 4 — Monorepo
+# Sanity UI 5 — Monorepo
 
-Development monorepo for Sanity UI 4 (`@sanity-labs/ui-poc`). Contains the component library, migration tooling, Storybook, and test apps.
+Development monorepo for Sanity UI 5 (`@sanity/ui`). Contains the component library, migration tooling, Storybook, and test apps.
 
 ## Packages
 
 Published packages installable from npm.
 
-| Package                                                | Version               | Description                                             |
-| ------------------------------------------------------ | --------------------- | ------------------------------------------------------- |
-| [`@sanity-labs/ui-poc`](./packages/ui)                 | `packages/ui`         | The component library. CSS-based, works alongside UI 3. |
-| [`@sanity-labs/ui-poc-codemod`](./packages/ui-codemod) | `packages/ui-codemod` | CLI codemods for migrating UI 3 components to UI 4.     |
+| Package                                       | Location              | Description                                           |
+| --------------------------------------------- | --------------------- | ----------------------------------------------------- |
+| [`@sanity/ui`](./packages/ui)                 | `packages/ui`         | The component library. CSS-based, works alongside v3. |
+| [`@sanity/ui-codemod`](./packages/ui-codemod) | `packages/ui-codemod` | CLI codemods for migrating v3 or v4 components to v5. |
 
 ## Apps
 
@@ -18,15 +18,17 @@ Internal apps — not published.
 | App                                          | Description                                                                               |
 | -------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | [`apps/storybook`](./apps/storybook)         | Component stories. Browse variants, test props, verify visual behavior.                   |
-| [`apps/depth-testing`](./apps/depth-testing) | DOM depth comparison. Compares the DOM each library emits between v3 and the POC.         |
-| [`apps/inp-testing`](./apps/inp-testing)     | INP comparison. Compares avg, max, and current INP between v3 and the POC.                |
-| [`apps/mount-testing`](./apps/mount-testing) | Mount time comparison. Compares v3 and v4 mount times across component counts.            |
+| [`apps/depth-testing`](./apps/depth-testing) | DOM depth comparison. Compares the DOM v3 and v5 emit for equivalent markup.              |
+| [`apps/inp-testing`](./apps/inp-testing)     | INP comparison. Compares avg, max, and current INP between v3 and v5.                     |
+| [`apps/mount-testing`](./apps/mount-testing) | Mount time comparison. Compares v3, v4, and v5 mount times across component counts.       |
 | [`apps/frameworks`](./apps/frameworks)       | E2E tests across Next.js, React Router, and Vite to verify cross-framework compatibility. |
+
+The comparison apps install published versions of `@sanity/ui` under package aliases, since the workspace already claims that name for v5. `ui3` resolves to v3 and `ui4` to v4, so a route named `ui3` imports from `ui3` and the v5 route imports from `@sanity/ui`.
 
 ## Repo structure
 
 ```
-ui-poc/
+ui/
 ├── apps/
 │   ├── depth-testing/       # DOM depth testing app
 │   ├── frameworks/          # E2E tests across Next, React Router, Vite
@@ -36,8 +38,8 @@ ui-poc/
 ├── packages/
 │   ├── @repo/
 │   │   └── eslint-config/   # Shared ESLint config (internal)
-│   ├── ui/                  # @sanity-labs/ui-poc
-│   └── ui-codemod/          # @sanity-labs/ui-poc-codemod
+│   ├── ui/                  # @sanity/ui
+│   └── ui-codemod/          # @sanity/ui-codemod
 ├── bin/
 │   └── create-ui.js         # Component scaffolding script
 ├── turbo.json
@@ -106,8 +108,10 @@ Releases use [Changesets](https://github.com/changesets/changesets).
 # Create a changeset for your changes
 pnpm changeset
 
-# Cut a release (build → version → publish)
+# Cut a release (version → build → publish)
 pnpm release
 ```
 
 Each changeset describes what changed and its semver impact. Commit the changeset file alongside your PR.
+
+Publishing is paused while the repo moves to [`sanity-io/ui`](https://github.com/sanity-io/ui). This package builds as `@sanity/ui` at `0.0.1-alpha.24`, and npm's `@sanity/ui` is at `3.5.1`, so `pnpm release` from this state would push an alpha to the `latest` dist-tag. Changesets prerelease mode gets re-established on the v5 branch before the next publish.

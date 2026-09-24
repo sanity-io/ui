@@ -1,4 +1,5 @@
-import {CheckmarkIcon, RemoveIcon} from '@sanity/icons'
+import {CheckmarkIcon} from '@sanity/icons/Checkmark'
+import {RemoveIcon} from '@sanity/icons/Remove'
 import clsx from 'clsx'
 import {useEffect, useRef} from 'react'
 
@@ -25,11 +26,11 @@ export function Checkbox(props: CheckboxProps) {
     if (inputRef.current) {
       inputRef.current.indeterminate = indeterminate
     }
-  }, [indeterminate])
+  }, [indeterminate, inputRef])
 
   return (
     <Label
-      className={clsx(checkboxClassName, className)}
+      className={clsx(checkboxClassName, 'sui-position-relative', className)}
       style={style}
       data-ui="Checkbox"
       disabled={disabled}
@@ -59,3 +60,5 @@ export function Checkbox(props: CheckboxProps) {
     </Label>
   )
 }
+
+export type {CheckboxProps}

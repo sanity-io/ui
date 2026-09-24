@@ -1,11 +1,9 @@
-import {
-  AddIcon,
-  CheckmarkIcon,
-  CloseIcon,
-  EditIcon,
-  SearchIcon,
-  WarningOutlineIcon,
-} from '@sanity/icons'
+import {AddIcon} from '@sanity/icons/Add'
+import {CheckmarkIcon} from '@sanity/icons/Checkmark'
+import {CloseIcon} from '@sanity/icons/Close'
+import {EditIcon} from '@sanity/icons/Edit'
+import {SearchIcon} from '@sanity/icons/Search'
+import {WarningOutlineIcon} from '@sanity/icons/WarningOutline'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 

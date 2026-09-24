@@ -59,3 +59,5 @@ export function Avatar<T extends ElementType = 'div'>({
     </Flex>
   )
 }
+
+export type {AvatarProps}

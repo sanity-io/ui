@@ -1,5 +1,5 @@
 {
-  "name": "ui-poc-vite",
+  "name": "ui-vite",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,19 +9,17 @@
     "preview": "vite preview --port 3002 --strictPort"
   },
   "dependencies": {
-    "@sanity-labs/ui-poc": "workspace:*",
+    "@sanity/ui": "workspace:*",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },
   "devDependencies": {
-    "@babel/core": "catalog:",
-    "@rolldown/plugin-babel": "catalog:",
     "@types/node": "^24.12.2",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "^6.0.1",
-    "babel-plugin-react-compiler": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "oxc-transform-react": "catalog:",
     "typescript": "~6.0.2",
-    "vite": "^8.0.10"
+    "vite": "catalog:"
   }
 }

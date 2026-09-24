@@ -55,3 +55,5 @@ export function AvatarStack<T extends ElementType = 'div'>({
     </HStack>
   )
 }
+
+export type {AvatarStackProps}
