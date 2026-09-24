@@ -21,7 +21,9 @@ describe('themerTool', () => {
     expect(plugin.name).toBe('@sanity/themer/tool')
     expect(plugin.studio?.components?.layout).toBeTypeOf('function')
     expect(plugin.studio?.components?.navbar).toBeTypeOf('function')
-    expect(plugin.studio?.components?.activeToolLayout).toBeTypeOf('function')
+    // The sidebar lives in the layout: an active tool layout override would
+    // render once per Studio copy in the split preview
+    expect(plugin.studio?.components?.activeToolLayout).toBeUndefined()
   })
 })
 

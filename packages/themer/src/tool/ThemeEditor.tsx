@@ -23,13 +23,19 @@ import {
   pickLuckyVariant,
 } from './imagePalette'
 import {ImagePaletteSection} from './ImagePaletteSection'
-import {ScrollArea} from './ScrollArea'
+import {ScrollArea, ScrollAreaBleed} from './ScrollArea'
 import {ThemeThumbnail} from './ThemeThumbnail'
 import {TooltipButton} from './TooltipButton'
 
 const SCHEME_TITLES: Record<ThemeColorSchemeKey, string> = {
   dark: 'Dark mode',
   light: 'Light mode',
+}
+
+/** Where the split preview shows each scheme */
+const SPLIT_HINTS: Record<ThemeColorSchemeKey, string> = {
+  dark: 'Shown on the right',
+  light: 'Shown on the left',
 }
 
 const SCHEME_OPTION_KEYS: Array<keyof SchemeThemeOptions> = [
@@ -82,13 +88,14 @@ const Range = styled.input`
  * The flow for editing one of the user's own themes: its title, a live
  * preview, and a card per color scheme with the accent/text/background
  * pickers and the contrast slider of that scheme. Every change applies to the
- * whole Studio right away — in the scheme the Studio is showing.
+ * whole Studio right away — in the scheme the Studio is showing, or in both
+ * side by side in the split preview.
  *
  * @internal
  */
 export function ThemeEditor(props: {focusTitle: boolean; slug: string}) {
   const {focusTitle, slug} = props
-  const {themes, images, send} = useThemer()
+  const {themes, images, split, send} = useThemer()
   const theme = themes.find((candidate) => candidate.slug === slug && candidate.source === 'custom')
 
   // The machine only enters the edit flow for a listed custom theme, and
@@ -134,6 +141,7 @@ export function ThemeEditor(props: {focusTitle: boolean; slug: string}) {
       onVariant={applyVariant}
       options={theme.options}
       palette={theme.palette}
+      split={split}
       title={theme.title}
     />
   )
@@ -153,6 +161,8 @@ function ThemeEditorForm(props: {
   onVariant: (variant: ImagePaletteVariant) => void
   options: BuildThemeOptions
   palette?: ImagePalette
+  /** Whether the Studio shows in light and dark side by side */
+  split: boolean
   title: string
 }) {
   const {
@@ -167,6 +177,7 @@ function ThemeEditorForm(props: {
     onVariant,
     options,
     palette,
+    split,
     title,
   } = props
   // The scheme the Studio is showing, with the appearance setting resolved
@@ -223,17 +234,20 @@ function ThemeEditorForm(props: {
             palette={palette}
           />
 
-          {SCHEMES.map((scheme) => (
-            <SchemeCard
-              active={scheme === studioScheme}
-              key={scheme}
-              onChange={(changes) => patchScheme(scheme, changes)}
-              options={options[scheme] ?? {}}
-              palette={palettes[scheme]}
-              resolved={resolved[scheme]}
-              scheme={scheme}
-            />
-          ))}
+          <ScrollAreaBleed>
+            {SCHEMES.map((scheme) => (
+              <SchemeCard
+                active={split || scheme === studioScheme}
+                key={scheme}
+                onChange={(changes) => patchScheme(scheme, changes)}
+                options={options[scheme] ?? {}}
+                palette={palettes[scheme]}
+                resolved={resolved[scheme]}
+                scheme={scheme}
+                split={split}
+              />
+            ))}
+          </ScrollAreaBleed>
         </Stack>
       </ScrollArea>
 
@@ -256,10 +270,12 @@ function ThemeEditorForm(props: {
 }
 
 /**
- * The colors of one scheme, on a card painted in that scheme so that each
- * card shows the colors it edits. The scheme the Studio is showing is marked
- * as active: its changes show up in the Studio right away, the other scheme's
- * only once the appearance setting switches to it.
+ * The colors of one scheme. The cards span the sidebar edge to edge, one
+ * after the other with a border between them, in the sidebar's own scheme —
+ * the swatches show the colors they edit. The scheme the Studio is showing is
+ * marked as active: its changes show up in the Studio right away, the other
+ * scheme's only once the appearance setting switches to it — or both are
+ * active, in the split preview.
  */
 function SchemeCard(props: {
   active: boolean
@@ -268,12 +284,13 @@ function SchemeCard(props: {
   palette: GeneratedColorPalette
   resolved: ResolvedSchemeOptions
   scheme: ThemeColorSchemeKey
+  split: boolean
 }) {
-  const {active, onChange, options, palette, resolved, scheme} = props
+  const {active, onChange, options, palette, resolved, scheme, split} = props
   const name = SCHEME_TITLES[scheme]
 
   return (
-    <Card border padding={3} radius={3} scheme={scheme} tone="default">
+    <Card borderTop padding={3}>
       <Stack gap={4}>
         <Stack gap={2}>
           <Flex align="center" gap={2}>
@@ -289,9 +306,11 @@ function SchemeCard(props: {
             )}
           </Flex>
           <Text muted size={0}>
-            {active
-              ? 'Shown in the Studio right now'
-              : `Shown once the Studio appearance is ${scheme}`}
+            {split
+              ? SPLIT_HINTS[scheme]
+              : active
+                ? 'Shown in the Studio right now'
+                : `Shown once the Studio appearance is ${scheme}`}
           </Text>
         </Stack>
 

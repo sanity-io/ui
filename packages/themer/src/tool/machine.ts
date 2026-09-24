@@ -40,6 +40,11 @@ export interface ThemerMachineContext extends ThemerState {
 export type ThemerEvent =
   | {type: 'sidebar.toggle'}
   | {type: 'sidebar.close'}
+  /**
+   * Switches between showing the Studio once, in its own appearance, and
+   * twice side by side, in light and dark
+   */
+  | {type: 'preview.toggle'}
   /** Applies a theme to the whole Studio */
   | {type: 'theme.pick'; slug: string}
   /**
@@ -81,11 +86,13 @@ function themesOf(context: ThemerMachineContext) {
 }
 
 /**
- * The state of the themer tool: two parallel regions, whether the `sidebar`
- * is open and which `flow` it is in — picking a theme from the `list`,
- * `edit`ing one of the user's own themes, or restoring `removed` ones. The
- * context carries the persisted state (the applied theme, the user's themes
- * and what was removed) alongside what the flows need.
+ * The state of the themer tool: three parallel regions, whether the
+ * `sidebar` is open, which `flow` it is in — picking a theme from the `list`,
+ * `edit`ing one of the user's own themes, or restoring `removed` ones — and
+ * whether the `preview` shows the Studio once (`single`) or in light and dark
+ * side by side (`split`). The context carries the persisted state (the
+ * applied theme, the user's themes and what was removed) alongside what the
+ * flows need.
  *
  * Theme operations are handled in every flow, and the flows leave on their
  * own when they lose their subject: the editor when its theme is removed or
@@ -236,6 +243,19 @@ export const themerMachine = setup({
         },
         open: {
           on: {'sidebar.toggle': 'closed', 'sidebar.close': 'closed'},
+        },
+      },
+    },
+    // Independent of the sidebar, so the split preview can be looked at
+    // without the sidebar taking up room
+    preview: {
+      initial: 'single',
+      states: {
+        single: {
+          on: {'preview.toggle': 'split'},
+        },
+        split: {
+          on: {'preview.toggle': 'single'},
         },
       },
     },

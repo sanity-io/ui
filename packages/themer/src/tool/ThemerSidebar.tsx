@@ -1,6 +1,7 @@
 import {ArrowLeftIcon} from '@sanity/icons/ArrowLeft'
 import {CloseIcon} from '@sanity/icons/Close'
 import {CodeBlockIcon} from '@sanity/icons/CodeBlock'
+import {SplitVerticalIcon} from '@sanity/icons/SplitVertical'
 import {Box, Card, Flex, Text} from '@sanity/ui'
 import {useState} from 'react'
 
@@ -18,22 +19,24 @@ const VIEW_TITLES = {
 } as const
 
 /**
- * The themer sidebar: a header that navigates between the flows, the flow
- * itself — picking a theme, editing one, or restoring removed ones — and the
- * dialog with the `buildTheme` snippet of the applied theme.
+ * The themer sidebar: a header that navigates between the flows and toggles
+ * the split preview, the flow itself — picking a theme, editing one, or
+ * restoring removed ones — and the dialog with the `buildTheme` snippet of
+ * the applied theme.
  *
  * @internal
  */
 export function ThemerSidebar() {
-  const {active, view, send} = useThemer()
+  const {active, split, view, send} = useThemer()
   const [snippetOpen, setSnippetOpen] = useState(false)
   const inList = view.name === 'list'
 
   return (
     <Card height="fill">
       <Flex direction="column" height="fill">
-        {/* No bottom border: the tools' own toolbars come in different heights, so a
-            line here would never line up with theirs */}
+        {/* No bottom border: the header sits next to the Studio navbar, whose
+            height is the Studio's to decide, so a line here would not line up
+            with the navbar's */}
         <Card padding={2}>
           <Flex align="center" gap={1}>
             {!inList && (
@@ -50,22 +53,37 @@ export function ThemerSidebar() {
                 {VIEW_TITLES[view.name]}
               </Text>
             </Box>
-            {view.name !== 'removed' && (
+            {/* Packed without gaps, so the title still fits next to them at the
+                narrowest sidebar width */}
+            <Flex>
+              {view.name !== 'removed' && (
+                <>
+                  <TooltipButton
+                    aria-pressed={split}
+                    icon={SplitVerticalIcon}
+                    mode="bleed"
+                    onClick={() => send({type: 'preview.toggle'})}
+                    padding={2}
+                    selected={split}
+                    tooltip="Show light and dark side by side"
+                  />
+                  <TooltipButton
+                    icon={CodeBlockIcon}
+                    mode="bleed"
+                    onClick={() => setSnippetOpen(true)}
+                    padding={2}
+                    tooltip="Show the code for the applied theme"
+                  />
+                </>
+              )}
               <TooltipButton
-                icon={CodeBlockIcon}
+                icon={CloseIcon}
                 mode="bleed"
-                onClick={() => setSnippetOpen(true)}
+                onClick={() => send({type: 'sidebar.close'})}
                 padding={2}
-                tooltip="Show the code for the applied theme"
+                tooltip="Close themer"
               />
-            )}
-            <TooltipButton
-              icon={CloseIcon}
-              mode="bleed"
-              onClick={() => send({type: 'sidebar.close'})}
-              padding={2}
-              tooltip="Close themer"
-            />
+            </Flex>
           </Flex>
         </Card>
 

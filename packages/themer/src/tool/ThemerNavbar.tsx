@@ -29,6 +29,9 @@ function ThemerNavbarButton() {
  * navbar — an icon button with a tooltip in the top bar (like the Tasks
  * toggle), and a regular titled action in the narrow-screen sidebar menu.
  *
+ * In the split preview every Studio copy renders its own navbar, so the
+ * toggle shows up in both — they drive the same sidebar.
+ *
  * @internal
  */
 export function ThemerNavbar(props: NavbarProps) {

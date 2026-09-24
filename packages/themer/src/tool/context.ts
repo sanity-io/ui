@@ -35,6 +35,8 @@ export interface ThemerContextValue {
   view: ThemerView
   /** Whether the themer sidebar is open */
   open: boolean
+  /** Whether the Studio shows twice side by side, in light and dark */
+  split: boolean
   /** Sends an event to the themer machine */
   send: (event: ThemerEvent) => void
 }

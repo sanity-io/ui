@@ -1,7 +1,6 @@
 import {definePlugin, type LayoutProps} from 'sanity'
 
 import {BuildThemeOptions} from '../theme/options'
-import {ThemerActiveToolLayout} from './ThemerActiveToolLayout'
 import {ThemerLayout} from './ThemerLayout'
 import {ThemerNavbar} from './ThemerNavbar'
 
@@ -33,15 +32,16 @@ export interface ThemerToolOptions {
 
 /**
  * A Studio plugin that adds a themer sidebar for `buildTheme` themes: a
- * navbar toggle opens the sidebar next to the active tool, with a list of
- * themes — the configured theme, the presets and your own — each previewed
- * as a tiny Studio in both color schemes. Picking one applies it live to the
- * whole Studio while you browse around; your own themes can be edited with
+ * navbar toggle opens the sidebar next to the Studio, with a list of themes —
+ * the configured theme, the presets and your own — each previewed as a tiny
+ * Studio in both color schemes. Picking one applies it live to the whole
+ * Studio while you browse around; your own themes can be edited with
  * accent/text/background pickers and a contrast slider per scheme, added,
  * duplicated, given the colors of an image (its palette is read on device),
  * removed and restored, and a dialog shows the `buildTheme` snippet that
  * makes the applied theme permanent. Toggle between light and dark mode with
- * the regular appearance menu — the preview follows it.
+ * the regular appearance menu — the preview follows it — or split the
+ * preview to see the whole Studio in light and dark side by side.
  *
  * ```ts
  * import {themerTool} from '@sanity/themer/tool'
@@ -73,7 +73,6 @@ export const themerTool = definePlugin<ThemerToolOptions | void>((options) => {
       components: {
         layout: ThemerLayoutWithOptions,
         navbar: ThemerNavbar,
-        activeToolLayout: ThemerActiveToolLayout,
       },
     },
   }
