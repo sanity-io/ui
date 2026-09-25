@@ -4,11 +4,27 @@ import {useEffect} from 'react'
 import {useThemer} from './context'
 import {convertLegacyTheme} from './legacyTheme'
 
+/** The `input` types that take no pasted text, like the editor's swatches and sliders */
+const nonTextInputTypes = new Set([
+  'button',
+  'checkbox',
+  'color',
+  'file',
+  'hidden',
+  'image',
+  'radio',
+  'range',
+  'reset',
+  'submit',
+])
+
 /** Whether a paste lands in a field that takes it as text */
 function isEditable(target: EventTarget | null): boolean {
+  if (target instanceof HTMLInputElement) return !nonTextInputTypes.has(target.type)
+
   return (
     target instanceof HTMLElement &&
-    (target.isContentEditable || target.matches('input, textarea, select'))
+    (target.isContentEditable || target.matches('textarea, select'))
   )
 }
 
