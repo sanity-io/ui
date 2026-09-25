@@ -12,7 +12,6 @@ import {
   type ViewTransitionClass,
 } from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
-import {createGlobalStyle} from 'styled-components'
 
 import {buildTheme} from '../theme/buildTheme'
 import {BuildThemeOptions} from '../theme/options'
@@ -22,6 +21,8 @@ import {ResizableSidebar} from './ResizableSidebar'
 import {readStoredState, writeStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
 
+import {layout, SPLIT_TRANSITION, splitTransitionClasses, studioScheme} from './ThemerLayout.css'
+
 /**
  * Below this media index the Studio collapses its navbar into a drawer, and
  * the themer follows suit: the sidebar covers the Studio instead of standing
@@ -29,112 +30,11 @@ import {resolveThemes, ThemerState} from './themes'
  */
 const MOBILE_MEDIA_INDEX = 1
 
-/**
- * The transition type of toggling the split preview. The Studio updates in
- * transitions of its own all the time; only this one animates its layout.
- */
-const SPLIT_TRANSITION = 'themer-split'
-
 /** The Studio the user was looking at cross-fades between its two widths */
 const resizeClass: ViewTransitionClass = {
-  [SPLIT_TRANSITION]: 'themer-split-resize',
+  [SPLIT_TRANSITION]: splitTransitionClasses.resize,
   default: 'none',
 }
-
-/**
- * How the split preview animates, through React's view transitions: the split
- * copy slides in from off screen — a transform, nothing fades — and out the
- * same way; the Studio the user was looking at cross-fades between its two
- * widths, its old and new snapshots stretched to the group's box so it keeps
- * its height. Everything shares one duration and easing, so the edge the copy
- * slides in on and the edge the Studio gives way with stay together. The
- * sidebar, a group of its own (`ResizableSidebar` names it), does not animate
- * at all: its new snapshot simply shows, stacked above the Studio copies
- * where it covers the Studio — groups of elements that only exist in the new
- * state (the arriving copy) would otherwise be stacked last, over it.
- */
-const SplitTransitionStyle = createGlobalStyle`
-  ::view-transition-group(themer-sidebar) {
-    z-index: 1;
-  }
-
-  ::view-transition-group(themer-sidebar),
-  ::view-transition-image-pair(themer-sidebar),
-  ::view-transition-old(themer-sidebar),
-  ::view-transition-new(themer-sidebar) {
-    animation: none;
-  }
-
-  ::view-transition-group(.themer-split-resize),
-  ::view-transition-old(.themer-split-resize),
-  ::view-transition-new(.themer-split-resize),
-  ::view-transition-new(.themer-split-slide-in),
-  ::view-transition-old(.themer-split-slide-out),
-  ::view-transition-new(.themer-split-drop-in),
-  ::view-transition-old(.themer-split-drop-out) {
-    animation-duration: 320ms;
-    animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    ::view-transition-group(.themer-split-resize),
-    ::view-transition-old(.themer-split-resize),
-    ::view-transition-new(.themer-split-resize),
-    ::view-transition-new(.themer-split-slide-in),
-    ::view-transition-old(.themer-split-slide-out),
-    ::view-transition-new(.themer-split-drop-in),
-    ::view-transition-old(.themer-split-drop-out) {
-      animation: none;
-    }
-  }
-
-  ::view-transition-old(.themer-split-resize),
-  ::view-transition-new(.themer-split-resize) {
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: fill;
-  }
-
-  ::view-transition-new(.themer-split-slide-in) {
-    animation-name: themer-split-slide-in;
-  }
-
-  ::view-transition-old(.themer-split-slide-out) {
-    animation-name: themer-split-slide-out;
-  }
-
-  ::view-transition-new(.themer-split-drop-in) {
-    animation-name: themer-split-drop-in;
-  }
-
-  ::view-transition-old(.themer-split-drop-out) {
-    animation-name: themer-split-drop-out;
-  }
-
-  @keyframes themer-split-slide-in {
-    from {
-      transform: translateX(-100%);
-    }
-  }
-
-  @keyframes themer-split-slide-out {
-    to {
-      transform: translateX(-100%);
-    }
-  }
-
-  @keyframes themer-split-drop-in {
-    from {
-      transform: translateY(-100%);
-    }
-  }
-
-  @keyframes themer-split-drop-out {
-    to {
-      transform: translateY(-100%);
-    }
-  }
-`
 
 function sameStoredState(a: ThemerState, b: ThemerState): boolean {
   return a.active === b.active && a.custom === b.custom && a.removed === b.removed
@@ -175,7 +75,7 @@ function sameView(a: ThemerView, b: ThemerView): boolean {
  * (light/dark/system) and the picked theme like any other theme would. The
  * split preview adds a second copy in the opposite scheme on the far side —
  * or on top, on small screens — through React's view transitions (React
- * 19.3), styled by `SplitTransitionStyle`.
+ * 19.3), styled in `ThemerLayout.css.ts`.
  *
  * @internal
  */
@@ -264,7 +164,18 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   }, [scheme, theme])
 
   const context = useMemo<ThemerContextValue>(
-    () => ({baseOptions, themes, removed, active, images, view, open, split, mobile, send}),
+    () => ({
+      baseOptions,
+      themes,
+      removed,
+      active,
+      images,
+      view,
+      open,
+      split,
+      mobile,
+      send,
+    }),
     [active, baseOptions, images, mobile, open, removed, send, split, themes, view],
   )
 
@@ -272,21 +183,15 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
 
   return (
     <ThemerContext.Provider value={context}>
-      <SplitTransitionStyle />
-      <Flex
-        direction={mobile ? 'column' : 'row'}
-        height="fill"
-        sizing="border"
-        style={{position: 'relative'}}
-      >
+      <Flex className={layout} direction={mobile ? 'column' : 'row'} height="fill" sizing="border">
         {/* The opposite scheme comes first — on the far side of the sidebar,
             or on top on small screens — so the Studio the user was looking at
             stays where it is, mounted, in its own scheme */}
         {shownSplit && (
           <ViewTransition
             key="opposite"
-            enter={mobile ? 'themer-split-drop-in' : 'themer-split-slide-in'}
-            exit={mobile ? 'themer-split-drop-out' : 'themer-split-slide-out'}
+            enter={mobile ? splitTransitionClasses.dropIn : splitTransitionClasses.slideIn}
+            exit={mobile ? splitTransitionClasses.dropOut : splitTransitionClasses.slideOut}
             update="none"
           >
             <StudioPreview
@@ -338,10 +243,10 @@ function StudioPreview(props: {
       <Card
         borderBottom={borderBottom}
         borderRight={borderRight}
+        className={scheme ? studioScheme[scheme] : undefined}
         flex={1}
         height="fill"
         overflow="hidden"
-        style={scheme ? {colorScheme: scheme} : undefined}
       >
         {children}
       </Card>

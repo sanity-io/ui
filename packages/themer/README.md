@@ -67,6 +67,8 @@ export default defineConfig({
 
 If the Studio already uses a `buildTheme` theme, pass the same options so the tool starts editing from them: `themerTool({config: {light: {accent: '#1cb485'}}})`.
 
+The tool's styles are a stylesheet, `@sanity/themer/bundle.css`, that `@sanity/themer/tool` imports itself — the Studio's bundler picks it up, nothing to add to the config.
+
 ## Migrating from themer.sanity.build
 
 The npm migration path off the hosted Themer service ([themer.sanity.build](https://themer.sanity.build)) is [`@sanity/themer-legacy`](https://www.npmjs.com/package/@sanity/themer-legacy): the exact same generator, running locally.

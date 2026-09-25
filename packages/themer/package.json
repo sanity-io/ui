@@ -24,12 +24,22 @@
     "dist"
   ],
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/tool.js",
+    "*.css"
+  ],
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./src/index.ts",
     "./legacy": "./src/legacy/index.ts",
     "./tool": "./src/tool/index.ts",
+    "./bundle.css": {
+      "types": "./dist/bundle-css.d.ts",
+      "browser": "./dist/bundle.css",
+      "style": "./dist/bundle.css",
+      "node": "./dist/bundle-css.js",
+      "default": "./dist/bundle-css.js"
+    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -37,6 +47,13 @@
       ".": "./dist/index.js",
       "./legacy": "./dist/legacy.js",
       "./tool": "./dist/tool.js",
+      "./bundle.css": {
+        "types": "./dist/bundle-css.d.ts",
+        "browser": "./dist/bundle.css",
+        "style": "./dist/bundle.css",
+        "node": "./dist/bundle-css.js",
+        "default": "./dist/bundle-css.js"
+      },
       "./package.json": "./package.json"
     }
   },
@@ -53,6 +70,7 @@
     "@sanity/icons": "workspace:^",
     "@sanity/themer-legacy": "workspace:^",
     "@sanity/ui": "workspace:^",
+    "@vanilla-extract/dynamic": "catalog:",
     "@xstate/react": "^6.1.0",
     "react-refractor": "catalog:",
     "refractor": "catalog:",
@@ -63,25 +81,21 @@
     "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
+    "@vanilla-extract/css": "catalog:",
     "oxc-transform-react": "catalog:",
     "react": "catalog:",
     "rimraf": "catalog:",
     "sanity": "catalog:",
-    "styled-components": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
   "peerDependencies": {
     "react": "^19.3.0",
-    "sanity": "^3 || ^4 || ^5 || ^6",
-    "styled-components": "^5.2 || ^6"
+    "sanity": "^3 || ^4 || ^5 || ^6"
   },
   "peerDependenciesMeta": {
     "sanity": {
-      "optional": true
-    },
-    "styled-components": {
       "optional": true
     }
   },

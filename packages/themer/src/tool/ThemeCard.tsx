@@ -6,81 +6,12 @@ import {Box, Button, Card, Text, useRootTheme} from '@sanity/ui'
 import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import {Tooltip} from '@sanity/ui/tooltip'
 import {useState} from 'react'
-import {styled} from 'styled-components'
 
 import {useThemer} from './context'
 import {displayTitle, ThemerTheme} from './themes'
 import {ThemeThumbnail} from './ThemeThumbnail'
 
-const Root = styled.div`
-  position: relative;
-`
-
-/** A bare button, so that the thumbnail and the title can carry the styling */
-const PickButton = styled.button`
-  appearance: none;
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-align: center;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-`
-
-/**
- * Wraps the thumbnail with room for the ring that marks the applied theme —
- * hovering shows a faint ring, the applied theme the focus ring color, and
- * keyboard focus an outline. The rings are drawn inside the frame's padding,
- * so nothing sticks out to be clipped by the scrolling list.
- */
-const Frame = styled.span`
-  display: block;
-  padding: 4px;
-  border-radius: 10px;
-  transition: box-shadow 100ms;
-
-  ${PickButton}:hover & {
-    box-shadow: inset 0 0 0 2px var(--card-border-color);
-  }
-
-  ${PickButton}[aria-pressed='true'] & {
-    box-shadow: inset 0 0 0 2px var(--card-focus-ring-color);
-  }
-
-  ${PickButton}:focus-visible & {
-    outline: 2px solid var(--card-focus-ring-color);
-    outline-offset: -2px;
-  }
-`
-
-/**
- * The actions menu sits on the thumbnail's top right corner, like the actions
- * of an image input, and only shows on hover, on keyboard focus, and while it
- * is open — its popover is portaled, so an open menu does not count as focus
- * within
- */
-const MenuSlot = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  opacity: 0;
-  transition: opacity 100ms;
-
-  ${Root}:hover &,
-  ${Root}:focus-within &,
-  &[data-visible='true'] {
-    opacity: 1;
-  }
-`
+import {frame, menuCard, menuSlot, pickButton, root} from './ThemeCard.css'
 
 /**
  * One theme in the list: the floating preview with the title below it, like
@@ -98,15 +29,16 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
   const title = displayTitle(theme.title)
 
   return (
-    <Root>
-      <PickButton
+    <div className={root}>
+      <button
         aria-pressed={active}
+        className={pickButton}
         onClick={() => send({type: 'theme.pick', slug: theme.slug})}
         type="button"
       >
-        <Frame>
+        <span className={frame}>
           <ThemeThumbnail options={theme.options} />
-        </Frame>
+        </span>
         <Box as="span" display="block" paddingTop={2} paddingX={2}>
           <Text
             align="center"
@@ -118,15 +50,15 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
             {title}
           </Text>
         </Box>
-      </PickButton>
+      </button>
 
       {/* The tooltip wraps a card rather than the button: the menu button
           clones its button to wire it up, which a tooltip in between would
           swallow. The card keeps the button dark, as it sits on the dark
           half of the thumbnail, while the menu opens in the sidebar's scheme */}
-      <MenuSlot data-visible={menuOpen}>
+      <div className={menuSlot} data-visible={menuOpen}>
         <Tooltip animate content={<Text size={1}>Show more</Text>} placement="bottom" portal>
-          <Card radius={2} scheme="dark" style={{display: 'inline-block'}}>
+          <Card className={menuCard} radius={2} scheme="dark">
             <MenuButton
               button={
                 <Button
@@ -172,7 +104,7 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
             />
           </Card>
         </Tooltip>
-      </MenuSlot>
-    </Root>
+      </div>
+    </div>
   )
 }

@@ -12,6 +12,8 @@ import {ThemeList} from './ThemeList'
 import {ThemeSnippetDialog} from './ThemeSnippetDialog'
 import {TooltipButton} from './TooltipButton'
 
+import {title} from './ThemerSidebar.css'
+
 const VIEW_TITLES = {
   list: 'Themer',
   edit: 'Edit theme',
@@ -48,7 +50,7 @@ export function ThemerSidebar() {
                 tooltip="Back to the themes"
               />
             )}
-            <Box flex={1} paddingLeft={inList ? 1 : 0} style={{minWidth: 0}}>
+            <Box className={title} flex={1} paddingLeft={inList ? 1 : 0}>
               <Text size={1} textOverflow="ellipsis" weight="semibold">
                 {VIEW_TITLES[view.name]}
               </Text>

@@ -1,7 +1,6 @@
 import {AddIcon} from '@sanity/icons/Add'
 import {RestoreIcon} from '@sanity/icons/Restore'
 import {Box, Button, Card, Flex, Stack} from '@sanity/ui'
-import {styled} from 'styled-components'
 
 import {useThemer} from './context'
 import {ImageFileButton} from './ImageFileButton'
@@ -11,16 +10,12 @@ import {ThemeCard} from './ThemeCard'
 import {TooltipButton} from './TooltipButton'
 import {useImagePalette} from './useImagePalette'
 
+import {cardGrid} from './ThemeList.css'
+
 /**
  * One column at the sidebar's default width; wider sidebars — and the
  * overlay on small screens — fit more cards per row
  */
-const CardGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 16px;
-`
-
 /**
  * The flow for picking a theme: one column of theme cards — the configured
  * theme, the presets and the user's own themes — with the entry points to
@@ -44,11 +39,11 @@ export function ThemeList() {
     <>
       <ScrollArea padding={3}>
         <Stack gap={4}>
-          <CardGrid>
+          <div className={cardGrid}>
             {themes.map((theme) => (
               <ThemeCard active={theme.slug === active.slug} key={theme.slug} theme={theme} />
             ))}
-          </CardGrid>
+          </div>
           {/* Trails the list rather than sitting in the footer, so the footer
               does not shift when the first theme gets removed */}
           {removed.length > 0 && (
