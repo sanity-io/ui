@@ -9,17 +9,9 @@ import {
 import {sidebarTransition} from './ResizableSidebar.css'
 
 /**
- * The transition types of toggling the split preview and of opening or
- * closing the panel — scoped identifiers, like the classes below, so nothing
- * else on the page can mean the same. The Studio updates in transitions of
- * its own all the time; only these two animate its layout.
- */
-export const SPLIT_TRANSITION = createViewTransition('split')
-export const PANEL_TRANSITION = createViewTransition('panel')
-
-/**
  * The view transition classes of the split preview — what React puts in
- * `view-transition-class`, which the pseudo-element rules below select on
+ * `view-transition-class`, which the pseudo-element rules below select on.
+ * Scoped identifiers, so nothing else on the page can mean the same.
  */
 export const splitTransitionClasses = {
   /** The Studio the user was looking at cross-fades between its two widths */
@@ -128,14 +120,10 @@ globalStyle(
 )
 
 /**
- * With reduced motion, nothing in these transitions animates — not the panel
- * or the copies, not the root's cross-fade — so the new layout simply shows:
- * the transition is over as soon as it starts. The pseudo-elements of the
- * panel and the copies are selected by their classes; the root's, which have
- * none, through the transition types — scoped so other view transitions on
- * the page keep their own reduced-motion behavior. (The types can go missing
- * from a commit that also carries work for hidden `Activity` content, which
- * is why the classes carry the rest.)
+ * With reduced motion, neither the panel nor the copies nor the Studio
+ * animate: the new layout simply shows, and the transition is over as soon as
+ * it starts. Selected by the classes, so other view transitions on the page
+ * keep their own reduced-motion behavior.
  */
 globalStyle(
   [
@@ -148,11 +136,6 @@ globalStyle(
     `::view-transition-old(.${splitTransitionClasses.dropOut})`,
     `::view-transition-new(.${panelTransitionClasses.slideIn})`,
     `::view-transition-old(.${panelTransitionClasses.slideOut})`,
-    ...[SPLIT_TRANSITION, PANEL_TRANSITION].flatMap((type) =>
-      ['group', 'image-pair', 'old', 'new'].map(
-        (part) => `:root:active-view-transition-type(${type})::view-transition-${part}(*)`,
-      ),
-    ),
   ].join(', '),
   {
     '@media': {
