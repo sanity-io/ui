@@ -29,10 +29,10 @@
     "@changesets/cli": "^3.0.3",
     "@types/node": "catalog:",
     "eslint-plugin-storybook": "^10.6.0",
-    "knip": "^6.37.0",
+    "knip": "^6.38.0",
     "oxfmt": "^0.70.0",
     "oxlint": "^1.85.0",
-    "oxlint-tsgolint": "^7.0.2002",
+    "oxlint-tsgolint": "^7.0.2003",
     "typescript": "catalog:"
   },
   "engines": {

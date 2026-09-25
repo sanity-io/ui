@@ -9,21 +9,15 @@ import {
 import {sidebarTransition} from './ResizableSidebar.css'
 
 /**
- * The transition types of toggling the split preview and of opening or
- * closing the panel — scoped identifiers, like the classes below, so nothing
- * else on the page can mean the same. The Studio updates in transitions of
- * its own all the time; only these two animate its layout.
- */
-export const SPLIT_TRANSITION = createViewTransition('split')
-export const PANEL_TRANSITION = createViewTransition('panel')
-
-/**
  * The view transition classes of the split preview — what React puts in
- * `view-transition-class`, which the pseudo-element rules below select on
+ * `view-transition-class`, which the pseudo-element rules below select on.
+ * Scoped identifiers, so nothing else on the page can mean the same.
  */
 export const splitTransitionClasses = {
   /** The Studio the user was looking at cross-fades between its two widths */
   resize: createViewTransition('splitResize'),
+  /** The Studio and the panel cross-fade to another theme, in place */
+  crossfade: createViewTransition('themeCrossfade'),
   /** The split copy slides in from the side, or out to it */
   slideIn: createViewTransition('splitSlideIn'),
   slideOut: createViewTransition('splitSlideOut'),
@@ -76,6 +70,8 @@ globalStyle(
     `::view-transition-old(.${splitTransitionClasses.dropOut})`,
     `::view-transition-new(.${panelTransitionClasses.slideIn})`,
     `::view-transition-old(.${panelTransitionClasses.slideOut})`,
+    `::view-transition-old(.${splitTransitionClasses.crossfade})`,
+    `::view-transition-new(.${splitTransitionClasses.crossfade})`,
   ].join(', '),
   {
     animationDuration: '320ms',
@@ -114,7 +110,9 @@ globalStyle(`::view-transition-old(.${panelTransitionClasses.slideOut})`, {
  * shows, stacked above the Studio copies where it covers the Studio (groups of
  * elements that only exist in the new state, the arriving copy, would
  * otherwise be stacked last, over it). While the panel itself opens or closes,
- * React names it instead, and the rules above slide it.
+ * or cross-fades to another theme, React names it instead, and the rules
+ * above apply.
+ *
  */
 globalStyle(`::view-transition-group(${sidebarTransition})`, {zIndex: 1})
 globalStyle(
@@ -128,32 +126,24 @@ globalStyle(
 )
 
 /**
- * With reduced motion, nothing in these transitions animates — not the panel
- * or the copies, not the root's cross-fade — so the new layout simply shows:
- * the transition is over as soon as it starts. The pseudo-elements of the
- * panel and the copies are selected by their classes; the root's, which have
- * none, through the transition types — scoped so other view transitions on
- * the page keep their own reduced-motion behavior. (The types can go missing
- * from a commit that also carries work for hidden `Activity` content, which
- * is why the classes carry the rest.)
+ * Someone who prefers reduced motion sees no motion here: the layout does not
+ * start these transitions in the first place (see `ThemerLayout`), and should
+ * one run anyway — the preference changed after the layout read it, the
+ * Studio ran one of its own over these groups — none of their animations does
+ * anything: the new state simply shows.
  */
 globalStyle(
-  [
-    ...['group', 'old', 'new'].map(
-      (part) => `::view-transition-${part}(.${splitTransitionClasses.resize})`,
-    ),
-    `::view-transition-new(.${splitTransitionClasses.slideIn})`,
-    `::view-transition-old(.${splitTransitionClasses.slideOut})`,
-    `::view-transition-new(.${splitTransitionClasses.dropIn})`,
-    `::view-transition-old(.${splitTransitionClasses.dropOut})`,
-    `::view-transition-new(.${panelTransitionClasses.slideIn})`,
-    `::view-transition-old(.${panelTransitionClasses.slideOut})`,
-    ...[SPLIT_TRANSITION, PANEL_TRANSITION].flatMap((type) =>
-      ['group', 'image-pair', 'old', 'new'].map(
-        (part) => `:root:active-view-transition-type(${type})::view-transition-${part}(*)`,
-      ),
-    ),
-  ].join(', '),
+  ['group', 'image-pair', 'old', 'new']
+    .flatMap((part) => {
+      const groups = [
+        ...Object.values(splitTransitionClasses).map((className) => `.${className}`),
+        ...Object.values(panelTransitionClasses).map((className) => `.${className}`),
+        sidebarTransition,
+      ]
+
+      return groups.map((group) => `::view-transition-${part}(${group})`)
+    })
+    .join(', '),
   {
     '@media': {
       '(prefers-reduced-motion: reduce)': {

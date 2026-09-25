@@ -40,7 +40,14 @@ export function ThemeSnippetDialog(props: {onClose: () => void; theme: ThemerThe
       animate
       footer={
         <Flex gap={2} justify="flex-end" padding={3}>
-          <Button icon={ClipboardIcon} mode="ghost" onClick={() => void handleCopy()} text="Copy" />
+          <Button
+            gap={2}
+            icon={ClipboardIcon}
+            mode="ghost"
+            onClick={() => void handleCopy()}
+            padding={2}
+            text="Copy"
+          />
         </Flex>
       }
       header="Add to your config"

@@ -239,7 +239,7 @@ function ThemeEditorForm(props: {
             tooltip="Remove the theme — it can be restored until it is deleted"
           />
           <Box flex={1} />
-          <Button mode="ghost" onClick={onDone} text="Done" />
+          <Button mode="ghost" onClick={onDone} padding={2} text="Done" />
         </Flex>
       </Card>
     </>

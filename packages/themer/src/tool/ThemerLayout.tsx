@@ -3,13 +3,12 @@ import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
 import {
   Activity,
-  addTransitionType,
   lazy,
+  useDeferredValue,
   useEffect,
   useMemo,
   useRef,
   useState,
-  useTransition,
   ViewTransition,
 } from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
@@ -18,15 +17,14 @@ import {buildTheme} from '../theme/buildTheme'
 import {BuildThemeOptions} from '../theme/options'
 import {ThemerContext, ThemerContextValue, ThemerView} from './context'
 import {selectStoredState, ThemerInput, themerMachine, ThemerSnapshot} from './machine'
-import {readStoredState, writeStoredState} from './storage'
+import {readStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
+import {usePrefersReducedMotion} from './usePrefersReducedMotion'
 import {useStudioNavbarHeight} from './useStudioNavbarHeight'
 
 import {
   layout,
-  PANEL_TRANSITION,
   panelTransitionClasses,
-  SPLIT_TRANSITION,
   splitTransitionClasses,
   studioScheme,
 } from './ThemerLayout.css'
@@ -39,21 +37,12 @@ import {
 const MOBILE_MEDIA_INDEX = 1
 
 /**
- * How long, at most, the Studio keeps its `update` class after the panel or
- * the split toggles — normally it drops it the moment its transition starts,
- * this covers a toggle that does not move it (the overlay on small screens).
- * The Studio updates in transitions of its own all the time, and none of
- * those should run a view transition over it — only these toggles do.
- */
-const RESIZE_WINDOW = 500
-
-/**
  * The sidebar — everything in it, from the theme list to the snippet dialog —
  * loads the first time it opens. There is no `Suspense` boundary around it,
- * so it must only ever render from a transition: that keeps the Studio as it
- * was while the code loads, with the navbar toggle showing the transition as
- * pending, where an urgent render would suspend up to the Studio's own
- * boundary and swap the whole Studio for its loading screen.
+ * so it must only ever mount from a deferred render: that keeps the Studio as
+ * it was while the code loads, with the navbar toggle showing the deferred
+ * value as pending, where an urgent render would suspend up to the Studio's
+ * own boundary and swap the whole Studio for its loading screen.
  */
 const ResizableSidebar = lazy(() =>
   import('./ResizableSidebar').then((module) => ({default: module.ResizableSidebar})),
@@ -102,6 +91,11 @@ function sameView(a: ThemerView, b: ThemerView): boolean {
  * or on top, on small screens — through React's view transitions (React
  * 19.3), styled in `ThemerLayout.css.ts`.
  *
+ * The machine says what shows and when the layout is in motion (its `panel`,
+ * `split` and `moving` tags); the layout defers what shows, which puts the
+ * panel's and the copy's mounts in a transition — what lets React animate
+ * them — and picks the view transition classes from the tags.
+ *
  * @internal
  */
 export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOptions}) {
@@ -110,85 +104,41 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const [snapshot, send, actorRef] = useActor(themerMachine, {input})
   const stored = useSelector(actorRef, selectStoredState, sameStoredState)
   const view = useSelector(actorRef, selectView, sameView)
-  const open = snapshot.matches({sidebar: 'open'})
-  const split = snapshot.matches({preview: 'split'})
+  const open = snapshot.hasTag('panel')
+  const split = snapshot.hasTag('split')
+  const moving = snapshot.hasTag('moving')
+  const switching = snapshot.hasTag('switching')
   const {images} = snapshot.context
   const mobile = useMediaIndex() <= MOBILE_MEDIA_INDEX
   const studioRef = useRef<HTMLDivElement | null>(null)
   const navbarHeight = useStudioNavbarHeight(studioRef)
 
-  // The machine publishes its state synchronously, which React does not
-  // animate: the panel and the split copy show from state of their own, set
-  // in a transition typed after what changed, which is what lets the view
-  // transition run — after the sidebar's own changes (the toggle's pressed
-  // state) have committed, so nothing in the sidebar changes while it does.
-  // Closing the sidebar ends the split, so both leave in one transition.
-  const [shown, setShown] = useState({open, split})
-  const [isPending, startTransition] = useTransition()
-  // Where the transitions are taking the panel and the split copy. A toggle
-  // that comes in while one is still pending — the first opening waits for
-  // the sidebar's code — goes on from there rather than from what is shown,
-  // or the pending transition would still show a sidebar that has been
-  // closed in the meantime
-  const requested = useRef({open, split})
-  // The sidebar mounts the first time it opens, which is when its code loads,
-  // and stays mounted from then on
-  const [panelMounted, setPanelMounted] = useState(false)
-  // The Studio's `update` class goes by state rather than by the transition's
-  // types: a commit that also carries work for hidden `Activity` content (as
-  // after revealing the split copy) drops the types, and the Studio would
-  // snap to its new width instead of cross-fading. The class is only needed
-  // as the transition starts, and goes away as soon as it has
-  const [resizing, setResizing] = useState(false)
-  const stopResizing = () => setResizing(false)
-  useEffect(() => {
-    const previous = requested.current
-    if (previous.open === open && previous.split === split) return
-    requested.current = {open, split}
-    startTransition(() => {
-      if (previous.open !== open) addTransitionType(PANEL_TRANSITION)
-      if (previous.split !== split) addTransitionType(SPLIT_TRANSITION)
-      setShown({open, split})
-      if (open) setPanelMounted(true)
-      setResizing(true)
-    })
-  }, [open, split])
+  // The machine publishes synchronously, which React does not animate. What
+  // shows is deferred: that renders the panel's and the copy's mounts in a
+  // transition — once the sidebar's own changes (the toggle's pressed state)
+  // have committed, so nothing in the sidebar changes while it runs. Someone
+  // who prefers reduced motion gets no view transition at all: nothing is
+  // deferred, so there is no transition render for React to animate, no
+  // boundary has a class, and what shows changes along with the machine —
+  // and should one run anyway, the stylesheet gives its animations nothing
+  // to do
+  const reduceMotion = usePrefersReducedMotion()
+  const deferredOpen = useDeferredValue(reduceMotion ? null : open)
+  const deferredSplit = useDeferredValue(reduceMotion ? null : split)
+  const shownOpen = deferredOpen ?? open
+  const shownSplit = deferredSplit ?? split
 
-  useEffect(() => {
-    if (!resizing) return undefined
-
-    const timer = setTimeout(() => setResizing(false), RESIZE_WINDOW)
-
-    return () => clearTimeout(timer)
-  }, [resizing, shown])
-
-  // Only the first opening has code to load. Every later toggle commits as
-  // soon as it renders, and its pending state would only flash the spinner on
-  // the navbar toggle — into the view transition's snapshot of the Studio too
-  const loading = isPending && !panelMounted
-
-  useEffect(() => writeStoredState(stored), [stored])
-
-  // The images live in memory as object URLs — release the ones no theme
-  // refers to anymore, and all of them on the way out
-  const previousImages = useRef(images)
-
-  useEffect(() => {
-    const current = new Set(Object.values(images))
-
-    for (const url of Object.values(previousImages.current)) {
-      if (!current.has(url)) URL.revokeObjectURL(url)
-    }
-
-    previousImages.current = images
-  }, [images])
-
-  useEffect(
-    () => () => {
-      for (const url of Object.values(previousImages.current)) URL.revokeObjectURL(url)
-    },
-    [],
-  )
+  // The sidebar's content mounts the first time it opens — which is when its
+  // code loads — and stays mounted from then on. It goes by a deferred copy
+  // of whether the sidebar has opened, deferred even for reduced motion: the
+  // render that loads the code must never be an urgent one. With motion it
+  // arrives with the panel's own deferred reveal; without, in a panel that
+  // already shows, as an update no view transition animates. The two copies
+  // differ while the code loads, which the navbar toggle shows
+  const [panelOpened, setPanelOpened] = useState(false)
+  if (open && !panelOpened) setPanelOpened(true)
+  const panelMounted = useDeferredValue(panelOpened)
+  const loading = panelOpened !== panelMounted
 
   const {themes, removed, active} = useMemo(
     () => resolveThemes(stored, baseOptions),
@@ -205,6 +155,13 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
     [activeOptions],
   )
 
+  // The applied theme is deferred the same way, and the Studio and the panel
+  // cross-fade to it while the machine says a theme is being switched to —
+  // edits to the applied theme's colors render deferred too, which keeps the
+  // pickers responsive, but with nothing to animate them they simply show
+  const deferredTheme = useDeferredValue(reduceMotion ? undefined : theme)
+  const shownTheme = deferredTheme === undefined ? theme : deferredTheme
+
   // The Studio paints the body with its configured theme from above this
   // layout, and Safari tints its chrome from the body — so the applied theme
   // has to reach the body too, in the scheme the Studio is showing
@@ -212,7 +169,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const oppositeScheme: ThemeColorSchemeKey = scheme === 'dark' ? 'light' : 'dark'
 
   useEffect(() => {
-    const background = theme?.v2?.color[scheme].default.bg
+    const background = shownTheme?.v2?.color[scheme].default.bg
 
     if (background === undefined) return undefined
 
@@ -224,7 +181,19 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
     return () => {
       style.backgroundColor = previous
     }
-  }, [scheme, theme])
+  }, [scheme, shownTheme])
+
+  // The machine releases the image of a palette as it is replaced or its
+  // theme deleted; whatever it still holds goes with the layout — the actor
+  // keeps its last snapshot once stopped
+  useEffect(
+    () => () => {
+      for (const url of Object.values(actorRef.getSnapshot().context.images)) {
+        URL.revokeObjectURL(url)
+      }
+    },
+    [actorRef],
+  )
 
   const context = useMemo<ThemerContextValue>(
     () => ({
@@ -259,6 +228,34 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
 
   const studio = layoutProps.renderDefault(layoutProps)
 
+  // Every view transition of the layout tells the machine its motion is under way
+  const transitioned = () => send({type: 'layout.transitioned'})
+
+  // What the view transitions do this render, from what the machine says
+  const classes = reduceMotion
+    ? {
+        copyEnter: 'none',
+        copyExit: 'none',
+        panelEnter: 'none',
+        panelExit: 'none',
+        update: 'none',
+        studioUpdate: 'none',
+      }
+    : {
+        copyEnter: mobile ? splitTransitionClasses.dropIn : splitTransitionClasses.slideIn,
+        copyExit: mobile ? splitTransitionClasses.dropOut : splitTransitionClasses.slideOut,
+        panelEnter: panelTransitionClasses.slideIn,
+        panelExit: panelTransitionClasses.slideOut,
+        // The copy and the panel cross-fade to another theme, in place
+        update: switching ? splitTransitionClasses.crossfade : 'none',
+        // The Studio too — unless it is giving way or taking room, which cross-fades as it goes
+        studioUpdate: moving
+          ? splitTransitionClasses.resize
+          : switching
+            ? splitTransitionClasses.crossfade
+            : 'none',
+      }
+
   return (
     <ThemerContext.Provider value={context}>
       <Flex className={layout} direction={mobile ? 'column' : 'row'} height="fill" sizing="border">
@@ -268,53 +265,59 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
             Studio is too costly to keep around (its styled-components alone
             insert CSS as they render), so it only exists while the sidebar is
             open — hidden until the split shows, warmed up for the transition */}
-        {shown.open && (
-          <Activity mode={shown.split ? 'visible' : 'hidden'}>
+        {shownOpen && (
+          <Activity mode={shownSplit ? 'visible' : 'hidden'}>
             <ViewTransition
               key="opposite"
-              enter={mobile ? splitTransitionClasses.dropIn : splitTransitionClasses.slideIn}
-              exit={mobile ? splitTransitionClasses.dropOut : splitTransitionClasses.slideOut}
-              update="none"
+              enter={classes.copyEnter}
+              exit={classes.copyExit}
+              onEnter={transitioned}
+              onExit={transitioned}
+              onUpdate={transitioned}
+              update={classes.update}
             >
               <StudioPreview
                 borderBottom={mobile}
                 borderRight={!mobile}
                 scheme={oppositeScheme}
-                theme={theme}
+                theme={shownTheme}
               >
                 {studio}
               </StudioPreview>
             </ViewTransition>
           </Activity>
         )}
-        <ViewTransition
-          key="primary"
-          onUpdate={stopResizing}
-          update={resizing ? splitTransitionClasses.resize : 'none'}
-        >
-          <StudioPreview ref={studioRef} theme={theme}>
+        {/* The Studio gives way and takes room while the machine says the
+            layout is moving, and cross-fades while it says a theme is being
+            switched to — the Studio updates in transitions of its own all the
+            time, and none of those may animate it. Once a transition is under
+            way the machine hears of it, and the Studio is its own again before
+            the next commit */}
+        <ViewTransition key="primary" onUpdate={transitioned} update={classes.studioUpdate}>
+          <StudioPreview ref={studioRef} theme={shownTheme}>
             {studio}
           </StudioPreview>
         </ViewTransition>
 
         {/* The sidebar is small and cheap: once it has opened it stays
             mounted, hidden while closed, keeping its state and ready to show.
-            Until then it is left out — hidden, it would be pre-rendered, and
-            its code loaded, as soon as the Studio renders */}
-        {panelMounted && (
-          <Activity mode={shown.open ? 'visible' : 'hidden'}>
-            <ViewTransition
-              key="panel"
-              enter={panelTransitionClasses.slideIn}
-              exit={panelTransitionClasses.slideOut}
-              update="none"
-            >
-              <ThemeProvider theme={theme ?? undefined}>
-                <ResizableSidebar overlay={mobile} />
-              </ThemeProvider>
-            </ViewTransition>
-          </Activity>
-        )}
+            Until then its content is left out — hidden, it would be
+            pre-rendered, and its code loaded, as soon as the Studio renders */}
+        <Activity mode={shownOpen ? 'visible' : 'hidden'}>
+          <ViewTransition
+            key="panel"
+            enter={classes.panelEnter}
+            exit={classes.panelExit}
+            onEnter={transitioned}
+            onExit={transitioned}
+            onUpdate={transitioned}
+            update={classes.update}
+          >
+            <ThemeProvider theme={shownTheme ?? undefined}>
+              {panelMounted && <ResizableSidebar overlay={mobile} />}
+            </ThemeProvider>
+          </ViewTransition>
+        </Activity>
       </Flex>
     </ThemerContext.Provider>
   )

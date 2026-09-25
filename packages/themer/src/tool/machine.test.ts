@@ -1,16 +1,24 @@
-import {describe, expect, it} from 'vitest'
-import {createActor} from 'xstate'
+import {afterEach, describe, expect, it, vi} from 'vitest'
+import {createActor, SimulatedClock} from 'xstate'
 
 import {presets} from '../theme/presets'
-import {selectStoredState, ThemerInput, themerMachine} from './machine'
+import {MOTION_DURATION, selectStoredState, ThemerInput, themerMachine} from './machine'
 import {CONFIG_SLUG, CustomTheme, initialThemerState, resolveThemes, ThemerState} from './themes'
 
 const baseOptions = {light: {accent: '#123456'}}
 const custom: CustomTheme = {slug: 'custom-1', title: 'Mine', options: {light: {accent: '#ff0000'}}}
 const verdant = presets.find((preset) => preset.slug === 'verdant')!
 
+/** The clock the layout motions run on, so tests can let them finish */
+const clock = new SimulatedClock()
+
 function start(stored: ThemerState = initialThemerState, input: Partial<ThemerInput> = {}) {
-  return createActor(themerMachine, {input: {baseOptions, stored, ...input}}).start()
+  return createActor(themerMachine, {clock, input: {baseOptions, stored, ...input}}).start()
+}
+
+/** Lets a motion the layout never reports on run out */
+function settle() {
+  clock.increment(MOTION_DURATION)
 }
 
 function startWithCustom(overrides: Partial<ThemerState> = {}) {
@@ -34,19 +42,36 @@ describe('themerMachine', () => {
     expect(snapshot.context.editing).toBeNull()
   })
 
-  it('toggles and closes the sidebar without touching the flow', () => {
+  it('opens and closes the sidebar through a motion, without touching the flow', () => {
     const actor = startWithCustom()
 
     actor.send({type: 'theme.edit', slug: 'custom-1'})
     actor.send({type: 'sidebar.toggle'})
+    // The panel shows from the first moment, and the layout is in motion
+    expect(actor.getSnapshot().matches({sidebar: 'opening', flow: 'edit'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('panel')).toBe(true)
+    expect(actor.getSnapshot().hasTag('moving')).toBe(true)
+
+    settle()
     expect(actor.getSnapshot().matches({sidebar: 'open', flow: 'edit'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('moving')).toBe(false)
 
     actor.send({type: 'sidebar.toggle'})
-    expect(actor.getSnapshot().matches({sidebar: 'closed', flow: 'edit'})).toBe(true)
+    expect(actor.getSnapshot().matches({sidebar: 'closing', flow: 'edit'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('panel')).toBe(false)
+    expect(actor.getSnapshot().hasTag('moving')).toBe(true)
 
+    // The layout reporting its transition ends the motion before the timer would
+    actor.send({type: 'layout.transitioned'})
+    expect(actor.getSnapshot().matches({sidebar: 'closed', flow: 'edit'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('moving')).toBe(false)
+
+    // Toggling again mid-motion turns the motion around
     actor.send({type: 'sidebar.toggle'})
     actor.send({type: 'sidebar.close'})
-    expect(actor.getSnapshot().matches({sidebar: 'closed', flow: 'edit'})).toBe(true)
+    expect(actor.getSnapshot().matches({sidebar: 'closing', flow: 'edit'})).toBe(true)
+    actor.send({type: 'sidebar.toggle'})
+    expect(actor.getSnapshot().matches({sidebar: 'opening', flow: 'edit'})).toBe(true)
   })
 
   it('splits the preview and back without touching the sidebar, the flow or the themes', () => {
@@ -54,15 +79,26 @@ describe('themerMachine', () => {
 
     actor.send({type: 'sidebar.toggle'})
     actor.send({type: 'theme.edit', slug: 'custom-1'})
+    settle()
     const stored = selectStoredState(actor.getSnapshot())
 
     actor.send({type: 'preview.toggle'})
-    expect(actor.getSnapshot().matches({sidebar: 'open', flow: 'edit', preview: 'split'})).toBe(
+    expect(actor.getSnapshot().matches({sidebar: 'open', flow: 'edit', preview: 'splitting'})).toBe(
       true,
     )
+    expect(actor.getSnapshot().hasTag('split')).toBe(true)
+    expect(actor.getSnapshot().hasTag('moving')).toBe(true)
     expect(selectStoredState(actor.getSnapshot())).toEqual(stored)
 
+    settle()
+    expect(actor.getSnapshot().matches({preview: 'split'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('moving')).toBe(false)
+
     actor.send({type: 'preview.toggle'})
+    expect(actor.getSnapshot().matches({preview: 'unsplitting'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('split')).toBe(false)
+
+    settle()
     expect(actor.getSnapshot().matches({sidebar: 'open', flow: 'edit', preview: 'single'})).toBe(
       true,
     )
@@ -73,22 +109,65 @@ describe('themerMachine', () => {
 
     actor.send({type: 'sidebar.toggle'})
     actor.send({type: 'preview.toggle'})
+    settle()
     actor.send({type: 'sidebar.close'})
+    // Both leave together
+    expect(actor.getSnapshot().matches({sidebar: 'closing', preview: 'unsplitting'})).toBe(true)
+    settle()
     expect(actor.getSnapshot().matches({sidebar: 'closed', preview: 'single'})).toBe(true)
 
     actor.send({type: 'sidebar.toggle'})
-    expect(actor.getSnapshot().matches({sidebar: 'open', preview: 'single'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('panel')).toBe(true)
+    expect(actor.getSnapshot().hasTag('split')).toBe(false)
 
+    // From the navbar too, even while the split is still arriving
     actor.send({type: 'preview.toggle'})
     actor.send({type: 'sidebar.toggle'})
-    expect(actor.getSnapshot().matches({sidebar: 'closed', preview: 'single'})).toBe(true)
+    expect(actor.getSnapshot().matches({sidebar: 'closing', preview: 'unsplitting'})).toBe(true)
 
     // Opening the sidebar is not a way to split
     actor.send({type: 'sidebar.toggle'})
-    expect(actor.getSnapshot().matches({sidebar: 'open', preview: 'single'})).toBe(true)
+    expect(actor.getSnapshot().matches({sidebar: 'opening', preview: 'unsplitting'})).toBe(true)
   })
 
   describe('picking', () => {
+    it('is switching themes right after a pick, not after an edit', () => {
+      const actor = startWithCustom()
+
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+
+      actor.send({type: 'theme.pick', slug: 'custom-1'})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(true)
+
+      actor.send({type: 'layout.transitioned'})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+
+      actor.send({type: 'theme.update', slug: 'custom-1', options: {light: {accent: '#00ff00'}}})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+
+      // Only what changes the applied theme is a switch: editing, duplicating or
+      // picking the applied one, adding a copy of it, or removing another theme
+      // leaves the Studio looking the same
+      actor.send({type: 'theme.edit', slug: 'custom-1'})
+      actor.send({type: 'theme.pick', slug: 'custom-1'})
+      actor.send({type: 'theme.duplicate', slug: 'custom-1'})
+      actor.send({type: 'theme.add'})
+      actor.send({type: 'theme.remove', slug: 'verdant'})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+
+      actor.send({type: 'theme.add', options: {dark: {accent: '#0000ff'}}})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(true)
+      actor.send({type: 'layout.transitioned'})
+
+      // Without word from the layout, the switch is over after the motion's duration
+      const applied = actor.getSnapshot().context.active!
+
+      actor.send({type: 'theme.remove', slug: applied})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(true)
+      settle()
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+    })
+
     it('applies a theme, and picking the configured theme applies nothing', () => {
       const actor = start()
 
@@ -169,6 +248,8 @@ describe('themerMachine', () => {
         darkMuted: null,
       }
 
+      const revoke = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => undefined)
+
       actor.send({type: 'theme.add', title: 'sunset', palette, imageUrl: 'blob:one'})
 
       const slug = actor.getSnapshot().context.custom[0].slug
@@ -176,8 +257,10 @@ describe('themerMachine', () => {
       expect(actor.getSnapshot().context.images).toEqual({[slug]: 'blob:one'})
       expect(selectStoredState(actor.getSnapshot())).not.toHaveProperty('images')
 
+      // A new image releases the one it replaces
       actor.send({type: 'theme.update', slug, palette, imageUrl: 'blob:two'})
       expect(actor.getSnapshot().context.images).toEqual({[slug]: 'blob:two'})
+      expect(revoke.mock.calls).toEqual([['blob:one']])
 
       actor.send({type: 'theme.update', slug: 'verdant', imageUrl: 'blob:nope'})
       expect(actor.getSnapshot().context.images).toEqual({[slug]: 'blob:two'})
@@ -191,6 +274,7 @@ describe('themerMachine', () => {
       actor.send({type: 'theme.remove', slug})
       actor.send({type: 'theme.delete', slug})
       expect(actor.getSnapshot().context.images).toEqual({})
+      expect(revoke.mock.calls).toEqual([['blob:one'], ['blob:two']])
     })
 
     it('duplicates listed and removed themes into the editor', () => {
@@ -289,6 +373,63 @@ describe('themerMachine', () => {
 
       expect(actor.getSnapshot().matches({flow: 'edit'})).toBe(true)
       expect(actor.getSnapshot().context.active).toBe('custom-1')
+    })
+  })
+
+  describe('persisting', () => {
+    afterEach(() => {
+      vi.unstubAllGlobals()
+    })
+
+    it('writes the stored state on every change to it, and nothing else', () => {
+      const written: string[] = []
+
+      vi.stubGlobal('localStorage', {
+        getItem: () => null,
+        setItem: (_key: string, value: string) => void written.push(value),
+        removeItem: () => undefined,
+      })
+
+      const actor = startWithCustom()
+
+      // Once as it starts, which completes the migration of an earlier version's storage
+      expect(written).toHaveLength(1)
+      expect(JSON.parse(written[0])).toEqual(selectStoredState(actor.getSnapshot()))
+
+      actor.send({type: 'sidebar.toggle'})
+      actor.send({type: 'preview.toggle'})
+      expect(written).toHaveLength(1)
+
+      actor.send({type: 'theme.pick', slug: 'custom-1'})
+      expect(written).toHaveLength(2)
+      expect(JSON.parse(written[1])).toEqual(selectStoredState(actor.getSnapshot()))
+
+      actor.send({type: 'theme.reorder', order: ['custom-1', CONFIG_SLUG]})
+      actor.send({type: 'theme.remove', slug: 'custom-1'})
+      expect(written).toHaveLength(4)
+      expect(JSON.parse(written[3])).toEqual(selectStoredState(actor.getSnapshot()))
+    })
+  })
+
+  describe('importing', () => {
+    it('adds and applies a shared theme without opening the editor', () => {
+      const actor = start()
+
+      actor.send({type: 'sidebar.toggle'})
+      actor.send({type: 'theme.import', title: 'Shared', options: {dark: {accent: '#ff0000'}}})
+
+      const snapshot = actor.getSnapshot()
+      const stored = selectStoredState(snapshot)
+
+      expect(snapshot.hasTag('panel')).toBe(true)
+      expect(snapshot.matches({flow: 'list'})).toBe(true)
+      expect(stored.custom).toHaveLength(1)
+      expect(stored.custom[0]).toMatchObject({
+        title: 'Shared',
+        options: {dark: {accent: '#ff0000'}},
+      })
+      expect(stored.active).toBe(stored.custom[0].slug)
+      expect(snapshot.context.editing).toBeNull()
     })
   })
 
