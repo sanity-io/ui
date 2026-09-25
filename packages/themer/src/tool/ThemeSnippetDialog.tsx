@@ -43,6 +43,7 @@ export function ThemeSnippetDialog(props: {onClose: () => void; theme: ThemerThe
           <Button
             gap={2}
             icon={ClipboardIcon}
+            mode="ghost"
             onClick={() => void handleCopy()}
             padding={2}
             text="Copy"

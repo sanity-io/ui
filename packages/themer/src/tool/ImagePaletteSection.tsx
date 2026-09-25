@@ -241,6 +241,7 @@ export function ImagePaletteSection(props: {
 
             <TooltipButton
               icon={SparklesIcon}
+              mode="ghost"
               onClick={onLucky}
               text="I'm feeling lucky"
               tooltip="Build the theme around a swatch that looks interesting"
@@ -255,6 +256,7 @@ export function ImagePaletteSection(props: {
             </Text>
             <ImageFileButton
               loading={busy}
+              mode="ghost"
               onFile={pickImage}
               text="Pick an image"
               tooltip="Take the colors from an image on your device"

@@ -31,12 +31,14 @@ export function RemovedThemes() {
             </Text>
             <Flex gap={2} justify="center">
               <Button
+                mode="ghost"
                 onClick={() => send({type: 'theme.restore', slug: theme.slug})}
                 padding={2}
                 text="Restore"
               />
               {theme.source === 'custom' && (
                 <Button
+                  mode="ghost"
                   onClick={() => send({type: 'theme.delete', slug: theme.slug})}
                   padding={2}
                   text="Delete"
