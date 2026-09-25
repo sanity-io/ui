@@ -2,6 +2,7 @@ import {Card, Flex, ThemeProvider, useMediaIndex} from '@sanity/ui'
 import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
 import {
+  Activity,
   addTransitionType,
   startTransition,
   useEffect,
@@ -9,10 +10,8 @@ import {
   useRef,
   useState,
   ViewTransition,
-  type ViewTransitionClass,
 } from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
-import {createGlobalStyle} from 'styled-components'
 
 import {buildTheme} from '../theme/buildTheme'
 import {BuildThemeOptions} from '../theme/options'
@@ -21,6 +20,16 @@ import {selectStoredState, ThemerInput, themerMachine, ThemerSnapshot} from './m
 import {ResizableSidebar} from './ResizableSidebar'
 import {readStoredState, writeStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
+import {useStudioNavbarHeight} from './useStudioNavbarHeight'
+
+import {
+  layout,
+  PANEL_TRANSITION,
+  panelTransitionClasses,
+  SPLIT_TRANSITION,
+  splitTransitionClasses,
+  studioScheme,
+} from './ThemerLayout.css'
 
 /**
  * Below this media index the Studio collapses its navbar into a drawer, and
@@ -30,114 +39,18 @@ import {resolveThemes, ThemerState} from './themes'
 const MOBILE_MEDIA_INDEX = 1
 
 /**
- * The transition type of toggling the split preview. The Studio updates in
- * transitions of its own all the time; only this one animates its layout.
+ * How long, at most, the Studio keeps its `update` class after the panel or
+ * the split toggles — normally it drops it the moment its transition starts,
+ * this covers a toggle that does not move it (the overlay on small screens).
+ * The Studio updates in transitions of its own all the time, and none of
+ * those should run a view transition over it — only these toggles do.
  */
-const SPLIT_TRANSITION = 'themer-split'
-
-/** The Studio the user was looking at cross-fades between its two widths */
-const resizeClass: ViewTransitionClass = {
-  [SPLIT_TRANSITION]: 'themer-split-resize',
-  default: 'none',
-}
-
-/**
- * How the split preview animates, through React's view transitions: the split
- * copy slides in from off screen — a transform, nothing fades — and out the
- * same way; the Studio the user was looking at cross-fades between its two
- * widths, its old and new snapshots stretched to the group's box so it keeps
- * its height. Everything shares one duration and easing, so the edge the copy
- * slides in on and the edge the Studio gives way with stay together. The
- * sidebar, a group of its own (`ResizableSidebar` names it), does not animate
- * at all: its new snapshot simply shows, stacked above the Studio copies
- * where it covers the Studio — groups of elements that only exist in the new
- * state (the arriving copy) would otherwise be stacked last, over it.
- */
-const SplitTransitionStyle = createGlobalStyle`
-  ::view-transition-group(themer-sidebar) {
-    z-index: 1;
-  }
-
-  ::view-transition-group(themer-sidebar),
-  ::view-transition-image-pair(themer-sidebar),
-  ::view-transition-old(themer-sidebar),
-  ::view-transition-new(themer-sidebar) {
-    animation: none;
-  }
-
-  ::view-transition-group(.themer-split-resize),
-  ::view-transition-old(.themer-split-resize),
-  ::view-transition-new(.themer-split-resize),
-  ::view-transition-new(.themer-split-slide-in),
-  ::view-transition-old(.themer-split-slide-out),
-  ::view-transition-new(.themer-split-drop-in),
-  ::view-transition-old(.themer-split-drop-out) {
-    animation-duration: 320ms;
-    animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    ::view-transition-group(.themer-split-resize),
-    ::view-transition-old(.themer-split-resize),
-    ::view-transition-new(.themer-split-resize),
-    ::view-transition-new(.themer-split-slide-in),
-    ::view-transition-old(.themer-split-slide-out),
-    ::view-transition-new(.themer-split-drop-in),
-    ::view-transition-old(.themer-split-drop-out) {
-      animation: none;
-    }
-  }
-
-  ::view-transition-old(.themer-split-resize),
-  ::view-transition-new(.themer-split-resize) {
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: fill;
-  }
-
-  ::view-transition-new(.themer-split-slide-in) {
-    animation-name: themer-split-slide-in;
-  }
-
-  ::view-transition-old(.themer-split-slide-out) {
-    animation-name: themer-split-slide-out;
-  }
-
-  ::view-transition-new(.themer-split-drop-in) {
-    animation-name: themer-split-drop-in;
-  }
-
-  ::view-transition-old(.themer-split-drop-out) {
-    animation-name: themer-split-drop-out;
-  }
-
-  @keyframes themer-split-slide-in {
-    from {
-      transform: translateX(-100%);
-    }
-  }
-
-  @keyframes themer-split-slide-out {
-    to {
-      transform: translateX(-100%);
-    }
-  }
-
-  @keyframes themer-split-drop-in {
-    from {
-      transform: translateY(-100%);
-    }
-  }
-
-  @keyframes themer-split-drop-out {
-    to {
-      transform: translateY(-100%);
-    }
-  }
-`
+const RESIZE_WINDOW = 500
 
 function sameStoredState(a: ThemerState, b: ThemerState): boolean {
-  return a.active === b.active && a.custom === b.custom && a.removed === b.removed
+  return (
+    a.active === b.active && a.custom === b.custom && a.removed === b.removed && a.order === b.order
+  )
 }
 
 function selectView(snapshot: ThemerSnapshot): ThemerView {
@@ -175,7 +88,7 @@ function sameView(a: ThemerView, b: ThemerView): boolean {
  * (light/dark/system) and the picked theme like any other theme would. The
  * split preview adds a second copy in the opposite scheme on the far side —
  * or on top, on small screens — through React's view transitions (React
- * 19.3), styled by `SplitTransitionStyle`.
+ * 19.3), styled in `ThemerLayout.css.ts`.
  *
  * @internal
  */
@@ -189,20 +102,40 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const split = snapshot.matches({preview: 'split'})
   const {images} = snapshot.context
   const mobile = useMediaIndex() <= MOBILE_MEDIA_INDEX
+  const studioRef = useRef<HTMLDivElement | null>(null)
+  const navbarHeight = useStudioNavbarHeight(studioRef)
 
   // The machine publishes its state synchronously, which React does not
-  // animate: the split copy mounts from state of its own, set in a transition
-  // of the split's type, which is what lets the view transition run — after
-  // the sidebar's own changes (the toggle's pressed state) have committed, so
-  // nothing in the sidebar changes while it does
-  const [shownSplit, setShownSplit] = useState(split)
+  // animate: the panel and the split copy show from state of their own, set
+  // in a transition typed after what changed, which is what lets the view
+  // transition run — after the sidebar's own changes (the toggle's pressed
+  // state) have committed, so nothing in the sidebar changes while it does.
+  // Closing the sidebar ends the split, so both leave in one transition.
+  const [shown, setShown] = useState({open, split})
+  // The Studio's `update` class goes by state rather than by the transition's
+  // types: a commit that also carries work for hidden `Activity` content (as
+  // after revealing the split copy) drops the types, and the Studio would
+  // snap to its new width instead of cross-fading. The class is only needed
+  // as the transition starts, and goes away as soon as it has
+  const [resizing, setResizing] = useState(false)
+  const stopResizing = () => setResizing(false)
   useEffect(() => {
-    if (shownSplit === split) return
+    if (shown.open === open && shown.split === split) return
     startTransition(() => {
-      addTransitionType(SPLIT_TRANSITION)
-      setShownSplit(split)
+      if (shown.open !== open) addTransitionType(PANEL_TRANSITION)
+      if (shown.split !== split) addTransitionType(SPLIT_TRANSITION)
+      setShown({open, split})
+      setResizing(true)
     })
-  }, [shownSplit, split])
+  }, [open, shown, split])
+
+  useEffect(() => {
+    if (!resizing) return undefined
+
+    const timer = setTimeout(() => setResizing(false), RESIZE_WINDOW)
+
+    return () => clearTimeout(timer)
+  }, [resizing, shown])
 
   useEffect(() => writeStoredState(stored), [stored])
 
@@ -264,50 +197,76 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   }, [scheme, theme])
 
   const context = useMemo<ThemerContextValue>(
-    () => ({baseOptions, themes, removed, active, images, view, open, split, mobile, send}),
-    [active, baseOptions, images, mobile, open, removed, send, split, themes, view],
+    () => ({
+      baseOptions,
+      themes,
+      removed,
+      active,
+      images,
+      view,
+      open,
+      split,
+      mobile,
+      navbarHeight,
+      send,
+    }),
+    [active, baseOptions, images, mobile, navbarHeight, open, removed, send, split, themes, view],
   )
 
   const studio = layoutProps.renderDefault(layoutProps)
 
   return (
     <ThemerContext.Provider value={context}>
-      <SplitTransitionStyle />
-      <Flex
-        direction={mobile ? 'column' : 'row'}
-        height="fill"
-        sizing="border"
-        style={{position: 'relative'}}
-      >
+      <Flex className={layout} direction={mobile ? 'column' : 'row'} height="fill" sizing="border">
         {/* The opposite scheme comes first — on the far side of the sidebar,
             or on top on small screens — so the Studio the user was looking at
-            stays where it is, mounted, in its own scheme */}
-        {shownSplit && (
-          <ViewTransition
-            key="opposite"
-            enter={mobile ? 'themer-split-drop-in' : 'themer-split-slide-in'}
-            exit={mobile ? 'themer-split-drop-out' : 'themer-split-slide-out'}
-            update="none"
-          >
-            <StudioPreview
-              borderBottom={mobile}
-              borderRight={!mobile}
-              scheme={oppositeScheme}
-              theme={theme}
+            stays where it is, mounted, in its own scheme. A whole second
+            Studio is too costly to keep around (its styled-components alone
+            insert CSS as they render), so it only exists while the sidebar is
+            open — hidden until the split shows, warmed up for the transition */}
+        {shown.open && (
+          <Activity mode={shown.split ? 'visible' : 'hidden'}>
+            <ViewTransition
+              key="opposite"
+              enter={mobile ? splitTransitionClasses.dropIn : splitTransitionClasses.slideIn}
+              exit={mobile ? splitTransitionClasses.dropOut : splitTransitionClasses.slideOut}
+              update="none"
             >
-              {studio}
-            </StudioPreview>
-          </ViewTransition>
+              <StudioPreview
+                borderBottom={mobile}
+                borderRight={!mobile}
+                scheme={oppositeScheme}
+                theme={theme}
+              >
+                {studio}
+              </StudioPreview>
+            </ViewTransition>
+          </Activity>
         )}
-        <ViewTransition key="primary" update={resizeClass}>
-          <StudioPreview theme={theme}>{studio}</StudioPreview>
+        <ViewTransition
+          key="primary"
+          onUpdate={stopResizing}
+          update={resizing ? splitTransitionClasses.resize : 'none'}
+        >
+          <StudioPreview ref={studioRef} theme={theme}>
+            {studio}
+          </StudioPreview>
         </ViewTransition>
 
-        {open && (
-          <ThemeProvider theme={theme ?? undefined}>
-            <ResizableSidebar overlay={mobile} />
-          </ThemeProvider>
-        )}
+        {/* The sidebar is small and cheap: it stays mounted, hidden while
+            closed, keeping its state and ready to show */}
+        <Activity mode={shown.open ? 'visible' : 'hidden'}>
+          <ViewTransition
+            key="panel"
+            enter={panelTransitionClasses.slideIn}
+            exit={panelTransitionClasses.slideOut}
+            update="none"
+          >
+            <ThemeProvider theme={theme ?? undefined}>
+              <ResizableSidebar overlay={mobile} />
+            </ThemeProvider>
+          </ViewTransition>
+        </Activity>
       </Flex>
     </ThemerContext.Provider>
   )
@@ -328,20 +287,22 @@ function StudioPreview(props: {
   borderBottom?: boolean
   borderRight?: boolean
   children: React.ReactNode
+  ref?: React.Ref<HTMLDivElement>
   scheme?: ThemeColorSchemeKey
   theme: RootTheme | null
 }) {
-  const {borderBottom, borderRight, children, scheme, theme} = props
+  const {borderBottom, borderRight, children, ref, scheme, theme} = props
 
   return (
     <ThemeProvider scheme={scheme} theme={theme ?? undefined}>
       <Card
         borderBottom={borderBottom}
         borderRight={borderRight}
+        className={scheme ? studioScheme[scheme] : undefined}
         flex={1}
         height="fill"
         overflow="hidden"
-        style={scheme ? {colorScheme: scheme} : undefined}
+        ref={ref}
       >
         {children}
       </Card>

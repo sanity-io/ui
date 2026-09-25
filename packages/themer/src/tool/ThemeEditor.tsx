@@ -4,7 +4,6 @@ import {Badge, Box, Button, Card, Flex, Stack, Text, TextInput} from '@sanity/ui
 import {type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useMemo} from 'react'
 import {useColorSchemeValue} from 'sanity'
-import {styled} from 'styled-components'
 
 import {buildPalette, GeneratedColorPalette} from '../theme/buildPalette'
 import {
@@ -26,6 +25,8 @@ import {ImagePaletteSection} from './ImagePaletteSection'
 import {ScrollArea, ScrollAreaBleed} from './ScrollArea'
 import {ThemeThumbnail} from './ThemeThumbnail'
 import {TooltipButton} from './TooltipButton'
+
+import {colorRowText, range, swatch} from './ThemeEditor.css'
 
 const SCHEME_TITLES: Record<ThemeColorSchemeKey, string> = {
   dark: 'Dark mode',
@@ -55,40 +56,6 @@ const SCHEME_OPTION_KEYS: Array<keyof SchemeThemeOptions> = [
  * its own border and padding, which then sits inside ours as a second border.
  * Stripping that chrome leaves the themed border as the only one.
  */
-const Swatch = styled.input`
-  box-sizing: border-box;
-  flex: none;
-  width: 33px;
-  height: 33px;
-  padding: 0;
-  border: 1px solid var(--card-border-color);
-  border-radius: 4px;
-  background: none;
-  cursor: pointer;
-
-  &::-webkit-color-swatch-wrapper {
-    padding: 0;
-  }
-
-  &::-webkit-color-swatch {
-    border: none;
-    border-radius: 3px;
-  }
-
-  &::-moz-color-swatch {
-    border: none;
-    border-radius: 3px;
-  }
-`
-
-/** A native range input, themed through `accent-color` */
-const Range = styled.input`
-  display: block;
-  width: 100%;
-  margin: 0;
-  accent-color: var(--card-focus-ring-color);
-`
-
 /**
  * The flow for editing one of the user's own themes: its title, a live
  * preview, and a card per color scheme with the accent/text/background
@@ -372,8 +339,9 @@ function SchemeCard(props: {
               />
             )}
           </Flex>
-          <Range
+          <input
             aria-label={`${name} contrast`}
+            className={range}
             max={100}
             min={15}
             onChange={(event) => onChange({contrast: Number(event.currentTarget.value)})}
@@ -409,13 +377,14 @@ function ColorRow(props: {
 
   return (
     <Flex align="center" gap={2}>
-      <Swatch
+      <input
         aria-label={label}
+        className={swatch}
         onChange={(event) => onChange(event.currentTarget.value)}
         type="color"
         value={value}
       />
-      <Stack flex={1} gap={2} style={{minWidth: 0}}>
+      <Stack className={colorRowText} flex={1} gap={2}>
         <Text size={1}>{title}</Text>
         <Text muted size={0} textOverflow="ellipsis">
           {value}

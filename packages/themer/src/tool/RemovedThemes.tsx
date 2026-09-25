@@ -5,6 +5,8 @@ import {ScrollArea} from './ScrollArea'
 import {displayTitle} from './themes'
 import {ThemeThumbnail} from './ThemeThumbnail'
 
+import {removedThumbnail} from './RemovedThemes.css'
+
 /**
  * The flow for restoring removed themes: the presets and custom themes the
  * user took out of the list, each with a button to put it back — and, for
@@ -21,7 +23,7 @@ export function RemovedThemes() {
       <Stack gap={5}>
         {removed.map((theme) => (
           <Stack gap={3} key={theme.slug}>
-            <Box style={{opacity: 0.6}}>
+            <Box className={removedThumbnail}>
               <ThemeThumbnail options={theme.options} />
             </Box>
             <Text align="center" size={1} textOverflow="ellipsis">

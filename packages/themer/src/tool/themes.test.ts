@@ -15,7 +15,7 @@ import {
 
 const verdant = presets.find((preset) => preset.slug === 'verdant')!
 const custom: CustomTheme = {slug: 'custom-1', title: 'Mine', options: {light: {accent: '#ff0000'}}}
-const stateWithCustom: ThemerState = {active: null, custom: [custom], removed: []}
+const stateWithCustom: ThemerState = {active: null, custom: [custom], removed: [], order: []}
 
 describe('resolveThemes', () => {
   it('lists the configured theme, the presets and the custom themes in that order', () => {
@@ -62,12 +62,41 @@ describe('resolveThemes', () => {
       active: 'verdant',
       custom: [custom],
       removed: ['verdant', 'custom-1'],
+      order: [],
     }
     const {themes, removed, active} = resolveThemes(state, {light: {accent: '#123456'}})
 
     expect(themes.some((theme) => theme.slug === 'verdant')).toBe(false)
     expect(removed.map((theme) => theme.slug)).toEqual(['verdant', 'custom-1'])
     expect(active.slug).toBe(CONFIG_SLUG)
+  })
+
+  it('arranges the themes in the stored order, the rest after them in default order', () => {
+    const {themes} = resolveThemes(
+      {...stateWithCustom, order: ['custom-1', 'dew', 'unknown', CONFIG_SLUG]},
+      {light: {accent: '#123456'}},
+    )
+    const slugs = themes.map((theme) => theme.slug)
+    const rest = presets.map((preset) => preset.slug).filter((slug) => slug !== 'dew')
+
+    expect(slugs).toEqual(['custom-1', 'dew', CONFIG_SLUG, ...rest])
+  })
+
+  it('keeps a removed theme in line for when it is restored', () => {
+    const state: ThemerState = {
+      ...stateWithCustom,
+      removed: ['dew'],
+      order: ['dew', 'custom-1', CONFIG_SLUG],
+    }
+    const {themes, removed} = resolveThemes(state, {light: {accent: '#123456'}})
+
+    expect(themes.slice(0, 2).map((theme) => theme.slug)).toEqual(['custom-1', CONFIG_SLUG])
+    expect(removed.map((theme) => theme.slug)).toEqual(['dew'])
+    expect(
+      resolveThemes({...state, removed: []}, {light: {accent: '#123456'}})
+        .themes.slice(0, 3)
+        .map((theme) => theme.slug),
+    ).toEqual(['dew', 'custom-1', CONFIG_SLUG])
   })
 
   it('applies the picked theme', () => {

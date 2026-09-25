@@ -1,10 +1,7 @@
 import {Box, useTheme_v2} from '@sanity/ui'
 import {createContext, useContext, useEffect, useMemo, useRef, useState} from 'react'
-import {styled} from 'styled-components'
 
-const Root = styled(Box)`
-  scrollbar-gutter: stable;
-`
+import {root} from './ScrollArea.css'
 
 /** How far the content of a scroll area sits from its edges, in pixels */
 interface ScrollAreaInset {
@@ -14,6 +11,15 @@ interface ScrollAreaInset {
 }
 
 const ScrollAreaInsetContext = createContext<ScrollAreaInset>({left: 0, right: 0, bottom: 0})
+
+/**
+ * The gutter the last scroll area measured. It is the same for every scroll
+ * area (the reserved gutter does not depend on the content), so the next one
+ * starts out with the right padding instead of shifting after its first
+ * measurement — which would also throw off anything scrolling into view as
+ * the content mounts.
+ */
+let lastGutter = 0
 
 /**
  * The scrolling body of a sidebar flow. It always reserves the scrollbar's
@@ -28,7 +34,7 @@ export function ScrollArea(props: {children: React.ReactNode; padding: number}) 
   const {children, padding} = props
   const {space} = useTheme_v2()
   const ref = useRef<HTMLDivElement | null>(null)
-  const [gutter, setGutter] = useState(0)
+  const [gutter, setGutter] = useState(() => lastGutter)
 
   useEffect(() => {
     const element = ref.current
@@ -36,7 +42,10 @@ export function ScrollArea(props: {children: React.ReactNode; padding: number}) 
     if (!element) return undefined
 
     // The reserved gutter is the part of the box the content cannot use
-    const measure = () => setGutter(element.offsetWidth - element.clientWidth)
+    const measure = () => {
+      lastGutter = element.offsetWidth - element.clientWidth
+      setGutter(lastGutter)
+    }
 
     measure()
 
@@ -57,9 +66,16 @@ export function ScrollArea(props: {children: React.ReactNode; padding: number}) 
   )
 
   return (
-    <Root flex={1} overflow="auto" padding={padding} ref={ref} style={{paddingRight: inset.right}}>
+    <Box
+      className={root}
+      flex={1}
+      overflow="auto"
+      padding={padding}
+      ref={ref}
+      style={{paddingRight: inset.right}}
+    >
       <ScrollAreaInsetContext.Provider value={inset}>{children}</ScrollAreaInsetContext.Provider>
-    </Root>
+    </Box>
   )
 }
 

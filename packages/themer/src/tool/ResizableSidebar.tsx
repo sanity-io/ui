@@ -1,18 +1,10 @@
 import {Box, Card, Layer} from '@sanity/ui'
 import {useCallback, useEffect, useRef, useState} from 'react'
-import {styled} from 'styled-components'
 
+import {MAXIMUM_WIDTH, MINIMUM_WIDTH} from './sidebarWidth'
 import {ThemerSidebar} from './ThemerSidebar'
 
-/**
- * The narrowest the sidebar goes — and its default: narrow enough to leave the
- * studio preview as much room as possible, while the themes stack in a single
- * column of preview cards and the editor fits a swatch next to its label.
- */
-const MINIMUM_WIDTH = 200
-
-/** Twice the default is as wide as the sidebar goes */
-const MAXIMUM_WIDTH = MINIMUM_WIDTH * 2
+import {content, frame, resizeHandle, sidebar} from './ResizableSidebar.css'
 
 /** How far one arrow key press resizes the sidebar */
 const KEYBOARD_STEP = 16
@@ -44,68 +36,6 @@ function writeStoredWidth(width: number): void {
     // Storage can be unavailable (e.g. private browsing) — the width just won't persist
   }
 }
-
-const Sidebar = styled(Layer)`
-  flex: none;
-
-  /* A view transition group of its own, which the split preview's transition
-     (see SplitTransitionStyle in ThemerLayout) leaves alone: it never
-     animates, and the Studio copies animating underneath never paint over it */
-  view-transition-name: themer-sidebar;
-
-  /* On small screens the sidebar covers the Studio instead of standing next to it */
-  &[data-overlay='true'] {
-    position: absolute;
-    inset: 0;
-    width: auto;
-  }
-`
-
-/**
- * Draws the sidebar's border and gives the resize handle its card colors. It
- * does not clip, so the handle can straddle the border — the content is
- * clipped one level down instead.
- */
-const Frame = styled(Card)`
-  position: relative;
-`
-
-/**
- * The grab area along the sidebar's left edge. It straddles the border so it
- * is easy to hit, and highlights while hovered, focused or dragged.
- */
-const ResizeHandle = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -3px;
-  z-index: 1;
-  width: 7px;
-  cursor: col-resize;
-  touch-action: none;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 2px;
-    width: 3px;
-    background: var(--card-focus-ring-color);
-    opacity: 0;
-    transition: opacity 100ms;
-  }
-
-  &:hover::after,
-  &:focus-visible::after,
-  &[data-dragging='true']::after {
-    opacity: 1;
-  }
-
-  &:focus {
-    outline: none;
-  }
-`
 
 /**
  * The themer sidebar, in a layer along the right edge of the Studio. Its left
@@ -165,11 +95,17 @@ export function ResizableSidebar(props: {overlay: boolean}) {
   }, [])
 
   return (
-    <Sidebar data-overlay={overlay} style={overlay ? undefined : {width}} zOffset={100}>
-      <Frame borderLeft={!overlay} height="fill">
+    <Layer
+      className={sidebar}
+      data-overlay={overlay}
+      style={overlay ? undefined : {width}}
+      zOffset={100}
+    >
+      <Card borderLeft={!overlay} className={frame} height="fill">
         {!overlay && (
-          <ResizeHandle
+          <div
             aria-label="Resize the themer"
+            className={resizeHandle}
             aria-orientation="vertical"
             aria-valuemax={MAXIMUM_WIDTH}
             aria-valuemin={MINIMUM_WIDTH}
@@ -186,10 +122,10 @@ export function ResizableSidebar(props: {overlay: boolean}) {
             tabIndex={0}
           />
         )}
-        <Box height="fill" overflow="hidden">
+        <Box className={content} height="fill" overflow="hidden">
           <ThemerSidebar />
         </Box>
-      </Frame>
-    </Sidebar>
+      </Card>
+    </Layer>
   )
 }

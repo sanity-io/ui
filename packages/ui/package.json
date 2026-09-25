@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui",
-  "version": "4.2.4",
+  "version": "4.2.6",
   "keywords": [
     "components",
     "design-system",
@@ -81,10 +81,10 @@
     "@floating-ui/react-dom": "^2.1.9",
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
-    "@vanilla-extract/dynamic": "^2.1.5",
+    "@vanilla-extract/dynamic": "catalog:",
     "clsx": "^2.1.1",
     "csstype": "^3.2.3",
-    "motion": "^13.4.2",
+    "motion": "catalog:",
     "react-is": "catalog:",
     "react-refractor": "catalog:",
     "use-effect-event": "^2.0.4"
@@ -100,7 +100,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/react-is": "catalog:",
-    "@vanilla-extract/css": "^1.21.2",
+    "@vanilla-extract/css": "catalog:",
     "@vitest/coverage-v8": "^5.0.1",
     "jsdom": "^30.1.1",
     "oxc-transform-react": "catalog:",

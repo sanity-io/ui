@@ -1,7 +1,7 @@
 import {AddIcon} from '@sanity/icons/Add'
 import {RestoreIcon} from '@sanity/icons/Restore'
 import {Box, Button, Card, Flex, Stack} from '@sanity/ui'
-import {styled} from 'styled-components'
+import {MotionConfig, Reorder} from 'motion/react'
 
 import {useThemer} from './context'
 import {ImageFileButton} from './ImageFileButton'
@@ -11,20 +11,16 @@ import {ThemeCard} from './ThemeCard'
 import {TooltipButton} from './TooltipButton'
 import {useImagePalette} from './useImagePalette'
 
+import {cardGrid} from './ThemeList.css'
+
 /**
  * One column at the sidebar's default width; wider sidebars — and the
  * overlay on small screens — fit more cards per row
  */
-const CardGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 16px;
-`
-
 /**
- * The flow for picking a theme: one column of theme cards — the configured
- * theme, the presets and the user's own themes — with the entry points to
- * the add and restore flows below.
+ * The flow for picking a theme: a grid of theme cards — the configured theme,
+ * the presets and the user's own themes — that drag into the order the user
+ * wants, with the entry points to the add and restore flows below.
  *
  * @internal
  */
@@ -44,11 +40,20 @@ export function ThemeList() {
     <>
       <ScrollArea padding={3}>
         <Stack gap={4}>
-          <CardGrid>
-            {themes.map((theme) => (
-              <ThemeCard active={theme.slug === active.slug} key={theme.slug} theme={theme} />
-            ))}
-          </CardGrid>
+          {/* The group tells a column from a grid by measuring the cards, and
+              lets go of the layout animations for users who prefer reduced motion */}
+          <MotionConfig reducedMotion="user">
+            <Reorder.Group
+              as="div"
+              className={cardGrid}
+              onReorder={(order: string[]) => send({type: 'theme.reorder', order})}
+              values={themes.map((theme) => theme.slug)}
+            >
+              {themes.map((theme) => (
+                <ThemeCard active={theme.slug === active.slug} key={theme.slug} theme={theme} />
+              ))}
+            </Reorder.Group>
+          </MotionConfig>
           {/* Trails the list rather than sitting in the footer, so the footer
               does not shift when the first theme gets removed */}
           {removed.length > 0 && (

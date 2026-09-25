@@ -3,7 +3,7 @@ import {createActor} from 'xstate'
 
 import {presets} from '../theme/presets'
 import {selectStoredState, ThemerInput, themerMachine} from './machine'
-import {CONFIG_SLUG, CustomTheme, initialThemerState, ThemerState} from './themes'
+import {CONFIG_SLUG, CustomTheme, initialThemerState, resolveThemes, ThemerState} from './themes'
 
 const baseOptions = {light: {accent: '#123456'}}
 const custom: CustomTheme = {slug: 'custom-1', title: 'Mine', options: {light: {accent: '#ff0000'}}}
@@ -14,12 +14,17 @@ function start(stored: ThemerState = initialThemerState, input: Partial<ThemerIn
 }
 
 function startWithCustom(overrides: Partial<ThemerState> = {}) {
-  return start({active: null, custom: [custom], removed: [], ...overrides})
+  return start({active: null, custom: [custom], removed: [], order: [], ...overrides})
 }
 
 describe('themerMachine', () => {
   it('starts closed in the list with a single preview, from the stored state', () => {
-    const stored: ThemerState = {active: 'verdant', custom: [custom], removed: ['dew']}
+    const stored: ThemerState = {
+      active: 'verdant',
+      custom: [custom],
+      removed: ['dew'],
+      order: ['dew', 'verdant'],
+    }
     const actor = start(stored)
     const snapshot = actor.getSnapshot()
 
@@ -63,16 +68,24 @@ describe('themerMachine', () => {
     )
   })
 
-  it('keeps the split preview while the sidebar is closed', () => {
+  it('ends the split preview when the sidebar closes, from its header or the navbar', () => {
     const actor = start()
 
     actor.send({type: 'sidebar.toggle'})
     actor.send({type: 'preview.toggle'})
     actor.send({type: 'sidebar.close'})
-    expect(actor.getSnapshot().matches({sidebar: 'closed', preview: 'split'})).toBe(true)
+    expect(actor.getSnapshot().matches({sidebar: 'closed', preview: 'single'})).toBe(true)
 
     actor.send({type: 'sidebar.toggle'})
-    expect(actor.getSnapshot().matches({sidebar: 'open', preview: 'split'})).toBe(true)
+    expect(actor.getSnapshot().matches({sidebar: 'open', preview: 'single'})).toBe(true)
+
+    actor.send({type: 'preview.toggle'})
+    actor.send({type: 'sidebar.toggle'})
+    expect(actor.getSnapshot().matches({sidebar: 'closed', preview: 'single'})).toBe(true)
+
+    // Opening the sidebar is not a way to split
+    actor.send({type: 'sidebar.toggle'})
+    expect(actor.getSnapshot().matches({sidebar: 'open', preview: 'single'})).toBe(true)
   })
 
   describe('picking', () => {
@@ -279,6 +292,38 @@ describe('themerMachine', () => {
     })
   })
 
+  describe('rearranging', () => {
+    it('stores the order the listed themes were dragged into', () => {
+      const actor = startWithCustom()
+      const slugs = () =>
+        resolveThemes(actor.getSnapshot().context, baseOptions).themes.map((theme) => theme.slug)
+      const [first, second, ...rest] = slugs()
+
+      actor.send({type: 'theme.reorder', order: ['custom-1', second, first, ...rest.slice(0, -1)]})
+      expect(slugs()).toEqual(['custom-1', second, first, ...rest.slice(0, -1)])
+      expect(selectStoredState(actor.getSnapshot()).order).toEqual([
+        'custom-1',
+        second,
+        first,
+        ...rest.slice(0, -1),
+      ])
+    })
+
+    it('ignores slugs that are not listed, and keeps removed themes in line', () => {
+      const actor = startWithCustom({removed: ['dew'], order: ['dew', 'custom-1']})
+
+      actor.send({type: 'theme.reorder', order: ['verdant', 'unknown', 'dew', 'custom-1']})
+      expect(selectStoredState(actor.getSnapshot()).order).toEqual(['verdant', 'custom-1', 'dew'])
+
+      actor.send({type: 'theme.restore', slug: 'dew'})
+      expect(
+        resolveThemes(actor.getSnapshot().context, baseOptions)
+          .themes.slice(0, 3)
+          .map((theme) => theme.slug),
+      ).toEqual(['verdant', 'custom-1', 'dew'])
+    })
+  })
+
   describe('removing and restoring', () => {
     it('removes themes, falling back to the configured theme when the applied one goes', () => {
       const actor = startWithCustom({active: 'custom-1'})
@@ -295,6 +340,7 @@ describe('themerMachine', () => {
         active: null,
         custom: [custom],
         removed: ['verdant', 'custom-1'],
+        order: [],
       })
     })
 
