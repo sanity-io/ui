@@ -113,9 +113,6 @@ globalStyle(`::view-transition-old(.${panelTransitionClasses.slideOut})`, {
  * or cross-fades to another theme, React names it instead, and the rules
  * above apply.
  *
- * Someone who prefers reduced motion gets none of these transitions: the
- * layout does not start them (see `ThemerLayout`), so there is nothing here to
- * switch off.
  */
 globalStyle(`::view-transition-group(${sidebarTransition})`, {zIndex: 1})
 globalStyle(
@@ -126,4 +123,32 @@ globalStyle(
     `::view-transition-new(${sidebarTransition})`,
   ].join(', '),
   {animation: 'none'},
+)
+
+/**
+ * Someone who prefers reduced motion sees no motion here: the layout does not
+ * start these transitions in the first place (see `ThemerLayout`), and should
+ * one run anyway — the preference changed after the layout read it, the
+ * Studio ran one of its own over these groups — none of their animations does
+ * anything: the new state simply shows.
+ */
+globalStyle(
+  ['group', 'image-pair', 'old', 'new']
+    .flatMap((part) => {
+      const groups = [
+        ...Object.values(splitTransitionClasses).map((className) => `.${className}`),
+        ...Object.values(panelTransitionClasses).map((className) => `.${className}`),
+        sidebarTransition,
+      ]
+
+      return groups.map((group) => `::view-transition-${part}(${group})`)
+    })
+    .join(', '),
+  {
+    '@media': {
+      '(prefers-reduced-motion: reduce)': {
+        animation: 'none',
+      },
+    },
+  },
 )

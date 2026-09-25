@@ -1,7 +1,6 @@
 import {Card, Flex, ThemeProvider, useMediaIndex} from '@sanity/ui'
 import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
-import {useReducedMotion} from 'motion/react'
 import {
   Activity,
   useDeferredValue,
@@ -20,6 +19,7 @@ import {selectStoredState, ThemerInput, themerMachine, ThemerSnapshot} from './m
 import {ResizableSidebar} from './ResizableSidebar'
 import {readStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
+import {usePrefersReducedMotion} from './usePrefersReducedMotion'
 import {useStudioNavbarHeight} from './useStudioNavbarHeight'
 
 import {
@@ -107,8 +107,10 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // have committed, so nothing in the sidebar changes while it runs. Someone
   // who prefers reduced motion gets no view transition at all: nothing is
   // deferred, so there is no transition render for React to animate, no
-  // boundary has a class, and what shows changes along with the machine
-  const reduceMotion = useReducedMotion() ?? false
+  // boundary has a class, and what shows changes along with the machine —
+  // and should one run anyway, the stylesheet gives its animations nothing
+  // to do
+  const reduceMotion = usePrefersReducedMotion()
   const deferredOpen = useDeferredValue(reduceMotion ? null : open)
   const deferredSplit = useDeferredValue(reduceMotion ? null : split)
   const shownOpen = deferredOpen ?? open
