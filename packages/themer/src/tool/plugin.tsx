@@ -38,8 +38,9 @@ export interface ThemerToolOptions {
  * Studio while you browse around; your own themes can be edited with
  * accent/text/background pickers and a contrast slider per scheme, added,
  * duplicated, given the colors of an image (its palette is read on device),
- * removed and restored, and a dialog shows the `buildTheme` snippet that
- * makes the applied theme permanent. Toggle between light and dark mode with
+ * imported from a pasted themer.sanity.build URL, removed and restored, and a
+ * dialog shows the `buildTheme` snippet that makes the applied theme
+ * permanent. Toggle between light and dark mode with
  * the regular appearance menu — the preview follows it — or split the
  * preview to see the whole Studio in light and dark side by side.
  *

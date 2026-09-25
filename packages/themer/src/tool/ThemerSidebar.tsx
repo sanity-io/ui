@@ -11,6 +11,7 @@ import {ThemeEditor} from './ThemeEditor'
 import {ThemeList} from './ThemeList'
 import {ThemeSnippetDialog} from './ThemeSnippetDialog'
 import {TooltipButton} from './TooltipButton'
+import {useLegacyThemePaste} from './useLegacyThemePaste'
 
 import {title} from './ThemerSidebar.css'
 
@@ -24,7 +25,9 @@ const VIEW_TITLES = {
  * The themer sidebar: a header that navigates between the flows and toggles
  * the split preview, the flow itself — picking a theme, editing one, or
  * restoring removed ones — and the dialog with the `buildTheme` snippet of
- * the applied theme.
+ * the applied theme. While it shows, pasting a themer.sanity.build URL
+ * imports its theme — the sidebar is kept mounted but hidden while closed,
+ * which lets go of the paste listener along with its other effects.
  *
  * @internal
  */
@@ -32,6 +35,8 @@ export function ThemerSidebar() {
   const {active, split, view, navbarHeight, send} = useThemer()
   const [snippetOpen, setSnippetOpen] = useState(false)
   const inList = view.name === 'list'
+
+  useLegacyThemePaste()
 
   return (
     <Card height="fill">
