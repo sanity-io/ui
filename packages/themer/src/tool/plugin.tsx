@@ -40,9 +40,9 @@ export interface ThemerToolOptions {
  * duplicated, given the colors of an image (its palette is read on device),
  * imported from a pasted themer.sanity.build URL, removed and restored, and a
  * dialog shows the `buildTheme` snippet that makes the applied theme
- * permanent. Toggle between light and dark mode with
- * the regular appearance menu — the preview follows it — or split the
- * preview to see the whole Studio in light and dark side by side.
+ * permanent. Toggle between light and dark mode with the regular appearance
+ * menu — the preview follows it — or split the preview to see the whole
+ * Studio in light and dark side by side.
  *
  * ```ts
  * import {themerTool} from '@sanity/themer/tool'

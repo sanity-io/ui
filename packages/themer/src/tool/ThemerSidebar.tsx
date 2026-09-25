@@ -26,8 +26,8 @@ const VIEW_TITLES = {
  * the split preview, the flow itself — picking a theme, editing one, or
  * restoring removed ones — and the dialog with the `buildTheme` snippet of
  * the applied theme. While it shows, pasting a themer.sanity.build URL
- * imports its theme — the sidebar is kept mounted but hidden while closed,
- * which lets go of the paste listener along with its other effects.
+ * imports its theme: a closed sidebar is hidden rather than unmounted, which
+ * tears down the paste listener along with its other effects.
  *
  * @internal
  */
