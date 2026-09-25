@@ -48,6 +48,11 @@ function writeStoredWidth(width: number): void {
 const Sidebar = styled(Layer)`
   flex: none;
 
+  /* A view transition group of its own, which the split preview's transition
+     (see SplitTransitionStyle in ThemerLayout) leaves alone: it never
+     animates, and the Studio copies animating underneath never paint over it */
+  view-transition-name: themer-sidebar;
+
   /* On small screens the sidebar covers the Studio instead of standing next to it */
   &[data-overlay='true'] {
     position: absolute;

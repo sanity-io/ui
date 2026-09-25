@@ -46,11 +46,25 @@ const resizeClass: ViewTransitionClass = {
  * copy slides in from off screen — a transform, nothing fades — and out the
  * same way; the Studio the user was looking at cross-fades between its two
  * widths, its old and new snapshots stretched to the group's box so it keeps
- * its height; the sidebar does not animate at all. Everything shares one
- * duration and easing, so the edge the copy slides in on and the edge the
- * Studio gives way with stay together.
+ * its height. Everything shares one duration and easing, so the edge the copy
+ * slides in on and the edge the Studio gives way with stay together. The
+ * sidebar, a group of its own (`ResizableSidebar` names it), does not animate
+ * at all: its new snapshot simply shows, stacked above the Studio copies
+ * where it covers the Studio — groups of elements that only exist in the new
+ * state (the arriving copy) would otherwise be stacked last, over it.
  */
 const SplitTransitionStyle = createGlobalStyle`
+  ::view-transition-group(themer-sidebar) {
+    z-index: 1;
+  }
+
+  ::view-transition-group(themer-sidebar),
+  ::view-transition-image-pair(themer-sidebar),
+  ::view-transition-old(themer-sidebar),
+  ::view-transition-new(themer-sidebar) {
+    animation: none;
+  }
+
   ::view-transition-group(.themer-split-resize),
   ::view-transition-old(.themer-split-resize),
   ::view-transition-new(.themer-split-resize),
@@ -277,11 +291,9 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
         </ViewTransition>
 
         {open && (
-          <ViewTransition default="none">
-            <ThemeProvider theme={theme ?? undefined}>
-              <ResizableSidebar overlay={mobile} />
-            </ThemeProvider>
-          </ViewTransition>
+          <ThemeProvider theme={theme ?? undefined}>
+            <ResizableSidebar overlay={mobile} />
+          </ThemeProvider>
         )}
       </Flex>
     </ThemerContext.Provider>
