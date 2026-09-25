@@ -76,6 +76,18 @@ const SplitTransitionStyle = createGlobalStyle`
     animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(.themer-split-resize),
+    ::view-transition-old(.themer-split-resize),
+    ::view-transition-new(.themer-split-resize),
+    ::view-transition-new(.themer-split-slide-in),
+    ::view-transition-old(.themer-split-slide-out),
+    ::view-transition-new(.themer-split-drop-in),
+    ::view-transition-old(.themer-split-drop-out) {
+      animation: none;
+    }
+  }
+
   ::view-transition-old(.themer-split-resize),
   ::view-transition-new(.themer-split-resize) {
     inline-size: 100%;
@@ -272,6 +284,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
             stays where it is, mounted, in its own scheme */}
         {shownSplit && (
           <ViewTransition
+            key="opposite"
             enter={mobile ? 'themer-split-drop-in' : 'themer-split-slide-in'}
             exit={mobile ? 'themer-split-drop-out' : 'themer-split-slide-out'}
             update="none"
@@ -286,7 +299,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
             </StudioPreview>
           </ViewTransition>
         )}
-        <ViewTransition update={resizeClass}>
+        <ViewTransition key="primary" update={resizeClass}>
           <StudioPreview theme={theme}>{studio}</StudioPreview>
         </ViewTransition>
 
