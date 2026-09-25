@@ -166,9 +166,14 @@ export const themerMachine = setup({
       ),
     hasRemovedThemes: ({context}) => themesOf(context).removed.length > 0,
     sidebarShown: or([stateIn({sidebar: 'opening'}), stateIn({sidebar: 'open'})]),
-    // Picking the applied theme again changes nothing to cross-fade to
+    // Only another theme than the applied one changes anything to cross-fade to
     isAnotherTheme: ({context}, params: {slug: string}) =>
       params.slug !== (context.active ?? CONFIG_SLUG),
+    // Removing or deleting the applied theme is what changes the applied theme
+    isAppliedTheme: ({context}, params: {slug: string}) => params.slug === context.active,
+    // A theme added from given options (an image's) looks different from the applied one
+    hasOptions: (_, params: {options: BuildThemeOptions | undefined}) =>
+      params.options !== undefined,
   },
   actions: {
     // The state that survives sessions is written as the machine starts — that
@@ -372,18 +377,39 @@ export const themerMachine = setup({
     theme: {
       initial: 'applied',
       states: {
+        // Only events that change what is applied count: adding a copy of the
+        // applied theme, editing or duplicating it, picking it again, or
+        // removing another theme leaves the Studio looking the same — with
+        // nothing to cross-fade, nothing would report the switch over, and the
+        // first edit that followed would cross-fade instead of following the
+        // pointer
         applied: {
           on: {
             'theme.pick': {
               guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
               target: 'switching',
             },
-            'theme.add': 'switching',
-            'theme.duplicate': 'switching',
-            'theme.edit': 'switching',
+            'theme.edit': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
+            'theme.duplicate': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
+            'theme.remove': {
+              guard: {type: 'isAppliedTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
+            'theme.delete': {
+              guard: {type: 'isAppliedTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
+            'theme.add': {
+              guard: {type: 'hasOptions', params: ({event}) => ({options: event.options})},
+              target: 'switching',
+            },
             'theme.import': 'switching',
-            'theme.remove': 'switching',
-            'theme.delete': 'switching',
           },
         },
         switching: {
@@ -397,12 +423,32 @@ export const themerMachine = setup({
               target: 'switching',
               reenter: true,
             },
-            'theme.add': {target: 'switching', reenter: true},
-            'theme.duplicate': {target: 'switching', reenter: true},
-            'theme.edit': {target: 'switching', reenter: true},
+            'theme.edit': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.duplicate': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.remove': {
+              guard: {type: 'isAppliedTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.delete': {
+              guard: {type: 'isAppliedTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.add': {
+              guard: {type: 'hasOptions', params: ({event}) => ({options: event.options})},
+              target: 'switching',
+              reenter: true,
+            },
             'theme.import': {target: 'switching', reenter: true},
-            'theme.remove': {target: 'switching', reenter: true},
-            'theme.delete': {target: 'switching', reenter: true},
           },
         },
       },

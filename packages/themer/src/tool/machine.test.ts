@@ -145,8 +145,24 @@ describe('themerMachine', () => {
       actor.send({type: 'theme.update', slug: 'custom-1', options: {light: {accent: '#00ff00'}}})
       expect(actor.getSnapshot().hasTag('switching')).toBe(false)
 
+      // Only what changes the applied theme is a switch: editing, duplicating or
+      // picking the applied one, adding a copy of it, or removing another theme
+      // leaves the Studio looking the same
+      actor.send({type: 'theme.edit', slug: 'custom-1'})
+      actor.send({type: 'theme.pick', slug: 'custom-1'})
+      actor.send({type: 'theme.duplicate', slug: 'custom-1'})
+      actor.send({type: 'theme.add'})
+      actor.send({type: 'theme.remove', slug: 'verdant'})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+
+      actor.send({type: 'theme.add', options: {dark: {accent: '#0000ff'}}})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(true)
+      actor.send({type: 'layout.transitioned'})
+
       // Without word from the layout, the switch is over after the motion's duration
-      actor.send({type: 'theme.remove', slug: 'custom-1'})
+      const applied = actor.getSnapshot().context.active!
+
+      actor.send({type: 'theme.remove', slug: applied})
       expect(actor.getSnapshot().hasTag('switching')).toBe(true)
       settle()
       expect(actor.getSnapshot().hasTag('switching')).toBe(false)
