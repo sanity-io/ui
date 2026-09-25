@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.2.7
+
+### Patch Changes
+
+- [#3000](https://github.com/sanity-io/ui/pull/3000) [`870c7b4`](https://github.com/sanity-io/ui/commit/870c7b4ac632d7ba4194b825d494faed6f0970a6) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency vite to ^8.3.1
+
 ## 4.2.6
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @sanity/themer
 
+## 0.7.0
+
+### Minor Changes
+
+- [#2995](https://github.com/sanity-io/ui/pull/2995) [`50ba94f`](https://github.com/sanity-io/ui/commit/50ba94f62a4d760ac59d1d51bd4fdba002234978) Thanks [@stipsan](https://github.com/stipsan)! - Themes can be shared as codes: "Copy to share" in a theme's menu puts a short code on the clipboard — the theme's title and the colors and contrasts of both schemes packed into bytes and base64url'd, one word of about 30 bytes plus the title — and the paste button in the list adds the theme from a code, straight from the clipboard where the browser allows and through a dialog otherwise; a code pasted anywhere in the Studio while the list shows is added too. Imported themes are applied right away without opening the editor. Applying another theme cross-fades the Studio and the sidebar to it, and with `prefers-reduced-motion: reduce` the tool runs no view transitions at all. The sidebar's buttons are sized like the Studio's own.
+
+### Patch Changes
+
+- Updated dependencies [[`870c7b4`](https://github.com/sanity-io/ui/commit/870c7b4ac632d7ba4194b825d494faed6f0970a6)]:
+  - @sanity/ui@4.2.7
+
 ## 0.6.1
 
 ### Patch Changes
