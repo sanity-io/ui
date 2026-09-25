@@ -1,34 +1,41 @@
-import {globalStyle, keyframes, style, styleVariants} from '@vanilla-extract/css'
+import {
+  createViewTransition,
+  globalStyle,
+  keyframes,
+  style,
+  styleVariants,
+} from '@vanilla-extract/css'
 
-import {SIDEBAR_TRANSITION_NAME} from './ResizableSidebar.css'
+import {sidebarTransition} from './ResizableSidebar.css'
 
 /**
  * The transition types of toggling the split preview and of opening or
- * closing the panel. The Studio updates in transitions of its own all the
- * time; only these two animate its layout.
+ * closing the panel — scoped identifiers, like the classes below, so nothing
+ * else on the page can mean the same. The Studio updates in transitions of
+ * its own all the time; only these two animate its layout.
  */
-export const SPLIT_TRANSITION = 'themer-split'
-export const PANEL_TRANSITION = 'themer-panel'
+export const SPLIT_TRANSITION = createViewTransition('split')
+export const PANEL_TRANSITION = createViewTransition('panel')
 
 /**
- * The view transition classes of the split preview — the strings React puts
- * in `view-transition-class`, which the pseudo-element rules below select on
+ * The view transition classes of the split preview — what React puts in
+ * `view-transition-class`, which the pseudo-element rules below select on
  */
 export const splitTransitionClasses = {
   /** The Studio the user was looking at cross-fades between its two widths */
-  resize: 'themer-split-resize',
+  resize: createViewTransition('splitResize'),
   /** The split copy slides in from the side, or out to it */
-  slideIn: 'themer-split-slide-in',
-  slideOut: 'themer-split-slide-out',
+  slideIn: createViewTransition('splitSlideIn'),
+  slideOut: createViewTransition('splitSlideOut'),
   /** The split copy drops in from the top, or out to it, where the copies stack */
-  dropIn: 'themer-split-drop-in',
-  dropOut: 'themer-split-drop-out',
+  dropIn: createViewTransition('splitDropIn'),
+  dropOut: createViewTransition('splitDropOut'),
 }
 
 /** The view transition classes of the panel, which slides in from its edge and out to it */
 export const panelTransitionClasses = {
-  slideIn: 'themer-panel-slide-in',
-  slideOut: 'themer-panel-slide-out',
+  slideIn: createViewTransition('panelSlideIn'),
+  slideOut: createViewTransition('panelSlideOut'),
 }
 
 /** The layout's `Flex` positions the sidebar overlay on small screens */
@@ -109,13 +116,13 @@ globalStyle(`::view-transition-old(.${panelTransitionClasses.slideOut})`, {
  * otherwise be stacked last, over it). While the panel itself opens or closes,
  * React names it instead, and the rules above slide it.
  */
-globalStyle(`::view-transition-group(${SIDEBAR_TRANSITION_NAME})`, {zIndex: 1})
+globalStyle(`::view-transition-group(${sidebarTransition})`, {zIndex: 1})
 globalStyle(
   [
-    `::view-transition-group(${SIDEBAR_TRANSITION_NAME})`,
-    `::view-transition-image-pair(${SIDEBAR_TRANSITION_NAME})`,
-    `::view-transition-old(${SIDEBAR_TRANSITION_NAME})`,
-    `::view-transition-new(${SIDEBAR_TRANSITION_NAME})`,
+    `::view-transition-group(${sidebarTransition})`,
+    `::view-transition-image-pair(${sidebarTransition})`,
+    `::view-transition-old(${sidebarTransition})`,
+    `::view-transition-new(${sidebarTransition})`,
   ].join(', '),
   {animation: 'none'},
 )

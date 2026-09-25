@@ -2,6 +2,8 @@ import {style} from '@vanilla-extract/css'
 
 import {MAXIMUM_WIDTH, MINIMUM_WIDTH} from './sidebarWidth'
 
+import {sidebarContent} from './ResizableSidebar.css'
+
 const CARD_GAP = 16
 
 /**
@@ -20,10 +22,10 @@ export const cardGrid = style({
   'gridTemplateColumns': '1fr',
   'gap': CARD_GAP,
   '@container': {
-    [`(min-width: ${TWO_COLUMNS_FROM}px)`]: {
+    [`${sidebarContent} (min-width: ${TWO_COLUMNS_FROM}px)`]: {
       gridTemplateColumns: 'repeat(2, 1fr)',
     },
-    [`(min-width: ${THREE_COLUMNS_FROM}px)`]: {
+    [`${sidebarContent} (min-width: ${THREE_COLUMNS_FROM}px)`]: {
       gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },

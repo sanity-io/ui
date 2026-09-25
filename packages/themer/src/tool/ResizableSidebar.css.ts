@@ -1,15 +1,18 @@
-import {style} from '@vanilla-extract/css'
+import {createContainer, createViewTransition, style} from '@vanilla-extract/css'
 
 /**
  * The view transition group of the sidebar, which the split preview's
  * transition (see `ThemerLayout.css.ts`) leaves alone: it never animates, and
  * the Studio copies animating underneath never paint over it
  */
-export const SIDEBAR_TRANSITION_NAME = 'themer-sidebar'
+export const sidebarTransition = createViewTransition()
+
+/** The sidebar's content, which the content's layout queries — as wide as the sidebar itself */
+export const sidebarContent = createContainer()
 
 export const sidebar = style({
   flex: 'none',
-  viewTransitionName: SIDEBAR_TRANSITION_NAME,
+  viewTransitionName: sidebarTransition,
   selectors: {
     // On small screens the sidebar covers the Studio instead of standing next to it
     "&[data-overlay='true']": {
@@ -36,6 +39,7 @@ export const frame = style({
  */
 export const content = style({
   containerType: 'inline-size',
+  containerName: sidebarContent,
 })
 
 /**
