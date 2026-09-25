@@ -4,11 +4,12 @@ import {useActor, useSelector} from '@xstate/react'
 import {
   Activity,
   addTransitionType,
-  startTransition,
+  lazy,
   useEffect,
   useMemo,
   useRef,
   useState,
+  useTransition,
   ViewTransition,
 } from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
@@ -17,7 +18,6 @@ import {buildTheme} from '../theme/buildTheme'
 import {BuildThemeOptions} from '../theme/options'
 import {ThemerContext, ThemerContextValue, ThemerView} from './context'
 import {selectStoredState, ThemerInput, themerMachine, ThemerSnapshot} from './machine'
-import {ResizableSidebar} from './ResizableSidebar'
 import {readStoredState, writeStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
 import {useStudioNavbarHeight} from './useStudioNavbarHeight'
@@ -46,6 +46,18 @@ const MOBILE_MEDIA_INDEX = 1
  * those should run a view transition over it — only these toggles do.
  */
 const RESIZE_WINDOW = 500
+
+/**
+ * The sidebar — everything in it, from the theme list to the snippet dialog —
+ * loads the first time it opens. There is no `Suspense` boundary around it,
+ * so it must only ever render from a transition: that keeps the Studio as it
+ * was while the code loads, with the navbar toggle showing the transition as
+ * pending, where an urgent render would suspend up to the Studio's own
+ * boundary and swap the whole Studio for its loading screen.
+ */
+const ResizableSidebar = lazy(() =>
+  import('./ResizableSidebar').then((module) => ({default: module.ResizableSidebar})),
+)
 
 function sameStoredState(a: ThemerState, b: ThemerState): boolean {
   return (
@@ -112,6 +124,10 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // state) have committed, so nothing in the sidebar changes while it does.
   // Closing the sidebar ends the split, so both leave in one transition.
   const [shown, setShown] = useState({open, split})
+  const [isPending, startTransition] = useTransition()
+  // The sidebar mounts the first time it opens, which is when its code loads,
+  // and stays mounted from then on
+  const [panelMounted, setPanelMounted] = useState(false)
   // The Studio's `update` class goes by state rather than by the transition's
   // types: a commit that also carries work for hidden `Activity` content (as
   // after revealing the split copy) drops the types, and the Studio would
@@ -125,6 +141,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
       if (shown.open !== open) addTransitionType(PANEL_TRANSITION)
       if (shown.split !== split) addTransitionType(SPLIT_TRANSITION)
       setShown({open, split})
+      if (open) setPanelMounted(true)
       setResizing(true)
     })
   }, [open, shown, split])
@@ -136,6 +153,11 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
 
     return () => clearTimeout(timer)
   }, [resizing, shown])
+
+  // Only the first opening has code to load. Every later toggle commits as
+  // soon as it renders, and its pending state would only flash the spinner on
+  // the navbar toggle — into the view transition's snapshot of the Studio too
+  const loading = isPending && !panelMounted
 
   useEffect(() => writeStoredState(stored), [stored])
 
@@ -205,12 +227,26 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
       images,
       view,
       open,
+      loading,
       split,
       mobile,
       navbarHeight,
       send,
     }),
-    [active, baseOptions, images, mobile, navbarHeight, open, removed, send, split, themes, view],
+    [
+      active,
+      baseOptions,
+      images,
+      loading,
+      mobile,
+      navbarHeight,
+      open,
+      removed,
+      send,
+      split,
+      themes,
+      view,
+    ],
   )
 
   const studio = layoutProps.renderDefault(layoutProps)
@@ -253,20 +289,24 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
           </StudioPreview>
         </ViewTransition>
 
-        {/* The sidebar is small and cheap: it stays mounted, hidden while
-            closed, keeping its state and ready to show */}
-        <Activity mode={shown.open ? 'visible' : 'hidden'}>
-          <ViewTransition
-            key="panel"
-            enter={panelTransitionClasses.slideIn}
-            exit={panelTransitionClasses.slideOut}
-            update="none"
-          >
-            <ThemeProvider theme={theme ?? undefined}>
-              <ResizableSidebar overlay={mobile} />
-            </ThemeProvider>
-          </ViewTransition>
-        </Activity>
+        {/* The sidebar is small and cheap: once it has opened it stays
+            mounted, hidden while closed, keeping its state and ready to show.
+            Until then it is left out — hidden, it would be pre-rendered, and
+            its code loaded, as soon as the Studio renders */}
+        {panelMounted && (
+          <Activity mode={shown.open ? 'visible' : 'hidden'}>
+            <ViewTransition
+              key="panel"
+              enter={panelTransitionClasses.slideIn}
+              exit={panelTransitionClasses.slideOut}
+              update="none"
+            >
+              <ThemeProvider theme={theme ?? undefined}>
+                <ResizableSidebar overlay={mobile} />
+              </ThemeProvider>
+            </ViewTransition>
+          </Activity>
+        )}
       </Flex>
     </ThemerContext.Provider>
   )

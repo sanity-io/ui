@@ -6,13 +6,14 @@ import {type NavbarProps} from 'sanity'
 import {useThemer} from './context'
 
 function ThemerNavbarButton() {
-  const {open, send} = useThemer()
+  const {open, loading, send} = useThemer()
 
   return (
     <Tooltip animate content={<Text size={1}>Themer</Text>} portal>
       <Button
         aria-label="Themer"
         icon={ColorWheelIcon}
+        loading={loading}
         mode="bleed"
         onClick={() => send({type: 'sidebar.toggle'})}
         // The Studio's own navbar buttons go through a wrapper that pins them
