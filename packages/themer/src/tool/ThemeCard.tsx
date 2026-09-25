@@ -9,12 +9,22 @@ import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import {Tooltip} from '@sanity/ui/tooltip'
 import {Reorder, useDragControls} from 'motion/react'
 import {useRef, useState} from 'react'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
 import {useThemer} from './context'
 import {displayTitle, ThemerTheme} from './themes'
 import {ThemeThumbnail} from './ThemeThumbnail'
 
 import {frame, menuCard, menuSlot, pickButton, root} from './ThemeCard.css'
+
+/**
+ * Scrolls the applied theme's card into view when it is not already, as a
+ * ref: the list scrolls to it as it mounts — coming back from the editor or
+ * the removed themes — and when another theme gets applied
+ */
+function scrollRefIntoViewIfNeeded(node: HTMLElement | null) {
+  if (node) scrollIntoView(node, {block: 'nearest', scrollMode: 'if-needed'})
+}
 
 /**
  * One theme in the list: the floating preview with the title below it, like
@@ -58,6 +68,7 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
       onDragStart={() => {
         dragged.current = true
       }}
+      ref={active ? scrollRefIntoViewIfNeeded : undefined}
       value={theme.slug}
       whileDrag={{scale: 1.04}}
     >

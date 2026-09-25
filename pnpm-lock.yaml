@@ -795,6 +795,9 @@ importers:
       refractor:
         specifier: 'catalog:'
         version: 5.0.0
+      scroll-into-view-if-needed:
+        specifier: ^3.1.0
+        version: 3.1.0
       xstate:
         specifier: ^5.33.2
         version: 5.33.2

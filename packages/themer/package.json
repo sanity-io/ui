@@ -75,6 +75,7 @@
     "motion": "catalog:",
     "react-refractor": "catalog:",
     "refractor": "catalog:",
+    "scroll-into-view-if-needed": "^3.1.0",
     "xstate": "^5.33.2"
   },
   "devDependencies": {
