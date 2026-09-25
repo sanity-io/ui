@@ -74,6 +74,44 @@ describe('themerMachine', () => {
     expect(actor.getSnapshot().matches({sidebar: 'opening', flow: 'edit'})).toBe(true)
   })
 
+  it('holds the first opening while the layout waits for the sidebar', () => {
+    const actor = start()
+
+    actor.send({type: 'sidebar.toggle'})
+    actor.send({type: 'layout.loading'})
+    expect(actor.getSnapshot().matches({sidebar: 'loading'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('panel')).toBe(true)
+
+    // However long the sidebar takes, the motion is still to come
+    settle()
+    expect(actor.getSnapshot().matches({sidebar: 'loading'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('moving')).toBe(true)
+
+    // It starts when the layout has the sidebar, and runs out from there
+    actor.send({type: 'layout.loaded'})
+    expect(actor.getSnapshot().matches({sidebar: 'opening'})).toBe(true)
+    settle()
+    expect(actor.getSnapshot().matches({sidebar: 'open'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('moving')).toBe(false)
+  })
+
+  it('closes at once when the sidebar is toggled back while the layout waits for it', () => {
+    const actor = start()
+
+    actor.send({type: 'sidebar.toggle'})
+    actor.send({type: 'layout.loading'})
+    // Nothing has appeared, so there is nothing to animate away
+    actor.send({type: 'sidebar.toggle'})
+    expect(actor.getSnapshot().matches({sidebar: 'closed'})).toBe(true)
+    expect(actor.getSnapshot().hasTag('moving')).toBe(false)
+
+    // Opening again while the sidebar is still on its way waits for it too
+    actor.send({type: 'sidebar.toggle'})
+    actor.send({type: 'layout.loading'})
+    actor.send({type: 'sidebar.close'})
+    expect(actor.getSnapshot().matches({sidebar: 'closed'})).toBe(true)
+  })
+
   it('splits the preview and back without touching the sidebar, the flow or the themes', () => {
     const actor = startWithCustom({active: 'custom-1'})
 

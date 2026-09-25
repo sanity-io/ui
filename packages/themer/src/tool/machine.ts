@@ -18,7 +18,9 @@ import {
  * says: it reports every view transition it starts, so this only ends a
  * motion that has none (reduced motion, a browser without view transitions),
  * where the `moving` and `switching` tags have nothing to affect. Generous,
- * so that it never runs out before a slow deferred commit starts the real one.
+ * so that it never runs out before a slow deferred commit starts the real one
+ * — the one wait it could not outlast, the first opening while the sidebar's
+ * code loads, the layout reports instead, and no timer runs while it does.
  *
  * @internal
  */
@@ -60,6 +62,13 @@ export type ThemerEvent =
    * the machine
    */
   | {type: 'layout.transitioned'}
+  /**
+   * The layout is waiting for the sidebar's code, which loads the first time
+   * it opens: nothing can move until it is there, and `layout.loaded` says it
+   * is
+   */
+  | {type: 'layout.loading'}
+  | {type: 'layout.loaded'}
   /**
    * Switches between showing the Studio once, in its own appearance, and
    * twice side by side, in light and dark
@@ -126,7 +135,7 @@ function revokeObjectUrl(url: string) {
  *
  * The sidebar and the preview pass through `opening`/`closing` and
  * `splitting`/`unsplitting` on their way, states tagged for the UI: `panel`
- * and `split` say what shows (the panel from `opening` on, the split copy from
+ * and `split` say what shows (the panel from `loading` on, the split copy from
  * `splitting` on), `moving` that the Studio is about to give way or take room
  * — which is when, and only when, the layout lets a view transition animate
  * it. A fourth region, `theme`, is `switching` (its tag) right after an event
@@ -136,7 +145,10 @@ function revokeObjectUrl(url: string) {
  * they follow the pointer. These states last until the layout reports its
  * transition under way — every boundary reports, the panel's and the copy's
  * entering and leaving as much as the Studio's morphing — or for
- * `MOTION_DURATION` when nothing animates.
+ * `MOTION_DURATION` when nothing animates. The very first opening waits in
+ * `loading` for the sidebar's code, which the layout reports too: it is the
+ * one wait no duration can be set for, so the motion of `opening` only
+ * starts once the panel has something to arrive with.
  *
  * Theme operations are handled in every flow, and the flows leave on their
  * own when they lose their subject: the editor when its theme is removed or
@@ -165,7 +177,11 @@ export const themerMachine = setup({
         (theme) => theme.slug === context.editing?.slug && theme.source === 'custom',
       ),
     hasRemovedThemes: ({context}) => themesOf(context).removed.length > 0,
-    sidebarShown: or([stateIn({sidebar: 'opening'}), stateIn({sidebar: 'open'})]),
+    sidebarShown: or([
+      stateIn({sidebar: 'loading'}),
+      stateIn({sidebar: 'opening'}),
+      stateIn({sidebar: 'open'}),
+    ]),
     // Only another theme than the applied one changes anything to cross-fade to
     isAnotherTheme: ({context}, params: {slug: string}) =>
       params.slug !== (context.active ?? CONFIG_SLUG),
@@ -321,10 +337,24 @@ export const themerMachine = setup({
         closed: {
           on: {'sidebar.toggle': 'opening'},
         },
+        // The sidebar's code loads the first time it opens, and the panel
+        // cannot arrive before it is there: the motion waits for it, with no
+        // timer to run out in the meantime, and a toggle back closes at once
+        // — nothing has appeared to take away
+        loading: {
+          tags: ['panel', 'moving'],
+          on: {
+            'layout.loaded': 'opening',
+            'layout.transitioned': 'open',
+            'sidebar.toggle': 'closed',
+            'sidebar.close': 'closed',
+          },
+        },
         opening: {
           tags: ['panel', 'moving'],
           after: {[MOTION_DURATION]: 'open'},
           on: {
+            'layout.loading': 'loading',
             'layout.transitioned': 'open',
             'sidebar.toggle': 'closing',
             'sidebar.close': 'closing',

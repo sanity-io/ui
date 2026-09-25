@@ -140,6 +140,18 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const panelMounted = useDeferredValue(panelOpened)
   const loading = panelOpened !== panelMounted
 
+  // The machine waits for the code with the layout: the motion of an opening
+  // starts once the panel has something to arrive with, where a load longer
+  // than `MOTION_DURATION` would have ended it first — and left the panel to
+  // slide in beside a Studio that took its new width without moving
+  useEffect(() => {
+    if (panelMounted) {
+      send({type: 'layout.loaded'})
+    } else if (open) {
+      send({type: 'layout.loading'})
+    }
+  }, [open, panelMounted, send])
+
   const {themes, removed, active} = useMemo(
     () => resolveThemes(stored, baseOptions),
     [stored, baseOptions],
