@@ -69,6 +69,8 @@ const theme = buildThemeFromUrl('?preset=verdant')
 
 Once migrated, remove any `themer.d.ts` module declarations and `urlImports` config that the URL imports needed.
 
+To move on to the `buildTheme` themes of [`@sanity/themer`](https://www.npmjs.com/package/@sanity/themer) instead, paste the URL into its themer tool, which converts the theme — see [its migration guide](https://www.npmjs.com/package/@sanity/themer#migrating-from-themersanitybuild). That is a different generator, so the colors come out close to, not exactly like, the hosted ones.
+
 The generated theme carries no `__themer` flag, which is the one intentional difference from the hosted module. Sanity Studio uses that flag to throw away the fonts the hosted module bundled, because they had drifted from the Studio's own; here the fonts come from the `@sanity/ui` this package depends on, so there is nothing to throw away.
 
 ## Migrating from `@sanity/themer/legacy`
