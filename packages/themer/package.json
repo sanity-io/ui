@@ -84,6 +84,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@vanilla-extract/css": "catalog:",
+    "lightningcss": "catalog:",
     "oxc-transform-react": "catalog:",
     "react": "catalog:",
     "rimraf": "catalog:",
