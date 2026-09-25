@@ -1,19 +1,10 @@
 import {Box, Card, Layer} from '@sanity/ui'
 import {useCallback, useEffect, useRef, useState} from 'react'
 
+import {MAXIMUM_WIDTH, MINIMUM_WIDTH} from './sidebarWidth'
 import {ThemerSidebar} from './ThemerSidebar'
 
-import {frame, resizeHandle, sidebar} from './ResizableSidebar.css'
-
-/**
- * The narrowest the sidebar goes — and its default: narrow enough to leave the
- * studio preview as much room as possible, while the themes stack in a single
- * column of preview cards and the editor fits a swatch next to its label.
- */
-const MINIMUM_WIDTH = 200
-
-/** Twice the default is as wide as the sidebar goes */
-const MAXIMUM_WIDTH = MINIMUM_WIDTH * 2
+import {content, frame, resizeHandle, sidebar} from './ResizableSidebar.css'
 
 /** How far one arrow key press resizes the sidebar */
 const KEYBOARD_STEP = 16
@@ -131,7 +122,7 @@ export function ResizableSidebar(props: {overlay: boolean}) {
             tabIndex={0}
           />
         )}
-        <Box height="fill" overflow="hidden">
+        <Box className={content} height="fill" overflow="hidden">
           <ThemerSidebar />
         </Box>
       </Card>

@@ -30,6 +30,15 @@ export const frame = style({
 })
 
 /**
+ * Clips the content, and is the container its layout queries: as wide as
+ * the sidebar, whether or not a scrollbar takes room inside — see the theme
+ * grid's columns in `ThemeList.css.ts`
+ */
+export const content = style({
+  containerType: 'inline-size',
+})
+
+/**
  * The grab area along the sidebar's left edge. It straddles the border so it
  * is easy to hit, and highlights while hovered, focused or dragged.
  */
