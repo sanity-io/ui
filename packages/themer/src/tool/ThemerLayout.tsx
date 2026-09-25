@@ -2,6 +2,7 @@ import {Card, Flex, ThemeProvider, useMediaIndex} from '@sanity/ui'
 import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
 import {
+  Activity,
   addTransitionType,
   startTransition,
   useEffect,
@@ -9,7 +10,6 @@ import {
   useRef,
   useState,
   ViewTransition,
-  type ViewTransitionClass,
 } from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
 
@@ -38,12 +38,14 @@ import {
  */
 const MOBILE_MEDIA_INDEX = 1
 
-/** The Studio the user was looking at cross-fades between its two widths */
-const resizeClass: ViewTransitionClass = {
-  [SPLIT_TRANSITION]: splitTransitionClasses.resize,
-  [PANEL_TRANSITION]: splitTransitionClasses.resize,
-  default: 'none',
-}
+/**
+ * How long, at most, the Studio keeps its `update` class after the panel or
+ * the split toggles — normally it drops it the moment its transition starts,
+ * this covers a toggle that does not move it (the overlay on small screens).
+ * The Studio updates in transitions of its own all the time, and none of
+ * those should run a view transition over it — only these toggles do.
+ */
+const RESIZE_WINDOW = 500
 
 function sameStoredState(a: ThemerState, b: ThemerState): boolean {
   return (
@@ -104,20 +106,36 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const navbarHeight = useStudioNavbarHeight(studioRef)
 
   // The machine publishes its state synchronously, which React does not
-  // animate: the panel and the split copy mount from state of their own, set
+  // animate: the panel and the split copy show from state of their own, set
   // in a transition typed after what changed, which is what lets the view
   // transition run — after the sidebar's own changes (the toggle's pressed
   // state) have committed, so nothing in the sidebar changes while it does.
   // Closing the sidebar ends the split, so both leave in one transition.
   const [shown, setShown] = useState({open, split})
+  // The Studio's `update` class goes by state rather than by the transition's
+  // types: a commit that also carries work for hidden `Activity` content (as
+  // after revealing the split copy) drops the types, and the Studio would
+  // snap to its new width instead of cross-fading. The class is only needed
+  // as the transition starts, and goes away as soon as it has
+  const [resizing, setResizing] = useState(false)
+  const stopResizing = () => setResizing(false)
   useEffect(() => {
     if (shown.open === open && shown.split === split) return
     startTransition(() => {
       if (shown.open !== open) addTransitionType(PANEL_TRANSITION)
       if (shown.split !== split) addTransitionType(SPLIT_TRANSITION)
       setShown({open, split})
+      setResizing(true)
     })
   }, [open, shown, split])
+
+  useEffect(() => {
+    if (!resizing) return undefined
+
+    const timer = setTimeout(() => setResizing(false), RESIZE_WINDOW)
+
+    return () => clearTimeout(timer)
+  }, [resizing, shown])
 
   useEffect(() => writeStoredState(stored), [stored])
 
@@ -202,31 +220,42 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
       <Flex className={layout} direction={mobile ? 'column' : 'row'} height="fill" sizing="border">
         {/* The opposite scheme comes first — on the far side of the sidebar,
             or on top on small screens — so the Studio the user was looking at
-            stays where it is, mounted, in its own scheme */}
-        {shown.split && (
-          <ViewTransition
-            key="opposite"
-            enter={mobile ? splitTransitionClasses.dropIn : splitTransitionClasses.slideIn}
-            exit={mobile ? splitTransitionClasses.dropOut : splitTransitionClasses.slideOut}
-            update="none"
-          >
-            <StudioPreview
-              borderBottom={mobile}
-              borderRight={!mobile}
-              scheme={oppositeScheme}
-              theme={theme}
+            stays where it is, mounted, in its own scheme. A whole second
+            Studio is too costly to keep around (its styled-components alone
+            insert CSS as they render), so it only exists while the sidebar is
+            open — hidden until the split shows, warmed up for the transition */}
+        {shown.open && (
+          <Activity mode={shown.split ? 'visible' : 'hidden'}>
+            <ViewTransition
+              key="opposite"
+              enter={mobile ? splitTransitionClasses.dropIn : splitTransitionClasses.slideIn}
+              exit={mobile ? splitTransitionClasses.dropOut : splitTransitionClasses.slideOut}
+              update="none"
             >
-              {studio}
-            </StudioPreview>
-          </ViewTransition>
+              <StudioPreview
+                borderBottom={mobile}
+                borderRight={!mobile}
+                scheme={oppositeScheme}
+                theme={theme}
+              >
+                {studio}
+              </StudioPreview>
+            </ViewTransition>
+          </Activity>
         )}
-        <ViewTransition key="primary" update={resizeClass}>
+        <ViewTransition
+          key="primary"
+          onUpdate={stopResizing}
+          update={resizing ? splitTransitionClasses.resize : 'none'}
+        >
           <StudioPreview ref={studioRef} theme={theme}>
             {studio}
           </StudioPreview>
         </ViewTransition>
 
-        {shown.open && (
+        {/* The sidebar is small and cheap: it stays mounted, hidden while
+            closed, keeping its state and ready to show */}
+        <Activity mode={shown.open ? 'visible' : 'hidden'}>
           <ViewTransition
             key="panel"
             enter={panelTransitionClasses.slideIn}
@@ -237,7 +266,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
               <ResizableSidebar overlay={mobile} />
             </ThemeProvider>
           </ViewTransition>
-        )}
+        </Activity>
       </Flex>
     </ThemerContext.Provider>
   )

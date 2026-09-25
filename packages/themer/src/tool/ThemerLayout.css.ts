@@ -123,18 +123,30 @@ globalStyle(
 /**
  * With reduced motion, nothing in these transitions animates — not the panel
  * or the copies, not the root's cross-fade — so the new layout simply shows:
- * the transition is over as soon as it starts. Scoped through the transition
- * types, so other view transitions on the page keep their own reduced-motion
- * behavior.
+ * the transition is over as soon as it starts. The pseudo-elements of the
+ * panel and the copies are selected by their classes; the root's, which have
+ * none, through the transition types — scoped so other view transitions on
+ * the page keep their own reduced-motion behavior. (The types can go missing
+ * from a commit that also carries work for hidden `Activity` content, which
+ * is why the classes carry the rest.)
  */
 globalStyle(
-  [SPLIT_TRANSITION, PANEL_TRANSITION]
-    .flatMap((type) =>
+  [
+    ...['group', 'old', 'new'].map(
+      (part) => `::view-transition-${part}(.${splitTransitionClasses.resize})`,
+    ),
+    `::view-transition-new(.${splitTransitionClasses.slideIn})`,
+    `::view-transition-old(.${splitTransitionClasses.slideOut})`,
+    `::view-transition-new(.${splitTransitionClasses.dropIn})`,
+    `::view-transition-old(.${splitTransitionClasses.dropOut})`,
+    `::view-transition-new(.${panelTransitionClasses.slideIn})`,
+    `::view-transition-old(.${panelTransitionClasses.slideOut})`,
+    ...[SPLIT_TRANSITION, PANEL_TRANSITION].flatMap((type) =>
       ['group', 'image-pair', 'old', 'new'].map(
         (part) => `:root:active-view-transition-type(${type})::view-transition-${part}(*)`,
       ),
-    )
-    .join(', '),
+    ),
+  ].join(', '),
   {
     '@media': {
       '(prefers-reduced-motion: reduce)': {
