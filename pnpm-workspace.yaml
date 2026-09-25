@@ -127,6 +127,13 @@ minimumReleaseAgeExclude:
   - framer-motion@13.4.2
   - motion-dom@13.4.2
   - motion@13.4.2
+  - '@oxlint-tsgolint/darwin-arm64@7.0.2003'
+  - '@oxlint-tsgolint/darwin-x64@7.0.2003'
+  - '@oxlint-tsgolint/linux-arm64@7.0.2003'
+  - '@oxlint-tsgolint/linux-x64@7.0.2003'
+  - '@oxlint-tsgolint/win32-arm64@7.0.2003'
+  - '@oxlint-tsgolint/win32-x64@7.0.2003'
+  - oxlint-tsgolint@7.0.2003
 
 minimumReleaseAgeExcludePrune: true
 
