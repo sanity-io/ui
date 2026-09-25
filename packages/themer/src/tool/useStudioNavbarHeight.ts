@@ -3,8 +3,10 @@ import {type RefObject, useEffect, useState} from 'react'
 /**
  * The Studio navbar's root, the `Card` that draws its bottom border — its
  * test id is stable and unique to the navbar, unlike its `data-ui` name
+ *
+ * @internal
  */
-const NAVBAR_SELECTOR = '[data-testid="studio-navbar"]'
+export const NAVBAR_SELECTOR = '[data-testid="studio-navbar"]'
 
 /**
  * The height of the Studio navbar inside the given element, in pixels — kept
