@@ -157,6 +157,18 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
     }
   }, [scheme, shownTheme])
 
+  // The machine releases the image of a palette as it is replaced or its
+  // theme deleted; whatever it still holds goes with the layout — the actor
+  // keeps its last snapshot once stopped
+  useEffect(
+    () => () => {
+      for (const url of Object.values(actorRef.getSnapshot().context.images)) {
+        URL.revokeObjectURL(url)
+      }
+    },
+    [actorRef],
+  )
+
   const context = useMemo<ThemerContextValue>(
     () => ({
       baseOptions,
@@ -175,6 +187,9 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   )
 
   const studio = layoutProps.renderDefault(layoutProps)
+
+  // Every view transition of the layout tells the machine its motion is under way
+  const transitioned = () => send({type: 'layout.transitioned'})
 
   // What the view transitions do this render, from what the machine says
   const classes = reduceMotion
@@ -216,6 +231,9 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
               key="opposite"
               enter={classes.copyEnter}
               exit={classes.copyExit}
+              onEnter={transitioned}
+              onExit={transitioned}
+              onUpdate={transitioned}
               update={classes.update}
             >
               <StudioPreview
@@ -232,14 +250,10 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
         {/* The Studio gives way and takes room while the machine says the
             layout is moving, and cross-fades while it says a theme is being
             switched to — the Studio updates in transitions of its own all the
-            time, and none of those may animate it. Once its transition is under
+            time, and none of those may animate it. Once a transition is under
             way the machine hears of it, and the Studio is its own again before
             the next commit */}
-        <ViewTransition
-          key="primary"
-          onUpdate={() => send({type: 'layout.transitioned'})}
-          update={classes.studioUpdate}
-        >
+        <ViewTransition key="primary" onUpdate={transitioned} update={classes.studioUpdate}>
           <StudioPreview ref={studioRef} theme={shownTheme}>
             {studio}
           </StudioPreview>
@@ -252,6 +266,9 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
             key="panel"
             enter={classes.panelEnter}
             exit={classes.panelExit}
+            onEnter={transitioned}
+            onExit={transitioned}
+            onUpdate={transitioned}
             update={classes.update}
           >
             <ThemeProvider theme={shownTheme ?? undefined}>

@@ -56,6 +56,8 @@ export function PasteThemeDialog(props: {onClose: () => void}) {
             applied.
           </Text>
           <TextInput
+            aria-describedby={invalid ? 'themer-paste-error' : undefined}
+            aria-invalid={invalid}
             aria-label="Theme code"
             autoFocus
             customValidity={invalid ? 'That is not a theme code' : undefined}
@@ -68,7 +70,7 @@ export function PasteThemeDialog(props: {onClose: () => void}) {
             value={text}
           />
           {invalid && (
-            <Card padding={3} radius={2} tone="critical">
+            <Card id="themer-paste-error" padding={3} radius={2} role="alert" tone="critical">
               <Text size={1}>
                 That is not a theme code — codes are one word, copied from a theme&apos;s menu.
               </Text>

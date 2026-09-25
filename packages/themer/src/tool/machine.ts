@@ -14,12 +14,15 @@ import {
 
 /**
  * How long the layout's motions — the panel's and the split preview's, and
- * the cross-fade to another theme — are taken to last, at most, when the
- * layout does not say: the view transitions run for 320ms, and the browser
- * takes a frame or two to capture them. The `moving` and `switching` tags
- * mark that time.
+ * the cross-fade to another theme — are taken to last when the layout never
+ * says: it reports every view transition it starts, so this only ends a
+ * motion that has none (reduced motion, a browser without view transitions),
+ * where the `moving` and `switching` tags have nothing to affect. Generous,
+ * so that it never runs out before a slow deferred commit starts the real one.
+ *
+ * @internal
  */
-const MOTION_DURATION = 500
+export const MOTION_DURATION = 2000
 
 /** What the themer machine starts from @internal */
 export interface ThemerInput {
@@ -51,9 +54,10 @@ export type ThemerEvent =
   | {type: 'sidebar.toggle'}
   | {type: 'sidebar.close'}
   /**
-   * The layout's view transition is under way: the Studio has started giving
-   * way or taking room, or cross-fading to another theme, and the layout is
-   * no longer `moving` or `switching` for the machine
+   * A view transition of the layout is under way — the panel or the split copy
+   * arriving or leaving, the Studio giving way, taking room or cross-fading to
+   * another theme — and the layout is no longer `moving` or `switching` for
+   * the machine
    */
   | {type: 'layout.transitioned'}
   /**
@@ -130,8 +134,9 @@ function revokeObjectUrl(url: string) {
  * editing one, removing or deleting the applied one — when the layout
  * cross-fades to it; edits to the applied theme's colors are not switches,
  * they follow the pointer. These states last until the layout reports its
- * transition under way, or for `MOTION_DURATION` when it does not animate
- * (the overlay on small screens, a pick of the applied theme).
+ * transition under way — every boundary reports, the panel's and the copy's
+ * entering and leaving as much as the Studio's morphing — or for
+ * `MOTION_DURATION` when nothing animates.
  *
  * Theme operations are handled in every flow, and the flows leave on their
  * own when they lose their subject: the editor when its theme is removed or
@@ -161,6 +166,9 @@ export const themerMachine = setup({
       ),
     hasRemovedThemes: ({context}) => themesOf(context).removed.length > 0,
     sidebarShown: or([stateIn({sidebar: 'opening'}), stateIn({sidebar: 'open'})]),
+    // Picking the applied theme again changes nothing to cross-fade to
+    isAnotherTheme: ({context}, params: {slug: string}) =>
+      params.slug !== (context.active ?? CONFIG_SLUG),
   },
   actions: {
     // The state that survives sessions is written as the machine starts — that
@@ -366,7 +374,10 @@ export const themerMachine = setup({
       states: {
         applied: {
           on: {
-            'theme.pick': 'switching',
+            'theme.pick': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
             'theme.add': 'switching',
             'theme.duplicate': 'switching',
             'theme.edit': 'switching',
@@ -381,7 +392,11 @@ export const themerMachine = setup({
           on: {
             'layout.transitioned': 'applied',
             // Another switch starts the clock over
-            'theme.pick': {target: 'switching', reenter: true},
+            'theme.pick': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
             'theme.add': {target: 'switching', reenter: true},
             'theme.duplicate': {target: 'switching', reenter: true},
             'theme.edit': {target: 'switching', reenter: true},

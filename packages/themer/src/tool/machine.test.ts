@@ -2,7 +2,7 @@ import {afterEach, describe, expect, it, vi} from 'vitest'
 import {createActor, SimulatedClock} from 'xstate'
 
 import {presets} from '../theme/presets'
-import {selectStoredState, ThemerInput, themerMachine} from './machine'
+import {MOTION_DURATION, selectStoredState, ThemerInput, themerMachine} from './machine'
 import {CONFIG_SLUG, CustomTheme, initialThemerState, resolveThemes, ThemerState} from './themes'
 
 const baseOptions = {light: {accent: '#123456'}}
@@ -16,9 +16,9 @@ function start(stored: ThemerState = initialThemerState, input: Partial<ThemerIn
   return createActor(themerMachine, {clock, input: {baseOptions, stored, ...input}}).start()
 }
 
-/** Lets the panel's and the split preview's motions run their course */
+/** Lets a motion the layout never reports on run out */
 function settle() {
-  clock.increment(500)
+  clock.increment(MOTION_DURATION)
 }
 
 function startWithCustom(overrides: Partial<ThemerState> = {}) {
