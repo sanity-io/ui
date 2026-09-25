@@ -67,7 +67,7 @@ export default defineConfig({
 
 If the Studio already uses a `buildTheme` theme, pass the same options so the tool starts editing from them: `themerTool({config: {light: {accent: '#1cb485'}}})`.
 
-The tool's styles are a stylesheet, `@sanity/themer/bundle.css`, that `@sanity/themer/tool` imports itself — the Studio's bundler picks it up, nothing to add to the config. Its sidebar header takes the height of the Studio navbar, so the two line up, and with `prefers-reduced-motion` the split preview switches layouts without animating.
+The tool's styles are a stylesheet, `@sanity/themer/bundle.css`, that `@sanity/themer/tool` imports itself — the Studio's bundler picks it up, nothing to add to the config. The sidebar slides in from the edge (and closing it ends the split preview), its header takes the height of the Studio navbar so the two line up, and with `prefers-reduced-motion` the sidebar and the split preview switch layouts without animating.
 
 ## Migrating from themer.sanity.build
 
