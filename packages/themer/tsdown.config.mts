@@ -25,6 +25,8 @@ const config: UserConfig = await defineConfig({
   // side-effect free, bundlers may bypass the entry and drop the bare CSS
   // import with it before the stylesheet's own side-effect status is consulted
   vanillaExtract: {
+    // Readable output keeps CSS diffs between published versions easy to review
+    minify: false,
     lightningcss: {
       // The `@sanity/browserslist-config` targets predate `light-dark()`, and
       // Lightning CSS polyfills it with `--lightningcss-light`/`-dark` toggles
