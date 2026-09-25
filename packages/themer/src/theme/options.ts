@@ -177,7 +177,13 @@ export function deriveTextColor(accent: string): string {
   })
 }
 
-function normalizeColor(value: string, name: string): string {
+/**
+ * Validates a hex color and normalizes it to lowercase `#rrggbb`, naming the
+ * option it came from when it is invalid.
+ *
+ * @internal
+ */
+export function normalizeColor(value: string, name: string): string {
   if (typeof value !== 'string' || !isColor(value)) {
     throw new TypeError(
       `Invalid \`${name}\` color: ${JSON.stringify(value)} — expected a hex color like #556bfc`,
