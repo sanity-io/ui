@@ -39,6 +39,8 @@ export interface ThemerContextValue {
   split: boolean
   /** Whether the Studio is on a small screen, where the sidebar covers it and the split preview stacks */
   mobile: boolean
+  /** The height of the Studio navbar, which the sidebar's header matches — `null` until it has rendered */
+  navbarHeight: number | null
   /** Sends an event to the themer machine */
   send: (event: ThemerEvent) => void
 }

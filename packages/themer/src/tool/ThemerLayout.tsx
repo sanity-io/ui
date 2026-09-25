@@ -20,6 +20,7 @@ import {selectStoredState, ThemerInput, themerMachine, ThemerSnapshot} from './m
 import {ResizableSidebar} from './ResizableSidebar'
 import {readStoredState, writeStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
+import {useStudioNavbarHeight} from './useStudioNavbarHeight'
 
 import {layout, SPLIT_TRANSITION, splitTransitionClasses, studioScheme} from './ThemerLayout.css'
 
@@ -89,6 +90,8 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const split = snapshot.matches({preview: 'split'})
   const {images} = snapshot.context
   const mobile = useMediaIndex() <= MOBILE_MEDIA_INDEX
+  const studioRef = useRef<HTMLDivElement | null>(null)
+  const navbarHeight = useStudioNavbarHeight(studioRef)
 
   // The machine publishes its state synchronously, which React does not
   // animate: the split copy mounts from state of its own, set in a transition
@@ -174,9 +177,10 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
       open,
       split,
       mobile,
+      navbarHeight,
       send,
     }),
-    [active, baseOptions, images, mobile, open, removed, send, split, themes, view],
+    [active, baseOptions, images, mobile, navbarHeight, open, removed, send, split, themes, view],
   )
 
   const studio = layoutProps.renderDefault(layoutProps)
@@ -205,7 +209,9 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
           </ViewTransition>
         )}
         <ViewTransition key="primary" update={resizeClass}>
-          <StudioPreview theme={theme}>{studio}</StudioPreview>
+          <StudioPreview ref={studioRef} theme={theme}>
+            {studio}
+          </StudioPreview>
         </ViewTransition>
 
         {open && (
@@ -233,10 +239,11 @@ function StudioPreview(props: {
   borderBottom?: boolean
   borderRight?: boolean
   children: React.ReactNode
+  ref?: React.Ref<HTMLDivElement>
   scheme?: ThemeColorSchemeKey
   theme: RootTheme | null
 }) {
-  const {borderBottom, borderRight, children, scheme, theme} = props
+  const {borderBottom, borderRight, children, ref, scheme, theme} = props
 
   return (
     <ThemeProvider scheme={scheme} theme={theme ?? undefined}>
@@ -247,6 +254,7 @@ function StudioPreview(props: {
         flex={1}
         height="fill"
         overflow="hidden"
+        ref={ref}
       >
         {children}
       </Card>
