@@ -1,4 +1,5 @@
 import {defineConfig} from '@sanity/tsdown-config'
+import {Features} from 'lightningcss'
 import type {UserConfig} from 'tsdown'
 
 // The annotation keeps the declaration emit portable: this file is part of the
@@ -23,7 +24,16 @@ const config: UserConfig = await defineConfig({
   // lists `./dist/tool.js` in `sideEffects` next to `*.css`: flagged
   // side-effect free, bundlers may bypass the entry and drop the bare CSS
   // import with it before the stylesheet's own side-effect status is consulted
-  vanillaExtract: true,
+  vanillaExtract: {
+    lightningcss: {
+      // The `@sanity/browserslist-config` targets predate `light-dark()`, and
+      // Lightning CSS polyfills it with `--lightningcss-light`/`-dark` toggles
+      // added to every `color-scheme` declaration rather than by following the
+      // computed `color-scheme`, so both ship as authored instead. See
+      // https://github.com/parcel-bundler/lightningcss/issues/873
+      exclude: Features.LightDark,
+    },
+  },
 })
 
 export default config

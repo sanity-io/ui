@@ -31,6 +31,7 @@ catalog:
   '@vanilla-extract/css': ^1.21.2
   '@vanilla-extract/dynamic': ^2.1.5
   '@vitejs/plugin-react': ^6.1.1
+  lightningcss: ^1.33.0
   motion: ^13.4.3
   oxc-transform-react: ^0.151.0
   react: ^19.3.0
