@@ -17,16 +17,23 @@ const TWO_COLUMNS_FROM = MINIMUM_WIDTH + (MAXIMUM_WIDTH - MINIMUM_WIDTH) * 0.3
 /** Three columns on the wider small screens the sidebar covers, where two would be huge */
 const THREE_COLUMNS_FROM = 480
 
+/**
+ * The columns start from nothing rather than from their content, which would
+ * let a title too long for its card — it is truncated, never wrapped — widen
+ * every column past the sidebar
+ */
+const COLUMN = 'minmax(0, 1fr)'
+
 export const cardGrid = style({
   'display': 'grid',
-  'gridTemplateColumns': '1fr',
+  'gridTemplateColumns': COLUMN,
   'gap': CARD_GAP,
   '@container': {
     [`${sidebarContent} (min-width: ${TWO_COLUMNS_FROM}px)`]: {
-      gridTemplateColumns: 'repeat(2, 1fr)',
+      gridTemplateColumns: `repeat(2, ${COLUMN})`,
     },
     [`${sidebarContent} (min-width: ${THREE_COLUMNS_FROM}px)`]: {
-      gridTemplateColumns: 'repeat(3, 1fr)',
+      gridTemplateColumns: `repeat(3, ${COLUMN})`,
     },
   },
 })
