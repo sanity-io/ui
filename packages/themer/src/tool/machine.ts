@@ -1,4 +1,4 @@
-import {assign, not, setup, SnapshotFrom} from 'xstate'
+import {assign, not, setup, SnapshotFrom, stateIn} from 'xstate'
 
 import {BuildThemeOptions} from '../theme/options'
 import {ImagePalette} from './imagePalette'
@@ -246,8 +246,8 @@ export const themerMachine = setup({
         },
       },
     },
-    // Independent of the sidebar, so the split preview can be looked at
-    // without the sidebar taking up room
+    // The split preview belongs to a sidebar session: closing the sidebar —
+    // from its header or from the navbar — ends the split with it
     preview: {
       initial: 'single',
       states: {
@@ -255,7 +255,11 @@ export const themerMachine = setup({
           on: {'preview.toggle': 'split'},
         },
         split: {
-          on: {'preview.toggle': 'single'},
+          on: {
+            'preview.toggle': 'single',
+            'sidebar.close': 'single',
+            'sidebar.toggle': {guard: stateIn({sidebar: 'open'}), target: 'single'},
+          },
         },
       },
     },

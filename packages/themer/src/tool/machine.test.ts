@@ -63,16 +63,24 @@ describe('themerMachine', () => {
     )
   })
 
-  it('keeps the split preview while the sidebar is closed', () => {
+  it('ends the split preview when the sidebar closes, from its header or the navbar', () => {
     const actor = start()
 
     actor.send({type: 'sidebar.toggle'})
     actor.send({type: 'preview.toggle'})
     actor.send({type: 'sidebar.close'})
-    expect(actor.getSnapshot().matches({sidebar: 'closed', preview: 'split'})).toBe(true)
+    expect(actor.getSnapshot().matches({sidebar: 'closed', preview: 'single'})).toBe(true)
 
     actor.send({type: 'sidebar.toggle'})
-    expect(actor.getSnapshot().matches({sidebar: 'open', preview: 'split'})).toBe(true)
+    expect(actor.getSnapshot().matches({sidebar: 'open', preview: 'single'})).toBe(true)
+
+    actor.send({type: 'preview.toggle'})
+    actor.send({type: 'sidebar.toggle'})
+    expect(actor.getSnapshot().matches({sidebar: 'closed', preview: 'single'})).toBe(true)
+
+    // Opening the sidebar is not a way to split
+    actor.send({type: 'sidebar.toggle'})
+    expect(actor.getSnapshot().matches({sidebar: 'open', preview: 'single'})).toBe(true)
   })
 
   describe('picking', () => {
