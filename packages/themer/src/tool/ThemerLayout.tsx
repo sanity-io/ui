@@ -125,6 +125,12 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // Closing the sidebar ends the split, so both leave in one transition.
   const [shown, setShown] = useState({open, split})
   const [isPending, startTransition] = useTransition()
+  // Where the transitions are taking the panel and the split copy. A toggle
+  // that comes in while one is still pending — the first opening waits for
+  // the sidebar's code — goes on from there rather than from what is shown,
+  // or the pending transition would still show a sidebar that has been
+  // closed in the meantime
+  const requested = useRef({open, split})
   // The sidebar mounts the first time it opens, which is when its code loads,
   // and stays mounted from then on
   const [panelMounted, setPanelMounted] = useState(false)
@@ -136,15 +142,17 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const [resizing, setResizing] = useState(false)
   const stopResizing = () => setResizing(false)
   useEffect(() => {
-    if (shown.open === open && shown.split === split) return
+    const previous = requested.current
+    if (previous.open === open && previous.split === split) return
+    requested.current = {open, split}
     startTransition(() => {
-      if (shown.open !== open) addTransitionType(PANEL_TRANSITION)
-      if (shown.split !== split) addTransitionType(SPLIT_TRANSITION)
+      if (previous.open !== open) addTransitionType(PANEL_TRANSITION)
+      if (previous.split !== split) addTransitionType(SPLIT_TRANSITION)
       setShown({open, split})
       if (open) setPanelMounted(true)
       setResizing(true)
     })
-  }, [open, shown, split])
+  }, [open, split])
 
   useEffect(() => {
     if (!resizing) return undefined
