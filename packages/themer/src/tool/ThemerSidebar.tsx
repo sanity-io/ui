@@ -12,6 +12,8 @@ import {ThemeList} from './ThemeList'
 import {ThemeSnippetDialog} from './ThemeSnippetDialog'
 import {TooltipButton} from './TooltipButton'
 
+import {title} from './ThemerSidebar.css'
+
 const VIEW_TITLES = {
   list: 'Themer',
   edit: 'Edit theme',
@@ -27,18 +29,23 @@ const VIEW_TITLES = {
  * @internal
  */
 export function ThemerSidebar() {
-  const {active, split, view, send} = useThemer()
+  const {active, split, view, navbarHeight, send} = useThemer()
   const [snippetOpen, setSnippetOpen] = useState(false)
   const inList = view.name === 'list'
 
   return (
     <Card height="fill">
       <Flex direction="column" height="fill">
-        {/* No bottom border: the header sits next to the Studio navbar, whose
-            height is the Studio's to decide, so a line here would not line up
-            with the navbar's */}
-        <Card padding={2}>
-          <Flex align="center" gap={1}>
+        {/* The header sits next to the Studio navbar and takes its height, so
+            the two bottom borders line up — whatever height the Studio, its
+            breakpoint or a custom navbar gives it */}
+        <Card
+          borderBottom
+          padding={3}
+          sizing="border"
+          style={navbarHeight === null ? undefined : {height: navbarHeight}}
+        >
+          <Flex align="center" gap={1} height="fill">
             {!inList && (
               <TooltipButton
                 icon={ArrowLeftIcon}
@@ -48,7 +55,7 @@ export function ThemerSidebar() {
                 tooltip="Back to the themes"
               />
             )}
-            <Box flex={1} paddingLeft={inList ? 1 : 0} style={{minWidth: 0}}>
+            <Box className={title} flex={1}>
               <Text size={1} textOverflow="ellipsis" weight="semibold">
                 {VIEW_TITLES[view.name]}
               </Text>

@@ -1,8 +1,8 @@
 import {SparklesIcon} from '@sanity/icons/Sparkles'
 import {Box, Card, Flex, Stack, Text} from '@sanity/ui'
 import {Tooltip} from '@sanity/ui/tooltip'
+import {assignInlineVars} from '@vanilla-extract/dynamic'
 import {useEffect, useMemo, useRef, useState} from 'react'
-import {styled} from 'styled-components'
 
 import {BuildThemeOptions} from '../theme/options'
 import {ImageFileButton} from './ImageFileButton'
@@ -19,6 +19,22 @@ import {ThemeThumbnail} from './ThemeThumbnail'
 import {TooltipButton} from './TooltipButton'
 import {useImagePalette} from './useImagePalette'
 
+import {
+  imageTile,
+  paletteGrid,
+  ROW_PADDING,
+  tile,
+  VARIANT_FRAME,
+  VARIANT_GAP,
+  VARIANT_WIDTH,
+  variantButton,
+  variantFrame,
+  variantRow,
+  variantScale,
+  variantScaleBox,
+  variantWidth,
+} from './ImagePaletteSection.css'
+
 /** The swatches on display: the vibrant family over the muted one */
 const TILES: ImagePaletteKey[] = [
   'vibrant',
@@ -29,132 +45,14 @@ const TILES: ImagePaletteKey[] = [
   'darkMuted',
 ]
 
-const TILE_SIZE = 24
-const TILE_GAP = 4
-
-/** The image spans both rows of tiles */
-const IMAGE_SIZE = TILE_SIZE * 2 + TILE_GAP
-
-/** The variant previews are the theme thumbnails, laid out at this width and scaled down */
-const VARIANT_WIDTH = 144
-
 /**
  * How many variants show at once: two and a half, so that the cut-off third
  * one gives away that the row scrolls
  */
 const VISIBLE_VARIANTS = 2.5
-const VARIANT_GAP = 8
-const ROW_PADDING = 12
 
 /** The width of one variant, before the row has been measured */
 const FALLBACK_VARIANT_WIDTH = 58
-
-const PaletteGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, ${TILE_SIZE}px);
-  grid-auto-rows: ${TILE_SIZE}px;
-  gap: ${TILE_GAP}px;
-
-  &[data-with-image='true'] {
-    grid-template-columns: ${IMAGE_SIZE}px repeat(3, ${TILE_SIZE}px);
-  }
-`
-
-const ImageTile = styled.img`
-  display: block;
-  grid-row: span 2;
-  width: ${IMAGE_SIZE}px;
-  height: ${IMAGE_SIZE}px;
-  border-radius: 3px;
-  object-fit: cover;
-  box-shadow: inset 0 0 0 1px var(--card-border-color);
-`
-
-const Tile = styled.span`
-  display: block;
-  border-radius: 3px;
-  box-shadow: inset 0 0 0 1px var(--card-border-color);
-
-  &[data-empty='true'] {
-    background: repeating-linear-gradient(
-      -45deg,
-      transparent 0 3px,
-      var(--card-border-color) 3px 4px
-    );
-  }
-`
-
-/**
- * The variants scroll sideways and snap into place, bleeding into the card's
- * padding so the row runs from edge to edge
- */
-const VariantRow = styled.div`
-  display: flex;
-  gap: ${VARIANT_GAP}px;
-  margin: 0 -${ROW_PADDING}px;
-  padding: 0 ${ROW_PADDING}px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: ${ROW_PADDING}px;
-  scrollbar-width: thin;
-`
-
-const VariantButton = styled.button`
-  appearance: none;
-  flex: none;
-  display: block;
-  box-sizing: border-box;
-  width: calc(var(--variant-width) + 8px);
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-align: center;
-  cursor: pointer;
-  scroll-snap-align: start;
-
-  &:focus {
-    outline: none;
-  }
-`
-
-/**
- * Clips the scaled-down thumbnail to its visual size, with room for the ring
- * — drawn inside the frame, like the theme cards', so the scrolling row
- * never clips it
- */
-const VariantFrame = styled.span`
-  display: block;
-  box-sizing: border-box;
-  width: calc(var(--variant-width) + 8px);
-  height: calc(var(--variant-width) * 9 / 16 + 8px);
-  padding: 4px;
-  border-radius: 7px;
-  overflow: hidden;
-  transition: box-shadow 100ms;
-
-  ${VariantButton}:hover & {
-    box-shadow: inset 0 0 0 2px var(--card-border-color);
-  }
-
-  ${VariantButton}[aria-pressed='true'] & {
-    box-shadow: inset 0 0 0 2px var(--card-focus-ring-color);
-  }
-
-  ${VariantButton}:focus-visible & {
-    outline: 2px solid var(--card-focus-ring-color);
-    outline-offset: -2px;
-  }
-`
-
-const VariantScale = styled.span`
-  display: block;
-  width: ${VARIANT_WIDTH}px;
-  transform: scale(var(--variant-scale));
-  transform-origin: top left;
-`
 
 /**
  * Takes the colors of a theme from an image, on device: the image is read
@@ -181,7 +79,7 @@ export function ImagePaletteSection(props: {
   const dragDepth = useRef(0)
   const current = palette ? currentImageVariant(options, palette) : null
   const rowRef = useRef<HTMLDivElement | null>(null)
-  const [variantWidth, setVariantWidth] = useState(FALLBACK_VARIANT_WIDTH)
+  const [thumbnailWidth, setThumbnailWidth] = useState(FALLBACK_VARIANT_WIDTH)
 
   // Size the variants to the row, so two and a half of them are in view
   useEffect(() => {
@@ -193,8 +91,8 @@ export function ImagePaletteSection(props: {
       const visible =
         row.clientWidth - ROW_PADDING - (Math.ceil(VISIBLE_VARIANTS) - 1) * VARIANT_GAP
 
-      // Each variant is its thumbnail plus the 4px frame on either side
-      setVariantWidth(Math.max(24, Math.floor(visible / VISIBLE_VARIANTS) - 8))
+      // Each variant is its thumbnail plus the frame on either side
+      setThumbnailWidth(Math.max(24, Math.floor(visible / VISIBLE_VARIANTS) - VARIANT_FRAME * 2))
     }
 
     measure()
@@ -212,7 +110,13 @@ export function ImagePaletteSection(props: {
     return IMAGE_PALETTE_VARIANTS.flatMap((variant) =>
       palette[variant] === null
         ? []
-        : [{variant, options: applyImagePalette(options, palette, variant)}],
+        : [
+            {
+              variant,
+              title: IMAGE_PALETTE_TITLES[variant],
+              options: applyImagePalette(options, palette, variant),
+            },
+          ],
     )
   }, [options, palette])
 
@@ -265,8 +169,8 @@ export function ImagePaletteSection(props: {
 
         {palette ? (
           <>
-            <PaletteGrid data-with-image={imageUrl !== undefined}>
-              {imageUrl && <ImageTile alt="" src={imageUrl} />}
+            <div className={paletteGrid} data-with-image={imageUrl !== undefined}>
+              {imageUrl && <img alt="" className={imageTile} src={imageUrl} />}
               {TILES.map((key) => {
                 const hex = palette[key]
                 const title = IMAGE_PALETTE_TITLES[key]
@@ -283,48 +187,56 @@ export function ImagePaletteSection(props: {
                     placement="bottom"
                     portal
                   >
-                    <Tile data-empty={hex === null} style={{background: hex ?? undefined}} />
+                    <span
+                      className={tile}
+                      data-empty={hex === null}
+                      style={{background: hex ?? undefined}}
+                    />
                   </Tooltip>
                 )
               })}
-            </PaletteGrid>
+            </div>
 
             <Stack gap={2}>
               <Text muted size={0}>
                 Pick the swatch to build the theme around
               </Text>
-              <VariantRow
+              <div
+                className={variantRow}
                 ref={rowRef}
-                style={{
-                  ['--variant-width' as string]: `${variantWidth}px`,
-                  ['--variant-scale' as string]: variantWidth / VARIANT_WIDTH,
-                }}
+                style={assignInlineVars({
+                  [variantWidth]: `${thumbnailWidth}px`,
+                  [variantScale]: String(thumbnailWidth / VARIANT_WIDTH),
+                })}
               >
-                {variants.map(({variant, options: variantOptions}) => (
-                  <VariantButton
+                {variants.map(({variant, title, options: variantOptions}) => (
+                  // oxlint-disable-next-line control-has-associated-label -- the title below the thumbnail is the label, deeper than the rule looks
+                  <button
                     aria-pressed={variant === current}
+                    className={variantButton}
                     key={variant}
                     onClick={() => onVariant(variant)}
                     type="button"
                   >
-                    <VariantFrame>
-                      <VariantScale>
+                    <span className={variantFrame}>
+                      <span className={variantScaleBox}>
                         <ThemeThumbnail options={variantOptions} />
-                      </VariantScale>
-                    </VariantFrame>
-                    <Box paddingTop={1}>
+                      </span>
+                    </span>
+                    <Box as="span" display="block" paddingTop={1}>
                       <Text
                         align="center"
+                        as="span"
                         size={0}
                         textOverflow="ellipsis"
                         weight={variant === current ? 'medium' : 'regular'}
                       >
-                        {IMAGE_PALETTE_TITLES[variant]}
+                        {title}
                       </Text>
                     </Box>
-                  </VariantButton>
+                  </button>
                 ))}
-              </VariantRow>
+              </div>
             </Stack>
 
             <TooltipButton

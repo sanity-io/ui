@@ -1,3 +1,5 @@
+import {ArrowDownIcon} from '@sanity/icons/ArrowDown'
+import {ArrowUpIcon} from '@sanity/icons/ArrowUp'
 import {CopyIcon} from '@sanity/icons/Copy'
 import {EditIcon} from '@sanity/icons/Edit'
 import {EllipsisHorizontalIcon} from '@sanity/icons/EllipsisHorizontal'
@@ -5,108 +7,87 @@ import {TrashIcon} from '@sanity/icons/Trash'
 import {Box, Button, Card, Text, useRootTheme} from '@sanity/ui'
 import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
 import {Tooltip} from '@sanity/ui/tooltip'
-import {useState} from 'react'
-import {styled} from 'styled-components'
+import {Reorder, useDragControls} from 'motion/react'
+import {useRef, useState} from 'react'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
 import {useThemer} from './context'
 import {displayTitle, ThemerTheme} from './themes'
 import {ThemeThumbnail} from './ThemeThumbnail'
 
-const Root = styled.div`
-  position: relative;
-`
-
-/** A bare button, so that the thumbnail and the title can carry the styling */
-const PickButton = styled.button`
-  appearance: none;
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  text-align: center;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-  }
-`
+import {frame, menuCard, menuSlot, pickButton, root} from './ThemeCard.css'
 
 /**
- * Wraps the thumbnail with room for the ring that marks the applied theme —
- * hovering shows a faint ring, the applied theme the focus ring color, and
- * keyboard focus an outline. The rings are drawn inside the frame's padding,
- * so nothing sticks out to be clipped by the scrolling list.
+ * Scrolls the applied theme's card into view when it is not already, as a
+ * ref: the list scrolls to it as it mounts — coming back from the editor or
+ * the removed themes — and when another theme gets applied
  */
-const Frame = styled.span`
-  display: block;
-  padding: 4px;
-  border-radius: 10px;
-  transition: box-shadow 100ms;
-
-  ${PickButton}:hover & {
-    box-shadow: inset 0 0 0 2px var(--card-border-color);
-  }
-
-  ${PickButton}[aria-pressed='true'] & {
-    box-shadow: inset 0 0 0 2px var(--card-focus-ring-color);
-  }
-
-  ${PickButton}:focus-visible & {
-    outline: 2px solid var(--card-focus-ring-color);
-    outline-offset: -2px;
-  }
-`
-
-/**
- * The actions menu sits on the thumbnail's top right corner, like the actions
- * of an image input, and only shows on hover, on keyboard focus, and while it
- * is open — its popover is portaled, so an open menu does not count as focus
- * within
- */
-const MenuSlot = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  opacity: 0;
-  transition: opacity 100ms;
-
-  ${Root}:hover &,
-  ${Root}:focus-within &,
-  &[data-visible='true'] {
-    opacity: 1;
-  }
-`
+function scrollRefIntoViewIfNeeded(node: HTMLElement | null) {
+  if (node) scrollIntoView(node, {block: 'nearest', scrollMode: 'if-needed'})
+}
 
 /**
  * One theme in the list: the floating preview with the title below it, like
  * an appearance option in macOS System Settings. Clicking it applies the
- * theme to the whole Studio; its menu holds the edit, duplicate and remove
- * flows that apply to the theme.
+ * theme to the whole Studio, dragging it moves the theme to another place in
+ * the list; its menu holds the move, edit, duplicate and remove flows that
+ * apply to the theme.
  *
  * @internal
  */
 export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
   const {active, theme} = props
-  const {send} = useThemer()
+  const {themes, send} = useThemer()
   const {scheme} = useRootTheme()
   const [menuOpen, setMenuOpen] = useState(false)
+  const dragControls = useDragControls()
+  // Letting go of a drag also clicks the card, and that click must not pick
+  const dragged = useRef(false)
   const title = displayTitle(theme.title)
+  const index = themes.findIndex((candidate) => candidate.slug === theme.slug)
+
+  const moveTo = (to: number) => {
+    const order = themes.map((candidate) => candidate.slug)
+
+    order.splice(to, 0, ...order.splice(index, 1))
+    send({type: 'theme.reorder', order})
+  }
 
   return (
-    <Root>
-      <PickButton
+    <Reorder.Item
+      as="div"
+      className={root}
+      dragControls={dragControls}
+      dragListener={false}
+      onDragEnd={() => {
+        // The click lands before the next frame
+        requestAnimationFrame(() => {
+          dragged.current = false
+        })
+      }}
+      onDragStart={() => {
+        dragged.current = true
+      }}
+      ref={active ? scrollRefIntoViewIfNeeded : undefined}
+      value={theme.slug}
+      whileDrag={{scale: 1.04}}
+    >
+      <button
         aria-pressed={active}
-        onClick={() => send({type: 'theme.pick', slug: theme.slug})}
+        className={pickButton}
+        onClick={() => {
+          if (!dragged.current) send({type: 'theme.pick', slug: theme.slug})
+        }}
+        onPointerDown={(event) => {
+          // A mouse or pen drags the card off the button; a finger scrolls the
+          // list instead, and moves themes from the menu
+          if (event.pointerType !== 'touch') dragControls.start(event)
+        }}
         type="button"
       >
-        <Frame>
+        <span className={frame}>
           <ThemeThumbnail options={theme.options} />
-        </Frame>
+        </span>
         <Box as="span" display="block" paddingTop={2} paddingX={2}>
           <Text
             align="center"
@@ -118,15 +99,15 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
             {title}
           </Text>
         </Box>
-      </PickButton>
+      </button>
 
       {/* The tooltip wraps a card rather than the button: the menu button
           clones its button to wire it up, which a tooltip in between would
           swallow. The card keeps the button dark, as it sits on the dark
           half of the thumbnail, while the menu opens in the sidebar's scheme */}
-      <MenuSlot data-visible={menuOpen}>
+      <div className={menuSlot} data-visible={menuOpen}>
         <Tooltip animate content={<Text size={1}>Show more</Text>} placement="bottom" portal>
-          <Card radius={2} scheme="dark" style={{display: 'inline-block'}}>
+          <Card className={menuCard} radius={2} scheme="dark">
             <MenuButton
               button={
                 <Button
@@ -141,6 +122,19 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
               id={`themer-theme-${theme.slug}`}
               menu={
                 <Menu>
+                  <MenuItem
+                    disabled={index <= 0}
+                    icon={ArrowUpIcon}
+                    onClick={() => moveTo(index - 1)}
+                    text="Move up"
+                  />
+                  <MenuItem
+                    disabled={index >= themes.length - 1}
+                    icon={ArrowDownIcon}
+                    onClick={() => moveTo(index + 1)}
+                    text="Move down"
+                  />
+                  <MenuDivider />
                   {theme.source === 'custom' && (
                     <MenuItem
                       icon={EditIcon}
@@ -172,7 +166,7 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
             />
           </Card>
         </Tooltip>
-      </MenuSlot>
-    </Root>
+      </div>
+    </Reorder.Item>
   )
 }

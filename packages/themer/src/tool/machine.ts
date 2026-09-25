@@ -1,4 +1,4 @@
-import {assign, not, setup, SnapshotFrom} from 'xstate'
+import {assign, not, setup, SnapshotFrom, stateIn} from 'xstate'
 
 import {BuildThemeOptions} from '../theme/options'
 import {ImagePalette} from './imagePalette'
@@ -76,6 +76,8 @@ export type ThemerEvent =
   | {type: 'theme.restore'; slug: string}
   /** Deletes one of the user's own themes for good */
   | {type: 'theme.delete'; slug: string}
+  /** Rearranges the list: the slugs of the listed themes, in their new order */
+  | {type: 'theme.reorder'; order: string[]}
   /** Back to picking a theme */
   | {type: 'flow.list'}
   /** On to restoring removed themes */
@@ -212,6 +214,15 @@ export const themerMachine = setup({
     restore: assign(({context}, params: {slug: string}) => ({
       removed: context.removed.filter((slug) => slug !== params.slug),
     })),
+    reorder: assign(({context}, params: {order: string[]}) => {
+      const listed = new Set(themesOf(context).themes.map((theme) => theme.slug))
+      const order = params.order.filter((slug) => listed.has(slug))
+
+      // The removed themes keep their place in line for when they are restored
+      return {
+        order: [...order, ...context.order.filter((slug) => !order.includes(slug))],
+      }
+    }),
     delete: assign(({context}, params: {slug: string}) => {
       if (!context.custom.some((theme) => theme.slug === params.slug)) return {}
 
@@ -246,8 +257,8 @@ export const themerMachine = setup({
         },
       },
     },
-    // Independent of the sidebar, so the split preview can be looked at
-    // without the sidebar taking up room
+    // The split preview belongs to a sidebar session: closing the sidebar —
+    // from its header or from the navbar — ends the split with it
     preview: {
       initial: 'single',
       states: {
@@ -255,7 +266,11 @@ export const themerMachine = setup({
           on: {'preview.toggle': 'split'},
         },
         split: {
-          on: {'preview.toggle': 'single'},
+          on: {
+            'preview.toggle': 'single',
+            'sidebar.close': 'single',
+            'sidebar.toggle': {guard: stateIn({sidebar: 'open'}), target: 'single'},
+          },
         },
       },
     },
@@ -307,6 +322,9 @@ export const themerMachine = setup({
         'theme.delete': {
           actions: {type: 'delete', params: ({event}) => ({slug: event.slug})},
         },
+        'theme.reorder': {
+          actions: {type: 'reorder', params: ({event}) => ({order: event.order})},
+        },
         'flow.list': '.list',
         'flow.removed': {
           target: '.removed',
@@ -335,7 +353,7 @@ export type ThemerSnapshot = SnapshotFrom<typeof themerMachine>
 
 /** The part of the machine context that is persisted between sessions @internal */
 export function selectStoredState(snapshot: ThemerSnapshot): ThemerState {
-  const {active, custom, removed} = snapshot.context
+  const {active, custom, removed, order} = snapshot.context
 
-  return {active, custom, removed}
+  return {active, custom, removed, order}
 }

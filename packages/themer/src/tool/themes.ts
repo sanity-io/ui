@@ -41,6 +41,11 @@ export interface ThemerState {
   custom: CustomTheme[]
   /** The slugs of the themes the user removed from the list */
   removed: string[]
+  /**
+   * The slugs of the themes in the order the user arranged them — themes not
+   * in it (new presets, themes added since) follow in their default order
+   */
+  order: string[]
 }
 
 /** The slug of the theme the Studio config was generated from @internal */
@@ -53,7 +58,7 @@ const CONFIG_TITLE = 'Studio config'
 export const UNTITLED_THEME = 'Untitled theme'
 
 /** @internal */
-export const initialThemerState: ThemerState = {active: null, custom: [], removed: []}
+export const initialThemerState: ThemerState = {active: null, custom: [], removed: [], order: []}
 
 /** The themes the tool works with, derived from the persisted state @internal */
 export interface ResolvedThemes {
@@ -68,9 +73,11 @@ export interface ResolvedThemes {
 /**
  * Resolves the list of themes: the configured theme first, then the presets
  * (minus the ones that would only repeat the configured theme), then the
- * user's own themes. Removed themes are set aside so they can be restored,
- * and the active theme falls back to the configured one when its slug no
- * longer resolves.
+ * user's own themes — rearranged into the order the user dragged them into,
+ * with themes that order does not know about kept in that default order after
+ * the ones it does. Removed themes are set aside so they can be restored, and
+ * the active theme falls back to the configured one when its slug no longer
+ * resolves.
  *
  * @internal
  */
@@ -99,6 +106,12 @@ export function resolveThemes(state: ThemerState, baseOptions: BuildThemeOptions
       ...(theme.palette ? {palette: theme.palette} : {}),
     })
   }
+
+  const position = new Map(state.order.map((slug, index) => [slug, index]))
+  const rank = (theme: ThemerTheme) => position.get(theme.slug) ?? state.order.length
+
+  // A stable sort: the themes the order does not know about keep their default order
+  all.sort((a, b) => rank(a) - rank(b))
 
   const removedSlugs = new Set(state.removed)
   const themes = all.filter((theme) => !removedSlugs.has(theme.slug))
