@@ -1,7 +1,8 @@
-import {assign, not, setup, SnapshotFrom, stateIn} from 'xstate'
+import {assign, not, or, setup, SnapshotFrom, stateIn} from 'xstate'
 
 import {BuildThemeOptions} from '../theme/options'
 import {ImagePalette} from './imagePalette'
+import {writeStoredState} from './storage'
 import {
   CONFIG_SLUG,
   createCustomTheme,
@@ -10,6 +11,18 @@ import {
   ThemerState,
   UNTITLED_THEME,
 } from './themes'
+
+/**
+ * How long the layout's motions — the panel's and the split preview's, and
+ * the cross-fade to another theme — are taken to last when the layout never
+ * says: it reports every view transition it starts, so this only ends a
+ * motion that has none (reduced motion, a browser without view transitions),
+ * where the `moving` and `switching` tags have nothing to affect. Generous,
+ * so that it never runs out before a slow deferred commit starts the real one.
+ *
+ * @internal
+ */
+export const MOTION_DURATION = 2000
 
 /** What the themer machine starts from @internal */
 export interface ThemerInput {
@@ -41,6 +54,13 @@ export type ThemerEvent =
   | {type: 'sidebar.toggle'}
   | {type: 'sidebar.close'}
   /**
+   * A view transition of the layout is under way — the panel or the split copy
+   * arriving or leaving, the Studio giving way, taking room or cross-fading to
+   * another theme — and the layout is no longer `moving` or `switching` for
+   * the machine
+   */
+  | {type: 'layout.transitioned'}
+  /**
    * Switches between showing the Studio once, in its own appearance, and
    * twice side by side, in light and dark
    */
@@ -60,6 +80,8 @@ export type ThemerEvent =
     }
   /** Adds a copy of a theme and opens it in the editor */
   | {type: 'theme.duplicate'; slug: string}
+  /** Adds a theme someone shared as a code, and applies it — staying in the list */
+  | {type: 'theme.import'; title: string; options: BuildThemeOptions}
   /** Opens one of the user's own themes in the editor */
   | {type: 'theme.edit'; slug: string}
   | {
@@ -87,6 +109,12 @@ function themesOf(context: ThemerMachineContext) {
   return resolveThemes(context, context.baseOptions)
 }
 
+function revokeObjectUrl(url: string) {
+  if (typeof URL !== 'undefined' && typeof URL.revokeObjectURL === 'function') {
+    URL.revokeObjectURL(url)
+  }
+}
+
 /**
  * The state of the themer tool: three parallel regions, whether the
  * `sidebar` is open, which `flow` it is in — picking a theme from the `list`,
@@ -95,6 +123,20 @@ function themesOf(context: ThemerMachineContext) {
  * side by side (`split`). The context carries the persisted state (the
  * applied theme, the user's themes and what was removed) alongside what the
  * flows need.
+ *
+ * The sidebar and the preview pass through `opening`/`closing` and
+ * `splitting`/`unsplitting` on their way, states tagged for the UI: `panel`
+ * and `split` say what shows (the panel from `opening` on, the split copy from
+ * `splitting` on), `moving` that the Studio is about to give way or take room
+ * — which is when, and only when, the layout lets a view transition animate
+ * it. A fourth region, `theme`, is `switching` (its tag) right after an event
+ * that applies another theme — picking one, adding, duplicating, importing or
+ * editing one, removing or deleting the applied one — when the layout
+ * cross-fades to it; edits to the applied theme's colors are not switches,
+ * they follow the pointer. These states last until the layout reports its
+ * transition under way — every boundary reports, the panel's and the copy's
+ * entering and leaving as much as the Studio's morphing — or for
+ * `MOTION_DURATION` when nothing animates.
  *
  * Theme operations are handled in every flow, and the flows leave on their
  * own when they lose their subject: the editor when its theme is removed or
@@ -123,8 +165,29 @@ export const themerMachine = setup({
         (theme) => theme.slug === context.editing?.slug && theme.source === 'custom',
       ),
     hasRemovedThemes: ({context}) => themesOf(context).removed.length > 0,
+    sidebarShown: or([stateIn({sidebar: 'opening'}), stateIn({sidebar: 'open'})]),
+    // Only another theme than the applied one changes anything to cross-fade to
+    isAnotherTheme: ({context}, params: {slug: string}) =>
+      params.slug !== (context.active ?? CONFIG_SLUG),
+    // Removing or deleting the applied theme is what changes the applied theme
+    isAppliedTheme: ({context}, params: {slug: string}) => params.slug === context.active,
+    // A theme added from given options (an image's) looks different from the applied one
+    hasOptions: (_, params: {options: BuildThemeOptions | undefined}) =>
+      params.options !== undefined,
   },
   actions: {
+    // The state that survives sessions is written as the machine starts — that
+    // completes the migration of what an earlier version stored — and on
+    // every change to it
+    persist: ({context}) => {
+      const {active, custom, removed, order} = context
+
+      writeStoredState({active, custom, removed, order})
+    },
+    // The image of a replaced palette or a deleted theme is released from memory
+    revokeImage: (_, params: {url: string | undefined}) => {
+      if (params.url) revokeObjectUrl(params.url)
+    },
     pick: assign((_, params: {slug: string}) => ({
       active: params.slug === CONFIG_SLUG ? null : params.slug,
     })),
@@ -155,6 +218,11 @@ export const themerMachine = setup({
         }
       },
     ),
+    import: assign(({context}, params: {title: string; options: BuildThemeOptions}) => {
+      const theme = createCustomTheme(params.title, params.options)
+
+      return {active: theme.slug, custom: [...context.custom, theme]}
+    }),
     duplicate: assign(({context}, params: {slug: string}) => {
       const {themes, removed} = themesOf(context)
       const source = [...themes, ...removed].find((theme) => theme.slug === params.slug)
@@ -244,16 +312,32 @@ export const themerMachine = setup({
     editing: null,
     images: {},
   }),
+  entry: 'persist',
   type: 'parallel',
   states: {
     sidebar: {
       initial: 'closed',
       states: {
         closed: {
-          on: {'sidebar.toggle': 'open'},
+          on: {'sidebar.toggle': 'opening'},
+        },
+        opening: {
+          tags: ['panel', 'moving'],
+          after: {[MOTION_DURATION]: 'open'},
+          on: {
+            'layout.transitioned': 'open',
+            'sidebar.toggle': 'closing',
+            'sidebar.close': 'closing',
+          },
         },
         open: {
-          on: {'sidebar.toggle': 'closed', 'sidebar.close': 'closed'},
+          tags: ['panel'],
+          on: {'sidebar.toggle': 'closing', 'sidebar.close': 'closing'},
+        },
+        closing: {
+          tags: ['moving'],
+          after: {[MOTION_DURATION]: 'closed'},
+          on: {'layout.transitioned': 'closed', 'sidebar.toggle': 'opening'},
         },
       },
     },
@@ -263,13 +347,108 @@ export const themerMachine = setup({
       initial: 'single',
       states: {
         single: {
-          on: {'preview.toggle': 'split'},
+          on: {'preview.toggle': 'splitting'},
+        },
+        splitting: {
+          tags: ['split', 'moving'],
+          after: {[MOTION_DURATION]: 'split'},
+          on: {
+            'layout.transitioned': 'split',
+            'preview.toggle': 'unsplitting',
+            'sidebar.close': 'unsplitting',
+            'sidebar.toggle': {guard: 'sidebarShown', target: 'unsplitting'},
+          },
         },
         split: {
+          tags: ['split'],
           on: {
-            'preview.toggle': 'single',
-            'sidebar.close': 'single',
-            'sidebar.toggle': {guard: stateIn({sidebar: 'open'}), target: 'single'},
+            'preview.toggle': 'unsplitting',
+            'sidebar.close': 'unsplitting',
+            'sidebar.toggle': {guard: 'sidebarShown', target: 'unsplitting'},
+          },
+        },
+        unsplitting: {
+          tags: ['moving'],
+          after: {[MOTION_DURATION]: 'single'},
+          on: {'layout.transitioned': 'single', 'preview.toggle': 'splitting'},
+        },
+      },
+    },
+    theme: {
+      initial: 'applied',
+      states: {
+        // Only events that change what is applied count: adding a copy of the
+        // applied theme, editing or duplicating it, picking it again, or
+        // removing another theme leaves the Studio looking the same — with
+        // nothing to cross-fade, nothing would report the switch over, and the
+        // first edit that followed would cross-fade instead of following the
+        // pointer
+        applied: {
+          on: {
+            'theme.pick': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
+            'theme.edit': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
+            'theme.duplicate': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
+            'theme.remove': {
+              guard: {type: 'isAppliedTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
+            'theme.delete': {
+              guard: {type: 'isAppliedTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+            },
+            'theme.add': {
+              guard: {type: 'hasOptions', params: ({event}) => ({options: event.options})},
+              target: 'switching',
+            },
+            'theme.import': 'switching',
+          },
+        },
+        switching: {
+          tags: ['switching'],
+          after: {[MOTION_DURATION]: 'applied'},
+          on: {
+            'layout.transitioned': 'applied',
+            // Another switch starts the clock over
+            'theme.pick': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.edit': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.duplicate': {
+              guard: {type: 'isAnotherTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.remove': {
+              guard: {type: 'isAppliedTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.delete': {
+              guard: {type: 'isAppliedTheme', params: ({event}) => ({slug: event.slug})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.add': {
+              guard: {type: 'hasOptions', params: ({event}) => ({options: event.options})},
+              target: 'switching',
+              reenter: true,
+            },
+            'theme.import': {target: 'switching', reenter: true},
           },
         },
       },
@@ -278,52 +457,81 @@ export const themerMachine = setup({
       initial: 'list',
       on: {
         'theme.pick': {
-          actions: {type: 'pick', params: ({event}) => ({slug: event.slug})},
+          actions: [{type: 'pick', params: ({event}) => ({slug: event.slug})}, 'persist'],
         },
         'theme.add': {
           target: '.edit',
-          actions: {
-            type: 'add',
-            params: ({event}) => ({
-              title: event.title,
-              options: event.options,
-              palette: event.palette,
-              imageUrl: event.imageUrl,
-            }),
-          },
+          actions: [
+            {
+              type: 'add',
+              params: ({event}) => ({
+                title: event.title,
+                options: event.options,
+                palette: event.palette,
+                imageUrl: event.imageUrl,
+              }),
+            },
+            'persist',
+          ],
         },
         'theme.duplicate': {
           target: '.edit',
-          actions: {type: 'duplicate', params: ({event}) => ({slug: event.slug})},
+          actions: [{type: 'duplicate', params: ({event}) => ({slug: event.slug})}, 'persist'],
         },
         'theme.edit': {
           target: '.edit',
           guard: {type: 'isCustomTheme', params: ({event}) => ({slug: event.slug})},
-          actions: {type: 'startEditing', params: ({event}) => ({slug: event.slug})},
+          actions: [{type: 'startEditing', params: ({event}) => ({slug: event.slug})}, 'persist'],
         },
         'theme.update': {
-          actions: {
-            type: 'update',
-            params: ({event}) => ({
-              slug: event.slug,
-              title: event.title,
-              options: event.options,
-              palette: event.palette,
-              imageUrl: event.imageUrl,
-            }),
-          },
+          actions: [
+            // A new image replaces the one the theme had
+            {
+              type: 'revokeImage',
+              params: ({context, event}) => ({
+                url: event.imageUrl ? context.images[event.slug] : undefined,
+              }),
+            },
+            {
+              type: 'update',
+              params: ({event}) => ({
+                slug: event.slug,
+                title: event.title,
+                options: event.options,
+                palette: event.palette,
+                imageUrl: event.imageUrl,
+              }),
+            },
+            'persist',
+          ],
         },
         'theme.remove': {
-          actions: {type: 'remove', params: ({event}) => ({slug: event.slug})},
+          actions: [{type: 'remove', params: ({event}) => ({slug: event.slug})}, 'persist'],
         },
         'theme.restore': {
-          actions: {type: 'restore', params: ({event}) => ({slug: event.slug})},
+          actions: [{type: 'restore', params: ({event}) => ({slug: event.slug})}, 'persist'],
         },
         'theme.delete': {
-          actions: {type: 'delete', params: ({event}) => ({slug: event.slug})},
+          actions: [
+            {
+              type: 'revokeImage',
+              params: ({context, event}) => ({url: context.images[event.slug]}),
+            },
+            {type: 'delete', params: ({event}) => ({slug: event.slug})},
+            'persist',
+          ],
         },
         'theme.reorder': {
-          actions: {type: 'reorder', params: ({event}) => ({order: event.order})},
+          actions: [{type: 'reorder', params: ({event}) => ({order: event.order})}, 'persist'],
+        },
+        'theme.import': {
+          actions: [
+            {
+              type: 'import',
+              params: ({event}) => ({title: event.title, options: event.options}),
+            },
+            'persist',
+          ],
         },
         'flow.list': '.list',
         'flow.removed': {
