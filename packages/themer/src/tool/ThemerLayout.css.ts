@@ -98,3 +98,26 @@ globalStyle(
   ].join(', '),
   {animation: 'none'},
 )
+
+/**
+ * With reduced motion, nothing in the split's transition animates — not the
+ * copies, not the root's cross-fade — so the new layout simply shows: the
+ * transition is over as soon as it starts. Scoped through the transition's
+ * type, so other view transitions on the page keep their own reduced-motion
+ * behavior.
+ */
+globalStyle(
+  ['group', 'image-pair', 'old', 'new']
+    .map(
+      (part) =>
+        `:root:active-view-transition-type(${SPLIT_TRANSITION})::view-transition-${part}(*)`,
+    )
+    .join(', '),
+  {
+    '@media': {
+      '(prefers-reduced-motion: reduce)': {
+        animation: 'none',
+      },
+    },
+  },
+)
