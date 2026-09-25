@@ -49,7 +49,7 @@
   "dependencies": {
     "@sanity/color": "workspace:^",
     "@sanity/icons": "workspace:^",
-    "@sanity/ui": "^4.2.3",
+    "@sanity/ui": "^4.2.4",
     "react-compiler-runtime": "1.0.0"
   },
   "devDependencies": {

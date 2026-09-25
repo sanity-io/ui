@@ -848,7 +848,7 @@ importers:
         specifier: workspace:^
         version: link:../icons
       '@sanity/ui':
-        specifier: ^4.2.3
+        specifier: ^4.2.4
         version: link:../ui
       react-compiler-runtime:
         specifier: 1.0.0
