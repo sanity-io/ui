@@ -1,5 +1,18 @@
 # @sanity/themer
 
+## 0.6.0
+
+### Minor Changes
+
+- [#2984](https://github.com/sanity-io/ui/pull/2984) [`196ecf0`](https://github.com/sanity-io/ui/commit/196ecf01111f8216f4282858cd0c403aad2e0382) Thanks [@stipsan](https://github.com/stipsan)! - The themer tool's split preview keeps the Studio next to the sidebar in the appearance the Studio is set to — light or dark from the appearance menu, with the picked theme — and slides a copy in the opposite scheme in from off screen on the far side, through React's `ViewTransition`: the copy slides in without fading, the Studio it makes room for cross-fades between its two widths at full height, and the sidebar stays put. `@sanity/themer` now requires React 19.3 for this. The tool works on small screens too: the sidebar covers the Studio instead of standing next to it, the split preview stacks the two copies, and the theme cards flow into more columns when the sidebar is wide enough.
+
+- [#2987](https://github.com/sanity-io/ui/pull/2987) [`2660338`](https://github.com/sanity-io/ui/commit/26603386b585c6b567c0a4e036406081e2137240) Thanks [@stipsan](https://github.com/stipsan)! - The themer tool is styled with vanilla-extract instead of styled-components: its styles ship as the `@sanity/themer/bundle.css` stylesheet, which `@sanity/themer/tool` imports itself (the `node` export condition resolves it to a no-op shim), and `styled-components` is no longer a peer dependency. The sidebar header has its bottom border back and takes the height of the Studio navbar, so the two line up — whatever height the Studio version, breakpoint or a custom navbar gives it. The sidebar slides in from its edge and out to it, the way the split copy does on the far side, and closing it ends the split preview with it. With `prefers-reduced-motion: reduce` the sidebar and the split preview switch layouts without their view transitions animating. The theme cards drag into any order — across the grid too — with the others making room, the card menu moves a theme up or down, and the order persists; the grid flows into two columns from a third of the way into widening the sidebar instead of most of the way. Coming back to the list scrolls the applied theme into view. The sidebar stays mounted while closed (an `Activity`), so it keeps its state and opens warmed up, and the split copy is kept the same way while the sidebar is open.
+
+### Patch Changes
+
+- Updated dependencies [[`fde1653`](https://github.com/sanity-io/ui/commit/fde16533056cab695eb9ff0cd52db8c3c023ed25)]:
+  - @sanity/ui@4.2.5
+
 ## 0.5.0
 
 ### Minor Changes
