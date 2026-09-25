@@ -60,6 +60,8 @@ export type ThemerEvent =
     }
   /** Adds a copy of a theme and opens it in the editor */
   | {type: 'theme.duplicate'; slug: string}
+  /** Adds a theme someone shared as a code, and applies it — staying in the list */
+  | {type: 'theme.import'; title: string; options: BuildThemeOptions}
   /** Opens one of the user's own themes in the editor */
   | {type: 'theme.edit'; slug: string}
   | {
@@ -155,6 +157,11 @@ export const themerMachine = setup({
         }
       },
     ),
+    import: assign(({context}, params: {title: string; options: BuildThemeOptions}) => {
+      const theme = createCustomTheme(params.title, params.options)
+
+      return {active: theme.slug, custom: [...context.custom, theme]}
+    }),
     duplicate: assign(({context}, params: {slug: string}) => {
       const {themes, removed} = themesOf(context)
       const source = [...themes, ...removed].find((theme) => theme.slug === params.slug)
@@ -324,6 +331,12 @@ export const themerMachine = setup({
         },
         'theme.reorder': {
           actions: {type: 'reorder', params: ({event}) => ({order: event.order})},
+        },
+        'theme.import': {
+          actions: {
+            type: 'import',
+            params: ({event}) => ({title: event.title, options: event.options}),
+          },
         },
         'flow.list': '.list',
         'flow.removed': {

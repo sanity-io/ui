@@ -1,15 +1,19 @@
 import {AddIcon} from '@sanity/icons/Add'
+import {ClipboardIcon} from '@sanity/icons/Clipboard'
 import {RestoreIcon} from '@sanity/icons/Restore'
 import {Box, Button, Card, Flex, Stack} from '@sanity/ui'
 import {MotionConfig, Reorder} from 'motion/react'
+import {useState} from 'react'
 
 import {useThemer} from './context'
 import {ImageFileButton} from './ImageFileButton'
 import {optionsFromImagePalette, titleFromFileName} from './imagePalette'
+import {PasteThemeDialog} from './PasteThemeDialog'
 import {ScrollArea} from './ScrollArea'
 import {ThemeCard} from './ThemeCard'
 import {TooltipButton} from './TooltipButton'
 import {useImagePalette} from './useImagePalette'
+import {usePasteThemeCodes, useThemeCodes} from './useThemeCodes'
 
 import {cardGrid} from './ThemeList.css'
 
@@ -20,12 +24,18 @@ import {cardGrid} from './ThemeList.css'
 /**
  * The flow for picking a theme: a grid of theme cards — the configured theme,
  * the presets and the user's own themes — that drag into the order the user
- * wants, with the entry points to the add and restore flows below.
+ * wants, with the entry points to the add and restore flows below. A theme
+ * code someone shared pastes right into the list, or through the paste button.
  *
  * @internal
  */
 export function ThemeList() {
   const {themes, removed, active, send} = useThemer()
+  const {addThemeFromClipboard} = useThemeCodes()
+  const [pasting, setPasting] = useState(false)
+
+  usePasteThemeCodes()
+
   const {busy, pickImage} = useImagePalette((palette, file) =>
     send({
       type: 'theme.add',
@@ -86,8 +96,19 @@ export function ThemeList() {
             onFile={pickImage}
             tooltip="Add a theme from the colors of an image"
           />
+          <TooltipButton
+            icon={ClipboardIcon}
+            mode="ghost"
+            onClick={async () => {
+              // Straight from the clipboard where the browser allows; by hand otherwise
+              if ((await addThemeFromClipboard()) !== 'added') setPasting(true)
+            }}
+            tooltip="Add a theme from a code someone shared"
+          />
         </Flex>
       </Card>
+
+      {pasting && <PasteThemeDialog onClose={() => setPasting(false)} />}
     </>
   )
 }

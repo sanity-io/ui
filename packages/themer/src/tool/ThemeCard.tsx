@@ -3,6 +3,7 @@ import {ArrowUpIcon} from '@sanity/icons/ArrowUp'
 import {CopyIcon} from '@sanity/icons/Copy'
 import {EditIcon} from '@sanity/icons/Edit'
 import {EllipsisHorizontalIcon} from '@sanity/icons/EllipsisHorizontal'
+import {ShareIcon} from '@sanity/icons/Share'
 import {TrashIcon} from '@sanity/icons/Trash'
 import {Box, Button, Card, Text, useRootTheme} from '@sanity/ui'
 import {Menu, MenuButton, MenuDivider, MenuItem} from '@sanity/ui/menu'
@@ -14,6 +15,7 @@ import scrollIntoView from 'scroll-into-view-if-needed'
 import {useThemer} from './context'
 import {displayTitle, ThemerTheme} from './themes'
 import {ThemeThumbnail} from './ThemeThumbnail'
+import {useThemeCodes} from './useThemeCodes'
 
 import {frame, menuCard, menuSlot, pickButton, root} from './ThemeCard.css'
 
@@ -38,6 +40,7 @@ function scrollRefIntoViewIfNeeded(node: HTMLElement | null) {
 export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
   const {active, theme} = props
   const {themes, send} = useThemer()
+  const {copyTheme} = useThemeCodes()
   const {scheme} = useRootTheme()
   const [menuOpen, setMenuOpen] = useState(false)
   const dragControls = useDragControls()
@@ -146,6 +149,11 @@ export function ThemeCard(props: {active: boolean; theme: ThemerTheme}) {
                     icon={CopyIcon}
                     onClick={() => send({type: 'theme.duplicate', slug: theme.slug})}
                     text={theme.source === 'custom' ? 'Duplicate' : 'Duplicate to edit'}
+                  />
+                  <MenuItem
+                    icon={ShareIcon}
+                    onClick={() => void copyTheme(theme)}
+                    text="Copy to share"
                   />
                   {theme.source !== 'config' && (
                     <>

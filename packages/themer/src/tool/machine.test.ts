@@ -292,6 +292,27 @@ describe('themerMachine', () => {
     })
   })
 
+  describe('importing', () => {
+    it('adds and applies a shared theme without opening the editor', () => {
+      const actor = start()
+
+      actor.send({type: 'sidebar.toggle'})
+      actor.send({type: 'theme.import', title: 'Shared', options: {dark: {accent: '#ff0000'}}})
+
+      const snapshot = actor.getSnapshot()
+      const stored = selectStoredState(snapshot)
+
+      expect(snapshot.matches({sidebar: 'open', flow: 'list'})).toBe(true)
+      expect(stored.custom).toHaveLength(1)
+      expect(stored.custom[0]).toMatchObject({
+        title: 'Shared',
+        options: {dark: {accent: '#ff0000'}},
+      })
+      expect(stored.active).toBe(stored.custom[0].slug)
+      expect(snapshot.context.editing).toBeNull()
+    })
+  })
+
   describe('rearranging', () => {
     it('stores the order the listed themes were dragged into', () => {
       const actor = startWithCustom()
