@@ -22,7 +22,14 @@ import {readStoredState, writeStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
 import {useStudioNavbarHeight} from './useStudioNavbarHeight'
 
-import {layout, SPLIT_TRANSITION, splitTransitionClasses, studioScheme} from './ThemerLayout.css'
+import {
+  layout,
+  PANEL_TRANSITION,
+  panelTransitionClasses,
+  SPLIT_TRANSITION,
+  splitTransitionClasses,
+  studioScheme,
+} from './ThemerLayout.css'
 
 /**
  * Below this media index the Studio collapses its navbar into a drawer, and
@@ -34,6 +41,7 @@ const MOBILE_MEDIA_INDEX = 1
 /** The Studio the user was looking at cross-fades between its two widths */
 const resizeClass: ViewTransitionClass = {
   [SPLIT_TRANSITION]: splitTransitionClasses.resize,
+  [PANEL_TRANSITION]: splitTransitionClasses.resize,
   default: 'none',
 }
 
@@ -94,18 +102,20 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const navbarHeight = useStudioNavbarHeight(studioRef)
 
   // The machine publishes its state synchronously, which React does not
-  // animate: the split copy mounts from state of its own, set in a transition
-  // of the split's type, which is what lets the view transition run — after
-  // the sidebar's own changes (the toggle's pressed state) have committed, so
-  // nothing in the sidebar changes while it does
-  const [shownSplit, setShownSplit] = useState(split)
+  // animate: the panel and the split copy mount from state of their own, set
+  // in a transition typed after what changed, which is what lets the view
+  // transition run — after the sidebar's own changes (the toggle's pressed
+  // state) have committed, so nothing in the sidebar changes while it does.
+  // Closing the sidebar ends the split, so both leave in one transition.
+  const [shown, setShown] = useState({open, split})
   useEffect(() => {
-    if (shownSplit === split) return
+    if (shown.open === open && shown.split === split) return
     startTransition(() => {
-      addTransitionType(SPLIT_TRANSITION)
-      setShownSplit(split)
+      if (shown.open !== open) addTransitionType(PANEL_TRANSITION)
+      if (shown.split !== split) addTransitionType(SPLIT_TRANSITION)
+      setShown({open, split})
     })
-  }, [shownSplit, split])
+  }, [open, shown, split])
 
   useEffect(() => writeStoredState(stored), [stored])
 
@@ -191,7 +201,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
         {/* The opposite scheme comes first — on the far side of the sidebar,
             or on top on small screens — so the Studio the user was looking at
             stays where it is, mounted, in its own scheme */}
-        {shownSplit && (
+        {shown.split && (
           <ViewTransition
             key="opposite"
             enter={mobile ? splitTransitionClasses.dropIn : splitTransitionClasses.slideIn}
@@ -214,10 +224,17 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
           </StudioPreview>
         </ViewTransition>
 
-        {open && (
-          <ThemeProvider theme={theme ?? undefined}>
-            <ResizableSidebar overlay={mobile} />
-          </ThemeProvider>
+        {shown.open && (
+          <ViewTransition
+            key="panel"
+            enter={panelTransitionClasses.slideIn}
+            exit={panelTransitionClasses.slideOut}
+            update="none"
+          >
+            <ThemeProvider theme={theme ?? undefined}>
+              <ResizableSidebar overlay={mobile} />
+            </ThemeProvider>
+          </ViewTransition>
         )}
       </Flex>
     </ThemerContext.Provider>

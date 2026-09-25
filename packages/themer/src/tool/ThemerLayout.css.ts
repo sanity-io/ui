@@ -3,10 +3,12 @@ import {globalStyle, keyframes, style, styleVariants} from '@vanilla-extract/css
 import {SIDEBAR_TRANSITION_NAME} from './ResizableSidebar.css'
 
 /**
- * The transition type of toggling the split preview. The Studio updates in
- * transitions of its own all the time; only this one animates its layout.
+ * The transition types of toggling the split preview and of opening or
+ * closing the panel. The Studio updates in transitions of its own all the
+ * time; only these two animate its layout.
  */
 export const SPLIT_TRANSITION = 'themer-split'
+export const PANEL_TRANSITION = 'themer-panel'
 
 /**
  * The view transition classes of the split preview — the strings React puts
@@ -21,6 +23,12 @@ export const splitTransitionClasses = {
   /** The split copy drops in from the top, or out to it, where the copies stack */
   dropIn: 'themer-split-drop-in',
   dropOut: 'themer-split-drop-out',
+}
+
+/** The view transition classes of the panel, which slides in from its edge and out to it */
+export const panelTransitionClasses = {
+  slideIn: 'themer-panel-slide-in',
+  slideOut: 'themer-panel-slide-out',
 }
 
 /** The layout's `Flex` positions the sidebar overlay on small screens */
@@ -38,14 +46,17 @@ const slideIn = keyframes({from: {transform: 'translateX(-100%)'}})
 const slideOut = keyframes({to: {transform: 'translateX(-100%)'}})
 const dropIn = keyframes({from: {transform: 'translateY(-100%)'}})
 const dropOut = keyframes({to: {transform: 'translateY(-100%)'}})
+const slideInFromEnd = keyframes({from: {transform: 'translateX(100%)'}})
+const slideOutToEnd = keyframes({to: {transform: 'translateX(100%)'}})
 
 /**
- * How the split preview animates, through React's view transitions: the split
- * copy slides in from off screen — a transform, nothing fades — and out the
- * same way; the Studio the user was looking at cross-fades between its two
- * widths, its old and new snapshots stretched to the group's box so it keeps
- * its height. Everything shares one duration and easing, so the edge the copy
- * slides in on and the edge the Studio gives way with stay together.
+ * How the panel and the split preview animate, through React's view
+ * transitions: the panel slides in from its edge and the split copy from the
+ * far one — a transform, nothing fades — and out the same way; the Studio the
+ * user was looking at cross-fades between its two widths, its old and new
+ * snapshots stretched to the group's box so it keeps its height. Everything
+ * shares one duration and easing, so the edge a panel slides in on and the
+ * edge the Studio gives way with stay together.
  */
 globalStyle(
   [
@@ -56,6 +67,8 @@ globalStyle(
     `::view-transition-old(.${splitTransitionClasses.slideOut})`,
     `::view-transition-new(.${splitTransitionClasses.dropIn})`,
     `::view-transition-old(.${splitTransitionClasses.dropOut})`,
+    `::view-transition-new(.${panelTransitionClasses.slideIn})`,
+    `::view-transition-old(.${panelTransitionClasses.slideOut})`,
   ].join(', '),
   {
     animationDuration: '320ms',
@@ -81,12 +94,20 @@ globalStyle(`::view-transition-old(.${splitTransitionClasses.slideOut})`, {
 })
 globalStyle(`::view-transition-new(.${splitTransitionClasses.dropIn})`, {animationName: dropIn})
 globalStyle(`::view-transition-old(.${splitTransitionClasses.dropOut})`, {animationName: dropOut})
+globalStyle(`::view-transition-new(.${panelTransitionClasses.slideIn})`, {
+  animationName: slideInFromEnd,
+})
+globalStyle(`::view-transition-old(.${panelTransitionClasses.slideOut})`, {
+  animationName: slideOutToEnd,
+})
 
 /**
- * The sidebar, a group of its own (`ResizableSidebar` names it), does not
- * animate at all: its new snapshot simply shows, stacked above the Studio
- * copies where it covers the Studio — groups of elements that only exist in
- * the new state (the arriving copy) would otherwise be stacked last, over it.
+ * While the split preview toggles, the sidebar — a group of its own, which
+ * `ResizableSidebar` names — does not animate at all: its new snapshot simply
+ * shows, stacked above the Studio copies where it covers the Studio (groups of
+ * elements that only exist in the new state, the arriving copy, would
+ * otherwise be stacked last, over it). While the panel itself opens or closes,
+ * React names it instead, and the rules above slide it.
  */
 globalStyle(`::view-transition-group(${SIDEBAR_TRANSITION_NAME})`, {zIndex: 1})
 globalStyle(
@@ -100,17 +121,18 @@ globalStyle(
 )
 
 /**
- * With reduced motion, nothing in the split's transition animates — not the
- * copies, not the root's cross-fade — so the new layout simply shows: the
- * transition is over as soon as it starts. Scoped through the transition's
- * type, so other view transitions on the page keep their own reduced-motion
+ * With reduced motion, nothing in these transitions animates — not the panel
+ * or the copies, not the root's cross-fade — so the new layout simply shows:
+ * the transition is over as soon as it starts. Scoped through the transition
+ * types, so other view transitions on the page keep their own reduced-motion
  * behavior.
  */
 globalStyle(
-  ['group', 'image-pair', 'old', 'new']
-    .map(
-      (part) =>
-        `:root:active-view-transition-type(${SPLIT_TRANSITION})::view-transition-${part}(*)`,
+  [SPLIT_TRANSITION, PANEL_TRANSITION]
+    .flatMap((type) =>
+      ['group', 'image-pair', 'old', 'new'].map(
+        (part) => `:root:active-view-transition-type(${type})::view-transition-${part}(*)`,
+      ),
     )
     .join(', '),
   {
