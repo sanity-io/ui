@@ -188,9 +188,6 @@ catalogs:
     '@vitejs/plugin-react':
       specifier: ^6.1.1
       version: 6.1.1
-    motion:
-      specifier: ^13.4.1
-      version: 13.4.1
     oxc-transform-react:
       specifier: ^0.151.0
       version: 0.151.0
@@ -777,12 +774,6 @@ importers:
       '@xstate/react':
         specifier: ^6.1.0
         version: 6.1.0(@types/react@19.3.0)(react@19.3.0)(xstate@5.33.2)
-      motion:
-        specifier: 'catalog:'
-        version: 13.4.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      react-compiler-runtime:
-        specifier: 1.0.0
-        version: 1.0.0(react@19.3.0)
       react-refractor:
         specifier: 'catalog:'
         version: 4.0.0(react@19.3.0)
@@ -903,7 +894,7 @@ importers:
         specifier: ^3.2.3
         version: 3.2.3
       motion:
-        specifier: 'catalog:'
+        specifier: ^13.4.1
         version: 13.4.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       react-is:
         specifier: 'catalog:'

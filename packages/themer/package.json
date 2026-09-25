@@ -54,8 +54,6 @@
     "@sanity/themer-legacy": "workspace:^",
     "@sanity/ui": "workspace:^",
     "@xstate/react": "^6.1.0",
-    "motion": "catalog:",
-    "react-compiler-runtime": "1.0.0",
     "react-refractor": "catalog:",
     "refractor": "catalog:",
     "xstate": "^5.33.2"
@@ -75,7 +73,7 @@
     "vitest": "catalog:"
   },
   "peerDependencies": {
-    "react": "^18 || ^19",
+    "react": "^19.3.0",
     "sanity": "^3 || ^4 || ^5 || ^6",
     "styled-components": "^5.2 || ^6"
   },

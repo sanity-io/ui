@@ -1,9 +1,18 @@
 import {Card, Flex, ThemeProvider, useMediaIndex} from '@sanity/ui'
 import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
-import {AnimateView} from 'motion/react-animate-view'
-import {useDeferredValue, useEffect, useMemo, useRef, useState, ViewTransition} from 'react'
+import {
+  addTransitionType,
+  startTransition,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  ViewTransition,
+  type ViewTransitionClass,
+} from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
+import {createGlobalStyle} from 'styled-components'
 
 import {buildTheme} from '../theme/buildTheme'
 import {BuildThemeOptions} from '../theme/options'
@@ -20,8 +29,86 @@ import {resolveThemes, ThemerState} from './themes'
  */
 const MOBILE_MEDIA_INDEX = 1
 
-/** `AnimateView` rides on React's view transitions, which React 18 lacks */
-const supportsViewTransitions = typeof ViewTransition !== 'undefined'
+/**
+ * The transition type of toggling the split preview. The Studio updates in
+ * transitions of its own all the time; only this one animates its layout.
+ */
+const SPLIT_TRANSITION = 'themer-split'
+
+/** The Studio the user was looking at cross-fades between its two widths */
+const resizeClass: ViewTransitionClass = {
+  [SPLIT_TRANSITION]: 'themer-split-resize',
+  default: 'none',
+}
+
+/**
+ * How the split preview animates, through React's view transitions: the split
+ * copy slides in from off screen — a transform, nothing fades — and out the
+ * same way; the Studio the user was looking at cross-fades between its two
+ * widths, its old and new snapshots stretched to the group's box so it keeps
+ * its height; the sidebar does not animate at all. Everything shares one
+ * duration and easing, so the edge the copy slides in on and the edge the
+ * Studio gives way with stay together.
+ */
+const SplitTransitionStyle = createGlobalStyle`
+  ::view-transition-group(.themer-split-resize),
+  ::view-transition-old(.themer-split-resize),
+  ::view-transition-new(.themer-split-resize),
+  ::view-transition-new(.themer-split-slide-in),
+  ::view-transition-old(.themer-split-slide-out),
+  ::view-transition-new(.themer-split-drop-in),
+  ::view-transition-old(.themer-split-drop-out) {
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  ::view-transition-old(.themer-split-resize),
+  ::view-transition-new(.themer-split-resize) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: fill;
+  }
+
+  ::view-transition-new(.themer-split-slide-in) {
+    animation-name: themer-split-slide-in;
+  }
+
+  ::view-transition-old(.themer-split-slide-out) {
+    animation-name: themer-split-slide-out;
+  }
+
+  ::view-transition-new(.themer-split-drop-in) {
+    animation-name: themer-split-drop-in;
+  }
+
+  ::view-transition-old(.themer-split-drop-out) {
+    animation-name: themer-split-drop-out;
+  }
+
+  @keyframes themer-split-slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes themer-split-slide-out {
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes themer-split-drop-in {
+    from {
+      transform: translateY(-100%);
+    }
+  }
+
+  @keyframes themer-split-drop-out {
+    to {
+      transform: translateY(-100%);
+    }
+  }
+`
 
 function sameStoredState(a: ThemerState, b: ThemerState): boolean {
   return a.active === b.active && a.custom === b.custom && a.removed === b.removed
@@ -61,7 +148,8 @@ function sameView(a: ThemerView, b: ThemerView): boolean {
  * The Studio next to the sidebar always follows the appearance setting
  * (light/dark/system) and the picked theme like any other theme would. The
  * split preview adds a second copy in the opposite scheme on the far side —
- * or on top, on small screens — animated in with a view transition.
+ * or on top, on small screens — through React's view transitions (React
+ * 19.3), styled by `SplitTransitionStyle`.
  *
  * @internal
  */
@@ -76,10 +164,19 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const {images} = snapshot.context
   const mobile = useMediaIndex() <= MOBILE_MEDIA_INDEX
 
-  // The machine publishes its state synchronously, so the split copy mounts
-  // from a deferred value: that puts the mount in a transition, which is what
-  // lets the view transition animate it in and out
-  const deferredSplit = useDeferredValue(split)
+  // The machine publishes its state synchronously, which React does not
+  // animate: the split copy mounts from state of its own, set in a transition
+  // of the split's type, which is what lets the view transition run — after
+  // the sidebar's own changes (the toggle's pressed state) have committed, so
+  // nothing in the sidebar changes while it does
+  const [shownSplit, setShownSplit] = useState(split)
+  useEffect(() => {
+    if (shownSplit === split) return
+    startTransition(() => {
+      addTransitionType(SPLIT_TRANSITION)
+      setShownSplit(split)
+    })
+  }, [shownSplit, split])
 
   useEffect(() => writeStoredState(stored), [stored])
 
@@ -149,6 +246,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
 
   return (
     <ThemerContext.Provider value={context}>
+      <SplitTransitionStyle />
       <Flex
         direction={mobile ? 'column' : 'row'}
         height="fill"
@@ -158,8 +256,12 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
         {/* The opposite scheme comes first — on the far side of the sidebar,
             or on top on small screens — so the Studio the user was looking at
             stays where it is, mounted, in its own scheme */}
-        {deferredSplit && (
-          <AnimateIn axis={mobile ? 'y' : 'x'}>
+        {shownSplit && (
+          <ViewTransition
+            enter={mobile ? 'themer-split-drop-in' : 'themer-split-slide-in'}
+            exit={mobile ? 'themer-split-drop-out' : 'themer-split-slide-out'}
+            update="none"
+          >
             <StudioPreview
               borderBottom={mobile}
               borderRight={!mobile}
@@ -168,40 +270,21 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
             >
               {studio}
             </StudioPreview>
-          </AnimateIn>
+          </ViewTransition>
         )}
-        <StudioPreview theme={theme}>{studio}</StudioPreview>
+        <ViewTransition update={resizeClass}>
+          <StudioPreview theme={theme}>{studio}</StudioPreview>
+        </ViewTransition>
 
         {open && (
-          <ThemeProvider theme={theme ?? undefined}>
-            <ResizableSidebar overlay={mobile} />
-          </ThemeProvider>
+          <ViewTransition default="none">
+            <ThemeProvider theme={theme ?? undefined}>
+              <ResizableSidebar overlay={mobile} />
+            </ThemeProvider>
+          </ViewTransition>
         )}
       </Flex>
     </ThemerContext.Provider>
-  )
-}
-
-/**
- * Slides its child in from the side it appears on, with a view transition —
- * or mounts it as-is where React cannot animate view transitions yet.
- */
-function AnimateIn(props: {axis: 'x' | 'y'; children: React.ReactNode}) {
-  const {axis, children} = props
-
-  if (!supportsViewTransitions) return children
-
-  const from = axis === 'x' ? {x: [-40, 0]} : {y: [-40, 0]}
-  const to = axis === 'x' ? {x: [0, -40]} : {y: [0, -40]}
-
-  return (
-    <AnimateView
-      enter={{opacity: [0, 1], ...from}}
-      exit={{opacity: [1, 0], ...to}}
-      transition={{duration: 0.3, ease: 'easeOut'}}
-    >
-      {children}
-    </AnimateView>
   )
 }
 

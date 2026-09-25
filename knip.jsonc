@@ -34,17 +34,13 @@
       // knip does not recognize as a script runner
       "entry": ["scripts/*.ts"],
     },
-    "packages/themer": {
+    "packages/themer-legacy": {
       "ignoreDependencies": [
         // The React Compiler (oxc-transform-react, target '18') injects imports of
         // this runtime package into the compiled dist output, so it is never
         // imported in source
         "react-compiler-runtime",
       ],
-    },
-    "packages/themer-legacy": {
-      // Same React Compiler runtime injection as packages/themer
-      "ignoreDependencies": ["react-compiler-runtime"],
     },
   },
 }
