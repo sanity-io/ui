@@ -131,6 +131,27 @@ describe('themerMachine', () => {
   })
 
   describe('picking', () => {
+    it('is switching themes right after a pick, not after an edit', () => {
+      const actor = startWithCustom()
+
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+
+      actor.send({type: 'theme.pick', slug: 'custom-1'})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(true)
+
+      actor.send({type: 'layout.transitioned'})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+
+      actor.send({type: 'theme.update', slug: 'custom-1', options: {light: {accent: '#00ff00'}}})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+
+      // Without word from the layout, the switch is over after the motion's duration
+      actor.send({type: 'theme.remove', slug: 'custom-1'})
+      expect(actor.getSnapshot().hasTag('switching')).toBe(true)
+      settle()
+      expect(actor.getSnapshot().hasTag('switching')).toBe(false)
+    })
+
     it('applies a theme, and picking the configured theme applies nothing', () => {
       const actor = start()
 

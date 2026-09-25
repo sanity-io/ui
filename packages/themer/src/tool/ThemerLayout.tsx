@@ -1,6 +1,7 @@
 import {Card, Flex, ThemeProvider, useMediaIndex} from '@sanity/ui'
 import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
+import {useReducedMotion} from 'motion/react'
 import {
   Activity,
   useDeferredValue,
@@ -94,6 +95,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const open = snapshot.hasTag('panel')
   const split = snapshot.hasTag('split')
   const moving = snapshot.hasTag('moving')
+  const switching = snapshot.hasTag('switching')
   const {images} = snapshot.context
   const mobile = useMediaIndex() <= MOBILE_MEDIA_INDEX
   const studioRef = useRef<HTMLDivElement | null>(null)
@@ -102,9 +104,15 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // The machine publishes synchronously, which React does not animate. What
   // shows is deferred: that renders the panel's and the copy's mounts in a
   // transition — once the sidebar's own changes (the toggle's pressed state)
-  // have committed, so nothing in the sidebar changes while it runs
-  const shownOpen = useDeferredValue(open)
-  const shownSplit = useDeferredValue(split)
+  // have committed, so nothing in the sidebar changes while it runs. Someone
+  // who prefers reduced motion gets no view transition at all: nothing is
+  // deferred, so there is no transition render for React to animate, no
+  // boundary has a class, and what shows changes along with the machine
+  const reduceMotion = useReducedMotion() ?? false
+  const deferredOpen = useDeferredValue(reduceMotion ? null : open)
+  const deferredSplit = useDeferredValue(reduceMotion ? null : split)
+  const shownOpen = deferredOpen ?? open
+  const shownSplit = deferredSplit ?? split
 
   const {themes, removed, active} = useMemo(
     () => resolveThemes(stored, baseOptions),
@@ -121,6 +129,13 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
     [activeOptions],
   )
 
+  // The applied theme is deferred the same way, and the Studio and the panel
+  // cross-fade to it while the machine says a theme is being switched to —
+  // edits to the applied theme's colors render deferred too, which keeps the
+  // pickers responsive, but with nothing to animate them they simply show
+  const deferredTheme = useDeferredValue(reduceMotion ? undefined : theme)
+  const shownTheme = deferredTheme === undefined ? theme : deferredTheme
+
   // The Studio paints the body with its configured theme from above this
   // layout, and Safari tints its chrome from the body — so the applied theme
   // has to reach the body too, in the scheme the Studio is showing
@@ -128,7 +143,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const oppositeScheme: ThemeColorSchemeKey = scheme === 'dark' ? 'light' : 'dark'
 
   useEffect(() => {
-    const background = theme?.v2?.color[scheme].default.bg
+    const background = shownTheme?.v2?.color[scheme].default.bg
 
     if (background === undefined) return undefined
 
@@ -140,7 +155,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
     return () => {
       style.backgroundColor = previous
     }
-  }, [scheme, theme])
+  }, [scheme, shownTheme])
 
   const context = useMemo<ThemerContextValue>(
     () => ({
@@ -161,6 +176,31 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
 
   const studio = layoutProps.renderDefault(layoutProps)
 
+  // What the view transitions do this render, from what the machine says
+  const classes = reduceMotion
+    ? {
+        copyEnter: 'none',
+        copyExit: 'none',
+        panelEnter: 'none',
+        panelExit: 'none',
+        update: 'none',
+        studioUpdate: 'none',
+      }
+    : {
+        copyEnter: mobile ? splitTransitionClasses.dropIn : splitTransitionClasses.slideIn,
+        copyExit: mobile ? splitTransitionClasses.dropOut : splitTransitionClasses.slideOut,
+        panelEnter: panelTransitionClasses.slideIn,
+        panelExit: panelTransitionClasses.slideOut,
+        // The copy and the panel cross-fade to another theme, in place
+        update: switching ? splitTransitionClasses.crossfade : 'none',
+        // The Studio too — unless it is giving way or taking room, which cross-fades as it goes
+        studioUpdate: moving
+          ? splitTransitionClasses.resize
+          : switching
+            ? splitTransitionClasses.crossfade
+            : 'none',
+      }
+
   return (
     <ThemerContext.Provider value={context}>
       <Flex className={layout} direction={mobile ? 'column' : 'row'} height="fill" sizing="border">
@@ -174,15 +214,15 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
           <Activity mode={shownSplit ? 'visible' : 'hidden'}>
             <ViewTransition
               key="opposite"
-              enter={mobile ? splitTransitionClasses.dropIn : splitTransitionClasses.slideIn}
-              exit={mobile ? splitTransitionClasses.dropOut : splitTransitionClasses.slideOut}
-              update="none"
+              enter={classes.copyEnter}
+              exit={classes.copyExit}
+              update={classes.update}
             >
               <StudioPreview
                 borderBottom={mobile}
                 borderRight={!mobile}
                 scheme={oppositeScheme}
-                theme={theme}
+                theme={shownTheme}
               >
                 {studio}
               </StudioPreview>
@@ -190,16 +230,17 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
           </Activity>
         )}
         {/* The Studio gives way and takes room while the machine says the
-            layout is moving — the Studio updates in transitions of its own
-            all the time, and none of those may animate it. Once its transition
-            is under way the machine hears of it, and the Studio is its own
-            again before the next commit */}
+            layout is moving, and cross-fades while it says a theme is being
+            switched to — the Studio updates in transitions of its own all the
+            time, and none of those may animate it. Once its transition is under
+            way the machine hears of it, and the Studio is its own again before
+            the next commit */}
         <ViewTransition
           key="primary"
           onUpdate={() => send({type: 'layout.transitioned'})}
-          update={moving ? splitTransitionClasses.resize : 'none'}
+          update={classes.studioUpdate}
         >
-          <StudioPreview ref={studioRef} theme={theme}>
+          <StudioPreview ref={studioRef} theme={shownTheme}>
             {studio}
           </StudioPreview>
         </ViewTransition>
@@ -209,11 +250,11 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
         <Activity mode={shownOpen ? 'visible' : 'hidden'}>
           <ViewTransition
             key="panel"
-            enter={panelTransitionClasses.slideIn}
-            exit={panelTransitionClasses.slideOut}
-            update="none"
+            enter={classes.panelEnter}
+            exit={classes.panelExit}
+            update={classes.update}
           >
-            <ThemeProvider theme={theme ?? undefined}>
+            <ThemeProvider theme={shownTheme ?? undefined}>
               <ResizableSidebar overlay={mobile} />
             </ThemeProvider>
           </ViewTransition>

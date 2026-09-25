@@ -13,10 +13,11 @@ import {
 } from './themes'
 
 /**
- * How long the panel's and the split preview's motions are taken to last, at
- * most, when the layout does not say: the view transitions run for 320ms,
- * and the browser takes a frame or two to capture them. The `moving` tag
- * marks that time.
+ * How long the layout's motions — the panel's and the split preview's, and
+ * the cross-fade to another theme — are taken to last, at most, when the
+ * layout does not say: the view transitions run for 320ms, and the browser
+ * takes a frame or two to capture them. The `moving` and `switching` tags
+ * mark that time.
  */
 const MOTION_DURATION = 500
 
@@ -51,7 +52,8 @@ export type ThemerEvent =
   | {type: 'sidebar.close'}
   /**
    * The layout's view transition is under way: the Studio has started giving
-   * way or taking room, and the layout is no longer `moving` for the machine
+   * way or taking room, or cross-fading to another theme, and the layout is
+   * no longer `moving` or `switching` for the machine
    */
   | {type: 'layout.transitioned'}
   /**
@@ -123,9 +125,13 @@ function revokeObjectUrl(url: string) {
  * and `split` say what shows (the panel from `opening` on, the split copy from
  * `splitting` on), `moving` that the Studio is about to give way or take room
  * — which is when, and only when, the layout lets a view transition animate
- * it. They last until the layout reports its transition under way, or for
- * `MOTION_DURATION` when it does not move the Studio (the overlay on small
- * screens).
+ * it. A fourth region, `theme`, is `switching` (its tag) right after an event
+ * that applies another theme — picking one, adding, duplicating, importing or
+ * editing one, removing or deleting the applied one — when the layout
+ * cross-fades to it; edits to the applied theme's colors are not switches,
+ * they follow the pointer. These states last until the layout reports its
+ * transition under way, or for `MOTION_DURATION` when it does not animate
+ * (the overlay on small screens, a pick of the applied theme).
  *
  * Theme operations are handled in every flow, and the flows leave on their
  * own when they lose their subject: the editor when its theme is removed or
@@ -352,6 +358,37 @@ export const themerMachine = setup({
           tags: ['moving'],
           after: {[MOTION_DURATION]: 'single'},
           on: {'layout.transitioned': 'single', 'preview.toggle': 'splitting'},
+        },
+      },
+    },
+    theme: {
+      initial: 'applied',
+      states: {
+        applied: {
+          on: {
+            'theme.pick': 'switching',
+            'theme.add': 'switching',
+            'theme.duplicate': 'switching',
+            'theme.edit': 'switching',
+            'theme.import': 'switching',
+            'theme.remove': 'switching',
+            'theme.delete': 'switching',
+          },
+        },
+        switching: {
+          tags: ['switching'],
+          after: {[MOTION_DURATION]: 'applied'},
+          on: {
+            'layout.transitioned': 'applied',
+            // Another switch starts the clock over
+            'theme.pick': {target: 'switching', reenter: true},
+            'theme.add': {target: 'switching', reenter: true},
+            'theme.duplicate': {target: 'switching', reenter: true},
+            'theme.edit': {target: 'switching', reenter: true},
+            'theme.import': {target: 'switching', reenter: true},
+            'theme.remove': {target: 'switching', reenter: true},
+            'theme.delete': {target: 'switching', reenter: true},
+          },
         },
       },
     },

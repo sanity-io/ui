@@ -16,6 +16,8 @@ import {sidebarTransition} from './ResizableSidebar.css'
 export const splitTransitionClasses = {
   /** The Studio the user was looking at cross-fades between its two widths */
   resize: createViewTransition('splitResize'),
+  /** The Studio and the panel cross-fade to another theme, in place */
+  crossfade: createViewTransition('themeCrossfade'),
   /** The split copy slides in from the side, or out to it */
   slideIn: createViewTransition('splitSlideIn'),
   slideOut: createViewTransition('splitSlideOut'),
@@ -68,6 +70,8 @@ globalStyle(
     `::view-transition-old(.${splitTransitionClasses.dropOut})`,
     `::view-transition-new(.${panelTransitionClasses.slideIn})`,
     `::view-transition-old(.${panelTransitionClasses.slideOut})`,
+    `::view-transition-old(.${splitTransitionClasses.crossfade})`,
+    `::view-transition-new(.${splitTransitionClasses.crossfade})`,
   ].join(', '),
   {
     animationDuration: '320ms',
@@ -106,7 +110,12 @@ globalStyle(`::view-transition-old(.${panelTransitionClasses.slideOut})`, {
  * shows, stacked above the Studio copies where it covers the Studio (groups of
  * elements that only exist in the new state, the arriving copy, would
  * otherwise be stacked last, over it). While the panel itself opens or closes,
- * React names it instead, and the rules above slide it.
+ * or cross-fades to another theme, React names it instead, and the rules
+ * above apply.
+ *
+ * Someone who prefers reduced motion gets none of these transitions: the
+ * layout does not start them (see `ThemerLayout`), so there is nothing here to
+ * switch off.
  */
 globalStyle(`::view-transition-group(${sidebarTransition})`, {zIndex: 1})
 globalStyle(
@@ -117,31 +126,4 @@ globalStyle(
     `::view-transition-new(${sidebarTransition})`,
   ].join(', '),
   {animation: 'none'},
-)
-
-/**
- * With reduced motion, neither the panel nor the copies nor the Studio
- * animate: the new layout simply shows, and the transition is over as soon as
- * it starts. Selected by the classes, so other view transitions on the page
- * keep their own reduced-motion behavior.
- */
-globalStyle(
-  [
-    ...['group', 'old', 'new'].map(
-      (part) => `::view-transition-${part}(.${splitTransitionClasses.resize})`,
-    ),
-    `::view-transition-new(.${splitTransitionClasses.slideIn})`,
-    `::view-transition-old(.${splitTransitionClasses.slideOut})`,
-    `::view-transition-new(.${splitTransitionClasses.dropIn})`,
-    `::view-transition-old(.${splitTransitionClasses.dropOut})`,
-    `::view-transition-new(.${panelTransitionClasses.slideIn})`,
-    `::view-transition-old(.${panelTransitionClasses.slideOut})`,
-  ].join(', '),
-  {
-    '@media': {
-      '(prefers-reduced-motion: reduce)': {
-        animation: 'none',
-      },
-    },
-  },
 )
