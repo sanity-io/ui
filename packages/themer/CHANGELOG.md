@@ -1,5 +1,16 @@
 # @sanity/themer
 
+## 0.6.0
+
+### Minor Changes
+
+- [#2984](https://github.com/sanity-io/ui/pull/2984) [`196ecf0`](https://github.com/sanity-io/ui/commit/196ecf01111f8216f4282858cd0c403aad2e0382) Thanks [@stipsan](https://github.com/stipsan)! - The themer tool's split preview keeps the Studio next to the sidebar in the appearance the Studio is set to — light or dark from the appearance menu, with the picked theme — and slides a copy in the opposite scheme in from off screen on the far side, through React's `ViewTransition`: the copy slides in without fading, the Studio it makes room for cross-fades between its two widths at full height, and the sidebar stays put. `@sanity/themer` now requires React 19.3 for this. The tool works on small screens too: the sidebar covers the Studio instead of standing next to it, the split preview stacks the two copies, and the theme cards flow into more columns when the sidebar is wide enough.
+
+### Patch Changes
+
+- Updated dependencies [[`fde1653`](https://github.com/sanity-io/ui/commit/fde16533056cab695eb9ff0cd52db8c3c023ed25)]:
+  - @sanity/ui@4.2.5
+
 ## 0.5.0
 
 ### Minor Changes
