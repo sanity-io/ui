@@ -1,15 +1,7 @@
 import {Card, Flex, ThemeProvider, useMediaIndex} from '@sanity/ui'
 import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
-import {
-  Activity,
-  useDeferredValue,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  ViewTransition,
-} from 'react'
+import {Activity, useEffect, useMemo, useRef, useState, ViewTransition} from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
 
 import {buildTheme} from '../theme/buildTheme'
@@ -21,11 +13,14 @@ import {readStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
 import {usePrefersReducedMotion} from './usePrefersReducedMotion'
 import {useStudioNavbarHeight} from './useStudioNavbarHeight'
+import {useTypedDeferredValue} from './useTypedDeferredValue'
 
 import {
   layout,
+  layoutTransitionType,
   panelTransitionClasses,
   splitTransitionClasses,
+  studioCopy,
   studioScheme,
 } from './ThemerLayout.css'
 
@@ -84,6 +79,12 @@ function sameView(a: ThemerView, b: ThemerView): boolean {
  * panel's and the copy's mounts in a transition — what lets React animate
  * them — and picks the view transition classes from the tags.
  *
+ * Whatever else on the page has a `view-transition-name` — an avatar the
+ * Studio names so it moves as one piece — comes along gracefully: every
+ * transition the layout starts carries `layoutTransitionType`, which the
+ * stylesheet keys on to move every group in the layout's time, and the split
+ * copy gives the Studio's names up (see `ThemerLayout.css.ts` for both).
+ *
  * @internal
  */
 export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOptions}) {
@@ -104,15 +105,16 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // The machine publishes synchronously, which React does not animate. What
   // shows is deferred: that renders the panel's and the copy's mounts in a
   // transition — once the sidebar's own changes (the toggle's pressed state)
-  // have committed, so nothing in the sidebar changes while it runs. Someone
-  // who prefers reduced motion gets no view transition at all: nothing is
-  // deferred, so there is no transition render for React to animate, no
-  // boundary has a class, and what shows changes along with the machine —
-  // and should one run anyway, the stylesheet gives its animations nothing
-  // to do
+  // have committed, so nothing in the sidebar changes while it runs — of the
+  // layout's type, so that the stylesheet knows the view transition for the
+  // layout's while it runs. Someone who prefers reduced motion gets no view
+  // transition at all: nothing is deferred, so there is no transition render
+  // for React to animate, no boundary has a class, and what shows changes
+  // along with the machine — and should one run anyway, the stylesheet gives
+  // its animations nothing to do
   const reduceMotion = usePrefersReducedMotion()
-  const deferredOpen = useDeferredValue(reduceMotion ? null : open)
-  const deferredSplit = useDeferredValue(reduceMotion ? null : split)
+  const deferredOpen = useTypedDeferredValue(reduceMotion ? null : open, layoutTransitionType)
+  const deferredSplit = useTypedDeferredValue(reduceMotion ? null : split, layoutTransitionType)
   const shownOpen = deferredOpen ?? open
   const shownSplit = deferredSplit ?? split
 
@@ -135,7 +137,10 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // cross-fade to it while the machine says a theme is being switched to —
   // edits to the applied theme's colors render deferred too, which keeps the
   // pickers responsive, but with nothing to animate them they simply show
-  const deferredTheme = useDeferredValue(reduceMotion ? undefined : theme)
+  const deferredTheme = useTypedDeferredValue(
+    reduceMotion ? undefined : theme,
+    layoutTransitionType,
+  )
   const shownTheme = deferredTheme === undefined ? theme : deferredTheme
 
   // The Studio paints the body with its configured theme from above this
@@ -241,6 +246,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
               <StudioPreview
                 borderBottom={mobile}
                 borderRight={!mobile}
+                copy
                 scheme={oppositeScheme}
                 theme={shownTheme}
               >
@@ -292,24 +298,29 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
  * The two copies of the split preview share the router, the document store
  * and every other provider above the layout — only the scheme differs — so
  * they stay in sync while navigating. The `color-scheme` of a forced scheme
- * keeps native form controls and scrollbars in step with it.
+ * keeps native form controls and scrollbars in step with it. The split
+ * `copy` gives up the `view-transition-name`s inside it, which the Studio the
+ * user was looking at keeps (see `studioCopy`).
  */
 function StudioPreview(props: {
   borderBottom?: boolean
   borderRight?: boolean
   children: React.ReactNode
+  copy?: boolean
   ref?: React.Ref<HTMLDivElement>
   scheme?: ThemeColorSchemeKey
   theme: RootTheme | null
 }) {
-  const {borderBottom, borderRight, children, ref, scheme, theme} = props
+  const {borderBottom, borderRight, children, copy, ref, scheme, theme} = props
+  const className =
+    [scheme && studioScheme[scheme], copy && studioCopy].filter(Boolean).join(' ') || undefined
 
   return (
     <ThemeProvider scheme={scheme} theme={theme ?? undefined}>
       <Card
         borderBottom={borderBottom}
         borderRight={borderRight}
-        className={scheme ? studioScheme[scheme] : undefined}
+        className={className}
         flex={1}
         height="fill"
         overflow="hidden"
