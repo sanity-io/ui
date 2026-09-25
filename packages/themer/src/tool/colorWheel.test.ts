@@ -1,30 +1,48 @@
 import {describe, expect, it} from 'vitest'
 
-import {SLICE_COLORS, SLICE_COUNT, sliceDash, wheelRotation} from './colorWheel'
+import {
+  ANIMATION_DURATION,
+  isSliceFilled,
+  SLICE_COLORS,
+  SLICE_COUNT,
+  wheelRotation,
+} from './colorWheel'
 
 const SLICES = Array.from({length: SLICE_COUNT}, (_, index) => index)
 
-/** The stretch of the circumference one slice takes up */
-const SLICE = 1 / SLICE_COUNT
+/** The acts the animation is made of: fill the top half, spin while filling the bottom half, clear */
+const TOTAL_ACTS = 2.5
 
-/** The progress at which the first two acts of the animation end */
-const TOP_HALF_FILLED = 1 / 3
-const SPUN = 2 / 3
+/** The progress at which each act ends */
+const TOP_HALF_FILLED = 1 / TOTAL_ACTS
+const SPUN = 2 / TOTAL_ACTS
 
-const FULL = {offset: 0, length: SLICE}
-const EMPTY = {offset: 0, length: 0}
-const CLEARED = {offset: SLICE, length: 0}
+const STEPS = 20_000
+const STEP = 1 / STEPS
 
-function expectDash(progress: number, index: number, expected: {offset: number; length: number}) {
-  const dash = sliceDash(progress, index)
+/** The first progress, in steps of `STEP`, at which `predicate` holds */
+function firstProgress(predicate: (progress: number) => boolean): number {
+  for (let step = 0; step <= STEPS; step++) {
+    const progress = step / STEPS
 
-  expect(dash.offset, `offset of slice ${index} at ${progress}`).toBeCloseTo(expected.offset, 9)
-  expect(dash.length, `length of slice ${index} at ${progress}`).toBeCloseTo(expected.length, 9)
+    if (predicate(progress)) return progress
+  }
+
+  throw new Error('never')
 }
 
-/** How far round the clearing sweep has come, in degrees */
-function clearedAngle(progress: number): number {
-  return SLICES.reduce((sum, index) => sum + sliceDash(progress, index).offset, 0) * 360
+/** When a slice pops in */
+function fillTime(index: number): number {
+  return firstProgress((progress) => isSliceFilled(progress, index))
+}
+
+/** When a slice pops out again */
+function clearTime(index: number): number {
+  return firstProgress((progress) => progress >= SPUN && !isSliceFilled(progress, index))
+}
+
+function filledSlices(progress: number): number[] {
+  return SLICES.filter((index) => isSliceFilled(progress, index))
 }
 
 describe('color wheel animation', () => {
@@ -33,84 +51,83 @@ describe('color wheel animation', () => {
     expect(new Set(SLICE_COLORS).size).toBe(SLICE_COUNT)
   })
 
+  it('takes two and a half acts', () => {
+    expect(ANIMATION_DURATION).toBeCloseTo(0.55 * TOTAL_ACTS)
+  })
+
   it('starts and ends with a blank, upright wheel', () => {
     expect(wheelRotation(0)).toBe(0)
     expect(wheelRotation(1)).toBe(0)
+    expect(filledSlices(0)).toEqual([])
+    expect(filledSlices(1)).toEqual([])
+  })
+
+  it('pops the slices in whole, one at a time, clockwise from 12 o’clock at a steady pace', () => {
+    // Four slices per act: the top half in the first, the bottom half in the second
+    const beat = TOP_HALF_FILLED / (SLICE_COUNT / 2)
 
     for (const index of SLICES) {
-      expectDash(0, index, EMPTY)
-      expectDash(1, index, CLEARED)
+      const time = fillTime(index)
+
+      expect(time, `slice ${index}`).toBeCloseTo(index * beat, 3)
+      expect(filledSlices(time)).toEqual(SLICES.slice(0, index + 1))
+      expect(filledSlices(time - STEP)).toEqual(SLICES.slice(0, index))
     }
   })
 
-  it('fills the slices clockwise from 12 o’clock at a steady pace', () => {
-    // A quarter of the way into the fill, one and a half slices are in
-    const progress = TOP_HALF_FILLED * (1.5 / (SLICE_COUNT / 2))
+  it('stands still until the 6 o’clock slice pops in', () => {
+    const sixOClock = SLICE_COUNT / 2
 
-    expectDash(progress, 0, FULL)
-    expectDash(progress, 1, {offset: 0, length: SLICE / 2})
-    expectDash(progress, 2, EMPTY)
-  })
-
-  it('stands still until the fill reaches 6 o’clock', () => {
     expect(wheelRotation(TOP_HALF_FILLED / 2)).toBe(0)
     expect(wheelRotation(TOP_HALF_FILLED)).toBe(0)
+    expect(filledSlices(TOP_HALF_FILLED)).toEqual(SLICES.slice(0, sixOClock))
 
-    for (const index of SLICES) {
-      expectDash(TOP_HALF_FILLED, index, index < SLICE_COUNT / 2 ? FULL : EMPTY)
-    }
+    const spinning = fillTime(sixOClock)
+
+    expect(spinning).toBeCloseTo(TOP_HALF_FILLED, 3)
+    expect(wheelRotation(spinning)).toBeGreaterThan(0)
   })
 
-  it('spins up with a cubic ease-in while the bottom half fills', () => {
+  it('spins up with a cubic ease-in while the bottom half pop in', () => {
     const halfway = (TOP_HALF_FILLED + SPUN) / 2
 
     expect(wheelRotation(halfway)).toBeCloseTo(360 * 0.5 ** 3)
-
-    for (const index of SLICES) {
-      expectDash(halfway, index, index < (SLICE_COUNT * 3) / 4 ? FULL : EMPTY)
-    }
+    // ...as the 9 o'clock slice pops in
+    expect(filledSlices(halfway - STEP)).toEqual(SLICES.slice(0, (SLICE_COUNT * 3) / 4))
+    expect(filledSlices(halfway + STEP)).toEqual(SLICES.slice(0, (SLICE_COUNT * 3) / 4 + 1))
 
     // Back upright, at top speed, with every slice filled
     expect(wheelRotation(SPUN - 1e-9)).toBeCloseTo(360)
     expect(wheelRotation(SPUN)).toBe(0)
+    expect(filledSlices(SPUN)).toEqual(SLICES)
+  })
+
+  it('pops the slices out the same way round, on an ease-out that starts at the speed of the spin', () => {
+    // Where a cubic ease-out over a full turn, from the spin's top speed, is
+    // as it reaches each slice's leading edge
+    const easeOutTime = (index: number) =>
+      SPUN + (1 - Math.cbrt(1 - index / SLICE_COUNT)) / TOTAL_ACTS
+
+    let previousGap = 0
 
     for (const index of SLICES) {
-      expectDash(SPUN, index, FULL)
-    }
-  })
+      const time = clearTime(index)
 
-  it('clears the slices the same way round, easing out', () => {
-    const halfway = (SPUN + 1) / 2
+      expect(time, `slice ${index}`).toBeCloseTo(easeOutTime(index), 3)
+      expect(filledSlices(time)).toEqual(SLICES.slice(index + 1))
+      expect(wheelRotation(time)).toBe(0)
 
-    // Half an act into a cubic ease-out is seven eighths of the way round
-    for (const index of SLICES) {
-      expectDash(halfway, index, index < SLICE_COUNT - 1 ? CLEARED : FULL)
-    }
+      if (index > 0) {
+        const gap = time - clearTime(index - 1)
 
-    expect(wheelRotation(halfway)).toBe(0)
-  })
-
-  it('hands the speed of the spin over to the clearing, and comes to rest', () => {
-    const step = 1e-5
-    const spinSpeed = (wheelRotation(SPUN - step) - wheelRotation(SPUN - 2 * step)) / step
-    const clearingSpeed = (clearedAngle(SPUN + 2 * step) - clearedAngle(SPUN + step)) / step
-
-    expect(spinSpeed).toBeGreaterThan(0)
-    expect(clearingSpeed / spinSpeed).toBeCloseTo(1, 3)
-    expect((clearedAngle(1) - clearedAngle(1 - step)) / step).toBeCloseTo(0, 1)
-  })
-
-  it('never fills a slice outside its own eighth', () => {
-    for (let step = 0; step <= 300; step++) {
-      const progress = step / 300
-
-      for (const index of SLICES) {
-        const {offset, length} = sliceDash(progress, index)
-
-        expect(length).toBeGreaterThanOrEqual(0)
-        expect(offset).toBeGreaterThanOrEqual(0)
-        expect(offset + length).toBeLessThanOrEqual(SLICE + 1e-12)
+        expect(gap, `gap before slice ${index}`).toBeGreaterThan(previousGap)
+        previousGap = gap
       }
     }
+  })
+
+  it('ends as the last slice pops out', () => {
+    expect(isSliceFilled(1 - STEP, SLICE_COUNT - 1)).toBe(true)
+    expect(isSliceFilled(1, SLICE_COUNT - 1)).toBe(false)
   })
 })

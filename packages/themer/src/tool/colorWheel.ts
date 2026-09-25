@@ -22,55 +22,68 @@ export const SLICE_COLORS: readonly string[] = [
 ]
 
 /**
- * The animation plays in three acts of this length, in seconds: the top half
- * of the slices fill, the wheel spins up while the bottom half fill, and the
- * colors clear again as the spin's speed carries over into the clearing
+ * The animation plays in acts of this length, in seconds. In the first act
+ * the top half of the slices pop in, one at a time like the segments of a
+ * classic spinner; in the second the wheel spins up while the bottom half pop
+ * in; in the third the colors pop out again as the spin's speed carries over
+ * into the clearing.
  */
 const ACT_DURATION = 0.55
 
+/**
+ * The clearing would take a whole act to come to rest, but its last slice
+ * pops out as the clearing reaches that slice's leading edge — with nothing
+ * left to show, the animation ends there
+ */
+const CLEARING_ACTS = 1 - Math.cbrt(1 / SLICE_COUNT)
+
+const TOTAL_ACTS = 2 + CLEARING_ACTS
+
 /** How long the whole animation takes, in seconds */
-export const ANIMATION_DURATION = ACT_DURATION * 3
+export const ANIMATION_DURATION = ACT_DURATION * TOTAL_ACTS
+
+function actAt(progress: number): number {
+  return progress * TOTAL_ACTS
+}
 
 /**
  * How far the wheel has turned at `progress` (0–1), in degrees.
  *
- * It stands still while the top half fills. As the fill reaches 6 o'clock it
- * starts spinning — one full turn with a cubic ease-in, from rest to top speed
- * as the bottom half fills up — and it stands still again the moment it is
- * back upright: the clearing sweep of {@link sliceDash} takes off at the speed
- * the spin reached, as if the wheel kept turning and eased out over a second
- * turn, so the two read as one movement.
+ * It stands still while the top half of the slices pop in. As the 6 o'clock
+ * slice pops in it starts spinning — one full turn with a cubic ease-in, from
+ * rest to top speed as the bottom half pop in — and it stands still again the
+ * moment it is back upright: the clearing of {@link isSliceFilled} takes off
+ * at the speed the spin reached, as if the wheel kept turning and eased out
+ * over a second turn, so the two read as one movement.
  */
 export function wheelRotation(progress: number): number {
-  const spin = progress * 3 - 1
+  const spin = actAt(progress) - 1
 
   if (spin <= 0 || spin >= 1) return 0
 
   return 360 * spin ** 3
 }
 
-function clamp01(value: number): number {
-  return Math.min(1, Math.max(0, value))
-}
-
 /**
- * The filled part of slice `index` (clockwise from 12 o'clock) at `progress`
- * (0–1), as a stretch of the ring's circumference: where it starts, measured
- * clockwise from the slice's own leading edge, and how long it is — both as
- * fractions of the circumference, ready for motion's `pathOffset` and
- * `pathLength` on a ring whose path starts at that edge. Neither ever exceeds
- * a slice's eighth of the ring.
+ * Whether slice `index` (clockwise from 12 o'clock) shows its color at
+ * `progress` (0–1). A slice pops in whole as the fill reaches its leading
+ * edge, and pops out whole as the clearing does — stepped, never partial.
  *
- * The fill sweeps clockwise at a steady pace over the first two acts, half of
- * the slices in each, and the third act clears the slices the same way round,
- * with a cubic ease-out that starts at the speed the spin of
- * {@link wheelRotation} ends with.
+ * The fill goes clockwise at a steady pace over the first two acts, half of
+ * the slices in each. The clearing follows in the third act, the same way
+ * round, on a cubic ease-out that starts at the speed the spin of
+ * {@link wheelRotation} ends with: the slices at first pop out as quickly as
+ * they were passing by, then ever more slowly.
  */
-export function sliceDash(progress: number, index: number): {offset: number; length: number} {
-  const act = progress * 3
-  const filled = clamp01((act * SLICE_COUNT) / 2 - index)
-  const clearing = act - 2
-  const cleared = clearing <= 0 ? 0 : clamp01((1 - (1 - clearing) ** 3) * SLICE_COUNT - index)
+export function isSliceFilled(progress: number, index: number): boolean {
+  const act = actAt(progress)
+  const filling = (act * SLICE_COUNT) / 2
 
-  return {offset: cleared / SLICE_COUNT, length: (filled - cleared) / SLICE_COUNT}
+  if (filling <= index) return false
+
+  const clearing = act - 2
+
+  if (clearing <= 0) return true
+
+  return (1 - (1 - clearing) ** 3) * SLICE_COUNT < index
 }
