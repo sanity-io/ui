@@ -46,7 +46,9 @@ const resizeClass: ViewTransitionClass = {
 }
 
 function sameStoredState(a: ThemerState, b: ThemerState): boolean {
-  return a.active === b.active && a.custom === b.custom && a.removed === b.removed
+  return (
+    a.active === b.active && a.custom === b.custom && a.removed === b.removed && a.order === b.order
+  )
 }
 
 function selectView(snapshot: ThemerSnapshot): ThemerView {

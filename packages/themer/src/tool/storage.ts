@@ -181,9 +181,24 @@ function sanitizeState(value: unknown): ThemerState {
     }
   }
 
+  const order: string[] = []
+  const rawOrder: unknown = Reflect.get(value, 'order')
+
+  if (Array.isArray(rawOrder)) {
+    for (const slug of rawOrder) {
+      const known =
+        typeof slug === 'string' &&
+        (slug === CONFIG_SLUG ||
+          presets.some((preset) => preset.slug === slug) ||
+          custom.some((theme) => theme.slug === slug))
+
+      if (known && !order.includes(slug)) order.push(slug)
+    }
+  }
+
   const rawActive: unknown = Reflect.get(value, 'active')
 
-  return {active: typeof rawActive === 'string' ? rawActive : null, custom, removed}
+  return {active: typeof rawActive === 'string' ? rawActive : null, custom, removed, order}
 }
 
 function readLegacyState(): ThemerState | null {
@@ -197,7 +212,7 @@ function readLegacyState(): ThemerState | null {
 
   const theme = createCustomTheme(LEGACY_DRAFT_TITLE, options)
 
-  return {active: theme.slug, custom: [theme], removed: []}
+  return {active: theme.slug, custom: [theme], removed: [], order: []}
 }
 
 /**

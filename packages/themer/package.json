@@ -72,6 +72,7 @@
     "@sanity/ui": "workspace:^",
     "@vanilla-extract/dynamic": "catalog:",
     "@xstate/react": "^6.1.0",
+    "motion": "catalog:",
     "react-refractor": "catalog:",
     "refractor": "catalog:",
     "xstate": "^5.33.2"

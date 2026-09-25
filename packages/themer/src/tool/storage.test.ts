@@ -49,6 +49,7 @@ describe('themer storage', () => {
         {slug: 'custom-2', title: 'Stock', options: {}},
       ],
       removed: ['verdant', 'custom-1'],
+      order: ['custom-2', 'config', 'verdant'],
     }
 
     writeStoredState(state)
@@ -76,6 +77,7 @@ describe('themer storage', () => {
           'garbage',
         ],
         removed: ['verdant', 'verdant', 'unknown', 'config', 'custom-3', 7],
+        order: ['custom-3', 'unknown', 'dew', 'custom-3', 'custom-4', 'config', 3],
       }),
     )
 
@@ -87,6 +89,7 @@ describe('themer storage', () => {
         {slug: 'custom-3', title: 'Untitled theme', options: {dark: {accent: '#00f'}}},
       ],
       removed: ['verdant', 'custom-3'],
+      order: ['custom-3', 'dew', 'config'],
     })
   })
 
@@ -153,6 +156,7 @@ describe('themer storage', () => {
     })
     expect(state.active).toBe(state.custom[0].slug)
     expect(state.removed).toEqual([])
+    expect(state.order).toEqual([])
 
     writeStoredState(state)
 
