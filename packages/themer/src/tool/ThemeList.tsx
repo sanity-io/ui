@@ -68,9 +68,11 @@ export function ThemeList() {
               does not shift when the first theme gets removed */}
           {removed.length > 0 && (
             <Button
+              gap={2}
               icon={RestoreIcon}
               mode="bleed"
               onClick={() => send({type: 'flow.removed'})}
+              padding={2}
               text={`Show removed (${removed.length})`}
               width="fill"
             />
@@ -83,7 +85,6 @@ export function ThemeList() {
           <Box flex={1}>
             <TooltipButton
               icon={AddIcon}
-              mode="ghost"
               onClick={() => send({type: 'theme.add'})}
               text="Add theme"
               tooltip="Add a theme based on the applied one"
@@ -92,13 +93,11 @@ export function ThemeList() {
           </Box>
           <ImageFileButton
             loading={busy}
-            mode="ghost"
             onFile={pickImage}
             tooltip="Add a theme from the colors of an image"
           />
           <TooltipButton
             icon={ClipboardIcon}
-            mode="ghost"
             onClick={async () => {
               // Straight from the clipboard where the browser allows; by hand otherwise
               if ((await addThemeFromClipboard()) !== 'added') setPasting(true)

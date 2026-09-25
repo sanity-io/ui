@@ -232,14 +232,12 @@ function ThemeEditorForm(props: {
         <Flex gap={2}>
           <TooltipButton
             icon={TrashIcon}
-            mode="ghost"
             onClick={onRemove}
             text="Remove"
-            tone="critical"
             tooltip="Remove the theme — it can be restored until it is deleted"
           />
           <Box flex={1} />
-          <Button mode="ghost" onClick={onDone} text="Done" />
+          <Button onClick={onDone} padding={2} text="Done" />
         </Flex>
       </Card>
     </>

@@ -28,8 +28,14 @@ export function PasteThemeDialog(props: {onClose: () => void}) {
       animate
       footer={
         <Flex gap={2} justify="flex-end" padding={3}>
-          <Button mode="ghost" onClick={onClose} text="Cancel" />
-          <Button disabled={text.trim() === ''} onClick={add} text="Add theme" tone="primary" />
+          <Button mode="ghost" onClick={onClose} padding={2} text="Cancel" />
+          <Button
+            disabled={text.trim() === ''}
+            onClick={add}
+            padding={2}
+            text="Add theme"
+            tone="primary"
+          />
         </Flex>
       }
       header="Add a shared theme"
