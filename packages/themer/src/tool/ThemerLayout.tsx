@@ -128,15 +128,21 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
 
   // The sidebar's content mounts the first time it opens — which is when its
   // code loads — and stays mounted from then on. It goes by a deferred copy
-  // of whether the sidebar has opened, deferred even for reduced motion: the
+  // of whether it should be there, deferred even for reduced motion: the
   // render that loads the code must never be an urgent one. With motion it
   // arrives with the panel's own deferred reveal; without, in a panel that
   // already shows, as an update no view transition animates. The two copies
-  // differ while the code loads, which the navbar toggle shows
-  const [panelOpened, setPanelOpened] = useState(false)
-  if (open && !panelOpened) setPanelOpened(true)
-  const panelMounted = useTypedDeferredValue(panelOpened, layoutTransitionType)
-  const loading = panelOpened !== panelMounted
+  // differ while the code loads, which the navbar toggle shows.
+  //
+  // It should be there while open, or once it has been: a sidebar closed
+  // again while its code loads is not mounted into the hidden panel, where
+  // the code could still be loading as a reduced-motion reopen — which is
+  // urgent — reveals it, and the Studio would give way to its loading screen
+  const [panelShown, setPanelShown] = useState(false)
+  const panelWanted = open || panelShown
+  const panelMounted = useTypedDeferredValue(panelWanted, layoutTransitionType)
+  if (panelMounted && !panelShown) setPanelShown(true)
+  const loading = panelWanted !== panelMounted
 
   const {themes, removed, active} = useMemo(
     () => resolveThemes(stored, baseOptions),
