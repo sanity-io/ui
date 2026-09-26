@@ -36,6 +36,13 @@ export interface CardOwnProps
   disabled?: boolean
   muted?: boolean
   pressed?: boolean
+  /**
+   * Overrides the color scheme inherited from the closest `ThemeProvider`.
+   *
+   * The resolved scheme is applied as the CSS `color-scheme` of the rendered element (and exposed
+   * as `data-scheme`), so `light-dark()` colors and native form controls inside the card follow
+   * the card rather than the operating system.
+   */
   scheme?: ThemeColorSchemeKey
   selected?: boolean
   tone?: CardTone
@@ -69,15 +76,17 @@ function CardComponent(
     pressed,
     radius = 0,
     ref,
-    scheme,
+    scheme: schemeProp,
     selected,
     shadow,
+    style,
     tone: toneProp = 'default',
     ...restProps
   } = props
 
   const as = isValidElementType(asProp) ? asProp : 'div'
   const rootTheme = useRootTheme()
+  const scheme = schemeProp ?? rootTheme.scheme
   const tone = toneProp === 'inherit' ? rootTheme.tone : toneProp
 
   // todo: Consider adding the wrapper approach for nested cards in which the tones are not changing, avoid unnecessary ThemeColorProvider
@@ -85,7 +94,7 @@ function CardComponent(
     <ThemeColorProvider scheme={scheme} tone={tone}>
       <StyledCard
         data-as={typeof as === 'string' ? as : undefined}
-        data-scheme={rootTheme.scheme}
+        data-scheme={scheme}
         data-ui="Card"
         data-tone={tone}
         {...restProps}
@@ -106,6 +115,7 @@ function CardComponent(
         forwardedAs={as}
         ref={ref}
         selected={selected}
+        style={{colorScheme: scheme, ...style}}
       />
     </ThemeColorProvider>
   )

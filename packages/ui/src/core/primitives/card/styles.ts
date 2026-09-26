@@ -57,8 +57,6 @@ function cardColorStyle(props: CardStyleProps & ThemeProps): ReturnType<typeof c
   const border = {width: card.border.width, color: 'var(--card-border-color)'}
 
   return css`
-    color-scheme: ${color._dark ? 'dark' : 'light'};
-
     ${_cardColorStyle(color, color, $checkered)}
 
     background-color: ${$muted ? 'var(--card-muted-bg-color)' : 'var(--card-bg-color)'};
