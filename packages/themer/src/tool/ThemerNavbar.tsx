@@ -1,5 +1,4 @@
 import {ColorWheelIcon} from '@sanity/icons/ColorWheel'
-import {SpinnerIcon} from '@sanity/icons/Spinner'
 import {Button, Text} from '@sanity/ui'
 import {Tooltip} from '@sanity/ui/tooltip'
 import {animate, useMotionValue} from 'motion/react'
@@ -11,8 +10,6 @@ import {ANIMATION_DURATION} from './colorWheel'
 import {ThemerContextValue, useThemer} from './context'
 import {hasVisited, markVisited} from './storage'
 import {NAVBAR_SELECTOR} from './useStudioNavbarHeight'
-
-import {spinner} from './ThemerNavbar.css'
 
 /**
  * Starts loading the sidebar's code as the toggle is about to be pressed —
@@ -43,9 +40,10 @@ let introduced = false
 
 /**
  * The topbar toggle, with an icon that plays its color wheel animation: on
- * hovering the button, every time; and on hovering the navbar it sits in,
- * once — a "hey, look, new tool!" for anyone who has never opened the
- * sidebar, which the visit noted by {@link toggleSidebar} ends for good.
+ * hovering the button, every time; on hovering the navbar it sits in, once —
+ * a "hey, look, new tool!" for anyone who has never opened the sidebar, which
+ * the visit noted by {@link toggleSidebar} ends for good; and lap after lap
+ * while the sidebar's code loads, the way a spinner would.
  */
 function ThemerNavbarButton() {
   const {open, loading, send} = useThemer()
@@ -61,6 +59,30 @@ function ThemerNavbarButton() {
 
     animate(progress, [0, 1], {duration: ANIMATION_DURATION, ease: 'linear'})
   }, [progress])
+
+  // Laps from wherever a hover's run has got to, so the wheel never jumps,
+  // and the lap in progress as the code arrives plays out: at rest, the wheel
+  // looks like the icon again
+  useEffect(() => {
+    if (!loading) return undefined
+
+    let looping = true
+    const lap = (from: number) => {
+      animate(progress, [from, 1], {
+        duration: (1 - from) * ANIMATION_DURATION,
+        ease: 'linear',
+        onComplete: () => {
+          if (looping) lap(0)
+        },
+      })
+    }
+
+    lap(progress.get())
+
+    return () => {
+      looping = false
+    }
+  }, [loading, progress])
 
   useEffect(() => () => progress.stop(), [progress])
 
@@ -89,17 +111,10 @@ function ThemerNavbarButton() {
       <Button
         aria-busy={loading}
         aria-label="Themer"
-        // While the sidebar's code loads, a spinner takes the icon's place at
-        // the icon's size — the `loading` prop would cover the button with a
-        // larger one
+        // The wheel itself shows the load, where the `loading` prop would
+        // cover it with a spinner
         disabled={loading}
-        icon={
-          loading ? (
-            <SpinnerIcon className={spinner} />
-          ) : (
-            <AnimatedColorWheelIcon progress={progress} />
-          )
-        }
+        icon={<AnimatedColorWheelIcon progress={progress} />}
         mode="bleed"
         onClick={() => toggleSidebar(send)}
         onFocus={preloadSidebar}
