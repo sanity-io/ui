@@ -1,10 +1,11 @@
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
-import {readStoredState, writeStoredState} from './storage'
+import {hasVisited, markVisited, readStoredState, writeStoredState} from './storage'
 import {initialThemerState, ThemerState} from './themes'
 
 const STORAGE_KEY = 'sanityStudio:themer:state'
 const LEGACY_STORAGE_KEY = 'sanityStudio:themer:options'
+const VISITED_STORAGE_KEY = 'sanityStudio:themer:visited'
 
 function createMemoryStorage(): Storage {
   const data = new Map<string, string>()
@@ -196,5 +197,65 @@ describe('themer storage', () => {
         },
       },
     ])
+  })
+})
+
+describe('themer visit', () => {
+  beforeEach(() => {
+    vi.stubGlobal('localStorage', createMemoryStorage())
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it('is not noted until the sidebar has been opened', () => {
+    expect(hasVisited()).toBe(false)
+
+    markVisited()
+
+    expect(hasVisited()).toBe(true)
+  })
+
+  it('keeps the time of the first visit', () => {
+    vi.useFakeTimers()
+
+    try {
+      vi.setSystemTime(new Date('2026-09-25T12:00:00.000Z'))
+      markVisited()
+      vi.setSystemTime(new Date('2026-09-26T12:00:00.000Z'))
+      markVisited()
+
+      expect(localStorage.getItem(VISITED_STORAGE_KEY)).toBe('2026-09-25T12:00:00.000Z')
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('counts any note as a visit', () => {
+    localStorage.setItem(VISITED_STORAGE_KEY, 'yes')
+
+    expect(hasVisited()).toBe(true)
+  })
+
+  it('does without storage', () => {
+    vi.stubGlobal('localStorage', undefined)
+
+    expect(hasVisited()).toBe(false)
+    expect(() => markVisited()).not.toThrow()
+  })
+
+  it('shrugs off storage that throws', () => {
+    const storage = createMemoryStorage()
+    const throwing = () => {
+      throw new Error('denied')
+    }
+
+    storage.getItem = throwing
+    storage.setItem = throwing
+    vi.stubGlobal('localStorage', storage)
+
+    expect(hasVisited()).toBe(false)
+    expect(() => markVisited()).not.toThrow()
   })
 })

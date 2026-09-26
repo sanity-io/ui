@@ -32,7 +32,7 @@ catalog:
   '@vanilla-extract/dynamic': ^2.1.5
   '@vitejs/plugin-react': ^6.1.1
   lightningcss: ^1.33.0
-  motion: ^13.4.3
+  motion: ^13.4.4
   oxc-transform-react: ^0.151.0
   react: ^19.3.0
   react-dom: ^19.3.0
@@ -46,7 +46,7 @@ catalog:
   typescript: 7.0.2
   unrun: ^0.3.1
   vite: ^8.3.1
-  vitest: ^5.0.1
+  vitest: ^5.0.2
 
 allowBuilds:
   # Like esbuild, @swc/core's postinstall is only a fallback downloader — the
@@ -128,7 +128,6 @@ minimumReleaseAgeExclude:
   - '@oxlint/binding-win32-ia32-msvc@1.85.0'
   - '@oxlint/binding-win32-x64-msvc@1.85.0'
   - oxlint@1.85.0
-  - motion-dom@13.4.2
   - '@oxlint-tsgolint/darwin-arm64@7.0.2003'
   - '@oxlint-tsgolint/darwin-x64@7.0.2003'
   - '@oxlint-tsgolint/linux-arm64@7.0.2003'
