@@ -1,5 +1,11 @@
 # @sanity/themer-legacy
 
+## 0.2.1
+
+### Patch Changes
+
+- [#3003](https://github.com/sanity-io/ui/pull/3003) [`0042a4a`](https://github.com/sanity-io/ui/commit/0042a4afa36f0055d02becd746d9e0d03d454d32) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency @sanity/ui to ^4.2.6
+
 ## 0.2.0
 
 ### Minor Changes
