@@ -35,6 +35,8 @@ export interface ThemerContextValue {
   view: ThemerView
   /** Whether the themer sidebar is open */
   open: boolean
+  /** Whether the sidebar is on its way to opening for the first time, pending while its code loads */
+  loading: boolean
   /** Whether the Studio shows twice side by side, in light and dark */
   split: boolean
   /** Whether the Studio is on a small screen, where the sidebar covers it and the split preview stacks */
