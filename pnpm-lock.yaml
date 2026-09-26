@@ -234,7 +234,7 @@ catalogs:
       specifier: ^8.3.1
       version: 8.3.1
     vitest:
-      specifier: ^5.0.1
+      specifier: ^5.0.2
       version: 5.0.2
 
 overrides:
@@ -485,7 +485,7 @@ importers:
         specifier: 'catalog:'
         version: 6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.11)(vite@8.3.1(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1)))(oxc-transform-react@0.151.0)(vite@8.3.1(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
       '@vitest/browser-playwright':
-        specifier: ^5.0.1
+        specifier: ^5.0.2
         version: 5.0.2(playwright@1.63.0)(vite@8.3.1(@types/node@24.13.6)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))(vitest@5.0.2)
       oxc-transform-react:
         specifier: 'catalog:'
@@ -973,7 +973,7 @@ importers:
         specifier: 'catalog:'
         version: 1.21.2(babel-plugin-macros@3.1.0)
       '@vitest/coverage-v8':
-        specifier: ^5.0.1
+        specifier: ^5.0.2
         version: 5.0.2(@vitest/browser@5.0.2)(vitest@5.0.2)
       jsdom:
         specifier: ^30.1.1

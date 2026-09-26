@@ -101,7 +101,7 @@
     "@types/react-dom": "catalog:",
     "@types/react-is": "catalog:",
     "@vanilla-extract/css": "catalog:",
-    "@vitest/coverage-v8": "^5.0.1",
+    "@vitest/coverage-v8": "^5.0.2",
     "jsdom": "^30.1.1",
     "oxc-transform-react": "catalog:",
     "react": "catalog:",
