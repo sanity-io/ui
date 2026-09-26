@@ -313,7 +313,7 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
       '@uiw/codemirror-themes':
-        specifier: ^4.25.11
+        specifier: ^4.25.12
         version: 4.25.12(@codemirror/language@6.12.4)(@codemirror/state@6.7.6)(@codemirror/view@6.43.13)
       '@uiw/react-codemirror':
         specifier: ^4.25.12
