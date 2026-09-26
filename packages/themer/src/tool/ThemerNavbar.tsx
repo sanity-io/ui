@@ -2,7 +2,7 @@ import {ColorWheelIcon} from '@sanity/icons/ColorWheel'
 import {Button, Text} from '@sanity/ui'
 import {Tooltip} from '@sanity/ui/tooltip'
 import {animate, useMotionValue} from 'motion/react'
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import {type NavbarProps} from 'sanity'
 
 import {AnimatedColorWheelIcon} from './AnimatedColorWheelIcon'
@@ -21,6 +21,15 @@ function toggleSidebar(send: ThemerContextValue['send']) {
 }
 
 /**
+ * Whether the navbar has had its one chance per page load to introduce the
+ * tool. Module state rather than component state on purpose: the button
+ * remounts with the navbar (switching workspaces, crossing the narrow-screen
+ * breakpoint) and renders once per Studio copy in the split preview, and none
+ * of those should earn another introduction — only loading the page again does.
+ */
+let introduced = false
+
+/**
  * The topbar toggle, with an icon that plays its color wheel animation: on
  * hovering the button, every time; and on hovering the navbar it sits in,
  * once — a "hey, look, new tool!" for anyone who has never opened the
@@ -33,7 +42,6 @@ function ThemerNavbarButton() {
   // wraps the button and hands the element on once it has rendered, which is
   // after a plain ref would have been read
   const [button, setButton] = useState<HTMLButtonElement | null>(null)
-  const introduced = useRef(false)
 
   const play = useCallback(() => {
     // A run in progress plays out — hovering again does not cut it short
@@ -47,10 +55,13 @@ function ThemerNavbarButton() {
   useEffect(() => {
     const navbar = button?.closest(NAVBAR_SELECTOR)
 
-    if (!navbar || introduced.current) return undefined
+    if (!navbar || introduced) return undefined
 
     const introduce = () => {
-      introduced.current = true
+      // Another navbar (the split preview's) may have had the chance meanwhile
+      if (introduced) return
+
+      introduced = true
       // Checked as the pointer comes in, not up front: a click in between
       // (on the button itself) counts
       if (!hasVisited()) play()
