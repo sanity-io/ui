@@ -1,9 +1,12 @@
 import {ColorWheelIcon} from '@sanity/icons/ColorWheel'
+import {SpinnerIcon} from '@sanity/icons/Spinner'
 import {Button, Text} from '@sanity/ui'
 import {Tooltip} from '@sanity/ui/tooltip'
 import {type NavbarProps} from 'sanity'
 
 import {useThemer} from './context'
+
+import {spinner} from './ThemerNavbar.css'
 
 function ThemerNavbarButton() {
   const {open, loading, send} = useThemer()
@@ -11,9 +14,13 @@ function ThemerNavbarButton() {
   return (
     <Tooltip animate content={<Text size={1}>Themer</Text>} portal>
       <Button
+        aria-busy={loading}
         aria-label="Themer"
-        icon={ColorWheelIcon}
-        loading={loading}
+        // While the sidebar's code loads, a spinner takes the icon's place at
+        // the icon's size — the `loading` prop would cover the button with a
+        // larger one
+        disabled={loading}
+        icon={loading ? <SpinnerIcon className={spinner} /> : ColorWheelIcon}
         mode="bleed"
         onClick={() => send({type: 'sidebar.toggle'})}
         // The Studio's own navbar buttons go through a wrapper that pins them
