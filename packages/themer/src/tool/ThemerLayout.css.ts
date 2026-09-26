@@ -101,7 +101,7 @@ globalStyle(
  * While one of the layout's transitions runs, every group keeps the layout's
  * time instead. Only then: the Studio's own transitions are none of the
  * layout's business and keep their own — and the layout's own groups, which
- * the rules above set to the same time, are none the different.
+ * the rules above set to the same time, are no different for it.
  */
 globalStyle(
   [
