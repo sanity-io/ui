@@ -1,20 +1,39 @@
 import {ColorWheelIcon} from '@sanity/icons/ColorWheel'
+import {SpinnerIcon} from '@sanity/icons/Spinner'
 import {Button, Text} from '@sanity/ui'
 import {Tooltip} from '@sanity/ui/tooltip'
 import {type NavbarProps} from 'sanity'
 
 import {useThemer} from './context'
 
+import {spinner} from './ThemerNavbar.css'
+
+/**
+ * Starts loading the sidebar's code as the toggle is about to be pressed —
+ * the same import `React.lazy` makes, which then waits for this one
+ */
+function preloadSidebar() {
+  // A failed load is for the lazy import to report, as the sidebar opens
+  import('./ResizableSidebar').catch(() => {})
+}
+
 function ThemerNavbarButton() {
-  const {open, send} = useThemer()
+  const {open, loading, send} = useThemer()
 
   return (
     <Tooltip animate content={<Text size={1}>Themer</Text>} portal>
       <Button
+        aria-busy={loading}
         aria-label="Themer"
-        icon={ColorWheelIcon}
+        // While the sidebar's code loads, a spinner takes the icon's place at
+        // the icon's size — the `loading` prop would cover the button with a
+        // larger one
+        disabled={loading}
+        icon={loading ? <SpinnerIcon className={spinner} /> : ColorWheelIcon}
         mode="bleed"
         onClick={() => send({type: 'sidebar.toggle'})}
+        onFocus={preloadSidebar}
+        onMouseEnter={preloadSidebar}
         // The Studio's own navbar buttons go through a wrapper that pins them
         // to this padding, where `@sanity/ui` defaults to a roomier 3
         padding={2}

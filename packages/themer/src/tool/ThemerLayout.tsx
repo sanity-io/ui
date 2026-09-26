@@ -1,14 +1,13 @@
 import {Card, Flex, ThemeProvider, useMediaIndex} from '@sanity/ui'
 import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
-import {Activity, useEffect, useMemo, useRef, useState, ViewTransition} from 'react'
+import {Activity, lazy, useEffect, useMemo, useRef, useState, ViewTransition} from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
 
 import {buildTheme} from '../theme/buildTheme'
 import {BuildThemeOptions} from '../theme/options'
 import {ThemerContext, ThemerContextValue, ThemerView} from './context'
 import {selectStoredState, ThemerInput, themerMachine, ThemerSnapshot} from './machine'
-import {ResizableSidebar} from './ResizableSidebar'
 import {readStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
 import {usePrefersReducedMotion} from './usePrefersReducedMotion'
@@ -29,6 +28,18 @@ import {
  * next to it, and the split preview stacks instead of sitting side by side.
  */
 const MOBILE_MEDIA_INDEX = 1
+
+/**
+ * The sidebar — everything in it, from the theme list to the snippet dialog —
+ * loads the first time it opens. There is no `Suspense` boundary around it,
+ * so it must only ever mount from a deferred render: that keeps the Studio as
+ * it was while the code loads, with the navbar toggle showing the deferred
+ * value as pending, where an urgent render would suspend up to the Studio's
+ * own boundary and swap the whole Studio for its loading screen.
+ */
+const ResizableSidebar = lazy(() =>
+  import('./ResizableSidebar').then((module) => ({default: module.ResizableSidebar})),
+)
 
 function sameStoredState(a: ThemerState, b: ThemerState): boolean {
   return (
@@ -117,6 +128,18 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   const shownOpen = deferredOpen ?? open
   const shownSplit = deferredSplit ?? split
 
+  // The sidebar's content mounts the first time it opens — which is when its
+  // code loads — and stays mounted from then on. It goes by a deferred copy
+  // of whether the sidebar has opened, deferred even for reduced motion: the
+  // render that loads the code must never be an urgent one. With motion it
+  // arrives with the panel's own deferred reveal; without, in a panel that
+  // already shows, as an update no view transition animates. The two copies
+  // differ while the code loads, which the navbar toggle shows
+  const [panelOpened, setPanelOpened] = useState(false)
+  if (open && !panelOpened) setPanelOpened(true)
+  const panelMounted = useTypedDeferredValue(panelOpened, layoutTransitionType)
+  const loading = panelOpened !== panelMounted
+
   const {themes, removed, active} = useMemo(
     () => resolveThemes(stored, baseOptions),
     [stored, baseOptions],
@@ -184,12 +207,26 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
       images,
       view,
       open,
+      loading,
       split,
       mobile,
       navbarHeight,
       send,
     }),
-    [active, baseOptions, images, mobile, navbarHeight, open, removed, send, split, themes, view],
+    [
+      active,
+      baseOptions,
+      images,
+      loading,
+      mobile,
+      navbarHeight,
+      open,
+      removed,
+      send,
+      split,
+      themes,
+      view,
+    ],
   )
 
   const studio = layoutProps.renderDefault(layoutProps)
@@ -265,8 +302,10 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
           </StudioPreview>
         </ViewTransition>
 
-        {/* The sidebar is small and cheap: it stays mounted, hidden while
-            closed, keeping its state and ready to show */}
+        {/* The sidebar is small and cheap: once it has opened it stays
+            mounted, hidden while closed, keeping its state and ready to show.
+            Until then its content is left out — hidden, it would be
+            pre-rendered, and its code loaded, as soon as the Studio renders */}
         <Activity mode={shownOpen ? 'visible' : 'hidden'}>
           <ViewTransition
             key="panel"
@@ -278,7 +317,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
             update={classes.update}
           >
             <ThemeProvider theme={shownTheme ?? undefined}>
-              <ResizableSidebar overlay={mobile} />
+              {panelMounted && <ResizableSidebar overlay={mobile} />}
             </ThemeProvider>
           </ViewTransition>
         </Activity>
