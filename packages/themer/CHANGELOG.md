@@ -1,5 +1,15 @@
 # @sanity/themer
 
+## 0.7.1
+
+### Patch Changes
+
+- [#3010](https://github.com/sanity-io/ui/pull/3010) [`ff01934`](https://github.com/sanity-io/ui/commit/ff0193453bb31a1ac31785cbdb33ff1996d77db1) Thanks [@stipsan](https://github.com/stipsan)! - `@sanity/themer/bundle.css` keeps its `color-scheme` declarations as authored: Lightning CSS no longer adds the `--lightningcss-light`/`--lightningcss-dark` custom properties of its `light-dark()` polyfill next to them. The stylesheet also ships unminified, so it reads cleanly when comparing published versions.
+
+- [#3015](https://github.com/sanity-io/ui/pull/3015) [`f17f4c0`](https://github.com/sanity-io/ui/commit/f17f4c05c44f6de632d34f95358f54b1b49e4d72) Thanks [@stipsan](https://github.com/stipsan)! - The themer tool's motions keep time with `view-transition-name`s the Studio gives its own elements — an avatar named so it moves as one piece instead of stretching along with the navbar's snapshot. Every view transition the layout starts now carries the `sanity-themer` transition type, and while one runs every group on the page shares the layout's duration and easing instead of the browser's default quarter second and `ease`, which left them out of step with the navbar; the Studio's own transitions keep their own.
+- Updated dependencies [[`0042a4a`](https://github.com/sanity-io/ui/commit/0042a4afa36f0055d02becd746d9e0d03d454d32)]:
+  - @sanity/themer-legacy@0.2.1
+
 ## 0.7.0
 
 ### Minor Changes
