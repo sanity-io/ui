@@ -1,5 +1,11 @@
 # @sanity/icons
 
+## 5.2.3
+
+### Patch Changes
+
+- [#3020](https://github.com/sanity-io/ui/pull/3020) [`48372eb`](https://github.com/sanity-io/ui/commit/48372eb2aed92b7aaea19b49981d38c0a9f7bb08) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update vitest monorepo to ^5.0.2
+
 ## 5.2.2
 
 ### Patch Changes

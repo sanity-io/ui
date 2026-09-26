@@ -1,5 +1,18 @@
 # @sanity/themer
 
+## 0.7.2
+
+### Patch Changes
+
+- [#3020](https://github.com/sanity-io/ui/pull/3020) [`48372eb`](https://github.com/sanity-io/ui/commit/48372eb2aed92b7aaea19b49981d38c0a9f7bb08) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update vitest monorepo to ^5.0.2
+
+- [#3022](https://github.com/sanity-io/ui/pull/3022) [`3048289`](https://github.com/sanity-io/ui/commit/3048289c070a2bf5c81c3c8735f8b335214108b2) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^13.4.4
+- Updated dependencies [[`48372eb`](https://github.com/sanity-io/ui/commit/48372eb2aed92b7aaea19b49981d38c0a9f7bb08), [`3048289`](https://github.com/sanity-io/ui/commit/3048289c070a2bf5c81c3c8735f8b335214108b2)]:
+  - @sanity/ui@4.2.7
+  - @sanity/color@3.0.9
+  - @sanity/icons@5.2.3
+  - @sanity/themer-legacy@0.2.2
+
 ## 0.7.1
 
 ### Patch Changes
