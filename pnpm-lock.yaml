@@ -194,6 +194,9 @@ catalogs:
     '@vitejs/plugin-react':
       specifier: ^6.1.1
       version: 6.1.1
+    lightningcss:
+      specifier: ^1.33.0
+      version: 1.33.0
     motion:
       specifier: ^13.4.3
       version: 13.4.3
@@ -823,6 +826,9 @@ importers:
       jsdom:
         specifier: ^30.1.1
         version: 30.1.1(@noble/hashes@2.4.0)
+      lightningcss:
+        specifier: 'catalog:'
+        version: 1.33.0
       oxc-transform-react:
         specifier: 'catalog:'
         version: 0.151.0
@@ -857,7 +863,7 @@ importers:
         specifier: workspace:^
         version: link:../icons
       '@sanity/ui':
-        specifier: ^4.2.4
+        specifier: ^4.2.6
         version: link:../ui
       react-compiler-runtime:
         specifier: 1.0.0
