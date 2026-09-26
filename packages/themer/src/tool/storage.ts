@@ -28,6 +28,12 @@ const LEGACY_STORAGE_KEY = 'sanityStudio:themer:options'
 /** The title a draft from before themes had titles is imported under */
 const LEGACY_DRAFT_TITLE = 'Draft theme'
 
+/**
+ * Where it is noted that the sidebar has been opened at least once — until
+ * then, the navbar introduces the tool with an animation of its icon
+ */
+const VISITED_STORAGE_KEY = 'sanityStudio:themer:visited'
+
 function sanitizeColor(value: unknown): string | null {
   return typeof value === 'string' && isColor(value) ? value.toLowerCase() : null
 }
@@ -245,5 +251,37 @@ export function writeStoredState(state: ThemerState): void {
     localStorage.removeItem(LEGACY_STORAGE_KEY)
   } catch {
     // Storage can be unavailable (e.g. private browsing) — themes just won't persist
+  }
+}
+
+/**
+ * Whether the themer sidebar has been opened before, in any session — the
+ * cue for the navbar to stop introducing the tool.
+ *
+ * @internal
+ */
+export function hasVisited(): boolean {
+  try {
+    return typeof localStorage !== 'undefined' && localStorage.getItem(VISITED_STORAGE_KEY) !== null
+  } catch {
+    return false
+  }
+}
+
+/**
+ * Notes that the themer sidebar has been opened, keeping the time it first
+ * was.
+ *
+ * @internal
+ */
+export function markVisited(): void {
+  try {
+    if (typeof localStorage === 'undefined' || localStorage.getItem(VISITED_STORAGE_KEY) !== null) {
+      return
+    }
+
+    localStorage.setItem(VISITED_STORAGE_KEY, new Date().toISOString())
+  } catch {
+    // Storage can be unavailable (e.g. private browsing) — the tool is introduced again next time
   }
 }
