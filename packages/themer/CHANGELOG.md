@@ -1,5 +1,19 @@
 # @sanity/themer
 
+## 0.8.0
+
+### Minor Changes
+
+- [#3011](https://github.com/sanity-io/ui/pull/3011) [`4c20a30`](https://github.com/sanity-io/ui/commit/4c20a30ff5f9493306ac2914fa57e3289af23fd9) Thanks [@stipsan](https://github.com/stipsan)! - The themer tool's sidebar loads the first time it's needed instead of with the Studio: `@sanity/themer/tool` starts out with just the navbar toggle and the layout that applies the picked theme, and the theme list, the editor and the snippet dialog — with `react-refractor` and the other dependencies only they use — load on demand, starting as the pointer moves onto the navbar toggle or it gets focus. Pressed before they have loaded, the toggle's color wheel goes round, lap after lap, while the Studio stays as it is; from then on the sidebar stays mounted while closed, as before, and opens right away.
+
+- [#3012](https://github.com/sanity-io/ui/pull/3012) [`afbb0f0`](https://github.com/sanity-io/ui/commit/afbb0f04d98c4c06dd475522c23cf3d756d6c193) Thanks [@stipsan](https://github.com/stipsan)! - The themer tool introduces itself: the color wheel icon of its navbar toggle plays an animation on hover — the eight slices of the wheel pop in one at a time with the palette's hues in rainbow order, clockwise from 12 o'clock like the segments of a classic spinner, the wheel spins once as the 6 o'clock slice pops in, and the colors pop out the same way round, easing out from the speed the spin reached as if it kept turning for a second lap. Hovering the button plays it every time; hovering the Studio navbar plays it once per page load for anyone who has never opened the sidebar — opening it (from the topbar button or the narrow-screen menu) is remembered in `localStorage`, and the navbar stops introducing the tool. With `prefers-reduced-motion: reduce` the wheel keeps still and only the colors come and go. The navbar action also renders the toggle as a stable component instead of remounting it on every navbar render.
+
+### Patch Changes
+
+- [#3022](https://github.com/sanity-io/ui/pull/3022) [`3048289`](https://github.com/sanity-io/ui/commit/3048289c070a2bf5c81c3c8735f8b335214108b2) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^13.4.4
+- Updated dependencies [[`3048289`](https://github.com/sanity-io/ui/commit/3048289c070a2bf5c81c3c8735f8b335214108b2)]:
+  - @sanity/ui@4.2.7
+
 ## 0.7.1
 
 ### Patch Changes
