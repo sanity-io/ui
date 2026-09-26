@@ -1,5 +1,12 @@
 # @sanity/logos
 
+## 2.2.6
+
+### Patch Changes
+
+- Updated dependencies [[`48372eb`](https://github.com/sanity-io/ui/commit/48372eb2aed92b7aaea19b49981d38c0a9f7bb08)]:
+  - @sanity/color@3.0.9
+
 ## 2.2.5
 
 ### Patch Changes
