@@ -128,7 +128,6 @@ minimumReleaseAgeExclude:
   - '@oxlint/binding-win32-ia32-msvc@1.85.0'
   - '@oxlint/binding-win32-x64-msvc@1.85.0'
   - oxlint@1.85.0
-  - motion-dom@13.4.2
   - '@oxlint-tsgolint/darwin-arm64@7.0.2003'
   - '@oxlint-tsgolint/darwin-x64@7.0.2003'
   - '@oxlint-tsgolint/linux-arm64@7.0.2003'
