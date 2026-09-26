@@ -1,16 +1,7 @@
 import {Card, Flex, ThemeProvider, useMediaIndex} from '@sanity/ui'
 import {type RootTheme, type ThemeColorSchemeKey} from '@sanity/ui/theme'
 import {useActor, useSelector} from '@xstate/react'
-import {
-  Activity,
-  lazy,
-  useDeferredValue,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  ViewTransition,
-} from 'react'
+import {Activity, lazy, useEffect, useMemo, useRef, useState, ViewTransition} from 'react'
 import {type LayoutProps, useColorSchemeValue} from 'sanity'
 
 import {buildTheme} from '../theme/buildTheme'
@@ -21,9 +12,11 @@ import {readStoredState} from './storage'
 import {resolveThemes, ThemerState} from './themes'
 import {usePrefersReducedMotion} from './usePrefersReducedMotion'
 import {useStudioNavbarHeight} from './useStudioNavbarHeight'
+import {useTypedDeferredValue} from './useTypedDeferredValue'
 
 import {
   layout,
+  layoutTransitionType,
   panelTransitionClasses,
   splitTransitionClasses,
   studioScheme,
@@ -96,6 +89,12 @@ function sameView(a: ThemerView, b: ThemerView): boolean {
  * panel's and the copy's mounts in a transition — what lets React animate
  * them — and picks the view transition classes from the tags.
  *
+ * Whatever else on the page has a `view-transition-name` — an avatar the
+ * Studio names so it moves as one piece — comes along in step: every
+ * transition the layout starts carries `layoutTransitionType`, which the
+ * stylesheet keys on to move every group in the layout's time (see
+ * `ThemerLayout.css.ts`).
+ *
  * @internal
  */
 export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOptions}) {
@@ -116,15 +115,16 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // The machine publishes synchronously, which React does not animate. What
   // shows is deferred: that renders the panel's and the copy's mounts in a
   // transition — once the sidebar's own changes (the toggle's pressed state)
-  // have committed, so nothing in the sidebar changes while it runs. Someone
-  // who prefers reduced motion gets no view transition at all: nothing is
-  // deferred, so there is no transition render for React to animate, no
-  // boundary has a class, and what shows changes along with the machine —
-  // and should one run anyway, the stylesheet gives its animations nothing
-  // to do
+  // have committed, so nothing in the sidebar changes while it runs. The
+  // transition carries the layout's type, which tells the stylesheet that the
+  // view transition running is the layout's. Someone who prefers reduced
+  // motion gets no view transition at all: nothing is deferred, so there is
+  // no transition render for React to animate, no boundary has a class, and
+  // what shows changes along with the machine — and should one run anyway,
+  // the stylesheet gives its animations nothing to do
   const reduceMotion = usePrefersReducedMotion()
-  const deferredOpen = useDeferredValue(reduceMotion ? null : open)
-  const deferredSplit = useDeferredValue(reduceMotion ? null : split)
+  const deferredOpen = useTypedDeferredValue(reduceMotion ? null : open, layoutTransitionType)
+  const deferredSplit = useTypedDeferredValue(reduceMotion ? null : split, layoutTransitionType)
   const shownOpen = deferredOpen ?? open
   const shownSplit = deferredSplit ?? split
 
@@ -137,7 +137,7 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // differ while the code loads, which the navbar toggle shows
   const [panelOpened, setPanelOpened] = useState(false)
   if (open && !panelOpened) setPanelOpened(true)
-  const panelMounted = useDeferredValue(panelOpened)
+  const panelMounted = useTypedDeferredValue(panelOpened, layoutTransitionType)
   const loading = panelOpened !== panelMounted
 
   const {themes, removed, active} = useMemo(
@@ -159,7 +159,10 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // cross-fade to it while the machine says a theme is being switched to —
   // edits to the applied theme's colors render deferred too, which keeps the
   // pickers responsive, but with nothing to animate them they simply show
-  const deferredTheme = useDeferredValue(reduceMotion ? undefined : theme)
+  const deferredTheme = useTypedDeferredValue(
+    reduceMotion ? undefined : theme,
+    layoutTransitionType,
+  )
   const shownTheme = deferredTheme === undefined ? theme : deferredTheme
 
   // The Studio paints the body with its configured theme from above this
