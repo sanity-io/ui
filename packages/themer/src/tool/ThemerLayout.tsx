@@ -20,7 +20,6 @@ import {
   layoutTransitionType,
   panelTransitionClasses,
   splitTransitionClasses,
-  studioCopy,
   studioScheme,
 } from './ThemerLayout.css'
 
@@ -80,10 +79,10 @@ function sameView(a: ThemerView, b: ThemerView): boolean {
  * them — and picks the view transition classes from the tags.
  *
  * Whatever else on the page has a `view-transition-name` — an avatar the
- * Studio names so it moves as one piece — comes along gracefully: every
+ * Studio names so it moves as one piece — comes along in step: every
  * transition the layout starts carries `layoutTransitionType`, which the
- * stylesheet keys on to move every group in the layout's time, and the split
- * copy gives the Studio's names up (see `ThemerLayout.css.ts` for both).
+ * stylesheet keys on to move every group in the layout's time (see
+ * `ThemerLayout.css.ts`).
  *
  * @internal
  */
@@ -246,7 +245,6 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
               <StudioPreview
                 borderBottom={mobile}
                 borderRight={!mobile}
-                copy
                 scheme={oppositeScheme}
                 theme={shownTheme}
               >
@@ -298,29 +296,24 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
  * The two copies of the split preview share the router, the document store
  * and every other provider above the layout — only the scheme differs — so
  * they stay in sync while navigating. The `color-scheme` of a forced scheme
- * keeps native form controls and scrollbars in step with it. The split
- * `copy` gives up the `view-transition-name`s inside it, which the Studio the
- * user was looking at keeps (see `studioCopy`).
+ * keeps native form controls and scrollbars in step with it.
  */
 function StudioPreview(props: {
   borderBottom?: boolean
   borderRight?: boolean
   children: React.ReactNode
-  copy?: boolean
   ref?: React.Ref<HTMLDivElement>
   scheme?: ThemeColorSchemeKey
   theme: RootTheme | null
 }) {
-  const {borderBottom, borderRight, children, copy, ref, scheme, theme} = props
-  const className =
-    [scheme && studioScheme[scheme], copy && studioCopy].filter(Boolean).join(' ') || undefined
+  const {borderBottom, borderRight, children, ref, scheme, theme} = props
 
   return (
     <ThemeProvider scheme={scheme} theme={theme ?? undefined}>
       <Card
         borderBottom={borderBottom}
         borderRight={borderRight}
-        className={className}
+        className={scheme ? studioScheme[scheme] : undefined}
         flex={1}
         height="fill"
         overflow="hidden"
