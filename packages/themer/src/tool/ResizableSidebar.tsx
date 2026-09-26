@@ -45,7 +45,7 @@ function writeStoredWidth(width: number): void {
  *
  * @internal
  */
-export function ResizableSidebar(props: {overlay: boolean}) {
+export default function ResizableSidebar(props: {overlay: boolean}) {
   const {overlay} = props
   const [width, setWidth] = useState(readStoredWidth)
   const [dragging, setDragging] = useState(false)

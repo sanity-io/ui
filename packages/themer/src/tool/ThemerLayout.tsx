@@ -37,9 +37,7 @@ const MOBILE_MEDIA_INDEX = 1
  * value as pending, where an urgent render would suspend up to the Studio's
  * own boundary and swap the whole Studio for its loading screen.
  */
-const ResizableSidebar = lazy(() =>
-  import('./ResizableSidebar').then((module) => ({default: module.ResizableSidebar})),
-)
+const ResizableSidebar = lazy(() => import('./ResizableSidebar'))
 
 function sameStoredState(a: ThemerState, b: ThemerState): boolean {
   return (
