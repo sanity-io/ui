@@ -104,13 +104,13 @@ export function ThemerLayout(props: LayoutProps & {baseOptions: BuildThemeOption
   // The machine publishes synchronously, which React does not animate. What
   // shows is deferred: that renders the panel's and the copy's mounts in a
   // transition — once the sidebar's own changes (the toggle's pressed state)
-  // have committed, so nothing in the sidebar changes while it runs — of the
-  // layout's type, so that the stylesheet knows the view transition for the
-  // layout's while it runs. Someone who prefers reduced motion gets no view
-  // transition at all: nothing is deferred, so there is no transition render
-  // for React to animate, no boundary has a class, and what shows changes
-  // along with the machine — and should one run anyway, the stylesheet gives
-  // its animations nothing to do
+  // have committed, so nothing in the sidebar changes while it runs. The
+  // transition carries the layout's type, which tells the stylesheet that the
+  // view transition running is the layout's. Someone who prefers reduced
+  // motion gets no view transition at all: nothing is deferred, so there is
+  // no transition render for React to animate, no boundary has a class, and
+  // what shows changes along with the machine — and should one run anyway,
+  // the stylesheet gives its animations nothing to do
   const reduceMotion = usePrefersReducedMotion()
   const deferredOpen = useTypedDeferredValue(reduceMotion ? null : open, layoutTransitionType)
   const deferredSplit = useTypedDeferredValue(reduceMotion ? null : split, layoutTransitionType)
