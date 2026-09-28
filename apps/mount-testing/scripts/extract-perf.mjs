@@ -35,6 +35,7 @@ const RUNS = Number(process.env.PERF_RUNS || 1)
 const ROUTES = ['ui3', 'ui4', 'ui5']
 const FINAL_ID = 'Composition' // the last <Profiler> on every page
 const PAGE_TIMEOUT = 120_000
+const INSTANCE_COUNT = 3000
 
 const median = (xs) => {
   const s = [...xs].filter((v) => v != null).sort((a, b) => a - b)
@@ -125,7 +126,7 @@ async function main() {
         codebases[route][comp] = {
           actualDuration: actual,
           baseDuration: round(median(s.base)),
-          perComponentMs: round((actual ?? 0) / 5000),
+          perComponentMs: round((actual ?? 0) / INSTANCE_COUNT),
         }
       }
     }
@@ -133,7 +134,7 @@ async function main() {
     const report = {
       generatedAt: new Date().toISOString(),
       runs: RUNS,
-      instancesPerComponent: 5000,
+      instancesPerComponent: INSTANCE_COUNT,
       codebases,
     }
     await mkdir(OUT_DIR, {recursive: true})
