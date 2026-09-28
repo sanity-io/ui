@@ -1,5 +1,4 @@
 ---
-'@sanity/logos': patch
 '@sanity/themer': patch
 '@sanity/themer-legacy': patch
 '@sanity/ui': patch

@@ -4,9 +4,7 @@
 
 This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
 the published `@sanity/ui` package lives in `packages/ui`, the published
-`@sanity/icons` icon library in `packages/icons`, the published
-`@sanity/logos` package (Sanity/GROQ logo components, migrated from the
-standalone `sanity-io/logos` repo with full git history) in `packages/logos`,
+`@sanity/icons` icon library in `packages/icons`,
 the published `@sanity/themer` package (a root `buildTheme` export that
 generates a Studio theme from a few colors by replacing the `@sanity/color`
 palette that `buildTheme` from `@sanity/ui/theme` uses, a deprecated `/legacy`
@@ -35,10 +33,12 @@ workspace root whose scripts orchestrate via pnpm filters. Package manager is pn
 (`packageManager` pin in `package.json`); developing in this repo requires Node
 `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
 requires `>=22.12` (matching `sanity`; see `packages/ui/package.json` engines).
-The `@sanity/color` palette that `@sanity/ui`, `@sanity/logos`,
-`@sanity/themer` and `@sanity/themer-legacy` depend on is developed in
-[sanity-io/color](https://github.com/sanity-io/color) and installed from npm
-(the `@sanity/color` entry of the `pnpm-workspace.yaml` catalog).
+The `@sanity/color` palette that `@sanity/ui`, `@sanity/themer` and
+`@sanity/themer-legacy` depend on is developed in
+[sanity-io/color](https://github.com/sanity-io/color), and the `@sanity/logos`
+components that `apps/docs` and `apps/studio` use are developed in
+[sanity-io/logos](https://github.com/sanity-io/logos). Both are installed from
+npm (their entries in the `pnpm-workspace.yaml` catalog).
 
 Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
 `dev`). Notes that are not obvious from the scripts:
@@ -90,9 +90,10 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. It
   resolves `@sanity/ui` to the `packages/ui/src/exports/` source through the
   dev `exports`, so it hot-reloads source edits directly (no rebuild needed).
-  The `@sanity/color` stories come from the color Storybook at
-  https://color.sanity.dev through a composition ref (`refs` in
-  `.storybook/main.ts`), so they are edited in sanity-io/color.
+  The `@sanity/color` and `@sanity/logos` stories come from the Storybooks at
+  https://color.sanity.dev and https://logos.sanity.dev through composition
+  refs (`refs` in `.storybook/main.ts`), so they are edited in sanity-io/color
+  and sanity-io/logos.
 - `packages/icons` (migrated from the standalone `sanity-io/icons` repo)
   generates its icon components from the SVG sources in
   `packages/icons/export/`: `pnpm --filter @sanity/icons generate` (also run

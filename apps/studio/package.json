@@ -17,7 +17,7 @@
   "dependencies": {
     "@sanity/code-input": "^7.3.8",
     "@sanity/icons": "workspace:*",
-    "@sanity/logos": "workspace:*",
+    "@sanity/logos": "catalog:",
     "@sanity/themer": "workspace:*",
     "@sanity/themer-legacy": "workspace:*",
     "@sanity/ui": "workspace:*",

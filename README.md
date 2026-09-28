@@ -11,12 +11,14 @@ and serverless functions live under `apps/`.
 | ------------------------------------------ | --------------------------------------- |
 | [`@sanity/ui`](packages/ui)                | React component library                 |
 | [`@sanity/icons`](packages/icons)          | Icon components (SVG → React)           |
-| [`@sanity/logos`](packages/logos)          | Sanity / GROQ logo components           |
 | [`figma-plugin-sanity-ui`](packages/figma) | Figma plugin for Sanity UI theme tokens |
 
 The `@sanity/color` palette and its Figma plugin live in
-[sanity-io/color](https://github.com/sanity-io/color). Its Storybook
-([color.sanity.dev](https://color.sanity.dev)) is composed into this repo's
+[sanity-io/color](https://github.com/sanity-io/color), and the `@sanity/logos`
+Sanity / GROQ logo components live in
+[sanity-io/logos](https://github.com/sanity-io/logos). Their Storybooks
+([color.sanity.dev](https://color.sanity.dev) and
+[logos.sanity.dev](https://logos.sanity.dev)) are composed into this repo's
 Storybook.
 
 ## Migration
@@ -55,8 +57,8 @@ pnpm dev:icons    # Icon showcase at http://localhost:5173
 pnpm dev:studio   # Sanity Studio at http://localhost:3333
 ```
 
-In the monorepo, `@sanity/ui`, `@sanity/icons`, and `@sanity/logos` resolve to
-TypeScript source through package `exports`, so
+In the monorepo, `@sanity/ui` and `@sanity/icons` resolve to TypeScript source
+through package `exports`, so
 Storybook and the apps hot-reload package edits without a rebuild.
 
 ### Common scripts
