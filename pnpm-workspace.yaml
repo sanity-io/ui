@@ -20,11 +20,11 @@ catalogMode: prefer
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
   '@sanity/blueprints': ^0.27.0
-  '@sanity/client': ^8.7.0
+  '@sanity/client': ^8.8.0
   '@sanity/functions': ^1.8.0
   '@sanity/tsdown-config': ^0.28.1
   '@sanity/vanilla-extract-vite-plugin': ^0.2.19
-  '@types/node': ^24.13.6
+  '@types/node': ^24.19.0
   '@types/react': ^19.3.0
   '@types/react-dom': ^19.3.0
   '@types/react-is': ^19.3.0
@@ -88,26 +88,26 @@ minimumReleaseAgeExclude:
   - react-is@19.3.0
   - react@19.3.0
   - scheduler@0.28.0
-  - '@oxfmt/binding-android-arm-eabi@0.70.0'
-  - '@oxfmt/binding-android-arm64@0.70.0'
-  - '@oxfmt/binding-darwin-arm64@0.70.0'
-  - '@oxfmt/binding-darwin-x64@0.70.0'
-  - '@oxfmt/binding-freebsd-x64@0.70.0'
-  - '@oxfmt/binding-linux-arm-gnueabihf@0.70.0'
-  - '@oxfmt/binding-linux-arm-musleabihf@0.70.0'
-  - '@oxfmt/binding-linux-arm64-gnu@0.70.0'
-  - '@oxfmt/binding-linux-arm64-musl@0.70.0'
-  - '@oxfmt/binding-linux-ppc64-gnu@0.70.0'
-  - '@oxfmt/binding-linux-riscv64-gnu@0.70.0'
-  - '@oxfmt/binding-linux-riscv64-musl@0.70.0'
-  - '@oxfmt/binding-linux-s390x-gnu@0.70.0'
-  - '@oxfmt/binding-linux-x64-gnu@0.70.0'
-  - '@oxfmt/binding-linux-x64-musl@0.70.0'
-  - '@oxfmt/binding-openharmony-arm64@0.70.0'
-  - '@oxfmt/binding-win32-arm64-msvc@0.70.0'
-  - '@oxfmt/binding-win32-ia32-msvc@0.70.0'
-  - '@oxfmt/binding-win32-x64-msvc@0.70.0'
-  - oxfmt@0.70.0
+  - '@oxfmt/binding-android-arm-eabi@0.71.0'
+  - '@oxfmt/binding-android-arm64@0.71.0'
+  - '@oxfmt/binding-darwin-arm64@0.71.0'
+  - '@oxfmt/binding-darwin-x64@0.71.0'
+  - '@oxfmt/binding-freebsd-x64@0.71.0'
+  - '@oxfmt/binding-linux-arm-gnueabihf@0.71.0'
+  - '@oxfmt/binding-linux-arm-musleabihf@0.71.0'
+  - '@oxfmt/binding-linux-arm64-gnu@0.71.0'
+  - '@oxfmt/binding-linux-arm64-musl@0.71.0'
+  - '@oxfmt/binding-linux-ppc64-gnu@0.71.0'
+  - '@oxfmt/binding-linux-riscv64-gnu@0.71.0'
+  - '@oxfmt/binding-linux-riscv64-musl@0.71.0'
+  - '@oxfmt/binding-linux-s390x-gnu@0.71.0'
+  - '@oxfmt/binding-linux-x64-gnu@0.71.0'
+  - '@oxfmt/binding-linux-x64-musl@0.71.0'
+  - '@oxfmt/binding-openharmony-arm64@0.71.0'
+  - '@oxfmt/binding-win32-arm64-msvc@0.71.0'
+  - '@oxfmt/binding-win32-ia32-msvc@0.71.0'
+  - '@oxfmt/binding-win32-x64-msvc@0.71.0'
+  - oxfmt@0.71.0
   - '@oxlint/binding-android-arm-eabi@1.86.0'
   - '@oxlint/binding-android-arm64@1.86.0'
   - '@oxlint/binding-darwin-arm64@1.86.0'
@@ -135,6 +135,7 @@ minimumReleaseAgeExclude:
   - '@oxlint-tsgolint/win32-arm64@7.0.2003'
   - '@oxlint-tsgolint/win32-x64@7.0.2003'
   - oxlint-tsgolint@7.0.2003
+  - '@lezer/highlight@1.2.5'
 
 minimumReleaseAgeExcludePrune: true
 
