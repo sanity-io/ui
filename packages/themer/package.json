@@ -66,7 +66,7 @@
     "watch": "tsdown --watch"
   },
   "dependencies": {
-    "@sanity/color": "workspace:^",
+    "@sanity/color": "catalog:",
     "@sanity/icons": "workspace:^",
     "@sanity/themer-legacy": "workspace:^",
     "@sanity/ui": "workspace:^",

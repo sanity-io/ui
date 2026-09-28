@@ -21,6 +21,7 @@ catalogMode: prefer
 catalog:
   '@sanity/blueprints': ^0.27.0
   '@sanity/client': ^8.8.0
+  '@sanity/color': ^3.0.9
   '@sanity/functions': ^1.8.0
   '@sanity/tsdown-config': ^0.28.2
   '@sanity/vanilla-extract-vite-plugin': ^0.2.20

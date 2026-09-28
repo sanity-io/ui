@@ -45,7 +45,7 @@
     "watch": "tsdown --watch"
   },
   "dependencies": {
-    "@sanity/color": "workspace:^"
+    "@sanity/color": "catalog:"
   },
   "devDependencies": {
     "@sanity/tsdown-config": "catalog:",

@@ -7,14 +7,17 @@ and serverless functions live under `apps/`.
 
 ## Packages
 
-| Package                                             | Description                                  |
-| --------------------------------------------------- | -------------------------------------------- |
-| [`@sanity/ui`](packages/ui)                         | React component library                      |
-| [`@sanity/icons`](packages/icons)                   | Icon components (SVG → React)                |
-| [`@sanity/color`](packages/color)                   | Color palette                                |
-| [`@sanity/logos`](packages/logos)                   | Sanity / GROQ logo components                |
-| [`figma-plugin-sanity-ui`](packages/figma)          | Figma plugin for Sanity UI theme tokens      |
-| [`figma-plugin-sanity-color`](packages/figma-color) | Figma plugin for the `@sanity/color` palette |
+| Package                                    | Description                             |
+| ------------------------------------------ | --------------------------------------- |
+| [`@sanity/ui`](packages/ui)                | React component library                 |
+| [`@sanity/icons`](packages/icons)          | Icon components (SVG → React)           |
+| [`@sanity/logos`](packages/logos)          | Sanity / GROQ logo components           |
+| [`figma-plugin-sanity-ui`](packages/figma) | Figma plugin for Sanity UI theme tokens |
+
+The `@sanity/color` palette and its Figma plugin live in
+[sanity-io/color](https://github.com/sanity-io/color). Its Storybook
+([color.sanity.dev](https://color.sanity.dev)) is composed into this repo's
+Storybook.
 
 ## Migration
 
@@ -52,21 +55,21 @@ pnpm dev:icons    # Icon showcase at http://localhost:5173
 pnpm dev:studio   # Sanity Studio at http://localhost:3333
 ```
 
-In the monorepo, `@sanity/ui`, `@sanity/icons`, `@sanity/color`, and
-`@sanity/logos` resolve to TypeScript source through package `exports`, so
+In the monorepo, `@sanity/ui`, `@sanity/icons`, and `@sanity/logos` resolve to
+TypeScript source through package `exports`, so
 Storybook and the apps hot-reload package edits without a rebuild.
 
 ### Common scripts
 
-| Script              | What it does                                                |
-| ------------------- | ----------------------------------------------------------- |
-| `pnpm build`        | Build all publishable packages and Figma plugins            |
-| `pnpm test`         | Unit tests (`@sanity/ui`, `@sanity/icons`, `@sanity/color`) |
-| `pnpm test:browser` | Storybook browser tests (Chromium via Playwright)           |
-| `pnpm lint`         | Lint + type-check (oxlint)                                  |
-| `pnpm format`       | Format with oxfmt                                           |
-| `pnpm knip`         | Unused files / dependencies / exports                       |
-| `pnpm changeset`    | Add a changeset for a release                               |
+| Script              | What it does                                        |
+| ------------------- | --------------------------------------------------- |
+| `pnpm build`        | Build all publishable packages and the Figma plugin |
+| `pnpm test`         | Unit tests (`@sanity/ui`, `@sanity/icons`)          |
+| `pnpm test:browser` | Storybook browser tests (Chromium via Playwright)   |
+| `pnpm lint`         | Lint + type-check (oxlint)                          |
+| `pnpm format`       | Format with oxfmt                                   |
+| `pnpm knip`         | Unused files / dependencies / exports               |
+| `pnpm changeset`    | Add a changeset for a release                       |
 
 ## Contributing & releasing
 

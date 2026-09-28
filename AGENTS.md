@@ -5,8 +5,6 @@
 This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
 the published `@sanity/ui` package lives in `packages/ui`, the published
 `@sanity/icons` icon library in `packages/icons`, the published
-`@sanity/color` package (the Sanity color palette, migrated from the
-sanity-io/color repo with full git history) in `packages/color`, the published
 `@sanity/logos` package (Sanity/GROQ logo components, migrated from the
 standalone `sanity-io/logos` repo with full git history) in `packages/logos`,
 the published `@sanity/themer` package (a root `buildTheme` export that
@@ -25,9 +23,8 @@ depends on a published `@sanity/ui` v4 range instead of `workspace:` so that
 `packages/ui` only while its version satisfies that range, and
 `.changeset/config.json` sets `bumpVersionsWithWorkspaceProtocolOnly` so
 Changesets never rewrites the range) in `packages/themer-legacy`,
-the Figma plugins in `packages/figma` (Sanity UI theme tokens) and
-`packages/figma-color` (the raw `@sanity/color` palette), the Storybook app in
-`apps/storybook`, the
+the Figma plugin in `packages/figma` (Sanity UI theme tokens), the Storybook
+app in `apps/storybook`, the
 sanity.io/ui docs site (a fully static Next.js app — no Sanity client, all
 content lives in code) in
 `apps/docs`, the Sanity Studio for the legacy docs dataset in `apps/studio`,
@@ -38,6 +35,10 @@ workspace root whose scripts orchestrate via pnpm filters. Package manager is pn
 (`packageManager` pin in `package.json`); developing in this repo requires Node
 `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
 requires `>=22.12` (matching `sanity`; see `packages/ui/package.json` engines).
+The `@sanity/color` palette that `@sanity/ui`, `@sanity/logos`,
+`@sanity/themer` and `@sanity/themer-legacy` depend on is developed in
+[sanity-io/color](https://github.com/sanity-io/color) and installed from npm
+(the `@sanity/color` entry of the `pnpm-workspace.yaml` catalog).
 
 Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
 `dev`). Notes that are not obvious from the scripts:
@@ -71,8 +72,8 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   and `@sanity/ui/toast`; components with heavy dependencies like `motion`,
   `@floating-ui/react-dom` and `react-refractor` live on their own subpaths so
   the root entry never references them, and adding a file to `src/exports/`
-  plus running the build is all it takes to publish a new subpath),
-  `@sanity/icons` (incl. its per-icon subpaths) and `@sanity/color` resolve
+  plus running the build is all it takes to publish a new subpath) and
+  `@sanity/icons` (incl. its per-icon subpaths) resolve
   directly to TypeScript source for every tool (tsc, oxlint's type checker,
   vitest, vite), so there are no tsconfig `paths`, no `customConditions`, and
   no vite aliases. The publishable `exports` (dist `import`/`require`) live
@@ -82,17 +83,16 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
   (`@sanity/ui`, `@sanity/icons`, `@sanity/themer` and `@sanity/themer-legacy`
   ship ESM only).
-- `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`,
-  `packages/icons/vitest.config.ts` and the tests in `packages/color/src`).
-  `@sanity/ui` resolves to the `packages/ui/src/exports/` source (and
-  `@sanity/color` to `packages/color/src`) through the dev `exports`, so unit
-  tests run directly against source and do not require a `pnpm build` first.
-- `packages/color/src/color.ts` is generated from `packages/color/src/config.ts`:
-  regenerate it with `pnpm --filter @sanity/color generate` after changing the
-  palette config; never edit it by hand.
+- `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`
+  and `packages/icons/vitest.config.ts`). `@sanity/ui` resolves to the
+  `packages/ui/src/exports/` source through the dev `exports`, so unit tests
+  run directly against source and do not require a `pnpm build` first.
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. It
   resolves `@sanity/ui` to the `packages/ui/src/exports/` source through the
   dev `exports`, so it hot-reloads source edits directly (no rebuild needed).
+  The `@sanity/color` stories come from the color Storybook at
+  https://color.sanity.dev through a composition ref (`refs` in
+  `.storybook/main.ts`), so they are edited in sanity-io/color.
 - `packages/icons` (migrated from the standalone `sanity-io/icons` repo)
   generates its icon components from the SVG sources in
   `packages/icons/export/`: `pnpm --filter @sanity/icons generate` (also run

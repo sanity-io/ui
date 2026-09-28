@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
   compiler: {styledComponents: true, define: {SC_DISABLE_SPEEDY: 'false'}},
   // These workspace packages resolve to their TypeScript source in the
   // monorepo (dev `exports`), so Next.js must transpile them.
-  transpilePackages: ['@sanity/color', '@sanity/icons', '@sanity/logos', '@sanity/ui'],
+  transpilePackages: ['@sanity/icons', '@sanity/logos', '@sanity/ui'],
   reactCompiler: true,
   experimental: {
     // Use the native Rust port of the React Compiler (runs directly on
