@@ -10,9 +10,9 @@ Storybook lives in [`apps/storybook`](apps/storybook).
 this branch. `@sanity/themer`, the [sanity.io/ui](https://www.sanity.io/ui)
 docs site, the [icons.sanity.dev](https://icons.sanity.dev) icon showcase, and
 the `@sanity/color` Figma plugin also live on `main` and are not part of this
-branch. `apps/docs` and `apps/icons` stay as a `vercel.json` that always skips
-the build (`ignoreCommand` exits 0), so the Vercel projects linked to those
-directories keep deploying.
+branch. `apps/docs`, `apps/icons`, and `apps/studio` stay as a `vercel.json`
+that always skips the build (`ignoreCommand` exits 0), so the Vercel projects
+linked to those directories keep deploying.
 
 This branch receives bug fixes and dependency updates for the `3.x` release
 line, while new feature development happens on

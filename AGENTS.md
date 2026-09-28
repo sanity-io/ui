@@ -14,11 +14,11 @@ Storybook app in `apps/storybook` (`pnpm-workspace.yaml`).
 icons.sanity.dev icon showcase, the `@sanity/color` Figma plugin
 (`packages/figma-color`, fully removed) and the docs Sanity Blueprint
 (`apps/blueprints/docs`) also live on `main` and are not workspace packages
-here. `apps/docs` and `apps/icons` remain only as a `vercel.json` whose
-`ignoreCommand` exits 0, so the Vercel projects still linked to those
-directories skip the build instead of failing. Do not reintroduce those
-packages/apps as workspace packages, and do not delete the stub
-`vercel.json` files.
+here. `apps/docs`, `apps/icons`, and `apps/studio` remain only as a
+`vercel.json` whose `ignoreCommand` exits 0, so the Vercel projects still
+linked to those directories skip the build instead of failing. Do not
+reintroduce those packages/apps as workspace packages, and do not delete the
+stub `vercel.json` files.
 
 The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
