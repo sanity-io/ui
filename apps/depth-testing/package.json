@@ -14,7 +14,8 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router": "7.15.0",
-    "ui3": "catalog:"
+    "ui3": "catalog:",
+    "ui4": "catalog:"
   },
   "devDependencies": {
     "@types/node": "^24.13.2",
@@ -23,6 +24,7 @@
     "@vitejs/plugin-react": "catalog:",
     "oxc-transform-react": "catalog:",
     "oxlint": "^1.82.0",
+    "styled-components": "^6.4.0",
     "typescript": "~6.0.2",
     "vite": "catalog:"
   }
