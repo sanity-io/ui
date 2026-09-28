@@ -2,8 +2,6 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "workspaces": {
     ".": {},
-    "apps/docs": {},
-    "apps/icons": {},
     "packages/ui": {
       "ignoreDependencies": [
         // babel-plugin-react-compiler (target '18') injects imports of this runtime

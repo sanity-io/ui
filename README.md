@@ -2,29 +2,30 @@
 
 pnpm workspace for Sanity’s design-system packages and related apps.
 
-Published packages live under `packages/`. Docs, Storybook, and the icon
-showcase live under `apps/`.
+Published packages live under `packages/`. Storybook lives under `apps/`.
 
 This is the `v3` maintenance branch for `@sanity/ui` `3.x`. `@sanity/color`,
 `@sanity/icons`, and `@sanity/logos` are published from
 [`main`](https://github.com/sanity-io/ui/tree/main) and consumed here from npm.
-`@sanity/themer` is also published from `main` and is not used on this branch.
+`@sanity/themer`, the [sanity.io/ui](https://www.sanity.io/ui) docs site, the
+[icons.sanity.dev](https://icons.sanity.dev) icon showcase, and the
+`@sanity/color` Figma plugin also live on `main` and are not part of this
+branch. `apps/docs`, `apps/icons`, and `apps/studio` stay as a `vercel.json`
+that always skips the build (`ignoreCommand` exits 0), so the Vercel projects
+linked to those directories keep deploying.
 
 ## Packages
 
-| Package                                             | Description                                  |
-| --------------------------------------------------- | -------------------------------------------- |
-| [`@sanity/ui`](packages/ui)                         | React component library                      |
-| [`figma-plugin-sanity-ui`](packages/figma)          | Figma plugin for Sanity UI theme tokens      |
-| [`figma-plugin-sanity-color`](packages/figma-color) | Figma plugin for the `@sanity/color` palette |
+| Package                                    | Description                             |
+| ------------------------------------------ | --------------------------------------- |
+| [`@sanity/ui`](packages/ui)                | React component library                 |
+| [`figma-plugin-sanity-ui`](packages/figma) | Figma plugin for Sanity UI theme tokens |
 
 ## Apps
 
-| App                                | Description                                                                    |
-| ---------------------------------- | ------------------------------------------------------------------------------ |
-| [`apps/storybook`](apps/storybook) | Component Storybook ([localhost:6006](http://localhost:6006) via `pnpm dev`)   |
-| [`apps/docs`](apps/docs)           | [sanity.io/ui](https://www.sanity.io/ui) docs site (Next.js + embedded Studio) |
-| [`apps/icons`](apps/icons)         | [icons.sanity.dev](https://icons.sanity.dev) searchable icon catalog           |
+| App                                | Description                                                                  |
+| ---------------------------------- | ---------------------------------------------------------------------------- |
+| [`apps/storybook`](apps/storybook) | Component Storybook ([localhost:6006](http://localhost:6006) via `pnpm dev`) |
 
 ## Requirements
 
@@ -43,20 +44,17 @@ pnpm test
 
 ```sh
 pnpm dev          # Storybook at http://localhost:6006
-pnpm dev:docs     # Docs at http://localhost:3000/ui (+ Studio at :3333)
-pnpm dev:icons    # Icon showcase at http://localhost:5173
 ```
 
 In the monorepo, `@sanity/ui` resolves to TypeScript source through package
-`exports`, so Storybook and the apps hot-reload UI package edits without a
-rebuild. `@sanity/color`, `@sanity/icons`, and `@sanity/logos` are installed
-from npm.
+`exports`, so Storybook hot-reloads UI package edits without a rebuild.
+`@sanity/color`, `@sanity/icons`, and `@sanity/logos` are installed from npm.
 
 ### Common scripts
 
 | Script              | What it does                                      |
 | ------------------- | ------------------------------------------------- |
-| `pnpm build`        | Build `@sanity/ui` and the Figma plugins          |
+| `pnpm build`        | Build `@sanity/ui` and the Figma plugin           |
 | `pnpm test`         | Unit tests (`@sanity/ui`)                         |
 | `pnpm test:browser` | Storybook browser tests (Chromium via Playwright) |
 | `pnpm lint`         | Lint + type-check (oxlint)                        |

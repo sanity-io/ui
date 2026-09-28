@@ -6,12 +6,9 @@ linkWorkspacePackages: deep
 strictPeerDependencies: false
 
 # Version ranges for dependencies used by more than one workspace package.
-# Referenced from package.json files via the `catalog:` protocol.
-# apps/docs may still diverge from the workspace-wide @types/node catalog pin,
-# so that keeps an explicit range there when needed. (See packageExtensions for
-# vitest peer wiring across packages that share different vitest versions.)
+# Referenced from package.json files via the `catalog:` protocol. (See
+# packageExtensions for vitest peer wiring across packages.)
 catalog:
-  '@sanity/client': ^7.27.0
   # Published from `main`; v3 consumes the npm releases.
   '@sanity/color': ^3.0.8
   '@sanity/icons': ^5.2.1
@@ -28,7 +25,6 @@ catalog:
   react-refractor: ^4.0.0
   refractor: ^5.0.0
   rimraf: ^5.0.5
-  sanity: ^6.9.1
   styled-components: ^6.5.0
   tsdown: ^0.22.14
   typescript: 7.0.2
@@ -40,29 +36,21 @@ allowBuilds:
   core-js: false
   esbuild: false
   fsevents: false
-  sharp: true
   unrs-resolver: true
 
 # Sanity-owned build tooling releases frequently; don't gate it on the
-# default minimum release age (1 day). Same for next's `preview` dist-tag
-# (apps/docs pins an exact preview version, so the exclusion only lifts the
-# age gate for versions we deliberately pick). tsdown and its lightningcss /
+# default minimum release age (1 day). tsdown and its lightningcss /
 # verkit / @tsdown/* / publint transitive deps are included for the same
 # reason when we deliberately bump the catalog to `latest`.
 # Version-pinned entries approve one specific release we deliberately picked
 # before it aged out of the gate; the lockfile is re-verified against these on
 # every install, so they have to stay until the version is a day old.
 minimumReleaseAgeExclude:
-  - '@next/*'
-  - '@portabletext/react'
   - '@sanity/*'
   - '@tsdown/*'
   - lightningcss
   - lightningcss-*
-  - next
-  - next-sanity
   - publint
-  - sanity
   - tsdown
   - verkit
   - use-effect-event@2.0.4
@@ -73,9 +61,8 @@ minimumReleaseAgeExclude:
 
 # @testing-library/jest-dom/vitest imports `vitest` without declaring it, so it
 # falls back to pnpm's hidden hoist — which can resolve to another workspace
-# package's vitest version (e.g. apps/docs uses vitest 3, packages/ui vitest 4),
-# registering the matchers on the wrong `expect` instance. Declare the peer so
-# each consumer gets its own vitest linked.
+# package's vitest copy, registering the matchers on the wrong `expect`
+# instance. Declare the peer so each consumer gets its own vitest linked.
 packageExtensions:
   '@testing-library/jest-dom':
     peerDependencies:
