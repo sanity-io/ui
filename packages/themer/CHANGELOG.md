@@ -1,5 +1,12 @@
 # @sanity/themer
 
+## 0.8.1
+
+### Patch Changes
+
+- Updated dependencies [[`b9aaa09`](https://github.com/sanity-io/ui/commit/b9aaa09a4a511888ba1864a0641b5c3de67f5539)]:
+  - @sanity/themer-legacy@0.2.2
+
 ## 0.8.0
 
 ### Minor Changes
