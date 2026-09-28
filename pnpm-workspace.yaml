@@ -135,6 +135,7 @@ minimumReleaseAgeExclude:
   - '@oxlint-tsgolint/win32-arm64@7.0.2003'
   - '@oxlint-tsgolint/win32-x64@7.0.2003'
   - oxlint-tsgolint@7.0.2003
+  - '@lezer/highlight@1.2.5'
 
 minimumReleaseAgeExcludePrune: true
 
