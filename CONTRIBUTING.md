@@ -1,18 +1,16 @@
 # Contributing guidelines
 
 This repository is a pnpm monorepo. On the `v3` maintenance branch, the
-published `@sanity/ui` package lives in [`packages/ui`](packages/ui), the Figma
-plugins live in [`packages/figma`](packages/figma) and
-[`packages/figma-color`](packages/figma-color), the Storybook lives in
-[`apps/storybook`](apps/storybook), the [sanity.io/ui](https://www.sanity.io/ui)
-docs site lives in [`apps/docs`](apps/docs), and the
-[icons.sanity.dev](https://icons.sanity.dev) icon showcase lives in
-[`apps/icons`](apps/icons).
+published `@sanity/ui` package lives in [`packages/ui`](packages/ui), the
+Sanity UI Figma plugin lives in [`packages/figma`](packages/figma), and the
+Storybook lives in [`apps/storybook`](apps/storybook).
 
 `@sanity/color`, `@sanity/icons`, and `@sanity/logos` are published from
 [`main`](https://github.com/sanity-io/ui/tree/main) and installed from npm on
-this branch. `@sanity/themer` is also published from `main` and is not used
-here.
+this branch. `@sanity/themer`, the [sanity.io/ui](https://www.sanity.io/ui)
+docs site, the [icons.sanity.dev](https://icons.sanity.dev) icon showcase, and
+the `@sanity/color` Figma plugin also live on `main` and are not part of this
+branch.
 
 This branch receives bug fixes and dependency updates for the `3.x` release
 line, while new feature development happens on
