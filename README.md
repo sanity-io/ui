@@ -10,7 +10,9 @@ This is the `v3` maintenance branch for `@sanity/ui` `3.x`. `@sanity/color`,
 `@sanity/themer`, the [sanity.io/ui](https://www.sanity.io/ui) docs site, the
 [icons.sanity.dev](https://icons.sanity.dev) icon showcase, and the
 `@sanity/color` Figma plugin also live on `main` and are not part of this
-branch.
+branch. `apps/docs` and `apps/icons` stay as a `vercel.json` that always skips
+the build (`ignoreCommand` exits 0), so the Vercel projects linked to those
+directories keep deploying.
 
 ## Packages
 
