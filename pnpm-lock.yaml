@@ -165,13 +165,13 @@ settings:
 catalogs:
   default:
     '@sanity/color':
-      specifier: ^3.0.8
+      specifier: ^3.0.9
       version: 3.0.9
     '@sanity/icons':
       specifier: ^5.2.2
       version: 5.2.3
     '@sanity/logos':
-      specifier: ^2.2.5
+      specifier: ^2.2.6
       version: 2.2.6
     '@sanity/tsdown-config':
       specifier: ^0.28.2

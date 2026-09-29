@@ -18,9 +18,9 @@ catalogMode: prefer
 # so that keeps an explicit range there when needed. (See packageExtensions for
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
-  '@sanity/color': ^3.0.8
+  '@sanity/color': ^3.0.9
   '@sanity/icons': ^5.2.2
-  '@sanity/logos': ^2.2.5
+  '@sanity/logos': ^2.2.6
   '@sanity/tsdown-config': ^0.28.2
   '@sanity/vanilla-extract-vite-plugin': ^0.2.20
   '@types/node': ^24.19.0
