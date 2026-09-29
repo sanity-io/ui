@@ -4,7 +4,6 @@ import {themerTool as themerLegacyTool} from '@sanity/themer-legacy/tool'
 import {themerTool} from '@sanity/themer/tool'
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
-import {media} from 'sanity-plugin-media'
 import {structureTool} from 'sanity/structure'
 
 import {schema} from './src/schema'
@@ -23,9 +22,6 @@ export default defineConfig({
     codeInput(),
     structureTool({structure}),
     visionTool(),
-    // Browse the uploaded image assets, e.g. the rasterized icon previews
-    // that `packages/icons/scripts/seed-icons-dataset.ts` uploads.
-    media(),
     themerTool(),
     // The hosted Themer's editor, next to the buildTheme themer above — both
     // chain through renderDefault, so they coexist

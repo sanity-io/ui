@@ -7,7 +7,6 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "dev": "sanity dev",
-    "embeddings:enable": "sanity datasets embeddings enable production --projection '{ filename, namedExport, tags, description }' --wait",
     "export:docs": "unrun scripts/export-docs-to-code.ts",
     "prebuild": "pnpm --filter @sanity/ui build",
     "predeploy": "pnpm --filter @sanity/ui build",
@@ -25,7 +24,6 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "sanity": "catalog:",
-    "sanity-plugin-media": "^6.3.1",
     "styled-components": "catalog:"
   },
   "devDependencies": {
