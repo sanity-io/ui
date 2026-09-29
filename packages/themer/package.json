@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@sanity/color": "catalog:",
-    "@sanity/icons": "workspace:^",
+    "@sanity/icons": "catalog:",
     "@sanity/themer-legacy": "workspace:^",
     "@sanity/ui": "workspace:^",
     "@vanilla-extract/dynamic": "catalog:",

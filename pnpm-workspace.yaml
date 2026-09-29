@@ -1,6 +1,5 @@
 packages:
   - 'apps/*'
-  - 'apps/blueprints/*'
   - 'packages/*'
 
 linkWorkspacePackages: deep
@@ -19,10 +18,8 @@ catalogMode: prefer
 # so that keeps an explicit range there when needed. (See packageExtensions for
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
-  '@sanity/blueprints': ^0.27.0
-  '@sanity/client': ^8.8.0
   '@sanity/color': ^3.0.9
-  '@sanity/functions': ^1.8.0
+  '@sanity/icons': ^5.2.2
   '@sanity/logos': ^2.2.6
   '@sanity/tsdown-config': ^0.28.2
   '@sanity/vanilla-extract-vite-plugin': ^0.2.20

@@ -21,6 +21,10 @@ const config: StorybookConfig = {
       title: '@sanity/color',
       url: 'https://color.sanity.dev',
     },
+    icons: {
+      title: '@sanity/icons',
+      url: 'https://icons-storybook.sanity.dev',
+    },
     logos: {
       title: '@sanity/logos',
       url: 'https://logos.sanity.dev',

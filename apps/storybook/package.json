@@ -14,7 +14,7 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
-    "@sanity/icons": "workspace:*",
+    "@sanity/icons": "catalog:",
     "@sanity/ui": "workspace:*",
     "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@storybook/addon-a11y": "^10.6.0",

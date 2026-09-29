@@ -2,13 +2,7 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "workspaces": {
     ".": {},
-    "apps/blueprints/docs": {
-      // The Blueprint config and function handlers are runtime entry points
-      // deployed via @sanity/runtime-cli, not imported by application code
-      "entry": ["sanity.blueprint.ts", "functions/*/index.ts"],
-    },
     "apps/docs": {},
-    "apps/icons": {},
     "apps/studio": {
       // The one-shot DS-276 docs export script is run via unrun, which knip
       // does not recognize as a script runner
@@ -23,11 +17,6 @@
         // which knip cannot trace through the `sanity` package
         "oxc-transform-react",
       ],
-    },
-    "packages/icons": {
-      // The generate/seed package.json scripts run these through unrun, which
-      // knip does not recognize as a script runner
-      "entry": ["scripts/*.ts"],
     },
     "packages/themer-legacy": {
       "ignoreDependencies": [

@@ -18,9 +18,9 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   // Matches the behavior of `sanity dev` which sets styled-components to use the fastest way of inserting CSS rules in both dev and production. It's default behavior is to disable it in dev mode.
   compiler: {styledComponents: true, define: {SC_DISABLE_SPEEDY: 'false'}},
-  // These workspace packages resolve to their TypeScript source in the
-  // monorepo (dev `exports`), so Next.js must transpile them.
-  transpilePackages: ['@sanity/icons', '@sanity/ui'],
+  // The workspace @sanity/ui resolves to its TypeScript source in the
+  // monorepo (dev `exports`), so Next.js must transpile it.
+  transpilePackages: ['@sanity/ui'],
   reactCompiler: true,
   experimental: {
     // Use the native Rust port of the React Compiler (runs directly on
