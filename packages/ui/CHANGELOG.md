@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.12
+
+### Patch Changes
+
+- d1c54f8: update icon component icon prop to allow react element
+
 ## 5.0.0-alpha.11
 
 ### Patch Changes
