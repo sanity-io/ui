@@ -463,9 +463,6 @@ importers:
       '@sanity/logos':
         specifier: 'catalog:'
         version: 2.2.6(react@19.3.0)
-      '@sanity/themer':
-        specifier: workspace:*
-        version: link:../../packages/themer
       '@sanity/themer-legacy':
         specifier: workspace:*
         version: link:../../packages/themer-legacy
