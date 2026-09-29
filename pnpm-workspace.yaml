@@ -18,10 +18,12 @@ catalog:
   react-dom: ^19.2.6
   tsdown: ^0.23.0
   ui3: npm:@sanity/ui@^3.3.0
+  ui4: npm:@sanity/ui@4.2.4
   vite: ^8.2.2
 
 minimumReleaseAgeExclude:
   - '@sanity-labs/design-tokens@0.0.2-alpha.5'
+  - '@sanity/ui@4.2.4'
 
 overrides:
   '@types/react': 'catalog:'

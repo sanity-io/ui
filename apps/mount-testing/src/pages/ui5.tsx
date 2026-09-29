@@ -34,7 +34,7 @@ import {
 } from '@sanity/ui'
 import {Profiler} from 'react'
 
-const count = 5000
+const count = 3000
 const iterator = [...Array(count).keys()]
 
 function handleOnRender(

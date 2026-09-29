@@ -1,4 +1,4 @@
-import 'ui4/css/index.css'
+import 'ui4/styles.css'
 import {AddIcon} from '@sanity/icons/Add'
 import {Profiler} from 'react'
 import {
@@ -7,7 +7,6 @@ import {
   Button,
   Card,
   Checkbox,
-  Code,
   Container,
   Flex,
   Grid,
@@ -15,15 +14,19 @@ import {
   Inline,
   Label,
   Radio,
-  Root,
   Spinner,
   Stack,
   Switch,
   Text,
-  Tooltip,
+  ThemeProvider,
 } from 'ui4'
+import {Code} from 'ui4/code'
+import {buildTheme} from 'ui4/theme'
+import {Tooltip} from 'ui4/tooltip'
 
-const count = 5000
+const theme = buildTheme()
+
+const count = 3000
 const iterator = [...Array(count).keys()]
 
 function handleOnRender(
@@ -44,7 +47,7 @@ function handleOnRender(
 
 export default function Ui4() {
   return (
-    <Root lang="en">
+    <ThemeProvider theme={theme}>
       <h1>UI v4</h1>
 
       <h2>{count} Boxes</h2>
@@ -234,6 +237,6 @@ export default function Ui4() {
           </Card>
         ))}
       </Profiler>
-    </Root>
+    </ThemeProvider>
   )
 }
