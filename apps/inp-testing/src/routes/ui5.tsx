@@ -14,6 +14,7 @@ import {
   Radio,
   Switch,
   Text,
+  TextInput,
   Tooltip,
   VStack,
 } from '@sanity/ui'
@@ -36,6 +37,7 @@ const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 function SingleControlSection() {
   const [on, setOn] = useState(false)
   const [choice, setChoice] = useState<'one' | 'two'>('one')
+  const [text, setText] = useState('')
 
   return (
     <Card density="regular">
@@ -60,6 +62,11 @@ function SingleControlSection() {
           label="Radio two"
           checked={choice === 'two'}
           onChange={() => setChoice('two')}
+        />
+        <TextInput
+          aria-label="Single text input"
+          value={text}
+          onChange={(event) => setText(event.currentTarget.value)}
         />
       </VStack>
     </Card>

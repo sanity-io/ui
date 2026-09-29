@@ -1,0 +1,49 @@
+.sui-TextInput {
+  --background-color: var(--backdrop);
+  --border-color: var(--separator-high);
+  --color: var(--foreground-high);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  font: var(--form-element-text);
+  color: var(--color);
+}
+
+.sui-TextInput::placeholder {
+  color: oklch(from var(--color) l c h / var(--placeholder-opacity));
+}
+
+/**
+  * Error
+  */
+.sui-TextInput.sui-error {
+  --border-color: var(--error-separator);
+  --color: var(--error-foreground);
+}
+
+/**
+  * Hover - uses relative border/background colours to darken/lighten in both normal & error state
+  */
+.sui-TextInput:hover {
+  border-color: light-dark(
+    oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
+    oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
+  );
+}
+
+/**
+  * Disabled
+  */
+.sui-TextInput:disabled {
+  --background-color: var(--inert-background);
+  --border-color: var(--separator-low);
+  --color: var(--inert-foreground);
+  pointer-events: none;
+}
+
+/**
+  * Focus
+  */
+.sui-TextInput:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}

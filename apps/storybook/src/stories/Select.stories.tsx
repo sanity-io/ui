@@ -9,7 +9,7 @@ import {getArgTypes} from '../utils/getArgTypes'
 const argTypes = getArgTypes(selectProps)
 
 const meta: Meta<typeof Select> = {
-  title: 'Components/Select',
+  title: 'Forms/Select',
   args: {},
   argTypes,
   component: Select,

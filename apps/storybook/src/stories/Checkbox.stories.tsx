@@ -10,7 +10,7 @@ import {getArgTypes} from '../utils/getArgTypes'
 const argTypes = getArgTypes(checkboxProps)
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Checkbox',
+  title: 'Forms/Checkbox',
   args: {
     label: 'Checkbox',
   },
