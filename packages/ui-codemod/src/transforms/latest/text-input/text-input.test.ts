@@ -146,7 +146,7 @@ defineInlineTest(
   <TextInput icon={SearchIcon} />
   `,
   `
-  // UI-CODEMOD TODO: Please double check the TextInput migration below. The icon prop is no longer supported. Compose the icon yourself.
+  // UI-CODEMOD TODO: Please double check the TextInput migration below. The icon prop is no longer supported.
   <TextInput icon={SearchIcon} />
   `,
   'warns on the unsupported icon prop',
@@ -159,7 +159,7 @@ defineInlineTest(
   <TextInput prefix="https://" />
   `,
   `
-  // UI-CODEMOD TODO: Please double check the TextInput migration below. The prefix prop is no longer supported. Compose the prefix yourself.
+  // UI-CODEMOD TODO: Please double check the TextInput migration below. The prefix prop is no longer supported.
   <TextInput prefix="https://" />
   `,
   'warns on the unsupported prefix prop',
@@ -172,7 +172,7 @@ defineInlineTest(
   <TextInput clearButton />
   `,
   `
-  // UI-CODEMOD TODO: Please double check the TextInput migration below. The clearButton prop is no longer supported. Add a clear control yourself.
+  // UI-CODEMOD TODO: Please double check the TextInput migration below. The clearButton prop is no longer supported.
   <TextInput clearButton />
   `,
   'warns on the unsupported clearButton prop',

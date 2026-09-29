@@ -17,7 +17,7 @@ export const TEXT_INPUT_MODS: AttributeMods = {
   clearButton: {
     type: 'warn-only',
     warning:
-      'Please double check the TextInput migration below. The clearButton prop is no longer supported. Add a clear control yourself.',
+      'Please double check the TextInput migration below. The clearButton prop is no longer supported.',
   },
   customValidity: {
     type: 'warn-only',
@@ -41,17 +41,17 @@ export const TEXT_INPUT_MODS: AttributeMods = {
   icon: {
     type: 'warn-only',
     warning:
-      'Please double check the TextInput migration below. The icon prop is no longer supported. Compose the icon yourself.',
+      'Please double check the TextInput migration below. The icon prop is no longer supported.',
   },
   iconRight: {
     type: 'warn-only',
     warning:
-      'Please double check the TextInput migration below. The iconRight prop is no longer supported. Compose the icon yourself.',
+      'Please double check the TextInput migration below. The iconRight prop is no longer supported.',
   },
   onClear: {
     type: 'warn-only',
     warning:
-      'Please double check the TextInput migration below. The onClear prop is no longer supported. Add a clear control yourself.',
+      'Please double check the TextInput migration below. The onClear prop is no longer supported.',
   },
   padding: {
     type: 'style-mapped',
@@ -72,7 +72,7 @@ export const TEXT_INPUT_MODS: AttributeMods = {
   prefix: {
     type: 'warn-only',
     warning:
-      'Please double check the TextInput migration below. The prefix prop is no longer supported. Compose the prefix yourself.',
+      'Please double check the TextInput migration below. The prefix prop is no longer supported.',
   },
   radius: {
     type: 'style-mapped',
@@ -92,7 +92,7 @@ export const TEXT_INPUT_MODS: AttributeMods = {
   suffix: {
     type: 'warn-only',
     warning:
-      'Please double check the TextInput migration below. The suffix prop is no longer supported. Compose the suffix yourself.',
+      'Please double check the TextInput migration below. The suffix prop is no longer supported.',
   },
   weight: {
     type: 'style-mapped',
