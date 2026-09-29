@@ -6,6 +6,7 @@ import App from './App.tsx'
 
 // Routes are lazy so each page loads only its own library's code and styles.
 const Ui5 = lazy(() => import('./routes/ui5.tsx'))
+const Ui4 = lazy(() => import('./routes/ui4.tsx'))
 const Ui3 = lazy(() => import('./routes/ui3.tsx'))
 
 const router = createBrowserRouter([
@@ -18,6 +19,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <Ui5 />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'ui4',
+        element: (
+          <Suspense>
+            <Ui4 />
           </Suspense>
         ),
       },

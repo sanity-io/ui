@@ -21,6 +21,7 @@ function App() {
         <strong>DOM depth test harness</strong>
         <nav style={{display: 'flex', gap: 12}}>
           <a href="/">UI 5</a>
+          <a href="/ui4">UI 4</a>
           <a href="/ui3">UI 3</a>
         </nav>
       </header>

@@ -102,3 +102,22 @@ export const Tones: Story = {
     )
   },
 }
+
+export const WithoutLabel: Story = {
+  render: (props) => <Icon {...props} data-testid="without-label" />,
+  play: async ({canvas}) => {
+    await expect((await canvas.findByTestId('without-label')).getAttribute('aria-hidden')).toBe(
+      'true',
+    )
+  },
+}
+
+export const WithElement: Story = {
+  argTypes: {
+    icon: {control: false},
+  },
+  render: (props) => <Icon {...props} icon={<AddIcon data-type="Element" />} aria-label="Icon" />,
+  play: async ({canvas}) => {
+    await expect((await canvas.findByLabelText('Icon')).dataset.type).toBe('Element')
+  },
+}

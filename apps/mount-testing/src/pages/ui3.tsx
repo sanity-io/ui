@@ -23,7 +23,7 @@ import {
 } from 'ui3'
 import {buildTheme} from 'ui3/theme'
 
-const count = 5000
+const count = 3000
 const iterator = [...Array(count).keys()]
 
 function handleOnRender(

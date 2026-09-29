@@ -13,7 +13,7 @@ export interface IconProps
   /**
    * The icon component to render.
    */
-  icon: React.ComponentType<SVGProps<SVGSVGElement>>
+  icon: React.ComponentType<SVGProps<SVGSVGElement>> | React.ReactElement<SVGProps<SVGSVGElement>>
   /**
    * Sets icon size.
    */
