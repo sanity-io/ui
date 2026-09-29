@@ -171,7 +171,7 @@ catalogs:
       specifier: ^8.8.0
       version: 8.8.0
     '@sanity/color':
-      specifier: ^3.0.8
+      specifier: ^3.0.9
       version: 3.0.9
     '@sanity/functions':
       specifier: ^1.8.0
@@ -4268,6 +4268,12 @@ packages:
   '@sanity/groq-condition-describe@0.5.0':
     resolution: {integrity: sha512-+fC2CBbbL5kk4rSO5oDOawJQU+nC2qlyvR8WfJtcrlB7sYJq0vBoj16jyE+cKSw7zt5ZpxhYWkAEgSM6BkQXAQ==}
     engines: {node: '>=20'}
+
+  '@sanity/icons@5.2.3':
+    resolution: {integrity: sha512-10nE7IiuXIPIf6ufSKyNwnOE75wghEollUYzkjPUAX+5oenyE5qDFUrMD5MeC+8gxZ8KS61o8sH1mpmhpWx++w==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      react: ^19.3.0
 
   '@sanity/id-utils@1.1.0':
     resolution: {integrity: sha512-A+DujVHCO3/+0DuzinmfCRQacIWVIherK0AHqFDoDOSgxx+Bur1kLhzX8fn7PdB2uZilxu2zWOr+UaGcj5zGbA==}
@@ -12044,7 +12050,7 @@ snapshots:
   '@sanity/access-ui@6.16.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(vitest@5.0.2)':
     dependencies:
       '@sanity/client': 8.8.0(vitest@5.0.2)
-      '@sanity/icons': link:packages/icons
+      '@sanity/icons': 5.2.3(react@19.3.0)
       '@sanity/ui': link:packages/ui
       react: 19.3.0
       ui5: '@sanity/ui@5.0.0-alpha.10(react-dom@19.3.0(react@19.3.0))(react@19.3.0)'
@@ -12301,7 +12307,7 @@ snapshots:
       '@codemirror/state': 6.7.6
       '@codemirror/view': 6.43.13
       '@lezer/highlight': 1.2.5
-      '@sanity/icons': link:packages/icons
+      '@sanity/icons': 5.2.3(react@19.3.0)
       '@sanity/lezer-groq': 1.0.4
       '@sanity/ui': link:packages/ui
       '@uiw/codemirror-themes': 4.25.12(@codemirror/language@6.12.4)(@codemirror/state@6.7.6)(@codemirror/view@6.43.13)
@@ -12410,6 +12416,10 @@ snapshots:
       groq-js: 1.30.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
+
+  '@sanity/icons@5.2.3(react@19.3.0)':
+    dependencies:
+      react: 19.3.0
 
   '@sanity/id-utils@1.1.0':
     dependencies:
@@ -12703,7 +12713,7 @@ snapshots:
   '@sanity/ui@5.0.0-alpha.10(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
       '@sanity-labs/design-tokens': 0.0.2-alpha.4
-      '@sanity/icons': link:packages/icons
+      '@sanity/icons': 5.2.3(react@19.3.0)
       clsx: 2.1.1
       comment-json: 5.0.0
       dialog-closedby-polyfill: 1.3.0
@@ -12793,7 +12803,7 @@ snapshots:
       '@rexxars/react-split-pane': 1.0.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@sanity/client': 8.8.0(vitest@5.0.2)
       '@sanity/color': 3.0.9
-      '@sanity/icons': link:packages/icons
+      '@sanity/icons': 5.2.3(react@19.3.0)
       '@sanity/lezer-groq': 1.0.4
       '@sanity/ui': link:packages/ui
       '@sanity/uuid': 3.0.3
@@ -16536,7 +16546,7 @@ snapshots:
       '@reduxjs/toolkit': 2.12.0(react-redux@9.3.0(@types/react@19.3.0)(react@19.3.0)(redux@5.0.1))(react@19.3.0)
       '@sanity/client': 8.8.0(vitest@5.0.2)
       '@sanity/color': 3.0.9
-      '@sanity/icons': link:packages/icons
+      '@sanity/icons': 5.2.3(react@19.3.0)
       '@sanity/ui': link:packages/ui
       '@sanity/uuid': 3.0.3
       '@tanem/react-nprogress': 5.0.63(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -16603,7 +16613,7 @@ snapshots:
       '@sanity/diff-patch': 5.0.0
       '@sanity/eventsource': 5.0.4
       '@sanity/generate-help-url': 4.0.0
-      '@sanity/icons': link:packages/icons
+      '@sanity/icons': 5.2.3(react@19.3.0)
       '@sanity/id-utils': 1.1.0
       '@sanity/image-url': 2.1.1
       '@sanity/logos': 2.2.5(react@19.3.0)
