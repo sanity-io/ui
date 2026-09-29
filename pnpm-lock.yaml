@@ -177,8 +177,8 @@ catalogs:
       specifier: ^1.8.0
       version: 1.8.0
     '@sanity/logos':
-      specifier: ^2.2.5
-      version: 2.2.5
+      specifier: ^2.2.6
+      version: 2.2.6
     '@sanity/tsdown-config':
       specifier: ^0.28.2
       version: 0.28.2
@@ -314,7 +314,7 @@ importers:
         version: link:../../packages/icons
       '@sanity/logos':
         specifier: 'catalog:'
-        version: 2.2.5(react@19.3.0)
+        version: 2.2.6(react@19.3.0)
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -537,7 +537,7 @@ importers:
         version: link:../../packages/icons
       '@sanity/logos':
         specifier: 'catalog:'
-        version: 2.2.5(react@19.3.0)
+        version: 2.2.6(react@19.3.0)
       '@sanity/themer':
         specifier: workspace:*
         version: link:../../packages/themer
@@ -4290,8 +4290,8 @@ packages:
   '@sanity/lezer-groq@1.0.4':
     resolution: {integrity: sha512-KgCmAY7yXll+g3+1z+GZiQhlEW7ulJGUH8gGzbUgKVZShPop/dDjfwNAdGZKFY3AkF+m62oSa1X8m1P3sonD4A==}
 
-  '@sanity/logos@2.2.5':
-    resolution: {integrity: sha512-P8dr9ai65KTimeqj2j58zjGwDErIg0UjsQdl8FfhDvweUY5i7vazztgotjVXtUfkj4kL18O6I04Kq4RvOVB15g==}
+  '@sanity/logos@2.2.6':
+    resolution: {integrity: sha512-wTkEcfne18DAYvbGclESNjraUCmbFL1fHMHzpIKH7AgdARvJqMHPEg6QoFsgeKP6tmDmME772uoAIsnwCOTWzg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: ^19.3.0
@@ -12443,7 +12443,7 @@ snapshots:
       '@lezer/highlight': 1.2.5
       '@lezer/lr': 1.4.10
 
-  '@sanity/logos@2.2.5(react@19.3.0)':
+  '@sanity/logos@2.2.6(react@19.3.0)':
     dependencies:
       '@sanity/color': 3.0.9
       react: 19.3.0
@@ -16606,7 +16606,7 @@ snapshots:
       '@sanity/icons': link:packages/icons
       '@sanity/id-utils': 1.1.0
       '@sanity/image-url': 2.1.1
-      '@sanity/logos': 2.2.5(react@19.3.0)
+      '@sanity/logos': 2.2.6(react@19.3.0)
       '@sanity/media-library-types': 1.7.1(@sanity/types@6.16.0(@types/react@19.3.0)(vitest@5.0.2))
       '@sanity/message-protocol': 0.24.0
       '@sanity/migrate': 8.0.5(@types/react@19.3.0)(vitest@5.0.2)(xstate@5.33.2)
