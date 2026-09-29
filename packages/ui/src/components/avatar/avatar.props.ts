@@ -5,11 +5,9 @@ import {type PropDef} from '../../types/PropDef'
 import {TEXT_SIZE} from '../../types/Text'
 
 /** @public */
-export interface AvatarProps<T extends React.ElementType> {
+export interface AvatarProps extends React.ComponentProps<'figure'> {
   /** Arrow position */
   arrowPosition?: 'top' | 'bottom'
-  /** Element to render */
-  as?: T
   /** Avatar color */
   color?: AvatarColor
   /** Avatar initials */
@@ -25,9 +23,6 @@ export const avatarProps: Record<string, PropDef> = {
     type: 'union',
     className: 'arrow',
     values: ['top', 'bottom'],
-  },
-  as: {
-    type: 'string',
   },
   color: {
     type: 'union',

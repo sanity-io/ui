@@ -3,7 +3,6 @@
 }
 
 .sui-AvatarImg {
-  border: 1px solid var(--white);
   object-fit: cover;
 }
 

@@ -1,24 +1,17 @@
 import clsx from 'clsx'
-import {useState, type ComponentPropsWithRef, type ElementType} from 'react'
+import {useState} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
-import {Box} from '../box/Box'
 import {Eyebrow} from '../eyebrow/Eyebrow'
-import {Flex} from '../flex/Flex'
 import {type AvatarProps, avatarProps} from './avatar.props'
 
 const avatarClassName = suffixClassName('sui-Avatar')
 const avatarImgClassName = suffixClassName('sui-AvatarImg')
 
 /** @public */
-export function Avatar<T extends ElementType = 'div'>({
-  color = 'magenta',
-  size = 1,
-  ...props
-}: AvatarProps<T> & Omit<ComponentPropsWithRef<T>, keyof AvatarProps<T>>) {
+export function Avatar({color = 'magenta', size = 1, ...props}: AvatarProps) {
   const {
-    as,
     className,
     style,
     'aria-label': ariaLabel,
@@ -26,29 +19,24 @@ export function Avatar<T extends ElementType = 'div'>({
     src,
     ...rest
   } = getProps({color, size, ...props}, avatarProps)
-  const Component = as || 'div'
   const [error, setError] = useState(false)
 
   return (
-    <Flex
-      as={Component}
-      className={clsx(avatarClassName, className)}
+    <figure
+      className={clsx(
+        avatarClassName,
+        'sui-display-inline-flex sui-align-items-center sui-justify-content-center sui-radius-full sui-position-relative',
+        className,
+      )}
       style={style}
       data-ui="Avatar"
-      display="inline-flex"
-      alignItems="center"
-      justifyContent="center"
-      radius="full"
-      position="relative"
       {...rest}
     >
       {src && !error ? (
-        <Box
-          as="img"
-          className={avatarImgClassName}
+        <img
+          className={clsx(avatarImgClassName, 'sui-radius-full')}
           src={src}
           alt={ariaLabel || initials}
-          radius="full"
           onError={() => setError(true)}
         />
       ) : (
@@ -56,7 +44,7 @@ export function Avatar<T extends ElementType = 'div'>({
           {initials.slice(0, 2)}
         </Eyebrow>
       )}
-    </Flex>
+    </figure>
   )
 }
 
