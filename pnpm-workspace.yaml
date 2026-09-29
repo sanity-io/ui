@@ -12,7 +12,7 @@ catalog:
   # Published from `main`; v3 consumes the npm releases.
   '@sanity/color': ^3.0.8
   '@sanity/icons': ^5.2.1
-  '@sanity/logos': ^2.2.5
+  '@sanity/logos': ^2.2.6
   '@sanity/tsdown-config': ^0.24.0
   '@types/node': ^24.13.3
   '@types/react': ^19.2.18
