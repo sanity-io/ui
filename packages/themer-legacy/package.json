@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@sanity/color": "catalog:",
-    "@sanity/icons": "workspace:^",
+    "@sanity/icons": "catalog:",
     "@sanity/ui": "^4.2.7",
     "react-compiler-runtime": "1.0.0"
   },

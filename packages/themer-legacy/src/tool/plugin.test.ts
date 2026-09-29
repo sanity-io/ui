@@ -3,7 +3,7 @@ import {describe, expect, it, vi} from 'vitest'
 import {themerTool} from './plugin'
 
 // Importing the real `sanity` package in a node test would resolve its
-// workspace dependencies (e.g. @sanity/icons) to untransformed .tsx source.
+// workspace dependencies (e.g. @sanity/ui) to untransformed .tsx source.
 // `definePlugin` only wraps the factory, so the mock returns it as-is.
 vi.mock('sanity', () => ({
   definePlugin: (factory: unknown) => factory,

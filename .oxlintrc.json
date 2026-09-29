@@ -130,36 +130,6 @@
       }
     },
     {
-      // `@sanity/icons` supports React 18 (`react` peers of `^18 || ^19`), where
-      // refs only attach to function components wrapped in `forwardRef` — so
-      // `forwardRef` stays allowed there (along with the `createRef`/`createElement`
-      // used by the tests that pin that contract).
-      // Class components remain banned via the root `react/prefer-function-component`.
-      "files": ["packages/icons/**"],
-      "rules": {
-        "eslint/no-restricted-imports": [
-          "error",
-          {
-            "paths": [
-              {
-                "name": "styled-components",
-                "importNames": ["default"],
-                "message": "Please use `import {styled} from \"styled-components\"` instead."
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      // apps/blueprints packages contain server-side Sanity Functions, where
-      // structured console logging (including `console.info`) is the norm
-      "files": ["apps/blueprints/**"],
-      "rules": {
-        "eslint/no-console": ["error", {"allow": ["info", "warn", "error"]}]
-      }
-    },
-    {
       // apps/docs is a Next.js app; enable the Next.js rules on top of the
       // base plugins (override plugins extend the base `plugins` set).
       "files": ["apps/docs/**"],
