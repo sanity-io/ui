@@ -15,6 +15,7 @@ import {
   Stack,
   Switch,
   Text,
+  TextInput,
   ThemeProvider,
 } from 'ui4'
 import {Popover} from 'ui4/popover'
@@ -41,6 +42,7 @@ const theme = buildTheme()
 function SingleControlSection() {
   const [on, setOn] = useState(false)
   const [choice, setChoice] = useState<'one' | 'two'>('one')
+  const [text, setText] = useState('')
 
   return (
     <Card tone="neutral" padding={4}>
@@ -77,6 +79,11 @@ function SingleControlSection() {
             <label htmlFor="single-radio-two">Radio two</label>
           </Text>
         </Inline>
+        <TextInput
+          aria-label="Single text input"
+          value={text}
+          onChange={(event) => setText(event.currentTarget.value)}
+        />
       </Stack>
     </Card>
   )
