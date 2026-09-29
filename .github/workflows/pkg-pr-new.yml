@@ -36,4 +36,4 @@ jobs:
 
       - run: |
           echo "Publishing to pkg.pr.new"
-          pnpm pnpx pkg-pr-new publish --pnpm ./packages/themer ./packages/themer-legacy ./packages/ui
+          pnpm pnpx pkg-pr-new publish --pnpm ./packages/themer-legacy ./packages/ui

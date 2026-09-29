@@ -194,9 +194,6 @@ catalogs:
     '@vitejs/plugin-react':
       specifier: ^6.1.1
       version: 6.1.1
-    lightningcss:
-      specifier: ^1.33.0
-      version: 1.33.0
     motion:
       specifier: ^13.4.4
       version: 13.4.4
@@ -533,91 +530,6 @@ importers:
       unrun:
         specifier: 'catalog:'
         version: 0.3.1
-
-  packages/themer:
-    dependencies:
-      '@sanity/color':
-        specifier: 'catalog:'
-        version: 3.0.9
-      '@sanity/icons':
-        specifier: 'catalog:'
-        version: 5.2.3(react@19.3.0)
-      '@sanity/themer-legacy':
-        specifier: workspace:^
-        version: link:../themer-legacy
-      '@sanity/ui':
-        specifier: workspace:^
-        version: link:../ui
-      '@vanilla-extract/dynamic':
-        specifier: 'catalog:'
-        version: 2.1.5
-      '@xstate/react':
-        specifier: ^6.1.0
-        version: 6.1.0(@types/react@19.3.0)(react@19.3.0)(xstate@5.33.2)
-      motion:
-        specifier: 'catalog:'
-        version: 13.4.4(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      react-refractor:
-        specifier: 'catalog:'
-        version: 4.0.0(react@19.3.0)
-      refractor:
-        specifier: 'catalog:'
-        version: 5.0.0
-      scroll-into-view-if-needed:
-        specifier: ^3.1.0
-        version: 3.1.0
-      xstate:
-        specifier: ^5.33.2
-        version: 5.33.2
-    devDependencies:
-      '@sanity/tsdown-config':
-        specifier: 'catalog:'
-        version: 0.28.2(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.11)(vite@8.3.1(@types/node@24.19.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1)))(@types/node@24.19.0)(babel-plugin-macros@3.1.0)(oxc-transform-react@0.151.0)(tsdown@0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.1(@types/node@24.19.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
-      '@sanity/vanilla-extract-vite-plugin':
-        specifier: 'catalog:'
-        version: 0.2.20(babel-plugin-macros@3.1.0)(vite@8.3.1(@types/node@24.19.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
-      '@types/node':
-        specifier: 'catalog:'
-        version: 24.19.0
-      '@types/react':
-        specifier: ^19.3.0
-        version: 19.3.0
-      '@types/react-dom':
-        specifier: ^19.3.0
-        version: 19.3.0(@types/react@19.3.0)
-      '@vanilla-extract/css':
-        specifier: 'catalog:'
-        version: 1.21.2(babel-plugin-macros@3.1.0)
-      jsdom:
-        specifier: ^30.1.1
-        version: 30.1.1(@noble/hashes@2.4.0)
-      lightningcss:
-        specifier: 'catalog:'
-        version: 1.33.0
-      oxc-transform-react:
-        specifier: 'catalog:'
-        version: 0.151.0
-      react:
-        specifier: ^19.3.0
-        version: 19.3.0
-      react-dom:
-        specifier: ^19.3.0
-        version: 19.3.0(react@19.3.0)
-      rimraf:
-        specifier: 'catalog:'
-        version: 5.0.10
-      sanity:
-        specifier: 'catalog:'
-        version: 6.16.0(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.7)(rolldown@1.2.11)(vite@8.3.1(@types/node@24.19.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1)))(@types/node@24.19.0)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(esbuild@0.28.2)(immer@11.1.18)(jiti@2.7.0)(oxc-transform-react@0.151.0)(oxfmt@0.71.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.11)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(supports-color@8.1.1)(terser@5.51.2)(typescript@7.0.2)(vitest@5.0.2)
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.23.0(oxc-resolver@11.24.2)(publint@0.3.24)(typescript@7.0.2)(unrun@0.3.1)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.2(@types/node@24.19.0)(@vitest/browser-playwright@5.0.2)(@vitest/coverage-v8@5.0.2)(@vitest/ui@5.0.2)(jsdom@30.1.1(@noble/hashes@2.4.0))(vite@8.3.1(@types/node@24.19.0)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1))
 
   packages/themer-legacy:
     dependencies:
