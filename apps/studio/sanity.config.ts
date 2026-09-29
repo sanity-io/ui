@@ -1,7 +1,6 @@
 import {codeInput} from '@sanity/code-input'
 import {SanityMonogram} from '@sanity/logos'
 import {themerTool as themerLegacyTool} from '@sanity/themer-legacy/tool'
-import {themerTool} from '@sanity/themer/tool'
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
@@ -22,9 +21,7 @@ export default defineConfig({
     codeInput(),
     structureTool({structure}),
     visionTool(),
-    themerTool(),
-    // The hosted Themer's editor, next to the buildTheme themer above — both
-    // chain through renderDefault, so they coexist
+    // The hosted Themer's editor
     themerLegacyTool(),
   ],
   schema,

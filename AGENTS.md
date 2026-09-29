@@ -4,12 +4,6 @@
 
 This is the `@sanity/ui` React component library, structured as a pnpm monorepo:
 the published `@sanity/ui` package lives in `packages/ui`,
-the published `@sanity/themer` package (a root `buildTheme` export that
-generates a Studio theme from a few colors by replacing the `@sanity/color`
-palette that `buildTheme` from `@sanity/ui/theme` uses, a deprecated `/legacy`
-subpath that re-exports `@sanity/themer-legacy` until `@sanity/themer@1.0`
-removes it, and a `/tool` subpath with the `themerTool` Studio plugin that
-edits and previews the root `buildTheme` themes) in `packages/themer`,
 the published `@sanity/themer-legacy` package (the hosted themer.sanity.build
 `/api/hues` generator replicated byte-for-byte for migration, plus a `/tool`
 subpath with the `themerTool` Studio plugin — named `themer-legacy` so it runs
@@ -30,8 +24,8 @@ workspace root whose scripts orchestrate via pnpm filters. Package manager is pn
 (`packageManager` pin in `package.json`); developing in this repo requires Node
 `>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
 requires `>=22.12` (matching `sanity`; see `packages/ui/package.json` engines).
-The `@sanity/color` palette that `@sanity/ui`, `@sanity/themer` and
-`@sanity/themer-legacy` depend on is developed in
+The `@sanity/color` palette that `@sanity/ui` and `@sanity/themer-legacy`
+depend on is developed in
 [sanity-io/color](https://github.com/sanity-io/color), the `@sanity/icons`
 icon components that those packages and the apps use are developed in
 [sanity-io/icons](https://github.com/sanity-io/icons) (along with the
@@ -39,6 +33,10 @@ icons.sanity.dev showcase, its Sanity Studio and its Sanity Functions), and
 the `@sanity/logos` components that `apps/docs` and `apps/studio` use are
 developed in [sanity-io/logos](https://github.com/sanity-io/logos). All three
 are installed from npm (their entries in the `pnpm-workspace.yaml` catalog).
+The `@sanity/themer` package (a root `buildTheme` export and the `themerTool`
+Studio plugin at `@sanity/themer/tool`) is developed in
+[sanity-io/plugins](https://github.com/sanity-io/plugins)
+(`plugins/@sanity/themer`); nothing in this repo depends on it.
 
 Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
 `dev`). Notes that are not obvious from the scripts:
@@ -79,9 +77,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   comes from the Changesets config (`access: public`), so packages don't set
   `publishConfig.access`. All published packages are `"type": "module"`: dist
   ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
-  (`@sanity/ui`, `@sanity/themer` and `@sanity/themer-legacy` ship ESM only).
+  (`@sanity/ui` and `@sanity/themer-legacy` ship ESM only).
 - `pnpm test` runs the unit tests with vitest (the `vitest.config.ts` of
-  `packages/ui`, `packages/themer` and `packages/themer-legacy`). `@sanity/ui` resolves to the
+  `packages/ui` and `packages/themer-legacy`). `@sanity/ui` resolves to the
   `packages/ui/src/exports/` source through the dev `exports`, so unit tests
   run directly against source and do not require a `pnpm build` first.
 - `pnpm dev` starts Storybook (`apps/storybook`) on http://localhost:6006. It
