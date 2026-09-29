@@ -2,7 +2,7 @@
   --backdrop: light-dark(var(--white), var(--black));
   --brand-background: #eb5228;
   --brand-foreground: var(--black);
-  --placeholder-opacity: var(--opacity-mid);
+  --placeholder-opacity: 0.64;
   --overlay-opacity: var(--opacity-mid);
   /* State */
   --active-background-normal: light-dark(var(--blue-50), var(--blue-950));
