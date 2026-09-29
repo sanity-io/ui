@@ -85,9 +85,11 @@ export const Types: Story = {
   ),
   play: async ({canvas}) => {
     // Each input passes its type through to the native element.
-    for (const type of NON_TEXT_TYPES) {
-      const input = (await canvas.findByLabelText(type)) as HTMLInputElement
-      await expect(input.type).toBe(type)
-    }
+    await Promise.all(
+      NON_TEXT_TYPES.map(async (type) => {
+        const input = (await canvas.findByLabelText(type)) as HTMLInputElement
+        await expect(input.type).toBe(type)
+      }),
+    )
   },
 }
