@@ -47,7 +47,7 @@
     "watch": "tsdown --watch"
   },
   "dependencies": {
-    "@sanity/color": "workspace:^",
+    "@sanity/color": "catalog:",
     "@sanity/icons": "workspace:^",
     "@sanity/ui": "^4.2.7",
     "react-compiler-runtime": "1.0.0"

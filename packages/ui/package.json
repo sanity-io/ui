@@ -79,7 +79,7 @@
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.9",
-    "@sanity/color": "workspace:^",
+    "@sanity/color": "catalog:",
     "@sanity/icons": "workspace:^",
     "@vanilla-extract/dynamic": "catalog:",
     "clsx": "^2.1.1",
