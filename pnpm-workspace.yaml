@@ -44,7 +44,7 @@ catalog:
   typescript: 7.0.2
   unrun: ^0.3.1
   vite: ^8.3.1
-  vitest: ^5.0.2
+  vitest: ^5.0.3
 
 allowBuilds:
   # Like esbuild, @swc/core's postinstall is only a fallback downloader — the
@@ -134,6 +134,15 @@ minimumReleaseAgeExclude:
   - '@oxlint-tsgolint/win32-x64@7.0.2003'
   - oxlint-tsgolint@7.0.2003
   - '@lezer/highlight@1.2.5'
+  - '@vitest/browser-playwright@5.0.3'
+  - '@vitest/browser@5.0.3'
+  - '@vitest/coverage-v8@5.0.3'
+  - '@vitest/mocker@5.0.3'
+  - '@vitest/pretty-format@5.0.3'
+  - '@vitest/spy@5.0.3'
+  - '@vitest/ui@5.0.3'
+  - '@vitest/utils@5.0.3'
+  - vitest@5.0.3
   - '@storybook/addon-a11y@10.6.1'
   - '@storybook/addon-docs@10.6.1'
   - '@storybook/addon-links@10.6.1'
