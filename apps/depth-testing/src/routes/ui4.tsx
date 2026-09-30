@@ -14,6 +14,7 @@ import {
   Stack,
   Switch,
   Text,
+  TextInput,
   ThemeProvider,
 } from 'ui4'
 import {buildTheme} from 'ui4/theme'
@@ -84,6 +85,7 @@ function Ui4() {
                   <label htmlFor="switch-warp">Engage warp drive</label>
                 </Text>
               </Inline>
+              <TextInput aria-label="Set stardate" />
             </Stack>
           </Container>
           <Box marginY={4}>

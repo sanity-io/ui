@@ -1,4 +1,4 @@
-.sui-Select {
+.sui-TextInput {
   --background-color: var(--backdrop);
   --border-color: var(--separator-high);
   --color: var(--foreground-high);
@@ -8,32 +8,22 @@
   color: var(--color);
 }
 
-[data-ui="Select-icon"] {
-  --background-color: var(--backdrop);
-  background-color: var(--background-color);
-  pointer-events: none;
-  /* reduce block size by 1px at each end and inset from right to not interrupt Select’s border */
-  top: calc(anchor(top) + 1px);
-  bottom: calc(anchor(bottom) + 1px);
-  right: calc(anchor(right) + 2px);
+.sui-TextInput::placeholder {
+  color: oklch(from var(--color) l c h / var(--placeholder-opacity));
 }
 
 /**
   * Error
   */
-.sui-Select[aria-invalid="true"] {
+.sui-TextInput[aria-invalid="true"] {
   --border-color: var(--error-separator);
   --color: var(--error-foreground);
-}
-
-.sui-Select[aria-invalid="true"] + [data-ui="Select-icon"] svg {
-  color: var(--error-foreground);
 }
 
 /**
   * Hover - uses relative border/background colours to darken/lighten in both normal & error state
   */
-.sui-Select:hover {
+.sui-TextInput:hover {
   border-color: light-dark(
     oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
     oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
@@ -43,25 +33,17 @@
 /**
   * Disabled
   */
-.sui-Select:disabled {
+.sui-TextInput:disabled {
   --background-color: var(--inert-background);
   --border-color: var(--separator-low);
   --color: var(--inert-foreground);
   pointer-events: none;
 }
 
-.sui-Select:disabled + [data-ui="Select-icon"] {
-  --background-color: var(--inert-background);
-}
-
-.sui-Select:disabled + [data-ui="Select-icon"] svg {
-  color: var(--inert-foreground);
-}
-
 /**
   * Focus
   */
-.sui-Select:focus-visible {
+.sui-TextInput:focus-visible {
   outline: var(--focus-outline);
   outline-offset: var(--focus-offset);
 }

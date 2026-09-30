@@ -25,5 +25,6 @@
 @import './skip-to-content/skip-to-content.css';
 @import './switch/switch.css';
 @import './text/text.css';
+@import './text-input/text-input.css';
 @import './tooltip/tooltip.css';
 @import './visually-hidden/visually-hidden.css';

@@ -13,6 +13,7 @@ import {
   Stack,
   Switch,
   Text,
+  TextInput,
   ThemeProvider,
 } from 'ui3'
 import {buildTheme} from 'ui3/theme'
@@ -83,6 +84,7 @@ function Ui3() {
                   <label htmlFor="switch-warp">Engage warp drive</label>
                 </Text>
               </Inline>
+              <TextInput aria-label="Set stardate" />
             </Stack>
           </Container>
           <Box marginY={4}>

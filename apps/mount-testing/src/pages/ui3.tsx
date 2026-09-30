@@ -18,6 +18,7 @@ import {
   Stack,
   Switch,
   Text,
+  TextInput,
   ThemeProvider,
   Tooltip,
 } from 'ui3'
@@ -186,6 +187,13 @@ export default function Ui3() {
             <Radio name="radio" />
             <Text as="label">Radio</Text>
           </Inline>
+        ))}
+      </Profiler>
+
+      <h2>{count} TextInputs</h2>
+      <Profiler id="TextInput" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <TextInput key={i} aria-label="Text input" />
         ))}
       </Profiler>
 
