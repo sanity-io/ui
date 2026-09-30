@@ -1,21 +1,24 @@
 import {formElementDensityProps, type FormElementDensityProps} from '../../props/formElement'
 import {type PropDef} from '../../types/PropDef'
 
-export const TEXT_INPUT_TYPE = [
-  'text',
-  'date',
-  'email',
-  'month',
-  'number',
-  'password',
-  'tel',
-  'time',
-  'url',
-  'week',
+export const TEXT_INPUT_EXCLUDED_TYPES = [
+  'button',
+  'checkbox',
+  'color',
+  'file',
+  'hidden',
+  'image',
+  'radio',
+  'range',
+  'reset',
+  'submit',
 ] as const
 
 /** @public */
-export type TextInputType = (typeof TEXT_INPUT_TYPE)[number]
+export type TextInputExcludedTypes = (typeof TEXT_INPUT_EXCLUDED_TYPES)[number]
+
+/** @public */
+export type TextInputType = Exclude<React.HTMLInputTypeAttribute, TextInputExcludedTypes>
 
 /** @public */
 export interface TextInputProps
@@ -25,7 +28,7 @@ export interface TextInputProps
    */
   hasError?: boolean
   /**
-   * Subset of the html `type` attribute, filtered to text based types
+   * The html `type` attribute, with non-text based types excluded.
    */
   type?: TextInputType
 }

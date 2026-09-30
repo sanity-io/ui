@@ -7,7 +7,12 @@ import {type TextInputProps, textInputProps} from './textInput.props'
 const textInputClassName = suffixClassName('sui-TextInput')
 
 /** @public */
-export function TextInput({density = 'regular', hasError = false, ...props}: TextInputProps) {
+export function TextInput({
+  density = 'regular',
+  hasError = false,
+  type = 'text',
+  ...props
+}: TextInputProps) {
   const {className, style, ...rest} = getProps({density, ...props}, textInputProps)
 
   const textInputClasses = clsx(
@@ -20,6 +25,7 @@ export function TextInput({density = 'regular', hasError = false, ...props}: Tex
 
   return (
     <input
+      type={type}
       className={textInputClasses}
       style={style}
       data-ui="TextInput"

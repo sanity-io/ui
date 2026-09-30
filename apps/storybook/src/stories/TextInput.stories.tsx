@@ -4,7 +4,7 @@ import {TextInput as TextInputV3} from 'ui3'
 
 import {TextInput} from '../../../../packages/ui/src/components/text-input/TextInput'
 import {
-  TEXT_INPUT_TYPE,
+  type TextInputType,
   textInputProps,
 } from '../../../../packages/ui/src/components/text-input/textInput.props'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
@@ -68,12 +68,22 @@ export const Error: Story = {
   },
 }
 
-const NON_TEXT_TYPES = TEXT_INPUT_TYPE.filter((type) => type !== 'text')
+const TEXT_TYPES = [
+  'date',
+  'email',
+  'month',
+  'number',
+  'password',
+  'tel',
+  'time',
+  'url',
+  'week',
+] satisfies TextInputType[]
 
 export const Types: Story = {
   render: (props) => (
     <VStack gap={3}>
-      {NON_TEXT_TYPES.map((type) => (
+      {TEXT_TYPES.map((type) => (
         <div key={type}>
           <Text as="label" htmlFor={`${type}-text-input`} size={1}>
             {type}
@@ -86,7 +96,7 @@ export const Types: Story = {
   play: async ({canvas}) => {
     // Each input passes its type through to the native element.
     await Promise.all(
-      NON_TEXT_TYPES.map(async (type) => {
+      TEXT_TYPES.map(async (type) => {
         const input = (await canvas.findByLabelText(type)) as HTMLInputElement
         await expect(input.type).toBe(type)
       }),
