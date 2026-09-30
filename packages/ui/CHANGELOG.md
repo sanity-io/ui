@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.13
+
+### Patch Changes
+
+- 675fb7e: add TextInput
+
 ## 5.0.0-alpha.12
 
 ### Patch Changes
