@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useId, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import ReactIs from 'react-is'
 import {styled} from 'styled-components'
 
@@ -10,7 +10,14 @@ import {ElementType, Props} from '../../types/component'
 import {Label} from '../label/label'
 import {avatarRootStyle, responsiveAvatarSizeStyle} from './styles'
 
-import {avatarArrow, avatarBgStroke, avatarImage, avatarInitials, avatarStroke} from './avatar.css'
+import {
+  avatarArrow,
+  avatarBgStroke,
+  avatarImage,
+  avatarInitials,
+  avatarStroke,
+  avatarStrokes,
+} from './avatar.css'
 
 /**
  * @public
@@ -71,13 +78,10 @@ function AvatarComponent(
   const {avatar} = useTheme_v2()
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = _getArrayProp(sizeProp)
-
-  // @todo: remove this
+  // The rendered size follows `--avatar-size` per breakpoint (see styles.ts);
+  // the first step also gives the image its intrinsic dimensions
   const avatarSize = avatar.sizes[size[0]] || avatar.sizes[0]
-  const _sizeRem = avatarSize.size
-  const _radius = _sizeRem / 2
 
-  const elementId = useId()
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
     animateArrowFrom || arrowPositionProp || 'inside',
   )
@@ -93,8 +97,6 @@ function AvatarComponent(
     setPrevSrc(src)
     if (src) setImageFailed(false)
   }
-
-  const imageId = `avatar-image-${elementId}`
 
   useEffect(() => {
     if (arrowPosition === arrowPositionProp) return undefined
@@ -137,35 +139,47 @@ function AvatarComponent(
       </div>
 
       {!imageFailed && src && (
-        <svg className={avatarImage} viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
-          <defs>
-            <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
-              <image href={src} width="1" height="1" onError={handleImageError} />
-            </pattern>
-          </defs>
+        <>
+          {/*
+           * A native <img> lets React wait for the image inside a <ViewTransition>
+           * or a Suspense reveal. An `onLoad` handler or `loading="lazy"` would
+           * opt it out of that, so neither is set. `width`/`height` give the
+           * browser (and React's image byte estimate) the size before it loads.
+           */}
+          <img
+            alt=""
+            className={avatarImage}
+            draggable={false}
+            height={avatarSize.size}
+            onError={handleImageError}
+            src={src}
+            width={avatarSize.size}
+          />
 
-          <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
+          {/*
+           * The strokes straddle the circle's edge and the svg clips the outer
+           * half, leaving 1px of avatar color and 1px of card color inside.
+           */}
+          <svg className={avatarStrokes} viewBox="0 0 2 2" fill="none">
+            {!__unstable_hideInnerStroke && (
+              <circle
+                className={avatarBgStroke}
+                cx="1"
+                cy="1"
+                r="1"
+                vectorEffect="non-scaling-stroke"
+              />
+            )}
 
-          {!__unstable_hideInnerStroke && (
-            <ellipse
-              className={avatarBgStroke}
-              cx={_radius}
-              cy={_radius}
-              rx={_radius}
-              ry={_radius}
+            <circle
+              className={avatarStroke}
+              cx="1"
+              cy="1"
+              r="1"
               vectorEffect="non-scaling-stroke"
             />
-          )}
-
-          <ellipse
-            className={avatarStroke}
-            cx={_radius}
-            cy={_radius}
-            rx={_radius}
-            ry={_radius}
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
+          </svg>
+        </>
       )}
 
       {(imageFailed || !src) && initials && (

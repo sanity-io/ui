@@ -4,7 +4,35 @@ import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
 import {storybookTest} from '@storybook/addon-vitest/vitest-plugin'
 import viteReact from '@vitejs/plugin-react'
 import {playwright} from '@vitest/browser-playwright'
+import type {Plugin} from 'vite'
 import {defineConfig} from 'vitest/config'
+
+// 1×1 opaque PNG
+const PNG = Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+  'base64',
+)
+
+/**
+ * Serves `/__slow-image?delay=<ms>` after the given delay, for tests that
+ * need an image that is still loading when React commits.
+ */
+function slowImage(): Plugin {
+  return {
+    name: 'sanity-ui:slow-image',
+    configureServer(server) {
+      server.middlewares.use('/__slow-image', (req, res) => {
+        const delay = Number(new URL(req.url ?? '', 'http://localhost').searchParams.get('delay'))
+
+        setTimeout(() => {
+          res.setHeader('Cache-Control', 'no-store')
+          res.setHeader('Content-Type', 'image/png')
+          res.end(PNG)
+        }, delay || 0)
+      })
+    },
+  }
+}
 
 export default defineConfig({
   test: {
@@ -34,7 +62,7 @@ export default defineConfig({
         // Browser tests that need direct control over the viewport
         // (vanillaExtractPlugin compiles the `.css.ts` modules of the
         // @sanity/ui source that the dev `exports` resolve to)
-        plugins: [viteReact(), vanillaExtractPlugin()],
+        plugins: [viteReact(), vanillaExtractPlugin(), slowImage()],
         test: {
           name: 'tests',
           include: ['tests/**/*.test.{ts,tsx}'],

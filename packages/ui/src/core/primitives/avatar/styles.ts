@@ -13,6 +13,9 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
     '--avatar-bg-color': `var(--card-avatar-${$color}-bg-color)`,
     '--avatar-fg-color': `var(--card-avatar-${$color}-fg-color)`,
 
+    'width': 'var(--avatar-size)',
+    'height': 'var(--avatar-size)',
+    'borderRadius': 'calc(var(--avatar-size) / 2)',
     'backgroundColor': 'var(--avatar-bg-color)',
     'position': 'relative',
     'boxSizing': 'border-box',
@@ -21,12 +24,6 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
 
     '&[data-status="inactive"]': {
       opacity: '0.5',
-    },
-
-    '&>svg': {
-      '&:not([hidden])': {
-        display: 'block',
-      },
     },
 
     /* &:is(button) */
@@ -51,6 +48,11 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
   }
 }
 
+/**
+ * Sets `--avatar-size` per breakpoint: the root, the image and the stroke
+ * overlay (`avatar.css.ts`) size themselves from it, so `size` arrays stay
+ * responsive for all of them.
+ */
 export function responsiveAvatarSizeStyle(
   props: ResponsiveAvatarSizeStyleProps & ThemeProps,
 ): CSSObject[] {
@@ -59,16 +61,6 @@ export function responsiveAvatarSizeStyle(
   return _responsive(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size] || avatar.sizes[0]
 
-    return {
-      'width': rem(avatarSize.size),
-      'height': rem(avatarSize.size),
-      'borderRadius': rem(avatarSize.size / 2),
-
-      '&>svg': {
-        width: rem(avatarSize.size),
-        height: rem(avatarSize.size),
-        borderRadius: rem(avatarSize.size / 2),
-      },
-    }
+    return {'--avatar-size': rem(avatarSize.size)}
   })
 }
