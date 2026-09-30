@@ -1,14 +1,12 @@
 import {
   arrow,
   autoPlacement,
-  autoUpdate,
   flip,
   hide,
   Middleware,
   offset,
   RootBoundary,
   shift,
-  useFloating,
 } from '@floating-ui/react-dom'
 import {
   Activity,
@@ -40,6 +38,7 @@ import {LayerProps} from '../../utils/layer/layer'
 import {LayerProvider} from '../../utils/layer/layerProvider'
 import {useLayer} from '../../utils/layer/useLayer'
 import {Portal} from '../../utils/portal/portal'
+import {useFloating} from '../../utils/useFloating'
 import {ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
@@ -283,7 +282,6 @@ export function Popover(
   const {x, y, middlewareData, placement, refs, strategy, update} = useFloating({
     middleware,
     placement: placementProp,
-    whileElementsMounted: autoUpdate,
     elements: referenceElement
       ? {
           reference: referenceElement,

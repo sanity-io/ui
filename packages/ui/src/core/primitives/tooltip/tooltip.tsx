@@ -1,12 +1,10 @@
 import {
   arrow,
-  autoUpdate,
   flip,
   type Middleware,
   offset,
   type RootBoundary,
   shift,
-  useFloating,
 } from '@floating-ui/react-dom'
 import {clsx} from 'clsx/lite'
 import {
@@ -41,6 +39,7 @@ import {getElementRef} from '../../utils/getElementRef'
 import {Layer, type LayerProps} from '../../utils/layer/layer'
 import {Portal} from '../../utils/portal/portal'
 import {usePortal} from '../../utils/portal/usePortal'
+import {useFloating} from '../../utils/useFloating'
 import type {Delay} from '../types'
 import {
   DEFAULT_FALLBACK_PLACEMENTS,
@@ -151,7 +150,6 @@ export function Tooltip(
   const {floatingStyles, placement, middlewareData, refs, update} = useFloating({
     middleware,
     placement: placementProp,
-    whileElementsMounted: autoUpdate,
     elements: {reference: referenceElement},
   })
 
