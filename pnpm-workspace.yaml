@@ -30,7 +30,7 @@ catalog:
   '@vanilla-extract/css': ^1.21.2
   '@vanilla-extract/dynamic': ^2.1.5
   '@vitejs/plugin-react': ^6.1.1
-  motion: ^13.4.5
+  motion: ^13.4.6
   oxc-transform-react: ^0.152.0
   react: ^19.3.0
   react-dom: ^19.3.0
@@ -135,6 +135,7 @@ minimumReleaseAgeExclude:
   - oxlint-tsgolint@7.0.2003
   - '@lezer/highlight@1.2.5'
   - knip@6.39.0
+  - eslint-plugin-storybook@10.6.1
 
 minimumReleaseAgeExcludePrune: true
 

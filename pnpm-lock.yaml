@@ -195,8 +195,8 @@ catalogs:
       specifier: ^6.1.1
       version: 6.1.1
     motion:
-      specifier: ^13.4.5
-      version: 13.4.5
+      specifier: ^13.4.6
+      version: 13.4.6
     oxc-transform-react:
       specifier: ^0.152.0
       version: 0.152.0
@@ -256,8 +256,8 @@ importers:
         specifier: 'catalog:'
         version: 24.19.0
       eslint-plugin-storybook:
-        specifier: ^10.6.0
-        version: 10.6.0(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2)
+        specifier: ^10.6.1
+        version: 10.6.1(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2)
       knip:
         specifier: ^6.39.0
         version: 6.39.0
@@ -550,7 +550,7 @@ importers:
         version: 3.2.3
       motion:
         specifier: 'catalog:'
-        version: 13.4.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        version: 13.4.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       react-is:
         specifier: 'catalog:'
         version: 19.3.0
@@ -5722,8 +5722,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-plugin-storybook@10.6.0:
-    resolution: {integrity: sha512-HK3yD5Nslv97buJ5JfT1xFkTOoyJgGIENmBoZZI3F8t2UpBzb/dHpKyCh5bQ8AvJWnhoM/WAtDNqyd9nq6xgcg==}
+  eslint-plugin-storybook@10.6.1:
+    resolution: {integrity: sha512-XBmXuQcI0wzxMYc0rWKIiydvUxgS+GzLesO1YK1adnj97LhMqqsnlalbM+nXfQo1JoH2F2CI12sAH9/dAC99Dw==}
     peerDependencies:
       eslint: '>=8'
 
@@ -5927,8 +5927,8 @@ packages:
     engines: {node: '>=18.3.0'}
     hasBin: true
 
-  framer-motion@13.4.5:
-    resolution: {integrity: sha512-iXRMQ0Dp9cNf2k/1bNCguTgEOjqKjYgFmez/HA5NmAeuarzuj24jcDCZRnTAHXfMZZjOBXCE196ni3hmOGDIMA==}
+  framer-motion@13.4.6:
+    resolution: {integrity: sha512-TwKWt2CC8rjhARzwV00TZIh04ipumSAqyKM/JZmS+urdncSHg6wTF/mfj/Fd6Oi2W01TZSWsiA3uxXDrXZtKyw==}
     peerDependencies:
       react: ^19.3.0
       react-dom: ^19.3.0
@@ -6747,8 +6747,8 @@ packages:
   motion-utils@13.3.0:
     resolution: {integrity: sha512-sgSschQp7EseHInIlR7hBbMuvet3RA0bs28KPZAXJcGKGdxHGvh1ogpYDilY3bOMtl73EqPNmp75sAKHYPU5sg==}
 
-  motion@13.4.5:
-    resolution: {integrity: sha512-PfSAiAqsmBYfX7Jgu698pakn6ifJEkixtftHBJyZR02CIEnz0/0e0E9GtK7GhWFeAYkeS50Iix863oZag+nePg==}
+  motion@13.4.6:
+    resolution: {integrity: sha512-zDXi6lIdyhda6wZlTsv9QgT2ed6UExAfRegtl/akQmZb5iaeLlArXr9Gmo/hx3iTx2y4R7tmdb9k9koFQmV+NQ==}
     peerDependencies:
       react: ^19.3.0
       react-dom: ^19.3.0
@@ -13677,7 +13677,7 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-plugin-storybook@10.6.0(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2):
+  eslint-plugin-storybook@10.6.1(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2):
     dependencies:
       '@typescript-eslint/types': 8.70.1
       '@typescript-eslint/utils': 8.70.1(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@7.0.2)
@@ -13915,7 +13915,7 @@ snapshots:
       fd-package-json: 2.0.0
       package-manager-detector: 1.8.0
 
-  framer-motion@13.4.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
+  framer-motion@13.4.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
     dependencies:
       motion-dom: 13.4.5
       motion-utils: 13.3.0
@@ -14668,9 +14668,9 @@ snapshots:
 
   motion-utils@13.3.0: {}
 
-  motion@13.4.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
+  motion@13.4.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
     dependencies:
-      framer-motion: 13.4.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      framer-motion: 13.4.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       tslib: 2.8.1
     optionalDependencies:
       react: 19.3.0
@@ -15533,7 +15533,7 @@ snapshots:
       json-stable-stringify: 1.3.0
       lodash-es: 4.18.1
       mendoza: 3.0.8
-      motion: 13.4.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      motion: 13.4.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       nano-pubsub: 3.0.0
       nanoid: 6.0.1
       observable-callback: 1.0.3(rxjs@7.8.2)
