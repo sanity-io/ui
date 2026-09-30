@@ -1,4 +1,4 @@
-import {useCallback, useContext, useEffect, useMemo, useReducer} from 'react'
+import {useCallback, useContext, useLayoutEffect, useMemo, useReducer} from 'react'
 
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {_getArrayProp} from '../../styles/helpers'
@@ -62,7 +62,7 @@ export function LayerProvider(props: LayerProviderProps): React.JSX.Element {
   )
 
   // Register this layer on mount
-  useEffect(() => parentRegisterChild?.(level), [level, parentRegisterChild])
+  useLayoutEffect(() => parentRegisterChild?.(level), [level, parentRegisterChild])
 
   const value: LayerContextValue = useMemo(
     () => ({
