@@ -6,11 +6,9 @@ This repository is a pnpm monorepo. The published `@sanity/ui` package lives in
 [`apps/storybook`](apps/storybook), and the [sanity.io/ui](https://www.sanity.io/ui)
 docs site lives in [`apps/docs`](apps/docs). The `@sanity/color` palette, the
 `@sanity/icons` icon components and the `@sanity/logos` components are
-developed in [sanity-io/color](https://github.com/sanity-io/color),
-[sanity-io/icons](https://github.com/sanity-io/icons) and
-[sanity-io/logos](https://github.com/sanity-io/logos), and their stories reach
-this Storybook through composition refs to https://color.sanity.dev,
-https://icons-storybook.sanity.dev and https://logos.sanity.dev.
+installed from npm, and their stories reach this Storybook through composition
+refs to https://color.sanity.dev, https://icons-storybook.sanity.dev and
+https://logos.sanity.dev.
 
 Development of the current major happens here on `main`. Previous release lines
 receive bug fixes on maintenance branches:

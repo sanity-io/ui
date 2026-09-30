@@ -12,19 +12,12 @@ Studio live under `apps/`.
 | [`@sanity/ui`](packages/ui)                | React component library                 |
 | [`figma-plugin-sanity-ui`](packages/figma) | Figma plugin for Sanity UI theme tokens |
 
-The `@sanity/color` palette and its Figma plugin live in
-[sanity-io/color](https://github.com/sanity-io/color), the `@sanity/icons`
-icon components and the [icons.sanity.dev](https://icons.sanity.dev) catalog
-live in [sanity-io/icons](https://github.com/sanity-io/icons), and the
-`@sanity/logos` Sanity / GROQ logo components live in
-[sanity-io/logos](https://github.com/sanity-io/logos). Their Storybooks
-([color.sanity.dev](https://color.sanity.dev),
+The `@sanity/color` palette, the `@sanity/icons` icon components and the
+`@sanity/logos` Sanity / GROQ logo components are installed from npm. Their
+Storybooks ([color.sanity.dev](https://color.sanity.dev),
 [icons-storybook.sanity.dev](https://icons-storybook.sanity.dev) and
 [logos.sanity.dev](https://logos.sanity.dev)) are composed into this repo's
-Storybook. The `@sanity/themer` theme builder and its Studio tool live in
-[sanity-io/plugins](https://github.com/sanity-io/plugins), and
-`@sanity/themer-legacy` lives in
-[sanity-io/themer](https://github.com/sanity-io/themer).
+Storybook.
 
 ## Migration
 
