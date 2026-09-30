@@ -22,7 +22,9 @@ live in [sanity-io/icons](https://github.com/sanity-io/icons), and the
 [icons-storybook.sanity.dev](https://icons-storybook.sanity.dev) and
 [logos.sanity.dev](https://logos.sanity.dev)) are composed into this repo's
 Storybook. The `@sanity/themer` theme builder and its Studio tool live in
-[sanity-io/plugins](https://github.com/sanity-io/plugins).
+[sanity-io/plugins](https://github.com/sanity-io/plugins), and
+`@sanity/themer-legacy` lives in
+[sanity-io/themer](https://github.com/sanity-io/themer).
 
 ## Migration
 
@@ -66,7 +68,7 @@ rebuild.
 | Script              | What it does                                        |
 | ------------------- | --------------------------------------------------- |
 | `pnpm build`        | Build all publishable packages and the Figma plugin |
-| `pnpm test`         | Unit tests (`@sanity/ui`, `@sanity/themer-legacy`)  |
+| `pnpm test`         | Unit tests (`@sanity/ui`)                           |
 | `pnpm test:browser` | Storybook browser tests (Chromium via Playwright)   |
 | `pnpm lint`         | Lint + type-check (oxlint)                          |
 | `pnpm format`       | Format with oxfmt                                   |

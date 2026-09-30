@@ -17,7 +17,6 @@
     "@sanity/code-input": "^7.3.9",
     "@sanity/icons": "catalog:",
     "@sanity/logos": "catalog:",
-    "@sanity/themer-legacy": "workspace:*",
     "@sanity/ui": "workspace:*",
     "@sanity/vision": "^6.17.0",
     "react": "catalog:",

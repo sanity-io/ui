@@ -33,8 +33,7 @@ without a rebuild.
 ## Testing
 
 Unit tests are written with [vitest](https://vitest.dev) and live next to the
-source in `packages/ui/src` and `packages/themer-legacy/src`. Run them with
-`pnpm test`
+source in `packages/ui/src`. Run them with `pnpm test`
 (or `pnpm test:watch` in the package for watch mode). They run against the
 package source, so no build is required.
 

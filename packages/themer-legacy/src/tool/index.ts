@@ -1,1 +1,0 @@
-export {themerTool} from './plugin'

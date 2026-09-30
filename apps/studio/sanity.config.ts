@@ -1,6 +1,5 @@
 import {codeInput} from '@sanity/code-input'
 import {SanityMonogram} from '@sanity/logos'
-import {themerTool as themerLegacyTool} from '@sanity/themer-legacy/tool'
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
@@ -17,13 +16,7 @@ export default defineConfig({
   title: 'Sanity UI',
   projectId: 'mos42crl',
   dataset: 'production',
-  plugins: [
-    codeInput(),
-    structureTool({structure}),
-    visionTool(),
-    // The hosted Themer's editor
-    themerLegacyTool(),
-  ],
+  plugins: [codeInput(), structureTool({structure}), visionTool()],
   schema,
   icon: SanityMonogram,
 })
