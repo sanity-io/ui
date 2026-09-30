@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.11
+
+### Patch Changes
+
+- 675fb7e: add TextInput
+
 ## 1.0.0-alpha.10
 
 ### Patch Changes
