@@ -134,6 +134,7 @@ minimumReleaseAgeExclude:
   - '@oxlint-tsgolint/win32-x64@7.0.2003'
   - oxlint-tsgolint@7.0.2003
   - '@lezer/highlight@1.2.5'
+  - eslint-plugin-storybook@10.6.1
 
 minimumReleaseAgeExcludePrune: true
 
