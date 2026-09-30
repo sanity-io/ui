@@ -5,7 +5,10 @@ import {useLayoutEffect} from 'react'
 import {describe, expect, it} from 'vitest'
 
 import {render} from '../../../../test/utils'
+import {buildTheme} from '../../../theme/build/buildTheme'
 import {Avatar} from './avatar'
+
+const {avatar: avatarTheme} = buildTheme().v2!
 
 interface AvatarFrame {
   imageSrc: string | null
@@ -42,6 +45,26 @@ describe('primitives/avatar', () => {
     // `loading="lazy"` would opt the image out of React's suspensey images
     expect(img.hasAttribute('loading')).toBe(false)
     expect(document.querySelector('[data-ui="Avatar"] image')).toBeNull()
+  })
+
+  it('gives the image the intrinsic size of the theme avatar size', () => {
+    const {rerender} = render(<Avatar src="/photo.png" />)
+    const img = () => document.querySelector('[data-ui="Avatar"] img')!
+    const {size: defaultSize} = avatarTheme.sizes[1]
+
+    expect(img().getAttribute('width')).toBe(String(defaultSize))
+    expect(img().getAttribute('height')).toBe(String(defaultSize))
+
+    rerender(<Avatar size={2} src="/photo.png" />)
+
+    expect(img().getAttribute('width')).toBe(String(avatarTheme.sizes[2].size))
+    expect(img().getAttribute('height')).toBe(String(avatarTheme.sizes[2].size))
+
+    // Responsive sizes are resolved in CSS, the first step is the intrinsic size
+    rerender(<Avatar size={[0, 2]} src="/photo.png" />)
+
+    expect(img().getAttribute('width')).toBe(String(avatarTheme.sizes[0].size))
+    expect(img().getAttribute('height')).toBe(String(avatarTheme.sizes[0].size))
   })
 
   it('falls back to the initials once the image fails to load', () => {

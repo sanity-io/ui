@@ -43,8 +43,8 @@ globalStyle(`${avatarArrow} > svg:not([hidden])`, {
 export const avatarImage = style({
   // Positioned so it paints over the absolutely positioned arrow
   position: 'relative',
-  width: '100%',
-  height: '100%',
+  width: 'var(--avatar-size)',
+  height: 'var(--avatar-size)',
   borderRadius: '50%',
   // The `xMidYMid meet` fit of the svg <image> this replaces
   objectFit: 'contain',
@@ -59,8 +59,8 @@ export const avatarStrokes = style({
   position: 'absolute',
   top: 0,
   left: 0,
-  width: '100%',
-  height: '100%',
+  width: 'var(--avatar-size)',
+  height: 'var(--avatar-size)',
   // With the UA `overflow: hidden` of a nested svg this clips the strokes to
   // the circle, so only the inner half of each stroke stays visible
   borderRadius: '50%',

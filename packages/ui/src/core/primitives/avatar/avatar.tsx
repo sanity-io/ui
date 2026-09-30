@@ -4,6 +4,7 @@ import {styled} from 'styled-components'
 
 import {ThemeColorAvatarColorKey} from '../../../theme/system/color/_system'
 import {_getArrayProp} from '../../styles/helpers'
+import {useTheme_v2} from '../../theme/useTheme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types/avatar'
 import {ElementType, Props} from '../../types/component'
 import {Label} from '../label/label'
@@ -74,8 +75,12 @@ function AvatarComponent(
     size: sizeProp = 1,
     ...restProps
   } = props
+  const {avatar} = useTheme_v2()
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = _getArrayProp(sizeProp)
+  // The rendered size follows `--avatar-size` per breakpoint (see styles.ts);
+  // the first step also gives the image its intrinsic dimensions
+  const avatarSize = avatar.sizes[size[0]] || avatar.sizes[0]
 
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
     animateArrowFrom || arrowPositionProp || 'inside',
@@ -138,14 +143,17 @@ function AvatarComponent(
           {/*
            * A native <img> lets React wait for the image inside a <ViewTransition>
            * or a Suspense reveal. An `onLoad` handler or `loading="lazy"` would
-           * opt it out of that, so neither is set.
+           * opt it out of that, so neither is set. `width`/`height` give the
+           * browser (and React's image byte estimate) the size before it loads.
            */}
           <img
             alt=""
             className={avatarImage}
             draggable={false}
+            height={avatarSize.size}
             onError={handleImageError}
             src={src}
+            width={avatarSize.size}
           />
 
           {/*
