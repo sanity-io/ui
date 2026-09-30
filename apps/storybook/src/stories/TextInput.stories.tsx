@@ -61,10 +61,9 @@ export const Error: Story = {
     <TextInput {...props} id="error-text-input" aria-label="Text input with error" hasError />
   ),
   play: async ({canvas}) => {
-    // The hasError prop marks the element invalid and adds the error class.
+    // The hasError prop marks the element invalid via aria-invalid.
     const input = await canvas.findByRole('textbox', {name: 'Text input with error'})
     await expect(input.getAttribute('aria-invalid')).toBe('true')
-    await expect(input.className).toContain('sui-error')
   },
 }
 

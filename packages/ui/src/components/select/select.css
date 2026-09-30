@@ -21,12 +21,12 @@
 /**
   * Error
   */
-.sui-Select.sui-error {
+.sui-Select[aria-invalid="true"] {
   --border-color: var(--error-separator);
   --color: var(--error-foreground);
 }
 
-.sui-Select.sui-error + [data-ui="Select-icon"] svg {
+.sui-Select[aria-invalid="true"] + [data-ui="Select-icon"] svg {
   color: var(--error-foreground);
 }
 

@@ -16,13 +16,7 @@ export function Select({density = 'regular', hasError = false, ...props}: Select
   const anchorId = useId()
   const anchorName = `--anchor-${anchorId}`
 
-  const selectClasses = clsx(
-    selectClassName,
-    hasError && 'sui-error',
-    'sui-radius2',
-    'sui-width-full',
-    className,
-  )
+  const selectClasses = clsx(selectClassName, 'sui-radius2', 'sui-width-full', className)
 
   const iconClasses = `sui-position-absolute sui-display-flex sui-align-items-center sui-px1`
 

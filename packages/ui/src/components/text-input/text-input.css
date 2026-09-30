@@ -15,7 +15,7 @@
 /**
   * Error
   */
-.sui-TextInput.sui-error {
+.sui-TextInput[aria-invalid="true"] {
   --border-color: var(--error-separator);
   --color: var(--error-foreground);
 }

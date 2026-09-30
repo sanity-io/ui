@@ -15,13 +15,7 @@ export function TextInput({
 }: TextInputProps) {
   const {className, style, ...rest} = getProps({density, ...props}, textInputProps)
 
-  const textInputClasses = clsx(
-    textInputClassName,
-    hasError && 'sui-error',
-    'sui-radius2',
-    'sui-width-full',
-    className,
-  )
+  const textInputClasses = clsx(textInputClassName, 'sui-radius2', 'sui-width-full', className)
 
   return (
     <input
@@ -29,8 +23,8 @@ export function TextInput({
       className={textInputClasses}
       style={style}
       data-ui="TextInput"
-      aria-invalid={hasError || undefined}
       {...rest}
+      aria-invalid={hasError || undefined}
     />
   )
 }
