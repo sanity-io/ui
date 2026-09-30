@@ -12,6 +12,7 @@ import {
 } from '@sanity/ui'
 import {Menu, MenuItem} from '@sanity/ui/menu'
 import type {Meta, StoryObj} from '@storybook/react-vite'
+import {Activity, ComponentProps, startTransition, useState, ViewTransition} from 'react'
 
 import {AVATAR_SRC} from '../constants'
 import {getAvatarSizeControls} from '../controls'
@@ -177,4 +178,59 @@ export const WithinMenuItem: Story = {
       </Layer>
     </Container>
   ),
+}
+
+function AnimatedAvatar({open, ...props}: ComponentProps<typeof Avatar> & {open: boolean}) {
+  return (
+    <Activity mode={open ? 'visible' : 'hidden'}>
+      <ViewTransition>
+        <Avatar {...props} />
+      </ViewTransition>
+    </Activity>
+  )
+}
+
+// A unique query parameter makes the browser fetch the image again on every
+// reveal, so the transition has something to wait for
+function freshSrc(src: string): string {
+  const url = new URL(src, location.href)
+
+  url.searchParams.set('t', String(Date.now()))
+
+  return url.href
+}
+
+function ViewTransitionStory(props: ComponentProps<typeof Avatar>) {
+  const {src: srcProp, ...restProps} = props
+  const [src, setSrc] = useState<string | undefined>(undefined)
+  const open = src !== undefined
+
+  return (
+    <Flex align="center" gap={3}>
+      <Button
+        mode="ghost"
+        onClick={() => {
+          startTransition(() => {
+            setSrc(open || !srcProp ? undefined : freshSrc(srcProp))
+          })
+        }}
+        text={open ? 'Hide avatar' : 'Show avatar'}
+      />
+      <AnimatedAvatar {...restProps} open={open} src={src} />
+    </Flex>
+  )
+}
+
+/**
+ * The image is a native `<img>`, so an `Avatar` inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) behaves like any other
+ * image: when a transition reveals it, React
+ * [waits for the image to load](https://react.dev/reference/react/Suspense#waiting-for-an-image-to-load)
+ * (up to a timeout) before it commits, so the animation never starts from an empty circle that the
+ * image later pops into. Here the avatar sits in an `<Activity>` that a `startTransition` update
+ * toggles between `hidden` and `visible`; every reveal fetches the image afresh.
+ */
+export const WithViewTransition: Story = {
+  parameters: {controls: {include: ['color', 'initials', 'size', 'src', 'status']}},
+  render: (props) => <ViewTransitionStory {...props} />,
 }
