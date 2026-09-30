@@ -136,10 +136,9 @@ function AvatarComponent(
       {!imageFailed && src && (
         <>
           {/*
-           * A native <img> (not an svg <image>) so that React can wait for it
-           * to load before revealing a Suspense boundary or running a
-           * <ViewTransition>. React opts an image out of that when it has an
-           * `onLoad` handler or `loading="lazy"`, so neither is set here.
+           * A native <img> lets React wait for the image inside a <ViewTransition>
+           * or a Suspense reveal. An `onLoad` handler or `loading="lazy"` would
+           * opt it out of that, so neither is set.
            */}
           <img
             alt=""
@@ -150,9 +149,8 @@ function AvatarComponent(
           />
 
           {/*
-           * The strokes straddle the edge of the circle; the outer half is
-           * clipped away by the svg's border-radius, so 1px of the avatar color
-           * and (unless hidden) 1px of the card color remain inside the image.
+           * The strokes straddle the circle's edge and the svg clips the outer
+           * half, leaving 1px of avatar color and 1px of card color inside.
            */}
           <svg className={avatarStrokes} viewBox="0 0 2 2" fill="none">
             {!__unstable_hideInnerStroke && (

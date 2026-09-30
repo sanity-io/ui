@@ -41,12 +41,12 @@ globalStyle(`${avatarArrow} > svg:not([hidden])`, {
 })
 
 export const avatarImage = style({
-  // Positioned so it paints over the arrow, like every other positioned sibling
+  // Positioned so it paints over the absolutely positioned arrow
   position: 'relative',
   width: '100%',
   height: '100%',
   borderRadius: '50%',
-  // Same fit as the `xMidYMid meet` default of the svg <image> it replaces
+  // The `xMidYMid meet` fit of the svg <image> this replaces
   objectFit: 'contain',
   selectors: {
     '&:not([hidden])': {
