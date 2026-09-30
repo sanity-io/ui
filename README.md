@@ -31,6 +31,10 @@ See the [`@sanity/ui` migration guides](MIGRATION.md) when you upgrade from v2 t
 | [`apps/docs`](apps/docs)           | [sanity.io/ui](https://www.sanity.io/ui) docs site (fully static Next.js)    |
 | [`apps/studio`](apps/studio)       | Sanity Studio for the legacy docs dataset                                    |
 
+`apps/studio` is tied to an older deployment of `apps/docs` that rendered the
+previous docs site. Once [sanity.io/ui](https://www.sanity.io/ui) points
+elsewhere, both apps can be deleted.
+
 ## Requirements
 
 - Node.js `>=22.13`

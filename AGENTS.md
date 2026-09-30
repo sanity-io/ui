@@ -112,8 +112,10 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   No tokens or env vars are required.
 - `pnpm dev:studio` runs the Sanity Studio (`apps/studio`, project `mos42crl`,
   dataset `production`) on http://localhost:3333. It holds the schemas and
-  content of the previous docs site. `apps/docs` reads nothing from it, so the
-  studio has no presentation tool.
+  content of the previous docs site and is tied to an older deployment of
+  `apps/docs` that rendered that site. `apps/docs` itself reads nothing from
+  it, so the studio has no presentation tool. Once sanity.io/ui points
+  elsewhere, both `apps/studio` and `apps/docs` can be deleted.
   `pnpm --filter sanity-ui-studio export:docs`
   (`apps/studio/scripts/export-docs-to-code.ts`) writes the dataset's docs
   content to the `apps/docs` page files, overwriting any changes made to them.

@@ -2,8 +2,12 @@
 
 The Sanity Studio for the `mos42crl` project (dataset `production`). It holds
 the schemas and content of the previous [sanity.io/ui](https://www.sanity.io/ui)
-docs site. [`apps/docs`](../docs) is fully static and reads nothing from this
-project, so the studio has no presentation tool.
+docs site and is tied to an older deployment of [`apps/docs`](../docs) that
+rendered that site. `apps/docs` itself is fully static and reads nothing from
+this project, so the studio has no presentation tool.
+
+Once sanity.io/ui points elsewhere, both this studio and `apps/docs` can be
+deleted.
 
 ## Development
 

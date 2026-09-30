@@ -25,9 +25,11 @@ manually maintained route list. Adding a page means creating a folder with a
 `page.tsx` and a `nav.ts`; group folders (e.g. `docs/primitive/`) only have a
 `nav.ts`.
 
-[`apps/studio`](../studio) holds the content of the previous docs site. Its
+[`apps/studio`](../studio) holds the content of the previous docs site and is
+tied to an older deployment of this app that rendered that site. Its
 `export:docs` script writes the page files here from that content, overwriting
-any changes made to them.
+any changes made to them. Once sanity.io/ui points elsewhere, both this app and
+`apps/studio` can be deleted.
 
 ## Development
 
