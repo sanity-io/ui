@@ -3,6 +3,7 @@
   "baseBranchPatterns": ["v2", "v3", "$default"],
   "extends": ["github>sanity-io/renovate-config"],
   "ignorePresets": ["github>sanity-io/renovate-config:group-non-major"],
+  "configMigration": false,
   "dependencyDashboardApproval": true,
   "vulnerabilityAlerts": {"dependencyDashboardApproval": true},
   "packageRules": [
