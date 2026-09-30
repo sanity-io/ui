@@ -3,6 +3,8 @@
   "baseBranchPatterns": ["v2", "v3", "$default"],
   "extends": ["github>sanity-io/renovate-config"],
   "ignorePresets": ["github>sanity-io/renovate-config:group-non-major"],
+  "dependencyDashboardApproval": true,
+  "vulnerabilityAlerts": {"dependencyDashboardApproval": true},
   "packageRules": [
     {
       "matchDepTypes": ["dependencies"],
@@ -93,6 +95,22 @@
       ],
       "matchBaseBranches": ["v2", "v3"],
       "allowedVersions": "<=8"
+    },
+    {
+      "description": "Every update waits for Dependency Dashboard approval, even where an earlier rule or an extended preset sets its own dependencyDashboardApproval",
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "pinDigest",
+        "digest",
+        "lockFileMaintenance",
+        "rollback",
+        "bump",
+        "replacement"
+      ],
+      "dependencyDashboardApproval": true
     }
   ]
 }
