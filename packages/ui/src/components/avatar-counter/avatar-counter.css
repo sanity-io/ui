@@ -1,3 +1,8 @@
+.sui-AvatarCounter {
+  aspect-ratio: 1;
+  padding-inline: 6px;
+}
+
 .sui-AvatarCounter .sui-Eyebrow {
   font-size: inherit;
 }

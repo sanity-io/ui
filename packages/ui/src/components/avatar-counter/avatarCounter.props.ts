@@ -1,13 +1,10 @@
 import {heightProps} from '../../props/height'
-import {widthProps} from '../../props/width'
 import {AVATAR_SIZE, type AvatarSize} from '../../types/Avatar'
 import {type PropDef} from '../../types/PropDef'
 import {TEXT_SIZE} from '../../types/Text'
 
 /** @public */
-export interface AvatarCounterProps<T extends React.ElementType> {
-  /** Element to render */
-  as?: T
+export interface AvatarCounterProps extends React.ComponentProps<'figure'> {
   /** Count */
   count?: number
   /** Composite prop for setting width, height, and font */
@@ -15,9 +12,6 @@ export interface AvatarCounterProps<T extends React.ElementType> {
 }
 
 export const avatarCounterProps: Record<string, PropDef> = {
-  as: {
-    type: 'string',
-  },
   count: {
     type: 'number',
   },
@@ -39,14 +33,6 @@ export const avatarCounterProps: Record<string, PropDef> = {
       },
       height: {
         propDef: heightProps['height'] as PropDef,
-        mapping: {
-          0: '19px',
-          1: '25px',
-          2: '33px',
-        },
-      },
-      minWidth: {
-        propDef: widthProps['minWidth'] as PropDef,
         mapping: {
           0: '19px',
           1: '25px',

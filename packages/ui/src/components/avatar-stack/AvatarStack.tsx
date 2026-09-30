@@ -1,27 +1,16 @@
 import clsx from 'clsx'
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  type ComponentPropsWithRef,
-  type ElementType,
-  type ReactElement,
-} from 'react'
+import {Children, cloneElement, isValidElement, type ReactElement} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {AvatarCounter} from '../avatar-counter/AvatarCounter'
 import type {AvatarProps} from '../avatar/avatar.props'
-import {HStack} from '../h-stack/HStack'
 import {type AvatarStackProps, avatarStackProps} from './avatarStack.props'
 
 const avatarStackClassName = suffixClassName('sui-AvatarStack')
 
 /** @public */
-export function AvatarStack<T extends ElementType = 'div'>({
-  size = 1,
-  ...props
-}: AvatarStackProps<T> & Omit<ComponentPropsWithRef<T>, keyof AvatarStackProps<T>>) {
+export function AvatarStack({size = 1, ...props}: AvatarStackProps) {
   const {
     as,
     children,
@@ -31,28 +20,37 @@ export function AvatarStack<T extends ElementType = 'div'>({
     size: sizeProp,
     ...rest
   } = getProps({size, ...props}, avatarStackProps)
-  const Component = as || 'div'
-  const childArray = Children.toArray(children).filter(isValidElement) as ReactElement<
-    AvatarProps<T>
-  >[]
+  const childArray = Children.toArray(children).filter(
+    isValidElement,
+  ) as ReactElement<AvatarProps>[]
   const length = childArray.length
   const maxLength = maxLengthProp ?? length
   const slicedArray = length > maxLength ? childArray.slice(length - maxLength, length) : childArray
 
   return (
-    <HStack
-      as={Component}
-      className={clsx(avatarStackClassName, className)}
+    <ul
+      className={clsx(avatarStackClassName, 'sui-display-flex', className)}
       style={style}
       data-ui="AvatarStack"
-      flexWrap="nowrap"
       {...rest}
     >
-      {!length && <AvatarCounter count={0} size={sizeProp} />}
-      {length > maxLength && <AvatarCounter count={length - maxLength} size={sizeProp} />}
+      {!length ||
+        (length > maxLength && (
+          <li className="sui-display-flex">
+            <AvatarCounter
+              count={!length ? 0 : length - maxLength}
+              size={sizeProp}
+              aria-label={!length ? 'No users' : `+ ${length - maxLength} more users`}
+            />
+          </li>
+        ))}
 
-      {slicedArray.map((child, i) => cloneElement(child, {key: i, size: sizeProp}))}
-    </HStack>
+      {slicedArray.map((child, i) => (
+        <li key={i} className="sui-display-flex">
+          {cloneElement(child, {size: sizeProp})}
+        </li>
+      ))}
+    </ul>
   )
 }
 

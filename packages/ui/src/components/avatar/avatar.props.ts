@@ -1,5 +1,5 @@
+import type {Responsive} from '../../../dist'
 import {heightProps} from '../../props/height'
-import {widthProps} from '../../props/width'
 import {AVATAR_COLOR, AVATAR_SIZE, type AvatarColor, type AvatarSize} from '../../types/Avatar'
 import {type PropDef} from '../../types/PropDef'
 import {TEXT_SIZE} from '../../types/Text'
@@ -13,7 +13,7 @@ export interface AvatarProps extends React.ComponentProps<'figure'> {
   /** Avatar initials */
   initials: string
   /** Composite prop for setting width, height, and font */
-  size?: AvatarSize
+  size?: Responsive<AvatarSize>
   /** Avatar image src */
   src?: string
 }
@@ -50,14 +50,6 @@ export const avatarProps: Record<string, PropDef> = {
       },
       height: {
         propDef: heightProps['height'] as PropDef,
-        mapping: {
-          0: '19px',
-          1: '25px',
-          2: '33px',
-        },
-      },
-      width: {
-        propDef: widthProps['width'] as PropDef,
         mapping: {
           0: '19px',
           1: '25px',

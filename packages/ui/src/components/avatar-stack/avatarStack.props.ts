@@ -2,9 +2,7 @@ import {AVATAR_SIZE, type AvatarSize} from '../../types/Avatar'
 import {type PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface AvatarStackProps<T extends React.ElementType> {
-  /** Element to render */
-  as?: T
+export interface AvatarStackProps extends React.ComponentProps<'ul'> {
   /** Max number of avatars to display */
   maxLength?: number
   /** Avatar and AvatarCounter size */
@@ -12,9 +10,6 @@ export interface AvatarStackProps<T extends React.ElementType> {
 }
 
 export const avatarStackProps: Record<string, PropDef> = {
-  as: {
-    type: 'string',
-  },
   maxLength: {
     type: 'number',
   },
