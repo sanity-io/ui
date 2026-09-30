@@ -143,6 +143,16 @@ minimumReleaseAgeExclude:
   - '@vitest/ui@5.0.3'
   - '@vitest/utils@5.0.3'
   - vitest@5.0.3
+  - '@storybook/addon-a11y@10.6.1'
+  - '@storybook/addon-docs@10.6.1'
+  - '@storybook/addon-links@10.6.1'
+  - '@storybook/addon-themes@10.6.1'
+  - '@storybook/addon-vitest@10.6.1'
+  - '@storybook/builder-vite@10.6.1'
+  - '@storybook/react-dom-shim@10.6.1'
+  - '@storybook/react-vite@10.6.1'
+  - '@storybook/react@10.6.1'
+  - storybook@10.6.1
   - eslint-plugin-storybook@10.6.1
 
 minimumReleaseAgeExcludePrune: true
