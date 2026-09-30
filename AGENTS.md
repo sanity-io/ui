@@ -12,8 +12,9 @@ content lives in code) in
 (`pnpm-workspace.yaml`). The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
 (`packageManager` pin in `package.json`); developing in this repo requires Node
-`>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
-requires `>=22.12` (matching `sanity`; see `packages/ui/package.json` engines).
+`>=22.13` (root `package.json` engines), while the published `@sanity/ui`
+package requires `>=22.12` (matching `sanity`; see `packages/ui/package.json`
+engines).
 The `@sanity/color` palette that `@sanity/ui` depends on is developed in
 [sanity-io/color](https://github.com/sanity-io/color), the `@sanity/icons`
 icon components that `@sanity/ui` and the apps use are developed in
@@ -64,12 +65,11 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   plus running the build is all it takes to publish a new subpath) resolves
   directly to TypeScript source for every tool (tsc, oxlint's type checker,
   vitest, vite), so there are no tsconfig `paths`, no `customConditions`, and
-  no vite aliases. The publishable `exports` (dist `import`/`require`) live
-  under `publishConfig` and are applied by `pnpm pack`/`publish`; npm access
-  comes from the Changesets config (`access: public`), so packages don't set
-  `publishConfig.access`. All published packages are `"type": "module"`: dist
-  ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
-  (`@sanity/ui` ships ESM only).
+  no vite aliases. The publishable `exports` (pointing at `dist`) live under
+  `publishConfig` and are applied by `pnpm pack`/`publish`; npm access comes
+  from the Changesets config (`access: public`), so packages don't set
+  `publishConfig.access`. `@sanity/ui` is `"type": "module"` and ships ESM
+  only (`.js`/`.d.ts`).
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`).
   `@sanity/ui` resolves to the
   `packages/ui/src/exports/` source through the dev `exports`, so unit tests
@@ -137,8 +137,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   one subpath that needs a build, and `pnpm install` only runs the package's
   `prepare` build when it actually installs something (not with a cached
   `node_modules`, as on Vercel).
-  `pnpm --filter sanity-ui-studio deploy` updates the hosted studio (the
-  `appId` in `apps/studio/sanity.cli.ts`). In Cloud Agent VMs,
+  `pnpm --filter sanity-ui-studio run deploy` updates the hosted studio (the
+  `appId` in `apps/studio/sanity.cli.ts`); it needs `run` because `deploy` on
+  its own is pnpm's built-in `pnpm deploy`. In Cloud Agent VMs,
   `SANITY_API_READ_TOKEN` and `SANITY_AUTH_TOKEN` are available as runtime
   secrets (injected as env vars when the VM starts). To sign in to the studio,
   open `http://localhost:3333/#token={SANITY_AUTH_TOKEN}` (Sanity consumes the

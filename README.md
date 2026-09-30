@@ -41,7 +41,7 @@ See the [`@sanity/ui` migration guides](MIGRATION.md) when you upgrade from v2 t
 ## Requirements
 
 - Node.js `>=22.13`
-- [pnpm](https://pnpm.io) `11` (pinned via `packageManager` in `package.json`)
+- [pnpm](https://pnpm.io) `12` (pinned via `packageManager` in `package.json`)
 
 ## Getting started
 
@@ -65,15 +65,15 @@ rebuild.
 
 ### Common scripts
 
-| Script              | What it does                                        |
-| ------------------- | --------------------------------------------------- |
-| `pnpm build`        | Build all publishable packages and the Figma plugin |
-| `pnpm test`         | Unit tests (`@sanity/ui`)                           |
-| `pnpm test:browser` | Storybook browser tests (Chromium via Playwright)   |
-| `pnpm lint`         | Lint + type-check (oxlint)                          |
-| `pnpm format`       | Format with oxfmt                                   |
-| `pnpm knip`         | Unused files / dependencies / exports               |
-| `pnpm changeset`    | Add a changeset for a release                       |
+| Script              | What it does                                      |
+| ------------------- | ------------------------------------------------- |
+| `pnpm build`        | Build `@sanity/ui` and the Figma plugin           |
+| `pnpm test`         | Unit tests (`@sanity/ui`)                         |
+| `pnpm test:browser` | Storybook browser tests (Chromium via Playwright) |
+| `pnpm lint`         | Lint + type-check (oxlint)                        |
+| `pnpm format`       | Format with oxfmt                                 |
+| `pnpm knip`         | Unused files / dependencies / exports             |
+| `pnpm changeset`    | Add a changeset for a release                     |
 
 ## Contributing & releasing
 

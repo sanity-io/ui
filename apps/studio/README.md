@@ -30,11 +30,12 @@ The studio is no longer embedded in the docs site (sanity.io/ui/studio). Use
 Sanity's hosting instead:
 
 ```sh
-pnpm --filter sanity-ui-studio deploy
+pnpm --filter sanity-ui-studio run deploy
 ```
 
-The app id in `sanity.cli.ts` keeps deploys pointed at the existing hosted
-studio.
+`run` is required: without it, `deploy` is pnpm's built-in `pnpm deploy`
+command. The app id in `sanity.cli.ts` keeps deploys pointed at the existing
+hosted studio.
 
 ## Schema deployment
 
