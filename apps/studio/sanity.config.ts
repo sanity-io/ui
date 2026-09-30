@@ -16,11 +16,7 @@ export default defineConfig({
   title: 'Sanity UI',
   projectId: 'mos42crl',
   dataset: 'production',
-  plugins: [
-    codeInput(),
-    structureTool({structure}),
-    visionTool(),
-  ],
+  plugins: [codeInput(), structureTool({structure}), visionTool()],
   schema,
   icon: SanityMonogram,
 })
