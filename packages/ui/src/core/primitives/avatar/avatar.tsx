@@ -1,16 +1,22 @@
-import {useCallback, useEffect, useId, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import ReactIs from 'react-is'
 import {styled} from 'styled-components'
 
 import {ThemeColorAvatarColorKey} from '../../../theme/system/color/_system'
 import {_getArrayProp} from '../../styles/helpers'
-import {useTheme_v2} from '../../theme/useTheme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types/avatar'
 import {ElementType, Props} from '../../types/component'
 import {Label} from '../label/label'
 import {avatarRootStyle, responsiveAvatarSizeStyle} from './styles'
 
-import {avatarArrow, avatarBgStroke, avatarImage, avatarInitials, avatarStroke} from './avatar.css'
+import {
+  avatarArrow,
+  avatarBgStroke,
+  avatarImage,
+  avatarInitials,
+  avatarStroke,
+  avatarStrokes,
+} from './avatar.css'
 
 /**
  * @public
@@ -68,16 +74,9 @@ function AvatarComponent(
     size: sizeProp = 1,
     ...restProps
   } = props
-  const {avatar} = useTheme_v2()
   const as = ReactIs.isValidElementType(asProp) ? asProp : 'div'
   const size = _getArrayProp(sizeProp)
 
-  // @todo: remove this
-  const avatarSize = avatar.sizes[size[0]] || avatar.sizes[0]
-  const _sizeRem = avatarSize.size
-  const _radius = _sizeRem / 2
-
-  const elementId = useId()
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
     animateArrowFrom || arrowPositionProp || 'inside',
   )
@@ -93,8 +92,6 @@ function AvatarComponent(
     setPrevSrc(src)
     if (src) setImageFailed(false)
   }
-
-  const imageId = `avatar-image-${elementId}`
 
   useEffect(() => {
     if (arrowPosition === arrowPositionProp) return undefined
@@ -137,35 +134,46 @@ function AvatarComponent(
       </div>
 
       {!imageFailed && src && (
-        <svg className={avatarImage} viewBox={`0 0 ${_sizeRem} ${_sizeRem}`} fill="none">
-          <defs>
-            <pattern id={imageId} patternContentUnits="objectBoundingBox" width="1" height="1">
-              <image href={src} width="1" height="1" onError={handleImageError} />
-            </pattern>
-          </defs>
+        <>
+          {/*
+           * A native <img> (not an svg <image>) so that React can wait for it
+           * to load before revealing a Suspense boundary or running a
+           * <ViewTransition>. React opts an image out of that when it has an
+           * `onLoad` handler or `loading="lazy"`, so neither is set here.
+           */}
+          <img
+            alt=""
+            className={avatarImage}
+            draggable={false}
+            onError={handleImageError}
+            src={src}
+          />
 
-          <circle cx={_radius} cy={_radius} r={_radius} fill={`url(#${imageId})`} />
+          {/*
+           * The strokes straddle the edge of the circle; the outer half is
+           * clipped away by the svg's border-radius, so 1px of the avatar color
+           * and (unless hidden) 1px of the card color remain inside the image.
+           */}
+          <svg className={avatarStrokes} viewBox="0 0 2 2" fill="none">
+            {!__unstable_hideInnerStroke && (
+              <circle
+                className={avatarBgStroke}
+                cx="1"
+                cy="1"
+                r="1"
+                vectorEffect="non-scaling-stroke"
+              />
+            )}
 
-          {!__unstable_hideInnerStroke && (
-            <ellipse
-              className={avatarBgStroke}
-              cx={_radius}
-              cy={_radius}
-              rx={_radius}
-              ry={_radius}
+            <circle
+              className={avatarStroke}
+              cx="1"
+              cy="1"
+              r="1"
               vectorEffect="non-scaling-stroke"
             />
-          )}
-
-          <ellipse
-            className={avatarStroke}
-            cx={_radius}
-            cy={_radius}
-            rx={_radius}
-            ry={_radius}
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
+          </svg>
+        </>
       )}
 
       {(imageFailed || !src) && initials && (

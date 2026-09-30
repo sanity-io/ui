@@ -8,7 +8,7 @@ import {render} from '../../../../test/utils'
 import {Avatar} from './avatar'
 
 interface AvatarFrame {
-  imageHref: string | null
+  imageSrc: string | null
   initials: string
 }
 
@@ -16,7 +16,7 @@ function readAvatarFrame(): AvatarFrame {
   const root = document.querySelector('[data-ui="Avatar"]')
 
   return {
-    imageHref: root?.querySelector('image')?.getAttribute('href') ?? null,
+    imageSrc: root?.querySelector('img')?.getAttribute('src') ?? null,
     initials: root?.textContent ?? '',
   }
 }
@@ -30,14 +30,28 @@ function FrameRecorder({frames}: {frames: AvatarFrame[]}) {
 }
 
 describe('primitives/avatar', () => {
+  it('renders the image as a native <img> that React can wait for in a <ViewTransition>', () => {
+    render(<Avatar initials="AB" src="/photo.png" />)
+
+    const img = document.querySelector('[data-ui="Avatar"] img')!
+
+    expect(img).toBeInstanceOf(HTMLImageElement)
+    expect(img.getAttribute('src')).toBe('/photo.png')
+    // Decorative: the root carries the accessible name through `title`
+    expect(img.getAttribute('alt')).toBe('')
+    // `loading="lazy"` would opt the image out of React's suspensey images
+    expect(img.hasAttribute('loading')).toBe(false)
+    expect(document.querySelector('[data-ui="Avatar"] image')).toBeNull()
+  })
+
   it('falls back to the initials once the image fails to load', () => {
     render(<Avatar initials="AB" src="/broken.png" />)
 
-    expect(readAvatarFrame()).toEqual({imageHref: '/broken.png', initials: ''})
+    expect(readAvatarFrame()).toEqual({imageSrc: '/broken.png', initials: ''})
 
-    fireEvent.error(document.querySelector('image')!)
+    fireEvent.error(document.querySelector('img')!)
 
-    expect(readAvatarFrame()).toEqual({imageHref: null, initials: 'AB'})
+    expect(readAvatarFrame()).toEqual({imageSrc: null, initials: 'AB'})
   })
 
   it('shows the image for a new src without ever committing the initials fallback', () => {
@@ -50,8 +64,8 @@ describe('primitives/avatar', () => {
       </>,
     )
 
-    fireEvent.error(document.querySelector('image')!)
-    expect(readAvatarFrame()).toEqual({imageHref: null, initials: 'AB'})
+    fireEvent.error(document.querySelector('img')!)
+    expect(readAvatarFrame()).toEqual({imageSrc: null, initials: 'AB'})
 
     const firstFrameAfterSrcChange = frames.length
 
@@ -62,9 +76,9 @@ describe('primitives/avatar', () => {
       </>,
     )
 
-    expect(readAvatarFrame()).toEqual({imageHref: '/working.png', initials: ''})
+    expect(readAvatarFrame()).toEqual({imageSrc: '/working.png', initials: ''})
     expect(frames.slice(firstFrameAfterSrcChange)).not.toContainEqual({
-      imageHref: null,
+      imageSrc: null,
       initials: 'AB',
     })
   })
@@ -72,23 +86,23 @@ describe('primitives/avatar', () => {
   it('keeps the initials when src is removed after a failure', () => {
     const {rerender} = render(<Avatar initials="AB" src="/broken.png" />)
 
-    fireEvent.error(document.querySelector('image')!)
+    fireEvent.error(document.querySelector('img')!)
 
     rerender(<Avatar initials="AB" />)
 
-    expect(readAvatarFrame()).toEqual({imageHref: null, initials: 'AB'})
+    expect(readAvatarFrame()).toEqual({imageSrc: null, initials: 'AB'})
   })
 
   it('falls back again when a replacement image also fails', () => {
     const {rerender} = render(<Avatar initials="AB" src="/broken.png" />)
 
-    fireEvent.error(document.querySelector('image')!)
+    fireEvent.error(document.querySelector('img')!)
     rerender(<Avatar initials="AB" src="/also-broken.png" />)
 
-    expect(readAvatarFrame()).toEqual({imageHref: '/also-broken.png', initials: ''})
+    expect(readAvatarFrame()).toEqual({imageSrc: '/also-broken.png', initials: ''})
 
-    fireEvent.error(document.querySelector('image')!)
+    fireEvent.error(document.querySelector('img')!)
 
-    expect(readAvatarFrame()).toEqual({imageHref: null, initials: 'AB'})
+    expect(readAvatarFrame()).toEqual({imageSrc: null, initials: 'AB'})
   })
 })

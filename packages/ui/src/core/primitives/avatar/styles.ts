@@ -23,12 +23,6 @@ export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSOb
       opacity: '0.5',
     },
 
-    '&>svg': {
-      '&:not([hidden])': {
-        display: 'block',
-      },
-    },
-
     /* &:is(button) */
     '&[data-as="button"]': {
       'WebkitFontSmoothing': 'inherit',
@@ -60,15 +54,9 @@ export function responsiveAvatarSizeStyle(
     const avatarSize = avatar.sizes[size] || avatar.sizes[0]
 
     return {
-      'width': rem(avatarSize.size),
-      'height': rem(avatarSize.size),
-      'borderRadius': rem(avatarSize.size / 2),
-
-      '&>svg': {
-        width: rem(avatarSize.size),
-        height: rem(avatarSize.size),
-        borderRadius: rem(avatarSize.size / 2),
-      },
+      width: rem(avatarSize.size),
+      height: rem(avatarSize.size),
+      borderRadius: rem(avatarSize.size / 2),
     }
   })
 }
