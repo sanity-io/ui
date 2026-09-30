@@ -1,15 +1,14 @@
 # sanity-ui-docs
 
-This is the source code of [sanity.io/ui](https://www.sanity.io/ui). It was
-migrated from the standalone [`sanity-io/ui-docs`](https://github.com/sanity-io/ui-docs)
-repository (with its full git history). It is linted by the root oxlint config
-(with the Next.js plugin rules enabled via an override in `.oxlintrc.json`) and
-formatted by the root oxfmt configuration (`pnpm format` at the repo root).
+This is the source code of [sanity.io/ui](https://www.sanity.io/ui). It is
+linted by the root oxlint config (with the Next.js plugin rules enabled via an
+override in `.oxlintrc.json`) and formatted by the root oxfmt configuration
+(`pnpm format` at the repo root).
 
 The site is fully static: it fetches nothing from Sanity at runtime (no
-`@sanity/client`, no Sanity Live) and needs no environment variables. A no-op
-`POST /ui/api/expire-tags` route remains so leftover callers of the pre-static
-revalidation endpoint still get a 200 JSON response.
+`@sanity/client`, no Sanity Live) and needs no environment variables. The
+`POST /ui/api/expire-tags` route is a no-op that returns a 200 JSON response,
+so callers of that revalidation endpoint don't see errors.
 
 ## Content lives in code
 
@@ -26,11 +25,11 @@ manually maintained route list. Adding a page means creating a folder with a
 `page.tsx` and a `nav.ts`; group folders (e.g. `docs/primitive/`) only have a
 `nav.ts`.
 
-The pages were originally generated from the `mos42crl`/`production` Sanity
-dataset by the one-shot `apps/studio/scripts/export-docs-to-code.ts` script
-(see the `DS-276` migration). The studio for that dataset lives in
-[`apps/studio`](../studio); the dataset is preserved but no longer read by
-this app.
+[`apps/studio`](../studio) holds the content of the previous docs site and is
+tied to an older deployment of this app that rendered that site. Its
+`export:docs` script writes the page files here from that content, overwriting
+any changes made to them. Once sanity.io/ui points elsewhere, both this app and
+`apps/studio` can be deleted.
 
 ## Development
 

@@ -1,20 +1,13 @@
 # sanity-ui-studio
 
-The Sanity Studio for the `mos42crl` project (dataset `production`) that used
-to power [sanity.io/ui](https://www.sanity.io/ui). The docs site (`apps/docs`)
-is now fully static — every page is a `page.tsx` in the repo — so nothing
-reads from this project at runtime anymore. The studio, its schemas and all
-content are preserved in case the docs ever move back to a data-driven
-approach (no data was deleted).
+The Sanity Studio for the `mos42crl` project (dataset `production`). It holds
+the schemas and content of the previous [sanity.io/ui](https://www.sanity.io/ui)
+docs site and is tied to an older deployment of [`apps/docs`](../docs) that
+rendered that site. `apps/docs` itself is fully static and reads nothing from
+this project, so the studio has no presentation tool.
 
-The `icon` documents in this dataset used to back the
-[icons.sanity.dev](https://icons.sanity.dev) search. The search, its studio and
-the `enrich-icon` Sanity Function now live in
-[sanity-io/icons](https://github.com/sanity-io/icons) (project `ppsg7ml5`), so
-this studio no longer has an `icon` type; the documents were left in place.
-
-Compared to the previous embedded studio there is no presentation tool /
-preview setup (there is no draft mode to preview against).
+Once sanity.io/ui points elsewhere, both this studio and `apps/docs` can be
+deleted.
 
 ## Development
 
@@ -26,15 +19,15 @@ This starts the studio dev server on http://localhost:3333.
 
 ## Deployment
 
-The studio is no longer embedded in the docs site (sanity.io/ui/studio). Use
-Sanity's hosting instead:
+The studio is deployed to Sanity's hosting:
 
 ```sh
-pnpm --filter sanity-ui-studio deploy
+pnpm --filter sanity-ui-studio run deploy
 ```
 
-The app id in `sanity.cli.ts` keeps deploys pointed at the existing hosted
-studio.
+`run` is required: without it, `deploy` is pnpm's built-in `pnpm deploy`
+command. The app id in `sanity.cli.ts` keeps deploys pointed at the existing
+hosted studio.
 
 ## Schema deployment
 
@@ -42,9 +35,13 @@ studio.
 pnpm --filter sanity-ui-studio schema:deploy
 ```
 
-## One-shot docs export
+## Docs export
 
-`scripts/export-docs-to-code.ts` is the migration script that converted the
-Sanity-hosted docs content into the static `page.tsx`/`nav.ts` files in
-`apps/docs` (see the `DS-276` migration). It is kept for reference and is not
-part of any build.
+```sh
+pnpm --filter sanity-ui-studio export:docs
+```
+
+`scripts/export-docs-to-code.ts` writes the docs content in this dataset to the
+`page.tsx`/`nav.ts` files under `apps/docs/src/app/(website)/` and downloads the
+images they use to `apps/docs/public/images/`, overwriting any changes made to
+those files. It is not part of any build.

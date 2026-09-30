@@ -12,23 +12,12 @@ content lives in code) in
 (`pnpm-workspace.yaml`). The root `package.json` is a private
 workspace root whose scripts orchestrate via pnpm filters. Package manager is pnpm
 (`packageManager` pin in `package.json`); developing in this repo requires Node
-`>=22.13` (required by pnpm 11), while the published `@sanity/ui` package
-requires `>=22.12` (matching `sanity`; see `packages/ui/package.json` engines).
-The `@sanity/color` palette that `@sanity/ui` depends on is developed in
-[sanity-io/color](https://github.com/sanity-io/color), the `@sanity/icons`
-icon components that `@sanity/ui` and the apps use are developed in
-[sanity-io/icons](https://github.com/sanity-io/icons) (along with the
-icons.sanity.dev showcase, its Sanity Studio and its Sanity Functions), and
-the `@sanity/logos` components that `apps/docs` and `apps/studio` use are
-developed in [sanity-io/logos](https://github.com/sanity-io/logos). All three
-are installed from npm (their entries in the `pnpm-workspace.yaml` catalog).
-The `@sanity/themer` package (a root `buildTheme` export and the `themerTool`
-Studio plugin at `@sanity/themer/tool`) is developed in
-[sanity-io/plugins](https://github.com/sanity-io/plugins)
-(`plugins/@sanity/themer`), and `@sanity/themer-legacy` (the hosted
-themer.sanity.build generator and its Studio tool) in
-[sanity-io/themer](https://github.com/sanity-io/themer); nothing in this repo
-depends on either.
+`>=22.13` (root `package.json` engines), while the published `@sanity/ui`
+package requires `>=22.12` (matching `sanity`; see `packages/ui/package.json`
+engines). `@sanity/color` (the palette `@sanity/ui` depends on), `@sanity/icons`
+(icon components used by `@sanity/ui` and the apps) and `@sanity/logos` (logo
+components used by `apps/docs` and `apps/studio`) are installed from npm through
+their entries in the `pnpm-workspace.yaml` catalog.
 
 Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
 `dev`). Notes that are not obvious from the scripts:
@@ -64,12 +53,11 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   plus running the build is all it takes to publish a new subpath) resolves
   directly to TypeScript source for every tool (tsc, oxlint's type checker,
   vitest, vite), so there are no tsconfig `paths`, no `customConditions`, and
-  no vite aliases. The publishable `exports` (dist `import`/`require`) live
-  under `publishConfig` and are applied by `pnpm pack`/`publish`; npm access
-  comes from the Changesets config (`access: public`), so packages don't set
-  `publishConfig.access`. All published packages are `"type": "module"`: dist
-  ESM builds use `.js`/`.d.ts` and dist CJS builds `.cjs`/`.d.cts`
-  (`@sanity/ui` ships ESM only).
+  no vite aliases. The publishable `exports` (pointing at `dist`) live under
+  `publishConfig` and are applied by `pnpm pack`/`publish`; npm access comes
+  from the Changesets config (`access: public`), so packages don't set
+  `publishConfig.access`. `@sanity/ui` is `"type": "module"` and ships ESM
+  only (`.js`/`.d.ts`).
 - `pnpm test` runs the unit tests with vitest (`packages/ui/vitest.config.ts`).
   `@sanity/ui` resolves to the
   `packages/ui/src/exports/` source through the dev `exports`, so unit tests
@@ -80,8 +68,7 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   The `@sanity/color`, `@sanity/icons` and `@sanity/logos` stories come from
   the Storybooks at https://color.sanity.dev, https://icons-storybook.sanity.dev
   and https://logos.sanity.dev through composition refs (`refs` in
-  `.storybook/main.ts`), so they are edited in sanity-io/color,
-  sanity-io/icons and sanity-io/logos.
+  `.storybook/main.ts`).
 - `pnpm test:browser` runs the Storybook tests (`apps/storybook`): vitest
   renders every story in headless Chromium via `@storybook/addon-vitest` and
   executes story `play` interactions, plus the browser tests in
@@ -95,27 +82,23 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   publishing under the `latest` dist-tag. The `3.x` line is maintained on the
   `v3` branch and publishes under the `release-v3` dist-tag, like `v2` for
   `2.x` (`release-v2`).
-- `apps/docs` was migrated from the standalone `sanity-io/ui-docs` repo. It is
-  linted by the root oxlint config like everything else (an override in
-  `.oxlintrc.json` additionally enables the Next.js plugin rules for it) and
-  formatted by the root oxfmt config (`pnpm format`) like the rest of the
-  repo. It depends on the workspace `@sanity/ui` (`workspace:*`), which
+- `apps/docs` is linted by the root oxlint config like everything else (an
+  override in `.oxlintrc.json` additionally enables the Next.js plugin rules
+  for it) and formatted by the root oxfmt config (`pnpm format`) like the rest
+  of the repo. It depends on the workspace `@sanity/ui` (`workspace:*`), which
   resolves to the TypeScript source through the dev `exports`, so Next.js
   transpiles it via `transpilePackages` in `apps/docs/next.config.ts`. It is
   deployed via Vercel, not released through Changesets.
-- `apps/docs` is fully static (DS-276): it fetches nothing from Sanity at
-  runtime and needs no environment variables. A no-op `POST /ui/api/expire-tags`
-  placeholder remains so leftover callers of the old revalidation endpoint
-  don't 404. Every URL is its own `page.tsx`
-  under `apps/docs/src/app/(website)/`, and the nav tree mirrors the route
-  file structure — each route folder has a colocated `nav.ts` (title, order,
-  display flags) collected with Turbopack's `import.meta.glob` in
-  `src/app/(website)/navTree.ts`, so there is no manually maintained route
-  list (group folders like `docs/primitive/` have a `nav.ts` but no
-  `page.tsx`). Edit the page files directly to change docs content. The pages
-  were generated from the `mos42crl`/`production` dataset by the one-shot
-  `apps/studio/scripts/export-docs-to-code.ts` script; the dataset is
-  preserved but no longer read. The app runs `next@16` with
+- `apps/docs` is fully static: it fetches nothing from Sanity at runtime and
+  needs no environment variables. `POST /ui/api/expire-tags` is a no-op that
+  answers 200, so callers of that revalidation endpoint don't see errors.
+  Every URL is its own `page.tsx` under `apps/docs/src/app/(website)/`, and
+  the nav tree mirrors the route file structure — each route folder has a
+  colocated `nav.ts` (title, order, display flags) collected with Turbopack's
+  `import.meta.glob` in `src/app/(website)/navTree.ts`, so there is no
+  manually maintained route list (group folders like `docs/primitive/` have a
+  `nav.ts` but no `page.tsx`). Edit the page files directly to change docs
+  content. The app runs `next@16` with
   `cacheComponents: true` and builds and devs with Turbopack and the native
   Rust React Compiler (`experimental.turbopackRustReactCompiler`). To make
   that work, `packages/ui` is `"type": "module"` and `apps/docs` omits the
@@ -128,17 +111,23 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   site is served under the `/ui` base path, so open http://localhost:3000/ui).
   No tokens or env vars are required.
 - `pnpm dev:studio` runs the Sanity Studio (`apps/studio`, project `mos42crl`,
-  dataset `production`) on http://localhost:3333. The studio keeps the legacy
-  docs schemas/content (nothing was deleted when the docs went static; there
-  is no presentation tool since there is no preview target anymore).
+  dataset `production`) on http://localhost:3333. It holds the schemas and
+  content of the previous docs site and is tied to an older deployment of
+  `apps/docs` that rendered that site. `apps/docs` itself reads nothing from
+  it, so the studio has no presentation tool. Once sanity.io/ui points
+  elsewhere, both `apps/studio` and `apps/docs` can be deleted.
+  `pnpm --filter sanity-ui-studio export:docs`
+  (`apps/studio/scripts/export-docs-to-code.ts`) writes the dataset's docs
+  content to the `apps/docs` page files, overwriting any changes made to them.
   The studio's `dev`, `build` and `deploy` scripts build `@sanity/ui` first
   (`pre*` scripts): `sanity` and its plugins import `@sanity/ui/styles.css`,
   which the workspace `exports` map to `packages/ui/dist/styles.css` — the
   one subpath that needs a build, and `pnpm install` only runs the package's
   `prepare` build when it actually installs something (not with a cached
   `node_modules`, as on Vercel).
-  `pnpm --filter sanity-ui-studio deploy` updates the hosted studio (the
-  `appId` in `apps/studio/sanity.cli.ts`). In Cloud Agent VMs,
+  `pnpm --filter sanity-ui-studio run deploy` updates the hosted studio (the
+  `appId` in `apps/studio/sanity.cli.ts`); it needs `run` because `deploy` on
+  its own is pnpm's built-in `pnpm deploy`. In Cloud Agent VMs,
   `SANITY_API_READ_TOKEN` and `SANITY_AUTH_TOKEN` are available as runtime
   secrets (injected as env vars when the VM starts). To sign in to the studio,
   open `http://localhost:3333/#token={SANITY_AUTH_TOKEN}` (Sanity consumes the

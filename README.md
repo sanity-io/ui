@@ -12,19 +12,12 @@ Studio live under `apps/`.
 | [`@sanity/ui`](packages/ui)                | React component library                 |
 | [`figma-plugin-sanity-ui`](packages/figma) | Figma plugin for Sanity UI theme tokens |
 
-The `@sanity/color` palette and its Figma plugin live in
-[sanity-io/color](https://github.com/sanity-io/color), the `@sanity/icons`
-icon components and the [icons.sanity.dev](https://icons.sanity.dev) catalog
-live in [sanity-io/icons](https://github.com/sanity-io/icons), and the
-`@sanity/logos` Sanity / GROQ logo components live in
-[sanity-io/logos](https://github.com/sanity-io/logos). Their Storybooks
-([color.sanity.dev](https://color.sanity.dev),
+The `@sanity/color` palette, the `@sanity/icons` icon components and the
+`@sanity/logos` Sanity / GROQ logo components are installed from npm. Their
+Storybooks ([color.sanity.dev](https://color.sanity.dev),
 [icons-storybook.sanity.dev](https://icons-storybook.sanity.dev) and
 [logos.sanity.dev](https://logos.sanity.dev)) are composed into this repo's
-Storybook. The `@sanity/themer` theme builder and its Studio tool live in
-[sanity-io/plugins](https://github.com/sanity-io/plugins), and
-`@sanity/themer-legacy` lives in
-[sanity-io/themer](https://github.com/sanity-io/themer).
+Storybook.
 
 ## Migration
 
@@ -38,10 +31,14 @@ See the [`@sanity/ui` migration guides](MIGRATION.md) when you upgrade from v2 t
 | [`apps/docs`](apps/docs)           | [sanity.io/ui](https://www.sanity.io/ui) docs site (fully static Next.js)    |
 | [`apps/studio`](apps/studio)       | Sanity Studio for the legacy docs dataset                                    |
 
+`apps/studio` is tied to an older deployment of `apps/docs` that rendered the
+previous docs site. Once [sanity.io/ui](https://www.sanity.io/ui) points
+elsewhere, both apps can be deleted.
+
 ## Requirements
 
 - Node.js `>=22.13`
-- [pnpm](https://pnpm.io) `11` (pinned via `packageManager` in `package.json`)
+- [pnpm](https://pnpm.io) `12` (pinned via `packageManager` in `package.json`)
 
 ## Getting started
 
@@ -65,15 +62,15 @@ rebuild.
 
 ### Common scripts
 
-| Script              | What it does                                        |
-| ------------------- | --------------------------------------------------- |
-| `pnpm build`        | Build all publishable packages and the Figma plugin |
-| `pnpm test`         | Unit tests (`@sanity/ui`)                           |
-| `pnpm test:browser` | Storybook browser tests (Chromium via Playwright)   |
-| `pnpm lint`         | Lint + type-check (oxlint)                          |
-| `pnpm format`       | Format with oxfmt                                   |
-| `pnpm knip`         | Unused files / dependencies / exports               |
-| `pnpm changeset`    | Add a changeset for a release                       |
+| Script              | What it does                                      |
+| ------------------- | ------------------------------------------------- |
+| `pnpm build`        | Build `@sanity/ui` and the Figma plugin           |
+| `pnpm test`         | Unit tests (`@sanity/ui`)                         |
+| `pnpm test:browser` | Storybook browser tests (Chromium via Playwright) |
+| `pnpm lint`         | Lint + type-check (oxlint)                        |
+| `pnpm format`       | Format with oxfmt                                 |
+| `pnpm knip`         | Unused files / dependencies / exports             |
+| `pnpm changeset`    | Add a changeset for a release                     |
 
 ## Contributing & releasing
 
