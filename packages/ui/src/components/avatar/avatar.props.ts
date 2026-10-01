@@ -6,8 +6,6 @@ import {TEXT_SIZE} from '../../types/Text'
 
 /** @public */
 export interface AvatarProps extends React.ComponentProps<'figure'> {
-  /** Arrow position */
-  arrowPosition?: 'top' | 'bottom'
   /** Avatar color */
   color?: AvatarColor
   /** Avatar initials */
@@ -19,11 +17,6 @@ export interface AvatarProps extends React.ComponentProps<'figure'> {
 }
 
 export const avatarProps: Record<string, PropDef> = {
-  arrowPosition: {
-    type: 'union',
-    className: 'arrow',
-    values: ['top', 'bottom'],
-  },
   color: {
     type: 'union',
     className: 'avatar',

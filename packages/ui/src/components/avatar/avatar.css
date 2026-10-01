@@ -47,23 +47,3 @@
 .sui-Avatar.sui-avatar-cyan {
   background-color: light-dark(var(--cyan-500), var(--cyan-400));
 }
-
-.sui-Avatar[class*="sui-arrow"]:after {
-  content: '';
-  background: inherit;
-  width: 10px;
-  height: 10px;
-  border-radius: 2px;
-  position: absolute;
-  left: 50%;
-  z-index: -1;
-  transform: translateX(-50%) rotate(45deg) skew(6deg, 6deg);
-}
-
-.sui-Avatar.sui-arrow-top:after {
-  top: -3px;
-}
-
-.sui-Avatar.sui-arrow-bottom:after {
-  bottom: -3px;
-}
