@@ -13,6 +13,7 @@ import {
   Radio,
   Switch,
   Text,
+  TextInput,
   VStack,
 } from '@sanity/ui'
 
@@ -50,6 +51,7 @@ function Ui5() {
               </HStack>
             </Card>
             <Switch label="Engage warp drive" />
+            <TextInput aria-label="Set stardate" />
           </VStack>
         </Container>
         <Divider marginY={4} />

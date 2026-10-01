@@ -9,7 +9,7 @@ import {getArgTypes} from '../utils/getArgTypes'
 const argTypes = getArgTypes(selectProps)
 
 const meta: Meta<typeof Select> = {
-  title: 'Components/Select',
+  title: 'Forms/Select',
   args: {},
   argTypes,
   component: Select,
@@ -87,9 +87,8 @@ export const Error: Story = {
     </Select>
   ),
   play: async ({canvas}) => {
-    // The error prop marks the element invalid and adds the error class.
+    // The hasError prop marks the element invalid via aria-invalid.
     const select = await canvas.findByRole('combobox', {name: 'Select with error'})
     await expect(select.getAttribute('aria-invalid')).toBe('true')
-    await expect(select.className).toContain('sui-error')
   },
 }

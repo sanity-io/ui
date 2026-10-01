@@ -27,6 +27,7 @@ import {
   Spinner,
   Switch,
   Text,
+  TextInput,
   Tooltip,
   TooltipGroup,
   VisuallyHidden,
@@ -199,6 +200,13 @@ export default function Ui5() {
       <Profiler id="Radio" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Radio key={i} name="radio" label="Radio" />
+        ))}
+      </Profiler>
+
+      <h2>{count} TextInputs</h2>
+      <Profiler id="TextInput" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <TextInput key={i} aria-label="Text input" />
         ))}
       </Profiler>
 

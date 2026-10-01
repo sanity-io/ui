@@ -10,7 +10,7 @@ import {getArgTypes} from '../utils/getArgTypes'
 const argTypes = getArgTypes(radioProps)
 
 const meta: Meta<typeof Radio> = {
-  title: 'Components/Radio',
+  title: 'Forms/Radio',
   args: {},
   argTypes,
   component: Radio,
