@@ -10,6 +10,7 @@
 .sui-Avatar .sui-Eyebrow {
   color: light-dark(var(--white), var(--black));
   font-size: inherit;
+  font-weight: var(--bold);
 }
 
 .sui-Avatar.sui-avatar-gray {

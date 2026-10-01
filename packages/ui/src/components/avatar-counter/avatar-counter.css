@@ -5,4 +5,5 @@
 
 .sui-AvatarCounter .sui-Eyebrow {
   font-size: inherit;
+  font-weight: var(--bold);
 }

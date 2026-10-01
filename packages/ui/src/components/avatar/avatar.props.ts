@@ -10,7 +10,7 @@ export interface AvatarProps extends React.ComponentProps<'figure'> {
   color?: AvatarColor
   /** Avatar initials */
   initials: string
-  /** Composite prop for setting width, height, and font */
+  /** Composite prop for setting height and font size */
   size?: Responsive<AvatarSize>
   /** Avatar image src */
   src?: string
@@ -39,6 +39,7 @@ export const avatarProps: Record<string, PropDef> = {
           0: 0,
           1: 1,
           2: 3,
+          3: 5,
         },
       },
       height: {
@@ -47,6 +48,7 @@ export const avatarProps: Record<string, PropDef> = {
           0: '19px',
           1: '25px',
           2: '33px',
+          3: '49px',
         },
       },
     },
