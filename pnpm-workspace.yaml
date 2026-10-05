@@ -29,7 +29,7 @@ catalog:
   '@types/react-is': ^19.3.0
   '@vanilla-extract/css': ^1.21.2
   '@vanilla-extract/dynamic': ^2.1.5
-  '@vitejs/plugin-react': ^6.1.1
+  '@vitejs/plugin-react': ^6.1.2
   motion: ^13.5.1
   oxc-transform-react: ^0.152.0
   react: ^19.3.0
@@ -86,26 +86,26 @@ minimumReleaseAgeExclude:
   - react-is@19.3.0
   - react@19.3.0
   - scheduler@0.28.0
-  - '@oxfmt/binding-android-arm-eabi@0.71.0'
-  - '@oxfmt/binding-android-arm64@0.71.0'
-  - '@oxfmt/binding-darwin-arm64@0.71.0'
-  - '@oxfmt/binding-darwin-x64@0.71.0'
-  - '@oxfmt/binding-freebsd-x64@0.71.0'
-  - '@oxfmt/binding-linux-arm-gnueabihf@0.71.0'
-  - '@oxfmt/binding-linux-arm-musleabihf@0.71.0'
-  - '@oxfmt/binding-linux-arm64-gnu@0.71.0'
-  - '@oxfmt/binding-linux-arm64-musl@0.71.0'
-  - '@oxfmt/binding-linux-ppc64-gnu@0.71.0'
-  - '@oxfmt/binding-linux-riscv64-gnu@0.71.0'
-  - '@oxfmt/binding-linux-riscv64-musl@0.71.0'
-  - '@oxfmt/binding-linux-s390x-gnu@0.71.0'
-  - '@oxfmt/binding-linux-x64-gnu@0.71.0'
-  - '@oxfmt/binding-linux-x64-musl@0.71.0'
-  - '@oxfmt/binding-openharmony-arm64@0.71.0'
-  - '@oxfmt/binding-win32-arm64-msvc@0.71.0'
-  - '@oxfmt/binding-win32-ia32-msvc@0.71.0'
-  - '@oxfmt/binding-win32-x64-msvc@0.71.0'
-  - oxfmt@0.71.0
+  - '@oxfmt/binding-android-arm-eabi@0.72.0'
+  - '@oxfmt/binding-android-arm64@0.72.0'
+  - '@oxfmt/binding-darwin-arm64@0.72.0'
+  - '@oxfmt/binding-darwin-x64@0.72.0'
+  - '@oxfmt/binding-freebsd-x64@0.72.0'
+  - '@oxfmt/binding-linux-arm-gnueabihf@0.72.0'
+  - '@oxfmt/binding-linux-arm-musleabihf@0.72.0'
+  - '@oxfmt/binding-linux-arm64-gnu@0.72.0'
+  - '@oxfmt/binding-linux-arm64-musl@0.72.0'
+  - '@oxfmt/binding-linux-ppc64-gnu@0.72.0'
+  - '@oxfmt/binding-linux-riscv64-gnu@0.72.0'
+  - '@oxfmt/binding-linux-riscv64-musl@0.72.0'
+  - '@oxfmt/binding-linux-s390x-gnu@0.72.0'
+  - '@oxfmt/binding-linux-x64-gnu@0.72.0'
+  - '@oxfmt/binding-linux-x64-musl@0.72.0'
+  - '@oxfmt/binding-openharmony-arm64@0.72.0'
+  - '@oxfmt/binding-win32-arm64-msvc@0.72.0'
+  - '@oxfmt/binding-win32-ia32-msvc@0.72.0'
+  - '@oxfmt/binding-win32-x64-msvc@0.72.0'
+  - oxfmt@0.72.0
   - '@oxlint/binding-android-arm-eabi@1.87.0'
   - '@oxlint/binding-android-arm64@1.87.0'
   - '@oxlint/binding-darwin-arm64@1.87.0'
@@ -155,6 +155,7 @@ minimumReleaseAgeExclude:
   - '@storybook/react@10.6.1'
   - storybook@10.6.1
   - eslint-plugin-storybook@10.6.1
+  - '@vitejs/plugin-react@6.1.2'
 
 minimumReleaseAgeExcludePrune: true
 
