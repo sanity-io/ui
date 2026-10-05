@@ -195,7 +195,7 @@ catalogs:
       specifier: ^6.1.1
       version: 6.1.1
     motion:
-      specifier: ^13.4.6
+      specifier: ^13.5.1
       version: 13.5.1
     oxc-transform-react:
       specifier: ^0.152.0
