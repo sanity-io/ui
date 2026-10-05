@@ -22,7 +22,7 @@ catalog:
   vite: ^8.2.2
 
 minimumReleaseAgeExclude:
-  - '@sanity-labs/design-tokens@0.0.2-alpha.5'
+  - '@sanity-labs/design-tokens@0.0.2-alpha.6'
   - '@sanity/ui@4.2.4'
 
 overrides:
