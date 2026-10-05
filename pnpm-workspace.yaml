@@ -22,7 +22,7 @@ catalog:
   '@sanity/icons': ^5.2.3
   '@sanity/logos': ^2.2.6
   '@sanity/tsdown-config': ^0.28.4
-  '@sanity/vanilla-extract-vite-plugin': ^0.2.20
+  '@sanity/vanilla-extract-vite-plugin': ^0.2.22
   '@types/node': ^24.19.1
   '@types/react': ^19.3.0
   '@types/react-dom': ^19.3.0

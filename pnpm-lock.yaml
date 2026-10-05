@@ -177,7 +177,7 @@ catalogs:
       specifier: ^0.28.4
       version: 0.28.4
     '@sanity/vanilla-extract-vite-plugin':
-      specifier: ^0.2.20
+      specifier: ^0.2.22
       version: 0.2.22
     '@types/node':
       specifier: ^24.19.1
