@@ -29,7 +29,7 @@ catalog:
   '@types/react-is': ^19.3.0
   '@vanilla-extract/css': ^1.21.2
   '@vanilla-extract/dynamic': ^2.1.5
-  '@vitejs/plugin-react': ^6.1.1
+  '@vitejs/plugin-react': ^6.1.2
   motion: ^13.5.1
   oxc-transform-react: ^0.152.0
   react: ^19.3.0
@@ -155,6 +155,7 @@ minimumReleaseAgeExclude:
   - '@storybook/react@10.6.1'
   - storybook@10.6.1
   - eslint-plugin-storybook@10.6.1
+  - '@vitejs/plugin-react@6.1.2'
 
 minimumReleaseAgeExcludePrune: true
 
