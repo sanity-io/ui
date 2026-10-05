@@ -21,7 +21,7 @@ catalog:
   '@sanity/color': ^3.0.9
   '@sanity/icons': ^5.2.3
   '@sanity/logos': ^2.2.6
-  '@sanity/tsdown-config': ^0.28.2
+  '@sanity/tsdown-config': ^0.28.4
   '@sanity/vanilla-extract-vite-plugin': ^0.2.20
   '@types/node': ^24.19.0
   '@types/react': ^19.3.0
