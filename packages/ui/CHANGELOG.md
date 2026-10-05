@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.14
+
+### Patch Changes
+
+- a95c442: feat!: reduce Heading scale to match UI v3/4
+
 ## 5.0.0-alpha.13
 
 ### Patch Changes
