@@ -304,7 +304,7 @@ importers:
         specifier: ^4.18.1
         version: 4.18.1
       next:
-        specifier: ^16.3.7
+        specifier: ^16.3.8
         version: 16.3.8(@babel/core@7.29.7(supports-color@8.1.1))(@playwright/test@1.63.0)(@types/node@24.19.1)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       pako:
         specifier: ^3.0.2
@@ -332,7 +332,7 @@ importers:
         version: 6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
     devDependencies:
       '@next/playwright':
-        specifier: ^16.3.7
+        specifier: ^16.3.8
         version: 16.3.8(@playwright/test@1.63.0)
       '@playwright/test':
         specifier: ^1.63.0
