@@ -18,16 +18,17 @@ import {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from 'react'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
-import {useElementSize} from '../../hooks/useElementSize'
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
+import {_elementSizeObserver, ElementRectValue} from '../../observers/elementSizeObserver'
 import {_getArrayProp} from '../../styles/helpers'
 import {useTheme_v2} from '../../theme/useTheme'
 import {BoxOverflow} from '../../types/box'
@@ -204,7 +205,13 @@ export function Popover(
   const zOffsetProp = _zOffsetProp ?? layer.popover.zOffset
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
-  const boundarySize = useElementSize(boundaryElement)?.border
+
+  // Opening renders the popover whether or not any intent preceded it. A `disabled` popover
+  // renders only its child, so neither `open` nor intent counts while it is disabled: otherwise
+  // enabling it later would render it hidden without it ever having opened or been about to.
+  const isOpen = Boolean(open) && !disabled
+
+  const boundarySize = useBoundarySize(boundaryElement, isOpen)
   const padding = _getArrayProp(paddingProp)
   const radius = _getArrayProp(radiusProp)
   const shadow = _getArrayProp(shadowProp)
@@ -307,11 +314,6 @@ export function Popover(
   // stays rendered so the state of its `content` survives reopening. Consumers that do not want
   // a popover pre-rendered on intent can leave `content` empty until it opens.
   const [hasRendered, setHasRendered] = useState(false)
-
-  // Opening renders the popover whether or not any intent preceded it. A `disabled` popover
-  // renders only its child, so neither `open` nor intent counts while it is disabled: otherwise
-  // enabling it later would render it hidden without it ever having opened or been about to.
-  const isOpen = Boolean(open) && !disabled
 
   if (isOpen && !hasRendered) setHasRendered(true)
 
@@ -440,6 +442,52 @@ export function Popover(
       {child}
     </>
   )
+}
+
+/**
+ * The border-box size of the boundary element, tracked only while the popover is open.
+ *
+ * Closed popovers have nothing to size, so they hold no `ResizeObserver` subscription and do not
+ * re-render when the boundary resizes (one subscription per popover, every closed popover
+ * re-rendering on every boundary resize, is what this replaces). The boundary is measured
+ * synchronously in a layout effect when the popover opens, so the max width is right in the first
+ * painted frame instead of one `ResizeObserver` callback later; the shared observer takes over
+ * from there. The last size is kept while closed.
+ */
+function useBoundarySize(element: HTMLElement | null, open: boolean): ElementRectValue | undefined {
+  const [size, setSize] = useState<ElementRectValue | undefined>(undefined)
+
+  useLayoutEffect(() => {
+    if (!open || !element) return undefined
+
+    // Measuring the boundary is what this effect is for: the DOM is only measurable after the
+    // commit, and the result has to be in the next paint
+    // oxlint-disable-next-line react/set-state-in-effect
+    setSize((prev) => sameSize(prev, measureBorderBox(element)))
+
+    return _elementSizeObserver.subscribe(element, (elementSize) =>
+      setSize((prev) => sameSize(prev, elementSize.border)),
+    )
+  }, [element, open])
+
+  return size
+}
+
+/**
+ * Kept at module scope on purpose: `getBoundingClientRect` forces a synchronous layout, and the
+ * React Compiler (which the package build runs) lifts a member expression on an element captured
+ * by a component callback into a memo dependency evaluated during render. A plain function call
+ * on the element gives it nothing to lift.
+ */
+function measureBorderBox(element: HTMLElement): ElementRectValue {
+  const {width, height} = element.getBoundingClientRect()
+
+  return {width, height}
+}
+
+/** Keeps the previous object when the size has not changed, so `setState` bails out */
+function sameSize(prev: ElementRectValue | undefined, next: ElementRectValue): ElementRectValue {
+  return prev && prev.width === next.width && prev.height === next.height ? prev : next
 }
 
 function useMiddleware({

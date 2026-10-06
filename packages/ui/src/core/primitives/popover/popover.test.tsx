@@ -7,9 +7,10 @@ import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
 import {useState} from 'react'
-import {describe, expect, it, vi} from 'vitest'
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
+import {BoundaryElementProvider} from '../../utils/boundaryElement/boundaryElementProvider'
 import {Button} from '../button/button'
 import {Text} from '../text/text'
 import {Popover, type PopoverProps} from './popover'
@@ -399,6 +400,160 @@ describe('Popover', () => {
       fireEvent.focusIn(reference)
 
       expectRenderedHidden()
+    })
+  })
+
+  describe('boundary size while closed', () => {
+    /**
+     * Records every `ResizeObserver` the popover creates, so that the tests can count observations
+     * and deliver sizes. Replaces the no-op mock imported at the top for these tests only.
+     */
+    class RecordingResizeObserver {
+      static instances: RecordingResizeObserver[] = []
+      static observed: Element[] = []
+
+      callback: ResizeObserverCallback
+      targets = new Set<Element>()
+      disconnected = false
+
+      constructor(callback: ResizeObserverCallback) {
+        this.callback = callback
+        RecordingResizeObserver.instances.push(this)
+      }
+
+      observe(target: Element) {
+        this.targets.add(target)
+        RecordingResizeObserver.observed.push(target)
+      }
+
+      unobserve(target: Element) {
+        this.targets.delete(target)
+      }
+
+      disconnect() {
+        this.targets.clear()
+        this.disconnected = true
+      }
+
+      /** Delivers a border-box size for `target`, like the browser does after a resize */
+      resize(target: Element, width: number, height: number) {
+        const size = {inlineSize: width, blockSize: height}
+
+        this.callback(
+          [
+            {
+              target,
+              contentRect: target.getBoundingClientRect(),
+              borderBoxSize: [size],
+              contentBoxSize: [size],
+              devicePixelContentBoxSize: [size],
+            },
+          ],
+          this,
+        )
+      }
+    }
+
+    function observersOf(target: Element) {
+      return RecordingResizeObserver.instances.filter((ro) => ro.targets.has(target))
+    }
+
+    /** How many times `target` was observed (Floating UI observes the reference and card too) */
+    function timesObserved(target: Element) {
+      return RecordingResizeObserver.observed.filter((observed) => observed === target).length
+    }
+
+    /** The popover card's inline `max-width`, which follows the boundary width minus the padding */
+    function cardMaxWidth() {
+      return document.querySelector<HTMLElement>('[data-ui="Popover"]')?.style.maxWidth
+    }
+
+    function Example(props: {boundaryWidth: number; open?: boolean}) {
+      const [boundary, setBoundary] = useState<HTMLDivElement | null>(null)
+
+      return (
+        <div
+          data-testid="boundary"
+          ref={(node) => {
+            if (node)
+              vi.spyOn(node, 'getBoundingClientRect').mockReturnValue(rect(props.boundaryWidth))
+            setBoundary(node)
+          }}
+        >
+          <BoundaryElementProvider element={boundary}>
+            <Popover content={content} open={props.open}>
+              <Button text="Reference" />
+            </Popover>
+          </BoundaryElementProvider>
+        </div>
+      )
+    }
+
+    function rect(width: number): DOMRect {
+      return {
+        x: 0,
+        y: 0,
+        top: 0,
+        left: 0,
+        right: width,
+        bottom: 100,
+        width,
+        height: 100,
+        toJSON: () => ({}),
+      }
+    }
+
+    beforeEach(() => {
+      RecordingResizeObserver.instances = []
+      RecordingResizeObserver.observed = []
+      vi.stubGlobal('ResizeObserver', RecordingResizeObserver)
+    })
+
+    afterEach(() => {
+      vi.unstubAllGlobals()
+    })
+
+    // `strict: false`: StrictMode runs every effect twice on mount, which would double the counts
+    // the tests below are about
+    it('does not observe the boundary element while closed, pre-rendered on intent or not', () => {
+      render(<Example boundaryWidth={300} />, {strict: false})
+
+      expect(RecordingResizeObserver.observed).toEqual([])
+
+      fireEvent.pointerEnter(getReference())
+      expectRenderedHidden()
+
+      // Nothing at all: no boundary observation, and Floating UI (which observes the reference
+      // and the card while open) is not running either
+      expect(RecordingResizeObserver.observed).toEqual([])
+    })
+
+    it('observes the boundary element only while open, and has its width in the opening commit', () => {
+      const {rerender} = render(<Example boundaryWidth={300} />, {strict: false})
+      const boundary = screen.getByTestId('boundary')
+
+      rerender(<Example boundaryWidth={300} open />)
+
+      // Measured synchronously on open (`300 - 2 * DEFAULT_POPOVER_PADDING`), before any
+      // `ResizeObserver` callback has had a chance to run
+      expect(cardMaxWidth()).toBe('292px')
+      expect(timesObserved(boundary)).toBe(1)
+
+      // Followed while open
+      act(() => observersOf(boundary)[0].resize(boundary, 200, 100))
+      expect(cardMaxWidth()).toBe('192px')
+
+      rerender(<Example boundaryWidth={300} />)
+
+      expect(observersOf(boundary)).toEqual([])
+      expect(RecordingResizeObserver.instances.at(-1)?.disconnected).toBe(true)
+
+      // A later open observes it again (the shared observer forgets an element once its last
+      // subscriber leaves)
+      rerender(<Example boundaryWidth={300} open />)
+
+      expect(timesObserved(boundary)).toBe(2)
+      expect(cardMaxWidth()).toBe('292px')
     })
   })
 })
