@@ -239,12 +239,19 @@ describe('component identifiers', () => {
           <Menu>
             <MenuItem text="Item" />
             <MenuDivider />
-            <MenuGroup text="Group">
+            {/* Closed popovers render nothing until they open or are about to, so ask for the
+                pre-render that puts their identifiers in the DOM */}
+            <MenuGroup popover={{prerender: true}} text="Group">
               <MenuItem text="Nested" />
             </MenuGroup>
           </Menu>
         </LayerProvider>
-        <MenuButton button={<Button text="Open" />} id="menu-button" menu={<Menu />} />
+        <MenuButton
+          button={<Button text="Open" />}
+          id="menu-button"
+          menu={<Menu />}
+          popover={{prerender: true}}
+        />
         <Popover content="Popover" modal open>
           <Button text="Reference" />
         </Popover>

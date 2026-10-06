@@ -102,6 +102,29 @@ export default function Page() {
               </PlainContent>
             ),
           },
+          {
+            name: 'prerender',
+            type: "boolean | 'intent'",
+            description: (
+              <PlainContent>
+                <PlainParagraph>
+                  {
+                    'When a closed popover is first rendered (hidden, so that opening it is instant): '
+                  }
+                  <code>{"'intent'"}</code>
+                  {
+                    ' (default) once the reference element receives focus or a pointer enters or presses it, '
+                  }
+                  <code>true</code>
+                  {' as soon as the popover itself renders, '}
+                  <code>false</code>
+                  {
+                    ' not before it opens for the first time. Once rendered, it stays rendered while closed.'
+                  }
+                </PlainParagraph>
+              </PlainContent>
+            ),
+          },
           {name: 'preventOverflow', type: 'boolean'},
           {name: 'radius', type: 'number | number[]'},
           {name: 'referenceElement', type: 'HTMLElement | null'},
