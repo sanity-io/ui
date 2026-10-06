@@ -53,7 +53,7 @@ function expectMenuVisible() {
 }
 
 describe('MenuButton', () => {
-  describe('prerender', () => {
+  describe('pre-rendering while closed', () => {
     it('does not render the closed menu until the button shows intent to open it', () => {
       renderMenuButton()
 
@@ -149,23 +149,6 @@ describe('MenuButton', () => {
       expect(onClose).not.toHaveBeenCalled()
       // The pre-rendered menu lives in the portal, nothing was added next to the button
       expect(container.querySelector('[data-ui="MenuButton__popover"]')).toBeNull()
-    })
-
-    it('passes `prerender` on through the `popover` props', () => {
-      renderMenuButton({popover: {prerender: true}})
-
-      expectMenuRenderedHidden()
-    })
-
-    it('`popover={{prerender: false}}` ignores intent and renders the menu when it first opens', () => {
-      renderMenuButton({popover: {prerender: false}})
-
-      fireEvent.focusIn(getButton())
-      fireEvent.pointerEnter(getButton())
-      expectMenuNotRendered()
-
-      fireEvent.click(getButton())
-      expectMenuVisible()
     })
   })
 })

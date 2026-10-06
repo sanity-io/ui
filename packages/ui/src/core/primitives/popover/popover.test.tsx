@@ -49,7 +49,7 @@ function expectVisible() {
 }
 
 describe('Popover', () => {
-  describe('prerender', () => {
+  describe('pre-rendering while closed', () => {
     it('does not render a closed popover until the reference element shows intent to open it', () => {
       render(
         <Popover content={content}>
@@ -263,44 +263,6 @@ describe('Popover', () => {
       rerender(<Popover content={content} open referenceElement={reference} />)
 
       expect(intentListeners()).toBe(0)
-    })
-
-    it('`prerender` renders the closed popover right away', () => {
-      render(
-        <Popover content={content} prerender>
-          <Button text="Reference" />
-        </Popover>,
-      )
-
-      expectRenderedHidden()
-    })
-
-    it('`prerender={false}` ignores intent and renders the popover when it first opens', () => {
-      const {rerender} = render(
-        <Popover content={content} prerender={false}>
-          <Button text="Reference" />
-        </Popover>,
-      )
-
-      fireEvent.focusIn(getReference())
-      fireEvent.pointerEnter(getReference())
-      expectNotRendered()
-
-      rerender(
-        <Popover content={content} open prerender={false}>
-          <Button text="Reference" />
-        </Popover>,
-      )
-
-      expectVisible()
-
-      rerender(
-        <Popover content={content} prerender={false}>
-          <Button text="Reference" />
-        </Popover>,
-      )
-
-      expectRenderedHidden()
     })
 
     it('pre-renders and shows an `animate` popover the same way', () => {

@@ -1,5 +1,6 @@
 /** @vitest-environment jsdom */
 
+import {fireEvent} from '@testing-library/react'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 // oxlint-disable-next-line no-unassigned-import
@@ -239,19 +240,12 @@ describe('component identifiers', () => {
           <Menu>
             <MenuItem text="Item" />
             <MenuDivider />
-            {/* Closed popovers render nothing until they open or are about to, so ask for the
-                pre-render that puts their identifiers in the DOM */}
-            <MenuGroup popover={{prerender: true}} text="Group">
+            <MenuGroup text="Group">
               <MenuItem text="Nested" />
             </MenuGroup>
           </Menu>
         </LayerProvider>
-        <MenuButton
-          button={<Button text="Open" />}
-          id="menu-button"
-          menu={<Menu />}
-          popover={{prerender: true}}
-        />
+        <MenuButton button={<Button text="Open" />} id="menu-button" menu={<Menu />} />
         <Popover content="Popover" modal open>
           <Button text="Reference" />
         </Popover>
@@ -289,6 +283,11 @@ describe('component identifiers', () => {
         <VirtualList />
       </>,
     )
+
+    // Closed popovers render nothing until they open or are about to, so show intent to open the
+    // menu button's and the menu group's popovers, which puts their identifiers in the DOM
+    fireEvent.pointerEnter(document.getElementById('menu-button')!)
+    fireEvent.pointerEnter(document.querySelector('[data-ui="MenuGroup"]')!)
 
     expectIdentifiers(PUBLIC_IDENTIFIERS)
     expectIdentifiers(COMPOSITE_IDENTIFIERS)
