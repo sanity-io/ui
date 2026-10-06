@@ -9,6 +9,10 @@
  * - `url` defaults to a single story rendered through `iframe.html`. Tool discovery only sees the
  *   top-level document, so stories must be opened that way rather than through the manager UI.
  * - `CHROME_PATH` overrides the Chrome executable that is used.
+ * - Extra Chrome arguments go after `--`. They cannot set the switches the launcher relies on
+ *   (`--remote-debugging-address`, `--remote-debugging-port`, `--remote-debugging-pipe`,
+ *   `--user-data-dir`, `--headless`; see `./chrome-args.ts`), and they are placed before the
+ *   launcher's own switches, which Chromium therefore keeps when a switch is repeated.
  * - Chrome is started with an allowlisted environment (see `./chrome-environment.ts`) instead of
  *   the caller's, so tokens and keys in the shell never reach `/proc/<pid>/environ` for the
  *   browser's lifetime.
@@ -22,6 +26,7 @@ import {accessSync, constants, mkdirSync} from 'node:fs'
 import path from 'node:path'
 import {setTimeout as sleep} from 'node:timers/promises'
 
+import {buildChromeArgs, checkPassthroughArgs} from './chrome-args.ts'
 import {chromeEnvironment} from './chrome-environment.ts'
 
 const DEFAULT_URL = 'http://localhost:6006/iframe.html?viewMode=story&id=primitives-button--default'
@@ -91,6 +96,7 @@ function parseArgs(argv: string[]): Options {
   const passthroughIndex = argv.indexOf('--')
   const ownArgs = passthroughIndex === -1 ? argv : argv.slice(0, passthroughIndex)
   options.chromeArgs = passthroughIndex === -1 ? [] : argv.slice(passthroughIndex + 1)
+  checkPassthroughArgs(options.chromeArgs)
 
   for (let i = 0; i < ownArgs.length; i++) {
     const arg = ownArgs[i]
@@ -249,19 +255,15 @@ async function launchChrome(options: Options): Promise<Launched> {
   )
   mkdirSync(userDataDir, {recursive: true})
 
-  const args = [
-    `--remote-debugging-port=${options.port}`,
-    '--remote-debugging-address=127.0.0.1',
-    `--user-data-dir=${userDataDir}`,
-    '--no-first-run',
-    '--no-default-browser-check',
-    '--window-size=1440,900',
-    ...(options.headless ? ['--headless=new'] : []),
+  const args = buildChromeArgs({
+    port: options.port,
+    userDataDir,
+    headless: options.headless,
     // Chrome refuses to run its sandbox as root (containers, some CI runners)
-    ...(process.platform === 'linux' && process.getuid?.() === 0 ? ['--no-sandbox'] : []),
-    ...options.chromeArgs,
-    options.url.href,
-  ]
+    noSandbox: process.platform === 'linux' && process.getuid?.() === 0,
+    passthrough: options.chromeArgs,
+    url: options.url.href,
+  })
 
   const child = spawn(chrome, args, {
     detached: true,
