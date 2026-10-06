@@ -8,57 +8,93 @@ export interface _MediaQueryStore {
   getSnapshot: () => boolean
 }
 
-let matchMedia: typeof window.matchMedia | undefined
-const mediaQueryLists = new Map<string, MediaQueryList>()
-const mediaQueryStores = new Map<string, _MediaQueryStore>()
-
 /**
- * The `MediaQueryList` for a query, created once per query string and shared by every caller.
- * `window.matchMedia` evaluates the query and allocates a new list on every call, so hooks must
- * not call it per component instance, let alone per render. Client-only, like `window.matchMedia`.
- *
- * A list stays cached while its query store has subscribers and is dropped together with the
- * store (see `_getMediaQueryStore`). The cache also follows `window.matchMedia` itself: when a
- * different function is installed (a test mock, a late polyfill), the lists the previous one
- * handed out are dropped.
+ * How many stores without subscribers a cache keeps. Stores are created while rendering, and a
+ * render that is abandoned, suspended, or kept in a hidden `Activity` never subscribes, so
+ * nothing else would ever remove them. Beyond this many idle stores the least recently requested
+ * one goes; stores with subscribers are never evicted. The limit comfortably covers a theme's
+ * breakpoint ranges plus a few preference queries, so steady-state sharing is unaffected.
  *
  * @internal
  */
-export function _getMediaQueryList(query: string): MediaQueryList {
-  if (matchMedia !== window.matchMedia) {
-    matchMedia = window.matchMedia
-    mediaQueryLists.clear()
+export const _IDLE_STORE_LIMIT = 32
+
+/**
+ * Returns the entry for `key`, moving it to the most recently requested end of `cache`.
+ *
+ * @internal
+ */
+export function _getRecentlyUsed<T>(cache: Map<string, T>, key: string): T | undefined {
+  const entry = cache.get(key)
+
+  if (entry !== undefined) {
+    cache.delete(key)
+    cache.set(key, entry)
   }
 
-  let mediaQueryList = mediaQueryLists.get(query)
-
-  if (!mediaQueryList) {
-    mediaQueryList = window.matchMedia(query)
-    mediaQueryLists.set(query, mediaQueryList)
-  }
-
-  return mediaQueryList
+  return entry
 }
 
 /**
- * The store for a query, shared by every component that subscribes to it. Subscribers share one
- * `change` listener on the query's `MediaQueryList`, attached when the first subscriber arrives.
- * When the last subscriber leaves, the listener is removed and the store and its list are
- * evicted, so caller-provided queries that stop being used do not accumulate; the next
- * subscriber gets a fresh store. Creating a store touches nothing in the DOM, `window.matchMedia`
- * is only reached through `subscribe` and `getSnapshot`, which React never calls on the server,
- * and on the server nothing is cached at all.
+ * Keeps `cache` to at most `_IDLE_STORE_LIMIT` entries that `isActive` rejects, dropping the
+ * least recently requested ones first.
+ *
+ * @internal
+ */
+export function _evictIdle<T>(cache: Map<string, T>, isActive: (entry: T) => boolean): void {
+  let idle = 0
+
+  for (const entry of cache.values()) {
+    if (!isActive(entry)) idle += 1
+  }
+
+  for (const [key, entry] of cache) {
+    if (idle <= _IDLE_STORE_LIMIT) return
+    if (isActive(entry)) continue
+
+    cache.delete(key)
+    idle -= 1
+  }
+}
+
+let matchMedia: typeof window.matchMedia | undefined
+const mediaQueryStores = new Map<string, _MediaQueryStore>()
+const activeMediaQueryStores = new WeakSet<_MediaQueryStore>()
+
+/**
+ * The store for a query, shared by every component that asks for it, so a query is evaluated
+ * once rather than per component instance, let alone per render. Subscribers share one `change`
+ * listener on the store's `MediaQueryList`, attached when the first subscriber arrives. When the
+ * last subscriber leaves, the listener is removed and the store is evicted, so caller-provided
+ * queries that stop being used do not accumulate; the next subscriber gets a fresh store. Stores
+ * that render but never subscribe are capped by `_IDLE_STORE_LIMIT`.
+ *
+ * Creating a store touches nothing in the DOM: `window.matchMedia` is only reached through
+ * `subscribe` and `getSnapshot`, which React never calls on the server, and on the server nothing
+ * is cached at all. The cache also follows `window.matchMedia` itself: when a different function
+ * is installed (a test mock, a late polyfill), idle stores are dropped so the next request
+ * evaluates against the replacement, while subscribed stores keep the list their listener is on
+ * — snapshot and notifications always come from the same list — until they are let go of.
  *
  * @internal
  */
 export function _getMediaQueryStore(query: string): _MediaQueryStore {
   if (typeof window === 'undefined') return _createMediaQueryStore(query)
 
-  let store = mediaQueryStores.get(query)
+  if (matchMedia !== window.matchMedia) {
+    matchMedia = window.matchMedia
+
+    for (const [key, store] of mediaQueryStores) {
+      if (!activeMediaQueryStores.has(store)) mediaQueryStores.delete(key)
+    }
+  }
+
+  let store = _getRecentlyUsed(mediaQueryStores, query)
 
   if (!store) {
     store = _createMediaQueryStore(query)
     mediaQueryStores.set(query, store)
+    _evictIdle(mediaQueryStores, (entry) => activeMediaQueryStores.has(entry))
   }
 
   return store
@@ -66,32 +102,33 @@ export function _getMediaQueryStore(query: string): _MediaQueryStore {
 
 function _createMediaQueryStore(query: string): _MediaQueryStore {
   const subscribers = new Set<() => void>()
-  // The list the `change` listener is attached to, while there are subscribers. `getSnapshot`
-  // reads from that same list, so the value and the notifications always agree — also when
-  // `window.matchMedia` is replaced in the meantime and the cache starts handing out a new list
-  // (which this store picks up once it is subscribed to from scratch again).
-  let listening: {mediaQueryList: MediaQueryList; unlisten: () => void} | undefined
+  let mediaQueryList: MediaQueryList | undefined
+  let unlisten: (() => void) | undefined
+
+  // The store's own list, evaluated once and kept for the store's lifetime
+  const list = () => (mediaQueryList ??= window.matchMedia(query))
 
   const listen = () => {
-    const mediaQueryList = _getMediaQueryList(query)
+    const target = list()
     const handleChange = () => {
       for (const subscriber of subscribers) {
         subscriber()
       }
     }
 
-    mediaQueryList.addEventListener('change', handleChange)
+    target.addEventListener('change', handleChange)
 
-    return {
-      mediaQueryList,
-      unlisten: () => mediaQueryList.removeEventListener('change', handleChange),
-    }
+    return () => target.removeEventListener('change', handleChange)
   }
 
   const store: _MediaQueryStore = {
-    getSnapshot: () => (listening?.mediaQueryList ?? _getMediaQueryList(query)).matches,
+    getSnapshot: () => list().matches,
     subscribe(onStoreChange) {
-      if (!listening) listening = listen()
+      if (!unlisten) {
+        unlisten = listen()
+        activeMediaQueryStores.add(store)
+      }
+
       subscribers.add(onStoreChange)
 
       return () => {
@@ -99,16 +136,14 @@ function _createMediaQueryStore(query: string): _MediaQueryStore {
 
         if (subscribers.size > 0) return
 
-        listening?.unlisten()
-        listening = undefined
+        unlisten?.()
+        unlisten = undefined
+        activeMediaQueryStores.delete(store)
 
         // Evict, unless a newer store has already taken this query over (a component can
         // subscribe to a store it rendered with just after another one evicted it; that store
         // keeps working on its own and is released when the component re-renders)
-        if (mediaQueryStores.get(query) === store) {
-          mediaQueryStores.delete(query)
-          mediaQueryLists.delete(query)
-        }
+        if (mediaQueryStores.get(query) === store) mediaQueryStores.delete(query)
       }
     },
   }

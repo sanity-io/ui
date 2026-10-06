@@ -1,6 +1,11 @@
 import {useMemo, useSyncExternalStore} from 'react'
 
-import {_getMediaQueryStore, type _MediaQueryStore} from '../../observers/mediaQueryObserver'
+import {
+  _evictIdle,
+  _getMediaQueryStore,
+  _getRecentlyUsed,
+  type _MediaQueryStore,
+} from '../../observers/mediaQueryObserver'
 import {useTheme_v2} from '../../theme/useTheme'
 
 /**
@@ -29,14 +34,15 @@ function _getMediaQuery(media: number[], index: number): MediaQuery {
 }
 
 const mediaStores = new Map<string, _MediaStore>()
+const activeMediaStores = new WeakSet<_MediaStore>()
 
 /**
  * The store for a set of breakpoints, shared by every component that uses it (every `Layer` and
  * `Popover` does). Stores are keyed by content, so two arrays with the same breakpoints share one
  * store even when they are different instances. Each store subscribes once to the shared query
  * stores and fans the changes out to its subscribers; it is evicted when the last subscriber
- * leaves, so dynamically generated breakpoint arrays do not accumulate, and on the server
- * nothing is cached at all.
+ * leaves, so dynamically generated breakpoint arrays do not accumulate, stores that render but
+ * never subscribe are capped like the query stores, and on the server nothing is cached at all.
  *
  * @internal
  */
@@ -44,11 +50,12 @@ export function _getMediaStore(media: number[]): _MediaStore {
   if (typeof window === 'undefined') return _createMediaStore(media)
 
   const key = media.join(',')
-  let store = mediaStores.get(key)
+  let store = _getRecentlyUsed(mediaStores, key)
 
   if (!store) {
     store = _createMediaStore(media, key)
     mediaStores.set(key, store)
+    _evictIdle(mediaStores, (entry) => activeMediaStores.has(entry))
   }
 
   return store
@@ -110,7 +117,11 @@ function _createMediaStore(media: number[], key?: string): _MediaStore {
   const store: _MediaStore = {
     getSnapshot,
     subscribe(onStoreChange) {
-      if (!listening) listening = listen()
+      if (!listening) {
+        listening = listen()
+        activeMediaStores.add(store)
+      }
+
       subscribers.add(onStoreChange)
 
       return () => {
@@ -120,6 +131,7 @@ function _createMediaStore(media: number[], key?: string): _MediaStore {
 
         listening?.unlisten()
         listening = undefined
+        activeMediaStores.delete(store)
 
         // Evict, unless a newer store has already taken this key over (see `_getMediaQueryStore`)
         if (key !== undefined && mediaStores.get(key) === store) mediaStores.delete(key)

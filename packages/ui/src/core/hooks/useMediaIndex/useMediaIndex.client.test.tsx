@@ -1,6 +1,7 @@
 /** @vitest-environment jsdom */
 
 import {act, render, screen} from '@testing-library/react'
+import {Suspense} from 'react'
 import {afterEach, beforeEach, describe, expect, it} from 'vitest'
 
 import {
@@ -8,8 +9,10 @@ import {
   type MatchMediaController,
 } from '../../../../test/mocks/matchMediaController'
 import {buildTheme} from '../../../theme/build/buildTheme'
+import {_IDLE_STORE_LIMIT} from '../../observers/mediaQueryObserver'
 import {ThemeProvider} from '../../theme/themeProvider'
-import {useMediaIndex} from './useMediaIndex'
+import {useTheme_v2} from '../../theme/useTheme'
+import {_getMediaStore, type _MediaStore, useMediaIndex} from './useMediaIndex'
 
 const QUERIES = [
   'screen and (max-width: 599px)',
@@ -129,6 +132,58 @@ describe('useMediaIndex', () => {
 
     expect(controller.matchMedia).toHaveBeenCalledTimes(QUERIES.length)
     expect(screen.getByTestId('index-0')).toHaveTextContent('2')
+  })
+
+  it('caps the stores kept for breakpoint arrays that never subscribe', () => {
+    const arrays = Array.from({length: _IDLE_STORE_LIMIT + 1}, (_, index) => [600 + index])
+    const stores = arrays.map((media) => {
+      const store = _getMediaStore(media)
+
+      store.getSnapshot()
+
+      return store
+    })
+
+    // The most recently requested stores are still shared…
+    expect(_getMediaStore(arrays[1])).toBe(stores[1])
+    expect(_getMediaStore(arrays[_IDLE_STORE_LIMIT])).toBe(stores[_IDLE_STORE_LIMIT])
+
+    // …the least recently requested one made room
+    expect(_getMediaStore(arrays[0])).not.toBe(stores[0])
+  })
+
+  it('bounds what renders that never subscribe leave behind', async () => {
+    const pending = new Promise<void>(() => {})
+    const seen: _MediaStore[] = []
+
+    // Asks for its breakpoints, then suspends for good: the render never commits, so it never
+    // subscribes. The store is recorded through the same lookup the hook uses.
+    function Abandoned(): React.JSX.Element {
+      useMediaIndex()
+      seen.push(_getMediaStore(useTheme_v2().media))
+
+      throw pending
+    }
+
+    const count = _IDLE_STORE_LIMIT + 5
+    const arrays = Array.from({length: count}, (_, index) => [600 + index])
+
+    // Awaited: a sync act reports the never-settling suspensions as unflushed
+    await act(async () => {
+      for (const media of arrays) {
+        render(
+          <ThemeProvider theme={buildTheme({media})}>
+            <Suspense fallback={null}>
+              <Abandoned />
+            </Suspense>
+          </ThemeProvider>,
+        )
+      }
+    })
+
+    // The most recent abandoned renders' stores are still shared, the oldest made room
+    expect(_getMediaStore(arrays[count - 1])).toBe(seen.at(-1))
+    expect(_getMediaStore(arrays[0])).not.toBe(seen[0])
   })
 
   it('subscribes afresh after every component unmounted', () => {

@@ -12,7 +12,7 @@ import {render} from '../../../test/utils'
 import {Button} from '../primitives/button/button'
 import {Text} from '../primitives/text/text'
 import {Tooltip} from '../primitives/tooltip/tooltip'
-import {_getMediaQueryList, _getMediaQueryStore} from './mediaQueryObserver'
+import {_getMediaQueryStore, _IDLE_STORE_LIMIT} from './mediaQueryObserver'
 
 const QUERY = '(prefers-reduced-motion: reduce)'
 
@@ -27,21 +27,29 @@ describe('mediaQueryObserver', () => {
     controller.restore()
   })
 
-  it('creates one MediaQueryList per query', () => {
-    const list = _getMediaQueryList(QUERY)
+  it('evaluates a query once, for one shared store', () => {
+    const store = _getMediaQueryStore(QUERY)
 
-    expect(_getMediaQueryList(QUERY)).toBe(list)
-    expect(_getMediaQueryList('(prefers-color-scheme: dark)')).not.toBe(list)
-    expect(controller.matchMedia).toHaveBeenCalledTimes(2)
+    expect(store.getSnapshot()).toBe(false)
+    expect(store.getSnapshot()).toBe(false)
+    expect(_getMediaQueryStore(QUERY)).toBe(store)
+    expect(controller.matchMedia).toHaveBeenCalledTimes(1)
+
+    expect(_getMediaQueryStore('(prefers-color-scheme: dark)')).not.toBe(store)
   })
 
-  it('drops its lists when window.matchMedia is replaced', () => {
-    const list = _getMediaQueryList(QUERY)
+  it('drops idle stores when window.matchMedia is replaced', () => {
+    const store = _getMediaQueryStore(QUERY)
+
+    expect(store.getSnapshot()).toBe(false)
 
     controller.restore()
-    controller = installMatchMedia()
+    controller = installMatchMedia({[QUERY]: true})
 
-    expect(_getMediaQueryList(QUERY)).not.toBe(list)
+    const next = _getMediaQueryStore(QUERY)
+
+    expect(next).not.toBe(store)
+    expect(next.getSnapshot()).toBe(true)
     expect(controller.matchMedia).toHaveBeenCalledTimes(1)
   })
 
@@ -50,7 +58,6 @@ describe('mediaQueryObserver', () => {
     const first = vi.fn()
     const second = vi.fn()
 
-    expect(_getMediaQueryStore(QUERY)).toBe(store)
     expect(store.getSnapshot()).toBe(false)
 
     const unsubscribeFirst = store.subscribe(first)
@@ -83,7 +90,7 @@ describe('mediaQueryObserver', () => {
     expect(controller.matchMedia).toHaveBeenCalledTimes(1)
   })
 
-  it('evicts the store and its list with the last subscriber, and recreates them for the next', () => {
+  it('evicts the store with the last subscriber, and creates a fresh one for the next', () => {
     const store = _getMediaQueryStore(QUERY)
     const unsubscribe = store.subscribe(vi.fn())
 
@@ -179,6 +186,43 @@ describe('mediaQueryObserver', () => {
     expect(next.getSnapshot()).toBe(false)
 
     unsubscribeNext()
+  })
+
+  it('caps the stores kept for queries that render but never subscribe', () => {
+    const queries = Array.from(
+      {length: _IDLE_STORE_LIMIT + 1},
+      (_, index) => `(min-width: ${index}px)`,
+    )
+    const stores = queries.map((query) => {
+      const store = _getMediaQueryStore(query)
+
+      store.getSnapshot()
+
+      return store
+    })
+
+    expect(controller.matchMedia).toHaveBeenCalledTimes(_IDLE_STORE_LIMIT + 1)
+
+    // The most recently requested stores are still shared…
+    expect(_getMediaQueryStore(queries[1])).toBe(stores[1])
+    expect(_getMediaQueryStore(queries[_IDLE_STORE_LIMIT])).toBe(stores[_IDLE_STORE_LIMIT])
+
+    // …the least recently requested one made room
+    expect(_getMediaQueryStore(queries[0])).not.toBe(stores[0])
+  })
+
+  it('never evicts a store that has subscribers', () => {
+    const active = _getMediaQueryStore(QUERY)
+    const unsubscribe = active.subscribe(vi.fn())
+
+    for (let index = 0; index <= _IDLE_STORE_LIMIT + 5; index += 1) {
+      _getMediaQueryStore(`(min-width: ${index}px)`).getSnapshot()
+    }
+
+    expect(_getMediaQueryStore(QUERY)).toBe(active)
+    expect(controller.listenerCount(QUERY)).toBe(1)
+
+    unsubscribe()
   })
 
   it('evaluates each media query once for any number of closed tooltips', () => {

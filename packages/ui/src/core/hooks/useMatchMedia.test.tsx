@@ -1,15 +1,27 @@
 /** @vitest-environment jsdom */
 
 import {act, render, screen} from '@testing-library/react'
+import {Suspense} from 'react'
 import {afterEach, beforeEach, describe, expect, it} from 'vitest'
 
 import {
   installMatchMedia,
   type MatchMediaController,
 } from '../../../test/mocks/matchMediaController'
+import {_getMediaQueryStore, _IDLE_STORE_LIMIT} from '../observers/mediaQueryObserver'
+import {useMatchMedia} from './useMatchMedia'
 import {usePrefersReducedMotion} from './usePrefersReducedMotion'
 
 const QUERY = '(prefers-reduced-motion: reduce)'
+
+const pending = new Promise<void>(() => {})
+
+/** Asks for its query, then suspends for good: the render never commits, so it never subscribes */
+function Abandoned({query}: {query: `(${string})`}): React.JSX.Element {
+  useMatchMedia(query)
+
+  throw pending
+}
 
 function Motion({id}: {id: number}) {
   const reduced = usePrefersReducedMotion()
@@ -99,6 +111,34 @@ describe('useMatchMedia', () => {
 
     expect(screen.getByTestId('motion-0')).toHaveTextContent('true')
     expect(screen.getByTestId('motion-1')).toHaveTextContent('true')
+  })
+
+  it('bounds what renders that never subscribe leave behind', async () => {
+    const count = _IDLE_STORE_LIMIT + 5
+    const query = (index: number): `(${string})` => `(min-width: ${index}px)`
+
+    // Awaited: a sync act reports the never-settling suspensions as unflushed
+    await act(async () => {
+      for (let index = 0; index < count; index += 1) {
+        render(
+          <Suspense fallback={null}>
+            <Abandoned query={query(index)} />
+          </Suspense>,
+        )
+      }
+    })
+
+    // Every abandoned render evaluated its query once (the StrictMode re-render hits the cache)…
+    expect(controller.matchMedia).toHaveBeenCalledTimes(count)
+
+    // …the most recent ones are still cached, the oldest made room
+    _getMediaQueryStore(query(count - 1)).getSnapshot()
+
+    expect(controller.matchMedia).toHaveBeenCalledTimes(count)
+
+    _getMediaQueryStore(query(0)).getSnapshot()
+
+    expect(controller.matchMedia).toHaveBeenCalledTimes(count + 1)
   })
 
   it('subscribes afresh after every component unmounted', () => {
