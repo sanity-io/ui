@@ -285,19 +285,28 @@ export function Tooltip(
     }
   }, [showTooltip])
 
-  // // Set the max width of the tooltip based on boundaries and portals
-  useLayoutEffect(() => {
+  // Set the max width of the tooltip based on boundaries and portals.
+  // The widths are `offsetWidth` layout reads, each forcing a synchronous layout, so they only
+  // happen when the tooltip opens — not on mount of a closed tooltip, not when the boundary or
+  // portal element changes, and never during render. The effect event reads the latest elements
+  // without the effect depending on them.
+  const measureTooltipMaxWidth = useEffectEvent(() => {
     // Get the maximum tooltip width (sans tooltip padding)
     // Tooltip width should never exceed the width of either any supplied boundary or portal element.
     // If both portal and boundary elements are provided, use the smaller width of the two.
+    // Note: keep these reads conditional (no `portalElement?.offsetWidth`): the React Compiler
+    // hoists an unconditional property read of a captured value into a render-time dependency.
     const availableWidths = [
       ...(boundaryElement ? [boundaryElement.offsetWidth] : []),
-      portalElement?.offsetWidth || document.body.offsetWidth,
+      (portalElement ? portalElement.offsetWidth : 0) || document.body.offsetWidth,
     ]
 
-    // oxlint-disable-next-line react/set-state-in-effect
     setTooltipMaxWidth(Math.min(...availableWidths) - DEFAULT_TOOLTIP_PADDING * 2)
-  }, [boundaryElement, portalElement])
+  })
+
+  useLayoutEffect(() => {
+    if (showTooltip) measureTooltipMaxWidth()
+  }, [showTooltip])
 
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
