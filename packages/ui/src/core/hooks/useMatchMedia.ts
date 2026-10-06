@@ -1,4 +1,6 @@
-import {useCallback, useDebugValue, useSyncExternalStore} from 'react'
+import {useDebugValue, useSyncExternalStore} from 'react'
+
+import {_getMediaQueryStore} from '../observers/mediaQueryObserver'
 
 /**
  * Efficiently subscribes to `window.matchMedia` queries
@@ -13,16 +15,9 @@ export function useMatchMedia(
 ): boolean {
   useDebugValue(mediaQueryString)
 
-  return useSyncExternalStore(
-    useCallback(
-      (onStoreChange) => {
-        const media = window.matchMedia(mediaQueryString)
-        media.addEventListener('change', onStoreChange)
-        return () => media.removeEventListener('change', onStoreChange)
-      },
-      [mediaQueryString],
-    ),
-    () => window.matchMedia(mediaQueryString).matches,
-    getServerSnapshot,
-  )
+  // One store (and one `MediaQueryList`) per query string, shared by every component that asks
+  // for it, so neither rendering nor subscribing calls `window.matchMedia` again
+  const store = _getMediaQueryStore(mediaQueryString)
+
+  return useSyncExternalStore(store.subscribe, store.getSnapshot, getServerSnapshot)
 }

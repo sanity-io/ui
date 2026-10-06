@@ -1,5 +1,6 @@
 import {useMemo, useSyncExternalStore} from 'react'
 
+import {_getMediaQueryList, _getMediaQueryStore} from '../../observers/mediaQueryObserver'
 import {useTheme_v2} from '../../theme/useTheme'
 
 /**
@@ -27,51 +28,78 @@ function _getMediaQuery(media: number[], index: number): MediaQuery {
   return `screen and (min-width: ${media[index - 1]}px) and (max-width: ${media[index] - 1}px)`
 }
 
-function _createMediaStore(media: number[]): _MediaStore {
-  const mediaLen = media.length
-  let sizes: {mq: MediaQueryList; index: number}[]
+const mediaStores = new Map<string, _MediaStore>()
 
-  // The _createMediaStore function is called in both server and client environments.
-  // However since subscribe and getSnapshot are only called on the client we lazy init what we need for them
-  // so that we don't need to run checks for wether it's safe to call `window.matchMedia`
-  const getSizes = () => {
-    if (!sizes) {
-      sizes = []
+/**
+ * The store for a set of breakpoints, created once per distinct `media` content and shared by
+ * every component that uses it (every `Layer` and `Popover` does), so two arrays with the same
+ * breakpoints share one store even when they are different instances. Each store subscribes
+ * once to the shared query stores and fans the changes out to its subscribers.
+ */
+function _getMediaStore(media: number[]): _MediaStore {
+  const key = media.join(',')
+  let store = mediaStores.get(key)
 
-      for (let index = mediaLen; index > -1; index -= 1) {
-        const mediaQuery = _getMediaQuery(media, index)
-
-        sizes.push({index, mq: window.matchMedia(mediaQuery)})
-      }
-    }
-
-    return sizes
+  if (!store) {
+    store = _createMediaStore(media)
+    mediaStores.set(key, store)
   }
 
+  return store
+}
+
+function _createMediaStore(media: number[]): _MediaStore {
+  // Highest breakpoint first: the first query that matches wins in `getSnapshot`
+  const queries: {index: number; query: MediaQuery}[] = []
+
+  for (let index = media.length; index > -1; index -= 1) {
+    queries.push({index, query: _getMediaQuery(media, index)})
+  }
+
+  const subscribers = new Set<() => void>()
+  let unlisten: (() => void) | undefined
+
+  // `_getMediaQueryList` reaches `window.matchMedia`, so it is only called from `getSnapshot` and
+  // `subscribe`, which React never calls on the server (where `getServerSnapshot` is used)
   const getSnapshot = () => {
-    for (const {index, mq} of getSizes()) {
-      if (mq.matches) return index
+    for (const {index, query} of queries) {
+      if (_getMediaQueryList(query).matches) return index
     }
 
     return 0
   }
 
-  const subscribe = (onStoreChange: () => void) => {
-    const disposeFns: (() => void)[] = []
-
-    for (const {mq} of getSizes()) {
-      const handleChange = () => {
-        if (mq.matches) onStoreChange()
+  const listen = () => {
+    const notify = () => {
+      for (const subscriber of subscribers) {
+        subscriber()
       }
-
-      mq.addEventListener('change', handleChange)
-
-      disposeFns.push(() => mq.removeEventListener('change', handleChange))
     }
+    const disposeFns = queries.map(({query}) =>
+      _getMediaQueryStore(query).subscribe(() => {
+        // Crossing a breakpoint fires two queries, the one that stops matching and the one that
+        // starts matching; only the latter changes the index
+        if (_getMediaQueryList(query).matches) notify()
+      }),
+    )
 
     return () => {
       for (const disposeFn of disposeFns) {
         disposeFn()
+      }
+    }
+  }
+
+  const subscribe = (onStoreChange: () => void) => {
+    if (subscribers.size === 0) unlisten = listen()
+    subscribers.add(onStoreChange)
+
+    return () => {
+      subscribers.delete(onStoreChange)
+
+      if (subscribers.size === 0) {
+        unlisten?.()
+        unlisten = undefined
       }
     }
   }
@@ -82,7 +110,7 @@ function _createMediaStore(media: number[]): _MediaStore {
 /**
  * Only called during server-side rendering, and hydration if using hydrateRoot
  * Since the server environment doesn't have access to the DOM, we can't determine the current value of the media query
- * and we assume `(prefers-color-scheme: light)` since it's the most common scheme
+ * and we assume the smallest breakpoint
  *
  * @link https://beta.reactjs.org/apis/react/useSyncExternalStore#adding-support-for-server-rendering
  */
@@ -96,7 +124,7 @@ function getServerSnapshot() {
  */
 export function useMediaIndex(): number {
   const {media} = useTheme_v2()
-  const store = useMemo(() => _createMediaStore(media), [media])
+  const store = useMemo(() => _getMediaStore(media), [media])
 
   return useSyncExternalStore(store.subscribe, store.getSnapshot, getServerSnapshot)
 }
