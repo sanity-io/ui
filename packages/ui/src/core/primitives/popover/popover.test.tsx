@@ -468,6 +468,10 @@ describe('Popover', () => {
       return document.querySelector<HTMLElement>('[data-ui="Popover"]')?.style.maxWidth
     }
 
+    /**
+     * jsdom lays nothing out, so the boundary's offset size (what the popover measures on open) is
+     * defined on the element
+     */
     function Example(props: {boundaryWidth: number; open?: boolean}) {
       const [boundary, setBoundary] = useState<HTMLDivElement | null>(null)
 
@@ -475,8 +479,13 @@ describe('Popover', () => {
         <div
           data-testid="boundary"
           ref={(node) => {
-            if (node)
-              vi.spyOn(node, 'getBoundingClientRect').mockReturnValue(rect(props.boundaryWidth))
+            if (node) {
+              Object.defineProperty(node, 'offsetWidth', {
+                configurable: true,
+                value: props.boundaryWidth,
+              })
+              Object.defineProperty(node, 'offsetHeight', {configurable: true, value: 100})
+            }
             setBoundary(node)
           }}
         >
@@ -487,20 +496,6 @@ describe('Popover', () => {
           </BoundaryElementProvider>
         </div>
       )
-    }
-
-    function rect(width: number): DOMRect {
-      return {
-        x: 0,
-        y: 0,
-        top: 0,
-        left: 0,
-        right: width,
-        bottom: 100,
-        width,
-        height: 100,
-        toJSON: () => ({}),
-      }
     }
 
     beforeEach(() => {
@@ -523,8 +518,8 @@ describe('Popover', () => {
       fireEvent.pointerEnter(getReference())
       expectRenderedHidden()
 
-      // Nothing at all: no boundary observation, and Floating UI (which observes the reference
-      // and the card while open) is not running either
+      // No boundary observation, and Floating UI (which observes the reference and the card
+      // while open) is not running either
       expect(RecordingResizeObserver.observed).toEqual([])
     })
 
@@ -539,9 +534,14 @@ describe('Popover', () => {
       expect(cardMaxWidth()).toBe('292px')
       expect(timesObserved(boundary)).toBe(1)
 
-      // Followed while open
-      act(() => observersOf(boundary)[0].resize(boundary, 200, 100))
-      expect(cardMaxWidth()).toBe('192px')
+      // The observer's first delivery is the fractional layout size that `offsetWidth` rounds, so
+      // it agrees with the measurement and changes nothing
+      act(() => observersOf(boundary)[0].resize(boundary, 300.4, 100))
+      expect(cardMaxWidth()).toBe('292px')
+
+      // Followed while open, in whole pixels
+      act(() => observersOf(boundary)[0].resize(boundary, 200.6, 100))
+      expect(cardMaxWidth()).toBe('193px')
 
       rerender(<Example boundaryWidth={300} />)
 

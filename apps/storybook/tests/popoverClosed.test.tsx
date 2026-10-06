@@ -1,7 +1,7 @@
 import {BoundaryElementProvider, Button, Card, Text, ThemeProvider} from '@sanity/ui'
 import {Popover} from '@sanity/ui/popover'
 import {buildTheme} from '@sanity/ui/theme'
-import {Profiler, useState} from 'react'
+import {type CSSProperties, Profiler, useState} from 'react'
 import {afterEach, beforeEach, describe, expect, type MockInstance, test, vi} from 'vitest'
 import {render} from 'vitest-browser-react'
 import {page, userEvent} from 'vitest/browser'
@@ -25,17 +25,21 @@ function countCommit() {
  * so that opening can be triggered without pointer intent (a plain `click()`), and `content` is
  * wide enough to need the boundary's max width.
  */
-function Harness(props: {matchReferenceWidth?: boolean}) {
+function Harness(props: {
+  boundaryStyle?: CSSProperties
+  matchReferenceWidth?: boolean
+  wrapperStyle?: CSSProperties
+}) {
   const [open, setOpen] = useState(false)
   const [boundary, setBoundary] = useState<HTMLDivElement | null>(null)
 
   return (
     <ThemeProvider scheme="light" theme={theme}>
-      <Card padding={4}>
+      <Card padding={4} style={props.wrapperStyle}>
         <div
           id="boundary"
           ref={setBoundary}
-          style={{height: 200, overflow: 'auto', width: BOUNDARY_WIDTH}}
+          style={{height: 200, overflow: 'auto', width: BOUNDARY_WIDTH, ...props.boundaryStyle}}
         >
           <button id="toggle" onClick={() => setOpen((value) => !value)} type="button">
             toggle
@@ -108,8 +112,9 @@ describe('closed popover', () => {
   // Floating UI's `autoUpdate` (observers on the reference and the card, scroll and resize
   // listeners on their overflow ancestors) and the boundary size observation only run while the
   // popover is open: the floating element lives inside `<Activity mode="hidden">`, which detaches
-  // its ref, and the boundary is only observed while open.
-  test('holds no observers or listeners and runs no positioning while closed', async () => {
+  // its ref, and the boundary is only observed while open. (The intent listeners on the reference
+  // element, until the popover has rendered once, are a different matter and stay.)
+  test('holds no boundary or Floating UI observation and no positioning listeners while closed', async () => {
     await render(<Harness />)
 
     const resizeObserve = vi.spyOn(ResizeObserver.prototype, 'observe')
@@ -265,5 +270,60 @@ describe('closed popover', () => {
       expect(Math.abs(first.width - first.referenceWidth)).toBeLessThan(1)
       expect(second).toEqual(first)
     })
+  })
+
+  // The boundary is measured synchronously when the popover opens and followed by the shared
+  // `ResizeObserver` from then on. The two have to agree, or the observer's first delivery would
+  // correct the max width a frame after the first paint — the very thing the synchronous measure
+  // is there to prevent. `ResizeObserverEntry.borderBoxSize` is the layout size without CSS
+  // transforms, in the element's writing mode, so that is what the measurement reproduces (in
+  // whole pixels), not `getBoundingClientRect`.
+  describe('boundary measured like the observer reports it', () => {
+    /** The boundary's border-box size as a `ResizeObserver` reports it */
+    function observedBorderBox(element: Element) {
+      return new Promise<ResizeObserverSize>((resolve) => {
+        const observer = new ResizeObserver(([entry]) => {
+          observer.disconnect()
+          resolve(entry.borderBoxSize[0])
+        })
+
+        observer.observe(element)
+      })
+    }
+
+    const cases: Array<{name: string; props: Parameters<typeof Harness>[0]}> = [
+      {
+        name: 'a boundary mid scale transform, with a fractional width',
+        props: {boundaryStyle: {transform: 'scale(0.5)', width: 240.5}},
+      },
+      {
+        name: 'a boundary inside a scaled ancestor',
+        props: {boundaryStyle: {width: 240.5}, wrapperStyle: {transform: 'scale(0.37)'}},
+      },
+      {
+        name: 'a boundary in a vertical writing mode (its inline size is its height)',
+        props: {boundaryStyle: {writingMode: 'vertical-rl'}},
+      },
+    ]
+
+    for (const {name, props} of cases) {
+      test(`agrees with the observer for ${name}`, async () => {
+        await render(<Harness {...props} />)
+
+        const observed = await observedBorderBox(boundary())
+        const expectedMaxWidth = `${Math.round(observed.inlineSize) - BOUNDARY_PADDING}px`
+
+        document.getElementById('toggle')!.click()
+        await nextFrame()
+
+        // The synchronous measurement, before the popover's own observer has delivered anything
+        expect(card()!.style.maxWidth).toBe(expectedMaxWidth)
+
+        // The observer's first delivery, and the frames after it, change nothing
+        await settle()
+        await nextFrame()
+        expect(card()!.style.maxWidth).toBe(expectedMaxWidth)
+      })
+    }
   })
 })
