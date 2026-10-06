@@ -145,6 +145,42 @@ describe('mediaQueryObserver', () => {
     expect(controller.listenerCount(QUERY)).toBe(0)
   })
 
+  it('keeps a subscribed store on the list it listens to when window.matchMedia is replaced', () => {
+    const store = _getMediaQueryStore(QUERY)
+    const subscriber = vi.fn()
+    const unsubscribe = store.subscribe(subscriber)
+    const previous = controller
+
+    controller.restore()
+    controller = installMatchMedia({[QUERY]: true})
+
+    // The snapshot comes from the list the listener is attached to, not from the replacement
+    expect(store.getSnapshot()).toBe(false)
+    expect(controller.matchMedia).not.toHaveBeenCalled()
+
+    previous.setMatches(QUERY, true)
+
+    expect(subscriber).toHaveBeenCalledTimes(1)
+    expect(store.getSnapshot()).toBe(true)
+
+    // Once the store has been let go of, the next subscriber lands on the new implementation
+    unsubscribe()
+
+    const next = _getMediaQueryStore(QUERY)
+    const nextSubscriber = vi.fn()
+    const unsubscribeNext = next.subscribe(nextSubscriber)
+
+    expect(controller.matchMedia).toHaveBeenCalledTimes(1)
+    expect(next.getSnapshot()).toBe(true)
+
+    controller.setMatches(QUERY, false)
+
+    expect(nextSubscriber).toHaveBeenCalledTimes(1)
+    expect(next.getSnapshot()).toBe(false)
+
+    unsubscribeNext()
+  })
+
   it('evaluates each media query once for any number of closed tooltips', () => {
     const count = 20
 

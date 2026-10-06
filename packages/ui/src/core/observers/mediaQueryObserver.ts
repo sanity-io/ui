@@ -66,7 +66,11 @@ export function _getMediaQueryStore(query: string): _MediaQueryStore {
 
 function _createMediaQueryStore(query: string): _MediaQueryStore {
   const subscribers = new Set<() => void>()
-  let unlisten: (() => void) | undefined
+  // The list the `change` listener is attached to, while there are subscribers. `getSnapshot`
+  // reads from that same list, so the value and the notifications always agree — also when
+  // `window.matchMedia` is replaced in the meantime and the cache starts handing out a new list
+  // (which this store picks up once it is subscribed to from scratch again).
+  let listening: {mediaQueryList: MediaQueryList; unlisten: () => void} | undefined
 
   const listen = () => {
     const mediaQueryList = _getMediaQueryList(query)
@@ -78,13 +82,16 @@ function _createMediaQueryStore(query: string): _MediaQueryStore {
 
     mediaQueryList.addEventListener('change', handleChange)
 
-    return () => mediaQueryList.removeEventListener('change', handleChange)
+    return {
+      mediaQueryList,
+      unlisten: () => mediaQueryList.removeEventListener('change', handleChange),
+    }
   }
 
   const store: _MediaQueryStore = {
-    getSnapshot: () => _getMediaQueryList(query).matches,
+    getSnapshot: () => (listening?.mediaQueryList ?? _getMediaQueryList(query)).matches,
     subscribe(onStoreChange) {
-      if (subscribers.size === 0) unlisten = listen()
+      if (!listening) listening = listen()
       subscribers.add(onStoreChange)
 
       return () => {
@@ -92,8 +99,8 @@ function _createMediaQueryStore(query: string): _MediaQueryStore {
 
         if (subscribers.size > 0) return
 
-        unlisten?.()
-        unlisten = undefined
+        listening?.unlisten()
+        listening = undefined
 
         // Evict, unless a newer store has already taken this query over (a component can
         // subscribe to a store it rendered with just after another one evicted it; that store

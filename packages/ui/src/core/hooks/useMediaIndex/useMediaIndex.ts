@@ -1,6 +1,6 @@
 import {useMemo, useSyncExternalStore} from 'react'
 
-import {_getMediaQueryList, _getMediaQueryStore} from '../../observers/mediaQueryObserver'
+import {_getMediaQueryStore, type _MediaQueryStore} from '../../observers/mediaQueryObserver'
 import {useTheme_v2} from '../../theme/useTheme'
 
 /**
@@ -63,13 +63,20 @@ function _createMediaStore(media: number[], key?: string): _MediaStore {
   }
 
   const subscribers = new Set<() => void>()
-  let unlisten: (() => void) | undefined
+  // The query stores this store is subscribed to, while it has subscribers. `getSnapshot` reads
+  // from those same stores, so the index and its notifications always come from the same lists
+  // (see `_createMediaQueryStore`).
+  let listening: {stores: _MediaQueryStore[]; unlisten: () => void} | undefined
 
-  // `_getMediaQueryList` reaches `window.matchMedia`, so it is only called from `getSnapshot` and
-  // `subscribe`, which React never calls on the server (where `getServerSnapshot` is used)
+  // Reaches `window.matchMedia` through the query stores, so it is only called from
+  // `getSnapshot` and `subscribe`, which React never calls on the server (where
+  // `getServerSnapshot` is used)
+  const queryStore = (position: number) =>
+    listening?.stores[position] ?? _getMediaQueryStore(queries[position].query)
+
   const getSnapshot = () => {
-    for (const {index, query} of queries) {
-      if (_getMediaQueryList(query).matches) return index
+    for (let position = 0; position < queries.length; position += 1) {
+      if (queryStore(position).getSnapshot()) return queries[position].index
     }
 
     return 0
@@ -81,25 +88,29 @@ function _createMediaStore(media: number[], key?: string): _MediaStore {
         subscriber()
       }
     }
-    const disposeFns = queries.map(({query}) =>
-      _getMediaQueryStore(query).subscribe(() => {
+    const stores = queries.map((_, position) => queryStore(position))
+    const disposeFns = stores.map((target) =>
+      target.subscribe(() => {
         // Crossing a breakpoint fires two queries, the one that stops matching and the one that
         // starts matching; only the latter changes the index
-        if (_getMediaQueryList(query).matches) notify()
+        if (target.getSnapshot()) notify()
       }),
     )
 
-    return () => {
-      for (const disposeFn of disposeFns) {
-        disposeFn()
-      }
+    return {
+      stores,
+      unlisten: () => {
+        for (const disposeFn of disposeFns) {
+          disposeFn()
+        }
+      },
     }
   }
 
   const store: _MediaStore = {
     getSnapshot,
     subscribe(onStoreChange) {
-      if (subscribers.size === 0) unlisten = listen()
+      if (!listening) listening = listen()
       subscribers.add(onStoreChange)
 
       return () => {
@@ -107,8 +118,8 @@ function _createMediaStore(media: number[], key?: string): _MediaStore {
 
         if (subscribers.size > 0) return
 
-        unlisten?.()
-        unlisten = undefined
+        listening?.unlisten()
+        listening = undefined
 
         // Evict, unless a newer store has already taken this key over (see `_getMediaQueryStore`)
         if (key !== undefined && mediaStores.get(key) === store) mediaStores.delete(key)

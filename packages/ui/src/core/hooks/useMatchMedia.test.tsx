@@ -74,6 +74,33 @@ describe('useMatchMedia', () => {
     expect(controller.listenerCount(QUERY)).toBe(0)
   })
 
+  it('keeps mounted components on the list they subscribed to when window.matchMedia is replaced', () => {
+    const {unmount} = render(<Motions count={2} label="a" />)
+    const previous = controller
+
+    controller.restore()
+    controller = installMatchMedia()
+
+    // Changes keep arriving from the list the components subscribed to…
+    act(() => previous.setMatches(QUERY, true))
+
+    expect(screen.getByTestId('motion-0')).toHaveTextContent('true')
+    expect(screen.getByTestId('motion-1')).toHaveTextContent('true')
+    expect(controller.matchMedia).not.toHaveBeenCalled()
+
+    // …and a remount picks up the replacement
+    unmount()
+    render(<Motions count={2} label="b" />)
+
+    expect(controller.matchMedia).toHaveBeenCalledTimes(1)
+    expect(screen.getByTestId('motion-0')).toHaveTextContent('false')
+
+    act(() => controller.setMatches(QUERY, true))
+
+    expect(screen.getByTestId('motion-0')).toHaveTextContent('true')
+    expect(screen.getByTestId('motion-1')).toHaveTextContent('true')
+  })
+
   it('subscribes afresh after every component unmounted', () => {
     render(<Motions count={2} label="a" />).unmount()
 

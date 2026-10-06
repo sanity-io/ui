@@ -104,6 +104,33 @@ describe('useMediaIndex', () => {
     expect(controller.matchMedia).toHaveBeenCalledTimes(QUERIES.length)
   })
 
+  it('keeps mounted components on the lists they subscribed to when window.matchMedia is replaced', () => {
+    const {unmount} = render(<Indexes count={2} media={[600, 900]} />)
+    const previous = controller
+
+    controller.restore()
+    controller = installMatchMedia({[QUERIES[2]]: true})
+
+    // The index keeps following the lists the components subscribed to…
+    expect(screen.getByTestId('index-0')).toHaveTextContent('0')
+
+    act(() => {
+      previous.setMatches(QUERIES[0], false)
+      previous.setMatches(QUERIES[1], true)
+    })
+
+    expect(screen.getByTestId('index-0')).toHaveTextContent('1')
+    expect(screen.getByTestId('index-1')).toHaveTextContent('1')
+    expect(controller.matchMedia).not.toHaveBeenCalled()
+
+    // …and a remount picks up the replacement
+    unmount()
+    render(<Indexes count={2} media={[600, 900]} />)
+
+    expect(controller.matchMedia).toHaveBeenCalledTimes(QUERIES.length)
+    expect(screen.getByTestId('index-0')).toHaveTextContent('2')
+  })
+
   it('subscribes afresh after every component unmounted', () => {
     render(<Indexes count={2} media={[600, 900]} />).unmount()
 
