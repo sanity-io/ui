@@ -69,6 +69,16 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   the Storybooks at https://color.sanity.dev, https://icons-storybook.sanity.dev
   and https://logos.sanity.dev through composition refs (`refs` in
   `.storybook/main.ts`).
+- `pnpm react-devtools-mcp:storybook` starts the same Storybook with
+  `react-devtools-cdt-mcp/register` loaded in the preview iframe, which lets
+  `chrome-devtools-mcp` (`--categoryExperimentalThirdParty=true`) expose the
+  React component tree, props/hooks and a render profiler as `react_*` tools.
+  `pnpm react-devtools-mcp:chrome` opens a story in Chrome with the remote
+  debugging port (9222) that `.cursor/mcp.json` attaches to; when the MCP
+  server is not available (cloud agents), drive the same tools from the
+  terminal with `pnpm --filter sanity-ui-storybook exec chrome-devtools ...`.
+  Stories must be opened through `iframe.html?viewMode=story&id=<id>`. See the
+  `react-devtools-mcp` skill (`.agents/skills/react-devtools-mcp/SKILL.md`).
 - `pnpm test:browser` runs the Storybook tests (`apps/storybook`): vitest
   renders every story in headless Chromium via `@storybook/addon-vitest` and
   executes story `play` interactions, plus the browser tests in
