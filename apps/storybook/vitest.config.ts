@@ -81,7 +81,7 @@ export default defineConfig({
         },
       },
       {
-        // Pure helpers of the dev scripts (the Chrome launcher's environment allowlist); plain
+        // Pure helpers of the dev scripts (the Chrome launcher's environment allowlist and argv); plain
         // node, no browser
         test: {
           name: 'scripts',
