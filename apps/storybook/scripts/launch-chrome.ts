@@ -9,6 +9,9 @@
  * - `url` defaults to a single story rendered through `iframe.html`. Tool discovery only sees the
  *   top-level document, so stories must be opened that way rather than through the manager UI.
  * - `CHROME_PATH` overrides the Chrome executable that is used.
+ * - Chrome is started with an allowlisted environment (`CHROME_ENV_NAMES` / `CHROME_ENV_PREFIXES`
+ *   below) instead of the caller's, so tokens and keys in the shell never reach
+ *   `/proc/<pid>/environ` for the browser's lifetime.
  * - The profile lives in `node_modules/.cache/react-devtools-mcp/chrome-profile` and is reused
  *   across runs. Chrome stays open after this script exits; stop it with `kill <pid>`. When a
  *   browser already listens on the port, the url is opened as a new tab in it instead.
@@ -25,6 +28,45 @@ const STARTUP_TIMEOUT_MS = 30_000
 const PROBE_TIMEOUT_MS = 2_000
 
 const ALLOWED_PROTOCOLS = new Set(['http:', 'https:'])
+// Chrome gets exactly this environment and nothing else from the caller's shell. Covered: user
+// and paths, temp dirs, locale and time zone, the display and session bus, proxy settings,
+// custom CA bundles and Chrome's own CHROME_* knobs. GOOGLE_* is left out on purpose: this
+// launcher relies on none of those and GOOGLE_API_KEY / GOOGLE_DEFAULT_CLIENT_SECRET are
+// credentials.
+const CHROME_ENV_NAMES = new Set([
+  'HOME',
+  'PATH',
+  'USER',
+  'LOGNAME',
+  'SHELL',
+  'TMPDIR',
+  'TMP',
+  'TEMP',
+  'LANG',
+  'LANGUAGE',
+  'TZ',
+  'DISPLAY',
+  'WAYLAND_DISPLAY',
+  'XAUTHORITY',
+  'DBUS_SESSION_BUS_ADDRESS',
+  'HTTP_PROXY',
+  'HTTPS_PROXY',
+  'NO_PROXY',
+  'http_proxy',
+  'https_proxy',
+  'no_proxy',
+])
+const CHROME_ENV_PREFIXES = ['LC_', 'XDG_', 'SSL_CERT_', 'CHROME_']
+
+/** The allowlisted subset of `env` that Chrome is started with. */
+function chromeEnvironment(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
+  return Object.fromEntries(
+    Object.entries(env).filter(
+      ([name]) =>
+        CHROME_ENV_NAMES.has(name) || CHROME_ENV_PREFIXES.some((prefix) => name.startsWith(prefix)),
+    ),
+  )
+}
 
 interface Options {
   url: URL
@@ -258,7 +300,11 @@ async function launchChrome(options: Options): Promise<Launched> {
     options.url.href,
   ]
 
-  const child = spawn(chrome, args, {detached: true, stdio: 'ignore'})
+  const child = spawn(chrome, args, {
+    detached: true,
+    stdio: 'ignore',
+    env: chromeEnvironment(process.env),
+  })
   child.unref()
   let failure: Error | null = null
   // A spawn that fails (stale CHROME_PATH, missing binary) emits `error` and no `exit`; without a
@@ -289,9 +335,9 @@ async function main(): Promise<void> {
       ? await launchChrome(options)
       : await openInRunningBrowser(browserUrl, runningBrowser, options.url.href)
 
-  console.log(
-    `${browserName} is listening on ${browserUrl}${options.headless ? ' (headless)' : ''}`,
-  )
+  // A reused browser's mode is unknown; --headless only describes a Chrome started here
+  const mode = pid !== undefined && options.headless ? ' (headless)' : ''
+  console.log(`${browserName} is listening on ${browserUrl}${mode}`)
   console.log(`Opened ${describeUrl(options.url)}`)
   console.log(
     pid === undefined
