@@ -38,24 +38,24 @@ interface Options {
   chromeArgs: string[]
 }
 
-/** A raw url argument safe to echo in an error: any `user:password@` segment is redacted. */
-function redactUserinfo(value: string): string {
-  return value.replace(/[^/\s@]+:[^/\s@]+@/g, '<redacted>@')
-}
-
 /**
  * Parses the url to open. Anything that is not an absolute http(s) url is rejected up front, and
- * so is a url with embedded credentials, which would otherwise travel with it everywhere.
+ * so is a url with embedded credentials, which would otherwise travel with it everywhere. The
+ * errors never reflect the argument itself (it may hold a password, in shapes no redaction
+ * reliably catches); they name at most the parsed scheme and host.
  */
 function parseUrl(value: string): URL {
   let url: URL
   try {
     url = new URL(value)
   } catch {
-    throw new Error(`Invalid url "${redactUserinfo(value)}": expected an absolute http(s) url`)
+    throw new Error(
+      'Invalid url: expected an absolute http(s) url such as http://localhost:6006/iframe.html?viewMode=story&id=<story-id>',
+    )
   }
   if (!ALLOWED_PROTOCOLS.has(url.protocol)) {
-    throw new Error(`Invalid url "${redactUserinfo(value)}": expected an absolute http(s) url`)
+    const host = url.hostname === '' ? '' : ` (host ${url.hostname})`
+    throw new Error(`Invalid url: expected an http(s) url, got the "${url.protocol}" scheme${host}`)
   }
   if (url.username !== '' || url.password !== '') {
     throw new Error(
