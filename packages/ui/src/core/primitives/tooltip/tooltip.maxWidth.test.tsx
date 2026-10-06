@@ -196,6 +196,11 @@ describe('Tooltip max width measurement', () => {
    * array; the tooltip repositions itself against the new element instead. Without that, the
    * swap is at the mercy of Floating UI's deep comparison of the middleware, which treats two
    * plain elements as equal and never looks inside the `apply` closure that holds the portal.
+   *
+   * The boundary swap is also the guard for the repositioning effect's dependencies as compiled
+   * (this suite runs through the React Compiler): a boundary swap changes nothing else, so only
+   * an effect keyed on `boundaryElement` reads the new boundary. A portal swap re-parents the
+   * tooltip, which makes Floating UI reposition on its own, so it does not guard the dependency.
    */
   it('repositions against a boundary or portal element swapped while the tooltip is shown', async () => {
     const {rerender} = render(renderTooltip())

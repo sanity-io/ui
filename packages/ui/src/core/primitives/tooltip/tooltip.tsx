@@ -161,11 +161,13 @@ export function Tooltip(
   // The middleware reads the boundary and portal elements through refs (see `useMiddleware`), so
   // a change of either does not reach Floating UI by itself: reposition a shown tooltip against
   // the new element here, without tearing `autoUpdate` down. `update` is a no-op while the tooltip
-  // is closed, as there is no floating element then.
+  // is closed, as there is no floating element then. The body references the elements so that
+  // the dependencies the React Compiler and the linter infer from it are the authored ones; with
+  // neither element there is no tooltip DOM to reposition (`Portal` renders nothing).
   const reposition = useEffectEvent(() => update())
 
   useLayoutEffect(() => {
-    reposition()
+    if (boundaryElement || portalElement) reposition()
   }, [boundaryElement, portalElement])
 
   const arrowX = middlewareData.arrow?.x
