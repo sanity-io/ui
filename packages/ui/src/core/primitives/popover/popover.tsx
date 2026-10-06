@@ -308,11 +308,17 @@ export function Popover(
   // a popover pre-rendered on intent can leave `content` empty until it opens.
   const [hasRendered, setHasRendered] = useState(false)
 
-  // Opening renders the popover whether or not any intent preceded it
-  if (open && !hasRendered) setHasRendered(true)
+  // Opening renders the popover whether or not any intent preceded it. A `disabled` popover
+  // renders only its child, so neither `open` nor intent counts while it is disabled: otherwise
+  // enabling it later would render it hidden without it ever having opened or been about to.
+  const isOpen = Boolean(open) && !disabled
 
-  const shouldRender = Boolean(open) || hasRendered
-  const reference = elements.reference
+  if (isOpen && !hasRendered) setHasRendered(true)
+
+  const shouldRender = isOpen || hasRendered
+  // No reference to listen to while disabled, which also drops the listeners of one that was
+  // enabled before
+  const reference = disabled ? null : elements.reference
 
   useEffect(() => {
     if (shouldRender || !reference) return undefined
@@ -325,6 +331,12 @@ export function Popover(
     // `pointerdown` is a fallback for a pointer that was already over the element when it
     // rendered, which fires no `pointerenter`.
     for (const type of INTENT_EVENT_TYPES) reference.addEventListener(type, handleIntent)
+
+    // Focus that landed before the listeners did (an `autoFocus` reference, a `referenceElement`
+    // that was focused already) fired its `focusin` unheard, so count it now
+    const {activeElement} = reference.ownerDocument
+
+    if (activeElement && reference.contains(activeElement)) handleIntent()
 
     return () => {
       for (const type of INTENT_EVENT_TYPES) reference.removeEventListener(type, handleIntent)

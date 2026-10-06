@@ -118,6 +118,18 @@ describe('MenuButton', () => {
       },
     )
 
+    it('pre-renders the menu of a button that is focused before it renders', () => {
+      renderMenuButton({button: <Button autoFocus text="Open menu" />})
+
+      const button = getButton()
+
+      expect(button).toHaveFocus()
+      expectMenuRenderedHidden()
+
+      fireEvent.keyDown(button, {key: 'Enter'})
+      expectMenuVisible()
+    })
+
     it('renders the menu when it opens without prior intent', () => {
       const onOpen = vi.fn()
 

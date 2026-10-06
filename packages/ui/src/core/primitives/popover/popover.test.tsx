@@ -123,6 +123,32 @@ describe('Popover', () => {
       expect(screen.getByRole('button', {name: 'Next'})).toHaveFocus()
     })
 
+    it('counts a reference element that is focused before the popover renders as intent', () => {
+      render(
+        <Popover content={content}>
+          <Button autoFocus text="Reference" />
+        </Popover>,
+      )
+
+      expect(getReference()).toHaveFocus()
+      expectRenderedHidden()
+    })
+
+    it('counts an external `referenceElement` that is focused already as intent', () => {
+      const reference = document.createElement('button')
+
+      reference.textContent = 'External reference'
+      document.body.appendChild(reference)
+      reference.focus()
+      expect(reference).toHaveFocus()
+
+      render(<Popover content={content} referenceElement={reference} />)
+
+      expectRenderedHidden()
+
+      reference.remove()
+    })
+
     it('counts focus landing inside the reference element as intent', () => {
       render(
         <Popover content={content}>
@@ -300,6 +326,69 @@ describe('Popover', () => {
 
       expectNotRendered()
       expect(getReference()).toBeVisible()
+    })
+
+    it('does not count `open` while `disabled`, so enabling a closed popover renders nothing', () => {
+      const {rerender} = render(
+        <Popover content={content} disabled open>
+          <Button text="Reference" />
+        </Popover>,
+      )
+
+      expectNotRendered()
+
+      rerender(
+        <Popover content={content}>
+          <Button text="Reference" />
+        </Popover>,
+      )
+
+      expectNotRendered()
+
+      fireEvent.pointerEnter(getReference())
+      expectRenderedHidden()
+
+      rerender(
+        <Popover content={content} open>
+          <Button text="Reference" />
+        </Popover>,
+      )
+
+      expectVisible()
+    })
+
+    it('does not count intent while `disabled`', () => {
+      const reference = document.createElement('button')
+      const addEventListener = vi.spyOn(reference, 'addEventListener')
+      const removeEventListener = vi.spyOn(reference, 'removeEventListener')
+      const isIntentType = ([type]: [string, ...unknown[]]) =>
+        type === 'focusin' || type === 'pointerenter' || type === 'pointerdown'
+      const intentListeners = () =>
+        addEventListener.mock.calls.filter(isIntentType).length -
+        removeEventListener.mock.calls.filter(isIntentType).length
+
+      const {rerender} = render(<Popover content={content} disabled referenceElement={reference} />)
+
+      expect(intentListeners()).toBe(0)
+
+      fireEvent.focusIn(reference)
+      fireEvent.pointerEnter(reference)
+
+      rerender(<Popover content={content} referenceElement={reference} />)
+
+      // Nothing was latched while disabled; once enabled it is listening and still renders nothing
+      expectNotRendered()
+      expect(intentListeners()).toBe(3)
+
+      // Disabling again drops the listeners
+      rerender(<Popover content={content} disabled referenceElement={reference} />)
+
+      expect(intentListeners()).toBe(0)
+
+      rerender(<Popover content={content} referenceElement={reference} />)
+      fireEvent.focusIn(reference)
+
+      expectRenderedHidden()
     })
   })
 })
