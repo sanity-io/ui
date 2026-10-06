@@ -29,7 +29,8 @@ pnpm react-devtools-mcp:chrome "http://localhost:6006/iframe.html?viewMode=story
 pnpm react-devtools-mcp:chrome --headless            # no display (CI, cloud VM without X)
 
 # 3. chrome-devtools-mcp attached to that Chrome — pick ONE of:
-#    a) Cursor: .cursor/mcp.json already defines the `chrome-devtools` server with
+#    a) Cursor: .cursor/mcp.json defines the `chrome-devtools` server (the workspace-installed,
+#       lockfile-pinned chrome-devtools-mcp under apps/storybook/node_modules) with
 #       --categoryExperimentalThirdParty=true --browserUrl=http://127.0.0.1:9222
 #    b) Terminal / cloud agents (same tools, no MCP client needed):
 pnpm --filter sanity-ui-storybook exec chrome-devtools start \
@@ -115,7 +116,11 @@ priority: Sync, 156 components, sorted by actualDuration:
 - The `chrome-devtools` CLI and the MCP server are the same daemon; do not run both against the
   same Chrome at once. `pnpm --filter sanity-ui-storybook exec chrome-devtools status` / `stop`.
 - Chrome keeps running after `react-devtools-mcp:chrome` returns (it prints the pid); the profile
-  is reused from `apps/storybook/node_modules/.cache/react-devtools-mcp/chrome-profile`.
+  is reused from `apps/storybook/node_modules/.cache/react-devtools-mcp/chrome-profile`. Running
+  the command again while that Chrome is up opens the url as a new tab in it ("Reused the
+  browser that was already listening") instead of starting a second Chrome.
+- "Chrome exited before opening its debugging port": a Chrome using the profile is already
+  running without `--remote-debugging-port`. Close it and retry. `--port` must be 1–65535.
 - Prefer `--headless` on machines without a display; the script turns it on automatically when
   `DISPLAY` is unset on Linux. Set `CHROME_PATH` if Chrome is not found.
 - To let `chrome-devtools-mcp` launch its own Chrome instead, drop `--browserUrl` (and skip step 2);
