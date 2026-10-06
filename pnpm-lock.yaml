@@ -174,7 +174,7 @@ catalogs:
       specifier: ^2.2.6
       version: 2.2.6
     '@sanity/tsdown-config':
-      specifier: ^0.28.4
+      specifier: ^0.28.5
       version: 0.28.5
     '@sanity/vanilla-extract-vite-plugin':
       specifier: ^0.2.23
