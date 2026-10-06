@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.3.3
+
+### Patch Changes
+
+- [#3117](https://github.com/sanity-io/ui/pull/3117) [`7b0c700`](https://github.com/sanity-io/ui/commit/7b0c7003e5f30556fc5cf461ab04574a04bb62dc) Thanks [@stipsan](https://github.com/stipsan)! - `Tooltip` measures the boundary, portal and `document.body` widths it caps its max width to only when it opens. Previously it read their `offsetWidth` on mount and whenever the boundary or portal element changed, and the React Compiler also lifted `portalElement?.offsetWidth` into a render-time memo dependency — a forced synchronous layout per tooltip per render, which adds up in forms with many tooltips.
+
 ## 4.3.2
 
 ### Patch Changes
