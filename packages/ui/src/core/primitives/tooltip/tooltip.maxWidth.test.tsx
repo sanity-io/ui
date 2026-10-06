@@ -86,9 +86,15 @@ describe('Tooltip max width measurement', () => {
     boundaryElement = boundary.element,
     content = 'Tooltip content',
     disabled = false,
-  }: {boundaryElement?: HTMLElement; content?: string; disabled?: boolean} = {}) {
+    portalElement = portal.element,
+  }: {
+    boundaryElement?: HTMLElement
+    content?: string
+    disabled?: boolean
+    portalElement?: HTMLElement
+  } = {}) {
     return (
-      <PortalProvider element={portal.element}>
+      <PortalProvider element={portalElement}>
         <Tooltip
           boundaryElement={boundaryElement}
           content={<Text size={1}>{content}</Text>}
@@ -183,5 +189,38 @@ describe('Tooltip max width measurement', () => {
     expect(boundary.offsetWidth).toHaveBeenCalledTimes(boundaryReads)
     expect(portal.offsetWidth).toHaveBeenCalledTimes(portalReads)
     expect(bodyOffsetWidth).not.toHaveBeenCalled()
+  })
+
+  /**
+   * The middleware reads the elements through refs, so a swap does not change the middleware
+   * array; the tooltip repositions itself against the new element instead. Without that, the
+   * swap is at the mercy of Floating UI's deep comparison of the middleware, which treats two
+   * plain elements as equal and never looks inside the `apply` closure that holds the portal.
+   */
+  it('repositions against a boundary or portal element swapped while the tooltip is shown', async () => {
+    const {rerender} = render(renderTooltip())
+
+    fireEvent.mouseEnter(screen.getByText('Hover me'))
+    await flushPositioning()
+
+    const otherBoundary = createMeasuredElement(BOUNDARY_WIDTH)
+    const otherPortal = createMeasuredElement(PORTAL_WIDTH)
+
+    rerender(renderTooltip({boundaryElement: otherBoundary.element}))
+    await flushPositioning()
+
+    expect(screen.getByText('Tooltip content')).toBeVisible()
+    expect(otherBoundary.offsetWidth).toHaveBeenCalled()
+
+    rerender(
+      renderTooltip({boundaryElement: otherBoundary.element, portalElement: otherPortal.element}),
+    )
+    await flushPositioning()
+
+    expect(screen.getByText('Tooltip content')).toBeVisible()
+    expect(otherPortal.offsetWidth).toHaveBeenCalled()
+
+    otherBoundary.element.remove()
+    otherPortal.element.remove()
   })
 })

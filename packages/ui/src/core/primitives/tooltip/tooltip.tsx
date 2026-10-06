@@ -18,6 +18,8 @@ import {
   useEffect,
   useId,
   useImperativeHandle,
+  useInsertionEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -155,6 +157,16 @@ export function Tooltip(
     whileElementsMounted: autoUpdate,
     elements: {reference: referenceElement},
   })
+
+  // The middleware reads the boundary and portal elements through refs (see `useMiddleware`), so
+  // a change of either does not reach Floating UI by itself: reposition a shown tooltip against
+  // the new element here, without tearing `autoUpdate` down. `update` is a no-op while the tooltip
+  // is closed, as there is no floating element then.
+  const reposition = useEffectEvent(() => update())
+
+  useLayoutEffect(() => {
+    reposition()
+  }, [boundaryElement, portalElement])
 
   const arrowX = middlewareData.arrow?.x
   const arrowY = middlewareData.arrow?.y
@@ -388,6 +400,87 @@ export function Tooltip(
   )
 }
 
+/**
+ * A ref that always holds the latest `value`, updated before any layout effect of the same commit
+ * runs (the same mechanism `use-effect-event` uses), for callbacks that run outside render.
+ */
+function useLatestRef<T>(value: T): React.RefObject<T> {
+  const ref = useRef(value)
+
+  useInsertionEffect(() => {
+    ref.current = value
+  }, [value])
+
+  return ref
+}
+
+type ElementRef = React.RefObject<HTMLElement | null>
+
+/**
+ * Derivable middleware options that read the boundary element from a ref. Floating UI evaluates
+ * them inside `computePosition`, which is when the ref is read — never during render.
+ *
+ * Built at module scope, like `sizeMiddleware` below: a `ref.current` read inside a callback
+ * created during render makes the React Compiler skip the calling function, since it cannot tell
+ * when the callback runs.
+ */
+function withBoundary<Options extends object>(
+  boundaryRef: ElementRef,
+  options: Options,
+): () => Options & {boundary: HTMLElement | undefined} {
+  return () => ({...options, boundary: boundaryRef.current || undefined})
+}
+
+/**
+ * Caps the tooltip width to the room it is positioned in: the boundary element (or the clipping
+ * ancestors when there is none), always within the viewport, and the portal element's width.
+ * Floating UI measures inside its own positioning pass — only while the tooltip is shown, never
+ * during render or on mount — and the width is written straight to the element, so no state or
+ * layout effect is involved. Placed after `shift` so `availableWidth` is the full clipping width
+ * for top and bottom placements; for left and right placements it is the room on that side.
+ */
+function sizeMiddleware({
+  boundaryRef,
+  portalRef,
+  rootBoundary,
+}: {
+  boundaryRef: ElementRef
+  portalRef: ElementRef
+  rootBoundary: RootBoundary
+}): Middleware {
+  return size(() => ({
+    boundary: boundaryRef.current || undefined,
+    rootBoundary,
+    padding: DEFAULT_TOOLTIP_PADDING,
+    async apply(state) {
+      const {availableWidth, elements} = state
+      const portalElement = portalRef.current
+      let maxWidth = availableWidth
+
+      // A tooltip rendered in a portal is capped to the portal's width as well, which may be
+      // narrower than the boundary (see the CustomPortal story). The portal is measured on its
+      // own rather than as part of `boundary`: an element array is the intersection of the rects,
+      // and the portal need not overlap the boundary at all. A portal without a width — an empty
+      // mount point — imposes no cap, as before.
+      if (portalElement) {
+        const overflow = await detectOverflow(state, {
+          boundary: portalElement,
+          rootBoundary,
+          padding: DEFAULT_TOOLTIP_PADDING,
+        })
+        // The portal's clipping width minus the padding on both sides, wherever the tooltip is
+        const portalWidth = state.rects.floating.width - overflow.left - overflow.right
+
+        if (portalWidth > 0) maxWidth = Math.min(maxWidth, portalWidth)
+      }
+
+      // No room on the chosen side gives a negative width: the cap is clamped to zero rather than
+      // removed, so the tooltip never grows across the boundary.
+      elements.floating.style.maxWidth = `${Math.max(0, maxWidth)}px`
+    },
+  }))
+}
+
 function useMiddleware({
   animate,
   arrowProp,
@@ -405,69 +498,40 @@ function useMiddleware({
   portalElement: HTMLElement | null
   rootBoundary: RootBoundary
 }) {
+  // The elements are read through refs when Floating UI runs the middleware — inside
+  // `computePosition`, never during render — so the middleware array keeps its identity when an
+  // element changes, and with it Floating UI's `update` callback and `autoUpdate` subscription.
+  // Passing the elements as option values would make `useFloating` deep-compare them on every
+  // render (it has no DOM element case: two elements are equal unless their own enumerable
+  // properties differ, which for React-rendered elements means walking their fibers), and an
+  // element captured by a closure such as `apply` would never be noticed at all, since functions
+  // are compared by source. The component repositions a shown tooltip itself when an element
+  // changes (see `useLayoutEffect` in `Tooltip`).
+  const boundaryRef = useLatestRef(boundaryElement)
+  const portalRef = useLatestRef(portalElement)
+
   return useMemo(() => {
     const ret: Middleware[] = []
 
     // Flip the floating element when leaving the boundary box
     ret.push(
-      flip({
-        boundary: boundaryElement || undefined,
-        fallbackPlacements,
-        padding: DEFAULT_TOOLTIP_PADDING,
-        rootBoundary,
-      }),
+      flip(
+        withBoundary(boundaryRef, {
+          fallbackPlacements,
+          padding: DEFAULT_TOOLTIP_PADDING,
+          rootBoundary,
+        }),
+      ),
     )
 
     // Define distance between reference and floating element
     ret.push(offset({mainAxis: DEFAULT_TOOLTIP_DISTANCE}))
 
     // Shift the tooltip so its sits with the boundary element
-    ret.push(
-      shift({
-        boundary: boundaryElement || undefined,
-        rootBoundary,
-        padding: DEFAULT_TOOLTIP_PADDING,
-      }),
-    )
+    ret.push(shift(withBoundary(boundaryRef, {rootBoundary, padding: DEFAULT_TOOLTIP_PADDING})))
 
-    // Cap the tooltip width to the room it is positioned in: the boundary element (or the
-    // clipping ancestors when there is none), always within the viewport. Floating UI measures
-    // inside its own positioning pass — only while the tooltip is shown, never during render or on
-    // mount — and the width is written straight to the element, so no state or layout effect is
-    // involved. Placed after `shift` so `availableWidth` is the full clipping width for top and
-    // bottom placements; for left and right placements it is the room on that side.
-    ret.push(
-      size({
-        boundary: boundaryElement || undefined,
-        rootBoundary,
-        padding: DEFAULT_TOOLTIP_PADDING,
-        async apply(state) {
-          const {availableWidth, elements} = state
-          let maxWidth = availableWidth
-
-          // A tooltip rendered in a portal is capped to the portal's width as well, which may be
-          // narrower than the boundary (see the CustomPortal story). The portal is measured on
-          // its own rather than as part of `boundary`: an element array is the intersection of
-          // the rects, and the portal need not overlap the boundary at all. A portal without a
-          // width — an empty mount point — imposes no cap, as before.
-          if (portalElement) {
-            const overflow = await detectOverflow(state, {
-              boundary: portalElement,
-              rootBoundary,
-              padding: DEFAULT_TOOLTIP_PADDING,
-            })
-            // The portal's clipping width minus the padding on both sides, wherever the tooltip is
-            const portalWidth = state.rects.floating.width - overflow.left - overflow.right
-
-            if (portalWidth > 0) maxWidth = Math.min(maxWidth, portalWidth)
-          }
-
-          // No room on the chosen side gives a negative width: the cap is clamped to zero rather
-          // than removed, so the tooltip never grows across the boundary.
-          elements.floating.style.maxWidth = `${Math.max(0, maxWidth)}px`
-        },
-      }),
-    )
+    // Cap the tooltip width to the boundary, viewport and portal
+    ret.push(sizeMiddleware({boundaryRef, portalRef, rootBoundary}))
 
     // Place arrow
     if (arrowProp) {
@@ -481,15 +545,7 @@ function useMiddleware({
     }
 
     return ret
-  }, [
-    animate,
-    arrowProp,
-    arrowRef,
-    boundaryElement,
-    fallbackPlacements,
-    portalElement,
-    rootBoundary,
-  ])
+  }, [animate, arrowProp, arrowRef, boundaryRef, fallbackPlacements, portalRef, rootBoundary])
 }
 
 /**
