@@ -1,7 +1,7 @@
 /** @vitest-environment jsdom */
 
 import {act, render, screen} from '@testing-library/react'
-import {Suspense} from 'react'
+import {StrictMode, Suspense} from 'react'
 import {afterEach, beforeEach, describe, expect, it} from 'vitest'
 
 import {
@@ -13,6 +13,9 @@ import {_IDLE_STORE_LIMIT} from '../../observers/mediaQueryObserver'
 import {ThemeProvider} from '../../theme/themeProvider'
 import {useTheme_v2} from '../../theme/useTheme'
 import {_getMediaStore, type _MediaStore, useMediaIndex} from './useMediaIndex'
+
+/** Eviction of a store that lost its last subscriber is deferred to a microtask */
+const evictions = () => Promise.resolve()
 
 const QUERIES = [
   'screen and (max-width: 599px)',
@@ -66,6 +69,27 @@ describe('useMediaIndex', () => {
     }
   })
 
+  it('shares one listener per query with components that mount later', () => {
+    // StrictMode unsubscribes and resubscribes the first root's components on mount, which
+    // evicts their stores in between; the second root must still land on them
+    render(
+      <StrictMode>
+        <Indexes count={1} media={[600, 900]} />
+      </StrictMode>,
+    )
+    render(
+      <StrictMode>
+        <Indexes count={1} media={[600, 900]} />
+      </StrictMode>,
+    )
+
+    expect(controller.matchMedia).toHaveBeenCalledTimes(QUERIES.length)
+
+    for (const query of QUERIES) {
+      expect(controller.listenerCount(query)).toBe(1)
+    }
+  })
+
   it('shares the store between equal breakpoint arrays that are different instances', () => {
     render(
       <>
@@ -107,7 +131,7 @@ describe('useMediaIndex', () => {
     expect(controller.matchMedia).toHaveBeenCalledTimes(QUERIES.length)
   })
 
-  it('keeps mounted components on the lists they subscribed to when window.matchMedia is replaced', () => {
+  it('keeps mounted components on the lists they subscribed to when window.matchMedia is replaced', async () => {
     const {unmount} = render(<Indexes count={2} media={[600, 900]} />)
     const previous = controller
 
@@ -128,6 +152,7 @@ describe('useMediaIndex', () => {
 
     // …and a remount picks up the replacement
     unmount()
+    await evictions()
     render(<Indexes count={2} media={[600, 900]} />)
 
     expect(controller.matchMedia).toHaveBeenCalledTimes(QUERIES.length)
@@ -186,8 +211,9 @@ describe('useMediaIndex', () => {
     expect(_getMediaStore(arrays[0])).not.toBe(seen[0])
   })
 
-  it('subscribes afresh after every component unmounted', () => {
+  it('subscribes afresh after every component unmounted', async () => {
     render(<Indexes count={2} media={[600, 900]} />).unmount()
+    await evictions()
 
     for (const query of QUERIES) {
       expect(controller.listenerCount(query)).toBe(0)

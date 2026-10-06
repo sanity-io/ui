@@ -120,6 +120,10 @@ function _createMediaStore(media: number[], key?: string): _MediaStore {
       if (!listening) {
         listening = listen()
         activeMediaStores.add(store)
+
+        // Subscribed to after being evicted: take the key back while nobody else has, so later
+        // components share this store (see `_createMediaQueryStore`)
+        if (key !== undefined && !mediaStores.has(key)) mediaStores.set(key, store)
       }
 
       subscribers.add(onStoreChange)
@@ -133,8 +137,13 @@ function _createMediaStore(media: number[], key?: string): _MediaStore {
         listening = undefined
         activeMediaStores.delete(store)
 
-        // Evict, unless a newer store has already taken this key over (see `_getMediaQueryStore`)
-        if (key !== undefined && mediaStores.get(key) === store) mediaStores.delete(key)
+        // Evict once the current task is done, so a synchronous resubscription keeps the store
+        // (see `_createMediaQueryStore`)
+        queueMicrotask(() => {
+          if (subscribers.size === 0 && key !== undefined && mediaStores.get(key) === store) {
+            mediaStores.delete(key)
+          }
+        })
       }
     },
   }

@@ -103,10 +103,18 @@ export function _getMediaQueryStore(query: string): _MediaQueryStore {
 function _createMediaQueryStore(query: string): _MediaQueryStore {
   const subscribers = new Set<() => void>()
   let mediaQueryList: MediaQueryList | undefined
+  let implementation: typeof window.matchMedia | undefined
   let unlisten: (() => void) | undefined
 
   // The store's own list, evaluated once and kept for the store's lifetime
-  const list = () => (mediaQueryList ??= window.matchMedia(query))
+  const list = () => {
+    if (!mediaQueryList) {
+      implementation = window.matchMedia
+      mediaQueryList = window.matchMedia(query)
+    }
+
+    return mediaQueryList
+  }
 
   const listen = () => {
     const target = list()
@@ -127,6 +135,15 @@ function _createMediaQueryStore(query: string): _MediaQueryStore {
       if (!unlisten) {
         unlisten = listen()
         activeMediaQueryStores.add(store)
+
+        // A store that is subscribed to after it was evicted — StrictMode's simulated unmount
+        // does exactly that, and so does a component committing with a store a sibling's
+        // cleanup evicted — takes its place back while nobody else has, so later components
+        // share it instead of opening a second listener. Not when its list predates a replaced
+        // `window.matchMedia`: then the next request should evaluate against the replacement.
+        if (!mediaQueryStores.has(query) && implementation === window.matchMedia) {
+          mediaQueryStores.set(query, store)
+        }
       }
 
       subscribers.add(onStoreChange)
@@ -140,10 +157,15 @@ function _createMediaQueryStore(query: string): _MediaQueryStore {
         unlisten = undefined
         activeMediaQueryStores.delete(store)
 
-        // Evict, unless a newer store has already taken this query over (a component can
-        // subscribe to a store it rendered with just after another one evicted it; that store
-        // keeps working on its own and is released when the component re-renders)
-        if (mediaQueryStores.get(query) === store) mediaQueryStores.delete(query)
+        // Evict once the current task is done: React unsubscribes and resubscribes
+        // synchronously within a commit (StrictMode does so on every mount), and a store that is
+        // back in use by then stays shared. Not when a newer store has taken the query over in
+        // the meantime — the orphan keeps working on its own until it is released.
+        queueMicrotask(() => {
+          if (subscribers.size === 0 && mediaQueryStores.get(query) === store) {
+            mediaQueryStores.delete(query)
+          }
+        })
       }
     },
   }

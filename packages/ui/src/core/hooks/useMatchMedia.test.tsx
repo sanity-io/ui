@@ -1,7 +1,7 @@
 /** @vitest-environment jsdom */
 
 import {act, render, screen} from '@testing-library/react'
-import {Suspense} from 'react'
+import {StrictMode, Suspense} from 'react'
 import {afterEach, beforeEach, describe, expect, it} from 'vitest'
 
 import {
@@ -13,6 +13,9 @@ import {useMatchMedia} from './useMatchMedia'
 import {usePrefersReducedMotion} from './usePrefersReducedMotion'
 
 const QUERY = '(prefers-reduced-motion: reduce)'
+
+/** Eviction of a store that lost its last subscriber is deferred to a microtask */
+const evictions = () => Promise.resolve()
 
 const pending = new Promise<void>(() => {})
 
@@ -63,6 +66,30 @@ describe('useMatchMedia', () => {
     expect(controller.matchMedia).toHaveBeenCalledTimes(1)
   })
 
+  it('shares one listener with components that mount later', () => {
+    // StrictMode unsubscribes and resubscribes the first root's components on mount, which
+    // evicts their store in between; the second root must still land on that store
+    render(
+      <StrictMode>
+        <Motions count={1} label="a" />
+      </StrictMode>,
+    )
+    render(
+      <StrictMode>
+        <Motions count={1} label="b" />
+      </StrictMode>,
+    )
+
+    expect(controller.listenerCount(QUERY)).toBe(1)
+    expect(controller.matchMedia).toHaveBeenCalledTimes(1)
+
+    act(() => controller.setMatches(QUERY, true))
+
+    for (const output of screen.getAllByTestId('motion-0')) {
+      expect(output).toHaveTextContent('true')
+    }
+  })
+
   it('shares one change listener and updates every subscriber when the query flips', () => {
     const {unmount} = render(<Motions count={3} label="a" />)
 
@@ -86,7 +113,7 @@ describe('useMatchMedia', () => {
     expect(controller.listenerCount(QUERY)).toBe(0)
   })
 
-  it('keeps mounted components on the list they subscribed to when window.matchMedia is replaced', () => {
+  it('keeps mounted components on the list they subscribed to when window.matchMedia is replaced', async () => {
     const {unmount} = render(<Motions count={2} label="a" />)
     const previous = controller
 
@@ -102,6 +129,7 @@ describe('useMatchMedia', () => {
 
     // …and a remount picks up the replacement
     unmount()
+    await evictions()
     render(<Motions count={2} label="b" />)
 
     expect(controller.matchMedia).toHaveBeenCalledTimes(1)
@@ -128,7 +156,7 @@ describe('useMatchMedia', () => {
       }
     })
 
-    // Every abandoned render evaluated its query once (the StrictMode re-render hits the cache)…
+    // Every abandoned render evaluated its query once (a re-render would hit the cache)…
     expect(controller.matchMedia).toHaveBeenCalledTimes(count)
 
     // …the most recent ones are still cached, the oldest made room
@@ -141,8 +169,9 @@ describe('useMatchMedia', () => {
     expect(controller.matchMedia).toHaveBeenCalledTimes(count + 1)
   })
 
-  it('subscribes afresh after every component unmounted', () => {
+  it('subscribes afresh after every component unmounted', async () => {
     render(<Motions count={2} label="a" />).unmount()
+    await evictions()
 
     expect(controller.listenerCount(QUERY)).toBe(0)
 
