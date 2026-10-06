@@ -40,9 +40,12 @@ const activeMediaStores = new WeakSet<_MediaStore>()
  * The store for a set of breakpoints, shared by every component that uses it (every `Layer` and
  * `Popover` does). Stores are keyed by content, so two arrays with the same breakpoints share one
  * store even when they are different instances. Each store subscribes once to the shared query
- * stores and fans the changes out to its subscribers; it is evicted when the last subscriber
- * leaves, so dynamically generated breakpoint arrays do not accumulate, stores that render but
- * never subscribe are capped like the query stores, and on the server nothing is cached at all.
+ * stores and fans the changes out to its subscribers; it is evicted right away when the last
+ * subscriber leaves, so dynamically generated breakpoint arrays do not accumulate, stores that
+ * render but never subscribe are capped like the query stores, and on the server nothing is
+ * cached at all. A store that is subscribed to again after its eviction takes its key back; in
+ * StrictMode's simulated unmount and remount that costs one more evaluation of its breakpoint
+ * queries per mount, in development only.
  *
  * @internal
  */

@@ -65,9 +65,11 @@ const activeMediaQueryStores = new WeakSet<_MediaQueryStore>()
  * The store for a query, shared by every component that asks for it, so a query is evaluated
  * once rather than per component instance, let alone per render. Subscribers share one `change`
  * listener on the store's `MediaQueryList`, attached when the first subscriber arrives. When the
- * last subscriber leaves, the listener is removed and the store is evicted, so caller-provided
- * queries that stop being used do not accumulate; the next subscriber gets a fresh store. Stores
- * that render but never subscribe are capped by `_IDLE_STORE_LIMIT`.
+ * last subscriber leaves, the listener is removed and the store is evicted right away, so
+ * caller-provided queries that stop being used do not accumulate; the next subscriber gets a
+ * fresh store, and a store that is subscribed to again after its eviction takes its place back
+ * (see `_createMediaQueryStore`). Stores that render but never subscribe are capped by
+ * `_IDLE_STORE_LIMIT`.
  *
  * Creating a store touches nothing in the DOM: `window.matchMedia` is only reached through
  * `subscribe` and `getSnapshot`, which React never calls on the server, and on the server nothing
