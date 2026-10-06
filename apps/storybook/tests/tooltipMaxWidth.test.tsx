@@ -1,4 +1,4 @@
-import {Button, PortalProvider, Text, ThemeProvider} from '@sanity/ui'
+import {Button, type Placement, PortalProvider, Text, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
 import {Tooltip} from '@sanity/ui/tooltip'
 import {useMemo, useState} from 'react'
@@ -10,8 +10,9 @@ const theme = buildTheme()
 
 const POLL = {timeout: 5000}
 
-// `DEFAULT_TOOLTIP_PADDING` in `core/primitives/tooltip/constants.ts`
+// `DEFAULT_TOOLTIP_PADDING` and `DEFAULT_TOOLTIP_DISTANCE` in `core/primitives/tooltip/constants.ts`
 const TOOLTIP_PADDING = 4
+const TOOLTIP_DISTANCE = 4
 
 const LONG_CONTENT =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mollis consectetur malesuada. Sed lobortis est dolor, eget imperdiet velit placerat et. Aenean posuere mi non aliquet iaculis.'
@@ -109,6 +110,75 @@ function EmptyPortalMountPoint() {
   )
 }
 
+function SidePlacement({
+  fallbackPlacements,
+  left,
+  placement,
+}: {
+  fallbackPlacements: Placement[]
+  left: number
+  placement: Placement
+}) {
+  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div
+        data-testid="boundary"
+        ref={setBoundaryElement}
+        style={{height: 400, overflow: 'hidden', position: 'relative', width: 320}}
+      >
+        <Tooltip
+          boundaryElement={boundaryElement}
+          content={<Text size={1}>{LONG_CONTENT}</Text>}
+          fallbackPlacements={fallbackPlacements}
+          placement={placement}
+          portal
+        >
+          <Button mode="bleed" style={{left, position: 'absolute', top: 180}} text="Hover me" />
+        </Tooltip>
+      </div>
+    </ThemeProvider>
+  )
+}
+
+function SwappableBoundary({outer}: {outer: boolean}) {
+  const [innerElement, setInnerElement] = useState<HTMLDivElement | null>(null)
+  const [outerElement, setOuterElement] = useState<HTMLDivElement | null>(null)
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div
+        data-testid="outer"
+        ref={setOuterElement}
+        style={{height: 300, overflow: 'hidden', position: 'relative', width: 320}}
+      >
+        <div
+          data-testid="inner"
+          ref={setInnerElement}
+          style={{height: 300, overflow: 'hidden', position: 'relative', width: 240}}
+        >
+          <Tooltip
+            boundaryElement={outer ? outerElement : innerElement}
+            content={<Text size={1}>{LONG_CONTENT}</Text>}
+            portal
+          >
+            <Button
+              mode="bleed"
+              style={{left: 10, position: 'absolute', top: 10}}
+              text="Hover me"
+            />
+          </Tooltip>
+        </div>
+      </div>
+    </ThemeProvider>
+  )
+}
+
+function maxWidthPx(): number {
+  return parseFloat(tooltipLayer()?.style.maxWidth || 'NaN')
+}
+
 // The tooltip's `max-width` comes from Floating UI's `size` middleware (boundary and viewport),
 // capped to the portal element's width. jsdom has no layout, so the applied values are checked
 // against real layout here; `tooltip.maxWidth.test.tsx` in the package covers when the
@@ -162,5 +232,78 @@ describe('tooltip max width', () => {
     await expect
       .poll(() => tooltipLayer()?.style.maxWidth, POLL)
       .toBe(`${boundary.clientWidth - 2 * TOOLTIP_PADDING}px`)
+  })
+
+  // For `left` and `right` placements Floating UI reports the room beside the reference, not
+  // the full clipping width, so a long tooltip wraps between the reference and the boundary
+  // edge instead of overlapping the reference or spilling out of the boundary.
+  test('caps a right-placed tooltip to the room beside the reference', async () => {
+    await page.viewport(800, 600)
+    const screen = await render(
+      <SidePlacement fallbackPlacements={['left']} left={10} placement="right" />,
+    )
+    const boundary = screen.getByTestId('boundary').element()
+    const button = screen.getByRole('button', {name: 'Hover me'}).element()
+
+    await userEvent.hover(button)
+
+    const boundaryRect = boundary.getBoundingClientRect()
+    const buttonRect = button.getBoundingClientRect()
+    const expectedMaxWidth =
+      boundaryRect.right - TOOLTIP_PADDING - (buttonRect.right + TOOLTIP_DISTANCE)
+
+    await expect.poll(() => Math.abs(maxWidthPx() - expectedMaxWidth) < 1, POLL).toBe(true)
+
+    const layerRect = tooltipLayer()!.getBoundingClientRect()
+
+    // Beside the reference, not over it…
+    expect(layerRect.left).toBeGreaterThanOrEqual(buttonRect.right + TOOLTIP_DISTANCE - 0.5)
+    // …and inside the boundary
+    expect(layerRect.right).toBeLessThanOrEqual(boundaryRect.right - TOOLTIP_PADDING + 0.5)
+    expect(layerRect.width).toBeLessThanOrEqual(expectedMaxWidth + 0.5)
+    // Wrapped onto several lines rather than collapsed or clipped
+    expect(layerRect.width).toBeGreaterThan(expectedMaxWidth / 2)
+    expect(layerRect.height).toBeGreaterThan(48)
+  })
+
+  test('keeps a zero cap for a left-placed tooltip with no room, instead of dropping it', async () => {
+    await page.viewport(800, 600)
+    // Flush against the boundary's left edge, and no fallback placement to flip to
+    const screen = await render(<SidePlacement fallbackPlacements={[]} left={0} placement="left" />)
+    const button = screen.getByRole('button', {name: 'Hover me'}).element()
+
+    await userEvent.hover(button)
+
+    await expect.poll(() => tooltipLayer()?.style.maxWidth, POLL).toBe('0px')
+
+    const layerRect = tooltipLayer()!.getBoundingClientRect()
+    const buttonRect = button.getBoundingClientRect()
+
+    // The box stays collapsed on the far side of the reference instead of growing across the
+    // boundary (the constraint is clamped, not removed)
+    expect(layerRect.width).toBeLessThanOrEqual(1)
+    expect(layerRect.right).toBeLessThanOrEqual(buttonRect.left + 0.5)
+  })
+
+  test('follows a boundary element swapped while the tooltip is shown', async () => {
+    await page.viewport(800, 600)
+    const screen = await render(<SwappableBoundary outer={false} />)
+    const inner = screen.getByTestId('inner').element()
+    const outer = screen.getByTestId('outer').element()
+
+    await userEvent.hover(screen.getByRole('button', {name: 'Hover me'}))
+
+    await expect
+      .poll(() => tooltipLayer()?.style.maxWidth, POLL)
+      .toBe(`${inner.clientWidth - 2 * TOOLTIP_PADDING}px`)
+
+    // The middleware reads the element through a ref and the tooltip repositions itself against
+    // the new element; nothing else changes, so the tooltip stays shown
+    await screen.rerender(<SwappableBoundary outer />)
+
+    await expect
+      .poll(() => tooltipLayer()?.style.maxWidth, POLL)
+      .toBe(`${outer.clientWidth - 2 * TOOLTIP_PADDING}px`)
+    expect(tooltipLayer()!.style.display).toBe('')
   })
 })
