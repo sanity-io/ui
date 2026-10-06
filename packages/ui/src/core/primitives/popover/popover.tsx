@@ -14,6 +14,7 @@ import {
   Activity,
   cloneElement,
   type Ref,
+  startTransition,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -129,6 +130,13 @@ export interface PopoverProps
   updateRef?: Ref<PopoverUpdateCallback | undefined>
   width?: PopoverWidth | PopoverWidth[]
 }
+
+/**
+ * The events on the reference element that count as intent to open the popover. Each precedes the
+ * interaction that usually opens a popover: focus before a key press, the pointer entering before
+ * a click or a tap.
+ */
+const INTENT_EVENT_TYPES = ['focusin', 'pointerenter', 'pointerdown'] as const
 
 const ViewportOverlay = () => {
   const {zIndex} = useLayer()
@@ -280,16 +288,63 @@ export function Popover(
     widthRef,
   })
 
-  const {x, y, middlewareData, placement, refs, strategy, update} = useFloating({
-    middleware,
-    placement: placementProp,
-    whileElementsMounted: autoUpdate,
-    elements: referenceElement
-      ? {
-          reference: referenceElement,
-        }
-      : undefined,
-  })
+  const {x, y, elements, middlewareData, placement, refs, strategy, update} =
+    useFloating<HTMLElement>({
+      middleware,
+      placement: placementProp,
+      whileElementsMounted: autoUpdate,
+      elements: referenceElement
+        ? {
+            reference: referenceElement,
+          }
+        : undefined,
+    })
+
+  // Whether the popover (card, portal and `content`) has been rendered yet. Closed popovers
+  // render inside a hidden `<Activity>`, so whatever is rendered while closed is pre-rendered DOM
+  // that only pays off if the popover opens. Nothing is rendered until the popover opens or the
+  // reference element shows intent to open it (see `INTENT_EVENT_TYPES`), and from then on it
+  // stays rendered so the state of its `content` survives reopening. Consumers that do not want
+  // a popover pre-rendered on intent can leave `content` empty until it opens.
+  const [hasRendered, setHasRendered] = useState(false)
+
+  // Opening renders the popover whether or not any intent preceded it. A `disabled` popover
+  // renders only its child, so neither `open` nor intent counts while it is disabled: otherwise
+  // enabling it later would render it hidden without it ever having opened or been about to.
+  const isOpen = Boolean(open) && !disabled
+
+  if (isOpen && !hasRendered) setHasRendered(true)
+
+  const shouldRender = isOpen || hasRendered
+  // The element to listen to for intent to open the popover: none once the popover has rendered,
+  // since there is nothing left to pre-render, and none while disabled, which also drops the
+  // listeners of a popover that was enabled before
+  const intentReference = shouldRender || disabled ? null : elements.reference
+
+  useEffect(() => {
+    if (!intentReference) return undefined
+
+    const controller = new AbortController()
+    const {signal} = controller
+    // In a transition, so that it never holds up an open that follows right away (a click), and
+    // so that React pre-renders the hidden popover in the background
+    const handleIntent = () => startTransition(() => setHasRendered(true))
+
+    // `focusin` rather than `focus` so that focus landing inside the reference element counts too.
+    // `pointerdown` is a fallback for a pointer that was already over the element when it
+    // rendered, which fires no `pointerenter`.
+    for (const type of INTENT_EVENT_TYPES) {
+      intentReference.addEventListener(type, handleIntent, {signal})
+    }
+
+    // Focus that landed before the listeners did (an `autoFocus` reference, a `referenceElement`
+    // that was focused already) fired its `focusin` unheard, so count it now
+    const {activeElement} = intentReference.ownerDocument
+
+    if (activeElement && intentReference.contains(activeElement)) handleIntent()
+
+    return () => controller.abort()
+  }, [intentReference])
 
   const referenceHidden = middlewareData.hide?.referenceHidden
 
@@ -372,13 +427,13 @@ export function Popover(
 
   return (
     <>
-      {/* the popover */}
+      {/* the popover (not rendered until it opens or is about to, see `hasRendered`) */}
       {animate ? (
         <AnimateActivity layoutMode="default" mode={open ? 'visible' : 'hidden'}>
-          {popoverNode}
+          {shouldRender ? popoverNode : null}
         </AnimateActivity>
       ) : (
-        <Activity mode={open ? 'visible' : 'hidden'}>{popoverNode}</Activity>
+        <Activity mode={open ? 'visible' : 'hidden'}>{shouldRender ? popoverNode : null}</Activity>
       )}
 
       {/* the referred element */}

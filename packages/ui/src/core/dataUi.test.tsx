@@ -1,5 +1,6 @@
 /** @vitest-environment jsdom */
 
+import {fireEvent} from '@testing-library/react'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 // oxlint-disable-next-line no-unassigned-import
@@ -282,6 +283,11 @@ describe('component identifiers', () => {
         <VirtualList />
       </>,
     )
+
+    // Closed popovers render nothing until they open or are about to, so show intent to open the
+    // menu button's and the menu group's popovers, which puts their identifiers in the DOM
+    fireEvent.pointerEnter(document.getElementById('menu-button')!)
+    fireEvent.pointerEnter(document.querySelector('[data-ui="MenuGroup"]')!)
 
     expectIdentifiers(PUBLIC_IDENTIFIERS)
     expectIdentifiers(COMPOSITE_IDENTIFIERS)
