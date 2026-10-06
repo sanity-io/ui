@@ -164,6 +164,12 @@ describe('Tooltip max width measurement', () => {
     // The body is no longer a fallback: the viewport bounds the tooltip instead
     expect(bodyOffsetWidth).not.toHaveBeenCalled()
 
+    // jsdom lays nothing out, so Floating UI finds no room at all. The cap is then clamped to
+    // zero rather than dropped: a dropped cap would let a tooltip grow across its boundary
+    expect(screen.getByText('Tooltip content').closest('[data-ui="Tooltip"]')).toHaveStyle({
+      maxWidth: '0px',
+    })
+
     fireEvent.mouseLeave(button)
     await flushPositioning()
 

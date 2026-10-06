@@ -462,7 +462,9 @@ function useMiddleware({
             if (portalWidth > 0) maxWidth = Math.min(maxWidth, portalWidth)
           }
 
-          elements.floating.style.maxWidth = maxWidth > 0 ? `${maxWidth}px` : ''
+          // No room on the chosen side gives a negative width: the cap is clamped to zero rather
+          // than removed, so the tooltip never grows across the boundary.
+          elements.floating.style.maxWidth = `${Math.max(0, maxWidth)}px`
         },
       }),
     )
