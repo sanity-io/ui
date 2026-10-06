@@ -77,21 +77,25 @@ function _createElementSizeObserver(): _ElementSizeObserver {
 
   return {
     subscribe(element, subscriber) {
-      const subscribers = subscribersCache.get(element) || []
+      let subscribers = subscribersCache.get(element)
 
-      let dispose = disposeCache.get(element)
+      if (!subscribers) {
+        const currentSubscribers: _ElementSizeSubscriber[] = []
 
-      if (!subscribersCache.has(element)) {
+        subscribers = currentSubscribers
         subscribersCache.set(element, subscribers)
 
         const listener = _createElementRectValueListener()
 
         // listen
-        dispose = listener.subscribe(element, (elementRect) => {
-          for (const sub of subscribers) {
-            sub(elementRect)
-          }
-        })
+        disposeCache.set(
+          element,
+          listener.subscribe(element, (elementRect) => {
+            for (const sub of currentSubscribers) {
+              sub(elementRect)
+            }
+          }),
+        )
       }
 
       subscribers.push(subscriber)
@@ -105,9 +109,14 @@ function _createElementSizeObserver(): _ElementSizeObserver {
           subscribers.splice(idx, 1)
         }
 
-        if (subscribers.length === 0) {
+        // The last subscriber of this element leaving stops the observation and forgets the
+        // element, so that a later subscriber starts a new one. (The guard keeps a stale
+        // unsubscribe from disposing an observation that a later subscriber started.)
+        if (subscribers.length === 0 && subscribersCache.get(element) === subscribers) {
           // unlisten
-          if (dispose) dispose()
+          disposeCache.get(element)?.()
+          disposeCache.delete(element)
+          subscribersCache.delete(element)
         }
       }
     },
