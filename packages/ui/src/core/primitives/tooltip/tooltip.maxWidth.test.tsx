@@ -228,4 +228,36 @@ describe('Tooltip max width measurement', () => {
     otherBoundary.element.remove()
     otherPortal.element.remove()
   })
+
+  it('caps to the default portal when the named portal is missing, like `Portal` renders into it', async () => {
+    const defaultPortal = createMeasuredElement(PORTAL_WIDTH)
+
+    render(
+      <PortalProvider
+        element={portal.element}
+        __unstable_elements={{default: defaultPortal.element}}
+      >
+        <Tooltip
+          boundaryElement={boundary.element}
+          content={<Text size={1}>{'Tooltip content'}</Text>}
+          portal="missing"
+        >
+          <Button mode="bleed" text="Hover me" />
+        </Tooltip>
+      </PortalProvider>,
+    )
+
+    fireEvent.mouseEnter(screen.getByText('Hover me'))
+    await flushPositioning()
+
+    const content = screen.getByText('Tooltip content')
+
+    expect(content).toBeVisible()
+    expect(defaultPortal.element.contains(content)).toBe(true)
+    // The cap is measured on the element the tooltip renders into, not on the context's element
+    expect(defaultPortal.offsetWidth).toHaveBeenCalled()
+    expect(portal.offsetWidth).not.toHaveBeenCalled()
+
+    defaultPortal.element.remove()
+  })
 })

@@ -79,6 +79,42 @@ function NarrowPortal() {
   )
 }
 
+function MissingNamedPortal() {
+  const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
+  const [defaultElement, setDefaultElement] = useState<HTMLDivElement | null>(null)
+  const elements = useMemo(() => ({default: defaultElement}), [defaultElement])
+
+  return (
+    <ThemeProvider theme={theme}>
+      <PortalProvider __unstable_elements={elements}>
+        <div
+          data-testid="boundary"
+          ref={setBoundaryElement}
+          style={{height: 300, left: 0, position: 'absolute', top: 0, width: 300}}
+        >
+          {/* No `missing` entry: `Portal` falls back to the `default` one */}
+          <Tooltip
+            boundaryElement={boundaryElement}
+            content={<Text size={1}>{LONG_CONTENT}</Text>}
+            portal="missing"
+          >
+            <Button
+              mode="bleed"
+              style={{left: 10, position: 'absolute', top: 10}}
+              text="Hover me"
+            />
+          </Tooltip>
+        </div>
+        <div
+          data-testid="default-portal"
+          ref={setDefaultElement}
+          style={{height: 100, left: 450, position: 'absolute', top: 0, width: 160}}
+        />
+      </PortalProvider>
+    </ThemeProvider>
+  )
+}
+
 function EmptyPortalMountPoint() {
   const [boundaryElement, setBoundaryElement] = useState<HTMLDivElement | null>(null)
   const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
@@ -219,6 +255,24 @@ describe('tooltip max width', () => {
     const layer = tooltipLayer()!
 
     expect(portal.contains(layer)).toBe(true)
+    expect(layer.getBoundingClientRect().width).toBeLessThanOrEqual(expectedMaxWidth + 0.5)
+  })
+
+  test('caps to the default portal when the named portal is missing', async () => {
+    await page.viewport(800, 600)
+    const screen = await render(<MissingNamedPortal />)
+    const defaultPortal = screen.getByTestId('default-portal').element()
+
+    await userEvent.hover(screen.getByRole('button', {name: 'Hover me'}))
+
+    const expectedMaxWidth = defaultPortal.clientWidth - 2 * TOOLTIP_PADDING
+
+    await expect.poll(() => tooltipLayer()?.style.maxWidth, POLL).toBe(`${expectedMaxWidth}px`)
+
+    const layer = tooltipLayer()!
+
+    // The same fallback `Portal` applies, so the cap matches where the tooltip rendered
+    expect(defaultPortal.contains(layer)).toBe(true)
     expect(layer.getBoundingClientRect().width).toBeLessThanOrEqual(expectedMaxWidth + 0.5)
   })
 

@@ -43,6 +43,7 @@ import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement
 import {getElementRef} from '../../utils/getElementRef'
 import {Layer, type LayerProps} from '../../utils/layer/layer'
 import {Portal} from '../../utils/portal/portal'
+import {resolvePortalElement} from '../../utils/portal/resolvePortalElement'
 import {usePortal} from '../../utils/portal/usePortal'
 import type {Delay} from '../types'
 import {
@@ -138,8 +139,10 @@ export function Tooltip(
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
   const portal = usePortal()
-  const portalElement =
-    typeof portalProp === 'string' ? portal.elements?.[portalProp] || null : portal.element
+  const portalName = typeof portalProp === 'string' ? portalProp : undefined
+  // Resolved the way `Portal` resolves it (a missing named portal falls back to the default one),
+  // so the width cap applies to the element the tooltip actually renders into
+  const portalElement = resolvePortalElement(portal, portalName)
 
   const middleware = useMiddleware({
     animate,
@@ -371,13 +374,7 @@ export function Tooltip(
     </Layer>
   )
 
-  const tooltipNode = portalProp ? (
-    <Portal __unstable_name={typeof portalProp === 'string' ? portalProp : undefined}>
-      {tooltip}
-    </Portal>
-  ) : (
-    tooltip
-  )
+  const tooltipNode = portalProp ? <Portal __unstable_name={portalName}>{tooltip}</Portal> : tooltip
 
   const tooltipActivity = animate ? (
     <AnimateActivity layoutMode="default" mode={showTooltip ? 'visible' : 'hidden'}>
