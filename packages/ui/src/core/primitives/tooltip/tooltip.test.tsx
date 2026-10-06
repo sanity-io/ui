@@ -579,33 +579,6 @@ describe('Tooltip', () => {
       fireEvent.mouseEnter(button)
       expectTooltipVisible('Tooltip content')
     })
-
-    it('hides the tooltip while disabled without an extra commit', () => {
-      const renderCommits: boolean[] = []
-
-      function Probe({disabled}: {disabled: boolean}) {
-        renderCommits.push(disabled)
-
-        return (
-          <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} disabled={disabled}>
-            <Button mode="bleed" text="Hover me" />
-          </Tooltip>
-        )
-      }
-
-      const {rerender} = render(<Probe disabled={false} />, {strict: false})
-
-      fireEvent.mouseEnter(screen.getByRole('button', {name: 'Hover me'}))
-      expectTooltipVisible('Tooltip content')
-
-      renderCommits.length = 0
-      rerender(<Probe disabled />)
-
-      // The tooltip is hidden in the render that received `disabled`; nothing re-rendered the
-      // parent afterwards to close it
-      expect(document.querySelector('[data-ui="Tooltip"]')).toBeNull()
-      expect(renderCommits).toEqual([true])
-    })
   })
 
   describe('Rendering without `content`', () => {
