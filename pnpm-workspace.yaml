@@ -30,7 +30,7 @@ catalog:
   '@vanilla-extract/css': ^1.21.2
   '@vanilla-extract/dynamic': ^2.1.5
   '@vitejs/plugin-react': ^6.1.2
-  motion: ^13.5.1
+  motion: ^14.0.0
   oxc-transform-react: ^0.153.0
   react: ^19.3.0
   react-dom: ^19.3.0
