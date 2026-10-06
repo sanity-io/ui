@@ -1,11 +1,13 @@
 import {
   arrow,
   autoUpdate,
+  detectOverflow,
   flip,
   type Middleware,
   offset,
   type RootBoundary,
   shift,
+  size,
   useFloating,
 } from '@floating-ui/react-dom'
 import {clsx} from 'clsx/lite'
@@ -16,7 +18,6 @@ import {
   useEffect,
   useId,
   useImperativeHandle,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -131,7 +132,6 @@ export function Tooltip(
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
-  const [tooltipMaxWidth, setTooltipMaxWidth] = useState(0)
 
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
@@ -145,6 +145,7 @@ export function Tooltip(
     arrowRef,
     boundaryElement,
     fallbackPlacements,
+    portalElement,
     rootBoundary,
   })
 
@@ -280,20 +281,6 @@ export function Tooltip(
     }
   }, [showTooltip])
 
-  // Set the max width of the tooltip based on boundaries and portals (sans tooltip padding).
-  // Measuring forces a synchronous layout, so it only happens when the tooltip opens — not on
-  // mount of a closed tooltip, not when the boundary or portal element changes, and never during
-  // render. The effect event reads the latest elements without the effect depending on them.
-  const measureTooltipMaxWidth = useEffectEvent(() => {
-    setTooltipMaxWidth(
-      measureAvailableWidth(boundaryElement, portalElement) - DEFAULT_TOOLTIP_PADDING * 2,
-    )
-  })
-
-  useLayoutEffect(() => {
-    if (showTooltip) measureTooltipMaxWidth()
-  }, [showTooltip])
-
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
       arrowRef.current = arrowEl
@@ -346,10 +333,7 @@ export function Tooltip(
       {...restProps}
       className={clsx(tooltipLayer, restProps.className)}
       ref={setFloating}
-      style={{
-        ...floatingStyles,
-        maxWidth: tooltipMaxWidth > 0 ? `${tooltipMaxWidth}px` : undefined,
-      }}
+      style={floatingStyles}
       zOffset={zOffset}
     >
       <TooltipCard
@@ -404,33 +388,13 @@ export function Tooltip(
   )
 }
 
-/**
- * Tooltip width should never exceed the width of either any supplied boundary or portal element.
- * If both portal and boundary elements are provided, use the smaller width of the two.
- *
- * Kept at module scope on purpose: `offsetWidth` forces a synchronous layout, and the React
- * Compiler (which the package build runs) lifts a member expression on an element captured by a
- * component callback — `portalElement?.offsetWidth` — into a memo dependency evaluated during
- * render. A plain function call on the elements gives it nothing to lift.
- */
-function measureAvailableWidth(
-  boundaryElement: HTMLElement | null,
-  portalElement: HTMLElement | null,
-): number {
-  const availableWidths = [
-    ...(boundaryElement ? [boundaryElement.offsetWidth] : []),
-    portalElement?.offsetWidth || document.body.offsetWidth,
-  ]
-
-  return Math.min(...availableWidths)
-}
-
 function useMiddleware({
   animate,
   arrowProp,
   arrowRef,
   boundaryElement,
   fallbackPlacements,
+  portalElement,
   rootBoundary,
 }: {
   animate: boolean
@@ -438,6 +402,7 @@ function useMiddleware({
   arrowRef: React.RefObject<HTMLDivElement | null>
   boundaryElement: HTMLElement | null
   fallbackPlacements: Placement[]
+  portalElement: HTMLElement | null
   rootBoundary: RootBoundary
 }) {
   return useMemo(() => {
@@ -465,19 +430,64 @@ function useMiddleware({
       }),
     )
 
+    // Cap the tooltip width to the room it is positioned in: the boundary element (or the
+    // clipping ancestors when there is none), always within the viewport. Floating UI measures
+    // inside its own positioning pass — only while the tooltip is shown, never during render or on
+    // mount — and the width is written straight to the element, so no state or layout effect is
+    // involved. Placed after `shift` so `availableWidth` is the full clipping width for top and
+    // bottom placements; for left and right placements it is the room on that side.
+    ret.push(
+      size({
+        boundary: boundaryElement || undefined,
+        rootBoundary,
+        padding: DEFAULT_TOOLTIP_PADDING,
+        async apply(state) {
+          const {availableWidth, elements} = state
+          let maxWidth = availableWidth
+
+          // A tooltip rendered in a portal is capped to the portal's width as well, which may be
+          // narrower than the boundary (see the CustomPortal story). The portal is measured on
+          // its own rather than as part of `boundary`: an element array is the intersection of
+          // the rects, and the portal need not overlap the boundary at all. A portal without a
+          // width — an empty mount point — imposes no cap, as before.
+          if (portalElement) {
+            const overflow = await detectOverflow(state, {
+              boundary: portalElement,
+              rootBoundary,
+              padding: DEFAULT_TOOLTIP_PADDING,
+            })
+            // The portal's clipping width minus the padding on both sides, wherever the tooltip is
+            const portalWidth = state.rects.floating.width - overflow.left - overflow.right
+
+            if (portalWidth > 0) maxWidth = Math.min(maxWidth, portalWidth)
+          }
+
+          elements.floating.style.maxWidth = maxWidth > 0 ? `${maxWidth}px` : ''
+        },
+      }),
+    )
+
     // Place arrow
     if (arrowProp) {
       ret.push(arrow({element: arrowRef, padding: DEFAULT_TOOLTIP_PADDING}))
     }
 
     // Determine the origin to scale from.
-    // Must be placed after `@sanity/ui/size` and `shift` middleware.
+    // Must be placed after `size` and `shift` middleware.
     if (animate) {
       ret.push(origin)
     }
 
     return ret
-  }, [animate, arrowProp, arrowRef, boundaryElement, fallbackPlacements, rootBoundary])
+  }, [
+    animate,
+    arrowProp,
+    arrowRef,
+    boundaryElement,
+    fallbackPlacements,
+    portalElement,
+    rootBoundary,
+  ])
 }
 
 /**
