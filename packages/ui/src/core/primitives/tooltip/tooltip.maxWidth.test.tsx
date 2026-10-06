@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 
-import {fireEvent, screen} from '@testing-library/react'
+import {act, fireEvent, screen} from '@testing-library/react'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
@@ -12,7 +12,6 @@ import {render} from '../../../../test/utils'
 import {PortalProvider} from '../../utils/portal/portalProvider'
 import {Button} from '../button/button'
 import {Text} from '../text/text'
-import {DEFAULT_TOOLTIP_PADDING} from './constants'
 import {Tooltip} from './tooltip'
 
 const BOUNDARY_WIDTH = 300
@@ -25,18 +24,19 @@ interface MeasuredElement {
 }
 
 /**
- * The tooltip caps its width to the narrowest of the boundary and portal elements (falling
- * back to `document.body` when the portal has no width). Reading their `offsetWidth` forces a
- * synchronous layout, so it must only happen when the tooltip opens — not on mount of a closed
- * tooltip, not on re-renders, never during render. Every element the tooltip can measure gets
- * its own spy: the React Compiler regression this guards against (the suite runs through the
- * compiler, see `vitest.config.ts`) lifts `portalElement?.offsetWidth` into a render-time memo
- * dependency, so the portal and body reads matter as much as the boundary read.
+ * The tooltip caps its width to the boundary and portal elements. Reading their layout
+ * (`offsetWidth`, rects) forces a synchronous layout, so it must only happen while the tooltip is
+ * shown — not on mount of a closed tooltip, not on re-renders, not when a disabled tooltip is
+ * hovered, and never during render. Every element the tooltip can measure gets its own spy: the
+ * React Compiler regression this guards against (the suite runs through the compiler, see
+ * `vitest.config.ts`) lifted `portalElement?.offsetWidth` into a render-time memo dependency, so
+ * the portal and body reads matter as much as the boundary read.
  *
- * The tests are synchronous on purpose: floating-ui also measures the boundary while it
- * positions an open tooltip, but it does so asynchronously, so no `await` means those reads
- * never land in the counts below (and each element gets a fresh spy per test, so reads that
- * trail a previous test's open tooltip cannot leak in either).
+ * The measurement is Floating UI's: its `size` middleware runs inside the (asynchronous)
+ * positioning pass of a shown tooltip. The closed-state assertions are therefore made after that
+ * pass had the chance to run, and the shown state is only checked for the reads happening at all,
+ * which proves the spies see what Floating UI reads. The applied width is asserted against real
+ * layout in the Storybook browser suite (`apps/storybook/tests/tooltipMaxWidth.test.tsx`).
  */
 describe('Tooltip max width measurement', () => {
   let boundary: MeasuredElement
@@ -66,16 +66,19 @@ describe('Tooltip max width measurement', () => {
     Reflect.deleteProperty(document.body, 'offsetWidth')
   })
 
+  /**
+   * Lets Floating UI's asynchronous positioning pass (if any) run to completion. The pass
+   * commits its result through `flushSync`, which has to land inside an `act` scope.
+   */
+  async function flushPositioning() {
+    await act(async () => {
+      await new Promise<void>((resolve) => setTimeout(resolve, 0))
+    })
+  }
+
   function expectNoMeasurement() {
     expect(boundary.offsetWidth).not.toHaveBeenCalled()
     expect(portal.offsetWidth).not.toHaveBeenCalled()
-    expect(bodyOffsetWidth).not.toHaveBeenCalled()
-  }
-
-  function expectMeasuredOnce() {
-    expect(boundary.offsetWidth).toHaveBeenCalledTimes(1)
-    expect(portal.offsetWidth).toHaveBeenCalledTimes(1)
-    // The body is only a fallback for a portal without a width
     expect(bodyOffsetWidth).not.toHaveBeenCalled()
   }
 
@@ -83,9 +86,15 @@ describe('Tooltip max width measurement', () => {
     boundaryElement = boundary.element,
     content = 'Tooltip content',
     disabled = false,
-  }: {boundaryElement?: HTMLElement; content?: string; disabled?: boolean} = {}) {
+    portalElement = portal.element,
+  }: {
+    boundaryElement?: HTMLElement
+    content?: string
+    disabled?: boolean
+    portalElement?: HTMLElement
+  } = {}) {
     return (
-      <PortalProvider element={portal.element}>
+      <PortalProvider element={portalElement}>
         <Tooltip
           boundaryElement={boundaryElement}
           content={<Text size={1}>{content}</Text>}
@@ -97,81 +106,158 @@ describe('Tooltip max width measurement', () => {
     )
   }
 
-  it('does not measure while the tooltip is closed', () => {
+  it('does not measure while the tooltip is closed', async () => {
     const {rerender} = render(renderTooltip())
 
+    // Neither synchronously (render, layout effects)…
+    expectNoMeasurement()
+
+    // …nor asynchronously (a positioning pass)
+    await flushPositioning()
     expectNoMeasurement()
 
     // Unrelated re-renders of a closed tooltip do not measure either
     rerender(renderTooltip({content: 'Other content'}))
+    await flushPositioning()
 
     expectNoMeasurement()
+
+    // Nor does a new boundary element
+    const otherBoundary = createMeasuredElement(BOUNDARY_WIDTH)
+
+    rerender(renderTooltip({boundaryElement: otherBoundary.element, content: 'Other content'}))
+    await flushPositioning()
+
+    expect(otherBoundary.offsetWidth).not.toHaveBeenCalled()
+    expectNoMeasurement()
+    otherBoundary.element.remove()
   })
 
-  it('does not measure when a disabled tooltip is hovered', () => {
+  it('does not measure when a disabled tooltip is hovered', async () => {
     const {rerender} = render(renderTooltip({disabled: true}))
 
-    // Hovering flips the open state for one commit before the close effect runs; the
-    // measurement is gated out of that commit too
+    // Hovering records the hover state, but a disabled tooltip is never shown, so nothing
+    // measures
     fireEvent.mouseEnter(screen.getByText('Hover me'))
+    await flushPositioning()
 
     expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     expectNoMeasurement()
 
-    // Enabled again, the next hover measures (the child is queried again: enabling currently
-    // remounts it, see #3116)
+    // Enabled again while still hovered, the tooltip shows and is measured right away
     rerender(renderTooltip({disabled: false}))
-
-    expectNoMeasurement()
-
-    fireEvent.mouseEnter(screen.getByText('Hover me'))
+    await flushPositioning()
 
     expect(screen.getByText('Tooltip content')).toBeVisible()
-    expectMeasuredOnce()
+    expect(boundary.offsetWidth).toHaveBeenCalled()
   })
 
-  it('measures when the tooltip opens and caps the width to the narrowest element', () => {
-    render(renderTooltip())
-
-    fireEvent.mouseEnter(screen.getByText('Hover me'))
-
-    const content = screen.getByText('Tooltip content')
-
-    expect(content).toBeVisible()
-    expectMeasuredOnce()
-    expect(content.closest('[data-ui="Tooltip"]')).toHaveStyle({
-      maxWidth: `${BOUNDARY_WIDTH - DEFAULT_TOOLTIP_PADDING * 2}px`,
-    })
-  })
-
-  it('measures once per open, not on re-renders while the tooltip stays open', () => {
+  it('measures the boundary and the portal while the tooltip is shown, and stops once it is closed', async () => {
     const {rerender} = render(renderTooltip())
     const button = screen.getByText('Hover me')
 
     fireEvent.mouseEnter(button)
 
-    expectMeasuredOnce()
+    // Nothing is read synchronously when the tooltip opens either (no layout effect): the
+    // measurement is part of Floating UI's positioning pass, which is asynchronous
+    expect(screen.getByText('Tooltip content')).toBeVisible()
+    expectNoMeasurement()
 
-    // Neither an unrelated re-render…
-    rerender(renderTooltip({content: 'Other content'}))
+    await flushPositioning()
 
-    expect(screen.getByText('Other content')).toBeVisible()
-    expectMeasuredOnce()
+    expect(boundary.offsetWidth).toHaveBeenCalled()
+    expect(portal.offsetWidth).toHaveBeenCalled()
+    // The body is no longer a fallback: the viewport bounds the tooltip instead
+    expect(bodyOffsetWidth).not.toHaveBeenCalled()
 
-    // …nor a new boundary element measures again while open
-    const otherBoundary = createMeasuredElement(BOUNDARY_WIDTH)
+    // jsdom lays nothing out, so Floating UI finds no room at all. The cap is then clamped to
+    // zero rather than dropped: a dropped cap would let a tooltip grow across its boundary
+    expect(screen.getByText('Tooltip content').closest('[data-ui="Tooltip"]')).toHaveStyle({
+      maxWidth: '0px',
+    })
 
-    rerender(renderTooltip({boundaryElement: otherBoundary.element, content: 'Other content'}))
-
-    expect(otherBoundary.offsetWidth).not.toHaveBeenCalled()
-    expectMeasuredOnce()
-
-    // The next open measures the current boundary (and the portal again)
     fireEvent.mouseLeave(button)
-    fireEvent.mouseEnter(button)
+    await flushPositioning()
 
-    expect(otherBoundary.offsetWidth).toHaveBeenCalledTimes(1)
-    expect(portal.offsetWidth).toHaveBeenCalledTimes(2)
+    const boundaryReads = boundary.offsetWidth.mock.calls.length
+    const portalReads = portal.offsetWidth.mock.calls.length
+
+    // Closed again, nothing measures any more — not even on re-render
+    rerender(renderTooltip({content: 'Other content'}))
+    await flushPositioning()
+
+    expect(boundary.offsetWidth).toHaveBeenCalledTimes(boundaryReads)
+    expect(portal.offsetWidth).toHaveBeenCalledTimes(portalReads)
+    expect(bodyOffsetWidth).not.toHaveBeenCalled()
+  })
+
+  /**
+   * The middleware reads the elements through refs, so a swap does not change the middleware
+   * array; the tooltip repositions itself against the new element instead. Without that, the
+   * swap is at the mercy of Floating UI's deep comparison of the middleware, which treats two
+   * plain elements as equal and never looks inside the `apply` closure that holds the portal.
+   *
+   * The boundary swap is also the guard for the repositioning effect's dependencies as compiled
+   * (this suite runs through the React Compiler): a boundary swap changes nothing else, so only
+   * an effect keyed on `boundaryElement` reads the new boundary. A portal swap re-parents the
+   * tooltip, which makes Floating UI reposition on its own, so it does not guard the dependency.
+   */
+  it('repositions against a boundary or portal element swapped while the tooltip is shown', async () => {
+    const {rerender} = render(renderTooltip())
+
+    fireEvent.mouseEnter(screen.getByText('Hover me'))
+    await flushPositioning()
+
+    const otherBoundary = createMeasuredElement(BOUNDARY_WIDTH)
+    const otherPortal = createMeasuredElement(PORTAL_WIDTH)
+
+    rerender(renderTooltip({boundaryElement: otherBoundary.element}))
+    await flushPositioning()
+
+    expect(screen.getByText('Tooltip content')).toBeVisible()
+    expect(otherBoundary.offsetWidth).toHaveBeenCalled()
+
+    rerender(
+      renderTooltip({boundaryElement: otherBoundary.element, portalElement: otherPortal.element}),
+    )
+    await flushPositioning()
+
+    expect(screen.getByText('Tooltip content')).toBeVisible()
+    expect(otherPortal.offsetWidth).toHaveBeenCalled()
+
     otherBoundary.element.remove()
+    otherPortal.element.remove()
+  })
+
+  it('caps to the default portal when the named portal is missing, like `Portal` renders into it', async () => {
+    const defaultPortal = createMeasuredElement(PORTAL_WIDTH)
+
+    render(
+      <PortalProvider
+        element={portal.element}
+        __unstable_elements={{default: defaultPortal.element}}
+      >
+        <Tooltip
+          boundaryElement={boundary.element}
+          content={<Text size={1}>{'Tooltip content'}</Text>}
+          portal="missing"
+        >
+          <Button mode="bleed" text="Hover me" />
+        </Tooltip>
+      </PortalProvider>,
+    )
+
+    fireEvent.mouseEnter(screen.getByText('Hover me'))
+    await flushPositioning()
+
+    const content = screen.getByText('Tooltip content')
+
+    expect(content).toBeVisible()
+    expect(defaultPortal.element.contains(content)).toBe(true)
+    // The cap is measured on the element the tooltip renders into, not on the context's element
+    expect(defaultPortal.offsetWidth).toHaveBeenCalled()
+    expect(portal.offsetWidth).not.toHaveBeenCalled()
+
+    defaultPortal.element.remove()
   })
 })

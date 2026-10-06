@@ -1,5 +1,6 @@
 import {createPortal} from 'react-dom'
 
+import {resolvePortalElement} from './resolvePortalElement'
 import {usePortal} from './usePortal'
 
 /**
@@ -19,8 +20,7 @@ export interface PortalProps {
 export function Portal(props: PortalProps): React.ReactPortal | null {
   const {children, __unstable_name: name} = props
   const portal = usePortal()
-  const portalElement =
-    (name ? portal.elements && portal.elements[name] : portal.element) || portal.elements?.default
+  const portalElement = resolvePortalElement(portal, name)
 
   if (!portalElement) {
     return null
