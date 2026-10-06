@@ -36,3 +36,22 @@ export const Default: Story = {
     </Box>
   ),
 }
+
+/**
+ * The breakpoints describe the element's own width, not the viewport's: the card is green while
+ * its container is narrower than 200px and blue from 200px on, whatever the size of the frame.
+ */
+export const NarrowContainer: StoryObj<{width: number}> = {
+  args: {width: 150},
+  argTypes: {width: {control: {type: 'range', min: 0, max: 400, step: 10}}},
+  parameters: {controls: {include: ['width']}},
+  render: ({width}) => (
+    <Box id="element-query-container" style={{width}}>
+      <ElementQuery id="element-query" media={[100, 200, 300]}>
+        <TestCard padding={2} shadow={1}>
+          <Text>This card sits inside a fixed-width container.</Text>
+        </TestCard>
+      </ElementQuery>
+    </Box>
+  ),
+}
