@@ -316,13 +316,16 @@ export function Popover(
   if (isOpen && !hasRendered) setHasRendered(true)
 
   const shouldRender = isOpen || hasRendered
-  // No reference to listen to while disabled, which also drops the listeners of one that was
-  // enabled before
-  const reference = disabled ? null : elements.reference
+  // The element to listen to for intent to open the popover: none once the popover has rendered,
+  // since there is nothing left to pre-render, and none while disabled, which also drops the
+  // listeners of a popover that was enabled before
+  const intentReference = shouldRender || disabled ? null : elements.reference
 
   useEffect(() => {
-    if (shouldRender || !reference) return undefined
+    if (!intentReference) return undefined
 
+    const controller = new AbortController()
+    const {signal} = controller
     // In a transition, so that it never holds up an open that follows right away (a click), and
     // so that React pre-renders the hidden popover in the background
     const handleIntent = () => startTransition(() => setHasRendered(true))
@@ -330,18 +333,18 @@ export function Popover(
     // `focusin` rather than `focus` so that focus landing inside the reference element counts too.
     // `pointerdown` is a fallback for a pointer that was already over the element when it
     // rendered, which fires no `pointerenter`.
-    for (const type of INTENT_EVENT_TYPES) reference.addEventListener(type, handleIntent)
+    for (const type of INTENT_EVENT_TYPES) {
+      intentReference.addEventListener(type, handleIntent, {signal})
+    }
 
     // Focus that landed before the listeners did (an `autoFocus` reference, a `referenceElement`
     // that was focused already) fired its `focusin` unheard, so count it now
-    const {activeElement} = reference.ownerDocument
+    const {activeElement} = intentReference.ownerDocument
 
-    if (activeElement && reference.contains(activeElement)) handleIntent()
+    if (activeElement && intentReference.contains(activeElement)) handleIntent()
 
-    return () => {
-      for (const type of INTENT_EVENT_TYPES) reference.removeEventListener(type, handleIntent)
-    }
-  }, [reference, shouldRender])
+    return () => controller.abort()
+  }, [intentReference])
 
   const referenceHidden = middlewareData.hide?.referenceHidden
 

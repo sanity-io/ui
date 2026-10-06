@@ -34,6 +34,24 @@ function hiddenByActivity(element: Element) {
   return false
 }
 
+/**
+ * The intent listeners are registered with an `AbortSignal` and removed by aborting it, so the
+ * registrations whose signal has not been aborted are the ones still listening. A registration
+ * without a signal can never be removed that way, so it counts as listening for good.
+ */
+function spyOnIntentListeners(reference: HTMLElement) {
+  const addEventListener = vi.spyOn(reference, 'addEventListener')
+
+  return {
+    active: () =>
+      addEventListener.mock.calls.filter(([type, , options]) => {
+        if (type !== 'focusin' && type !== 'pointerenter' && type !== 'pointerdown') return false
+
+        return typeof options === 'object' && options.signal ? !options.signal.aborted : true
+      }).length,
+  }
+}
+
 function expectNotRendered() {
   expect(queryPopoverCard()).toBeNull()
   expect(screen.queryByText('Popover content')).not.toBeInTheDocument()
@@ -273,22 +291,20 @@ describe('Popover', () => {
 
     it('stops listening for intent once the popover has rendered', () => {
       const reference = document.createElement('button')
-      const addEventListener = vi.spyOn(reference, 'addEventListener')
-      const removeEventListener = vi.spyOn(reference, 'removeEventListener')
+      const intentListeners = spyOnIntentListeners(reference)
 
       const {rerender} = render(<Popover content={content} referenceElement={reference} />)
 
-      const isIntentType = ([type]: [string, ...unknown[]]) =>
-        type === 'focusin' || type === 'pointerenter' || type === 'pointerdown'
-      const intentListeners = () =>
-        addEventListener.mock.calls.filter(isIntentType).length -
-        removeEventListener.mock.calls.filter(isIntentType).length
-
-      expect(intentListeners()).toBe(3)
+      expect(intentListeners.active()).toBe(3)
 
       rerender(<Popover content={content} open referenceElement={reference} />)
 
-      expect(intentListeners()).toBe(0)
+      expect(intentListeners.active()).toBe(0)
+
+      // Nothing to listen for once rendered, closing does not bring the listeners back
+      rerender(<Popover content={content} referenceElement={reference} />)
+
+      expect(intentListeners.active()).toBe(0)
     })
 
     it('pre-renders and shows an `animate` popover the same way', () => {
@@ -359,17 +375,11 @@ describe('Popover', () => {
 
     it('does not count intent while `disabled`', () => {
       const reference = document.createElement('button')
-      const addEventListener = vi.spyOn(reference, 'addEventListener')
-      const removeEventListener = vi.spyOn(reference, 'removeEventListener')
-      const isIntentType = ([type]: [string, ...unknown[]]) =>
-        type === 'focusin' || type === 'pointerenter' || type === 'pointerdown'
-      const intentListeners = () =>
-        addEventListener.mock.calls.filter(isIntentType).length -
-        removeEventListener.mock.calls.filter(isIntentType).length
+      const intentListeners = spyOnIntentListeners(reference)
 
       const {rerender} = render(<Popover content={content} disabled referenceElement={reference} />)
 
-      expect(intentListeners()).toBe(0)
+      expect(intentListeners.active()).toBe(0)
 
       fireEvent.focusIn(reference)
       fireEvent.pointerEnter(reference)
@@ -378,12 +388,12 @@ describe('Popover', () => {
 
       // Nothing was latched while disabled; once enabled it is listening and still renders nothing
       expectNotRendered()
-      expect(intentListeners()).toBe(3)
+      expect(intentListeners.active()).toBe(3)
 
       // Disabling again drops the listeners
       rerender(<Popover content={content} disabled referenceElement={reference} />)
 
-      expect(intentListeners()).toBe(0)
+      expect(intentListeners.active()).toBe(0)
 
       rerender(<Popover content={content} referenceElement={reference} />)
       fireEvent.focusIn(reference)
