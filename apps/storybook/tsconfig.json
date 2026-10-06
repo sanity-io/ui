@@ -1,6 +1,13 @@
 {
   "extends": "../../tsconfig.settings.json",
-  "include": ["./.storybook/**/*", "./stories", "./tests", "./typings", "./vitest.config.ts"],
+  "include": [
+    "./.storybook/**/*",
+    "./scripts",
+    "./stories",
+    "./tests",
+    "./typings",
+    "./vitest.config.ts"
+  ],
   "compilerOptions": {
     "noEmit": true,
     "declaration": false,

@@ -3,6 +3,13 @@
   "workspaces": {
     ".": {},
     "apps/docs": {},
+    "apps/storybook": {
+      "ignoreDependencies": [
+        // CLI daemon that agents drive with `pnpm --filter sanity-ui-storybook exec
+        // chrome-devtools ...` (see .agents/skills/react-devtools-mcp); never imported
+        "chrome-devtools-mcp",
+      ],
+    },
     "apps/studio": {
       // The one-shot DS-276 docs export script is run via unrun, which knip
       // does not recognize as a script runner

@@ -16,6 +16,8 @@
     "lint": "pnpm run oxlint",
     "lint:fix": "pnpm lint --fix --fix-suggestions",
     "oxlint": "oxlint --disable-nested-config",
+    "react-devtools-mcp:chrome": "pnpm --filter sanity-ui-storybook react-devtools-mcp:chrome",
+    "react-devtools-mcp:storybook": "ENABLE_REACT_DEVTOOLS_MCP=true pnpm dev",
     "release": "changeset publish",
     "storybook:build": "pnpm --filter sanity-ui-storybook build",
     "test": "pnpm --filter @sanity/ui test",
