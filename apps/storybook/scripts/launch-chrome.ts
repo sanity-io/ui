@@ -9,6 +9,9 @@
  * - `url` defaults to a single story rendered through `iframe.html`. Tool discovery only sees the
  *   top-level document, so stories must be opened that way rather than through the manager UI.
  * - `CHROME_PATH` overrides the Chrome executable that is used.
+ * - Chrome is started with an allowlisted environment (see `./chrome-environment.ts`) instead of
+ *   the caller's, so tokens and keys in the shell never reach `/proc/<pid>/environ` for the
+ *   browser's lifetime.
  * - The profile lives in `node_modules/.cache/react-devtools-mcp/chrome-profile` and is reused
  *   across runs. Chrome stays open after this script exits; stop it with `kill <pid>`. When a
  *   browser already listens on the port, the url is opened as a new tab in it instead.
@@ -19,16 +22,55 @@ import {accessSync, constants, mkdirSync} from 'node:fs'
 import path from 'node:path'
 import {setTimeout as sleep} from 'node:timers/promises'
 
+import {chromeEnvironment} from './chrome-environment.ts'
+
 const DEFAULT_URL = 'http://localhost:6006/iframe.html?viewMode=story&id=primitives-button--default'
 const DEFAULT_PORT = 9222
 const STARTUP_TIMEOUT_MS = 30_000
 const PROBE_TIMEOUT_MS = 2_000
 
+const ALLOWED_PROTOCOLS = new Set(['http:', 'https:'])
+
 interface Options {
-  url: string
+  url: URL
   port: number
   headless: boolean
   chromeArgs: string[]
+}
+
+/**
+ * Parses the url to open. Anything that is not an absolute http(s) url is rejected up front, and
+ * so is a url with embedded credentials, which would otherwise travel with it everywhere. The
+ * errors never reflect the argument itself (it may hold a password, in shapes no redaction
+ * reliably catches); they name at most the parsed scheme and host.
+ */
+function parseUrl(value: string): URL {
+  let url: URL
+  try {
+    url = new URL(value)
+  } catch {
+    throw new Error(
+      'Invalid url: expected an absolute http(s) url such as http://localhost:6006/iframe.html?viewMode=story&id=<story-id>',
+    )
+  }
+  if (!ALLOWED_PROTOCOLS.has(url.protocol)) {
+    const host = url.hostname === '' ? '' : ` (host ${url.hostname})`
+    throw new Error(`Invalid url: expected an http(s) url, got the "${url.protocol}" scheme${host}`)
+  }
+  if (url.username !== '' || url.password !== '') {
+    throw new Error(
+      `Invalid url for ${url.origin}: credentials in the url (user:password@) are not supported`,
+    )
+  }
+  return url
+}
+
+/**
+ * The url for messages, rebuilt from origin, path and query so that nothing outside those parts
+ * (a fragment, or anything else a caller typed) can be echoed.
+ */
+function describeUrl(url: URL): string {
+  return `${url.origin}${url.pathname}${url.search}${url.hash === '' ? '' : '#…'}`
 }
 
 function parsePort(value: string | undefined): number {
@@ -40,7 +82,12 @@ function parsePort(value: string | undefined): number {
 }
 
 function parseArgs(argv: string[]): Options {
-  const options: Options = {url: DEFAULT_URL, port: DEFAULT_PORT, headless: false, chromeArgs: []}
+  const options: Options = {
+    url: new URL(DEFAULT_URL),
+    port: DEFAULT_PORT,
+    headless: false,
+    chromeArgs: [],
+  }
   const passthroughIndex = argv.indexOf('--')
   const ownArgs = passthroughIndex === -1 ? argv : argv.slice(0, passthroughIndex)
   options.chromeArgs = passthroughIndex === -1 ? [] : argv.slice(passthroughIndex + 1)
@@ -56,7 +103,7 @@ function parseArgs(argv: string[]): Options {
     } else if (arg.startsWith('--')) {
       throw new Error(`Unknown option ${arg}. Pass Chrome flags after "--".`)
     } else {
-      options.url = arg
+      options.url = parseUrl(arg)
     }
   }
 
@@ -213,10 +260,14 @@ async function launchChrome(options: Options): Promise<Launched> {
     // Chrome refuses to run its sandbox as root (containers, some CI runners)
     ...(process.platform === 'linux' && process.getuid?.() === 0 ? ['--no-sandbox'] : []),
     ...options.chromeArgs,
-    options.url,
+    options.url.href,
   ]
 
-  const child = spawn(chrome, args, {detached: true, stdio: 'ignore'})
+  const child = spawn(chrome, args, {
+    detached: true,
+    stdio: 'ignore',
+    env: chromeEnvironment(process.env),
+  })
   child.unref()
   let failure: Error | null = null
   // A spawn that fails (stale CHROME_PATH, missing binary) emits `error` and no `exit`; without a
@@ -245,12 +296,12 @@ async function main(): Promise<void> {
   const {browserName, pid} =
     runningBrowser === null
       ? await launchChrome(options)
-      : await openInRunningBrowser(browserUrl, runningBrowser, options.url)
+      : await openInRunningBrowser(browserUrl, runningBrowser, options.url.href)
 
-  console.log(
-    `${browserName} is listening on ${browserUrl}${options.headless ? ' (headless)' : ''}`,
-  )
-  console.log(`Opened ${options.url}`)
+  // A reused browser's mode is unknown; --headless only describes a Chrome started here
+  const mode = pid !== undefined && options.headless ? ' (headless)' : ''
+  console.log(`${browserName} is listening on ${browserUrl}${mode}`)
+  console.log(`Opened ${describeUrl(options.url)}`)
   console.log(
     pid === undefined
       ? `Reused the browser that was already listening on ${browserUrl}`

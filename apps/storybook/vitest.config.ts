@@ -80,6 +80,16 @@ export default defineConfig({
           setupFiles: ['./.storybook/vitest.setup.ts'],
         },
       },
+      {
+        // Pure helpers of the dev scripts (the Chrome launcher's environment allowlist); plain
+        // node, no browser
+        test: {
+          name: 'scripts',
+          include: ['scripts/**/*.test.ts'],
+          environment: 'node',
+          fileParallelism: false,
+        },
+      },
     ],
   },
 })
