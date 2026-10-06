@@ -347,8 +347,6 @@ export function Tooltip(
 
   if (!child) return <></>
 
-  if (disabled) return child
-
   const tooltip = (
     <Layer
       data-ui="Tooltip"
@@ -390,16 +388,22 @@ export function Tooltip(
     tooltip
   )
 
+  const tooltipActivity = animate ? (
+    <AnimateActivity layoutMode="default" mode={showTooltip ? 'visible' : 'hidden'}>
+      {tooltipNode}
+    </AnimateActivity>
+  ) : (
+    <Activity mode={showTooltip ? 'visible' : 'hidden'}>{tooltipNode}</Activity>
+  )
+
+  // The fragment has the same shape whether or not the tooltip is disabled, so the referred
+  // element keeps its fiber (DOM node, state, focus) when `disabled` toggles. Returning the bare
+  // child while disabled would change the tree shape and remount it. While disabled the tooltip
+  // slot is left empty: no hidden tooltip DOM is rendered.
   return (
     <>
       {/* the tooltip */}
-      {animate ? (
-        <AnimateActivity layoutMode="default" mode={showTooltip ? 'visible' : 'hidden'}>
-          {tooltipNode}
-        </AnimateActivity>
-      ) : (
-        <Activity mode={showTooltip ? 'visible' : 'hidden'}>{tooltipNode}</Activity>
-      )}
+      {disabled ? null : tooltipActivity}
 
       {/* the referred element */}
       {child}
