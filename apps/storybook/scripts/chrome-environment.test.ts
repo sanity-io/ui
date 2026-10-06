@@ -15,6 +15,8 @@ const SECRETS = {
   CHROME_API_KEY: 'chrome...',
   CHROME_TOKEN: 'chrome...',
   SSL_CERT_PASSWORD: 'cert...',
+  XDG_API_KEY: 'xdg...',
+  LC_SECRET_KEY: 'lc...',
   DATABASE_URL: 'postgres://user:password@db/app',
   npm_config_registry: 'https://registry.npmjs.org/',
 }
@@ -30,11 +32,16 @@ describe('chromeEnvironment', () => {
       TMPDIR: '/tmp',
       LANG: 'en_US.UTF-8',
       LC_ALL: 'en_US.UTF-8',
+      LC_TIME: 'nb_NO.UTF-8',
       TZ: 'Europe/Oslo',
       DISPLAY: ':1',
       WAYLAND_DISPLAY: 'wayland-0',
       XAUTHORITY: '/home/dev/.Xauthority',
       XDG_RUNTIME_DIR: '/run/user/1000',
+      XDG_SESSION_TYPE: 'wayland',
+      XDG_CURRENT_DESKTOP: 'GNOME',
+      XDG_DATA_DIRS: '/usr/local/share:/usr/share',
+      XDG_SESSION_ID: '2',
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/run/user/1000/bus',
       HTTPS_PROXY: 'http://proxy:3128',
       no_proxy: 'localhost,127.0.0.1',
@@ -58,11 +65,15 @@ describe('chromeEnvironment', () => {
       TMPDIR: '/tmp',
       LANG: 'en_US.UTF-8',
       LC_ALL: 'en_US.UTF-8',
+      LC_TIME: 'nb_NO.UTF-8',
       TZ: 'Europe/Oslo',
       DISPLAY: ':1',
       WAYLAND_DISPLAY: 'wayland-0',
       XAUTHORITY: '/home/dev/.Xauthority',
       XDG_RUNTIME_DIR: '/run/user/1000',
+      XDG_SESSION_TYPE: 'wayland',
+      XDG_CURRENT_DESKTOP: 'GNOME',
+      XDG_DATA_DIRS: '/usr/local/share:/usr/share',
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/run/user/1000/bus',
       HTTPS_PROXY: 'http://proxy:3128',
       no_proxy: 'localhost,127.0.0.1',
@@ -135,7 +146,7 @@ describe('chromeEnvironment', () => {
     }
   })
 
-  test('keeps macOS text encoding and the LC_/XDG_ families in any casing', () => {
+  test('keeps macOS text encoding and matches exact names in any casing', () => {
     const result = chromeEnvironment({
       __CF_USER_TEXT_ENCODING: '0x1F5:0x0:0x0',
       lc_messages: 'C',
@@ -153,22 +164,30 @@ describe('chromeEnvironment', () => {
     })
   })
 
-  test('only the exact Chrome and CA bundle names pass, never their prefixes', () => {
+  test('only exact names pass, never a CHROME_, SSL_CERT_, XDG_ or LC_ prefix', () => {
     const result = chromeEnvironment({
       CHROME_DEVEL_SANDBOX: '/opt/chrome/chrome-sandbox',
       CHROME_HEADLESS: '1',
       SSL_CERT_DIR: '/etc/ssl/certs',
+      XDG_CONFIG_HOME: '/home/dev/.config',
+      LC_MESSAGES: 'C',
       CHROME_API_KEY: 'chrome...',
       CHROME_TOKEN: 'chrome...',
       CHROME_WRAPPER: '/usr/bin/google-chrome',
       SSL_CERT_PASSWORD: 'cert...',
       SSL_CERT_KEY: 'key...',
+      XDG_API_KEY: 'xdg...',
+      XDG_SESSION_ID: '2',
+      LC_SECRET_KEY: 'lc...',
+      LC_: 'empty-suffix',
     })
 
     expect(result).toEqual({
       CHROME_DEVEL_SANDBOX: '/opt/chrome/chrome-sandbox',
       CHROME_HEADLESS: '1',
       SSL_CERT_DIR: '/etc/ssl/certs',
+      XDG_CONFIG_HOME: '/home/dev/.config',
+      LC_MESSAGES: 'C',
     })
   })
 })
