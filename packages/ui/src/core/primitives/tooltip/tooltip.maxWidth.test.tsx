@@ -111,20 +111,15 @@ describe('Tooltip max width measurement', () => {
   it('does not measure when a disabled tooltip is hovered', () => {
     const {rerender} = render(renderTooltip({disabled: true}))
 
-    // Hovering flips the open state for one commit before the close effect runs; the
-    // measurement is gated out of that commit too
+    // Hovering records the hover state, but a disabled tooltip is never shown, so nothing
+    // measures
     fireEvent.mouseEnter(screen.getByText('Hover me'))
 
     expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
     expectNoMeasurement()
 
-    // Enabled again, the next hover measures (the child is queried again: enabling currently
-    // remounts it, see #3116)
+    // Enabled again while still hovered, the tooltip shows and measures right away
     rerender(renderTooltip({disabled: false}))
-
-    expectNoMeasurement()
-
-    fireEvent.mouseEnter(screen.getByText('Hover me'))
 
     expect(screen.getByText('Tooltip content')).toBeVisible()
     expectMeasuredOnce()

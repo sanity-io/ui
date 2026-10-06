@@ -565,14 +565,91 @@ describe('Tooltip', () => {
 
       rerender(renderTooltip(false))
 
-      // Disabling closed the tooltip, so re-enabling does not reopen it by itself...
-      expectTooltipHidden('Tooltip content')
-
-      // ...but the next interaction with the (still mounted) referred element does
-      fireEvent.mouseLeave(button)
-      fireEvent.mouseEnter(button)
+      // `disabled` only hides the tooltip, it does not reset the hover state: re-enabled while
+      // the (still mounted) referred element is hovered, the tooltip shows right away
       expect(screen.getByRole('button', {name: 'Hover me'})).toBe(button)
       expectTooltipVisible('Tooltip content')
+
+      // Once the pointer has left, re-enabling shows nothing until the next hover
+      fireEvent.mouseLeave(button)
+      rerender(renderTooltip(true))
+      rerender(renderTooltip(false))
+      expectTooltipHidden('Tooltip content')
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+    })
+
+    it('hides the tooltip while disabled without an extra commit', () => {
+      const renderCommits: boolean[] = []
+
+      function Probe({disabled}: {disabled: boolean}) {
+        renderCommits.push(disabled)
+
+        return (
+          <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} disabled={disabled}>
+            <Button mode="bleed" text="Hover me" />
+          </Tooltip>
+        )
+      }
+
+      const {rerender} = render(<Probe disabled={false} />, {strict: false})
+
+      fireEvent.mouseEnter(screen.getByRole('button', {name: 'Hover me'}))
+      expectTooltipVisible('Tooltip content')
+
+      renderCommits.length = 0
+      rerender(<Probe disabled />)
+
+      // The tooltip is hidden in the render that received `disabled`; nothing re-rendered the
+      // parent afterwards to close it
+      expect(document.querySelector('[data-ui="Tooltip"]')).toBeNull()
+      expect(renderCommits).toEqual([true])
+    })
+  })
+
+  describe('Rendering without `content`', () => {
+    const renderTooltip = (content: React.ReactNode) => (
+      <Tooltip content={content}>
+        <Button mode="bleed" text="Hover me" />
+      </Tooltip>
+    )
+
+    it('hides the tooltip while `content` is empty, and shows it again once there is content', () => {
+      const {rerender} = render(renderTooltip(<Text size={1}>{'Tooltip content'}</Text>))
+
+      const button = screen.getByRole('button', {name: 'Hover me'})
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+
+      rerender(renderTooltip(null))
+      expectTooltipHidden('Tooltip content')
+
+      // Still hovered, so content arriving shows the tooltip without another `mouseenter`
+      rerender(renderTooltip(<Text size={1}>{'Tooltip content'}</Text>))
+      expectTooltipVisible('Tooltip content')
+
+      // Not hovered any more: new content stays hidden until the next hover
+      fireEvent.mouseLeave(button)
+      rerender(renderTooltip(null))
+      rerender(renderTooltip(<Text size={1}>{'Tooltip content'}</Text>))
+      expectTooltipHidden('Tooltip content')
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+    })
+
+    it('does not show an empty tooltip when hovered', () => {
+      render(renderTooltip(undefined))
+
+      fireEvent.mouseEnter(screen.getByRole('button', {name: 'Hover me'}))
+
+      const tooltip = document.querySelector('[data-ui="Tooltip"]')
+
+      if (tooltip) {
+        expect(tooltip).not.toBeVisible()
+      }
     })
   })
 })

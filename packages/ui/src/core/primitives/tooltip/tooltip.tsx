@@ -165,7 +165,12 @@ export function Tooltip(
   const [isOpen, setIsOpen] = useDelayedState(false)
   const delayGroupContext = useTooltipDelayGroup()
   const {setIsGroupActive, setOpenTooltipId} = delayGroupContext || {}
-  const showTooltip = isOpen || delayGroupContext?.openTooltipId === tooltipId
+  // Derived, not synced: `disabled` and an empty `content` hide the tooltip in the same render
+  // that changes them, instead of an effect closing it one commit later. The hover state
+  // (`isOpen`, or the group pointing at this tooltip) is kept as it is, so a tooltip that is
+  // re-enabled or given content while its child is still hovered shows right away.
+  const showTooltip =
+    !disabled && Boolean(content) && (isOpen || delayGroupContext?.openTooltipId === tooltipId)
 
   const isInsideGroup = delayGroupContext !== null
   const openDelayProp = typeof delay === 'number' ? delay : delay?.open || 0
@@ -255,16 +260,6 @@ export function Tooltip(
   // Handle closing the tooltip when the mouse leaves the referenceElement
   useCloseOnMouseLeave({handleIsOpenChange, referenceElement, showTooltip, isInsideGroup})
 
-  // Close when `disabled` changes to `true`
-  useEffect(() => {
-    if (disabled && showTooltip) handleIsOpenChange(false)
-  }, [disabled, handleIsOpenChange, showTooltip])
-
-  // Close when `content` changes to falsy
-  useEffect(() => {
-    if (!content && showTooltip) handleIsOpenChange(false)
-  }, [content, handleIsOpenChange, showTooltip])
-
   const onWindowEscape = useEffectEvent(() => handleIsOpenChange(false, true))
 
   useEffect(() => {
@@ -295,11 +290,9 @@ export function Tooltip(
     )
   })
 
-  // A disabled tooltip renders nothing, but hovering its child still flips `showTooltip` for the
-  // one commit before the effect above closes it again, so it is gated out explicitly.
   useLayoutEffect(() => {
-    if (showTooltip && !disabled) measureTooltipMaxWidth()
-  }, [disabled, showTooltip])
+    if (showTooltip) measureTooltipMaxWidth()
+  }, [showTooltip])
 
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
