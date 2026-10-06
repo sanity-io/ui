@@ -156,6 +156,7 @@ minimumReleaseAgeExclude:
   - storybook@10.6.1
   - eslint-plugin-storybook@10.6.1
   - '@vitejs/plugin-react@6.1.2'
+  - '@sanity-labs/design-tokens@0.0.2-alpha.6'
 
 minimumReleaseAgeExcludePrune: true
 
