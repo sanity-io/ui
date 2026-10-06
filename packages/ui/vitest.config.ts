@@ -1,11 +1,17 @@
 import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
+import react from '@vitejs/plugin-react'
 import {defineConfig} from 'vitest/config'
 
 export default defineConfig({
-  // Compiles the vanilla-extract `.css.ts` modules imported by the source
-  // under test (vitest stubs the resulting virtual CSS, but the class name
-  // exports must evaluate)
-  plugins: [vanillaExtractPlugin()],
+  plugins: [
+    // Compiles the vanilla-extract `.css.ts` modules imported by the source
+    // under test (vitest stubs the resulting virtual CSS, but the class name
+    // exports must evaluate)
+    vanillaExtractPlugin(),
+    // React Compiler on oxc (`oxc-transform-react`), the same transform the
+    // package build runs (`tsdown.config.mts`), so tests exercise what ships
+    react({compiler: {target: '19'}}),
+  ],
   resolve: {
     // Keep every `from 'vitest'` (setup files, jest-dom, vitest-axe) on this
     // package's copy. pnpm isolates the same vitest version per vite peer set.
