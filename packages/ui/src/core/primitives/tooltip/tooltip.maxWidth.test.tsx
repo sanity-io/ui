@@ -63,10 +63,18 @@ describe('Tooltip max width measurement', () => {
     return measured.filter((element) => element === boundary || element === portal)
   }
 
-  function renderTooltip(content = 'Tooltip content', boundaryElement = boundary) {
+  function renderTooltip({
+    boundaryElement = boundary,
+    content = 'Tooltip content',
+    disabled = false,
+  }: {boundaryElement?: HTMLElement; content?: string; disabled?: boolean} = {}) {
     return (
       <PortalProvider element={portal}>
-        <Tooltip boundaryElement={boundaryElement} content={<Text size={1}>{content}</Text>}>
+        <Tooltip
+          boundaryElement={boundaryElement}
+          content={<Text size={1}>{content}</Text>}
+          disabled={disabled}
+        >
           <Button mode="bleed" text="Hover me" />
         </Tooltip>
       </PortalProvider>
@@ -79,9 +87,33 @@ describe('Tooltip max width measurement', () => {
     expect(measured).toEqual([])
 
     // Unrelated re-renders of a closed tooltip do not measure either
-    rerender(renderTooltip('Other content'))
+    rerender(renderTooltip({content: 'Other content'}))
 
     expect(measured).toEqual([])
+  })
+
+  it('does not read layout when a disabled tooltip is hovered', () => {
+    const {rerender} = render(renderTooltip({disabled: true}))
+    const button = screen.getByText('Hover me')
+
+    // Hovering flips the open state for one commit before the close effect runs; the
+    // measurement is gated out of that commit too
+    fireEvent.mouseEnter(button)
+
+    expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument()
+    expect(measured).toEqual([])
+
+    // Enabled again, the next hover measures (the child is queried again: enabling currently
+    // remounts it, see #3116)
+    fireEvent.mouseLeave(button)
+    rerender(renderTooltip({disabled: false}))
+
+    expect(measured).toEqual([])
+
+    fireEvent.mouseEnter(screen.getByText('Hover me'))
+
+    expect(screen.getByText('Tooltip content')).toBeVisible()
+    expect(measuredWidths()).toContain(boundary)
   })
 
   it('measures when the tooltip opens and caps the width to the narrowest element', () => {
@@ -110,7 +142,7 @@ describe('Tooltip max width measurement', () => {
     expect(readsAfterOpening).toBeGreaterThan(0)
 
     // Neither an unrelated re-render…
-    rerender(renderTooltip('Other content'))
+    rerender(renderTooltip({content: 'Other content'}))
 
     expect(screen.getByText('Other content')).toBeVisible()
     expect(measuredWidths()).toHaveLength(readsAfterOpening)
@@ -118,7 +150,7 @@ describe('Tooltip max width measurement', () => {
     // …nor a new boundary element measures again while open
     const otherBoundary = document.createElement('div')
     document.body.appendChild(otherBoundary)
-    rerender(renderTooltip('Other content', otherBoundary))
+    rerender(renderTooltip({boundaryElement: otherBoundary, content: 'Other content'}))
 
     expect(measured).not.toContain(otherBoundary)
 

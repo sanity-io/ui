@@ -295,9 +295,11 @@ export function Tooltip(
     )
   })
 
+  // A disabled tooltip renders nothing, but hovering its child still flips `showTooltip` for the
+  // one commit before the effect above closes it again, so it is gated out explicitly.
   useLayoutEffect(() => {
-    if (showTooltip) measureTooltipMaxWidth()
-  }, [showTooltip])
+    if (showTooltip && !disabled) measureTooltipMaxWidth()
+  }, [disabled, showTooltip])
 
   const setArrow = useCallback(
     (arrowEl: HTMLDivElement | null) => {
