@@ -137,13 +137,8 @@ function _createMediaStore(media: number[], key?: string): _MediaStore {
         listening = undefined
         activeMediaStores.delete(store)
 
-        // Evict once the current task is done, so a synchronous resubscription keeps the store
-        // (see `_createMediaQueryStore`)
-        queueMicrotask(() => {
-          if (subscribers.size === 0 && key !== undefined && mediaStores.get(key) === store) {
-            mediaStores.delete(key)
-          }
-        })
+        // Evict, unless a newer store has already taken this key over (see `_getMediaQueryStore`)
+        if (key !== undefined && mediaStores.get(key) === store) mediaStores.delete(key)
       }
     },
   }

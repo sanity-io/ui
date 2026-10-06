@@ -16,9 +16,6 @@ import {_getMediaQueryStore, _IDLE_STORE_LIMIT} from './mediaQueryObserver'
 
 const QUERY = '(prefers-reduced-motion: reduce)'
 
-/** Eviction of a store that lost its last subscriber is deferred to a microtask */
-const evictions = () => Promise.resolve()
-
 describe('mediaQueryObserver', () => {
   let controller: MatchMediaController
 
@@ -93,14 +90,13 @@ describe('mediaQueryObserver', () => {
     expect(controller.matchMedia).toHaveBeenCalledTimes(1)
   })
 
-  it('evicts the store with the last subscriber, and creates a fresh one for the next', async () => {
+  it('evicts the store with the last subscriber, and creates a fresh one for the next', () => {
     const store = _getMediaQueryStore(QUERY)
     const unsubscribe = store.subscribe(vi.fn())
 
     expect(controller.matchMedia).toHaveBeenCalledTimes(1)
 
     unsubscribe()
-    await evictions()
 
     expect(controller.listenerCount(QUERY)).toBe(0)
 
@@ -126,9 +122,9 @@ describe('mediaQueryObserver', () => {
     expect(controller.listenerCount(QUERY)).toBe(0)
   })
 
-  it('keeps a store that is resubscribed to within the same task, as React does in a commit', () => {
-    // StrictMode unsubscribes and resubscribes every store on mount; a sibling's cleanup followed
-    // by a mount in the same commit does the same for a shared store
+  it('puts a store that is subscribed to after its eviction back into the cache', () => {
+    // StrictMode's simulated unmount does this to every store on mount: the last subscriber
+    // leaves, which evicts the store, and subscribes again right away
     const store = _getMediaQueryStore(QUERY)
 
     store.subscribe(vi.fn())()
@@ -137,7 +133,8 @@ describe('mediaQueryObserver', () => {
 
     expect(_getMediaQueryStore(QUERY)).toBe(store)
 
-    // A later component shares it rather than opening a second listener
+    // A later component shares it rather than opening a second listener, and the store kept
+    // its list
     const unsubscribeLater = _getMediaQueryStore(QUERY).subscribe(vi.fn())
 
     expect(controller.listenerCount(QUERY)).toBe(1)
@@ -149,26 +146,7 @@ describe('mediaQueryObserver', () => {
     expect(controller.listenerCount(QUERY)).toBe(0)
   })
 
-  it('puts a store that is subscribed to after its eviction back into the cache', async () => {
-    const store = _getMediaQueryStore(QUERY)
-
-    store.subscribe(vi.fn())()
-    await evictions()
-
-    const unsubscribe = store.subscribe(vi.fn())
-
-    expect(_getMediaQueryStore(QUERY)).toBe(store)
-
-    const unsubscribeLater = _getMediaQueryStore(QUERY).subscribe(vi.fn())
-
-    expect(controller.listenerCount(QUERY)).toBe(1)
-    expect(controller.matchMedia).toHaveBeenCalledTimes(1)
-
-    unsubscribe()
-    unsubscribeLater()
-  })
-
-  it('does not put an evicted store back when its list predates a replaced window.matchMedia', async () => {
+  it('does not put an evicted store back when its list predates a replaced window.matchMedia', () => {
     const store = _getMediaQueryStore(QUERY)
     const unsubscribe = store.subscribe(vi.fn())
 
@@ -176,7 +154,6 @@ describe('mediaQueryObserver', () => {
     controller = installMatchMedia({[QUERY]: true})
 
     unsubscribe()
-    await evictions()
 
     const unsubscribeLate = store.subscribe(vi.fn())
     const next = _getMediaQueryStore(QUERY)
@@ -187,11 +164,10 @@ describe('mediaQueryObserver', () => {
     unsubscribeLate()
   })
 
-  it('keeps serving a store that was evicted before a late subscriber reached it', async () => {
+  it('keeps serving a store that was evicted before a late subscriber reached it', () => {
     const evicted = _getMediaQueryStore(QUERY)
 
     evicted.subscribe(vi.fn())()
-    await evictions()
 
     const current = _getMediaQueryStore(QUERY)
     const late = vi.fn()
@@ -207,7 +183,6 @@ describe('mediaQueryObserver', () => {
 
     // The orphan's last subscriber leaving does not evict the current store
     unsubscribeLate()
-    await evictions()
 
     expect(_getMediaQueryStore(QUERY)).toBe(current)
     expect(controller.listenerCount(QUERY)).toBe(1)
@@ -217,7 +192,7 @@ describe('mediaQueryObserver', () => {
     expect(controller.listenerCount(QUERY)).toBe(0)
   })
 
-  it('keeps a subscribed store on the list it listens to when window.matchMedia is replaced', async () => {
+  it('keeps a subscribed store on the list it listens to when window.matchMedia is replaced', () => {
     const store = _getMediaQueryStore(QUERY)
     const subscriber = vi.fn()
     const unsubscribe = store.subscribe(subscriber)
@@ -237,7 +212,6 @@ describe('mediaQueryObserver', () => {
 
     // Once the store has been let go of, the next subscriber lands on the new implementation
     unsubscribe()
-    await evictions()
 
     const next = _getMediaQueryStore(QUERY)
     const nextSubscriber = vi.fn()

@@ -14,9 +14,6 @@ import {usePrefersReducedMotion} from './usePrefersReducedMotion'
 
 const QUERY = '(prefers-reduced-motion: reduce)'
 
-/** Eviction of a store that lost its last subscriber is deferred to a microtask */
-const evictions = () => Promise.resolve()
-
 const pending = new Promise<void>(() => {})
 
 /** Asks for its query, then suspends for good: the render never commits, so it never subscribes */
@@ -68,12 +65,15 @@ describe('useMatchMedia', () => {
 
   it('shares one listener with components that mount later', () => {
     // StrictMode unsubscribes and resubscribes the first root's components on mount, which
-    // evicts their store in between; the second root must still land on that store
+    // evicts their store in between; it takes its place back, so the second root lands on it
     render(
       <StrictMode>
         <Motions count={1} label="a" />
       </StrictMode>,
     )
+
+    const evaluations = controller.matchMedia.mock.calls.length
+
     render(
       <StrictMode>
         <Motions count={1} label="b" />
@@ -81,7 +81,7 @@ describe('useMatchMedia', () => {
     )
 
     expect(controller.listenerCount(QUERY)).toBe(1)
-    expect(controller.matchMedia).toHaveBeenCalledTimes(1)
+    expect(controller.matchMedia).toHaveBeenCalledTimes(evaluations)
 
     act(() => controller.setMatches(QUERY, true))
 
@@ -113,7 +113,7 @@ describe('useMatchMedia', () => {
     expect(controller.listenerCount(QUERY)).toBe(0)
   })
 
-  it('keeps mounted components on the list they subscribed to when window.matchMedia is replaced', async () => {
+  it('keeps mounted components on the list they subscribed to when window.matchMedia is replaced', () => {
     const {unmount} = render(<Motions count={2} label="a" />)
     const previous = controller
 
@@ -129,7 +129,6 @@ describe('useMatchMedia', () => {
 
     // …and a remount picks up the replacement
     unmount()
-    await evictions()
     render(<Motions count={2} label="b" />)
 
     expect(controller.matchMedia).toHaveBeenCalledTimes(1)
@@ -169,9 +168,8 @@ describe('useMatchMedia', () => {
     expect(controller.matchMedia).toHaveBeenCalledTimes(count + 1)
   })
 
-  it('subscribes afresh after every component unmounted', async () => {
+  it('subscribes afresh after every component unmounted', () => {
     render(<Motions count={2} label="a" />).unmount()
-    await evictions()
 
     expect(controller.listenerCount(QUERY)).toBe(0)
 
