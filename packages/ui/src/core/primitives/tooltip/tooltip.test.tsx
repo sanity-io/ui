@@ -501,4 +501,78 @@ describe('Tooltip', () => {
       expect(handleMouseLeave).toHaveBeenCalledTimes(1)
     })
   })
+
+  describe('Toggling the `disabled` prop', () => {
+    /**
+     * The tree shape must not depend on `disabled`: a consumer may gate the tooltip through it
+     * while the referred element keeps its DOM node, state and focus. Returning the bare child in
+     * the disabled branch and a fragment otherwise would remount the referred element each time
+     * `disabled` flips.
+     */
+    it('keeps the referred element mounted when `disabled` toggles', () => {
+      const renderTooltip = (disabled: boolean) => (
+        <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} disabled={disabled}>
+          <input aria-label="Reference" />
+        </Tooltip>
+      )
+
+      const {rerender} = render(renderTooltip(false))
+
+      const input = screen.getByRole('textbox', {name: 'Reference'})
+
+      act(() => input.focus())
+      fireEvent.change(input, {target: {value: 'draft'}})
+      expect(input).toHaveFocus()
+      expect(input).toHaveValue('draft')
+
+      rerender(renderTooltip(true))
+
+      // Same DOM node, still focused, uncontrolled value intact
+      expect(screen.getByRole('textbox', {name: 'Reference'})).toBe(input)
+      expect(input).toHaveFocus()
+      expect(input).toHaveValue('draft')
+
+      rerender(renderTooltip(false))
+
+      expect(screen.getByRole('textbox', {name: 'Reference'})).toBe(input)
+      expect(input).toHaveFocus()
+      expect(input).toHaveValue('draft')
+    })
+
+    it('renders no tooltip while disabled, and works again once re-enabled', () => {
+      const renderTooltip = (disabled: boolean) => (
+        <Tooltip content={<Text size={1}>{'Tooltip content'}</Text>} disabled={disabled}>
+          <Button mode="bleed" text="Hover me" />
+        </Tooltip>
+      )
+
+      const {rerender} = render(renderTooltip(false))
+
+      const button = screen.getByRole('button', {name: 'Hover me'})
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+
+      rerender(renderTooltip(true))
+
+      // Not even a hidden tooltip is kept in the DOM while disabled
+      expect(document.querySelector('[data-ui="Tooltip"]')).toBeNull()
+      expect(screen.queryByText('Tooltip content')).toBeNull()
+
+      fireEvent.mouseLeave(button)
+      fireEvent.mouseEnter(button)
+      expect(document.querySelector('[data-ui="Tooltip"]')).toBeNull()
+
+      rerender(renderTooltip(false))
+
+      // Disabling closed the tooltip, so re-enabling does not reopen it by itself...
+      expectTooltipHidden('Tooltip content')
+
+      // ...but the next interaction with the (still mounted) referred element does
+      fireEvent.mouseLeave(button)
+      fireEvent.mouseEnter(button)
+      expect(screen.getByRole('button', {name: 'Hover me'})).toBe(button)
+      expectTooltipVisible('Tooltip content')
+    })
+  })
 })
