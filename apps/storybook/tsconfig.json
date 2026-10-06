@@ -10,6 +10,8 @@
   ],
   "compilerOptions": {
     "noEmit": true,
+    // scripts/ run under Node's type stripping, which needs the `.ts` extension on relative imports
+    "allowImportingTsExtensions": true,
     "declaration": false,
     "declarationMap": false,
     "types": ["node"],
