@@ -9,30 +9,35 @@ import '../../../../test/mocks/matchMedia.mock'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
+import {PortalProvider} from '../../utils/portal/portalProvider'
 import {Button} from '../button/button'
 import {Text} from '../text/text'
 import {DEFAULT_TOOLTIP_PADDING} from './constants'
 import {Tooltip} from './tooltip'
 
 const BOUNDARY_WIDTH = 300
-const BODY_WIDTH = 1024
+const PORTAL_WIDTH = 500
 
 /**
- * The tooltip caps its width to the narrowest of the boundary, portal and `document.body`
- * widths. Those are `offsetWidth` layout reads, and each one forces a synchronous layout, so
- * they must happen inside an effect and only when the tooltip opens — not on mount of a closed
- * tooltip, not on re-renders, and never during render. (The React Compiler turns an
- * unconditional property read inside an effect callback into a render-time memo dependency.
- * This suite runs the uncompiled source and cannot observe that; `dist/tooltip.js` is the place
- * to check it.)
+ * The tooltip caps its width to the narrowest of the boundary and portal elements. Those are
+ * `offsetWidth` layout reads, and each one forces a synchronous layout, so they must happen
+ * inside an effect and only when the tooltip opens — not on mount of a closed tooltip, not on
+ * re-renders, and never during render.
+ *
+ * This file also runs in the `react-compiler` vitest project (see `vitest.config.ts`), which
+ * compiles the source the way the package build does. That run is the one that catches the
+ * compiler lifting a member expression on a captured element (`portalElement?.offsetWidth`)
+ * into a render-time memo dependency; the plain source run cannot observe it.
  */
 describe('Tooltip max width measurement', () => {
   let boundary: HTMLDivElement
+  let portal: HTMLDivElement
   let measured: HTMLElement[]
 
   beforeEach(() => {
     boundary = document.createElement('div')
-    document.body.appendChild(boundary)
+    portal = document.createElement('div')
+    document.body.append(boundary, portal)
     measured = []
 
     vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockImplementation(function (
@@ -41,7 +46,7 @@ describe('Tooltip max width measurement', () => {
       measured.push(this)
 
       if (this === boundary) return BOUNDARY_WIDTH
-      if (this === document.body) return BODY_WIDTH
+      if (this === portal) return PORTAL_WIDTH
 
       return 0
     })
@@ -50,30 +55,33 @@ describe('Tooltip max width measurement', () => {
   afterEach(() => {
     vi.restoreAllMocks()
     boundary.remove()
+    portal.remove()
   })
 
   /** Layout reads of the elements the tooltip measures (floating-ui measures others) */
   function measuredWidths() {
-    return measured.filter((element) => element === boundary || element === document.body)
+    return measured.filter((element) => element === boundary || element === portal)
   }
 
   function renderTooltip(content = 'Tooltip content', boundaryElement = boundary) {
     return (
-      <Tooltip boundaryElement={boundaryElement} content={<Text size={1}>{content}</Text>}>
-        <Button mode="bleed" text="Hover me" />
-      </Tooltip>
+      <PortalProvider element={portal}>
+        <Tooltip boundaryElement={boundaryElement} content={<Text size={1}>{content}</Text>}>
+          <Button mode="bleed" text="Hover me" />
+        </Tooltip>
+      </PortalProvider>
     )
   }
 
   it('does not read layout while the tooltip is closed', () => {
     const {rerender} = render(renderTooltip())
 
-    expect(measuredWidths()).toEqual([])
+    expect(measured).toEqual([])
 
     // Unrelated re-renders of a closed tooltip do not measure either
     rerender(renderTooltip('Other content'))
 
-    expect(measuredWidths()).toEqual([])
+    expect(measured).toEqual([])
   })
 
   it('measures when the tooltip opens and caps the width to the narrowest element', () => {
@@ -85,7 +93,7 @@ describe('Tooltip max width measurement', () => {
 
     expect(content).toBeVisible()
     expect(measuredWidths()).toContain(boundary)
-    expect(measuredWidths()).toContain(document.body)
+    expect(measuredWidths()).toContain(portal)
     expect(content.closest('[data-ui="Tooltip"]')).toHaveStyle({
       maxWidth: `${BOUNDARY_WIDTH - DEFAULT_TOOLTIP_PADDING * 2}px`,
     })
