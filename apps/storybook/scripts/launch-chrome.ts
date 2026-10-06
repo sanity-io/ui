@@ -10,17 +10,20 @@
  *   top-level document, so stories must be opened that way rather than through the manager UI.
  * - `CHROME_PATH` overrides the Chrome executable that is used.
  * - The profile lives in `node_modules/.cache/react-devtools-mcp/chrome-profile` and is reused
- *   across runs. Chrome stays open after this script exits; stop it with `kill <pid>`.
+ *   across runs, with Chrome's output in `chrome.log` next to it. Chrome stays open after this
+ *   script exits; stop it with `kill <pid>`.
  */
 // oxlint-disable no-console, no-await-in-loop -- CLI script: reports to stdout and polls Chrome's debugging endpoint sequentially
 import {spawn} from 'node:child_process'
-import {accessSync, constants, mkdirSync} from 'node:fs'
+import {accessSync, constants, mkdirSync, openSync, readFileSync} from 'node:fs'
 import path from 'node:path'
 import {setTimeout as sleep} from 'node:timers/promises'
 
 const DEFAULT_URL = 'http://localhost:6006/iframe.html?viewMode=story&id=primitives-button--default'
 const DEFAULT_PORT = 9222
 const STARTUP_TIMEOUT_MS = 30_000
+/** Chrome writes this to stderr whenever it opens a debugging server, logging the browser path. */
+const DEVTOOLS_LISTENING = /DevTools listening on ws:\/\/\S*(\/devtools\/browser\/\S+)/g
 
 interface Options {
   url: string
@@ -120,20 +123,72 @@ function getBrowserName(versionInfo: unknown): string {
   return 'Chrome'
 }
 
-async function waitForDevTools(port: number): Promise<string> {
+/** Reads the `webSocketDebuggerUrl` field of Chrome's `/json/version` response. */
+function getWebSocketDebuggerUrl(versionInfo: unknown): string | undefined {
+  if (
+    typeof versionInfo === 'object' &&
+    versionInfo !== null &&
+    'webSocketDebuggerUrl' in versionInfo &&
+    typeof versionInfo.webSocketDebuggerUrl === 'string'
+  ) {
+    return versionInfo.webSocketDebuggerUrl
+  }
+  return undefined
+}
+
+/** The browser paths of every debugging server the Chrome instances we started have logged. */
+function readLoggedBrowserPaths(logFile: string): string[] {
+  try {
+    return [...readFileSync(logFile, 'utf8').matchAll(DEVTOOLS_LISTENING)].map((match) => match[1])
+  } catch {
+    return []
+  }
+}
+
+/**
+ * Waits for a debugging endpoint on the port that one of the Chrome instances we started serves:
+ * the one we just spawned, or the one it handed the URL over to. Chrome leaves a debugging server
+ * that already owns the port alone and silently starts without one instead, so an endpoint serving
+ * a browser path we never logged is another browser that `chrome-devtools-mcp` must not attach to.
+ * `serversBefore` is how many servers the log held before the spawn, which tells a server the
+ * instance we spawned opened apart from those of earlier runs.
+ */
+async function waitForDevTools(
+  port: number,
+  logFile: string,
+  serversBefore: number,
+): Promise<string> {
   const deadline = Date.now() + STARTUP_TIMEOUT_MS
   let lastError = 'no response yet'
+  let foreignBrowser: string | undefined
   while (Date.now() < deadline) {
     try {
       const response = await fetch(`http://127.0.0.1:${port}/json/version`)
       if (response.ok) {
-        return getBrowserName(await response.json())
+        const versionInfo: unknown = await response.json()
+        const webSocketUrl = getWebSocketDebuggerUrl(versionInfo)
+        const browserPaths = readLoggedBrowserPaths(logFile)
+        if (
+          webSocketUrl &&
+          browserPaths.some((browserPath) => webSocketUrl.endsWith(browserPath))
+        ) {
+          return getBrowserName(versionInfo)
+        }
+        foreignBrowser = getBrowserName(versionInfo)
+        // Our instance opened a server of its own, so it will never take this port over
+        if (browserPaths.length > serversBefore) break
+      } else {
+        lastError = `HTTP ${response.status}`
       }
-      lastError = `HTTP ${response.status}`
     } catch (error) {
       lastError = error instanceof Error ? error.message : String(error)
     }
     await sleep(250)
+  }
+  if (foreignBrowser) {
+    throw new Error(
+      `Port ${port} is already used by another browser (${foreignBrowser}). Close it, or pass --port=<free port> here and the matching --browserUrl to chrome-devtools-mcp.`,
+    )
   }
   throw new Error(
     `Chrome did not open http://127.0.0.1:${port} within ${STARTUP_TIMEOUT_MS / 1000}s (${lastError})`,
@@ -144,14 +199,12 @@ async function main(): Promise<void> {
   const options = parseArgs(process.argv.slice(2))
   const chrome = findChrome()
   const packageDir = path.resolve(import.meta.dirname, '..')
-  const userDataDir = path.join(
-    packageDir,
-    'node_modules',
-    '.cache',
-    'react-devtools-mcp',
-    'chrome-profile',
-  )
+  const cacheDir = path.join(packageDir, 'node_modules', '.cache', 'react-devtools-mcp')
+  const userDataDir = path.join(cacheDir, 'chrome-profile')
   mkdirSync(userDataDir, {recursive: true})
+  // Chrome appends its output here, which is how the instances we start stay identifiable
+  const logFile = path.join(cacheDir, 'chrome.log')
+  const serversBefore = readLoggedBrowserPaths(logFile).length
 
   const hasDisplay = Boolean(process.env.DISPLAY || process.env.WAYLAND_DISPLAY)
   const headless = options.headless || (process.platform === 'linux' && !hasDisplay)
@@ -170,7 +223,10 @@ async function main(): Promise<void> {
     options.url,
   ]
 
-  const child = spawn(chrome, args, {detached: true, stdio: 'ignore'})
+  const child = spawn(chrome, args, {
+    detached: true,
+    stdio: ['ignore', 'ignore', openSync(logFile, 'a')],
+  })
   child.unref()
   // When Chrome is already running with this profile, the new process hands the URL over to
   // it and exits; the running instance keeps serving the debugging port.
@@ -179,7 +235,14 @@ async function main(): Promise<void> {
     handedOver = true
   })
 
-  const browserName = await waitForDevTools(options.port)
+  let browserName: string
+  try {
+    browserName = await waitForDevTools(options.port, logFile, serversBefore)
+  } catch (error) {
+    // The instance we started cannot serve the port, so don't leave it running
+    if (!handedOver) child.kill()
+    throw error
+  }
   const browserUrl = `http://127.0.0.1:${options.port}`
 
   console.log(`${browserName} is listening on ${browserUrl}${headless ? ' (headless)' : ''}`)
