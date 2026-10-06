@@ -24,11 +24,48 @@ const DEFAULT_PORT = 9222
 const STARTUP_TIMEOUT_MS = 30_000
 const PROBE_TIMEOUT_MS = 2_000
 
+const ALLOWED_PROTOCOLS = new Set(['http:', 'https:'])
+
 interface Options {
-  url: string
+  url: URL
   port: number
   headless: boolean
   chromeArgs: string[]
+}
+
+/** A raw url argument safe to echo in an error: any `user:password@` segment is redacted. */
+function redactUserinfo(value: string): string {
+  return value.replace(/[^/\s@]+:[^/\s@]+@/g, '<redacted>@')
+}
+
+/**
+ * Parses the url to open. Anything that is not an absolute http(s) url is rejected up front, and
+ * so is a url with embedded credentials, which would otherwise travel with it everywhere.
+ */
+function parseUrl(value: string): URL {
+  let url: URL
+  try {
+    url = new URL(value)
+  } catch {
+    throw new Error(`Invalid url "${redactUserinfo(value)}": expected an absolute http(s) url`)
+  }
+  if (!ALLOWED_PROTOCOLS.has(url.protocol)) {
+    throw new Error(`Invalid url "${redactUserinfo(value)}": expected an absolute http(s) url`)
+  }
+  if (url.username !== '' || url.password !== '') {
+    throw new Error(
+      `Invalid url for ${url.origin}: credentials in the url (user:password@) are not supported`,
+    )
+  }
+  return url
+}
+
+/**
+ * The url for messages, rebuilt from origin, path and query so that nothing outside those parts
+ * (a fragment, or anything else a caller typed) can be echoed.
+ */
+function describeUrl(url: URL): string {
+  return `${url.origin}${url.pathname}${url.search}${url.hash === '' ? '' : '#…'}`
 }
 
 function parsePort(value: string | undefined): number {
@@ -40,7 +77,12 @@ function parsePort(value: string | undefined): number {
 }
 
 function parseArgs(argv: string[]): Options {
-  const options: Options = {url: DEFAULT_URL, port: DEFAULT_PORT, headless: false, chromeArgs: []}
+  const options: Options = {
+    url: new URL(DEFAULT_URL),
+    port: DEFAULT_PORT,
+    headless: false,
+    chromeArgs: [],
+  }
   const passthroughIndex = argv.indexOf('--')
   const ownArgs = passthroughIndex === -1 ? argv : argv.slice(0, passthroughIndex)
   options.chromeArgs = passthroughIndex === -1 ? [] : argv.slice(passthroughIndex + 1)
@@ -56,7 +98,7 @@ function parseArgs(argv: string[]): Options {
     } else if (arg.startsWith('--')) {
       throw new Error(`Unknown option ${arg}. Pass Chrome flags after "--".`)
     } else {
-      options.url = arg
+      options.url = parseUrl(arg)
     }
   }
 
@@ -213,7 +255,7 @@ async function launchChrome(options: Options): Promise<Launched> {
     // Chrome refuses to run its sandbox as root (containers, some CI runners)
     ...(process.platform === 'linux' && process.getuid?.() === 0 ? ['--no-sandbox'] : []),
     ...options.chromeArgs,
-    options.url,
+    options.url.href,
   ]
 
   const child = spawn(chrome, args, {detached: true, stdio: 'ignore'})
@@ -245,12 +287,12 @@ async function main(): Promise<void> {
   const {browserName, pid} =
     runningBrowser === null
       ? await launchChrome(options)
-      : await openInRunningBrowser(browserUrl, runningBrowser, options.url)
+      : await openInRunningBrowser(browserUrl, runningBrowser, options.url.href)
 
   console.log(
     `${browserName} is listening on ${browserUrl}${options.headless ? ' (headless)' : ''}`,
   )
-  console.log(`Opened ${options.url}`)
+  console.log(`Opened ${describeUrl(options.url)}`)
   console.log(
     pid === undefined
       ? `Reused the browser that was already listening on ${browserUrl}`
