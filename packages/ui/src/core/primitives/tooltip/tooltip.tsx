@@ -183,12 +183,12 @@ export function Tooltip(
   const [isOpen, setIsOpen] = useDelayedState(false)
   const delayGroupContext = useTooltipDelayGroup()
   const {setIsGroupActive, setOpenTooltipId} = delayGroupContext || {}
-  // Derived, not synced: `disabled` and an empty `content` hide the tooltip in the same render
+  // Derived, not synced: `disabled` and an empty `content` suppress the tooltip in the same render
   // that changes them, instead of an effect closing it one commit later. The hover state
   // (`isOpen`, or the group pointing at this tooltip) is kept as it is, so a tooltip that is
   // re-enabled or given content while its child is still hovered shows right away.
-  const showTooltip =
-    !disabled && Boolean(content) && (isOpen || delayGroupContext?.openTooltipId === tooltipId)
+  const suppressed = disabled || !content
+  const showTooltip = !suppressed && (isOpen || delayGroupContext?.openTooltipId === tooltipId)
 
   const isInsideGroup = delayGroupContext !== null
   const openDelayProp = typeof delay === 'number' ? delay : delay?.open || 0
@@ -232,12 +232,16 @@ export function Tooltip(
     ],
   )
 
+  // `isOpen` is delayed visibility, not the current hover state: after the pointer or focus
+  // leaves, it stays true for the close delay. While the tooltip is suppressed it must not linger
+  // like that, or re-enabling it (or giving it content) before the delay has elapsed would show it
+  // under a pointer that has already left. Leaving a suppressed tooltip closes it immediately.
   const handleBlur = useCallback(
     (e: FocusEvent) => {
-      handleIsOpenChange(false)
+      handleIsOpenChange(false, suppressed)
       childProp?.props?.onBlur?.(e)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childProp?.props, handleIsOpenChange, suppressed],
   )
   const handleClick = useCallback(
     (e: MouseEvent) => {
@@ -269,10 +273,10 @@ export function Tooltip(
   )
   const handleMouseLeave = useCallback(
     (e: MouseEvent) => {
-      handleIsOpenChange(false)
+      handleIsOpenChange(false, suppressed)
       childProp?.props?.onMouseLeave?.(e)
     },
-    [childProp?.props, handleIsOpenChange],
+    [childProp?.props, handleIsOpenChange, suppressed],
   )
 
   // Handle closing the tooltip when the mouse leaves the referenceElement

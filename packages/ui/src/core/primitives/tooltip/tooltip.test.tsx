@@ -625,4 +625,96 @@ describe('Tooltip', () => {
       }
     })
   })
+
+  /**
+   * `isOpen` is delayed visibility, not the current hover state: after the pointer leaves it stays
+   * true for the close delay. A tooltip that is suppressed (disabled, or without content) when the
+   * pointer leaves must not keep that lingering state, or un-suppressing it before the delay has
+   * elapsed would show it under a pointer that already left.
+   */
+  describe('Suppressing an open tooltip with a close delay', () => {
+    const CLOSE_DELAY = 150
+
+    function advance(ms: number) {
+      // oxlint-disable-next-line no-floating-promises
+      act(() => vi.advanceTimersByTime(ms))
+    }
+
+    const renderTooltip = ({
+      content = <Text size={1}>{'Tooltip content'}</Text>,
+      disabled = false,
+    }: {content?: React.ReactNode; disabled?: boolean} = {}) => (
+      <Tooltip content={content} delay={{close: CLOSE_DELAY}} disabled={disabled}>
+        <Button mode="bleed" text="Hover me" />
+      </Tooltip>
+    )
+
+    it('stays hidden when re-enabled within the close delay after the pointer left while disabled', () => {
+      const {rerender} = render(renderTooltip())
+      const button = screen.getByRole('button', {name: 'Hover me'})
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+
+      rerender(renderTooltip({disabled: true}))
+      expect(document.querySelector('[data-ui="Tooltip"]')).toBeNull()
+
+      // Leaving a suppressed tooltip closes it at once, so no close delay is pending here
+      fireEvent.mouseLeave(button)
+      advance(CLOSE_DELAY / 3)
+
+      rerender(renderTooltip({disabled: false}))
+      expectTooltipHidden('Tooltip content')
+
+      advance(CLOSE_DELAY)
+      expectTooltipHidden('Tooltip content')
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+    })
+
+    it('stays hidden when given content within the close delay after the pointer left while it had none', () => {
+      const {rerender} = render(renderTooltip())
+      const button = screen.getByRole('button', {name: 'Hover me'})
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+
+      rerender(renderTooltip({content: null}))
+      expectTooltipHidden('Tooltip content')
+
+      fireEvent.mouseLeave(button)
+      advance(CLOSE_DELAY / 3)
+
+      rerender(renderTooltip())
+      expectTooltipHidden('Tooltip content')
+
+      advance(CLOSE_DELAY)
+      expectTooltipHidden('Tooltip content')
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+    })
+
+    it('shows right away when re-enabled while still hovered, then lingers for the close delay as usual', () => {
+      const {rerender} = render(renderTooltip())
+      const button = screen.getByRole('button', {name: 'Hover me'})
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+
+      rerender(renderTooltip({disabled: true}))
+      expect(document.querySelector('[data-ui="Tooltip"]')).toBeNull()
+
+      advance(CLOSE_DELAY / 3)
+      rerender(renderTooltip({disabled: false}))
+      expectTooltipVisible('Tooltip content')
+
+      // Enabled again, leaving closes with the configured delay
+      fireEvent.mouseLeave(button)
+      expectTooltipVisible('Tooltip content')
+      advance(CLOSE_DELAY)
+      expectTooltipHidden('Tooltip content')
+    })
+  })
 })
