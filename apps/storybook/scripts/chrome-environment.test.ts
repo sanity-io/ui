@@ -11,6 +11,10 @@ const SECRETS = {
   SSH_KEY: 'ssh...',
   KEY: 'key',
   GOOGLE_API_KEY: 'AIza...',
+  // Share a prefix with allowlisted names and must still be dropped
+  CHROME_API_KEY: 'chrome...',
+  CHROME_TOKEN: 'chrome...',
+  SSL_CERT_PASSWORD: 'cert...',
   DATABASE_URL: 'postgres://user:password@db/app',
   npm_config_registry: 'https://registry.npmjs.org/',
 }
@@ -35,7 +39,9 @@ describe('chromeEnvironment', () => {
       HTTPS_PROXY: 'http://proxy:3128',
       no_proxy: 'localhost,127.0.0.1',
       SSL_CERT_FILE: '/etc/ssl/certs/ca.pem',
+      SSL_CERT_DIR: '/etc/ssl/certs',
       CHROME_DEVEL_SANDBOX: '/opt/chrome/chrome-sandbox',
+      CHROME_PATH: '/opt/google/chrome/chrome',
       PWD: '/agent/repos/ui',
       TERM: 'xterm-256color',
       ...SECRETS,
@@ -61,7 +67,9 @@ describe('chromeEnvironment', () => {
       HTTPS_PROXY: 'http://proxy:3128',
       no_proxy: 'localhost,127.0.0.1',
       SSL_CERT_FILE: '/etc/ssl/certs/ca.pem',
+      SSL_CERT_DIR: '/etc/ssl/certs',
       CHROME_DEVEL_SANDBOX: '/opt/chrome/chrome-sandbox',
+      CHROME_PATH: '/opt/google/chrome/chrome',
     })
     for (const name of Object.keys(SECRETS)) {
       expect(result).not.toHaveProperty(name)
@@ -127,7 +135,7 @@ describe('chromeEnvironment', () => {
     }
   })
 
-  test('keeps macOS text encoding and prefixed variables in any casing', () => {
+  test('keeps macOS text encoding and the LC_/XDG_ families in any casing', () => {
     const result = chromeEnvironment({
       __CF_USER_TEXT_ENCODING: '0x1F5:0x0:0x0',
       lc_messages: 'C',
@@ -142,6 +150,25 @@ describe('chromeEnvironment', () => {
       lc_messages: 'C',
       xdg_config_home: '/home/dev/.config',
       Chrome_Log_File: '/tmp/chrome.log',
+    })
+  })
+
+  test('only the exact Chrome and CA bundle names pass, never their prefixes', () => {
+    const result = chromeEnvironment({
+      CHROME_DEVEL_SANDBOX: '/opt/chrome/chrome-sandbox',
+      CHROME_HEADLESS: '1',
+      SSL_CERT_DIR: '/etc/ssl/certs',
+      CHROME_API_KEY: 'chrome...',
+      CHROME_TOKEN: 'chrome...',
+      CHROME_WRAPPER: '/usr/bin/google-chrome',
+      SSL_CERT_PASSWORD: 'cert...',
+      SSL_CERT_KEY: 'key...',
+    })
+
+    expect(result).toEqual({
+      CHROME_DEVEL_SANDBOX: '/opt/chrome/chrome-sandbox',
+      CHROME_HEADLESS: '1',
+      SSL_CERT_DIR: '/etc/ssl/certs',
     })
   })
 })
