@@ -73,4 +73,26 @@ describe('useMatchMedia', () => {
 
     expect(controller.listenerCount(QUERY)).toBe(0)
   })
+
+  it('subscribes afresh after every component unmounted', () => {
+    render(<Motions count={2} label="a" />).unmount()
+
+    expect(controller.listenerCount(QUERY)).toBe(0)
+
+    const {unmount} = render(<Motions count={2} label="b" />)
+
+    // The store and its list were evicted with the last subscriber, so the query is evaluated
+    // once more, and the new subscribers get their updates
+    expect(controller.matchMedia).toHaveBeenCalledTimes(2)
+    expect(controller.listenerCount(QUERY)).toBe(1)
+
+    act(() => controller.setMatches(QUERY, true))
+
+    expect(screen.getByTestId('motion-0')).toHaveTextContent('true')
+    expect(screen.getByTestId('motion-1')).toHaveTextContent('true')
+
+    unmount()
+
+    expect(controller.listenerCount(QUERY)).toBe(0)
+  })
 })

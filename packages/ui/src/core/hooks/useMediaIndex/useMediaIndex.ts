@@ -31,24 +31,30 @@ function _getMediaQuery(media: number[], index: number): MediaQuery {
 const mediaStores = new Map<string, _MediaStore>()
 
 /**
- * The store for a set of breakpoints, created once per distinct `media` content and shared by
- * every component that uses it (every `Layer` and `Popover` does), so two arrays with the same
- * breakpoints share one store even when they are different instances. Each store subscribes
- * once to the shared query stores and fans the changes out to its subscribers.
+ * The store for a set of breakpoints, shared by every component that uses it (every `Layer` and
+ * `Popover` does). Stores are keyed by content, so two arrays with the same breakpoints share one
+ * store even when they are different instances. Each store subscribes once to the shared query
+ * stores and fans the changes out to its subscribers; it is evicted when the last subscriber
+ * leaves, so dynamically generated breakpoint arrays do not accumulate, and on the server
+ * nothing is cached at all.
+ *
+ * @internal
  */
-function _getMediaStore(media: number[]): _MediaStore {
+export function _getMediaStore(media: number[]): _MediaStore {
+  if (typeof window === 'undefined') return _createMediaStore(media)
+
   const key = media.join(',')
   let store = mediaStores.get(key)
 
   if (!store) {
-    store = _createMediaStore(media)
+    store = _createMediaStore(media, key)
     mediaStores.set(key, store)
   }
 
   return store
 }
 
-function _createMediaStore(media: number[]): _MediaStore {
+function _createMediaStore(media: number[], key?: string): _MediaStore {
   // Highest breakpoint first: the first query that matches wins in `getSnapshot`
   const queries: {index: number; query: MediaQuery}[] = []
 
@@ -90,21 +96,27 @@ function _createMediaStore(media: number[]): _MediaStore {
     }
   }
 
-  const subscribe = (onStoreChange: () => void) => {
-    if (subscribers.size === 0) unlisten = listen()
-    subscribers.add(onStoreChange)
+  const store: _MediaStore = {
+    getSnapshot,
+    subscribe(onStoreChange) {
+      if (subscribers.size === 0) unlisten = listen()
+      subscribers.add(onStoreChange)
 
-    return () => {
-      subscribers.delete(onStoreChange)
+      return () => {
+        subscribers.delete(onStoreChange)
 
-      if (subscribers.size === 0) {
+        if (subscribers.size > 0) return
+
         unlisten?.()
         unlisten = undefined
+
+        // Evict, unless a newer store has already taken this key over (see `_getMediaQueryStore`)
+        if (key !== undefined && mediaStores.get(key) === store) mediaStores.delete(key)
       }
-    }
+    },
   }
 
-  return {getSnapshot, subscribe}
+  return store
 }
 
 /**

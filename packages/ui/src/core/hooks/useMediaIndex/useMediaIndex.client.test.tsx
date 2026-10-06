@@ -103,4 +103,33 @@ describe('useMediaIndex', () => {
     // Rendering and subscribing never re-evaluate a query
     expect(controller.matchMedia).toHaveBeenCalledTimes(QUERIES.length)
   })
+
+  it('subscribes afresh after every component unmounted', () => {
+    render(<Indexes count={2} media={[600, 900]} />).unmount()
+
+    for (const query of QUERIES) {
+      expect(controller.listenerCount(query)).toBe(0)
+    }
+
+    const {unmount} = render(<Indexes count={2} media={[600, 900]} />)
+
+    // The stores and their lists were evicted with the last subscriber, so each query is
+    // evaluated once more, and the new subscribers get their updates
+    expect(controller.matchMedia).toHaveBeenCalledTimes(QUERIES.length * 2)
+    expect(screen.getByTestId('index-0')).toHaveTextContent('0')
+
+    act(() => {
+      controller.setMatches(QUERIES[0], false)
+      controller.setMatches(QUERIES[2], true)
+    })
+
+    expect(screen.getByTestId('index-0')).toHaveTextContent('2')
+    expect(screen.getByTestId('index-1')).toHaveTextContent('2')
+
+    unmount()
+
+    for (const query of QUERIES) {
+      expect(controller.listenerCount(query)).toBe(0)
+    }
+  })
 })

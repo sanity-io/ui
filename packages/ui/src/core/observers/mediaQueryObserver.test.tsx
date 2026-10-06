@@ -79,21 +79,70 @@ describe('mediaQueryObserver', () => {
 
     expect(controller.listenerCount(QUERY)).toBe(0)
 
-    // A later subscriber attaches it again
-    const third = vi.fn()
-    const unsubscribeThird = store.subscribe(third)
+    // Subscribing and reading never evaluated the query again
+    expect(controller.matchMedia).toHaveBeenCalledTimes(1)
+  })
 
+  it('evicts the store and its list with the last subscriber, and recreates them for the next', () => {
+    const store = _getMediaQueryStore(QUERY)
+    const unsubscribe = store.subscribe(vi.fn())
+
+    expect(controller.matchMedia).toHaveBeenCalledTimes(1)
+
+    unsubscribe()
+
+    expect(controller.listenerCount(QUERY)).toBe(0)
+
+    const next = _getMediaQueryStore(QUERY)
+    const subscriber = vi.fn()
+
+    expect(next).not.toBe(store)
+
+    const unsubscribeNext = next.subscribe(subscriber)
+
+    // A fresh list for the fresh store…
+    expect(controller.matchMedia).toHaveBeenCalledTimes(2)
     expect(controller.listenerCount(QUERY)).toBe(1)
+
+    // …that still delivers changes
+    controller.setMatches(QUERY, true)
+
+    expect(subscriber).toHaveBeenCalledTimes(1)
+    expect(next.getSnapshot()).toBe(true)
+
+    unsubscribeNext()
+
+    expect(controller.listenerCount(QUERY)).toBe(0)
+  })
+
+  it('keeps serving a store that was evicted before a late subscriber reached it', () => {
+    // A component subscribes in a commit to the store it rendered with, which another
+    // component's unmount can have evicted in the same commit
+    const evicted = _getMediaQueryStore(QUERY)
+
+    evicted.subscribe(vi.fn())()
+
+    const current = _getMediaQueryStore(QUERY)
+    const late = vi.fn()
+    const unsubscribeLate = evicted.subscribe(late)
+    const unsubscribeCurrent = current.subscribe(vi.fn())
+
+    expect(current).not.toBe(evicted)
 
     controller.setMatches(QUERY, true)
 
-    expect(third).toHaveBeenCalledTimes(1)
-    expect(second).toHaveBeenCalledTimes(2)
+    expect(late).toHaveBeenCalledTimes(1)
+    expect(evicted.getSnapshot()).toBe(true)
 
-    unsubscribeThird()
+    // The orphan's last subscriber leaving does not evict the current store
+    unsubscribeLate()
 
-    // Lists are created once; subscribing and reading never evaluate the query again
-    expect(controller.matchMedia).toHaveBeenCalledTimes(1)
+    expect(_getMediaQueryStore(QUERY)).toBe(current)
+    expect(controller.listenerCount(QUERY)).toBe(1)
+
+    unsubscribeCurrent()
+
+    expect(controller.listenerCount(QUERY)).toBe(0)
   })
 
   it('evaluates each media query once for any number of closed tooltips', () => {
