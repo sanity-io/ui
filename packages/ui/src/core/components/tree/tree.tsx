@@ -238,15 +238,21 @@ export function Tree(
 
   const handleFocus = useCallback(
     (event: React.FocusEvent<HTMLUListElement>) => {
-      if (event.target === event.currentTarget) {
+      const treeElement = event.currentTarget
+
+      if (event.target === treeElement) {
         // The tree element is only focusable while no item is the tab stop (see `tabStop`).
         // Keyboard focus is passed on to the first item, which then reports its own focus here; a
         // pointer press on the tree element itself (between the items) leaves focus where it is.
-        if (!pointerDownRef.current) {
-          const [firstItemElement] = _getItemElements(event.currentTarget)
+        const firstItemElement = pointerDownRef.current
+          ? undefined
+          : _getItemElements(treeElement)[0]
 
-          if (firstItemElement) _focusItemElement(firstItemElement)
-        }
+        if (firstItemElement) _focusItemElement(firstItemElement)
+
+        // Focus that stays on the tree element (after a pointer press, or with no item to pass it
+        // on to) is a focus transition the consumer will see the `blur` of, so it is reported too
+        if (treeElement.ownerDocument.activeElement === treeElement) onFocus?.(event)
 
         return
       }

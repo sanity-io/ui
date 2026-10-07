@@ -279,6 +279,48 @@ describe('components/tree tab stop', () => {
     expect(onFocus).toHaveBeenCalledTimes(2)
     expect(onFocus.mock.calls[1][0].target).toBe(screen.getByTestId('oranges'))
   })
+
+  it('calls `onFocus` when focus stays on the tree element', async () => {
+    const user = userEvent.setup()
+    const onFocus = vi.fn<(event: React.FocusEvent<HTMLUListElement>) => void>()
+
+    render(<FruitTree onFocus={onFocus} />)
+
+    const tree = screen.getByRole('tree')
+
+    // A press between the items: the focus the consumer sees the `blur` of later
+    await user.click(tree)
+    expect(tree).toHaveFocus()
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
+    expect(onFocus.mock.calls[0][0].target).toBe(tree)
+  })
+
+  it('keeps keyboard focus and calls `onFocus` when there is no item to pass it on to', async () => {
+    const user = userEvent.setup()
+    const onFocus = vi.fn<(event: React.FocusEvent<HTMLUListElement>) => void>()
+
+    render(
+      <>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree onFocus={onFocus} />
+      </>,
+    )
+
+    const tree = screen.getByRole('tree')
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+
+    expect(tree).toHaveFocus()
+    expect(onFocus).toHaveBeenCalledTimes(1)
+    expect(onFocus.mock.calls[0][0].target).toBe(tree)
+
+    await user.keyboard('{ArrowDown}{End}')
+    expect(tree).toHaveFocus()
+  })
 })
 
 describe('components/tree keyboard navigation', () => {
