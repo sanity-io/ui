@@ -6,14 +6,24 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {useLayoutEffect, useState} from 'react'
-import {describe, expect, it, vi} from 'vitest'
+import {startTransition, useLayoutEffect, useState} from 'react'
+import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
 import {Button} from '../../primitives/button/button'
 import {Menu} from './menu'
 import {MenuButton, type MenuButtonProps} from './menuButton'
 import {MenuItem} from './menuItem'
+
+// `startTransition` wrapped in a mock that passes through to React, so the transition tests can
+// observe and intercept it (an ESM export cannot be spied on in place)
+vi.mock('react', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('react')>()
+
+  return {...actual, startTransition: vi.fn(actual.startTransition)}
+})
+
+const startTransitionMock = vi.mocked(startTransition)
 
 function renderMenuButton(props?: Partial<MenuButtonProps>) {
   return render(
@@ -299,6 +309,52 @@ describe('MenuButton', () => {
       expectMenuRenderedHidden()
     })
 
+    it.each([
+      ['Escape', (item: HTMLElement) => fireEvent.keyDown(item, {key: 'Escape'})],
+      ['a menu item click', (item: HTMLElement) => fireEvent.click(item)],
+    ])(
+      'returns focus to the button before calling onClose, so focus moved there stands on %s',
+      (_name, close) => {
+        const focusedWhenCalled: (Element | null)[] = []
+        const onClose = vi.fn(() => {
+          focusedWhenCalled.push(document.activeElement)
+          screen.getByRole('button', {name: 'Outside'}).focus()
+        })
+
+        render(
+          <>
+            <MenuButton
+              button={<Button text="Open menu" />}
+              id="menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Option 1" />
+                </Menu>
+              }
+              onClose={onClose}
+            />
+            <button type="button">Outside</button>
+          </>,
+        )
+
+        const button = getButton()
+
+        fireEvent.click(button)
+        expectMenuVisible()
+
+        const item = screen.getByRole('menuitem', {name: 'Option 1'})
+
+        act(() => item.focus())
+        close(item)
+
+        expect(onClose).toHaveBeenCalledTimes(1)
+        // The built-in restoration had run when `onClose` was called, and did not override it
+        expect(focusedWhenCalled).toEqual([button])
+        expect(screen.getByRole('button', {name: 'Outside'})).toHaveFocus()
+        expectMenuRenderedHidden()
+      },
+    )
+
     it('calls onClose once when a click outside closes the menu', () => {
       const onClose = vi.fn()
 
@@ -330,6 +386,138 @@ describe('MenuButton', () => {
       expect(onOpen).toHaveBeenCalledTimes(1)
       expectMenuVisible()
     })
+  })
+
+  describe('transitions', () => {
+    afterEach(() => {
+      // Back to passing through to React
+      startTransitionMock.mockReset()
+    })
+
+    /**
+     * Wraps the real `startTransition` so that a test can tell whether code runs inside the
+     * function passed to it (the scope React runs as a transition)
+     */
+    function trackTransitions() {
+      const actual = startTransitionMock.getMockImplementation()
+      let depth = 0
+
+      if (!actual) throw new Error('startTransition is not passing through to React')
+
+      startTransitionMock.mockImplementation((scope) => {
+        depth++
+
+        try {
+          actual(scope)
+        } finally {
+          depth--
+        }
+      })
+
+      return {inTransition: () => depth > 0}
+    }
+
+    it('opens and closes in a transition on every path, calling onOpen and onClose inside it', () => {
+      const {inTransition} = trackTransitions()
+      const calls: string[] = []
+      const onOpen = vi.fn(() => {
+        calls.push(inTransition() ? 'open' : 'open outside a transition')
+      })
+      const onClose = vi.fn(() => {
+        calls.push(inTransition() ? 'close' : 'close outside a transition')
+      })
+
+      render(
+        <>
+          <MenuButton
+            button={<Button text="Open menu" />}
+            id="menu-button"
+            menu={
+              <Menu>
+                <MenuItem text="Option 1" />
+              </Menu>
+            }
+            onClose={onClose}
+            onOpen={onOpen}
+          />
+          <button type="button">Outside</button>
+        </>,
+      )
+
+      const button = getButton()
+      const outside = screen.getByRole('button', {name: 'Outside'})
+      const item = () => screen.getByRole('menuitem', {name: 'Option 1'})
+
+      // Button click, both ways
+      fireEvent.click(button)
+      expectMenuVisible()
+      fireEvent.click(button)
+      expectMenuRenderedHidden()
+
+      // Key press, click outside
+      fireEvent.keyDown(button, {key: 'ArrowDown'})
+      expectMenuVisible()
+      fireEvent.mouseDown(document.body)
+      expectMenuRenderedHidden()
+
+      // Key press, Escape
+      fireEvent.keyDown(button, {key: 'Enter'})
+      expectMenuVisible()
+      act(() => item().focus())
+      fireEvent.keyDown(item(), {key: 'Escape'})
+      expectMenuRenderedHidden()
+
+      // Key press, menu item click
+      fireEvent.keyDown(button, {key: ' '})
+      expectMenuVisible()
+      fireEvent.click(item())
+      expectMenuRenderedHidden()
+
+      // Key press, focus leaving the menu
+      fireEvent.keyDown(button, {key: 'ArrowUp'})
+      expectMenuVisible()
+      act(() => item().focus())
+      act(() => outside.focus())
+      expectMenuRenderedHidden()
+
+      expect(calls).toEqual(Array.from({length: 5}, () => ['open', 'close']).flat())
+    })
+
+    it('runs the open update, with onOpen, in the function it passes to startTransition', () => {
+      const scopes: (() => void)[] = []
+
+      startTransitionMock.mockImplementation((scope) => {
+        scopes.push(scope)
+      })
+
+      const onOpen = vi.fn()
+
+      renderMenuButton({onOpen})
+
+      const button = getButton()
+
+      fireEvent.click(button)
+
+      // The handler ran, but what it does to the state waits for the transition React would run
+      expect(scopes).toHaveLength(1)
+      expect(button).toHaveAttribute('aria-expanded', 'false')
+      expectMenuNotRendered()
+      expect(onOpen).not.toHaveBeenCalled()
+
+      act(() => {
+        scopes[0]()
+      })
+
+      expectMenuVisible()
+      expect(onOpen).toHaveBeenCalledTimes(1)
+    })
+
+    // The focus request made by a key press (`shouldFocus`) is applied by `useMenuController` in
+    // animation frames after the open commit, by which time Floating UI has positioned the menu.
+    // With the zero-size rects jsdom reports, its `hide` middleware marks the reference hidden,
+    // which puts `display: none` on the popover card, and jsdom refuses to focus anything inside
+    // it. That path is covered in a real browser by the `KeyboardNavigation` story and
+    // `apps/storybook/tests/menuButton.test.tsx`.
   })
 
   describe('handlers on the button element', () => {
