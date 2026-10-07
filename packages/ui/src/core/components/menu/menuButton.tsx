@@ -225,11 +225,12 @@ export function MenuButton(props: MenuButtonProps) {
     menuProp?.props ?? {}
 
   // A click inside the menu is tracked from the capture phase on the menu element to the bubble
-  // phase on it, which runs after the item's own handlers
+  // phase on it, which runs after the item's own handlers. Tracking starts before the consumer's
+  // capture handler, so that focus it moves out of the menu counts as moved during the click.
   const handleMenuClickCapture = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
-      onMenuClickCapture?.(event)
       trackMenuClick()
+      onMenuClickCapture?.(event)
     },
     [onMenuClickCapture, trackMenuClick],
   )

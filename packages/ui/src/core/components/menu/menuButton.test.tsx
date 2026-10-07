@@ -355,51 +355,59 @@ describe('MenuButton', () => {
       },
     )
 
-    it('returns focus to the button before calling onClose when the clicked item moves focus out of the menu', () => {
-      // A menu item calls its own `onClick` before it reports the click to the menu, so the focus
-      // move fires the menu's blur handler before the item click can close the menu
-      const focusedWhenCalled: (Element | null)[] = []
-      const onClose = vi.fn(() => {
-        focusedWhenCalled.push(document.activeElement)
-      })
-      const onMenuClickCapture = vi.fn()
+    // A menu item calls its own `onClick` before it reports the click to the menu, and a capture
+    // handler on the menu element runs before either, so focus moved out of the menu by one of
+    // them fires the menu's blur handler before the item click can close the menu
+    it.each([
+      ['the clicked item’s onClick', 'onClick'],
+      ['an onClickCapture on the menu element', 'onClickCapture'],
+    ] as const)(
+      'returns focus to the button before calling onClose when %s moves focus out of the menu',
+      (_name, handler) => {
+        const focusedWhenCalled: (Element | null)[] = []
+        const onClose = vi.fn(() => {
+          focusedWhenCalled.push(document.activeElement)
+        })
+        const focusOutside = vi.fn(() => {
+          screen.getByRole('button', {name: 'Outside'}).focus()
+        })
 
-      render(
-        <>
-          <MenuButton
-            button={<Button text="Open menu" />}
-            id="menu-button"
-            menu={
-              <Menu onClickCapture={onMenuClickCapture}>
-                <MenuItem
-                  onClick={() => screen.getByRole('button', {name: 'Outside'}).focus()}
-                  text="Option 1"
-                />
-              </Menu>
-            }
-            onClose={onClose}
-          />
-          <button type="button">Outside</button>
-        </>,
-      )
+        render(
+          <>
+            <MenuButton
+              button={<Button text="Open menu" />}
+              id="menu-button"
+              menu={
+                <Menu onClickCapture={handler === 'onClickCapture' ? focusOutside : undefined}>
+                  <MenuItem
+                    onClick={handler === 'onClick' ? focusOutside : undefined}
+                    text="Option 1"
+                  />
+                </Menu>
+              }
+              onClose={onClose}
+            />
+            <button type="button">Outside</button>
+          </>,
+        )
 
-      const button = getButton()
+        const button = getButton()
 
-      fireEvent.click(button)
-      expectMenuVisible()
+        fireEvent.click(button)
+        expectMenuVisible()
 
-      const item = screen.getByRole('menuitem', {name: 'Option 1'})
+        const item = screen.getByRole('menuitem', {name: 'Option 1'})
 
-      act(() => item.focus())
-      fireEvent.click(item)
+        act(() => item.focus())
+        fireEvent.click(item)
 
-      expect(onClose).toHaveBeenCalledTimes(1)
-      expect(focusedWhenCalled).toEqual([button])
-      expect(button).toHaveFocus()
-      expectMenuRenderedHidden()
-      // The handler on the menu element still runs
-      expect(onMenuClickCapture).toHaveBeenCalledTimes(1)
-    })
+        expect(focusOutside).toHaveBeenCalledTimes(1)
+        expect(onClose).toHaveBeenCalledTimes(1)
+        expect(focusedWhenCalled).toEqual([button])
+        expect(button).toHaveFocus()
+        expectMenuRenderedHidden()
+      },
+    )
 
     describe('a click inside the menu that moves focus out of it without closing it', () => {
       // Not an item click, so nothing closes the menu during the click; the blur it caused closes
