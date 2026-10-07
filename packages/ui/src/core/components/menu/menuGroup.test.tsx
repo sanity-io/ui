@@ -1,12 +1,13 @@
 /** @vitest-environment jsdom */
 
-import {fireEvent, screen, waitFor} from '@testing-library/react'
+import {act, fireEvent, screen, waitFor} from '@testing-library/react'
+import {startTransition} from 'react'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {describe, expect, it, vi} from 'vitest'
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
 import {Button} from '../../primitives/button/button'
@@ -27,6 +28,17 @@ vi.mock('@floating-ui/react-dom', async (importOriginal) => {
   return {
     ...actual,
     hide: () => ({name: 'hide', fn: () => ({})}),
+  }
+})
+
+// `startTransition` as a spy that calls through, so the `transitions` tests can swap in an
+// implementation that holds the callbacks back (an ESM named import cannot be spied on in place)
+vi.mock('react', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('react')>()
+
+  return {
+    ...actual,
+    startTransition: vi.fn(actual.startTransition),
   }
 })
 
@@ -292,5 +304,169 @@ describe('MenuGroup', () => {
     expect(screen.getByText('Search')).toBeVisible()
     expectChildMenuClosed()
     expectIdle(getGroup())
+  })
+
+  // Opening and closing the child menu happen in `startTransition`. The spy keeps the callbacks
+  // instead of running them, so whatever changes before `flushTransitions()` was set outside the
+  // transition, and whatever changes when it runs was set inside it.
+  describe('transitions', () => {
+    let transitions: Array<() => void>
+
+    beforeEach(() => {
+      transitions = []
+      vi.mocked(startTransition).mockImplementation((callback) => {
+        transitions.push(callback)
+      })
+    })
+
+    afterEach(() => {
+      // Back to calling through
+      vi.mocked(startTransition).mockReset()
+    })
+
+    function flushTransitions() {
+      const pending = transitions.splice(0)
+
+      expect(pending.length).toBeGreaterThan(0)
+      act(() => {
+        for (const callback of pending) callback()
+      })
+    }
+
+    /**
+     * A frame passes before the transition commits. `shouldFocus` is reset by an animation frame
+     * after the commit that set it, so a focus request set outside the transition would be gone
+     * by the time the child menu is revealed, and its first item would not receive focus.
+     */
+    function nextFrame() {
+      return new Promise<void>((resolve) => {
+        requestAnimationFrame(() => resolve())
+      })
+    }
+
+    /** Makes the group item the active, focused item through the controller: `Search`, then `More` */
+    async function navigateToGroup() {
+      const menu = getMenu()
+
+      fireEvent.keyDown(menu, {key: 'ArrowDown'})
+      fireEvent.keyDown(menu, {key: 'ArrowDown'})
+      await waitFor(() => expect(getGroup()).toHaveFocus())
+    }
+
+    it('opens on hover in a transition, while the item is selected right away', () => {
+      renderMenu()
+
+      const group = getGroup()
+
+      fireEvent.mouseEnter(group)
+
+      // The controller's activation is urgent; the child menu waits for the transition
+      expectSelected(group)
+      expectChildMenuClosed()
+
+      flushTransitions()
+
+      expectChildMenuOpen()
+      expectSelected(group)
+    })
+
+    it('opens on click in a transition, together with the focus request for its first item', async () => {
+      renderMenu()
+
+      const group = getGroup()
+
+      await navigateToGroup()
+      transitions.length = 0
+
+      fireEvent.click(group)
+
+      expectChildMenuClosed()
+      expectSelected(group)
+
+      await nextFrame()
+      flushTransitions()
+
+      expectChildMenuOpen()
+      expectSelected(group)
+      await waitFor(() => expect(getItem('Email link')).toHaveFocus())
+    })
+
+    it('opens on `ArrowRight` in a transition, together with the pressed state and the focus request', async () => {
+      renderMenu()
+
+      const group = getGroup()
+
+      await navigateToGroup()
+      transitions.length = 0
+
+      fireEvent.keyDown(group, {key: 'ArrowRight'})
+
+      expectChildMenuClosed()
+      expectSelected(group)
+
+      await nextFrame()
+      flushTransitions()
+
+      expectChildMenuOpen()
+      expectPressed(group)
+      await waitFor(() => expect(getItem('Email link')).toHaveFocus())
+    })
+
+    it('closes on `ArrowLeft` in a transition', async () => {
+      renderMenu()
+
+      const group = getGroup()
+
+      await navigateToGroup()
+      fireEvent.keyDown(group, {key: 'ArrowRight'})
+      flushTransitions()
+      expectChildMenuOpen()
+
+      fireEvent.keyDown(getItem('Email link'), {key: 'ArrowLeft'})
+
+      expectChildMenuOpen()
+
+      flushTransitions()
+
+      expectChildMenuClosed()
+      expectSelected(group)
+    })
+
+    it('closes on a child item click in a transition', () => {
+      renderMenu()
+
+      const group = getGroup()
+
+      fireEvent.mouseEnter(group)
+      flushTransitions()
+      expectChildMenuOpen()
+
+      fireEvent.click(getItem('Email link'))
+
+      expectChildMenuOpen()
+
+      flushTransitions()
+
+      expectChildMenuClosed()
+      expectSelected(group)
+    })
+
+    it('closes right away, outside a transition, when a sibling item becomes active', () => {
+      renderMenu()
+
+      const group = getGroup()
+
+      fireEvent.mouseEnter(group)
+      flushTransitions()
+      expectChildMenuOpen()
+
+      fireEvent.mouseEnter(getItem('Expand'))
+
+      // The reset of `open` happens during render, at the priority of the activation that caused
+      // it, so there is nothing to flush
+      expectChildMenuClosed()
+      expectIdle(group)
+      expect(transitions).toHaveLength(0)
+    })
   })
 })

@@ -1,5 +1,5 @@
 import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
-import {isValidElement, useCallback, useEffect, useState} from 'react'
+import {isValidElement, startTransition, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 
 import {Selectable} from '../../primitives/_selectable/selectable'
@@ -91,7 +91,9 @@ const MenuGroupComponent = function MenuGroup(
   // reset as well, or re-activating this item from the keyboard (the controller sets
   // `activeElement`, nothing happens on this component) would show a child menu that the user
   // never reopened. The reset happens during render, so the close lands in the same commit as the
-  // activation that caused it.
+  // activation that caused it. A render-phase update is applied by re-rendering this component
+  // within the render in progress, at that render's priority, so unlike the handlers below it
+  // cannot be made a transition: the priority of the close is that of the activation.
   // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
   const [prevActive, setPrevActive] = useState(active)
 
@@ -106,11 +108,22 @@ const MenuGroupComponent = function MenuGroup(
   // menu closes; every path that opens it sets `withinMenu` for that session.
   const pressed = childMenuOpen && withinMenu
 
+  // Opening and closing the child menu are transitions, so that they do not interrupt a
+  // pre-render of the closed popover (the hidden `<Activity>` in `Popover`, rendered on intent in
+  // a transition) and yield to more urgent input. The state that is set together with `open`
+  // (`withinMenu` for the pressed state, `shouldFocus` for the child menu's initial focus) goes
+  // into the same transition so that it commits together with it, as it did when the three were
+  // set synchronously: `shouldFocus` in particular is reset by an animation frame after its
+  // commit, which must not come before the commit that reveals the child menu. The controller's
+  // activation of the item (`onItemMouseEnter`) and the consumer callbacks stay urgent.
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
-      setWithinMenu(false)
       onItemMouseEnter(event)
-      setOpen(true)
+
+      startTransition(() => {
+        setWithinMenu(false)
+        setOpen(true)
+      })
     },
     [onItemMouseEnter],
   )
@@ -120,7 +133,7 @@ const MenuGroupComponent = function MenuGroup(
       if (event.key === 'ArrowLeft') {
         event.stopPropagation()
 
-        setOpen(false)
+        startTransition(() => setOpen(false))
 
         requestAnimationFrame(() => {
           rootElement?.focus()
@@ -134,15 +147,17 @@ const MenuGroupComponent = function MenuGroup(
     (event: React.MouseEvent<HTMLDivElement>) => {
       onClick?.(event)
 
-      setWithinMenu(false)
-      setShouldFocus('first')
-      setOpen(true)
+      startTransition(() => {
+        setWithinMenu(false)
+        setShouldFocus('first')
+        setOpen(true)
+      })
     },
     [onClick],
   )
 
   const handleChildItemClick = useCallback(() => {
-    setOpen(false)
+    startTransition(() => setOpen(false))
     onItemClick?.()
   }, [onItemClick])
 
@@ -185,9 +200,11 @@ const MenuGroupComponent = function MenuGroup(
     }
 
     if (event.key === 'ArrowRight') {
-      setShouldFocus('first')
-      setOpen(true)
-      setWithinMenu(true)
+      startTransition(() => {
+        setShouldFocus('first')
+        setOpen(true)
+        setWithinMenu(true)
+      })
 
       return
     }
