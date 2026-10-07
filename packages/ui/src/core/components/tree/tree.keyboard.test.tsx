@@ -230,6 +230,38 @@ describe('components/tree tab stop', () => {
     expect(focusedItem()).toBe('c')
   })
 
+  it('lets a `tabIndex` prop keep the tree element out of the tab order', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree tabIndex={-1}>
+          <TreeItem data-testid="a" text="A" />
+          <TreeItem data-testid="b" text="B" />
+        </Tree>
+        <button data-testid="after" type="button">
+          After
+        </button>
+      </>,
+    )
+
+    const tree = screen.getByRole('tree')
+
+    expect(tree).toHaveAttribute('tabindex', '-1')
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    expect(screen.getByTestId('after')).toHaveFocus()
+
+    // Once an item is the tab stop the tree element stays out of the tab order either way
+    await user.click(screen.getByTestId('b'))
+    expect(screen.getByTestId('b')).toHaveAttribute('tabindex', '0')
+    expect(tree).not.toHaveAttribute('tabindex')
+  })
+
   it('calls `onFocus` for the items, not for the tree element passing focus on', async () => {
     const user = userEvent.setup()
     const onFocus = vi.fn<(event: React.FocusEvent<HTMLUListElement>) => void>()

@@ -32,7 +32,15 @@ export function Tree(
   props: TreeProps &
     Omit<React.HTMLProps<HTMLUListElement>, 'align' | 'as' | 'height' | 'role' | 'wrap'>,
 ): React.JSX.Element {
-  const {children, gap = 1, onFocus, onMouseDown, ref: forwardedRef, ...restProps} = props
+  const {
+    children,
+    gap = 1,
+    onFocus,
+    onMouseDown,
+    ref: forwardedRef,
+    tabIndex: tabIndexProp,
+    ...restProps
+  } = props
   const ref = useRef<HTMLUListElement | null>(null)
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const path: string[] = useMemo(() => [], [])
@@ -268,7 +276,10 @@ export function Tree(
         ref={ref}
         role="tree"
         gap={gap}
-        tabIndex={tabStop ? undefined : 0}
+        // While an item is the tab stop the tree element stays out of the tab order, so the tree
+        // remains a single tab stop; until then a `tabIndex` prop (e.g. `-1` to keep the tree out
+        // of the tab order) wins over the default
+        tabIndex={tabStop ? undefined : (tabIndexProp ?? 0)}
       >
         {children}
       </Stack>
