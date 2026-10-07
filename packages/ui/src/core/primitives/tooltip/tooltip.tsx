@@ -491,20 +491,18 @@ function useMiddleware({
 
     // Flip the floating element when leaving the boundary box
     ret.push(
-      flip(
-        withBoundary(boundaryRef, {
-          fallbackPlacements,
-          padding: DEFAULT_TOOLTIP_PADDING,
-          rootBoundary,
-        }),
-      ),
+      withBoundary(flip, boundaryRef, {
+        fallbackPlacements,
+        padding: DEFAULT_TOOLTIP_PADDING,
+        rootBoundary,
+      }),
     )
 
     // Define distance between reference and floating element
     ret.push(offset({mainAxis: DEFAULT_TOOLTIP_DISTANCE}))
 
     // Shift the tooltip so its sits with the boundary element
-    ret.push(shift(withBoundary(boundaryRef, {rootBoundary, padding: DEFAULT_TOOLTIP_PADDING})))
+    ret.push(withBoundary(shift, boundaryRef, {rootBoundary, padding: DEFAULT_TOOLTIP_PADDING}))
 
     // Cap the tooltip width to the boundary, viewport and portal
     ret.push(sizeMiddleware({boundaryRef, portalRef, rootBoundary}))

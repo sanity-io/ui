@@ -594,13 +594,11 @@ function useMiddleware({
         )
       } else {
         ret.push(
-          flip(
-            withBoundary(floatingBoundaryRef, {
-              fallbackPlacements,
-              padding: DEFAULT_POPOVER_PADDING,
-              rootBoundary,
-            }),
-          ),
+          withBoundary(flip, floatingBoundaryRef, {
+            fallbackPlacements,
+            padding: DEFAULT_POPOVER_PADDING,
+            rootBoundary,
+          }),
         )
       }
     }
@@ -625,7 +623,7 @@ function useMiddleware({
     // Shift the popover so its sits within the boundary element
     if (preventOverflow) {
       ret.push(
-        shift(withBoundary(floatingBoundaryRef, {rootBoundary, padding: DEFAULT_POPOVER_PADDING})),
+        withBoundary(shift, floatingBoundaryRef, {rootBoundary, padding: DEFAULT_POPOVER_PADDING}),
       )
     }
 
@@ -646,12 +644,10 @@ function useMiddleware({
     }
 
     ret.push(
-      hide(
-        withBoundary(referenceBoundaryRef, {
-          padding: DEFAULT_POPOVER_PADDING,
-          strategy: 'referenceHidden',
-        }),
-      ),
+      withBoundary(hide, referenceBoundaryRef, {
+        padding: DEFAULT_POPOVER_PADDING,
+        strategy: 'referenceHidden',
+      }),
     )
 
     return ret
