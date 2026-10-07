@@ -855,6 +855,56 @@ describe('Popover', () => {
       for (const element of boundaries) element.remove()
     })
 
+    it("lets a consumer `style` set the sizes React owns, never the middleware's", async () => {
+      const style = {maxHeight: 50, maxWidth: 60, width: 70}
+
+      // With the default `width` the popover has no width of its own, so the consumer's applies;
+      // the popover's cap wins over the consumer's max width, as the effect that used to re-apply
+      // it made it; nothing constrains the height
+      const {rerender} = render(<Example boundaryWidth={300} open style={style} />, {
+        strict: false,
+      })
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.style.width).toBe('70px')
+      expect(card.style.maxWidth).toBe('292px')
+      expect(card.style.maxHeight).toBe('50px')
+
+      // A `width` property wins over the consumer's width, as before
+      rerender(<Example boundaryWidth={300} open style={style} width={0} />)
+      await settle()
+
+      expect(card.style.width).toBe('320px')
+
+      // The sizes the middleware owns are not the consumer's to set: `matchReferenceWidth` writes
+      // the width, `constrainSize` the max width and height, and an unrelated re-render changes
+      // nothing (React is passed `undefined` for them, consumer style or not)
+      rerender(<Example boundaryWidth={300} constrainSize matchReferenceWidth open style={style} />)
+      await settle()
+
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+      expect(card.style.maxWidth).toBe('292px')
+      expect(card.style.maxHeight).toBe('72px')
+
+      rerender(
+        <Example
+          boundaryWidth={300}
+          constrainSize
+          matchReferenceWidth
+          open
+          style={{...style, width: 80}}
+          tone="primary"
+        />,
+      )
+      await settle()
+
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+      expect(card.style.maxWidth).toBe('292px')
+      expect(card.style.maxHeight).toBe('72px')
+    })
+
     it('clears the max height and takes the max width back once `constrainSize` is turned off', async () => {
       // A boundary with a scrollbar: the room within it (its client width) is narrower than the
       // cap from its border-box width, so the two writers are told apart by their values

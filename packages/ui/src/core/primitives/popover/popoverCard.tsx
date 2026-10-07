@@ -22,6 +22,21 @@ import {
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
 
+/**
+ * A size style of the card (see the `maxHeight` prop): `undefined` while the `size` middleware
+ * owns it, whatever the consumer's `style` says; otherwise the popover's own value, and the
+ * consumer's only where the popover has none (`''`), as the effect that used to re-apply the
+ * popover's width and max width after every render made it.
+ */
+function sizeStyle(
+  value: number | '' | undefined,
+  consumerValue: number | string | undefined,
+): number | string | undefined {
+  if (value === undefined) return undefined
+
+  return value === '' ? (consumerValue ?? '') : value
+}
+
 const MotionCard = styled(motion.create(Card))`
   &:not([hidden]) {
     display: flex;
@@ -112,15 +127,17 @@ export function PopoverCard(
   const rootStyle: CSSProperties = useMemo(
     () => ({
       left: x,
-      maxHeight,
-      maxWidth,
       position: strategy,
       top: y,
       transformOrigin: getTransformOrigin(originX, originY),
-      width,
       zIndex,
       willChange: animate ? 'transform' : undefined,
       ...style,
+      // After the consumer's `style`: a size the middleware owns must not come back through it, or
+      // React would write it over the middleware's value on the next change of that style
+      maxHeight: sizeStyle(maxHeight, style?.maxHeight),
+      maxWidth: sizeStyle(maxWidth, style?.maxWidth),
+      width: sizeStyle(width, style?.width),
     }),
     [animate, maxHeight, maxWidth, originX, originY, strategy, style, width, x, y, zIndex],
   )
