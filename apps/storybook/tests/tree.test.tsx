@@ -98,4 +98,25 @@ describe('Components/Tree', () => {
     await userEvent.tab()
     await expect.poll(focusedTestId).toBe('a')
   })
+
+  test('enters the items from the focused tree element with the navigation keys', async () => {
+    await render(
+      <ThemeProvider scheme="light" theme={theme}>
+        <Tree gap={1} style={{padding: 40}}>
+          <TreeItem data-testid="a" text="A" />
+          <TreeItem data-testid="b" text="B" />
+        </Tree>
+      </ThemeProvider>,
+    )
+
+    await userEvent.click(tree(), {position: {x: 10, y: 10}})
+    await expect.poll(() => document.activeElement).toBe(tree())
+
+    await userEvent.keyboard('{End}')
+    await expect.poll(focusedTestId).toBe('b')
+    await expect.poll(() => tree().hasAttribute('tabindex')).toBe(false)
+
+    await userEvent.keyboard('{ArrowUp}')
+    await expect.poll(focusedTestId).toBe('a')
+  })
 })

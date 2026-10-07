@@ -113,13 +113,27 @@ export function Tree(
     (event: React.KeyboardEvent<HTMLUListElement>) => {
       const treeElement = ref.current
 
-      if (!tabStop || !treeElement) return
+      if (!treeElement) return
 
       const focusItem = (el: HTMLElement | null | undefined) => {
         if (!el) return
 
         _focusItemElement(el)
         setFocusedElement(el)
+      }
+
+      if (!tabStop) {
+        // The tree element itself has focus (a pointer press between the items left it there, see
+        // `handleFocus`): the navigation keys enter the items at either end
+        if (event.key === 'ArrowDown' || event.key === 'Home') {
+          event.preventDefault()
+          focusItem(_getItemElements(treeElement)[0])
+        } else if (event.key === 'ArrowUp' || event.key === 'End') {
+          event.preventDefault()
+          focusItem(_findLastItemElement(state, _getItemElements(treeElement)))
+        }
+
+        return
       }
 
       if (event.key === 'ArrowDown') {

@@ -378,7 +378,14 @@ describe('components/tree keyboard navigation', () => {
     expect(focusedItem()).toBe('apples')
   })
 
-  it('does nothing while no item is focused', async () => {
+  // A press between the items leaves focus on the tree element (see the tab stop tests); the
+  // navigation keys enter the items from there, at the end that matches the key
+  it.each([
+    ['ArrowDown', 'fruit'],
+    ['Home', 'fruit'],
+    ['ArrowUp', 'vegetables'],
+    ['End', 'vegetables'],
+  ])('enters the items from the focused tree element with %s', async (key, id) => {
     const user = userEvent.setup()
 
     render(<FruitTree />)
@@ -388,7 +395,24 @@ describe('components/tree keyboard navigation', () => {
     await user.click(tree)
     expect(tree).toHaveFocus()
 
-    await user.keyboard('{ArrowDown}{End}{Home}{ArrowRight}')
+    await user.keyboard(`{${key}}`)
+
+    expect(focusedItem()).toBe(id)
+    expect(screen.getByTestId(id)).toHaveAttribute('tabindex', '0')
+    expect(tree).not.toHaveAttribute('tabindex')
+  })
+
+  it('leaves focus on the tree element for ArrowLeft and ArrowRight', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    const tree = screen.getByRole('tree')
+
+    await user.click(tree)
+    expect(tree).toHaveFocus()
+
+    await user.keyboard('{ArrowRight}{ArrowLeft}')
 
     expect(tree).toHaveFocus()
     expect(screen.getByTestId('fruit')).toHaveAttribute('tabindex', '-1')
