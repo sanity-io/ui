@@ -606,13 +606,19 @@ describe('Popover', () => {
         boundaryClientWidth?: number
         /** A boundary element of the test's own, instead of the one the example renders */
         boundaryElement?: HTMLElement
+        /** Where the reference element is, instead of at the origin */
+        referenceRect?: {x: number; y: number}
         style?: CSSProperties
-      } & Pick<PopoverProps, 'constrainSize' | 'matchReferenceWidth' | 'open' | 'tone' | 'width'>,
+      } & Pick<
+        PopoverProps,
+        'constrainSize' | 'fallbackPlacements' | 'matchReferenceWidth' | 'open' | 'tone' | 'width'
+      >,
     ) {
       const {
         boundaryWidth,
         boundaryClientWidth = boundaryWidth,
         boundaryElement,
+        referenceRect = {x: 0, y: 0},
         ...popoverProps
       } = props
       const [boundary, setBoundary] = useState<HTMLDivElement | null>(null)
@@ -631,7 +637,7 @@ describe('Popover', () => {
                 ref={(node) => {
                   if (node) {
                     node.getBoundingClientRect = () =>
-                      DOMRect.fromRect({x: 0, y: 0, width: REFERENCE_WIDTH, height: 20})
+                      DOMRect.fromRect({...referenceRect, width: REFERENCE_WIDTH, height: 20})
                   }
                 }}
                 text="Reference"
@@ -818,6 +824,59 @@ describe('Popover', () => {
       // boundary; the popover must not add a pass of its own for the cap in the same commit
       expect(card.style.maxWidth).toBe('277px')
       expect(card.style.maxHeight).toBe('72px')
+      expect(passes()).toBe(2)
+    })
+
+    it('tells Floating UI about changed `fallbackPlacements`, although the boundary is read from a ref', async () => {
+      // The boundary goes through a ref so that a change of the element does not recreate the
+      // middleware; the other options still have to count as a change for `useFloating`, which
+      // compares middleware by their `options` and functions by their source text. A 200×30 card
+      // under a reference near the bottom of a 600×100 boundary: `bottom` overflows, and whether
+      // it flips to `top` or `right` is decided by the fallback placements of the pass
+      const {rerender} = render(
+        <Example
+          boundaryClientWidth={600}
+          boundaryWidth={600}
+          fallbackPlacements={['top']}
+          referenceRect={{x: 150, y: 70}}
+        />,
+        {strict: false},
+      )
+
+      // Pre-rendered on intent, so that the card can be given a size before the first pass
+      fireEvent.pointerEnter(getReference())
+
+      const card = cardElement()!
+
+      Object.defineProperty(card, 'offsetWidth', {configurable: true, value: 200})
+      Object.defineProperty(card, 'offsetHeight', {configurable: true, value: 30})
+
+      rerender(
+        <Example
+          boundaryClientWidth={600}
+          boundaryWidth={600}
+          fallbackPlacements={['top']}
+          open
+          referenceRect={{x: 150, y: 70}}
+        />,
+      )
+      await settle()
+
+      expect(card.dataset.placement).toBe('top')
+
+      rerender(
+        <Example
+          boundaryClientWidth={600}
+          boundaryWidth={600}
+          fallbackPlacements={['right']}
+          open
+          referenceRect={{x: 150, y: 70}}
+        />,
+      )
+      await settle()
+
+      // The changed middleware made Floating UI restart `autoUpdate` with a pass
+      expect(card.dataset.placement).toBe('right')
       expect(passes()).toBe(2)
     })
 
