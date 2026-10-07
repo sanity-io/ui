@@ -25,8 +25,8 @@ export interface MenuButtonProps {
   boundaryElement?: never
   /**
    * The element that toggles the menu. `MenuButton` adds its own `onClick`, `onKeyDown` and
-   * `onMouseDown` handlers to it, after any the element already has: those run first, and one
-   * that calls `event.preventDefault()` keeps `MenuButton` from acting on the event.
+   * `onMouseDown` handlers to it, after any handlers the element already has: those run first,
+   * and one that calls `event.preventDefault()` keeps `MenuButton` from acting on the event.
    */
   button: React.JSX.Element
   id: string
