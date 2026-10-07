@@ -468,5 +468,27 @@ describe('MenuGroup', () => {
       expectIdle(group)
       expect(transitions).toHaveLength(0)
     })
+
+    it('drops an open that resolves after a sibling item became active', async () => {
+      renderMenu()
+
+      const group = getGroup()
+
+      fireEvent.mouseEnter(group)
+      fireEvent.mouseEnter(getItem('Expand'))
+
+      // The item stopped being active before the transition that opens its child menu ran
+      flushTransitions()
+
+      expectChildMenuClosed()
+      expectIdle(group)
+
+      // `ArrowUp` from the sibling makes the group item the active (and focused) item again
+      fireEvent.keyDown(getMenu(), {key: 'ArrowUp'})
+      await waitFor(() => expect(group).toHaveFocus())
+
+      expectSelected(group)
+      expectChildMenuClosed()
+    })
   })
 })

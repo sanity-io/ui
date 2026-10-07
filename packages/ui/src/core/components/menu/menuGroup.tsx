@@ -87,20 +87,19 @@ const MenuGroupComponent = function MenuGroup(
   const active = Boolean(activeElement) && activeElement === rootElement
   const [withinMenu, setWithinMenu] = useState(false)
 
-  // Close the child menu when a sibling item becomes the controller's active element. `open` is
-  // reset as well, or re-activating this item from the keyboard (the controller sets
-  // `activeElement`, nothing happens on this component) would show a child menu that the user
-  // never reopened. The reset happens during render, so the close lands in the same commit as the
-  // activation that caused it. A render-phase update is applied by re-rendering this component
-  // within the render in progress, at that render's priority, so unlike the handlers below it
-  // cannot be made a transition: the priority of the close is that of the activation.
+  // The child menu is only ever open while the item is the controller's active element, so `open`
+  // is reset as soon as that stops holding: hovering a sibling item closes the child menu, and
+  // re-activating this item from the keyboard (the controller sets `activeElement`, nothing
+  // happens on this component) must not show a child menu that the user never reopened. The reset
+  // happens during render, so the close lands in the same commit as the activation that caused
+  // it. A render-phase update is applied by re-rendering this component within the render in
+  // progress, at that render's priority, so unlike the handlers below it cannot be made a
+  // transition: the priority of the close is that of the activation. The invariant is checked on
+  // every render rather than only on the one that deactivates the item, because a render-phase
+  // update is dropped when a lower priority update to the same state is still queued — an opening
+  // transition that is pending when a sibling takes over would otherwise leave `open` set.
   // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
-  const [prevActive, setPrevActive] = useState(active)
-
-  if (active !== prevActive) {
-    setPrevActive(active)
-    if (!active) setOpen(false)
-  }
+  if (open && !active) setOpen(false)
 
   const childMenuOpen = open && active
   // Pressed while the child menu is open and the pointer (or, after `ArrowRight`, the focus) is
