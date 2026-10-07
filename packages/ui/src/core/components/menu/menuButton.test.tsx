@@ -355,6 +355,124 @@ describe('MenuButton', () => {
       },
     )
 
+    it('returns focus to the button before calling onClose when the clicked item moves focus out of the menu', () => {
+      // A menu item calls its own `onClick` before it reports the click to the menu, so the focus
+      // move fires the menu's blur handler before the item click can close the menu
+      const focusedWhenCalled: (Element | null)[] = []
+      const onClose = vi.fn(() => {
+        focusedWhenCalled.push(document.activeElement)
+      })
+      const onMenuClickCapture = vi.fn()
+
+      render(
+        <>
+          <MenuButton
+            button={<Button text="Open menu" />}
+            id="menu-button"
+            menu={
+              <Menu onClickCapture={onMenuClickCapture}>
+                <MenuItem
+                  onClick={() => screen.getByRole('button', {name: 'Outside'}).focus()}
+                  text="Option 1"
+                />
+              </Menu>
+            }
+            onClose={onClose}
+          />
+          <button type="button">Outside</button>
+        </>,
+      )
+
+      const button = getButton()
+
+      fireEvent.click(button)
+      expectMenuVisible()
+
+      const item = screen.getByRole('menuitem', {name: 'Option 1'})
+
+      act(() => item.focus())
+      fireEvent.click(item)
+
+      expect(onClose).toHaveBeenCalledTimes(1)
+      expect(focusedWhenCalled).toEqual([button])
+      expect(button).toHaveFocus()
+      expectMenuRenderedHidden()
+      // The handler on the menu element still runs
+      expect(onMenuClickCapture).toHaveBeenCalledTimes(1)
+    })
+
+    describe('a click inside the menu that moves focus out of it without closing it', () => {
+      // Not an item click, so nothing closes the menu during the click; the blur it caused closes
+      // the menu once the click has finished dispatching
+      function renderWithControlInside(onInsideClick: (event: React.MouseEvent) => void) {
+        const onClose = vi.fn()
+        const onMenuClick = vi.fn()
+
+        render(
+          <>
+            <MenuButton
+              button={<Button text="Open menu" />}
+              id="menu-button"
+              menu={
+                <Menu onClick={onMenuClick}>
+                  <MenuItem text="Option 1" />
+                  <button onClick={onInsideClick} type="button">
+                    Inside
+                  </button>
+                </Menu>
+              }
+              onClose={onClose}
+            />
+            <button type="button">Outside</button>
+          </>,
+        )
+
+        fireEvent.click(getButton())
+        expectMenuVisible()
+
+        const inside = screen.getByRole('button', {name: 'Inside'})
+
+        act(() => inside.focus())
+
+        return {inside, onClose, onMenuClick}
+      }
+
+      function focusOutside() {
+        screen.getByRole('button', {name: 'Outside'}).focus()
+      }
+
+      function expectClosedWithFocusOutside(onClose: ReturnType<typeof vi.fn>) {
+        expect(onClose).toHaveBeenCalledTimes(1)
+        expect(screen.getByRole('button', {name: 'Outside'})).toHaveFocus()
+        expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+      }
+
+      it('closes when the click reaches the menu element', () => {
+        const {inside, onClose, onMenuClick} = renderWithControlInside(focusOutside)
+
+        fireEvent.click(inside)
+
+        expectClosedWithFocusOutside(onClose)
+        // The handler on the menu element still runs
+        expect(onMenuClick).toHaveBeenCalledTimes(1)
+      })
+
+      it('closes once the click has finished dispatching when a handler stopped its propagation', async () => {
+        const {inside, onClose, onMenuClick} = renderWithControlInside((event) => {
+          event.stopPropagation()
+          focusOutside()
+        })
+
+        fireEvent.click(inside)
+
+        expect(onClose).not.toHaveBeenCalled()
+        expect(onMenuClick).not.toHaveBeenCalled()
+        await act(async () => {})
+
+        expectClosedWithFocusOutside(onClose)
+      })
+    })
+
     it('calls onClose once when a click outside closes the menu', () => {
       const onClose = vi.fn()
 
