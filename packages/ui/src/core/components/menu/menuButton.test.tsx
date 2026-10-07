@@ -6,7 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {startTransition, useLayoutEffect, useState} from 'react'
+import {startTransition, use, useLayoutEffect, useState} from 'react'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -510,6 +510,80 @@ describe('MenuButton', () => {
 
       expectMenuVisible()
       expect(onOpen).toHaveBeenCalledTimes(1)
+    })
+
+    it('settles on the last requested state when the button is clicked again while an open is still pending', async () => {
+      let resolveContent!: () => void
+      const content = new Promise<void>((resolve) => {
+        resolveContent = resolve
+      })
+
+      // Suspends until `resolveContent()`; with no Suspense boundary above it, the open transition
+      // that renders it stays pending (React waits rather than committing a fallback)
+      function SuspendingItem() {
+        use(content)
+
+        return <MenuItem text="Option 1" />
+      }
+
+      const onOpen = vi.fn()
+      const onClose = vi.fn()
+
+      render(
+        <MenuButton
+          button={<Button text="Open menu" />}
+          id="menu-button"
+          menu={
+            <Menu>
+              <SuspendingItem />
+            </Menu>
+          }
+          onClose={onClose}
+          onOpen={onOpen}
+        />,
+      )
+
+      const button = getButton()
+
+      // The open is a transition; its render suspends, so nothing of it commits (awaited `act`,
+      // as React asks for whenever a render suspends inside one)
+      await act(async () => {
+        fireEvent.click(button)
+      })
+      expect(onOpen).toHaveBeenCalledTimes(1)
+      expect(button).toHaveAttribute('aria-expanded', 'false')
+      expectMenuNotRendered()
+
+      // A second click while that open is pending closes: the handler toggles the requested
+      // value, not the committed one, and the close joins the pending transition
+      await act(async () => {
+        fireEvent.click(button)
+      })
+      expect(onClose).toHaveBeenCalledTimes(1)
+      expect(onOpen).toHaveBeenCalledTimes(1)
+
+      await act(async () => {
+        resolveContent()
+        await content
+      })
+
+      expect(button).toHaveAttribute('aria-expanded', 'false')
+      expectMenuNotRendered()
+      expect(onOpen).toHaveBeenCalledTimes(1)
+      expect(onClose).toHaveBeenCalledTimes(1)
+
+      // Opening for real now that the content can render. Asserted on the DOM rather than the
+      // accessibility tree: after an awaited `act` Floating UI has positioned the menu, and with
+      // jsdom's zero-size rects its `hide` middleware marks the card hidden (see below).
+      await act(async () => {
+        fireEvent.click(button)
+      })
+      expect(onOpen).toHaveBeenCalledTimes(2)
+      expect(button).toHaveAttribute('aria-expanded', 'true')
+      expect(
+        document.querySelector<HTMLElement>('[data-ui="MenuButton__popover"]')?.style.display,
+      ).toBe('')
+      expect(screen.getByText('Option 1')).toBeInTheDocument()
     })
 
     // The focus request made by a key press (`shouldFocus`) is applied by `useMenuController` in
