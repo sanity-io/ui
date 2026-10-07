@@ -1,0 +1,5 @@
+---
+'@sanity/ui': patch
+---
+
+fix(tree): navigate the items that are in the DOM, and hand the tab stop over from the tree element. `Tree` no longer reads its items into state from an effect after every `children` change; the arrow keys read them from the DOM when they are pressed, so items that were added, removed or moved since the last render are navigated in their current order, and the tree renders in one pass. The focused item is the tab stop (roving tabindex) for as long as it is in the tree. Until an item has been focused, and after the focused item has unmounted, the tree element itself is the tab stop and passes keyboard focus on to the first item, which until now received `tabindex="0"` one commit after mount and was never given back once it had been removed. The `focusedElement` of `useTree()` is therefore `null` until an item has been focused, where it used to be the first item. `Home` and `End` move focus to the first and last visible item. Tabbing onto an item with an `href` no longer breaks the arrow keys for it: the focused element may be the item's link, and the item is now resolved from it.

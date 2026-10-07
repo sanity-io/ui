@@ -1,43 +1,55 @@
 import {TreeState} from './types'
 
+const ITEM_SELECTOR = '[data-ui="TreeItem"]'
+
+/**
+ * The tree's item elements in document order. Read from the DOM when a key is pressed, so items
+ * that mounted, unmounted or moved since the last render are navigated as they are now.
+ */
+export function _getItemElements(treeElement: HTMLElement): HTMLElement[] {
+  return Array.from(treeElement.querySelectorAll<HTMLElement>(ITEM_SELECTOR))
+}
+
+/**
+ * The item element that contains `element`: the element itself, or an ancestor such as the item
+ * whose link (`href`) or content received focus.
+ */
+export function _closestItemElement(element: Element): HTMLElement | null {
+  return element.closest<HTMLElement>(ITEM_SELECTOR)
+}
+
+/**
+ * An item can take focus when every ancestor item is expanded.
+ */
+function _isItemVisible(state: TreeState, element: HTMLElement): boolean {
+  const itemKey = element.getAttribute('data-tree-key')
+
+  if (!itemKey) return false
+
+  const segments = itemKey.split('/')
+
+  segments.pop()
+
+  const p: string[] = []
+
+  for (const segment of segments) {
+    p.push(segment)
+
+    if (!state[p.join('/')]?.expanded) return false
+  }
+
+  return true
+}
+
 export function _findPrevItemElement(
   state: TreeState,
   itemElements: HTMLElement[],
   focusedElement: HTMLElement,
 ): HTMLElement | null {
   const idx = itemElements.indexOf(focusedElement)
-  const els = itemElements.slice(0, idx)
-  const len = els.length
 
-  for (let i = len - 1; i >= 0; i -= 1) {
-    const itemKey = els[i].getAttribute('data-tree-key')
-
-    if (!itemKey) {
-      continue
-    }
-
-    const segments = itemKey.split('/')
-
-    segments.pop()
-
-    const p: string[] = []
-
-    let expanded = true
-
-    for (let j = 0; j < segments.length; j += 1) {
-      p.push(segments[j])
-
-      const k = p.join('/')
-
-      if (!state[k]?.expanded) {
-        expanded = false
-        break
-      }
-    }
-
-    if (expanded) {
-      return els[i]
-    }
+  for (let i = idx - 1; i >= 0; i -= 1) {
+    if (_isItemVisible(state, itemElements[i])) return itemElements[i]
   }
 
   return null
@@ -49,42 +61,22 @@ export function _findNextItemElement(
   focusedElement: HTMLElement,
 ): HTMLElement | null {
   const idx = itemElements.indexOf(focusedElement)
-  const els = itemElements.slice(idx)
-  const len = itemElements.length
 
-  for (let i = 1; i < len; i += 1) {
-    if (!els[i]) {
-      continue
-    }
+  if (idx === -1) return null
 
-    const itemKey = els[i].getAttribute('data-tree-key')
+  for (let i = idx + 1; i < itemElements.length; i += 1) {
+    if (_isItemVisible(state, itemElements[i])) return itemElements[i]
+  }
 
-    if (!itemKey) {
-      continue
-    }
+  return null
+}
 
-    const segments = itemKey.split('/')
-
-    segments.pop()
-
-    const p: string[] = []
-
-    let expanded = true
-
-    for (let j = 0; j < segments.length; j += 1) {
-      p.push(segments[j])
-
-      const k = p.join('/')
-
-      if (!state[k]?.expanded) {
-        expanded = false
-        break
-      }
-    }
-
-    if (expanded) {
-      return els[i]
-    }
+export function _findLastItemElement(
+  state: TreeState,
+  itemElements: HTMLElement[],
+): HTMLElement | null {
+  for (let i = itemElements.length - 1; i >= 0; i -= 1) {
+    if (_isItemVisible(state, itemElements[i])) return itemElements[i]
   }
 
   return null
