@@ -27,6 +27,7 @@ function countCommit() {
  */
 function Harness(props: {
   boundaryStyle?: CSSProperties
+  constrainSize?: boolean
   matchReferenceWidth?: boolean
   wrapperStyle?: CSSProperties
 }) {
@@ -47,6 +48,7 @@ function Harness(props: {
           <BoundaryElementProvider element={boundary}>
             <Profiler id="popover" onRender={countCommit}>
               <Popover
+                constrainSize={props.constrainSize}
                 content={
                   <Text size={1}>
                     Popover content that is far wider than the boundary element it is inside of
@@ -181,6 +183,7 @@ describe('closed popover', () => {
       return {
         display: card()!.style.display,
         hidden: card()!.hidden,
+        maxHeight: card()!.style.maxHeight,
         maxWidth: card()!.style.maxWidth,
         width: cardRect.width,
         top: Math.round(cardRect.top),
@@ -269,6 +272,76 @@ describe('closed popover', () => {
       expect(first.top).toBe(first.expectedTop)
       expect(Math.abs(first.width - first.referenceWidth)).toBeLessThan(1)
       expect(second).toEqual(first)
+    })
+
+    // With `constrainSize` the `size` middleware writes the max width (the smaller of the room
+    // within the boundary and the cap from the boundary width) and the max height to the card
+    // during the positioning pass, instead of React rendering the cap
+    test('is capped to the room within the boundary when `constrainSize` is set', async () => {
+      await render(<Harness constrainSize />)
+
+      const {first, second} = await openAndReadFirstFrame()
+      // The room is the boundary's client width (its scrollbar excluded, unlike the cap from its
+      // border-box width) minus the padding on both sides
+      const room = boundary().clientWidth - BOUNDARY_PADDING
+
+      expect(first.display).toBe('')
+      expect(first.top).toBe(first.expectedTop)
+      expect(first.maxWidth).toBe(`${Math.min(room, BOUNDARY_WIDTH - BOUNDARY_PADDING)}px`)
+      expect(first.width).toBeLessThanOrEqual(room)
+      expect(parseFloat(first.maxHeight)).toBeGreaterThan(0)
+      expect(parseFloat(first.maxHeight)).toBeLessThan(200)
+      expect(second).toEqual(first)
+    })
+  })
+
+  // The styles the `size` middleware owns are written during positioning, so they follow their
+  // inputs through positioning passes rather than through renders of the card
+  describe('size while open', () => {
+    test('follows the reference width in the positioning pass when `matchReferenceWidth` is set', async () => {
+      await render(<Harness matchReferenceWidth />)
+
+      await open()
+
+      // The middleware writes the reference's layout width, fractional and all
+      const referenceWidth = reference().getBoundingClientRect().width
+
+      expect(Math.abs(parseFloat(card()!.style.width) - referenceWidth)).toBeLessThan(0.01)
+      popoverCommits = 0
+
+      // The reference growing resizes the card inside the positioning pass that follows it. The
+      // one commit is Floating UI's, for its positioning data (the `hide` middleware's offsets
+      // follow the reference's rect); the reference width used to be mirrored into state from
+      // inside the pass as well, for a second commit that rendered the width already written
+      reference().style.width = '180px'
+      await expect.poll(() => card()!.style.width).toBe('180px')
+      await settle()
+
+      expect(Math.abs(card()!.getBoundingClientRect().width - 180)).toBeLessThan(1)
+      expect(popoverCommits).toBe(1)
+    })
+
+    test('follows the boundary width when `constrainSize` is set', async () => {
+      await render(<Harness constrainSize />)
+
+      await open()
+
+      const narrower = BOUNDARY_WIDTH - 40
+
+      // The boundary shrinking changes the cap (measured by the popover's own observer) and the
+      // room (read by the middleware), neither of which Floating UI's `autoUpdate` watches: the
+      // popover repositions itself for the new cap, and the pass reads the new room too
+      boundary().style.width = `${narrower}px`
+      await expect
+        .poll(() => card()!.style.maxWidth)
+        .toBe(
+          `${Math.min(boundary().clientWidth - BOUNDARY_PADDING, narrower - BOUNDARY_PADDING)}px`,
+        )
+      await settle()
+
+      expect(card()!.getBoundingClientRect().right).toBeLessThanOrEqual(
+        boundary().getBoundingClientRect().right,
+      )
     })
   })
 

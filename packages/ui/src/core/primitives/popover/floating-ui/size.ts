@@ -2,30 +2,40 @@ import {detectOverflow, Middleware} from '@floating-ui/react-dom'
 
 import {PopoverMargins} from '../../../types/popover'
 
-export function size(options: {
+interface SizeOptions {
   boundaryElement?: HTMLElement | null
   constrainSize: boolean
   margins: PopoverMargins
   matchReferenceWidth?: boolean
+  /**
+   * The width cap from the `width` property and the boundary width (`calcMaxWidth`), read on
+   * every positioning pass while `constrainSize` is set. A ref rather than a value, so that a
+   * change of the cap does not recreate the middleware (see `Popover`).
+   */
   maxWidthRef: React.RefObject<number | undefined>
   padding?: number
-  referenceWidthRef: React.RefObject<number | undefined>
-  setReferenceWidth: (referenceWidth: number) => void
-  widthRef: React.RefObject<number | undefined>
-}): Middleware {
-  const {
-    constrainSize,
-    margins,
-    matchReferenceWidth,
-    maxWidthRef,
-    padding = 0,
-    referenceWidthRef,
-    setReferenceWidth,
-    widthRef,
-  } = options
+}
+
+/**
+ * Sizes the floating element inside the positioning pass: `matchReferenceWidth` gives it the
+ * reference element's width, and `constrainSize` caps its width and height to the room within the
+ * boundary. The styles are written straight to the element — before its dimensions are read back,
+ * so that a changed size restarts the pass — and only these: whatever this middleware does not
+ * own (`width` without `matchReferenceWidth`, `maxWidth` without `constrainSize`) is rendered by
+ * React on the card instead, so every style property has exactly one writer.
+ */
+export function size(options: SizeOptions): Middleware {
+  const {constrainSize, margins, matchReferenceWidth, maxWidthRef, padding = 0} = options
 
   return {
     name: '@sanity/ui/size',
+    // `useFloating` tells a changed middleware array from an unchanged one by comparing the arrays
+    // deeply, functions by their source, so a middleware that keeps its inputs to itself can never
+    // change in its eyes. Exposing them the way Floating UI's own middleware do makes a change of
+    // `constrainSize`, `matchReferenceWidth`, the margins or the boundary reach the next pass.
+    // (`maxWidthRef` is the same object on every render, so its value changing does not count as
+    // a change — on purpose, see above.)
+    options,
     async fn(args) {
       const {elements, placement, platform, rects} = args
       const {floating, reference} = rects
@@ -68,14 +78,9 @@ export function size(options: {
       // Elements need to be resized BEFORE the `platform.getDimensions` call below
       const availableWidth = maxWidth - margins[1] - margins[3]
       const availableHeight = maxHeight - margins[0] - margins[2]
-      const referenceWidth = reference.width - margins[1] - margins[3]
-      referenceWidthRef.current = referenceWidth
-      setReferenceWidth(referenceWidth)
 
       if (matchReferenceWidth) {
-        elements.floating.style.width = `${referenceWidth}px`
-      } else if (widthRef.current !== undefined) {
-        elements.floating.style.width = `${widthRef.current}px`
+        elements.floating.style.width = `${reference.width - margins[1] - margins[3]}px`
       }
 
       if (constrainSize) {

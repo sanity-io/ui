@@ -44,6 +44,11 @@ export function PopoverCard(
     arrowRef: React.Ref<HTMLDivElement>
     arrowX?: number
     arrowY?: number
+    /**
+     * The width cap, as a rendered style. Left undefined when the `size` middleware writes
+     * `maxWidth` to the element itself (`constrainSize`), so that React never touches it
+     */
+    maxWidth: number | undefined
     originX?: number
     originY?: number
     overflow?: BoxOverflow
@@ -54,6 +59,10 @@ export function PopoverCard(
     shadow?: number | number[]
     strategy: Strategy
     tone: CardTone
+    /**
+     * The width, as a rendered style. Left undefined when the `size` middleware writes `width` to
+     * the element itself (`matchReferenceWidth`), so that React never touches it
+     */
     width: number | undefined
     x: number | null
     y: number | null
@@ -67,6 +76,7 @@ export function PopoverCard(
     arrowX,
     arrowY,
     children,
+    maxWidth,
     padding,
     placement,
     originX,
@@ -100,6 +110,7 @@ export function PopoverCard(
   const rootStyle: CSSProperties = useMemo(
     () => ({
       left: x,
+      maxWidth,
       position: strategy,
       top: y,
       transformOrigin: getTransformOrigin(originX, originY),
@@ -108,7 +119,7 @@ export function PopoverCard(
       willChange: animate ? 'transform' : undefined,
       ...style,
     }),
-    [animate, originX, originY, strategy, style, width, x, y, zIndex],
+    [animate, maxWidth, originX, originY, strategy, style, width, x, y, zIndex],
   )
 
   const arrowStyle: CSSProperties = useMemo(

@@ -1,5 +1,6 @@
 /** @vitest-environment jsdom */
 
+import {platform} from '@floating-ui/react-dom'
 import {act, fireEvent, screen} from '@testing-library/react'
 
 // oxlint-disable-next-line no-unassigned-import
@@ -65,6 +66,82 @@ function expectRenderedHidden() {
 
 function expectVisible() {
   expect(screen.getByText('Popover content')).toBeVisible()
+}
+
+/**
+ * Records every `ResizeObserver` the popover creates, so that the tests can count observations
+ * and deliver sizes. Replaces the no-op mock imported at the top for the tests that stub it in.
+ */
+class RecordingResizeObserver {
+  static instances: RecordingResizeObserver[] = []
+  static observed: Element[] = []
+
+  callback: ResizeObserverCallback
+  targets = new Set<Element>()
+  disconnected = false
+
+  constructor(callback: ResizeObserverCallback) {
+    this.callback = callback
+    RecordingResizeObserver.instances.push(this)
+  }
+
+  observe(target: Element) {
+    this.targets.add(target)
+    RecordingResizeObserver.observed.push(target)
+  }
+
+  unobserve(target: Element) {
+    this.targets.delete(target)
+  }
+
+  disconnect() {
+    this.targets.clear()
+    this.disconnected = true
+  }
+
+  /** Delivers a border-box size for `target`, like the browser does after a resize */
+  resize(target: Element, width: number, height: number) {
+    const size = {inlineSize: width, blockSize: height}
+
+    this.callback(
+      [
+        {
+          target,
+          contentRect: target.getBoundingClientRect(),
+          borderBoxSize: [size],
+          contentBoxSize: [size],
+          devicePixelContentBoxSize: [size],
+        },
+      ],
+      this,
+    )
+  }
+}
+
+function observersOf(target: Element) {
+  return RecordingResizeObserver.instances.filter((ro) => ro.targets.has(target))
+}
+
+/** How many times `target` was observed (Floating UI observes the reference and card too) */
+function timesObserved(target: Element) {
+  return RecordingResizeObserver.observed.filter((observed) => observed === target).length
+}
+
+function cardElement() {
+  return document.querySelector<HTMLElement>('[data-ui="Popover"]')
+}
+
+/** The popover card's inline `max-width`, which follows the boundary width minus the padding */
+function cardMaxWidth() {
+  return cardElement()?.style.maxWidth
+}
+
+/**
+ * Lets Floating UI's positioning pass, which runs in microtasks after a commit, finish and commit
+ * its result
+ */
+function settle() {
+  return act(() => new Promise<void>((resolve) => setTimeout(resolve, 0)))
 }
 
 describe('Popover', () => {
@@ -405,70 +482,6 @@ describe('Popover', () => {
 
   describe('boundary size while closed', () => {
     /**
-     * Records every `ResizeObserver` the popover creates, so that the tests can count observations
-     * and deliver sizes. Replaces the no-op mock imported at the top for these tests only.
-     */
-    class RecordingResizeObserver {
-      static instances: RecordingResizeObserver[] = []
-      static observed: Element[] = []
-
-      callback: ResizeObserverCallback
-      targets = new Set<Element>()
-      disconnected = false
-
-      constructor(callback: ResizeObserverCallback) {
-        this.callback = callback
-        RecordingResizeObserver.instances.push(this)
-      }
-
-      observe(target: Element) {
-        this.targets.add(target)
-        RecordingResizeObserver.observed.push(target)
-      }
-
-      unobserve(target: Element) {
-        this.targets.delete(target)
-      }
-
-      disconnect() {
-        this.targets.clear()
-        this.disconnected = true
-      }
-
-      /** Delivers a border-box size for `target`, like the browser does after a resize */
-      resize(target: Element, width: number, height: number) {
-        const size = {inlineSize: width, blockSize: height}
-
-        this.callback(
-          [
-            {
-              target,
-              contentRect: target.getBoundingClientRect(),
-              borderBoxSize: [size],
-              contentBoxSize: [size],
-              devicePixelContentBoxSize: [size],
-            },
-          ],
-          this,
-        )
-      }
-    }
-
-    function observersOf(target: Element) {
-      return RecordingResizeObserver.instances.filter((ro) => ro.targets.has(target))
-    }
-
-    /** How many times `target` was observed (Floating UI observes the reference and card too) */
-    function timesObserved(target: Element) {
-      return RecordingResizeObserver.observed.filter((observed) => observed === target).length
-    }
-
-    /** The popover card's inline `max-width`, which follows the boundary width minus the padding */
-    function cardMaxWidth() {
-      return document.querySelector<HTMLElement>('[data-ui="Popover"]')?.style.maxWidth
-    }
-
-    /**
      * jsdom lays nothing out, so the boundary's offset size (what the popover measures on open) is
      * defined on the element
      */
@@ -554,6 +567,208 @@ describe('Popover', () => {
 
       expect(timesObserved(boundary)).toBe(2)
       expect(cardMaxWidth()).toBe('292px')
+    })
+  })
+
+  // Every size style on the card has one writer: React renders `width` and `maxWidth` except
+  // where the `size` middleware writes them to the element during positioning (the width when it
+  // matches the reference element's, the max width when `constrainSize` caps it to the available
+  // room), and React never touches a style it did not render.
+  describe('width and max width', () => {
+    const REFERENCE_WIDTH = 100
+
+    /** Positioning passes: Floating UI measures the elements once at the start of every pass */
+    function passes() {
+      return vi.mocked(platform.getElementRects).mock.calls.length
+    }
+
+    /**
+     * jsdom lays nothing out, so the geometry is defined on the elements: the boundary's offset
+     * size (what the popover measures on open) and client size (what Floating UI clips to), the
+     * viewport's client size, and the reference element's rect, `REFERENCE_WIDTH` wide
+     */
+    function Example(
+      props: {boundaryWidth: number} & Pick<
+        PopoverProps,
+        'constrainSize' | 'matchReferenceWidth' | 'open' | 'tone' | 'width'
+      >,
+    ) {
+      const {boundaryWidth, ...popoverProps} = props
+      const [boundary, setBoundary] = useState<HTMLDivElement | null>(null)
+
+      return (
+        <div
+          data-testid="boundary"
+          ref={(node) => {
+            if (node) {
+              for (const [name, value] of [
+                ['offsetWidth', boundaryWidth],
+                ['offsetHeight', 100],
+                ['clientWidth', boundaryWidth],
+                ['clientHeight', 100],
+              ] as const) {
+                Object.defineProperty(node, name, {configurable: true, value})
+              }
+            }
+            setBoundary(node)
+          }}
+        >
+          <BoundaryElementProvider element={boundary}>
+            <Popover content={content} {...popoverProps}>
+              <Button
+                ref={(node) => {
+                  if (node) {
+                    node.getBoundingClientRect = () =>
+                      DOMRect.fromRect({x: 0, y: 0, width: REFERENCE_WIDTH, height: 20})
+                  }
+                }}
+                text="Reference"
+              />
+            </Popover>
+          </BoundaryElementProvider>
+        </div>
+      )
+    }
+
+    beforeEach(() => {
+      RecordingResizeObserver.instances = []
+      RecordingResizeObserver.observed = []
+      vi.stubGlobal('ResizeObserver', RecordingResizeObserver)
+      vi.spyOn(platform, 'getElementRects')
+      Object.defineProperty(document.documentElement, 'clientWidth', {
+        configurable: true,
+        value: 1024,
+      })
+      Object.defineProperty(document.documentElement, 'clientHeight', {
+        configurable: true,
+        value: 768,
+      })
+    })
+
+    afterEach(() => {
+      vi.unstubAllGlobals()
+      vi.restoreAllMocks()
+      // @ts-expect-error -- removes the own property defined above, uncovering the prototype's
+      delete document.documentElement.clientWidth
+      // @ts-expect-error -- same
+      delete document.documentElement.clientHeight
+    })
+
+    // `strict: false` throughout: StrictMode double-invokes effects on mount, which would double
+    // the counts these tests are about
+    it('renders the max width on the card, so the boundary resizing while open costs no positioning pass', async () => {
+      const {rerender} = render(<Example boundaryWidth={300} />, {strict: false})
+      const boundary = screen.getByTestId('boundary')
+
+      rerender(<Example boundaryWidth={300} open />)
+      await settle()
+
+      expect(cardMaxWidth()).toBe('292px')
+      expect(cardElement()?.style.width).toBe('')
+      expect(passes()).toBe(1)
+
+      act(() => observersOf(boundary)[0].resize(boundary, 200, 100))
+
+      // In the same commit as the new size, no pass involved
+      expect(cardMaxWidth()).toBe('192px')
+      await settle()
+      expect(passes()).toBe(1)
+    })
+
+    it('lets the `size` middleware write the width when it matches the reference element, and never touches it itself', async () => {
+      const {rerender} = render(<Example boundaryWidth={300} matchReferenceWidth />, {
+        strict: false,
+      })
+
+      rerender(<Example boundaryWidth={300} matchReferenceWidth open />)
+      await settle()
+
+      const card = cardElement()!
+
+      // Written by the middleware during the one positioning pass of the open; the max width is
+      // still React's
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+      expect(card.style.maxWidth).toBe('292px')
+      expect(passes()).toBe(1)
+
+      // Re-rendering the card leaves the middleware's write alone
+      rerender(<Example boundaryWidth={300} matchReferenceWidth open tone="primary" />)
+      await settle()
+
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+      expect(passes()).toBe(1)
+    })
+
+    it('lets the `size` middleware write the max width under `constrainSize`, and repositions once when it changes', async () => {
+      const {rerender} = render(<Example boundaryWidth={300} constrainSize />, {strict: false})
+      const boundary = screen.getByTestId('boundary')
+
+      rerender(<Example boundaryWidth={300} constrainSize open />)
+      await settle()
+
+      // One pass on open, with the max width from the boundary measured in the opening commit
+      expect(cardMaxWidth()).toBe('292px')
+      expect(passes()).toBe(1)
+
+      // A boundary resize reaches the element through one positioning pass, which also re-reads
+      // the room within the boundary (`Math.min`); the room stays 292 here, the cap wins
+      act(() => observersOf(boundary)[0].resize(boundary, 200.6, 100))
+      await settle()
+
+      expect(cardMaxWidth()).toBe('193px')
+      expect(passes()).toBe(2)
+
+      // An unchanged size, or an unrelated re-render, costs no pass
+      act(() => observersOf(boundary)[0].resize(boundary, 200.6, 100))
+      rerender(<Example boundaryWidth={300} constrainSize open tone="primary" />)
+      await settle()
+
+      expect(passes()).toBe(2)
+
+      // Closing and reopening positions once more, reading the current max width
+      rerender(<Example boundaryWidth={300} constrainSize />)
+      await settle()
+      rerender(<Example boundaryWidth={300} constrainSize open />)
+      await settle()
+
+      expect(cardMaxWidth()).toBe('292px')
+      expect(passes()).toBe(3)
+    })
+
+    it('tells Floating UI about a changed `matchReferenceWidth` through the middleware options', async () => {
+      // `useFloating` compares middleware deeply and functions by their source, so a middleware
+      // that keeps its inputs in a closure is never seen to change: the pass would keep writing
+      // the reference width over the width React rendered
+      const {rerender} = render(
+        <Example boundaryWidth={300} constrainSize matchReferenceWidth width={0} />,
+        {strict: false},
+      )
+
+      rerender(<Example boundaryWidth={300} constrainSize matchReferenceWidth open width={0} />)
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+
+      rerender(
+        <Example boundaryWidth={300} constrainSize matchReferenceWidth={false} open width={0} />,
+      )
+      await settle()
+
+      // React renders the `width` property (the first `container` width), and the changed
+      // middleware repositioned without overwriting it
+      expect(card.style.width).toBe('320px')
+      expect(passes()).toBe(2)
+
+      // Nor does a later pass (here from a window resize, which `autoUpdate` listens for)
+      act(() => {
+        window.dispatchEvent(new Event('resize'))
+      })
+      await settle()
+
+      expect(card.style.width).toBe('320px')
+      expect(passes()).toBe(3)
     })
   })
 })
