@@ -2,7 +2,7 @@
 
 import {act, fireEvent, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {ComponentProps} from 'react'
+import {ComponentProps, Profiler} from 'react'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
@@ -21,7 +21,7 @@ const OPTIONS = [{value: 'foo'}, {value: 'bar'}, {value: 'baz'}]
 const SHOW_ALL = () => true
 
 function getInput() {
-  return screen.getByRole('combobox')
+  return screen.getByRole<HTMLInputElement>('combobox')
 }
 
 /**
@@ -42,24 +42,38 @@ async function blurTo(element: HTMLElement) {
   await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
 }
 
+/**
+ * Renders the autocomplete with an element to move focus to, and records the state of the input
+ * (`value`, `aria-expanded`, `aria-activedescendant`) after every commit of the subtree.
+ */
 function renderAutocomplete(props: Partial<Props> = {}) {
-  const result = render(
+  const commits: string[] = []
+  const recordCommit = () => {
+    const input = getInput()
+
+    commits.push(
+      [
+        JSON.stringify(input.value),
+        input.getAttribute('aria-expanded'),
+        input.getAttribute('aria-activedescendant'),
+      ].join(' '),
+    )
+  }
+  const ui = (nextProps: Partial<Props>) => (
     <>
-      <Autocomplete id="ac" options={OPTIONS} {...props} />
+      <Profiler id="autocomplete" onRender={recordCommit}>
+        <Autocomplete id="ac" options={OPTIONS} {...nextProps} />
+      </Profiler>
       <button type="button">Outside</button>
-    </>,
+    </>
   )
+  const result = render(ui(props))
 
   return {
     ...result,
+    commits,
     outside: screen.getByRole('button', {name: 'Outside'}),
-    rerender: (nextProps: Partial<Props> = {}) =>
-      result.rerender(
-        <>
-          <Autocomplete id="ac" options={OPTIONS} {...nextProps} />
-          <button type="button">Outside</button>
-        </>,
-      ),
+    rerender: (nextProps: Partial<Props> = {}) => result.rerender(ui(nextProps)),
   }
 }
 
@@ -153,6 +167,18 @@ describe('components/autocomplete', () => {
 
       expect(getInput()).toHaveValue('')
       expect(screen.queryByRole('button', {name: 'Clear'})).toBeNull()
+    })
+
+    it('shows a new `value` prop in the first commit after it changed', () => {
+      const {commits, rerender} = renderAutocomplete({value: 'foo'})
+
+      commits.length = 0
+
+      rerender({value: 'bar'})
+
+      // The first commit shows the new value, and no committed frame showed the previous one
+      expect(commits[0]).toBe('"bar" false ac-option-bar')
+      expect(commits).not.toContain('"foo" false ac-option-foo')
     })
 
     it('keeps the current value when the `value` prop becomes undefined', () => {
@@ -343,6 +369,28 @@ describe('components/autocomplete', () => {
 
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
       expect(onBlur).toHaveBeenCalledTimes(1)
+    })
+
+    it('closes and resets the active option in the same commit when focus leaves', async () => {
+      const user = userEvent.setup()
+      const {commits, outside} = renderAutocomplete({
+        filterOption: SHOW_ALL,
+        openOnFocus: true,
+        value: 'bar',
+      })
+
+      await user.click(getInput())
+      await user.keyboard('{ArrowDown}')
+
+      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-baz')
+
+      commits.length = 0
+
+      await blurTo(outside)
+
+      // No committed frame was closed while still pointing at the option the arrow key reached
+      expect(commits).not.toContain('"bar" false ac-option-baz')
+      expect(commits.at(-1)).toBe('"bar" false ac-option-bar')
     })
 
     it('leaves the active option alone when focus leaves without a value', async () => {

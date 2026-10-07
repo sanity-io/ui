@@ -172,6 +172,21 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   const {activeValue, focused, listFocused, query, value} = state
 
+  // Follow the `value` prop. Compared during render rather than in an effect, so the new value is
+  // in the first committed frame instead of one commit later.
+  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+  //
+  // The prop is applied only when it changes. A selection or clear the parent does not answer
+  // with a new `value` stays visible: `onChange` has been called, and the component keeps its
+  // own state until the parent sets a value again. A prop that becomes `undefined` leaves the
+  // current value in place, like a controlled `<input>` that switches to uncontrolled.
+  const [prevValueProp, setPrevValueProp] = useState(valueProp)
+
+  if (valueProp !== prevValueProp) {
+    setPrevValueProp(valueProp)
+    if (valueProp !== undefined) dispatch({type: 'value/change', value: valueProp})
+  }
+
   const defaultRenderOption = useCallback(
     ({value}: BaseAutocompleteOption) => (
       <Card data-as="button" padding={paddingProp} radius={2} tone="inherit">
@@ -199,8 +214,6 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   // Value refs
   const listFocusedRef = useRef(false)
-  const valueRef = useRef(value)
-  const valuePropRef = useRef(valueProp)
   const popoverMouseWithinRef = useRef(false)
 
   // Forward inputElement state to inputElementRef
@@ -288,9 +301,6 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
       popoverMouseWithinRef.current = false
 
       if (onSelect) onSelect(v)
-
-      valueRef.current = v
-
       if (onChange) onChange(v)
       if (onQueryChange) onQueryChange(null)
 
@@ -403,7 +413,6 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   const handleClearButtonClick = useCallback(() => {
     dispatch({type: 'root/clear'})
-    valueRef.current = ''
     if (onChange) onChange('')
     if (onQueryChange) onQueryChange(null)
     inputElementRef.current?.focus()
@@ -412,35 +421,6 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   const handleClearButtonFocus = useCallback(() => {
     dispatch({type: 'input/focus'})
   }, [])
-
-  // Change the value when `value` prop changes
-  useEffect(() => {
-    // If `valueProp` changed
-    if (valueProp !== valuePropRef.current) {
-      valuePropRef.current = valueProp
-
-      if (valueProp !== undefined) {
-        dispatch({type: 'value/change', value: valueProp})
-        valueRef.current = valueProp
-      }
-
-      return
-    }
-
-    // If `valueProp` is not equal to `value`
-    if (valueProp !== valueRef.current) {
-      valueRef.current = valueProp || null
-
-      dispatch({type: 'value/change', value: valueProp || null})
-    }
-  }, [valueProp])
-
-  // Reset active item when closing
-  useEffect(() => {
-    if (!focused && valueRef.current) {
-      dispatch({type: 'root/setActiveValue', value: valueRef.current})
-    }
-  }, [focused])
 
   // Focus the selected item
   useEffect(() => {

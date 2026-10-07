@@ -15,16 +15,15 @@ export function autocompleteReducer(
     return {...state, focused: true}
   }
 
-  if (msg.type === 'root/blur') {
-    return {...state, focused: false, query: null}
+  // Closing (blur and Escape) puts the active option back on the value, so the next time the
+  // list opens, the value is highlighted and arrow navigation starts from it. Without a value
+  // the last active option is kept.
+  if (msg.type === 'root/blur' || msg.type === 'root/escape') {
+    return {...state, activeValue: state.value || state.activeValue, focused: false, query: null}
   }
 
   if (msg.type === 'root/clear') {
     return {...state, activeValue: null, query: null, value: null}
-  }
-
-  if (msg.type === 'root/escape') {
-    return {...state, focused: false, query: null}
   }
 
   if (msg.type === 'root/open') {

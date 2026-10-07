@@ -29,9 +29,29 @@ describe('autocompleteReducer', () => {
     expect(reduce({type: 'input/focus'})).toEqual({...state, focused: true})
   })
 
-  it.each(['root/blur', 'root/escape'] as const)('closes on %s', (type) => {
-    expect(reduce({type})).toEqual({...state, focused: false, query: null})
-  })
+  it.each(['root/blur', 'root/escape'] as const)(
+    'closes on %s and puts the active option back on the value',
+    (type) => {
+      expect(reduce({type})).toEqual({
+        ...state,
+        activeValue: 'selected',
+        focused: false,
+        query: null,
+      })
+    },
+  )
+
+  it.each(['root/blur', 'root/escape'] as const)(
+    'closes on %s and keeps the active option without a value',
+    (type) => {
+      expect(reduce({type}, {...state, value: null})).toEqual({
+        ...state,
+        focused: false,
+        query: null,
+        value: null,
+      })
+    },
+  )
 
   it('clears the query and selected values', () => {
     expect(reduce({type: 'root/clear'})).toEqual({
