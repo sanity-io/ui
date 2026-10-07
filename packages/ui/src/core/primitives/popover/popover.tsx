@@ -292,6 +292,9 @@ export function Popover(
   // `constrainSize`; React renders it otherwise. A layout effect is early enough to write that
   // ref: Floating UI awaits the element measurements before it runs any middleware, so even the
   // pass `autoUpdate` starts in this commit reads the ref one microtask later at the earliest.
+  // That is also why one pass per task is enough: a boundary swap whose new boundary has another
+  // width commits twice in one task (the swap, then the size `useBoundarySize` measured in the
+  // swap commit, in a nested commit), and the pass started in the first commit reads both changes.
   const reposition = useEffectEvent(() => update())
   const floatingElement = elements.floating
   const positionedRef = useRef<{
@@ -307,6 +310,7 @@ export function Popover(
     maxWidth: undefined,
     referenceBoundary: null,
   })
+  const passRequestedRef = useRef(false)
 
   useLayoutEffect(() => {
     maxWidthRef.current = maxWidth
@@ -334,7 +338,13 @@ export function Popover(
       referenceBoundary !== previous.referenceBoundary
     const maxWidthChanged = constrainSize && maxWidth !== previous.maxWidth
 
-    if (boundaryChanged || maxWidthChanged) reposition()
+    if ((boundaryChanged || maxWidthChanged) && !passRequestedRef.current) {
+      passRequestedRef.current = true
+      queueMicrotask(() => {
+        passRequestedRef.current = false
+      })
+      reposition()
+    }
   }, [constrainSize, floatingBoundary, floatingElement, maxWidth, referenceBoundary])
 
   // Whether the popover (card, portal and `content`) has been rendered yet. Closed popovers

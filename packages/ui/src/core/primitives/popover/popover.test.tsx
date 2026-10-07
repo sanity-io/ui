@@ -914,6 +914,40 @@ describe('Popover', () => {
       for (const element of boundaries) element.remove()
     })
 
+    it('repositions once for a swapped boundary element whose width differs', async () => {
+      // The swap commits twice in one task: the swap itself, then the new boundary's size measured
+      // in that commit (a nested commit, the cap changing from `292` to `192`). Floating UI reads
+      // the refs only after the task, so the pass of the first commit sees both changes and the
+      // second commit must not add a pass of its own
+      const boundaries = [300, 200].map((width) => {
+        const element = document.createElement('div')
+
+        defineBoundarySize(element, width)
+        document.body.appendChild(element)
+
+        return element
+      })
+
+      const {rerender} = render(
+        <Example boundaryElement={boundaries[0]} boundaryWidth={300} constrainSize open />,
+        {strict: false},
+      )
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.style.maxWidth).toBe('292px')
+      expect(passes()).toBe(1)
+
+      rerender(<Example boundaryElement={boundaries[1]} boundaryWidth={300} constrainSize open />)
+      await settle()
+
+      expect(card.style.maxWidth).toBe('192px')
+      expect(passes()).toBe(2)
+
+      for (const element of boundaries) element.remove()
+    })
+
     it("lets a consumer `style` set the sizes React owns, never the middleware's", async () => {
       const style = {maxHeight: 50, maxWidth: 60, width: 70}
 
