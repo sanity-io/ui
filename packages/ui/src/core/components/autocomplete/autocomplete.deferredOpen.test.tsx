@@ -14,12 +14,12 @@ import {render} from '../../../../test/utils'
 import {Autocomplete} from './autocomplete'
 
 /**
- * The results popover opens and closes one render after the state that calls for it
- * (`useDeferredValue` in autocomplete.tsx): the urgent commit carries the new input and state,
- * the deferred commit flips `aria-expanded` (and with it the popover's `open`). Each test records
- * the committed `value` and `aria-expanded` of the input through a `Profiler`, collapsing commits
- * that repeat the previous state (`TextInput` re-attaches its forwarded ref whenever it renders,
- * which commits the same state once more).
+ * The results popover opens one render after the state that calls for it (`useDeferredValue` in
+ * autocomplete.tsx): the urgent commit carries the new input and state, the deferred commit flips
+ * `aria-expanded` (and with it the popover's `open`). Closing is urgent, in the same commit as
+ * the state that closes. Each test records the committed `value` and `aria-expanded` of the
+ * input through a `Profiler`, collapsing commits that repeat the previous state (`TextInput`
+ * re-attaches its forwarded ref whenever it renders, which commits the same state once more).
  */
 
 const OPTIONS = [{value: 'foo'}, {value: 'bar'}, {value: 'baz'}]
@@ -119,7 +119,7 @@ describe('components/autocomplete (deferred popover)', () => {
     expect(commits).toEqual(['"b" false', '"b" true'])
   })
 
-  it('shows the selected value before the list closes', async () => {
+  it('closes with the selected value in one commit', async () => {
     const user = userEvent.setup()
     const {commits} = renderAutocomplete({filterOption: SHOW_ALL, openOnFocus: true})
 
@@ -130,10 +130,10 @@ describe('components/autocomplete (deferred popover)', () => {
 
     await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
 
-    expect(commits).toEqual(['"bar" true', '"bar" false'])
+    expect(commits).toEqual(['"bar" false'])
   })
 
-  it('shows the cleared input before the list closes', async () => {
+  it('closes with the cleared input in one commit', async () => {
     const user = userEvent.setup()
     const {commits} = renderAutocomplete({openOnFocus: true, value: 'foo'})
 
@@ -145,10 +145,10 @@ describe('components/autocomplete (deferred popover)', () => {
 
     await user.click(screen.getByRole('button', {name: 'Clear'}))
 
-    expect(commits).toEqual(['"" true', '"" false'])
+    expect(commits).toEqual(['"" false'])
   })
 
-  it('restores the input before the list closes when focus leaves', async () => {
+  it('closes with the restored input in one commit when focus leaves', async () => {
     const user = userEvent.setup()
     const {commits, outside} = renderAutocomplete()
 
@@ -157,10 +157,10 @@ describe('components/autocomplete (deferred popover)', () => {
 
     await blurTo(outside)
 
-    expect(commits).toEqual(['"" true', '"" false'])
+    expect(commits).toEqual(['"" false'])
   })
 
-  it('restores the input before the list closes on Escape', async () => {
+  it('closes with the restored input in one commit on Escape', async () => {
     const user = userEvent.setup()
     const {commits} = renderAutocomplete()
 
@@ -169,7 +169,7 @@ describe('components/autocomplete (deferred popover)', () => {
 
     await user.keyboard('{Escape}')
 
-    expect(commits).toEqual(['"" true', '"" false'])
+    expect(commits).toEqual(['"" false'])
   })
 
   // The deferred render that opens the list is a re-render from the latest state, not an update

@@ -242,10 +242,8 @@ describe('components/autocomplete', () => {
       expect(onSelect).toHaveBeenCalledWith('bar')
       expect(onQueryChange).toHaveBeenLastCalledWith(null)
       expect(getInput()).toHaveValue('bar')
+      expect(getInput()).toHaveAttribute('aria-expanded', 'false')
       expect(getInput()).toHaveFocus()
-
-      // The list closes in a deferred render
-      await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
     })
 
     it('keeps showing a selection that the parent did not accept', async () => {
@@ -318,7 +316,7 @@ describe('components/autocomplete', () => {
       await user.click(getOption('bar'))
 
       await waitFor(() => expect(getInput()).toHaveValue('bar'))
-      await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
+      expect(getInput()).toHaveAttribute('aria-expanded', 'false')
     })
 
     it('shows the selection once more when the parent accepts it', async () => {
@@ -418,7 +416,7 @@ describe('components/autocomplete', () => {
       expect(onBlur).toHaveBeenCalledTimes(1)
     })
 
-    it('never commits a closed list that still points at the arrowed option', async () => {
+    it('closes and resets the active option in the same commit when focus leaves', async () => {
       const user = userEvent.setup()
       const {commits, outside} = renderAutocomplete({
         filterOption: SHOW_ALL,
