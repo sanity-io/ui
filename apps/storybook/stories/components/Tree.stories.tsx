@@ -286,20 +286,24 @@ export const TabFromElement: Story = {
 function DynamicItemsStory() {
   const [names, setNames] = useState(['Beets', 'Carrots'])
 
+  // The names are the React keys of the items, so each one can be added once
   return (
     <Box padding={[4, 5, 6]}>
       <Flex gap={2} paddingBottom={3}>
         <Button
+          disabled={names.includes('Asparagus')}
           mode="ghost"
           onClick={() => setNames((prev) => ['Asparagus', ...prev])}
           text="Prepend"
         />
         <Button
+          disabled={names.includes('Daikon')}
           mode="ghost"
           onClick={() => setNames((prev) => [...prev, 'Daikon'])}
           text="Append"
         />
         <Button
+          disabled={names.length === 0}
           mode="ghost"
           onClick={() => setNames((prev) => prev.slice(1))}
           text="Remove first"
