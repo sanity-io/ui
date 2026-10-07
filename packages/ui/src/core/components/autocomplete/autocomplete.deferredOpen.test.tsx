@@ -2,7 +2,7 @@
 
 import {act, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {ComponentProps, Profiler} from 'react'
+import {ComponentProps, Profiler, use} from 'react'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
@@ -170,6 +170,87 @@ describe('components/autocomplete (deferred popover)', () => {
     await user.keyboard('{Escape}')
 
     expect(commits).toEqual(['"" true', '"" false'])
+  })
+
+  // The deferred render that opens the list is a re-render from the latest state, not an update
+  // waiting in the reducer, so a `value` prop that changes while that render is held cannot be
+  // overtaken by it. (A `startTransition(() => dispatch(…))` would be: React applies a
+  // render-phase update, the prop sync, to the memoized state only while a lower-priority update
+  // is pending in the same hook, and the transition then lands on top of it.)
+  it('applies a `value` prop that changes while the opening render is held', async () => {
+    let resolveContent!: () => void
+    const content = new Promise<void>((resolve) => {
+      resolveContent = resolve
+    })
+
+    // Suspends until `resolveContent()`; with no Suspense boundary above it, the render that
+    // shows the list stays pending and the committed state keeps the list closed
+    function SuspendingOption({value}: {value: string}) {
+      use(content)
+
+      return <div>{value}</div>
+    }
+
+    const renderOption = (option: {value: string}) => <SuspendingOption value={option.value} />
+    const {rerender} = render(
+      <Autocomplete
+        filterOption={SHOW_ALL}
+        id="ac"
+        openOnFocus
+        options={OPTIONS}
+        renderOption={renderOption}
+        value="foo"
+      />,
+    )
+
+    // Focus asks for the list; the deferred render that would open it suspends on the content
+    // (awaited `act`, as React asks for whenever a render suspends inside one)
+    await act(async () => {
+      getInput().focus()
+    })
+
+    expect(getInput()).toHaveValue('foo')
+    expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+
+    // The parent changes the value while that render is pending: the sync drops the query, so
+    // the list is no longer asked for
+    await act(async () => {
+      rerender(
+        <Autocomplete
+          filterOption={SHOW_ALL}
+          id="ac"
+          openOnFocus
+          options={OPTIONS}
+          renderOption={renderOption}
+          value="bar"
+        />,
+      )
+    })
+
+    expect(getInput()).toHaveValue('bar')
+    expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+
+    await act(async () => {
+      resolveContent()
+      await content
+    })
+
+    // The held render does not reopen the list or bring back the previous value
+    expect(getInput()).toHaveValue('bar')
+    expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+    expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
+
+    // A render that is no longer held still opens it on demand
+    await act(async () => {
+      getInput().blur()
+    })
+    await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
+    await act(async () => {
+      getInput().focus()
+    })
+
+    expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+    expect(getInput()).toHaveValue('bar')
   })
 
   it('keeps arrow navigation and typing within an open list in the urgent commit', async () => {
