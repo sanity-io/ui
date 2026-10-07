@@ -39,7 +39,7 @@ export default defineConfig({
         print: true,
       },
     },
-    include: ['src/**/*.test.{ts,tsx}'],
+    include: ['src/**/*.test.{ts,tsx}', 'test/**/*.test.{ts,tsx}'],
     setupFiles: ['./test/setup.ts'],
   },
 })
