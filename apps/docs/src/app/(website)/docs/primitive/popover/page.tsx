@@ -1,6 +1,7 @@
 import type {Metadata} from 'next'
 
 import {Article} from '@/components/page/article/Article'
+import {CodeBlock} from '@/components/page/article/content/CodeBlock'
 import {CodeExampleBlock} from '@/components/page/article/content/CodeExampleBlock'
 import {Heading2} from '@/components/page/article/content/headings'
 import {Paragraph} from '@/components/page/article/content/Paragraph'
@@ -27,7 +28,10 @@ export default function Page() {
     <Article
       title="Popover"
       isComponent
-      headings={[{level: 2, slug: 'properties', text: 'Properties'}]}
+      headings={[
+        {level: 2, slug: 'controlling-open', text: 'Controlling open'},
+        {level: 2, slug: 'properties', text: 'Properties'},
+      ]}
     >
       <Paragraph>
         {'The '}
@@ -54,6 +58,47 @@ export default function Page() {
   </Popover>
 </Box>`}
       />
+
+      <Heading2 id="controlling-open">Controlling open</Heading2>
+
+      <Paragraph>
+        {'The popover is controlled through '}
+        <code>open</code>
+        {'. Set it inside '}
+        <code>startTransition</code>
+        {'. A closed popover pre-renders its content hidden, in a transition, once the reference '}
+        {'element shows intent to open it (focus, a pointer entering or pressing it). When '}
+        <code>open</code>
+        {' changes in a transition too, React keeps rendering that content in the background '}
+        {'if the open comes before it is done, instead of rendering it synchronously in the '}
+        {'click. Content that was pre-rendered already shows in the first frame after the click '}
+        {'either way.'}
+      </Paragraph>
+
+      <CodeBlock
+        language="tsx"
+        code={`import {Button, Popover, Text} from '@sanity/ui'
+import {startTransition, useState} from 'react'
+
+function Example() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Popover content={<Text size={1}>Hello, world</Text>} open={open} padding={3}>
+      <Button
+        onClick={() => startTransition(() => setOpen((isOpen) => !isOpen))}
+        text="Toggle"
+      />
+    </Popover>
+  )
+}`}
+      />
+
+      <Paragraph>
+        {'Wrap the state update itself: a '}
+        <code>startTransition</code>
+        {' around code that schedules the update for later (a timeout) does not reach it.'}
+      </Paragraph>
 
       <Heading2 id="properties">Properties</Heading2>
 
@@ -85,7 +130,20 @@ export default function Page() {
           {name: 'constrainSize', type: 'boolean'},
           {name: 'content', type: 'React.ReactNode'},
           {name: 'disabled', type: 'boolean'},
-          {name: 'open', type: 'boolean'},
+          {
+            name: 'open',
+            type: 'boolean',
+            description: (
+              <PlainContent>
+                <PlainParagraph>
+                  {'Whether the popover is open. Set it inside '}
+                  <code>startTransition</code>
+                  {', see '}
+                  <a href="#controlling-open">Controlling open</a>.
+                </PlainParagraph>
+              </PlainContent>
+            ),
+          },
           {name: 'padding', type: 'number | number[]'},
           {
             name: 'placement',
