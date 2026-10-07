@@ -584,16 +584,17 @@ describe('Popover', () => {
 
     /**
      * jsdom lays nothing out, so the geometry is defined on the elements: the boundary's offset
-     * size (what the popover measures on open) and client size (what Floating UI clips to), the
-     * viewport's client size, and the reference element's rect, `REFERENCE_WIDTH` wide
+     * size (what the popover measures on open) and client size (what Floating UI clips to; the
+     * same unless `boundaryClientWidth` says otherwise, as a scrollbar would), the viewport's
+     * client size, and the reference element's rect, `REFERENCE_WIDTH` wide
      */
     function Example(
-      props: {boundaryWidth: number} & Pick<
+      props: {boundaryWidth: number; boundaryClientWidth?: number} & Pick<
         PopoverProps,
         'constrainSize' | 'matchReferenceWidth' | 'open' | 'tone' | 'width'
       >,
     ) {
-      const {boundaryWidth, ...popoverProps} = props
+      const {boundaryWidth, boundaryClientWidth = boundaryWidth, ...popoverProps} = props
       const [boundary, setBoundary] = useState<HTMLDivElement | null>(null)
 
       return (
@@ -604,7 +605,7 @@ describe('Popover', () => {
               for (const [name, value] of [
                 ['offsetWidth', boundaryWidth],
                 ['offsetHeight', 100],
-                ['clientWidth', boundaryWidth],
+                ['clientWidth', boundaryClientWidth],
                 ['clientHeight', 100],
               ] as const) {
                 Object.defineProperty(node, name, {configurable: true, value})
@@ -735,40 +736,91 @@ describe('Popover', () => {
       expect(passes()).toBe(3)
     })
 
-    it('tells Floating UI about a changed `matchReferenceWidth` through the middleware options', async () => {
-      // `useFloating` compares middleware deeply and functions by their source, so a middleware
-      // that keeps its inputs in a closure is never seen to change: the pass would keep writing
-      // the reference width over the width React rendered
+    // With the default `width` of `auto` React has no width of its own to render, so it renders
+    // `''` to clear the middleware's; with a `width` property it renders that (the first
+    // `container` width here). And `useFloating` compares middleware deeply, functions by their
+    // source, so a middleware that keeps its inputs in a closure is never seen to change: the
+    // pass would keep writing the reference width over whatever React rendered
+    it.each([
+      {width: undefined, expected: ''},
+      {width: 0, expected: '320px'},
+    ])(
+      'clears the width the middleware wrote once `matchReferenceWidth` is turned off, and tells Floating UI (width: $width)',
+      async ({width, expected}) => {
+        const {rerender} = render(
+          <Example boundaryWidth={300} constrainSize matchReferenceWidth width={width} />,
+          {strict: false},
+        )
+
+        rerender(
+          <Example boundaryWidth={300} constrainSize matchReferenceWidth open width={width} />,
+        )
+        await settle()
+
+        const card = cardElement()!
+
+        expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+
+        rerender(
+          <Example
+            boundaryWidth={300}
+            constrainSize
+            matchReferenceWidth={false}
+            open
+            width={width}
+          />,
+        )
+        await settle()
+
+        // Cleared or set by React in the commit, and the changed middleware repositioned without
+        // writing the reference width again
+        expect(card.style.width).toBe(expected)
+        expect(passes()).toBe(2)
+
+        // Nor does a later pass (here from a window resize, which `autoUpdate` listens for)
+        act(() => {
+          window.dispatchEvent(new Event('resize'))
+        })
+        await settle()
+
+        expect(card.style.width).toBe(expected)
+        expect(passes()).toBe(3)
+      },
+    )
+
+    it('clears the max height and takes the max width back once `constrainSize` is turned off', async () => {
+      // A boundary with a scrollbar: the room within it (its client width) is narrower than the
+      // cap from its border-box width, so the two writers are told apart by their values
       const {rerender} = render(
-        <Example boundaryWidth={300} constrainSize matchReferenceWidth width={0} />,
+        <Example boundaryClientWidth={285} boundaryWidth={300} constrainSize />,
         {strict: false},
       )
 
-      rerender(<Example boundaryWidth={300} constrainSize matchReferenceWidth open width={0} />)
+      rerender(<Example boundaryClientWidth={285} boundaryWidth={300} constrainSize open />)
       await settle()
 
       const card = cardElement()!
 
-      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+      // The middleware's: the room within the boundary (`285 - 2 * DEFAULT_POPOVER_PADDING`) and
+      // the room below the reference
+      expect(card.style.maxWidth).toBe('277px')
+      expect(card.style.maxHeight).toBe('72px')
 
-      rerender(
-        <Example boundaryWidth={300} constrainSize matchReferenceWidth={false} open width={0} />,
-      )
+      rerender(<Example boundaryClientWidth={285} boundaryWidth={300} open />)
       await settle()
 
-      // React renders the `width` property (the first `container` width), and the changed
-      // middleware repositioned without overwriting it
-      expect(card.style.width).toBe('320px')
-      expect(passes()).toBe(2)
+      // React's cap, and no max height; the middleware is out of the array, so a later pass
+      // changes nothing
+      expect(card.style.maxWidth).toBe('292px')
+      expect(card.style.maxHeight).toBe('')
 
-      // Nor does a later pass (here from a window resize, which `autoUpdate` listens for)
       act(() => {
         window.dispatchEvent(new Event('resize'))
       })
       await settle()
 
-      expect(card.style.width).toBe('320px')
-      expect(passes()).toBe(3)
+      expect(card.style.maxWidth).toBe('292px')
+      expect(card.style.maxHeight).toBe('')
     })
   })
 })

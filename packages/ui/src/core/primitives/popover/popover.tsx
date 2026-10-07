@@ -233,9 +233,12 @@ export function Popover(
   // The width the `width` property resolves to at the current media index, and the cap that it and
   // the boundary width give. Both are rendered on the card, except where the `size` middleware
   // writes the property to the element itself during positioning (see `size.ts`): the width when
-  // it matches the reference element's, the max width when `constrainSize` caps it to the available
-  // room as well. React never touches a style it did not render, so the two never overwrite each
-  // other.
+  // it matches the reference element's, the max width (and max height) when `constrainSize` caps
+  // it to the available room as well. The card is passed `undefined` for a property while the
+  // middleware owns it — React never touches a style it did not render, so the middleware's write
+  // stands across renders — and a value or `''` otherwise, so that React clears the middleware's
+  // write once the property is React's again (`matchReferenceWidth` or `constrainSize` turned
+  // off), open or closed.
   const width = calcCurrentWidth({
     container,
     mediaIndex,
@@ -393,7 +396,8 @@ export function Popover(
         arrowX={arrowX}
         arrowY={arrowY}
         hidden={referenceHidden}
-        maxWidth={constrainSize ? undefined : maxWidth}
+        maxHeight={constrainSize ? undefined : ''}
+        maxWidth={constrainSize ? undefined : (maxWidth ?? '')}
         overflow={overflow}
         padding={padding}
         placement={placement}
@@ -405,7 +409,7 @@ export function Popover(
         originY={originY}
         strategy={strategy}
         tone={tone}
-        width={matchReferenceWidth ? undefined : width}
+        width={matchReferenceWidth ? undefined : (width ?? '')}
         x={x}
         y={y}
       >

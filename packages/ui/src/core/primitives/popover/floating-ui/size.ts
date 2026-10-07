@@ -21,8 +21,10 @@ interface SizeOptions {
  * reference element's width, and `constrainSize` caps its width and height to the room within the
  * boundary. The styles are written straight to the element — before its dimensions are read back,
  * so that a changed size restarts the pass — and only these: whatever this middleware does not
- * own (`width` without `matchReferenceWidth`, `maxWidth` without `constrainSize`) is rendered by
- * React on the card instead, so every style property has exactly one writer.
+ * own (`width` without `matchReferenceWidth`, `maxWidth` and `maxHeight` without `constrainSize`)
+ * is rendered by React on the card instead, as a value or as `''`, so every style property has
+ * exactly one writer and React clears a write of this middleware once the property is its own
+ * again (see `Popover`).
  */
 export function size(options: SizeOptions): Middleware {
   const {constrainSize, margins, matchReferenceWidth, maxWidthRef, padding = 0} = options

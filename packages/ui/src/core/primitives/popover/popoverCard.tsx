@@ -45,10 +45,14 @@ export function PopoverCard(
     arrowX?: number
     arrowY?: number
     /**
-     * The width cap, as a rendered style. Left undefined when the `size` middleware writes
-     * `maxWidth` to the element itself (`constrainSize`), so that React never touches it
+     * The size styles (`width`, `maxWidth`, `maxHeight`) are rendered by React except while the
+     * `size` middleware writes them to the element itself during positioning (`width` for
+     * `matchReferenceWidth`, `maxWidth` and `maxHeight` for `constrainSize`). Pass `undefined`
+     * while the middleware owns one, so that React never touches it, and a value or `''`
+     * otherwise, so that React clears what the middleware wrote once it no longer owns it.
      */
-    maxWidth: number | undefined
+    maxHeight: '' | undefined
+    maxWidth: number | '' | undefined
     originX?: number
     originY?: number
     overflow?: BoxOverflow
@@ -59,11 +63,8 @@ export function PopoverCard(
     shadow?: number | number[]
     strategy: Strategy
     tone: CardTone
-    /**
-     * The width, as a rendered style. Left undefined when the `size` middleware writes `width` to
-     * the element itself (`matchReferenceWidth`), so that React never touches it
-     */
-    width: number | undefined
+    /** See `maxHeight` */
+    width: number | '' | undefined
     x: number | null
     y: number | null
   } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
@@ -76,6 +77,7 @@ export function PopoverCard(
     arrowX,
     arrowY,
     children,
+    maxHeight,
     maxWidth,
     padding,
     placement,
@@ -110,6 +112,7 @@ export function PopoverCard(
   const rootStyle: CSSProperties = useMemo(
     () => ({
       left: x,
+      maxHeight,
       maxWidth,
       position: strategy,
       top: y,
@@ -119,7 +122,7 @@ export function PopoverCard(
       willChange: animate ? 'transform' : undefined,
       ...style,
     }),
-    [animate, maxWidth, originX, originY, strategy, style, width, x, y, zIndex],
+    [animate, maxHeight, maxWidth, originX, originY, strategy, style, width, x, y, zIndex],
   )
 
   const arrowStyle: CSSProperties = useMemo(
