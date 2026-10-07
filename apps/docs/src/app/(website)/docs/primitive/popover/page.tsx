@@ -97,7 +97,15 @@ function Example() {
       <Paragraph>
         {'Wrap the state update itself: a '}
         <code>startTransition</code>
-        {' around code that schedules the update for later (a timeout) does not reach it.'}
+        {' around code that schedules the update for later (a timeout) does not reach it. '}
+        {'Reset '}
+        <code>open</code>
+        {' from an event handler or in a transition as well, not during render: a render-phase '}
+        {'update is applied on top of the render in progress and is not rebased over a pending '}
+        {'transition, so a '}
+        <code>setOpen(false)</code>
+        {' made during render while an opening transition has not committed yet (its render '}
+        {'suspended on the content, say) is lost, and the open applies afterwards.'}
       </Paragraph>
 
       <Heading2 id="properties">Properties</Heading2>
