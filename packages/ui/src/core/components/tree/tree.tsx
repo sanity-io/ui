@@ -37,9 +37,9 @@ export function Tree(
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const path: string[] = useMemo(() => [], [])
   const [state, setState] = useState<TreeState>({})
-  // Whether a pointer press is in progress: set on `mousedown`, cleared when the button is released
-  // anywhere in the document. The focus a press moves is dispatched in between, so `handleFocus`
-  // can tell a press on the tree element itself (between the items) from keyboard focus
+  // Whether the focus event being handled was caused by a pointer press: set on `mousedown` and
+  // cleared in the next task (see `handleMouseDown`), so `handleFocus` can tell a press on the
+  // tree element itself (between the items) from keyboard focus
   const pointerDownRef = useRef(false)
 
   useImperativeHandle<HTMLUListElement | null, HTMLUListElement | null>(
@@ -217,14 +217,13 @@ export function Tree(
   const handleMouseDown = useCallback(
     (event: React.MouseEvent<HTMLUListElement>) => {
       pointerDownRef.current = true
-      // A press that moves focus nowhere (on the focused item, or on the tree element while it is
-      // not focusable) never gets a focus event to clear the flag, and the button may be released
-      // outside of the tree, so it is cleared from the document. `once` removes the listener,
-      // and adding the same listener again is a no-op.
-      event.currentTarget.ownerDocument.addEventListener('mouseup', clearPointerDown, {
-        capture: true,
-        once: true,
-      })
+      // The focus a press moves is the default action of this `mousedown`: it is dispatched right
+      // after the handlers, in the same task. Clearing the flag in the next task is therefore
+      // after that focus and before any later keyboard focus, and does not depend on the button
+      // being released over this document (or at all, when the window loses focus mid-press).
+      // A press that moves focus nowhere leaves nothing behind. Should the tree unmount in
+      // between, the timeout only writes a ref, so there is nothing to cancel.
+      setTimeout(clearPointerDown, 0)
       onMouseDown?.(event)
     },
     [clearPointerDown, onMouseDown],
