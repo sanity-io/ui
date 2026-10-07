@@ -17,6 +17,7 @@ import {
 import {render} from '../../../../test/utils'
 import {buildTheme} from '../../../theme/build/buildTheme'
 import {ThemeProvider} from '../../theme/themeProvider'
+import {createBreakpointObserver} from './breakpointObserver'
 import {ElementQuery} from './elementQuery'
 
 const MEDIA = [100, 200, 300]
@@ -59,13 +60,18 @@ class ResizeObserverMock {
   }
 }
 
-/** The observer that is currently watching `element` (created by the latest effect run) */
-function observerOf(element: Element): ResizeObserverMock {
-  const active = ResizeObserverMock.instances.filter(
+/** The observers that are currently watching `element` */
+function observersOf(element: Element): ResizeObserverMock[] {
+  return ResizeObserverMock.instances.filter(
     (observer) =>
       observer.observe.mock.calls.some(([target]) => target === element) &&
       !observer.disconnect.mock.calls.length,
   )
+}
+
+/** The one observer that is currently watching `element` (created by the latest effect run) */
+function observerOf(element: Element): ResizeObserverMock {
+  const active = observersOf(element)
 
   expect(active).toHaveLength(1)
 
@@ -84,21 +90,24 @@ function PassiveEffectProbe({onEffect}: {onEffect: () => void}) {
   return null
 }
 
+beforeAll(() => {
+  vi.stubGlobal('ResizeObserver', ResizeObserverMock)
+})
+
+afterAll(() => {
+  vi.unstubAllGlobals()
+})
+
+beforeEach(() => {
+  ResizeObserverMock.instances = []
+  ResizeObserverMock.onObserve = undefined
+})
+
 describe('ElementQuery', () => {
   const innerWidthDescriptor = Object.getOwnPropertyDescriptor(window, 'innerWidth')
   let innerWidth: Mock<() => number>
 
-  beforeAll(() => {
-    vi.stubGlobal('ResizeObserver', ResizeObserverMock)
-  })
-
-  afterAll(() => {
-    vi.unstubAllGlobals()
-  })
-
   beforeEach(() => {
-    ResizeObserverMock.instances = []
-    ResizeObserverMock.onObserve = undefined
     innerWidth = vi.fn(() => 1024)
     Object.defineProperty(window, 'innerWidth', {get: innerWidth, configurable: true})
   })
@@ -148,6 +157,22 @@ describe('ElementQuery', () => {
     )
 
     expect(order).toEqual(['observe', 'passive'])
+  })
+
+  it('observes the element once, however often the component re-renders', () => {
+    const {rerender} = render(<ElementQuery data-testid="eq" media={MEDIA} />, {strict: false})
+    const element = screen.getByTestId('eq')
+
+    // The layout effect has no dependency array, so it runs after every commit to notice a
+    // changed element; while the element and `media` are unchanged it must not observe again
+    rerender(<ElementQuery data-testid="eq" media={MEDIA} title="one" />)
+    rerender(<ElementQuery data-testid="eq" media={MEDIA} title="two" />)
+    rerender(<ElementQuery data-testid="eq" media={MEDIA} className="three" />)
+
+    expect(ResizeObserverMock.instances).toHaveLength(1)
+    expect(ResizeObserverMock.instances[0].observe).toHaveBeenCalledTimes(1)
+    expect(ResizeObserverMock.instances[0].observe).toHaveBeenCalledWith(element)
+    expect(ResizeObserverMock.instances[0].disconnect).not.toHaveBeenCalled()
   })
 
   it('writes the breakpoint attributes from the observer callback and keeps them in sync with the width', () => {
@@ -206,6 +231,35 @@ describe('ElementQuery', () => {
     expect(onRender).toHaveBeenCalledTimes(rendersBeforeResize)
   })
 
+  it('keeps the measured attributes whatever `data-eq-*` props a caller passes', () => {
+    const {rerender} = render(
+      <ElementQuery data-eq-max="caller" data-eq-min="caller" data-testid="eq" media={MEDIA} />,
+    )
+    const element = screen.getByTestId('eq')
+
+    // The attributes are reserved for the observer: React never renders the caller's values…
+    expect(element).not.toHaveAttribute('data-eq-min')
+    expect(element).not.toHaveAttribute('data-eq-max')
+
+    reportWidth(element, 150)
+
+    expect(element).toHaveAttribute('data-eq-min', '0')
+    expect(element).toHaveAttribute('data-eq-max', '1 2')
+
+    // …and neither changing nor dropping them touches the measured ones
+    rerender(
+      <ElementQuery data-eq-max="changed" data-eq-min="changed" data-testid="eq" media={MEDIA} />,
+    )
+
+    expect(element).toHaveAttribute('data-eq-min', '0')
+    expect(element).toHaveAttribute('data-eq-max', '1 2')
+
+    rerender(<ElementQuery data-testid="eq" media={MEDIA} />)
+
+    expect(element).toHaveAttribute('data-eq-min', '0')
+    expect(element).toHaveAttribute('data-eq-max', '1 2')
+  })
+
   it('observes the element again when `media` changes, so the new breakpoints apply without a resize', () => {
     const {rerender} = render(<ElementQuery data-testid="eq" media={MEDIA} />)
     const element = screen.getByTestId('eq')
@@ -229,7 +283,7 @@ describe('ElementQuery', () => {
     expect(element).toHaveAttribute('data-eq-max', '3')
   })
 
-  it('survives StrictMode re-running the effect: the element is observed by exactly one live observer', () => {
+  it('survives StrictMode re-running the effects: the element is observed by exactly one live observer', () => {
     // `StrictMode` has to be the outermost element: React only re-runs the mount effects of a
     // newly placed subtree when `StrictMode` is at (or above) its top, and the test wrapper of
     // `test/utils` renders it below the wrapper component, where React skips it on mount
@@ -242,7 +296,7 @@ describe('ElementQuery', () => {
     )
     const element = screen.getByTestId('eq')
 
-    // StrictMode runs the layout effect, its cleanup, then the effect again
+    // StrictMode runs the layout effects, their cleanups, then the effects again
     expect(ResizeObserverMock.instances).toHaveLength(2)
     expect(ResizeObserverMock.instances[0].disconnect).toHaveBeenCalledTimes(1)
     expect(ResizeObserverMock.instances[1].observe).toHaveBeenCalledWith(element)
@@ -276,5 +330,86 @@ describe('ElementQuery', () => {
     expect(element).toHaveAttribute('data-ui', 'ElementQuery')
     expect(element).toHaveClass('eq')
     expect(element).toContainElement(screen.getByText('child'))
+  })
+})
+
+// The component cannot swap the element behind its ref itself (it always renders the same
+// `div`), so the swap path of the observer is covered here
+describe('createBreakpointObserver', () => {
+  it('observes an element once while the element and media are unchanged', () => {
+    const observer = createBreakpointObserver()
+    const element = document.createElement('div')
+
+    observer.observe(element, MEDIA)
+    observer.observe(element, MEDIA)
+    observer.observe(element, MEDIA)
+
+    expect(ResizeObserverMock.instances).toHaveLength(1)
+    expect(ResizeObserverMock.instances[0].observe).toHaveBeenCalledTimes(1)
+    expect(ResizeObserverMock.instances[0].observe).toHaveBeenCalledWith(element)
+
+    reportWidth(element, 150)
+
+    expect(element).toHaveAttribute('data-eq-min', '0')
+    expect(element).toHaveAttribute('data-eq-max', '1 2')
+  })
+
+  it('moves to a new element, releasing the previous one', () => {
+    const observer = createBreakpointObserver()
+    const first = document.createElement('div')
+    const second = document.createElement('div')
+
+    observer.observe(first, MEDIA)
+    reportWidth(first, 150)
+
+    observer.observe(second, MEDIA)
+
+    expect(observersOf(first)).toHaveLength(0)
+    expect(ResizeObserverMock.instances[0].disconnect).toHaveBeenCalledTimes(1)
+
+    reportWidth(second, 250)
+
+    expect(second).toHaveAttribute('data-eq-min', '0 1')
+    expect(second).toHaveAttribute('data-eq-max', '2')
+    // The previous element keeps the attributes it had; nothing observes it any more
+    expect(first).toHaveAttribute('data-eq-min', '0')
+  })
+
+  it('observes the element again with a new media list', () => {
+    const observer = createBreakpointObserver()
+    const element = document.createElement('div')
+
+    observer.observe(element, MEDIA)
+    observer.observe(element, [50, 150, 250, 350])
+
+    expect(ResizeObserverMock.instances).toHaveLength(2)
+    expect(ResizeObserverMock.instances[0].disconnect).toHaveBeenCalledTimes(1)
+
+    reportWidth(element, 250)
+
+    expect(element).toHaveAttribute('data-eq-min', '0 1 2')
+    expect(element).toHaveAttribute('data-eq-max', '3')
+  })
+
+  it('releases the element for `null`, and on `disconnect()`', () => {
+    const observer = createBreakpointObserver()
+    const element = document.createElement('div')
+
+    observer.observe(element, MEDIA)
+    observer.observe(null, MEDIA)
+
+    expect(observersOf(element)).toHaveLength(0)
+    expect(ResizeObserverMock.instances).toHaveLength(1)
+
+    // Observing again after a release starts a fresh observer
+    observer.observe(element, MEDIA)
+
+    expect(observersOf(element)).toHaveLength(1)
+
+    observer.disconnect()
+    observer.disconnect()
+
+    expect(observersOf(element)).toHaveLength(0)
+    expect(ResizeObserverMock.instances[1].disconnect).toHaveBeenCalledTimes(1)
   })
 })

@@ -1,7 +1,7 @@
 import {useImperativeHandle, useLayoutEffect, useRef} from 'react'
 
 import {useTheme_v2} from '../../theme/useTheme'
-import {findMaxBreakpoints, findMinBreakpoints} from './helpers'
+import {type BreakpointObserver, createBreakpointObserver} from './breakpointObserver'
 
 /**
  * DO NOT USE IN PRODUCTION.
@@ -24,58 +24,50 @@ export function ElementQuery(
   const media = _media ?? theme.media
 
   const ref = useRef<HTMLDivElement | null>(null)
+  const observerRef = useRef<BreakpointObserver | null>(null)
 
   // The `data-eq-min` / `data-eq-max` attributes only exist for CSS attribute selectors, so the
-  // observer callback writes them onto the element directly: nothing is measured or derived during
-  // render, and a resize re-renders nothing. Observing from a layout effect makes the browser
-  // deliver the initial entry in the same frame as the commit — after layout, before the first
-  // paint — so the attributes describe the element's own width from the start, with no viewport
-  // fallback. An element without a box (`display: none`) is either reported as 0 wide (Chromium)
-  // or not at all (per specification); nothing is painted in either case, and the frame that
-  // shows it delivers its real width before painting. Re-observing when `media` changes delivers
-  // a fresh entry, which applies the new breakpoints without waiting for a resize.
+  // observer writes them onto the element directly: nothing is measured or derived during render,
+  // and a resize re-renders nothing. Observing from a layout effect makes the browser deliver the
+  // initial entry in the same frame as the commit — after layout, before the first paint — so the
+  // attributes describe the element's own width from the start, with no viewport fallback. An
+  // element without a box (`display: none`) is either reported as 0 wide (Chromium) or not at all
+  // (per specification); nothing is painted in either case, and the frame that shows it delivers
+  // its real width before painting.
+  //
+  // No dependency array: `ref.current` is not reactive, so the effect runs after every commit to
+  // notice a new element behind the ref (or a new `media` list) and re-observes only then. An
+  // unchanged element and list cost one comparison per commit. Re-observing delivers a fresh
+  // initial entry, which applies new breakpoints without waiting for a resize.
   useLayoutEffect(() => {
-    const element = ref.current
+    if (!observerRef.current) observerRef.current = createBreakpointObserver()
 
-    if (!element) return undefined
+    observerRef.current.observe(ref.current, media)
+  })
 
-    const observer = new ResizeObserver(([entry]) => {
-      setBreakpointAttributes(element, media, entry.borderBoxSize[0].inlineSize)
-    })
-
-    observer.observe(element)
-
-    return () => observer.disconnect()
-  }, [media])
-
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(
-    forwardedRef,
-    () => ref.current,
+  // Release the element when the effects are torn down (unmount, a hidden `Activity`); the effect
+  // above observes it again when they run again
+  useLayoutEffect(
+    () => () => {
+      observerRef.current?.disconnect()
+    },
     [],
   )
 
+  // No dependency array either, so a forwarded ref follows the element behind `ref`
+  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
+
   return (
-    <div data-ui="ElementQuery" {...restProps} ref={ref}>
+    // `data-eq-min` / `data-eq-max` belong to the observer: set to `undefined` after the spread,
+    // React never writes or removes them, whatever a caller passes
+    <div
+      data-ui="ElementQuery"
+      {...restProps}
+      data-eq-max={undefined}
+      data-eq-min={undefined}
+      ref={ref}
+    >
       {children}
     </div>
   )
-}
-
-function setBreakpointAttributes(element: HTMLElement, media: number[], width: number): void {
-  setBreakpointAttribute(element, 'data-eq-max', findMaxBreakpoints(media, width))
-  setBreakpointAttribute(element, 'data-eq-min', findMinBreakpoints(media, width))
-}
-
-function setBreakpointAttribute(element: HTMLElement, name: string, indices: number[]): void {
-  const value = indices.length ? indices.join(' ') : null
-
-  // Skip writes that would not change anything, so a resize that stays within the same
-  // breakpoints does not invalidate styles
-  if (element.getAttribute(name) === value) return
-
-  if (value === null) {
-    element.removeAttribute(name)
-  } else {
-    element.setAttribute(name, value)
-  }
 }
