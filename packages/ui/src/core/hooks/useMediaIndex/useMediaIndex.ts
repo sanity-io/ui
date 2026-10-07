@@ -27,6 +27,27 @@ function _getMediaQuery(media: number[], index: number): MediaQuery {
   return `screen and (min-width: ${media[index - 1]}px) and (max-width: ${media[index] - 1}px)`
 }
 
+// One canonical breakpoint array per content. Theme objects are rebuilt freely
+// (`buildTheme({media})` per workspace or scheme, cloned or deserialized themes),
+// and each rebuild carries its own `media` array instance. The store below is
+// keyed on that instance, so without this a new array with the same values
+// would tear down `media.length + 1` MediaQueryLists and listeners in every
+// subscribed `useMediaIndex` and create them again, for no change. Keyed by the
+// joined values; an app has as many entries as it has distinct breakpoint
+// configurations, so the map does not grow with rendering.
+const canonicalMedia = new Map<string, number[]>()
+
+function _getCanonicalMedia(media: number[]): number[] {
+  const key = media.join(',')
+  const canonical = canonicalMedia.get(key)
+
+  if (canonical) return canonical
+
+  canonicalMedia.set(key, media)
+
+  return media
+}
+
 function _createMediaStore(media: number[]): _MediaStore {
   const mediaLen = media.length
   let sizes: {mq: MediaQueryList; index: number}[]
@@ -95,7 +116,7 @@ function getServerSnapshot() {
  * @beta
  */
 export function useMediaIndex(): number {
-  const {media} = useTheme_v2()
+  const media = _getCanonicalMedia(useTheme_v2().media)
   const store = useMemo(() => _createMediaStore(media), [media])
 
   return useSyncExternalStore(store.subscribe, store.getSnapshot, getServerSnapshot)
