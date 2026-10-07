@@ -770,5 +770,29 @@ describe('Popover', () => {
       expect(card.style.width).toBe('320px')
       expect(passes()).toBe(3)
     })
+
+    it('clears what the `size` middleware wrote when it stops owning it', async () => {
+      const {rerender} = render(<Example boundaryWidth={300} constrainSize matchReferenceWidth />, {
+        strict: false,
+      })
+
+      rerender(<Example boundaryWidth={300} constrainSize matchReferenceWidth open />)
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+      expect(card.style.maxHeight).not.toBe('')
+
+      // Both flags off hands all three styles back to React, which has no value of its own for
+      // the max height, nor for the width of the default `auto` `width` property: it renders
+      // them empty so that the middleware's last write goes away with them
+      rerender(<Example boundaryWidth={300} open />)
+      await settle()
+
+      expect(card.style.width).toBe('')
+      expect(card.style.maxHeight).toBe('')
+      expect(card.style.maxWidth).toBe('292px')
+    })
   })
 })

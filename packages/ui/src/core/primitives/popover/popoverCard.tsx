@@ -45,10 +45,17 @@ export function PopoverCard(
     arrowX?: number
     arrowY?: number
     /**
-     * The width cap, as a rendered style. Left undefined when the `size` middleware writes
-     * `maxWidth` to the element itself (`constrainSize`), so that React never touches it
+     * The height cap, as a rendered style, which is only ever `''`: nothing but the `size`
+     * middleware caps the height. Left undefined when the middleware writes `maxHeight` to the
+     * element itself (`constrainSize`), so that React never touches it
      */
-    maxWidth: number | undefined
+    maxHeight: '' | undefined
+    /**
+     * The width cap, as a rendered style, `''` where there is none. Left undefined when the
+     * `size` middleware writes `maxWidth` to the element itself (`constrainSize`), so that React
+     * never touches it
+     */
+    maxWidth: number | '' | undefined
     originX?: number
     originY?: number
     overflow?: BoxOverflow
@@ -60,10 +67,11 @@ export function PopoverCard(
     strategy: Strategy
     tone: CardTone
     /**
-     * The width, as a rendered style. Left undefined when the `size` middleware writes `width` to
-     * the element itself (`matchReferenceWidth`), so that React never touches it
+     * The width, as a rendered style, `''` where there is none. Left undefined when the `size`
+     * middleware writes `width` to the element itself (`matchReferenceWidth`), so that React
+     * never touches it
      */
-    width: number | undefined
+    width: number | '' | undefined
     x: number | null
     y: number | null
   } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
@@ -76,6 +84,7 @@ export function PopoverCard(
     arrowX,
     arrowY,
     children,
+    maxHeight,
     maxWidth,
     padding,
     placement,
@@ -110,6 +119,7 @@ export function PopoverCard(
   const rootStyle: CSSProperties = useMemo(
     () => ({
       left: x,
+      maxHeight,
       maxWidth,
       position: strategy,
       top: y,
@@ -119,7 +129,7 @@ export function PopoverCard(
       willChange: animate ? 'transform' : undefined,
       ...style,
     }),
-    [animate, maxWidth, originX, originY, strategy, style, width, x, y, zIndex],
+    [animate, maxHeight, maxWidth, originX, originY, strategy, style, width, x, y, zIndex],
   )
 
   const arrowStyle: CSSProperties = useMemo(
