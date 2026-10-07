@@ -1,0 +1,399 @@
+/** @vitest-environment jsdom */
+
+import {screen} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import {useState} from 'react'
+import {describe, expect, it, vi} from 'vitest'
+
+import {render} from '../../../../test/utils'
+import {Tree} from './tree'
+import {TreeItem} from './treeItem'
+
+/**
+ * The test id of the item that contains the focused element. The focused element is the item
+ * itself for plain items and the link for items with an `href`.
+ */
+function focusedItem(): string | null | undefined {
+  return document.activeElement?.closest('[data-testid]')?.getAttribute('data-testid')
+}
+
+function FruitTree(props: {onFocus?: (event: React.FocusEvent<HTMLUListElement>) => void}) {
+  return (
+    <>
+      <button data-testid="before" type="button">
+        Before
+      </button>
+      <Tree onFocus={props.onFocus}>
+        <TreeItem data-testid="fruit" expanded text="Fruit">
+          <TreeItem data-testid="oranges" text="Oranges" />
+          <TreeItem data-testid="apples" text="Apples">
+            <TreeItem data-testid="macintosh" href="/apples/macintosh" text="Macintosh" />
+            <TreeItem data-testid="fuji" text="Fuji" />
+          </TreeItem>
+          <TreeItem data-testid="pears" text="Pears">
+            <TreeItem data-testid="anjou" text="Anjou" />
+          </TreeItem>
+        </TreeItem>
+        <TreeItem data-testid="vegetables" text="Vegetables">
+          <TreeItem data-testid="carrots" text="Carrots" />
+        </TreeItem>
+      </Tree>
+      <button data-testid="after" type="button">
+        After
+      </button>
+    </>
+  )
+}
+
+function DynamicTree() {
+  const [ids, setIds] = useState(['b', 'c'])
+
+  return (
+    <>
+      <button data-testid="prepend" onClick={() => setIds(['a', ...ids])} type="button">
+        Prepend
+      </button>
+      <button data-testid="append" onClick={() => setIds([...ids, 'd'])} type="button">
+        Append
+      </button>
+      <button
+        data-testid="remove-first"
+        onClick={() => setIds((prev) => prev.slice(1))}
+        type="button"
+      >
+        Remove first
+      </button>
+      <Tree>
+        {ids.map((id) => (
+          <TreeItem data-testid={id} key={id} text={id.toUpperCase()} />
+        ))}
+      </Tree>
+      <button data-testid="after" type="button">
+        After
+      </button>
+    </>
+  )
+}
+
+describe('components/tree tab stop', () => {
+  it('is the tree element until an item has been focused, then the focused item', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    const tree = screen.getByRole('tree')
+
+    expect(tree).toHaveAttribute('tabindex', '0')
+    expect(screen.getByTestId('fruit')).toHaveAttribute('tabindex', '-1')
+    expect(screen.getByTestId('vegetables')).toHaveAttribute('tabindex', '-1')
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+
+    // Keyboard focus on the tree element is passed on to the first item
+    expect(focusedItem()).toBe('fruit')
+    expect(tree).not.toHaveAttribute('tabindex')
+    expect(screen.getByTestId('fruit')).toHaveAttribute('tabindex', '0')
+    expect(screen.getByTestId('vegetables')).toHaveAttribute('tabindex', '-1')
+
+    // The tree is a single tab stop in both directions
+    await user.tab()
+    expect(screen.getByTestId('after')).toHaveFocus()
+
+    await user.tab({shift: true})
+    expect(focusedItem()).toBe('fruit')
+
+    await user.tab({shift: true})
+    expect(screen.getByTestId('before')).toHaveFocus()
+  })
+
+  it('reaches the first item when tabbing backwards into the tree', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    screen.getByTestId('after').focus()
+    await user.tab({shift: true})
+
+    expect(focusedItem()).toBe('fruit')
+  })
+
+  it('stays on the item that was focused last when tabbing back in', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    await user.keyboard('{ArrowDown}{ArrowDown}')
+    expect(focusedItem()).toBe('apples')
+
+    await user.tab()
+    expect(screen.getByTestId('after')).toHaveFocus()
+
+    await user.tab({shift: true})
+    expect(focusedItem()).toBe('apples')
+    expect(screen.getByTestId('apples')).toHaveAttribute('tabindex', '0')
+    expect(screen.getByTestId('fruit')).toHaveAttribute('tabindex', '-1')
+  })
+
+  it('moves to the item that is clicked', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    await user.click(screen.getByTestId('oranges'))
+
+    expect(focusedItem()).toBe('oranges')
+    expect(screen.getByTestId('oranges')).toHaveAttribute('tabindex', '0')
+    expect(screen.getByRole('tree')).not.toHaveAttribute('tabindex')
+  })
+
+  it('leaves focus on the tree element when it is pressed between the items', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    const tree = screen.getByRole('tree')
+
+    await user.click(tree)
+
+    expect(tree).toHaveFocus()
+    expect(screen.getByTestId('fruit')).toHaveAttribute('tabindex', '-1')
+
+    // Keyboard focus is still passed on afterwards
+    screen.getByTestId('before').focus()
+    await user.tab()
+
+    expect(focusedItem()).toBe('fruit')
+  })
+
+  it('calls `onFocus` for the items, not for the tree element passing focus on', async () => {
+    const user = userEvent.setup()
+    const onFocus = vi.fn<(event: React.FocusEvent<HTMLUListElement>) => void>()
+
+    render(<FruitTree onFocus={onFocus} />)
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+
+    expect(onFocus).toHaveBeenCalledTimes(1)
+    expect(onFocus.mock.calls[0][0].target).toBe(screen.getByTestId('fruit'))
+
+    await user.keyboard('{ArrowDown}')
+
+    expect(onFocus).toHaveBeenCalledTimes(2)
+    expect(onFocus.mock.calls[1][0].target).toBe(screen.getByTestId('oranges'))
+  })
+})
+
+describe('components/tree keyboard navigation', () => {
+  it('moves between the visible items with ArrowDown and ArrowUp', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    expect(focusedItem()).toBe('fruit')
+
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('oranges')
+
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('apples')
+
+    // The items of the collapsed "Apples" and "Pears" are skipped
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('pears')
+
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('vegetables')
+
+    // The last visible item stays focused
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('vegetables')
+
+    await user.keyboard('{ArrowUp}')
+    expect(focusedItem()).toBe('pears')
+
+    await user.keyboard('{ArrowUp}{ArrowUp}{ArrowUp}')
+    expect(focusedItem()).toBe('fruit')
+
+    // The first item stays focused
+    await user.keyboard('{ArrowUp}')
+    expect(focusedItem()).toBe('fruit')
+  })
+
+  it('expands with ArrowRight, collapses or moves to the parent with ArrowLeft', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    const apples = screen.getByTestId('apples')
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    await user.keyboard('{ArrowDown}{ArrowDown}')
+    expect(focusedItem()).toBe('apples')
+    expect(apples).toHaveAttribute('aria-expanded', 'false')
+
+    await user.keyboard('{ArrowRight}')
+    expect(apples).toHaveAttribute('aria-expanded', 'true')
+    expect(focusedItem()).toBe('apples')
+
+    // The children are reachable once the item is expanded
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('macintosh')
+    expect(document.activeElement).toHaveAttribute('href', '/apples/macintosh')
+
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('fuji')
+
+    // ArrowLeft on a collapsed item (or a leaf) moves to the parent
+    await user.keyboard('{ArrowLeft}')
+    expect(focusedItem()).toBe('apples')
+    expect(apples).toHaveAttribute('aria-expanded', 'true')
+
+    // ArrowLeft on an expanded item collapses it
+    await user.keyboard('{ArrowLeft}')
+    expect(apples).toHaveAttribute('aria-expanded', 'false')
+    expect(focusedItem()).toBe('apples')
+
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('pears')
+
+    // ArrowLeft on a top-level item does nothing
+    await user.keyboard('{ArrowLeft}{ArrowUp}{ArrowUp}{ArrowUp}{ArrowLeft}')
+    expect(focusedItem()).toBe('fruit')
+    expect(screen.getByTestId('fruit')).toHaveAttribute('aria-expanded', 'false')
+
+    await user.keyboard('{ArrowLeft}')
+    expect(focusedItem()).toBe('fruit')
+  })
+
+  it('moves to the first and last visible item with Home and End', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('oranges')
+
+    // "Carrots" is hidden inside the collapsed "Vegetables"
+    await user.keyboard('{End}')
+    expect(focusedItem()).toBe('vegetables')
+
+    await user.keyboard('{ArrowRight}{End}')
+    expect(focusedItem()).toBe('carrots')
+
+    await user.keyboard('{Home}')
+    expect(focusedItem()).toBe('fruit')
+  })
+
+  it('keeps navigating from a link item that received focus directly', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    await user.keyboard('{ArrowDown}{ArrowDown}{ArrowRight}{ArrowDown}')
+    expect(focusedItem()).toBe('macintosh')
+
+    // Leave the tree and come back onto the link itself
+    await user.tab()
+    expect(screen.getByTestId('after')).toHaveFocus()
+    await user.tab({shift: true})
+    expect(document.activeElement).toHaveAttribute('href', '/apples/macintosh')
+
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('fuji')
+
+    await user.keyboard('{ArrowUp}{ArrowLeft}')
+    expect(focusedItem()).toBe('apples')
+  })
+
+  it('does nothing while no item is focused', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    const tree = screen.getByRole('tree')
+
+    await user.click(tree)
+    expect(tree).toHaveFocus()
+
+    await user.keyboard('{ArrowDown}{End}{Home}{ArrowRight}')
+
+    expect(tree).toHaveFocus()
+    expect(screen.getByTestId('fruit')).toHaveAttribute('tabindex', '-1')
+  })
+})
+
+describe('components/tree dynamic items', () => {
+  it('navigates items in their current document order', async () => {
+    const user = userEvent.setup()
+
+    render(<DynamicTree />)
+
+    await user.click(screen.getByTestId('append'))
+    await user.click(screen.getByTestId('prepend'))
+
+    await user.click(screen.getByTestId('b'))
+    expect(focusedItem()).toBe('b')
+
+    await user.keyboard('{ArrowUp}')
+    expect(focusedItem()).toBe('a')
+
+    await user.keyboard('{End}')
+    expect(focusedItem()).toBe('d')
+
+    await user.keyboard('{ArrowUp}')
+    expect(focusedItem()).toBe('c')
+  })
+
+  it('tabs onto an item that was added before the first one', async () => {
+    const user = userEvent.setup()
+
+    render(<DynamicTree />)
+
+    await user.click(screen.getByTestId('prepend'))
+    await user.click(screen.getByTestId('append'))
+
+    expect(screen.getByRole('tree')).toHaveAttribute('tabindex', '0')
+
+    screen.getByTestId('remove-first').focus()
+    await user.tab()
+    expect(focusedItem()).toBe('a')
+
+    await user.keyboard('{End}')
+    expect(focusedItem()).toBe('d')
+  })
+
+  it('takes the tab stop back when the focused item is removed', async () => {
+    const user = userEvent.setup()
+
+    render(<DynamicTree />)
+
+    const tree = screen.getByRole('tree')
+
+    await user.click(screen.getByTestId('b'))
+    expect(screen.getByTestId('b')).toHaveAttribute('tabindex', '0')
+    expect(tree).not.toHaveAttribute('tabindex')
+
+    await user.click(screen.getByTestId('remove-first'))
+    expect(screen.queryByTestId('b')).toBeNull()
+
+    // The tree is reachable again and passes focus on to the item that is now first
+    expect(tree).toHaveAttribute('tabindex', '0')
+    expect(screen.getByTestId('c')).toHaveAttribute('tabindex', '-1')
+
+    await user.tab()
+    expect(focusedItem()).toBe('c')
+    expect(screen.getByTestId('c')).toHaveAttribute('tabindex', '0')
+    expect(tree).not.toHaveAttribute('tabindex')
+  })
+})
