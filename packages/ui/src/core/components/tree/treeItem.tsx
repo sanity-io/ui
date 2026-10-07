@@ -193,7 +193,7 @@ export function TreeItem(
         </TreeItemBox>
 
         <TreeContext.Provider value={contextValue}>
-          {children && <TreeGroup hidden={!expanded}>{children}</TreeGroup>}
+          {children && <TreeGroup expanded={expanded}>{children}</TreeGroup>}
         </TreeContext.Provider>
       </StyledTreeItem>
     )

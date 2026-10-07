@@ -83,6 +83,33 @@ describe('components/treeItem links', () => {
     }
   })
 
+  it('shows the children of a link item while it is expanded', () => {
+    const {container, rerender} = render(
+      <TreeContext.Provider value={treeContextValue}>
+        <TreeItem expanded href="/foo" text="Item">
+          <TreeItem text="Child" />
+        </TreeItem>
+      </TreeContext.Provider>,
+    )
+    const group = () => container.querySelector('[data-ui="TreeGroup"]')
+
+    expect(group()).not.toHaveAttribute('hidden')
+    expect(container.querySelector('[data-ui="TreeItem__box"]')).toHaveAttribute(
+      'aria-expanded',
+      'true',
+    )
+
+    rerender(
+      <TreeContext.Provider value={treeContextValue}>
+        <TreeItem href="/foo" text="Item">
+          <TreeItem text="Child" />
+        </TreeItem>
+      </TreeContext.Provider>,
+    )
+
+    expect(group()).toHaveAttribute('hidden')
+  })
+
   it('renders a plain element without href', () => {
     const {container} = renderTreeItem({})
     const box = container.querySelector('[data-ui="TreeItem__box"]')
