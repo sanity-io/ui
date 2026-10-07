@@ -172,6 +172,39 @@ describe('components/autocomplete (deferred popover)', () => {
     expect(commits).toEqual(['"" true', '"" false'])
   })
 
+  it('keeps the list filtered in every commit it is open in', async () => {
+    const user = userEvent.setup()
+    const openCommits: string[] = []
+    const recordCommit = () => {
+      // The query the list filters by is deferred along with the open, so a list that is still
+      // open while a close is pending shows the options it was filtered to, not every option
+      if (getInput().getAttribute('aria-expanded') !== 'true') return
+
+      const state = screen
+        .queryAllByRole('option', {hidden: true})
+        .map((option) => option.textContent)
+        .join(' ')
+
+      if (openCommits.at(-1) !== state) openCommits.push(state)
+    }
+
+    render(
+      <Profiler id="autocomplete" onRender={recordCommit}>
+        <Autocomplete id="ac" options={OPTIONS} />
+      </Profiler>,
+    )
+
+    await user.type(getInput(), 'ba')
+
+    expect(openCommits).toEqual(['bar baz'])
+
+    await user.click(getOption('bar'))
+
+    await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
+
+    expect(openCommits).toEqual(['bar baz'])
+  })
+
   it('keeps arrow navigation and typing within an open list in the urgent commit', async () => {
     const user = userEvent.setup()
     const {commits} = renderAutocomplete({filterOption: SHOW_ALL, openOnFocus: true})

@@ -240,24 +240,32 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
     [options, value],
   )
-  const filteredOptions = useMemo(
-    () => options.filter((option) => (query ? filterOption(query, option) : true)),
-    [filterOption, options, query],
-  )
-  const filteredOptionsLen = filteredOptions.length
-  const activeItemId = activeValue ? `${id}-option-${activeValue}` : undefined
   // The results show while a query is in progress and the input has focus (or the results are
   // loading). The popover follows one render later, at transition priority: the urgent render
   // (a keystroke, a selection, focus leaving) updates the input and the state, the deferred one
-  // opens or closes the list. So opening never interrupts a pre-render in progress inside the
-  // popover's hidden `<Activity>` (it pre-renders on intent, in a transition) and never holds
-  // up the input. The state itself stays synchronous on purpose: dispatching an open or close
-  // inside `startTransition` would race the render-time `value` sync above, because React does
-  // not keep a render-phase update while a lower-priority update is pending in the same
-  // reducer; a parent that answers `onChange` with another value in the same tick would lose it.
-  // `aria-expanded`, the open button and the popover all follow the deferred value.
+  // opens or closes the list and filters it. So opening never interrupts a pre-render in
+  // progress inside the popover's hidden `<Activity>` (it pre-renders on intent, in a
+  // transition) and never holds up the input with the options to render. The state itself stays
+  // synchronous on purpose: dispatching an open or close inside `startTransition` would race the
+  // render-time `value` sync above, because React does not keep a render-phase update while a
+  // lower-priority update is pending in the same reducer; a parent that answers `onChange` with
+  // another value in the same tick would lose it.
+  //
+  // The query the options are filtered by is deferred along with the open (it is the query the
+  // list is open for, and `null` while closed), so the two cannot disagree: closing (a
+  // selection, a clear, a blur, Escape) drops the query in the urgent render, and no query
+  // filters nothing, so a list that has not hidden yet would show every option in the frame
+  // before it closes. `aria-expanded`, the open button and the popover all follow the deferred
+  // value.
   const shouldExpand = (query !== null && loading) || (focused && query !== null)
-  const expanded = useDeferredValue(shouldExpand)
+  const expandedQuery = useDeferredValue(shouldExpand ? query : null)
+  const expanded = expandedQuery !== null
+  const filteredOptions = useMemo(
+    () => options.filter((option) => (expandedQuery ? filterOption(expandedQuery, option) : true)),
+    [expandedQuery, filterOption, options],
+  )
+  const filteredOptionsLen = filteredOptions.length
+  const activeItemId = activeValue ? `${id}-option-${activeValue}` : undefined
 
   const handleRootBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>) => {
