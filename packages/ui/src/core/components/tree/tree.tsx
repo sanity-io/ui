@@ -26,6 +26,13 @@ export interface TreeProps {
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
+ *
+ * @remarks
+ * The tree is a single tab stop. Until an item has been focused (and again after the focused item
+ * has unmounted) the tree element itself is that tab stop: keyboard focus on it is passed on to
+ * the first item, while a pointer press between the items leaves focus on the tree element, from
+ * where `ArrowDown` / `Home` and `ArrowUp` / `End` enter the items. Once an item has been focused
+ * it is the tab stop, and the tree element is not focusable.
  * @beta
  */
 export function Tree(
@@ -281,9 +288,10 @@ export function Tree(
         ref={ref}
         role="tree"
         gap={gap}
-        // While an item is the tab stop the tree element stays out of the tab order, so the tree
-        // remains a single tab stop; until then a `tabIndex` prop (e.g. `-1` to keep the tree out
-        // of the tab order) wins over the default
+        // While an item is the tab stop the tree element is not focusable at all, so the tree
+        // remains a single tab stop and a press between the items moves focus out of the tree, as
+        // it always did; until then a `tabIndex` prop (e.g. `-1` to keep the tree out of the tab
+        // order) wins over the default
         tabIndex={tabStop ? undefined : (tabIndexProp ?? 0)}
       >
         {children}
