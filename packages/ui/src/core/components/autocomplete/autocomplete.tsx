@@ -12,6 +12,7 @@ import {
   ReactNode,
   Ref,
   useCallback,
+  useDeferredValue,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -245,7 +246,18 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   )
   const filteredOptionsLen = filteredOptions.length
   const activeItemId = activeValue ? `${id}-option-${activeValue}` : undefined
-  const expanded = (query !== null && loading) || (focused && query !== null)
+  // The results show while a query is in progress and the input has focus (or the results are
+  // loading). The popover follows one render later, at transition priority: the urgent render
+  // (a keystroke, a selection, focus leaving) updates the input and the state, the deferred one
+  // opens or closes the list. So opening never interrupts a pre-render in progress inside the
+  // popover's hidden `<Activity>` (it pre-renders on intent, in a transition) and never holds
+  // up the input. The state itself stays synchronous on purpose: dispatching an open or close
+  // inside `startTransition` would race the render-time `value` sync above, because React does
+  // not keep a render-phase update while a lower-priority update is pending in the same
+  // reducer; a parent that answers `onChange` with another value in the same tick would lose it.
+  // `aria-expanded`, the open button and the popover all follow the deferred value.
+  const shouldExpand = (query !== null && loading) || (focused && query !== null)
+  const expanded = useDeferredValue(shouldExpand)
 
   const handleRootBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>) => {
