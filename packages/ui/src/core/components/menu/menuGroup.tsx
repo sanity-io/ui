@@ -87,6 +87,25 @@ const MenuGroupComponent = function MenuGroup(
   const active = Boolean(activeElement) && activeElement === rootElement
   const [withinMenu, setWithinMenu] = useState(false)
 
+  // Close the child menu when a sibling item becomes the controller's active element. `open` is
+  // reset as well, or re-activating this item from the keyboard (the controller sets
+  // `activeElement`, nothing happens on this component) would show a child menu that the user
+  // never reopened. The reset happens during render, so the close lands in the same commit as the
+  // activation that caused it.
+  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+  const [prevActive, setPrevActive] = useState(active)
+
+  if (active !== prevActive) {
+    setPrevActive(active)
+    if (!active) setOpen(false)
+  }
+
+  const childMenuOpen = open && active
+  // Pressed while the child menu is open and the pointer (or, after `ArrowRight`, the focus) is
+  // within it. Derived from `childMenuOpen` so that `withinMenu` needs no reset when the child
+  // menu closes; every path that opens it sets `withinMenu` for that session.
+  const pressed = childMenuOpen && withinMenu
+
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       setWithinMenu(false)
@@ -115,6 +134,7 @@ const MenuGroupComponent = function MenuGroup(
     (event: React.MouseEvent<HTMLDivElement>) => {
       onClick?.(event)
 
+      setWithinMenu(false)
       setShouldFocus('first')
       setOpen(true)
     },
@@ -130,18 +150,6 @@ const MenuGroupComponent = function MenuGroup(
 
   // Register the menu item element
   useEffect(() => mount(rootElement), [mount, rootElement])
-
-  // Close child menu when a sibling item becomes active
-  useEffect(() => {
-    // oxlint-disable-next-line react/set-state-in-effect
-    if (!active) setOpen(false)
-  }, [active])
-
-  // Update state when child menu is no longer open
-  useEffect(() => {
-    // oxlint-disable-next-line react/set-state-in-effect
-    if (!open) setWithinMenu(false)
-  }, [open])
 
   // Reset the shouldFocus state after it has been used
   useEffect(() => {
@@ -186,15 +194,15 @@ const MenuGroupComponent = function MenuGroup(
   }, [])
 
   return (
-    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={open}>
+    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={childMenuOpen}>
       <Selectable
         data-as={as}
         data-ui="MenuGroup"
         forwardedAs={as}
         {...restProps}
-        aria-pressed={as === 'button' ? withinMenu : undefined}
-        data-pressed={as !== 'button' ? withinMenu : undefined}
-        data-selected={!withinMenu && active ? '' : undefined}
+        aria-pressed={as === 'button' ? pressed : undefined}
+        data-pressed={as !== 'button' ? pressed : undefined}
+        data-selected={!pressed && active ? '' : undefined}
         $radius={_getArrayProp(radius)}
         $tone={tone}
         $scheme={scheme}
