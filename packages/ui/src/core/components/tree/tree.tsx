@@ -194,10 +194,9 @@ export function Tree(
           const parentKey = itemPath.join('/')
           const parentState = parentKey && state[parentKey]
 
-          if (parentState) {
-            parentState.element.focus()
-            setFocusedElement(parentState.element)
-          }
+          // Through `focusItem`: the registered element of an item with an `href` is its
+          // non-focusable `<li role="none">`, whose link is what takes focus
+          if (parentState) focusItem(parentState.element)
         }
 
         return

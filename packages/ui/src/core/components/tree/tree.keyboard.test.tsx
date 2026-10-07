@@ -387,6 +387,50 @@ describe('components/tree keyboard navigation', () => {
     expect(focusedItem()).toBe('fruit')
   })
 
+  it('expands a link item and moves back onto its link with ArrowLeft', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree>
+          <TreeItem data-testid="docs" href="/docs" text="Docs">
+            <TreeItem data-testid="intro" text="Intro" />
+          </TreeItem>
+          <TreeItem data-testid="blog" text="Blog" />
+        </Tree>
+      </>,
+    )
+
+    const docsLink = screen.getByTestId('docs').querySelector('a')!
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    expect(docsLink).toHaveFocus()
+    expect(docsLink).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.getByTestId('intro').closest('[data-ui="TreeGroup"]')).toHaveAttribute('hidden')
+
+    await user.keyboard('{ArrowRight}')
+    expect(docsLink).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByTestId('intro').closest('[data-ui="TreeGroup"]')).not.toHaveAttribute(
+      'hidden',
+    )
+
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('intro')
+
+    // The parent's registered element is its `<li role="none">`; focus goes to the link inside
+    await user.keyboard('{ArrowLeft}')
+    expect(docsLink).toHaveFocus()
+    expect(docsLink).toHaveAttribute('tabindex', '0')
+
+    await user.keyboard('{ArrowLeft}')
+    expect(docsLink).toHaveAttribute('aria-expanded', 'false')
+    expect(docsLink).toHaveFocus()
+  })
+
   it('keeps navigating from a link item that received focus directly', async () => {
     const user = userEvent.setup()
 
