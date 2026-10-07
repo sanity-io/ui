@@ -2,7 +2,7 @@
 
 import {act, fireEvent, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {ComponentProps, Profiler} from 'react'
+import {ComponentProps, Profiler, useState} from 'react'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
@@ -75,6 +75,22 @@ function renderAutocomplete(props: Partial<Props> = {}) {
     outside: screen.getByRole('button', {name: 'Outside'}),
     rerender: (nextProps: Partial<Props> = {}) => result.rerender(ui(nextProps)),
   }
+}
+
+/** A parent that answers `onChange` synchronously, with the selected value or another one */
+function ControlledParent({answer}: {answer: (selected: string) => string}) {
+  const [value, setValue] = useState('foo')
+
+  return (
+    <Autocomplete
+      filterOption={SHOW_ALL}
+      id="ac"
+      onChange={(selected) => setValue(answer(selected))}
+      openOnFocus
+      options={OPTIONS}
+      value={value}
+    />
+  )
 }
 
 describe('components/autocomplete', () => {
@@ -272,6 +288,35 @@ describe('components/autocomplete', () => {
 
       expect(getInput()).toHaveValue('baz')
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-baz')
+    })
+
+    it('shows the value a parent answers a selection with in the same tick', async () => {
+      const user = userEvent.setup()
+
+      render(<ControlledParent answer={() => 'baz'} />)
+
+      await user.click(getInput())
+      await user.click(getOption('bar'))
+
+      await waitFor(() => expect(getInput()).toHaveValue('baz'))
+
+      // Nothing pending overrides the parent's answer later on
+      await act(() => new Promise((resolve) => setTimeout(resolve, 50)))
+
+      expect(getInput()).toHaveValue('baz')
+      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-baz')
+    })
+
+    it('shows a selection a parent accepts in the same tick', async () => {
+      const user = userEvent.setup()
+
+      render(<ControlledParent answer={(selected) => selected} />)
+
+      await user.click(getInput())
+      await user.click(getOption('bar'))
+
+      await waitFor(() => expect(getInput()).toHaveValue('bar'))
+      await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
     })
 
     it('shows the selection once more when the parent accepts it', async () => {
