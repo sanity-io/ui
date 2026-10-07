@@ -260,8 +260,22 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   // reducer; a parent that answers `onChange` with another value in the same tick would lose it.
   // `aria-expanded`, the open button and the popover all follow `expanded`.
   const shouldExpand = (query !== null && loading) || (focused && query !== null)
-  const deferredExpand = useDeferredValue(shouldExpand)
-  const expanded = shouldExpand && deferredExpand
+
+  // What is deferred is the number of the open cycle, not `shouldExpand` itself: a deferred
+  // `true` would survive an urgent close until its own deferred render commits, and a reopen
+  // before that (Escape, then a keystroke) would open urgently. Each closed → open flip gets a
+  // new number, counted during render where `shouldExpand` is known (it includes the `loading`
+  // prop, which the reducer does not see).
+  const [openCycle, setOpenCycle] = useState(0)
+  const [prevShouldExpand, setPrevShouldExpand] = useState(shouldExpand)
+
+  if (shouldExpand !== prevShouldExpand) {
+    setPrevShouldExpand(shouldExpand)
+    if (shouldExpand) setOpenCycle((cycle) => cycle + 1)
+  }
+
+  const deferredOpenCycle = useDeferredValue(openCycle)
+  const expanded = shouldExpand && deferredOpenCycle === openCycle
 
   const handleRootBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>) => {

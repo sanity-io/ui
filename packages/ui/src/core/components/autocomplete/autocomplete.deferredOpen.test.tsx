@@ -62,6 +62,15 @@ async function blurTo(element: HTMLElement) {
   await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
 }
 
+/**
+ * A keystroke as the browser delivers it, outside of `act`: the value is set through the
+ * prototype setter so that React's value tracker sees the change, then `input` is dispatched.
+ */
+function typeNatively(input: HTMLInputElement, value: string) {
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set?.call(input, value)
+  input.dispatchEvent(new Event('input', {bubbles: true}))
+}
+
 declare global {
   // The flag React reads to decide whether updates must happen inside `act`; Testing Library sets
   // it for the test and clears it while waiting
@@ -102,6 +111,40 @@ describe('components/autocomplete (deferred popover)', () => {
 
       await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'true'))
     })
+  })
+
+  // `useDeferredValue` keeps its previous value until its deferred render has committed. Were
+  // `shouldExpand` itself deferred, a close followed by a reopen before that render would find the
+  // deferred value still `true` and open urgently; the open cycle number does not have that past.
+  it('defers a reopen that comes before the deferred render of the previous close', async () => {
+    const user = userEvent.setup()
+    const {commits} = renderAutocomplete({openOnFocus: true})
+
+    await user.click(getInput())
+
+    expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+
+    commits.length = 0
+
+    await outsideAct(async () => {
+      // Escape closes in the urgent commit of its event …
+      getInput().dispatchEvent(new KeyboardEvent('keydown', {bubbles: true, key: 'Escape'}))
+      await Promise.resolve()
+
+      expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+
+      // … and a keystroke in the next microtask, before any deferred render has run, reopens:
+      // closed in its urgent commit, open in a later task
+      typeNatively(getInput(), 'b')
+      await Promise.resolve()
+
+      expect(getInput()).toHaveValue('b')
+      expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+
+      await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'true'))
+    })
+
+    expect(commits).toEqual(['"" false', '"b" false', '"b" true'])
   })
 
   it('shows the first keystroke before the list opens for it', async () => {
