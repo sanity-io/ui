@@ -209,16 +209,34 @@ describe('components/autocomplete', () => {
       const user = userEvent.setup()
       const {rerender} = renderAutocomplete({value: 'foo'})
 
-      await user.click(getInput())
+      await user.clear(getInput())
       await user.type(getInput(), 'ba')
 
-      expect(getInput()).toHaveValue('fooba')
+      expect(getInput()).toHaveValue('ba')
       expect(getInput()).toHaveAttribute('aria-expanded', 'true')
 
       rerender({value: 'baz'})
 
       expect(getInput()).toHaveValue('baz')
       expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    it('reports the list as expanded only while there are results to show', async () => {
+      const user = userEvent.setup()
+
+      renderAutocomplete({value: 'foo'})
+
+      await user.type(getInput(), 'x')
+
+      expect(getInput()).toHaveValue('foox')
+      expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+      expect(screen.queryByRole('listbox', {hidden: true})).toBeNull()
+
+      await user.clear(getInput())
+      await user.type(getInput(), 'ba')
+
+      expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+      expect(screen.getByRole('listbox', {hidden: true})).toBeInTheDocument()
     })
 
     it('selecting an option calls `onSelect`, `onChange` and `onQueryChange`, and shows it', async () => {

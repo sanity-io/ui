@@ -44,16 +44,22 @@ function renderAutocomplete(props: Partial<ComponentProps<typeof Autocomplete>> 
     if (commits.at(-1) !== state) commits.push(state)
   }
 
-  render(
+  const ui = (nextProps: Partial<ComponentProps<typeof Autocomplete>>) => (
     <>
       <Profiler id="autocomplete" onRender={recordCommit}>
-        <Autocomplete id="ac" options={OPTIONS} {...props} />
+        <Autocomplete id="ac" options={OPTIONS} {...nextProps} />
       </Profiler>
       <button type="button">Outside</button>
-    </>,
+    </>
   )
+  const result = render(ui(props))
 
-  return {commits, outside: screen.getByRole('button', {name: 'Outside'})}
+  return {
+    commits,
+    outside: screen.getByRole('button', {name: 'Outside'}),
+    rerender: (nextProps: Partial<ComponentProps<typeof Autocomplete>>) =>
+      result.rerender(ui(nextProps)),
+  }
 }
 
 async function blurTo(element: HTMLElement) {
@@ -145,6 +151,43 @@ describe('components/autocomplete (deferred popover)', () => {
     })
 
     expect(commits).toEqual(['"" false', '"b" false', '"b" true'])
+  })
+
+  // With nothing to show there is no popover, so the open cycle has to start when results
+  // arrive for the pending query, not when the query started
+  it('opens one commit after results arrive for a pending query', async () => {
+    const user = userEvent.setup()
+    const {commits, rerender} = renderAutocomplete({openOnFocus: true, options: []})
+
+    await user.click(getInput())
+
+    expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+
+    commits.length = 0
+
+    rerender({openOnFocus: true, options: OPTIONS})
+
+    expect(commits).toEqual(['"" false', '"" true'])
+  })
+
+  it('opens one commit after a query starts matching', async () => {
+    const user = userEvent.setup()
+    const {commits} = renderAutocomplete()
+
+    await user.type(getInput(), 'x')
+
+    expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+
+    commits.length = 0
+
+    // Replaces the selected "x" in one keystroke (an empty query would match every option)
+    await user.type(getInput(), 'b', {
+      initialSelectionEnd: 1,
+      initialSelectionStart: 0,
+      skipClick: true,
+    })
+
+    expect(commits).toEqual(['"b" false', '"b" true'])
   })
 
   it('shows the first keystroke before the list opens for it', async () => {
