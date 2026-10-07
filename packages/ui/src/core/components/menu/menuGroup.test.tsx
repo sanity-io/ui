@@ -1,7 +1,7 @@
 /** @vitest-environment jsdom */
 
 import {act, fireEvent, screen, waitFor} from '@testing-library/react'
-import {startTransition} from 'react'
+import {startTransition, use} from 'react'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
@@ -304,6 +304,66 @@ describe('MenuGroup', () => {
     expect(screen.getByText('Search')).toBeVisible()
     expectChildMenuClosed()
     expectIdle(getGroup())
+  })
+
+  it('does not show the child menu for an open that was still pending when the item stopped being active', async () => {
+    let resolveContent!: () => void
+    const content = new Promise<void>((resolve) => {
+      resolveContent = resolve
+    })
+
+    // Suspends until `resolveContent()`; with no Suspense boundary above it, the open transition
+    // that renders it stays pending (React waits rather than committing a fallback)
+    function SuspendingItem() {
+      use(content)
+
+      return <MenuItem text="Email link" />
+    }
+
+    render(
+      <LayerProvider>
+        <Menu>
+          <MenuItem text="Search" />
+          <MenuGroup text="More">
+            <SuspendingItem />
+          </MenuGroup>
+          <MenuItem text="Expand" />
+        </Menu>
+      </LayerProvider>,
+    )
+
+    const group = getGroup()
+    const menu = getMenu()
+
+    // The open is a transition; its render suspends, so nothing of the child menu commits
+    // (awaited `act`, as React asks for whenever a render suspends inside one)
+    await act(async () => {
+      fireEvent.mouseEnter(group)
+    })
+    expectSelected(group)
+    expect(screen.queryByText('Email link')).toBeNull()
+
+    // A sibling becomes active while that open is still pending
+    await act(async () => {
+      fireEvent.mouseEnter(getItem('Expand'))
+    })
+    expectIdle(group)
+    expect(screen.queryByText('Email link')).toBeNull()
+
+    await act(async () => {
+      resolveContent()
+      await content
+    })
+    expectChildMenuClosed()
+
+    // Re-activating the item from the keyboard must not show a child menu the user never reopened
+    await act(async () => {
+      fireEvent.keyDown(menu, {key: 'ArrowUp'})
+    })
+    await waitFor(() => expect(group).toHaveFocus())
+
+    expectSelected(group)
+    expectChildMenuClosed()
   })
 
   // Opening and closing the child menu happen in `startTransition`. The spy keeps the callbacks

@@ -1,4 +1,8 @@
+import {Card, LayerProvider, ThemeProvider} from '@sanity/ui'
+import {Menu, MenuGroup, MenuItem} from '@sanity/ui/menu'
+import {buildTheme} from '@sanity/ui/theme'
 import {composeStories} from '@storybook/react-vite'
+import {use} from 'react'
 import {describe, expect, test} from 'vitest'
 import {render} from 'vitest-browser-react'
 import {page, userEvent} from 'vitest/browser'
@@ -6,6 +10,8 @@ import {page, userEvent} from 'vitest/browser'
 import * as menuButtonStories from '../stories/components/MenuButton.stories'
 
 const {WithMenuGroup} = composeStories(menuButtonStories)
+
+const theme = buildTheme()
 
 function group() {
   return document.querySelector<HTMLElement>('[data-ui="MenuGroup"]')!
@@ -108,5 +114,61 @@ describe('Components/MenuGroup', () => {
     await expect.poll(() => document.activeElement).toBe(group())
     await expectSelected()
     await expectChildMenuClosed()
+  })
+
+  // The open is a transition. While its render is still pending (here: suspended on the child
+  // menu's content, with no Suspense boundary to show a fallback), a sibling item becomes active.
+  // That must end the open as well; otherwise, once the transition completes, re-activating the
+  // item from the keyboard shows a child menu the user never reopened.
+  test('does not show the child menu for an open that was still pending when the item stopped being active', async () => {
+    let resolveContent!: () => void
+    const content = new Promise<void>((resolve) => {
+      resolveContent = resolve
+    })
+
+    function SuspendingItem() {
+      use(content)
+
+      return <MenuItem text="Email link" />
+    }
+
+    await page.viewport(1024, 768)
+    await render(
+      <ThemeProvider scheme="light" theme={theme}>
+        <Card padding={4}>
+          <LayerProvider>
+            <Menu>
+              <MenuItem text="Search" />
+              <MenuGroup text="More">
+                <SuspendingItem />
+              </MenuGroup>
+              <MenuItem text="Expand" />
+            </Menu>
+          </LayerProvider>
+        </Card>
+      </ThemeProvider>,
+    )
+
+    await userEvent.hover(group())
+    await expectSelected()
+    // Nothing of the child menu commits while its content is pending
+    await new Promise((resolve) => setTimeout(resolve, 100))
+    expect(childMenuPopover()).toBeNull()
+
+    // The sibling above the group, so that the pointer rests outside the area a child menu would
+    // open into (a child menu opening under the pointer would fire its own mouse events)
+    await userEvent.hover(menuItem('Search'))
+    await expectIdle()
+    await expect.poll(() => menuItem('Search').getAttribute('data-selected')).toBe('')
+
+    resolveContent()
+    await new Promise((resolve) => setTimeout(resolve, 100))
+
+    // The sibling has focus; `ArrowDown` makes the group item active and focused again
+    await userEvent.keyboard('{ArrowDown}')
+    await expect.poll(() => document.activeElement).toBe(group())
+    await new Promise((resolve) => setTimeout(resolve, 100))
+    expect(childMenuPopover()?.style.display ?? 'none').toBe('none')
+    await expectSelected()
   })
 })

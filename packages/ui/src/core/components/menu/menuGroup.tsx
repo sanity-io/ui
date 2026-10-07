@@ -82,27 +82,38 @@ const MenuGroupComponent = function MenuGroup(
   } = menu
   const onItemMouseEnter = _onItemMouseEnter ?? menu.onItemMouseEnter
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
-  const [open, setOpen] = useState(false)
+  // Numbers the activations of this item (the periods in which it is the controller's active
+  // element); `openedIn` is the activation during which the child menu was last opened
+  const [activation, setActivation] = useState(0)
+  const [openedIn, setOpenedIn] = useState<number | null>(null)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
   const [withinMenu, setWithinMenu] = useState(false)
 
-  // Close the child menu when a sibling item becomes the controller's active element. `open` is
-  // reset as well, or re-activating this item from the keyboard (the controller sets
-  // `activeElement`, nothing happens on this component) would show a child menu that the user
-  // never reopened. The reset happens during render, so the close lands in the same commit as the
-  // activation that caused it. A render-phase update is applied by re-rendering this component
-  // within the render in progress, at that render's priority, so unlike the handlers below it
-  // cannot be made a transition: the priority of the close is that of the activation.
+  // When a sibling item becomes the controller's active element, this item's activation ends and
+  // the next one is numbered, which closes a child menu opened during it. Just hiding the child
+  // menu while inactive would not do: re-activating this item from the keyboard (the controller
+  // sets `activeElement`, nothing happens on this component) would show a child menu that the
+  // user never reopened. The end of the activation is recorded during render, so the close lands
+  // in the same commit as the activation that caused it.
+  //
+  // It is recorded in `activation`, which only this render-phase update writes, rather than by
+  // resetting `openedIn`, which the handlers below write in transitions. React applies a
+  // render-phase update on top of the state of the render in progress and does not rebase it
+  // over a lower-priority update that this render skipped; a reset of `openedIn` would be lost
+  // while an opening transition is still pending (its render suspended on the child menu's
+  // content, say), and that open would then apply after the item stopped being active. The
+  // priority of the close is that of the activation, so unlike the handlers below this update
+  // cannot be made a transition.
   // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
   const [prevActive, setPrevActive] = useState(active)
 
   if (active !== prevActive) {
     setPrevActive(active)
-    if (!active) setOpen(false)
+    if (!active) setActivation((current) => current + 1)
   }
 
-  const childMenuOpen = open && active
+  const childMenuOpen = active && openedIn === activation
   // Pressed while the child menu is open and the pointer (or, after `ArrowRight`, the focus) is
   // within it. Derived from `childMenuOpen` so that `withinMenu` needs no reset when the child
   // menu closes; every path that opens it sets `withinMenu` for that session.
@@ -110,7 +121,7 @@ const MenuGroupComponent = function MenuGroup(
 
   // Opening and closing the child menu are transitions, so that they do not interrupt a
   // pre-render of the closed popover (the hidden `<Activity>` in `Popover`, rendered on intent in
-  // a transition) and yield to more urgent input. The state that is set together with `open`
+  // a transition) and yield to more urgent input. The state that is set together with `openedIn`
   // (`withinMenu` for the pressed state, `shouldFocus` for the child menu's initial focus) goes
   // into the same transition so that it commits together with it, as it did when the three were
   // set synchronously: `shouldFocus` in particular is reset by an animation frame after its
@@ -122,10 +133,10 @@ const MenuGroupComponent = function MenuGroup(
 
       startTransition(() => {
         setWithinMenu(false)
-        setOpen(true)
+        setOpenedIn(activation)
       })
     },
-    [onItemMouseEnter],
+    [activation, onItemMouseEnter],
   )
 
   const handleMenuKeyDown = useCallback(
@@ -133,7 +144,7 @@ const MenuGroupComponent = function MenuGroup(
       if (event.key === 'ArrowLeft') {
         event.stopPropagation()
 
-        startTransition(() => setOpen(false))
+        startTransition(() => setOpenedIn(null))
 
         requestAnimationFrame(() => {
           rootElement?.focus()
@@ -150,14 +161,14 @@ const MenuGroupComponent = function MenuGroup(
       startTransition(() => {
         setWithinMenu(false)
         setShouldFocus('first')
-        setOpen(true)
+        setOpenedIn(activation)
       })
     },
-    [onClick],
+    [activation, onClick],
   )
 
   const handleChildItemClick = useCallback(() => {
-    startTransition(() => setOpen(false))
+    startTransition(() => setOpenedIn(null))
     onItemClick?.()
   }, [onItemClick])
 
@@ -192,23 +203,26 @@ const MenuGroupComponent = function MenuGroup(
     </Menu>
   )
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    const target = event.currentTarget
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      const target = event.currentTarget
 
-    if (document.activeElement !== target) {
-      return
-    }
+      if (document.activeElement !== target) {
+        return
+      }
 
-    if (event.key === 'ArrowRight') {
-      startTransition(() => {
-        setShouldFocus('first')
-        setOpen(true)
-        setWithinMenu(true)
-      })
+      if (event.key === 'ArrowRight') {
+        startTransition(() => {
+          setShouldFocus('first')
+          setOpenedIn(activation)
+          setWithinMenu(true)
+        })
 
-      return
-    }
-  }, [])
+        return
+      }
+    },
+    [activation],
+  )
 
   return (
     <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={childMenuOpen}>
