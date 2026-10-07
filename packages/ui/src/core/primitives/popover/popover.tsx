@@ -29,9 +29,11 @@ import {
 import {useEffectEvent} from 'use-effect-event'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {useLatestRef} from '../../hooks/useLatestRef'
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
+import {withBoundary} from '../../middleware/withBoundary'
 import {_elementSizeObserver, ElementRectValue} from '../../observers/elementSizeObserver'
 import {_getArrayProp} from '../../styles/helpers'
 import {useTheme_v2} from '../../theme/useTheme'
@@ -279,28 +281,61 @@ export function Popover(
         : undefined,
     })
 
-  // Floating UI does not know the max width changed (it reads it through the ref), so an open
-  // `constrainSize` popover is repositioned here when it does — except in the commit in which
-  // Floating UI received the floating element, the one right after the popover opened: it starts
-  // `autoUpdate` with a positioning pass there, and the boundary measured in the opening commit
-  // (`useBoundarySize`) lands in that same commit, so the max width changes there without needing
-  // a second pass. While closed there is no element to position. A layout effect is early enough
-  // to write the ref: Floating UI awaits the element measurements before it runs any middleware,
-  // so even the pass `autoUpdate` starts in this commit reads the ref one microtask later at the
-  // earliest.
+  // The middleware reads the boundaries and the max width through refs (see `useMiddleware` and
+  // `size.ts`), so a change of either does not reach Floating UI by itself: an open popover is
+  // repositioned here when they change, without tearing `autoUpdate` down — unless Floating UI
+  // runs a pass of its own in this commit anyway, which reads the refs: in the commit in which it
+  // received the floating element (the one right after the popover opened, where the boundary
+  // measured in the opening commit by `useBoundarySize` lands too) `autoUpdate` starts with a pass,
+  // and when `constrainSize` toggled the middleware changed and `autoUpdate` restarts with one.
+  // While closed there is no element to position. The max width is only read under
+  // `constrainSize`; React renders it otherwise. A layout effect is early enough to write that
+  // ref: Floating UI awaits the element measurements before it runs any middleware, so even the
+  // pass `autoUpdate` starts in this commit reads the ref one microtask later at the earliest.
   const reposition = useEffectEvent(() => update())
   const floatingElement = elements.floating
-  const positionedElementRef = useRef<HTMLElement | null>(null)
+  const positionedRef = useRef<{
+    constrainSize: boolean
+    element: HTMLElement | null
+    floatingBoundary: HTMLElement | null
+    maxWidth: number | undefined
+    referenceBoundary: HTMLElement | null
+  }>({
+    constrainSize: false,
+    element: null,
+    floatingBoundary: null,
+    maxWidth: undefined,
+    referenceBoundary: null,
+  })
 
   useLayoutEffect(() => {
     maxWidthRef.current = maxWidth
 
-    const positioned = floatingElement !== null && floatingElement === positionedElementRef.current
+    const previous = positionedRef.current
 
-    positionedElementRef.current = floatingElement
+    positionedRef.current = {
+      constrainSize,
+      element: floatingElement,
+      floatingBoundary,
+      maxWidth,
+      referenceBoundary,
+    }
 
-    if (constrainSize && positioned) reposition()
-  }, [constrainSize, floatingElement, maxWidth])
+    if (
+      floatingElement === null ||
+      floatingElement !== previous.element ||
+      constrainSize !== previous.constrainSize
+    ) {
+      return
+    }
+
+    const boundaryChanged =
+      floatingBoundary !== previous.floatingBoundary ||
+      referenceBoundary !== previous.referenceBoundary
+    const maxWidthChanged = constrainSize && maxWidth !== previous.maxWidth
+
+    if (boundaryChanged || maxWidthChanged) reposition()
+  }, [constrainSize, floatingBoundary, floatingElement, maxWidth, referenceBoundary])
 
   // Whether the popover (card, portal and `content`) has been rendered yet. Closed popovers
   // render inside a hidden `<Activity>`, so whatever is rendered while closed is pre-rendered DOM
@@ -538,6 +573,14 @@ function useMiddleware({
   referenceBoundary: HTMLElement | null
   rootBoundary: RootBoundary
 }) {
+  // The boundaries are read through refs when Floating UI runs the middleware (see
+  // `withBoundary`), so the middleware array keeps its identity when a boundary element changes —
+  // and with it `useFloating`'s `update` callback and `autoUpdate` subscription, which a new array
+  // would re-create and restart. The component repositions an open popover itself when a boundary
+  // changes (see `useLayoutEffect` in `Popover`).
+  const floatingBoundaryRef = useLatestRef(floatingBoundary)
+  const referenceBoundaryRef = useLatestRef(referenceBoundary)
+
   return useMemo(() => {
     const ret: Middleware[] = []
 
@@ -551,12 +594,13 @@ function useMiddleware({
         )
       } else {
         ret.push(
-          flip({
-            boundary: floatingBoundary || undefined,
-            fallbackPlacements,
-            padding: DEFAULT_POPOVER_PADDING,
-            rootBoundary,
-          }),
+          flip(
+            withBoundary(floatingBoundaryRef, {
+              fallbackPlacements,
+              padding: DEFAULT_POPOVER_PADDING,
+              rootBoundary,
+            }),
+          ),
         )
       }
     }
@@ -568,7 +612,7 @@ function useMiddleware({
     if (constrainSize || matchReferenceWidth) {
       ret.push(
         size({
-          boundaryElement: floatingBoundary || undefined,
+          boundaryRef: floatingBoundaryRef,
           constrainSize,
           margins,
           matchReferenceWidth,
@@ -581,11 +625,7 @@ function useMiddleware({
     // Shift the popover so its sits within the boundary element
     if (preventOverflow) {
       ret.push(
-        shift({
-          boundary: floatingBoundary || undefined,
-          rootBoundary,
-          padding: DEFAULT_POPOVER_PADDING,
-        }),
+        shift(withBoundary(floatingBoundaryRef, {rootBoundary, padding: DEFAULT_POPOVER_PADDING})),
       )
     }
 
@@ -606,11 +646,12 @@ function useMiddleware({
     }
 
     ret.push(
-      hide({
-        boundary: referenceBoundary || undefined,
-        padding: DEFAULT_POPOVER_PADDING,
-        strategy: 'referenceHidden',
-      }),
+      hide(
+        withBoundary(referenceBoundaryRef, {
+          padding: DEFAULT_POPOVER_PADDING,
+          strategy: 'referenceHidden',
+        }),
+      ),
     )
 
     return ret
@@ -620,14 +661,14 @@ function useMiddleware({
     arrowRef,
     constrainSize,
     fallbackPlacements,
-    floatingBoundary,
+    floatingBoundaryRef,
     margins,
     matchReferenceWidth,
     maxWidthRef,
     placementProp,
     placementStrategy,
     preventOverflow,
-    referenceBoundary,
+    referenceBoundaryRef,
     rootBoundary,
   ])
 }

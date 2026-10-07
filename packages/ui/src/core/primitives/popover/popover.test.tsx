@@ -7,7 +7,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {useState} from 'react'
+import {type CSSProperties, useState} from 'react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -588,33 +588,44 @@ describe('Popover', () => {
      * same unless `boundaryClientWidth` says otherwise, as a scrollbar would), the viewport's
      * client size, and the reference element's rect, `REFERENCE_WIDTH` wide
      */
+    /** Defines the layout sizes jsdom does not compute on a boundary element */
+    function defineBoundarySize(node: HTMLElement, width: number, clientWidth = width) {
+      for (const [name, value] of [
+        ['offsetWidth', width],
+        ['offsetHeight', 100],
+        ['clientWidth', clientWidth],
+        ['clientHeight', 100],
+      ] as const) {
+        Object.defineProperty(node, name, {configurable: true, value})
+      }
+    }
+
     function Example(
-      props: {boundaryWidth: number; boundaryClientWidth?: number} & Pick<
-        PopoverProps,
-        'constrainSize' | 'matchReferenceWidth' | 'open' | 'tone' | 'width'
-      >,
+      props: {
+        boundaryWidth: number
+        boundaryClientWidth?: number
+        /** A boundary element of the test's own, instead of the one the example renders */
+        boundaryElement?: HTMLElement
+        style?: CSSProperties
+      } & Pick<PopoverProps, 'constrainSize' | 'matchReferenceWidth' | 'open' | 'tone' | 'width'>,
     ) {
-      const {boundaryWidth, boundaryClientWidth = boundaryWidth, ...popoverProps} = props
+      const {
+        boundaryWidth,
+        boundaryClientWidth = boundaryWidth,
+        boundaryElement,
+        ...popoverProps
+      } = props
       const [boundary, setBoundary] = useState<HTMLDivElement | null>(null)
 
       return (
         <div
           data-testid="boundary"
           ref={(node) => {
-            if (node) {
-              for (const [name, value] of [
-                ['offsetWidth', boundaryWidth],
-                ['offsetHeight', 100],
-                ['clientWidth', boundaryClientWidth],
-                ['clientHeight', 100],
-              ] as const) {
-                Object.defineProperty(node, name, {configurable: true, value})
-              }
-            }
+            if (node) defineBoundarySize(node, boundaryWidth, boundaryClientWidth)
             setBoundary(node)
           }}
         >
-          <BoundaryElementProvider element={boundary}>
+          <BoundaryElementProvider element={boundaryElement ?? boundary}>
             <Popover content={content} {...popoverProps}>
               <Button
                 ref={(node) => {
@@ -787,6 +798,62 @@ describe('Popover', () => {
         expect(passes()).toBe(3)
       },
     )
+
+    it('repositions once when `constrainSize` is turned on, with Floating UI restarting `autoUpdate`', async () => {
+      const {rerender} = render(<Example boundaryClientWidth={285} boundaryWidth={300} open />, {
+        strict: false,
+      })
+      await settle()
+
+      const card = cardElement()!
+
+      // React's cap
+      expect(card.style.maxWidth).toBe('292px')
+      expect(passes()).toBe(1)
+
+      rerender(<Example boundaryClientWidth={285} boundaryWidth={300} constrainSize open />)
+      await settle()
+
+      // The changed middleware restarts `autoUpdate` with a pass that writes the room within the
+      // boundary; the popover must not add a pass of its own for the cap in the same commit
+      expect(card.style.maxWidth).toBe('277px')
+      expect(card.style.maxHeight).toBe('72px')
+      expect(passes()).toBe(2)
+    })
+
+    it('repositions an open popover against a swapped boundary element', async () => {
+      // Plain elements, which `useFloating`'s deep comparison cannot tell apart (no own enumerable
+      // properties): the middleware reads the boundary through a ref and the popover repositions
+      // for the swap itself, so Floating UI need not notice
+      const boundaries = [300, 200].map((clientWidth) => {
+        const element = document.createElement('div')
+
+        defineBoundarySize(element, 300, clientWidth)
+        document.body.appendChild(element)
+
+        return element
+      })
+
+      const {rerender} = render(
+        <Example boundaryElement={boundaries[0]} boundaryWidth={300} constrainSize open />,
+        {strict: false},
+      )
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.style.maxWidth).toBe('292px')
+      expect(passes()).toBe(1)
+
+      rerender(<Example boundaryElement={boundaries[1]} boundaryWidth={300} constrainSize open />)
+      await settle()
+
+      // One pass, which clipped to the new boundary's room (the cap stayed at `292`)
+      expect(card.style.maxWidth).toBe('192px')
+      expect(passes()).toBe(2)
+
+      for (const element of boundaries) element.remove()
+    })
 
     it('clears the max height and takes the max width back once `constrainSize` is turned off', async () => {
       // A boundary with a scrollbar: the room within it (its client width) is narrower than the

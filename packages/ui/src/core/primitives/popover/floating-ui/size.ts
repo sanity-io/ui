@@ -1,9 +1,11 @@
 import {detectOverflow, Middleware} from '@floating-ui/react-dom'
 
+import {ElementRef} from '../../../middleware/withBoundary'
 import {PopoverMargins} from '../../../types/popover'
 
 interface SizeOptions {
-  boundaryElement?: HTMLElement | null
+  /** The boundary element to fit within, read on every positioning pass (see `withBoundary`) */
+  boundaryRef: ElementRef
   constrainSize: boolean
   margins: PopoverMargins
   matchReferenceWidth?: boolean
@@ -27,16 +29,23 @@ interface SizeOptions {
  * again (see `Popover`).
  */
 export function size(options: SizeOptions): Middleware {
-  const {constrainSize, margins, matchReferenceWidth, maxWidthRef, padding = 0} = options
+  const {
+    boundaryRef,
+    constrainSize,
+    margins,
+    matchReferenceWidth,
+    maxWidthRef,
+    padding = 0,
+  } = options
 
   return {
     name: '@sanity/ui/size',
     // `useFloating` tells a changed middleware array from an unchanged one by comparing the arrays
     // deeply, functions by their source, so a middleware that keeps its inputs to itself can never
     // change in its eyes. Exposing them the way Floating UI's own middleware do makes a change of
-    // `constrainSize`, `matchReferenceWidth`, the margins or the boundary reach the next pass.
-    // (`maxWidthRef` is the same object on every render, so its value changing does not count as
-    // a change — on purpose, see above.)
+    // `constrainSize`, `matchReferenceWidth` or the margins reach the next pass. (The two refs are
+    // the same objects on every render, so their values changing does not count as a change — on
+    // purpose: the popover repositions itself for those, see `Popover`.)
     options,
     async fn(args) {
       const {elements, placement, platform, rects} = args
@@ -44,7 +53,7 @@ export function size(options: SizeOptions): Middleware {
 
       const overflow = await detectOverflow(args, {
         altBoundary: true,
-        boundary: options.boundaryElement || undefined,
+        boundary: boundaryRef.current || undefined,
         elementContext: 'floating',
         padding,
         rootBoundary: 'viewport',

@@ -18,7 +18,6 @@ import {
   useEffect,
   useId,
   useImperativeHandle,
-  useInsertionEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -33,8 +32,10 @@ import {useEffectEvent} from 'use-effect-event'
 
 import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {useDelayedState} from '../../hooks/useDelayedState'
+import {useLatestRef} from '../../hooks/useLatestRef'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
+import {type ElementRef, withBoundary} from '../../middleware/withBoundary'
 import {_getArrayProp} from '../../styles/helpers'
 import {useTheme_v2} from '../../theme/useTheme'
 import type {Placement} from '../../types/placement'
@@ -404,43 +405,15 @@ export function Tooltip(
 }
 
 /**
- * A ref that always holds the latest `value`, updated before any layout effect of the same commit
- * runs (the same mechanism `use-effect-event` uses), for callbacks that run outside render.
- */
-function useLatestRef<T>(value: T): React.RefObject<T> {
-  const ref = useRef(value)
-
-  useInsertionEffect(() => {
-    ref.current = value
-  }, [value])
-
-  return ref
-}
-
-type ElementRef = React.RefObject<HTMLElement | null>
-
-/**
- * Derivable middleware options that read the boundary element from a ref. Floating UI evaluates
- * them inside `computePosition`, which is when the ref is read — never during render.
- *
- * Built at module scope, like `sizeMiddleware` below: a `ref.current` read inside a callback
- * created during render makes the React Compiler skip the calling function, since it cannot tell
- * when the callback runs.
- */
-function withBoundary<Options extends object>(
-  boundaryRef: ElementRef,
-  options: Options,
-): () => Options & {boundary: HTMLElement | undefined} {
-  return () => ({...options, boundary: boundaryRef.current || undefined})
-}
-
-/**
  * Caps the tooltip width to the room it is positioned in: the boundary element (or the clipping
  * ancestors when there is none), always within the viewport, and the portal element's width.
  * Floating UI measures inside its own positioning pass — only while the tooltip is shown, never
  * during render or on mount — and the width is written straight to the element, so no state or
  * layout effect is involved. Placed after `shift` so `availableWidth` is the full clipping width
  * for top and bottom placements; for left and right placements it is the room on that side.
+ *
+ * Built at module scope, like `withBoundary`: a `ref.current` read inside a callback created
+ * during render makes the React Compiler skip the calling function.
  */
 function sizeMiddleware({
   boundaryRef,
