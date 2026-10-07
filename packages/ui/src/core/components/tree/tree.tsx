@@ -37,8 +37,9 @@ export function Tree(
   const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
   const path: string[] = useMemo(() => [], [])
   const [state, setState] = useState<TreeState>({})
-  // Set by a pointer press and consumed by the focus event it causes, so that a press on the tree
-  // element itself (between the items) leaves focus there instead of moving it to the first item
+  // Whether a pointer press is in progress: set on `mousedown`, cleared when the button is released
+  // anywhere in the document. The focus a press moves is dispatched in between, so `handleFocus`
+  // can tell a press on the tree element itself (between the items) from keyboard focus
   const pointerDownRef = useRef(false)
 
   useImperativeHandle<HTMLUListElement | null, HTMLUListElement | null>(
@@ -195,25 +196,33 @@ export function Tree(
     [setExpanded, state, tabStop],
   )
 
+  const clearPointerDown = useCallback(() => {
+    pointerDownRef.current = false
+  }, [])
+
   const handleMouseDown = useCallback(
     (event: React.MouseEvent<HTMLUListElement>) => {
       pointerDownRef.current = true
+      // A press that moves focus nowhere (on the focused item, or on the tree element while it is
+      // not focusable) never gets a focus event to clear the flag, and the button may be released
+      // outside of the tree, so it is cleared from the document. `once` removes the listener,
+      // and adding the same listener again is a no-op.
+      event.currentTarget.ownerDocument.addEventListener('mouseup', clearPointerDown, {
+        capture: true,
+        once: true,
+      })
       onMouseDown?.(event)
     },
-    [onMouseDown],
+    [clearPointerDown, onMouseDown],
   )
 
   const handleFocus = useCallback(
     (event: React.FocusEvent<HTMLUListElement>) => {
-      const pointerDown = pointerDownRef.current
-
-      pointerDownRef.current = false
-
       if (event.target === event.currentTarget) {
         // The tree element is only focusable while no item is the tab stop (see `tabStop`).
         // Keyboard focus is passed on to the first item, which then reports its own focus here; a
         // pointer press on the tree element itself (between the items) leaves focus where it is.
-        if (!pointerDown) {
+        if (!pointerDownRef.current) {
           const [firstItemElement] = _getItemElements(event.currentTarget)
 
           if (firstItemElement) _focusItemElement(firstItemElement)

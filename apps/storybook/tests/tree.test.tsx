@@ -89,6 +89,10 @@ describe('Components/Tree', () => {
     await expect.poll(() => document.activeElement).toBe(tree())
     expect(document.querySelector('[data-testid="a"]')).toHaveAttribute('tabindex', '-1')
 
+    // A second press moves focus nowhere, so no focus event follows it
+    await userEvent.click(tree(), {position: {x: 10, y: 10}})
+    await expect.poll(() => document.activeElement).toBe(tree())
+
     // Keyboard focus is still passed on afterwards
     document.querySelector<HTMLElement>('[data-testid="before"]')!.focus()
     await userEvent.tab()

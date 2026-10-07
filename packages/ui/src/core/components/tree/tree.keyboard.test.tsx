@@ -168,6 +168,68 @@ describe('components/tree tab stop', () => {
     expect(focusedItem()).toBe('fruit')
   })
 
+  it('passes keyboard focus on after a second press on the focused tree element', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    const tree = screen.getByRole('tree')
+
+    await user.click(tree)
+    expect(tree).toHaveFocus()
+
+    // Focus does not move, so no focus event follows this press
+    await user.click(tree)
+    expect(tree).toHaveFocus()
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+
+    expect(focusedItem()).toBe('fruit')
+  })
+
+  it('passes keyboard focus on after a press on the focused item', async () => {
+    const user = userEvent.setup()
+
+    render(<DynamicTree />)
+
+    await user.click(screen.getByTestId('b'))
+    expect(focusedItem()).toBe('b')
+
+    // Focus does not move, so no focus event follows this press
+    await user.click(screen.getByTestId('b'))
+    expect(focusedItem()).toBe('b')
+
+    await user.click(screen.getByTestId('remove-first'))
+    expect(screen.queryByTestId('b')).toBeNull()
+
+    await user.tab()
+    expect(focusedItem()).toBe('c')
+  })
+
+  it('passes keyboard focus on after a press between the items while an item held the tab stop', async () => {
+    const user = userEvent.setup()
+
+    render(<DynamicTree />)
+
+    const tree = screen.getByRole('tree')
+
+    await user.click(screen.getByTestId('b'))
+    expect(focusedItem()).toBe('b')
+    expect(tree).not.toHaveAttribute('tabindex')
+
+    // The tree element is not focusable now, so this press moves focus to nowhere in the tree
+    await user.click(tree)
+    expect(tree).not.toHaveFocus()
+    expect(screen.getByTestId('b')).not.toHaveFocus()
+
+    await user.click(screen.getByTestId('remove-first'))
+    expect(screen.queryByTestId('b')).toBeNull()
+
+    await user.tab()
+    expect(focusedItem()).toBe('c')
+  })
+
   it('calls `onFocus` for the items, not for the tree element passing focus on', async () => {
     const user = userEvent.setup()
     const onFocus = vi.fn<(event: React.FocusEvent<HTMLUListElement>) => void>()
