@@ -197,10 +197,14 @@ export function Tree(
 
   const handleMouseDown = useCallback(
     (event: React.MouseEvent<HTMLUListElement>) => {
-      pointerDownRef.current = true
+      // Only a press that is about to focus the tree element sets the flag: one that lands while
+      // the tree element holds the tab stop and is not focused yet. Any other press causes no
+      // focus event to consume the flag, so it clears it instead of leaving it set for a later
+      // keyboard focus
+      pointerDownRef.current = !tabStop && document.activeElement !== event.currentTarget
       onMouseDown?.(event)
     },
-    [onMouseDown],
+    [onMouseDown, tabStop],
   )
 
   const handleFocus = useCallback(

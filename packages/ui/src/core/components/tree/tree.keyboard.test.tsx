@@ -168,6 +168,24 @@ describe('components/tree tab stop', () => {
     expect(focusedItem()).toBe('fruit')
   })
 
+  it('passes focus on after a press that moves no focus at all', async () => {
+    const user = userEvent.setup()
+
+    render(<FruitTree />)
+
+    const tree = screen.getByRole('tree')
+
+    // The second press between the items fires no focus event, the tree element being focused
+    await user.click(tree)
+    await user.click(tree)
+    expect(tree).toHaveFocus()
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+
+    expect(focusedItem()).toBe('fruit')
+  })
+
   it('calls `onFocus` for the items, not for the tree element passing focus on', async () => {
     const user = userEvent.setup()
     const onFocus = vi.fn<(event: React.FocusEvent<HTMLUListElement>) => void>()
@@ -395,5 +413,23 @@ describe('components/tree dynamic items', () => {
     expect(focusedItem()).toBe('c')
     expect(screen.getByTestId('c')).toHaveAttribute('tabindex', '0')
     expect(tree).not.toHaveAttribute('tabindex')
+  })
+
+  it('takes the tab stop back after a press between the items', async () => {
+    const user = userEvent.setup()
+
+    render(<DynamicTree />)
+
+    await user.click(screen.getByTestId('b'))
+
+    // The tree element is not focusable while an item is the tab stop, so the press leaves the
+    // tree without moving focus to it
+    await user.click(screen.getByRole('tree'))
+
+    await user.click(screen.getByTestId('remove-first'))
+    expect(screen.queryByTestId('b')).toBeNull()
+
+    await user.tab()
+    expect(focusedItem()).toBe('c')
   })
 })
