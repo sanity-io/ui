@@ -1,6 +1,7 @@
-import {cloneElement, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react'
+import {cloneElement, useCallback, useMemo, useRef, useState} from 'react'
 
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
+import {attachRef} from '../../utils/attachRef'
 import {MenuProps} from './menu'
 
 /**
@@ -68,8 +69,17 @@ export function MenuButton(props: MenuButtonProps) {
   } = props
   const [open, setOpen] = useOpenState(onOpen, onClose)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
-  const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
-  const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
+  // The button that opened the menu, set as it opens: the menu's `Tab` handling returns focus to
+  // it, and so does closing with Escape or an item click. The button used to be set into state
+  // from its ref callback instead, which React schedules at Immediate priority as the callback
+  // runs in the commit phase — on mount, on unmount, and each time an `<Activity>` hides or shows
+  // the button — and commits as soon as a view transition that reveals or hides the button is
+  // ready to animate, delaying its first frame; should anything flush sync work while the browser
+  // is still preparing the transition, such a pending update is what makes React cancel it. The
+  // forwarded ref is attached to the button directly, so it holds the element from the commit
+  // that mounts it on.
+  const [originElement, setOriginElement] = useState<HTMLButtonElement | null>(null)
+  const menuElements = useMenuElements()
   const {
     onClick: onButtonClick,
     onKeyDown: onButtonKeyDown,
@@ -82,6 +92,7 @@ export function MenuButton(props: MenuButtonProps) {
       if (event.defaultPrevented) return
       setOpen((v) => !v)
       setShouldFocus(null)
+      setOriginElement(event.currentTarget)
     },
     [onButtonClick, setOpen],
   )
@@ -108,6 +119,7 @@ export function MenuButton(props: MenuButtonProps) {
         event.preventDefault()
         setOpen(true)
         setShouldFocus('first')
+        setOriginElement(event.currentTarget)
 
         return
       }
@@ -118,6 +130,7 @@ export function MenuButton(props: MenuButtonProps) {
         event.preventDefault()
         setOpen(true)
         setShouldFocus('last')
+        setOriginElement(event.currentTarget)
 
         return
       }
@@ -133,22 +146,20 @@ export function MenuButton(props: MenuButtonProps) {
         return
       }
 
-      if (buttonElement && (target === buttonElement || buttonElement.contains(target))) {
+      if (originElement && (target === originElement || originElement.contains(target))) {
         return
       }
 
-      for (const el of menuElements) {
-        if (target === el || el.contains(target)) {
-          return
-        }
+      if (menuElements.contains(target)) {
+        return
       }
 
       setOpen(false)
     },
-    [buttonElement, menuElements, setOpen],
+    [menuElements, originElement, setOpen],
   )
 
-  const returnFocusTo = disableRestoreFocusOnClose ? null : buttonElement
+  const returnFocusTo = disableRestoreFocusOnClose ? null : originElement
 
   const handleMenuEscape = useCallback(() => {
     setOpen(false, returnFocusTo)
@@ -162,10 +173,8 @@ export function MenuButton(props: MenuButtonProps) {
         return
       }
 
-      for (const el of menuElements) {
-        if (el === target || el.contains(target)) {
-          return
-        }
+      if (menuElements.contains(target)) {
+        return
       }
 
       setOpen(false)
@@ -177,24 +186,22 @@ export function MenuButton(props: MenuButtonProps) {
     setOpen(false, returnFocusTo)
   }, [returnFocusTo, setOpen])
 
-  const registerElement = useCallback((el: HTMLElement) => {
-    setChildMenuElements((els) => els.concat([el]))
-
-    return () => setChildMenuElements((els) => els.filter((_el) => _el !== el))
-  }, [])
-
   const menuProps: MenuProps = {
     'aria-labelledby': id,
     'onBlurCapture': handleBlur,
     'onClickOutside': handleMenuClickOutside,
     'onEscape': handleMenuEscape,
     'onItemClick': handleItemClick,
-    'originElement': buttonElement,
-    registerElement,
+    originElement,
+    'registerElement': menuElements.register,
     shouldFocus,
   }
 
   const menu = menuProp && cloneElement(menuProp, menuProps)
+
+  // The button's ref callback attaches the forwarded ref to the button, from the commit that
+  // mounts it on. `Popover` clones the button once more and attaches this callback from its own.
+  const setButton = useForwardedRefCallback(forwardedRef)
 
   const button = useMemo(
     () =>
@@ -207,17 +214,10 @@ export function MenuButton(props: MenuButtonProps) {
         'onMouseDown': handleMouseDown,
         'aria-haspopup': true,
         'aria-expanded': open,
-        'ref': setButtonElement,
+        'ref': setButton,
         'selected': buttonProp.props.selected ?? open,
       }),
-    [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open],
-  )
-
-  // Forward button ref to parent
-  useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
-    forwardedRef,
-    () => buttonElement,
-    [buttonElement],
+    [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open, setButton],
   )
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
@@ -265,4 +265,59 @@ function useOpenState(onOpen?: () => void, onClose?: () => void) {
   )
 
   return [open, setOpen] as const
+}
+
+/**
+ * A ref callback that attaches the forwarded ref to the button, with React's semantics for a
+ * `ref` prop: a new callback whenever the forwarded ref changes, so that React detaches the old
+ * ref and attaches the new one. A hook of its own because the React Compiler takes a ref — or a
+ * callback that accesses one — for a possible read during render wherever it flows into a plain
+ * call such as `cloneElement` in `MenuButton`, and would skip the component; the result of a hook
+ * call carries no such mark.
+ */
+function useForwardedRefCallback(
+  forwardedRef: React.Ref<HTMLButtonElement | null> | undefined,
+): (node: HTMLButtonElement) => () => void {
+  return useCallback((node: HTMLButtonElement) => attachRef(forwardedRef, node), [forwardedRef])
+}
+
+interface MenuElements {
+  /** Whether `target` is one of the registered menu elements or inside one */
+  contains: (target: Node) => boolean
+  /** Registers a menu (or nested menu) element, until the returned function is called */
+  register: (element: HTMLElement) => () => void
+}
+
+/**
+ * The elements of the menu and its nested menus, which `Menu` registers from its ref callback
+ * (`registerElement`), kept in a ref: the click-outside and blur handlers read them when they
+ * run, nothing reads them during render. Registering used to set them into state, an update at
+ * Immediate priority (a ref callback runs in the commit phase) in the commit that opened the menu.
+ * A hook of its own because the React Compiler takes a callback that accesses refs for a possible
+ * read during render wherever it flows into a plain call — `cloneElement` in `MenuButton` — and
+ * would skip the component, since it cannot tell when the callback runs; the result of a hook
+ * call carries no such mark.
+ */
+function useMenuElements(): MenuElements {
+  const elementsRef = useRef(new Set<HTMLElement>())
+
+  return useMemo(
+    () => ({
+      contains: (target) => {
+        for (const element of elementsRef.current) {
+          if (target === element || element.contains(target)) return true
+        }
+
+        return false
+      },
+      register: (element) => {
+        elementsRef.current.add(element)
+
+        return () => {
+          elementsRef.current.delete(element)
+        }
+      },
+    }),
+    [],
+  )
 }
