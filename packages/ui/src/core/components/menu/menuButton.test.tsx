@@ -200,19 +200,39 @@ describe('MenuButton', () => {
       expect(ref.current).toBeNull()
     })
 
-    it('attaches a forwarded callback ref, and calls it with `null` on unmount', () => {
+    it('attaches a forwarded callback ref once, keeps it across renders, and calls it with `null` on unmount', () => {
       const callbackRef = vi.fn()
+      const menuButton = (
+        <MenuButton
+          button={<Button text="Open menu" />}
+          id="menu-button"
+          menu={
+            <Menu>
+              <MenuItem text="Option 1" />
+            </Menu>
+          }
+          ref={callbackRef}
+        />
+      )
 
-      const {unmount} = renderMenuButton({ref: callbackRef})
+      // Without `StrictMode`, whose double-invoked mount effects would call the ref three times
+      const {rerender, unmount} = render(menuButton, {strict: false})
 
       const button = getButton()
 
-      expect(callbackRef).toHaveBeenCalledWith(button)
-      expect(callbackRef.mock.lastCall).toEqual([button])
+      expect(callbackRef.mock.calls).toEqual([[button]])
+
+      // Neither a re-render nor opening and closing the menu detaches and attaches it again
+      rerender(menuButton)
+      fireEvent.click(getButton())
+      expectMenuVisible()
+      fireEvent.click(getButton())
+
+      expect(callbackRef.mock.calls).toEqual([[button]])
 
       unmount()
 
-      expect(callbackRef.mock.lastCall).toEqual([null])
+      expect(callbackRef.mock.calls).toEqual([[button], [null]])
     })
 
     it('returns focus to the button that opened the menu when it closes with Escape', () => {

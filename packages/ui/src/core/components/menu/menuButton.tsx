@@ -1,7 +1,14 @@
-import {cloneElement, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {
+  cloneElement,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
-import {attachRef} from '../../utils/attachRef'
 import {MenuProps} from './menu'
 
 /**
@@ -71,8 +78,7 @@ export function MenuButton(props: MenuButtonProps) {
   // the button — and commits as soon as a view transition that reveals or hides the button is
   // ready to animate, delaying its first frame; should anything flush sync work while the browser
   // is still preparing the transition, such a pending update is what makes React cancel it. The
-  // forwarded ref is attached to the button directly, so it holds the element from the commit
-  // that mounts it on.
+  // button element itself lives in a ref (see `setButton` below).
   const [originElement, setOriginElement] = useState<HTMLButtonElement | null>(null)
   const menuElements = useMenuElements()
   const openRef = useRef<boolean>(open)
@@ -198,9 +204,20 @@ export function MenuButton(props: MenuButtonProps) {
 
   const menu = menuProp && cloneElement(menuProp, menuProps)
 
-  // The button's ref callback attaches the forwarded ref to the button, from the commit that
-  // mounts it on. `Popover` clones the button once more and attaches this callback from its own.
-  const setButton = useForwardedRefCallback(forwardedRef)
+  // The button element, for the forwarded ref below. `Popover` clones the button once more and
+  // attaches this callback from its own.
+  const buttonRef = useRef<HTMLButtonElement | null>(null)
+  const setButton = useButtonRefCallback(buttonRef)
+
+  // Forwarded from the same commit as the one that mounts the button, since the handle of a
+  // parent runs after the refs of its children attached. Not composed into `setButton` itself:
+  // `Popover` re-runs the child ref it is given on every render, which would detach and attach a
+  // consumer's callback ref each time.
+  useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
+    forwardedRef,
+    () => buttonRef.current,
+    [],
+  )
 
   const button = useMemo(
     () =>
@@ -237,17 +254,27 @@ export function MenuButton(props: MenuButtonProps) {
 }
 
 /**
- * A ref callback that attaches the forwarded ref to the button, with React's semantics for a
- * `ref` prop: a new callback whenever the forwarded ref changes, so that React detaches the old
- * ref and attaches the new one. A hook of its own because the React Compiler takes a ref — or a
- * callback that accesses one — for a possible read during render wherever it flows into a plain
- * call such as `cloneElement` in `MenuButton`, and would skip the component; the result of a hook
- * call carries no such mark.
+ * The ref callback for the button, keeping its element in `buttonRef`. A hook of its own, with
+ * the ref access in the module-scope function below, because the React Compiler takes a callback
+ * that accesses refs for a possible read during render wherever it flows into a plain call such
+ * as `cloneElement` in `MenuButton`, and would skip the component; the result of a hook call
+ * carries no such mark.
  */
-function useForwardedRefCallback(
-  forwardedRef: React.Ref<HTMLButtonElement | null> | undefined,
+function useButtonRefCallback(
+  buttonRef: React.RefObject<HTMLButtonElement | null>,
 ): (node: HTMLButtonElement) => () => void {
-  return useCallback((node: HTMLButtonElement) => attachRef(forwardedRef, node), [forwardedRef])
+  return useCallback((node: HTMLButtonElement) => attachButton(node, buttonRef), [buttonRef])
+}
+
+function attachButton(
+  node: HTMLButtonElement,
+  buttonRef: React.RefObject<HTMLButtonElement | null>,
+): () => void {
+  buttonRef.current = node
+
+  return () => {
+    buttonRef.current = null
+  }
 }
 
 interface MenuElements {
