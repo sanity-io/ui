@@ -391,7 +391,18 @@ export function Popover(
 
   // If there's a child then we need to set the reference element to the cloned child ref
   // and if child changes we make sure to update or remove the reference element.
-  useImperativeHandle(childProp ? getElementRef(childProp) : null, () => refs.reference.current)
+  //
+  // `refs.reference` leads `elements.reference` by a render — it holds the element from the
+  // commit that attaches it — so the handle reads the ref and takes the state as the dependency
+  // that re-runs it when the reference element changes. Without a dependency array the handle
+  // runs on every commit, detaching and attaching a callback ref the child was given (the `ref`
+  // `MenuButton` forwards to its button, among others) every time the popover opens, closes or
+  // repositions.
+  useImperativeHandle(
+    childProp ? getElementRef(childProp) : null,
+    () => refs.reference.current ?? elements.reference,
+    [elements.reference, refs],
+  )
 
   const child = useMemo(() => {
     // If a reference element is defined, we don't need to clone the child

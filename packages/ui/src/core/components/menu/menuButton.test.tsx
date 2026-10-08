@@ -215,6 +215,24 @@ describe('MenuButton', () => {
       expect(callbackRef.mock.lastCall).toEqual([null])
     })
 
+    it('leaves a forwarded callback ref attached as the menu opens and closes', () => {
+      const callbackRef = vi.fn()
+
+      renderMenuButton({ref: callbackRef})
+
+      const button = getButton()
+
+      callbackRef.mockClear()
+
+      fireEvent.click(button)
+      expectMenuVisible()
+
+      fireEvent.click(button)
+      expectMenuRenderedHidden()
+
+      expect(callbackRef).not.toHaveBeenCalled()
+    })
+
     it('returns focus to the button that opened the menu when it closes with Escape', () => {
       renderMenuButton()
 
