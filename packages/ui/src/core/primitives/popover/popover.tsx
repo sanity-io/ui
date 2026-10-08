@@ -102,6 +102,27 @@ export interface PopoverProps
    * @defaultValue false
    */
   modal?: boolean
+  /**
+   * Whether the popover is open.
+   *
+   * Set it inside `startTransition`. A closed popover pre-renders its content hidden, in a
+   * transition, once the reference element shows intent to open it (focus, a pointer entering or
+   * pressing it). Opening in a transition too lets React keep rendering that content in the
+   * background when the open comes before it is done, instead of rendering it synchronously in the
+   * click. Content that was pre-rendered already shows in the first frame after the click either
+   * way.
+   *
+   * ```tsx
+   * const [open, setOpen] = useState(false)
+   *
+   * <Popover content={content} open={open}>
+   *   <Button onClick={() => startTransition(() => setOpen((isOpen) => !isOpen))} text="Toggle" />
+   * </Popover>
+   * ```
+   *
+   * Wrap the state update itself: a `startTransition` around code that schedules the update for
+   * later (a timeout) does not reach it.
+   */
   open?: boolean
   overflow?: BoxOverflow
   padding?: number | number[]
