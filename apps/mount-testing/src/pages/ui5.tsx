@@ -13,11 +13,13 @@ import {
   Flex,
   Grid,
   Heading,
+  Hotkeys,
   HStack,
   Icon,
   IconButton,
   Indicator,
   IndicatorStack,
+  KBD,
   Label,
   Link,
   List,
@@ -311,6 +313,20 @@ export default function Ui5() {
       <Profiler id="Badge" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Badge key={i} text="Badge" />
+        ))}
+      </Profiler>
+
+      <h2>{count} KBDs</h2>
+      <Profiler id="KBD" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <KBD key={i} text="A" />
+        ))}
+      </Profiler>
+
+      <h2>{count} Hotkeys</h2>
+      <Profiler id="Hotkeys" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Hotkeys key={i} keys={['A', 'B', 'C']} />
         ))}
       </Profiler>
 
