@@ -1,0 +1,5 @@
+.sui-Hotkeys {
+  /* Half a space step, as in Sanity UI 4. The space scale has no half step. */
+  gap: calc(var(--space-1) / 2);
+  font: inherit;
+}
