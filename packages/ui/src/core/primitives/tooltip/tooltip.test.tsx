@@ -6,6 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
+import {Profiler, useLayoutEffect} from 'react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -499,6 +500,103 @@ describe('Tooltip', () => {
     it('should fire the onMouseLeave event', () => {
       fireEvent.mouseLeave(screen.getByTestId('btn'))
       expect(handleMouseLeave).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('The referred element', () => {
+    const content = <Text size={1}>{'Tooltip content'}</Text>
+
+    /**
+     * Mounting used to schedule a second commit from the first one: the ref callback set the
+     * element into state, in the commit phase, at Immediate priority (a "nested update" to the
+     * profiler), which also held up the first frame of any view transition revealing the element.
+     * The element now lives in a ref, which nothing needs to re-render for. What remains is the
+     * pass in which React renders the content of the hidden `Activity` the closed tooltip is in,
+     * which a bare `<Activity mode="hidden">` gets as well.
+     */
+    it('schedules no follow-up commit for the referred element when it mounts', () => {
+      const onRender = vi.fn()
+
+      render(
+        <Profiler id="tooltip" onRender={onRender}>
+          <Tooltip content={content}>
+            <Button mode="bleed" text="Hover me" />
+          </Tooltip>
+        </Profiler>,
+        {strict: false},
+      )
+
+      expect(onRender.mock.calls.map((call) => call[1])).toEqual(['mount', 'update'])
+
+      // The element is known all the same: hovering positions and shows the tooltip against it
+      fireEvent.mouseEnter(screen.getByText('Hover me'))
+      expectTooltipVisible('Tooltip content')
+    })
+
+    it('attaches the child’s own object ref from the commit that mounts it', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      // Read in a layout effect of a parent, which runs in the same commit, after the ref attached
+      const seenInLayoutEffect: (HTMLElement | null)[] = []
+
+      function Parent() {
+        useLayoutEffect(() => {
+          seenInLayoutEffect.push(ref.current)
+        }, [])
+
+        return (
+          <Tooltip content={content}>
+            <Button mode="bleed" ref={ref} text="Hover me" />
+          </Tooltip>
+        )
+      }
+
+      const {unmount} = render(<Parent />, {strict: false})
+
+      expect(ref.current).toBe(screen.getByRole('button', {name: 'Hover me'}))
+      expect(seenInLayoutEffect).toEqual([ref.current])
+
+      unmount()
+
+      expect(ref.current).toBeNull()
+    })
+
+    it('attaches the child’s own callback ref, and runs the cleanup it returns on unmount', () => {
+      const cleanup = vi.fn()
+      const callbackRef = vi.fn((_node: HTMLButtonElement | null) => cleanup)
+
+      const {unmount} = render(
+        <Tooltip content={content}>
+          <Button mode="bleed" ref={callbackRef} text="Hover me" />
+        </Tooltip>,
+        {strict: false},
+      )
+
+      expect(callbackRef).toHaveBeenCalledTimes(1)
+      expect(callbackRef).toHaveBeenCalledWith(screen.getByRole('button', {name: 'Hover me'}))
+      expect(cleanup).not.toHaveBeenCalled()
+
+      unmount()
+
+      // React 19 semantics: a callback ref that returned a cleanup is not called with `null`
+      expect(cleanup).toHaveBeenCalledTimes(1)
+      expect(callbackRef).toHaveBeenCalledTimes(1)
+    })
+
+    it('calls a callback ref without cleanup with `null` on unmount', () => {
+      const callbackRef = vi.fn()
+
+      const {unmount} = render(
+        <Tooltip content={content}>
+          <Button mode="bleed" ref={callbackRef} text="Hover me" />
+        </Tooltip>,
+        {strict: false},
+      )
+
+      const button = screen.getByRole('button', {name: 'Hover me'})
+
+      unmount()
+
+      expect(callbackRef.mock.calls).toEqual([[button], [null]])
     })
   })
 

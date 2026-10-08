@@ -6,7 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {useState} from 'react'
+import {Profiler, useState} from 'react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -400,6 +400,80 @@ describe('Popover', () => {
       fireEvent.focusIn(reference)
 
       expectRenderedHidden()
+    })
+  })
+
+  describe('the reference element', () => {
+    /**
+     * Mounting used to schedule a second commit from the first one: Floating UI's ref callback
+     * set the element into state, in the commit phase, at Immediate priority (a "nested update"
+     * to the profiler), which also held up the first frame of any view transition revealing the
+     * element. The element now lives in a ref, which nothing needs to re-render for; Floating UI
+     * is handed it when the popover opens. What remains is the pass in which React renders the
+     * (empty) content of the hidden `Activity` the closed popover is in, which a bare
+     * `<Activity mode="hidden">` gets as well.
+     */
+    it('schedules no follow-up commit for the reference element when it mounts', () => {
+      const onRender = vi.fn()
+
+      const {rerender} = render(
+        <Profiler id="popover" onRender={onRender}>
+          <Popover content={content}>
+            <Button text="Reference" />
+          </Popover>
+        </Profiler>,
+        {strict: false},
+      )
+
+      expect(onRender.mock.calls.map((call) => call[1])).toEqual(['mount', 'update'])
+
+      // Floating UI receives the element along with the card, as the popover opens
+      rerender(
+        <Profiler id="popover" onRender={onRender}>
+          <Popover content={content} open>
+            <Button text="Reference" />
+          </Popover>
+        </Profiler>,
+      )
+
+      expectVisible()
+    })
+
+    it('attaches the child’s own ref from the commit that mounts it', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      const callbackRef = vi.fn()
+
+      const {rerender, unmount} = render(
+        <Popover content={content}>
+          <Button ref={ref} text="Reference" />
+        </Popover>,
+        {strict: false},
+      )
+
+      expect(ref.current).toBe(getReference())
+
+      // Re-rendering does not detach and attach the ref again
+      rerender(
+        <Popover content={content}>
+          <Button ref={callbackRef} text="Reference" />
+        </Popover>,
+      )
+
+      // A new ref is attached (and the old one detached) the way React does it for a ref prop
+      expect(ref.current).toBeNull()
+      expect(callbackRef.mock.calls).toEqual([[getReference()]])
+
+      rerender(
+        <Popover content={content}>
+          <Button ref={callbackRef} text="Reference" />
+        </Popover>,
+      )
+
+      expect(callbackRef).toHaveBeenCalledTimes(1)
+
+      unmount()
+
+      expect(callbackRef.mock.calls).toEqual([[expect.any(HTMLButtonElement)], [null]])
     })
   })
 

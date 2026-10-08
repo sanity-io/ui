@@ -11,7 +11,7 @@ import {
 import {Code} from '@sanity/ui/code'
 import {Tooltip, TooltipDelayGroupProvider} from '@sanity/ui/tooltip'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
-import {useCallback, useMemo, useState} from 'react'
+import {Activity, startTransition, useCallback, useMemo, useState, ViewTransition} from 'react'
 import {expect, userEvent, waitFor, within} from 'storybook/test'
 
 import {PLACEMENT_OPTIONS} from '../constants'
@@ -360,4 +360,46 @@ function CustomPortalStory() {
 export const CustomPortal: Story = {
   parameters: {controls: {include: []}, padding: 0},
   render: () => <CustomPortalStory />,
+}
+
+function ViewTransitionStory(props: React.ComponentProps<typeof Tooltip>) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Flex align="center" gap={3}>
+      <Button
+        mode="ghost"
+        onClick={() => startTransition(() => setOpen((isOpen) => !isOpen))}
+        text={open ? 'Hide' : 'Show'}
+      />
+      <Activity mode={open ? 'visible' : 'hidden'}>
+        <ViewTransition>
+          <Flex gap={2}>
+            <Tooltip {...props}>
+              <Button mode="bleed" text="Hover me" />
+            </Tooltip>
+            <Tooltip {...props} content={<Text size={1}>Another tooltip</Text>}>
+              <Button mode="bleed" text="Or me" />
+            </Tooltip>
+          </Flex>
+        </ViewTransition>
+      </Activity>
+    </Flex>
+  )
+}
+
+/**
+ * The tooltips sit in an `<Activity>` inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), shown and hidden by a
+ * `startTransition` update, so React animates them in and out. A tooltip adds no work of its own
+ * to that transition: the element it is attached to is kept in a ref, not state, so nothing is
+ * scheduled when the `Activity` attaches or detaches the ref. An update scheduled there would run
+ * at Immediate priority as soon as the transition is ready to animate, holding up its first frame
+ * (React DevTools shows it as an Immediate-priority commit caused by `Tooltip`), and would make
+ * React cancel the transition should anything flush sync work while the browser is still
+ * preparing it.
+ */
+export const WithViewTransition: Story = {
+  parameters: {controls: {include: ['animate', 'delay', 'placement', 'portal']}},
+  render: (props) => <ViewTransitionStory {...props} />,
 }

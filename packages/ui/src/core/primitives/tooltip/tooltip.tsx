@@ -9,6 +9,7 @@ import {
   shift,
   size,
   useFloating,
+  type UseFloatingReturn,
 } from '@floating-ui/react-dom'
 import {clsx} from 'clsx/lite'
 import {
@@ -18,11 +19,9 @@ import {
   useEffect,
   useId,
   useImperativeHandle,
-  useInsertionEffect,
   useLayoutEffect,
   useMemo,
   useRef,
-  useState,
 } from 'react'
 // TODO: switch to `useEffectEvent` from `react` once
 // https://github.com/facebook/react/issues/34818 is fixed in the lowest React
@@ -33,12 +32,14 @@ import {useEffectEvent} from 'use-effect-event'
 
 import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {useDelayedState} from '../../hooks/useDelayedState'
+import {useLatestRef} from '../../hooks/useLatestRef'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
 import {_getArrayProp} from '../../styles/helpers'
 import {useTheme_v2} from '../../theme/useTheme'
 import type {Placement} from '../../types/placement'
 import {AnimateActivity} from '../../utils/animateActivity'
+import {attachRef} from '../../utils/attachRef'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
 import {Layer, type LayerProps} from '../../utils/layer/layer'
@@ -132,7 +133,16 @@ export function Tooltip(
   const animate = prefersReducedMotion ? false : _animate
   const fallbackPlacements = _getArrayProp(fallbackPlacementsProp)
   const ref = useRef<HTMLDivElement | null>(null)
-  const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null)
+  // The referred element, in a ref rather than state. The only render-time reader of it was
+  // Floating UI, which has nothing to position until the tooltip is shown, so it is handed the
+  // element when the card mounts instead (`setFloating`). A state update from the ref callback
+  // would be scheduled at Immediate priority in the commit that attaches the ref — on mount, on
+  // unmount, and each time an `<Activity>` hides or shows the element — and such an update is
+  // committed as soon as a view transition that reveals or hides the element is ready to animate,
+  // delaying its first frame; should anything flush sync work while the browser is still
+  // preparing the transition (a `flushSync`, React restoring a controlled input), it is what
+  // makes React cancel the transition. See `apps/storybook/tests/viewTransitionReveal.test.tsx`.
+  const referenceRef = useRef<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
 
@@ -158,7 +168,6 @@ export function Tooltip(
     middleware,
     placement: placementProp,
     whileElementsMounted: autoUpdate,
-    elements: {reference: referenceElement},
   })
 
   // The middleware reads the boundary and portal elements through refs (see `useMiddleware`), so
@@ -280,7 +289,7 @@ export function Tooltip(
   )
 
   // Handle closing the tooltip when the mouse leaves the referenceElement
-  useCloseOnMouseLeave({handleIsOpenChange, referenceElement, showTooltip, isInsideGroup})
+  useCloseOnMouseLeave({handleIsOpenChange, referenceRef, showTooltip, isInsideGroup})
 
   const onWindowEscape = useEffectEvent(() => handleIsOpenChange(false, true))
 
@@ -313,10 +322,20 @@ export function Tooltip(
   const setFloating = useCallback(
     (node: HTMLDivElement | null) => {
       ref.current = node
+      if (node) handOverReference(refs, referenceRef)
       refs.setFloating(node)
     },
     [refs],
   )
+
+  // The child's own ref, when it has one: attached from the same callback as ours (see
+  // `setReference`), so it holds the element from the commit that mounts it on.
+  // oxlint-disable-next-line no-unsafe-type-assertion
+  const childRef = (childProp ? getElementRef(childProp) : undefined) as
+    | React.Ref<HTMLElement>
+    | undefined
+
+  const setReference = useReferenceCallback(referenceRef, refs, childRef)
 
   const child = useMemo(() => {
     if (!childProp) return null
@@ -328,7 +347,7 @@ export function Tooltip(
       onMouseLeave: handleMouseLeave,
       onClick: handleClick,
       onContextMenu: handleContextMenu,
-      ref: setReferenceElement,
+      ref: setReference,
     })
   }, [
     childProp,
@@ -338,12 +357,7 @@ export function Tooltip(
     handleFocus,
     handleMouseEnter,
     handleMouseLeave,
-  ])
-
-  // If there's a child then we need to set the reference element to the cloned child ref
-  // and if child changes we make sure to update or remove the reference element.
-  useImperativeHandle(childProp ? getElementRef(childProp) : null, () => referenceElement, [
-    referenceElement,
+    setReference,
   ])
 
   if (!child) return <></>
@@ -403,21 +417,69 @@ export function Tooltip(
   )
 }
 
+type ElementRef = React.RefObject<HTMLElement | null>
+
+type FloatingRefs = UseFloatingReturn['refs']
+
 /**
- * A ref that always holds the latest `value`, updated before any layout effect of the same commit
- * runs (the same mechanism `use-effect-event` uses), for callbacks that run outside render.
+ * The ref callback for the referred element: keeps the element in `referenceRef`, attaches the
+ * child's own ref to it, and hands it to Floating UI while there is a card to position against it
+ * (see `updateReferenceWhileShown`), and detaches all of that again in the cleanup it returns. A
+ * new callback whenever the child's ref changes, so that React detaches the old ref and attaches
+ * the new one the way it does for a `ref` prop.
+ *
+ * A hook of its own, with the ref accesses in a module-scope function: the React Compiler takes a
+ * callback that accesses refs for a possible read during render wherever it flows into a plain
+ * call — `cloneElement` in `Tooltip` — and would skip the component, since it cannot tell when the
+ * callback runs. The result of a hook call carries no such mark.
  */
-function useLatestRef<T>(value: T): React.RefObject<T> {
-  const ref = useRef(value)
-
-  useInsertionEffect(() => {
-    ref.current = value
-  }, [value])
-
-  return ref
+function useReferenceCallback(
+  referenceRef: React.RefObject<HTMLElement | null>,
+  refs: FloatingRefs,
+  childRef: React.Ref<HTMLElement> | undefined,
+): (node: HTMLElement) => () => void {
+  return useCallback(
+    (node: HTMLElement) => attachReference(node, referenceRef, refs, childRef),
+    [childRef, referenceRef, refs],
+  )
 }
 
-type ElementRef = React.RefObject<HTMLElement | null>
+function attachReference(
+  node: HTMLElement,
+  referenceRef: React.RefObject<HTMLElement | null>,
+  refs: FloatingRefs,
+  childRef: React.Ref<HTMLElement> | undefined,
+): () => void {
+  referenceRef.current = node
+  updateReferenceWhileShown(refs, node)
+
+  const detachChildRef = attachRef(childRef, node)
+
+  return () => {
+    detachChildRef()
+    referenceRef.current = null
+    updateReferenceWhileShown(refs, null)
+  }
+}
+
+/**
+ * Floating UI is only told about the referred element while it has a card to position against it,
+ * so that the ref callback of the referred element schedules nothing (see `referenceRef`): the
+ * element is handed over as the card mounts, which is when the tooltip is shown, so the update
+ * Floating UI schedules for it rides along with the one for the card, in the commit that shows the
+ * tooltip.
+ */
+function handOverReference(refs: FloatingRefs, referenceRef: ElementRef): void {
+  refs.setReference(referenceRef.current)
+}
+
+/**
+ * Keeps Floating UI's reference current while the card is shown: a referred element replaced (or
+ * removed) while the tooltip is shown repositions it right away.
+ */
+function updateReferenceWhileShown(refs: FloatingRefs, node: HTMLElement | null): void {
+  if (refs.floating.current) refs.setReference(node)
+}
 
 /**
  * Derivable middleware options that read the boundary element from a ref. Floating UI evaluates
@@ -557,19 +619,21 @@ function useMiddleware({
  */
 function useCloseOnMouseLeave({
   handleIsOpenChange,
-  referenceElement,
+  referenceRef,
   showTooltip,
   isInsideGroup,
 }: {
   handleIsOpenChange: (open: boolean, immediate?: boolean) => void
-  referenceElement: HTMLElement | null
+  referenceRef: ElementRef
   showTooltip: boolean
   isInsideGroup: boolean
 }) {
-  // Since we don't want the `mouseevent` events to be attached and removed if the `referenceElement` is changed
-  // we use a "effect event" (https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events)
-  // in order to always see the latest `referenceElement` value inside the event handler itself.
+  // An "effect event" (https://19.react.dev/learn/separating-events-from-effects#reading-latest-props-and-state-with-effect-events),
+  // so that the `mousemove` listener below is not detached and attached again whenever
+  // `handleIsOpenChange` changes; the referred element is read from its ref when the pointer moves.
   const onMouseMove = useEffectEvent((target: EventTarget | null, teardown: () => void) => {
+    const referenceElement = referenceRef.current
+
     if (!referenceElement) return
 
     const isHoveringReference =
