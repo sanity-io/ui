@@ -6,6 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
+import {useLayoutEffect} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -161,6 +162,98 @@ describe('MenuButton', () => {
       expect(onClose).not.toHaveBeenCalled()
       // The pre-rendered menu lives in the portal, nothing was added next to the button
       expect(container.querySelector('[data-ui="MenuButton__popover"]')).toBeNull()
+    })
+  })
+
+  describe('the button element', () => {
+    it('attaches the forwarded ref to the button from the commit that mounts it', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      // Read in a layout effect of a parent, which runs in the same commit, after the ref attached
+      const seenInLayoutEffect: (HTMLElement | null)[] = []
+
+      function Parent() {
+        useLayoutEffect(() => {
+          seenInLayoutEffect.push(ref.current)
+        }, [])
+
+        return (
+          <MenuButton
+            button={<Button text="Open menu" />}
+            id="menu-button"
+            menu={
+              <Menu>
+                <MenuItem text="Option 1" />
+              </Menu>
+            }
+            ref={ref}
+          />
+        )
+      }
+
+      const {unmount} = render(<Parent />, {strict: false})
+
+      expect(ref.current).toBe(getButton())
+      expect(seenInLayoutEffect).toEqual([ref.current])
+
+      unmount()
+
+      expect(ref.current).toBeNull()
+    })
+
+    it('attaches a forwarded callback ref, and calls it with `null` on unmount', () => {
+      const callbackRef = vi.fn()
+
+      const {unmount} = renderMenuButton({ref: callbackRef})
+
+      const button = getButton()
+
+      expect(callbackRef).toHaveBeenCalledWith(button)
+      expect(callbackRef.mock.lastCall).toEqual([button])
+
+      unmount()
+
+      expect(callbackRef.mock.lastCall).toEqual([null])
+    })
+
+    it('returns focus to the button that opened the menu when it closes with Escape', () => {
+      renderMenuButton()
+
+      fireEvent.click(getButton())
+      expectMenuVisible()
+
+      fireEvent.keyDown(window, {key: 'Escape'})
+
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+      expect(getButton()).toHaveFocus()
+    })
+
+    it('returns focus to the button that opened the menu from the keyboard when an item is clicked', () => {
+      renderMenuButton()
+
+      fireEvent.keyDown(getButton(), {key: 'ArrowDown'})
+      expectMenuVisible()
+
+      fireEvent.click(screen.getByRole('menuitem', {name: 'Option 2'}))
+
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+      expect(getButton()).toHaveFocus()
+    })
+
+    it('closes on a click outside, but not on one inside the menu or on the button', () => {
+      renderMenuButton()
+
+      fireEvent.click(getButton())
+      expectMenuVisible()
+
+      // `useClickOutsideEvent` listens for `mousedown` on the document
+      fireEvent.mouseDown(screen.getByRole('menu'))
+      expectMenuVisible()
+
+      fireEvent.mouseDown(getButton())
+      expectMenuVisible()
+
+      fireEvent.mouseDown(document.body)
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
     })
   })
 })
