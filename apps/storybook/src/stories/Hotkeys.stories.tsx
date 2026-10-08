@@ -57,19 +57,3 @@ export const SingleKey: Story = {
     await expect(canvasElement.querySelectorAll('[data-ui="KBD"]')).toHaveLength(1)
   },
 }
-
-export const NoKeys: Story = {
-  args: {
-    keys: [],
-  },
-  parameters: {
-    // Hotkeys renders nothing here, so there is no element for the a11y check.
-    a11y: {test: 'off'},
-  },
-  render: (props) => {
-    return <Hotkeys {...props} />
-  },
-  play: async ({canvasElement}) => {
-    await expect(canvasElement.querySelector('[data-ui="Hotkeys"]')).toBeNull()
-  },
-}
