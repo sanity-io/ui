@@ -3,14 +3,21 @@ import {useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react
 import {Stack} from '../../primitives/stack/stack'
 import {
   _closestItemElement,
-  _findLastItemElement,
-  _findNextItemElement,
-  _findPrevItemElement,
-  _focusItemElement,
+  _focusFirstItemElement,
+  _getActiveElement,
+  _getItemCandidates,
   _getItemElements,
+  _getItemKey,
+  _isItemKeyVisible,
 } from './helpers'
 import {TreeContext} from './treeContext'
 import {TreeContextValue, TreeState} from './types'
+
+interface FocusedItem {
+  element: HTMLElement
+  /** The key the item registered under (`data-tree-key`); `null` for an element that is not an item */
+  key: string | null
+}
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.
@@ -28,11 +35,14 @@ export interface TreeProps {
  * This API might change. DO NOT USE IN PRODUCTION.
  *
  * @remarks
- * The tree is a single tab stop. Until an item has been focused (and again after the focused item
- * has unmounted) the tree element itself is that tab stop: keyboard focus on it is passed on to
- * the first item, while a pointer press between the items leaves focus on the tree element, from
- * where `ArrowDown` / `Home` and `ArrowUp` / `End` enter the items. Once an item has been focused
- * it is the tab stop, and the tree element is not focusable.
+ * The tree is a single tab stop. Until an item has been focused or mounted as `selected` (and
+ * again while that item is unmounted or inside a collapsed ancestor) the tree element itself is
+ * that tab stop: keyboard focus on it is passed on to the first item, while a pointer press
+ * between the items leaves focus on the tree element, from where `ArrowDown` / `Home` and
+ * `ArrowUp` / `End` enter the items. A `tabIndex` prop applies to the tree element in that state
+ * only (`-1` keeps the tree out of the tab order), and so does `focus()` on the element (through
+ * the `ref`): once an item is the tab stop, the tree element is not focusable. Because the tree
+ * element can hold focus, give it an accessible name (`aria-label` or `aria-labelledby`).
  * @beta
  */
 export function Tree(
@@ -49,7 +59,7 @@ export function Tree(
     ...restProps
   } = props
   const ref = useRef<HTMLUListElement | null>(null)
-  const [focusedElement, setFocusedElement] = useState<HTMLElement | null>(null)
+  const [focusedItem, setFocusedItem] = useState<FocusedItem | null>(null)
   const path: string[] = useMemo(() => [], [])
   const [state, setState] = useState<TreeState>({})
   // Whether the focus event being handled was caused by a pointer press: set on `mousedown` and
@@ -62,12 +72,18 @@ export function Tree(
     () => ref.current,
   )
 
+  // The key is read from the element here, at event (or effect) time, so that the tab stop can be
+  // derived from `state` with a lookup during render
+  const setFocusedElement = useCallback((element: HTMLElement | null) => {
+    setFocusedItem(element ? {element, key: _getItemKey(element)} : null)
+  }, [])
+
   const registerItem = useCallback(
     (element: HTMLElement, path: string, expanded: boolean, selected: boolean) => {
       setState((s) => ({...s, [path]: {element, expanded}}))
 
       if (selected) {
-        setFocusedElement(element)
+        setFocusedItem({element, key: path})
       }
 
       return () => {
@@ -93,18 +109,20 @@ export function Tree(
     })
   }, [])
 
-  // The focused item is the tree's tab stop (roving tabindex) for as long as it is registered.
-  // While there is none — before any item has been focused, or after the focused item unmounted —
-  // the tree element takes the tab stop and `handleFocus` passes keyboard focus on to the first
-  // item, resolved from the DOM at that moment. That way no item order is kept in state: the
-  // first item follows the DOM, also when items are added, removed or moved without being focused.
+  // The focused item is the tree's tab stop (roving tabindex) for as long as it is registered and
+  // not inside a collapsed ancestor (sequential focus navigation skips hidden elements, so such an
+  // item could not hold the tab stop). While there is none — before any item has been focused,
+  // after the focused item unmounted, or while its ancestor is collapsed — the tree element takes
+  // the tab stop and `handleFocus` passes keyboard focus on to the first item, resolved from the
+  // DOM at that moment. That way no item order is kept in state: the first item follows the DOM,
+  // also when items are added, removed or moved without being focused.
   const tabStop = useMemo(() => {
-    if (!focusedElement) return null
+    if (!focusedItem || focusedItem.key === null) return null
 
-    const registered = Object.values(state).some((item) => item?.element === focusedElement)
+    const {element, key} = focusedItem
 
-    return registered ? focusedElement : null
-  }, [focusedElement, state])
+    return state[key]?.element === element && _isItemKeyVisible(state, key) ? element : null
+  }, [focusedItem, state])
 
   const contextValue: TreeContextValue = useMemo(
     () => ({
@@ -118,7 +136,7 @@ export function Tree(
       gap,
       state,
     }),
-    [gap, path, registerItem, setExpanded, state, tabStop],
+    [gap, path, registerItem, setExpanded, setFocusedElement, state, tabStop],
   )
 
   // The item elements are read from the DOM when a key is pressed instead of being kept in state,
@@ -127,25 +145,35 @@ export function Tree(
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLUListElement>) => {
       const treeElement = ref.current
+      const target = event.target
 
       if (!treeElement) return
 
-      const focusItem = (el: HTMLElement | null | undefined) => {
-        if (!el) return
-
-        _focusItemElement(el)
-        setFocusedElement(el)
+      // Keys typed into editable content inside an item (`text` is a `ReactNode`) move the caret,
+      // not the focus
+      if (
+        target instanceof HTMLElement &&
+        (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))
+      ) {
+        return
       }
+
+      // Moving focus is all a key does: the focus event (`handleFocus`) records the item that took
+      // it. An item that cannot take focus right now (hidden by the consumer, a `linkAs` without a
+      // focusable element) is skipped, so the tab stop never lands on an element without focus.
+      const items = () => _getItemElements(treeElement)
+      const first = () => _getItemCandidates(state, items(), 'next')
+      const last = () => _getItemCandidates(state, items(), 'prev')
 
       if (!tabStop) {
         // The tree element itself has focus (a pointer press between the items left it there, see
         // `handleFocus`): the navigation keys enter the items at either end
         if (event.key === 'ArrowDown' || event.key === 'Home') {
           event.preventDefault()
-          focusItem(_getItemElements(treeElement)[0])
+          _focusFirstItemElement(first())
         } else if (event.key === 'ArrowUp' || event.key === 'End') {
           event.preventDefault()
-          focusItem(_findLastItemElement(state, _getItemElements(treeElement)))
+          _focusFirstItemElement(last())
         }
 
         return
@@ -153,29 +181,28 @@ export function Tree(
 
       if (event.key === 'ArrowDown') {
         event.preventDefault()
-        focusItem(_findNextItemElement(state, _getItemElements(treeElement), tabStop))
+        _focusFirstItemElement(_getItemCandidates(state, items(), 'next', tabStop))
 
         return
       }
 
       if (event.key === 'ArrowUp') {
         event.preventDefault()
-        focusItem(_findPrevItemElement(state, _getItemElements(treeElement), tabStop))
+        _focusFirstItemElement(_getItemCandidates(state, items(), 'prev', tabStop))
 
         return
       }
 
       if (event.key === 'Home') {
         event.preventDefault()
-        // The first item is a top-level item, so it is always visible
-        focusItem(_getItemElements(treeElement)[0])
+        _focusFirstItemElement(first())
 
         return
       }
 
       if (event.key === 'End') {
         event.preventDefault()
-        focusItem(_findLastItemElement(state, _getItemElements(treeElement)))
+        _focusFirstItemElement(last())
 
         return
       }
@@ -183,7 +210,7 @@ export function Tree(
       if (event.key === 'ArrowLeft') {
         event.preventDefault()
 
-        const itemKey = tabStop.getAttribute('data-tree-key')
+        const itemKey = _getItemKey(tabStop)
 
         if (!itemKey) return
 
@@ -201,9 +228,9 @@ export function Tree(
           const parentKey = itemPath.join('/')
           const parentState = parentKey && state[parentKey]
 
-          // Through `focusItem`: the registered element of an item with an `href` is its
-          // non-focusable `<li role="none">`, whose link is what takes focus
-          if (parentState) focusItem(parentState.element)
+          // The registered element of an item with an `href` is its non-focusable
+          // `<li role="none">`; `_focusFirstItemElement` focuses the link inside it
+          if (parentState) _focusFirstItemElement([parentState.element])
         }
 
         return
@@ -212,7 +239,7 @@ export function Tree(
       if (event.key === 'ArrowRight') {
         event.preventDefault()
 
-        const focusedKey = tabStop.getAttribute('data-tree-key')
+        const focusedKey = _getItemKey(tabStop)
 
         if (!focusedKey) return
 
@@ -249,17 +276,14 @@ export function Tree(
 
       if (event.target === treeElement) {
         // The tree element is only focusable while no item is the tab stop (see `tabStop`).
-        // Keyboard focus is passed on to the first item, which then reports its own focus here; a
-        // pointer press on the tree element itself (between the items) leaves focus where it is.
-        const firstItemElement = pointerDownRef.current
-          ? undefined
-          : _getItemElements(treeElement)[0]
-
-        if (firstItemElement) _focusItemElement(firstItemElement)
+        // Keyboard focus is passed on to the first item that takes it (an item the consumer hid
+        // is skipped), which then reports its own focus here; a pointer press on the tree element
+        // itself (between the items) leaves focus where it is.
+        if (!pointerDownRef.current) _focusFirstItemElement(_getItemElements(treeElement))
 
         // Focus that stays on the tree element (after a pointer press, or with no item to pass it
         // on to) is a focus transition the consumer will see the `blur` of, so it is reported too
-        if (treeElement.ownerDocument.activeElement === treeElement) onFocus?.(event)
+        if (_getActiveElement(treeElement) === treeElement) onFocus?.(event)
 
         return
       }
@@ -273,7 +297,7 @@ export function Tree(
       // Call the element's `focus` handler
       onFocus?.(event)
     },
-    [onFocus],
+    [onFocus, setFocusedElement],
   )
 
   return (

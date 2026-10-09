@@ -1,13 +1,15 @@
 /** @vitest-environment jsdom */
 
-import {screen} from '@testing-library/react'
+import {act, fireEvent, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
 import {Tree} from './tree'
 import {TreeItem} from './treeItem'
+import {TreeContextValue} from './types'
+import {useTree} from './useTree'
 
 /**
  * The test id of the item that contains the focused element. The focused element is the item
@@ -17,13 +19,28 @@ function focusedItem(): string | null | undefined {
   return document.activeElement?.closest('[data-testid]')?.getAttribute('data-testid')
 }
 
-function FruitTree(props: {onFocus?: (event: React.FocusEvent<HTMLUListElement>) => void}) {
+/** Hands the tree's context value to the test, the way a `useTree()` consumer sees it */
+function ExposeTree(props: {onChange: (tree: TreeContextValue) => void}) {
+  const {onChange} = props
+  const tree = useTree()
+
+  useEffect(() => {
+    onChange(tree)
+  }, [onChange, tree])
+
+  return null
+}
+
+function FruitTree(props: {
+  onFocus?: (event: React.FocusEvent<HTMLUListElement>) => void
+  onMouseDown?: (event: React.MouseEvent<HTMLUListElement>) => void
+}) {
   return (
     <>
       <button data-testid="before" type="button">
         Before
       </button>
-      <Tree onFocus={props.onFocus}>
+      <Tree aria-label="Fruit" onFocus={props.onFocus} onMouseDown={props.onMouseDown}>
         <TreeItem data-testid="fruit" expanded text="Fruit">
           <TreeItem data-testid="oranges" text="Oranges" />
           <TreeItem data-testid="apples" text="Apples">
@@ -63,7 +80,7 @@ function DynamicTree() {
       >
         Remove first
       </button>
-      <Tree>
+      <Tree aria-label="Letters">
         {ids.map((id) => (
           <TreeItem data-testid={id} key={id} text={id.toUpperCase()} />
         ))}
@@ -228,6 +245,120 @@ describe('components/tree tab stop', () => {
 
     await user.tab()
     expect(focusedItem()).toBe('c')
+  })
+
+  it('starts on a `selected` item', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree aria-label="Fruit">
+          <TreeItem data-testid="oranges" text="Oranges" />
+          <TreeItem data-testid="apples" selected text="Apples" />
+        </Tree>
+      </>,
+    )
+
+    const tree = screen.getByRole('tree')
+
+    // The selected item is the tab stop from the start, without a focus event
+    expect(tree).not.toHaveAttribute('tabindex')
+    expect(screen.getByTestId('apples')).toHaveAttribute('tabindex', '0')
+    expect(screen.getByTestId('oranges')).toHaveAttribute('tabindex', '-1')
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    expect(focusedItem()).toBe('apples')
+  })
+
+  it('takes the tab stop back while the focused item is inside a collapsed ancestor', async () => {
+    const user = userEvent.setup()
+    let treeContext: TreeContextValue | null = null
+
+    render(
+      <>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree aria-label="Fruit">
+          <ExposeTree onChange={(tree) => (treeContext = tree)} />
+          <TreeItem data-testid="apples" text="Apples">
+            <TreeItem data-testid="fuji" selected text="Fuji" />
+          </TreeItem>
+          <TreeItem data-testid="pears" text="Pears" />
+        </Tree>
+      </>,
+    )
+
+    const tree = screen.getByRole('tree')
+    const apples = screen.getByTestId('apples')
+    const fuji = screen.getByTestId('fuji')
+    const applesKey = apples.getAttribute('data-tree-key')!
+
+    // A `selected` item inside a collapsed parent cannot hold the tab stop (sequential focus
+    // navigation skips hidden elements), so the tree element keeps it
+    expect(apples).toHaveAttribute('aria-expanded', 'false')
+    expect(tree).toHaveAttribute('tabindex', '0')
+    expect(fuji).toHaveAttribute('tabindex', '-1')
+
+    // The item becomes the tab stop the moment its parent expands
+    act(() => treeContext!.setExpanded(applesKey, true))
+    expect(tree).not.toHaveAttribute('tabindex')
+    expect(fuji).toHaveAttribute('tabindex', '0')
+
+    // Collapsing the parent from outside the tree (a "collapse all" control) hands it back
+    act(() => treeContext!.setExpanded(applesKey, false))
+    expect(tree).toHaveAttribute('tabindex', '0')
+    expect(fuji).toHaveAttribute('tabindex', '-1')
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    expect(focusedItem()).toBe('apples')
+  })
+
+  it('calls a consumer `onMouseDown`', async () => {
+    const user = userEvent.setup()
+    const onMouseDown = vi.fn<(event: React.MouseEvent<HTMLUListElement>) => void>()
+
+    render(<FruitTree onMouseDown={onMouseDown} />)
+
+    await user.click(screen.getByTestId('oranges'))
+
+    expect(onMouseDown).toHaveBeenCalledTimes(1)
+    expect(onMouseDown.mock.calls[0][0].target).toBe(screen.getByTestId('oranges'))
+  })
+
+  it('exposes the tab stop as `focusedElement` of `useTree()`', async () => {
+    const user = userEvent.setup()
+    let treeContext: TreeContextValue | null = null
+
+    render(
+      <>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree aria-label="Fruit">
+          <ExposeTree onChange={(tree) => (treeContext = tree)} />
+          <TreeItem data-testid="oranges" text="Oranges" />
+          <TreeItem data-testid="apples" text="Apples" />
+        </Tree>
+      </>,
+    )
+
+    // `null` until an item has been focused: the tree element is the tab stop
+    expect(treeContext!.focusedElement).toBeNull()
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    expect(treeContext!.focusedElement).toBe(screen.getByTestId('oranges'))
+
+    // An element that is not a registered item does not become the tab stop
+    act(() => treeContext!.setFocusedElement(screen.getByTestId('before')))
+    expect(treeContext!.focusedElement).toBeNull()
+    expect(screen.getByRole('tree')).toHaveAttribute('tabindex', '0')
   })
 
   it('lets a `tabIndex` prop keep the tree element out of the tab order', async () => {
@@ -518,6 +649,28 @@ describe('components/tree keyboard navigation', () => {
     expect(focusedItem()).toBe(id)
     expect(screen.getByTestId(id)).toHaveAttribute('tabindex', '0')
     expect(tree).not.toHaveAttribute('tabindex')
+  })
+
+  it('leaves keys typed into editable content inside an item alone', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <Tree aria-label="Fruit">
+        <TreeItem data-testid="oranges" text={<input data-testid="rename" defaultValue="Or" />} />
+        <TreeItem data-testid="apples" text="Apples" />
+      </Tree>,
+    )
+
+    const input = screen.getByTestId('rename')
+
+    await user.click(input)
+    expect(input).toHaveFocus()
+
+    for (const key of ['Home', 'End', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']) {
+      // `fireEvent` returns `false` when a handler prevented the default action
+      expect(fireEvent.keyDown(input, {key})).toBe(true)
+      expect(input).toHaveFocus()
+    }
   })
 
   it('leaves focus on the tree element for ArrowLeft and ArrowRight', async () => {

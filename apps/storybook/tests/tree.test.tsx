@@ -76,7 +76,7 @@ describe('Components/Tree', () => {
         <button data-testid="before" type="button">
           Before
         </button>
-        <Tree gap={1} style={{padding: 40}}>
+        <Tree aria-label="Letters" gap={1} style={{padding: 40}}>
           <TreeItem data-testid="a" text="A" />
           <TreeItem data-testid="b" text="B" />
         </Tree>
@@ -99,10 +99,68 @@ describe('Components/Tree', () => {
     await expect.poll(focusedTestId).toBe('a')
   })
 
+  test('skips an item that cannot take focus instead of making it the tab stop', async () => {
+    await render(
+      <ThemeProvider scheme="light" theme={theme}>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree aria-label="Letters" gap={1} style={{padding: 40}}>
+          <TreeItem data-testid="a" hidden text="A" />
+          <TreeItem data-testid="b" text="B" />
+          <TreeItem data-testid="c" text="C" />
+        </Tree>
+        <button data-testid="after" type="button">
+          After
+        </button>
+      </ThemeProvider>,
+    )
+
+    const a = () => document.querySelector<HTMLElement>('[data-testid="a"]')!
+
+    // The hand-off from the tree element goes to the first item that takes focus
+    document.querySelector<HTMLElement>('[data-testid="before"]')!.focus()
+    await userEvent.tab()
+    await expect.poll(focusedTestId).toBe('b')
+    await expect.poll(() => tree().hasAttribute('tabindex')).toBe(false)
+    expect(a()).toHaveAttribute('tabindex', '-1')
+
+    // So do the keys, both from an item and from the tree element
+    await userEvent.keyboard('{Home}')
+    await expect.poll(focusedTestId).toBe('b')
+
+    await userEvent.keyboard('{ArrowDown}')
+    await expect.poll(focusedTestId).toBe('c')
+
+    // Leaving and tabbing back still lands inside the tree
+    await userEvent.tab()
+    await expect.poll(focusedTestId).toBe('after')
+    await userEvent.tab({shift: true})
+    await expect.poll(focusedTestId).toBe('c')
+  })
+
+  test('enters the items at the first one that takes focus from the focused tree element', async () => {
+    await render(
+      <ThemeProvider scheme="light" theme={theme}>
+        <Tree aria-label="Letters" gap={1} style={{padding: 40}}>
+          <TreeItem data-testid="a" hidden text="A" />
+          <TreeItem data-testid="b" text="B" />
+        </Tree>
+      </ThemeProvider>,
+    )
+
+    await userEvent.click(tree(), {position: {x: 10, y: 10}})
+    await expect.poll(() => document.activeElement).toBe(tree())
+
+    await userEvent.keyboard('{ArrowDown}')
+    await expect.poll(focusedTestId).toBe('b')
+    await expect.poll(() => tree().hasAttribute('tabindex')).toBe(false)
+  })
+
   test('enters the items from the focused tree element with the navigation keys', async () => {
     await render(
       <ThemeProvider scheme="light" theme={theme}>
-        <Tree gap={1} style={{padding: 40}}>
+        <Tree aria-label="Letters" gap={1} style={{padding: 40}}>
           <TreeItem data-testid="a" text="A" />
           <TreeItem data-testid="b" text="B" />
         </Tree>

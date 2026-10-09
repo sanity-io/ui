@@ -19,13 +19,18 @@ export function _closestItemElement(element: Element): HTMLElement | null {
 }
 
 /**
- * An item can take focus when every ancestor item is expanded.
+ * The key an item registered under (`data-tree-key`), or `null` for an element that is not an
+ * item.
  */
-function _isItemVisible(state: TreeState, element: HTMLElement): boolean {
-  const itemKey = element.getAttribute('data-tree-key')
+export function _getItemKey(element: HTMLElement): string | null {
+  return element.getAttribute('data-tree-key')
+}
 
-  if (!itemKey) return false
-
+/**
+ * Whether the item with `itemKey` is inside expanded ancestors only, i.e. whether its group is
+ * shown. Derived from `state` alone, so it can be used during render.
+ */
+export function _isItemKeyVisible(state: TreeState, itemKey: string): boolean {
   const segments = itemKey.split('/')
 
   segments.pop()
@@ -41,48 +46,52 @@ function _isItemVisible(state: TreeState, element: HTMLElement): boolean {
   return true
 }
 
-export function _findPrevItemElement(
-  state: TreeState,
-  itemElements: HTMLElement[],
-  focusedElement: HTMLElement,
-): HTMLElement | null {
-  const idx = itemElements.indexOf(focusedElement)
+function _isItemVisible(state: TreeState, element: HTMLElement): boolean {
+  const itemKey = _getItemKey(element)
 
-  for (let i = idx - 1; i >= 0; i -= 1) {
-    if (_isItemVisible(state, itemElements[i])) return itemElements[i]
-  }
-
-  return null
+  return itemKey !== null && _isItemKeyVisible(state, itemKey)
 }
 
-export function _findNextItemElement(
+/**
+ * The items a key can move focus to, in the order they should be tried: `ArrowDown` continues
+ * after the focused item, `ArrowUp` before it (nearest first), and from the tree element `Home` /
+ * `ArrowDown` start at the first item and `End` / `ArrowUp` at the last one.
+ */
+export function _getItemCandidates(
   state: TreeState,
   itemElements: HTMLElement[],
-  focusedElement: HTMLElement,
-): HTMLElement | null {
-  const idx = itemElements.indexOf(focusedElement)
+  direction: 'next' | 'prev',
+  focusedElement?: HTMLElement,
+): HTMLElement[] {
+  const candidates: HTMLElement[] = []
+  const idx = focusedElement ? itemElements.indexOf(focusedElement) : -1
 
-  if (idx === -1) return null
+  if (focusedElement && idx === -1) return candidates
 
-  for (let i = idx + 1; i < itemElements.length; i += 1) {
-    if (_isItemVisible(state, itemElements[i])) return itemElements[i]
+  if (direction === 'next') {
+    for (let i = idx + 1; i < itemElements.length; i += 1) {
+      if (_isItemVisible(state, itemElements[i])) candidates.push(itemElements[i])
+    }
+  } else {
+    for (let i = (idx === -1 ? itemElements.length : idx) - 1; i >= 0; i -= 1) {
+      if (_isItemVisible(state, itemElements[i])) candidates.push(itemElements[i])
+    }
   }
 
-  return null
+  return candidates
 }
 
-export function _findLastItemElement(
-  state: TreeState,
-  itemElements: HTMLElement[],
-): HTMLElement | null {
-  for (let i = itemElements.length - 1; i >= 0; i -= 1) {
-    if (_isItemVisible(state, itemElements[i])) return itemElements[i]
-  }
+/**
+ * The focused element as seen from `element`: inside a shadow root `document.activeElement` is the
+ * shadow host, the root node knows the element itself.
+ */
+export function _getActiveElement(element: Element): Element | null {
+  const root = element.getRootNode()
 
-  return null
+  return root instanceof Document || root instanceof ShadowRoot ? root.activeElement : null
 }
 
-export function _focusItemElement(el: HTMLElement): void {
+function _focusItemElement(el: HTMLElement): void {
   if (el.getAttribute('role') === 'treeitem') {
     el.focus()
   }
@@ -94,4 +103,19 @@ export function _focusItemElement(el: HTMLElement): void {
       firstChild.focus()
     }
   }
+}
+
+/**
+ * Focuses the first of `candidates` that takes focus and returns it. `focus()` fails silently on
+ * an item that cannot take focus right now (hidden by the consumer, a `linkAs` without a focusable
+ * element), so each candidate is tried in turn and checked against the active element.
+ */
+export function _focusFirstItemElement(candidates: HTMLElement[]): HTMLElement | null {
+  for (const el of candidates) {
+    _focusItemElement(el)
+
+    if (el.contains(_getActiveElement(el))) return el
+  }
+
+  return null
 }
