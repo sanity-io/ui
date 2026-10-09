@@ -7,7 +7,7 @@ import {afterEach, beforeEach, describe, expect, test} from 'vitest'
 import {render} from 'vitest-browser-react'
 
 import * as menuButtonStories from '../stories/components/MenuButton.stories'
-import {commits} from './helpers/reactDevtoolsHook'
+import {commits, installed} from './helpers/reactDevtoolsHook'
 
 const {WithViewTransition} = composeStories(menuButtonStories)
 
@@ -41,6 +41,9 @@ function observeViewTransitions(): ObservedTransition[] {
 
       try {
         await transition.finished
+      } catch {
+        // `finished` follows `updateCallbackDone`: an update callback that threw rejects it too,
+        // and is reported through `ready` above
       } finally {
         observed.finished = true
       }
@@ -63,6 +66,11 @@ async function waitForTransitionsToFinish(transitions: ObservedTransition[]) {
     .toBe(true)
 }
 
+/** The components that scheduled the commits recorded so far, at any priority */
+function updaters() {
+  return commits.flatMap((commit) => commit.updaters)
+}
+
 /** The components that scheduled the Immediate-priority commits recorded so far */
 function immediateUpdaters() {
   return commits
@@ -82,6 +90,8 @@ function button(text: string): HTMLButtonElement {
 }
 
 beforeEach(() => {
+  // The hook records only when React found it first (see `installed`)
+  expect(installed).toBe(true)
   commits.length = 0
 })
 
@@ -109,6 +119,10 @@ describe('revealing a MenuButton with a <ViewTransition>', () => {
 
     expect(transitions[0]).toEqual({ready: 'resolved', finished: true})
     expect(button('Open').checkVisibility()).toBe(true)
+    // A positive control for the hook: the click's commit renders the story component, and React
+    // reports it as the commit's updater only when the hook this file installs is the one it
+    // found — without it the negative assertions below would pass with nothing recorded
+    expect(updaters()).toContain('ViewTransitionStory')
     expect(immediateUpdaters()).not.toContain('MenuButton')
 
     // Opening the menu mounts it, and `Menu` registers its element with `MenuButton` from a ref
@@ -119,6 +133,8 @@ describe('revealing a MenuButton with a <ViewTransition>', () => {
     button('Open').click()
     await expect.poll(() => document.querySelector('[role="menu"]')?.checkVisibility()).toBe(true)
 
+    // The open renders `MenuButton` at whichever priority the click's update has: recorded
+    expect(updaters()).toContain('MenuButton')
     expect(immediateUpdaters().filter((name) => name === 'MenuButton').length).toBeLessThanOrEqual(
       1,
     )
