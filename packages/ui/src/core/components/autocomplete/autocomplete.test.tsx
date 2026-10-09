@@ -243,6 +243,26 @@ describe('components/autocomplete', () => {
       expect(getInput()).toHaveAttribute('aria-expanded', 'true')
     })
 
+    it('keeps a pending query when the `value` prop echoes a clear', async () => {
+      const user = userEvent.setup()
+      const onChange = vi.fn()
+      const {rerender} = renderAutocomplete({filterOption: SHOW_ALL, onChange, value: 'foo'})
+
+      await user.click(screen.getByRole('button', {name: 'Clear'}))
+
+      await waitFor(() => expect(onChange).toHaveBeenCalledWith(''))
+
+      // A new search starts before the parent's store caught up with the `''` it was told
+      await user.type(getInput(), 'ba')
+
+      expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+
+      rerender({filterOption: SHOW_ALL, onChange, value: ''})
+
+      expect(getInput()).toHaveValue('ba')
+      expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+    })
+
     it('reports the list as expanded only while there are results to show', async () => {
       const user = userEvent.setup()
 

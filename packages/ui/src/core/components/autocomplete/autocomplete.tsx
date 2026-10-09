@@ -111,8 +111,8 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
    * The current value. Applied whenever it changes to a defined value, and then it wins over the
    * component's own state: a pending query is dropped and the active option moves to it. A
    * selection or clear the parent does not answer with a new `value` stays shown (`onChange`
-   * has been called), a `value` equal to the one shown changes nothing, and a `value` that
-   * becomes `undefined` leaves the current value in place.
+   * has been called), a `value` equal to the one shown (`''` after a clear) changes nothing,
+   * and a `value` that becomes `undefined` leaves the current value in place.
    */
   value?: string
 }
@@ -201,17 +201,19 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
   //
   // The prop is applied only when it changes, and only when it differs from the value shown: a
-  // parent echoing the selection it was just told about (a store that lags `onChange`) must not
-  // drop a query the user has started since. A selection or clear the parent does not answer
-  // with a new `value` stays visible: `onChange` has been called, and the component keeps its
-  // own state until the parent sets a value again. A prop that becomes `undefined` leaves the
-  // current value in place, like a controlled `<input>` that switches to uncontrolled. The drop
-  // of a pending query here is not reported through `onQueryChange`: the parent made the change.
+  // parent echoing the selection it was just told about (a store that lags `onChange`), or the
+  // `''` it was told about for a clear, must not drop a query the user has started since. `''`
+  // and `null` both mean no value (the initial state stores `''` as `null`; a clear stores `null`
+  // and reports `''`). A selection or clear the parent does not answer with a new `value` stays
+  // visible: `onChange` has been called, and the component keeps its own state until the parent
+  // sets a value again. A prop that becomes `undefined` leaves the current value in place, like
+  // a controlled `<input>` that switches to uncontrolled. The drop of a pending query here is
+  // not reported through `onQueryChange`: the parent made the change.
   const [prevValueProp, setPrevValueProp] = useState(valueProp)
 
   if (valueProp !== prevValueProp) {
     setPrevValueProp(valueProp)
-    if (valueProp !== undefined && valueProp !== value) {
+    if (valueProp !== undefined && (valueProp || null) !== value) {
       dispatch({type: 'value/change', value: valueProp})
     }
   }
