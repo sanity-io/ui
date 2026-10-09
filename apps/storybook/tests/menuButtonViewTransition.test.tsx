@@ -127,17 +127,20 @@ describe('revealing a MenuButton with a <ViewTransition>', () => {
 
     // Opening the menu mounts it, and `Menu` registers its element with `MenuButton` from a ref
     // callback: that registration used to be a second Immediate-priority `MenuButton` commit,
-    // right after the one the click itself schedules (the only one allowed here; it becomes a
-    // transition once the open state is set in one).
+    // right after the one the click itself schedules. The click's commit is the first with
+    // `MenuButton` among its updaters (Immediate today, a transition once the open state is set
+    // in one); nothing after it may be an Immediate-priority `MenuButton` commit.
     commits.length = 0
     button('Open').click()
     await expect.poll(() => document.querySelector('[role="menu"]')?.checkVisibility()).toBe(true)
 
+    const menuButtonCommits = commits.filter((commit) => commit.updaters.includes('MenuButton'))
+
     // The open renders `MenuButton` at whichever priority the click's update has: recorded
-    expect(updaters()).toContain('MenuButton')
-    expect(immediateUpdaters().filter((name) => name === 'MenuButton').length).toBeLessThanOrEqual(
-      1,
-    )
+    expect(menuButtonCommits.length).toBeGreaterThanOrEqual(1)
+    expect(
+      menuButtonCommits.slice(1).filter((commit) => commit.priority === IMMEDIATE_PRIORITY),
+    ).toEqual([])
 
     // The hide is the next transition after whatever the open started: none today, one of its
     // own under this `<ViewTransition>` once the open state is set in a transition
