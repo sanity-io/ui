@@ -82,9 +82,13 @@ export function Tree(
     (element: HTMLElement, path: string, expanded: boolean, selected: boolean) => {
       setState((s) => ({...s, [path]: {element, expanded}}))
 
-      if (selected) {
-        setFocusedItem({element, key: path})
-      }
+      // A `selected` item becomes the tab stop. An item that re-registers under a new key (its
+      // `id`, or an ancestor's, changed) keeps it, under that key.
+      setFocusedItem((prev) => {
+        if (!selected && prev?.element !== element) return prev
+
+        return prev?.element === element && prev.key === path ? prev : {element, key: path}
+      })
 
       return () => {
         setState((s) => {

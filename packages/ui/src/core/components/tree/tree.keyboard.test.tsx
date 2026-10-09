@@ -319,6 +319,46 @@ describe('components/tree tab stop', () => {
     expect(focusedItem()).toBe('apples')
   })
 
+  it('keeps the tab stop on an item that re-registers under a new key', async () => {
+    const user = userEvent.setup()
+
+    function RekeyedTree() {
+      const [id, setId] = useState('apples')
+
+      return (
+        <>
+          <button data-testid="rekey" onClick={() => setId('pears')} type="button">
+            Rename
+          </button>
+          <Tree aria-label="Fruit">
+            <TreeItem data-testid="oranges" text="Oranges" />
+            <TreeItem data-testid="renamed" id={id} text="Renamed" />
+            <TreeItem data-testid="bananas" text="Bananas" />
+          </Tree>
+        </>
+      )
+    }
+
+    render(<RekeyedTree />)
+
+    const tree = screen.getByRole('tree')
+    const renamed = screen.getByTestId('renamed')
+
+    await user.click(renamed)
+    expect(renamed).toHaveAttribute('data-tree-key', 'apples')
+    expect(renamed).toHaveAttribute('tabindex', '0')
+
+    // The same element registers under its new key; the tab stop follows it
+    await user.click(screen.getByTestId('rekey'))
+    expect(renamed).toHaveAttribute('data-tree-key', 'pears')
+    expect(renamed).toHaveAttribute('tabindex', '0')
+    expect(tree).not.toHaveAttribute('tabindex')
+
+    renamed.focus()
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('bananas')
+  })
+
   it('calls a consumer `onMouseDown`', async () => {
     const user = userEvent.setup()
     const onMouseDown = vi.fn<(event: React.MouseEvent<HTMLUListElement>) => void>()
