@@ -103,7 +103,8 @@ afterEach(() => {
 // kept the button element from such a ref in state, so it scheduled an update from the ref
 // callback at the Immediate priority of the commit phase, which React commits the moment the view
 // transition revealing (or hiding) the button is ready to animate. (`Popover` did the same for
-// its reference element; that is fixed separately, so only `MenuButton` is asserted on here.)
+// its reference element; #3143, which this builds on, fixed that, so revealing a closed menu
+// button is expected to schedule no Immediate-priority commit at all.)
 describe('revealing a MenuButton with a <ViewTransition>', () => {
   test('MenuButton schedules no Immediate-priority commit when it is revealed or hidden', async () => {
     const transitions = observeViewTransitions()
@@ -123,7 +124,7 @@ describe('revealing a MenuButton with a <ViewTransition>', () => {
     // reports it as the commit's updater only when the hook this file installs is the one it
     // found — without it the negative assertions below would pass with nothing recorded
     expect(updaters()).toContain('ViewTransitionStory')
-    expect(immediateUpdaters()).not.toContain('MenuButton')
+    expect(immediateUpdaters()).toEqual([])
 
     // Opening the menu mounts it, and `Menu` registers its element with `MenuButton` from a ref
     // callback: that registration used to be a second Immediate-priority `MenuButton` commit,
@@ -153,6 +154,9 @@ describe('revealing a MenuButton with a <ViewTransition>', () => {
 
     expect(transitions[hideTransition]).toEqual({ready: 'resolved', finished: true})
     expect(button('Open').checkVisibility()).toBe(false)
+    // The menu is open as it is hidden, which still costs an Immediate-priority commit that is
+    // not `MenuButton`'s: Floating UI sets the card's and the reference's element to `null` from
+    // the card's ref detaching, and each `MenuItem` keeps its element in state
     expect(immediateUpdaters()).not.toContain('MenuButton')
   })
 })
