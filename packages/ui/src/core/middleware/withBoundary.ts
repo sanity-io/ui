@@ -1,7 +1,6 @@
-import {Middleware} from '@floating-ui/react-dom'
+import {Derivable, Middleware} from '@floating-ui/react-dom'
 
-/** @internal */
-export type ElementRef = React.RefObject<HTMLElement | null>
+import {ElementRef} from '../types/elementRef'
 
 /**
  * Creates a Floating UI middleware (`flip`, `shift`, `hide`, …) from `options` plus a `boundary`
@@ -21,17 +20,25 @@ export type ElementRef = React.RefObject<HTMLElement | null>
  * with the ref standing in for the element: a changed `fallbackPlacements` or `padding` is seen,
  * a changed element (same ref) is not.
  *
+ * The options are typed by the middleware (`Options` is inferred from `create`), so a misspelled
+ * or foreign option is a type error, as it is for the middleware itself.
+ *
  * Built at module scope on purpose: a `ref.current` read inside a callback created during render
  * makes the React Compiler skip the calling function, since it cannot tell when the callback runs.
  *
  * @internal
  */
-export function withBoundary<const Options extends object>(
-  create: (options: () => Options & {boundary: HTMLElement | undefined}) => Middleware,
+export function withBoundary<Options extends {boundary?: unknown}>(
+  create: (options: Derivable<Options>) => Middleware,
   boundaryRef: ElementRef,
-  options: Options,
+  options: Omit<Options, 'boundary'>,
 ): Middleware {
-  const middleware = create(() => ({...options, boundary: boundaryRef.current || undefined}))
+  const middleware = create(
+    // The options with the boundary put back are `Options` by construction; TypeScript cannot
+    // see through `Omit` on a type parameter to agree
+    // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+    () => ({...options, boundary: boundaryRef.current || undefined}) as Options,
+  )
 
   return {...middleware, options: {...options, boundaryRef}}
 }

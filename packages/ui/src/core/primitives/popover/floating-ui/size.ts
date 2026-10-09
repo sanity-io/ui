@@ -1,6 +1,6 @@
 import {detectOverflow, Middleware} from '@floating-ui/react-dom'
 
-import {ElementRef} from '../../../middleware/withBoundary'
+import {ElementRef} from '../../../types/elementRef'
 import {PopoverMargins} from '../../../types/popover'
 
 interface SizeOptions {
