@@ -604,6 +604,35 @@ describe('components/tree keyboard navigation', () => {
     expect(docsLink).toHaveFocus()
   })
 
+  it('moves past an ancestor whose `linkAs` cannot take focus', async () => {
+    const user = userEvent.setup()
+
+    // A custom link component that drops `tabIndex` and `href`: nothing in it can take focus
+    function Unfocusable(props: React.ComponentProps<'a'>) {
+      return <span>{props.children}</span>
+    }
+
+    render(
+      <Tree aria-label="Docs">
+        <TreeItem data-testid="docs" expanded href="/docs" linkAs={Unfocusable} text="Docs">
+          <TreeItem data-testid="intro" text="Intro" />
+          <TreeItem data-testid="guide" text="Guide" />
+        </TreeItem>
+      </Tree>,
+    )
+
+    await user.click(screen.getByTestId('guide'))
+    expect(focusedItem()).toBe('guide')
+
+    // "Docs" is the first candidate but refuses focus; focus staying on a descendant must not
+    // count as "Docs" being focused, or Home would stop there
+    await user.keyboard('{Home}')
+    expect(focusedItem()).toBe('intro')
+
+    await user.keyboard('{ArrowUp}')
+    expect(focusedItem()).toBe('intro')
+  })
+
   it('keeps navigating from a link item that received focus directly', async () => {
     const user = userEvent.setup()
 

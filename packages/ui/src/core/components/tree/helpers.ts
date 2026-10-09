@@ -91,9 +91,15 @@ export function _getActiveElement(element: Element): Element | null {
   return root instanceof Document || root instanceof ShadowRoot ? root.activeElement : null
 }
 
-function _focusItemElement(el: HTMLElement): void {
+/**
+ * Focuses the element of an item that takes focus — the item itself, or the link of an item with
+ * an `href` — and returns it.
+ */
+function _focusItemElement(el: HTMLElement): HTMLElement | null {
   if (el.getAttribute('role') === 'treeitem') {
     el.focus()
+
+    return el
   }
 
   if (el.getAttribute('role') === 'none') {
@@ -101,20 +107,25 @@ function _focusItemElement(el: HTMLElement): void {
 
     if (firstChild && firstChild instanceof HTMLElement) {
       firstChild.focus()
+
+      return firstChild
     }
   }
+
+  return null
 }
 
 /**
  * Focuses the first of `candidates` that takes focus and returns it. `focus()` fails silently on
  * an item that cannot take focus right now (hidden by the consumer, a `linkAs` without a focusable
- * element), so each candidate is tried in turn and checked against the active element.
+ * element), so each candidate is tried in turn and checked against the active element — exactly,
+ * since focus that stays on a descendant item does not make its ancestor the focused one.
  */
 export function _focusFirstItemElement(candidates: HTMLElement[]): HTMLElement | null {
   for (const el of candidates) {
-    _focusItemElement(el)
+    const target = _focusItemElement(el)
 
-    if (el.contains(_getActiveElement(el))) return el
+    if (target && _getActiveElement(el) === target) return el
   }
 
   return null
