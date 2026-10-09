@@ -205,18 +205,22 @@ export function MenuButton(props: MenuButtonProps) {
   const menu = menuProp && cloneElement(menuProp, menuProps)
 
   // The button element, for the forwarded ref below. `Popover` clones the button once more and
-  // attaches this callback from its own.
+  // attaches this callback from its own. `replacedButton` is the node of a `button` whose DOM
+  // node was replaced (another element type or key): that, and only that, schedules an update
+  // here, so the handle follows the new node — mounting, unmounting and an `Activity` hiding and
+  // showing the button attach the same node again and schedule nothing.
   const buttonRef = useRef<HTMLButtonElement | null>(null)
-  const setButton = useButtonRefCallback(buttonRef)
+  const [replacedButton, setReplacedButton] = useState<HTMLButtonElement | null>(null)
+  const setButton = useButtonRefCallback(buttonRef, setReplacedButton)
 
   // Forwarded from the same commit as the one that mounts the button, since the handle of a
-  // parent runs after the refs of its children attached. Not composed into `setButton` itself:
-  // `Popover` re-runs the child ref it is given on every render, which would detach and attach a
-  // consumer's callback ref each time.
+  // parent runs after the refs of its children attached, and again when the node is replaced.
+  // Not composed into `setButton` itself: `Popover` re-runs the child ref it is given on every
+  // render, which would detach and attach a consumer's callback ref each time.
   useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
     forwardedRef,
-    () => buttonRef.current,
-    [],
+    () => replacedButton ?? buttonRef.current,
+    [replacedButton],
   )
 
   const button = useMemo(
@@ -254,23 +258,36 @@ export function MenuButton(props: MenuButtonProps) {
 }
 
 /**
- * The ref callback for the button, keeping its element in `buttonRef`. A hook of its own, with
- * the ref access in the module-scope function below, because the React Compiler takes a callback
- * that accesses refs for a possible read during render wherever it flows into a plain call such
- * as `cloneElement` in `MenuButton`, and would skip the component; the result of a hook call
- * carries no such mark.
+ * The ref callback for the button, keeping its element in `buttonRef` and calling `onReplace`
+ * when a different node than the last one attaches. A hook of its own, with the ref accesses in
+ * the module-scope function below, because the React Compiler takes a callback that accesses refs
+ * for a possible read during render wherever it flows into a plain call such as `cloneElement` in
+ * `MenuButton`, and would skip the component; the result of a hook call carries no such mark.
  */
 function useButtonRefCallback(
   buttonRef: React.RefObject<HTMLButtonElement | null>,
+  onReplace: (node: HTMLButtonElement) => void,
 ): (node: HTMLButtonElement) => () => void {
-  return useCallback((node: HTMLButtonElement) => attachButton(node, buttonRef), [buttonRef])
+  // The node last attached, not cleared on detach: a detach followed by the same node attaching
+  // again (`Popover` re-running the ref, an `Activity` showing the button again) is not a replacement
+  const lastNodeRef = useRef<HTMLButtonElement | null>(null)
+
+  return useCallback(
+    (node: HTMLButtonElement) => attachButton(node, buttonRef, lastNodeRef, onReplace),
+    [buttonRef, lastNodeRef, onReplace],
+  )
 }
 
 function attachButton(
   node: HTMLButtonElement,
   buttonRef: React.RefObject<HTMLButtonElement | null>,
+  lastNodeRef: React.RefObject<HTMLButtonElement | null>,
+  onReplace: (node: HTMLButtonElement) => void,
 ): () => void {
   buttonRef.current = node
+
+  if (lastNodeRef.current !== null && lastNodeRef.current !== node) onReplace(node)
+  lastNodeRef.current = node
 
   return () => {
     buttonRef.current = null

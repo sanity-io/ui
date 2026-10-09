@@ -235,6 +235,45 @@ describe('MenuButton', () => {
       expect(callbackRef.mock.calls).toEqual([[button], [null]])
     })
 
+    it('follows the button when its element is replaced, without touching the ref otherwise', () => {
+      const callbackRef = vi.fn()
+      const renderMenuButtonWith = (button: React.JSX.Element) => (
+        <MenuButton
+          button={button}
+          id="menu-button"
+          menu={
+            <Menu>
+              <MenuItem text="Option 1" />
+            </Menu>
+          }
+          ref={callbackRef}
+        />
+      )
+
+      const {rerender} = render(renderMenuButtonWith(<Button text="Open menu" />), {
+        strict: false,
+      })
+
+      const button = getButton()
+
+      expect(callbackRef.mock.calls).toEqual([[button]])
+
+      // The same element re-rendered keeps its DOM node, and the ref is left alone
+      rerender(renderMenuButtonWith(<Button text="Open menu" />))
+
+      expect(getButton()).toBe(button)
+      expect(callbackRef.mock.calls).toEqual([[button]])
+
+      // A `button` of another key mounts a new DOM node: the ref follows it, the way React moves
+      // a `ref` prop from a replaced node to its replacement
+      rerender(renderMenuButtonWith(<Button key="replacement" text="Open menu" />))
+
+      const replacement = getButton()
+
+      expect(replacement).not.toBe(button)
+      expect(callbackRef.mock.calls).toEqual([[button], [null], [replacement]])
+    })
+
     it('returns focus to the button that opened the menu when it closes with Escape', () => {
       renderMenuButton()
 
