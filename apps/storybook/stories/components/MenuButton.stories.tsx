@@ -672,14 +672,11 @@ function ViewTransitionStory(props: MenuButtonProps) {
 }
 
 /**
- * The menu button sits in an `<Activity>` inside a
- * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), shown and hidden by a
- * `startTransition` update, so React animates it in and out. The menu button adds no work of its
- * own to that transition: the button element is not kept in state, so nothing is scheduled when
- * the `Activity` attaches or detaches its ref. An update scheduled there would run at Immediate
- * priority as soon as the transition is ready to animate, holding up its first frame (React
- * DevTools shows it as an Immediate-priority commit caused by `MenuButton`), and would make React
- * cancel the transition should anything flush sync work while the browser is still preparing it.
+ * A menu button shown and hidden by an `<Activity>` inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), toggled in a
+ * `startTransition`, so React animates it in and out. The menu button adds no work of its own to
+ * that transition. (`apps/storybook/tests/menuButtonViewTransition.test.tsx` asserts on the
+ * commits of the reveal and of opening the menu.)
  */
 export const WithViewTransition: Story = {
   args: {id: 'view-transition-menu'},
