@@ -6,7 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {Activity, Profiler, useLayoutEffect} from 'react'
+import {Activity, Profiler, useCallback, useLayoutEffect, useState} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -307,9 +307,8 @@ describe('MenuButton', () => {
         const button = getButton()
         const otherButton = screen.getByRole('button', {name: 'Open other menu'})
 
-        // `Popover` positions against the reference element and renders the button without
-        // cloning it, but still forwards the reference element through the handle it keeps for
-        // the button's own ref: not a replacement of the button, and no update on mount
+        // `Popover` positions against the reference element and renders the button as given,
+        // so React attaches the button's own ref callback to the button: no update on mount
         expect(ref.current).toBe(button)
         expect(callbackRef.mock.calls).toEqual([[otherButton]])
         expect(onRender.mock.calls.map((call) => call[1])).not.toContain('nested-update')
@@ -427,8 +426,8 @@ describe('MenuButton', () => {
 
       expect(first.mock.calls).toEqual([[button]])
 
-      // The forwarded-ref effect runs for the changed ref already, so the replacement schedules
-      // no second run that would detach and attach the new ref once more
+      // The replacement's ref callback attaches the changed ref, and the forwarded-ref effect,
+      // which runs for the changed ref in the same commit, finds it attached already
       rerender(renderMenuButton('b', second))
 
       const replacement = getButton()
@@ -469,8 +468,9 @@ describe('MenuButton', () => {
 
       expect(seen).toEqual([button])
 
-      // A consumer may point the popover at the button it got from the forwarded ref: the button
-      // is then the node to ignore and the button at once, and stays the button
+      // A consumer may point the popover at the button it got from the forwarded ref: `Popover`
+      // then stops cloning the button, and React swaps the popover's ref callback on it for the
+      // button's own, the way it swaps a changed `ref` prop, and so is the forwarded ref swapped
       rerender(renderMenuButton(button, true, 1))
 
       expect(getButton()).toBe(button)
@@ -485,6 +485,74 @@ describe('MenuButton', () => {
         seen.filter((element) => element === button).length - 1,
       )
     })
+
+    // The button's ref callback is attached by React when `Popover` renders the button as given
+    // (with a `referenceElement`), and through `Popover`'s own ref callback when it clones the
+    // button: the forwarded ref detaches with the element either way
+    it.each([
+      {description: 'while it is the popover’s `referenceElement`', selfReferenced: true},
+      {description: 'while the popover clones it', selfReferenced: false},
+    ])(
+      'detaches the forwarded ref from a button that renders nothing $description, without rendering',
+      ({selfReferenced}) => {
+        const seen: (HTMLButtonElement | null)[] = []
+
+        // Hides itself on a double click, so that the button's element unmounts without
+        // `MenuButton` rendering
+        function MaybeButton(props: {ref?: React.Ref<HTMLButtonElement>}) {
+          const {ref: forwardedRef} = props
+          const [hidden, setHidden] = useState(false)
+
+          if (hidden) return null
+
+          return (
+            <Button onDoubleClick={() => setHidden(true)} ref={forwardedRef} text="Open menu" />
+          )
+        }
+
+        // A consumer that points the popover at the button it gets from the forwarded ref
+        function Consumer(props: {buttonKey: string}) {
+          const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
+          const setButton = useCallback((element: HTMLButtonElement | null) => {
+            seen.push(element)
+            setButtonElement(element)
+          }, [])
+
+          return (
+            <MenuButton
+              button={<MaybeButton key={props.buttonKey} />}
+              id="menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Option 1" />
+                </Menu>
+              }
+              popover={selfReferenced ? {referenceElement: buttonElement} : undefined}
+              ref={setButton}
+            />
+          )
+        }
+
+        const {rerender} = render(<Consumer buttonKey="a" />, {strict: false})
+
+        const button = getButton()
+
+        expect(seen.at(-1)).toBe(button)
+
+        fireEvent.doubleClick(button)
+
+        expect(screen.queryByRole('button', {name: 'Open menu'})).toBeNull()
+        expect(seen.at(-1)).toBeNull()
+
+        // And a button rendered again is attached again
+        rerender(<Consumer buttonKey="b" />)
+
+        const again = getButton()
+
+        expect(again).not.toBe(button)
+        expect(seen.at(-1)).toBe(again)
+      },
+    )
 
     it('keeps the forwarded ref on the button when a `referenceElement` is added after mount', () => {
       const seen: (HTMLButtonElement | null)[] = []
@@ -533,10 +601,10 @@ describe('MenuButton', () => {
         expect(seen).toEqual([button])
         expect(objectRef.current).toBe(otherButton)
 
-        // `Popover` stops cloning the button and attaches its own ref directly, which restores
-        // the element after the handle's cleanup cleared it; the handle then forwards the
-        // reference element, which is ignored. The changed callback ref is swapped the way React
-        // swaps a `ref` prop: the old one with `null`, the new one with the button.
+        // `Popover` stops cloning the button, so React swaps the popover's ref callback on the
+        // button for the button's own, the way it swaps a changed `ref` prop: the forwarded ref
+        // is detached with the one and attached with the other, in the same commit, and a
+        // callback ref that changed in that render is attached once, to the button
         rerender(renderMenuButtons(true))
 
         expect(getButton()).toBe(button)
@@ -676,8 +744,8 @@ describe('MenuButton', () => {
         </>
       )
 
-      // A disabled `Popover` renders the button without cloning it, and forwards `null` through
-      // the imperative handle it keeps for the button's own ref: that is not a detach
+      // A disabled `Popover` renders the button as given, so React attaches the button's own
+      // ref callback to it
       const {rerender, unmount} = render(renderMenuButtonWith(true), {strict: false})
 
       const button = getButton()
@@ -697,8 +765,7 @@ describe('MenuButton', () => {
       expect(ref.current).toBe(enabledButton)
       expect(callbackRef.mock.calls).toEqual([[otherButton], [null], [enabledOtherButton]])
 
-      // And back: the imperative handle in `Popover` forwards `null` again, after this callback
-      // attached to the new node directly
+      // And back: the button mounts again outside the popover's fragment
       rerender(renderMenuButtonWith(true))
 
       const disabledButton = getButton()

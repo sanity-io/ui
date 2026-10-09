@@ -79,7 +79,7 @@ export function MenuButton(props: MenuButtonProps) {
   // or is hidden and shown by an `<Activity>`, nor when the menu registers its elements (the
   // button element and the menu elements live in refs, see `useButtonRefCallback` and
   // `useMenuElements`); the one update a ref callback schedules is for a `button` whose DOM node
-  // is replaced (`replaceButton`). The changeset and
+  // is replaced (`handleButtonReplace`). The changeset and
   // `apps/storybook/tests/menuButtonViewTransition.test.tsx` have the why.
   const [originElement, setOriginElement] = useState<HTMLButtonElement | null>(null)
   const menuElements = useMenuElements()
@@ -216,35 +216,32 @@ export function MenuButton(props: MenuButtonProps) {
   // press on the new button must still count as one on the button, and Escape or an item click
   // must return focus to it rather than to the detached node.
   const buttonRef = useRef<HTMLButtonElement | null>(null)
+  const handleButtonReplace = useCallback(
+    (node: HTMLButtonElement) => setOriginElement((origin) => (origin === null ? null : node)),
+    [],
+  )
+
+  // The forwarded ref follows the button with React's semantics for a `ref` prop (`attachRef`),
+  // from the button's own ref callback: attached in the commit that mounts the button, before any
+  // layout effect of this component or its parents runs, and detached from the callback's cleanup
+  // when the button unmounts, when an `<Activity>` hides it, and when a `button` renders nothing
+  // where it rendered the button before — whether or not this component renders then. The
+  // callback reads the ref through `forwardedRefRef` and keeps one attachment record, which the
+  // effect below swaps to a changed ref.
   const forwardedRefRef = useLatestRef(forwardedRef)
   const forwardedAttachmentRef = useRef<ForwardedRefAttachment | null>(null)
-  const handleButtonReplace = useCallback(
-    (node: HTMLButtonElement) =>
-      replaceButton(node, {forwardedAttachmentRef, forwardedRefRef, setOriginElement}),
-    [forwardedAttachmentRef, forwardedRefRef],
+  const setButton = useButtonRefCallback(
+    buttonRef,
+    forwardedAttachmentRef,
+    forwardedRefRef,
+    handleButtonReplace,
   )
-  const setButton = useButtonRefCallback(buttonRef, handleButtonReplace, popover?.referenceElement)
 
-  // The forwarded ref follows the element with React's semantics for a `ref` prop (`attachRef`),
-  // through one attachment record: attached in the commit that mounts the button (a parent's
-  // layout effect runs after the refs of its children attached), swapped when it changes itself,
-  // moved to a replacement from the ref callback that receives the new node (before any layout
-  // effect of this component or its parents), detached when the button unmounts or an
-  // `<Activity>` hides it (layout cleanups run then) and when a `button` renders nothing where
-  // it rendered the button before. The ref callback's own cleanup leaves it alone: a cleanup
-  // followed by the same node attaching again — today `Popover` re-runs the child ref it is
-  // given on every render — must not reach the consumer's ref. A `button` that stops rendering
-  // its element without this component rendering keeps the ref on the detached node until the
-  // next render here.
   useLayoutEffect(() => {
     syncForwardedRef(forwardedAttachmentRef, forwardedRef, buttonRef.current)
 
     return () => detachForwardedRef(forwardedAttachmentRef)
   }, [forwardedRef])
-
-  useLayoutEffect(() => {
-    if (buttonRef.current === null) detachForwardedRef(forwardedAttachmentRef)
-  })
 
   const button = useMemo(
     () =>
@@ -316,47 +313,29 @@ function detachForwardedRef(attachmentRef: React.RefObject<ForwardedRefAttachmen
   attachment.detach()
 }
 
-interface ReplaceButtonOptions {
-  forwardedAttachmentRef: React.RefObject<ForwardedRefAttachment | null>
-  forwardedRefRef: React.RefObject<React.Ref<HTMLButtonElement | null> | undefined>
-  setOriginElement: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>
-}
-
-/**
- * A `button` whose DOM node was replaced: the forwarded ref moves to the new node right here, in
- * the commit that mounts it, and the origin follows it when set (see `originElement`).
- */
-function replaceButton(
-  node: HTMLButtonElement,
-  {forwardedAttachmentRef, forwardedRefRef, setOriginElement}: ReplaceButtonOptions,
-): void {
-  syncForwardedRef(forwardedAttachmentRef, forwardedRefRef.current, node)
-  setOriginElement((origin) => (origin === null ? null : node))
-}
-
 interface ButtonRefOptions {
   buttonRef: React.RefObject<HTMLButtonElement | null>
-  /**
-   * A node to take for no attachment at all: the popover's `referenceElement`, when it has one.
-   * Unless it is the button itself (a consumer may point the popover at the button it gets from
-   * the forwarded ref), which is told from a foreign node by being the node last attached.
-   */
-  ignoredNode: HTMLElement | null | undefined
+  forwardedAttachmentRef: React.RefObject<ForwardedRefAttachment | null>
+  forwardedRefRef: React.RefObject<React.Ref<HTMLButtonElement | null> | undefined>
+  /** The node last attached, remembered across its detach, which tells a replacement from it */
   lastNodeRef: React.RefObject<HTMLButtonElement | null>
   onReplace: (node: HTMLButtonElement) => void
 }
 
 /**
- * The ref callback for the button, keeping its element in `buttonRef` and calling `onReplace`
- * when a different node than the last one attaches. Its guarantees, whatever attaches it:
+ * The ref callback for the button: keeps its element in `buttonRef`, attaches the forwarded ref
+ * to it and detaches it again with React's semantics for a `ref` prop, and calls `onReplace`
+ * when a different node than the last one attaches. Its guarantees, whatever attaches it —
+ * React, when `Popover` renders the button as given, or `Popover`'s own ref callback through
+ * `attachRef`, when it clones the button:
  *
  * - The same node attaching again is never a replacement: the node last attached is remembered
- *   across its detach (an `<Activity>` showing the button again, a parent re-attaching the ref).
- * - A `null` node is ignored, since detaching only ever arrives through the returned cleanup, and
- *   so is `ignoredNode` unless it is the button itself. (Today both come from `Popover`, which
- *   forwards Floating UI's reference element through a handle of its own on every render: `null`
- *   while disabled, the `referenceElement` prop when there is one, the button otherwise.)
- * - A cleanup clears only the node its own attachment set.
+ *   across its detach (an `<Activity>` showing the button again, the second mount of
+ *   `StrictMode`, `Popover` switching between cloning the button and rendering it as given).
+ * - A cleanup clears only the node its own attachment set, and the forwarded ref with it.
+ * - A `null` node detaches whatever is attached. Neither React nor `attachRef` sends one, since
+ *   both detach through the returned cleanup; a `button` that forwards its ref with the
+ *   pre-React 19 semantics does.
  *
  * A hook of its own, with the ref accesses in the module-scope function below, because the React
  * Compiler takes a callback that accesses refs for a possible read during render wherever it
@@ -365,33 +344,47 @@ interface ButtonRefOptions {
  */
 function useButtonRefCallback(
   buttonRef: React.RefObject<HTMLButtonElement | null>,
+  forwardedAttachmentRef: React.RefObject<ForwardedRefAttachment | null>,
+  forwardedRefRef: React.RefObject<React.Ref<HTMLButtonElement | null> | undefined>,
   onReplace: (node: HTMLButtonElement) => void,
-  ignoredNode: HTMLElement | null | undefined,
 ): (node: HTMLButtonElement | null) => () => void {
   const lastNodeRef = useRef<HTMLButtonElement | null>(null)
 
   return useCallback(
     (node: HTMLButtonElement | null) =>
-      attachButton(node, {buttonRef, ignoredNode, lastNodeRef, onReplace}),
-    [buttonRef, ignoredNode, lastNodeRef, onReplace],
+      attachButton(node, {
+        buttonRef,
+        forwardedAttachmentRef,
+        forwardedRefRef,
+        lastNodeRef,
+        onReplace,
+      }),
+    [buttonRef, forwardedAttachmentRef, forwardedRefRef, lastNodeRef, onReplace],
   )
 }
 
 function attachButton(
   node: HTMLButtonElement | null,
-  {buttonRef, ignoredNode, lastNodeRef, onReplace}: ButtonRefOptions,
+  {buttonRef, forwardedAttachmentRef, forwardedRefRef, lastNodeRef, onReplace}: ButtonRefOptions,
 ): () => void {
-  if (node === null || (node === ignoredNode && node !== lastNodeRef.current)) {
+  if (node === null) {
+    buttonRef.current = null
+    detachForwardedRef(forwardedAttachmentRef)
+
     return () => undefined
   }
 
   buttonRef.current = node
+  syncForwardedRef(forwardedAttachmentRef, forwardedRefRef.current, node)
 
   if (lastNodeRef.current !== null && lastNodeRef.current !== node) onReplace(node)
   lastNodeRef.current = node
 
   return () => {
-    if (buttonRef.current === node) buttonRef.current = null
+    if (buttonRef.current !== node) return
+
+    buttonRef.current = null
+    detachForwardedRef(forwardedAttachmentRef)
   }
 }
 
