@@ -14,18 +14,21 @@ export function calcCurrentWidth(params: {
   return typeof currentWidth === 'number' ? container[currentWidth] : undefined
 }
 
+/**
+ * The width cap from the resolved `width` property and the boundary width, or `undefined` when
+ * neither caps the popover — also for a boundary without a width (collapsed or `display: none`
+ * while the popover is open), which must not become a `max-width` of `Infinity`
+ */
 export function calcMaxWidth(params: {
   boundaryWidth: number | undefined
   currentWidth: number | undefined
 }): number | undefined {
   const {boundaryWidth, currentWidth} = params
 
-  if (currentWidth === undefined && boundaryWidth === undefined) {
-    return undefined
-  }
-
-  return Math.min(
+  const maxWidth = Math.min(
     currentWidth ?? Infinity,
     (boundaryWidth || Infinity) - DEFAULT_POPOVER_PADDING * 2,
   )
+
+  return Number.isFinite(maxWidth) ? maxWidth : undefined
 }

@@ -23,18 +23,20 @@ import {
 } from './constants'
 
 /**
- * A size style of the card (see the `maxHeight` prop): `undefined` while the `size` middleware
- * owns it, whatever the consumer's `style` says; otherwise the popover's own value, and the
- * consumer's only where the popover has none (`''`), as the effect that used to re-apply the
- * popover's width and max width after every render made it.
+ * A size style of the card (see the `constrainSize` prop). `undefined` while the `size` middleware
+ * owns the property, whatever the consumer's `style` says: React never writes a style it renders
+ * as `undefined`, so the middleware's write stands. Otherwise a value for React to render — the
+ * popover's own, the consumer's where the popover has none, or `''` — which also clears the
+ * middleware's write once the property is React's again.
  */
 function sizeStyle(
-  value: number | '' | undefined,
+  ownedByMiddleware: boolean | undefined,
+  value: number | undefined,
   consumerValue: number | string | undefined,
 ): number | string | undefined {
-  if (value === undefined) return undefined
+  if (ownedByMiddleware) return undefined
 
-  return value === '' ? (consumerValue ?? '') : value
+  return value ?? consumerValue ?? ''
 }
 
 const MotionCard = styled(motion.create(Card))`
@@ -60,14 +62,15 @@ export function PopoverCard(
     arrowX?: number
     arrowY?: number
     /**
-     * The size styles (`width`, `maxWidth`, `maxHeight`) are rendered by React except while the
-     * `size` middleware writes them to the element itself during positioning (`width` for
-     * `matchReferenceWidth`, `maxWidth` and `maxHeight` for `constrainSize`). Pass `undefined`
-     * while the middleware owns one, so that React never touches it, and a value or `''`
-     * otherwise, so that React clears what the middleware wrote once it no longer owns it.
+     * Whether the `size` middleware writes `maxWidth` and `maxHeight` to the element itself during
+     * positioning. The size styles are React's to render otherwise (see `sizeStyle`): the two
+     * never write the same property, so neither overwrites the other
      */
-    maxHeight: '' | undefined
-    maxWidth: number | '' | undefined
+    constrainSize?: boolean
+    /** Whether the `size` middleware writes `width` to the element itself during positioning */
+    matchReferenceWidth?: boolean
+    /** The width cap, rendered unless `constrainSize` */
+    maxWidth: number | undefined
     originX?: number
     originY?: number
     overflow?: BoxOverflow
@@ -78,8 +81,8 @@ export function PopoverCard(
     shadow?: number | number[]
     strategy: Strategy
     tone: CardTone
-    /** See `maxHeight` */
-    width: number | '' | undefined
+    /** The width, rendered unless `matchReferenceWidth` */
+    width: number | undefined
     x: number | null
     y: number | null
   } & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'width'>,
@@ -92,7 +95,8 @@ export function PopoverCard(
     arrowX,
     arrowY,
     children,
-    maxHeight,
+    constrainSize,
+    matchReferenceWidth,
     maxWidth,
     padding,
     placement,
@@ -134,12 +138,26 @@ export function PopoverCard(
       willChange: animate ? 'transform' : undefined,
       ...style,
       // After the consumer's `style`: a size the middleware owns must not come back through it, or
-      // React would write it over the middleware's value on the next change of that style
-      maxHeight: sizeStyle(maxHeight, style?.maxHeight),
-      maxWidth: sizeStyle(maxWidth, style?.maxWidth),
-      width: sizeStyle(width, style?.width),
+      // React would write it over the middleware's value on the next change of that style. For the
+      // sizes React owns the popover's value wins, the consumer's applies where the popover has none.
+      maxHeight: sizeStyle(constrainSize, undefined, style?.maxHeight),
+      maxWidth: sizeStyle(constrainSize, maxWidth, style?.maxWidth),
+      width: sizeStyle(matchReferenceWidth, width, style?.width),
     }),
-    [animate, maxHeight, maxWidth, originX, originY, strategy, style, width, x, y, zIndex],
+    [
+      animate,
+      constrainSize,
+      matchReferenceWidth,
+      maxWidth,
+      originX,
+      originY,
+      strategy,
+      style,
+      width,
+      x,
+      y,
+      zIndex,
+    ],
   )
 
   const arrowStyle: CSSProperties = useMemo(

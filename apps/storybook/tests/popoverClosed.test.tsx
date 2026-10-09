@@ -284,13 +284,20 @@ describe('closed popover', () => {
       // The room is the boundary's client width (its scrollbar excluded, unlike the cap from its
       // border-box width) minus the padding on both sides
       const room = boundary().clientWidth - BOUNDARY_PADDING
+      // And below the reference: from the card's top (the reference's bottom plus the distance) to
+      // the bottom of the boundary's client box, less the padding
+      const roomBelow =
+        boundary().getBoundingClientRect().top +
+        boundary().clientHeight -
+        reference().getBoundingClientRect().bottom -
+        DISTANCE -
+        BOUNDARY_PADDING / 2
 
       expect(first.display).toBe('')
       expect(first.top).toBe(first.expectedTop)
       expect(first.maxWidth).toBe(`${Math.min(room, BOUNDARY_WIDTH - BOUNDARY_PADDING)}px`)
       expect(first.width).toBeLessThanOrEqual(room)
-      expect(parseFloat(first.maxHeight)).toBeGreaterThan(0)
-      expect(parseFloat(first.maxHeight)).toBeLessThan(200)
+      expect(Math.abs(parseFloat(first.maxHeight) - roomBelow)).toBeLessThan(1)
       expect(second).toEqual(first)
     })
   })
@@ -325,6 +332,7 @@ describe('closed popover', () => {
       await render(<Harness constrainSize />)
 
       await open()
+      popoverCommits = 0
 
       const narrower = BOUNDARY_WIDTH - 40
 
@@ -342,6 +350,13 @@ describe('closed popover', () => {
       expect(card()!.getBoundingClientRect().right).toBeLessThanOrEqual(
         boundary().getBoundingClientRect().right,
       )
+      // This is where the popover's own pass costs something: the commit for the new boundary
+      // size, the commit of that pass's positioning data (the card shrank inside the pass, and
+      // Floating UI's `flip` records the placements it tried with the old and the new size), and
+      // the commit of the pass `autoUpdate` runs for the card's new size. Without the explicit
+      // pass the cap would be written to the element directly and the second commit saved — at
+      // the price of a cap that ignores the room within the boundary until the next pass.
+      expect(popoverCommits).toBe(3)
     })
   })
 

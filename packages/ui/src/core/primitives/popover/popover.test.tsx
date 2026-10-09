@@ -574,20 +574,23 @@ describe('Popover', () => {
   // where the `size` middleware writes them to the element during positioning (the width when it
   // matches the reference element's, the max width when `constrainSize` caps it to the available
   // room), and React never touches a style it did not render.
+  //
+  // jsdom lays nothing out, so the geometry is defined on the elements: the boundary's offset size
+  // (what the popover measures on open) and client size (what Floating UI clips to; the same
+  // unless `boundaryClientWidth` says otherwise, as a scrollbar would), the viewport's client size
+  // (`beforeEach`), and the reference element's rect, `REFERENCE_WIDTH` wide (`Example`).
   describe('width and max width', () => {
     const REFERENCE_WIDTH = 100
 
-    /** Positioning passes: Floating UI measures the elements once at the start of every pass */
+    /**
+     * Positioning passes, counted as the measurements Floating UI takes at the start of every pass
+     * — and again for every `reset: {rects: true}` the `size` middleware returns, which no test here
+     * triggers: jsdom's card is 0×0 unless a test defines its size, and then keeps it constant
+     */
     function passes() {
       return vi.mocked(platform.getElementRects).mock.calls.length
     }
 
-    /**
-     * jsdom lays nothing out, so the geometry is defined on the elements: the boundary's offset
-     * size (what the popover measures on open) and client size (what Floating UI clips to; the
-     * same unless `boundaryClientWidth` says otherwise, as a scrollbar would), the viewport's
-     * client size, and the reference element's rect, `REFERENCE_WIDTH` wide
-     */
     /** Defines the layout sizes jsdom does not compute on a boundary element */
     function defineBoundarySize(node: HTMLElement, width: number, clientWidth = width) {
       for (const [name, value] of [
@@ -600,18 +603,50 @@ describe('Popover', () => {
       }
     }
 
+    const plainBoundaries: HTMLElement[] = []
+
+    /**
+     * A boundary element of the test's own: a plain element (no own enumerable properties, so
+     * `useFloating`'s deep comparison cannot tell two of them apart) in the document, at the
+     * origin unless `rect` says otherwise
+     */
+    function plainBoundary(width: number, clientWidth = width, rect?: {x: number; y: number}) {
+      const element = document.createElement('div')
+
+      defineBoundarySize(element, width, clientWidth)
+      if (rect) {
+        element.getBoundingClientRect = () =>
+          DOMRect.fromRect({...rect, width: clientWidth, height: 100})
+      }
+      document.body.appendChild(element)
+      plainBoundaries.push(element)
+
+      return element
+    }
+
     function Example(
       props: {
         boundaryWidth: number
         boundaryClientWidth?: number
-        /** A boundary element of the test's own, instead of the one the example renders */
-        boundaryElement?: HTMLElement
+        /**
+         * A boundary element of the test's own for the provider, instead of the one the example
+         * renders; `null` for no boundary at all
+         */
+        boundaryElement?: HTMLElement | null
         /** Where the reference element is, instead of at the origin */
         referenceRect?: {x: number; y: number}
         style?: CSSProperties
       } & Pick<
         PopoverProps,
-        'constrainSize' | 'fallbackPlacements' | 'matchReferenceWidth' | 'open' | 'tone' | 'width'
+        | '__unstable_margins'
+        | 'constrainSize'
+        | 'fallbackPlacements'
+        | 'floatingBoundary'
+        | 'matchReferenceWidth'
+        | 'open'
+        | 'referenceBoundary'
+        | 'tone'
+        | 'width'
       >,
     ) {
       const {
@@ -621,6 +656,8 @@ describe('Popover', () => {
         referenceRect = {x: 0, y: 0},
         ...popoverProps
       } = props
+      // The boundary element reaches the provider through state, in a nested commit of the mount
+      // task, as `BoundaryElementProvider`s rendered from a ref callback do
       const [boundary, setBoundary] = useState<HTMLDivElement | null>(null)
 
       return (
@@ -631,7 +668,9 @@ describe('Popover', () => {
             setBoundary(node)
           }}
         >
-          <BoundaryElementProvider element={boundaryElement ?? boundary}>
+          <BoundaryElementProvider
+            element={boundaryElement === undefined ? boundary : boundaryElement}
+          >
             <Popover content={content} {...popoverProps}>
               <Button
                 ref={(node) => {
@@ -670,12 +709,11 @@ describe('Popover', () => {
       delete document.documentElement.clientWidth
       // @ts-expect-error -- same
       delete document.documentElement.clientHeight
+      for (const element of plainBoundaries.splice(0)) element.remove()
     })
 
-    // `strict: false` throughout: StrictMode double-invokes effects on mount, which would double
-    // the counts these tests are about
     it('renders the max width on the card, so the boundary resizing while open costs no positioning pass', async () => {
-      const {rerender} = render(<Example boundaryWidth={300} />, {strict: false})
+      const {rerender} = render(<Example boundaryWidth={300} />)
       const boundary = screen.getByTestId('boundary')
 
       rerender(<Example boundaryWidth={300} open />)
@@ -694,9 +732,7 @@ describe('Popover', () => {
     })
 
     it('lets the `size` middleware write the width when it matches the reference element, and never touches it itself', async () => {
-      const {rerender} = render(<Example boundaryWidth={300} matchReferenceWidth />, {
-        strict: false,
-      })
+      const {rerender} = render(<Example boundaryWidth={300} matchReferenceWidth />)
 
       rerender(<Example boundaryWidth={300} matchReferenceWidth open />)
       await settle()
@@ -718,7 +754,7 @@ describe('Popover', () => {
     })
 
     it('lets the `size` middleware write the max width under `constrainSize`, and repositions once when it changes', async () => {
-      const {rerender} = render(<Example boundaryWidth={300} constrainSize />, {strict: false})
+      const {rerender} = render(<Example boundaryWidth={300} constrainSize />)
       const boundary = screen.getByTestId('boundary')
 
       rerender(<Example boundaryWidth={300} constrainSize open />)
@@ -766,7 +802,6 @@ describe('Popover', () => {
       async ({width, expected}) => {
         const {rerender} = render(
           <Example boundaryWidth={300} constrainSize matchReferenceWidth width={width} />,
-          {strict: false},
         )
 
         rerender(
@@ -806,9 +841,7 @@ describe('Popover', () => {
     )
 
     it('repositions once when `constrainSize` is turned on, with Floating UI restarting `autoUpdate`', async () => {
-      const {rerender} = render(<Example boundaryClientWidth={285} boundaryWidth={300} open />, {
-        strict: false,
-      })
+      const {rerender} = render(<Example boundaryClientWidth={285} boundaryWidth={300} open />)
       await settle()
 
       const card = cardElement()!
@@ -840,7 +873,6 @@ describe('Popover', () => {
           fallbackPlacements={['top']}
           referenceRect={{x: 150, y: 70}}
         />,
-        {strict: false},
       )
 
       // Pre-rendered on intent, so that the card can be given a size before the first pass
@@ -884,18 +916,10 @@ describe('Popover', () => {
       // Plain elements, which `useFloating`'s deep comparison cannot tell apart (no own enumerable
       // properties): the middleware reads the boundary through a ref and the popover repositions
       // for the swap itself, so Floating UI need not notice
-      const boundaries = [300, 200].map((clientWidth) => {
-        const element = document.createElement('div')
-
-        defineBoundarySize(element, 300, clientWidth)
-        document.body.appendChild(element)
-
-        return element
-      })
+      const boundaries = [300, 200].map((clientWidth) => plainBoundary(300, clientWidth))
 
       const {rerender} = render(
         <Example boundaryElement={boundaries[0]} boundaryWidth={300} constrainSize open />,
-        {strict: false},
       )
       await settle()
 
@@ -910,8 +934,6 @@ describe('Popover', () => {
       // One pass, which clipped to the new boundary's room (the cap stayed at `292`)
       expect(card.style.maxWidth).toBe('192px')
       expect(passes()).toBe(2)
-
-      for (const element of boundaries) element.remove()
     })
 
     it('repositions once for a swapped boundary element whose width differs', async () => {
@@ -919,18 +941,10 @@ describe('Popover', () => {
       // in that commit (a nested commit, the cap changing from `292` to `192`). Floating UI reads
       // the refs only after the task, so the pass of the first commit sees both changes and the
       // second commit must not add a pass of its own
-      const boundaries = [300, 200].map((width) => {
-        const element = document.createElement('div')
-
-        defineBoundarySize(element, width)
-        document.body.appendChild(element)
-
-        return element
-      })
+      const boundaries = [300, 200].map((width) => plainBoundary(width))
 
       const {rerender} = render(
         <Example boundaryElement={boundaries[0]} boundaryWidth={300} constrainSize open />,
-        {strict: false},
       )
       await settle()
 
@@ -944,19 +958,140 @@ describe('Popover', () => {
 
       expect(card.style.maxWidth).toBe('192px')
       expect(passes()).toBe(2)
+    })
 
-      for (const element of boundaries) element.remove()
+    it('positions once when it mounts open under a boundary that arrives in the mount task', async () => {
+      // The floating element and the boundary element reach Floating UI and the provider in a
+      // nested commit of the mount task, and the boundary's size, measured in that commit, in the
+      // next: `autoUpdate` starts with a pass in the first, which reads the cap written in the
+      // second, so the popover must not add a pass for the cap of its own
+      render(<Example boundaryWidth={300} constrainSize open />)
+      await settle()
+
+      expect(cardMaxWidth()).toBe('292px')
+      expect(passes()).toBe(1)
+    })
+
+    it('renders no cap for a boundary without a width, rather than an infinite one', async () => {
+      // A boundary that collapses or is `display: none` while the popover is open reports a `0`
+      // border-box size; `Infinity` is not a length, so React would leave the previous cap in place
+      const {rerender} = render(<Example boundaryWidth={300} />)
+      const boundary = screen.getByTestId('boundary')
+      const error = vi.spyOn(console, 'error').mockImplementation(() => undefined)
+
+      rerender(<Example boundaryWidth={300} open />)
+      await settle()
+
+      expect(cardMaxWidth()).toBe('292px')
+
+      act(() => observersOf(boundary)[0].resize(boundary, 0, 0))
+
+      expect(cardMaxWidth()).toBe('')
+      expect(error).not.toHaveBeenCalled()
+    })
+
+    it('tells Floating UI about changed margins', async () => {
+      // The margins are an array, compared deeply through the `size` middleware's `options`; the
+      // reference-matched width is the reference's less the horizontal margins
+      const {rerender} = render(<Example boundaryWidth={300} matchReferenceWidth open />)
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+
+      rerender(
+        <Example
+          __unstable_margins={[0, 10, 0, 10]}
+          boundaryWidth={300}
+          matchReferenceWidth
+          open
+        />,
+      )
+      await settle()
+
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH - 20}px`)
+      expect(passes()).toBe(2)
+    })
+
+    it('repositions against the clipping ancestors once the boundary element is gone', async () => {
+      // With no boundary there is no cap either (the last measured size is not kept for an element
+      // that is no longer there), so the room within the clipping ancestors — the viewport, here —
+      // is what constrains the popover
+      const {rerender} = render(
+        <Example boundaryElement={plainBoundary(300)} boundaryWidth={300} constrainSize open />,
+      )
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.style.maxWidth).toBe('292px')
+
+      rerender(<Example boundaryElement={null} boundaryWidth={300} constrainSize open />)
+      await settle()
+
+      expect(card.style.maxWidth).toBe('1016px')
+      expect(passes()).toBe(2)
+    })
+
+    it('repositions for a changed `floatingBoundary` property on its own', async () => {
+      // The provider's boundary (300 wide, so the cap stays `292`) is left alone; only the element
+      // the `size` middleware clips to changes
+      const {rerender} = render(
+        <Example boundaryWidth={300} constrainSize floatingBoundary={plainBoundary(300)} open />,
+      )
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.style.maxWidth).toBe('292px')
+
+      rerender(
+        <Example
+          boundaryWidth={300}
+          constrainSize
+          floatingBoundary={plainBoundary(300, 200)}
+          open
+        />,
+      )
+      await settle()
+
+      expect(card.style.maxWidth).toBe('192px')
+      expect(passes()).toBe(2)
+    })
+
+    it('repositions for a changed `referenceBoundary` property on its own', async () => {
+      // The `hide` middleware hides the card once the reference element is clipped by the
+      // reference boundary: a boundary to the right of the reference clips it entirely
+      const beside = plainBoundary(100, 100, {x: 500, y: 0})
+      const around = plainBoundary(300)
+      const {rerender} = render(<Example boundaryWidth={300} open referenceBoundary={around} />)
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.hidden).toBe(false)
+
+      rerender(<Example boundaryWidth={300} open referenceBoundary={beside} />)
+      await settle()
+
+      expect(card.hidden).toBe(true)
+      expect(passes()).toBe(2)
+
+      rerender(<Example boundaryWidth={300} open referenceBoundary={around} />)
+      await settle()
+
+      expect(card.hidden).toBe(false)
+      expect(passes()).toBe(3)
     })
 
     it("lets a consumer `style` set the sizes React owns, never the middleware's", async () => {
       const style = {maxHeight: 50, maxWidth: 60, width: 70}
 
       // With the default `width` the popover has no width of its own, so the consumer's applies;
-      // the popover's cap wins over the consumer's max width, as the effect that used to re-apply
-      // it made it; nothing constrains the height
-      const {rerender} = render(<Example boundaryWidth={300} open style={style} />, {
-        strict: false,
-      })
+      // the popover's cap wins over the consumer's max width (the popover's own value always does);
+      // nothing constrains the height
+      const {rerender} = render(<Example boundaryWidth={300} open style={style} />)
       await settle()
 
       const card = cardElement()!
@@ -965,7 +1100,7 @@ describe('Popover', () => {
       expect(card.style.maxWidth).toBe('292px')
       expect(card.style.maxHeight).toBe('50px')
 
-      // A `width` property wins over the consumer's width, as before
+      // A `width` property wins over the consumer's width
       rerender(<Example boundaryWidth={300} open style={style} width={0} />)
       await settle()
 
@@ -1003,7 +1138,6 @@ describe('Popover', () => {
       // cap from its border-box width, so the two writers are told apart by their values
       const {rerender} = render(
         <Example boundaryClientWidth={285} boundaryWidth={300} constrainSize />,
-        {strict: false},
       )
 
       rerender(<Example boundaryClientWidth={285} boundaryWidth={300} constrainSize open />)

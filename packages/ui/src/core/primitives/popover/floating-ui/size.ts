@@ -51,50 +51,52 @@ export function size(options: SizeOptions): Middleware {
       const {elements, placement, platform, rects} = args
       const {floating, reference} = rects
 
-      const overflow = await detectOverflow(args, {
-        altBoundary: true,
-        boundary: boundaryRef.current || undefined,
-        elementContext: 'floating',
-        padding,
-        rootBoundary: 'viewport',
-      })
-
-      let maxWidth = Infinity
-      let maxHeight = Infinity
-
       const floatingW = floating.width
       const floatingH = floating.height
 
-      if (placement.includes('top')) {
-        maxWidth = floatingW - (overflow.left + overflow.right)
-        maxHeight = floatingH - overflow.top
-      }
-
-      if (placement.includes('right')) {
-        maxWidth = floatingW - overflow.right
-        maxHeight = floatingH - (overflow.top + overflow.bottom)
-      }
-
-      if (placement.includes('bottom')) {
-        maxWidth = floatingW - (overflow.left + overflow.right)
-        maxHeight = floatingH - overflow.bottom
-      }
-
-      if (placement.includes('left')) {
-        maxWidth = floatingW - overflow.left
-        maxHeight = floatingH - (overflow.top + overflow.bottom)
-      }
-
       // IMPORTANT – APPLY ELEMENT STYLES HERE
       // Elements need to be resized BEFORE the `platform.getDimensions` call below
-      const availableWidth = maxWidth - margins[1] - margins[3]
-      const availableHeight = maxHeight - margins[0] - margins[2]
-
       if (matchReferenceWidth) {
         elements.floating.style.width = `${reference.width - margins[1] - margins[3]}px`
       }
 
+      // The room within the boundary is only measured when it is applied: `detectOverflow` walks
+      // the clipping ancestors on every pass otherwise, for nothing
       if (constrainSize) {
+        const overflow = await detectOverflow(args, {
+          altBoundary: true,
+          boundary: boundaryRef.current || undefined,
+          elementContext: 'floating',
+          padding,
+          rootBoundary: 'viewport',
+        })
+
+        let maxWidth = Infinity
+        let maxHeight = Infinity
+
+        if (placement.includes('top')) {
+          maxWidth = floatingW - (overflow.left + overflow.right)
+          maxHeight = floatingH - overflow.top
+        }
+
+        if (placement.includes('right')) {
+          maxWidth = floatingW - overflow.right
+          maxHeight = floatingH - (overflow.top + overflow.bottom)
+        }
+
+        if (placement.includes('bottom')) {
+          maxWidth = floatingW - (overflow.left + overflow.right)
+          maxHeight = floatingH - overflow.bottom
+        }
+
+        if (placement.includes('left')) {
+          maxWidth = floatingW - overflow.left
+          maxHeight = floatingH - (overflow.top + overflow.bottom)
+        }
+
+        const availableWidth = maxWidth - margins[1] - margins[3]
+        const availableHeight = maxHeight - margins[0] - margins[2]
+
         elements.floating.style.maxWidth = `${Math.min(availableWidth, maxWidthRef.current ?? Infinity)}px`
 
         elements.floating.style.maxHeight = `${availableHeight}px`
