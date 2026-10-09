@@ -279,6 +279,50 @@ describe('Components/MenuButton', () => {
     })
   })
 
+  // The browser activates a button on Enter and Space by synthesizing a click, a default action
+  // `MenuButton` prevents when it handles those keys, which `fireEvent` cannot reproduce
+  describe('handlers on the button element', () => {
+    test('onClick on the button does not run for a keyboard open, and runs for a programmatic click', async () => {
+      const onButtonClick = vi.fn()
+
+      await render(
+        <ThemeProvider scheme="light" theme={theme}>
+          <Card padding={4}>
+            <MenuButton
+              button={<Button onClick={onButtonClick} text="Open" />}
+              id="menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Item" />
+                </Menu>
+              }
+            />
+          </Card>
+        </ThemeProvider>,
+      )
+
+      /** Opens the menu with a key press on the focused button, then closes it with Escape */
+      async function openWithKeyThenClose(key: string) {
+        button().focus()
+        await userEvent.keyboard(key)
+
+        await expect.poll(readFrame).toEqual(OPEN)
+        expect(onButtonClick).not.toHaveBeenCalled()
+
+        await userEvent.keyboard('{Escape}')
+        await expect.poll(readFrame).toEqual(CLOSED)
+      }
+
+      await openWithKeyThenClose('{Enter}')
+      await openWithKeyThenClose(' ')
+
+      button().click()
+
+      await expect.poll(readFrame).toEqual(OPEN)
+      expect(onButtonClick).toHaveBeenCalledTimes(1)
+    })
+  })
+
   // These scenarios rely on the browser's native tab behavior (the menu moves
   // focus back to the button on tab, and the key press then moves it onwards),
   // so they use real key presses instead of a story `play` function

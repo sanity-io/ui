@@ -53,10 +53,12 @@ export interface MenuButtonProps {
    * and one that calls `event.preventDefault()` keeps `MenuButton` from acting on the event. That
    * includes a handler that prevents the default for its own reasons, such as the navigation of
    * an `<a>` or the submission of a `type="submit"` button, which then also keeps the menu from
-   * opening. `MenuButton` prevents the default of the key presses that open the menu, so the
-   * browser does not synthesize a click for them: an `onClick` on the element runs for pointer
-   * clicks, not for keyboard opens. The element's `id`, `ref`, `aria-haspopup`, `aria-expanded`
-   * and `data-ui` are set by `MenuButton`; `selected` is, unless the element sets it.
+   * opening. `MenuButton` prevents the default of the Enter and Space key presses it handles, so
+   * the click the browser would synthesize for them does not fire: an `onClick` on the element
+   * does not run for a keyboard open, while a pointer click, a programmatic `click()` and an
+   * activation by assistive technology run it as usual. The element's `id`, `ref`,
+   * `aria-haspopup`, `aria-expanded` and `data-ui` are set by `MenuButton`; `selected` is, unless
+   * the element sets it.
    */
   button: React.JSX.Element
   id: string
