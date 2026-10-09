@@ -7,13 +7,21 @@ import {Popover} from '@sanity/ui/popover'
 import {buildTheme} from '@sanity/ui/theme'
 import {Tooltip} from '@sanity/ui/tooltip'
 import {composeStories} from '@storybook/react-vite'
-import {Activity, startTransition, useState, ViewTransition} from 'react'
+import {
+  Activity,
+  startTransition,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
+  useState,
+  ViewTransition,
+} from 'react'
 import {afterEach, beforeEach, describe, expect, test, vi} from 'vitest'
 import {render} from 'vitest-browser-react'
 
 import * as popoverStories from '../stories/primitives/Popover.stories'
 import * as tooltipStories from '../stories/primitives/Tooltip.stories'
-import {commits, type RecordedCommit} from './helpers/reactDevtoolsHook'
+import {commits, installed, type RecordedCommit} from './helpers/reactDevtoolsHook'
 
 const {WithViewTransition: TooltipWithViewTransition} = composeStories(tooltipStories)
 const {WithViewTransition: PopoverWithViewTransition} = composeStories(popoverStories)
@@ -87,6 +95,9 @@ function observeViewTransitions(duringPreparation?: () => void): ObservedTransit
 
       try {
         await transition.finished
+      } catch {
+        // `finished` follows `updateCallbackDone`: an update callback that threw rejects it too,
+        // and is reported through `ready` above
       } finally {
         observed.finished = true
       }
@@ -122,6 +133,11 @@ function commitsOfPriority(priority: number) {
  * any Idle-priority pre-rendering of hidden content; neither is urgent.
  */
 function urgentCommitsBeforeFirstFrame(transition: ObservedTransition) {
+  // Both times are recorded once `ready` resolved; without them the window below is empty and
+  // the assertion on it would pass for nothing
+  expect(transition.readyAt).not.toBeNaN()
+  expect(transition.firstFrameAt).not.toBeNaN()
+
   return commits
     .filter(
       (commit) =>
@@ -130,6 +146,21 @@ function urgentCommitsBeforeFirstFrame(transition: ObservedTransition) {
         commit.time < transition.firstFrameAt,
     )
     .map(describeCommit)
+}
+
+/** The components that scheduled the updates of the commits recorded so far, at any priority */
+function updaters() {
+  return commits.flatMap((commit) => commit.updaters)
+}
+
+/**
+ * A positive control for the hook: the commit of the click that toggles `shown` in the story
+ * renders its component, and React reports it as that commit's updater only when the hook this
+ * file installs is the one it found. Without it every negative assertion below would pass with
+ * nothing recorded.
+ */
+function expectRecordedUpdater(name: string) {
+  expect(updaters()).toContain(name)
 }
 
 /** The button with the given text, whether or not an `Activity` currently hides it */
@@ -159,6 +190,8 @@ function isShown(element: HTMLElement) {
 }
 
 beforeEach(() => {
+  // The hook records only when React found it first (see `installed`)
+  expect(installed).toBe(true)
   commits.length = 0
 })
 
@@ -185,8 +218,11 @@ describe('revealing @sanity/ui overlays with a <ViewTransition>', () => {
 
     expect(transitions[0]).toMatchObject({ready: 'resolved', finished: true})
     expect(isShown(button('Hover me'))).toBe(true)
+    expectRecordedUpdater('ViewTransitionStory')
     expect(commitsOfPriority(IMMEDIATE_PRIORITY)).toEqual([])
     expect(urgentCommitsBeforeFirstFrame(transitions[0])).toEqual([])
+
+    expect(transitions).toHaveLength(1)
 
     clickAndRecord('Hide')
     await waitForTransitionToFinish(transitions, 1)
@@ -195,6 +231,7 @@ describe('revealing @sanity/ui overlays with a <ViewTransition>', () => {
     expect(isShown(button('Hover me'))).toBe(false)
     expect(commitsOfPriority(IMMEDIATE_PRIORITY)).toEqual([])
     expect(urgentCommitsBeforeFirstFrame(transitions[1])).toEqual([])
+    expect(transitions).toHaveLength(2)
   })
 
   test('a Popover schedules no Immediate-priority commit when it is revealed or hidden', async () => {
@@ -208,20 +245,39 @@ describe('revealing @sanity/ui overlays with a <ViewTransition>', () => {
 
     expect(transitions[0]).toMatchObject({ready: 'resolved', finished: true})
     expect(isShown(button('Toggle popover'))).toBe(true)
+    expectRecordedUpdater('ViewTransitionStory')
     expect(commitsOfPriority(IMMEDIATE_PRIORITY)).toEqual([])
     expect(urgentCommitsBeforeFirstFrame(transitions[0])).toEqual([])
     // Nor did it commit anything in the transition's wake: a transition update inside the
     // `<ViewTransition>` would have been one more transition for React to snapshot and animate
     expect(transitions).toHaveLength(1)
 
-    clickAndRecord('Hide')
+    // The revealed element is listened to for intent: the pointer entering it pre-renders the
+    // popover, hidden, in a transition. Being a transition update inside the `<ViewTransition>`,
+    // React starts a view transition for that commit too (one with nothing visible to animate),
+    // after the reveal's has finished.
+    expect(document.querySelector('[data-ui="Popover"]')).toBeNull()
+    commits.length = 0
+    button('Toggle popover').dispatchEvent(new PointerEvent('pointerenter'))
+    await expect.poll(() => document.querySelector('[data-ui="Popover"]')).not.toBeNull()
+    expect(document.querySelector<HTMLElement>('[data-ui="Popover"]')!.checkVisibility()).toBe(
+      false,
+    )
+    expect(commitsOfPriority(IMMEDIATE_PRIORITY)).toEqual([])
+    await expect.poll(() => transitions.length).toBe(2)
     await waitForTransitionToFinish(transitions, 1)
 
-    expect(transitions[1]).toMatchObject({ready: 'resolved', finished: true})
+    // The hide is the transition after whatever came before it
+    const hideTransition = transitions.length
+
+    clickAndRecord('Hide')
+    await waitForTransitionToFinish(transitions, hideTransition)
+
+    expect(transitions[hideTransition]).toMatchObject({ready: 'resolved', finished: true})
     expect(isShown(button('Toggle popover'))).toBe(false)
     expect(commitsOfPriority(IMMEDIATE_PRIORITY)).toEqual([])
-    expect(urgentCommitsBeforeFirstFrame(transitions[1])).toEqual([])
-    expect(transitions).toHaveLength(2)
+    expect(urgentCommitsBeforeFirstFrame(transitions[hideTransition])).toEqual([])
+    expect(transitions).toHaveLength(hideTransition + 1)
   })
 
   // A sync update scheduled while the browser prepares a view transition is not committed until
@@ -317,6 +373,85 @@ describe('revealing @sanity/ui overlays with a <ViewTransition>', () => {
 
       expect(transition).toMatchObject({ready: 'resolved', finished: true, error: null})
       expect(warnings).toEqual([])
+    })
+  })
+
+  // Focus inside the reference element counts as intent to open the popover. A reference that is
+  // focused as the reveal commits (a layout effect of its own that focuses it, focus restored into
+  // the subtree) shows that intent from inside the commit that starts the view transition, so the
+  // pre-render — a transition update, inside the `<ViewTransition>` — is scheduled from the commit
+  // phase of a transition: React holds it until that transition has finished, and it is a
+  // transition of its own for the boundary, with nothing visible to animate. (`autoFocus` is not
+  // such a case: React focuses an element only as it mounts, which hidden `Activity` content does
+  // while hidden, where it cannot take focus, and not again as it is shown.)
+  describe('a Popover whose reference is focused as it is revealed', () => {
+    /**
+     * Focuses its button from a layout effect, which runs as it mounts and again as an
+     * `<Activity>` shows it, before the handle below hands the button to the popover: the
+     * popover meets an element that has focus already, as a `referenceElement` prop can.
+     */
+    function FocusOnShow(props: {ref?: React.Ref<HTMLButtonElement>; text: string}) {
+      const {ref: forwardedRef, text} = props
+      const ref = useRef<HTMLButtonElement | null>(null)
+
+      useLayoutEffect(() => {
+        ref.current?.focus()
+      })
+
+      useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
+        forwardedRef,
+        () => ref.current,
+        [],
+      )
+
+      return <Button ref={ref} text={text} />
+    }
+
+    function Harness() {
+      const [shown, setShown] = useState(false)
+
+      return (
+        <ThemeProvider scheme="light" theme={theme}>
+          <Card padding={4}>
+            <button id="show" onClick={() => startTransition(() => setShown(true))} type="button">
+              show
+            </button>
+            <Activity mode={shown ? 'visible' : 'hidden'}>
+              <ViewTransition>
+                <div id="revealed">
+                  <Popover content="Popover">
+                    <FocusOnShow text="Reference" />
+                  </Popover>
+                </div>
+              </ViewTransition>
+            </Activity>
+          </Card>
+        </ThemeProvider>
+      )
+    }
+
+    test('pre-renders the popover once the reveal has finished, without skipping it', async () => {
+      const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined)
+      const transitions = observeViewTransitions()
+
+      await render(<Harness />)
+      clickAndRecord('show')
+      await waitForTransitionToFinish(transitions)
+
+      expect(transitions[0]).toMatchObject({ready: 'resolved', finished: true, error: null})
+      expect(document.activeElement).toBe(button('Reference'))
+      expect(commitsOfPriority(IMMEDIATE_PRIORITY)).toEqual([])
+      expect(urgentCommitsBeforeFirstFrame(transitions[0])).toEqual([])
+      expect(warn.mock.calls.map((call) => String(call[0]))).toEqual([])
+
+      // The pre-render landed after the reveal, hidden, and started a transition of its own
+      await expect.poll(() => document.querySelector('[data-ui="Popover"]')).not.toBeNull()
+      expect(document.querySelector<HTMLElement>('[data-ui="Popover"]')!.checkVisibility()).toBe(
+        false,
+      )
+      await expect.poll(() => transitions.length).toBe(2)
+      await waitForTransitionToFinish(transitions, 1)
+      expect(transitions[1]).toMatchObject({ready: 'resolved', finished: true, error: null})
     })
   })
 })

@@ -5,6 +5,13 @@
  * DevTools displays as the commit's priority (1 "Immediate", 2 "User-blocking", 3 "Normal", 5
  * "Idle") and, because the hook is present, `root.memoizedUpdaters` holding the fibers whose
  * updates the commit rendered (what DevTools lists under "What caused this update?").
+ *
+ * The hook only records when it is the hook React found: `react-dom` reads the global once, as it
+ * evaluates, so this module has to run before anything imports `react-dom/client` — including the
+ * setup files of the Vitest project, which run before the imports of a test file do. `installed`
+ * tells whether this module got to install its hook; a test should assert it (and that commits
+ * are being recorded) before relying on what was recorded, since an empty record makes every
+ * negative assertion pass for nothing.
  */
 
 export interface RecordedCommit {
@@ -45,7 +52,16 @@ declare global {
   var __REACT_DEVTOOLS_GLOBAL_HOOK__: unknown
 }
 
-if (!globalThis.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+/**
+ * Whether this module installed the hook React reports to. `false` when another hook was there
+ * first (a DevTools extension in a headed browser, a setup file that installed one), in which
+ * case nothing is ever recorded here.
+ */
+export const installed: boolean = install()
+
+function install(): boolean {
+  if (globalThis.__REACT_DEVTOOLS_GLOBAL_HOOK__) return false
+
   let nextId = 1
   const renderers = new Map<number, unknown>()
 
@@ -70,4 +86,6 @@ if (!globalThis.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
     onPostCommitFiberRoot() {},
     setStrictMode() {},
   }
+
+  return true
 }
