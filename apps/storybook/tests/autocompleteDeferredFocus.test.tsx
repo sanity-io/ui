@@ -66,4 +66,33 @@ describe('autocomplete arrow key while the list is still opening', () => {
     await expect.poll(activeOptionId, POLL).toBe('ac-option-bar')
     expect(input.element().getAttribute('aria-activedescendant')).toBe('ac-option-bar')
   })
+
+  // The same effect must not move focus for an open that keyboard navigation had no part in. A
+  // link option is focusable whatever its `tabIndex`, and the open button focuses the input in
+  // an animation frame, which the deferred open can land after.
+  test('leaves focus in the input when the list opens on a focusable selected option', async () => {
+    const screen = await render(
+      <ThemeProvider theme={theme}>
+        <Autocomplete
+          filterOption={() => true}
+          id="ac"
+          openButton
+          options={OPTIONS}
+          renderOption={(option) => <a href="#">{option.value}</a>}
+          value="foo"
+        />
+      </ThemeProvider>,
+    )
+    const input = screen.getByRole('combobox')
+
+    await userEvent.click(screen.getByRole('button', {name: 'Open'}))
+
+    await expect.poll(() => input.element().getAttribute('aria-expanded'), POLL).toBe('true')
+    await expect.poll(activeOptionId, POLL).toBe(undefined)
+    expect(document.activeElement).toBe(input.element())
+
+    // Keyboard navigation does move focus into the list
+    await userEvent.keyboard('{ArrowDown}')
+    await expect.poll(activeOptionId, POLL).toBe('ac-option-bar')
+  })
 })

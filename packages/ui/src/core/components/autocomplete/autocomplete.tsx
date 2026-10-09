@@ -493,12 +493,14 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     dispatch({type: 'input/focus'})
   }, [])
 
-  // Focus the selected item. Also when the list shows: an arrow key pressed between the render
-  // that asked for the list and the deferred one that shows it finds no visible option yet.
+  // Move DOM focus to the active option, when keyboard navigation put focus in the list
+  // (`listFocused`; a plain open with a selected value leaves focus in the input, however
+  // focusable the option is) and the list shows: an arrow key pressed between the render that
+  // asked for the list and the deferred one that shows it finds no visible option yet.
   useEffect(() => {
     const listElement = listBoxElementRef.current
 
-    if (!expanded || !listElement) return
+    if (!expanded || !listFocused || !listElement) return
 
     const activeOption = filteredOptions.find((o) => o.value === activeValue)
 
@@ -516,7 +518,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
         focusFirstDescendant(activeItemElement)
       }
     }
-  }, [activeValue, expanded, filteredOptions])
+  }, [activeValue, expanded, filteredOptions, listFocused])
 
   const clearButton = useMemo(() => {
     if (!loading && !disabled && value) {
