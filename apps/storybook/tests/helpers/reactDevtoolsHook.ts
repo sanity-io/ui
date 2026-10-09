@@ -25,32 +25,48 @@ export interface RecordedCommit {
 
 interface FiberLike {
   type: unknown
-  elementType: unknown
   tag: number
-  return: FiberLike | null
 }
 
 interface RootLike {
   memoizedUpdaters?: Set<FiberLike>
 }
 
+/** The shapes `fiber.type` takes for the components whose names matter in a failure message */
+interface NamedType {
+  displayName?: string
+  name?: string
+  /** `forwardRef(render)` */
+  render?: NamedType
+  /** `memo(component)` */
+  type?: NamedType
+}
+
 export const commits: RecordedCommit[] = []
 
 function nameOf(fiber: FiberLike): string {
-  const type = fiber.type
-  if (typeof type === 'function') return type.name || 'anonymous'
-  if (typeof type === 'string') return type
-  if (type && typeof type === 'object') {
-    const t = type as {displayName?: string; render?: {name?: string}; type?: {name?: string}}
-    return t.displayName || t.render?.name || t.type?.name || `tag:${fiber.tag}`
-  }
-  return `tag:${fiber.tag}`
+  return nameOfType(fiber.type) ?? `tag:${fiber.tag}`
 }
 
-declare global {
-  // The hook is a global that React looks up by name
-  var __REACT_DEVTOOLS_GLOBAL_HOOK__: unknown
+function nameOfType(type: unknown): string | undefined {
+  if (typeof type === 'function') return type.name || 'anonymous'
+  if (typeof type === 'string') return type
+  if (!type || typeof type !== 'object') return undefined
+
+  // `memo(forwardRef(render))` nests: the name is the innermost one that has one
+  const named = type as NamedType
+
+  return (
+    named.displayName ||
+    named.name ||
+    (named.render && nameOfType(named.render)) ||
+    (named.type && nameOfType(named.type)) ||
+    undefined
+  )
 }
+
+/** The global React looks the hook up by; through `Reflect`, so no type is declared for it */
+const HOOK_GLOBAL = '__REACT_DEVTOOLS_GLOBAL_HOOK__'
 
 /**
  * Whether this module installed the hook React reports to. `false` when another hook was there
@@ -60,12 +76,12 @@ declare global {
 export const installed: boolean = install()
 
 function install(): boolean {
-  if (globalThis.__REACT_DEVTOOLS_GLOBAL_HOOK__) return false
+  if (Reflect.has(globalThis, HOOK_GLOBAL)) return false
 
   let nextId = 1
   const renderers = new Map<number, unknown>()
 
-  globalThis.__REACT_DEVTOOLS_GLOBAL_HOOK__ = {
+  Reflect.set(globalThis, HOOK_GLOBAL, {
     supportsFiber: true,
     renderers,
     inject(renderer: unknown) {
@@ -85,7 +101,7 @@ function install(): boolean {
     onCommitFiberUnmount() {},
     onPostCommitFiberRoot() {},
     setStrictMode() {},
-  }
+  })
 
   return true
 }

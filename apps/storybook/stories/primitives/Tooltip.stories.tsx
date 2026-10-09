@@ -9,7 +9,7 @@ import {
   Text,
 } from '@sanity/ui'
 import {Code} from '@sanity/ui/code'
-import {Tooltip, TooltipDelayGroupProvider} from '@sanity/ui/tooltip'
+import {Tooltip, TooltipDelayGroupProvider, type TooltipProps} from '@sanity/ui/tooltip'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
 import {Activity, startTransition, useCallback, useMemo, useState, ViewTransition} from 'react'
 import {expect, userEvent, waitFor, within} from 'storybook/test'
@@ -362,7 +362,7 @@ export const CustomPortal: Story = {
   render: () => <CustomPortalStory />,
 }
 
-function ViewTransitionStory(props: React.ComponentProps<typeof Tooltip>) {
+function ViewTransitionStory(props: TooltipProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -398,4 +398,22 @@ function ViewTransitionStory(props: React.ComponentProps<typeof Tooltip>) {
 export const WithViewTransition: Story = {
   parameters: {controls: {include: ['animate', 'delay', 'placement', 'portal']}},
   render: (props) => <ViewTransitionStory {...props} />,
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement)
+
+    await step('the tooltips are revealed with a view transition', async () => {
+      await expect(canvas.getByText('Hover me').checkVisibility()).toBe(false)
+      await userEvent.click(canvas.getByRole('button', {name: 'Show'}))
+      await waitFor(async () => {
+        await expect(canvas.getByText('Hover me').checkVisibility()).toBe(true)
+      })
+    })
+
+    await step('a revealed tooltip shows against its element', async () => {
+      await userEvent.hover(canvas.getByText('Hover me'))
+      await waitFor(async () => {
+        await expect(canvas.getByText("I'm a tooltip").checkVisibility()).toBe(true)
+      })
+    })
+  },
 }
