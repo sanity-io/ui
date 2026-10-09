@@ -84,6 +84,9 @@ export function TreeItem(
   const {path, registerItem, setExpanded, setFocusedElement} = tree
   const _id = useId()
   const id = idProp || _id
+  // The group of an item with an `href` is a sibling of its `treeitem` (the link), not a
+  // descendant, so the link owns it explicitly for assistive technology
+  const groupId = `${_id}group`
   const [itemPath, itemKey] = useMemo(() => {
     const itemPath = path.concat([id || ''])
     return [itemPath, itemPath.join('/')]
@@ -181,6 +184,7 @@ export function TreeItem(
           {...linkProps}
           $level={tree.level}
           aria-expanded={expanded}
+          aria-owns={children ? groupId : undefined}
           as={linkAs}
           data-as={typeof linkAs === 'string' ? linkAs : 'a'}
           data-ui="TreeItem__box"
@@ -193,7 +197,11 @@ export function TreeItem(
         </TreeItemBox>
 
         <TreeContext.Provider value={contextValue}>
-          {children && <TreeGroup expanded={expanded}>{children}</TreeGroup>}
+          {children && (
+            <TreeGroup expanded={expanded} id={groupId}>
+              {children}
+            </TreeGroup>
+          )}
         </TreeContext.Provider>
       </StyledTreeItem>
     )

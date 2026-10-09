@@ -20,7 +20,8 @@ function focusedItem(doc: Document): string | null | undefined {
 
 const meta: Meta<typeof Tree> = {
   args: {
-    children: [
+    'aria-label': 'Items',
+    'children': [
       <TreeItem key="item1" text="Item 1" />,
       <TreeItem key="item2" text="Item 2" />,
       <TreeItem key="item3" text="Item 3" />,
@@ -186,7 +187,7 @@ function TabFromElementStory() {
         <Text>Focus: {focus}</Text>
       </Box>
       <TextInput data-testid="before" />
-      <Tree gap={1} onFocus={handleFocus}>
+      <Tree aria-label="Groceries" gap={1} onFocus={handleFocus}>
         <TreeItem data-testid="fruit" onClick={handleClick} expanded text="Fruit">
           <TreeItem
             data-testid="oranges"
@@ -309,7 +310,7 @@ function DynamicItemsStory() {
           text="Remove first"
         />
       </Flex>
-      <Tree gap={1}>
+      <Tree aria-label="Vegetables" gap={1}>
         {names.map((name) => (
           <TreeItem data-testid={name.toLowerCase()} key={name} text={name} />
         ))}
