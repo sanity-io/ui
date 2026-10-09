@@ -334,7 +334,7 @@ type ShouldFocus = MenuProps['shouldFocus']
  * click does, with focus returned first. A click that moved focus out without closing the menu
  * (a control inside the menu that is not an item) closes it when it ends, as the blur would
  * have. A handler that stops the click's propagation keeps it from reaching the bubble phase, so
- * a microtask ends the click too, once it has finished dispatching.
+ * a macrotask ends the click too, once it has finished dispatching.
  *
  * A hook rather than inline state: the handlers that call these functions reach the button and
  * the menu through `cloneElement`, a call the React Compiler cannot see through, and it rejects
@@ -423,8 +423,11 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
 
   const trackMenuClick = useCallback(() => {
     clickInMenuRef.current = true
-    // Once the click has finished dispatching; a no-op when the bubble phase ended it already
-    queueMicrotask(endMenuClick)
+    // For a click whose propagation a handler stops before the bubble phase. A macrotask, not a
+    // microtask: React dispatches the capture and bubble phases of a trusted event from separate
+    // native listeners, and the microtask checkpoint between them would end the click before the
+    // item's handlers run. A no-op when the bubble phase ended it already.
+    setTimeout(endMenuClick, 0)
   }, [endMenuClick])
 
   return {

@@ -13,6 +13,7 @@ import {render} from '../../../../test/utils'
 import {Button} from '../../primitives/button/button'
 import {Menu} from './menu'
 import {MenuButton, type MenuButtonProps} from './menuButton'
+import {MenuGroup} from './menuGroup'
 import {MenuItem} from './menuItem'
 
 // `startTransition` wrapped in a mock that passes through to React, so the transition tests can
@@ -475,9 +476,98 @@ describe('MenuButton', () => {
 
         expect(onClose).not.toHaveBeenCalled()
         expect(onMenuClick).not.toHaveBeenCalled()
-        await act(async () => {})
+        // The click never reached the menu element, so a macrotask ends it
+        await act(() => new Promise<void>((resolve) => setTimeout(resolve, 0)))
 
         expectClosedWithFocusOutside(onClose)
+      })
+    })
+
+    it('leaves focus alone when __unstable_disableRestoreFocusOnClose is set', () => {
+      const focusedWhenCalled: (Element | null)[] = []
+      const onClose = vi.fn(() => {
+        focusedWhenCalled.push(document.activeElement)
+      })
+
+      renderMenuButton({__unstable_disableRestoreFocusOnClose: true, onClose})
+
+      const button = getButton()
+      const item = () => screen.getByRole('menuitem', {name: 'Option 1'})
+
+      // Escape
+      fireEvent.click(button)
+      act(() => item().focus())
+      fireEvent.keyDown(item(), {key: 'Escape'})
+      expect(onClose).toHaveBeenCalledTimes(1)
+      expect(button).not.toHaveFocus()
+      expectMenuRenderedHidden()
+
+      // Menu item click
+      fireEvent.click(button)
+      act(() => item().focus())
+      fireEvent.click(item())
+      expect(onClose).toHaveBeenCalledTimes(2)
+      expect(button).not.toHaveFocus()
+      expectMenuRenderedHidden()
+
+      // `onClose` saw whatever had focus at the time, never the button
+      expect(focusedWhenCalled).not.toContain(button)
+    })
+
+    describe('nested menus', () => {
+      function renderWithGroup(onClose: () => void) {
+        render(
+          <MenuButton
+            button={<Button text="Open menu" />}
+            id="menu-button"
+            menu={
+              <Menu>
+                <MenuItem text="Option 1" />
+                <MenuGroup text="More">
+                  <MenuItem text="Nested option" />
+                </MenuGroup>
+              </Menu>
+            }
+            onClose={onClose}
+          />,
+        )
+
+        fireEvent.click(getButton())
+        expectMenuVisible()
+
+        const group = screen.getByRole('button', {name: 'More'})
+
+        // Opens the child menu; its click goes through the menu element's tracking too
+        act(() => group.focus())
+        fireEvent.click(group)
+
+        return screen.getByRole('menuitem', {name: 'Nested option'})
+      }
+
+      it('stays open when a group item opens its child menu', () => {
+        const onClose = vi.fn()
+
+        renderWithGroup(onClose)
+
+        expect(getButton()).toHaveAttribute('aria-expanded', 'true')
+        expect(onClose).not.toHaveBeenCalled()
+      })
+
+      it('closes the whole menu and returns focus to the button when a child menu item is clicked', () => {
+        const focusedWhenCalled: (Element | null)[] = []
+        const onClose = vi.fn(() => {
+          focusedWhenCalled.push(document.activeElement)
+        })
+
+        const nestedItem = renderWithGroup(onClose)
+
+        act(() => nestedItem.focus())
+        fireEvent.click(nestedItem)
+
+        expect(onClose).toHaveBeenCalledTimes(1)
+        expect(focusedWhenCalled).toEqual([getButton()])
+        expect(getButton()).toHaveFocus()
+        expectMenuRenderedHidden()
       })
     })
 
@@ -624,14 +714,16 @@ describe('MenuButton', () => {
 
       fireEvent.click(button)
 
-      // The handler ran, but what it does to the state waits for the transition React would run
+      // The handler ran, but what it does to the state waits for the transition React would run.
+      // One scope: the mock intercepts `Popover`'s intent transition too, but a plain `click`
+      // fires none of the events that count as intent (`focusin`, `pointerenter`, `pointerdown`).
       expect(scopes).toHaveLength(1)
       expect(button).toHaveAttribute('aria-expanded', 'false')
       expectMenuNotRendered()
       expect(onOpen).not.toHaveBeenCalled()
 
       act(() => {
-        scopes[0]()
+        for (const scope of scopes) scope()
       })
 
       expectMenuVisible()

@@ -1,12 +1,17 @@
+import {Button, Card, ThemeProvider} from '@sanity/ui'
+import {Menu, MenuButton, MenuItem} from '@sanity/ui/menu'
+import {buildTheme} from '@sanity/ui/theme'
 import {composeStories} from '@storybook/react-vite'
 import {Profiler} from 'react'
-import {describe, expect, test} from 'vitest'
+import {describe, expect, test, vi} from 'vitest'
 import {render} from 'vitest-browser-react'
 import {page, userEvent} from 'vitest/browser'
 
 import * as menuButtonStories from '../stories/components/MenuButton.stories'
 
 const {KeyboardNavigation} = composeStories(menuButtonStories)
+
+const theme = buildTheme()
 
 const nextFrame = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
 
@@ -173,6 +178,58 @@ describe('Components/MenuButton', () => {
         expect(firstRenderedDisplay()).toBe('')
         expect(commitDisplays).not.toContain('none')
       })
+    })
+  })
+
+  // Closing from a menu item click, with the trusted events a user produces. React dispatches
+  // the capture and bubble phases of a trusted click from separate native listeners, with a
+  // microtask checkpoint between them, an ordering `fireEvent` cannot reproduce, so the
+  // coordination between the item click and the blur it may cause is asserted here.
+  describe('closing from a menu item click', () => {
+    function ItemClickHarness(props: {onClose: () => void; onItemClick: () => void}) {
+      return (
+        <ThemeProvider scheme="light" theme={theme}>
+          <Card padding={4}>
+            <MenuButton
+              button={<Button text="Open" />}
+              id="menu-button"
+              menu={
+                <Menu>
+                  <MenuItem onClick={props.onItemClick} text="Item" />
+                </Menu>
+              }
+              onClose={props.onClose}
+            />
+            <button id="outside" type="button">
+              Outside
+            </button>
+          </Card>
+        </ThemeProvider>
+      )
+    }
+
+    test('returns focus to the button before onClose when the item’s own click handler moved focus out of the menu', async () => {
+      const focusedWhenCalled: (Element | null)[] = []
+      const onClose = vi.fn(() => {
+        focusedWhenCalled.push(document.activeElement)
+      })
+
+      await render(
+        <ItemClickHarness
+          onClose={onClose}
+          onItemClick={() => document.getElementById('outside')!.focus()}
+        />,
+      )
+
+      await userEvent.click(page.getByRole('button', {name: 'Open'}))
+      await expect.element(page.getByRole('menuitem', {name: 'Item'})).toBeVisible()
+
+      await userEvent.click(page.getByRole('menuitem', {name: 'Item'}))
+
+      await expect.poll(() => onClose.mock.calls.length).toBe(1)
+      expect(focusedWhenCalled).toEqual([button()])
+      expect(document.activeElement).toBe(button())
+      await expect.poll(readFrame).toEqual(CLOSED)
     })
   })
 
