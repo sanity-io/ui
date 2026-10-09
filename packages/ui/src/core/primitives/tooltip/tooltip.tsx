@@ -9,7 +9,6 @@ import {
   shift,
   size,
   useFloating,
-  type UseFloatingReturn,
 } from '@floating-ui/react-dom'
 import {clsx} from 'clsx/lite'
 import {
@@ -34,12 +33,12 @@ import type {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {useDelayedState} from '../../hooks/useDelayedState'
 import {useLatestRef} from '../../hooks/useLatestRef'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
+import {useReferenceElement} from '../../hooks/useReferenceElement'
 import {origin} from '../../middleware/origin'
 import {_getArrayProp} from '../../styles/helpers'
 import {useTheme_v2} from '../../theme/useTheme'
 import type {Placement} from '../../types/placement'
 import {AnimateActivity} from '../../utils/animateActivity'
-import {attachRef} from '../../utils/attachRef'
 import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement'
 import {getElementRef} from '../../utils/getElementRef'
 import {Layer, type LayerProps} from '../../utils/layer/layer'
@@ -133,16 +132,6 @@ export function Tooltip(
   const animate = prefersReducedMotion ? false : _animate
   const fallbackPlacements = _getArrayProp(fallbackPlacementsProp)
   const ref = useRef<HTMLDivElement | null>(null)
-  // The referred element, in a ref rather than state. The only render-time reader of it was
-  // Floating UI, which has nothing to position until the tooltip is shown, so it is handed the
-  // element when the card mounts instead (`setFloating`). A state update from the ref callback
-  // would be scheduled at Immediate priority in the commit that attaches the ref — on mount, on
-  // unmount, and each time an `<Activity>` hides or shows the element — and such an update is
-  // committed as soon as a view transition that reveals or hides the element is ready to animate,
-  // delaying its first frame; should anything flush sync work while the browser is still
-  // preparing the transition (a `flushSync`, React restoring a controlled input), it is what
-  // makes React cancel the transition. See `apps/storybook/tests/viewTransitionReveal.test.tsx`.
-  const referenceRef = useRef<HTMLElement | null>(null)
   const arrowRef = useRef<HTMLDivElement | null>(null)
   const rootBoundary: RootBoundary = 'viewport'
 
@@ -169,6 +158,17 @@ export function Tooltip(
     placement: placementProp,
     whileElementsMounted: autoUpdate,
   })
+
+  // The child's own ref, when it has one: attached to its element along with ours, so it holds
+  // the element from the commit that mounts it on.
+  // oxlint-disable-next-line no-unsafe-type-assertion
+  const childRef = (childProp ? getElementRef(childProp) : undefined) as
+    | React.Ref<HTMLElement>
+    | undefined
+
+  // The referred element, in a ref: nothing reads it during render, and Floating UI is handed it
+  // as the card mounts (`setFloating`). See `useReferenceElement` for why not state.
+  const {handOverReference, referenceRef, setReference} = useReferenceElement({childRef, refs})
 
   // The middleware reads the boundary and portal elements through refs (see `useMiddleware`), so
   // a change of either does not reach Floating UI by itself: reposition a shown tooltip against
@@ -322,20 +322,11 @@ export function Tooltip(
   const setFloating = useCallback(
     (node: HTMLDivElement | null) => {
       ref.current = node
-      if (node) handOverReference(refs, referenceRef)
+      if (node) handOverReference()
       refs.setFloating(node)
     },
-    [refs],
+    [handOverReference, refs],
   )
-
-  // The child's own ref, when it has one: attached from the same callback as ours (see
-  // `setReference`), so it holds the element from the commit that mounts it on.
-  // oxlint-disable-next-line no-unsafe-type-assertion
-  const childRef = (childProp ? getElementRef(childProp) : undefined) as
-    | React.Ref<HTMLElement>
-    | undefined
-
-  const setReference = useReferenceCallback(referenceRef, refs, childRef)
 
   const child = useMemo(() => {
     if (!childProp) return null
@@ -418,68 +409,6 @@ export function Tooltip(
 }
 
 type ElementRef = React.RefObject<HTMLElement | null>
-
-type FloatingRefs = UseFloatingReturn['refs']
-
-/**
- * The ref callback for the referred element: keeps the element in `referenceRef`, attaches the
- * child's own ref to it, and hands it to Floating UI while there is a card to position against it
- * (see `updateReferenceWhileShown`), and detaches all of that again in the cleanup it returns. A
- * new callback whenever the child's ref changes, so that React detaches the old ref and attaches
- * the new one the way it does for a `ref` prop.
- *
- * A hook of its own, with the ref accesses in a module-scope function: the React Compiler takes a
- * callback that accesses refs for a possible read during render wherever it flows into a plain
- * call — `cloneElement` in `Tooltip` — and would skip the component, since it cannot tell when the
- * callback runs. The result of a hook call carries no such mark.
- */
-function useReferenceCallback(
-  referenceRef: React.RefObject<HTMLElement | null>,
-  refs: FloatingRefs,
-  childRef: React.Ref<HTMLElement> | undefined,
-): (node: HTMLElement) => () => void {
-  return useCallback(
-    (node: HTMLElement) => attachReference(node, referenceRef, refs, childRef),
-    [childRef, referenceRef, refs],
-  )
-}
-
-function attachReference(
-  node: HTMLElement,
-  referenceRef: React.RefObject<HTMLElement | null>,
-  refs: FloatingRefs,
-  childRef: React.Ref<HTMLElement> | undefined,
-): () => void {
-  referenceRef.current = node
-  updateReferenceWhileShown(refs, node)
-
-  const detachChildRef = attachRef(childRef, node)
-
-  return () => {
-    detachChildRef()
-    referenceRef.current = null
-    updateReferenceWhileShown(refs, null)
-  }
-}
-
-/**
- * Floating UI is only told about the referred element while it has a card to position against it,
- * so that the ref callback of the referred element schedules nothing (see `referenceRef`): the
- * element is handed over as the card mounts, which is when the tooltip is shown, so the update
- * Floating UI schedules for it rides along with the one for the card, in the commit that shows the
- * tooltip.
- */
-function handOverReference(refs: FloatingRefs, referenceRef: ElementRef): void {
-  refs.setReference(referenceRef.current)
-}
-
-/**
- * Keeps Floating UI's reference current while the card is shown: a referred element replaced (or
- * removed) while the tooltip is shown repositions it right away.
- */
-function updateReferenceWhileShown(refs: FloatingRefs, node: HTMLElement | null): void {
-  if (refs.floating.current) refs.setReference(node)
-}
 
 /**
  * Derivable middleware options that read the boundary element from a ref. Floating UI evaluates
