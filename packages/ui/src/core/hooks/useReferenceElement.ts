@@ -30,8 +30,12 @@ export interface ReferenceElement {
   handOverReference: () => void
   /** The referred element while it is mounted and shown, `null` otherwise */
   referenceRef: React.RefObject<HTMLElement | null>
-  /** The ref callback for the cloned child, stable for the lifetime of the component */
-  setReference: (node: HTMLElement) => () => void
+  /**
+   * The ref callback for the cloned child, stable for the lifetime of the component. It returns a
+   * cleanup, so React never calls it with `null` (React 19); the type states the contract it is
+   * used under, a `ref` prop.
+   */
+  setReference: React.RefCallback<HTMLElement>
 }
 
 /** The consumer's ref attached to the referred element, and the function that detaches it */

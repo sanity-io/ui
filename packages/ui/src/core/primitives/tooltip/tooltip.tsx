@@ -161,10 +161,7 @@ export function Tooltip(
 
   // The child's own ref, when it has one: attached to its element along with ours, so it holds
   // the element from the commit that mounts it on.
-  // oxlint-disable-next-line no-unsafe-type-assertion
-  const childRef = (childProp ? getElementRef(childProp) : undefined) as
-    | React.Ref<HTMLElement>
-    | undefined
+  const childRef = childProp ? getElementRef<HTMLElement>(childProp) : undefined
 
   // The referred element, in a ref: nothing reads it during render, and Floating UI is handed it
   // as the card mounts (`setFloating`). See `useReferenceElement` for why not state.

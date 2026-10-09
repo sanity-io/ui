@@ -719,17 +719,17 @@ describe('Popover', () => {
 
       expect(ref.current).toBe(getReference())
 
-      // Re-rendering does not detach and attach the ref again
+      // A new ref is attached (and the old one detached) the way React does it for a ref prop
       rerender(
         <Popover content={content}>
           <Button ref={callbackRef} text="Reference" />
         </Popover>,
       )
 
-      // A new ref is attached (and the old one detached) the way React does it for a ref prop
       expect(ref.current).toBeNull()
       expect(callbackRef.mock.calls).toEqual([[getReference()]])
 
+      // Re-rendering with the same ref does not detach and attach it again
       rerender(
         <Popover content={content}>
           <Button ref={callbackRef} text="Reference" />
