@@ -136,14 +136,20 @@ function _getItemFocusTarget(el: HTMLElement): HTMLElement | null {
  * focus, and nothing between that node and the tree element hides or inerts it — except the
  * tree's own collapsed groups, which are state the render-time derivation accounts for
  * (`_isItemKeyVisible`), so that the item becomes the tab stop when its ancestor expands.
- * Anything else (`hidden`, `display: none`, `visibility: hidden`, `inert` from the consumer)
- * would put the tab stop on a node that sequential focus navigation skips and take the tree out
- * of the tab order. Runs at effect time, for an item mounted as `selected`.
+ * Anything else (a `linkAs` that does not render the `tabindex` the item controls, a disabled
+ * control, `hidden`, `display: none`, `visibility: hidden`, `inert` from the consumer) would put
+ * the tab stop on a node that sequential focus navigation skips and take the tree out of the tab
+ * order. Runs at effect time, for an item mounted as `selected`.
  */
 export function _isItemFocusable(el: HTMLElement, treeElement: HTMLElement | null): boolean {
   const target = _getItemFocusTarget(el)
 
   if (!target) return false
+
+  // The tab stop is the `tabindex` that `TreeItem` renders on this node (`0` for the tab stop,
+  // `-1` otherwise), so a custom link that drops it has nowhere to put it, and `focus()` does
+  // nothing on a disabled control
+  if (!target.hasAttribute('tabindex') || target.matches(':disabled')) return false
 
   const view = target.ownerDocument.defaultView
 

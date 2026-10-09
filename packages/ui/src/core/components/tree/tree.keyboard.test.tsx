@@ -306,6 +306,56 @@ describe('components/tree tab stop', () => {
     expect(focusedItem()).toBe('oranges')
   })
 
+  it('does not hand the tab stop to a `selected` item whose `linkAs` cannot take focus', async () => {
+    const user = userEvent.setup()
+
+    // A custom link component that drops `tabIndex` and `href`: nothing in it can take focus,
+    // and the `tabindex="0"` of a tab stop would have nowhere to go
+    function Unfocusable(props: React.ComponentProps<'a'>) {
+      return <span>{props.children}</span>
+    }
+
+    // One that renders the controlled `tabindex` on a disabled control: `focus()` does nothing
+    // on it, and sequential focus navigation skips it
+    function DisabledButton(props: {children?: React.ReactNode; tabIndex?: number}) {
+      return (
+        <button disabled tabIndex={props.tabIndex} type="button">
+          {props.children}
+        </button>
+      )
+    }
+
+    render(
+      <>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree aria-label="Docs">
+          <TreeItem data-testid="docs" href="/docs" linkAs={Unfocusable} selected text="Docs" />
+          <TreeItem data-testid="intro" text="Intro" />
+          <TreeItem
+            data-testid="guide"
+            href="/guide"
+            linkAs={DisabledButton}
+            selected
+            text="Guide"
+          />
+        </Tree>
+      </>,
+    )
+
+    const tree = screen.getByRole('tree')
+
+    // Neither `selected` item has a node the tab stop could sit on, so the tree element keeps it
+    expect(screen.getByTestId('docs').querySelector('[tabindex]')).toBeNull()
+    expect(screen.getByTestId('guide').querySelector('button')).toHaveAttribute('tabindex', '-1')
+    expect(tree).toHaveAttribute('tabindex', '0')
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    expect(focusedItem()).toBe('intro')
+  })
+
   it('takes the tab stop back while the focused item is inside a collapsed ancestor', async () => {
     const user = userEvent.setup()
     let treeContext: TreeContextValue | null = null
