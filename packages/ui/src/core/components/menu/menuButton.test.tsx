@@ -274,6 +274,60 @@ describe('MenuButton', () => {
       expect(callbackRef.mock.calls).toEqual([[button], [null], [replacement]])
     })
 
+    it('treats a button replaced while the menu is open as the one that opened it', () => {
+      const renderMenuButtonWith = (button: React.JSX.Element) => (
+        <MenuButton
+          button={button}
+          id="menu-button"
+          menu={
+            <Menu>
+              <MenuItem text="Option 1" />
+              <MenuItem text="Option 2" />
+            </Menu>
+          }
+        />
+      )
+
+      const {rerender} = render(renderMenuButtonWith(<Button text="Open menu" />))
+
+      const button = getButton()
+
+      fireEvent.click(button)
+      expectMenuVisible()
+
+      rerender(renderMenuButtonWith(<Button key="replacement" text="Open menu" />))
+
+      const replacement = getButton()
+
+      expect(replacement).not.toBe(button)
+      expectMenuVisible()
+
+      // A press on the replacement is a press on the button, not a click outside the menu
+      fireEvent.mouseDown(replacement)
+      expectMenuVisible()
+
+      // And closing returns focus to the replacement, not to the detached node
+      fireEvent.keyDown(window, {key: 'Escape'})
+
+      expect(replacement).toHaveAttribute('aria-expanded', 'false')
+      expect(replacement).toHaveFocus()
+
+      fireEvent.click(replacement)
+      expectMenuVisible()
+
+      rerender(renderMenuButtonWith(<Button key="another" text="Open menu" />))
+
+      const another = getButton()
+
+      expect(another).not.toBe(replacement)
+      expectMenuVisible()
+
+      fireEvent.click(screen.getByRole('menuitem', {name: 'Option 2'}))
+
+      expect(another).toHaveAttribute('aria-expanded', 'false')
+      expect(another).toHaveFocus()
+    })
+
     it('keeps the forwarded ref on the button while the popover is disabled, and across enabling it', () => {
       const ref = {current: null as HTMLButtonElement | null}
       const callbackRef = vi.fn()

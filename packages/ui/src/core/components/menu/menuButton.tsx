@@ -208,10 +208,17 @@ export function MenuButton(props: MenuButtonProps) {
   // attaches this callback from its own. `replacedButton` is the node of a `button` whose DOM
   // node was replaced (another element type or key): that, and only that, schedules an update
   // here, so the handle follows the new node — mounting, unmounting and an `Activity` hiding and
-  // showing the button attach the same node again and schedule nothing.
+  // showing the button attach the same node again and schedule nothing. The origin follows the
+  // replacement as well when it was set, since it can only have been the replaced button: with
+  // the menu open, a click on the new button must still count as one on the button, and Escape
+  // or an item click must return focus to it rather than to the detached node.
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const [replacedButton, setReplacedButton] = useState<HTMLButtonElement | null>(null)
-  const setButton = useButtonRefCallback(buttonRef, setReplacedButton)
+  const handleButtonReplace = useCallback((node: HTMLButtonElement) => {
+    setReplacedButton(node)
+    setOriginElement((origin) => (origin === null ? null : node))
+  }, [])
+  const setButton = useButtonRefCallback(buttonRef, handleButtonReplace)
 
   // Forwarded from the same commit as the one that mounts the button, since the handle of a
   // parent runs after the refs of its children attached, and again when the node is replaced.

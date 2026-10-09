@@ -52,8 +52,15 @@ function observeViewTransitions(): ObservedTransition[] {
   return transitions
 }
 
-async function waitForTransitionToFinish(transitions: ObservedTransition[], index = 0) {
+async function waitForTransitionToFinish(transitions: ObservedTransition[], index: number) {
   await expect.poll(() => transitions[index]?.finished, {timeout: 5000}).toBe(true)
+}
+
+/** Waits for every view transition started so far, so the next interaction starts with none running */
+async function waitForTransitionsToFinish(transitions: ObservedTransition[]) {
+  await expect
+    .poll(() => transitions.every((transition) => transition.finished), {timeout: 5000})
+    .toBe(true)
 }
 
 /** The components that scheduled the Immediate-priority commits recorded so far */
@@ -98,7 +105,7 @@ describe('revealing a MenuButton with a <ViewTransition>', () => {
     // A synchronous `click()` rather than `userEvent.click`: the pointer moving onto the button
     // would otherwise count as intent for the popover next to it
     button('Show').click()
-    await waitForTransitionToFinish(transitions)
+    await waitForTransitionToFinish(transitions, 0)
 
     expect(transitions[0]).toEqual({ready: 'resolved', finished: true})
     expect(button('Open').checkVisibility()).toBe(true)
@@ -116,11 +123,16 @@ describe('revealing a MenuButton with a <ViewTransition>', () => {
       1,
     )
 
+    // The hide is the next transition after whatever the open started: none today, one of its
+    // own under this `<ViewTransition>` once the open state is set in a transition
+    await waitForTransitionsToFinish(transitions)
+    const hideTransition = transitions.length
+
     commits.length = 0
     button('Hide').click()
-    await waitForTransitionToFinish(transitions, 1)
+    await waitForTransitionToFinish(transitions, hideTransition)
 
-    expect(transitions[1]).toEqual({ready: 'resolved', finished: true})
+    expect(transitions[hideTransition]).toEqual({ready: 'resolved', finished: true})
     expect(button('Open').checkVisibility()).toBe(false)
     expect(immediateUpdaters()).not.toContain('MenuButton')
   })
