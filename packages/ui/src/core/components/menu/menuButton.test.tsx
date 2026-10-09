@@ -326,6 +326,85 @@ describe('MenuButton', () => {
       }
     })
 
+    it('moves the forwarded ref to a replaced button, and off a removed one, before a parent’s layout effect runs', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      const callbackRef = vi.fn()
+      // What a layout effect of a parent sees in each commit: it runs after the refs of its
+      // children attached and after `MenuButton`'s own layout effects
+      const seenInLayoutEffect: (HTMLElement | null)[] = []
+
+      function MaybeButton(props: {hidden?: boolean; ref?: React.Ref<HTMLButtonElement>}) {
+        const {hidden, ref: forwardedRef} = props
+
+        if (hidden) return null
+
+        return <Button ref={forwardedRef} text="Open menu" />
+      }
+
+      function Parent(props: {buttonKey: string; hidden?: boolean}) {
+        useLayoutEffect(() => {
+          seenInLayoutEffect.push(ref.current)
+        })
+
+        return (
+          <>
+            <MenuButton
+              button={<MaybeButton key={props.buttonKey} hidden={props.hidden} />}
+              id="menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Option 1" />
+                </Menu>
+              }
+              ref={ref}
+            />
+            <MenuButton
+              button={<MaybeButton key={props.buttonKey} hidden={props.hidden} />}
+              id="other-menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Option 2" />
+                </Menu>
+              }
+              ref={callbackRef}
+            />
+          </>
+        )
+      }
+
+      const {rerender} = render(<Parent buttonKey="a" />, {strict: false})
+
+      const [button, otherButton] = screen.getAllByRole('button', {name: 'Open menu'})
+
+      expect(seenInLayoutEffect).toEqual([button])
+      expect(callbackRef.mock.calls).toEqual([[otherButton]])
+
+      // Replaced: the parent sees the replacement in the commit that mounts it, with no commit
+      // in between in which it would have seen the detached node
+      rerender(<Parent buttonKey="b" />)
+
+      const [replacement, otherReplacement] = screen.getAllByRole('button', {name: 'Open menu'})
+
+      expect(replacement).not.toBe(button)
+      expect(seenInLayoutEffect).toEqual([button, replacement])
+      expect(callbackRef.mock.calls).toEqual([[otherButton], [null], [otherReplacement]])
+
+      // Removed without a successor: detached in that commit
+      rerender(<Parent buttonKey="b" hidden />)
+
+      expect(screen.queryAllByRole('button', {name: 'Open menu'})).toEqual([])
+      expect(seenInLayoutEffect).toEqual([button, replacement, null])
+      expect(callbackRef.mock.calls.at(-1)).toEqual([null])
+
+      // And attached again once there is a button again
+      rerender(<Parent buttonKey="b" />)
+
+      const [again, otherAgain] = screen.getAllByRole('button', {name: 'Open menu'})
+
+      expect(seenInLayoutEffect.at(-1)).toBe(again)
+      expect(callbackRef.mock.calls.at(-1)).toEqual([otherAgain])
+    })
+
     it('attaches a forwarded ref that changes in the render that replaces the button exactly once', () => {
       const first = vi.fn()
       const second = vi.fn()

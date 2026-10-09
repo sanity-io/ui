@@ -209,42 +209,42 @@ export function MenuButton(props: MenuButtonProps) {
 
   const menu = menuProp && cloneElement(menuProp, menuProps)
 
-  // The button element, in a ref. The one update the ref callback schedules is for a `button`
-  // whose DOM node is replaced (another element type or key): `replacements` counts those, and
-  // the layout effect below follows the new node. Mounting, unmounting, and an `<Activity>`
-  // hiding and showing the button attach the same node again and schedule nothing. The origin
-  // follows a replacement as well when it is set, since it can only have been the replaced
-  // button: with the menu open, a press on the new button must still count as one on the button,
-  // and Escape or an item click must return focus to it rather than to the detached node.
+  // The button element, in a ref. Mounting, unmounting, and an `<Activity>` hiding and showing
+  // the button attach the same node again and schedule nothing. The one update a ref callback
+  // schedules is for a `button` whose DOM node is replaced (another element type or key) while
+  // the origin is set, which can only have been the replaced button: with the menu open, a
+  // press on the new button must still count as one on the button, and Escape or an item click
+  // must return focus to it rather than to the detached node.
   const buttonRef = useRef<HTMLButtonElement | null>(null)
-  const [replacements, setReplacements] = useState(0)
   const forwardedRefRef = useLatestRef(forwardedRef)
-  const attachedForwardedRef = useRef<React.Ref<HTMLButtonElement | null> | undefined>(undefined)
+  const forwardedAttachmentRef = useRef<ForwardedRefAttachment | null>(null)
   const handleButtonReplace = useCallback(
     (node: HTMLButtonElement) =>
-      replaceButton(node, {
-        attachedForwardedRef,
-        forwardedRefRef,
-        setOriginElement,
-        setReplacements,
-      }),
-    [attachedForwardedRef, forwardedRefRef],
+      replaceButton(node, {forwardedAttachmentRef, forwardedRefRef, setOriginElement}),
+    [forwardedAttachmentRef, forwardedRefRef],
   )
   const setButton = useButtonRefCallback(buttonRef, handleButtonReplace, popover?.referenceElement)
 
-  // The forwarded ref, attached to the live element in the commit that mounts the button (a
-  // parent's layout effect runs after the refs of its children attached), again after a
-  // replacement, and again when it changes itself; detached with React's semantics for a `ref`
-  // prop (`attachRef`). Not attached from the button's ref callback: that would hand every
-  // detach and re-attach of the same node to the consumer's ref (today `Popover` re-runs the
-  // child ref it is given on every render). A node that is removed without a successor leaves
-  // the forwarded ref on the detached node until this runs again, which is accepted: clearing
-  // it from the ref callback's cleanup would be the hide-time update this component avoids.
+  // The forwarded ref follows the element with React's semantics for a `ref` prop (`attachRef`),
+  // through one attachment record: attached in the commit that mounts the button (a parent's
+  // layout effect runs after the refs of its children attached), swapped when it changes itself,
+  // moved to a replacement from the ref callback that receives the new node (before any layout
+  // effect of this component or its parents), detached when the button unmounts or an
+  // `<Activity>` hides it (layout cleanups run then) and when a `button` renders nothing where
+  // it rendered the button before. The ref callback's own cleanup leaves it alone: a cleanup
+  // followed by the same node attaching again — today `Popover` re-runs the child ref it is
+  // given on every render — must not reach the consumer's ref. A `button` that stops rendering
+  // its element without this component rendering keeps the ref on the detached node until the
+  // next render here.
   useLayoutEffect(() => {
-    attachedForwardedRef.current = forwardedRef
+    syncForwardedRef(forwardedAttachmentRef, forwardedRef, buttonRef.current)
 
-    return attachRef(forwardedRef, buttonRef.current)
-  }, [forwardedRef, replacements])
+    return () => detachForwardedRef(forwardedAttachmentRef)
+  }, [forwardedRef])
+
+  useLayoutEffect(() => {
+    if (buttonRef.current === null) detachForwardedRef(forwardedAttachmentRef)
+  })
 
   const button = useMemo(
     () =>
@@ -280,27 +280,57 @@ export function MenuButton(props: MenuButtonProps) {
   )
 }
 
-interface ReplaceButtonOptions {
-  attachedForwardedRef: React.RefObject<React.Ref<HTMLButtonElement | null> | undefined>
-  forwardedRefRef: React.RefObject<React.Ref<HTMLButtonElement | null> | undefined>
-  setOriginElement: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>
-  setReplacements: React.Dispatch<React.SetStateAction<number>>
+/** The consumer's ref attached to the button, and the function that detaches it */
+interface ForwardedRefAttachment {
+  detach: () => void
+  node: HTMLButtonElement
+  ref: React.Ref<HTMLButtonElement | null>
 }
 
 /**
- * A `button` whose DOM node was replaced: the origin follows it when set (see `originElement`),
- * and the forwarded ref is re-attached — through an update of its own, unless the forwarded ref
- * changed in the same render, in which case the layout effect runs for that already and a second
- * run would detach and attach the new ref once more for nothing.
+ * Attaches `ref` to `node` unless that is what is attached already, detaching whatever else was.
+ * With no `ref` or no `node`, detaches only.
+ */
+function syncForwardedRef(
+  attachmentRef: React.RefObject<ForwardedRefAttachment | null>,
+  ref: React.Ref<HTMLButtonElement | null> | undefined,
+  node: HTMLButtonElement | null,
+): void {
+  const attachment = attachmentRef.current
+
+  if (attachment && attachment.ref === ref && attachment.node === node) return
+
+  detachForwardedRef(attachmentRef)
+
+  if (ref && node) {
+    attachmentRef.current = {detach: attachRef(ref, node), node, ref}
+  }
+}
+
+function detachForwardedRef(attachmentRef: React.RefObject<ForwardedRefAttachment | null>): void {
+  const attachment = attachmentRef.current
+
+  if (!attachment) return
+
+  attachmentRef.current = null
+  attachment.detach()
+}
+
+interface ReplaceButtonOptions {
+  forwardedAttachmentRef: React.RefObject<ForwardedRefAttachment | null>
+  forwardedRefRef: React.RefObject<React.Ref<HTMLButtonElement | null> | undefined>
+  setOriginElement: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>
+}
+
+/**
+ * A `button` whose DOM node was replaced: the forwarded ref moves to the new node right here, in
+ * the commit that mounts it, and the origin follows it when set (see `originElement`).
  */
 function replaceButton(
   node: HTMLButtonElement,
-  {attachedForwardedRef, forwardedRefRef, setOriginElement, setReplacements}: ReplaceButtonOptions,
+  {forwardedAttachmentRef, forwardedRefRef, setOriginElement}: ReplaceButtonOptions,
 ): void {
-  if (forwardedRefRef.current === attachedForwardedRef.current) {
-    setReplacements((count) => count + 1)
-  }
-
+  syncForwardedRef(forwardedAttachmentRef, forwardedRefRef.current, node)
   setOriginElement((origin) => (origin === null ? null : node))
 }
 
