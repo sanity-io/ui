@@ -2,7 +2,7 @@
 
 import {act, fireEvent, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {ComponentProps, Profiler, useState} from 'react'
+import {useState} from 'react'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
@@ -12,70 +12,14 @@ import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
 import {Autocomplete} from './autocomplete'
-
-type Props = ComponentProps<typeof Autocomplete>
-
-const OPTIONS = [{value: 'foo'}, {value: 'bar'}, {value: 'baz'}]
-
-// Every option matches, so an open list always shows all of them
-const SHOW_ALL = () => true
-
-function getInput() {
-  return screen.getByRole<HTMLInputElement>('combobox')
-}
-
-/**
- * The results popover keeps its `hidden` attribute until Floating UI has positioned it, which
- * never happens in jsdom, so the options have to be queried as hidden.
- */
-function getOption(value: string) {
-  return screen.getByRole('option', {hidden: true, name: value})
-}
-
-/**
- * Moves focus to an element outside the autocomplete and waits for the (deferred) blur handling to
- * close the list. `Autocomplete` only treats a blur as leaving once focus has settled outside of it.
- */
-async function blurTo(element: HTMLElement) {
-  act(() => element.focus())
-
-  await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
-}
-
-/**
- * Renders the autocomplete with an element to move focus to, and records the state of the input
- * (`value`, `aria-expanded`, `aria-activedescendant`) after every commit of the subtree.
- */
-function renderAutocomplete(props: Partial<Props> = {}) {
-  const commits: string[] = []
-  const recordCommit = () => {
-    const input = getInput()
-
-    commits.push(
-      [
-        JSON.stringify(input.value),
-        input.getAttribute('aria-expanded'),
-        input.getAttribute('aria-activedescendant'),
-      ].join(' '),
-    )
-  }
-  const ui = (nextProps: Partial<Props>) => (
-    <>
-      <Profiler id="autocomplete" onRender={recordCommit}>
-        <Autocomplete id="ac" options={OPTIONS} {...nextProps} />
-      </Profiler>
-      <button type="button">Outside</button>
-    </>
-  )
-  const result = render(ui(props))
-
-  return {
-    ...result,
-    commits,
-    outside: screen.getByRole('button', {name: 'Outside'}),
-    rerender: (nextProps: Partial<Props> = {}) => result.rerender(ui(nextProps)),
-  }
-}
+import {
+  blurTo,
+  getInput,
+  getOption,
+  OPTIONS,
+  renderAutocomplete,
+  SHOW_ALL,
+} from './autocomplete.testUtils'
 
 /** A parent that answers `onChange` synchronously, with the selected value or another one */
 function ControlledParent({answer}: {answer: (selected: string) => string}) {
@@ -91,6 +35,17 @@ function ControlledParent({answer}: {answer: (selected: string) => string}) {
       value={value}
     />
   )
+}
+
+/**
+ * Opens the list (`openOnFocus`) from a blurred state, so that `aria-activedescendant`, which the
+ * input only carries while the list shows, can be read.
+ */
+async function reopen(user: ReturnType<typeof userEvent.setup>, outside: HTMLElement) {
+  await blurTo(outside)
+  await user.click(getInput())
+
+  expect(getInput()).toHaveAttribute('aria-expanded', 'true')
 }
 
 describe('components/autocomplete', () => {
@@ -137,6 +92,36 @@ describe('components/autocomplete', () => {
       expect(onClick).toHaveBeenCalledTimes(1)
       expect(input).toHaveAttribute('aria-expanded', 'true')
     })
+
+    it('stays disabled for the whole query, with or without matching options', async () => {
+      const user = userEvent.setup()
+
+      renderAutocomplete({openButton: true})
+
+      const button = () => screen.getByRole('button', {hidden: true, name: 'Open'})
+      const buttonBox = () => button().parentElement
+
+      expect(button()).toBeEnabled()
+      expect(buttonBox()).toHaveAttribute('aria-hidden', 'false')
+
+      await user.type(getInput(), 'ba')
+
+      expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+      expect(button()).toBeDisabled()
+      expect(buttonBox()).toHaveAttribute('aria-hidden', 'true')
+
+      // No match: the list is not expanded, the query is still in progress
+      await user.type(getInput(), 'x', {skipClick: true})
+
+      expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+      expect(button()).toBeDisabled()
+      expect(buttonBox()).toHaveAttribute('aria-hidden', 'true')
+
+      await user.keyboard('{Escape}')
+
+      expect(button()).toBeEnabled()
+      expect(buttonBox()).toHaveAttribute('aria-hidden', 'false')
+    })
   })
 
   describe('controlled value', () => {
@@ -156,30 +141,35 @@ describe('components/autocomplete', () => {
       )
 
       expect(getInput()).toHaveValue('Bar')
-      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
     })
 
     it('renders an empty input for an empty `value`', () => {
       renderAutocomplete({value: ''})
 
       expect(getInput()).toHaveValue('')
-      expect(getInput()).not.toHaveAttribute('aria-activedescendant')
       expect(screen.queryByRole('button', {name: 'Clear'})).toBeNull()
     })
 
-    it('follows a new `value` prop and makes it the active option', () => {
-      const {rerender} = renderAutocomplete({value: 'foo'})
+    it('follows a new `value` prop and makes it the active option', async () => {
+      const user = userEvent.setup()
+      const {outside, rerender} = renderAutocomplete({
+        filterOption: SHOW_ALL,
+        openOnFocus: true,
+        value: 'foo',
+      })
 
       expect(getInput()).toHaveValue('foo')
-      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-foo')
 
-      rerender({value: 'bar'})
+      rerender({filterOption: SHOW_ALL, openOnFocus: true, value: 'bar'})
 
       expect(getInput()).toHaveValue('bar')
-      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
       expect(screen.getByRole('button', {name: 'Clear'})).toBeInTheDocument()
 
-      rerender({value: ''})
+      await reopen(user, outside)
+
+      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
+
+      rerender({filterOption: SHOW_ALL, openOnFocus: true, value: ''})
 
       expect(getInput()).toHaveValue('')
       expect(screen.queryByRole('button', {name: 'Clear'})).toBeNull()
@@ -193,8 +183,8 @@ describe('components/autocomplete', () => {
       rerender({value: 'bar'})
 
       // The first commit shows the new value, and no committed frame showed the previous one
-      expect(commits[0]).toBe('"bar" false ac-option-bar')
-      expect(commits).not.toContain('"foo" false ac-option-foo')
+      expect(commits[0]).toBe('"bar" false')
+      expect(commits).not.toContain('"foo" false')
     })
 
     it('keeps the current value when the `value` prop becomes undefined', () => {
@@ -205,20 +195,52 @@ describe('components/autocomplete', () => {
       expect(getInput()).toHaveValue('foo')
     })
 
-    it('drops a pending query when the `value` prop changes', async () => {
+    it('drops a pending query when the `value` prop changes, without reporting it', async () => {
       const user = userEvent.setup()
-      const {rerender} = renderAutocomplete({value: 'foo'})
+      const onQueryChange = vi.fn()
+      const {rerender} = renderAutocomplete({onQueryChange, value: 'foo'})
 
       await user.clear(getInput())
       await user.type(getInput(), 'ba')
 
       expect(getInput()).toHaveValue('ba')
       expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+      expect(onQueryChange).toHaveBeenLastCalledWith('ba')
 
-      rerender({value: 'baz'})
+      onQueryChange.mockClear()
+      rerender({onQueryChange, value: 'baz'})
 
       expect(getInput()).toHaveValue('baz')
       expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+      // The parent made this change; only the user's own query ends are reported
+      expect(onQueryChange).not.toHaveBeenCalled()
+    })
+
+    it('keeps a pending query when the `value` prop echoes the current selection', async () => {
+      const user = userEvent.setup()
+      const onChange = vi.fn()
+      const {rerender} = renderAutocomplete({
+        filterOption: SHOW_ALL,
+        onChange,
+        openOnFocus: true,
+        value: 'foo',
+      })
+
+      await user.click(getInput())
+      await user.click(getOption('bar'))
+
+      await waitFor(() => expect(onChange).toHaveBeenCalledWith('bar'))
+
+      // A new search starts before the parent's store caught up
+      await user.clear(getInput())
+      await user.type(getInput(), 'ba')
+
+      expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+
+      rerender({filterOption: SHOW_ALL, onChange, openOnFocus: true, value: 'bar'})
+
+      expect(getInput()).toHaveValue('ba')
+      expect(getInput()).toHaveAttribute('aria-expanded', 'true')
     })
 
     it('reports the list as expanded only while there are results to show', async () => {
@@ -267,7 +289,7 @@ describe('components/autocomplete', () => {
     it('keeps showing a selection that the parent did not accept', async () => {
       const user = userEvent.setup()
       const onChange = vi.fn()
-      const {rerender} = renderAutocomplete({
+      const {outside, rerender} = renderAutocomplete({
         filterOption: SHOW_ALL,
         onChange,
         openOnFocus: true,
@@ -283,13 +305,16 @@ describe('components/autocomplete', () => {
       rerender({filterOption: SHOW_ALL, onChange, openOnFocus: true, value: 'foo'})
 
       expect(getInput()).toHaveValue('bar')
+
+      await reopen(user, outside)
+
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
     })
 
     it('shows the value the parent answers a selection with', async () => {
       const user = userEvent.setup()
       const onChange = vi.fn()
-      const {rerender} = renderAutocomplete({
+      const {outside, rerender} = renderAutocomplete({
         filterOption: SHOW_ALL,
         onChange,
         openOnFocus: true,
@@ -305,6 +330,9 @@ describe('components/autocomplete', () => {
       rerender({filterOption: SHOW_ALL, onChange, openOnFocus: true, value: 'baz'})
 
       expect(getInput()).toHaveValue('baz')
+
+      await reopen(user, outside)
+
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-baz')
     })
 
@@ -318,11 +346,12 @@ describe('components/autocomplete', () => {
 
       await waitFor(() => expect(getInput()).toHaveValue('baz'))
 
-      // Nothing pending overrides the parent's answer later on
-      await act(() => new Promise((resolve) => setTimeout(resolve, 50)))
+      // Nothing pending overrides the parent's answer later on (`act` flushes every scheduled
+      // render, deferred ones included)
+      await act(async () => {})
 
       expect(getInput()).toHaveValue('baz')
-      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-baz')
+      expect(getInput()).toHaveAttribute('aria-expanded', 'false')
     })
 
     it('shows a selection a parent accepts in the same tick', async () => {
@@ -340,7 +369,7 @@ describe('components/autocomplete', () => {
     it('shows the selection once more when the parent accepts it', async () => {
       const user = userEvent.setup()
       const onChange = vi.fn()
-      const {rerender} = renderAutocomplete({
+      const {outside, rerender} = renderAutocomplete({
         filterOption: SHOW_ALL,
         onChange,
         openOnFocus: true,
@@ -355,6 +384,9 @@ describe('components/autocomplete', () => {
       rerender({filterOption: SHOW_ALL, onChange, openOnFocus: true, value: 'bar'})
 
       expect(getInput()).toHaveValue('bar')
+
+      await reopen(user, outside)
+
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
     })
 
@@ -378,19 +410,18 @@ describe('components/autocomplete', () => {
     it('starts empty and shows the selected option', async () => {
       const user = userEvent.setup()
       const onChange = vi.fn()
-
-      renderAutocomplete({onChange})
+      const {outside} = renderAutocomplete({filterOption: SHOW_ALL, onChange, openOnFocus: true})
 
       expect(getInput()).toHaveValue('')
 
-      await user.type(getInput(), 'ba')
-
-      expect(screen.queryByRole('option', {hidden: true, name: 'foo'})).toBeNull()
-
+      await user.click(getInput())
       await user.click(getOption('baz'))
 
       await waitFor(() => expect(getInput()).toHaveValue('baz'))
       expect(onChange).toHaveBeenCalledWith('baz')
+
+      await reopen(user, outside)
+
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-baz')
     })
 
@@ -410,6 +441,28 @@ describe('components/autocomplete', () => {
   })
 
   describe('active option', () => {
+    it('points `aria-activedescendant` at an option only while the list shows', async () => {
+      const user = userEvent.setup()
+      const {outside} = renderAutocomplete({
+        filterOption: SHOW_ALL,
+        openOnFocus: true,
+        value: 'bar',
+      })
+
+      // Before the list has ever shown there is no option element to point at
+      expect(getInput()).not.toHaveAttribute('aria-activedescendant')
+
+      await user.click(getInput())
+
+      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
+
+      await blurTo(outside)
+
+      // The option still exists, inside the hidden list
+      expect(getOption('bar')).toBeInTheDocument()
+      expect(getInput()).not.toHaveAttribute('aria-activedescendant')
+    })
+
     it('resets the active option to the value when focus leaves', async () => {
       const user = userEvent.setup()
       const onBlur = vi.fn()
@@ -428,13 +481,13 @@ describe('components/autocomplete', () => {
 
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-baz')
 
-      await blurTo(outside)
+      await reopen(user, outside)
 
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
       expect(onBlur).toHaveBeenCalledTimes(1)
     })
 
-    it('closes and resets the active option in the same commit when focus leaves', async () => {
+    it('closes on blur with the value restored, with no state in between', async () => {
       const user = userEvent.setup()
       const {commits, outside} = renderAutocomplete({
         filterOption: SHOW_ALL,
@@ -451,9 +504,9 @@ describe('components/autocomplete', () => {
 
       await blurTo(outside)
 
-      // No committed frame was closed while still pointing at the option the arrow key reached
-      expect(commits).not.toContain('"bar" false ac-option-baz')
-      expect(commits.at(-1)).toBe('"bar" false ac-option-bar')
+      // The close and the reset are one reducer step (see autocompleteReducer.test.ts); here the
+      // list goes from open to closed in one visible step
+      expect(commits).toEqual(['"bar" false'])
     })
 
     it('leaves the active option alone when focus leaves without a value', async () => {
@@ -465,7 +518,7 @@ describe('components/autocomplete', () => {
 
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-foo')
 
-      await blurTo(outside)
+      await reopen(user, outside)
 
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-foo')
     })
@@ -473,8 +526,7 @@ describe('components/autocomplete', () => {
     it('resets the active option to the value on Escape', async () => {
       const user = userEvent.setup()
       const onQueryChange = vi.fn()
-
-      renderAutocomplete({
+      const {outside} = renderAutocomplete({
         filterOption: SHOW_ALL,
         onQueryChange,
         openOnFocus: true,
@@ -489,9 +541,12 @@ describe('components/autocomplete', () => {
       await user.keyboard('{Escape}')
 
       expect(getInput()).toHaveAttribute('aria-expanded', 'false')
-      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
       expect(onQueryChange).toHaveBeenLastCalledWith(null)
       expect(getInput()).toHaveFocus()
+
+      await reopen(user, outside)
+
+      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
     })
 
     it('clears the active option when the query changes', async () => {

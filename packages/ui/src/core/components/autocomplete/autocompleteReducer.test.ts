@@ -41,17 +41,21 @@ describe('autocompleteReducer', () => {
     },
   )
 
-  it.each(['root/blur', 'root/escape'] as const)(
-    'closes on %s and keeps the active option without a value',
-    (type) => {
-      expect(reduce({type}, {...state, value: null})).toEqual({
-        ...state,
-        focused: false,
-        query: null,
-        value: null,
-      })
-    },
-  )
+  // `value` is `''` after a `value/change` with the prop's empty string; like `null` it counts as
+  // no value, so the active option stays where it was
+  it.each([
+    ['root/blur', null],
+    ['root/blur', ''],
+    ['root/escape', null],
+    ['root/escape', ''],
+  ] as const)('closes on %s and keeps the active option with the value %j', (type, value) => {
+    expect(reduce({type}, {...state, value})).toEqual({
+      ...state,
+      focused: false,
+      query: null,
+      value,
+    })
+  })
 
   it('clears the query and selected values', () => {
     expect(reduce({type: 'root/clear'})).toEqual({

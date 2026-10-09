@@ -2,105 +2,37 @@
 
 import {act, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {ComponentProps, Profiler, use} from 'react'
+import {ComponentProps, startTransition, use} from 'react'
 
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {describe, expect, it} from 'vitest'
+import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
 import {Autocomplete} from './autocomplete'
+import {
+  blurTo,
+  getInput,
+  getOption,
+  OPTIONS,
+  outsideAct,
+  renderAutocomplete,
+  SHOW_ALL,
+  typeNatively,
+} from './autocomplete.testUtils'
 
 /**
- * The results popover opens one render after the state that calls for it (`useDeferredValue` in
+ * The results popover opens one render after the state that asks for it (`useDeferredValue` in
  * autocomplete.tsx): the urgent commit carries the new input and state, the deferred commit flips
- * `aria-expanded` (and with it the popover's `open`). Closing is urgent, in the same commit as
- * the state that closes. Each test records the committed `value` and `aria-expanded` of the
- * input through a `Profiler`, collapsing commits that repeat the previous state (`TextInput`
- * re-attaches its forwarded ref whenever it renders, which commits the same state once more).
+ * `aria-expanded` (and with it the popover's `open`). Closing is urgent. The recorded commits
+ * collapse repeats (see `renderAutocomplete`), so the tests pin the order of the states a user
+ * could see — "the keystroke shows before the list opens", "the list closes with the selected
+ * value and no state in between" — not the number of commits.
  */
-
-const OPTIONS = [{value: 'foo'}, {value: 'bar'}, {value: 'baz'}]
-
-const SHOW_ALL = () => true
-
-function getInput() {
-  return screen.getByRole<HTMLInputElement>('combobox')
-}
-
-function getOption(value: string) {
-  // The popover stays `hidden` in jsdom (Floating UI never positions it there)
-  return screen.getByRole('option', {hidden: true, name: value})
-}
-
-function renderAutocomplete(props: Partial<ComponentProps<typeof Autocomplete>> = {}) {
-  const commits: string[] = []
-  const recordCommit = () => {
-    const input = getInput()
-    const state = `${JSON.stringify(input.value)} ${input.getAttribute('aria-expanded')}`
-
-    if (commits.at(-1) !== state) commits.push(state)
-  }
-
-  const ui = (nextProps: Partial<ComponentProps<typeof Autocomplete>>) => (
-    <>
-      <Profiler id="autocomplete" onRender={recordCommit}>
-        <Autocomplete id="ac" options={OPTIONS} {...nextProps} />
-      </Profiler>
-      <button type="button">Outside</button>
-    </>
-  )
-  const result = render(ui(props))
-
-  return {
-    commits,
-    outside: screen.getByRole('button', {name: 'Outside'}),
-    rerender: (nextProps: Partial<ComponentProps<typeof Autocomplete>>) =>
-      result.rerender(ui(nextProps)),
-  }
-}
-
-async function blurTo(element: HTMLElement) {
-  act(() => element.focus())
-
-  await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'false'))
-}
-
-/**
- * A keystroke as the browser delivers it, outside of `act`: the value is set through the
- * prototype setter so that React's value tracker sees the change, then `input` is dispatched.
- */
-function typeNatively(input: HTMLInputElement, value: string) {
-  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set?.call(input, value)
-  input.dispatchEvent(new Event('input', {bubbles: true}))
-}
-
-declare global {
-  // The flag React reads to decide whether updates must happen inside `act`; Testing Library sets
-  // it for the test and clears it while waiting
-  var IS_REACT_ACT_ENVIRONMENT: boolean | undefined
-}
-
-/**
- * Runs `fn` outside of React's act environment, where the urgent update of a discrete event
- * commits in a microtask and a deferred render needs a task of its own.
- */
-async function outsideAct(fn: () => Promise<void>) {
-  const previous = globalThis.IS_REACT_ACT_ENVIRONMENT
-
-  globalThis.IS_REACT_ACT_ENVIRONMENT = false
-
-  try {
-    await fn()
-  } finally {
-    globalThis.IS_REACT_ACT_ENVIRONMENT = previous
-  }
-}
-
 describe('components/autocomplete (deferred popover)', () => {
-  it('opens in a later task than the focus that calls for it', async () => {
+  it('opens in a later task than the focus that asks for it', async () => {
     const user = userEvent.setup()
     const {outside} = renderAutocomplete({openOnFocus: true})
 
@@ -155,7 +87,7 @@ describe('components/autocomplete (deferred popover)', () => {
 
   // With nothing to show there is no popover, so the open cycle has to start when results
   // arrive for the pending query, not when the query started
-  it('opens one commit after results arrive for a pending query', async () => {
+  it('shows the pending query closed, then opens once results arrive', async () => {
     const user = userEvent.setup()
     const {commits, rerender} = renderAutocomplete({openOnFocus: true, options: []})
 
@@ -170,7 +102,7 @@ describe('components/autocomplete (deferred popover)', () => {
     expect(commits).toEqual(['"" false', '"" true'])
   })
 
-  it('opens one commit after a query starts matching', async () => {
+  it('shows a query that starts matching closed, then opens for it', async () => {
     const user = userEvent.setup()
     const {commits} = renderAutocomplete()
 
@@ -190,6 +122,23 @@ describe('components/autocomplete (deferred popover)', () => {
     expect(commits).toEqual(['"b" false', '"b" true'])
   })
 
+  // The `(query !== null && loading)` branch: the open button with nothing loaded yet
+  it('shows a query that is loading closed, then opens once the options are in', async () => {
+    const user = userEvent.setup()
+    const {commits, rerender} = renderAutocomplete({loading: true, openButton: true, options: []})
+
+    await user.click(screen.getByRole('button', {name: 'Open'}))
+    await waitFor(() => expect(getInput()).toHaveFocus())
+
+    expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+
+    commits.length = 0
+
+    rerender({loading: false, openButton: true, options: OPTIONS})
+
+    expect(commits).toEqual(['"" false', '"" true'])
+  })
+
   it('shows the first keystroke before the list opens for it', async () => {
     const user = userEvent.setup()
     const {commits} = renderAutocomplete()
@@ -205,7 +154,29 @@ describe('components/autocomplete (deferred popover)', () => {
     expect(commits).toEqual(['"b" false', '"b" true'])
   })
 
-  it('closes with the selected value in one commit', async () => {
+  it('opens in the same render when that render is already a transition', () => {
+    const {commits, rerender} = renderAutocomplete({openOnFocus: true, options: []})
+
+    act(() => {
+      getInput().focus()
+    })
+
+    expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+
+    commits.length = 0
+
+    // A parent delivering options inside `startTransition` renders at transition priority
+    // already, so there is nothing to defer: the list opens with them
+    act(() => {
+      startTransition(() => {
+        rerender({openOnFocus: true, options: OPTIONS})
+      })
+    })
+
+    expect(commits).toEqual(['"" true'])
+  })
+
+  it('closes with the selected value, with no state in between', async () => {
     const user = userEvent.setup()
     const {commits} = renderAutocomplete({filterOption: SHOW_ALL, openOnFocus: true})
 
@@ -219,7 +190,7 @@ describe('components/autocomplete (deferred popover)', () => {
     expect(commits).toEqual(['"bar" false'])
   })
 
-  it('closes with the cleared input in one commit', async () => {
+  it('closes with the cleared input, with no state in between', async () => {
     const user = userEvent.setup()
     const {commits} = renderAutocomplete({openOnFocus: true, value: 'foo'})
 
@@ -234,7 +205,7 @@ describe('components/autocomplete (deferred popover)', () => {
     expect(commits).toEqual(['"" false'])
   })
 
-  it('closes with the restored input in one commit when focus leaves', async () => {
+  it('closes with the restored input when focus leaves, with no state in between', async () => {
     const user = userEvent.setup()
     const {commits, outside} = renderAutocomplete()
 
@@ -246,7 +217,7 @@ describe('components/autocomplete (deferred popover)', () => {
     expect(commits).toEqual(['"" false'])
   })
 
-  it('closes with the restored input in one commit on Escape', async () => {
+  it('closes with the restored input on Escape, with no state in between', async () => {
     const user = userEvent.setup()
     const {commits} = renderAutocomplete()
 
@@ -324,9 +295,8 @@ describe('components/autocomplete (deferred popover)', () => {
     // The held render does not reopen the list or bring back the previous value
     expect(getInput()).toHaveValue('bar')
     expect(getInput()).toHaveAttribute('aria-expanded', 'false')
-    expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
 
-    // A render that is no longer held still opens it on demand
+    // A render that is no longer held still opens it on demand, highlighting the new value
     await act(async () => {
       getInput().blur()
     })
@@ -337,6 +307,7 @@ describe('components/autocomplete (deferred popover)', () => {
 
     expect(getInput()).toHaveAttribute('aria-expanded', 'true')
     expect(getInput()).toHaveValue('bar')
+    expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-bar')
   })
 
   it('keeps arrow navigation and typing within an open list in the urgent commit', async () => {
@@ -356,5 +327,118 @@ describe('components/autocomplete (deferred popover)', () => {
     await user.type(getInput(), 'b', {skipClick: true})
 
     expect(commits).toEqual(['"b" true'])
+  })
+
+  describe('renderPopover', () => {
+    type RenderPopover = NonNullable<ComponentProps<typeof Autocomplete>['renderPopover']>
+
+    /** Records the `hidden` flag each render, and renders the content when shown */
+    function createRenderPopover() {
+      const hidden = vi.fn<(value: boolean) => void>()
+      const renderPopover: RenderPopover = (props) => {
+        hidden(props.hidden)
+
+        return props.hidden ? null : <div data-testid="custom-popover">{props.content}</div>
+      }
+
+      return {hidden, renderPopover}
+    }
+
+    it('shows the list one render after it is asked for', async () => {
+      const user = userEvent.setup()
+      const {hidden, renderPopover} = createRenderPopover()
+      const {commits} = renderAutocomplete({
+        filterOption: SHOW_ALL,
+        openOnFocus: true,
+        renderPopover,
+      })
+
+      hidden.mockClear()
+      commits.length = 0
+
+      await user.click(getInput())
+
+      // Hidden in the urgent render of the focus, shown in the deferred one (StrictMode renders
+      // twice, so repeats are collapsed)
+      const flags = hidden.mock.calls.map(([value]) => value)
+
+      expect(flags.filter((value, index) => value !== flags[index - 1])).toEqual([true, false])
+      expect(commits).toEqual(['"" false', '"" true'])
+      expect(screen.getByTestId('custom-popover')).toBeInTheDocument()
+    })
+
+    it('keeps the list hidden while loading without options, then shows it with them', async () => {
+      const user = userEvent.setup()
+      const {renderPopover} = createRenderPopover()
+      const {commits, rerender} = renderAutocomplete({
+        filterOption: SHOW_ALL,
+        loading: true,
+        openOnFocus: true,
+        options: [],
+        renderPopover,
+      })
+
+      await user.click(getInput())
+
+      // Nothing to show yet: not even the renderer's own "no results" state
+      expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+      expect(screen.queryByTestId('custom-popover')).toBeNull()
+
+      commits.length = 0
+
+      // The results are the closed → open flip, shown one render after they arrive
+      rerender({
+        filterOption: SHOW_ALL,
+        loading: false,
+        openOnFocus: true,
+        options: OPTIONS,
+        renderPopover,
+      })
+
+      expect(commits).toEqual(['"" false', '"" true'])
+      expect(screen.getByTestId('custom-popover')).toContainElement(getOption('bar'))
+    })
+
+    it('shows the renderer once loading ends without options', async () => {
+      const user = userEvent.setup()
+      const {renderPopover} = createRenderPopover()
+      const {rerender} = renderAutocomplete({
+        loading: true,
+        openOnFocus: true,
+        options: [],
+        renderPopover,
+      })
+
+      await user.click(getInput())
+      rerender({loading: false, openOnFocus: true, options: [], renderPopover})
+
+      // The renderer decides what to show for no results (a message, say)
+      expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+      expect(screen.getByTestId('custom-popover')).toBeEmptyDOMElement()
+    })
+
+    // Known limit: a renderer with options that filter client-side shows a query without matches
+    // (as "no results"), so a later match is a change inside the shown list, not an open
+    it('treats a query that starts matching as a change inside the shown list', async () => {
+      const user = userEvent.setup()
+      const {renderPopover} = createRenderPopover()
+      const {commits} = renderAutocomplete({renderPopover})
+
+      await user.type(getInput(), 'x')
+
+      expect(getInput()).toHaveAttribute('aria-expanded', 'true')
+      expect(screen.getByTestId('custom-popover')).toBeEmptyDOMElement()
+
+      commits.length = 0
+
+      await user.type(getInput(), 'b', {
+        initialSelectionEnd: 1,
+        initialSelectionStart: 0,
+        skipClick: true,
+      })
+
+      expect(commits).toEqual(['"b" true'])
+      expect(screen.getByTestId('custom-popover')).toContainElement(getOption('bar'))
+    })
   })
 })
