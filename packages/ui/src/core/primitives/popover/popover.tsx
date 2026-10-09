@@ -25,8 +25,10 @@ import {
 } from 'react'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {useLatestRef} from '../../hooks/useLatestRef'
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
+import {useReferenceElement} from '../../hooks/useReferenceElement'
 import {origin} from '../../middleware/origin'
 import {_elementSizeObserver, ElementRectValue} from '../../observers/elementSizeObserver'
 import {_getArrayProp} from '../../styles/helpers'
@@ -159,6 +161,73 @@ export interface PopoverProps
  * a click or a tap.
  */
 const INTENT_EVENT_TYPES = ['focusin', 'pointerenter', 'pointerdown'] as const
+
+/**
+ * Calls `handleIntent` whenever `element` shows intent to open the popover, until the returned
+ * function is called. `focusin` rather than `focus` so that focus landing inside the reference
+ * element counts too. `pointerdown` is a fallback for a pointer that was already over the element
+ * when it rendered, which fires no `pointerenter`.
+ */
+function listenForIntent(element: HTMLElement, handleIntent: () => void): () => void {
+  const controller = new AbortController()
+  const {signal} = controller
+
+  for (const type of INTENT_EVENT_TYPES) {
+    element.addEventListener(type, handleIntent, {signal})
+  }
+
+  // Focus that landed before the listeners did (an `autoFocus` reference, a `referenceElement`
+  // that was focused already) fired its `focusin` unheard, so count it now
+  const {activeElement} = element.ownerDocument
+
+  if (activeElement && element.contains(activeElement)) handleIntent()
+
+  return () => controller.abort()
+}
+
+/** Holds the function that stops the intent listeners on the cloned child's element, while they are on */
+type IntentListenerHandle = React.RefObject<(() => void) | null>
+
+interface ChildIntentOptions {
+  handle: IntentListenerHandle
+  handleIntent: () => void
+  shouldRenderRef: React.RefObject<boolean>
+}
+
+/**
+ * Listens to the cloned child's element for intent from the moment it attaches, unless the
+ * popover has rendered already (which leaves nothing to pre-render), until it detaches. A hook,
+ * with the ref accesses in `listenForChildIntent`, for the same reason as `useReferenceElement`:
+ * the callback flows into a `cloneElement` call through it.
+ */
+function useChildIntent(options: ChildIntentOptions): (node: HTMLElement) => () => void {
+  const {handle, handleIntent, shouldRenderRef} = options
+
+  return useCallback(
+    (node: HTMLElement) => listenForChildIntent(node, {handle, handleIntent, shouldRenderRef}),
+    [handle, handleIntent, shouldRenderRef],
+  )
+}
+
+function listenForChildIntent(
+  node: HTMLElement,
+  {handle, handleIntent, shouldRenderRef}: ChildIntentOptions,
+): () => void {
+  // One element at a time: whatever the handle still holds (it should hold nothing, since the
+  // previous element's detach stopped it) is stopped before it is replaced
+  stopListeningForIntent(handle)
+
+  if (!shouldRenderRef.current) {
+    handle.current = listenForIntent(node, handleIntent)
+  }
+
+  return () => stopListeningForIntent(handle)
+}
+
+function stopListeningForIntent(handle: IntentListenerHandle): void {
+  handle.current?.()
+  handle.current = null
+}
 
 const ViewportOverlay = () => {
   const {zIndex} = useLayer()
@@ -316,17 +385,16 @@ export function Popover(
     widthRef,
   })
 
-  const {x, y, elements, middlewareData, placement, refs, strategy, update} =
-    useFloating<HTMLElement>({
-      middleware,
-      placement: placementProp,
-      whileElementsMounted: autoUpdate,
-      elements: referenceElement
-        ? {
-            reference: referenceElement,
-          }
-        : undefined,
-    })
+  const {x, y, middlewareData, placement, refs, strategy, update} = useFloating<HTMLElement>({
+    middleware,
+    placement: placementProp,
+    whileElementsMounted: autoUpdate,
+    elements: referenceElement
+      ? {
+          reference: referenceElement,
+        }
+      : undefined,
+  })
 
   // Whether the popover (card, portal and `content`) has been rendered yet. Closed popovers
   // render inside a hidden `<Activity>`, so whatever is rendered while closed is pre-rendered DOM
@@ -339,35 +407,33 @@ export function Popover(
   if (isOpen && !hasRendered) setHasRendered(true)
 
   const shouldRender = isOpen || hasRendered
-  // The element to listen to for intent to open the popover: none once the popover has rendered,
-  // since there is nothing left to pre-render, and none while disabled, which also drops the
-  // listeners of a popover that was enabled before
-  const intentReference = shouldRender || disabled ? null : elements.reference
+  const shouldRenderRef = useLatestRef(shouldRender)
+
+  // Arms the pre-render. In a transition, so that it never holds up an open that follows right
+  // away (a click), and so that React pre-renders the hidden popover in the background.
+  const handleIntent = useCallback(() => startTransition(() => setHasRendered(true)), [])
+
+  // Nothing is listened to once the popover has rendered, since there is nothing left to
+  // pre-render, nor while disabled, which also drops the listeners of a popover that was enabled
+  // before. A `referenceElement` given as a prop is listened to from here; the cloned child from
+  // the ref callback that receives its element (`setReference`, through `listenForChildIntent`),
+  // whose listeners are stopped from here once the popover has rendered. A disabled popover
+  // renders the child without cloning it, so the child path has no listeners while disabled.
+  const childIntentHandle: IntentListenerHandle = useRef<(() => void) | null>(null)
 
   useEffect(() => {
-    if (!intentReference) return undefined
+    if (shouldRender) stopListeningForIntent(childIntentHandle)
 
-    const controller = new AbortController()
-    const {signal} = controller
-    // In a transition, so that it never holds up an open that follows right away (a click), and
-    // so that React pre-renders the hidden popover in the background
-    const handleIntent = () => startTransition(() => setHasRendered(true))
+    if (!referenceElement || disabled || shouldRender) return undefined
 
-    // `focusin` rather than `focus` so that focus landing inside the reference element counts too.
-    // `pointerdown` is a fallback for a pointer that was already over the element when it
-    // rendered, which fires no `pointerenter`.
-    for (const type of INTENT_EVENT_TYPES) {
-      intentReference.addEventListener(type, handleIntent, {signal})
-    }
+    return listenForIntent(referenceElement, handleIntent)
+  }, [disabled, handleIntent, referenceElement, shouldRender])
 
-    // Focus that landed before the listeners did (an `autoFocus` reference, a `referenceElement`
-    // that was focused already) fired its `focusin` unheard, so count it now
-    const {activeElement} = intentReference.ownerDocument
-
-    if (activeElement && intentReference.contains(activeElement)) handleIntent()
-
-    return () => controller.abort()
-  }, [intentReference])
+  const listenForChildIntentOnAttach = useChildIntent({
+    handle: childIntentHandle,
+    handleIntent,
+    shouldRenderRef,
+  })
 
   const referenceHidden = middlewareData.hide?.referenceHidden
 
@@ -381,17 +447,28 @@ export function Popover(
     arrowRef.current = arrowEl
   }, [])
 
+  // The child's own ref, when it has one: attached to its element along with ours, so it holds
+  // the element from the commit that mounts it on. With a `referenceElement` the child is not
+  // cloned and keeps its ref to itself.
+  const childRef =
+    childProp && !referenceElement ? getElementRef<HTMLElement>(childProp) : undefined
+
+  // The cloned child's element, in a ref: nothing reads it during render, and Floating UI is
+  // handed it as the card mounts (`setFloating`). See `useReferenceElement` for why not state.
+  const {handOverReference, setReference} = useReferenceElement({
+    childRef,
+    onAttach: listenForChildIntentOnAttach,
+    refs,
+  })
+
   const setFloating = useCallback(
     (node: HTMLDivElement | null) => {
       ref.current = node
+      if (node) handOverReference()
       refs.setFloating(node)
     },
-    [refs],
+    [handOverReference, refs],
   )
-
-  // If there's a child then we need to set the reference element to the cloned child ref
-  // and if child changes we make sure to update or remove the reference element.
-  useImperativeHandle(childProp ? getElementRef(childProp) : null, () => refs.reference.current)
 
   const child = useMemo(() => {
     // If a reference element is defined, we don't need to clone the child
@@ -399,8 +476,8 @@ export function Popover(
 
     if (!childProp) return null
 
-    return cloneElement(childProp, {ref: refs.setReference})
-  }, [childProp, referenceElement, refs.setReference])
+    return cloneElement(childProp, {ref: setReference})
+  }, [childProp, referenceElement, setReference])
 
   useImperativeHandle(updateRef, () => update, [update])
 

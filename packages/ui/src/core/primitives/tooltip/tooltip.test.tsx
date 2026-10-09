@@ -6,6 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
+import {Profiler, useLayoutEffect} from 'react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -499,6 +500,263 @@ describe('Tooltip', () => {
     it('should fire the onMouseLeave event', () => {
       fireEvent.mouseLeave(screen.getByTestId('btn'))
       expect(handleMouseLeave).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('The referred element', () => {
+    const content = <Text size={1}>{'Tooltip content'}</Text>
+    const phasesOf = (onRender: ReturnType<typeof vi.fn>) =>
+      onRender.mock.calls.map((call: unknown[]) => call[1])
+
+    /** The tooltip layer, which Floating UI positions through its inline `transform` */
+    function tooltipTransform() {
+      return document.querySelector<HTMLElement>('[data-ui="Tooltip"]')?.style.transform
+    }
+
+    /** jsdom answers `getBoundingClientRect` with zeros: gives `element` a place and a size */
+    function placeAt(element: HTMLElement, x: number, y: number, width: number, height: number) {
+      element.getBoundingClientRect = () => new DOMRect(x, y, width, height)
+    }
+
+    /**
+     * jsdom's viewport has no size, so every placement overflows it and Floating UI flips and
+     * shifts the tooltip around: gives the viewport a size for the duration of `run`
+     */
+    async function withViewport(run: () => Promise<void>) {
+      const html = document.documentElement
+
+      Object.defineProperty(html, 'clientWidth', {configurable: true, value: 1024})
+      Object.defineProperty(html, 'clientHeight', {configurable: true, value: 768})
+
+      try {
+        await run()
+      } finally {
+        Reflect.deleteProperty(html, 'clientWidth')
+        Reflect.deleteProperty(html, 'clientHeight')
+      }
+    }
+
+    /**
+     * Mounting used to schedule a second commit from the first one: the ref callback set the
+     * element into state, in the commit phase, at Immediate priority (a "nested update" to the
+     * profiler), which also held up the first frame of any view transition revealing the element.
+     * The element now lives in a ref, which nothing needs to re-render for. The pass in which
+     * React renders the content of the hidden `Activity` the closed tooltip is in, which a bare
+     * `<Activity mode="hidden">` gets as well, is React's to schedule and not asserted on.
+     */
+    it('schedules no follow-up commit for the referred element when it mounts', () => {
+      const onRender = vi.fn()
+
+      render(
+        <Profiler id="tooltip" onRender={onRender}>
+          <Tooltip content={content}>
+            <Button mode="bleed" text="Hover me" />
+          </Tooltip>
+        </Profiler>,
+        {strict: false},
+      )
+
+      expect(phasesOf(onRender)[0]).toBe('mount')
+      expect(phasesOf(onRender)).not.toContain('nested-update')
+
+      // The element is known all the same: hovering positions and shows the tooltip against it
+      fireEvent.mouseEnter(screen.getByText('Hover me'))
+      expectTooltipVisible('Tooltip content')
+    })
+
+    it('hands Floating UI the referred element as the tooltip shows, and a replacement while it is shown', async () => {
+      // `expect.poll` needs real timers; the hooks of this file put the fake ones back
+      vi.useRealTimers()
+
+      try {
+        await withViewport(async () => {
+          const {rerender} = render(
+            <Tooltip content={content} placement="bottom">
+              <Button mode="bleed" text="Hover me" />
+            </Tooltip>,
+            {strict: false},
+          )
+
+          const button = screen.getByRole('button', {name: 'Hover me'})
+
+          placeAt(button, 100, 50, 80, 20)
+          fireEvent.mouseEnter(button)
+          expectTooltipVisible('Tooltip content')
+
+          // Centered below the element, `DEFAULT_TOOLTIP_DISTANCE` away (the card has no size in jsdom)
+          await expect.poll(tooltipTransform).toBe('translate(140px, 74px)')
+
+          // A `Button` of another key mounts a new element, which the tooltip repositions against
+          rerender(
+            <Tooltip content={content} placement="bottom">
+              <Button key="replacement" mode="bleed" text="Hover me" />
+            </Tooltip>,
+          )
+
+          const replacement = screen.getByRole('button', {name: 'Hover me'})
+
+          expect(replacement).not.toBe(button)
+          placeAt(replacement, 300, 50, 80, 20)
+
+          await expect.poll(tooltipTransform).toBe('translate(340px, 74px)')
+        })
+      } finally {
+        vi.useFakeTimers()
+      }
+    })
+
+    /**
+     * An inline `ref={(el) => …}` on the child is a new function every render of the parent
+     * (unless the React Compiler memoizes it). React detaches the old one and attaches the new one
+     * for it, and nothing else: our ref callback on the element stays the same, so Floating UI is
+     * not told about the element again while the tooltip is shown, which would be an
+     * Immediate-priority update per render.
+     */
+    it('swaps an inline child ref that changes every render without touching Floating UI', () => {
+      const onRender = vi.fn()
+      const seen: (HTMLElement | null)[] = []
+
+      function Example(props: {render: number}) {
+        'use no memo'
+
+        return (
+          <Tooltip content={content}>
+            <Button
+              data-render={props.render}
+              mode="bleed"
+              ref={(element: HTMLElement | null) => {
+                seen.push(element)
+              }}
+              text="Hover me"
+            />
+          </Tooltip>
+        )
+      }
+
+      const {rerender} = render(
+        <Profiler id="tooltip" onRender={onRender}>
+          <Example render={0} />
+        </Profiler>,
+        {strict: false},
+      )
+
+      const button = screen.getByRole('button', {name: 'Hover me'})
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+      expect(seen).toEqual([button])
+      onRender.mockClear()
+
+      for (const pass of [1, 2, 3]) {
+        rerender(
+          <Profiler id="tooltip" onRender={onRender}>
+            <Example render={pass} />
+          </Profiler>,
+        )
+      }
+
+      expect(phasesOf(onRender)).toEqual(['update', 'update', 'update'])
+      expect(seen).toEqual([button, null, button, null, button, null, button])
+      expectTooltipVisible('Tooltip content')
+    })
+
+    it('attaches the child’s own ref with React’s own sequence under StrictMode', () => {
+      const callbackRef = vi.fn()
+      const cleanup = vi.fn()
+      const callbackRefWithCleanup = vi.fn((_node: HTMLButtonElement | null) => cleanup)
+      const onRender = vi.fn()
+
+      // `render` puts `<StrictMode>` at the top of the tree, which is where it has to be for React
+      // to run the mount effects (and refs) of the subtree twice
+      render(
+        <Profiler id="tooltip" onRender={onRender}>
+          <Tooltip content={content}>
+            <Button mode="bleed" ref={callbackRef} text="Hover me" />
+          </Tooltip>
+          <Tooltip content={<Text size={1}>Other content</Text>}>
+            <Button mode="bleed" ref={callbackRefWithCleanup} text="Hover me too" />
+          </Tooltip>
+        </Profiler>,
+      )
+
+      const button = screen.getByRole('button', {name: 'Hover me'})
+      const otherButton = screen.getByRole('button', {name: 'Hover me too'})
+
+      // StrictMode detaches and attaches every ref once more on mount
+      expect(callbackRef.mock.calls).toEqual([[button], [null], [button]])
+      expect(callbackRefWithCleanup.mock.calls).toEqual([[otherButton], [otherButton]])
+      expect(cleanup).toHaveBeenCalledTimes(1)
+      expect(phasesOf(onRender)).not.toContain('nested-update')
+
+      fireEvent.mouseEnter(button)
+      expectTooltipVisible('Tooltip content')
+      expect(callbackRef).toHaveBeenCalledTimes(3)
+    })
+
+    it('attaches the child’s own object ref from the commit that mounts it', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      // Read in a layout effect of a parent, which runs in the same commit, after the ref attached
+      const seenInLayoutEffect: (HTMLElement | null)[] = []
+
+      function Parent() {
+        useLayoutEffect(() => {
+          seenInLayoutEffect.push(ref.current)
+        }, [])
+
+        return (
+          <Tooltip content={content}>
+            <Button mode="bleed" ref={ref} text="Hover me" />
+          </Tooltip>
+        )
+      }
+
+      const {unmount} = render(<Parent />, {strict: false})
+
+      expect(ref.current).toBe(screen.getByRole('button', {name: 'Hover me'}))
+      expect(seenInLayoutEffect).toEqual([ref.current])
+
+      unmount()
+
+      expect(ref.current).toBeNull()
+    })
+
+    it('attaches the child’s own callback ref, and runs the cleanup it returns on unmount', () => {
+      const cleanup = vi.fn()
+      const callbackRef = vi.fn((_node: HTMLButtonElement | null) => cleanup)
+
+      const {unmount} = render(
+        <Tooltip content={content}>
+          <Button mode="bleed" ref={callbackRef} text="Hover me" />
+        </Tooltip>,
+        {strict: false},
+      )
+
+      expect(callbackRef).toHaveBeenCalledTimes(1)
+      expect(callbackRef).toHaveBeenCalledWith(screen.getByRole('button', {name: 'Hover me'}))
+      expect(cleanup).not.toHaveBeenCalled()
+
+      unmount()
+
+      // React 19 semantics: a callback ref that returned a cleanup is not called with `null`
+      expect(cleanup).toHaveBeenCalledTimes(1)
+      expect(callbackRef).toHaveBeenCalledTimes(1)
+    })
+
+    it('calls a callback ref without cleanup with `null` on unmount', () => {
+      const callbackRef = vi.fn()
+
+      const {unmount} = render(
+        <Tooltip content={content}>
+          <Button mode="bleed" ref={callbackRef} text="Hover me" />
+        </Tooltip>,
+        {strict: false},
+      )
+
+      const button = screen.getByRole('button', {name: 'Hover me'})
+
+      unmount()
+
+      expect(callbackRef.mock.calls).toEqual([[button], [null]])
     })
   })
 

@@ -1,8 +1,13 @@
 /** @vitest-environment jsdom */
 
+import {screen} from '@testing-library/react'
+
+// oxlint-disable-next-line no-unassigned-import
+import '../../../../test/mocks/matchMedia.mock'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
+import {Layer} from './layer'
 import {LayerContext} from './layerContext'
 import {LayerContextValue} from './types'
 import {useLayer} from './useLayer'
@@ -110,6 +115,39 @@ describe('utils/layer', () => {
       expect(log.mock.calls[0][0].message).toEqual(
         'useLayer(): the context value is not compatible',
       )
+    })
+  })
+
+  describe('Layer', () => {
+    it('forwards its element once, not again on every render, and follows the element type', () => {
+      const callbackRef = vi.fn()
+
+      const {rerender, unmount} = render(<Layer ref={callbackRef}>layer</Layer>, {strict: false})
+
+      const element = screen.getByText('layer')
+
+      expect(callbackRef.mock.calls).toEqual([[element]])
+
+      rerender(<Layer ref={callbackRef}>layer</Layer>)
+      rerender(<Layer ref={callbackRef}>layer again</Layer>)
+
+      expect(callbackRef.mock.calls).toEqual([[element]])
+
+      // Another element type mounts another element, and the ref moves to it
+      rerender(
+        <Layer as="section" ref={callbackRef}>
+          layer again
+        </Layer>,
+      )
+
+      const section = screen.getByText('layer again')
+
+      expect(section.tagName).toBe('SECTION')
+      expect(callbackRef.mock.calls).toEqual([[element], [null], [section]])
+
+      unmount()
+
+      expect(callbackRef.mock.calls.at(-1)).toEqual([null])
     })
   })
 })

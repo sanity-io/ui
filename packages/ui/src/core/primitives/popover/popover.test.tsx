@@ -6,7 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {useState} from 'react'
+import {Activity, Profiler, useState} from 'react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -23,7 +23,7 @@ function getReference() {
 
 /** The popover card itself, not just its `content`, so that the test covers the whole hidden tree */
 function queryPopoverCard() {
-  return document.querySelector('[data-ui="Popover"]')
+  return document.querySelector<HTMLElement>('[data-ui="Popover"]')
 }
 
 /** `<Activity mode="hidden">` hides its content with an inline `display: none` on the topmost host nodes */
@@ -42,15 +42,32 @@ function hiddenByActivity(element: Element) {
  */
 function spyOnIntentListeners(reference: HTMLElement) {
   const addEventListener = vi.spyOn(reference, 'addEventListener')
+  const intentRegistrations = () =>
+    addEventListener.mock.calls.filter(
+      ([type]) => type === 'focusin' || type === 'pointerenter' || type === 'pointerdown',
+    )
 
   return {
     active: () =>
-      addEventListener.mock.calls.filter(([type, , options]) => {
-        if (type !== 'focusin' && type !== 'pointerenter' && type !== 'pointerdown') return false
-
-        return typeof options === 'object' && options.signal ? !options.signal.aborted : true
-      }).length,
+      intentRegistrations().filter(([, , options]) =>
+        typeof options === 'object' && options.signal ? !options.signal.aborted : true,
+      ).length,
+    /** Every registration so far, including the ones aborted since */
+    total: () => intentRegistrations().length,
   }
+}
+
+/**
+ * Floating UI measures the reference element through `getBoundingClientRect`, which jsdom answers
+ * with zeros: gives `element` a width of its own, so that what Floating UI positions against is
+ * observable (`matchReferenceWidth` copies it onto the card).
+ */
+function giveWidth(element: HTMLElement, width: number) {
+  element.getBoundingClientRect = () => new DOMRect(0, 0, width, 32)
+}
+
+function popoverCardWidth() {
+  return queryPopoverCard()?.style.width
 }
 
 function expectNotRendered() {
@@ -374,6 +391,98 @@ describe('Popover', () => {
       expectVisible()
     })
 
+    it('listens for intent again when an `<Activity>` shows the reference element again', () => {
+      function Example(props: {shown: boolean}) {
+        return (
+          <Activity mode={props.shown ? 'visible' : 'hidden'}>
+            <Popover content={content}>
+              <Button text="Reference" />
+            </Popover>
+          </Activity>
+        )
+      }
+
+      const {rerender} = render(<Example shown />, {strict: false})
+
+      const reference = getReference()
+      const intentListeners = spyOnIntentListeners(reference)
+
+      // The listeners went on as the element attached, before the spy: hiding takes them off
+      rerender(<Example shown={false} />)
+
+      expect(intentListeners.total()).toBe(0)
+      expectNotRendered()
+
+      // Showing attaches the element again, and with it the listeners
+      rerender(<Example shown />)
+
+      expect(intentListeners.active()).toBe(3)
+      expect(getReference()).toBe(reference)
+
+      fireEvent.pointerEnter(reference)
+      expectRenderedHidden()
+    })
+
+    it('does not listen for intent again on an element shown again once the popover has rendered', () => {
+      function Example(props: {shown: boolean}) {
+        return (
+          <Activity mode={props.shown ? 'visible' : 'hidden'}>
+            <Popover content={content}>
+              <Button text="Reference" />
+            </Popover>
+          </Activity>
+        )
+      }
+
+      const {rerender} = render(<Example shown />, {strict: false})
+
+      const reference = getReference()
+      const intentListeners = spyOnIntentListeners(reference)
+
+      fireEvent.pointerEnter(reference)
+      expectRenderedHidden()
+
+      rerender(<Example shown={false} />)
+      rerender(<Example shown />)
+
+      expect(getReference()).toBe(reference)
+      expect(intentListeners.total()).toBe(0)
+      expectRenderedHidden()
+    })
+
+    it('counts no intent on the cloned child while `disabled`, and does again once enabled', () => {
+      const {rerender} = render(
+        <Popover content={content} disabled>
+          <Button text="Reference" />
+        </Popover>,
+      )
+
+      fireEvent.pointerEnter(getReference())
+      fireEvent.focusIn(getReference())
+      expectNotRendered()
+
+      rerender(
+        <Popover content={content}>
+          <Button text="Reference" />
+        </Popover>,
+      )
+
+      expectNotRendered()
+
+      fireEvent.pointerEnter(getReference())
+      expectRenderedHidden()
+
+      // Disabling drops the pre-rendered popover along with the listeners
+      rerender(
+        <Popover content={content} disabled>
+          <Button text="Reference" />
+        </Popover>,
+      )
+
+      fireEvent.pointerEnter(getReference())
+      expectNotRendered()
+    })
+
     it('does not count intent while `disabled`', () => {
       const reference = document.createElement('button')
       const intentListeners = spyOnIntentListeners(reference)
@@ -400,6 +509,238 @@ describe('Popover', () => {
       fireEvent.focusIn(reference)
 
       expectRenderedHidden()
+    })
+  })
+
+  describe('the reference element', () => {
+    const phasesOf = (onRender: ReturnType<typeof vi.fn>) =>
+      onRender.mock.calls.map((call: unknown[]) => call[1])
+
+    /**
+     * Mounting used to schedule a second commit from the first one: Floating UI's ref callback
+     * set the element into state, in the commit phase, at Immediate priority (a "nested update"
+     * to the profiler), which also held up the first frame of any view transition revealing the
+     * element. The element now lives in a ref, which nothing needs to re-render for; Floating UI
+     * is handed it when the popover opens. The pass in which React renders the (empty) content of
+     * the hidden `Activity` the closed popover is in, which a bare `<Activity mode="hidden">`
+     * gets as well, is React's to schedule and not asserted on.
+     */
+    it('schedules no follow-up commit for the reference element when it mounts', () => {
+      const onRender = vi.fn()
+
+      const {rerender} = render(
+        <Profiler id="popover" onRender={onRender}>
+          <Popover content={content}>
+            <Button text="Reference" />
+          </Popover>
+        </Profiler>,
+        {strict: false},
+      )
+
+      expect(phasesOf(onRender)[0]).toBe('mount')
+      expect(phasesOf(onRender)).not.toContain('nested-update')
+
+      // Floating UI receives the element along with the card, as the popover opens
+      rerender(
+        <Profiler id="popover" onRender={onRender}>
+          <Popover content={content} open>
+            <Button text="Reference" />
+          </Popover>
+        </Profiler>,
+      )
+
+      expectVisible()
+    })
+
+    it('hands Floating UI the reference element as the popover opens, and a replacement while it is open', async () => {
+      const {rerender} = render(
+        <Popover content={content} matchReferenceWidth>
+          <Button text="Reference" />
+        </Popover>,
+        {strict: false},
+      )
+
+      giveWidth(getReference(), 240)
+
+      rerender(
+        <Popover content={content} matchReferenceWidth open>
+          <Button text="Reference" />
+        </Popover>,
+      )
+
+      expectVisible()
+      // Positioning is asynchronous (`computePosition`); the width of the reference lands on the card
+      await expect.poll(popoverCardWidth).toBe('240px')
+
+      // A `Button` of another key mounts a new element, which Floating UI positions against right away
+      rerender(
+        <Popover content={content} matchReferenceWidth open>
+          <Button key="replacement" text="Reference" />
+        </Popover>,
+      )
+
+      giveWidth(getReference(), 320)
+
+      await expect.poll(popoverCardWidth).toBe('320px')
+    })
+
+    /**
+     * An inline `ref={(el) => …}` on the child is a new function every render of the parent
+     * (unless the React Compiler memoizes it). React detaches the old one and attaches the new one
+     * for it, and nothing else: our ref callback on the element stays the same, so Floating UI
+     * is not told about the element again (an Immediate-priority update while the popover is
+     * open), and the intent listeners are not taken off and put on again while it is closed.
+     */
+    it('swaps an inline child ref that changes every render without touching Floating UI or the listeners', () => {
+      const onRender = vi.fn()
+      const seen: (HTMLElement | null)[] = []
+
+      function Example(props: {open?: boolean; render: number}) {
+        'use no memo'
+
+        return (
+          <Popover content={content} open={props.open}>
+            <Button
+              data-render={props.render}
+              ref={(element: HTMLElement | null) => {
+                seen.push(element)
+              }}
+              text="Reference"
+            />
+          </Popover>
+        )
+      }
+
+      const {rerender} = render(
+        <Profiler id="popover" onRender={onRender}>
+          <Example open render={0} />
+        </Profiler>,
+        {strict: false},
+      )
+
+      const reference = getReference()
+
+      expectVisible()
+      expect(seen).toEqual([reference])
+      onRender.mockClear()
+
+      for (const pass of [1, 2, 3]) {
+        rerender(
+          <Profiler id="popover" onRender={onRender}>
+            <Example open render={pass} />
+          </Profiler>,
+        )
+      }
+
+      expect(phasesOf(onRender)).toEqual(['update', 'update', 'update'])
+      // React's own semantics for a changed ref: the old one is called with `null`, the new one
+      // with the element
+      expect(seen).toEqual([reference, null, reference, null, reference, null, reference])
+
+      // Closing hides the card in its `Activity`, which detaches the card's ref: Floating UI's
+      // `setFloating(null)` is a nested update of its own there (as on `main`), not asserted on
+      rerender(
+        <Profiler id="popover" onRender={onRender}>
+          <Example render={4} />
+        </Profiler>,
+      )
+
+      onRender.mockClear()
+
+      // Closed: the intent listeners stay the ones put on when the element attached
+      const intentListeners = spyOnIntentListeners(reference)
+
+      for (const pass of [5, 6, 7]) {
+        rerender(
+          <Profiler id="popover" onRender={onRender}>
+            <Example render={pass} />
+          </Profiler>,
+        )
+      }
+
+      expect(intentListeners.total()).toBe(0)
+      expect(phasesOf(onRender)).not.toContain('nested-update')
+    })
+
+    it('attaches the child’s own ref with React’s own sequence under StrictMode', () => {
+      const callbackRef = vi.fn()
+      const cleanup = vi.fn()
+      const callbackRefWithCleanup = vi.fn((_node: HTMLButtonElement | null) => cleanup)
+      const onRender = vi.fn()
+
+      // `render` puts `<StrictMode>` at the top of the tree, which is where it has to be for React
+      // to run the mount effects (and refs) of the subtree twice
+      const {rerender} = render(
+        <Profiler id="popover" onRender={onRender}>
+          <Popover content={content}>
+            <Button ref={callbackRef} text="Reference" />
+          </Popover>
+          <Popover content={<Text size={1}>Other content</Text>}>
+            <Button ref={callbackRefWithCleanup} text="Other reference" />
+          </Popover>
+        </Profiler>,
+      )
+
+      const reference = getReference()
+      const otherReference = screen.getByRole('button', {name: 'Other reference'})
+
+      // StrictMode detaches and attaches every ref once more on mount
+      expect(callbackRef.mock.calls).toEqual([[reference], [null], [reference]])
+      expect(callbackRefWithCleanup.mock.calls).toEqual([[otherReference], [otherReference]])
+      expect(cleanup).toHaveBeenCalledTimes(1)
+      expect(phasesOf(onRender)).not.toContain('nested-update')
+
+      rerender(
+        <Profiler id="popover" onRender={onRender}>
+          <Popover content={content} open>
+            <Button ref={callbackRef} text="Reference" />
+          </Popover>
+          <Popover content={<Text size={1}>Other content</Text>}>
+            <Button ref={callbackRefWithCleanup} text="Other reference" />
+          </Popover>
+        </Profiler>,
+      )
+
+      expectVisible()
+      expect(callbackRef).toHaveBeenCalledTimes(3)
+      expect(callbackRefWithCleanup).toHaveBeenCalledTimes(2)
+    })
+
+    it('attaches the child’s own ref from the commit that mounts it', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      const callbackRef = vi.fn()
+
+      const {rerender, unmount} = render(
+        <Popover content={content}>
+          <Button ref={ref} text="Reference" />
+        </Popover>,
+        {strict: false},
+      )
+
+      expect(ref.current).toBe(getReference())
+
+      // A new ref is attached (and the old one detached) the way React does it for a ref prop
+      rerender(
+        <Popover content={content}>
+          <Button ref={callbackRef} text="Reference" />
+        </Popover>,
+      )
+
+      expect(ref.current).toBeNull()
+      expect(callbackRef.mock.calls).toEqual([[getReference()]])
+
+      // Re-rendering with the same ref does not detach and attach it again
+      rerender(
+        <Popover content={content}>
+          <Button ref={callbackRef} text="Reference" />
+        </Popover>,
+      )
+
+      expect(callbackRef).toHaveBeenCalledTimes(1)
+
+      unmount()
+
+      expect(callbackRef.mock.calls).toEqual([[expect.any(HTMLButtonElement)], [null]])
     })
   })
 

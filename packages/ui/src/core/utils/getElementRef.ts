@@ -4,7 +4,9 @@
 // https://github.com/facebook/react/pull/28348
 //
 // Access the ref using the method that doesn't yield a warning.
-export function getElementRef(element: React.ReactElement) {
+//
+// The element type of the ref is the caller's to know (`T`): an element carries no type for it.
+export function getElementRef<T = unknown>(element: React.ReactElement): React.Ref<T> | undefined {
   // React <=18 in DEV
   // oxlint-disable-next-line unbound-method
   let getter = Object.getOwnPropertyDescriptor(element.props, 'ref')?.get
@@ -12,7 +14,7 @@ export function getElementRef(element: React.ReactElement) {
 
   if (mayWarn) {
     // oxlint-disable-next-line no-unsafe-type-assertion
-    return (element as any).ref
+    return (element as {ref?: React.Ref<T>}).ref
   }
 
   // React 19 in DEV
@@ -22,10 +24,10 @@ export function getElementRef(element: React.ReactElement) {
 
   if (mayWarn) {
     // oxlint-disable-next-line no-unsafe-type-assertion
-    return (element.props as {ref?: React.Ref<unknown>}).ref
+    return (element.props as {ref?: React.Ref<T>}).ref
   }
 
   // Not DEV
   // oxlint-disable-next-line no-unsafe-type-assertion
-  return (element.props as {ref?: React.Ref<unknown>}).ref || (element as any).ref
+  return (element.props as {ref?: React.Ref<T>}).ref || (element as {ref?: React.Ref<T>}).ref
 }

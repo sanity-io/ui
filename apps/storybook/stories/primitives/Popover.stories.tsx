@@ -18,8 +18,17 @@ import {Popover, PopoverProps, PopoverUpdateCallback} from '@sanity/ui/popover'
 import {ThemeColorToneKey} from '@sanity/ui/theme'
 import {Tooltip} from '@sanity/ui/tooltip'
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
-import {expect, userEvent, waitFor} from 'storybook/test'
+import {
+  Activity,
+  startTransition,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  ViewTransition,
+} from 'react'
+import {expect, userEvent, waitFor, within} from 'storybook/test'
 
 import {PLACEMENT_OPTIONS, RADII} from '../constants'
 import {getRadiusControls, getShadowControls, getSpaceControls} from '../controls'
@@ -633,4 +642,73 @@ function SidePanelInlineObject(props: {updateRef?: PopoverProps['updateRef']}) {
 export const SidePanel: Story = {
   parameters: {controls: {include: []}, padding: 0},
   render: () => <SidePanelStory />,
+}
+
+function ViewTransitionStory(props: PopoverProps) {
+  const [shown, setShown] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Flex align="center" gap={3}>
+      <Button
+        mode="ghost"
+        onClick={() => startTransition(() => setShown((isShown) => !isShown))}
+        text={shown ? 'Hide' : 'Show'}
+      />
+      <Activity mode={shown ? 'visible' : 'hidden'}>
+        <ViewTransition>
+          <Popover {...props} open={open}>
+            <Button
+              onClick={() => startTransition(() => setOpen((isOpen) => !isOpen))}
+              text="Toggle popover"
+            />
+          </Popover>
+        </ViewTransition>
+      </Activity>
+    </Flex>
+  )
+}
+
+/**
+ * A popover whose reference is shown and hidden by an `<Activity>` inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), toggled in a
+ * `startTransition`, so React animates it in and out. The popover adds no work of its own to that
+ * transition, and still opens and closes in transitions as its `open` prop asks for.
+ * (`apps/storybook/tests/viewTransitionReveal.test.tsx` asserts on the commits of the reveal.)
+ */
+export const WithViewTransition: Story = {
+  parameters: {controls: {include: ['animate', 'placement', 'portal']}},
+  render: (props) => <ViewTransitionStory {...props} />,
+  play: async ({canvasElement, step}) => {
+    const canvas = within(canvasElement)
+    const doc = canvasElement.ownerDocument
+
+    await step('the popover’s reference is revealed with a view transition', async () => {
+      await expect(canvas.getByText('Toggle popover').checkVisibility()).toBe(false)
+      await userEvent.click(canvas.getByRole('button', {name: 'Show'}))
+      await waitFor(async () => {
+        await expect(canvas.getByText('Toggle popover').checkVisibility()).toBe(true)
+      })
+    })
+
+    await step('the popover opens against the revealed reference', async () => {
+      const toggle = canvas.getByRole('button', {name: 'Toggle popover'})
+
+      // The pointer entering the reference pre-renders the popover in a transition, for which
+      // React starts a view transition of its own (an update inside the boundary). A transition
+      // update made while the browser prepares that one — between `startViewTransition()` and
+      // `ready`, a few milliseconds — is dropped by React 19.3 (reproduced with a plain
+      // `<ViewTransition>` and a counter), so the click waits for the pre-render to land.
+      await userEvent.hover(toggle)
+      await waitFor(async () => {
+        await expect(doc.querySelector('[data-ui="Popover"]')).not.toBeNull()
+        await expect(doc.getAnimations()).toHaveLength(0)
+      })
+
+      await userEvent.click(toggle)
+      await waitFor(async () => {
+        await expect(doc.querySelector('[data-ui="Popover"]')?.checkVisibility()).toBe(true)
+      })
+    })
+  },
 }
