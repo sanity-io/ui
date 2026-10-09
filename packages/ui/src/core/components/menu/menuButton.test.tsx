@@ -10,7 +10,11 @@ import {startTransition, use, useLayoutEffect, useState} from 'react'
 import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
+import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
+import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
 import {Button} from '../../primitives/button/button'
+import {LayerProvider} from '../../utils/layer/layerProvider'
+import {useLayer} from '../../utils/layer/useLayer'
 import {Menu} from './menu'
 import {MenuButton, type MenuButtonProps} from './menuButton'
 import {MenuGroup} from './menuGroup'
@@ -881,59 +885,92 @@ describe('MenuButton', () => {
       expect(screen.getByText('Option 1')).toBeInTheDocument()
     })
 
+    /**
+     * An overlay around the menu button that closes on Escape and on a click outside while it is
+     * the top layer, the way `Dialog` does
+     */
+    function Overlay(props: {children: React.ReactNode; onDismiss: () => void}) {
+      const {children, onDismiss} = props
+      const {isTopLayer} = useLayer()
+
+      useGlobalKeyDown((event) => {
+        if (isTopLayer && event.key === 'Escape') onDismiss()
+      })
+      useClickOutsideEvent(isTopLayer && onDismiss, () => [])
+
+      return children
+    }
+
     it.each([
       ['Escape', () => fireEvent.keyDown(document.body, {key: 'Escape'})],
       ['a click outside', () => fireEvent.mouseDown(document.body)],
-    ])('cancels an open that is still pending on %s', async (_name, cancel) => {
-      let resolveContent!: () => void
-      const content = new Promise<void>((resolve) => {
-        resolveContent = resolve
-      })
+    ])(
+      'cancels an open that is still pending on %s, leaving the overlay around it alone',
+      async (_name, cancel) => {
+        let resolveContent!: () => void
+        const content = new Promise<void>((resolve) => {
+          resolveContent = resolve
+        })
 
-      function SuspendingItem() {
-        use(content)
+        function SuspendingItem() {
+          use(content)
 
-        return <MenuItem text="Option 1" />
-      }
+          return <MenuItem text="Option 1" />
+        }
 
-      const onClose = vi.fn()
+        const onClose = vi.fn()
+        const onDismissOverlay = vi.fn()
 
-      render(
-        <MenuButton
-          button={<Button text="Open menu" />}
-          id="menu-button"
-          menu={
-            <Menu>
-              <SuspendingItem />
-            </Menu>
-          }
-          onClose={onClose}
-        />,
-      )
+        render(
+          <LayerProvider>
+            <Overlay onDismiss={onDismissOverlay}>
+              <MenuButton
+                button={<Button text="Open menu" />}
+                id="menu-button"
+                menu={
+                  <Menu>
+                    <SuspendingItem />
+                  </Menu>
+                }
+                onClose={onClose}
+              />
+            </Overlay>
+          </LayerProvider>,
+        )
 
-      const button = getButton()
+        const button = getButton()
 
-      await act(async () => {
-        fireEvent.click(button)
-      })
-      expectMenuNotRendered()
+        await act(async () => {
+          fireEvent.click(button)
+        })
+        expectMenuNotRendered()
 
-      // The menu's own Escape and click-outside listeners are not running, since the menu has not
-      // committed; the menu button cancels the pending open itself
-      await act(async () => {
-        cancel()
-      })
-      expect(onClose).toHaveBeenCalledTimes(1)
+        // The menu's own Escape and click-outside listeners are not running, since the menu has not
+        // committed; the menu button cancels the pending open itself, from a layer of its own, so
+        // the overlay is not the top layer and does not act on the same event
+        await act(async () => {
+          cancel()
+        })
+        expect(onClose).toHaveBeenCalledTimes(1)
+        expect(onDismissOverlay).not.toHaveBeenCalled()
 
-      await act(async () => {
-        resolveContent()
-        await content
-      })
+        await act(async () => {
+          resolveContent()
+          await content
+        })
 
-      expect(button).toHaveAttribute('aria-expanded', 'false')
-      expectMenuNotRendered()
-      expect(onClose).toHaveBeenCalledTimes(1)
-    })
+        expect(button).toHaveAttribute('aria-expanded', 'false')
+        expectMenuNotRendered()
+        expect(onClose).toHaveBeenCalledTimes(1)
+
+        // Nothing pending or open any more: the overlay is the top layer again
+        await act(async () => {
+          cancel()
+        })
+        expect(onDismissOverlay).toHaveBeenCalledTimes(1)
+        expect(onClose).toHaveBeenCalledTimes(1)
+      },
+    )
 
     // The focus request made by a key press (`shouldFocus`) is applied by `useMenuController` in
     // animation frames after the open commit, by which time Floating UI has positioned the menu.
