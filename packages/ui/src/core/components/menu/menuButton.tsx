@@ -267,30 +267,40 @@ export function MenuButton(props: MenuButtonProps) {
 function useButtonRefCallback(
   buttonRef: React.RefObject<HTMLButtonElement | null>,
   onReplace: (node: HTMLButtonElement) => void,
-): (node: HTMLButtonElement) => () => void {
+): (node: HTMLButtonElement | null) => () => void {
   // The node last attached, not cleared on detach: a detach followed by the same node attaching
   // again (`Popover` re-running the ref, an `Activity` showing the button again) is not a replacement
   const lastNodeRef = useRef<HTMLButtonElement | null>(null)
 
   return useCallback(
-    (node: HTMLButtonElement) => attachButton(node, buttonRef, lastNodeRef, onReplace),
+    (node: HTMLButtonElement | null) => attachButton(node, buttonRef, lastNodeRef, onReplace),
     [buttonRef, lastNodeRef, onReplace],
   )
 }
 
 function attachButton(
-  node: HTMLButtonElement,
+  node: HTMLButtonElement | null,
   buttonRef: React.RefObject<HTMLButtonElement | null>,
   lastNodeRef: React.RefObject<HTMLButtonElement | null>,
   onReplace: (node: HTMLButtonElement) => void,
 ): () => void {
+  // Detaching arrives through the cleanup returned below, never as a `null` node. The one caller
+  // that passes `null` is the imperative handle `Popover` keeps for the button's own ref: while
+  // the popover is disabled it renders the button without cloning it, so this callback is attached
+  // to the button directly, and the handle forwards the `null` reference element of the clone it
+  // does not render. Taking that for a detach would leave the forwarded ref `null` while the
+  // button is mounted.
+  if (node === null) return () => undefined
+
   buttonRef.current = node
 
   if (lastNodeRef.current !== null && lastNodeRef.current !== node) onReplace(node)
   lastNodeRef.current = node
 
   return () => {
-    buttonRef.current = null
+    // Only the attachment that set the node clears it: a cleanup of an earlier attachment (the
+    // handle in `Popover` re-running) must not clear a later one of another node.
+    if (buttonRef.current === node) buttonRef.current = null
   }
 }
 

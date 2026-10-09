@@ -274,6 +274,80 @@ describe('MenuButton', () => {
       expect(callbackRef.mock.calls).toEqual([[button], [null], [replacement]])
     })
 
+    it('keeps the forwarded ref on the button while the popover is disabled, and across enabling it', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      const callbackRef = vi.fn()
+      const renderMenuButtonWith = (disabled: boolean) => (
+        <>
+          <MenuButton
+            button={<Button text="Open menu" />}
+            id="menu-button"
+            menu={
+              <Menu>
+                <MenuItem text="Option 1" />
+              </Menu>
+            }
+            popover={{disabled}}
+            ref={ref}
+          />
+          <MenuButton
+            button={<Button text="Open other menu" />}
+            id="other-menu-button"
+            menu={
+              <Menu>
+                <MenuItem text="Option 2" />
+              </Menu>
+            }
+            popover={{disabled}}
+            ref={callbackRef}
+          />
+        </>
+      )
+
+      // A disabled `Popover` renders the button without cloning it, and forwards `null` through
+      // the imperative handle it keeps for the button's own ref: that is not a detach
+      const {rerender, unmount} = render(renderMenuButtonWith(true), {strict: false})
+
+      const button = getButton()
+      const otherButton = screen.getByRole('button', {name: 'Open other menu'})
+
+      expect(ref.current).toBe(button)
+      expect(callbackRef.mock.calls).toEqual([[otherButton]])
+
+      // Enabling the popover mounts the button again (cloned, inside the popover's fragment), so
+      // the refs follow it to its new node, like on any other replacement
+      rerender(renderMenuButtonWith(false))
+
+      const enabledButton = getButton()
+      const enabledOtherButton = screen.getByRole('button', {name: 'Open other menu'})
+
+      expect(enabledButton).not.toBe(button)
+      expect(ref.current).toBe(enabledButton)
+      expect(callbackRef.mock.calls).toEqual([[otherButton], [null], [enabledOtherButton]])
+
+      // And back: the imperative handle in `Popover` forwards `null` again, after this callback
+      // attached to the new node directly
+      rerender(renderMenuButtonWith(true))
+
+      const disabledButton = getButton()
+      const disabledOtherButton = screen.getByRole('button', {name: 'Open other menu'})
+
+      expect(disabledButton).not.toBe(enabledButton)
+      expect(ref.current).toBe(disabledButton)
+      expect(callbackRef.mock.calls).toEqual([
+        [otherButton],
+        [null],
+        [enabledOtherButton],
+        [null],
+        [disabledOtherButton],
+      ])
+
+      unmount()
+
+      expect(ref.current).toBeNull()
+      expect(callbackRef.mock.calls.at(-1)).toEqual([null])
+    })
+
     it('returns focus to the button that opened the menu when it closes with Escape', () => {
       renderMenuButton()
 
