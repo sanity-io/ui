@@ -1,5 +1,14 @@
 import {clsx} from 'clsx/lite'
-import {Children, Fragment, isValidElement, useCallback, useMemo, useRef, useState} from 'react'
+import {
+  Children,
+  Fragment,
+  isValidElement,
+  startTransition,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {Box} from '../../primitives/box/box'
@@ -36,8 +45,11 @@ export function Breadcrumbs(
   const expandElementRef = useRef<HTMLButtonElement | null>(null)
   const popoverElementRef = useRef<HTMLDivElement | null>(null)
 
-  const collapse = useCallback(() => setOpen(false), [])
-  const expand = useCallback(() => setOpen(true), [])
+  // In transitions, like every update of a `Popover`'s `open`: the popover pre-renders the
+  // collapsed items in the background once the expand button shows intent, and a transition lets
+  // React keep rendering them that way instead of synchronously in the click (see `PopoverProps`)
+  const collapse = useCallback(() => startTransition(() => setOpen(false)), [])
+  const expand = useCallback(() => startTransition(() => setOpen(true)), [])
 
   useClickOutsideEvent(collapse, () => [expandElementRef.current, popoverElementRef.current])
 
