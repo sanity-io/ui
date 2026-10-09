@@ -8,7 +8,7 @@ import {Box} from '../../primitives/box/box'
 import {Flex} from '../../primitives/flex/flex'
 import {Text} from '../../primitives/text/text'
 import {ElementType} from '../../types/component'
-import {_encodeKeySegment} from './helpers'
+import {_encodeKeySegment, _isHTMLElement} from './helpers'
 import {treeItemBoxStyle, TreeItemBoxStyleProps, treeItemRootColorStyle} from './style'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
@@ -108,7 +108,7 @@ export function TreeItem(
       const target = event.target
 
       if (
-        target instanceof HTMLElement &&
+        _isHTMLElement(target) &&
         (target.getAttribute('data-ui') === 'TreeItem' ||
           target.closest('[data-ui="TreeItem__box"]'))
       ) {

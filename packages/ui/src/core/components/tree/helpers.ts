@@ -91,13 +91,29 @@ export function _getItemCandidates(
 }
 
 /**
+ * Whether `node` is an element that can take focus, judged by its shape: a tree rendered into
+ * another document (an iframe) consists of that document's elements, which `instanceof` against
+ * this realm's `HTMLElement` does not recognise.
+ */
+export function _isHTMLElement(node: unknown): node is HTMLElement {
+  return (
+    typeof node === 'object' &&
+    node !== null &&
+    'nodeType' in node &&
+    node.nodeType === Node.ELEMENT_NODE &&
+    'focus' in node
+  )
+}
+
+/**
  * The focused element as seen from `element`: inside a shadow root `document.activeElement` is the
- * shadow host, the root node knows the element itself.
+ * shadow host, the root node knows the element itself. The root is recognised by its
+ * `activeElement` rather than with `instanceof Document`, which fails for another document.
  */
 export function _getActiveElement(element: Element): Element | null {
-  const root = element.getRootNode()
+  const root: Node & Partial<DocumentOrShadowRoot> = element.getRootNode()
 
-  return root instanceof Document || root instanceof ShadowRoot ? root.activeElement : null
+  return root.activeElement ?? null
 }
 
 /**
@@ -109,7 +125,7 @@ function _getItemFocusTarget(el: HTMLElement): HTMLElement | null {
   if (el.getAttribute('role') === 'none') {
     const firstChild = el.firstChild
 
-    if (firstChild instanceof HTMLElement) return firstChild
+    if (_isHTMLElement(firstChild)) return firstChild
   }
 
   return null

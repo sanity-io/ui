@@ -3,6 +3,7 @@
 import {act, fireEvent, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {useEffect, useState} from 'react'
+import {createPortal} from 'react-dom'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -993,5 +994,63 @@ describe('components/tree dynamic items', () => {
     expect(focusedItem()).toBe('c')
     expect(screen.getByTestId('c')).toHaveAttribute('tabindex', '0')
     expect(tree).not.toHaveAttribute('tabindex')
+  })
+})
+
+describe('components/tree in another document', () => {
+  it('navigates a tree rendered into an iframe', () => {
+    const iframe = document.createElement('iframe')
+
+    document.body.appendChild(iframe)
+
+    const frameDocument = iframe.contentDocument!
+
+    // The frame's elements are instances of its own constructors, not of this realm's, so an
+    // `instanceof HTMLElement` or `instanceof Document` check does not recognise them
+    expect(frameDocument.body instanceof HTMLElement).toBe(false)
+    expect(frameDocument instanceof Document).toBe(false)
+
+    render(
+      createPortal(
+        <Tree aria-label="Fruit">
+          <TreeItem data-testid="oranges" text="Oranges" />
+          <TreeItem data-testid="macintosh" href="/apples/macintosh" text="Macintosh" />
+          <TreeItem data-testid="fuji" text={<input data-testid="rename" defaultValue="Fuji" />} />
+          <TreeItem data-testid="pears" text="Pears" />
+        </Tree>,
+        frameDocument.body,
+      ),
+    )
+
+    const byTestId = (id: string) =>
+      frameDocument.querySelector<HTMLElement>(`[data-testid="${id}"]`)!
+    const focusedFrameItem = () =>
+      frameDocument.activeElement?.closest('[data-testid]')?.getAttribute('data-testid')
+
+    act(() => byTestId('oranges').focus())
+    expect(focusedFrameItem()).toBe('oranges')
+    expect(byTestId('oranges')).toHaveAttribute('tabindex', '0')
+
+    // The link item takes focus (its link is recognised as an element), and the search stops
+    // there (the frame document's active element is recognised as such) instead of running on to
+    // the last candidate
+    fireEvent.keyDown(byTestId('oranges'), {key: 'ArrowDown'})
+    expect(focusedFrameItem()).toBe('macintosh')
+    expect(frameDocument.activeElement).toHaveAttribute('href', '/apples/macintosh')
+
+    fireEvent.keyDown(frameDocument.activeElement!, {key: 'ArrowDown'})
+    expect(focusedFrameItem()).toBe('fuji')
+
+    // Keys typed into editable content are left alone here too
+    act(() => byTestId('rename').focus())
+    expect(fireEvent.keyDown(byTestId('rename'), {key: 'ArrowDown'})).toBe(true)
+    expect(frameDocument.activeElement).toBe(byTestId('rename'))
+
+    // A click on an item records it as the tab stop
+    fireEvent.click(byTestId('pears'))
+    expect(byTestId('pears')).toHaveAttribute('tabindex', '0')
+    expect(byTestId('fuji')).toHaveAttribute('tabindex', '-1')
+
+    iframe.remove()
   })
 })

@@ -8,6 +8,7 @@ import {
   _getItemCandidates,
   _getItemElements,
   _getItemKey,
+  _isHTMLElement,
   _isItemFocusable,
   _isItemKeyVisible,
 } from './helpers'
@@ -172,7 +173,7 @@ export function Tree(
       // Keys typed into editable content inside an item (`text` is a `ReactNode`) move the caret,
       // not the focus
       if (
-        target instanceof HTMLElement &&
+        _isHTMLElement(target) &&
         (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))
       ) {
         return
