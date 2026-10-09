@@ -8,6 +8,7 @@ import {
   _getItemCandidates,
   _getItemElements,
   _getItemKey,
+  _isItemFocusable,
   _isItemKeyVisible,
 } from './helpers'
 import {TreeContext} from './treeContext'
@@ -82,10 +83,14 @@ export function Tree(
     (element: HTMLElement, path: string, expanded: boolean, selected: boolean) => {
       setState((s) => ({...s, [path]: {element, expanded}}))
 
-      // A `selected` item becomes the tab stop. An item that re-registers under a new key (its
-      // `id`, or an ancestor's, changed) keeps it, under that key.
+      // A `selected` item becomes the tab stop, unless it cannot take focus where it is (hidden
+      // by the consumer, no focusable node): a tab stop sequential focus navigation skips would
+      // take the tree out of the tab order. An item that re-registers under a new key (its `id`,
+      // or an ancestor's, changed) keeps the tab stop, under that key.
+      const claims = selected && _isItemFocusable(element)
+
       setFocusedItem((prev) => {
-        if (!selected && prev?.element !== element) return prev
+        if (!claims && prev?.element !== element) return prev
 
         return prev?.element === element && prev.key === path ? prev : {element, key: path}
       })

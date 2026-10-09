@@ -139,6 +139,31 @@ describe('Components/Tree', () => {
     await expect.poll(focusedTestId).toBe('c')
   })
 
+  test('does not hand the tab stop to a `selected` item that is hidden', async () => {
+    // `checkVisibility()` decides this at registration time; jsdom does not implement it, so the
+    // case lives here
+    await render(
+      <ThemeProvider scheme="light" theme={theme}>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree aria-label="Letters" gap={1}>
+          <TreeItem data-testid="a" text="A" />
+          <TreeItem data-testid="b" hidden selected text="B" />
+          <TreeItem data-testid="c" selected style={{display: 'none'}} text="C" />
+        </Tree>
+      </ThemeProvider>,
+    )
+
+    await expect.poll(() => tree().getAttribute('tabindex')).toBe('0')
+    expect(document.querySelector('[data-testid="b"]')).toHaveAttribute('tabindex', '-1')
+    expect(document.querySelector('[data-testid="c"]')).toHaveAttribute('tabindex', '-1')
+
+    document.querySelector<HTMLElement>('[data-testid="before"]')!.focus()
+    await userEvent.tab()
+    await expect.poll(focusedTestId).toBe('a')
+  })
+
   test('enters the items at the first one that takes focus from the focused tree element', async () => {
     await render(
       <ThemeProvider scheme="light" theme={theme}>

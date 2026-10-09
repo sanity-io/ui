@@ -92,27 +92,45 @@ export function _getActiveElement(element: Element): Element | null {
 }
 
 /**
- * Focuses the element of an item that takes focus — the item itself, or the link of an item with
- * an `href` — and returns it.
+ * The node of an item that takes focus: the item itself, or the link of an item with an `href`.
  */
-function _focusItemElement(el: HTMLElement): HTMLElement | null {
-  if (el.getAttribute('role') === 'treeitem') {
-    el.focus()
-
-    return el
-  }
+function _getItemFocusTarget(el: HTMLElement): HTMLElement | null {
+  if (el.getAttribute('role') === 'treeitem') return el
 
   if (el.getAttribute('role') === 'none') {
     const firstChild = el.firstChild
 
-    if (firstChild && firstChild instanceof HTMLElement) {
-      firstChild.focus()
-
-      return firstChild
-    }
+    if (firstChild instanceof HTMLElement) return firstChild
   }
 
   return null
+}
+
+/**
+ * Whether an item can be made the tab stop without being focused first: it has a node that takes
+ * focus, and that node is rendered as far as `checkVisibility()` can tell (`hidden`,
+ * `display: none`, `visibility: hidden` on it or an ancestor). Runs at effect time, for an item
+ * mounted as `selected`; environments without `checkVisibility()` (jsdom) count as rendered.
+ */
+export function _isItemFocusable(el: HTMLElement): boolean {
+  const target = _getItemFocusTarget(el)
+
+  if (!target) return false
+
+  return typeof target.checkVisibility === 'function'
+    ? target.checkVisibility({visibilityProperty: true})
+    : true
+}
+
+/**
+ * Focuses the node of an item that takes focus and returns it.
+ */
+function _focusItemElement(el: HTMLElement): HTMLElement | null {
+  const target = _getItemFocusTarget(el)
+
+  target?.focus()
+
+  return target
 }
 
 /**
