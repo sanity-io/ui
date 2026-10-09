@@ -1,8 +1,9 @@
 import {clsx} from 'clsx/lite'
-import {FocusEvent, useCallback, useEffect, useImperativeHandle, useRef} from 'react'
+import {FocusEvent, useCallback, useEffect, useRef} from 'react'
 
 import {EMPTY_RECORD} from '../../constants'
 import {containsOrEqualsElement, isHTMLElement} from '../../helpers/element'
+import {attachRef} from '../attachRef'
 import {LayerProvider} from './layerProvider'
 import {useLayer} from './useLayer'
 
@@ -16,6 +17,21 @@ export interface LayerProps {
   /** A callback that fires when the layer becomes the top layer when it was not the top layer before. */
   onActivate?: (props: {activeElement: HTMLElement | null}) => void
   zOffset?: number | number[]
+}
+
+function attachElement(
+  node: HTMLDivElement | null,
+  ref: React.RefObject<HTMLDivElement | null>,
+  forwardedRef: React.Ref<HTMLDivElement> | undefined,
+): () => void {
+  ref.current = node
+
+  const detachForwardedRef = attachRef(forwardedRef, node)
+
+  return () => {
+    detachForwardedRef()
+    ref.current = null
+  }
 }
 
 interface LayerChildrenProps {
@@ -39,7 +55,15 @@ function LayerChildren(props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivE
   const ref = useRef<HTMLDivElement | null>(null)
   const isTopLayerRef = useRef<boolean>(isTopLayer)
 
-  useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
+  // The forwarded ref is attached from the element's own ref callback, so it is attached once,
+  // follows the element when another `as` replaces it, and is detached and attached again only
+  // when it changes itself. A `useImperativeHandle` without dependencies did that on every render,
+  // which for a callback ref that sets state (Floating UI's `setFloating`, through `Tooltip`) was
+  // an Immediate-priority update per render while the layer is shown.
+  const setElement = useCallback(
+    (node: HTMLDivElement | null) => attachElement(node, ref, forwardedRef),
+    [forwardedRef],
+  )
 
   // When the layer very first mounts, it will be the top layer, but we don't want to fire
   // the callback in that case. We use a ref to track the previous value of isTopLayer to
@@ -84,7 +108,7 @@ function LayerChildren(props: LayerChildrenProps & Omit<React.HTMLProps<HTMLDivE
       {...restProps}
       className={clsx(layer, className)}
       onFocus={handleFocus}
-      ref={ref}
+      ref={setElement}
       style={{...style, zIndex}}
     >
       {children}
