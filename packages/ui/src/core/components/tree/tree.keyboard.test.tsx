@@ -350,6 +350,87 @@ describe('components/tree tab stop', () => {
     expect(focusedItem()).toBe('apples')
   })
 
+  it('stays the focused tree element while a remembered item becomes visible', async () => {
+    const user = userEvent.setup()
+    let treeContext: TreeContextValue | null = null
+
+    render(
+      <>
+        <Tree aria-label="Fruit">
+          <ExposeTree onChange={(tree) => (treeContext = tree)} />
+          <TreeItem data-testid="apples" text="Apples">
+            <TreeItem data-testid="fuji" selected text="Fuji" />
+          </TreeItem>
+          <TreeItem data-testid="pears" text="Pears" />
+        </Tree>
+        <button data-testid="after" type="button">
+          After
+        </button>
+      </>,
+    )
+
+    const tree = screen.getByRole('tree')
+    const fuji = screen.getByTestId('fuji')
+    const applesKey = screen.getByTestId('apples').getAttribute('data-tree-key')!
+
+    // A press between the items leaves focus on the tree element, the tab stop while the
+    // `selected` item is inside its collapsed parent
+    await user.click(tree)
+    expect(tree).toHaveFocus()
+
+    // Expanding the parent from outside the tree makes the item eligible, but taking the
+    // `tabindex` off the focused tree element would not move focus off it: it stays the tab stop
+    act(() => treeContext!.setExpanded(applesKey, true))
+    expect(tree).toHaveFocus()
+    expect(tree).toHaveAttribute('tabindex', '0')
+    expect(fuji).toHaveAttribute('tabindex', '-1')
+    expect(treeContext!.focusedElement).toBeNull()
+
+    // So Tab leaves the tree in one step, as from any tab stop
+    await user.tab()
+    expect(screen.getByTestId('after')).toHaveFocus()
+
+    // Once the tree element has lost focus, the remembered item is the tab stop
+    expect(tree).not.toHaveAttribute('tabindex')
+    expect(fuji).toHaveAttribute('tabindex', '0')
+    expect(treeContext!.focusedElement).toBe(fuji)
+
+    await user.tab({shift: true})
+    expect(focusedItem()).toBe('fuji')
+  })
+
+  it('enters the items from the focused tree element, not from a remembered item', async () => {
+    const user = userEvent.setup()
+    let treeContext: TreeContextValue | null = null
+
+    render(
+      <Tree aria-label="Fruit">
+        <ExposeTree onChange={(tree) => (treeContext = tree)} />
+        <TreeItem data-testid="apples" text="Apples">
+          <TreeItem data-testid="fuji" selected text="Fuji" />
+        </TreeItem>
+        <TreeItem data-testid="pears" text="Pears" />
+      </Tree>,
+    )
+
+    const tree = screen.getByRole('tree')
+    const applesKey = screen.getByTestId('apples').getAttribute('data-tree-key')!
+
+    await user.click(tree)
+    expect(tree).toHaveFocus()
+
+    act(() => treeContext!.setExpanded(applesKey, true))
+    expect(tree).toHaveFocus()
+
+    // The keys act on the element that has focus: ArrowDown enters at the first item instead of
+    // moving on from the `selected` item, which does not have focus
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('apples')
+    expect(screen.getByTestId('apples')).toHaveAttribute('tabindex', '0')
+    expect(screen.getByTestId('fuji')).toHaveAttribute('tabindex', '-1')
+    expect(tree).not.toHaveAttribute('tabindex')
+  })
+
   it('keeps the tab stop on an item that re-registers under a new key', async () => {
     const user = userEvent.setup()
 

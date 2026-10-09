@@ -216,6 +216,52 @@ describe('Components/Tree', () => {
     await expect.poll(focusedTestId).toBe('fuji')
   })
 
+  test('stays the focused tree element while a `selected` item becomes visible', async () => {
+    let treeContext: ReturnType<typeof useTree> | null = null
+
+    await render(
+      <ThemeProvider scheme="light" theme={theme}>
+        <Tree aria-label="Fruit" gap={1} style={{padding: 40}}>
+          <ExposeTree onChange={(tree) => (treeContext = tree)} />
+          <TreeItem data-testid="apples" text="Apples">
+            <TreeItem data-testid="fuji" selected text="Fuji" />
+          </TreeItem>
+          <TreeItem data-testid="pears" text="Pears" />
+        </Tree>
+        <button data-testid="after" type="button">
+          After
+        </button>
+      </ThemeProvider>,
+    )
+
+    const apples = () => document.querySelector<HTMLElement>('[data-testid="apples"]')!
+    const fuji = () => document.querySelector<HTMLElement>('[data-testid="fuji"]')!
+    const applesKey = apples().getAttribute('data-tree-key')!
+
+    // A click between the items leaves focus on the tree element
+    await userEvent.click(tree(), {position: {x: 10, y: 10}})
+    await expect.poll(() => document.activeElement).toBe(tree())
+
+    // Expanding the parent makes the `selected` item eligible, but the focused tree element stays
+    // the tab stop (taking its `tabindex` away would not move focus off it), so Tab leaves the
+    // tree in one step instead of landing on the item
+    treeContext!.setExpanded(applesKey, true)
+    await expect.poll(() => apples().getAttribute('aria-expanded')).toBe('true')
+    expect(document.activeElement).toBe(tree())
+    expect(tree()).toHaveAttribute('tabindex', '0')
+    expect(fuji()).toHaveAttribute('tabindex', '-1')
+
+    await userEvent.tab()
+    await expect.poll(focusedTestId).toBe('after')
+
+    // Once the tree element has lost focus, the `selected` item is the tab stop
+    await expect.poll(() => fuji().getAttribute('tabindex')).toBe('0')
+    expect(tree()).not.toHaveAttribute('tabindex')
+
+    await userEvent.tab({shift: true})
+    await expect.poll(focusedTestId).toBe('fuji')
+  })
+
   test('enters the items at the first one that takes focus from the focused tree element', async () => {
     await render(
       <ThemeProvider scheme="light" theme={theme}>

@@ -40,7 +40,8 @@ export interface TreeProps {
  * again while that item is unmounted or inside a collapsed ancestor) the tree element itself is
  * that tab stop: keyboard focus on it is passed on to the first item, while a pointer press
  * between the items leaves focus on the tree element, from where `ArrowDown` / `Home` and
- * `ArrowUp` / `End` enter the items. A `tabIndex` prop applies to the tree element in that state
+ * `ArrowUp` / `End` enter the items; it stays the tab stop for as long as it has focus. A
+ * `tabIndex` prop applies to the tree element in that state
  * only (`-1` keeps the tree out of the tab order), and so does `focus()` on the element (through
  * the `ref`): once an item is the tab stop, the tree element is not focusable. Because the tree
  * element can hold focus, give it an accessible name (`aria-label` or `aria-labelledby`).
@@ -53,6 +54,7 @@ export function Tree(
   const {
     children,
     gap = 1,
+    onBlur,
     onFocus,
     onMouseDown,
     ref: forwardedRef,
@@ -61,6 +63,9 @@ export function Tree(
   } = props
   const ref = useRef<HTMLUListElement | null>(null)
   const [focusedItem, setFocusedItem] = useState<FocusedItem | null>(null)
+  // Whether the tree element itself has focus (a pointer press between the items left it there,
+  // see `handleFocus`): set by its focus event and cleared by its blur event
+  const [treeHasFocus, setTreeHasFocus] = useState(false)
   const path: string[] = useMemo(() => [], [])
   const [state, setState] = useState<TreeState>({})
   // Whether the focus event being handled was caused by a pointer press: set on `mousedown` and
@@ -126,13 +131,18 @@ export function Tree(
   // the tab stop and `handleFocus` passes keyboard focus on to the first item, resolved from the
   // DOM at that moment. That way no item order is kept in state: the first item follows the DOM,
   // also when items are added, removed or moved without being focused.
+  //
+  // The tree element also stays the tab stop for as long as it has focus itself. An item that
+  // becomes eligible meanwhile (its collapsed ancestor was expanded from outside the tree) takes
+  // over once the tree element loses focus: taking the `tabindex` off the focused tree element
+  // would not move focus off it, and the keys would act on an item that does not have focus.
   const tabStop = useMemo(() => {
-    if (!focusedItem || focusedItem.key === null) return null
+    if (treeHasFocus || !focusedItem || focusedItem.key === null) return null
 
     const {element, key} = focusedItem
 
     return state[key]?.element === element && _isItemKeyVisible(state, key) ? element : null
-  }, [focusedItem, state])
+  }, [focusedItem, state, treeHasFocus])
 
   const contextValue: TreeContextValue = useMemo(
     () => ({
@@ -292,8 +302,12 @@ export function Tree(
         if (!pointerDownRef.current) _focusFirstItemElement(_getItemElements(treeElement))
 
         // Focus that stays on the tree element (after a pointer press, or with no item to pass it
-        // on to) is a focus transition the consumer will see the `blur` of, so it is reported too
-        if (_getActiveElement(treeElement) === treeElement) onFocus?.(event)
+        // on to) keeps the tab stop there (see `tabStop`), and is a focus transition the consumer
+        // will see the `blur` of, so it is reported too
+        if (_getActiveElement(treeElement) === treeElement) {
+          setTreeHasFocus(true)
+          onFocus?.(event)
+        }
 
         return
       }
@@ -310,12 +324,24 @@ export function Tree(
     [onFocus, setFocusedElement],
   )
 
+  const handleBlur = useCallback(
+    (event: React.FocusEvent<HTMLUListElement>) => {
+      // `onBlur` is `focusout`, which also bubbles up from the items: only the tree element itself
+      // losing focus frees the tab stop for the item that is remembered (see `tabStop`)
+      if (event.target === event.currentTarget) setTreeHasFocus(false)
+
+      onBlur?.(event)
+    },
+    [onBlur],
+  )
+
   return (
     <TreeContext.Provider value={contextValue}>
       <Stack
         as="ul"
         data-ui="Tree"
         {...restProps}
+        onBlur={handleBlur}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
         onMouseDown={handleMouseDown}
