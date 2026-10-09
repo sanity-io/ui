@@ -10,7 +10,7 @@ export function Nav(props: {nav: NavNode; path: string}): ReactElement {
   const {nav, path} = props
 
   return (
-    <Tree gap={1}>
+    <Tree aria-label="Documentation" gap={1}>
       {nav.children?.map((node) => (
         <NavMenuItem key={node.href} level={1} node={node} path={path} />
       ))}
