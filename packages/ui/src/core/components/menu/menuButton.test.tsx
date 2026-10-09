@@ -633,14 +633,14 @@ describe('MenuButton', () => {
       return {inTransition: () => depth > 0}
     }
 
-    it('opens and closes in a transition on every path, calling onOpen and onClose inside it', () => {
+    it('opens in a transition on every path, with onOpen inside it, and closes synchronously on every path', () => {
       const {inTransition} = trackTransitions()
       const calls: string[] = []
       const onOpen = vi.fn(() => {
-        calls.push(inTransition() ? 'open' : 'open outside a transition')
+        calls.push(inTransition() ? 'open in a transition' : 'open outside a transition')
       })
       const onClose = vi.fn(() => {
-        calls.push(inTransition() ? 'close' : 'close outside a transition')
+        calls.push(inTransition() ? 'close in a transition' : 'close synchronously')
       })
 
       render(
@@ -696,7 +696,33 @@ describe('MenuButton', () => {
       act(() => outside.focus())
       expectMenuRenderedHidden()
 
-      expect(calls).toEqual(Array.from({length: 5}, () => ['open', 'close']).flat())
+      expect(calls).toEqual(
+        Array.from({length: 5}, () => ['open in a transition', 'close synchronously']).flat(),
+      )
+    })
+
+    it('closes without a transition, so the close commits with the updates of the event that closed it', () => {
+      const scopes: (() => void)[] = []
+
+      startTransitionMock.mockImplementation((scope) => {
+        scopes.push(scope)
+      })
+
+      renderMenuButton()
+
+      const button = getButton()
+
+      fireEvent.click(button)
+      act(() => {
+        for (const scope of scopes) scope()
+      })
+      expectMenuVisible()
+
+      // A held-back transition would leave the menu open here; the close does not go through one
+      fireEvent.click(button)
+
+      expect(scopes).toHaveLength(1)
+      expectMenuRenderedHidden()
     })
 
     it('runs the open update, with onOpen, in the function it passes to startTransition', () => {

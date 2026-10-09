@@ -2,7 +2,7 @@ import {Button, Card, ThemeProvider} from '@sanity/ui'
 import {Menu, MenuButton, MenuItem} from '@sanity/ui/menu'
 import {buildTheme} from '@sanity/ui/theme'
 import {composeStories} from '@storybook/react-vite'
-import {Profiler} from 'react'
+import {Profiler, useState} from 'react'
 import {describe, expect, test, vi} from 'vitest'
 import {render} from 'vitest-browser-react'
 import {page, userEvent} from 'vitest/browser'
@@ -230,6 +230,56 @@ describe('Components/MenuButton', () => {
       expect(focusedWhenCalled).toEqual([button()])
       expect(document.activeElement).toBe(button())
       await expect.poll(readFrame).toEqual(CLOSED)
+    })
+
+    // The common item: `onClick={() => setSomething(true)}`, opening a dialog or a panel. The
+    // close is a synchronous update so that it commits with that state, instead of the new UI
+    // being painted under the still-open menu until a transition lands.
+    test('commits the close together with state the item’s click handler set', async () => {
+      const commits: {dialog: boolean; menuVisible: boolean}[] = []
+
+      function recordDialogCommit() {
+        commits.push({
+          dialog: document.getElementById('dialog') !== null,
+          menuVisible: Boolean(menu()?.checkVisibility()),
+        })
+      }
+
+      function DialogFromItem() {
+        const [dialogOpen, setDialogOpen] = useState(false)
+
+        return (
+          <ThemeProvider scheme="light" theme={theme}>
+            <Card padding={4}>
+              <Profiler id="dialog-from-item" onRender={recordDialogCommit}>
+                <MenuButton
+                  button={<Button text="Open" />}
+                  id="menu-button"
+                  menu={
+                    <Menu>
+                      <MenuItem onClick={() => setDialogOpen(true)} text="Item" />
+                    </Menu>
+                  }
+                />
+                {dialogOpen && <div id="dialog">Dialog</div>}
+              </Profiler>
+            </Card>
+          </ThemeProvider>
+        )
+      }
+
+      await render(<DialogFromItem />)
+
+      await userEvent.click(page.getByRole('button', {name: 'Open'}))
+      await expect.element(page.getByRole('menuitem', {name: 'Item'})).toBeVisible()
+
+      await userEvent.click(page.getByRole('menuitem', {name: 'Item'}))
+
+      await expect.poll(() => document.getElementById('dialog')).not.toBeNull()
+      await expect.poll(readFrame).toEqual(CLOSED)
+      // No commit (and so no painted frame) had the dialog with the menu still showing
+      expect(commits.filter((commit) => commit.dialog && commit.menuVisible)).toEqual([])
+      expect(commits.some((commit) => commit.dialog && !commit.menuVisible)).toBe(true)
     })
   })
 

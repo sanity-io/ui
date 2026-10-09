@@ -46,10 +46,10 @@ export interface MenuButtonProps {
   menu?: React.JSX.Element
   /**
    * Called from the event that closes the menu (a click outside, Escape, a menu item click, focus
-   * leaving the menu, or a click on the button), inside the transition that updates the closed
-   * state, so state set here commits together with it. When Escape or a menu item click closes
-   * the menu, focus has been returned to the button by the time this is called, so focus moved
-   * here stands.
+   * leaving the menu, or a click on the button), before the closed state is committed. The close
+   * is a synchronous update, so state set here commits together with it. When Escape or a menu
+   * item click closes the menu, focus has been returned to the button by the time this is
+   * called, so focus moved here stands.
    */
   onClose?: () => void
   /**
@@ -311,16 +311,17 @@ type ShouldFocus = MenuProps['shouldFocus']
  * The open state of the menu and the focus request made when it opens, with `onOpen` / `onClose`
  * called from the event that changes it.
  *
- * The state is updated in a transition. `Popover` pre-renders the closed menu in a hidden
- * `<Activity>` once the button shows intent to open it, and an open that arrives while that
- * pre-render is in progress continues it as a transition, where a synchronous update would force
- * the menu's content to render again in the event. The focus request rides the same transition
- * and is applied by the menu's own effect once it is rendered open (`useMenuController`), so it
- * does not depend on when the update commits.
+ * Opening is a transition. `Popover` pre-renders the closed menu in a hidden `<Activity>` once
+ * the button shows intent to open it, and an open that arrives while that pre-render is in
+ * progress continues it as a transition, where a synchronous update would force the menu's
+ * content to render again in the event. The focus request rides the same transition and is
+ * applied by the menu's own effect once it is rendered open (`useMenuController`), so it does
+ * not depend on when the update commits. Closing is synchronous: it renders nothing, only hides
+ * the menu, and has to commit with whatever else the closing event updated.
  *
  * The callbacks run in the handler, not in an effect after the commit that renders the new state,
- * and inside the transition, so that state the consumer sets in them commits together with the
- * menu's own. Each is called once per change: `requestedOpenRef` holds the value requested last,
+ * and `onOpen` inside the transition, so that state the consumer sets in them commits together
+ * with the menu's own. Each is called once per change: `requestedOpenRef` holds the value requested last,
  * so a handler that runs before React re-renders sees the change it follows. Returning focus to
  * the button when Escape or a menu item click closes the menu fires the menu's blur handler
  * synchronously, and that second close must not notify `onClose` again. Focus is returned before
@@ -371,14 +372,19 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
       nextShouldFocus: ShouldFocus | undefined,
       returnFocusTo?: HTMLElement | null,
     ) => {
-      startTransition(() => {
-        if (nextShouldFocus !== undefined) setShouldFocus(nextShouldFocus)
-        if (requestedOpenRef.current === nextOpen) return
+      const changes = requestedOpenRef.current !== nextOpen
 
+      if (changes) {
         requestedOpenRef.current = nextOpen
         // Focus leaving the menu closes it again through its blur handler, which finds the state
         // already requested closed. Before `onClose`, so that focus moved there is not overridden.
         returnFocusTo?.focus()
+      }
+
+      const update = () => {
+        if (nextShouldFocus !== undefined) setShouldFocus(nextShouldFocus)
+        if (!changes) return
+
         setOpenState(nextOpen)
 
         if (nextOpen) {
@@ -386,7 +392,16 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
         } else {
           onClose?.()
         }
-      })
+      }
+
+      // Opening renders the menu, so it is a transition (see above). Closing only hides it and
+      // must commit together with whatever else the closing event updated: a dialog opened from a
+      // menu item would otherwise be painted under the still-open menu until the transition lands.
+      if (nextOpen) {
+        startTransition(update)
+      } else {
+        update()
+      }
     },
     [onClose, onOpen],
   )
