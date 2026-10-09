@@ -122,7 +122,11 @@ export function TreeItem(
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLElement>) => {
-      if (focused && event.key === 'Enter') {
+      // Enter pressed on the item itself activates it. Typed into editable content inside it
+      // (`text` is a `ReactNode`) it belongs to that content — the item is still the tab stop
+      // then, since focus inside an item is resolved to the item — and bubbling up from a
+      // descendant item it belongs to that item.
+      if (focused && event.key === 'Enter' && event.target === event.currentTarget) {
         const el = treeitemRef.current || rootElement
 
         el?.click()

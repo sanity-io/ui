@@ -993,6 +993,40 @@ describe('components/tree keyboard navigation', () => {
     }
   })
 
+  it('leaves Enter typed into editable content inside an item to that content', () => {
+    const onClick = vi.fn()
+
+    render(
+      <Tree aria-label="Fruit">
+        <TreeItem
+          data-testid="oranges"
+          onClick={onClick}
+          text={<input data-testid="rename" defaultValue="Or" />}
+        >
+          <TreeItem data-testid="navel" text="Navel" />
+        </TreeItem>
+      </Tree>,
+    )
+
+    const input = screen.getByTestId('rename')
+    const oranges = screen.getByTestId('oranges')
+
+    // Focus inside the item makes the item the tab stop, but Enter in the input is not for it
+    act(() => input.focus())
+    expect(oranges).toHaveAttribute('tabindex', '0')
+
+    fireEvent.keyDown(input, {key: 'Enter'})
+    expect(onClick).not.toHaveBeenCalled()
+    expect(oranges).toHaveAttribute('aria-expanded', 'false')
+    expect(input).toHaveFocus()
+
+    // Enter on the item itself still activates it
+    act(() => oranges.focus())
+    fireEvent.keyDown(oranges, {key: 'Enter'})
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(oranges).toHaveAttribute('aria-expanded', 'true')
+  })
+
   it('leaves focus on the tree element for ArrowLeft and ArrowRight', async () => {
     const user = userEvent.setup()
 
