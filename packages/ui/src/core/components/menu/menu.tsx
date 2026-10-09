@@ -37,7 +37,7 @@ export interface MenuProps extends ResponsivePaddingProps {
    */
   'space'?: never
   'aria-labelledby'?: string
-  'onBlurCapture'?: (event: FocusEvent) => void
+  'onBlurCapture'?: React.FocusEventHandler<HTMLDivElement>
 }
 
 /**
