@@ -1,4 +1,7 @@
 /**
+ * The registered items by key. An item's key is its path: the `id`s of its ancestors and its own,
+ * joined with `/`, with any `/` (and `%`) inside an `id` percent-encoded.
+ *
  * @beta
  */
 export interface TreeState {

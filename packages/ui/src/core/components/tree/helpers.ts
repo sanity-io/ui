@@ -27,6 +27,15 @@ export function _getItemKey(element: HTMLElement): string | null {
 }
 
 /**
+ * An item's `id` as a segment of its key: the key joins the segments of the item's path with `/`
+ * and is split on it to find the ancestors, so a `/` inside an `id` has to be escaped (and `%`
+ * with it, to keep the escaping unambiguous).
+ */
+export function _encodeKeySegment(id: string): string {
+  return id.replace(/%/g, '%25').replace(/\//g, '%2F')
+}
+
+/**
  * Whether the item with `itemKey` is inside expanded ancestors only, i.e. whether its group is
  * shown. Derived from `state` alone, so it can be used during render.
  */

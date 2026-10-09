@@ -8,6 +8,7 @@ import {Box} from '../../primitives/box/box'
 import {Flex} from '../../primitives/flex/flex'
 import {Text} from '../../primitives/text/text'
 import {ElementType} from '../../types/component'
+import {_encodeKeySegment} from './helpers'
 import {treeItemBoxStyle, TreeItemBoxStyleProps, treeItemRootColorStyle} from './style'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
@@ -88,7 +89,7 @@ export function TreeItem(
   // descendant, so the link owns it explicitly for assistive technology
   const groupId = `${_id}group`
   const [itemPath, itemKey] = useMemo(() => {
-    const itemPath = path.concat([id || ''])
+    const itemPath = path.concat([_encodeKeySegment(id || '')])
     return [itemPath, itemPath.join('/')]
   }, [id, path])
   const itemState = tree.state[itemKey]

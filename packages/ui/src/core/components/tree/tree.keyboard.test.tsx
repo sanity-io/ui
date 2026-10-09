@@ -390,6 +390,38 @@ describe('components/tree tab stop', () => {
     expect(focusedItem()).toBe('bananas')
   })
 
+  it('keeps `id`s with slashes apart from the hierarchy', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <Tree aria-label="Docs">
+        <TreeItem data-testid="docs" expanded id="docs/getting-started" text="Getting started">
+          <TreeItem data-testid="install" id="docs/getting-started/install" text="Install" />
+        </TreeItem>
+        <TreeItem data-testid="api" id="api/reference" text="API reference" />
+      </Tree>,
+    )
+
+    const tree = screen.getByRole('tree')
+
+    // The slashes are escaped in the key, so the item is not taken for a child of `docs`
+    expect(screen.getByTestId('docs')).toHaveAttribute('data-tree-key', 'docs%2Fgetting-started')
+
+    await user.click(screen.getByTestId('docs'))
+    expect(screen.getByTestId('docs')).toHaveAttribute('tabindex', '0')
+    expect(tree).not.toHaveAttribute('tabindex')
+
+    // Expanded again (the click collapsed it), the child is reachable and ArrowLeft finds the parent
+    await user.keyboard('{ArrowRight}{ArrowDown}')
+    expect(focusedItem()).toBe('install')
+
+    await user.keyboard('{ArrowLeft}')
+    expect(focusedItem()).toBe('docs')
+
+    await user.keyboard('{End}')
+    expect(focusedItem()).toBe('api')
+  })
+
   it('calls a consumer `onMouseDown`', async () => {
     const user = userEvent.setup()
     const onMouseDown = vi.fn<(event: React.MouseEvent<HTMLUListElement>) => void>()
