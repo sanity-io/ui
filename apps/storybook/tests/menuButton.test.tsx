@@ -101,8 +101,10 @@ describe('Components/MenuButton', () => {
   // callback, which runs before that frame is painted, they assert what the user sees first.
   describe('opening in a transition', () => {
     // The pre-render has committed: the hidden menu is in the DOM when the open arrives, and the
-    // open only has to reveal it, which reaches the first painted frame (measured 160 of 160
-    // opens in headless chromium)
+    // open only has to reveal it. That it reaches the first painted frame is empirical (160 of
+    // 160 opens in headless chromium), not something React guarantees for a transition: the
+    // commit runs in a Scheduler task that the browser could paint before. A miss here is a
+    // scheduler race, not a regression, and CI's retries absorb one.
     describe('after the pre-render on intent has committed', () => {
       test('a click shows the menu in the first painted frame', async () => {
         await renderStory()

@@ -483,6 +483,45 @@ describe('MenuButton', () => {
       })
     })
 
+    it('calls the onBlurCapture on the menu element before closing on focus leaving the menu', () => {
+      const calls: string[] = []
+      // `MenuProps` types `onBlurCapture` with the DOM event while the element delivers React's;
+      // a handler typed for both is what `<Menu>` accepts
+      const onMenuBlurCapture = vi.fn((event: FocusEvent | React.FocusEvent<HTMLDivElement>) => {
+        const {relatedTarget} = event
+
+        calls.push(
+          `blur to ${relatedTarget instanceof HTMLElement ? relatedTarget.textContent : 'nothing'}`,
+        )
+      })
+      const onClose = vi.fn(() => {
+        calls.push('close')
+      })
+
+      render(
+        <>
+          <MenuButton
+            button={<Button text="Open menu" />}
+            id="menu-button"
+            menu={
+              <Menu onBlurCapture={onMenuBlurCapture}>
+                <MenuItem text="Option 1" />
+              </Menu>
+            }
+            onClose={onClose}
+          />
+          <button type="button">Outside</button>
+        </>,
+      )
+
+      fireEvent.click(getButton())
+      act(() => screen.getByRole('menuitem', {name: 'Option 1'}).focus())
+      act(() => screen.getByRole('button', {name: 'Outside'}).focus())
+
+      expect(calls).toEqual(['blur to Outside', 'close'])
+      expectMenuRenderedHidden()
+    })
+
     it('leaves focus alone when __unstable_disableRestoreFocusOnClose is set', () => {
       const focusedWhenCalled: (Element | null)[] = []
       const onClose = vi.fn(() => {
