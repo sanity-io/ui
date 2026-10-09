@@ -2,13 +2,14 @@ import {
   cloneElement,
   useCallback,
   useEffect,
-  useImperativeHandle,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from 'react'
 
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
+import {attachRef} from '../../utils/attachRef'
 import {MenuProps} from './menu'
 
 /**
@@ -71,14 +72,11 @@ export function MenuButton(props: MenuButtonProps) {
   } = props
   const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
-  // The button that opened the menu, set as it opens: the menu's `Tab` handling returns focus to
-  // it, and so does closing with Escape or an item click. The button used to be set into state
-  // from its ref callback instead, which React schedules at Immediate priority as the callback
-  // runs in the commit phase — on mount, on unmount, and each time an `<Activity>` hides or shows
-  // the button — and commits as soon as a view transition that reveals or hides the button is
-  // ready to animate, delaying its first frame; should anything flush sync work while the browser
-  // is still preparing the transition, such a pending update is what makes React cancel it. The
-  // button element itself lives in a ref (see `setButton` below).
+  // The button that opened the menu, set by the handlers that open it, so it is set whenever
+  // `open` is: the menu's `Tab` handling returns focus to it, and so does closing with Escape or
+  // an item click. Nothing in this component sets state from a ref callback (the button element
+  // and the menu elements live in refs, see `useButtonRefCallback` and `useMenuElements`); the
+  // changeset and `apps/storybook/tests/menuButtonViewTransition.test.tsx` have the why.
   const [originElement, setOriginElement] = useState<HTMLButtonElement | null>(null)
   const menuElements = useMenuElements()
   const openRef = useRef<boolean>(open)
@@ -149,6 +147,9 @@ export function MenuButton(props: MenuButtonProps) {
         return
       }
 
+      // A press on the button is not a click outside: the button's own click handler toggles the
+      // menu, and closing here first would reopen it there. This relies on the origin being set
+      // whenever the menu is open — every path that opens it sets the origin.
       if (originElement && (target === originElement || originElement.contains(target))) {
         return
       }
@@ -204,31 +205,30 @@ export function MenuButton(props: MenuButtonProps) {
 
   const menu = menuProp && cloneElement(menuProp, menuProps)
 
-  // The button element, for the forwarded ref below. `Popover` clones the button once more and
-  // attaches this callback from its own. `replacedButton` is the node of a `button` whose DOM
-  // node was replaced (another element type or key): that, and only that, schedules an update
-  // here, so the handle follows the new node — mounting, unmounting and an `Activity` hiding and
-  // showing the button attach the same node again and schedule nothing. The origin follows the
-  // replacement as well when it was set, since it can only have been the replaced button: with
-  // the menu open, a click on the new button must still count as one on the button, and Escape
-  // or an item click must return focus to it rather than to the detached node.
+  // The button element, in a ref. The one update the ref callback schedules is for a `button`
+  // whose DOM node is replaced (another element type or key): `replacements` counts those, and
+  // the layout effect below follows the new node. Mounting, unmounting, and an `<Activity>`
+  // hiding and showing the button attach the same node again and schedule nothing. The origin
+  // follows a replacement as well when it is set, since it can only have been the replaced
+  // button: with the menu open, a press on the new button must still count as one on the button,
+  // and Escape or an item click must return focus to it rather than to the detached node.
   const buttonRef = useRef<HTMLButtonElement | null>(null)
-  const [replacedButton, setReplacedButton] = useState<HTMLButtonElement | null>(null)
+  const [replacements, setReplacements] = useState(0)
   const handleButtonReplace = useCallback((node: HTMLButtonElement) => {
-    setReplacedButton(node)
+    setReplacements((count) => count + 1)
     setOriginElement((origin) => (origin === null ? null : node))
   }, [])
-  const setButton = useButtonRefCallback(buttonRef, handleButtonReplace)
+  const setButton = useButtonRefCallback(buttonRef, handleButtonReplace, popover?.referenceElement)
 
-  // Forwarded from the same commit as the one that mounts the button, since the handle of a
-  // parent runs after the refs of its children attached, and again when the node is replaced.
-  // Not composed into `setButton` itself: `Popover` re-runs the child ref it is given on every
-  // render, which would detach and attach a consumer's callback ref each time.
-  useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
-    forwardedRef,
-    () => replacedButton ?? buttonRef.current,
-    [replacedButton],
-  )
+  // The forwarded ref, attached to the live element in the commit that mounts the button (a
+  // parent's layout effect runs after the refs of its children attached), again after a
+  // replacement, and again when it changes itself; detached with React's semantics for a `ref`
+  // prop (`attachRef`). Not attached from the button's ref callback: that would hand every
+  // detach and re-attach of the same node to the consumer's ref (today `Popover` re-runs the
+  // child ref it is given on every render). A node that is removed without a successor leaves
+  // the forwarded ref on the detached node until this runs again, which is accepted: clearing
+  // it from the ref callback's cleanup would be the hide-time update this component avoids.
+  useLayoutEffect(() => attachRef(forwardedRef, buttonRef.current), [forwardedRef, replacements])
 
   const button = useMemo(
     () =>
@@ -264,40 +264,50 @@ export function MenuButton(props: MenuButtonProps) {
   )
 }
 
+interface ButtonRefOptions {
+  buttonRef: React.RefObject<HTMLButtonElement | null>
+  /** A node to take for no attachment at all: the popover's `referenceElement`, when it has one */
+  ignoredNode: HTMLElement | null | undefined
+  lastNodeRef: React.RefObject<HTMLButtonElement | null>
+  onReplace: (node: HTMLButtonElement) => void
+}
+
 /**
  * The ref callback for the button, keeping its element in `buttonRef` and calling `onReplace`
- * when a different node than the last one attaches. A hook of its own, with the ref accesses in
- * the module-scope function below, because the React Compiler takes a callback that accesses refs
- * for a possible read during render wherever it flows into a plain call such as `cloneElement` in
- * `MenuButton`, and would skip the component; the result of a hook call carries no such mark.
+ * when a different node than the last one attaches. Its guarantees, whatever attaches it:
+ *
+ * - The same node attaching again is never a replacement: the node last attached is remembered
+ *   across its detach (an `<Activity>` showing the button again, a parent re-attaching the ref).
+ * - A `null` node is ignored, since detaching only ever arrives through the returned cleanup, and
+ *   so is `ignoredNode`, which is not the button. (Today both come from `Popover`, which forwards
+ *   Floating UI's reference element through a handle of its own on every render: `null` while
+ *   disabled, the `referenceElement` prop when there is one, the button otherwise.)
+ * - A cleanup clears only the node its own attachment set.
+ *
+ * A hook of its own, with the ref accesses in the module-scope function below, because the React
+ * Compiler takes a callback that accesses refs for a possible read during render wherever it
+ * flows into a plain call such as `cloneElement` in `MenuButton`, and would skip the component;
+ * the result of a hook call carries no such mark.
  */
 function useButtonRefCallback(
   buttonRef: React.RefObject<HTMLButtonElement | null>,
   onReplace: (node: HTMLButtonElement) => void,
+  ignoredNode: HTMLElement | null | undefined,
 ): (node: HTMLButtonElement | null) => () => void {
-  // The node last attached, not cleared on detach: a detach followed by the same node attaching
-  // again (`Popover` re-running the ref, an `Activity` showing the button again) is not a replacement
   const lastNodeRef = useRef<HTMLButtonElement | null>(null)
 
   return useCallback(
-    (node: HTMLButtonElement | null) => attachButton(node, buttonRef, lastNodeRef, onReplace),
-    [buttonRef, lastNodeRef, onReplace],
+    (node: HTMLButtonElement | null) =>
+      attachButton(node, {buttonRef, ignoredNode, lastNodeRef, onReplace}),
+    [buttonRef, ignoredNode, lastNodeRef, onReplace],
   )
 }
 
 function attachButton(
   node: HTMLButtonElement | null,
-  buttonRef: React.RefObject<HTMLButtonElement | null>,
-  lastNodeRef: React.RefObject<HTMLButtonElement | null>,
-  onReplace: (node: HTMLButtonElement) => void,
+  {buttonRef, ignoredNode, lastNodeRef, onReplace}: ButtonRefOptions,
 ): () => void {
-  // Detaching arrives through the cleanup returned below, never as a `null` node. The one caller
-  // that passes `null` is the imperative handle `Popover` keeps for the button's own ref: while
-  // the popover is disabled it renders the button without cloning it, so this callback is attached
-  // to the button directly, and the handle forwards the `null` reference element of the clone it
-  // does not render. Taking that for a detach would leave the forwarded ref `null` while the
-  // button is mounted.
-  if (node === null) return () => undefined
+  if (node === null || node === ignoredNode) return () => undefined
 
   buttonRef.current = node
 
@@ -305,8 +315,6 @@ function attachButton(
   lastNodeRef.current = node
 
   return () => {
-    // Only the attachment that set the node clears it: a cleanup of an earlier attachment (the
-    // handle in `Popover` re-running) must not clear a later one of another node.
     if (buttonRef.current === node) buttonRef.current = null
   }
 }
@@ -320,34 +328,33 @@ interface MenuElements {
 
 /**
  * The elements of the menu and its nested menus, which `Menu` registers from its ref callback
- * (`registerElement`), kept in a ref: the click-outside and blur handlers read them when they
- * run, nothing reads them during render. Registering used to set them into state, an update at
- * Immediate priority (a ref callback runs in the commit phase) in the commit that opened the menu.
- * A hook of its own because the React Compiler takes a callback that accesses refs for a possible
- * read during render wherever it flows into a plain call — `cloneElement` in `MenuButton` — and
- * would skip the component, since it cannot tell when the callback runs; the result of a hook
- * call carries no such mark.
+ * (`registerElement`), kept outside of state: the click-outside and blur handlers read them when
+ * they run, nothing reads them during render, so registering one schedules nothing. A hook of its
+ * own because the React Compiler takes a callback that accesses refs for a possible read during
+ * render wherever it flows into a plain call — `cloneElement` in `MenuButton` — and would skip the
+ * component, since it cannot tell when the callback runs; the result of a hook call carries no
+ * such mark.
  */
 function useMenuElements(): MenuElements {
-  const elementsRef = useRef(new Set<HTMLElement>())
+  const [elements] = useState(() => new Set<HTMLElement>())
 
   return useMemo(
     () => ({
       contains: (target) => {
-        for (const element of elementsRef.current) {
+        for (const element of elements) {
           if (target === element || element.contains(target)) return true
         }
 
         return false
       },
       register: (element) => {
-        elementsRef.current.add(element)
+        elements.add(element)
 
         return () => {
-          elementsRef.current.delete(element)
+          elements.delete(element)
         }
       },
     }),
-    [],
+    [elements],
   )
 }

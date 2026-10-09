@@ -6,13 +6,14 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {useLayoutEffect} from 'react'
+import {Profiler, useLayoutEffect} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
 import {Button} from '../../primitives/button/button'
 import {Menu} from './menu'
 import {MenuButton, type MenuButtonProps} from './menuButton'
+import {MenuGroup} from './menuGroup'
 import {MenuItem} from './menuItem'
 
 function renderMenuButton(props?: Partial<MenuButtonProps>) {
@@ -235,6 +236,96 @@ describe('MenuButton', () => {
       expect(callbackRef.mock.calls).toEqual([[button], [null]])
     })
 
+    it('attaches a forwarded callback ref with React’s own sequence under StrictMode, and nothing more', () => {
+      const callbackRef = vi.fn()
+      const menuButton = (
+        <MenuButton
+          button={<Button text="Open menu" />}
+          id="menu-button"
+          menu={
+            <Menu>
+              <MenuItem text="Option 1" />
+            </Menu>
+          }
+          ref={callbackRef}
+        />
+      )
+
+      // `render` puts `<StrictMode>` at the top of the tree, where React runs the mount effects
+      // (and refs) of the subtree twice: the same node attaching again is not a replacement
+      const {rerender} = render(menuButton)
+
+      const button = getButton()
+
+      expect(callbackRef.mock.calls).toEqual([[button], [null], [button]])
+
+      rerender(menuButton)
+      fireEvent.click(getButton())
+      expectMenuVisible()
+      fireEvent.click(getButton())
+
+      expect(callbackRef.mock.calls).toEqual([[button], [null], [button]])
+    })
+
+    it('holds the button, not the reference element, with `popover={{referenceElement}}`', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      const callbackRef = vi.fn()
+      const onRender = vi.fn()
+      const referenceElement = document.createElement('div')
+
+      document.body.append(referenceElement)
+
+      try {
+        render(
+          <Profiler id="menu-button" onRender={onRender}>
+            <MenuButton
+              button={<Button text="Open menu" />}
+              id="menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Option 1" />
+                </Menu>
+              }
+              popover={{referenceElement}}
+              ref={ref}
+            />
+            <MenuButton
+              button={<Button text="Open other menu" />}
+              id="other-menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Option 2" />
+                </Menu>
+              }
+              popover={{referenceElement}}
+              ref={callbackRef}
+            />
+          </Profiler>,
+          {strict: false},
+        )
+
+        const button = getButton()
+        const otherButton = screen.getByRole('button', {name: 'Open other menu'})
+
+        // `Popover` positions against the reference element and renders the button without
+        // cloning it, but still forwards the reference element through the handle it keeps for
+        // the button's own ref: not a replacement of the button, and no update on mount
+        expect(ref.current).toBe(button)
+        expect(callbackRef.mock.calls).toEqual([[otherButton]])
+        expect(onRender.mock.calls.map((call) => call[1])).not.toContain('nested-update')
+
+        // Closing returns focus to the button that opened the menu, not to the reference element
+        fireEvent.click(button)
+        expectMenuVisible()
+        fireEvent.keyDown(window, {key: 'Escape'})
+
+        expect(button).toHaveAttribute('aria-expanded', 'false')
+        expect(button).toHaveFocus()
+      } finally {
+        referenceElement.remove()
+      }
+    })
+
     it('follows the button when its element is replaced, without touching the ref otherwise', () => {
       const callbackRef = vi.fn()
       const renderMenuButtonWith = (button: React.JSX.Element) => (
@@ -424,6 +515,46 @@ describe('MenuButton', () => {
 
       expect(getButton()).toHaveAttribute('aria-expanded', 'false')
       expect(getButton()).toHaveFocus()
+    })
+
+    it('keeps the menu open while focus moves into a portaled submenu, and closes when it leaves', () => {
+      render(
+        <MenuButton
+          button={<Button text="Open menu" />}
+          id="menu-button"
+          menu={
+            <Menu>
+              <MenuItem text="Option 1" />
+              <MenuGroup id="menu-group" popover={{portal: true}} text="More">
+                <MenuItem text="Sub option" />
+              </MenuGroup>
+            </Menu>
+          }
+        />,
+      )
+
+      fireEvent.click(getButton())
+      expectMenuVisible()
+
+      const rootMenu = screen.getByRole('menu')
+      const group = screen.getByRole('button', {name: 'More'})
+
+      // The submenu opens on ArrowRight from the focused group item, into a portal: its `Menu`
+      // registers its element with the menu button as well, through the group
+      act(() => group.focus())
+      fireEvent.keyDown(group, {key: 'ArrowRight'})
+
+      const subOption = screen.getByRole('menuitem', {name: 'Sub option'})
+
+      expect(subOption).toBeVisible()
+      expect(rootMenu.contains(subOption)).toBe(false)
+
+      // Focus moving into the submenu is focus moving inside the menu
+      fireEvent.focusOut(rootMenu, {relatedTarget: subOption})
+      expect(getButton()).toHaveAttribute('aria-expanded', 'true')
+
+      fireEvent.focusOut(rootMenu, {relatedTarget: document.body})
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
     })
 
     it('closes on a click outside, but not on one inside the menu or on the button', () => {
