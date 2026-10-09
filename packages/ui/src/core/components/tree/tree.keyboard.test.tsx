@@ -604,6 +604,40 @@ describe('components/tree keyboard navigation', () => {
     expect(docsLink).toHaveFocus()
   })
 
+  it('skips a parent that cannot take focus with ArrowUp', async () => {
+    const user = userEvent.setup()
+
+    // A `linkAs` that drops the props it is handed leaves the item without a focusable element
+    function PlainSpan(props: React.ComponentProps<'a'>) {
+      return <span>{props.children}</span>
+    }
+
+    render(
+      <>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree aria-label="Docs">
+          <TreeItem data-testid="blog" text="Blog" />
+          <TreeItem data-testid="docs" expanded href="/docs" linkAs={PlainSpan} text="Docs">
+            <TreeItem data-testid="intro" text="Intro" />
+          </TreeItem>
+        </Tree>
+      </>,
+    )
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    expect(focusedItem()).toBe('blog')
+
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('intro')
+
+    // "Docs" contains the focused item, so moving onto it has to be told apart from staying put
+    await user.keyboard('{ArrowUp}')
+    expect(focusedItem()).toBe('blog')
+  })
+
   it('keeps navigating from a link item that received focus directly', async () => {
     const user = userEvent.setup()
 

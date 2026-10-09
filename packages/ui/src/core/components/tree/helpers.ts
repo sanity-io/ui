@@ -114,7 +114,12 @@ export function _focusFirstItemElement(candidates: HTMLElement[]): HTMLElement |
   for (const el of candidates) {
     _focusItemElement(el)
 
-    if (el.contains(_getActiveElement(el))) return el
+    const activeElement = _getActiveElement(el)
+
+    // A candidate that is an ancestor of the focused item (`ArrowUp` and `Home` onto a parent)
+    // contains the active element whether or not `focus()` worked, so what counts is the item the
+    // active element belongs to
+    if (activeElement && _closestItemElement(activeElement) === el) return el
   }
 
   return null
