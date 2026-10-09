@@ -1,0 +1,8 @@
+---
+'@sanity/ui': patch
+---
+
+fix(menu): `MenuGroup` derives its pressed state and whether its child menu is shown during render. The item is pressed while its child menu is open and the pointer (or, after `ArrowRight`, the focus) is within it, and the child menu is shown only while the item is its menu's active item. Both used to be kept in sync by effects that reset `withinMenu` and `open` one commit after the fact; hovering a sibling item now closes the child menu and clears the pressed state in the same commit as the activation that caused it. Opening and closing the child menu from the item's own handlers (hover, click, `ArrowRight`, `ArrowLeft`, a child item click) are transitions, so they yield to more urgent input and do not interrupt a pre-render of the closed popover, while the item's own active highlight stays immediate. Hover, click and `ArrowRight` open, `ArrowLeft` and child item clicks close, and the `aria-pressed` / `data-pressed` / `data-selected` attributes behave as before, with two exceptions:
+
+- A click or `ArrowRight` on a `MenuGroup` that is not the menu's active item now makes it the active item as it opens the child menu. It used to open the child menu without activating the item. A real click and a keyboard activation already activate the item (through `mouseenter`, and through the menu's own arrow-key handling), so this changes a plain `click()` with no preceding `mouseenter`, such as `fireEvent.click(menuGroup)` in a test.
+- A `MenuGroup` rendered with `as="a"` or `as="div"` renders `data-pressed` only while it is pressed. It used to render `data-pressed="false"` while it was not, which matched the pressed selector of the link variant and painted an `as="a"` group in its pressed colour.

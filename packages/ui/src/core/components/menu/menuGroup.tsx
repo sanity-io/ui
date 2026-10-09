@@ -1,5 +1,5 @@
 import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
-import {isValidElement, useCallback, useEffect, useState} from 'react'
+import {isValidElement, startTransition, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 
 import {Selectable} from '../../primitives/_selectable/selectable'
@@ -82,18 +82,62 @@ const MenuGroupComponent = function MenuGroup(
   } = menu
   const onItemMouseEnter = _onItemMouseEnter ?? menu.onItemMouseEnter
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
-  const [open, setOpen] = useState(false)
+  // Numbers the activations of this item (the periods in which it is the controller's active
+  // element); `openedIn` is the activation during which the child menu was last opened
+  const [activation, setActivation] = useState(0)
+  const [openedIn, setOpenedIn] = useState<number | null>(null)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
   const [withinMenu, setWithinMenu] = useState(false)
 
+  // When a sibling item becomes the controller's active element, this item's activation ends and
+  // the next one is numbered, which closes a child menu opened during it. Just hiding the child
+  // menu while inactive would not do: re-activating this item from the keyboard (the controller
+  // sets `activeElement`, nothing happens on this component) would show a child menu that the
+  // user never reopened. The end of the activation is recorded during render, so the close lands
+  // in the same commit as the activation that caused it.
+  //
+  // It is recorded in `activation`, which only this render-phase update writes, rather than by
+  // resetting `openedIn`, which the handlers below write in transitions. React applies a
+  // render-phase update on top of the state of the render in progress and does not rebase it
+  // over a lower-priority update that this render skipped (`rerenderReducer` in
+  // packages/react-reconciler/src/ReactFiberHooks.js persists the result to the base state only
+  // while the base queue is empty); a reset of `openedIn` would be lost while an opening
+  // transition is still pending (its render suspended on the child menu's content, say), and that
+  // open would then apply after the item stopped being active. The priority of the close is that
+  // of the activation, so unlike the handlers below this update cannot be made a transition.
+  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+  const [prevActive, setPrevActive] = useState(active)
+
+  if (active !== prevActive) {
+    setPrevActive(active)
+    if (!active) setActivation((current) => current + 1)
+  }
+
+  const childMenuOpen = active && openedIn === activation
+  // Pressed while the child menu is open and the pointer is within it, or it was opened with
+  // `ArrowRight`. Derived from `childMenuOpen` so that `withinMenu` needs no reset when the child
+  // menu closes; every path that opens it sets `withinMenu` for that session.
+  const pressed = childMenuOpen && withinMenu
+
+  // Opening and closing the child menu are transitions, so that they do not interrupt a
+  // pre-render of the closed popover (the hidden `<Activity>` in `Popover`, rendered on intent in
+  // a transition) and yield to more urgent input. `shouldFocus`, the child menu's initial focus,
+  // goes into the same transition so that it commits together with the open, as it did when the
+  // two were set synchronously: it is reset by an animation frame after its commit, which must
+  // not come before the commit that reveals the child menu. Everything else stays urgent: the
+  // controller's activation of the item (`onItemMouseEnter`, which every opener performs, so an
+  // item that was not the active one becomes it rather than recording an open for its next
+  // activation), the consumer callbacks, and `withinMenu`, which tracks the pointer and is read
+  // only once the child menu is open.
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
-      setWithinMenu(false)
       onItemMouseEnter(event)
-      setOpen(true)
+      setWithinMenu(false)
+
+      startTransition(() => setOpenedIn(activation))
     },
-    [onItemMouseEnter],
+    [activation, onItemMouseEnter],
   )
 
   const handleMenuKeyDown = useCallback(
@@ -101,8 +145,11 @@ const MenuGroupComponent = function MenuGroup(
       if (event.key === 'ArrowLeft') {
         event.stopPropagation()
 
-        setOpen(false)
+        startTransition(() => setOpenedIn(null))
 
+        // Deliberately not tied to the commit of the close: focus returns to the item on the next
+        // frame whether or not the child menu is still displayed by then. Nothing reacts to focus
+        // moving within the menu, so the order of the two is of no consequence.
         requestAnimationFrame(() => {
           rootElement?.focus()
         })
@@ -114,15 +161,19 @@ const MenuGroupComponent = function MenuGroup(
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       onClick?.(event)
+      onItemMouseEnter(event)
+      setWithinMenu(false)
 
-      setShouldFocus('first')
-      setOpen(true)
+      startTransition(() => {
+        setShouldFocus('first')
+        setOpenedIn(activation)
+      })
     },
-    [onClick],
+    [activation, onClick, onItemMouseEnter],
   )
 
   const handleChildItemClick = useCallback(() => {
-    setOpen(false)
+    startTransition(() => setOpenedIn(null))
     onItemClick?.()
   }, [onItemClick])
 
@@ -130,18 +181,6 @@ const MenuGroupComponent = function MenuGroup(
 
   // Register the menu item element
   useEffect(() => mount(rootElement), [mount, rootElement])
-
-  // Close child menu when a sibling item becomes active
-  useEffect(() => {
-    // oxlint-disable-next-line react/set-state-in-effect
-    if (!active) setOpen(false)
-  }, [active])
-
-  // Update state when child menu is no longer open
-  useEffect(() => {
-    // oxlint-disable-next-line react/set-state-in-effect
-    if (!open) setWithinMenu(false)
-  }, [open])
 
   // Reset the shouldFocus state after it has been used
   useEffect(() => {
@@ -169,32 +208,39 @@ const MenuGroupComponent = function MenuGroup(
     </Menu>
   )
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    const target = event.currentTarget
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      const target = event.currentTarget
 
-    if (document.activeElement !== target) {
-      return
-    }
+      if (document.activeElement !== target) {
+        return
+      }
 
-    if (event.key === 'ArrowRight') {
-      setShouldFocus('first')
-      setOpen(true)
-      setWithinMenu(true)
+      if (event.key === 'ArrowRight') {
+        onItemMouseEnter(event)
+        setWithinMenu(true)
 
-      return
-    }
-  }, [])
+        startTransition(() => {
+          setShouldFocus('first')
+          setOpenedIn(activation)
+        })
+
+        return
+      }
+    },
+    [activation, onItemMouseEnter],
+  )
 
   return (
-    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={open}>
+    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={childMenuOpen}>
       <Selectable
         data-as={as}
         data-ui="MenuGroup"
         forwardedAs={as}
         {...restProps}
-        aria-pressed={as === 'button' ? withinMenu : undefined}
-        data-pressed={as !== 'button' ? withinMenu : undefined}
-        data-selected={!withinMenu && active ? '' : undefined}
+        aria-pressed={as === 'button' ? pressed : undefined}
+        data-pressed={as !== 'button' && pressed ? '' : undefined}
+        data-selected={!pressed && active ? '' : undefined}
         $radius={_getArrayProp(radius)}
         $tone={tone}
         $scheme={scheme}
