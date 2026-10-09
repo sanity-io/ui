@@ -85,9 +85,10 @@ export function Tree(
 
       // A `selected` item becomes the tab stop, unless it cannot take focus where it is (hidden
       // by the consumer, no focusable node): a tab stop sequential focus navigation skips would
-      // take the tree out of the tab order. An item that re-registers under a new key (its `id`,
-      // or an ancestor's, changed) keeps the tab stop, under that key.
-      const claims = selected && _isItemFocusable(element)
+      // take the tree out of the tab order. A collapsed ancestor does not count — `tabStop` holds
+      // the item back until the ancestor expands. An item that re-registers under a new key (its
+      // `id`, or an ancestor's, changed) keeps the tab stop, under that key.
+      const claims = selected && _isItemFocusable(element, ref.current)
 
       setFocusedItem((prev) => {
         if (!claims && prev?.element !== element) return prev

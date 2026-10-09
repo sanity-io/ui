@@ -108,18 +108,35 @@ function _getItemFocusTarget(el: HTMLElement): HTMLElement | null {
 
 /**
  * Whether an item can be made the tab stop without being focused first: it has a node that takes
- * focus, and that node is rendered as far as `checkVisibility()` can tell (`hidden`,
- * `display: none`, `visibility: hidden` on it or an ancestor). Runs at effect time, for an item
- * mounted as `selected`; environments without `checkVisibility()` (jsdom) count as rendered.
+ * focus, and nothing between that node and the tree element hides it — except the tree's own
+ * collapsed groups, which are state the render-time derivation accounts for (`_isItemKeyVisible`),
+ * so that the item becomes the tab stop when its ancestor expands. Anything else (`hidden`,
+ * `display: none`, `visibility: hidden` from the consumer) would put the tab stop on a node that
+ * sequential focus navigation skips and take the tree out of the tab order. Runs at effect time,
+ * for an item mounted as `selected`.
  */
-export function _isItemFocusable(el: HTMLElement): boolean {
+export function _isItemFocusable(el: HTMLElement, treeElement: HTMLElement | null): boolean {
   const target = _getItemFocusTarget(el)
 
   if (!target) return false
 
-  return typeof target.checkVisibility === 'function'
-    ? target.checkVisibility({visibilityProperty: true})
-    : true
+  const view = target.ownerDocument.defaultView
+
+  if (!view) return true
+
+  for (
+    let node: HTMLElement | null = target;
+    node && node !== treeElement;
+    node = node.parentElement
+  ) {
+    if (node.getAttribute('data-ui') === 'TreeGroup') continue
+
+    const {display, visibility} = view.getComputedStyle(node)
+
+    if (display === 'none' || visibility === 'hidden') return false
+  }
+
+  return true
 }
 
 /**

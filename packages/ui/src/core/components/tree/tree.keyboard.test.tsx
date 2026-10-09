@@ -274,6 +274,35 @@ describe('components/tree tab stop', () => {
     expect(focusedItem()).toBe('apples')
   })
 
+  it('does not hand the tab stop to a `selected` item the consumer hid', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree aria-label="Fruit">
+          <TreeItem data-testid="oranges" text="Oranges" />
+          <TreeItem data-testid="apples" hidden selected text="Apples" />
+          <TreeItem data-testid="pears" selected style={{display: 'none'}} text="Pears" />
+        </Tree>
+      </>,
+    )
+
+    const tree = screen.getByRole('tree')
+
+    // A tab stop that sequential focus navigation skips would take the tree out of the tab
+    // order, so the tree element keeps it
+    expect(tree).toHaveAttribute('tabindex', '0')
+    expect(screen.getByTestId('apples')).toHaveAttribute('tabindex', '-1')
+    expect(screen.getByTestId('pears')).toHaveAttribute('tabindex', '-1')
+
+    screen.getByTestId('before').focus()
+    await user.tab()
+    expect(focusedItem()).toBe('oranges')
+  })
+
   it('takes the tab stop back while the focused item is inside a collapsed ancestor', async () => {
     const user = userEvent.setup()
     let treeContext: TreeContextValue | null = null

@@ -1,6 +1,7 @@
-import {ThemeProvider, Tree, TreeItem} from '@sanity/ui'
+import {ThemeProvider, Tree, TreeItem, useTree} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
 import {composeStories} from '@storybook/react-vite'
+import {useEffect} from 'react'
 import {describe, expect, test} from 'vitest'
 import {render} from 'vitest-browser-react'
 import {userEvent} from 'vitest/browser'
@@ -10,6 +11,18 @@ import * as treeStories from '../stories/components/Tree.stories'
 const {TabFromElement} = composeStories(treeStories)
 
 const theme = buildTheme()
+
+/** Hands the tree's context value to the test, the way a `useTree()` consumer sees it */
+function ExposeTree(props: {onChange: (tree: ReturnType<typeof useTree>) => void}) {
+  const {onChange} = props
+  const tree = useTree()
+
+  useEffect(() => {
+    onChange(tree)
+  }, [onChange, tree])
+
+  return null
+}
 
 function focusedTestId() {
   return document.activeElement?.closest('[data-testid]')?.getAttribute('data-testid') ?? null
@@ -162,6 +175,43 @@ describe('Components/Tree', () => {
     document.querySelector<HTMLElement>('[data-testid="before"]')!.focus()
     await userEvent.tab()
     await expect.poll(focusedTestId).toBe('a')
+  })
+
+  test('hands the tab stop to a `selected` item once its collapsed ancestor expands', async () => {
+    let treeContext: ReturnType<typeof useTree> | null = null
+
+    await render(
+      <ThemeProvider scheme="light" theme={theme}>
+        <button data-testid="before" type="button">
+          Before
+        </button>
+        <Tree aria-label="Fruit" gap={1}>
+          <ExposeTree onChange={(tree) => (treeContext = tree)} />
+          <TreeItem data-testid="apples" text="Apples">
+            <TreeItem data-testid="fuji" selected text="Fuji" />
+          </TreeItem>
+          <TreeItem data-testid="pears" text="Pears" />
+        </Tree>
+      </ThemeProvider>,
+    )
+
+    const fuji = () => document.querySelector<HTMLElement>('[data-testid="fuji"]')!
+    const applesKey = document
+      .querySelector('[data-testid="apples"]')!
+      .getAttribute('data-tree-key')!
+
+    // Collapsed: the tree element is the tab stop, the hidden selected item is not
+    await expect.poll(() => tree().getAttribute('tabindex')).toBe('0')
+    expect(fuji()).toHaveAttribute('tabindex', '-1')
+
+    // Expanding the ancestor from outside the tree (nothing re-registers) hands it over
+    treeContext!.setExpanded(applesKey, true)
+    await expect.poll(() => fuji().getAttribute('tabindex')).toBe('0')
+    expect(tree()).not.toHaveAttribute('tabindex')
+
+    document.querySelector<HTMLElement>('[data-testid="before"]')!.focus()
+    await userEvent.tab()
+    await expect.poll(focusedTestId).toBe('fuji')
   })
 
   test('enters the items at the first one that takes focus from the focused tree element', async () => {
