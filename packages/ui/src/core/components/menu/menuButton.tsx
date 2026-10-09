@@ -1,14 +1,18 @@
 import {
   cloneElement,
-  startTransition,
   useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
+  useTransition,
 } from 'react'
+// TODO: switch to `useEffectEvent` from `react` once
+// https://github.com/facebook/react/issues/34818 is fixed in the lowest React version we support
+import {useEffectEvent} from 'use-effect-event'
 
+import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
 import {MenuProps} from './menu'
 
@@ -75,7 +79,10 @@ export interface MenuButtonProps {
    *   `__unstable_disableRestoreFocusOnClose` is set), so focus moved here stands.
    * - Focus leaving the menu: the callback runs while that focus change is being dispatched,
    *   before the element that is receiving focus has it.
-   * - A click on the button or outside the menu: focus is wherever that click put it.
+   * - A click on the button: focus is unchanged, since the press does not take focus while the
+   *   menu is open.
+   * - A click outside the menu: the callback runs on the press (`mousedown`), before the browser
+   *   moves focus to what was pressed, so focus moved here can be overridden by that.
    *
    * One close runs from the task right after its event rather than from the event: a click inside
    * the menu whose handler stopped the click's propagation and moved focus out of the menu.
@@ -137,6 +144,7 @@ export function MenuButton(props: MenuButtonProps) {
     endMenuClick,
     open,
     openMenu,
+    openPending,
     shouldFocus,
     toggleMenu,
     trackMenuClick,
@@ -229,6 +237,25 @@ export function MenuButton(props: MenuButtonProps) {
     closeMenu({returnFocusTo})
   }, [closeMenu, returnFocusTo])
 
+  // The menu's own click-outside and Escape handling only works once the menu is rendered open.
+  // While an open is still pending (its transition has not committed: content that suspends, or
+  // takes long to render), those interactions have to cancel it from here.
+  useClickOutsideEvent(openPending && handleMenuClickOutside, () => [buttonElement, menuElements])
+
+  const onEscapeWhilePending = useEffectEvent(handleMenuEscape)
+
+  useEffect(() => {
+    if (!openPending) return undefined
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onEscapeWhilePending()
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [openPending])
+
   // The handlers the consumer put on the menu element, composed with the ones below
   const {
     onBlurCapture: onMenuBlurCapture,
@@ -286,9 +313,7 @@ export function MenuButton(props: MenuButtonProps) {
     return () => setChildMenuElements((els) => els.filter((_el) => _el !== el))
   }, [])
 
-  // `MenuProps` types `onBlurCapture` as taking a DOM `FocusEvent`; the menu element receives
-  // React's, which is what the composed handler and the consumer's are typed against
-  const menuProps: Omit<MenuProps, keyof MenuHandlerProps> & MenuHandlerProps = {
+  const menuProps: MenuProps & MenuHandlerProps = {
     'aria-labelledby': id,
     'onBlurCapture': handleBlur,
     'onClick': handleMenuClick,
@@ -367,6 +392,8 @@ interface OpenState {
   open: boolean
   /** Opens the menu and asks it to focus its first or last item once it is rendered open */
   openMenu: (focus: NonNullable<ShouldFocus>) => void
+  /** Whether an open has been requested whose transition has not committed yet */
+  openPending: boolean
   shouldFocus: ShouldFocus
   /** Opens or closes the menu, clearing any focus request: a click leaves focus on the button */
   toggleMenu: () => void
@@ -378,7 +405,9 @@ interface OpenState {
  * The open state of the menu and the focus request made when it opens, with `onOpen` / `onClose`
  * called from the event that changes it. Opening is a transition, so that an open arriving while
  * `Popover` pre-renders the hidden menu continues that render; closing renders nothing and is a
- * plain update, so that it commits with whatever else the closing event updated.
+ * plain update, so that it commits with whatever else the closing event updated. `openPending`
+ * is `useTransition`'s pending flag, so that the menu button can cancel an open whose menu has
+ * not committed yet (the menu's own listeners are not running then).
  *
  * Constraints that shaped it:
  *
@@ -397,6 +426,7 @@ interface OpenState {
 function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOpen'>): OpenState {
   const [open, setOpenState] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<ShouldFocus>(null)
+  const [openPending, startTransition] = useTransition()
   const requestedOpenRef = useRef(open)
   const clickInMenuRef = useRef(false)
   const blurDuringClickRef = useRef(false)
@@ -433,7 +463,7 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
         update()
       }
     },
-    [onClose, onOpen],
+    [onClose, onOpen, startTransition],
   )
 
   const closeMenu = useCallback(
@@ -489,6 +519,7 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
     endMenuClick,
     open,
     openMenu,
+    openPending,
     shouldFocus,
     toggleMenu,
     trackMenuClick,

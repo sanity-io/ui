@@ -17,11 +17,25 @@ import {MenuGroup} from './menuGroup'
 import {MenuItem} from './menuItem'
 
 // `startTransition` wrapped in a mock that passes through to React, so the transition tests can
-// observe and intercept it (an ESM export cannot be spied on in place)
+// observe and intercept it (an ESM export cannot be spied on in place). `useTransition`'s own
+// `startTransition`, which `MenuButton` uses for its pending flag, goes through the same mock.
 vi.mock('react', async (importOriginal) => {
   const actual = await importOriginal<typeof import('react')>()
+  const startTransitionMock = vi.fn(actual.startTransition)
 
-  return {...actual, startTransition: vi.fn(actual.startTransition)}
+  const useTransition: typeof actual.useTransition = () => {
+    const [isPending, start] = actual.useTransition()
+    const startThroughMock = actual.useCallback(
+      (scope: Parameters<typeof start>[0]) => {
+        startTransitionMock(() => start(scope))
+      },
+      [start],
+    )
+
+    return [isPending, startThroughMock]
+  }
+
+  return {...actual, startTransition: startTransitionMock, useTransition}
 })
 
 const startTransitionMock = vi.mocked(startTransition)
@@ -485,9 +499,7 @@ describe('MenuButton', () => {
 
     it('calls the onBlurCapture on the menu element before closing on focus leaving the menu', () => {
       const calls: string[] = []
-      // `MenuProps` types `onBlurCapture` with the DOM event while the element delivers React's;
-      // a handler typed for both is what `<Menu>` accepts
-      const onMenuBlurCapture = vi.fn((event: FocusEvent | React.FocusEvent<HTMLDivElement>) => {
+      const onMenuBlurCapture = vi.fn((event: React.FocusEvent<HTMLDivElement>) => {
         const {relatedTarget} = event
 
         calls.push(
@@ -867,6 +879,60 @@ describe('MenuButton', () => {
         document.querySelector<HTMLElement>('[data-ui="MenuButton__popover"]')?.style.display,
       ).toBe('')
       expect(screen.getByText('Option 1')).toBeInTheDocument()
+    })
+
+    it.each([
+      ['Escape', () => fireEvent.keyDown(document.body, {key: 'Escape'})],
+      ['a click outside', () => fireEvent.mouseDown(document.body)],
+    ])('cancels an open that is still pending on %s', async (_name, cancel) => {
+      let resolveContent!: () => void
+      const content = new Promise<void>((resolve) => {
+        resolveContent = resolve
+      })
+
+      function SuspendingItem() {
+        use(content)
+
+        return <MenuItem text="Option 1" />
+      }
+
+      const onClose = vi.fn()
+
+      render(
+        <MenuButton
+          button={<Button text="Open menu" />}
+          id="menu-button"
+          menu={
+            <Menu>
+              <SuspendingItem />
+            </Menu>
+          }
+          onClose={onClose}
+        />,
+      )
+
+      const button = getButton()
+
+      await act(async () => {
+        fireEvent.click(button)
+      })
+      expectMenuNotRendered()
+
+      // The menu's own Escape and click-outside listeners are not running, since the menu has not
+      // committed; the menu button cancels the pending open itself
+      await act(async () => {
+        cancel()
+      })
+      expect(onClose).toHaveBeenCalledTimes(1)
+
+      await act(async () => {
+        resolveContent()
+        await content
+      })
+
+      expect(button).toHaveAttribute('aria-expanded', 'false')
+      expectMenuNotRendered()
+      expect(onClose).toHaveBeenCalledTimes(1)
     })
 
     // The focus request made by a key press (`shouldFocus`) is applied by `useMenuController` in
