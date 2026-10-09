@@ -2,6 +2,7 @@ import {
   cloneElement,
   startTransition,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -394,6 +395,10 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
   const requestedOpenRef = useRef(open)
   const clickInMenuRef = useRef(false)
   const blurDuringClickRef = useRef(false)
+  const endMenuClickTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  // A tracked click must not end, and close, after the menu button is gone
+  useEffect(() => () => clearTimeout(endMenuClickTimeoutRef.current), [])
 
   const setOpen = useCallback(
     ({open: nextOpen, focus, returnFocusTo}: OpenStateUpdate) => {
@@ -450,6 +455,8 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
   }, [setOpen])
 
   const endMenuClick = useCallback(() => {
+    clearTimeout(endMenuClickTimeoutRef.current)
+
     if (!clickInMenuRef.current) return
 
     clickInMenuRef.current = false
@@ -466,8 +473,9 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
     // For a click whose propagation a handler stops before the bubble phase. A macrotask, not a
     // microtask: React dispatches the capture and bubble phases of a trusted event from separate
     // native listeners, and the microtask checkpoint between them would end the click before the
-    // item's handlers run. A no-op when the bubble phase ended it already.
-    setTimeout(endMenuClick, 0)
+    // item's handlers run. Cleared when the bubble phase ends the click.
+    clearTimeout(endMenuClickTimeoutRef.current)
+    endMenuClickTimeoutRef.current = setTimeout(endMenuClick, 0)
   }, [endMenuClick])
 
   return {
