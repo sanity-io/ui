@@ -58,9 +58,11 @@ export interface MenuButtonProps {
   id: string
   /**
    * The menu to show. `MenuButton` adds its own `onBlurCapture`, `onClick` and `onClickCapture`
-   * handlers to it, after any handlers the element already has, and sets its `aria-labelledby`,
-   * `onClickOutside`, `onEscape`, `onItemClick`, `originElement`, `registerElement` and
-   * `shouldFocus`.
+   * handlers to it. Handlers the element already has run first, except that `MenuButton` starts
+   * tracking a click inside the menu before the element's own `onClickCapture`, so that focus the
+   * handler moves out of the menu counts as moved during the click. `MenuButton` sets the menu's
+   * `aria-labelledby`, `onClickOutside`, `onEscape`, `onItemClick`, `originElement`,
+   * `registerElement` and `shouldFocus`.
    */
   menu?: React.JSX.Element
   /**
@@ -74,6 +76,9 @@ export interface MenuButtonProps {
    * - Focus leaving the menu: the callback runs while that focus change is being dispatched,
    *   before the element that is receiving focus has it.
    * - A click on the button or outside the menu: focus is wherever that click put it.
+   *
+   * One close runs from the task right after its event rather than from the event: a click inside
+   * the menu whose handler stopped the click's propagation and moved focus out of the menu.
    */
   onClose?: () => void
   /**

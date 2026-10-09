@@ -13,8 +13,6 @@ const {KeyboardNavigation} = composeStories(menuButtonStories)
 
 const theme = buildTheme()
 
-const nextFrame = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
-
 /**
  * The popover card's inline `display` at every commit of the story: `''` shown, `none` hidden
  * (the pre-render on intent), or not rendered at all
@@ -37,7 +35,7 @@ function menu() {
   return document.querySelector<HTMLElement>('[role="menu"]')
 }
 
-/** What the user sees first: the DOM as of the next animation frame callback, before it is painted */
+/** Whether the button reports the menu open and the menu is visible */
 function readFrame() {
   return {
     expanded: button().getAttribute('aria-expanded'),
@@ -94,36 +92,33 @@ function pressArrowDownToOpen() {
 }
 
 describe('Components/MenuButton', () => {
-  // `MenuButton` updates its open state in a transition, so that an open arriving while `Popover`
-  // is still pre-rendering the hidden menu (a transition it starts on intent) continues that
-  // render instead of rendering the menu synchronously in the event. These tests open the menu
-  // in the three situations that gives. Where they read the DOM in the next animation frame
-  // callback, which runs before that frame is painted, they assert what the user sees first.
+  // `MenuButton` opens in a transition, so that an open arriving while `Popover` is still
+  // pre-rendering the hidden menu (a transition it starts on intent) continues that render
+  // instead of rendering the menu synchronously in the event. These tests open the menu in the
+  // three situations that gives.
   describe('opening in a transition', () => {
     // The pre-render has committed: the hidden menu is in the DOM when the open arrives, and the
-    // open only has to reveal it. That it reaches the first painted frame is empirical (160 of
-    // 160 opens in headless chromium), not something React guarantees for a transition: the
-    // commit runs in a Scheduler task that the browser could paint before. A miss here is a
-    // scheduler race, not a regression, and CI's retries absorb one.
+    // open only has to reveal it. Measured out of band, that reaches the first painted frame
+    // (160 of 160 opens in headless chromium), but React does not guarantee it for a transition
+    // (the commit runs in a Scheduler task the browser could paint before), so these poll for the
+    // open like the cases below rather than gate on a scheduler outcome
     describe('after the pre-render on intent has committed', () => {
-      test('a click shows the menu in the first painted frame', async () => {
+      test('a click shows the menu', async () => {
         await renderStory()
         await hoverUntilPreRendered()
 
         clickToOpen()
-        await nextFrame()
 
-        expect(readFrame()).toEqual(OPEN)
+        await expect.poll(readFrame).toEqual(OPEN)
       })
 
-      test('ArrowDown shows the menu in the first painted frame, then focuses the first item', async () => {
+      test('ArrowDown shows the menu, then focuses the first item', async () => {
         await renderStory()
         await hoverUntilPreRendered()
 
         pressArrowDownToOpen()
-        await nextFrame()
 
-        expect(readFrame()).toEqual(OPEN)
+        await expect.poll(readFrame).toEqual(OPEN)
         // The focus request made by the key press is applied once the menu is rendered open
         await expect.poll(() => document.activeElement?.id).toBe('menu-item-1')
       })
@@ -138,9 +133,8 @@ describe('Components/MenuButton', () => {
     // started has not committed when the open does: there is no popover in the DOM yet. Both are
     // transitions of the same event, so the menu renders in one commit, shown, rather than being
     // committed hidden first and revealed after. Nothing is pre-rendered when the open arrives,
-    // so the content renders inside the transition that opens the menu; the browser is free to
-    // paint before that render is done, and the first painted frame is not guaranteed to show the
-    // menu (it did in 118 of 120 opens of this menu in headless chromium), so these poll
+    // so the content renders inside the transition that opens the menu (measured out of band, the
+    // first painted frame showed it in 118 of 120 opens of this menu in headless chromium)
     describe('while the pre-render on intent is still pending', () => {
       test('a click opens the menu in one commit, never committed hidden', async () => {
         await renderStory()
@@ -168,8 +162,8 @@ describe('Components/MenuButton', () => {
       })
     })
 
-    // No intent at all: the menu renders when it opens, inside the transition. As above, the
-    // first painted frame is not guaranteed to show it (118 of 120 opens did), so this polls
+    // No intent at all: the menu renders when it opens, inside the transition (as above, 118 of
+    // 120 first painted frames showed it)
     describe('without intent', () => {
       test('a click opens the menu in one commit, never committed hidden', async () => {
         await renderStory()
