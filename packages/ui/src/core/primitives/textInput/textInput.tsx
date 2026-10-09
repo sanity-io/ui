@@ -182,9 +182,15 @@ export function TextInput(
   const $hasSuffix = Boolean(suffix)
   const $hasPrefix = Boolean(prefix)
 
+  // Attached once: the `<Input>` below is always rendered, so its element is set by the time
+  // this layout effect runs, and it never changes. Without the dependency array the forwarded
+  // ref was detached and re-attached on every render, which for a callback ref that stores the
+  // element in state (as `Autocomplete` does) scheduled a synchronous update in the parent each
+  // time this component rendered.
   useImperativeHandle<HTMLInputElement | null, HTMLInputElement | null>(
     forwardedRef,
     () => ref.current,
+    [],
   )
 
   useCustomValidity(ref, customValidity)

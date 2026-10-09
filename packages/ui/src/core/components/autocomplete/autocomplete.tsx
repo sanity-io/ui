@@ -12,6 +12,7 @@ import {
   ReactNode,
   Ref,
   useCallback,
+  useDeferredValue,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -58,7 +59,17 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   /** @beta */
   listBox?: BoxProps
   loading?: boolean
+  /**
+   * Called with the selected option's value, or `''` when the value is cleared. The selection
+   * is shown right away and stays shown whether or not the parent answers with a new `value`;
+   * see `value`.
+   */
   onChange?: (value: string) => void
+  /**
+   * Called with the text typed into the input, and with `null` when the user ends the query
+   * (blur, Escape, a selection, clear). Not called when a `value` prop change drops a pending
+   * query: that change is the parent's own.
+   */
   onQueryChange?: (query: string | null) => void
   onSelect?: (value: string) => void
   /** @beta */
@@ -76,7 +87,14 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   relatedElements?: HTMLElement[]
   /** The callback function for rendering each option. */
   renderOption?: (option: Option) => React.JSX.Element
-  /** @beta */
+  /**
+   * Renders the results popover. `content` is the list of matching options, or `null` when
+   * there are none; `hidden` is `true` while there is nothing to show (no query, or `loading`
+   * without options yet). It flips to `false` one render after the list is asked for, at
+   * transition priority, or in the same render when that render already is a transition.
+   *
+   * @beta
+   */
   renderPopover?: (
     props: {
       content: React.JSX.Element | null
@@ -89,7 +107,13 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   ) => ReactNode
   renderValue?: (value: string, option?: Option) => string
   suffix?: ReactNode
-  /** The current value. */
+  /**
+   * The current value. Applied whenever it changes to a defined value, and then it wins over the
+   * component's own state: a pending query is dropped and the active option moves to it. A
+   * selection or clear the parent does not answer with a new `value` stays shown (`onChange`
+   * has been called), a `value` equal to the one shown (`''` after a clear) changes nothing,
+   * and a `value` that becomes `undefined` leaves the current value in place.
+   */
   value?: string
 }
 
@@ -172,6 +196,28 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   const {activeValue, focused, listFocused, query, value} = state
 
+  // Follow the `value` prop. Compared during render rather than in an effect, so the new value is
+  // in the first committed frame instead of one commit later.
+  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+  //
+  // The prop is applied only when it changes, and only when it differs from the value shown: a
+  // parent echoing the selection it was just told about (a store that lags `onChange`), or the
+  // `''` it was told about for a clear, must not drop a query the user has started since. `''`
+  // and `null` both mean no value (the initial state stores `''` as `null`; a clear stores `null`
+  // and reports `''`). A selection or clear the parent does not answer with a new `value` stays
+  // visible: `onChange` has been called, and the component keeps its own state until the parent
+  // sets a value again. A prop that becomes `undefined` leaves the current value in place, like
+  // a controlled `<input>` that switches to uncontrolled. The drop of a pending query here is
+  // not reported through `onQueryChange`: the parent made the change.
+  const [prevValueProp, setPrevValueProp] = useState(valueProp)
+
+  if (valueProp !== prevValueProp) {
+    setPrevValueProp(valueProp)
+    if (valueProp !== undefined && (valueProp || null) !== value) {
+      dispatch({type: 'value/change', value: valueProp})
+    }
+  }
+
   const defaultRenderOption = useCallback(
     ({value}: BaseAutocompleteOption) => (
       <Card data-as="button" padding={paddingProp} radius={2} tone="inherit">
@@ -199,8 +245,6 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   // Value refs
   const listFocusedRef = useRef(false)
-  const valueRef = useRef(value)
-  const valuePropRef = useRef(valueProp)
   const popoverMouseWithinRef = useRef(false)
 
   // Forward inputElement state to inputElementRef
@@ -218,7 +262,10 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
-  const padding = _getArrayProp(paddingProp)
+  // Memoized by hand (the compiler rebuilt this array and the two derived from it below on every
+  // render), so that `TextInput` does not re-render, and re-attach its forwarded ref, on every
+  // render of this component
+  const padding = useMemo(() => _getArrayProp(paddingProp), [paddingProp])
   const currentOption = useMemo(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
     [options, value],
@@ -229,7 +276,47 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   )
   const filteredOptionsLen = filteredOptions.length
   const activeItemId = activeValue ? `${id}-option-${activeValue}` : undefined
-  const expanded = (query !== null && loading) || (focused && query !== null)
+  // A query is in progress while the input holds one and has focus, or results are loading.
+  // The open button is disabled and hidden from assistive technology for as long as that is
+  // the case, whether or not anything matches (clicking it would only keep the current query).
+  const querying = (query !== null && loading) || (focused && query !== null)
+
+  // Something to show: matching options, or a custom `renderPopover` that is not waiting for
+  // options (it decides for itself what to show then, a "no results" message, say). Results
+  // arriving for a pending query, be it async options or a query that starts matching, are
+  // thereby the moment the list opens rather than a change inside an open list. For a
+  // `renderPopover` with options that filter client-side, a query going from no match to a
+  // match stays a change inside the open list.
+  const hasResults = filteredOptionsLen > 0 || (renderPopover !== undefined && !loading)
+  const shouldExpand = querying && hasResults
+
+  // Opening the popover is deferred: when the render that asks for the list is urgent (a
+  // keystroke, focus, new options), the list follows in a deferred render at transition
+  // priority, so that it never interrupts a pre-render in progress inside the popover's hidden
+  // `<Activity>` (it pre-renders on intent, in a transition) and never holds up the input. A
+  // render that is itself non-urgent shows the list right away. What is deferred is the number
+  // of the open cycle, not `shouldExpand`: a deferred `true` would survive an urgent close until
+  // its own deferred render commits, and a reopen before that (Escape, then a keystroke) would
+  // open urgently. Each closed → open flip gets a new number, counted here where `shouldExpand`
+  // is known (it includes the `loading` prop, which the reducer does not see).
+  const [openCycle, setOpenCycle] = useState(0)
+  const [prevShouldExpand, setPrevShouldExpand] = useState(shouldExpand)
+
+  if (shouldExpand !== prevShouldExpand) {
+    setPrevShouldExpand(shouldExpand)
+    if (shouldExpand) setOpenCycle((cycle) => cycle + 1)
+  }
+
+  const deferredOpenCycle = useDeferredValue(openCycle)
+
+  // Closing is urgent: a close also clears `query` and puts the active option back on the
+  // value, and a list still showing while that has happened would briefly show every option
+  // with the highlight moved. Hiding the `<Activity>` renders no content, so there is nothing
+  // for it to interrupt. Every dispatch stays synchronous, none goes through `startTransition`:
+  // a transition pending in the reducer would race the render-time `value` sync above and the
+  // parent's `value` would be lost (see sanity-io/ui#3138). `aria-expanded` and the popover
+  // follow `expanded`.
+  const expanded = shouldExpand && deferredOpenCycle === openCycle
 
   const handleRootBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>) => {
@@ -288,9 +375,6 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
       popoverMouseWithinRef.current = false
 
       if (onSelect) onSelect(v)
-
-      valueRef.current = v
-
       if (onChange) onChange(v)
       if (onQueryChange) onQueryChange(null)
 
@@ -403,7 +487,6 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   const handleClearButtonClick = useCallback(() => {
     dispatch({type: 'root/clear'})
-    valueRef.current = ''
     if (onChange) onChange('')
     if (onQueryChange) onQueryChange(null)
     inputElementRef.current?.focus()
@@ -413,40 +496,14 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     dispatch({type: 'input/focus'})
   }, [])
 
-  // Change the value when `value` prop changes
-  useEffect(() => {
-    // If `valueProp` changed
-    if (valueProp !== valuePropRef.current) {
-      valuePropRef.current = valueProp
-
-      if (valueProp !== undefined) {
-        dispatch({type: 'value/change', value: valueProp})
-        valueRef.current = valueProp
-      }
-
-      return
-    }
-
-    // If `valueProp` is not equal to `value`
-    if (valueProp !== valueRef.current) {
-      valueRef.current = valueProp || null
-
-      dispatch({type: 'value/change', value: valueProp || null})
-    }
-  }, [valueProp])
-
-  // Reset active item when closing
-  useEffect(() => {
-    if (!focused && valueRef.current) {
-      dispatch({type: 'root/setActiveValue', value: valueRef.current})
-    }
-  }, [focused])
-
-  // Focus the selected item
+  // Move DOM focus to the active option, when keyboard navigation put focus in the list
+  // (`listFocused`; a plain open with a selected value leaves focus in the input, however
+  // focusable the option is) and the list shows: an arrow key pressed between the render that
+  // asked for the list and the deferred one that shows it finds no visible option yet.
   useEffect(() => {
     const listElement = listBoxElementRef.current
 
-    if (!listElement) return
+    if (!expanded || !listFocused || !listElement) return
 
     const activeOption = filteredOptions.find((o) => o.value === activeValue)
 
@@ -464,7 +521,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
         focusFirstDescendant(activeItemElement)
       }
     }
-  }, [activeValue, filteredOptions])
+  }, [activeValue, expanded, filteredOptions, listFocused])
 
   const clearButton = useMemo(() => {
     if (!loading && !disabled && value) {
@@ -477,14 +534,18 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     return undefined
   }, [disabled, handleClearButtonFocus, loading, value])
 
-  const openButtonBoxPadding = padding.map((v) => {
-    if (v === 0) return 0
-    if (v === 1) return 1
-    if (v === 2) return 1
+  const openButtonBoxPadding = useMemo(
+    () =>
+      padding.map((v) => {
+        if (v === 0) return 0
+        if (v === 1) return 1
+        if (v === 2) return 1
 
-    return v - 2
-  })
-  const openButtonPadding = padding.map((v) => Math.max(v - 1, 0))
+        return v - 2
+      }),
+    [padding],
+  )
+  const openButtonPadding = useMemo(() => padding.map((v) => Math.max(v - 1, 0)), [padding])
   const openButtonProps: AutocompleteOpenButtonProps =
     typeof openButton === 'object' ? openButton : EMPTY_RECORD
 
@@ -502,10 +563,10 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   const openButtonNode = useMemo(
     () =>
       !disabled && !readOnly && openButton ? (
-        <Box aria-hidden={expanded} padding={openButtonBoxPadding}>
+        <Box aria-hidden={querying} padding={openButtonBoxPadding}>
           <Button
             aria-label="Open"
-            disabled={expanded}
+            disabled={querying}
             fontSize={fontSize}
             icon={ChevronDownIcon}
             mode="bleed"
@@ -517,13 +578,13 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
       ) : undefined,
     [
       disabled,
-      expanded,
       fontSize,
       handleOpenClick,
       openButton,
       openButtonBoxPadding,
       openButtonPadding,
       openButtonProps,
+      querying,
       readOnly,
     ],
   )
@@ -673,7 +734,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     >
       <TextInput
         {...restProps}
-        aria-activedescendant={activeItemId}
+        aria-activedescendant={expanded ? activeItemId : undefined}
         aria-autocomplete="list"
         aria-expanded={expanded}
         aria-owns={listBoxId}
