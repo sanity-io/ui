@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react'
 
+import {useLatestRef} from '../../hooks/useLatestRef'
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
 import {attachRef} from '../../utils/attachRef'
 import {MenuProps} from './menu'
@@ -214,10 +215,18 @@ export function MenuButton(props: MenuButtonProps) {
   // and Escape or an item click must return focus to it rather than to the detached node.
   const buttonRef = useRef<HTMLButtonElement | null>(null)
   const [replacements, setReplacements] = useState(0)
-  const handleButtonReplace = useCallback((node: HTMLButtonElement) => {
-    setReplacements((count) => count + 1)
-    setOriginElement((origin) => (origin === null ? null : node))
-  }, [])
+  const forwardedRefRef = useLatestRef(forwardedRef)
+  const attachedForwardedRef = useRef<React.Ref<HTMLButtonElement | null> | undefined>(undefined)
+  const handleButtonReplace = useCallback(
+    (node: HTMLButtonElement) =>
+      replaceButton(node, {
+        attachedForwardedRef,
+        forwardedRefRef,
+        setOriginElement,
+        setReplacements,
+      }),
+    [attachedForwardedRef, forwardedRefRef],
+  )
   const setButton = useButtonRefCallback(buttonRef, handleButtonReplace, popover?.referenceElement)
 
   // The forwarded ref, attached to the live element in the commit that mounts the button (a
@@ -228,7 +237,11 @@ export function MenuButton(props: MenuButtonProps) {
   // child ref it is given on every render). A node that is removed without a successor leaves
   // the forwarded ref on the detached node until this runs again, which is accepted: clearing
   // it from the ref callback's cleanup would be the hide-time update this component avoids.
-  useLayoutEffect(() => attachRef(forwardedRef, buttonRef.current), [forwardedRef, replacements])
+  useLayoutEffect(() => {
+    attachedForwardedRef.current = forwardedRef
+
+    return attachRef(forwardedRef, buttonRef.current)
+  }, [forwardedRef, replacements])
 
   const button = useMemo(
     () =>
@@ -264,9 +277,37 @@ export function MenuButton(props: MenuButtonProps) {
   )
 }
 
+interface ReplaceButtonOptions {
+  attachedForwardedRef: React.RefObject<React.Ref<HTMLButtonElement | null> | undefined>
+  forwardedRefRef: React.RefObject<React.Ref<HTMLButtonElement | null> | undefined>
+  setOriginElement: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>
+  setReplacements: React.Dispatch<React.SetStateAction<number>>
+}
+
+/**
+ * A `button` whose DOM node was replaced: the origin follows it when set (see `originElement`),
+ * and the forwarded ref is re-attached — through an update of its own, unless the forwarded ref
+ * changed in the same render, in which case the layout effect runs for that already and a second
+ * run would detach and attach the new ref once more for nothing.
+ */
+function replaceButton(
+  node: HTMLButtonElement,
+  {attachedForwardedRef, forwardedRefRef, setOriginElement, setReplacements}: ReplaceButtonOptions,
+): void {
+  if (forwardedRefRef.current === attachedForwardedRef.current) {
+    setReplacements((count) => count + 1)
+  }
+
+  setOriginElement((origin) => (origin === null ? null : node))
+}
+
 interface ButtonRefOptions {
   buttonRef: React.RefObject<HTMLButtonElement | null>
-  /** A node to take for no attachment at all: the popover's `referenceElement`, when it has one */
+  /**
+   * A node to take for no attachment at all: the popover's `referenceElement`, when it has one.
+   * Unless it is the button itself (a consumer may point the popover at the button it gets from
+   * the forwarded ref), which is told from a foreign node by being the node last attached.
+   */
   ignoredNode: HTMLElement | null | undefined
   lastNodeRef: React.RefObject<HTMLButtonElement | null>
   onReplace: (node: HTMLButtonElement) => void
@@ -279,9 +320,9 @@ interface ButtonRefOptions {
  * - The same node attaching again is never a replacement: the node last attached is remembered
  *   across its detach (an `<Activity>` showing the button again, a parent re-attaching the ref).
  * - A `null` node is ignored, since detaching only ever arrives through the returned cleanup, and
- *   so is `ignoredNode`, which is not the button. (Today both come from `Popover`, which forwards
- *   Floating UI's reference element through a handle of its own on every render: `null` while
- *   disabled, the `referenceElement` prop when there is one, the button otherwise.)
+ *   so is `ignoredNode` unless it is the button itself. (Today both come from `Popover`, which
+ *   forwards Floating UI's reference element through a handle of its own on every render: `null`
+ *   while disabled, the `referenceElement` prop when there is one, the button otherwise.)
  * - A cleanup clears only the node its own attachment set.
  *
  * A hook of its own, with the ref accesses in the module-scope function below, because the React
@@ -307,7 +348,9 @@ function attachButton(
   node: HTMLButtonElement | null,
   {buttonRef, ignoredNode, lastNodeRef, onReplace}: ButtonRefOptions,
 ): () => void {
-  if (node === null || node === ignoredNode) return () => undefined
+  if (node === null || (node === ignoredNode && node !== lastNodeRef.current)) {
+    return () => undefined
+  }
 
   buttonRef.current = node
 

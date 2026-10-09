@@ -6,7 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {Profiler, useLayoutEffect} from 'react'
+import {Activity, Profiler, useLayoutEffect} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -324,6 +324,87 @@ describe('MenuButton', () => {
       } finally {
         referenceElement.remove()
       }
+    })
+
+    it('attaches a forwarded ref that changes in the render that replaces the button exactly once', () => {
+      const first = vi.fn()
+      const second = vi.fn()
+      const renderMenuButton = (key: string, ref: (element: HTMLButtonElement | null) => void) => (
+        <MenuButton
+          button={<Button key={key} text="Open menu" />}
+          id="menu-button"
+          menu={
+            <Menu>
+              <MenuItem text="Option 1" />
+            </Menu>
+          }
+          ref={ref}
+        />
+      )
+
+      const {rerender} = render(renderMenuButton('a', first), {strict: false})
+
+      const button = getButton()
+
+      expect(first.mock.calls).toEqual([[button]])
+
+      // The forwarded-ref effect runs for the changed ref already, so the replacement schedules
+      // no second run that would detach and attach the new ref once more
+      rerender(renderMenuButton('b', second))
+
+      const replacement = getButton()
+
+      expect(replacement).not.toBe(button)
+      expect(first.mock.calls).toEqual([[button], [null]])
+      expect(second.mock.calls).toEqual([[replacement]])
+    })
+
+    it('holds the button when the popover’s `referenceElement` is the button itself', () => {
+      const seen: (HTMLButtonElement | null)[] = []
+      const renderMenuButton = (
+        referenceElement: HTMLElement | undefined,
+        shown: boolean,
+        render: number,
+      ) => (
+        <Activity mode={shown ? 'visible' : 'hidden'}>
+          <MenuButton
+            button={<Button text="Open menu" />}
+            id="menu-button"
+            menu={
+              <Menu>
+                <MenuItem text="Option 1" />
+              </Menu>
+            }
+            popover={referenceElement ? {referenceElement} : undefined}
+            ref={(element: HTMLButtonElement | null) => {
+              seen.push(element)
+              void render
+            }}
+          />
+        </Activity>
+      )
+
+      const {rerender} = render(renderMenuButton(undefined, true, 0), {strict: false})
+
+      const button = getButton()
+
+      expect(seen).toEqual([button])
+
+      // A consumer may point the popover at the button it got from the forwarded ref: the button
+      // is then the node to ignore and the button at once, and stays the button
+      rerender(renderMenuButton(button, true, 1))
+
+      expect(getButton()).toBe(button)
+      expect(seen).toEqual([button, null, button])
+
+      // Hidden and shown again, the ref is detached and attached to the button, not to `null`
+      rerender(renderMenuButton(button, false, 2))
+      rerender(renderMenuButton(button, true, 3))
+
+      expect(seen.at(-1)).toBe(button)
+      expect(seen.filter((element) => element === null)).toHaveLength(
+        seen.filter((element) => element === button).length - 1,
+      )
     })
 
     it('keeps the forwarded ref on the button when a `referenceElement` is added after mount', () => {
