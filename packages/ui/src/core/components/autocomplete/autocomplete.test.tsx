@@ -677,5 +677,34 @@ describe('components/autocomplete', () => {
       // Wraps around from "baz"
       expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-foo')
     })
+
+    it('ends keyboard navigation in the list when the list closes', async () => {
+      const user = userEvent.setup()
+
+      renderAutocomplete({filterOption: SHOW_ALL, openButton: true, value: 'foo'})
+
+      await user.type(getInput(), 'b')
+      await user.keyboard('{ArrowDown}')
+
+      // The arrow key marked the list as the keyboard target (the active option is the one
+      // tabbable element in it) while DOM focus stayed in the input: jsdom cannot focus into the
+      // still-hidden popover, as a browser cannot before the deferred render shows the list
+      expect(getInput()).toHaveFocus()
+      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-foo')
+      expect(getOption('foo').firstElementChild).toHaveAttribute('tabindex', '0')
+
+      // Escape focuses the input, which is focused already, so no focus event resets the mark
+      await user.keyboard('{Escape}')
+
+      expect(getInput()).toHaveAttribute('aria-expanded', 'false')
+
+      await user.click(screen.getByRole('button', {name: 'Open'}))
+      await waitFor(() => expect(getInput()).toHaveAttribute('aria-expanded', 'true'))
+
+      // An ordinary open: the value is the active option, and nothing in the list is tabbable
+      // (the focus effect would otherwise move focus to it)
+      expect(getInput()).toHaveAttribute('aria-activedescendant', 'ac-option-foo')
+      expect(getOption('foo').firstElementChild).toHaveAttribute('tabindex', '-1')
+    })
   })
 })

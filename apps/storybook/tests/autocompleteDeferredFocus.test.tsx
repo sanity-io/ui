@@ -16,6 +16,50 @@ function activeOptionId(): string | undefined {
   return document.activeElement?.closest('[role="option"]')?.id
 }
 
+/**
+ * Waits until the option is visible: the popover positions itself in a commit after the one that
+ * opened the list, and React runs the effects of a commit before it renders the next one, so the
+ * focus effect of the open has run by then, whichever way it went.
+ */
+async function expectOptionShown(screen: Awaited<ReturnType<typeof render>>, value: string) {
+  const option = screen.getByRole('option', {name: value})
+
+  await expect.poll(() => option.element().checkVisibility(), POLL).toBe(true)
+}
+
+/**
+ * Renders an autocomplete whose options suspend until the returned `resolveContent` is called,
+ * which holds the render that would show the list. `tabIndex` comes from the autocomplete (0 for
+ * the active option while the list has keyboard focus), which is what makes an option focusable.
+ */
+async function renderWithHeldOptions(props: {openButton?: boolean; openOnFocus?: boolean}) {
+  let resolveContent!: () => void
+  const content = new Promise<void>((resolve) => {
+    resolveContent = resolve
+  })
+
+  function SuspendingOption(suspendingProps: {tabIndex?: number; value: string}) {
+    use(content)
+
+    return <div tabIndex={suspendingProps.tabIndex}>{suspendingProps.value}</div>
+  }
+
+  const screen = await render(
+    <ThemeProvider theme={theme}>
+      <Autocomplete
+        filterOption={() => true}
+        id="ac"
+        options={OPTIONS}
+        renderOption={(option) => <SuspendingOption value={option.value} />}
+        value="foo"
+        {...props}
+      />
+    </ThemeProvider>,
+  )
+
+  return {input: screen.getByRole('combobox'), resolveContent, screen}
+}
+
 // The results list shows one render after it is asked for (`useDeferredValue` in autocomplete.tsx).
 // The effect that moves DOM focus to the active option used to react to the active option and
 // the options only, so an arrow key pressed before the list showed found nothing it could focus,
@@ -23,32 +67,7 @@ function activeOptionId(): string | undefined {
 // stays hidden for good. Here the opening render is held on a promise the options suspend on.
 describe('autocomplete arrow key while the list is still opening', () => {
   test('moves focus to the active option once the list shows', async () => {
-    let resolveContent!: () => void
-    const content = new Promise<void>((resolve) => {
-      resolveContent = resolve
-    })
-
-    // Suspends until `resolveContent()`. `tabIndex` comes from the autocomplete (0 for the active
-    // option while the list has keyboard focus), which is what makes the option focusable.
-    function SuspendingOption(props: {tabIndex?: number; value: string}) {
-      use(content)
-
-      return <div tabIndex={props.tabIndex}>{props.value}</div>
-    }
-
-    const screen = await render(
-      <ThemeProvider theme={theme}>
-        <Autocomplete
-          filterOption={() => true}
-          id="ac"
-          openOnFocus
-          options={OPTIONS}
-          renderOption={(option) => <SuspendingOption value={option.value} />}
-          value="foo"
-        />
-      </ThemeProvider>,
-    )
-    const input = screen.getByRole('combobox')
+    const {input, resolveContent} = await renderWithHeldOptions({openOnFocus: true})
 
     // Focus asks for the list; the render that would show it suspends on the options
     await userEvent.click(input)
@@ -65,6 +84,34 @@ describe('autocomplete arrow key while the list is still opening', () => {
     await expect.poll(() => input.element().getAttribute('aria-expanded'), POLL).toBe('true')
     await expect.poll(activeOptionId, POLL).toBe('ac-option-bar')
     expect(input.element().getAttribute('aria-activedescendant')).toBe('ac-option-bar')
+  })
+
+  // Escape while the list is still opening focuses the input, which is focused already, so no
+  // focus event ends the keyboard navigation the arrow key started; closing has to end it, or the
+  // next ordinary open would move focus to the active option.
+  test('leaves focus in the input when Escape closed the list before it showed', async () => {
+    const {input, resolveContent, screen} = await renderWithHeldOptions({
+      openButton: true,
+      openOnFocus: true,
+    })
+
+    await userEvent.click(input)
+    await userEvent.keyboard('{ArrowDown}')
+    await expect.poll(() => input.element().getAttribute('aria-expanded'), POLL).toBe('false')
+    expect(activeOptionId()).toBeUndefined()
+
+    await userEvent.keyboard('{Escape}')
+    expect(document.activeElement).toBe(input.element())
+
+    resolveContent()
+
+    await userEvent.click(screen.getByRole('button', {name: 'Open'}))
+    await expectOptionShown(screen, 'foo')
+
+    expect(input.element().getAttribute('aria-expanded')).toBe('true')
+    expect(input.element().getAttribute('aria-activedescendant')).toBe('ac-option-foo')
+    expect(activeOptionId()).toBeUndefined()
+    expect(document.activeElement).toBe(input.element())
   })
 
   // The same effect must not move focus for an open that keyboard navigation had no part in. A
@@ -86,9 +133,10 @@ describe('autocomplete arrow key while the list is still opening', () => {
     const input = screen.getByRole('combobox')
 
     await userEvent.click(screen.getByRole('button', {name: 'Open'}))
+    await expectOptionShown(screen, 'foo')
 
-    await expect.poll(() => input.element().getAttribute('aria-expanded'), POLL).toBe('true')
-    await expect.poll(activeOptionId, POLL).toBe(undefined)
+    expect(input.element().getAttribute('aria-expanded')).toBe('true')
+    expect(activeOptionId()).toBeUndefined()
     expect(document.activeElement).toBe(input.element())
 
     // Keyboard navigation does move focus into the list

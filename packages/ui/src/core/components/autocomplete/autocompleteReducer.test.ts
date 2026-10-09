@@ -41,6 +41,21 @@ describe('autocompleteReducer', () => {
     },
   )
 
+  // An arrow key pressed before the list showed set `listFocused` with DOM focus still in the
+  // input, where no focus event resets it
+  it.each(['root/blur', 'root/escape'] as const)(
+    'closes on %s and ends keyboard navigation in the list',
+    (type) => {
+      expect(reduce({type}, {...state, listFocused: true})).toEqual({
+        ...state,
+        activeValue: 'selected',
+        focused: false,
+        listFocused: false,
+        query: null,
+      })
+    },
+  )
+
   // `value` is `''` after a `value/change` with the prop's empty string; like `null` it counts as
   // no value, so the active option stays where it was
   it.each([
