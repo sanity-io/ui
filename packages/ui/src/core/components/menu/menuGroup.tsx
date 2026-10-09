@@ -100,11 +100,12 @@ const MenuGroupComponent = function MenuGroup(
   // It is recorded in `activation`, which only this render-phase update writes, rather than by
   // resetting `openedIn`, which the handlers below write in transitions. React applies a
   // render-phase update on top of the state of the render in progress and does not rebase it
-  // over a lower-priority update that this render skipped; a reset of `openedIn` would be lost
-  // while an opening transition is still pending (its render suspended on the child menu's
-  // content, say), and that open would then apply after the item stopped being active. The
-  // priority of the close is that of the activation, so unlike the handlers below this update
-  // cannot be made a transition.
+  // over a lower-priority update that this render skipped (`rerenderReducer` in
+  // packages/react-reconciler/src/ReactFiberHooks.js persists the result to the base state only
+  // while the base queue is empty); a reset of `openedIn` would be lost while an opening
+  // transition is still pending (its render suspended on the child menu's content, say), and that
+  // open would then apply after the item stopped being active. The priority of the close is that
+  // of the activation, so unlike the handlers below this update cannot be made a transition.
   // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
   const [prevActive, setPrevActive] = useState(active)
 
@@ -114,27 +115,27 @@ const MenuGroupComponent = function MenuGroup(
   }
 
   const childMenuOpen = active && openedIn === activation
-  // Pressed while the child menu is open and the pointer (or, after `ArrowRight`, the focus) is
-  // within it. Derived from `childMenuOpen` so that `withinMenu` needs no reset when the child
+  // Pressed while the child menu is open and the pointer is within it, or it was opened with
+  // `ArrowRight`. Derived from `childMenuOpen` so that `withinMenu` needs no reset when the child
   // menu closes; every path that opens it sets `withinMenu` for that session.
   const pressed = childMenuOpen && withinMenu
 
   // Opening and closing the child menu are transitions, so that they do not interrupt a
   // pre-render of the closed popover (the hidden `<Activity>` in `Popover`, rendered on intent in
-  // a transition) and yield to more urgent input. The state that is set together with `openedIn`
-  // (`withinMenu` for the pressed state, `shouldFocus` for the child menu's initial focus) goes
-  // into the same transition so that it commits together with it, as it did when the three were
-  // set synchronously: `shouldFocus` in particular is reset by an animation frame after its
-  // commit, which must not come before the commit that reveals the child menu. The controller's
-  // activation of the item (`onItemMouseEnter`) and the consumer callbacks stay urgent.
+  // a transition) and yield to more urgent input. `shouldFocus`, the child menu's initial focus,
+  // goes into the same transition so that it commits together with the open, as it did when the
+  // two were set synchronously: it is reset by an animation frame after its commit, which must
+  // not come before the commit that reveals the child menu. Everything else stays urgent: the
+  // controller's activation of the item (`onItemMouseEnter`, which every opener performs, so an
+  // item that was not the active one becomes it rather than recording an open for its next
+  // activation), the consumer callbacks, and `withinMenu`, which tracks the pointer and is read
+  // only once the child menu is open.
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       onItemMouseEnter(event)
+      setWithinMenu(false)
 
-      startTransition(() => {
-        setWithinMenu(false)
-        setOpenedIn(activation)
-      })
+      startTransition(() => setOpenedIn(activation))
     },
     [activation, onItemMouseEnter],
   )
@@ -146,6 +147,9 @@ const MenuGroupComponent = function MenuGroup(
 
         startTransition(() => setOpenedIn(null))
 
+        // Deliberately not tied to the commit of the close: focus returns to the item on the next
+        // frame whether or not the child menu is still displayed by then. Nothing reacts to focus
+        // moving within the menu, so the order of the two is of no consequence.
         requestAnimationFrame(() => {
           rootElement?.focus()
         })
@@ -157,14 +161,15 @@ const MenuGroupComponent = function MenuGroup(
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       onClick?.(event)
+      onItemMouseEnter(event)
+      setWithinMenu(false)
 
       startTransition(() => {
-        setWithinMenu(false)
         setShouldFocus('first')
         setOpenedIn(activation)
       })
     },
-    [activation, onClick],
+    [activation, onClick, onItemMouseEnter],
   )
 
   const handleChildItemClick = useCallback(() => {
@@ -212,16 +217,18 @@ const MenuGroupComponent = function MenuGroup(
       }
 
       if (event.key === 'ArrowRight') {
+        onItemMouseEnter(event)
+        setWithinMenu(true)
+
         startTransition(() => {
           setShouldFocus('first')
           setOpenedIn(activation)
-          setWithinMenu(true)
         })
 
         return
       }
     },
-    [activation],
+    [activation, onItemMouseEnter],
   )
 
   return (
@@ -232,7 +239,7 @@ const MenuGroupComponent = function MenuGroup(
         forwardedAs={as}
         {...restProps}
         aria-pressed={as === 'button' ? pressed : undefined}
-        data-pressed={as !== 'button' ? pressed : undefined}
+        data-pressed={as !== 'button' && pressed ? '' : undefined}
         data-selected={!pressed && active ? '' : undefined}
         $radius={_getArrayProp(radius)}
         $tone={tone}

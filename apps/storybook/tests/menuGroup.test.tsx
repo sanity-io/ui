@@ -32,8 +32,9 @@ async function expectChildMenuOpen() {
   await expect.element(page.getByRole('menuitem', {name: 'Email link'})).toBeVisible()
 }
 
+/** Closed: hidden if it has rendered (the pre-render on intent, or an earlier open), else absent */
 async function expectChildMenuClosed() {
-  await expect.poll(() => childMenuPopover()?.style.display).toBe('none')
+  await expect.poll(() => childMenuPopover()?.style.display ?? 'none').toBe('none')
 }
 
 /** Pressed: the child menu is open and the pointer or focus is within it */
@@ -93,7 +94,7 @@ describe('Components/MenuGroup', () => {
     await userEvent.keyboard('{ArrowDown}')
     await expect.poll(() => document.activeElement).toBe(group())
     await expectSelected()
-    await expect.poll(() => childMenuPopover()?.style.display ?? 'none').toBe('none')
+    await expectChildMenuClosed()
 
     await userEvent.keyboard('{ArrowRight}')
     await expectChildMenuOpen()
@@ -161,14 +162,17 @@ describe('Components/MenuGroup', () => {
     await expectIdle()
     await expect.poll(() => menuItem('Search').getAttribute('data-selected')).toBe('')
 
+    // Once the content resolves, the pre-render that the pointer's intent started commits the card
+    // hidden: the popover is in the DOM, not displayed
     resolveContent()
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await expect.poll(() => childMenuPopover()).not.toBeNull()
+    expect(childMenuPopover()!.style.display).toBe('none')
 
     // The sibling has focus; `ArrowDown` makes the group item active and focused again
     await userEvent.keyboard('{ArrowDown}')
     await expect.poll(() => document.activeElement).toBe(group())
-    await new Promise((resolve) => setTimeout(resolve, 100))
-    expect(childMenuPopover()?.style.display ?? 'none').toBe('none')
+    // The activation is a synchronous render, committed before the focus it caused moved
+    expect(childMenuPopover()!.style.display).toBe('none')
     await expectSelected()
   })
 })

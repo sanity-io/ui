@@ -42,7 +42,7 @@ vi.mock('react', async (importOriginal) => {
   }
 })
 
-function renderMenu(groupProps: {as?: 'div'} = {}) {
+function renderMenu(groupProps: {as?: 'a' | 'div'} = {}) {
   return render(
     <LayerProvider>
       <Menu>
@@ -144,16 +144,29 @@ describe('MenuGroup', () => {
     const group = getGroup()
 
     expect(group).not.toHaveAttribute('aria-pressed')
-    expect(group).toHaveAttribute('data-pressed', 'false')
+    // Present only while pressed: `Selectable` styles `[data-pressed]` by presence, so a
+    // serialised `"false"` would paint the item pressed
+    expect(group).not.toHaveAttribute('data-pressed')
 
     fireEvent.mouseEnter(group)
     fireEvent.mouseEnter(getChildMenu())
 
-    expect(group).toHaveAttribute('data-pressed', 'true')
+    expect(group).toHaveAttribute('data-pressed', '')
     expect(group).not.toHaveAttribute('data-selected')
+
+    fireEvent.mouseEnter(group)
+
+    expect(group).not.toHaveAttribute('data-pressed')
+    expect(group).toHaveAttribute('data-selected', '')
   })
 
-  it('closes the child menu when a sibling item becomes active', () => {
+  it('does not match the pressed selector while idle when rendered as a link', () => {
+    renderMenu({as: 'a'})
+
+    expect(getGroup().matches('[data-as="a"][data-pressed]')).toBe(false)
+  })
+
+  it('closes the child menu when a sibling item becomes active, and reopens it when hovered again', () => {
     renderMenu()
 
     const group = getGroup()
@@ -168,6 +181,13 @@ describe('MenuGroup', () => {
     expectChildMenuClosed()
     expectIdle(group)
     expect(sibling).toHaveAttribute('data-selected', '')
+
+    // The most common pointer flow, group → sibling → group: the open has to record the
+    // activation that began with this hover, not the one the sibling ended
+    fireEvent.mouseEnter(group)
+
+    expectChildMenuOpen()
+    expectSelected(group)
   })
 
   it('does not reopen a closed child menu when the item becomes active again from the keyboard', async () => {
@@ -230,6 +250,9 @@ describe('MenuGroup', () => {
     await waitFor(() => expect(group).toHaveFocus())
   })
 
+  // A click opens the child menu selected, not pressed, as it always has (only the pointer in the
+  // child menu and `ArrowRight` press the item). This guards the `withinMenu` left behind by the
+  // `ArrowRight` open; whether a click should press the item too is a separate decision.
   it('is not pressed when the child menu reopens by click after it was opened with `ArrowRight`', async () => {
     renderMenu()
 
@@ -253,6 +276,57 @@ describe('MenuGroup', () => {
     expectChildMenuOpen()
     expectSelected(group)
     await waitFor(() => expect(getItem('Email link')).toHaveFocus())
+  })
+
+  // A click or `ArrowRight` that is not preceded by an activation (a programmatic `click()`, an
+  // activation dispatched by assistive technology, focus given from outside the menu) makes the
+  // item the menu's active item and opens the child menu right away. It must not record an open
+  // for an item that is not active, which would show the child menu on the next activation.
+  describe('opened while not the active item', () => {
+    it('activates the item and opens the child menu on click', async () => {
+      renderMenu()
+
+      const group = getGroup()
+
+      fireEvent.click(group)
+
+      expectChildMenuOpen()
+      expectSelected(group)
+      await waitFor(() => expect(getItem('Email link')).toHaveFocus())
+    })
+
+    it('activates the item and opens the child menu pressed on `ArrowRight`', async () => {
+      renderMenu()
+
+      const group = getGroup()
+
+      act(() => group.focus())
+      fireEvent.keyDown(group, {key: 'ArrowRight'})
+
+      expectChildMenuOpen()
+      expectPressed(group)
+      await waitFor(() => expect(getItem('Email link')).toHaveFocus())
+    })
+
+    it('does not show the child menu later, when the keyboard passes over the item', async () => {
+      renderMenu()
+
+      const group = getGroup()
+      const menu = getMenu()
+
+      fireEvent.click(group)
+      expectChildMenuOpen()
+
+      // `Expand`, `Search`, then back onto the group
+      fireEvent.keyDown(menu, {key: 'ArrowDown'})
+      expectChildMenuClosed()
+      fireEvent.keyDown(menu, {key: 'ArrowDown'})
+      fireEvent.keyDown(menu, {key: 'ArrowDown'})
+      await waitFor(() => expect(group).toHaveFocus())
+
+      expectSelected(group)
+      expectChildMenuClosed()
+    })
   })
 
   it('closes the child menu when one of its items is clicked', () => {
@@ -368,7 +442,11 @@ describe('MenuGroup', () => {
 
   // Opening and closing the child menu happen in `startTransition`. The spy keeps the callbacks
   // instead of running them, so whatever changes before `flushTransitions()` was set outside the
-  // transition, and whatever changes when it runs was set inside it.
+  // transition, and whatever changes when it runs was set inside it. The spy is graph-wide (the
+  // `react` module is mocked for every module in this file's graph), so the callbacks of other
+  // components land in the same array: `Popover` pre-renders its closed content in a transition
+  // when the reference element gains focus, which the controller's focus does. The assertions
+  // therefore read the state before and after the flush, never how many callbacks were held.
   describe('transitions', () => {
     let transitions: Array<() => void>
 
@@ -387,7 +465,6 @@ describe('MenuGroup', () => {
     function flushTransitions() {
       const pending = transitions.splice(0)
 
-      expect(pending.length).toBeGreaterThan(0)
       act(() => {
         for (const callback of pending) callback()
       })
@@ -451,7 +528,7 @@ describe('MenuGroup', () => {
       await waitFor(() => expect(getItem('Email link')).toHaveFocus())
     })
 
-    it('opens on `ArrowRight` in a transition, together with the pressed state and the focus request', async () => {
+    it('opens on `ArrowRight` in a transition, together with the focus request, and is pressed once open', async () => {
       renderMenu()
 
       const group = getGroup()
@@ -522,11 +599,16 @@ describe('MenuGroup', () => {
 
       fireEvent.mouseEnter(getItem('Expand'))
 
-      // The reset of `open` happens during render, at the priority of the activation that caused
-      // it, so there is nothing to flush
+      // The end of the activation is recorded during render, at the priority of the activation
+      // that caused it: the child menu is closed before anything is flushed, and flushing changes
+      // nothing
       expectChildMenuClosed()
       expectIdle(group)
-      expect(transitions).toHaveLength(0)
+
+      flushTransitions()
+
+      expectChildMenuClosed()
+      expectIdle(group)
     })
   })
 })

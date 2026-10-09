@@ -8,7 +8,7 @@ import {_getFocusableElements, _sortElements} from './helpers'
 export interface MenuController {
   activeElement: HTMLElement | null
   activeIndex: number
-  handleItemMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
+  handleItemMouseEnter: (event: React.SyntheticEvent<HTMLElement>) => void
   handleItemMouseLeave: () => void
   handleKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void
   mount: (element: HTMLElement | null, selected?: boolean) => () => void
@@ -169,7 +169,7 @@ export function useMenuController(props: {
   )
 
   const handleItemMouseEnter = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
+    (event: React.SyntheticEvent<HTMLElement>) => {
       const element = event.currentTarget
       const currentIndex = elementsRef.current.indexOf(element)
 
