@@ -104,6 +104,18 @@ describe('revealing a MenuButton with a <ViewTransition>', () => {
     expect(button('Open').checkVisibility()).toBe(true)
     expect(immediateUpdaters()).not.toContain('MenuButton')
 
+    // Opening the menu mounts it, and `Menu` registers its element with `MenuButton` from a ref
+    // callback: that registration used to be a second Immediate-priority `MenuButton` commit,
+    // right after the one the click itself schedules (the only one allowed here; it becomes a
+    // transition once the open state is set in one).
+    commits.length = 0
+    button('Open').click()
+    await expect.poll(() => document.querySelector('[role="menu"]')?.checkVisibility()).toBe(true)
+
+    expect(immediateUpdaters().filter((name) => name === 'MenuButton').length).toBeLessThanOrEqual(
+      1,
+    )
+
     commits.length = 0
     button('Hide').click()
     await waitForTransitionToFinish(transitions, 1)
