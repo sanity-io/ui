@@ -75,9 +75,12 @@ export function MenuButton(props: MenuButtonProps) {
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   // The button that opened the menu, set by the handlers that open it, so it is set whenever
   // `open` is: the menu's `Tab` handling returns focus to it, and so does closing with Escape or
-  // an item click. Nothing in this component sets state from a ref callback (the button element
-  // and the menu elements live in refs, see `useButtonRefCallback` and `useMenuElements`); the
-  // changeset and `apps/storybook/tests/menuButtonViewTransition.test.tsx` have the why.
+  // an item click. No ref callback in this component sets state when the button mounts, unmounts,
+  // or is hidden and shown by an `<Activity>`, nor when the menu registers its elements (the
+  // button element and the menu elements live in refs, see `useButtonRefCallback` and
+  // `useMenuElements`); the one update a ref callback schedules is for a `button` whose DOM node
+  // is replaced (`replaceButton`). The changeset and
+  // `apps/storybook/tests/menuButtonViewTransition.test.tsx` have the why.
   const [originElement, setOriginElement] = useState<HTMLButtonElement | null>(null)
   const menuElements = useMenuElements()
   const openRef = useRef<boolean>(open)
