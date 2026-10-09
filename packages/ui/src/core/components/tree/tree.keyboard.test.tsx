@@ -286,6 +286,7 @@ describe('components/tree tab stop', () => {
           <TreeItem data-testid="oranges" text="Oranges" />
           <TreeItem data-testid="apples" hidden selected text="Apples" />
           <TreeItem data-testid="pears" selected style={{display: 'none'}} text="Pears" />
+          <TreeItem data-testid="plums" inert selected text="Plums" />
         </Tree>
       </>,
     )
@@ -297,6 +298,7 @@ describe('components/tree tab stop', () => {
     expect(tree).toHaveAttribute('tabindex', '0')
     expect(screen.getByTestId('apples')).toHaveAttribute('tabindex', '-1')
     expect(screen.getByTestId('pears')).toHaveAttribute('tabindex', '-1')
+    expect(screen.getByTestId('plums')).toHaveAttribute('tabindex', '-1')
 
     screen.getByTestId('before').focus()
     await user.tab()
@@ -700,6 +702,34 @@ describe('components/tree keyboard navigation', () => {
 
     await user.keyboard('{ArrowUp}')
     expect(focusedItem()).toBe('intro')
+  })
+
+  it('stops at an item whose focus handler redirected focus', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <>
+        <Tree aria-label="Fruit">
+          <TreeItem data-testid="oranges" text="Oranges" />
+          <TreeItem
+            data-testid="apples"
+            onFocus={() => screen.getByTestId('rename').focus()}
+            text="Apples"
+          />
+          <TreeItem data-testid="pears" text="Pears" />
+        </Tree>
+        <input data-testid="rename" />
+      </>,
+    )
+
+    await user.click(screen.getByTestId('oranges'))
+    expect(focusedItem()).toBe('oranges')
+
+    // Focus moved, but to where the consumer sent it: not a failed attempt to try again on the
+    // next item
+    await user.keyboard('{ArrowDown}')
+    expect(screen.getByTestId('rename')).toHaveFocus()
+    expect(screen.getByTestId('pears')).not.toHaveFocus()
   })
 
   it('keeps navigating from a link item that received focus directly', async () => {

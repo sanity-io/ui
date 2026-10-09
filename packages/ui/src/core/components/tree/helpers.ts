@@ -108,12 +108,12 @@ function _getItemFocusTarget(el: HTMLElement): HTMLElement | null {
 
 /**
  * Whether an item can be made the tab stop without being focused first: it has a node that takes
- * focus, and nothing between that node and the tree element hides it — except the tree's own
- * collapsed groups, which are state the render-time derivation accounts for (`_isItemKeyVisible`),
- * so that the item becomes the tab stop when its ancestor expands. Anything else (`hidden`,
- * `display: none`, `visibility: hidden` from the consumer) would put the tab stop on a node that
- * sequential focus navigation skips and take the tree out of the tab order. Runs at effect time,
- * for an item mounted as `selected`.
+ * focus, and nothing between that node and the tree element hides or inerts it — except the
+ * tree's own collapsed groups, which are state the render-time derivation accounts for
+ * (`_isItemKeyVisible`), so that the item becomes the tab stop when its ancestor expands.
+ * Anything else (`hidden`, `display: none`, `visibility: hidden`, `inert` from the consumer)
+ * would put the tab stop on a node that sequential focus navigation skips and take the tree out
+ * of the tab order. Runs at effect time, for an item mounted as `selected`.
  */
 export function _isItemFocusable(el: HTMLElement, treeElement: HTMLElement | null): boolean {
   const target = _getItemFocusTarget(el)
@@ -129,6 +129,8 @@ export function _isItemFocusable(el: HTMLElement, treeElement: HTMLElement | nul
     node && node !== treeElement;
     node = node.parentElement
   ) {
+    if (node.hasAttribute('inert')) return false
+
     if (node.getAttribute('data-ui') === 'TreeGroup') continue
 
     const {display, visibility} = view.getComputedStyle(node)
@@ -140,27 +142,28 @@ export function _isItemFocusable(el: HTMLElement, treeElement: HTMLElement | nul
 }
 
 /**
- * Focuses the node of an item that takes focus and returns it.
- */
-function _focusItemElement(el: HTMLElement): HTMLElement | null {
-  const target = _getItemFocusTarget(el)
-
-  target?.focus()
-
-  return target
-}
-
-/**
  * Focuses the first of `candidates` that takes focus and returns it. `focus()` fails silently on
  * an item that cannot take focus right now (hidden by the consumer, a `linkAs` without a focusable
  * element), so each candidate is tried in turn and checked against the active element — exactly,
- * since focus that stays on a descendant item does not make its ancestor the focused one.
+ * since focus that stays on a descendant item does not make its ancestor the focused one. Focus
+ * that moved somewhere else entirely was redirected by a focus handler of the consumer, and that
+ * ends the search rather than being overridden by the next candidate.
  */
 export function _focusFirstItemElement(candidates: HTMLElement[]): HTMLElement | null {
   for (const el of candidates) {
-    const target = _focusItemElement(el)
+    const target = _getItemFocusTarget(el)
 
-    if (target && _getActiveElement(el) === target) return el
+    if (!target) continue
+
+    const before = _getActiveElement(el)
+
+    target.focus()
+
+    const after = _getActiveElement(el)
+
+    if (after === target) return el
+
+    if (after !== before) return null
   }
 
   return null
