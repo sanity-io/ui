@@ -57,7 +57,7 @@ export function size(options: SizeOptions): Middleware {
       // IMPORTANT – APPLY ELEMENT STYLES HERE
       // Elements need to be resized BEFORE the `platform.getDimensions` call below
       if (matchReferenceWidth) {
-        elements.floating.style.width = `${reference.width - margins[1] - margins[3]}px`
+        elements.floating.style.width = px(reference.width - margins[1] - margins[3])
       }
 
       // The room within the boundary is only measured when it is applied: `detectOverflow` walks
@@ -97,9 +97,10 @@ export function size(options: SizeOptions): Middleware {
         const availableWidth = maxWidth - margins[1] - margins[3]
         const availableHeight = maxHeight - margins[0] - margins[2]
 
-        elements.floating.style.maxWidth = `${Math.min(availableWidth, maxWidthRef.current ?? Infinity)}px`
-
-        elements.floating.style.maxHeight = `${availableHeight}px`
+        elements.floating.style.maxWidth = px(
+          Math.min(availableWidth, maxWidthRef.current ?? Infinity),
+        )
+        elements.floating.style.maxHeight = px(availableHeight)
       }
 
       const nextDimensions = await platform.getDimensions(elements.floating)
@@ -114,4 +115,13 @@ export function size(options: SizeOptions): Middleware {
       return {}
     },
   }
+}
+
+/**
+ * A CSS length for a computed size, never negative: a negative length is invalid CSS, which the
+ * CSSOM ignores, leaving the previous value in place — and the margins can exceed the reference
+ * width, as the padding can exceed the room within a narrow boundary
+ */
+function px(length: number): string {
+  return `${Math.max(0, length)}px`
 }

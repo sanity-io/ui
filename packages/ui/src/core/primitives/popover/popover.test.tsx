@@ -990,6 +990,44 @@ describe('Popover', () => {
       expect(error).not.toHaveBeenCalled()
     })
 
+    it('renders a cap of zero for a boundary narrower than its padding, rather than a negative one', async () => {
+      // A negative length is invalid CSS, which the CSSOM ignores: the previous cap would stay
+      const {rerender} = render(<Example boundaryWidth={300} />)
+      const boundary = screen.getByTestId('boundary')
+
+      rerender(<Example boundaryWidth={300} open />)
+      await settle()
+
+      expect(cardMaxWidth()).toBe('292px')
+
+      act(() => observersOf(boundary)[0].resize(boundary, 6, 100))
+
+      expect(cardMaxWidth()).toBe('0px')
+    })
+
+    it('has the `size` middleware write sizes of zero, never negative ones', async () => {
+      // The padding uses up the room within a 6px wide boundary (the cap from the provider's
+      // 300px wide boundary is `292`, so the room is what is written), and horizontal margins of
+      // 60px each exceed the 100px wide reference
+      render(
+        <Example
+          __unstable_margins={[0, 60, 0, 60]}
+          boundaryClientWidth={6}
+          boundaryWidth={300}
+          constrainSize
+          matchReferenceWidth
+          open
+        />,
+      )
+      await settle()
+
+      const card = cardElement()!
+
+      expect(card.style.width).toBe('0px')
+      expect(card.style.maxWidth).toBe('0px')
+      expect(card.style.maxHeight).toBe('72px')
+    })
+
     it('tells Floating UI about changed margins', async () => {
       // The margins are an array, compared deeply through the `size` middleware's `options`; the
       // reference-matched width is the reference's less the horizontal margins
