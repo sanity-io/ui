@@ -8,6 +8,7 @@ import {Box} from '../../primitives/box/box'
 import {Flex} from '../../primitives/flex/flex'
 import {Text} from '../../primitives/text/text'
 import {ElementType} from '../../types/component'
+import {_encodeKeySegment, _isHTMLElement} from './helpers'
 import {treeItemBoxStyle, TreeItemBoxStyleProps, treeItemRootColorStyle} from './style'
 import {TreeContext} from './treeContext'
 import {TreeGroup} from './treeGroup'
@@ -84,8 +85,11 @@ export function TreeItem(
   const {path, registerItem, setExpanded, setFocusedElement} = tree
   const _id = useId()
   const id = idProp || _id
+  // The group of an item with an `href` is a sibling of its `treeitem` (the link), not a
+  // descendant, so the link owns it explicitly for assistive technology
+  const groupId = `${_id}group`
   const [itemPath, itemKey] = useMemo(() => {
-    const itemPath = path.concat([id || ''])
+    const itemPath = path.concat([_encodeKeySegment(id || '')])
     return [itemPath, itemPath.join('/')]
   }, [id, path])
   const itemState = tree.state[itemKey]
@@ -104,7 +108,7 @@ export function TreeItem(
       const target = event.target
 
       if (
-        target instanceof HTMLElement &&
+        _isHTMLElement(target) &&
         (target.getAttribute('data-ui') === 'TreeItem' ||
           target.closest('[data-ui="TreeItem__box"]'))
       ) {
@@ -118,7 +122,11 @@ export function TreeItem(
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLElement>) => {
-      if (focused && event.key === 'Enter') {
+      // Enter pressed on the item itself activates it. Typed into editable content inside it
+      // (`text` is a `ReactNode`) it belongs to that content — the item is still the tab stop
+      // then, since focus inside an item is resolved to the item — and bubbling up from a
+      // descendant item it belongs to that item.
+      if (focused && event.key === 'Enter' && event.target === event.currentTarget) {
         const el = treeitemRef.current || rootElement
 
         el?.click()
@@ -181,6 +189,7 @@ export function TreeItem(
           {...linkProps}
           $level={tree.level}
           aria-expanded={expanded}
+          aria-owns={children ? groupId : undefined}
           as={linkAs}
           data-as={typeof linkAs === 'string' ? linkAs : 'a'}
           data-ui="TreeItem__box"
@@ -193,7 +202,11 @@ export function TreeItem(
         </TreeItemBox>
 
         <TreeContext.Provider value={contextValue}>
-          {children && <TreeGroup hidden={!expanded}>{children}</TreeGroup>}
+          {children && (
+            <TreeGroup expanded={expanded} id={groupId}>
+              {children}
+            </TreeGroup>
+          )}
         </TreeContext.Provider>
       </StyledTreeItem>
     )

@@ -153,7 +153,7 @@ function ColorStory() {
 
   return (
     <Box padding={[4, 5, 6]}>
-      <Tree gap={1}>
+      <Tree aria-label="Theme colors" gap={1}>
         {/* oxlint-disable-next-line no-deprecated */}
         {Object.entries(theme.color).map(([key, value]) => (
           <ColorGroup key={key} name={key} value={value} />

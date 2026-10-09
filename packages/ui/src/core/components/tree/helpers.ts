@@ -1,105 +1,208 @@
 import {TreeState} from './types'
 
-export function _findPrevItemElement(
-  state: TreeState,
-  itemElements: HTMLElement[],
-  focusedElement: HTMLElement,
-): HTMLElement | null {
-  const idx = itemElements.indexOf(focusedElement)
-  const els = itemElements.slice(0, idx)
-  const len = els.length
+const ITEM_SELECTOR = '[data-ui="TreeItem"]'
 
-  for (let i = len - 1; i >= 0; i -= 1) {
-    const itemKey = els[i].getAttribute('data-tree-key')
-
-    if (!itemKey) {
-      continue
-    }
-
-    const segments = itemKey.split('/')
-
-    segments.pop()
-
-    const p: string[] = []
-
-    let expanded = true
-
-    for (let j = 0; j < segments.length; j += 1) {
-      p.push(segments[j])
-
-      const k = p.join('/')
-
-      if (!state[k]?.expanded) {
-        expanded = false
-        break
-      }
-    }
-
-    if (expanded) {
-      return els[i]
-    }
-  }
-
-  return null
+/**
+ * The tree's item elements in document order. Read from the DOM when a key is pressed, so items
+ * that mounted, unmounted or moved since the last render are navigated as they are now.
+ */
+export function _getItemElements(treeElement: HTMLElement): HTMLElement[] {
+  return Array.from(treeElement.querySelectorAll<HTMLElement>(ITEM_SELECTOR))
 }
 
-export function _findNextItemElement(
-  state: TreeState,
-  itemElements: HTMLElement[],
-  focusedElement: HTMLElement,
-): HTMLElement | null {
-  const idx = itemElements.indexOf(focusedElement)
-  const els = itemElements.slice(idx)
-  const len = itemElements.length
-
-  for (let i = 1; i < len; i += 1) {
-    if (!els[i]) {
-      continue
-    }
-
-    const itemKey = els[i].getAttribute('data-tree-key')
-
-    if (!itemKey) {
-      continue
-    }
-
-    const segments = itemKey.split('/')
-
-    segments.pop()
-
-    const p: string[] = []
-
-    let expanded = true
-
-    for (let j = 0; j < segments.length; j += 1) {
-      p.push(segments[j])
-
-      const k = p.join('/')
-
-      if (!state[k]?.expanded) {
-        expanded = false
-        break
-      }
-    }
-
-    if (expanded) {
-      return els[i]
-    }
-  }
-
-  return null
+/**
+ * The item element that contains `element`: the element itself, or an ancestor such as the item
+ * whose link (`href`) or content received focus.
+ */
+export function _closestItemElement(element: Element): HTMLElement | null {
+  return element.closest<HTMLElement>(ITEM_SELECTOR)
 }
 
-export function _focusItemElement(el: HTMLElement): void {
-  if (el.getAttribute('role') === 'treeitem') {
-    el.focus()
+/**
+ * The key an item registered under (`data-tree-key`), or `null` for an element that is not an
+ * item.
+ */
+export function _getItemKey(element: HTMLElement): string | null {
+  return element.getAttribute('data-tree-key')
+}
+
+/**
+ * An item's `id` as a segment of its key: the key joins the segments of the item's path with `/`
+ * and is split on it to find the ancestors, so a `/` inside an `id` has to be escaped (and `%`
+ * with it, to keep the escaping unambiguous).
+ */
+export function _encodeKeySegment(id: string): string {
+  return id.replace(/%/g, '%25').replace(/\//g, '%2F')
+}
+
+/**
+ * Whether the item with `itemKey` is inside expanded ancestors only, i.e. whether its group is
+ * shown. Derived from `state` alone, so it can be used during render.
+ */
+export function _isItemKeyVisible(state: TreeState, itemKey: string): boolean {
+  const segments = itemKey.split('/')
+
+  segments.pop()
+
+  const p: string[] = []
+
+  for (const segment of segments) {
+    p.push(segment)
+
+    if (!state[p.join('/')]?.expanded) return false
   }
+
+  return true
+}
+
+function _isItemVisible(state: TreeState, element: HTMLElement): boolean {
+  const itemKey = _getItemKey(element)
+
+  return itemKey !== null && _isItemKeyVisible(state, itemKey)
+}
+
+/**
+ * The items a key can move focus to, in the order they should be tried: `ArrowDown` continues
+ * after the focused item, `ArrowUp` before it (nearest first), and from the tree element `Home` /
+ * `ArrowDown` start at the first item and `End` / `ArrowUp` at the last one.
+ */
+export function _getItemCandidates(
+  state: TreeState,
+  itemElements: HTMLElement[],
+  direction: 'next' | 'prev',
+  focusedElement?: HTMLElement,
+): HTMLElement[] {
+  const candidates: HTMLElement[] = []
+  const idx = focusedElement ? itemElements.indexOf(focusedElement) : -1
+
+  if (focusedElement && idx === -1) return candidates
+
+  if (direction === 'next') {
+    for (let i = idx + 1; i < itemElements.length; i += 1) {
+      if (_isItemVisible(state, itemElements[i])) candidates.push(itemElements[i])
+    }
+  } else {
+    for (let i = (idx === -1 ? itemElements.length : idx) - 1; i >= 0; i -= 1) {
+      if (_isItemVisible(state, itemElements[i])) candidates.push(itemElements[i])
+    }
+  }
+
+  return candidates
+}
+
+/**
+ * Whether `node` is an element that can take focus, judged by its shape: a tree rendered into
+ * another document (an iframe) consists of that document's elements, which `instanceof` against
+ * this realm's `HTMLElement` does not recognise.
+ */
+export function _isHTMLElement(node: unknown): node is HTMLElement {
+  return (
+    typeof node === 'object' &&
+    node !== null &&
+    'nodeType' in node &&
+    node.nodeType === Node.ELEMENT_NODE &&
+    'focus' in node
+  )
+}
+
+/**
+ * The focused element as seen from `element`: inside a shadow root `document.activeElement` is the
+ * shadow host, the root node knows the element itself. The root is recognised by its
+ * `activeElement` rather than with `instanceof Document`, which fails for another document.
+ */
+export function _getActiveElement(element: Element): Element | null {
+  const root: Node & Partial<DocumentOrShadowRoot> = element.getRootNode()
+
+  return root.activeElement ?? null
+}
+
+/**
+ * The node of an item that takes focus: the item itself, or the link of an item with an `href`.
+ */
+function _getItemFocusTarget(el: HTMLElement): HTMLElement | null {
+  if (el.getAttribute('role') === 'treeitem') return el
 
   if (el.getAttribute('role') === 'none') {
     const firstChild = el.firstChild
 
-    if (firstChild && firstChild instanceof HTMLElement) {
-      firstChild.focus()
-    }
+    if (_isHTMLElement(firstChild)) return firstChild
   }
+
+  return null
+}
+
+/**
+ * Whether an item can be made the tab stop without being focused first: it has a node that takes
+ * focus, and nothing between that node and the tree element hides or inerts it — except the
+ * tree's own collapsed groups, which are state the render-time derivation accounts for
+ * (`_isItemKeyVisible`), so that the item becomes the tab stop when its ancestor expands.
+ * Anything else (a `linkAs` that does not render the `tabindex` the item controls, a disabled
+ * control, `hidden`, `display: none`, `visibility: hidden`, `inert` from the consumer) would put
+ * the tab stop on a node that sequential focus navigation skips and take the tree out of the tab
+ * order. Runs at effect time, for an item mounted as `selected`.
+ */
+export function _isItemFocusable(el: HTMLElement, treeElement: HTMLElement | null): boolean {
+  const target = _getItemFocusTarget(el)
+
+  if (!target) return false
+
+  // The tab stop is the `tabindex` that `TreeItem` renders on this node (`0` for the tab stop,
+  // `-1` otherwise), so a custom link that drops it has nowhere to put it, and `focus()` does
+  // nothing on a disabled control
+  if (!target.hasAttribute('tabindex') || target.matches(':disabled')) return false
+
+  const view = target.ownerDocument.defaultView
+
+  if (!view) return true
+
+  for (
+    let node: HTMLElement | null = target;
+    node && node !== treeElement;
+    node = node.parentElement
+  ) {
+    if (node.hasAttribute('inert')) return false
+
+    if (node.getAttribute('data-ui') === 'TreeGroup') continue
+
+    const {display, visibility} = view.getComputedStyle(node)
+
+    if (display === 'none' || visibility === 'hidden') return false
+  }
+
+  return true
+}
+
+/**
+ * Focuses the first of `candidates` that takes focus and returns it. `focus()` fails silently on
+ * an item that cannot take focus right now (hidden by the consumer, a `linkAs` without a focusable
+ * element), so each candidate is tried in turn: one whose node received no focus event is skipped
+ * (focus that stays on a descendant item does not make its ancestor the focused one). One whose
+ * node did receive focus but does not hold it afterwards had a focus handler of the consumer move
+ * focus on — wherever to, also back to where it came from — and that ends the search rather than
+ * being overridden by the next candidate. A candidate that holds focus already is the result as it
+ * is (`Home` on the first item).
+ */
+export function _focusFirstItemElement(candidates: HTMLElement[]): HTMLElement | null {
+  for (const el of candidates) {
+    const target = _getItemFocusTarget(el)
+
+    if (!target) continue
+
+    if (_getActiveElement(el) === target) return el
+
+    let received = false
+    const receive = () => {
+      received = true
+    }
+
+    target.addEventListener('focus', receive)
+    target.focus()
+    target.removeEventListener('focus', receive)
+
+    if (_getActiveElement(el) === target) return el
+
+    if (received) return null
+  }
+
+  return null
 }

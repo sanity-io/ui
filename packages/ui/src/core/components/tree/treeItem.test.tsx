@@ -83,6 +83,42 @@ describe('components/treeItem links', () => {
     }
   })
 
+  it('shows the children of a link item while it is expanded', () => {
+    const {container, rerender} = render(
+      <TreeContext.Provider value={treeContextValue}>
+        <TreeItem expanded href="/foo" text="Item">
+          <TreeItem text="Child" />
+        </TreeItem>
+      </TreeContext.Provider>,
+    )
+    const group = () => container.querySelector('[data-ui="TreeGroup"]')
+    const link = container.querySelector('[data-ui="TreeItem__box"]')
+
+    expect(group()).not.toHaveAttribute('hidden')
+    expect(link).toHaveAttribute('aria-expanded', 'true')
+
+    // The group is a sibling of the link, not a descendant, so the link owns it
+    expect(group()).toHaveAttribute('id')
+    expect(link).toHaveAttribute('aria-owns', group()!.getAttribute('id')!)
+
+    rerender(
+      <TreeContext.Provider value={treeContextValue}>
+        <TreeItem href="/foo" text="Item">
+          <TreeItem text="Child" />
+        </TreeItem>
+      </TreeContext.Provider>,
+    )
+
+    expect(group()).toHaveAttribute('hidden')
+  })
+
+  it('does not own a group without children', () => {
+    const {container} = renderTreeItem({href: '/foo'})
+
+    expect(container.querySelector('[data-ui="TreeItem__box"]')).not.toHaveAttribute('aria-owns')
+    expect(container.querySelector('[data-ui="TreeGroup"]')).toBeNull()
+  })
+
   it('renders a plain element without href', () => {
     const {container} = renderTreeItem({})
     const box = container.querySelector('[data-ui="TreeItem__box"]')
