@@ -314,10 +314,15 @@ export function Tree(
       }
 
       // The focused element may be the item's link (`href`) or something inside it; the item
-      // element is what `registerItem` and the navigation keys work with
+      // element is what `registerItem` and the navigation keys work with. A focus handler of the
+      // consumer that ran before this one may have moved focus on already (which
+      // `_focusFirstItemElement` respects): the tab stop follows the element that holds focus now,
+      // whose own focus event recorded it.
       const itemElement = _closestItemElement(event.target)
 
-      if (itemElement) setFocusedElement(itemElement)
+      if (itemElement && _getActiveElement(itemElement) === event.target) {
+        setFocusedElement(itemElement)
+      }
 
       // Call the element's `focus` handler
       onFocus?.(event)

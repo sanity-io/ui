@@ -896,6 +896,34 @@ describe('components/tree keyboard navigation', () => {
     expect(screen.getByTestId('pears')).not.toHaveFocus()
   })
 
+  it('stops at an item whose focus handler sent focus back to where it came from', async () => {
+    const user = userEvent.setup()
+
+    render(
+      <Tree aria-label="Fruit">
+        <TreeItem data-testid="oranges" text="Oranges" />
+        <TreeItem
+          data-testid="apples"
+          onFocus={() => screen.getByTestId('oranges').focus()}
+          text="Apples"
+        />
+        <TreeItem data-testid="pears" text="Pears" />
+      </Tree>,
+    )
+
+    await user.click(screen.getByTestId('oranges'))
+    expect(focusedItem()).toBe('oranges')
+
+    // The item did receive focus; its handler returning it to the previous item is a redirect
+    // like any other, not a failed attempt — the search ends, and the tab stop stays with the
+    // item that holds focus
+    await user.keyboard('{ArrowDown}')
+    expect(focusedItem()).toBe('oranges')
+    expect(screen.getByTestId('pears')).not.toHaveFocus()
+    expect(screen.getByTestId('oranges')).toHaveAttribute('tabindex', '0')
+    expect(screen.getByTestId('apples')).toHaveAttribute('tabindex', '-1')
+  })
+
   it('keeps navigating from a link item that received focus directly', async () => {
     const user = userEvent.setup()
 

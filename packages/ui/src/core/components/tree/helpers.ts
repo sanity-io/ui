@@ -175,10 +175,12 @@ export function _isItemFocusable(el: HTMLElement, treeElement: HTMLElement | nul
 /**
  * Focuses the first of `candidates` that takes focus and returns it. `focus()` fails silently on
  * an item that cannot take focus right now (hidden by the consumer, a `linkAs` without a focusable
- * element), so each candidate is tried in turn and checked against the active element — exactly,
- * since focus that stays on a descendant item does not make its ancestor the focused one. Focus
- * that moved somewhere else entirely was redirected by a focus handler of the consumer, and that
- * ends the search rather than being overridden by the next candidate.
+ * element), so each candidate is tried in turn: one whose node received no focus event is skipped
+ * (focus that stays on a descendant item does not make its ancestor the focused one). One whose
+ * node did receive focus but does not hold it afterwards had a focus handler of the consumer move
+ * focus on — wherever to, also back to where it came from — and that ends the search rather than
+ * being overridden by the next candidate. A candidate that holds focus already is the result as it
+ * is (`Home` on the first item).
  */
 export function _focusFirstItemElement(candidates: HTMLElement[]): HTMLElement | null {
   for (const el of candidates) {
@@ -186,15 +188,20 @@ export function _focusFirstItemElement(candidates: HTMLElement[]): HTMLElement |
 
     if (!target) continue
 
-    const before = _getActiveElement(el)
+    if (_getActiveElement(el) === target) return el
 
+    let received = false
+    const receive = () => {
+      received = true
+    }
+
+    target.addEventListener('focus', receive)
     target.focus()
+    target.removeEventListener('focus', receive)
 
-    const after = _getActiveElement(el)
+    if (_getActiveElement(el) === target) return el
 
-    if (after === target) return el
-
-    if (after !== before) return null
+    if (received) return null
   }
 
   return null
