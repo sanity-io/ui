@@ -34,6 +34,20 @@ describe('primitives/textInput', () => {
     )
   })
 
+  it('attaches a forwarded callback ref once, not on every render', () => {
+    const forwardedRef = vi.fn()
+    // StrictMode replays effects on mount, which would attach the ref a second time by design
+    const {rerender} = render(<TextInput placeholder="One" ref={forwardedRef} />, {strict: false})
+
+    expect(forwardedRef).toHaveBeenCalledTimes(1)
+    expect(forwardedRef).toHaveBeenCalledWith(screen.getByPlaceholderText('One'))
+
+    rerender(<TextInput placeholder="Two" ref={forwardedRef} />)
+
+    // A re-render used to detach (`null`) and re-attach the ref
+    expect(forwardedRef).toHaveBeenCalledTimes(1)
+  })
+
   describe('clearButton', () => {
     it('renders no clear button by default', () => {
       render(<TextInput />)
