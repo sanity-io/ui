@@ -90,7 +90,8 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   /**
    * Renders the results popover. `content` is the list of matching options, or `null` when
    * there are none; `hidden` is `true` while there is nothing to show (no query, or `loading`
-   * without options yet) and flips one render after the list is asked for.
+   * without options yet). It flips to `false` one render after the list is asked for, at
+   * transition priority, or in the same render when that render already is a transition.
    *
    * @beta
    */
