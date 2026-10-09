@@ -326,6 +326,73 @@ describe('MenuButton', () => {
       }
     })
 
+    it('keeps the forwarded ref on the button when a `referenceElement` is added after mount', () => {
+      const seen: (HTMLButtonElement | null)[] = []
+      const objectRef = {current: null as HTMLButtonElement | null}
+      const referenceElement = document.createElement('div')
+
+      document.body.append(referenceElement)
+
+      try {
+        // The callback ref is a new function on every render, so the forwarded-ref effect runs
+        // again in the very render that adds the reference element
+        const renderMenuButtons = (withReferenceElement: boolean) => (
+          <>
+            <MenuButton
+              button={<Button text="Open menu" />}
+              id="menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Option 1" />
+                </Menu>
+              }
+              popover={withReferenceElement ? {referenceElement} : undefined}
+              ref={(element: HTMLButtonElement | null) => {
+                seen.push(element)
+              }}
+            />
+            <MenuButton
+              button={<Button text="Open other menu" />}
+              id="other-menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Option 2" />
+                </Menu>
+              }
+              popover={withReferenceElement ? {referenceElement} : undefined}
+              ref={objectRef}
+            />
+          </>
+        )
+
+        const {rerender} = render(renderMenuButtons(false), {strict: false})
+
+        const button = getButton()
+        const otherButton = screen.getByRole('button', {name: 'Open other menu'})
+
+        expect(seen).toEqual([button])
+        expect(objectRef.current).toBe(otherButton)
+
+        // `Popover` stops cloning the button and attaches its own ref directly, which restores
+        // the element after the handle's cleanup cleared it; the handle then forwards the
+        // reference element, which is ignored. The changed callback ref is swapped the way React
+        // swaps a `ref` prop: the old one with `null`, the new one with the button.
+        rerender(renderMenuButtons(true))
+
+        expect(getButton()).toBe(button)
+        expect(seen).toEqual([button, null, button])
+        expect(objectRef.current).toBe(otherButton)
+
+        fireEvent.click(button)
+        expectMenuVisible()
+        fireEvent.keyDown(window, {key: 'Escape'})
+
+        expect(button).toHaveFocus()
+      } finally {
+        referenceElement.remove()
+      }
+    })
+
     it('follows the button when its element is replaced, without touching the ref otherwise', () => {
       const callbackRef = vi.fn()
       const renderMenuButtonWith = (button: React.JSX.Element) => (
