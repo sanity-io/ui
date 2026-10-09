@@ -13,6 +13,7 @@ import {render} from '../../../../test/utils'
 import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
 import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
 import {Button} from '../../primitives/button/button'
+import {ErrorBoundary} from '../../utils/errorBoundary'
 import {LayerProvider} from '../../utils/layer/layerProvider'
 import {useLayer} from '../../utils/layer/useLayer'
 import {Menu} from './menu'
@@ -656,6 +657,113 @@ describe('MenuButton', () => {
 
       expect(onOpen).toHaveBeenCalledTimes(1)
       expectMenuVisible()
+    })
+
+    describe('errors thrown in the callbacks', () => {
+      const error = new Error('callback failed')
+      const originalConsoleError = console.error.bind(console)
+      let consoleError: {mockRestore: () => void} | undefined
+
+      afterEach(() => {
+        consoleError?.mockRestore()
+        consoleError = undefined
+      })
+
+      /** Keeps React's and jsdom's reports of the expected error out of the test output */
+      function silenceReportsOf(expected: Error) {
+        consoleError = vi.spyOn(console, 'error').mockImplementation((...args: unknown[]) => {
+          const isExpected = args.some(
+            (arg) =>
+              arg === expected ||
+              (arg instanceof Error && arg.message === expected.message) ||
+              (typeof arg === 'string' && arg.includes(expected.message)),
+          )
+
+          if (!isExpected) originalConsoleError(...args)
+        })
+      }
+
+      // `onOpen` runs inside the function passed to `useTransition`'s `startTransition`, and React
+      // rethrows an error thrown there from the component's render, so it reaches the nearest
+      // error boundary (as an error thrown from the effect that used to call `onOpen` did)
+      it('throws an error from onOpen to the nearest error boundary, and the menu does not open', () => {
+        silenceReportsOf(error)
+        const onCatch = vi.fn()
+
+        render(
+          <ErrorBoundary onCatch={onCatch}>
+            <MenuButton
+              button={<Button text="Open menu" />}
+              id="menu-button"
+              menu={
+                <Menu>
+                  <MenuItem text="Option 1" />
+                </Menu>
+              }
+              onOpen={() => {
+                throw error
+              }}
+            />
+          </ErrorBoundary>,
+        )
+
+        fireEvent.click(getButton())
+
+        expect(onCatch).toHaveBeenCalledTimes(1)
+        expect(onCatch.mock.calls[0][0].error).toBe(error)
+        expect(document.querySelector('[data-ui="ErrorBoundary"]')).toHaveTextContent(
+          'callback failed',
+        )
+        expect(screen.queryByRole('button', {name: 'Open menu'})).not.toBeInTheDocument()
+        expectMenuNotRendered()
+      })
+
+      // The close is a plain update made from the event, so an error thrown in `onClose` is an
+      // uncaught error of that event (reported through the window's `error` event), and no error
+      // boundary sees it
+      it('throws an error from onClose out of the closing event, past any error boundary', () => {
+        silenceReportsOf(error)
+        const onCatch = vi.fn()
+        const reported: unknown[] = []
+        const onWindowError = (event: ErrorEvent) => {
+          reported.push(event.error)
+          event.preventDefault()
+        }
+
+        window.addEventListener('error', onWindowError)
+
+        try {
+          render(
+            <ErrorBoundary onCatch={onCatch}>
+              <MenuButton
+                button={<Button text="Open menu" />}
+                id="menu-button"
+                menu={
+                  <Menu>
+                    <MenuItem text="Option 1" />
+                  </Menu>
+                }
+                onClose={() => {
+                  throw error
+                }}
+              />
+            </ErrorBoundary>,
+          )
+
+          fireEvent.click(getButton())
+          expectMenuVisible()
+
+          fireEvent.keyDown(screen.getByRole('menu'), {key: 'Escape'})
+
+          expect(reported).toEqual([error])
+          expect(onCatch).not.toHaveBeenCalled()
+          // The close itself went through before the error was thrown
+          expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+          expectMenuRenderedHidden()
+        } finally {
+          window.removeEventListener('error', onWindowError)
+        }
+      })
     })
   })
 

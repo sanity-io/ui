@@ -95,8 +95,9 @@ export interface MenuButtonProps {
    * or Space while the button has focus), inside the transition that updates the open state, so
    * state set here commits together with it. The menu is not in the DOM yet when the button has
    * never shown intent to open it; anything that reads or focuses it belongs in an effect. An
-   * urgent update needs `flushSync`, and an error thrown here is reported through the window's
-   * `error` event, as for any transition, not to an error boundary, with the menu opening anyway.
+   * urgent update needs `flushSync`. An error thrown here is the error of that transition: React
+   * rethrows it from `MenuButton`'s render, so it reaches the nearest error boundary and the menu
+   * does not open.
    */
   onOpen?: () => void
   /**

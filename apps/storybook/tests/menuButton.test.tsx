@@ -95,7 +95,7 @@ describe('Components/MenuButton', () => {
   // `MenuButton` opens in a transition, so that an open arriving while `Popover` is still
   // pre-rendering the hidden menu (a transition it starts on intent) continues that render
   // instead of rendering the menu synchronously in the event. These tests open the menu in the
-  // three situations that gives.
+  // three resulting situations.
   describe('opening in a transition', () => {
     // The pre-render has committed: the hidden menu is in the DOM when the open arrives, and the
     // open only has to reveal it. Measured out of band, that reaches the first painted frame
