@@ -8,12 +8,12 @@ import {
   useState,
   useTransition,
 } from 'react'
-// TODO: switch to `useEffectEvent` from `react` once
-// https://github.com/facebook/react/issues/34818 is fixed in the lowest React version we support
-import {useEffectEvent} from 'use-effect-event'
 
-import {useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
+import {ClickOutsideEventElements, useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
+import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
+import {LayerProvider} from '../../utils/layer/layerProvider'
+import {useLayer} from '../../utils/layer/useLayer'
 import {MenuProps} from './menu'
 
 /**
@@ -237,25 +237,6 @@ export function MenuButton(props: MenuButtonProps) {
     closeMenu({returnFocusTo})
   }, [closeMenu, returnFocusTo])
 
-  // The menu's own click-outside and Escape handling only works once the menu is rendered open.
-  // While an open is still pending (its transition has not committed: content that suspends, or
-  // takes long to render), those interactions have to cancel it from here.
-  useClickOutsideEvent(openPending && handleMenuClickOutside, () => [buttonElement, menuElements])
-
-  const onEscapeWhilePending = useEffectEvent(handleMenuEscape)
-
-  useEffect(() => {
-    if (!openPending) return undefined
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onEscapeWhilePending()
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [openPending])
-
   // The handlers the consumer put on the menu element, composed with the ones below
   const {
     onBlurCapture: onMenuBlurCapture,
@@ -363,10 +344,59 @@ export function MenuButton(props: MenuButtonProps) {
   )
 
   return (
-    <Popover data-ui="MenuButton__popover" {...popoverProps} content={menu} open={open}>
-      {button || <></>}
-    </Popover>
+    <>
+      {openPending && (
+        <LayerProvider>
+          <PendingOpen
+            elements={() => [buttonElement, menuElements]}
+            onClickOutside={handleMenuClickOutside}
+            onEscape={handleMenuEscape}
+          />
+        </LayerProvider>
+      )}
+      <Popover data-ui="MenuButton__popover" {...popoverProps} content={menu} open={open}>
+        {button || <></>}
+      </Popover>
+    </>
   )
+}
+
+/**
+ * Cancels an open that is still pending (its transition has not committed: content that suspends,
+ * or takes long to render) on Escape or a press outside the button and the menu. The menu's own
+ * click-outside and Escape handling only works once the menu is rendered open, so until then it
+ * is up to the menu button.
+ *
+ * Rendered in a layer of its own, the one the menu occupies once it opens, so that it handles
+ * those interactions on the terms the menu would: only while it is the top layer, and with an
+ * overlay the menu button is in (a `Dialog`) no longer the top layer, so the Escape or the press
+ * that cancels the pending open does not close that overlay too.
+ */
+function PendingOpen(props: {
+  elements: () => ClickOutsideEventElements
+  onClickOutside: (event: MouseEvent) => void
+  onEscape: () => void
+}) {
+  const {elements, onClickOutside, onEscape} = props
+  const {isTopLayer} = useLayer()
+
+  useClickOutsideEvent(isTopLayer && onClickOutside, elements)
+
+  useGlobalKeyDown(
+    useCallback(
+      (event: KeyboardEvent) => {
+        if (!isTopLayer) return
+
+        if (event.key === 'Escape') {
+          event.stopPropagation()
+          onEscape()
+        }
+      },
+      [isTopLayer, onEscape],
+    ),
+  )
+
+  return null
 }
 
 type ShouldFocus = NonNullable<MenuProps['shouldFocus']> | null

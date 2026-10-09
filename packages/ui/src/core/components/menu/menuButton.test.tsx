@@ -11,6 +11,7 @@ import {afterEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
 import {Button} from '../../primitives/button/button'
+import {Dialog} from '../dialog/dialog'
 import {Menu} from './menu'
 import {MenuButton, type MenuButtonProps} from './menuButton'
 import {MenuGroup} from './menuGroup'
@@ -934,6 +935,73 @@ describe('MenuButton', () => {
       expectMenuNotRendered()
       expect(onClose).toHaveBeenCalledTimes(1)
     })
+
+    it.each([
+      ['Escape', () => fireEvent.keyDown(document.body, {key: 'Escape'})],
+      ['a click outside', () => fireEvent.mouseDown(document.body)],
+    ])(
+      'leaves the dialog the button is in open when %s cancels a pending open',
+      async (_name, cancel) => {
+        let resolveContent!: () => void
+        const content = new Promise<void>((resolve) => {
+          resolveContent = resolve
+        })
+
+        function SuspendingItem() {
+          use(content)
+
+          return <MenuItem text="Option 1" />
+        }
+
+        const onClose = vi.fn()
+        const onDialogClickOutside = vi.fn()
+        const onDialogClose = vi.fn()
+
+        render(
+          <Dialog
+            header="Dialog"
+            id="dialog"
+            onClickOutside={onDialogClickOutside}
+            onClose={onDialogClose}
+          >
+            <MenuButton
+              button={<Button text="Open menu" />}
+              id="menu-button"
+              menu={
+                <Menu>
+                  <SuspendingItem />
+                </Menu>
+              }
+              onClose={onClose}
+            />
+          </Dialog>,
+        )
+
+        const button = getButton()
+
+        await act(async () => {
+          fireEvent.click(button)
+        })
+        expect(button).toHaveAttribute('aria-expanded', 'false')
+
+        // The pending open holds the layer the open menu would, so the dialog is not the top layer
+        // and leaves the interaction that cancels the open to the menu button
+        await act(async () => {
+          cancel()
+        })
+        expect(onClose).toHaveBeenCalledTimes(1)
+        expect(onDialogClickOutside).not.toHaveBeenCalled()
+        expect(onDialogClose).not.toHaveBeenCalled()
+
+        await act(async () => {
+          resolveContent()
+          await content
+        })
+
+        expect(button).toHaveAttribute('aria-expanded', 'false')
+        expect(screen.queryByRole('menu')).not.toBeInTheDocument()
+      },
+    )
 
     // The focus request made by a key press (`shouldFocus`) is applied by `useMenuController` in
     // animation frames after the open commit, by which time Floating UI has positioned the menu.
