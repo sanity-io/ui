@@ -6,6 +6,7 @@ import {
   hide,
   Middleware,
   offset,
+  ReferenceType,
   RootBoundary,
   shift,
   useFloating,
@@ -23,11 +24,19 @@ import {
   useRef,
   useState,
 } from 'react'
+// TODO: switch to `useEffectEvent` from `react` once
+// https://github.com/facebook/react/issues/34818 is fixed in the lowest React
+// version we support: on React 19.2 the native hook never sees values past
+// the first render when the calling component is wrapped in `forwardRef` or
+// `memo`, and consumers may wrap `Popover` in `memo`.
+import {useEffectEvent} from 'use-effect-event'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
+import {useLatestRef} from '../../hooks/useLatestRef'
 import {useMediaIndex} from '../../hooks/useMediaIndex/useMediaIndex'
 import {usePrefersReducedMotion} from '../../hooks/usePrefersReducedMotion'
 import {origin} from '../../middleware/origin'
+import {withBoundary} from '../../middleware/withBoundary'
 import {_elementSizeObserver, ElementRectValue} from '../../observers/elementSizeObserver'
 import {_getArrayProp} from '../../styles/helpers'
 import {useTheme_v2} from '../../theme/useTheme'
@@ -245,57 +254,35 @@ export function Popover(
   useImperativeHandle<HTMLDivElement | null, HTMLDivElement | null>(forwardedRef, () => ref.current)
 
   const mediaIndex = useMediaIndex()
-  const boundaryWidth = constrainSize || preventOverflow ? boundarySize?.width : undefined
+  // The last size `useBoundarySize` measured is kept while closed, and until the next measurement
+  // when the boundary element changes; without an element there is no boundary to cap to
+  const boundaryWidth =
+    boundaryElement && (constrainSize || preventOverflow) ? boundarySize?.width : undefined
 
-  // Update width when
-  // - media index changes
-  // - `width` property changes
+  // The width the `width` property resolves to at the current media index, and the cap that it and
+  // the boundary width give. Both are rendered on the card, except where the `size` middleware
+  // writes the property to the element itself during positioning (see `size.ts`): the width when
+  // it matches the reference element's, the max width (and max height) when `constrainSize` caps
+  // it to the available room as well. The card renders `undefined` for a property while the
+  // middleware owns it — React never touches a style it renders as `undefined`, so the middleware's
+  // write stands across renders — and a value or `''` otherwise, so that React clears the
+  // middleware's write once the property is React's again (`matchReferenceWidth` or `constrainSize`
+  // turned off), open or closed. The one write React makes on the hand-over the other way, from a
+  // rendered value to `undefined`, is `''`: a width React rendered is cleared before the pass that
+  // Floating UI's restart runs in the same task writes the reference width.
   const width = calcCurrentWidth({
     container,
     mediaIndex,
     width: widthArrayProp,
   })
-  const widthRef = useRef(width)
-
-  useEffect(() => {
-    widthRef.current = width
-  }, [width])
-
-  // Update max width when
-  // - boundary width changes
-  // - `width` property changes
   const maxWidth = calcMaxWidth({boundaryWidth, currentWidth: width})
+  // Read by the `size` middleware on every positioning pass (see `size.ts`), so that a change of
+  // the max width does not recreate the middleware: `useFloating` would re-render for the new
+  // array and restart `autoUpdate` for it. Kept current by the layout effect below.
   const maxWidthRef = useRef(maxWidth)
+  // The `update` that started a positioning pass in the current task, see `startPass`
+  const passStartedRef = useRef<(() => void) | null>(null)
 
-  useEffect(() => {
-    maxWidthRef.current = maxWidth
-  }, [maxWidth])
-
-  // Keep track of reference element width (see `size` middleware below)
-  const referenceWidthRef = useRef<number>(undefined)
-
-  // Force apply width & max width to floating element
-  useEffect(() => {
-    const floatingElement = ref.current
-
-    if (!open || !floatingElement) return
-
-    const referenceWidth = referenceWidthRef.current
-
-    if (matchReferenceWidth) {
-      if (referenceWidth !== undefined) {
-        floatingElement.style.width = `${referenceWidth}px`
-      }
-    } else if (width !== undefined) {
-      floatingElement.style.width = `${width}px`
-    }
-
-    if (typeof maxWidth === 'number') {
-      floatingElement.style.maxWidth = `${maxWidth}px`
-    }
-  }, [width, matchReferenceWidth, maxWidth, open])
-
-  const [referenceWidth, setReferenceWidth] = useState<number | undefined>(undefined)
   const middleware = useMiddleware({
     animate,
     arrowProp,
@@ -310,23 +297,63 @@ export function Popover(
     placementStrategy,
     preventOverflow,
     referenceBoundary,
-    referenceWidthRef,
     rootBoundary,
-    setReferenceWidth,
-    widthRef,
   })
+
+  // `autoUpdate` with its passes going through `startPass`, so that the repositioning below is left
+  // out of a later commit of the same task
+  const whileElementsMounted = useCallback(
+    (reference: ReferenceType, floating: HTMLElement, update: () => void) =>
+      autoUpdate(reference, floating, () => startPass(passStartedRef, update)),
+    [],
+  )
 
   const {x, y, elements, middlewareData, placement, refs, strategy, update} =
     useFloating<HTMLElement>({
       middleware,
       placement: placementProp,
-      whileElementsMounted: autoUpdate,
+      whileElementsMounted,
       elements: referenceElement
         ? {
             reference: referenceElement,
           }
         : undefined,
     })
+
+  // The middleware reads the boundaries and the max width through refs (see `useMiddleware` and
+  // `size.ts`), so a change of either does not reach Floating UI by itself: an open popover is
+  // repositioned here when they change, without tearing `autoUpdate` down. The max width is only
+  // read under `constrainSize`; React renders it otherwise. While closed there is no element to
+  // position. A layout effect is early enough to write the ref: Floating UI awaits the element
+  // measurements before it runs any middleware, so even the pass `autoUpdate` starts in this
+  // commit reads the ref one microtask later at the earliest — which is also why `startPass` can
+  // leave this pass out when Floating UI started one in the same task, as it does in the commit it
+  // receives the floating element in (right after the popover opened, where the boundary measured
+  // in the opening commit by `useBoundarySize` lands too) and when the middleware changed.
+  const reposition = useEffectEvent(() => startPass(passStartedRef, update))
+  const floatingElement = elements.floating
+  const previousRef = useRef<{
+    floatingBoundary: HTMLElement | null
+    maxWidth: number | undefined
+    referenceBoundary: HTMLElement | null
+  }>({floatingBoundary: null, maxWidth: undefined, referenceBoundary: null})
+
+  useLayoutEffect(() => {
+    maxWidthRef.current = maxWidth
+
+    const previous = previousRef.current
+
+    previousRef.current = {floatingBoundary, maxWidth, referenceBoundary}
+
+    if (floatingElement === null) return
+
+    const boundaryChanged =
+      floatingBoundary !== previous.floatingBoundary ||
+      referenceBoundary !== previous.referenceBoundary
+    const maxWidthChanged = constrainSize && maxWidth !== previous.maxWidth
+
+    if (boundaryChanged || maxWidthChanged) reposition()
+  }, [constrainSize, floatingBoundary, floatingElement, maxWidth, referenceBoundary])
 
   // Whether the popover (card, portal and `content`) has been rendered yet. Closed popovers
   // render inside a hidden `<Activity>`, so whatever is rendered while closed is pre-rendered DOM
@@ -421,7 +448,10 @@ export function Popover(
         arrowRef={setArrow}
         arrowX={arrowX}
         arrowY={arrowY}
+        constrainSize={constrainSize}
         hidden={referenceHidden}
+        matchReferenceWidth={matchReferenceWidth}
+        maxWidth={maxWidth}
         overflow={overflow}
         padding={padding}
         placement={placement}
@@ -433,7 +463,7 @@ export function Popover(
         originY={originY}
         strategy={strategy}
         tone={tone}
-        width={matchReferenceWidth ? referenceWidth : width}
+        width={width}
         x={x}
         y={y}
       >
@@ -531,6 +561,29 @@ function sameSize(prev: ElementRectValue | undefined, next: ElementRectValue): E
   return prev && prev.width === next.width && prev.height === next.height ? prev : next
 }
 
+/**
+ * Starts a positioning pass with `update`, unless the same `update` started one in the current
+ * task already. Floating UI reads the middleware's refs only after the task — `computePosition`
+ * awaits the element measurements before it runs any middleware — so one pass per task sees every
+ * change made in it, and React commits the changes of one task together: a boundary swap whose new
+ * boundary has another width commits twice (the swap, then the size measured in the swap commit,
+ * in a nested commit), and so does a popover that mounts open under a provider whose element
+ * arrives in the mount task (the element, then its size). A different `update` — `useFloating`
+ * recreates it for a changed middleware or placement — always starts a pass of its own, as the
+ * earlier one positions with the old configuration.
+ *
+ * Module scope, like `measureBorderBox`: the ref is read here, never during render.
+ */
+function startPass(startedRef: React.RefObject<(() => void) | null>, update: () => void): void {
+  if (startedRef.current === update) return
+
+  startedRef.current = update
+  queueMicrotask(() => {
+    startedRef.current = null
+  })
+  update()
+}
+
 function useMiddleware({
   animate,
   arrowProp,
@@ -545,10 +598,7 @@ function useMiddleware({
   placementStrategy,
   preventOverflow,
   referenceBoundary,
-  referenceWidthRef,
   rootBoundary,
-  setReferenceWidth,
-  widthRef,
 }: {
   animate: boolean
   arrowProp: boolean
@@ -563,11 +613,16 @@ function useMiddleware({
   placementStrategy: 'flip' | 'autoPlacement'
   preventOverflow: boolean
   referenceBoundary: HTMLElement | null
-  referenceWidthRef: React.RefObject<number | undefined>
   rootBoundary: RootBoundary
-  setReferenceWidth: (referenceWidth: number) => void
-  widthRef: React.RefObject<number | undefined>
 }) {
+  // The boundaries are read through refs when Floating UI runs the middleware (see
+  // `withBoundary`), so the middleware array keeps its identity when a boundary element changes —
+  // and with it `useFloating`'s `update` callback and `autoUpdate` subscription, which a new array
+  // would re-create and restart. The component repositions an open popover itself when a boundary
+  // changes (see `useLayoutEffect` in `Popover`).
+  const floatingBoundaryRef = useLatestRef(floatingBoundary)
+  const referenceBoundaryRef = useLatestRef(referenceBoundary)
+
   return useMemo(() => {
     const ret: Middleware[] = []
 
@@ -581,8 +636,7 @@ function useMiddleware({
         )
       } else {
         ret.push(
-          flip({
-            boundary: floatingBoundary || undefined,
+          withBoundary(flip, floatingBoundaryRef, {
             fallbackPlacements,
             padding: DEFAULT_POPOVER_PADDING,
             rootBoundary,
@@ -594,19 +648,17 @@ function useMiddleware({
     // Define distance between reference and floating element
     ret.push(offset({mainAxis: DEFAULT_POPOVER_DISTANCE}))
 
-    // Track sizes
+    // Track sizes. `constrainSize` and `matchReferenceWidth` are `options` of this middleware, so
+    // toggling either makes `useFloating` run a pass for the changed array (see `size.ts`).
     if (constrainSize || matchReferenceWidth) {
       ret.push(
         size({
-          boundaryElement: floatingBoundary || undefined,
+          boundaryRef: floatingBoundaryRef,
           constrainSize,
           margins,
           matchReferenceWidth,
           maxWidthRef,
           padding: DEFAULT_POPOVER_PADDING,
-          referenceWidthRef,
-          setReferenceWidth,
-          widthRef,
         }),
       )
     }
@@ -614,11 +666,7 @@ function useMiddleware({
     // Shift the popover so its sits within the boundary element
     if (preventOverflow) {
       ret.push(
-        shift({
-          boundary: floatingBoundary || undefined,
-          rootBoundary,
-          padding: DEFAULT_POPOVER_PADDING,
-        }),
+        withBoundary(shift, floatingBoundaryRef, {rootBoundary, padding: DEFAULT_POPOVER_PADDING}),
       )
     }
 
@@ -639,8 +687,7 @@ function useMiddleware({
     }
 
     ret.push(
-      hide({
-        boundary: referenceBoundary || undefined,
+      withBoundary(hide, referenceBoundaryRef, {
         padding: DEFAULT_POPOVER_PADDING,
         strategy: 'referenceHidden',
       }),
@@ -653,17 +700,14 @@ function useMiddleware({
     arrowRef,
     constrainSize,
     fallbackPlacements,
-    floatingBoundary,
+    floatingBoundaryRef,
     margins,
     matchReferenceWidth,
     maxWidthRef,
     placementProp,
     placementStrategy,
     preventOverflow,
-    referenceBoundary,
-    referenceWidthRef,
+    referenceBoundaryRef,
     rootBoundary,
-    setReferenceWidth,
-    widthRef,
   ])
 }

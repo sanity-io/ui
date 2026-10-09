@@ -22,6 +22,23 @@ import {
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
 
+/**
+ * A size style of the card (see the `constrainSize` prop). `undefined` while the `size` middleware
+ * owns the property, whatever the consumer's `style` says: React never writes a style it renders
+ * as `undefined`, so the middleware's write stands. Otherwise a value for React to render — the
+ * popover's own, the consumer's where the popover has none, or `''` — which also clears the
+ * middleware's write once the property is React's again.
+ */
+function sizeStyle(
+  ownedByMiddleware: boolean | undefined,
+  value: number | undefined,
+  consumerValue: number | string | undefined,
+): number | string | undefined {
+  if (ownedByMiddleware) return undefined
+
+  return value ?? consumerValue ?? ''
+}
+
 const MotionCard = styled(motion.create(Card))`
   &:not([hidden]) {
     display: flex;
@@ -44,6 +61,16 @@ export function PopoverCard(
     arrowRef: React.Ref<HTMLDivElement>
     arrowX?: number
     arrowY?: number
+    /**
+     * Whether the `size` middleware writes `maxWidth` and `maxHeight` to the element itself during
+     * positioning. The size styles are React's to render otherwise (see `sizeStyle`): the two
+     * never write the same property, so neither overwrites the other
+     */
+    constrainSize?: boolean
+    /** Whether the `size` middleware writes `width` to the element itself during positioning */
+    matchReferenceWidth?: boolean
+    /** The width cap, rendered unless `constrainSize` */
+    maxWidth: number | undefined
     originX?: number
     originY?: number
     overflow?: BoxOverflow
@@ -54,6 +81,7 @@ export function PopoverCard(
     shadow?: number | number[]
     strategy: Strategy
     tone: CardTone
+    /** The width, rendered unless `matchReferenceWidth` */
     width: number | undefined
     x: number | null
     y: number | null
@@ -67,6 +95,9 @@ export function PopoverCard(
     arrowX,
     arrowY,
     children,
+    constrainSize,
+    matchReferenceWidth,
+    maxWidth,
     padding,
     placement,
     originX,
@@ -103,12 +134,30 @@ export function PopoverCard(
       position: strategy,
       top: y,
       transformOrigin: getTransformOrigin(originX, originY),
-      width,
       zIndex,
       willChange: animate ? 'transform' : undefined,
       ...style,
+      // After the consumer's `style`: a size the middleware owns must not come back through it, or
+      // React would write it over the middleware's value on the next change of that style. For the
+      // sizes React owns the popover's value wins, the consumer's applies where the popover has none.
+      maxHeight: sizeStyle(constrainSize, undefined, style?.maxHeight),
+      maxWidth: sizeStyle(constrainSize, maxWidth, style?.maxWidth),
+      width: sizeStyle(matchReferenceWidth, width, style?.width),
     }),
-    [animate, originX, originY, strategy, style, width, x, y, zIndex],
+    [
+      animate,
+      constrainSize,
+      matchReferenceWidth,
+      maxWidth,
+      originX,
+      originY,
+      strategy,
+      style,
+      width,
+      x,
+      y,
+      zIndex,
+    ],
   )
 
   const arrowStyle: CSSProperties = useMemo(
