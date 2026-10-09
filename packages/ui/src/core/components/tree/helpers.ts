@@ -108,7 +108,7 @@ function _getItemFocusTarget(el: HTMLElement): HTMLElement | null {
 
 /**
  * Whether an item can be made the tab stop without being focused first: it has a node that takes
- * focus, and that node is rendered as far as `checkVisibility()` can tell (`hidden`,
+ * focus, and the consumer has not hidden it as far as `checkVisibility()` can tell (`hidden`,
  * `display: none`, `visibility: hidden` on it or an ancestor). Runs at effect time, for an item
  * mounted as `selected`; environments without `checkVisibility()` (jsdom) count as rendered.
  */
@@ -116,6 +116,11 @@ export function _isItemFocusable(el: HTMLElement): boolean {
   const target = _getItemFocusTarget(el)
 
   if (!target) return false
+
+  // An item inside a collapsed group is hidden by the tree itself, which the derived tab stop
+  // already accounts for: it withholds the tab stop while the group is closed and hands it over
+  // when it opens, without the item registering again
+  if (el.closest('[data-ui="TreeGroup"][hidden]')) return true
 
   return typeof target.checkVisibility === 'function'
     ? target.checkVisibility({visibilityProperty: true})
