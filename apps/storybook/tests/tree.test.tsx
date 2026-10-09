@@ -153,8 +153,10 @@ describe('Components/Tree', () => {
   })
 
   test('does not hand the tab stop to a `selected` item that is hidden', async () => {
-    // `checkVisibility()` decides this at registration time; jsdom does not implement it, so the
-    // case lives here
+    // The registration-time check reads `getComputedStyle` of the item and its ancestors. jsdom
+    // covers the same case with its approximation of computed styles (`tree.keyboard.test.tsx`);
+    // here a real layout engine resolves the `hidden` attribute through the UA stylesheet and the
+    // inline `display: none`, and a real Tab press shows the hidden item is indeed skipped
     await render(
       <ThemeProvider scheme="light" theme={theme}>
         <button data-testid="before" type="button">
