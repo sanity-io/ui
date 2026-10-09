@@ -389,15 +389,11 @@ function ViewTransitionStory(props: React.ComponentProps<typeof Tooltip>) {
 }
 
 /**
- * The tooltips sit in an `<Activity>` inside a
- * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), shown and hidden by a
- * `startTransition` update, so React animates them in and out. A tooltip adds no work of its own
- * to that transition: the element it is attached to is kept in a ref, not state, so nothing is
- * scheduled when the `Activity` attaches or detaches the ref. An update scheduled there would run
- * at Immediate priority as soon as the transition is ready to animate, holding up its first frame
- * (React DevTools shows it as an Immediate-priority commit caused by `Tooltip`), and would make
- * React cancel the transition should anything flush sync work while the browser is still
- * preparing it.
+ * Tooltips whose elements are shown and hidden by an `<Activity>` inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), toggled in a
+ * `startTransition`, so React animates them in and out. A tooltip adds no work of its own to that
+ * transition. (`apps/storybook/tests/viewTransitionReveal.test.tsx` asserts on the commits of
+ * the reveal.)
  */
 export const WithViewTransition: Story = {
   parameters: {controls: {include: ['animate', 'delay', 'placement', 'portal']}},

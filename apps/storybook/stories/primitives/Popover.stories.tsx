@@ -670,16 +670,11 @@ function ViewTransitionStory(props: PopoverProps) {
 }
 
 /**
- * The popover's reference sits in an `<Activity>` inside a
- * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), shown and hidden by a
- * `startTransition` update, so React animates it in and out. The popover adds no work of its own
- * to that transition: its reference element is kept in a ref, not state, so nothing is scheduled
- * when the `Activity` attaches or detaches the ref. An update scheduled there would run at
- * Immediate priority as soon as the transition is ready to animate, holding up its first frame
- * (React DevTools shows it as an Immediate-priority commit caused by `Popover`), and would make
- * React cancel the transition should anything flush sync work while the browser is still
- * preparing it. The popover itself still opens and closes in transitions, as its `open` prop
- * asks for.
+ * A popover whose reference is shown and hidden by an `<Activity>` inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), toggled in a
+ * `startTransition`, so React animates it in and out. The popover adds no work of its own to that
+ * transition, and still opens and closes in transitions as its `open` prop asks for.
+ * (`apps/storybook/tests/viewTransitionReveal.test.tsx` asserts on the commits of the reveal.)
  */
 export const WithViewTransition: Story = {
   parameters: {controls: {include: ['animate', 'placement', 'portal']}},
