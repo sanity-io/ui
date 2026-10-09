@@ -5,7 +5,7 @@ import {expect} from 'vitest'
 import {render} from '../../../../test/utils'
 import {Autocomplete} from './autocomplete'
 
-export type AutocompleteTestProps = Partial<ComponentProps<typeof Autocomplete>>
+type AutocompleteTestProps = Partial<ComponentProps<typeof Autocomplete>>
 
 export const OPTIONS = [{value: 'foo'}, {value: 'bar'}, {value: 'baz'}]
 
