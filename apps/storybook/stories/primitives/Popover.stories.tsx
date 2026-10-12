@@ -18,7 +18,16 @@ import {Popover, PopoverProps, PopoverUpdateCallback} from '@sanity/ui/popover'
 import {ThemeColorToneKey} from '@sanity/ui/theme'
 import {Tooltip} from '@sanity/ui/tooltip'
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {
+  Activity,
+  startTransition,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  ViewTransition,
+} from 'react'
 import {expect, userEvent, waitFor} from 'storybook/test'
 
 import {PLACEMENT_OPTIONS, RADII} from '../constants'
@@ -633,4 +642,40 @@ function SidePanelInlineObject(props: {updateRef?: PopoverProps['updateRef']}) {
 export const SidePanel: Story = {
   parameters: {controls: {include: []}, padding: 0},
   render: () => <SidePanelStory />,
+}
+
+function ViewTransitionStory(props: PopoverProps) {
+  const [shown, setShown] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Flex align="center" gap={3}>
+      <Button
+        mode="ghost"
+        onClick={() => startTransition(() => setShown((isShown) => !isShown))}
+        text={shown ? 'Hide' : 'Show'}
+      />
+      <Activity mode={shown ? 'visible' : 'hidden'}>
+        <ViewTransition>
+          <Popover {...props} open={open}>
+            <Button
+              onClick={() => startTransition(() => setOpen((isOpen) => !isOpen))}
+              text="Toggle popover"
+            />
+          </Popover>
+        </ViewTransition>
+      </Activity>
+    </Flex>
+  )
+}
+
+/**
+ * A popover on an element inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) that an `<Activity>`
+ * shows and hides in a `startTransition`, so that React animates it in and out. The popover adds
+ * no work of its own to that transition.
+ */
+export const WithViewTransition: Story = {
+  parameters: {controls: {include: ['animate', 'placement', 'portal']}},
+  render: (props) => <ViewTransitionStory {...props} />,
 }

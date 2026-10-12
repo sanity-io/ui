@@ -6,6 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
+import {Profiler, useLayoutEffect} from 'react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -499,6 +500,101 @@ describe('Tooltip', () => {
     it('should fire the onMouseLeave event', () => {
       fireEvent.mouseLeave(screen.getByTestId('btn'))
       expect(handleMouseLeave).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('The referred element', () => {
+    const content = <Text size={1}>{'Tooltip content'}</Text>
+    const phasesOf = (onRender: ReturnType<typeof vi.fn>) =>
+      onRender.mock.calls.map((call: unknown[]) => call[1])
+
+    // Setting the element into state from its ref callback scheduled a nested update. The pass
+    // React makes later over the closed tooltip's hidden `Activity` is not asserted on.
+    it('schedules no follow-up commit for the referred element when it mounts', () => {
+      const onRender = vi.fn()
+
+      render(
+        <Profiler id="tooltip" onRender={onRender}>
+          <Tooltip content={content}>
+            <Button mode="bleed" text="Hover me" />
+          </Tooltip>
+        </Profiler>,
+        {strict: false},
+      )
+
+      expect(phasesOf(onRender)[0]).toBe('mount')
+      expect(phasesOf(onRender)).not.toContain('nested-update')
+
+      // The element is known all the same: hovering positions and shows the tooltip against it
+      fireEvent.mouseEnter(screen.getByText('Hover me'))
+      expectTooltipVisible('Tooltip content')
+    })
+
+    it('hands Floating UI the referred element as the tooltip shows, and a replacement while it is shown', async () => {
+      // jsdom has no layout: in a 0×0 viewport, Floating UI flips and shifts every placement
+      vi.spyOn(document.documentElement, 'clientWidth', 'get').mockReturnValue(1024)
+      vi.spyOn(document.documentElement, 'clientHeight', 'get').mockReturnValue(768)
+      // `expect.poll` needs real timers
+      vi.useRealTimers()
+
+      const transform = () =>
+        document.querySelector<HTMLElement>('[data-ui="Tooltip"]')?.style.transform
+
+      try {
+        const {rerender} = render(
+          <Tooltip content={content} placement="bottom">
+            <Button mode="bleed" text="Hover me" />
+          </Tooltip>,
+        )
+        const button = screen.getByRole('button', {name: 'Hover me'})
+
+        button.getBoundingClientRect = () => new DOMRect(100, 50, 80, 20)
+        fireEvent.mouseEnter(button)
+        expectTooltipVisible('Tooltip content')
+        // Centered below the element (the card has no size in jsdom), 4px away
+        await expect.poll(transform).toBe('translate(140px, 74px)')
+
+        rerender(
+          <Tooltip content={content} placement="bottom">
+            <Button key="replacement" mode="bleed" text="Hover me" />
+          </Tooltip>,
+        )
+        const replacement = screen.getByRole('button', {name: 'Hover me'})
+
+        expect(replacement).not.toBe(button)
+        replacement.getBoundingClientRect = () => new DOMRect(300, 50, 80, 20)
+        await expect.poll(transform).toBe('translate(340px, 74px)')
+      } finally {
+        vi.restoreAllMocks()
+        vi.useFakeTimers()
+      }
+    })
+
+    it('attaches the child’s own object ref from the commit that mounts it', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      // A parent's layout effect runs in the commit that mounts the child, after its refs attached
+      const seenInLayoutEffect: (HTMLElement | null)[] = []
+
+      function Parent() {
+        useLayoutEffect(() => {
+          seenInLayoutEffect.push(ref.current)
+        }, [])
+
+        return (
+          <Tooltip content={content}>
+            <Button mode="bleed" ref={ref} text="Hover me" />
+          </Tooltip>
+        )
+      }
+
+      const {unmount} = render(<Parent />, {strict: false})
+
+      expect(ref.current).toBe(screen.getByRole('button', {name: 'Hover me'}))
+      expect(seenInLayoutEffect).toEqual([ref.current])
+
+      unmount()
+
+      expect(ref.current).toBeNull()
     })
   })
 

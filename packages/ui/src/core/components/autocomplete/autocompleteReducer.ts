@@ -15,16 +15,20 @@ export function autocompleteReducer(
     return {...state, focused: true}
   }
 
-  if (msg.type === 'root/blur') {
-    return {...state, focused: false, query: null}
+  // Closing puts the active option back on the value. It also ends keyboard navigation in the list,
+  // which an arrow key can start before the list shows, with no focus event to end it.
+  if (msg.type === 'root/blur' || msg.type === 'root/escape') {
+    return {
+      ...state,
+      activeValue: state.value || state.activeValue,
+      focused: false,
+      listFocused: false,
+      query: null,
+    }
   }
 
   if (msg.type === 'root/clear') {
     return {...state, activeValue: null, query: null, value: null}
-  }
-
-  if (msg.type === 'root/escape') {
-    return {...state, focused: false, query: null}
   }
 
   if (msg.type === 'root/open') {

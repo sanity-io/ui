@@ -23,7 +23,7 @@ describe('components/menu', () => {
       function Root() {
         const handleItemMouseEnter = useCallback(
           // oxlint-disable-next-line no-console
-          (event: React.MouseEvent<HTMLElement>) => console.log(event),
+          (event: React.SyntheticEvent<HTMLElement>) => console.log(event),
           [],
         )
 

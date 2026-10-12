@@ -26,6 +26,7 @@ import {useBoundaryElement} from '../../utils/boundaryElement/useBoundaryElement
 import {Layer, LayerProps} from '../../utils/layer/layer'
 import {useLayer} from '../../utils/layer/useLayer'
 import {Portal} from '../../utils/portal/portal'
+import {resolvePortalElement} from '../../utils/portal/resolvePortalElement'
 import {usePortal} from '../../utils/portal/usePortal'
 import {
   dialogStyle,
@@ -139,7 +140,7 @@ function DialogCard(props: DialogCardProps) {
     width: widthProp,
   } = props
   const portal = usePortal()
-  const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
+  const portalElement = resolvePortalElement(portal, portalProp)
   const boundaryElement = useBoundaryElement().element
   const radius = _getArrayProp(radiusProp)
   const shadow = _getArrayProp(shadowProp)
@@ -305,7 +306,7 @@ export function Dialog(
   const prefersReducedMotion = usePrefersReducedMotion()
   const animate = prefersReducedMotion ? false : _animate
   const portal = usePortal()
-  const portalElement = portalProp ? portal.elements?.[portalProp] || null : portal.element
+  const portalElement = resolvePortalElement(portal, portalProp)
   const boundaryElement = useBoundaryElement().element
   const cardRadius = _getArrayProp(cardRadiusProp)
   const padding = _getArrayProp(paddingProp)

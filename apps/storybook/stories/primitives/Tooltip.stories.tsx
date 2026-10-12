@@ -9,9 +9,9 @@ import {
   Text,
 } from '@sanity/ui'
 import {Code} from '@sanity/ui/code'
-import {Tooltip, TooltipDelayGroupProvider} from '@sanity/ui/tooltip'
+import {Tooltip, TooltipDelayGroupProvider, type TooltipProps} from '@sanity/ui/tooltip'
 import type {Meta, StoryFn, StoryObj} from '@storybook/react-vite'
-import {useCallback, useMemo, useState} from 'react'
+import {Activity, startTransition, useCallback, useMemo, useState, ViewTransition} from 'react'
 import {expect, userEvent, waitFor, within} from 'storybook/test'
 
 import {PLACEMENT_OPTIONS} from '../constants'
@@ -360,4 +360,36 @@ function CustomPortalStory() {
 export const CustomPortal: Story = {
   parameters: {controls: {include: []}, padding: 0},
   render: () => <CustomPortalStory />,
+}
+
+function ViewTransitionStory(props: TooltipProps) {
+  const [shown, setShown] = useState(false)
+
+  return (
+    <Flex align="center" gap={3}>
+      <Button
+        mode="ghost"
+        onClick={() => startTransition(() => setShown((isShown) => !isShown))}
+        text={shown ? 'Hide' : 'Show'}
+      />
+      <Activity mode={shown ? 'visible' : 'hidden'}>
+        <ViewTransition>
+          <Tooltip {...props}>
+            <Button mode="bleed" text="Hover me" />
+          </Tooltip>
+        </ViewTransition>
+      </Activity>
+    </Flex>
+  )
+}
+
+/**
+ * A tooltip on an element inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) that an `<Activity>`
+ * shows and hides in a `startTransition`, so that React animates it in and out. The tooltip adds
+ * no work of its own to that transition.
+ */
+export const WithViewTransition: Story = {
+  parameters: {controls: {include: ['animate', 'delay', 'placement', 'portal']}},
+  render: (props) => <ViewTransitionStory {...props} />,
 }
