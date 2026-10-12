@@ -159,13 +159,8 @@ export function Tooltip(
     whileElementsMounted: autoUpdate,
   })
 
-  // The child's own ref, when it has one: attached to its element along with ours, so it holds
-  // the element from the commit that mounts it on.
   const childRef = childProp ? getElementRef<HTMLElement>(childProp) : undefined
-
-  // The referred element, in a ref: nothing reads it during render, and Floating UI is handed it
-  // as the card mounts (`setFloating`). See `useReferenceElement` for why not state.
-  const {handOverReference, referenceRef, setReference} = useReferenceElement({childRef, refs})
+  const {handOverReference, referenceRef, setReference} = useReferenceElement(refs, childRef)
 
   // The middleware reads the boundary and portal elements through refs (see `useMiddleware`), so
   // a change of either does not reach Floating UI by itself: reposition a shown tooltip against
