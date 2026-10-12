@@ -255,10 +255,7 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   const listBoxId = `${id}-listbox`
   const options = Array.isArray(optionsProp) ? optionsProp : EMPTY_ARRAY
-  // Memoized by hand (the compiler rebuilt this array and the two derived from it below on every
-  // render), so that `TextInput` does not re-render, and re-attach its forwarded ref, on every
-  // render of this component
-  const padding = useMemo(() => _getArrayProp(paddingProp), [paddingProp])
+  const padding = _getArrayProp(paddingProp)
   const currentOption = useMemo(
     () => (value !== null ? options.find((o) => o.value === value) : undefined),
     [options, value],
@@ -492,18 +489,14 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     return undefined
   }, [disabled, handleClearButtonFocus, loading, value])
 
-  const openButtonBoxPadding = useMemo(
-    () =>
-      padding.map((v) => {
-        if (v === 0) return 0
-        if (v === 1) return 1
-        if (v === 2) return 1
+  const openButtonBoxPadding = padding.map((v) => {
+    if (v === 0) return 0
+    if (v === 1) return 1
+    if (v === 2) return 1
 
-        return v - 2
-      }),
-    [padding],
-  )
-  const openButtonPadding = useMemo(() => padding.map((v) => Math.max(v - 1, 0)), [padding])
+    return v - 2
+  })
+  const openButtonPadding = padding.map((v) => Math.max(v - 1, 0))
   const openButtonProps: AutocompleteOpenButtonProps =
     typeof openButton === 'object' ? openButton : EMPTY_RECORD
 
