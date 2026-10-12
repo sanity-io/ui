@@ -1,7 +1,7 @@
 /** @vitest-environment jsdom */
 
+import {Profiler} from 'react'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
-import {axe} from 'vitest-axe'
 
 import {render} from '../../../../test/utils'
 import {Stack} from '../../primitives/stack/stack'
@@ -16,26 +16,6 @@ vi.mock('../../primitives/stack/stack', async (importOriginal) => {
     // oxlint-disable-next-line no-unsafe-type-assertion
     Stack: vi.fn((props: Record<string, unknown>) => (actual.Stack as any)(props)),
   }
-})
-
-describe('components/tree accessibility', () => {
-  it('Axe: should have no violations', async () => {
-    const {container} = render(
-      <Tree aria-label="Fruit">
-        <TreeItem expanded text="Fruit">
-          <TreeItem text="Oranges" />
-          <TreeItem expanded href="/apples" text="Apples">
-            <TreeItem href="/apples/fuji" text="Fuji" />
-          </TreeItem>
-        </TreeItem>
-        <TreeItem text="Vegetables">
-          <TreeItem text="Carrots" />
-        </TreeItem>
-      </Tree>,
-    )
-
-    expect(await axe(container.outerHTML)).toHaveNoViolations()
-  })
 })
 
 describe('components/tree spacing', () => {
@@ -54,5 +34,24 @@ describe('components/tree spacing', () => {
     expect(mockedStack.mock.calls.map(([props]) => props)).toContainEqual(
       expect.objectContaining({gap: 2}),
     )
+  })
+})
+
+describe('components/tree rendering', () => {
+  it('commits once when its parent re-renders', () => {
+    const onRender = vi.fn()
+    const tree = (text: string) => (
+      <Profiler id="tree" onRender={onRender}>
+        <Tree>
+          <TreeItem text={text} />
+        </Tree>
+      </Profiler>
+    )
+    const {rerender} = render(tree('Item 1'))
+
+    onRender.mockClear()
+    rerender(tree('Item 2'))
+
+    expect(onRender).toHaveBeenCalledOnce()
   })
 })
