@@ -6,14 +6,9 @@ import {
   useMemo,
   useRef,
   useState,
-  useTransition,
 } from 'react'
 
-import {ClickOutsideEventElements, useClickOutsideEvent} from '../../hooks/useClickOutsideEvent'
-import {useGlobalKeyDown} from '../../hooks/useGlobalKeyDown'
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
-import {LayerProvider} from '../../utils/layer/layerProvider'
-import {useLayer} from '../../utils/layer/useLayer'
 import {MenuProps} from './menu'
 
 /**
@@ -92,12 +87,10 @@ export interface MenuButtonProps {
   onClose?: () => void
   /**
    * Called from the event that opens the menu (a click on the button, or ArrowDown, ArrowUp, Enter
-   * or Space while the button has focus), inside the transition that updates the open state, so
-   * state set here commits together with it. The menu is not in the DOM yet when the button has
-   * never shown intent to open it; anything that reads or focuses it belongs in an effect. An
-   * urgent update needs `flushSync`. An error thrown here is the error of that transition: React
-   * rethrows it from `MenuButton`'s render, so it reaches the nearest error boundary and the menu
-   * does not open.
+   * or Space while the button has focus), before the open state is committed, so state set here
+   * commits together with it. The menu is not in the DOM yet when the button has never shown
+   * intent to open it; anything that reads or focuses it belongs in an effect. An error thrown
+   * here is thrown from that event, not reported to an error boundary.
    */
   onOpen?: () => void
   /**
@@ -147,7 +140,6 @@ export function MenuButton(props: MenuButtonProps) {
     endMenuClick,
     open,
     openMenu,
-    openPending,
     shouldFocus,
     toggleMenu,
     trackMenuClick,
@@ -239,11 +231,6 @@ export function MenuButton(props: MenuButtonProps) {
   const handleMenuEscape = useCallback(() => {
     closeMenu({returnFocusTo})
   }, [closeMenu, returnFocusTo])
-
-  const pendingOpenElements = useCallback(
-    () => [buttonElement, menuElements],
-    [buttonElement, menuElements],
-  )
 
   // The handlers the consumer put on the menu element, composed with the ones below
   const {
@@ -352,56 +339,10 @@ export function MenuButton(props: MenuButtonProps) {
   )
 
   return (
-    <>
-      <Popover data-ui="MenuButton__popover" {...popoverProps} content={menu} open={open}>
-        {button || <></>}
-      </Popover>
-      {/* The menu's own Escape and click-outside handling only runs once the menu is rendered
-      open; while an open is still pending (its transition has not committed: content that
-      suspends, or takes long to render), this cancels it the way the menu would */}
-      {openPending && (
-        <LayerProvider zOffset={popoverProps.zOffset}>
-          <PendingOpenCancel
-            elements={pendingOpenElements}
-            onClickOutside={handleMenuClickOutside}
-            onEscape={handleMenuEscape}
-          />
-        </LayerProvider>
-      )}
-    </>
+    <Popover data-ui="MenuButton__popover" {...popoverProps} content={menu} open={open}>
+      {button || <></>}
+    </Popover>
   )
-}
-
-/**
- * Cancels an open whose menu has not been rendered yet, on Escape or a press outside the button
- * and the menu, from a layer of its own like the rendered menu's: an overlay around the menu
- * button is then not the top layer, and leaves the same event alone.
- */
-function PendingOpenCancel(props: {
-  elements: () => ClickOutsideEventElements
-  onClickOutside: (event: MouseEvent) => void
-  onEscape: () => void
-}) {
-  const {elements, onClickOutside, onEscape} = props
-  const {isTopLayer} = useLayer()
-
-  useClickOutsideEvent(isTopLayer && onClickOutside, elements)
-
-  useGlobalKeyDown(
-    useCallback(
-      (event: KeyboardEvent) => {
-        if (!isTopLayer) return
-
-        if (event.key === 'Escape') {
-          event.stopPropagation()
-          onEscape()
-        }
-      },
-      [isTopLayer, onEscape],
-    ),
-  )
-
-  return null
 }
 
 type ShouldFocus = NonNullable<MenuProps['shouldFocus']> | null
@@ -427,8 +368,6 @@ interface OpenState {
   open: boolean
   /** Opens the menu and asks it to focus its first or last item once it is rendered open */
   openMenu: (focus: NonNullable<ShouldFocus>) => void
-  /** Whether an open has been requested whose transition has not committed yet */
-  openPending: boolean
   shouldFocus: ShouldFocus
   /** Opens or closes the menu, clearing any focus request: a click leaves focus on the button */
   toggleMenu: () => void
@@ -438,11 +377,7 @@ interface OpenState {
 
 /**
  * The open state of the menu and the focus request made when it opens, with `onOpen` / `onClose`
- * called from the event that changes it. Opening is a transition, so that an open arriving while
- * `Popover` pre-renders the hidden menu continues that render; closing renders nothing and is a
- * plain update, so that it commits with whatever else the closing event updated. `openPending`
- * is `useTransition`'s pending flag, so that the menu button can cancel an open whose menu has
- * not committed yet (the menu's own listeners are not running then).
+ * called from the event that changes it.
  *
  * Constraints that shaped it:
  *
@@ -461,7 +396,6 @@ interface OpenState {
 function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOpen'>): OpenState {
   const [open, setOpenState] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<ShouldFocus>(null)
-  const [openPending, startTransition] = useTransition()
   const requestedOpenRef = useRef(open)
   const clickInMenuRef = useRef(false)
   const blurDuringClickRef = useRef(false)
@@ -479,26 +413,18 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
         returnFocusTo?.focus()
       }
 
-      const update = () => {
-        if (focus !== undefined) setShouldFocus(focus)
-        if (!changes) return
+      if (focus !== undefined) setShouldFocus(focus)
+      if (!changes) return
 
-        setOpenState(nextOpen)
-
-        if (nextOpen) {
-          onOpen?.()
-        } else {
-          onClose?.()
-        }
-      }
+      setOpenState(nextOpen)
 
       if (nextOpen) {
-        startTransition(update)
+        onOpen?.()
       } else {
-        update()
+        onClose?.()
       }
     },
-    [onClose, onOpen, startTransition],
+    [onClose, onOpen],
   )
 
   const closeMenu = useCallback(
@@ -554,7 +480,6 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
     endMenuClick,
     open,
     openMenu,
-    openPending,
     shouldFocus,
     toggleMenu,
     trackMenuClick,
