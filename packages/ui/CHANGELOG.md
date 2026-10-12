@@ -1,5 +1,17 @@
 # @sanity/ui
 
+## 4.4.3
+
+### Patch Changes
+
+- [#3174](https://github.com/sanity-io/ui/pull/3174) [`513fe51`](https://github.com/sanity-io/ui/commit/513fe51bfb5a1b5decc2047cc1d8456858fb836c) Thanks [@stipsan](https://github.com/stipsan)! - Fix a regression introduced in 4.4.2 where calling `event.preventDefault()` in the button's `onClick` or `onKeyDown` handler stopped `MenuButton` from opening. These handlers still run first, but `preventDefault()` no longer blocks the menu from opening or toggling. To keep the menu closed, disable the button.
+
+- [#3170](https://github.com/sanity-io/ui/pull/3170) [`246ad17`](https://github.com/sanity-io/ui/commit/246ad174836ad4936259e6bc8b48cc0b752c4092) Thanks [@stipsan](https://github.com/stipsan)! - Improve rendering performance by sharing common CSS across components instead of generating duplicate styles for each combination of props. This reduces the amount of CSS your app generates and the work needed to render it, especially on pages with many Sanity UI components.
+  
+  Across our Storybook stories in both light and dark mode, generated CSS was 77% smaller and style generation took 54% less time. In a server-rendering benchmark, generated CSS was 80% smaller and rendering took 63% less time. Results will vary by app.
+  
+  No changes to your code are needed to benefit from these improvements, and components using the built-in themes look the same.
+
 ## 4.4.2
 
 ### Patch Changes
