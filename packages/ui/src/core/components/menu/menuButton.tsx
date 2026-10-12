@@ -1,12 +1,4 @@
-import {
-  cloneElement,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import {cloneElement, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react'
 
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
 import {MenuProps} from './menu'
@@ -17,14 +9,6 @@ import {MenuProps} from './menu'
 type ButtonHandlerProps = Pick<
   React.DOMAttributes<HTMLButtonElement>,
   'onClick' | 'onKeyDown' | 'onMouseDown'
->
-
-/**
- * The handlers `MenuButton` composes with its own on the `menu` element.
- */
-type MenuHandlerProps = Pick<
-  React.DOMAttributes<HTMLDivElement>,
-  'onBlurCapture' | 'onClick' | 'onClickCapture'
 >
 
 /**
@@ -57,14 +41,6 @@ export interface MenuButtonProps {
    */
   button: React.JSX.Element
   id: string
-  /**
-   * The menu to show. `MenuButton` adds its own `onBlurCapture`, `onClick` and `onClickCapture`
-   * handlers to it. Handlers the element already has run first, except that `MenuButton` starts
-   * tracking a click inside the menu before the element's own `onClickCapture`, so that focus the
-   * handler moves out of the menu counts as moved during the click. `MenuButton` sets the menu's
-   * `aria-labelledby`, `onClickOutside`, `onEscape`, `onItemClick`, `originElement`,
-   * `registerElement` and `shouldFocus`.
-   */
   menu?: React.JSX.Element
   /**
    * Called from the event that closes the menu, before the closed state is committed. The close
@@ -80,9 +56,6 @@ export interface MenuButtonProps {
    *   menu is open.
    * - A click outside the menu: the callback runs on the press (`mousedown`), before the browser
    *   moves focus to what was pressed, so focus moved here can be overridden by that.
-   *
-   * One close runs from the task right after its event rather than from the event: a click inside
-   * the menu whose handler stopped the click's propagation and moved focus out of the menu.
    */
   onClose?: () => void
   /**
@@ -134,16 +107,7 @@ export function MenuButton(props: MenuButtonProps) {
     popover,
     ref: forwardedRef,
   } = props
-  const {
-    closeMenu,
-    closeMenuOnBlur,
-    endMenuClick,
-    open,
-    openMenu,
-    shouldFocus,
-    toggleMenu,
-    trackMenuClick,
-  } = useOpenState({onClose, onOpen})
+  const {closeMenu, open, openMenu, shouldFocus, toggleMenu} = useOpenState({onClose, onOpen})
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
   const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
 
@@ -232,17 +196,8 @@ export function MenuButton(props: MenuButtonProps) {
     closeMenu({returnFocusTo})
   }, [closeMenu, returnFocusTo])
 
-  // The handlers the consumer put on the menu element, composed with the ones below
-  const {
-    onBlurCapture: onMenuBlurCapture,
-    onClick: onMenuClick,
-    onClickCapture: onMenuClickCapture,
-  }: MenuHandlerProps = menuProp?.props ?? {}
-
   const handleBlur = useCallback(
-    (event: React.FocusEvent<HTMLDivElement>) => {
-      onMenuBlurCapture?.(event)
-
+    (event: FocusEvent) => {
       const target = event.relatedTarget
 
       if (!(target instanceof Node)) {
@@ -255,33 +210,14 @@ export function MenuButton(props: MenuButtonProps) {
         }
       }
 
-      closeMenuOnBlur()
+      closeMenu()
     },
-    [closeMenuOnBlur, menuElements, onMenuBlurCapture],
+    [closeMenu, menuElements],
   )
 
   const handleItemClick = useCallback(() => {
     closeMenu({returnFocusTo})
   }, [closeMenu, returnFocusTo])
-
-  // A click inside the menu is tracked from the capture phase on the menu element to the bubble
-  // phase on it, which runs after the item's own handlers. Tracking starts before the consumer's
-  // capture handler, so that focus it moves out of the menu counts as moved during the click.
-  const handleMenuClickCapture = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      trackMenuClick()
-      onMenuClickCapture?.(event)
-    },
-    [onMenuClickCapture, trackMenuClick],
-  )
-
-  const handleMenuClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      onMenuClick?.(event)
-      endMenuClick()
-    },
-    [endMenuClick, onMenuClick],
-  )
 
   const registerElement = useCallback((el: HTMLElement) => {
     setChildMenuElements((els) => els.concat([el]))
@@ -289,11 +225,9 @@ export function MenuButton(props: MenuButtonProps) {
     return () => setChildMenuElements((els) => els.filter((_el) => _el !== el))
   }, [])
 
-  const menuProps: MenuProps & MenuHandlerProps = {
+  const menuProps: MenuProps = {
     'aria-labelledby': id,
     'onBlurCapture': handleBlur,
-    'onClick': handleMenuClick,
-    'onClickCapture': handleMenuClickCapture,
     'onClickOutside': handleMenuClickOutside,
     'onEscape': handleMenuEscape,
     'onItemClick': handleItemClick,
@@ -358,21 +292,12 @@ interface OpenStateUpdate {
 interface OpenState {
   /** Closes the menu, returning focus to `returnFocusTo` first when given */
   closeMenu: (options?: Pick<OpenStateUpdate, 'returnFocusTo'>) => void
-  /**
-   * Closes the menu because focus left it, unless a click inside the menu is being dispatched,
-   * in which case the click decides what the menu does
-   */
-  closeMenuOnBlur: () => void
-  /** Ends the click inside the menu that `trackMenuClick` started, closing if a blur waited on it */
-  endMenuClick: () => void
   open: boolean
   /** Opens the menu and asks it to focus its first or last item once it is rendered open */
   openMenu: (focus: NonNullable<ShouldFocus>) => void
   shouldFocus: ShouldFocus
   /** Opens or closes the menu, clearing any focus request: a click leaves focus on the button */
   toggleMenu: () => void
-  /** Marks a click inside the menu as being dispatched, until `endMenuClick` */
-  trackMenuClick: () => void
 }
 
 /**
@@ -385,10 +310,6 @@ interface OpenState {
  *   Escape or a menu item click closes the menu fires the menu's blur handler synchronously, and
  *   that second close has to find the state already requested closed, before React re-renders.
  * - Focus is returned before `onClose`, so focus that a consumer moves in `onClose` stands.
- * - A menu item calls its own `onClick` before it reports the click, and a blur that handler
- *   causes must not close the menu first: a click inside the menu is tracked from the menu
- *   element's capture phase to its bubble phase (with a macrotask as the fallback for a handler
- *   that stops propagation), and a blur during it waits for the click to decide.
  * - A hook rather than inline state: the handlers that call these functions reach the button and
  *   the menu through `cloneElement`, a call the React Compiler cannot see through, and it rejects
  *   passing a function it knows to read a ref to such a call during render.
@@ -397,21 +318,13 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
   const [open, setOpenState] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<ShouldFocus>(null)
   const requestedOpenRef = useRef(open)
-  const clickInMenuRef = useRef(false)
-  const blurDuringClickRef = useRef(false)
-  const endMenuClickTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
-
-  // A tracked click must not end, and close, after the menu button is gone
-  useEffect(() => () => clearTimeout(endMenuClickTimeoutRef.current), [])
 
   const setOpen = useCallback(
     ({open: nextOpen, focus, returnFocusTo}: OpenStateUpdate) => {
       const changes = requestedOpenRef.current !== nextOpen
 
-      if (changes) {
-        requestedOpenRef.current = nextOpen
-        returnFocusTo?.focus()
-      }
+      requestedOpenRef.current = nextOpen
+      returnFocusTo?.focus()
 
       if (focus !== undefined) setShouldFocus(focus)
       if (!changes) return
@@ -440,48 +353,5 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
     [setOpen],
   )
 
-  const closeMenuOnBlur = useCallback(() => {
-    if (clickInMenuRef.current) {
-      blurDuringClickRef.current = true
-
-      return
-    }
-
-    setOpen({open: false})
-  }, [setOpen])
-
-  const endMenuClick = useCallback(() => {
-    clearTimeout(endMenuClickTimeoutRef.current)
-
-    if (!clickInMenuRef.current) return
-
-    clickInMenuRef.current = false
-
-    if (!blurDuringClickRef.current) return
-
-    blurDuringClickRef.current = false
-    // Focus left the menu during the click and nothing closed it: close as the blur would have
-    setOpen({open: false})
-  }, [setOpen])
-
-  const trackMenuClick = useCallback(() => {
-    clickInMenuRef.current = true
-    // For a click whose propagation a handler stops before the bubble phase. A macrotask, not a
-    // microtask: React dispatches the capture and bubble phases of a trusted event from separate
-    // native listeners, and the microtask checkpoint between them would end the click before the
-    // item's handlers run. Cleared when the bubble phase ends the click.
-    clearTimeout(endMenuClickTimeoutRef.current)
-    endMenuClickTimeoutRef.current = setTimeout(endMenuClick, 0)
-  }, [endMenuClick])
-
-  return {
-    closeMenu,
-    closeMenuOnBlur,
-    endMenuClick,
-    open,
-    openMenu,
-    shouldFocus,
-    toggleMenu,
-    trackMenuClick,
-  }
+  return {closeMenu, open, openMenu, shouldFocus, toggleMenu}
 }
