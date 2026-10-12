@@ -15,6 +15,7 @@ import {
   avatarBgStroke,
   avatarImage,
   avatarInitials,
+  avatarRoot,
   avatarStroke,
   avatarStrokes,
 } from './avatar.css'
@@ -45,19 +46,12 @@ export interface AvatarOwnProps {
  */
 export type AvatarProps<E extends ElementType = 'div'> = Props<AvatarOwnProps, E>
 
-const AvatarBase = styled.div(avatarRootStyle)
+const AvatarBase = styled.div.attrs({className: avatarRoot})(avatarRootStyle)
 
 const StyledAvatar = styled(AvatarBase)<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
   avatarColorStyle,
 )
-
-// Stays on styled-components: `color: inherit` must beat Label's runtime
-// `color: var(--card-fg-color)` at equal specificity, which needs both rules in
-// the runtime stylesheet.
-const InitialsLabel = styled(Label)({
-  color: 'inherit',
-})
 
 function AvatarComponent(
   props: AvatarOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,
@@ -187,8 +181,8 @@ function AvatarComponent(
       {(imageFailed || !src) && initials && (
         <>
           <div className={avatarInitials}>
-            <InitialsLabel
-              forwardedAs="span"
+            <Label
+              as="span"
               size={size.map((s) => {
                 if (s === 1) return 1
                 if (s === 2) return 3
@@ -199,7 +193,7 @@ function AvatarComponent(
               weight="medium"
             >
               {initials}
-            </InitialsLabel>
+            </Label>
           </div>
         </>
       )}

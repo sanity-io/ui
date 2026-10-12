@@ -5,7 +5,7 @@ import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {_cardColorStyle} from '../../styles/card/_cardColorStyle'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
 import {ThemeProps} from '../../styles/types'
-import {ButtonMode, ButtonTone, ButtonWidth} from '../../types/button'
+import {ButtonMode, ButtonTone} from '../../types/button'
 
 function buttonToneColor(
   base: ThemeColorCard_v2,
@@ -27,38 +27,11 @@ export function buttonBaseStyles(props: ThemeProps): ReturnType<typeof css> {
   })
 
   return css`
-    -webkit-font-smoothing: inherit;
-    appearance: none;
-    display: inline-flex;
-    align-items: center;
-    font: inherit;
-    border: 0;
-    outline: none;
-    user-select: none;
-    text-decoration: none;
-    border: 0;
-    box-sizing: border-box;
-    padding: 0;
+    /* Stays here: Breadcrumbs' expand button overrides it at equal specificity */
     margin: 0;
-    white-space: nowrap;
-    text-align: left;
-    position: relative;
-    vertical-align: top;
     background-color: var(--card-bg-color);
     color: var(--card-fg-color);
     box-shadow: ${borderBoxShadow};
-
-    & > span {
-      display: block;
-      flex: 1;
-      min-width: 0;
-      border-radius: inherit;
-    }
-
-    &::-moz-focus-inner {
-      border: 0;
-      padding: 0;
-    }
 
     &:not([data-disabled='true']) {
       &:focus:not(:focus-visible) {
@@ -130,19 +103,10 @@ export function buttonDisabledAndFocusStyles(
 /**
  * @internal
  */
-export function buttonStyles(props: {$width?: ButtonWidth} & ThemeProps): ReturnType<typeof css> {
+export function buttonStyles(props: ThemeProps): ReturnType<typeof css> {
   const {style} = getTheme_v2(props.theme)
 
   return css`
-    ${
-      props.$width === 'fill' &&
-      css`
-        width: -moz-available;
-        width: -webkit-fill-available;
-        width: stretch;
-      `
-    }
-
     ${style?.button?.root}
   `
 }

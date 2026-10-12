@@ -8,6 +8,7 @@ import {buildTheme} from '../../theme/build/buildTheme'
 import {ThemeProvider} from '../theme/themeProvider'
 import {Button} from './button/button'
 import {Card} from './card/card'
+import {Switch} from './switch/switch'
 import {Text} from './text/text'
 import {TextInput} from './textInput/textInput'
 
@@ -84,5 +85,21 @@ describe('styles shared by instances with different props', () => {
     )
 
     expect(colors(variants)).toBe(colors(single))
+  })
+
+  it('leaves the migrated static rules out of the runtime sheet', () => {
+    const css = renderCSS(
+      <>
+        <Button text="A" />
+        <Button mode="ghost" text="B" tone="critical" />
+        <Switch />
+        <Switch checked readOnly />
+      </>,
+    )
+
+    // These now live in styles.css; seeing them here means a rule crept back
+    // into a styled-components level, or is being emitted twice.
+    expect(css).not.toMatch(/white-space:nowrap/)
+    expect(css).not.toMatch(/pointer-events:none/)
   })
 })

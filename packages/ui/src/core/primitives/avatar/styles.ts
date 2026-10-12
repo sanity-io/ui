@@ -18,30 +18,8 @@ export function avatarRootStyle(props: ThemeProps): CSSObject {
   const {avatar} = getTheme_v2(props.theme)
 
   return {
-    'width': 'var(--avatar-size)',
-    'height': 'var(--avatar-size)',
-    'borderRadius': 'calc(var(--avatar-size) / 2)',
-    'backgroundColor': 'var(--avatar-bg-color)',
-    'position': 'relative',
-    'boxSizing': 'border-box',
-    'userSelect': 'none',
-    'boxShadow': '0 0 0 1px var(--card-bg-color)',
-
-    '&[data-status="inactive"]': {
-      opacity: '0.5',
-    },
-
     /* &:is(button) */
     '&[data-as="button"]': {
-      'WebkitFontSmoothing': 'inherit',
-      'appearance': 'none',
-      'margin': 0,
-      'padding': 0,
-      'border': 0,
-      'font': 'inherit',
-      'color': 'inherit',
-      'outline': 'none',
-
       '&:focus': {
         boxShadow: focusRingStyle({focusRing: avatar.focusRing}),
       },

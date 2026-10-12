@@ -1,5 +1,31 @@
 import {globalStyle, style} from '@vanilla-extract/css'
 
+export const avatarRoot = style({
+  width: 'var(--avatar-size)',
+  height: 'var(--avatar-size)',
+  borderRadius: 'calc(var(--avatar-size) / 2)',
+  backgroundColor: 'var(--avatar-bg-color)',
+  position: 'relative',
+  boxSizing: 'border-box',
+  userSelect: 'none',
+  boxShadow: '0 0 0 1px var(--card-bg-color)',
+  selectors: {
+    '&[data-status="inactive"]': {
+      opacity: 0.5,
+    },
+    '&[data-as="button"]': {
+      WebkitFontSmoothing: 'inherit',
+      appearance: 'none',
+      margin: 0,
+      padding: 0,
+      border: 0,
+      font: 'inherit',
+      color: 'inherit',
+      outline: 'none',
+    },
+  },
+})
+
 export const avatarArrow = style({
   position: 'absolute',
   boxSizing: 'border-box',
@@ -93,6 +119,21 @@ globalStyle(`${avatarStack} > div`, {
 
 globalStyle(`${avatarStack} > div:not([hidden])`, {
   display: 'inline-block',
+})
+
+export const avatarCounter = style({
+  alignItems: 'center',
+  justifyContent: 'center',
+  boxSizing: 'border-box',
+  userSelect: 'none',
+  color: 'var(--card-fg-color)',
+  background: 'var(--card-bg-color)',
+  boxShadow: '0 0 0 1px var(--card-bg-color), inset 0 0 0 1px var(--card-hairline-hard-color)',
+  selectors: {
+    '&:not([hidden])': {
+      display: 'flex',
+    },
+  },
 })
 
 export const avatarInitials = style({
