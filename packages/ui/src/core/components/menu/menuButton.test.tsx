@@ -155,6 +155,30 @@ describe('MenuButton', () => {
       expect(onClose).toHaveBeenCalledTimes(1)
       expect(getButton()).toHaveFocus()
     })
+
+    it('lets a focus handler on the button reopen the menu while focus is returned to it', () => {
+      const onClose = vi.fn()
+      let reopen = false
+
+      renderMenuButton({
+        button: (
+          <Button onFocus={(event) => reopen && event.currentTarget.click()} text="Open menu" />
+        ),
+        onClose,
+      })
+
+      fireEvent.click(getButton())
+      reopen = true
+      fireEvent.keyDown(screen.getByRole('menuitem', {name: 'Option 1'}), {key: 'Escape'})
+
+      expect(getButton()).toHaveAttribute('aria-expanded', 'true')
+      expect(onClose).not.toHaveBeenCalled()
+
+      fireEvent.click(getButton())
+
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+      expect(onClose).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('handlers on the button element', () => {

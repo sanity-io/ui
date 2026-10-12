@@ -243,8 +243,6 @@ export function MenuButton(props: MenuButtonProps) {
  */
 function useOpenState(onOpen?: () => void, onClose?: () => void) {
   const [open, setOpenState] = useState(false)
-  // Written before focus is returned, which blurs the menu synchronously: the close that blur
-  // causes must find the menu closed already
   const openRef = useRef(false)
 
   const setOpen = useCallback(
@@ -252,9 +250,11 @@ function useOpenState(onOpen?: () => void, onClose?: () => void) {
       const nextOpen = typeof action === 'function' ? action(openRef.current) : action
       const changed = openRef.current !== nextOpen
       openRef.current = nextOpen
+      if (changed) setOpenState(nextOpen)
+      // Focus handlers run synchronously: the close that the menu's blur causes must find the menu
+      // closed already, and a change that another handler makes supersedes this one
       returnFocusTo?.focus()
-      if (!changed) return
-      setOpenState(nextOpen)
+      if (!changed || openRef.current !== nextOpen) return
       if (nextOpen) {
         onOpen?.()
       } else {
