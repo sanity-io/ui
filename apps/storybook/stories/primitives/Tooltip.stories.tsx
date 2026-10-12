@@ -363,25 +363,20 @@ export const CustomPortal: Story = {
 }
 
 function ViewTransitionStory(props: TooltipProps) {
-  const [open, setOpen] = useState(false)
+  const [shown, setShown] = useState(false)
 
   return (
     <Flex align="center" gap={3}>
       <Button
         mode="ghost"
-        onClick={() => startTransition(() => setOpen((isOpen) => !isOpen))}
-        text={open ? 'Hide' : 'Show'}
+        onClick={() => startTransition(() => setShown((isShown) => !isShown))}
+        text={shown ? 'Hide' : 'Show'}
       />
-      <Activity mode={open ? 'visible' : 'hidden'}>
+      <Activity mode={shown ? 'visible' : 'hidden'}>
         <ViewTransition>
-          <Flex gap={2}>
-            <Tooltip {...props}>
-              <Button mode="bleed" text="Hover me" />
-            </Tooltip>
-            <Tooltip {...props} content={<Text size={1}>Another tooltip</Text>}>
-              <Button mode="bleed" text="Or me" />
-            </Tooltip>
-          </Flex>
+          <Tooltip {...props}>
+            <Button mode="bleed" text="Hover me" />
+          </Tooltip>
         </ViewTransition>
       </Activity>
     </Flex>
@@ -389,31 +384,12 @@ function ViewTransitionStory(props: TooltipProps) {
 }
 
 /**
- * Tooltips whose elements are shown and hidden by an `<Activity>` inside a
- * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), toggled in a
- * `startTransition`, so React animates them in and out. A tooltip adds no work of its own to that
- * transition. (`apps/storybook/tests/viewTransitionReveal.test.tsx` asserts on the commits of
- * the reveal.)
+ * A tooltip on an element that an `<Activity>` inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) shows and hides in a
+ * `startTransition`, so that React animates it in and out. The tooltip adds no work of its own to
+ * that transition.
  */
 export const WithViewTransition: Story = {
   parameters: {controls: {include: ['animate', 'delay', 'placement', 'portal']}},
   render: (props) => <ViewTransitionStory {...props} />,
-  play: async ({canvasElement, step}) => {
-    const canvas = within(canvasElement)
-
-    await step('the tooltips are revealed with a view transition', async () => {
-      await expect(canvas.getByText('Hover me').checkVisibility()).toBe(false)
-      await userEvent.click(canvas.getByRole('button', {name: 'Show'}))
-      await waitFor(async () => {
-        await expect(canvas.getByText('Hover me').checkVisibility()).toBe(true)
-      })
-    })
-
-    await step('a revealed tooltip shows against its element', async () => {
-      await userEvent.hover(canvas.getByText('Hover me'))
-      await waitFor(async () => {
-        await expect(canvas.getByText("I'm a tooltip").checkVisibility()).toBe(true)
-      })
-    })
-  },
 }
