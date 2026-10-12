@@ -20,6 +20,9 @@ import {
   useRef,
   useState,
 } from 'react'
+// TODO: switch to `useEffectEvent` from `react` once https://github.com/facebook/react/issues/34818
+// is fixed in the lowest React version we support (consumers may wrap `Autocomplete` in `memo`)
+import {useEffectEvent} from 'use-effect-event'
 
 import {EMPTY_ARRAY, EMPTY_RECORD} from '../../constants'
 import {_raf} from '../../helpers/animation'
@@ -428,14 +431,13 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
     dispatch({type: 'input/focus'})
   }, [])
 
-  // Move DOM focus to the active option, when keyboard navigation put focus in the list
-  // (`listFocused`; a plain open with a selected value leaves focus in the input, however
-  // focusable the option is) and the list shows: an arrow key pressed between the render that
-  // asked for the list and the deferred one that shows it finds no visible option yet.
-  useEffect(() => {
+  // Focus the active option, but only while the keyboard is in the list: opening the list leaves
+  // focus in the input even when the option is focusable (a link or button). An effect event, so
+  // focus entering the list on a click does not re-run it and scroll the clicked option away.
+  const focusActiveOption = useEffectEvent(() => {
     const listElement = listBoxElementRef.current
 
-    if (!expanded || !listFocused || !listElement) return
+    if (!listFocused || !listElement) return
 
     const activeOption = filteredOptions.find((o) => o.value === activeValue)
 
@@ -453,7 +455,12 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
         focusFirstDescendant(activeItemElement)
       }
     }
-  }, [activeValue, expanded, filteredOptions, listFocused])
+  })
+
+  // Also runs when the deferred render shows the list, for an arrow key pressed before it did
+  useEffect(() => {
+    if (expanded) focusActiveOption()
+  }, [activeValue, expanded, filteredOptions])
 
   const clearButton = useMemo(() => {
     if (!loading && !disabled && value) {

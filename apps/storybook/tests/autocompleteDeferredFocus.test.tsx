@@ -2,7 +2,7 @@ import {ThemeProvider} from '@sanity/ui'
 import {Autocomplete} from '@sanity/ui/autocomplete'
 import {buildTheme} from '@sanity/ui/theme'
 import {use} from 'react'
-import {describe, expect, test} from 'vitest'
+import {describe, expect, test, vi} from 'vitest'
 import {render} from 'vitest-browser-react'
 import {userEvent} from 'vitest/browser'
 
@@ -93,5 +93,27 @@ describe('Components/Autocomplete', () => {
     await userEvent.keyboard('{ArrowDown}')
 
     await expect.poll(focusedOptionId).toBe('ac-option-bar')
+  })
+
+  test('selects a clicked option while the active option is scrolled out of view', async () => {
+    const onChange = vi.fn()
+    const options = Array.from({length: 50}, (_, i) => ({value: `option-${i}`}))
+    const screen = await render(
+      <ThemeProvider theme={theme}>
+        <Autocomplete
+          filterOption={() => true}
+          id="ac"
+          onChange={onChange}
+          openButton
+          options={options}
+          value="option-0"
+        />
+      </ThemeProvider>,
+    )
+
+    await userEvent.click(screen.getByRole('button', {name: 'Open'}))
+    await userEvent.click(screen.getByRole('option', {name: 'option-49'}))
+
+    await expect.poll(() => onChange.mock.calls).toEqual([['option-49']])
   })
 })
