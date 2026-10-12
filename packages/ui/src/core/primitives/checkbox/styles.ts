@@ -6,7 +6,7 @@ import {rem} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 
 export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
-  const {color, input, radius} = getTheme_v2(props.theme)
+  const {input, radius} = getTheme_v2(props.theme)
   const {focusRing} = input.checkbox
 
   return css`
@@ -27,13 +27,8 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
       height: ${rem(input.checkbox.size)};
       width: ${rem(input.checkbox.size)};
       box-sizing: border-box;
-      box-shadow: ${focusRingBorderStyle({
-        color: color.input.default.enabled.border,
-        width: input.border.width,
-      })};
       border-radius: ${rem(radius[2])};
       line-height: 1;
-      background-color: ${color.input.default.enabled.bg};
 
       & > svg {
         display: block;
@@ -49,15 +44,6 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
       }
     }
 
-    &:checked + span {
-      background: ${color.input.default.enabled.fg};
-      box-shadow: ${focusRingBorderStyle({
-        color: color.input.default.enabled.fg,
-        width: input.border.width,
-      })};
-      color: ${color.input.default.enabled.bg};
-    }
-
     /* focus */
     &:not(:disabled):focus:focus-visible + span {
       box-shadow: ${focusRingStyle({focusRing})};
@@ -66,6 +52,36 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
     /* focus when checked - uses a different offset */
     &:not(:disabled):focus:focus-visible&:checked + span {
       box-shadow: ${focusRingStyle({focusRing: {width: 1, offset: 1}})};
+    }
+
+    &:checked + span > svg:first-child {
+      opacity: 1;
+    }
+    &:indeterminate + span > svg:last-child {
+      opacity: 1;
+    }
+  `
+}
+
+export function inputElementColorStyles(props: ThemeProps): ReturnType<typeof css> {
+  const {color, input} = getTheme_v2(props.theme)
+
+  return css`
+    & + span {
+      box-shadow: ${focusRingBorderStyle({
+        color: color.input.default.enabled.border,
+        width: input.border.width,
+      })};
+      background-color: ${color.input.default.enabled.bg};
+    }
+
+    &:checked + span {
+      background: ${color.input.default.enabled.fg};
+      box-shadow: ${focusRingBorderStyle({
+        color: color.input.default.enabled.fg,
+        width: input.border.width,
+      })};
+      color: ${color.input.default.enabled.bg};
     }
 
     &[data-error] + span {
@@ -110,13 +126,6 @@ export function inputElementStyles(props: ThemeProps): ReturnType<typeof css> {
 
     &[data-read-only]&:checked + span {
       background-color: ${color.input.default.readOnly.muted.bg};
-    }
-
-    &:checked + span > svg:first-child {
-      opacity: 1;
-    }
-    &:indeterminate + span > svg:last-child {
-      opacity: 1;
     }
   `
 }

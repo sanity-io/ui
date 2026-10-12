@@ -2,11 +2,11 @@ import {lazy, Suspense} from 'react'
 import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
-import {responsiveCodeFontStyle} from '../../styles/font/codeFontStyle'
+import {_fontWeight, _responsiveFontSize} from '../../styles/font/responsiveFont'
 import {FontWeightStyleProps, ResponsiveFontSizeStyleProps} from '../../styles/font/types'
 import {_getArrayProp} from '../../styles/helpers'
 import {ElementType, Props} from '../../types/component'
-import {codeBaseStyle} from './styles'
+import {codeBaseStyle, codeSyntaxStyle} from './styles'
 
 const LazyRefractor = lazy(() => import('./refractor'))
 
@@ -25,9 +25,15 @@ export interface CodeOwnProps {
  */
 export type CodeProps<E extends ElementType = 'pre'> = Props<CodeOwnProps, E>
 
-const StyledCode = styled.pre<FontWeightStyleProps & ResponsiveFontSizeStyleProps>(
-  codeBaseStyle,
-  responsiveCodeFontStyle,
+const CodeBase = styled.pre(codeBaseStyle)
+
+const CodeSyntax = styled(CodeBase)`
+  ${codeSyntaxStyle}
+`
+
+const StyledCode = styled(CodeSyntax)<FontWeightStyleProps & ResponsiveFontSizeStyleProps>(
+  (props) => _fontWeight('code', props),
+  (props) => _responsiveFontSize('code', props),
 )
 
 function CodeComponent(

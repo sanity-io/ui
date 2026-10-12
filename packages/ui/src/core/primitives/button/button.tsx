@@ -15,7 +15,12 @@ import {Flex} from '../flex/flex'
 import {Spinner} from '../spinner/spinner'
 import {Text} from '../text/text'
 import {ResponsivePaddingProps, ResponsiveRadiusProps} from '../types'
-import {buttonBaseStyles, buttonColorStyles} from './styles'
+import {
+  buttonBaseStyles,
+  buttonColorStyles,
+  buttonDisabledAndFocusStyles,
+  buttonStyles,
+} from './styles'
 
 import {buttonLoadingBox} from './button.css'
 
@@ -54,9 +59,17 @@ export interface ButtonOwnProps extends ResponsivePaddingProps, ResponsiveRadius
  */
 export type ButtonProps<E extends ElementType = 'button'> = Props<ButtonOwnProps, E>
 
-const StyledButton = styled.button<
-  {$mode: ButtonMode; $tone: ButtonTone; $width?: ButtonWidth} & ResponsiveRadiusStyleProps
->(responsiveRadiusStyle, buttonBaseStyles, buttonColorStyles)
+const ButtonBase = styled.button(buttonBaseStyles)
+
+const ButtonColor = styled(ButtonBase)<{$mode: ButtonMode; $tone: ButtonTone}>(buttonColorStyles)
+
+const ButtonDisabledAndFocus = styled(ButtonColor)<{$mode: ButtonMode; $tone: ButtonTone}>(
+  buttonDisabledAndFocusStyles,
+)
+
+const StyledButton = styled(ButtonDisabledAndFocus)<
+  {$width?: ButtonWidth} & ResponsiveRadiusStyleProps
+>(responsiveRadiusStyle, buttonStyles)
 
 function ButtonComponent(
   props: ButtonOwnProps & {as?: ElementType} & Omit<

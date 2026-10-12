@@ -5,14 +5,19 @@ import {_responsive, rem} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
 
-export function avatarRootStyle(props: AvatarRootStyleProps & ThemeProps): CSSObject {
+export function avatarColorStyle(props: AvatarRootStyleProps): CSSObject {
   const {$color} = props
-  const {avatar} = getTheme_v2(props.theme)
 
   return {
     '--avatar-bg-color': `var(--card-avatar-${$color}-bg-color)`,
     '--avatar-fg-color': `var(--card-avatar-${$color}-fg-color)`,
+  }
+}
 
+export function avatarRootStyle(props: ThemeProps): CSSObject {
+  const {avatar} = getTheme_v2(props.theme)
+
+  return {
     'width': 'var(--avatar-size)',
     'height': 'var(--avatar-size)',
     'borderRadius': 'calc(var(--avatar-size) / 2)',

@@ -14,8 +14,11 @@ import {
 } from '../../styles/input/responsiveInputPaddingStyle'
 import {
   textInputBaseStyle,
+  textInputColorStyle,
   textInputFontSizeStyle,
+  textInputFontStyle,
   TextInputInputStyleProps,
+  textInputRepresentationColorStyle,
   textInputRepresentationStyle,
   TextInputRepresentationStyleProps,
 } from '../../styles/input/textInputStyle'
@@ -116,16 +119,25 @@ const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
   }
 `
 
-const Input = styled.input<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
+const InputBase = styled.input`
+  ${textInputBaseStyle}
+`
+
+const InputColor = styled(InputBase)<TextInputInputStyleProps>(textInputColorStyle)
+
+const Input = styled(InputColor)<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
-  textInputBaseStyle,
+  textInputFontStyle,
   textInputFontSizeStyle,
 )
 
-const Presentation = styled.span<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputRepresentationStyle,
+const PresentationColor = styled.span<TextInputRepresentationStyleProps>(
+  textInputRepresentationColorStyle,
 )
+
+const Presentation = styled(PresentationColor)<
+  ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps
+>(responsiveRadiusStyle, textInputRepresentationStyle)
 
 // Stays on styled-components: `background-color: transparent` must beat Card's
 // runtime `background-color: var(--card-bg-color)` at equal specificity, which

@@ -1,28 +1,13 @@
 import {css} from 'styled-components'
 
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {_fontBase} from '../../styles/font/responsiveFont'
 import {ThemeProps} from '../../styles/types'
-import {HeadingStyleProps} from './types'
 
-export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnType<typeof css> {
-  const {$accent, $muted} = props
+export function headingBaseStyle(props: ThemeProps): ReturnType<typeof css> {
   const {font} = getTheme_v2(props.theme)
 
   return css`
-    ${
-      $accent &&
-      css`
-        color: var(--card-accent-fg-color);
-      `
-    }
-
-    ${
-      $muted &&
-      css`
-        color: var(--card-muted-fg-color);
-      `
-    }
-
     & code {
       font-family: ${font.code.family};
       border-radius: 1px;
@@ -66,5 +51,7 @@ export function headingBaseStyle(props: HeadingStyleProps & ThemeProps): ReturnT
     & [data-sanity-icon] {
       vertical-align: baseline;
     }
+
+    ${_fontBase('heading', props)}
   `
 }

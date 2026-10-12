@@ -15,7 +15,7 @@ import {CardTone} from '../../types/card'
 import {ElementType, Props} from '../../types/component'
 import {Box, BoxOwnProps} from '../box/box'
 import {ResponsiveBorderProps, ResponsiveRadiusProps, ResponsiveShadowProps} from '../types'
-import {cardStyle} from './styles'
+import {cardCheckeredStyle, cardColorStyle, cardStaticStyle, cardStyle} from './styles'
 import {CardStyleProps} from './types'
 
 /**
@@ -46,12 +46,22 @@ export interface CardOwnProps
  */
 export type CardProps<E extends ElementType = 'div'> = Props<CardOwnProps, E>
 
-const StyledCard = styled(Box)<
-  CardStyleProps &
-    ResponsiveRadiusStyleProps &
-    ResponsiveBorderStyleProps &
-    ResponsiveShadowStyleProps
->(responsiveBorderStyle, responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
+// Each level gets its own class per distinct CSS, so the colors aren't repeated per combination of
+// props. Their order is the cascade order: borders before the button reset, `style.card.root` last
+const CardBorder = styled(Box)<CardStyleProps & ResponsiveBorderStyleProps>(
+  responsiveBorderStyle,
+  cardCheckeredStyle,
+)
+
+const CardStatic = styled(CardBorder)`
+  ${cardStaticStyle}
+`
+
+const CardColor = styled(CardStatic)<CardStyleProps>(cardColorStyle)
+
+const StyledCard = styled(CardColor)<
+  CardStyleProps & ResponsiveRadiusStyleProps & ResponsiveShadowStyleProps
+>(responsiveRadiusStyle, responsiveShadowStyle, cardStyle)
 
 function CardComponent(
   props: CardOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,

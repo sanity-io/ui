@@ -1,15 +1,39 @@
 import {ThemeColorCard_v2} from '../../../theme/system/color/color'
 import {ThemeColorState_v2} from '../../../theme/system/color/state'
-import {CSSObject} from '../../../theme/system/css'
+
+const cache = new WeakMap<ThemeColorCard_v2, WeakMap<ThemeColorState_v2, string>>()
 
 /**
+ * Joined once per pair of theme color objects, as themes are immutable.
+ *
  * @internal
  */
 export function _cardColorStyle(
   base: ThemeColorCard_v2,
   color: ThemeColorState_v2,
   checkered = false,
-): CSSObject {
+): string {
+  let byColor = cache.get(base)
+  if (!byColor) cache.set(base, (byColor = new WeakMap()))
+
+  let declarations = byColor.get(color)
+  if (declarations === undefined) {
+    declarations = Object.entries(cardColorVariables(base, color))
+      .filter(([, value]) => value)
+      .map(([name, value]) => `${name}: ${value};`)
+      .join('')
+    byColor.set(color, declarations)
+  }
+
+  return checkered
+    ? `${declarations}--card-bg-image: repeating-conic-gradient(${color.bg} 0% 25%, ${color.muted.bg} 0% 50%);`
+    : declarations
+}
+
+function cardColorVariables(
+  base: ThemeColorCard_v2,
+  color: ThemeColorState_v2,
+): Record<`--${string}`, string | undefined> {
   return {
     // from base
 
@@ -46,9 +70,6 @@ export function _cardColorStyle(
     '--card-avatar-cyan-fg-color': color.avatar.cyan.fg,
 
     '--card-bg-color': color.bg,
-    '--card-bg-image': checkered
-      ? `repeating-conic-gradient(${color.bg} 0% 25%, ${color.muted.bg} 0% 50%)`
-      : undefined,
 
     '--card-border-color': color.border,
 

@@ -1,7 +1,8 @@
 import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
-import {responsiveLabelFont} from '../../styles/font/labelFontStyle'
+import {fontColorStyle} from '../../styles/font/fontColorStyle'
+import {_fontWeight, _responsiveFontSize} from '../../styles/font/responsiveFont'
 import {responsiveTextAlignStyle} from '../../styles/font/textAlignStyle'
 import {_getArrayProp} from '../../styles/helpers'
 import {ElementType, Props} from '../../types/component'
@@ -31,13 +32,18 @@ export interface LabelOwnProps {
  */
 export type LabelProps<E extends ElementType = 'div'> = Props<LabelOwnProps, E>
 
-const StyledLabel = styled.div<{
+const LabelBase = styled.div(labelBaseStyle)
+
+const LabelSize = styled(LabelBase)<{$size: number[]}>((props) =>
+  _responsiveFontSize('label', props),
+)
+
+const StyledLabel = styled(LabelSize)<{
   $accent?: boolean
   $align: TextAlign[]
   $muted: boolean
-  $size: number[]
   $weight?: ThemeFontWeightKey
-}>(responsiveLabelFont, responsiveTextAlignStyle, labelBaseStyle)
+}>((props) => _fontWeight('label', props), responsiveTextAlignStyle, fontColorStyle)
 
 function LabelComponent(
   props: LabelOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,

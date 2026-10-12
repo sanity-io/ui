@@ -8,7 +8,7 @@ import {useTheme_v2} from '../../theme/useTheme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types/avatar'
 import {ElementType, Props} from '../../types/component'
 import {Label} from '../label/label'
-import {avatarRootStyle, responsiveAvatarSizeStyle} from './styles'
+import {avatarColorStyle, avatarRootStyle, responsiveAvatarSizeStyle} from './styles'
 
 import {
   avatarArrow,
@@ -45,9 +45,11 @@ export interface AvatarOwnProps {
  */
 export type AvatarProps<E extends ElementType = 'div'> = Props<AvatarOwnProps, E>
 
-const StyledAvatar = styled.div<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
+const AvatarBase = styled.div(avatarRootStyle)
+
+const StyledAvatar = styled(AvatarBase)<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
   responsiveAvatarSizeStyle,
-  avatarRootStyle,
+  avatarColorStyle,
 )
 
 // Stays on styled-components: `color: inherit` must beat Label's runtime

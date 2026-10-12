@@ -20,10 +20,10 @@ function flattenCss(value: unknown): string {
 describe('typography SVG reset', () => {
   it('unsets max-width wherever SVG display is forced to inline', () => {
     const snippets = [
-      flattenCss(textBaseStyle({theme, $muted: false})),
-      flattenCss(labelBaseStyle({theme, $muted: false})),
-      flattenCss(headingBaseStyle({$accent: false, $muted: false, theme})),
-      flattenCss(codeBaseStyle()),
+      flattenCss(textBaseStyle({theme})),
+      flattenCss(labelBaseStyle({theme})),
+      flattenCss(headingBaseStyle({theme})),
+      flattenCss(codeBaseStyle({theme})),
     ]
 
     for (const css of snippets) {

@@ -1,6 +1,8 @@
 import {css, ExecutionContext} from 'styled-components'
 
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {_fontBase} from '../../styles/font/responsiveFont'
+import {ThemeProps} from '../../styles/types'
 
 function codeSyntaxHighlightingStyle({theme}: ExecutionContext) {
   const {
@@ -47,16 +49,12 @@ function codeSyntaxHighlightingStyle({theme}: ExecutionContext) {
   }
 }
 
-export function codeBaseStyle(): ReturnType<typeof css> {
+export function codeBaseStyle(props: ThemeProps): ReturnType<typeof css> {
   return css`
     color: var(--card-code-fg-color);
 
     & code {
       font-family: inherit;
-
-      &.refractor .token {
-        ${codeSyntaxHighlightingStyle}
-      }
     }
 
     & a {
@@ -76,5 +74,13 @@ export function codeBaseStyle(): ReturnType<typeof css> {
     & [data-sanity-icon] {
       vertical-align: baseline;
     }
+
+    ${_fontBase('code', props)}
   `
 }
+
+export const codeSyntaxStyle = css`
+  & code.refractor .token {
+    ${codeSyntaxHighlightingStyle}
+  }
+`
