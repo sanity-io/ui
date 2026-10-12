@@ -50,6 +50,8 @@ export default defineConfig({
           isolate: false,
           fileParallelism: false,
           retry: process.env.CI ? 2 : 0,
+          // Large color-matrix stories exceed 15s on styled-components 6.1.
+          testTimeout: 120_000,
           browser: {
             enabled: true,
             headless: true,

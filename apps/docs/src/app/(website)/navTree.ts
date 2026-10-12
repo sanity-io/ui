@@ -6,10 +6,10 @@ import type {NavItemMeta, NavNode} from '#lib/nav/types.ts'
 // list of routes. Group folders (e.g. /docs/primitive) have a `nav.ts` but no
 // `page.tsx`; the lazy page glob is only used for its keys, to know which
 // folders are actual pages.
-const navModules = import.meta.glob('./**/nav.ts', {eager: true, import: 'nav'}) as Record<
-  string,
-  NavItemMeta
->
+// Pick `nav` off the module namespace instead of passing `{import: 'nav'}`:
+// since next@16.4.0 the `import` option yields `undefined` for every match
+// unless the same modules are also pulled in as namespaces somewhere.
+const navModules = import.meta.glob<{nav: NavItemMeta}>('./**/nav.ts', {eager: true})
 const pageModules = import.meta.glob('./**/page.tsx')
 
 function parseKey(key: string, suffix: string): string[] {
@@ -23,9 +23,9 @@ interface Entry {
   meta: NavItemMeta
 }
 
-const entries: Entry[] = Object.entries(navModules).map(([key, meta]) => ({
+const entries: Entry[] = Object.entries(navModules).map(([key, {nav}]) => ({
   segments: parseKey(key, '/nav.ts'),
-  meta,
+  meta: nav,
 }))
 
 const pagePaths = new Set(

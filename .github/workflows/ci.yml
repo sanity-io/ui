@@ -30,21 +30,56 @@ jobs:
   test:
     needs: [build]
     runs-on: ${{ matrix.os }}
-    name: Test ${{ matrix.runtime }} / ${{ matrix.os }}
+    name: Test ${{ matrix.runtime }} / ${{ matrix.os }} / styled-components@${{ matrix.styled-components }}
+    # Keep prerelease failures non-blocking until v7 is stable.
+    continue-on-error: ${{ matrix.experimental == true }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
         runtime: [node@lts]
+        styled-components: [devDependencies, '6.1.0']
         include:
           - os: macos-latest
             runtime: node@lts
+            styled-components: devDependencies
+          - os: ubuntu-latest
+            runtime: node@lts
+            styled-components: test
+            experimental: true
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
         with:
           runtime: ${{ matrix.runtime }}
+      - name: Pin styled-components@${{ matrix.styled-components }}
+        if: matrix.styled-components != 'devDependencies'
+        env:
+          SC_SPEC: ${{ matrix.styled-components }}
+        run: |
+          SC_VERSION="$(npm view "styled-components@${SC_SPEC}" version)"
+          echo "Resolved styled-components@${SC_SPEC} to ${SC_VERSION}"
+          grep -q '^  styled-components: ' pnpm-workspace.yaml
+          sed -i -E "s|^  styled-components: .+$|  styled-components: ${SC_VERSION}|" pnpm-workspace.yaml
+          sed -i '/^minimumReleaseAgeExclude:/a\  - styled-components' pnpm-workspace.yaml
+          pnpm install --no-frozen-lockfile
       - run: pnpm test
+
+  # Aggregates the matrix under the name the branch protection rule requires.
+  # Experimental legs can't fail it: `continue-on-error` legs that fail still
+  # aggregate to `success`.
+  test-required:
+    name: Test node@lts / ubuntu-latest
+    needs: [test]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check matrix result
+        env:
+          RESULT: ${{ needs.test.result }}
+        run: |
+          echo "Test matrix result: $RESULT"
+          test "$RESULT" = success
 
   coverage:
     needs: [build]
@@ -62,9 +97,29 @@ jobs:
 
   storybook-test:
     runs-on: ubuntu-latest
+    name: Storybook test / styled-components@${{ matrix.styled-components }}
+    continue-on-error: ${{ matrix.experimental == true }}
+    strategy:
+      fail-fast: false
+      matrix:
+        styled-components: [devDependencies, '6.1.0']
+        include:
+          - styled-components: test
+            experimental: true
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
+      - name: Pin styled-components@${{ matrix.styled-components }}
+        if: matrix.styled-components != 'devDependencies'
+        env:
+          SC_SPEC: ${{ matrix.styled-components }}
+        run: |
+          SC_VERSION="$(npm view "styled-components@${SC_SPEC}" version)"
+          echo "Resolved styled-components@${SC_SPEC} to ${SC_VERSION}"
+          grep -q '^  styled-components: ' pnpm-workspace.yaml
+          sed -i -E "s|^  styled-components: .+$|  styled-components: ${SC_VERSION}|" pnpm-workspace.yaml
+          sed -i '/^minimumReleaseAgeExclude:/a\  - styled-components' pnpm-workspace.yaml
+          pnpm install --no-frozen-lockfile
       - name: Store Playwright's version
         id: playwright-version
         run: |
@@ -84,6 +139,20 @@ jobs:
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
-          name: vitest-failure-screenshots
+          name: vitest-failure-screenshots-styled-components-${{ matrix.styled-components }}
           path: apps/storybook/**/__screenshots__/
           if-no-files-found: ignore
+
+  # See `test-required`.
+  storybook-test-required:
+    name: storybook-test
+    needs: [storybook-test]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check matrix result
+        env:
+          RESULT: ${{ needs.storybook-test.result }}
+        run: |
+          echo "Storybook test matrix result: $RESULT"
+          test "$RESULT" = success

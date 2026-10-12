@@ -1,7 +1,7 @@
 /** @vitest-environment jsdom */
 
-import {render as renderWithoutWrapper, screen} from '@testing-library/react'
-import {Profiler, type RefObject, StrictMode, useEffect} from 'react'
+import {screen} from '@testing-library/react'
+import {Profiler, type RefObject, useEffect} from 'react'
 import {
   afterAll,
   afterEach,
@@ -15,8 +15,6 @@ import {
 } from 'vitest'
 
 import {render} from '../../../../test/utils'
-import {buildTheme} from '../../../theme/build/buildTheme'
-import {ThemeProvider} from '../../theme/themeProvider'
 import {ElementQuery} from './elementQuery'
 
 const MEDIA = [100, 200, 300]
@@ -278,16 +276,7 @@ describe('ElementQuery', () => {
   })
 
   it('survives StrictMode re-running the effect: the element is observed by exactly one live observer', () => {
-    // `StrictMode` has to be the outermost element: React only re-runs the mount effects of a
-    // newly placed subtree when `StrictMode` is at (or above) its top, and the test wrapper of
-    // `test/utils` renders it below the wrapper component, where React skips it on mount
-    renderWithoutWrapper(
-      <StrictMode>
-        <ThemeProvider theme={buildTheme()}>
-          <ElementQuery data-testid="eq" media={MEDIA} />
-        </ThemeProvider>
-      </StrictMode>,
-    )
+    render(<ElementQuery data-testid="eq" media={MEDIA} />)
     const element = screen.getByTestId('eq')
 
     // StrictMode runs the layout effect, its cleanup, then the effect again

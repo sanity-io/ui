@@ -1,7 +1,22 @@
+import {css} from 'styled-components'
+
 import {CSSObject} from '../../theme/system/css'
 import {Theme} from '../../theme/system/theme'
 import {getTheme_v2} from '../../theme/versioning/getTheme_v2'
 import {EMPTY_ARRAY} from '../constants'
+
+const EMPTY_CSS_OBJECT: CSSObject = {}
+
+/**
+ * Tags style chunks with the metadata required for v7 function interpolations.
+ * The `CSSObject[]` return type avoids exposing styled-components types.
+ *
+ * @internal
+ */
+export function _ruleSet(...rules: unknown[]): CSSObject[] {
+  // oxlint-disable-next-line no-unsafe-type-assertion
+  return css(EMPTY_CSS_OBJECT, ...(rules as never[])) as unknown as CSSObject[]
+}
 
 /**
  * @internal
@@ -24,6 +39,8 @@ export function rem(pixelValue: number): string | 0 {
 }
 
 /**
+ * Builds a spreadable, v7-compatible rule array for responsive styles.
+ *
  * @internal
  */
 export function _responsive<T>(
@@ -33,11 +50,13 @@ export function _responsive<T>(
 ): CSSObject[] {
   const statements = values?.map(callback) || []
 
-  return statements.map((statement, mediaIndex) => {
-    if (mediaIndex === 0) return statement
+  return _ruleSet(
+    ...statements.map((statement, mediaIndex) => {
+      if (mediaIndex === 0) return statement
 
-    return {[`@media screen and (min-width: ${media[mediaIndex - 1]}px)`]: statement}
-  })
+      return {[`@media screen and (min-width: ${media[mediaIndex - 1]}px)`]: statement}
+    }),
+  )
 }
 
 /**

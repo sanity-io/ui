@@ -1,6 +1,6 @@
 import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive, rem} from '../helpers'
+import {_responsive, _ruleSet, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveGridStyleProps} from './types'
 
@@ -27,20 +27,20 @@ const GRID_AUTO_ROWS = {
   fr: 'minmax(0, 1fr)',
 }
 
-export function responsiveGridStyle(): Array<
-  CSSObject | ((props: ResponsiveGridStyleProps & ThemeProps) => CSSObject[])
-> {
-  return [
-    GRID_CSS,
-    responsiveGridAutoFlowStyle,
-    responsiveGridAutoRowsStyle,
-    responsiveGridAutoColsStyle,
-    responsiveGridColumnsStyle,
-    responsiveGridRowsStyle,
-    responsiveGridGapStyle,
-    responsiveGridGapXStyle,
-    responsiveGridGapYStyle,
-  ]
+const RULES = _ruleSet(
+  GRID_CSS,
+  responsiveGridAutoFlowStyle,
+  responsiveGridAutoRowsStyle,
+  responsiveGridAutoColsStyle,
+  responsiveGridColumnsStyle,
+  responsiveGridRowsStyle,
+  responsiveGridGapStyle,
+  responsiveGridGapXStyle,
+  responsiveGridGapYStyle,
+)
+
+export function responsiveGridStyle(): CSSObject[] {
+  return RULES
 }
 
 function responsiveGridAutoFlowStyle(props: ResponsiveGridStyleProps & ThemeProps) {

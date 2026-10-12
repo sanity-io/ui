@@ -1,7 +1,7 @@
 import {CSSObject} from '../../../theme/system/css'
 import {ThemeFontKey, ThemeFontSize} from '../../../theme/system/font'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive, rem} from '../helpers'
+import {_responsive, _ruleSet, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {FontWeightStyleProps, ResponsiveFontSizeStyleProps} from './types'
 
@@ -58,12 +58,12 @@ export function responsiveFont(
       responsiveFont.warned = true
     }
 
-    return [base]
+    return _ruleSet(base)
   }
 
   const resp = _responsive(media, $size, (sizeIndex) => fontSize(sizes[sizeIndex] || defaultSize))
 
-  return [base, ...resp]
+  return _ruleSet(base, resp)
 }
 
 function fontSize(size: ThemeFontSize): CSSObject {
