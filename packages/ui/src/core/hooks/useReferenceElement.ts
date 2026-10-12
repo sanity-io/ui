@@ -63,8 +63,7 @@ export function useReferenceElement(
   }, [childRef])
 
   const handOverReference = useCallback(() => {
-    // Never `null`: Floating UI copies `Popover`'s `referenceElement` option into `refs.reference`
-    // only when the option changes, so a `null` here would stop positioning
+    // Never `null`: that would replace `Popover`'s `referenceElement` option in `refs.reference`
     if (referenceRef.current) refs.setReference(referenceRef.current)
   }, [refs])
 
