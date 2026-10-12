@@ -87,14 +87,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   relatedElements?: HTMLElement[]
   /** The callback function for rendering each option. */
   renderOption?: (option: Option) => React.JSX.Element
-  /**
-   * Renders the results popover. `content` is the list of matching options, or `null` when
-   * there are none; `hidden` is `true` while there is nothing to show (no query, or `loading`
-   * without options yet). It flips to `false` one render after the list is asked for, at
-   * transition priority, or in the same render when that render already is a transition.
-   *
-   * @beta
-   */
+  /** @beta */
   renderPopover?: (
     props: {
       content: React.JSX.Element | null
@@ -276,47 +269,12 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
   )
   const filteredOptionsLen = filteredOptions.length
   const activeItemId = activeValue ? `${id}-option-${activeValue}` : undefined
-  // A query is in progress while the input holds one and has focus, or results are loading.
-  // The open button is disabled and hidden from assistive technology for as long as that is
-  // the case, whether or not anything matches (clicking it would only keep the current query).
   const querying = (query !== null && loading) || (focused && query !== null)
-
-  // Something to show: matching options, or a custom `renderPopover` that is not waiting for
-  // options (it decides for itself what to show then, a "no results" message, say). Results
-  // arriving for a pending query, be it async options or a query that starts matching, are
-  // thereby the moment the list opens rather than a change inside an open list. For a
-  // `renderPopover` with options that filter client-side, a query going from no match to a
-  // match stays a change inside the open list.
-  const hasResults = filteredOptionsLen > 0 || (renderPopover !== undefined && !loading)
-  const shouldExpand = querying && hasResults
-
-  // Opening the popover is deferred: when the render that asks for the list is urgent (a
-  // keystroke, focus, new options), the list follows in a deferred render at transition
-  // priority, so that it never interrupts a pre-render in progress inside the popover's hidden
-  // `<Activity>` (it pre-renders on intent, in a transition) and never holds up the input. A
-  // render that is itself non-urgent shows the list right away. What is deferred is the number
-  // of the open cycle, not `shouldExpand`: a deferred `true` would survive an urgent close until
-  // its own deferred render commits, and a reopen before that (Escape, then a keystroke) would
-  // open urgently. Each closed → open flip gets a new number, counted here where `shouldExpand`
-  // is known (it includes the `loading` prop, which the reducer does not see).
-  const [openCycle, setOpenCycle] = useState(0)
-  const [prevShouldExpand, setPrevShouldExpand] = useState(shouldExpand)
-
-  if (shouldExpand !== prevShouldExpand) {
-    setPrevShouldExpand(shouldExpand)
-    if (shouldExpand) setOpenCycle((cycle) => cycle + 1)
-  }
-
-  const deferredOpenCycle = useDeferredValue(openCycle)
-
-  // Closing is urgent: a close also clears `query` and puts the active option back on the
-  // value, and a list still showing while that has happened would briefly show every option
-  // with the highlight moved. Hiding the `<Activity>` renders no content, so there is nothing
-  // for it to interrupt. Every dispatch stays synchronous, none goes through `startTransition`:
-  // a transition pending in the reducer would race the render-time `value` sync above and the
-  // parent's `value` would be lost (see sanity-io/ui#3138). `aria-expanded` and the popover
-  // follow `expanded`.
-  const expanded = shouldExpand && deferredOpenCycle === openCycle
+  // The list opens in a deferred render, so the keystroke, focus or click that opens it paints
+  // first, and closes in the same render as the state that closes it. Dispatching the open in a
+  // transition instead would drop a render-phase `value` sync while the transition is pending.
+  const deferredQuerying = useDeferredValue(querying)
+  const expanded = querying && deferredQuerying
 
   const handleRootBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>) => {
