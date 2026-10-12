@@ -274,18 +274,13 @@ describe('closed popover', () => {
       expect(second).toEqual(first)
     })
 
-    // With `constrainSize` the `size` middleware writes the max width (the smaller of the room
-    // within the boundary and the cap from the boundary width) and the max height to the card
-    // during the positioning pass, instead of React rendering the cap
     test('is capped to the room within the boundary when `constrainSize` is set', async () => {
       await render(<Harness constrainSize />)
 
       const {first, second} = await openAndReadFirstFrame()
-      // The room is the boundary's client width (its scrollbar excluded, unlike the cap from its
-      // border-box width) minus the padding on both sides
+      // Within the boundary's client box (no scrollbar, unlike the cap from its border box), less
+      // the padding: on both sides for the width, below the card's top for the height
       const room = boundary().clientWidth - BOUNDARY_PADDING
-      // And below the reference: from the card's top (the reference's bottom plus the distance) to
-      // the bottom of the boundary's client box, less the padding
       const roomBelow =
         boundary().getBoundingClientRect().top +
         boundary().clientHeight -
@@ -302,30 +297,37 @@ describe('closed popover', () => {
     })
   })
 
-  // The styles the `size` middleware owns are written during positioning, so they follow their
-  // inputs through positioning passes rather than through renders of the card
+  // A positioning pass commits only for Floating UI's positioning data
   describe('size while open', () => {
-    test('follows the reference width in the positioning pass when `matchReferenceWidth` is set', async () => {
+    test('commits once for a reference resize when `matchReferenceWidth` is set', async () => {
       await render(<Harness matchReferenceWidth />)
 
       await open()
-
-      // The middleware writes the reference's layout width, fractional and all
-      const referenceWidth = reference().getBoundingClientRect().width
-
-      expect(Math.abs(parseFloat(card()!.style.width) - referenceWidth)).toBeLessThan(0.01)
       popoverCommits = 0
 
-      // The reference growing resizes the card inside the positioning pass that follows it. The
-      // one commit is Floating UI's, for its positioning data (the `hide` middleware's offsets
-      // follow the reference's rect); the reference width used to be mirrored into state from
-      // inside the pass as well, for a second commit that rendered the width already written
       reference().style.width = '180px'
       await expect.poll(() => card()!.style.width).toBe('180px')
       await settle()
 
       expect(Math.abs(card()!.getBoundingClientRect().width - 180)).toBeLessThan(1)
       expect(popoverCommits).toBe(1)
+    })
+
+    test('commits once per scroll-driven positioning pass when `constrainSize` is set', async () => {
+      await render(<Harness constrainSize />)
+
+      await open()
+      popoverCommits = 0
+
+      // Every scroll moves the reference, so every pass has new positioning data
+      for (let scrollTop = 2; scrollTop <= 10; scrollTop += 2) {
+        boundary().scrollTop = scrollTop
+        // oxlint-disable-next-line no-await-in-loop
+        await nextFrame()
+      }
+      await settle()
+
+      expect(popoverCommits).toBe(5)
     })
 
     test('follows the boundary width when `constrainSize` is set', async () => {
@@ -336,9 +338,6 @@ describe('closed popover', () => {
 
       const narrower = BOUNDARY_WIDTH - 40
 
-      // The boundary shrinking changes the cap (measured by the popover's own observer) and the
-      // room (read by the middleware), neither of which Floating UI's `autoUpdate` watches: the
-      // popover repositions itself for the new cap, and the pass reads the new room too
       boundary().style.width = `${narrower}px`
       await expect
         .poll(() => card()!.style.maxWidth)
@@ -350,12 +349,8 @@ describe('closed popover', () => {
       expect(card()!.getBoundingClientRect().right).toBeLessThanOrEqual(
         boundary().getBoundingClientRect().right,
       )
-      // This is where the popover's own pass costs something: the commit for the new boundary
-      // size, the commit of that pass's positioning data (the card shrank inside the pass, and
-      // Floating UI's `flip` records the placements it tried with the old and the new size), and
-      // the commit of the pass `autoUpdate` runs for the card's new size. Without the explicit
-      // pass the cap would be written to the element directly and the second commit saved — at
-      // the price of a cap that ignores the room within the boundary until the next pass.
+      // The boundary size, then the positioning data of the passes `autoUpdate` runs as it
+      // restarts for the new cap (a `size` option)
       expect(popoverCommits).toBe(3)
     })
   })
