@@ -1,5 +1,5 @@
 ---
-'@sanity/ui': minor
+'@sanity/ui': patch
 ---
 
 `Avatar`, `AvatarCounter`, `Button` and `Switch` now load more of their styles from `@sanity/ui/styles.css` instead of generating them with JavaScript at runtime. This reduces runtime styling work while keeping the combined JavaScript and CSS download size nearly unchanged.
