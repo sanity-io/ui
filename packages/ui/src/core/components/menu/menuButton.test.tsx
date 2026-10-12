@@ -73,6 +73,22 @@ describe('MenuButton', () => {
       expect(onClose.mock.results.map((result) => result.value)).toEqual(['true'])
     })
 
+    it('toggles from the last requested state when clicks are handled before a re-render', () => {
+      const onOpen = vi.fn()
+      const onClose = vi.fn()
+
+      renderMenuButton({onClose, onOpen})
+
+      act(() => {
+        getButton().click()
+        getButton().click()
+      })
+
+      expect(onOpen).toHaveBeenCalledTimes(1)
+      expect(onClose).toHaveBeenCalledTimes(1)
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+    })
+
     // Returning focus to the button blurs the menu, and the blur handler closes the menu too
     it.each(closeFromItem)(
       'calls onClose once on %s, after returning focus to the button',

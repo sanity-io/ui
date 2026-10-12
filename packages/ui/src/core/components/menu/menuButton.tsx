@@ -80,10 +80,10 @@ export function MenuButton(props: MenuButtonProps) {
     (event: React.MouseEvent<HTMLButtonElement>) => {
       onButtonClick?.(event)
       if (event.defaultPrevented) return
-      setOpen(!open)
+      setOpen((v) => !v)
       setShouldFocus(null)
     },
-    [onButtonClick, open, setOpen],
+    [onButtonClick, setOpen],
   )
 
   // Prevent mouse event propagation when the menu is open.
@@ -248,7 +248,8 @@ function useOpenState(onOpen?: () => void, onClose?: () => void) {
   const openRef = useRef(false)
 
   const setOpen = useCallback(
-    (nextOpen: boolean, returnFocusTo?: HTMLElement | null) => {
+    (action: React.SetStateAction<boolean>, returnFocusTo?: HTMLElement | null) => {
+      const nextOpen = typeof action === 'function' ? action(openRef.current) : action
       const changed = openRef.current !== nextOpen
       openRef.current = nextOpen
       returnFocusTo?.focus()
