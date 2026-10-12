@@ -186,7 +186,7 @@ catalogs:
       specifier: ^19.3.0
       version: 19.3.0
     '@vanilla-extract/css':
-      specifier: ^1.21.2
+      specifier: ^1.21.3
       version: 1.21.3
     '@vanilla-extract/dynamic':
       specifier: ^2.1.5
