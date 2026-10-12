@@ -214,7 +214,7 @@ describe('MenuButton', () => {
       expect(calls).toEqual(['keydown', 'open', 'mousedown', 'click', 'close'])
     })
 
-    it('does not act on events whose default they prevented', () => {
+    it('opens the menu from events whose default they prevented', () => {
       const onOpen = vi.fn()
 
       renderMenuButton({
@@ -229,10 +229,15 @@ describe('MenuButton', () => {
       })
 
       fireEvent.click(getButton())
+
+      expect(onOpen).toHaveBeenCalledTimes(1)
+      expect(getButton()).toHaveAttribute('aria-expanded', 'true')
+
+      fireEvent.click(getButton())
       fireEvent.keyDown(getButton(), {key: 'Enter'})
 
-      expect(onOpen).not.toHaveBeenCalled()
-      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+      expect(onOpen).toHaveBeenCalledTimes(2)
+      expect(getButton()).toHaveAttribute('aria-expanded', 'true')
     })
   })
 
