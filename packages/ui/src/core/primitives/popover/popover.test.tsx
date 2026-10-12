@@ -595,6 +595,18 @@ describe('Popover', () => {
       expect(cleanup).toHaveBeenCalledTimes(1)
       expect(phasesOf(onRender)).not.toContain('nested-update')
     })
+
+    it('leaves the child’s own ref on the child when a `referenceElement` is given', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+
+      render(
+        <Popover content={content} referenceElement={document.createElement('div')}>
+          <Button ref={ref} text="Reference" />
+        </Popover>,
+      )
+
+      expect(ref.current).toBe(getReference())
+    })
   })
 
   describe('boundary size while closed', () => {
