@@ -4,21 +4,10 @@ import {Popover, PopoverProps} from '../../primitives/popover/popover'
 import {MenuProps} from './menu'
 
 /**
- * The handlers `MenuButton` composes with its own on the `button` element.
- */
-type ButtonHandlerProps = Pick<
-  React.DOMAttributes<HTMLButtonElement>,
-  'onClick' | 'onKeyDown' | 'onMouseDown'
->
-
-/**
  * @public
  */
 export interface MenuButtonProps {
   /**
-   * Leaves focus where it is when Escape or a menu item click closes the menu, instead of
-   * returning it to the button.
-   *
    * @beta Do not use in production.
    */
   __unstable_disableRestoreFocusOnClose?: boolean
@@ -27,44 +16,14 @@ export interface MenuButtonProps {
    */
   boundaryElement?: never
   /**
-   * The element that toggles the menu. `MenuButton` adds its own `onClick`, `onKeyDown` and
-   * `onMouseDown` handlers to it, after any handlers the element already has: those run first,
-   * and one that calls `event.preventDefault()` keeps `MenuButton` from acting on the event. That
-   * includes a handler that prevents the default for its own reasons, such as the navigation of
-   * an `<a>` or the submission of a `type="submit"` button, which then also keeps the menu from
-   * opening. `MenuButton` prevents the default of the Enter and Space key presses it handles, so
-   * the click the browser would synthesize for them does not fire: an `onClick` on the element
-   * does not run for a keyboard open, while a pointer click, a programmatic `click()` and an
-   * activation by assistive technology run it as usual. The element's `id`, `ref`,
-   * `aria-haspopup`, `aria-expanded` and `data-ui` are set by `MenuButton`; `selected` is, unless
-   * the element sets it.
+   * Its `onClick`, `onKeyDown` and `onMouseDown` run before `MenuButton`'s handlers, and calling
+   * `event.preventDefault()` in them stops `MenuButton` from acting on the event. Enter and Space
+   * open the menu on `keydown` and don't trigger `onClick`.
    */
   button: React.JSX.Element
   id: string
   menu?: React.JSX.Element
-  /**
-   * Called from the event that closes the menu, before the closed state is committed. The close
-   * is a plain (synchronous) update, so state set here commits together with it, and an error
-   * thrown here is thrown from that event, not reported to an error boundary. What has focus
-   * when this runs depends on what closed the menu:
-   *
-   * - Escape or a menu item click: focus has been returned to the button (unless
-   *   `__unstable_disableRestoreFocusOnClose` is set), so focus moved here stands.
-   * - Focus leaving the menu: the callback runs while that focus change is being dispatched,
-   *   before the element that is receiving focus has it.
-   * - A click on the button: focus is unchanged, since the press does not take focus while the
-   *   menu is open.
-   * - A click outside the menu: the callback runs on the press (`mousedown`), before the browser
-   *   moves focus to what was pressed, so focus moved here can be overridden by that.
-   */
   onClose?: () => void
-  /**
-   * Called from the event that opens the menu (a click on the button, or ArrowDown, ArrowUp, Enter
-   * or Space while the button has focus), before the open state is committed, so state set here
-   * commits together with it. The menu is not in the DOM yet when the button has never shown
-   * intent to open it; anything that reads or focuses it belongs in an effect. An error thrown
-   * here is thrown from that event, not reported to an error boundary.
-   */
   onOpen?: () => void
   /**
    * @deprecated Use `popover={{placement: 'top'}}` instead.
@@ -107,34 +66,32 @@ export function MenuButton(props: MenuButtonProps) {
     popover,
     ref: forwardedRef,
   } = props
-  const {closeMenu, open, openMenu, shouldFocus, toggleMenu} = useOpenState({onClose, onOpen})
+  const [open, setOpen] = useOpenState(onOpen, onClose)
+  const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
   const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
-
-  // The handlers the consumer put on the button element, composed with the ones below
   const {
     onClick: onButtonClick,
     onKeyDown: onButtonKeyDown,
     onMouseDown: onButtonMouseDown,
-  }: ButtonHandlerProps = buttonProp?.props ?? {}
+  }: React.DOMAttributes<HTMLButtonElement> = buttonProp?.props ?? {}
 
   const handleButtonClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       onButtonClick?.(event)
       if (event.defaultPrevented) return
-
-      toggleMenu()
+      setOpen(!open)
+      setShouldFocus(null)
     },
-    [onButtonClick, toggleMenu],
+    [onButtonClick, open, setOpen],
   )
 
-  // Keep the button from taking focus when it is pressed while the menu is open. Focus leaving the
-  // menu would fire `handleBlur` and close it, and the click that follows would then reopen it.
+  // Keep the button from taking focus when it is pressed while the menu is open.
+  // This is to ensure that `handleBlur` isn't triggered when clicking the menu button whilst open,
+  // which can lead to `setOpen` being triggered multiple times (once by `handleBlur`, and again by `handleButtonClick`).
   const handleMouseDown = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       onButtonMouseDown?.(event)
-      if (event.defaultPrevented) return
-
       if (open) event.preventDefault()
     },
     [onButtonMouseDown, open],
@@ -149,7 +106,8 @@ export function MenuButton(props: MenuButtonProps) {
       // - Opens menu and moves focus to first menuitem
       if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
         event.preventDefault()
-        openMenu('first')
+        setOpen(true)
+        setShouldFocus('first')
 
         return
       }
@@ -158,12 +116,13 @@ export function MenuButton(props: MenuButtonProps) {
       // - 	Opens menu and moves focus to last menuitem
       if (event.key === 'ArrowUp') {
         event.preventDefault()
-        openMenu('last')
+        setOpen(true)
+        setShouldFocus('last')
 
         return
       }
     },
-    [onButtonKeyDown, openMenu],
+    [onButtonKeyDown, setOpen],
   )
 
   const handleMenuClickOutside = useCallback(
@@ -184,17 +143,16 @@ export function MenuButton(props: MenuButtonProps) {
         }
       }
 
-      closeMenu()
+      setOpen(false)
     },
-    [buttonElement, closeMenu, menuElements],
+    [buttonElement, menuElements, setOpen],
   )
 
-  // The element to return focus to when Escape or a menu item click closes the menu
   const returnFocusTo = disableRestoreFocusOnClose ? null : buttonElement
 
   const handleMenuEscape = useCallback(() => {
-    closeMenu({returnFocusTo})
-  }, [closeMenu, returnFocusTo])
+    setOpen(false, returnFocusTo)
+  }, [returnFocusTo, setOpen])
 
   const handleBlur = useCallback(
     (event: FocusEvent) => {
@@ -210,14 +168,14 @@ export function MenuButton(props: MenuButtonProps) {
         }
       }
 
-      closeMenu()
+      setOpen(false)
     },
-    [closeMenu, menuElements],
+    [menuElements, setOpen],
   )
 
   const handleItemClick = useCallback(() => {
-    closeMenu({returnFocusTo})
-  }, [closeMenu, returnFocusTo])
+    setOpen(false, returnFocusTo)
+  }, [returnFocusTo, setOpen])
 
   const registerElement = useCallback((el: HTMLElement) => {
     setChildMenuElements((els) => els.concat([el]))
@@ -279,58 +237,23 @@ export function MenuButton(props: MenuButtonProps) {
   )
 }
 
-type ShouldFocus = NonNullable<MenuProps['shouldFocus']> | null
-
-interface OpenStateUpdate {
-  open: boolean
-  /** The focus request made with an open; `undefined` leaves the current one alone */
-  focus?: ShouldFocus
-  /** The element to return focus to before `onClose`, when closing */
-  returnFocusTo?: HTMLElement | null
-}
-
-interface OpenState {
-  /** Closes the menu, returning focus to `returnFocusTo` first when given */
-  closeMenu: (options?: Pick<OpenStateUpdate, 'returnFocusTo'>) => void
-  open: boolean
-  /** Opens the menu and asks it to focus its first or last item once it is rendered open */
-  openMenu: (focus: NonNullable<ShouldFocus>) => void
-  shouldFocus: ShouldFocus
-  /** Opens or closes the menu, clearing any focus request: a click leaves focus on the button */
-  toggleMenu: () => void
-}
-
 /**
- * The open state of the menu and the focus request made when it opens, with `onOpen` / `onClose`
- * called from the event that changes it.
- *
- * Constraints that shaped it:
- *
- * - The dedup is a ref written in the handler, not state: returning focus to the button when
- *   Escape or a menu item click closes the menu fires the menu's blur handler synchronously, and
- *   that second close has to find the state already requested closed, before React re-renders.
- * - Focus is returned before `onClose`, so focus that a consumer moves in `onClose` stands.
- * - A hook rather than inline state: the handlers that call these functions reach the button and
- *   the menu through `cloneElement`, a call the React Compiler cannot see through, and it rejects
- *   passing a function it knows to read a ref to such a call during render.
+ * The open state, with `onOpen` and `onClose` called by `setOpen` when it changes. A hook because
+ * `setOpen` reads a ref, and the React Compiler rejects passing such a function to `cloneElement`.
  */
-function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOpen'>): OpenState {
+function useOpenState(onOpen?: () => void, onClose?: () => void) {
   const [open, setOpenState] = useState(false)
-  const [shouldFocus, setShouldFocus] = useState<ShouldFocus>(null)
-  const requestedOpenRef = useRef(open)
+  // Written before focus is returned, which blurs the menu synchronously: the close that blur
+  // causes must find the menu closed already
+  const openRef = useRef(false)
 
   const setOpen = useCallback(
-    ({open: nextOpen, focus, returnFocusTo}: OpenStateUpdate) => {
-      const changes = requestedOpenRef.current !== nextOpen
-
-      requestedOpenRef.current = nextOpen
+    (nextOpen: boolean, returnFocusTo?: HTMLElement | null) => {
+      const changed = openRef.current !== nextOpen
+      openRef.current = nextOpen
       returnFocusTo?.focus()
-
-      if (focus !== undefined) setShouldFocus(focus)
-      if (!changes) return
-
+      if (!changed) return
       setOpenState(nextOpen)
-
       if (nextOpen) {
         onOpen?.()
       } else {
@@ -340,18 +263,5 @@ function useOpenState({onClose, onOpen}: Pick<MenuButtonProps, 'onClose' | 'onOp
     [onClose, onOpen],
   )
 
-  const closeMenu = useCallback(
-    (options?: Pick<OpenStateUpdate, 'returnFocusTo'>) => setOpen({open: false, ...options}),
-    [setOpen],
-  )
-  const openMenu = useCallback(
-    (focus: NonNullable<ShouldFocus>) => setOpen({open: true, focus}),
-    [setOpen],
-  )
-  const toggleMenu = useCallback(
-    () => setOpen({open: !requestedOpenRef.current, focus: null}),
-    [setOpen],
-  )
-
-  return {closeMenu, open, openMenu, shouldFocus, toggleMenu}
+  return [open, setOpen] as const
 }

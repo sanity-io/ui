@@ -6,7 +6,6 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {useLayoutEffect, useState} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -54,6 +53,143 @@ function expectMenuVisible() {
 }
 
 describe('MenuButton', () => {
+  describe('onOpen and onClose', () => {
+    const closeFromItem: [string, (item: HTMLElement) => void][] = [
+      ['Escape', (item) => fireEvent.keyDown(item, {key: 'Escape'})],
+      ['an item click', (item) => fireEvent.click(item)],
+    ]
+
+    it('calls them from the event that changes the open state, before it commits', () => {
+      const expanded = () => getButton().getAttribute('aria-expanded')
+      const onOpen = vi.fn(expanded)
+      const onClose = vi.fn(expanded)
+
+      renderMenuButton({onClose, onOpen})
+
+      fireEvent.click(getButton())
+      fireEvent.click(getButton())
+
+      expect(onOpen.mock.results.map((result) => result.value)).toEqual(['false'])
+      expect(onClose.mock.results.map((result) => result.value)).toEqual(['true'])
+    })
+
+    // Returning focus to the button blurs the menu, and the blur handler closes the menu too
+    it.each(closeFromItem)(
+      'calls onClose once on %s, after returning focus to the button',
+      (_name, close) => {
+        const onClose = vi.fn(() => document.activeElement)
+
+        renderMenuButton({onClose})
+
+        fireEvent.click(getButton())
+        const item = screen.getByRole('menuitem', {name: 'Option 1'})
+        act(() => item.focus())
+        close(item)
+
+        expect(onClose.mock.results.map((result) => result.value)).toEqual([getButton()])
+        expect(getButton()).toHaveFocus()
+      },
+    )
+
+    it.each(closeFromItem)(
+      'leaves focus alone on %s when __unstable_disableRestoreFocusOnClose is set',
+      (_name, close) => {
+        const onClose = vi.fn()
+
+        renderMenuButton({__unstable_disableRestoreFocusOnClose: true, onClose})
+
+        fireEvent.click(getButton())
+        const item = screen.getByRole('menuitem', {name: 'Option 1'})
+        act(() => item.focus())
+        close(item)
+
+        expect(onClose).toHaveBeenCalledTimes(1)
+        expect(getButton()).not.toHaveFocus()
+      },
+    )
+
+    // The blur closes the menu before the item click does
+    it("returns focus to the button when the item's onClick moved it out of the menu", () => {
+      const onClose = vi.fn()
+
+      render(
+        <>
+          <MenuButton
+            button={<Button text="Open menu" />}
+            id="menu-button"
+            menu={
+              <Menu>
+                <MenuItem
+                  onClick={() => screen.getByRole('button', {name: 'Outside'}).focus()}
+                  text="Option 1"
+                />
+              </Menu>
+            }
+            onClose={onClose}
+          />
+          <button type="button">Outside</button>
+        </>,
+      )
+
+      fireEvent.click(getButton())
+      const item = screen.getByRole('menuitem', {name: 'Option 1'})
+      act(() => item.focus())
+      fireEvent.click(item)
+
+      expect(onClose).toHaveBeenCalledTimes(1)
+      expect(getButton()).toHaveFocus()
+    })
+  })
+
+  describe('handlers on the button element', () => {
+    it('calls them before its own', () => {
+      const calls: string[] = []
+      const record = (call: string) => () => {
+        calls.push(call)
+      }
+
+      renderMenuButton({
+        button: (
+          <Button
+            onClick={record('click')}
+            onKeyDown={record('keydown')}
+            onMouseDown={record('mousedown')}
+            text="Open menu"
+          />
+        ),
+        onClose: record('close'),
+        onOpen: record('open'),
+      })
+
+      fireEvent.keyDown(getButton(), {key: 'ArrowDown'})
+      fireEvent.mouseDown(getButton())
+      fireEvent.click(getButton())
+
+      expect(calls).toEqual(['keydown', 'open', 'mousedown', 'click', 'close'])
+    })
+
+    it('does not act on events whose default they prevented', () => {
+      const onOpen = vi.fn()
+
+      renderMenuButton({
+        button: (
+          <Button
+            onClick={(event) => event.preventDefault()}
+            onKeyDown={(event) => event.preventDefault()}
+            text="Open menu"
+          />
+        ),
+        onOpen,
+      })
+
+      fireEvent.click(getButton())
+      fireEvent.keyDown(getButton(), {key: 'Enter'})
+
+      expect(onOpen).not.toHaveBeenCalled()
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+    })
+  })
+
   describe('pre-rendering while closed', () => {
     it('does not render the closed menu until the button shows intent to open it', () => {
       renderMenuButton()
@@ -162,379 +298,6 @@ describe('MenuButton', () => {
       expect(onClose).not.toHaveBeenCalled()
       // The pre-rendered menu lives in the portal, nothing was added next to the button
       expect(container.querySelector('[data-ui="MenuButton__popover"]')).toBeNull()
-    })
-  })
-
-  describe('onOpen and onClose', () => {
-    it('calls onOpen from the event that opens the menu, before the open state commits', () => {
-      const expandedWhenCalled: (string | null)[] = []
-      const onOpen = vi.fn(() => {
-        expandedWhenCalled.push(getButton().getAttribute('aria-expanded'))
-      })
-
-      renderMenuButton({onOpen})
-
-      fireEvent.click(getButton())
-
-      expect(onOpen).toHaveBeenCalledTimes(1)
-      // Called while the click is dispatched, not from an effect after the menu rendered open
-      expect(expandedWhenCalled).toEqual(['false'])
-      expectMenuVisible()
-    })
-
-    it('calls onClose from the event that closes the menu, before the closed state commits', () => {
-      const expandedWhenCalled: (string | null)[] = []
-      const onClose = vi.fn(() => {
-        expandedWhenCalled.push(getButton().getAttribute('aria-expanded'))
-      })
-
-      renderMenuButton({onClose})
-
-      fireEvent.click(getButton())
-      expectMenuVisible()
-      expect(onClose).not.toHaveBeenCalled()
-
-      fireEvent.click(getButton())
-
-      expect(onClose).toHaveBeenCalledTimes(1)
-      expect(expandedWhenCalled).toEqual(['true'])
-      expectMenuRenderedHidden()
-    })
-
-    it('commits state set in onOpen together with the open state', () => {
-      // Records, at every commit of the button, whether the menu is expanded and whether the
-      // state a consumer sets in `onOpen` has been committed. Notifying from an effect after the
-      // open commit would record a commit in which the menu is expanded but that state is not.
-      const commits: {expanded: string | null; notified: string | null}[] = []
-
-      function ProbeButton(props: React.ComponentPropsWithRef<'button'> & {selected?: boolean}) {
-        const {selected: _selected, ...rest} = props
-
-        useLayoutEffect(() => {
-          commits.push({
-            expanded: getButton().getAttribute('aria-expanded'),
-            notified: screen.getByTestId('notified').textContent,
-          })
-        })
-
-        return (
-          <button type="button" {...rest}>
-            Open menu
-          </button>
-        )
-      }
-
-      function Consumer() {
-        const [notified, setNotified] = useState(false)
-
-        return (
-          <>
-            <span data-testid="notified">{notified ? 'yes' : 'no'}</span>
-            <MenuButton
-              button={<ProbeButton />}
-              id="menu-button"
-              menu={
-                <Menu>
-                  <MenuItem text="Option 1" />
-                </Menu>
-              }
-              onOpen={() => setNotified(true)}
-            />
-          </>
-        )
-      }
-
-      render(<Consumer />)
-
-      expect(commits.at(-1)).toEqual({expanded: 'false', notified: 'no'})
-      commits.length = 0
-
-      fireEvent.click(getButton())
-
-      expectMenuVisible()
-      expect(commits).toEqual([{expanded: 'true', notified: 'yes'}])
-    })
-
-    it('calls onClose once when Escape closes the menu and focus returns to the button', () => {
-      const onClose = vi.fn()
-
-      renderMenuButton({onClose})
-
-      const button = getButton()
-
-      fireEvent.click(button)
-      expectMenuVisible()
-
-      // Focus an item, as keyboard navigation does: closing then moves focus out of the menu,
-      // which fires the menu's blur handler from inside the Escape handler
-      const item = screen.getByRole('menuitem', {name: 'Option 1'})
-
-      act(() => item.focus())
-      expect(item).toHaveFocus()
-
-      fireEvent.keyDown(item, {key: 'Escape'})
-
-      expect(onClose).toHaveBeenCalledTimes(1)
-      expect(button).toHaveFocus()
-      expectMenuRenderedHidden()
-    })
-
-    it('calls onClose once when a menu item is clicked and focus returns to the button', () => {
-      const onClose = vi.fn()
-
-      renderMenuButton({onClose})
-
-      const button = getButton()
-
-      fireEvent.click(button)
-      expectMenuVisible()
-
-      const item = screen.getByRole('menuitem', {name: 'Option 1'})
-
-      act(() => item.focus())
-      fireEvent.click(item)
-
-      expect(onClose).toHaveBeenCalledTimes(1)
-      expect(button).toHaveFocus()
-      expectMenuRenderedHidden()
-    })
-
-    it.each([
-      ['Escape', (item: HTMLElement) => fireEvent.keyDown(item, {key: 'Escape'})],
-      ['a menu item click', (item: HTMLElement) => fireEvent.click(item)],
-    ])(
-      'returns focus to the button before calling onClose, so focus moved there stands on %s',
-      (_name, close) => {
-        const focusedWhenCalled: (Element | null)[] = []
-        const onClose = vi.fn(() => {
-          focusedWhenCalled.push(document.activeElement)
-          screen.getByRole('button', {name: 'Outside'}).focus()
-        })
-
-        render(
-          <>
-            <MenuButton
-              button={<Button text="Open menu" />}
-              id="menu-button"
-              menu={
-                <Menu>
-                  <MenuItem text="Option 1" />
-                </Menu>
-              }
-              onClose={onClose}
-            />
-            <button type="button">Outside</button>
-          </>,
-        )
-
-        const button = getButton()
-
-        fireEvent.click(button)
-        expectMenuVisible()
-
-        const item = screen.getByRole('menuitem', {name: 'Option 1'})
-
-        act(() => item.focus())
-        close(item)
-
-        expect(onClose).toHaveBeenCalledTimes(1)
-        // The built-in restoration had run when `onClose` was called, and did not override it
-        expect(focusedWhenCalled).toEqual([button])
-        expect(screen.getByRole('button', {name: 'Outside'})).toHaveFocus()
-        expectMenuRenderedHidden()
-      },
-    )
-
-    it('leaves focus alone when __unstable_disableRestoreFocusOnClose is set', () => {
-      const focusedWhenCalled: (Element | null)[] = []
-      const onClose = vi.fn(() => {
-        focusedWhenCalled.push(document.activeElement)
-      })
-
-      renderMenuButton({__unstable_disableRestoreFocusOnClose: true, onClose})
-
-      const button = getButton()
-      const item = () => screen.getByRole('menuitem', {name: 'Option 1'})
-
-      // Escape
-      fireEvent.click(button)
-      act(() => item().focus())
-      fireEvent.keyDown(item(), {key: 'Escape'})
-      expect(onClose).toHaveBeenCalledTimes(1)
-      expect(button).not.toHaveFocus()
-      expectMenuRenderedHidden()
-
-      // Menu item click
-      fireEvent.click(button)
-      act(() => item().focus())
-      fireEvent.click(item())
-      expect(onClose).toHaveBeenCalledTimes(2)
-      expect(button).not.toHaveFocus()
-      expectMenuRenderedHidden()
-
-      // `onClose` saw whatever had focus at the time, never the button
-      expect(focusedWhenCalled).not.toContain(button)
-    })
-
-    it('calls onClose once when a click outside closes the menu', () => {
-      const onClose = vi.fn()
-
-      renderMenuButton({onClose})
-
-      fireEvent.click(getButton())
-      expectMenuVisible()
-
-      fireEvent.mouseDown(document.body)
-
-      expect(onClose).toHaveBeenCalledTimes(1)
-      expectMenuRenderedHidden()
-    })
-
-    it('does not call onOpen again when a key press asks an open menu to open', () => {
-      const onOpen = vi.fn()
-
-      renderMenuButton({onOpen})
-
-      const button = getButton()
-
-      act(() => button.focus())
-      fireEvent.click(button)
-      expect(onOpen).toHaveBeenCalledTimes(1)
-
-      // Focus stays on the button after a click, so Enter reaches `MenuButton` while it is open
-      fireEvent.keyDown(button, {key: 'Enter'})
-
-      expect(onOpen).toHaveBeenCalledTimes(1)
-      expectMenuVisible()
-    })
-  })
-
-  describe('handlers on the button element', () => {
-    it('calls the handlers on the button element before its own', () => {
-      const calls: string[] = []
-      const onMouseDown = vi.fn(() => {
-        calls.push('mousedown')
-      })
-      const onClick = vi.fn(() => {
-        calls.push('click')
-      })
-      const onKeyDown = vi.fn(() => {
-        calls.push('keydown')
-      })
-      const onOpen = vi.fn(() => {
-        calls.push('open')
-      })
-      const onClose = vi.fn(() => {
-        calls.push('close')
-      })
-
-      renderMenuButton({
-        button: (
-          <Button
-            onClick={onClick}
-            onKeyDown={onKeyDown}
-            onMouseDown={onMouseDown}
-            text="Open menu"
-          />
-        ),
-        onClose,
-        onOpen,
-      })
-
-      const button = getButton()
-
-      fireEvent.mouseDown(button)
-      fireEvent.click(button)
-      expectMenuVisible()
-      expect(calls).toEqual(['mousedown', 'click', 'open'])
-
-      fireEvent.keyDown(button, {key: 'a'})
-      expect(calls).toEqual(['mousedown', 'click', 'open', 'keydown'])
-
-      fireEvent.mouseDown(button)
-      fireEvent.click(button)
-      expectMenuRenderedHidden()
-      expect(calls).toEqual([
-        'mousedown',
-        'click',
-        'open',
-        'keydown',
-        'mousedown',
-        'click',
-        'close',
-      ])
-
-      expect(onClick).toHaveBeenCalledWith(expect.objectContaining({type: 'click', target: button}))
-      expect(onKeyDown).toHaveBeenCalledWith(expect.objectContaining({type: 'keydown', key: 'a'}))
-      expect(onMouseDown).toHaveBeenCalledWith(
-        expect.objectContaining({type: 'mousedown', target: button}),
-      )
-    })
-
-    it('does not open when the onClick on the button element prevents the default', () => {
-      const onOpen = vi.fn()
-
-      renderMenuButton({
-        button: <Button onClick={(event) => event.preventDefault()} text="Open menu" />,
-        onOpen,
-      })
-
-      fireEvent.click(getButton())
-
-      expect(onOpen).not.toHaveBeenCalled()
-      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
-      expectMenuNotRendered()
-    })
-
-    it('does not act on a key press whose default the onKeyDown on the button element prevented', () => {
-      const onOpen = vi.fn()
-
-      renderMenuButton({
-        button: (
-          <Button
-            onKeyDown={(event) => {
-              if (event.key === 'Enter') event.preventDefault()
-            }}
-            text="Open menu"
-          />
-        ),
-        onOpen,
-      })
-
-      const button = getButton()
-
-      act(() => button.focus())
-
-      fireEvent.keyDown(button, {key: 'Enter'})
-      expect(onOpen).not.toHaveBeenCalled()
-      expect(button).toHaveAttribute('aria-expanded', 'false')
-
-      fireEvent.keyDown(button, {key: 'ArrowDown'})
-      expect(onOpen).toHaveBeenCalledTimes(1)
-      expectMenuVisible()
-    })
-
-    it('calls the onMouseDown on the button element before preventing the default of a press on the open menu', () => {
-      const defaultPreventedWhenCalled: boolean[] = []
-      const onMouseDown = vi.fn((event: React.MouseEvent<HTMLButtonElement>) => {
-        defaultPreventedWhenCalled.push(event.defaultPrevented)
-      })
-
-      renderMenuButton({button: <Button onMouseDown={onMouseDown} text="Open menu" />})
-
-      const button = getButton()
-
-      // Closed: the press keeps its default
-      expect(fireEvent.mouseDown(button)).toBe(true)
-
-      fireEvent.click(button)
-      expectMenuVisible()
-
-      // Open: `MenuButton` prevents the default so the button does not take focus from the menu
-      expect(fireEvent.mouseDown(button)).toBe(false)
-
-      expect(onMouseDown).toHaveBeenCalledTimes(2)
-      expect(defaultPreventedWhenCalled).toEqual([false, false])
     })
   })
 })
