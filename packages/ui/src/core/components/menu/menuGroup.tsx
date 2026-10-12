@@ -1,5 +1,5 @@
 import {ChevronRightIcon} from '@sanity/icons/ChevronRight'
-import {isValidElement, useCallback, useEffect, useState} from 'react'
+import {isValidElement, startTransition, useCallback, useEffect, useState} from 'react'
 import {isValidElementType} from 'react-is'
 
 import {Selectable} from '../../primitives/_selectable/selectable'
@@ -82,18 +82,36 @@ const MenuGroupComponent = function MenuGroup(
   } = menu
   const onItemMouseEnter = _onItemMouseEnter ?? menu.onItemMouseEnter
   const [rootElement, setRootElement] = useState<HTMLButtonElement | HTMLDivElement | null>(null)
-  const [open, setOpen] = useState(false)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
   const active = Boolean(activeElement) && activeElement === rootElement
   const [withinMenu, setWithinMenu] = useState(false)
 
+  // The child menu is open while the item is active and was opened during this activation. The
+  // end of an activation is counted rather than reset in `openedIn`, which the openers set in
+  // transitions: React does not rebase a render-phase update over a pending lower-priority one
+  // (`rerenderReducer`), so the reset would be lost under an open that is still rendering.
+  const [activation, setActivation] = useState(0)
+  const [openedIn, setOpenedIn] = useState<number | null>(null)
+  const [prevActive, setPrevActive] = useState(active)
+
+  if (active !== prevActive) {
+    setPrevActive(active)
+    if (!active) setActivation((current) => current + 1)
+  }
+
+  const childMenuOpen = active && openedIn === activation
+  // Every opener sets `withinMenu`, so it needs no reset when the child menu closes
+  const pressed = childMenuOpen && withinMenu
+
+  // The child menu opens and closes in transitions, as `Popover` asks of `open`. `shouldFocus` goes
+  // with the open: it is reset a frame after it commits, which must not come before the open.
   const handleMouseEnter = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       setWithinMenu(false)
       onItemMouseEnter(event)
-      setOpen(true)
+      startTransition(() => setOpenedIn(activation))
     },
-    [onItemMouseEnter],
+    [activation, onItemMouseEnter],
   )
 
   const handleMenuKeyDown = useCallback(
@@ -101,7 +119,7 @@ const MenuGroupComponent = function MenuGroup(
       if (event.key === 'ArrowLeft') {
         event.stopPropagation()
 
-        setOpen(false)
+        startTransition(() => setOpenedIn(null))
 
         requestAnimationFrame(() => {
           rootElement?.focus()
@@ -115,14 +133,18 @@ const MenuGroupComponent = function MenuGroup(
     (event: React.MouseEvent<HTMLDivElement>) => {
       onClick?.(event)
 
-      setShouldFocus('first')
-      setOpen(true)
+      setWithinMenu(false)
+      onItemMouseEnter(event)
+      startTransition(() => {
+        setShouldFocus('first')
+        setOpenedIn(activation)
+      })
     },
-    [onClick],
+    [activation, onClick, onItemMouseEnter],
   )
 
   const handleChildItemClick = useCallback(() => {
-    setOpen(false)
+    startTransition(() => setOpenedIn(null))
     onItemClick?.()
   }, [onItemClick])
 
@@ -130,18 +152,6 @@ const MenuGroupComponent = function MenuGroup(
 
   // Register the menu item element
   useEffect(() => mount(rootElement), [mount, rootElement])
-
-  // Close child menu when a sibling item becomes active
-  useEffect(() => {
-    // oxlint-disable-next-line react/set-state-in-effect
-    if (!active) setOpen(false)
-  }, [active])
-
-  // Update state when child menu is no longer open
-  useEffect(() => {
-    // oxlint-disable-next-line react/set-state-in-effect
-    if (!open) setWithinMenu(false)
-  }, [open])
 
   // Reset the shouldFocus state after it has been used
   useEffect(() => {
@@ -169,32 +179,38 @@ const MenuGroupComponent = function MenuGroup(
     </Menu>
   )
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    const target = event.currentTarget
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      const target = event.currentTarget
 
-    if (document.activeElement !== target) {
-      return
-    }
+      if (document.activeElement !== target) {
+        return
+      }
 
-    if (event.key === 'ArrowRight') {
-      setShouldFocus('first')
-      setOpen(true)
-      setWithinMenu(true)
+      if (event.key === 'ArrowRight') {
+        setWithinMenu(true)
+        onItemMouseEnter(event)
+        startTransition(() => {
+          setShouldFocus('first')
+          setOpenedIn(activation)
+        })
 
-      return
-    }
-  }, [])
+        return
+      }
+    },
+    [activation, onItemMouseEnter],
+  )
 
   return (
-    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={open}>
+    <Popover {...popover} content={childMenu} data-ui="MenuGroup__popover" open={childMenuOpen}>
       <Selectable
         data-as={as}
         data-ui="MenuGroup"
         forwardedAs={as}
         {...restProps}
-        aria-pressed={as === 'button' ? withinMenu : undefined}
-        data-pressed={as !== 'button' ? withinMenu : undefined}
-        data-selected={!withinMenu && active ? '' : undefined}
+        aria-pressed={as === 'button' ? pressed : undefined}
+        data-pressed={as !== 'button' && pressed ? '' : undefined}
+        data-selected={!pressed && active ? '' : undefined}
         $radius={_getArrayProp(radius)}
         $tone={tone}
         $scheme={scheme}

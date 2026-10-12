@@ -7,7 +7,8 @@ export interface MenuContextValue {
   onClickOutside?: (event: MouseEvent) => void
   onEscape?: () => void
   onItemClick?: () => void
-  onItemMouseEnter: (event: React.MouseEvent<HTMLElement>) => void
+  /** Makes `event.currentTarget` the active item, also on a click or key press */
+  onItemMouseEnter: (event: React.SyntheticEvent<HTMLElement>) => void
   onItemMouseLeave: (event: React.MouseEvent<HTMLElement>) => void
   registerElement?: (el: HTMLElement) => () => void
 }
