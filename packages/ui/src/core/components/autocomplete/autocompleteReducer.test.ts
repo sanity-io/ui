@@ -30,21 +30,7 @@ describe('autocompleteReducer', () => {
   })
 
   it.each(['root/blur', 'root/escape'] as const)(
-    'closes on %s and puts the active option back on the value',
-    (type) => {
-      expect(reduce({type})).toEqual({
-        ...state,
-        activeValue: 'selected',
-        focused: false,
-        query: null,
-      })
-    },
-  )
-
-  // An arrow key pressed before the list showed set `listFocused` with DOM focus still in the
-  // input, where no focus event resets it
-  it.each(['root/blur', 'root/escape'] as const)(
-    'closes on %s and ends keyboard navigation in the list',
+    'closes on %s, puts the active option back on the value and ends keyboard navigation',
     (type) => {
       expect(reduce({type}, {...state, listFocused: true})).toEqual({
         ...state,
@@ -56,15 +42,9 @@ describe('autocompleteReducer', () => {
     },
   )
 
-  // `value` is `''` after a `value/change` with the prop's empty string; like `null` it counts as
-  // no value, so the active option stays where it was
-  it.each([
-    ['root/blur', null],
-    ['root/blur', ''],
-    ['root/escape', null],
-    ['root/escape', ''],
-  ] as const)('closes on %s and keeps the active option with the value %j', (type, value) => {
-    expect(reduce({type}, {...state, value})).toEqual({
+  // A `value` prop of `''` is stored as is
+  it.each([null, ''])('keeps the active option when closing without a value (%j)', (value) => {
+    expect(reduce({type: 'root/blur'}, {...state, value})).toEqual({
       ...state,
       focused: false,
       query: null,

@@ -15,11 +15,8 @@ export function autocompleteReducer(
     return {...state, focused: true}
   }
 
-  // Closing (blur and Escape) puts the active option back on the value, so the next time the
-  // list opens, the value is highlighted and arrow navigation starts from it. Without a value
-  // the last active option is kept. Keyboard navigation in the list ends with the list: an arrow
-  // key pressed while the list was still opening set `listFocused` with DOM focus still in the
-  // input, and a close then would leave it set, since no focus event follows.
+  // Closing puts the active option back on the value. It also ends keyboard navigation in the list,
+  // which an arrow key can start before the list shows, with no focus event to end it.
   if (msg.type === 'root/blur' || msg.type === 'root/escape') {
     return {
       ...state,
