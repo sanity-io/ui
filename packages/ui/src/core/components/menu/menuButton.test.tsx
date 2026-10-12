@@ -360,30 +360,30 @@ describe('MenuButton', () => {
         name: 'with a `referenceElement`',
         popover: {referenceElement: document.createElement('div')},
       },
-    ])(
-      'attaches a forwarded ref once when it mounts, $name, with no follow-up commit',
-      ({popover}) => {
-        const callbackRef = vi.fn()
-        const onRender = vi.fn()
+    ])('attaches a forwarded ref once, $name, in the commit that mounts it', ({popover}) => {
+      const callbackRef = vi.fn()
+      const onRender = vi.fn()
 
-        const {unmount} = render(
-          <Profiler id="menu-button" onRender={onRender}>
-            {menuButton({popover, ref: callbackRef})}
-          </Profiler>,
-          {strict: false},
-        )
+      const {unmount} = render(
+        <Profiler id="menu-button" onRender={onRender}>
+          {menuButton({popover, ref: callbackRef})}
+        </Profiler>,
+        {strict: false},
+      )
 
-        const button = getButton()
+      const button = getButton()
 
-        expect(callbackRef.mock.calls).toEqual([[button]])
-        expect(phasesOf(onRender)[0]).toBe('mount')
-        expect(phasesOf(onRender)).not.toContain('nested-update')
+      expect(callbackRef.mock.calls).toEqual([[button]])
+      expect(phasesOf(onRender)[0]).toBe('mount')
+      expect(phasesOf(onRender)).not.toContain('nested-update')
 
-        unmount()
+      // Opening and closing the menu leaves it attached
+      fireEvent.click(button)
+      fireEvent.click(button)
+      unmount()
 
-        expect(callbackRef.mock.calls).toEqual([[button], [null]])
-      },
-    )
+      expect(callbackRef.mock.calls).toEqual([[button], [null]])
+    })
 
     it('detaches and attaches a forwarded ref as an `<Activity>` hides and shows it, with no follow-up commit', () => {
       const callbackRef = vi.fn()
