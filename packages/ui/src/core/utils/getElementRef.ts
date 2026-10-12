@@ -4,8 +4,6 @@
 // https://github.com/facebook/react/pull/28348
 //
 // Access the ref using the method that doesn't yield a warning.
-//
-// The element type of the ref is the caller's to know (`T`): an element carries no type for it.
 export function getElementRef<T = unknown>(element: React.ReactElement): React.Ref<T> | undefined {
   // React <=18 in DEV
   // oxlint-disable-next-line unbound-method
