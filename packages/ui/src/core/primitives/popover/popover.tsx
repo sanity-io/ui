@@ -308,47 +308,12 @@ export function Popover(
     mediaIndex,
     width: widthArrayProp,
   })
-  const widthRef = useRef(width)
-
-  useEffect(() => {
-    widthRef.current = width
-  }, [width])
 
   // Update max width when
   // - boundary width changes
   // - `width` property changes
   const maxWidth = calcMaxWidth({boundaryWidth, currentWidth: width})
-  const maxWidthRef = useRef(maxWidth)
 
-  useEffect(() => {
-    maxWidthRef.current = maxWidth
-  }, [maxWidth])
-
-  // Keep track of reference element width (see `size` middleware below)
-  const referenceWidthRef = useRef<number>(undefined)
-
-  // Force apply width & max width to floating element
-  useEffect(() => {
-    const floatingElement = ref.current
-
-    if (!open || !floatingElement) return
-
-    const referenceWidth = referenceWidthRef.current
-
-    if (matchReferenceWidth) {
-      if (referenceWidth !== undefined) {
-        floatingElement.style.width = `${referenceWidth}px`
-      }
-    } else if (width !== undefined) {
-      floatingElement.style.width = `${width}px`
-    }
-
-    if (typeof maxWidth === 'number') {
-      floatingElement.style.maxWidth = `${maxWidth}px`
-    }
-  }, [width, matchReferenceWidth, maxWidth, open])
-
-  const [referenceWidth, setReferenceWidth] = useState<number | undefined>(undefined)
   const middleware = useMiddleware({
     animate,
     arrowProp,
@@ -358,15 +323,12 @@ export function Popover(
     floatingBoundary,
     margins,
     matchReferenceWidth,
-    maxWidthRef,
+    maxWidth,
     placementProp,
     placementStrategy,
     preventOverflow,
     referenceBoundary,
-    referenceWidthRef,
     rootBoundary,
-    setReferenceWidth,
-    widthRef,
   })
 
   const {x, y, middlewareData, placement, refs, strategy, update} = useFloating<HTMLElement>({
@@ -466,7 +428,10 @@ export function Popover(
         arrowRef={setArrow}
         arrowX={arrowX}
         arrowY={arrowY}
+        constrainSize={constrainSize}
         hidden={referenceHidden}
+        matchReferenceWidth={matchReferenceWidth}
+        maxWidth={maxWidth}
         overflow={overflow}
         padding={padding}
         placement={placement}
@@ -478,7 +443,7 @@ export function Popover(
         originY={originY}
         strategy={strategy}
         tone={tone}
-        width={matchReferenceWidth ? referenceWidth : width}
+        width={width}
         x={x}
         y={y}
       >
@@ -585,15 +550,12 @@ function useMiddleware({
   floatingBoundary,
   margins,
   matchReferenceWidth,
-  maxWidthRef,
+  maxWidth,
   placementProp,
   placementStrategy,
   preventOverflow,
   referenceBoundary,
-  referenceWidthRef,
   rootBoundary,
-  setReferenceWidth,
-  widthRef,
 }: {
   animate: boolean
   arrowProp: boolean
@@ -603,15 +565,12 @@ function useMiddleware({
   floatingBoundary: HTMLElement | null
   margins: PopoverMargins
   matchReferenceWidth: boolean | undefined
-  maxWidthRef: React.RefObject<number | undefined>
+  maxWidth: number | undefined
   placementProp: Placement
   placementStrategy: 'flip' | 'autoPlacement'
   preventOverflow: boolean
   referenceBoundary: HTMLElement | null
-  referenceWidthRef: React.RefObject<number | undefined>
   rootBoundary: RootBoundary
-  setReferenceWidth: (referenceWidth: number) => void
-  widthRef: React.RefObject<number | undefined>
 }) {
   return useMemo(() => {
     const ret: Middleware[] = []
@@ -647,11 +606,9 @@ function useMiddleware({
           constrainSize,
           margins,
           matchReferenceWidth,
-          maxWidthRef,
+          // The card renders the cap unless `constrainSize`: no reason to change the middleware then
+          maxWidth: constrainSize ? maxWidth : undefined,
           padding: DEFAULT_POPOVER_PADDING,
-          referenceWidthRef,
-          setReferenceWidth,
-          widthRef,
         }),
       )
     }
@@ -701,14 +658,11 @@ function useMiddleware({
     floatingBoundary,
     margins,
     matchReferenceWidth,
-    maxWidthRef,
+    maxWidth,
     placementProp,
     placementStrategy,
     preventOverflow,
     referenceBoundary,
-    referenceWidthRef,
     rootBoundary,
-    setReferenceWidth,
-    widthRef,
   ])
 }

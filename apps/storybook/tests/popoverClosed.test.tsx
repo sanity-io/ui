@@ -27,6 +27,7 @@ function countCommit() {
  */
 function Harness(props: {
   boundaryStyle?: CSSProperties
+  constrainSize?: boolean
   matchReferenceWidth?: boolean
   wrapperStyle?: CSSProperties
 }) {
@@ -47,6 +48,7 @@ function Harness(props: {
           <BoundaryElementProvider element={boundary}>
             <Profiler id="popover" onRender={countCommit}>
               <Popover
+                constrainSize={props.constrainSize}
                 content={
                   <Text size={1}>
                     Popover content that is far wider than the boundary element it is inside of
@@ -181,6 +183,7 @@ describe('closed popover', () => {
       return {
         display: card()!.style.display,
         hidden: card()!.hidden,
+        maxHeight: card()!.style.maxHeight,
         maxWidth: card()!.style.maxWidth,
         width: cardRect.width,
         top: Math.round(cardRect.top),
@@ -269,6 +272,86 @@ describe('closed popover', () => {
       expect(first.top).toBe(first.expectedTop)
       expect(Math.abs(first.width - first.referenceWidth)).toBeLessThan(1)
       expect(second).toEqual(first)
+    })
+
+    test('is capped to the room within the boundary when `constrainSize` is set', async () => {
+      await render(<Harness constrainSize />)
+
+      const {first, second} = await openAndReadFirstFrame()
+      // Within the boundary's client box (no scrollbar, unlike the cap from its border box), less
+      // the padding: on both sides for the width, below the card's top for the height
+      const room = boundary().clientWidth - BOUNDARY_PADDING
+      const roomBelow =
+        boundary().getBoundingClientRect().top +
+        boundary().clientHeight -
+        reference().getBoundingClientRect().bottom -
+        DISTANCE -
+        BOUNDARY_PADDING / 2
+
+      expect(first.display).toBe('')
+      expect(first.top).toBe(first.expectedTop)
+      expect(first.maxWidth).toBe(`${Math.min(room, BOUNDARY_WIDTH - BOUNDARY_PADDING)}px`)
+      expect(first.width).toBeLessThanOrEqual(room)
+      expect(Math.abs(parseFloat(first.maxHeight) - roomBelow)).toBeLessThan(1)
+      expect(second).toEqual(first)
+    })
+  })
+
+  // A positioning pass commits only for Floating UI's positioning data
+  describe('size while open', () => {
+    test('commits once for a reference resize when `matchReferenceWidth` is set', async () => {
+      await render(<Harness matchReferenceWidth />)
+
+      await open()
+      popoverCommits = 0
+
+      reference().style.width = '180px'
+      await expect.poll(() => card()!.style.width).toBe('180px')
+      await settle()
+
+      expect(Math.abs(card()!.getBoundingClientRect().width - 180)).toBeLessThan(1)
+      expect(popoverCommits).toBe(1)
+    })
+
+    test('commits once per scroll-driven positioning pass when `constrainSize` is set', async () => {
+      await render(<Harness constrainSize />)
+
+      await open()
+      popoverCommits = 0
+
+      // Every scroll moves the reference, so every pass has new positioning data
+      for (let scrollTop = 2; scrollTop <= 10; scrollTop += 2) {
+        boundary().scrollTop = scrollTop
+        // oxlint-disable-next-line no-await-in-loop
+        await nextFrame()
+      }
+      await settle()
+
+      expect(popoverCommits).toBe(5)
+    })
+
+    test('follows the boundary width when `constrainSize` is set', async () => {
+      await render(<Harness constrainSize />)
+
+      await open()
+      popoverCommits = 0
+
+      const narrower = BOUNDARY_WIDTH - 40
+
+      boundary().style.width = `${narrower}px`
+      await expect
+        .poll(() => card()!.style.maxWidth)
+        .toBe(
+          `${Math.min(boundary().clientWidth - BOUNDARY_PADDING, narrower - BOUNDARY_PADDING)}px`,
+        )
+      await settle()
+
+      expect(card()!.getBoundingClientRect().right).toBeLessThanOrEqual(
+        boundary().getBoundingClientRect().right,
+      )
+      // The boundary size, then the positioning data of the passes `autoUpdate` runs as it
+      // restarts for the new cap (a `size` option)
+      expect(popoverCommits).toBe(3)
     })
   })
 

@@ -44,6 +44,9 @@ export function PopoverCard(
     arrowRef: React.Ref<HTMLDivElement>
     arrowX?: number
     arrowY?: number
+    constrainSize?: boolean
+    matchReferenceWidth?: boolean
+    maxWidth: number | undefined
     originX?: number
     originY?: number
     overflow?: BoxOverflow
@@ -67,6 +70,9 @@ export function PopoverCard(
     arrowX,
     arrowY,
     children,
+    constrainSize,
+    matchReferenceWidth,
+    maxWidth,
     padding,
     placement,
     originX,
@@ -103,12 +109,29 @@ export function PopoverCard(
       position: strategy,
       top: y,
       transformOrigin: getTransformOrigin(originX, originY),
-      width,
       zIndex,
       willChange: animate ? 'transform' : undefined,
       ...style,
+      // The `size` middleware writes these to the element while it owns them (React leaves a style
+      // it keeps rendering as `undefined` alone), and `''` clears its write once React owns them
+      maxHeight: constrainSize ? undefined : (style?.maxHeight ?? ''),
+      maxWidth: constrainSize ? undefined : (maxWidth ?? style?.maxWidth ?? ''),
+      width: matchReferenceWidth ? undefined : (width ?? style?.width ?? ''),
     }),
-    [animate, originX, originY, strategy, style, width, x, y, zIndex],
+    [
+      animate,
+      constrainSize,
+      matchReferenceWidth,
+      maxWidth,
+      originX,
+      originY,
+      strategy,
+      style,
+      width,
+      x,
+      y,
+      zIndex,
+    ],
   )
 
   const arrowStyle: CSSProperties = useMemo(

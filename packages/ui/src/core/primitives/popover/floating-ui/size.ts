@@ -7,25 +7,16 @@ export function size(options: {
   constrainSize: boolean
   margins: PopoverMargins
   matchReferenceWidth?: boolean
-  maxWidthRef: React.RefObject<number | undefined>
+  maxWidth: number | undefined
   padding?: number
-  referenceWidthRef: React.RefObject<number | undefined>
-  setReferenceWidth: (referenceWidth: number) => void
-  widthRef: React.RefObject<number | undefined>
 }): Middleware {
-  const {
-    constrainSize,
-    margins,
-    matchReferenceWidth,
-    maxWidthRef,
-    padding = 0,
-    referenceWidthRef,
-    setReferenceWidth,
-    widthRef,
-  } = options
+  const {constrainSize, margins, matchReferenceWidth, padding = 0} = options
 
   return {
     name: '@sanity/ui/size',
+    // `useFloating` compares middleware deeply and functions by their source text, so without its
+    // `options` it would keep running this middleware with outdated ones
+    options,
     async fn(args) {
       const {elements, placement, platform, rects} = args
       const {floating, reference} = rects
@@ -65,21 +56,18 @@ export function size(options: {
       }
 
       // IMPORTANT – APPLY ELEMENT STYLES HERE
-      // Elements need to be resized BEFORE the `platform.getDimensions` call below
-      const availableWidth = maxWidth - margins[1] - margins[3]
-      const availableHeight = maxHeight - margins[0] - margins[2]
-      const referenceWidth = reference.width - margins[1] - margins[3]
-      referenceWidthRef.current = referenceWidth
-      setReferenceWidth(referenceWidth)
+      // Elements need to be resized BEFORE the `platform.getDimensions` call below, and never to a
+      // negative size: CSS ignores a negative length, keeping the previous one
+      const availableWidth = Math.max(0, maxWidth - margins[1] - margins[3])
+      const availableHeight = Math.max(0, maxHeight - margins[0] - margins[2])
+      const referenceWidth = Math.max(0, reference.width - margins[1] - margins[3])
 
       if (matchReferenceWidth) {
         elements.floating.style.width = `${referenceWidth}px`
-      } else if (widthRef.current !== undefined) {
-        elements.floating.style.width = `${widthRef.current}px`
       }
 
       if (constrainSize) {
-        elements.floating.style.maxWidth = `${Math.min(availableWidth, maxWidthRef.current ?? Infinity)}px`
+        elements.floating.style.maxWidth = `${Math.min(availableWidth, options.maxWidth ?? Infinity)}px`
 
         elements.floating.style.maxHeight = `${availableHeight}px`
       }

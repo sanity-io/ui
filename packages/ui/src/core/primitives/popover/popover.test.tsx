@@ -6,10 +6,11 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {Activity, Profiler, useState} from 'react'
+import {Activity, type CSSProperties, Profiler, useState} from 'react'
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
+import {_elementSizeObserver} from '../../observers/elementSizeObserver'
 import {BoundaryElementProvider} from '../../utils/boundaryElement/boundaryElementProvider'
 import {Button} from '../button/button'
 import {Text} from '../text/text'
@@ -760,6 +761,242 @@ describe('Popover', () => {
 
       expect(timesObserved(boundary)).toBe(2)
       expect(cardMaxWidth()).toBe('292px')
+    })
+  })
+
+  // The `size` middleware writes the width (`matchReferenceWidth`) and the max width and height
+  // (`constrainSize`) to the card while positioning it; React renders them otherwise. jsdom lays
+  // nothing out, so the sizes the popover and Floating UI read are defined on the elements.
+  describe('size styles', () => {
+    const REFERENCE_WIDTH = 100
+
+    /**
+     * An open popover in a boundary whose offset width less the padding is the cap (`292` by
+     * default) and whose client width less the padding is the room the middleware measures
+     */
+    function Example(
+      props: {boundaryClientWidth?: number; style?: CSSProperties} & Pick<
+        PopoverProps,
+        '__unstable_margins' | 'constrainSize' | 'matchReferenceWidth' | 'width'
+      >,
+    ) {
+      const {boundaryClientWidth = 300, ...popoverProps} = props
+      const [boundary, setBoundary] = useState<HTMLDivElement | null>(null)
+
+      return (
+        <div
+          data-testid="boundary"
+          ref={(node) => {
+            if (node) {
+              Object.defineProperties(node, {
+                clientHeight: {configurable: true, value: 100},
+                clientWidth: {configurable: true, value: boundaryClientWidth},
+                offsetHeight: {configurable: true, value: 100},
+                offsetWidth: {configurable: true, value: 300},
+              })
+            }
+            setBoundary(node)
+          }}
+        >
+          <BoundaryElementProvider element={boundary}>
+            <Popover content={content} open {...popoverProps}>
+              <Button
+                ref={(node) => {
+                  if (node) {
+                    node.getBoundingClientRect = () =>
+                      DOMRect.fromRect({width: REFERENCE_WIDTH, height: 20})
+                  }
+                }}
+                text="Reference"
+              />
+            </Popover>
+          </BoundaryElementProvider>
+        </div>
+      )
+    }
+
+    /** Lets the positioning pass, which runs in microtasks after a commit, finish */
+    const settle = () => act(() => new Promise<void>((resolve) => setTimeout(resolve, 0)))
+
+    /** Delivers a border-box width of the boundary to the popover, as its observer would */
+    function resizeBoundary(width: number) {
+      const boundary = screen.getByTestId('boundary')
+      const [, subscriber] = vi
+        .mocked(_elementSizeObserver.subscribe)
+        .mock.calls.findLast(([element]) => element === boundary)!
+      const size = {width, height: 100}
+
+      act(() =>
+        // oxlint-disable-next-line no-deprecated -- still part of what subscribers receive
+        subscriber({_contentRect: DOMRect.fromRect(size), border: size, content: size}),
+      )
+    }
+
+    beforeEach(() => {
+      vi.spyOn(_elementSizeObserver, 'subscribe')
+      // Floating UI clips to the viewport too
+      Object.defineProperties(document.documentElement, {
+        clientHeight: {configurable: true, value: 768},
+        clientWidth: {configurable: true, value: 1024},
+      })
+    })
+
+    afterEach(() => {
+      vi.restoreAllMocks()
+      Reflect.deleteProperty(document.documentElement, 'clientHeight')
+      Reflect.deleteProperty(document.documentElement, 'clientWidth')
+    })
+
+    it.each([
+      {width: undefined, expected: ''},
+      {width: 0, expected: '320px'},
+    ])(
+      'hands the width back to React once `matchReferenceWidth` is turned off (width: $width)',
+      async ({width, expected}) => {
+        // `constrainSize` keeps the `size` middleware in the array, only its options change
+        const {rerender} = render(<Example constrainSize matchReferenceWidth width={width} />)
+        await settle()
+
+        const card = queryPopoverCard()!
+
+        expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+
+        rerender(<Example constrainSize width={width} />)
+        await settle()
+
+        expect(card.style.width).toBe(expected)
+
+        // Nor does a later pass (`autoUpdate` listens for window resizes) write it again
+        act(() => {
+          window.dispatchEvent(new Event('resize'))
+        })
+        await settle()
+
+        expect(card.style.width).toBe(expected)
+      },
+    )
+
+    it('hands the max width and height back to React once `constrainSize` is turned off', async () => {
+      // The room (`277`) is narrower than the cap (`292`), so that the two writers are told apart
+      const {rerender} = render(<Example boundaryClientWidth={285} constrainSize />)
+      await settle()
+
+      const card = queryPopoverCard()!
+
+      expect(card.style.maxWidth).toBe('277px')
+      expect(card.style.maxHeight).toBe('72px')
+
+      rerender(<Example boundaryClientWidth={285} />)
+      await settle()
+
+      expect(card.style.maxWidth).toBe('292px')
+      expect(card.style.maxHeight).toBe('')
+    })
+
+    it('applies a changed cap within the room under `constrainSize`', async () => {
+      render(<Example boundaryClientWidth={150} constrainSize />)
+      await settle()
+
+      const card = queryPopoverCard()!
+
+      expect(card.style.maxWidth).toBe('142px')
+
+      resizeBoundary(250)
+      await settle()
+
+      expect(card.style.maxWidth).toBe('142px')
+
+      resizeBoundary(100)
+      await settle()
+
+      expect(card.style.maxWidth).toBe('92px')
+    })
+
+    it("lets a consumer `style` set the sizes React renders, but not the middleware's", async () => {
+      // The popover has no width of its own (`auto`); its cap wins over the consumer's
+      const {rerender} = render(
+        <Example boundaryClientWidth={285} style={{maxHeight: 50, maxWidth: 60, width: 70}} />,
+      )
+      await settle()
+
+      const card = queryPopoverCard()!
+
+      expect(card.style.width).toBe('70px')
+      expect(card.style.maxWidth).toBe('292px')
+      expect(card.style.maxHeight).toBe('50px')
+
+      rerender(
+        <Example
+          boundaryClientWidth={285}
+          constrainSize
+          matchReferenceWidth
+          style={{maxHeight: 55, maxWidth: 65, width: 75}}
+        />,
+      )
+      await settle()
+
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+      expect(card.style.maxWidth).toBe('277px')
+      expect(card.style.maxHeight).toBe('72px')
+
+      // Re-rendering for another consumer style, with no positioning pass to follow
+      rerender(
+        <Example
+          boundaryClientWidth={285}
+          constrainSize
+          matchReferenceWidth
+          style={{maxHeight: 50, maxWidth: 60, width: 70}}
+        />,
+      )
+      await settle()
+
+      expect(card.style.width).toBe(`${REFERENCE_WIDTH}px`)
+      expect(card.style.maxWidth).toBe('277px')
+      expect(card.style.maxHeight).toBe('72px')
+    })
+
+    it('renders a cap of zero for a boundary narrower than its padding, and none for one without a width', async () => {
+      render(<Example />)
+      await settle()
+
+      const card = queryPopoverCard()!
+      const error = vi.spyOn(console, 'error')
+
+      expect(card.style.maxWidth).toBe('292px')
+
+      // CSS ignores a negative length, which would keep the previous cap
+      resizeBoundary(6)
+
+      expect(card.style.maxWidth).toBe('0px')
+
+      // What a `display: none` boundary reports; React warns about an `Infinity` style
+      resizeBoundary(0)
+
+      expect(card.style.maxWidth).toBe('')
+      expect(error).not.toHaveBeenCalled()
+    })
+
+    it('has the `size` middleware write sizes of zero, never negative ones', async () => {
+      const {rerender} = render(<Example constrainSize matchReferenceWidth />)
+      await settle()
+
+      const card = queryPopoverCard()!
+
+      // Margins wider than the reference and taller than the room below it, and a boundary narrower
+      // than its padding: CSS ignores a negative length, which would keep the first render's sizes
+      rerender(
+        <Example
+          __unstable_margins={[60, 60, 60, 60]}
+          boundaryClientWidth={6}
+          constrainSize
+          matchReferenceWidth
+        />,
+      )
+      await settle()
+
+      expect(card.style.width).toBe('0px')
+      expect(card.style.maxWidth).toBe('0px')
+      expect(card.style.maxHeight).toBe('0px')
     })
   })
 })
