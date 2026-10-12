@@ -7,6 +7,8 @@ import {ThemeProps} from '../../styles/types'
 import {AvatarSize} from '../../types/avatar'
 import {Label} from '../label/label'
 
+import {avatarCounter} from './avatar.css'
+
 function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {avatar, media} = getTheme_v2(props.theme)
 
@@ -23,31 +25,17 @@ function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeP
   })
 }
 
-function _avatarCounterBaseStyle(props: ThemeProps) {
+function _avatarCounterPaddingStyle(props: ThemeProps) {
   const {space} = getTheme_v2(props.theme)
 
   return css`
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    user-select: none;
-    color: inherit;
-    color: var(--card-fg-color);
-    background: var(--card-bg-color);
-    box-shadow:
-      0 0 0 1px var(--card-bg-color),
-      inset 0 0 0 1px var(--card-hairline-hard-color);
     padding: 0 ${rem(space[2])};
-
-    &:not([hidden]) {
-      display: flex;
-    }
   `
 }
 
-const StyledAvatarCounter = styled.div<{$size: AvatarSize[]}>(
+const StyledAvatarCounter = styled.div.attrs({className: avatarCounter})<{$size: AvatarSize[]}>(
   _responsiveAvatarCounterSizeStyle,
-  _avatarCounterBaseStyle,
+  _avatarCounterPaddingStyle,
 )
 
 /**

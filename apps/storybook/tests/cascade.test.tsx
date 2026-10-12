@@ -1,4 +1,4 @@
-import {Layer, ThemeProvider} from '@sanity/ui'
+import {Button, Layer, ThemeProvider} from '@sanity/ui'
 import {MenuDivider} from '@sanity/ui/menu'
 import {buildTheme} from '@sanity/ui/theme'
 import {composeStories} from '@storybook/react-vite'
@@ -21,6 +21,10 @@ const FixedLayer = styled(Layer)`
 const TallMenuDivider = styled(MenuDivider)`
   height: 20px;
   width: 1px;
+`
+
+const WrappingButton = styled(Button)`
+  white-space: normal;
 `
 
 describe('vanilla-extract cascade', () => {
@@ -65,5 +69,29 @@ describe('vanilla-extract cascade', () => {
     )
 
     expect(getComputedStyle(document.getElementById('styled-divider')!).height).toBe('20px')
+  })
+
+  test('styled(Button) white-space wins when styles.css loads first', async () => {
+    await render(
+      <ThemeProvider theme={theme}>
+        <WrappingButton id="styled-button" text="Button" />
+      </ThemeProvider>,
+    )
+
+    expect(getComputedStyle(document.getElementById('styled-button')!).whiteSpace).toBe('normal')
+  })
+
+  test('Button width="fill" stretches to the container', async () => {
+    await render(
+      <ThemeProvider theme={theme}>
+        <div style={{width: 640}}>
+          <Button id="fill-button" text="Button" width="fill" />
+        </div>
+      </ThemeProvider>,
+    )
+
+    const button = document.getElementById('fill-button')!
+
+    expect(button.getBoundingClientRect().width).toBe(640)
   })
 })

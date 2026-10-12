@@ -4,7 +4,7 @@ import {styled} from 'styled-components'
 
 import {switchRepresentationStyles, switchThumbStyles, switchTrackStyles} from './styles'
 
-import {switchInput, switchRoot} from './switch.css'
+import {switchInput, switchRepresentation, switchRoot, switchThumb, switchTrack} from './switch.css'
 
 /**
  * @public
@@ -13,9 +13,14 @@ export interface SwitchProps {
   indeterminate?: boolean
 }
 
-const Representation = styled.span(switchRepresentationStyles)
-const Track = styled.span(switchTrackStyles)
-const Thumb = styled.span<{$checked?: boolean; $indeterminate?: boolean}>(switchThumbStyles)
+const Representation = styled.span.attrs({className: switchRepresentation})(
+  switchRepresentationStyles,
+)
+const Track = styled.span.attrs({className: switchTrack})(switchTrackStyles)
+const Thumb = styled.span.attrs({className: switchThumb})<{
+  $checked?: boolean
+  $indeterminate?: boolean
+}>(switchThumbStyles)
 
 /**
  * The `Switch` component allows the user to toggle a setting on and off.

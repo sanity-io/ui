@@ -22,7 +22,7 @@ import {
   buttonStyles,
 } from './styles'
 
-import {buttonLoadingBox} from './button.css'
+import {buttonLoadingBox, buttonRoot, buttonWidthFill} from './button.css'
 
 /**
  * @public
@@ -59,7 +59,9 @@ export interface ButtonOwnProps extends ResponsivePaddingProps, ResponsiveRadius
  */
 export type ButtonProps<E extends ElementType = 'button'> = Props<ButtonOwnProps, E>
 
-const ButtonBase = styled.button(buttonBaseStyles)
+// The static rules live in `buttonRoot` in styles.css; `width="fill"` is the
+// `buttonWidthFill` class on the last level
+const ButtonBase = styled.button.attrs({className: buttonRoot})(buttonBaseStyles)
 
 const ButtonColor = styled(ButtonBase)<{$mode: ButtonMode; $tone: ButtonTone}>(buttonColorStyles)
 
@@ -67,9 +69,9 @@ const ButtonDisabledAndFocus = styled(ButtonColor)<{$mode: ButtonMode; $tone: Bu
   buttonDisabledAndFocusStyles,
 )
 
-const StyledButton = styled(ButtonDisabledAndFocus)<
-  {$width?: ButtonWidth} & ResponsiveRadiusStyleProps
->(responsiveRadiusStyle, buttonStyles)
+const StyledButton = styled(ButtonDisabledAndFocus).attrs<{$width?: ButtonWidth}>((props) => ({
+  className: props.$width === 'fill' ? buttonWidthFill : undefined,
+}))<{$width?: ButtonWidth} & ResponsiveRadiusStyleProps>(responsiveRadiusStyle, buttonStyles)
 
 function ButtonComponent(
   props: ButtonOwnProps & {as?: ElementType} & Omit<

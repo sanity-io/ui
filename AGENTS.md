@@ -40,6 +40,18 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `--treat-config-hints-as-errors`, so stale knip config (e.g. an
   `ignoreDependencies` entry that no longer matches anything) also fails the
   run.
+- Static CSS lives in vanilla-extract `.css.ts` files next to the component
+  and is served from `@sanity/ui/styles.css`; only rules that read the theme
+  or its breakpoints, or that must beat another library rule at equal
+  specificity, stay on styled-components. On a styled component, attach the
+  class on the styled definition rather than in the JSX, so the markup stays
+  unchanged and styled-components joins it with any `className` a consumer
+  passes (6.1 and later): `.attrs({className: x})` for a fixed class, and
+  `.attrs((props) => ({className: cond ? x : undefined}))` when it depends on
+  a prop. Components that are plain functions rather than styled components
+  (`Layer`, `Tab`, `MenuDivider` and the rest migrated in 4.1.0 and 4.2.0)
+  merge in the JSX with `className={clsx(x, className)}` instead.
+
 - Packages are built with [tsdown](https://tsdown.dev) via
   `@sanity/tsdown-config` (`tsdown.config.mts` in every package — a bare
   `.ts` config only imports on the Node version in CI when the package is

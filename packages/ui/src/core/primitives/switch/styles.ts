@@ -12,31 +12,10 @@ export function switchRepresentationStyles(props: ThemeProps): ReturnType<typeof
   return css`
     --switch-bg-color: ${color.input.default.enabled.border};
     --switch-fg-color: ${color.input.default.enabled.bg};
-    --switch-box-shadow: none;
 
-    &:not([hidden]) {
-      display: block;
-    }
-    position: relative;
     width: ${rem(input.switch.width)};
     height: ${rem(input.switch.height)};
     border-radius: ${rem(input.switch.height / 2)};
-
-    /* Make sure it’s not possible to interact with the wrapper element */
-    pointer-events: none;
-
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1;
-      box-shadow: var(--switch-box-shadow);
-      border-radius: inherit;
-    }
 
     /* Focus styles */
     input:focus + && {
@@ -86,13 +65,6 @@ export function switchTrackStyles(props: ThemeProps): ReturnType<typeof css> {
   const {input} = getTheme_v2(props.theme)
 
   return css`
-    &:not([hidden]) {
-      display: block;
-    }
-    background-color: var(--switch-bg-color);
-    position: absolute;
-    left: 0;
-    top: 0;
     width: ${rem(input.switch.width)};
     height: ${rem(input.switch.height)};
     border-radius: ${rem(input.switch.height / 2)};
@@ -114,21 +86,15 @@ export function switchThumbStyles(
   const checked = $indeterminate !== true && props.$checked === true
 
   return css`
-    &:not([hidden]) {
-      display: block;
-    }
-    position: absolute;
     left: ${rem(trackPadding)};
     top: ${rem(trackPadding)};
     height: ${rem(size)};
     width: ${rem(size)};
     border-radius: ${rem(size / 2)};
-    transition-property: transform;
     transition-duration: ${input.switch.transitionDurationMs}ms;
     transition-timing-function: ${input.switch.transitionTimingFunction};
-    background: var(--switch-fg-color);
+    /* Stays here: the checked offsets below override it at equal specificity */
     transform: translate3d(0, 0, 0);
-    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
 
     ${
       checked &&
