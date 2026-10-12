@@ -6,16 +6,18 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
+import {Activity, Profiler, useState} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
 import {Button} from '../../primitives/button/button'
 import {Menu} from './menu'
 import {MenuButton, type MenuButtonProps} from './menuButton'
+import {MenuGroup} from './menuGroup'
 import {MenuItem} from './menuItem'
 
-function renderMenuButton(props?: Partial<MenuButtonProps>) {
-  return render(
+function menuButton(props?: Partial<MenuButtonProps>) {
+  return (
     <MenuButton
       button={<Button text="Open menu" />}
       id="menu-button"
@@ -26,8 +28,12 @@ function renderMenuButton(props?: Partial<MenuButtonProps>) {
         </Menu>
       }
       {...props}
-    />,
+    />
   )
+}
+
+function renderMenuButton(props?: Partial<MenuButtonProps>) {
+  return render(menuButton(props))
 }
 
 function getButton() {
@@ -338,6 +344,194 @@ describe('MenuButton', () => {
       expect(onClose).not.toHaveBeenCalled()
       // The pre-rendered menu lives in the portal, nothing was added next to the button
       expect(container.querySelector('[data-ui="MenuButton__popover"]')).toBeNull()
+    })
+  })
+
+  describe('the button element', () => {
+    // A `nested-update` is a commit that React flushes synchronously from the one before it, as it
+    // does for a state update from a ref callback
+    const phasesOf = (onRender: ReturnType<typeof vi.fn>) =>
+      onRender.mock.calls.map((call: unknown[]) => call[1])
+
+    it.each([
+      {name: 'cloned by the popover', popover: undefined},
+      {name: 'with a disabled popover', popover: {disabled: true}},
+      {
+        name: 'with a `referenceElement`',
+        popover: {referenceElement: document.createElement('div')},
+      },
+    ])('attaches a forwarded ref once, $name, in the commit that mounts it', ({popover}) => {
+      const callbackRef = vi.fn()
+      const onRender = vi.fn()
+
+      const {unmount} = render(
+        <Profiler id="menu-button" onRender={onRender}>
+          {menuButton({popover, ref: callbackRef})}
+        </Profiler>,
+        {strict: false},
+      )
+
+      const button = getButton()
+
+      expect(callbackRef.mock.calls).toEqual([[button]])
+      expect(phasesOf(onRender)[0]).toBe('mount')
+      expect(phasesOf(onRender)).not.toContain('nested-update')
+
+      // Opening and closing the menu leaves it attached
+      fireEvent.click(button)
+      fireEvent.click(button)
+      unmount()
+
+      expect(callbackRef.mock.calls).toEqual([[button], [null]])
+    })
+
+    it('detaches and attaches a forwarded ref as an `<Activity>` hides and shows it, with no follow-up commit', () => {
+      const callbackRef = vi.fn()
+      const onRender = vi.fn()
+      const inActivity = (mode: 'hidden' | 'visible') => (
+        <Profiler id="menu-button" onRender={onRender}>
+          <Activity mode={mode}>{menuButton({ref: callbackRef})}</Activity>
+        </Profiler>
+      )
+
+      const {rerender} = render(inActivity('visible'), {strict: false})
+
+      const button = getButton()
+
+      onRender.mockClear()
+      rerender(inActivity('hidden'))
+      rerender(inActivity('visible'))
+
+      expect(callbackRef.mock.calls).toEqual([[button], [null], [button]])
+      expect(phasesOf(onRender)).not.toContain('nested-update')
+    })
+
+    // React cannot bail out of a same-value update scheduled in a commit that rendered an update
+    // of the component, so the button attaching again must not set state at all. A disabled
+    // popover, whose opening renders nothing, keeps Floating UI's follow-up commit out of it.
+    it('schedules no follow-up commit when a new forwarded ref attaches as the button is clicked', () => {
+      const onRender = vi.fn()
+
+      function Parent() {
+        'use no memo'
+        const [clicks, setClicks] = useState(0)
+
+        return (
+          <div onClick={() => setClicks(clicks + 1)} role="presentation">
+            {menuButton({popover: {disabled: true}, ref: () => undefined})}
+          </div>
+        )
+      }
+
+      render(
+        <Profiler id="menu-button" onRender={onRender}>
+          <Parent />
+        </Profiler>,
+        {strict: false},
+      )
+
+      onRender.mockClear()
+      fireEvent.click(getButton())
+
+      expect(phasesOf(onRender)).toEqual(['update'])
+    })
+
+    it('follows a button replaced while the menu is open', () => {
+      const ref = {current: null as HTMLButtonElement | null}
+      const {rerender} = render(menuButton({ref}))
+
+      const button = getButton()
+
+      fireEvent.click(button)
+      expectMenuVisible()
+
+      rerender(menuButton({button: <Button key="replacement" text="Open menu" />, ref}))
+
+      const replacement = getButton()
+
+      expect(replacement).not.toBe(button)
+      expect(ref.current).toBe(replacement)
+
+      // A press on the replacement is not a click outside the menu, and closing focuses it
+      fireEvent.mouseDown(replacement)
+      expectMenuVisible()
+      fireEvent.keyDown(window, {key: 'Escape'})
+
+      expect(replacement).toHaveAttribute('aria-expanded', 'false')
+      expect(replacement).toHaveFocus()
+    })
+
+    it('returns focus to the button when the menu closes with Escape', () => {
+      renderMenuButton()
+
+      fireEvent.click(getButton())
+      expectMenuVisible()
+
+      fireEvent.keyDown(window, {key: 'Escape'})
+
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+      expect(getButton()).toHaveFocus()
+    })
+
+    it('returns focus to the button when an item of a menu opened from the keyboard is clicked', () => {
+      renderMenuButton()
+
+      fireEvent.keyDown(getButton(), {key: 'ArrowDown'})
+      expectMenuVisible()
+
+      fireEvent.click(screen.getByRole('menuitem', {name: 'Option 2'}))
+
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+      expect(getButton()).toHaveFocus()
+    })
+
+    it('closes on a click outside, but not on one inside the menu or on the button', () => {
+      renderMenuButton()
+
+      fireEvent.click(getButton())
+      expectMenuVisible()
+
+      // `useClickOutsideEvent` listens for `mousedown` on the document
+      fireEvent.mouseDown(screen.getByRole('menu'))
+      expectMenuVisible()
+
+      fireEvent.mouseDown(getButton())
+      expectMenuVisible()
+
+      fireEvent.mouseDown(document.body)
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    it('keeps the menu open while focus moves into a portaled submenu, and closes when it leaves', () => {
+      renderMenuButton({
+        menu: (
+          <Menu>
+            <MenuItem text="Option 1" />
+            <MenuGroup id="menu-group" popover={{portal: true}} text="More">
+              <MenuItem text="Sub option" />
+            </MenuGroup>
+          </Menu>
+        ),
+      })
+
+      fireEvent.click(getButton())
+      expectMenuVisible()
+
+      const rootMenu = screen.getByRole('menu')
+      const group = screen.getByRole('button', {name: 'More'})
+
+      act(() => group.focus())
+      fireEvent.keyDown(group, {key: 'ArrowRight'})
+
+      const subOption = screen.getByRole('menuitem', {name: 'Sub option'})
+
+      expect(rootMenu.contains(subOption)).toBe(false)
+
+      fireEvent.focusOut(rootMenu, {relatedTarget: subOption})
+      expect(getButton()).toHaveAttribute('aria-expanded', 'true')
+
+      fireEvent.focusOut(rootMenu, {relatedTarget: document.body})
+      expect(getButton()).toHaveAttribute('aria-expanded', 'false')
     })
   })
 })
