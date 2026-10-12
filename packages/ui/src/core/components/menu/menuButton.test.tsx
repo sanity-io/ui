@@ -6,7 +6,7 @@ import {act, fireEvent, screen} from '@testing-library/react'
 import '../../../../test/mocks/resizeObserver.mock'
 // oxlint-disable-next-line no-unassigned-import
 import '../../../../test/mocks/matchMedia.mock'
-import {Activity, Profiler} from 'react'
+import {Activity, Profiler, useState} from 'react'
 import {describe, expect, it, vi} from 'vitest'
 
 import {render} from '../../../../test/utils'
@@ -404,6 +404,36 @@ describe('MenuButton', () => {
 
       expect(callbackRef.mock.calls).toEqual([[button], [null], [button]])
       expect(phasesOf(onRender)).not.toContain('nested-update')
+    })
+
+    // React cannot bail out of a same-value update scheduled in a commit that rendered an update
+    // of the component, so the button attaching again must not set state at all. A disabled
+    // popover, whose opening renders nothing, keeps Floating UI's follow-up commit out of it.
+    it('schedules no follow-up commit when a new forwarded ref attaches as the button is clicked', () => {
+      const onRender = vi.fn()
+
+      function Parent() {
+        'use no memo'
+        const [clicks, setClicks] = useState(0)
+
+        return (
+          <div onClick={() => setClicks(clicks + 1)} role="presentation">
+            {menuButton({popover: {disabled: true}, ref: () => undefined})}
+          </div>
+        )
+      }
+
+      render(
+        <Profiler id="menu-button" onRender={onRender}>
+          <Parent />
+        </Profiler>,
+        {strict: false},
+      )
+
+      onRender.mockClear()
+      fireEvent.click(getButton())
+
+      expect(phasesOf(onRender)).toEqual(['update'])
     })
 
     it('follows a button replaced while the menu is open', () => {

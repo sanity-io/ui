@@ -278,8 +278,8 @@ function useOpenState(onOpen?: () => void, onClose?: () => void) {
 /**
  * The button's ref callback: attaches the forwarded ref, and moves `buttonElement` to a button
  * that replaces the one it is set to. The same button attaching again (an `<Activity>` showing
- * it, `StrictMode`) schedules nothing. A hook because the React Compiler skips a component that
- * passes a callback reading a ref to `cloneElement`.
+ * it, a new forwarded ref) schedules nothing. A hook because the React Compiler skips a component
+ * that passes a callback reading a ref to `cloneElement`.
  */
 function useButtonRef(
   forwardedRef: React.Ref<HTMLButtonElement | null> | undefined,
