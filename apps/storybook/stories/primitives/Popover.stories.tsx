@@ -670,10 +670,10 @@ function ViewTransitionStory(props: PopoverProps) {
 }
 
 /**
- * A popover on an element that an `<Activity>` inside a
- * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) shows and hides in a
- * `startTransition`, so that React animates it in and out. The popover adds no work of its own to
- * that transition.
+ * A popover on an element inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) that an `<Activity>`
+ * shows and hides in a `startTransition`, so that React animates it in and out. The popover adds
+ * no work of its own to that transition.
  */
 export const WithViewTransition: Story = {
   parameters: {controls: {include: ['animate', 'placement', 'portal']}},
