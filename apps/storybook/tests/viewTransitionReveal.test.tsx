@@ -3,6 +3,7 @@
 // oxlint-disable-next-line no-unassigned-import
 import './helpers/reactDevtoolsHook'
 import {Button, Card, Flex, TextInput, ThemeProvider} from '@sanity/ui'
+import {Menu, MenuButton, MenuItem} from '@sanity/ui/menu'
 import {Popover} from '@sanity/ui/popover'
 import {buildTheme} from '@sanity/ui/theme'
 import {Tooltip} from '@sanity/ui/tooltip'
@@ -11,12 +12,14 @@ import {Activity, startTransition, useState, ViewTransition} from 'react'
 import {afterEach, beforeEach, describe, expect, test, vi} from 'vitest'
 import {render} from 'vitest-browser-react'
 
+import * as menuButtonStories from '../stories/components/MenuButton.stories'
 import * as popoverStories from '../stories/primitives/Popover.stories'
 import * as tooltipStories from '../stories/primitives/Tooltip.stories'
 import {commits, installed} from './helpers/reactDevtoolsHook'
 
 const {WithViewTransition: TooltipWithViewTransition} = composeStories(tooltipStories)
 const {WithViewTransition: PopoverWithViewTransition} = composeStories(popoverStories)
+const {WithViewTransition: MenuButtonWithViewTransition} = composeStories(menuButtonStories)
 
 const theme = buildTheme()
 
@@ -148,6 +151,30 @@ describe('revealing @sanity/ui overlays with a <ViewTransition>', () => {
     },
   )
 
+  test('a MenuButton schedules no Immediate-priority commit when it is revealed, and none of its own when its menu opens or it is hidden', async () => {
+    const transitions = observeViewTransitions()
+
+    await render(<MenuButtonWithViewTransition />)
+
+    expect(await clickAndWaitForTransition('Show', transitions)).toMatchObject({ready: 'resolved'})
+    expect(button('Open').checkVisibility()).toBe(true)
+    expect(updaters()).toContain('ViewTransitionStory')
+    expect(immediateCommitUpdaters()).toEqual([])
+
+    // The click's commit renders `MenuButton`; the menu registering its element as it mounts
+    // schedules no second one
+    commits.length = 0
+    button('Open').click()
+    await expect.poll(() => document.querySelector('[role="menu"]')?.checkVisibility()).toBe(true)
+    expect(updaters().filter((name) => name === 'MenuButton')).toHaveLength(1)
+
+    // Hidden with the menu open: Floating UI and each `MenuItem` still set state as their refs
+    // detach, `MenuButton` does not
+    expect(await clickAndWaitForTransition('Hide', transitions)).toMatchObject({ready: 'resolved'})
+    expect(button('Open').checkVisibility()).toBe(false)
+    expect(updaters()).not.toContain('MenuButton')
+  })
+
   // A sync update pending while the browser prepares a view transition makes any sync flush in
   // that window skip the transition ("A flushSync update cancelled a View Transition…"). React
   // flushes sync work as it restores the value of a controlled input after a change it rejected.
@@ -222,6 +249,23 @@ describe('revealing @sanity/ui overlays with a <ViewTransition>', () => {
             <Button text="Reference" />
           </Popover>
         </>,
+      )
+
+      expect(transition).toMatchObject({ready: 'resolved'})
+      expect(warnings).toEqual([])
+    })
+
+    test('does not skip the reveal of a MenuButton', async () => {
+      const {transition, warnings} = await revealWithKeystroke(
+        <MenuButton
+          button={<Button text="Open" />}
+          id="menu"
+          menu={
+            <Menu>
+              <MenuItem text="Item" />
+            </Menu>
+          }
+        />,
       )
 
       expect(transition).toMatchObject({ready: 'resolved'})

@@ -24,7 +24,7 @@ import {Code} from '@sanity/ui/code'
 import {Menu, MenuButton, MenuButtonProps, MenuDivider, MenuGroup, MenuItem} from '@sanity/ui/menu'
 import {ToastProvider, useToast} from '@sanity/ui/toast'
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import {useCallback, useRef, useState} from 'react'
+import {Activity, startTransition, useCallback, useRef, useState, ViewTransition} from 'react'
 import {expect, fn, userEvent, waitFor, within} from 'storybook/test'
 
 const meta: Meta<typeof MenuButton> = {
@@ -650,4 +650,35 @@ export const CustomSelectedState: Story = {
       />
     </Box>
   ),
+}
+
+function ViewTransitionStory(props: MenuButtonProps) {
+  const [shown, setShown] = useState(false)
+
+  return (
+    <Flex align="center" gap={3}>
+      <Button
+        mode="ghost"
+        onClick={() => startTransition(() => setShown((isShown) => !isShown))}
+        text={shown ? 'Hide' : 'Show'}
+      />
+      <Activity mode={shown ? 'visible' : 'hidden'}>
+        <ViewTransition>
+          <MenuButton {...props} />
+        </ViewTransition>
+      </Activity>
+    </Flex>
+  )
+}
+
+/**
+ * A menu button inside a
+ * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition) that an `<Activity>`
+ * shows and hides in a `startTransition`, so that React animates it in and out. The menu button
+ * adds no work of its own to that transition.
+ */
+export const WithViewTransition: Story = {
+  args: {id: 'view-transition-menu'},
+  parameters: {controls: {include: []}},
+  render: (props) => <ViewTransitionStory {...props} />,
 }

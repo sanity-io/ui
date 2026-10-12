@@ -1,6 +1,7 @@
-import {cloneElement, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react'
+import {cloneElement, useCallback, useMemo, useRef, useState} from 'react'
 
 import {Popover, PopoverProps} from '../../primitives/popover/popover'
+import {attachRef} from '../../utils/attachRef'
 import {MenuProps} from './menu'
 
 /**
@@ -68,8 +69,13 @@ export function MenuButton(props: MenuButtonProps) {
   } = props
   const [open, setOpen] = useOpenState(onOpen, onClose)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
+  // Set by the button's event handlers, the only way the menu opens, rather than whenever the
+  // button attaches: a state update from a ref callback re-renders synchronously on every mount
+  // and `<Activity>` reveal, which holds up a view transition of the button (see
+  // `useReferenceElement`)
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
-  const [menuElements, setChildMenuElements] = useState<HTMLElement[]>([])
+  // Mutated in place: only event handlers read it, so registering a menu element needs no render
+  const [menuElements] = useState(() => new Set<HTMLElement>())
   const {
     onClick: onButtonClick,
     onKeyDown: onButtonKeyDown,
@@ -82,6 +88,7 @@ export function MenuButton(props: MenuButtonProps) {
       if (event.defaultPrevented) return
       setOpen((v) => !v)
       setShouldFocus(null)
+      setButtonElement(event.currentTarget)
     },
     [onButtonClick, setOpen],
   )
@@ -108,6 +115,7 @@ export function MenuButton(props: MenuButtonProps) {
         event.preventDefault()
         setOpen(true)
         setShouldFocus('first')
+        setButtonElement(event.currentTarget)
 
         return
       }
@@ -118,6 +126,7 @@ export function MenuButton(props: MenuButtonProps) {
         event.preventDefault()
         setOpen(true)
         setShouldFocus('last')
+        setButtonElement(event.currentTarget)
 
         return
       }
@@ -177,11 +186,16 @@ export function MenuButton(props: MenuButtonProps) {
     setOpen(false, returnFocusTo)
   }, [returnFocusTo, setOpen])
 
-  const registerElement = useCallback((el: HTMLElement) => {
-    setChildMenuElements((els) => els.concat([el]))
+  const registerElement = useCallback(
+    (el: HTMLElement) => {
+      menuElements.add(el)
 
-    return () => setChildMenuElements((els) => els.filter((_el) => _el !== el))
-  }, [])
+      return () => {
+        menuElements.delete(el)
+      }
+    },
+    [menuElements],
+  )
 
   const menuProps: MenuProps = {
     'aria-labelledby': id,
@@ -196,6 +210,8 @@ export function MenuButton(props: MenuButtonProps) {
 
   const menu = menuProp && cloneElement(menuProp, menuProps)
 
+  const setButton = useButtonRef(forwardedRef, setButtonElement)
+
   const button = useMemo(
     () =>
       buttonProp &&
@@ -207,17 +223,10 @@ export function MenuButton(props: MenuButtonProps) {
         'onMouseDown': handleMouseDown,
         'aria-haspopup': true,
         'aria-expanded': open,
-        'ref': setButtonElement,
+        'ref': setButton,
         'selected': buttonProp.props.selected ?? open,
       }),
-    [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open],
-  )
-
-  // Forward button ref to parent
-  useImperativeHandle<HTMLButtonElement | null, HTMLButtonElement | null>(
-    forwardedRef,
-    () => buttonElement,
-    [buttonElement],
+    [buttonProp, handleButtonClick, handleButtonKeyDown, handleMouseDown, id, open, setButton],
   )
 
   const popoverProps: MenuButtonProps['popover'] = useMemo(
@@ -265,4 +274,29 @@ function useOpenState(onOpen?: () => void, onClose?: () => void) {
   )
 
   return [open, setOpen] as const
+}
+
+/**
+ * The button's ref callback: attaches the forwarded ref, and moves `buttonElement` to a button
+ * that replaces the one it is set to. The same button attaching again (an `<Activity>` showing
+ * it, a new forwarded ref) schedules nothing. A hook because the React Compiler skips a component
+ * that passes a callback reading a ref to `cloneElement`.
+ */
+function useButtonRef(
+  forwardedRef: React.Ref<HTMLButtonElement | null> | undefined,
+  setButtonElement: React.Dispatch<React.SetStateAction<HTMLButtonElement | null>>,
+): (node: HTMLButtonElement) => () => void {
+  const lastNodeRef = useRef<HTMLButtonElement | null>(null)
+
+  return useCallback(
+    (node: HTMLButtonElement) => {
+      if (lastNodeRef.current && lastNodeRef.current !== node) {
+        setButtonElement((element) => element && node)
+      }
+      lastNodeRef.current = node
+
+      return attachRef(forwardedRef, node)
+    },
+    [forwardedRef, setButtonElement],
+  )
 }
