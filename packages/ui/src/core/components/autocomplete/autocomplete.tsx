@@ -59,17 +59,7 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   /** @beta */
   listBox?: BoxProps
   loading?: boolean
-  /**
-   * Called with the selected option's value, or `''` when the value is cleared. The selection
-   * is shown right away and stays shown whether or not the parent answers with a new `value`;
-   * see `value`.
-   */
   onChange?: (value: string) => void
-  /**
-   * Called with the text typed into the input, and with `null` when the user ends the query
-   * (blur, Escape, a selection, clear). Not called when a `value` prop change drops a pending
-   * query: that change is the parent's own.
-   */
   onQueryChange?: (query: string | null) => void
   onSelect?: (value: string) => void
   /** @beta */
@@ -101,11 +91,9 @@ export interface AutocompleteProps<Option extends BaseAutocompleteOption = BaseA
   renderValue?: (value: string, option?: Option) => string
   suffix?: ReactNode
   /**
-   * The current value. Applied whenever it changes to a defined value, and then it wins over the
-   * component's own state: a pending query is dropped and the active option moves to it. A
-   * selection or clear the parent does not answer with a new `value` stays shown (`onChange`
-   * has been called), a `value` equal to the one shown (`''` after a clear) changes nothing,
-   * and a `value` that becomes `undefined` leaves the current value in place.
+   * The current value. A changed `value` replaces the value shown and drops a pending query,
+   * unless it equals the value shown (a parent echoing `onChange`). A selection or clear shows
+   * until `value` changes, and changing `value` to `undefined` keeps the value shown.
    */
   value?: string
 }
@@ -189,23 +177,12 @@ export function Autocomplete<Option extends BaseAutocompleteOption>(
 
   const {activeValue, focused, listFocused, query, value} = state
 
-  // Follow the `value` prop. Compared during render rather than in an effect, so the new value is
-  // in the first committed frame instead of one commit later.
   // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
-  //
-  // The prop is applied only when it changes, and only when it differs from the value shown: a
-  // parent echoing the selection it was just told about (a store that lags `onChange`), or the
-  // `''` it was told about for a clear, must not drop a query the user has started since. `''`
-  // and `null` both mean no value (the initial state stores `''` as `null`; a clear stores `null`
-  // and reports `''`). A selection or clear the parent does not answer with a new `value` stays
-  // visible: `onChange` has been called, and the component keeps its own state until the parent
-  // sets a value again. A prop that becomes `undefined` leaves the current value in place, like
-  // a controlled `<input>` that switches to uncontrolled. The drop of a pending query here is
-  // not reported through `onQueryChange`: the parent made the change.
   const [prevValueProp, setPrevValueProp] = useState(valueProp)
 
   if (valueProp !== prevValueProp) {
     setPrevValueProp(valueProp)
+    // A clear stores `null` and reports `''`
     if (valueProp !== undefined && (valueProp || null) !== value) {
       dispatch({type: 'value/change', value: valueProp})
     }
