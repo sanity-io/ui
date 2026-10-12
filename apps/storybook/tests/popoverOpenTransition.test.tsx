@@ -1,5 +1,6 @@
-import {Button, Card, Text, ThemeProvider} from '@sanity/ui'
+import {Button, Card, LayerProvider, Text, ThemeProvider} from '@sanity/ui'
 import {Breadcrumbs} from '@sanity/ui/breadcrumbs'
+import {Menu, MenuGroup, MenuItem} from '@sanity/ui/menu'
 import {Popover} from '@sanity/ui/popover'
 import {buildTheme} from '@sanity/ui/theme'
 import {Profiler, startTransition, useState} from 'react'
@@ -361,6 +362,79 @@ describe('opening a popover in a transition', () => {
       await userEvent.click(page.getByRole('button', {name: 'outside'}))
       await expect.poll(() => card()!.style.display).toBe('none')
       await expect.element(page.getByText('Category B')).not.toBeVisible()
+    })
+  })
+
+  describe('MenuGroup', () => {
+    function MenuGroupHarness() {
+      return (
+        <ThemeProvider scheme="light" theme={theme}>
+          <Card padding={4}>
+            <button id="toggle" type="button">
+              outside
+            </button>
+            <LayerProvider>
+              <Menu>
+                <MenuGroup text="More">
+                  <MenuItem text="Email link" />
+                  {slowContent}
+                </MenuGroup>
+              </Menu>
+            </LayerProvider>
+          </Card>
+        </ThemeProvider>
+      )
+    }
+
+    function group() {
+      return document.querySelector<HTMLElement>('[data-ui="MenuGroup"]')!
+    }
+
+    function childMenuShown() {
+      const element = document.querySelector<HTMLElement>('[data-ui="MenuGroup__popover"]')
+
+      return element?.checkVisibility() ?? false
+    }
+
+    test('paints the highlight of a hovered item while its child menu renders', async () => {
+      await render(<MenuGroupHarness />)
+      await parkPointer()
+
+      let highlightedFrames = 0
+      let shown = false
+
+      const tick = () => {
+        if (childMenuShown()) {
+          shown = true
+
+          return
+        }
+
+        if (group().hasAttribute('data-selected')) highlightedFrames++
+        requestAnimationFrame(tick)
+      }
+
+      // What a pointer entering the item dispatches: intent to open the popover, then `mouseenter`
+      group().dispatchEvent(new PointerEvent('pointerenter'))
+      group().dispatchEvent(new MouseEvent('mouseover', {bubbles: true}))
+      requestAnimationFrame(tick)
+
+      await expect.poll(() => shown, {timeout: 5000}).toBe(true)
+      expect(highlightedFrames).toBeGreaterThanOrEqual(1)
+    })
+
+    test('moves focus into a child menu opened with `ArrowRight` while it renders', async () => {
+      await render(<MenuGroupHarness />)
+      await parkPointer()
+
+      // Focus pre-renders the child menu, and `ArrowRight` in the same task opens it before that
+      // render is done, so frames pass before the open commits
+      group().focus()
+      group().dispatchEvent(new KeyboardEvent('keydown', {bubbles: true, key: 'ArrowRight'}))
+
+      await expect
+        .poll(() => document.activeElement?.textContent?.trim(), {timeout: 5000})
+        .toBe('Email link')
     })
   })
 })
