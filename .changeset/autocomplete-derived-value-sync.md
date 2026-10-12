@@ -2,4 +2,9 @@
 '@sanity/ui': patch
 ---
 
-fix(autocomplete): follow the `value` prop during render, and open the results list in a deferred render. A changed `value` shows in the render that receives it instead of an effect applying it one commit later, and a `value` equal to the one shown (a parent echoing `onChange`) no longer drops a query typed since. The keystroke, focus or click that opens the list paints before the option components render, so it no longer waits for them (filtering the options and calling `renderOption` still happen before that paint). The list still closes in the same render as the selection, clear, blur or Escape that closes it. Opening the list on focus no longer moves focus into it when the selected option is a link or a button, and `aria-activedescendant` is only set while the list shows.
+Fix `Autocomplete` value syncing, responsiveness, and focus:
+
+- Apply `value` changes immediately without clearing a typed query when the parent echoes the current value.
+- Defer option component rendering when opening the list; filtering and `renderOption` still run before paint. Closing remains immediate.
+- Keep input focus when opening the list on focus, even if the selected option is a link or button.
+- Set `aria-activedescendant` only while the list is visible.
