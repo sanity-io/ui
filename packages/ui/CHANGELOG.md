@@ -1,5 +1,39 @@
 # @sanity/ui
 
+## 4.4.2
+
+### Patch Changes
+
+- [#3138](https://github.com/sanity-io/ui/pull/3138) [`2340587`](https://github.com/sanity-io/ui/commit/23405874fcdc7f82c0abeaa5e29fe0dc30f4dfa0) Thanks [@stipsan](https://github.com/stipsan)! - Fix `Autocomplete` value syncing, responsiveness, and focus:
+  
+  - Apply `value` changes immediately without clearing a typed query when the parent echoes the current value.
+  - Defer option component rendering when opening the list; filtering and `renderOption` still run before paint. Closing remains immediate.
+  - Keep input focus when opening the list on focus, even if the selected option is a link or button.
+  - Set `aria-activedescendant` only while the list is visible.
+
+- [#3144](https://github.com/sanity-io/ui/pull/3144) [`4916f1e`](https://github.com/sanity-io/ui/commit/4916f1e33a38694d40bc47d05722bb6469a85586) Thanks [@stipsan](https://github.com/stipsan)! - Remove unnecessary `MenuButton` re-renders when registering elements or hiding and showing them with `<Activity>`, preventing delayed or skipped `<ViewTransition>` animations. Set the forwarded button ref on mount rather than one render later.
+
+- [#3137](https://github.com/sanity-io/ui/pull/3137) [`20c5d3e`](https://github.com/sanity-io/ui/commit/20c5d3e8faadd2c94b7fe7d8373f44aa1ab0a1e5) Thanks [@stipsan](https://github.com/stipsan)! - Fix `MenuButton` event handling:
+  
+  - Preserve the button's `onClick`, `onKeyDown`, and `onMouseDown` handlers. They run first; `event.preventDefault()` skips the menu's default action.
+  - Call `onOpen` and `onClose` during the triggering event, batching their state updates with the menu's. `onOpen` now runs before the menu renders, and callback errors are not caught by error boundaries.
+
+- [#3139](https://github.com/sanity-io/ui/pull/3139) [`4bb2462`](https://github.com/sanity-io/ui/commit/4bb246276bfdf32620544a28ef3cc14fa53dea81) Thanks [@stipsan](https://github.com/stipsan)! - Fix `MenuGroup` state and styling:
+  
+  - Clear pressed and child-menu state as soon as a sibling becomes active.
+  - Transition child-menu updates so slow rendering does not delay the item's highlight.
+  - Activate the group when a click or `ArrowRight` opens its child menu, even without a preceding hover.
+  - Only set `data-pressed` while pressed for `as="a"` and `as="div"`, fixing incorrect pressed styling on links.
+
+- [#3143](https://github.com/sanity-io/ui/pull/3143) [`650ff7e`](https://github.com/sanity-io/ui/commit/650ff7e9db836a6c641842667a77ff6c14ecc07d) Thanks [@stipsan](https://github.com/stipsan)! - Remove unnecessary `Tooltip` and `Popover` re-renders when their reference element mounts or `<Activity>` hides or shows it, preventing delayed or skipped `<ViewTransition>` animations. Set child refs on mount and preserve them when `Popover` uses a separate `referenceElement`.
+
+- [#3141](https://github.com/sanity-io/ui/pull/3141) [`153a456`](https://github.com/sanity-io/ui/commit/153a456e25942d02726fe4a67653e3a7ddad13c1) Thanks [@stipsan](https://github.com/stipsan)! - Fix `Popover` sizing:
+  
+  - Reduce extra renders when positioning or resizing.
+  - Apply `constrainSize` and `matchReferenceWidth` changes on the next positioning pass, clearing the applied max height or matched width when disabled.
+  - Clear stale max widths for zero-width boundaries and clamp negative sizes to zero.
+  - Give calculated sizes precedence over conflicting `style` values; other styles still apply.
+
 ## 4.4.1
 
 ### Patch Changes
