@@ -17,9 +17,9 @@ export interface MenuButtonProps {
    */
   boundaryElement?: never
   /**
-   * Its `onClick`, `onKeyDown` and `onMouseDown` run before `MenuButton`'s handlers, and calling
-   * `event.preventDefault()` in them stops `MenuButton` from acting on the event. Enter and Space
-   * open the menu on `keydown` and don't trigger `onClick`.
+   * Its `onClick`, `onKeyDown` and `onMouseDown` run before `MenuButton`'s handlers, which act on
+   * the event even when those called `event.preventDefault()`. Disable the button to keep its
+   * menu closed. Enter and Space open the menu on `keydown` and don't trigger `onClick`.
    */
   button: React.JSX.Element
   id: string
@@ -85,7 +85,6 @@ export function MenuButton(props: MenuButtonProps) {
   const handleButtonClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       onButtonClick?.(event)
-      if (event.defaultPrevented) return
       setOpen((v) => !v)
       setShouldFocus(null)
       setButtonElement(event.currentTarget)
@@ -107,7 +106,6 @@ export function MenuButton(props: MenuButtonProps) {
   const handleButtonKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLButtonElement>) => {
       onButtonKeyDown?.(event)
-      if (event.defaultPrevented) return
 
       // On `ArrowDown`, `Enter` and `Space`
       // - Opens menu and moves focus to first menuitem
