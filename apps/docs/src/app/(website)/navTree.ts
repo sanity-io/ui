@@ -9,10 +9,7 @@ import type {NavItemMeta, NavNode} from '#lib/nav/types.ts'
 // Pick `nav` off the module namespace instead of passing `{import: 'nav'}`:
 // since next@16.4.0 the `import` option yields `undefined` for every match
 // unless the same modules are also pulled in as namespaces somewhere.
-const navModules = import.meta.glob('./**/nav.ts', {eager: true}) as Record<
-  string,
-  {nav: NavItemMeta}
->
+const navModules = import.meta.glob<{nav: NavItemMeta}>('./**/nav.ts', {eager: true})
 const pageModules = import.meta.glob('./**/page.tsx')
 
 function parseKey(key: string, suffix: string): string[] {
