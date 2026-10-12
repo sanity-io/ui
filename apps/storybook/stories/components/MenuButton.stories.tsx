@@ -675,8 +675,8 @@ function ViewTransitionStory(props: MenuButtonProps) {
  * A menu button shown and hidden by an `<Activity>` inside a
  * [`<ViewTransition>`](https://react.dev/reference/react/ViewTransition), toggled in a
  * `startTransition`, so React animates it in and out. The menu button adds no work of its own to
- * that transition. (`apps/storybook/tests/menuButtonViewTransition.test.tsx` asserts on the
- * commits of the reveal and of opening the menu.)
+ * that transition. (`apps/storybook/tests/viewTransitionReveal.test.tsx` asserts on the commits of
+ * the reveal and of opening the menu.)
  */
 export const WithViewTransition: Story = {
   args: {id: 'view-transition-menu'},
