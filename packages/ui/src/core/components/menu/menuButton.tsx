@@ -69,9 +69,10 @@ export function MenuButton(props: MenuButtonProps) {
   } = props
   const [open, setOpen] = useOpenState(onOpen, onClose)
   const [shouldFocus, setShouldFocus] = useState<'first' | 'last' | null>(null)
-  // Set from the button's event handlers rather than whenever the button attaches: a state update
-  // from a ref callback re-renders synchronously on every mount and `<Activity>` reveal, which
-  // holds up a view transition of the button (see `useReferenceElement`)
+  // Set by the button's event handlers, the only way the menu opens, rather than whenever the
+  // button attaches: a state update from a ref callback re-renders synchronously on every mount
+  // and `<Activity>` reveal, which holds up a view transition of the button (see
+  // `useReferenceElement`)
   const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null)
   // Mutated in place: only event handlers read it, so registering a menu element needs no render
   const [menuElements] = useState(() => new Set<HTMLElement>())
