@@ -571,7 +571,7 @@ describe('Popover', () => {
     function Example(
       props: {boundaryClientWidth?: number; style?: CSSProperties} & Pick<
         PopoverProps,
-        'constrainSize' | 'matchReferenceWidth' | 'width'
+        '__unstable_margins' | 'constrainSize' | 'matchReferenceWidth' | 'width'
       >,
     ) {
       const {boundaryClientWidth = 300, ...popoverProps} = props
@@ -749,7 +749,7 @@ describe('Popover', () => {
       expect(card.style.maxHeight).toBe('72px')
     })
 
-    it('renders no cap for a boundary without a width', async () => {
+    it('renders a cap of zero for a boundary narrower than its padding, and none for one without a width', async () => {
       render(<Example />)
       await settle()
 
@@ -758,11 +758,39 @@ describe('Popover', () => {
 
       expect(card.style.maxWidth).toBe('292px')
 
+      // CSS ignores a negative length, which would keep the previous cap
+      resizeBoundary(6)
+
+      expect(card.style.maxWidth).toBe('0px')
+
       // What a `display: none` boundary reports; React warns about an `Infinity` style
       resizeBoundary(0)
 
       expect(card.style.maxWidth).toBe('')
       expect(error).not.toHaveBeenCalled()
+    })
+
+    it('has the `size` middleware write sizes of zero, never negative ones', async () => {
+      const {rerender} = render(<Example constrainSize matchReferenceWidth />)
+      await settle()
+
+      const card = queryPopoverCard()!
+
+      // Margins wider than the reference and taller than the room below it, and a boundary narrower
+      // than its padding: CSS ignores a negative length, which would keep the first render's sizes
+      rerender(
+        <Example
+          __unstable_margins={[60, 60, 60, 60]}
+          boundaryClientWidth={6}
+          constrainSize
+          matchReferenceWidth
+        />,
+      )
+      await settle()
+
+      expect(card.style.width).toBe('0px')
+      expect(card.style.maxWidth).toBe('0px')
+      expect(card.style.maxHeight).toBe('0px')
     })
   })
 })

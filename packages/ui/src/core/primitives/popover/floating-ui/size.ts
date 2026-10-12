@@ -56,10 +56,11 @@ export function size(options: {
       }
 
       // IMPORTANT – APPLY ELEMENT STYLES HERE
-      // Elements need to be resized BEFORE the `platform.getDimensions` call below
-      const availableWidth = maxWidth - margins[1] - margins[3]
-      const availableHeight = maxHeight - margins[0] - margins[2]
-      const referenceWidth = reference.width - margins[1] - margins[3]
+      // Elements need to be resized BEFORE the `platform.getDimensions` call below, and never to a
+      // negative size: CSS ignores a negative length, keeping the previous one
+      const availableWidth = Math.max(0, maxWidth - margins[1] - margins[3])
+      const availableHeight = Math.max(0, maxHeight - margins[0] - margins[2])
+      const referenceWidth = Math.max(0, reference.width - margins[1] - margins[3])
 
       if (matchReferenceWidth) {
         elements.floating.style.width = `${referenceWidth}px`

@@ -25,6 +25,7 @@ export function calcMaxWidth(params: {
     (boundaryWidth || Infinity) - DEFAULT_POPOVER_PADDING * 2,
   )
 
-  // Also uncapped for a boundary of width `0` (collapsed, or `display: none`)
-  return Number.isFinite(maxWidth) ? maxWidth : undefined
+  // Also uncapped for a boundary of width `0` (collapsed, or `display: none`), and never negative
+  // for one narrower than the padding: CSS ignores a negative length, keeping the previous cap
+  return Number.isFinite(maxWidth) ? Math.max(0, maxWidth) : undefined
 }
