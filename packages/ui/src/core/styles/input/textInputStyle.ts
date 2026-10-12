@@ -30,48 +30,48 @@ export interface TextInputRepresentationStyleProps {
   $unstableDisableFocusRing?: boolean
 }
 
-export function textInputBaseStyle(
-  props: TextInputInputStyleProps & ThemeProps,
+export const textInputBaseStyle = css`
+  appearance: none;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  display: block;
+
+  /* NOTE: This is a hack to disable Chrome’s autofill styles */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--input-fg-color) !important;
+    transition: background-color 5000s;
+    transition-delay: 86400s /* 24h */;
+  }
+
+  /* &:is(textarea) */
+  &[data-as='textarea'] {
+    resize: none;
+  }
+
+  color: var(--input-fg-color);
+
+  &::placeholder {
+    color: var(--input-placeholder-color);
+  }
+`
+
+export function textInputColorStyle(
+  props: Pick<TextInputInputStyleProps, '$scheme' | '$tone'> & ThemeProps,
 ): ReturnType<typeof css> {
-  const {$scheme, $tone, $weight} = props
-  const {color, font} = getTheme_v2(props.theme)
+  const {$scheme, $tone} = props
+  const {color} = getTheme_v2(props.theme)
 
   return css`
-    appearance: none;
-    background: none;
-    border: 0;
-    border-radius: 0;
-    outline: none;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: ${font.text.family};
-    font-weight: ${($weight && font.text.weights[$weight]) || font.text.weights.regular};
-    margin: 0;
-    position: relative;
-    z-index: 1;
-    display: block;
-
-    /* NOTE: This is a hack to disable Chrome’s autofill styles */
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      -webkit-text-fill-color: var(--input-fg-color) !important;
-      transition: background-color 5000s;
-      transition-delay: 86400s /* 24h */;
-    }
-
-    /* &:is(textarea) */
-    &[data-as='textarea'] {
-      resize: none;
-    }
-
-    color: var(--input-fg-color);
-
-    &::placeholder {
-      color: var(--input-placeholder-color);
-    }
-
     &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
       --input-fg-color: ${color.input.default.enabled.fg};
       --input-placeholder-color: ${color.input.default.enabled.placeholder};
@@ -103,6 +103,18 @@ export function textInputBaseStyle(
   `
 }
 
+export function textInputFontStyle(
+  props: Pick<TextInputInputStyleProps, '$weight'> & ThemeProps,
+): CSSObject {
+  const {$weight} = props
+  const {font} = getTheme_v2(props.theme)
+
+  return {
+    fontFamily: font.text.family,
+    fontWeight: `${($weight && font.text.weights[$weight]) || font.text.weights.regular}`,
+  }
+}
+
 export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject[] {
   const {font, media} = getTheme_v2(props.theme)
 
@@ -117,10 +129,9 @@ export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemePr
 }
 
 export function textInputRepresentationStyle(
-  props: TextInputRepresentationStyleProps & ThemeProps,
+  props: Pick<TextInputRepresentationStyleProps, '$hasPrefix' | '$hasSuffix'>,
 ): ReturnType<typeof css> {
-  const {$hasPrefix, $hasSuffix, $scheme, $tone, $unstableDisableFocusRing} = props
-  const {color, input} = getTheme_v2(props.theme)
+  const {$hasPrefix, $hasSuffix} = props
 
   return css`
     --input-box-shadow: none;
@@ -141,7 +152,16 @@ export function textInputRepresentationStyle(
     border-bottom-left-radius: ${$hasPrefix ? 0 : undefined};
     border-top-right-radius: ${$hasSuffix ? 0 : undefined};
     border-bottom-right-radius: ${$hasSuffix ? 0 : undefined};
+  `
+}
 
+export function textInputRepresentationColorStyle(
+  props: Omit<TextInputRepresentationStyleProps, '$hasPrefix' | '$hasSuffix'> & ThemeProps,
+): ReturnType<typeof css> {
+  const {$scheme, $tone, $unstableDisableFocusRing} = props
+  const {color, input} = getTheme_v2(props.theme)
+
+  return css`
     &[data-scheme='${$scheme}'][data-tone='${$tone}'] {
       --card-bg-color: ${color.input.default.enabled.bg};
       --card-fg-color: ${color.input.default.enabled.fg};

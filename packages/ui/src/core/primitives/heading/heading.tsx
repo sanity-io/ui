@@ -1,9 +1,14 @@
 import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
-import {responsiveHeadingFont} from '../../styles/font/headingFontStyle'
+import {fontColorStyle} from '../../styles/font/fontColorStyle'
+import {_fontWeight, _responsiveFontSize} from '../../styles/font/responsiveFont'
 import {responsiveTextAlignStyle} from '../../styles/font/textAlignStyle'
-import {ResponsiveFontStyleProps, ResponsiveTextAlignStyleProps} from '../../styles/font/types'
+import {
+  ResponsiveFontSizeStyleProps,
+  ResponsiveFontStyleProps,
+  ResponsiveTextAlignStyleProps,
+} from '../../styles/font/types'
 import {_getArrayProp} from '../../styles/helpers'
 import {ElementType, Props} from '../../types/component'
 import {TextAlign} from '../../types/text'
@@ -33,9 +38,15 @@ export interface HeadingOwnProps {
  */
 export type HeadingProps<E extends ElementType = 'div'> = Props<HeadingOwnProps, E>
 
-const StyledHeading = styled.div<
+const HeadingBase = styled.div(headingBaseStyle)
+
+const HeadingSize = styled(HeadingBase)<ResponsiveFontSizeStyleProps>((props) =>
+  _responsiveFontSize('heading', props),
+)
+
+const StyledHeading = styled(HeadingSize)<
   HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
->(headingBaseStyle, responsiveTextAlignStyle, responsiveHeadingFont)
+>(fontColorStyle, responsiveTextAlignStyle, (props) => _fontWeight('heading', props))
 
 function HeadingComponent(
   props: HeadingOwnProps & {as?: ElementType} & Omit<

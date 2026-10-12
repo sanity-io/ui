@@ -8,7 +8,7 @@ import {ElementType, Props} from '../../types/component'
 import {Box, BoxOwnProps} from '../box/box'
 import {Text} from '../text/text'
 import {ResponsiveRadiusProps} from '../types'
-import {badgeStyle} from './styles'
+import {badgeBaseStyle, badgeToneStyle} from './styles'
 import {BadgeStyleProps} from './types'
 
 /**
@@ -26,9 +26,13 @@ export interface BadgeOwnProps extends BoxOwnProps, ResponsiveRadiusProps {
  */
 export type BadgeProps<E extends ElementType = 'div'> = Props<BadgeOwnProps, E>
 
-const StyledBadge = styled(Box)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
+const BadgeBase = styled(Box)`
+  ${badgeBaseStyle}
+`
+
+const StyledBadge = styled(BadgeBase)<BadgeStyleProps & ResponsiveRadiusStyleProps>(
   responsiveRadiusStyle,
-  badgeStyle,
+  badgeToneStyle,
 )
 
 const BadgeComponent = function Badge(

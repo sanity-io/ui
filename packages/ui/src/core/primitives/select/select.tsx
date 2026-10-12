@@ -26,7 +26,13 @@ export interface SelectProps {
   customValidity?: string
 }
 
-const Input = styled.select<{
+const InputBase = styled.select`
+  ${selectStyle.inputBase}
+`
+
+const InputColor = styled(InputBase)(selectStyle.inputColor)
+
+const Input = styled(InputColor)<{
   $fontSize: number[]
   $padding: number[]
   $radius: Radius[]

@@ -1,30 +1,16 @@
 import {css} from 'styled-components'
 
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
+import {_fontBase} from '../../styles/font/responsiveFont'
 import {ThemeProps} from '../../styles/types'
 
-export function labelBaseStyle(
-  props: {$accent?: boolean; $muted: boolean} & ThemeProps,
-): ReturnType<typeof css> {
-  const {$accent, $muted} = props
+export function labelBaseStyle(props: ThemeProps): ReturnType<typeof css> {
   const {font} = getTheme_v2(props.theme)
 
   return css`
+    ${_fontBase('label', props)}
+
     text-transform: uppercase;
-
-    ${
-      $accent &&
-      css`
-        color: var(--card-accent-fg-color);
-      `
-    }
-
-    ${
-      $muted &&
-      css`
-        color: var(--card-muted-fg-color);
-      `
-    }
 
     & code {
       font-family: ${font.code.family};

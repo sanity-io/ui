@@ -2,10 +2,14 @@
 
 import {AddIcon} from '@sanity/icons/Add'
 import {screen} from '@testing-library/react'
+import {renderToString} from 'react-dom/server'
+import {ServerStyleSheet} from 'styled-components'
 import {beforeEach, describe, expect, it, vi} from 'vitest'
 import {axe} from 'vitest-axe'
 
 import {render} from '../../../../test/utils'
+import {buildTheme} from '../../../theme/build/buildTheme'
+import {ThemeProvider} from '../../theme/themeProvider'
 import {Flex} from '../flex/flex'
 import {Button, ButtonOwnProps} from './button'
 
@@ -65,5 +69,25 @@ describe('atoms/button', () => {
 
     const propsList = mockedFlex.mock.calls.map(([props]) => props)
     expect(propsList).toContainEqual(expect.objectContaining({gap: [18]}))
+  })
+
+  it('applies `style.button.root` of the theme to the button, not to `root` elements', () => {
+    const sheet = new ServerStyleSheet()
+
+    try {
+      renderToString(
+        sheet.collectStyles(
+          <ThemeProvider theme={buildTheme()}>
+            <Button text="Button text" />
+          </ThemeProvider>,
+        ),
+      )
+      const css = sheet.getStyleTags()
+
+      expect(css).toMatch(/\{[^}]*transition:background-color 100ms/)
+      expect(css).not.toMatch(/ root\{/)
+    } finally {
+      sheet.seal()
+    }
   })
 })

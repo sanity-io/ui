@@ -9,29 +9,26 @@ import {responsiveInputPaddingIconRightStyle} from '../../styles/input/responsiv
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ThemeProps} from '../../styles/types'
 
-function inputBaseStyle(props: ThemeProps): ReturnType<typeof css> {
-  const {font} = getTheme_v2(props.theme)
+const INPUT_BASE_STYLE = css`
+  -webkit-font-smoothing: antialiased;
+  appearance: none;
+  border: 0;
+  color: inherit;
+  width: 100%;
+  outline: none;
+  margin: 0;
 
-  return css`
-    -webkit-font-smoothing: antialiased;
-    appearance: none;
-    border: 0;
-    font-family: ${font.text.family};
-    color: inherit;
-    width: 100%;
-    outline: none;
-    margin: 0;
-
-    &:disabled {
-      opacity: 1;
-    }
-  `
-}
+  &:disabled {
+    opacity: 1;
+  }
+`
 
 function inputColorStyle(props: ThemeProps) {
-  const {color, input} = getTheme_v2(props.theme)
+  const {color, font, input} = getTheme_v2(props.theme)
 
   return css`
+    font-family: ${font.text.family};
+
     /* enabled */
     background-color: ${color.input.default.enabled.bg};
     color: ${color.input.default.enabled.fg};
@@ -97,8 +94,6 @@ function inputTextSizeStyle(props: {$fontSize: number[]} & ThemeProps) {
 
 const INPUT_RULES = _ruleSet(
   responsiveRadiusStyle,
-  inputBaseStyle,
-  inputColorStyle,
   inputTextSizeStyle,
   responsiveInputPaddingIconRightStyle,
 )
@@ -139,6 +134,8 @@ function iconBoxStyle(props: ThemeProps): ReturnType<typeof css> {
 }
 
 export const selectStyle = {
+  inputBase: INPUT_BASE_STYLE,
+  inputColor: inputColorStyle,
   input: inputStyle,
   iconBox: iconBoxStyle,
 }

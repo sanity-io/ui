@@ -5,6 +5,31 @@ import {_responsive, _ruleSet, rem} from '../helpers'
 import {ThemeProps} from '../types'
 import {FontWeightStyleProps, ResponsiveFontSizeStyleProps} from './types'
 
+const FONT_BOX_STYLE: CSSObject = {
+  'padding': '1px 0',
+  'margin': 0,
+
+  '&:before': {
+    content: '""',
+    display: 'block',
+    height: 0,
+  },
+
+  '&:after': {
+    content: '""',
+    display: 'block',
+    height: 0,
+  },
+
+  '& > code, & > span': {
+    display: 'block',
+  },
+
+  '&:not([hidden])': {
+    display: 'block',
+  },
+}
+
 /**
  * A utility function getting responsive font styles.
  * @internal
@@ -13,41 +38,8 @@ export function responsiveFont(
   fontKey: ThemeFontKey,
   props: FontWeightStyleProps & ResponsiveFontSizeStyleProps & ThemeProps,
 ): CSSObject[] {
-  const {$size, $weight} = props
-  const {font, media} = getTheme_v2(props.theme)
-  const {family, sizes, weights} = font[fontKey]
-  const fontWeight = ($weight && weights[$weight]) || weights.regular
-
-  // @todo: make this configurable
-  const defaultSize = sizes[2]
-
-  const base: CSSObject = {
-    'position': 'relative',
-    'fontFamily': family,
-    'fontWeight': `${fontWeight}`,
-    'padding': '1px 0',
-    'margin': 0,
-
-    '&:before': {
-      content: '""',
-      display: 'block',
-      height: 0,
-    },
-
-    '&:after': {
-      content: '""',
-      display: 'block',
-      height: 0,
-    },
-
-    '& > code, & > span': {
-      display: 'block',
-    },
-
-    '&:not([hidden])': {
-      display: 'block',
-    },
-  }
+  const {$size} = props
+  const base = {..._fontBase(fontKey, props), ..._fontWeight(fontKey, props)}
 
   // @TODO fix the real condition that is causing $size to be undefined sometimes
   if (!$size) {
@@ -61,9 +53,45 @@ export function responsiveFont(
     return _ruleSet(base)
   }
 
-  const resp = _responsive(media, $size, (sizeIndex) => fontSize(sizes[sizeIndex] || defaultSize))
+  return _ruleSet(base, _responsiveFontSize(fontKey, props))
+}
 
-  return _ruleSet(base, resp)
+/**
+ * @internal
+ */
+export function _fontBase(fontKey: ThemeFontKey, props: ThemeProps): CSSObject {
+  const {font} = getTheme_v2(props.theme)
+
+  return {
+    position: 'relative',
+    fontFamily: font[fontKey].family,
+    ...FONT_BOX_STYLE,
+  }
+}
+
+/**
+ * @internal
+ */
+export function _fontWeight(
+  fontKey: ThemeFontKey,
+  props: FontWeightStyleProps & ThemeProps,
+): CSSObject {
+  const {weights} = getTheme_v2(props.theme).font[fontKey]
+
+  return {fontWeight: `${(props.$weight && weights[props.$weight]) || weights.regular}`}
+}
+
+/**
+ * @internal
+ */
+export function _responsiveFontSize(
+  fontKey: ThemeFontKey,
+  props: ResponsiveFontSizeStyleProps & ThemeProps,
+): CSSObject[] {
+  const {font, media} = getTheme_v2(props.theme)
+  const {sizes} = font[fontKey]
+
+  return _responsive(media, props.$size, (sizeIndex) => fontSize(sizes[sizeIndex] || sizes[2]))
 }
 
 function fontSize(size: ThemeFontSize): CSSObject {

@@ -10,8 +10,11 @@ import {
 } from '../../styles/input/responsiveInputPaddingStyle'
 import {
   textInputBaseStyle,
+  textInputColorStyle,
   textInputFontSizeStyle,
+  textInputFontStyle,
   TextInputInputStyleProps,
+  textInputRepresentationColorStyle,
   textInputRepresentationStyle,
   TextInputRepresentationStyleProps,
 } from '../../styles/input/textInputStyle'
@@ -37,16 +40,25 @@ export interface TextAreaProps extends ResponsiveRadiusProps {
   weight?: ThemeFontWeightKey
 }
 
-const Input = styled.textarea<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
+const InputBase = styled.textarea`
+  ${textInputBaseStyle}
+`
+
+const InputColor = styled(InputBase)<TextInputInputStyleProps>(textInputColorStyle)
+
+const Input = styled(InputColor)<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
   responsiveInputPaddingStyle,
-  textInputBaseStyle,
+  textInputFontStyle,
   textInputFontSizeStyle,
 )
 
-const Presentation = styled.div<ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps>(
-  responsiveRadiusStyle,
-  textInputRepresentationStyle,
+const PresentationColor = styled.div<TextInputRepresentationStyleProps>(
+  textInputRepresentationColorStyle,
 )
+
+const Presentation = styled(PresentationColor)<
+  ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps
+>(responsiveRadiusStyle, textInputRepresentationStyle)
 
 /**
  * A multiline text input.

@@ -5,7 +5,7 @@ import {useEffect, useImperativeHandle, useRef} from 'react'
 import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import {inputElementStyles} from './styles'
+import {inputElementColorStyles, inputElementStyles} from './styles'
 
 import {checkbox} from './checkbox.css'
 
@@ -17,7 +17,9 @@ export interface CheckboxProps {
   customValidity?: string
 }
 
-const Input = styled.input(inputElementStyles)
+const InputBase = styled.input(inputElementStyles)
+
+const Input = styled(InputBase)(inputElementColorStyles)
 
 /**
  * Checkboxes allow the user to select one or more items from a set.

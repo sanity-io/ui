@@ -22,25 +22,27 @@ export interface KBDOwnProps {
  */
 export type KBDProps<E extends ElementType = 'kbd'> = Props<KBDOwnProps, E>
 
-function kbdStyle() {
-  return css`
-    --card-bg-color: var(--card-kbd-bg-color);
-    --card-border-color: var(--card-kbd-border-color);
-    --card-fg-color: var(--card-kbd-fg-color);
+const kbdBaseStyle = css`
+  --card-bg-color: var(--card-kbd-bg-color);
+  --card-border-color: var(--card-kbd-border-color);
+  --card-fg-color: var(--card-kbd-fg-color);
 
-    box-shadow: inset 0 0 0 1px var(--card-border-color);
-    background: var(--card-bg-color);
-    font: inherit;
+  box-shadow: inset 0 0 0 1px var(--card-border-color);
+  background: var(--card-bg-color);
+  font: inherit;
 
-    vertical-align: top;
+  vertical-align: top;
 
-    &:not([hidden]) {
-      display: inline-block;
-    }
-  `
-}
+  &:not([hidden]) {
+    display: inline-block;
+  }
+`
 
-const StyledKBD = styled.kbd<ResponsiveRadiusStyleProps>(responsiveRadiusStyle, kbdStyle)
+const KBDBase = styled.kbd`
+  ${kbdBaseStyle}
+`
+
+const StyledKBD = styled(KBDBase)<ResponsiveRadiusStyleProps>(responsiveRadiusStyle)
 
 function KBDComponent(
   props: KBDOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,

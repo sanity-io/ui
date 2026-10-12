@@ -1,9 +1,10 @@
 import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
+import {fontColorStyle} from '../../styles/font/fontColorStyle'
+import {_fontWeight, _responsiveFontSize} from '../../styles/font/responsiveFont'
 import {responsiveTextAlignStyle} from '../../styles/font/textAlignStyle'
-import {responsiveTextFont} from '../../styles/font/textFontStyle'
-import {ResponsiveFontStyleProps} from '../../styles/font/types'
+import {ResponsiveFontSizeStyleProps, ResponsiveFontStyleProps} from '../../styles/font/types'
 import {_getArrayProp} from '../../styles/helpers'
 import {ElementType, Props} from '../../types/component'
 import {TextAlign} from '../../types/text'
@@ -33,10 +34,16 @@ export interface TextOwnProps {
  */
 export type TextProps<E extends ElementType = 'div'> = Props<TextOwnProps, E>
 
-const StyledText = styled.div<ResponsiveFontStyleProps>(
-  responsiveTextFont,
+const TextBase = styled.div(textBaseStyle)
+
+const TextSize = styled(TextBase)<ResponsiveFontSizeStyleProps>((props) =>
+  _responsiveFontSize('text', props),
+)
+
+const StyledText = styled(TextSize)<ResponsiveFontStyleProps>(
+  (props) => _fontWeight('text', props),
   responsiveTextAlignStyle,
-  textBaseStyle,
+  fontColorStyle,
 )
 
 function TextComponent(
