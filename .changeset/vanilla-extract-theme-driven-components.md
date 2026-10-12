@@ -1,10 +1,14 @@
 ---
-'@sanity/ui': minor
+'@sanity/ui': patch
 ---
 
-Move more static CSS to `@sanity/ui/styles.css`:
+`Avatar`, `AvatarCounter`, `Button` and `Switch` now load more of their styles from `@sanity/ui/styles.css` instead of generating them with JavaScript at runtime. This reduces runtime styling work while keeping the combined JavaScript and CSS download size nearly unchanged.
 
-- Migrate the static styled-components levels of `Avatar`, `AvatarCounter`, `Button` and `Switch` to [vanilla-extract](https://vanilla-extract.style/), along with `Button`'s `width="fill"`, which takes a fixed set of values.
-- No API or DOM changes.
+The components keep the same appearance, props and HTML structure. Theme-dependent and responsive styles continue to work as before, including `Button`'s `width="fill"` option.
 
-As with the components migrated in 4.1.0 and 4.2.0, equal-specificity consumer overrides of the migrated rules (for example `styled(Button)` with `white-space`) win only if `@sanity/ui/styles.css` loads before styled-components' runtime style tags. That is the usual case when the stylesheet is in the entry chunk.
+**When upgrading:**
+
+- Keep importing `@sanity/ui/styles.css` in your app's entry point.
+- If you customize these components with styled-components, make sure that stylesheet loads before styled-components' generated style tags. When your custom CSS targets an element with the same selector specificity as the library's CSS, the rule loaded last wins. For example, a `white-space` override in `styled(Button)` now depends on this order.
+
+This is the same stylesheet load-order requirement introduced for other components in 4.1.0 and 4.2.0. If your app already follows it, no changes are needed.
