@@ -19,7 +19,7 @@
     "typecheck": "tsc --build"
   },
   "dependencies": {
-    "@babel/standalone": "^7.29.9",
+    "@babel/standalone": "^7.29.10",
     "@codemirror/lang-javascript": "^6.2.5",
     "@lezer/highlight": "^1.2.5",
     "@sanity/icons": "catalog:",

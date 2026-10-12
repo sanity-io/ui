@@ -277,8 +277,8 @@ importers:
   apps/docs:
     dependencies:
       '@babel/standalone':
-        specifier: ^7.29.9
-        version: 7.29.9
+        specifier: ^7.29.10
+        version: 7.29.10
       '@codemirror/lang-javascript':
         specifier: ^6.2.5
         version: 6.2.5
@@ -1270,8 +1270,8 @@ packages:
     resolution: {integrity: sha512-Nq8OhGWiZIZGV6hLHoyAKLLcJihP/xFeBMGJoUrxTX2psI8dCifzLhZISFb+VWS3wFMRDmCGw5R+dOySCqPLhw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/standalone@7.29.9':
-    resolution: {integrity: sha512-Oztlw9huD3bdgX6HmYqCSBamOtH05qbbF5TGfD2cbetKsqMo/2U9WB24U02qGDqMzmY0wY2bnLhbFAjXW3dWYg==}
+  '@babel/standalone@7.29.10':
+    resolution: {integrity: sha512-Hw4VoSA8lWuYPfYlzfKP3W44F166NEQJbgJRkzZSn1lAqNPq0nVlOEfBKTLckQDs6X3cUcAq2Nh6vopUMvkk3g==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.29.7':
@@ -9197,7 +9197,7 @@ snapshots:
 
   '@babel/runtime@7.29.7': {}
 
-  '@babel/standalone@7.29.9': {}
+  '@babel/standalone@7.29.10': {}
 
   '@babel/template@7.29.7':
     dependencies:
