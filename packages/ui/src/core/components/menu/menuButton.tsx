@@ -86,7 +86,7 @@ export function MenuButton(props: MenuButtonProps) {
     [onButtonClick, open, setOpen],
   )
 
-  // Keep the button from taking focus when it is pressed while the menu is open.
+  // Prevent mouse event propagation when the menu is open.
   // This is to ensure that `handleBlur` isn't triggered when clicking the menu button whilst open,
   // which can lead to `setOpen` being triggered multiple times (once by `handleBlur`, and again by `handleButtonClick`).
   const handleMouseDown = useCallback(
