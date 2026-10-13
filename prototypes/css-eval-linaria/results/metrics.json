@@ -1,0 +1,155 @@
+{
+  "node": "v22.14.0",
+  "versions": {
+    "@linaria/core": "8.2.0",
+    "@linaria/react": "8.2.0",
+    "@linaria/atomic": "8.2.0",
+    "@wyw-in-js/transform": "2.5.1",
+    "@wyw-in-js/rollup": "2.5.1",
+    "tsdown": "0.23.1",
+    "typescript": "7.0.2"
+  },
+  "build": {
+    "default (js+css+dts)": {
+      "runs": 5,
+      "wallMedianMs": 918.2,
+      "wallMinMs": 885.4
+    },
+    "default (js+css, no dts)": {
+      "runs": 5,
+      "wallMedianMs": 814.5,
+      "wallMinMs": 798.3
+    },
+    "atomic (js+css, no dts)": {
+      "runs": 5,
+      "wallMedianMs": 833.8,
+      "wallMinMs": 822.3
+    }
+  },
+  "transform": {
+    "cold (new process state, first file, spawns eval broker)": {
+      "ms": 391.7,
+      "cssBytes": 2773
+    },
+    "warm (same cache, unchanged file)": {
+      "ms": 10.4,
+      "cssBytes": 2773
+    },
+    "incremental (same cache, one declaration edited)": {
+      "ms": 28.1,
+      "cssBytes": 2773
+    },
+    "incremental (second edit)": {
+      "ms": 15.9,
+      "cssBytes": 2773
+    },
+    "cold cache, warm process (new TransformCacheCollection, broker alive)": {
+      "ms": 267.9,
+      "cssBytes": 2773
+    }
+  },
+  "output": {
+    "button-lib/default": {
+      "css": {
+        "raw": 5290,
+        "gzip": 1050,
+        "brotli": 855
+      },
+      "js": {
+        "raw": 5298,
+        "gzip": 1814,
+        "brotli": 1530
+      }
+    },
+    "button-lib/namespaced": {
+      "css": {
+        "raw": 5584,
+        "gzip": 1069,
+        "brotli": 879
+      },
+      "js": {
+        "raw": 5529,
+        "gzip": 1829,
+        "brotli": 1540
+      }
+    },
+    "button-lib/atomic": {
+      "css": {
+        "raw": 6800,
+        "gzip": 1902,
+        "brotli": 1665
+      },
+      "js": {
+        "raw": 7666,
+        "gzip": 2715,
+        "brotli": 2335
+      }
+    },
+    "button-lib-v2/default": {
+      "css": {
+        "raw": 5895,
+        "gzip": 1111,
+        "brotli": 911
+      },
+      "js": {
+        "raw": 5731,
+        "gzip": 1878,
+        "brotli": 1568
+      }
+    },
+    "button-lib-v2/namespaced": {
+      "css": {
+        "raw": 6210,
+        "gzip": 1130,
+        "brotli": 934
+      },
+      "js": {
+        "raw": 5983,
+        "gzip": 1896,
+        "brotli": 1603
+      }
+    },
+    "button-lib-v2/atomic": {
+      "css": {
+        "raw": 7534,
+        "gzip": 2030,
+        "brotli": 1766
+      },
+      "js": {
+        "raw": 8382,
+        "gzip": 2854,
+        "brotli": 2459
+      }
+    }
+  },
+  "runtime": [
+    {
+      "label": "@linaria/core (css + cx)",
+      "raw": 469,
+      "gzip": 336,
+      "brotli": 278
+    },
+    {
+      "label": "@linaria/react (styled) + @linaria/core (cx)",
+      "raw": 5718,
+      "gzip": 2889,
+      "brotli": 2516
+    },
+    {
+      "label": "@linaria/react styled only (deps bundled)",
+      "raw": 5710,
+      "gzip": 2884,
+      "brotli": 2512
+    }
+  ],
+  "typeSafety": {
+    "caught.tsx (5 misuses, all must error → tsc exit 0)": {
+      "exitCode": 0,
+      "output": ""
+    },
+    "not-caught.tsx (4 CSS-level typos compile → 4× TS2578)": {
+      "exitCode": 1,
+      "output": "typecheck/not-caught.tsx(10,1): error TS2578: Unused '@ts-expect-error' directive.\ntypecheck/not-caught.tsx(15,1): error TS2578: Unused '@ts-expect-error' directive.\ntypecheck/not-caught.tsx(22,1): error TS2578: Unused '@ts-expect-error' directive.\ntypecheck/not-caught.tsx(28,1): error TS2578: Unused '@ts-expect-error' directive."
+    }
+  }
+}

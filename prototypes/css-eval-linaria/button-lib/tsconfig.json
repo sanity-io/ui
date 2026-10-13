@@ -10,5 +10,5 @@
     "isolatedModules": true,
     "types": []
   },
-  "include": ["src", "typecheck"]
+  "include": ["src", "typecheck/caught.tsx"]
 }

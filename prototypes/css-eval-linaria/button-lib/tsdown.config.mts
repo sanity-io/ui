@@ -36,7 +36,7 @@ const config: UserConfig = defineConfig({
   outDir,
   format: 'esm',
   platform: 'browser',
-  dts: true,
+  dts: process.env.NO_DTS !== '1',
   clean: true,
   sourcemap: false,
   external: [/^react($|\/)/, /^@linaria\//],

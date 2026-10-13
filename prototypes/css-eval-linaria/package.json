@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "postcss": "^8.5.30"
+    "postcss": "^8.5.30",
+    "rolldown": "^1.2.13"
   }
 }
