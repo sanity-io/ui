@@ -14,15 +14,21 @@
     "sizes": "node --experimental-strip-types bench/sizes.ts"
   },
   "devDependencies": {
+    "@swc/core": "catalog:",
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "catalog:",
+    "@yak-eval/ui-v1": "workspace:*",
+    "lightningcss": "^1.33.0",
     "next-yak": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "rolldown": "1.2.13",
+    "styled-components": "^6.5.3",
     "typescript": "^7.0.2",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "yak-swc": "9.10.2"
   },
   "packageManager": "pnpm@12.11.2"
 }
