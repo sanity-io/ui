@@ -5,6 +5,8 @@ packages:
 linkWorkspacePackages: deep
 strictPeerDependencies: false
 autoDedupe: true
+lockfile:
+  includeResolutionSettings: true
 
 # `pnpm add` writes `catalog:` when the requested version is covered by an
 # existing catalog entry, or when the dependency is not cataloged yet (the
@@ -39,7 +41,7 @@ catalog:
   refractor: ^5.0.0
   rimraf: ^5.0.5
   sanity: ^6.18.0
-  styled-components: ^6.5.3
+  styled-components: ^6.6.0
   tsdown: ^0.23.1
   typescript: 7.0.2
   unrun: ^0.3.1
@@ -149,6 +151,7 @@ minimumReleaseAgeExclude:
   - storybook@10.6.1
   - eslint-plugin-storybook@10.6.1
   - '@vitejs/plugin-react@6.1.2'
+  - styled-components@6.6.0
 
 minimumReleaseAgeExcludePrune: true
 
