@@ -24,7 +24,10 @@ migration) is `css-eval-stylex.md` next to this file.
 | `scripts/stylex-options.mjs` | Version-scoped `defineVars` identifiers (the one path-based hash in StyleX) shared by library builds and the consumer app. |
 | `scripts/hazard-define-vars.mjs` | Shows the stock vs version-scoped vs explicit-name behaviour of `defineVars` across two package versions. |
 | `scripts/specificity-groups.mjs` | Shows the per-sheet priority-group specificity bumps and when they matter. |
-| `scripts/bench.mjs`, `scripts/measure.mjs` | Compile times (cold/warm, Babel vs Rust compiler) and output sizes (raw/gzip/brotli). |
+| `scripts/bench.mjs`, `scripts/measure.mjs` | Compile times (cold/warm) and output sizes (raw/gzip/brotli). |
+| `scripts/stylex-tsdown.mjs` | Compiler selection for the library builds: `STYLEX_COMPILER=babel` (default, `@stylexjs/unplugin`) or `STYLEX_COMPILER=rs` (the Rust port `@stylexswc/rs-compiler` via `@stylexswc/unplugin`, see facebook/stylex#1623). `app/vite.config.ts` honours the same variable for Vite 8. |
+| `scripts/gen-synthetic.mjs`, `scripts/bench-compilers.mjs` | Synthetic 300/1,000-file libraries and the Babel-vs-Rust benchmark: per-file cold/warm, whole-set transforms, full tsdown builds, `tsdown --watch` rebuilds, Vite 8 builds. |
+| `scripts/parity.mjs` | Babel-vs-Rust output parity: rule metadata, class/variable names and assembled CSS per file, plus an end-to-end `dist/` comparison. |
 | `evidence/` | Committed outputs: screenshot, Playwright JSON, class-name comparison, CSS files, bench and size JSON, hazard transcripts, Next build log. |
 
 ## Run

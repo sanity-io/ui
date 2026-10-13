@@ -115,10 +115,19 @@ export function App() {
           <h2 {...stylex.props(app.h2)}>v2 — darkTheme (createTheme)</h2>
           <Matrix version="v2" Button={ButtonV2} prefix="dark-" />
         </section>
-        <section {...stylex.props(app.card, brandTheme)}>
-          <h2 {...stylex.props(app.h2)}>v1 — consumer brandTheme (compiled in the app)</h2>
-          <Matrix version="v1" Button={ButtonV1} prefix="brand-" />
-        </section>
+        {__STYLEX_COMPILER__ === 'babel' ? (
+          <section {...stylex.props(app.card, brandTheme)}>
+            <h2 {...stylex.props(app.h2)}>v1 — consumer brandTheme (compiled in the app)</h2>
+            <Matrix version="v1" Button={ButtonV1} prefix="brand-" />
+          </section>
+        ) : (
+          <section {...stylex.props(app.card)}>
+            <h2 {...stylex.props(app.h2)}>
+              v1 — consumer brandTheme skipped: compiled with the Rust port, which has no `custom`
+              module resolution, so the app cannot address the published token variables
+            </h2>
+          </section>
+        )}
       </div>
     </main>
   )

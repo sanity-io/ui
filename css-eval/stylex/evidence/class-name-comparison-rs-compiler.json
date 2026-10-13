@@ -1,0 +1,13 @@
+{
+  "description": "Class names present in both stylesheets, and whether any of them maps to different declarations (a vanilla-extract style collision).",
+  "v1Rules": 64,
+  "v2Rules": 72,
+  "v1Classes": 63,
+  "v2Classes": 71,
+  "sharedClasses": 0,
+  "v1OnlyClasses": 63,
+  "v2OnlyClasses": 71,
+  "sharedClassesWithDifferentRules": 0,
+  "sharedSample": [],
+  "conflicts": []
+}

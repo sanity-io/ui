@@ -1,0 +1,27 @@
+=== button-v1: 3 files
+distinct rules            babel 64 / rs 64
+class-name set mismatches 0
+variable-name mismatches  0
+rule-metadata mismatches  0
+assembled CSS byte-identical: true (7008 B)
+
+=== button-v2: 3 files
+distinct rules            babel 72 / rs 72
+class-name set mismatches 0
+variable-name mismatches  0
+rule-metadata mismatches  0
+assembled CSS byte-identical: true (7464 B)
+
+=== synthetic-300: 301 files
+distinct rules            babel 8401 / rs 8401
+class-name set mismatches 0
+variable-name mismatches  0
+rule-metadata mismatches  0
+assembled CSS byte-identical: true (24476 B)
+
+=== end-to-end: v1 library built with tsdown, stock StyleX settings on both compilers
+dist/stylex.css raw identical: false (babel 8092 B after its lightningcss pass, rs 7008 B raw)
+dist/stylex.css identical after lightningcss normalization: false (65 vs 65 rules)
+  only in babel output: [".x87ps6o:not(#\\#):not(#\\#):not(#\\#){-webkit-user-select:none;user-select:none}"]
+  only in rs output:    [".x87ps6o:not(#\\#):not(#\\#):not(#\\#){user-select:none}"]
+dist/index.js class names identical: true (129); variable names identical: true

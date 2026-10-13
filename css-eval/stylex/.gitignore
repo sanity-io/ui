@@ -5,3 +5,4 @@ playwright-report
 .stylex
 *.tgz
 app/public/*.css
+bench/.generated

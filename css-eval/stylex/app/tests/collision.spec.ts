@@ -33,6 +33,12 @@ const BRAND_FILL = 'rgb(255, 51, 153)' // #ff3399
 
 const cssVarName = (ref: string) => ref.slice('var('.length, -1)
 
+// `STYLEX_COMPILER=rs` builds with the Rust port, which has no `custom` module
+// resolution: the libraries fall back to a per-version `classNamePrefix`
+// (`x100…`/`x200…`), so no class name is shared across versions and the app
+// cannot compile a theme over the published tokens (see App.tsx).
+const COMPILER = process.env.STYLEX_COMPILER === 'rs' ? 'rs' : 'babel'
+
 async function expectVersion(page: Page, v: 'v1' | 'v2') {
   const e = EXPECT[v]
   const id = (name: string) => page.getByTestId(`${v}-${name}`)
@@ -102,16 +108,20 @@ for (const order of ['v1,v2', 'v2,v1']) {
       await expect(loading.locator('[data-ui="ButtonLoading"]')).toHaveCSS('position', 'absolute')
       await expect(loading.locator('[data-ui="ButtonLoading"]')).toHaveCSS('opacity', '0.8')
 
-      // theme compiled in the app over the published v1 tokens
-      await expect(page.getByTestId('v1-brand-default-primary')).toHaveCSS(
-        'background-color',
-        BRAND_FILL,
-      )
-      // untouched tones inherit, other versions are unaffected
-      await expect(page.getByTestId('v1-brand-default-positive')).toHaveCSS(
-        'background-color',
-        'rgb(58, 181, 100)',
-      )
+      if (COMPILER === 'babel') {
+        // theme compiled in the app over the published v1 tokens
+        await expect(page.getByTestId('v1-brand-default-primary')).toHaveCSS(
+          'background-color',
+          BRAND_FILL,
+        )
+        // untouched tones inherit, other versions are unaffected
+        await expect(page.getByTestId('v1-brand-default-positive')).toHaveCSS(
+          'background-color',
+          'rgb(58, 181, 100)',
+        )
+      } else {
+        await expect(page.getByTestId('v1-brand-default-primary')).toHaveCount(0)
+      }
       await expect(page.getByTestId('v2-default-primary')).toHaveCSS('background-color', PRIMARY_FILL)
     })
 
@@ -165,7 +175,11 @@ test('class names shared by v1.css and v2.css always carry identical rules', asy
     ),
   )
 
-  expect(result.shared.length).toBeGreaterThan(0) // literal-valued rules dedupe across versions
+  if (COMPILER === 'babel') {
+    expect(result.shared.length).toBeGreaterThan(0) // literal-valued rules dedupe across versions
+  } else {
+    expect(result.shared.length).toBe(0) // per-version prefix: nothing shared, nothing to collide
+  }
   expect(result.conflicts).toEqual([]) // never the same class name with a different rule
 })
 

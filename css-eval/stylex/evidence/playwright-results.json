@@ -163,7 +163,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-13T17:01:00.096Z",
+                  "startTime": "2026-10-13T17:47:28.811Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -173,7 +173,7 @@
           ],
           "id": "6681b18af080ebb977a7-70accd2339bd86e83d0a",
           "file": "collision.spec.ts",
-          "line": 137,
+          "line": 147,
           "column": 1
         },
         {
@@ -192,12 +192,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3,
+                  "duration": 4,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-13T17:01:00.106Z",
+                  "startTime": "2026-10-13T17:47:28.820Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -207,7 +207,7 @@
           ],
           "id": "6681b18af080ebb977a7-3cf3c6167d938d15336c",
           "file": "collision.spec.ts",
-          "line": 172,
+          "line": 186,
           "column": 1
         },
         {
@@ -226,12 +226,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 165,
+                  "duration": 187,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-13T17:01:00.115Z",
+                  "startTime": "2026-10-13T17:47:28.830Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -241,7 +241,7 @@
           ],
           "id": "6681b18af080ebb977a7-c03de6347508cc734fd3",
           "file": "collision.spec.ts",
-          "line": 180,
+          "line": 194,
           "column": 1
         }
       ],
@@ -249,7 +249,7 @@
         {
           "title": "stylesheet order v1,v2",
           "file": "collision.spec.ts",
-          "line": 86,
+          "line": 92,
           "column": 8,
           "specs": [
             {
@@ -268,12 +268,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 703,
+                      "duration": 755,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-13T17:00:58.237Z",
+                      "startTime": "2026-10-13T17:47:26.793Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -283,7 +283,7 @@
               ],
               "id": "6681b18af080ebb977a7-114689357247008e6f8b",
               "file": "collision.spec.ts",
-              "line": 92,
+              "line": 98,
               "column": 5
             },
             {
@@ -302,12 +302,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 111,
+                      "duration": 126,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-13T17:00:59.020Z",
+                      "startTime": "2026-10-13T17:47:27.639Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -317,7 +317,7 @@
               ],
               "id": "6681b18af080ebb977a7-0cab96a3dafeb5f81bc3",
               "file": "collision.spec.ts",
-              "line": 97,
+              "line": 103,
               "column": 5
             },
             {
@@ -336,12 +336,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 95,
+                      "duration": 108,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-13T17:00:59.138Z",
+                      "startTime": "2026-10-13T17:47:27.774Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -351,7 +351,7 @@
               ],
               "id": "6681b18af080ebb977a7-babd92673c3c7faf8539",
               "file": "collision.spec.ts",
-              "line": 118,
+              "line": 128,
               "column": 5
             }
           ]
@@ -359,7 +359,7 @@
         {
           "title": "stylesheet order v2,v1",
           "file": "collision.spec.ts",
-          "line": 86,
+          "line": 92,
           "column": 8,
           "specs": [
             {
@@ -378,12 +378,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 632,
+                      "duration": 676,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-13T17:00:59.242Z",
+                      "startTime": "2026-10-13T17:47:27.890Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -393,7 +393,7 @@
               ],
               "id": "6681b18af080ebb977a7-4885644486047f1d8733",
               "file": "collision.spec.ts",
-              "line": 92,
+              "line": 98,
               "column": 5
             },
             {
@@ -412,12 +412,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 105,
+                      "duration": 113,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-13T17:00:59.883Z",
+                      "startTime": "2026-10-13T17:47:28.577Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -427,7 +427,7 @@
               ],
               "id": "6681b18af080ebb977a7-bc74d01b9ae7e84dcc3d",
               "file": "collision.spec.ts",
-              "line": 97,
+              "line": 103,
               "column": 5
             },
             {
@@ -446,12 +446,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 94,
+                      "duration": 104,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-13T17:00:59.995Z",
+                      "startTime": "2026-10-13T17:47:28.698Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -461,7 +461,7 @@
               ],
               "id": "6681b18af080ebb977a7-2b59bd5c4fe307d1b4f7",
               "file": "collision.spec.ts",
-              "line": 118,
+              "line": 128,
               "column": 5
             }
           ]
@@ -490,12 +490,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 187,
+                  "duration": 238,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-13T17:00:58.200Z",
+                  "startTime": "2026-10-13T17:47:26.800Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -513,8 +513,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-13T17:00:56.903Z",
-    "duration": 3428.891,
+    "startTime": "2026-10-13T17:47:25.299Z",
+    "duration": 3783.6910000000003,
     "expected": 10,
     "skipped": 0,
     "unexpected": 0,

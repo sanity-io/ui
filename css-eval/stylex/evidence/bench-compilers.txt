@@ -1,0 +1,43 @@
+# Per-file transform — Button library sources (3 cold runs, 50 warm iterations)
+src/button.tsx          5583 B | babel: load 151 ms, first transform 104 ms, warm 36 ms | rs: load 11 ms, first transform 4.94 ms, warm 1.27 ms | speedup warm 28.5×
+src/theme.ts            3674 B | babel: load 150 ms, first transform 60 ms, warm 11 ms | rs: load 9.74 ms, first transform 1.21 ms, warm 0.31 ms | speedup warm 35.5×
+src/tokens.stylex.ts    2589 B | babel: load 145 ms, first transform 48 ms, warm 2.48 ms | rs: load 12 ms, first transform 0.94 ms, warm 0.23 ms | speedup warm 10.7×
+
+# Synthetic 300-file set — sequential in-process transform of every file
+babel  all 301 files: 3862 ms, 3714 ms, 3680 ms → median 3714 ms (12 ms per file; first run includes JIT warm-up)
+rs     all 301 files: 154 ms, 156 ms, 152 ms → median 154 ms (0.51 ms per file; first run includes JIT warm-up)
+
+# Synthetic 300-file set — full tsdown library build, cold process (3 runs each, dts off)
+babel                      wall 3560 ms, 3568 ms, 3504 ms → median 3560 ms; tsdown-reported 3293/3307/3235 ms
+rs                         wall 560 ms, 583 ms, 562 ms → median 562 ms; tsdown-reported 297/307/306 ms
+none (no StyleX plugin)    wall 305 ms, 310 ms, 286 ms → median 305 ms; tsdown-reported 44/50/37 ms
+
+# Synthetic 300-file set — tsdown --watch rebuild after touching one component (3 edits each)
+babel  initial 3451 ms; rebuilds wall 3353 ms, 3426 ms, 3332 ms → median 3353 ms; tsdown-reported 3348/3422/3329 ms
+rs     initial 552 ms; rebuilds wall 264 ms, 263 ms, 270 ms → median 264 ms; tsdown-reported 260/259/265 ms
+
+# Synthetic 1000-file set — sequential in-process transform of every file
+babel  all 1001 files: 12357 ms, 12614 ms, 12582 ms → median 12582 ms (13 ms per file; first run includes JIT warm-up)
+rs     all 1001 files: 557 ms, 557 ms, 538 ms → median 557 ms (0.56 ms per file; first run includes JIT warm-up)
+
+# Synthetic 1000-file set — full tsdown library build, cold process (3 runs each, dts off)
+babel                      wall 11568 ms, 11647 ms, 12048 ms → median 11647 ms; tsdown-reported 11279/11346/11759 ms
+rs                         wall 1239 ms, 1282 ms, 1213 ms → median 1239 ms; tsdown-reported 950/1007/934 ms
+none (no StyleX plugin)    wall 356 ms, 355 ms, 394 ms → median 356 ms; tsdown-reported 84/80/118 ms
+
+# Synthetic 1000-file set — tsdown --watch rebuild after touching one component (3 edits each)
+babel  initial 11834 ms; rebuilds wall 11385 ms, 11618 ms, 11870 ms → median 11618 ms; tsdown-reported 11380/11612/11867 ms
+rs     initial 1225 ms; rebuilds wall 922 ms, 882 ms, 961 ms → median 922 ms; tsdown-reported 917/877/957 ms
+
+# Button library — full tsdown build, cold process (3 runs each; dts on, @sanity/tsdown-config)
+babel                      wall 1589 ms, 1629 ms, 1608 ms → median 1608 ms; tsdown-reported 1029/1058/1047 ms
+rs                         wall 1422 ms, 1446 ms, 1431 ms → median 1431 ms; tsdown-reported 891/893/908 ms
+none (no StyleX plugin)    wall 1427 ms, 1440 ms, 1540 ms → median 1440 ms; tsdown-reported 881/888/982 ms
+
+# Button library — tsdown --watch rebuild after touching button.tsx (3 edits each)
+babel  initial 1394 ms; rebuilds wall 611 ms, 537 ms, 562 ms → median 562 ms; tsdown-reported 606/532/558 ms
+rs     initial 1473 ms; rebuilds wall 565 ms, 534 ms, 486 ms → median 534 ms; tsdown-reported 560/530/481 ms
+
+# Vite 8 consumer app — vite build, cold process (3 runs each)
+babel  wall 569 ms, 513 ms, 540 ms → median 540 ms
+rs     wall 447 ms, 456 ms, 436 ms → median 447 ms

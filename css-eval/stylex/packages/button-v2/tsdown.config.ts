@@ -22,7 +22,7 @@ const config: UserConfig = mergeConfig(
   {
     // the unplugin re-emits the CSS asset through `assetFileNames`
     outputOptions: {assetFileNames: '[name][extname]'},
-    plugins: stylexLibraryPlugins(),
+    plugins: stylexLibraryPlugins({packageDir: import.meta.dirname}),
   },
 )
 

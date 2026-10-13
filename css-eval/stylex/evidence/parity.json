@@ -1,0 +1,56 @@
+{
+  "sets": [
+    {
+      "label": "button-v1",
+      "filesCompared": 3,
+      "babelRules": 64,
+      "rsRules": 64,
+      "classMismatch": 0,
+      "varMismatch": 0,
+      "ruleMismatch": 0,
+      "cssIdentical": true,
+      "cssBytes": 7008
+    },
+    {
+      "label": "button-v2",
+      "filesCompared": 3,
+      "babelRules": 72,
+      "rsRules": 72,
+      "classMismatch": 0,
+      "varMismatch": 0,
+      "ruleMismatch": 0,
+      "cssIdentical": true,
+      "cssBytes": 7464
+    },
+    {
+      "label": "synthetic-300",
+      "filesCompared": 301,
+      "babelRules": 8401,
+      "rsRules": 8401,
+      "classMismatch": 0,
+      "varMismatch": 0,
+      "ruleMismatch": 0,
+      "cssIdentical": true,
+      "cssBytes": 24476
+    }
+  ],
+  "endToEnd": {
+    "rawCssIdentical": false,
+    "normalizedCssIdentical": false,
+    "babelCssBytes": 8092,
+    "rsCssBytes": 7008,
+    "ruleCount": {
+      "babel": 65,
+      "rs": 65
+    },
+    "rulesOnlyInBabelOutput": [
+      ".x87ps6o:not(#\\#):not(#\\#):not(#\\#){-webkit-user-select:none;user-select:none}"
+    ],
+    "rulesOnlyInRsOutput": [
+      ".x87ps6o:not(#\\#):not(#\\#):not(#\\#){user-select:none}"
+    ],
+    "jsClassNamesIdentical": true,
+    "jsVarNamesIdentical": true,
+    "jsClassNameCount": 129
+  }
+}
