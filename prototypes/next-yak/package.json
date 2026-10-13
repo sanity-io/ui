@@ -4,10 +4,11 @@
   "type": "module",
   "description": "Evaluation prototype: a @sanity/ui-style Button compiled with next-yak, built twice (v1/v2) and rendered on one page to test for class-name collisions.",
   "scripts": {
-    "build": "pnpm --filter './packages/*' run build && pnpm --filter ./app run build",
+    "build": "pnpm build:libs && pnpm build:unsafe && pnpm build:tsdown && pnpm build:app",
     "build:libs": "pnpm --filter './packages/*' run build",
     "build:unsafe": "pnpm --filter './packages/*' run build:unsafe",
     "build:tsdown": "pnpm --filter './packages/*' run build:tsdown",
+    "build:app": "pnpm --filter ./app run build",
     "test": "pnpm --filter ./app test",
     "typecheck": "tsc -p type-tests/tsconfig.json",
     "bench": "node --experimental-strip-types bench/compile-bench.ts",
@@ -26,7 +27,9 @@
     "react-dom": "catalog:",
     "rolldown": "1.2.13",
     "styled-components": "^6.5.3",
+    "tsdown": "catalog:",
     "typescript": "^7.0.2",
+    "unrun": "^0.3.1",
     "vite": "catalog:",
     "yak-swc": "9.10.2"
   },

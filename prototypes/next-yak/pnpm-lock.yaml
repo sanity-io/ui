@@ -68,9 +68,15 @@ importers:
       styled-components:
         specifier: ^6.5.3
         version: 6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.23.1(typescript@7.0.2)(unrun@0.3.1)
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
+      unrun:
+        specifier: ^0.3.1
+        version: 0.3.1
       vite:
         specifier: 'catalog:'
         version: 8.3.4(@types/node@24.19.2)
@@ -123,7 +129,7 @@ importers:
         version: 19.3.0(react@19.3.0)
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.1(typescript@7.0.2)
+        version: 0.23.1(typescript@7.0.2)(unrun@0.3.1)
       vite:
         specifier: 'catalog:'
         version: 8.3.4(@types/node@24.19.2)
@@ -148,7 +154,7 @@ importers:
         version: 19.3.0(react@19.3.0)
       tsdown:
         specifier: 'catalog:'
-        version: 0.23.1(typescript@7.0.2)
+        version: 0.23.1(typescript@7.0.2)(unrun@0.3.1)
       vite:
         specifier: 'catalog:'
         version: 8.3.4(@types/node@24.19.2)
@@ -908,6 +914,16 @@ packages:
   undici-types@7.24.6:
     resolution: {integrity: sha512-WRNW+sJgj5OBN4/0JpHFqtqzhpbnV0GuB+OozA9gCL7a993SmU+1JBZCzLNxYsbMfIeDL+lTsphD5jN5N+n0zg==}
 
+  unrun@0.3.1:
+    resolution: {integrity: sha512-onIck/oNnCaytwths1ZVp1LK2Gq2hPoyFhiHebObuUXqR3S0uHuLLaBK8K6mRRgV7Ptip8AnNvaUsgzwWwBZuA==}
+    engines: {node: ^22.13.0 || >=24.0.0}
+    hasBin: true
+    peerDependencies:
+      synckit: ^0.11.11
+    peerDependenciesMeta:
+      synckit:
+        optional: true
+
   verkit@0.5.0:
     resolution: {integrity: sha512-u4J1hr6Y+C/hit34GwL3eIcUf3wngT8TlYUjK7tk0jxydKLAq3sYvifjdTDA6U3KCKRcQCQDGf/srjxfZF3l7g==}
     engines: {node: '>=18.12.0'}
@@ -1418,7 +1434,7 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  tsdown@0.23.1(typescript@7.0.2):
+  tsdown@0.23.1(typescript@7.0.2)(unrun@0.3.1):
     dependencies:
       cac: 7.1.0
       defu: 6.1.7
@@ -1436,6 +1452,7 @@ snapshots:
       verkit: 0.5.0
     optionalDependencies:
       typescript: 7.0.2
+      unrun: 0.3.1
     transitivePeerDependencies:
       - '@typescript/native-preview'
       - '@volar/typescript'
@@ -1472,6 +1489,10 @@ snapshots:
       quansync: 1.0.0
 
   undici-types@7.24.6: {}
+
+  unrun@0.3.1:
+    dependencies:
+      rolldown: 1.2.13
 
   verkit@0.5.0: {}
 

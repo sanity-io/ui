@@ -9,6 +9,11 @@ allowBuilds:
   '@swc/core': true
   esbuild: true
 
+# next-yak evaluates `*.yak.ts` token modules with Node's native type stripping, which is only on
+# by default from Node 22.18 (next-yak declares no `engines`, so on 22.14 it fails with
+# `Unknown file extension ".ts"`). This VM runs 22.14.
+nodeOptions: --experimental-strip-types
+
 catalog:
   next-yak: ^9.10.2
   react: ^19.2.4
