@@ -11,6 +11,9 @@ import pkg from './package.json' with {type: 'json'}
  */
 export default defineConfig({
   entry: ['src/index.ts'],
+  // Only the library sources: with the editor tsconfig (which also includes ../../shared for
+  // the config files) the declaration emit writes .d.ts files next to those shared sources.
+  tsconfig: 'tsconfig.build.json',
   outDir: 'dist-tsdown',
   format: 'esm',
   platform: 'browser',
