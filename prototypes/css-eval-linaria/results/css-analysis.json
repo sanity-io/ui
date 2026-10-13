@@ -1,0 +1,60 @@
+{
+  "default": {
+    "v1Selectors": 14,
+    "v2Selectors": 15,
+    "shared": 9,
+    "identical": 5,
+    "conflicting": [
+      {
+        "selector": ".p1dloej8",
+        "v1": [
+          "--sui-button-bg-hover:var(--sui-tone-positive-bg-hover);--sui-button-bg:var(--sui-tone-positive-bg);--sui-button-border:var(--sui-tone-positive-border);--sui-button-fg:var(--sui-tone-positive-fg);--sui-button-text:var(--sui-tone-positive-text)"
+        ],
+        "v2": [
+          "--sui-button-bg-hover:var(--sui-tone-primary-bg-hover);--sui-button-bg:var(--sui-tone-primary-bg);--sui-button-border:var(--sui-tone-primary-border);--sui-button-fg:var(--sui-tone-primary-fg);--sui-button-text:var(--sui-tone-primary-text)"
+        ]
+      },
+      {
+        "selector": ".c482hkv",
+        "v1": [
+          "--sui-button-bg-hover:var(--sui-tone-critical-bg-hover);--sui-button-bg:var(--sui-tone-critical-bg);--sui-button-border:var(--sui-tone-critical-border);--sui-button-fg:var(--sui-tone-critical-fg);--sui-button-text:var(--sui-tone-critical-text)"
+        ],
+        "v2": [
+          "--sui-button-bg-hover:var(--sui-tone-caution-bg-hover);--sui-button-bg:var(--sui-tone-caution-bg);--sui-button-border:var(--sui-tone-caution-border);--sui-button-fg:var(--sui-tone-caution-fg);--sui-button-text:var(--sui-tone-caution-text)"
+        ]
+      },
+      {
+        "selector": ".t1czagbo",
+        "v1": [
+          "--sui-color-bg:#fff;--sui-color-border:#d3d8e0;--sui-color-fg:#1f2430;--sui-color-focus-ring:#3b82f6;--sui-font-family:Inter,system-ui,sans-serif;--sui-font-size-1:13px;--sui-radius-1:3px;--sui-radius-2:6px;--sui-space-2:8px;--sui-space-3:12px;--sui-tone-caution-bg-hover:#e3b813;--sui-tone-caution-bg:#fbd024;--sui-tone-caution-border:#e3b813;--sui-tone-caution-fg:#3b2f00;--sui-tone-caution-text:#8a6d00;--sui-tone-critical-bg-hover:#d12e20;--sui-tone-critical-bg:#f03e2f;--sui-tone-critical-border:#d12e20;--sui-tone-critical-fg:#fff;--sui-tone-critical-text:#b4261a;--sui-tone-default-bg-hover:#e2e6ec;--sui-tone-default-bg:#f0f2f5;--sui-tone-default-border:#c5ccd6;--sui-tone-default-fg:#1f2430;--sui-tone-default-text:#1f2430;--sui-tone-positive-bg-hover:#2e9a56;--sui-tone-positive-bg:#3ab667;--sui-tone-positive-border:#2e9a56;--sui-tone-positive-fg:#fff;--sui-tone-positive-text:#1f7a40;--sui-tone-primary-bg-hover:#1a5fd0;--sui-tone-primary-bg:#2276fc;--sui-tone-primary-border:#1a5fd0;--sui-tone-primary-fg:#fff;--sui-tone-primary-text:#1a5fd0;background:var(--sui-color-bg);color:var(--sui-color-fg);font-family:var(--sui-font-family)"
+        ],
+        "v2": [
+          "--sui-color-bg:#fff;--sui-color-border:#d3d8e0;--sui-color-fg:#1f2430;--sui-color-focus-ring:#3b82f6;--sui-font-family:Inter,system-ui,sans-serif;--sui-font-size-1:13px;--sui-radius-1:3px;--sui-radius-2:999px;--sui-space-2:8px;--sui-space-3:12px;--sui-tone-brand-bg-hover:#d12e20;--sui-tone-brand-bg:#f03e2f;--sui-tone-brand-border:#d12e20;--sui-tone-brand-fg:#fff;--sui-tone-brand-text:#b4261a;--sui-tone-caution-bg-hover:#e3b813;--sui-tone-caution-bg:#fbd024;--sui-tone-caution-border:#e3b813;--sui-tone-caution-fg:#3b2f00;--sui-tone-caution-text:#8a6d00;--sui-tone-critical-bg-hover:#d12e20;--sui-tone-critical-bg:#f03e2f;--sui-tone-critical-border:#d12e20;--sui-tone-critical-fg:#fff;--sui-tone-critical-text:#b4261a;--sui-tone-default-bg-hover:#e2e6ec;--sui-tone-default-bg:#f0f2f5;--sui-tone-default-border:#c5ccd6;--sui-tone-default-fg:#1f2430;--sui-tone-default-text:#1f2430;--sui-tone-positive-bg-hover:#2e9a56;--sui-tone-positive-bg:#3ab667;--sui-tone-positive-border:#2e9a56;--sui-tone-positive-fg:#fff;--sui-tone-positive-text:#1f7a40;--sui-tone-primary-bg-hover:#6d28d9;--sui-tone-primary-bg:#7c3aed;--sui-tone-primary-border:#6d28d9;--sui-tone-primary-fg:#fff;--sui-tone-primary-text:#6d28d9;background:var(--sui-color-bg);color:var(--sui-color-fg);font-family:var(--sui-font-family)"
+        ]
+      },
+      {
+        "selector": ".t1ujdjs9",
+        "v1": [
+          "--sui-color-bg:#13141b;--sui-color-border:#2f3340;--sui-color-fg:#e6e8ee;--sui-color-focus-ring:#3b82f6;--sui-font-family:Inter,system-ui,sans-serif;--sui-font-size-1:13px;--sui-radius-1:3px;--sui-radius-2:6px;--sui-space-2:8px;--sui-space-3:12px;--sui-tone-caution-bg-hover:#e3b813;--sui-tone-caution-bg:#fbd024;--sui-tone-caution-border:#e3b813;--sui-tone-caution-fg:#3b2f00;--sui-tone-caution-text:#f5d45a;--sui-tone-critical-bg-hover:#d12e20;--sui-tone-critical-bg:#f03e2f;--sui-tone-critical-border:#d12e20;--sui-tone-critical-fg:#fff;--sui-tone-critical-text:#ff8a7e;--sui-tone-default-bg-hover:#333848;--sui-tone-default-bg:#262a36;--sui-tone-default-border:#3a4050;--sui-tone-default-fg:#e6e8ee;--sui-tone-default-text:#e6e8ee;--sui-tone-positive-bg-hover:#2e9a56;--sui-tone-positive-bg:#3ab667;--sui-tone-positive-border:#2e9a56;--sui-tone-positive-fg:#fff;--sui-tone-positive-text:#6fd394;--sui-tone-primary-bg-hover:#1a5fd0;--sui-tone-primary-bg:#2276fc;--sui-tone-primary-border:#1a5fd0;--sui-tone-primary-fg:#fff;--sui-tone-primary-text:#7fb0ff;background:var(--sui-color-bg);color:var(--sui-color-fg);font-family:var(--sui-font-family)"
+        ],
+        "v2": [
+          "--sui-color-bg:#13141b;--sui-color-border:#2f3340;--sui-color-fg:#e6e8ee;--sui-color-focus-ring:#3b82f6;--sui-font-family:Inter,system-ui,sans-serif;--sui-font-size-1:13px;--sui-radius-1:3px;--sui-radius-2:999px;--sui-space-2:8px;--sui-space-3:12px;--sui-tone-brand-bg-hover:#d12e20;--sui-tone-brand-bg:#f03e2f;--sui-tone-brand-border:#d12e20;--sui-tone-brand-fg:#fff;--sui-tone-brand-text:#ff8a7e;--sui-tone-caution-bg-hover:#e3b813;--sui-tone-caution-bg:#fbd024;--sui-tone-caution-border:#e3b813;--sui-tone-caution-fg:#3b2f00;--sui-tone-caution-text:#f5d45a;--sui-tone-critical-bg-hover:#d12e20;--sui-tone-critical-bg:#f03e2f;--sui-tone-critical-border:#d12e20;--sui-tone-critical-fg:#fff;--sui-tone-critical-text:#ff8a7e;--sui-tone-default-bg-hover:#333848;--sui-tone-default-bg:#262a36;--sui-tone-default-border:#3a4050;--sui-tone-default-fg:#e6e8ee;--sui-tone-default-text:#e6e8ee;--sui-tone-positive-bg-hover:#2e9a56;--sui-tone-positive-bg:#3ab667;--sui-tone-positive-border:#2e9a56;--sui-tone-positive-fg:#fff;--sui-tone-positive-text:#6fd394;--sui-tone-primary-bg-hover:#6d28d9;--sui-tone-primary-bg:#7c3aed;--sui-tone-primary-border:#6d28d9;--sui-tone-primary-fg:#fff;--sui-tone-primary-text:#c4b5fd;background:var(--sui-color-bg);color:var(--sui-color-fg);font-family:var(--sui-font-family)"
+        ]
+      }
+    ]
+  },
+  "namespaced": {
+    "v1Selectors": 14,
+    "v2Selectors": 15,
+    "shared": 0,
+    "identical": 0,
+    "conflicting": []
+  },
+  "atomic": {
+    "v1Selectors": 108,
+    "v2Selectors": 119,
+    "shared": 102,
+    "identical": 102,
+    "conflicting": []
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "css-eval-linaria",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "postcss": "^8.5.30"
+  }
+}

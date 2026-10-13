@@ -1,0 +1,6 @@
+# Standalone pnpm workspace so this prototype does not touch the monorepo lockfile.
+packages:
+  - 'button-lib'
+  - 'demo'
+  - 'button-lib-v2'
+  - 'pigment-probe'

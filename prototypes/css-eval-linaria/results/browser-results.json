@@ -1,0 +1,141 @@
+{
+  "default": {
+    "checks": 59,
+    "mismatches": [
+      {
+        "testId": "v1-default-default",
+        "prop": "border-radius",
+        "expected": "6px",
+        "actual": "999px"
+      },
+      {
+        "testId": "v1-default-ghost",
+        "prop": "background-color",
+        "expected": "rgba(0, 0, 0, 0)",
+        "actual": "rgb(240, 242, 245)"
+      },
+      {
+        "testId": "v1-default-bleed",
+        "prop": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0) 0px 0px 0px 1px inset",
+        "actual": "rgb(197, 204, 214) 0px 0px 0px 1px inset"
+      },
+      {
+        "testId": "v1-primary-default",
+        "prop": "background-color",
+        "expected": "rgb(34, 118, 252)",
+        "actual": "rgb(124, 58, 237)"
+      },
+      {
+        "testId": "v1-primary-default",
+        "prop": "border-radius",
+        "expected": "6px",
+        "actual": "999px"
+      },
+      {
+        "testId": "v1-primary-ghost",
+        "prop": "color",
+        "expected": "rgb(26, 95, 208)",
+        "actual": "rgb(109, 40, 217)"
+      },
+      {
+        "testId": "v1-positive-default",
+        "prop": "background-color",
+        "expected": "rgb(58, 182, 103)",
+        "actual": "rgb(124, 58, 237)"
+      },
+      {
+        "testId": "v1-positive-default",
+        "prop": "border-radius",
+        "expected": "6px",
+        "actual": "999px"
+      },
+      {
+        "testId": "v1-positive-ghost",
+        "prop": "background-color",
+        "expected": "rgba(0, 0, 0, 0)",
+        "actual": "rgb(124, 58, 237)"
+      },
+      {
+        "testId": "v1-positive-ghost",
+        "prop": "color",
+        "expected": "rgb(31, 122, 64)",
+        "actual": "rgb(255, 255, 255)"
+      },
+      {
+        "testId": "v1-positive-bleed",
+        "prop": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0) 0px 0px 0px 1px inset",
+        "actual": "rgb(109, 40, 217) 0px 0px 0px 1px inset"
+      },
+      {
+        "testId": "v1-caution-default",
+        "prop": "border-radius",
+        "expected": "6px",
+        "actual": "999px"
+      },
+      {
+        "testId": "v1-critical-default",
+        "prop": "background-color",
+        "expected": "rgb(240, 62, 47)",
+        "actual": "rgb(251, 208, 36)"
+      },
+      {
+        "testId": "v1-critical-default",
+        "prop": "border-radius",
+        "expected": "6px",
+        "actual": "999px"
+      },
+      {
+        "testId": "v1-critical-ghost",
+        "prop": "background-color",
+        "expected": "rgba(0, 0, 0, 0)",
+        "actual": "rgb(251, 208, 36)"
+      },
+      {
+        "testId": "v1-critical-ghost",
+        "prop": "color",
+        "expected": "rgb(180, 38, 26)",
+        "actual": "rgb(59, 47, 0)"
+      },
+      {
+        "testId": "v1-critical-bleed",
+        "prop": "box-shadow",
+        "expected": "rgba(0, 0, 0, 0) 0px 0px 0px 1px inset",
+        "actual": "rgb(227, 184, 19) 0px 0px 0px 1px inset"
+      }
+    ],
+    "sharedSelectors": {
+      "selectors": 20,
+      "conflicting": [
+        ".t1czagbo",
+        ".t1ujdjs9"
+      ],
+      "identical": 0
+    },
+    "v1RendersCorrectly": false,
+    "v2RendersCorrectly": true
+  },
+  "namespaced": {
+    "checks": 59,
+    "mismatches": [],
+    "sharedSelectors": {
+      "selectors": 29,
+      "conflicting": [],
+      "identical": 0
+    },
+    "v1RendersCorrectly": true,
+    "v2RendersCorrectly": true
+  },
+  "atomic": {
+    "checks": 59,
+    "mismatches": [],
+    "sharedSelectors": {
+      "selectors": 125,
+      "conflicting": [],
+      "identical": 0
+    },
+    "v1RendersCorrectly": true,
+    "v2RendersCorrectly": true
+  }
+}

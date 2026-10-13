@@ -1,0 +1,27 @@
+{
+  "name": "@sanity-css-eval/demo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "test": "node tests/collisions.mjs"
+  },
+  "dependencies": {
+    "@linaria/atomic": "^8.2.0",
+    "@linaria/core": "^8.2.0",
+    "@linaria/react": "^8.2.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "playwright": "^1.64.0",
+    "postcss": "^8.5.30",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  }
+}
