@@ -1,0 +1,143 @@
+{
+  "compile": [
+    {
+      "lib": "lib-v1",
+      "mode": "default",
+      "coldMs": 365,
+      "warmMedianMs": 352,
+      "tsdownInternalMs": 182
+    },
+    {
+      "lib": "lib-v2",
+      "mode": "default",
+      "coldMs": 370,
+      "warmMedianMs": 351,
+      "tsdownInternalMs": 183
+    },
+    {
+      "lib": "lib-v1",
+      "mode": "version",
+      "coldMs": 342,
+      "warmMedianMs": 348,
+      "tsdownInternalMs": 182
+    },
+    {
+      "lib": "lib-v2",
+      "mode": "version",
+      "coldMs": 339,
+      "warmMedianMs": 355,
+      "tsdownInternalMs": 187
+    },
+    {
+      "lib": "lib-v1",
+      "mode": "version+module",
+      "coldMs": 355,
+      "warmMedianMs": 353,
+      "tsdownInternalMs": 183
+    },
+    {
+      "lib": "lib-v2",
+      "mode": "version+module",
+      "coldMs": 345,
+      "warmMedianMs": 348,
+      "tsdownInternalMs": 175
+    }
+  ],
+  "output": [
+    {
+      "lib": "lib-v1",
+      "mode": "default",
+      "css": {
+        "raw": 2976,
+        "gzip": 890,
+        "brotli": 715
+      },
+      "js": {
+        "raw": 2464,
+        "gzip": 931,
+        "brotli": 800
+      },
+      "avgIdentifierLength": 7.266666666666667
+    },
+    {
+      "lib": "lib-v2",
+      "mode": "default",
+      "css": {
+        "raw": 3101,
+        "gzip": 920,
+        "brotli": 739
+      },
+      "js": {
+        "raw": 2634,
+        "gzip": 971,
+        "brotli": 824
+      },
+      "avgIdentifierLength": 7.25
+    },
+    {
+      "lib": "lib-v1",
+      "mode": "version",
+      "css": {
+        "raw": 3058,
+        "gzip": 893,
+        "brotli": 714
+      },
+      "js": {
+        "raw": 2496,
+        "gzip": 934,
+        "brotli": 798
+      },
+      "avgIdentifierLength": 9
+    },
+    {
+      "lib": "lib-v2",
+      "mode": "version",
+      "css": {
+        "raw": 3120,
+        "gzip": 920,
+        "brotli": 740
+      },
+      "js": {
+        "raw": 2647,
+        "gzip": 974,
+        "brotli": 836
+      },
+      "avgIdentifierLength": 8.875
+    },
+    {
+      "lib": "lib-v1",
+      "mode": "version+module",
+      "css": {
+        "raw": 3058,
+        "gzip": 891,
+        "brotli": 717
+      },
+      "js": {
+        "raw": 2496,
+        "gzip": 933,
+        "brotli": 798
+      },
+      "avgIdentifierLength": 9
+    },
+    {
+      "lib": "lib-v2",
+      "mode": "version+module",
+      "css": {
+        "raw": 3143,
+        "gzip": 918,
+        "brotli": 740
+      },
+      "js": {
+        "raw": 2652,
+        "gzip": 971,
+        "brotli": 833
+      },
+      "avgIdentifierLength": 8.125
+    }
+  ],
+  "runtime": {
+    "raw": 4064,
+    "gzip": 1562,
+    "brotli": 1383
+  }
+}

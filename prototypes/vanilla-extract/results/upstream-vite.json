@@ -1,0 +1,44 @@
+[
+  {
+    "lib": "lib-v1",
+    "mode": "default",
+    "ms": 289,
+    "identifiers": 39,
+    "identicalToTsdown": true
+  },
+  {
+    "lib": "lib-v2",
+    "mode": "default",
+    "ms": 131,
+    "identifiers": 41,
+    "identicalToTsdown": true
+  },
+  {
+    "lib": "lib-v1",
+    "mode": "version",
+    "ms": 143,
+    "identifiers": 39,
+    "identicalToTsdown": true
+  },
+  {
+    "lib": "lib-v2",
+    "mode": "version",
+    "ms": 124,
+    "identifiers": 41,
+    "identicalToTsdown": true
+  },
+  {
+    "lib": "lib-v1",
+    "mode": "version+module",
+    "ms": 122,
+    "identifiers": 39,
+    "identicalToTsdown": true
+  },
+  {
+    "lib": "lib-v2",
+    "mode": "version+module",
+    "ms": 136,
+    "identifiers": 41,
+    "identicalToTsdown": true
+  }
+]

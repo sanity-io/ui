@@ -1,3 +1,4 @@
+import murmur2 from '@emotion/hash'
 import {createHash} from 'node:crypto'
 import {readFileSync} from 'node:fs'
 import {resolve} from 'node:path'
@@ -9,7 +10,7 @@ import {resolve} from 'node:path'
  * function cannot hash rule content — it can only re-derive a name from these inputs.
  */
 export interface IdentifierArgs {
-  /** Upstream's default `short` identifier: `murmur(packageName + filePath)` + per-file counter (base36). */
+  /** Upstream's default `short` identifier: `murmur2(packageName + filePath)` + per-file counter (base36). */
   hash: string
   /** Path of the `.css.ts` module, relative to the integration's root (cwd for tsdown, `root` for Vite). */
   filePath: string
@@ -32,11 +33,12 @@ export interface VersionedIdentifiersOptions {
    */
   moduleContent?: {root: string}
   /**
-   * Number of base36 characters. 8 ≈ 41 bits, 10 ≈ 52 bits. Upstream's `short` names are 7–9
-   * characters but only ~32 bits of hash plus a counter.
-   * @defaultValue 8
+   * Length of the per-file prefix in base36 characters: 7 ≈ 36 bits (upstream's murmur2 prefix
+   * is 32 bits and 6–7 characters). Two identifiers can only collide when two *files* across
+   * releases hash to the same prefix and reuse a counter value.
+   * @defaultValue 7
    */
-  length?: number
+  prefixLength?: number
   /** Prefix names with the debug id when there is one, like upstream's `debug` mode. */
   debug?: boolean
 }
@@ -55,28 +57,38 @@ function base36(hex: string, length: number): string {
  *
  * Why this fixes SAPP-4639: upstream names are `hash(name + path) + counter`. Reordering the
  * `style()` calls in a module renumbers them, so two releases reuse the same name for different
- * rules. Here the release is part of the hash input, so a name can only repeat across releases
- * by an actual hash collision (~2^-41 per pair at the default length), never by renumbering.
+ * rules. Here the release is part of the per-file hash, so a name can only repeat across
+ * releases through a hash collision between two files, never through renumbering.
+ *
+ * The output keeps upstream's shape — a per-file prefix followed by the per-file counter — so
+ * names stay as short and as compressible as the defaults (every name in a module shares its
+ * prefix). The counter is recovered from upstream's `hash` by stripping the murmur2 prefix it is
+ * documented to start with; should that layout ever change, the whole `hash` is kept instead
+ * (longer names, still unique).
  */
 export function versionedIdentifiers(options: VersionedIdentifiersOptions): IdentifierFn {
-  const {name, version, moduleContent, length = 8, debug = false} = options
+  const {name, version, moduleContent, prefixLength = 7, debug = false} = options
   const salt = `${name}@${version}`
-  const moduleHashes = new Map<string, string>()
+  const prefixes = new Map<string, string>()
 
-  const moduleHash = (filePath: string): string => {
-    let cached = moduleHashes.get(filePath)
-    if (cached === undefined) {
-      const source = readFileSync(resolve(moduleContent!.root, filePath), 'utf8')
-      cached = createHash('sha256').update(source.replace(/\r\n?/g, '\n')).digest('hex')
-      moduleHashes.set(filePath, cached)
+  const prefixFor = (filePath: string): string => {
+    let prefix = prefixes.get(filePath)
+    if (prefix === undefined) {
+      const hash = createHash('sha256').update(salt).update('\0').update(filePath)
+      if (moduleContent) {
+        const source = readFileSync(resolve(moduleContent.root, filePath), 'utf8')
+        hash.update('\0').update(source.replace(/\r\n?/g, '\n'))
+      }
+      prefix = base36(hash.digest('hex'), prefixLength)
+      prefixes.set(filePath, prefix)
     }
-    return cached
+    return prefix
   }
 
-  return ({hash, filePath, debugId}) => {
-    const input = [salt, filePath, hash, moduleContent ? moduleHash(filePath) : ''].join('\0')
-    const digest = createHash('sha256').update(input).digest('hex')
-    const id = base36(digest, length)
+  return ({hash, filePath, packageName, debugId}) => {
+    const upstreamPrefix = murmur2(packageName ? `${packageName}${filePath}` : filePath)
+    const counter = hash.startsWith(upstreamPrefix) ? hash.slice(upstreamPrefix.length) : hash
+    const id = `${prefixFor(filePath)}${counter}`
     const identifier = /^[0-9]/.test(id) ? `_${id}` : id
     return debug && debugId ? `${debugId.replace(/\s/g, '_')}__${identifier}` : identifier
   }

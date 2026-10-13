@@ -7,7 +7,7 @@
   "packageManager": "pnpm@12.11.2",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "build:upstream-vite": "node scripts/build-upstream-vite.mjs",
+    "build:upstream-vite": "node --experimental-strip-types --no-warnings scripts/build-upstream-vite.mjs",
     "compare": "node scripts/compare-css.mjs",
     "bench": "node scripts/bench.mjs",
     "sizes": "node scripts/sizes.mjs",
@@ -16,6 +16,7 @@
     "dev": "vite --config consumer/vite.config.ts"
   },
   "devDependencies": {
+    "@emotion/hash": "^0.9.2",
     "@playwright/test": "^1.64.0",
     "@sanity/tsdown-config": "^0.28.8",
     "@types/node": "^24.19.2",
