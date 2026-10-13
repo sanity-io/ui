@@ -580,7 +580,7 @@
     ],
     "failures": 0,
     "sample": {
-      "backgroundColor": "rgb(230, 71, 71)",
+      "backgroundColor": "rgb(42, 79, 217)",
       "paddingLeft": "6px",
       "fontWeight": "400",
       "columnGap": "normal",

@@ -79,6 +79,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^6.1.2
         version: 6.1.2(vite@8.3.4)
+      postcss:
+        specifier: ^8.5.30
+        version: 8.5.30
       typescript:
         specifier: 7.0.2
         version: 7.0.2

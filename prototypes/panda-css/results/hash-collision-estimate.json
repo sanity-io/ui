@@ -1,0 +1,86 @@
+{
+  "report": {
+    "2000": {
+      "collisions": 0,
+      "birthdayEstimate": "0.05%",
+      "expectedPairs": 0.00046566128730773926,
+      "examples": []
+    },
+    "5000": {
+      "collisions": 0,
+      "birthdayEstimate": "0.29%",
+      "expectedPairs": 0.0029103830456733704,
+      "examples": []
+    },
+    "10000": {
+      "collisions": 0,
+      "birthdayEstimate": "1.16%",
+      "expectedPairs": 0.011641532182693481,
+      "examples": []
+    },
+    "20000": {
+      "collisions": 0,
+      "birthdayEstimate": "4.55%",
+      "expectedPairs": 0.046566128730773926,
+      "examples": []
+    },
+    "50000": {
+      "collisions": 0,
+      "birthdayEstimate": "25.25%",
+      "expectedPairs": 0.29103830456733704,
+      "examples": []
+    },
+    "100000": {
+      "collisions": 9,
+      "birthdayEstimate": "68.78%",
+      "expectedPairs": 1.1641532182693481,
+      "examples": [
+        [
+          "bg_[39px]",
+          "bd-r_red.50",
+          "dlPnlp"
+        ],
+        [
+          "hover:bg_[39px]",
+          "hover:bd-r_red.50",
+          "eDtsTd"
+        ],
+        [
+          "focus-visible:bg_[39px]",
+          "focus-visible:bd-r_red.50",
+          "gfPQcM"
+        ]
+      ]
+    },
+    "567000": {
+      "collisions": 63,
+      "birthdayEstimate": "100.00%",
+      "expectedPairs": 37.42624539881945,
+      "examples": [
+        [
+          "bg-r_red.50",
+          "bd_[39px]",
+          "dlPnkG"
+        ],
+        [
+          "bg_[39px]",
+          "bd-r_red.50",
+          "dlPnlp"
+        ],
+        [
+          "scr-mx_orange.800",
+          "scrs-strt_green.400",
+          "cdobOw"
+        ]
+      ]
+    }
+  },
+  "reproduction": {
+    "hash": "dlPnlp",
+    "compilerOutput": "cssgen: parsed 4 files, wrote 7671 bytes to /workspace/prototypes/panda-css/packages/button-v1/.scale/collide/dist/styles.css, diagnostics: 0",
+    "rules": [
+      ".sui-v4-dlPnlp { background: 39px; }",
+      ".sui-v4-dlPnlp { border-right: red\\.50; }"
+    ]
+  }
+}
