@@ -1,0 +1,479 @@
+{
+  "assertions": [
+    {
+      "label": "v1 light default/default background",
+      "expected": "rgb(37, 40, 55)",
+      "actual": "rgb(37, 40, 55)",
+      "ok": true
+    },
+    {
+      "label": "v1 light default/default padding-inline",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v1 light default/default radius",
+      "expected": "6px",
+      "actual": "6px",
+      "ok": true
+    },
+    {
+      "label": "v1 light default/default gap",
+      "expected": "8px",
+      "actual": "8px",
+      "ok": true
+    },
+    {
+      "label": "v1 light default/default font-weight",
+      "expected": "500",
+      "actual": "500",
+      "ok": true
+    },
+    {
+      "label": "v1 light primary/default background",
+      "expected": "rgb(62, 107, 255)",
+      "actual": "rgb(62, 107, 255)",
+      "ok": true
+    },
+    {
+      "label": "v1 light primary/default padding-inline",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v1 light primary/default radius",
+      "expected": "6px",
+      "actual": "6px",
+      "ok": true
+    },
+    {
+      "label": "v1 light primary/default gap",
+      "expected": "8px",
+      "actual": "8px",
+      "ok": true
+    },
+    {
+      "label": "v1 light primary/default font-weight",
+      "expected": "500",
+      "actual": "500",
+      "ok": true
+    },
+    {
+      "label": "v1 light positive/default background",
+      "expected": "rgb(47, 166, 102)",
+      "actual": "rgb(47, 166, 102)",
+      "ok": true
+    },
+    {
+      "label": "v1 light positive/default padding-inline",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v1 light positive/default radius",
+      "expected": "6px",
+      "actual": "6px",
+      "ok": true
+    },
+    {
+      "label": "v1 light positive/default gap",
+      "expected": "8px",
+      "actual": "8px",
+      "ok": true
+    },
+    {
+      "label": "v1 light positive/default font-weight",
+      "expected": "500",
+      "actual": "500",
+      "ok": true
+    },
+    {
+      "label": "v1 light caution/default background",
+      "expected": "rgb(217, 158, 15)",
+      "actual": "rgb(217, 158, 15)",
+      "ok": true
+    },
+    {
+      "label": "v1 light caution/default padding-inline",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v1 light caution/default radius",
+      "expected": "6px",
+      "actual": "6px",
+      "ok": true
+    },
+    {
+      "label": "v1 light caution/default gap",
+      "expected": "8px",
+      "actual": "8px",
+      "ok": true
+    },
+    {
+      "label": "v1 light caution/default font-weight",
+      "expected": "500",
+      "actual": "500",
+      "ok": true
+    },
+    {
+      "label": "v1 light critical/default background",
+      "expected": "rgb(230, 71, 71)",
+      "actual": "rgb(230, 71, 71)",
+      "ok": true
+    },
+    {
+      "label": "v1 light critical/default padding-inline",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v1 light critical/default radius",
+      "expected": "6px",
+      "actual": "6px",
+      "ok": true
+    },
+    {
+      "label": "v1 light critical/default gap",
+      "expected": "8px",
+      "actual": "8px",
+      "ok": true
+    },
+    {
+      "label": "v1 light critical/default font-weight",
+      "expected": "500",
+      "actual": "500",
+      "ok": true
+    },
+    {
+      "label": "v1 light critical/ghost background",
+      "expected": "rgba(0, 0, 0, 0)",
+      "actual": "rgba(0, 0, 0, 0)",
+      "ok": true
+    },
+    {
+      "label": "v1 light critical/ghost color",
+      "expected": "rgb(163, 38, 38)",
+      "actual": "rgb(163, 38, 38)",
+      "ok": true
+    },
+    {
+      "label": "v1 light critical/ghost border",
+      "expected": "rgb(230, 71, 71)",
+      "actual": "rgb(230, 71, 71)",
+      "ok": true
+    },
+    {
+      "label": "v1 light primary/bleed background",
+      "expected": "rgba(0, 0, 0, 0)",
+      "actual": "rgba(0, 0, 0, 0)",
+      "ok": true
+    },
+    {
+      "label": "v1 light primary/bleed color",
+      "expected": "rgb(30, 59, 179)",
+      "actual": "rgb(30, 59, 179)",
+      "ok": true
+    },
+    {
+      "label": "v1 light primary/bleed border",
+      "expected": "rgba(0, 0, 0, 0)",
+      "actual": "rgba(0, 0, 0, 0)",
+      "ok": true
+    },
+    {
+      "label": "v1 dark default/default background",
+      "expected": "rgb(227, 228, 232)",
+      "actual": "rgb(227, 228, 232)",
+      "ok": true
+    },
+    {
+      "label": "v1 dark primary/default background",
+      "expected": "rgb(102, 144, 255)",
+      "actual": "rgb(102, 144, 255)",
+      "ok": true
+    },
+    {
+      "label": "v1 dynamic width=240",
+      "expected": 240,
+      "actual": 240,
+      "ok": true
+    },
+    {
+      "label": "v1 dynamic radius=full",
+      "expected": "9999px",
+      "actual": "9999px",
+      "ok": true
+    },
+    {
+      "label": "v1 dynamic radius=0",
+      "expected": "0px",
+      "actual": "0px",
+      "ok": true
+    },
+    {
+      "label": "v1 themed primary background (runtime theme)",
+      "expected": "rgb(142, 68, 173)",
+      "actual": "rgb(142, 68, 173)",
+      "ok": true
+    },
+    {
+      "label": "v2 light default/default background",
+      "expected": "rgb(37, 40, 55)",
+      "actual": "rgb(37, 40, 55)",
+      "ok": true
+    },
+    {
+      "label": "v2 light default/default padding-inline",
+      "expected": "16px",
+      "actual": "16px",
+      "ok": true
+    },
+    {
+      "label": "v2 light default/default radius",
+      "expected": "9px",
+      "actual": "9px",
+      "ok": true
+    },
+    {
+      "label": "v2 light default/default gap",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v2 light default/default font-weight",
+      "expected": "600",
+      "actual": "600",
+      "ok": true
+    },
+    {
+      "label": "v2 light primary/default background",
+      "expected": "rgb(42, 79, 217)",
+      "actual": "rgb(42, 79, 217)",
+      "ok": true
+    },
+    {
+      "label": "v2 light primary/default padding-inline",
+      "expected": "16px",
+      "actual": "16px",
+      "ok": true
+    },
+    {
+      "label": "v2 light primary/default radius",
+      "expected": "9px",
+      "actual": "9px",
+      "ok": true
+    },
+    {
+      "label": "v2 light primary/default gap",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v2 light primary/default font-weight",
+      "expected": "600",
+      "actual": "600",
+      "ok": true
+    },
+    {
+      "label": "v2 light positive/default background",
+      "expected": "rgb(47, 166, 102)",
+      "actual": "rgb(47, 166, 102)",
+      "ok": true
+    },
+    {
+      "label": "v2 light positive/default padding-inline",
+      "expected": "16px",
+      "actual": "16px",
+      "ok": true
+    },
+    {
+      "label": "v2 light positive/default radius",
+      "expected": "9px",
+      "actual": "9px",
+      "ok": true
+    },
+    {
+      "label": "v2 light positive/default gap",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v2 light positive/default font-weight",
+      "expected": "600",
+      "actual": "600",
+      "ok": true
+    },
+    {
+      "label": "v2 light caution/default background",
+      "expected": "rgb(217, 158, 15)",
+      "actual": "rgb(217, 158, 15)",
+      "ok": true
+    },
+    {
+      "label": "v2 light caution/default padding-inline",
+      "expected": "16px",
+      "actual": "16px",
+      "ok": true
+    },
+    {
+      "label": "v2 light caution/default radius",
+      "expected": "9px",
+      "actual": "9px",
+      "ok": true
+    },
+    {
+      "label": "v2 light caution/default gap",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v2 light caution/default font-weight",
+      "expected": "600",
+      "actual": "600",
+      "ok": true
+    },
+    {
+      "label": "v2 light critical/default background",
+      "expected": "rgb(230, 71, 71)",
+      "actual": "rgb(230, 71, 71)",
+      "ok": true
+    },
+    {
+      "label": "v2 light critical/default padding-inline",
+      "expected": "16px",
+      "actual": "16px",
+      "ok": true
+    },
+    {
+      "label": "v2 light critical/default radius",
+      "expected": "9px",
+      "actual": "9px",
+      "ok": true
+    },
+    {
+      "label": "v2 light critical/default gap",
+      "expected": "12px",
+      "actual": "12px",
+      "ok": true
+    },
+    {
+      "label": "v2 light critical/default font-weight",
+      "expected": "600",
+      "actual": "600",
+      "ok": true
+    },
+    {
+      "label": "v2 light critical/ghost background",
+      "expected": "rgba(0, 0, 0, 0)",
+      "actual": "rgba(0, 0, 0, 0)",
+      "ok": true
+    },
+    {
+      "label": "v2 light critical/ghost color",
+      "expected": "rgb(163, 38, 38)",
+      "actual": "rgb(163, 38, 38)",
+      "ok": true
+    },
+    {
+      "label": "v2 light critical/ghost border",
+      "expected": "rgb(230, 71, 71)",
+      "actual": "rgb(230, 71, 71)",
+      "ok": true
+    },
+    {
+      "label": "v2 light primary/bleed background",
+      "expected": "rgba(0, 0, 0, 0)",
+      "actual": "rgba(0, 0, 0, 0)",
+      "ok": true
+    },
+    {
+      "label": "v2 light primary/bleed color",
+      "expected": "rgb(30, 59, 179)",
+      "actual": "rgb(30, 59, 179)",
+      "ok": true
+    },
+    {
+      "label": "v2 light primary/bleed border",
+      "expected": "rgba(0, 0, 0, 0)",
+      "actual": "rgba(0, 0, 0, 0)",
+      "ok": true
+    },
+    {
+      "label": "v2 dark default/default background",
+      "expected": "rgb(227, 228, 232)",
+      "actual": "rgb(227, 228, 232)",
+      "ok": true
+    },
+    {
+      "label": "v2 dark primary/default background",
+      "expected": "rgb(102, 144, 255)",
+      "actual": "rgb(102, 144, 255)",
+      "ok": true
+    },
+    {
+      "label": "v2 dynamic width=240",
+      "expected": 240,
+      "actual": 240,
+      "ok": true
+    },
+    {
+      "label": "v2 dynamic radius=full",
+      "expected": "9999px",
+      "actual": "9999px",
+      "ok": true
+    },
+    {
+      "label": "v2 dynamic radius=0",
+      "expected": "0px",
+      "actual": "0px",
+      "ok": true
+    },
+    {
+      "label": "v2 themed primary background (runtime theme)",
+      "expected": "rgb(142, 68, 173)",
+      "actual": "rgb(142, 68, 173)",
+      "ok": true
+    }
+  ],
+  "failures": 0,
+  "classNameOverlap": {
+    "v1Classes": 69,
+    "v2Classes": 73,
+    "shared": 65,
+    "sharedAtomic": 63,
+    "sharedWithDifferentRules": [],
+    "controlClassesWithDifferentRules": [
+      "sui-v4-wGgBK"
+    ],
+    "onlyV1": 4,
+    "onlyV2": 8
+  },
+  "pitfalls": {
+    "configRecipeBadge": {
+      "sameClassName": true,
+      "v1PaddingInline": "12px",
+      "v1Expected": "8px",
+      "v2PaddingInline": "12px",
+      "v2Expected": "12px",
+      "collided": true
+    },
+    "rootTokenDefaultWithoutProvider": {
+      "v1Background": "rgb(42, 79, 217)",
+      "v1OwnDefault": "rgb(62, 107, 255)",
+      "v2Background": "rgb(42, 79, 217)",
+      "v2OwnDefault": "rgb(42, 79, 217)",
+      "collided": true
+    }
+  },
+  "consoleErrors": []
+}

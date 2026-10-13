@@ -1,0 +1,14 @@
+# Self-contained workspace: this prototype is deliberately NOT part of the root
+# sanity-io/ui workspace, so it has its own lockfile and does not affect the
+# library's dependency graph.
+packages:
+  - 'packages/*'
+  - 'apps/*'
+
+linkWorkspacePackages: deep
+strictPeerDependencies: false
+# @pandacss/compiler ships platform binaries as optionalDependencies; the
+# postinstall only runs as a fallback downloader.
+allowBuilds:
+  esbuild: false
+  '@swc/core': false

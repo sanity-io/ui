@@ -1,0 +1,23 @@
+{
+  "name": "sanity-css-eval-panda",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Evaluation prototype: a @sanity/ui-style Button built with Panda CSS 2.x, published as a library with pre-generated CSS, with two versions rendered on one page to prove the absence of class-name collisions.",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r --filter './packages/*' run build && pnpm --filter sanity-css-eval-panda-demo run build",
+    "test": "pnpm run test:static && pnpm run test:browser",
+    "test:static": "node scripts/check-css-collisions.mjs",
+    "test:browser": "node scripts/browser-proof.mjs",
+    "test:types": "node scripts/type-safety.mjs",
+    "bench": "node scripts/bench.mjs",
+    "runtime-size": "node scripts/runtime-size.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.58.2",
+    "postcss": "^8.5.6"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

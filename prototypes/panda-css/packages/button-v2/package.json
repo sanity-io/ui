@@ -1,0 +1,49 @@
+{
+  "name": "@sanity-eval/panda-button-v2",
+  "version": "4.4.4",
+  "description": "v2 (4.4.4) of the evaluation Button library: Panda CSS 2.x, pre-generated CSS shipped to consumers that do not run Panda.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "codegen": "panda codegen",
+    "cssgen": "panda cssgen --outfile dist/styles.css",
+    "build": "rm -rf dist && panda codegen && panda cssgen --outfile dist/styles.css && tsdown",
+    "build:transform": "tsdown -c tsdown.transform.config.mts",
+    "clean": "rm -rf dist dist-transform styled-system"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^2.2.0",
+    "@pandacss/preset-base": "^2.2.0",
+    "@pandacss/rollup": "^2.2.0",
+    "@sanity/tsdown-config": "^0.28.8",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsdown": "^0.23.1",
+    "typescript": "7.0.2",
+    "unrun": "^0.3.1"
+  },
+  "peerDependencies": {
+    "react": "^19.2",
+    "react-dom": "^19.2"
+  }
+}
