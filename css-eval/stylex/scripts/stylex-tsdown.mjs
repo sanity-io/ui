@@ -23,6 +23,9 @@ function seedCssAsset(fileName) {
  * `vanillaExtract: {fileName: 'styles.css'}` option.
  */
 export function stylexLibraryPlugins({fileName = 'stylex.css', ...options} = {}) {
+  // scripts/bench.mjs builds the same package without the compiler to isolate
+  // its cost (the output is not usable: `stylex.create` stays a runtime call)
+  if (process.env.STYLEX_EVAL_NO_STYLEX) return []
   return [
     seedCssAsset(fileName),
     stylex.rolldown({

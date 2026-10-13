@@ -1,0 +1,76 @@
+{
+  "css": {
+    "v1 styles.css (as published, pretty)": {
+      "raw": 8067,
+      "gzip": 2240,
+      "brotli": 1954
+    },
+    "v1 styles.css (minified)": {
+      "raw": 6831,
+      "gzip": 2158,
+      "brotli": 1879
+    },
+    "v2 styles.css (as published, pretty)": {
+      "raw": 8618,
+      "gzip": 2357,
+      "brotli": 2050
+    },
+    "v2 styles.css (minified)": {
+      "raw": 7309,
+      "gzip": 2270,
+      "brotli": 1990
+    },
+    "app index.css (reset + app StyleX + consumer theme)": {
+      "raw": 2169,
+      "gzip": 625,
+      "brotli": 549
+    },
+    "page total: v1 + v2 + app (minified)": {
+      "raw": 16309,
+      "gzip": 4075,
+      "brotli": 3445
+    },
+    "v1 + v2 compiled as one sheet (deduplicated, minified)": {
+      "raw": 12567,
+      "gzip": 3544,
+      "brotli": 2985
+    }
+  },
+  "cssDedupe": {
+    "v1Rules": 65,
+    "v2Rules": 73,
+    "mergedRules": 107
+  },
+  "js": {
+    "v1 dist/index.js + tokens.stylex.js (as published, not minified)": {
+      "raw": 6302,
+      "gzip": 2365,
+      "brotli": 2101
+    },
+    "runtime: static styles only (compiled away)": {
+      "raw": 43,
+      "gzip": 63,
+      "brotli": 47
+    },
+    "runtime: props() for dynamic/conditional merging": {
+      "raw": 1502,
+      "gzip": 840,
+      "brotli": 748
+    },
+    "runtime: whole @stylexjs/stylex namespace": {
+      "raw": 4109,
+      "gzip": 1733,
+      "brotli": 1551
+    },
+    "v1 library + runtime, consumer bundle (react external)": {
+      "raw": 4581,
+      "gzip": 2290,
+      "brotli": 2057
+    },
+    "app bundle incl. react-dom (context only)": {
+      "raw": 229433,
+      "gzip": 71150,
+      "brotli": 61345
+    }
+  }
+}

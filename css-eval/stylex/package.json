@@ -25,10 +25,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
+    "@babel/preset-typescript": "^7.29.7",
     "@playwright/test": "1.64.0",
     "@sanity/tsdown-config": "0.28.8",
     "@stylexjs/babel-plugin": "0.19.1",
     "@stylexjs/unplugin": "0.19.1",
+    "@stylexswc/rs-compiler": "0.19.1",
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

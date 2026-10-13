@@ -1,0 +1,35 @@
+=== stock unstable_moduleResolution ===
+@sanity/ui@4.4.3 compiled JS:
+  radius2: "var(--x1dd0byb)",
+  bg: "var(--xtjeked)",
+  "--sui-radius-2": "var(--sui-radius-2)",
+@sanity/ui@4.4.3 CSS:
+:root, .xmrq57g{--sui-radius-2:3px;}
+:root, .xv70yn7{--x1dd0byb:3px;--xtjeked:#fff;}
+@sanity/ui@4.4.4 compiled JS:
+  radius2: "var(--x1dd0byb)",
+  bg: "var(--xtjeked)",
+  "--sui-radius-2": "var(--sui-radius-2)",
+@sanity/ui@4.4.4 CSS:
+:root, .xmrq57g{--sui-radius-2:4px;}
+:root, .xv70yn7{--x1dd0byb:4px;--xtjeked:#fff;}
+→ IDENTICAL variable names across versions: both sheets set the same `:root` custom properties to different values; whichever stylesheet loads last wins for BOTH versions. (`--sui-radius-2` is identical by design.)
+
+=== version-scoped unstable_moduleResolution ===
+@sanity/ui@4.4.3 compiled JS:
+  radius2: "var(--x1g97vdg)",
+  bg: "var(--x80fstz)",
+  "--sui-radius-2": "var(--sui-radius-2)",
+@sanity/ui@4.4.3 CSS:
+:root, .xq6yfmb{--sui-radius-2:3px;}
+:root, .xbhyh8b{--x1g97vdg:3px;--x80fstz:#fff;}
+@sanity/ui@4.4.4 compiled JS:
+  radius2: "var(--x1xjk04i)",
+  bg: "var(--xjuy46g)",
+  "--sui-radius-2": "var(--sui-radius-2)",
+@sanity/ui@4.4.4 CSS:
+:root, .x10x4cec{--sui-radius-2:4px;}
+:root, .x1skv33v{--x1xjk04i:4px;--xjuy46g:#fff;}
+→ DISTINCT hashed variable names per version: no shared `:root` declarations. The explicit `--sui-radius-2` key is kept verbatim in both, i.e. an intentionally shared contract.
+
+Atomic class names, `createTheme` classes and keyframes are content hashes and never have this problem; see evidence/class-name-comparison.json.

@@ -1,0 +1,74 @@
+{
+  "node": "v22.14.0",
+  "runs": 3,
+  "libraryBuildCold": {
+    "withStylexMs": [
+      1391.297916,
+      1384.863541,
+      1359.4296050000003
+    ],
+    "withoutStylexMs": [
+      1275.551856,
+      1315.4809089999999,
+      1295.303301
+    ],
+    "medianWithMs": 1384.863541,
+    "medianWithoutMs": 1295.303301
+  },
+  "libraryBuildWarm": {
+    "firstMs": 1072.2722150000009,
+    "warmMs": [
+      87.28151400000024,
+      79.52488399999856,
+      73.86309600000095
+    ],
+    "medianWarmMs": 79.52488399999856
+  },
+  "appBuildCold": {
+    "runsMs": [
+      496.78088599999865,
+      516.7793199999996,
+      546.7461910000002
+    ],
+    "medianMs": 516.7793199999996
+  },
+  "appBuildWarm": {
+    "firstMs": 156.8031119999996,
+    "warmMs": [
+      121.03639400000066,
+      124.89844999999877,
+      115.21084200000041
+    ],
+    "medianWarmMs": 121.03639400000066
+  },
+  "perFile": {
+    "src/button.tsx": {
+      "bytes": 5585,
+      "babelColdMs": 56.99240999999893,
+      "babelWarmMeanMs": 41.396338280000094,
+      "rsColdMs": 7.113357999998698,
+      "rsWarmMeanMs": 1.6517756000000008,
+      "rulesBabel": 59,
+      "rulesRs": 56
+    },
+    "src/theme.ts": {
+      "bytes": 3674,
+      "babelColdMs": 13.662544999999227,
+      "babelWarmMeanMs": 13.931944840000178,
+      "rsColdMs": 0.8601250000010623,
+      "rsWarmMeanMs": 0.3552091400001882,
+      "rulesBabel": 6,
+      "rulesRs": 6
+    },
+    "src/tokens.stylex.ts": {
+      "bytes": 2589,
+      "babelColdMs": 5.809640999999829,
+      "babelWarmMeanMs": 2.86564794000009,
+      "rsColdMs": 0.7576960000005784,
+      "rsWarmMeanMs": 0.3452694199999678,
+      "rulesBabel": 2,
+      "rulesRs": 2
+    }
+  },
+  "note": "In-process repeated builds share @stylexjs/unplugin global state; artifacts were rebuilt in fresh processes afterwards."
+}

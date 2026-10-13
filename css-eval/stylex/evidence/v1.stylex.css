@@ -1,0 +1,404 @@
+@property --x-width {
+  syntax: "*";
+  inherits: false
+}
+
+:root, .x1g1e887 {
+  --xq7pwnz: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --x1jejq67: 13px;
+  --x1vjgopi: 17px;
+  --x10378qf: 500;
+  --x8p3zko: 2px;
+  --xh1zsdd: 3px;
+  --xvnia6j: 6px;
+  --x1c0vhsj: 4px;
+  --xjfnh4v: 8px;
+  --x1udgqqb: 12px;
+  --xqfastw: 16px;
+  --x1joijgf: #fff;
+  --x6cdwij: #121923;
+  --x7jczu: #2276fc;
+  --xlesy14: #f2f3f5;
+  --xyzvo5f: #b6b9c3;
+  --xmyloof: #e3e4e8;
+  --x17bzy8m: #f2f3f5;
+  --x4kambc: #e3e4e8;
+  --xq5asau: #d4d6dc;
+  --x1gvybv2: #121923;
+  --xuobk4w: #f2f3f5;
+  --x1m0kh5x: #e3e4e8;
+  --x1m64j8w: #121923;
+  --xx6d4aw: #d4d6dc;
+  --xdffpmi: #2276fc;
+  --x1ytf0fx: #1e61cd;
+  --xqkybhl: #1a4d9e;
+  --x1u2xjt0: #fff;
+  --x1ot3ec4: #e8f0ff;
+  --x1lb2ex6: #d1e1fe;
+  --x10jj3lc: #1e61cd;
+  --x1acex0z: #2276fc;
+  --x1wh940x: #3ab564;
+  --x1vljn02: #2f9552;
+  --xmhgzeg: #267a43;
+  --x94d8r2: #fff;
+  --xgicevc: #e6f8ec;
+  --xozvhu3: #cdf1d9;
+  --x1u3ylk4: #2f9552;
+  --x1kfa9xt: #3ab564;
+  --x1cpxa04: #fbd024;
+  --x1jyiwkz: #d9b31f;
+  --xdc4f3r: #b7961b;
+  --x1hbkt7m: #121923;
+  --x18s7qa7: #fff8d6;
+  --x1vr5dpc: #fff0ad;
+  --xwn1enm: #8a6f0f;
+  --x15ii750: #d9b31f;
+  --xmt4pbn: #f03e2f;
+  --xzfndhd: #cc3829;
+  --xazrf4l: #a83125;
+  --xaplnie: #fff;
+  --x1f2r7i4: #fdeae8;
+  --xps4rk9: #fbd4d1;
+  --x12t9e6c: #cc3829;
+  --xmqmf7e: #f03e2f;
+}
+
+:root, .xmfpx0s {
+  --xzklcfy: var(--x17bzy8m);
+  --xrrn4ij: var(--x4kambc);
+  --xtk2ol1: var(--xq5asau);
+  --xii20pu: var(--x1gvybv2);
+  --xmg98v0: var(--xuobk4w);
+  --x1wi9sum: var(--x1m0kh5x);
+  --x1tab84n: var(--x1m64j8w);
+  --x1vrepkv: var(--xx6d4aw);
+}
+
+.x19bo577.x19bo577, .x19bo577.x19bo577:root {
+  --x1joijgf: #13141b;
+  --x15ii750: #d9b31f;
+  --x1cpxa04: #fbd024;
+  --xdc4f3r: #b7961b;
+  --x1jyiwkz: #d9b31f;
+  --x1hbkt7m: #1a1503;
+  --xwn1enm: #fbd024;
+  --x18s7qa7: #2b2608;
+  --x1vr5dpc: #3d350b;
+  --xmqmf7e: #f36458;
+  --xmt4pbn: #f36458;
+  --xazrf4l: #cc3829;
+  --xzfndhd: #f03e2f;
+  --xaplnie: #1d0806;
+  --x12t9e6c: #f7918a;
+  --x1f2r7i4: #2e1210;
+  --xps4rk9: #421a16;
+  --xx6d4aw: #383c52;
+  --x17bzy8m: #1d1f2a;
+  --xq5asau: #383c52;
+  --x4kambc: #2a2d3d;
+  --x1gvybv2: #e6e8ee;
+  --x1m64j8w: #e6e8ee;
+  --xuobk4w: #1d1f2a;
+  --x1m0kh5x: #2a2d3d;
+  --xmyloof: #2a2d3d;
+  --xlesy14: #1d1f2a;
+  --xyzvo5f: #5a5f73;
+  --x6cdwij: #e6e8ee;
+  --x7jczu: #4e91fd;
+  --x1kfa9xt: #43d675;
+  --x1wh940x: #43d675;
+  --xmhgzeg: #2f9552;
+  --x1vljn02: #3ab564;
+  --x94d8r2: #07170d;
+  --x1u3ylk4: #6fe39a;
+  --xgicevc: #102a19;
+  --xozvhu3: #153b22;
+  --x1acex0z: #4e91fd;
+  --xdffpmi: #4e91fd;
+  --xqkybhl: #1e61cd;
+  --x1ytf0fx: #2276fc;
+  --x1u2xjt0: #0b1526;
+  --x10jj3lc: #7fb0fe;
+  --x1ot3ec4: #152849;
+  --x1lb2ex6: #1a3663;
+}
+
+.xojz9ag.xojz9ag, .xojz9ag.xojz9ag:root {
+  --x1vrepkv: var(--x15ii750);
+  --xzklcfy: var(--x1cpxa04);
+  --xtk2ol1: var(--xdc4f3r);
+  --xrrn4ij: var(--x1jyiwkz);
+  --xii20pu: var(--x1hbkt7m);
+  --x1tab84n: var(--xwn1enm);
+  --xmg98v0: var(--x18s7qa7);
+  --x1wi9sum: var(--x1vr5dpc);
+}
+
+.xw2wob7.xw2wob7, .xw2wob7.xw2wob7:root {
+  --x1vrepkv: var(--x1acex0z);
+  --xzklcfy: var(--xdffpmi);
+  --xtk2ol1: var(--xqkybhl);
+  --xrrn4ij: var(--x1ytf0fx);
+  --xii20pu: var(--x1u2xjt0);
+  --x1tab84n: var(--x10jj3lc);
+  --xmg98v0: var(--x1ot3ec4);
+  --x1wi9sum: var(--x1lb2ex6);
+}
+
+.xow110h.xow110h, .xow110h.xow110h:root {
+  --x1vrepkv: var(--x1kfa9xt);
+  --xzklcfy: var(--x1wh940x);
+  --xtk2ol1: var(--xmhgzeg);
+  --xrrn4ij: var(--x1vljn02);
+  --xii20pu: var(--x94d8r2);
+  --x1tab84n: var(--x1u3ylk4);
+  --xmg98v0: var(--xgicevc);
+  --x1wi9sum: var(--xozvhu3);
+}
+
+.xltwagc.xltwagc, .xltwagc.xltwagc:root {
+  --x1vrepkv: var(--xmqmf7e);
+  --xzklcfy: var(--xmt4pbn);
+  --xtk2ol1: var(--xazrf4l);
+  --xrrn4ij: var(--xzfndhd);
+  --xii20pu: var(--xaplnie);
+  --x1tab84n: var(--x12t9e6c);
+  --xmg98v0: var(--x1f2r7i4);
+  --x1wi9sum: var(--xps4rk9);
+}
+
+.x2utbif.x2utbif, .x2utbif.x2utbif:root {
+  --x1vrepkv: var(--xx6d4aw);
+  --xzklcfy: var(--x17bzy8m);
+  --xtk2ol1: var(--xq5asau);
+  --xrrn4ij: var(--x4kambc);
+  --xii20pu: var(--x1gvybv2);
+  --x1tab84n: var(--x1m64j8w);
+  --xmg98v0: var(--xuobk4w);
+  --x1wi9sum: var(--x1m0kh5x);
+}
+
+.x1ghz6dp:not(#\#) {
+  margin: 0;
+}
+
+.x1717udv:not(#\#) {
+  padding: 0;
+}
+
+.x118qlua:not(#\#) {
+  padding: var(--x1c0vhsj);
+}
+
+.xzza1ct:not(#\#) {
+  padding: var(--x1udgqqb);
+}
+
+.xaxm6r5:not(#\#) {
+  padding: var(--xjfnh4v);
+}
+
+.x1ym872c:not(#\#) {
+  padding: var(--xqfastw);
+}
+
+.x2u8bby:not(#\#):not(#\#) {
+  border-radius: 0;
+}
+
+.x1pjcqnp:not(#\#):not(#\#) {
+  border-radius: inherit;
+}
+
+.x1olkf8y:not(#\#):not(#\#) {
+  border-radius: var(--x8p3zko);
+}
+
+.xqq08g0:not(#\#):not(#\#) {
+  border-radius: var(--xh1zsdd);
+}
+
+.x1f01s7s:not(#\#):not(#\#) {
+  border-radius: var(--xvnia6j);
+}
+
+.xng3xce:not(#\#):not(#\#) {
+  border-style: none;
+}
+
+.xb3r6kr:not(#\#):not(#\#) {
+  overflow: hidden;
+}
+
+.x1hl2dhg:not(#\#):not(#\#) {
+  text-decoration: none;
+}
+
+.x6s0dn4:not(#\#):not(#\#):not(#\#) {
+  align-items: center;
+}
+
+.xjyslct:not(#\#):not(#\#):not(#\#) {
+  appearance: none;
+}
+
+.xjbqb8w:not(#\#):not(#\#):not(#\#) {
+  background-color: #0000;
+}
+
+.x1k4vkkg:not(#\#):not(#\#):not(#\#) {
+  background-color: var(--x1wi9sum);
+}
+
+.x1unqq7c:not(#\#):not(#\#):not(#\#) {
+  background-color: var(--xlesy14);
+}
+
+.xmrfbj3:not(#\#):not(#\#):not(#\#) {
+  background-color: var(--xtk2ol1);
+}
+
+.xmhrcog:not(#\#):not(#\#):not(#\#) {
+  background-color: var(--xzklcfy);
+}
+
+.x1fk98uv:not(#\#):not(#\#):not(#\#) {
+  box-shadow: inset 0 0 0 1px var(--x1vrepkv);
+}
+
+.x1n5m0lp:not(#\#):not(#\#):not(#\#) {
+  box-shadow: inset 0 0 0 1px var(--xmyloof);
+}
+
+.x1gnnqk1:not(#\#):not(#\#):not(#\#) {
+  box-shadow: none;
+}
+
+.x9f619:not(#\#):not(#\#):not(#\#) {
+  box-sizing: border-box;
+}
+
+.xngkdm4:not(#\#):not(#\#):not(#\#) {
+  color: var(--x1tab84n);
+}
+
+.xd3w7jj:not(#\#):not(#\#):not(#\#) {
+  color: var(--xii20pu);
+}
+
+.x1rpvv64:not(#\#):not(#\#):not(#\#) {
+  color: var(--xyzvo5f);
+}
+
+.x1ypdohk:not(#\#):not(#\#):not(#\#) {
+  cursor: pointer;
+}
+
+.x1lliihq:not(#\#):not(#\#):not(#\#) {
+  display: block;
+}
+
+.x3nfvp2:not(#\#):not(#\#):not(#\#) {
+  display: inline-flex;
+}
+
+.x1t1x2f9:not(#\#):not(#\#):not(#\#) {
+  flex-basis: 0%;
+}
+
+.x1iyjqo2:not(#\#):not(#\#):not(#\#) {
+  flex-grow: 1;
+}
+
+.xs83m0k:not(#\#):not(#\#):not(#\#) {
+  flex-shrink: 1;
+}
+
+.xxv95j5:not(#\#):not(#\#):not(#\#) {
+  font-family: var(--xq7pwnz);
+}
+
+.xzj3xqn:not(#\#):not(#\#):not(#\#) {
+  font-size: var(--x1jejq67);
+}
+
+.x1ko3t5s:not(#\#):not(#\#):not(#\#) {
+  font-weight: var(--x10378qf);
+}
+
+.xhps8mw:not(#\#):not(#\#):not(#\#) {
+  line-height: var(--x1vjgopi);
+}
+
+.x1t137rt:not(#\#):not(#\#):not(#\#) {
+  outline-style: none;
+}
+
+.x1n2onr6:not(#\#):not(#\#):not(#\#) {
+  position: relative;
+}
+
+.xdpxx8g:not(#\#):not(#\#):not(#\#) {
+  text-align: left;
+}
+
+.xlyipyv:not(#\#):not(#\#):not(#\#) {
+  text-overflow: ellipsis;
+}
+
+.x87ps6o:not(#\#):not(#\#):not(#\#) {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.x16dsc37:not(#\#):not(#\#):not(#\#) {
+  vertical-align: top;
+}
+
+.xuxw1ft:not(#\#):not(#\#):not(#\#) {
+  white-space: nowrap;
+}
+
+.xm81fiv:focus-visible:not(#\#):not(#\#):not(#\#) {
+  box-shadow: 0 0 0 0 transparent,0 0 0 1px var(--x1joijgf),0 0 0 3px var(--x7jczu);
+}
+
+.x7jd81h:focus-visible:not(#\#):not(#\#):not(#\#) {
+  box-shadow: inset 0 0 0 1px var(--x1vrepkv),0 0 0 1px var(--x1joijgf),0 0 0 3px var(--x7jczu);
+}
+
+.xtgyt42:disabled:not(#\#):not(#\#):not(#\#) {
+  cursor: default;
+}
+
+.xpfrpo8:active:not(#\#):not(#\#):not(#\#) {
+  background-color: var(--x1wi9sum);
+}
+
+.x1w2etyo:active:not(#\#):not(#\#):not(#\#) {
+  background-color: var(--xtk2ol1);
+}
+
+@media (hover: hover) {
+  .x1e0oyos.x1e0oyos:hover:not(#\#):not(#\#):not(#\#) {
+    background-color: var(--xmg98v0);
+  }
+
+  .x130la7q.x130la7q:hover:not(#\#):not(#\#):not(#\#) {
+    background-color: var(--xrrn4ij);
+  }
+}
+
+.xeuugli:not(#\#):not(#\#):not(#\#):not(#\#) {
+  min-width: 0;
+}
+
+.x1hz3ggw:not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: stretch;
+}
+
+.x5lhr3w:not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: var(--x-width);
+}
