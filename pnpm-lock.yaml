@@ -458,8 +458,8 @@ importers:
   apps/studio:
     dependencies:
       '@sanity/code-input':
-        specifier: ^7.3.10
-        version: 7.3.10(2371d93adcc091f3529d13f5723ecf67)
+        specifier: ^7.3.11
+        version: 7.3.11(2371d93adcc091f3529d13f5723ecf67)
       '@sanity/icons':
         specifier: 'catalog:'
         version: 5.2.3(react@19.3.0)
@@ -3739,8 +3739,8 @@ packages:
     resolution: {integrity: sha512-V6kFNH6xvz29ot66zTVVyzZ34dIGzVJHzQJXEV2ljGVZEelHRoMayhErsTDac/ZR7ej8Spz39qEMYCaJWg176g==}
     engines: {node: '>=22.12.0'}
 
-  '@sanity/code-input@7.3.10':
-    resolution: {integrity: sha512-6PZATvkw/uk1BZO06dCfK2CH+NvklWh5ihSNC284+b6poCjAJE771Qbklsdzdu5H21J8/ic7ZuJpywhjvLCJyw==}
+  '@sanity/code-input@7.3.11':
+    resolution: {integrity: sha512-7XSQ466DIDwZxidWNe0ZC+MsMxpNL8RKwX25DThxCzGS3/NhI6/vbcdmIWTZZIDIO9yypfF4DGCIGAsJfuGR6Q==}
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       react: ^19.3.0
@@ -11341,7 +11341,7 @@ snapshots:
     transitivePeerDependencies:
       - vitest
 
-  '@sanity/code-input@7.3.10(2371d93adcc091f3529d13f5723ecf67)':
+  '@sanity/code-input@7.3.11(2371d93adcc091f3529d13f5723ecf67)':
     dependencies:
       '@codemirror/lang-html': 6.4.12
       '@codemirror/lang-java': 6.0.2
