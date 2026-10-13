@@ -1,0 +1,39 @@
+{
+  "name": "@yak-eval/ui-v1",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./unsafe": "./dist-unsafe/index.js",
+    "./unsafe.css": "./dist-unsafe/styles.css",
+    "./tsdown": "./dist-tsdown/index.js",
+    "./tsdown.css": "./dist-tsdown/index.css"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "vite build",
+    "build:unsafe": "YAK_UNSAFE=1 vite build",
+    "build:tsdown": "tsdown"
+  },
+  "dependencies": {
+    "next-yak": "catalog:"
+  },
+  "peerDependencies": {
+    "react": ">=19",
+    "react-dom": ">=19"
+  },
+  "devDependencies": {
+    "@swc/core": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "tsdown": "catalog:",
+    "vite": "catalog:"
+  }
+}

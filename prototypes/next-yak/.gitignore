@@ -1,0 +1,7 @@
+node_modules
+dist
+dist-unsafe
+dist-tsdown
+test-results
+playwright-report
+.swc

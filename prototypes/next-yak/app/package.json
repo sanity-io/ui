@@ -1,0 +1,23 @@
+{
+  "name": "@yak-eval/app",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview --port 4173 --strictPort",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "@yak-eval/ui-v1": "workspace:*",
+    "@yak-eval/ui-v2": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@vitejs/plugin-react": "catalog:",
+    "vite": "catalog:"
+  }
+}

@@ -1,0 +1,91 @@
+/* Page chrome only — nothing here styles the buttons */
+:root {
+  color-scheme: light;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 24px;
+  background: #f6f7f9;
+  color: #262b36;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0 0 8px;
+}
+
+h2 {
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+h3 {
+  font-size: 13px;
+  margin: 0 0 8px;
+}
+
+.description {
+  max-width: 72ch;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.showcase {
+  min-width: 0;
+}
+
+.showcase [data-ui='ThemeProvider'] {
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.label {
+  width: 56px;
+  flex: none;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+.diagnostics {
+  margin-top: 24px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e1e4ea;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.diagnostics dt {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.diagnostics dd {
+  margin: 4px 0 0;
+  word-break: break-word;
+}
