@@ -13,3 +13,5 @@ packages:
 
 # oxc-parser / oxc-resolver ship prebuilt napi binaries through optional
 # dependencies; nothing here needs a postinstall build.
+minimumReleaseAgeExclude:
+  - styled-components@6.6.0

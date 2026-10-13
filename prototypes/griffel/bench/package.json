@@ -1,5 +1,22 @@
 {
   "name": "@css-eval/bench",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "description": "Metrics for the report: cold/warm compile time, CSS size (raw/gzip/brotli), runtime JS size of Griffel vs Compiled vs the current styled-components baseline",
+  "type": "module",
+  "scripts": {
+    "bench": "node bench.mjs"
+  },
+  "devDependencies": {
+    "@compiled/react": "^2.0.0",
+    "@griffel/react": "^1.7.8",
+    "@griffel/transform": "^3.0.9",
+    "@griffel/vite-plugin": "^1.0.1",
+    "@vanilla-extract/dynamic": "^2.1.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "rolldown": "^1.2.13",
+    "styled-components": "^6.6.0",
+    "vite": "^8.3.4"
+  }
 }

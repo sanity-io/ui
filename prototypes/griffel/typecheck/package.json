@@ -1,5 +1,17 @@
 {
   "name": "@css-eval/typecheck",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "description": "Type-safety probes: wrong tokens, variants, slots and values must fail tsc (self-verifying via @ts-expect-error); documented gaps compile on purpose",
+  "type": "module",
+  "scripts": {
+    "test": "tsc -p tsconfig.json && echo 'typecheck: every @ts-expect-error fired, every documented gap compiled'"
+  },
+  "devDependencies": {
+    "@griffel/react": "^1.7.8",
+    "@types/react": "^19.3.0",
+    "griffel-button": "link:../button",
+    "react": "^19.3.0",
+    "typescript": "7.0.2"
+  }
 }

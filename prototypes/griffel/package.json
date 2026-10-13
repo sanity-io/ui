@@ -5,7 +5,7 @@
   "description": "SAPP-4639 prototype: @sanity/ui-style Button on Griffel (atomic CSS-in-JS), two versions on one page",
   "scripts": {
     "build": "pnpm --filter ./tsdown-plugin build && pnpm --filter ./button build && pnpm --filter ./button-v2 build",
-    "pack": "rm -f app/tarballs/*.tgz && pnpm --filter ./button pack --pack-destination ../app/tarballs && pnpm --filter ./button-v2 pack --pack-destination ../app/tarballs",
+    "pack:tarballs": "rm -f app/tarballs/*.tgz && (cd button && pnpm pack --pack-destination ../app/tarballs) && (cd button-v2 && pnpm pack --pack-destination ../app/tarballs)",
     "test": "pnpm --filter ./app test",
     "typecheck": "pnpm --filter ./typecheck test",
     "bench": "pnpm --filter ./bench bench"

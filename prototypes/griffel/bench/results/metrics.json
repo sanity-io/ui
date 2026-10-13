@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-10-13T16:42:22.716Z",
+  "node": "v22.14.0",
+  "transform": {
+    "file": "button/src/Button.tsx (4 style calls, 1 reset, imports tokens from ./theme → VM evaluation)",
+    "coldFirstCallMs": 24.996111999999982,
+    "coldProcessMs": 242.42622799999998,
+    "warm": {
+      "medianMs": 4.0511730000000625,
+      "minMs": 3.3328180000000884,
+      "iterations": 50
+    }
+  },
+  "builds": {
+    "tsdown button v1 (clean dist, fresh process)": 585.3487130000001,
+    "tsdown button v1 (dist present, fresh process)": 593.5155019999997,
+    "tsdown button v2 incl. bundling the Griffel runtime (clean)": 769.0688229999996,
+    "vite build app, runtime mode (no plugin)": 479.7242750000005,
+    "vite build app, @griffel/vite-plugin extraction": 602.9690919999994,
+    "vitePluginStats": "32 files — [Griffel] Transform: 31ms (AST 8ms | VM 22ms), avg 979μs/file, AST eval hit 96.9%",
+    "note": "Wall-clock of the whole CLI process (node start, config load, bundling, d.ts emit). tsdown has no persistent cache, so \"warm\" only differs by the OS file cache."
+  },
+  "css": {
+    "button v1 dist/styles.css": {
+      "raw": 5120,
+      "gzip": 1445,
+      "brotli": 1205,
+      "rules": 86
+    },
+    "button v2 dist/styles.css": {
+      "raw": 5171,
+      "gzip": 1481,
+      "brotli": 1244,
+      "rules": 88
+    },
+    "v1 ∪ v2 deduplicated (what two versions on one page insert)": {
+      "raw": 5468,
+      "gzip": 1557,
+      "brotli": 1304,
+      "rules": 95
+    },
+    "note": "Atomic CSS grows with distinct declarations, not with components: a second version only adds the rules whose declarations changed."
+  },
+  "runtime": {
+    "@griffel/react — full (makeStyles at runtime: stylis, rtl-css-js, hashing)": {
+      "raw": 39394,
+      "gzip": 13424,
+      "brotli": 12147
+    },
+    "@griffel/react — what precompiled (__styles) libraries need": {
+      "raw": 11000,
+      "gzip": 4631,
+      "brotli": 4257
+    },
+    "@griffel/react — extracted mode (__css, no DOM insertion)": {
+      "raw": 2516,
+      "gzip": 1167,
+      "brotli": 1044
+    },
+    "@compiled/react/runtime (ax, CC/CS style insertion)": {
+      "raw": 3798,
+      "gzip": 1775,
+      "brotli": 1577
+    },
+    "@compiled/react — full": {
+      "raw": 3854,
+      "gzip": 1119,
+      "brotli": 949
+    },
+    "styled-components 6 (current @sanity/ui runtime, baseline)": {
+      "raw": 24793,
+      "gzip": 9529,
+      "brotli": 8715
+    },
+    "@vanilla-extract/dynamic (current, for inline vars)": {
+      "raw": 1142,
+      "gzip": 628,
+      "brotli": 526
+    },
+    "note": "rolldown, minify, NODE_ENV=production, react/react-dom external (styled-components additionally has react-is and stylis external, which it ships with — its real cost is higher)."
+  },
+  "libraryOutput": {
+    "button v1 dist/index.js (Griffel runtime external)": {
+      "raw": 14239,
+      "gzip": 4807,
+      "brotli": 4075
+    },
+    "button v2 dist/index.js (Griffel runtime bundled)": {
+      "raw": 43926,
+      "gzip": 11988,
+      "brotli": 10418
+    }
+  }
+}
