@@ -1,0 +1,38 @@
+{
+  "versions": {
+    "@pigment-css/react": "0.0.31",
+    "@pigment-css/vite-plugin": "0.0.31",
+    "vite": "6.4.4"
+  },
+  "build": {
+    "runs": 5,
+    "wallMedianMs": 878,
+    "wallMinMs": 863
+  },
+  "output": {
+    "css": {
+      "raw": 3523,
+      "gzip": 882,
+      "brotli": 708
+    },
+    "js": {
+      "raw": 4199,
+      "gzip": 1084,
+      "brotli": 929
+    }
+  },
+  "runtime": [
+    {
+      "label": "@pigment-css/react styled (deps bundled: clsx, @emotion/is-prop-valid)",
+      "raw": 6981,
+      "gzip": 3365,
+      "brotli": 2937
+    },
+    {
+      "label": "@pigment-css/react styled + css + sx",
+      "raw": 8053,
+      "gzip": 3690,
+      "brotli": 3254
+    }
+  ]
+}
