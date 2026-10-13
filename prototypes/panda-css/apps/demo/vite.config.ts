@@ -11,5 +11,11 @@ export default defineConfig({
     // Keep the CSS readable and un-merged so the proof can inspect it.
     minify: false,
     cssMinify: false,
+    rollupOptions: {
+      input: {
+        index: 'index.html',
+        skew: 'skew.html',
+      },
+    },
   },
 })

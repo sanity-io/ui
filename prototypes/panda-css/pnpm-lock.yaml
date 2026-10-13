@@ -49,6 +49,43 @@ importers:
         specifier: ^8.3.4
         version: 8.3.4
 
+  apps/vite-panda-app:
+    dependencies:
+      '@sanity-eval/panda-button-v1':
+        specifier: workspace:*
+        version: link:../../packages/button-v1
+      react:
+        specifier: ^19.3.0
+        version: 19.3.0
+      react-dom:
+        specifier: ^19.3.0
+        version: 19.3.0(react@19.3.0)
+    devDependencies:
+      '@pandacss/dev':
+        specifier: ^2.2.0
+        version: 2.2.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(postcss@8.5.30)
+      '@pandacss/preset-base':
+        specifier: ^2.2.0
+        version: 2.2.0
+      '@pandacss/vite':
+        specifier: ^2.2.0
+        version: 2.2.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(vite@8.3.4)
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: ^19.3.0
+        version: 19.3.0(@types/react@19.3.0)
+      '@vitejs/plugin-react':
+        specifier: ^6.1.2
+        version: 6.1.2(vite@8.3.4)
+      typescript:
+        specifier: 7.0.2
+        version: 7.0.2
+      vite:
+        specifier: ^8.3.4
+        version: 8.3.4
+
   packages/button-v1:
     dependencies:
       clsx:
@@ -315,6 +352,12 @@ packages:
   '@pandacss/types@2.2.0':
     resolution: {integrity: sha512-XeUt/mWUkghn4oyKqcFMz6whTr4SHxmiKksNVNX3EAB1ceyrvQ68tHrYWNK59NtBrRPeJxSOibHhZWVRqHcuvQ==}
     engines: {node: '>=22'}
+
+  '@pandacss/vite@2.2.0':
+    resolution: {integrity: sha512-fNyyujbfb8DJbFtNHyVU64viZBsTc1fXIpyz5eT7w0P8bNptybcDIIBVkb8EGML76Ggkhb8tQsRIOme0LAUyDQ==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      vite: '>=6.0.0'
 
   '@parcel/watcher-android-arm64@2.5.6':
     resolution: {integrity: sha512-YQxSS34tPF/6ZG7r/Ih9xy+kP/WwediEUsqmtf0cuCV5TPPKw/PQHRhueUo6JdeFJaqV3pyjm0GdYjZotbRt/A==}
@@ -1762,6 +1805,18 @@ snapshots:
       - '@emnapi/runtime'
 
   '@pandacss/types@2.2.0': {}
+
+  '@pandacss/vite@2.2.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(vite@8.3.4)':
+    dependencies:
+      '@pandacss/compiler': 2.2.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler-shared': 2.2.0
+      '@pandacss/transformer': 2.2.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(vite@8.3.4)
+      vite: 8.3.4
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+      - rollup
+      - webpack
 
   '@parcel/watcher-android-arm64@2.5.6':
     optional: true

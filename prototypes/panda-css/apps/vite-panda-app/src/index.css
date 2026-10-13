@@ -1,0 +1,3 @@
+/* The Vite plugin treats the stylesheet that declares Panda's layers as the
+   generated CSS root and injects the extracted CSS here. */
+@layer reset, base, tokens, recipes, utilities;

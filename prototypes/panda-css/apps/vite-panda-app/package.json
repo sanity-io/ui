@@ -1,0 +1,27 @@
+{
+  "name": "sanity-css-eval-panda-vite-app",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Toolchain check: an APP that runs Panda itself through @pandacss/vite (Vite 8 / rolldown-vite) with source transforms on, alongside the pre-built Button library.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "check": "node check.mjs"
+  },
+  "dependencies": {
+    "@sanity-eval/panda-button-v1": "workspace:*",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^2.2.0",
+    "@pandacss/preset-base": "^2.2.0",
+    "@pandacss/vite": "^2.2.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "typescript": "7.0.2",
+    "vite": "^8.3.4"
+  }
+}

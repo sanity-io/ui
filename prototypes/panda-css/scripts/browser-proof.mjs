@@ -213,6 +213,44 @@ await page.screenshot({path: screenshot, fullPage: true})
 const artifactsDir = '/opt/cursor/artifacts'
 if (existsSync(artifactsDir)) copyFileSync(screenshot, join(artifactsDir, 'panda-two-versions-one-page.png'))
 
+// Version skew (SAPP-4639 shape): v2 JavaScript with ONLY v1's stylesheet.
+// A v2 class either exists in v1's CSS with the identical rule, or has no rule.
+// So colors (shared classes + inline theme vars) must be v2's, and changed
+// structural properties must fall back to UA defaults — never to v1's values.
+const skewPage = await browser.newPage({viewport: {width: 1280, height: 600}})
+const skewErrors = []
+skewPage.on('pageerror', (e) => skewErrors.push(String(e)))
+await skewPage.goto(`http://127.0.0.1:${port}/skew.html`)
+await skewPage.waitForSelector('[data-testid="skew-critical-bleed"]')
+const skewToneBg = {
+  default: palette.gray800,
+  primary: palette.blue600,
+  positive: palette.green500,
+  caution: palette.yellow500,
+  critical: palette.red500,
+}
+const skew = {assertions: [], failures: 0, sample: null}
+for (const [tone, bg] of Object.entries(skewToneBg)) {
+  const r = await skewPage.evaluate((id) => {
+    const el = document.querySelector(`[data-testid="${id}"]`)
+    const cs = getComputedStyle(el)
+    return {backgroundColor: cs.backgroundColor, paddingLeft: cs.paddingLeft, fontWeight: cs.fontWeight, columnGap: cs.columnGap, borderTopLeftRadius: cs.borderTopLeftRadius}
+  }, `skew-${tone}-default`)
+  const push = (label, ok, actual) => {
+    if (!ok) skew.failures++
+    skew.assertions.push({label, ok, actual})
+  }
+  push(`skew ${tone}: background is v2's own color (shared class + inline theme var)`, r.backgroundColor === hex(bg), r.backgroundColor)
+  push(`skew ${tone}: padding-inline is NOT v1's 12px (v2 class has no rule in v1 CSS → UA default)`, r.paddingLeft !== '12px' && r.paddingLeft !== '16px', r.paddingLeft)
+  push(`skew ${tone}: font-weight is NOT v1's 500`, r.fontWeight !== '500' && r.fontWeight !== '600', r.fontWeight)
+  push(`skew ${tone}: gap is NOT v1's 8px`, r.columnGap !== '8px' && r.columnGap !== '12px', r.columnGap)
+  if (tone === 'primary') skew.sample = r
+}
+const skewShot = join(resultsDir, 'version-skew-v2-js-with-v1-css.png')
+await skewPage.screenshot({path: skewShot, fullPage: true})
+if (existsSync(artifactsDir)) copyFileSync(skewShot, join(artifactsDir, 'panda-version-skew-v2-js-with-v1-css.png'))
+skew.pageErrors = skewErrors
+
 await browser.close()
 server.close()
 
@@ -222,6 +260,7 @@ const report = {
   failures,
   classNameOverlap: overlap,
   pitfalls,
+  versionSkew: skew,
   consoleErrors,
 }
 writeFileSync(join(resultsDir, 'browser-proof.json'), JSON.stringify(report, null, 2) + '\n')
@@ -245,12 +284,18 @@ console.log(
 )
 console.log(`  console errors: ${consoleErrors.length}`)
 console.log(`  screenshot: ${screenshot}`)
+console.log(`  version skew (v2 JS + v1 CSS only): ${skew.assertions.length - skew.failures}/${skew.assertions.length} assertions passed`)
+for (const a of skew.assertions) if (!a.ok) console.log(`    FAIL ${a.label}: got ${a.actual}`)
+console.log(`    sample computed style of v2 primary/default under v1 CSS: ${JSON.stringify(skew.sample)}`)
+console.log(`    screenshot: ${skewShot}`)
 
 const ok =
   failures === 0 &&
   overlap.sharedWithDifferentRules.length === 0 &&
   consoleErrors.length === 0 &&
   badgeClass.sameClassName &&
-  badgeClass.collided
+  badgeClass.collided &&
+  skew.failures === 0 &&
+  skewErrors.length === 0
 console.log(ok ? '\nRESULT: PASS' : '\nRESULT: FAIL')
 process.exit(ok ? 0 : 1)

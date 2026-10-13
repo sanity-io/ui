@@ -475,5 +475,118 @@
       "collided": true
     }
   },
+  "versionSkew": {
+    "assertions": [
+      {
+        "label": "skew default: background is v2's own color (shared class + inline theme var)",
+        "ok": true,
+        "actual": "rgb(37, 40, 55)"
+      },
+      {
+        "label": "skew default: padding-inline is NOT v1's 12px (v2 class has no rule in v1 CSS → UA default)",
+        "ok": true,
+        "actual": "6px"
+      },
+      {
+        "label": "skew default: font-weight is NOT v1's 500",
+        "ok": true,
+        "actual": "400"
+      },
+      {
+        "label": "skew default: gap is NOT v1's 8px",
+        "ok": true,
+        "actual": "normal"
+      },
+      {
+        "label": "skew primary: background is v2's own color (shared class + inline theme var)",
+        "ok": true,
+        "actual": "rgb(42, 79, 217)"
+      },
+      {
+        "label": "skew primary: padding-inline is NOT v1's 12px (v2 class has no rule in v1 CSS → UA default)",
+        "ok": true,
+        "actual": "6px"
+      },
+      {
+        "label": "skew primary: font-weight is NOT v1's 500",
+        "ok": true,
+        "actual": "400"
+      },
+      {
+        "label": "skew primary: gap is NOT v1's 8px",
+        "ok": true,
+        "actual": "normal"
+      },
+      {
+        "label": "skew positive: background is v2's own color (shared class + inline theme var)",
+        "ok": true,
+        "actual": "rgb(47, 166, 102)"
+      },
+      {
+        "label": "skew positive: padding-inline is NOT v1's 12px (v2 class has no rule in v1 CSS → UA default)",
+        "ok": true,
+        "actual": "6px"
+      },
+      {
+        "label": "skew positive: font-weight is NOT v1's 500",
+        "ok": true,
+        "actual": "400"
+      },
+      {
+        "label": "skew positive: gap is NOT v1's 8px",
+        "ok": true,
+        "actual": "normal"
+      },
+      {
+        "label": "skew caution: background is v2's own color (shared class + inline theme var)",
+        "ok": true,
+        "actual": "rgb(217, 158, 15)"
+      },
+      {
+        "label": "skew caution: padding-inline is NOT v1's 12px (v2 class has no rule in v1 CSS → UA default)",
+        "ok": true,
+        "actual": "6px"
+      },
+      {
+        "label": "skew caution: font-weight is NOT v1's 500",
+        "ok": true,
+        "actual": "400"
+      },
+      {
+        "label": "skew caution: gap is NOT v1's 8px",
+        "ok": true,
+        "actual": "normal"
+      },
+      {
+        "label": "skew critical: background is v2's own color (shared class + inline theme var)",
+        "ok": true,
+        "actual": "rgb(230, 71, 71)"
+      },
+      {
+        "label": "skew critical: padding-inline is NOT v1's 12px (v2 class has no rule in v1 CSS → UA default)",
+        "ok": true,
+        "actual": "6px"
+      },
+      {
+        "label": "skew critical: font-weight is NOT v1's 500",
+        "ok": true,
+        "actual": "400"
+      },
+      {
+        "label": "skew critical: gap is NOT v1's 8px",
+        "ok": true,
+        "actual": "normal"
+      }
+    ],
+    "failures": 0,
+    "sample": {
+      "backgroundColor": "rgb(230, 71, 71)",
+      "paddingLeft": "6px",
+      "fontWeight": "400",
+      "columnGap": "normal",
+      "borderTopLeftRadius": "0px"
+    },
+    "pageErrors": []
+  },
   "consoleErrors": []
 }
