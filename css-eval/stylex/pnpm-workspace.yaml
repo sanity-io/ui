@@ -3,3 +3,4 @@
 # dependencies never touch the main lockfile.
 packages:
   - '.'
+  - 'next-smoke'

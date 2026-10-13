@@ -25,7 +25,7 @@ export interface ButtonProps extends ComponentProps<'button'> {
    * StyleX styles merged last (the StyleX convention for a style prop). The type
    * forbids overriding `display` and `position`.
    */
-  xstyle?: StyleXStylesWithout<{display: unknown; position: unknown}>
+  xstyle?: StyleXStylesWithout<{display: string; position: string}>
 }
 
 const focusRing = (border: string) =>

@@ -21,6 +21,10 @@ export const gaps = stylex.create({
   e: {zIndex: 'high'},
 })
 
+// Docs mismatch: the documented `StyleXStylesWithout<{display: unknown}>` does
+// not satisfy the type's own constraint under `strict` (`unknown` is not
+// `{} | null`); `{display: string}` works and restricts the key just the same.
+
 // A string that happens to be a `var()` reference is accepted anywhere a token
 // is — tokens are `string`-typed `var(--hash)` references, not branded types.
 // (StyleX `types.color()` etc. exist for typed `@property` declarations.)

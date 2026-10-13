@@ -1,0 +1,22 @@
+{
+  "name": "css-eval-stylex-next-smoke",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Next.js 16 (Turbopack) + React Server Components consuming the precompiled StyleX library with zero StyleX build config.",
+  "scripts": {
+    "build": "next build",
+    "start": "next start -p 3077"
+  },
+  "dependencies": {
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "stylex-button-v1": "link:../packages/button-v1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "5.9.3"
+  }
+}

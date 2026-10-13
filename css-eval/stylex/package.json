@@ -8,13 +8,14 @@
     "setup": "pnpm install && pnpm build:libs",
     "build:libs": "node scripts/build-libs.mjs",
     "build:app": "vite build app",
+    "build:next": "pnpm --filter css-eval-stylex-next-smoke build",
     "dev": "vite app",
     "test": "playwright test",
-    "typecheck": "tsc -p typecheck/tsconfig.json",
+    "typecheck": "tsc -p typecheck/tsconfig.json && tsc -p app/tsconfig.json",
     "bench": "node scripts/bench.mjs",
     "measure": "node scripts/measure.mjs",
-    "hazard": "node scripts/hazard-define-vars.mjs",
-    "evidence": "pnpm build:libs && pnpm build:app && pnpm test && pnpm typecheck && pnpm hazard && pnpm bench && pnpm measure"
+    "hazard": "node scripts/hazard-define-vars.mjs && node scripts/specificity-groups.mjs",
+    "evidence": "pnpm build:libs && pnpm build:app && pnpm build:next && pnpm test && pnpm typecheck && pnpm hazard && pnpm bench && pnpm measure"
   },
   "dependencies": {
     "@stylexjs/stylex": "0.19.1",
