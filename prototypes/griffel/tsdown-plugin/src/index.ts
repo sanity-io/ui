@@ -189,10 +189,44 @@ export function griffelTsdownPlugin(options: GriffelPluginOptions = {}): Plugin 
     },
 
     generateBundle() {
-      if (fileName === false || rulesByFile.size === 0) return
+      if (rulesByFile.size === 0) return
+      assertOneMeaningPerClass([...rulesByFile.values()])
+      if (fileName === false) return
       // Same ordering as the runtime's style buckets and as `@griffel/vite-plugin`
       const source = sortCSSRules([...rulesByFile.values()], compareMediaQueries, compareContainerQueries)
       this.emitFile({type: 'asset', fileName, source})
     },
+  }
+}
+
+const GRIFFEL_CLASS = /\.([fr][0-9a-z]+)/
+
+/**
+ * Class names are murmur2 (32-bit) hashes of `salt + selector + at-rules +
+ * property + value`, so two different declarations can only share a name through
+ * a hash collision (p ≈ n²/2³³ for n distinct declarations). Within one build
+ * that is cheap to rule out entirely, so the build fails instead of shipping a
+ * class with two meanings.
+ */
+export function assertOneMeaningPerClass(sets: CSSRulesByBucket[]): void {
+  const meaning = new Map<string, string>()
+  for (const set of sets) {
+    for (const entries of Object.values(set)) {
+      for (const entry of entries) {
+        const rule = typeof entry === 'string' ? entry : entry[0]
+        const className = GRIFFEL_CLASS.exec(rule)?.[1]
+        if (!className) continue
+        // An atomic ("f") class is exactly one rule. A reset ("r") class legitimately
+        // spans several rules (`.r…`, `.r…::after`, `.r…>span`), so it is keyed by selector.
+        const key = className.startsWith('r') ? rule.slice(0, rule.lastIndexOf('{')) : className
+        const previous = meaning.get(key)
+        if (previous !== undefined && previous !== rule) {
+          throw new Error(
+            `Griffel class "${className}" has two meanings in this build (hash collision):\n  ${previous}\n  ${rule}`,
+          )
+        }
+        meaning.set(key, rule)
+      }
+    }
   }
 }

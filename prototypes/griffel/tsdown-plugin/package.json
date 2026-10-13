@@ -11,7 +11,8 @@
     }
   },
   "scripts": {
-    "build": "tsdown"
+    "build": "tsdown",
+    "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
     "@griffel/core": "^1.21.4",

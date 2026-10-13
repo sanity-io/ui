@@ -6,7 +6,7 @@
   "scripts": {
     "build": "pnpm --filter ./tsdown-plugin build && pnpm --filter ./button build && pnpm --filter ./button-v2 build",
     "pack:tarballs": "rm -f app/tarballs/*.tgz && (cd button && pnpm pack --pack-destination ../app/tarballs) && (cd button-v2 && pnpm pack --pack-destination ../app/tarballs)",
-    "test": "pnpm --filter ./app test",
+    "test": "pnpm --filter ./tsdown-plugin test && pnpm --filter ./app test",
     "typecheck": "pnpm --filter ./typecheck test",
     "bench": "pnpm --filter ./bench bench"
   },
