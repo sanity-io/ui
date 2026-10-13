@@ -1,0 +1,15 @@
+# Marks this directory as its own pnpm workspace root, so `pnpm install` here does
+# not climb up to the monorepo's workspace. `lib-v1`/`lib-v2` are deliberately not
+# workspace members: both are published as the same package name
+# (`@css-eval/ve-button`, like two releases of `@sanity/ui`), which a workspace
+# cannot hold twice. They resolve their build tooling from this directory's
+# node_modules through normal upward resolution.
+packages: []
+
+# Mirror the monorepo's release-age exemptions for Sanity-owned tooling.
+minimumReleaseAgeExclude:
+  - '@sanity/*'
+  - '@tsdown/*'
+  - tsdown
+  - lightningcss
+  - lightningcss-*

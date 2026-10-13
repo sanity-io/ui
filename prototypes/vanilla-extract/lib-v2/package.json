@@ -1,0 +1,32 @@
+{
+  "name": "@css-eval/ve-button",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Prototype design-system Button on vanilla-extract (release 2.0.0)",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/version/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/version/index.d.ts",
+      "default": "./dist/version/index.js"
+    },
+    "./styles.css": "./dist/version/styles.css",
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@vanilla-extract/dynamic": "^2.1.5",
+    "@vanilla-extract/recipes": "^0.5.7"
+  },
+  "devDependencies": {
+    "@vanilla-extract/css": "^1.21.3"
+  },
+  "peerDependencies": {
+    "react": "^19.2"
+  }
+}

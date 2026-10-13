@@ -1,0 +1,36 @@
+{
+  "name": "css-eval-vanilla-extract",
+  "version": "0.0.0",
+  "private": true,
+  "description": "CSS eval prototype: vanilla-extract with content-safe class names through upstream features only (the `identifiers` option)",
+  "type": "module",
+  "packageManager": "pnpm@12.11.2",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:upstream-vite": "node scripts/build-upstream-vite.mjs",
+    "compare": "node scripts/compare-css.mjs",
+    "bench": "node scripts/bench.mjs",
+    "sizes": "node scripts/sizes.mjs",
+    "test": "playwright test",
+    "typecheck": "tsc -p typecheck/tsconfig.json",
+    "dev": "vite --config consumer/vite.config.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@sanity/tsdown-config": "^0.28.8",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vanilla-extract/css": "^1.21.3",
+    "@vanilla-extract/dynamic": "^2.1.5",
+    "@vanilla-extract/recipes": "^0.5.7",
+    "@vanilla-extract/vite-plugin": "^5.2.6",
+    "@vitejs/plugin-react": "^6.1.2",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsdown": "^0.23.1",
+    "typescript": "7.0.2",
+    "unrun": "^0.3.1",
+    "vite": "^8.3.4"
+  }
+}
