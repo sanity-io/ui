@@ -1,0 +1,6 @@
+node_modules
+dist
+dist-extract
+# The packed library versions are the inputs of the two-versions test (the root
+# .gitignore drops *.tgz); they are committed so `pnpm install` works from a clone.
+!app/tarballs/*.tgz

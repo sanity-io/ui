@@ -1,0 +1,41 @@
+{
+  "name": "@css-eval/griffel-button",
+  "version": "1.0.0",
+  "private": true,
+  "description": "@sanity/ui-style Button built on Griffel — v1 of the two-versions-on-one-page experiment",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rm -rf dist",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "@griffel/react": "^1.7.8"
+  },
+  "devDependencies": {
+    "@css-eval/tsdown-plugin-griffel": "workspace:*",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsdown": "^0.23.1",
+    "typescript": "7.0.2",
+    "unrun": "^0.3.1"
+  },
+  "peerDependencies": {
+    "react": "^19.2",
+    "react-dom": "^19.2"
+  }
+}

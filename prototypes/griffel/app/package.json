@@ -1,0 +1,32 @@
+{
+  "name": "@css-eval/app",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Consumer app: renders @css-eval/griffel-button v1 and v2 (installed from their packed tarballs) on one page and proves there are no class collisions in a real browser",
+  "type": "module",
+  "scripts": {
+    "build": "vite build && vite build --config vite.extract.config.ts",
+    "preview": "vite preview --port 4173 --strictPort",
+    "test": "pnpm build && node tests/two-versions.test.mjs && vitest run",
+    "test:browser": "node tests/two-versions.test.mjs",
+    "test:node": "vitest run"
+  },
+  "dependencies": {
+    "@griffel/react": "^1.7.8",
+    "griffel-button-v1": "file:tarballs/css-eval-griffel-button-1.0.0.tgz",
+    "griffel-button-v2": "file:tarballs/css-eval-griffel-button-2.0.0.tgz",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@griffel/vite-plugin": "^1.0.1",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "playwright": "^1.64.0",
+    "typescript": "7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.3"
+  }
+}

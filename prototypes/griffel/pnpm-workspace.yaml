@@ -1,0 +1,15 @@
+# Standalone pnpm workspace for the Griffel evaluation prototype (SAPP-4639).
+# It is deliberately NOT part of the repository root workspace: the root
+# `pnpm-workspace.yaml` only lists `apps/*` and `packages/*`, so the root
+# lockfile and the published `@sanity/ui` build are untouched by anything here.
+# Run `pnpm install` from this directory.
+packages:
+  - 'tsdown-plugin'
+  - 'button'
+  - 'button-v2'
+  - 'app'
+  - 'typecheck'
+  - 'bench'
+
+# oxc-parser / oxc-resolver ship prebuilt napi binaries through optional
+# dependencies; nothing here needs a postinstall build.
