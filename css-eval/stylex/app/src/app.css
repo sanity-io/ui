@@ -1,0 +1,8 @@
+/* Global rules stay in plain CSS: StyleX has no `globalStyle()` equivalent.
+   This file also gives the bundle an `index-*.css` asset that
+   @stylexjs/unplugin appends the compiled app rules to. */
+html,
+body {
+  margin: 0;
+  background: #f6f6f8;
+}

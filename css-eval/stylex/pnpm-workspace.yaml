@@ -1,0 +1,5 @@
+# Standalone pnpm root: stops pnpm from treating the repository workspace
+# (../../pnpm-workspace.yaml) as this prototype's root, so the evaluation
+# dependencies never touch the main lockfile.
+packages:
+  - '.'

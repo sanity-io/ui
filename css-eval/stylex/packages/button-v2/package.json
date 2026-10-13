@@ -1,0 +1,34 @@
+{
+  "name": "@sanity-eval/stylex-button",
+  "version": "2.0.0",
+  "description": "StyleX evaluation: a @sanity/ui-style Button published with precompiled CSS (v2: changed + reordered styles)",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tokens.stylex": {
+      "types": "./dist/tokens.stylex.d.ts",
+      "default": "./dist/tokens.stylex.js"
+    },
+    "./styles.css": "./dist/stylex.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown"
+  },
+  "dependencies": {
+    "@stylexjs/stylex": "0.19.1"
+  },
+  "peerDependencies": {
+    "react": "^19"
+  }
+}

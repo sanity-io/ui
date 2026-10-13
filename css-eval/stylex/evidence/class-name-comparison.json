@@ -1,0 +1,62 @@
+{
+  "description": "Class names present in both stylesheets, and whether any of them maps to different declarations (a vanilla-extract style collision).",
+  "v1Rules": 64,
+  "v2Rules": 72,
+  "v1Classes": 63,
+  "v2Classes": 71,
+  "sharedClasses": 29,
+  "v1OnlyClasses": 34,
+  "v2OnlyClasses": 42,
+  "sharedClassesWithDifferentRules": 0,
+  "sharedSample": [
+    {
+      "className": "x1ghz6dp",
+      "rule": ".x1ghz6dp:not(#\\#){margin:0}"
+    },
+    {
+      "className": "x1717udv",
+      "rule": ".x1717udv:not(#\\#){padding:0}"
+    },
+    {
+      "className": "x2u8bby",
+      "rule": ".x2u8bby:not(#\\#):not(#\\#){border-radius:0}"
+    },
+    {
+      "className": "x1pjcqnp",
+      "rule": ".x1pjcqnp:not(#\\#):not(#\\#){border-radius:inherit}"
+    },
+    {
+      "className": "xng3xce",
+      "rule": ".xng3xce:not(#\\#):not(#\\#){border-style:none}"
+    },
+    {
+      "className": "xb3r6kr",
+      "rule": ".xb3r6kr:not(#\\#):not(#\\#){overflow:hidden}"
+    },
+    {
+      "className": "x1hl2dhg",
+      "rule": ".x1hl2dhg:not(#\\#):not(#\\#){text-decoration:none}"
+    },
+    {
+      "className": "x6s0dn4",
+      "rule": ".x6s0dn4:not(#\\#):not(#\\#):not(#\\#){align-items:center}"
+    },
+    {
+      "className": "xjyslct",
+      "rule": ".xjyslct:not(#\\#):not(#\\#):not(#\\#){appearance:none}"
+    },
+    {
+      "className": "xjbqb8w",
+      "rule": ".xjbqb8w:not(#\\#):not(#\\#):not(#\\#){background-color:#0000}"
+    },
+    {
+      "className": "x1gnnqk1",
+      "rule": ".x1gnnqk1:not(#\\#):not(#\\#):not(#\\#){box-shadow:none}"
+    },
+    {
+      "className": "x9f619",
+      "rule": ".x9f619:not(#\\#):not(#\\#):not(#\\#){box-sizing:border-box}"
+    }
+  ],
+  "conflicts": []
+}
