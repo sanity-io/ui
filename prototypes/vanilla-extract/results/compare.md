@@ -5,6 +5,7 @@
 | `default` | 39 | 41 | 36 | 2 | **34** |
 | `version` | 39 | 41 | 0 | 0 | **0** |
 | `version+module` | 39 | 41 | 0 | 0 | **0** |
+| `content` | 38 | 40 | 3 | 3 | **0** |
 
 ## Examples of the same name meaning different rules
 

@@ -13,3 +13,6 @@ minimumReleaseAgeExclude:
   - tsdown
   - lightningcss
   - lightningcss-*
+
+patchedDependencies:
+  '@vanilla-extract/css@1.21.3': patches/@vanilla-extract__css@1.21.3.patch

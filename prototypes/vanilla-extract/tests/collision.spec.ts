@@ -1,4 +1,4 @@
-import {mkdirSync, writeFileSync} from 'node:fs'
+import {mkdirSync, readFileSync, writeFileSync} from 'node:fs'
 import {resolve} from 'node:path'
 
 import {expect, type Page, test} from '@playwright/test'
@@ -104,6 +104,27 @@ for (const mode of ['version', 'version+module']) {
   test(`${mode}-salted identifiers: both releases render exactly as built, no shared names`, async ({page}) => {
     const report = await openMode(page, mode)
     expect(report.sharedClasses).toEqual([])
+    expect(report.deviationsV1).toEqual([])
+    expect(report.deviationsV2).toEqual([])
+    // Sanity-check that the page really renders the two different releases.
+    expect(report.v1.lightPrimaryDefault.bg).toBe(EXPECTED['1.0.0'].primaryBg)
+    expect(report.v2.lightPrimaryDefault.bg).toBe(EXPECTED['2.0.0'].primaryBg)
+    expect(report.v1.lightPrimaryDefault.radius).toBe('3px')
+    expect(report.v2.lightPrimaryDefault.radius).toBe('6px')
+  })
+}
+
+for (const mode of ['content']) {
+  test(`${mode}-hashed identifiers (patched upstream): shared names only where the rules are identical`, async ({page}) => {
+    const report = await openMode(page, mode)
+    // Identical rules (overlay, spinner) are *meant* to share a name across releases…
+    expect(report.sharedClasses.length).toBeGreaterThan(0)
+    const {compareStylesheets} = await import('../scripts/lib/cssIdentifiers.mjs')
+    const cssFor = (lib: string) => readFileSync(resolve(import.meta.dirname, `../${lib}/dist/${mode}/styles.css`), 'utf8')
+    const comparison = compareStylesheets(cssFor('lib-v1'), cssFor('lib-v2'))
+    // …and every shared name carries byte-identical rules in both stylesheets.
+    expect(comparison.conflicting).toEqual([])
+    for (const name of report.sharedClasses) expect(comparison.identical).toContain(`.${name}`)
     expect(report.deviationsV1).toEqual([])
     expect(report.deviationsV2).toEqual([])
     // Sanity-check that the page really renders the two different releases.

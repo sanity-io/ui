@@ -24,7 +24,7 @@ interface ButtonModule {
 
 const TONES = ['default', 'primary', 'positive', 'caution', 'critical'] as const
 const MODES = ['default', 'ghost', 'bleed'] as const
-const NAMING_MODES = ['default', 'version', 'version+module'] as const
+const NAMING_MODES = ['default', 'version', 'version+module', 'content'] as const
 type NamingMode = (typeof NAMING_MODES)[number]
 
 const params = new URLSearchParams(location.search)

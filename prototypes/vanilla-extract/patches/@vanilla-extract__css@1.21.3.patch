@@ -1,0 +1,252 @@
+diff --git a/dist/vanilla-extract-css.cjs.dev.js b/dist/vanilla-extract-css.cjs.dev.js
+index 78aaa46722385205884c6b73c992e008519fba66..0f5edc5b775d22dd6c993477a1b88c6b5e1e5a76 100644
+--- a/dist/vanilla-extract-css.cjs.dev.js
++++ b/dist/vanilla-extract-css.cjs.dev.js
+@@ -142,7 +142,8 @@ function generateIdentifier(arg) {
+   var identOption = adapter_dist_vanillaExtractCssAdapter.getIdentOption();
+   var {
+     debugId,
+-    debugFileName = true
++    debugFileName = true,
++    content
+   } = transformCss_dist_vanillaExtractCssTransformCss._objectSpread2(transformCss_dist_vanillaExtractCssTransformCss._objectSpread2({}, typeof arg === 'string' ? {
+     debugId: arg
+   } : null), typeof arg === 'object' ? arg : null);
+@@ -170,7 +171,8 @@ function generateIdentifier(arg) {
+       hash: identifier,
+       debugId,
+       filePath,
+-      packageName
++      packageName,
++      content: content === undefined ? undefined : JSON.stringify(content)
+     });
+     if (!identifier.match(/^[A-Z_][0-9A-Z_-]+$/i)) {
+       throw new Error("Identifier function returned invalid indentifier: \"".concat(identifier, "\""));
+@@ -349,7 +351,10 @@ function createGlobalTheme(selector, arg2, arg3) {
+   }
+ }
+ function createTheme(arg1, arg2, arg3) {
+-  var themeClassName = generateIdentifier(typeof arg2 === 'object' ? arg3 : arg2);
++  var themeClassName = generateIdentifier({
++    debugId: typeof arg2 === 'object' ? arg3 : arg2,
++    content: typeof arg2 === 'object' ? [arg1, arg2] : arg1
++  });
+   adapter_dist_vanillaExtractCssAdapter.registerClassName(themeClassName, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+   var vars = typeof arg2 === 'object' ? createGlobalTheme(themeClassName, arg1, arg2) : createGlobalTheme(themeClassName, arg1);
+   return vars ? [themeClassName, vars] : themeClassName;
+@@ -380,7 +385,10 @@ var mergeStyleRules = deepmergeTs.deepmergeCustom({
+   filterValues: false
+ });
+ function composedStyle(rules, debugId) {
+-  var className = generateIdentifier(debugId);
++  var className = generateIdentifier({
++    debugId,
++    content: rules
++  });
+   adapter_dist_vanillaExtractCssAdapter.registerClassName(className, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+   var classList = [];
+   var styleRules = [];
+@@ -427,7 +435,10 @@ function style(rule, debugId) {
+   if (Array.isArray(rule)) {
+     return composedStyle(rule, debugId);
+   }
+-  var className = generateIdentifier(debugId);
++  var className = generateIdentifier({
++    debugId,
++    content: rule
++  });
+   adapter_dist_vanillaExtractCssAdapter.registerClassName(className, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+   adapter_dist_vanillaExtractCssAdapter.appendCss({
+     type: 'local',
+@@ -455,7 +466,10 @@ function globalStyle(selector, rule) {
+   }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+ }
+ function fontFace(rule, debugId) {
+-  var fontFamily = "\"".concat(transformCss_dist_vanillaExtractCssTransformCss.cssesc(generateIdentifier(debugId), {
++  var fontFamily = "\"".concat(transformCss_dist_vanillaExtractCssTransformCss.cssesc(generateIdentifier({
++    debugId,
++    content: rule
++  }), {
+     quotes: 'double'
+   }), "\"");
+   var rules = Array.isArray(rule) ? rule : [rule];
+@@ -484,7 +498,10 @@ function globalFontFace(fontFamily, rule) {
+   }
+ }
+ function keyframes(rule, debugId) {
+-  var name = transformCss_dist_vanillaExtractCssTransformCss.cssesc(generateIdentifier(debugId), {
++  var name = transformCss_dist_vanillaExtractCssTransformCss.cssesc(generateIdentifier({
++    debugId,
++    content: rule
++  }), {
+     isIdentifier: true
+   });
+   adapter_dist_vanillaExtractCssAdapter.appendCss({
+diff --git a/dist/vanilla-extract-css.cjs.prod.js b/dist/vanilla-extract-css.cjs.prod.js
+index 8a11c9460f1f99da87c9572d48d637fcafde0b01..b9a43f0e20027fb3e62bd4a2dc1984365c245154 100644
+--- a/dist/vanilla-extract-css.cjs.prod.js
++++ b/dist/vanilla-extract-css.cjs.prod.js
+@@ -142,7 +142,8 @@ function generateIdentifier(arg) {
+   var identOption = adapter_dist_vanillaExtractCssAdapter.getIdentOption();
+   var {
+     debugId,
+-    debugFileName = true
++    debugFileName = true,
++    content
+   } = transformCss_dist_vanillaExtractCssTransformCss._objectSpread2(transformCss_dist_vanillaExtractCssTransformCss._objectSpread2({}, typeof arg === 'string' ? {
+     debugId: arg
+   } : null), typeof arg === 'object' ? arg : null);
+@@ -170,7 +171,8 @@ function generateIdentifier(arg) {
+       hash: identifier,
+       debugId,
+       filePath,
+-      packageName
++      packageName,
++      content: content === undefined ? undefined : JSON.stringify(content)
+     });
+     if (!identifier.match(/^[A-Z_][0-9A-Z_-]+$/i)) {
+       throw new Error("Identifier function returned invalid indentifier: \"".concat(identifier, "\""));
+@@ -349,7 +351,10 @@ function createGlobalTheme(selector, arg2, arg3) {
+   }
+ }
+ function createTheme(arg1, arg2, arg3) {
+-  var themeClassName = generateIdentifier(typeof arg2 === 'object' ? arg3 : arg2);
++  var themeClassName = generateIdentifier({
++    debugId: typeof arg2 === 'object' ? arg3 : arg2,
++    content: typeof arg2 === 'object' ? [arg1, arg2] : arg1
++  });
+   adapter_dist_vanillaExtractCssAdapter.registerClassName(themeClassName, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+   var vars = typeof arg2 === 'object' ? createGlobalTheme(themeClassName, arg1, arg2) : createGlobalTheme(themeClassName, arg1);
+   return vars ? [themeClassName, vars] : themeClassName;
+@@ -380,7 +385,10 @@ var mergeStyleRules = deepmergeTs.deepmergeCustom({
+   filterValues: false
+ });
+ function composedStyle(rules, debugId) {
+-  var className = generateIdentifier(debugId);
++  var className = generateIdentifier({
++    debugId,
++    content: rules
++  });
+   adapter_dist_vanillaExtractCssAdapter.registerClassName(className, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+   var classList = [];
+   var styleRules = [];
+@@ -427,7 +435,10 @@ function style(rule, debugId) {
+   if (Array.isArray(rule)) {
+     return composedStyle(rule, debugId);
+   }
+-  var className = generateIdentifier(debugId);
++  var className = generateIdentifier({
++    debugId,
++    content: rule
++  });
+   adapter_dist_vanillaExtractCssAdapter.registerClassName(className, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+   adapter_dist_vanillaExtractCssAdapter.appendCss({
+     type: 'local',
+@@ -455,7 +466,10 @@ function globalStyle(selector, rule) {
+   }, fileScope_dist_vanillaExtractCssFileScope.getFileScope());
+ }
+ function fontFace(rule, debugId) {
+-  var fontFamily = "\"".concat(transformCss_dist_vanillaExtractCssTransformCss.cssesc(generateIdentifier(debugId), {
++  var fontFamily = "\"".concat(transformCss_dist_vanillaExtractCssTransformCss.cssesc(generateIdentifier({
++    debugId,
++    content: rule
++  }), {
+     quotes: 'double'
+   }), "\"");
+   var rules = Array.isArray(rule) ? rule : [rule];
+@@ -484,7 +498,10 @@ function globalFontFace(fontFamily, rule) {
+   }
+ }
+ function keyframes(rule, debugId) {
+-  var name = transformCss_dist_vanillaExtractCssTransformCss.cssesc(generateIdentifier(debugId), {
++  var name = transformCss_dist_vanillaExtractCssTransformCss.cssesc(generateIdentifier({
++    debugId,
++    content: rule
++  }), {
+     isIdentifier: true
+   });
+   adapter_dist_vanillaExtractCssAdapter.appendCss({
+diff --git a/dist/vanilla-extract-css.esm.js b/dist/vanilla-extract-css.esm.js
+index 83ef50b072292e40f26b08650e0432e61a0549ae..aefab830d88c11bbf94f6bc2d6779e92afc2d19b 100644
+--- a/dist/vanilla-extract-css.esm.js
++++ b/dist/vanilla-extract-css.esm.js
+@@ -132,7 +132,8 @@ function generateIdentifier(arg) {
+   var identOption = getIdentOption();
+   var {
+     debugId,
+-    debugFileName = true
++    debugFileName = true,
++    content
+   } = _objectSpread2(_objectSpread2({}, typeof arg === 'string' ? {
+     debugId: arg
+   } : null), typeof arg === 'object' ? arg : null);
+@@ -160,7 +161,8 @@ function generateIdentifier(arg) {
+       hash: identifier,
+       debugId,
+       filePath,
+-      packageName
++      packageName,
++      content: content === undefined ? undefined : JSON.stringify(content)
+     });
+     if (!identifier.match(/^[A-Z_][0-9A-Z_-]+$/i)) {
+       throw new Error("Identifier function returned invalid indentifier: \"".concat(identifier, "\""));
+@@ -339,7 +341,10 @@ function createGlobalTheme(selector, arg2, arg3) {
+   }
+ }
+ function createTheme(arg1, arg2, arg3) {
+-  var themeClassName = generateIdentifier(typeof arg2 === 'object' ? arg3 : arg2);
++  var themeClassName = generateIdentifier({
++    debugId: typeof arg2 === 'object' ? arg3 : arg2,
++    content: typeof arg2 === 'object' ? [arg1, arg2] : arg1
++  });
+   registerClassName(themeClassName, getFileScope());
+   var vars = typeof arg2 === 'object' ? createGlobalTheme(themeClassName, arg1, arg2) : createGlobalTheme(themeClassName, arg1);
+   return vars ? [themeClassName, vars] : themeClassName;
+@@ -370,7 +375,10 @@ var mergeStyleRules = deepmergeCustom({
+   filterValues: false
+ });
+ function composedStyle(rules, debugId) {
+-  var className = generateIdentifier(debugId);
++  var className = generateIdentifier({
++    debugId,
++    content: rules
++  });
+   registerClassName(className, getFileScope());
+   var classList = [];
+   var styleRules = [];
+@@ -417,7 +425,10 @@ function style(rule, debugId) {
+   if (Array.isArray(rule)) {
+     return composedStyle(rule, debugId);
+   }
+-  var className = generateIdentifier(debugId);
++  var className = generateIdentifier({
++    debugId,
++    content: rule
++  });
+   registerClassName(className, getFileScope());
+   appendCss({
+     type: 'local',
+@@ -445,7 +456,10 @@ function globalStyle(selector, rule) {
+   }, getFileScope());
+ }
+ function fontFace(rule, debugId) {
+-  var fontFamily = "\"".concat(cssesc(generateIdentifier(debugId), {
++  var fontFamily = "\"".concat(cssesc(generateIdentifier({
++    debugId,
++    content: rule
++  }), {
+     quotes: 'double'
+   }), "\"");
+   var rules = Array.isArray(rule) ? rule : [rule];
+@@ -474,7 +488,10 @@ function globalFontFace(fontFamily, rule) {
+   }
+ }
+ function keyframes(rule, debugId) {
+-  var name = cssesc(generateIdentifier(debugId), {
++  var name = cssesc(generateIdentifier({
++    debugId,
++    content: rule
++  }), {
+     isIdentifier: true
+   });
+   appendCss({

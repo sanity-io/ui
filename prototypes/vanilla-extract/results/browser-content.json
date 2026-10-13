@@ -1,0 +1,91 @@
+{
+  "mode": "content",
+  "v1": {
+    "version": "1.0.0",
+    "lightPrimaryDefault": {
+      "bg": "rgb(34, 118, 252)",
+      "color": "rgb(255, 255, 255)",
+      "radius": "3px",
+      "position": "relative",
+      "animation": "none",
+      "width": "137.109px"
+    },
+    "lightPrimaryGhost": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(34, 118, 252)"
+    },
+    "darkDefaultDefault": {
+      "bg": "rgb(27, 29, 32)"
+    },
+    "overlay": {
+      "position": "absolute",
+      "inset": "0px"
+    },
+    "accent": {
+      "outlineColor": "rgb(255, 0, 255)"
+    },
+    "classes": [
+      "c15s2cyjr",
+      "c1b40sxv8",
+      "c1dv0nn89",
+      "c1e4dhtsa",
+      "c1fb9xsmv",
+      "c1k7o07cb",
+      "c1u5otdik",
+      "c1z9mt8px",
+      "c34m7tw75",
+      "c37hjuqtw",
+      "c385waufe",
+      "c3qy82gme",
+      "c3ymk3y3d",
+      "cfpnjfnl9"
+    ]
+  },
+  "v2": {
+    "version": "2.0.0",
+    "lightPrimaryDefault": {
+      "bg": "rgb(125, 60, 252)",
+      "color": "rgb(255, 255, 255)",
+      "radius": "6px",
+      "position": "relative",
+      "animation": "none",
+      "width": "137.109px"
+    },
+    "lightPrimaryGhost": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(125, 60, 252)"
+    },
+    "darkDefaultDefault": {
+      "bg": "rgb(27, 29, 32)"
+    },
+    "overlay": {
+      "position": "absolute",
+      "inset": "0px"
+    },
+    "accent": {
+      "outlineColor": "rgb(255, 0, 255)"
+    },
+    "classes": [
+      "c12ybdnbr",
+      "c14jgyp5s",
+      "c1b40sxv8",
+      "c1ieghbrk",
+      "c1koh8g51",
+      "c1q78rtkw",
+      "c28kdf7r6",
+      "c32gbv41b",
+      "c3h15yrcw",
+      "ca1az1qyd",
+      "cbnm8ou48",
+      "cfpnjfnl9",
+      "cqfoq3uda",
+      "crbtu59j7"
+    ]
+  },
+  "sharedClasses": [
+    "c1b40sxv8",
+    "cfpnjfnl9"
+  ],
+  "deviationsV1": [],
+  "deviationsV2": []
+}

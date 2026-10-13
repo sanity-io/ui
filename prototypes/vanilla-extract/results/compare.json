@@ -23,6 +23,14 @@
       "shared": 0,
       "identical": 0,
       "conflicting": 0
+    },
+    {
+      "mode": "content",
+      "v1": 38,
+      "v2": 40,
+      "shared": 3,
+      "identical": 3,
+      "conflicting": 0
     }
   ],
   "examples": [

@@ -17,6 +17,12 @@ export interface IdentifierArgs {
   /** Only present when authored (`style({}, 'id')`) or passed by `recipe`/`styleVariants`; upstream does not inject debug ids for custom functions (vanilla-extract PR #1229 is still open). */
   debugId?: string
   packageName?: string
+  /**
+   * NOT upstream: the serialized rule/keyframes/font-face/theme the identifier stands for. Only
+   * present with the `upstream-content-hash.patch` sketch applied (here via `pnpm patch`, see
+   * `patches/`). Undefined for `createVar`, `createContainer`, `layer`, `createViewTransition`.
+   */
+  content?: string
 }
 
 export type IdentifierFn = (args: IdentifierArgs) => string
@@ -94,6 +100,28 @@ export function versionedIdentifiers(options: VersionedIdentifiersOptions): Iden
   }
 }
 
+/**
+ * Content-addressed identifiers — what "hashed by content" means for vanilla-extract. Needs the
+ * `content` argument from `upstream-content-hash.patch`; without it every identifier falls back
+ * to the version salt. Styles, keyframes, font faces and theme classes are named by a hash of
+ * their serialized content, so identical rules get identical names in every release (and are
+ * deduplicated by the cascade), while changed rules get new names. Identifiers without content
+ * (`createVar`, `createContainer`, `layer`) stay version-scoped, which in turn makes every rule
+ * that references a generated variable version-specific as well.
+ */
+export function contentIdentifiers(options: VersionedIdentifiersOptions): IdentifierFn {
+  const {debug = false, prefixLength = 7} = options
+  const versioned = versionedIdentifiers(options)
+  return (args) => {
+    if (args.content === undefined) return versioned(args)
+    const digest = createHash('sha256').update(args.content).digest('hex')
+    // `prefixLength + 1` characters of content hash, with a letter prefix so the name is always
+    // a valid identifier: comparable length to the counter-based names.
+    const identifier = `c${base36(digest, prefixLength + 1)}`
+    return debug && args.debugId ? `${args.debugId.replace(/\s/g, '_')}__${identifier}` : identifier
+  }
+}
+
 /** Reads `name` and `version` from a package.json file. */
 export function readPackageIdentity(packageJsonPath: string): {name: string; version: string} {
   const {name, version} = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as {
@@ -103,13 +131,19 @@ export function readPackageIdentity(packageJsonPath: string): {name: string; ver
   return {name, version}
 }
 
-export type IdentifiersMode = 'default' | 'version' | 'version+module'
+export type IdentifiersMode = 'default' | 'version' | 'version+module' | 'content'
 
-export const IDENTIFIER_MODES: readonly IdentifiersMode[] = ['default', 'version', 'version+module']
+export const IDENTIFIER_MODES: readonly IdentifiersMode[] = [
+  'default',
+  'version',
+  'version+module',
+  'content',
+]
 
 /**
  * Resolves the `identifiers` option for one of the prototype's build modes. `default` is
- * upstream's unsalted `short` naming (the control that reproduces the incident).
+ * upstream's unsalted `short` naming (the control that reproduces the incident); `content`
+ * additionally depends on the patched `@vanilla-extract/css`.
  */
 export function identifiersForMode(
   mode: IdentifiersMode,
@@ -123,6 +157,8 @@ export function identifiersForMode(
       return versionedIdentifiers(identity)
     case 'version+module':
       return versionedIdentifiers({...identity, moduleContent: {root}})
+    case 'content':
+      return contentIdentifiers(identity)
     default: {
       const exhaustive: never = mode
       throw new Error(`Unknown identifiers mode: ${String(exhaustive)}`)

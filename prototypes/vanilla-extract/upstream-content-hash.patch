@@ -1,0 +1,130 @@
+diff --git a/.changeset/content-aware-identifiers.md b/.changeset/content-aware-identifiers.md
+new file mode 100644
+index 0000000..af4b76e
+--- /dev/null
++++ b/.changeset/content-aware-identifiers.md
+@@ -0,0 +1,5 @@
++---
++'@vanilla-extract/css': minor
++---
++
++Pass the serialized `content` of styles, keyframes, font faces and themes to custom `identifiers` functions, so names can be derived from what a rule contains instead of from the per-file counter.
+diff --git a/packages/css/src/identifier.ts b/packages/css/src/identifier.ts
+index ca196f8..a8a81ec 100644
+--- a/packages/css/src/identifier.ts
++++ b/packages/css/src/identifier.ts
+@@ -34,6 +34,8 @@ function normalizeIdentifier(identifier: string) {
+ interface GenerateIdentifierOptions {
+   debugId?: string;
+   debugFileName?: boolean;
++  /** The value the identifier stands for, passed to custom identifier functions as `content`. */
++  content?: unknown;
+ }
+ 
+ export function generateIdentifier(debugId?: string): string;
+@@ -42,7 +44,7 @@ export function generateIdentifier(
+   arg?: string | GenerateIdentifierOptions,
+ ): string {
+   const identOption = getIdentOption();
+-  const { debugId, debugFileName = true } = {
++  const { debugId, debugFileName = true, content } = {
+     ...(typeof arg === 'string' ? { debugId: arg } : null),
+     ...(typeof arg === 'object' ? arg : null),
+   };
+@@ -72,6 +74,7 @@ export function generateIdentifier(
+       debugId,
+       filePath,
+       packageName,
++      content: content === undefined ? undefined : JSON.stringify(content),
+     });
+ 
+     if (!identifier.match(/^[A-Z_][0-9A-Z_-]+$/i)) {
+diff --git a/packages/css/src/style.ts b/packages/css/src/style.ts
+index e884108..e4d26d4 100644
+--- a/packages/css/src/style.ts
++++ b/packages/css/src/style.ts
+@@ -29,7 +29,7 @@ const mergeStyleRules = deepmergeCustom({
+ });
+ 
+ function composedStyle(rules: Array<StyleRule | ClassNames>, debugId?: string) {
+-  const className = generateIdentifier(debugId);
++  const className = generateIdentifier({ debugId, content: rules });
+   registerClassName(className, getFileScope());
+ 
+   const classList = [];
+@@ -86,7 +86,7 @@ export function style(rule: ComplexStyleRule, debugId?: string): string {
+     return composedStyle(rule, debugId);
+   }
+ 
+-  const className = generateIdentifier(debugId);
++  const className = generateIdentifier({ debugId, content: rule });
+ 
+   registerClassName(className, getFileScope());
+   appendCss({ type: 'local', selector: className, rule }, getFileScope());
+@@ -111,7 +111,7 @@ export function fontFace(
+   rule: FontFaceRule | FontFaceRule[],
+   debugId?: string,
+ ): string {
+-  const fontFamily = `"${cssesc(generateIdentifier(debugId), {
++  const fontFamily = `"${cssesc(generateIdentifier({ debugId, content: rule }), {
+     quotes: 'double',
+   })}"`;
+ 
+@@ -150,7 +150,7 @@ export function globalFontFace(
+ }
+ 
+ export function keyframes(rule: CSSKeyframes, debugId?: string): string {
+-  const name = cssesc(generateIdentifier(debugId), {
++  const name = cssesc(generateIdentifier({ debugId, content: rule }), {
+     isIdentifier: true,
+   });
+ 
+diff --git a/packages/css/src/theme.ts b/packages/css/src/theme.ts
+index 4667191..b6f5dc1 100644
+--- a/packages/css/src/theme.ts
++++ b/packages/css/src/theme.ts
+@@ -73,9 +73,11 @@ export function createTheme<ThemeTokens extends Tokens>(
+   debugId?: string,
+ ): [className: string, vars: Resolve<WithoutLayer<ThemeVars<ThemeTokens>>>];
+ export function createTheme(arg1: any, arg2?: any, arg3?: string): any {
+-  const themeClassName = generateIdentifier(
+-    typeof arg2 === 'object' ? arg3 : arg2,
+-  );
++  const themeClassName = generateIdentifier({
++    debugId: typeof arg2 === 'object' ? arg3 : arg2,
++    // The contract names the variables the class assigns, so it is part of what the class means.
++    content: typeof arg2 === 'object' ? [arg1, arg2] : arg1,
++  });
+ 
+   registerClassName(themeClassName, getFileScope());
+ 
+diff --git a/packages/css/src/types.ts b/packages/css/src/types.ts
+index cb97c69..e19cd47 100644
+--- a/packages/css/src/types.ts
++++ b/packages/css/src/types.ts
+@@ -131,6 +131,12 @@ type CustomIdentFunction = (params: {
+   filePath: string;
+   debugId?: string;
+   packageName?: string;
++  /**
++   * The serialized content the identifier stands for (the style rule, keyframes, font face or
++   * theme tokens), when there is one. Lets a function derive names from content rather than
++   * from the per-file counter, so names stay stable across reordering and across releases.
++   */
++  content?: string;
+ }) => string;
+ 
+ type IdentOption = 'short' | 'debug' | CustomIdentFunction;
+diff --git a/site/docs/integrations/vite.md b/site/docs/integrations/vite.md
+index 60b07be..af58332 100644
+--- a/site/docs/integrations/vite.md
++++ b/site/docs/integrations/vite.md
+@@ -57,7 +57,7 @@ Different formatting of identifiers (e.g. class names, keyframes, CSS Vars, etc)
+ 
+ - `short` identifiers are a 7+ character hash. e.g. `hnw5tz3`
+ - `debug` identifiers contain human readable prefixes representing the owning filename and a potential rule level debug name. e.g. `myfile_mystyle_hnw5tz3`
+-- A custom identifier function takes an object parameter with properties `hash`, `filePath`, `debugId`, and `packageName`, and returns a customized identifier. e.g.
++- A custom identifier function takes an object parameter with properties `hash`, `filePath`, `debugId`, `packageName`, and `content` (the serialized style rule, keyframes, font face or theme tokens the identifier stands for, when there is one), and returns a customized identifier. e.g.
+ 
+ ```ts
+ vanillaExtractPlugin({

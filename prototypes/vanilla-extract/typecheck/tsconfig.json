@@ -1,0 +1,8 @@
+{
+  "extends": "../lib-v1/tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["react", "node"]
+  },
+  "include": ["./negative.ts", "../lib-v1/src", "../identifiers"]
+}

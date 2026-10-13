@@ -3,44 +3,58 @@
     {
       "lib": "lib-v1",
       "mode": "default",
-      "coldMs": 365,
-      "warmMedianMs": 352,
-      "tsdownInternalMs": 182
+      "coldMs": 330,
+      "warmMedianMs": 338,
+      "tsdownInternalMs": 170
     },
     {
       "lib": "lib-v2",
       "mode": "default",
-      "coldMs": 370,
-      "warmMedianMs": 351,
-      "tsdownInternalMs": 183
+      "coldMs": 325,
+      "warmMedianMs": 319,
+      "tsdownInternalMs": 165
     },
     {
       "lib": "lib-v1",
       "mode": "version",
-      "coldMs": 342,
-      "warmMedianMs": 348,
-      "tsdownInternalMs": 182
+      "coldMs": 327,
+      "warmMedianMs": 324,
+      "tsdownInternalMs": 162
     },
     {
       "lib": "lib-v2",
       "mode": "version",
-      "coldMs": 339,
-      "warmMedianMs": 355,
-      "tsdownInternalMs": 187
-    },
-    {
-      "lib": "lib-v1",
-      "mode": "version+module",
-      "coldMs": 355,
-      "warmMedianMs": 353,
-      "tsdownInternalMs": 183
-    },
-    {
-      "lib": "lib-v2",
-      "mode": "version+module",
-      "coldMs": 345,
-      "warmMedianMs": 348,
+      "coldMs": 319,
+      "warmMedianMs": 327,
       "tsdownInternalMs": 175
+    },
+    {
+      "lib": "lib-v1",
+      "mode": "version+module",
+      "coldMs": 338,
+      "warmMedianMs": 331,
+      "tsdownInternalMs": 168
+    },
+    {
+      "lib": "lib-v2",
+      "mode": "version+module",
+      "coldMs": 330,
+      "warmMedianMs": 323,
+      "tsdownInternalMs": 174
+    },
+    {
+      "lib": "lib-v1",
+      "mode": "content",
+      "coldMs": 329,
+      "warmMedianMs": 325,
+      "tsdownInternalMs": 168
+    },
+    {
+      "lib": "lib-v2",
+      "mode": "content",
+      "coldMs": 323,
+      "warmMedianMs": 326,
+      "tsdownInternalMs": 169
     }
   ],
   "output": [
@@ -133,11 +147,41 @@
         "brotli": 833
       },
       "avgIdentifierLength": 8.125
+    },
+    {
+      "lib": "lib-v1",
+      "mode": "content",
+      "css": {
+        "raw": 3046,
+        "gzip": 953,
+        "brotli": 783
+      },
+      "js": {
+        "raw": 2496,
+        "gzip": 1001,
+        "brotli": 884
+      },
+      "avgIdentifierLength": 9
+    },
+    {
+      "lib": "lib-v2",
+      "mode": "content",
+      "css": {
+        "raw": 3110,
+        "gzip": 988,
+        "brotli": 817
+      },
+      "js": {
+        "raw": 2649,
+        "gzip": 1054,
+        "brotli": 917
+      },
+      "avgIdentifierLength": 9
     }
   ],
   "runtime": {
-    "raw": 4064,
-    "gzip": 1562,
-    "brotli": 1383
+    "raw": 4126,
+    "gzip": 1620,
+    "brotli": 1432
   }
 }
