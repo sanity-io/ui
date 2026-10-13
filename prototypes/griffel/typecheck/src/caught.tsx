@@ -1,3 +1,4 @@
+/* oxlint-disable react-hooks/rules-of-hooks -- type probes, never executed */
 /**
  * Every statement below is wrong and MUST be a compile error. `tsc` only passes
  * when each `@ts-expect-error` is actually triggered (an unused directive is an
@@ -17,11 +18,11 @@ import {
 // ── Theme tokens ────────────────────────────────────────────────────────────
 
 // @ts-expect-error misspelled token
-tokens['tone-primray-bg']
+void tokens['tone-primray-bg']
 // @ts-expect-error token names are derived from the Theme shape; this one does not exist
-tokens['focus-ring']
+void tokens['focus-ring']
 // @ts-expect-error tone that the theme does not define
-tokens['tone-neutral-bg']
+void tokens['tone-neutral-bg']
 
 // ── Variants (props) ────────────────────────────────────────────────────────
 
@@ -40,7 +41,7 @@ makeStyles<ButtonTone>({default: {}, primary: {}, positive: {}, caution: {}})
 const useStyles = makeStyles({root: {display: 'flex'}, content: {}})
 const classes = useStyles()
 // @ts-expect-error no slot named 'rooot'
-classes.rooot
+void classes.rooot
 
 // ── Values ──────────────────────────────────────────────────────────────────
 

@@ -222,14 +222,14 @@ packages:
       react: '>=18.0.0'
 
   '@css-eval/griffel-button@file:app/tarballs/css-eval-griffel-button-1.0.0.tgz':
-    resolution: {integrity: sha512-ieAWm2jmEovqErTBYlwvxsXEzH1eG2oGErqP77d4Qb2F3BV1cXAO8lpQQPDxx4uKXHEFLtDkqcTLvi4gpqv+uA==, tarball: file:app/tarballs/css-eval-griffel-button-1.0.0.tgz}
+    resolution: {integrity: sha512-INnGF0psaqVIizdy7tQza2nRGOatfvCegD6igGyVlBDaJlv0RjzNHJ5AtEb+FJj2i2uOD97r9mOl8VMaTxHPDQ==, tarball: file:app/tarballs/css-eval-griffel-button-1.0.0.tgz}
     version: 1.0.0
     peerDependencies:
       react: ^19.2
       react-dom: ^19.2
 
   '@css-eval/griffel-button@file:app/tarballs/css-eval-griffel-button-2.0.0.tgz':
-    resolution: {integrity: sha512-eV7itdoae8G43Ms25peGhFOUYT8kEXXhO4CktXWvb/BYiMuxQXzBzQI1VWSpnjUWB8yJ8iDcbU78oGoHkaLWFw==, tarball: file:app/tarballs/css-eval-griffel-button-2.0.0.tgz}
+    resolution: {integrity: sha512-zThJZ/8RpTh6DetCRiV6Ffnqj6wnZds2LgVJ4CLFM35F0MWc22e/h2QI/hH2HOjQsvaC4DUT4mvYSfXa7JL9jA==, tarball: file:app/tarballs/css-eval-griffel-button-2.0.0.tgz}
     version: 2.0.0
     peerDependencies:
       react: ^19.2

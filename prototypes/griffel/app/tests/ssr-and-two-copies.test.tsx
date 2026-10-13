@@ -1,16 +1,15 @@
 import {createDOMRenderer, RendererProvider, renderToStyleElements} from '@griffel/react'
-import {renderToStaticMarkup} from 'react-dom/server'
-import {describe, expect, test} from 'vitest'
-
 import * as v1 from 'griffel-button-v1'
 import * as v2 from 'griffel-button-v2'
+import {renderToStaticMarkup} from 'react-dom/server'
+import {describe, expect, test} from 'vitest'
 
 const GRIFFEL_CLASS = /^[fr][0-9a-z]+$/
 
 function griffelClassesOf(html: string): string[] {
   const match = /<button[^>]*class="([^"]+)"/.exec(html)
   if (!match) throw new Error(`no button in ${html}`)
-  return match[1]!.split(' ').filter((c) => GRIFFEL_CLASS.test(c))
+  return match[1].split(' ').filter((c) => GRIFFEL_CLASS.test(c))
 }
 
 describe('server-side rendering (Node, no DOM)', () => {
@@ -62,8 +61,8 @@ describe('two Griffel runtime copies on one page', () => {
   test('mergeClasses() of one copy resolves classes produced by the other copy (lookup table shared via Symbol.for)', () => {
     const v1Html = renderToStaticMarkup(<v1.Button tone="primary" text="a" />)
     const v2Html = renderToStaticMarkup(<v2.Button tone="primary" text="b" />)
-    const v1Classes = /<button[^>]*class="([^"]+)"/.exec(v1Html)![1]!
-    const v2Classes = /<button[^>]*class="([^"]+)"/.exec(v2Html)![1]!
+    const v1Classes = /<button[^>]*class="([^"]+)"/.exec(v1Html)![1]
+    const v2Classes = /<button[^>]*class="([^"]+)"/.exec(v2Html)![1]
 
     const v1Radius = 'f18vnl5v' // border-radius: var(--sui-radius-2) — only v1
     const anyAtomicClass = /\bf[0-9a-z]+\b/

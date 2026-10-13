@@ -8,6 +8,6 @@ export default defineConfig({
   // Worst case on purpose: v2 carries its *own* copy of the Griffel runtime, so
   // the page ends up with two renderers, two insertion caches and two sets of
   // <style data-make-styles-bucket> elements. Only `react` stays shared.
-  noExternal: [/^@griffel\//],
+  deps: {alwaysBundle: [/^@griffel\//]},
   plugins: [griffelTsdownPlugin({mode: 'inject', fileName: 'styles.css'})],
 })

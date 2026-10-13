@@ -1,3 +1,4 @@
+/* oxlint-disable no-console, no-await-in-loop -- a CLI test script; hover checks are sequential by nature */
 /**
  * Real-browser proof that two versions of the same Griffel-styled package on one
  * page cannot collide — the exact failure of @sanity/ui 4.4.3 + 4.4.4 (SAPP-4639).
@@ -26,8 +27,22 @@ function check(name, condition, detail) {
 }
 
 const EXPECTED = {
-  '1.0.0': {radius: '3px', paddingTop: '8px', paddingLeft: '12px', fontWeight: '500', textTransform: 'none', transitionDuration: '0.08s'},
-  '2.0.0': {radius: '6px', paddingTop: '12px', paddingLeft: '20px', fontWeight: '600', textTransform: 'uppercase', transitionDuration: '0.12s'},
+  '1.0.0': {
+    radius: '3px',
+    paddingTop: '8px',
+    paddingLeft: '12px',
+    fontWeight: '500',
+    textTransform: 'none',
+    transitionDuration: '0.08s',
+  },
+  '2.0.0': {
+    radius: '6px',
+    paddingTop: '12px',
+    paddingLeft: '20px',
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    transitionDuration: '0.12s',
+  },
 }
 
 /** Collects every Griffel rule on the page and checks that no selector has two meanings. */
@@ -54,13 +69,18 @@ function auditPage() {
   const bucketOrder = ['r', 'd', 'l', 'v', 'w', 'f', 'i', 'h', 'a', 's', 'k', 't', 'm', 'c', 'x']
   const bucketElements = [...document.head.querySelectorAll('style[data-make-styles-bucket]')]
   const bucketSequence = bucketElements.map(
-    (el) => `${el.getAttribute('data-make-styles-bucket')}${el.getAttribute('data-priority') === '0' ? '' : `(p${el.getAttribute('data-priority')})`}`,
+    (el) =>
+      `${el.getAttribute('data-make-styles-bucket')}${el.getAttribute('data-priority') === '0' ? '' : `(p${el.getAttribute('data-priority')})`}`,
   )
-  const bucketIndexes = bucketElements.map((el) => bucketOrder.indexOf(el.getAttribute('data-make-styles-bucket')))
+  const bucketIndexes = bucketElements.map((el) =>
+    bucketOrder.indexOf(el.getAttribute('data-make-styles-bucket')),
+  )
   const bucketsInOrder = bucketIndexes.every((index, i) => i === 0 || index >= bucketIndexes[i - 1])
   // One "d" bucket element per renderer (per priority); priority 0 exists for every renderer
   const renderers = bucketElements.filter(
-    (el) => el.getAttribute('data-make-styles-bucket') === 'd' && el.getAttribute('data-priority') === '0',
+    (el) =>
+      el.getAttribute('data-make-styles-bucket') === 'd' &&
+      el.getAttribute('data-priority') === '0',
   ).length
 
   for (const sheet of document.styleSheets) {
@@ -82,8 +102,8 @@ function auditPage() {
 
   const classesOf = (version) =>
     new Set(
-      [...document.querySelectorAll(`[data-ui="Button"][data-version="${version}"]`)].flatMap((el) =>
-        [...el.classList].filter((c) => /^[fr][0-9a-z]+$/.test(c)),
+      [...document.querySelectorAll(`[data-ui="Button"][data-version="${version}"]`)].flatMap(
+        (el) => [...el.classList].filter((c) => /^[fr][0-9a-z]+$/.test(c)),
       ),
     )
   const v1Classes = classesOf('1.0.0')
@@ -131,11 +151,17 @@ function measureButtons() {
 }
 
 async function openBuild(browser, outDir, port) {
-  const server = await preview({root: appDir, build: {outDir}, preview: {port, strictPort: true}, logLevel: 'silent'})
+  const server = await preview({
+    root: appDir,
+    build: {outDir},
+    preview: {port, strictPort: true},
+    logLevel: 'silent',
+  })
   const page = await browser.newPage({viewport: {width: 1400, height: 1000}})
   const consoleErrors = []
   page.on('console', (message) => {
-    if (message.type() === 'error' || message.type() === 'warning') consoleErrors.push(message.text())
+    if (message.type() === 'error' || message.type() === 'warning')
+      consoleErrors.push(message.text())
   })
   page.on('pageerror', (error) => consoleErrors.push(String(error)))
   await page.goto(`http://localhost:${port}/`)
@@ -153,38 +179,91 @@ try {
     const audit = await runtime.page.evaluate(auditPage)
     const buttons = await runtime.page.evaluate(measureButtons)
 
-    check('runtime: no selector on the page has two meanings', audit.collisions.length === 0, audit.collisions)
-    check('runtime: two Griffel runtime copies each inserted their own buckets', audit.renderers === 2, audit.bucketSequence)
-    check('runtime: bucket order is global across both runtime copies', audit.bucketsInOrder, audit.bucketSequence)
-    check('runtime: v1 and v2 share the classes whose declarations did not change', audit.sharedClasses.length > 10, audit.sharedClasses.length)
-    check('runtime: v2 has classes v1 does not (changed declarations hash differently)', audit.v2OnlyClasses.length > 5, audit.v2OnlyClasses)
+    check(
+      'runtime: no selector on the page has two meanings',
+      audit.collisions.length === 0,
+      audit.collisions,
+    )
+    check(
+      'runtime: two Griffel runtime copies each inserted their own buckets',
+      audit.renderers === 2,
+      audit.bucketSequence,
+    )
+    check(
+      'runtime: bucket order is global across both runtime copies',
+      audit.bucketsInOrder,
+      audit.bucketSequence,
+    )
+    check(
+      'runtime: v1 and v2 share the classes whose declarations did not change',
+      audit.sharedClasses.length > 10,
+      audit.sharedClasses.length,
+    )
+    check(
+      'runtime: v2 has classes v1 does not (changed declarations hash differently)',
+      audit.v2OnlyClasses.length > 5,
+      audit.v2OnlyClasses,
+    )
 
     for (const button of buttons) {
       if (button.text.includes('override')) continue
       for (const [prop, value] of Object.entries(EXPECTED[button.version])) {
-        check(`runtime: ${button.version} ${button.mode}/${button.tone} "${button.text}" ${prop}=${value}`, button[prop] === value, button[prop])
+        check(
+          `runtime: ${button.version} ${button.mode}/${button.tone} "${button.text}" ${prop}=${value}`,
+          button[prop] === value,
+          button[prop],
+        )
       }
     }
 
-    const primary = buttons.filter((b) => b.tone === 'primary' && b.mode === 'default' && /^primary v[12]$/.test(b.text))
+    const primary = buttons.filter(
+      (b) => b.tone === 'primary' && b.mode === 'default' && /^primary v[12]$/.test(b.text),
+    )
     const light = primary.filter((b) => !b.inDark)
     const dark = primary.filter((b) => b.inDark)
-    check('runtime: primary/default is #2276fc in defaultTheme for both versions', light.length === 2 && light.every((b) => b.backgroundColor === 'rgb(34, 118, 252)'), light)
-    check('runtime: primary/default is #4d8dff in darkTheme for both versions', dark.length === 2 && dark.every((b) => b.backgroundColor === 'rgb(77, 141, 255)'), dark)
+    check(
+      'runtime: primary/default is #2276fc in defaultTheme for both versions',
+      light.length === 2 && light.every((b) => b.backgroundColor === 'rgb(34, 118, 252)'),
+      light,
+    )
+    check(
+      'runtime: primary/default is #4d8dff in darkTheme for both versions',
+      dark.length === 2 && dark.every((b) => b.backgroundColor === 'rgb(77, 141, 255)'),
+      dark,
+    )
     const bleed = buttons.filter((b) => b.mode === 'bleed')
-    check('runtime: bleed mode is transparent in both versions', bleed.length === 20 && bleed.every((b) => b.backgroundColor === 'rgba(0, 0, 0, 0)'), bleed.map((b) => b.backgroundColor))
+    check(
+      'runtime: bleed mode is transparent in both versions',
+      bleed.length === 20 && bleed.every((b) => b.backgroundColor === 'rgba(0, 0, 0, 0)'),
+      bleed.map((b) => b.backgroundColor),
+    )
     const dynamic = buttons.filter((b) => b.text.includes('width=200'))
-    check('runtime: dynamic width (inline CSS variable) is 200px in both versions', dynamic.length === 4 && dynamic.every((b) => Math.round(b.width) === 200), dynamic.map((b) => b.width))
+    check(
+      'runtime: dynamic width (inline CSS variable) is 200px in both versions',
+      dynamic.length === 4 && dynamic.every((b) => Math.round(b.width) === 200),
+      dynamic.map((b) => b.width),
+    )
     const fill = buttons.filter((b) => b.text.includes('width=fill'))
-    check('runtime: width="fill" stretches in both versions', fill.length === 4 && fill.every((b) => b.width > 300), fill.map((b) => b.width))
+    check(
+      'runtime: width="fill" stretches in both versions',
+      fill.length === 4 && fill.every((b) => b.width > 300),
+      fill.map((b) => b.width),
+    )
 
     const override = buttons.find((b) => b.text.includes('override'))
-    check('runtime: consumer className overrides font-size/weight through mergeClasses', override?.fontSize === '14px' && override?.fontWeight === '600', override)
+    check(
+      'runtime: consumer className overrides font-size/weight through mergeClasses',
+      override?.fontSize === '14px' && override?.fontWeight === '600',
+      override,
+    )
 
     const hover = {}
     for (const version of ['1.0.0', '2.0.0']) {
       const selector = `[data-ui="Button"][data-version="${version}"][data-tone="primary"][data-mode="default"]`
-      const before = await runtime.page.$eval(selector, (el) => getComputedStyle(el).backgroundColor)
+      const before = await runtime.page.$eval(
+        selector,
+        (el) => getComputedStyle(el).backgroundColor,
+      )
       await runtime.page.hover(selector)
       await runtime.page.waitForTimeout(250)
       const after = await runtime.page.$eval(selector, (el) => getComputedStyle(el).backgroundColor)
@@ -211,14 +290,28 @@ try {
     const audit = await extract.page.evaluate(auditPage)
     const buttons = await extract.page.evaluate(measureButtons)
     const override = buttons.find((b) => b.text.includes('override'))
-    const extractedSheets = await extract.page.evaluate(() => document.querySelectorAll('link[rel="stylesheet"]').length)
+    const extractedSheets = await extract.page.evaluate(
+      () => document.querySelectorAll('link[rel="stylesheet"]').length,
+    )
 
-    check('extract: no selector on the page has two meanings', audit.collisions.length === 0, audit.collisions)
-    check('extract: the app CSS was extracted to a stylesheet', extractedSheets === 1, extractedSheets)
+    check(
+      'extract: no selector on the page has two meanings',
+      audit.collisions.length === 0,
+      audit.collisions,
+    )
+    check(
+      'extract: the app CSS was extracted to a stylesheet',
+      extractedSheets === 1,
+      extractedSheets,
+    )
     for (const button of buttons) {
       if (button.text.includes('override')) continue
       for (const [prop, value] of Object.entries(EXPECTED[button.version])) {
-        check(`extract: ${button.version} "${button.text}" ${prop}=${value}`, button[prop] === value, button[prop])
+        check(
+          `extract: ${button.version} "${button.text}" ${prop}=${value}`,
+          button[prop] === value,
+          button[prop],
+        )
       }
     }
 
@@ -249,8 +342,14 @@ writeFileSync(join(resultsDir, 'two-versions.json'), JSON.stringify(summary, nul
 
 const artifacts = '/opt/cursor/artifacts'
 if (existsSync(artifacts)) {
-  copyFileSync(join(resultsDir, 'two-versions.png'), join(artifacts, 'griffel-two-versions-one-page.png'))
-  copyFileSync(join(resultsDir, 'two-versions.json'), join(artifacts, 'griffel-two-versions-one-page.json'))
+  copyFileSync(
+    join(resultsDir, 'two-versions.png'),
+    join(artifacts, 'griffel-two-versions-one-page.png'),
+  )
+  copyFileSync(
+    join(resultsDir, 'two-versions.json'),
+    join(artifacts, 'griffel-two-versions-one-page.json'),
+  )
 }
 
 const a = summary.runtimeBuild.audit
@@ -262,7 +361,9 @@ console.log(
     `[runtime build] Atomic classes on v1 buttons: ${a.v1ClassCount}, on v2 buttons: ${a.v2ClassCount}, shared: ${a.sharedClasses.length}, v1-only: ${a.v1OnlyClasses.length}, v2-only: ${a.v2OnlyClasses.length}`,
     `[runtime build] Buttons measured: ${summary.runtimeBuild.buttons.length}; hover: ${JSON.stringify(summary.runtimeBuild.hover)}`,
     `[extract build] collisions: ${summary.extractBuild.audit.collisions.length}; mixed-mode hazard reproduced: ${summary.extractBuild.mixedModeHazard.overrideLostToRuntimeReset} (override font-size=${summary.extractBuild.mixedModeHazard.overrideFontSize})`,
-    failures.length ? `FAILURES (${failures.length}):\n${JSON.stringify(failures, null, 2)}` : 'All checks passed.',
+    failures.length
+      ? `FAILURES (${failures.length}):\n${JSON.stringify(failures, null, 2)}`
+      : 'All checks passed.',
   ].join('\n'),
 )
 

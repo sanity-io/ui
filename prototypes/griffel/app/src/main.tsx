@@ -1,9 +1,8 @@
 import {makeStyles} from '@griffel/react'
-import {StrictMode} from 'react'
-import {createRoot} from 'react-dom/client'
-
 import * as v1 from 'griffel-button-v1'
 import * as v2 from 'griffel-button-v2'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 
 // The app's own styles: compiled + extracted to CSS by @griffel/vite-plugin.
 const useStyles = makeStyles({
@@ -81,7 +80,10 @@ function App() {
 
   return (
     <main className={classes.page}>
-      <Matrix theme={v1.defaultTheme} title="defaultTheme — v1 (shared runtime) next to v2 (own runtime copy)" />
+      <Matrix
+        theme={v1.defaultTheme}
+        title="defaultTheme — v1 (shared runtime) next to v2 (own runtime copy)"
+      />
       <Matrix theme={v2.darkTheme} title="darkTheme — same page, same CSS-variable contract" />
     </main>
   )

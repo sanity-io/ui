@@ -58,7 +58,8 @@ function flatten(prefix: string, value: unknown, out: Record<string, string>): v
     out[`${PREFIX}${prefix}`] = value
     return
   }
-  for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
+  if (typeof value !== 'object' || value === null) return
+  for (const [key, child] of Object.entries(value)) {
     flatten(prefix ? `${prefix}-${key}` : key, child, out)
   }
 }
@@ -71,6 +72,8 @@ function flatten(prefix: string, value: unknown, out: Record<string, string>): v
 export function createThemeVars(theme: Theme): TokenVars & CSSProperties {
   const out: Record<string, string> = {}
   flatten('', theme, out)
+  // `flatten` visits exactly the leaves `TokenName` is derived from
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
   return out as unknown as TokenVars & CSSProperties
 }
 
@@ -125,9 +128,11 @@ export const darkTheme: Theme = {
  * step inlines into the generated CSS, so the theme is a CSS-variable contract
  * shared by every package version, not a class-name contract.
  */
-export const tokens: {readonly [K in TokenName]: TokenVar<K>} = Object.fromEntries(
-  Object.keys(createThemeVars(defaultTheme)).map((property) => [
-    property.slice(PREFIX.length),
-    `var(${property})`,
-  ]),
-) as {readonly [K in TokenName]: TokenVar<K>}
+export const tokens: {readonly [K in TokenName]: TokenVar<K>} =
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion -- keys come from the same leaves as TokenName
+  Object.fromEntries(
+    Object.keys(createThemeVars(defaultTheme)).map((property) => [
+      property.slice(PREFIX.length),
+      `var(${property})`,
+    ]),
+  ) as {readonly [K in TokenName]: TokenVar<K>}

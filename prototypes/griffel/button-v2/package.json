@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "private": true,
   "description": "@sanity/ui-style Button built on Griffel — v2 of the two-versions-on-one-page experiment (reordered definitions, changed values, bundled Griffel runtime)",
-  "type": "module",
-  "sideEffects": false,
   "files": [
     "dist"
   ],
+  "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

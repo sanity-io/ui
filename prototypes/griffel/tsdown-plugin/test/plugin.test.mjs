@@ -1,3 +1,4 @@
+/* oxlint-disable typescript/no-floating-promises -- node:test registers tests synchronously */
 import assert from 'node:assert/strict'
 import {mkdtempSync, readFileSync, writeFileSync} from 'node:fs'
 import {tmpdir} from 'node:os'
@@ -13,7 +14,11 @@ test('assertOneMeaningPerClass: identical rules may repeat, different rules per 
   // one reset class spans several selectors
   assertOneMeaningPerClass([{r: ['.rxyz{margin:0;}', '.rxyz>span{display:block;}']}])
   assert.throws(
-    () => assertOneMeaningPerClass([{d: ['.fabc123{color:red;}']}, {h: ['.fabc123:hover{color:blue;}']}]),
+    () =>
+      assertOneMeaningPerClass([
+        {d: ['.fabc123{color:red;}']},
+        {h: ['.fabc123:hover{color:blue;}']},
+      ]),
     /two meanings/,
   )
 })
@@ -60,7 +65,10 @@ test('extract mode: __css/__resetCSS/__staticCSS without CSS in the JS, CSS in t
   assert.doesNotMatch(code, /color:red/)
   assert.ok(css.includes('.f') && css.includes('color:red') && css.includes(':hover{color:blue;}'))
   // bucket order: reset → default → hover
-  assert.ok(css.indexOf('margin:0') < css.indexOf('color:red') && css.indexOf('color:red') < css.indexOf(':hover'))
+  assert.ok(
+    css.indexOf('margin:0') < css.indexOf('color:red') &&
+      css.indexOf('color:red') < css.indexOf(':hover'),
+  )
 })
 
 test('classNameHashSalt changes every class name', async () => {
@@ -75,7 +83,9 @@ test('classNameHashSalt changes every class name', async () => {
 
 test('the committed build of button v1 passes the one-meaning check', () => {
   const dist = readFileSync(new URL('../../button/dist/index.js', import.meta.url), 'utf8')
-  const rules = [...dist.matchAll(/const __griffelCssRules\$?\d* = (\{[\s\S]*?\});\n/g)].map((m) => JSON.parse(m[1]))
+  const rules = [...dist.matchAll(/const __griffelCssRules\$?\d* = (\{[\s\S]*?\});\n/g)].map((m) =>
+    JSON.parse(m[1]),
+  )
   assert.ok(rules.length >= 2)
   assertOneMeaningPerClass(rules)
 })

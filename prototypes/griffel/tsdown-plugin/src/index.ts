@@ -1,10 +1,14 @@
-import {defaultCompareMediaQueries, type CSSRulesByBucket, type GriffelRenderer} from '@griffel/core'
+import {
+  defaultCompareMediaQueries,
+  type CSSRulesByBucket,
+  type GriffelRenderer,
+} from '@griffel/core'
 import {sortCSSRules} from '@griffel/css-extraction-utils'
 import {EvalCache, transformSync, type TransformResolver} from '@griffel/transform'
 import {createResolverFactory} from '@griffel/vite-plugin'
-import MagicString from 'magic-string'
+import {MagicString} from 'magic-string'
 import {parseSync} from 'oxc-parser'
-import {ScopeTracker, type ScopeTrackerImport, walk} from 'oxc-walker'
+import {ScopeTracker, walk} from 'oxc-walker'
 import type {Plugin} from 'rolldown'
 
 /**
@@ -74,7 +78,12 @@ function isNonESMError(error: unknown): boolean {
  * references cost nothing, and a file is the natural insertion unit for a
  * component module anyway.
  */
-function toInjectShape(code: string, filename: string, cssRules: CSSRulesByBucket, importsToTransform: Set<string>) {
+function toInjectShape(
+  code: string,
+  filename: string,
+  cssRules: CSSRulesByBucket,
+  importsToTransform: Set<string>,
+) {
   const parsed = parseSync(filename, code)
   const magic = new MagicString(code)
   const scopeTracker = new ScopeTracker()
@@ -100,14 +109,16 @@ function toInjectShape(code: string, filename: string, cssRules: CSSRulesByBucke
     scopeTracker,
     enter(node) {
       if (node.type !== 'CallExpression' || node.callee.type !== 'Identifier') return
-      const declaration = scopeTracker.getDeclaration(node.callee.name) as ScopeTrackerImport | null
-      if (declaration?.type !== 'Import' || declaration.node.type !== 'ImportSpecifier') return
-      if (!importsToTransform.has(declaration.importNode.source.value)) return
-      const imported = declaration.node.imported
+      const declaration = scopeTracker.getDeclaration(node.callee.name)
+      if (declaration?.type !== 'Import') return
+      const {node: specifier, importNode} = declaration
+      if (specifier.type !== 'ImportSpecifier') return
+      if (!importsToTransform.has(importNode.source.value)) return
+      const imported = specifier.imported
       if (imported.type !== 'Identifier') return
       const target = INJECT_IDENTIFIERS[imported.name]
       if (!target) return
-      if (declaration.node.local.name === imported.name) {
+      if (specifier.local.name === imported.name) {
         magic.overwrite(node.callee.start, node.callee.end, target.name)
       }
       if (target.appendRules) {
@@ -182,7 +193,12 @@ export function griffelTsdownPlugin(options: GriffelPluginOptions = {}): Plugin 
 
         if (mode === 'extract') return {code: result.code, map: null}
         return {
-          code: toInjectShape(result.code, filename, result.cssRulesByBucket, importsToTransformSet),
+          code: toInjectShape(
+            result.code,
+            filename,
+            result.cssRulesByBucket,
+            importsToTransformSet,
+          ),
           map: null,
         }
       },
@@ -193,7 +209,11 @@ export function griffelTsdownPlugin(options: GriffelPluginOptions = {}): Plugin 
       assertOneMeaningPerClass([...rulesByFile.values()])
       if (fileName === false) return
       // Same ordering as the runtime's style buckets and as `@griffel/vite-plugin`
-      const source = sortCSSRules([...rulesByFile.values()], compareMediaQueries, compareContainerQueries)
+      const source = sortCSSRules(
+        [...rulesByFile.values()],
+        compareMediaQueries,
+        compareContainerQueries,
+      )
       this.emitFile({type: 'asset', fileName, source})
     },
   }
