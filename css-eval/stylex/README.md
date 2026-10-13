@@ -40,6 +40,8 @@ pnpm evidence                # build libs + app + next, playwright, tsc probe, h
 pnpm build:libs && pnpm build:app && pnpm build:next
 pnpm test                    # starts `vite preview` (4173) and `next start` (3077)
 pnpm typecheck && pnpm hazard && pnpm bench && pnpm measure
+pnpm parity && pnpm bench:compilers   # Babel vs Rust compiler
+STYLEX_COMPILER=rs pnpm build:libs && STYLEX_COMPILER=rs pnpm build:app && STYLEX_COMPILER=rs pnpm test
 pnpm dev                     # vite dev server for the one-page demo
 ```
 
