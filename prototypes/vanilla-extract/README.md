@@ -18,7 +18,7 @@ plugins. It also sketches what rule-content hashing would need upstream, and mea
 | `lib-*/tsdown.config.mts` | the real toolchain: tsdown + `@sanity/tsdown-config` → `@sanity/vanilla-extract-tsdown-plugin`; `VE_IDENTIFIERS` selects the naming mode |
 | `consumer/` | a Vite + React 19 page that loads **both** releases' built CSS and JS (`?mode=<naming mode>`) |
 | `tests/collision.spec.ts` | Playwright: proves the collision in `default` mode and its absence in the salted modes, samples computed styles, takes the screenshots |
-| `scripts/` | `build.mjs` (all modes), `compare-css.mjs` (identifier collisions per mode), `compare-files.mjs` (any two stylesheets, e.g. published tarballs), `build-upstream-vite.mjs` (same build through the upstream `@vanilla-extract/vite-plugin`), `bench.mjs` (compile time, sizes, runtime) |
+| `scripts/` | `build.mjs` (all modes), `compare-css.mjs` (identifier collisions per mode), `compare-files.mjs` (any two stylesheets, e.g. published tarballs), `build-upstream-vite.mjs` (same build through the upstream `@vanilla-extract/vite-plugin`), `build-fork-vite.mjs` (through `@sanity/vanilla-extract-vite-plugin`, the CDN-bundle plugin), `bench.mjs` (compile time, sizes, runtime) |
 | `typecheck/negative.ts` | which authoring mistakes `tsc` catches (and which it does not) |
 | `upstream-content-hash.patch` | the proposed upstream change (`@vanilla-extract/css`: pass serialized `content` to custom identifier functions; +25/−9 lines) |
 | `patches/` | the same change applied to the installed `@vanilla-extract/css@1.21.3` through `pnpm patch`, so the `content` mode can be built and measured |
@@ -44,6 +44,7 @@ pnpm build                   # lib-v1 + lib-v2 in every mode → <lib>/dist/<mod
 pnpm compare                 # results/compare.md
 pnpm test                    # Playwright (needs `playwright install chromium`)
 pnpm run build:upstream-vite # same libs through upstream @vanilla-extract/vite-plugin, compares names
+pnpm run build:fork-vite     # through @sanity/vanilla-extract-vite-plugin (see the note inside)
 pnpm bench                   # results/metrics.md
 pnpm typecheck               # typecheck/negative.ts
 pnpm dev                     # open http://localhost:4173/?mode=default|version|version+module|content

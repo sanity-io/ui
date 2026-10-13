@@ -20,6 +20,9 @@ importers:
       '@sanity/tsdown-config':
         specifier: ^0.28.8
         version: 0.28.8(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@24.19.2)(tsdown@0.23.1(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2))
+      '@sanity/vanilla-extract-vite-plugin':
+        specifier: ^0.2.26
+        version: 0.2.26(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2))
       '@types/node':
         specifier: ^24.19.2
         version: 24.19.2
@@ -528,6 +531,12 @@ packages:
     engines: {node: '>=20.19 <22 || >=22.12'}
     peerDependencies:
       tsdown: ^0.23.0
+
+  '@sanity/vanilla-extract-vite-plugin@0.2.26':
+    resolution: {integrity: sha512-RMuydTy9cmEvufvt+FxOMTPTJyGWLZOcDIZnH1Y7uT6/1IB3nF3LlQbNekW4a2DLZdFNlF5t4mt9dwNbXF1wUA==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      vite: ^8.0.0
 
   '@types/argparse@1.0.38':
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
@@ -1831,6 +1840,14 @@ snapshots:
     transitivePeerDependencies:
       - babel-plugin-macros
       - rolldown
+
+  '@sanity/vanilla-extract-vite-plugin@0.2.26(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2))':
+    dependencies:
+      '@sanity/vanilla-extract-integration': 0.1.26
+      '@vanilla-extract/css': 1.21.3(patch_hash=f1ba0716ae9219b35ff7f13756e019fc48981bfa149ef7d7d91427bb26e86edc)
+      vite: 8.3.4(@types/node@24.19.2)(esbuild@0.28.2)
+    transitivePeerDependencies:
+      - babel-plugin-macros
 
   '@types/argparse@1.0.38': {}
 
