@@ -1,35 +1,39 @@
-import {createVar, globalStyle, style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const arrowSize = createVar()
+const arrowSize = 'var(--arrow-size)'
 
-export const arrow = style({
-  position: 'absolute',
-  width: arrowSize,
-  height: arrowSize,
-  selectors: {
-    ':empty + &': {display: 'none'},
-    "[data-placement^='top'] > &": {bottom: `calc(-1 * ${arrowSize})`},
-    "[data-placement^='right'] > &": {left: `calc(-1 * ${arrowSize})`},
-    "[data-placement^='left'] > &": {right: `calc(-1 * ${arrowSize})`},
-    "[data-placement^='bottom'] > &": {top: `calc(-1 * ${arrowSize})`},
+export const arrow = css({
+  'position': 'absolute',
+  'width': arrowSize,
+  'height': arrowSize,
+  ':empty + &': {display: 'none'},
+  "[data-placement^='top'] > &": {
+    'bottom': `calc(-1 * ${arrowSize})`,
+    '& > svg': {transform: 'rotate(0)'},
+  },
+  "[data-placement^='right'] > &": {
+    'left': `calc(-1 * ${arrowSize})`,
+    '& > svg': {transform: 'rotate(90deg)'},
+  },
+  "[data-placement^='left'] > &": {
+    'right': `calc(-1 * ${arrowSize})`,
+    '& > svg': {transform: 'rotate(-90deg)'},
+  },
+  "[data-placement^='bottom'] > &": {
+    'top': `calc(-1 * ${arrowSize})`,
+    '& > svg': {transform: 'rotate(180deg)'},
+  },
+  '& > svg': {
+    display: 'block',
+    lineHeight: 0,
+    transformOrigin: `calc(${arrowSize} / 2) calc(${arrowSize} / 2)`,
   },
 })
 
-globalStyle(`${arrow} > svg`, {
-  display: 'block',
-  lineHeight: 0,
-  transformOrigin: `calc(${arrowSize} / 2) calc(${arrowSize} / 2)`,
-})
-
-globalStyle(`[data-placement^='top'] > ${arrow} > svg`, {transform: 'rotate(0)'})
-globalStyle(`[data-placement^='right'] > ${arrow} > svg`, {transform: 'rotate(90deg)'})
-globalStyle(`[data-placement^='left'] > ${arrow} > svg`, {transform: 'rotate(-90deg)'})
-globalStyle(`[data-placement^='bottom'] > ${arrow} > svg`, {transform: 'rotate(180deg)'})
-
-export const arrowStroke = style({
+export const arrowStroke = css({
   stroke: 'var(--card-shadow-outline-color)',
 })
 
-export const arrowShape = style({
+export const arrowShape = css({
   fill: 'var(--card-bg-color)',
 })

@@ -1,8 +1,10 @@
 {
   "extends": "../../tsconfig.settings.json",
   "include": [
+    "./panda.config.ts",
     "./scripts",
     "./src",
+    "./styled-system",
     "./test",
     "./tsdown.config.mts",
     "./typings",

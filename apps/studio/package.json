@@ -25,7 +25,7 @@
     "styled-components": "catalog:"
   },
   "devDependencies": {
-    "@sanity/vanilla-extract-vite-plugin": "catalog:",
+    "@pandacss/vite": "catalog:",
     "@sindresorhus/slugify": "^2.2.1",
     "@types/node": "catalog:",
     "@types/react": "catalog:",

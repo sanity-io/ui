@@ -1,24 +1,22 @@
-import {style} from '@vanilla-extract/css'
+import {css, firstThatWorks} from '#styled-system/css'
 
 const LOADING_BAR_HEIGHT = 2
 
-export const toast = style({
-  pointerEvents: 'all',
-  width: '100%',
-  position: 'relative',
-  overflow: ['hidden', 'clip'],
-  selectors: {
-    '&[data-has-duration]': {
-      paddingBottom: `calc(${LOADING_BAR_HEIGHT}px / 2)`,
-    },
+export const toast = css({
+  'pointerEvents': 'all',
+  'width': '100%',
+  'position': 'relative',
+  'overflow': firstThatWorks('clip', 'hidden'),
+  '&[data-has-duration]': {
+    paddingBottom: `calc(${LOADING_BAR_HEIGHT}px / 2)`,
   },
 })
 
-export const toastText = style({
+export const toastText = css({
   overflowX: 'auto',
 })
 
-export const loadingBar = style({
+export const loadingBar = css({
   display: 'flex',
   position: 'absolute',
   bottom: '0px',
@@ -27,13 +25,13 @@ export const loadingBar = style({
   right: '0px',
   pointerEvents: 'none',
   zIndex: -1,
-  overflow: ['hidden', 'clip'],
+  overflow: firstThatWorks('clip', 'hidden'),
   background: 'transparent',
   alignItems: 'flex-end',
   willChange: 'opacity',
 })
 
-export const loadingBarMask = style({
+export const loadingBarMask = css({
   position: 'absolute',
   top: 0,
   left: `-${LOADING_BAR_HEIGHT}px`,
@@ -42,14 +40,9 @@ export const loadingBarMask = style({
   zIndex: 1,
 })
 
-export const loadingBarProgress = style({
+export const loadingBarProgress = css({
   display: 'block',
   height: '100%',
   width: '100%',
   transformOrigin: '0% 50%',
-  selectors: {
-    '&&': {
-      backgroundColor: 'var(--toast-loading-bar-bg)',
-    },
-  },
 })

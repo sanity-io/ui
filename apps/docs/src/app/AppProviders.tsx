@@ -1,5 +1,6 @@
 'use client'
 
+import '@sanity/ui/styles.css'
 import {LayerProvider, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'
 import {ToastProvider} from '@sanity/ui/toast'

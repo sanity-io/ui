@@ -1,3 +1,4 @@
+import './panda.css'
 import type {Preview} from '@storybook/react-vite'
 import {registerLanguage} from 'react-refractor'
 import javascript from 'refractor/javascript'

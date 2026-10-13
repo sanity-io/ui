@@ -1,5 +1,5 @@
-import {style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const tab = style({
+export const tab = css({
   maxWidth: '100%',
 })

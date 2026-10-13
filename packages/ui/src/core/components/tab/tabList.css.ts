@@ -1,11 +1,11 @@
-import {globalStyle, style} from '@vanilla-extract/css'
-
-export const tabList = style({})
+import {css} from '#styled-system/css'
 
 // Limits the width of tabs in the tablist
-globalStyle(`${tabList} > div`, {
-  display: 'inline-block',
-  verticalAlign: 'middle',
-  maxWidth: '100%',
-  boxSizing: 'border-box',
+export const tabList = css({
+  '& > div': {
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  },
 })

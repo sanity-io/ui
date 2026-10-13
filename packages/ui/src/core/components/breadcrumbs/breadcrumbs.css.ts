@@ -1,6 +1,6 @@
-import {style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const breadcrumbs = style({
+export const breadcrumbs = css({
   margin: 0,
   padding: 0,
   display: 'flex',
@@ -10,6 +10,6 @@ export const breadcrumbs = style({
   lineHeight: 0,
 })
 
-export const expandButton = style({
+export const expandButton = css({
   appearance: 'none',
 })

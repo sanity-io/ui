@@ -13,6 +13,9 @@
     "dev": "next dev --turbopack",
     "e2e": "playwright test",
     "e2e:build": "EXPOSE_TESTING_API=1 next build --turbopack",
+    "prebuild": "pnpm --filter @sanity/ui build",
+    "predev": "pnpm --filter @sanity/ui build",
+    "pree2e:build": "pnpm --filter @sanity/ui build",
     "prepare": "next typegen",
     "start": "next start",
     "test": "vitest",
@@ -47,7 +50,6 @@
     "@types/qs": "^6.15.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vanilla-extract/next-plugin": "^2.5.2",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }

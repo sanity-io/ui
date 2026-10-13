@@ -28,6 +28,9 @@
     "*.css"
   ],
   "types": "./dist/index.d.ts",
+  "imports": {
+    "#styled-system/*": "./styled-system/*/index.js"
+  },
   "exports": {
     ".": "./src/exports/index.ts",
     "./autocomplete": "./src/exports/autocomplete.ts",
@@ -81,7 +84,6 @@
     "@floating-ui/react-dom": "^2.1.9",
     "@sanity/color": "catalog:",
     "@sanity/icons": "catalog:",
-    "@vanilla-extract/dynamic": "catalog:",
     "clsx": "^2.1.1",
     "csstype": "^3.2.3",
     "motion": "catalog:",
@@ -90,17 +92,19 @@
     "use-effect-event": "^2.0.4"
   },
   "devDependencies": {
+    "@pandacss/dev": "catalog:",
+    "@pandacss/transformer": "catalog:",
+    "@pandacss/vite": "catalog:",
     "@sanity/tsdown-config": "catalog:",
-    "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
+    "@tsdown/css": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@types/react-is": "catalog:",
-    "@vanilla-extract/css": "catalog:",
     "@vitejs/plugin-react": "catalog:",
     "@vitest/coverage-v8": "^5.0.4",
     "jsdom": "^30.1.2",

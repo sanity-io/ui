@@ -1,6 +1,6 @@
-import {style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const toastLayer = style({
+export const toastLayer = css({
   boxSizing: 'border-box',
   position: 'fixed',
   right: 0,
