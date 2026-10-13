@@ -47,6 +47,11 @@ const config: UserConfig = await defineConfig({
   // Baseline).
   vanillaExtract: {
     fileName: 'styles.css',
+    // Fold the package version into each file's class-name hash. The default
+    // `'short'` hash is only the package name and the file path, so a release
+    // that reorders a file's styles reuses the previous release's class names
+    // for different rules.
+    identifiers: 'safe',
     inject: false,
     exports: {nodeCompat: true},
     minify: false,
