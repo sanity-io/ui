@@ -52,4 +52,4 @@ Requires Node ≥ 22.13, pnpm 12 and a system Chrome (`playwright` uses `channel
   library reset (`font: inherit`, bucket `r`) beats the extracted app override (`font-size: 14px`).
   One delivery mode per page.
 
-See `/cursor/stores/self/css-eval-griffel.md` (the report) for the full evaluation, metrics and migration plan.
+See `REPORT.md` (also written to `/cursor/stores/self/css-eval-griffel.md`) for the full evaluation, metrics and migration plan.
