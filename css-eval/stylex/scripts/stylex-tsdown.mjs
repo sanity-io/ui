@@ -7,6 +7,11 @@ import {versionScopedModuleResolution} from './stylex-options.mjs'
  * bundle, and otherwise writes a fallback to `<outDir>/assets/stylex.css`. A
  * library wants a stable, exported file, so this plugin seeds an empty
  * `stylex.css` asset for the unplugin to fill in (it runs first in the chain).
+ * The unplugin re-emits the filled asset under the same name, which makes
+ * rolldown print a harmless `FILE_NAME_CONFLICT` warning during the write phase
+ * (outside tsdown's `suppressWarnings` path). A real `@sanity/tsdown-config`
+ * integration would call `@stylexjs/babel-plugin` + `processStylexRules`
+ * directly and emit the asset once.
  */
 function seedCssAsset(fileName) {
   return {

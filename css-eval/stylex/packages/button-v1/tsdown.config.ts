@@ -18,8 +18,6 @@ const config: UserConfig = mergeConfig(
     // so the wrapper's exports generation (dev exports → source) is disabled.
     exports: false,
     sourcemap: false,
-    // the unplugin re-emits the seeded `stylex.css` asset with its content
-    suppressWarnings: [/The emitted file stylex\.css overwrites/],
   }),
   {
     // the unplugin re-emits the CSS asset through `assetFileNames`
