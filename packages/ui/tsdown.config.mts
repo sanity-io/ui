@@ -1,6 +1,8 @@
 import {defineConfig} from '@sanity/tsdown-config'
 import type {UserConfig} from 'tsdown'
 
+import {stylexTsdownPlugins} from './scripts/stylex-plugin'
+
 // The annotation keeps the declaration emit portable: this file is part of the
 // same TypeScript program as the build (there is no separate tsconfig for
 // dist), and the inferred config type cannot be named without it (TS2883).
@@ -21,41 +23,15 @@ const config: UserConfig = await defineConfig({
   // `transform: 'oxc'` runs the React Compiler natively via `oxc-transform-react`
   // (the Rust port) instead of `babel-plugin-react-compiler`
   reactCompiler: {target: '19', transform: 'oxc'},
-  // Extract vanilla-extract `.css.ts` styles into dist/styles.css. Unlike the
-  // default (`inject: true`, which self-imports `@sanity/ui/styles.css` from
-  // every entry), `inject: false` leaves loading the stylesheet to the
-  // consumer: `import '@sanity/ui/styles.css'` — the same file name and
-  // consumer contract as the vanilla-extract based successor of this library,
-  // to minimize churn when upgrading later.
-  //
-  // `exports: {nodeCompat: true}` (the default, spelled out because it carries
-  // the whole consumer contract while `inject` is off) publishes the
-  // stylesheet as the `./styles.css` subpath through a conditional export: the
-  // `browser`/`style` conditions resolve to `dist/styles.css`, while
-  // `node`/`default` resolve to a generated no-op `dist/styles-css.js` shim
-  // (with `dist/styles-css.d.ts` for `types`). Runtimes that cannot load CSS —
-  // plain `node`, SSR test runners, RSC bundlers — therefore import a valid
-  // module instead of throwing on the stylesheet.
-  //
-  // `minify: false` keeps the output readable so CSS diffs between published
-  // versions are easy to eval. The lightningcss pass still runs with the
-  // lowering targets resolved from `@sanity/browserslist-config` (the
-  // `@sanity/tsdown-config` default when no `target` is set). Note that it
-  // collapses duplicate declarations to the last value regardless of targets
-  // (e.g. an authored `overflow: hidden` fallback before `overflow: clip`
-  // ships as just `overflow: clip` — fine, since `overflow: clip` is
-  // Baseline).
-  vanillaExtract: {
-    fileName: 'styles.css',
-    // Fold the package version into each file's class-name hash. The default
-    // `'short'` hash is only the package name and the file path, so a release
-    // that reorders a file's styles reuses the previous release's class names
-    // for different rules.
-    identifiers: 'safe',
-    inject: false,
-    exports: {nodeCompat: true},
-    minify: false,
-  },
 })
 
-export default config
+// `@sanity/tsdown-config` builds its own plugin list and drops a `plugins`
+// field passed into `defineConfig`. Append the StyleX extractor afterwards.
+// It writes `dist/styles.css` plus the node/default shim and keeps the
+// conditional `./styles.css` export. Consumers still `import '@sanity/ui/styles.css'`.
+const built = config as UserConfig & {plugins?: UserConfig['plugins']}
+
+export default {
+  ...built,
+  plugins: [...stylexTsdownPlugins(), ...(Array.isArray(built.plugins) ? built.plugins : [])],
+}

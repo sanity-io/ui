@@ -1,11 +1,11 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const hotkeys = style({
-  font: 'inherit',
-  padding: '1px',
-  selectors: {
-    '&:not([hidden])': {
-      display: 'block',
-    },
+const styles = stylex.create({
+  root: {
+    ':not([hidden])': {display: 'block'},
+    'font': 'inherit',
+    'padding': '1px',
   },
 })
+
+export const hotkeys = stylex.props(styles.root).className ?? ''

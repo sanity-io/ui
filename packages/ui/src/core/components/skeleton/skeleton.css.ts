@@ -1,61 +1,49 @@
-import {keyframes, style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-const shimmer = keyframes({
+const shimmer = stylex.keyframes({
   from: {transform: 'translateX(-100%)'},
   to: {transform: 'translateX(100%)'},
 })
 
-export const skeleton = style({
-  'transition': 'opacity 200ms ease-in',
-  '@media': {
-    'screen and (prefers-reduced-motion: reduce)': {
+const styles = stylex.create({
+  root: {
+    '@media screen and (prefers-reduced-motion: reduce)': {
       backgroundColor: 'var(--card-skeleton-color-from)',
     },
+    'transition': 'opacity 200ms ease-in',
   },
-})
-
-export const skeletonVisible = style({
-  opacity: 1,
-})
-
-export const skeletonHidden = style({
-  opacity: 0,
-})
-
-export const skeletonAnimated = style({
-  '@media': {
-    'screen and (prefers-reduced-motion: no-preference)': {
-      backgroundColor: 'var(--card-skeleton-color-from)',
-      contain: 'paint',
-      WebkitMaskImage: 'linear-gradient(#fff, #fff)',
-      maskImage: 'linear-gradient(#fff, #fff)',
-      selectors: {
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `linear-gradient(
-            to right,
-            transparent,
-            var(--card-skeleton-color-to),
-            transparent
-          )`,
-          pointerEvents: 'none',
-          willChange: 'transform',
-          animationName: shimmer,
-          animationTimingFunction: 'ease-in-out',
-          animationIterationCount: 'infinite',
-          animationDuration: '2000ms',
-        },
+  visible: {opacity: 1},
+  hidden: {opacity: 0},
+  animated: {
+    '@media screen and (prefers-reduced-motion: no-preference)': {
+      '::after': {
+        animationDuration: '2000ms',
+        animationIterationCount: 'infinite',
+        animationName: shimmer,
+        animationTimingFunction: 'ease-in-out',
+        backgroundImage:
+          'linear-gradient(to right, transparent, var(--card-skeleton-color-to), transparent)',
+        content: '""',
+        inset: 0,
+        pointerEvents: 'none',
+        position: 'absolute',
+        willChange: 'transform',
       },
+      'WebkitMaskImage': 'linear-gradient(#fff, #fff)',
+      'backgroundColor': 'var(--card-skeleton-color-from)',
+      'contain': 'paint',
+      'maskImage': 'linear-gradient(#fff, #fff)',
     },
   },
-})
-
-export const skeletonStatic = style({
-  '@media': {
-    'screen and (prefers-reduced-motion: no-preference)': {
+  static: {
+    '@media screen and (prefers-reduced-motion: no-preference)': {
       backgroundColor: 'var(--card-skeleton-color-from)',
     },
   },
 })
+
+export const skeleton = stylex.props(styles.root).className ?? ''
+export const skeletonVisible = stylex.props(styles.visible).className ?? ''
+export const skeletonHidden = stylex.props(styles.hidden).className ?? ''
+export const skeletonAnimated = stylex.props(styles.animated).className ?? ''
+export const skeletonStatic = stylex.props(styles.static).className ?? ''

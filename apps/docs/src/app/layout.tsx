@@ -2,6 +2,8 @@ import {type Metadata, type Viewport} from 'next'
 import {Inter} from 'next/font/google'
 import {PropsWithChildren} from 'react'
 
+import '@sanity/ui/styles.css'
+
 import {StyledComponentsRegistry} from '@/lib/styled/registry'
 
 import {AppProviders} from './AppProviders'

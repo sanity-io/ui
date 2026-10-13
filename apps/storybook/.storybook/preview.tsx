@@ -1,4 +1,6 @@
 import type {Preview} from '@storybook/react-vite'
+
+import './stylex.css'
 import {registerLanguage} from 'react-refractor'
 import javascript from 'refractor/javascript'
 import json from 'refractor/json'

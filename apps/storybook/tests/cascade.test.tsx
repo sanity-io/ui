@@ -1,10 +1,12 @@
-import {Button, Layer, ThemeProvider} from '@sanity/ui'
+import {Avatar, AvatarStack, Button, Layer, Skeleton, Switch, ThemeProvider} from '@sanity/ui'
 import {MenuDivider} from '@sanity/ui/menu'
 import {buildTheme} from '@sanity/ui/theme'
 import {composeStories} from '@storybook/react-vite'
 import {styled} from 'styled-components'
 import {describe, expect, test} from 'vitest'
 import {render} from 'vitest-browser-react'
+
+import {Arrow} from '../../../packages/ui/src/core/utils/arrow/arrow'
 
 import * as breadcrumbsStories from '../stories/components/Breadcrumbs.stories'
 import * as hotkeysStories from '../stories/components/Hotkeys.stories'
@@ -27,7 +29,7 @@ const WrappingButton = styled(Button)`
   white-space: normal;
 `
 
-describe('vanilla-extract cascade', () => {
+describe('static stylesheet cascade', () => {
   test('Breadcrumbs expand button margin beats Button runtime margin', async () => {
     await render(<BreadcrumbsDefault maxLength={4} />)
 
@@ -94,4 +96,105 @@ describe('vanilla-extract cascade', () => {
 
     expect(button.getBoundingClientRect().width).toBe(640)
   })
+
+  test('Button label span keeps the descendant rule', async () => {
+    await render(
+      <ThemeProvider theme={theme}>
+        <Button id="label-button" text="Button" />
+      </ThemeProvider>,
+    )
+
+    const span = document.getElementById('label-button')!.querySelector(':scope > span')!
+
+    expect(getComputedStyle(span).display).toBe('block')
+    expect(getComputedStyle(span).flexGrow).toBe('1')
+    expect(getComputedStyle(span).minWidth).toBe('0px')
+  })
+
+  test('AvatarStack children stay inline', async () => {
+    await render(
+      <ThemeProvider theme={theme}>
+        <AvatarStack>
+          <Avatar initials="A" />
+          <Avatar initials="B" />
+        </AvatarStack>
+      </ThemeProvider>,
+    )
+
+    const child = document.querySelector('[data-ui="AvatarStack"] > div')!
+
+    expect(getComputedStyle(child).display).toBe('inline-block')
+    expect(getComputedStyle(child).verticalAlign).toBe('top')
+  })
+
+  test('Arrow placement and size variable match the static rules', async () => {
+    await render(
+      <ThemeProvider theme={theme}>
+        <div data-placement="top">
+          <span>label</span>
+          <Arrow height={6} width={12} />
+        </div>
+      </ThemeProvider>,
+    )
+
+    const arrow = document.querySelector('[data-ui="Arrow"]')!
+    const svg = arrow.querySelector('svg')!
+
+    expect(getComputedStyle(arrow).bottom).toBe('-12px')
+    expect(getComputedStyle(arrow).getPropertyValue('--sui-arrow-size').trim()).toBe('12px')
+    expect(getComputedStyle(svg).display).toBe('block')
+    expect(getComputedStyle(svg).transform).toBe('matrix(1, 0, 0, 1, 0, 0)')
+  })
+
+  test('Switch thumb resets the background image', async () => {
+    await render(
+      <ThemeProvider theme={theme}>
+        <Switch />
+      </ThemeProvider>,
+    )
+
+    const thumb = document.querySelector('[data-ui="Switch__thumb"]')!
+    const representation = document.querySelector('[data-ui="Switch__representation"]')!
+
+    expect(getComputedStyle(thumb).backgroundImage).toBe('none')
+    expect(getComputedStyle(representation).getPropertyValue('--switch-box-shadow').trim()).toBe(
+      'none',
+    )
+  })
+
+  test('Skeleton shimmer runs unless reduced motion is requested', async () => {
+    await render(
+      <ThemeProvider theme={theme}>
+        <Skeleton animated id="skeleton" />
+      </ThemeProvider>,
+    )
+
+    const skeleton = document.getElementById('skeleton')!
+
+    expect(getComputedStyle(skeleton, '::after').animationName).not.toBe('none')
+
+    const css = stylesheetText()
+
+    expect(css).toContain('@layer sui')
+    expect(css).not.toContain(':not(#\\#)')
+    expect(css).not.toMatch(/\.x[a-z0-9]+\.x[a-z0-9]+\b/)
+  })
 })
+
+function stylesheetText(): string {
+  const chunks: string[] = []
+
+  for (const sheet of document.styleSheets) {
+    let rules: CSSRuleList
+
+    try {
+      rules = sheet.cssRules
+    } catch {
+      continue
+    }
+
+    for (const rule of rules) chunks.push(rule.cssText)
+  }
+
+  return chunks.join('\n')
+}

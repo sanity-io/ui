@@ -1,6 +1,10 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const checkbox = style({
-  position: 'relative',
-  display: 'inline-block',
+const styles = stylex.create({
+  root: {
+    display: 'inline-block',
+    position: 'relative',
+  },
 })
+
+export const checkbox = stylex.props(styles.root).className ?? ''

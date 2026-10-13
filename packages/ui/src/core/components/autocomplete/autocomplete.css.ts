@@ -1,13 +1,12 @@
-import {globalStyle, style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const autocomplete = style({
-  lineHeight: 0,
+import {autocompleteList} from '../../../stylex/globals'
+
+const styles = stylex.create({
+  root: {
+    lineHeight: 0,
+  },
 })
 
-export const autocompleteListBox = style({})
-
-globalStyle(`${autocompleteListBox} > ul`, {
-  listStyle: 'none',
-  padding: 0,
-  margin: 0,
-})
+export const autocomplete = stylex.props(styles.root).className ?? ''
+export const autocompleteListBox = autocompleteList.className

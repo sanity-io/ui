@@ -1,6 +1,10 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const menu = style({
-  outline: 'none',
-  overflow: 'auto',
+const styles = stylex.create({
+  root: {
+    outline: 'none',
+    overflow: 'auto',
+  },
 })
+
+export const menu = stylex.props(styles.root).className ?? ''

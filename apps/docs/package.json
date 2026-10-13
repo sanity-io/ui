@@ -11,6 +11,8 @@
   "scripts": {
     "build": "next build --turbopack",
     "dev": "next dev --turbopack",
+    "prebuild": "pnpm --filter @sanity/ui build",
+    "predev": "pnpm --filter @sanity/ui build",
     "e2e": "playwright test",
     "e2e:build": "EXPOSE_TESTING_API=1 next build --turbopack",
     "prepare": "next typegen",
@@ -41,13 +43,13 @@
   "devDependencies": {
     "@next/playwright": "^16.4.0",
     "@playwright/test": "^1.64.0",
+    "@stylexswc/nextjs-plugin": "catalog:",
     "@types/babel__standalone": "^7.1.9",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^24.19.2",
     "@types/qs": "^6.15.1",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@vanilla-extract/next-plugin": "^2.5.2",
     "typescript": "catalog:",
     "vitest": "catalog:"
   }

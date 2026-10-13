@@ -1,13 +1,13 @@
-import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
 import react from '@vitejs/plugin-react'
 import {defineConfig} from 'vitest/config'
 
+import {stylexVitePlugin} from './scripts/stylex-plugin'
+
 export default defineConfig({
   plugins: [
-    // Compiles the vanilla-extract `.css.ts` modules imported by the source
-    // under test (vitest stubs the resulting virtual CSS, but the class name
-    // exports must evaluate)
-    vanillaExtractPlugin(),
+    // Compiles StyleX modules to content-hashed classes. The extracted CSS is
+    // stubbed in jsdom; browser tests load the real sheet.
+    stylexVitePlugin(),
     // React Compiler on oxc (`oxc-transform-react`), the same transform the
     // package build runs (`tsdown.config.mts`), so tests exercise what ships
     react({compiler: {target: '19'}}),

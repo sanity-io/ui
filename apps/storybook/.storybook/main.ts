@@ -1,10 +1,11 @@
 import {createRequire} from 'node:module'
 import path from 'node:path'
 
-import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
 import type {StorybookConfig} from '@storybook/react-vite'
 import viteReact from '@vitejs/plugin-react'
 import {mergeConfig, type Plugin} from 'vite'
+
+import {stylexVitePlugin} from '../../../packages/ui/scripts/stylex-plugin.ts'
 
 const require = createRequire(import.meta.url)
 
@@ -68,13 +69,17 @@ const config: StorybookConfig = {
   },
   viteFinal(config) {
     return mergeConfig(config, {
+      // Placeholder injection renames the stylesheet after Vite hashes it,
+      // which only applies when CSS is not code-split.
+      build: {cssCodeSplit: false},
+      optimizeDeps: {exclude: ['@stylexjs/stylex', '@sanity/ui']},
       plugins: [
         // `compiler` runs the React Compiler natively via `oxc-transform-react`
         // (the Rust port) in the same pass as TypeScript/JSX — no babel
         viteReact({compiler: {target: '19'}}),
         // @sanity/ui resolves to its TypeScript source (dev `exports`), so its
-        // vanilla-extract `.css.ts` modules must be compiled here
-        vanillaExtractPlugin(),
+        // StyleX modules must be compiled here
+        stylexVitePlugin(),
         ...(isReactDevtoolsMcpEnabled ? [reactDevtoolsMcp()] : []),
       ],
     })

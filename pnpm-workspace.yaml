@@ -20,18 +20,22 @@ catalogMode: prefer
 # so that keeps an explicit range there when needed. (See packageExtensions for
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
+  '@sanity/browserslist-config': ^1.0.5
   '@sanity/color': ^3.0.9
   '@sanity/icons': ^5.2.3
   '@sanity/logos': ^2.2.6
   '@sanity/tsdown-config': ^0.29.0
-  '@sanity/vanilla-extract-vite-plugin': ^0.3.0
+  '@stylexjs/stylex': 0.19.1
+  '@stylexswc/nextjs-plugin': 0.19.1
+  '@stylexswc/rs-compiler': 0.19.1
+  '@stylexswc/unplugin': 0.19.1
   '@types/node': ^24.19.2
   '@types/react': ^19.3.0
   '@types/react-dom': ^19.3.0
   '@types/react-is': ^19.3.0
-  '@vanilla-extract/css': ^1.21.3
-  '@vanilla-extract/dynamic': ^2.1.5
   '@vitejs/plugin-react': ^6.1.2
+  browserslist: ^4.29.3
+  lightningcss: ^1.33.0
   motion: ^14.2.0
   oxc-transform-react: ^0.154.0
   react: ^19.3.0
@@ -137,19 +141,12 @@ minimumReleaseAgeExclude:
   - '@oxlint/binding-win32-x64-msvc@1.88.0'
   - oxlint@1.88.0
   - '@lezer/highlight@1.2.5'
-  - '@storybook/addon-a11y@10.6.1'
-  - '@storybook/addon-docs@10.6.1'
-  - '@storybook/addon-links@10.6.1'
-  - '@storybook/addon-themes@10.6.1'
-  - '@storybook/addon-vitest@10.6.1'
-  - '@storybook/builder-vite@10.6.1'
-  - '@storybook/react-dom-shim@10.6.1'
-  - '@storybook/react-vite@10.6.1'
-  - '@storybook/react@10.6.1'
-  - storybook@10.6.1
-  - eslint-plugin-storybook@10.6.1
   - '@vitejs/plugin-react@6.1.2'
   - styled-components@6.6.0
+  - framer-motion@14.2.0
+  - motion-dom@14.2.0
+  - motion-utils@14.1.1
+  - motion@14.2.0
 
 minimumReleaseAgeExcludePrune: true
 

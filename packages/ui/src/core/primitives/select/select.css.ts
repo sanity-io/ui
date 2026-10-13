@@ -1,11 +1,11 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const select = style({
-  position: 'relative',
-  width: ['-moz-available', '-webkit-fill-available', 'stretch'],
-  selectors: {
-    '&:not([hidden])': {
-      display: 'inline-block',
-    },
+const styles = stylex.create({
+  root: {
+    ':not([hidden])': {display: 'inline-block'},
+    'position': 'relative',
+    'width': stylex.firstThatWorks('stretch', '-webkit-fill-available', '-moz-available'),
   },
 })
+
+export const select = stylex.props(styles.root).className ?? ''

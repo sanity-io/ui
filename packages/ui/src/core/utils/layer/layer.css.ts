@@ -1,5 +1,7 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const layer = style({
-  position: 'relative',
+const styles = stylex.create({
+  root: {position: 'relative'},
 })
+
+export const layer = stylex.props(styles.root).className ?? ''

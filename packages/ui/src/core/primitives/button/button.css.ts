@@ -1,51 +1,52 @@
-import {globalStyle, style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const buttonRoot = style({
-  WebkitFontSmoothing: 'inherit',
-  appearance: 'none',
-  display: 'inline-flex',
-  alignItems: 'center',
-  font: 'inherit',
-  border: 0,
-  outline: 'none',
-  userSelect: 'none',
-  textDecoration: 'none',
-  boxSizing: 'border-box',
-  padding: 0,
-  whiteSpace: 'nowrap',
-  textAlign: 'left',
-  position: 'relative',
-  verticalAlign: 'top',
-  selectors: {
-    '&::-moz-focus-inner': {
-      border: 0,
+import {buttonLabel, withGlobal} from '../../../stylex/globals'
+
+const styles = stylex.create({
+  root: {
+    '::-moz-focus-inner': {
+      borderColor: 'currentcolor',
+      borderStyle: 'none',
+      borderWidth: 0,
       padding: 0,
     },
+    'WebkitFontSmoothing': 'inherit',
+    'alignItems': 'center',
+    'appearance': 'none',
+    'borderColor': 'currentcolor',
+    'borderStyle': 'none',
+    'borderWidth': 0,
+    'boxSizing': 'border-box',
+    'display': 'inline-flex',
+    'font': 'inherit',
+    'outline': 'none',
+    'padding': 0,
+    'position': 'relative',
+    'textAlign': 'left',
+    'textDecoration': 'none',
+    'userSelect': 'none',
+    'verticalAlign': 'top',
+    'whiteSpace': 'nowrap',
+  },
+  fill: {
+    width: stylex.firstThatWorks('stretch', '-webkit-fill-available', '-moz-available'),
+  },
+  loading: {
+    alignItems: 'center',
+    backgroundColor: 'var(--card-bg-color)',
+    borderRadius: 'inherit',
+    bottom: 0,
+    boxShadow: 'inherit',
+    display: 'flex',
+    justifyContent: 'center',
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 1,
   },
 })
 
-globalStyle(`${buttonRoot} > span`, {
-  display: 'block',
-  flex: 1,
-  minWidth: 0,
-  borderRadius: 'inherit',
-})
-
-export const buttonWidthFill = style({
-  width: ['-moz-available', '-webkit-fill-available', 'stretch'],
-})
-
-export const buttonLoadingBox = style({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: 'var(--card-bg-color)',
-  borderRadius: 'inherit',
-  zIndex: 1,
-  boxShadow: 'inherit',
-})
+export const buttonRoot = withGlobal(stylex.props(styles.root).className, buttonLabel)
+export const buttonWidthFill = stylex.props(styles.fill).className ?? ''
+export const buttonLoadingBox = stylex.props(styles.loading).className ?? ''

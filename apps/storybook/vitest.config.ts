@@ -1,11 +1,12 @@
 import path from 'node:path'
 
-import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
 import {storybookTest} from '@storybook/addon-vitest/vitest-plugin'
 import viteReact from '@vitejs/plugin-react'
 import {playwright} from '@vitest/browser-playwright'
 import type {Plugin} from 'vite'
 import {defineConfig} from 'vitest/config'
+
+import {stylexVitePlugin} from '../../packages/ui/scripts/stylex-plugin.ts'
 
 // 1×1 opaque PNG
 const PNG = Buffer.from(
@@ -62,9 +63,9 @@ export default defineConfig({
       },
       {
         // Browser tests that need direct control over the viewport
-        // (vanillaExtractPlugin compiles the `.css.ts` modules of the
-        // @sanity/ui source that the dev `exports` resolve to)
-        plugins: [viteReact(), vanillaExtractPlugin(), slowImage()],
+        // StyleX compiles the source that the dev `exports` resolve to
+        optimizeDeps: {exclude: ['@stylexjs/stylex']},
+        plugins: [stylexVitePlugin(), viteReact(), slowImage()],
         test: {
           name: 'tests',
           include: ['tests/**/*.test.{ts,tsx}'],

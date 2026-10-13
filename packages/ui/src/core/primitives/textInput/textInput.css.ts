@@ -1,21 +1,21 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const textInputLeftBox = style({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-})
-
-export const textInputRightBox = style({
-  position: 'absolute',
-  top: 0,
-  right: 0,
-})
-
-export const textInputClearButton = style({
-  selectors: {
-    '&:not([hidden])': {
-      display: 'block',
-    },
+const styles = stylex.create({
+  left: {
+    left: 0,
+    position: 'absolute',
+    top: 0,
+  },
+  right: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  },
+  clear: {
+    ':not([hidden])': {display: 'block'},
   },
 })
+
+export const textInputLeftBox = stylex.props(styles.left).className ?? ''
+export const textInputRightBox = stylex.props(styles.right).className ?? ''
+export const textInputClearButton = stylex.props(styles.clear).className ?? ''

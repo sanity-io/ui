@@ -1,8 +1,12 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const spanWithTextOverflow = style({
-  display: 'block',
-  whiteSpace: 'nowrap',
-  textOverflow: 'ellipsis',
-  overflow: ['hidden', 'clip'],
+const styles = stylex.create({
+  root: {
+    display: 'block',
+    overflow: stylex.firstThatWorks('clip', 'hidden'),
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
 })
+
+export const spanWithTextOverflow = stylex.props(styles.root).className ?? ''

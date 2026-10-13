@@ -1,19 +1,19 @@
-import {createVanillaExtractPlugin} from '@vanilla-extract/next-plugin'
+import withStylexTurbopack from '@stylexswc/nextjs-plugin/turbopack'
 import type {NextConfig} from 'next'
 
-// The workspace @sanity/ui resolves to its TypeScript source (dev `exports`),
-// so its vanilla-extract `.css.ts` modules must be compiled here. Turbopack
-// support is forced `on` (rather than `auto`) because this app devs and
-// builds exclusively with `--turbopack`, and `auto`'s version sniffing would
-// quietly fall back to webpack-only wiring if it failed to parse a `next`
-// preview version.
-const withVanillaExtract = createVanillaExtractPlugin({
-  unstable_turbopack: {mode: 'on'},
-})
+import {stylexRsOptions} from '../../packages/ui/scripts/stylex-options.ts'
 
 const basePath = '/ui'
 const nextConfig: NextConfig = {
   basePath,
+  turbopack: {
+    // `./styles.css` also exports a Node shim. Turbopack's server conditions
+    // (`node`) pick that shim, so the docs build never receives the sheet.
+    // Point the import at the built file.
+    resolveAlias: {
+      '@sanity/ui/styles.css': '../../packages/ui/dist/styles.css',
+    },
+  },
   cacheComponents: true,
   partialPrefetching: true,
   // Matches the behavior of `sanity dev` which sets styled-components to use the fastest way of inserting CSS rules in both dev and production. It's default behavior is to disable it in dev mode.
@@ -71,4 +71,6 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withVanillaExtract(nextConfig)
+// Compiles the workspace `@sanity/ui` source. The loader does not emit CSS;
+// `layout.tsx` imports the package stylesheet (`predev` / `prebuild` refresh it).
+export default withStylexTurbopack({rsOptions: stylexRsOptions})(nextConfig)

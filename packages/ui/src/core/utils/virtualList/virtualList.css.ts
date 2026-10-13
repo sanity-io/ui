@@ -1,11 +1,13 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const virtualList = style({
-  position: 'relative',
+const styles = stylex.create({
+  root: {position: 'relative'},
+  item: {
+    left: 0,
+    position: 'absolute',
+    right: 0,
+  },
 })
 
-export const virtualListItem = style({
-  position: 'absolute',
-  left: 0,
-  right: 0,
-})
+export const virtualList = stylex.props(styles.root).className ?? ''
+export const virtualListItem = stylex.props(styles.item).className ?? ''

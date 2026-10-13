@@ -1,9 +1,9 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const tooltipLayer = style({
-  pointerEvents: 'none',
+const styles = stylex.create({
+  layer: {pointerEvents: 'none'},
+  card: {willChange: 'transform'},
 })
 
-export const tooltipCard = style({
-  willChange: 'transform',
-})
+export const tooltipLayer = stylex.props(styles.layer).className ?? ''
+export const tooltipCard = stylex.props(styles.card).className ?? ''

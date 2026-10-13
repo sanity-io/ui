@@ -1,8 +1,15 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const menuDivider = style({
-  height: '1px',
-  border: 0,
-  background: 'var(--card-hairline-soft-color)',
-  margin: 0,
+const styles = stylex.create({
+  root: {
+    backgroundColor: 'var(--card-hairline-soft-color)',
+    backgroundImage: 'none',
+    borderColor: 'currentcolor',
+    borderStyle: 'none',
+    borderWidth: 0,
+    height: '1px',
+    margin: 0,
+  },
 })
+
+export const menuDivider = stylex.props(styles.root).className ?? ''

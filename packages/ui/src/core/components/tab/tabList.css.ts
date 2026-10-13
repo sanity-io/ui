@@ -1,11 +1,3 @@
-import {globalStyle, style} from '@vanilla-extract/css'
+import {tabListChild} from '../../../stylex/globals'
 
-export const tabList = style({})
-
-// Limits the width of tabs in the tablist
-globalStyle(`${tabList} > div`, {
-  display: 'inline-block',
-  verticalAlign: 'middle',
-  maxWidth: '100%',
-  boxSizing: 'border-box',
-})
+export const tabList = tabListChild.className

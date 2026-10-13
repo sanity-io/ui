@@ -1,26 +1,18 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-// TextInput renders its root as a Card, whose Box styles own `display`, so the
-// flex layout comes from the `display` prop there and only the alignment lives
-// here. TextArea's root is a plain span, so it reuses that class and adds display.
-export const textInputRoot = style({
-  alignItems: 'center',
-})
-
-export const textAreaRoot = style([
-  textInputRoot,
-  {
-    selectors: {
-      '&:not([hidden])': {
-        display: 'flex',
-      },
-    },
+const styles = stylex.create({
+  root: {alignItems: 'center'},
+  area: {
+    ':not([hidden])': {display: 'flex'},
   },
-])
-
-export const inputRoot = style({
-  flex: 1,
-  minWidth: 0,
-  display: 'block',
-  position: 'relative',
+  input: {
+    display: 'block',
+    flex: 1,
+    minWidth: 0,
+    position: 'relative',
+  },
 })
+
+export const textInputRoot = stylex.props(styles.root).className ?? ''
+export const textAreaRoot = stylex.props(styles.root, styles.area).className ?? ''
+export const inputRoot = stylex.props(styles.input).className ?? ''

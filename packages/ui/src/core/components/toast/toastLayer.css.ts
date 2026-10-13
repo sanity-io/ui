@@ -1,12 +1,16 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const toastLayer = style({
-  boxSizing: 'border-box',
-  position: 'fixed',
-  right: 0,
-  bottom: 0,
-  listStyle: 'none',
-  pointerEvents: 'none',
-  maxWidth: '420px',
-  width: '100%',
+const styles = stylex.create({
+  root: {
+    bottom: 0,
+    boxSizing: 'border-box',
+    listStyle: 'none',
+    maxWidth: '420px',
+    pointerEvents: 'none',
+    position: 'fixed',
+    right: 0,
+    width: '100%',
+  },
 })
+
+export const toastLayer = stylex.props(styles.root).className ?? ''

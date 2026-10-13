@@ -1,71 +1,68 @@
-import {globalStyle, keyframes, style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const dialogLayer = style({
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  alignItems: 'center',
-  justifyContent: 'center',
-  outline: 'none',
-  selectors: {
-    '&:not([hidden])': {
-      display: 'flex',
-    },
-  },
-})
+import {dialogCardIn, withGlobal} from '../../../stylex/globals'
 
-const zoomIn = keyframes({
-  from: {opacity: 0, transform: 'scale(0.95)'},
-  to: {opacity: 1, transform: 'scale(1)'},
-})
-
-const fadeIn = keyframes({
+const fadeIn = stylex.keyframes({
   from: {opacity: 0},
   to: {opacity: 1},
 })
 
-export const dialogAnimated = style({
-  animation: `${fadeIn} 200ms ease-out`,
+const clip = stylex.firstThatWorks('clip', 'hidden')
+
+const styles = stylex.create({
+  layer: {
+    ':not([hidden])': {display: 'flex'},
+    'alignItems': 'center',
+    'bottom': 0,
+    'justifyContent': 'center',
+    'left': 0,
+    'outline': 'none',
+    'right': 0,
+    'top': 0,
+  },
+  animated: {
+    animationDuration: '200ms',
+    animationName: fadeIn,
+    animationTimingFunction: 'ease-out',
+  },
+  container: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    height: '100%',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  card: {
+    maxHeight: '100%',
+    minHeight: 0,
+    overflow: clip,
+    width: '100%',
+  },
+  layout: {
+    minHeight: 0,
+    width: '100%',
+  },
+  header: {
+    position: 'relative',
+    zIndex: 2,
+  },
+  content: {
+    outline: 'none',
+    overflow: 'auto',
+    position: 'relative',
+    zIndex: 1,
+  },
+  footer: {
+    position: 'relative',
+    zIndex: 3,
+  },
 })
 
-globalStyle(`${dialogAnimated} > [data-ui='DialogCard']`, {
-  animation: `${zoomIn} 200ms ease-out`,
-})
-
-export const dialogContainer = style({
-  width: '100%',
-  height: '100%',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-})
-
-export const dialogCard = style({
-  width: '100%',
-  minHeight: 0,
-  maxHeight: '100%',
-  overflow: ['hidden', 'clip'],
-})
-
-export const dialogLayout = style({
-  minHeight: 0,
-  width: '100%',
-})
-
-export const dialogHeader = style({
-  position: 'relative',
-  zIndex: 2,
-})
-
-export const dialogContent = style({
-  position: 'relative',
-  zIndex: 1,
-  overflow: 'auto',
-  outline: 'none',
-})
-
-export const dialogFooter = style({
-  position: 'relative',
-  zIndex: 3,
-})
+export const dialogLayer = stylex.props(styles.layer).className ?? ''
+export const dialogAnimated = withGlobal(stylex.props(styles.animated).className, dialogCardIn)
+export const dialogContainer = stylex.props(styles.container).className ?? ''
+export const dialogCard = stylex.props(styles.card).className ?? ''
+export const dialogLayout = stylex.props(styles.layout).className ?? ''
+export const dialogHeader = stylex.props(styles.header).className ?? ''
+export const dialogContent = stylex.props(styles.content).className ?? ''
+export const dialogFooter = stylex.props(styles.footer).className ?? ''

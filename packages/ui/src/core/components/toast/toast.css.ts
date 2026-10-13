@@ -1,55 +1,51 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-const LOADING_BAR_HEIGHT = 2
+import {toastProgress, withGlobal} from '../../../stylex/globals'
 
-export const toast = style({
-  pointerEvents: 'all',
-  width: '100%',
-  position: 'relative',
-  overflow: ['hidden', 'clip'],
-  selectors: {
-    '&[data-has-duration]': {
-      paddingBottom: `calc(${LOADING_BAR_HEIGHT}px / 2)`,
-    },
+const clip = stylex.firstThatWorks('clip', 'hidden')
+
+const styles = stylex.create({
+  root: {
+    ':is([data-has-duration])': {paddingBottom: 'calc(2px / 2)'},
+    'overflow': clip,
+    'pointerEvents': 'all',
+    'position': 'relative',
+    'width': '100%',
+  },
+  text: {overflowX: 'auto'},
+  bar: {
+    alignItems: 'flex-end',
+    backgroundColor: 'transparent',
+    backgroundImage: 'none',
+    bottom: '0px',
+    display: 'flex',
+    left: '0px',
+    overflow: clip,
+    pointerEvents: 'none',
+    position: 'absolute',
+    right: '0px',
+    top: '0px',
+    willChange: 'opacity',
+    zIndex: -1,
+  },
+  mask: {
+    bottom: '2px',
+    left: '-2px',
+    position: 'absolute',
+    right: '-2px',
+    top: 0,
+    zIndex: 1,
+  },
+  progress: {
+    display: 'block',
+    height: '100%',
+    transformOrigin: '0% 50%',
+    width: '100%',
   },
 })
 
-export const toastText = style({
-  overflowX: 'auto',
-})
-
-export const loadingBar = style({
-  display: 'flex',
-  position: 'absolute',
-  bottom: '0px',
-  top: '0px',
-  left: '0px',
-  right: '0px',
-  pointerEvents: 'none',
-  zIndex: -1,
-  overflow: ['hidden', 'clip'],
-  background: 'transparent',
-  alignItems: 'flex-end',
-  willChange: 'opacity',
-})
-
-export const loadingBarMask = style({
-  position: 'absolute',
-  top: 0,
-  left: `-${LOADING_BAR_HEIGHT}px`,
-  right: `-${LOADING_BAR_HEIGHT}px`,
-  bottom: `${LOADING_BAR_HEIGHT}px`,
-  zIndex: 1,
-})
-
-export const loadingBarProgress = style({
-  display: 'block',
-  height: '100%',
-  width: '100%',
-  transformOrigin: '0% 50%',
-  selectors: {
-    '&&': {
-      backgroundColor: 'var(--toast-loading-bar-bg)',
-    },
-  },
-})
+export const toast = stylex.props(styles.root).className ?? ''
+export const toastText = stylex.props(styles.text).className ?? ''
+export const loadingBar = stylex.props(styles.bar).className ?? ''
+export const loadingBarMask = stylex.props(styles.mask).className ?? ''
+export const loadingBarProgress = withGlobal(stylex.props(styles.progress).className, toastProgress)

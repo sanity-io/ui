@@ -1,36 +1,15 @@
-import {globalStyle, style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const treeItem = style({
-  selectors: {
-    "&[role='treeitem']": {
-      outline: 'none',
-    },
+import {treeItemChildren, withGlobal} from '../../../stylex/globals'
+
+const styles = stylex.create({
+  item: {
+    ':is([role="treeitem"])': {outline: 'none'},
+  },
+  arrow: {
+    transition: 'transform 100ms',
   },
 })
 
-globalStyle(`${treeItem}[role='none'] > [role='treeitem']`, {
-  outline: 'none',
-  cursor: 'default',
-  borderRadius: '3px',
-  backgroundColor: 'var(--card-bg-color)',
-  color: 'var(--treeitem-fg-color)',
-})
-
-globalStyle(`${treeItem}[role='none'] > [role='treeitem']:focus`, {
-  position: 'relative',
-})
-
-globalStyle(`${treeItem}[role='treeitem'] > div`, {
-  cursor: 'default',
-  borderRadius: '3px',
-  backgroundColor: 'var(--card-bg-color)',
-  color: 'var(--treeitem-fg-color)',
-})
-
-globalStyle(`${treeItem}[role='treeitem']:focus > div`, {
-  position: 'relative',
-})
-
-export const treeItemToggleArrow = style({
-  transition: 'transform 100ms',
-})
+export const treeItem = withGlobal(stylex.props(styles.item).className, treeItemChildren)
+export const treeItemToggleArrow = stylex.props(styles.arrow).className ?? ''

@@ -1,10 +1,10 @@
-import {style} from '@vanilla-extract/css'
+import * as stylex from '@stylexjs/stylex'
 
-export const radio = style({
-  position: 'relative',
-  selectors: {
-    '&:not([hidden])': {
-      display: 'inline-block',
-    },
+const styles = stylex.create({
+  root: {
+    ':not([hidden])': {display: 'inline-block'},
+    'position': 'relative',
   },
 })
+
+export const radio = stylex.props(styles.root).className ?? ''
