@@ -25,6 +25,7 @@ export interface TextInputProps
   extends Omit<React.ComponentProps<'input'>, 'type'>, FormElementDensityProps {
   /**
    * Used to trigger styling for invalid states.
+   * @remarks Use when form validation fails. Pair with a visible error message.
    */
   hasError?: boolean
   /**

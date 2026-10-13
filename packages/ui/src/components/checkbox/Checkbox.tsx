@@ -17,7 +17,7 @@ const checkboxMarkClassName = suffixClassName('sui-CheckboxMark')
 /** @beta */
 export function Checkbox(props: CheckboxProps) {
   const inputRef = useRef<HTMLInputElement>(null)
-  const {className, style, disabled, error, indeterminate, label, ...rest} = getProps(
+  const {className, style, disabled, hasError, indeterminate, label, ...rest} = getProps(
     props,
     checkboxProps,
   )
@@ -34,7 +34,7 @@ export function Checkbox(props: CheckboxProps) {
       style={style}
       data-ui="Checkbox"
       disabled={disabled}
-      error={error}
+      error={hasError}
     >
       <VisuallyHidden
         as="input"
@@ -47,7 +47,7 @@ export function Checkbox(props: CheckboxProps) {
 
       <Box
         as="span"
-        className={clsx(checkboxMarkClassName, error && 'sui-error')}
+        className={clsx(checkboxMarkClassName, hasError && 'sui-error')}
         position="relative"
         radius={2}
         width="17px"
