@@ -1,0 +1,71 @@
+{
+  "js": {
+    "styled-system/css (css + cva + cx)": {
+      "raw": 18879,
+      "gzip": 6902,
+      "brotli": 6104
+    },
+    "styled-system/css (css only)": {
+      "raw": 16630,
+      "gzip": 6084,
+      "brotli": 5377
+    },
+    "styled-system/tokens (token + token.var)": {
+      "raw": 5980,
+      "gzip": 1580,
+      "brotli": 1322
+    },
+    "styled-system/recipes (config recipe badge)": {
+      "raw": 9159,
+      "gzip": 3718,
+      "brotli": 3366
+    },
+    "styled-system/jsx (styled factory, unused by this library)": {
+      "raw": 32855,
+      "gzip": 11064,
+      "brotli": 9571
+    },
+    "library dist/index.js (runtime build)": {
+      "raw": 32218,
+      "gzip": 10627,
+      "brotli": 9329
+    },
+    "library dist-transform/index.js (transform: true)": {
+      "raw": 32195,
+      "gzip": 10623,
+      "brotli": 9332
+    },
+    "library, components only (Button + ThemeProvider + Badge)": {
+      "raw": 32035,
+      "gzip": 10531,
+      "brotli": 9255
+    }
+  },
+  "css": {
+    "styles.css (hashed)": {
+      "raw": 12671,
+      "gzip": 2533,
+      "brotli": 2113
+    },
+    "styles.css (hashed, min)": {
+      "raw": 10715,
+      "gzip": 2434,
+      "brotli": 2004
+    },
+    "styles.css (readable)": {
+      "raw": 14454,
+      "gzip": 2545,
+      "brotli": 2089
+    },
+    "styles.css (readable, min)": {
+      "raw": 12498,
+      "gzip": 2452,
+      "brotli": 2026
+    },
+    "demo app combined CSS (v1 + v2 + page chrome, Vite output)": {
+      "raw": 27002,
+      "gzip": 3224,
+      "brotli": 2595
+    }
+  }
+}

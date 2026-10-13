@@ -1,0 +1,76 @@
+{
+  "typescript": "Version 7.0.2",
+  "tscMs": 342,
+  "expectedErrorLines": 13,
+  "caught": 13,
+  "missedLines": [],
+  "unexpectedErrorLinesInWrong": [],
+  "errorsOutsideWrong": [],
+  "diagnostics": [
+    {
+      "line": 12,
+      "code": "TS2769",
+      "message": "No overload matches this call. The last overload gave the following error. Type '\"tone.primary.nope\"' is not assignable to type 'ConditionalValue<ColorsValue>'. Did you mean '\"tone.primary.bg\"'?"
+    },
+    {
+      "line": 15,
+      "code": "TS2769",
+      "message": "No overload matches this call. The last overload gave the following error. Type '\"13px\"' is not assignable to type 'ConditionalValue<SpacingValue>'."
+    },
+    {
+      "line": 18,
+      "code": "TS2769",
+      "message": "No overload matches this call. The last overload gave the following error. Type '\"flexx\"' is not assignable to type 'ConditionalValue<DisplayValue>'. Did you mean '\"flex\"'?"
+    },
+    {
+      "line": 21,
+      "code": "TS2769",
+      "message": "No overload matches this call. The last overload gave the following error. Object literal may only specify known properties, but 'colour' does not exist in type 'SystemStyleObject'. Did you mean to write 'color'?"
+    },
+    {
+      "line": 24,
+      "code": "TS2769",
+      "message": "No overload matches this call. The last overload gave the following error. Object literal may only specify known properties, but '_hovr' does not exist in type 'SystemStyleObject'. Did you mean to write '_hover'?"
+    },
+    {
+      "line": 27,
+      "code": "TS2322",
+      "message": "Type '\"brand\"' is not assignable to type '\"caution\" | \"critical\" | \"default\" | \"positive\" | \"primary\" | undefined'."
+    },
+    {
+      "line": 30,
+      "code": "TS2353",
+      "message": "Object literal may only specify known properties, and 'size' does not exist in type 'ButtonVariantProps'."
+    },
+    {
+      "line": 33,
+      "code": "TS2322",
+      "message": "Type '\"brand\"' is not assignable to type '\"caution\" | \"critical\" | \"default\" | \"positive\" | \"primary\" | undefined'."
+    },
+    {
+      "line": 36,
+      "code": "TS2345",
+      "message": "Argument of type '\"colors.tone.primary.nope\"' is not assignable to parameter of type 'TokenPath'."
+    },
+    {
+      "line": 37,
+      "code": "TS2345",
+      "message": "Argument of type '\"radii.9\"' is not assignable to parameter of type 'Token'."
+    },
+    {
+      "line": 40,
+      "code": "TS2322",
+      "message": "Type '\"positive\"' is not assignable to type 'ConditionalValue<\"critical\" | \"default\" | \"primary\" | undefined>'."
+    },
+    {
+      "line": 43,
+      "code": "TS2353",
+      "message": "Object literal may only specify known properties, and ''tone.primary.nope'' does not exist in type 'Partial<Record<SemanticColorPath, string>>'."
+    },
+    {
+      "line": 46,
+      "code": "TS2769",
+      "message": "No overload matches this call. The last overload gave the following error. Type '\"full\"' is not assignable to type 'ConditionalValue<ColorsValue>'."
+    }
+  ]
+}

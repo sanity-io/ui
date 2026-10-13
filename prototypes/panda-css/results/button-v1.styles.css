@@ -377,7 +377,7 @@
   .sui-v4-gMHZtu:is(:focus-visible, [data-focus-visible]) {
     outline-color: var(--sui-v4-colors-focus-ring);
   }
-  .sui-v4-bCMHJF:is(:focus-visible, [data-focus-visible]) {
+  .sui-v4-cemknP:is(:focus-visible, [data-focus-visible]) {
     outline-offset: 1px;
   }
   .sui-v4-hLPNjH:is(:focus-visible, [data-focus-visible]) {

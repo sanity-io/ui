@@ -1,0 +1,173 @@
+{
+  "machine": {
+    "cpu": "Intel(R) Xeon(R) Processor",
+    "cores": 4,
+    "memoryGb": 16,
+    "node": "v22.14.0",
+    "platform": "linux-x64",
+    "panda": "2.2.0",
+    "tsdown": "0.23.1",
+    "vite": "8.3.4"
+  },
+  "prototype": {
+    "panda codegen (cold: no styled-system/)": {
+      "runs": 5,
+      "min": 343.7,
+      "median": 352.6,
+      "max": 359.4,
+      "all": [
+        359.4,
+        352.6,
+        343.7,
+        354.5,
+        348.9
+      ]
+    },
+    "panda codegen (warm: styled-system/ present)": {
+      "runs": 5,
+      "min": 341.7,
+      "median": 351.7,
+      "max": 364.5,
+      "all": [
+        341.7,
+        342.6,
+        364.5,
+        358.9,
+        351.7
+      ]
+    },
+    "panda cssgen (first run after codegen)": {
+      "runs": 5,
+      "min": 348.3,
+      "median": 352.4,
+      "max": 362.4,
+      "all": [
+        348.3,
+        362.4,
+        349,
+        352.4,
+        353.8
+      ]
+    },
+    "panda cssgen (repeat run)": {
+      "runs": 5,
+      "min": 336.2,
+      "median": 343.3,
+      "max": 396.3,
+      "all": [
+        396.3,
+        359.7,
+        342.9,
+        336.2,
+        343.3
+      ]
+    },
+    "process overhead: pnpm exec panda --version": {
+      "runs": 5,
+      "min": 217.9,
+      "median": 222.4,
+      "max": 230.7,
+      "all": [
+        223.2,
+        217.9,
+        222.4,
+        230.7,
+        219
+      ]
+    },
+    "tsdown (library JS + d.ts, @sanity/tsdown-config)": {
+      "runs": 5,
+      "min": 647.8,
+      "median": 656.2,
+      "max": 669.2,
+      "all": [
+        656.2,
+        647.8,
+        656.2,
+        648.1,
+        669.2
+      ]
+    },
+    "full library build (rm dist, codegen, cssgen, tsdown)": {
+      "runs": 3,
+      "min": 962.6,
+      "median": 974.3,
+      "max": 986.5,
+      "all": [
+        974.3,
+        962.6,
+        986.5
+      ]
+    },
+    "tsdown + @pandacss/rollup transform:true (zero-runtime build)": {
+      "runs": 3,
+      "min": 654.7,
+      "median": 655.8,
+      "max": 663.2,
+      "all": [
+        655.8,
+        663.2,
+        654.7
+      ]
+    },
+    "vite build of the consumer demo (no Panda plugin)": {
+      "runs": 3,
+      "min": 415.4,
+      "median": 426.8,
+      "max": 439.6,
+      "all": [
+        426.8,
+        439.6,
+        415.4
+      ]
+    },
+    "panda cssgen --watch: file-change events not picked up": 0,
+    "panda cssgen --watch rebuild after editing Button.tsx": {
+      "runs": 5,
+      "min": 4,
+      "median": 4.4,
+      "max": 6,
+      "all": [
+        6,
+        4.1,
+        4,
+        4.9,
+        4.4
+      ]
+    }
+  },
+  "scale": {
+    "300 component files (each 1 css() + 1 cva with 6 variants)": {
+      "panda codegen ms": 168.7,
+      "panda cssgen ms": {
+        "runs": 3,
+        "min": 171.1,
+        "median": 171.6,
+        "max": 172.2,
+        "all": [
+          172.2,
+          171.6,
+          171.1
+        ]
+      },
+      "styles.css bytes": 66125,
+      "atomic rules": 1100
+    },
+    "1000 component files (each 1 css() + 1 cva with 6 variants)": {
+      "panda codegen ms": 152.4,
+      "panda cssgen ms": {
+        "runs": 3,
+        "min": 231.6,
+        "median": 236,
+        "max": 236.4,
+        "all": [
+          236.4,
+          231.6,
+          236
+        ]
+      },
+      "styles.css bytes": 158193,
+      "atomic rules": 3200
+    }
+  }
+}

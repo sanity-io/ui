@@ -11,8 +11,8 @@ export type ButtonMode = (typeof buttonModes)[number]
 export type ButtonTone = Tone
 
 export interface ButtonVariantProps {
-  tone?: ButtonTone
-  mode?: ButtonMode
+  tone?: ButtonTone | undefined
+  mode?: ButtonMode | undefined
 }
 
 // v4.4.4 CHANGE 1 ("renumbering"): a new style declared BEFORE the button
@@ -60,7 +60,7 @@ export const button: RecipeRuntimeFn<ButtonVariantProps> = cva({
       outlineWidth: '2px',
       outlineStyle: 'solid',
       outlineColor: 'focusRing',
-      outlineOffset: '1px',
+      outlineOffset: '[1px]',
     },
     _disabled: {
       opacity: 0.4,
