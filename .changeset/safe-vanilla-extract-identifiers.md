@@ -2,8 +2,8 @@
 '@sanity/ui': patch
 ---
 
-Class names in `@sanity/ui/styles.css` now include the package version, so a release no longer reuses an older release's class names for different rules.
+Fixes a bug where loading multiple versions of `@sanity/ui` 4.x on the same page could cause CSS class name collisions, making components display incorrectly.
 
-A page that loaded stylesheets from two releases could apply an old rule to a new component. For example, `._2mi48t0` was the Button loading overlay in 4.4.2 and the Button root in 4.4.4.
+Starting with this release, generated CSS class names are guaranteed to be unique to each `@sanity/ui` version, so multiple versions can safely share a page without their styles clashing.
 
-Keep importing `@sanity/ui/styles.css` as before. Appearance, props, and markup are unchanged.
+No changes are needed in your code—keep importing `@sanity/ui/styles.css` as before.
