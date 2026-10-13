@@ -1,3 +1,3 @@
-export const EYEBROW_SIZE = [0, 1, 2, 3, 4] as const
+export const EYEBROW_SIZE = [0, 1, 2, 3, 4, 5] as const
 /** @public */
 export type EyebrowSize = (typeof EYEBROW_SIZE)[number]
