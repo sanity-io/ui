@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.4.5
+
+### Patch Changes
+
+- [#3181](https://github.com/sanity-io/ui/pull/3181) [`b543fab`](https://github.com/sanity-io/ui/commit/b543fab06469ce99457d3ba1bbb64c5de2baaedb) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency styled-components to ^6.6.0
+
 ## 4.4.4
 
 ### Patch Changes
