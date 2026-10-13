@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@css-eval/ve-button 1.0.0 + 2.0.0 on one page</title>
+    <style>
+      body { margin: 0; font: 14px/1.4 system-ui, sans-serif; color: #1f2126; background: #f3f4f6; }
+      header { padding: 16px 24px; background: #fff; border-bottom: 1px solid #e0e3e8; }
+      header h1 { margin: 0 0 4px; font-size: 18px; }
+      header code { background: #eef0f3; padding: 1px 5px; border-radius: 3px; }
+      main { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 24px; }
+      section h2 { margin: 0 0 8px; font-size: 15px; }
+      .panel { padding: 16px; border-radius: 8px; margin-bottom: 16px; }
+      .panel h3 { margin: 0 0 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.7; }
+      .grid { display: grid; grid-template-columns: repeat(3, max-content); gap: 10px 14px; align-items: center; }
+      .row { display: flex; gap: 14px; margin-top: 14px; align-items: center; }
+      .classes { margin-top: 8px; font: 11px/1.5 ui-monospace, monospace; word-break: break-all; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

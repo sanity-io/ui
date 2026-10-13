@@ -1,0 +1,111 @@
+{
+  "mode": "default",
+  "v1": {
+    "version": "1.0.0",
+    "lightPrimaryDefault": {
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(198, 203, 214)",
+      "radius": "3px",
+      "position": "relative",
+      "animation": "none",
+      "width": "137.109px"
+    },
+    "lightPrimaryGhost": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(198, 203, 214)"
+    },
+    "darkDefaultDefault": {
+      "bg": "rgb(245, 176, 49)"
+    },
+    "overlay": {
+      "position": "relative",
+      "inset": "0px"
+    },
+    "accent": {
+      "outlineColor": "rgb(255, 0, 255)"
+    },
+    "classes": [
+      "_1u1be65k",
+      "_1u1be65l",
+      "lgqk174",
+      "lgqk176",
+      "lgqk177",
+      "lgqk178",
+      "lgqk179",
+      "lgqk17a",
+      "lgqk17b",
+      "lgqk17c",
+      "lgqk17d",
+      "lgqk17e",
+      "lgqk17f",
+      "lgqk17g",
+      "lgqk17h"
+    ]
+  },
+  "v2": {
+    "version": "2.0.0",
+    "lightPrimaryDefault": {
+      "bg": "rgb(125, 60, 252)",
+      "color": "rgb(255, 255, 255)",
+      "radius": "6px",
+      "position": "relative",
+      "animation": "lgqk175",
+      "width": "26px"
+    },
+    "lightPrimaryGhost": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(125, 60, 252)"
+    },
+    "darkDefaultDefault": {
+      "bg": "rgb(27, 29, 32)"
+    },
+    "overlay": {
+      "position": "absolute",
+      "inset": "0px"
+    },
+    "accent": {
+      "outlineColor": "rgb(255, 0, 255)"
+    },
+    "classes": [
+      "_1u1be65l",
+      "_1u1be65m",
+      "lgqk174",
+      "lgqk175",
+      "lgqk176",
+      "lgqk177",
+      "lgqk178",
+      "lgqk179",
+      "lgqk17a",
+      "lgqk17b",
+      "lgqk17c",
+      "lgqk17d",
+      "lgqk17e",
+      "lgqk17g",
+      "lgqk17i"
+    ]
+  },
+  "sharedClasses": [
+    "_1u1be65l",
+    "lgqk174",
+    "lgqk176",
+    "lgqk177",
+    "lgqk178",
+    "lgqk179",
+    "lgqk17a",
+    "lgqk17b",
+    "lgqk17c",
+    "lgqk17d",
+    "lgqk17e",
+    "lgqk17g"
+  ],
+  "deviationsV1": [
+    "light primary/default background: got rgb(255, 255, 255), expected rgb(34, 118, 252)",
+    "light primary/default color: got rgb(198, 203, 214), expected rgb(255, 255, 255)",
+    "light primary/ghost color: got rgb(198, 203, 214), expected rgb(34, 118, 252)",
+    "dark default/default background: got rgb(245, 176, 49), expected rgb(27, 29, 32)",
+    "loading overlay position: got relative, expected absolute"
+  ],
+  "deviationsV2": [
+    "light primary/default animation: got lgqk175, expected none"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "mode": "version+module",
+  "v1": {
+    "version": "1.0.0",
+    "lightPrimaryDefault": {
+      "bg": "rgb(34, 118, 252)",
+      "color": "rgb(255, 255, 255)",
+      "radius": "3px",
+      "position": "relative",
+      "animation": "none",
+      "width": "137.109px"
+    },
+    "lightPrimaryGhost": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(34, 118, 252)"
+    },
+    "darkDefaultDefault": {
+      "bg": "rgb(27, 29, 32)"
+    },
+    "overlay": {
+      "position": "absolute",
+      "inset": "0px"
+    },
+    "accent": {
+      "outlineColor": "rgb(255, 0, 255)"
+    },
+    "classes": [
+      "_1brknylj",
+      "_1i52zjgi",
+      "_1s2klvfy",
+      "_21951rju",
+      "_21yti14n",
+      "_266lgvoo",
+      "_26i6rmxs",
+      "_2tu30lir",
+      "_32fx40kc",
+      "_33rxi1pj",
+      "_34muon4a",
+      "_3arc6zmg",
+      "_7crgr7q8",
+      "k2q0x4pg",
+      "snjr4c30"
+    ]
+  },
+  "v2": {
+    "version": "2.0.0",
+    "lightPrimaryDefault": {
+      "bg": "rgb(125, 60, 252)",
+      "color": "rgb(255, 255, 255)",
+      "radius": "6px",
+      "position": "relative",
+      "animation": "none",
+      "width": "137.109px"
+    },
+    "lightPrimaryGhost": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(125, 60, 252)"
+    },
+    "darkDefaultDefault": {
+      "bg": "rgb(27, 29, 32)"
+    },
+    "overlay": {
+      "position": "absolute",
+      "inset": "0px"
+    },
+    "accent": {
+      "outlineColor": "rgb(255, 0, 255)"
+    },
+    "classes": [
+      "_17colmvq",
+      "_1ysqvw1k",
+      "_1zz304n5",
+      "_262ly2u9",
+      "_2cvzi7lm",
+      "_2fw2jp5n",
+      "_2tg90zkd",
+      "_30zsd4vz",
+      "_33tjct37",
+      "_372oun0q",
+      "_37oiwexv",
+      "_3dqkls5p",
+      "_3enj2183",
+      "uyniosxx",
+      "xyls82sr"
+    ]
+  },
+  "sharedClasses": [],
+  "deviationsV1": [],
+  "deviationsV2": []
+}
