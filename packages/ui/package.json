@@ -90,6 +90,7 @@
     "use-effect-event": "^2.0.4"
   },
   "devDependencies": {
+    "@emotion/hash": "catalog:",
     "@sanity/tsdown-config": "catalog:",
     "@sanity/vanilla-extract-vite-plugin": "catalog:",
     "@testing-library/dom": "^10.4.2",

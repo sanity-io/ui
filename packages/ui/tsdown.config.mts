@@ -1,6 +1,8 @@
 import {defineConfig} from '@sanity/tsdown-config'
 import type {UserConfig} from 'tsdown'
 
+import {readPackageIdentity, versionedIdentifiers} from './scripts/versionedIdentifiers'
+
 // The annotation keeps the declaration emit portable: this file is part of the
 // same TypeScript program as the build (there is no separate tsconfig for
 // dist), and the inferred config type cannot be named without it (TS2883).
@@ -50,6 +52,12 @@ const config: UserConfig = await defineConfig({
     inject: false,
     exports: {nodeCompat: true},
     minify: false,
+    // Version-unique identifiers through vanilla-extract's own `identifiers` option (no plugin
+    // fork involved): two @sanity/ui releases on one page can no longer share a class name that
+    // means different rules in each (SAPP-4639). See scripts/versionedIdentifiers.ts.
+    identifiers: versionedIdentifiers(
+      readPackageIdentity(new URL('./package.json', import.meta.url)),
+    ),
   },
 })
 
