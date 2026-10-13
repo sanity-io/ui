@@ -1,5 +1,5 @@
 {
-  "name": "@sanity-css-eval/button-linaria",
+  "name": "@sanity-css-eval/button-linaria-v2",
   "version": "2.0.0",
   "private": true,
   "type": "module",
@@ -45,6 +45,7 @@
   "devDependencies": {
     "@tsdown/css": "^0.23.1",
     "postcss": "^8.5.30",
-    "unrun": "^0.3.1"
+    "unrun": "^0.3.1",
+    "vite": "^8.3.4"
   }
 }

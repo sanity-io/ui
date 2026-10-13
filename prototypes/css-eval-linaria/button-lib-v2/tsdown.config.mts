@@ -18,7 +18,7 @@ const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 
   name: string
   version: string
 }
-const pkgSlug = pkg.name.split('/').pop()!
+const pkgSlug = pkg.name.split("/").pop()!.replace(/-v2$/, "")
 
 // `@linaria/atomic` exports the same `css`, `cx` and `styled` names, so the
 // atomic flavor only has to point the imports at it before wyw sees the code.

@@ -34,7 +34,8 @@
   "scripts": {
     "build": "tsdown",
     "build:all": "WYW_FLAVOR=default tsdown && WYW_FLAVOR=namespaced tsdown && WYW_FLAVOR=atomic tsdown",
-    "typecheck": "tsc -p tsconfig.json"
+    "typecheck": "tsc -p tsconfig.json",
+    "build:vite": "vite build --config vite.lib.config.ts"
   },
   "peerDependencies": {
     "@linaria/atomic": "^8.2.0",
@@ -45,6 +46,7 @@
   "devDependencies": {
     "@tsdown/css": "^0.23.1",
     "postcss": "^8.5.30",
-    "unrun": "^0.3.1"
+    "unrun": "^0.3.1",
+    "vite": "^8.3.4"
   }
 }
