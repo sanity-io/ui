@@ -81,6 +81,10 @@ minimumReleaseAgeExclude:
   - sanity
   - tsdown
   - verkit
+  - 'framer-motion@14.2.0'
+  - 'motion-dom@14.2.0'
+  - 'motion-utils@14.1.1'
+  - 'motion@14.2.0'
   - use-effect-event@2.0.4
   - '@types/react-dom@19.3.0'
   - '@types/react-is@19.3.0'
