@@ -89,8 +89,6 @@ minimumReleaseAgeExclude:
   - 'motion-utils@14.1.1'
   - motion@14.2.0
   - use-effect-event@2.0.4
-  - '@tanstack/react-virtual@3.14.18'
-  - '@tanstack/virtual-core@3.19.3'
   - '@types/react-dom@19.3.0'
   - '@types/react-is@19.3.0'
   - '@types/react@19.3.0'
