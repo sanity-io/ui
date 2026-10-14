@@ -1,5 +1,12 @@
 # @sanity/ui
 
+## 4.4.6
+
+### Patch Changes
+
+- [#3223](https://github.com/sanity-io/ui/pull/3223) [`7444091`](https://github.com/sanity-io/ui/commit/7444091c1880afbc1e7fe484dca845f9047ab2d3) Thanks [@stipsan](https://github.com/stipsan)! - - Replace vanilla-extract with Panda CSS for much stronger guarantees against CSS class name collisions.
+  - Put static CSS in CSS `@layer` so unlayered styled-components overrides take precedence even when the `<link rel="stylesheet">` for `@sanity/ui/styles.css` appears after `<style data-styled>` in the DOM. This prevents equal-specificity overrides from breaking in embedded Studios, such as those in Next.js, where stylesheet ordering can vary.
+
 ## 4.5.0-panda.2
 
 ### Patch Changes
