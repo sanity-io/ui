@@ -2,8 +2,6 @@
 '@sanity/ui': patch
 ---
 
-- Replace vanilla-extract with Panda CSS for much stronger guarantees against CSS class name collisions. Static CSS now uses CSS `@layer`, making it easier to override even when userland CSS loads out of order.
-- Keep public exports, component props, theme CSS variables, and styled-components behavior unchanged.
-- Prefix hashed Panda class names with `u-` and guard against future class name reuse.
+- Replace vanilla-extract with Panda CSS for much stronger guarantees against CSS class name collisions.
+- Put static CSS in CSS `@layer` so unlayered styled-components overrides take precedence even when the `<link rel="stylesheet">` for `@sanity/ui/styles.css` appears after `<style data-styled>` in the DOM. This prevents equal-specificity overrides from breaking in embedded Studios, such as those in Next.js, where stylesheet ordering can vary.
 - Hash Panda-generated CSS variables and generate stricter style types.
-- Omit the internal `#styled-system/*` build-time alias from the published package.
