@@ -120,8 +120,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   transpiles it via `transpilePackages` in `apps/docs/next.config.ts`. Because
   Turbopack evaluates `.css.ts` modules via the generated `styled-system/css`
   runtime and `src/app/AppProviders.tsx` imports `@sanity/ui/styles.css`
-  (`packages/ui/dist/styles.css`), `apps/docs`'s `prebuild`, `predev` and
-  `pree2e:build` scripts build `@sanity/ui` first. It is deployed via Vercel,
+  (`packages/ui/dist/styles.css`). `prepare` builds `@sanity/ui` on install.
+  `dev`, `build`, and `e2e:build` build it again because Vercel and other
+  cached installs skip lifecycle scripts. It is deployed via Vercel,
   not released through Changesets.
 - `apps/docs` is fully static: it fetches nothing from Sanity at runtime and
   needs no environment variables. `POST /ui/api/expire-tags` is a no-op that
@@ -156,9 +157,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   The studio's `dev`, `build` and `deploy` scripts build `@sanity/ui` first
   (`pre*` scripts): `sanity` and its plugins import `@sanity/ui/styles.css`,
   which the workspace `exports` map to `packages/ui/dist/styles.css` — the
-  one subpath that needs a build, and `pnpm install` only runs the package's
-  `prepare` build when it actually installs something (not with a cached
-  `node_modules`, as on Vercel).
+  one subpath that needs a build. `@sanity/ui`'s `prepare` only runs Panda
+  codegen, and `pnpm install` skips lifecycle scripts when `node_modules` is
+  cached (as on Vercel).
   `pnpm --filter sanity-ui-studio run deploy` updates the hosted studio (the
   `appId` in `apps/studio/sanity.cli.ts`); it needs `run` because `deploy` on
   its own is pnpm's built-in `pnpm deploy`. In Cloud Agent VMs,

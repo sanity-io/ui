@@ -9,14 +9,11 @@
     "#context/*": "./src/context/*.tsx"
   },
   "scripts": {
-    "build": "next build --turbopack",
-    "dev": "next dev --turbopack",
+    "build": "pnpm --filter @sanity/ui build && next build --turbopack",
+    "dev": "pnpm --filter @sanity/ui build && next dev --turbopack",
     "e2e": "playwright test",
-    "e2e:build": "EXPOSE_TESTING_API=1 next build --turbopack",
-    "prebuild": "pnpm --filter @sanity/ui build",
-    "predev": "pnpm --filter @sanity/ui build",
-    "pree2e:build": "pnpm --filter @sanity/ui build",
-    "prepare": "next typegen",
+    "e2e:build": "pnpm --filter @sanity/ui build && EXPOSE_TESTING_API=1 next build --turbopack",
+    "prepare": "next typegen && pnpm --filter @sanity/ui build",
     "start": "next start",
     "test": "vitest",
     "typecheck": "tsc --build"

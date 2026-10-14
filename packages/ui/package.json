@@ -51,6 +51,7 @@
     "./package.json": "./package.json"
   },
   "publishConfig": {
+    "imports": {},
     "exports": {
       ".": "./dist/index.js",
       "./autocomplete": "./dist/autocomplete.js",
@@ -75,7 +76,7 @@
     "build": "tsdown",
     "clean": "rimraf dist",
     "prepack": "pnpm build",
-    "prepare": "pnpm build",
+    "prepare": "pnpm panda codegen",
     "test": "vitest run",
     "test:watch": "vitest",
     "watch": "tsdown --watch"
