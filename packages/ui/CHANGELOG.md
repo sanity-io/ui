@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 4.5.0-panda.2
+
+### Patch Changes
+
+- [#3218](https://github.com/sanity-io/ui/pull/3218) [`88c3a0e`](https://github.com/sanity-io/ui/commit/88c3a0ef76f57cdbc9472eb0fdf1c3ca55859025) Thanks [@stipsan](https://github.com/stipsan)! - Hash Panda-generated CSS variables (`hash: true`) for consistency with the class-name hashing that shipped in the previous release. This config defines no Panda tokens today, so the emitted stylesheet is unchanged, and hand-written theme custom properties such as `--arrow-size` keep their names. Generated style types now reject invalid CSS values.
+
+- [#3217](https://github.com/sanity-io/ui/pull/3217) [`3da0799`](https://github.com/sanity-io/ui/commit/3da0799c1458058dd68ed293026f1939665ff77a) Thanks [@stipsan](https://github.com/stipsan)! - Prefix the hashed Panda class names of `@sanity/ui/styles.css` with `u-` (`display: flex` is now `u-HgOzd`), so they cannot coincide with the names of other Panda builds on the same page, and keep an append-only manifest of every class name ever emitted (`packages/ui/test/class-names/manifest.json`) so that no later release can reuse a name for a different style.
+
 ## 4.5.0-panda.1
 
 ### Patch Changes
