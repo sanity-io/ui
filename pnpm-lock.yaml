@@ -7215,9 +7215,6 @@ packages:
   react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
-  react-is@19.3.0:
-    resolution: {integrity: sha512-UpMYezM4v5/18F28aC66AEsjXIgE02kyEMH6yLdgLXu/UTfa1Ntwck/nNLrbqJsEXW7gPb0coNO9FQse9WTovA==}
-
   react-is@19.3.1:
     resolution: {integrity: sha512-RRieF6IyxQBkcK6pP8xOHprLTPW6QjRkbGdImtqNme+/hYVwCZkLQLdlZGOhUqXwkS9IEynaGvPJtv6XB/cz0Q==}
 
@@ -11385,7 +11382,7 @@ snapshots:
       oneline: 2.0.0
       picomatch: 4.0.7
       react: 19.3.1
-      react-is: 19.3.0
+      react-is: 19.3.1
       semver: 7.8.5
       vite: 8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
       zod: 4.6.7
@@ -11994,7 +11991,7 @@ snapshots:
       motion: 14.2.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      react-is: 19.3.0
+      react-is: 19.3.1
       react-refractor: 4.0.0(react@19.3.1)
       styled-components: 6.6.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       use-effect-event: 2.0.4(react@19.3.1)
@@ -15051,8 +15048,6 @@ snapshots:
 
   react-is@17.0.2: {}
 
-  react-is@19.3.0: {}
-
   react-is@19.3.1: {}
 
   react-refractor@4.0.0(react@19.3.1):
@@ -15345,7 +15340,7 @@ snapshots:
       react-fast-compare: 3.2.2
       react-focus-lock: 2.13.7(@types/react@19.3.0)(react@19.3.1)
       react-i18next: 17.0.16(i18next@26.4.4(typescript@7.0.2))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@7.0.2)
-      react-is: 19.3.0
+      react-is: 19.3.1
       react-refractor: 4.0.0(react@19.3.1)
       react-rx: 7.0.1(react@19.3.1)(rxjs@7.8.2)
       refractor: 5.0.0
