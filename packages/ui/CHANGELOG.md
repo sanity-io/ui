@@ -1,5 +1,15 @@
 # @sanity/ui
 
+## 4.5.0
+
+### Patch Changes
+
+- [#3223](https://github.com/sanity-io/ui/pull/3223) [`7444091`](https://github.com/sanity-io/ui/commit/7444091c1880afbc1e7fe484dca845f9047ab2d3) Thanks [@stipsan](https://github.com/stipsan)! - - Replace vanilla-extract with Panda CSS for much stronger guarantees against CSS class name collisions. Static CSS now uses CSS `@layer`, making it easier to override even when userland CSS loads out of order.
+  - Keep public exports, component props, theme CSS variables, and styled-components behavior unchanged.
+  - Prefix hashed Panda class names with `u-` and guard against future class name reuse.
+  - Hash Panda-generated CSS variables and generate stricter style types.
+  - Omit the internal `#styled-system/*` build-time alias from the published package.
+
 ## 4.5.0-panda.2
 
 ### Patch Changes
