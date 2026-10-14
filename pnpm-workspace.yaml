@@ -84,14 +84,13 @@ minimumReleaseAgeExclude:
   - sanity
   - tsdown
   - verkit
-  - 'framer-motion@14.2.0'
-  - 'motion-dom@14.2.0'
+  - framer-motion@14.2.0
+  - motion-dom@14.2.0
   - 'motion-utils@14.1.1'
-  - 'motion@14.2.0'
+  - motion@14.2.0
   - use-effect-event@2.0.4
   - '@tanstack/react-virtual@3.14.18'
   - '@tanstack/virtual-core@3.19.3'
-  - motion-utils@14.1.1
   - '@types/react-dom@19.3.0'
   - '@types/react-is@19.3.0'
   - '@types/react@19.3.0'
@@ -142,6 +141,9 @@ minimumReleaseAgeExclude:
   - '@lezer/highlight@1.2.5'
   - '@vitejs/plugin-react@6.1.2'
   - styled-components@6.6.0
+  - '@playwright/test@1.64.1'
+  - playwright-core@1.64.1
+  - playwright@1.64.1
 
 minimumReleaseAgeExcludePrune: true
 
