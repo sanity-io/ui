@@ -14,7 +14,7 @@
     "allowImportingTsExtensions": true,
     "declaration": false,
     "declarationMap": false,
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     // Setting "jsx" to anything but "preserve" is usually incorrect, but at the moment Storybook needs it
     "jsx": "react-jsx"
   }

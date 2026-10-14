@@ -29,10 +29,10 @@
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.3",
     "@types/node": "catalog:",
-    "eslint-plugin-storybook": "^10.6.1",
+    "eslint-plugin-storybook": "^10.6.2",
     "knip": "^6.41.0",
     "oxfmt": "^0.73.0",
-    "oxlint": "^1.87.0",
+    "oxlint": "^1.88.0",
     "oxlint-tsgolint": "^7.0.2004",
     "typescript": "catalog:"
   },

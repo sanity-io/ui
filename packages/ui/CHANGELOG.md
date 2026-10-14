@@ -1,5 +1,23 @@
 # @sanity/ui
 
+## 4.5.0-panda.0
+
+### Minor Changes
+
+- [#3198](https://github.com/sanity-io/ui/pull/3198) [`78c268a`](https://github.com/sanity-io/ui/commit/78c268a8586c6f1babde8d49736552cb046f2d28) Thanks [@stipsan](https://github.com/stipsan)! - Replace vanilla-extract with Panda CSS for the static stylesheet (`@sanity/ui/styles.css`), emitted in Panda's default `@layer tokens` and `@layer utilities` cascade layers with content-hashed class names (`hash: {className: true}`). styled-components, public exports, component props, and theme CSS variables stay the same (`Arrow` uses `--arrow-size` in place of the previously hashed vanilla-extract `createVar()` custom property).
+
+## 4.4.5
+
+### Patch Changes
+
+- [#3187](https://github.com/sanity-io/ui/pull/3187) [`862c41a`](https://github.com/sanity-io/ui/commit/862c41a1602f6af24bbc581db78f27b269fd1da1) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^14.2.0
+
+- [#3193](https://github.com/sanity-io/ui/pull/3193) [`0089d4d`](https://github.com/sanity-io/ui/commit/0089d4d4a21b97bb7effc6ca93866e1d5ea0dfd1) Thanks [@stipsan](https://github.com/stipsan)! - Fixes a bug where loading multiple versions of `@sanity/ui` 4.x on the same page could cause CSS class name collisions, making components display incorrectly.
+  
+  Starting with this release, generated CSS class names are guaranteed to be unique to each `@sanity/ui` version, so multiple versions can safely share a page without their styles clashing.
+  
+  No changes are needed in your code—keep importing `@sanity/ui/styles.css` as before.
+
 ## 4.4.4
 
 ### Patch Changes

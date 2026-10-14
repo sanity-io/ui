@@ -14,18 +14,18 @@
     "schema:deploy": "sanity schema deploy"
   },
   "dependencies": {
-    "@sanity/code-input": "^7.3.11",
+    "@sanity/code-input": "^7.3.12",
     "@sanity/icons": "catalog:",
     "@sanity/logos": "catalog:",
     "@sanity/ui": "workspace:*",
-    "@sanity/vision": "^6.18.0",
+    "@sanity/vision": "^6.19.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "sanity": "catalog:",
     "styled-components": "catalog:"
   },
   "devDependencies": {
-    "@sanity/vanilla-extract-vite-plugin": "catalog:",
+    "@pandacss/vite": "catalog:",
     "@sindresorhus/slugify": "^2.2.1",
     "@types/node": "catalog:",
     "@types/react": "catalog:",

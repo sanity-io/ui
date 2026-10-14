@@ -1,4 +1,4 @@
-import {keyframes, style} from '@vanilla-extract/css'
+import {css, keyframes} from '#styled-system/css'
 
 const rotate = keyframes({
   from: {transform: 'rotate(0deg)'},
@@ -6,7 +6,7 @@ const rotate = keyframes({
 })
 
 const size = 'round(1em, 2px)'
-export const spinnerIcon = style({
+export const spinnerIcon = css({
   animation: `${rotate} 500ms linear infinite`,
   // Prevents a wobbly spinner on Safari
   height: size,

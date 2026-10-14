@@ -1,4 +1,6 @@
-import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
+import path from 'node:path'
+
+import {pandacss} from '@pandacss/vite'
 import {defineCliConfig} from 'sanity/cli'
 
 export default defineCliConfig({
@@ -15,14 +17,16 @@ export default defineCliConfig({
   reactCompiler: {target: '19', transform: 'oxc'},
   vite: {
     // The workspace @sanity/ui resolves to its TypeScript source (dev
-    // `exports`), so the studio's vite must compile its vanilla-extract
-    // `.css.ts` modules
-    plugins: [vanillaExtractPlugin()],
+    // `exports`), so the studio's vite rewrites its Panda `.css.ts` modules
+    // to static class strings
+    plugins: [
+      pandacss({cwd: path.resolve(import.meta.dirname, '../../packages/ui'), transform: true}),
+    ],
     // Keep the workspace @sanity/ui out of vite's dependency pre-bundling:
     // real node_modules deps (sanity, @sanity/code-input, ...) import it, and
     // esbuild would otherwise inline its TypeScript source — including raw
     // `.css.ts` modules — into their prebundled chunks, bypassing the
-    // vanilla-extract plugin ("Styles were unable to be assigned to a file").
+    // Panda plugin.
     optimizeDeps: {exclude: ['@sanity/ui']},
   },
 })

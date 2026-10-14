@@ -1,6 +1,6 @@
-import {style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const checkbox = style({
+export const checkbox = css({
   position: 'relative',
   display: 'inline-block',
 })

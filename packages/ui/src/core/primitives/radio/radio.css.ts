@@ -1,10 +1,8 @@
-import {style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const radio = style({
-  position: 'relative',
-  selectors: {
-    '&:not([hidden])': {
-      display: 'inline-block',
-    },
+export const radio = css({
+  'position': 'relative',
+  '&:not([hidden])': {
+    display: 'inline-block',
   },
 })

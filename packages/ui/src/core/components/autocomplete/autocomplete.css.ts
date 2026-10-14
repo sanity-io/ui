@@ -1,13 +1,13 @@
-import {globalStyle, style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const autocomplete = style({
+export const autocomplete = css({
   lineHeight: 0,
 })
 
-export const autocompleteListBox = style({})
-
-globalStyle(`${autocompleteListBox} > ul`, {
-  listStyle: 'none',
-  padding: 0,
-  margin: 0,
+export const autocompleteListBox = css({
+  '& > ul': {
+    listStyle: 'none',
+    padding: 0,
+    margin: 0,
+  },
 })

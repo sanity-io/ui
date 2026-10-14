@@ -1,21 +1,19 @@
-import {style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const textInputLeftBox = style({
+export const textInputLeftBox = css({
   position: 'absolute',
   top: 0,
   left: 0,
 })
 
-export const textInputRightBox = style({
+export const textInputRightBox = css({
   position: 'absolute',
   top: 0,
   right: 0,
 })
 
-export const textInputClearButton = style({
-  selectors: {
-    '&:not([hidden])': {
-      display: 'block',
-    },
+export const textInputClearButton = css({
+  '&:not([hidden])': {
+    display: 'block',
   },
 })

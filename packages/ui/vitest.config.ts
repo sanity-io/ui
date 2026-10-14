@@ -1,13 +1,12 @@
-import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
+import {pandacss} from '@pandacss/vite'
 import react from '@vitejs/plugin-react'
 import {defineConfig} from 'vitest/config'
 
 export default defineConfig({
   plugins: [
-    // Compiles the vanilla-extract `.css.ts` modules imported by the source
-    // under test (vitest stubs the resulting virtual CSS, but the class name
-    // exports must evaluate)
-    vanillaExtractPlugin(),
+    // Rewrites the Panda `.css.ts` modules imported by the source under test
+    // to static class strings (`transform`), matching the package build
+    pandacss({transform: true}),
     // React Compiler on oxc (`oxc-transform-react`), the same transform the
     // package build runs (`tsdown.config.mts`), so tests exercise what ships
     react({compiler: {target: '19'}}),
