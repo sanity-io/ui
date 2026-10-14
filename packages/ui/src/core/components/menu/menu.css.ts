@@ -1,6 +1,6 @@
-import {style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const menu = style({
+export const menu = css({
   outline: 'none',
   overflow: 'auto',
 })

@@ -1,9 +1,9 @@
-import {style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const tooltipLayer = style({
+export const tooltipLayer = css({
   pointerEvents: 'none',
 })
 
-export const tooltipCard = style({
+export const tooltipCard = css({
   willChange: 'transform',
 })

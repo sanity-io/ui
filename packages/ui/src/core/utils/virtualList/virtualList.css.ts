@@ -1,10 +1,10 @@
-import {style} from '@vanilla-extract/css'
+import {css} from '#styled-system/css'
 
-export const virtualList = style({
+export const virtualList = css({
   position: 'relative',
 })
 
-export const virtualListItem = style({
+export const virtualListItem = css({
   position: 'absolute',
   left: 0,
   right: 0,

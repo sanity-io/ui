@@ -1,6 +1,7 @@
 import {Button, Layer, ThemeProvider} from '@sanity/ui'
 import {MenuDivider} from '@sanity/ui/menu'
 import {buildTheme} from '@sanity/ui/theme'
+import {Toast} from '@sanity/ui/toast'
 import {composeStories} from '@storybook/react-vite'
 import {styled} from 'styled-components'
 import {describe, expect, test} from 'vitest'
@@ -49,6 +50,22 @@ describe('vanilla-extract cascade', () => {
     for (const key of keys) {
       expect(getComputedStyle(key).display).toBe('block')
     }
+  })
+
+  test('Toast loading bar progress background beats Card runtime background', async () => {
+    await render(
+      <ThemeProvider theme={theme}>
+        <Toast duration={10_000} onClose={() => {}} title="Toast" />
+      </ThemeProvider>,
+    )
+
+    const loadingBar = document.querySelector('[data-ui="ToastLoadingBar"]')!
+    const mask = loadingBar.firstElementChild!
+    const progress = loadingBar.lastElementChild!
+
+    expect(getComputedStyle(progress).backgroundColor).not.toBe(
+      getComputedStyle(mask).backgroundColor,
+    )
   })
 
   test('styled(Layer) position wins when styles.css loads first', async () => {

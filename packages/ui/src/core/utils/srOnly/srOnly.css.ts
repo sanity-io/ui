@@ -1,9 +1,9 @@
-import {style} from '@vanilla-extract/css'
+import {css, firstThatWorks} from '#styled-system/css'
 
-export const srOnly = style({
+export const srOnly = css({
   display: 'block',
   width: 0,
   height: 0,
   position: 'absolute',
-  overflow: ['hidden', 'clip'],
+  overflow: firstThatWorks('clip', 'hidden'),
 })

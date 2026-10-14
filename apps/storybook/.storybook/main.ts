@@ -1,7 +1,7 @@
 import {createRequire} from 'node:module'
 import path from 'node:path'
 
-import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
+import {pandacss} from '@pandacss/vite'
 import type {StorybookConfig} from '@storybook/react-vite'
 import viteReact from '@vitejs/plugin-react'
 import {mergeConfig, type Plugin} from 'vite'
@@ -73,8 +73,8 @@ const config: StorybookConfig = {
         // (the Rust port) in the same pass as TypeScript/JSX — no babel
         viteReact({compiler: {target: '19'}}),
         // @sanity/ui resolves to its TypeScript source (dev `exports`), so its
-        // vanilla-extract `.css.ts` modules must be compiled here
-        vanillaExtractPlugin(),
+        // Panda `.css.ts` modules are rewritten to static class strings here
+        pandacss({cwd: path.resolve(import.meta.dirname, '../../../packages/ui'), transform: true}),
         ...(isReactDevtoolsMcpEnabled ? [reactDevtoolsMcp()] : []),
       ],
     })

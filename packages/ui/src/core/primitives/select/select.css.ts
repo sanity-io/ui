@@ -1,11 +1,9 @@
-import {style} from '@vanilla-extract/css'
+import {css, firstThatWorks} from '#styled-system/css'
 
-export const select = style({
-  position: 'relative',
-  width: ['-moz-available', '-webkit-fill-available', 'stretch'],
-  selectors: {
-    '&:not([hidden])': {
-      display: 'inline-block',
-    },
+export const select = css({
+  'position': 'relative',
+  'width': firstThatWorks('stretch', '-webkit-fill-available', '-moz-available'),
+  '&:not([hidden])': {
+    display: 'inline-block',
   },
 })

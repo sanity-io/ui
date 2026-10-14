@@ -1,17 +1,15 @@
-import {globalStyle, keyframes, style} from '@vanilla-extract/css'
+import {css, firstThatWorks, keyframes} from '#styled-system/css'
 
-export const dialogLayer = style({
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  alignItems: 'center',
-  justifyContent: 'center',
-  outline: 'none',
-  selectors: {
-    '&:not([hidden])': {
-      display: 'flex',
-    },
+export const dialogLayer = css({
+  'top': 0,
+  'left': 0,
+  'right': 0,
+  'bottom': 0,
+  'alignItems': 'center',
+  'justifyContent': 'center',
+  'outline': 'none',
+  '&:not([hidden])': {
+    display: 'flex',
   },
 })
 
@@ -25,15 +23,14 @@ const fadeIn = keyframes({
   to: {opacity: 1},
 })
 
-export const dialogAnimated = style({
-  animation: `${fadeIn} 200ms ease-out`,
+export const dialogAnimated = css({
+  'animation': `${fadeIn} 200ms ease-out`,
+  "& > [data-ui='DialogCard']": {
+    animation: `${zoomIn} 200ms ease-out`,
+  },
 })
 
-globalStyle(`${dialogAnimated} > [data-ui='DialogCard']`, {
-  animation: `${zoomIn} 200ms ease-out`,
-})
-
-export const dialogContainer = style({
+export const dialogContainer = css({
   width: '100%',
   height: '100%',
   flexDirection: 'column',
@@ -41,31 +38,31 @@ export const dialogContainer = style({
   justifyContent: 'center',
 })
 
-export const dialogCard = style({
+export const dialogCard = css({
   width: '100%',
   minHeight: 0,
   maxHeight: '100%',
-  overflow: ['hidden', 'clip'],
+  overflow: firstThatWorks('clip', 'hidden'),
 })
 
-export const dialogLayout = style({
+export const dialogLayout = css({
   minHeight: 0,
   width: '100%',
 })
 
-export const dialogHeader = style({
+export const dialogHeader = css({
   position: 'relative',
   zIndex: 2,
 })
 
-export const dialogContent = style({
+export const dialogContent = css({
   position: 'relative',
   zIndex: 1,
   overflow: 'auto',
   outline: 'none',
 })
 
-export const dialogFooter = style({
+export const dialogFooter = css({
   position: 'relative',
   zIndex: 3,
 })

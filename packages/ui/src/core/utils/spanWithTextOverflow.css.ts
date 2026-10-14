@@ -1,8 +1,8 @@
-import {style} from '@vanilla-extract/css'
+import {css, firstThatWorks} from '#styled-system/css'
 
-export const spanWithTextOverflow = style({
+export const spanWithTextOverflow = css({
   display: 'block',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  overflow: ['hidden', 'clip'],
+  overflow: firstThatWorks('clip', 'hidden'),
 })

@@ -1,7 +1,6 @@
 // A type-only import: the figma build bundles @sanity/ui's TypeScript source
 // (dev `exports`), and a value import of the barrel would pull the entire
-// runtime component graph — including vanilla-extract `.css.ts` modules that
-// only the packages/ui build can compile — into this bundle.
+// runtime component graph into this bundle.
 import type {ButtonMode} from '@sanity/ui'
 import {ThemeColorCardToneKey, ThemeColorStateToneKey} from '@sanity/ui/theme'
 

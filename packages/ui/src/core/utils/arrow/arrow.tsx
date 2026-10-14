@@ -1,11 +1,10 @@
-import {assignInlineVars} from '@vanilla-extract/dynamic'
 import {clsx} from 'clsx/lite'
-import {HTMLProps, useId} from 'react'
+import {CSSProperties, HTMLProps, useId} from 'react'
 
 import {useTheme_v2} from '../../theme/useTheme'
 import {compileCommands, getRoundedCommands, Point} from './cmds'
 
-import {arrow, arrowShape, arrowSize, arrowStroke} from './arrow.css'
+import {arrow, arrowShape, arrowStroke} from './arrow.css'
 
 /** @internal */
 export function Arrow(
@@ -60,7 +59,7 @@ export function Arrow(
       {...restProps}
       className={clsx(arrow, className)}
       ref={ref}
-      style={{...style, ...assignInlineVars({[arrowSize]: `${w}px`})}}
+      style={{...style, '--arrow-size': `${w}px`} as CSSProperties}
     >
       <svg width={w} height={w} viewBox={`0 0 ${w} ${w}`}>
         <mask id={strokeMaskId}>

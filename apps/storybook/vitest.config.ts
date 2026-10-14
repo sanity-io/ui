@@ -1,6 +1,6 @@
 import path from 'node:path'
 
-import {vanillaExtractPlugin} from '@sanity/vanilla-extract-vite-plugin'
+import {pandacss} from '@pandacss/vite'
 import {storybookTest} from '@storybook/addon-vitest/vitest-plugin'
 import viteReact from '@vitejs/plugin-react'
 import {playwright} from '@vitest/browser-playwright'
@@ -62,9 +62,13 @@ export default defineConfig({
       },
       {
         // Browser tests that need direct control over the viewport
-        // (vanillaExtractPlugin compiles the `.css.ts` modules of the
-        // @sanity/ui source that the dev `exports` resolve to)
-        plugins: [viteReact(), vanillaExtractPlugin(), slowImage()],
+        // (pandacss rewrites the `.css.ts` modules of the @sanity/ui source
+        // that the dev `exports` resolve to)
+        plugins: [
+          viteReact(),
+          pandacss({cwd: path.resolve(import.meta.dirname, '../../packages/ui'), transform: true}),
+          slowImage(),
+        ],
         test: {
           name: 'tests',
           include: ['tests/**/*.test.{ts,tsx}'],

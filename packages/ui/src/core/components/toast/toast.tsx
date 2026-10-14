@@ -171,7 +171,7 @@ function LoadingBarProgress(props: LoadingBarProgressProps) {
     <MotionCard
       className={loadingBarProgress}
       tone={tone}
-      style={{'--toast-loading-bar-bg': color.button.default[tone].enabled.bg}}
+      style={{backgroundColor: color.button.default[tone].enabled.bg}}
       initial={{scaleX: 0}}
       animate={{scaleX: 1}}
       transition={{delay: visualDuration, duration: duration / 1_000, ease: 'linear'}}
