@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.5.0-panda.1
+
+### Patch Changes
+
+- [#3211](https://github.com/sanity-io/ui/pull/3211) [`b288f96`](https://github.com/sanity-io/ui/commit/b288f965563a18ac35d7b867392fda86a47880b3) Thanks [@stipsan](https://github.com/stipsan)! - Omit the internal `#styled-system/*` import from the published package. It is a build-time alias for generated Panda files and is not part of the installed package.
+
 ## 4.5.0-panda.0
 
 ### Minor Changes
