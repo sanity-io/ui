@@ -77,7 +77,7 @@ const config: StorybookConfig = {
         // Panda `.css.ts` modules are rewritten to static class strings here
         pandacss({cwd: path.resolve(import.meta.dirname, '../../../packages/ui'), transform: true}),
         // Like the published `@sanity/ui/styles.css` (`cascadeLayers: false`)
-        removeCascadeLayers(['u-reset', 'u-base', 'u-tokens', 'u-recipes', 'u-utilities']),
+        removeCascadeLayers(['reset', 'base', 'tokens', 'recipes', 'utilities']),
         ...(isReactDevtoolsMcpEnabled ? [reactDevtoolsMcp()] : []),
       ],
     })

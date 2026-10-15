@@ -52,7 +52,7 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   hover, focus and selected states. The sheet cascades by specificity and then
   source order instead, so apps must load it before styled-components'
   `<style data-styled>` (the README's "Load order"). Panda still generates it
-  in the `u-` layers of `panda.config.ts`, which the build removes; in
+  in its default cascade layers, which the build removes; in
   Storybook, `@pandacss/vite` appends it to `apps/storybook/.storybook/panda.css`
   and `removeCascadeLayers()` from `@sanity/pandacss-tsdown-plugin/vite`
   removes them. The package build gets all of that from

@@ -1,8 +1,9 @@
 /*
- * `@pandacss/vite` appends Panda's stylesheet to the CSS file that declares its layers.
- * `removeCascadeLayers()` from `@sanity/pandacss-tsdown-plugin/vite`, registered after it in
- * `main.ts` and `vitest.config.ts`, then removes the layers again, statement included, since the
- * published `@sanity/ui/styles.css` has none. `preview.tsx` imports this file first, so it loads
- * before styled-components' `<style data-styled>`, as the README requires of apps.
+ * `@pandacss/vite` has no virtual module: it appends Panda's stylesheet to the CSS file that
+ * declares Panda's layers, which is all this file is for. `removeCascadeLayers()` from
+ * `@sanity/pandacss-tsdown-plugin/vite`, registered after it in `main.ts` and `vitest.config.ts`,
+ * then removes the layers again, statement included, since the published `@sanity/ui/styles.css`
+ * has none. `preview.tsx` imports this file first, so it loads before styled-components'
+ * `<style data-styled>`, as the README requires of apps.
  */
-@layer u-reset, u-base, u-tokens, u-recipes, u-utilities;
+@layer reset, base, tokens, recipes, utilities;

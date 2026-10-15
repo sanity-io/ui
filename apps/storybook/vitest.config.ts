@@ -68,7 +68,7 @@ export default defineConfig({
         plugins: [
           viteReact(),
           pandacss({cwd: path.resolve(import.meta.dirname, '../../packages/ui'), transform: true}),
-          removeCascadeLayers(['u-reset', 'u-base', 'u-tokens', 'u-recipes', 'u-utilities']),
+          removeCascadeLayers(['reset', 'base', 'tokens', 'recipes', 'utilities']),
           slowImage(),
         ],
         test: {

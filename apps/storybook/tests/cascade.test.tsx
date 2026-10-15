@@ -38,7 +38,8 @@ function* layerRules(rules: CSSRuleList): Generator<string> {
 }
 
 describe('vanilla-extract cascade', () => {
-  // The names passed to `removeCascadeLayers()` must match the layers of `packages/ui/panda.config.ts`
+  // The names passed to `removeCascadeLayers()` must match Panda's layer names (its defaults, since
+  // `packages/ui/panda.config.ts` doesn't set `layers`)
   test('the Panda stylesheet has no cascade layers, like styles.css', () => {
     const found: string[] = []
     for (const sheet of document.styleSheets) found.push(...layerRules(sheet.cssRules))
