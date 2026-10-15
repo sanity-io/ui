@@ -45,6 +45,8 @@ import '@sanity/ui/styles.css'
 
 Without it, `SrOnly`, `Spinner` and internal text-overflow styling render unstyled. These components have moved off styled-components — more components follow in future 4.x minors, and UI5 ships without styled-components or any other runtime CSS-in-JS.
 
+The stylesheet must load before styled-components' `<style data-styled>` tag. It has no cascade layers, so when one of your styled-components overrides, such as `styled(Button)`, has the same specificity as the static style it overrides, the rule that loads last wins. Importing the stylesheet before anything renders gives the right order; see [Load order](./packages/ui/README.md#load-order).
+
 ### 3. Update imports for moved components
 
 Components with heavy dependencies moved to dedicated subpath entry points, so importing `@sanity/ui` no longer pulls in `@floating-ui/react-dom`, `motion` or `react-refractor` — even without bundler treeshaking.

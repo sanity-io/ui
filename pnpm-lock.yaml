@@ -187,11 +187,11 @@ catalogs:
       specifier: ^2.2.6
       version: 2.2.6
     '@sanity/pandacss-tsdown-plugin':
-      specifier: ^0.1.0
-      version: 0.1.0
+      specifier: ^0.2.0
+      version: 0.2.0
     '@sanity/tsdown-config':
-      specifier: ^0.30.0
-      version: 0.30.0
+      specifier: ^0.31.0
+      version: 0.31.0
     '@types/node':
       specifier: ^24.19.2
       version: 24.19.2
@@ -207,6 +207,9 @@ catalogs:
     oxc-transform-react:
       specifier: ^0.154.0
       version: 0.154.0
+    postcss:
+      specifier: ^8.5.30
+      version: 8.5.30
     react-is:
       specifier: ^19.3.1
       version: 19.3.1
@@ -422,6 +425,9 @@ importers:
       playwright:
         specifier: ^1.64.1
         version: 1.64.1
+      postcss:
+        specifier: 'catalog:'
+        version: 8.5.30
       react:
         specifier: ^19.3.1
         version: 19.3.1
@@ -521,7 +527,7 @@ importers:
         version: 1.141.0
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.30.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.31.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/ui':
         specifier: workspace:*
         version: link:../ui
@@ -579,10 +585,10 @@ importers:
         version: 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/pandacss-tsdown-plugin':
         specifier: 'catalog:'
-        version: 0.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.30.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.31.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@testing-library/dom':
         specifier: ^10.4.2
         version: 10.4.2
@@ -4169,8 +4175,8 @@ packages:
     resolution: {integrity: sha512-dQqahEhUX8Pe4Xqj1HrrQW98WcmNtMfFz5LXG7s6qxYt7/fpt+2KJvScfOYEMDndKGNiJxLmpSvN6PymckrldQ==}
     engines: {node: '>=22.12'}
 
-  '@sanity/pandacss-tsdown-plugin@0.1.0':
-    resolution: {integrity: sha512-6HFuffRSufafBTddxREvNMtyzmrBI7KyfulNgZQPoswWH9CAGqn8WtPNvOtLXqHm+AGCN4IP1UDnTGFlcybvFg==}
+  '@sanity/pandacss-tsdown-plugin@0.2.0':
+    resolution: {integrity: sha512-ZST0IKooTZDfNywZTEqlBnal25g2hXbCWeH2R9TaBKbEOamESViKEBZUb+56CGfdvktfX6hoPPgmlbo22228zA==}
     engines: {node: ^22.18.0 || ^24.11.0 || >=26.0.0}
     peerDependencies:
       '@pandacss/dev': '*'
@@ -4236,8 +4242,8 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  '@sanity/tsdown-config@0.30.0':
-    resolution: {integrity: sha512-HTA+o2zuse31vMa+T/L2ICFsAgU/k1S4OdQRpTsYzUfV8kTT3I+objgQXizAnZbSLJtV1Vph/ATVgLcwCUwM0A==}
+  '@sanity/tsdown-config@0.31.0':
+    resolution: {integrity: sha512-Px9HO6t75pJOYPuNr5DsO0+OTJRiU1CItyk+efJR9zKuCCwQwvqulw7xxjGQNm90+UYuU5ql9t6KWPIRY00aLw==}
     engines: {node: ^22.18.0 || ^24.11.0 || >=26.0.0}
     peerDependencies:
       '@babel/core': '*'
@@ -11758,11 +11764,12 @@ snapshots:
       - '@types/react'
       - vitest
 
-  '@sanity/pandacss-tsdown-plugin@0.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+  '@sanity/pandacss-tsdown-plugin@0.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
       '@pandacss/compiler': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@pandacss/transformer': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       lightningcss: 1.33.0
+      postcss: 8.5.30
       tsdown: 0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1)
     optionalDependencies:
       '@pandacss/dev': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)
@@ -11932,7 +11939,7 @@ snapshots:
     dependencies:
       yaml: 2.9.1
 
-  '@sanity/tsdown-config@0.30.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+  '@sanity/tsdown-config@0.31.0(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
       '@microsoft/api-extractor': 7.59.4(@types/node@24.19.2)
       '@microsoft/tsdoc-config': 0.18.3
@@ -11951,7 +11958,7 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.29.7(supports-color@8.1.1)
       '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
-      '@sanity/pandacss-tsdown-plugin': 0.1.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+      '@sanity/pandacss-tsdown-plugin': 0.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       oxc-transform-react: 0.154.0
     transitivePeerDependencies:
       - '@types/node'
