@@ -27,9 +27,5 @@ export const GlobalStyle = createGlobalStyle((props) => {
       WebkitFontSmoothing: 'antialiased',
       minWidth: 320,
     },
-
-    'a': {
-      textDecoration: 'none',
-    },
   }
 })
