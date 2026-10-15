@@ -1,12 +1,12 @@
 import {clsx} from 'clsx/lite'
 import {useEffect, useState} from 'react'
+import {styled} from 'styled-components'
 
 import {Box, BoxOwnProps} from '../../primitives/box/box'
 import {ResponsiveRadiusProps} from '../../primitives/types'
 import {_getArrayProp} from '../../styles/helpers'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
-import {styled} from '../../styles/styled'
 
 import {
   skeleton,
@@ -16,7 +16,11 @@ import {
   skeletonVisible,
 } from './skeleton.css'
 
-const StyledSkeleton = styled(Box)<ResponsiveRadiusStyleProps>(responsiveRadiusStyle)
+const StyledSkeleton = styled(Box)<ResponsiveRadiusStyleProps>`
+  @layer u-styled {
+    ${responsiveRadiusStyle}
+  }
+`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.

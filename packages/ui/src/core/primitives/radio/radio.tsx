@@ -1,8 +1,8 @@
 import {clsx} from 'clsx/lite'
 import {useImperativeHandle, useRef} from 'react'
+import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import {styled} from '../../styles/styled'
 import {inputElementStyle} from './styles'
 
 import {radio} from './radio.css'
@@ -14,7 +14,11 @@ export interface RadioProps {
   customValidity?: string
 }
 
-const Input = styled.input(inputElementStyle)
+const Input = styled.input`
+  @layer u-styled {
+    ${inputElementStyle}
+  }
+`
 
 /**
  * The `Radio` component allows the user to select one option from a set.

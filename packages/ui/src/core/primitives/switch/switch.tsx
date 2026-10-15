@@ -1,7 +1,7 @@
 import {clsx} from 'clsx/lite'
 import {useEffect, useImperativeHandle, useRef} from 'react'
+import {styled} from 'styled-components'
 
-import {styled} from '../../styles/styled'
 import {switchRepresentationStyles, switchThumbStyles, switchTrackStyles} from './styles'
 
 import {switchInput, switchRepresentation, switchRoot, switchThumb, switchTrack} from './switch.css'
@@ -13,14 +13,24 @@ export interface SwitchProps {
   indeterminate?: boolean
 }
 
-const Representation = styled.span.attrs({className: switchRepresentation})(
-  switchRepresentationStyles,
-)
-const Track = styled.span.attrs({className: switchTrack})(switchTrackStyles)
+const Representation = styled.span.attrs({className: switchRepresentation})`
+  @layer u-styled {
+    ${switchRepresentationStyles}
+  }
+`
+const Track = styled.span.attrs({className: switchTrack})`
+  @layer u-styled {
+    ${switchTrackStyles}
+  }
+`
 const Thumb = styled.span.attrs({className: switchThumb})<{
   $checked?: boolean
   $indeterminate?: boolean
-}>(switchThumbStyles)
+}>`
+  @layer u-styled {
+    ${switchThumbStyles}
+  }
+`
 
 /**
  * The `Switch` component allows the user to toggle a setting on and off.

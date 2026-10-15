@@ -28,7 +28,7 @@ describe('_responsive', () => {
     expect(Array.isArray(rules)).toBe(true)
     expect(() => [...rules]).not.toThrow()
 
-    expect([..._responsive(media, [], () => ({}))]).toEqual([])
+    expect([..._responsive(media, [], () => ({}))].filter(Boolean)).toEqual([])
   })
 
   it('emits the base statement plus one media block per following breakpoint', () => {

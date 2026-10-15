@@ -1,9 +1,9 @@
 import {useCallback, useEffect, useState} from 'react'
 import ReactIs from 'react-is'
+import {styled} from 'styled-components'
 
 import {ThemeColorAvatarColorKey} from '../../../theme/system/color/_system'
 import {_getArrayProp} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
 import {useTheme_v2} from '../../theme/useTheme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types/avatar'
 import {ElementType, Props} from '../../types/component'
@@ -46,12 +46,18 @@ export interface AvatarOwnProps {
  */
 export type AvatarProps<E extends ElementType = 'div'> = Props<AvatarOwnProps, E>
 
-const AvatarBase = styled.div.attrs({className: avatarRoot})(avatarRootStyle)
+const AvatarBase = styled.div.attrs({className: avatarRoot})`
+  @layer u-styled {
+    ${avatarRootStyle}
+  }
+`
 
-const StyledAvatar = styled(AvatarBase)<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>(
-  responsiveAvatarSizeStyle,
-  avatarColorStyle,
-)
+const StyledAvatar = styled(AvatarBase)<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>`
+  @layer u-styled {
+    ${responsiveAvatarSizeStyle}
+    ${avatarColorStyle}
+  }
+`
 
 function AvatarComponent(
   props: AvatarOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,

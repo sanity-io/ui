@@ -1,7 +1,8 @@
+import {styled} from 'styled-components'
+
 import {responsiveGridStyle} from '../../styles/grid/gridStyle'
 import {ResponsiveGridStyleProps} from '../../styles/grid/types'
 import {_getArrayProp} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {Box, BoxOwnProps} from '../box/box'
 import {ResponsiveGridProps} from '../types'
@@ -16,7 +17,11 @@ export interface GridOwnProps extends Omit<BoxOwnProps, 'display'>, ResponsiveGr
  */
 export type GridProps<E extends ElementType = 'div'> = Props<GridOwnProps, E>
 
-const StyledGrid = styled(Box)<ResponsiveGridStyleProps>(responsiveGridStyle)
+const StyledGrid = styled(Box)<ResponsiveGridStyleProps>`
+  @layer u-styled {
+    ${responsiveGridStyle}
+  }
+`
 
 function GridComponent(
   props: GridOwnProps & {as?: ElementType} & Omit<

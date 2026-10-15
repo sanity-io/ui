@@ -1,6 +1,7 @@
+import {styled} from 'styled-components'
+
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
-import {styled} from '../../styles/styled'
 import {Box} from '../box/box'
 import {
   selectableBaseStyle,
@@ -11,17 +12,29 @@ import {
 } from './style'
 
 const SelectableBase = styled(Box)`
-  ${selectableBaseStyle}
+  @layer u-styled {
+    ${selectableBaseStyle}
+  }
 `
 
-const SelectableColor = styled(SelectableBase)<SelectableStyleProps>(selectableColorStyle)
+const SelectableColor = styled(SelectableBase)<SelectableStyleProps>`
+  @layer u-styled {
+    ${selectableColorStyle}
+  }
+`
 
-const SelectableDisabled = styled(SelectableColor)<SelectableStyleProps>(selectableDisabledStyle)
+const SelectableDisabled = styled(SelectableColor)<SelectableStyleProps>`
+  @layer u-styled {
+    ${selectableDisabledStyle}
+  }
+`
 
 /**
  * @internal
  */
-export const Selectable = styled(SelectableDisabled)<ResponsiveRadiusStyleProps>(
-  responsiveRadiusStyle,
-  selectableStyle,
-)
+export const Selectable = styled(SelectableDisabled)<ResponsiveRadiusStyleProps>`
+  @layer u-styled {
+    ${responsiveRadiusStyle}
+    ${selectableStyle}
+  }
+`

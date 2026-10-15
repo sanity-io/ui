@@ -1,11 +1,11 @@
 import {isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
+import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {_getArrayProp} from '../../styles/helpers'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
-import {styled} from '../../styles/styled'
 import {useTheme_v2} from '../../theme/useTheme'
 import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth} from '../../types/button'
 import {ElementType, Props} from '../../types/component'
@@ -61,17 +61,32 @@ export type ButtonProps<E extends ElementType = 'button'> = Props<ButtonOwnProps
 
 // The static rules live in `buttonRoot` in styles.css; `width="fill"` is the
 // `buttonWidthFill` class on the last level
-const ButtonBase = styled.button.attrs({className: buttonRoot})(buttonBaseStyles)
+const ButtonBase = styled.button.attrs({className: buttonRoot})`
+  @layer u-styled {
+    ${buttonBaseStyles}
+  }
+`
 
-const ButtonColor = styled(ButtonBase)<{$mode: ButtonMode; $tone: ButtonTone}>(buttonColorStyles)
+const ButtonColor = styled(ButtonBase)<{$mode: ButtonMode; $tone: ButtonTone}>`
+  @layer u-styled {
+    ${buttonColorStyles}
+  }
+`
 
-const ButtonDisabledAndFocus = styled(ButtonColor)<{$mode: ButtonMode; $tone: ButtonTone}>(
-  buttonDisabledAndFocusStyles,
-)
+const ButtonDisabledAndFocus = styled(ButtonColor)<{$mode: ButtonMode; $tone: ButtonTone}>`
+  @layer u-styled {
+    ${buttonDisabledAndFocusStyles}
+  }
+`
 
 const StyledButton = styled(ButtonDisabledAndFocus).attrs<{$width?: ButtonWidth}>((props) => ({
   className: props.$width === 'fill' ? buttonWidthFill : undefined,
-}))<{$width?: ButtonWidth} & ResponsiveRadiusStyleProps>(responsiveRadiusStyle, buttonStyles)
+}))<{$width?: ButtonWidth} & ResponsiveRadiusStyleProps>`
+  @layer u-styled {
+    ${responsiveRadiusStyle}
+    ${buttonStyles}
+  }
+`
 
 function ButtonComponent(
   props: ButtonOwnProps & {as?: ElementType} & Omit<

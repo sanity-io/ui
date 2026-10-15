@@ -1,9 +1,10 @@
+import {styled} from 'styled-components'
+
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {fontColorStyle} from '../../styles/font/fontColorStyle'
 import {_fontWeight, _responsiveFontSize} from '../../styles/font/responsiveFont'
 import {responsiveTextAlignStyle} from '../../styles/font/textAlignStyle'
 import {_getArrayProp} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {TextAlign} from '../../types/text'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'
@@ -31,18 +32,30 @@ export interface LabelOwnProps {
  */
 export type LabelProps<E extends ElementType = 'div'> = Props<LabelOwnProps, E>
 
-const LabelBase = styled.div(labelBaseStyle)
+const LabelBase = styled.div`
+  @layer u-styled {
+    ${labelBaseStyle}
+  }
+`
 
-const LabelSize = styled(LabelBase)<{$size: number[]}>((props) =>
-  _responsiveFontSize('label', props),
-)
+const LabelSize = styled(LabelBase)<{$size: number[]}>`
+  @layer u-styled {
+    ${(props) => _responsiveFontSize('label', props)}
+  }
+`
 
 const StyledLabel = styled(LabelSize)<{
   $accent?: boolean
   $align: TextAlign[]
   $muted: boolean
   $weight?: ThemeFontWeightKey
-}>((props) => _fontWeight('label', props), responsiveTextAlignStyle, fontColorStyle)
+}>`
+  @layer u-styled {
+    ${(props) => _fontWeight('label', props)}
+    ${responsiveTextAlignStyle}
+    ${fontColorStyle}
+  }
+`
 
 function LabelComponent(
   props: LabelOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,

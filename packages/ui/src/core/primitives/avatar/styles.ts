@@ -1,34 +1,35 @@
-import {CSSObject} from '../../../theme/system/css'
+import {css} from 'styled-components'
+
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {focusRingStyle} from '../../styles/focusRing'
-import {_responsive, rem} from '../../styles/helpers'
+import {rem, responsiveRules} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {AvatarRootStyleProps, ResponsiveAvatarSizeStyleProps} from './types'
 
-export function avatarColorStyle(props: AvatarRootStyleProps): CSSObject {
+export function avatarColorStyle(props: AvatarRootStyleProps): ReturnType<typeof css> {
   const {$color} = props
 
-  return {
-    '--avatar-bg-color': `var(--card-avatar-${$color}-bg-color)`,
-    '--avatar-fg-color': `var(--card-avatar-${$color}-fg-color)`,
-  }
+  return css`
+    --avatar-bg-color: var(--card-avatar-${$color}-bg-color);
+    --avatar-fg-color: var(--card-avatar-${$color}-fg-color);
+  `
 }
 
-export function avatarRootStyle(props: ThemeProps): CSSObject {
+export function avatarRootStyle(props: ThemeProps): ReturnType<typeof css> {
   const {avatar} = getTheme_v2(props.theme)
 
-  return {
+  return css`
     /* &:is(button) */
-    '&[data-as="button"]': {
-      '&:focus': {
-        boxShadow: focusRingStyle({focusRing: avatar.focusRing}),
-      },
+    &[data-as='button'] {
+      &:focus {
+        box-shadow: ${focusRingStyle({focusRing: avatar.focusRing})};
+      }
 
-      '&:focus:not(:focus-visible)': {
-        boxShadow: 'none',
-      },
-    },
-  }
+      &:focus:not(:focus-visible) {
+        box-shadow: none;
+      }
+    }
+  `
 }
 
 /**
@@ -38,12 +39,14 @@ export function avatarRootStyle(props: ThemeProps): CSSObject {
  */
 export function responsiveAvatarSizeStyle(
   props: ResponsiveAvatarSizeStyleProps & ThemeProps,
-): CSSObject[] {
+): ReturnType<typeof css> {
   const {avatar, media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$size, (size) => {
+  return responsiveRules(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size] || avatar.sizes[0]
 
-    return {'--avatar-size': rem(avatarSize.size)}
+    return css`
+      --avatar-size: ${rem(avatarSize.size)};
+    `
   })
 }

@@ -1,24 +1,29 @@
-import {CSSObject} from '../../../theme/system/css'
+import {css} from 'styled-components'
+
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive, rem} from '../../styles/helpers'
+import {rem, responsiveRules} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {ResponsiveWidthStyleProps} from './types'
 
-const BASE_STYLE: CSSObject = {
-  width: '100%',
-  margin: '0 auto',
-}
+const BASE_STYLE = css`
+  width: 100%;
+  margin: 0 auto;
+`
 
-export function containerBaseStyle(): CSSObject {
+export function containerBaseStyle(): ReturnType<typeof css> {
   return BASE_STYLE
 }
 
 export function responsiveContainerWidthStyle(
   props: ResponsiveWidthStyleProps & ThemeProps,
-): CSSObject[] {
+): ReturnType<typeof css> {
   const {container, media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$width, (val) => ({
-    maxWidth: val === 'auto' ? 'none' : rem(container[val]),
-  }))
+  return responsiveRules(
+    media,
+    props.$width,
+    (val) => css`
+      max-width: ${val === 'auto' ? 'none' : rem(container[val])};
+    `,
+  )
 }

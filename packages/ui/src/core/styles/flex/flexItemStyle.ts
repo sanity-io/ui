@@ -1,24 +1,29 @@
+import {css} from 'styled-components'
+
 import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive, _ruleSet} from '../helpers'
+import {_ruleSet, responsiveRules} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexItemStyleProps} from './types'
 
-const BASE_STYLE: CSSObject = {
-  minWidth: 0,
-  minHeight: 0,
-}
-
-const RULES = _ruleSet(BASE_STYLE, responsiveFlexItemStyle)
+const RULES = _ruleSet(css<ResponsiveFlexItemStyleProps & ThemeProps>`
+  min-width: 0;
+  min-height: 0;
+  ${responsiveFlexItemStyle}
+`)
 
 export function flexItemStyle(): CSSObject[] {
   return RULES
 }
 
-function responsiveFlexItemStyle(props: ResponsiveFlexItemStyleProps & ThemeProps): CSSObject[] {
+function responsiveFlexItemStyle(props: ResponsiveFlexItemStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  if (!props.$flex) return _ruleSet()
-
-  return _responsive(media, props.$flex, (flex) => ({flex: `${flex}`}))
+  return responsiveRules(
+    media,
+    props.$flex,
+    (flex) => css`
+      flex: ${flex};
+    `,
+  )
 }

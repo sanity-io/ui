@@ -2,6 +2,7 @@ import {CloseIcon} from '@sanity/icons/Close'
 import {clsx} from 'clsx/lite'
 import {isValidElement, useCallback, useImperativeHandle, useMemo, useRef} from 'react'
 import {isValidElementType} from 'react-is'
+import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {EMPTY_RECORD} from '../../constants'
@@ -23,7 +24,6 @@ import {
 } from '../../styles/input/textInputStyle'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
-import {styled} from '../../styles/styled'
 import {useRootTheme} from '../../theme/useRootTheme'
 import {Radius} from '../../types/radius'
 import {Box} from '../box/box'
@@ -100,53 +100,74 @@ const CLEAR_BUTTON_BOX_STYLE: React.CSSProperties = {zIndex: 2}
 // must beat Card's runtime `border-radius` shorthand at equal specificity,
 // which needs both rules in the runtime stylesheet.
 const Prefix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  @layer u-styled {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 
-  & > span {
-    display: block;
-    margin: -1px;
+    & > span {
+      display: block;
+      margin: -1px;
+    }
   }
 `
 
 const Suffix = styled(Card).attrs({forwardedAs: 'span'})`
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  @layer u-styled {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 
-  & > span {
-    display: block;
-    margin: -1px;
+    & > span {
+      display: block;
+      margin: -1px;
+    }
   }
 `
 
 const InputBase = styled.input`
-  ${textInputBaseStyle}
+  @layer u-styled {
+    ${textInputBaseStyle}
+  }
 `
 
-const InputColor = styled(InputBase)<TextInputInputStyleProps>(textInputColorStyle)
+const InputColor = styled(InputBase)<TextInputInputStyleProps>`
+  @layer u-styled {
+    ${textInputColorStyle}
+  }
+`
 
-const Input = styled(InputColor)<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
-  responsiveInputPaddingStyle,
-  textInputFontStyle,
-  textInputFontSizeStyle,
-)
+const Input = styled(InputColor)<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>`
+  @layer u-styled {
+    ${responsiveInputPaddingStyle}
+    ${textInputFontStyle}
+    ${textInputFontSizeStyle}
+  }
+`
 
-const PresentationColor = styled.span<TextInputRepresentationStyleProps>(
-  textInputRepresentationColorStyle,
-)
+const PresentationColor = styled.span<TextInputRepresentationStyleProps>`
+  @layer u-styled {
+    ${textInputRepresentationColorStyle}
+  }
+`
 
 const Presentation = styled(PresentationColor)<
   ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps
->(responsiveRadiusStyle, textInputRepresentationStyle)
+>`
+  @layer u-styled {
+    ${responsiveRadiusStyle}
+    ${textInputRepresentationStyle}
+  }
+`
 
 // Stays on styled-components: `background-color: transparent` must beat Card's
 // runtime `background-color: var(--card-bg-color)` at equal specificity, which
 // needs both rules in the runtime stylesheet.
 const RightCard = styled(Card)`
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  right: 0;
+  @layer u-styled {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 `
 
 /**

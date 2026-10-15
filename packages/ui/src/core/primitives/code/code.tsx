@@ -1,10 +1,10 @@
 import {lazy, Suspense} from 'react'
+import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {_fontWeight, _responsiveFontSize} from '../../styles/font/responsiveFont'
 import {FontWeightStyleProps, ResponsiveFontSizeStyleProps} from '../../styles/font/types'
 import {_getArrayProp} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {codeBaseStyle, codeSyntaxStyle} from './styles'
 
@@ -25,16 +25,24 @@ export interface CodeOwnProps {
  */
 export type CodeProps<E extends ElementType = 'pre'> = Props<CodeOwnProps, E>
 
-const CodeBase = styled.pre(codeBaseStyle)
-
-const CodeSyntax = styled(CodeBase)`
-  ${codeSyntaxStyle}
+const CodeBase = styled.pre`
+  @layer u-styled {
+    ${codeBaseStyle}
+  }
 `
 
-const StyledCode = styled(CodeSyntax)<FontWeightStyleProps & ResponsiveFontSizeStyleProps>(
-  (props) => _fontWeight('code', props),
-  (props) => _responsiveFontSize('code', props),
-)
+const CodeSyntax = styled(CodeBase)`
+  @layer u-styled {
+    ${codeSyntaxStyle}
+  }
+`
+
+const StyledCode = styled(CodeSyntax)<FontWeightStyleProps & ResponsiveFontSizeStyleProps>`
+  @layer u-styled {
+    ${(props) => _fontWeight('code', props)}
+    ${(props) => _responsiveFontSize('code', props)}
+  }
+`
 
 function CodeComponent(
   props: CodeOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLPreElement>, 'as' | 'size'>,

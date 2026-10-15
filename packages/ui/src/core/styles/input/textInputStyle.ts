@@ -1,12 +1,11 @@
 import {css} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
-import {CSSObject} from '../../../theme/system/css'
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {CardTone} from '../../types/card'
 import {focusRingBorderStyle, focusRingStyle} from '../focusRing'
-import {_responsive, rem} from '../helpers'
+import {rem, responsiveRules} from '../helpers'
 import {ThemeProps} from '../types'
 
 /**
@@ -105,26 +104,28 @@ export function textInputColorStyle(
 
 export function textInputFontStyle(
   props: Pick<TextInputInputStyleProps, '$weight'> & ThemeProps,
-): CSSObject {
+): ReturnType<typeof css> {
   const {$weight} = props
   const {font} = getTheme_v2(props.theme)
 
-  return {
-    fontFamily: font.text.family,
-    fontWeight: `${($weight && font.text.weights[$weight]) || font.text.weights.regular}`,
-  }
+  return css`
+    font-family: ${font.text.family};
+    font-weight: ${($weight && font.text.weights[$weight]) || font.text.weights.regular};
+  `
 }
 
-export function textInputFontSizeStyle(props: TextInputInputStyleProps & ThemeProps): CSSObject[] {
+export function textInputFontSizeStyle(
+  props: TextInputInputStyleProps & ThemeProps,
+): ReturnType<typeof css> {
   const {font, media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$fontSize, (sizeIndex) => {
+  return responsiveRules(media, props.$fontSize, (sizeIndex) => {
     const size = font.text.sizes[sizeIndex] || font.text.sizes[2]
 
-    return {
-      fontSize: rem(size.fontSize),
-      lineHeight: `${size.lineHeight / size.fontSize}`,
-    }
+    return css`
+      font-size: ${rem(size.fontSize)};
+      line-height: ${size.lineHeight / size.fontSize};
+    `
   })
 }
 

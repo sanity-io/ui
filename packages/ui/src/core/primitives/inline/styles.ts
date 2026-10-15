@@ -1,33 +1,41 @@
-import {CSSObject} from '../../../theme/system/css'
+import {css} from 'styled-components'
+
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive, rem} from '../../styles/helpers'
+import {rem, responsiveRules} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {ResponsiveInlineSpaceStyleProps} from './types'
 
-export function inlineBaseStyle(): CSSObject {
-  return {
-    'lineHeight': '0',
+const BASE_STYLE = css`
+  line-height: 0;
 
-    '&&:not([hidden])': {
-      display: 'block',
-    },
-
-    '& > div': {
-      display: 'inline-block',
-      verticalAlign: 'middle',
-    },
+  &&:not([hidden]) {
+    display: block;
   }
+
+  & > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+`
+
+export function inlineBaseStyle(): ReturnType<typeof css> {
+  return BASE_STYLE
 }
 
-export function inlineSpaceStyle(props: ResponsiveInlineSpaceStyleProps & ThemeProps): CSSObject[] {
+export function inlineSpaceStyle(
+  props: ResponsiveInlineSpaceStyleProps & ThemeProps,
+): ReturnType<typeof css> {
   const {media, space} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$space, (spaceIndex) => {
+  return responsiveRules(media, props.$space, (spaceIndex) => {
     const _space = rem(spaceIndex === 0.5 ? space[1] / 2 : space[spaceIndex])
 
-    return {
-      'margin': `-${_space} 0 0 -${_space}`,
-      '& > div': {padding: `${_space} 0 0 ${_space}`},
-    }
+    return css`
+      margin: -${_space} 0 0 -${_space};
+
+      & > div {
+        padding: ${_space} 0 0 ${_space};
+      }
+    `
   })
 }

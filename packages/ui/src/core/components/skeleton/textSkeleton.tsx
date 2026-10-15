@@ -1,29 +1,31 @@
+import {css, styled} from 'styled-components'
+
 import {ThemeFontKey} from '../../../theme/system/font'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_getArrayProp, _responsive} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
+import {_getArrayProp, responsiveRules} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {Skeleton, SkeletonProps} from './skeleton'
 
-const StyledSkeleton = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>((
-  props: {
-    $size: number[]
-    $style: ThemeFontKey
-  } & ThemeProps,
-) => {
+function textSkeletonHeightStyle(props: {$size: number[]; $style: ThemeFontKey} & ThemeProps) {
   const {$size, $style} = props
   const {font, media} = getTheme_v2(props.theme)
   const fontStyle = font[$style]
 
-  const styles = _responsive(media, $size, (sizeIndex) => {
+  return responsiveRules(media, $size, (sizeIndex) => {
     const fontSize = fontStyle.sizes[sizeIndex]
     const capHeight = fontSize.lineHeight - fontSize.ascenderHeight - fontSize.descenderHeight
 
-    return {height: capHeight}
+    return css`
+      height: ${capHeight}px;
+    `
   })
+}
 
-  return styles
-})
+const StyledSkeleton = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>`
+  @layer u-styled {
+    ${textSkeletonHeightStyle}
+  }
+`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.

@@ -204,7 +204,6 @@ describe('styled-components cascade layer', () => {
     const unlayered = rules.filter((rule) => !(rule instanceof CSSLayerBlockRule))
 
     expect(statement instanceof CSSLayerStatementRule && statement.nameList).toEqual([
-      'sui',
       'u-tokens',
       'u-utilities',
       'u-styled',
@@ -218,7 +217,7 @@ describe('styled-components cascade layer', () => {
     expect(getComputedStyle(document.getElementById('wrapping-button')!).whiteSpace).toBe('normal')
   })
 
-  test('the layer order holds when styles.css loads last and the page declares no order', async () => {
+  test('the ThemeProvider statement holds the order when styles.css loads last without one', async () => {
     await render(
       <ThemeProvider theme={theme}>
         <Button text="Button" />
@@ -227,7 +226,6 @@ describe('styled-components cascade layer', () => {
 
     loadStaticStylesLast()
 
-    expect(higherLayer('sui', 'u-tokens')).toBe('u-tokens')
     expect(higherLayer('u-tokens', 'u-utilities')).toBe('u-utilities')
     expect(higherLayer('u-utilities', 'u-styled')).toBe('u-styled')
   })

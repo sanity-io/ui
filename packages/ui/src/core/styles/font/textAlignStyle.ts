@@ -1,6 +1,8 @@
+import {css} from 'styled-components'
+
 import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive} from '../helpers'
+import {_ruleSet, responsiveRules} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveTextAlignStyleProps} from './types'
 
@@ -13,7 +15,13 @@ export function responsiveTextAlignStyle(
 ): CSSObject[] {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$align, (textAlign) => {
-    return {textAlign}
-  })
+  return _ruleSet(
+    responsiveRules(
+      media,
+      props.$align,
+      (textAlign) => css`
+        text-align: ${textAlign};
+      `,
+    ),
+  )
 }

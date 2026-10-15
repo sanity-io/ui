@@ -2,9 +2,9 @@ import {CheckmarkIcon} from '@sanity/icons/Checkmark'
 import {RemoveIcon} from '@sanity/icons/Remove'
 import {clsx} from 'clsx/lite'
 import {useEffect, useImperativeHandle, useRef} from 'react'
+import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
-import {styled} from '../../styles/styled'
 import {inputElementColorStyles, inputElementStyles} from './styles'
 
 import {checkbox} from './checkbox.css'
@@ -17,9 +17,17 @@ export interface CheckboxProps {
   customValidity?: string
 }
 
-const InputBase = styled.input(inputElementStyles)
+const InputBase = styled.input`
+  @layer u-styled {
+    ${inputElementStyles}
+  }
+`
 
-const Input = styled(InputBase)(inputElementColorStyles)
+const Input = styled(InputBase)`
+  @layer u-styled {
+    ${inputElementColorStyles}
+  }
+`
 
 /**
  * Checkboxes allow the user to select one or more items from a set.

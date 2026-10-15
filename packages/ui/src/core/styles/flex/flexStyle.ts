@@ -1,64 +1,83 @@
+import {css} from 'styled-components'
+
 import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive, _ruleSet, rem} from '../helpers'
+import {_ruleSet, rem, responsiveRules} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveFlexStyleProps} from './types'
 
-const BASE_STYLE: CSSObject = {
-  '&&:not([hidden])': {
-    display: 'flex',
-  },
-}
+const RULES = _ruleSet(css<ResponsiveFlexStyleProps & ThemeProps>`
+  &&:not([hidden]) {
+    display: flex;
+  }
 
-const RULES = _ruleSet(
-  BASE_STYLE,
-  responsiveFlexAlignStyle,
-  responsiveFlexGapStyle,
-  responsiveFlexWrapStyle,
-  responsiveFlexJustifyStyle,
-  responsiveFlexDirectionStyle,
-)
+  ${responsiveFlexAlignStyle}
+  ${responsiveFlexGapStyle}
+  ${responsiveFlexWrapStyle}
+  ${responsiveFlexJustifyStyle}
+  ${responsiveFlexDirectionStyle}
+`)
 
 export function responsiveFlexStyle(): CSSObject[] {
   return RULES
 }
 
-function responsiveFlexAlignStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+function responsiveFlexAlignStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$align, (align) => {
-    return {alignItems: align}
-  })
+  return responsiveRules(
+    media,
+    props.$align,
+    (align) => css`
+      align-items: ${align};
+    `,
+  )
 }
 
 function responsiveFlexGapStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
   const {media, space} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$gap, (gap) => ({
-    gap: gap ? rem(space[gap]) : undefined,
-  }))
+  return responsiveRules(media, props.$gap, (gap) =>
+    gap
+      ? css`
+          gap: ${rem(space[gap])};
+        `
+      : null,
+  )
 }
 
-function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+function responsiveFlexWrapStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$wrap, (wrap) => {
-    return {flexWrap: wrap}
-  })
+  return responsiveRules(
+    media,
+    props.$wrap,
+    (wrap) => css`
+      flex-wrap: ${wrap};
+    `,
+  )
 }
 
-function responsiveFlexJustifyStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+function responsiveFlexJustifyStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$justify, (justify) => {
-    return {justifyContent: justify}
-  })
+  return responsiveRules(
+    media,
+    props.$justify,
+    (justify) => css`
+      justify-content: ${justify};
+    `,
+  )
 }
 
-function responsiveFlexDirectionStyle(props: ResponsiveFlexStyleProps & ThemeProps): CSSObject[] {
+function responsiveFlexDirectionStyle(props: ResponsiveFlexStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$direction, (direction) => {
-    return {flexDirection: direction}
-  })
+  return responsiveRules(
+    media,
+    props.$direction,
+    (direction) => css`
+      flex-direction: ${direction};
+    `,
+  )
 }

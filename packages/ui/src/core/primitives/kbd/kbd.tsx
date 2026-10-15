@@ -1,9 +1,8 @@
-import {css} from 'styled-components'
+import {css, styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles/helpers'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
-import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {Radius} from '../../types/radius'
 import {Box} from '../box/box'
@@ -40,10 +39,16 @@ const kbdBaseStyle = css`
 `
 
 const KBDBase = styled.kbd`
-  ${kbdBaseStyle}
+  @layer u-styled {
+    ${kbdBaseStyle}
+  }
 `
 
-const StyledKBD = styled(KBDBase)<ResponsiveRadiusStyleProps>(responsiveRadiusStyle)
+const StyledKBD = styled(KBDBase)<ResponsiveRadiusStyleProps>`
+  @layer u-styled {
+    ${responsiveRadiusStyle}
+  }
+`
 
 function KBDComponent(
   props: KBDOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,

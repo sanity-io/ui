@@ -119,42 +119,6 @@
   },
   "overrides": [
     {
-      // Components of @sanity/ui emit their rules in the `u-styled` cascade layer,
-      // which the wrapper in core/styles/styled.ts adds. The `paths` repeat the
-      // base rule's, since an override replaces a rule's options.
-      "files": ["packages/ui/src/**"],
-      "excludeFiles": ["packages/ui/src/core/styles/styled.ts", "**/*.test.{ts,tsx}"],
-      "rules": {
-        "eslint/no-restricted-imports": [
-          "error",
-          {
-            "paths": [
-              {
-                "name": "styled-components",
-                "importNames": ["default", "createGlobalStyle", "styled"],
-                "message": "Import `styled` from `core/styles/styled`, which emits the rules in the `u-styled` cascade layer."
-              },
-              {
-                "name": "react",
-                "importNames": ["forwardRef"],
-                "message": "React 19 passes `ref` as a regular prop — write a plain function component that reads `props.ref` instead of wrapping it in `forwardRef`."
-              },
-              {
-                "name": "react",
-                "importNames": ["createRef"],
-                "message": "Use `useRef` instead of `createRef`."
-              },
-              {
-                "name": "react",
-                "importNames": ["createElement"],
-                "message": "Use JSX instead of `createElement`."
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
       // tsgolint non-deterministically reports either no-unsafe-type-assertion or
       // no-unnecessary-type-assertion for the `as HTMLElement[]` assertion in this file,
       // so an inline disable comment cannot be used (it would be flagged as unused on

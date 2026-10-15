@@ -1,10 +1,9 @@
 import {clsx} from 'clsx/lite'
 import {Children, cloneElement, isValidElement} from 'react'
+import {css, styled} from 'styled-components'
 
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {EMPTY_RECORD} from '../../constants'
-import {_getArrayProp, _responsive, rem} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
+import {_getArrayProp, rem, responsiveRules} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {AvatarSize} from '../../types/avatar'
 import {AvatarCounter} from './avatarCounter'
@@ -14,20 +13,24 @@ import {avatarStack} from './avatar.css'
 function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {avatar, media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$size, (size) => {
+  return responsiveRules(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size]
 
-    if (!avatarSize) return EMPTY_RECORD
+    if (!avatarSize) return null
 
-    return {
-      '& > div + div': {
-        marginLeft: rem(avatarSize.distance),
-      },
-    }
+    return css`
+      & > div + div {
+        margin-left: ${rem(avatarSize.distance)};
+      }
+    `
   })
 }
 
-const StyledAvatarStack = styled.div<{$size: AvatarSize[]}>(responsiveAvatarStackSizeStyle)
+const StyledAvatarStack = styled.div<{$size: AvatarSize[]}>`
+  @layer u-styled {
+    ${responsiveAvatarStackSizeStyle}
+  }
+`
 
 /**
  * @public

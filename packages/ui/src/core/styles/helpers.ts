@@ -1,21 +1,39 @@
-import {css} from 'styled-components'
+import {css, styled, type Interpolation, type RuleSet} from 'styled-components'
 
 import {CSSObject} from '../../theme/system/css'
 import {Theme} from '../../theme/system/theme'
 import {getTheme_v2} from '../../theme/versioning/getTheme_v2'
 import {EMPTY_ARRAY} from '../constants'
 
-const EMPTY_CSS_OBJECT: CSSObject = {}
-
 /**
- * Tags style chunks with the metadata required for v7 function interpolations.
- * The `CSSObject[]` return type avoids exposing styled-components types.
+ * Declares the order of the cascade layers of @sanity/ui, so that the layers of
+ * `@sanity/ui/styles.css` stay below `u-styled` even when `<style data-styled>` precedes that
+ * stylesheet, which would otherwise make `u-styled` the first layer the page mentions.
+ *
+ * styled-components emits sheet groups in the order it registers them, and a styled component
+ * registers its group when it is defined. Every module of @sanity/ui that defines a styled
+ * component depends on this one, so this group comes before every `@layer u-styled` block
+ * (`test/styled-definitions.test.ts` checks both).
  *
  * @internal
  */
-export function _ruleSet(...rules: unknown[]): CSSObject[] {
+export const StyledLayerOrder = styled(renderNothing)`
+  @layer u-tokens, u-utilities, u-styled;
+`
+
+function renderNothing() {
+  return null
+}
+
+/**
+ * Types a rule set as `CSSObject[]`, so that the published types don't reference
+ * styled-components.
+ *
+ * @internal
+ */
+export function _ruleSet<Props extends object>(rules: RuleSet<Props>): CSSObject[] {
   // oxlint-disable-next-line no-unsafe-type-assertion
-  return css(EMPTY_CSS_OBJECT, ...(rules as never[])) as unknown as CSSObject[]
+  return rules as unknown as CSSObject[]
 }
 
 /**
@@ -39,6 +57,37 @@ export function rem(pixelValue: number): string | 0 {
 }
 
 /**
+ * Applies the rules for each value after the first from the breakpoint before it.
+ *
+ * Folds the rules into nested templates, since styled-components v7 rejects arrays as
+ * interpolations.
+ *
+ * @internal
+ */
+export function responsiveRules<T>(
+  media: number[],
+  values: T[] | undefined,
+  callback: (value: T, index: number, array: T[]) => Interpolation<object>,
+): ReturnType<typeof css> {
+  return (values ?? EMPTY_ARRAY).reduce<ReturnType<typeof css>>(
+    (rules, value, index, array) =>
+      index === 0
+        ? css`
+            ${rules}
+            ${callback(value, index, array)}
+          `
+        : css`
+            ${rules}
+
+            @media screen and (min-width: ${media[index - 1]}px) {
+              ${callback(value, index, array)}
+            }
+          `,
+    css``,
+  )
+}
+
+/**
  * Builds a spreadable, v7-compatible rule array for responsive styles.
  *
  * @internal
@@ -48,15 +97,7 @@ export function _responsive<T>(
   values: T[],
   callback: (value: T, index: number, array: T[]) => CSSObject,
 ): CSSObject[] {
-  const statements = values?.map(callback) || []
-
-  return _ruleSet(
-    ...statements.map((statement, mediaIndex) => {
-      if (mediaIndex === 0) return statement
-
-      return {[`@media screen and (min-width: ${media[mediaIndex - 1]}px)`]: statement}
-    }),
-  )
+  return _ruleSet(responsiveRules(media, values, callback))
 }
 
 /**
@@ -88,5 +129,24 @@ export function _getResponsiveSpace(
 
   return _responsive(media, spaceIndexes, (spaceIndex) =>
     _fillCSSObject(props, rem(space[spaceIndex])),
+  )
+}
+
+/**
+ * Sets each of `properties` to the theme space at each index, per breakpoint.
+ *
+ * @internal
+ */
+export function responsiveSpace(
+  theme: Theme,
+  properties: string[],
+  spaceIndexes: number[] | undefined,
+): ReturnType<typeof css> | null {
+  if (!spaceIndexes?.length) return null
+
+  const {media, space} = getTheme_v2(theme)
+
+  return responsiveRules(media, spaceIndexes, (spaceIndex) =>
+    properties.map((property) => `${property}: ${rem(space[spaceIndex])};`).join(''),
   )
 }

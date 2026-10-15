@@ -4,9 +4,10 @@ import {CSSObject} from '../../../theme/system/css'
 import {ThemeFontSize} from '../../../theme/system/font'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {focusRingBorderStyle, focusRingStyle} from '../../styles/focusRing'
-import {_responsive, _ruleSet, rem} from '../../styles/helpers'
+import {_ruleSet, rem, responsiveRules} from '../../styles/helpers'
 import {responsiveInputPaddingIconRightStyle} from '../../styles/input/responsiveInputPaddingStyle'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
+import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
 import {ThemeProps} from '../../styles/types'
 
 const INPUT_BASE_STYLE = css`
@@ -80,23 +81,32 @@ function inputColorStyle(props: ThemeProps) {
 }
 
 function textSize(size: ThemeFontSize) {
-  return {fontSize: rem(size.fontSize), lineHeight: `${rem(size.lineHeight)}`}
+  return css`
+    font-size: ${rem(size.fontSize)};
+    line-height: ${rem(size.lineHeight)};
+  `
 }
 
 function inputTextSizeStyle(props: {$fontSize: number[]} & ThemeProps) {
   const {$fontSize} = props
   const {font, media} = getTheme_v2(props.theme)
 
-  return _responsive(media, $fontSize, (sizeIndex) =>
+  return responsiveRules(media, $fontSize, (sizeIndex) =>
     textSize(font.text.sizes[sizeIndex] || font.text.sizes[2]),
   )
 }
 
-const INPUT_RULES = _ruleSet(
-  responsiveRadiusStyle,
-  inputTextSizeStyle,
-  responsiveInputPaddingIconRightStyle,
-)
+type InputStyleProps = ResponsiveRadiusStyleProps & {
+  $fontSize: number[]
+  $padding: number[]
+  $space: number[]
+} & ThemeProps
+
+const INPUT_RULES = _ruleSet(css<InputStyleProps>`
+  ${responsiveRadiusStyle}
+  ${inputTextSizeStyle}
+  ${responsiveInputPaddingIconRightStyle}
+`)
 
 function inputStyle(): CSSObject[] {
   return INPUT_RULES

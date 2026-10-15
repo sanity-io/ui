@@ -1,4 +1,5 @@
 import {useImperativeHandle, useRef} from 'react'
+import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -19,7 +20,6 @@ import {
 } from '../../styles/input/textInputStyle'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
-import {styled} from '../../styles/styled'
 import {useRootTheme} from '../../theme/useRootTheme'
 import {ResponsiveRadiusProps} from '../types'
 
@@ -41,24 +41,39 @@ export interface TextAreaProps extends ResponsiveRadiusProps {
 }
 
 const InputBase = styled.textarea`
-  ${textInputBaseStyle}
+  @layer u-styled {
+    ${textInputBaseStyle}
+  }
 `
 
-const InputColor = styled(InputBase)<TextInputInputStyleProps>(textInputColorStyle)
+const InputColor = styled(InputBase)<TextInputInputStyleProps>`
+  @layer u-styled {
+    ${textInputColorStyle}
+  }
+`
 
-const Input = styled(InputColor)<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>(
-  responsiveInputPaddingStyle,
-  textInputFontStyle,
-  textInputFontSizeStyle,
-)
+const Input = styled(InputColor)<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>`
+  @layer u-styled {
+    ${responsiveInputPaddingStyle}
+    ${textInputFontStyle}
+    ${textInputFontSizeStyle}
+  }
+`
 
-const PresentationColor = styled.div<TextInputRepresentationStyleProps>(
-  textInputRepresentationColorStyle,
-)
+const PresentationColor = styled.div<TextInputRepresentationStyleProps>`
+  @layer u-styled {
+    ${textInputRepresentationColorStyle}
+  }
+`
 
 const Presentation = styled(PresentationColor)<
   ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps
->(responsiveRadiusStyle, textInputRepresentationStyle)
+>`
+  @layer u-styled {
+    ${responsiveRadiusStyle}
+    ${textInputRepresentationStyle}
+  }
+`
 
 /**
  * A multiline text input.

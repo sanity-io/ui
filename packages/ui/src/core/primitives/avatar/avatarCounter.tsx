@@ -1,9 +1,7 @@
-import {css} from 'styled-components'
+import {css, styled} from 'styled-components'
 
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {EMPTY_RECORD} from '../../constants'
-import {_getArrayProp, _responsive, rem} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
+import {_getArrayProp, rem, responsiveRules} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {AvatarSize} from '../../types/avatar'
 import {Label} from '../label/label'
@@ -13,16 +11,16 @@ import {avatarCounter} from './avatar.css'
 function _responsiveAvatarCounterSizeStyle(props: {$size: AvatarSize[]} & ThemeProps) {
   const {avatar, media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$size, (size) => {
+  return responsiveRules(media, props.$size, (size) => {
     const avatarSize = avatar.sizes[size]
 
-    if (!avatarSize) return EMPTY_RECORD
+    if (!avatarSize) return null
 
-    return {
-      borderRadius: rem(avatarSize.size / 2),
-      minWidth: rem(avatarSize.size),
-      height: rem(avatarSize.size),
-    }
+    return css`
+      border-radius: ${rem(avatarSize.size / 2)};
+      min-width: ${rem(avatarSize.size)};
+      height: ${rem(avatarSize.size)};
+    `
   })
 }
 
@@ -34,10 +32,12 @@ function _avatarCounterPaddingStyle(props: ThemeProps) {
   `
 }
 
-const StyledAvatarCounter = styled.div.attrs({className: avatarCounter})<{$size: AvatarSize[]}>(
-  _responsiveAvatarCounterSizeStyle,
-  _avatarCounterPaddingStyle,
-)
+const StyledAvatarCounter = styled.div.attrs({className: avatarCounter})<{$size: AvatarSize[]}>`
+  @layer u-styled {
+    ${_responsiveAvatarCounterSizeStyle}
+    ${_avatarCounterPaddingStyle}
+  }
+`
 
 /**
  * @public

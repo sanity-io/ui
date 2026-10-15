@@ -1,17 +1,10 @@
+import {css} from 'styled-components'
+
 import {CSSObject} from '../../../theme/system/css'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive, _ruleSet, rem} from '../helpers'
+import {_ruleSet, rem, responsiveRules} from '../helpers'
 import {ThemeProps} from '../types'
 import {ResponsiveGridStyleProps} from './types'
-
-const GRID_CSS = {
-  '&&:not([hidden])': {
-    display: 'grid',
-  },
-  '&[data-as="ul"],&[data-as="ol"]': {
-    listStyle: 'none',
-  },
-}
 
 const GRID_AUTO_COLUMS = {
   auto: 'auto',
@@ -27,17 +20,25 @@ const GRID_AUTO_ROWS = {
   fr: 'minmax(0, 1fr)',
 }
 
-const RULES = _ruleSet(
-  GRID_CSS,
-  responsiveGridAutoFlowStyle,
-  responsiveGridAutoRowsStyle,
-  responsiveGridAutoColsStyle,
-  responsiveGridColumnsStyle,
-  responsiveGridRowsStyle,
-  responsiveGridGapStyle,
-  responsiveGridGapXStyle,
-  responsiveGridGapYStyle,
-)
+const RULES = _ruleSet(css<ResponsiveGridStyleProps & ThemeProps>`
+  &&:not([hidden]) {
+    display: grid;
+  }
+
+  &[data-as='ul'],
+  &[data-as='ol'] {
+    list-style: none;
+  }
+
+  ${responsiveGridAutoFlowStyle}
+  ${responsiveGridAutoRowsStyle}
+  ${responsiveGridAutoColsStyle}
+  ${responsiveGridColumnsStyle}
+  ${responsiveGridRowsStyle}
+  ${responsiveGridGapStyle}
+  ${responsiveGridGapXStyle}
+  ${responsiveGridGapYStyle}
+`)
 
 export function responsiveGridStyle(): CSSObject[] {
   return RULES
@@ -46,64 +47,95 @@ export function responsiveGridStyle(): CSSObject[] {
 function responsiveGridAutoFlowStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$autoFlow, (autoFlow) => ({
-    gridAutoFlow: autoFlow,
-  }))
+  return responsiveRules(
+    media,
+    props.$autoFlow,
+    (autoFlow) => css`
+      grid-auto-flow: ${autoFlow};
+    `,
+  )
 }
 
 function responsiveGridAutoRowsStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$autoRows, (autoRows) => ({
-    gridAutoRows: autoRows && GRID_AUTO_ROWS[autoRows],
-  }))
+  return responsiveRules(media, props.$autoRows, (autoRows) =>
+    autoRows
+      ? css`
+          grid-auto-rows: ${GRID_AUTO_ROWS[autoRows]};
+        `
+      : null,
+  )
 }
 
 function responsiveGridAutoColsStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$autoCols, (autoCols) => ({
-    gridAutoColumns: autoCols && GRID_AUTO_COLUMS[autoCols],
-  }))
+  return responsiveRules(media, props.$autoCols, (autoCols) =>
+    autoCols
+      ? css`
+          grid-auto-columns: ${GRID_AUTO_COLUMS[autoCols]};
+        `
+      : null,
+  )
 }
 
 function responsiveGridColumnsStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$columns, (columns) => ({
-    gridTemplateColumns: columns && `repeat(${columns},minmax(0,1fr));`,
-  }))
+  return responsiveRules(media, props.$columns, (columns) =>
+    columns
+      ? css`
+          grid-template-columns: repeat(${columns}, minmax(0, 1fr));
+        `
+      : null,
+  )
 }
 
 function responsiveGridRowsStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$rows, (rows) => ({
-    gridTemplateRows: rows && `repeat(${rows},minmax(0,1fr));`,
-  }))
+  return responsiveRules(media, props.$rows, (rows) =>
+    rows
+      ? css`
+          grid-template-rows: repeat(${rows}, minmax(0, 1fr));
+        `
+      : null,
+  )
 }
 
 function responsiveGridGapStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   const {media, space} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$gap, (gap) => ({
-    // oxlint-disable-next-line no-deprecated
-    gridGap: gap ? rem(space[gap]) : undefined,
-  }))
+  return responsiveRules(media, props.$gap, (gap) =>
+    gap
+      ? css`
+          grid-gap: ${rem(space[gap])};
+        `
+      : null,
+  )
 }
 
 function responsiveGridGapXStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   const {media, space} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$gapX, (gapX) => ({
-    columnGap: gapX ? rem(space[gapX]) : undefined,
-  }))
+  return responsiveRules(media, props.$gapX, (gapX) =>
+    gapX
+      ? css`
+          column-gap: ${rem(space[gapX])};
+        `
+      : null,
+  )
 }
 
 function responsiveGridGapYStyle(props: ResponsiveGridStyleProps & ThemeProps) {
   const {media, space} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$gapY, (gapY) => ({
-    rowGap: gapY ? rem(space[gapY]) : undefined,
-  }))
+  return responsiveRules(media, props.$gapY, (gapY) =>
+    gapY
+      ? css`
+          row-gap: ${rem(space[gapY])};
+        `
+      : null,
+  )
 }

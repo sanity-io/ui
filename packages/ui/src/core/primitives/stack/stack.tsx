@@ -1,5 +1,6 @@
+import {styled} from 'styled-components'
+
 import {_getArrayProp} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {Box, BoxOwnProps} from '../box/box'
 import {responsiveStackSpaceStyle, ResponsiveStackSpaceStyleProps, stackBaseStyle} from './styles'
@@ -20,10 +21,12 @@ export interface StackOwnProps extends BoxOwnProps {
  */
 export type StackProps<E extends ElementType = 'div'> = Props<StackOwnProps, E>
 
-const StyledStack = styled(Box)<ResponsiveStackSpaceStyleProps>(
-  stackBaseStyle,
-  responsiveStackSpaceStyle,
-)
+const StyledStack = styled(Box)<ResponsiveStackSpaceStyleProps>`
+  @layer u-styled {
+    ${stackBaseStyle}
+    ${responsiveStackSpaceStyle}
+  }
+`
 
 function StackComponent(
   props: StackOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,

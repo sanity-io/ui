@@ -1,7 +1,7 @@
 import {Children, useMemo} from 'react'
+import {styled} from 'styled-components'
 
 import {_getArrayProp} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {Box, BoxOwnProps} from '../box/box'
 import {inlineBaseStyle, inlineSpaceStyle} from './styles'
@@ -24,7 +24,12 @@ export interface InlineOwnProps extends Omit<BoxOwnProps, 'display'> {
  */
 export type InlineProps<E extends ElementType = 'div'> = Props<InlineOwnProps, E>
 
-const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>(inlineBaseStyle, inlineSpaceStyle)
+const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>`
+  @layer u-styled {
+    ${inlineBaseStyle}
+    ${inlineSpaceStyle}
+  }
+`
 
 function InlineComponent(
   props: InlineOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,

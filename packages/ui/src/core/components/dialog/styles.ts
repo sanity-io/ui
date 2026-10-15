@@ -1,6 +1,7 @@
-import {CSSObject} from '../../../theme/system/css'
+import {css} from 'styled-components'
+
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive} from '../../styles/helpers'
+import {responsiveRules} from '../../styles/helpers'
 import {ThemeProps} from '../../styles/types'
 import {DialogPosition} from '../../types/dialog'
 
@@ -11,18 +12,26 @@ export interface ResponsiveDialogPositionStyleProps {
   $position: DialogPosition[]
 }
 
-export function dialogStyle({theme}: ThemeProps): CSSObject {
+export function dialogStyle({theme}: ThemeProps): ReturnType<typeof css> {
   const {color} = getTheme_v2(theme)
 
-  return {
-    background: color.backdrop,
-  }
+  return css`
+    background: ${color.backdrop};
+  `
 }
 
 export function responsiveDialogPositionStyle(
   props: ResponsiveDialogPositionStyleProps & ThemeProps,
-): CSSObject[] {
+): ReturnType<typeof css> {
   const {media} = getTheme_v2(props.theme)
 
-  return _responsive(media, props.$position, (position) => ({'&&': {position}}))
+  return responsiveRules(
+    media,
+    props.$position,
+    (position) => css`
+      && {
+        position: ${position};
+      }
+    `,
+  )
 }

@@ -1,9 +1,9 @@
 import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
 import {useImperativeHandle, useRef} from 'react'
+import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
 import {_getArrayProp} from '../../styles/helpers'
-import {styled} from '../../styles/styled'
 import {Radius} from '../../types/radius'
 import {Box} from '../box/box'
 import {Text} from '../text/text'
@@ -27,19 +27,33 @@ export interface SelectProps {
 }
 
 const InputBase = styled.select`
-  ${selectStyle.inputBase}
+  @layer u-styled {
+    ${selectStyle.inputBase}
+  }
 `
 
-const InputColor = styled(InputBase)(selectStyle.inputColor)
+const InputColor = styled(InputBase)`
+  @layer u-styled {
+    ${selectStyle.inputColor}
+  }
+`
 
 const Input = styled(InputColor)<{
   $fontSize: number[]
   $padding: number[]
   $radius: Radius[]
   $space: number[]
-}>(selectStyle.input)
+}>`
+  @layer u-styled {
+    ${selectStyle.input}
+  }
+`
 
-const IconBox = styled(Box)(selectStyle.iconBox)
+const IconBox = styled(Box)`
+  @layer u-styled {
+    ${selectStyle.iconBox}
+  }
+`
 
 /**
  * The `Select` component provides control of options.

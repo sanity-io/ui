@@ -1,6 +1,7 @@
-import {CSSObject} from '../../../theme/system/css'
+import {css} from 'styled-components'
+
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
-import {_responsive, rem} from '../helpers'
+import {rem, responsiveRules} from '../helpers'
 import {ThemeProps} from '../types'
 
 export interface TextInputResponsivePaddingStyleProps {
@@ -13,7 +14,7 @@ export interface TextInputResponsivePaddingStyleProps {
 
 export function responsiveInputPaddingStyle(
   props: TextInputResponsivePaddingStyleProps & ThemeProps,
-): CSSObject[] {
+): ReturnType<typeof css> {
   const {$fontSize, $iconLeft, $iconRight, $padding, $space} = props
   const {font, media, space} = getTheme_v2(props.theme)
   const len = Math.max($padding.length, $space.length, $fontSize.length)
@@ -27,23 +28,18 @@ export function responsiveInputPaddingStyle(
     _space[i] = $space[i] === undefined ? _space[i - 1] : $space[i]
   }
 
-  return _responsive(media, _padding, (_, i) => {
+  return responsiveRules(media, _padding, (_, i) => {
     const size = font.text.sizes[_fontSize[i]] || font.text.sizes[2]
     const emSize = size.lineHeight - size.ascenderHeight - size.descenderHeight
     const p = space[_padding[i]]
     const s = space[_space[i]]
 
-    const styles = {
-      paddingTop: rem(p - size.ascenderHeight),
-      paddingRight: rem(p),
-      paddingBottom: rem(p - size.descenderHeight),
-      paddingLeft: rem(p),
-    }
-
-    if ($iconRight) styles.paddingRight = rem(p + emSize + s)
-    if ($iconLeft) styles.paddingLeft = rem(p + emSize + s)
-
-    return styles
+    return css`
+      padding-top: ${rem(p - size.ascenderHeight)};
+      padding-right: ${rem($iconRight ? p + emSize + s : p)};
+      padding-bottom: ${rem(p - size.descenderHeight)};
+      padding-left: ${rem($iconLeft ? p + emSize + s : p)};
+    `
   })
 }
 
@@ -53,6 +49,6 @@ export function responsiveInputPaddingIconRightStyle(
     $padding: number[]
     $space: number[]
   } & ThemeProps,
-): CSSObject[] {
+): ReturnType<typeof css> {
   return responsiveInputPaddingStyle({...props, $iconRight: true})
 }

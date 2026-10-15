@@ -7,7 +7,7 @@ import {
   type ThemeColorSchemeKey,
 } from '../../theme/system/color/_system'
 import {type RootTheme, type Theme} from '../../theme/system/theme'
-import {StyledLayerOrder} from '../styles/styled'
+import {StyledLayerOrder} from '../styles/helpers'
 import {ThemeContext} from './themeContext'
 import {ThemeContextValue} from './types'
 
