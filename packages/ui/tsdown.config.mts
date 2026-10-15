@@ -1,30 +1,6 @@
-import {defineConfig, type PackageOptions} from '@sanity/tsdown-config'
-import {mergeConfig, type Rolldown} from 'tsdown'
+import {defineConfig} from '@sanity/tsdown-config'
 
-/**
- * The first rule of `styles.css`. It orders the layers of the stylesheet below `u-styled`, the
- * layer of the styled-components rules, for pages that load `styles.css` before
- * `<style data-styled>`. `@sanity/pandacss-tsdown-plugin` writes no layer statement.
- */
-export const STYLES_LAYER_ORDER = '@layer u-tokens, u-utilities, u-styled;'
-
-export function stylesLayerOrder(fileName: string): Rolldown.Plugin {
-  return {
-    name: 'sanity-ui:styles-layer-order',
-    generateBundle: {
-      order: 'post',
-      handler(_outputOptions, bundle) {
-        const asset = bundle[fileName]
-
-        if (asset?.type === 'asset') {
-          asset.source = `${STYLES_LAYER_ORDER}\n\n${String(asset.source)}`
-        }
-      },
-    },
-  }
-}
-
-export const options = {
+export default defineConfig({
   // One entry point per file in `src/exports/`. The glob form maps e.g.
   // `src/exports/toast.ts` → `@sanity/ui/toast` (the matched filename replaces
   // the `*` in the key, which is what drives the generated `package.json`
@@ -47,8 +23,4 @@ export const options = {
     fileName: 'styles.css',
     inject: false,
   },
-} satisfies PackageOptions
-
-export default mergeConfig(await defineConfig(options), {
-  plugins: [stylesLayerOrder(options.panda.fileName)],
 })

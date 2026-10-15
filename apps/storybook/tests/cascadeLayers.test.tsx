@@ -160,23 +160,34 @@ function higherLayer(a: string, b: string): string {
   return winner
 }
 
+const ORDER_STATEMENT = '@layer u-tokens, u-utilities, u-styled;'
+
+function staticStyles(): HTMLStyleElement {
+  return document.querySelector<HTMLStyleElement>('style[data-vite-dev-id$="panda.css"]')!
+}
+
 /**
- * Turns the page into the one `@layer` statements cannot fix up front: `styles.css` loads after
- * `<style data-styled>`, as in apps that stream styled-components' tag into the document head,
- * and nothing declares the layer order.
+ * Drops the order statement `.storybook/panda.css` starts with, so that only what the README asks
+ * of apps orders the layers. With `staticStylesLast`, `styles.css` also moves after
+ * `<style data-styled>`, as when an app loads it lazily.
  */
-function loadStaticStylesLast() {
-  const panda = document.querySelector<HTMLStyleElement>('style[data-vite-dev-id$="panda.css"]')!
+function withoutOrderStatement({staticStylesLast = false} = {}) {
+  const panda = staticStyles()
   const nextSibling = panda.nextSibling
 
-  // Moving the element parses its text again, statement included
-  document.head.append(panda)
+  if (staticStylesLast) document.head.append(panda)
   const sheet = panda.sheet!
   sheet.deleteRule([...sheet.cssRules].findIndex((rule) => rule instanceof CSSLayerStatementRule))
 
   onTestFinished(() => {
+    // Inserting the element again parses its text, statement included
     document.head.insertBefore(panda, nextSibling)
   })
+}
+
+function expectLayerOrder() {
+  expect(higherLayer('u-tokens', 'u-utilities')).toBe('u-utilities')
+  expect(higherLayer('u-utilities', 'u-styled')).toBe('u-styled')
 }
 
 async function settle(root: Element) {
@@ -192,22 +203,18 @@ async function settle(root: Element) {
 }
 
 describe('styled-components cascade layer', () => {
-  test('@sanity/ui rules are in u-styled after the layer order statement, extensions stay unlayered', async () => {
+  test('@sanity/ui rules are all in u-styled, extensions stay unlayered', async () => {
     await render(
       <ThemeProvider theme={theme}>
         <WrappingButton id="wrapping-button" text="Button" />
       </ThemeProvider>,
     )
 
-    const sheet = document.querySelector<HTMLStyleElement>('style[data-styled]')!.sheet!
-    const [statement, ...rules] = [...sheet.cssRules]
+    const rules = [
+      ...document.querySelector<HTMLStyleElement>('style[data-styled]')!.sheet!.cssRules,
+    ]
     const unlayered = rules.filter((rule) => !(rule instanceof CSSLayerBlockRule))
 
-    expect(statement instanceof CSSLayerStatementRule && statement.nameList).toEqual([
-      'u-tokens',
-      'u-utilities',
-      'u-styled',
-    ])
     expect(
       new Set(rules.flatMap((rule) => (rule instanceof CSSLayerBlockRule ? [rule.name] : []))),
     ).toEqual(new Set(['u-styled']))
@@ -217,47 +224,33 @@ describe('styled-components cascade layer', () => {
     expect(getComputedStyle(document.getElementById('wrapping-button')!).whiteSpace).toBe('normal')
   })
 
-  test('the ThemeProvider statement holds the order when styles.css loads last without one', async () => {
-    await render(
-      <ThemeProvider theme={theme}>
-        <Button text="Button" />
-      </ThemeProvider>,
-    )
-
-    loadStaticStylesLast()
-
-    expect(higherLayer('u-tokens', 'u-utilities')).toBe('u-utilities')
-    expect(higherLayer('u-utilities', 'u-styled')).toBe('u-styled')
-  })
-
-  test('a layer declared after styles.css, before <style data-styled>, comes after u-styled', async () => {
-    const panda = document.querySelector<HTMLStyleElement>('style[data-vite-dev-id$="panda.css"]')!
-    const app = document.createElement('style')
-    app.textContent = '@layer app;'
-    panda.after(app)
-    onTestFinished(() => app.remove())
-
-    await render(
-      <ThemeProvider theme={theme}>
-        <Button text="Button" />
-      </ThemeProvider>,
-    )
-
-    expect(app.compareDocumentPosition(document.querySelector('style[data-styled]')!)).toBe(
-      Node.DOCUMENT_POSITION_FOLLOWING,
-    )
-    expect(higherLayer('u-styled', 'app')).toBe('app')
-  })
-
-  test('precedence inside @sanity/ui does not depend on where styles.css loads', async () => {
+  test('styles.css loading before <style data-styled> orders the layers on its own', async () => {
     await render(<KitchenSink />)
 
     const root = document.getElementById('kitchen-sink')!
     await settle(root)
     const before = computedStyles(root)
 
-    loadStaticStylesLast()
+    withoutOrderStatement()
 
+    expect(
+      staticStyles().compareDocumentPosition(document.querySelector('style[data-styled]')!),
+    ).toBe(Node.DOCUMENT_POSITION_FOLLOWING)
+    expectLayerOrder()
+    expect(computedStyles(root)).toEqual(before)
+  })
+
+  test('an order statement loaded first orders the layers when styles.css loads last', async () => {
+    await render(<KitchenSink />)
+
+    const root = document.getElementById('kitchen-sink')!
+    await settle(root)
+    const before = computedStyles(root)
+
+    withoutOrderStatement({staticStylesLast: true})
+    addStyleSheet(ORDER_STATEMENT, 'first')
+
+    expectLayerOrder()
     expect(computedStyles(root)).toEqual(before)
   })
 

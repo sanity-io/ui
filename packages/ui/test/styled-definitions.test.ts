@@ -1,16 +1,12 @@
 /**
  * Every styled component of @sanity/ui writes its rules inside `@layer u-styled { … }`, so that
- * apps can order them through cascade layers, and `StyledLayerOrder` (`core/styles/helpers.ts`)
- * declares that layer's place before any of those blocks reaches the sheet. styled-components is
- * replaced with a pass-through that records each template a styled component or a `css` helper is
- * defined with.
+ * apps can order them through cascade layers. styled-components is replaced with a pass-through
+ * that records each template a styled component or a `css` helper is defined with.
  */
 import fs from 'node:fs'
 import path from 'node:path'
 
 import {beforeEach, expect, test, vi} from 'vitest'
-
-const STATEMENT = '@layer u-tokens, u-utilities, u-styled;'
 
 const recorded = vi.hoisted(() => ({
   css: [] as unknown[][],
@@ -65,10 +61,7 @@ const sources = Object.fromEntries(
 )
 
 const modules = Object.keys(sources).filter(
-  (file) =>
-    /from 'styled-components'/.test(sources[file]) &&
-    /\bstyled[.(]/.test(sources[file]) &&
-    !sources[file].includes(STATEMENT),
+  (file) => /from 'styled-components'/.test(sources[file]) && /\bstyled[.(]/.test(sources[file]),
 )
 
 function templateText(args: unknown[]): string | null {
@@ -104,13 +97,12 @@ test('finds the modules that define styled components', () => {
 })
 
 test.each(modules.map((file) => path.relative(SRC_DIR, file)))(
-  '%s declares the layer order first, then layered rules',
+  '%s defines its styled components in u-styled',
   async (file) => {
     await import(/* @vite-ignore */ path.join(SRC_DIR, file))
 
-    const [order, ...definitions] = recorded.styled.map(templateText)
+    const definitions = recorded.styled.map(templateText)
 
-    expect(order).toBe(STATEMENT)
     expect(definitions.length).toBeGreaterThan(0)
 
     for (const text of definitions) {

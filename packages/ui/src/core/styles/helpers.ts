@@ -1,29 +1,9 @@
-import {css, styled, type Interpolation, type RuleSet} from 'styled-components'
+import {css, type Interpolation, type RuleSet} from 'styled-components'
 
 import {CSSObject} from '../../theme/system/css'
 import {Theme} from '../../theme/system/theme'
 import {getTheme_v2} from '../../theme/versioning/getTheme_v2'
 import {EMPTY_ARRAY} from '../constants'
-
-/**
- * Declares the order of the cascade layers of @sanity/ui, so that the layers of
- * `@sanity/ui/styles.css` stay below `u-styled` even when `<style data-styled>` precedes that
- * stylesheet, which would otherwise make `u-styled` the first layer the page mentions.
- *
- * styled-components emits sheet groups in the order it registers them, and a styled component
- * registers its group when it is defined. Every module of @sanity/ui that defines a styled
- * component depends on this one, so this group comes before every `@layer u-styled` block
- * (`test/styled-definitions.test.ts` checks both).
- *
- * @internal
- */
-export const StyledLayerOrder = styled(renderNothing)`
-  @layer u-tokens, u-utilities, u-styled;
-`
-
-function renderNothing() {
-  return null
-}
 
 /**
  * Types a rule set as `CSSObject[]`, so that the published types don't reference
