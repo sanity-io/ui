@@ -32,6 +32,12 @@ root.render(
 )
 ```
 
+## Load order
+
+`@sanity/ui/styles.css` is plain CSS without cascade layers: when two rules with the same specificity set the same property on an element, the one that loads last wins. Your styled-components overrides, such as `styled(Button)`, often have the same specificity as the static styles they override, so **`@sanity/ui/styles.css` must load before styled-components' `<style data-styled>` tag**, or those overrides break.
+
+Importing the stylesheet in your entry point, before anything renders, as above, gives this order: styled-components adds its tag to the end of `<head>` the first time it renders. Check the order in your browser's devtools if the stylesheet loads lazily, in a code-split chunk, or if a framework such as Next.js decides where stylesheets go.
+
 ## Contributing and releasing new versions to npm
 
 This package lives in the [`sanity-io/ui` monorepo](https://github.com/sanity-io/ui) and uses [Changesets](https://github.com/changesets/changesets) to manage versioning and publishing.
