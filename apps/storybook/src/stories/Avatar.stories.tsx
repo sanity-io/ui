@@ -20,7 +20,7 @@ const meta: Meta<typeof Avatar> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-Avatar',
+      context: '[data-ui="Avatar"]',
     },
     performance: {
       component: Avatar,

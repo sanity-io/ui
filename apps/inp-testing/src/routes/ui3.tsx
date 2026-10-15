@@ -1,5 +1,7 @@
 import {useState} from 'react'
+import {Avatar} from 'ui3'
 import {
+  AvatarStack,
   Badge,
   Box,
   Button,
@@ -28,6 +30,7 @@ const PANEL_CARD_COUNT = 300
 const TOOLTIP_COUNT = 300
 const POPOVER_COUNT = 300
 const BADGE_COUNT = 500
+const AVATAR_COUNT = 300
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -329,6 +332,38 @@ function BadgeToneToggleSection() {
   )
 }
 
+function AvatarOrderToggleSection() {
+  const [avatars, setAvatars] = useState(['ab', 'cd', 'ef'])
+
+  return (
+    <Card tone="neutral" padding={4}>
+      <Stack gap={3}>
+        <Text size={1} weight="semibold">
+          6. Avatar shuffle ({AVATAR_COUNT} badges)
+        </Text>
+        <Text size={1}>One click shuffles all {AVATAR_COUNT} avatars.</Text>
+        <Inline>
+          <Button
+            text="Shuffle Avatars"
+            onClick={() => setAvatars([...avatars].sort(() => 0.5 - Math.random()))}
+          />
+        </Inline>
+        <div style={scrollAreaStyle}>
+          <Flex wrap="wrap" gap={2}>
+            {Array.from({length: AVATAR_COUNT}, (_, index) => (
+              <AvatarStack key={index}>
+                {avatars.map((avatar) => (
+                  <Avatar key={avatar} initials={avatar} />
+                ))}
+              </AvatarStack>
+            ))}
+          </Flex>
+        </div>
+      </Stack>
+    </Card>
+  )
+}
+
 function Ui3() {
   return (
     <ThemeProvider theme={theme}>
@@ -342,6 +377,7 @@ function Ui3() {
         <TooltipMountSection />
         <PopoverMountSection />
         <BadgeToneToggleSection />
+        <AvatarOrderToggleSection />
       </Stack>
     </ThemeProvider>
   )

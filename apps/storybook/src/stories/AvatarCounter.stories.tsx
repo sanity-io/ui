@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
+import {AvatarCounter as AvatarCounterV3} from 'ui3'
 
 import {AvatarCounter} from '../../../../packages/ui/src/components/avatar-counter/AvatarCounter'
 import {avatarCounterProps} from '../../../../packages/ui/src/components/avatar-counter/avatarCounter.props'
@@ -17,10 +18,11 @@ const meta: Meta<typeof AvatarCounter> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-AvatarCounter',
+      context: '[data-ui="AvatarCounter"]',
     },
     performance: {
       component: AvatarCounter,
+      compareComponent: AvatarCounterV3,
     },
   },
 }
@@ -33,6 +35,6 @@ export const Default: Story = {
     return <AvatarCounter {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('')).classList).toContain('')
+    await expect(await canvas.findByLabelText('+ 10 more')).toBeInTheDocument()
   },
 }

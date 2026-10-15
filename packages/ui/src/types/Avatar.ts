@@ -1,9 +1,8 @@
-export const AVATAR_SIZE = [0, 1, 2, 3] as const
+export const AVATAR_SIZE = [0, 1, 2] as const
 export type AvatarSize = (typeof AVATAR_SIZE)[number]
 
 export const AVATAR_COLOR = [
   'gray',
-  'blue',
   'purple',
   'magenta',
   'red',

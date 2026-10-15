@@ -12,7 +12,6 @@ const avatarStackClassName = suffixClassName('sui-AvatarStack')
 /** @public */
 export function AvatarStack({size = 1, ...props}: AvatarStackProps) {
   const {
-    as,
     children,
     className,
     style,
@@ -25,7 +24,8 @@ export function AvatarStack({size = 1, ...props}: AvatarStackProps) {
   ) as ReactElement<AvatarProps>[]
   const length = childArray.length
   const maxLength = maxLengthProp ?? length
-  const slicedArray = length > maxLength ? childArray.slice(length - maxLength, length) : childArray
+  const visibleAvatars =
+    length > maxLength ? childArray.slice(length - maxLength, length) : childArray
 
   return (
     <ul
@@ -34,19 +34,22 @@ export function AvatarStack({size = 1, ...props}: AvatarStackProps) {
       data-ui="AvatarStack"
       {...rest}
     >
-      {!length ||
-        (length > maxLength && (
-          <li className="sui-display-flex">
-            <AvatarCounter
-              count={!length ? 0 : length - maxLength}
-              size={sizeProp}
-              aria-label={!length ? 'No users' : `+ ${length - maxLength} more users`}
-            />
-          </li>
-        ))}
+      {(!length || length > maxLength) && (
+        <li className="sui-display-flex">
+          <AvatarCounter
+            count={!length ? 0 : length - maxLength}
+            size={sizeProp}
+            aria-label={
+              !length
+                ? 'No users'
+                : `+ ${length - maxLength} more user${length - maxLength > 1 ? 's' : ''}`
+            }
+          />
+        </li>
+      )}
 
-      {slicedArray.map((child, i) => (
-        <li key={i} className="sui-display-flex">
+      {visibleAvatars.map((child) => (
+        <li key={child.props.initials} className="sui-display-flex">
           {cloneElement(child, {size: sizeProp})}
         </li>
       ))}

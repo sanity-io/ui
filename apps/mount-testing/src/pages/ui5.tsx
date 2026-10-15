@@ -2,6 +2,8 @@ import '@sanity/ui/styles.css'
 import {AddIcon} from '@sanity/icons/Add'
 import {EditIcon} from '@sanity/icons/Edit'
 import {
+  Avatar,
+  AvatarStack,
   Badge,
   Box,
   Button,
@@ -311,6 +313,15 @@ export default function Ui5() {
       <Profiler id="Badge" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Badge key={i} text="Badge" />
+        ))}
+      </Profiler>
+
+      <h2>{count} Avatars & Avatar Stacks</h2>
+      <Profiler id="Avatar" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <AvatarStack key={i}>
+            <Avatar initials="AB" />
+          </AvatarStack>
         ))}
       </Profiler>
 

@@ -10,7 +10,7 @@ const avatarClassName = suffixClassName('sui-Avatar')
 const avatarImgClassName = suffixClassName('sui-AvatarImg')
 
 /** @public */
-export function Avatar({color = 'magenta', size = 1, ...props}: AvatarProps) {
+export function Avatar({color = 'gray', size = 1, ...props}: AvatarProps) {
   const {
     className,
     style,

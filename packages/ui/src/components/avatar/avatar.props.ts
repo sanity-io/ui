@@ -1,8 +1,8 @@
-import type {Responsive} from '../../../dist'
 import {heightProps} from '../../props/height'
 import {AVATAR_COLOR, AVATAR_SIZE, type AvatarColor, type AvatarSize} from '../../types/Avatar'
+import {EYEBROW_SIZE} from '../../types/Eyebrow'
 import {type PropDef} from '../../types/PropDef'
-import {TEXT_SIZE} from '../../types/Text'
+import type {Responsive} from '../../types/Responsive'
 
 /** @public */
 export interface AvatarProps extends React.ComponentProps<'figure'> {
@@ -33,13 +33,12 @@ export const avatarProps: Record<string, PropDef> = {
         propDef: {
           type: 'union',
           className: 'text-eyebrow',
-          values: TEXT_SIZE,
+          values: EYEBROW_SIZE,
         },
         mapping: {
           0: 0,
           1: 1,
           2: 3,
-          3: 5,
         },
       },
       height: {
@@ -48,7 +47,6 @@ export const avatarProps: Record<string, PropDef> = {
           0: '19px',
           1: '25px',
           2: '33px',
-          3: '49px',
         },
       },
     },
