@@ -32,7 +32,7 @@ defineInlineTest(
   <Grid
     style={{
       flexDirection: "row",
-      flexWrap: "wrap",
+      flexWrap: "wrap"
     }} />
   `,
   'moves flex props to style',
