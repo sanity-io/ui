@@ -207,6 +207,9 @@ catalogs:
     oxc-transform-react:
       specifier: ^0.154.0
       version: 0.154.0
+    postcss:
+      specifier: ^8.5.30
+      version: 8.5.30
     react-is:
       specifier: ^19.3.1
       version: 19.3.1
@@ -422,6 +425,9 @@ importers:
       playwright:
         specifier: ^1.64.1
         version: 1.64.1
+      postcss:
+        specifier: 'catalog:'
+        version: 8.5.30
       react:
         specifier: ^19.3.1
         version: 19.3.1

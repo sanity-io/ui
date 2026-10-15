@@ -7,6 +7,8 @@ import {playwright} from '@vitest/browser-playwright'
 import type {Plugin} from 'vite'
 import {defineConfig} from 'vitest/config'
 
+import {unlayeredPanda} from './.storybook/unlayeredPanda'
+
 // 1×1 opaque PNG
 const PNG = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
@@ -67,6 +69,7 @@ export default defineConfig({
         plugins: [
           viteReact(),
           pandacss({cwd: path.resolve(import.meta.dirname, '../../packages/ui'), transform: true}),
+          unlayeredPanda(),
           slowImage(),
         ],
         test: {
