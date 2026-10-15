@@ -1,7 +1,6 @@
-import {styled} from 'styled-components'
-
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {styled} from '../../styles/styled'
 import {Box} from '../box/box'
 import {
   selectableBaseStyle,

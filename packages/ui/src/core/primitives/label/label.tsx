@@ -1,10 +1,9 @@
-import {styled} from 'styled-components'
-
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {fontColorStyle} from '../../styles/font/fontColorStyle'
 import {_fontWeight, _responsiveFontSize} from '../../styles/font/responsiveFont'
 import {responsiveTextAlignStyle} from '../../styles/font/textAlignStyle'
 import {_getArrayProp} from '../../styles/helpers'
+import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {TextAlign} from '../../types/text'
 import {SpanWithTextOverflow} from '../../utils/spanWithTextOverflow'

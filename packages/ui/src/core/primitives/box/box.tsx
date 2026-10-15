@@ -1,5 +1,3 @@
-import {styled} from 'styled-components'
-
 import {boxStyle, responsiveBoxStyle} from '../../styles/box/boxStyle'
 import {ResponsiveBoxStyleProps} from '../../styles/box/types'
 import {flexItemStyle} from '../../styles/flex/flexItemStyle'
@@ -11,6 +9,7 @@ import {responsiveMarginStyle} from '../../styles/margin/marginStyle'
 import {ResponsiveMarginStyleProps} from '../../styles/margin/types'
 import {responsivePaddingStyle} from '../../styles/padding/paddingStyle'
 import {ResponsivePaddingStyleProps} from '../../styles/padding/types'
+import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {
   ResponsiveBoxProps,

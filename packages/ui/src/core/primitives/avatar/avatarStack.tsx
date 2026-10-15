@@ -1,10 +1,10 @@
 import {clsx} from 'clsx/lite'
 import {Children, cloneElement, isValidElement} from 'react'
-import {styled} from 'styled-components'
 
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {EMPTY_RECORD} from '../../constants'
 import {_getArrayProp, _responsive, rem} from '../../styles/helpers'
+import {styled} from '../../styles/styled'
 import {ThemeProps} from '../../styles/types'
 import {AvatarSize} from '../../types/avatar'
 import {AvatarCounter} from './avatarCounter'

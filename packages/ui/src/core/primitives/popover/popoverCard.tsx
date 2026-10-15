@@ -1,11 +1,11 @@
 import {Strategy} from '@floating-ui/react-dom'
 import {motion} from 'motion/react'
 import React, {CSSProperties, useMemo} from 'react'
-import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {POPOVER_MOTION_PROPS} from '../../constants'
 import {getTransformOrigin} from '../../middleware/origin'
+import {styled} from '../../styles/styled'
 import {BoxOverflow} from '../../types/box'
 import {CardTone} from '../../types/card'
 import {Placement} from '../../types/placement'

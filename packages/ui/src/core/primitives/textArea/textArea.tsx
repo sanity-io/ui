@@ -1,5 +1,4 @@
 import {useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {useCustomValidity} from '../../hooks/useCustomValidity'
@@ -20,6 +19,7 @@ import {
 } from '../../styles/input/textInputStyle'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {styled} from '../../styles/styled'
 import {useRootTheme} from '../../theme/useRootTheme'
 import {ResponsiveRadiusProps} from '../types'
 

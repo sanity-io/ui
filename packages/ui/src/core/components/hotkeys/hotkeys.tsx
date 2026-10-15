@@ -1,9 +1,9 @@
 import {clsx} from 'clsx/lite'
-import {styled} from 'styled-components'
 
 import {Inline} from '../../primitives/inline/inline'
 import {KBD} from '../../primitives/kbd/kbd'
 import {_getArrayProp} from '../../styles/helpers'
+import {styled} from '../../styles/styled'
 import {Radius} from '../../types/radius'
 
 import {hotkeys} from './hotkeys.css'

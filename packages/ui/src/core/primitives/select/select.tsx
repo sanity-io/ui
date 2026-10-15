@@ -1,9 +1,9 @@
 import {ChevronDownIcon} from '@sanity/icons/ChevronDown'
 import {useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
 import {_getArrayProp} from '../../styles/helpers'
+import {styled} from '../../styles/styled'
 import {Radius} from '../../types/radius'
 import {Box} from '../box/box'
 import {Text} from '../text/text'

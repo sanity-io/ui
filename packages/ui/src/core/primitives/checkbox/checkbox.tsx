@@ -2,9 +2,9 @@ import {CheckmarkIcon} from '@sanity/icons/Checkmark'
 import {RemoveIcon} from '@sanity/icons/Remove'
 import {clsx} from 'clsx/lite'
 import {useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 
 import {useCustomValidity} from '../../hooks/useCustomValidity'
+import {styled} from '../../styles/styled'
 import {inputElementColorStyles, inputElementStyles} from './styles'
 
 import {checkbox} from './checkbox.css'

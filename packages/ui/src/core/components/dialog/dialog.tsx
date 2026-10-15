@@ -1,7 +1,6 @@
 import {CloseIcon} from '@sanity/icons/Close'
 import {clsx} from 'clsx/lite'
 import {useCallback, useEffect, useImperativeHandle, useRef} from 'react'
-import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {containsOrEqualsElement, isHTMLElement} from '../../helpers/element'
@@ -19,6 +18,7 @@ import {ResponsivePaddingProps, ResponsiveWidthProps} from '../../primitives/typ
 import {_getArrayProp} from '../../styles/helpers'
 import {responsivePaddingStyle} from '../../styles/padding/paddingStyle'
 import {ResponsivePaddingStyleProps} from '../../styles/padding/types'
+import {styled} from '../../styles/styled'
 import {useTheme_v2} from '../../theme/useTheme'
 import {DialogPosition} from '../../types/dialog'
 import {Radius} from '../../types/radius'

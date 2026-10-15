@@ -1,8 +1,7 @@
-import {styled} from 'styled-components'
-
 import {_getArrayProp} from '../../styles/helpers'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {styled} from '../../styles/styled'
 import {BadgeTone} from '../../types/badge'
 import {ElementType, Props} from '../../types/component'
 import {Box, BoxOwnProps} from '../box/box'

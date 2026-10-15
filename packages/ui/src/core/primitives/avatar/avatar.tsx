@@ -1,9 +1,9 @@
 import {useCallback, useEffect, useState} from 'react'
 import ReactIs from 'react-is'
-import {styled} from 'styled-components'
 
 import {ThemeColorAvatarColorKey} from '../../../theme/system/color/_system'
 import {_getArrayProp} from '../../styles/helpers'
+import {styled} from '../../styles/styled'
 import {useTheme_v2} from '../../theme/useTheme'
 import {AvatarPosition, AvatarSize, AvatarStatus} from '../../types/avatar'
 import {ElementType, Props} from '../../types/component'

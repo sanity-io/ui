@@ -1,12 +1,12 @@
 import {ToggleArrowRightIcon} from '@sanity/icons/ToggleArrowRight'
 import {clsx} from 'clsx/lite'
 import {useCallback, useEffect, useId, useMemo, useRef, useState} from 'react'
-import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {Box} from '../../primitives/box/box'
 import {Flex} from '../../primitives/flex/flex'
 import {Text} from '../../primitives/text/text'
+import {styled} from '../../styles/styled'
 import {ElementType} from '../../types/component'
 import {treeItemBoxStyle, TreeItemBoxStyleProps, treeItemRootColorStyle} from './style'
 import {TreeContext} from './treeContext'

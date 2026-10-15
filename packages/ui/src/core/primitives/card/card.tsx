@@ -1,5 +1,4 @@
 import {isValidElementType} from 'react-is'
-import {styled} from 'styled-components'
 
 import {ThemeColorSchemeKey} from '../../../theme/system/color/_system'
 import {responsiveBorderStyle} from '../../styles/border/borderStyle'
@@ -9,6 +8,7 @@ import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
 import {responsiveShadowStyle} from '../../styles/shadow/shadowStyle'
 import {ResponsiveShadowStyleProps} from '../../styles/shadow/types'
+import {styled} from '../../styles/styled'
 import {ThemeColorProvider} from '../../theme/themeColorProvider'
 import {useRootTheme} from '../../theme/useRootTheme'
 import {CardTone} from '../../types/card'

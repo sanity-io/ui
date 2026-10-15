@@ -1,8 +1,7 @@
-import {styled} from 'styled-components'
-
 import {responsiveGridStyle} from '../../styles/grid/gridStyle'
 import {ResponsiveGridStyleProps} from '../../styles/grid/types'
 import {_getArrayProp} from '../../styles/helpers'
+import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {Box, BoxOwnProps} from '../box/box'
 import {ResponsiveGridProps} from '../types'

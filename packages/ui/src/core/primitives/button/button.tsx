@@ -1,11 +1,11 @@
 import {isValidElement, useMemo} from 'react'
 import {isValidElementType} from 'react-is'
-import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {_getArrayProp} from '../../styles/helpers'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {styled} from '../../styles/styled'
 import {useTheme_v2} from '../../theme/useTheme'
 import {ButtonMode, ButtonTextAlign, ButtonTone, ButtonWidth} from '../../types/button'
 import {ElementType, Props} from '../../types/component'

@@ -70,6 +70,25 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   (`Layer`, `Tab`, `MenuDivider` and the rest migrated in 4.1.0 and 4.2.0)
   merge in the JSX with `className={clsx(x, className)}` instead.
 
+- The styled-components rules of @sanity/ui are emitted in `@layer u-styled`.
+  Components import `styled` from `packages/ui/src/core/styles/styled.ts`, a
+  proxy over styled-components' `styled` that wraps each template's rules in
+  the layer (a `no-restricted-imports` override enforces it in
+  `packages/ui/src`, tests excluded). It needs no `StyleSheetManager`, so it
+  works with styled-components v7, whose plugins cannot add at-rules, and
+  leaves consumers' sheet options alone. Consumers' own styled components,
+  `styled(Button)` extensions included, stay unlayered and beat every ui rule.
+  Layers are ordered by first mention, so the root `ThemeProvider` renders a
+  `@layer sui, u-tokens, u-utilities, u-styled;` global style (`LAYER_ORDER`);
+  `sui` is ui5's layer, whose global reset must lose to ui's rules.
+  `createGlobalStyle` registers its sheet group when it is called, so defining
+  it in `styled.ts` puts the statement ahead of every `u-styled` block, even
+  when `<style data-styled>` precedes `styles.css`.
+  `apps/storybook/tests/cascadeLayers.test.tsx` checks that order with
+  `styles.css` loaded last and no page-level statement, and
+  `test/cascade-layers.test.ts` keeps `LAYER_ORDER` in sync with the layers of
+  `styles.css`.
+
 - Packages are built with [tsdown](https://tsdown.dev) via
   `@sanity/tsdown-config` (`tsdown.config.mts` in every package — a bare
   `.ts` config only imports on the Node version in CI when the package is

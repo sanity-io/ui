@@ -1,9 +1,8 @@
-import {styled} from 'styled-components'
-
 import {flexItemStyle} from '../../styles/flex/flexItemStyle'
 import {responsiveFlexStyle} from '../../styles/flex/flexStyle'
 import {FlexItemStyleProps, ResponsiveFlexStyleProps} from '../../styles/flex/types'
 import {_getArrayProp} from '../../styles/helpers'
+import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {Box, BoxOwnProps} from '../box/box'
 import {ResponsiveFlexItemProps, ResponsiveFlexProps} from '../types'

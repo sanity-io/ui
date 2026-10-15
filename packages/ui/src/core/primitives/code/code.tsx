@@ -1,10 +1,10 @@
 import {lazy, Suspense} from 'react'
-import {styled} from 'styled-components'
 
 import {ThemeFontWeightKey} from '../../../theme/system/font'
 import {_fontWeight, _responsiveFontSize} from '../../styles/font/responsiveFont'
 import {FontWeightStyleProps, ResponsiveFontSizeStyleProps} from '../../styles/font/types'
 import {_getArrayProp} from '../../styles/helpers'
+import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {codeBaseStyle, codeSyntaxStyle} from './styles'
 

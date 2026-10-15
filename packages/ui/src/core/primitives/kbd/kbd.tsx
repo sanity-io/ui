@@ -1,8 +1,9 @@
-import {css, styled} from 'styled-components'
+import {css} from 'styled-components'
 
 import {_getArrayProp} from '../../styles/helpers'
 import {responsiveRadiusStyle} from '../../styles/radius/radiusStyle'
 import {ResponsiveRadiusStyleProps} from '../../styles/radius/types'
+import {styled} from '../../styles/styled'
 import {ElementType, Props} from '../../types/component'
 import {Radius} from '../../types/radius'
 import {Box} from '../box/box'

@@ -1,8 +1,7 @@
-import {styled} from 'styled-components'
-
 import {ThemeFontKey} from '../../../theme/system/font'
 import {getTheme_v2} from '../../../theme/versioning/getTheme_v2'
 import {_getArrayProp, _responsive} from '../../styles/helpers'
+import {styled} from '../../styles/styled'
 import {ThemeProps} from '../../styles/types'
 import {Skeleton, SkeletonProps} from './skeleton'
 
