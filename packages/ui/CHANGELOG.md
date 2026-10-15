@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.4.7
+
+### Patch Changes
+
+- [#3228](https://github.com/sanity-io/ui/pull/3228) [`02f7d97`](https://github.com/sanity-io/ui/commit/02f7d97fe141ba094d631e5d6cfdd90c4208b2ed) Thanks [@stipsan](https://github.com/stipsan)! - Fix compatibility with Tailwind CSS v3 and other Panda CSS bundles by prefixing the CSS layer names in `@sanity/ui/styles.css` with `u-`. This prevents Tailwind build errors and keeps Sanity UI's layers separate from other libraries' layers. CSS class names are unchanged.
+
 ## 4.4.6
 
 ### Patch Changes
