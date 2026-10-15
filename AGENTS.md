@@ -78,12 +78,15 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   works with styled-components v7, whose plugins cannot add at-rules, and
   leaves consumers' sheet options alone. Consumers' own styled components,
   `styled(Button)` extensions included, stay unlayered and beat every ui rule.
-  Layers are ordered by first mention, so the root `ThemeProvider` renders a
-  `@layer sui, u-tokens, u-utilities, u-styled;` global style (`LAYER_ORDER`);
-  `sui` is ui5's layer, whose global reset must lose to ui's rules.
-  `createGlobalStyle` registers its sheet group when it is called, so defining
-  it in `styled.ts` puts the statement ahead of every `u-styled` block, even
-  when `<style data-styled>` precedes `styles.css`.
+  Layers are ordered by first mention, so the root `ThemeProvider` renders
+  `StyledLayerOrder`, a styled component that renders nothing and emits
+  `@layer sui, u-tokens, u-utilities, u-styled;` (`LAYER_ORDER`); `sui` is
+  ui5's layer, whose global reset must lose to ui's rules. A styled component
+  registers its sheet group when it is defined, so defining it in `styled.ts`
+  puts the statement ahead of every `u-styled` block, even when
+  `<style data-styled>` precedes `styles.css`. Don't use `createGlobalStyle`
+  for it: before styled-components 6.4, every mount after the first gets a
+  later group.
   `apps/storybook/tests/cascadeLayers.test.tsx` checks that order with
   `styles.css` loaded last and no page-level statement, and
   `test/cascade-layers.test.ts` keeps `LAYER_ORDER` in sync with the layers of
