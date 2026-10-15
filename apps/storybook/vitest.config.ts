@@ -7,7 +7,7 @@ import {playwright} from '@vitest/browser-playwright'
 import type {Plugin} from 'vite'
 import {defineConfig} from 'vitest/config'
 
-import {unlayeredPanda} from './.storybook/unlayeredPanda'
+import {unlayeredPanda} from './.storybook/unlayeredPanda.ts'
 
 // 1×1 opaque PNG
 const PNG = Buffer.from(

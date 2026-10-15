@@ -6,7 +6,7 @@ import type {StorybookConfig} from '@storybook/react-vite'
 import viteReact from '@vitejs/plugin-react'
 import {mergeConfig, type Plugin} from 'vite'
 
-import {unlayeredPanda} from './unlayeredPanda'
+import {unlayeredPanda} from './unlayeredPanda.ts'
 
 const require = createRequire(import.meta.url)
 
