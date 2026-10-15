@@ -3,7 +3,6 @@
   padding-inline: 0.5em;
 }
 
-.sui-AvatarCounter .sui-Eyebrow {
+.sui-AvatarCounter .sui-Text {
   font-size: inherit;
-  font-weight: var(--bold);
 }

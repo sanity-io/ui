@@ -4,47 +4,48 @@
 }
 
 .sui-Avatar img {
+  border: 1px solid light-dark(var(--white), var(--black));
   object-fit: cover;
 }
 
-.sui-Avatar .sui-Eyebrow {
+.sui-Avatar .sui-Text {
   color: light-dark(var(--white), var(--black));
   font-size: inherit;
-  font-weight: var(--bold);
+  text-transform: uppercase;
 }
 
 .sui-Avatar.sui-avatar-gray {
-  background-color: light-dark(var(--gray-500), var(--gray-400));
+  background-color: light-dark(var(--gray-600), var(--gray-400));
 }
 
 .sui-Avatar.sui-avatar-blue {
-  background-color: light-dark(var(--blue-500), var(--blue-400));
+  background-color: light-dark(var(--blue-600), var(--blue-400));
 }
 
 .sui-Avatar.sui-avatar-purple {
-  background-color: light-dark(var(--purple-500), var(--purple-400));
+  background-color: light-dark(var(--purple-600), var(--purple-400));
 }
 
 .sui-Avatar.sui-avatar-magenta {
-  background-color: light-dark(var(--magenta-500), var(--magenta-400));
+  background-color: light-dark(var(--magenta-600), var(--magenta-400));
 }
 
 .sui-Avatar.sui-avatar-red {
-  background-color: light-dark(var(--red-500), var(--red-400));
+  background-color: light-dark(var(--red-600), var(--red-400));
 }
 
 .sui-Avatar.sui-avatar-orange {
-  background-color: light-dark(var(--orange-500), var(--orange-400));
+  background-color: light-dark(var(--orange-600), var(--orange-400));
 }
 
 .sui-Avatar.sui-avatar-yellow {
-  background-color: light-dark(var(--yellow-500), var(--yellow-400));
+  background-color: light-dark(var(--yellow-600), var(--yellow-400));
 }
 
 .sui-Avatar.sui-avatar-green {
-  background-color: light-dark(var(--green-500), var(--green-400));
+  background-color: light-dark(var(--green-600), var(--green-400));
 }
 
 .sui-Avatar.sui-avatar-cyan {
-  background-color: light-dark(var(--cyan-500), var(--cyan-400));
+  background-color: light-dark(var(--cyan-600), var(--cyan-400));
 }

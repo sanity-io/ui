@@ -69,9 +69,9 @@ export const Colors: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByLabelText('Avatar blue')).parentElement?.classList).toContain(
-      'sui-avatar-blue',
-    )
+    await expect(
+      (await canvas.findByLabelText('Avatar purple')).parentElement?.classList,
+    ).toContain('sui-avatar-purple')
   },
 }
 

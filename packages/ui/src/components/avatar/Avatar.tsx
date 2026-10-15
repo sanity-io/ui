@@ -3,7 +3,7 @@ import {useState} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
-import {Eyebrow} from '../eyebrow/Eyebrow'
+import {Text} from '../text/Text'
 import {type AvatarProps, avatarProps} from './avatar.props'
 
 const avatarClassName = suffixClassName('sui-Avatar')
@@ -39,9 +39,9 @@ export function Avatar({color = 'gray', size = 1, ...props}: AvatarProps) {
           onError={() => setError(true)}
         />
       ) : (
-        <Eyebrow role="img" aria-label={ariaLabel || initials}>
-          {initials.slice(0, 2)}
-        </Eyebrow>
+        <Text role="img" weight="semibold" aria-label={ariaLabel || initials}>
+          {initials.slice(0, 1)}
+        </Text>
       )}
     </figure>
   )

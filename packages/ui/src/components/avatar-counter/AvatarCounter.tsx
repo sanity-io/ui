@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
-import {Eyebrow} from '../eyebrow/Eyebrow'
+import {Text} from '../text/Text'
 import {type AvatarCounterProps, avatarCounterProps} from './avatarCounter.props'
 
 const avatarCounterClassName = suffixClassName('sui-AvatarCounter')
@@ -28,9 +28,9 @@ export function AvatarCounter({size = 1, ...props}: AvatarCounterProps) {
       data-ui="AvatarCounter"
       {...rest}
     >
-      <Eyebrow role="img" aria-label={ariaLabel || `+ ${count} more`}>
+      <Text role="img" weight="semibold" aria-label={ariaLabel || `+ ${count} more`}>
         {count}
-      </Eyebrow>
+      </Text>
     </figure>
   )
 }
