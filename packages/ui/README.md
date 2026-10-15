@@ -49,7 +49,13 @@ A layer takes its place in the order the first time the page mentions it, and `@
 
 If neither holds, `u-styled` is declared first and the static styles win over component styles they should lose to.
 
-CSS outside any layer beats every layer, whatever its specificity. That includes your own styled components and extensions like `styled(Button)`, which stay unlayered.
+Normal declarations outside any layer beat every layer, whatever their specificity. That includes your own styled components and extensions like `styled(Button)`, which stay unlayered.
+
+`!important` declarations reverse that order: a layered one beats an unlayered one, and one in an earlier layer beats one in a later layer. An unlayered `!important` override therefore loses to an `!important` rule of `@sanity/ui`, while one in a layer declared before `u-styled` wins. `@sanity/ui` has a few, all in `u-styled`:
+
+- `TextInput` and `TextArea`: `-webkit-text-fill-color` while autofilled, and `--card-bg-color`, `--card-fg-color` and `--card-icon-color` while disabled or read-only.
+- `Text`: `vector-effect` on the paths of icons inside it.
+- `Checkbox`: `stroke-width` on its check mark.
 
 ### Next.js
 

@@ -81,7 +81,10 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   it off for the files that define styled components (`packages/ui/src`'s
   `.tsx` files and `breadcrumbs.styles.ts`); add a new `.ts` file that defines
   one to that list. Consumers' own styled components,
-  `styled(Button)` extensions included, stay unlayered and beat every ui rule.
+  `styled(Button)` extensions included, stay unlayered and beat every ui rule
+  with normal declarations. With `!important` it's the other way round: ui's
+  layered `!important` rules (autofilled, disabled and read-only text inputs,
+  icon paths in `Text`, the checkbox mark) beat unlayered ones.
   Nothing in @sanity/ui declares the layer order: the page does, by loading
   `styles.css` before `<style data-styled>` or by declaring
   `@layer u-tokens, u-utilities, u-styled;` first (the `Cascade layers`

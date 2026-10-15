@@ -335,6 +335,27 @@ describe('styled-components cascade layer', () => {
 
     expect(getComputedStyle(button).backgroundColor).toBe('rgb(7, 8, 9)')
   })
+  test('an earlier layer overrides a @sanity/ui !important rule, unlayered CSS does not', async () => {
+    addStyleSheet('@layer app-reset;', 'first')
+    await render(
+      <ThemeProvider theme={theme}>
+        <Text>
+          <SearchIcon />
+        </Text>
+      </ThemeProvider>,
+    )
+
+    const path = document.querySelector('[data-sanity-icon] path')!
+    expect(getComputedStyle(path).vectorEffect).toBe('non-scaling-stroke')
+
+    addStyleSheet('[data-sanity-icon] path { vector-effect: none !important; }')
+    expect(getComputedStyle(path).vectorEffect).toBe('non-scaling-stroke')
+
+    addStyleSheet(
+      '@layer app-reset { [data-sanity-icon] path { vector-effect: none !important; } }',
+    )
+    expect(getComputedStyle(path).vectorEffect).toBe('none')
+  })
 })
 
 describe('the layer order a page sets, as the README asks', () => {
