@@ -333,14 +333,14 @@ function BadgeToneToggleSection() {
   )
 }
 
-function AvatarOrderToggleSection() {
+function AvatarShuffleSection() {
   const [avatars, setAvatars] = useState(['ab', 'cd', 'ef'])
 
   return (
     <Card tone="neutral" padding={4}>
       <Stack gap={3}>
         <Text size={1} weight="semibold">
-          6. Avatar shuffle ({AVATAR_COUNT} badges)
+          6. Avatar shuffle ({AVATAR_COUNT} avatar stacks)
         </Text>
         <Text size={1}>One click shuffles all {AVATAR_COUNT} avatars.</Text>
         <Inline>
@@ -378,7 +378,7 @@ function Ui4() {
         <TooltipMountSection />
         <PopoverMountSection />
         <BadgeToneToggleSection />
-        <AvatarOrderToggleSection />
+        <AvatarShuffleSection />
       </Stack>
     </ThemeProvider>
   )

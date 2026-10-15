@@ -11,7 +11,6 @@ const argTypes = getArgTypes(avatarStackProps)
 
 const meta: Meta<typeof AvatarStack> = {
   title: 'Components/AvatarStack',
-  args: {},
   argTypes,
   component: AvatarStack,
   tags: ['autodocs'],

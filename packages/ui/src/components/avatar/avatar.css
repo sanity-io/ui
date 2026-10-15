@@ -3,7 +3,7 @@
   aspect-ratio: 1;
 }
 
-.sui-AvatarImg {
+.sui-Avatar img {
   object-fit: cover;
 }
 

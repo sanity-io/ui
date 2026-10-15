@@ -7,7 +7,6 @@ import {Eyebrow} from '../eyebrow/Eyebrow'
 import {type AvatarProps, avatarProps} from './avatar.props'
 
 const avatarClassName = suffixClassName('sui-Avatar')
-const avatarImgClassName = suffixClassName('sui-AvatarImg')
 
 /** @public */
 export function Avatar({color = 'gray', size = 1, ...props}: AvatarProps) {
@@ -34,7 +33,7 @@ export function Avatar({color = 'gray', size = 1, ...props}: AvatarProps) {
     >
       {src && !error ? (
         <img
-          className={clsx(avatarImgClassName, 'sui-radius-full')}
+          className="sui-radius-full"
           src={src}
           alt={ariaLabel || initials}
           onError={() => setError(true)}

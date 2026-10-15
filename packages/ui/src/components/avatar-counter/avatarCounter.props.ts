@@ -6,7 +6,7 @@ import {type PropDef} from '../../types/PropDef'
 /** @public */
 export interface AvatarCounterProps extends React.ComponentProps<'figure'> {
   /** Count */
-  count?: number
+  count: number
   /** Composite prop for setting height and font size */
   size?: AvatarSize
 }
