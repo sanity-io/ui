@@ -1,0 +1,56 @@
+.sui-TextArea {
+  --background-color: var(--backdrop);
+  --border-color: var(--separator-high);
+  --color: var(--foreground-high);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  font: var(--form-element-text);
+  color: var(--color);
+  resize: none;
+}
+
+.sui-TextArea::placeholder {
+  color: oklch(from var(--color) l c h / var(--placeholder-opacity));
+}
+
+/**
+  * Error
+  */
+.sui-TextArea[aria-invalid="true"] {
+  --border-color: var(--error-separator);
+  --color: var(--error-foreground);
+}
+
+/**
+  * Hover - uses relative border/background colours to darken/lighten in both normal & error state
+  */
+.sui-TextArea:hover {
+  border-color: light-dark(
+    oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
+    oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
+  );
+}
+
+/**
+  * Disabled, read-only
+  */
+.sui-TextArea:is(:disabled, :read-only) {
+  --background-color: var(--inert-background);
+  --border-color: var(--separator-low);
+  pointer-events: none;
+}
+
+/**
+  * Disabled
+  */
+.sui-TextArea:disabled {
+  --color: var(--inert-foreground);
+}
+
+/**
+  * Focus
+  */
+.sui-TextArea:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
