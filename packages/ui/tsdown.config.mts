@@ -22,5 +22,6 @@ export default defineConfig({
   panda: {
     fileName: 'styles.css',
     inject: false,
+    cascadeLayers: false,
   },
 })
