@@ -38,6 +38,9 @@ import {render} from 'vitest-browser-react'
 
 const theme = buildTheme()
 
+// A background change would otherwise start `Button`'s transition from the previous color
+const NO_TRANSITION = {transition: 'none'}
+
 const WrappingButton = styled(Button)`
   white-space: normal;
 `
@@ -245,7 +248,7 @@ describe('styled-components cascade layer', () => {
     addStyleSheet('@layer app-reset;', 'first')
     await render(
       <ThemeProvider theme={theme}>
-        <Button id="layered-button" text="Button" tone="primary" />
+        <Button id="layered-button" style={NO_TRANSITION} text="Button" tone="primary" />
       </ThemeProvider>,
     )
 
@@ -256,21 +259,19 @@ describe('styled-components cascade layer', () => {
     expect(getComputedStyle(button).backgroundColor).toBe(uiBackground)
 
     addStyleSheet('@layer app { #layered-button { background-color: rgb(4, 5, 6); } }')
-    // The new color arrives through the button's `background-color` transition
-    await expect.poll(() => getComputedStyle(button).backgroundColor).toBe('rgb(4, 5, 6)')
+    expect(getComputedStyle(button).backgroundColor).toBe('rgb(4, 5, 6)')
   })
 
   test('unlayered CSS overrides a @sanity/ui rule regardless of specificity', async () => {
     await render(
       <ThemeProvider theme={theme}>
-        <Button id="unlayered-button" text="Button" tone="primary" />
+        <Button id="unlayered-button" style={NO_TRANSITION} text="Button" tone="primary" />
       </ThemeProvider>,
     )
 
+    const button = document.getElementById('unlayered-button')!
     addStyleSheet('button { background-color: rgb(7, 8, 9); }')
 
-    expect(getComputedStyle(document.getElementById('unlayered-button')!).backgroundColor).toBe(
-      'rgb(7, 8, 9)',
-    )
+    expect(getComputedStyle(button).backgroundColor).toBe('rgb(7, 8, 9)')
   })
 })
