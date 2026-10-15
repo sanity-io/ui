@@ -49,7 +49,12 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `layers` in `panda.config.ts` prefixes every Panda cascade layer with `u-`
   so the sheet does not use Tailwind v3's `@layer utilities` or merge with
   another Panda bundle). Storybook declares that order in
-  `apps/storybook/.storybook/panda.css`. Class names are `u-` plus a hash of the
+  `apps/storybook/.storybook/panda.css`. The package build gets all of that from
+  the `panda` option of `@sanity/tsdown-config`
+  (`@sanity/pandacss-tsdown-plugin`): codegen, rewriting `.css.ts` modules to
+  static class strings, extracting their CSS into `dist/styles.css` through
+  Lightning CSS, and writing the conditional `./styles.css` export. It sets
+  `inject: false`, since consumers import the stylesheet themselves. Class names are `u-` plus a hash of the
   style key (`hash: true`, `prefix: 'u'`); two releases on one page share
   them, so `packages/ui/test/class-names/classNames.test.ts` keeps
   `manifest.json` (every name ever emitted → its readable key) append-only
