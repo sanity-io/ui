@@ -78,7 +78,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   rules outside that block, and on a `css` helper that declares a layer itself
   (a nested `@layer u-styled` would be a sublayer). oxfmt's embedded CSS
   formatting would move the layer to its own line, so `.oxfmtrc.json` turns
-  it off for `packages/ui/src`. Consumers' own styled components,
+  it off for the files that define styled components (`packages/ui/src`'s
+  `.tsx` files and `breadcrumbs.styles.ts`); add a new `.ts` file that defines
+  one to that list. Consumers' own styled components,
   `styled(Button)` extensions included, stay unlayered and beat every ui rule.
   Nothing in @sanity/ui declares the layer order: the page does, by loading
   `styles.css` before `<style data-styled>` or by declaring

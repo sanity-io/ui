@@ -16,7 +16,10 @@
   ],
   "overrides": [
     {
-      "files": ["packages/ui/src/**"],
+      "files": [
+        "packages/ui/src/**/*.tsx",
+        "packages/ui/src/core/components/breadcrumbs/breadcrumbs.styles.ts"
+      ],
       "options": {"embeddedLanguageFormatting": "off"}
     }
   ]
