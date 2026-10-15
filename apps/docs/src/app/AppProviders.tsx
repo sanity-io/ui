@@ -1,6 +1,5 @@
 'use client'
 
-import './layers.css'
 import '@sanity/ui/styles.css'
 import {LayerProvider, ThemeProvider} from '@sanity/ui'
 import {buildTheme} from '@sanity/ui/theme'

@@ -51,7 +51,25 @@ If neither holds, `u-styled` is declared first and the static styles win over co
 
 CSS outside any layer beats every layer, whatever its specificity. That includes your own styled components and extensions like `styled(Button)`, which stay unlayered.
 
-In Next.js, use the statement: Next.js decides where its stylesheets go relative to the `<style>` tag of a styled-components registry, so put it at the top of the global stylesheet that your root layout imports.
+### Next.js
+
+Use the statement, and declare it in the root layout: either at the top of a global stylesheet that the root layout imports before anything else, or in a `<style>` in its `<head>`:
+
+```tsx
+// app/layout.tsx
+export default function RootLayout({children}: {children: React.ReactNode}) {
+  return (
+    <html lang="en">
+      <head>
+        <style>{'@layer u-tokens, u-utilities, u-styled;'}</style>
+      </head>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+Next.js doesn't document where stylesheets go relative to the `<style>` tag of a styled-components registry. In the HTML it renders today, the root layout's stylesheets and `<head>` come first and the registry adds its tag at the end of `<head>`, so both placements work. Keep the statement out of stylesheets imported further down the tree, whose place in the document Next.js decides per route.
 
 ## Contributing and releasing new versions to npm
 

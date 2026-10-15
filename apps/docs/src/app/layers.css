@@ -1,3 +1,4 @@
-/* Next.js decides where its stylesheets go relative to the styled-components registry's
-   `<style>` tag, so the order of @sanity/ui's layers is declared here (see its README) */
+/* The root layout imports this first, so @sanity/ui's layer order is declared before
+   `@sanity/ui/styles.css` and the styled-components registry's `<style>` tag, in whatever
+   order Next.js places those (see the README of @sanity/ui) */
 @layer u-tokens, u-utilities, u-styled;

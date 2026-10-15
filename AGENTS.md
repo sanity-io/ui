@@ -156,8 +156,9 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   transpiles it via `transpilePackages` in `apps/docs/next.config.ts`. Because
   Turbopack evaluates `.css.ts` modules via the generated `styled-system/css`
   runtime and `src/app/AppProviders.tsx` imports `@sanity/ui/styles.css`
-  (`packages/ui/dist/styles.css`), after `src/app/layers.css`, which declares
-  the cascade layer order as the README asks of Next.js apps. `prepare` builds `@sanity/ui` on install.
+  (`packages/ui/dist/styles.css`). The root layout imports
+  `src/app/layers.css` first, which declares the cascade layer order as the
+  README asks of Next.js apps. `prepare` builds `@sanity/ui` on install.
   `dev`, `build`, and `e2e:build` build it again because Vercel and other
   cached installs skip lifecycle scripts. It is deployed via Vercel,
   not released through Changesets.
