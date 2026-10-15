@@ -230,6 +230,25 @@ describe('styled-components cascade layer', () => {
     expect(higherLayer('u-utilities', 'u-styled')).toBe('u-styled')
   })
 
+  test('a layer declared after styles.css, before <style data-styled>, comes after u-styled', async () => {
+    const panda = document.querySelector<HTMLStyleElement>('style[data-vite-dev-id$="panda.css"]')!
+    const app = document.createElement('style')
+    app.textContent = '@layer app;'
+    panda.after(app)
+    onTestFinished(() => app.remove())
+
+    await render(
+      <ThemeProvider theme={theme}>
+        <Button text="Button" />
+      </ThemeProvider>,
+    )
+
+    expect(app.compareDocumentPosition(document.querySelector('style[data-styled]')!)).toBe(
+      Node.DOCUMENT_POSITION_FOLLOWING,
+    )
+    expect(higherLayer('u-styled', 'app')).toBe('app')
+  })
+
   test('precedence inside @sanity/ui does not depend on where styles.css loads', async () => {
     await render(<KitchenSink />)
 
