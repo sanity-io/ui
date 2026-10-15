@@ -54,7 +54,8 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   `<style data-styled>` (the README's "Load order"). Panda still generates it
   in the `u-` layers of `panda.config.ts`, which the build removes; in
   Storybook, `@pandacss/vite` appends it to `apps/storybook/.storybook/panda.css`
-  and `.storybook/unlayeredPanda.ts` removes them. The package build gets all of that from
+  and `removeCascadeLayers()` from `@sanity/pandacss-tsdown-plugin/vite`
+  removes them. The package build gets all of that from
   the `panda` option of `@sanity/tsdown-config`
   (`@sanity/pandacss-tsdown-plugin`): codegen, rewriting `.css.ts` modules to
   static class strings, extracting their CSS into `dist/styles.css` through
