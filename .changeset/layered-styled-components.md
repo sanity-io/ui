@@ -4,7 +4,7 @@
 
 Emit the styled-components rules of `@sanity/ui` components in the `u-styled` CSS cascade layer, so apps can override them through layer order instead of selector specificity.
 
-`@sanity/ui/styles.css` now starts with `@layer u-tokens, u-utilities, u-styled;`, and `ThemeProvider` emits the same statement ahead of the component styles, which keeps component styles above the static styles whichever of the two stylesheets loads first. Any layer that your page declares after them beats `u-styled`. To order one of your layers below `u-styled`, declare the full order yourself before both, for example `@layer reset, u-tokens, u-utilities, u-styled, app;`.
+`u-styled` must come after the `u-tokens` and `u-utilities` layers of `@sanity/ui/styles.css`, and the page sets that order, since a layer takes its place the first time the page mentions it. Load `styles.css` before styled-components' `<style data-styled>` tag, or declare `@layer u-tokens, u-utilities, u-styled;` in global CSS that loads before anything else (see the README). If `styles.css` can load after styled-components' tag, for example on a lazily loaded route or in Next.js, add the statement: without it, static styles win over component styles they should lose to.
 
 Unlayered CSS now beats `@sanity/ui` component styles regardless of specificity:
 
