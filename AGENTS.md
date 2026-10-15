@@ -83,8 +83,11 @@ Standard scripts live in the root `package.json` (`lint`, `test`, `build`,
   Nothing in @sanity/ui declares the layer order: the page does, by loading
   `styles.css` before `<style data-styled>` or by declaring
   `@layer u-tokens, u-utilities, u-styled;` first (the `Cascade layers`
-  section of `packages/ui/README.md`), and `apps/storybook/tests/cascadeLayers.test.tsx`
-  checks the kitchen-sink computed styles under both. Compose a variable
+  section of `packages/ui/README.md`). `apps/storybook/tests/cascadeLayers.test.tsx`
+  renders a kitchen sink in iframes that load the statement, `styles.css` and
+  styled-components in a given order: both README options must match a
+  reference frame, and two violations must not (Dialog's styled
+  `position: fixed` loses to Layer's static `position: relative` then). Compose a variable
   number of rule sets by folding templates, as `responsiveRules` does:
   styled-components v7 rejects arrays as interpolations.
 
