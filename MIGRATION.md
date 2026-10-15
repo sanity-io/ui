@@ -37,11 +37,13 @@ npm install @sanity/ui@^4 react@^19.2 react-dom@^19.2 styled-components@^6.1
 
 Static styles (the ones that don't depend on theme or props) are extracted into a stylesheet at build time instead of being injected at runtime, and the stylesheet is **not** loaded automatically.
 
-Add this import once, next to where the app renders `<ThemeProvider>`:
+Add this import once, where the app loads its global CSS:
 
 ```js
 import '@sanity/ui/styles.css'
 ```
+
+It has to load before styled-components' `<style data-styled>` tag, unless your global CSS declares `@layer u-tokens, u-utilities, u-styled;` first. [Cascade layers](./packages/ui/README.md#cascade-layers) in the README explains why.
 
 Without it, `SrOnly`, `Spinner` and internal text-overflow styling render unstyled. These components have moved off styled-components — more components follow in future 4.x minors, and UI5 ships without styled-components or any other runtime CSS-in-JS.
 
