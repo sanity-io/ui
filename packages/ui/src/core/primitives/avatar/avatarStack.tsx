@@ -26,11 +26,9 @@ function responsiveAvatarStackSizeStyle(props: {$size: AvatarSize[]} & ThemeProp
   })
 }
 
-const StyledAvatarStack = styled.div<{$size: AvatarSize[]}>`
-  @layer u-styled {
-    ${responsiveAvatarStackSizeStyle}
-  }
-`
+const StyledAvatarStack = styled.div<{$size: AvatarSize[]}>`@layer u-styled {
+  ${responsiveAvatarStackSizeStyle}
+}`
 
 /**
  * @public

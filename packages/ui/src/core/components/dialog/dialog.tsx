@@ -119,13 +119,11 @@ function isTargetWithinScope(
 
 const StyledDialog = styled(Layer)<
   ResponsiveDialogPositionStyleProps & ResponsivePaddingStyleProps
->`
-  @layer u-styled {
-    ${responsivePaddingStyle}
-    ${dialogStyle}
-    ${responsiveDialogPositionStyle}
-  }
-`
+>`@layer u-styled {
+  ${responsivePaddingStyle}
+  ${dialogStyle}
+  ${responsiveDialogPositionStyle}
+}`
 
 function DialogCard(props: DialogCardProps) {
   const {

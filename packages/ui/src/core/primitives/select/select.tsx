@@ -26,34 +26,26 @@ export interface SelectProps {
   customValidity?: string
 }
 
-const InputBase = styled.select`
-  @layer u-styled {
-    ${selectStyle.inputBase}
-  }
-`
+const InputBase = styled.select`@layer u-styled {
+  ${selectStyle.inputBase}
+}`
 
-const InputColor = styled(InputBase)`
-  @layer u-styled {
-    ${selectStyle.inputColor}
-  }
-`
+const InputColor = styled(InputBase)`@layer u-styled {
+  ${selectStyle.inputColor}
+}`
 
 const Input = styled(InputColor)<{
   $fontSize: number[]
   $padding: number[]
   $radius: Radius[]
   $space: number[]
-}>`
-  @layer u-styled {
-    ${selectStyle.input}
-  }
-`
+}>`@layer u-styled {
+  ${selectStyle.input}
+}`
 
-const IconBox = styled(Box)`
-  @layer u-styled {
-    ${selectStyle.iconBox}
-  }
-`
+const IconBox = styled(Box)`@layer u-styled {
+  ${selectStyle.iconBox}
+}`
 
 /**
  * The `Select` component provides control of options.

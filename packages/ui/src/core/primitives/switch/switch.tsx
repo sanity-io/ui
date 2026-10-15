@@ -13,24 +13,18 @@ export interface SwitchProps {
   indeterminate?: boolean
 }
 
-const Representation = styled.span.attrs({className: switchRepresentation})`
-  @layer u-styled {
-    ${switchRepresentationStyles}
-  }
-`
-const Track = styled.span.attrs({className: switchTrack})`
-  @layer u-styled {
-    ${switchTrackStyles}
-  }
-`
+const Representation = styled.span.attrs({className: switchRepresentation})`@layer u-styled {
+  ${switchRepresentationStyles}
+}`
+const Track = styled.span.attrs({className: switchTrack})`@layer u-styled {
+  ${switchTrackStyles}
+}`
 const Thumb = styled.span.attrs({className: switchThumb})<{
   $checked?: boolean
   $indeterminate?: boolean
-}>`
-  @layer u-styled {
-    ${switchThumbStyles}
-  }
-`
+}>`@layer u-styled {
+  ${switchThumbStyles}
+}`
 
 /**
  * The `Switch` component allows the user to toggle a setting on and off.

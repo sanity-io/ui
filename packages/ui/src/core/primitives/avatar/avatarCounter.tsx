@@ -32,12 +32,12 @@ function _avatarCounterPaddingStyle(props: ThemeProps) {
   `
 }
 
-const StyledAvatarCounter = styled.div.attrs({className: avatarCounter})<{$size: AvatarSize[]}>`
-  @layer u-styled {
-    ${_responsiveAvatarCounterSizeStyle}
-    ${_avatarCounterPaddingStyle}
-  }
-`
+const StyledAvatarCounter = styled.div.attrs({className: avatarCounter})<{
+  $size: AvatarSize[]
+}>`@layer u-styled {
+  ${_responsiveAvatarCounterSizeStyle}
+  ${_avatarCounterPaddingStyle}
+}`
 
 /**
  * @public

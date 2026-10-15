@@ -17,11 +17,9 @@ export interface GridOwnProps extends Omit<BoxOwnProps, 'display'>, ResponsiveGr
  */
 export type GridProps<E extends ElementType = 'div'> = Props<GridOwnProps, E>
 
-const StyledGrid = styled(Box)<ResponsiveGridStyleProps>`
-  @layer u-styled {
-    ${responsiveGridStyle}
-  }
-`
+const StyledGrid = styled(Box)<ResponsiveGridStyleProps>`@layer u-styled {
+  ${responsiveGridStyle}
+}`
 
 function GridComponent(
   props: GridOwnProps & {as?: ElementType} & Omit<

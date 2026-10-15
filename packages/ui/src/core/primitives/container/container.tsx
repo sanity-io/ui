@@ -17,12 +17,10 @@ export interface ContainerOwnProps extends BoxOwnProps, ResponsiveWidthProps {}
  */
 export type ContainerProps<E extends ElementType = 'div'> = Props<ContainerOwnProps, E>
 
-const StyledContainer = styled(Box)<ResponsiveWidthStyleProps>`
-  @layer u-styled {
-    ${containerBaseStyle}
-    ${responsiveContainerWidthStyle}
-  }
-`
+const StyledContainer = styled(Box)<ResponsiveWidthStyleProps>`@layer u-styled {
+  ${containerBaseStyle}
+  ${responsiveContainerWidthStyle}
+}`
 
 function ContainerComponent(
   props: ContainerOwnProps & {as?: ElementType} & Omit<

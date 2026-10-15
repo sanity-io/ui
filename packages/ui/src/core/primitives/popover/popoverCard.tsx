@@ -22,17 +22,15 @@ import {
   DEFAULT_POPOVER_MARGINS,
 } from './constants'
 
-const MotionCard = styled(motion.create(Card))`
-  @layer u-styled {
-    &:not([hidden]) {
-      display: flex;
-    }
-    flex-direction: column;
-    width: max-content;
-    min-width: min-content;
-    will-change: transform;
+const MotionCard = styled(motion.create(Card))`@layer u-styled {
+  &:not([hidden]) {
+    display: flex;
   }
-`
+  flex-direction: column;
+  width: max-content;
+  min-width: min-content;
+  will-change: transform;
+}`
 
 /**
  * @internal

@@ -17,17 +17,13 @@ export interface CheckboxProps {
   customValidity?: string
 }
 
-const InputBase = styled.input`
-  @layer u-styled {
-    ${inputElementStyles}
-  }
-`
+const InputBase = styled.input`@layer u-styled {
+  ${inputElementStyles}
+}`
 
-const Input = styled(InputBase)`
-  @layer u-styled {
-    ${inputElementColorStyles}
-  }
-`
+const Input = styled(InputBase)`@layer u-styled {
+  ${inputElementColorStyles}
+}`
 
 /**
  * Checkboxes allow the user to select one or more items from a set.

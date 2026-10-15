@@ -46,16 +46,14 @@ const StyledBox = styled.div<
     ResponsiveGridItemStyleProps &
     ResponsiveMarginStyleProps &
     ResponsivePaddingStyleProps
->`
-  @layer u-styled {
-    ${boxStyle}
-    ${flexItemStyle}
-    ${responsiveBoxStyle}
-    ${responsiveGridItemStyle}
-    ${responsiveMarginStyle}
-    ${responsivePaddingStyle}
-  }
-`
+>`@layer u-styled {
+  ${boxStyle}
+  ${flexItemStyle}
+  ${responsiveBoxStyle}
+  ${responsiveGridItemStyle}
+  ${responsiveMarginStyle}
+  ${responsivePaddingStyle}
+}`
 
 const BoxComponent = function Box(
   props: BoxOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height'>,

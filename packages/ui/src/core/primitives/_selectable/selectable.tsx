@@ -11,30 +11,22 @@ import {
   SelectableStyleProps,
 } from './style'
 
-const SelectableBase = styled(Box)`
-  @layer u-styled {
-    ${selectableBaseStyle}
-  }
-`
+const SelectableBase = styled(Box)`@layer u-styled {
+  ${selectableBaseStyle}
+}`
 
-const SelectableColor = styled(SelectableBase)<SelectableStyleProps>`
-  @layer u-styled {
-    ${selectableColorStyle}
-  }
-`
+const SelectableColor = styled(SelectableBase)<SelectableStyleProps>`@layer u-styled {
+  ${selectableColorStyle}
+}`
 
-const SelectableDisabled = styled(SelectableColor)<SelectableStyleProps>`
-  @layer u-styled {
-    ${selectableDisabledStyle}
-  }
-`
+const SelectableDisabled = styled(SelectableColor)<SelectableStyleProps>`@layer u-styled {
+  ${selectableDisabledStyle}
+}`
 
 /**
  * @internal
  */
-export const Selectable = styled(SelectableDisabled)<ResponsiveRadiusStyleProps>`
-  @layer u-styled {
-    ${responsiveRadiusStyle}
-    ${selectableStyle}
-  }
-`
+export const Selectable = styled(SelectableDisabled)<ResponsiveRadiusStyleProps>`@layer u-styled {
+  ${responsiveRadiusStyle}
+  ${selectableStyle}
+}`

@@ -24,12 +24,10 @@ export interface InlineOwnProps extends Omit<BoxOwnProps, 'display'> {
  */
 export type InlineProps<E extends ElementType = 'div'> = Props<InlineOwnProps, E>
 
-const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>`
-  @layer u-styled {
-    ${inlineBaseStyle}
-    ${inlineSpaceStyle}
-  }
-`
+const StyledInline = styled(Box)<ResponsiveInlineSpaceStyleProps>`@layer u-styled {
+  ${inlineBaseStyle}
+  ${inlineSpaceStyle}
+}`
 
 function InlineComponent(
   props: InlineOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,

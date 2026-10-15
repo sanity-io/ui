@@ -32,30 +32,24 @@ export interface LabelOwnProps {
  */
 export type LabelProps<E extends ElementType = 'div'> = Props<LabelOwnProps, E>
 
-const LabelBase = styled.div`
-  @layer u-styled {
-    ${labelBaseStyle}
-  }
-`
+const LabelBase = styled.div`@layer u-styled {
+  ${labelBaseStyle}
+}`
 
-const LabelSize = styled(LabelBase)<{$size: number[]}>`
-  @layer u-styled {
-    ${(props) => _responsiveFontSize('label', props)}
-  }
-`
+const LabelSize = styled(LabelBase)<{$size: number[]}>`@layer u-styled {
+  ${(props) => _responsiveFontSize('label', props)}
+}`
 
 const StyledLabel = styled(LabelSize)<{
   $accent?: boolean
   $align: TextAlign[]
   $muted: boolean
   $weight?: ThemeFontWeightKey
-}>`
-  @layer u-styled {
-    ${(props) => _fontWeight('label', props)}
-    ${responsiveTextAlignStyle}
-    ${fontColorStyle}
-  }
-`
+}>`@layer u-styled {
+  ${(props) => _fontWeight('label', props)}
+  ${responsiveTextAlignStyle}
+  ${fontColorStyle}
+}`
 
 function LabelComponent(
   props: LabelOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,

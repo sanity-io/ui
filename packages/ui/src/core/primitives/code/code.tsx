@@ -25,24 +25,20 @@ export interface CodeOwnProps {
  */
 export type CodeProps<E extends ElementType = 'pre'> = Props<CodeOwnProps, E>
 
-const CodeBase = styled.pre`
-  @layer u-styled {
-    ${codeBaseStyle}
-  }
-`
+const CodeBase = styled.pre`@layer u-styled {
+  ${codeBaseStyle}
+}`
 
-const CodeSyntax = styled(CodeBase)`
-  @layer u-styled {
-    ${codeSyntaxStyle}
-  }
-`
+const CodeSyntax = styled(CodeBase)`@layer u-styled {
+  ${codeSyntaxStyle}
+}`
 
-const StyledCode = styled(CodeSyntax)<FontWeightStyleProps & ResponsiveFontSizeStyleProps>`
-  @layer u-styled {
-    ${(props) => _fontWeight('code', props)}
-    ${(props) => _responsiveFontSize('code', props)}
-  }
-`
+const StyledCode = styled(CodeSyntax)<
+  FontWeightStyleProps & ResponsiveFontSizeStyleProps
+>`@layer u-styled {
+  ${(props) => _fontWeight('code', props)}
+  ${(props) => _responsiveFontSize('code', props)}
+}`
 
 function CodeComponent(
   props: CodeOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLPreElement>, 'as' | 'size'>,

@@ -26,18 +26,16 @@ export interface BadgeOwnProps extends BoxOwnProps, ResponsiveRadiusProps {
  */
 export type BadgeProps<E extends ElementType = 'div'> = Props<BadgeOwnProps, E>
 
-const BadgeBase = styled(Box)`
-  @layer u-styled {
-    ${badgeBaseStyle}
-  }
-`
+const BadgeBase = styled(Box)`@layer u-styled {
+  ${badgeBaseStyle}
+}`
 
-const StyledBadge = styled(BadgeBase)<BadgeStyleProps & ResponsiveRadiusStyleProps>`
-  @layer u-styled {
-    ${responsiveRadiusStyle}
-    ${badgeToneStyle}
-  }
-`
+const StyledBadge = styled(BadgeBase)<
+  BadgeStyleProps & ResponsiveRadiusStyleProps
+>`@layer u-styled {
+  ${responsiveRadiusStyle}
+  ${badgeToneStyle}
+}`
 
 const BadgeComponent = function Badge(
   props: BadgeOwnProps & {as?: ElementType} & React.HTMLProps<HTMLDivElement>,

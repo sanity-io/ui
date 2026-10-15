@@ -16,11 +16,9 @@ import {
   skeletonVisible,
 } from './skeleton.css'
 
-const StyledSkeleton = styled(Box)<ResponsiveRadiusStyleProps>`
-  @layer u-styled {
-    ${responsiveRadiusStyle}
-  }
-`
+const StyledSkeleton = styled(Box)<ResponsiveRadiusStyleProps>`@layer u-styled {
+  ${responsiveRadiusStyle}
+}`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.

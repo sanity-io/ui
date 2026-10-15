@@ -34,25 +34,19 @@ export interface TextOwnProps {
  */
 export type TextProps<E extends ElementType = 'div'> = Props<TextOwnProps, E>
 
-const TextBase = styled.div`
-  @layer u-styled {
-    ${textBaseStyle}
-  }
-`
+const TextBase = styled.div`@layer u-styled {
+  ${textBaseStyle}
+}`
 
-const TextSize = styled(TextBase)<ResponsiveFontSizeStyleProps>`
-  @layer u-styled {
-    ${(props) => _responsiveFontSize('text', props)}
-  }
-`
+const TextSize = styled(TextBase)<ResponsiveFontSizeStyleProps>`@layer u-styled {
+  ${(props) => _responsiveFontSize('text', props)}
+}`
 
-const StyledText = styled(TextSize)<ResponsiveFontStyleProps>`
-  @layer u-styled {
-    ${(props) => _fontWeight('text', props)}
-    ${responsiveTextAlignStyle}
-    ${fontColorStyle}
-  }
-`
+const StyledText = styled(TextSize)<ResponsiveFontStyleProps>`@layer u-styled {
+  ${(props) => _fontWeight('text', props)}
+  ${responsiveTextAlignStyle}
+  ${fontColorStyle}
+}`
 
 function TextComponent(
   props: TextOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'size'>,

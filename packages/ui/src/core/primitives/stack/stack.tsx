@@ -21,12 +21,10 @@ export interface StackOwnProps extends BoxOwnProps {
  */
 export type StackProps<E extends ElementType = 'div'> = Props<StackOwnProps, E>
 
-const StyledStack = styled(Box)<ResponsiveStackSpaceStyleProps>`
-  @layer u-styled {
-    ${stackBaseStyle}
-    ${responsiveStackSpaceStyle}
-  }
-`
+const StyledStack = styled(Box)<ResponsiveStackSpaceStyleProps>`@layer u-styled {
+  ${stackBaseStyle}
+  ${responsiveStackSpaceStyle}
+}`
 
 function StackComponent(
   props: StackOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,

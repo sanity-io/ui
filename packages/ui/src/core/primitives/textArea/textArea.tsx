@@ -40,40 +40,32 @@ export interface TextAreaProps extends ResponsiveRadiusProps {
   weight?: ThemeFontWeightKey
 }
 
-const InputBase = styled.textarea`
-  @layer u-styled {
-    ${textInputBaseStyle}
-  }
-`
+const InputBase = styled.textarea`@layer u-styled {
+  ${textInputBaseStyle}
+}`
 
-const InputColor = styled(InputBase)<TextInputInputStyleProps>`
-  @layer u-styled {
-    ${textInputColorStyle}
-  }
-`
+const InputColor = styled(InputBase)<TextInputInputStyleProps>`@layer u-styled {
+  ${textInputColorStyle}
+}`
 
-const Input = styled(InputColor)<TextInputResponsivePaddingStyleProps & TextInputInputStyleProps>`
-  @layer u-styled {
-    ${responsiveInputPaddingStyle}
-    ${textInputFontStyle}
-    ${textInputFontSizeStyle}
-  }
-`
+const Input = styled(InputColor)<
+  TextInputResponsivePaddingStyleProps & TextInputInputStyleProps
+>`@layer u-styled {
+  ${responsiveInputPaddingStyle}
+  ${textInputFontStyle}
+  ${textInputFontSizeStyle}
+}`
 
-const PresentationColor = styled.div<TextInputRepresentationStyleProps>`
-  @layer u-styled {
-    ${textInputRepresentationColorStyle}
-  }
-`
+const PresentationColor = styled.div<TextInputRepresentationStyleProps>`@layer u-styled {
+  ${textInputRepresentationColorStyle}
+}`
 
 const Presentation = styled(PresentationColor)<
   ResponsiveRadiusStyleProps & TextInputRepresentationStyleProps
->`
-  @layer u-styled {
-    ${responsiveRadiusStyle}
-    ${textInputRepresentationStyle}
-  }
-`
+>`@layer u-styled {
+  ${responsiveRadiusStyle}
+  ${textInputRepresentationStyle}
+}`
 
 /**
  * A multiline text input.

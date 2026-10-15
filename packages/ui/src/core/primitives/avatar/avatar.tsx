@@ -46,18 +46,17 @@ export interface AvatarOwnProps {
  */
 export type AvatarProps<E extends ElementType = 'div'> = Props<AvatarOwnProps, E>
 
-const AvatarBase = styled.div.attrs({className: avatarRoot})`
-  @layer u-styled {
-    ${avatarRootStyle}
-  }
-`
+const AvatarBase = styled.div.attrs({className: avatarRoot})`@layer u-styled {
+  ${avatarRootStyle}
+}`
 
-const StyledAvatar = styled(AvatarBase)<{$color: ThemeColorAvatarColorKey; $size: AvatarSize[]}>`
-  @layer u-styled {
-    ${responsiveAvatarSizeStyle}
-    ${avatarColorStyle}
-  }
-`
+const StyledAvatar = styled(AvatarBase)<{
+  $color: ThemeColorAvatarColorKey
+  $size: AvatarSize[]
+}>`@layer u-styled {
+  ${responsiveAvatarSizeStyle}
+  ${avatarColorStyle}
+}`
 
 function AvatarComponent(
   props: AvatarOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as'>,

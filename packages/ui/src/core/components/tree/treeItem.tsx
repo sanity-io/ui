@@ -42,11 +42,9 @@ export interface TreeItemProps {
   weight?: ThemeFontWeightKey
 }
 
-const StyledTreeItem = styled.li`
-  @layer u-styled {
-    ${treeItemRootColorStyle}
-  }
-`
+const StyledTreeItem = styled.li`@layer u-styled {
+  ${treeItemRootColorStyle}
+}`
 
 /**
  * Styles a plain element (rather than wrapping `Box`) so that `as={linkAs}` renders the custom
@@ -54,11 +52,9 @@ const StyledTreeItem = styled.li`
  * `.attrs({forwardedAs: 'a'})` made styled-components pass `as="a"` on to the custom component
  * (breaking e.g. `next/link`, which treats `as` as a URL override) and skip the `Box` styles.
  */
-const TreeItemBox = styled.a<TreeItemBoxStyleProps>`
-  @layer u-styled {
-    ${treeItemBoxStyle}
-  }
-`
+const TreeItemBox = styled.a<TreeItemBoxStyleProps>`@layer u-styled {
+  ${treeItemBoxStyle}
+}`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.

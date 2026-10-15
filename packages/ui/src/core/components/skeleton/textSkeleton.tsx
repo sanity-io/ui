@@ -21,11 +21,9 @@ function textSkeletonHeightStyle(props: {$size: number[]; $style: ThemeFontKey} 
   })
 }
 
-const StyledSkeleton = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>`
-  @layer u-styled {
-    ${textSkeletonHeightStyle}
-  }
-`
+const StyledSkeleton = styled(Skeleton)<{$size: number[]; $style: ThemeFontKey}>`@layer u-styled {
+  ${textSkeletonHeightStyle}
+}`
 
 /**
  * This API might change. DO NOT USE IN PRODUCTION.

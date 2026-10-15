@@ -38,17 +38,13 @@ const kbdBaseStyle = css`
   }
 `
 
-const KBDBase = styled.kbd`
-  @layer u-styled {
-    ${kbdBaseStyle}
-  }
-`
+const KBDBase = styled.kbd`@layer u-styled {
+  ${kbdBaseStyle}
+}`
 
-const StyledKBD = styled(KBDBase)<ResponsiveRadiusStyleProps>`
-  @layer u-styled {
-    ${responsiveRadiusStyle}
-  }
-`
+const StyledKBD = styled(KBDBase)<ResponsiveRadiusStyleProps>`@layer u-styled {
+  ${responsiveRadiusStyle}
+}`
 
 function KBDComponent(
   props: KBDOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLElement>, 'as' | 'size'>,

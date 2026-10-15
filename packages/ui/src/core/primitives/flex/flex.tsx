@@ -21,12 +21,10 @@ export interface FlexOwnProps
  */
 export type FlexProps<E extends ElementType = 'div'> = Props<FlexOwnProps, E>
 
-const StyledFlex = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>`
-  @layer u-styled {
-    ${flexItemStyle}
-    ${responsiveFlexStyle}
-  }
-`
+const StyledFlex = styled(Box)<FlexItemStyleProps & ResponsiveFlexStyleProps>`@layer u-styled {
+  ${flexItemStyle}
+  ${responsiveFlexStyle}
+}`
 
 function FlexComponent(
   props: FlexOwnProps & {as?: ElementType} & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'wrap'>,

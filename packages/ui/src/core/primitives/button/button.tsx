@@ -61,32 +61,27 @@ export type ButtonProps<E extends ElementType = 'button'> = Props<ButtonOwnProps
 
 // The static rules live in `buttonRoot` in styles.css; `width="fill"` is the
 // `buttonWidthFill` class on the last level
-const ButtonBase = styled.button.attrs({className: buttonRoot})`
-  @layer u-styled {
-    ${buttonBaseStyles}
-  }
-`
+const ButtonBase = styled.button.attrs({className: buttonRoot})`@layer u-styled {
+  ${buttonBaseStyles}
+}`
 
-const ButtonColor = styled(ButtonBase)<{$mode: ButtonMode; $tone: ButtonTone}>`
-  @layer u-styled {
-    ${buttonColorStyles}
-  }
-`
+const ButtonColor = styled(ButtonBase)<{$mode: ButtonMode; $tone: ButtonTone}>`@layer u-styled {
+  ${buttonColorStyles}
+}`
 
-const ButtonDisabledAndFocus = styled(ButtonColor)<{$mode: ButtonMode; $tone: ButtonTone}>`
-  @layer u-styled {
-    ${buttonDisabledAndFocusStyles}
-  }
-`
+const ButtonDisabledAndFocus = styled(ButtonColor)<{
+  $mode: ButtonMode
+  $tone: ButtonTone
+}>`@layer u-styled {
+  ${buttonDisabledAndFocusStyles}
+}`
 
 const StyledButton = styled(ButtonDisabledAndFocus).attrs<{$width?: ButtonWidth}>((props) => ({
   className: props.$width === 'fill' ? buttonWidthFill : undefined,
-}))<{$width?: ButtonWidth} & ResponsiveRadiusStyleProps>`
-  @layer u-styled {
-    ${responsiveRadiusStyle}
-    ${buttonStyles}
-  }
-`
+}))<{$width?: ButtonWidth} & ResponsiveRadiusStyleProps>`@layer u-styled {
+  ${responsiveRadiusStyle}
+  ${buttonStyles}
+}`
 
 function ButtonComponent(
   props: ButtonOwnProps & {as?: ElementType} & Omit<

@@ -38,27 +38,21 @@ export interface HeadingOwnProps {
  */
 export type HeadingProps<E extends ElementType = 'div'> = Props<HeadingOwnProps, E>
 
-const HeadingBase = styled.div`
-  @layer u-styled {
-    ${headingBaseStyle}
-  }
-`
+const HeadingBase = styled.div`@layer u-styled {
+  ${headingBaseStyle}
+}`
 
-const HeadingSize = styled(HeadingBase)<ResponsiveFontSizeStyleProps>`
-  @layer u-styled {
-    ${(props) => _responsiveFontSize('heading', props)}
-  }
-`
+const HeadingSize = styled(HeadingBase)<ResponsiveFontSizeStyleProps>`@layer u-styled {
+  ${(props) => _responsiveFontSize('heading', props)}
+}`
 
 const StyledHeading = styled(HeadingSize)<
   HeadingStyleProps & ResponsiveTextAlignStyleProps & ResponsiveFontStyleProps
->`
-  @layer u-styled {
-    ${fontColorStyle}
-    ${responsiveTextAlignStyle}
-    ${(props) => _fontWeight('heading', props)}
-  }
-`
+>`@layer u-styled {
+  ${fontColorStyle}
+  ${responsiveTextAlignStyle}
+  ${(props) => _fontWeight('heading', props)}
+}`
 
 function HeadingComponent(
   props: HeadingOwnProps & {as?: ElementType} & Omit<

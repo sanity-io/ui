@@ -26,13 +26,11 @@ export interface HotkeysProps {
 // Stays on styled-components: `display: block` must beat KBD's runtime
 // `display: inline-block` at equal specificity, which needs both rules in the
 // runtime stylesheet.
-const Key = styled(KBD)`
-  @layer u-styled {
-    &:not([hidden]) {
-      display: block;
-    }
+const Key = styled(KBD)`@layer u-styled {
+  &:not([hidden]) {
+    display: block;
   }
-`
+}`
 
 /**
  * Represent hotkeys (a keyboard combination) with semantic `<kbd>` elements.

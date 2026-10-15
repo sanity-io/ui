@@ -1,7 +1,15 @@
 /**
  * Every styled component of @sanity/ui writes its rules inside `@layer u-styled { … }`, so that
- * apps can order them through cascade layers. styled-components is replaced with a pass-through
- * that records each template a styled component or a `css` helper is defined with.
+ * apps can order them through cascade layers. The layer opens on the template's first line:
+ *
+ * ```ts
+ * styled(Component)`@layer u-styled {
+ *   ${styles}
+ * }`
+ * ```
+ *
+ * styled-components is replaced with a pass-through that records each template a styled component
+ * or a `css` helper is defined with.
  */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -67,7 +75,26 @@ const modules = Object.keys(sources).filter(
 function templateText(args: unknown[]): string | null {
   const [strings] = args
 
-  return Array.isArray(strings) && 'raw' in strings ? strings.join('${…}').trim() : null
+  return Array.isArray(strings) && 'raw' in strings ? strings.join('${…}') : null
+}
+
+/**
+ * Whether the template opens with `@layer u-styled {` on its first line, indents the rules one
+ * level, and ends with the closing brace.
+ */
+function hasLayerShape(text: string): boolean {
+  const lines = text.split('\n')
+  const indents = lines
+    .slice(1, -1)
+    .filter((line) => line.trim())
+    .map((line) => line.length - line.trimStart().length)
+
+  return (
+    lines[0] === '@layer u-styled {' &&
+    lines.at(-1) === '}' &&
+    indents.length > 0 &&
+    Math.min(...indents) === 2
+  )
 }
 
 /** Whether the text is one `@layer u-styled { … }` block and nothing else. */
@@ -107,6 +134,9 @@ test.each(modules.map((file) => path.relative(SRC_DIR, file)))(
 
     for (const text of definitions) {
       expect(text, 'define styled components with a tagged template').not.toBeNull()
+      expect(hasLayerShape(text!), `open the template with \`@layer u-styled {\`:\n${text}`).toBe(
+        true,
+      )
       expect(isLayeredBlock(text!), `rules outside \`@layer u-styled\`:\n${text}`).toBe(true)
     }
 

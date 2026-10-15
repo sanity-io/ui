@@ -13,5 +13,11 @@
     "pnpm-lock.yaml",
     "CHANGELOG.md",
     "**/sanity.types.ts"
+  ],
+  "overrides": [
+    {
+      "files": ["packages/ui/src/**"],
+      "options": {"embeddedLanguageFormatting": "off"}
+    }
   ]
 }
