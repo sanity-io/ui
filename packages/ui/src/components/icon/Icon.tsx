@@ -17,6 +17,7 @@ export function Icon({icon, size = 2, ...props}: IconProps) {
   const svgProps = {
     'className': clsx(
       iconClassName,
+      'sui-display-block',
       className,
       iconElement ? iconElement.props.className : undefined,
     ),
