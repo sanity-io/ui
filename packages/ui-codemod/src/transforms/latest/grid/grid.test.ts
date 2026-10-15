@@ -24,19 +24,15 @@ defineInlineTest(
   {},
   `
   <Grid
-    alignItems="center"
     flexDirection="row"
     flexWrap="wrap"
-    justifyContent="center"
   />
   `,
   `
   <Grid
     style={{
-      alignItems: "center",
       flexDirection: "row",
       flexWrap: "wrap",
-      justifyContent: "center"
     }} />
   `,
   'moves flex props to style',
