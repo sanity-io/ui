@@ -233,7 +233,7 @@ export default function Ui3() {
       <Profiler id="Avatar" onRender={handleOnRender}>
         {iterator.map((i) => (
           <AvatarStack key={i}>
-            <Avatar name="AB" />
+            <Avatar initials="AB" />
           </AvatarStack>
         ))}
       </Profiler>

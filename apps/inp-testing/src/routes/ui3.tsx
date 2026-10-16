@@ -353,7 +353,7 @@ function AvatarShuffleSection() {
             {Array.from({length: AVATAR_COUNT}, (_, index) => (
               <AvatarStack key={index}>
                 {avatars.map((avatar) => (
-                  <Avatar key={avatar} name={avatar} />
+                  <Avatar key={avatar} initials={avatar} />
                 ))}
               </AvatarStack>
             ))}

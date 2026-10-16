@@ -234,7 +234,7 @@ export default function Ui4() {
       <Profiler id="Avatar" onRender={handleOnRender}>
         {iterator.map((i) => (
           <AvatarStack key={i}>
-            <Avatar name="AB" />
+            <Avatar initials="AB" />
           </AvatarStack>
         ))}
       </Profiler>
