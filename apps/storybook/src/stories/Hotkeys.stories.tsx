@@ -17,7 +17,14 @@ const meta: Meta<typeof Hotkeys> = {
   args: {
     keys: ['Ctrl', 'Alt', 'P'],
   },
-  argTypes,
+  argTypes: {
+    ...argTypes,
+    keys: {
+      control: {
+        type: 'object',
+      },
+    },
+  },
   component: Hotkeys,
   tags: ['autodocs'],
   parameters: {

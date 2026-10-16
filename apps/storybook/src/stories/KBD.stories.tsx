@@ -45,18 +45,3 @@ export const Default: Story = {
     await expect(kbd?.tagName).toBe('KBD')
   },
 }
-
-export const Shortcut: Story = {
-  render: () => {
-    return (
-      <HStack gap={1}>
-        <KBD text="Ctrl" />
-        <KBD text="Alt" />
-        <KBD text="P" />
-      </HStack>
-    )
-  },
-  play: async ({canvas}) => {
-    await expect(canvas.getAllByText(/^(Ctrl|Alt|P)$/)).toHaveLength(3)
-  },
-}

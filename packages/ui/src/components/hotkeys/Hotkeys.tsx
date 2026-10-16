@@ -20,7 +20,7 @@ export function Hotkeys({keys, ...props}: HotkeysProps) {
 
   return (
     <kbd className={clsx(hotkeysClasses, className)} style={style} data-ui="Hotkeys" {...rest}>
-      {(keys as string[]).map((key) => (
+      {keys.map((key) => (
         <KBD key={key} text={key} />
       ))}
     </kbd>
