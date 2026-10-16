@@ -33,7 +33,7 @@ export function Avatar({color = 'gray', size = 1, ...props}: AvatarProps) {
     >
       {src && !error ? (
         <img
-          className="sui-radius-full"
+          className="sui-radius-full sui-width-full sui-height-full"
           src={src}
           alt={ariaLabel || initials}
           onError={() => setError(true)}

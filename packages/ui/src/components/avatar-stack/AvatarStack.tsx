@@ -48,8 +48,8 @@ export function AvatarStack({size = 1, ...props}: AvatarStackProps) {
         </li>
       )}
 
-      {visibleAvatars.map((child) => (
-        <li key={child.props.initials} className="sui-display-flex">
+      {visibleAvatars.map((child, i) => (
+        <li key={`avatar-${i}`} className="sui-display-flex">
           {cloneElement(child, {size: sizeProp})}
         </li>
       ))}
