@@ -5,6 +5,7 @@ import {type PropDef} from '../../types/PropDef'
 export interface SelectProps extends React.ComponentProps<'select'>, FormElementDensityProps {
   /**
    * Used to trigger styling for invalid states.
+   * @remarks Use when form validation fails. Pair with a visible error message.
    */
   hasError?: boolean
 }
