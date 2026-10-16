@@ -320,7 +320,7 @@ export default function Ui5() {
       <Profiler id="Avatar" onRender={handleOnRender}>
         {iterator.map((i) => (
           <AvatarStack key={i}>
-            <Avatar initials="AB" />
+            <Avatar name="AB" />
           </AvatarStack>
         ))}
       </Profiler>

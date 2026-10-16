@@ -14,7 +14,7 @@ export function Avatar({color = 'gray', size = 1, ...props}: AvatarProps) {
     className,
     style,
     'aria-label': ariaLabel,
-    initials,
+    name,
     src,
     ...rest
   } = getProps({color, size, ...props}, avatarProps)
@@ -35,12 +35,12 @@ export function Avatar({color = 'gray', size = 1, ...props}: AvatarProps) {
         <img
           className="sui-radius-full sui-width-full sui-height-full"
           src={src}
-          alt={ariaLabel || initials}
+          alt={ariaLabel || name}
           onError={() => setError(true)}
         />
       ) : (
-        <Text role="img" weight="semibold" aria-label={ariaLabel || initials}>
-          {initials.slice(0, 1)}
+        <Text role="img" weight="semibold" aria-label={ariaLabel || name}>
+          {name.slice(0, 1)}
         </Text>
       )}
     </figure>

@@ -8,8 +8,8 @@ import {TEXT_SIZE} from '../../types/Text'
 export interface AvatarProps extends React.ComponentProps<'figure'> {
   /** Avatar color */
   color?: AvatarColor
-  /** Avatar initials */
-  initials: string
+  /** Avatar name, only first letter will be displayed */
+  name: string
   /** Composite prop for setting height and font size */
   size?: Responsive<AvatarSize>
   /** Avatar image src */
@@ -22,7 +22,7 @@ export const avatarProps: Record<string, PropDef> = {
     className: 'avatar',
     values: AVATAR_COLOR,
   },
-  initials: {
+  name: {
     type: 'string',
   },
   size: {

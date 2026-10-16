@@ -32,20 +32,20 @@ export const Default: Story = {
   render: (props) => {
     return (
       <AvatarStack {...props}>
-        <Avatar initials="AB" />
-        <Avatar color="green" initials="CD" />
+        <Avatar name="Anna" />
+        <Avatar color="green" name="Ben" />
         <Avatar
           color="purple"
-          initials="EF"
+          name="Cole"
           src="https://avatars3.githubusercontent.com/u/406933?s=400&u=af898b0a50ef2ef1248be32dfa1410ccb55f6f65&v=4"
         />
       </AvatarStack>
     )
   },
   play: async ({canvas}) => {
-    await expect(await canvas.findByLabelText('AB')).toBeInTheDocument()
-    await expect(await canvas.findByLabelText('CD')).toBeInTheDocument()
-    await expect(await canvas.findByAltText('EF')).toBeInTheDocument()
+    await expect(await canvas.findByLabelText('Anna')).toBeInTheDocument()
+    await expect(await canvas.findByLabelText('Ben')).toBeInTheDocument()
+    await expect(await canvas.findByAltText('Cole')).toBeInTheDocument()
   },
 }
 
@@ -53,11 +53,11 @@ export const WithMaxLength: Story = {
   render: (props) => {
     return (
       <AvatarStack {...props} maxLength={2}>
-        <Avatar initials="AB" />
-        <Avatar color="green" initials="CD" />
+        <Avatar name="Anna" />
+        <Avatar color="green" name="Ben" />
         <Avatar
           color="purple"
-          initials="EF"
+          name="Cole"
           src="https://avatars3.githubusercontent.com/u/406933?s=400&u=af898b0a50ef2ef1248be32dfa1410ccb55f6f65&v=4"
         />
       </AvatarStack>

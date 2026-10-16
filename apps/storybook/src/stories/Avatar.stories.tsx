@@ -13,7 +13,7 @@ const argTypes = getArgTypes(avatarProps)
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',
   args: {
-    initials: 'AB',
+    name: 'Anna',
   },
   argTypes,
   component: Avatar,
@@ -37,7 +37,7 @@ export const Default: Story = {
     return <Avatar {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByLabelText('AB')).parentElement?.dataset.ui).toBe('Avatar')
+    await expect((await canvas.findByLabelText('Anna')).parentElement?.dataset.ui).toBe('Avatar')
   },
 }
 
@@ -85,6 +85,6 @@ export const WithSrc: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByAltText('AB')).tagName).toBe('IMG')
+    await expect((await canvas.findByAltText('Anna')).tagName).toBe('IMG')
   },
 }
