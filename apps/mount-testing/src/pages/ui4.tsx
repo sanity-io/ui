@@ -2,6 +2,8 @@ import 'ui4/styles.css'
 import {AddIcon} from '@sanity/icons/Add'
 import {Profiler} from 'react'
 import {
+  Avatar,
+  AvatarStack,
   Badge,
   Box,
   Button,
@@ -225,6 +227,15 @@ export default function Ui4() {
       <Profiler id="Badge" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Badge key={i}>Badge</Badge>
+        ))}
+      </Profiler>
+
+      <h2>{count} Avatars & Avatar Stacks</h2>
+      <Profiler id="Avatar" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <AvatarStack key={i}>
+            <Avatar initials="AB" />
+          </AvatarStack>
         ))}
       </Profiler>
 

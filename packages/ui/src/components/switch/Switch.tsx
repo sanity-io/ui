@@ -13,7 +13,7 @@ const switchMarkClassName = suffixClassName('sui-SwitchMark')
 
 /** @beta */
 export function Switch(props: SwitchProps) {
-  const {className, style, disabled, error, label, ...rest} = getProps(props, switchProps)
+  const {className, style, disabled, hasError, label, ...rest} = getProps(props, switchProps)
 
   return (
     <Label
@@ -21,7 +21,7 @@ export function Switch(props: SwitchProps) {
       style={style}
       data-ui="Switch"
       disabled={props.disabled}
-      error={error}
+      error={hasError}
     >
       <VisuallyHidden
         as="input"
@@ -34,7 +34,7 @@ export function Switch(props: SwitchProps) {
 
       <Flex
         as="span"
-        className={clsx(switchMarkClassName, error && 'sui-error')}
+        className={clsx(switchMarkClassName, hasError && 'sui-error')}
         alignItems="center"
         radius={6}
         aria-hidden="true"

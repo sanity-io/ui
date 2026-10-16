@@ -4,10 +4,6 @@ import type {AttributeMods} from '../../../types/AttributeMods'
 /** @internal */
 export const GRID_MODS: AttributeMods = {
   ...LAYOUT_MODS,
-  alignItems: {
-    type: 'style-only',
-    style: 'alignItems',
-  },
   autoCols: {
     type: 'rename-only',
     name: 'gridAutoColumns',
@@ -82,10 +78,6 @@ export const GRID_MODS: AttributeMods = {
       11: 'repeat(11, minmax(0, 1fr))',
       12: 'repeat(12, minmax(0, 1fr))',
     },
-  },
-  justifyContent: {
-    type: 'style-only',
-    style: 'justifyContent',
   },
   rows: {
     type: 'rename-mapped',
