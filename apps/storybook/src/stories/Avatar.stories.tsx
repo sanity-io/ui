@@ -53,7 +53,7 @@ export const Sizes: Story = {
   },
   play: async ({canvas}) => {
     await expect((await canvas.findByLabelText('Avatar 2')).parentElement?.classList).toContain(
-      'sui-text-eyebrow3',
+      'sui-text-body3',
     )
   },
 }

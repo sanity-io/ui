@@ -45,7 +45,7 @@ export const Default: Story = {
   play: async ({canvas}) => {
     await expect(await canvas.findByLabelText('AB')).toBeInTheDocument()
     await expect(await canvas.findByLabelText('CD')).toBeInTheDocument()
-    await expect(await canvas.findByLabelText('EF')).toBeInTheDocument()
+    await expect(await canvas.findByAltText('EF')).toBeInTheDocument()
   },
 }
 
