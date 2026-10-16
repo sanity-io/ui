@@ -1,7 +1,7 @@
 import {type PropDef} from '../../types/PropDef'
 
 /** @public */
-export interface KBDProps {
+export interface KBDProps extends React.ComponentProps<'kbd'> {
   /**
    * Sets KBD's key label.
    */
