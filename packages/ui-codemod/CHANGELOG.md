@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.12
+
+### Patch Changes
+
+- 5012098: fix: remove alignItems and justifyGrid transforms from Grid codemod
+
 ## 1.0.0-alpha.11
 
 ### Patch Changes
