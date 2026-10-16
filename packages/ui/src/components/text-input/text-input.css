@@ -31,13 +31,19 @@
 }
 
 /**
+  * Disabled, read-only
+  */
+.sui-TextInput:is(:disabled, :read-only) {
+  --background-color: var(--inert-background);
+  --border-color: var(--separator-low);
+  pointer-events: none;
+}
+
+/**
   * Disabled
   */
 .sui-TextInput:disabled {
-  --background-color: var(--inert-background);
-  --border-color: var(--separator-low);
   --color: var(--inert-foreground);
-  pointer-events: none;
 }
 
 /**
