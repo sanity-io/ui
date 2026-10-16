@@ -2,7 +2,6 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 import {KBD as KBDV3} from 'ui3'
 
-import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
 import {KBD} from '../../../../packages/ui/src/components/kbd/KBD'
 import {kbdProps} from '../../../../packages/ui/src/components/kbd/kbd.props'
 import {getArgTypes} from '../utils/getArgTypes'
