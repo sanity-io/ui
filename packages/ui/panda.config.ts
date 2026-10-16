@@ -9,16 +9,6 @@ export default defineConfig({
   // every name ever emitted bound to a single style.
   hash: true,
   prefix: 'u',
-  // `prefix` names classes and variables only. The published stylesheet has no
-  // layers (`cascadeLayers: false` in tsdown.config.mts); these names would keep
-  // it out of Tailwind v3's `@layer utilities` and other Panda bundles if it did.
-  layers: {
-    base: 'u-base',
-    recipes: 'u-recipes',
-    reset: 'u-reset',
-    tokens: 'u-tokens',
-    utilities: 'u-utilities',
-  },
   preflight: false,
   presets: [],
   // `styled` in this package is styled-components, not Panda's JSX factory.

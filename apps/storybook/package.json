@@ -17,6 +17,7 @@
   "devDependencies": {
     "@pandacss/vite": "catalog:",
     "@sanity/icons": "catalog:",
+    "@sanity/pandacss-tsdown-plugin": "catalog:",
     "@sanity/ui": "workspace:*",
     "@storybook/addon-a11y": "^10.6.2",
     "@storybook/addon-docs": "^10.6.2",
@@ -32,7 +33,6 @@
     "chrome-devtools-mcp": "^1.10.1",
     "oxc-transform-react": "catalog:",
     "playwright": "^1.64.1",
-    "postcss": "catalog:",
     "react": "catalog:",
     "react-devtools-cdt-mcp": "^0.1.0",
     "react-dom": "catalog:",

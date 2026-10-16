@@ -28,7 +28,25 @@ const WrappingButton = styled(Button)`
   white-space: normal;
 `
 
+function* layerRules(rules: CSSRuleList): Generator<string> {
+  for (const rule of rules) {
+    if (rule instanceof CSSLayerBlockRule || rule instanceof CSSLayerStatementRule) {
+      yield rule.cssText.slice(0, 80)
+    }
+    if (rule instanceof CSSGroupingRule) yield* layerRules(rule.cssRules)
+  }
+}
+
 describe('vanilla-extract cascade', () => {
+  // The names passed to `removeCascadeLayers()` must match Panda's layer names (its defaults, since
+  // `packages/ui/panda.config.ts` doesn't set `layers`)
+  test('the Panda stylesheet has no cascade layers, like styles.css', () => {
+    const found: string[] = []
+    for (const sheet of document.styleSheets) found.push(...layerRules(sheet.cssRules))
+
+    expect(found).toEqual([])
+  })
+
   test('Breadcrumbs expand button margin beats Button runtime margin', async () => {
     await render(<BreadcrumbsDefault maxLength={4} />)
 

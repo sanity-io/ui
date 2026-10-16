@@ -2,11 +2,10 @@ import {createRequire} from 'node:module'
 import path from 'node:path'
 
 import {pandacss} from '@pandacss/vite'
+import {removeCascadeLayers} from '@sanity/pandacss-tsdown-plugin/vite'
 import type {StorybookConfig} from '@storybook/react-vite'
 import viteReact from '@vitejs/plugin-react'
 import {mergeConfig, type Plugin} from 'vite'
-
-import {unlayeredPanda} from './unlayeredPanda.ts'
 
 const require = createRequire(import.meta.url)
 
@@ -77,7 +76,8 @@ const config: StorybookConfig = {
         // @sanity/ui resolves to its TypeScript source (dev `exports`), so its
         // Panda `.css.ts` modules are rewritten to static class strings here
         pandacss({cwd: path.resolve(import.meta.dirname, '../../../packages/ui'), transform: true}),
-        unlayeredPanda(),
+        // Like the published `@sanity/ui/styles.css` (`cascadeLayers: false`)
+        removeCascadeLayers(['reset', 'base', 'tokens', 'recipes', 'utilities']),
         ...(isReactDevtoolsMcpEnabled ? [reactDevtoolsMcp()] : []),
       ],
     })

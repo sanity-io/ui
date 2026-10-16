@@ -1,13 +1,12 @@
 import path from 'node:path'
 
 import {pandacss} from '@pandacss/vite'
+import {removeCascadeLayers} from '@sanity/pandacss-tsdown-plugin/vite'
 import {storybookTest} from '@storybook/addon-vitest/vitest-plugin'
 import viteReact from '@vitejs/plugin-react'
 import {playwright} from '@vitest/browser-playwright'
 import type {Plugin} from 'vite'
 import {defineConfig} from 'vitest/config'
-
-import {unlayeredPanda} from './.storybook/unlayeredPanda.ts'
 
 // 1×1 opaque PNG
 const PNG = Buffer.from(
@@ -69,7 +68,7 @@ export default defineConfig({
         plugins: [
           viteReact(),
           pandacss({cwd: path.resolve(import.meta.dirname, '../../packages/ui'), transform: true}),
-          unlayeredPanda(),
+          removeCascadeLayers(['reset', 'base', 'tokens', 'recipes', 'utilities']),
           slowImage(),
         ],
         test: {
