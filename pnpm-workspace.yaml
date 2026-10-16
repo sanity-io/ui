@@ -78,6 +78,7 @@ minimumReleaseAgeExclude:
   - '@tsdown/*'
   - lightningcss
   - lightningcss-*
+  - chrome-devtools-mcp
   - next
   - oxc-transform-react
   - publint
