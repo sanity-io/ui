@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.15
+
+### Patch Changes
+
+- 5012098: fix: add alignItems and justifyContent to Grid, add sui-display-block to Icon, bump design-tokens to 0.0.2-alpha.7
+
 ## 5.0.0-alpha.14
 
 ### Patch Changes

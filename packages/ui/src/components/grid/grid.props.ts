@@ -1,3 +1,4 @@
+import {flexParentProps, type FlexParentProps} from '../../props/flexParent'
 import {type GapProps, gapProps} from '../../props/gap'
 import {type GridParentProps, gridParentProps} from '../../props/gridParent'
 import {type LayoutProps, layoutProps} from '../../props/layout'
@@ -7,7 +8,11 @@ import type {Responsive} from '../../types/Responsive'
 
 /** @public */
 export interface GridProps<T extends React.ElementType = 'div'>
-  extends GridParentProps, GapProps, LayoutProps {
+  extends
+    Pick<FlexParentProps, 'alignItems' | 'justifyContent'>,
+    GridParentProps,
+    GapProps,
+    LayoutProps {
   /**
    * HTML element or component to render.
    */
@@ -27,6 +32,8 @@ export const gridProps: Record<string, PropDef> = {
     className: 'display',
     values: DISPLAY_GRID,
   },
+  alignItems: flexParentProps['alignItems'] as PropDef,
+  justifyContent: flexParentProps['justifyContent'] as PropDef,
   ...gridParentProps,
   ...gapProps,
   ...layoutProps,
