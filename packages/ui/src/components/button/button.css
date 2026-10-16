@@ -10,7 +10,7 @@
 .sui-Button:hover {
   background: color-mix(
     in srgb,
-    var(--tone-500) 25%,
+    var(--tone-500) 12%,
     var(--background-color)
   );
 }
@@ -18,7 +18,7 @@
 .sui-Button.sui-button-level-primary:hover {
   background: color-mix(
     in srgb,
-    var(--tone-950) 25%,
+    var(--tone-950) 12%,
     var(--background-color)
   );
 }
