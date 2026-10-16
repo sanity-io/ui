@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 5.0.0-alpha.16
+
+### Patch Changes
+
+- dc8fc9d: add avatar, avatar counter, and avatar stack
+- 06129f7: rename the `error` prop on Checkbox, Radio and Switch to `hasError`, to match Select and TextInput
+- 8d1c771: add Eyebrow size 5 (15px), so Eyebrow has six sizes, 0 to 5, like Heading
+
 ## 5.0.0-alpha.15
 
 ### Patch Changes

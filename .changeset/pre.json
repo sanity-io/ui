@@ -13,6 +13,7 @@
     "@sanity/ui-codemod": "1.0.0-alpha.1"
   },
   "changesets": [
+    "all-mice-camp",
     "brown-trees-lay",
     "clear-clowns-guess",
     "clear-roses-bake",
@@ -34,12 +35,14 @@
     "olive-deer-learn",
     "olive-flowers-brake",
     "plain-donkeys-shave",
+    "plain-flags-match",
     "proud-drinks-lick",
     "shaky-ties-wish",
     "sharp-cloths-stand",
     "solid-wolves-wish",
     "sour-olives-cut",
     "spotty-bananas-work",
+    "tall-labels-grow",
     "tidy-icons-subpaths",
     "tidy-mangos-wave",
     "twenty-chefs-sleep"
