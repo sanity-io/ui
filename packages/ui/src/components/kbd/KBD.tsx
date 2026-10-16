@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import {type ComponentPropsWithRef} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
