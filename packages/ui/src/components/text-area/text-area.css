@@ -37,7 +37,6 @@
 .sui-TextArea:is(:disabled, :read-only) {
   --background-color: var(--inert-background);
   --border-color: var(--separator-low);
-  pointer-events: none;
 }
 
 /**
@@ -45,6 +44,7 @@
   */
 .sui-TextArea:disabled {
   --color: var(--inert-foreground);
+  pointer-events: none;
 }
 
 /**
