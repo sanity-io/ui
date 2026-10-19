@@ -67,6 +67,23 @@ export const Error: Story = {
   },
 }
 
+export const ReadOnly: Story = {
+  render: (props) => (
+    <TextInput
+      {...props}
+      id="read-only-text-input"
+      aria-label="Read-only text input"
+      defaultValue="Read-only value"
+      readOnly
+    />
+  ),
+  play: async ({canvas}) => {
+    // The readOnly prop sets the native readonly state.
+    const input = (await canvas.findByLabelText('Read-only text input')) as HTMLInputElement
+    await expect(input.readOnly).toBe(true)
+  },
+}
+
 const TEXT_TYPES = [
   'date',
   'email',
