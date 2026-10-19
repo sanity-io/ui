@@ -8,9 +8,9 @@ const textAreaClassName = suffixClassName('sui-TextArea')
 
 /** @public */
 export function TextArea({
-  autoResize = false,
+  autoResize,
   density = 'regular',
-  hasError = false,
+  hasError,
   rows = 5,
   ...props
 }: TextAreaProps) {
