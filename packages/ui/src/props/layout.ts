@@ -1,4 +1,5 @@
 import {type PropDef} from '../types/PropDef'
+import {TONE} from '../types/Tone'
 import {type BorderProps, borderProps} from './border'
 import {type FlexChildProps, flexChildProps} from './flexChild'
 import {type GridChildProps, gridChildProps} from './gridChild'
@@ -8,14 +9,14 @@ import {type OverflowProps, overflowProps} from './overflow'
 import {type PaddingProps, paddingProps} from './padding'
 import {type PositionProps, positionProps} from './position'
 import {type ShadowProps, shadowProps} from './shadow'
-import {type ToneProps, toneProps} from './tone'
+import {layoutToneProps, type LayoutToneProps, type ToneProps, toneProps} from './tone'
 import {type WidthProps, widthProps} from './width'
 import {type ZIndexProps, zIndexProps} from './zIndex'
 
 /** @public */
 export interface LayoutProps
   extends
-    ToneProps,
+    LayoutToneProps,
     WidthProps,
     HeightProps,
     MarginProps,
@@ -29,7 +30,7 @@ export interface LayoutProps
     ShadowProps {}
 
 export const layoutProps: Record<string, PropDef> = {
-  ...toneProps,
+  ...layoutToneProps,
   ...widthProps,
   ...heightProps,
   ...marginProps,

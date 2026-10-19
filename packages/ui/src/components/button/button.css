@@ -1,4 +1,8 @@
+/**
+  * Button defaults
+  */
 .sui-Button {
+  --hover-blend-color: var(--gray-500);
   background: var(--background-color);
   box-shadow: inset 0 0 0 1px var(--border-color, transparent);
   color: var(--foreground-color);
@@ -10,24 +14,9 @@
 .sui-Button:hover {
   background: color-mix(
     in srgb,
-    var(--tone-500) 12%,
+    var(--hover-blend-color) 12%,
     var(--background-color)
   );
-}
-
-.sui-Button.sui-button-level-primary:hover {
-  background: color-mix(
-    in srgb,
-    var(--tone-950) 12%,
-    var(--background-color)
-  );
-}
-
-.sui-Button[class*='sui-tone']:disabled {
-  --background-color: var(--inert-background);
-  --foreground-color: var(--inert-foreground);
-  --border-color: transparent;
-  pointer-events: none;
 }
 
 .sui-Button:focus-visible {
@@ -39,19 +28,37 @@
   color: inherit;
 }
 
-.sui-Button > .sui-Flex + * {
+.sui-Button > [data-ui="Button-spinner"] + * {
   opacity: 0;
 }
 
+/**
+  * Disabled
+  */
+.sui-Button[class*='sui-tone']:disabled {
+  --background-color: var(--inert-background);
+  --foreground-color: var(--inert-foreground);
+  --border-color: transparent;
+  pointer-events: none;
+}
+
+/**
+  * Primary
+  */
 .sui-button-level-primary {
   --background-color: var(--background-high-emphasized);
   --foreground-color: var(--foreground-low-emphasized);
+  --hover-blend-color: var(--gray-950);
 }
 
 .sui-button-level-primary.sui-tone-critical {
   --background-color: var(--background-low-emphasized);
+  --hover-blend-color: var(--red-950);
 }
 
+/**
+  * Secondary
+  */
 .sui-button-level-secondary {
   --background-color: var(--background-high);
   --foreground-color: var(--foreground-high);
@@ -60,8 +67,12 @@
 
 .sui-button-level-secondary.sui-tone-critical {
   --foreground-color: var(--foreground-low);
+  --hover-blend-color: var(--red-500);
 }
 
+/**
+  * Tertiary
+  */
 .sui-button-level-tertiary {
   --background-color: transparent;
   --foreground-color: var(--foreground-high);
@@ -69,4 +80,5 @@
 
 .sui-button-level-tertiary.sui-tone-critical {
   --foreground-color: var(--foreground-low);
+  --hover-blend-color: var(--red-500);
 }

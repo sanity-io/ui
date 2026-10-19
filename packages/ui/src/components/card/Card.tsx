@@ -10,7 +10,7 @@ const cardClassName = suffixClassName('sui-Card')
 /** @public */
 export function Card<T extends ElementType = 'div'>({
   density = 'regular',
-  tone = 'neutral',
+  tone = 'default',
   ...props
 }: CardProps<T> & Omit<ComponentPropsWithRef<T>, keyof CardProps<T>>) {
   const {as, children, className, style, ...rest} = getProps({density, tone, ...props}, cardProps)

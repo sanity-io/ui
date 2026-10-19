@@ -46,7 +46,13 @@ export function Button<T extends ElementType = 'button'>({
       {...rest}
     >
       {loading && (
-        <Flex position="absolute" inset={0} alignItems="center" justifyContent="center">
+        <Flex
+          position="absolute"
+          inset={0}
+          alignItems="center"
+          justifyContent="center"
+          data-ui="Button-spinner"
+        >
           <Spinner />
         </Flex>
       )}
