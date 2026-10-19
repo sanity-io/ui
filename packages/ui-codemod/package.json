@@ -119,6 +119,14 @@
       "source": "./src/commands/latest/text.ts",
       "default": "./dist/commands/latest/text.js"
     },
+    "./transforms/latest/text-area": {
+      "source": "./src/transforms/latest/text-area/text-area.ts",
+      "default": "./dist/transforms/latest/text-area/text-area.js"
+    },
+    "./latest/text-area": {
+      "source": "./src/commands/latest/text-area.ts",
+      "default": "./dist/commands/latest/text-area.js"
+    },
     "./transforms/latest/text-input": {
       "source": "./src/transforms/latest/text-input/text-input.ts",
       "default": "./dist/transforms/latest/text-input/text-input.js"
@@ -157,6 +165,8 @@
       "./latest/stack": "./dist/commands/latest/stack.js",
       "./transforms/latest/text": "./dist/transforms/latest/text/text.js",
       "./latest/text": "./dist/commands/latest/text.js",
+      "./transforms/latest/text-area": "./dist/transforms/latest/text-area/text-area.js",
+      "./latest/text-area": "./dist/commands/latest/text-area.js",
       "./transforms/latest/text-input": "./dist/transforms/latest/text-input/text-input.js",
       "./latest/text-input": "./dist/commands/latest/text-input.js",
       "./package.json": "./package.json"

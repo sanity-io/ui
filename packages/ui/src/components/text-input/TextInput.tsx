@@ -9,7 +9,7 @@ const textInputClassName = suffixClassName('sui-TextInput')
 /** @public */
 export function TextInput({
   density = 'regular',
-  hasError = false,
+  hasError,
   type = 'text',
   ...props
 }: TextInputProps) {
