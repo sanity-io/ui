@@ -48,12 +48,12 @@
 .sui-button-level-primary {
   --background-color: var(--background-high-emphasized);
   --foreground-color: var(--foreground-low-emphasized);
-  --hover-blend-color: var(--gray-950);
+  --hover-blend-color: light-dark(var(--gray-950), var(--gray-50));
 }
 
 .sui-button-level-primary.sui-tone-critical {
   --background-color: var(--background-low-emphasized);
-  --hover-blend-color: var(--red-950);
+  --hover-blend-color: light-dark(var(--red-950), var(--red-50));
 }
 
 /**
