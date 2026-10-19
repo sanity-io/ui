@@ -520,7 +520,7 @@ importers:
   packages/figma:
     devDependencies:
       '@figma/plugin-typings':
-        specifier: ^1.141.0
+        specifier: ^1.142.0
         version: 1.142.0
       '@sanity/tsdown-config':
         specifier: 'catalog:'
