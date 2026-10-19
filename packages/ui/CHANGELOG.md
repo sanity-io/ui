@@ -1,5 +1,17 @@
 # @sanity/ui
 
+## 5.0.0-alpha.16
+
+### Patch Changes
+
+- dc8fc9d: add avatar, avatar counter, and avatar stack
+- c0ead09: feat: adjust button hover blend to 12%
+- 6b8fdf8: add TextArea component; add readonly styles for TextInput
+- 06129f7: rename the `error` prop on Checkbox, Radio and Switch to `hasError`, to match Select and TextInput
+- a5cd0d3: add KBD component
+- a5cd0d3: add Hotkeys component
+- 8d1c771: add Eyebrow size 5 (15px), so Eyebrow has six sizes, 0 to 5, like Heading
+
 ## 5.0.0-alpha.15
 
 ### Patch Changes
