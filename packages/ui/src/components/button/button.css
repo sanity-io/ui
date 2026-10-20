@@ -2,6 +2,8 @@
   * Button defaults
   */
 .sui-Button {
+  --background-color: hsl(from var(--backdrop) h s l / var(--opacity-high));
+  --foreground-color: var(--foreground-high);
   --hover-blend-color: var(--gray-500);
   background: var(--background-color);
   box-shadow: inset 0 0 0 1px var(--border-color, transparent);
@@ -60,8 +62,6 @@
   * Secondary
   */
 .sui-button-level-secondary {
-  --background-color: var(--background-high);
-  --foreground-color: var(--foreground-high);
   --border-color: var(--separator-low)
 }
 
@@ -73,11 +73,6 @@
 /**
   * Tertiary
   */
-.sui-button-level-tertiary {
-  --background-color: transparent;
-  --foreground-color: var(--foreground-high);
-}
-
 .sui-button-level-tertiary.sui-tone-critical {
   --foreground-color: var(--foreground-low);
   --hover-blend-color: var(--red-500);
