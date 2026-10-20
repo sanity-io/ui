@@ -9,7 +9,7 @@
   box-shadow: inset 0 0 0 1px var(--border-color, transparent);
   color: var(--foreground-color);
   text-decoration: none;
-  transition: var(--hover-transition);
+  transition: var(--hover-transition), transform 100ms linear;
   appearance: none;
 }
 
@@ -24,6 +24,10 @@
 .sui-Button:focus-visible {
   outline: var(--focus-outline);
   outline-offset: var(--focus-offset);
+}
+
+.sui-Button:active {
+  transform: scale(0.975);
 }
 
 .sui-Button :is([data-sanity-icon], .sui-Spinner, .sui-Text) {
