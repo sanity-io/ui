@@ -169,14 +169,14 @@ settings:
 catalogs:
   default:
     '@pandacss/dev':
-      specifier: ^2.2.0
-      version: 2.2.0
+      specifier: ^2.3.0
+      version: 2.3.0
     '@pandacss/transformer':
-      specifier: ^2.2.0
-      version: 2.2.0
+      specifier: ^2.3.0
+      version: 2.3.0
     '@pandacss/vite':
-      specifier: ^2.2.0
-      version: 2.2.0
+      specifier: ^2.3.0
+      version: 2.3.0
     '@sanity/color':
       specifier: ^3.0.9
       version: 3.0.9
@@ -373,13 +373,13 @@ importers:
     devDependencies:
       '@pandacss/vite':
         specifier: 'catalog:'
-        version: 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/icons':
         specifier: 'catalog:'
         version: 5.2.3(react@19.3.1)
       '@sanity/pandacss-tsdown-plugin':
         specifier: 'catalog:'
-        version: 0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -494,7 +494,7 @@ importers:
     devDependencies:
       '@pandacss/vite':
         specifier: 'catalog:'
-        version: 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sindresorhus/slugify':
         specifier: ^2.2.1
         version: 2.2.1
@@ -524,7 +524,7 @@ importers:
         version: 1.142.0
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.31.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.31.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/ui':
         specifier: workspace:*
         version: link:../ui
@@ -573,19 +573,19 @@ importers:
     devDependencies:
       '@pandacss/dev':
         specifier: 'catalog:'
-        version: 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)
+        version: 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)
       '@pandacss/transformer':
         specifier: 'catalog:'
-        version: 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@pandacss/vite':
         specifier: 'catalog:'
-        version: 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/pandacss-tsdown-plugin':
         specifier: 'catalog:'
-        version: 0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.31.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.31.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@testing-library/dom':
         specifier: ^10.4.2
         version: 10.4.2
@@ -3352,13 +3352,19 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@pandacss/cli@2.2.0':
-    resolution: {integrity: sha512-bDPfyD39jfFYtVg4IsTFamgGOK3r774dq16Qz8va3FWNSOPAatclkQXmvNqCqIKVliRVHWzcLMHBeTKlL2n7/A==}
+  '@pandacss/cli@2.3.0':
+    resolution: {integrity: sha512-gmJRzj6dIwTL00Yp46U8DyZ01PcNoo+DvGY09BZ0O0nstRY1mthqZRYPnibSrKet3/Ygu6keVzBYi6Vg/9ah+g==}
     engines: {node: '>=22'}
     hasBin: true
 
   '@pandacss/compiler-darwin-arm64@2.2.0':
     resolution: {integrity: sha512-TIG6KTyD2tB2Yh3XkcFrJ2fZbmlF0Sfvr2hHTAAftYRMSnhKA2v1kI3JTxLHFQsr1Qr0cbYkrVfiGBTdiOu2hg==}
+    engines: {node: '>=22'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@pandacss/compiler-darwin-arm64@2.3.0':
+    resolution: {integrity: sha512-3Qk2jCRhO7hGR3mbYLihoIqgV5gW3SDvXU245Mjc9CzP/YEWwhjHaGRu2cbU93WAi7Q8ETiy2dsQ7X8ahsEERA==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [darwin]
@@ -3369,8 +3375,21 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@pandacss/compiler-darwin-x64@2.3.0':
+    resolution: {integrity: sha512-0Y7oiN11foxW36U3E0nkOAb6ifUqcrpLYWDRz0u/X7Ix/PxHpYUilYz7o/7PoLRlorpL8TbpWhl7sIPIUA2a0A==}
+    engines: {node: '>=22'}
+    cpu: [x64]
+    os: [darwin]
+
   '@pandacss/compiler-linux-arm64-gnu@2.2.0':
     resolution: {integrity: sha512-NddWzvWjp/8aBB4AB/7HSNIi3hLHYqD8W/Wd/QHJ+TZtKBhXByK7YStrKBQpcXpXKgtwVShA2V+Y//tK9Q+CDA==}
+    engines: {node: '>=22'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@pandacss/compiler-linux-arm64-gnu@2.3.0':
+    resolution: {integrity: sha512-8zJylUQDVdNtF4Bo/l7d5tPf35yiwREry9yAl+tg6Fn8ga+MYQXjr5NTAknn6qS8fUfXx0Ic9DA8MYHDxpRVvg==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [linux]
@@ -3383,8 +3402,22 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@pandacss/compiler-linux-arm64-musl@2.3.0':
+    resolution: {integrity: sha512-TRtjESwVp8WZSNQ0aZFWvX5Yxql77xb/pFyhL4rCvjLikgPiXtzC34S3nWBMbzMr24Fq2nynofF4ukXP5Yi+tQ==}
+    engines: {node: '>=22'}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
   '@pandacss/compiler-linux-x64-gnu@2.2.0':
     resolution: {integrity: sha512-y482diqp5o/aijmW6q263htgkEx/h0bS9At8GErlvmMxZFYfqZ8bL1v11CHWrruve06q82dqc4rP00NemyEYyA==}
+    engines: {node: '>=22'}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@pandacss/compiler-linux-x64-gnu@2.3.0':
+    resolution: {integrity: sha512-u1OZFF3CSRXrXUZq7IzLZ6fA4QuESjvQGNlDEwMCGsl+RxyCufp8bv+0E1znVQC/UUxrJ0ehZlUSc1wsqq7xcg==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [linux]
@@ -3397,12 +3430,29 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@pandacss/compiler-linux-x64-musl@2.3.0':
+    resolution: {integrity: sha512-d6Hj6OlfJg8L21I0rqtK0tlBsolNzaKIaJZX/TL3iSiu+Z/h5q9W1wdqsVRsrs4DcwbRqGHhPZcOhD6+9varRA==}
+    engines: {node: '>=22'}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
   '@pandacss/compiler-shared@2.2.0':
     resolution: {integrity: sha512-4UTc4MM31p/AHtMy9gI8o9LsIya17nlOfz+2iR59fvGe2pFkFNyqFZG42yb8HOh6TAmeE/9LGifCmuyg9r1qAQ==}
     engines: {node: '>=22'}
 
+  '@pandacss/compiler-shared@2.3.0':
+    resolution: {integrity: sha512-kO4s4ZeWCmrBBFolPMxNtKFwP9wwdyfDvHFo2ZOOS2PMb27nlVFKxQA2XKzR6sjYK5V5OmEmD/HBtp0KAPBpfA==}
+    engines: {node: '>=22'}
+
   '@pandacss/compiler-win32-arm64-msvc@2.2.0':
     resolution: {integrity: sha512-pvSF+B4S6LScWuFJRMK/3nSCQRYv/tYm1QRGoaoSPlMANn5WCayqJ9qM1Jq8PDwl/9wqHpORwNr0UFJCkSwTww==}
+    engines: {node: '>=22'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@pandacss/compiler-win32-arm64-msvc@2.3.0':
+    resolution: {integrity: sha512-G9Hmb40j9oPW8bk0pnZIxeUhgfEQOffPqy3RUMvtq+GtMYt28GJXOU8eQYQPEi93UUrioVoor/i5T5iBW3sdDw==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [win32]
@@ -3413,16 +3463,30 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@pandacss/compiler-win32-x64-msvc@2.3.0':
+    resolution: {integrity: sha512-GBCnQh+eqwkfnWEMjZ6oYqO1n8JMyV46HyQkWwemWIA5O+nv3Ls9su1SAvUsjOS5ZIj4BtEWoXORgliEhI3eGg==}
+    engines: {node: '>=22'}
+    cpu: [x64]
+    os: [win32]
+
   '@pandacss/compiler@2.2.0':
     resolution: {integrity: sha512-wuaOhKNwUoF+18qBA9RtcQeTbbRKgDGOX8ynCPkobsT6I3tsXX4NSbeD/G25qF/262DYwcdbEldMgollOJ5zfQ==}
+    engines: {node: '>=22'}
+
+  '@pandacss/compiler@2.3.0':
+    resolution: {integrity: sha512-XZMJAnIRDxjfdpgJ44nRXtNPS8KiWM46xvNUj9x1KXf9QRPW17asXJ7XnRsQM/IsevLjRD4PFassqeM/+dl5RQ==}
     engines: {node: '>=22'}
 
   '@pandacss/config@2.2.0':
     resolution: {integrity: sha512-iPNLaTo+CmF94eu9s+KiooDXhV2hJ28fjgX/1RPm57lUhzMKsYs9gBb4RruQXF+UBQaFiagLeESUJrD96cwdvA==}
     engines: {node: '>=22'}
 
-  '@pandacss/dev@2.2.0':
-    resolution: {integrity: sha512-tflRs0WLaESwmHptVls+SrkJpjepf9M29LJwjeh2H3BxH9BA1+/2riWFGweXoW7vmylkG98ns6BDqLBkqEVUJg==}
+  '@pandacss/config@2.3.0':
+    resolution: {integrity: sha512-817o73rmWD35TzHxQkekrTGQdOgccV9KlEBwtrTT1ajjNZrRvEjw1JwUfDSloIk/yP9v4wX0iDqtYLF+wMDjmg==}
+    engines: {node: '>=22'}
+
+  '@pandacss/dev@2.3.0':
+    resolution: {integrity: sha512-F+vqt4BB11MJI0d/vpDsk3dI2gVLdij1b/d/HyYMbwckRzp98PljC3JcO88gJoIMfLDXMpcZKRykX+sQytgE7g==}
     engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
@@ -3431,8 +3495,8 @@ packages:
       postcss:
         optional: true
 
-  '@pandacss/postcss@2.2.0':
-    resolution: {integrity: sha512-n4y0YJ4oLtr29MFn+5lFv/S3vju4/Wc0DDDf7QnI1EN9SfsunRSaNpxuMrze8HxPo/7K4J6loLRzl7bKuB05aA==}
+  '@pandacss/postcss@2.3.0':
+    resolution: {integrity: sha512-t93rQuU/+qljqDSFcUIso/yIHZE61xwmK8jlxIF2ZN95inoc83ncGHuF9/Rg6SunxwCVHNpefeJX76wwHfc7cw==}
     engines: {node: '>=22'}
     peerDependencies:
       postcss: '>=8'
@@ -3452,12 +3516,31 @@ packages:
       webpack:
         optional: true
 
+  '@pandacss/transformer@2.3.0':
+    resolution: {integrity: sha512-oWD7+ByJlPwOJxWReYVlLdV8zYdPiIdH4tueUSt1Niph5N8rfUnONx8GewHPiafhMaV65J53q5vvTMKHb6V48w==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      rollup: '>=3.0.0'
+      vite: '>=6.0.0'
+      webpack: '>=5.0.0'
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+
   '@pandacss/types@2.2.0':
     resolution: {integrity: sha512-XeUt/mWUkghn4oyKqcFMz6whTr4SHxmiKksNVNX3EAB1ceyrvQ68tHrYWNK59NtBrRPeJxSOibHhZWVRqHcuvQ==}
     engines: {node: '>=22'}
 
-  '@pandacss/vite@2.2.0':
-    resolution: {integrity: sha512-fNyyujbfb8DJbFtNHyVU64viZBsTc1fXIpyz5eT7w0P8bNptybcDIIBVkb8EGML76Ggkhb8tQsRIOme0LAUyDQ==}
+  '@pandacss/types@2.3.0':
+    resolution: {integrity: sha512-YbwB+9U9DhlFrKOz6+f2rMXFI7j7qSs8xhiGzvrWf8HVZQkcn2Yr3L+Q8u5ARr5qGErjA7UC4F80+eg6rnLjnA==}
+    engines: {node: '>=22'}
+
+  '@pandacss/vite@2.3.0':
+    resolution: {integrity: sha512-W6/NtN3eHVNk4cU0GSBYf3mbTp/vTMmUuynBqenmiwRM4WWIQxnYfClTosiLyP/NN0iEWbvrwnHwtzeKVYwMPg==}
     engines: {node: '>=22'}
     peerDependencies:
       vite: '>=6.0.0'
@@ -10803,13 +10886,13 @@ snapshots:
   '@oxlint/binding-win32-x64-msvc@1.88.0':
     optional: true
 
-  '@pandacss/cli@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
+  '@pandacss/cli@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
     dependencies:
       '@clack/prompts': 1.7.0
-      '@pandacss/compiler': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
-      '@pandacss/compiler-shared': 2.2.0
-      '@pandacss/config': 2.2.0
-      '@pandacss/types': 2.2.0
+      '@pandacss/compiler': 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler-shared': 2.3.0
+      '@pandacss/config': 2.3.0
+      '@pandacss/types': 2.3.0
       '@parcel/watcher': 2.5.6
       citty: 0.2.2
       fflate: 0.8.3
@@ -10822,29 +10905,57 @@ snapshots:
   '@pandacss/compiler-darwin-arm64@2.2.0':
     optional: true
 
+  '@pandacss/compiler-darwin-arm64@2.3.0':
+    optional: true
+
   '@pandacss/compiler-darwin-x64@2.2.0':
+    optional: true
+
+  '@pandacss/compiler-darwin-x64@2.3.0':
     optional: true
 
   '@pandacss/compiler-linux-arm64-gnu@2.2.0':
     optional: true
 
+  '@pandacss/compiler-linux-arm64-gnu@2.3.0':
+    optional: true
+
   '@pandacss/compiler-linux-arm64-musl@2.2.0':
+    optional: true
+
+  '@pandacss/compiler-linux-arm64-musl@2.3.0':
     optional: true
 
   '@pandacss/compiler-linux-x64-gnu@2.2.0':
     optional: true
 
+  '@pandacss/compiler-linux-x64-gnu@2.3.0':
+    optional: true
+
   '@pandacss/compiler-linux-x64-musl@2.2.0':
+    optional: true
+
+  '@pandacss/compiler-linux-x64-musl@2.3.0':
     optional: true
 
   '@pandacss/compiler-shared@2.2.0':
     dependencies:
       '@pandacss/types': 2.2.0
 
+  '@pandacss/compiler-shared@2.3.0':
+    dependencies:
+      '@pandacss/types': 2.3.0
+
   '@pandacss/compiler-win32-arm64-msvc@2.2.0':
     optional: true
 
+  '@pandacss/compiler-win32-arm64-msvc@2.3.0':
+    optional: true
+
   '@pandacss/compiler-win32-x64-msvc@2.2.0':
+    optional: true
+
+  '@pandacss/compiler-win32-x64-msvc@2.3.0':
     optional: true
 
   '@pandacss/compiler@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
@@ -10866,6 +10977,25 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
+  '@pandacss/compiler@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)':
+    dependencies:
+      '@napi-rs/wasm-runtime': 1.2.5(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler-shared': 2.3.0
+      '@pandacss/config': 2.3.0
+      '@pandacss/types': 2.3.0
+    optionalDependencies:
+      '@pandacss/compiler-darwin-arm64': 2.3.0
+      '@pandacss/compiler-darwin-x64': 2.3.0
+      '@pandacss/compiler-linux-arm64-gnu': 2.3.0
+      '@pandacss/compiler-linux-arm64-musl': 2.3.0
+      '@pandacss/compiler-linux-x64-gnu': 2.3.0
+      '@pandacss/compiler-linux-x64-musl': 2.3.0
+      '@pandacss/compiler-win32-arm64-msvc': 2.3.0
+      '@pandacss/compiler-win32-x64-msvc': 2.3.0
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+
   '@pandacss/config@2.2.0':
     dependencies:
       '@pandacss/compiler-shared': 2.2.0
@@ -10877,23 +11007,34 @@ snapshots:
       microdiff: 1.5.0
       rolldown: 1.2.7
 
-  '@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)':
+  '@pandacss/config@2.3.0':
     dependencies:
-      '@pandacss/cli': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
-      '@pandacss/compiler': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
-      '@pandacss/config': 2.2.0
-      '@pandacss/postcss': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)
-      '@pandacss/types': 2.2.0
+      '@pandacss/compiler-shared': 2.3.0
+      '@pandacss/types': 2.3.0
+      acorn: 8.19.0
+      acorn-walk: 8.3.5
+      javascript-stringify: 2.1.0
+      magic-string: 0.30.21
+      microdiff: 1.5.0
+      rolldown: 1.2.7
+
+  '@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)':
+    dependencies:
+      '@pandacss/cli': 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler': 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      '@pandacss/config': 2.3.0
+      '@pandacss/postcss': 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)
+      '@pandacss/types': 2.3.0
     optionalDependencies:
       postcss: 8.5.30
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  '@pandacss/postcss@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)':
+  '@pandacss/postcss@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)':
     dependencies:
-      '@pandacss/compiler': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
-      '@pandacss/compiler-shared': 2.2.0
+      '@pandacss/compiler': 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler-shared': 2.3.0
       postcss: 8.5.30
     transitivePeerDependencies:
       - '@emnapi/core'
@@ -10910,13 +11051,26 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
+  '@pandacss/transformer@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+    dependencies:
+      '@pandacss/compiler': 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler-shared': 2.3.0
+      unplugin: 2.3.11
+    optionalDependencies:
+      vite: 8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
+    transitivePeerDependencies:
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+
   '@pandacss/types@2.2.0': {}
 
-  '@pandacss/vite@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+  '@pandacss/types@2.3.0': {}
+
+  '@pandacss/vite@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
-      '@pandacss/compiler': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
-      '@pandacss/compiler-shared': 2.2.0
-      '@pandacss/transformer': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+      '@pandacss/compiler': 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler-shared': 2.3.0
+      '@pandacss/transformer': 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       vite: 8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
     transitivePeerDependencies:
       - '@emnapi/core'
@@ -11760,7 +11914,7 @@ snapshots:
       - '@types/react'
       - vitest
 
-  '@sanity/pandacss-tsdown-plugin@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+  '@sanity/pandacss-tsdown-plugin@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
       '@pandacss/compiler': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)
       '@pandacss/transformer': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -11768,7 +11922,7 @@ snapshots:
       postcss: 8.5.30
       tsdown: 0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1)
     optionalDependencies:
-      '@pandacss/dev': 2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)
+      '@pandacss/dev': 2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30)
       vite: 8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
     transitivePeerDependencies:
       - '@emnapi/core'
@@ -11935,7 +12089,7 @@ snapshots:
     dependencies:
       yaml: 2.9.1
 
-  '@sanity/tsdown-config@0.31.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+  '@sanity/tsdown-config@0.31.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.154.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
       '@microsoft/api-extractor': 7.59.4(@types/node@24.19.2)
       '@microsoft/tsdoc-config': 0.18.3
@@ -11954,7 +12108,7 @@ snapshots:
     optionalDependencies:
       '@babel/core': 7.29.7(supports-color@8.1.1)
       '@rolldown/plugin-babel': 0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
-      '@sanity/pandacss-tsdown-plugin': 0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.2.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+      '@sanity/pandacss-tsdown-plugin': 0.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.30))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       oxc-transform-react: 0.154.0
     transitivePeerDependencies:
       - '@types/node'
