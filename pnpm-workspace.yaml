@@ -34,14 +34,14 @@ catalog:
   '@types/react-is': ^19.3.0
   '@vitejs/plugin-react': ^6.1.2
   motion: ^14.4.0
-  oxc-transform-react: ^0.154.0
+  oxc-transform-react: ^0.155.0
   react: ^19.3.1
   react-dom: ^19.3.1
   react-is: ^19.3.1
   react-refractor: ^4.0.0
   refractor: ^5.0.0
   rimraf: ^5.0.5
-  sanity: ^6.19.0
+  sanity: ^6.20.0
   styled-components: ^6.6.0
   tsdown: ^0.23.1
   typescript: 7.0.2
@@ -71,11 +71,13 @@ allowBuilds:
 # every install, so they have to stay until the version is a day old.
 minimumReleaseAgeExclude:
   - '@next/*'
+  - '@oxlint/*'
   - '@oxc-transform-react/*'
   - '@pandacss/*'
   - '@portabletext/*'
   - '@sanity/*'
   - '@sanity-labs/*'
+  - '@storybook/*'
   - '@tsdown/*'
   - lightningcss
   - lightningcss-*
@@ -84,6 +86,7 @@ minimumReleaseAgeExclude:
   - oxc-transform-react
   - publint
   - sanity
+  - storybook
   - tsdown
   - verkit
   - framer-motion
@@ -118,26 +121,7 @@ minimumReleaseAgeExclude:
   - '@oxfmt/binding-win32-ia32-msvc@0.73.0'
   - '@oxfmt/binding-win32-x64-msvc@0.73.0'
   - oxfmt@0.73.0
-  - '@oxlint/binding-android-arm-eabi@1.88.0'
-  - '@oxlint/binding-android-arm64@1.88.0'
-  - '@oxlint/binding-darwin-arm64@1.88.0'
-  - '@oxlint/binding-darwin-x64@1.88.0'
-  - '@oxlint/binding-freebsd-x64@1.88.0'
-  - '@oxlint/binding-linux-arm-gnueabihf@1.88.0'
-  - '@oxlint/binding-linux-arm-musleabihf@1.88.0'
-  - '@oxlint/binding-linux-arm64-gnu@1.88.0'
-  - '@oxlint/binding-linux-arm64-musl@1.88.0'
-  - '@oxlint/binding-linux-ppc64-gnu@1.88.0'
-  - '@oxlint/binding-linux-riscv64-gnu@1.88.0'
-  - '@oxlint/binding-linux-riscv64-musl@1.88.0'
-  - '@oxlint/binding-linux-s390x-gnu@1.88.0'
-  - '@oxlint/binding-linux-x64-gnu@1.88.0'
-  - '@oxlint/binding-linux-x64-musl@1.88.0'
-  - '@oxlint/binding-openharmony-arm64@1.88.0'
-  - '@oxlint/binding-win32-arm64-msvc@1.88.0'
-  - '@oxlint/binding-win32-ia32-msvc@1.88.0'
-  - '@oxlint/binding-win32-x64-msvc@1.88.0'
-  - oxlint@1.88.0
+  - oxlint
   - '@lezer/highlight@1.2.5'
   - '@vitejs/plugin-react@6.1.2'
   - styled-components@6.6.0
