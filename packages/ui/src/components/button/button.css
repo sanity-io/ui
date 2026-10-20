@@ -26,6 +26,7 @@
     var(--tone-950) 12%,
     var(--background-color)
   );
+  color: var(--foreground-low-emphasized);
 }
 
 .sui-Button[class*='sui-tone']:disabled {
