@@ -190,8 +190,8 @@ catalogs:
       specifier: ^0.3.1
       version: 0.3.1
     '@sanity/tsdown-config':
-      specifier: ^0.31.1
-      version: 0.31.1
+      specifier: ^0.31.2
+      version: 0.31.2
     '@types/node':
       specifier: ^24.19.2
       version: 24.19.2
@@ -524,7 +524,7 @@ importers:
         version: 1.142.0
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.31.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.31.2(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/ui':
         specifier: workspace:*
         version: link:../ui
@@ -585,7 +585,7 @@ importers:
         version: 0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@sanity/tsdown-config':
         specifier: 'catalog:'
-        version: 0.31.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
+        version: 0.31.2(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       '@testing-library/dom':
         specifier: ^10.4.2
         version: 10.4.2
@@ -4278,8 +4278,8 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  '@sanity/tsdown-config@0.31.1':
-    resolution: {integrity: sha512-YSmDjkcIRL5N0Du6MdDqql7No6wCqxB0irQyhMAKx71qG3bNDIM1iT7JaUFWDLsx20Vd5ih6KFmUihFRlWrm6w==}
+  '@sanity/tsdown-config@0.31.2':
+    resolution: {integrity: sha512-HJrHz08SjxRj7QTfAFDlGJDo4o9Wh5KxvBcDfOuYjx3bhL8j2xAoYtSEcjubmNY+ZYJrvnmbopl8PovOH/YpDQ==}
     engines: {node: ^22.18.0 || ^24.11.0 || >=26.0.0}
     peerDependencies:
       '@babel/core': '*'
@@ -5355,8 +5355,8 @@ packages:
   browserify-zlib@0.1.4:
     resolution: {integrity: sha512-19OEpq7vWgsH6WkvkBJQDFvJS1uPcbFOQ4v9CU839dO+ZZXUZO6XpE6hNCqvlIIj+4fZvRiJ6DsAQ382GwiyTQ==}
 
-  browserslist@4.29.3:
-    resolution: {integrity: sha512-1R4kiYKXGViqEN0CnoDrXc1StD9niAwu+j2dukWzrD4bJgsD4lDmEp0CRbc6E/vYJIfTHwPmwyaKtVSudICdPA==}
+  browserslist@4.29.4:
+    resolution: {integrity: sha512-2TcbbiwXEq+N0kD36tykpCfyyQigUXmuwNQbnPp4Xk4PX9JOqVIKjJlIDjpH7uY6tmRGoAd+apeT1p60T8wsdA==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -8577,7 +8577,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.29.7
       '@babel/helper-validator-option': 7.29.7
-      browserslist: 4.29.3
+      browserslist: 4.29.4
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -12124,7 +12124,7 @@ snapshots:
     dependencies:
       yaml: 2.9.1
 
-  '@sanity/tsdown-config@0.31.1(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
+  '@sanity/tsdown-config@0.31.2(@babel/core@7.29.7(supports-color@8.1.1))(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@sanity/pandacss-tsdown-plugin@0.3.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@pandacss/dev@2.3.0(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(postcss@8.5.31))(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(@types/node@24.19.2)(oxc-transform-react@0.155.0)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))(typescript@7.0.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:
       '@microsoft/api-extractor': 7.59.4(@types/node@24.19.2)
       '@microsoft/tsdoc-config': 0.18.3
@@ -12132,7 +12132,7 @@ snapshots:
       '@sanity/vanilla-extract-tsdown-plugin': 0.5.1(rolldown@1.2.14)(tsdown@0.23.1(oxc-resolver@11.24.2)(publint@0.3.25)(typescript@7.0.2)(unrun@0.3.1))
       '@typescript/typescript6': 6.0.2
       '@vitejs/plugin-react': 6.1.2(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7(supports-color@8.1.1))(@babel/runtime@7.29.10)(rolldown@1.2.14)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)))(oxc-transform-react@0.155.0)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
-      browserslist: 4.29.3
+      browserslist: 4.29.4
       jsonc-parser: 3.3.1
       lightningcss: 1.33.0
       package-manager-detector: 1.9.0
@@ -13303,13 +13303,13 @@ snapshots:
     dependencies:
       pako: 0.2.9
 
-  browserslist@4.29.3:
+  browserslist@4.29.4:
     dependencies:
       baseline-browser-mapping: 2.11.29
       caniuse-lite: 1.0.30001816
       electron-to-chromium: 1.5.459
       node-releases: 2.0.59
-      update-browserslist-db: 1.3.4(browserslist@4.29.3)
+      update-browserslist-db: 1.3.4(browserslist@4.29.4)
 
   buffer-from@1.1.2: {}
 
@@ -13487,7 +13487,7 @@ snapshots:
 
   core-js-compat@3.50.0:
     dependencies:
-      browserslist: 4.29.3
+      browserslist: 4.29.4
 
   core-util-is@1.0.3: {}
 
@@ -16246,9 +16246,9 @@ snapshots:
     dependencies:
       rolldown: 1.2.14
 
-  update-browserslist-db@1.3.4(browserslist@4.29.3):
+  update-browserslist-db@1.3.4(browserslist@4.29.4):
     dependencies:
-      browserslist: 4.29.3
+      browserslist: 4.29.4
       escalade: 3.2.0
       picocolors: 1.1.1
 
