@@ -45,11 +45,19 @@ export const Default: Story = {
 
 export const Disabled: Story = {
   render: (props) => {
-    return <Button {...props} disabled text="Disabled Button" />
+    return (
+      <HStack gap={3}>
+        <Button {...props} level="primary" disabled text="Disabled Primary Button" />
+        <Button {...props} level="secondary" disabled text="Disabled Secondary Button" />
+        <Button {...props} level="tertiary" disabled text="Disabled Tertiary Button" />
+        <Button {...props} tone="critical" disabled text="Disabled Critical Button" />
+      </HStack>
+    )
   },
   play: async ({canvas}) => {
     await expect(
-      ((await canvas.findByText('Disabled Button')).parentElement as HTMLButtonElement)?.disabled,
+      ((await canvas.findByText('Disabled Primary Button')).parentElement as HTMLButtonElement)
+        ?.disabled,
     ).toBe(true)
   },
 }

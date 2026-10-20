@@ -1,7 +1,4 @@
 :root {
-  --backdrop: light-dark(var(--white), var(--black));
-  --brand-background: #eb5228;
-  --brand-foreground: var(--black);
   --placeholder-opacity: 0.64;
   --overlay-opacity: var(--opacity-mid);
   /* State */
@@ -15,7 +12,7 @@
   --focus-outline: 2px solid var(--blue-500);
   --focus-offset: 2px;
   --hover-lightness-delta: 0.125;
-  --hover-transition: border-color 100ms linear, background-color 100ms linear;
+  --hover-transition: border-color 100ms linear, background-color 100ms linear, transform 100ms linear;
   --inert-background: light-dark(var(--gray-50), var(--gray-950));
   --inert-foreground: light-dark(var(--gray-400), var(--gray-600));
   --fade-in-transition:
