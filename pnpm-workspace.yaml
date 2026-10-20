@@ -72,6 +72,7 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - '@next/*'
   - '@oxc-transform-react/*'
+  - '@pandacss/*'
   - '@portabletext/*'
   - '@sanity/*'
   - '@sanity-labs/*'
