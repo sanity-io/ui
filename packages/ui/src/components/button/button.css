@@ -2,12 +2,14 @@
   * Button defaults
   */
 .sui-Button {
+  --background-color: hsl(from var(--backdrop) h s l / var(--opacity-high));
+  --foreground-color: var(--foreground-high);
   --hover-blend-color: var(--gray-500);
   background: var(--background-color);
   box-shadow: inset 0 0 0 1px var(--border-color, transparent);
   color: var(--foreground-color);
   text-decoration: none;
-  transition: var(--hover-transition);
+  transition: var(--hover-transition), transform 100ms linear;
   appearance: none;
 }
 
@@ -22,6 +24,10 @@
 .sui-Button:focus-visible {
   outline: var(--focus-outline);
   outline-offset: var(--focus-offset);
+}
+
+.sui-Button:active {
+  transform: scale(0.975);
 }
 
 .sui-Button :is([data-sanity-icon], .sui-Spinner, .sui-Text) {
@@ -60,8 +66,6 @@
   * Secondary
   */
 .sui-button-level-secondary {
-  --background-color: var(--background-high);
-  --foreground-color: var(--foreground-high);
   --border-color: var(--separator-low)
 }
 
@@ -74,11 +78,6 @@
 /**
   * Tertiary
   */
-.sui-button-level-tertiary {
-  --background-color: transparent;
-  --foreground-color: var(--foreground-high);
-}
-
 .sui-button-level-tertiary.sui-tone-critical {
   --foreground-color: var(--foreground-low);
   --hover-blend-color: var(--red-500);
