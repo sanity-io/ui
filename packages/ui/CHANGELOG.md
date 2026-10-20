@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 4.4.10
+
+### Patch Changes
+
+- [#3255](https://github.com/sanity-io/ui/pull/3255) [`cf691eb`](https://github.com/sanity-io/ui/commit/cf691ebd8e5b10aec0db25e8a71faa972e860624) Thanks [@squiggler-app](https://github.com/apps/squiggler-app)! - fix(deps): update dependency motion to ^14.4.0
+
 ## 4.4.9
 
 ### Patch Changes
