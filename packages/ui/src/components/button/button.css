@@ -70,6 +70,7 @@
 }
 
 .sui-button-level-secondary.sui-tone-critical {
+  --background-color: var(--background-low);
   --foreground-color: var(--foreground-low);
   --hover-blend-color: var(--red-500);
 }
