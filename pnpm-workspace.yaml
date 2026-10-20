@@ -20,9 +20,9 @@ catalogMode: prefer
 # so that keeps an explicit range there when needed. (See packageExtensions for
 # vitest peer wiring across packages that share different vitest versions.)
 catalog:
-  '@pandacss/dev': ^2.2.0
-  '@pandacss/transformer': ^2.2.0
-  '@pandacss/vite': ^2.2.0
+  '@pandacss/dev': ^2.3.0
+  '@pandacss/transformer': ^2.3.0
+  '@pandacss/vite': ^2.3.0
   '@sanity/color': ^3.0.9
   '@sanity/icons': ^5.2.3
   '@sanity/logos': ^2.2.6
@@ -73,6 +73,7 @@ minimumReleaseAgeExclude:
   - '@next/*'
   - '@oxlint/*'
   - '@oxc-transform-react/*'
+  - '@pandacss/*'
   - '@portabletext/*'
   - '@sanity/*'
   - '@sanity-labs/*'
