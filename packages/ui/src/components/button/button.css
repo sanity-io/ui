@@ -53,12 +53,13 @@
 }
 
 .sui-button-level-secondary {
-  --background-color: var(--background-low);
+  --background-color: var(--background-high);
   --foreground-color: var(--foreground-high);
   --border-color: var(--separator-low)
 }
 
 .sui-button-level-secondary.sui-tone-critical {
+  --background-color: var(--background-low);
   --foreground-color: var(--foreground-low);
 }
 
