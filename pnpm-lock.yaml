@@ -202,7 +202,7 @@ catalogs:
       specifier: ^6.1.2
       version: 6.1.2
     motion:
-      specifier: ^14.3.0
+      specifier: ^14.4.0
       version: 14.4.0
     oxc-transform-react:
       specifier: ^0.154.0
