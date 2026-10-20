@@ -5,7 +5,7 @@ import {Card as CardV3} from 'ui3'
 import {Card} from '../../../../packages/ui/src/components/card/Card'
 import {cardProps} from '../../../../packages/ui/src/components/card/card.props'
 import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
-import {LAYOUT_TONE} from '../../../../packages/ui/src/types/Tone'
+import {TONE_WITH_DEFAULT} from '../../../../packages/ui/src/types/Tone'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(cardProps)
@@ -46,7 +46,7 @@ export const Tones: Story = {
   render: (props) => {
     return (
       <HStack gap={3}>
-        {LAYOUT_TONE.map((tone) => (
+        {TONE_WITH_DEFAULT.map((tone) => (
           <Card {...props} key={tone} tone={tone}>
             {`Card ${tone} tone`}
           </Card>

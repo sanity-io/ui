@@ -1,5 +1,5 @@
 import {type PropDef} from '../types/PropDef'
-import {LAYOUT_TONE, TONE, type LayoutTone, type Tone} from '../types/Tone'
+import {TONE_WITH_DEFAULT, TONE, type ToneWithDefault, type Tone} from '../types/Tone'
 
 export type ToneProps = {
   tone?: Tone
@@ -13,14 +13,14 @@ export const toneProps: Record<string, PropDef> = {
   },
 }
 
-export type LayoutToneProps = {
-  tone?: LayoutTone
+export type ToneWithDefaultProps = {
+  tone?: ToneWithDefault
 }
 
-export const layoutToneProps: Record<string, PropDef> = {
+export const toneWithDefaultProps: Record<string, PropDef> = {
   tone: {
     type: 'union',
     className: 'tone',
-    values: LAYOUT_TONE,
+    values: TONE_WITH_DEFAULT,
   },
 }

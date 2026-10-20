@@ -28,7 +28,7 @@
   color: inherit;
 }
 
-.sui-Button > [data-ui="Button-spinner"] + * {
+.sui-Button > [data-ui="Button-Spinner"] + * {
   opacity: 0;
 }
 

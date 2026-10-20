@@ -2,14 +2,14 @@ import {borderProps} from '../../props/border'
 import {gapProps} from '../../props/gap'
 import {type MarginProps, marginProps} from '../../props/margin'
 import {paddingProps} from '../../props/padding'
-import {layoutToneProps, type LayoutToneProps} from '../../props/tone'
+import {toneWithDefaultProps, type ToneWithDefaultProps} from '../../props/tone'
 import {DENSITY, type Density} from '../../types/Density'
 import {type PropDef} from '../../types/PropDef'
 import {type Responsive} from '../../types/Responsive'
 
 /** @public */
 export interface CardProps<T extends React.ElementType = 'div'>
-  extends MarginProps, LayoutToneProps {
+  extends MarginProps, ToneWithDefaultProps {
   /**
    * HTML element or component to render.
    */
@@ -54,6 +54,6 @@ export const cardProps: Record<string, PropDef> = {
       },
     },
   } satisfies PropDef<Density>,
-  ...layoutToneProps,
+  ...toneWithDefaultProps,
   ...marginProps,
 }

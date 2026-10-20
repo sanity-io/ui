@@ -8,14 +8,14 @@ import {type OverflowProps, overflowProps} from './overflow'
 import {type PaddingProps, paddingProps} from './padding'
 import {type PositionProps, positionProps} from './position'
 import {type ShadowProps, shadowProps} from './shadow'
-import {layoutToneProps, type LayoutToneProps} from './tone'
+import {toneWithDefaultProps, type ToneWithDefaultProps} from './tone'
 import {type WidthProps, widthProps} from './width'
 import {type ZIndexProps, zIndexProps} from './zIndex'
 
 /** @public */
 export interface LayoutProps
   extends
-    LayoutToneProps,
+    ToneWithDefaultProps,
     WidthProps,
     HeightProps,
     MarginProps,
@@ -29,7 +29,7 @@ export interface LayoutProps
     ShadowProps {}
 
 export const layoutProps: Record<string, PropDef> = {
-  ...layoutToneProps,
+  ...toneWithDefaultProps,
   ...widthProps,
   ...heightProps,
   ...marginProps,

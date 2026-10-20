@@ -51,7 +51,7 @@ export function Button<T extends ElementType = 'button'>({
           inset={0}
           alignItems="center"
           justifyContent="center"
-          data-ui="Button-spinner"
+          data-ui="Button-Spinner"
         >
           <Spinner />
         </Flex>
