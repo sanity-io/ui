@@ -75,6 +75,7 @@ minimumReleaseAgeExclude:
   - '@portabletext/*'
   - '@sanity/*'
   - '@sanity-labs/*'
+  - '@storybook/*'
   - '@tsdown/*'
   - lightningcss
   - lightningcss-*
@@ -83,6 +84,7 @@ minimumReleaseAgeExclude:
   - oxc-transform-react
   - publint
   - sanity
+  - storybook
   - tsdown
   - verkit
   - framer-motion
