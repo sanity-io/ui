@@ -13,6 +13,11 @@
     var(--tone-500) 12%,
     var(--background-color)
   );
+  color: color-mix(
+    in srgb,
+    var(--tone-950) 25%,
+    var(--foreground-color)
+  );
 }
 
 .sui-Button.sui-button-level-primary:hover {
