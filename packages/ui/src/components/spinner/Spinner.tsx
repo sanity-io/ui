@@ -15,6 +15,7 @@ export function Spinner({size = 2, ...props}: SpinnerProps) {
   return (
     <Icon
       icon={SpinnerIcon}
+      size={size}
       className={clsx(spinnerClassName, className)}
       style={style}
       data-ui="Spinner"

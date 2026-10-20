@@ -1,12 +1,16 @@
+/* Untoned surface */
 :root {
-  /* Default surface */
+  --backdrop: light-dark(var(--white), var(--black));
   --background-high: light-dark(var(--gray-100), var(--gray-900));
   --background-high-emphasized: light-dark(var(--gray-800), var(--gray-200));
   --background-low: light-dark(var(--gray-50), var(--gray-950));
   --background-low-emphasized: light-dark(var(--gray-600), var(--gray-400));
+  --brand-background: #eb5228;
+  --brand-foreground: var(--black);
   --separator-high: light-dark(var(--gray-400), var(--gray-600));
   --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
   --foreground-high: light-dark(var(--gray-800), var(--gray-200));
+  /* This property stable across all tones */
   --foreground-high-emphasized: light-dark(var(--white), var(--black));
   --foreground-low: light-dark(var(--gray-600), var(--gray-400));
   --foreground-low-emphasized: light-dark(var(--gray-100), var(--gray-900));
@@ -14,16 +18,76 @@
   --form-element-text: var(--regular) 13px / 1.15 var(--sans);
 }
 
-[class*='sui-tone'] {
-  /* Toned surface */
-  --background-high: var(--tone-100);
-  --background-high-emphasized: var(--tone-800);
-  --background-low: var(--tone-50);
-  --background-low-emphasized: var(--tone-600);
-  --separator-high: var(--tone-400);
+/* Default tone mirrors untoned surface except for backgrounds */
+.sui-tone-default {
+  --background-high: var(--backdrop);
+  --background-high-emphasized: var(--backdrop);
+  --background-low: var(--backdrop);
+  --background-low-emphasized: var(--backdrop);
+  --separator-high: light-dark(var(--gray-400), var(--gray-600));
   --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
-  --foreground-high: var(--tone-800);
-  --foreground-high-emphasized: var(--tone-0);
-  --foreground-low: var(--tone-600);
-  --foreground-low-emphasized: var(--tone-100);
+  --foreground-high: light-dark(var(--gray-800), var(--gray-200));
+  --foreground-low: light-dark(var(--gray-600), var(--gray-400));
+  --foreground-low-emphasized: light-dark(var(--gray-100), var(--gray-900));
+}
+
+/* Toned surfaces */
+.sui-tone-neutral {
+  --background-high: light-dark(var(--gray-100), var(--gray-900));
+  --background-high-emphasized: light-dark(var(--gray-800), var(--gray-200));
+  --background-low: light-dark(var(--gray-50), var(--gray-950));
+  --background-low-emphasized: light-dark(var(--gray-600), var(--gray-400));
+  --separator-high: light-dark(var(--gray-400), var(--gray-600));
+  --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
+  --foreground-high: light-dark(var(--gray-800), var(--gray-200));
+  --foreground-low: light-dark(var(--gray-600), var(--gray-400));
+  --foreground-low-emphasized: light-dark(var(--gray-100), var(--gray-900));
+}
+
+.sui-tone-suggest {
+  --background-high: light-dark(var(--purple-100), var(--purple-900));
+  --background-high-emphasized: light-dark(var(--purple-800), var(--purple-200));
+  --background-low: light-dark(var(--purple-50), var(--purple-950));
+  --background-low-emphasized: light-dark(var(--purple-600), var(--purple-400));
+  --separator-high: light-dark(var(--purple-400), var(--purple-600));
+  --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
+  --foreground-high: light-dark(var(--purple-800), var(--purple-200));
+  --foreground-low: light-dark(var(--purple-600), var(--purple-400));
+  --foreground-low-emphasized: light-dark(var(--purple-100), var(--purple-900));
+}
+
+.sui-tone-positive {
+  --background-high: light-dark(var(--green-100), var(--green-900));
+  --background-high-emphasized: light-dark(var(--green-800), var(--green-200));
+  --background-low: light-dark(var(--green-50), var(--green-950));
+  --background-low-emphasized: light-dark(var(--green-600), var(--green-400));
+  --separator-high: light-dark(var(--green-400), var(--green-600));
+  --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
+  --foreground-high: light-dark(var(--green-800), var(--green-200));
+  --foreground-low: light-dark(var(--green-600), var(--green-400));
+  --foreground-low-emphasized: light-dark(var(--green-100), var(--green-900));
+}
+
+.sui-tone-caution {
+  --background-high: light-dark(var(--yellow-100), var(--yellow-900));
+  --background-high-emphasized: light-dark(var(--yellow-800), var(--yellow-200));
+  --background-low: light-dark(var(--yellow-50), var(--yellow-950));
+  --background-low-emphasized: light-dark(var(--yellow-600), var(--yellow-400));
+  --separator-high: light-dark(var(--yellow-400), var(--yellow-600));
+  --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
+  --foreground-high: light-dark(var(--yellow-800), var(--yellow-200));
+  --foreground-low: light-dark(var(--yellow-600), var(--yellow-400));
+  --foreground-low-emphasized: light-dark(var(--yellow-100), var(--yellow-900));
+}
+
+.sui-tone-critical {
+  --background-high: light-dark(var(--red-100), var(--red-900));
+  --background-high-emphasized: light-dark(var(--red-800), var(--red-200));
+  --background-low: light-dark(var(--red-50), var(--red-950));
+  --background-low-emphasized: light-dark(var(--red-600), var(--red-400));
+  --separator-high: light-dark(var(--red-400), var(--red-600));
+  --separator-low: rgb(from var(--separator-high) r g b / var(--opacity-low));
+  --foreground-high: light-dark(var(--red-800), var(--red-200));
+  --foreground-low: light-dark(var(--red-600), var(--red-400));
+  --foreground-low-emphasized: light-dark(var(--red-100), var(--red-900));
 }
