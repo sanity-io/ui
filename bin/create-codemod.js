@@ -14,12 +14,9 @@ function createCodemod() {
     return console.error('\x1b[33m', 'Error: Name must be kebab-case (e.g., new-component).')
   }
 
-  const codemodDirectory = path.join(path.resolve(), `/packages/ui-codemod/src`)
-  const transformsDirectory = path.join(
-    path.resolve(),
-    `${codemodDirectory}/transforms/latest/${name}`,
-  )
-  const commandFile = path.join(path.resolve(), `${codemodDirectory}/commands/latest/${name}.ts`)
+  const codemodDirectory = path.join(path.resolve(), 'packages/ui-codemod/src')
+  const transformsDirectory = path.join(codemodDirectory, 'transforms/latest', name)
+  const commandFile = path.join(codemodDirectory, 'commands/latest', `${name}.ts`)
 
   if (fs.existsSync(transformsDirectory)) {
     return console.error('\x1b[33m', 'Error: Transforms directory already exists.')
@@ -31,7 +28,7 @@ function createCodemod() {
 
   const componentName = getName(name, true)
 
-  fs.writeFileSync(commandsFile, getCommandFile(componentName, componentName, name))
+  fs.writeFileSync(commandFile, getCommandFile(componentName, name))
 
   const modsName = getName(name, false, true)
 
@@ -48,12 +45,10 @@ function createCodemod() {
     )
   })
 
-  const pkg = JSON.parse(
-    fs.readFileSync(path.join(path.resolve(), '/packages/ui-codemod/package.json')),
-    'utf8',
-  )
+  const pkgFile = path.join(path.resolve(), 'packages/ui-codemod/package.json')
+  const pkg = JSON.parse(fs.readFileSync(pkgFile, 'utf8'))
 
-  fs.writeFileSync(packageFile, `${JSON.stringify(mergeExports(pkg, name), null, 2)}\n`, 'utf8')
+  fs.writeFileSync(pkgFile, `${JSON.stringify(mergeExports(pkg, name), null, 2)}\n`, 'utf8')
 
   // oxlint-disable-next-line no-console
   console.log('\x1b[32m', `Successfully created ${componentName} codemod`)
