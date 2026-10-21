@@ -221,13 +221,18 @@ function sortExports(exports) {
         if (a === './package.json') return 1
         if (b === './package.json') return -1
 
-        const component = (key) =>
-          key.startsWith('./transforms/latest/')
-            ? key.slice('./transforms/latest/'.length)
-            : key.slice('./latest/'.length)
-        const directory = (key) => (key.startsWith('./transforms/') ? 0 : 1)
-        const byName = component(a).localeCompare(component(b))
-        return byName !== 0 ? byName : directory(a) - directory(b)
+        const nameA = a.startsWith('./transforms/latest/')
+          ? a.slice('./transforms/latest/'.length)
+          : a.slice('./latest/'.length)
+        const nameB = b.startsWith('./transforms/latest/')
+          ? b.slice('./transforms/latest/'.length)
+          : b.slice('./latest/'.length)
+        const byName = nameA.localeCompare(nameB)
+        if (byName !== 0) return byName
+
+        const dirA = a.startsWith('./transforms/') ? 0 : 1
+        const dirB = b.startsWith('./transforms/') ? 0 : 1
+        return dirA - dirB
       })
       .map((key) => [key, exports[key]]),
   )

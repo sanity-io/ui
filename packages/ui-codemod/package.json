@@ -15,6 +15,14 @@
   "type": "module",
   "sideEffects": false,
   "exports": {
+    "./transforms/latest/avatar-stack": {
+      "source": "./src/transforms/latest/avatar-stack/avatar-stack.ts",
+      "default": "./dist/transforms/latest/avatar-stack/avatar-stack.js"
+    },
+    "./latest/avatar-stack": {
+      "source": "./src/commands/latest/avatar-stack.ts",
+      "default": "./dist/commands/latest/avatar-stack.js"
+    },
     "./transforms/latest/badge": {
       "source": "./src/transforms/latest/badge/badge.ts",
       "default": "./dist/transforms/latest/badge/badge.js"
@@ -139,6 +147,8 @@
   },
   "publishConfig": {
     "exports": {
+      "./transforms/latest/avatar-stack": "./dist/transforms/latest/avatar-stack/avatar-stack.js",
+      "./latest/avatar-stack": "./dist/commands/latest/avatar-stack.js",
       "./transforms/latest/badge": "./dist/transforms/latest/badge/badge.js",
       "./latest/badge": "./dist/commands/latest/badge.js",
       "./transforms/latest/box": "./dist/transforms/latest/box/box.js",
