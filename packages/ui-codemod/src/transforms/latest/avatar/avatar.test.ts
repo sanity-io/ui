@@ -1,6 +1,6 @@
 import {expect} from 'vitest'
 
-import {defineInlineTest} from '../../../utils/testUtils'
+import {defineCrossFileTest, defineInlineTest} from '../../../utils/testUtils'
 import transform from './avatar'
 
 defineInlineTest(
@@ -82,4 +82,79 @@ defineInlineTest(
   </>
   `,
   'warns for deprecated size prop',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Avatar} from '@sanity/ui'
+
+    export const RootAvatar = styled(Avatar)(({theme}) => ({}))
+  `,
+  `
+    import {RootAvatar} from './Component.styled'
+
+    export function RootAvatar() {
+      return <RootAvatar initials="AB" />
+    }
+  `,
+  (output) => {
+    expect(output.replace(/\s+/g, ' ')).toContain('<RootAvatar name="AB" />')
+  },
+  'transforms attributes on imported styled Avatar wrappers',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Avatar} from '@sanity/ui'
+
+    export const RootAvatar = styled(Avatar)(({theme}) => ({}))
+  `,
+  `
+    import {Avatar} from 'another-package'
+    import {RootAvatar} from './Component.styled'
+
+    export function Component() {
+      return (
+        <>
+          <RootAvatar initials="AB" />
+          <Avatar initials="AB" />
+        </>
+      )
+    }
+  `,
+  (output) => {
+    expect(output.replace(/\s+/g, ' ')).toContain('<RootAvatar name="AB" />')
+    expect(output).toContain('<Avatar initials="AB" />')
+  },
+  'does not transform attributes on unrelated Avatar from another package',
+)
+
+defineCrossFileTest(
+  transform,
+  {},
+  `
+    import {Avatar} from '@sanity/ui'
+
+    export const RootAvatar = styled(Avatar)(({theme}) => ({}))
+  `,
+  `
+    import {RootAvatar} from './index'
+
+    export function Component() {
+      return <RootAvatar initials="AB" />
+    }
+  `,
+  (output) => {
+    expect(output.replace(/\s+/g, ' ')).toContain('<RootAvatar name="AB" />')
+  },
+  'transforms styled Avatar wrappers imported through barrel re-exports',
+  {
+    extraFiles: {
+      'index.ts': `export {RootAvatar} from './Component.styled'`,
+    },
+  },
 )
