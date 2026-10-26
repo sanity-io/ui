@@ -65,7 +65,7 @@ export const Sizes: Story = {
       <>
         {CODE_SIZE.map((size) => (
           <Code {...props} key={size} size={size}>
-            Code Size {size} ({['10px', '13px', '16px', '18.75px', '21.5px'][size]})
+            Code Size {size} ({['10px', '13px', '16px', '19px', '22px'][size]})
           </Code>
         ))}
       </>
