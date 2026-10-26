@@ -56,7 +56,7 @@ export const Sizes: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('Text Size 3 (18.75px)')).classList).toContain(
+    await expect((await canvas.findByText('Text Size 3 (18px)')).classList).toContain(
       'sui-text-body3',
     )
   },

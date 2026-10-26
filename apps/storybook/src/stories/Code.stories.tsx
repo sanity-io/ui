@@ -73,7 +73,7 @@ export const Sizes: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Code Size 3 (18.75px)')).parentElement?.closest('[data-ui="Code"]')
+      (await canvas.findByText('Code Size 3 (19px)')).parentElement?.closest('[data-ui="Code"]')
         ?.classList,
     ).toContain('sui-text-code3')
   },
