@@ -64,6 +64,10 @@ export function transformAttributes(
     }
 
     if (mod.type === 'warn-only') {
+      if (mod.when && getMappingValue(mod.when, expr) === undefined) {
+        continue
+      }
+
       if (insertTodoWarning(j, path, mod.warning || todoWarning)) {
         hasChanges = true
       }
