@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.18
+
+### Patch Changes
+
+- 55d3f3f: bump @sanity-labs/design-tokens to 0.0.2-alpha.9
+
 ## 5.0.0-alpha.17
 
 ### Patch Changes
