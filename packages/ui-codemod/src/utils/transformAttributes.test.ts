@@ -365,7 +365,20 @@ defineInlineTest(
   // UI-CODEMOD TODO: Blue is deprecated
   <div color="blue" />
   `,
-  'warns with custom warning for warn-only prop with matching when value',
+  'warns for warn-only prop if when value matches',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div color={['green', 'blue']} />
+  `,
+  `
+  // UI-CODEMOD TODO: Blue is deprecated
+  <div color={['green', 'blue']} />
+  `,
+  'warns for warn-only prop if array includes matching when value',
 )
 
 defineInlineTest(
