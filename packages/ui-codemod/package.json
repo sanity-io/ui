@@ -23,6 +23,22 @@
       "source": "./src/commands/latest/avatar.ts",
       "default": "./dist/commands/latest/avatar.js"
     },
+    "./transforms/latest/avatar-counter": {
+      "source": "./src/transforms/latest/avatar-counter/avatar-counter.ts",
+      "default": "./dist/transforms/latest/avatar-counter/avatar-counter.js"
+    },
+    "./latest/avatar-counter": {
+      "source": "./src/commands/latest/avatar-counter.ts",
+      "default": "./dist/commands/latest/avatar-counter.js"
+    },
+    "./transforms/latest/avatar-stack": {
+      "source": "./src/transforms/latest/avatar-stack/avatar-stack.ts",
+      "default": "./dist/transforms/latest/avatar-stack/avatar-stack.js"
+    },
+    "./latest/avatar-stack": {
+      "source": "./src/commands/latest/avatar-stack.ts",
+      "default": "./dist/commands/latest/avatar-stack.js"
+    },
     "./transforms/latest/badge": {
       "source": "./src/transforms/latest/badge/badge.ts",
       "default": "./dist/transforms/latest/badge/badge.js"
@@ -149,6 +165,10 @@
     "exports": {
       "./transforms/latest/avatar": "./dist/transforms/latest/avatar/avatar.js",
       "./latest/avatar": "./dist/commands/latest/avatar.js",
+      "./transforms/latest/avatar-counter": "./dist/transforms/latest/avatar-counter/avatar-counter.js",
+      "./latest/avatar-counter": "./dist/commands/latest/avatar-counter.js",
+      "./transforms/latest/avatar-stack": "./dist/transforms/latest/avatar-stack/avatar-stack.js",
+      "./latest/avatar-stack": "./dist/commands/latest/avatar-stack.js",
       "./transforms/latest/badge": "./dist/transforms/latest/badge/badge.js",
       "./latest/badge": "./dist/commands/latest/badge.js",
       "./transforms/latest/box": "./dist/transforms/latest/box/box.js",
