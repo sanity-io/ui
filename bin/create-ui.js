@@ -30,7 +30,7 @@ function createUi() {
     return console.error('\x1b[33m', 'Error: Storybook file already exists.')
   }
 
-  const indexFile = path.join(path.resolve(), `/packages/ui/src/index.ts`)
+  const indexFile = path.join(path.resolve(), '/packages/ui/src/index.ts')
   const propsName = getName(name)
 
   fs.mkdir(componentDirectory, {}, (err) => {

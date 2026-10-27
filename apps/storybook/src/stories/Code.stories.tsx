@@ -65,7 +65,7 @@ export const Sizes: Story = {
       <>
         {CODE_SIZE.map((size) => (
           <Code {...props} key={size} size={size}>
-            Code Size {size} ({['10px', '13px', '16px', '18.75px', '21.5px'][size]})
+            Code Size {size} ({['10px', '13px', '16px', '19px', '22px'][size]})
           </Code>
         ))}
       </>
@@ -73,7 +73,7 @@ export const Sizes: Story = {
   },
   play: async ({canvas}) => {
     await expect(
-      (await canvas.findByText('Code Size 3 (18.75px)')).parentElement?.closest('[data-ui="Code"]')
+      (await canvas.findByText('Code Size 3 (19px)')).parentElement?.closest('[data-ui="Code"]')
         ?.classList,
     ).toContain('sui-text-code3')
   },

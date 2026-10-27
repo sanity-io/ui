@@ -49,14 +49,14 @@ export const Sizes: Story = {
       <>
         {TEXT_SIZE.map((size) => (
           <Text {...props} key={size} size={size}>
-            Text Size {size} ({['10px', '13px', '16px', '18.75px', '21.5px'][size]})
+            Text Size {size} ({['10px', '13px', '16px', '18px', '21px'][size]})
           </Text>
         ))}
       </>
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('Text Size 3 (18.75px)')).classList).toContain(
+    await expect((await canvas.findByText('Text Size 3 (18px)')).classList).toContain(
       'sui-text-body3',
     )
   },
