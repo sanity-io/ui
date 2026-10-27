@@ -111,6 +111,14 @@
       "source": "./src/commands/latest/inline.ts",
       "default": "./dist/commands/latest/inline.js"
     },
+    "./transforms/latest/kbd": {
+      "source": "./src/transforms/latest/kbd/kbd.ts",
+      "default": "./dist/transforms/latest/kbd/kbd.js"
+    },
+    "./latest/kbd": {
+      "source": "./src/commands/latest/kbd.ts",
+      "default": "./dist/commands/latest/kbd.js"
+    },
     "./transforms/latest/label": {
       "source": "./src/transforms/latest/label/label.ts",
       "default": "./dist/transforms/latest/label/label.js"
@@ -187,6 +195,8 @@
       "./latest/heading": "./dist/commands/latest/heading.js",
       "./transforms/latest/inline": "./dist/transforms/latest/inline/inline.js",
       "./latest/inline": "./dist/commands/latest/inline.js",
+      "./transforms/latest/kbd": "./dist/transforms/latest/kbd/kbd.js",
+      "./latest/kbd": "./dist/commands/latest/kbd.js",
       "./transforms/latest/label": "./dist/transforms/latest/label/label.js",
       "./latest/label": "./dist/commands/latest/label.js",
       "./transforms/latest/select": "./dist/transforms/latest/select/select.js",

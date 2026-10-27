@@ -20,7 +20,7 @@ export function moveChildrenToAttribute(
 ): boolean {
   const {stringOnly = false, todoWarning} = options
   const parentNode = path.parent?.node
-  const warning = todoWarning ?? `Move the children into the ${name} prop.`
+  const warning = todoWarning ?? `Move children into the ${name} prop`
 
   if (parentNode?.type !== 'JSXElement') {
     return false

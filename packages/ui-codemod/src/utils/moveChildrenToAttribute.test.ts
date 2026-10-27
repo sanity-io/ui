@@ -98,7 +98,7 @@ defineInlineTest(
   <KBD text="Cmd">Ctrl</KBD>
   `,
   `
-  // UI-CODEMOD TODO: Move the children into the text prop.
+  // UI-CODEMOD TODO: Move children into the text prop
   <KBD text="Cmd">Ctrl</KBD>
   `,
   'warns when the target attribute is already set',
@@ -123,7 +123,7 @@ defineInlineTest(
   <Badge>{label}</Badge>
   `,
   `
-  // UI-CODEMOD TODO: Move the children into the text prop.
+  // UI-CODEMOD TODO: Move children into the text prop
   <Badge>{label}</Badge>
   `,
   'warns on single expression children when stringOnly is true',
@@ -136,7 +136,7 @@ defineInlineTest(
   <Badge>{label}{suffix}</Badge>
   `,
   `
-  // UI-CODEMOD TODO: Move the children into the text prop.
+  // UI-CODEMOD TODO: Move children into the text prop
   <Badge>{label}{suffix}</Badge>
   `,
   'warns on multiple expressions when stringOnly is true',
@@ -149,7 +149,7 @@ defineInlineTest(
   <Badge><Text>{label}</Text></Badge>
   `,
   `
-  // UI-CODEMOD TODO: Move the children into the text prop.
+  // UI-CODEMOD TODO: Move children into the text prop
   <Badge><Text>{label}</Text></Badge>
   `,
   'warns on JSX element child onto the attribute',
