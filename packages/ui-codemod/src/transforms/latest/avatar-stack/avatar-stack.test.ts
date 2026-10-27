@@ -1,5 +1,3 @@
-import {expect} from 'vitest'
-
 import {defineInlineTest} from '../../../utils/testUtils'
 import transform from './avatar-stack'
 
