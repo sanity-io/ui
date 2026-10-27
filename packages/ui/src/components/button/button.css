@@ -19,6 +19,11 @@
     var(--hover-blend-color) 12%,
     var(--background-color)
   );
+  color: color-mix(
+    in srgb,
+    var(--foreground-high) 25%,
+    var(--foreground-color)
+  );
 }
 
 .sui-Button:focus-visible {
@@ -57,10 +62,21 @@
   --hover-blend-color: light-dark(var(--gray-950), var(--gray-50));
 }
 
+.sui-Button.sui-button-level-primary:hover {
+  background: color-mix(
+    in srgb,
+    var(--hover-blend-color) 12%,
+    var(--background-color)
+  );
+  color: var(--foreground-low-emphasized);
+}
+
 .sui-button-level-primary.sui-tone-critical {
   --background-color: var(--background-low-emphasized);
   --hover-blend-color: light-dark(var(--red-950), var(--red-50));
 }
+
+
 
 /**
   * Secondary
