@@ -26,5 +26,5 @@
 
 .sui-Tabs [role="tab"][aria-selected="true"] {
   --background-color: var(--background-low);
-  --color: var(--foreground-high);
+  --foreground-color: var(--foreground-high);
 }
