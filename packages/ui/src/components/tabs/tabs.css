@@ -1,0 +1,30 @@
+.sui-Tabs [role="tab"] {
+  --background-color: transparent;
+  --foreground-color: var(--foreground-low);
+  --hover-blend-color: var(--foreground-low);
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  transition: var(--hover-transition);
+}
+
+.sui-Tabs [role="tab"]:hover {
+  background: color-mix(
+    in srgb,
+    var(--hover-blend-color) 12%,
+    var(--background-color)
+  );
+}
+
+.sui-Tabs [role="tab"]:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-offset);
+}
+
+.sui-Tabs [role="tab"]:active {
+  transform: scale(0.975);
+}
+
+.sui-Tabs [role="tab"][aria-selected="true"] {
+  --background-color: var(--background-high);
+  --color: var(--foreground-high);
+}

@@ -57,7 +57,8 @@
     "react/todo": "error",
     "typescript/no-deprecated": "error",
     "unicorn/no-abusive-eslint-disable": "error",
-    // Not necessary since react compiler handles it
+    // Not necessary since react compiler handles these:
+    "react/jsx-no-constructed-context-values": "off",
     "react-perf/jsx-no-new-array-as-prop": "off",
     "react-perf/jsx-no-jsx-as-prop": "off",
     "react-perf/jsx-no-new-object-as-prop": "off",
