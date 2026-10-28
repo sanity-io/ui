@@ -87,7 +87,7 @@ export const Default: Story = {
     const firstTab = await canvas.findByRole('tab', {name: 'First Tab'})
     const secondTab = await canvas.findByRole('tab', {name: 'Second Tab'})
 
-    await expect(await canvas.findByRole('tablist')).toBeInTheDocument()
+    await expect(await canvas.findByRole('tablist', {name: 'Basic tabs'})).toBeInTheDocument()
     await expect(firstTab).toHaveAttribute('type', 'button')
 
     await expect(firstTab).toHaveAttribute('aria-selected', 'true')
