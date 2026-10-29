@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {createContext, isValidElement, useContext} from 'react'
+import {createContext, isValidElement, useContext, useId} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
@@ -22,6 +22,7 @@ const tabsClassName = suffixClassName('sui-Tabs')
 const TabsContext = createContext<{
   value: string
   onValueChange: (value: string) => void
+  tabsRootId: string
 } | null>(null)
 
 function useTabsContext() {
@@ -33,8 +34,10 @@ function useTabsContext() {
 function TabsRoot({value, onValueChange, ...props}: TabsProps) {
   const {children, className, style, ...rest} = getProps(props, tabsProps)
 
+  const tabsRootId = useId()
+
   return (
-    <TabsContext.Provider value={{value, onValueChange}}>
+    <TabsContext.Provider value={{value, onValueChange, tabsRootId}}>
       <div className={clsx(tabsClassName, className)} style={style} data-ui="Tabs" {...rest}>
         {children}
       </div>
@@ -106,6 +109,7 @@ function Tab({value, tone = 'neutral', ...props}: TabProps) {
   const {icon: IconProp, label, className, style, ...rest} = getProps({tone, ...props}, tabProps)
 
   const context = useTabsContext()
+  const {tabsRootId} = context
   const selected = context.value === value
 
   return (
@@ -114,16 +118,16 @@ function Tab({value, tone = 'neutral', ...props}: TabProps) {
       style={style}
       {...rest}
       data-ui="Tabs.Tab"
-      id={`${value}-tab`}
+      id={`${tabsRootId}-${value}-tab`}
       type="button"
       role="tab"
-      aria-controls={`${value}-panel`}
+      aria-controls={`${tabsRootId}-${value}-panel`}
       aria-selected={selected}
       /* Only the active tab should receive focus via Tab key; others focus via arrow keys */
       tabIndex={selected ? 0 : -1}
       onClick={(e) => {
         props.onClick?.(e)
-        context.onValueChange?.(value)
+        context.onValueChange(value)
       }}
     >
       {IconProp &&
@@ -141,6 +145,7 @@ function TabPanel({value, ...props}: TabsPanelProps) {
   const {children, className, style, ...rest} = getProps(props, tabsPanelProps)
 
   const context = useTabsContext()
+  const {tabsRootId} = context
   const selected = context.value === value
 
   return (
@@ -153,8 +158,8 @@ function TabPanel({value, ...props}: TabsPanelProps) {
       data-ui="Tabs.Panel"
       display={selected ? 'block' : 'none'}
       role="tabpanel"
-      id={`${value}-panel`}
-      aria-labelledby={`${value}-tab`}
+      id={`${tabsRootId}-${value}-panel`}
+      aria-labelledby={`${tabsRootId}-${value}-tab`}
     >
       {children}
     </Box>
