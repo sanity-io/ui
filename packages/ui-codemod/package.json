@@ -159,6 +159,14 @@
       "source": "./src/commands/latest/text-input.ts",
       "default": "./dist/commands/latest/text-input.js"
     },
+    "./transforms/latest/tooltip": {
+      "source": "./src/transforms/latest/tooltip/tooltip.ts",
+      "default": "./dist/transforms/latest/tooltip/tooltip.js"
+    },
+    "./latest/tooltip": {
+      "source": "./src/commands/latest/tooltip.ts",
+      "default": "./dist/commands/latest/tooltip.js"
+    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -199,6 +207,8 @@
       "./latest/text-area": "./dist/commands/latest/text-area.js",
       "./transforms/latest/text-input": "./dist/transforms/latest/text-input/text-input.js",
       "./latest/text-input": "./dist/commands/latest/text-input.js",
+      "./transforms/latest/tooltip": "./dist/transforms/latest/tooltip/tooltip.js",
+      "./latest/tooltip": "./dist/commands/latest/tooltip.js",
       "./package.json": "./package.json"
     }
   },
