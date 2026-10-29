@@ -4,8 +4,9 @@ import {type PropDef} from '../../types/PropDef'
 
 /** @public */
 export interface TabsProps extends React.ComponentProps<'div'> {
-  /** The value of the active tab */
+  /** The `value` of the active Tabs.Tab */
   value: string
+  /** An updater function to set `value` - will be invoked with the `value` of the selected Tabs.Tab */
   onValueChange: (value: string) => void
 }
 
@@ -30,11 +31,11 @@ export interface TabProps
   extends
     Omit<React.ComponentProps<'button'>, 'aria-disabled' | 'disabled' | 'id' | 'role'>,
     ToneProps {
-  /**
-   * Shows an icon before the label.
-   */
+  /** Optional icon for the tab */
   icon?: React.ElementType | React.ReactNode
+  /** Text label to display in the tab */
   label: string
+  /** Unique string used to identify this tab and its matching Tabs.Panel */
   value: string
 }
 
@@ -54,6 +55,7 @@ export const tabProps: Record<string, PropDef> = {
 /** @public */
 export interface TabsPanelProps
   extends Omit<React.ComponentProps<'div'>, 'id' | 'role'>, LayoutProps {
+  /** Unique string used to identify this panel and its matching Tabs.Tab */
   value: string
 }
 
