@@ -30,6 +30,7 @@ import {
   SkipToContent,
   Spinner,
   Switch,
+  Tabs,
   Text,
   TextInput,
   Tooltip,
@@ -41,6 +42,8 @@ import {Profiler} from 'react'
 
 const count = 3000
 const iterator = [...Array(count).keys()]
+
+function noop() {}
 
 function handleOnRender(
   id: string,
@@ -338,6 +341,21 @@ export default function Ui5() {
           <AvatarStack key={i}>
             <Avatar name="AB" />
           </AvatarStack>
+        ))}
+      </Profiler>
+
+      <h2>{count} Tabs</h2>
+      <Profiler id="Tabs" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          // Values include the index so the ids that Tabs builds from them are unique
+          <Tabs key={i} value={`${i}-one`} onValueChange={noop}>
+            <Tabs.List aria-label="Tabs">
+              <Tabs.Tab label="Tab one" value={`${i}-one`} />
+              <Tabs.Tab label="Tab two" value={`${i}-two`} />
+            </Tabs.List>
+            <Tabs.Panel value={`${i}-one`}>Panel one</Tabs.Panel>
+            <Tabs.Panel value={`${i}-two`}>Panel two</Tabs.Panel>
+          </Tabs>
         ))}
       </Profiler>
 

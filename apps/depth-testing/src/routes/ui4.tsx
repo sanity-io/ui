@@ -13,6 +13,9 @@ import {
   Radio,
   Stack,
   Switch,
+  Tab,
+  TabList,
+  TabPanel,
   Text,
   TextInput,
   ThemeProvider,
@@ -23,6 +26,7 @@ const theme = buildTheme()
 
 function Ui4() {
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [station, setStation] = useState('bridge')
 
   return (
     <ThemeProvider theme={theme}>
@@ -112,6 +116,48 @@ function Ui4() {
               <Badge tone="caution">Deflector array offline</Badge>
               <Badge tone="critical">Warp core breach</Badge>
             </Inline>
+          </Box>
+          <Box marginY={3}>
+            <TabList aria-label="Ship stations" gap={1}>
+              <Tab
+                id="tab-bridge"
+                aria-controls="panel-bridge"
+                label="Bridge"
+                selected={station === 'bridge'}
+                onClick={() => setStation('bridge')}
+              />
+              <Tab
+                id="tab-engineering"
+                aria-controls="panel-engineering"
+                label="Engineering"
+                selected={station === 'engineering'}
+                onClick={() => setStation('engineering')}
+              />
+              <Tab
+                id="tab-sickbay"
+                aria-controls="panel-sickbay"
+                label="Sickbay"
+                selected={station === 'sickbay'}
+                onClick={() => setStation('sickbay')}
+              />
+            </TabList>
+            <TabPanel id="panel-bridge" aria-labelledby="tab-bridge" hidden={station !== 'bridge'}>
+              <Text>All stations report ready.</Text>
+            </TabPanel>
+            <TabPanel
+              id="panel-engineering"
+              aria-labelledby="tab-engineering"
+              hidden={station !== 'engineering'}
+            >
+              <Text>Dilithium matrix stable.</Text>
+            </TabPanel>
+            <TabPanel
+              id="panel-sickbay"
+              aria-labelledby="tab-sickbay"
+              hidden={station !== 'sickbay'}
+            >
+              <Text>No patients on the ward.</Text>
+            </TabPanel>
           </Box>
         </Card>
       </Box>

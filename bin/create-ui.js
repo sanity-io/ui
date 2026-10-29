@@ -131,7 +131,7 @@ const meta: Meta<typeof ${componentName}> = {
   tags: ['autodocs'],
   parameters: {
     a11y: {
-      context: '.sui-${componentName}',
+      context: '[data-ui="${componentName}"]',
     },
     performance: {
       component: ${componentName},
