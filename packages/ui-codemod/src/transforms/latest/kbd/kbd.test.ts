@@ -25,7 +25,7 @@ defineInlineTest(
   `
   import {KBD} from '@legacy/ui'
 
-  <KBD fontSize={1} padding={1} radius={1} size={1} />
+  <KBD size={1} />
   `,
   `
   import {KBD} from "@sanity/ui"
@@ -33,6 +33,28 @@ defineInlineTest(
   <KBD />
   `,
   'removes deprecated props',
+)
+
+defineInlineTest(
+  transform,
+  {fromPackage: '@legacy/ui', toPackage: '@sanity/ui'},
+  `
+  import {KBD} from '@legacy/ui'
+
+  <KBD fontSize={1} padding={1} radius={1} />
+  `,
+  `
+  import {KBD} from "@sanity/ui"
+
+  <KBD
+    style={{
+      font: "var(--body-1)"
+      padding: "var(--space-1)"
+      borderRadius: "var(--radius-1)"
+    }}
+  />
+  `,
+  'moves deprecated props to style',
 )
 
 defineInlineTest(
