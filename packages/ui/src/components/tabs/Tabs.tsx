@@ -173,3 +173,4 @@ TabsRoot.Panel = TabPanel
 export type {TabsProps}
 export type {TabsListProps}
 export type {TabProps}
+export type {TabsPanelProps}
