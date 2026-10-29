@@ -48,11 +48,10 @@ defineInlineTest(
 
   <KBD
     style={{
-      font: "var(--body-1)"
-      padding: "var(--space-1)"
+      font: "var(--body-1)",
+      padding: "var(--space-1)",
       borderRadius: "var(--radius-1)"
-    }}
-  />
+    }} />
   `,
   'moves deprecated props to style',
 )
