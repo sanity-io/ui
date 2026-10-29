@@ -15,6 +15,7 @@ import {
   Popover,
   Radio,
   Switch,
+  Tabs,
   Text,
   TextInput,
   Tooltip,
@@ -30,6 +31,12 @@ const TOOLTIP_COUNT = 300
 const POPOVER_COUNT = 300
 const BADGE_COUNT = 500
 const AVATAR_COUNT = 300
+
+const TABS = [
+  {value: 'overview', label: 'Overview'},
+  {value: 'activity', label: 'Activity'},
+  {value: 'settings', label: 'Settings'},
+]
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -328,6 +335,34 @@ function AvatarShuffleSection() {
   )
 }
 
+/** One click on a tab shows its panel and hides the previous panel. */
+function TabSwitchSection() {
+  const [selected, setSelected] = useState('overview')
+
+  return (
+    <Card density="regular">
+      <VStack gap={3}>
+        <Text size={1} weight="semibold">
+          7. Tab switch
+        </Text>
+        <Text size={1}>One click on a tab shows its panel and hides the previous panel.</Text>
+        <Tabs value={selected} onValueChange={setSelected}>
+          <Tabs.List aria-label="Tab switch">
+            {TABS.map((tab) => (
+              <Tabs.Tab key={tab.value} label={tab.label} value={tab.value} />
+            ))}
+          </Tabs.List>
+          {TABS.map((tab) => (
+            <Tabs.Panel key={tab.value} value={tab.value}>
+              <Text size={1}>{tab.label} panel</Text>
+            </Tabs.Panel>
+          ))}
+        </Tabs>
+      </VStack>
+    </Card>
+  )
+}
+
 function Ui5() {
   return (
     <VStack gap={4}>
@@ -341,6 +376,7 @@ function Ui5() {
       <PopoverMountSection />
       <BadgeToneToggleSection />
       <AvatarShuffleSection />
+      <TabSwitchSection />
     </VStack>
   )
 }
