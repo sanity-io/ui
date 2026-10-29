@@ -175,13 +175,15 @@ export const WithCustomContent: Story = {
   },
   play: async ({canvas}) => {
     const trigger = await canvas.findByRole('button', {name: 'Open Tooltip'})
-    const tooltip = await canvas.findByText('Tooltip Content')
+    const title = await canvas.findByText('Title')
+    const subtitle = await canvas.findByText('Subtitle')
 
     await userEvent.tab()
 
     await waitFor(
       async () => {
-        await expect(tooltip).toBeVisible()
+        await expect(title).toBeVisible()
+        await expect(subtitle).toBeVisible()
       },
       {timeout: 750},
     )
