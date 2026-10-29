@@ -118,9 +118,8 @@ const tabClasses = clsx(
 function Tab({value, tone = 'neutral', ...props}: TabProps) {
   const {icon: IconProp, label, className, style, ...rest} = getProps({tone, ...props}, tabProps)
 
-  const context = useTabsContext()
-  const {tabsRootId} = context
-  const selected = context.value === value
+  const {tabsRootId, value: contextValue, onValueChange} = useTabsContext()
+  const selected = contextValue === value
 
   return (
     <button
@@ -137,7 +136,7 @@ function Tab({value, tone = 'neutral', ...props}: TabProps) {
       tabIndex={selected ? 0 : -1}
       onClick={(e) => {
         props.onClick?.(e)
-        context.onValueChange(value)
+        onValueChange(value)
       }}
     >
       {IconProp &&
@@ -154,9 +153,8 @@ function Tab({value, tone = 'neutral', ...props}: TabProps) {
 function TabPanel({value, ...props}: TabsPanelProps) {
   const {children, className, style, ...rest} = getProps(props, tabsPanelProps)
 
-  const context = useTabsContext()
-  const {tabsRootId} = context
-  const selected = context.value === value
+  const {tabsRootId, value: contextValue} = useTabsContext()
+  const selected = contextValue === value
 
   return (
     <Box
