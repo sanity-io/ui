@@ -113,6 +113,7 @@ function Tab({value, tone = 'neutral', ...props}: TabProps) {
       className={clsx(tabClasses, className)}
       style={style}
       {...rest}
+      data-ui="Tabs.Tab"
       id={`${value}-tab`}
       type="button"
       role="tab"
@@ -149,6 +150,7 @@ function TabPanel({value, ...props}: TabsPanelProps) {
       // Default tabIndex for panels without focusable content — consumer overrides if their panel content is focusable
       tabIndex={0}
       {...rest}
+      data-ui="Tabs.Panel"
       display={selected ? 'block' : 'none'}
       role="tabpanel"
       id={`${value}-panel`}
