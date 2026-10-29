@@ -88,7 +88,7 @@ defineInlineTest(
   `
   <Badge text={<Text>{label}</Text>} />
   `,
-  'moves a JSX element child onto the attribute',
+  'moves a JSX element child',
 )
 
 defineInlineTest(
@@ -152,5 +152,5 @@ defineInlineTest(
   // UI-CODEMOD TODO: Move children into the text prop
   <Badge><Text>{label}</Text></Badge>
   `,
-  'warns on JSX element child onto the attribute',
+  'warns on JSX element child when stringOnly is true',
 )
