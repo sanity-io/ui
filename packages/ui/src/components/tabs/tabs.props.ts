@@ -30,11 +30,18 @@ export interface TabProps
   extends
     Omit<React.ComponentProps<'button'>, 'aria-disabled' | 'disabled' | 'id' | 'role'>,
     ToneProps {
+  /**
+   * Shows an icon before the label.
+   */
+  icon?: React.ElementType | React.ReactNode
   label: string
   value: string
 }
 
 export const tabProps: Record<string, PropDef> = {
+  icon: {
+    type: 'string',
+  },
   label: {
     type: 'string',
   },

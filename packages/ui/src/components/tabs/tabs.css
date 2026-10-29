@@ -7,6 +7,10 @@
   transition: var(--hover-transition);
 }
 
+.sui-Tabs [role="tab"] .sui-Icon {
+  color: var(--foreground-color);
+}
+
 .sui-Tabs [role="tab"]:hover {
   background: color-mix(
     in srgb,

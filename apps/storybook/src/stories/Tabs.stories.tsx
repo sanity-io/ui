@@ -1,3 +1,8 @@
+import {CheckmarkCircleIcon} from '@sanity/icons/CheckmarkCircle'
+import {CircleIcon} from '@sanity/icons/Circle'
+import {ErrorOutlineIcon} from '@sanity/icons/ErrorOutline'
+import {SparklesIcon} from '@sanity/icons/Sparkles'
+import {WarningOutlineIcon} from '@sanity/icons/WarningOutline'
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'
 import {expect, userEvent} from 'storybook/test'
@@ -48,17 +53,22 @@ function TabsDefaultStory(props: TabsProps) {
   )
 }
 
-function TabsTonesStory(props: TabsProps) {
+function TabsTonesAndIconsStory(props: TabsProps) {
   const [value, setValue] = useState('neutral')
 
   return (
     <Tabs {...props} value={value} onValueChange={setValue}>
       <Tabs.List aria-label="Toned tabs">
-        <Tabs.Tab label="Neutral Tab" value="neutral" />
-        <Tabs.Tab label="Positive Tab" value="positive" tone="positive" />
-        <Tabs.Tab label="Suggest Tab" value="suggest" tone="suggest" />
-        <Tabs.Tab label="Caution Tab" value="caution" tone="caution" />
-        <Tabs.Tab label="Critical Tab" value="critical" tone="critical" />
+        <Tabs.Tab label="Neutral Tab" value="neutral" icon={CircleIcon} />
+        <Tabs.Tab
+          label="Positive Tab"
+          value="positive"
+          tone="positive"
+          icon={CheckmarkCircleIcon}
+        />
+        <Tabs.Tab label="Suggest Tab" value="suggest" tone="suggest" icon={SparklesIcon} />
+        <Tabs.Tab label="Caution Tab" value="caution" tone="caution" icon={WarningOutlineIcon} />
+        <Tabs.Tab label="Critical Tab" value="critical" tone="critical" icon={ErrorOutlineIcon} />
       </Tabs.List>
       <Box marginTop={3}>
         <Tabs.Panel value="neutral">
@@ -103,8 +113,9 @@ export const Default: Story = {
   },
 }
 
-export const Tones: Story = {
-  render: (props) => <TabsTonesStory {...props} />,
+export const TonesAndIcons: Story = {
+  name: 'Tones and icons',
+  render: (props) => <TabsTonesAndIconsStory {...props} />,
   play: async ({canvas}) => {
     await expect((await canvas.findByRole('tab', {name: 'Neutral Tab'})).classList).toContain(
       'sui-tone-neutral',

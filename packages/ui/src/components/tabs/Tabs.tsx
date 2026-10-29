@@ -1,10 +1,11 @@
 import clsx from 'clsx'
-import {createContext, useContext} from 'react'
+import {createContext, isValidElement, useContext} from 'react'
 
 import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
 import {HStack} from '../h-stack/HStack'
+import {Icon} from '../icon/Icon'
 import {
   tabProps,
   type TabProps,
@@ -90,10 +91,19 @@ function TabsList(props: TabsListProps) {
   )
 }
 
-const tabClasses = clsx('sui-px2', 'sui-py1', 'sui-radius2', 'sui-text-body1', 'sui-weight-medium')
+const tabClasses = clsx(
+  'sui-display-inline-flex',
+  'sui-align-items-center',
+  'sui-gap1',
+  'sui-px2',
+  'sui-py1',
+  'sui-radius2',
+  'sui-text-body1',
+  'sui-weight-medium',
+)
 
 function Tab({value, tone = 'neutral', ...props}: TabProps) {
-  const {label, className, style, ...rest} = getProps({tone, ...props}, tabProps)
+  const {icon: IconProp, label, className, style, ...rest} = getProps({tone, ...props}, tabProps)
 
   const context = useTabsContext()
   const selected = context.value === value
@@ -115,6 +125,12 @@ function Tab({value, tone = 'neutral', ...props}: TabProps) {
         context.onValueChange?.(value)
       }}
     >
+      {IconProp &&
+        (isValidElement(IconProp) ? (
+          IconProp
+        ) : (
+          <Icon icon={IconProp} marginX={-1} marginY={-2} size={1} />
+        ))}
       {label}
     </button>
   )
