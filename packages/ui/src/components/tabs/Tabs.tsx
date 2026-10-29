@@ -31,6 +31,16 @@ function useTabsContext() {
   return context
 }
 
+function getTabId(tabsRootId: string, value: string): string {
+  const valueWithoutSpaces = value.replace(/\s/g, '-')
+  return `${tabsRootId}-${valueWithoutSpaces}-tab`
+}
+
+function getPanelId(tabsRootId: string, value: string): string {
+  const valueWithoutSpaces = value.replace(/\s/g, '-')
+  return `${tabsRootId}-${valueWithoutSpaces}-panel`
+}
+
 function TabsRoot({value, onValueChange, ...props}: TabsProps) {
   const {children, className, style, ...rest} = getProps(props, tabsProps)
 
@@ -118,10 +128,10 @@ function Tab({value, tone = 'neutral', ...props}: TabProps) {
       style={style}
       {...rest}
       data-ui="Tabs.Tab"
-      id={`${tabsRootId}-${value}-tab`}
       type="button"
       role="tab"
-      aria-controls={`${tabsRootId}-${value}-panel`}
+      id={getTabId(tabsRootId, value)}
+      aria-controls={getPanelId(tabsRootId, value)}
       aria-selected={selected}
       /* Only the active tab should receive focus via Tab key; others focus via arrow keys */
       tabIndex={selected ? 0 : -1}
@@ -158,8 +168,8 @@ function TabPanel({value, ...props}: TabsPanelProps) {
       data-ui="Tabs.Panel"
       display={selected ? 'block' : 'none'}
       role="tabpanel"
-      id={`${tabsRootId}-${value}-panel`}
-      aria-labelledby={`${tabsRootId}-${value}-tab`}
+      id={getPanelId(tabsRootId, value)}
+      aria-labelledby={getTabId(tabsRootId, value)}
     >
       {children}
     </Box>
