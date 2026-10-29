@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import {useState} from 'react'
-import {expect} from 'storybook/test'
+import {expect, userEvent} from 'storybook/test'
 
 import {Box} from '../../../../packages/ui/src/components/box/Box'
 import {Card} from '../../../../packages/ui/src/components/card/Card'
@@ -124,5 +124,93 @@ export const Tones: Story = {
 
     await expect(canvas.getByText('Neutral Card in tab panel')).toBeVisible()
     await expect(canvas.getByText('Critical Card in tab panel')).not.toBeVisible()
+  },
+}
+
+// Test click and keyboard interactions as per https://www.w3.org/WAI/ARIA/apg/patterns/tabs
+// Runs only with Vitest, not surfaced in Storybook
+export const Interactions: Story = {
+  tags: ['!dev', '!autodocs'],
+  render: (props) => <TabsDefaultStory {...props} />,
+  play: async ({canvas, step}) => {
+    const firstTab = await canvas.findByRole('tab', {name: 'First Tab'})
+    const secondTab = await canvas.findByRole('tab', {name: 'Second Tab'})
+    const thirdTab = await canvas.findByRole('tab', {name: 'Third Tab'})
+
+    await step('Click selects a tab and shows its panel', async () => {
+      await userEvent.click(secondTab)
+
+      await expect(secondTab).toHaveAttribute('aria-selected', 'true')
+      await expect(firstTab).toHaveAttribute('aria-selected', 'false')
+      await expect(canvas.getByText('Second tab panel')).toBeVisible()
+      await expect(canvas.getByText('First tab panel')).not.toBeVisible()
+    })
+
+    await step('Only the selected tab is in the tab sequence', async () => {
+      await expect(secondTab).toHaveAttribute('tabindex', '0')
+      await expect(firstTab).toHaveAttribute('tabindex', '-1')
+      await expect(thirdTab).toHaveAttribute('tabindex', '-1')
+    })
+
+    await step('Arrow keys move focus without a change to the selection', async () => {
+      secondTab.focus()
+
+      await userEvent.keyboard('{ArrowRight}')
+      await expect(thirdTab).toHaveFocus()
+      await expect(secondTab).toHaveAttribute('aria-selected', 'true')
+
+      await userEvent.keyboard('{ArrowLeft}')
+      await expect(secondTab).toHaveFocus()
+    })
+
+    await step('Arrow keys wrap at the ends', async () => {
+      thirdTab.focus()
+      await userEvent.keyboard('{ArrowRight}')
+      await expect(firstTab).toHaveFocus()
+
+      await userEvent.keyboard('{ArrowLeft}')
+      await expect(thirdTab).toHaveFocus()
+    })
+
+    await step('Home and End move focus to the first and last tab', async () => {
+      await userEvent.keyboard('{Home}')
+      await expect(firstTab).toHaveFocus()
+
+      await userEvent.keyboard('{End}')
+      await expect(thirdTab).toHaveFocus()
+    })
+
+    await step('Up and Down arrows do not move focus', async () => {
+      await userEvent.keyboard('{ArrowDown}')
+      await expect(thirdTab).toHaveFocus()
+
+      await userEvent.keyboard('{ArrowUp}')
+      await expect(thirdTab).toHaveFocus()
+    })
+
+    await step('Enter and Space select the focused tab', async () => {
+      await userEvent.keyboard('{Enter}')
+      await expect(thirdTab).toHaveAttribute('aria-selected', 'true')
+      await expect(canvas.getByText('Third tab panel')).toBeVisible()
+
+      await userEvent.keyboard('{Home}')
+      await userEvent.keyboard(' ')
+      await expect(firstTab).toHaveAttribute('aria-selected', 'true')
+      await expect(canvas.getByText('First tab panel')).toBeVisible()
+    })
+
+    await step(
+      'Tab moves focus to the panel, and Shift+Tab returns to the selected tab',
+      async () => {
+        await userEvent.keyboard('{End}')
+        await expect(thirdTab).toHaveFocus()
+
+        await userEvent.tab()
+        await expect(canvas.getByText('First tab panel')).toHaveFocus()
+
+        await userEvent.tab({shift: true})
+        await expect(firstTab).toHaveFocus()
+      },
+    )
   },
 }
