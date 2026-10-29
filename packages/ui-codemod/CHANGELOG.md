@@ -1,5 +1,11 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.14
+
+### Patch Changes
+
+- df8f7d8: added avatar, avatar counter, and avatar stack codemods
+
 ## 1.0.0-alpha.13
 
 ### Patch Changes
