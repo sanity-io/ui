@@ -1,3 +1,7 @@
+.sui-text-trim-edge {
+  text-box: trim-both cap alphabetic;
+}
+
 .sui-text-trim:before,
 .sui-text-trim:after {
   content: '';

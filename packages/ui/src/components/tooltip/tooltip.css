@@ -13,6 +13,8 @@
   opacity: 0;
   scale: 0.9;
   transition: none;
+  --tooltip-color: var(--foreground-high);
+  color: var(--tooltip-color);
 }
 
 .sui-Tooltip:popover-open {
