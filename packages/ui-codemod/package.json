@@ -103,6 +103,14 @@
       "source": "./src/commands/latest/heading.ts",
       "default": "./dist/commands/latest/heading.js"
     },
+    "./transforms/latest/hotkeys": {
+      "source": "./src/transforms/latest/hotkeys/hotkeys.ts",
+      "default": "./dist/transforms/latest/hotkeys/hotkeys.js"
+    },
+    "./latest/hotkeys": {
+      "source": "./src/commands/latest/hotkeys.ts",
+      "default": "./dist/commands/latest/hotkeys.js"
+    },
     "./transforms/latest/inline": {
       "source": "./src/transforms/latest/inline/inline.ts",
       "default": "./dist/transforms/latest/inline/inline.js"
@@ -110,6 +118,14 @@
     "./latest/inline": {
       "source": "./src/commands/latest/inline.ts",
       "default": "./dist/commands/latest/inline.js"
+    },
+    "./transforms/latest/kbd": {
+      "source": "./src/transforms/latest/kbd/kbd.ts",
+      "default": "./dist/transforms/latest/kbd/kbd.js"
+    },
+    "./latest/kbd": {
+      "source": "./src/commands/latest/kbd.ts",
+      "default": "./dist/commands/latest/kbd.js"
     },
     "./transforms/latest/label": {
       "source": "./src/transforms/latest/label/label.ts",
@@ -185,8 +201,12 @@
       "./latest/grid": "./dist/commands/latest/grid.js",
       "./transforms/latest/heading": "./dist/transforms/latest/heading/heading.js",
       "./latest/heading": "./dist/commands/latest/heading.js",
+      "./transforms/latest/hotkeys": "./dist/transforms/latest/hotkeys/hotkeys.js",
+      "./latest/hotkeys": "./dist/commands/latest/hotkeys.js",
       "./transforms/latest/inline": "./dist/transforms/latest/inline/inline.js",
       "./latest/inline": "./dist/commands/latest/inline.js",
+      "./transforms/latest/kbd": "./dist/transforms/latest/kbd/kbd.js",
+      "./latest/kbd": "./dist/commands/latest/kbd.js",
       "./transforms/latest/label": "./dist/transforms/latest/label/label.js",
       "./latest/label": "./dist/commands/latest/label.js",
       "./transforms/latest/select": "./dist/transforms/latest/select/select.js",
