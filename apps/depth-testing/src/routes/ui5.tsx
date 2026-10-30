@@ -12,6 +12,7 @@ import {
   Link,
   Radio,
   Switch,
+  Tabs,
   Text,
   TextInput,
   VStack,
@@ -22,6 +23,7 @@ import {useState} from 'react'
 
 function Ui5() {
   const [dialogOpen, setDialogOpen] = useState(false)
+  const [station, setStation] = useState('bridge')
 
   return (
     <Box margin={4}>
@@ -73,6 +75,24 @@ function Ui5() {
             <Badge tone="caution" text="Deflector array offline" />
             <Badge tone="critical" text="Warp core breach" />
           </HStack>
+        </Box>
+        <Box marginY={3}>
+          <Tabs value={station} onValueChange={setStation}>
+            <Tabs.List aria-label="Ship stations">
+              <Tabs.Tab label="Bridge" value="bridge" />
+              <Tabs.Tab label="Engineering" value="engineering" />
+              <Tabs.Tab label="Sickbay" value="sickbay" />
+            </Tabs.List>
+            <Tabs.Panel value="bridge">
+              <Text>All stations report ready.</Text>
+            </Tabs.Panel>
+            <Tabs.Panel value="engineering">
+              <Text>Dilithium matrix stable.</Text>
+            </Tabs.Panel>
+            <Tabs.Panel value="sickbay">
+              <Text>No patients on the ward.</Text>
+            </Tabs.Panel>
+          </Tabs>
         </Box>
       </Card>
     </Box>

@@ -22,6 +22,9 @@ import {
   Spinner,
   Stack,
   Switch,
+  Tab,
+  TabList,
+  TabPanel,
   Text,
   TextArea,
   TextInput,
@@ -272,6 +275,24 @@ export default function Ui4() {
           <AvatarStack key={i}>
             <Avatar initials="AB" />
           </AvatarStack>
+        ))}
+      </Profiler>
+
+      <h2>{count} Tabs</h2>
+      <Profiler id="Tabs" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <div key={i}>
+            <TabList aria-label="Tabs" gap={1}>
+              <Tab id={`tab-${i}-one`} aria-controls={`panel-${i}-one`} label="Tab one" selected />
+              <Tab id={`tab-${i}-two`} aria-controls={`panel-${i}-two`} label="Tab two" />
+            </TabList>
+            <TabPanel id={`panel-${i}-one`} aria-labelledby={`tab-${i}-one`}>
+              Panel one
+            </TabPanel>
+            <TabPanel id={`panel-${i}-two`} aria-labelledby={`tab-${i}-two`} hidden>
+              Panel two
+            </TabPanel>
+          </div>
         ))}
       </Profiler>
 

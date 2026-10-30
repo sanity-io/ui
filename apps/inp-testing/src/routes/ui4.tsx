@@ -16,6 +16,9 @@ import {
   Radio,
   Stack,
   Switch,
+  Tab,
+  TabList,
+  TabPanel,
   Text,
   TextInput,
   ThemeProvider,
@@ -32,6 +35,12 @@ const TOOLTIP_COUNT = 300
 const POPOVER_COUNT = 300
 const BADGE_COUNT = 500
 const AVATAR_COUNT = 300
+
+const TABS = [
+  {value: 'overview', label: 'Overview'},
+  {value: 'activity', label: 'Activity'},
+  {value: 'settings', label: 'Settings'},
+]
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -365,6 +374,46 @@ function AvatarShuffleSection() {
   )
 }
 
+/** One click on a tab shows its panel and hides the previous panel. */
+function TabSwitchSection() {
+  const [selected, setSelected] = useState('overview')
+
+  return (
+    <Card tone="neutral" padding={4}>
+      <Stack gap={3}>
+        <Text size={1} weight="semibold">
+          7. Tab switch
+        </Text>
+        <Text size={1}>One click on a tab shows its panel and hides the previous panel.</Text>
+        <div>
+          <TabList aria-label="Tab switch" gap={1}>
+            {TABS.map((tab) => (
+              <Tab
+                key={tab.value}
+                id={`tab-${tab.value}`}
+                aria-controls={`panel-${tab.value}`}
+                label={tab.label}
+                selected={selected === tab.value}
+                onClick={() => setSelected(tab.value)}
+              />
+            ))}
+          </TabList>
+          {TABS.map((tab) => (
+            <TabPanel
+              key={tab.value}
+              id={`panel-${tab.value}`}
+              aria-labelledby={`tab-${tab.value}`}
+              hidden={selected !== tab.value}
+            >
+              <Text size={1}>{tab.label} panel</Text>
+            </TabPanel>
+          ))}
+        </div>
+      </Stack>
+    </Card>
+  )
+}
+
 function Ui4() {
   return (
     <ThemeProvider theme={theme}>
@@ -379,6 +428,7 @@ function Ui4() {
         <PopoverMountSection />
         <BadgeToneToggleSection />
         <AvatarShuffleSection />
+        <TabSwitchSection />
       </Stack>
     </ThemeProvider>
   )
