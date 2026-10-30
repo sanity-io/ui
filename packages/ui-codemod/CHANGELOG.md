@@ -1,5 +1,12 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.15
+
+### Patch Changes
+
+- 5c24ffd: add kbd and hotkeys codemods
+- 5e5d285: add tooltip changeset
+
 ## 1.0.0-alpha.14
 
 ### Patch Changes
