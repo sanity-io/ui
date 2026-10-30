@@ -3,8 +3,10 @@ import {expect, userEvent, waitFor} from 'storybook/test'
 import {Tooltip as TooltipV3} from 'ui3'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
+import {Flex} from '../../../../packages/ui/src/components/flex/Flex'
 import {Grid} from '../../../../packages/ui/src/components/grid/Grid'
 import {Popover} from '../../../../packages/ui/src/components/popover/Popover'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {Tooltip} from '../../../../packages/ui/src/components/tooltip/Tooltip'
 import {PLACEMENT} from '../../../../packages/ui/src/types/Placement'
 
@@ -146,6 +148,45 @@ export const WithPopover: Story = {
     )
 
     await userEvent.click(trigger)
+    trigger.blur()
+  },
+}
+
+export const WithCustomContent: Story = {
+  render: (props) => {
+    return (
+      <Tooltip
+        {...props}
+        content={
+          <Flex flexDirection="column" gap={2} minWidth="150px">
+            <Text trim size={1}>
+              Title
+            </Text>
+            <Text trim muted size={0}>
+              Subtitle
+            </Text>
+          </Flex>
+        }
+      >
+        <Button text="Open Tooltip" />
+      </Tooltip>
+    )
+  },
+  play: async ({canvas}) => {
+    const trigger = await canvas.findByRole('button', {name: 'Open Tooltip'})
+    const title = await canvas.findByText('Title')
+    const subtitle = await canvas.findByText('Subtitle')
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(title).toBeVisible()
+        await expect(subtitle).toBeVisible()
+      },
+      {timeout: 750},
+    )
+
     trigger.blur()
   },
 }

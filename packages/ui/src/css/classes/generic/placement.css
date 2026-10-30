@@ -1,128 +1,70 @@
-[class*='placement-'] {
+[class*="placement-"] {
   inset: auto;
   margin: 0;
 }
 
-@position-try --top-center {
-  top: auto;
-  right: auto;
-  bottom: anchor(top);
-  left: anchor(center);
-  translate: -50% 0;
-}
-
 @position-try --top-start {
-  top: auto;
-  right: auto;
+  inset: auto;
   bottom: anchor(top);
   left: anchor(left);
-  translate: none;
 }
 
 @position-try --top-end {
-  top: auto;
-  left: auto;
+  inset: auto;
   bottom: anchor(top);
   right: anchor(right);
-  translate: none;
-}
-
-@position-try --bottom-center {
-  bottom: auto;
-  right: auto;
-  top: anchor(bottom);
-  left: anchor(center);
-  translate: -50% 0;
 }
 
 @position-try --bottom-start {
-  bottom: auto;
-  right: auto;
+  inset: auto;
   top: anchor(bottom);
   left: anchor(left);
-  translate: none;
 }
 
 @position-try --bottom-end {
-  bottom: auto;
-  left: auto;
+  inset: auto;
   top: anchor(bottom);
   right: anchor(right);
-  translate: none;
-}
-
-@position-try --right-center {
-  right: auto;
-  bottom: auto;
-  left: anchor(right);
-  top: anchor(center);
-  translate: 0 -50%;
-}
-
-@position-try --right-start {
-  right: auto;
-  bottom: auto;
-  left: anchor(right);
-  top: anchor(top);
-  translate: none;
-}
-
-@position-try --right-end {
-  right: auto;
-  top: auto;
-  left: anchor(right);
-  bottom: anchor(bottom);
-  translate: none;
-}
-
-@position-try --left-center {
-  left: auto;
-  bottom: auto;
-  right: anchor(left);
-  top: anchor(center);
-  translate: 0 -50%;
 }
 
 @position-try --left-start {
-  left: auto;
-  bottom: auto;
-  right: anchor(left);
+  inset: auto;
   top: anchor(top);
-  translate: none;
+  right: anchor(left);
 }
 
 @position-try --left-end {
-  left: auto;
-  top: auto;
-  right: anchor(left);
+  inset: auto;
   bottom: anchor(bottom);
-  translate: none;
+  right: anchor(left);
 }
 
-.sui-placement-bottom {
-  top: anchor(bottom);
-  left: anchor(center);
-  translate: -50% 0;
-  position-try-fallbacks: --top-center;
+@position-try --right-start {
+  inset: auto;
+  top: anchor(top);
+  left: anchor(right);
 }
 
-.sui-placement-bottom-start {
-  top: anchor(bottom);
-  left: anchor(left);
-  position-try-fallbacks: --top-start;
-}
-
-.sui-placement-bottom-end {
-  top: anchor(bottom);
-  right: anchor(right);
-  position-try-fallbacks: --top-end;
+@position-try --right-end {
+  inset: auto;
+  bottom: anchor(bottom);
+  left: anchor(right);
 }
 
 .sui-placement-top {
   bottom: anchor(top);
   left: anchor(center);
   translate: -50% 0;
-  position-try-fallbacks: --bottom-center;
+  position-try-fallbacks: flip-block;
+}
+
+@supports (justify-self: anchor-center) {
+  .sui-placement-top {
+    left: auto;
+    translate: none;
+    justify-self: anchor-center;
+    margin-inline: var(--space-2);
+  }
 }
 
 .sui-placement-top-start {
@@ -137,41 +79,87 @@
   position-try-fallbacks: --bottom-end;
 }
 
+.sui-placement-bottom {
+  top: anchor(bottom);
+  left: anchor(center);
+  translate: -50% 0;
+  position-try-fallbacks: flip-block;
+}
+
+@supports (justify-self: anchor-center) {
+  .sui-placement-bottom {
+    left: auto;
+    translate: none;
+    justify-self: anchor-center;
+    margin-inline: var(--space-2);
+  }
+}
+
+.sui-placement-bottom-start {
+  top: anchor(bottom);
+  left: anchor(left);
+  position-try-fallbacks: --top-start;
+}
+
+.sui-placement-bottom-end {
+  top: anchor(bottom);
+  right: anchor(right);
+  position-try-fallbacks: --top-end;
+}
+
 .sui-placement-left {
-  right: anchor(left);
   top: anchor(center);
+  right: anchor(left);
   translate: 0 -50%;
-  position-try-fallbacks: --right-center;
+  position-try-fallbacks: flip-inline;
+}
+
+@supports (align-self: anchor-center) {
+  .sui-placement-left {
+    top: auto;
+    translate: none;
+    align-self: anchor-center;
+    margin-block: var(--space-2);
+  }
 }
 
 .sui-placement-left-start {
-  right: anchor(left);
   top: anchor(top);
+  right: anchor(left);
   position-try-fallbacks: --right-start;
 }
 
 .sui-placement-left-end {
-  right: anchor(left);
   bottom: anchor(bottom);
+  right: anchor(left);
   position-try-fallbacks: --right-end;
 }
 
 .sui-placement-right {
-  left: anchor(right);
   top: anchor(center);
+  left: anchor(right);
   translate: 0 -50%;
-  position-try-fallbacks: --left-center;
+  position-try-fallbacks: flip-inline;
+}
+
+@supports (align-self: anchor-center) {
+  .sui-placement-right {
+    top: auto;
+    translate: none;
+    align-self: anchor-center;
+    margin-block: var(--space-2);
+  }
 }
 
 .sui-placement-right-start {
-  left: anchor(right);
   top: anchor(top);
+  left: anchor(right);
   position-try-fallbacks: --left-start;
 }
 
 .sui-placement-right-end {
-  left: anchor(right);
   bottom: anchor(bottom);
+  left: anchor(right);
   position-try-fallbacks: --left-end;
 }
 
@@ -185,12 +173,12 @@
   margin-inline: var(--space-1);
 }
 
-[class*="placement-bottom"] {
-  transform-origin: center top;
-}
-
 [class*="placement-top"] {
   transform-origin: center bottom;
+}
+
+[class*="placement-bottom"] {
+  transform-origin: center top;
 }
 
 [class*="placement-left"] {
