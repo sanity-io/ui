@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.19
+
+### Patch Changes
+
+- 933796b: feat: add Tabs & subcomponents
+
 ## 5.0.0-alpha.18
 
 ### Patch Changes

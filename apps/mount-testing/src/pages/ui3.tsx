@@ -13,13 +13,20 @@ import {
   Flex,
   Grid,
   Heading,
+  Hotkeys,
   Inline,
+  KBD,
   Label,
   Radio,
+  Select,
   Spinner,
   Stack,
   Switch,
+  Tab,
+  TabList,
+  TabPanel,
   Text,
+  TextArea,
   TextInput,
   ThemeProvider,
   Tooltip,
@@ -192,6 +199,24 @@ export default function Ui3() {
         ))}
       </Profiler>
 
+      <h2>{count} Selects</h2>
+      <Profiler id="Select" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Select key={i} aria-label="Select">
+            <option>First</option>
+            <option>Second</option>
+            <option>Third</option>
+          </Select>
+        ))}
+      </Profiler>
+
+      <h2>{count} TextAreas</h2>
+      <Profiler id="TextArea" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <TextArea key={i} aria-label="Text area" />
+        ))}
+      </Profiler>
+
       <h2>{count} TextInputs</h2>
       <Profiler id="TextInput" onRender={handleOnRender}>
         {iterator.map((i) => (
@@ -229,12 +254,44 @@ export default function Ui3() {
         ))}
       </Profiler>
 
+      <h2>{count} KBDs</h2>
+      <Profiler id="KBD" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <KBD key={i}>A</KBD>
+        ))}
+      </Profiler>
+
+      <h2>{count} Hotkeys</h2>
+      <Profiler id="Hotkeys" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Hotkeys key={i} keys={['A', 'B', 'C']} />
+        ))}
+      </Profiler>
+
       <h2>{count} Avatars & Avatar Stacks</h2>
       <Profiler id="Avatar" onRender={handleOnRender}>
         {iterator.map((i) => (
           <AvatarStack key={i}>
             <Avatar initials="AB" />
           </AvatarStack>
+        ))}
+      </Profiler>
+
+      <h2>{count} Tabs</h2>
+      <Profiler id="Tabs" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <div key={i}>
+            <TabList aria-label="Tabs" gap={1}>
+              <Tab id={`tab-${i}-one`} aria-controls={`panel-${i}-one`} label="Tab one" selected />
+              <Tab id={`tab-${i}-two`} aria-controls={`panel-${i}-two`} label="Tab two" />
+            </TabList>
+            <TabPanel id={`panel-${i}-one`} aria-labelledby={`tab-${i}-one`}>
+              Panel one
+            </TabPanel>
+            <TabPanel id={`panel-${i}-two`} aria-labelledby={`tab-${i}-two`} hidden>
+              Panel two
+            </TabPanel>
+          </div>
         ))}
       </Profiler>
 
