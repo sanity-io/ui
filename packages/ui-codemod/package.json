@@ -175,6 +175,14 @@
       "source": "./src/commands/latest/text-input.ts",
       "default": "./dist/commands/latest/text-input.js"
     },
+    "./transforms/latest/tooltip-group": {
+      "source": "./src/transforms/latest/tooltip-group/tooltip-group.ts",
+      "default": "./dist/transforms/latest/tooltip-group/tooltip-group.js"
+    },
+    "./latest/tooltip-group": {
+      "source": "./src/commands/latest/tooltip-group.ts",
+      "default": "./dist/commands/latest/tooltip-group.js"
+    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -219,6 +227,8 @@
       "./latest/text-area": "./dist/commands/latest/text-area.js",
       "./transforms/latest/text-input": "./dist/transforms/latest/text-input/text-input.js",
       "./latest/text-input": "./dist/commands/latest/text-input.js",
+      "./transforms/latest/tooltip-group": "./dist/transforms/latest/tooltip-group/tooltip-group.js",
+      "./latest/tooltip-group": "./dist/commands/latest/tooltip-group.js",
       "./package.json": "./package.json"
     }
   },
