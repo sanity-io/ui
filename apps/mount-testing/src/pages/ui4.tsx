@@ -13,9 +13,12 @@ import {
   Flex,
   Grid,
   Heading,
+  Hotkeys,
   Inline,
+  KBD,
   Label,
   Radio,
+  Select,
   Spinner,
   Stack,
   Switch,
@@ -23,6 +26,7 @@ import {
   TabList,
   TabPanel,
   Text,
+  TextArea,
   TextInput,
   ThemeProvider,
 } from 'ui4'
@@ -196,6 +200,24 @@ export default function Ui4() {
         ))}
       </Profiler>
 
+      <h2>{count} Selects</h2>
+      <Profiler id="Select" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Select key={i} aria-label="Select">
+            <option>First</option>
+            <option>Second</option>
+            <option>Third</option>
+          </Select>
+        ))}
+      </Profiler>
+
+      <h2>{count} TextAreas</h2>
+      <Profiler id="TextArea" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <TextArea key={i} aria-label="Text area" />
+        ))}
+      </Profiler>
+
       <h2>{count} TextInputs</h2>
       <Profiler id="TextInput" onRender={handleOnRender}>
         {iterator.map((i) => (
@@ -230,6 +252,20 @@ export default function Ui4() {
       <Profiler id="Badge" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Badge key={i}>Badge</Badge>
+        ))}
+      </Profiler>
+
+      <h2>{count} KBDs</h2>
+      <Profiler id="KBD" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <KBD key={i}>A</KBD>
+        ))}
+      </Profiler>
+
+      <h2>{count} Hotkeys</h2>
+      <Profiler id="Hotkeys" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Hotkeys key={i} keys={['A', 'B', 'C']} />
         ))}
       </Profiler>
 

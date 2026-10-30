@@ -14,6 +14,7 @@ import {
   Divider,
   Flex,
   Grid,
+  Eyebrow,
   Heading,
   Hotkeys,
   HStack,
@@ -27,11 +28,13 @@ import {
   List,
   PressArea,
   Radio,
+  Select,
   SkipToContent,
   Spinner,
   Switch,
   Tabs,
   Text,
+  TextArea,
   TextInput,
   Tooltip,
   TooltipGroup,
@@ -143,6 +146,15 @@ export default function Ui5() {
         ))}
       </Profiler>
 
+      <h2>{count} Eyebrows</h2>
+      <Profiler id="Eyebrow" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Eyebrow key={i} size={2} muted>
+            Eyebrow
+          </Eyebrow>
+        ))}
+      </Profiler>
+
       <h2>{count} Headings</h2>
       <Profiler id="Heading" onRender={handleOnRender}>
         {iterator.map((i) => (
@@ -207,6 +219,24 @@ export default function Ui5() {
       <Profiler id="Radio" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Radio key={i} name="radio" label="Radio" />
+        ))}
+      </Profiler>
+
+      <h2>{count} Selects</h2>
+      <Profiler id="Select" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Select key={i} aria-label="Select">
+            <option>First</option>
+            <option>Second</option>
+            <option>Third</option>
+          </Select>
+        ))}
+      </Profiler>
+
+      <h2>{count} TextAreas</h2>
+      <Profiler id="TextArea" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <TextArea key={i} aria-label="Text area" />
         ))}
       </Profiler>
 
