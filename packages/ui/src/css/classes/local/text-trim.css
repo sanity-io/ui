@@ -38,4 +38,11 @@
   .sui-text-code2 { --trim: -6px; }
   .sui-text-code3 { --trim: -7px; }
   .sui-text-code4 { --trim: -8px; }
+
+  .sui-text-eyebrow0 { --trim: -2px; }
+  .sui-text-eyebrow1 { --trim: -2.5px; }
+  .sui-text-eyebrow2 { --trim: -3px; }
+  .sui-text-eyebrow3 { --trim: -3.5px; }
+  .sui-text-eyebrow4 { --trim: -4px; }
+  .sui-text-eyebrow5 { --trim: -4.5px; }
 }
