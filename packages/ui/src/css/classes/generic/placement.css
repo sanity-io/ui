@@ -3,124 +3,52 @@
   margin: 0;
 }
 
-@position-try --top-center {
-  inset: auto;
-  bottom: anchor(top);
-  left: anchor(center);
-  translate: -50% 0;
-}
-
-@supports (justify-self: anchor-center) {
-  @position-try --top-center {
-    left: auto;
-    translate: none;
-    justify-self: anchor-center;
-    margin-inline: var(--space-2);
-  }
-}
-
 @position-try --top-start {
   inset: auto;
   bottom: anchor(top);
   left: anchor(left);
-  translate: none;
 }
 
 @position-try --top-end {
   inset: auto;
   bottom: anchor(top);
   right: anchor(right);
-  translate: none;
-}
-
-@position-try --bottom-center {
-  inset: auto;
-  top: anchor(bottom);
-  left: anchor(center);
-  translate: -50% 0;
-}
-
-@supports (justify-self: anchor-center) {
-  @position-try --bottom-center {
-    left: auto;
-    translate: none;
-    justify-self: anchor-center;
-    margin-inline: var(--space-2);
-  }
 }
 
 @position-try --bottom-start {
   inset: auto;
   top: anchor(bottom);
   left: anchor(left);
-  translate: none;
 }
 
 @position-try --bottom-end {
   inset: auto;
   top: anchor(bottom);
   right: anchor(right);
-  translate: none;
-}
-
-@position-try --left-center {
-  inset: auto;
-  top: anchor(center);
-  right: anchor(left);
-  translate: 0 -50%;
-}
-
-@supports (align-self: anchor-center) {
-  @position-try --left-center {
-    top: auto;
-    translate: none;
-    align-self: anchor-center;
-    margin-block: var(--space-2);
-  }
 }
 
 @position-try --left-start {
   inset: auto;
   top: anchor(top);
   right: anchor(left);
-  translate: none;
 }
 
 @position-try --left-end {
   inset: auto;
   bottom: anchor(bottom);
   right: anchor(left);
-  translate: none;
-}
-
-@position-try --right-center {
-  inset: auto;
-  top: anchor(center);
-  left: anchor(right);
-  translate: 0 -50%;
-}
-
-@supports (align-self: anchor-center) {
-  @position-try --right-center {
-    top: auto;
-    translate: none;
-    align-self: anchor-center;
-    margin-block: var(--space-2);
-  }
 }
 
 @position-try --right-start {
   inset: auto;
   top: anchor(top);
   left: anchor(right);
-  translate: none;
 }
 
 @position-try --right-end {
   inset: auto;
   bottom: anchor(bottom);
   left: anchor(right);
-  translate: none;
 }
 
 .sui-placement-top {

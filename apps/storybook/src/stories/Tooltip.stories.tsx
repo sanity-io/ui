@@ -157,7 +157,6 @@ export const WithCustomContent: Story = {
     return (
       <Tooltip
         {...props}
-        placement="bottom-start"
         content={
           <Flex flexDirection="column" gap={2} minWidth="150px">
             <Text trim size={1}>
