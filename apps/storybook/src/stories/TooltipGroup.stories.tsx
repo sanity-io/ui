@@ -71,7 +71,8 @@ export const Default: Story = {
           <Button text="Open Tooltip 2" />
         </Tooltip>
 
-        <Tooltip content="Tooltip 3 Text">
+        {/* The overflow: hidden prevents an axe scrollable-region-focusable false positive */}
+        <Tooltip content="Tooltip 3 Text" style={{overflow: 'hidden'}}>
           <Button text="Open Tooltip 3" />
         </Tooltip>
       </TooltipGroup>
