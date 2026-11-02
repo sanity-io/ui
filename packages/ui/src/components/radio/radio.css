@@ -8,7 +8,8 @@
 
 .sui-RadioInput {
   position: absolute;
-  inset: -1px;
+  /* Use negative inset for 24x24 pixel hit area */
+  inset: calc(-1 * var(--space-1) - 0.5px);
 }
 
 /**
@@ -71,7 +72,7 @@
   --border-color: var(--separator-low);
 }
 
-.sui-Radio:has(.sui-RadioInput:disabled) {
+.sui-Radio:has(.sui-RadioInput:disabled):before {
   background: light-dark(var(--gray-300), var(--gray-500));
 }
 

@@ -16,6 +16,8 @@ export function Switch(props: SwitchProps) {
     <Flex
       as="span"
       className={clsx(switchClassName, className)}
+      style={style}
+      data-ui="Switch"
       position="relative"
       alignItems="center"
       radius={6}

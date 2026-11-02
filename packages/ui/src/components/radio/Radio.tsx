@@ -16,6 +16,8 @@ export function Radio(props: RadioProps) {
     <Box
       as="span"
       className={clsx(radioClassName, className)}
+      style={style}
+      data-ui="Radio"
       position="relative"
       radius="full"
       width="17px"

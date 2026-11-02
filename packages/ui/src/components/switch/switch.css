@@ -14,9 +14,9 @@
 
 .sui-SwitchInput {
   position: absolute;
-  inset: -1px;
+  /* Use negative inset for 24x24 pixel hit area */
+  inset: calc(-1 * var(--space-1) - 0.5px);
 }
-
 
 /**
   * Custom switch marker
@@ -105,7 +105,7 @@
   --border-color: var(--error-separator);
 }
 
-.sui-Switch:has(.sui-SwitchInput[aria-invalid="true"]):before {
+.sui-Switch:has(.sui-SwitchInput:not(:checked)[aria-invalid="true"]):before {
   background-color: var(--error-separator);
 }
 
