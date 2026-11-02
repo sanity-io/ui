@@ -183,6 +183,14 @@
       "source": "./src/commands/latest/tooltip.ts",
       "default": "./dist/commands/latest/tooltip.js"
     },
+    "./transforms/latest/tooltip-delay-group-provider": {
+      "source": "./src/transforms/latest/tooltip-delay-group-provider/tooltip-delay-group-provider.ts",
+      "default": "./dist/transforms/latest/tooltip-delay-group-provider/tooltip-delay-group-provider.js"
+    },
+    "./latest/tooltip-delay-group-provider": {
+      "source": "./src/commands/latest/tooltip-delay-group-provider.ts",
+      "default": "./dist/commands/latest/tooltip-delay-group-provider.js"
+    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -229,6 +237,8 @@
       "./latest/text-input": "./dist/commands/latest/text-input.js",
       "./transforms/latest/tooltip": "./dist/transforms/latest/tooltip/tooltip.js",
       "./latest/tooltip": "./dist/commands/latest/tooltip.js",
+      "./transforms/latest/tooltip-delay-group-provider": "./dist/transforms/latest/tooltip-delay-group-provider/tooltip-delay-group-provider.js",
+      "./latest/tooltip-delay-group-provider": "./dist/commands/latest/tooltip-delay-group-provider.js",
       "./package.json": "./package.json"
     }
   },
