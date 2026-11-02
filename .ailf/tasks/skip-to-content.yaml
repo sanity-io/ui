@@ -1,0 +1,88 @@
+- id: sanity-ui-v5-skip-to-content-requires-href-and-label
+  mode: literacy
+  title: 'SkipToContent — href and label are both required, with no children'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 134967f5-d8f5-4e34-92a3-cd4a4e3900aa
+        path: ui/components/skip-to-content
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 134967f5-d8f5-4e34-92a3-cd4a4e3900aa
+          perspective: rqgKNUCe1
+        reason: 'SkipToContent requires both href and label as props with no defaults; children is blocked entirely (the prop type is never) — label supplies the visible/announced text'
+  prompt:
+    text: |
+      I'm adding a skip link at the top of the page so keyboard users can jump past the nav. I tried `<SkipToContent href="#main-content">Skip to content</SkipToContent>`, passing the text as children. TypeScript rejects it. Fix it.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides corrected code with `href="#main-content"` kept, pointing at the same target
+        - If the surrounding markup is shown, SkipToContent comes before the navigation
+        - The link text still reads as a skip-to-content message (for example "Skip to content")
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected example passes text via `label`, not as JSX children
+        - Both `href` and `label` are present on SkipToContent
+        - SkipToContent is imported from '@sanity/ui'
+    - type: contains-any
+      value: ['label="Skip to content', 'label="Skip to main content']
+    - type: contains
+      value: 'href="#'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-skip-to-content-href-needs-hash-and-focusable-target
+  mode: literacy
+  title: 'SkipToContent — href keeps the leading #, and the target needs tabIndex={-1}'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 134967f5-d8f5-4e34-92a3-cd4a4e3900aa
+        path: ui/components/skip-to-content
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 134967f5-d8f5-4e34-92a3-cd4a4e3900aa
+          perspective: rqgKNUCe1
+        reason: 'href is passed straight through to the anchor, so href="main" compiles but links to a relative URL instead of the same-page fragment; the target element (typically main) must have tabIndex={-1} so focus moves to it'
+  prompt:
+    text: |
+      Our skip link appears when I press Tab, but pressing Enter on it navigates the browser to `/documents/main` and shows a 404 instead of jumping past the nav. There are no TypeScript or console errors. Here is the relevant markup:
+
+      ```tsx
+      <SkipToContent href="main" label="Skip to content" />
+      <Box as="nav" aria-label="Main navigation">…</Box>
+      <Box as="main" id="main">…</Box>
+      ```
+
+      Fix it so the link jumps past the nav and keyboard focus actually lands in the main region. Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Keeps SkipToContent before the nav, as the first focusable element on the page
+        - Does not hide the link with display none or aria-hidden
+        - Keeps the nav and main landmarks and the main element's `id="main"`
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - SkipToContent uses `href="#main"` (matching the target's id) and `label`
+        - The main element has `id="main"` and `tabIndex={-1}`
+        - SkipToContent is imported from '@sanity/ui'
+        - Does not use a `hash` prop or pass the text as children
+    - type: contains
+      value: 'href="#main"'
+    - type: contains
+      value: 'tabIndex={-1}'
+  baseline:
+    enabled: true
+    rubric: full

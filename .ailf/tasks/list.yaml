@@ -1,0 +1,106 @@
+- id: sanity-ui-v5-list-compound-component-access
+  mode: literacy
+  title: 'List — a compound component; Item/ButtonItem/ItemText/ItemImage are not separate imports'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: bb5cb4f0-8eb0-400f-acdb-f0b4ddd91c7a
+        path: ui/components/list
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: bb5cb4f0-8eb0-400f-acdb-f0b4ddd91c7a
+          perspective: rqgKNUCe1
+        reason: 'List is a compound component — List.Item, List.ButtonItem, List.ItemText, and List.ItemImage are accessed as properties of the List import, not imported by name'
+  prompt:
+    text: |
+      I'm building a document list and tried `import { List, ListItem, ListItemText } from '@sanity/ui'`, but `ListItem` and `ListItemText` don't exist. Show the correct import and a working example.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Shows a working example using List.Item and List.ItemText as properties of List
+        - List.ItemText is nested inside List.Item
+        - Any other list part used (List.ButtonItem, List.ItemImage) is also accessed as a property of List
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Only List is imported from '@sanity/ui'
+        - List.Item is rendered as a direct child of List
+        - No ListItem or ListItemText bare identifier appears in the corrected code (quoting the broken import to explain it is fine)
+    - type: contains
+      value: 'List.Item'
+    - type: contains
+      value: 'List.ItemText'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-list-ranked-ol-density-on-items
+  mode: literacy
+  title: 'List — as="ol" for a ranked list; density belongs on each row, not on List'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: bb5cb4f0-8eb0-400f-acdb-f0b4ddd91c7a
+        path: ui/components/list
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: bb5cb4f0-8eb0-400f-acdb-f0b4ddd91c7a
+          perspective: rqgKNUCe1
+        reason: 'List renders <ul> by default and should use as="ol" when order is meaningful (ranked results, step sequences); density=''compact'' is the guidance for sidebars and panels'
+      - id: 0f510262-a1fb-48ae-89e6-7c33eacf2934
+        path: ui/components/list-item
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 0f510262-a1fb-48ae-89e6-7c33eacf2934
+          perspective: rqgKNUCe1
+        reason: 'density (compact | regular | loose, default regular) is a List.Item prop that sets row padding, gap and minimum height together'
+  prompt:
+    text: |
+      I'm adding a "Most edited this week" panel to a narrow sidebar. It shows the top five documents in rank order, and I want the rows tight because the panel is small. I wrote this, and TypeScript rejects `density` on the List:
+
+      ```tsx
+      import { List } from '@sanity/ui'
+
+      <List density="compact">
+        {topDocs.map((doc) => (
+          <List.Item key={doc.id}>
+            <List.ItemText title={doc.title} subtitle={`${doc.edits} edits`} />
+          </List.Item>
+        ))}
+      </List>
+      ```
+
+      Fix it, and fix anything else about this markup that is wrong for a ranked list. Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides the corrected JSX
+        - Keeps each document's List.ItemText with its `title` and `subtitle`
+        - Keeps one List.Item per document, with its `key`, in `topDocs` order
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - List has `as="ol"` and no `density` prop
+        - Every List.Item sets `density="compact"`
+        - List is the only name imported from '@sanity/ui' for the list parts; no ListItem or ListItemText identifiers are used
+        - Does not add inline styles, className or padding props to tighten the rows
+        - JSX is syntactically valid
+    - type: contains
+      value: 'as="ol"'
+    - type: regex
+      value: "<List\\.Item[^>]*density=\"compact\""
+    # No not-contains on `<List density=`: the prompt quotes that line, so a
+    # correct answer may restate it. The rubric checks List carries no density.
+  baseline:
+    enabled: true
+    rubric: full

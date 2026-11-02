@@ -1,0 +1,93 @@
+- id: sanity-ui-v5-link-open-in-new-tab-and-underlined
+  mode: literacy
+  title: 'Link — openInNewTab sets target/rel together, underlined is a boolean prop, not a style'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 8cfd4eb8-b494-4366-b79b-e927d6e4dc7c
+        path: ui/components/link
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 8cfd4eb8-b494-4366-b79b-e927d6e4dc7c
+          perspective: rqgKNUCe1
+        reason: 'Link''s openInNewTab prop sets target="_blank" and rel="noopener noreferrer" together, and the underline is controlled by the underlined boolean prop (default true) rather than an inline text-decoration style'
+  prompt:
+    text: |
+      I need a Link to an external site that opens in a new tab and is underlined. I was going to set `target="_blank"` directly on it, and reach for an inline `style` prop setting `textDecoration: 'underline'`. Show the correct way to write this Link in this design system.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Relies on `openInNewTab` for both `target` and `rel`, with no hand-written `rel` attribute alongside it
+        - The link's visible text names the destination site
+        - Provides corrected JSX that uses `openInNewTab` on Link and either omits `underlined` (it defaults to `true`) or passes it explicitly
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected example uses `openInNewTab` rather than a raw `target` attribute
+        - The corrected example controls the underline through the `underlined` prop (or by relying on its `true` default), never through an inline `style` object
+        - Link is imported from '@sanity/ui'
+    - type: contains
+      value: 'openInNewTab'
+    - type: contains
+      value: 'underlined'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-link-not-for-actions-use-button
+  mode: literacy
+  title: 'Link — navigation only; an href="#" that opens a dialog should be a Button'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 8cfd4eb8-b494-4366-b79b-e927d6e4dc7c
+        path: ui/components/link
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 8cfd4eb8-b494-4366-b79b-e927d6e4dc7c
+          perspective: rqgKNUCe1
+        reason: "Don't use Link to trigger a side effect such as opening a dialog, submitting data or toggling state without navigating — use Button; a Link's href must be a real destination, not '#' or 'javascript:void(0)'; link labels name the destination rather than 'Click here'"
+  prompt:
+    text: |
+      In a document footer I have this, using `@sanity/ui`:
+
+      ```tsx
+      <Text size={1}>
+        Need to change who can edit?{' '}
+        <Link href="#" onClick={(e) => { e.preventDefault(); setShareDialogOpen(true) }}>
+          Click here
+        </Link>
+      </Text>
+      ```
+
+      It works, but a reviewer said it's the wrong component. Is that right? Fix it.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Calls `setShareDialogOpen(true)` from the Button's onClick, with no `href` or `e.preventDefault()`
+        - Replaces "Click here" with a label that names the action, such as "Manage access"
+        - Provides corrected JSX that opens the dialog from a Button
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The dialog is opened by a Button with an onClick handler and a label naming the action
+        - No Link with `href="#"` or `javascript:void(0)` remains
+        - Button is imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: '<Button'
+    # Scoped to the rendered label: the prompt quotes "Click here", so a
+    # correct answer may name it while explaining why it is replaced.
+    - type: not-contains
+      value: 'text="Click here"'
+  baseline:
+    enabled: true
+    rubric: full

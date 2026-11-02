@@ -10,3 +10,5 @@ etc
 node_modules
 .turbo
 apps/mount-testing/perf-results/
+
+.env

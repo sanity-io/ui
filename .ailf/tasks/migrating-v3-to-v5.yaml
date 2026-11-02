@@ -1,0 +1,175 @@
+- id: sanity-ui-v5-migrating-v3-to-v5-layout-snippet
+  mode: literacy
+  title: 'Migrating v3 to v5 — Card padding, tone and Flex prop names'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/guides/migrating-v3-to-v5
+        reason: 'Manual migration areas — tone="default" is a TS2322 error on v5 Card (use neutral); Flex''s direction/align/justify/wrap become flexDirection/alignItems/justifyContent/flexWrap'
+      - id: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+        path: ui/components/card
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+          perspective: rqgKNUCe1
+        reason: 'v5 Card has no padding prop; density (compact, regular, loose) sets padding, gap and radius together'
+      - path: ui/tokens/space
+        reason: "Card's compact density uses space-3 (12px), the same size as v3 padding={3}"
+  prompt:
+    text: |
+      I'm moving this Sanity UI 3 panel to Sanity UI 5. After upgrading, it fails the type check. Migrate it so it looks the same:
+
+      ```tsx
+      import {Card, Flex, Heading, Text} from '@sanity/ui'
+
+      export function ReviewSummary() {
+        return (
+          <Card padding={3} tone="default">
+            <Flex direction="row" align="center" justify="space-between">
+              <Heading as="h2" size={1}>Review</Heading>
+              <Text size={1} muted>3 fields need attention</Text>
+            </Flex>
+          </Card>
+        )
+      }
+      ```
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses `density="compact"` on Card as the match for v3 `padding={3}` (compact density's padding is space-3, 12px)
+        - Changes `tone="default"` to `tone="neutral"` (or drops the tone)
+        - Imports all four components from `@sanity/ui`
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Card has no padding, radius or gap prop and uses a density value from compact, regular or loose
+        - Flex uses `flexDirection="row"`, `alignItems="center"` and `justifyContent="space-between"` and no `direction`, `align` or `justify` prop
+        - No inline `style` or wrapping Box is added to recreate the Card's padding
+        - JSX is syntactically valid
+    # Only "density=" is checked as a string: compact is the expected value, but the
+    # rubric judges the choice. No not-contains on the v3 props, because a correct
+    # answer may quote the prompt's v3 code as the "before" version.
+    - type: contains
+      value: 'density='
+    - type: contains
+      value: 'alignItems="center"'
+    - type: contains
+      value: 'justifyContent="space-between"'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-migrating-v3-to-v5-controls-snippet
+  mode: literacy
+  title: 'Migrating v3 to v5 — Button mode, Icon symbol and Tooltip content'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/guides/migrating-v3-to-v5
+        reason: "Icon's symbol prop becomes icon; Tooltip's label stays content (there is no text prop); icons import from their own @sanity/icons subpath"
+      - id: ea580011-a37c-4dba-b1a0-30a27e47530f
+        path: ui/components/button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: ea580011-a37c-4dba-b1a0-30a27e47530f
+          perspective: rqgKNUCe1
+        reason: 'v5 Button replaces mode with level (primary, secondary, tertiary); mode is not a valid prop'
+      - id: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+        path: ui/components/tooltip
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+          perspective: rqgKNUCe1
+        reason: 'Tooltip content keeps its name between versions and its child must be a single React element'
+  prompt:
+    text: |
+      Port this toolbar action from our old Sanity UI 3 code to Sanity UI 5. Keep the same look and behaviour:
+
+      ```tsx
+      import {Button, Flex, Tooltip} from '@sanity/ui'
+      import {Icon} from '@sanity/icons'
+
+      export function ReviewAction() {
+        return (
+          <Flex align="center" gap={2}>
+            <Icon symbol="warning-outline" />
+            <Tooltip content="Open the review panel">
+              <Button mode="ghost" text="Review" />
+            </Tooltip>
+          </Flex>
+        )
+      }
+      ```
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Replaces Button's `mode` with `level`, using one of the v5 values primary, secondary or tertiary
+        - Uses the v5 `Icon` component from `@sanity/ui` with the `icon` prop (not `symbol`), passing the icon component rather than a string name
+        - Imports the icon from its own subpath, `import {WarningOutlineIcon} from '@sanity/icons/WarningOutline'`
+        - Keeps the Tooltip label on `content`
+        - Renames Flex's `align` to `alignItems`
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Button, Flex, Icon and Tooltip are imported from `@sanity/ui`
+        - No `mode`, `symbol` or `align` prop remains in the migrated JSX, and Tooltip has no `text` or `title` prop
+        - The Tooltip wraps a single React element (the Button)
+        - JSX is syntactically valid
+    - type: contains
+      value: '@sanity/icons/WarningOutline'
+    - type: contains
+      value: 'level='
+    - type: regex
+      value: "<Icon\\b[^>]*\\bicon=\\{WarningOutlineIcon\\}"
+    - type: contains
+      value: 'content="Open the review panel"'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-migrating-v3-to-v5-styling-model
+  mode: literacy
+  title: 'Migrating v3 to v5 — ThemeProvider becomes a stylesheet import; CSS custom properties, light-dark() and sui- classes'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/guides/migrating-v3-to-v5
+        reason: "v5 styling and theming — static stylesheet, no provider, theming through CSS custom properties, light and dark through light-dark(), sui- class prefix, styled() wrappers replaced by props or your own CSS; v3's ThemeProvider is replaced by one stylesheet import"
+      - path: ui/guides/api-essentials
+        reason: 'v5 ships no theming API — no ThemeProvider, no studioTheme, no runtime scheme toggle; importing one from v5 is a TypeScript error'
+  prompt:
+    text: |
+      We're planning a move from Sanity UI 3 to Sanity UI 5 in a large app. Today we customise v3 with a JavaScript theme passed to `ThemeProvider`, we toggle dark mode by switching the theme's `scheme`, and we have a dozen `styled(Card)` wrappers.
+
+      Show the team what this becomes in v5: the app entry file, how we override one of our theme colours so it still has separate light and dark values, and what one of the `styled(Card)` wrappers turns into.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - The entry file imports `'@sanity/ui/styles.css'` once and renders the app without a ThemeProvider or any other theme wrapper
+        - The theme colour is overridden in CSS by setting a CSS custom property, not through a JavaScript theme object
+        - The override's light and dark values are set with the CSS `light-dark()` function, not a `prefers-color-scheme` media query or a `scheme` prop
+        - The `styled(Card)` wrapper is replaced by a plain Card using v5 props, or by the team's own CSS class passed through `className`; no `styled()` call remains
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Does not import ThemeProvider, studioTheme or any theme object from '@sanity/ui' (they do not exist in v5)
+        - Does not import styled-components or use a CSS-in-JS runtime
+        - Any Card uses only v5 Card props (such as `density` or `tone`) and no `padding` or `radius` prop
+        - The code is syntactically valid TypeScript/JSX and CSS
+    - type: contains
+      value: 'light-dark('
+  baseline:
+    enabled: true
+    rubric: full

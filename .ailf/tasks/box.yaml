@@ -1,0 +1,266 @@
+- id: sanity-ui-v5-box-vs-card-structural-layout
+  mode: literacy
+  title: 'Box — use Box instead of Card for structural regions'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+        path: ui/components/box
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+          perspective: rqgKNUCe1
+        reason: 'Box usage guidelines — when to use and when not to use'
+      - id: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+        path: ui/components/card
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+          perspective: rqgKNUCe1
+        reason: 'Card usage guidelines — for comparison'
+  prompt:
+    text: |
+      You are building a Sanity Studio-style layout using the Sanity UI design system.
+
+      Using VStack, Box, Card, and Flex from the `@sanity/ui` package, implement the following layout:
+
+      1. A navigation sidebar rendered as a <nav> landmark with a right border
+      2. Inside it, a header strip containing a title and a close button, separated from the rest by a bottom border
+      3. A scrollable content area below the header
+      4. A main content region (rendered as <main>) that fills the remaining space and uses column flex direction
+
+      Requirements:
+      - Use the correct component for each region — structural layout regions must NOT use Card
+      - The <nav> must have an aria-label
+      - The main region must support overflow scrolling for its content
+
+      Show the complete JSX structure with correct component choices and props.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Renders the nav as Box or Flex (not Card) with as='nav' and aria-label
+        - Renders the main content region as Flex (not Card) with as='main' and flexDirection='column'
+        - Uses Box or Flex (not Card) for the header strip inside the nav
+        - Applies borderRight to the nav Box/Flex and borderBottom to the header Box/Flex
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Box and Flex are imported from the '@sanity/ui' package
+        - No Card component is used for the sidebar, toolbar, or main area
+        - No onClick is added to any Box or Flex element
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-box-as-prop-semantic-aria
+  title: 'Box — semantic elements via the as prop with ARIA requirements'
+  mode: literacy
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+        path: ui/components/box
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+          perspective: rqgKNUCe1
+        reason: 'Box as prop — semantic elements and ARIA requirements'
+  prompt:
+    text: |
+      Using the Box component from the `@sanity/ui` package, demonstrate correct usage of the `as` prop for three different scenarios:
+
+      1. A page with a primary navigation that requires an accessible label
+      2. A page section that should register as a landmark in screen readers
+      3. A Box used purely as a spacing wrapper (no semantic meaning needed)
+
+      For each scenario:
+      - Show the correct `as` value and any required ARIA attributes
+
+      Do NOT use <button>, <dialog>, or <select> via the as prop.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - as='nav' includes aria-label when multiple navs could exist on the page
+        - as='section' includes either a heading child or aria-label to register as a landmark
+        - The spacing wrapper example uses as='div' or omits as (default div), with no unnecessary ARIA
+        - No behavioral elements (button, dialog, select) are used with as prop
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - ARIA attributes are correctly applied — not missing on landmarks that require them
+        - Box is imported from the '@sanity/ui' package
+        - JSX is syntactically valid
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-box-styling-props-versus-inline-styles
+  mode: literacy
+  title: 'Box — use styling props instead inline styles to adjust appearance'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+        path: ui/components/box
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+          perspective: rqgKNUCe1
+        reason: "Box Best practices — dos and don'ts for how to use Box"
+  prompt:
+    text: |
+      You are building a piece of the interface that needs a light gray background, padding on all sides, a height of 100vh, a minimum width of 260 pixels and a border on the right.
+
+      Using  Box from the `@sanity/ui` package, implement the following layout:
+
+      1. A container rendered as a <div> with a right border
+      2. Inside it, a single <span> with "Text" as its child
+      3. The container should have a minimum width of 260px, height of 100vh, a light gray background, a 1px gray border on the right side only, and padding on top, left, right, and bottom.
+
+      Requirements:
+      - Use Box's styling props to set the following visual attributes
+        - background
+        - padding
+        - border right
+        - min width
+        - height
+      - No inline styles can be used
+
+      Show the complete JSX structure with correct component choices and props.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Renders the component as Box with no style attribute
+        - The Box has the following props
+          - tone="neutral"
+          - padding={[ANY INTEGER]}
+          - borderRight={true}
+          - minWidth="260px"
+          - height="100vh"
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Box is imported from the '@sanity/ui' package
+        - No Flex or Card component is used
+        - No inline styles exist on the component
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-box-display-flex-grid-removed
+  mode: literacy
+  title: "Box — display='flex' and display='grid' are no longer supported"
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+        path: ui/components/box
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+          perspective: rqgKNUCe1
+        reason: 'Box display prop — accepted values no longer include flex or grid'
+      - id: c4927bb5-d137-424c-8c29-1f97b132c61c
+        path: ui/components/flex
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: c4927bb5-d137-424c-8c29-1f97b132c61c
+          perspective: rqgKNUCe1
+        reason: "Flex component as the replacement for Box with display='flex'"
+      - id: 68dbb3bf-b7c7-4a80-8999-8ce418cf7fe3
+        path: ui/components/grid
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 68dbb3bf-b7c7-4a80-8999-8ce418cf7fe3
+          perspective: rqgKNUCe1
+        reason: "Grid component as the replacement for Box with display='grid'"
+  prompt:
+    text: |
+      I'm trying to use Box with `display="flex"` from the `@sanity/ui` package, but TypeScript errors out and the layout doesn't work. The error message doesn't tell me what to use instead. How do I create a flex container in the design system, and what about a grid container?
+
+      Show corrected JSX for both cases.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Replaces the flex Box with a Flex component
+        - Replaces the grid Box with a Grid component
+        - Provides corrected JSX for both the flex case and the grid case
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Flex and Grid are imported from the '@sanity/ui' package
+        - No display='flex' or display='grid' is passed to Box
+        - JSX is syntactically valid
+    - type: contains
+      value: '<Flex'
+    - type: contains
+      value: '<Grid'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-box-scale-integer-vs-css-string-props
+  mode: literacy
+  title: 'Box — spacing-scale integers vs CSS-string sizing props'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/box/box-scale-integer-vs-css-string-props.tsx
+  context:
+    docs:
+      - id: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+        path: ui/components/box
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+          perspective: rqgKNUCe1
+        reason: 'Box prop value model — scale-step integers (padding, margin, radius) vs CSS strings (width, height)'
+  prompt:
+    text: |
+      Using Box and Card from the `@sanity/ui` package, build a 260px-wide sidebar Box with padding 4 containing an inner Card. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - The sidebar Box width is set as the string "260px"
+        - padding on the Box is set as the integer 4
+        - The inner Card gets its padding and corner radius from the density prop, not from padding or radius props
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Box spacing-scale props (padding, margin, radius) are integers with no quotes
+        - CSS-value props (width, height) are strings
+        - Does not write padding="4" or width={260}
+        - Box and Card are imported from the '@sanity/ui' package
+    - type: contains-any
+      value: ['width="260px"', "width='260px'", "width={'260px'}", 'width={"260px"}']
+    - type: not-contains
+      value: 'padding="4"'
+    - type: contains
+      value: 'padding={4}'
+  baseline:
+    enabled: true
+    rubric: full

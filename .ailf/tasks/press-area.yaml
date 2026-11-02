@@ -1,0 +1,99 @@
+- id: sanity-ui-v5-press-area-polymorphic-press-target
+  mode: literacy
+  title: 'PressArea — wrap a Card to make the whole surface one accessible press target'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: aa3c252e-2e8d-48ff-9e86-2a624ec19d06
+        path: ui/components/press-area
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: aa3c252e-2e8d-48ff-9e86-2a624ec19d06
+          perspective: rqgKNUCe1
+        reason: "PressArea wraps content such as a whole Card and renders a native button (or an anchor with as='a') so the surface is one keyboard- and screen-reader-accessible press target without Button's chrome; it is unstyled, so hover visuals and padding belong on the child Card; every PressArea needs an accessible name"
+      - id: ea580011-a37c-4dba-b1a0-30a27e47530f
+        path: ui/components/button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: ea580011-a37c-4dba-b1a0-30a27e47530f
+          perspective: rqgKNUCe1
+        reason: 'Button as the default choice for labeled actions; PressArea is for content surfaces such as a whole Card'
+  prompt:
+    text: |
+      I need an entire Card to act as a clickable surface — no visible button chrome, just a custom hover/press state on the whole card. I was going to add `onClick` directly to the Card. Show me the right way to build it in this design system.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses PressArea, not Button, as the press target for the whole Card; if the press navigates, PressArea uses `as="a"` with `href`
+        - Any hover or press visuals and any padding sit on the child Card, not on PressArea
+        - The whole Card sits inside one PressArea, with no Button or other interactive element nested inside it
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected example uses PressArea as the parent of the Card, with onClick (or href) on PressArea rather than on the Card
+        - No padding, background, radius, role="button", or custom onKeyDown is added to PressArea
+        - PressArea and Card are imported from '@sanity/ui'
+        - The PressArea has an accessible name, from visible child text or an aria-label describing the action
+    - type: contains
+      value: '<PressArea'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-press-area-no-nested-interactive
+  mode: literacy
+  title: 'PressArea — never nest a Button inside it; move the secondary action out as a sibling'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: aa3c252e-2e8d-48ff-9e86-2a624ec19d06
+        path: ui/components/press-area
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: aa3c252e-2e8d-48ff-9e86-2a624ec19d06
+          perspective: rqgKNUCe1
+        reason: "Don't nest interactive elements — Button inside PressArea, PressArea inside Button, or PressArea inside PressArea (WCAG 4.1.2); move the secondary action outside the press surface, for example a Flex holding the PressArea and the Button as siblings; don't add role='button' or a custom Enter/Space onKeyDown"
+  prompt:
+    text: |
+      Our media grid tiles (built with `@sanity/ui`) open the asset when clicked, and have a small delete button in the corner:
+
+      ```tsx
+      <PressArea onClick={() => openAsset(asset.id)} role="button" onKeyDown={handleEnterOrSpace}>
+        <Card>
+          <img src={asset.thumbUrl} alt="" />
+          <Text size={1}>{asset.filename}</Text>
+          <IconButton icon={TrashIcon} aria-label={`Delete ${asset.filename}`} tone="critical" onClick={() => deleteAsset(asset.id)} />
+        </Card>
+      </PressArea>
+      ```
+
+      Screen reader testers say the delete button is hard to reach. Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Moves the delete action outside the press surface so the PressArea and the IconButton are siblings (for example inside a Flex)
+        - The PressArea keeps `onClick={() => openAsset(asset.id)}` and the IconButton keeps `onClick={() => deleteAsset(asset.id)}`
+        - The thumbnail and filename stay inside the PressArea
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - No IconButton, Button, or other interactive element is a descendant of the PressArea
+        - The PressArea has no `role` prop and no onKeyDown handler for Enter or Space
+        - The IconButton keeps its `aria-label` and `tone="critical"`
+        - PressArea, Card, and IconButton are imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: '<PressArea'
+  baseline:
+    enabled: true
+    rubric: full

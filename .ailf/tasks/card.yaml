@@ -1,0 +1,284 @@
+- id: sanity-ui-v5-card-layout-props-type-error
+  mode: literacy
+  title: 'Card — layout props are not supported and fail the type check'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+        path: ui/components/card
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+          perspective: rqgKNUCe1
+        reason: 'Card accepts only density, tone, margin* and as — passing flexGrow, width, overflow, padding, minWidth or position directly is a TypeScript error; layout sizing goes on a wrapping Box or Flex'
+      - id: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+        path: ui/components/box
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+          perspective: rqgKNUCe1
+        reason: 'Box for layout control as the recommended wrapper around Card'
+  prompt:
+    text: |
+      I'm trying to make a Card from the `@sanity/ui` package fill the available space inside a Flex container. I passed `flexGrow={1}` to the Card, TypeScript underlines it, and the Card stays its original size. What's the correct pattern?
+
+      Show a working JSX example.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Wraps the Card in a Box or Flex that carries flexGrow and any sizing props
+        - The wrapper holding flexGrow is a direct child of the parent Flex container
+        - Provides a working JSX example
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Card has no flexGrow, width, overflow, padding, minWidth or position prop
+        - Box, Flex, and Card are imported from the '@sanity/ui' package
+        - JSX is syntactically valid
+    # Any prop may come before flexGrow on the wrapper.
+    - type: regex
+      value: "<(Box|Flex)\\b[^>]*\\bflexGrow="
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-card-v3-to-v5-prop-migration
+  mode: literacy
+  title: 'Card — v3 props (padding, radius, shadow) are no longer supported'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+        path: ui/components/card
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+          perspective: rqgKNUCe1
+        reason: "Card v5 API — density and tone replace v3's padding/radius/shadow/border/scheme props; density is the only spacing control and a Box must not be nested inside Card to re-create a v3 padding value"
+  prompt:
+    text: |
+      I'm migrating a Card from v3 where I used `padding={4}` and `radius={2}` for styling. On the new Card from the `@sanity/ui` package, TypeScript rejects both props. Show the corrected Card.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Replaces `padding={4}` and `radius={2}` with a single `density` value on the Card
+        - Does not nest a Box inside the Card to re-create the old padding
+        - Provides a corrected example using density and tone
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Uses density values from the v5 scale (compact, regular, loose)
+        - Does not pass padding, radius, shadow, border, or scheme directly to Card
+        - Card is imported from the '@sanity/ui' package
+        - JSX is syntactically valid
+    - type: contains-any
+      value: ['density=', 'tone=']
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-card-tone-status-communication
+  mode: literacy
+  title: 'Card — choose the correct tone for semantic status communication'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+        path: ui/components/card
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+          perspective: rqgKNUCe1
+        reason: 'Card tone values, purpose, and paired icon guidance'
+  prompt:
+    text: |
+      Using the Card component from `@sanity/ui`, implement four status card variants for a billing dashboard:
+
+      1. A card representing a successful payment transaction
+      2. A card representing a credit card that will expire next month (needs attention but not blocking)
+      3. A card representing a failed transaction (critical error)
+      4. A card representing a standard document in the list (no special status)
+
+      Requirements:
+      - Choose the correct `tone` prop value for each scenario
+      - Pair each toned card with an appropriate icon (import each icon from its own `@sanity/icons` subpath)
+      - Set `density="regular"` on each card
+      - Do NOT use `tone="default"`, `tone="transparent"` or `tone="muted"` — those v3 values were removed
+
+      Show the JSX for all four cards.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Successful payment uses tone='positive'
+        - Expiring credit card uses tone='caution' (not 'critical')
+        - Failed transaction uses tone='critical'
+        - Standard document uses tone='neutral' or no tone prop
+        - Each toned card (positive/caution/critical) includes an associated icon
+        - No card uses tone='default', tone='transparent' or tone='muted'
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Icons are imported from per-icon '@sanity/icons' subpaths (e.g. CheckmarkCircleIcon from '@sanity/icons/CheckmarkCircle'), not as named exports from the '@sanity/icons' root
+        - Card is imported from '@sanity/ui'
+        - All cards use density="regular" and no border, radius, shadow or padding prop is passed to Card
+  baseline:
+    enabled: true
+    rubric: full
+
+# REMOVED 2026-08-31: `card-selectable-list-aria`. Its premise required Card's
+# `selected` prop, which v5 removed outright (Card is no longer interactive),
+# and it imported v3 `Stack`. Graders flagged it as unanswerable: "no
+# documentation evidence for ... the 'selected' prop behavior". Rewriting it
+# against List.ButtonItem / PressArea is a redesign, not an edit -- the ARIA
+# pattern changes completely -- so it was retired rather than half-migrated.
+- id: sanity-ui-v5-card-cross-component-tone-vocabulary
+  mode: literacy
+  title: 'Card — tone vocabulary across Card, Button and Badge'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/card/card-cross-component-tone-vocabulary.tsx
+  context:
+    docs:
+      - id: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+        path: ui/components/card
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+          perspective: rqgKNUCe1
+        reason: 'Card tone vocabulary (neutral/positive/suggest/caution/critical); a toned message leads with the state in words or carries an icon'
+      - id: ea580011-a37c-4dba-b1a0-30a27e47530f
+        path: ui/components/button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: ea580011-a37c-4dba-b1a0-30a27e47530f
+          perspective: rqgKNUCe1
+        reason: "v5 Button tone is narrower (neutral/critical); a destructive confirm is level='primary' tone='critical' with a `text` label"
+      - id: b8cb486b-7c49-4096-9b88-89e6ba8831ff
+        path: ui/components/badge
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: b8cb486b-7c49-4096-9b88-89e6ba8831ff
+          perspective: rqgKNUCe1
+        reason: 'v5 Badge takes the same five tones as Card, its label goes in `text`, and a toned Badge needs a second channel (state-first text or iconStart)'
+  prompt:
+    text: |
+      Build a destructive delete-confirmation panel with `@sanity/ui`: a Card wrapping the message, a status Badge flagging the action as permanent, a Cancel button and a confirm Button that deletes. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - The Card uses tone="critical"
+        - The confirm Button uses tone="critical" (with level="primary" as the main action) and the Cancel button is not critical
+        - The Badge uses tone="critical" and its label either leads with the state in words or carries an iconStart
+        - The layout reads as a confirmation panel
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Card, Button and Badge are all imported from '@sanity/ui'
+        - Uses only valid v5 tones — no tone="default" or tone="primary" on any of the three, and nothing beyond neutral or critical on Button
+        - Button and Badge labels are set through the `text` prop; Button uses `level`, not v3's `mode`
+    - type: contains
+      value: 'tone="critical"'
+    - type: not-contains
+      value: 'tone="default"'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-card-suggest-tone-ai-hint
+  mode: literacy
+  title: 'Card — tone="suggest" for AI/recommendation surfaces'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/card/card-suggest-tone-ai-hint.tsx
+  context:
+    docs:
+      - id: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+        path: ui/components/card
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: e751904e-4bbe-4ac6-8bb3-a91d445bded4
+          perspective: rqgKNUCe1
+        reason: "Card tone='suggest' for suggestions/recommendations/informational content (a v5-only tone)"
+  prompt:
+    text: |
+      Using a Card from the `@sanity/ui` package, add a subtle "AI suggestion" callout next to a form field to hint at an AI-generated value. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses a Card with tone="suggest"
+        - The Card is imported from '@sanity/ui'
+        - Reads as an inline hint placed near the field
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Uses tone="suggest", which exists on the v5 Card (and is not a v5 Button tone — Button only accepts neutral or critical)
+        - Does not invent a tone such as ai, info, or hint
+    - type: contains
+      value: 'tone="suggest"'
+    - type: not-contains
+      value: 'tone="info"'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-card-tone-css-variable-scope
+  mode: literacy
+  title: 'Card — semantic colour properties, not tone ramp variables, in custom markup'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/card/card-tone-css-variable-scope.tsx
+  context:
+    docs:
+      - path: ui/tokens/semantic-tokens
+        reason: "Custom markup takes colour from the semantic properties (var(--separator-low), var(--foreground-high)), which resolve in both schemes; inside a toned element they remap to that tone's ramp"
+      - path: ui/foundations/color-guidelines
+        reason: 'Ordinary borders and rules use --separator-low; never a hex value or a base token such as --gray-200, which ignores the colour scheme'
+  prompt:
+    text: |
+      I tried using `var(--tone-200)` for a custom divider line outside a card and it shows nothing. Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides a corrected divider example
+        - The corrected divider uses var(--separator-low) (or var(--separator-high) for a deliberate border)
+        - The divider stays custom markup outside a card, as in the question
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The divider colour is not a hard-coded hex value or a base palette token such as var(--gray-200)
+        - No `--tone-*` variable remains in the corrected divider
+        - The CSS and any JSX are syntactically valid
+    - type: contains
+      value: '--separator-'
+    # Scoped to a border declaration: a correct answer may name --gray-200 while
+    # rejecting it, but it should not write it into the fix.
+    - type: not-contains
+      value: 'solid var(--gray-'
+  baseline:
+    enabled: true
+    rubric: full

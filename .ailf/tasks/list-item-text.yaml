@@ -1,0 +1,39 @@
+- id: sanity-ui-v5-list-item-text-title-subtitle-clamp
+  mode: literacy
+  title: 'List.ItemText — title and subtitle, both clamped to one line'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 20b592f5-c5d3-44f4-a137-942aa24563d6
+        path: ui/components/list-item-text
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 20b592f5-c5d3-44f4-a137-942aa24563d6
+          perspective: rqgKNUCe1
+        reason: 'List.ItemText renders a title and optional subtitle, both clamped to one line — it is the text content slot inside a List.Item, not a general-purpose text component'
+  prompt:
+    text: |
+      I have a document row that needs a document name and, below it, a muted "last edited" timestamp. I was about to reach for two separate `<Text>` elements inside a `<List.Item>`, and add truncation so long names stay on one line. Is there a more correct way? Show the row.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses List.ItemText with a `title` for the document name and a `subtitle` for the timestamp, instead of two separate Text elements
+        - Adds no truncation of its own (no textOverflow, line clamp or CSS) to title or subtitle, since List.ItemText already clamps each to one line
+        - Provides corrected JSX for the row inside a List
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - List.ItemText is used as a property of List, imported from '@sanity/ui'
+        - title and subtitle are passed as props on List.ItemText, not as children
+        - List.ItemText is nested inside List.Item
+    - type: contains
+      value: 'List.ItemText'
+    - type: contains
+      value: 'subtitle'
+  baseline:
+    enabled: true
+    rubric: full

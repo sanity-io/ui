@@ -1,0 +1,39 @@
+- id: sanity-ui-v5-list-item-start-end-not-trailing
+  mode: literacy
+  title: 'List.Item — start/end slots, and there is no trailing prop'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 0f510262-a1fb-48ae-89e6-7c33eacf2934
+        path: ui/components/list-item
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 0f510262-a1fb-48ae-89e6-7c33eacf2934
+          perspective: rqgKNUCe1
+        reason: 'List.Item takes start and end slots (rendered outside the flex-grown content area); trailing was replaced by start/end as a breaking change and is now a TypeScript error'
+  prompt:
+    text: |
+      I'm rendering a row with a thumbnail on the left and a trailing action button on the right using `<List.Item trailing={<Button .../>}>`. TypeScript says `trailing` doesn't exist. Fix the row, showing both the leading thumbnail and the action.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - No `trailing` prop remains on List.Item
+        - Provides a corrected row with both the leading thumbnail and the action button, as asked
+        - The action is still the Button, passed into `end` as an element
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - List is imported from '@sanity/ui', and List.Item is used as a property of it
+        - The thumbnail is passed via the `start` prop and the action via the `end` prop
+        - List.Item is rendered as a direct child of List
+    - type: contains
+      value: 'start='
+    - type: contains
+      value: 'end='
+  baseline:
+    enabled: true
+    rubric: full

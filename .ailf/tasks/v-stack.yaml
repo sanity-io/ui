@@ -1,0 +1,108 @@
+- id: sanity-ui-v5-vstack-only-as-and-gap
+  mode: literacy
+  title: 'VStack — only as and gap are accepted; flexGrow and overflow are type errors'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 8b196b72-efff-4e6b-a381-7a6327f95ff1
+        path: ui/components/v-stack
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 8b196b72-efff-4e6b-a381-7a6327f95ff1
+          perspective: rqgKNUCe1
+        reason: "VStack's prop surface is only as and gap — passing flexGrow, overflowY, minHeight, or any other layout prop directly is a TypeScript error (TS2322), because the signature is VStackProps<T> & Omit<ComponentPropsWithRef<T>, keyof VStackProps<T>>"
+      - id: c4927bb5-d137-424c-8c29-1f97b132c61c
+        path: ui/components/flex
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: c4927bb5-d137-424c-8c29-1f97b132c61c
+          perspective: rqgKNUCe1
+        reason: "Flex flexDirection='column' as the alternative when full layout control is needed"
+  prompt:
+    text: |
+      I'm using VStack as a scrollable sidebar column and I want it to grow and scroll, so I wrote `<VStack gap={2} flexGrow={1} overflowY="auto">`. The build fails with `TS2322: Property 'flexGrow' does not exist on type ...`. Show the fix.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - If VStack is kept, it receives no props other than `as` and `gap` (no flexGrow, overflowY, minHeight or other layout prop)
+        - Either switches to Flex with flexDirection="column", or keeps VStack for the gap and wraps it in a Box or Flex that carries flexGrow and overflowY
+        - Keeps the `gap={2}`, `flexGrow={1}` and `overflowY="auto"` values from the original
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - flexGrow and overflowY are on a Flex or Box, never on VStack
+        - The children still stack vertically — through Flex flexDirection="column" or through a VStack inside the wrapper
+        - Every component is imported from '@sanity/ui'
+    # flexGrow must land on a Flex or Box. The prompt puts it on VStack.
+    - type: regex
+      value: "<(Flex|Box)\\b[^>]*\\bflexGrow="
+  baseline:
+    enabled: true
+    rubric: full
+
+# Added 2026-09-28. Verified against alpha.11: there is no Stack export, and
+# `<VStack space={3}>` is a TypeScript error (TS2322) — VStack's props are
+# only `as` and `gap`.
+- id: sanity-ui-v5-vstack-replaces-stack-space-to-gap
+  mode: literacy
+  title: "VStack — replaces v3's Stack; space is renamed gap and sizing is gone"
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 8b196b72-efff-4e6b-a381-7a6327f95ff1
+        path: ui/components/v-stack
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 8b196b72-efff-4e6b-a381-7a6327f95ff1
+          perspective: rqgKNUCe1
+        reason: 'Migration guide: VStack replaces v3 Stack in its vertical direction; space is renamed gap (same 0–9 scale), sizing is removed with no replacement prop'
+  prompt:
+    text: |
+      I'm porting a settings panel from v3 to Sanity UI 5. The v3 code is:
+
+      ```tsx
+      import { Stack, Text } from '@sanity/ui'
+
+      <Stack space={3} sizing="border">
+        <Text>General</Text>
+        <Text>Notifications</Text>
+        <Text>Billing</Text>
+      </Stack>
+      ```
+
+      I upgraded `@sanity/ui` to v5 and it can't find `Stack`. Show the ported JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides the ported JSX
+        - Keeps the three Text children (General, Notifications, Billing) in order
+        - Does not replace `sizing` with another prop or an inline style
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Uses `<VStack gap={3}>` imported from '@sanity/ui'
+        - Does not pass `space` or `sizing` to VStack
+        - Text is imported from '@sanity/ui'
+        - Does not import Stack
+        - JSX is syntactically valid
+    - type: contains
+      value: 'gap={3}'
+    - type: contains
+      value: '<VStack'
+    # Scoped to VStack: the prompt quotes `<Stack space={3}`, which a correct
+    # answer may restate.
+    - type: not-contains
+      value: '<VStack space'
+  baseline:
+    enabled: true
+    rubric: full

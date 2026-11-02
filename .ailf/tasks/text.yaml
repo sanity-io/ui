@@ -1,0 +1,52 @@
+- id: sanity-ui-v5-text-block-element-in-vstack
+  mode: literacy
+  title: 'Text — use `as="p"` for block content inside VStack'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 397b656a-4e2b-4dea-ae4c-d3b0dbfce726
+        path: ui/components/text
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 397b656a-4e2b-4dea-ae4c-d3b0dbfce726
+          perspective: rqgKNUCe1
+        reason: 'Text default rendered element is <span> (inline) and the `as` prop to render it as a block element'
+      - id: 8b196b72-efff-4e6b-a381-7a6327f95ff1
+        path: ui/components/v-stack
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 8b196b72-efff-4e6b-a381-7a6327f95ff1
+          perspective: rqgKNUCe1
+        reason: 'VStack for vertical stacking with gap spacing'
+  prompt:
+    text: |
+      I'm using VStack from `@sanity/ui` to stack several Text components that represent article paragraphs. The gap spacing looks correct visually, but inspecting the DOM shows every Text rendering as a `<span>`. Show a corrected JSX example.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides a corrected example with Text using `as="p"` inside the VStack
+        - Keeps each paragraph as its own Text, rather than merging them into one
+        - Keeps the VStack as the container that stacks the paragraphs
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Every Text inside the VStack sets `as="p"` (or another block-level element such as `as="div"`)
+        - VStack uses `gap=` (not `space=`)
+        - Text and VStack are imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: 'gap='
+    - type: contains-any
+      value: ['as="p"', 'as="div"']
+    # Scoped to VStack: a correct answer may say "gap, not space=" in prose.
+    - type: not-contains
+      value: '<VStack space='
+  baseline:
+    enabled: true
+    rubric: full

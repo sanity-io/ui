@@ -1,0 +1,103 @@
+- id: sanity-ui-v5-eyebrow-replaces-v3-label-not-v5-label
+  mode: literacy
+  title: "Eyebrow — replaces v3's Label-as-heading-eyebrow; v5's own Label is a different, unrelated component"
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 1c54978c-263a-49f3-9bdb-302a3f1d81b2
+        path: ui/components/eyebrow
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1c54978c-263a-49f3-9bdb-302a3f1d81b2
+          perspective: rqgKNUCe1
+        reason: "Eyebrow is the small uppercase text above a Heading, replacing UI 3's Label primitive used that way — it is unrelated to v5's own Label component, which identifies form controls"
+      - id: bc29e90d-1a99-4cf0-917e-1915159cca05
+        path: ui/components/label
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: bc29e90d-1a99-4cf0-917e-1915159cca05
+          perspective: rqgKNUCe1
+        reason: "v5's Label is a form-control component (links a caption to an input via htmlFor) and is the wrong migration target for a v3 heading eyebrow"
+  prompt:
+    text: |
+      I'm migrating a v3 screen that uses `<Label size={0}>Settings</Label>` as small uppercase text above a section Heading. I assumed the current `Label` component is the direct replacement, since the name matches. Show the migrated code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides corrected code using Eyebrow above the Heading
+        - Replaces the v3 Label with Eyebrow rather than keeping v5's Label
+        - Keeps the text "Settings"
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - JSX is syntactically valid
+        - Eyebrow and Heading are imported from '@sanity/ui'
+        - No htmlFor or form-control usage is added to Eyebrow
+    - type: contains
+      value: '<Eyebrow'
+    - type: contains
+      value: '<Heading'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-eyebrow-sentence-case-component-uppercases
+  mode: literacy
+  title: 'Eyebrow — pass sentence-case text; the component applies the uppercase treatment itself'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 1c54978c-263a-49f3-9bdb-302a3f1d81b2
+        path: ui/components/eyebrow
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1c54978c-263a-49f3-9bdb-302a3f1d81b2
+          perspective: rqgKNUCe1
+        reason: 'Pass eyebrow text in sentence case with no text-transform override and no all-caps literal — Eyebrow applies uppercase and letter-spacing itself; place it directly above its Heading in a VStack with a small gap; keep it to one to three words'
+  prompt:
+    text: |
+      {% raw %}
+      Designers want the small category text above our article titles to look like "CASE STUDY". I wrote this with `@sanity/ui`:
+
+      ```tsx
+      <VStack gap={2}>
+        <Eyebrow style={{textTransform: 'uppercase', letterSpacing: '0.1em'}}>CASE STUDY</Eyebrow>
+        <Heading as="h2">How Acme cut publishing time in half</Heading>
+      </VStack>
+      ```
+
+      A reviewer flagged the Eyebrow line. Show the corrected code.
+      {% endraw %}
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Removes the inline textTransform and letterSpacing style override
+        - Keeps the Eyebrow directly above its Heading inside the VStack with a small gap
+        - Provides the corrected JSX
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected Eyebrow has no `style` or className that sets text-transform or letter-spacing
+        - The Eyebrow's children are sentence case ("Case study"), not all caps
+        - Eyebrow, VStack and Heading are imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: 'Case study'
+    # Scoped to an Eyebrow with no props: the prompt's original line carries a
+    # style prop, so quoting it does not match, but dropping only the style and
+    # keeping the all-caps literal does.
+    - type: not-contains
+      value: '<Eyebrow>CASE STUDY'
+  baseline:
+    enabled: true
+    rubric: full

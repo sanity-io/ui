@@ -1,0 +1,37 @@
+- id: sanity-ui-v5-list-button-item-selected-is-presence-based
+  mode: literacy
+  title: 'List.ButtonItem — selected is presence-based, not value-based'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 86037dbb-a6f2-4556-bd31-d1d90bdaf562
+        path: ui/components/list-button-item
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 86037dbb-a6f2-4556-bd31-d1d90bdaf562
+          perspective: rqgKNUCe1
+        reason: 'selected is a presence-based boolean prop — selected={false} still renders identically to selected={true} because the prop is present either way; omit it entirely to mark a row unselected'
+  prompt:
+    text: |
+      I'm rendering a list of selectable navigation rows with `<List.ButtonItem selected={activeSection === section.id}>`. When `activeSection !== section.id`, the row still looks selected. Fix it and show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Shows the corrected conditional, e.g. only spreading/adding `selected` when the row is active
+        - The active row still receives `selected`, so the current section stays highlighted
+        - Keeps `activeSection === section.id` as the condition for adding `selected`
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected code never renders `selected={false}`
+        - The corrected code conditionally includes `selected` (e.g. `selected={activeSection === section.id || undefined}` or an equivalent conditional spread), not a literal boolean expression passed straight through
+        - List.ButtonItem is used as a property of List, imported from '@sanity/ui'
+    - type: contains-any
+      value: ['|| undefined', '? true : undefined', 'selected: true', '&& {selected']
+  baseline:
+    enabled: true
+    rubric: full

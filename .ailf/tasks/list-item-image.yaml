@@ -1,0 +1,37 @@
+- id: sanity-ui-v5-list-item-image-decorative-alt
+  mode: literacy
+  title: "List.ItemImage — accepts only native img attributes, and alt should not repeat the row's own name"
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 1c3cb6e1-e819-4c06-9da7-bd34485a0ed2
+        path: ui/components/list-item-image
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1c3cb6e1-e819-4c06-9da7-bd34485a0ed2
+          perspective: rqgKNUCe1
+        reason: "List.ItemImage has no props of its own beyond native <img> attributes; a decorative thumbnail whose alt repeats the row's own name (already announced by List.ItemText) announces that name twice"
+  prompt:
+    text: |
+      Each row in my document list has a thumbnail via `<List.ItemImage src={doc.thumbnailUrl} alt={doc.title} />` next to a `<List.ItemText title={doc.title} .../>`. Is the alt text right here? Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Keeps `src={doc.thumbnailUrl}` on List.ItemImage
+        - Keeps List.ItemText with `title={doc.title}` as the row's name
+        - Provides corrected JSX for the row, with List.ItemImage and List.ItemText inside a List.Item
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected example sets `alt=""` on List.ItemImage rather than repeating doc.title
+        - List.ItemImage remains a native-img-attributes-only element (no invented props like `rounded` or `size`)
+        - List.ItemImage is used as a property of List, imported from '@sanity/ui'
+    - type: contains
+      value: 'alt=""'
+  baseline:
+    enabled: true
+    rubric: full

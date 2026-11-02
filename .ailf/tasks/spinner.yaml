@@ -1,0 +1,79 @@
+- id: sanity-ui-v5-spinner-accessible-loading
+  mode: literacy
+  title: 'Spinner — accessible loading indicator'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/spinner/spinner-accessible-loading.tsx
+  context:
+    docs:
+      - id: 9628d145-b661-4506-bd64-f1aaf0ffcd7b
+        path: ui/components/spinner
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 9628d145-b661-4506-bd64-f1aaf0ffcd7b
+          perspective: rqgKNUCe1
+        reason: "Spinner ships with a built-in role='status' and aria-label='Loading...'; pass a more specific aria-label, or wrap Spinner and a visible label in a role='status' container so the announcement says what is loading"
+  prompt:
+    text: |
+      Show a loading spinner that screen readers announce with a message describing what is loading, using the `@sanity/ui` package. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Spinner is imported from '@sanity/ui'
+        - Provides a loading announcement that describes the specific operation, via a more specific aria-label on Spinner, VisuallyHidden text, or a role=status wrapper with a label
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The announcement is more specific than the built-in default (Spinner already renders role="status" and aria-label="Loading..." on its own, so a bare <Spinner /> is not silent — it is just generic)
+        - size, if set, is a scale integer (0–4)
+        - Does not set `tone` or `muted` on Spinner — Spinner's only prop is `size`
+    - type: contains
+      value: '<Spinner'
+    - type: contains-any
+      value: ['VisuallyHidden', 'aria-label', 'role="status"']
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-spinner-inline-with-text
+  mode: literacy
+  title: 'Spinner — sized inline next to text'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/spinner/spinner-inline-in-button.tsx
+  context:
+    docs:
+      - id: 9628d145-b661-4506-bd64-f1aaf0ffcd7b
+        path: ui/components/spinner
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 9628d145-b661-4506-bd64-f1aaf0ffcd7b
+          perspective: rqgKNUCe1
+        reason: 'Spinner `size` prop (scale 0–4) and inline alignment with adjacent text via Flex'
+  prompt:
+    text: |
+      Put a small spinner next to a "Saving…" label, aligned inline, using the `@sanity/ui` package. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses Spinner with a small size value
+        - Aligns the spinner inline with the text (e.g. Flex alignItems="center")
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - size is a scale integer (0–4)
+        - Spinner is imported from '@sanity/ui'
+        - Does not set `tone` or `muted` on Spinner — Spinner's only prop is `size`
+    - type: contains
+      value: '<Spinner'
+    - type: contains
+      value: 'size='
+  baseline:
+    enabled: true
+    rubric: full

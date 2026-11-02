@@ -1,0 +1,79 @@
+- id: sanity-ui-v5-switch-controlled-label
+  mode: literacy
+  title: 'Switch — controlled toggle with a label'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/switch/switch-controlled-label.tsx
+  context:
+    docs:
+      - id: cff416f3-e363-4cb0-9039-400d34de0d25
+        path: ui/components/switch
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: cff416f3-e363-4cb0-9039-400d34de0d25
+          perspective: rqgKNUCe1
+        reason: 'Switch API — required `label` prop, controlled checked/onChange; the component sets role=switch itself'
+  prompt:
+    text: |
+      Add a controlled "Email notifications" on/off switch using the `@sanity/ui` package. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Switch is imported from the '@sanity/ui' package
+        - Passes the required label prop
+        - Controlled via checked and onChange
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The label text is provided through the `label` prop
+        - Does not manually add role="switch" (the component already sets it)
+        - checked and onChange are wired to state
+    - type: contains
+      value: 'label='
+    - type: contains-any
+      value: ['checked', 'onChange']
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-switch-vs-checkbox-choice
+  mode: literacy
+  title: 'Switch vs Checkbox — choosing the right control'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/switch/switch-vs-checkbox-choice.tsx
+  context:
+    docs:
+      - id: cff416f3-e363-4cb0-9039-400d34de0d25
+        path: ui/components/switch
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: cff416f3-e363-4cb0-9039-400d34de0d25
+          perspective: rqgKNUCe1
+        reason: 'When to use Switch (immediate on/off setting) vs Checkbox (form selection/submit)'
+  prompt:
+    text: |
+      I need an instant on/off setting that applies immediately when toggled. Using the `@sanity/ui` package, build it with whichever of Switch or Checkbox fits. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses Switch, not Checkbox, for the setting that applies immediately
+        - Builds a Switch with the required label prop and controlled state
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Uses Switch from '@sanity/ui' with a label prop
+        - The toggle is controlled (checked/onChange)
+    - type: contains
+      value: 'Switch'
+    - type: contains
+      value: 'label='
+  baseline:
+    enabled: true
+    rubric: full
