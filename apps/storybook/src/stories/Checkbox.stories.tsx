@@ -4,16 +4,13 @@ import {Checkbox as CheckboxV3} from 'ui3'
 
 import {Checkbox} from '../../../../packages/ui/src/components/checkbox/Checkbox'
 import {checkboxProps} from '../../../../packages/ui/src/components/checkbox/checkbox.props'
-import {VisuallyHidden} from '../../../../packages/ui/src/components/visually-hidden/VisuallyHidden'
+import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(checkboxProps)
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Forms/Checkbox',
-  args: {
-    label: 'Checkbox',
-  },
   argTypes,
   component: Checkbox,
   tags: ['autodocs'],
@@ -33,7 +30,7 @@ type Story = StoryObj<typeof Checkbox>
 
 export const Default: Story = {
   render: (props) => {
-    return <Checkbox {...props} />
+    return <Checkbox {...props} aria-label="Checkbox" />
   },
   play: async ({canvas}) => {
     await expect(((await canvas.findByLabelText('Checkbox')) as HTMLInputElement).type).toBe(
@@ -44,7 +41,7 @@ export const Default: Story = {
 
 export const Indeterminate: Story = {
   render: (props) => {
-    return <Checkbox {...props} label="Indeterminate checkbox" indeterminate />
+    return <Checkbox {...props} aria-label="Indeterminate checkbox" indeterminate />
   },
   play: async ({canvas}) => {
     await waitFor(async () => {
@@ -58,7 +55,19 @@ export const Indeterminate: Story = {
 
 export const Disabled: Story = {
   render: (props) => {
-    return <Checkbox {...props} label="Disabled checkbox" disabled />
+    return (
+      <VStack gap={2}>
+        <Checkbox {...props} aria-label="Disabled checkbox" disabled />
+        <Checkbox {...props} checked aria-label="Disabled checked checkbox" disabled />
+        <Checkbox
+          {...props}
+          checked
+          aria-label="Disabled checked checkbox"
+          disabled
+          indeterminate
+        />
+      </VStack>
+    )
   },
   play: async ({canvas}) => {
     await expect(
@@ -67,18 +76,19 @@ export const Disabled: Story = {
   },
 }
 
-export const VisuallyHiddenLabel: Story = {
-  render: (props) => {
-    return (
-      <Checkbox
-        {...props}
-        label={<VisuallyHidden>Visually hidden label checkbox</VisuallyHidden>}
-      />
-    )
-  },
+export const Error: Story = {
+  render: (props) => (
+    <VStack gap={2}>
+      <Checkbox {...props} aria-label="Errored checkbox" hasError />
+      <Checkbox {...props} checked aria-label="Errored checked checkbox" hasError />
+      <Checkbox {...props} checked aria-label="Errored checked checkbox" hasError indeterminate />
+    </VStack>
+  ),
   play: async ({canvas}) => {
     await expect(
-      ((await canvas.findByLabelText('Visually hidden label checkbox')) as HTMLInputElement).type,
-    ).toBe('checkbox')
+      ((await canvas.findByLabelText('Errored checkbox')) as HTMLInputElement).getAttribute(
+        'aria-invalid',
+      ),
+    ).toBe('true')
   },
 }
