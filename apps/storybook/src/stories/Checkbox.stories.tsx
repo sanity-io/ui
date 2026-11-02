@@ -58,14 +58,8 @@ export const Disabled: Story = {
     return (
       <VStack gap={2}>
         <Checkbox {...props} aria-label="Disabled checkbox" disabled />
-        <Checkbox {...props} checked aria-label="Disabled checked checkbox" disabled />
-        <Checkbox
-          {...props}
-          checked
-          aria-label="Disabled checked checkbox"
-          disabled
-          indeterminate
-        />
+        <Checkbox {...props} aria-label="Disabled checked checkbox" disabled defaultChecked />
+        <Checkbox {...props} aria-label="Disabled checked checkbox" disabled indeterminate />
       </VStack>
     )
   },
@@ -80,8 +74,8 @@ export const Error: Story = {
   render: (props) => (
     <VStack gap={2}>
       <Checkbox {...props} aria-label="Errored checkbox" hasError />
-      <Checkbox {...props} checked aria-label="Errored checked checkbox" hasError />
-      <Checkbox {...props} checked aria-label="Errored checked checkbox" hasError indeterminate />
+      <Checkbox {...props} aria-label="Errored checked checkbox" hasError defaultChecked />
+      <Checkbox {...props} aria-label="Errored indeterminate checkbox" hasError indeterminate />
     </VStack>
   ),
   play: async ({canvas}) => {
