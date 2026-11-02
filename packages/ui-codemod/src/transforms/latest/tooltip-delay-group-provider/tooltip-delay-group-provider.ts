@@ -75,18 +75,6 @@ export default function transform(
       markChanged()
     }
 
-    root.find(j.JSXOpeningElement).forEach((path) => {
-      const name = path.node.name
-
-      if (name.type !== 'JSXIdentifier' || !localNames.has(name.name)) {
-        return
-      }
-
-      if (transformAttributes(j, path, TOOLTIP_DELAY_GROUP_PROVIDER_MODS, TODO_WARNING)) {
-        markChanged()
-      }
-    })
-
     if (
       transformStyledComponents(j, root, styledAliases, () => true, {
         callback: (path) =>
