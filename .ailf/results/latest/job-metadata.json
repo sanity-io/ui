@@ -1,0 +1,15 @@
+{
+  "jobId": "job_9f3809792451",
+  "status": "completed",
+  "startedAt": "2026-11-02T19:05:22.465Z",
+  "completedAt": "2026-11-02T19:26:39.055Z",
+  "reportId": "01a19dba-25bc-7651-bede-79282a2be475",
+  "reportUrl": "/v1/reports/01a19dba-25bc-7651-bede-79282a2be475",
+  "execution": {
+    "backend": "github-actions",
+    "runId": null,
+    "runUrl": null
+  },
+  "error": null,
+  "apiUrl": "https://ailf-api.sanity.build"
+}
