@@ -1,16 +1,15 @@
 import clsx from 'clsx'
 
-import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
-import {type RadioProps, radioProps} from './radio.props'
+import {type RadioProps} from './radio.props'
 
 const radioClassName = suffixClassName('sui-Radio')
 const radioInputClassName = suffixClassName('sui-RadioInput')
 
 /** @beta */
 export function Radio(props: RadioProps) {
-  const {className, style, hasError, ...rest} = getProps(props, radioProps)
+  const {className, style, ...rest} = props
 
   return (
     <Box
@@ -23,12 +22,7 @@ export function Radio(props: RadioProps) {
       width="17px"
       height="17px"
     >
-      <input
-        type="radio"
-        className={radioInputClassName}
-        data-invalid={hasError || undefined}
-        {...rest}
-      />
+      <input type="radio" className={radioInputClassName} {...rest} />
     </Box>
   )
 }

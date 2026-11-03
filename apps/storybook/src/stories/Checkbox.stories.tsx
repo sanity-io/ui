@@ -61,7 +61,7 @@ export const Disabled: Story = {
       <VStack gap={2}>
         <Checkbox {...props} aria-label="Disabled checkbox" disabled />
         <Checkbox {...props} aria-label="Disabled checked checkbox" disabled defaultChecked />
-        <Checkbox {...props} aria-label="Disabled checked checkbox" disabled indeterminate />
+        <Checkbox {...props} aria-label="Disabled indeterminate checkbox" disabled indeterminate />
       </VStack>
     )
   },

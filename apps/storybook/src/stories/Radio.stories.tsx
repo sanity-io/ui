@@ -4,16 +4,11 @@ import {Radio as RadioV3} from 'ui3'
 
 import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
 import {Radio} from '../../../../packages/ui/src/components/radio/Radio'
-import {radioProps} from '../../../../packages/ui/src/components/radio/radio.props'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
-import {getArgTypes} from '../utils/getArgTypes'
-
-const argTypes = getArgTypes(radioProps)
 
 const meta: Meta<typeof Radio> = {
   title: 'Forms/Radio',
-  argTypes,
   component: Radio,
   tags: ['autodocs'],
   parameters: {
@@ -61,22 +56,6 @@ export const Disabled: Story = {
     await expect(
       ((await canvas.findByLabelText('Disabled checked radio')) as HTMLInputElement).disabled,
     ).toBe(true)
-  },
-}
-
-export const Error: Story = {
-  render: (props) => (
-    <VStack gap={2}>
-      <Radio {...props} aria-label="Errored radio" hasError />
-      <Radio {...props} aria-label="Errored checked radio" hasError defaultChecked />
-    </VStack>
-  ),
-  play: async ({canvas}) => {
-    await expect(
-      ((await canvas.findByLabelText('Errored radio')) as HTMLInputElement).getAttribute(
-        'data-invalid',
-      ),
-    ).toBe('true')
   },
 }
 

@@ -16,7 +16,7 @@
   opacity: 0;
   position: absolute;
   /* Use negative inset for 24x24 pixel hit area */
-  inset: calc(-1 * var(--space-1) - 0.5px);
+  inset: var(--form-element-inset);
 }
 
 /**

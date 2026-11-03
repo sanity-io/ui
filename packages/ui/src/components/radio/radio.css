@@ -10,7 +10,7 @@
   opacity: 0;
   position: absolute;
   /* Use negative inset for 24x24 pixel hit area */
-  inset: calc(-1 * var(--space-1) - 0.5px);
+  inset: var(--form-element-inset);
 }
 
 /**
@@ -79,18 +79,4 @@
 
 .sui-RadioInput:disabled {
   pointer-events: none;
-}
-
-/**
-  * Error
-  */
-.sui-Radio:has(.sui-RadioInput[data-invalid="true"]) {
-  --border-color: var(--error-separator);
-}
-
-/**
-  * Error, checked
-  */
-.sui-Radio:has(.sui-RadioInput:checked[data-invalid="true"]) {
-  --background-color: var(--error-background-emphasized);
 }
