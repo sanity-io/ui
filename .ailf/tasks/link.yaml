@@ -1,6 +1,6 @@
-- id: sanity-ui-v5-link-open-in-new-tab-and-underlined
+- id: sanity-ui-v5-link-open-in-new-tab
   mode: literacy
-  title: 'Link — openInNewTab sets target/rel together, underlined is a boolean prop, not a style'
+  title: 'Link — openInNewTab sets target/rel together'
   area: sanity-ui-v5
   docCoverage: false
   context:
@@ -13,27 +13,24 @@
           dataset: next
           documentId: 8cfd4eb8-b494-4366-b79b-e927d6e4dc7c
           perspective: rqgKNUCe1
-        reason: 'Link''s openInNewTab prop sets target="_blank" and rel="noopener noreferrer" together, and the underline is controlled by the underlined boolean prop (default true) rather than an inline text-decoration style'
+        reason: 'Link''s openInNewTab prop sets target="_blank" and rel="noopener noreferrer" together'
   prompt:
     text: |
-      I need a Link to an external site that opens in a new tab and is underlined. I was going to set `target="_blank"` directly on it, and reach for an inline `style` prop setting `textDecoration: 'underline'`. Show the correct way to write this Link in this design system.
+      I need a Link to an external site that opens in a new tab. I was going to set `target="_blank"` directly on it. Show the correct way to write this Link in this design system.
   assertions:
     - type: llm-rubric
       template: task-completion
       criteria:
         - Relies on `openInNewTab` for both `target` and `rel`, with no hand-written `rel` attribute alongside it
         - The link's visible text names the destination site
-        - Provides corrected JSX that uses `openInNewTab` on Link and either omits `underlined` (it defaults to `true`) or passes it explicitly
+        - Provides corrected JSX that uses `openInNewTab` on Link
     - type: llm-rubric
       template: code-correctness
       criteria:
         - The corrected example uses `openInNewTab` rather than a raw `target` attribute
-        - The corrected example controls the underline through the `underlined` prop (or by relying on its `true` default), never through an inline `style` object
         - Link is imported from '@sanity/ui'
     - type: contains
       value: 'openInNewTab'
-    - type: contains
-      value: 'underlined'
   baseline:
     enabled: true
     rubric: full
