@@ -1,0 +1,79 @@
+- id: sanity-ui-v5-code-syntax-highlight-language
+  mode: literacy
+  title: "Code — mark a block's language with the language prop"
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/code/code-syntax-highlight-language.tsx
+  context:
+    docs:
+      - id: 09b70e70-9be1-408d-90f3-96acc1933266
+        path: ui/components/code
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 09b70e70-9be1-408d-90f3-96acc1933266
+          perspective: rqgKNUCe1
+        reason: 'Code API — `language` takes a Refractor language name; `size` scale 0–4; `as` is pre or span'
+  prompt:
+    text: |
+      Render a JavaScript snippet as a code block with the `@sanity/ui` package, and tell the component which language it is so it can be highlighted. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Code is imported from the '@sanity/ui' package
+        - Sets the `language` prop to the snippet's language (e.g. "javascript" or "jsx")
+        - The snippet is passed as children
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - language is a string Refractor language name
+        - size, if set, is a scale integer (0–4)
+        - Does not swap in a different highlighter such as highlight.js; registering the language with react-refractor is fine
+    - type: contains
+      value: 'language='
+    - type: contains
+      value: '<Code'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-code-inline-vs-block-as-prop
+  mode: literacy
+  title: 'Code — inline code via the as prop'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/code/code-inline-vs-block-as-prop.tsx
+  context:
+    docs:
+      - id: 09b70e70-9be1-408d-90f3-96acc1933266
+        path: ui/components/code
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 09b70e70-9be1-408d-90f3-96acc1933266
+          perspective: rqgKNUCe1
+        reason: 'Code `as` prop — defaults to a <pre> block; use as="span" for inline code'
+  prompt:
+    text: |
+      Render an inline code reference (not a block) inside a sentence using the `@sanity/ui` package. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses Code with as="span" for inline rendering rather than the default pre block
+        - The code reference sits inline within text
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The `as` value is one of the allowed Code tags (pre or span)
+        - Code is imported from '@sanity/ui'
+    - type: contains
+      value: '<Code'
+    - type: contains
+      value: 'as='
+  baseline:
+    enabled: true
+    rubric: full

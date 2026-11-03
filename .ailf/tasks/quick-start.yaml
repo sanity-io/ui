@@ -1,0 +1,164 @@
+- id: sanity-ui-v5-quick-start-three-region-layout
+  mode: literacy
+  title: 'Quick start — build the complete three-region App.tsx scaffold'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/guides/quick-start
+        reason: 'Full quick-start scaffold guide — layout structure, stylesheet import, SkipToContent, Link navigation, Container inside the scroll Box, heading hierarchy, and accessibility patterns'
+      - path: ui/guides/api-essentials
+        reason: 'Which component accepts which prop — Card spacing via density, VStack only as/gap, icons from per-icon subpaths, no onClick on Box or Card'
+  prompt:
+    text: |
+      Using the Sanity UI design system, build the complete three-region App.tsx scaffold described in the quick-start guide.
+
+      The layout must include:
+
+      1. An outer wrapper that fills the full viewport height and allows the sidebar and main area to sit side by side, reflowing vertically at narrow widths
+      2. A skip link as the first focusable element, pointing to the main content region
+      3. A collapsible navigation sidebar rendered as a <nav> landmark containing:
+         - A header strip with a title ("Studio") and an icon-only close button, separated from the content below by a bottom border
+         - Navigation links (Documents, Authors, Settings)
+      4. A main content area rendered as a <main> landmark containing:
+         - A toolbar with the page title ("All Documents") on the left and a "New document" button on the right — the toolbar must reflow to two lines at narrow widths
+         - When the sidebar is closed, a menu icon button must appear in the toolbar to reopen it
+         - A scrollable document list, constrained to a readable max width, with three cards (titles: "Getting Started", "API Reference", "Design Tokens"; statuses: Published, Draft, Published) — each card shows the document title, a muted "Last edited 2 hours ago" line, and a status badge
+
+      Requirements:
+      - Components are imported from '@sanity/ui', and the stylesheet '@sanity/ui/styles.css' is imported
+      - Icons must be imported from '@sanity/icons' per-icon subpaths (e.g. `@sanity/icons/Close`) — not from the package root
+      - Structural regions (sidebar, toolbar, main wrapper) must use Box or Flex — not Card
+      - Document list items must use Card, which sets padding, gap, and radius through its `density` prop (it has no `radius` or `padding` props)
+      - Every Heading must have an explicit `as` prop setting its heading level (Heading has no `level` prop), and no heading level is skipped
+      - Every icon-only button must use IconButton, which requires both `icon` and `aria-label`
+      - Sidebar visibility must be controlled with useState
+
+      Show the complete App.tsx.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Outer wrapper uses Flex with flexWrap="wrap" and minHeight set to fill the viewport
+        - SkipToContent is the first focusable element and its href points to the main region's id (e.g. href="#main-content" with id="main-content" on main)
+        - Navigation sidebar uses Box or Flex with as="nav" and aria-label
+        - Sidebar header has a bottom border separating it from the nav content below
+        - Close button is an IconButton with both an icon and an aria-label
+        - Sidebar navigation items are Link components (Documents, Authors, Settings)
+        - Main content area uses Box or Flex with as="main" and stacks the toolbar above the document list (Flex flexDirection="column", or a VStack inside)
+        - Toolbar uses Box or Flex (not Card) with a bottom border
+        - Toolbar Flex has flexWrap="wrap" so it reflows at narrow widths
+        - Page title Heading is as="h1"; sidebar and card headings are as="h2", so no level is skipped
+        - Menu button to reopen the sidebar is an IconButton with both an icon and an aria-label
+        - The document list sits in a scroll Box (flexGrow and overflowY="auto") with a Container inside it, not around it
+        - Document list items use Card (not Box or Flex)
+        - A muted Text with "Last edited" content appears inside each card
+        - Each card has a Badge whose tone reflects the status (positive for Published, caution for Draft)
+        - Sidebar open/closed state is managed with useState
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Every Sanity UI component is imported from '@sanity/ui', and '@sanity/ui/styles.css' is imported
+        - Icons are imported from '@sanity/icons' subpaths (e.g. CloseIcon from '@sanity/icons/Close', MenuIcon from '@sanity/icons/Menu', AddIcon from '@sanity/icons/Add') — not as named exports from '@sanity/icons'
+        - No padding, radius, or layout prop (flexGrow, minWidth, overflow) is passed to Card
+        - No level prop is passed to Heading — Heading uses as for the heading level and size for visual size
+        - No Card is used for the sidebar, toolbar, or main content wrapper, and no Container wraps the sidebar or toolbar
+        - Vertical stacks use VStack with the gap prop (or Flex flexDirection="column") — there is no Stack and no space prop
+        - Flex uses the gap prop for spacing between children — not space
+        - No onClick handler is placed directly on a Box or Flex element
+    - type: contains
+      value: '<SkipToContent'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-quick-start-styles-css-import
+  mode: literacy
+  title: 'Quick start — the @sanity/ui/styles.css import is required'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/guides/installation
+        reason: 'The styles.css import is required — without it every component renders as unstyled HTML and no error is thrown; the exact specifier is @sanity/ui/styles.css; import it before your own global CSS because only the global reset is in a cascade layer'
+  prompt:
+    text: |
+      My Box, Flex, and Card components from the `@sanity/ui` package are rendering, but they look completely unstyled — no colors, no spacing, no borders, no typography. The HTML is there but it's plain. There are no build errors, no console warnings, and no TypeScript errors.
+
+      Show the corrected entry-point file.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Adds the `@sanity/ui/styles.css` import to the app entry file (e.g. main.tsx / index.tsx), not to an individual component file
+        - Imports the stylesheet once, not in several files
+        - Places the stylesheet import before the app's own global CSS import
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Import path is exactly `@sanity/ui/styles.css` (no `/lib/styles` or other variant)
+        - The import is placed at the top of the entry file, before component rendering
+        - The code adds no alternative styling mechanism (CSS-in-JS, manual CSS variables) in place of the import
+        - Code is syntactically valid
+    - type: contains
+      value: '@sanity/ui/styles.css'
+    # Removed not-contains "CSS-in-JS" (2026-09-28): a correct answer can say
+    # "you don't need CSS-in-JS" and would have failed. The rubric covers it.
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-quick-start-inline-styles-vs-component-props
+  mode: literacy
+  title: 'Quick start — use component props, not inline styles, for layout and spacing'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/guides/api-essentials
+        reason: 'Any CSS with a component-prop equivalent is passed as that prop; style is only for values with no prop path (a transform, a gradient, an aspect ratio, a CSS custom property); inline styles bypass the token system and break in dark mode; spacing is an integer step, sizing a CSS string'
+      - path: ui/foundations/spacing-guidelines
+        reason: 'Spacing scale — numeric steps that map to fixed pixel values'
+      - id: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+        path: ui/components/box
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+          perspective: rqgKNUCe1
+        reason: 'Box styling props — padding, margin, width, height, gap, overflow, etc.'
+      - id: c4927bb5-d137-424c-8c29-1f97b132c61c
+        path: ui/components/flex
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: c4927bb5-d137-424c-8c29-1f97b132c61c
+          perspective: rqgKNUCe1
+        reason: 'Flex layout props — gap, justifyContent, alignItems, flexGrow, flexWrap'
+  prompt:
+    text: |
+      I'm reaching for an inline `style` attribute on Box and Flex components from the `@sanity/ui` package to set width 100%, padding 16px, gap 12px, and justifyContent space-between. It works, but I've been told inline styles are an anti-pattern in this design system.
+
+      Show a before/after JSX example that expresses width, padding, gap, and justifyContent the right way.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - The element that takes `gap` and `justifyContent` is a Flex (or Grid), not a Box — Box has no gap or justifyContent prop
+        - Shows both a before example with the inline style object and an after example with component props
+        - The after example keeps all four settings from the before example (width, padding, gap, and `justifyContent="space-between"`)
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected JSX uses `width=`, `padding=`, `gap=`, and `justifyContent=` as component props
+        - Spacing values (padding, gap) are integer steps on the spacing scale, not pixel strings; width is a CSS string such as `width="100%"`
+        - The corrected JSX has no inline style attribute for layout or spacing
+        - Box and Flex are imported from the `@sanity/ui` package
+        - Code is syntactically valid
+    - type: contains-any
+      value: ['width=', 'padding=', 'gap=', 'justifyContent=']
+  baseline:
+    enabled: true
+    rubric: full

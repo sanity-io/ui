@@ -18,7 +18,8 @@
     "**/build/**",
     "**/next-env.d.ts",
     "**/*.css.d.ts",
-    "pnpm-lock.yaml"
+    "pnpm-lock.yaml",
+    ".ailf/**"
   ],
   "options": {
     "denyWarnings": true,

@@ -1,0 +1,163 @@
+- id: sanity-ui-v5-grid-responsive-card-grid
+  mode: literacy
+  title: 'Grid — build a responsive card grid that reflows at small viewports'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 68dbb3bf-b7c7-4a80-8999-8ce418cf7fe3
+        path: ui/components/grid
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 68dbb3bf-b7c7-4a80-8999-8ce418cf7fe3
+          perspective: rqgKNUCe1
+        reason: 'Grid gridTemplateColumns, responsive array props, and reflow requirements'
+      - path: ui/patterns/responsive
+        reason: 'Responsive array index-to-breakpoint table (index 0 is the base, applied at 320px) and spacing-scale gap values'
+  prompt:
+    text: |
+      Using Grid and Card from the `@sanity/ui` package, build a responsive card grid that:
+
+      1. Shows 1 column on small viewports
+      2. Shows 2 columns on medium viewports
+      3. Shows 3 columns on large viewports
+      4. Has token-based gap between cards (not raw px)
+      5. Does not cause horizontal scrolling at 320px viewport width
+
+      Each card should display a title (Heading with as="h2" from the `@sanity/ui` package) and a short description (Text from the `@sanity/ui` package).
+
+      Requirements:
+      - Use the responsive prop array format for gridTemplateColumns
+      - Import Grid, Card, Heading, and Text from the correct package
+      - Do NOT hardcode pixel widths in gridTemplateColumns
+
+      Show the complete JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - gridTemplateColumns uses a responsive array of CSS strings (e.g. ['1fr', '1fr', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)'] or similar)
+        - A gap token is applied instead of a hardcoded px value
+        - The first breakpoint value is a single column ('1fr' or equivalent) for reflow compliance
+        - Each card uses Heading with as="h2" and a Text component for description
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Grid is imported from the '@sanity/ui' package
+        - Heading is imported from the '@sanity/ui' package
+        - Card is imported from the '@sanity/ui' package
+        - No hardcoded px values in gridTemplateColumns
+        - No fixed-width px values on Grid children
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-grid-reading-order-safety
+  mode: literacy
+  title: 'Grid — avoid CSS reordering that breaks screen reader reading order'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 68dbb3bf-b7c7-4a80-8999-8ce418cf7fe3
+        path: ui/components/grid
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 68dbb3bf-b7c7-4a80-8999-8ce418cf7fe3
+          perspective: rqgKNUCe1
+        reason: 'Grid accessibility — visual-to-DOM order, dense packing, and interactive content'
+  prompt:
+    text: |
+      A developer wrote the following Grid layout, and it fails an accessibility review:
+
+      ```tsx
+      <Grid
+        gridTemplateColumns="repeat(3, 1fr)"
+        gridAutoFlow="column dense"
+        gap={3}
+      >
+        <Box gridColumn="3">Featured Item</Box>
+        <Box gridColumn="1">Item A</Box>
+        <Box gridColumn="2">Item B</Box>
+      </Grid>
+      ```
+
+      Show a corrected version that fixes the accessibility problems while keeping as much of the intended visual layout as it can.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides a corrected version where DOM order matches the intended visual reading sequence
+        - Keeps the three-column Grid layout
+        - Keeps all three items (Featured Item, Item A and Item B)
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The corrected version does not use gridColumn or gridAutoFlow='dense' to achieve a different visual order than the DOM order
+        - The correction is practically implementable and syntactically valid
+        - gap stays a spacing-scale integer
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-grid-v3-responsive-columns-migration
+  mode: literacy
+  title: 'Grid — responsive v3 `columns` becomes a gridTemplateColumns array of CSS strings'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/grid/grid-v3-responsive-columns-migration.tsx
+  context:
+    docs:
+      - id: 68dbb3bf-b7c7-4a80-8999-8ce418cf7fe3
+        path: ui/components/grid
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 68dbb3bf-b7c7-4a80-8999-8ce418cf7fe3
+          perspective: rqgKNUCe1
+        reason: 'Grid migration — the numeric `columns` prop is removed; use gridTemplateColumns with CSS grid strings (columns={3} becomes gridTemplateColumns="repeat(3, 1fr)"), and responsive arrays still work on it'
+      - path: ui/patterns/responsive
+        reason: 'Responsive array index-to-breakpoint table: [0] base, [1] 360px, [2] 600px, [3] 900px'
+  prompt:
+    text: |
+      I'm porting this Sanity UI v3 card grid to `@sanity/ui`. It needs to keep exactly the same column count at each breakpoint as it has now. Show the migrated JSX.
+
+      ```tsx
+      import {Card, Grid} from '@sanity/ui'
+
+      <Grid columns={[1, 1, 2, 3]} gap={3}>
+        {items.map((item) => (
+          <Card key={item.id}>{item.title}</Card>
+        ))}
+      </Grid>
+      ```
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Replaces the removed `columns` prop with `gridTemplateColumns`
+        - Keeps a responsive array with the same breakpoint positions — 1 column at the base and at 360px, 2 columns from 600px, 3 columns from 900px
+        - Grid and Card are imported from '@sanity/ui'
+        - gap stays a spacing-scale integer
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - gridTemplateColumns array entries are CSS grid strings such as "1fr", "repeat(2, 1fr)" and "repeat(3, 1fr)", not bare numbers
+        - The v5 Grid has no `columns` prop
+        - Card carries no padding or layout props (spacing, if any, comes from density)
+    - type: contains
+      value: 'gridTemplateColumns={['
+    # The grid doc recommends repeat(3, minmax(0, 1fr)), so accept it too.
+    - type: regex
+      value: "repeat\\(3,\\s*(1fr|minmax\\(0,\\s*1fr\\))\\)|1fr 1fr 1fr"
+    # Numbers in the array are the v3 habit carried over; a string array is required.
+    - type: not-contains
+      value: 'gridTemplateColumns={[1'
+  baseline:
+    enabled: true
+    rubric: full

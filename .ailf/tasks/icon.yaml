@@ -1,0 +1,106 @@
+- id: sanity-ui-v5-icon-hallucinated-glyph-names
+  mode: literacy
+  title: 'Icon — use real @sanity/icons names, not invented ones'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/icon/icon-hallucinated-glyph-names.tsx
+  context:
+    docs:
+      - path: ui/foundations/iconography-guidelines
+        reason: "The icon catalogue maps intents to real @sanity/icons glyphs (CogIcon for settings; UploadIcon, ShareIcon, PublishIcon for uploading, sharing, publishing), and @sanity/icons v5 imports each icon from its own subpath: import {SearchIcon} from '@sanity/icons/Search' — the root entry only offers the dynamic Icon component and icons map"
+      - id: b8d89890-9922-421e-bc42-ec56d408279c
+        path: ui/components/icon
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: b8d89890-9922-421e-bc42-ec56d408279c
+          perspective: rqgKNUCe1
+        reason: "Icon examples import glyphs from per-icon subpaths such as '@sanity/icons/Rocket'"
+      - id: ea580011-a37c-4dba-b1a0-30a27e47530f
+        path: ui/components/button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: ea580011-a37c-4dba-b1a0-30a27e47530f
+          perspective: rqgKNUCe1
+        reason: 'Button v5 API — `text` for the label, `iconStart`/`iconEnd` for icons, `level` for visual weight, `tone` limited to neutral|critical'
+  prompt:
+    text: |
+      Using Button from `@sanity/ui` with icons from `@sanity/icons`, add a "send" button and a "settings" button. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses real @sanity/icons glyphs for both intents
+        - For "send" uses a real glyph such as UploadIcon, ShareIcon, PublishIcon, or EnvelopeIcon
+        - For "settings" uses CogIcon (or EllipsisVerticalIcon for a menu)
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Imports only glyph names that exist in @sanity/icons
+        - Does not invent SendIcon or SettingsIcon
+        - "Each glyph is imported from its own subpath — `import {CogIcon} from '@sanity/icons/Cog'` — not from the `@sanity/icons` root, which no longer exports named icons in v5"
+        - 'Button passes its label via the `text` prop and its glyph via `iconStart` (or `iconEnd`); the v3 `icon`/`iconRight`/`mode` props are not used'
+        - '`tone`, if set, is only `neutral` or `critical`; visual weight is set with `level` (primary/secondary/tertiary)'
+    # A per-icon subpath import. Naming SendIcon, SettingsIcon or the root
+    # import to reject them is correct, so those are left to the rubric.
+    - type: regex
+      value: "from\\s*['\\\"]@sanity/icons/[A-Z]"
+    - type: not-contains
+      value: 'mode='
+    - type: contains-any
+      value: ['UploadIcon', 'ShareIcon', 'PublishIcon', 'EnvelopeIcon', 'CogIcon']
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-icon-component-wrapper-usage
+  mode: literacy
+  title: 'Icon — pass a glyph into the Icon component'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/icon/icon-component-wrapper-usage.tsx
+  context:
+    docs:
+      - id: b8d89890-9922-421e-bc42-ec56d408279c
+        path: ui/components/icon
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: b8d89890-9922-421e-bc42-ec56d408279c
+          perspective: rqgKNUCe1
+        reason: 'Icon component from @sanity/ui takes the icon component via the `icon` prop and sizes it with the scale `size` prop (0–4)'
+      - path: ui/foundations/iconography-guidelines
+        reason: "@sanity/icons v5 imports each glyph from its own subpath (import {SearchIcon} from '@sanity/icons/Search'); the root entry only offers the dynamic Icon component and icons map"
+  prompt:
+    text: |
+      Using the Icon component from `@sanity/ui` and a glyph from `@sanity/icons`, show a large standalone search icon next to a section heading. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses the Icon component from '@sanity/ui' with a glyph passed in
+        - "The SearchIcon glyph is imported from its subpath, '@sanity/icons/Search'"
+        - The icon is sized larger via the size prop
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - 'The glyph is passed to the Icon component via the `icon` prop — as the component, `icon={SearchIcon}`, or, from alpha.12, as an element, `icon={<SearchIcon />}` — not the v3 `symbol` prop, and not raw SVG markup'
+        - size is an integer on the 0–4 scale
+        - "Icon comes from '@sanity/ui' and the glyph from the '@sanity/icons/Search' subpath — the '@sanity/icons' root no longer exports named icons in v5"
+    - type: contains
+      value: 'SearchIcon'
+    - type: contains
+      value: '<Icon'
+    - type: contains
+      value: '@sanity/icons/Search'
+    - type: contains
+      value: 'icon={SearchIcon}'
+    - type: not-contains
+      value: 'symbol='
+  baseline:
+    enabled: true
+    rubric: full

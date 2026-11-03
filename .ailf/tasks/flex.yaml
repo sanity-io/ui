@@ -1,0 +1,157 @@
+- id: sanity-ui-v5-flex-toolbar-reflow
+  mode: literacy
+  title: 'Flex — build a toolbar that reflows correctly at 320px'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: c4927bb5-d137-424c-8c29-1f97b132c61c
+        path: ui/components/flex
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: c4927bb5-d137-424c-8c29-1f97b132c61c
+          perspective: rqgKNUCe1
+        reason: 'Flex reflow requirements — flexWrap, gap, and 320px viewport compliance'
+      - path: ui/patterns/responsive
+        reason: "Every horizontal Flex row needs flexWrap='wrap' to reflow at 320px; gap takes a spacing-scale step (0–9), never pixels"
+  prompt:
+    text: |
+      Using Flex, Heading, and Button from the `@sanity/ui` package, build a toolbar that:
+
+      1. Displays a page title ("All Documents") on the left
+      2. Displays a "New document" button on the right
+      3. Wraps to two lines at narrow viewport widths instead of overflowing
+
+      Requirements:
+      - The toolbar must not cause horizontal scrolling at 320px viewport width
+      - The heading must be rendered as an `<h1>` element (use `as="h1"`)
+      - Use token-based gap spacing (not raw px values)
+      - Import Flex, Heading, and Button from the correct package
+
+      Show the complete JSX for the toolbar.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Flex has flexWrap="wrap" to allow line-breaking at narrow widths
+        - A gap token is applied (gap={1} through gap={9}) instead of a hardcoded px value
+        - Heading uses as="h1" for correct semantic heading role
+        - alignItems and justifyContent are set to arrange title left and button right
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Flex is imported from the '@sanity/ui' package
+        - Heading is imported from the '@sanity/ui' package
+        - Button is imported from the '@sanity/ui' package
+        - No fixed px widths on Flex children that would cause overflow
+        - No onClick added to Flex itself
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-flex-vs-vstack-decision
+  mode: literacy
+  title: 'Flex — choose correctly between Flex, VStack, and Box'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: c4927bb5-d137-424c-8c29-1f97b132c61c
+        path: ui/components/flex
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: c4927bb5-d137-424c-8c29-1f97b132c61c
+          perspective: rqgKNUCe1
+        reason: 'Flex — when to use vs VStack and Box'
+      - id: 8b196b72-efff-4e6b-a381-7a6327f95ff1
+        path: ui/components/v-stack
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 8b196b72-efff-4e6b-a381-7a6327f95ff1
+          perspective: rqgKNUCe1
+        reason: 'VStack — simple vertical column with gap, exposes only as and gap props'
+      - id: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+        path: ui/components/box
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: a0cb0c96-7426-4fef-b3a0-af7a0b5742f9
+          perspective: rqgKNUCe1
+        reason: 'Layout component comparison table'
+  prompt:
+    text: |
+      For each of the following layout scenarios, choose the correct component (Box, Flex, or VStack from the `@sanity/ui` package):
+
+      1. A list of navigation links stacked vertically with uniform spacing between each
+      2. A row containing a user avatar, a name label, and an action button — centered vertically
+      3. A collection of tags (each with different widths) that should wrap to the next line when they overflow
+      4. A container that applies padding around a block of content with no directional layout
+      5. A responsive layout that changes from a vertical column on mobile to a horizontal row on desktop
+
+      For each scenario, show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Scenario 1 uses VStack with a gap, not Flex
+        - Scenario 2 uses Flex with alignItems="center"
+        - Scenario 3 uses Flex with flexWrap="wrap"
+        - Scenario 4 uses Box with padding
+        - Scenario 5 uses Flex with a responsive flexDirection prop
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - No answer uses VStack for horizontal or wrapping layouts
+        - No answer uses Grid for a single-row or single-column scenario
+        - All components are from '@sanity/ui'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-flex-v3-shorthand-prop-rename
+  mode: literacy
+  title: 'Flex — v3 shorthand props are renamed to full CSS names'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/flex/flex-v3-shorthand-prop-rename.tsx
+  context:
+    docs:
+      - id: c4927bb5-d137-424c-8c29-1f97b132c61c
+        path: ui/components/flex
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: c4927bb5-d137-424c-8c29-1f97b132c61c
+          perspective: rqgKNUCe1
+        reason: 'Flex v5 prop names — flexDirection, alignItems, justifyContent (the v3 direction/align/justify shorthands were dropped)'
+  prompt:
+    text: |
+      Using Flex from the `@sanity/ui` package, lay out a row that centers its items vertically and pushes them to opposite ends. I'm migrating from Sanity UI v3. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses Flex from the '@sanity/ui' package
+        - Vertical centering uses alignItems="center"
+        - Opposite ends uses justifyContent="space-between"
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Uses full CSS prop names — flexDirection, alignItems, justifyContent
+        - Does not use the v3 shorthands direction, align, or justify on Flex
+        - JSX is syntactically valid
+    - type: contains
+      value: 'alignItems'
+    - type: contains
+      value: 'justifyContent'
+  baseline:
+    enabled: true
+    rubric: full

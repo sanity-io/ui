@@ -1,0 +1,92 @@
+- id: sanity-ui-v5-heading-explicit-as-prop
+  mode: literacy
+  title: 'Heading — always set `as` explicitly for correct semantic hierarchy'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 97c9ef53-d07f-46ac-877d-ff3afd046d5e
+        path: ui/components/heading
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 97c9ef53-d07f-46ac-877d-ff3afd046d5e
+          perspective: rqgKNUCe1
+        reason: 'Heading defaults to h2 when as is omitted, the as prop sets the semantic level, and each page has exactly one h1'
+      - path: ui/foundations/typography-guidelines
+        reason: 'Heading hierarchy requirements — heading level is split from visual size, and levels are never skipped'
+  prompt:
+    text: |
+      I have several Heading components on a page from the `@sanity/ui` package and I'm not sure what HTML elements they end up as. I'm worried I'm rendering multiple h2s with no h1, which screen readers won't like.
+
+      Show a corrected page header structure with a page title and two section headings.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides a corrected example with one page title Heading and two section Headings
+        - The two section headings are siblings at the same level (both `as="h2"`), not one h2 and one h3
+        - Any change in visual size is made with `size`, not by picking a different `as` level
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Every Heading in the example sets `as` explicitly
+        - Exactly one Heading uses `as="h1"`
+        - Section headings use `as="h2"` (or appropriate deeper levels) without skipping levels
+        - Heading is imported from the '@sanity/ui' package
+        - '`as` is only ever set to a heading element (h1–h6); Heading rejects non-heading tags such as `as="p"` or `as="div"`'
+        - JSX is syntactically valid
+    - type: contains
+      value: 'as="h1"'
+    - type: contains
+      value: 'as="h2"'
+    - type: contains-any
+      value: ['as="h1"', 'as="h2"', 'as="h3"']
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-heading-size-not-level-for-smaller-look
+  mode: literacy
+  title: 'Heading — change size for a smaller look; never skip a level with as'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 97c9ef53-d07f-46ac-877d-ff3afd046d5e
+        path: ui/components/heading
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 97c9ef53-d07f-46ac-877d-ff3afd046d5e
+          perspective: rqgKNUCe1
+        reason: "as sets the semantic level (h1–h6) independently of size; don't skip levels (h1 to h4) to get a smaller visual size — use as='h2' with a smaller size instead; heading levels must stay sequential"
+  prompt:
+    text: |
+      On our project settings page (built with `@sanity/ui`) the page title is `<Heading as="h1" size={4}>Project settings</Heading>`. Directly under it are sections like "API tokens" and "Members". The design calls for those section titles to look small, so I used `<Heading as="h4">API tokens</Heading>` because h4 seemed like the smaller heading. An accessibility audit flagged it. Fix it so the section titles still look small, and show the corrected JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides corrected JSX for the page title and both section titles ("API tokens" and "Members")
+        - Leaves the page title as `<Heading as="h1" size={4}>` while the section titles get a smaller `size`
+        - Does not add inline styles, className or font-size overrides to make the section titles look small
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The page title stays `as="h1"` and each section title directly under it uses `as="h2"`
+        - Section titles set a small `size` value on the 0–5 Heading scale (for example `size={0}` or `size={1}`)
+        - No `as="h4"` is used for a section directly below the h1
+        - Heading is imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: 'as="h2"'
+    # A section heading at h2 with a small size, props in either order. No
+    # not-contains on as="h4": the prompt quotes it, so a correct answer may too.
+    - type: regex
+      value: "as=\"h2\"[^>]*size=\\{[0-2]\\}|size=\\{[0-2]\\}[^>]*as=\"h2\""
+  baseline:
+    enabled: true
+    rubric: full

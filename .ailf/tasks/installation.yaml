@@ -1,0 +1,43 @@
+- id: sanity-ui-v5-installation-stylesheet-cascade-order
+  mode: literacy
+  title: 'Installation — import v5 styles before your own CSS; only the reset is layered'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/guides/installation
+        reason: 'Import order (polyfills, then the v5 stylesheet, then your own global CSS) and the cascade model: only the global reset sits in the sui.global layer, component styles are unlayered so the later import wins at equal specificity'
+      - path: ui/guides/migrating-v3-to-v5
+        reason: 'v5 styling notes restating that only the global reset is layered in sui.global and component styles are not'
+  prompt:
+    text: |
+      We added Sanity UI 5 to a Vite app. The top of `main.tsx` looks like this:
+
+      ```tsx
+      import './index.css'
+      import '@sanity/ui/styles.css'
+      import '@sanity/ui/polyfills'
+      ```
+
+      `index.css` has our own element resets plus a few classes we pass to v5 components through `className` for one-off effects like a background gradient. Since adding v5, some of those classes lose to the library's rules even though the selectors look equally specific. Is this import order right? Show the corrected imports.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Gives the corrected order — polyfills, then `@sanity/ui/styles.css`, then `./index.css` — so the app's classes load after v5's component styles
+        - Keeps the `@sanity/ui/polyfills` import rather than dropping it
+        - Fixes the override with import order alone, without adding `!important`, extra selector specificity or inline styles to the app's classes
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Uses the exact specifiers `@sanity/ui/polyfills` and `@sanity/ui/styles.css`, not `@sanity/ui/dist/styles.css` or `@sanity/ui/styles`
+        - Does not wrap v5's CSS or the app's CSS in extra @layer rules to fix the problem
+        - The code is syntactically valid TypeScript/CSS
+    # Order check on one block: the three imports, in order, with at most three
+    # unrelated lines between them. Anchoring stops a match that starts in the
+    # quoted broken block and ends in a wrong corrected block.
+    - type: regex
+      value: "@sanity/ui/polyfills['\\\"];?[^\\n]*\\n(?:(?![^\\n]*(?:ui/|index\\.css|```))[^\\n]*\\n){0,3}[^\\n]*@sanity/ui/styles\\.css['\\\"];?[^\\n]*\\n(?:(?![^\\n]*(?:ui/|index\\.css|```))[^\\n]*\\n){0,3}[^\\n]*\\./index\\.css"
+  baseline:
+    enabled: true
+    rubric: full

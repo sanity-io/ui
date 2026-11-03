@@ -1,0 +1,129 @@
+- id: sanity-ui-v5-comments-composer-pending-and-failed-post
+  mode: literacy
+  title: 'Comments — composer keeps a visible submit, a loading Button with its label, and the draft on failure'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/patterns/comments
+        reason: 'Composer must have a visible submit Button labelled "Comment"/"Reply" (not Enter-only); pending state is loading={true}, which keeps the label and rejects a second click; disable submit on an empty comment; keep the draft until the post succeeds; TextArea is not yet available in Sanity UI 5, so the composer uses a native <textarea>; post errors name the cause, then the fix'
+      - id: ea580011-a37c-4dba-b1a0-30a27e47530f
+        path: ui/components/button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: ea580011-a37c-4dba-b1a0-30a27e47530f
+          perspective: rqgKNUCe1
+        reason: "Button's loading prop and text prop in v5"
+  prompt:
+    text: |
+      I'm building the comment composer for our document comments panel. Users complain that comments sometimes vanish, and one screen reader user says there's no way to send a comment. Current code:
+
+      ```tsx
+      import {Box, Text} from '@sanity/ui'
+
+      function Composer({onSubmit}: {onSubmit: (body: string) => Promise<void>}) {
+        const [value, setValue] = useState('')
+        const [error, setError] = useState<string | null>(null)
+
+        async function send() {
+          const body = value
+          setValue('')
+          try {
+            await onSubmit(body)
+          } catch {
+            setError('An error occurred. Please try again.')
+          }
+        }
+
+        return (
+          <Box>
+            <textarea
+              aria-label="Write a comment"
+              value={value}
+              onChange={(e) => setValue(e.currentTarget.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  send()
+                }
+              }}
+            />
+            {error && <Text size={1}>{error}</Text>}
+          </Box>
+        )
+      }
+      ```
+
+      Please fix it. We use Sanity UI v5 alpha.14.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Adds a visible submit Button labelled "Comment" (or "Reply"), so sending no longer depends on the Enter key alone
+        - Keeps the draft in the composer until the post succeeds, clearing it only after onSubmit resolves, so a failed post doesn't wipe the person's words
+        - Disables the submit Button while the comment is empty
+        - Rewrites the error to name the cause and the fix (for example "Comment wasn't posted. Check your connection and try again.") instead of "An error occurred. Please try again."
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The submit Button uses `text="Comment"` (or "Reply") and `loading={…}` bound to a pending flag; its text does not change while pending
+        - "`setValue('')` runs only after `await onSubmit(...)` succeeds, not before the request"
+        - The Button is disabled when the trimmed value is empty
+        - Button, Box and Text are imported from '@sanity/ui'
+        - The pending flag is reset in both the success and failure paths (for example in `finally`)
+    - type: contains
+      value: 'loading={'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-comments-thread-order-resolve-delete
+  mode: literacy
+  title: 'Comments — oldest-first nested list, resolve without confirmation, delete with a critical confirm'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - path: ui/patterns/comments
+        reason: 'Threads are chronological, oldest first, and new replies append to the bottom; threads are marked up as a nested ol/ul; new comments are announced through an aria-live="polite" region; resolving never deletes and needs no confirmation; deleting needs a confirmation with tone="critical"; use the terms Open and Resolved'
+      - path: ui/patterns/confirmation-dialogs
+        reason: 'The delete confirmation follows the confirmation-dialogs pattern: critical-tone primary confirm and a guaranteed Cancel'
+  prompt:
+    text: |
+      Our PM wrote this spec for the comment thread in our Studio plugin. I have to build it with Sanity UI v5 (alpha.14), but a couple of points feel off to me:
+
+      1. Show the newest reply at the top of each thread so people see what's new.
+      2. Render each thread as a stack of `<Box>`es, with replies indented using `paddingLeft={4}`.
+      3. A "Mark as done" button deletes the thread, after an "Are you sure?" dialog.
+      4. Deleting a single comment happens immediately from its menu, no dialog, to keep it fast.
+      5. Tabs at the top: "Active" and "Done".
+
+      Write the thread component the way comments should work in Studio, changing any spec point that doesn't fit (a thread with its root comment and replies, the resolve action, and the delete confirmation). You can stub `Comment` and the data.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Does not follow spec point 1 — the thread renders oldest first, with new replies appended at the bottom
+        - Does not follow spec point 2 — replies are nested in the markup as a list (ol/ul), not only indented Boxes with paddingLeft
+        - Does not follow spec point 3 — the resolve action moves the thread to Resolved without deleting any comment and without a confirmation dialog
+        - Does not follow spec point 4 — deleting a single comment opens a confirmation whose confirm Button uses tone="critical"
+        - Labels the thread states "Open" and "Resolved", not "Active" and "Done"
+        - Announces newly posted comments or replies through an aria-live="polite" region
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Replies render oldest first (no reverse or descending sort) inside a nested `ol` or `ul` (plain elements, v5 List, or Box with `as="ol"`/`as="ul"`)
+        - The resolve action calls a resolve handler directly with no confirmation dialog and does not delete anything
+        - The delete confirmation is a Dialog (or anchored Popover) with a Cancel control and a confirm Button with `tone="critical"` whose label names the action (for example "Delete comment")
+        - Layout and actions use Sanity UI 5 components imported from '@sanity/ui'; components not yet available in Sanity UI 5 are left out or replaced with native elements rather than imported
+    - type: contains
+      value: 'aria-live="polite"'
+    - type: contains
+      value: 'Resolved'
+    - type: contains-any
+      value: ['<ol', '<ul', 'as="ol"', 'as="ul"', '<List']
+  baseline:
+    enabled: true
+    rubric: full

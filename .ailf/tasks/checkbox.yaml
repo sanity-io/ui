@@ -1,0 +1,81 @@
+- id: sanity-ui-v5-checkbox-controlled-label-required
+  mode: literacy
+  title: 'Checkbox — controlled with the required label prop'
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/checkbox/checkbox-controlled-label-required.tsx
+  context:
+    docs:
+      - id: 8e00d62f-7846-45b1-a253-0d75a10cb05f
+        path: ui/components/checkbox
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 8e00d62f-7846-45b1-a253-0d75a10cb05f
+          perspective: rqgKNUCe1
+        reason: 'Checkbox API — required `label` prop (renders its own label), controlled checked/onChange, extends input props'
+  prompt:
+    text: |
+      Build a controlled "I agree to the terms" checkbox using the `@sanity/ui` package that tracks its checked state. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Checkbox is imported from the '@sanity/ui' package
+        - Passes the required `label` prop for the accessible name
+        - Controlled via checked and onChange
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The label text is provided through the `label` prop (Checkbox renders its own <label>)
+        - Does not hand-roll a raw <input type="checkbox"> or a separate <label> wrapper
+        - checked and onChange are wired to state
+    - type: contains
+      value: 'label='
+    - type: contains-any
+      value: ['checked', 'onChange']
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-checkbox-indeterminate-select-all
+  mode: literacy
+  title: "Checkbox — indeterminate 'select all' state"
+  area: sanity-ui-v5
+  docCoverage: false
+  referenceSolution: reference-solutions/checkbox/checkbox-indeterminate-select-all.tsx
+  context:
+    docs:
+      - id: 8e00d62f-7846-45b1-a253-0d75a10cb05f
+        path: ui/components/checkbox
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 8e00d62f-7846-45b1-a253-0d75a10cb05f
+          perspective: rqgKNUCe1
+        reason: "Checkbox `indeterminate` boolean prop for partial-selection 'select all' patterns"
+  prompt:
+    text: |
+      Make a "select all" checkbox with the `@sanity/ui` package that shows an indeterminate state when only some of its child items are selected. Show the JSX.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - The parent checkbox uses indeterminate when only some children are selected
+        - The parent is checked when all children are selected
+        - Child items are also Checkbox components with label props
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - indeterminate is passed as a boolean prop on Checkbox
+        - Every Checkbox has a label prop and controlled checked/onChange
+        - Checkbox is imported from '@sanity/ui'
+    - type: contains
+      value: 'indeterminate'
+    - type: contains
+      value: 'label='
+  baseline:
+    enabled: true
+    rubric: full

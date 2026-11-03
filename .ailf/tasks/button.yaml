@@ -1,0 +1,110 @@
+- id: sanity-ui-v5-button-tone-primary-fails-contrast
+  mode: literacy
+  title: "Button — tone='primary' was removed; use level='primary'"
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: ea580011-a37c-4dba-b1a0-30a27e47530f
+        path: ui/components/button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: ea580011-a37c-4dba-b1a0-30a27e47530f
+          perspective: rqgKNUCe1
+        reason: "Button v5 tone values (neutral|critical) and the `level` prop (primary/secondary/tertiary) that replaced v3's `mode` and the emphasis tones"
+  prompt:
+    text: |
+      I have a Button from `@sanity/ui` with `tone="primary"`. TypeScript underlines it, and in the browser it doesn't render as the emphasized call-to-action I expected. I assumed `primary` was the semantically obvious tone for a primary action. What's the correct way to express a primary action here?
+
+      Show the corrected JSX for a primary action button, with its emphasis set explicitly.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides corrected JSX showing the primary action button with `level="primary"`
+        - Removes `tone="primary"` from the Button; if tone is set at all, it is `tone="neutral"`
+        - Sets the emphasis with a Button prop, not with custom CSS, inline styles, a className or a color prop
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Does not use `tone="default"` or the removed `mode` prop
+        - The button label is supplied via the `text` prop
+        - Button is imported from `@sanity/ui`
+        - JSX is syntactically valid
+    - type: contains
+      value: 'level="primary"'
+    # Scoped to the Button usage: the prompt quotes tone="primary", so a bare
+    # not-contains would fail any correct answer that restates the broken code.
+    - type: not-contains
+      value: '<Button tone="primary"'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-button-loading-keeps-label-and-disables
+  mode: literacy
+  title: 'Button — use the loading prop for a pending action; it disables the button and the label stays unchanged'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: ea580011-a37c-4dba-b1a0-30a27e47530f
+        path: ui/components/button
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: ea580011-a37c-4dba-b1a0-30a27e47530f
+          perspective: rqgKNUCe1
+        reason: "Button's loading state shows the action is in progress and also disables the button; use it for processes longer than 200ms, and add a Toast to confirm completion when they take over three seconds"
+      - path: ui/patterns/loading-states
+        reason: "For a pending Button action set loading={true} — it shows progress and disables the button so a second click does nothing — and keep the button's label unchanged while it loads"
+      - id: 9628d145-b661-4506-bd64-f1aaf0ffcd7b
+        path: ui/components/spinner
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 9628d145-b661-4506-bd64-f1aaf0ffcd7b
+          perspective: rqgKNUCe1
+        reason: 'Button has a built-in loading prop; use it instead of composing a Spinner inside a Button'
+  prompt:
+    text: |
+      Our settings form's save button is built like this (all from `@sanity/ui`):
+
+      ```tsx
+      <Button
+        type="submit"
+        level="primary"
+        text={isSaving ? 'Saving…' : 'Save settings'}
+        disabled={isSaving}
+      >
+        {isSaving && <Spinner />}
+      </Button>
+      ```
+
+      The save request usually takes four or five seconds. A reviewer said this doesn't follow the design system's loading pattern. Rewrite the button the way the system intends. Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Replaces the hand-composed Spinner child with Button's built-in `loading` prop (for example `loading={isSaving}`)
+        - Removes the separate `disabled={isSaving}`, which `loading` already covers
+        - Provides the corrected Button JSX
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - The Button sets `loading` bound to the pending state and keeps a constant `text` label
+        - No Spinner is rendered as a child of the Button
+        - The Button's `text` does not change based on the loading state
+        - Button keeps `type="submit"` and `level="primary"`, and is imported from '@sanity/ui'
+        - JSX is syntactically valid
+    - type: contains
+      value: 'loading={'
+    - type: contains-any
+      value: ['text="Save settings"', "text='Save settings'", "text={'Save settings'}"]
+  baseline:
+    enabled: true
+    rubric: full

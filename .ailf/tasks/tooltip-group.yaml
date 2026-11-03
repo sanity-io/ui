@@ -1,0 +1,72 @@
+# Added 2026-09-28. Verified against alpha.11: TooltipGroupProps is `as` plus
+# the rendered element's own attributes, so `delay` is a TypeScript error
+# (TS2322); the group renders a <div> by default and sets
+# `--tooltip-delay-group: 0ms` on it once a tooltip inside has shown.
+- id: sanity-ui-v5-tooltip-group-replaces-delay-group-provider
+  mode: literacy
+  title: "TooltipGroup — replaces v3's TooltipDelayGroupProvider; a rendered element with no delay prop"
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+        path: ui/components/tooltip
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+          perspective: rqgKNUCe1
+        reason: 'Migration table: TooltipDelayGroupProvider is replaced by TooltipGroup, which is a rendered element rather than a context provider; there is no delay prop — the show delay is 500ms and the hide delay 0ms, set in CSS via --tooltip-delay'
+      - id: 28b34b7d-4f3f-4cf7-a589-5df28962c872
+        path: ui/components/tooltip-group
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 28b34b7d-4f3f-4cf7-a589-5df28962c872
+          perspective: rqgKNUCe1
+        reason: 'TooltipGroup removes the delay for the tooltips inside the group element after the first one shows, and resets it when the pointer or focus leaves the group'
+  prompt:
+    text: |
+      {% raw %}
+      I'm migrating an editor toolbar to v5. In v3 it looked like this:
+
+      ```tsx
+      import { TooltipDelayGroupProvider } from '@sanity/ui'
+
+      <TooltipDelayGroupProvider delay={{ open: 300, close: 100 }}>
+        <HStack gap={1}>
+          <Tooltip content="Bold"><IconButton icon={BoldIcon} aria-label="Bold" /></Tooltip>
+          <Tooltip content="Italic"><IconButton icon={ItalicIcon} aria-label="Italic" /></Tooltip>
+          <Tooltip content="Link"><IconButton icon={LinkIcon} aria-label="Link" /></Tooltip>
+        </HStack>
+      </TooltipDelayGroupProvider>
+      ```
+
+      The Tooltips and IconButtons now come from Sanity UI 5. Show the v5 version of this toolbar, including what to do about the 300ms / 100ms timings.
+      {% endraw %}
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides the ported toolbar in full, with all three buttons (Bold, Italic, Link)
+        - Does not recreate the 300ms / 100ms timings through props, timers or state
+        - The buttons stay in a row, with the HStack and its `gap={1}` kept inside or around the TooltipGroup
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Uses TooltipGroup from '@sanity/ui' and no TooltipDelayGroupProvider
+        - Does not pass a `delay` prop to TooltipGroup or to any Tooltip
+        - TooltipGroup wraps all three Tooltips (placed around or inside the HStack)
+        - Each Tooltip keeps its label in `content` and wraps an IconButton that has an aria-label
+        - JSX is syntactically valid
+    - type: contains
+      value: '<TooltipGroup'
+    # Scoped to a delay prop on TooltipGroup itself. The prompt's `delay={{`
+    # sits on TooltipDelayGroupProvider, so restating the old code is safe.
+    - type: not-contains
+      value: '<TooltipGroup delay'
+  baseline:
+    enabled: true
+    rubric: full

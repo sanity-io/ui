@@ -1,0 +1,108 @@
+- id: sanity-ui-v5-badge-iconstart-and-v5-tone-values
+  mode: literacy
+  title: 'Badge — leading icon is iconStart, label is text, and tone uses the v5 vocabulary'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: b8cb486b-7c49-4096-9b88-89e6ba8831ff
+        path: ui/components/badge
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: b8cb486b-7c49-4096-9b88-89e6ba8831ff
+          perspective: rqgKNUCe1
+        reason: "Badge's tone values (neutral, positive, suggest, caution, critical), the iconStart prop for a leading icon (never an Icon child), and text as the primary way to set the label"
+  prompt:
+    text: |
+      I'm moving our document list to `@sanity/ui`. The status badges came over from our old code and TypeScript now rejects them:
+
+      ```tsx
+      import {Badge} from '@sanity/ui'
+      import {CheckmarkCircleIcon} from '@sanity/icons/CheckmarkCircle'
+      import {ClockIcon} from '@sanity/icons/Clock'
+
+      <Badge tone="primary" icon={CheckmarkCircleIcon}>Published</Badge>
+      <Badge tone="default" mode="outline">
+        <ClockIcon /> Scheduled
+      </Badge>
+      ```
+
+      Fix both badges so they compile and keep their meaning: "Published" is a success state, "Scheduled" is plain metadata.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - 'Maps Published to `tone="positive"` and Scheduled to `tone="neutral"` (or leaves Scheduled''s tone unset, since neutral is the default)'
+        - 'Keeps both icons: CheckmarkCircleIcon on Published and ClockIcon on Scheduled'
+        - 'Keeps both labels, "Published" and "Scheduled"'
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - 'Both badges use `iconStart` for their icon and pass the icon component (for example `iconStart={CheckmarkCircleIcon}`), with no Icon or svg element as a child'
+        - 'Both labels are set with the `text` prop'
+        - 'No badge uses `tone="primary"`, `tone="default"`, `mode`, or an `icon` prop'
+        - "Badge is imported from '@sanity/ui' and icons from per-icon '@sanity/icons/<Name>' subpaths"
+        - 'JSX is syntactically valid'
+    - type: contains
+      value: 'iconStart='
+    - type: contains
+      value: 'tone="positive"'
+    # Scoped to a Badge opening tag: the prompt quotes tone="primary", so an
+    # answer that restates the broken code must not fail.
+    - type: not-contains
+      value: '<Badge tone="primary" iconStart'
+  baseline:
+    enabled: true
+    rubric: full
+
+- id: sanity-ui-v5-badge-status-needs-second-channel-no-emoji
+  mode: literacy
+  title: 'Badge — toned status badges need a second channel, and never an emoji'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: b8cb486b-7c49-4096-9b88-89e6ba8831ff
+        path: ui/components/badge
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: b8cb486b-7c49-4096-9b88-89e6ba8831ff
+          perspective: rqgKNUCe1
+        reason: 'The rule that a toned Badge must lead with the state in words or carry an iconStart icon (WCAG 1.4.1), the ban on emoji in Badge text, and keeping labels to 1–3 words'
+  prompt:
+    text: |
+      Our accessibility review flagged the status column in the deploy history table. Each row shows one of these badges:
+
+      ```tsx
+      import {Badge} from '@sanity/ui'
+
+      <Badge tone="positive" text="✅ Live" />
+      <Badge tone="critical" text="Failed" />
+      <Badge tone="caution" text="Timed out" />
+      ```
+
+      The reviewer wrote "status relies on color" and "no emoji". Rewrite the three badges so they pass review. Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - 'The Failed and Timed out badges each gain an `iconStart` icon or a state-first label (such as "Error" or "Warning: timed out")'
+        - 'Removes the emoji from the Live badge and uses the `iconStart` prop if a symbol is wanted'
+        - 'Keeps each label short (1–3 words) and does not make the badges clickable'
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - 'Every toned badge either has an `iconStart` icon or text that starts with the state name'
+        - 'Icons are passed via `iconStart`, not nested as children'
+        - 'No emoji appears in any Badge `text` or children'
+        - "Badge is imported from '@sanity/ui' and any icons from per-icon '@sanity/icons/<Name>' subpaths"
+        - 'JSX is syntactically valid'
+    # No string checks: a correct answer may fix every badge with state-first
+    # text and no icon. The rubric grades both channels.
+  baseline:
+    enabled: true
+    rubric: full

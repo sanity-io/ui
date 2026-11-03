@@ -1,0 +1,87 @@
+- id: sanity-ui-v5-tooltip-content-not-text
+  mode: literacy
+  title: 'Tooltip — the label prop is content, not text'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+        path: ui/components/tooltip
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+          perspective: rqgKNUCe1
+        reason: "Tooltip's label prop is content — there is no text prop (a TypeScript error), and title compiles but is not a substitute"
+  prompt:
+    text: |
+      I want a Tooltip that says "Delete" over an IconButton. I wrote `<Tooltip text="Delete"><IconButton ... /></Tooltip>` but TypeScript rejects it. Someone suggested `title` instead. Show the correct code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Provides corrected code using `content="Delete"`
+        - Keeps the Tooltip, wrapping the IconButton
+        - The IconButton keeps an `aria-label`
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Tooltip is imported from '@sanity/ui'
+        - The corrected example uses `content`, not `text` or `title`
+        - Tooltip wraps a single focusable child element
+    - type: contains
+      value: 'content="Delete"'
+  baseline:
+    enabled: true
+    rubric: full
+
+# Added 2026-09-28. Verified against alpha.11: `<Tooltip content="…"><Badge>…</Badge></Tooltip>`
+# type-checks, so the failure is silent. Tooltip clones its child to add
+# `interestfor`, which only a button or an anchor with href acts on; Badge
+# renders a <span>.
+- id: sanity-ui-v5-tooltip-non-interactive-trigger
+  mode: literacy
+  title: 'Tooltip — only works on a button or link; a Badge trigger silently never shows'
+  area: sanity-ui-v5
+  docCoverage: false
+  context:
+    docs:
+      - id: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+        path: ui/components/tooltip
+        locator:
+          kind: sanity-content-lake
+          projectId: 3do82whm
+          dataset: next
+          documentId: 1ef69ead-ecc7-40fa-bc77-d7f7b57d1380
+          perspective: rqgKNUCe1
+        reason: 'Tooltip must never wrap a non-interactive element (text, Badge, Indicator, Avatar, bare Icon, Box, Card); its child must render an element that accepts interestfor — a button or an anchor with href — so either show the information as visible text or wrap the element in PressArea'
+  prompt:
+    text: |
+      In our document list each row has a status Badge. I wanted hovering "Draft" to explain what it means, so I wrote:
+
+      ```tsx
+      <Tooltip content="Not published yet. Only editors can see it.">
+        <Badge tone="caution">Draft</Badge>
+      </Tooltip>
+      ```
+
+      It compiles, but the tooltip never shows. Tooltips on our IconButtons in the same app work fine, and the polyfill is imported. Show the corrected code.
+  assertions:
+    - type: llm-rubric
+      template: task-completion
+      criteria:
+        - Uses a documented fix — shows the explanation as visible text next to the Badge, or wraps the Badge in PressArea so Tooltip has a real button to target
+        - Does not change the placement, add a delay setting, or re-import the polyfill as the fix
+        - Provides corrected JSX
+    - type: llm-rubric
+      template: code-correctness
+      criteria:
+        - Tooltip no longer wraps the Badge directly — its child is a PressArea (or Button/IconButton), or the Tooltip is removed in favour of visible text
+        - Does not make the Badge focusable by hand (tabIndex, onMouseEnter, role="button") as the fix
+        - If Tooltip is kept, its label is still passed with `content`
+        - Components are imported from '@sanity/ui'
+        - JSX is syntactically valid
+  baseline:
+    enabled: true
+    rubric: full
