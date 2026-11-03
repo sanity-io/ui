@@ -84,6 +84,6 @@ export const WithLabel: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect(((await canvas.findByLabelText('Switch')) as HTMLInputElement).type).toBe('switch')
+    await expect(((await canvas.findByLabelText('Switch')) as HTMLInputElement).role).toBe('switch')
   },
 }
