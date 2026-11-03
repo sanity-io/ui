@@ -2,8 +2,10 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 import {Radio as RadioV3} from 'ui3'
 
+import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
 import {Radio} from '../../../../packages/ui/src/components/radio/Radio'
 import {radioProps} from '../../../../packages/ui/src/components/radio/radio.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
 import {getArgTypes} from '../utils/getArgTypes'
 
@@ -75,5 +77,21 @@ export const Error: Story = {
         'aria-invalid',
       ),
     ).toBe('true')
+  },
+}
+
+export const WithLabel: Story = {
+  render: (props) => {
+    return (
+      <HStack gap={2}>
+        <Radio {...props} />
+        <Text as="label" htmlFor="labelRadio">
+          Radio
+        </Text>
+      </HStack>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect(((await canvas.findByLabelText('Radio')) as HTMLInputElement).type).toBe('radio')
   },
 }

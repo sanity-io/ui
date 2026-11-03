@@ -2,8 +2,10 @@ import type {Meta, StoryObj} from '@storybook/react-vite'
 import {expect} from 'storybook/test'
 import {Switch as SwitchV3} from 'ui3'
 
+import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
 import {Switch} from '../../../../packages/ui/src/components/switch/Switch'
 import {switchProps} from '../../../../packages/ui/src/components/switch/switch.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
 import {VisuallyHidden} from '../../../../packages/ui/src/components/visually-hidden/VisuallyHidden'
 import {getArgTypes} from '../utils/getArgTypes'
@@ -67,5 +69,21 @@ export const Error: Story = {
         'aria-invalid',
       ),
     ).toBe('true')
+  },
+}
+
+export const WithLabel: Story = {
+  render: (props) => {
+    return (
+      <HStack gap={2}>
+        <Switch {...props} id="labelSwitch" />
+        <Text as="label" htmlFor="labelSwitch">
+          Switch
+        </Text>
+      </HStack>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect(((await canvas.findByLabelText('Switch')) as HTMLInputElement).type).toBe('switch')
   },
 }

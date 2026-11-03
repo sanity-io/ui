@@ -4,6 +4,8 @@ import {Checkbox as CheckboxV3} from 'ui3'
 
 import {Checkbox} from '../../../../packages/ui/src/components/checkbox/Checkbox'
 import {checkboxProps} from '../../../../packages/ui/src/components/checkbox/checkbox.props'
+import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
 import {getArgTypes} from '../utils/getArgTypes'
 
@@ -84,5 +86,23 @@ export const Error: Story = {
         'aria-invalid',
       ),
     ).toBe('true')
+  },
+}
+
+export const WithLabel: Story = {
+  render: (props) => {
+    return (
+      <HStack gap={2}>
+        <Checkbox {...props} id="labelCheckbox" />
+        <Text as="label" htmlFor="labelCheckbox">
+          Checkbox
+        </Text>
+      </HStack>
+    )
+  },
+  play: async ({canvas}) => {
+    await expect(((await canvas.findByLabelText('Checkbox')) as HTMLInputElement).type).toBe(
+      'checkbox',
+    )
   },
 }
