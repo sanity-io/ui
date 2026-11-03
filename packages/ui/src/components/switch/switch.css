@@ -1,9 +1,4 @@
-/**
-  * Custom switch control, base
-  */
-.sui-SwitchMark {
-  /* Background and border colours are computed relatively in hover states;
-     we use custom properties to make this easier */
+.sui-Switch {
   --background-color: var(--backdrop);
   --border-color: var(--separator-high);
   /* Switch size stored as custom properties to be used with calc
@@ -17,10 +12,17 @@
   transition: var(--hover-transition);
 }
 
+.sui-SwitchInput {
+  opacity: 0;
+  position: absolute;
+  /* Use negative inset for 24x24 pixel hit area */
+  inset: var(--form-element-inset);
+}
+
 /**
   * Custom switch marker
   */
-.sui-SwitchMark:after {
+.sui-Switch:before {
   content: '';
   display: block;
   background-color: var(--foreground-high);
@@ -34,16 +36,14 @@
 /**
   * Hover - uses relative border/background colours to darken/lighten in both normal & error state
   */
-/** Switch border (unchecked) */
-.sui-Switch:hover .sui-SwitchMark {
+.sui-Switch:has(.sui-SwitchInput:hover) {
   border-color: light-dark(
     oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
     oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
   );
 }
 
-/* Switch background (checked) */
-.sui-Switch:hover .sui-SwitchInput:is(:checked) + .sui-SwitchMark {
+.sui-Switch:has(.sui-SwitchInput:is(:checked):hover) {
   background-color: light-dark(
     oklch(from var(--background-color) calc(l - var(--hover-lightness-delta)) c h),
     oklch(from var(--background-color) calc(l + var(--hover-lightness-delta)) c h)
@@ -53,7 +53,7 @@
 /**
   * Focus
   */
-.sui-SwitchInput:focus-visible + .sui-SwitchMark {
+.sui-Switch:has(.sui-SwitchInput:focus-visible) {
   outline: var(--focus-outline);
   outline-offset: var(--focus-offset);
 }
@@ -61,12 +61,12 @@
 /**
   * Checked
   */
-.sui-SwitchInput:checked + .sui-SwitchMark {
+.sui-Switch:has(.sui-SwitchInput:checked) {
   --background-color: var(--active-background-emphasized);
   --border-color: transparent;
 }
 
-.sui-SwitchInput:checked + .sui-SwitchMark:after {
+.sui-Switch:has(.sui-SwitchInput:checked):before {
   background-color: var(--active-foreground-emphasized);
   translate: calc(var(--width) - 175%);
 }
@@ -74,46 +74,45 @@
 /**
   * Disabled
   */
-.sui-SwitchInput:disabled + .sui-SwitchMark {
+.sui-Switch:has(.sui-SwitchInput:disabled) {
   --background-color: var(--inert-background);
   --border-color: var(--separator-low);
 }
 
-.sui-SwitchInput:disabled + .sui-SwitchMark:after {
+.sui-Switch:has(.sui-SwitchInput:disabled):before {
   background: var(--inert-foreground);
 }
 
-/* Turn hover (and all pointer events) off for disabled switches */
-.sui-Switch:has(:disabled) {
+.sui-SwitchInput:disabled {
   pointer-events: none;
 }
 
 /**
   * Disabled and checked
   */
-.sui-SwitchInput:disabled:checked + .sui-SwitchMark {
+.sui-Switch:has(.sui-SwitchInput:disabled:checked) {
   --background-color: var(--inert-foreground);
   --border-color: transparent;
 }
 
-.sui-SwitchInput:disabled:checked + .sui-SwitchMark:after {
+.sui-Switch:has(.sui-SwitchInput:disabled:checked):before {
   background-color: var(--inert-background);
 }
 
 /**
   * Error
   */
-.sui-SwitchMark.sui-error {
+.sui-Switch:has(.sui-SwitchInput[aria-invalid="true"]) {
   --border-color: var(--error-separator);
 }
 
-.sui-SwitchMark.sui-error:after {
+.sui-Switch:has(.sui-SwitchInput:not(:checked)[aria-invalid="true"]):before {
   background-color: var(--error-separator);
 }
 
 /**
   * Error and checked
   */
-.sui-SwitchInput:checked + .sui-SwitchMark.sui-error {
+.sui-Switch:has(.sui-SwitchInput:checked[aria-invalid="true"]) {
   --background-color: var(--error-background-emphasized);
 }

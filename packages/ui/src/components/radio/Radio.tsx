@@ -1,47 +1,29 @@
 import clsx from 'clsx'
 
-import {getProps} from '../../utils/getProps'
 import {suffixClassName} from '../../utils/suffixClassName'
 import {Box} from '../box/Box'
-import {Label} from '../label/Label'
-import {VisuallyHidden} from '../visually-hidden/VisuallyHidden'
-import {type RadioProps, radioProps} from './radio.props'
+import {type RadioProps} from './radio.props'
 
 const radioClassName = suffixClassName('sui-Radio')
 const radioInputClassName = suffixClassName('sui-RadioInput')
-const radioMarkClassName = suffixClassName('sui-RadioMark')
 
 /** @beta */
 export function Radio(props: RadioProps) {
-  const {className, style, label, disabled, hasError, ...rest} = getProps(props, radioProps)
+  const {className, style, ...rest} = props
 
   return (
-    <Label
-      className={clsx(radioClassName, 'sui-position-relative', className)}
+    <Box
+      as="span"
+      className={clsx(radioClassName, className)}
       style={style}
       data-ui="Radio"
-      disabled={disabled}
-      error={hasError}
+      position="relative"
+      radius="full"
+      width="17px"
+      height="17px"
     >
-      <VisuallyHidden
-        as="input"
-        type="radio"
-        className={radioInputClassName}
-        disabled={disabled}
-        {...rest}
-      />
-
-      <Box
-        as="span"
-        className={clsx(radioMarkClassName, hasError && 'sui-error')}
-        position="relative"
-        radius="full"
-        width="17px"
-        height="17px"
-      />
-
-      {label}
-    </Label>
+      <input type="radio" className={radioInputClassName} {...rest} />
+    </Box>
   )
 }
 

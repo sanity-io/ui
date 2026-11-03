@@ -23,7 +23,6 @@ import {
   Indicator,
   IndicatorStack,
   KBD,
-  Label,
   Link,
   List,
   PressArea,
@@ -173,13 +172,6 @@ export default function Ui5() {
         ))}
       </Profiler>
 
-      <h2>{count} Labels</h2>
-      <Profiler id="Label" onRender={handleOnRender}>
-        {iterator.map((i) => (
-          <Label key={i}>Label</Label>
-        ))}
-      </Profiler>
-
       <h2>{count} Codes</h2>
       <Profiler id="Code" onRender={handleOnRender}>
         {iterator.map((i) => (
@@ -204,21 +196,21 @@ export default function Ui5() {
       <h2>{count} Checkboxes</h2>
       <Profiler id="Checkbox" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Checkbox key={i} label="Checkbox" />
+          <Checkbox key={i} aria-label="Checkbox" />
         ))}
       </Profiler>
 
       <h2>{count} Switches</h2>
       <Profiler id="Switch" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Switch key={i} label="Switch" />
+          <Switch key={i} aria-label="Switch" />
         ))}
       </Profiler>
 
       <h2>{count} Radios</h2>
       <Profiler id="Radio" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Radio key={i} name="radio" label="Radio" />
+          <Radio key={i} name="radio" aria-label="Radio" />
         ))}
       </Profiler>
 

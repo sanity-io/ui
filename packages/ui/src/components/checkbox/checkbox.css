@@ -1,9 +1,4 @@
-/*
-  * Custom checkbox, base
-  */
-.sui-CheckboxMark {
-  /* Background and border colours are computed relatively in hover states;
-     we use custom properties to make this easier */
+.sui-Checkbox {
   --background-color: var(--backdrop);
   --border-color: var(--separator-high);
   background-color: var(--background-color);
@@ -13,19 +8,24 @@
   transition: var(--hover-transition);
 }
 
+.sui-CheckboxInput {
+  opacity: 0;
+  position: absolute;
+  /* Use negative inset for 24x24 pixel hit area */
+  inset: var(--form-element-inset);
+}
+
 /**
   * Hover - uses relative border/background colours to darken/lighten in both normal & error state
   */
-/** Checkbox border (unchecked) */
-.sui-Checkbox:hover .sui-CheckboxMark {
+.sui-Checkbox:has(.sui-CheckboxInput:hover)  {
   border-color: light-dark(
     oklch(from var(--border-color) calc(l - var(--hover-lightness-delta)) c h),
     oklch(from var(--border-color) calc(l + var(--hover-lightness-delta)) c h)
   );
 }
 
-/** Checkbox background (checked, indeterminate) */
-.sui-Checkbox:hover .sui-CheckboxInput:is(:checked, :indeterminate) + .sui-CheckboxMark {
+.sui-Checkbox:has(.sui-CheckboxInput:hover:is(:checked, :indeterminate)) {
   background-color: light-dark(
     oklch(from var(--background-color) calc(l - var(--hover-lightness-delta)) c h),
     oklch(from var(--background-color) calc(l + var(--hover-lightness-delta)) c h)
@@ -35,7 +35,7 @@
 /**
   * Focus
   */
-.sui-CheckboxInput:focus-visible + .sui-CheckboxMark {
+.sui-Checkbox:has(.sui-CheckboxInput:focus-visible) {
   outline: var(--focus-outline);
   outline-offset: var(--focus-offset);
 }
@@ -43,7 +43,7 @@
 /**
   * Checked/indeterminate
   */
-.sui-CheckboxInput:is(:checked, :indeterminate) + .sui-CheckboxMark {
+.sui-Checkbox:has(.sui-CheckboxInput:is(:checked, :indeterminate)) {
   --background-color: var(--active-background-emphasized);
   --border-color: transparent;
   color: var(--active-foreground-emphasized);
@@ -52,20 +52,19 @@
 /**
   * Disabled
   */
-.sui-CheckboxInput:disabled + .sui-CheckboxMark {
+.sui-Checkbox:has(.sui-CheckboxInput:disabled) {
   --background-color: var(--inert-background);
   --border-color: var(--separator-low);
 }
 
-/* Turn hover (and all pointer events) off for disabled checkboxes */
-.sui-Checkbox:has(:disabled) {
+.sui-CheckboxInput:disabled {
   pointer-events: none;
 }
 
 /**
   * Disabled, but checked/indeterminate
   */
-.sui-CheckboxInput:is(:checked, :indeterminate):disabled + .sui-CheckboxMark {
+.sui-Checkbox:has(.sui-CheckboxInput:is(:checked, :indeterminate):disabled) {
   --border-color: var(--separator-low);
   color: var(--inert-foreground);
 }
@@ -73,28 +72,28 @@
 /**
   * Error
   */
-.sui-CheckboxMark.sui-error {
+.sui-Checkbox:has(.sui-CheckboxInput[aria-invalid="true"]) {
   --border-color: var(--error-separator);
 }
 
 /**
   * Error, checked/indeterminate
   */
-.sui-CheckboxInput:is(:checked, :indeterminate) + .sui-CheckboxMark.sui-error {
+.sui-Checkbox:has(.sui-CheckboxInput:is(:checked, :indeterminate)[aria-invalid="true"]) {
   --background-color: var(--error-background-emphasized);
 }
 
 /**
   * Check/dash icons
   */
-.sui-CheckboxMark svg {
+.sui-Checkbox svg {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.sui-CheckboxMark path {
+.sui-Checkbox path {
   vector-effect: non-scaling-stroke;
   stroke-width: 1.5px;
 }
