@@ -51,7 +51,7 @@ export const Sizes: Story = {
       <>
         {EYEBROW_SIZE.map((size) => (
           <Eyebrow {...props} key={size} size={size}>
-            Eyebrow Size {size} ({['8.1px', '9.5px', '10.8', '12.25px', '13.6px'][size]})
+            Eyebrow Size {size} ({['8.1px', '9.5px', '10.8px', '12.25px', '13.6px', '15px'][size]})
           </Eyebrow>
         ))}
       </>

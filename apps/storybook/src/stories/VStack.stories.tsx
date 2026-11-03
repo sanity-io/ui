@@ -4,11 +4,17 @@ import {Stack as StackV3} from 'ui3'
 
 import {Card} from '../../../../packages/ui/src/components/card/Card'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
-import {vStackProps} from '../../../../packages/ui/src/components/v-stack/vStack.props'
+import {SPACE_INHERIT} from '../../../../packages/ui/src/types/Space'
 import {Square} from '../components/Square'
 import {getArgTypes} from '../utils/getArgTypes'
 
-const argTypes = getArgTypes(vStackProps)
+const argTypes = getArgTypes({
+  gap: {
+    type: 'union',
+    className: 'gap',
+    values: SPACE_INHERIT,
+  },
+})
 
 const meta: Meta<typeof VStack> = {
   title: 'Layout/VStack',

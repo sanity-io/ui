@@ -10,14 +10,9 @@ const gridClassName = suffixClassName('sui-Grid')
 /** @public */
 export function Grid<T extends ElementType = 'div'>({
   display = 'grid',
-  minHeight = '0',
-  minWidth = '0',
   ...props
 }: GridProps<T> & Omit<ComponentPropsWithRef<T>, keyof GridProps<T>>) {
-  const {as, children, className, style, ...rest} = getProps(
-    {display, minHeight, minWidth, ...props},
-    gridProps,
-  )
+  const {as, children, className, style, ...rest} = getProps({display, ...props}, gridProps)
   const Component = as || 'div'
 
   return (

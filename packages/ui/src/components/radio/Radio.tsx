@@ -13,7 +13,7 @@ const radioMarkClassName = suffixClassName('sui-RadioMark')
 
 /** @beta */
 export function Radio(props: RadioProps) {
-  const {className, style, label, disabled, error, ...rest} = getProps(props, radioProps)
+  const {className, style, label, disabled, hasError, ...rest} = getProps(props, radioProps)
 
   return (
     <Label
@@ -21,7 +21,7 @@ export function Radio(props: RadioProps) {
       style={style}
       data-ui="Radio"
       disabled={disabled}
-      error={error}
+      error={hasError}
     >
       <VisuallyHidden
         as="input"
@@ -33,7 +33,7 @@ export function Radio(props: RadioProps) {
 
       <Box
         as="span"
-        className={clsx(radioMarkClassName, error && 'sui-error')}
+        className={clsx(radioMarkClassName, hasError && 'sui-error')}
         position="relative"
         radius="full"
         width="17px"

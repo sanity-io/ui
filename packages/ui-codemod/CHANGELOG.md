@@ -1,5 +1,36 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.14
+
+### Patch Changes
+
+- df8f7d8: added avatar, avatar counter, and avatar stack codemods
+
+## 1.0.0-alpha.13
+
+### Patch Changes
+
+- 6b8fdf8: add TextArea codemod
+
+## 1.0.0-alpha.12
+
+### Patch Changes
+
+- 5012098: fix: remove alignItems and justifyGrid transforms from Grid codemod
+
+## 1.0.0-alpha.11
+
+### Patch Changes
+
+- 675fb7e: add TextInput
+
+## 1.0.0-alpha.10
+
+### Patch Changes
+
+- 01ec789: fix codemod adding duplicate imports, not combing imports from same path
+- 0e13cbe: add Select component + codemod
+
 ## 1.0.0-alpha.9
 
 ### Patch Changes

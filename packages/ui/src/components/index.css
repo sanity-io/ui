@@ -1,3 +1,6 @@
+@import './avatar/avatar.css';
+@import './avatar-counter/avatar-counter.css';
+@import './avatar-stack/avatar-stack.css';
 @import './badge/badge.css';
 @import './box/box.css';
 @import './button/button.css';
@@ -10,10 +13,12 @@
 @import './flex/flex.css';
 @import './grid/grid.css';
 @import './heading/heading.css';
+@import './hotkeys/hotkeys.css';
 @import './icon/icon.css';
 @import './indicator/indicator.css';
 @import './indicator-stack/indicator-stack.css';
 @import './inline/inline.css';
+@import './kbd/kbd.css';
 @import './label/label.css';
 @import './link/link.css';
 @import './list/list.css';
@@ -21,9 +26,13 @@
 @import './popover/popover.css';
 @import './press-area/press-area.css';
 @import './radio/radio.css';
+@import './select/select.css';
 @import './spinner/spinner.css';
 @import './skip-to-content/skip-to-content.css';
 @import './switch/switch.css';
+@import './tabs/tabs.css';
 @import './text/text.css';
+@import './text-area/text-area.css';
+@import './text-input/text-input.css';
 @import './tooltip/tooltip.css';
 @import './visually-hidden/visually-hidden.css';

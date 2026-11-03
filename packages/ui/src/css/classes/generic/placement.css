@@ -1,186 +1,63 @@
-[class*='placement-'] {
+[class*="placement-"] {
   inset: auto;
   margin: 0;
   overflow-y: auto;
-  max-height: calc(100dvh - 2 * var(--space-1, 8px));
-}
-
-@position-try --top-center {
-  inset: auto;
-  margin: 0;
-  bottom: anchor(top);
-  top: var(--space-1, 8px);
-  left: anchor(center);
-  translate: -50% 0;
-}
-
-@supports (justify-self: anchor-center) {
-  @position-try --top-center {
-    left: auto;
-    translate: none;
-    justify-self: anchor-center;
-  }
+  max-height: calc(100dvh - 2 * var(--space-1));
 }
 
 @position-try --top-start {
   inset: auto;
-  margin: 0;
   bottom: anchor(top);
-  top: var(--space-1, 8px);
   left: anchor(left);
 }
 
 @position-try --top-end {
   inset: auto;
-  margin: 0;
   bottom: anchor(top);
-  top: var(--space-1, 8px);
   right: anchor(right);
-}
-
-@position-try --bottom-center {
-  inset: auto;
-  margin: 0;
-  top: anchor(bottom);
-  bottom: var(--space-1, 8px);
-  left: anchor(center);
-  translate: -50% 0;
-}
-
-@supports (justify-self: anchor-center) {
-  @position-try --bottom-center {
-    left: auto;
-    translate: none;
-    justify-self: anchor-center;
-  }
 }
 
 @position-try --bottom-start {
   inset: auto;
-  margin: 0;
   top: anchor(bottom);
-  bottom: var(--space-1, 8px);
   left: anchor(left);
 }
 
 @position-try --bottom-end {
   inset: auto;
-  margin: 0;
   top: anchor(bottom);
-  bottom: var(--space-1, 8px);
   right: anchor(right);
-}
-
-@position-try --right-center {
-  inset: auto;
-  margin: 0;
-  left: anchor(right);
-  top: anchor(center);
-  translate: 0 -50%;
-  max-height: calc(100dvh - 2 * var(--space-1, 8px));
-}
-
-@supports (align-self: anchor-center) {
-  @position-try --right-center {
-    top: auto;
-    translate: none;
-    align-self: anchor-center;
-  }
-}
-
-@position-try --right-start {
-  inset: auto;
-  margin: 0;
-  left: anchor(right);
-  bottom: var(--space-1, 8px);
-}
-
-@position-try --right-end {
-  inset: auto;
-  margin: 0;
-  left: anchor(right);
-  bottom: anchor(bottom);
-  top: var(--space-1, 8px);
-}
-
-@position-try --left-center {
-  inset: auto;
-  margin: 0;
-  right: anchor(left);
-  top: anchor(center);
-  translate: 0 -50%;
-  max-height: calc(100dvh - 2 * var(--space-1, 8px));
-}
-
-@supports (align-self: anchor-center) {
-  @position-try --left-center {
-    top: auto;
-    translate: none;
-    align-self: anchor-center;
-  }
 }
 
 @position-try --left-start {
   inset: auto;
-  margin: 0;
+  top: anchor(top);
   right: anchor(left);
-  bottom: var(--space-1, 8px);
 }
 
 @position-try --left-end {
   inset: auto;
-  margin: 0;
-  right: anchor(left);
   bottom: anchor(bottom);
-  top: var(--space-1, 8px);
-}
-
-@position-try --left-fill {
-  inset: auto;
-  margin: 0;
-  top: var(--space-1, 8px);
-  bottom: var(--space-1, 8px);
-  left: var(--space-1, 8px);
   right: anchor(left);
 }
 
-@position-try --viewport-fill {
-  inset: var(--space-1, 8px);
-  margin: 0;
+@position-try --right-start {
+  inset: auto;
+  top: anchor(top);
+  left: anchor(right);
 }
 
-.sui-placement-bottom {
-  top: anchor(bottom);
-  left: anchor(center);
-  translate: -50% 0;
-  position-try-fallbacks: --bottom-center, --top-center;
-}
-
-@supports (justify-self: anchor-center) {
-  .sui-placement-bottom {
-    left: auto;
-    translate: none;
-    justify-self: anchor-center;
-  }
-}
-
-.sui-placement-bottom-start {
-  top: anchor(bottom);
-  left: anchor(left);
-  position-try-fallbacks: --bottom-start, --top-start;
-}
-
-.sui-placement-bottom-end {
-  top: anchor(bottom);
-  right: anchor(right);
-  position-try-fallbacks: --bottom-end, --top-end;
+@position-try --right-end {
+  inset: auto;
+  bottom: anchor(bottom);
+  left: anchor(right);
 }
 
 .sui-placement-top {
   bottom: anchor(top);
   left: anchor(center);
   translate: -50% 0;
-  position-try-fallbacks: --top-center, --bottom-center;
+  position-try-fallbacks: flip-block;
 }
 
 @supports (justify-self: anchor-center) {
@@ -188,26 +65,55 @@
     left: auto;
     translate: none;
     justify-self: anchor-center;
+    margin-inline: var(--space-2);
   }
 }
 
 .sui-placement-top-start {
   bottom: anchor(top);
   left: anchor(left);
-  position-try-fallbacks: --top-start, --bottom-start;
+  position-try-fallbacks: --bottom-start;
 }
 
 .sui-placement-top-end {
   bottom: anchor(top);
   right: anchor(right);
-  position-try-fallbacks: --top-end, --bottom-end;
+  position-try-fallbacks: --bottom-end;
+}
+
+.sui-placement-bottom {
+  top: anchor(bottom);
+  left: anchor(center);
+  translate: -50% 0;
+  position-try-fallbacks: flip-block;
+}
+
+@supports (justify-self: anchor-center) {
+  .sui-placement-bottom {
+    left: auto;
+    translate: none;
+    justify-self: anchor-center;
+    margin-inline: var(--space-2);
+  }
+}
+
+.sui-placement-bottom-start {
+  top: anchor(bottom);
+  left: anchor(left);
+  position-try-fallbacks: --top-start;
+}
+
+.sui-placement-bottom-end {
+  top: anchor(bottom);
+  right: anchor(right);
+  position-try-fallbacks: --top-end;
 }
 
 .sui-placement-left {
-  right: anchor(left);
   top: anchor(center);
+  right: anchor(left);
   translate: 0 -50%;
-  position-try-fallbacks: --right-center;
+  position-try-fallbacks: flip-inline;
 }
 
 @supports (align-self: anchor-center) {
@@ -215,26 +121,27 @@
     top: auto;
     translate: none;
     align-self: anchor-center;
+    margin-block: var(--space-2);
   }
 }
 
 .sui-placement-left-start {
-  right: anchor(left);
   top: anchor(top);
-  position-try-fallbacks: --left-start, --left-end, --right-start, --right-end;
+  right: anchor(left);
+  position-try-fallbacks: --left-end, --right-start, --right-end;;
 }
 
 .sui-placement-left-end {
-  right: anchor(left);
   bottom: anchor(bottom);
+  right: anchor(left);
   position-try-fallbacks: --left-start, --right-end, --right-start;
 }
 
 .sui-placement-right {
-  left: anchor(right);
   top: anchor(center);
+  left: anchor(right);
   translate: 0 -50%;
-  position-try-fallbacks: --left-center;
+  position-try-fallbacks: flip-inline;
 }
 
 @supports (align-self: anchor-center) {
@@ -242,45 +149,20 @@
     top: auto;
     translate: none;
     align-self: anchor-center;
+    margin-block: var(--space-2);
   }
 }
 
 .sui-placement-right-start {
-  left: anchor(right);
   top: anchor(top);
-  position-try-fallbacks: --right-start, --right-end, --left-start, --left-end;
+  left: anchor(right);
+  position-try-fallbacks: --right-end, --left-start, --left-end;
 }
 
 .sui-placement-right-end {
-  left: anchor(right);
   bottom: anchor(bottom);
+  left: anchor(right);
   position-try-fallbacks: --right-start, --left-end, --left-start;
-}
-
-[class*='placement-bottom'],
-[class*='placement-top'] {
-  margin-block: var(--space-1);
-}
-
-[class*='placement-left'],
-[class*='placement-right'] {
-  margin-inline: var(--space-1);
-}
-
-[class*='placement-bottom'] {
-  transform-origin: center top;
-}
-
-[class*='placement-top'] {
-  transform-origin: center bottom;
-}
-
-[class*='placement-left'] {
-  transform-origin: right center;
-}
-
-[class*='placement-right'] {
-  transform-origin: left center;
 }
 
 [class*="placement-bottom"],
@@ -293,12 +175,12 @@
   margin-inline: var(--space-1);
 }
 
-[class*="placement-bottom"] {
-  transform-origin: center top;
-}
-
 [class*="placement-top"] {
   transform-origin: center bottom;
+}
+
+[class*="placement-bottom"] {
+  transform-origin: center top;
 }
 
 [class*="placement-left"] {
@@ -307,4 +189,19 @@
 
 [class*="placement-right"] {
   transform-origin: left center;
+}
+
+/* TODO: Figure out if these only apply to menu? */
+@position-try --left-fill {
+  inset: auto;
+  margin: 0;
+  top: var(--space-1, 8px);
+  bottom: var(--space-1, 8px);
+  left: var(--space-1, 8px);
+  right: anchor(left);
+}
+
+@position-try --viewport-fill {
+  inset: var(--space-1, 8px);
+  margin: 0;
 }

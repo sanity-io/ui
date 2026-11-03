@@ -66,7 +66,7 @@ function TooltipRoot({
         <div
           className={clsx(
             tooltipClassName,
-            'sui-px2 sui-py1 sui-radius2 sui-position-fixed sui-shadow2',
+            'sui-p2 sui-radius2 sui-position-fixed sui-shadow2 sui-text-body1 sui-text-trim-edge',
             className,
           )}
           style={{

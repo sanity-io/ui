@@ -7,7 +7,7 @@ export interface RadioProps extends React.ComponentProps<'input'>, MarginProps {
    * Applies error styling to the radio mark.
    * @remarks Use when form validation fails. Pair with a visible error message. The prop is visual only.
    */
-  error?: boolean
+  hasError?: boolean
   /**
    * Visible label next to the radio.
    */
@@ -15,7 +15,7 @@ export interface RadioProps extends React.ComponentProps<'input'>, MarginProps {
 }
 
 export const radioProps: Record<string, PropDef> = {
-  error: {
+  hasError: {
     type: 'boolean',
   },
   label: {

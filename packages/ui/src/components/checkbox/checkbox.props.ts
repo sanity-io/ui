@@ -7,7 +7,7 @@ export interface CheckboxProps extends React.ComponentProps<'input'>, MarginProp
    * Applies error styling to the checkbox mark.
    * @remarks Use when form validation fails. Pair with a visible error message. The prop is visual only.
    */
-  error?: boolean
+  hasError?: boolean
   /**
    * Renders the "mixed state" mark (a horizontal line).
    * @remarks Use when the checkbox controls a group with some-but-not-all children checked.
@@ -20,7 +20,7 @@ export interface CheckboxProps extends React.ComponentProps<'input'>, MarginProp
 }
 
 export const checkboxProps: Record<string, PropDef> = {
-  error: {
+  hasError: {
     type: 'boolean',
   },
   indeterminate: {

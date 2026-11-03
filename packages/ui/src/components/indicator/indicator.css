@@ -1,4 +1,4 @@
 .sui-Indicator[class*='sui-tone'] {
-  --indicator-background: var(--tone-500);
+  --indicator-background: var(--separator-high);
   background-color: var(--indicator-background);
 }

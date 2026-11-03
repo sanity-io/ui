@@ -10,7 +10,7 @@ import {getArgTypes} from '../utils/getArgTypes'
 const argTypes = getArgTypes(switchProps)
 
 const meta: Meta<typeof Switch> = {
-  title: 'Components/Switch',
+  title: 'Forms/Switch',
   args: {
     label: 'Switch',
   },

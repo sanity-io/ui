@@ -5,7 +5,7 @@ import {type PropDef} from '../types/PropDef'
 const PREFIX = 'sui'
 const BREAKPOINTS_LENGTH = 6
 
-interface ComponentProps {
+export interface ComponentProps {
   className?: string | undefined
   style?: React.CSSProperties | undefined
   [key: string]: any

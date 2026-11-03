@@ -1,5 +1,72 @@
 # @sanity/ui
 
+## 5.0.0-alpha.19
+
+### Patch Changes
+
+- 933796b: feat: add Tabs & subcomponents
+
+## 5.0.0-alpha.18
+
+### Patch Changes
+
+- 55d3f3f: bump @sanity-labs/design-tokens to 0.0.2-alpha.9
+
+## 5.0.0-alpha.17
+
+### Patch Changes
+
+- 3ef340c: refactored the tone system and added new 'default' tone for layout components
+- d225701: update secondary/tertiary Button backgrounds; add :active style for Button
+- ea7156b: improve contrast on disabled components in dark mode
+
+## 5.0.0-alpha.16
+
+### Patch Changes
+
+- dc8fc9d: add avatar, avatar counter, and avatar stack
+- c0ead09: feat: adjust button hover blend to 12%
+- 6b8fdf8: add TextArea component; add readonly styles for TextInput
+- 06129f7: rename the `error` prop on Checkbox, Radio and Switch to `hasError`, to match Select and TextInput
+- a5cd0d3: add KBD component
+- a5cd0d3: add Hotkeys component
+- 8d1c771: add Eyebrow size 5 (15px), so Eyebrow has six sizes, 0 to 5, like Heading
+
+## 5.0.0-alpha.15
+
+### Patch Changes
+
+- 5012098: fix: add alignItems and justifyContent to Grid, add sui-display-block to Icon, bump design-tokens to 0.0.2-alpha.7
+
+## 5.0.0-alpha.14
+
+### Patch Changes
+
+- a95c442: feat!: reduce Heading scale to match UI v3/4
+
+## 5.0.0-alpha.13
+
+### Patch Changes
+
+- 675fb7e: add TextInput
+
+## 5.0.0-alpha.12
+
+### Patch Changes
+
+- d1c54f8: update icon component icon prop to allow react element
+
+## 5.0.0-alpha.11
+
+### Patch Changes
+
+- 06f2cff: - move box, flex, and grid default min-width and min-height to css files
+  - remove extra getProps calls in hstack and vstack
+  - set container default size, add width to css file
+- bc83e6d: Build with the native Rust React Compiler through `oxc-transform-react`, reducing the compiled index bundle by about 6% while preserving the public runtime and type exports.
+- 0713570: bump @sanity-labs/design-tokens and update shadow css
+- 0e13cbe: add Select component + codemod
+
 ## 5.0.0-alpha.10
 
 ### Patch Changes

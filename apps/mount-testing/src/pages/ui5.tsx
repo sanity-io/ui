@@ -2,6 +2,8 @@ import '@sanity/ui/styles.css'
 import {AddIcon} from '@sanity/icons/Add'
 import {EditIcon} from '@sanity/icons/Edit'
 import {
+  Avatar,
+  AvatarStack,
   Badge,
   Box,
   Button,
@@ -12,21 +14,28 @@ import {
   Divider,
   Flex,
   Grid,
+  Eyebrow,
   Heading,
+  Hotkeys,
   HStack,
   Icon,
   IconButton,
   Indicator,
   IndicatorStack,
+  KBD,
   Label,
   Link,
   List,
   PressArea,
   Radio,
+  Select,
   SkipToContent,
   Spinner,
   Switch,
+  Tabs,
   Text,
+  TextArea,
+  TextInput,
   Tooltip,
   TooltipGroup,
   VisuallyHidden,
@@ -34,8 +43,10 @@ import {
 } from '@sanity/ui'
 import {Profiler} from 'react'
 
-const count = 5000
+const count = 3000
 const iterator = [...Array(count).keys()]
+
+function noop() {}
 
 function handleOnRender(
   id: string,
@@ -135,6 +146,15 @@ export default function Ui5() {
         ))}
       </Profiler>
 
+      <h2>{count} Eyebrows</h2>
+      <Profiler id="Eyebrow" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Eyebrow key={i} size={2} muted>
+            Eyebrow
+          </Eyebrow>
+        ))}
+      </Profiler>
+
       <h2>{count} Headings</h2>
       <Profiler id="Heading" onRender={handleOnRender}>
         {iterator.map((i) => (
@@ -199,6 +219,31 @@ export default function Ui5() {
       <Profiler id="Radio" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Radio key={i} name="radio" label="Radio" />
+        ))}
+      </Profiler>
+
+      <h2>{count} Selects</h2>
+      <Profiler id="Select" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Select key={i} aria-label="Select">
+            <option>First</option>
+            <option>Second</option>
+            <option>Third</option>
+          </Select>
+        ))}
+      </Profiler>
+
+      <h2>{count} TextAreas</h2>
+      <Profiler id="TextArea" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <TextArea key={i} aria-label="Text area" />
+        ))}
+      </Profiler>
+
+      <h2>{count} TextInputs</h2>
+      <Profiler id="TextInput" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <TextInput key={i} aria-label="Text input" />
         ))}
       </Profiler>
 
@@ -303,6 +348,44 @@ export default function Ui5() {
       <Profiler id="Badge" onRender={handleOnRender}>
         {iterator.map((i) => (
           <Badge key={i} text="Badge" />
+        ))}
+      </Profiler>
+
+      <h2>{count} KBDs</h2>
+      <Profiler id="KBD" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <KBD key={i} text="A" />
+        ))}
+      </Profiler>
+
+      <h2>{count} Hotkeys</h2>
+      <Profiler id="Hotkeys" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <Hotkeys key={i} keys={['A', 'B', 'C']} />
+        ))}
+      </Profiler>
+
+      <h2>{count} Avatars & Avatar Stacks</h2>
+      <Profiler id="Avatar" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          <AvatarStack key={i}>
+            <Avatar name="AB" />
+          </AvatarStack>
+        ))}
+      </Profiler>
+
+      <h2>{count} Tabs</h2>
+      <Profiler id="Tabs" onRender={handleOnRender}>
+        {iterator.map((i) => (
+          // Values include the index so the ids that Tabs builds from them are unique
+          <Tabs key={i} value={`${i}-one`} onValueChange={noop}>
+            <Tabs.List aria-label="Tabs">
+              <Tabs.Tab label="Tab one" value={`${i}-one`} />
+              <Tabs.Tab label="Tab two" value={`${i}-two`} />
+            </Tabs.List>
+            <Tabs.Panel value={`${i}-one`}>Panel one</Tabs.Panel>
+            <Tabs.Panel value={`${i}-two`}>Panel two</Tabs.Panel>
+          </Tabs>
         ))}
       </Profiler>
 

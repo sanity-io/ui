@@ -1,5 +1,7 @@
 import {useState} from 'react'
 import {
+  Avatar,
+  AvatarStack,
   Badge,
   Box,
   Button,
@@ -14,7 +16,11 @@ import {
   Radio,
   Stack,
   Switch,
+  Tab,
+  TabList,
+  TabPanel,
   Text,
+  TextInput,
   ThemeProvider,
   Tooltip,
 } from 'ui3'
@@ -27,6 +33,13 @@ const PANEL_CARD_COUNT = 300
 const TOOLTIP_COUNT = 300
 const POPOVER_COUNT = 300
 const BADGE_COUNT = 500
+const AVATAR_COUNT = 300
+
+const TABS = [
+  {value: 'overview', label: 'Overview'},
+  {value: 'activity', label: 'Activity'},
+  {value: 'settings', label: 'Settings'},
+]
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -40,6 +53,7 @@ const theme = buildTheme()
 function SingleControlSection() {
   const [on, setOn] = useState(false)
   const [choice, setChoice] = useState<'one' | 'two'>('one')
+  const [text, setText] = useState('')
 
   return (
     <Card tone="neutral" padding={4}>
@@ -76,6 +90,11 @@ function SingleControlSection() {
             <label htmlFor="single-radio-two">Radio two</label>
           </Text>
         </Inline>
+        <TextInput
+          aria-label="Single text input"
+          value={text}
+          onChange={(event) => setText(event.currentTarget.value)}
+        />
       </Stack>
     </Card>
   )
@@ -322,6 +341,78 @@ function BadgeToneToggleSection() {
   )
 }
 
+function AvatarShuffleSection() {
+  const [avatars, setAvatars] = useState(['ab', 'cd', 'ef'])
+
+  return (
+    <Card tone="neutral" padding={4}>
+      <Stack gap={3}>
+        <Text size={1} weight="semibold">
+          6. Avatar shuffle ({AVATAR_COUNT} avatar stacks)
+        </Text>
+        <Text size={1}>One click shuffles all {AVATAR_COUNT} avatars.</Text>
+        <Inline>
+          <Button
+            text="Shuffle Avatars"
+            onClick={() => setAvatars([...avatars].sort(() => 0.5 - Math.random()))}
+          />
+        </Inline>
+        <div style={scrollAreaStyle}>
+          <Flex wrap="wrap" gap={2}>
+            {Array.from({length: AVATAR_COUNT}, (_, index) => (
+              <AvatarStack key={index}>
+                {avatars.map((avatar) => (
+                  <Avatar key={avatar} initials={avatar} />
+                ))}
+              </AvatarStack>
+            ))}
+          </Flex>
+        </div>
+      </Stack>
+    </Card>
+  )
+}
+
+/** One click on a tab shows its panel and hides the previous panel. */
+function TabSwitchSection() {
+  const [selected, setSelected] = useState('overview')
+
+  return (
+    <Card tone="neutral" padding={4}>
+      <Stack gap={3}>
+        <Text size={1} weight="semibold">
+          7. Tab switch
+        </Text>
+        <Text size={1}>One click on a tab shows its panel and hides the previous panel.</Text>
+        <div>
+          <TabList aria-label="Tab switch" gap={1}>
+            {TABS.map((tab) => (
+              <Tab
+                key={tab.value}
+                id={`tab-${tab.value}`}
+                aria-controls={`panel-${tab.value}`}
+                label={tab.label}
+                selected={selected === tab.value}
+                onClick={() => setSelected(tab.value)}
+              />
+            ))}
+          </TabList>
+          {TABS.map((tab) => (
+            <TabPanel
+              key={tab.value}
+              id={`panel-${tab.value}`}
+              aria-labelledby={`tab-${tab.value}`}
+              hidden={selected !== tab.value}
+            >
+              <Text size={1}>{tab.label} panel</Text>
+            </TabPanel>
+          ))}
+        </div>
+      </Stack>
+    </Card>
+  )
+}
+
 function Ui3() {
   return (
     <ThemeProvider theme={theme}>
@@ -335,6 +426,8 @@ function Ui3() {
         <TooltipMountSection />
         <PopoverMountSection />
         <BadgeToneToggleSection />
+        <AvatarShuffleSection />
+        <TabSwitchSection />
       </Stack>
     </ThemeProvider>
   )

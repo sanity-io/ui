@@ -178,6 +178,18 @@ defineInlineTest(
   transform,
   {},
   `
+  <Badge tone="critical">Draft</Badge>
+  `,
+  `
+  <Badge tone="critical" as="div" text="Draft" />
+  `,
+  'moves static string children to the text prop',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
   <Badge tone="critical">{label}</Badge>
   `,
   `

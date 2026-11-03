@@ -3,7 +3,7 @@ export type CompositeAttributeMapping = Record<string, Record<string, string | n
 
 export type AttributeMod =
   | {type: 'remove'}
-  | {type: 'warn-only'; warning?: string}
+  | {type: 'warn-only'; warning?: string; when?: AttributeMapping}
   | {type: 'warn-missing'; warning?: string}
   | {type: 'rename-only'; name: string}
   | {type: 'rename-mapped'; name: string; mapping: AttributeMapping}

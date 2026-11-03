@@ -1,16 +1,10 @@
-import {
-  type API,
-  type ASTPath,
-  type FileInfo,
-  type JSXElement,
-  type JSXOpeningElement,
-} from 'jscodeshift'
+import {type API, type ASTPath, type FileInfo, type JSXOpeningElement} from 'jscodeshift'
 
 import type {BaseOptions} from '../../../types/BaseOptions'
 import {addAttribute} from '../../../utils/addAttribute'
 import {getComponentLocalNames} from '../../../utils/getComponentLocalNames'
 import {getStyledComponentAliases} from '../../../utils/getStyledComponentAliases'
-import {insertTodoWarning} from '../../../utils/insertTodoWarning'
+import {moveChildrenToAttribute} from '../../../utils/moveChildrenToAttribute'
 import {shouldTransformComponent} from '../../../utils/shouldTransformComponent'
 import {transformAttributes} from '../../../utils/transformAttributes'
 import {transformComponent} from '../../../utils/transformComponent'
@@ -49,22 +43,6 @@ export default function transform(
       markChanged()
     }
 
-    const warnOnChildren = (path: ASTPath<JSXOpeningElement>): boolean => {
-      const parentNode = path.parent?.node
-      const element: JSXElement | undefined =
-        parentNode?.type === 'JSXElement' ? parentNode : undefined
-
-      if (!element) {
-        return false
-      }
-
-      const hasChildren = (element.children ?? []).some(
-        (child) => !(child.type === 'JSXText' && child.value.trim() === ''),
-      )
-
-      return hasChildren && insertTodoWarning(j, path, CHILDREN_TODO_WARNING)
-    }
-
     const migrate = (path: ASTPath<JSXOpeningElement>): boolean => {
       let changed = false
 
@@ -76,7 +54,12 @@ export default function transform(
         changed = true
       }
 
-      if (warnOnChildren(path)) {
+      if (
+        moveChildrenToAttribute(j, path, 'text', {
+          stringOnly: true,
+          todoWarning: CHILDREN_TODO_WARNING,
+        })
+      ) {
         changed = true
       }
 

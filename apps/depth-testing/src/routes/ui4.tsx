@@ -1,0 +1,168 @@
+import 'ui4/styles.css'
+import {useState} from 'react'
+import {
+  Badge,
+  Box,
+  Button,
+  Card,
+  Checkbox,
+  Container,
+  Dialog,
+  Heading,
+  Inline,
+  Radio,
+  Stack,
+  Switch,
+  Tab,
+  TabList,
+  TabPanel,
+  Text,
+  TextInput,
+  ThemeProvider,
+} from 'ui4'
+import {buildTheme} from 'ui4/theme'
+
+const theme = buildTheme()
+
+function Ui4() {
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [station, setStation] = useState('bridge')
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Box margin={4}>
+        <Box marginBottom={5}>
+          <Heading as="h2">UI 4</Heading>
+        </Box>
+        <Box marginBottom={4}>
+          <Text as="p">A measure of the USS Sanity’s DOM engines</Text>
+        </Box>
+        <Box marginY={5}>
+          <Button text="Open a hailing frequency" onClick={() => setDialogOpen(true)} />
+          {dialogOpen && (
+            <Dialog
+              id="ui4Dialog"
+              onClose={() => setDialogOpen(false)}
+              header="Greetings, Admiral"
+              animate={true}
+            >
+              <Box padding={4}>
+                <Text>I believe you’ll find everything is in order for the festivities.</Text>
+              </Box>
+            </Dialog>
+          )}
+        </Box>
+        <Card tone="neutral" padding={5} radius={3} shadow={1}>
+          <Container marginLeft={0}>
+            <Stack gap={[1, 2]}>
+              <Inline gap={3}>
+                <Checkbox id="checkbox-hey" name="checkboxes" defaultChecked />
+                <Text>
+                  <label htmlFor="checkbox-hey">Hey</label>
+                </Text>
+              </Inline>
+              <Inline gap={3}>
+                <Checkbox id="checkbox-ho" name="checkboxes" />
+                <Text>
+                  <label htmlFor="checkbox-ho">Ho</label>
+                </Text>
+              </Inline>
+              <Card padding={4} tone="transparent" radius={3} shadow={1}>
+                <Inline gap={3}>
+                  <Inline gap={3}>
+                    <Radio id="radio-go" name="radios" defaultChecked />
+                    <Text>
+                      <label htmlFor="radio-go">Let’s go</label>
+                    </Text>
+                  </Inline>
+                  <Inline gap={3}>
+                    <Radio id="radio-nogo" name="radios" />
+                    <Text>
+                      <label htmlFor="radio-nogo">Let’s not go</label>
+                    </Text>
+                  </Inline>
+                </Inline>
+              </Card>
+              <Inline gap={3}>
+                <Switch id="switch-warp" />
+                <Text>
+                  <label htmlFor="switch-warp">Engage warp drive</label>
+                </Text>
+              </Inline>
+              <TextInput aria-label="Set stardate" />
+            </Stack>
+          </Container>
+          <Box marginY={4}>
+            <hr
+              style={{
+                border: 0,
+                borderTop: '1px solid var(--card-border-color, #e3e4e8)',
+                margin: 0,
+              }}
+            />
+          </Box>
+          <Box marginY={3}>
+            <Inline gap={3}>
+              <Button text="Make it so, Number One" />
+              <Button mode="ghost" tone="critical" text="Belay that order, Commander" />
+              <Text as="a" href="https://example.org">
+                Refer to the Prime Directive
+              </Text>
+            </Inline>
+          </Box>
+          <Box marginY={3}>
+            <Inline gap={2}>
+              <Badge tone="positive">Shields nominal</Badge>
+              <Badge tone="caution">Deflector array offline</Badge>
+              <Badge tone="critical">Warp core breach</Badge>
+            </Inline>
+          </Box>
+          <Box marginY={3}>
+            <TabList aria-label="Ship stations" gap={1}>
+              <Tab
+                id="tab-bridge"
+                aria-controls="panel-bridge"
+                label="Bridge"
+                selected={station === 'bridge'}
+                onClick={() => setStation('bridge')}
+              />
+              <Tab
+                id="tab-engineering"
+                aria-controls="panel-engineering"
+                label="Engineering"
+                selected={station === 'engineering'}
+                onClick={() => setStation('engineering')}
+              />
+              <Tab
+                id="tab-sickbay"
+                aria-controls="panel-sickbay"
+                label="Sickbay"
+                selected={station === 'sickbay'}
+                onClick={() => setStation('sickbay')}
+              />
+            </TabList>
+            <TabPanel id="panel-bridge" aria-labelledby="tab-bridge" hidden={station !== 'bridge'}>
+              <Text>All stations report ready.</Text>
+            </TabPanel>
+            <TabPanel
+              id="panel-engineering"
+              aria-labelledby="tab-engineering"
+              hidden={station !== 'engineering'}
+            >
+              <Text>Dilithium matrix stable.</Text>
+            </TabPanel>
+            <TabPanel
+              id="panel-sickbay"
+              aria-labelledby="tab-sickbay"
+              hidden={station !== 'sickbay'}
+            >
+              <Text>No patients on the ward.</Text>
+            </TabPanel>
+          </Box>
+        </Card>
+      </Box>
+    </ThemeProvider>
+  )
+}
+
+export default Ui4

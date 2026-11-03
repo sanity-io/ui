@@ -52,9 +52,20 @@
   select,
   textarea
 ) {
+  appearance: none;
+  color: inherit;
   font: inherit;
   line-height: inherit;
-  color: inherit;
+}
+
+/* Remove user agent reduced opacity on disabled form elements */
+:where(
+  button,
+  input,
+  select,
+  textarea
+):disabled {
+  opacity: 1;
 }
 
 /* Remove excess space for table borders */

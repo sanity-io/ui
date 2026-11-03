@@ -1,5 +1,6 @@
 import {type API, type ASTPath, type JSXOpeningElement} from 'jscodeshift'
 
+import type {AnyExpression} from '../types/AnyExpression'
 import {type AttributeMods} from '../types/AttributeMods'
 import {getAttribute} from './getAttribute'
 import {getAttributeExpression} from './getAttributeExpression'
@@ -64,6 +65,30 @@ export function transformAttributes(
     }
 
     if (mod.type === 'warn-only') {
+      if (mod.when) {
+        let matchesWhen = getMappingValue(mod.when, expr) !== undefined
+
+        if (expr.type === 'ArrayExpression') {
+          matchesWhen = false
+
+          for (const el of expr.elements as (AnyExpression | null)[]) {
+            if (el == null || el.type === 'SpreadElement') {
+              matchesWhen = false
+              break
+            }
+
+            if (getMappingValue(mod.when, el) !== undefined) {
+              matchesWhen = true
+              break
+            }
+          }
+        }
+
+        if (!matchesWhen) {
+          continue
+        }
+      }
+
       if (insertTodoWarning(j, path, mod.warning || todoWarning)) {
         hasChanges = true
       }

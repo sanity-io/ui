@@ -69,6 +69,11 @@ const MODS: AttributeMods = {
     type: 'warn-only',
     warning: 'Custom warning',
   },
+  color: {
+    type: 'warn-only',
+    when: {blue: true},
+    warning: 'Blue is deprecated',
+  },
   sizing: {
     type: 'style-mapped',
     style: 'boxSizing',
@@ -347,7 +352,33 @@ defineInlineTest(
   // UI-CODEMOD TODO: Custom warning
   <div scheme="light" width="100%" />
   `,
-  'warns with custom warning for warn prop',
+  'warns with custom warning for warn-only prop',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div color="blue" />
+  `,
+  `
+  // UI-CODEMOD TODO: Blue is deprecated
+  <div color="blue" />
+  `,
+  'warns for warn-only prop if when value matches',
+)
+
+defineInlineTest(
+  transform,
+  {},
+  `
+  <div color={['green', 'blue']} />
+  `,
+  `
+  // UI-CODEMOD TODO: Blue is deprecated
+  <div color={['green', 'blue']} />
+  `,
+  'warns for warn-only prop if array includes matching when value',
 )
 
 defineInlineTest(

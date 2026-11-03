@@ -1,5 +1,7 @@
 import '@sanity/ui/styles.css'
 import {
+  Avatar,
+  AvatarStack,
   Badge,
   Box,
   Button,
@@ -13,7 +15,9 @@ import {
   Popover,
   Radio,
   Switch,
+  Tabs,
   Text,
+  TextInput,
   Tooltip,
   VStack,
 } from '@sanity/ui'
@@ -26,6 +30,13 @@ const PANEL_CARD_COUNT = 300
 const TOOLTIP_COUNT = 300
 const POPOVER_COUNT = 300
 const BADGE_COUNT = 500
+const AVATAR_COUNT = 300
+
+const TABS = [
+  {value: 'overview', label: 'Overview'},
+  {value: 'activity', label: 'Activity'},
+  {value: 'settings', label: 'Settings'},
+]
 
 const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 
@@ -36,6 +47,7 @@ const scrollAreaStyle = {maxHeight: 260, overflow: 'auto'} as const
 function SingleControlSection() {
   const [on, setOn] = useState(false)
   const [choice, setChoice] = useState<'one' | 'two'>('one')
+  const [text, setText] = useState('')
 
   return (
     <Card density="regular">
@@ -60,6 +72,11 @@ function SingleControlSection() {
           label="Radio two"
           checked={choice === 'two'}
           onChange={() => setChoice('two')}
+        />
+        <TextInput
+          aria-label="Single text input"
+          value={text}
+          onChange={(event) => setText(event.currentTarget.value)}
         />
       </VStack>
     </Card>
@@ -286,6 +303,66 @@ function BadgeToneToggleSection() {
   )
 }
 
+function AvatarShuffleSection() {
+  const [avatars, setAvatars] = useState(['ab', 'cd', 'ef'])
+
+  return (
+    <Card density="regular">
+      <VStack gap={3}>
+        <Text size={1} weight="semibold">
+          6. Avatar shuffle ({AVATAR_COUNT} avatar stacks)
+        </Text>
+        <Text size={1}>One click shuffles all {AVATAR_COUNT} avatars.</Text>
+        <div>
+          <Button
+            text="Shuffle Avatars"
+            onClick={() => setAvatars([...avatars].sort(() => 0.5 - Math.random()))}
+          />
+        </div>
+        <div style={scrollAreaStyle}>
+          <Flex flexWrap="wrap" gap={2}>
+            {Array.from({length: AVATAR_COUNT}, (_, index) => (
+              <AvatarStack key={index}>
+                {avatars.map((avatar) => (
+                  <Avatar key={avatar} name={avatar} />
+                ))}
+              </AvatarStack>
+            ))}
+          </Flex>
+        </div>
+      </VStack>
+    </Card>
+  )
+}
+
+/** One click on a tab shows its panel and hides the previous panel. */
+function TabSwitchSection() {
+  const [selected, setSelected] = useState('overview')
+
+  return (
+    <Card density="regular">
+      <VStack gap={3}>
+        <Text size={1} weight="semibold">
+          7. Tab switch
+        </Text>
+        <Text size={1}>One click on a tab shows its panel and hides the previous panel.</Text>
+        <Tabs value={selected} onValueChange={setSelected}>
+          <Tabs.List aria-label="Tab switch">
+            {TABS.map((tab) => (
+              <Tabs.Tab key={tab.value} label={tab.label} value={tab.value} />
+            ))}
+          </Tabs.List>
+          {TABS.map((tab) => (
+            <Tabs.Panel key={tab.value} value={tab.value}>
+              <Text size={1}>{tab.label} panel</Text>
+            </Tabs.Panel>
+          ))}
+        </Tabs>
+      </VStack>
+    </Card>
+  )
+}
+
 function Ui5() {
   return (
     <VStack gap={4}>
@@ -298,6 +375,8 @@ function Ui5() {
       <TooltipMountSection />
       <PopoverMountSection />
       <BadgeToneToggleSection />
+      <AvatarShuffleSection />
+      <TabSwitchSection />
     </VStack>
   )
 }

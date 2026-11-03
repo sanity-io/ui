@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
 import type {ComponentProps} from 'react'
-import {expect, userEvent, waitFor} from 'storybook/test'
+import {expect, userEvent, screen, waitFor} from 'storybook/test'
 import {Tooltip as TooltipV3, TooltipDelayGroupProvider} from 'ui3'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
@@ -71,7 +71,8 @@ export const Default: Story = {
           <Button text="Open Tooltip 2" />
         </Tooltip>
 
-        <Tooltip content="Tooltip 3 Text">
+        {/* The overflow: hidden prevents an axe scrollable-region-focusable false positive */}
+        <Tooltip content="Tooltip 3 Text" style={{overflow: 'hidden'}}>
           <Button text="Open Tooltip 3" />
         </Tooltip>
       </TooltipGroup>
@@ -107,6 +108,61 @@ export const Default: Story = {
     await waitFor(
       async () => {
         await expect(await canvas.findByText('Tooltip 3 Text')).toBeVisible()
+      },
+      {timeout: 200},
+    )
+  },
+}
+
+export const WithPortal: Story = {
+  render: (props) => {
+    return (
+      <TooltipGroup as={HStack} gap={2} {...props}>
+        <Tooltip content="Tooltip 1 Text" portal>
+          <Button text="Open Tooltip 1" />
+        </Tooltip>
+
+        <Tooltip content="Tooltip 2 Text" portal>
+          <Button text="Open Tooltip 2" />
+        </Tooltip>
+
+        {/* The overflow: hidden prevents an axe scrollable-region-focusable false positive */}
+        <Tooltip content="Tooltip 3 Text" portal style={{overflow: 'hidden'}}>
+          <Button text="Open Tooltip 3" />
+        </Tooltip>
+      </TooltipGroup>
+    )
+  },
+  play: async ({canvasElement}) => {
+    const group = canvasElement.querySelector('[data-ui="TooltipGroup"]') as HTMLElement
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(await screen.findByText('Tooltip 1 Text')).toBeVisible()
+      },
+      {timeout: 750},
+    )
+
+    await waitFor(() => {
+      expect(group.style.getPropertyValue('--tooltip-delay-group')).toBe('0ms')
+    })
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(await screen.findByText('Tooltip 2 Text')).toBeVisible()
+      },
+      {timeout: 200},
+    )
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(await screen.findByText('Tooltip 3 Text')).toBeVisible()
       },
       {timeout: 200},
     )

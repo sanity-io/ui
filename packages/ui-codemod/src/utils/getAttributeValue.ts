@@ -16,5 +16,9 @@ export function getAttributeValue(
     return j.jsxExpressionContainer(j.numericLiteral(value))
   }
 
+  if (typeof value === 'object' && value !== null && 'type' in value) {
+    return j.jsxExpressionContainer(value as never)
+  }
+
   return j.jsxExpressionContainer(j.nullLiteral())
 }
