@@ -24,7 +24,7 @@ defineInlineTest(
   <Radio customValidity="Required" />
   `,
   `
-  // UI-CODEMOD TODO: Please double check the Radio migration below. The customValidity prop is no longer supported. Handle validation externally and pass hasError to toggle the invalid styling.
+  // UI-CODEMOD TODO: Please double check the Radio migration below. The customValidity prop is no longer supported. Radio validation should occur at the field level.
   <Radio customValidity="Required" />
   `,
   'warns on the unsupported customValidity prop',
