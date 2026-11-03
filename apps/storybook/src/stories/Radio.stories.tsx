@@ -74,7 +74,7 @@ export const Error: Story = {
   play: async ({canvas}) => {
     await expect(
       ((await canvas.findByLabelText('Errored radio')) as HTMLInputElement).getAttribute(
-        'aria-invalid',
+        'data-invalid',
       ),
     ).toBe('true')
   },
