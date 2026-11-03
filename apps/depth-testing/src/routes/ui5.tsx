@@ -44,15 +44,15 @@ function Ui5() {
       <Card tone="neutral" density="loose">
         <Container size={2} marginLeft={0}>
           <VStack gap={[1, 2]}>
-            <Checkbox name="checkboxes" label="Hey" defaultChecked />
-            <Checkbox name="checkboxes" label="Ho" />
+            <Checkbox name="checkboxes" aria-label="Hey" defaultChecked />
+            <Checkbox name="checkboxes" aria-label="Ho" />
             <Card>
               <HStack gap={3}>
-                <Radio name="radios" label="Let’s go" defaultChecked />
-                <Radio name="radios" label="Let’s not go" />
+                <Radio name="radios" aria-label="Let's go" defaultChecked />
+                <Radio name="radios" aria-label="Let's not go" />
               </HStack>
             </Card>
-            <Switch label="Engage warp drive" />
+            <Switch aria-label="Engage warp drive" />
             <TextInput aria-label="Set stardate" />
           </VStack>
         </Container>

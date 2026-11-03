@@ -57,19 +57,19 @@ function SingleControlSection() {
         </Text>
         <Text size={1}>Blast radius: this control only.</Text>
         <Switch
-          label={on ? 'Switch is on' : 'Switch is off'}
+          aria-label={on ? 'Switch is on' : 'Switch is off'}
           checked={on}
           onChange={() => setOn((value) => !value)}
         />
         <Radio
           name="single-radios"
-          label="Radio one"
+          aria-label="Radio one"
           checked={choice === 'one'}
           onChange={() => setChoice('one')}
         />
         <Radio
           name="single-radios"
-          label="Radio two"
+          aria-label="Radio two"
           checked={choice === 'two'}
           onChange={() => setChoice('two')}
         />
@@ -110,7 +110,7 @@ function SelectAllSection() {
         </Text>
         <Text size={1}>One click re-renders all {ROW_COUNT} rows.</Text>
         <Checkbox
-          label={allChecked ? 'Deselect all' : 'Select all'}
+          aria-label={allChecked ? 'Deselect all' : 'Select all'}
           checked={allChecked}
           onChange={() => setChecked(Array(ROW_COUNT).fill(!allChecked))}
         />
@@ -121,7 +121,7 @@ function SelectAllSection() {
                 // Fixed-length list that never reorders — index is a stable key here.
                 // eslint-disable-next-line react/no-array-index-key
                 key={index}
-                label={`Row ${index + 1}`}
+                aria-label={`Row ${index + 1}`}
                 checked={value}
                 onChange={() =>
                   setChecked((previous) => previous.map((v, i) => (i === index ? !v : v)))
