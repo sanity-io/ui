@@ -84,13 +84,13 @@
 /**
   * Error
   */
-.sui-Radio:has(.sui-RadioInput[aria-invalid="true"]) {
+.sui-Radio:has(.sui-RadioInput[data-invalid="true"]) {
   --border-color: var(--error-separator);
 }
 
 /**
   * Error, checked
   */
-.sui-Radio:has(.sui-RadioInput:checked[aria-invalid="true"]) {
+.sui-Radio:has(.sui-RadioInput:checked[data-invalid="true"]) {
   --background-color: var(--error-background-emphasized);
 }

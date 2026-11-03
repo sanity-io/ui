@@ -84,7 +84,7 @@ export const WithLabel: Story = {
   render: (props) => {
     return (
       <HStack gap={2}>
-        <Radio {...props} />
+        <Radio {...props} id="labelRadio" />
         <Text as="label" htmlFor="labelRadio">
           Radio
         </Text>

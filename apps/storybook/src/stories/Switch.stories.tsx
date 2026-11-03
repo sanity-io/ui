@@ -7,7 +7,6 @@ import {Switch} from '../../../../packages/ui/src/components/switch/Switch'
 import {switchProps} from '../../../../packages/ui/src/components/switch/switch.props'
 import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {VStack} from '../../../../packages/ui/src/components/v-stack/VStack'
-import {VisuallyHidden} from '../../../../packages/ui/src/components/visually-hidden/VisuallyHidden'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(switchProps)

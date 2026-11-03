@@ -26,7 +26,7 @@ export function Radio(props: RadioProps) {
       <input
         type="radio"
         className={radioInputClassName}
-        aria-invalid={hasError || undefined}
+        data-invalid={hasError || undefined}
         {...rest}
       />
     </Box>
