@@ -2,8 +2,3 @@
   --heading-color: var(--foreground-high);
   color: var(--heading-color);
 }
-
-.sui-Heading:where(.sui-text-muted) {
-  --heading-color-muted: var(--foreground-low);
-  color: var(--heading-color-muted);
-}

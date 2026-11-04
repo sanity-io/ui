@@ -8,12 +8,10 @@ import {type HeadingProps, headingProps} from './heading.props'
 const headingClassName = suffixClassName('sui-Heading')
 
 /** @public */
-export function Heading<T extends ElementType = 'h2'>({
-  size = 2,
-  weight = 'bold',
-  ...props
-}: HeadingProps & Omit<ComponentPropsWithRef<T>, keyof HeadingProps>) {
-  const {as, children, className, style, ...rest} = getProps({size, weight, ...props}, headingProps)
+export function Heading<T extends ElementType = 'h2'>(
+  props: HeadingProps & Omit<ComponentPropsWithRef<T>, keyof HeadingProps>,
+) {
+  const {as, children, className, style, ...rest} = getProps(props, headingProps)
   const Component = as || 'h2'
 
   if (props.truncate && props.trim) {
@@ -41,7 +39,12 @@ export function Heading<T extends ElementType = 'h2'>({
 
   return (
     <Component
-      className={clsx(headingClassName, props.truncate && 'sui-overflow-hidden', className)}
+      className={clsx(
+        headingClassName,
+        props.truncate && 'sui-overflow-hidden',
+        'sui-weight-bold',
+        className,
+      )}
       style={style}
       data-ui="Heading"
       {...rest}
