@@ -47,7 +47,7 @@ export const Inline: Story = {
     return (
       <>
         <Text>Use the command </Text>
-        <Code {...props} as="span">
+        <Code {...props} inline>
           pnpm run dev
         </Code>
         <Text> to run.</Text>
