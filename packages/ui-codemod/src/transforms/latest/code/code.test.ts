@@ -35,31 +35,31 @@ defineInlineTest(
   transform,
   {},
   `
-  <Code flex="auto" />
+  <Code as="span" />
   `,
   `
-  <Code
-    style={{
-      flex: "1 1 auto"
-    }}
-    trim={true} />
+  <Code trim={true} />
   `,
-  'moves flex prop to style',
+  'removes the as prop',
 )
 
 defineInlineTest(
   transform,
   {},
   `
-  <Code width={1} maxWidth="fill" />
+  <Code flex="auto" width={1} maxWidth="fill" weight="bold" />
   `,
   `
-  <Code style={{
-    width: "40rem",
-    maxWidth: "100%"
-  }} trim={true} />
+  <Code
+    style={{
+      flex: "1 1 auto",
+      width: "40rem",
+      maxWidth: "100%",
+      fontWeight: "bold"
+    }}
+    trim={true} />
   `,
-  'moves width props to style and uppdates mapped values',
+  'moves deprecated props to style',
 )
 
 defineCrossFileTest(

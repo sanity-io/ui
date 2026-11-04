@@ -2,6 +2,9 @@ import type {AttributeMods} from '../../../types/AttributeMods'
 
 /** @internal */
 export const CODE_MODS: AttributeMods = {
+  as: {
+    type: 'remove',
+  },
   flex: {
     type: 'style-mapped',
     style: 'flex',
@@ -36,6 +39,10 @@ export const CODE_MODS: AttributeMods = {
       4: '100rem',
       5: '120rem',
     },
+  },
+  weight: {
+    type: 'style-only',
+    style: 'fontWeight',
   },
   width: {
     type: 'style-mapped',

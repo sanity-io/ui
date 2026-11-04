@@ -16,19 +16,20 @@ export function Code({size = 2, ...props}: CodeProps) {
     codeProps,
   )
   const Component = inline ? 'code' : 'pre'
+  const content = inline ? children : <code>{children}</code>
 
   if (!language) {
     return (
       <Component className={clsx(codeClassName, className)} style={style} data-ui="Code" {...rest}>
-        {inline ? children : <code>{children}</code>}
+        {content}
       </Component>
     )
   }
 
   return (
     <Component className={clsx(codeClassName, className)} style={style} data-ui="Code" {...rest}>
-      <Suspense fallback={<code>{children}</code>}>
-        <LazyRefractor language={language} value={children} inline={inline} />
+      <Suspense fallback={content}>
+        <LazyRefractor language={language} value={children} inline={inline} fallback={content} />
       </Suspense>
     </Component>
   )
