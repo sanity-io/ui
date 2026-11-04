@@ -30,7 +30,7 @@ export const headingProps: Record<string, PropDef> = {
   },
   align: typographyProps['align'] as PropDef,
   trim: typographyProps['trim'] as PropDef,
-  truncate: typographyProps['truncated'] as PropDef,
+  truncate: typographyProps['truncate'] as PropDef,
   ...marginProps,
   ...toneProps,
 }
