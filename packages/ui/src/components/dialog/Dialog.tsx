@@ -66,7 +66,7 @@ function DialogRoot({open = false, size = 0, ...props}: DialogProps) {
     >
       <Flex flexShrink={0} justifyContent="space-between" alignItems="center">
         {header ? (
-          <Heading trim size={1} id={headerId}>
+          <Heading as="h2" trim size={1} id={headerId}>
             {header}
           </Heading>
         ) : (

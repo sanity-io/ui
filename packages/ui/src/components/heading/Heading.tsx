@@ -10,10 +10,9 @@ const headingClassName = suffixClassName('sui-Heading')
 /** @public */
 export function Heading<T extends ElementType = 'h2'>({
   size = 2,
-  weight = 'bold',
   ...props
 }: HeadingProps & Omit<ComponentPropsWithRef<T>, keyof HeadingProps>) {
-  const {as, children, className, style, ...rest} = getProps({size, weight, ...props}, headingProps)
+  const {as, children, className, style, ...rest} = getProps({size, ...props}, headingProps)
   const Component = as || 'h2'
 
   if (props.truncate && props.trim) {
@@ -30,6 +29,7 @@ export function Heading<T extends ElementType = 'h2'>({
         <span
           className={clsx(
             'sui-overflow-hidden',
+            'sui-weight-bold',
             props.truncate === 1 ? 'sui-text-overflow' : 'sui-line-clamp',
           )}
         >
@@ -41,7 +41,12 @@ export function Heading<T extends ElementType = 'h2'>({
 
   return (
     <Component
-      className={clsx(headingClassName, props.truncate && 'sui-overflow-hidden', className)}
+      className={clsx(
+        headingClassName,
+        props.truncate && 'sui-overflow-hidden',
+        'sui-weight-bold',
+        className,
+      )}
       style={style}
       data-ui="Heading"
       {...rest}
