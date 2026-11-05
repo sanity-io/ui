@@ -2,6 +2,14 @@ import type {AttributeMods} from '../../../types/AttributeMods'
 
 /** @internal */
 export const CODE_MODS: AttributeMods = {
+  as: {
+    type: 'rename-mapped',
+    name: 'inline',
+    mapping: {
+      span: true,
+      pre: false,
+    },
+  },
   flex: {
     type: 'style-mapped',
     style: 'flex',
@@ -35,6 +43,16 @@ export const CODE_MODS: AttributeMods = {
       3: '80rem',
       4: '100rem',
       5: '120rem',
+    },
+  },
+  weight: {
+    type: 'style-mapped',
+    style: 'fontWeight',
+    mapping: {
+      regular: 'var(--regular)',
+      medium: 'var(--medium)',
+      semibold: 'var(--semibold)',
+      bold: 'var(--bold)',
     },
   },
   width: {
