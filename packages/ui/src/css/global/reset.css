@@ -74,6 +74,10 @@
   border-spacing: 0;
 }
 
+:where(code) {
+  font-family: var(--mono);
+}
+
 /* Enforce no animations for users that prefer reduced motion*/
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -1,6 +1,6 @@
 {
   "name": "@sanity/ui-codemod",
-  "version": "1.0.0-alpha.14",
+  "version": "1.0.0-alpha.15",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -159,6 +159,14 @@
       "source": "./src/commands/latest/select.ts",
       "default": "./dist/commands/latest/select.js"
     },
+    "./transforms/latest/spinner": {
+      "source": "./src/transforms/latest/spinner/spinner.ts",
+      "default": "./dist/transforms/latest/spinner/spinner.js"
+    },
+    "./latest/spinner": {
+      "source": "./src/commands/latest/spinner.ts",
+      "default": "./dist/commands/latest/spinner.js"
+    },
     "./transforms/latest/stack": {
       "source": "./src/transforms/latest/stack/stack.ts",
       "default": "./dist/transforms/latest/stack/stack.js"
@@ -255,6 +263,8 @@
       "./latest/radio": "./dist/commands/latest/radio.js",
       "./transforms/latest/select": "./dist/transforms/latest/select/select.js",
       "./latest/select": "./dist/commands/latest/select.js",
+      "./transforms/latest/spinner": "./dist/transforms/latest/spinner/spinner.js",
+      "./latest/spinner": "./dist/commands/latest/spinner.js",
       "./transforms/latest/stack": "./dist/transforms/latest/stack/stack.js",
       "./latest/stack": "./dist/commands/latest/stack.js",
       "./transforms/latest/switch": "./dist/transforms/latest/switch/switch.js",

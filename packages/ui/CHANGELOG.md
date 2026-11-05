@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 5.0.0-alpha.20
+
+### Patch Changes
+
+- f21f5a2: remove label wrapper from checkbox, radio, and switch components
+- 3cfacb2: fix trim prop on eyebrow
+- 5e5d285: fix tooltip default and placement styling
+
 ## 5.0.0-alpha.19
 
 ### Patch Changes
