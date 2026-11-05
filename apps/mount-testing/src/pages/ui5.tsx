@@ -157,7 +157,7 @@ export default function Ui5() {
       <h2>{count} Headings</h2>
       <Profiler id="Heading" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Heading key={i} as="h2" size={2} muted>
+          <Heading key={i} as="h2" size={2}>
             Heading
           </Heading>
         ))}
@@ -386,7 +386,7 @@ export default function Ui5() {
         {iterator.map((i) => (
           <Card key={i} density={['regular', 'loose']} marginBottom={2}>
             <Flex flexDirection="column" gap={3}>
-              <Heading as="h3" size={3} muted>
+              <Heading as="h3" size={3}>
                 Card content
               </Heading>
               <Box padding={3}>
