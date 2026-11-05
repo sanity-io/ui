@@ -366,7 +366,7 @@ function TabSwitchSection() {
 function Ui5() {
   return (
     <VStack gap={4}>
-      <Heading>UI 5</Heading>
+      <Heading as="h2">UI 5</Heading>
       <SingleControlSection />
       <DialogSection />
       <SelectAllSection />
