@@ -38,9 +38,9 @@ defineInlineTest(
   <Code as="span" />
   `,
   `
-  <Code trim={true} />
+  <Code inline={true} trim={true} />
   `,
-  'removes the as prop',
+  'renames the as prop',
 )
 
 defineInlineTest(
@@ -55,7 +55,7 @@ defineInlineTest(
       flex: "1 1 auto",
       width: "40rem",
       maxWidth: "100%",
-      fontWeight: "bold"
+      fontWeight: "var(--bold)"
     }}
     trim={true} />
   `,

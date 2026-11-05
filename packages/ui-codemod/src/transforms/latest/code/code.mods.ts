@@ -3,7 +3,12 @@ import type {AttributeMods} from '../../../types/AttributeMods'
 /** @internal */
 export const CODE_MODS: AttributeMods = {
   as: {
-    type: 'remove',
+    type: 'rename-mapped',
+    name: 'inline',
+    mapping: {
+      span: true,
+      pre: false,
+    },
   },
   flex: {
     type: 'style-mapped',
@@ -41,8 +46,14 @@ export const CODE_MODS: AttributeMods = {
     },
   },
   weight: {
-    type: 'style-only',
+    type: 'style-mapped',
     style: 'fontWeight',
+    mapping: {
+      regular: 'var(--regular)',
+      medium: 'var(--medium)',
+      semibold: 'var(--semibold)',
+      bold: 'var(--bold)',
+    },
   },
   width: {
     type: 'style-mapped',
