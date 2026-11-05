@@ -60,7 +60,7 @@ export const Inline: Story = {
           <Text>
             Or use{' '}
             <Code {...props} inline language="jsx">
-              {'<RefractorLanguage><Code inline language="jsx">...</Code></RefractorLanguage>'}
+              {'<Code inline language="jsx">...</Code>'}
             </Code>{' '}
             for an inline code block with syntax highlighting.
           </Text>
@@ -69,10 +69,19 @@ export const Inline: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('<Code inline>...</Code>')).parentElement?.tagName).toBe(
-      'SPAN',
-    )
-    await expect((await canvas.findByText('<Code inline>...</Code>')).tagName).toBe('CODE')
+    const code = await canvas.findByText('<Code inline>...</Code>')
+
+    await expect(code.parentElement?.tagName).toBe('SPAN')
+    await expect(code.tagName).toBe('CODE')
+
+    await waitFor(async () => {
+      const highlightedCode = await canvas.findByText(
+        (_, el) =>
+          el?.tagName === 'CODE' && el.textContent === '<Code inline language="jsx">...</Code>',
+      )
+      await expect(highlightedCode.parentElement?.tagName).toBe('SPAN')
+      await expect(highlightedCode.tagName).toBe('CODE')
+    })
   },
 }
 

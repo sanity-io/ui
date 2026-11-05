@@ -386,7 +386,7 @@ export default function Ui5() {
         {iterator.map((i) => (
           <Card key={i} density={['regular', 'loose']} marginBottom={2}>
             <Flex flexDirection="column" gap={3}>
-              <Heading size={3} muted>
+              <Heading as="h3" size={3} muted>
                 Card content
               </Heading>
               <Box padding={3}>
