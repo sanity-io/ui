@@ -15,22 +15,21 @@ export function Code({size = 2, ...props}: CodeProps) {
     {size, ...props},
     codeProps,
   )
-  const Component = inline ? 'code' : 'pre'
-  const content = inline ? children : <code>{children}</code>
-
-  if (!language) {
-    return (
-      <Component className={clsx(codeClassName, className)} style={style} data-ui="Code" {...rest}>
-        {content}
-      </Component>
-    )
-  }
+  /*
+   * The span wrapper for inline code is necessary because react-refractor does not
+   * support any attributes other than className
+   */
+  const Component = inline ? 'span' : 'pre'
 
   return (
     <Component className={clsx(codeClassName, className)} style={style} data-ui="Code" {...rest}>
-      <Suspense fallback={content}>
-        <LazyRefractor language={language} value={children} inline={inline} fallback={content} />
-      </Suspense>
+      {language ? (
+        <Suspense fallback={<code>{children}</code>}>
+          <LazyRefractor language={language} value={children} />
+        </Suspense>
+      ) : (
+        <code>{children}</code>
+      )}
     </Component>
   )
 }

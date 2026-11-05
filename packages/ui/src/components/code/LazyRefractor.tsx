@@ -1,15 +1,9 @@
-import type {ReactNode} from 'react'
 import {hasLanguage, Refractor, type RefractorProps} from 'react-refractor'
 
-export default function LazyRefractor({
-  language,
-  value,
-  inline,
-  fallback,
-}: RefractorProps & {fallback: ReactNode}) {
+export default function LazyRefractor({language, value}: RefractorProps) {
   if (!hasLanguage(language)) {
-    return fallback
+    return <code>{value}</code>
   }
 
-  return <Refractor inline={inline} language={language} value={value} />
+  return <Refractor inline language={language} value={value} />
 }

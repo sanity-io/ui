@@ -69,9 +69,9 @@ export const Inline: Story = {
     )
   },
   play: async ({canvas}) => {
-    await expect(
-      (await canvas.findByText('<Code inline>...</Code>')).parentElement?.tagName,
-    ).not.toBe('PRE')
+    await expect((await canvas.findByText('<Code inline>...</Code>')).parentElement?.tagName).toBe(
+      'SPAN',
+    )
     await expect((await canvas.findByText('<Code inline>...</Code>')).tagName).toBe('CODE')
   },
 }
@@ -97,6 +97,11 @@ export const Sizes: Story = {
 }
 
 export const SyntaxHighlighting: Story = {
+  parameters: {
+    a11y: {
+      context: '.refractor',
+    },
+  },
   render: (props) => {
     return (
       <RefractorLanguage>
@@ -120,6 +125,8 @@ export const SyntaxHighlighting: Story = {
         (_, el) =>
           el?.textContent === `console.log('Code Component') // Comment` && el?.tagName === 'CODE',
       )
+
+      await expect(code.parentElement?.tagName).toBe('PRE')
       await expect(code.classList).toContain('refractor')
     })
   },

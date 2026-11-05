@@ -26,7 +26,7 @@ export type CodeProps =
     } & Omit<React.ComponentPropsWithRef<'pre'>, keyof CodeBaseProps>)
   | (CodeBaseProps & {
       inline: true
-    } & Omit<React.ComponentPropsWithRef<'code'>, keyof CodeBaseProps>)
+    } & Omit<React.ComponentPropsWithRef<'span'>, keyof CodeBaseProps>)
 
 export const codeProps: Record<string, PropDef> = {
   inline: {
