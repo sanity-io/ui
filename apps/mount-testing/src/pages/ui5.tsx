@@ -157,7 +157,7 @@ export default function Ui5() {
       <h2>{count} Headings</h2>
       <Profiler id="Heading" onRender={handleOnRender}>
         {iterator.map((i) => (
-          <Heading key={i} size={2} muted>
+          <Heading key={i} as="h2" size={2} muted>
             Heading
           </Heading>
         ))}
