@@ -1,5 +1,12 @@
 # @sanity/ui-codemod
 
+## 1.0.0-alpha.16
+
+### Patch Changes
+
+- 410157c: update as and weight transforms in code codemod
+- 08e03e1: add spinner codemod
+
 ## 1.0.0-alpha.15
 
 ### Patch Changes

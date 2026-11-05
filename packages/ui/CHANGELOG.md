@@ -1,5 +1,13 @@
 # @sanity/ui
 
+## 5.0.0-alpha.21
+
+### Patch Changes
+
+- 80650b0: remove 'weight' and 'muted' from Heading, make 'as' mandatory
+- 410157c: switch as to inline and remove weight in code component
+- 3d32506: fix: apply --font-mono to code elements in reset
+
 ## 5.0.0-alpha.20
 
 ### Patch Changes
