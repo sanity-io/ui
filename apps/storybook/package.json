@@ -29,6 +29,7 @@
     "@vitejs/plugin-react": "catalog:",
     "@vitest/browser-playwright": "^4.1.1",
     "@vitest/coverage-v8": "^4.1.1",
+    "lightningcss": "^1.33.0",
     "oxc-transform-react": "catalog:",
     "playwright": "^1.58.2",
     "storybook": "^10.3.3",
