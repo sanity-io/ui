@@ -3,6 +3,7 @@ import {expect} from 'storybook/test'
 
 import {Divider} from '../../../../packages/ui/src/components/divider/Divider'
 import {dividerProps} from '../../../../packages/ui/src/components/divider/divider.props'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {getArgTypes} from '../utils/getArgTypes'
 
 const argTypes = getArgTypes(dividerProps)
@@ -29,9 +30,9 @@ export const Default: Story = {
   render: (props) => {
     return (
       <>
-        <p>Content above</p>
+        <Text>Content above</Text>
         <Divider {...props} />
-        <p>Content below</p>
+        <Text>Content below</Text>
       </>
     )
   },
