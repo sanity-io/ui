@@ -78,7 +78,7 @@
   font-family: var(--mono);
 }
 
-/* Enforce no animations for users that prefer reduced motion (whole sui subtree — same coverage as box-sizing above; no “outer root only” needed) */
+/* Enforce no animations for users that prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   :where([class*="sui-"]),
   :where([class*="sui-"]) *,
