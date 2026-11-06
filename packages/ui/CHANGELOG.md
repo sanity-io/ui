@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.22
+
+### Patch Changes
+
+- 5002265: move shadow token definitions to repo
+
 ## 5.0.0-alpha.21
 
 ### Patch Changes
