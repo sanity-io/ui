@@ -119,14 +119,17 @@ export const Default: Story = {
 
     await expect(firstTab).toHaveAttribute('aria-selected', 'true')
     await expect(secondTab).toHaveAttribute('aria-selected', 'false')
-    await expect(canvas.getByText('First tab panel')).toBeVisible()
-    await expect(canvas.getByText('Second tab panel')).not.toBeVisible()
+    await expect(canvas.getByText('First tab panel').parentElement).toBeVisible()
+    await expect(canvas.getByText('Second tab panel').parentElement).not.toBeVisible()
 
-    await expect(canvas.getByText('First tab panel')).toHaveAttribute(
+    await expect(canvas.getByText('First tab panel').parentElement).toHaveAttribute(
       'aria-labelledby',
       firstTab.id,
     )
-    await expect(firstTab).toHaveAttribute('aria-controls', canvas.getByText('First tab panel').id)
+    await expect(firstTab).toHaveAttribute(
+      'aria-controls',
+      canvas.getByText('First tab panel').parentElement?.id,
+    )
   },
 }
 
@@ -170,8 +173,8 @@ export const Interactions: Story = {
 
       await expect(secondTab).toHaveAttribute('aria-selected', 'true')
       await expect(firstTab).toHaveAttribute('aria-selected', 'false')
-      await expect(canvas.getByText('Second tab panel')).toBeVisible()
-      await expect(canvas.getByText('First tab panel')).not.toBeVisible()
+      await expect(canvas.getByText('Second tab panel').parentElement).toBeVisible()
+      await expect(canvas.getByText('First tab panel').parentElement).not.toBeVisible()
     })
 
     await step('Only the selected tab is in the tab sequence', async () => {
@@ -219,12 +222,12 @@ export const Interactions: Story = {
     await step('Enter and Space select the focused tab', async () => {
       await userEvent.keyboard('{Enter}')
       await expect(thirdTab).toHaveAttribute('aria-selected', 'true')
-      await expect(canvas.getByText('Third tab panel')).toBeVisible()
+      await expect(canvas.getByText('Third tab panel').parentElement).toBeVisible()
 
       await userEvent.keyboard('{Home}')
       await userEvent.keyboard(' ')
       await expect(firstTab).toHaveAttribute('aria-selected', 'true')
-      await expect(canvas.getByText('First tab panel')).toBeVisible()
+      await expect(canvas.getByText('First tab panel').parentElement).toBeVisible()
     })
 
     await step(
@@ -234,7 +237,7 @@ export const Interactions: Story = {
         await expect(thirdTab).toHaveFocus()
 
         await userEvent.tab()
-        await expect(canvas.getByText('First tab panel')).toHaveFocus()
+        await expect(canvas.getByText('First tab panel').parentElement).toHaveFocus()
 
         await userEvent.tab({shift: true})
         await expect(firstTab).toHaveFocus()
