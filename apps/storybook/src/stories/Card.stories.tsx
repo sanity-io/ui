@@ -5,6 +5,7 @@ import {Card as CardV3} from 'ui3'
 import {Card} from '../../../../packages/ui/src/components/card/Card'
 import {cardProps} from '../../../../packages/ui/src/components/card/card.props'
 import {HStack} from '../../../../packages/ui/src/components/h-stack/HStack'
+import {Text} from '../../../../packages/ui/src/components/text/Text'
 import {TONE_WITH_DEFAULT} from '../../../../packages/ui/src/types/Tone'
 import {getArgTypes} from '../utils/getArgTypes'
 
@@ -13,7 +14,7 @@ const argTypes = getArgTypes(cardProps)
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   args: {
-    children: 'This is a Card component.',
+    children: <Text>This is a Card component.</Text>,
     as: 'div',
   },
   argTypes,
@@ -38,7 +39,9 @@ export const Default: Story = {
     return <Card {...props} />
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('This is a Card component.')).dataset.ui).toBe('Card')
+    await expect(
+      (await canvas.findByText('This is a Card component.')).parentElement?.dataset.ui,
+    ).toBe('Card')
   },
 }
 
@@ -48,15 +51,15 @@ export const Tones: Story = {
       <HStack gap={3}>
         {TONE_WITH_DEFAULT.map((tone) => (
           <Card {...props} key={tone} tone={tone}>
-            {`Card ${tone} tone`}
+            <Text>{`Card ${tone} tone`}</Text>
           </Card>
         ))}
       </HStack>
     )
   },
   play: async ({canvas}) => {
-    await expect((await canvas.findByText('Card positive tone')).classList).toContain(
-      'sui-tone-positive',
-    )
+    await expect(
+      (await canvas.findByText('Card positive tone')).parentElement?.classList,
+    ).toContain('sui-tone-positive')
   },
 }

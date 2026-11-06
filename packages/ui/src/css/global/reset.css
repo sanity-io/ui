@@ -1,56 +1,51 @@
-/* Default to border-box sizing */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* Zero out default margins, padding, and borders */
-* {
-  margin: 0;
-  padding: 0;
-  border: 0 solid transparent;
-}
-
-:root {
-  color-scheme: light dark;
-}
-
 /* Prevent adjustments of font size after orientation changes in iOS. */
 :where(html) {
   -webkit-text-size-adjust: 100%;
 }
 
-:where(body) {
-  background: light-dark(var(--white), var(--black));
+/* Reset font and color-scheme for first sui- class in a tree */
+:where([class*="sui-"]):not(:where([class*="sui-"]) :where([class*="sui-"])) {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
+  color-scheme: light dark;
+}
+
+/* Default to border-box sizing */
+:where([class*="sui-"]),
+:where([class*="sui-"]) *,
+:where([class*="sui-"]) *::before,
+:where([class*="sui-"]) *::after {
+  box-sizing: border-box;
+}
+
+/* Zero out default margins, padding, and borders */
+:where([class*="sui-"]),
+:where([class*="sui-"]) * {
+  margin: 0;
+  padding: 0;
+  border: 0 solid transparent;
 }
 
 /* Display multimedia as block by default */
-:where(
-  audio,
-  canvas,
-  embed,
-  iframe,
-  img,
-  object,
-  picture,
-  video
-){
+:is(
+  :where([class*="sui-"]) :where(audio, canvas, embed, iframe, img, object, picture, video),
+  :where(audio, canvas, embed, iframe, img, object, picture, video):where([class*="sui-"])
+) {
   display: block;
   max-width: 100%;
 }
-:where(img, picture, video) {
+
+:is(
+  :where([class*="sui-"]) :where(img, picture, video),
+  :where(img, picture, video):where([class*="sui-"])
+) {
   block-size: auto;
 }
 
 /* Inherit typography in form controls */
-:where(
-  button,
-  input,
-  select,
-  textarea
+:is(
+  :where([class*="sui-"]) :where(button, input, select, textarea),
+  :where(button, input, select, textarea):where([class*="sui-"])
 ) {
   appearance: none;
   color: inherit;
@@ -59,30 +54,36 @@
 }
 
 /* Remove user agent reduced opacity on disabled form elements */
-:where(
-  button,
-  input,
-  select,
-  textarea
-):disabled {
+:is(
+  :where([class*="sui-"]) :where(button, input, select, textarea):disabled,
+  :where(button, input, select, textarea):where([class*="sui-"]):disabled
+) {
   opacity: 1;
 }
 
 /* Remove excess space for table borders */
-:where(table) {
+:is(
+  :where([class*="sui-"]) :where(table),
+  :where(table):where([class*="sui-"])
+) {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-:where(code) {
+/* Inherit typography for code blocks */
+:is(
+  :where([class*="sui-"]) :where(code),
+  :where(code):where([class*="sui-"])
+) {
   font-family: var(--mono);
 }
 
-/* Enforce no animations for users that prefer reduced motion*/
+/* Enforce no animations for users that prefer reduced motion (whole sui subtree — same coverage as box-sizing above; no “outer root only” needed) */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  :where([class*="sui-"]),
+  :where([class*="sui-"]) *,
+  :where([class*="sui-"]) *::before,
+  :where([class*="sui-"]) *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
