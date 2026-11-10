@@ -1,5 +1,10 @@
 {
   "extends": "./tsconfig.settings.json",
+  "compilerOptions": {
+    "paths": {
+      "@sanity/ui": ["./src/index.ts"]
+    }
+  },
   "include": ["./**/*.cjs", "./**/*.mts", "./**/*.ts", "./**/*.tsx"],
   "exclude": ["./node_modules"]
 }

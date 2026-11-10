@@ -1,16 +1,28 @@
 import {Button} from '@sanity/ui'
 
-{
-  /* ✗ — confirm is available before the reference count resolves */
+// ✗ Confirm is available before the reference count resolves.
+export function ConfirmImmediately({onConfirm}: {onConfirm: () => void}) {
+  return <Button text="Confirm" tone="critical" onClick={onConfirm} />
 }
-;<Button text="Confirm" tone="critical" onClick={onConfirm} />
 
-{
-  /* ✓ — confirm waits for the count, and names the consequence directly */
+// ✓ Confirm waits for the count, and names the consequence directly. The button
+// stays focusable while it is blocked: aria-disabled blocks the action, and the
+// click handler does nothing until the count arrives.
+export function ConfirmAfterCount({
+  referenceCount,
+  onConfirm,
+}: {
+  referenceCount: number | null
+  onConfirm: () => void
+}) {
+  const ready = referenceCount != null
+
+  return (
+    <Button
+      text={ready ? `Delete (${referenceCount} refs)` : 'Checking references…'}
+      tone="critical"
+      aria-disabled={!ready}
+      onClick={ready ? onConfirm : undefined}
+    />
+  )
 }
-;<Button
-  text={referenceCount == null ? 'Checking references…' : `Delete (${referenceCount} refs)`}
-  tone="critical"
-  disabled={referenceCount == null}
-  onClick={onConfirm}
-/>

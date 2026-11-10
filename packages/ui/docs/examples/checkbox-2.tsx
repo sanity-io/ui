@@ -9,7 +9,17 @@ import {Checkbox} from '@sanity/ui'
 // mixed mark when some but not all rows are selected. Set `checked` false
 // while indeterminate is true — the mixed mark replaces the tick.
 
-export function SelectableRows({rows, selected, onToggleRow, onToggleAll}) {
+export function SelectableRows({
+  rows,
+  selected,
+  onToggleRow,
+  onToggleAll,
+}: {
+  rows: {id: string; name: string}[]
+  selected: string[]
+  onToggleRow: (id: string) => void
+  onToggleAll: (checked: boolean) => void
+}) {
   const allSelected = rows.length > 0 && selected.length === rows.length
   const someSelected = selected.length > 0 && !allSelected
 
