@@ -5,7 +5,7 @@ entries:
   - kind: system
     id: sanity-ui
     name: Sanity UI
-    description: The React component library and design system behind Sanity Studio.
+    description: Sanity’s React component library and design system.
     metadata:
       status:
         status: beta
