@@ -64,10 +64,10 @@ sections:
       - level: must
         statement: The child must render a button element. The popovertarget attribute is only honoured on buttons, so Button, IconButton, and a bare button work; a Box, Text, or div renders but never opens.
       - level: must
-        statement: Set autoFocus on the first focusable element inside the content. An auto popover does not move focus on its own.
+        statement: Move focus into the content when the panel opens. An auto popover does not move focus on its own. Do not use `autoFocus` for this. It causes usability problems for sighted and non-sighted users, and the `jsx-a11y/no-autofocus` lint rule flags it. Put the first control in a small component that focuses it in a `useEffect`. The content stays mounted while the popover is closed, so the effect runs each time the panel opens.
         example:
           title: Focus the first control when the panel opens
-          description: A filter panel whose Select takes `autoFocus`. Opening the Popover moves focus into the panel, so the next key press lands on the first filter, not back on the trigger.
+          description: A filter panel whose first Select is focused by a small component's `useEffect`. Opening the Popover moves focus into the panel, so the next key press lands on the first filter, not back on the trigger.
           ref:
             href: ../examples/popover-1.tsx
             rel: source

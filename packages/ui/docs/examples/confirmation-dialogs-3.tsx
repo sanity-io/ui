@@ -1,3 +1,5 @@
+import {Button} from '@sanity/ui'
+
 {
   /* ✗ — confirm is available before the reference count resolves */
 }

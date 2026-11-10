@@ -1,3 +1,5 @@
+import {Button, Dialog, Flex, Text} from '@sanity/ui'
+
 ;<Dialog header="Delete document?" open={open} onClose={onCancel}>
   <Dialog.Content>
     <Text>This can't be undone.</Text>

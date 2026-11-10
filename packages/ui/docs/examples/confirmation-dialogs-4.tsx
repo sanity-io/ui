@@ -1,3 +1,5 @@
+import {Button, Dialog, Flex, Text} from '@sanity/ui'
+
 {
   /* ✗ — no focus trap, no Escape handling, no focus return on close */
 }
