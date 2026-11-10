@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react-vite'
-import {expect, userEvent, waitFor} from 'storybook/test'
+import {expect, screen, userEvent, waitFor} from 'storybook/test'
 import {Tooltip as TooltipV3} from 'ui3'
 
 import {Button} from '../../../../packages/ui/src/components/button/Button'
@@ -105,6 +105,29 @@ export const Placements: Story = {
       {timeout: 750},
     )
 
+    trigger.blur()
+  },
+}
+
+export const WithPortal: Story = {
+  render: (props) => (
+    <Tooltip {...props} content="Tooltip Content" portal>
+      <Button text="Open Tooltip" />
+    </Tooltip>
+  ),
+  play: async ({canvas}) => {
+    const trigger = await canvas.findByRole('button', {name: 'Open Tooltip'})
+
+    await userEvent.tab()
+
+    await waitFor(
+      async () => {
+        await expect(await screen.findByText('Tooltip Content')).toBeVisible()
+      },
+      {timeout: 500},
+    )
+
+    await userEvent.click(trigger)
     trigger.blur()
   },
 }
