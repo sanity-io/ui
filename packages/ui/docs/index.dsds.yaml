@@ -50,7 +50,7 @@ shared:
             statement: WCAG 2.2 AA is a hard requirement for all work. Keyboard nav, screen reader support, and touch targets are required from the start — not added after.
           - id: semantics-mirror-visuals
             level: must
-            statement: Semantics must mirror visuals. Spacing groups visually. Color signals meaning. Motion marks a state change. None of that reaches assistive technology unless the same information appears in markup. Use semantic HTML, ARIA roles, and ARIA properties to express what the visual layer shows.
+            statement: Semantics must mirror visuals. Spacing, color, and motion all rely on visual acuity to convey information; none of that reaches assistive technology unless the same information appears in markup. Use semantic HTML, and provide ARIA roles and ARIA properties additively where gaps in HTML semantics exist, to express what the visual layer shows.
           - id: container-inside-scroll-box
             level: must
             statement: Place `Container` inside the scroll `Box`, not around it. `Container` only constrains max-width; the scroll `Box` owns `flexGrow` and `overflowY`. Wrapping the scroll box in a Container caps the scroll region instead of the content.
