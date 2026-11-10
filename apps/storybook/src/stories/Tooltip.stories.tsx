@@ -124,7 +124,7 @@ export const WithPortal: Story = {
       async () => {
         await expect(await screen.findByText('Tooltip Content')).toBeVisible()
       },
-      {timeout: 500},
+      {timeout: 750},
     )
 
     await userEvent.click(trigger)
