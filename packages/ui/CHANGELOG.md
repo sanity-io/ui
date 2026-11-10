@@ -1,5 +1,11 @@
 # @sanity/ui
 
+## 5.0.0-alpha.23
+
+### Patch Changes
+
+- ba3e618: initial commits for docs
+
 ## 5.0.0-alpha.22
 
 ### Patch Changes
