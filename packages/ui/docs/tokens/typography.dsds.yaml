@@ -1,0 +1,316 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: body-0
+    name: body-0
+    description: Fine print in dense contexts.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#body-0
+  - kind: token
+    id: body-1
+    name: body-1
+    description: Compact body and secondary text.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#body-1
+  - kind: token
+    id: body-2
+    name: body-2
+    description: Default body copy.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#body-2
+  - kind: token
+    id: body-3
+    name: body-3
+    description: Display body — intros and lead paragraphs.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#body-3
+  - kind: token
+    id: body-4
+    name: body-4
+    description: Display body — hero and empty-state text.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#body-4
+  - kind: token
+    id: code-0
+    name: code-0
+    description: Fine inline code.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#code-0
+  - kind: token
+    id: code-1
+    name: code-1
+    description: Compact code and identifiers.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#code-1
+  - kind: token
+    id: code-2
+    name: code-2
+    description: Default code blocks and inline tokens.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#code-2
+  - kind: token
+    id: code-3
+    name: code-3
+    description: Display code.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#code-3
+  - kind: token
+    id: code-4
+    name: code-4
+    description: Display code.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#code-4
+  - kind: token
+    id: heading-0
+    name: heading-0
+    description: UI chrome — toolbars, sidebars, dense panels.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#heading-0
+  - kind: token
+    id: heading-1
+    name: heading-1
+    description: Sub-section titles.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#heading-1
+  - kind: token
+    id: heading-2
+    name: heading-2
+    description: Standard section headings. The default.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#heading-2
+  - kind: token
+    id: heading-3
+    name: heading-3
+    description: Document titles in high-density layouts.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#heading-3
+  - kind: token
+    id: heading-4
+    name: heading-4
+    description: Document titles in medium-density layouts.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#heading-4
+  - kind: token
+    id: heading-5
+    name: heading-5
+    description: Document titles in low-density layouts.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#heading-5
+  - kind: token
+    id: label-0
+    name: label-0
+    description: Fine print labels.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#label-0
+  - kind: token
+    id: label-1
+    name: label-1
+    description: Compact form and UI labels.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#label-1
+  - kind: token
+    id: label-2
+    name: label-2
+    description: Small labels.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#label-2
+  - kind: token
+    id: label-3
+    name: label-3
+    description: Standard labels.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#label-3
+  - kind: token
+    id: label-4
+    name: label-4
+    description: Larger labels.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#label-4
+  - kind: token
+    id: label-5
+    name: label-5
+    description: Largest labels.
+    metadata:
+      status:
+        status: stable
+      group: typography
+    tokenType: typography
+    source:
+      href: ./dtcg/json/typography.tokens.json#label-5
+  - kind: entry
+    id: typography
+    name: Typography styles
+    description: Composite text styles for body, code, heading, and label roles, each binding a family, size, weight, and line height.
+    metadata:
+      tags: [typography, type, text, heading, label, code, scale, line-height]
+      status:
+        status: stable
+      group: typography
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - refs:
+              - to: semantics#heading-level-from-outline
+                rel: same-as
+          - level: should
+            statement: Use the fewest roles a layout needs — three or four. Lean on weight and space before adding a size.
+          - level: should
+            statement: Constrain body measure to roughly 45–75 characters per line.
+          - level: should-not
+            statement: Don't use display steps (`body`/`code` `3`–`4`) for product chrome. They are for hero and empty-state text.
+      - kind: guidelines
+        for: agent
+        framing: how-to-use
+        items:
+          - level: must
+            statement: The `size` prop takes an integer step, not a px value. Weight comes from the `weight` prop, not the size token.
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              Each typography token bundles a font family, size, weight, and line height into one style. The set covers four roles: `body`, `code`, `heading`, and `label`. Every token carries the regular weight; the rendered weight comes from the component's `weight` prop (see Font weights).
+          - title: Roles and components
+            body: |-
+              | Token role | Component | Family | Default size |
+              | --- | --- | --- | --- |
+              | `body` | Text | `sans` | `2` |
+              | `code` | Code | `mono` | `2` |
+              | `heading` | Heading | `sans` | `2` |
+              | `label` | Eyebrow | `sans` | — |
+
+              `heading` runs `0`–`5`, and Heading's `size` accepts all six steps. `body` and `code` run `0`–`4`. `label` runs `0`–`5`, and Eyebrow's `size` uses steps `0`–`4`. The `label` role belongs to Eyebrow.
+          - title: Sizes
+            body: |-
+              Each step is one token, named by role and step: `body-2`, `heading-4`, `label-1`. The size, line height and letter spacing of each live in `docs/tokens/dtcg/json/typography.tokens.json`. Read a role, such as `heading`, to see a whole ramp. Larger heading steps carry negative letter spacing.
+
+              | Role | Steps | Tokens |
+              | --- | --- | --- |
+              | `body` | `0`–`4` | `body-0` … `body-4` |
+              | `code` | `0`–`4` | `code-0` … `code-4` |
+              | `heading` | `0`–`5` | `heading-0` … `heading-5` |
+              | `label` | `0`–`5` | `label-0` … `label-5` |
+
+              Run large steps (`heading` `4`–`5`, `body`/`code` `3`–`4`) tighter where needed.
+          - title: Related
+            body: |-
+              - **Typography guidelines** — hierarchy table, measure (45–75 characters), alignment, and weight.
+              - **Font families** and **Font weights** — the family and weight a style binds.
+              - **Spacing** — the spacing scale and vertical rhythm.
+      - kind: section
+        for: agent
+        freeform:
+          - title: Intent
+            body: Choose a type style by role (Text, Code, Heading, Eyebrow) and step. Use the fewest roles a layout needs.
+    refs:
+      - href: ./dtcg/json/typography.tokens.json
+        rel: source
+        role: DTCG source

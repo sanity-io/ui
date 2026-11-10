@@ -1,0 +1,72 @@
+{
+  "space-0": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 0
+    }
+  },
+  "space-1": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 4
+    }
+  },
+  "space-2": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 8
+    }
+  },
+  "space-3": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 12
+    }
+  },
+  "space-4": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 20
+    }
+  },
+  "space-5": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 32
+    }
+  },
+  "space-6": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 52
+    }
+  },
+  "space-7": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 84
+    }
+  },
+  "space-8": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 136
+    }
+  },
+  "space-9": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 220
+    }
+  }
+}

@@ -1,0 +1,599 @@
+{
+  "shadow-0": {
+    "$type": "shadow",
+    "$value": [
+      {
+        "_key": "ba9bd5139673",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 0
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 0
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0
+        }
+      }
+    ]
+  },
+  "shadow-1": {
+    "$type": "shadow",
+    "$value": [
+      {
+        "_key": "outline",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 0
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.3,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 0
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0.5
+        }
+      },
+      {
+        "_key": "umbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 0
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.1,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 0
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0
+        }
+      },
+      {
+        "_key": "penumbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 0
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.07,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 0
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0
+        }
+      },
+      {
+        "_key": "ambient",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 0
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.06,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 0
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0
+        }
+      }
+    ]
+  },
+  "shadow-2": {
+    "$type": "shadow",
+    "$value": [
+      {
+        "_key": "outline",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 0
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.3,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 0
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0.5
+        }
+      },
+      {
+        "_key": "umbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 5
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.1,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 3
+        },
+        "spread": {
+          "unit": "px",
+          "value": -2
+        }
+      },
+      {
+        "_key": "penumbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 10
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.07,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 6
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0
+        }
+      },
+      {
+        "_key": "ambient",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 18
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.06,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 1
+        },
+        "spread": {
+          "unit": "px",
+          "value": 1
+        }
+      }
+    ]
+  },
+  "shadow-3": {
+    "$type": "shadow",
+    "$value": [
+      {
+        "_key": "outline",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 0
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.3,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 0
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0.5
+        }
+      },
+      {
+        "_key": "umbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 8
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.1,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 7
+        },
+        "spread": {
+          "unit": "px",
+          "value": -4
+        }
+      },
+      {
+        "_key": "penumbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 17
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.07,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 12
+        },
+        "spread": {
+          "unit": "px",
+          "value": 2
+        }
+      },
+      {
+        "_key": "ambient",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 22
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.06,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 5
+        },
+        "spread": {
+          "unit": "px",
+          "value": 4
+        }
+      }
+    ]
+  },
+  "shadow-4": {
+    "$type": "shadow",
+    "$value": [
+      {
+        "_key": "outline",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 0
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.3,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 0
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0.5
+        }
+      },
+      {
+        "_key": "umbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 11
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.1,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 9
+        },
+        "spread": {
+          "unit": "px",
+          "value": -5
+        }
+      },
+      {
+        "_key": "penumbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 28
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.07,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 18
+        },
+        "spread": {
+          "unit": "px",
+          "value": 2
+        }
+      },
+      {
+        "_key": "ambient",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 34
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.06,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 7
+        },
+        "spread": {
+          "unit": "px",
+          "value": 6
+        }
+      }
+    ]
+  },
+  "shadow-5": {
+    "$type": "shadow",
+    "$value": [
+      {
+        "_key": "outline",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 0
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.3,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 0
+        },
+        "spread": {
+          "unit": "px",
+          "value": 0.5
+        }
+      },
+      {
+        "_key": "umbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 15
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.1,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 11
+        },
+        "spread": {
+          "unit": "px",
+          "value": -7
+        }
+      },
+      {
+        "_key": "penumbra",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 38
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.07,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 24
+        },
+        "spread": {
+          "unit": "px",
+          "value": 3
+        }
+      },
+      {
+        "_key": "ambient",
+        "_type": "object",
+        "blur": {
+          "unit": "px",
+          "value": 46
+        },
+        "color": {
+          "_type": "color",
+          "alpha": 0.06,
+          "colorSpace": "srgb",
+          "components": [0.45, 0.47, 0.57],
+          "hex": "#727892"
+        },
+        "offsetX": {
+          "unit": "px",
+          "value": 0
+        },
+        "offsetY": {
+          "unit": "px",
+          "value": 9
+        },
+        "spread": {
+          "unit": "px",
+          "value": 8
+        }
+      }
+    ]
+  }
+}

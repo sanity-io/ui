@@ -1,0 +1,131 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: container-0
+    name: container-0
+    description: Small — narrow panels, mobile width.
+    metadata:
+      status:
+        status: stable
+      group: container-widths
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/container.tokens.json#container-0
+  - kind: token
+    id: container-1
+    name: container-1
+    description: Reading width — forms, prose, dialogs.
+    metadata:
+      status:
+        status: stable
+      group: container-widths
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/container.tokens.json#container-1
+  - kind: token
+    id: container-2
+    name: container-2
+    description: Medium — standard content area.
+    metadata:
+      status:
+        status: stable
+      group: container-widths
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/container.tokens.json#container-2
+  - kind: token
+    id: container-3
+    name: container-3
+    description: Large — wide content, dashboards.
+    metadata:
+      status:
+        status: stable
+      group: container-widths
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/container.tokens.json#container-3
+  - kind: token
+    id: container-4
+    name: container-4
+    description: Extra-large layouts.
+    metadata:
+      status:
+        status: stable
+      group: container-widths
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/container.tokens.json#container-4
+  - kind: token
+    id: container-5
+    name: container-5
+    description: Full-width layouts.
+    metadata:
+      status:
+        status: stable
+      group: container-widths
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/container.tokens.json#container-5
+  - kind: entry
+    id: container-widths
+    name: Container widths
+    description: The max-width scale that bounds content width across Sanity UI layouts.
+    metadata:
+      tags: [sizing, container, max-width, width, layout, dimension, breakpoint]
+      status:
+        status: stable
+      group: container-widths
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - level: must
+            statement: Take container widths from the scale; don't hardcode a raw `max-width` that duplicates a step.
+          - level: should
+            statement: Bound body text near `container-1` so the line measure stays readable.
+          - level: should-not
+            statement: Don't treat these as breakpoints. They cap content width; they do not trigger layout changes at the viewport edge.
+      - kind: guidelines
+        for: agent
+        framing: how-to-use
+        items:
+          - level: must
+            statement: The Container `size` prop takes an integer step (0–5), not a px value or a string.
+          - level: must-not
+            statement: Do not use container widths as viewport breakpoints; the responsive-array breakpoints are separate.
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              Container widths bound how wide content grows before it stops. The Container component centers content and caps it at one of these widths. The scale has steps `0` through `5`.
+          - title: The scale
+            body: |-
+              | Step | Token | Common use |
+              | --- | --- | --- |
+              | `0` | `container-0` | Small — narrow panels, mobile width |
+              | `1` | `container-1` | Reading width — forms, prose, dialogs |
+              | `2` | `container-2` | Medium — standard content area |
+              | `3` | `container-3` | Large — wide content, dashboards |
+              | `4` | `container-4` | Extra-large layouts |
+              | `5` | `container-5` | Full-width layouts |
+
+              The widths live in `docs/tokens/dtcg/json/container.tokens.json`.
+
+              These cap the content's width. They are not viewport breakpoints. For viewport breakpoints and the responsive-array syntax, see the Responsive pattern.
+          - title: Related
+            body: |-
+              - **Container** — centers content and caps it at one of these widths.
+              - **Responsive pattern** — owns viewport breakpoints and responsive arrays.
+              - **Typography guidelines** — measure (45–75 characters) often lands near `container-1`.
+      - kind: section
+        for: agent
+        freeform:
+          - title: Intent
+            body: Cap content width with a Container step. Use `container-1` for readable text columns.
+    refs:
+      - href: ./dtcg/json/container.tokens.json
+        rel: source
+        role: DTCG source

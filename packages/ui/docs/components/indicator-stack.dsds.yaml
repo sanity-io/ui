@@ -1,0 +1,98 @@
+kind: component
+id: indicator-stack
+name: IndicatorStack
+description: A horizontal container for Indicator dots.
+metadata:
+  tags: [indicator, stack, status, dots, horizontal, mask]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: 'When an item has two or more concurrent statuses (for example, published but has a draft).'
+      - level: should
+        statement: When status dots appear side by side and need clear visual separation.
+      - level: should-not
+        statement: For a single indicator. Use Indicator on its own.
+        alternatives:
+          - to: indicator
+      - level: should-not
+        statement: When dots are not adjacent. The cut-out mask only applies to side-by-side dots.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: always-indicatorstack-placing-two-more
+        refs:
+          - to: shared-foundations#indicator-stack-for-adjacent-dots
+            rel: same-as
+      - level: should
+        statement: Use as='ul' and wrap each Indicator in as='li' when the stack represents a list of statuses.
+      - level: should-not
+        statement: Don't use more than 3 or 4 indicators in a single stack. More dots are hard to read at a glance.
+      - level: must-not
+        statement: Don't put non-Indicator elements inside IndicatorStack. Only Indicator children are supported.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - id: pass-child-without-dot-conveys
+        level: must
+        statement: Pass `label` on each child `Indicator`. Without it, the dot is `aria-hidden` and conveys no information to screen reader users.
+      - level: should
+        statement: '`IndicatorStack` renders as a `div` by default. It has no implicit role.'
+      - level: should
+        statement: Use `as="ul"` if the group is a meaningful list. Wrap each `Indicator` in `as="li"`.
+      - level: should
+        statement: The cut-out mask is a visual effect only. It has no effect on screen readers.
+      - level: must-not
+        statement: "Don't show an indicator without a `label` or adjacent text."
+
+alternatives:
+  - to: indicator
+    note: The individual status dot — always use inside `IndicatorStack` when placing two or more side by side
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32595-45
+    rel: design
+    role: Figma component (v5)
+  - to: badge
+    rel: relates-to
+    note: Shows a short text label or count — use when the status needs to be read as text
+  - to: avatar
+    rel: relates-to
+    note: Commonly paired with `IndicatorStack` to show online or notification state on a user
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/indicator-stack/IndicatorStack.tsx
+imports:
+  - platform: react
+    code: import { IndicatorStack } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        `IndicatorStack` is new in v5, with no direct v3 equivalent. Side-by-side status dots in v3 were composed manually, usually with `Flex`.
+
+        ```
+        // v3 pattern (manual spacing, no cut-out mask)
+        <Flex gap={1}>
+          <Box style={{width: 5, height: 5, borderRadius: '50%', background: 'green'}} />
+          <Box style={{width: 5, height: 5, borderRadius: '50%', background: 'yellow'}} />
+        </Flex>
+
+        // v5 equivalent
+        <IndicatorStack>
+          <Indicator tone="positive" label="Published" />
+          <Indicator tone="caution" label="Unpublished changes" />
+        </IndicatorStack>
+        ```

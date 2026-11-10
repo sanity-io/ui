@@ -1,0 +1,189 @@
+kind: component
+id: text-input
+name: TextInput
+description: Used to accept a single line of text like names, titles, zip codes.
+metadata:
+  tags: [textinput, form, input, text, single-line, text field, name, title, search]
+  status:
+    status: beta
+    note: Added in 5.0.0-alpha.13.
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: 'For freeform input of short text: names, titles, search queries.'
+      - level: should-not
+        statement: For longer form, multi-line text where spell check is expected. Use TextArea instead.
+        alternatives:
+          - to: text-area
+      - level: should-not
+        statement: For selecting an option from a fixed list. Use Select instead.
+        alternatives:
+          - to: select
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Don't use TextInput to pick from a fixed set of options. Use Select or Radio instead.
+        alternatives:
+          - to: select
+          - to: radio
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: forms#pair-with-visible-label
+            rel: same-as
+      - level: must
+        statement: Mark an invalid field with `hasError`. It colors the border and text and sets `aria-invalid="true"` on the input. It renders no message, so add the error text yourself and link it with `aria-describedby`.
+      - refs:
+          - to: forms#mark-optional-fields
+            rel: same-as
+      - refs:
+          - to: forms#stack-fields-vertically
+            rel: same-as
+      - level: should
+        statement: Use `density="loose"` in forms with wide spacing. `regular` is the default. Give every field in one form the same density, including any Select beside it.
+      - refs:
+          - to: shared-foundations#error-state-never-disabled
+            rel: same-as
+      - refs:
+          - to: forms#placeholder-not-a-label
+            rel: same-as
+      - level: must-not
+        statement: Don't horizontally stack more than two TextInputs in a row.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: should
+        statement: >-
+          Set `type` to the kind of text the field takes: `email`, `password`, `search`, `tel`, `url`, `number`, `date`, `time`, `datetime-local`, `month` or `week`. `text` is the default. The right type gives the matching mobile keyboard and browser autofill.
+      - level: must-not
+        statement: >-
+          Don't set `type` to `button`, `checkbox`, `color`, `file`, `hidden`, `image`, `radio`, `range`, `reset` or `submit`. TextInput is a text field and is not styled for those controls. TypeScript does not catch this: the `type` prop still accepts any string. Use Button, Checkbox, Radio or a native element instead.
+      - level: must-not
+        statement: >-
+          Don't set `aria-invalid` on TextInput by hand. TextInput writes `aria-invalid` from `hasError` after your props, so a hand-set value is ignored. Use `hasError`.
+      - level: must-not
+        statement: >-
+          Don't pass layout or spacing props to TextInput. It takes the native input attributes plus `density` and `hasError`, so `margin`, `padding`, `flexGrow` and the like are TypeScript errors. TextInput always fills its container's width. Size it and space it from a wrapping Box or Flex. The native `width` attribute compiles but has no effect on a text field.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - refs:
+          - to: forms#label-available-to-screen-readers
+            rel: same-as
+      - refs:
+          - to: forms#programmatic-name-required
+            rel: same-as
+      - refs:
+          - to: forms#border-contrast
+            rel: same-as
+      - refs:
+          - to: forms#placeholder-contrast
+            rel: same-as
+      - refs:
+          - to: forms#error-described-in-text
+            rel: same-as
+      - refs:
+          - to: forms#error-prop-needs-visible-message
+            rel: same-as
+  - kind: section
+    for: agent
+    freeform:
+      - title: Form-field pairing (canonical example)
+        body: |-
+          The canonical form-field pairing. A `Text` with `as="label"` links to the input via `htmlFor` ↔ `id`; the label text is passed as children.
+
+          ```tsx
+          import { Text, TextInput, VStack } from '@sanity/ui'
+
+          <VStack gap={2}>
+            <Text as="label" htmlFor="email">Email address</Text>
+            <TextInput id="email" type="email" value={email} onChange={(e) => setEmail(e.currentTarget.value)} />
+          </VStack>
+          ```
+alternatives:
+  - to: text-area
+  - to: select
+refs:
+  - href: https://www.figma.com/design/NWmchNlsNdG66VBaCsTdSL/pjo-ui4-component-buildout?node-id=29-1895
+    rel: design
+    role: Figma component
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/text-input/TextInput.tsx
+imports:
+  - platform: react
+    code: import { TextInput } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: enabled
+    description: Resting state. Backdrop background with a high separator border. The border carries the states below; the background only moves for `disabled`.
+  - traitType: state
+    kind: boolean
+    id: hovered
+    description: The border shifts one lightness step — darker in light mode, lighter in dark mode. In the error state it shifts from the error border.
+  - traitType: state
+    kind: boolean
+    id: focused
+    description: Focus outline on `:focus-visible`, offset from the border.
+  - traitType: state
+    kind: boolean
+    id: disabled
+    description: 'Inert background and a low separator border, with the text in the inert foreground color. `pointer-events: none`, so the field is not clickable.'
+  - traitType: state
+    kind: boolean
+    id: error
+    description: Set with the `hasError` prop, which adds `aria-invalid="true"` to the input. The error styling keys off that attribute, so the border turns the error separator color and the text the error foreground color. It carries no message — supply that yourself.
+  - traitType: variant
+    kind: enum
+    id: density
+    description: Sets the field's padding. The type size is fixed at body size 1.
+    values:
+      - id: regular
+        description: Default. Horizontal padding {space-2}, vertical padding {space-1}.
+      - id: loose
+        description: Horizontal padding {space-3}, vertical padding {space-2}. For forms with wide spacing.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        TextInput is now a plain native input. The sizing props and the icon, prefix, suffix and clear-button slots are gone. One `density` prop sets the spacing, and validation is a boolean named `hasError`.
+
+        ### Detailed list of differences
+
+        | v3 pattern | v5 pattern | Notes |
+        | :---- | :---- | :---- |
+        | `<TextInput fontSize={2} weight="medium" />` | `<TextInput />` | The type size is fixed at body size 1, in regular weight |
+        | `<TextInput padding={3} space={3} />` | `<TextInput density="loose" />` | `density` is `regular` or `loose`. Neither value reproduces a v3 `padding={3}` exactly |
+        | `<TextInput radius={2} border={false} />` | `<TextInput />` | The radius is fixed at step 2, and the border is always drawn |
+        | `<TextInput customValidity="Required" />` | `<TextInput hasError />` plus your own message | `hasError` sets `aria-invalid` and recolors the border and text. It renders no text |
+        | `<TextInput icon={SearchIcon} iconRight={…} />` | `<TextInput />` | No icon slots. Put an icon beside the field, not inside it |
+        | `<TextInput prefix="https://" suffix=".com" />` | `<TextInput />` | No prefix or suffix slots |
+        | `<TextInput clearButton onClear={…} />` | `<TextInput />` plus your own Button | No built-in clear button |
+        | `<TextInput type="search" />` | `<TextInput type="search" />` | Unchanged. Every v3 text type still works, including `search` and `datetime-local` |
+        | All other native `<input>` attributes | Forwarded unchanged | Pass them as before |
+
+        ### Breaking changes
+
+        - **The v3 styling and slot props are TypeScript errors.** `fontSize`, `weight`, `padding`, `space`, `gap`, `radius`, `border`, `icon`, `iconRight`, `suffix`, `clearButton`, `onClear` and `customValidity` are not TextInput props. `prefix` still compiles, because it is a native HTML attribute, but it renders no text.
+        - **`customValidity` is replaced by `hasError`.** The old prop set the native validation message. The new one is styling plus `aria-invalid`. You own the message and where it appears.
+        - **`type` means text types only.** The type excludes `button`, `checkbox`, `color`, `file`, `hidden`, `image`, `radio`, `range`, `reset` and `submit`, but TypeScript does not enforce it, because the prop still accepts any string. Every text type from v3 still works.
+        - **`aria-invalid` follows `hasError`.** A hand-set `aria-invalid` is overwritten. Set `hasError` instead.
+        - **The width is no longer yours to set on the component.** TextInput fills its container. Size it from the parent.

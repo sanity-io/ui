@@ -1,0 +1,153 @@
+kind: sanity.pattern
+id: navigation
+name: Sidebar navigation pattern
+description: >-
+  Sanity UI has no built-in NavItem or SidebarLink component. This pattern shows
+  the canonical way to build keyboard-accessible sidebar navigation by composing
+  List + List.ButtonItem, instead of hand-building nav items from a native
+  button or Box as="button". Use this pattern for persistent sidebar navigation,
+  not for a popover menu.
+metadata:
+  tags:
+    - tutorial
+    - navigation
+    - sidebar
+    - nav item
+    - menu
+    - list
+    - badge
+    - keyboard accessible
+    - aria-current
+    - selected state
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Persistent sidebar links (not inside a popover menu).
+      - level: should
+        statement: Navigation items with icon + label + a badge/count at the end.
+      - level: should
+        statement: Items that show an active/selected state.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: plain-selectable-navigation-rows-prop
+        level: must
+        statement: Use `List.ButtonItem` for navigation rows.
+        tags: [development]
+      - id: prop-also-set-yourself-only
+        level: must
+        statement: When using `List.ButtonItem`'s `selected` prop, also set `aria-current` yourself. `selected` only sets `data-selected`, a styling hook — it carries no accessibility signal on its own. Pass `selected` conditionally (`selected={isActive || undefined}`) and pair it with `aria-current` so assistive technology learns which item is active.
+        tags: [accessibility]
+      - level: should
+        statement: Verify the selected state's contrast in your theme, and consider marking the active item with a bold label or a left border accent instead of relying on a selected background alone. Confirm the result meets WCAG AA in whichever theme is active.
+        tags: [visual-design]
+      - level: must-not
+        statement: Never use a native `<button>` or `<Box as="button">` with inline styles for navigation items. Hand-built nav items are the single most common source of unnecessary inline styles in test runs — agents create 10–12 CSS properties per nav item to replicate what Sanity UI's List/List.ButtonItem already provide.
+        tags: [development]
+      - level: must-not
+        statement: Don't use `Box as="button">` for a navigation item. It inherits browser button defaults (border, background, cursor) with no prop-based reset available.
+        tags: [development]
+      - level: must-not
+        statement: Don't use `<a>` without an `href` for a navigation item. An anchor without `href` is not keyboard-focusable.
+        tags: [accessibility]
+  - kind: guidelines
+    for: all
+    title: Collapsible trees
+    tags: [accessibility]
+    items:
+      - level: must
+        statement: 'Use nested lists with `aria-expanded` on each disclosure control for a collapsible navigation tree, not `role="tree"`. Wrap the whole thing in `<nav aria-label="…">`, mark the current page with `aria-current="page"`, and let every row stay reachable by Tab. This is what a site or section navigation is, and it needs no ARIA tree.'
+      - level: must
+        statement: |-
+          Treat `role="tree"` as a commitment to the full widget pattern. Miss any one and the role misleads screen reader users.
+
+          - One tab stop for the whole tree (roving tabindex)
+          - Arrow Up/Down between visible nodes
+          - Arrow Right/Left expands and collapses
+          - `aria-expanded` on every parent node
+          - `aria-level` on every `role="treeitem"`
+          - `aria-selected` when the tree carries a selection
+        checkedBy: manual
+      - level: must
+        statement: 'Give a subtree `role="group"`, never a second `role="tree"`. A tree cannot contain a tree — assistive technology announces two separate trees and the level count restarts at the nested one. One `tree` at the root, a `treeitem` per node, a `group` around each node''s children.'
+        checkedBy: manual
+      - level: should
+        statement: 'Render the same structure twice — inline and inside a Popover for narrow viewports — as two sibling trees, each with its own `aria-label`. Two trees side by side are valid. Nesting one inside the other is not.'
+      - level: must-not
+        statement: 'Don''t give every node `tabIndex={0}` inside a `role="tree"`. That makes the tree as many tab stops as it has rows, which is the cost the single-tab-stop pattern exists to remove. Exactly one node carries `tabIndex={0}`; the rest carry `tabIndex={-1}`.'
+      - level: must-not
+        statement: 'Don''t build a tree row from `Box`/`Flex` with `onClick`, `role="button"` and `tabIndex`. Use `List.ButtonItem` with `as="a"` and `href` for a navigation row, or `PressArea` for a custom surface. Both render a real control with keyboard support already wired.'
+
+  - kind: steps
+    for: all
+    ordered: false
+    title: Accessibility checklist
+    items:
+      - title: Navigation container uses `<Box as="nav" aria-label="...">`.
+      - title: Each item is keyboard-reachable and activatable (`Enter`/`Space`).
+      - title: Active item is marked `selected` + `aria-current` (List.ButtonItem).
+      - title: Icon-only items have `aria-label` (not needed if a text label is present).
+      - optional: true
+        title: Navigation group uses `VStack gap={1}` or `gap={2}` for target spacing.
+      - title: Selected state meets WCAG AA contrast (4.5:1) — test in your theme.
+  - kind: section
+    for: all
+    freeform:
+      - title: 'List + List.ButtonItem'
+        body: |-
+          Use `List` with `List.ButtonItem` for nav items. Pass `as="a"` and `href`: each row then renders a real link, and middle-click, "Open in new tab" and bookmarking work. `List.ButtonItem` also supports a `selected` state, which `Button` lacks.
+
+          ```tsx
+          import { Badge, Box, List, Text } from '@sanity/ui'
+          import { DocumentTextIcon } from '@sanity/icons/DocumentText'
+          import { CodeIcon } from '@sanity/icons/Code'
+
+          <Box as="nav" aria-label="Main navigation" padding={3}>
+            <List>
+              <List.ButtonItem
+                selected={activeSection === 'guides' || undefined}
+                aria-current={activeSection === 'guides' ? 'page' : undefined}
+                as="a"
+                href="/guides"
+                start={<Text size={1}><DocumentTextIcon /></Text>}
+                end={<Badge>{counts.guides}</Badge>}
+              >
+                <List.ItemText title="Guides" />
+              </List.ButtonItem>
+              <List.ButtonItem
+                selected={activeSection === 'api' || undefined}
+                aria-current={activeSection === 'api' ? 'page' : undefined}
+                as="a"
+                href="/api"
+                start={<Text size={1}><CodeIcon /></Text>}
+                end={<Badge>{counts.api}</Badge>}
+              >
+                <List.ItemText title="API References" />
+              </List.ButtonItem>
+            </List>
+          </Box>
+          ```
+
+          **Notes on the List approach:**
+          - The whole row is one link — focusable via `Tab`, and it follows the link on `Enter`.
+          - Unlike `Button`, it holds icon + label + a badge/count at the end via the `start` and `end` slots.
+          - No arrow-key navigation between items — each row is a separate Tab stop.
+          - `selected` sets `data-selected` only (a styling hook). Pass it conditionally (`selected={isActive || undefined}`) and add `aria-current` yourself so assistive technology gets the signal.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Build sidebar navigation with List + List.ButtonItem, never with a hand-built button or Box as="button".
+uses:
+  - to: list
+    note: Optional part.
+  - to: list-button-item
+    note: Optional part.
+  - to: badge

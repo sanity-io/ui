@@ -1,0 +1,237 @@
+kind: component
+id: flex
+name: Flex
+description: The lowest-level building block for laying out UI elements along a single axis.
+metadata:
+  tags:
+    - layout
+    - flex
+    - alignment
+    - row
+    - column
+    - responsive
+    - flexbox
+    - gap
+    - wrap
+    - direction
+    - justify
+    - align
+    - alignItems
+    - justifyContent
+    - flexDirection
+    - flexWrap
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To stack items vertically or horizontally. Flex defaults to horizontal.
+      - level: should
+        statement: 'To control alignment: center children, space them apart, or push one to the end.'
+      - level: should
+        statement: To create responsive layouts that change direction at breakpoints.
+      - level: should-not
+        statement: To stack items in a simple vertical column with even spacing — use VStack instead.
+        alternatives:
+          - to: v-stack
+      - level: should-not
+        statement: To group a few items in a horizontal row with even spacing — use HStack instead.
+        alternatives:
+          - to: h-stack
+      - level: should-not
+        statement: To create a two-axis grid — use Grid instead.
+        alternatives:
+          - to: grid
+      - level: should-not
+        statement: To wrap a single child with spacing or visual styling — use Box instead.
+        alternatives:
+          - to: box
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: api-essentials#sizing-is-a-css-string
+            rel: same-as
+      - id: flex-start-alignment-default
+        level: should
+        statement: Bias toward start-aligned content over center alignment for most interface elements. By default, children of a Flex container should use start alignment (alignItems='flex-start' or justifyContent='flex-start') unless center alignment is deliberately required by the design.
+        example:
+          title: How to satisfy this
+          description: 'Inspect the rendered layout and confirm that text, icons, and controls are left- or top-aligned by default. Check that center alignment is only applied where the design explicitly calls for it (for example, a dialog button row, a centered hero).'
+        checkedBy: manual
+      - id: flex-wrap-uses-gap
+        level: should
+        statement: Pair flexWrap='wrap' with the gap prop, not margin on child elements, to prevent item clipping in variable-count rows.
+        example:
+          title: How to satisfy this
+          description: Inspect the Flex element in the source and confirm it carries a gap prop alongside flexWrap='wrap'. Verify that child elements do not carry margin-top, margin-left, or equivalent shorthand values intended to create inter-item spacing.
+        checkedBy: manual
+      - refs:
+          - to: shared-foundations#layout-primitive-no-text-styles
+            rel: same-as
+        tags: [content]
+      - id: flex-no-inline-styles
+        level: must-not
+        statement: Flex elements carry no `style` attribute for anything a Flex prop or a dedicated component already provides.
+        example:
+          title: How to satisfy this
+          description: Review the JSX source and confirm the Flex element has no style={…} attribute. Where layout or visual adjustments are needed, use Flex props (gap, alignItems, etc.) or replace Flex with the appropriate component (Box, Card, etc.).
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - id: flex-reverse-dom-order-matches-visual
+        level: must-not
+        statement: Don't use row-reverse or column-reverse to change sort order — these only change visual order, not tab order. When a reverse direction is used, the DOM order of child elements must still match the intended reading and tab order.
+        example:
+          title: How to satisfy this
+          description: Tab through the Flex container using only the keyboard and confirm focus moves in the same sequence a sighted user would read the content. Inspect the DOM in browser DevTools and verify the source order of children reflects the correct reading sequence, not the reversed visual sequence.
+        checkedBy: manual
+      - id: flex-no-onclick
+        level: must-not
+        statement: 'Flex carries no `onClick` handler; it is a layout element, not an interactive one. Use Button for interactive surfaces.'
+        example:
+          title: How to satisfy this
+          description: Inspect the JSX source and confirm no onClick prop is present on any Flex element. If a clickable surface is needed, wrap the content in a Button component instead.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Use VStack or HStack for common vertical/horizontal layouts; reserve Flex for cases needing custom alignment or wrapping.
+      - level: must-not
+        statement: >-
+          Do not use `align` or `justify` as prop names. Use `alignItems` and `justifyContent`. Other names silently do nothing — no error, no effect.
+      - level: must-not
+        statement: Do not use `direction` or `wrap` as prop names. Use `flexDirection` and `flexWrap`.
+      - level: must-not
+        statement: 'Applying flex styles via inline styles on Box. Instead: Use the Flex component.'
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - refs:
+          - to: semantics#landmark-requirements
+            rel: same-as
+      - refs:
+          - to: semantics#list-semantics
+            rel: same-as
+      - refs:
+          - to: api-essentials#responsive-array-undefined-slot
+            rel: same-as
+      - level: should
+        statement: Flex provides layout along an axis. It does not add keyboard handling, focus management, or ARIA state. If you render Flex as a semantic element via `as`, you own the behavior that element requires.
+      - refs:
+          - to: shared-foundations#layout-primitive-as-not-behavioral
+            rel: same-as
+      - level: must-not
+        statement: 'Do not use `flex-direction: row-reverse` or `flex-direction: column-reverse` when children contain content users interact with or read. Do not use CSS `order` on Flex children. Screen readers and keyboard follow DOM order, not visual order (WCAG 1.3.2 A, WCAG 2.4.3 A). If visual reordering cannot be avoided, confirm the DOM order produces a logical reading sequence.'
+  - kind: section
+    for: agent
+    freeform:
+      - title: Responsive array breakpoints
+        body: |-
+          Every Flex prop that accepts `Responsive<T>` takes a breakpoint array. The Responsive pattern (`responsive`) has the breakpoint table and the rules for undefined slots.
+
+          ```tsx
+          // Column on mobile → row at 600px
+          <Flex
+            flexDirection={['column', undefined, 'row']}
+            gap={[2, undefined, 3]}
+            alignItems={['flex-start', undefined, 'center']}
+          >
+          ```
+
+alternatives:
+  - to: v-stack
+    note: Vertical list with an even gap between items
+  - to: h-stack
+  - to: grid
+    note: Two-axis layout for card grids and dashboards
+  - to: box
+    note: Simpler container for spacing and structure
+refs:
+  - to: responsive
+    rel: relates-to
+    note: Owns the breakpoint table for responsive arrays
+  - to: space
+    rel: relates-to
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/flex/Flex.tsx
+imports:
+  - platform: react
+    code: import { Flex } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        Props are renamed to match CSS: `direction`→`flexDirection`, `align`→`alignItems`, `justify`→`justifyContent`, `wrap`→`flexWrap`, `gapX`/`gapY`→`columnGap`/`rowGap`. The old names are silent no-ops, not TypeScript errors — do not assume they still work.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:flex --paths <paths> --toPackage @sanity/ui`.
+      guidance: |-
+        Flex in the new system replaces the `@sanity/ui` Flex. Core layout behavior is the same.
+
+        ### Key differences
+
+        - v5 components use CSS classes with a static stylesheet instead of `styled-components`.
+        - Props are named to match their CSS forms. `direction` → `flexDirection`, `align` → `alignItems`, `justify` → `justifyContent`, `wrap` → `flexWrap`.
+        - The new Flex sets `display` to `'flex'` by default.
+        - The new API has direct props for width, height, position, border, and similar attributes.
+        - `gapX`/`gapY` props renamed to `columnGap` and `rowGap`.
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `direction="column"` | `flexDirection="column"` | Renamed from `direction` to `flexDirection`. |
+        | `align="center"` | `alignItems="center"` | Renamed from `align` to `alignItems`. |
+        | `justify="space-between"` | `justifyContent="space-between"` | Renamed from `justify` to `justifyContent`. |
+        | `wrap="wrap"` | `flexWrap="wrap"` | Renamed from `wrap` to `flexWrap`. |
+        | `flex={1}` | `flexGrow={1}` | v3 used a `flex` shorthand on Box. Split into `flexGrow`, `flexShrink`, `flexBasis`. |
+        | — | `rowGap`, `columnGap` | New. Separate row and column gap control. |
+        | — | `tone` | New. Sets a semantic background tint. Unset, Flex has no background. Accepts `default`, `neutral`, `positive`, `suggest`, `caution`, and `critical`. |
+        | — | `width`, `minWidth`, `maxWidth` | New. Accept any CSS string. |
+        | — | `position`, `zIndex` | New. |
+        | — | `border`, `radius` | New. |
+
+        ### Breaking changes
+
+        - **`direction` renamed to `flexDirection`.** `<Flex direction="column">` does nothing. Use `<Flex flexDirection="column">`.
+        - **`align` renamed to `alignItems`.** `<Flex align="center">` does nothing. Use `<Flex alignItems="center">`.
+        - **`justify` renamed to `justifyContent`.** `<Flex justify="space-between">` does nothing. Use `<Flex justifyContent="space-between">`.
+        - **`wrap` renamed to `flexWrap`.** `<Flex wrap="wrap">` does nothing. Use `<Flex flexWrap="wrap">`. This is the most common source of 320px reflow failures.
+        - **`flex` prop removed.** `<Flex flex={1}>` does nothing. Use `flexGrow={1}`, `flexShrink={1}`, `flexBasis="0"` separately.
+        - **`styled-components` no longer used.** Custom styled-components extensions like `styled(Flex)` will not work.
+
+        ### Codemod
+
+        A codemod is available to make the changes above less painful. Run the following command with the path (or a space-separated list of paths) to the file or directory you want to migrate.
+
+        ```
+        pnpx @sanity/ui-codemod latest:flex --paths <paths> --toPackage @sanity/ui
+        ```
+
+        If an instance cannot be migrated or needs manual review, the codemod inserts a comment prefixed with “UI-POC-CODEMOD TODO”.

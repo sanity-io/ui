@@ -1,0 +1,170 @@
+kind: component
+id: text-area
+name: TextArea
+description: A multi-line text field for longer freeform text, like descriptions and comments.
+metadata:
+  tags: [textarea, form, input, multiline, text, text input, description, comment]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: For multi-line freeform text input — descriptions, comments, summaries.
+      - level: should-not
+        statement: For single-line freeform text input. Use TextInput instead.
+        alternatives:
+          - to: text-input
+      - level: should-not
+        statement: For rich text editing. Use a dedicated editor component.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: forms#pair-with-visible-label
+            rel: same-as
+      - level: must
+        statement: Mark an invalid field with `hasError`. It renders no message. Add the error text yourself and link it with `aria-describedby`.
+      - refs:
+          - to: error-messaging#name-what-failed
+            rel: same-as
+      - refs:
+          - to: forms#error-described-in-text
+            rel: same-as
+      - refs:
+          - to: forms#mark-optional-fields
+            rel: same-as
+      - refs:
+          - to: forms#stack-fields-vertically
+            rel: same-as
+      - level: should
+        statement: Set `rows` to fit amount of expected text. The default is 5.
+      - level: should
+        statement: Use `autoResize` when vertical space is limited and/or the length of text entered can greatly vary. Pair it with `maxHeight`, such as `maxHeight="10rem"`. A long entry then scrolls instead of pushing the page down.
+      - level: should
+        statement: Use `density="loose"` in forms with wide spacing. `regular` is the default. Give every field in one form the same density.
+      - level: should
+        statement: Use placeholders that are fully visible within the bounds of the input.
+      - refs:
+          - to: shared-foundations#error-state-never-disabled
+            rel: same-as
+      - refs:
+          - to: forms#placeholder-not-a-label
+            rel: same-as
+      - level: must-not
+        statement: Don't use `readOnly` for long text people need to read or copy. A read-only TextArea ignores the pointer and mouse users can't scroll or select its text. Show the text with Text instead.
+        alternatives:
+          - to: text
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: Don't set `rows` to give an `autoResize` field a starting height. The field sizes to its content and starts one line tall. Browsers without CSS `field-sizing` ignore `autoResize` and use `rows`.
+      - level: must-not
+        statement: Don't set `aria-invalid` on TextArea by hand. TextArea writes `aria-invalid` from `hasError` after your props and overwrites a hand-set value. Use `hasError`.
+      - level: must-not
+        statement: >-
+          Don't pass layout or spacing props to TextArea. It takes the native textarea attributes plus `autoResize`, `density`, `hasError` and `maxHeight`. `margin`, `padding`, `flexGrow` and the like are TypeScript errors. TextArea always fills its container's width. Size it and space it from a wrapping Box or Flex.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - refs:
+          - to: forms#label-available-to-screen-readers
+            rel: same-as
+          - to: forms#programmatic-name-required
+            rel: same-as
+          - to: forms#border-contrast
+            rel: same-as
+          - to: forms#placeholder-contrast
+            rel: same-as
+          - to: forms#error-prop-needs-visible-message
+            rel: same-as
+          - to: forms#field-group-name
+            rel: same-as
+alternatives:
+  - to: text-input
+refs:
+  - href: https://www.figma.com/design/NWmchNlsNdG66VBaCsTdSL/pjo-ui4-component-buildout?node-id=38-85
+    rel: design
+    role: Figma component
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/text-area/TextArea.tsx
+imports:
+  - platform: react
+    code: import { TextArea } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: enabled
+    description: Resting state. Backdrop background with a high separator border. The border carries the states below; the background only moves for `disabled` and `readOnly`.
+  - traitType: state
+    kind: boolean
+    id: hovered
+    description: The border shifts one lightness step — darker in light mode, lighter in dark mode. In the error state it shifts from the error border.
+  - traitType: state
+    kind: boolean
+    id: focused
+    description: Focus outline on `:focus-visible`, offset from the border.
+  - traitType: state
+    kind: boolean
+    id: disabled
+    description: 'Inert background and a low separator border, with the text in the inert foreground color. `pointer-events: none` makes the field unclickable.'
+  - traitType: state
+    kind: boolean
+    id: read-only
+    description: 'Set with `readOnly`. Same inert background and low border as `disabled`, but the text keeps its normal color. `pointer-events: none` stops the mouse from scrolling or selecting the text. The field can still take keyboard focus.'
+  - traitType: state
+    kind: boolean
+    id: error
+    description: Set with the `hasError` prop, which adds `aria-invalid="true"` to the textarea. The error styling keys off that attribute. The border turns the error separator color and the text the error foreground color. It carries no message — supply that yourself.
+  - traitType: variant
+    kind: enum
+    id: density
+    description: Sets the field's padding. The type size stays at body size 1.
+    values:
+      - id: regular
+        description: Default. Horizontal padding {space-2}, vertical padding {space-1}.
+      - id: loose
+        description: Horizontal padding {space-3}, vertical padding {space-2}. For forms with wide spacing.
+  - traitType: variant
+    kind: boolean
+    id: autoResize
+    description: Grows and shrinks the field with its content, through CSS `field-sizing`. Ignores `rows`. Cap it with `maxHeight`, a CSS length that can vary by breakpoint.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        TextArea is now a plain native textarea, without the sizing props. One `density` prop sets the spacing, and a boolean named `hasError` marks validation. `autoResize` and `maxHeight` are new.
+
+        ### Detailed list of differences
+
+        | v3 pattern | v5 pattern | Notes |
+        | :---- | :---- | :---- |
+        | `<TextArea fontSize={2} weight="medium" />` | `<TextArea />` | The type size is fixed at body size 1, in regular weight |
+        | `<TextArea padding={3} />` | `<TextArea density="loose" />` | `density` is `regular` or `loose`. Neither value reproduces a v3 `padding={3}` exactly |
+        | `<TextArea radius={2} border={false} />` | `<TextArea />` | The radius is fixed at step 2, and the border is always drawn |
+        | `<TextArea customValidity="Required" />` | `<TextArea hasError />` plus your own message | `hasError` sets `aria-invalid` and recolors the border and text. It renders no text |
+        | `<TextArea rows={…} />` | `<TextArea rows={…} />` | Unchanged. The default is now 5 |
+        | No v3 equivalent | `<TextArea autoResize maxHeight="10rem" />` | Grows with the content, up to `maxHeight` |
+        | All other native `<textarea>` attributes | Forwarded unchanged | Pass them as before |
+
+        ### Breaking changes
+
+        - **The v3 styling props are TypeScript errors.** `fontSize`, `weight`, `padding`, `radius`, `border` and `customValidity` are not TextArea props.
+        - **`hasError` replaces `customValidity`.** The old prop set the native validation message. The new one is styling plus `aria-invalid`. You own the message and where it appears.
+        - **`aria-invalid` follows `hasError`.** A hand-set `aria-invalid` is overwritten. Set `hasError` instead.
+        - **No resize handle.** People can't drag the corner to resize the field. Set `rows`, or use `autoResize`.
+        - **The width is no longer yours to set on the component.** TextArea fills its container. Size it from the parent.

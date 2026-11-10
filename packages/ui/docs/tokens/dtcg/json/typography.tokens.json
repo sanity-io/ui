@@ -1,0 +1,354 @@
+{
+  "body-0": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 10
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "body-1": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 13
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "body-2": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 16
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "body-3": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 18.75
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "body-4": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 21.5
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "code-0": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace",
+      "fontSize": {
+        "unit": "px",
+        "value": 10
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "code-1": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace",
+      "fontSize": {
+        "unit": "px",
+        "value": 13
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "code-2": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace",
+      "fontSize": {
+        "unit": "px",
+        "value": 16
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "code-3": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace",
+      "fontSize": {
+        "unit": "px",
+        "value": 18.75
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "code-4": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace",
+      "fontSize": {
+        "unit": "px",
+        "value": 21.5
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.5
+    }
+  },
+  "heading-0": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 13
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "heading-1": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 16
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "heading-2": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 21
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "heading-3": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 27
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "heading-4": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 33
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": -0.5
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "heading-5": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 38
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": -1
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "label-0": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 8.1
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0.5
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "label-1": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 9.5
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0.5
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "label-2": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 10.8
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0.5
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "label-3": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 12.25
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "label-4": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 13.6
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0
+      },
+      "lineHeight": 1.25
+    }
+  },
+  "label-5": {
+    "$type": "typography",
+    "$value": {
+      "fontFamily": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif",
+      "fontSize": {
+        "unit": "px",
+        "value": 15
+      },
+      "fontWeight": 400,
+      "letterSpacing": {
+        "unit": "px",
+        "value": 0.5
+      },
+      "lineHeight": 1.25
+    }
+  }
+}

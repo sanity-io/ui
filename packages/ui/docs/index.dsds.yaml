@@ -1,0 +1,518 @@
+$schema: https://designsystemdocspec.org/v0.23.1/dsds.bundled.yaml
+schemaVersion: 0.23.1
+name: Sanity UI
+entries:
+  - kind: system
+    id: sanity-ui
+    name: Sanity UI
+    description: The React component library and design system behind Sanity Studio.
+    metadata:
+      status:
+        status: beta
+      organization: Sanity
+      url: https://www.sanity.io/ui
+      version: 5.x-alpha
+      platforms:
+        - react
+      sourceRoot: ../../..
+    refs:
+      - href: https://www.sanity.io/ui
+        rel: relates-to
+        role: Sanity UI homepage
+      - href: https://github.com/sanity-io/ui
+        rel: source
+        role: Source on GitHub
+shared:
+  - id: shared-foundations
+    name: Foundations
+    description: Cross-cutting principles that apply to every component and pattern in Sanity UI. When a guideline is unclear, trace it back here.
+    metadata:
+      tags:
+        - concept
+        - foundations
+        - principles
+        - accessibility
+        - semantics
+        - color
+        - spacing
+        - motion
+        - iconography
+        - behavior
+        - purpose
+        - design system
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - id: wcag-22-aa-baseline
+            level: must
+            statement: WCAG 2.2 AA is a hard requirement for all work. Keyboard nav, screen reader support, and touch targets are required from the start — not added after.
+          - id: semantics-mirror-visuals
+            level: must
+            statement: Semantics must mirror visuals. Spacing groups visually. Color signals meaning. Motion marks a state change. None of that reaches assistive technology unless the same information appears in markup. Use semantic HTML, ARIA roles, and ARIA properties to express what the visual layer shows.
+          - id: container-inside-scroll-box
+            level: must
+            statement: Place `Container` inside the scroll `Box`, not around it. `Container` only constrains max-width; the scroll `Box` owns `flexGrow` and `overflowY`. Wrapping the scroll box in a Container caps the scroll region instead of the content.
+          - id: indicator-stack-for-adjacent-dots
+            level: must
+            statement: Use `IndicatorStack` whenever two or more `Indicator` dots appear side by side. It applies the cut-out mask between adjacent dots; bare Indicators placed next to each other render without it and read as one blurred shape.
+          - id: icon-only-control-needs-name
+            level: must
+            statement: 'Every icon-only control has an `aria-label` on the control itself. That means an IconButton, or a Button with an icon and no `text`. The icon needs nothing: Icon hides itself when it has no `aria-label`, and IconButton hides its own icon. A tooltip does not supply an accessible name.'
+            checks:
+              - href: ./evals/cases.yaml
+                role: agent-test
+            checkedBy: assisted
+            refines:
+              - to: button#button-icon-only-accessible-name
+              - to: quick-start#add-aria-label-to-every-icon-only-button-a-tooltip-does-not-set-an-accessible-name
+            $extensions:
+              io.jev:
+                type: boolean
+          - id: aria-disabled-keeps-focus
+            level: must
+            statement: Use `aria-disabled` instead of the HTML `disabled` attribute when a button must stay in the tab order. It keeps the button focusable but blocks the action (WCAG 2.1.1 A).
+            tags:
+              - accessibility
+          - id: aria-pressed-toggle
+            level: must
+            statement: Set `aria-pressed` on a two-state toggle button (favorite, mute, follow). Keep the button's label — its `text` or `aria-label` — describing the action, not the state, and keep it the same in every state. Screen readers announce the pressed state on their own.
+            tags:
+              - accessibility
+          - id: inner-spacing-smaller-than-outer
+            level: must
+            statement: Inner spacing within a group must be smaller than the space around it, by at least one step on the scale. Equal inner and outer spacing hides that the container is one group.
+          - id: destructive-actions-use-critical-tone
+            level: must
+            statement: A destructive action should use `tone="critical"`. Destructive means the action removes data — delete, archive, revoke, terminate. All destructive actions should display an icon that reads as destructive and use a verb in the label naming what is lost.
+            checks:
+              - href: ./evals/cases.yaml
+                role: agent-test
+            checkedBy: assisted
+            refines:
+              - to: button#most-buttons-tertiary
+              - to: layouts#give-destructive-actions-tone-critical-and-an-erroroutlineicon-through-iconstart-iconstart-erroroutlineicon
+            $extensions:
+              io.jev:
+                type: boolean
+          - id: tone-signals-state
+            level: must
+            statement: 'Use `tone` only to signal a real state: `positive` for success, `caution` for a warning, `critical` for an error or a destructive action, and `suggest` for guidance or a soft nudge. Everything else stays `neutral`. Never apply a tone for decoration or emphasis.'
+            checks:
+              - href: ./evals/cases.yaml
+                role: agent-test
+            checkedBy: assisted
+            refs:
+              - to: shared-foundations#tone-paired-with-second-channel
+                rel: relates-to
+              - to: shared-foundations#destructive-actions-use-critical-tone
+                rel: relates-to
+            $extensions:
+              io.jev:
+                type: boolean
+          - id: tone-paired-with-second-channel
+            level: must
+            statement: Tone is only the colour channel, so it never carries a state alone. A toned message must either lead with the state in words or carry an icon that reinforces it. Leading with the state looks like "**Error:** Process timed out. Restart the process to try again." Text that only describes what happened, as in `<Text tone="critical">Timed out</Text>`, does neither and needs the icon. A status dot, a coloured word or a tinted card with nothing else beside it fails this rule.
+            checks:
+              - href: ./evals/cases.yaml
+                role: agent-test
+            checkedBy: assisted
+            refines:
+              - to: color-guidelines#second-channel-required
+            refs:
+              - to: shared-foundations#tone-signals-state
+                rel: relates-to
+            $extensions:
+              io.jev:
+                type: boolean
+          - id: form-control-visible-label-is-the-name
+            level: should
+            statement: Name a Checkbox, Radio or Switch through a linked label element (id and htmlFor), aria-label or aria-labelledby. These controls render no label of their own, so the name must come from one of these.
+          - id: form-control-repeated-rows-use-visuallyhidden
+            level: should
+            statement: When the visible label would repeat across rows, wrap a fully descriptive label in `VisuallyHidden` rather than showing the repeated text. The linked label element is the accessible name, so hiding a more descriptive version of its text keeps a single accessible name in the DOM instead of introducing a second, separately maintained one.
+          - id: form-control-aria-label-is-the-fallback
+            level: should
+            statement: Use `aria-label` or `aria-labelledby` only when the label content can't be restructured that way — for example, when the descriptive text already exists elsewhere in the DOM. Both attributes forward straight to the underlying `<input>`, but they create a second source of the accessible name that can drift out of sync with the visible label.
+            refines:
+              - to: forms#aria-label-overrides-name
+          - id: form-control-aria-label-includes-visible-text
+            level: should
+            statement: When setting `aria-label` on a Checkbox, Radio or Switch, include the visible `label` text inside it. This satisfies WCAG 2.5.3 (Label in Name). Voice-control users can then target the control by what they see on screen.
+          - id: least-that-does-the-job
+            level: should
+            statement: "Use the least that does the job. Each foundation provides a constrained set: a spacing scale, a tone family, motion tokens, and elevation levels. The set exists so you don't invent. One emphasized element draws attention; three cancel each other out."
+            refines:
+              - to: shared-foundations#use-the-constrained-token-set-spacing-scale-tone-family-motion-tokens-elevation-levels-do-not-invent-custom-values-outside-the-system
+          - id: define-state-model-first
+            level: should
+            statement: Define the complete state model before any visual design. Name every state, every transition, and every copy slot. A spec is not done until all keyboard behaviors are defined, all states are verifiable, and all ARIA properties are assigned.
+          - id: every-choice-has-a-job
+            level: should
+            statement: Every design choice should have a job. Color communicates status. Motion marks a state change. Icons support recognition. Elevation signals layering. If a choice has no named job, leave it out.
+          - id: prefer-component-over-native-element
+            level: should
+            statement: 'Reach for the design-system component before a native element that has a direct equivalent: `Box` (or `VStack`/`HStack`/`Flex`/`Grid`) instead of `div`, `Text` instead of `p` or `span`, `Heading` instead of `h1`–`h6`, `Button` instead of `button`, `Link` instead of `a`, `List` instead of `ul`/`ol`, `Divider` instead of `hr`. A native element used where a component exists opts out of the theme, the spacing scale, and the accessibility behaviour the component already carries. Elements with no component equivalent stay native — `table` and its parts, `form`, `section`, `main`, `label`.'
+            checks:
+              - href: ./evals/cases.yaml
+                role: agent-test
+            checkedBy: assisted
+            $extensions:
+              io.jev:
+                type: boolean
+          - id: no-emojis
+            level: must-not
+            statement: Never use emojis in any way outside of user reactions. Emojis must never be used for decorative purposes. If a visual symbol is necessary, use Icon instead.
+            checks:
+              - href: ./evals/cases.yaml
+                role: agent-test
+            checkedBy: assisted
+            $extensions:
+              io.jev:
+                type: boolean
+          - id: error-state-never-disabled
+            level: must-not
+            statement: Never disable an input that is in an error or critical state. A disabled control cannot receive focus. The user cannot reach the field to correct the problem. Assistive technology skips disabled inputs, which strands the error message without the element it describes. Keep the field enabled and carry the problem through tone, an accessible description, and visible text. When a field must stop accepting input, clear the error state first, or mark it read-only instead.
+          - id: card-not-for-structural-regions
+            level: must-not
+            statement: Do not use `Card` for structural UI regions — toolbars, sidebars, nav headers, scroll wrappers. Card carries a visual surface (background, border, shadow); a structural region needs layout only. Use `Box` or `Flex` instead.
+          - id: install-alpha-not-ui-poc
+            level: must-not
+            statement: Do not install `@sanity-labs/ui-poc`. It was the internal name of Sanity UI 5 before the merge into `@sanity/ui`. Install `@sanity/ui@alpha`.
+          - id: layout-primitive-as-not-behavioral
+            level: must-not
+            statement: Do not use `as` to render `<button>`, `<dialog>`, `<select>`, `<details>`, `<summary>`, or `<fieldset>` on a layout primitive. Box, Container, Flex and Grid do not fulfil the keyboard, focus, or ARIA contracts those elements require (WCAG 4.1.2 A). Use the matching Sanity UI component instead.
+          - id: layout-primitive-no-text-styles
+            level: should
+            statement: Box, Container, Flex and Grid set no text styles. They set no font size, line height, weight or color, and take no inline text styles. Use Text or Heading for text.
+          - id: icon-not-sole-content-of-control
+            level: must-not
+            statement: Don't use Icon inside an interactive element. Use Button, with `iconStart` if it needs an icon, or IconButton when the icon is the only content.
+            checks:
+              - href: ./evals/cases.yaml
+                role: agent-test
+            checkedBy: assisted
+            refines:
+              - to: button#don-t-use-button-without-a-text-label-button-relies-on-the-text-label-to-describe-its-purpose-use-iconbutton-in-cases-where-the-icon-is-the-only-visual-indicator
+            $extensions:
+              io.jev:
+                type: boolean
+      - kind: guidelines
+        for: agent
+        framing: how-to-use
+        items:
+          - level: must
+            statement: 'Use the constrained token set: spacing scale, tone family, motion tokens, elevation levels. Do not invent custom values outside the system.'
+          - level: should
+            statement: Design token values ship from `@sanity-labs/design-tokens` as DTCG tokens and CSS custom properties. Each token group has a file in the package's `docs/tokens/` folder, with its values in `docs/tokens/dtcg/json/`. The groups are `color`, `container-widths`, `font-family`, `font-weight`, `radius`, `semantic`, `shadow`, `space` and `typography`.
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: Foundations are the shared principles beneath every component and pattern in Sanity UI. Each foundation — color, spacing, motion — draws from a small set of cross-cutting rules. When a guideline is unclear, trace it back to the nearest principle here.
+          - title: How the foundations connect
+            body: |-
+              Each foundation is self-contained, but they share constants and rules.
+
+              **Interaction and all other foundations.** Each component state requires resolved color contrast, a motion transition, a content slot, correct spacing, and accessible names. A spec is not complete until all six resolve.
+
+              **Color and accessibility.** Contrast ratios and CVD simulation live in both. The accessibility foundation owns the required numbers; color owns the tones.
+
+              **Spacing and interaction.** The 24px hit-area floor is a shared constant. Visual gap and hit area are separate properties — one does not set the other.
+
+              **Motion and accessibility.** Reduced-motion support is a hard safety rule. The motion token layer resolves it in CSS. JavaScript-driven animation must check the preference at runtime.
+
+              **Iconography and content.** The accessible name on an icon-only control follows the content naming rules: one concept, one plain-language name, consistent across every surface.
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        title: Rules shared across components and patterns
+        items:
+          - id: table-uses-native-elements
+            level: must
+            statement: 'Build table structure from native HTML elements: `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>` and `<td>`. Do not use `Box as="table"` or `Box as="tr"`: Box applies `display: block`, which breaks the table layout model and stacks the cells.'
+          - id: table-has-caption
+            level: must
+            statement: 'Give every table a `<caption>`. It may be visually hidden, but it must be present: screen readers announce it before the table.'
+          - id: page-has-one-main
+            level: must
+            statement: A page has exactly one `<main>` landmark. Render the primary content region with `as="main"`, unless an outer shell already provides one; never nest a second. Without a `<main>`, screen reader users get no skip target and axe reports landmark-one-main.
+          - id: shell-regions-are-landmarks
+            level: must
+            statement: 'Render each shell region as its landmark: `as="nav"` for navigation, `as="main"` for the content, and `as="aside"` for an inspector. These give screen reader users the page''s structure.'
+          - id: shell-state-from-matches-desktop
+            level: must
+            statement: Initialize the shell's open state and `isDesktop` with `matchesDesktop()`, not `true`. The navigation then starts open on desktop and closed on mobile, with no flash of the wrong state on the first render.
+          - id: main-region-min-width-zero
+            level: must
+            statement: Set `minWidth="0"` on the flex child that holds the main content. Without it, wide content or a long heading pushes the layout past the viewport.
+          - id: shell-min-height-not-height
+            level: must
+            statement: Use `minHeight="100vh"` on the outer container, not `height="100vh"`. `height` stops the layout from growing taller than the viewport.
+          - id: selected-is-attribute-presence
+            level: must
+            statement: '`selected` works on attribute presence, not value: `selected={false}` looks the same as `selected={true}`. Pass `selected={isSelected || undefined}` so the prop is left out when the item is not selected.'
+          - id: navigating-row-is-a-link
+            level: must
+            statement: 'A row that navigates renders as a link: pass `as="a"` and `href`, not `onClick`. Middle-click and "Open in new tab" then work.'
+          - id: card-no-layout-props
+            level: must-not
+            statement: 'Do not pass layout or padding props to Card: `padding`, `flexGrow`, `minWidth`, `overflow` and the like are TypeScript errors. Card sets its padding with `density`. Put layout on a Box around the Card.'
+            checks:
+              - href: ./evals/cases.yaml
+                role: agent-test
+            checkedBy: assisted
+            $extensions:
+              io.jev:
+                type: boolean
+          - id: card-has-no-onclick
+            level: must-not
+            statement: Do not put `onClick` on Card; it has none. To make a card clickable, wrap its content in PressArea, which renders a real `<button>` or `<a>`, or use a List.ButtonItem row.
+          - id: table-not-simulated-with-flex
+            level: must-not
+            statement: Do not use Flex or Grid to simulate a table. It has no row or cell semantics, so screen readers cannot announce row counts or move by column.
+refs:
+  - href: ./components/avatar.dsds.yaml
+    rel: file
+    role: Avatar (component)
+  - href: ./components/avatar-counter.dsds.yaml
+    rel: file
+    role: AvatarCounter (component)
+  - href: ./components/avatar-stack.dsds.yaml
+    rel: file
+    role: AvatarStack (component)
+  - href: ./components/badge.dsds.yaml
+    rel: file
+    role: Badge (component)
+  - href: ./components/box.dsds.yaml
+    rel: file
+    role: Box (component)
+  - href: ./components/button.dsds.yaml
+    rel: file
+    role: Button (component)
+  - href: ./components/card.dsds.yaml
+    rel: file
+    role: Card (component)
+  - href: ./components/checkbox.dsds.yaml
+    rel: file
+    role: Checkbox (component)
+  - href: ./components/code.dsds.yaml
+    rel: file
+    role: Code (component)
+  - href: ./components/container.dsds.yaml
+    rel: file
+    role: Container (component)
+  - href: ./components/dialog.dsds.yaml
+    rel: file
+    role: Dialog (component)
+  - href: ./components/divider.dsds.yaml
+    rel: file
+    role: Divider (component)
+  - href: ./components/eyebrow.dsds.yaml
+    rel: file
+    role: Eyebrow (component)
+  - href: ./components/flex.dsds.yaml
+    rel: file
+    role: Flex (component)
+  - href: ./components/grid.dsds.yaml
+    rel: file
+    role: Grid (component)
+  - href: ./components/h-stack.dsds.yaml
+    rel: file
+    role: HStack (component)
+  - href: ./components/heading.dsds.yaml
+    rel: file
+    role: Heading (component)
+  - href: ./components/hotkeys.dsds.yaml
+    rel: file
+    role: Hotkeys (component)
+  - href: ./components/icon-button.dsds.yaml
+    rel: file
+    role: IconButton (component)
+  - href: ./components/icon.dsds.yaml
+    rel: file
+    role: Icon (component)
+  - href: ./components/indicator-stack.dsds.yaml
+    rel: file
+    role: IndicatorStack (component)
+  - href: ./components/indicator.dsds.yaml
+    rel: file
+    role: Indicator (component)
+  - href: ./components/inline.dsds.yaml
+    rel: file
+    role: Inline (component)
+  - href: ./components/kbd.dsds.yaml
+    rel: file
+    role: KBD (component)
+  - href: ./components/link.dsds.yaml
+    rel: file
+    role: Link (component)
+  - href: ./components/list-button-item.dsds.yaml
+    rel: file
+    role: List.ButtonItem (component)
+  - href: ./components/list-item-image.dsds.yaml
+    rel: file
+    role: List.ItemImage (component)
+  - href: ./components/list-item-text.dsds.yaml
+    rel: file
+    role: List.ItemText (component)
+  - href: ./components/list-item.dsds.yaml
+    rel: file
+    role: List.Item (component)
+  - href: ./components/list.dsds.yaml
+    rel: file
+    role: List (component)
+  - href: ./components/popover.dsds.yaml
+    rel: file
+    role: Popover (component)
+  - href: ./components/press-area.dsds.yaml
+    rel: file
+    role: PressArea (component)
+  - href: ./components/radio.dsds.yaml
+    rel: file
+    role: Radio (component)
+  - href: ./components/select.dsds.yaml
+    rel: file
+    role: Select (component)
+  - href: ./components/skip-to-content.dsds.yaml
+    rel: file
+    role: SkipToContent (component)
+  - href: ./components/spinner.dsds.yaml
+    rel: file
+    role: Spinner (component)
+  - href: ./components/switch.dsds.yaml
+    rel: file
+    role: Switch (component)
+  - href: ./components/tabs.dsds.yaml
+    rel: file
+    role: Tabs (component family)
+  - href: ./components/tab.dsds.yaml
+    rel: file
+    role: Tabs.Tab (component)
+  - href: ./components/tabs-list.dsds.yaml
+    rel: file
+    role: Tabs.List (component)
+  - href: ./components/tabs-panel.dsds.yaml
+    rel: file
+    role: Tabs.Panel (component)
+  - href: ./components/text.dsds.yaml
+    rel: file
+    role: Text (component)
+  - href: ./components/text-area.dsds.yaml
+    rel: file
+    role: TextArea (component)
+  - href: ./components/text-input.dsds.yaml
+    rel: file
+    role: TextInput (component)
+  - href: ./components/tooltip-group.dsds.yaml
+    rel: file
+    role: TooltipGroup (component)
+  - href: ./components/tooltip.dsds.yaml
+    rel: file
+    role: Tooltip (component)
+  - href: ./components/v-stack.dsds.yaml
+    rel: file
+    role: VStack (component)
+  - href: ./components/visually-hidden.dsds.yaml
+    rel: file
+    role: VisuallyHidden (component)
+  - href: ./foundations/accessibility-guidelines.dsds.yaml
+    rel: file
+    role: Accessibility guidelines (sanity.foundation)
+  - href: ./foundations/color-guidelines.dsds.yaml
+    rel: file
+    role: Color guidelines (sanity.foundation)
+  - href: ./foundations/content-guidelines.dsds.yaml
+    rel: file
+    role: Content guidelines (sanity.foundation)
+  - href: ./foundations/semantics.dsds.yaml
+    rel: file
+    role: Semantics (sanity.foundation)
+  - href: ./foundations/spacing-guidelines.dsds.yaml
+    rel: file
+    role: Spacing guidelines (sanity.foundation)
+  - href: ./foundations/typography-guidelines.dsds.yaml
+    rel: file
+    role: Typography guidelines (sanity.foundation)
+  - href: ./overview/component-reference.dsds.yaml
+    rel: file
+    role: Component reference (sanity.guide)
+  - href: ./overview/designer-contribution-model.dsds.yaml
+    rel: file
+    role: Sanity Design System's design contribution model (sanity.guide)
+  - href: ./overview/developer-contribution-model.dsds.yaml
+    rel: file
+    role: Developer contribution model (sanity.guide)
+  - href: ./overview/api-essentials.dsds.yaml
+    rel: file
+    role: API essentials (sanity.guide)
+  - href: ./overview/installation.dsds.yaml
+    rel: file
+    role: Installation (sanity.guide)
+  - href: ./overview/quick-start.dsds.yaml
+    rel: file
+    role: Quick start (sanity.guide)
+  - href: ./patterns/confirmation-dialogs.dsds.yaml
+    rel: file
+    role: Confirmation & action dialogs (sanity.pattern)
+  - href: ./patterns/error-messaging.dsds.yaml
+    rel: file
+    role: Error messaging (sanity.pattern)
+  - href: ./patterns/forms.dsds.yaml
+    rel: file
+    role: Forms and form copy (sanity.pattern)
+  - href: ./patterns/layouts.dsds.yaml
+    rel: file
+    role: Layout guidelines (sanity.pattern)
+  - href: ./patterns/loading-states.dsds.yaml
+    rel: file
+    role: Loading states (sanity.pattern)
+  - href: ./patterns/messaging.dsds.yaml
+    rel: file
+    role: Messaging (sanity.pattern)
+  - href: ./patterns/navigation.dsds.yaml
+    rel: file
+    role: Sidebar navigation pattern (sanity.pattern)
+  - href: ./patterns/responsive.dsds.yaml
+    rel: file
+    role: Responsive (sanity.pattern)
+  - href: ./tokens/color.dsds.yaml
+    rel: file
+    role: Color palette (entry)
+  - href: ./tokens/container-widths.dsds.yaml
+    rel: file
+    role: Container widths (entry)
+  - href: ./tokens/content.dsds.yaml
+    rel: file
+    role: Content tokens (demo) (entry)
+  - href: ./tokens/font-family.dsds.yaml
+    rel: file
+    role: Font families (entry)
+  - href: ./tokens/font-weight.dsds.yaml
+    rel: file
+    role: Font weights (entry)
+  - href: ./tokens/radius.dsds.yaml
+    rel: file
+    role: Radius scale (entry)
+  - href: ./tokens/semantic.dsds.yaml
+    rel: file
+    role: Semantic tokens (entry)
+  - href: ./tokens/shadow.dsds.yaml
+    rel: file
+    role: Shadow scale (entry)
+  - href: ./tokens/space.dsds.yaml
+    rel: file
+    role: Space scale (entry)
+  - href: ./tokens/typography.dsds.yaml
+    rel: file
+    role: Typography styles (entry)
+  - href: ./overview/resources.dsds.yaml
+    rel: file
+    role: Resources (sanity.guide)
+  - href: ./guides/faq.dsds.yaml
+    rel: file
+    role: Sanity UI 5 FAQ (sanity.guide)
+  - href: ./icons.dsds.yaml
+    rel: file
+    role: Sanity icon library (@sanity/icons)

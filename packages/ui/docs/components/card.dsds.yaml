@@ -1,0 +1,317 @@
+kind: component
+id: card
+name: Card
+description: Groups related content into a single visual element.
+metadata:
+  tags: [layout, container, surface, card, panel, tile, region, status, tone]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To group related content on a distinct background surface.
+      - level: should
+        statement: To create visual separation between content regions.
+      - level: should
+        statement: To wrap content that needs consistent internal padding and rounded corners.
+      - id: layout-without-distinct-visual-surface
+        level: should-not
+        statement: For layout without a distinct visual surface — use Box or Flex.
+        alternatives:
+          - to: box
+          - to: flex
+      - level: should-not
+        statement: For structural UI regions like sidebars and toolbars — use Box or Flex.
+        alternatives:
+          - to: box
+          - to: flex
+      - level: should-not
+        statement: For anything the user activates — use Button.
+        alternatives:
+          - to: button
+      - level: must-not
+        statement: To contain large parts of an interface that typically represent a section or large surface area. Use Box or Flex instead.
+        alternatives:
+          - to: box
+          - to: flex
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: shared-foundations#tone-signals-state
+            rel: same-as
+      - refs:
+          - to: shared-foundations#tone-paired-with-second-channel
+            rel: same-as
+      - id: density-matches-context
+        level: should
+        statement: Use density to match the surrounding layout density, so the Card's density prop matches the density used by adjacent or sibling components in the same layout region.
+        example:
+          title: How to satisfy this
+          description: Set density='compact' when the card appears inside a high-density list or table. Set density='loose' when the card is a featured or standalone element in a low-density layout. Leave density at the default 'regular' when the surrounding layout uses standard spacing.
+        checkedBy: manual
+      - id: card-wrapped-for-layout
+        level: should
+        statement: Wrap Card in Box or Flex to control layout sizing — Card handles appearance, the wrapper handles position — so layout sizing props like width, height, flexGrow, overflow, and position are applied to that Box or Flex wrapper, not directly to Card.
+        example:
+          title: How to satisfy this
+          description: Inspect the component tree and confirm that sizing or positioning props appear on a Box or Flex element that is the direct parent of Card. Confirm that the Card element itself carries only density, tone, margin, and as props.
+        checkedBy: manual
+      - refs:
+          - to: shared-foundations#card-not-for-structural-regions
+            rel: same-as
+      - id: no-nested-cards
+        level: must-not
+        statement: Don't nest cards — no Card element should render as a direct or indirect descendant of another Card element. Use Box, Flex, or VStack for internal layout within a card.
+        example:
+          title: How to satisfy this
+          description: Inspect the rendered component tree and confirm there is no Card inside another Card. Use Box, Flex, or VStack for all internal layout structure within a Card.
+        checkedBy: manual
+      - id: no-onclick-on-card
+        level: must-not
+        statement: Card carries no `onClick` or other interaction handler; interactive behaviour lives on a Button or PressArea instead.
+        example:
+          title: How to satisfy this
+          description: Inspect the component tree and confirm that Card has no onClick, onKeyDown, onPointerDown, or similar event handler props. Use Button for actions where keyboard accessibility and focus management are required.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - id: no-inline-style-for-spacing
+        level: must-not
+        statement: 'Card elements carry no `style` attribute setting padding or border-radius. Card has no `padding` or `radius` props; spacing comes from `density`.'
+        example:
+          title: How to satisfy this
+          description: Inspect the Card element's props in the component tree and confirm no style prop is present with padding or border-radius values. Use the density prop to control padding and border-radius through the design token scale.
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        $extensions:
+          io.jev:
+            type: boolean
+      - id: no-layout-props
+        level: must-not
+        statement: Don't pass layout props to Card. It takes density and tone for its look, and rejects padding, radius, border, shadow, gap, flex, width, height, position, and overflow props with a TypeScript error. Put layout sizing on a Box or Flex around the Card.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Use Card's `density` prop as the method for setting a Card's size. It handles padding and radius together. This is an intentional design decision to keep Card usage consistent
+      - level: must-not
+        statement: 'Do not put a Box inside Card to change its padding. Density is the only spacing control Card has: when no value is an exact fit, use the closest one.'
+
+  - kind: guidelines
+    for: all
+    title: Content guidelines
+    tags: [content]
+    items:
+      - level: should
+        statement: Limit card content to a single topic.
+      - level: should
+        statement: Content should be related. Split different topics into separate cards.
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - refs:
+          - to: semantics#heading-levels-sequential
+            rel: same-as
+      - refs:
+          - to: semantics#landmark-requirements
+            rel: same-as
+      - level: should
+        statement: When the whole Card surface should be pressable, wrap it in PressArea. PressArea renders a native button or anchor and leaves Card to carry the visual state.
+        alternatives:
+          - to: press-area
+            note: The supported way to make a whole Card pressable.
+      - level: must-not
+        statement: Card has no keyboard activation, focus management, or ARIA role. Do not use `as="button"` — wrap the Card in a PressArea, which renders a native button or anchor and leaves the Card to carry the visual state. Use Button when the action needs a labelled control rather than a whole pressable surface.
+        alternatives:
+          - to: press-area
+            note: The supported way to make a whole Card pressable.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Adding internal padding
+        body: |-
+          Use Card's `density` prop to set padding, gap, and border-radius together. Density is the primary approach — it keeps spacing on the design token scale.
+
+          ```tsx
+          // correct — density sets padding, gap, and border-radius
+          <Card density="loose">
+            <Heading as="h2">Title</Heading>
+            <Text>Body</Text>
+          </Card>
+          ```
+
+          Do not add an inner `Box` to change Card's padding, even when no density option is an exact fit. Use the closest one.
+
+          ```tsx
+          // wrong — an inner Box re-spaces the Card
+          <Card>
+            <Box paddingTop={2}>
+              <Text>Body</Text>
+            </Box>
+          </Card>
+
+          // wrong — padding is not a Card prop, so this is a TypeScript error
+          <Card padding={4}>
+            <Heading as="h2">Title</Heading>
+          </Card>
+          ```
+
+          The same applies to every other layout prop. See the no-layout-props rule in the guidelines above.
+      - title: density values
+        body: |-
+          Card's `density` prop sets padding, gap, and border-radius together via the design token scale. It is the primary way to control spacing inside a Card.
+
+          | Value | Padding | Description |
+          |-------|---------|-------------|
+          | `compact` | {space-3} | Tighter spacing for dense lists or sidebars |
+          | `regular` | {space-4} | Default. Standard spacing |
+          | `loose` | {space-5} | More breathing room for featured content |
+
+          Density also propagates a spacing context to nested components.
+
+alternatives:
+  - to: box
+    note: Structural container without a visual surface
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=30993-2035
+    rel: design
+    role: Figma component (v5)
+  - to: space
+    rel: relates-to
+  - to: flex
+    rel: relates-to
+    note: Layout container without a visual surface
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/card/Card.tsx
+imports:
+  - platform: react
+    code: import { Card } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: tone
+    description: Semantic color of the card surface.
+    values:
+      - id: default
+        description: No semantic meaning — used for grouping content with lower visual emphasis.
+      - id: neutral
+        description: No semantic meaning — increased visual emphasis over default.
+      - id: positive
+        description: Success, published, healthy states.
+      - id: suggest
+        description: Suggestions, recommendations, informational content.
+      - id: caution
+        description: Needs attention, in review.
+      - id: critical
+        description: Error, failed, rejected.
+  - traitType: variant
+    kind: enum
+    id: density
+    description: Composite prop setting padding, gap, and border-radius together.
+    values:
+      - id: compact
+        description: Padding {space-3}, radius {radius-2}. For high-density lists and table rows.
+      - id: regular
+        description: Padding {space-4}, radius {radius-3}. Default for standard content cards.
+      - id: loose
+        description: Padding {space-5}, radius {radius-4}. For low-density or featured cards.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        Card no longer inherits Box's full prop set — it accepts only `density`, `tone`, `margin*`, and `as`. `density` replaces `padding`+`radius`; other layout props (`flexGrow`, `width`, `overflow`, `position`, etc.) are TypeScript errors when passed directly. `tone=`"muted"`/`"transparent"` no longer exist — use `"neutral"`.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:card --paths <paths> --toPackage @sanity/ui`. Run the Box codemod first — this codemod converts non-conforming Cards to Box.
+      guidance: |-
+        Card in the new system is a focused visual surface. It no longer extends Box.
+
+        ### Key differences
+
+        - v5 components use CSS classes with a static stylesheet as opposed to `styled-components`.
+        - Card no longer inherits all Box props (padding, margin, overflow, flex, grid). The new Card accepts only `density`, `tone`, `margin*`, and `as`.
+        - `density` replaces `padding` \+ `radius`. Instead of setting padding and radius separately, choose `'compact'` ({space-3} padding, {radius-2} radius), `'regular'` ({space-4}, {radius-3}), or `'loose'` ({space-5}, {radius-4}).
+        - Layout props are rejected by the type checker. `flexGrow`, `width`, `overflow`, `position`, and every other layout prop fail to compile on Card. Wrap Card in a Box or Flex.
+        - `tone` values have changed. There is no `'muted'` or `'transparent'` tone. Use `'default'` for the base tone. Available: `'default'`, `'neutral'`, `'positive'`, `'suggest'`, `'caution'`, `'critical'`.
+        - No `scheme` prop. Dark mode inversion is no longer done at the Card level.
+        - No `border`, `shadow`, `muted`, `pressed`, `selected` props. Card has been changed to be more focused and purpose-built.
+
+        ### Removed props (no longer accepted on Card)
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `padding` | –– | Removed. Use `density` (couples padding \+ radius). Pick the closest density; do not nest a Box inside Card to recreate a v3 padding value. |
+        | `radius` | –– | Removed. Use `density` (couples padding \+ radius). |
+        | `shadow` | –– | Removed. Use `tone` for surface treatment. |
+        | `border` | –– | Removed. Always rendered. Cannot be opted out of. |
+        | `scheme` | –– | Removed. Use `tone` instead. |
+
+        ### `density` scale
+
+        | Density | Padding | Radius |
+        | :---- | :---- | :---- |
+        | `compact` | {space-3} | {radius-2} |
+        | `regular` | {space-4} | {radius-3} |
+        | `loose` | {space-5} | {radius-4} |
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `padding={3}` | `density="compact"` | Card no longer accepts individual `padding` or `radius` props. Use `density` (`'compact'`, `'regular'`, `'loose'`). |
+        | `radius={2}` | `density="compact"` | Coupled with padding into `density`. |
+        | `shadow={1}` | — | Removed. Card has no `shadow` prop. |
+        | `border` | — | Removed as a prop. Card always renders a 1px border via CSS. |
+        | `borderTop`, `borderRight`, etc. | — | Removed. Card has no individual border-side props. |
+        | `scheme="dark"` | — | Removed. |
+        | `muted` | — | Removed.  |
+        | `pressed` | — | Removed. Card is not interactive. |
+        | `selected` | — | Removed. Card is not interactive. |
+        | All Box layout props | — | Removed. Card no longer extends Box. Wrap in Box or Flex for layout control. |
+        | — | `density` | New. Composite prop for padding \+ border-radius (`'compact'`, `'regular'`, `'loose'`). |
+        | — | `display` | New. `'block'`, `'inline-block'`, `'none'`. |
+
+        ### Breaking changes
+
+        - Card no longer extends Box. Wrap it in a Box or Flex for layout control.
+        - `padding` and `radius` props removed. `<Card padding={3}>` and `<Card radius={2}>` fail to compile. Use `density` (`'compact'`, `'regular'`, `'loose'`).
+        - `tone="inherit"` removed. Card no longer inherits tone from a parent context.
+        - `scheme` prop removed. `<Card scheme="dark">` fails to compile.
+        - `shadow` prop removed. `<Card shadow={1}>` fails to compile.
+        - `border` prop removed. `<Card border>` fails to compile. Card always renders a 1px border. Border color is controlled by `tone`.
+        - `borderTop`, `borderRight`, `borderBottom`, `borderLeft` removed. Individual border-side props are not available.
+        - `muted`, `pressed`, `selected` props removed. Card is no longer interactive. Passing any of them is a TypeScript error.
+        - `styled-components` no longer used. Custom styled-components extensions like `styled(Card)` will not work.
+
+        ### Codemod
+
+        A codemod is available to make the changes above less painful. Run the command below with the path to the file or directory you want to migrate. Pass a space-delimited list for multiple paths.
+
+        ```
+        pnpx @sanity/ui-codemod latest:card --paths <paths> --toPackage @sanity/ui
+        ```
+
+        Some components may need manual review. When a component cannot be migrated or has unclear changes, the codemod adds a “UI-POC-CODEMOD TODO” comment.
+
+        For the best results, run the Box codemod first. One caveat: this codemod will transform Cards that don’t match the updated styling (padding, radius, and border) to Box. Double-check any UI that follows the Card usage guidelines and should not be converted.

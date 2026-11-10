@@ -1,0 +1,185 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: space-0
+    name: space-0
+    description: Removes padding, margin, or gap.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-0
+  - kind: token
+    id: space-1
+    name: space-1
+    description: Tight gaps — a label with its input, an icon with text.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-1
+  - kind: token
+    id: space-2
+    name: space-2
+    description: Compact padding — toolbars, sidebar items.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-2
+  - kind: token
+    id: space-3
+    name: space-3
+    description: Standard padding — buttons, fields, compact cards. Card's `compact` density.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-3
+  - kind: token
+    id: space-4
+    name: space-4
+    description: Generous padding — dashboard cards, form sections. Card's default (`regular`) density.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-4
+  - kind: token
+    id: space-5
+    name: space-5
+    description: Section padding — onboarding, auth forms, section breaks.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-5
+  - kind: token
+    id: space-6
+    name: space-6
+    description: Page-level section breaks. Not for component interiors.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-6
+  - kind: token
+    id: space-7
+    name: space-7
+    description: Page-level layout.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-7
+  - kind: token
+    id: space-8
+    name: space-8
+    description: Page-level layout.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-8
+  - kind: token
+    id: space-9
+    name: space-9
+    description: Page-level layout.
+    metadata:
+      status:
+        status: stable
+      group: space
+    tokenType: dimension
+    source:
+      href: ./dtcg/json/space.tokens.json#space-9
+  - kind: entry
+    id: space
+    name: Space scale
+    description: The spacing scale for padding, margin, and gap across Sanity UI layout components.
+    metadata:
+      tags: [spacing, space, scale, padding, margin, gap, dimension, layout]
+      status:
+        status: stable
+      group: space
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - level: must
+            statement: Pass spacing as an integer in braces — `padding={2}`, `gap={3}`. A string like `padding="2"` is a TypeScript error.
+          - level: must
+            statement: Take every value from the scale. The scale is a Fibonacci sequence. Read the value of each step from `docs/tokens/dtcg/json/space.tokens.json`.
+          - refs:
+              - to: shared-foundations#inner-spacing-smaller-than-outer
+                rel: same-as
+          - level: should
+            statement: Prefer the parent's `gap` over a `margin` on each child.
+          - level: must-not
+            statement: Do not use steps `6`–`9` inside a component interior. Reserve them for page-level layout.
+          - level: must-not
+            statement: Do not hardcode the pixel values. Pass the step, so the value follows the token file when the scale changes.
+      - kind: guidelines
+        for: agent
+        framing: how-to-use
+        items:
+          - level: must
+            statement: Spacing props (padding, margin, gap, and their axis variants) take integer literals, not strings. `gap={3}` is correct; `gap='3'` and `gap='medium'` are TypeScript errors.
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              The space scale holds Sanity UI's spacing values. Layout primitives use it for `padding`, `margin`, and `gap`. The scale has 10 steps, `0` through `9`. Step `0` removes spacing.
+          - title: The scale
+            body: |-
+              From step `2` up, each value is the sum of the two before it. Steps sit close together at small sizes and spread apart at large ones. Steps `6`–`9` are for page-level layout, not component interiors.
+
+              | Step | Token | Common use |
+              | --- | --- | --- |
+              | `0` | `space-0` | No spacing |
+              | `1` | `space-1` | Tight gaps — label with input, icon with text |
+              | `2` | `space-2` | Compact padding — toolbars, sidebar items |
+              | `3` | `space-3` | Standard padding — cards, buttons, fields |
+              | `4` | `space-4` | Generous padding — dashboard cards, form sections |
+              | `5` | `space-5` | Section padding — onboarding, auth forms |
+              | `6` | `space-6` | Page-level section breaks |
+              | `7` | `space-7` | Page-level |
+              | `8` | `space-8` | Page-level |
+              | `9` | `space-9` | Page-level |
+
+              The values live in `docs/tokens/dtcg/json/space.tokens.json`.
+          - title: Related
+            body: |-
+              - **Spacing guidelines** — principles, props, and grouping rules.
+              - **Box** and **Flex** — accept `padding` and `margin`.
+              - **Card** — sets inner spacing with `density`, not `padding`.
+              - **Flex**, **Grid**, **VStack**, **HStack** — accept `gap`.
+      - kind: section
+        for: agent
+        freeform:
+          - title: Intent
+            body: Apply the spacing scale by integer step, chosen by content density. Most component work lives in steps 0–5.
+    refs:
+      - href: ./dtcg/json/space.tokens.json
+        rel: source
+        role: DTCG source

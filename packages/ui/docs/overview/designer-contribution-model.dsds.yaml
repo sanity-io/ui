@@ -1,0 +1,77 @@
+kind: sanity.guide
+id: designer-contribution-model
+name: Sanity Design System's design contribution model
+description: How designers propose and graduate a recipe into the core Sanity Design System through a three-step, low-process contribution model.
+metadata:
+  tags:
+    - contribution
+    - designer
+    - recipe
+    - triage
+    - graduation
+    - process
+    - design system
+    - governance
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Build recipes out of existing Sanity Design System components and tokens where possible — doing so carries baseline accessibility and consistency requirements forward automatically.
+      - level: should
+        statement: Propose graduating a recipe (Step 2) only when the creator believes it would be valuable beyond their own feature — bring it to a triage sync with the design system team and, ideally, a developer to confirm technical soundness.
+      - level: should
+        statement: 'When a recipe graduates (Step 3), assign explicit owners for four separate workstreams: changes to the initial recipe, spec definition, documentation, and component development.'
+      - level: must-not
+        statement: Do not treat stopping at Step 1 (a recipe that never graduates) as a failure — it is an explicitly supported, penalty-free outcome, and the feature team retains ownership and maintenance of it.
+  - kind: steps
+    for: all
+    ordered: true
+    title: The three-step contribution model
+    items:
+      - title: 'Step 1: Make a recipe'
+        description: |-
+          A recipe is a distinct composition of existing design system components or design tokens (for example, an onboarding stepper pattern built out of standard buttons, text, and containers). Recipes aren't required to use Sanity UI, but it dramatically simplifies the following steps of the process.
+
+          The designer creates the recipe to solve their immediate feature need and adds it to a shared recipe library.
+
+          The more the recipe uses existing design system building blocks, the more baseline requirements like accessibility are automatically sorted out.
+
+          People can stop at Step 1. Stopping at Step 1 carries no penalty. Teams remain unblocked and the feature team owns future maintenance.
+      - title: 'Step 2: Propose a contribution'
+        description: |-
+          The recipe creator can propose graduating it into the core system. They do this if they believe it would be valuable to the rest of the company.
+
+          Bring the recipe to a "triage" sync. This could be as short as 15 minutes, depending on the size/complexity of the recipe.
+
+          The design system team and the feature designer review the work together. They can review the idea quickly with a developer to confirm it's technically sound.
+
+          The team decides if the recipe should graduate to a core system pattern. If it doesn't, the creator still has a perfectly usable recipe for their feature.
+      - title: 'Step 3: Contribute'
+        description: |-
+          The graduation process begins if everyone agrees that the recipe should be absorbed into the central design system. The contributing team and the design system team collaborate to:
+
+          - Agree on what needs to change from the initial recipe to make it universally applicable.
+          - Define a spec for engineering development.
+          - Write usage documentation. The person best equipped to write the first draft is usually the person who made it.
+
+          **Assign owners to take on:**
+          - Changes of the initial recipe
+          - Spec definition
+          - Documentation
+          - Component development
+
+          And that's it.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: No approval step is required to ship a recipe. Designers and developers make recipes for whatever they need, without waiting for sign-off or policing. Even if a recipe never officially graduates to the core design system, the contributing designer still gets something usable out of the process.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this guide to understand how a designer moves a recipe (a composition of existing components/tokens) toward becoming a core design system pattern, and to know that stopping at any step is a valid, penalty-free outcome.

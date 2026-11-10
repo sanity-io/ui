@@ -1,0 +1,356 @@
+kind: sanity.pattern
+id: forms
+name: Forms
+description: 'Shared guidance for form fields and their inputs (Checkbox, Radio, Switch, TextInput, TextArea, Select) and the copy inside and around them: labels, placeholders, helper text, errors, empty states, success confirmations, and buttons. Rules that hold for every form field live here once; each component page references them and adds only what is specific to that input.'
+metadata:
+  tags:
+    - form
+    - forms
+    - input
+    - label
+    - checkbox
+    - radio
+    - switch
+    - text input
+    - text area
+    - select
+    - validation
+    - accessible name
+    - tutorial
+    - copy
+    - UX writing
+    - placeholder
+    - helper text
+    - error message
+    - empty state
+    - success confirmation
+    - buttons
+    - voice and tone
+    - content tokens
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: Choosing a control
+    items:
+      - id: choose-control-by-option-count
+        level: should
+        statement: 'Choose the selection control by what the user is choosing: Radio for 2–4 options, Select for 5–20, TextInput with a search pattern for more than 20. Use Checkbox when several options can be chosen at once, and Switch for a binary setting that takes effect immediately.'
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Labels
+    items:
+      - id: disabled-input-helper-text
+        level: must
+        statement: A form field with a disabled input must have helper text. It says why the input is off and what turns it on.
+      - id: pair-with-visible-label
+        level: must
+        statement: Give every form field a visible label. The label tells a sighted user what the field is for, and gives the input its accessible name (WCAG 3.3.2 Labels or Instructions, Level A).
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+      - id: label-short
+        level: should
+        statement: Keep labels short, descriptive, and noun phrases. Most fields need one to three words; go longer only when a shorter label would be ambiguous. A label names the field, not the action.
+      - refs:
+          - to: content-guidelines#label-length-by-element
+            rel: same-as
+      - id: mark-optional-fields
+        level: should
+        statement: Mark optional fields as optional in the label, as `Phone number (optional)`, rather than marking required ones. If most fields are optional, mark the required ones instead, and use one convention for the whole form.
+      - id: label-no-trailing-period
+        level: should-not
+        statement: Don't end a label with a period. Labels are not full sentences.
+      - id: label-no-trailing-colon
+        level: should-not
+        statement: Don't end a label with a colon. The visual relationship between a label and its input already conveys "this labels that".
+      - id: placeholder-not-a-label
+        level: must-not
+        statement: Don't use placeholder text as the label, or as a replacement for one. A placeholder disappears as soon as the user types and is unreliable for screen readers (WCAG 3.3.2). Pair the input with a visible label.
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html
+            role: WCAG 3.3.2 Labels or Instructions
+      - id: no-nested-label-elements
+        level: must-not
+        statement: Don't nest a label element inside another label element. Nested labels are invalid HTML and break the accessible name.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Layout
+    items:
+      - id: stack-fields-vertically
+        level: should
+        statement: Lay out form fields (defined as the paired composition of label + input) vertically. Place fields side by side only for a small group of closely related fields.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: State
+    items:
+      - id: pair-checked-with-onchange
+        level: must
+        statement: Pair `checked` with `onChange` on every controlled Checkbox, Radio and Switch. A control with `checked` set and no `onChange` looks interactive but never updates — a common generated-code bug.
+      - id: stack-options-vertically
+        level: should
+        statement: Lay out a group of Checkbox or Radio options vertically for easier scanning.
+      - id: no-mixed-controlled-uncontrolled
+        level: must-not
+        statement: Don't set both `checked` and `defaultChecked` on the same Checkbox, Radio or Switch. Choose one pattern — controlled or uncontrolled — per instance; mixing them produces inconsistent behaviour.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags:
+      - accessibility
+    items:
+      - id: aria-label-overrides-name
+        level: must
+        statement: "`aria-label` overrides the accessible name screen readers announce. Prefer wrapping a fully descriptive `label` in `VisuallyHidden` first, and use `aria-label` only when that isn't practical. Checkbox, Radio and Switch forward it directly to the underlying `<input>`."
+      - id: aria-labelledby-references-name
+        level: must
+        statement: "`aria-labelledby` takes another element's `id` and uses that element's text as the control's accessible name, as an alternative to `aria-label`. Use it when the more specific descriptive text already exists elsewhere in the DOM. Checkbox, Radio and Switch forward it directly to the underlying `<input>`."
+      - id: label-available-to-screen-readers
+        level: must
+        statement: Give every form field a label that screen readers can reach. Keep the label visible by default. Hide it with VisuallyHidden only where the layout already shows what the field is for, such as a row checkbox in a table.
+      - id: programmatic-name-required
+        level: should
+        statement: An input with no programmatic name is a critical violation. Link a visible label to the input with `id` and `htmlFor`, or have the input render its own `<label>`. Use `aria-label` or `aria-labelledby` only when there is no visible text to link (WCAG 4.1.2 Name, Role, Value).
+      - id: error-prop-needs-visible-message
+        level: should
+        statement: When setting `hasError`, always render a visible error message near the field. The prop sets the error styling and `aria-invalid`, but it adds no description, so link the message with `aria-describedby`.
+      - id: border-contrast
+        level: should
+        statement: Field border color contrast must reach 3:1 against its background (WCAG 1.4.11).
+      - id: placeholder-contrast
+        level: should
+        statement: Placeholder text needs the a minumum 4.5:1 color contrast (WCAG 1.4.3).
+      - id: field-group-name
+        level: should
+        statement: '**A field inside a group still needs its own name.** A`legend` only names the group. Fields in a group require their own labels, or point at the legend with `aria-labelledby`.'
+      - id: error-described-in-text
+        level: should
+        statement: |-
+          A field in an error state needs the error described in text, linked to the field with `aria-describedby` so assistive technology announces the error with the field (WCAG 3.3.1). Write the message to the Error messaging rules: name what failed, and state the next step (`error-messaging#name-what-failed`, WCAG 3.3.3).
+          ```tsx
+          // ✗ — axe critical: no accessible name, error is color-only
+          <TextInput hasError value={value} onChange={onChange} />
+          // ✓ — labeled, and the error is described in linked text
+          <VStack gap={2}>
+            <Text as="label" htmlFor="email">Email address</Text>
+            <TextInput id="email" hasError aria-describedby="email-error" value={value} onChange={onChange} />
+            <Text id="email-error" size={1} tone="critical">Error: Enter a valid email address.</Text>
+          </VStack>
+          ```
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    tags:
+      - content
+    items:
+      - refs:
+          - to: error-messaging#name-what-failed
+            rel: same-as
+      - refs:
+          - to: error-messaging#state-next-step
+            rel: same-as
+      - refs:
+          - to: error-messaging#field-error-names-field
+            rel: same-as
+      - level: must
+        statement: Use action-oriented button labels that describe the action, not the state. "Submit," "OK," and "Done" don't say what will happen or that it has happened yet.
+        refines:
+          - to: content-guidelines#name-the-action
+      - level: must
+        statement: A destructive confirmation button must echo the action ("Delete project"), not read as a generic "Confirm."
+        refines:
+          - to: content-guidelines#name-the-action
+      - level: should
+        statement: Show an example in a placeholder, not a description of the field. `example@domain.com` beats "Enter your email address."
+      - level: should
+        statement: Keep placeholder text short — one example format or one short phrase. Placeholder text competes with what the user types.
+      - level: should
+        statement: In a top-of-form error summary, name the total number of fields needing attention and link or scroll to the first error field, instead of listing every error again. The inline field errors already list the specifics; the summary's job is to orient, not repeat.
+      - level: should
+        statement: State what happened in a success confirmation, and avoid exclamation points unless the context truly warrants excitement. "Project created." is specific; "Success!" and "You're all set!" say nothing about what happened.
+      - level: should
+        statement: Route a form string to a content token once the same string appears in three or more places. Recurring form strings — generic error tones, common placeholder shapes, common button labels — are candidates for tokenization once repeated. Route to Frontend Engineer for the implementation side; content designer owns the naming and canonical values.
+      - level: should-not
+        statement: Don't use placeholders to carry required format rules. If the format matters, use helper text below the field — it stays visible after the user starts typing, unlike a placeholder, which is also often low-contrast (WCAG 1.4.3).
+      - level: must-not
+        statement: Don't write an apologetic or hostile error tone. "Sorry, that email looks wrong" is wrong — the system isn't sorry, it's wrong. "INVALID INPUT" or "You entered this incorrectly" blames the user. Be factual and helpful instead.
+      - level: must-not
+        statement: Don't show empty-state copy while a Select's options are still loading — leave a combobox with only a disabled input and no message. The user can't tell if the system is broken or the list is empty.
+      - level: must-not
+        statement: Don't mix `Cancel`, `Back`, and `Close` on the same control — each implies a different result (abandon without saving, return to a previous step, dismiss with nothing pending).
+        example:
+          title: Examples
+          description: Cancel abandons the change without saving. Back returns to a previous step. Close dismisses a dialog when no action is pending.
+  - kind: steps
+    for: all
+    ordered: false
+    title: The form copy checklist
+    items:
+      - title: Every field has a clear label (not placeholder-as-label).
+      - title: Optional fields are marked; required is implied.
+      - optional: true
+        title: Placeholders show examples, not instructions.
+      - optional: true
+        title: Helper text adds information; no filler.
+      - title: Errors name the field and explain how to fix.
+      - title: Error tone is factual, not apologetic or hostile.
+      - title: Empty states are handled (Select, combobox, multi-select).
+      - title: Button labels describe actions, not states.
+      - optional: true
+        title: No "Submit", "OK", "Done", or "Success!".
+      - optional: true
+        title: Voice is consistent across the form.
+      - optional: true
+        title: Recurring copy has been considered for tokenization.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: |-
+          A reference for writing the copy that lives inside and around form fields: labels, placeholders, helper text, error messages, empty states, and the small decisions that make forms feel cared for or sloppy.
+
+          The governing idea: **forms are mostly words.** The input is a rectangle; the words tell the user what to do, what's happening, and what went wrong. Sloppy form copy is sloppy design — no matter how clean the rectangles look.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Label copy
+    items:
+      - id: label-present-tense
+        level: should
+        statement: 'Write labels in the present tense, with the second person implied: `Delivery address`, not `Your delivery address`.'
+        example:
+          title: Examples
+          description: ✅ `Delivery address`, `Date of birth`. ❌ `Your delivery address`, `Enter your date of birth`.
+      - id: label-not-question-or-instruction
+        level: must-not
+        statement: Don't write a label as a question, an instruction, or a request. The label names the field; instructions go in helper text or a placeholder.
+        example:
+          title: Examples
+          description: ❌ `What's your name?`, `Please enter your password`, `Type your email below`. ✅ `Name`, `Password`.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Placeholder copy
+    items:
+      - id: placeholder-format
+        level: should
+        statement: Lead an example placeholder with `ex:`, and don't use `ex:` for a format or a constraint. Use sentence case, and no trailing punctuation unless the example includes it.
+        example:
+          title: Examples
+          description: '✅ `ex: Jane Cooper`, `(555) 123-4567`, `Letters and numbers only`, `you@example.com`. ❌ `[Your email here]`, `example@example.com`, `Name` (restates the label).'
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Helper text
+    items:
+      - id: helper-text-when-to-use
+        level: should
+        statement: Use helper text when a field has a constraint the user needs upfront, a format to match, an optional field whose purpose isn't obvious, or a choice with lasting consequences.
+        example:
+          title: Examples
+          description: ✅ `Must be at least 12 characters with one number.`, `Use the format YYYY-MM-DD.`, `We'll only contact you about urgent issues.`
+      - id: helper-text-format
+        level: should
+        statement: Write helper text as a complete sentence in sentence case, ending with a period. Keep it under 100 characters, and under 60 when possible, in plain language.
+      - id: helper-text-no-filler
+        level: should-not
+        statement: Don't write helper text that repeats the label, the placeholder, or the error, or that adds no information. Leave it out instead.
+        example:
+          title: Examples
+          description: '❌ `Enter a valid email address` under an `Email address` label, or `Enter your name` under a placeholder of `ex: Jane Cooper`.'
+      - id: helper-text-not-for-irreversible
+        level: should-not
+        statement: Don't use helper text for an irreversible decision. Use a caution callout near the action instead.
+        example:
+          title: Examples
+          description: ❌ `Choose carefully. This can't be changed later.` as helper text.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Error copy
+    items:
+      - id: error-anatomy
+        level: should
+        statement: Name the field or problem, state the cause briefly, and say what to do when action is needed.
+        example:
+          title: Examples
+          description: ✅ `Email address is missing an @ symbol. Use the format name@example.com.` ❌ `Invalid input.`, `Please correct the errors above.`, `INVALID EMAIL`.
+      - id: error-format
+        level: should
+        statement: Write error messages in sentence case, ending with a period, in two sentences at most, as the error messaging pattern sets.
+        refs:
+          - to: error-messaging
+            rel: relates-to
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Empty states
+    items:
+      - id: empty-select-default
+        level: should
+        statement: When a Select or combobox has nothing chosen yet, show `Select` or `Choose an option`. Don't decorate the placeholder with `-- Select --` or `[Choose]`.
+      - id: empty-no-matches
+        level: should
+        statement: When a search has no matches, say so briefly. Echo the query back when it helps.
+        example:
+          title: Examples
+          description: ✅ `No matches found.`, `No results for "[query]".`
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Button verbs
+    items:
+      - id: button-verb-matches-action
+        level: should
+        statement: 'Match the button verb to the action: `Create` for creating, `Save changes` or `Update` for editing, and a destructive verb such as `Delete`, `Remove`, or `Cancel subscription` for destructive actions.'
+        example:
+          title: Examples
+          description: ✅ `Create project`, `Save changes`, `Send invitation`. ❌ `Submit`, `OK`, `Done` (past tense, but nothing is done yet).
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    title: Voice
+    items:
+      - id: voice-direct
+        level: should
+        statement: Be direct. Write `Name`, not `Could you please tell us your name?`
+      - id: voice-plain
+        level: should
+        statement: Be plain. Write `Must be at least 12 characters`, not `Please ensure your password meets the minimum length requirements.`
+      - id: voice-specific
+        level: should
+        statement: Be specific. Write `Email address must include an @ symbol`, not `Invalid email.`
+      - id: voice-kind
+        level: must-not
+        statement: Don't blame the user, and don't apologize on the software's behalf. Say what is true and what to do next.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    title: Extending the patterns
+    items:
+      - id: extend-doc-for-new-form-shapes
+        level: should
+        statement: When a new form shape isn't covered here, extend this doc before writing its copy, so the next person follows a pattern rather than an invention. Route publishing to the Technical Writer.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Write form copy — labels, placeholders, helper text, errors, empty states, success confirmations, and buttons — that is direct, plain, specific, and kind, and that follows the format rules for each copy type below.
+refs:
+  - to: checkbox
+    rel: relates-to
+  - to: radio
+    rel: relates-to
+  - to: switch
+    rel: relates-to
+  - to: text-input
+    rel: relates-to
+  - to: text-area
+    rel: relates-to
+  - to: select
+    rel: relates-to

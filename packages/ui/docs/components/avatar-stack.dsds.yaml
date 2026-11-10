@@ -1,0 +1,96 @@
+kind: component
+id: avatar-stack
+name: AvatarStack
+description: A visual representation of multiple people and/or agents. When there are more children than maxLength, it shows the rest as a count.
+metadata:
+  tags: [avatar, group, users, collaborators, stack, avatarstack, team, cohort]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To represent user groups or cohorts.
+      - level: should
+        statement: To disclose the group of people an action will impact.
+      - level: should-not
+        statement: To represent a group that doesn't consist of Sanity accounts.
+      - level: should-not
+        statement: To represent a single person or agent. Use Avatar instead.
+        alternatives:
+          - to: avatar
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Put the people who matter most last in `children`. With `maxLength`, AvatarStack shows the last children and counts the rest.
+      - level: should
+        statement: 'Sort children logically: by most recently shared or last edited. If no sort logic exists, show the active user first.'
+      - level: should
+        statement: When not all Avatars are visible, make the full list available as a Popover through user interaction.
+      - level: must-not
+        statement: Don't set `size` on each Avatar inside AvatarStack. Use the stack's `size` prop. It overrides the size of every child.
+      - level: must-not
+        statement: Don't add an AvatarCounter yourself. Use the `maxLength` prop.
+        alternatives:
+          - to: avatar-counter
+      - level: must-not
+        statement: Don't put anything but Avatar inside AvatarStack.
+      - level: must-not
+        statement: Don't use as an inline element within a block of text.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Use `maxLength` to truncate overflow, not a manually added AvatarCounter.
+      - level: must-not
+        statement: Do not use for non-Sanity entities or groups of apps.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: '**AvatarStack is a list.** It renders a `ul`, with each Avatar in an `li`. Screen readers announce how many people it holds.'
+      - level: should
+        statement: '**Each Avatar still needs its own `aria-label`.** Stacking Avatars does not change the rules in the Avatar doc. Name each one the way you would a standalone Avatar.'
+      - level: should
+        statement: '**AvatarStack names the overflow count.** It labels the count, for example "+ 3 more users". With no children it shows 0, labelled "No users".'
+alternatives:
+  - to: avatar
+refs:
+  - href: https://www.figma.com/design/NWmchNlsNdG66VBaCsTdSL/pjo-ui4-component-buildout?node-id=19505-3527
+    rel: design
+    role: Figma component
+  - to: avatar-counter
+    rel: relates-to
+    note: The count AvatarStack shows when it truncates its children
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/avatar-stack/AvatarStack.tsx
+imports:
+  - platform: react
+    code: import { AvatarStack } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: size
+    description: Size applied to every Avatar child and the overflow count.
+    values:
+      - id: '0'
+        description: Smallest. For metadata or high-density layouts.
+      - id: '1'
+        description: Small (default).
+      - id: '2'
+        description: Medium. When a group is the focus of an element.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

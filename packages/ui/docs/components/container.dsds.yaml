@@ -1,0 +1,189 @@
+kind: component
+id: container
+name: Container
+description: A wrapper to constrain content to a maximum width and horizontally center it.
+metadata:
+  tags: [layout, container, max-width, centering, responsive, page, width, constrain]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To display a content block that is horizontally centered and limited to a maximum width.
+      - level: should-not
+        statement: As a general container for content. Use Box, Flex, or Grid instead.
+        alternatives:
+          - to: box
+          - to: flex
+          - to: grid
+      - level: should-not
+        statement: As a visual container to group related content. Use Card instead.
+        alternatives:
+          - to: card
+      - level: should-not
+        statement: When the content should fill the full viewport width (application chrome, sticky headers). Use Box or Flex.
+        alternatives:
+          - to: box
+          - to: flex
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: api-essentials#sizing-is-a-css-string
+            rel: same-as
+      - id: content-size-prop-used
+        level: should
+        statement: Use size to choose a max-width from the design scale instead of setting maxWidth manually — the rendered Container's max-width should come from the size prop, not from an inline style or utility class with a hardcoded max-width value.
+        example:
+          title: How to satisfy this
+          description: Pass a size value (0–5) to the Container and confirm the rendered element carries no inline max-width style. Inspect the computed styles in browser DevTools and verify max-width resolves to a design-scale token rather than a literal pixel value set by the author.
+        checkedBy: manual
+      - id: semantic-element-for-primary-region
+        level: should
+        statement: Render Container as a semantic element via as when it represents the page's primary content region — typically as='main' or as='article' — so the rendered HTML element is <main> or <article>, not a generic <div>.
+        example:
+          title: How to satisfy this
+          description: Inspect the rendered DOM and confirm the element tag is 'main' or 'article' when the Container holds the page's primary content. Use browser DevTools or the Accessibility tree to verify the element exposes a landmark role (main or article) to assistive technology.
+        checkedBy: manual
+      - refs:
+          - to: shared-foundations#layout-primitive-no-text-styles
+            rel: same-as
+        tags: [content]
+      - id: no-nested-containers
+        level: must-not
+        statement: Don't nest Container components — the outer one already constrains the width, so no Container should render as a direct or indirect descendant of another Container in the same page subtree.
+        example:
+          title: How to satisfy this
+          description: Inspect the component tree in React DevTools and confirm no Container node appears inside another Container node. Review the JSX source for the page or layout and confirm Container is not used inside another Container's children.
+        checkedBy: manual
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: 'Size Container with size — exactly one of 0 | 1 | 2 | 3 | 4 | 5. Do not size it with width: width takes a raw CSS string, so width={4} means 4px, not a scale step. When you reach for width={n} on Container, you want size={n}.'
+      - level: must-not
+        statement: 'Using Box with a manual maxWidth style to constrain content. Instead: Use Container with size from the design scale.'
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - refs:
+          - to: semantics#landmark-requirements
+            rel: same-as
+      - level: should
+        statement: '**Layout only.** Container provides width constraint and centering. It does not add keyboard handling, focus management, or ARIA state. If you render Container as a semantic element via `as`, you own the behavior that element requires.'
+      - refs:
+          - to: shared-foundations#layout-primitive-as-not-behavioral
+            rel: same-as
+alternatives:
+  - to: box
+    note: Base spacing and structure container without max-width centering
+  - to: card
+refs:
+  - to: space
+    rel: relates-to
+  - to: flex
+    rel: relates-to
+    note: Row or column layout with alignment and gap
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/container/Container.tsx
+imports:
+  - platform: react
+    code: import { Container } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: size
+    description: Named max-width from the design scale.
+    values:
+      - id: '0'
+        description: Width {container-0} — narrow column content.
+      - id: '1'
+        description: Width {container-1} — form-width content.
+      - id: '2'
+        description: Width {container-2} — standard article width.
+      - id: '3'
+        description: Width {container-3} — wide content area.
+      - id: '4'
+        description: Width {container-4} — extra wide content.
+      - id: '5'
+        description: Width {container-5} — full-screen wide content.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        `width` (a numeric scale prop) is renamed to `size`. The implicit `width: 100%` and hardcoded `margin: 0 auto` from v3 are gone — `marginX="auto"` is now an explicit, overridable default. The numeric scale also shifts: v3 `width={1}` maps to v5 `size={0}`.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:container --paths <paths> --toPackage @sanity/ui`.
+      guidance: |-
+        v3 of `@sanity/ui` shipped a `Container` component that extended `BoxProps`. It added a single responsive `width` prop drawn from a numeric scale. It centered its children using `width: 100%` and `margin: 0 auto` baked into the base style.
+
+        ```
+        {/* v3 — Container with numeric width scale */}
+        import { Container } from '@sanity/ui'
+
+        <Container width={2} padding={4}>
+          <ArticleBody />
+        </Container>
+        ```
+
+        The new Container keeps the same purpose. It renames the responsive prop and trims the implicit defaults:
+
+        ```
+        {/* v5 — Container with size prop */}
+        import { Container } from '@sanity/ui'
+
+        <Container padding={4}>
+          <ArticleBody />
+        </Container>
+        ```
+
+        ### Key differences
+
+        - `width` replaced with `size`. The responsive max-width prop is renamed.
+        - v3 defaulted to `width={2}`, the width of {container-1}. v5 defaults to `size={2}`, the width of {container-2}. Set `size` when you want a different max-width.
+        - v3 hard-coded `margin: 0 auto`. v5 keeps the same default but as a changeable prop.
+        - No implicit `width: 100%`. v5 leaves `width` alone; pass it directly if you need it.
+        - `size={5}` is new — it adds a {container-5} step beyond v3's largest option, {container-4}.
+        - Added `as` prop. Use `as="main"` / `as="article"` directly. v3 required `forwardedAs` via styled-components.
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `width` default `2` | `size` default `2` | v5 Container defaults to `size={2}`, {container-2}. Set `size` for a different max-width. |
+        | Implicit `width: 100%` (CSS) | — | v5 does not set `width` at all. Add `width="100%"` only if you need fill behavior. |
+        | Implicit `margin: 0 auto` | `marginX="auto"` (default) | v5 keeps the centering default but exposes it as a prop you can override. |
+        | All `BoxProps` (padding, margin, tone, border, etc.) | All `LayoutProps` | v5 Container still inherits the full layout-prop surface (padding, margin, sizing, border, overflow, position, tone, flex-child, grid-child). |
+        | `forwardRef`, `styled-components` | Plain function component, CSS classes | v5 is a regular function component using static CSS classes. `styled(Container)` extensions from v3 will not work. |
+        | — | `as` prop | v5 Container accepts `as` directly to render any element type (for example, `as="main"`, `as="article"`). v3 used `forwardedAs` via `styled-components`. |
+        | — | `tone` | New. Sets a semantic background tint. Unset, Container has no background. Accepts `default`, `neutral`, `positive`, `suggest`, `caution`, and `critical`. |
+
+        ### Breaking changes
+
+        - **`width` prop renamed to `size`.** `<Container width={3}>` no longer accepts a numeric scale value. Use `<Container size={3}>`. v5 `width` accepts CSS strings only (for example, `width="100%"`) — passing a number is invalid.
+        - **Implicit `width: 100%` removed.** v3 baked `width: 100%` into the base style. v5 does not. The component fills the parent via the default `<div>` block-level behavior. If you relied on the implicit fill on a non-block parent, set `width="100%"` directly.
+        - **`width="auto"` no longer needed.** v3 used `width="auto"` to opt out of any max-width. In v5, omit the `size` prop.
+        - **Numeric scale shift.** v3 used `1`–`5`. v5 uses `0`–`5` and adds a `5` step, {container-5}. The pixel values for the range `1`–`5` are unchanged, but a v3 `width={1}`, the width of {container-0}, maps to v5 `size={0}`. Audit any literal `width={N}` changes.
+
+        ### Codemod
+
+        A codemod is available to ease the changes above. Run the command below with the path to the file or folder you want to migrate. Use spaces to pass more than one path.
+
+        ```
+        pnpx @sanity/ui-codemod latest:container --paths <paths> --toPackage @sanity/ui
+        ```
+
+        The codemod renames `width` to `size` and converts flex/grid layout props (`alignItems`, `flexDirection`, `flexWrap`, `gridTemplateColumns`, `gridTemplateRows`, `gridAutoColumns`, `gridAutoFlow`, `gridAutoRows`, `justifyContent`) to an inline `style` object. If a component instance cannot be migrated or needs manual review, the codemod inserts a comment prefixed with "UI-POC-CODEMOD TODO".

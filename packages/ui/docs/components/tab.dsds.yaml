@@ -1,0 +1,54 @@
+kind: component
+id: tab
+name: Tabs.Tab
+description: A button that selects one Tabs.Panel. Use it inside Tabs.List.
+metadata:
+  tags: [tabs, tablist, tabpanel, navigation, views, tab, sections]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: When `tone` is not set to neutral, use the `icon` prop to visually reinforce the state of a tab.
+      - level: should
+        statement: Keep tab labels short, 1 to 3 words.
+      - level: should-not
+        statement: Don't use icon unless it's necessary to communicate the content related to that tab. Tabs.Tab renders icon before label.
+      - level: must-not
+        statement: Don't use tone for decorative purposes. tone must only communicate an important state related to the content it reveals.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: Don't set id or aria-controls on Tabs.Tab. It builds both from value.
+
+refs:
+  - to: tabs
+    rel: relates-to
+    note: The family this tab belongs to.
+  - to: tabs-list
+    rel: relates-to
+    note: Holds the Tabs.Tab buttons in a row.
+  - to: tabs-panel
+    rel: relates-to
+    note: The content this tab selects.
+  - href: https://www.figma.com/design/NWmchNlsNdG66VBaCsTdSL/pjo-ui4-component-buildout?node-id=23902-5282
+    rel: design
+    role: Figma component
+
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/tabs/Tabs.tsx
+imports:
+  - platform: react
+    code: import { Tabs } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

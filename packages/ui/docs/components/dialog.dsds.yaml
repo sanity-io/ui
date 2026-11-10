@@ -1,0 +1,343 @@
+kind: component
+id: dialog
+name: Dialog
+description: Presents a gating task or decision that blocks other interaction until completed. Use it only in cases where a decision must be made to proceed.
+metadata:
+  tags: [dialog, modal, overlay, confirmation, form, alert, popup, destructive, blocking]
+  status:
+    status: beta
+    since: 5.0.0-alpha.7
+    note: Shipped as Modal in @sanity/ui@5.0.0-alpha.5 and renamed to Dialog in 5.0.0-alpha.7. There is no Modal alias. Still marked @beta — the API may change before it's stable.
+  aliases: [Modal]
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: must
+        statement: Give every Dialog an accessible name via a header (aria-labelledby) or aria-label.
+        tags: [accessibility]
+      - level: should
+        statement: To confirm a destructive action before it occurs (deleting a file, removing a user).
+      - level: should
+        statement: To request specific input needed for a critical task to complete.
+      - level: should
+        statement: To display an error that needs direct user input to proceed.
+      - level: should
+        statement: To display terms or legal agreements that require explicit consent.
+      - level: should-not
+        statement: To display a system update that doesn't need user input. Use Popover instead.
+        alternatives:
+          - to: popover
+      - level: should-not
+        statement: To display non-essential contextual information. Use Popover or Tooltip instead.
+        alternatives:
+          - to: popover
+          - to: tooltip
+      - level: should-not
+        statement: To highlight a new feature or brand moment. Use Popover instead.
+        alternatives:
+          - to: popover
+      - level: should-not
+        statement: As a way to disclose a non-essential feature or display secondary content. Navigate to a new screen or display in an end-aligned column instead.
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Don't use Dialog for non-blocking status messages. Use Popover instead.
+        alternatives:
+          - to: popover
+      - level: should-not
+        statement: Don't use Dialog for brief hover labels. Use Tooltip instead.
+        alternatives:
+          - to: tooltip
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Dialog must be cancelable or dismissible. Users should not be trapped into agreeing or initiating an action.
+        tags: [interaction]
+      - id: destructive-dialog-title-names-target
+        level: must
+        statement: 'Destructive-action Dialogs must name the action and its target in the title — for example, "Delete [PAGE NAME]?", not a vague title like "Delete?". The consequence goes in the body, not the title: what will be lost and whether it can be recovered.'
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+        checkedBy: assisted
+        tags: [content]
+        $extensions:
+          io.jev:
+            type: boolean
+      - level: must
+        statement: Dialog body text must present the full details of what will happen — for example, listing every item being deleted and whether the data is recoverable.
+        tags: [content]
+      - tags: [content]
+        refs:
+          - to: shared-foundations#destructive-actions-use-critical-tone
+            rel: same-as
+      - level: should
+        statement: >-
+          Set `topAnchor` when the Dialog's content can grow taller, so the Dialog does not shift as it grows. It takes a CSS length, the distance from the top of the viewport, such as `topAnchor="10vh"`. The Dialog docks at that distance, and its height is capped at the viewport height minus twice the distance.
+      - level: should
+        statement: Use Dialog only in cases where a decision must be made to proceed. If the user can carry on without answering, it is not a Dialog.
+        tags: [interaction]
+      - level: should
+        statement: Choose a size that matches the content. The default suits a confirmation; a form needs 1 or 2.
+      - level: should
+        statement: Treat each Dialog as a mini, self-contained surface. Include everything the user needs in the Dialog itself, repeating information from the surrounding page when needed for understanding.
+        tags: [content]
+      - level: must-not
+        statement: Never interrupt the user with upsells or marketing moments through a Dialog.
+        tags: [interaction]
+      - level: must-not
+        statement: Don't make Dialog a shortcut to presenting a new page.
+        tags: [interaction]
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: >-
+          Dialog needs the entry-file setup in the `installation` guide. Without it, backdrop-click dismissal does not work in Safari; Escape and the close button still do.
+      - level: must
+        statement: The component is called Dialog as of @sanity/ui@5.0.0-alpha.7. Modal, Modal.Content, Modal.Footer, and ModalProps no longer exist and there is no alias.
+      - level: must
+        statement: Dialog has two parts, Dialog.Content and Dialog.Footer. Look up their props in the Anatomy section of this entry before you write them.
+      - level: must
+        statement: onClose is required. It binds to the native close event and fires for every close cause.
+      - level: should
+        statement: Keep Dialog mounted and drive it with the open prop. Conditional mounting works but skips the open and close transitions.
+      - level: should
+        statement: For destructive confirmations, do not focus the destructive button on open — focus Cancel or the container. showModal() focuses the first focusable element, which is the close button by default.
+      - level: should
+        statement: Set a width by choosing a size value, or by composing a Container inside Dialog.Content. There is no width prop.
+        uses:
+          - to: container
+      - level: must-not
+        statement: Dialog has no `width` prop. Set the width with `size`, or compose a Container inside Dialog.Content.
+      - level: must-not
+        statement: Do not implement a focus trap, an Escape handler, or backdrop-click handling. The native dialog element provides all three.
+      - level: must-not
+        statement: 'Do not use Dialog for non-essential information, upsells, marketing or feature announcements. Use Popover or Tooltip for non-blocking content.'
+      - level: must-not
+        statement: 'Focusing the destructive action button when a destructive Dialog opens. Instead: Focus the Cancel button or the dialog container. An accidental Enter must not confirm the destructive action.'
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - level: should
+        statement: Dialogs should be treated as a mini, self-contained surface. All necessary information should be included in the Dialog's content. Repeat information from the surrounding page when necessary.
+      - level: should
+        statement: Dialogs for destructive actions should name the action and its target in the title. For example, a dialog for deleting a document should be titled, "Delete \[PAGE NAME\]?". Do not use vague titles, such as "Delete?". Put the consequence in the body, not the title.
+      - level: should
+        statement: Dialog body text should present the full details for what action will take place. For example, listing out all what exactly will be deleted (if multiple items are being deleted), if/how the data is recoverable, etc.
+      - id: dialog-buttons-reinforce-the-action
+        level: should
+        statement: Dialog buttons should reinforce the action. The confirmation button for a dialog to delete 2 items should be labeled, "Delete 2 items". The cancel button should be labeled, "Do not delete". Do not use vague button labels, such as "Yes"/"No".
+        checks:
+          - href: ../evals/cases.yaml
+            role: agent-test
+
+        checkedBy: assisted
+        refines:
+          - to: content-guidelines#name-the-action
+        $extensions:
+          io.jev:
+            type: boolean
+  - kind: definitions
+    for: all
+    title: Anatomy
+    items:
+      - term: Dialog
+        definition: The native dialog element. Holds the header row, then whatever children you give it.
+      - term: Header row
+        definition: The heading text from the header prop, plus a close button. The close button is always rendered, with or without a header. `header` takes a string only, not an icon or other markup. Put anything richer at the top of Dialog.Content.
+      - term: Dialog.Content
+        definition: The scrollable body. Grows to fill the space between header and footer and scrolls on overflow. It has no props of its own; it takes the attributes of a `<div>`.
+      - term: Dialog.Footer
+        definition: The action row. Does not shrink, so it stays visible while the content scrolls. It has no props of its own; it takes the attributes of a `<div>`.
+  - kind: section
+    for: all
+    title: Basic example
+    freeform:
+      - title: Basic example
+        body: |
+          ```tsx
+          import { Button, Dialog, Flex, Text } from '@sanity/ui'
+          import { useState } from 'react'
+
+          function PublishPageDialog({ page, onPublish }) {
+            const [open, setOpen] = useState(false)
+
+            function handlePublish() {
+              onPublish(page)
+              setOpen(false)
+            }
+
+            return (
+              <>
+                <Button text="Publish page…" onClick={() => setOpen(true)} />
+                <Dialog
+                  open={open}
+                  onClose={() => setOpen(false)}
+                  header={`Publish '${page.title}'?`}
+                >
+                  <Dialog.Content>
+                    <Text>
+                      The page goes live on your site straight away. You can unpublish it later.
+                    </Text>
+                  </Dialog.Content>
+                  <Dialog.Footer>
+                    <Flex gap={3} justifyContent="flex-end">
+                      <Button text="Keep editing" level="secondary" onClick={() => setOpen(false)} />
+                      <Button text="Publish page" onClick={handlePublish} />
+                    </Flex>
+                  </Dialog.Footer>
+                </Dialog>
+              </>
+            )
+          }
+          ```
+  - kind: section
+    for: agent
+    freeform:
+      - title: How it works
+        body: |-
+          Dialog renders a native `<dialog>`. An effect calls `showModal()` when `open` becomes true and `close()` when it becomes false, and closes the dialog on unmount. Because it is opened as modal, the browser makes the rest of the document inert, renders it in the top layer, and traps focus — no focus-trap library is needed.
+
+          `onClose` is bound to the element's native `close` event, so it fires for every close cause: Escape, the close button, a backdrop click, or a programmatic `close()`.
+
+          `closedby="any"` is what makes a backdrop click dismiss the dialog. That attribute is not yet in Safari. v5 ships `dialog-closedby-polyfill` and applies it as part of the entry-file setup in the `installation` guide.
+
+          `size` maps to the shared container class, setting `max-width` only. The dialog's width is `calc(100dvw - 2rem)` and its height is capped at `calc(100dvh - 2rem)`.
+  - kind: section
+    for: all
+    freeform:
+      - title: Setup
+        body: |-
+          Dialog sets `closedby="any"` on the element so the browser dismisses it on a backdrop click. That attribute is not yet in Safari. v5 ships `dialog-closedby-polyfill` as a dependency and applies it through the entry-file setup in the `installation` guide, only where the attribute is missing. Without it, backdrop clicks will not dismiss the dialog in Safari; Escape and the close button still work.
+alternatives:
+  - to: popover
+    note: Use for non-essential secondary content that should not block the page
+  - to: tooltip
+    note: Use for brief hover and focus labels
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32972-1053
+    rel: design
+    role: Figma component (v5)
+  - to: container
+    rel: relates-to
+    note: Compose inside `Dialog.Content` when you need a narrower measure than `size` gives you
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/dialog/Dialog.tsx
+imports:
+  - platform: react
+    code: import { Dialog } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: open
+    description: >-
+      Controls the dialog. True calls showModal() on the element; false calls
+      close(). Dialog stays mounted and is driven by this prop. Conditional
+      mounting works but skips the open and close transitions, so prefer the
+      prop.
+  - traitType: variant
+    kind: enum
+    id: size
+    description: >-
+      Maximum width of the dialog, drawn from the shared container scale. The
+      dialog's own width is calc(100dvw - 2rem), so it shrinks to fit narrow
+      viewports. Matches the surface to the content. A confirmation needs no
+      more than the default; a form needs room to breathe. Accepts a responsive
+      array.
+    values:
+      - id: '0'
+        description: >-
+          Width {container-0}. The default. Confirmations and short
+          destructive-action prompts.
+      - id: '1'
+        description: Width {container-1}. Short forms and content that needs a readable measure.
+      - id: '2'
+        description: Width {container-2}. Multi-column forms or content with a preview pane.
+      - id: '3'
+        description: Width {container-3}.
+      - id: '4'
+        description: Width {container-4}.
+      - id: '5'
+        description: Width {container-5}.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+      tracking: https://github.com/sanity-io/ui/pull/2720
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        ### Migrating from Sanity UI 3
+
+        Sanity UI 3 also had a Dialog, but it is not this component — it shares the name and almost nothing else. Automated migration via codemod isn't feasible; the two render in fundamentally different ways. Migrate manually, ideally assisted by an agentic workflow using this reference.
+
+        1. **Update the render signature**
+
+           The v3 Dialog renders using conditional mounting, a `footer` prop, and content passed directly to `children`:
+
+           ```tsx
+           <Button onClick={() => setOpen(true)} text="Open dialog" />
+           {open && (
+             <Dialog footer={footerContent} {...dialogProps}>
+               {dialogContent}
+             </Dialog>
+           )}
+           ```
+
+           The v5 Dialog renders using the `open` prop, with subcomponents for the content and the footer:
+
+           ```tsx
+           <Button onClick={() => setOpen(true)} text="Open dialog" />
+           <Dialog open={open} {...dialogProps}>
+             <Dialog.Content>{dialogContent}</Dialog.Content>
+             <Dialog.Footer>{footerContent}</Dialog.Footer>
+           </Dialog>
+           ```
+
+        2. **Reconcile every prop against the differences reference**
+
+           The two versions diverge on more than a dozen props — sizing, layering, refs, and lifecycle all changed. Check each prop your v3 usage passes against the differences below before shipping.
+
+        ### v3 Dialog to v5 Dialog prop differences
+
+        | Prop | Change in v5 |
+        | :---- | :---- |
+        | `animate` | Removed. v5 always animates, unless the user prefers reduced motion. |
+        | `cardRadius` | Removed. v5's radius is fixed. |
+        | `cardShadow` | Removed. v5's shadow is fixed. |
+        | `children` | v3 puts children in a scrollable content Box. v5 puts children directly in the dialog element. |
+        | `className` | No behavior difference. v3 passes it through to the layer element; v5 merges it into the dialog element's className. |
+        | `contentRef` | Removed. v5 has no equivalent. |
+        | `footer` | Removed. v5 offers the Dialog.Footer subcomponent instead of a prop. |
+        | `header` | Narrowed. v3 accepts any React node; v5 accepts a string only. Both render the text in the header row. |
+        | `id` | No longer required. v3 needs id to build its aria-labelledby target; v5 generates that id internally with useId. Passing id doesn't affect this. |
+        | `onActivate` | Removed. Used for layer management in v3; v5 manages layering itself via the native dialog element. |
+        | `onClickOutside` | Removed. v5 sets closedby="any" on the dialog element. The browser then dismisses it on a backdrop click, firing onClose. Move any effect unrelated to closing into onClose instead. |
+        | `onClose` | Now required, and bound to the native close event instead of a custom handler. v3 calls it on Escape and the close button, and hides the close button when it's absent. v5 fires it for every close cause and passes the event object. |
+        | `open` | New. v3 has no open state — the developer mounts and unmounts it. v5 stays mounted; an effect calls showModal() or close() when open changes. |
+        | `padding` | Removed, along with paddingX, paddingY, paddingTop, paddingRight, paddingBottom, and paddingLeft. v5's padding is fixed — drop these props. |
+        | `portal` | Removed. v3 renders into a named portal; v5 renders in place, in the browser's top layer. |
+        | `position` | Removed. v5 uses the native top layer instead of a positioning prop. |
+        | `ref` | Not forwarded. v5 sets its own internal ref on the dialog element — drop this prop. |
+        | `scheme` | Removed. v5 has no equivalent. |
+        | `style` | No difference. Passed through on both. |
+        | `width` | Replaced by size. v5's size sets a max width from the shared container scale; the dialog's own width is calc(100dvw - 2rem). |
+        | `zOffset` | Removed. v5 uses the native top layer instead of a z-index prop. |
+        | `__unstable_autoFocus` | Removed. v5 relies on the native showModal() autofocus behavior. |
+        | `__unstable_hideCloseButton` | Removed. v5 always renders the close button. |
+        | `Other DOM props` | v3 extends div props. v5 extends native dialog element props, with open removed from the DOM props and redefined as a controlled prop. |

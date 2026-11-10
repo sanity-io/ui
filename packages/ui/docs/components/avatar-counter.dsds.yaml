@@ -1,0 +1,78 @@
+kind: component
+id: avatar-counter
+name: AvatarCounter
+description: A counter to display the number of people or agents in a group.
+metadata:
+  tags: [avatar, counter, count, overflow, more, users, avatarcounter]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To show how many more people there are, next to avatars laid out without AvatarStack.
+      - level: should-not
+        statement: Inside AvatarStack. Use its `maxLength` prop, which adds the count for you.
+        alternatives:
+          - to: avatar-stack
+      - level: should-not
+        statement: For counts that are not people or agents. Use Badge instead.
+        alternatives:
+          - to: badge
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Pass only the number of hidden people as `count`. AvatarCounter shows the number as is, with no "+".
+      - level: should
+        statement: Match the `size` of the avatars next to it.
+      - level: should
+        statement: Make the full list of people available, for example in a Popover.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: Don't add AvatarCounter as a child of AvatarStack. Set `maxLength` on the stack instead.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: '**Say what the number counts.** Without an `aria-label`, screen readers announce AvatarCounter as "+ 3 more". Set one that names the people, such as "3 more reviewers".'
+alternatives:
+  - to: avatar-stack
+  - to: badge
+refs:
+  - to: avatar
+    rel: relates-to
+    note: The single person or agent the count stands in for
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/avatar-counter/AvatarCounter.tsx
+imports:
+  - platform: react
+    code: import { AvatarCounter } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: size
+    description: Height and number size. Matches Avatar's sizes. Not responsive.
+    values:
+      - id: '0'
+        description: Smallest.
+      - id: '1'
+        description: Small (default).
+      - id: '2'
+        description: Medium.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

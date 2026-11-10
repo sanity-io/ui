@@ -1,0 +1,140 @@
+kind: sanity.pattern
+id: confirmation-dialogs
+name: Confirmation & action dialogs
+description: 'Sanity UI has one modal overlay (Dialog) and one floating layer (Popover), and no built-in lightweight inline confirm. This pattern shows how to choose between a full Dialog and a Popover-based inline confirm, and the rules every confirmation surface must follow regardless of which shape is used: an informed confirm button, and a guaranteed way to close.'
+metadata:
+  tags:
+    - tutorial
+    - confirm
+    - confirmation
+    - dialog
+    - modal
+    - popover
+    - destructive
+    - delete
+    - focus trap
+    - escape
+    - dismissal
+    - critical
+    - alertdialog
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Anchor the inline confirm popover to the triggering element, not the viewport center. That's what makes it read as "confirming this row," not "confirming something."
+      - id: default-destructive-confirms-both-popover
+        level: must
+        statement: Default destructive confirms to `tone="critical"` on both the popover's accent and the confirm button, and give the confirm button `level="primary"`. The confirm button is the most important action on a confirmation surface — that is what the surface exists for — so it carries the primary level alongside the critical tone. Cancel is the secondary or tertiary action.
+        refines:
+          - to: shared-foundations#destructive-actions-use-critical-tone
+      - level: must
+        statement: 'Disable or hide the confirm action until an async impact check resolves — for example, counting how many other documents reference this one, or checking permissions. Once it resolves, name the consequence on the confirm button. A generic confirm gives a destructive action less friction than it needs, and lets someone confirm before they know what breaks.'
+        example:
+          title: Confirm waits on an async impact check
+          ref:
+            href: ../examples/confirmation-dialogs-3.tsx
+            rel: source
+      - id: guarantee-every-confirmation-surface-way
+        level: must
+        statement: Guarantee every confirmation surface a way out — Escape, click-outside, and an explicit Cancel/close control. A surface missing any of the three can trap whoever opened it.
+      - level: must
+        statement: 'When building a fully custom confirmation overlay instead of composing `Dialog` or `Popover`, wire Escape-to-close, click-outside, a backdrop dismissal, and an explicit close control yourself. Nothing gives you these for free outside of `Dialog` and `Popover`. Otherwise the surface can end up with no declared close handler at all — closeable by neither the keyboard nor a click.'
+      - level: should
+        statement: 'Name the resolved consequence on the confirm button itself once it''s known (for example, "Delete (3 refs)"), instead of leaving a generic "Confirm" label. "Delete (3 refs)" tells the user what they''re about to do; "Confirm" doesn''t. The confirm button must repeat the action verb, per the messaging pattern — even though the number in the label wasn''t known a moment ago.'
+        refines:
+          - to: content-guidelines#name-the-action
+      - level: must-not
+        statement: Never let one confirmation shape lose a dismissal path that another shape has. If the popover version of a confirm closes on Escape, click-outside, and Cancel, the Dialog version of that same confirm must close the same three ways. Consistency here isn't cosmetic — it's what a keyboard user learns to expect from every confirm in the product.
+      - level: must-not
+        statement: 'Do not hand-build a confirmation surface — a fixed-position `div` with a manual backdrop — instead of composing `Dialog`. A hand-built modal reproduces what `Dialog` already provides, and usually drops the parts that are easy to forget: focus trapping, Escape handling, and returning focus to the trigger on close.'
+        example:
+          title: Hand-built confirmation vs. Dialog
+          ref:
+            href: ../examples/confirmation-dialogs-4.tsx
+            rel: source
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Use a full Dialog for destructive actions with rich content to show; use an inline Popover confirm, anchored to the trigger, for a single row's action.
+  - kind: steps
+    for: all
+    ordered: false
+    title: Accessibility checklist
+    items:
+      - title: Focus lands on Cancel (or the container), never on the destructive confirm button, when the surface opens.
+      - title: Escape, click-outside, and an explicit Cancel/close control all resolve to the same close behavior.
+      - title: The confirm button is disabled, not styled to look disabled, while an async impact check is pending.
+      - title: The confirm button's label names the action and, when known, its scale — not a bare "Confirm."
+      - title: Destructive confirms use `tone="critical"` on the confirm button, not color alone, and `level="primary"` — the confirm action is not visually demoted for being destructive.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: 'Sanity UI has one modal overlay (`Dialog`) and one floating layer (`Popover`). It has no built-in "lightweight inline confirm." Studio composes exactly that on top of `Popover`, for confirms that don''t need a full modal. This page covers which shape to reach for. It also covers the one rule that holds no matter which you choose: a confirmation surface must have a guaranteed way to close.'
+      - title: Two shapes of confirmation
+        body: |-
+          | | Full `Dialog` | Inline confirm popover |
+          | --- | --- | --- |
+          | Use for | A destructive action with rich content: a document, or what else it references | A small, local action: one row's delete button, an inline discard |
+          | Anchoring | Centered, blocks the whole page | Anchored beside the trigger that opened it |
+          | Body content | A heading, body text, optionally a list or preview of affected items | One line of consequence text |
+          | Focus behavior | Traps focus; nothing behind it is reachable | Does not trap focus; the rest of the page stays interactive |
+
+          **Reach for a full `Dialog` when the confirmation needs to show something, not describe it.** A delete that also removes other documents needs to list those documents. That's rich content — it earns a dialog. A delete on one list row with nothing else at stake needs one sentence next to the row it affects.
+  - kind: section
+    for: all
+    freeform:
+      - title: The escape-hatch rule
+        body: |-
+          Every confirmation surface must guarantee a way out, regardless of mechanism: Escape, click-outside, or an explicit Cancel/close control.
+
+          | Surface | Closes via |
+          | --- | --- |
+          | `Dialog` | Header close icon, click-outside (via `closedby="any"`), Escape — all routed to the same `onClose` |
+          | Inline confirm popover | Escape, click-outside, or the Cancel button — route all three to the same handler |
+          | A fully custom overlay | Nothing automatic. You build every dismissal path yourself. |
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Choose a full Dialog when a confirmation needs to show something (a document or its references); choose an inline Popover confirm for a small, local action. Whichever shape is used, guarantee a way to close it, and never render a generic confirm button while an async impact check is still pending.
+traits:
+  - traitType: variant
+    kind: enum
+    id: shape
+    name: Confirmation shape
+    description: Which surface a confirmation renders in, chosen by how much the confirmation needs to show.
+    values:
+      - id: dialog
+        name: Full Dialog
+        description: Use for a destructive action with rich content — a document, or what else it references. Centered, blocks the whole page, and traps focus so nothing behind it is reachable. Body content can include a heading, body text, and a list or preview of affected items.
+        examples:
+          - title: Confirmation built on Dialog
+            description: Dialog handles the backdrop, focus trap, and Escape for a full confirmation.
+            ref:
+              href: ../examples/confirmation-dialogs-1.tsx
+              rel: source
+      - id: inline-popover
+        name: Inline confirm popover
+        description: Use for a small, local action — one row's delete button, an inline discard. Anchored beside the trigger that opened it, does not trap focus, and the rest of the page stays interactive. Body content is one line of consequence text.
+        examples:
+          - title: Popover + Button composing an inline confirm
+            description: Popover and Button compose the whole thing. Anchor the popover to the row's own trigger element, and default its tone to critical for destructive confirms.
+            ref:
+              href: ../examples/confirmation-dialogs-2.tsx
+              rel: source
+uses:
+  - to: dialog
+    note: Required part.
+  - to: popover
+    note: Required part.
+  - to: button
+    note: Required part.
+  - to: messaging
+  - to: error-messaging

@@ -1,0 +1,180 @@
+{
+  "$description": "DEMO — a worked example of microcopy as DTCG tokens, proposed by foundations/content-guidelines.md (\"Content tokens\"). `content` is not a type defined by the W3C Design Tokens Community Group spec; it is a proposed extension for this design system, following the same pattern already used for `duration` and `cubicBezier` in the motion foundation. This file does not ship from `@sanity-labs/design-tokens` today — see `content.dsds.json` for status.",
+  "content": {
+    "$type": "content",
+    "action": {
+      "$description": "Six words compete for four distinct operations in shipped Sanity Studio copy (see studio-microcopy-audit-2026-08-18.md). Pick by what happens to the data, not by habit.",
+      "delete": {
+        "$value": "Delete",
+        "$description": "Permanently destroy an object — a document, comment, task, or release — that will not come back.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": [],
+            "example": "Delete this document? This can't be undone."
+          }
+        }
+      },
+      "discard": {
+        "$value": "Discard",
+        "$description": "Abandon unsaved or unpublished edits, returning to the last saved or published state. The object itself survives.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": [],
+            "example": "Discard changes"
+          }
+        }
+      },
+      "remove": {
+        "$value": "Remove",
+        "$description": "Take an item out of a collection. The item still exists; only its membership changes.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": ["Take out", "Exclude"],
+            "example": "Remove from release"
+          }
+        }
+      },
+      "clear": {
+        "$value": "Clear",
+        "$description": "Empty a field's value. The field stays; its content doesn't.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": [],
+            "example": "Clear field"
+          }
+        }
+      },
+      "restore": {
+        "$value": "Restore",
+        "$description": "Bring back a deleted object, or return to a prior version from history.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": ["Revert"],
+            "evidence": "One audited Studio feature (document revision history) named its own button \"Revert to revision\" while its tooltip, confirm dialog, disabled state, and success toast all said \"Restore\" for the identical action — Restore already won 4-to-1 within that single feature.",
+            "example": "Restore to this revision"
+          }
+        }
+      },
+      "create": {
+        "$value": "Create",
+        "$description": "Verb-first label for the trigger that starts creating an object — a button or menu item. Pair with a noun: \"Create document,\" \"Create release.\"",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": [],
+            "role": "trigger-button-or-menu-item",
+            "pairsWith": "content.action.new"
+          }
+        }
+      },
+      "new": {
+        "$value": "New",
+        "$description": "Noun-phrase label for the resulting object — a dialog title or empty-state heading. Pair with a noun: \"New document,\" \"New release.\" Not a synonym for Create; the two are assigned by grammatical role, not interchangeable.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": [],
+            "role": "dialog-title-or-empty-state-heading",
+            "pairsWith": "content.action.create"
+          }
+        }
+      }
+    },
+    "region": {
+      "$description": "Naming for docked, non-modal UI regions. \"Sidebar\" and \"Panel\" name genuinely different things — keep them distinct.",
+      "panel": {
+        "$value": "Panel",
+        "$description": "A collapsible, docked auxiliary region attached to the main content — comments, tasks, field help.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": ["Pane", "Inspector"]
+          }
+        }
+      },
+      "sidebar": {
+        "$value": "Sidebar",
+        "$description": "The primary, persistent navigation rail.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": []
+          }
+        }
+      }
+    },
+    "surface": {
+      "$description": "Naming for overlay UI surfaces, distinguished by whether they trap focus.",
+      "dialog": {
+        "$value": "Dialog",
+        "$description": "A focus-trapping overlay that blocks interaction until dismissed. Matches the Sanity UI component name as of @sanity/ui@5.0.0-alpha.7.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": [
+              "Modal (as a noun; \"modal\" remains valid as an adjective, as in \"a modal dialog\")"
+            ],
+            "status": "settled",
+            "note": "Supersedes terminology-glossary-2026-08-18.md decision D1, which ruled 'Modal' on the premise that the component was being renamed Dialog -> Modal. alpha.7 renamed it the other way (Modal -> Dialog), so the canonical term and the component name now agree."
+          }
+        }
+      },
+      "popover": {
+        "$value": "Popover",
+        "$description": "A non-modal, anchored floating surface that doesn't trap focus.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": []
+          }
+        }
+      }
+    },
+    "severity": {
+      "$description": "Problem-severity words, each given a distinct job so a string's key and its displayed value can't silently disagree.",
+      "error": {
+        "$value": "Error",
+        "$description": "Something invalid or broken that blocks progress — validation failures, failed operations.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": ["Issue, when it only ever means \"error\""]
+          }
+        }
+      },
+      "warning": {
+        "$value": "Warning",
+        "$description": "Something that may be a problem but doesn't block progress — advisory, non-blocking notices.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": []
+          }
+        }
+      },
+      "issue": {
+        "$value": "Issue",
+        "$description": "An aggregate that may include both errors and warnings — reserved for a summary count only, ex: \"3 issues found\" covering 2 errors and 1 warning.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": [],
+            "constraint": "Never use as a bare synonym for error. If a string's key says error but its value says issue — or the reverse — that's a bug, not a style choice."
+          }
+        }
+      }
+    },
+    "type-error": {
+      "$description": "Naming for \"this type wasn't found/valid\" errors, split by audience.",
+      "document-type": {
+        "$value": "document type",
+        "$description": "Use for any user-facing error about a specific document's type.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": ["bare \"type\" alone in a title"]
+          }
+        }
+      },
+      "schema-type": {
+        "$value": "schema type",
+        "$description": "Reserve for developer- or config-level errors — a broken schema definition, not a document instance.",
+        "$extensions": {
+          "com.sanity.contentTokens": {
+            "retired": ["bare \"type\" alone in a title"]
+          }
+        }
+      }
+    }
+  }
+}

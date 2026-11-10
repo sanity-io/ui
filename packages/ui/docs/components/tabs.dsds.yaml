@@ -1,0 +1,104 @@
+kind: component
+id: tabs
+name: Tabs
+description: 'A family of components that switch between separate but related content sections. Tabs has three parts, each with its own entry: Tabs.List, Tabs.Tab and Tabs.Panel.'
+metadata:
+  tags: [tabs, tablist, tabpanel, navigation, views, tab, sections]
+  status:
+    status: beta
+uses:
+  - to: tabs-list
+  - to: tab
+  - to: tabs-panel
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: "When switching between different yet related views in the same context (for example, 'Content', 'Preview', 'History' in an inspector panel)."
+      - level: should
+        statement: Organizing sections within a settings or configuration screen.
+      - level: should
+        statement: Breaking a dense detail view into digestible categories without navigating away.
+      - level: should-not
+        statement: Navigating between separate pages or top-level routes. Use sidebar navigation or links instead.
+        alternatives:
+          - to: navigation
+          - to: link
+      - level: should-not
+        statement: Content that should all be visible at once. Use VStack to lay out sections vertically.
+        alternatives:
+          - to: v-stack
+      - level: should-not
+        statement: Changing how one view presents the content it already shows. Examples include a density toggle, a sort order, a chart time range. Use Select instead.
+        alternatives:
+          - to: select
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: "Don't use Tabs when the selection changes how a single view renders. Use Select or Radio instead."
+        alternatives:
+          - to: select
+          - to: radio
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Render Tabs with a value and an onValueChange handler. Tabs is controlled. The parent holds the selected value.
+      - level: must
+        statement: Give each Tabs.Tab and each Tabs.Panel the value of the tab it pairs with.
+      - level: must
+        statement: Keep each value unique within one Tabs. Tabs uses value to link each tab to its panel. A repeated value links the wrong pair.
+      - level: must-not
+        statement: 'Don''t use two values that differ only in spaces, such as "Draft notes" and "Draft-notes". Tabs turns spaces into hyphens in the ids it builds. Both values produce the same id.'
+      - level: must-not
+        statement: "Don't render Tabs.Tab or Tabs.Panel outside Tabs. They read the selected value from Tabs and throw an error without it."
+      - level: must-not
+        statement: Don't nest tabs within tabs.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    title: Child parts
+    items:
+      - level: must
+        statement: Tabs has three subcomponents, Tabs.List, Tabs.Tab and Tabs.Panel. Each has its own entry, `tabs-list`, `tab` and `tabs-panel`. Read each one's entry in `docs/components/` before you write it. Its props are not listed here.
+      - level: must
+        statement: Don't write a subcomponent's props from memory or from this entry. This entry does not list them.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: Use Tabs.List, Tabs.Tab and Tabs.Panel together. They set the roles, ids and focus behavior that link each tab to its panel.
+alternatives:
+  - to: link
+refs:
+  - to: tabs-list
+    rel: relates-to
+    note: The row that holds the Tabs.Tab buttons.
+  - to: tab
+    rel: relates-to
+    note: The button that selects a Tabs.Panel.
+  - to: tabs-panel
+    rel: relates-to
+    note: The content for one tab.
+
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/tabs/Tabs.tsx
+imports:
+  - platform: react
+    code: import { Tabs } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

@@ -1,0 +1,93 @@
+kind: component
+id: divider
+name: Divider
+description: Renders a horizontal rule to break up sections of content.
+metadata:
+  tags: [divider, separator, rule, section, hr, break, group]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To visually and semantically break up sections of content in a vertical layout.
+      - level: should
+        statement: Between groups of items in a list or menu where a clear boundary helps scanning.
+      - level: should
+        statement: To mark a thematic shift in content — for example, between a primary action group and a destructive action.
+      - level: should-not
+        statement: As a spacing tool. Use VStack gap prop for vertical spacing instead.
+        alternatives:
+          - to: v-stack
+      - level: should-not
+        statement: To add a border to the bottom of a container like a toolbar. Use borderBottom on Box instead.
+        alternatives:
+          - to: box
+      - level: should-not
+        statement: When the line is purely decorative. Use a CSS border on Box instead.
+        alternatives:
+          - to: box
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Place Divider between distinct content groups — it renders a semantic hr that screen readers announce as a thematic break.
+      - level: should
+        statement: Use Divider inside a VStack so spacing on either side is consistent.
+      - level: must-not
+        statement: "Don't use Divider at the top or bottom of a container (toolbars, nav headers) to create an edge border — use borderTop or borderBottom on Box instead."
+      - level: must-not
+        statement: Don't add multiple Dividers in a row — use VStack with a larger gap value instead.
+  - kind: guidelines
+    for: all
+    title: Content
+    description: Divider has no text content of its own. These guidelines cover the content around a Divider.
+    tags: [content]
+    items:
+      - level: should
+        statement: Place a Divider between groups of related content, not between every item. If each item needs spacing, use VStack `gap` instead.
+      - level: should
+        statement: A Divider signals that two sections are different. The content on each side should make that clear without relying on the line itself.
+      - level: should
+        statement: In long lists (nav, settings panels), use a heading or label above each group. This lets users find sections without reading every item. The Divider marks the boundary; the heading names it.
+      - level: should
+        statement: A label followed by a Divider followed by a field creates a false thematic break. Use VStack `gap={1}` to pair a label with its field.
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: Divider renders as `<hr>`, which carries the implicit ARIA role `separator`. Screen readers announce it as a thematic break. Use it only when the content on either side is distinct — not for visual spacing alone.
+      - id: divider-focusable-keyboard-interaction-add
+        level: should
+        statement: Divider is not focusable and has no keyboard interaction. Do not add `onClick` or other event handlers to it.
+      - level: should
+        statement: Unlike `<section>` or `<nav>`, `<hr>` does not create an ARIA landmark. Screen reader users who navigate by landmarks will not stop at a Divider. Use it for in-flow separation only, not as a navigation aid.
+      - level: must-not
+        statement: Do not override the `<hr>` role with `role="presentation"` or `aria-hidden="true"` unless the line is decorative. If it is decorative, use a CSS border or Box with `borderBottom` instead of Divider.
+
+alternatives:
+  - to: box
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=31003-2
+    rel: design
+    role: Figma component (v5)
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/divider/Divider.tsx
+imports:
+  - platform: react
+    code: import { Divider } from '@sanity/ui'
+    package: '@sanity/ui'
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

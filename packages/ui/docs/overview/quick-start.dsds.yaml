@@ -1,0 +1,317 @@
+kind: sanity.guide
+id: quick-start
+name: Quick start
+description: A step-by-step tutorial for building a three-region admin interface with Sanity UI, covering layout, accessibility, and key component patterns.
+metadata:
+  tags:
+    - getting-started
+    - layout
+    - accessibility
+    - tutorial
+    - Box
+    - Flex
+    - Card
+    - Container
+    - VStack
+    - admin interface
+    - sidebar
+    - toolbar
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Place `SkipToContent` as the first focusable element in the layout, pointing to the main content region's `id`.
+      - level: must
+        statement: Never skip heading levels. Use one `<h1>` for the page title and `<h2>` for sidebar and card headings.
+      - refs:
+          - to: shared-foundations#container-inside-scroll-box
+            rel: same-as
+      - level: must
+        statement: Set `lang="en"` on the `<html>` element in `index.html` so screen readers can detect the page language (WCAG 3.1.1 A).
+      - level: must
+        statement: Add `flexWrap="wrap"` to every `Flex` with two or more children to prevent overflow at 320px.
+      - level: must
+        statement: Add `aria-label` to every icon-only button. A tooltip does not set an accessible name.
+      - level: should
+        statement: Use `VStack` for simple vertical lists with even spacing. Use `Flex flexDirection="column"` when you need `flexGrow`, `overflow`, `minHeight`, or full flex control.
+      - refs:
+          - to: shared-foundations#card-no-layout-props
+            rel: same-as
+      - level: must-not
+        statement: Do not add `Container` to app chrome (sidebar, toolbar). Use `Box` or `Flex` directly for those regions.
+      - refs:
+          - to: shared-foundations#card-not-for-structural-regions
+            rel: same-as
+  - kind: steps
+    for: all
+    ordered: true
+    title: Steps
+    items:
+      - title: 'Step 1: Create the outer shell'
+        description: |-
+          The outer shell is a `Flex` that fills the viewport. The sidebar and main area sit side by side. This assumes the project is set up as the `installation` guide shows: its `package.json`, `tsconfig.json` and entry file.
+
+          ```tsx
+          // src/App.tsx
+          import { useState } from 'react'
+          import { Box, Button, Flex, Heading, IconButton, SkipToContent } from '@sanity/ui'
+          import { MenuIcon } from '@sanity/icons/Menu'
+
+          const App = () => {
+            const [sidebarOpen, setSidebarOpen] = useState(true)
+
+            return (
+              <Flex flexWrap="wrap" minHeight="100vh">
+                <SkipToContent href="#main-content" label="Skip to content" />
+                {sidebarOpen && (
+                  <Box as="nav" aria-label="Main navigation" borderRight={[false, false, false, true]} flexBasis={['100%', '100%', '100%', '260px']} flexShrink={0}>
+                    <Box padding={3}>
+                      <Heading as="h2" size={1}>Studio</Heading>
+                    </Box>
+                  </Box>
+                )}
+
+                <Flex as="main" id="main-content" tabIndex={-1} flexBasis={['100%', '100%', '100%', '0']} flexDirection="column" flexGrow={1} minWidth="0" overflow="hidden">
+                  <Box padding={3} borderBottom>
+                    <Heading as="h1">All Documents</Heading>
+                  </Box>
+                </Flex>
+              </Flex>
+            )
+          }
+
+          export default App
+          ```
+
+          **What to notice:**
+
+          - `Box as="nav"` renders a `<nav>` element. Screen readers list it as a landmark.
+          - `Flex as="main"` renders a `<main>` element.
+          - `flexWrap="wrap"` on the outer Flex lets the sidebar stack above the content at narrow widths (WCAG 1.4.10).
+          - `minWidth="0"` on the main area prevents content from pushing the layout wider than the viewport.
+          - `as="h1"` on the page heading and `as="h2"` on the sidebar heading create a correct hierarchy.
+          - `SkipToContent` is the first focusable element. A keyboard user's first Tab press reveals it; activating it jumps focus to `#main-content`.
+      - title: 'Step 2: Add a toolbar with reflow'
+        description: |-
+          The toolbar holds the page title and an action button. Both wrap to separate lines on mobile.
+
+          Replace the `<Box padding={3} borderBottom>` inside `main` with:
+
+          ```tsx
+          import { AddIcon } from '@sanity/icons/Add'
+          import { MenuIcon } from '@sanity/icons/Menu'
+          import { CloseIcon } from '@sanity/icons/Close'
+          ```
+
+          ```tsx
+          <Box padding={3} borderBottom>
+            <Flex alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={2}>
+              <Flex alignItems="center" gap={3} minWidth="0">
+                {!sidebarOpen && (
+                  <IconButton
+                    level="tertiary"
+                    icon={MenuIcon}
+                    aria-label="Show navigation"
+                    onClick={() => setSidebarOpen(true)}
+                  />
+                )}
+                <Heading truncate={1} as="h1">All Documents</Heading>
+              </Flex>
+              <Button text="New document" iconStart={AddIcon} />
+            </Flex>
+          </Box>
+          ```
+
+          **What to notice:**
+
+          - `flexWrap="wrap"` is required on every `Flex` with two or more children. Without it the page overflows at 320px.
+          - `truncate={1}` on the Heading truncates long titles with an ellipsis.
+          - The `MenuIcon` button has `aria-label` because it has no visible text.
+          - Button `level` controls visual weight: `"primary"` is the default (solid, full visual weight).
+      - title: 'Step 3: Build the sidebar'
+        description: |-
+          Replace the sidebar placeholder with navigation links and a close button.
+
+          ```tsx
+          import { CloseIcon } from '@sanity/icons/Close'
+          import { Box, Flex, Heading, IconButton, Link, Text, VStack } from '@sanity/ui'
+          ```
+
+          ```tsx
+          <Box as="nav" aria-label="Main navigation" borderRight={[false, false, false, true]} flexBasis={['100%', '100%', '100%', '260px']} flexShrink={0} overflowY="auto">
+            <VStack>
+              <Box padding={3} borderBottom>
+                <Flex alignItems="center" justifyContent="space-between">
+                  <Heading as="h2" size={1}>Studio</Heading>
+                  <IconButton
+                    level="tertiary"
+                    icon={CloseIcon}
+                    aria-label="Close navigation"
+                    onClick={() => setSidebarOpen(false)}
+                  />
+                </Flex>
+              </Box>
+              <Box padding={3}>
+                <VStack gap={3}>
+                  <Link href="/documents">Documents</Link>
+                  <Link href="/authors">Authors</Link>
+                  <Link href="/settings">Settings</Link>
+                </VStack>
+              </Box>
+            </VStack>
+          </Box>
+          ```
+
+          **What to notice:**
+
+          - `VStack` lays children out in a column with even `gap` spacing. It exposes only `as` and `gap`. For full flex control, use `Flex flexDirection="column"`.
+          - `Link` renders a native `<a>` element and inherits color from the container. It adds an underline by default — use `underlined={false}` to remove it for nav links.
+      - title: 'Step 4: Add document cards'
+        description: |-
+          Create a scrollable list of cards below the toolbar.
+
+          ```tsx
+          import { Badge, Card, Container } from '@sanity/ui'
+          ```
+
+          ```tsx
+          const DOCUMENTS = [
+            { title: 'Getting Started', status: 'Published' },
+            { title: 'API Reference', status: 'Draft' },
+            { title: 'Design Tokens', status: 'Published' },
+          ]
+          ```
+
+          Add this below the toolbar `Box`, still inside the `main` Flex:
+
+          ```tsx
+          <Box padding={4} flexGrow={1} overflowY="auto">
+            <Container>
+              <VStack gap={3}>
+                {DOCUMENTS.map((doc) => (
+                  <Card key={doc.title}>
+                    <Flex alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={2}>
+                      <VStack gap={2}>
+                        <Heading as="h2">{doc.title}</Heading>
+                        <Text as="p" size={1} muted>Last edited 2 hours ago</Text>
+                      </VStack>
+                      <Badge tone={doc.status === 'Published' ? 'positive' : 'caution'}>
+                        {doc.status}
+                      </Badge>
+                    </Flex>
+                  </Card>
+                ))}
+              </VStack>
+            </Container>
+          </Box>
+          ```
+
+          **What to notice:**
+
+          - `Container size={2}` caps the card list at the width of {container-2} and centers it. On a wide monitor the cards won't stretch edge to edge.
+          - `Container` goes inside the scroll `Box`, not around it. The `Box` handles `flexGrow` and `overflowY`; Container handles max-width only.
+          - Don't add Container to the sidebar or toolbar — those are app chrome and should fill their available width.
+          - `Card` is a content surface — it adds a background and border. Do not use it for structural regions like sidebars or toolbars.
+          - Layout props like `flexGrow` go on `Box`, not on `Card`. Passing one to Card is a TypeScript error.
+          - Each card heading is `as="h2"` because `as="h1"` is the page title above. Never skip heading levels.
+      - title: 'Step 5: Set the page language'
+        description: |-
+          In `index.html`, set `lang="en"` on the `<html>` element:
+
+          ```html
+          <html lang="en">
+          ```
+
+          Without this, screen readers cannot detect the page language (WCAG 3.1.1 A).
+      - title: Run it
+        description: |-
+          ```shell
+          npm run dev
+          ```
+
+          Open `http://localhost:5173`. You should see a sidebar with navigation links on the left and a document list on the right.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: |-
+          This tutorial walks through building a three-region admin interface with Sanity UI. You will create a sidebar, a toolbar, and a content list — the same layout used in Sanity Studio.
+
+          **Before you start:** complete the steps in the `installation` guide. You should have `@sanity/ui@alpha` and `@sanity/icons` installed, plus a working entry file.
+      - title: What you will build
+        body: |-
+          A single-page app with:
+
+          - A collapsible sidebar (`<nav>`) with navigation links
+          - A toolbar with a page title and an action button
+          - A scrollable list of document cards with status badges
+          - Correct heading hierarchy, landmarks, keyboard access, and responsive reflow
+  - kind: section
+    for: all
+    freeform:
+      - title: What you built
+        body: |-
+          | Feature | How it works |
+          | :---- | :---- |
+          | Landmarks | `Box as="nav"` and `Flex as="main"` create `<nav>` and `<main>` for screen readers. |
+          | Responsive sidebar | `flexWrap="wrap"` on the outer Flex. At 320px the sidebar stacks above the content. |
+          | Toolbar reflow | `flexWrap="wrap"` on the toolbar Flex. Heading and button wrap at narrow widths. |
+          | Heading hierarchy | One `<h1>` for the page title. `<h2>` for sidebar and card headings. No skipped levels. |
+          | Page language | `<html lang="en">` in `index.html`. |
+          | Icon-only buttons | `aria-label` on every button without visible text. |
+          | Skip navigation | `SkipToContent` at the top of the layout. A keyboard user presses Tab to reveal it; activating it jumps focus to `#main-content`. |
+          | Navigation links | `Link` components in the sidebar. They render native `<a>` elements and inherit color from the container. |
+      - title: Key patterns
+        body: |-
+          ### Box vs Flex vs Card vs Container
+
+          | Component | Use for | Adds a visual surface? |
+          | :---- | :---- | :---- |
+          | `Box` | Padding, borders, scroll containers, landmarks | No |
+          | `Flex` | Row/column layout with alignment and gap | No |
+          | `Card` | Content that needs a background, border, and tone | Yes |
+          | `Container` | Max-width constraint and horizontal centering for content areas | No |
+
+          Do not use `Card` for toolbars, sidebars, or scroll wrappers. Use `Box` or `Flex`. Do not use `Container` for app chrome — use `Box` or `Flex` directly.
+
+          ### VStack vs Flex for vertical layout
+
+          | Use `VStack` | Use `Flex flexDirection="column"` |
+          | :---- | :---- |
+          | Simple vertical list with even spacing | Container needs `flexGrow`, `overflow`, or `minHeight` |
+          | Exposes only `as` and `gap` | Full flex control: `alignItems`, `justifyContent`, `flexWrap` |
+
+          ### Card does not accept layout props
+
+          `Card` does not accept `flexGrow`, `minWidth`, `overflow`, or any other layout prop. Passing one directly is a TypeScript error (TS2322). Wrap it in a `Box`:
+
+          ```tsx
+          {/* ✗ — flexGrow on Card does nothing */}
+          <Card flexGrow={1}>...</Card>
+
+          {/* ✓ — Box handles layout, Card handles the surface */}
+          <Box flexGrow={1}>
+            <Card>...</Card>
+          </Box>
+          ```
+
+          ### Icon-only buttons need aria-label
+
+          A tooltip does not set an accessible name. Add `aria-label`:
+
+          ```tsx
+          <IconButton icon={SearchIcon} level="tertiary" aria-label="Search" />
+          ```
+      - title: Next steps
+        body: |-
+          - Add a right-side inspector panel with `Box as="aside" aria-label="Inspector"`.
+          - Use `tone` on Card and Button for status: Button accepts `"neutral" and `"critical"`. Card accepts `"neutral"`, `"positive"`, `"caution"`, `"critical"`, `"suggest"`. Always a critical Button with an icon.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this guide to scaffold a three-region admin layout with Sanity UI, following correct accessibility, heading hierarchy, and responsive reflow patterns.

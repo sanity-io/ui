@@ -1,0 +1,162 @@
+kind: component
+id: list
+name: List
+description: A compound component for displaying structured rows.
+metadata:
+  tags: [list, rows, item, compound, document, navigation]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To list documents in a navigational or summary context.
+      - level: should
+        statement: Any repeating vertical list of scannable rows.
+      - level: should-not
+        statement: For simple stacked content with no row structure. Use VStack instead.
+        alternatives:
+          - to: v-stack
+      - level: should-not
+        statement: For action menus or dropdown options. Use List.ButtonItem inside a Popover instead.
+        alternatives:
+          - to: popover
+          - to: list-button-item
+      - level: should-not
+        statement: For table data with column headers. Use a table element directly.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Use density='compact' on the List.Item or List.ButtonItem rows in sidebars and panels, and density='loose' for touch-first UIs.
+      - level: should
+        statement: Use as='ol' when list order is meaningful (ranked results, step sequences).
+      - level: should
+        statement: 'Keep each of the start and end slots compact — one element only: a thumbnail or icon for start; a button, badge, or timestamp for end.'
+      - id: don-list-itemtext-outside-list
+        level: must-not
+        statement: Don't use List.ItemText outside of List.Item. It relies on the flex layout of the parent row.
+      - level: must-not
+        statement: "Don't place two or more buttons or other interactive elements in the end slot (or the start slot). It creates an unclear tab order."
+      - level: must-not
+        statement: Don't override List.ItemImage dimensions with inline styles. The fixed size keeps rows visually even.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: List has subcomponents, List.Item, List.ItemText, List.ItemImage and List.ButtonItem. Each has its own entry, `list-item`, `list-item-text`, `list-item-image` and `list-button-item`. Read each one's entry in `docs/components/` before you write it. Its props are not listed here.
+      - id: subcomponents-not-named-exports
+        level: must
+        statement: "Access subcomponents via dot notation: List.Item, List.ItemText, List.ItemImage, List.ButtonItem. They are not separate named exports, so don't import them that way."
+      - level: must
+        statement: Provide alt on every List.ItemImage — it renders a native <img> with no implicit accessible name.
+      - id: no-density-on-list
+        level: must-not
+        statement: Do not set `density` on List. It has no `density` prop, and `<List density="compact">` is a TypeScript error. Set it on each List.Item or List.ButtonItem.
+      - level: must-not
+        statement: List.Item does not support the `as` prop — it always renders as `<li>`. Passing `as` to List.Item causes a TypeScript error.
+      - level: must-not
+        statement: There is no `trailing` prop on List.Item — it was replaced by `start` and `end` in a breaking change. `trailing={...}` is a TypeScript error (unknown prop); use `end` instead.
+
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+      - level: should
+        statement: Keep titles short. Aim for one line at the target container width.
+      - level: should
+        statement: Use `subtitle` for metadata, not for key actions or status.
+      - refs:
+          - to: content-guidelines#plain-language
+            rel: same-as
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - id: list-item-image-alt-required
+        level: must
+        statement: Always pass `alt` on `List.ItemImage`. Use `alt=""` only if the image is decorative and the title text already describes the item.
+      - level: must
+        statement: Buttons in `start` or `end` must have an accessible name via `aria-label` or visible text.
+      - level: should
+        statement: '`List` renders as `<ul>` by default. Use `as="ol"` when order is meaningful.'
+      - level: must-not
+        statement: '`List.Item` renders as `<li>`. Do not use it outside a `<ul>` or `<ol>`.'
+
+alternatives:
+  - to: v-stack
+    note: Plain vertical stacking without list semantics
+  - to: list-button-item
+    note: Action rows inside a Popover
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32244-2
+    rel: design
+    role: Figma component (v5)
+  - to: space
+    rel: relates-to
+  - to: list-button-item
+    rel: relates-to
+    note: Action rows inside a Popover
+  - to: badge
+    rel: relates-to
+    note: Good as an `end` element for status indicators
+  - to: list-button-item
+    rel: relates-to
+    note: The interactive/selectable variant of **List.Item**
+  - to: avatar
+    rel: relates-to
+    note: Good as a start element before `List.ItemText`
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/list/List.tsx
+imports:
+  - platform: react
+    code: import { List } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        List is new in v5, with no direct v3 match. v3 list patterns were built with `Stack` \+ `Card` or custom `<ul>/<li>` markup.
+
+        The new `List` formalizes that pattern. It adds built-in density, start/end slots, and an image slot.
+
+        ### **Key differences**
+
+        - `List.Item` handles its own layout. No need to wrap rows in `Card` or `Box` for spacing.
+        - `List.ItemText` has built-in sizing and truncation. No need to set `Text` props on each item.
+        - `List.ItemImage` provides a standard thumbnail slot with fixed sizing and rounded corners.
+
+        ### **If you used Stack \+ Card rows**
+
+        ```
+        // v3 pattern
+        <Stack space={1}>
+          <Card padding={3}>
+            <Flex align="center" gap={3}>
+              <Text weight="semibold">{item.title}</Text>
+            </Flex>
+          </Card>
+        </Stack>
+
+        // v5 equivalent
+        <List>
+          <List.Item>
+            <List.ItemText title={item.title} />
+          </List.Item>
+        </List>
+        ```

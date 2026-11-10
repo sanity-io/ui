@@ -1,0 +1,79 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: sans
+    name: sans
+    description: The sans-serif stack. All UI text and content.
+    metadata:
+      status:
+        status: stable
+      group: font-family
+    tokenType: fontFamily
+    source:
+      href: ./dtcg/json/fontFamily.tokens.json#sans
+  - kind: token
+    id: mono
+    name: mono
+    description: The monospace stack. Code, identifiers, and tabular data.
+    metadata:
+      status:
+        status: stable
+      group: font-family
+    tokenType: fontFamily
+    source:
+      href: ./dtcg/json/fontFamily.tokens.json#mono
+  - kind: entry
+    id: font-family
+    name: Font families
+    description: 'The two font stacks used across Sanity UI: a sans-serif for all UI text and a monospace for code.'
+    metadata:
+      tags: [typography, font-family, font, sans, mono, monospace]
+      status:
+        status: stable
+      group: font-family
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - level: must
+            statement: Use `mono` for code, identifiers, and tabular tokens. Use `sans` for everything else.
+          - level: should
+            statement: Let the component set the family. Reach for the raw token only when no component fits.
+          - level: should-not
+            statement: Don't introduce a third typeface. Two families keep the system coherent.
+      - kind: guidelines
+        for: agent
+        framing: how-to-use
+        items:
+          - level: must
+            statement: Render code with the Code component (mono) and UI text with Text or Heading (sans).
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              Sanity UI ships two font stacks. `sans` carries all content and UI controls. `mono` carries code and identifiers. Each token is a full stack with fallbacks, so text renders before the primary face loads.
+          - title: The families
+            body: |-
+              | Token | Used by |
+              | --- | --- |
+              | `sans` | Heading, Text, and all UI controls |
+              | `mono` | Code |
+
+              `mono` is a stack of system monospace faces, so code matches the user's environment.
+          - title: Related
+            body: |-
+              - **Typography guidelines** — type scale, hierarchy, and font features (`ss02`, `dlig`, `tnum`).
+              - **Typography styles** — composite styles that bind a family to a size, weight, and line height.
+              - **Code** — renders with `mono`; **Text** and **Heading** render with `sans`.
+      - kind: section
+        for: agent
+        freeform:
+          - title: Intent
+            body: Choose `sans` for UI text and `mono` for code. Prefer the matching component over setting a family directly.
+    refs:
+      - href: ./dtcg/json/fontFamily.tokens.json
+        rel: source
+        role: DTCG source

@@ -1,0 +1,208 @@
+kind: component
+id: popover
+name: Popover
+description: A floating layer to disclose secondary, contextually relevant content or actions.
+metadata:
+  tags: [popover, floating, overlay, contextual, non-modal, secondary]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To save space by hiding secondary controls until requested.
+      - level: should
+        statement: To introduce or educate users on a specific feature or element on the screen.
+      - level: should-not
+        statement: To display critical information the user needs for their workflow.
+      - level: should-not
+        statement: To provide a standard list of options in a contextual menu. Use a List with List.ButtonItem inside this Popover instead.
+        alternatives:
+          - to: list-button-item
+      - level: must-not
+        statement: To display helper text via hover or focus. Use Tooltip instead.
+        alternatives:
+          - to: tooltip
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To display non-essential, non-blocking secondary content.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Open Popover on press or Space/Enter keypress. Popover should not open on hover.
+      - level: must
+        statement: Give the trigger a clear accessible name that describes what the Popover reveals.
+      - level: should
+        statement: Provide a visual cue that interacting with an item will open a Popover. When in doubt, use an end-aligned ChevronDownIcon.
+      - level: should
+        statement: Keep the content short and self-contained. A Popover should only be relevant to its target..
+      - level: should
+        statement: Choose a placement that keeps the content inside the viewport and clear of the trigger's neighbors.
+      - level: must-not
+        statement: Don't auto-open Popovers outside of walkthroughs.
+      - level: must-not
+        statement: Don't open more than one Popover at a time.
+      - level: must-not
+        statement: Do not use Popover for gating content. Use Dialog instead.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Popover has no `open`, `onOpen` or `onClose` prop. Its trigger opens it, and the browser closes it on Escape or an outside click. Do not mirror its open state in React state.
+      - level: must
+        statement: The child of Popover must be a single React element (not a string, fragment, or array). Popover clones it.
+      - level: must
+        statement: The child must render a button element. The popovertarget attribute is only honoured on buttons, so Button, IconButton, and a bare button work; a Box, Text, or div renders but never opens.
+      - level: must
+        statement: Set autoFocus on the first focusable element inside the content. An auto popover does not move focus on its own.
+        example:
+          title: Focus the first control when the panel opens
+          description: A filter panel whose Select takes `autoFocus`. Opening the Popover moves focus into the panel, so the next key press lands on the first filter, not back on the trigger.
+          ref:
+            href: ../examples/popover-1.tsx
+            rel: source
+      - level: should
+        statement: To open or close a Popover from code, put a `ref` on it. The ref reaches the native popover element, so `ref.current?.hidePopover()`, `showPopover()` and `togglePopover()` work. Use `hidePopover()` to close it after a form inside it submits.
+        example:
+          title: Close the popover when its form submits
+          description: A rename form inside a Popover. On submit it saves the name and closes the popover through the ref.
+          ref:
+            href: ../examples/popover-2.tsx
+            rel: source
+      - level: should
+        statement: The content box has its own padding, {space-2} across and {space-1} down, with radius {radius-2} and shadow {shadow-2}. Put the content straight inside; a padded wrapper doubles the padding.
+      - level: should
+        statement: Set portal only when an ancestor clips or misplaces the content.
+      - level: may
+        statement: Set the same anchorName on a Tooltip and a Popover to attach both to one trigger, with the Tooltip nested inside the Popover.
+      - level: must-not
+        statement: Don't set aria-expanded on the trigger by hand. Popover attaches popovertarget, and browsers implementing invoker semantics reflect aria-expanded themselves.
+      - level: must-not
+        statement: Escape and outside-click dismissal come from the browser. Do not reimplement them.
+      - level: must-not
+        statement: Do not trigger Popover on hover — trigger on click or keyboard press only.
+
+alternatives:
+  - to: dialog
+    note: Use when the content must block the rest of the page or gate a task
+  - to: tooltip
+    note: Use when the floating content is a short, non-interactive label. Share a trigger with a Popover via `anchorName`
+  - to: list-button-item
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=33949-674
+    rel: design
+    role: Figma component (v5)
+  - to: button
+    rel: relates-to
+    note: The required trigger for a Popover
+  - to: icon-button
+    rel: relates-to
+    note: The required trigger for a Popover
+  - to: card
+    rel: relates-to
+    note: Compose inside `content` when the floating surface needs its own tone, padding, or border
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/popover/Popover.tsx
+imports:
+  - platform: react
+    code: import { Popover } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: placement
+    description: >-
+      Position of the floating layer relative to its trigger. Keeps the content
+      in the viewport and clear of whatever sits next to the trigger. Each value
+      declares a fallback on the opposite side, so the browser flips the layer
+      rather than letting it overflow.
+    values:
+      - id: top
+        description: Above the trigger, centered.
+      - id: top-start
+        description: Above, aligned to the start edge.
+      - id: top-end
+        description: Above, aligned to the end edge.
+      - id: right
+        description: Right of the trigger, centered.
+      - id: right-start
+        description: Right, aligned to the start edge.
+      - id: right-end
+        description: Right, aligned to the end edge.
+      - id: bottom
+        description: >-
+          Below the trigger, centered. The default. The default reading
+          direction for a menu or a disclosure opened from a toolbar.
+      - id: bottom-start
+        description: Below, aligned to the start edge.
+      - id: bottom-end
+        description: >-
+          Below, aligned to the end edge. The conventional placement for a menu
+          opened from an end-aligned action button.
+      - id: left
+        description: Left of the trigger, centered.
+      - id: left-start
+        description: Left, aligned to the start edge.
+      - id: left-end
+        description: Left, aligned to the end edge.
+  - traitType: variant
+    kind: boolean
+    id: portal
+    description: >-
+      Renders the floating content into document.body through a React portal
+      instead of inline. Rarely needed. The content already sits in the
+      browser's top layer, so overflow ancestors do not clip it. Use when an
+      ancestor with transform, filter, or contain creates a containing block
+      that breaks anchor positioning. Portalled content does not render during
+      server-side rendering.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        The v3 Popover was a controlled component positioned by Floating UI and rendered through a portal. The v5 Popover is uncontrolled and built on the native Popover API and CSS anchor positioning. Most of the v3 configuration surface is gone because the browser now does that work.
+
+        ### Key differences
+
+        - **Popover is no longer controlled.** `open` is removed. The trigger opens the Popover; you cannot drive it from state.
+        - **`children` is now the trigger, not a positioning reference.** In v3, `children` was the reference element and could be omitted in favor of `referenceElement`. In v5, `children` is required and must render a `<button>`.
+        - **Positioning is CSS, not JavaScript.** Floating UI is gone. `placement` maps to a CSS class, and viewport flipping uses `position-try-fallbacks`.
+        - **Card styling props are gone.** v3 Popover rendered a `PopoverCard` and accepted `radius`, `shadow`, `tone`, `padding`, `overflow`, and `width`. v5 applies a fixed radius, shadow, and padding. Compose a `Card` inside `content` if you need more.
+        - **No arrow.** The `arrow` prop is removed.
+        - **No layer management.** `zOffset`, `onActivate`, and the `Layer` context are gone. The browser's top layer handles stacking.
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `open` | — | Removed. The Popover is uncontrolled and driven by the trigger. |
+        | `content` | `content` | Same purpose |
+        | `children` | `children` | Now required, and must render a `<button>`. It is the trigger, not just a positioning reference. |
+        | `placement` | `placement` | Same values, same default (`'bottom'`) |
+        | `portal` | `portal` | Now `boolean` only; v3 also accepted a portal name string |
+        | `arrow` | — | Removed |
+        | `disabled` | — | Removed. Conditionally render the trigger without a Popover instead. |
+        | `modal` | — | Removed. Use **Dialog** when interaction beneath the layer must be blocked. |
+        | `animate` | — | Removed. The open and close transition is always applied. |
+        | `fallbackPlacements`, `placementStrategy`, `preventOverflow`, `constrainSize` | — | Removed. CSS `position-try-fallbacks` flips the popover automatically. |
+        | `matchReferenceWidth`, `width` | — | Removed. Size the content yourself. |
+        | `referenceElement` | `anchorName` | Point a Popover at a shared anchor by name rather than by element reference. |
+        | `boundaryElement`, `floatingBoundary`, `referenceBoundary` | — | Removed. The viewport is the boundary. |
+        | `radius`, `shadow`, `tone`, `padding`, `overflow` | — | Removed. Compose a **Card** inside `content` for custom surface styling. |
+        | `scheme` | — | Removed |
+        | `zOffset`, `onActivate` | — | Removed. The browser's top layer handles stacking. |
+        | `updateRef`, `__unstable_margins` | — | Removed |

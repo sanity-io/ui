@@ -1,0 +1,10 @@
+{
+  "mono": {
+    "$type": "fontFamily",
+    "$value": "ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace"
+  },
+  "sans": {
+    "$type": "fontFamily",
+    "$value": "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Liberation Sans, sans-serif"
+  }
+}

@@ -1,0 +1,103 @@
+kind: sanity.guide
+id: faq
+name: Sanity UI 5 FAQ
+description: Anticipated questions about Sanity UI 5, with honest answers, covering migration timing, scope, stability, and where to get help.
+metadata:
+  tags:
+    - faq
+    - migration
+    - support
+    - stability
+  status:
+    status: stable
+    note: If a question isn't here, ask in #design-systems — common ones get added to this page.
+sections:
+  - kind: section
+    for: all
+    freeform:
+      - title: Should I migrate now?
+        body: |-
+          It depends. v5 is still a preview release. The recommended path:
+
+          - Try v5 on something new — a new feature, a small internal app, a component you're building from scratch.
+          - Read the per-component migration tables when you're ready.
+          - For non-Studio teams, it's worth waiting on a mass migration. Studio components are planned to migrate to v5 in Q2, and a lot of improvements are expected based on that process.
+      - title: What's coming in Q2?
+        body: |-
+          - **6 new components.** VStack, Button, PressArea, Inline, Container, Icons.
+          - **Token refactor.** Reduce the ~164,500 color tokens by at least 80%.
+          - **Color scheme adjustment.**
+          - **Studio migration.** Migrate ~2,000 Studio UI elements to v5 (8 components × instances). Codemods land for the components that need them.
+          - **Contribution program launch.**
+          - **Adoption + agentic fluency metrics automation.**
+          - **AILF (AI Literacy Framework) setup for Sanity UI docs.**
+
+          See the long-term roadmap for the bigger picture beyond Q2.
+      - title: Why is this worth doing?
+        body: |-
+          Sanity is currently spending separate code, separate maintenance, and separate diligence on multiple UI solutions across the company. v5's architecture and theming are how Sanity collapses that into one system that supports product, marketing, docs, email, and beyond.
+
+          There's precedent — design systems commonly improve design/development velocity by 30%. The ceiling is likely much higher, especially with agentic support.
+      - title: Are there codemods?
+        body: |-
+          Yes, for some migrations.
+
+          - **Card**
+          - **Import paths** (done)
+          - **Flex shorthand split** (`flex` → `flexBasis` + `flexGrow` + `flexShrink`) (done)
+
+          More are being built as the migration work in Q2 progresses. Not every breaking change needs a codemod — many are 1-line manual fixes.
+      - title: Is v5 stable?
+        body: No — everything is still written in pencil. The experience of using v5 is meant to be joyful, which means it needs your feedback. This preview release is intended to solicit just that. APIs will change to meet your needs and expectations. The area expected to change most is color — the current basic API isn't the final one, and it's expected to change and improve in the weeks ahead.
+      - title: Why did my component render with no styles?
+        body: |-
+          You probably skipped the entry-file setup in the `installation` guide. Without it, the layout components render as unstyled HTML. There's no error or warning — the browser swallows it silently. This is the single most common first-install issue.
+      - title: Can I use `styled(Box)` or `styled(Flex)`?
+        body: |-
+          No. v5 components are not styled-components — they're plain function components with CSS classes. Use `className` and CSS instead.
+
+          If you have a heavily styled-components-based codebase, this is the largest migration hurdle. The rest of the breaking changes are smaller.
+      - title: "What about `style={{ width: '100%' }}` and similar?"
+        body: |-
+          There's nothing stopping you, but ideally not — v5 has direct props for those now. Inline styles still work, but use the props when they exist:
+
+          ```tsx
+          {/* old */}
+          <Box style={{ width: '100%', position: 'sticky' }} />
+
+          {/* new */}
+          <Box width="100%" position="sticky" />
+          ```
+
+          The full list of inline-style replacements is in each component's reference doc.
+      - title: Is contribution open?
+        body: |-
+          Structured contribution opens in Q2, when the contribution program launches. Until that's live, the most useful contribution is:
+
+          - Use the Q1 components and report what breaks
+          - Open issues on the repo or in `#design-system`
+          - Flag where the system is missing what you need
+
+          The designer contribution model and developer contribution model — both shipped in Q1 — describe how the program will work.
+      - title: Where do I report bugs?
+        body: '`#design-system` for fast triage, or open an issue on the repo: github.com/sanity-io/ui. For accessibility issues specifically: same place, but flag the WCAG criterion if known — the documented accessibility authoring standard covers 13 standards, and a component failing one of them is a bug.'
+      - title: What's the relationship between v5 and the existing component-level documentation?
+        body: |-
+          The component reference docs (Box, Flex, Grid, Card, Heading, Text, Divider, and others) live in the working Google Doc, including API docs, usage guidelines, accessibility notes, and migration tables. The hub links to each one.
+
+          The long-term home for these docs is sanity.io/docs, in a `/ui` section — until that ships, the working Google Doc is the canonical location.
+      - title: Is there a hosted sandbox I can play with?
+        body: Not at launch. The repo includes a Storybook instance you can run locally — clone `github.com/sanity-io/ui` and follow the README. A hosted sandbox is on the wishlist for after the soft-launch period.
+      - title: Will the visual design change?
+        body: The architecture changed; the visual design mostly carries over for now. Density, spacing, and typography stay the same. Color will be changing — a Q2 token refactor is planned to reduce the color scale by at least 80%. If your code uses `tone` props, you'll get the new colors automatically. If you've hardcoded colors, you'll need to update them.
+      - title: Will styled-components ever come back?
+        body: No. The move off styled-components is intentional and final. Bundle size, runtime cost, and SSR ergonomics all improved.
+      - title: Where's the Figma library?
+        body: Where it's always been — the current Sanity UI Figma library is updated as v5 ships. New components are added to the v5 page as they ship.
+      - title: I have a question that's not here.
+        body: Drop it in `#design-system` or open a discussion on the repo. Common ones get added to this page.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this to answer common questions about Sanity UI 5's migration timing, stability, and scope before escalating to a human.

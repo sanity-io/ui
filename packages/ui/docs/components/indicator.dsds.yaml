@@ -1,0 +1,108 @@
+kind: component
+id: indicator
+name: Indicator
+description: A small colored dot that shows status at a glance.
+metadata:
+  tags: [indicator, status, dot, tone, signal, notification]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: 'To show the status of a document, user, or process at a glance (for example, published, draft, offline).'
+      - level: should
+        statement: To display a small notification signal next to an avatar or label.
+      - level: should
+        statement: To represent multiple concurrent statuses in a compact space using IndicatorStack.
+      - level: should-not
+        statement: To show a count or number. Use Badge instead.
+        alternatives:
+          - to: badge
+      - level: should-not
+        statement: 'As a standalone status label where the meaning needs text or a count. Use Badge or Text instead.'
+        alternatives:
+          - to: badge
+          - to: text
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - refs:
+          - to: shared-foundations#indicator-stack-for-adjacent-dots
+            rel: same-as
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: 'Provide a label when the indicator is the only signal for a status. Without it, the dot is invisible to screen readers. Omit label only when adjacent visible text conveys the same status.'
+      - level: should
+        statement: 'Pair the indicator with a visible text label. To show the status in a Tooltip instead, wrap Indicator in PressArea. The Tooltip needs it as a target.'
+      - level: must-not
+        statement: Don't change the size of the dot with inline styles or custom CSS. The 5×5px size is fixed.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: "Valid tone values: 'neutral', 'positive', 'suggest', 'caution', 'critical'. Do not use 'default', 'success', or 'warning' — they are not in the tone union and will cause a TypeScript error."
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: Always pass `label` when the indicator is the only signal for a status. This sets `role="img"` and `aria-label`, making the dot readable to screen readers.
+      - id: omit-only-adjacent-visible-text
+        level: should
+        statement: Omit `label` only when adjacent visible text already conveys the status. The dot becomes `aria-hidden` in that case.
+        refines:
+          - to: indicator#provide-a-label-when-the-indicator-is-the-only-signal-for-a-status-without-it-the-dot-is-invisible-to-screen-readers-omit-label-only-when-adjacent-visible-text-conveys-the-same-status
+      - level: should
+        statement: For document or item status (Published, Draft), pair the dot with a shape or icon difference in addition to tone. Put the status word in the row's accessible name or visible text — not only in the dot's color (WCAG 1.4.1).
+        refines:
+          - to: shared-foundations#tone-paired-with-second-channel
+      - level: should
+        statement: '`IndicatorStack` renders as a `div`. If the group represents a meaningful list of statuses, consider using `as="ul"` and wrapping each `Indicator` in `as="li"`.'
+alternatives:
+  - to: badge
+    note: Shows a short text label or count for status — use when the status needs to be read as text
+  - to: indicator-stack
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32595-44
+    rel: design
+    role: Figma component (v5)
+  - to: avatar
+    rel: relates-to
+    note: Commonly paired with `IndicatorStack` to show online or notification state on a user
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/indicator/Indicator.tsx
+imports:
+  - platform: react
+    code: import { Indicator } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        `Indicator` and `IndicatorStack` are new in v5, with no direct v3 equivalent. Status dots in v3 were built with a styled `Box` using `radius="full"` and a fixed size.
+
+        ```
+        // v3 pattern
+        <Box
+          style={{width: 5, height: 5, borderRadius: '50%', background: 'green'}}
+        />
+
+        // v5 equivalent
+        <Indicator tone="positive" label="Online" />
+        ```

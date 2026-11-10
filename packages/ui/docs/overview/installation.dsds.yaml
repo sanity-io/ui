@@ -1,0 +1,238 @@
+kind: sanity.guide
+id: installation
+name: Installation
+description: Everything needed to set up a React project for Sanity UI 5 — install, project files, TypeScript configuration and the entry file. The one place setup is documented.
+metadata:
+  tags:
+    - installation
+    - install
+    - setup
+    - getting-started
+    - react
+    - styles.css
+    - peer dependency
+    - overrides
+    - react-refractor
+    - ERESOLVE
+    - legacy-peer-deps
+    - tsconfig
+    - doctor
+    - package.json
+    - vite
+    - typescript
+    - polyfills
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: The `styles.css` import is required. Without it, all components render as plain, unstyled HTML. No error is thrown.
+      - level: must
+        statement: Import `@sanity/ui/polyfills` on the line above the stylesheet. Tooltip and Dialog both need it. Both fail silently without it. Tooltips never appear in browsers that lack the Interest Invokers API. A Dialog backdrop click stops dismissing in Safari, where Escape and the close button still work.
+      - level: must
+        statement: Import the Sanity UI stylesheet before your own global CSS. Sanity UI puts only its global reset in a cascade layer, `sui.global`, so any of your CSS overrides the reset. Its component styles are not layered, so when your CSS and a component rule have the same specificity, the later import wins.
+      - level: must
+        statement: 'Use `PressArea` to make a non-interactive element interactive. `Box` and `Card` don''t accept `onClick`. To make a whole card, list row, or media tile clickable, wrap it in `PressArea` — `<PressArea onClick={...}><Card>…</Card></PressArea>` — which renders a real `<button>` (or an `<a>` with `as="a"`). Put padding and visual styling on the child `Card`/`Box`, not on `PressArea`. `PressArea` is interactive-only: don''t use it as a backdrop or layout wrapper, and never pass `as="div"` (use a styled `Box` for non-interactive surfaces).'
+      - refs:
+          - to: shared-foundations#install-alpha-not-ui-poc
+            rel: same-as
+      - level: must-not
+        statement: The exact specifier is `@sanity/ui/styles.css` — not `@sanity/ui/dist/styles.css` (wrong subpath) and not `@sanity/ui/styles` (missing the extension). Both wrong forms fail at the Vite dev-server level, not in the browser. The page never renders and no console error explains why.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: '@sanity/ui v5 requires React 19.2 or later. Installing it in a project with React 18 will fail with ERESOLVE unless you add npm overrides or use --legacy-peer-deps.'
+      - level: must
+        statement: 'Install @sanity/ui with the `alpha` dist-tag, or with the exact v5 version you were given. If a task, a team or a lockfile names an exact version, use it as given. Never install a bare `@sanity/ui`: its `latest` tag is the pre-v5 line, and it resolves to the wrong major with no error.'
+      - level: must
+        statement: Install @sanity/icons without a dist-tag, or with the exact version you were given. Unlike @sanity/ui, its v5 line (5.2.1 and later) is already the package's `latest` tag.
+      - level: should
+        statement: Run `npx @sanity/ui@alpha doctor` before manually inspecting an entry file for a missing styles.css import or a tsconfig.json gap — it checks both (and package/icons install state, React/Node versions) in one pass.
+      - level: should
+        statement: 'For React 18 projects, add overrides to package.json before running install: { "overrides": { "react": "^19.2", "react-dom": "^19.2" } }. Use --legacy-peer-deps as a fallback if overrides are not an option.'
+      - level: should
+        statement: '@sanity/icons is a regular dependency of @sanity/ui v5, not a peer dependency — it installs on its own. Add it to your own package.json only because your app code imports icons directly, not because v5 needs you to.'
+      - level: should-not
+        statement: Do not add react-refractor to package.json. It is a regular dependency of @sanity/ui v5, not a peer dependency, and installs on its own.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    title: Project files
+    items:
+      - level: must
+        statement: "Add `@types/react` and `@types/react-dom` to `devDependencies`. Without them, every file reports `TS7016: Could not find a declaration file for module 'react'`. The error cascades, and components such as Switch, Radio and Card then look broken when nothing is wrong with them."
+      - level: must
+        statement: Add `@vitejs/plugin-react` to `devDependencies` in a Vite project. Without it the install and the type check both pass, and the dev server then fails to start with `ERR_MODULE_NOT_FOUND`.
+      - level: must-not
+        statement: Do not add `styled-components`. Version 5 does not use it.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    title: TypeScript configuration
+    items:
+      - level: must
+        statement: Write the `tsconfig.json` below as the project's first file, as written. It is the config Sanity UI's CLI writes for a new project (`npx @sanity/ui@alpha init`).
+      - level: must
+        statement: 'Keep `"jsx": "react-jsx"` in `compilerOptions`. Leaving it out causes the most common build failure in this library, `TS17004: Cannot use JSX unless the ''--jsx'' flag is provided`, on every component.'
+      - level: must
+        statement: 'Use TypeScript 5 or later, with `"moduleResolution": "bundler"`. Sanity UI''s types are reached through its `exports` map, which `"node"` and `"classic"` do not read.'
+      - level: should
+        statement: Keep `"app"` in `include`, even with no `app` folder. The CLI writes it so the same config fits projects that keep their sources in `app/`. A missing folder is not an error while `src` has files.
+      - level: must-not
+        statement: 'Do not add `compilerOptions` keys beyond the ones shown. An invented or misspelled key fails the build with `TS5023: Unknown compiler option`.'
+      - level: must-not
+        statement: Do not run a bare `tsc`. The config sets no `noEmit`, so it writes `.js` files beside your sources, and Vite loads those instead of the `.tsx` files. Type-check with `tsc --noEmit`, as the `build` script below does.
+      - level: must-not
+        statement: Do not change `tsconfig.json` while fixing a build. The cause of a build failure is almost always in the source under `src/`. Editing the config turns one error into an error on every file.
+  - kind: steps
+    for: all
+    ordered: true
+    title: Automatic setup (recommended)
+    items:
+      - title: Run the setup CLI
+        description: |-
+          ```sh
+          npx @sanity/ui@alpha init
+          ``` Detects your framework (Next.js, Remix, React Router, Vite, Astro, or plain React) and package manager, checks React and Node versions, installs `@sanity/ui@5` and `@sanity/icons` at matching versions, adds `import '@sanity/ui/styles.css'` to the detected entry file, reconciles `tsconfig.json` (creates it if missing, or adds only the missing required options), and writes `sanity-ui.json`. Prints the plan and asks for confirmation before writing anything.
+          `@sanity/ui`'s `latest` npm tag still points at the pre-v5 line — v5 only publishes under the `alpha` tag. Always pin `@sanity/ui@alpha`. A bare `@sanity/ui` install resolves to the wrong major. `init` is for new apps only. If it finds a pre-v5 `@sanity/ui` dependency, it stops with exit code 1.
+      - title: Flags
+        description: '`--dry` prints the plan and exits without changing anything. `--yes` / `-y` accepts every prompt with its default — use this for CI or when running through an agent. `--cwd <dir>` runs against a directory other than the current one. Without a TTY, `init` applies the plan and reports it. `--yes` only silences the confirmation prompt in an interactive terminal.'
+      - title: Verify an existing setup
+        description: |-
+          ```sh
+          npx @sanity/ui@alpha doctor
+          ``` Re-runs the same checks `init` verifies at the end of its run and prints a one-line fix for anything that fails: package and `@sanity/icons` installed, stylesheet resolves and is imported, `tsconfig.json` has the required options, React and Node versions. Read-only — it never writes anything. Run it first whenever a component renders unstyled or a build fails for no obvious reason.
+          If it finds `@sanity/ui` at a pre-v5 version, it prints a warning and exits with code 0 without running any checks.
+  - kind: steps
+    for: all
+    ordered: true
+    title: Install
+    items:
+      - title: Check your React version
+        description: '`@sanity/ui` requires React 19.2 or later. If your project has an older React version, `npm install` will fail with a peer dependency error.'
+      - title: 'New project: install React 19.2 first'
+        description: |-
+          Start with React 19.2:
+          ```shell npm install react@^19.2 react-dom@^19.2 ``` Then add Sanity UI (pin the `alpha` tag — `@sanity/ui`'s `latest` npm tag is the pre-v5 line):
+          ```shell npm install @sanity/ui@alpha ```
+          `@sanity/ui` depends on `@sanity/icons` and `react-refractor` directly — both install on their own. Add `@sanity/icons` to your own `package.json` if your app code imports icons directly. That keeps it from being a hidden transitive dependency:
+          ```shell npm install @sanity/icons ```
+          Sanity UI 5 has no `styled-components` dependency and no theme provider. Skip both.
+      - title: 'Existing project with React 18: add npm overrides'
+        description: |-
+          Add `overrides` to your `package.json` before running install:
+
+          ```json
+          "overrides": {
+            "react": "^19.2",
+            "react-dom": "^19.2"
+          }
+          ```
+
+          Then install:
+
+          ```shell
+          npm install react@^19.2 react-dom@^19.2 @sanity/ui@alpha @sanity/icons
+          ```
+
+          If you can't add overrides, use `--legacy-peer-deps`:
+
+          ```shell
+          npm install @sanity/ui@alpha @sanity/icons --legacy-peer-deps
+          ```
+  - kind: steps
+    for: all
+    ordered: true
+    title: Set up the entry point
+    items:
+      - title: Import the polyfills and the stylesheet
+        description: |-
+          Sanity UI 5 has no `ThemeProvider`. Import the polyfills and the stylesheet once, in the entry file.
+
+          ```js
+          import { createRoot } from 'react-dom/client'
+          import '@sanity/ui/polyfills' // Tooltip and Dialog need this; both fail silently without it
+          import '@sanity/ui/styles.css'
+          import App from './App'
+
+          createRoot(document.getElementById('root')!).render(<App />)
+          ```
+  - kind: section
+    for: all
+    freeform:
+      - title: Project files to start from
+        body: |-
+          For a new Vite project, start from these files. Where you were given exact versions, write those in place of `alpha` and `^5.2.1`.
+
+          **`package.json`**
+
+          ```json
+          {
+            "name": "my-app",
+            "private": true,
+            "version": "0.0.1",
+            "type": "module",
+            "scripts": {
+              "dev": "vite",
+              "build": "tsc --noEmit && vite build"
+            },
+            "dependencies": {
+              "react": "^19.2",
+              "react-dom": "^19.2",
+              "@sanity/ui": "alpha",
+              "@sanity/icons": "^5.2.1"
+            },
+            "devDependencies": {
+              "typescript": "^5",
+              "vite": "^6",
+              "@vitejs/plugin-react": "^4",
+              "@types/react": "^19",
+              "@types/react-dom": "^19"
+            }
+          }
+          ```
+
+          **`vite.config.ts`**
+
+          ```ts
+          import { defineConfig } from 'vite'
+          import react from '@vitejs/plugin-react'
+
+          export default defineConfig({
+            plugins: [react()],
+          })
+          ```
+
+          **`tsconfig.json`**:
+
+          ```json
+          {
+            "compilerOptions": {
+              "target": "ES2022",
+              "lib": ["DOM", "DOM.Iterable", "ES2022"],
+              "module": "esnext",
+              "moduleResolution": "bundler",
+              "jsx": "react-jsx",
+              "strict": true,
+              "esModuleInterop": true,
+              "skipLibCheck": true,
+              "resolveJsonModule": true,
+              "isolatedModules": true,
+              "moduleDetection": "force"
+            },
+            "include": ["src", "app"]
+          }
+          ```
+  - kind: section
+    for: all
+    freeform:
+      - title: Package version note
+        body: |-
+          These docs track the current `@sanity/ui` v5 alpha line. The package is pre-1.0 and still changing. The docs may describe components or props that your installed copy does not yet export. To list what your copy ships:
+          ```shell node -e "console.log(Object.keys(require('@sanity/ui')))" ```
+          When a doc and your installed package disagree, the package wins. Treat the docs as forward-looking.

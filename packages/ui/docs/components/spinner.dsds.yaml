@@ -1,0 +1,119 @@
+kind: component
+id: spinner
+name: Spinner
+description: Displays a loading/processing indicator.
+metadata:
+  tags: [spinner, loading, progress, async, indicator, busy, fetch]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: Content loading into a region of the page.
+      - level: should
+        statement: Async operations in progress (fetching data, uploading files).
+      - level: should
+        statement: Form submissions or other actions that take a long time.
+      - level: should-not
+        statement: To fill in placeholder content prior to loading. Use a skeleton placeholder instead.
+        alternatives:
+          - to: loading-states
+      - level: should-not
+        statement: When progress is known. Use a progress bar pattern instead.
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Button has a built-in loading prop; use that for button-level loading states instead of composing a Spinner inside a Button.
+        alternatives:
+          - to: button
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Pair with a visible text label explaining what's loading. A spinner alone does not tell the user what is happening.
+      - level: must
+        statement: >-
+          Carry the loading state in text, not in the rotation. Under reduced motion, v5's global reset stops Spinner's animation after one short iteration, so the spinner renders still. The paired text label, or an `aria-live` announcement, is what tells the user that work is in progress.
+      - level: should
+        statement: Show the spinner only after a short delay (~200ms) to avoid a flash for operations that complete quickly. If the operation finishes before the delay, skip the spinner.
+      - level: should
+        statement: Place the spinner near the content region it relates to.
+      - level: must-not
+        statement: Don't show spinners for tasks that finish in under 200ms.
+      - level: must-not
+        statement: Don't use multiple spinners on the same screen — use a single spinner at a higher level or skeleton placeholders per region.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Spinner renders `role="status"` and `aria-label="Loading..."` by default. Don't wrap it in another status region. Pass your own `aria-label` to name the operation.
+      - level: must-not
+        statement: 'Showing a spinner without any text label. Instead: Always pair Spinner with a visible text label or aria-label describing the operation.'
+      - level: must-not
+        statement: 'Using a tone or muted prop on Spinner. Instead: Both props were removed in v5. Spinner color is CSS-driven via --foreground-high and --foreground-low. Set tone on the parent container to control color intensity.'
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    description: 'Target conformance: WCAG Level AA.'
+    tags: [accessibility]
+    items:
+      - id: aria-busy
+        level: must
+        statement: Set aria-busy='true' on the container that is loading. Remove it when loading completes.
+      - id: role
+        level: must
+        statement: Wrap the Spinner and its label in a container with role='status'. Screen readers announce the loading message when it appears. The role implies aria-live='polite' so the announcement does not cut off the user.
+      - id: aria-label
+        level: must
+        statement: "Spinner ships with a built-in role='status' and aria-label='Loading...', so a bare <Spinner /> is announced by screen readers as 'Loading...' — it is not hidden from assistive technology. Pass your own aria-label to announce a more specific state (for example, 'Loading documents'); it overrides the default."
+
+alternatives:
+  - to: button
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32600-2650
+    rel: design
+    role: Figma component (v5)
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/spinner/Spinner.tsx
+imports:
+  - platform: react
+    code: import { Spinner } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        Spinner has two API changes in v5\. v5 drops `tone` and adds `size`.
+
+        ### **Key differences**
+
+        - v5 drops the `tone` and `muted` props.
+        - v5 adds a `size` prop. It controls the icon size on a scale of 0–4. Defaults to `2`.
+        - v5 drops `styled-components`. Custom extensions like `styled(Spinner)` will not work.
+
+        ### **Detailed list of differences**
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `tone` | — | Removed.  |
+        | `muted` | — | Removed.  |
+        | — | `size` | New. Controls the icon size (0–4, default `2`) |
+
+        ### **Breaking changes**
+
+        - v5 drops `tone` and `muted`. `<Spinner tone="critical" muted>` does nothing.
+        - v5 drops `styled-components`. `styled(Spinner)` will not work.

@@ -1,0 +1,127 @@
+kind: component
+id: h-stack
+name: HStack
+description: HStack provides an opinionated horizontal layout with uniform gaps for simple use cases.
+metadata:
+  tags: [layout, horizontal, row, stack, gap, icon-label, hstack, inline, toolbar, flex]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: 'To horizontally lay out items for common use cases: icon-label pairs, toolbar groups, badges, and filters.'
+      - level: should-not
+        statement: For vertical stacking. Use VStack or Flex instead.
+        alternatives:
+          - to: v-stack
+          - to: flex
+      - level: should-not
+        statement: For full-width rows that stretch across their container. Use Flex instead.
+        alternatives:
+          - to: flex
+      - id: horizontal-layouts-need-custom-alignment
+        level: should-not
+        statement: For horizontal layouts that need custom alignment, or that must stay on one line. Use Flex instead.
+        alternatives:
+          - to: flex
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Inline is deprecated — use HStack instead.
+        alternatives:
+          - to: inline
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: h-stack-defaults
+        level: must
+        statement: "Expect HStack's three fixed defaults. It renders an inline flex row (`display: inline-flex`), so it sizes to its content and does not stretch to fill its container. It centers children on the cross axis (`alignItems: center`). It wraps children onto a new line when they run out of room (`flexWrap: wrap`). None of these can be changed through props — use Flex when you need a different value."
+      - level: should
+        statement: "Size the gap to the content: {space-1} between an icon and its text, {space-2} for a row of buttons or toolbar items, and {space-3} or more between separate groups. The full scale is in the Space scale entry's table (`space`)."
+      - level: should
+        statement: Use HStack for icon+label pairs, button groups, and compact inline groups.
+      - level: must-not
+        statement: "Don't use HStack when you need alignItems, justifyContent, flexWrap, or any flex prop — use Flex instead. HStack only accepts `as` and `gap`. Passing any other prop is a TypeScript error."
+        alternatives:
+          - to: flex
+      - level: must-not
+        statement: Don't add margin to children for spacing — use gap.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: "HStack accepts only as and gap. Don't pass any other prop as a JSX attribute."
+      - level: must-not
+        statement: 'Do not use HStack for a row that must stay on one line. HStack wraps by default (`flexWrap: wrap`) and has no prop to turn it off. Use Flex, which does not wrap unless you set `flexWrap`.'
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - id: h-stack-dom-order-not-css-order
+        level: must-not
+        statement: Don’t use CSS to change the visual order of HStack's children. Children render in DOM order — screen readers do not detect CSS order changes.
+  - kind: section
+    for: agent
+    freeform:
+      - title: HStack vs Flex
+        body: |-
+          HStack only accepts `as` and `gap`. Passing any other prop directly is a TypeScript error.
+
+          ```tsx
+          // correct — gap is the only spacing control
+          <HStack gap={3}>
+            <Button text="Save" />
+            <Button level="tertiary" text="Cancel" />
+          </HStack>
+
+          // wrong — TS2322: alignItems and padding do not exist on HStack
+          <HStack gap={3} padding={4}>
+            ...
+          </HStack>
+          ```
+
+          When you need alignment, distribution, or wrapping, use `Flex`:
+
+          ```tsx
+          <Flex gap={3} alignItems="center" justifyContent="space-between">
+            <Text>Label</Text>
+            <Button>Action</Button>
+          </Flex>
+          ```
+alternatives:
+  - to: flex
+    note: Row or column layout with full flex control
+  - to: v-stack
+    note: Vertical stack with uniform spacing
+  - to: inline
+    note: Deprecated. Replaced by HStack.
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32600-2633
+    rel: design
+    role: Figma component (v5)
+  - to: space
+    rel: relates-to
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/h-stack/HStack.tsx
+imports:
+  - platform: react
+    code: import { HStack } from '@sanity/ui'
+    package: '@sanity/ui'
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
