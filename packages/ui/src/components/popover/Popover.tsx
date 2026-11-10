@@ -1,13 +1,5 @@
 import clsx from 'clsx'
-import {
-  Activity,
-  cloneElement,
-  useId,
-  useState,
-  type ComponentPropsWithRef,
-  type ElementType,
-  type ToggleEvent,
-} from 'react'
+import {Activity, cloneElement, useId, useState, type ToggleEvent} from 'react'
 
 import {useIsClient} from '../../hooks/useIsClient'
 import {getProps} from '../../utils/getProps'
@@ -18,16 +10,14 @@ import {type PopoverProps, popoverProps} from './popover.props'
 
 const popoverClassName = suffixClassName('sui-Popover')
 
-function PopoverRoot<T extends ElementType = 'div'>({
+function PopoverRoot({
   placement = 'bottom',
   fullBleed = false,
   ...props
-}: PopoverProps<T> &
-  Omit<ComponentPropsWithRef<T>, keyof PopoverProps<T>> & {
-    triggerProps?: Record<string, unknown>
-  }) {
+}: PopoverProps & {
+  triggerProps?: Record<string, unknown>
+}) {
   const {
-    as,
     children,
     className,
     style,
@@ -40,7 +30,6 @@ function PopoverRoot<T extends ElementType = 'div'>({
   } = getProps({placement, fullBleed, ...props}, popoverProps)
   const reactId = useId()
   const id = idProp || reactId
-  const Component = as || 'div'
   const [open, setOpen] = useState(false)
   const isClient = useIsClient()
 
@@ -63,7 +52,7 @@ function PopoverRoot<T extends ElementType = 'div'>({
 
       {renderPortal(
         <Activity mode={open ? 'visible' : 'hidden'}>
-          <Component
+          <div
             className={clsx(
               popoverClassName,
               'sui-radius3 sui-position-fixed sui-shadow2 sui-text-body1 sui-text-trim-edge',
@@ -80,7 +69,7 @@ function PopoverRoot<T extends ElementType = 'div'>({
             {...rest}
           >
             {content}
-          </Component>
+          </div>
         </Activity>,
         isClient,
         portal,
