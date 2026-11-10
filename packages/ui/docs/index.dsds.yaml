@@ -510,9 +510,6 @@ refs:
   - href: ./overview/resources.dsds.yaml
     rel: file
     role: Resources (sanity.guide)
-  - href: ./guides/faq.dsds.yaml
-    rel: file
-    role: Sanity UI 5 FAQ (sanity.guide)
   - href: ./icons.dsds.yaml
     rel: file
     role: Sanity icon library (@sanity/icons)
