@@ -1,0 +1,58 @@
+kind: sanity.pattern
+id: error-messaging
+name: Error messaging
+description: Guidelines for writing clear, actionable error messages that name the problem and direct users to the next step.
+metadata:
+  tags:
+    - tutorial
+    - errors
+    - messaging
+    - copy
+    - accessibility
+    - feedback
+    - error
+    - error message
+    - validation
+    - field error
+    - tone
+    - critical
+    - WCAG
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: name-what-failed
+        level: must
+        statement: 'Name what failed: the thing, and what went wrong with it. Use plain words, with no error codes or stack traces. Use "Something went wrong" only as a last resort, when you can''t find the cause.'
+        refines:
+          - to: content-guidelines#plain-language
+      - id: state-next-step
+        level: must
+        statement: 'State the next step when the user can act. Example: "The image failed to upload. Try a file under 10 MB." When they cannot act, describe what the system is doing.'
+      - level: must
+        statement: 'For errors the user can''t fix, say what the system does. Never invent a step the user can''t take. Name who to contact instead. Example: "This didn''t save. We''re retrying — your work is safe."'
+      - id: field-error-names-field
+        level: must
+        statement: Field errors must identify their field. A message that floats free of its input fails WCAG 3.3.1 Error Identification. Place it with its input, and name that field's problem.
+      - id: error-message-length
+        level: should
+        statement: Keep messages to two sentences at most. Link to docs or offer a "Details" toggle for longer context.
+      - id: dont-blame-the-user
+        level: must-not
+        statement: Don't blame the user. Frame errors as states, not faults. Use "This file type is not allowed," not "You sent a bad file."
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: 'Lead an error message with the state ("**Error:** …") or pair tone="critical" with ErrorOutlineIcon.'
+        refines:
+          - to: shared-foundations#tone-paired-with-second-channel
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Apply these rules when writing or reviewing error message copy in Sanity UI components to ensure messages are clear, actionable, and accessible.

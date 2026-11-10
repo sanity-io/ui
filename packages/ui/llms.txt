@@ -1,0 +1,108 @@
+# Sanity UI 5
+
+> Sanity UI 5 is a React component library. This file lists the documentation shipped in this package. Read the documents under `docs/` before you write code. Read the skills under `skills/` for the build workflow.
+
+The schema is DSDS, the Design System Documentation Spec, version 0.23.1. `docs/index.dsds.yaml` names it in its `$schema` and `schemaVersion` fields.
+Each document is a DSDS file, written as YAML. Its `guidelines` carry a level: `must`, `should`, `may`, `should-not`, or `must-not`. Its `$extensions` hold migration notes from v3.
+
+## Start here
+
+- [Installation](docs/overview/installation.dsds.yaml): Everything needed to set up a React project for Sanity UI 5 — install, project files, TypeScript configuration and the entry file. The one place setup is documented.
+- [API essentials](docs/overview/api-essentials.dsds.yaml): Cross-cutting rules for writing Sanity UI 5. Covers prop value types, prop ownership, and import shapes.
+- [Component reference](docs/overview/component-reference.dsds.yaml): The index of what to build with — every documented Sanity UI component, grouped by taxonomy category, with its status in Sanity UI 5 (stable, beta or unavailable).
+- [Quick start](docs/overview/quick-start.dsds.yaml): A step-by-step tutorial for building a three-region admin interface with Sanity UI, covering layout, accessibility, and key component patterns.
+- [Sanity Design System's design contribution model](docs/overview/designer-contribution-model.dsds.yaml): How designers propose and graduate a recipe into the core Sanity Design System through a three-step, low-process contribution model.
+- [Developer contribution model](docs/overview/developer-contribution-model.dsds.yaml): How a developer moves a working recipe into a pull request against @sanity/ui, and what that PR must include: branch naming, PR description, code formatting, Storybook stories, prop documentation, tests, and docs.
+- [Resources](docs/overview/resources.dsds.yaml): Links to Sanity UI's project tracking, code repositories, package registry, and Figma libraries.
+
+## Components
+
+- [AvatarCounter](docs/components/avatar-counter.dsds.yaml): A counter to display the number of people or agents in a group.
+- [AvatarStack](docs/components/avatar-stack.dsds.yaml): A visual representation of multiple people and/or agents. When there are more children than maxLength, it shows the rest as a count.
+- [Avatar](docs/components/avatar.dsds.yaml): A visual representation of a person or agent.
+- [Badge](docs/components/badge.dsds.yaml): A label used to communicate status, category, count, or other metadata inline.
+- [Box](docs/components/box.dsds.yaml): The lowest-level building block for containing UI elements. Provides spacing, borders, shadows, and semantic tone without adding flex or grid layout behavior.
+- [Button](docs/components/button.dsds.yaml): Used to trigger an action — like submitting a form, starting a dialog, or running a command.
+- [Card](docs/components/card.dsds.yaml): Groups related content into a single visual element.
+- [Checkbox](docs/components/checkbox.dsds.yaml): Enables the selection of an item or option.
+- [Code](docs/components/code.dsds.yaml): Used for inline code snippets and multi-line code blocks.
+- [Container](docs/components/container.dsds.yaml): A wrapper to constrain content to a maximum width and horizontally center it.
+- [Dialog](docs/components/dialog.dsds.yaml): Presents a gating task or decision that blocks other interaction until completed. Use it only in cases where a decision must be made to proceed.
+- [Divider](docs/components/divider.dsds.yaml): Renders a horizontal rule to break up sections of content.
+- [Eyebrow](docs/components/eyebrow.dsds.yaml): Displays a small amount of text that contextualizes or categorizes a subject.
+- [Flex](docs/components/flex.dsds.yaml): The lowest-level building block for laying out UI elements along a single axis.
+- [Grid](docs/components/grid.dsds.yaml): Renders a CSS grid layout container. Supports named props for all CSS grid properties with responsive arrays.
+- [HStack](docs/components/h-stack.dsds.yaml): HStack provides an opinionated horizontal layout with uniform gaps for simple use cases.
+- [Heading](docs/components/heading.dsds.yaml): Displays heading text to create logical hierarchy and page structure.
+- [Hotkeys](docs/components/hotkeys.dsds.yaml): Presents multi-key keyboard shortcuts.
+- [IconButton](docs/components/icon-button.dsds.yaml): Triggers an action using an icon as the primary communicator.
+- [Icon](docs/components/icon.dsds.yaml): Renders a sizable and tonable SVG icon from @sanity/icons.
+- [IndicatorStack](docs/components/indicator-stack.dsds.yaml): A horizontal container for Indicator dots.
+- [Indicator](docs/components/indicator.dsds.yaml): A small colored dot that shows status at a glance.
+- [Inline](docs/components/inline.dsds.yaml): Deprecated. Use HStack instead. Previously laid out children in a wrapping inline row. Maintained for backward compatibility only.
+- [KBD](docs/components/kbd.dsds.yaml): Presents a single keyboard shortcut.
+- [Link](docs/components/link.dsds.yaml): Acts as a navigational element to move across pages.
+- [List.ButtonItem](docs/components/list-button-item.dsds.yaml): The interactive, selectable variant of List.Item.
+- [List.ItemImage](docs/components/list-item-image.dsds.yaml): A thumbnail image slot inside a List.Item.
+- [List.ItemText](docs/components/list-item-text.dsds.yaml): The text content slot inside a List.Item.
+- [List.Item](docs/components/list-item.dsds.yaml): A single row inside a List.
+- [List](docs/components/list.dsds.yaml): A compound component for displaying structured rows.
+- [Popover](docs/components/popover.dsds.yaml): A floating layer to disclose secondary, contextually relevant content or actions.
+- [PressArea](docs/components/press-area.dsds.yaml): PressArea wraps a non-interactive element (Card, Box, Avatar) into an interactive target.
+- [Radio](docs/components/radio.dsds.yaml): Enables the selection from a small set of options (2–4).
+- [Select](docs/components/select.dsds.yaml): Allows the user to choose one option from medium-size set (5-20) within a dropdown list.
+- [SkipToContent](docs/components/skip-to-content.dsds.yaml): An accessibility helper that lets keyboard and screen-reader users skip past navigation to the main content.
+- [Spinner](docs/components/spinner.dsds.yaml): Displays a loading/processing indicator.
+- [Switch](docs/components/switch.dsds.yaml): A toggle control for binary on/off settings that take immediate effect.
+- [Tabs.Tab](docs/components/tab.dsds.yaml): A button that selects one Tabs.Panel. Use it inside Tabs.List.
+- [Tabs.List](docs/components/tabs-list.dsds.yaml): The row that holds the Tabs.Tab buttons. It renders with role="tablist", lays its tabs out in a row, and moves focus between them with the arrow keys.
+- [Tabs.Panel](docs/components/tabs-panel.dsds.yaml): The content for one tab. It shows when its value matches the selected Tabs value, and stays hidden otherwise.
+- [Tabs](docs/components/tabs.dsds.yaml): A family of components that switch between separate but related content sections. Tabs has three parts, each with its own entry: Tabs.List, Tabs.Tab and Tabs.Panel.
+- [TextArea](docs/components/text-area.dsds.yaml): A multi-line text field for longer freeform text, like descriptions and comments.
+- [TextInput](docs/components/text-input.dsds.yaml): Used to accept a single line of text like names, titles, zip codes.
+- [Text](docs/components/text.dsds.yaml): Displays body paragraphs, captions, and metadata.
+- [TooltipGroup](docs/components/tooltip-group.dsds.yaml): A container that lets the rest of a row's tooltips show at once after the first one has shown.
+- [Tooltip](docs/components/tooltip.dsds.yaml): A floating text label that shows information when a user hovers or focuses an element.
+- [VStack](docs/components/v-stack.dsds.yaml): Stacks children vertically with even spacing.
+- [VisuallyHidden](docs/components/visually-hidden.dsds.yaml): Hides content from sighted users while keeping it in the accessibility tree.
+
+## Patterns
+
+- [Confirmation & action dialogs](docs/patterns/confirmation-dialogs.dsds.yaml): Sanity UI has one modal overlay (Dialog) and one floating layer (Popover), and no built-in lightweight inline confirm. This pattern shows how to choose between a full Dialog and a Popover-based inline confirm, and the rules every confirmation surface must follow regardless of which shape is used: an informed confirm button, and a guaranteed way to close.
+- [Error messaging](docs/patterns/error-messaging.dsds.yaml): Guidelines for writing clear, actionable error messages that name the problem and direct users to the next step.
+- [Forms](docs/patterns/forms.dsds.yaml): Shared guidance for form fields and their inputs (Checkbox, Radio, Switch, TextInput, TextArea, Select) and the copy inside and around them: labels, placeholders, helper text, errors, empty states, success confirmations, and buttons. Rules that hold for every form field live here once; each component page references them and adds only what is specific to that input.
+- [Layout guidelines](docs/patterns/layouts.dsds.yaml): The Sanity UI application layout system: a Navigation sidebar, a Content area (with its own toolbar and display), and an Inspection sidebar, composed into five shell layouts. Covers layout structure, navigation patterns, action placement, sidebar show/hide behavior, responsiveness, and the accessibility rules that hold the whole thing together.
+- [Loading states](docs/patterns/loading-states.dsds.yaml): Guidelines for handling the three distinct loading moments in Sanity UI: initial load, in-place refresh, and pending actions.
+- [Messaging](docs/patterns/messaging.dsds.yaml): Rules and guidance for writing tooltips, confirm dialogs, and status messages in Sanity UI.
+- [Sidebar navigation pattern](docs/patterns/navigation.dsds.yaml): Sanity UI has no built-in NavItem or SidebarLink component. This pattern shows the canonical way to build keyboard-accessible sidebar navigation by composing List + List.ButtonItem, instead of hand-building nav items from a native button or Box as="button". Use this pattern for persistent sidebar navigation, not for a popover menu.
+- [Responsive](docs/patterns/responsive.dsds.yaml): A complete reference for building responsive Sanity UI layouts using spacing tokens, breakpoint arrays, reflow patterns, grid columns, sizing props, text overflow, and overflow portal rules.
+
+## Foundations
+
+- [Accessibility guidelines](docs/foundations/accessibility-guidelines.dsds.yaml): Rules, requirements and the review checklist for accessible color, content, iconography, motion, spacing, and typography in Sanity UI.
+- [Color guidelines](docs/foundations/color-guidelines.dsds.yaml): Explains Sanity UI's color principles, token layers, semantic tone system, interaction states, and practical rules for applying color in interface design.
+- [Content guidelines](docs/foundations/content-guidelines.dsds.yaml): Rules and principles governing UI copy, naming, labels, casing, internationalization, and truncation in Sanity UI.
+- [Semantics](docs/foundations/semantics.dsds.yaml): The HTML a component renders, and what it owes assistive technology. Covers heading structure, landmark elements, and lists rendered through `as`.
+- [Spacing guidelines](docs/foundations/spacing-guidelines.dsds.yaml): How to apply the spacing scale in Sanity UI layout components, and how space shows what belongs together.
+- [Typography guidelines](docs/foundations/typography-guidelines.dsds.yaml): Rules and conventions for applying Sanity UI's type scale, components, hierarchy, and reading mechanics across product interfaces.
+
+## Tokens
+
+- [Sanity UI](docs/tokens/color.dsds.yaml): 
+- [Sanity UI](docs/tokens/container-widths.dsds.yaml): 
+- [Sanity UI](docs/tokens/content.dsds.yaml): 
+- [Sanity UI](docs/tokens/font-family.dsds.yaml): 
+- [Sanity UI](docs/tokens/font-weight.dsds.yaml): 
+- [Sanity UI](docs/tokens/radius.dsds.yaml): 
+- [Sanity UI](docs/tokens/semantic.dsds.yaml): 
+- [Sanity UI](docs/tokens/shadow.dsds.yaml): 
+- [Sanity UI](docs/tokens/space.dsds.yaml): 
+- [Sanity UI](docs/tokens/typography.dsds.yaml): 
+
+## Guides
+
+- [Sanity UI 5 FAQ](docs/guides/faq.dsds.yaml): Anticipated questions about Sanity UI 5, with honest answers, covering migration timing, scope, stability, and where to get help.
+
+## Skills
+
+- [Sanity UI 5 skill](skills/sanity-ui-5/SKILL.md): the build workflow, the rules that prevent most failures, and the reference files for setup, props, components, forms, migration, and taste (tone, density, component choice, silent failures).

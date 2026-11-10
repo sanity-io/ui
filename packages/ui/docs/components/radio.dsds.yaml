@@ -1,0 +1,198 @@
+kind: component
+id: radio
+name: Radio
+description: Enables the selection from a small set of options (2–4).
+metadata:
+  tags: [radio, form, input, single-select, choice, option, group]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To select from a small set of options (2–4).
+        refines:
+          - to: forms#choose-control-by-option-count
+      - refs:
+          - to: forms#choose-control-by-option-count
+            rel: same-as
+      - level: should-not
+        statement: For binary on/off toggles that trigger immediate feedback. Use Switch instead.
+        alternatives:
+          - to: switch
+      - level: should-not
+        statement: When more than one option can be selected. Use Checkbox instead.
+        alternatives:
+          - to: checkbox
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Give every Radio an accessible name. Link a visible label element to it with id and htmlFor, or use aria-label or aria-labelledby when there is no visible text to link.
+        refines:
+          - to: forms#pair-with-visible-label
+      - level: must-not
+        statement: Use Radio without an accessible name. A nameless radio is announced as an unlabeled radio button.
+      - level: must
+        statement: Always group radios with a shared name prop for mutual exclusivity.
+      - refs:
+          - to: forms#pair-checked-with-onchange
+            rel: same-as
+      - level: should
+        statement: Wrap groups in a fieldset with a legend to provide group-level labeling.
+      - refs:
+          - to: forms#stack-options-vertically
+            rel: same-as
+      - refs:
+          - to: forms#stack-fields-vertically
+            rel: same-as
+      - refs:
+          - to: shared-foundations#error-state-never-disabled
+            rel: same-as
+      - level: must-not
+        statement: Don't horizontally arrange more than 2 radio options.
+      - refs:
+          - to: forms#no-mixed-controlled-uncontrolled
+            rel: same-as
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - id: radio-has-accessible-name
+        level: must
+        statement: Every Radio has an accessible name from a linked label element, aria-label or aria-labelledby. Radio has no label prop.
+        checkedBy: manual
+      - level: must-not
+        statement: 'Passing hasError to Radio. Radio has no error state. Instead: Show a visible message near the group and link each Radio to it with aria-describedby.'
+      - refs:
+          - to: forms#error-prop-needs-visible-message
+            rel: same-as
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+      - refs:
+          - to: forms#label-short
+            rel: same-as
+      - level: should
+        statement: All labels in a group should follow the same grammatical pattern ("Send weekly", "Send daily", "Send hourly" — not "Send weekly", "Daily digest", "Send hourly notifications").
+      - refs:
+          - to: forms#label-no-trailing-period
+            rel: same-as
+      - refs:
+          - to: forms#label-no-trailing-colon
+            rel: same-as
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    description: 'Target conformance: WCAG Level AA.'
+    tags: [accessibility]
+    items:
+      - level: must
+        statement: The Radio has no name of its own (WCAG 4.1.2). Name it through a linked label element, aria-label or aria-labelledby.
+      - refs:
+          - to: forms#aria-label-overrides-name
+            rel: same-as
+      - refs:
+          - to: forms#aria-labelledby-references-name
+            rel: same-as
+      - refs:
+          - to: forms#label-available-to-screen-readers
+            rel: same-as
+      - refs:
+          - to: forms#error-described-in-text
+            rel: same-as
+      - refs:
+          - to: forms#border-contrast
+            rel: same-as
+  - kind: section
+    for: all
+    freeform:
+      - title: Example — single handler for a Radio group
+        body: |-
+          ```
+          import { Flex, Radio, Text, VStack } from '@sanity/ui'
+
+          <VStack gap={2}>
+            {plans.map((plan) => (
+              <Flex key={plan.id} alignItems="center" gap={2}>
+                <Radio
+                  id={`plan-${plan.id}`}
+                  name="plan"
+                  value={plan.id}
+                  checked={selectedPlan === plan.id}
+                  onChange={(e) => setSelectedPlan(e.currentTarget.value)}
+                />
+                <Text as="label" htmlFor={`plan-${plan.id}`}>{plan.label}</Text>
+              </Flex>
+            ))}
+          </VStack>
+          ```
+
+          Use `checked` and `onChange` to control each radio from React state. Only the newly-selected Radio fires `onChange`. The previously-checked Radio does not fire a "deselect" event, so derive deselection from the next selection in state. Each `id` and `htmlFor` pair gives its option its name.
+alternatives:
+  - to: checkbox
+    note: multi-select or boolean toggle
+  - to: switch
+    note: boolean toggle that takes effect immediately
+  - to: select
+    note: single-select dropdown for 5–20 options
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=31902-99
+    rel: design
+    role: Figma component (v5)
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/radio/Radio.tsx
+imports:
+  - platform: react
+    code: import { Radio } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: enabled
+    description: Standard unselected state.
+  - traitType: state
+    kind: boolean
+    id: focused
+    description: Focus ring on :focus-visible.
+  - traitType: state
+    kind: boolean
+    id: checked
+    description: Filled inner dot showing the selected option.
+  - traitType: state
+    kind: boolean
+    id: disabled
+    description: Muted appearance, removed from tab order.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        The v5 Radio is the input itself, with no label wrapper. It has no visible text and no name of its own. In v3, a separate `<label htmlFor>` named the Radio. In v5, link a label element with `id` and `htmlFor`, or use `aria-label` or `aria-labelledby`.
+
+        | v3 pattern | v5 pattern | Notes |
+        | :---- | :---- | :---- |
+        | `<label htmlFor="x">Label</label><Radio id="x" name="g" />` | `<Radio id="x" name="g" /><label htmlFor="x">Label</label>` | Same association. Use `Text as="label"` if you need the Sanity UI text styles |
+        | `<Radio checked />` | `<Radio checked />` | Same `checked`/`onChange` API |
+        | All native `<input>` attributes (`name`, `value`, `required`, `aria-*`) | Forwarded unchanged | Pass them as before |
+
+        ### Breaking changes
+
+        - **`customValidity` removed.** Handle validation outside the component. Show a visible message near the group and link it with `aria-describedby`.
+
+        ### Codemod
+
+        Run `pnpx @sanity/ui-codemod latest:radio --paths <paths> --toPackage @sanity/ui`. It updates the import and warns about `customValidity`. It does not rewrite `label` props or wrapping label elements. Fix those by hand.

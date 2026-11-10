@@ -1,0 +1,202 @@
+kind: component
+id: switch
+name: Switch
+description: A toggle control for binary on/off settings that take immediate effect.
+metadata:
+  tags: [switch, toggle, boolean, form, on/off, setting, enable, disable]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: "Toggling a boolean setting that takes effect immediately (for example, 'Enable notifications')."
+      - level: should-not
+        statement: When choosing between more than two options. Use Select or Radio instead.
+        alternatives:
+          - to: select
+          - to: radio
+      - level: should-not
+        statement: To display an indeterminate state. Switch only has two options. Use Checkbox instead.
+        alternatives:
+          - to: checkbox
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Don't use Switch when changes are deferred until form submission, or when selection does not trigger an immediate reaction. Use Checkbox instead.
+        alternatives:
+          - to: checkbox
+      - level: should-not
+        statement: Don't use Switch for choosing between named options. Use Radio instead.
+        alternatives:
+          - to: radio
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Give every Switch an accessible name. Link a visible label element to it with id and htmlFor, or use aria-label or aria-labelledby when there is no visible text to link.
+        refines:
+          - to: forms#pair-with-visible-label
+      - level: must-not
+        statement: Use Switch without an accessible name. A nameless switch is announced as an unlabeled switch.
+      - level: must
+        statement: The label should describe the on state using present-tense verb phrases. 'Enable feature flags', 'Show archived items'.
+      - refs:
+          - to: forms#pair-checked-with-onchange
+            rel: same-as
+      - refs:
+          - to: forms#stack-fields-vertically
+            rel: same-as
+      - refs:
+          - to: shared-foundations#error-state-never-disabled
+            rel: same-as
+      - level: must-not
+        statement: Don't pair Switch with a confirm button or action. Toggling a switch should immediately trigger the action.
+      - refs:
+          - to: forms#no-mixed-controlled-uncontrolled
+            rel: same-as
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - id: switch-has-accessible-name
+        level: must
+        statement: Every Switch has an accessible name from a linked label element, aria-label or aria-labelledby. Switch has no label prop.
+        checkedBy: manual
+      - level: must
+        statement: Changes commit on onChange. Don't defer them to a Save button, and don't add one beside a Switch.
+      - refs:
+          - to: forms#error-prop-needs-visible-message
+            rel: same-as
+      - level: must-not
+        statement: "Writing a label that describes the off state ('Hide notifications'). Instead: Write the label for the on state ('Enable notifications')."
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+      - refs:
+          - to: forms#label-short
+            rel: same-as
+      - level: should
+        statement: Labels should use present-tense verbs. "Enable notifications" not "Notifications enabled". The label describes the action of turning it on.
+      - level: should
+        statement: Pair the on state with the positive outcome. ("Show archived items", not "Hide archived items".)
+      - refs:
+          - to: forms#label-no-trailing-period
+            rel: same-as
+      - refs:
+          - to: forms#label-no-trailing-colon
+            rel: same-as
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    description: 'Target conformance: WCAG Level AA.'
+    tags: [accessibility]
+    items:
+      - level: must
+        statement: The Switch has no name of its own (WCAG 4.1.2). Name it through a linked label element, aria-label or aria-labelledby.
+      - level: should
+        statement: 'With hasError, the Switch sets aria-invalid on the input and shows error styling on the track. Pair it with a visible error message that the input describes.'
+      - refs:
+          - to: forms#aria-label-overrides-name
+            rel: same-as
+      - refs:
+          - to: forms#aria-labelledby-references-name
+            rel: same-as
+      - refs:
+          - to: forms#label-available-to-screen-readers
+            rel: same-as
+      - refs:
+          - to: forms#error-described-in-text
+            rel: same-as
+      - refs:
+          - to: forms#border-contrast
+            rel: same-as
+  - kind: section
+    for: all
+    freeform:
+      - title: Example — commit on toggle
+        body: |-
+          ```
+          import { Switch } from '@sanity/ui'
+
+          <Switch
+            id="notifications"
+            checked={settings.notifications}
+            onChange={(e) => save({ notifications: e.currentTarget.checked })}
+          />
+          <label htmlFor="notifications">Enable notifications</label>
+          ```
+
+          Use `checked` and `onChange` to control the switch from React state. A Switch commits on `onChange`. The `id` and `htmlFor` pair gives the switch its name. Use `aria-label` instead when the text can't be rendered visibly.
+alternatives:
+  - to: checkbox
+    note: multi-select or boolean within a form that's submitted later
+  - to: radio
+    note: single-select within a small group
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=31902-62
+    rel: design
+    role: Figma component (v5)
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/switch/Switch.tsx
+imports:
+  - platform: react
+    code: import { Switch } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: state
+    kind: boolean
+    id: 'off'
+    description: Standard unchecked state with dot on the left.
+  - traitType: state
+    kind: boolean
+    id: 'on'
+    description: Track filled, dot on the right.
+  - traitType: state
+    kind: boolean
+    id: focused
+    description: Focus ring around the track on :focus-visible.
+  - traitType: state
+    kind: boolean
+    id: disabled
+    description: Muted track and dot, removed from tab order.
+  - traitType: state
+    kind: boolean
+    id: hasError
+    description: Red track styling and aria-invalid on the input for a validation error.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        The v5 Switch is the input itself, with no label wrapper. It has no visible text and no name of its own. In v3, a separate `<label htmlFor>` named the Switch. In v5, link a label element with `id` and `htmlFor`, or use `aria-label` or `aria-labelledby`.
+
+        | v3 pattern | v5 pattern | Notes |
+        | :---- | :---- | :---- |
+        | `<label htmlFor="x">Label</label><Switch id="x" />` | `<Switch id="x" /><label htmlFor="x">Label</label>` | Same association. Use `Text as="label"` if you need the Sanity UI text styles |
+        | `<Switch checked />` | `<Switch checked />` | Same `checked`/`onChange` API |
+        | All native `<input>` attributes (`name`, `value`, `required`, `aria-*`) | Forwarded unchanged | Pass them as before |
+
+        ### Breaking changes
+
+        - **`indeterminate` removed.** Switch has two states only. Use Checkbox for a mixed state.
+
+        ### Codemod
+
+        Run `pnpx @sanity/ui-codemod latest:switch --paths <paths> --toPackage @sanity/ui`. It updates the import and warns about `indeterminate`. It does not rewrite `label` props or wrapping label elements. Fix those by hand.

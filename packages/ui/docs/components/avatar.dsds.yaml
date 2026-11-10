@@ -1,0 +1,115 @@
+kind: component
+id: avatar
+name: Avatar
+description: A visual representation of a person or agent.
+metadata:
+  tags: [avatar, user, profile, image, identity, person, agent, name, photo]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As a way to access a profile (either human or agent).
+      - level: should
+        statement: To disclose a user or agent associated with content or permissions.
+      - level: should-not
+        statement: To represent a person or bot that doesn't represent a Sanity user.
+      - level: must-not
+        statement: To represent an app or studio instance.
+      - level: must-not
+        statement: To represent a group of people and/or bots. Use AvatarStack instead.
+        alternatives:
+          - to: avatar-stack
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: 'Pass the full name of the person or agent as `name`. It is required. Avatar has no `initials` prop: it shows the first letter of `name` as its fallback, so passing `initials` is a TypeScript error.'
+      - level: must
+        statement: Pass `src` when you have an image. If the image is missing or fails to load, Avatar shows the first letter of `name` instead.
+      - level: should
+        statement: When space permits, display the full name of the person or agent next to Avatar.
+      - level: should
+        statement: When space is not available, still give the full name as text, for example with VisuallyHidden next to the Avatar. If the name must appear in a Tooltip, wrap Avatar in PressArea for Tooltip to target.
+      - level: should
+        statement: Rotate `color` values when more than one Avatar is visible at a time.
+      - level: must-not
+        statement: Don't use as an inline element within a block of text.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: 'Using Avatar as an inline element within a paragraph. Instead: Use Avatar in layout containers (Flex, HStack) separate from running text.'
+      - level: must-not
+        statement: Don't set Avatar's size with `style`, `className` or `height`. Use the `size` prop.
+      - level: must-not
+        statement: Don't pass a single letter as `name`. The fallback shows the first letter of `name`, and a letter alone does not name the person for assistive technology.
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: "**The accessible name is `aria-label`, or `name` when there is no `aria-label`.** Avatar uses it as the image's `alt` text, and as the label of the letter fallback. Pass the full name in `name`, and set `aria-label` only when the name needs different wording for assistive technology."
+      - level: should
+        statement: '**Hidden when the name is already announced elsewhere.** The surrounding row, option or button may already state the name. Set `aria-hidden` on the Avatar, which Avatar passes through to its element. Screen readers then skip the repeated name.'
+alternatives:
+  - to: avatar-stack
+refs:
+  - href: https://www.figma.com/design/NWmchNlsNdG66VBaCsTdSL/pjo-ui4-component-buildout?node-id=25-320
+    rel: design
+    role: Figma component
+  - to: avatar-counter
+    rel: relates-to
+    note: The overflow count AvatarStack shows next to its avatars
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/avatar/Avatar.tsx
+imports:
+  - platform: react
+    code: import { Avatar } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: size
+    description: Height and letter size of the avatar. Responsive.
+    values:
+      - id: '0'
+        description: Smallest. For metadata or high-density layouts.
+      - id: '1'
+        description: Small (default), 25px tall. For UI labels, buttons, menu items and toast messages.
+      - id: '2'
+        description: Medium. When a user is the focus of an element.
+  - traitType: variant
+    kind: enum
+    id: color
+    description: Background color behind the letter.
+    values:
+      - id: gray
+        description: Gray (default).
+      - id: purple
+        description: Purple.
+      - id: magenta
+        description: Magenta.
+      - id: red
+        description: Red.
+      - id: orange
+        description: Orange.
+      - id: yellow
+        description: Yellow.
+      - id: green
+        description: Green.
+      - id: cyan
+        description: Cyan.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

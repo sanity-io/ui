@@ -1,0 +1,103 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: regular
+    name: regular
+    description: Body copy, captions, prose.
+    metadata:
+      status:
+        status: stable
+      group: font-weight
+    tokenType: fontWeight
+    source:
+      href: ./dtcg/json/fontWeight.tokens.json#regular
+  - kind: token
+    id: medium
+    name: medium
+    description: UI labels, form labels, inline emphasis.
+    metadata:
+      status:
+        status: stable
+      group: font-weight
+    tokenType: fontWeight
+    source:
+      href: ./dtcg/json/fontWeight.tokens.json#medium
+  - kind: token
+    id: semibold
+    name: semibold
+    description: Sub-section headings and dense UI chrome.
+    metadata:
+      status:
+        status: stable
+      group: font-weight
+    tokenType: fontWeight
+    source:
+      href: ./dtcg/json/fontWeight.tokens.json#semibold
+  - kind: token
+    id: bold
+    name: bold
+    description: Page titles and section headings.
+    metadata:
+      status:
+        status: stable
+      group: font-weight
+    tokenType: fontWeight
+    source:
+      href: ./dtcg/json/fontWeight.tokens.json#bold
+  - kind: entry
+    id: font-weight
+    name: Font weights
+    description: The four font weights used to build type hierarchy across Sanity UI.
+    metadata:
+      tags: [typography, font-weight, weight, regular, medium, semibold, bold]
+      status:
+        status: stable
+      group: font-weight
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - level: must
+            statement: 'Pass weight as a named string — `weight="medium"` — not a number. The names are regular, medium, semibold, and bold. Each name maps to a numeric weight in the token file.'
+          - level: should
+            statement: Build hierarchy with size and weight before adding color.
+          - level: should-not
+            statement: Don't mix many weights at one level. It cancels the emphasis.
+      - kind: guidelines
+        for: agent
+        framing: how-to-use
+        items:
+          - level: should-not
+            statement: Do not use more than one or two weights in a single view.
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              Weight creates emphasis. Sanity UI holds four weights. Many weights at one level cancel the effect, so the set stays small.
+          - title: The weights
+            body: |-
+              | Token | Use for |
+              | --- | --- |
+              | `regular` | Body copy, captions, prose |
+              | `medium` | UI labels, form labels, inline emphasis |
+              | `semibold` | Sub-section headings, dense UI chrome (Heading `0`–`1`) |
+              | `bold` | Page titles, section headings (Heading `2`–`3`) |
+
+              Reach for weight and space before adding a new size.
+          - title: Related
+            body: |-
+              - **Typography guidelines** — when to use each weight, and the type hierarchy table.
+              - **Typography styles** — composite styles that pair a weight with a size and family.
+              - **Color guidelines** — build hierarchy in grayscale with size and weight before adding color.
+      - kind: section
+        for: agent
+        freeform:
+          - title: Intent
+            body: Choose a weight by role. Lean on weight and space for hierarchy before adding a size or color.
+    refs:
+      - href: ./dtcg/json/fontWeight.tokens.json
+        rel: source
+        role: DTCG source

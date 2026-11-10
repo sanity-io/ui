@@ -1,0 +1,90 @@
+kind: component
+id: tooltip-group
+name: TooltipGroup
+description: A container that lets the rest of a row's tooltips show at once after the first one has shown.
+metadata:
+  tags: [tooltip, group, toolbar, action-bar]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: A toolbar or action bar where each button has a tooltip.
+      - level: should
+        statement: A row of icon-only controls that a user scans across.
+      - level: should-not
+        statement: A single button with one tooltip. TooltipGroup adds no value for a single trigger.
+        alternatives:
+          - to: tooltip
+      - level: should-not
+        statement: Controls spread across the page. The grouped behaviour only applies inside the group element.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Wrap only tooltips that are logically grouped — a toolbar, an action bar, or a row of icon buttons.
+      - level: must-not
+        statement: Do not use TooltipGroup for a single trigger. It adds no value and creates unnecessary markup.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: The group wrapper has no ARIA role. Individual Tooltip components still wire aria-describedby on their triggers.
+      - level: should
+        statement: Use TooltipGroup when multiple adjacent triggers each have a Tooltip — a toolbar, action bar, or icon row.
+  - kind: section
+    for: agent
+    freeform:
+      - title: How it works
+        body: |-
+          Without a group, each tooltip in a toolbar opens on its own, so the user sees a pause at every button they scan across.
+
+          Once one tooltip in the group is visible, the rest show at once.
+
+          When the mouse leaves the group or focus moves outside it, the group resets.
+
+          ```tsx
+          import { TooltipGroup, Tooltip, IconButton } from '@sanity/ui'
+          import { TrashIcon } from '@sanity/icons/Trash'
+          import { EditIcon } from '@sanity/icons/Edit'
+          import { CopyIcon } from '@sanity/icons/Copy'
+
+          <TooltipGroup>
+            <Tooltip content="Delete">
+              <IconButton icon={TrashIcon} aria-label="Delete" level="tertiary" />
+            </Tooltip>
+            <Tooltip content="Edit">
+              <IconButton icon={EditIcon} aria-label="Edit" level="tertiary" />
+            </Tooltip>
+            <Tooltip content="Duplicate">
+              <IconButton icon={CopyIcon} aria-label="Duplicate" level="tertiary" />
+            </Tooltip>
+          </TooltipGroup>
+          ```
+
+          Once one tooltip in the group is visible, the rest show at once.
+
+          When the mouse leaves the group or focus moves outside it, the group resets.
+
+refs:
+  - to: tooltip
+    rel: relates-to
+    note: The floating label that TooltipGroup coordinates
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/tooltip-group/TooltipGroup.tsx
+imports:
+  - platform: react
+    code: import { TooltipGroup } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

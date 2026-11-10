@@ -1,0 +1,308 @@
+kind: sanity.foundation
+id: color-guidelines
+name: Color guidelines
+description: Explains Sanity UI's color principles, token layers, semantic tone system, interaction states, and practical rules for applying color in interface design.
+metadata:
+  tags:
+    - concept
+    - color
+    - tokens
+    - semantic
+    - accessibility
+    - theming
+    - contrast
+    - tones
+    - design-foundations
+    - semantic-tokens
+    - base-palette
+    - emphasis
+    - intensity
+    - interaction-states
+    - error
+    - critical
+    - inert
+    - active
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Design works in grayscale first — hierarchy is established before adding hue.
+      - id: second-channel-required
+        level: must
+        statement: 'Every color signal is backed by a second channel: text, icon, shape, or position.'
+      - level: must
+        statement: Components use semantic tokens.
+      - level: must
+        statement: Theming touches only the semantic layer.
+      - refs:
+          - to: accessibility-guidelines#contrast-minimums
+            rel: same-as
+      - refs:
+          - to: shared-foundations#destructive-actions-use-critical-tone
+            rel: same-as
+      - level: should
+        statement: The palette is as small as the job allows.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Use semantic tokens when composing UI.
+      - level: must
+        statement: 'Read a theme-aware color from a semantic CSS custom property when no component prop reaches it. On a native `<td>`, write `border: 1px solid var(--separator-low)`. Each property resolves for both schemes on its own.'
+      - level: must
+        statement: "Set the standard CSS `color-scheme` property to force light or dark. Write `:root { color-scheme: dark }`. Sanity UI 5 has no theme provider and no `scheme` prop. The stylesheet ships `color-scheme: light dark`. An app follows the reader's system setting until you override it."
+      - level: should
+        statement: Prefer a `tone` prop over a CSS custom property when one exists. Tone remaps the same variables across the whole subtree. The surface, its text and its separators then stay in step.
+      - level: must-not
+        statement: 'Do not use `--card-bg-color`, `--card-border-color` or `--card-fg-color`. These variables do not exist. They resolve to nothing. A fallback like `var(--card-bg-color, #fff)` then pins the color to the light value in both schemes.'
+      - level: must-not
+        statement: Do not hard-code a hex value for a surface, separator or text color. Do not use a base token such as `--gray-100` either. Base tokens hold one fixed color and ignore the scheme.
+      - level: must-not
+        statement: Do not use color as the only differentiator for states such as error, success, or selection.
+      - level: must-not
+        statement: Do not use hue alone to create contrast — hue does not reliably separate elements; use intensity (lightness/saturation) differences instead.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: Color is powerful, but unreliable. Sanity UI's color system gives designers and developers a simple framework for applying color.
+  - kind: section
+    for: all
+    freeform:
+      - title: Principles
+        body: These are Sanity UI's stances on applying color.
+      - title: Purposeful
+        body: Color in Sanity UI is functional. It supports semantic meaning, visual contrast, and hierarchy. Arbitrary color choices are problematic choices.
+      - title: Supportive
+        body: Color only reinforces meaning. Using only color leaves people with low vision behind.
+      - title: Simple, with fallbacks
+        body: Sanity UI's semantic color set covers common use cases. But edge cases always exist. Teams should pull from the full Base palette in those cases.
+  - kind: section
+    for: all
+    freeform:
+      - title: Fundamentals
+        body: |-
+          - **Color is relative:** Color looks different based on color pairing, display, ambient light, viewing angle, and an individual's vision. A gray reads dark on white and light on black. You never see a color alone — only in its context.
+          - **The eye adapts to the dominant color:** The eye rebalances a color cast toward neutral after a few seconds. Small punches of color in a neutral environment separate better than larger ambient tone shifts.
+          - **Hue doesn't create reliable separation:** The eye reads text, edges, and shape from differences in intensity (lightness/saturation). Hue resolves far less detail. Hue alone won't create contrast.
+          - **Hue categorizes, intensity prioritizes:** The eye reads hue as a way to group items. Intensity draws attention — and thus importance. Use hue to classify and intensity to assign significance.
+          - **Contrast sensitivity falls at small sizes and in low light:** Thin strokes, small text, and fine icons need more contrast than large shapes to stay legible. A tint that works for a heading can fail for a caption or a 1px border.
+          - **Many people cannot separate certain hues:** Color vision deficiency is common — about 1 in 12 men. A color pairing that reads for most people can collapse for them, and a hue-only signal disappears.
+          - **Color meaning isn't innate:** People learn color meaning from culture and context. No meaning is universal — red warns in one place and rewards in another. This makes color expressive — but also volatile.
+  - kind: section
+    for: all
+    freeform:
+      - title: Base
+        body: Raw color values with no meaning. The full palette lives here — every option, indexed by brightness (low, mid, high). Base colors have no inherent meaning or purpose.
+      - title: Semantic
+        body: Where colors map to meaning. This is where designers and developers reach when composing a UI. Five tones, plus `active`, `brand`, and `accent`. Each carries a specific job.
+      - title: Component
+        body: Colors applied to component parts. Rarely used directly — most components inherit from the semantic layer. Only use to customize specific component color treatments.
+  - kind: section
+    for: all
+    freeform:
+      - title: Base color tokens
+        body: |-
+          | Color | 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 |
+          | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+          | Gray | {gray-50} | {gray-100} | {gray-200} | {gray-300} | {gray-400} | {gray-500} | {gray-600} | {gray-700} | {gray-800} | {gray-900} | {gray-950} |
+          | Blue | {blue-50} | {blue-100} | {blue-200} | {blue-300} | {blue-400} | {blue-500} | {blue-600} | {blue-700} | {blue-800} | {blue-900} | {blue-950} |
+          | Purple | {purple-50} | {purple-100} | {purple-200} | {purple-300} | {purple-400} | {purple-500} | {purple-600} | {purple-700} | {purple-800} | {purple-900} | {purple-950} |
+          | Magenta | {magenta-50} | {magenta-100} | {magenta-200} | {magenta-300} | {magenta-400} | {magenta-500} | {magenta-600} | {magenta-700} | {magenta-800} | {magenta-900} | {magenta-950} |
+          | Red | {red-50} | {red-100} | {red-200} | {red-300} | {red-400} | {red-500} | {red-600} | {red-700} | {red-800} | {red-900} | {red-950} |
+          | Orange | {orange-50} | {orange-100} | {orange-200} | {orange-300} | {orange-400} | {orange-500} | {orange-600} | {orange-700} | {orange-800} | {orange-900} | {orange-950} |
+          | Yellow | {yellow-50} | {yellow-100} | {yellow-200} | {yellow-300} | {yellow-400} | {yellow-500} | {yellow-600} | {yellow-700} | {yellow-800} | {yellow-900} | {yellow-950} |
+          | Green | {green-50} | {green-100} | {green-200} | {green-300} | {green-400} | {green-500} | {green-600} | {green-700} | {green-800} | {green-900} | {green-950} |
+          | Cyan | {cyan-50} | {cyan-100} | {cyan-200} | {cyan-300} | {cyan-400} | {cyan-500} | {cyan-600} | {cyan-700} | {cyan-800} | {cyan-900} | {cyan-950} |
+
+          The palette also has {black} and {white}. The values come from `tokens/dtcg/json/color.tokens.json`.
+  - kind: section
+    for: all
+    freeform:
+      - title: Tones
+        body: |-
+          Tones are the heart of the semantic layer. They convey intent.
+
+          Tones follow a three-layer structure: Tone type → Emphasis → Intensity
+
+          **Tone types:**
+
+          | Tone | When to use | Color |
+          | :---- | :---- | :---- |
+          | `neutral` | Default. No special state or meaning. | gray |
+          | `suggest` | Educational moments, promotions, soft nudges. | purple |
+          | `positive` | Success, correctness, completion. | green |
+          | `caution` | Non-critical failure, impending issue, incompleteness. | yellow |
+          | `critical` | Failure, destructive operations, termination. | red |
+      - title: Emphasis
+        body: |-
+          Emphasis sets the visual weight for an element.
+
+          **Normal:** The default emphasis level. Backgrounds have subtle contrast with the backdrop. Foreground content has strong contrast with both backdrop and backgrounds. Use for most surfaces and elements.
+
+          **Emphasized:** When an element needs high visual contrast from other content. Emphasized elements rely on the background for visual separation with the backdrop. Use for high-emphasis, core actions you want the user to take.
+
+          **Emphasized containers:** When a whole container needs emphasis (a card, a panel, a section), the container and everything inside switches to dark mode. This approach maintains visual separation while ensuring all elements maintain their relationship to each other.
+      - title: Intensity
+        body: |-
+          Every tone breaks down into three parts.
+
+          **Background:** The container color of a UI element.
+
+          **Separator:** Borders, dividers, anything that creates visual separation.
+
+          **Foreground:** Content inside the element (text, icons).
+
+          Every tone part has two intensity values:
+
+          | Value | Background | Separator | Foreground |
+          | :---- | :---- | :---- | :---- |
+          | Low | For containers that require a background to visually differentiate from the backdrop. Example: Card | When a subtle visual separator is needed to intensify the visual contrast between itself and its container's background. Examples: Badge and Button | For secondary information that isn't critical for consumption. Examples: Decorative icons and captions |
+          | High | For elements that need visual contrast from both backdrop and low backgrounds. Examples: Badge and Button | In cases where the visual separator's appearance is critical to understanding the purpose of the element. Examples: TextInput, Select and other inputs | For primary information that is needed to use the product. Examples: Headers, button labels, icons in icon-only buttons. |
+      - title: Accents
+        body: |-
+          Accents are a sibling of tone and follow the same structure, model and rules. However, accents have no semantic meaning. Use to create visual distinction between elements. Examples include Avatars and data visualization elements.
+
+          The accent family includes Cyan and Magenta.
+      - title: Other key semantic tokens
+        body: |-
+          - **Backdrop** (`--backdrop`): The bottom layer of the page, behind every surface. It is not the `::backdrop` pseudo-element behind a dialog.
+          - **Overlay**: A separation between different layers of UI.
+          - **Brand**: For in-product Sanity brand moments.
+      - title: Interaction states
+        body: |-
+          The system handles interaction states for you. You usually don't need to think about them.
+
+          **Hover:** Calculated as a brightness shift — darker in light mode, lighter in dark mode. These colors are dynamically calculated from the base color.
+
+          **The active family (`active-*`):** Three interaction states share a single token family. Active tokens are represented by blue. Active tokens have two parts: background and foreground.
+
+          - *Selected/Checked/On:* Selected menu items are given a blue background. For high-emphasis selections — such as menu items or checkboxes — the background is given a high-contrast blue with the foreground inverted to white. For lower-emphasis selections — such as Tabs — the background is given a low-contrast blue with foreground acting as the main contrast element.
+          - *Focused:* Focused elements are given a halo outline with a high-contrast blue color.
+
+          **Note on naming:** The family is currently called `active` in design. Token names in code are TBD. If you're consuming the system through tokens alone — without seeing the rendered UI — know that the active family covers all three states above. The visual distinction is rendered, not tokenized. When the code names land, this section updates.
+
+          **The inert family (`inert-*`):** represents elements that aren't interactive. Inert tokens have two parts: background and foreground.
+
+          - *Read-only:* Read-only elements use an inert background only. The inert background signals the element can't be edited, but the text can still be read and selected.
+          - *Disabled:* Disabled elements use inert background and foreground to represent that the entire element provides no interaction.
+  - kind: section
+    for: all
+    freeform:
+      - title: Design in grayscale first
+        body: Build hierarchy with type, spacing, and contrast before adding hue. An interface that relies on color to work does not work. Color adds to hierarchy; it does not create it.
+      - title: Default to `neutral`
+        body: If you have no specific reason to choose another tone, `neutral` is the right answer. One emphasized button is an emphasized button. Three are noise.
+  - kind: section
+    for: all
+    freeform:
+      - title: Light and dark
+        body: |-
+          Sanity UI 5 has no theme provider, and no `scheme` prop. Colour scheme is
+          plain CSS.
+
+          The stylesheet sets `color-scheme: light dark` on `:root`, and every
+          semantic colour is declared with the CSS `light-dark()` function:
+
+          ```css
+          --background-high: light-dark(var(--gray-100), var(--gray-900));
+          ```
+
+          `light-dark()` reads whichever scheme is in effect. With no further work,
+          an app follows the reader's system setting.
+
+          To force one scheme, set the standard `color-scheme` property:
+
+          ```css
+          :root { color-scheme: dark }   /* always dark  */
+          :root { color-scheme: light }  /* always light */
+          ```
+
+          For a user-facing toggle, write that property from React. Nothing else is
+          needed — every component re-resolves its colours from the same variables:
+
+          ```tsx
+          function SchemeToggle() {
+            const [scheme, setScheme] = useState<'light' | 'dark'>('light')
+
+            useEffect(() => {
+              document.documentElement.style.colorScheme = scheme
+            }, [scheme])
+
+            return (
+              <Button
+                text={scheme === 'light' ? 'Dark mode' : 'Light mode'}
+                onClick={() => setScheme(scheme === 'light' ? 'dark' : 'light')}
+              />
+            )
+          }
+          ```
+
+          `color-scheme` also applies to a subtree. A single panel can be inverted
+          without touching the rest of the page.
+
+          `Card` has no `scheme` prop.
+  - kind: section
+    for: all
+    freeform:
+      - title: Semantic CSS custom properties
+        body: |-
+          Component props cover most colour work. When they cannot reach — a native
+          `<td>` border, a custom scrollbar, a `<select>` you cannot replace — read the
+          semantic custom properties directly. Each one already resolves for both
+          schemes. Using them keeps custom CSS in step with the design system.
+
+          | Custom property | Use for |
+          | --- | --- |
+          | `--background-low` | The page or a recessed surface |
+          | `--background-high` | A raised surface: card, panel, popover |
+          | `--background-high-emphasized` | A filled, high-contrast surface |
+          | `--foreground-high` | Primary text and icons |
+          | `--foreground-low` | Secondary and muted text |
+          | `--separator-low` | Ordinary borders and rules |
+          | `--separator-high` | A border that needs to read as deliberate |
+          | `--focus-outline` / `--focus-offset` | Matching the focus ring on a custom control |
+          | `--backdrop` | The page's bottom layer, behind every surface. Not the `::backdrop` behind a dialog |
+          | `--inert-background` / `--inert-foreground` | Disabled surfaces and text |
+
+          Inside anything carrying a `tone`, these same names remap to that tone's
+          ramp. A border written once is neutral in a neutral card and critical in a
+          critical one:
+
+          ```tsx
+          <Card tone="critical">
+            <table>
+              <td style={{ borderBottom: '1px solid var(--separator-low)' }}>…</td>
+            </table>
+          </Card>
+          ```
+
+          Prefer a prop where one exists. `tone` changes the whole surface together.
+          A single custom property changes one declaration. That one declaration can
+          drift from the text beside it.
+
+          **Some variable names do not exist.** `--card-bg-color`,
+          `--card-border-color` and `--card-fg-color` resolve to nothing, and the
+          usual fallback form is worse than no colour at all:
+
+          ```css
+          /* ✗ pins the colour to the light value in both schemes */
+          background: var(--card-bg-color, #fff);
+
+          /* ✓ resolves per scheme */
+          background: var(--background-high);
+          ```
+
+          Base tokens such as `--gray-100` are also the wrong layer for this. Each holds
+          one fixed colour and does not respond to the scheme; the semantic names above
+          are the ones built to.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this guide to understand Sanity UI's color system — including token layers, semantic tones, emphasis, intensity, and interaction states — and to apply color correctly in interface design and token usage.

@@ -1,0 +1,125 @@
+kind: sanity.foundation
+id: semantics
+name: Semantics
+description: The HTML a component renders, and what it owes assistive technology. Covers heading structure, landmark elements, and lists rendered through `as`.
+metadata:
+  tags:
+    - concept
+    - foundations
+    - semantics
+    - accessibility
+    - heading
+    - heading level
+    - outline
+    - landmark
+    - as
+    - section
+    - nav
+    - main
+    - aside
+    - form
+    - article
+    - list
+    - WCAG
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    title: Headings
+    framing: how-to-use
+    tags: [accessibility]
+    items:
+      - id: heading-as-explicit
+        level: must
+        statement: Set `as` on every Heading, to a level from `h1` to `h6`. Without `as`, Heading renders an `h2`, which is often the wrong level.
+        example:
+          title: How to satisfy this
+          description: Search the code for `<Heading` and confirm every instance sets `as`.
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html
+            role: WCAG 1.3.1 Info and Relationships (A)
+        checkedBy: manual
+      - id: heading-level-from-outline
+        level: must
+        statement: Choose a heading's level from its place in the page outline. Set how big it looks with `size`. The two are independent and often differ. `<Heading as="h2" size={4}>` is an `h2` that looks like size 4.
+        example:
+          title: How to satisfy this
+          description: Where `size` and `as` differ, confirm `as` still matches the outline. No heading should change level to look bigger or smaller.
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html
+            role: WCAG 1.3.1 Info and Relationships (A)
+        checkedBy: manual
+      - id: one-h1-per-page
+        level: must
+        statement: Give each page one `h1`, for the page title.
+        example:
+          title: How to satisfy this
+          description: Run `document.querySelectorAll('h1').length` in the browser console on the rendered page. The result is 1.
+        checkedBy: manual
+      - id: heading-levels-sequential
+        level: must
+        statement: Don't skip heading levels. Each heading is at most one level deeper than the heading before it. An `h2` follows an `h1`, and an `h3` follows an `h2`. Screen reader users navigate by level, and a gap breaks their map of the page.
+        example:
+          title: How to satisfy this
+          description: List the page's headings in DOM order, or open the browser's accessibility tree. No heading is more than one level deeper than the one before it.
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html
+            role: WCAG 1.3.1 Info and Relationships (A)
+        checkedBy: manual
+  - kind: guidelines
+    for: all
+    title: Elements rendered through `as`
+    framing: how-to-use
+    tags: [accessibility]
+    items:
+      - id: landmark-requirements
+        level: must
+        statement: |-
+          When `as` renders a landmark element, give it what that element needs.
+            - `section`: an accessible name, through `aria-labelledby` on its heading or through `aria-label`. A section with no name is not a landmark. A heading inside it does not name it.
+            - `nav`: an `aria-label` when the page has more than one `nav`.
+            - `aside`: an `aria-label` when the page has more than one `aside`, or when its purpose is not clear.
+            - `form`: an accessible name, through `aria-label` or `aria-labelledby`.
+            - `main`: one per page, around the primary content.
+            - `article`: self-contained content. It needs no name.
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html
+            role: WCAG 1.3.1 Info and Relationships (A)
+          - href: https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/
+            role: WAI-ARIA landmark regions
+      - id: app-shell-landmark-regions
+        level: must
+        statement: |-
+          Map each Sanity app shell region to its HTML landmark. Without landmarks, screen readers experience the layout as a flat list with no structure.
+
+          | Region | Element | `aria-label` |
+          | --- | --- | --- |
+          | Navigation sidebar | `<nav>` | Required — e.g. "Main navigation" |
+          | Content area | `<main>` | None (one per page) |
+          | Inspection sidebar | `<aside>` | Required — e.g. "Document inspector" |
+          | Content toolbar | `<header>` within `<main>` | None |
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html
+            role: WCAG 1.3.1 Info and Relationships (A)
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html
+            role: WCAG 2.4.1 Bypass Blocks
+      - id: list-semantics
+        level: must
+        statement: When `as` renders a `ul` or an `ol`, its children must be `li` elements. Add `role="list"` when `list-style` is `none`. WebKit drops the list semantics without it.
+        evidence:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html
+            role: WCAG 1.3.1 Info and Relationships (A)
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: |-
+          Assistive technology reads the HTML, not the screen. A heading's level, a landmark's name and a list's items are how a screen reader user finds their way around a page.
+
+          This document is the one place those rules live. Heading and the layout components that take `as` (Box, Card, Container, Flex and Grid) point here.
+      - title: Related
+        body: |-
+          - **Heading** — the component these heading rules apply to.
+          - **Typography guidelines** — the type scale behind `size`.
+          - **Accessibility guidelines** — the wider WCAG 2.2 AA requirements.

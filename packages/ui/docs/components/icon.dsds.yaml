@@ -1,0 +1,275 @@
+kind: component
+id: icon
+name: Icon
+description: Renders a sizable and tonable SVG icon from @sanity/icons.
+metadata:
+  tags: [icon, svg, vector shape, size, tone, iconography, symbol, indicator]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To communicate a basic concept or action when horizontal space is limited.
+      - level: should
+        statement: To represent common button actions in dense UI elements like toolbars.
+      - level: should
+        statement: To reinforce the meaning of text with semantic context or visual prominence.
+      - level: should-not
+        statement: As a purely decorative element. Use an image or illustration instead.
+      - level: should-not
+        statement: As a replacement for text for complex concepts. Use plain text instead.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: standalone-icon-has-aria-label
+        level: must
+        statement: An Icon that conveys meaning on its own, with no adjacent text, needs an aria-label attribute that describes that meaning.
+        example:
+          title: How to satisfy this
+          description: Inspect the rendered DOM and confirm aria-label is present on the Icon's SVG element. Use a screen reader to navigate to the icon and verify the label is announced.
+        checkedBy: manual
+      - id: decorative-icon-is-aria-hidden
+        level: must
+        statement: "An Icon that decorates adjacent text needs no extra prop. Icon hides itself from screen readers — it renders aria-hidden='true' — whenever it has no aria-label. Don't give a decorative icon an aria-label; that removes the automatic aria-hidden and the meaning is announced twice. Give a meaningful icon with no adjacent text an aria-label. An icon-only control is an IconButton, with aria-label on the IconButton, not the Icon."
+        example:
+          title: How to satisfy this
+          description: Inspect the rendered DOM and confirm the Icon's SVG element carries aria-hidden='true' and no aria-label when adjacent text already conveys the meaning.
+        checkedBy: manual
+      - refs:
+          - to: shared-foundations#tone-signals-state
+            rel: same-as
+      - refs:
+          - to: shared-foundations#tone-paired-with-second-channel
+            rel: same-as
+      - id: icon-size-matches-text-size
+        level: should
+        statement: When Icon appears alongside Text, use the same numeric size value for both, so the icon height lines up with the text cap-height.
+        example:
+          title: How to satisfy this
+          description: Inspect the Icon and Text props in code and confirm the size values are equal. Review the rendered UI and confirm the icon height visually aligns with the text cap-height.
+        checkedBy: manual
+      - id: icon-muted-matches-text-muted
+        level: should
+        statement: When Icon appears alongside Text that has muted applied, apply muted to the Icon too, so both share the same reduced-contrast look.
+        example:
+          title: How to satisfy this
+          description: Inspect the Icon and Text props in code and confirm muted is set on both. Review the rendered UI and confirm the icon and text share the same reduced-contrast appearance.
+        checkedBy: manual
+      - id: pass-icon-component-itself-instance
+        level: should
+        statement: >-
+          Pass the icon component: `<Icon icon={SearchIcon} />`. From 5.0.0-alpha.12, an element works too: `<Icon icon={<SearchIcon />} />`. Icon clones the element, merges its `className` and `style` with its own, and keeps its `aria-label`. Use the element form only when the icon needs props of its own.
+      - id: choose-from-icons-entry
+        level: should
+        statement: >-
+          To choose an icon, look it up in the `icons` entry: every icon in
+          @sanity/icons, with its import path, purpose and other names it goes by.
+          Find an icon by purpose by searching `docs/icons.dsds.yaml` for the purpose word.
+      - level: must-not
+        statement: Don't set fontSize via inline styles — use the size prop.
+      - refs:
+          - to: shared-foundations#icon-not-sole-content-of-control
+            rel: same-as
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: "Do not pass the icon's vector shape as `symbol`. The prop is `icon`. Passing `symbol={SomeIcon}` directly is a TypeScript error (TS2322, verified against @sanity/ui@5.0.0-alpha.8) and renders no icon. It only fails silently when spread in from an object, which skips excess-property checking."
+      - level: must-not
+        statement: Don't use `as={SomeIcon}` to pass the icon component. Use `icon={SomeIcon}` instead — `as` changes the HTML element rendered, not the icon, and `<Icon as={SomeIcon} />` is a TypeScript error.
+      - level: must-not
+        statement: 'Wrapping an icon in a Box with inline fontSize for sizing. Instead: Use <Icon icon={SomeIcon} size={3} />.'
+  - kind: guidelines
+    for: all
+    title: Content guidelines
+    tags: [content]
+    items:
+      - level: should
+        statement: Choose the icon that most directly matches its meaning. Icons used in unfamiliar ways (for example, a gear for "edit") slow down comprehension.
+      - level: should
+        statement: For icon-plus-text pairs, place the icon before the text in left-to-right languages.
+      - level: should-not
+        statement: Don't combine icons that visually look like they form a sentence — icons aren't grammar.
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: '**Decorative by default.** Icon renders `aria-hidden="true"` on its own unless it has an `aria-label`, either on Icon or on an icon element passed to `icon`. A decorative icon that repeats adjacent text needs nothing extra — it is already hidden from screen readers. Passing `aria-label` removes the automatic `aria-hidden` and exposes the icon as informational (WCAG 1.1.1 A). Do this for icons that convey meaning on their own (for example, an icon-only status indicator). Set `aria-hidden="true"` explicitly only when you want to document the decorative intent in the markup.'
+      - level: should
+        statement: '**Not focusable.** Icon sets no `tabindex`, and an SVG is not focusable. Focus belongs on the control: use Button or IconButton.'
+  - kind: section
+    for: agent
+    freeform:
+      - title: 'Accessibility: decorative vs meaningful'
+        body: |-
+          Icon renders `aria-hidden="true"` on its own unless you pass `aria-label`. A decorative icon needs no extra prop; only a meaningful icon with no adjacent text needs `aria-label`.
+
+          ```tsx
+          // decorative icon — next to visible text label; hidden automatically
+          <Icon icon={SearchIcon} />
+
+          // meaningful icon — only icon, no adjacent text
+          <Icon icon={CloseIcon} aria-label="Close dialog" />
+
+          // from 5.0.0-alpha.12 an element works too; its aria-label counts
+          <Icon icon={<CloseIcon aria-label="Close dialog" />} />
+          ```
+
+          An icon-only control is IconButton's job, not Button's — Button always carries a
+          visible `text` label. The `aria-label` goes on the control, never on the Icon, and
+          the Icon stays hidden on its own.
+
+          ```tsx
+          // icon-only control — IconButton, label on the control
+          <IconButton
+            icon={TrashIcon}
+            aria-label="Delete item"
+            level="tertiary"
+            tone="critical"
+          />
+
+          // icon plus label — Button, icon decorates the text
+          <Button
+            iconStart={TrashIcon}
+            text="Delete item"
+            level="tertiary"
+            tone="critical"
+          />
+          ```
+
+uses:
+  - to: icons
+    note: Icon accepts any component from @sanity/icons as its value prop.
+alternatives:
+  - to: button
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=31907-17
+    rel: design
+    role: Figma component (v5)
+  - to: text
+    rel: relates-to
+    note: To match surrounding text size on its own, render the raw `@sanity/icons` component inside Text instead of using Icon
+  - to: icon-button
+    rel: relates-to
+    note: A button that displays an icon as its main label
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/icon/Icon.tsx
+imports:
+  - platform: react
+    code: import { Icon } from '@sanity/ui'
+    package: '@sanity/ui'
+traits:
+  - traitType: variant
+    kind: enum
+    id: size
+    description: CSS font-size property.
+    values:
+      - id: '0'
+        description: Smallest.
+      - id: '1'
+        description: Small.
+      - id: '2'
+        description: Medium (default).
+      - id: '3'
+        description: Large.
+      - id: '4'
+        description: Extra large.
+  - traitType: variant
+    kind: enum
+    id: tone
+    description: Semantic icon color.
+    values:
+      - id: neutral
+        description: Default. No semantic meaning.
+      - id: suggest
+        description: Suggestions or informational content.
+      - id: positive
+        description: Success, published, healthy.
+      - id: caution
+        description: Needs attention.
+      - id: critical
+        description: Error, failed, rejected.
+  - traitType: variant
+    kind: boolean
+    id: muted
+    description: Reduces visual prominence for secondary or decorative icons.
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      guidance: |-
+        ### v3 → v5 prop migration
+
+        The v3 `symbol` prop was renamed to `icon` in v5. Passing `symbol` directly is a TypeScript error (TS2322) and renders no icon. The linter catches it before tsc does, and the fix is simple.
+
+        ```tsx
+        // v3 (wrong in v5)
+        <Icon symbol={SearchIcon} />
+
+        // v5 (correct)
+        <Icon icon={SearchIcon} />
+        ```
+
+        ### Migrating from Sanity UI 3
+
+        `@sanity/icons` exports its own `Icon` component — it renders an SVG icon from the package. The component documented here is different. It is a Sanity UI component that adds `size`, `tone`, `muted`, and margin props on top.
+
+        ```
+        import {RocketIcon} from '@sanity/icons/Rocket'
+
+        {/* v3 — icon rendered by specific RocketIcon component */}
+        <RocketIcon />
+        ```
+
+        The new Icon component also allows for direct manipulation of sizing and toning:
+
+        ```
+        import {CropIcon} from '@sanity/icons/Crop'
+        import {Icon} from '@sanity/ui'
+
+        {/* v3 — wrap in Text just for sizing */}
+        <Text size={3}>
+          <CropIcon />
+        </Text>
+
+        {/* v3 — inline fontSize fallback */}
+        <Card tone="suggest">
+          <CropIcon />
+        </Card>
+
+        {/* v5 — Icon */}
+        <Icon icon={CropIcon} size={3} tone="suggest" />
+        ```
+
+        ### Key differences
+
+        - Icon’s `size` prop replaces the "wrap in Text" workaround for sizing standalone icons. The size scale (`0`–`4`) matches Text and Heading exactly.
+        - Icon’s `tone` prop replaces inline `style={{ color }}` for icon coloring with the semantic tone vocabulary used elsewhere in the system.
+        - Icon’s  `muted` prop mirrors the `muted` boolean on Text.
+        - Icon does not currently inherit size/tone from parents.
+
+        ### Detailed list of differences
+
+        | v3 pattern | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `<Box style={{ fontSize }}><SomeIcon /></Box>` | `<Icon icon={SomeIcon} size={N} />` | Replaces the inline-fontSize escape hatch. |
+        | `<SomeIcon style={{ color: '...' }} />` | `<Icon icon={SomeIcon} tone="..." />` | Use the `tone` prop with a semantic value. |
+        | `<Text muted size={N}><SomeIcon /></Text>` | `<Icon icon={SomeIcon} size={N} muted />` | `muted` is now a first-class prop on Icon. |
+        | `<Button><SomeIcon /></Button>` | `<IconButton icon={SomeIcon} />` | Don't wrap Icon in a button — use `IconButton` and pass the icon component to its `icon` prop. |
+
+        ### Breaking changes
+
+        Icon has no breaking changes from v3; it's new in v5. Migrate to Icon at your own pace.

@@ -1,0 +1,217 @@
+kind: component
+id: grid
+name: Grid
+description: Renders a CSS grid layout container. Supports named props for all CSS grid properties with responsive arrays.
+metadata:
+  tags: [layout, grid, columns, rows, two-axis, responsive, dashboard, card-grid, CSS grid]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To display non-tabular content in multiple rows and columns.
+      - level: should
+        statement: To build fixed-column layouts where items should align on a shared grid (dashboards, card grids, settings panels).
+      - level: should
+        statement: When you need precise control over row and column sizing, spanning, or placement.
+      - level: should-not
+        statement: When content flows in a single direction. Use Flex, VStack, or HStack instead.
+        alternatives:
+          - to: flex
+          - to: v-stack
+          - to: h-stack
+      - level: should-not
+        statement: When you need wrapping rows of variable-width items. Use Flex with flexWrap='wrap' instead.
+        alternatives:
+          - to: flex
+      - level: should-not
+        statement: When you need to constrain and center content at a max width. Use Container instead.
+        alternatives:
+          - to: container
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: api-essentials#sizing-is-a-css-string
+            rel: same-as
+      - id: grid-template-columns-uses-fr-or-minmax
+        level: should
+        statement: 'Use gridTemplateColumns with repeat() and fr units, minmax(), auto, or responsive arrays to build layouts that adapt gracefully — avoid bare pixel values.'
+        example:
+          title: How to satisfy this
+          description: "Review the JSX source and confirm gridTemplateColumns values use expressions like 'repeat(3, 1fr)', 'minmax(200px, 1fr)', or 'auto 1fr'. Pass an array to gridTemplateColumns for responsive breakpoints (for example, ['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']) and verify the rendered grid adapts at each breakpoint."
+        checkedBy: manual
+      - id: gap-used-not-child-margin
+        level: should
+        statement: Use gap, columnGap, or rowGap on the Grid component to control the gap between grid cells, not padding or margin on child elements.
+        example:
+          title: How to satisfy this
+          description: Inspect the JSX source and confirm child elements inside Grid have no margin or padding props intended to create inter-cell spacing. In browser DevTools, inspect the computed styles of grid children and verify there is no margin contributing to the gap between cells.
+        checkedBy: manual
+      - refs:
+          - to: shared-foundations#layout-primitive-no-text-styles
+            rel: same-as
+        tags: [content]
+      - id: no-visual-reorder-via-grid-placement
+        level: must-not
+        statement: Don't use CSS order, gridColumn, or gridRow to visually reorder items away from their DOM order — screen readers follow DOM order, so the visual order of grid items should match their DOM source order.
+        example:
+          title: How to satisfy this
+          description: Tab through the grid with keyboard-only navigation and confirm focus moves in the same sequence as the visual reading order. Inspect the rendered DOM in browser DevTools and confirm the sequence of child nodes matches the left-to-right, top-to-bottom visual order of the grid. Use a screen reader and verify the announced order of items matches what a sighted user would read.
+        checkedBy: manual
+      - id: no-hardcoded-px-in-grid-template-columns
+        level: must-not
+        statement: Don't hardcode pixel values in gridTemplateColumns when a fluid unit like fr, minmax(), or auto would serve the same purpose more resiliently.
+        example:
+          title: How to satisfy this
+          description: "Review the JSX source and confirm gridTemplateColumns does not contain values like '200px 200px' or '33% 33% 33%' where 'repeat(3, 1fr)' or 'repeat(3, minmax(0, 1fr))' would work. If a minimum width is needed, verify it is expressed as the lower bound of minmax() (for example, 'minmax(160px, 1fr)') rather than as a fixed column width."
+        checkedBy: manual
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: must
+        statement: If Grid is used for an interactive widget (calendar, data grid, color picker), you must implement the WAI-ARIA grid pattern yourself. This means `role="grid"` with `role="row"` and `role="gridcell"` children, roving tabindex, and full keyboard navigation. Grid the component provides none of this. See the WAI-ARIA Authoring Practices Guide for the `grid` pattern.
+      - refs:
+          - to: semantics#landmark-requirements
+            rel: same-as
+      - refs:
+          - to: semantics#list-semantics
+            rel: same-as
+      - refs:
+          - to: api-essentials#responsive-array-undefined-slot
+            rel: same-as
+      - level: should
+        statement: 'CSS grid placement (`gridColumn`, `gridRow`, `gridAutoFlow: "column dense"`) can visually reorder items without touching the DOM. Screen readers and keyboard users follow DOM order, not visual order. Never use grid placement to change the logical reading or focus sequence — keep visual order and DOM order in sync (WCAG 1.3.2 A).'
+      - level: should
+        statement: '`gridAutoFlow: "row dense"` and `"column dense"` fill holes in the grid by pulling later items forward. This can produce a visual order that diverges from DOM order. Only use dense packing for purely decorative or non-interactive content (for example, image mosaics) where reading order does not matter.'
+      - level: should
+        statement: Take Grid gap values from the spacing scale. Do not use fixed `px` values for gap where a step exists — a fixed value drifts from the scale when the token values change.
+      - refs:
+          - to: shared-foundations#layout-primitive-as-not-behavioral
+            rel: same-as
+  - kind: section
+    for: agent
+    freeform:
+      - title: Responsive array breakpoints
+        body: |-
+          Every Grid prop that accepts `Responsive<T>` takes a breakpoint array. The Responsive pattern (`responsive`) has the breakpoint table and the rules for undefined slots.
+
+          ```tsx
+          // 1 col → 2 col at 600px → 3 col at 1200px
+          <Grid
+            gridTemplateColumns={['1fr', '1fr', '1fr 1fr', '1fr 1fr', 'repeat(3, 1fr)']}
+            gap={[2, undefined, 3]}
+          >
+          ```
+      - title: gridTemplateColumns templates
+        body: |-
+          Grid uses CSS string syntax for columns — there is no numeric columns prop.
+
+          ```tsx
+          // 1 column
+          <Grid gridTemplateColumns="1fr" gap={3}>
+
+          // 2 equal columns
+          <Grid gridTemplateColumns="1fr 1fr" gap={3}>
+
+          // 3 equal columns
+          <Grid gridTemplateColumns="repeat(3, 1fr)" gap={3}>
+
+          // 4 equal columns
+          <Grid gridTemplateColumns="repeat(4, 1fr)" gap={3}>
+
+          // Auto-fit: fill row with as many columns as fit at min 240px
+          <Grid gridTemplateColumns="repeat(auto-fit, minmax(240px, 1fr))" gap={3}>
+
+          // Responsive: 1 col mobile → 2 col at 600px → 3 col at 1200px
+          <Grid
+            gridTemplateColumns={['1fr', '1fr', '1fr 1fr', '1fr 1fr', 'repeat(3, 1fr)']}
+            gap={3}
+          >
+          ```
+
+alternatives:
+  - to: flex
+    note: One-axis layout for rows or columns
+  - to: container
+refs:
+  - to: responsive
+    rel: relates-to
+    note: Owns the breakpoint table for responsive arrays
+  - to: space
+    rel: relates-to
+  - to: box
+    rel: relates-to
+    note: Single container for spacing and structure
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/grid/Grid.tsx
+imports:
+  - platform: react
+    code: import { Grid } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        `columns`/`rows` are removed — use `gridTemplateColumns`/`gridTemplateRows` with CSS grid syntax (`columns={3}` → `gridTemplateColumns="repeat(3, 1fr)"`). `autoRows`/`autoCols`/`autoFlow`/`gapX`/`gapY` and child props (`column`, `row`, etc.) all gain a `grid` prefix.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:grid --paths <paths> --toPackage @sanity/ui`.
+      guidance: |-
+        Grid in the new system replaces the `@sanity/ui` Grid. The core grid layout behavior is the same.
+
+        ### Key differences
+
+        - v5 components use CSS classes with a static stylesheet as opposed to `styled-components`.
+        - `columns` and `rows` props have been removed. Use `gridTemplateColumns` and `gridTemplateRows` with CSS grid syntax. `columns={3}` becomes `gridTemplateColumns="repeat(3, 1fr)"`.
+        - Props are named to match their CSS equivalents. `autoRows` → `gridAutoRows`, `autoCols` → `gridAutoColumns`, `autoFlow` → `gridAutoFlow`, `gapX` → `columnGap`, `gapY` → `rowGap`. On child elements: `column` → `gridColumn`, `row` → `gridRow`, `columnStart` → `gridColumnStart`, etc.
+        - Responsive arrays work on grid-related props. Use `gridTemplateColumns={['1fr', '1fr', '1fr 1fr', 'repeat(3, 1fr)']}` for responsive column counts.
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `columns={3}` | `gridTemplateColumns="repeat(3, 1fr)"` | v3 accepted a number. The new version uses the CSS `grid-template-columns` string. |
+        | `rows={2}` | `gridTemplateRows="repeat(2, 1fr)"` | Same change — numeric shorthand replaced by CSS string. |
+        | `autoRows="min"` | `gridAutoRows="min-content"` | v3 used shorthand values (`'min'`, `'max'`, `'fr'`). New uses CSS values. |
+        | `autoCols="auto"` | `gridAutoColumns="auto"` | Renamed from `autoCols` to `gridAutoColumns`. |
+        | `autoFlow="column"` | `gridAutoFlow="column"` | Renamed from `autoFlow` to `gridAutoFlow`. |
+        | `gapX={2}` | `columnGap={2}` | Renamed from `gapX` to `columnGap`. |
+        | `gapY={4}` | `rowGap={4}` | Renamed from `gapY` to `rowGap`. |
+        | — | `tone` | New. Sets a semantic background tint. Unset, Grid has no background. Accepts `default`, `neutral`, `positive`, `suggest`, `caution`, and `critical`. |
+        | — | `width`, `minWidth`, `maxWidth` | New. Accept any CSS string. |
+        | — | `position`, `zIndex` | New. |
+        | — | `border`, `radius` | New. |
+
+        ### Breaking changes
+
+        - **`columns` prop removed.** `<Grid columns={3}>` does nothing. Use `<Grid gridTemplateColumns="repeat(3, 1fr)">`.
+        - **`rows` prop removed.** `<Grid rows={2}>` does nothing. Use `<Grid gridTemplateRows="repeat(2, 1fr)">`.
+        - **`autoRows` renamed to `gridAutoRows`.** The old prop name does nothing.
+        - **`autoCols` renamed to `gridAutoColumns`.** The old prop name does nothing.
+        - **`autoFlow` renamed to `gridAutoFlow`.** The old prop name does nothing.
+        - **`gapX` renamed to `columnGap`.** The old prop name does nothing.
+        - **`gapY` renamed to `rowGap`.** The old prop name does nothing.
+        - **Grid child props renamed on child elements.** `column` → `gridColumn`, `row` → `gridRow`, `columnStart` → `gridColumnStart`, `columnEnd` → `gridColumnEnd`, `rowStart` → `gridRowStart`, `rowEnd` → `gridRowEnd`. The old names do nothing.
+        - **`styled-components` no longer used.** Custom styled-components extensions like `styled(Grid)` will not work.
+
+        ### Codemod
+
+        A codemod is ready to make the changes above less painful. To get started, run the following command with the path to the file or directory you want to migrate.
+
+        ```
+        pnpx @sanity/ui-codemod latest:grid --paths <paths> --toPackage @sanity/ui
+        ```
+
+        If a component instance cannot be migrated, includes unclear changes, or needs manual review, the codemod inserts a comment prefixed with “UI-POC-CODEMOD TODO”.

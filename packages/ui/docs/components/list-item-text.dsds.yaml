@@ -1,0 +1,80 @@
+kind: component
+id: list-item-text
+name: List.ItemText
+description: The text content slot inside a List.Item.
+metadata:
+  tags: [list, item, text, title, subtitle]
+  status:
+    status: beta
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Keep titles short — they are clamped to one line.
+      - level: must-not
+        statement: Don't use List.ItemText outside of List.Item. It relies on the flex layout of the parent row.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - refs:
+          - to: list#subcomponents-not-named-exports
+            rel: same-as
+      - level: must-not
+        statement: Do not wrap title or subtitle in a Text component — List.ItemText applies sizing, weight, and truncation internally.
+  - kind: guidelines
+    for: all
+    title: Content
+    tags: [content]
+    items:
+      - refs:
+          - to: content-guidelines#sentence-case-all-system-set
+            rel: same-as
+  - kind: section
+    for: agent
+    freeform:
+      - title: Examples
+        body: |-
+          List.ItemText renders a two-line label block with built-in styling.
+
+          ```tsx
+          // ✓ — ItemText applies size, weight, and truncation internally
+          <List.ItemText title="My document" subtitle="Last edited 2 hours ago" />
+
+          // ✗ — wrapping in Text adds conflicting styles
+          <List.ItemText
+            title={<Text size={1} weight="medium">My document</Text>}
+            subtitle="..."
+          />
+          ```
+
+          Both `title` and `subtitle` accept `React.ReactNode`, so you can pass a `Badge` or `Icon` when needed. Keep the value short — both lines are clamped to one line (`truncate={1}`).
+
+refs:
+  - href: https://www.figma.com/design/5mhVqXlldJEEB2VWZeKQ4i/Sanity-UI?node-id=32249-547
+    rel: design
+    role: Figma component (v5)
+  - to: list-item
+    rel: relates-to
+    note: The parent row
+  - to: list
+    rel: relates-to
+    note: The root list component — see **List** for full compound component docs
+  - to: tooltip
+    rel: relates-to
+    note: Use to reveal full text when a title is truncated
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/list/List.tsx
+imports:
+  - platform: react
+    code: import { List } from '@sanity/ui'
+    package: '@sanity/ui'
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

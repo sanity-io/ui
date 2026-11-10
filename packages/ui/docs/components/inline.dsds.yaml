@@ -1,0 +1,127 @@
+kind: component
+id: inline
+name: Inline
+description: Deprecated. Use HStack instead. Previously laid out children in a wrapping inline row. Maintained for backward compatibility only.
+metadata:
+  tags: [deprecated, horizontal, inline, layout, hstack, row]
+  status:
+    status: deprecated
+    deprecationNotice: Use HStack instead
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: inline-new-code-hstack-instead
+        level: must-not
+        statement: "Do not use Inline in new code. Use HStack instead. HStack wraps its children by default, as Inline did. Use Flex only when you need alignment or spacing that HStack's defaults don't give."
+        alternatives:
+          - to: h-stack
+          - to: flex
+  - kind: section
+    for: all
+    freeform:
+      - title: 'Deprecation guide: Inline to HStack'
+        body: |-
+          Inline itself is deprecated in favor of HStack (see the notice at the top of this doc). This is a separate, manual migration — there is no codemod for it.
+
+          ### From Inline to HStack
+
+          For most cases, replace `Inline` with `HStack`:
+
+          ```
+          {/* Before */}
+          <Inline gap={2}>
+            <Tag>One</Tag>
+            <Tag>Two</Tag>
+          </Inline>
+
+          {/* After */}
+          <HStack gap={2}>
+            <Tag>One</Tag>
+            <Tag>Two</Tag>
+          </HStack>
+          ```
+
+          If you used padding props on Inline, add a Box wrapper:
+
+          ```
+          {/* Before */}
+          <Inline gap={2} padding={3}>
+            <Tag>One</Tag>
+            <Tag>Two</Tag>
+          </Inline>
+
+          {/* After */}
+          <Box padding={3}>
+            <HStack gap={2}>
+              <Tag>One</Tag>
+              <Tag>Two</Tag>
+            </HStack>
+          </Box>
+          ```
+
+          ### Behavioral difference
+
+          Inline wraps each child in a `<div>` with `display: inline-block`. HStack is a flex box with no extra wrappers. Items still flow to a new row: HStack wraps by default, and centers its children on the cross axis.
+alternatives:
+  - to: h-stack
+    note: Replaces Inline
+refs:
+  - href: https://www.figma.com/design/NWmchNlsNdG66VBaCsTdSL/pjo-ui4-component-buildout?node-id=29358-194
+    rel: design
+    role: Figma component
+  - to: space
+    rel: relates-to
+  - to: flex
+    rel: relates-to
+    note: Full flex control, including `flexWrap` for rows that wrap
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/inline/Inline.tsx
+imports:
+  - platform: react
+    code: import { HStack } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        Inline keeps its name but renames `space`→`gap` and removes `flex` as a direct prop (the codemod converts it to inline `style`). Margin props are unsupported on Inline in either version. This codemod migrates v3 usage to v5's Inline — it does NOT migrate to HStack. Inline itself is deprecated in favor of HStack, but that move has no codemod and must be done by hand.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:inline --paths <paths> --toPackage @sanity/ui`.
+      guidance: |-
+        Inline in the new system keeps the same name and purpose as `@sanity/ui`'s Inline — a wrapping inline row. The API changes are small:
+
+        ### Key differences
+
+        - `space` renamed to `gap`, matching the prop name used across other v5 layout components.
+        - `flex` is removed as a direct prop. v5 has no shorthand `flex` prop on Inline — the codemod converts a literal `flex` value to an inline `style` object.
+        - Margin props (`margin`, `marginX`, `marginY`, and per-side variants) are not supported on Inline in either version — a v3 app relying on them was already reaching outside Inline's documented API.
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `space` | `gap` | Renamed. Same scale (`0`–`9`, `'inherit'`). |
+        | `flex` | — | Removed as a prop. The codemod converts a literal value to `style={{ flex: '...' }}`. |
+        | `margin`, `marginX`, `marginY`, per-side margin | — | Not supported on Inline in either version. Wrap in `Box` for margin. |
+
+        ### Breaking changes
+
+        - **`space` prop renamed to `gap`.** `<Inline space={2}>` no longer sets spacing. Use `<Inline gap={2}>`.
+        - **`flex` prop removed.** `<Inline flex={1}>` no longer works as a prop. Move the value to `style={{ flex: '1' }}` or wrap in a flex-aware parent.
+
+        ### Codemod
+
+        A codemod is available to ease the changes above. Run the command below with the path to the file or folder you want to migrate. Use spaces to pass more than one path.
+
+        ```
+        pnpx @sanity/ui-codemod latest:inline --paths <paths> --toPackage @sanity/ui
+        ```
+
+        This codemod migrates a v3 `@sanity/ui` Inline to v5's Inline component — it does not migrate to HStack. If you're also moving off the deprecated Inline component itself, run this codemod first, then follow the deprecation guide below. If a component instance cannot be migrated or needs manual review, the codemod inserts a comment prefixed with "UI-POC-CODEMOD TODO".

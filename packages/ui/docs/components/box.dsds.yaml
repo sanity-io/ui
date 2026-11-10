@@ -1,0 +1,223 @@
+kind: component
+id: box
+name: Box
+description: The lowest-level building block for containing UI elements. Provides spacing, borders, shadows, and semantic tone without adding flex or grid layout behavior.
+metadata:
+  tags: [layout, container, spacing, structure, box, div, wrapper, padding, margin]
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: As a container for child elements.
+      - level: should
+        statement: To apply padding or margin to a group of elements.
+      - level: should
+        statement: To create basic visual styling (background, border, shadow) when composing a custom component.
+      - level: should-not
+        statement: As an interactive element. Box is not intended to act as a button.
+        alternatives:
+          - to: button
+      - level: should-not
+        statement: As a way to stack or align child elements. Use Flex, VStack, or HStack instead.
+        alternatives:
+          - to: flex
+          - to: v-stack
+          - to: h-stack
+      - level: should-not
+        statement: 'When you want display: flex. Use Flex instead.'
+        alternatives:
+          - to: flex
+      - level: should-not
+        statement: As a way to display children in a grid layout. Use Grid instead.
+        alternatives:
+          - to: grid
+      - level: should-not
+        statement: To center content at a max width. Use Container instead.
+        alternatives:
+          - to: container
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: Don't use Box for content surfaces with a distinct visual surface (background + border). Use Card instead.
+        alternatives:
+          - to: card
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: api-essentials#sizing-is-a-css-string
+            rel: same-as
+      - id: box-styling-props-over-inline-styles
+        level: should
+        statement: Use Box's styling props (tone, padding, width, and similar) to adjust visual appearance rather than inline styles — every visual style Box supports through a prop is set through that prop, not the style attribute.
+        example:
+          title: How to satisfy this
+          description: Review the rendered JSX and confirm no style={{ }} attribute contains a value covered by a Box prop. Check that tone, padding, paddingX, paddingY, width, and related props are used directly on the Box element.
+        checkedBy: manual
+      - id: box-padding-preferred-over-margin
+        level: should
+        statement: Use padding over margin when possible — padding keeps spacing inside the component's own box, so internal spacing on a Box should use the padding prop rather than margin.
+        example:
+          title: How to satisfy this
+          description: Review Box usages where spacing is added to the element itself and confirm padding is used. Confirm margin is only present when external spacing between sibling elements is genuinely needed.
+        checkedBy: manual
+      - refs:
+          - to: shared-foundations#layout-primitive-no-text-styles
+            rel: same-as
+        tags: [content]
+      - id: box-no-as-button
+        level: must-not
+        statement: 'Never use as=''button''. Box does not reset browser defaults for button elements, and it does not fulfill the keyboard and ARIA contract a button requires. No Box element in the codebase should have as=''button'' or as="button" set. Use the Button component instead.'
+        example:
+          title: How to satisfy this
+          description: Search the file or component for as='button' or as="button" on any Box element. Replace any found instances with the Button component.
+        alternatives:
+          - to: button
+        checkedBy: manual
+      - id: box-no-inline-flex-styles
+        level: must-not
+        statement: "Don't use inline styles to apply flex layout to Box — no Box element should use style={{ display: 'flex' }} or a similar inline style. Wrap the content in a Flex component instead."
+        example:
+          title: How to satisfy this
+          description: "Review all Box usages and confirm none have style={{ display: 'flex' }} or style={{ display: 'inline-flex' }}. Replace any found instances by wrapping the content in a Flex component instead."
+        alternatives:
+          - to: flex
+        checkedBy: manual
+      - id: box-no-style-prop-for-supported-attrs
+        level: must-not
+        statement: Don't use the style prop for attributes that have a matching Box prop (width, height, borderRadius, background, and similar) — no Box element should set these through style.
+        example:
+          title: How to satisfy this
+          description: Inspect the style attribute on each Box element and verify none of its keys correspond to a prop Box exposes (width, height, borderRadius, background, padding, margin, etc.). Move any such values from style={{ }} to the equivalent Box prop.
+        checkedBy: manual
+      - id: box-no-display-grid-or-flex
+        level: must-not
+        statement: Do not pass display='grid' or display='flex' as a Box prop, and don't set display='inline-grid' or display='inline-flex' either — Box.display only accepts "none" | "block" | "inline-block". Use <Grid> for grid layouts and <Flex> for flex layouts.
+        example:
+          title: How to satisfy this
+          description: Search for display='grid' or display='flex' on Box elements. Replace <Box display='grid'> with <Grid> and <Box display='flex'> with <Flex>.
+        checkedBy: manual
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must-not
+        statement: "Box has no `backgroundColor` prop. Do not pass `style={{backgroundColor: '...'}}`. For semantic surface colors use `tone` on Box or on a wrapping Card."
+      - level: must-not
+        statement: "Box has no `borderColor` prop. The `borderTop`, `borderRight`, `borderBottom`, `borderLeft`, and `border` boolean props apply the design-system border token in the current tone color — they do not accept a custom color value. Do not add `style={{borderColor: '...'}}`. For colored borders, use `tone` on a parent Card instead."
+      - level: must-not
+        statement: Box has no `textAlign` prop. To align text, use the `align` prop on `Text` or `Heading` directly.
+      - level: must-not
+        statement: "Box has no `borderRadius` prop. Use the `radius` prop instead (integer 0–6 or `'full'`). Do not pass `style={{borderRadius: ...}}`."
+      - level: must-not
+        statement: 'Adding onClick to a Box to make it interactive. Instead: Use Button for interactive actions.'
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - refs:
+          - to: semantics#landmark-requirements
+            rel: same-as
+      - level: should
+        statement: Box spacing comes from the spacing tokens, which scale with browser zoom. Content inside Box must reflow at 320px viewport width without horizontal scrolling (WCAG 1.4.10 AA).
+      - refs:
+          - to: shared-foundations#layout-primitive-as-not-behavioral
+            rel: same-as
+      - level: must-not
+        statement: Do not use `as` to render `<ul>` or `<ol>`. Use VStack instead.
+        alternatives:
+          - to: v-stack
+      - level: must-not
+        statement: Do not use CSS `order` or grid placement on Box children to reorder them from source order. Screen readers and keyboard navigation follow DOM order, not visual order (WCAG 1.3.2 A).
+
+alternatives:
+  - to: flex
+    note: Row or column layout with alignment and gap
+  - to: card
+    note: Adds a visual surface with background, border, and tone
+  - to: container
+refs:
+  - to: space
+    rel: relates-to
+  - to: grid
+    rel: relates-to
+    note: Two-axis layout for card grids and dashboards
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/box/Box.tsx
+imports:
+  - platform: react
+    code: import { Box } from '@sanity/ui'
+    package: '@sanity/ui'
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true
+    migrationGuide:
+      context: 'Migration guide for this component, covering the codemod and the changes it cannot make. Held as an extension because it is temporary: migration tooling and porting agents read it, and it should be dropped when Sanity UI 3 support ends.'
+      codemod: |-
+        Box replaces `@sanity/ui`'s Box. Breaking changes: `display` no longer accepts `'flex'`/`'grid'` (use Flex/Grid instead), the `flex` shorthand splits into `flexGrow`/`flexShrink`/`flexBasis`, `sizing` is removed, grid child props are renamed with a `grid` prefix (`column` → `gridColumn`, etc.), and `margin` no longer defaults to `0`.
+
+        Run the codemod: `pnpx @sanity/ui-codemod latest:box --paths <paths> --toPackage @sanity/ui`. If an instance can't be migrated automatically, the codemod inserts a "UI-POC-CODEMOD TODO" comment.
+      guidance: |-
+        Box in the new system replaces the `@sanity/ui` Box. The core purpose is the same — a general-purpose layout container. The API changes are:
+
+        ### Key differences
+
+        - v5 components use CSS classes with a static stylesheet as opposed to `styled-components`.
+        - Box no longer uses `flex` shorthand. Use `flexGrow`, `flexShrink`, and `flexBasis` as separate props.
+        - Grid child props renamed: `column` → `gridColumn`, `row` → `gridRow`, etc.
+        - Box’s `display` prop no longer accepts `'flex'` or `'grid'`. Use the Flex and Grid components.
+        - The new API has direct props for styling attributes such as width, height, position, and border, etc.
+        - v3 Box used `React.forwardRef`. The new version is a plain function component.
+
+        ### Detailed list of differences
+
+        | v3 prop | v5 prop | Notes |
+        | :---- | :---- | :---- |
+        | `display` | `display` | v3 accepted `'flex'` and `'grid'`. New Box restricts to `'block'`, `'inline-block'`, `'none'`. Use Flex or Grid for those display modes. |
+        | `flex={1}` | `flexGrow={1}` | v3 used a single `flex` shorthand. Split into `flexGrow`, `flexShrink`, `flexBasis`. |
+        | `overflow="hidden"` | `overflow="hidden"` | v3 accepted `'visible'`, `'hidden'`, `'auto'`. New adds `'scroll'` and `'clip'`. |
+        | `height="fill"` | `height="100%"` | v3 used named values (`'fill'`, `'stretch'`). New accepts any CSS string. |
+        | `sizing="border"` | — | Removed. Use CSS `box-sizing` via `style` if needed. |
+        | `column={2}` | `gridColumn="span 2"` | v3 used numeric shorthand. New uses CSS `grid-column` string syntax. |
+        | `row`, `rowStart`, `rowEnd` | `gridRow`, `gridRowStart`, `gridRowEnd` | Renamed with `grid` prefix. |
+        | `columnStart`, `columnEnd` | `gridColumnStart`, `gridColumnEnd` | Renamed with `grid` prefix. |
+        | — | `tone` | New. Sets a semantic background tint. Unset, Box has no background. Accepts `default`, `neutral`, `positive`, `suggest`, `caution`, and `critical`. |
+        | — | `width`, `minWidth`, `maxWidth` | New. Accept any CSS string value. v3 Box had no width props. |
+        | — | `height`, `minHeight`, `maxHeight` | New. Accept any CSS string value. |
+        | — | `position` | New. Accepts `'absolute'`, `'fixed'`, `'relative'`, `'static'`, `'sticky'`. |
+        | — | `zIndex` | New. Accepts any number. |
+        | — | `border`, `borderTop`, etc. | New. Boolean props for themed borders. |
+        | — | `radius` | New. Border-radius from the design scale (0–6, `'full'`). |
+
+        ### Breaking changes
+
+        - **`display` no longer accepts `'flex'` or `'grid'`.** Any `<Box display="flex">` or `<Box display="grid">` silently renders as `display: block`. Replace with `<Flex>` or `<Grid>`.
+        - **`flex` prop removed.** `<Box flex={1}>` does nothing. Replace with `<Box flexGrow={1}>`. For the full shorthand, split into `flexGrow`, `flexShrink`, and `flexBasis`.
+        - **`height` named values removed.** `height="fill"` and `height="stretch"` are no longer valid. Use `height="100%"` or `height="100vh"` instead.
+        - **`sizing` prop removed.** `<Box sizing="border">` does nothing. Use `style={{ boxSizing: 'border-box' }}` if needed.
+        - **Grid child props renamed.** `column`, `columnStart`, `columnEnd`, `row`, `rowStart`, `rowEnd` no longer work. Use `gridColumn`, `gridColumnStart`, `gridColumnEnd`, `gridRow`, `gridRowStart`, `gridRowEnd`.
+        - **`margin` no longer defaults to `0`.** v3 Box defaulted `margin` to `0`. The new Box has no margin default. If your layout relied on the implicit zero margin, add `margin={0}` directly.
+        - **`styled-components` no longer used.** The component uses CSS classes. Custom styled-components extensions like `styled(Box)` will not work. Use `className` and CSS instead.
+
+        ### Codemod
+
+        A codemod is available to make the changes above less painful. To get started, run the following command with the path (or space delimited list of paths) to the file or directory you want to migrate.
+
+        ```
+        pnpx @sanity/ui-codemod latest:box --paths <paths> --toPackage @sanity/ui
+        ```
+
+        If a component instance cannot be migrated, includes unclear changes, or needs manual review, the codemod inserts a comment prefixed with “UI-POC-CODEMOD TODO”.

@@ -1,0 +1,397 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: background-high
+    name: background-high
+    description: 'The stronger surface fill. Use for headers, wells and hovered rows in custom markup.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#background-high
+  - kind: token
+    id: background-high-emphasized
+    name: background-high-emphasized
+    description: 'The fill of a strongly emphasized surface. Pair its text with `foreground-high-emphasized`.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#background-high-emphasized
+  - kind: token
+    id: background-low
+    name: background-low
+    description: 'The base surface fill, behind page and card content.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#background-low
+  - kind: token
+    id: background-low-emphasized
+    name: background-low-emphasized
+    description: 'The fill of a moderately emphasized surface. Pair its text with `foreground-low-emphasized`.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#background-low-emphasized
+  - kind: token
+    id: separator-high
+    name: separator-high
+    description: 'The stronger border color, for dividers that must stand out.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#separator-high
+  - kind: token
+    id: separator-low
+    name: separator-low
+    description: 'The default border and divider color. Use it for borders on custom markup, such as table cells.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#separator-low
+  - kind: token
+    id: foreground-high
+    name: foreground-high
+    description: 'The primary text and icon color.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#foreground-high
+  - kind: token
+    id: foreground-high-emphasized
+    name: foreground-high-emphasized
+    description: 'Text and icons on a `background-high-emphasized` fill.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#foreground-high-emphasized
+  - kind: token
+    id: foreground-low
+    name: foreground-low
+    description: 'The secondary text and icon color, for muted content.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#foreground-low
+  - kind: token
+    id: foreground-low-emphasized
+    name: foreground-low-emphasized
+    description: 'Text and icons on a `background-low-emphasized` fill.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#foreground-low-emphasized
+  - kind: token
+    id: backdrop
+    name: backdrop
+    description: 'The page backdrop behind every surface.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#backdrop
+  - kind: token
+    id: brand-background
+    name: brand-background
+    description: "Sanity's brand color. Use it for brand marks only, never for state or emphasis."
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#brand-background
+  - kind: token
+    id: brand-foreground
+    name: brand-foreground
+    description: 'Text and marks on the brand color.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#brand-foreground
+  - kind: token
+    id: placeholder-opacity
+    name: placeholder-opacity
+    description: 'The opacity of placeholder text in a field.'
+    metadata:
+      status:
+        status: stable
+      group: opacity
+    source:
+      href: ./dtcg/json/semantic.tokens.json#placeholder-opacity
+  - kind: token
+    id: overlay-opacity
+    name: overlay-opacity
+    description: 'The opacity of the dimmed layer behind a modal or overlay.'
+    metadata:
+      status:
+        status: stable
+      group: opacity
+    source:
+      href: ./dtcg/json/semantic.tokens.json#overlay-opacity
+  - kind: token
+    id: active-background-normal
+    name: active-background-normal
+    description: 'The fill of a selected or current item, such as the active row in a list.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#active-background-normal
+  - kind: token
+    id: active-foreground-normal
+    name: active-foreground-normal
+    description: 'Text and icons on `active-background-normal`.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#active-foreground-normal
+  - kind: token
+    id: active-background-emphasized
+    name: active-background-emphasized
+    description: 'The strong fill of a selected control.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#active-background-emphasized
+  - kind: token
+    id: active-foreground-emphasized
+    name: active-foreground-emphasized
+    description: 'Text and icons on `active-background-emphasized`.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#active-foreground-emphasized
+  - kind: token
+    id: error-background-emphasized
+    name: error-background-emphasized
+    description: 'The strong fill of an error state.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#error-background-emphasized
+  - kind: token
+    id: error-foreground
+    name: error-foreground
+    description: 'The text color of an error message.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#error-foreground
+  - kind: token
+    id: error-separator
+    name: error-separator
+    description: 'The border of a field in an error state.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#error-separator
+  - kind: token
+    id: focus-outline
+    name: focus-outline
+    description: 'The focus ring. Apply it to custom interactive markup with `outline`.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#focus-outline
+  - kind: token
+    id: focus-offset
+    name: focus-offset
+    description: 'The gap between an element and its focus ring, for `outline-offset`.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#focus-offset
+  - kind: token
+    id: hover-lightness-delta
+    name: hover-lightness-delta
+    description: 'How far a hovered surface moves in lightness from its resting color.'
+    metadata:
+      status:
+        status: stable
+      group: motion
+    source:
+      href: ./dtcg/json/semantic.tokens.json#hover-lightness-delta
+  - kind: token
+    id: hover-transition
+    name: hover-transition
+    description: 'The transition for color changes on hover.'
+    metadata:
+      status:
+        status: stable
+      group: motion
+    source:
+      href: ./dtcg/json/semantic.tokens.json#hover-transition
+  - kind: token
+    id: inert-background
+    name: inert-background
+    description: 'The fill of a disabled control.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#inert-background
+  - kind: token
+    id: inert-foreground
+    name: inert-foreground
+    description: 'The text color of a disabled control.'
+    metadata:
+      status:
+        status: stable
+      group: color.semantic
+    source:
+      href: ./dtcg/json/semantic.tokens.json#inert-foreground
+  - kind: token
+    id: fade-in-transition
+    name: fade-in-transition
+    description: 'The transition for elements that fade and scale in, such as popovers.'
+    metadata:
+      status:
+        status: stable
+      group: motion
+    source:
+      href: ./dtcg/json/semantic.tokens.json#fade-in-transition
+  - kind: token
+    id: opacity-low
+    name: opacity-low
+    description: 'The low opacity step. The low separator color is built on it.'
+    metadata:
+      status:
+        status: stable
+      group: opacity
+    source:
+      href: ./dtcg/json/semantic.tokens.json#opacity-low
+  - kind: token
+    id: opacity-mid
+    name: opacity-mid
+    description: 'The middle opacity step. Placeholder text and overlays use it.'
+    metadata:
+      status:
+        status: stable
+      group: opacity
+    source:
+      href: ./dtcg/json/semantic.tokens.json#opacity-mid
+  - kind: token
+    id: opacity-high
+    name: opacity-high
+    description: 'The high opacity step, for content that stays nearly solid.'
+    metadata:
+      status:
+        status: stable
+      group: opacity
+    source:
+      href: ./dtcg/json/semantic.tokens.json#opacity-high
+  - kind: token
+    id: opacity-full
+    name: opacity-full
+    description: 'Fully opaque, for resetting an inherited opacity.'
+    metadata:
+      status:
+        status: stable
+      group: opacity
+    source:
+      href: ./dtcg/json/semantic.tokens.json#opacity-full
+  - kind: entry
+    id: semantic-tokens
+    name: Semantic tokens
+    description: The theme-aware custom properties Sanity UI 5 builds from the palette, for colour, focus, opacity and motion in custom markup.
+    metadata:
+      tags:
+        [
+          color,
+          colour,
+          semantic,
+          css custom property,
+          background,
+          foreground,
+          separator,
+          border,
+          focus,
+          opacity,
+          dark mode,
+          tone,
+        ]
+      status:
+        status: stable
+      group: color.semantic
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - level: must
+            statement: >-
+              In custom markup that no component covers, take color from these properties, as
+              `var(--separator-low)` or `var(--foreground-high)`. Each resolves for light and dark
+              mode on its own.
+            checkedBy: manual
+          - level: should
+            statement: >-
+              Inside an element with a `tone`, the surface properties follow that tone:
+              `--background-*`, `--foreground-*` and `--separator-*` switch to the tone's ramp.
+              Read them there instead of choosing a tone color by hand.
+          - level: must-not
+            statement: >-
+              Do not use the names `--card-border-color`, `--card-bg-color`, `--card-fg-color` or
+              `--card-muted-bg-color`, and do not invent names like `--token-color-border`. They do not
+              exist, so the declaration does nothing.
+            checkedBy: manual
+          - level: must-not
+            statement: >-
+              Do not use these properties to restyle a design system component. They let custom markup
+              match the system; a component takes its color from `tone`.
+            checkedBy: manual
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              Sanity UI 5 defines this layer in its own CSS, not in `@sanity-labs/design-tokens`. Each property is built from the palette with `light-dark()`, so one name serves both color schemes. This corpus keeps a generated copy in `tokens/dtcg/json/semantic.tokens.json`. Read `docs/tokens/dtcg/json/semantic.tokens.json` for every name with its light and dark value.
+    uses:
+      - to: color-palette
+    refs:
+      - to: color-guidelines
+        rel: relates-to
+      - href: ./dtcg/json/semantic.tokens.json
+        rel: source
+        role: DTCG source

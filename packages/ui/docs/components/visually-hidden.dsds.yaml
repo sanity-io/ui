@@ -1,0 +1,112 @@
+kind: component
+id: visually-hidden
+name: VisuallyHidden
+description: Hides content from sighted users while keeping it in the accessibility tree.
+metadata:
+  tags:
+    - accessibility
+    - screen-reader
+    - hidden
+    - visually-hidden
+    - ARIA
+    - accessible-name
+    - sr-only
+    - clip
+    - aria-label
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: must
+        statement: When content must be visible for browser reading modes, translation tools, and some testing frameworks. `aria-label` is often invisible in those circumstances.
+      - level: should
+        statement: "To add screen-reader-only context to a control with a visual label (for example, 'Edit John Doe' where 'John Doe' comes from row context)."
+      - level: should
+        statement: As extra content for a repeated text content, such as links.
+      - level: should
+        statement: As a table column header that's visually implied.
+      - level: should
+        statement: As status text to support indicators or color-only elements.
+      - level: should
+        statement: To label a section landmark when the visual treatment doesn't include a visible heading.
+      - level: should-not
+        statement: For content the user shouldn't see at all. Use Box with display='none' instead.
+        alternatives:
+          - to: box
+      - level: should-not
+        statement: To hide decorative imagery — use aria-hidden='true' on the visual instead.
+      - level: should-not
+        statement: For collapsible UI — use hidden on the wrapping element or conditional rendering.
+  - kind: guidelines
+    for: agent
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should-not
+        statement: To give an accessible name to an icon-only control (close button, sort handle). Use an IconButton instead.
+        alternatives:
+          - to: icon-button
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: 'Pair VisuallyHidden with content that must reach assistive technology but not sighted users: per-row context on a control that already has a visible label, or status text backing a color-only indicator. For an icon-only control, use IconButton instead.'
+      - level: should
+        statement: Use sentence-case, action-describing text. 'Close dialog' not 'Close'.
+      - level: must-not
+        statement: Don't use VisuallyHidden to hide content you'll show later — use conditional rendering or hidden.
+      - level: must-not
+        statement: Don't put interactive elements (button, a) inside VisuallyHidden — they remain keyboard-reachable and the user sees a focus ring on invisible content.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Use a visible label element (Text as='label', linked with htmlFor) for form labels. Use VisuallyHidden with as='label' when a visible label is not possible.
+      - level: must-not
+        statement: 'Do not use VisuallyHidden for content that should be fully hidden — use display: none.'
+      - level: must-not
+        statement: "Putting a button inside VisuallyHidden to hide an action from sighted users. Instead: Use display='none' or conditional rendering — VisuallyHidden keeps content focusable."
+
+  - kind: guidelines
+    for: all
+    title: Accessibility
+    tags: [accessibility]
+    items:
+      - level: should
+        statement: VisuallyHidden does not make its children non-focusable. If you put a `<button>` or `<a>` inside, it stays keyboard-reachable — and users get a focus ring on something they can't see. Avoid putting focusable elements inside VisuallyHidden. If you need a hidden control, use `tabIndex={-1}`.
+      - id: visuallyhidden-does-replace-prefer-short
+        level: should
+        statement: VisuallyHidden does not replace `aria-label`. Prefer `aria-label` for short, fixed strings (`aria-label="Close"`). Prefer VisuallyHidden when the content includes dynamic data, formatting, or multiple elements (`<VisuallyHidden>Sort by date, descending</VisuallyHidden>`).
+
+refs:
+  - to: icon-button
+    rel: relates-to
+    note: Preferred for a plain icon-only button — it takes a required `aria-label` for the accessible name
+  - to: checkbox
+    rel: relates-to
+    note: Input components that use VisuallyHidden internally to hide the native `<input>` while keeping it focusable and announceable
+  - to: radio
+    rel: relates-to
+    note: Input components that use VisuallyHidden internally to hide the native `<input>` while keeping it focusable and announceable
+  - to: switch
+    rel: relates-to
+    note: Input components that use VisuallyHidden internally to hide the native `<input>` while keeping it focusable and announceable
+sourceFiles:
+  - platform: react
+    file: packages/ui/src/components/visually-hidden/VisuallyHidden.tsx
+imports:
+  - platform: react
+    code: import { VisuallyHidden } from '@sanity/ui'
+    package: '@sanity/ui'
+
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

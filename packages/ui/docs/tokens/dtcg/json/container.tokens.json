@@ -1,0 +1,44 @@
+{
+  "container-0": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 320
+    }
+  },
+  "container-1": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 640
+    }
+  },
+  "container-2": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 960
+    }
+  },
+  "container-3": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 1280
+    }
+  },
+  "container-4": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 1600
+    }
+  },
+  "container-5": {
+    "$type": "dimension",
+    "$value": {
+      "unit": "px",
+      "value": 1920
+    }
+  }
+}

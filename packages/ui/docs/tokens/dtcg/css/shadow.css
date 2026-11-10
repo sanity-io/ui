@@ -1,0 +1,22 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --shadow-0: 0px 0px 0px 0px rgb(45% 47% 57% / 0);
+  --shadow-1:
+    0px 0px 0px 0.5px rgb(45% 47% 57% / 0.3), 0px 0px 0px 0px rgb(45% 47% 57% / 0.1),
+    0px 0px 0px 0px rgb(45% 47% 57% / 0.07), 0px 0px 0px 0px rgb(45% 47% 57% / 0.06);
+  --shadow-2:
+    0px 0px 0px 0.5px rgb(45% 47% 57% / 0.3), 0px 3px 5px -2px rgb(45% 47% 57% / 0.1),
+    0px 6px 10px 0px rgb(45% 47% 57% / 0.07), 0px 1px 18px 1px rgb(45% 47% 57% / 0.06);
+  --shadow-3:
+    0px 0px 0px 0.5px rgb(45% 47% 57% / 0.3), 0px 7px 8px -4px rgb(45% 47% 57% / 0.1),
+    0px 12px 17px 2px rgb(45% 47% 57% / 0.07), 0px 5px 22px 4px rgb(45% 47% 57% / 0.06);
+  --shadow-4:
+    0px 0px 0px 0.5px rgb(45% 47% 57% / 0.3), 0px 9px 11px -5px rgb(45% 47% 57% / 0.1),
+    0px 18px 28px 2px rgb(45% 47% 57% / 0.07), 0px 7px 34px 6px rgb(45% 47% 57% / 0.06);
+  --shadow-5:
+    0px 0px 0px 0.5px rgb(45% 47% 57% / 0.3), 0px 11px 15px -7px rgb(45% 47% 57% / 0.1),
+    0px 24px 38px 3px rgb(45% 47% 57% / 0.07), 0px 9px 46px 8px rgb(45% 47% 57% / 0.06);
+}

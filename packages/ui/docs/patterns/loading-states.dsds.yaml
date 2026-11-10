@@ -1,0 +1,41 @@
+kind: sanity.pattern
+id: loading-states
+name: Loading states
+description: 'Guidelines for handling the three distinct loading moments in Sanity UI: initial load, in-place refresh, and pending actions.'
+metadata:
+  tags:
+    - tutorial
+    - loading
+    - skeleton
+    - spinner
+    - empty state
+    - pending
+    - progress
+    - pending action
+    - in-progress
+    - refresh
+    - saving
+    - publishing
+    - progress indicator
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Show a skeleton or "Loading…" on initial load once the wait passes about 200ms and no content is available yet. Below that, show nothing — an indicator that flashes and vanishes reads as noise. Hold empty-state copy until the load fails or returns nothing.
+      - level: must
+        statement: For a pending action on a Button, such as a form mid-submit, set `loading={true}`. It shows progress and disables the button, so a second click does nothing. Keep the button's label unchanged while it loads.
+      - level: should
+        statement: On in-place refresh when content is already shown, keep the content visible and show progress — not a full-screen message.
+      - level: should
+        statement: Use "-ing" wording for progress shown as status text, such as a "Saving…" message beside the form. Do not change a Button's label while it loads.
+      - level: must-not
+        statement: Never render an empty state and a loading state at the same time.
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Apply correct loading state patterns — skeleton on initial load, in-place progress on refresh, in-progress labels on pending actions — and avoid co-rendering empty and loading states.

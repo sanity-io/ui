@@ -1,0 +1,258 @@
+schemaVersion: '0.23.1'
+name: Sanity UI
+entries:
+  - kind: token
+    id: content-action-delete
+    name: content-action-delete
+    description: Permanently destroy an object that will not come back.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.action.delete
+  - kind: token
+    id: content-action-discard
+    name: content-action-discard
+    description: Abandon unsaved or unpublished edits; the object survives.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.action.discard
+  - kind: token
+    id: content-action-remove
+    name: content-action-remove
+    description: Take an item out of a collection; the item itself still exists.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.action.remove
+  - kind: token
+    id: content-action-clear
+    name: content-action-clear
+    description: Empty a field's value; the field stays.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.action.clear
+  - kind: token
+    id: content-action-restore
+    name: content-action-restore
+    description: Bring back a deleted object or a prior version. Retires "Revert".
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.action.restore
+  - kind: token
+    id: content-action-create
+    name: content-action-create
+    description: Verb-first label for the trigger button or menu item.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.action.create
+  - kind: token
+    id: content-action-new
+    name: content-action-new
+    description: Noun-phrase label for a dialog title or empty-state heading.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.action.new
+  - kind: token
+    id: content-region-panel
+    name: content-region-panel
+    description: A collapsible, docked auxiliary region. Retires "Pane" and "Inspector".
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.region.panel
+  - kind: token
+    id: content-region-sidebar
+    name: content-region-sidebar
+    description: The primary, persistent navigation rail.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.region.sidebar
+  - kind: token
+    id: content-surface-dialog
+    name: content-surface-dialog
+    description: A focus-trapping overlay that blocks interaction until dismissed. Matches the Sanity UI component name as of @sanity/ui@5.0.0-alpha.7.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.surface.dialog
+  - kind: token
+    id: content-surface-popover
+    name: content-surface-popover
+    description: A non-modal, anchored floating surface that doesn't trap focus.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.surface.popover
+  - kind: token
+    id: content-severity-error
+    name: content-severity-error
+    description: Something invalid or broken that blocks progress.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.severity.error
+  - kind: token
+    id: content-severity-warning
+    name: content-severity-warning
+    description: Something that may be a problem but doesn't block progress.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.severity.warning
+  - kind: token
+    id: content-severity-issue
+    name: content-severity-issue
+    description: An aggregate that may include both errors and warnings; summary counts only.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.severity.issue
+  - kind: token
+    id: content-type-error-document-type
+    name: content-type-error-document-type
+    description: User-facing error about a specific document's type.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.type-error.document-type
+  - kind: token
+    id: content-type-error-schema-type
+    name: content-type-error-schema-type
+    description: Developer- or config-level schema definition error.
+    metadata:
+      status:
+        status: proposal
+      group: content
+    tokenType: content
+    source:
+      href: ./content.tokens.json#content.type-error.schema-type
+  - kind: entry
+    id: content
+    name: Content tokens (demo)
+    description: A worked example of microcopy vocabulary encoded as DTCG tokens — one canonical term per recurring concept, the same pattern used for space, color, and motion values.
+    metadata:
+      tags: [content, microcopy, terminology, naming, vocabulary, copy, tokens, demo]
+      status:
+        status: proposal
+      group: content
+    sections:
+      - kind: guidelines
+        for: all
+        framing: how-to-use
+        items:
+          - level: should
+            statement: Treat a value under `$extensions.com.sanity.contentTokens.retired` as a synonym error in review, not a stylistic preference — the same weight as a hardcoded color instead of a token.
+          - level: should
+            statement: 'When a retired synonym carries an interim exception, keep the exception scoped to what it actually covers rather than treating it as a reason to keep using the retired term generally. `surface.dialog` used to carry one for runnable code examples; alpha.7 removed the need for it.'
+          - level: must-not
+            statement: Don't add a new concept family to this file to resolve a naming disagreement that hasn't been ruled on. A token records a decision; it doesn't make one.
+      - kind: guidelines
+        for: agent
+        framing: how-to-use
+        items:
+          - level: must
+            statement: Use the canonical value for a concept; treat any value listed under that token's retired synonyms as a defect to fix, not a stylistic variant.
+          - level: must
+            statement: For create vs. new, choose by grammatical role — Create for a verb-first trigger, New for a noun-phrase title — not by preference.
+          - level: should-not
+            statement: Do not invent a canonical term for a concept not yet in this file; flag the gap instead of guessing.
+      - kind: section
+        for: all
+        freeform:
+          - title: Overview
+            body: |-
+              `content` is not a token type defined by the W3C Design Tokens Community Group spec — it is a **proposed extension**, demonstrating what `foundations/content-guidelines.md`'s "Content tokens" section would look like as machine-readable tokens instead of prose tables. This follows the same path already sketched for motion (`type: duration`, `type: cubicBezier` in the motion guidelines' `name-motion-values-by-role` rule): name the value by role, let the token be the single source of truth, and stop restating raw strings in every doc that needs them.
+
+              This file does **not** ship from `@sanity-labs/design-tokens` today. Its source (`./content.tokens.json`) is a local demo, not the design-tokens package — status `proposal`, not `stable`, reflects that. Each canonical term is evidenced by `studio-microcopy-audit-2026-08-18.md`, the audit that found the underlying drift in shipped Sanity Studio copy.
+          - title: The tokens
+            body: |-
+              | Group | Token | Canonical value | Retires |
+              | --- | --- | --- | --- |
+              | action | delete | Delete | — |
+              | action | discard | Discard | — |
+              | action | remove | Remove | Take out, Exclude |
+              | action | clear | Clear | — |
+              | action | restore | Restore | Revert |
+              | action | create | Create | — (pairs with `new` by role) |
+              | action | new | New | — (pairs with `create` by role) |
+              | region | panel | Panel | Pane, Inspector |
+              | region | sidebar | Sidebar | — |
+              | surface | dialog | Dialog | Modal (as a noun; "modal" stays valid as an adjective) |
+              | surface | popover | Popover | — |
+              | severity | error | Error | Issue, when used as a bare synonym |
+              | severity | warning | Warning | — |
+              | severity | issue | Issue | — (aggregate-only; never a synonym for error) |
+              | type-error | document-type | document type | bare "type" |
+              | type-error | schema-type | schema type | bare "type" |
+
+              Each token's `$extensions.com.sanity.contentTokens` carries the retired synonyms, the audit evidence, and (for `create`/`new`) the grammatical role that decides which one to use.
+          - title: Why extend DTCG for this
+            body: |-
+              The same argument content-guidelines.md makes for a token family applies to any recurring string: two writers reaching for "Delete" and "Remove" for the same operation is the same failure mode as two designers choosing two different blues for the same surface. A token file makes the canonical answer queryable and diffable instead of buried in prose — a linter could flag `"Revert"` in a PR the same way a design-lint flags a raw hex value instead of `--blue-500`.
+
+              This demo intentionally stays inside the six concept families already documented in `foundations/content-guidelines.md`. It does not attempt to tokenize the "needs a product decision" item (release-scheduling vocabulary) — a token can encode a decision already made, not force one that hasn't been.
+          - title: Related
+            body: |-
+              - **Content guidelines, "Content tokens"** — the prose catalog this file makes machine-readable.
+              - **studio-microcopy-audit-2026-08-18.md** — the evidence for every retired synonym.
+              - **terminology-glossary-2026-08-18.md** — decision D1 (Modal vs. Dialog). D1 ruled "Modal" on the premise that the component was being renamed Dialog → Modal; @sanity/ui@5.0.0-alpha.7 renamed it the other way, so the `surface.dialog` token supersedes it.
+      - kind: section
+        for: agent
+        freeform:
+          - title: Intent
+            body: When writing or reviewing UI copy, resolve a recurring concept (delete/remove/discard, create/new, panel/sidebar, dialog/modal/popover, error/warning/issue) to the canonical term in this file rather than choosing a synonym ad hoc.
+    refs:
+      - href: ./content.tokens.json
+        rel: source
+        role: DTCG source

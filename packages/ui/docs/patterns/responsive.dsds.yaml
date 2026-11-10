@@ -1,0 +1,590 @@
+kind: sanity.pattern
+id: responsive
+name: Responsive
+description: A complete reference for building responsive Sanity UI layouts using spacing tokens, breakpoint arrays, reflow patterns, grid columns, sizing props, text overflow, and overflow portal rules.
+metadata:
+  tags:
+    - tutorial
+    - responsive
+    - layout
+    - breakpoints
+    - spacing
+    - grid
+    - flexbox
+    - overflow
+    - wcag
+    - accessibility
+    - tokens
+    - Responsive<T>
+    - flexWrap
+    - minHeight
+    - spacing tokens
+    - truncate
+    - portal
+    - 320px reflow
+    - gridTemplateColumns
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Add `flexWrap="wrap"` to every horizontal `Flex` row (toolbar, action bar, card actions) so layouts reflow at 320px without horizontal scrolling.
+      - level: must
+        statement: Add `minWidth="0"` to any flex child that contains text. Without it the child cannot shrink below its content size, causing overflow past the viewport.
+      - id: inside-scrollable-container-must-failure
+        level: must
+        statement: >-
+          Tooltip and Popover render in the browser's top layer, so a scrollable or `overflow: hidden` ancestor does not clip them. Set their boolean `portal` prop only when an ancestor with `transform`, `filter` or `contain` breaks their positioning.
+      - level: must
+        statement: Use spacing scale tokens (0–9) for all `padding`, `margin`, `gap`, `rowGap`, and `columnGap` props — never guess with inline pixel styles.
+      - level: must
+        statement: Use `minHeight="100vh"` on the outermost layout container, not `height="100vh"`. `height` clips content that is taller than the viewport.
+      - level: should
+        statement: Use `truncate` prop on `Text` and `Heading` for text truncation.
+      - level: should
+        statement: Use `maxWidth` instead of `width` for sidebars, so the element can collapse responsively.
+      - level: should
+        statement: Use `gridTemplateColumns={['1fr', '1fr', '1fr 1fr', 'repeat(3, 1fr)']}` for responsive card grids, or `repeat(auto-fill, minmax(240px, 1fr))` for fluid grids.
+      - level: should
+        statement: 'Use `truncate` with a responsive array to show more lines on wider viewports, for example `truncate={[1, 1, 2]}`. It takes a number, so an `undefined` slot would turn truncation off at that breakpoint; fill every slot up to the last one you set.'
+      - level: should
+        statement: Inline styles are acceptable only for values with no prop or token equivalent, such as arbitrary `gridTemplateColumns` strings, `transform` offsets, or CSS custom property overrides.
+      - level: must-not
+        statement: "Do not use `style={{ padding: '12px' }}` or similar inline styles for values that map to a spacing token prop."
+      - level: must-not
+        statement: "Do not use `style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}` — use `truncate={1}` on `Heading` or `Text` instead."
+      - level: must-not
+        statement: Do not use fixed pixel widths in `gridTemplateColumns`. Use `fr`, `auto`, or `minmax()` units.
+      - level: must-not
+        statement: >-
+          Do not give a sidebar a fixed `width` with `flexShrink={0}` at every width. It never collapses below that width, and the layout fails reflow at 320px. Use responsive `flexBasis`, `['100%', '100%', '100%', '260px']`, so the sidebar stacks on narrow screens, or switch it to an overlay below the desktop breakpoint. Write every slot in the array: an `undefined` slot resets a string prop like `flexBasis` to its default instead of inheriting the previous value.
+  - kind: section
+    for: all
+    freeform:
+      - title: Overview
+        body: Sanity UI experiences should work across all devices. A Sanity interface isn't done until it's responsive. This document covers spacing tokens, breakpoint arrays, reflow patterns, grid columns, sizing props, text overflow, and overflow portal rules for building responsive layouts.
+  - kind: section
+    for: all
+    freeform:
+      - title: 'Quick reference: breakpoints'
+        body: |-
+          Every layout prop accepting `Responsive<T>` also accepts an array. Each array position maps to a `min-width` breakpoint. Position `0` is the base (no media query — applies from 0px up, including 320px).
+
+          | Array index | Min-width | Typical target |
+          |-------------|-----------|----------------|
+          | `[0]` | none (base) | 320px — narrow mobile, 400% zoom |
+          | `[1]` | `360px` | Standard mobile |
+          | `[2]` | `600px` | Large phone / small tablet |
+          | `[3]` | `900px` | Tablet / small laptop |
+          | `[4]` | `1200px` | Desktop |
+          | `[5]` | `1800px` | Large desktop and ultra-wide |
+
+          An array has at most six slots; anything past `[5]` is ignored. `undefined` in a slot inherits the previous breakpoint's value only for props that take a keyword or a step: spacing and position steps, `flexDirection`, `flexWrap`, `alignItems`, `justifyContent`, `display`, `overflow`, `radius` and `size`. For props that take a CSS string or a number — `flexBasis`, `width`, `height`, the min and max sizes, the `grid*` template and placement props, `flexGrow`, `flexShrink`, `zIndex` and Text's `truncate` — and for the border, `muted`, `trim` and `fullWidth` toggles, an `undefined` slot resets the prop to its default. Write every slot for those.
+  - kind: section
+    for: all
+    freeform:
+      - title: 1. Spacing scale
+        body: |-
+          Every `padding`, `margin`, `gap`, `rowGap`, and `columnGap` prop maps to a CSS token. Use them — never guess with inline styles.
+
+          The steps and their common uses are in the Space scale entry's table (`space`).
+
+          **Most common values in practice:**
+          - `gap={2}`, {space-2} — toolbar icon-button rows
+          - `gap={3}`, {space-3} — standard flex row gaps
+          - `padding={3}`, {space-3} — default card / nav item padding
+          - `padding={4}`, {space-4} — content area padding
+
+          ```tsx
+          {/* ✗ Undiscoverable pixel values via inline style */}
+          <Box style={{ padding: '12px', gap: '8px' }} />
+
+          {/* ✓ Token-based — scales with user font-size settings */}
+          <Box padding={3} />
+          <Flex gap={2} />
+          ```
+  - kind: section
+    for: all
+    freeform:
+      - title: 2. Breakpoints and responsive arrays
+        body: |-
+          See the **Quick reference: breakpoints** table for the pixel values. This section covers syntax and patterns.
+
+          ### Syntax
+
+          ```tsx
+          {/* Single value — applies at all breakpoints */}
+          <Box padding={3} />
+
+          {/* Array — different value per breakpoint */}
+          <Box padding={[2, undefined, 3, 4]} />
+          {/*         ^    ^          ^  ^
+                      base 360px      600px 900px   */}
+          ```
+
+          **`undefined` inherits only for keyword and step props.** On `padding`, `gap`, `flexDirection` and the other props that take a keyword or a step, `undefined` skips a breakpoint and keeps the previous value. On a prop that takes a CSS string or a number, such as `flexBasis`, `width` or `gridTemplateColumns`, an `undefined` slot resets the prop to its default at that breakpoint. Write every slot for those props.
+
+          ```tsx
+          {/* ✓ Correct — undefined skips 360px, uses 'row' from 600px up */}
+          <Flex flexDirection={['column', undefined, 'row']} />
+
+          {/* ✗ Wrong — flexBasis falls back to auto from 360px to 599px */}
+          <Box flexBasis={['100%', undefined, '260px']} />
+
+          {/* ✓ Correct — every slot written */}
+          <Box flexBasis={['100%', '100%', '260px']} />
+          ```
+
+          ### Common responsive patterns
+
+          **Layout direction — column on mobile, row on desktop:**
+          ```tsx
+          <Flex flexDirection={['column', undefined, 'row']} gap={[2, undefined, 4]}>
+            <Box flexBasis={['100%', '100%', '260px']} flexShrink={0}>Sidebar</Box>
+            <Box flexGrow={1} minWidth="0">Content</Box>
+          </Flex>
+          ```
+
+          **Padding — tighter on mobile:**
+          ```tsx
+          <Box padding={[2, undefined, 4]}>
+            {/* 8px on mobile, 20px on 600px+ */}
+          </Box>
+          ```
+
+          **Text size — larger at wider viewports:**
+          ```tsx
+          <Heading as="h1" size={[1, undefined, undefined, 3]} />
+          {/* size 1 on mobile, size 3 on 900px+ */}
+          ```
+
+          **Alignment — centered on mobile, start on desktop:**
+          ```tsx
+          <Text align={['center', undefined, 'start']} />
+          ```
+  - kind: section
+    for: all
+    freeform:
+      - title: 3. 320px reflow (WCAG 1.4.10)
+        body: |-
+          Layouts must work at 320px with no horizontal scrolling. This section covers two responsive-specific cases: the wrap that never triggers, and the overlay-sidebar alternative.
+
+          ### Fixed sidebar widths — the wrap that never triggers
+
+          ```tsx
+          {/* ✗ FAILS — sidebar won't collapse below 260px (no flexWrap, no flexShrink) */}
+          <Flex>
+            <Box width="260px" flexShrink={0}>Sidebar</Box>
+            <Box flexGrow={1}>Content</Box>
+          </Flex>
+
+          {/* ✗ ALSO FAILS — flexWrap is set, but the wrap never triggers at 375px */}
+          <Flex flexWrap="wrap" minHeight="100vh">
+            <Box width="260px">Sidebar</Box>
+            <Box flexGrow={1} minWidth="0">Content</Box>
+          </Flex>
+
+          {/* ✓ PASSES — both children claim a full row at narrow widths; sidebar takes 260px from 900px up */}
+          <Flex flexWrap="wrap" minHeight="100vh">
+            <Box
+              flexBasis={['100%', '100%', '100%', '260px']}
+              flexShrink={0}
+            >
+              Sidebar
+            </Box>
+            <Box
+              flexBasis={['100%', '100%', '100%', '0']}
+              flexGrow={1}
+              minWidth="0"
+              overflow="hidden"
+            >
+              Content
+            </Box>
+          </Flex>
+          ```
+
+          **Why "ALSO FAILS" fails.** At 375px, the 260px sidebar and main column fit on one row. The main column gets only 115px. `flexWrap` moves a child to a new row only when it can't fit. Here the sizes sum to less than the viewport, so no wrap occurs.
+
+          **The fix needs responsive `flexBasis` on both children.** At narrow widths both children want a full row (basis `"100%"`), summing to 200% and forcing the wrap. At a desktop breakpoint the sidebar wants `"260px"` and main wants `"0"` plus `flexGrow`, and they sit side-by-side.
+
+          > The stack pattern keeps the sidebar visible — full-width above the main content — on mobile. For app shells where the sidebar should be hidden by default and shown via a toggle, see the popover pattern below.
+
+          ### Toolbars with many buttons
+
+          The basic toolbar rule — `flexWrap="wrap"` and `gap={2}` on the heading-plus-buttons Flex. One case not covered by the basics: a toolbar with five or more buttons can still overflow at ≤375px even with `flexWrap`. Two fixes:
+
+          - Collapse labeled buttons to icon-only on mobile with a conditional render. Button's `text` is a plain string, not a responsive prop.
+          - Move secondary actions (Filter, Sort) into a `Popover` overflow.
+
+          ### Mobile navigation: popover instead of stack
+
+          For app shells with sidebars hidden by default on mobile, put the nav in a Popover opened from a menu button. This is the standard for mobile navigation. The browser handles Escape and outside clicks. Requires React state for `isDesktop` plus `window.matchMedia`, not pure CSS. The example below shows only the nav logic.
+
+          ```tsx
+          import { useEffect, useState } from 'react'
+          import type { ReactNode } from 'react'
+          import { Box, Flex, IconButton, Popover } from '@sanity/ui'
+          import { MenuIcon } from '@sanity/icons/Menu'
+
+          const DESKTOP_QUERY = '(min-width: 900px)'
+          const NAV_ID = 'app-nav'
+
+          function matchesDesktop() {
+            return typeof window !== 'undefined' && window.matchMedia(DESKTOP_QUERY).matches
+          }
+
+          const closeNav = () => document.getElementById(NAV_ID)?.hidePopover()
+
+          function AppShell({ nav, children }: { nav: (closeNav: () => void) => ReactNode; children: ReactNode }) {
+            const [isDesktop, setIsDesktop] = useState(matchesDesktop)
+
+            useEffect(() => {
+              const mq = window.matchMedia(DESKTOP_QUERY)
+              const onChange = (e: MediaQueryListEvent) => {
+                setIsDesktop(e.matches)
+                if (e.matches) closeNav() // the inline nav replaces the Popover on desktop
+              }
+              mq.addEventListener('change', onChange)
+              return () => mq.removeEventListener('change', onChange)
+            }, [])
+
+            const navContent = (
+              <Box as="nav" aria-label="Main navigation" padding={2}>
+                {nav(closeNav)}
+              </Box>
+            )
+
+            return (
+              <Flex minHeight="100vh">
+                {isDesktop && (
+                  <Flex flexDirection="column" flexBasis="260px" flexShrink={0} tone="neutral" borderRight overflowY="auto">
+                    {navContent}
+                  </Flex>
+                )}
+
+                <Flex as="main" id="main" flexGrow={1} flexBasis="0" minWidth="0" overflow="hidden">
+                  {!isDesktop && (
+                    <Popover id={NAV_ID} placement="bottom-start" content={navContent}>
+                      <IconButton icon={MenuIcon} level="tertiary" aria-label="Show navigation" />
+                    </Popover>
+                  )}
+                  {children}
+                </Flex>
+              </Flex>
+            )
+          }
+          ```
+
+          **Why each piece matters:**
+
+          - `DESKTOP_QUERY = '(min-width: 900px)'` matches the §2 breakpoint table at index `[3]` ("tablet / small laptop"). Below 900px is "tablet and mobile."
+          - `useState(matchesDesktop)` starts the layout in the right mode, so there is no flash of the wrong nav on first render.
+          - The `onChange` handler closes the Popover when the viewport widens to desktop, because the inline nav replaces it.
+          - `closeNav` calls `hidePopover()` on the Popover by its `id`. Passing it to the nav means picking an item closes the Popover.
+          - Escape and outside clicks close the Popover natively, so the example needs no Escape handler.
+          - `flexBasis="260px"` and `flexShrink={0}` keep the sidebar at 260px from 900px up. Below 900px the nav is in the Popover, so the fixed size never blocks reflow.
+          - `tone="neutral"` on the nav applies the design system's theme-aware background. Do not use `style={{ background: 'var(--card-bg-color, #fff)' }}`. The `#fff` fallback breaks dark mode.
+          - `borderRight` shows a border on the inline nav only.
+          - `{!isDesktop && <Popover>}` limits the menu button to mobile and tablet.
+
+          **When to choose which:**
+
+          - **VStack** — reading-first layouts, dashboards, content pages where the sidebar above the main content on mobile is acceptable.
+          - **Popover** — app-like UIs where mobile users expect navigation hidden until summoned.
+
+          ### Secondary panels: the same rule applies
+
+          The popover pattern governs the primary sidebar. The same rule applies to every secondary panel — inspector panels, detail drawers, filter columns. Any panel that should be hidden on mobile must initialize with `matchesDesktop()`, not `true`.
+
+          ```tsx
+          {/* ✗ Inspector stays open on mobile — never hides */}
+          const [inspectorOpen, setInspectorOpen] = useState(true)
+
+          {/* ✓ Inspector defaults to closed on mobile, open on desktop */}
+          const [inspectorOpen, setInspectorOpen] = useState(matchesDesktop)
+          ```
+
+          The `onChange` handler should close all such panels when the viewport narrows:
+
+          ```tsx
+          const onChange = (e: MediaQueryListEvent) => {
+            setIsDesktop(e.matches)
+            if (!e.matches) {
+              setSidebarOpen(false)
+              setInspectorOpen(false) // close every secondary panel on resize to mobile
+            }
+          }
+          ```
+
+          Toggle buttons for secondary panels follow the same rule as the menu button: gate them on `!isDesktop` if the panel should only be togglable on mobile and tablet.
+  - kind: section
+    for: all
+    freeform:
+      - title: 4. Responsive Grid columns
+        body: |-
+          Grid's `gridTemplateColumns` prop accepts a responsive array. Use `fr` units and `repeat()` — never hardcode pixel widths.
+
+          ```tsx
+          {/* ✓ 1 column on mobile, 2 on tablet, 3 on desktop */}
+          <Grid
+            gridTemplateColumns={['1fr', '1fr', '1fr 1fr', 'repeat(3, 1fr)']}
+            gap={3}
+          >
+            {items.map(item => (
+              <Card key={item.id}>{item.title}</Card>
+            ))}
+          </Grid>
+          ```
+
+          **Use `minmax()` for fluid grids that don't require exact breakpoints:**
+          ```tsx
+          {/* Auto-fills columns, minimum 240px each, maximum 1fr */}
+          <Grid
+            gridTemplateColumns="repeat(auto-fill, minmax(240px, 1fr))"
+            gap={3}
+          >
+          ```
+
+          **Common column patterns:**
+
+          | Layout | `gridTemplateColumns` |
+          |--------|----------------------|
+          | Full-width single column | `'1fr'` |
+          | Two even columns | `'1fr 1fr'` or `'repeat(2, 1fr)'` |
+          | Sidebar + content | `'260px 1fr'` |
+          | Responsive 1→2→3 | `['1fr', '1fr', '1fr 1fr', 'repeat(3, 1fr)']` |
+          | Auto-fill fluid | `'repeat(auto-fill, minmax(240px, 1fr))'` |
+
+          **`gridColumn` on children for spanning:**
+          ```tsx
+          {/* Featured item spans all 3 columns */}
+          <Grid gridTemplateColumns="repeat(3, 1fr)" gap={3}>
+            <Box gridColumn="1 / -1"><Card>Featured</Card></Box>
+            <Card>Item A</Card>
+            <Card>Item B</Card>
+          </Grid>
+          ```
+  - kind: section
+    for: all
+    freeform:
+      - title: '5. Sizing: width, minWidth, maxWidth'
+        body: |-
+          Prefer `min-width` and `max-width` over fixed `width` whenever content may overflow or the container needs to collapse responsively.
+
+          ### Width vs minWidth vs maxWidth
+
+          | Prop | Use when |
+          |------|----------|
+          | `width` | The element must be exactly this size (icons, avatars, fixed UI chrome) |
+          | `minWidth` | The element must be at least this size but can grow |
+          | `maxWidth` | The element must not exceed this size but can shrink |
+          | `minWidth="0"` | The element is a flex child containing text that may overflow |
+
+          ### `minWidth="0"` on flex children
+
+          This is the most commonly missed prop. By default, a flex child's minimum size is its content size — it won't shrink below the longest word in a heading. Setting `minWidth="0"` allows the child to shrink past its content size, enabling text truncation and preventing overflow.
+
+          ```tsx
+          {/* ✗ Long heading in flex row pushes layout past viewport */}
+          <Flex gap={3}>
+            <Heading as="h2">A very long document title that overflows</Heading>
+            <IconButton icon={CloseIcon} aria-label="Close" />
+          </Flex>
+
+          {/* ✓ Heading container can shrink; text truncates instead of overflowing */}
+          <Flex gap={3}>
+            <Box flexGrow={1} minWidth="0">
+              <Heading as="h2" truncate={1}>A very long document title that overflows</Heading>
+            </Box>
+            <Box flexShrink={0}>
+              <IconButton icon={CloseIcon} aria-label="Close" />
+            </Box>
+          </Flex>
+          ```
+
+          ### When a positive `minWidth` is the right choice
+
+          `minWidth="0"` lets a flex child shrink to nothing. For "let this row wrap when content can't fit on one line," use a positive `minWidth`:
+
+          ```tsx
+          {/* ✗ minWidth="0" lets the title squash to nothing and overlap the actions */}
+          <Flex gap={2}>
+            <Box flexGrow={1} minWidth="0">
+              <Heading as="h2">Document title</Heading>
+            </Box>
+            <Button text="Edit" />
+            <Button text="Delete" />
+          </Flex>
+
+          {/* ✓ minWidth="200px" forces the row to wrap when content can't fit */}
+          <Flex gap={2} flexWrap="wrap">
+            <Box flexGrow={1} minWidth="200px">
+              <Heading as="h2">Document title</Heading>
+            </Box>
+            <Button text="Edit" />
+            <Button text="Delete" />
+          </Flex>
+          ```
+
+          **Decision rule:**
+
+          - Truncate text to one line: `minWidth="0"` plus `truncate={1}` on the heading or text.
+          - Wrap the row to a new line when content doesn't fit: a positive `minWidth` like `"200px"` or `"160px"`, plus `flexWrap="wrap"` on the parent.
+
+          ### height vs minHeight
+
+          | Prop | Behavior |
+          |------|----------|
+          | `height="100vh"` | Container is exactly 100vh — content that overflows is clipped or causes scroll on the inner element only |
+          | `minHeight="100vh"` | Container is at least 100vh but grows when stacked content is taller |
+
+          Always use `minHeight="100vh"` on the outermost layout container. `height="100vh"` is appropriate only when the container must scroll internally (for example, a sidebar with `overflowY="auto"`).
+
+          ```tsx
+          {/* ✗ Sidebar stacks above content but container clips at 100vh */}
+          <Flex flexWrap="wrap" height="100vh">
+
+          {/* ✓ Container grows to fit stacked content at narrow widths */}
+          <Flex flexWrap="wrap" minHeight="100vh">
+          ```
+  - kind: section
+    for: all
+    freeform:
+      - title: 6. Text overflow
+        body: |-
+          Use the `truncate` prop on `Text`, `Heading`, and `Eyebrow` to limit text to a set number of lines. `truncate={1}` clips to one line with an ellipsis using `text-overflow`. Values above `1` clamp with CSS `-webkit-line-clamp`. Both work inside flex and grid containers.
+
+          Truncate metadata and support labels only: titles, file names, authors, dates. Never truncate body text, including a preview of it in a list row. Clipping changes meaning. In a list row, show the title and metadata, and leave the body for the detail view.
+
+          ```tsx
+          {/* ✗ Inline overflow styles bypass the spacing scale and break in flex containers */}
+          <Heading
+            as="h2"
+            style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+          >
+            Long title
+          </Heading>
+
+          {/* ✓ Single-line truncation */}
+          <Heading as="h2" truncate={1}>Long title</Heading>
+
+          {/* ✓ Multi-line clamp on a long title in a list row */}
+          <Text size={1} weight="semibold" truncate={2}>
+            {document.title}
+          </Text>
+
+          {/* ✗ Clamped body text. The preview cuts the sentence mid-thought. */}
+          <Text size={1} truncate={2} as="p">
+            {document.bodyPreview}
+          </Text>
+
+          {/* ✓ The row shows the title and metadata. The body stays in the detail view. */}
+          <VStack gap={2}>
+            <Text size={1} weight="semibold" truncate={1}>{document.title}</Text>
+            <Text size={1} muted truncate={1}>{document.author} · {document.updatedAt}</Text>
+          </VStack>
+          ```
+
+          **`truncate` accepts a responsive array** — you can show more lines on wider viewports:
+
+          ```tsx
+          {/* A title: 1 line on mobile, 2 on tablet, unclamped on desktop */}
+          <Text size={1} weight="semibold" truncate={[1, 1, 2]}>
+            {document.title}
+          </Text>
+          ```
+  - kind: section
+    for: all
+    freeform:
+      - title: 7. Inline styles — when they are and are not appropriate
+        body: |-
+          In nearly every case where an inline style appears in generated code, a prop or component already handles it.
+
+          ### Never use inline styles for these — use the prop instead
+
+          | Inline style | Replace with |
+          |---|---|
+          | `style={{ padding: '12px' }}` | `padding={3}` |
+          | `style={{ gap: '8px' }}` | `gap={2}` (on Flex or Grid) |
+          | `style={{ width: '260px' }}` | `width="260px"` |
+          | `style={{ minWidth: '0' }}` | `minWidth="0"` |
+          | `style={{ height: '100vh' }}` | `height="100vh"` |
+          | `style={{ minHeight: '100vh' }}` | `minHeight="100vh"` |
+          | `style={{ overflow: 'hidden' }}` | `overflow="hidden"` |
+          | `style={{ overflowY: 'auto' }}` | `overflowY="auto"` |
+          | `style={{ flexGrow: 1 }}` | `flexGrow={1}` |
+          | `style={{ flexShrink: 0 }}` | `flexShrink={0}` |
+          | `style={{ display: 'flex' }}` | Use `<Flex>` instead of `<Box>` |
+          | `style={{ flexDirection: 'column' }}` | `flexDirection="column"` on Flex |
+          | `style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}` | `truncate={1}` on Heading or Text |
+          | `style={{ fontSize: '24px' }}` on an icon | Wrap in `<Text as="span" size={3}>` |
+          | `style={{ borderRadius: '4px' }}` | `radius={2}` on Box or use Card `density` |
+          | `style={{ background: 'var(--card-bg)' }}` on Box | Use a Card ancestor or `tone` on Box |
+
+          ### When inline styles are acceptable
+
+          Inline styles are appropriate only for values that have no prop equivalent and cannot be expressed with a spacing token:
+
+          ```tsx
+          {/* Acceptable — no prop for arbitrary string-based grid template */}
+          <Grid style={{ gridTemplateColumns: 'auto 1fr auto' }} />
+
+          {/* Acceptable — position offsets for custom absolute positioned elements */}
+          <Box position="absolute" style={{ top: '50%', transform: 'translateY(-50%)' }} />
+
+          {/* Acceptable — CSS custom property override for a specific instance */}
+          <Box style={{ '--border-color': 'var(--blue-500)' }} />
+          ```
+  - kind: section
+    for: all
+    freeform:
+      - title: '8. `overflow: hidden` and portal-dependent components'
+        body: |-
+          Tooltip and Popover render in the browser's top layer, so a container with `overflow="hidden"` or `overflowY="auto"` does not clip them. Set their boolean `portal` prop only when an ancestor with `transform`, `filter` or `contain` breaks their positioning.
+  - kind: section
+    for: all
+    freeform:
+      - title: 9. Responsive layout checklist
+        body: |-
+          Run through this before shipping any layout. A single missed item causes `spacing-and-reflow` to fail.
+
+          **Container**
+          - [ ] Outer layout Flex uses `minHeight` (not `height`)
+          - [ ] Outer layout Flex has `flexWrap="wrap"`
+
+          **Sidebar**
+          - [ ] A fixed sidebar width applies only from the desktop breakpoint up
+          - [ ] Below that, the sidebar stacks above the content (responsive `flexBasis`) or moves into a Popover
+          - [ ] Has `overflowY="auto"` if content scrolls
+
+          **Main content area**
+          - [ ] `flexGrow={1} flexShrink={1} flexBasis="0"` to fill remaining space
+          - [ ] `minWidth="0"` to prevent text overflow
+          - [ ] `overflow="hidden"` to contain long words and headings
+
+          **Every horizontal Flex row (toolbar, action bar, card actions)**
+          - [ ] `flexWrap="wrap"` present
+          - [ ] `gap={2}` or higher present (wrapping without gap creates collapsed-looking rows)
+
+          **Typography**
+          - [ ] Long headings inside flex rows are in a `minWidth="0"` wrapper
+          - [ ] Truncated text uses `truncate` prop, not inline overflow styles
+
+          **Spacing**
+          - [ ] All padding and margin use scale tokens (0–9), not inline px values
+          - [ ] All gap values use scale tokens, not inline px values
+
+          **Menus and popovers**
+          - [ ] Any Tooltip or Popover under a `transform`, `filter` or `contain` ancestor sets `portal`
+
+          **Grid**
+          - [ ] `gridTemplateColumns` uses `fr`, `auto`, or `minmax()` — not fixed pixel widths
+          - [ ] Responsive column count uses responsive array, not a single fixed value
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this guide to produce responsive Sanity UI layouts that pass WCAG 1.4.10 reflow at 320px, apply spacing tokens, use correct responsive array syntax, and configure portals for floating components in overflow containers.

@@ -1,0 +1,60 @@
+kind: component
+id: hotkeys
+name: Hotkeys
+description: Presents multi-key keyboard shortcuts.
+metadata:
+  tags: [keyboard, shortcut, hotkey, keycap, display, hotkeys, keyboard shortcut, modifier]
+  status:
+    status: experimental
+    note: Exported from @sanity/ui 5.0.0-alpha.16, marked @alpha in the source. Its API can change without notice.
+sections:
+  - kind: guidelines
+    for: all
+    framing: when-to-use
+    title: When to use
+    items:
+      - level: should
+        statement: To show keyboard shortcuts next to menu items or toolbar actions.
+      - level: should
+        statement: For help dialogs or keyboard shortcut cheat sheets.
+      - level: should
+        statement: Tooltips that reveal the shortcut for an action.
+      - level: should-not
+        statement: Inline references to a single key within running text — use KBD instead.
+        alternatives:
+          - to: kbd
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - level: should
+        statement: 'Use platform-appropriate labels: Ctrl on Windows/Linux, ⌘ on Mac. Detect the platform at runtime.'
+      - level: should
+        statement: Keep shortcuts to 2–3 keys. Anything longer is difficult to press and read.
+      - level: should
+        statement: Pair the key caps with a visible action label so the shortcut has context.
+      - level: must-not
+        statement: Don't display more than 3 keys in a single Hotkeys instance.
+      - level: must-not
+        statement: Don't rely on the Hotkeys display as the only way to discover a feature.
+      - level: must-not
+        statement: Don't use Hotkeys inside body text — use KBD for inline key references.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: should
+        statement: Detect the platform at runtime and pass the correct platform-specific key labels.
+      - level: must-not
+        statement: 'Using Hotkeys as the sole mechanism to discover a feature. Instead: Shortcuts should supplement visible UI — never gate functionality.'
+alternatives:
+  - to: kbd
+refs:
+  - href: https://www.figma.com/design/NWmchNlsNdG66VBaCsTdSL/pjo-ui4-component-buildout?node-id=144-7
+    rel: design
+    role: Figma component
+$extensions:
+  com.sanity.ui:
+    implementationStatus:
+      context: Implementation status. Lets a tool tell a component that is coming from one that does not exist, without parsing the status note.
+      implemented: true

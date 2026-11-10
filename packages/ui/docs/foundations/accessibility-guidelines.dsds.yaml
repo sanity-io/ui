@@ -1,0 +1,301 @@
+kind: sanity.foundation
+id: accessibility-guidelines
+name: Accessibility guidelines
+description: Rules, requirements and the review checklist for accessible color, content, iconography, motion, spacing, and typography in Sanity UI.
+metadata:
+  tags:
+    - concept
+    - accessibility
+    - WCAG
+    - color
+    - contrast
+    - motion
+    - typography
+    - spacing
+    - iconography
+    - content
+    - aria-label
+    - prefers-reduced-motion
+    - color vision
+    - target size
+    - reflow
+    - text spacing
+    - icon contrast
+    - checklist
+    - review
+  status:
+    status: stable
+sections:
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: wcag-22-aa-baseline
+        level: must
+        statement: WCAG 2.2 Level AA is the baseline across all foundations. Keyboard navigation, screen reader support, and touch targets belong in the spec from the start — not added after. No accessibility requirement trades for aesthetics.
+        refines:
+          - to: shared-foundations#wcag-22-aa-baseline
+      - id: contrast-minimums
+        level: must
+        statement: 'Color contrast must meet WCAG 2.2 Level AA: 4.5:1 for text, and 3:1 for large text (24px, or 18.66px bold) and for UI components and graphics (WCAG 1.4.3, 1.4.11).'
+        checks:
+          - href: axe-core:color-contrast
+            role: test
+            note: axe-core rule implementing SC 1.4.3
+        checkedBy: automated
+        refs:
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+            rel: relates-to
+            role: WCAG 2.2 Understanding SC 1.4.3 Contrast (Minimum)
+          - href: https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html
+            rel: relates-to
+            role: WCAG 2.2 Understanding SC 1.4.11 Non-text Contrast
+      - level: must
+        statement: 'Color must survive color vision deficiency and grayscale. Run the palette and key UI through a CVD simulator and a grayscale check. Test all three CVD types: deutan, protan, and tritan. A pair that survives one can collapse under another. Categorical colors (chart series, status) must stay distinct.'
+      - level: must
+        statement: 'Focus rings must survive forced colors. Forced-colors mode ignores `box-shadow` and falls back to the `outline` property (WCAG 2.4.7). A focus ring built only with `box-shadow` and `outline: none` disappears entirely under forced colors. Set `outline-color: transparent` instead of `outline: none` so forced-colors mode can override it with a system color. Apply the same swap to `border-color: transparent` instead of `border: 0` on inputs.'
+      - level: must
+        statement: Read-only content is not disabled, so it must still meet the contrast requirement. Only disabled controls are exempt.
+      - level: should
+        statement: Verify under forced colors. Check key UI under forced-colors and Windows High Contrast Mode. Boundaries that rely on background fill alone disappear there. Use the separator token, not a background shift alone, to define edges.
+      - level: must-not
+        statement: Severity must not ride on hue alone. `critical`, `caution`, and `positive` must differ by icon, label, and placement, not color. This is the sole-carrier rule applied to severity. Severity must be legible without color.
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: shared-foundations#tone-signals-state
+            rel: same-as
+      - refs:
+          - to: shared-foundations#tone-paired-with-second-channel
+            rel: same-as
+      - refs:
+          - to: shared-foundations#icon-only-control-needs-name
+            rel: same-as
+      - level: must
+        statement: An icon paired with a value needs its own alternative. An icon next to a count or value (a comment icon next to "3") needs a text alternative distinct from any wrapping control's name (WCAG 1.1.1). Fold the value into the wrapping control's accessible name too — "3 comments," not "Open comments" (WCAG 4.1.2).
+      - level: must
+        statement: A purely decorative graphic still needs a text alternative. WCAG 1.1.1 requires an alternative for every image, even a decorative one — an empty alternative is valid, a missing one is not. Mark decorative avatars, illustrations, and status graphics with `role="presentation"` or `alt=""`.
+      - id: disabled-control-no-tooltip
+        level: must
+        statement: Disabled controls must explain themselves. A disabled control can't surface a reason through a tooltip. Put the reason in reachable text, or use `aria-disabled` (see Tooltips).
+      - level: must
+        statement: An icon-only button's `aria-label` persists across every state. Do not remove it or swap it out conditionally.
+      - level: should-not
+        statement: Don't duplicate an accessible name that already exists. A decorative preview image's `alt` can repeat text already present in the surrounding accessible name — mark that image decorative instead of announcing the name twice.
+      - refs:
+          - to: content-guidelines#plain-language
+            rel: same-as
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: touch-target-minimum
+        level: must
+        statement: "Any interactive control's hit area must be at least 24×24 CSS pixels (WCAG 2.5.8, AA) — not necessarily the visible size."
+      - level: must-not
+        statement: Never put `aria-selected` on a `<div>`, `<button>` or `<a>`. It is valid only on the option, row, tab, gridcell and treeitem roles. Use `aria-current` on those elements instead.
+      - level: must-not
+        statement: Never carry meaning by icon color alone. Shape and position must tell states apart; color supplements. A `positive` and a `critical` icon must differ in vector shape, not only in tone (WCAG 1.4.1).
+        refs:
+          - to: color-guidelines#second-channel-required
+            rel: relates-to
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - id: respect-reduced-motion
+        level: must
+        statement: Provide a reduced-motion alternative for every non-essential animation. Check `prefers-reduced-motion` and remove movement (translate, scale, rotate) — don't just slow it down. When uncertain whether motion is essential, treat it as non-essential. An instant state change is the safest fallback; a short opacity fade is acceptable where it aids comprehension.
+      - id: reduced-motion-v5-reset
+        level: must
+        statement: "v5's reduced-motion CSS reset stops all animations, including essential ones like Spinner's rotation. Any loading or live state that communicates through movement must also use text or an `aria-live` announcement — motion alone cannot carry the message."
+      - id: reduced-motion-state-distinction
+        level: must
+        statement: Before and after states must stay visually distinct under reduced motion. Pair every animated state change with a persistent change in shape, color, text, icon, or position that remains after the motion ends. Spec the reduced variant next to the full-motion transition.
+      - id: pause-looping-motion
+        level: must
+        statement: No autoplaying or looping motion without a pause or stop control. Continuous, non-interaction motion (carousels, animated backgrounds, looping video) needs an accessible way to stop it (WCAG 2.2.2 Pause, Stop, Hide, Level A). The pause or stop control meets WCAG 2.5.8 Target Size, 24 by 24 CSS px.
+      - id: motion-not-only-channel
+        level: must-not
+        statement: Motion must not be the only channel for a state change. A state change that rides on movement alone disappears under reduced motion. Pair it with a persistent change in shape, color, text, icon, or position that remains after the motion ends. The change must also reach assistive technology, through a moved focus or an `aria-live` announcement, not motion alone.
+      - id: no-flashing
+        level: must-not
+        statement: No content flashes more than three times per second. This applies to any rapid change in brightness or color, including pulsing attention cues and loading shimmers (WCAG 2.3.1 Three Flashes, Level A — this is a seizure risk, not a preference).
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: spacing-guidelines#back-groups-with-markup
+            rel: same-as
+      - level: must
+        statement: Layouts must reflow at a 320px-equivalent viewport. Content must reflow without two-dimensional scrolling at a 320 CSS px viewport (WCAG 1.4.10 Reflow, AA). This matches 1280px at 400% zoom. Reflow must keep all information and function. Reduce large spacing values with responsive arrays. Content that needs two-dimensional layout, such as a large data table, is exempt.
+      - id: target-size-minimum
+        level: must
+        statement: "Tight spacing must not shrink hit targets. A dense layout may use the 2.5.8 spacing exception: a target under 24px passes when a 24px-diameter circle centered on it does not overlap a neighboring target's circle."
+        refs:
+          - to: accessibility-guidelines#touch-target-minimum
+            rel: relates-to
+      - level: should
+        statement: 'Spacing and type scale with browser zoom. The token files ship both in `px`, so they grow together when the user zooms, and layouts hold together (WCAG 1.4.4 Resize Text, AA). They do not follow a larger default font size set in the browser. Note: this does not by itself satisfy WCAG 1.4.12 Text Spacing.'
+  - kind: guidelines
+    for: all
+    framing: how-to-use
+    items:
+      - refs:
+          - to: color-guidelines#second-channel-required
+            rel: same-as
+      - level: must
+        statement: Text must resize and reflow. Text must resize to 200% without loss of content or function, and reflow at a 320px viewport with no horizontal scroll (WCAG 1.4.4, 1.4.10). Text sizes come from the type tokens in `px`, not from the document's base font size. The consuming app must not ship `user-scalable=no` or `maximum-scale=1`.
+      - level: must
+        statement: Layouts must survive text-spacing overrides. The layout must hold when users override line height to 1.5×, paragraph spacing to 2×, letter spacing to 0.12em, and word spacing to 0.16em (WCAG 1.4.12). The failure comes from wrapping components in fixed-height containers or applying `textOverflow="ellipsis"` where text needs to wrap.
+  - kind: guidelines
+    for: agent
+    framing: how-to-use
+    items:
+      - level: must
+        statement: Meaning must not be carried by color, motion, or icon appearance alone — always pair with a persistent, perceivable alternative such as an icon, label, or shape change.
+      - refs:
+          - to: shared-foundations#icon-only-control-needs-name
+            rel: same-as
+  - kind: steps
+    for: all
+    ordered: false
+    title: 'Checklist: semantic structure'
+    items:
+      - title: 'If the component has an `as` prop, the doc lists when to use each semantic element value.'
+        description: 'WCAG 1.3.1 A'
+      - title: 'If the component has an `as` prop, the doc warns which elements carry behavioral contracts the component does not fulfil.'
+        description: 'WCAG 4.1.2 A'
+      - title: 'If the component can render as `<nav>`, `<section>`, `<aside>`, `<form>`, `<header>` or `<footer>`, the doc states the labeling requirement for each.'
+        description: 'WCAG 1.3.1 A'
+      - title: 'If the component renders `<ul>` or `<ol>`, the doc states that `role="list"` is needed when `list-style: none` is applied.'
+        description: 'WCAG 1.3.1 A'
+      - title: 'If the component renders a heading, it takes its level through `as` (`as="h2"`, `as="h3"`) and the doc states that levels follow the page hierarchy.'
+        description: 'WCAG 1.3.1 A, 2.4.6 AA'
+  - kind: steps
+    for: all
+    ordered: false
+    title: 'Checklist: keyboard and focus'
+    items:
+      - title: 'If the component is interactive, the doc names the keys that activate it: Enter, Space, or both.'
+        description: 'WCAG 2.1.1 A'
+      - title: 'If the component is a layout primitive, the doc warns against CSS `order`, reverse flex directions and grid reordering that break visual-to-DOM order.'
+        description: 'WCAG 1.3.2 A'
+      - title: 'If the component opens an overlay, the doc states where focus moves on open and where it returns on close.'
+        description: 'WCAG 2.4.3 A'
+      - title: 'A clickable toggle region, such as an expand/collapse header, is a real `<button>`, not a `<div>` with `onClick`.'
+        description: 'WCAG 2.1.1 A'
+      - title: 'UI that appears only on a pointer gesture, such as a selection toolbar or a hover popover, has a documented keyboard path.'
+        description: 'WCAG 2.1.1 A'
+      - title: 'A drag-based resize handle responds to arrow keys once focused.'
+        description: 'WCAG 2.1.1 A'
+      - title: 'A drag-to-reorder pattern cancels when the pointer is released outside the drop zone, and has a single-pointer alternative that needs no drag.'
+        description: 'WCAG 2.5.2 A, 2.5.7 AA'
+  - kind: steps
+    for: all
+    ordered: false
+    title: 'Checklist: names, roles and states'
+    items:
+      - title: 'Every interactive element has a documented accessible name source: visible text, `aria-label` or `aria-labelledby`. An icon-only button uses `aria-label`.'
+        description: 'WCAG 4.1.2 A'
+      - title: 'If the component triggers a popup or expandable region, the trigger documents `aria-expanded`.'
+        description: 'WCAG 4.1.2 A'
+      - title: 'If the component updates content dynamically, the doc names the live region: `aria-live="polite"` for status, `aria-live="assertive"` for errors.'
+        description: 'WCAG 4.1.3 AA'
+      - title: 'If the component is a two-state toggle, `aria-pressed` is documented and the label describes the action, not the state.'
+        description: 'WCAG 4.1.2 A'
+      - title: 'If the component has a selected or current state, the doc names `aria-selected` or `aria-current` for it, following the `aria-selected` rule above.'
+        description: 'WCAG 4.1.2 A'
+      - title: 'If the component builds an application layout, the doc maps regions to labeled landmarks: `<nav>`, `<main>`, `<aside>`.'
+        description: 'WCAG 2.4.1 A'
+      - title: 'The component does not nest one interactive role inside another, such as an `<a>` inside a `role="option"` row or a `<button>` inside a `<button>`.'
+        description: 'WCAG 4.1.2 A'
+  - kind: steps
+    for: all
+    ordered: false
+    title: 'Checklist: non-text alternatives'
+    items:
+      - title: "An icon next to a count or value has its own text alternative, distinct from any wrapping control's name."
+        description: 'WCAG 1.1.1 A'
+      - title: 'A decorative avatar, illustration or status graphic is marked `role="presentation"` or `alt=""`, not left with no alternative.'
+        description: 'WCAG 1.1.1 A'
+      - title: 'A status indicator, such as a colored dot, is backed by a shape or icon difference and a text alternative.'
+        description: 'WCAG 1.4.1 A'
+  - kind: steps
+    for: all
+    ordered: false
+    title: 'Checklist: contrast and color'
+    items:
+      - title: 'Every text and UI color pair meets the contrast requirement above, in both light and dark mode. Check input borders, placeholder text, and a selected row against every text color it holds; these are the common failures.'
+        description: 'WCAG 1.4.3, 1.4.11 AA'
+      - title: 'Keyboard focus rings stay visible in forced-colors mode: `outline-color: transparent`, not `outline: none`.'
+        description: 'WCAG 2.4.7 AA'
+      - title: 'Every use of semantic color (positive, caution, critical) is paired with an icon, a text label or a shape.'
+        description: 'WCAG 1.4.1 A'
+  - kind: steps
+    for: all
+    ordered: false
+    title: 'Checklist: motion, timing and targets'
+    items:
+      - title: 'All animations and transitions honor `prefers-reduced-motion`.'
+        description: 'WCAG 2.3.3 AAA, treated as the baseline'
+      - title: 'An auto-dismissing message, such as a toast or transient banner, pauses on hover and focus, or offers a way to extend or turn off the timing.'
+        description: 'WCAG 2.2.1 A'
+      - title: "Every interactive target is at least 24\u00d724 CSS px, or small targets are spaced so a 24px circle on each does not overlap."
+        description: 'WCAG 2.5.8 AA'
+  - kind: steps
+    for: all
+    ordered: false
+    title: 'Checklist: reflow and text spacing'
+    items:
+      - title: 'The component works at 400% zoom, a 320px viewport, without horizontal scrolling.'
+        description: 'WCAG 1.4.10 AA'
+      - title: "The component holds when users override text spacing: line height 1.5\u00d7, paragraph spacing 2\u00d7, letter spacing 0.12em, word spacing 0.16em."
+        description: 'WCAG 1.4.12 AA'
+  - kind: steps
+    for: all
+    ordered: false
+    title: 'Checklist: form errors'
+    items:
+      - title: "An input's error state links its message through `aria-describedby`, not color or an icon alone."
+        description: 'WCAG 3.3.1 A'
+      - title: 'Where practical, the error message suggests a fix, not only the problem.'
+        description: 'WCAG 3.3.3 AA'
+      - title: "A custom field inside a `fieldset`/`legend` has its own accessible name through `aria-labelledby`, not only the group's."
+        description: 'WCAG 4.1.2 A'
+  - kind: section
+    for: all
+    freeform:
+      - title: Content
+        body: |-
+          Most accessibility rules sit with the content type they govern; the cross-cutting ones live here. The developer owns the ARIA wiring; the writer owns the words that wiring carries.
+
+          Known limitation: right-to-left text has edge cases this doc can't resolve. When a content rule can't be met accessibly, the accessible path wins.
+      - title: Motion
+        body: |-
+          Reduced motion resolves in v5's global reset, not per component. Under `prefers-reduced-motion: reduce`, the reset shortens every CSS animation and transition to `0.01ms` and limits every animation to one iteration, so component authors get correct behavior for free. That also stops looping animations such as Spinner's rotation. Respect the preference in JS-driven animation as well, since the CSS query does not cover `requestAnimationFrame` or WAAPI work.
+
+          ```css
+          .panel {
+            transition: transform 200ms ease-out;
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .panel {
+              /* 0.01ms, not 0ms, so transitionend still fires and JS awaiting it doesn't hang */
+              transition-duration: 0.01ms; /* instant; movement removed, state still changes */
+            }
+          }
+          ```
+
+          ```js
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ```
+  - kind: section
+    for: agent
+    freeform:
+      - title: Intent
+        body: Use this guide to verify that color choices, content patterns, iconography, motion, spacing, and typography decisions meet WCAG 2.2 accessibility requirements in Sanity UI. When reviewing a component doc or building a component, work through every checklist item that applies.
